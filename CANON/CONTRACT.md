@@ -16,7 +16,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 6. **Output roots.** System-generated artifacts must be written only to:
    - `CONTRACTS/_runs/`
    - `CORTEX/_generated/`
-   - `MEMORY/_packs/`
+   - `MEMORY/LLM-PACKER-1.0/_packs/`
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
 
