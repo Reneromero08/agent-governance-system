@@ -112,7 +112,7 @@ If an agent changes behavior, it MUST:
 1. Add or update fixtures
 2. Run CONTRACTS/runner.py
 3. Ensure all fixtures pass
-4. Update CANON if constraints change
+4. Update CANON or CHANGELOG if behavior is user-visible
 
 If fixtures fail, the change does not exist.
 
