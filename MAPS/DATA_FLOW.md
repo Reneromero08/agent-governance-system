@@ -8,4 +8,4 @@ This document explains how information moves through the Agent Governance System
 4. **Select entrypoint** - Using the maps, agents determine which files or skills need to change to achieve the goal.
 5. **Execute skill** - The agent invokes a skill (a script under `SKILLS/`) to perform the action. Skills operate on data provided by the cortex and abide by the canon constraints.
 6. **Validate via fixtures** - After the skill runs, fixtures in `CONTRACTS/fixtures/` are executed by the runner. Any failure blocks the merge. Runner artifacts are written under `CONTRACTS/_runs/`.
-7. **Update memory** - If the work is completed, the packer serialises the current state into a pack for future sessions under `MEMORY/_packs/`. The manifest includes file hashes and canon version.
+7. **Update memory** - If the work is completed, the packer serialises the current state into a pack for future sessions under `MEMORY/LLM-PACKER-1.0/_packs/`. The manifest includes file hashes and canon version.

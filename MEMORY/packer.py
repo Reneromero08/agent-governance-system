@@ -10,7 +10,7 @@ This script produces two related artifacts:
 2) A shareable "LLM pack" directory with curated entrypoints, indices and optional combined
    markdown suitable for handoff to another model.
 
-All outputs are written under `MEMORY/_packs/`.
+All outputs are written under `MEMORY/LLM-PACKER-1.0/_packs/`.
 """
 
 from __future__ import annotations
@@ -25,7 +25,8 @@ from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MEMORY_DIR = Path(__file__).resolve().parent
-PACKS_ROOT = MEMORY_DIR / "_packs"
+LLM_PACKER_DIR = MEMORY_DIR / "LLM-PACKER-1.0"
+PACKS_ROOT = LLM_PACKER_DIR / "_packs"
 STATE_DIR = PACKS_ROOT / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
 
@@ -376,7 +377,9 @@ def ensure_under_packs_root(out_dir: Path) -> Path:
     try:
         out_dir_resolved.relative_to(packs_root)
     except ValueError as exc:
-        raise ValueError(f"OutDir must be under MEMORY/_packs/. Received: {out_dir}") from exc
+        raise ValueError(
+            f"OutDir must be under MEMORY/LLM-PACKER-1.0/_packs/. Received: {out_dir}"
+        ) from exc
     return out_dir_resolved
 
 
@@ -469,7 +472,9 @@ def make_pack(
     return out_dir
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Create AGS memory/LLM packs under MEMORY/_packs/.")
+    parser = argparse.ArgumentParser(
+        description="Create AGS memory/LLM packs under MEMORY/LLM-PACKER-1.0/_packs/."
+    )
     parser.add_argument(
         "--mode",
         choices=("full", "delta"),
@@ -479,7 +484,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out-dir",
         default="",
-        help="Output directory for the pack, relative to the repo root and under MEMORY/_packs/.",
+        help="Output directory for the pack, relative to the repo root and under MEMORY/LLM-PACKER-1.0/_packs/.",
     )
     parser.add_argument("--combined", action="store_true", help="Write COMBINED/AGS_COMBINED.md.")
     parser.add_argument("--zip", action="store_true", help="Write a zip archive under MEMORY/_packs/archive/.")

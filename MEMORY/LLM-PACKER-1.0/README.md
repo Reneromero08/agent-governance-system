@@ -27,6 +27,7 @@ Or run cross-platform:
 Optional arguments:
 
 - `-OutDir MEMORY/_packs/<name>` (must be under `MEMORY/_packs/`)
+- `-OutDir MEMORY/LLM-PACKER-1.0/_packs/<name>` (must be under `MEMORY/LLM-PACKER-1.0/_packs/`)
 - `-Mode full` or `-Mode delta`
 - `-Zip:$false` or `-Combined:$false`
 
@@ -34,12 +35,12 @@ Optional arguments:
 
 Creates a pack folder under:
 
-`MEMORY/_packs/`
+`MEMORY/LLM-PACKER-1.0/_packs/`
 
 And optionally produces a `.zip` archived under:
 
-`MEMORY/_packs/archive/`
+`MEMORY/LLM-PACKER-1.0/_packs/archive/`
 
 Baseline state used for delta packs is stored at:
 
-`MEMORY/_packs/_state/baseline.json`
+`MEMORY/LLM-PACKER-1.0/_packs/_state/baseline.json`

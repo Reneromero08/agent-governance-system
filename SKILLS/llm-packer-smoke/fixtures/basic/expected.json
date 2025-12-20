@@ -1,5 +1,5 @@
 {
-  "pack_dir": "MEMORY/_packs/fixture-smoke",
+  "pack_dir": "MEMORY/LLM-PACKER-1.0/_packs/fixture-smoke",
   "verified": [
     "meta/START_HERE.md",
     "meta/ENTRYPOINTS.md",

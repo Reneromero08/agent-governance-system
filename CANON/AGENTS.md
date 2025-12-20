@@ -77,7 +77,7 @@ System-generated artifacts MUST be written only to:
 
 - CONTRACTS/_runs/
 - CORTEX/_generated/
-- MEMORY/_packs/
+- MEMORY/LLM-PACKER-1.0/_packs/
 
 `BUILD/` is reserved for user build outputs. It must not be used for system artifacts.
 

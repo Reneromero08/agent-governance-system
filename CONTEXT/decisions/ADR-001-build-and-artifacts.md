@@ -24,7 +24,7 @@ The intended meaning of `BUILD/` in this template is "dist for users": it is whe
 - Write system-generated artifacts near their subsystem:
   - `CONTRACTS/_runs/` for fixture runner outputs
   - `CORTEX/_generated/` for the cortex index
-  - `MEMORY/_packs/` for memory and LLM handoff packs
+  - `MEMORY/LLM-PACKER-1.0/_packs/` for memory and LLM handoff packs
 - Include only an inventory of `BUILD/` (file tree) in packs, not its contents.
 
 ## Alternatives considered
@@ -52,4 +52,3 @@ Subsystem-owned artifact roots keep outputs colocated with the code that generat
 
 - A need arises for a centralized artifact cache.
 - The template introduces a build system that requires a different output convention.
-

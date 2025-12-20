@@ -22,7 +22,7 @@ if (-not (Test-Path -LiteralPath $packer)) {
 
 if ($OutDir -eq "") {
   $stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss")
-  $OutDir = "MEMORY/_packs/llm-pack-$stamp"
+  $OutDir = "MEMORY/LLM-PACKER-1.0/_packs/llm-pack-$stamp"
 }
 
 $args = @(
@@ -38,4 +38,3 @@ if ($Combined) { $args += "--combined" }
 Write-Host "Running: $($args -join ' ')"
 & $args[0] $args[1..($args.Count - 1)]
 if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-
