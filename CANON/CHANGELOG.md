@@ -26,6 +26,12 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 - LLM pack output root moved to `MEMORY/LLM-PACKER-1.0/_packs/` (from `MEMORY/_packs/`).
 
+## [0.1.4] - 2025-12-20
+
+### Removed
+
+- Legacy `MEMORY/_packs/` directory (no longer used).
+
 ## [0.1.1] - 2025-12-19
 
 ### Added
