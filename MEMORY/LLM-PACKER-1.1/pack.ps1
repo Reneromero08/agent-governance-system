@@ -2,6 +2,7 @@ param(
   [string]$OutDir = "",
   [ValidateSet("full","delta")]
   [string]$Mode = "full",
+  [string]$Stamp = "",
   [switch]$Zip = $true,
   [switch]$Combined = $true
 )
@@ -20,10 +21,8 @@ if (-not (Test-Path -LiteralPath $packer)) {
   throw "Missing Python packer at: $packer"
 }
 
-if ($OutDir -eq "") {
-  $stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss")
-  $OutDir = "MEMORY/LLM-PACKER-1.0/_packs/llm-pack-$stamp"
-}
+if ($Stamp -eq "") { $Stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss") }
+if ($OutDir -eq "") { $OutDir = "MEMORY/LLM-PACKER-1.1/_packs/llm-pack-$Stamp" }
 
 $args = @(
   "python",
@@ -32,6 +31,7 @@ $args = @(
   "--out-dir", $OutDir
 )
 
+$args += @("--stamp", $Stamp)
 if ($Zip) { $args += "--zip" }
 if ($Combined) { $args += "--combined" }
 

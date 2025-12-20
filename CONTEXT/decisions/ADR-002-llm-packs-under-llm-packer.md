@@ -1,4 +1,4 @@
-# ADR-002: Store packs under MEMORY/LLM-PACKER-1.0
+# ADR-002: Store packs under MEMORY/LLM-PACKER-1.1
 
 **Status:** Accepted
 
@@ -14,12 +14,12 @@
 
 ## Context
 
-Packs are generated artifacts and should live near the subsystem that owns them. The LLM packer lives under `MEMORY/LLM-PACKER-1.0/`, but the initial implementation wrote packs under `MEMORY/_packs/`.
+Packs are generated artifacts and should live near the subsystem that owns them. The LLM packer lives under `MEMORY/LLM-PACKER-1.1/`, but the initial implementation wrote packs under `MEMORY/_packs/`.
 
 ## Decision
 
-- The canonical pack output root is `MEMORY/LLM-PACKER-1.0/_packs/`.
-- Delta baseline state is stored under `MEMORY/LLM-PACKER-1.0/_packs/_state/`.
+- The canonical pack output root is `MEMORY/LLM-PACKER-1.1/_packs/`.
+- Delta baseline state is stored under `MEMORY/LLM-PACKER-1.1/_packs/_state/`.
 
 ## Alternatives considered
 
@@ -37,9 +37,8 @@ Colocating packs with the LLM packer keeps the repository modular and reduces am
 
 ## Enforcement
 
-- `python CONTRACTS/runner.py` includes a smoke fixture that asserts pack outputs are created under `MEMORY/LLM-PACKER-1.0/_packs/`.
+- `python CONTRACTS/runner.py` includes a smoke fixture that asserts pack outputs are created under `MEMORY/LLM-PACKER-1.1/_packs/`.
 
 ## Review triggers
 
 - Packs become shared infrastructure across multiple subsystems.
-
