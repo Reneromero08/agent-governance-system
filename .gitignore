@@ -9,5 +9,11 @@ CORTEX/_generated/**
 
 MEMORY/_packs/**
 !MEMORY/_packs/.gitkeep
-!MEMORY/_packs/_state/.gitkeep
-!MEMORY/_packs/archive/.gitkeep
+
+MEMORY/LLM-PACKER-1.0/_packs/**
+!MEMORY/LLM-PACKER-1.0/_packs/
+!MEMORY/LLM-PACKER-1.0/_packs/.gitkeep
+!MEMORY/LLM-PACKER-1.0/_packs/_state/
+!MEMORY/LLM-PACKER-1.0/_packs/_state/.gitkeep
+!MEMORY/LLM-PACKER-1.0/_packs/archive/
+!MEMORY/LLM-PACKER-1.0/_packs/archive/.gitkeep
