@@ -24,7 +24,7 @@ def ensure_under_packs(path: Path) -> None:
     try:
         path.resolve().relative_to(packs_root)
     except ValueError as exc:
-        raise ValueError(f"out_dir must be under MEMORY/_packs/: {path}") from exc
+        raise ValueError(f"out_dir must be under MEMORY/LLM-PACKER-1.0/_packs/: {path}") from exc
 
 
 def ensure_runner_writes_under_runs(path: Path) -> None:
