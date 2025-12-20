@@ -61,7 +61,7 @@ Agents MAY:
   - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.1/_packs/` (generated)
   - BUILD/ (user build outputs only)
 - append new records under CONTEXT/ (append-first; editing existing records requires explicit instruction)
-- consult CONTEXT/research as optional, non-binding input
+- ignore CONTEXT/research unless the user explicitly requests it (non-binding)
 
 Agents MAY NOT:
 - modify CANON/* or edit existing CONTEXT records unless explicitly instructed or the task is explicitly about rules or memory updates
@@ -74,8 +74,8 @@ Agents MAY NOT:
 
 Generated files must be clearly marked as generated.
 
-Research under CONTEXT/research is opt-in and non-binding. It must not be
-treated as canon.
+Research under CONTEXT/research is non-binding and ignored unless explicitly
+requested. It must not be treated as canon.
 
 ## 4. Build output rules
 
