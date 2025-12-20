@@ -43,7 +43,3 @@ And optionally produces a `.zip` archived under:
 Baseline state used for delta packs is stored at:
 
 `MEMORY/_packs/_state/baseline.json`
-
-## Legacy
-
-`pack-legacy.ps1` is retained for reference and may write artifacts under `BUILD/`. Prefer `pack.ps1` (Python wrapper) for current behavior.
