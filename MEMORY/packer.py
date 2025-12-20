@@ -502,21 +502,53 @@ def default_stamp_for_out_dir(out_dir: Path) -> str:
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 
-def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
-    combined_dir = pack_dir / "COMBINED"
-    combined_dir.mkdir(parents=True, exist_ok=True)
-
+def compute_treemap_text(pack_dir: Path, *, stamp: str, include_combined_paths: bool) -> str:
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
+
+    if not include_combined_paths:
+        return build_pack_tree_text(base_paths, extra_paths=[])
 
     combined_md_rel = f"COMBINED/FULL-COMBINED-{stamp}.md"
     combined_txt_rel = f"COMBINED/FULL-COMBINED-{stamp}.txt"
     treemap_md_rel = f"COMBINED/FULL-TREEMAP-{stamp}.md"
     treemap_txt_rel = f"COMBINED/FULL-TREEMAP-{stamp}.txt"
 
-    tree_text = build_pack_tree_text(
+    return build_pack_tree_text(
         base_paths,
         extra_paths=[combined_md_rel, combined_txt_rel, treemap_md_rel, treemap_txt_rel],
     )
+
+
+def append_repo_tree_to_split_maps(pack_dir: Path, *, tree_text: str) -> None:
+    split_maps_path = pack_dir / "COMBINED" / "SPLIT" / "03_MAPS.md"
+    if not split_maps_path.exists():
+        return
+    existing = read_text(split_maps_path).rstrip("\n")
+    updated = "\n".join(
+        [
+            existing,
+            "",
+            "## Repo File Tree",
+            "",
+            "```",
+            tree_text.rstrip("\n"),
+            "```",
+            "",
+        ]
+    )
+    split_maps_path.write_text(updated, encoding="utf-8")
+
+
+def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
+    combined_dir = pack_dir / "COMBINED"
+    combined_dir.mkdir(parents=True, exist_ok=True)
+
+    combined_md_rel = f"COMBINED/FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/FULL-TREEMAP-{stamp}.txt"
+
+    tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True)
 
     (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
     (pack_dir / treemap_md_rel).write_text(
@@ -527,6 +559,7 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
     combined_md_lines = ["# FULL COMBINED", ""]
     combined_txt_lines = ["FULL COMBINED", ""]
 
+    base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
     for rel in base_paths:
         abs_path = pack_dir / rel
         if not abs_path.exists() or not abs_path.is_file():
@@ -608,8 +641,12 @@ def make_pack(
     write_entrypoints(out_dir)
     write_split_pack(out_dir, repo_pack_paths)
 
+    effective_stamp = stamp or default_stamp_for_out_dir(out_dir)
+    tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined))
+    append_repo_tree_to_split_maps(out_dir, tree_text=tree_text)
+
     if combined:
-        write_combined_outputs(out_dir, stamp=(stamp or default_stamp_for_out_dir(out_dir)))
+        write_combined_outputs(out_dir, stamp=effective_stamp)
 
     write_pack_file_tree_and_index(out_dir)
 
