@@ -124,6 +124,11 @@ def main(input_path: Path, output_path: Path) -> int:
             print(f"ENTRYPOINTS.md missing required mention: {mention}")
             return 1
 
+    maps_text = (out_dir / "COMBINED" / "SPLIT" / "03_MAPS.md").read_text(encoding="utf-8", errors="replace")
+    if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
+        print("03_MAPS.md missing embedded repo file tree")
+        return 1
+
     output_payload = {
         "pack_dir": out_dir.relative_to(PROJECT_ROOT).as_posix(),
         "stamp": stamp,
