@@ -29,6 +29,17 @@ If any of the above steps are skipped, the agent must stop.
 
 ---
 
+## 1A. Question-first gate (no-write)
+
+If the user is asking questions, requesting analysis, or requesting a strategy without explicitly approving implementation, the agent MUST:
+
+- answer first (no edits)
+- avoid creating, modifying, deleting, or committing files
+- avoid running commands that write artifacts
+- ask for explicit approval before making changes (example: "Do you want me to implement this now?")
+
+---
+
 ## 2. Authority gradient
 
 If instructions conflict, obey in this order:
