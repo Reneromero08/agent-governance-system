@@ -1,5 +1,6 @@
 {
-  "pack_dir": "MEMORY/LLM-PACKER-1.0/_packs/fixture-smoke",
+  "pack_dir": "MEMORY/LLM-PACKER-1.1/_packs/fixture-smoke",
+  "stamp": "fixture-smoke",
   "verified": [
     "meta/START_HERE.md",
     "meta/ENTRYPOINTS.md",
@@ -10,6 +11,16 @@
     "meta/PACK_INFO.json",
     "meta/BUILD_TREE.txt",
     "COMBINED/SPLIT/00_INDEX.md",
-    "COMBINED/SPLIT/01_CANON.md"
+    "COMBINED/SPLIT/01_CANON.md",
+    "COMBINED/SPLIT/02_ROOT.md",
+    "COMBINED/SPLIT/03_MAPS.md",
+    "COMBINED/SPLIT/04_CONTEXT.md",
+    "COMBINED/SPLIT/05_SKILLS.md",
+    "COMBINED/SPLIT/06_CONTRACTS.md",
+    "COMBINED/SPLIT/07_SYSTEM.md",
+    "COMBINED/FULL-COMBINED-fixture-smoke.md",
+    "COMBINED/FULL-COMBINED-fixture-smoke.txt",
+    "COMBINED/FULL-TREEMAP-fixture-smoke.md",
+    "COMBINED/FULL-TREEMAP-fixture-smoke.txt"
   ]
 }

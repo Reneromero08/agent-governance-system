@@ -8,7 +8,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "packer.py"
-PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER-1.0" / "_packs"
+PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER-1.1" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
 
 
@@ -24,7 +24,7 @@ def ensure_under_packs(path: Path) -> None:
     try:
         path.resolve().relative_to(packs_root)
     except ValueError as exc:
-        raise ValueError(f"out_dir must be under MEMORY/LLM-PACKER-1.0/_packs/: {path}") from exc
+        raise ValueError(f"out_dir must be under MEMORY/LLM-PACKER-1.1/_packs/: {path}") from exc
 
 
 def ensure_runner_writes_under_runs(path: Path) -> None:
@@ -42,10 +42,11 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Error reading input JSON: {exc}")
         return 1
 
-    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM-PACKER-1.0/_packs/fixture-smoke"))
+    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM-PACKER-1.1/_packs/fixture-smoke"))
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))
+    stamp = str(config.get("stamp", "fixture-smoke"))
 
     out_dir = resolve_out_dir(out_dir_raw)
     ensure_under_packs(out_dir)
@@ -62,6 +63,8 @@ def main(input_path: Path, output_path: Path) -> int:
         "--out-dir",
         out_dir.relative_to(PROJECT_ROOT).as_posix(),
     ]
+    if stamp:
+        args.extend(["--stamp", stamp])
     if zip_enabled:
         args.append("--zip")
     if combined:
@@ -83,7 +86,22 @@ def main(input_path: Path, output_path: Path) -> int:
         "meta/BUILD_TREE.txt",
         "COMBINED/SPLIT/00_INDEX.md",
         "COMBINED/SPLIT/01_CANON.md",
+        "COMBINED/SPLIT/02_ROOT.md",
+        "COMBINED/SPLIT/03_MAPS.md",
+        "COMBINED/SPLIT/04_CONTEXT.md",
+        "COMBINED/SPLIT/05_SKILLS.md",
+        "COMBINED/SPLIT/06_CONTRACTS.md",
+        "COMBINED/SPLIT/07_SYSTEM.md",
     ]
+    if combined:
+        required.extend(
+            [
+                f"COMBINED/FULL-COMBINED-{stamp}.md",
+                f"COMBINED/FULL-COMBINED-{stamp}.txt",
+                f"COMBINED/FULL-TREEMAP-{stamp}.md",
+                f"COMBINED/FULL-TREEMAP-{stamp}.txt",
+            ]
+        )
     missing = [p for p in required if not (out_dir / p).exists()]
     if missing:
         print("Packer output missing required files:")
@@ -108,6 +126,7 @@ def main(input_path: Path, output_path: Path) -> int:
 
     output_payload = {
         "pack_dir": out_dir.relative_to(PROJECT_ROOT).as_posix(),
+        "stamp": stamp,
         "verified": required,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)

@@ -10,7 +10,7 @@ This script produces two related artifacts:
 2) A shareable "LLM pack" directory with curated entrypoints, indices and optional combined
    markdown suitable for handoff to another model.
 
-All outputs are written under `MEMORY/LLM-PACKER-1.0/_packs/`.
+All outputs are written under `MEMORY/LLM-PACKER-1.1/_packs/`.
 """
 
 from __future__ import annotations
@@ -20,12 +20,13 @@ import hashlib
 import json
 import re
 import shutil
+from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MEMORY_DIR = Path(__file__).resolve().parent
-LLM_PACKER_DIR = MEMORY_DIR / "LLM-PACKER-1.0"
+LLM_PACKER_DIR = MEMORY_DIR / "LLM-PACKER-1.1"
 PACKS_ROOT = LLM_PACKER_DIR / "_packs"
 STATE_DIR = PACKS_ROOT / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
@@ -78,6 +79,8 @@ EXCLUDED_DIR_PARTS = {
     "_runs",
     "_generated",
     "_packs",
+    "Original",
+    "ORIGINAL",
     "__pycache__",
     "node_modules",
 }
@@ -197,10 +200,115 @@ def write_json(path: Path, payload: Any) -> None:
 
 
 def choose_fence(text: str) -> str:
-    fence = "```"
-    while fence in text:
-        fence += "`"
-    return fence
+    matches = re.findall(r"`+", text)
+    longest = max((len(m) for m in matches), default=0)
+    return "`" * max(3, longest + 1)
+
+
+def infer_lang(rel_path: str) -> str:
+    suffix = Path(rel_path).suffix.lower()
+    return {
+        ".json": "json",
+        ".md": "md",
+        ".py": "python",
+        ".js": "js",
+        ".mjs": "js",
+        ".cjs": "js",
+        ".yml": "yaml",
+        ".yaml": "yaml",
+        ".ps1": "powershell",
+        ".cmd": "bat",
+        ".bat": "bat",
+        ".css": "css",
+        ".html": "html",
+        ".php": "php",
+        ".txt": "text",
+    }.get(suffix, "")
+
+
+def build_combined_md_block(rel_path: str, text: str, byte_count: int) -> str:
+    fence = choose_fence(text)
+    lang = infer_lang(rel_path)
+    fence_open = fence + (lang if lang else "")
+    return "\n".join(
+        [
+            "",
+            "-----",
+            f"Source: `{rel_path}`",
+            f"Bytes: {byte_count}",
+            "-----",
+            "",
+            fence_open,
+            text.rstrip("\n"),
+            fence,
+        ]
+    )
+
+
+def build_combined_txt_block(rel_path: str, text: str, byte_count: int) -> str:
+    return "\n".join(
+        [
+            "",
+            "-----",
+            f"Source: {rel_path}",
+            f"Bytes: {byte_count}",
+            "-----",
+            "",
+            text.rstrip("\n"),
+        ]
+    )
+
+
+class _TreeNode:
+    def __init__(self) -> None:
+        self.dirs: Dict[str, "_TreeNode"] = {}
+        self.files: set[str] = set()
+
+
+def _sort_key(name: str) -> Tuple[str, str]:
+    folded = name.casefold()
+    return (folded, name)
+
+
+def _add_tree_path(root: _TreeNode, rel_path: str) -> None:
+    parts = [p for p in rel_path.split("/") if p]
+    if not parts:
+        return
+    node = root
+    for idx, part in enumerate(parts):
+        is_leaf = idx == len(parts) - 1
+        if is_leaf:
+            node.files.add(part)
+            return
+        node = node.dirs.setdefault(part, _TreeNode())
+
+
+def _render_tree(node: _TreeNode, prefix: str, out_lines: List[str]) -> None:
+    dir_names = sorted(node.dirs.keys(), key=_sort_key)
+    file_names = sorted(node.files, key=_sort_key)
+    entries: List[Tuple[str, str]] = [("dir", d) for d in dir_names] + [("file", f) for f in file_names]
+
+    for idx, (kind, name) in enumerate(entries):
+        is_last = idx == len(entries) - 1
+        connector = "\\-- " if is_last else "|-- "
+        child_prefix = prefix + ("    " if is_last else "|   ")
+        if kind == "dir":
+            out_lines.append(prefix + connector + name + "/")
+            _render_tree(node.dirs[name], child_prefix, out_lines)
+        else:
+            out_lines.append(prefix + connector + name)
+
+
+def build_pack_tree_text(paths: Sequence[str], extra_paths: Sequence[str]) -> str:
+    root = _TreeNode()
+    for rel in paths:
+        _add_tree_path(root, rel)
+    for rel in extra_paths:
+        _add_tree_path(root, rel)
+
+    lines: List[str] = ["PACK/"]
+    _render_tree(root, "", lines)
+    return "\n".join(lines).rstrip() + "\n"
 
 
 def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None:
@@ -224,13 +332,15 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
         return "\n".join(out_lines).rstrip() + "\n"
 
     canon_paths = [p for p in included_repo_paths if p.startswith("repo/CANON/")]
-    root_paths = [p for p in included_repo_paths if p in ("repo/AGENTS.md", "repo/README.md", "repo/ROADMAP.md")]
+    root_paths = [p for p in included_repo_paths if p.startswith("repo/") and p.count("/") == 1]
     maps_paths = [p for p in included_repo_paths if p.startswith("repo/MAPS/")]
+    context_paths = [p for p in included_repo_paths if p.startswith("repo/CONTEXT/")]
     skills_paths = [p for p in included_repo_paths if p.startswith("repo/SKILLS/")]
     contracts_paths = [p for p in included_repo_paths if p.startswith("repo/CONTRACTS/")]
     cortex_paths = [p for p in included_repo_paths if p.startswith("repo/CORTEX/")]
     memory_paths = [p for p in included_repo_paths if p.startswith("repo/MEMORY/")]
     tools_paths = [p for p in included_repo_paths if p.startswith("repo/TOOLS/")]
+    github_paths = [p for p in included_repo_paths if p.startswith("repo/.github/")]
 
     (split_dir / "00_INDEX.md").write_text(
         "\n".join(
@@ -250,6 +360,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
                 "## Notes",
                 "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
                 "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
+                "- If `--combined` is enabled, `COMBINED/` contains `FULL-COMBINED-*` and `FULL-TREEMAP-*` outputs.",
                 "",
             ]
         ),
@@ -259,12 +370,11 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     (split_dir / "01_CANON.md").write_text("# Canon\n\n" + section(canon_paths), encoding="utf-8")
     (split_dir / "02_ROOT.md").write_text("# Root\n\n" + section(root_paths), encoding="utf-8")
     (split_dir / "03_MAPS.md").write_text("# Maps\n\n" + section(maps_paths), encoding="utf-8")
-    (split_dir / "04_SKILLS_CONTRACTS.md").write_text(
-        "# Skills and Contracts\n\n" + section([*skills_paths, *contracts_paths]),
-        encoding="utf-8",
-    )
-    (split_dir / "05_CORTEX_MEMORY_TOOLS.md").write_text(
-        "# Cortex, Memory, Tools\n\n" + section([*cortex_paths, *memory_paths, *tools_paths]),
+    (split_dir / "04_CONTEXT.md").write_text("# Context\n\n" + section(context_paths), encoding="utf-8")
+    (split_dir / "05_SKILLS.md").write_text("# Skills\n\n" + section(skills_paths), encoding="utf-8")
+    (split_dir / "06_CONTRACTS.md").write_text("# Contracts\n\n" + section(contracts_paths), encoding="utf-8")
+    (split_dir / "07_SYSTEM.md").write_text(
+        "# System\n\n" + section([*cortex_paths, *memory_paths, *tools_paths, *github_paths]),
         encoding="utf-8",
     )
 
@@ -287,6 +397,7 @@ def write_start_here(pack_dir: Path) -> None:
             "## Notes",
             "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
             "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
+            "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
             "",
         ]
     )
@@ -314,6 +425,7 @@ def write_entrypoints(pack_dir: Path) -> None:
             "Notes:",
             "- `BUILD/` contents are not included. Only `meta/BUILD_TREE.txt` is captured.",
             "- Research under `repo/CONTEXT/research/` has no authority.",
+            "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
             "",
         ]
     )
@@ -378,9 +490,54 @@ def ensure_under_packs_root(out_dir: Path) -> Path:
         out_dir_resolved.relative_to(packs_root)
     except ValueError as exc:
         raise ValueError(
-            f"OutDir must be under MEMORY/LLM-PACKER-1.0/_packs/. Received: {out_dir}"
+            f"OutDir must be under MEMORY/LLM-PACKER-1.1/_packs/. Received: {out_dir}"
         ) from exc
     return out_dir_resolved
+
+
+def default_stamp_for_out_dir(out_dir: Path) -> str:
+    match = re.search(r"(\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2})", out_dir.name)
+    if match:
+        return match.group(1)
+    return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+
+
+def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
+    combined_dir = pack_dir / "COMBINED"
+    combined_dir.mkdir(parents=True, exist_ok=True)
+
+    base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
+
+    combined_md_rel = f"COMBINED/FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/FULL-TREEMAP-{stamp}.txt"
+
+    tree_text = build_pack_tree_text(
+        base_paths,
+        extra_paths=[combined_md_rel, combined_txt_rel, treemap_md_rel, treemap_txt_rel],
+    )
+
+    (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
+    (pack_dir / treemap_md_rel).write_text(
+        "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n",
+        encoding="utf-8",
+    )
+
+    combined_md_lines = ["# FULL COMBINED", ""]
+    combined_txt_lines = ["FULL COMBINED", ""]
+
+    for rel in base_paths:
+        abs_path = pack_dir / rel
+        if not abs_path.exists() or not abs_path.is_file():
+            continue
+        text = read_text(abs_path)
+        size = abs_path.stat().st_size
+        combined_md_lines.append(build_combined_md_block(rel, text, size))
+        combined_txt_lines.append(build_combined_txt_block(rel, text, size))
+
+    (pack_dir / combined_md_rel).write_text("\n".join(combined_md_lines).rstrip() + "\n", encoding="utf-8")
+    (pack_dir / combined_txt_rel).write_text("\n".join(combined_txt_lines).rstrip() + "\n", encoding="utf-8")
 
 
 def make_pack(
@@ -388,6 +545,7 @@ def make_pack(
     mode: str,
     out_dir: Optional[Path],
     combined: bool,
+    stamp: Optional[str],
     zip_enabled: bool,
 ) -> Path:
     manifest, omitted = build_state_manifest(PROJECT_ROOT)
@@ -451,11 +609,7 @@ def make_pack(
     write_split_pack(out_dir, repo_pack_paths)
 
     if combined:
-        combined_dir = out_dir / "COMBINED"
-        combined_dir.mkdir(parents=True, exist_ok=True)
-        ordered = sorted((out_dir / "COMBINED" / "SPLIT").glob("*.md"), key=lambda p: p.name)
-        combined_text = "\n\n".join(read_text(p).rstrip("\n") for p in ordered) + "\n"
-        (combined_dir / "AGS_COMBINED.md").write_text(combined_text, encoding="utf-8")
+        write_combined_outputs(out_dir, stamp=(stamp or default_stamp_for_out_dir(out_dir)))
 
     write_pack_file_tree_and_index(out_dir)
 
@@ -473,7 +627,7 @@ def make_pack(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Create AGS memory/LLM packs under MEMORY/LLM-PACKER-1.0/_packs/."
+        description="Create AGS memory/LLM packs under MEMORY/LLM-PACKER-1.1/_packs/."
     )
     parser.add_argument(
         "--mode",
@@ -484,13 +638,18 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out-dir",
         default="",
-        help="Output directory for the pack, relative to the repo root and under MEMORY/LLM-PACKER-1.0/_packs/.",
+        help="Output directory for the pack, relative to the repo root and under MEMORY/LLM-PACKER-1.1/_packs/.",
     )
-    parser.add_argument("--combined", action="store_true", help="Write COMBINED/AGS_COMBINED.md.")
+    parser.add_argument("--combined", action="store_true", help="Write COMBINED/FULL-COMBINED-* and COMBINED/FULL-TREEMAP-* outputs.")
+    parser.add_argument(
+        "--stamp",
+        default="",
+        help="Stamp string for COMBINED output filenames. Defaults to a timestamp or to one parsed from the out_dir name.",
+    )
     parser.add_argument(
         "--zip",
         action="store_true",
-        help="Write a zip archive under MEMORY/LLM-PACKER-1.0/_packs/archive/.",
+        help="Write a zip archive under MEMORY/LLM-PACKER-1.1/_packs/archive/.",
     )
     args = parser.parse_args()
 
@@ -502,6 +661,7 @@ if __name__ == "__main__":
         mode=args.mode,
         out_dir=out_dir,
         combined=bool(args.combined),
+        stamp=args.stamp or None,
         zip_enabled=bool(args.zip),
     )
     print(f"Pack created: {pack_dir}")
