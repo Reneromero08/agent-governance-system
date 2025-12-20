@@ -487,7 +487,11 @@ if __name__ == "__main__":
         help="Output directory for the pack, relative to the repo root and under MEMORY/LLM-PACKER-1.0/_packs/.",
     )
     parser.add_argument("--combined", action="store_true", help="Write COMBINED/AGS_COMBINED.md.")
-    parser.add_argument("--zip", action="store_true", help="Write a zip archive under MEMORY/_packs/archive/.")
+    parser.add_argument(
+        "--zip",
+        action="store_true",
+        help="Write a zip archive under MEMORY/LLM-PACKER-1.0/_packs/archive/.",
+    )
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir) if args.out_dir else None
