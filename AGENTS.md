@@ -45,7 +45,7 @@ Agents MAY:
   - SKILLS/
   - CONTRACTS/
   - CORTEX/ (implementation), and `CORTEX/_generated/` (generated)
-  - MEMORY/ (implementation), and `MEMORY/_packs/` (generated)
+  - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.0/_packs/` (generated)
   - BUILD/ (user build outputs only)
 - append new records under CONTEXT/
 - consult CONTEXT/research as optional, non-binding input
@@ -57,7 +57,7 @@ Agents MAY NOT:
 - touch generated artifacts outside:
   - CONTRACTS/_runs/
   - CORTEX/_generated/
-  - MEMORY/_packs/
+  - MEMORY/LLM-PACKER-1.0/_packs/
 
 Research under CONTEXT/research is opt-in and non-binding. It must not be
 treated as canon.

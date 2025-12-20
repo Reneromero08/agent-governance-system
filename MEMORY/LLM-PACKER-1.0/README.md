@@ -26,7 +26,6 @@ Or run cross-platform:
 
 Optional arguments:
 
-- `-OutDir MEMORY/_packs/<name>` (must be under `MEMORY/_packs/`)
 - `-OutDir MEMORY/LLM-PACKER-1.0/_packs/<name>` (must be under `MEMORY/LLM-PACKER-1.0/_packs/`)
 - `-Mode full` or `-Mode delta`
 - `-Zip:$false` or `-Combined:$false`
