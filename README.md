@@ -31,13 +31,13 @@ Agents interacting with the system should follow the protocol described in `CANO
 3. Use the maps to find the right entrypoints.
 4. Execute work through skills rather than ad-hoc scripts.
 5. Validate changes using the runner in `CONTRACTS`.
-6. Update the canon and changelog in the same commit when rules change.
+6. Update the canon in the same commit when rules change.
 
 ## How to extend AGS
 
 - Add a skill: create `SKILLS/<skill-name>/` with `SKILL.md`, a run script, a validation script, and `fixtures/<case>/input.json` plus `expected.json`.
 - Add fixtures: place skill fixtures under `SKILLS/<skill-name>/fixtures/` and governance fixtures under `CONTRACTS/fixtures/`.
 - Add ADRs: create a new `CONTEXT/decisions/ADR-xxx-*.md` and reference it in `CONTEXT/INDEX.md`.
-- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM-PACKER-1.0/_packs/`.
+- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM-PACKER-1.1/_packs/`.
 
 For more details, see individual files in the respective directories.

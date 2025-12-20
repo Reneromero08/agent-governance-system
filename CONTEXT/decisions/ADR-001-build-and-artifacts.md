@@ -24,7 +24,7 @@ The intended meaning of `BUILD/` in this template is "dist for users": it is whe
 - Write system-generated artifacts near their subsystem:
   - `CONTRACTS/_runs/` for fixture runner outputs
   - `CORTEX/_generated/` for the cortex index
-  - `MEMORY/LLM-PACKER-1.0/_packs/` for memory and LLM handoff packs
+  - `MEMORY/LLM-PACKER-1.1/_packs/` for memory and LLM handoff packs
 - Include only an inventory of `BUILD/` (file tree) in packs, not its contents.
 
 ## Alternatives considered
@@ -44,7 +44,7 @@ Subsystem-owned artifact roots keep outputs colocated with the code that generat
 ## Enforcement
 
 - Update `CANON/CONTRACT.md` output roots rule.
-- Update `AGENTS.md` and `CANON/AGENTS.md` mutation and output rules.
+- Update `AGENTS.md` mutation and output rules.
 - Update `.gitignore` to ignore new artifact roots while keeping their directories tracked.
 - Update fixtures so `python CONTRACTS/runner.py` proves pack generation and output location behavior.
 

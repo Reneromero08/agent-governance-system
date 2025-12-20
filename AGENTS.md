@@ -54,7 +54,7 @@ Agents MAY:
   - SKILLS/
   - CONTRACTS/
   - CORTEX/ (implementation), and `CORTEX/_generated/` (generated)
-  - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.0/_packs/` (generated)
+  - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.1/_packs/` (generated)
   - BUILD/ (user build outputs only)
 - append new records under CONTEXT/
 - consult CONTEXT/research as optional, non-binding input
@@ -66,7 +66,9 @@ Agents MAY NOT:
 - touch generated artifacts outside:
   - CONTRACTS/_runs/
   - CORTEX/_generated/
-  - MEMORY/LLM-PACKER-1.0/_packs/
+  - MEMORY/LLM-PACKER-1.1/_packs/
+
+Generated files must be clearly marked as generated.
 
 Research under CONTEXT/research is opt-in and non-binding. It must not be
 treated as canon.
@@ -77,7 +79,7 @@ System-generated artifacts MUST be written only to:
 
 - CONTRACTS/_runs/
 - CORTEX/_generated/
-- MEMORY/LLM-PACKER-1.0/_packs/
+- MEMORY/LLM-PACKER-1.1/_packs/
 
 `BUILD/` is reserved for user build outputs. It must not be used for system artifacts.
 
@@ -110,7 +112,7 @@ If an agent changes behavior, it MUST:
 1. Add or update fixtures
 2. Run CONTRACTS/runner.py
 3. Ensure all fixtures pass
-4. Update CANON or CHANGELOG if behavior is user-visible
+4. Update CANON if constraints change
 
 If fixtures fail, the change does not exist.
 
