@@ -8,7 +8,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "packer.py"
-PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "_packs"
+PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER-1.0" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
 
 
@@ -42,7 +42,7 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Error reading input JSON: {exc}")
         return 1
 
-    out_dir_raw = str(config.get("out_dir", "MEMORY/_packs/fixture-smoke"))
+    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM-PACKER-1.0/_packs/fixture-smoke"))
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))

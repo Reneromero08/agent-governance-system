@@ -1,1 +1,7 @@
-_packs/
+_packs/**
+!_packs/
+!_packs/.gitkeep
+!_packs/archive/
+!_packs/archive/.gitkeep
+!_packs/_state/
+!_packs/_state/.gitkeep
