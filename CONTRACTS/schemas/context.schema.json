@@ -1,0 +1,11 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Context Record",
+  "type": "object",
+  "properties": {
+    "Status": { "type": "string" },
+    "Date": { "type": "string" },
+    "Tags": { "type": "string" }
+  },
+  "additionalProperties": true
+}
