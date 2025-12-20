@@ -1,0 +1,13 @@
+BUILD/**
+!BUILD/.gitkeep
+
+CONTRACTS/_runs/**
+!CONTRACTS/_runs/.gitkeep
+
+CORTEX/_generated/**
+!CORTEX/_generated/.gitkeep
+
+MEMORY/_packs/**
+!MEMORY/_packs/.gitkeep
+!MEMORY/_packs/_state/.gitkeep
+!MEMORY/_packs/archive/.gitkeep

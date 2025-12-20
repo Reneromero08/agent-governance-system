@@ -1,0 +1,10 @@
+# Ensure consistent line endings
+* text=auto eol=lf
+
+# Treat schema files as JSON
+*.schema.json linguist-language=JSON
+
+# Preserve binary files
+*.png binary
+*.jpg binary
+*.jpeg binary

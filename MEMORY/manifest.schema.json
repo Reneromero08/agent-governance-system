@@ -1,0 +1,25 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Memory Pack Manifest",
+  "type": "object",
+  "properties": {
+    "canon_version": {
+      "type": "string"
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "hash": { "type": "string" },
+          "size": { "type": "number" }
+        },
+        "required": ["path", "hash", "size"],
+        "additionalProperties": false
+      }
+    }
+  },
+  "required": ["canon_version", "files"],
+  "additionalProperties": false
+}

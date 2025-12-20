@@ -1,0 +1,15 @@
+{
+  "pack_dir": "MEMORY/_packs/fixture-smoke",
+  "verified": [
+    "meta/START_HERE.md",
+    "meta/ENTRYPOINTS.md",
+    "meta/FILE_TREE.txt",
+    "meta/FILE_INDEX.json",
+    "meta/REPO_OMITTED_BINARIES.json",
+    "meta/REPO_STATE.json",
+    "meta/PACK_INFO.json",
+    "meta/BUILD_TREE.txt",
+    "COMBINED/SPLIT/00_INDEX.md",
+    "COMBINED/SPLIT/01_CANON.md"
+  ]
+}
