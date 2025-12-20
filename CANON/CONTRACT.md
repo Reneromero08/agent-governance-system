@@ -8,6 +8,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 2. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
+   - update the affected module docs when operation changes (MAPS, SKILLS, MEMORY, CORTEX, TOOLS), not just AGENTS and CONTRACT;
    - record the change in the changelog;
    - occur within the same merge request.
 3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
