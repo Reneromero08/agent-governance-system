@@ -8,6 +8,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 2. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
+   - record the change in the changelog;
    - occur within the same merge request.
 3. **No mutation of authored content.**  Agents may not modify files under `CANON`, `CONTEXT` or authored assets without explicit permission.
 4. **Stable token grammar.**  Tokens used to reference entities and rules form a stable API.  Changes to tokens require a major version bump and deprecation cycle.
@@ -37,4 +38,5 @@ To change the canon:
 2. Update the relevant canon file(s) with the new rule or modification.
 3. Add or update fixtures in `CONTRACTS/fixtures/` to enforce the new rule.
 4. Increment the version in `CANON/VERSIONING.md` accordingly.
-5. Submit a merge request. The critic and runner must pass before the change is accepted.
+5. Add an entry to `CANON/CHANGELOG.md` describing the change.
+6. Submit a merge request. The critic and runner must pass before the change is accepted.

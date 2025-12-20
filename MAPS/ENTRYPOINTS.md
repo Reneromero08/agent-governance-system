@@ -7,6 +7,7 @@ This document lists the primary entrypoints where agents and humans are expected
 - `CANON/CONTRACT.md` - Modify to change non-negotiable rules. Requires full ceremony.
 - `CANON/INVARIANTS.md` - Modify to add or change invariants (rare).
 - `CANON/VERSIONING.md` - Modify when bumping the canon version or documenting deprecations.
+- `CANON/CHANGELOG.md` - Add entries for each change to the canon or system behavior.
 
 ## Decision records
 

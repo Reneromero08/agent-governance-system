@@ -31,7 +31,7 @@ Agents interacting with the system should follow the protocol described in `CANO
 3. Use the maps to find the right entrypoints.
 4. Execute work through skills rather than ad-hoc scripts.
 5. Validate changes using the runner in `CONTRACTS`.
-6. Update the canon in the same commit when rules change.
+6. Update the canon and changelog in the same commit when rules change.
 
 ## How to extend AGS
 
