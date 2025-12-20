@@ -7,6 +7,8 @@ CONTRACTS/_runs/**
 CORTEX/_generated/**
 !CORTEX/_generated/.gitkeep
 
+CONTEXT/research/**
+
 MEMORY/LLM-PACKER-1.1/_packs/**
 !MEMORY/LLM-PACKER-1.1/_packs/
 !MEMORY/LLM-PACKER-1.1/_packs/.gitkeep
