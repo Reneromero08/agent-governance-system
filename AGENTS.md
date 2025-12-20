@@ -32,6 +32,10 @@ If the user is asking questions, requesting analysis, or requesting a strategy w
 - avoid running commands that write artifacts
 - ask for explicit approval before making changes (example: "Do you want me to implement this now?")
 
+## 1B. Intent gate (canon and context)
+
+Only change CANON or edit existing CONTEXT records when the task is explicitly about rules, governance, or memory updates. If intent is ambiguous, ask one clarifying question before touching CANON or existing CONTEXT records. Changes are reversible; if a change is wrong, revert it.
+
 ## 2. Authority gradient
 
 If instructions conflict, obey in this order:
@@ -56,13 +60,13 @@ Agents MAY:
   - CORTEX/ (implementation), and `CORTEX/_generated/` (generated)
   - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.1/_packs/` (generated)
   - BUILD/ (user build outputs only)
-- append new records under CONTEXT/
+- append new records under CONTEXT/ (append-first; editing existing records requires explicit instruction)
 - consult CONTEXT/research as optional, non-binding input
 
 Agents MAY NOT:
-- modify CANON/* unless explicitly instructed
+- modify CANON/* or edit existing CONTEXT records unless explicitly instructed or the task is explicitly about rules or memory updates
 - delete authored content
-- rewrite history in CONTEXT/*
+- rewrite history in CONTEXT/* without explicit instruction
 - touch generated artifacts outside:
   - CONTRACTS/_runs/
   - CORTEX/_generated/
@@ -105,7 +109,7 @@ All non-trivial work must be performed via a skill:
 
 Direct ad-hoc scripting is forbidden.
 
-## 6. Fixtures as law
+## 6. Fixtures gate changes
 
 If an agent changes behavior, it MUST:
 

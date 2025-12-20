@@ -4,13 +4,13 @@ This document defines the non-negotiable rules and the authority gradient for th
 
 ## Non-negotiable rules
 
-1. **Text outranks code.**  The canon (this directory) defines the law; implementation must follow.
+1. **Text outranks code.**  The canon (this directory) defines the working spec for this repository; implementation must follow.
 2. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
    - record the change in the changelog;
    - occur within the same merge request.
-3. **No mutation of authored content.**  Agents may not modify files under `CANON`, `CONTEXT` or authored assets without explicit permission.
+3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
 4. **Stable token grammar.**  Tokens used to reference entities and rules form a stable API.  Changes to tokens require a major version bump and deprecation cycle.
 5. **Determinism.** Given the same inputs and canon, the system must produce the same outputs.
 6. **Output roots.** System-generated artifacts must be written only to:
@@ -19,6 +19,10 @@ This document defines the non-negotiable rules and the authority gradient for th
    - `MEMORY/LLM-PACKER-1.1/_packs/`
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
+
+## Intent gate
+
+Only change CANON or edit existing CONTEXT records when the task is explicitly about rules, governance, or memory updates. If intent is ambiguous, ask one clarifying question before touching CANON or existing CONTEXT records. Changes are reversible; if a change is wrong, revert it.
 
 ## Authority gradient
 
