@@ -13,7 +13,7 @@ By default, the agent was committing and pushing every small fix (hotfixes v1.0.
 ## Rule
 
 ### The Core Constraint
-**Every single `git commit` and `git push` requires explicit, per-instance user approval.**
+**Every single `git commit`, `git push`, and release publication requires explicit, per-instance user approval.**
 
 This is not negotiable. This is not bypassable. This is the highest-priority governance rule for agent behavior.
 
@@ -27,6 +27,11 @@ The following phrases do **NOT** authorize commits or pushes:
 - "yes" (unless in direct response to a commit ceremony prompt)
 
 These authorize **implementation** only. They are **never** implicit commit approvals.
+
+### Explicit composite approvals
+Explicit composite directives that include "commit", "push", and "release" (for example,
+"commit, push, and release") count as approval for each action listed in that request.
+This does not authorize additional commits beyond the current task.
 
 ### The Anti-Chaining Rule
 **One commit approval = one commit.** If the user approves a commit, the agent may execute that single commit. The agent may NOT:
@@ -45,7 +50,8 @@ Before any Git command, the agent MUST:
 5. **Wait** for explicit user approval (e.g., "yes, commit" or "commit and push").
 
 ### No Composite Commands
-Do not chain `git commit` and `git push` unless the user explicitly says "commit and push." Default to separate checkpoints.
+Do not chain `git commit` and `git push` unless the user explicitly says "commit and push."
+Explicit "commit, push, and release" is also allowed. Default to separate checkpoints.
 
 ## Governance Violation
 Any commit or push executed without following this ceremony is a **critical governance violation**.
