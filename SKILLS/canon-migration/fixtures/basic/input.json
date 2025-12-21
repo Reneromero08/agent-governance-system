@@ -1,0 +1,6 @@
+{
+    "description": "Test migration skill with no-op migration",
+    "pack_path": "",
+    "target_version": "0.1.5",
+    "source_version": "0.1.5"
+}
