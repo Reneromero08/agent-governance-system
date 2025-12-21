@@ -102,7 +102,7 @@ def read_canon_version() -> str:
     if not CANON_VERSION_FILE.exists():
         return "unknown"
     text = read_text(CANON_VERSION_FILE)
-    match = re.search(r"canon_version:\s*([0-9]+\\.[0-9]+\\.[0-9]+)", text)
+    match = re.search(r"canon_version:\s*(\d+\.\d+\.\d+)", text)
     return match.group(1) if match else "unknown"
 
 
