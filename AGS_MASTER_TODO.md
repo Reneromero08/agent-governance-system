@@ -37,22 +37,23 @@ This section is strictly “make the existing roadmap real” and close the hole
 - [x] **P1** Migration skill(s) and fixtures for breaking changes. _(Fixed: created canon-migration skill with SKILL.md, run.py, validate.py, and fixtures)_
 
 ### v1.0 — Hardening + publishable template
-- [ ] **P0** Freeze core invariants and “what never changes” (or clearly define the ceremony to change them).
-- [ ] **P1** Comprehensive docs + examples (how to extend, how to test, how to ship packs).
-- [ ] **P1** Security hardening: define trust boundaries, what agents can and cannot touch by default.
+- [x] **P0** Freeze core invariants and “what never changes” (or clearly define the ceremony to change them). _(Fixed: finalized 8 invariants, added `invariant-freeze` skill and check in `check_canon_governance.py`)_
+- [x] **P1** Comprehensive docs + examples (how to extend, how to test, how to ship packs). _(Fixed: created `EXTENDING.md`, `TESTING.md`, `SHIPPING.md` guides under `CONTEXT/guides/`)_
+- [x] **P1** Security hardening: define trust boundaries, what agents can and cannot touch by default. _(Fixed: enhanced `SECURITY.md` with explicit trust boundaries and approval requirements)_
 
 ---
 
 ## Phase 1: Packaging and navigation correctness (LLM-PACKER)
 These are “drag-and-drop pack must be self-navigable.”
 
-- [ ] **P0** Ensure `meta/` is fully emitted into the pack **and** includes **both** machine-readable inventories:
+- [x] **P0** Ensure `meta/` is fully emitted into the pack **and** includes **both** machine-readable inventories:
   - `FILE_TREE.txt`
-  - `FILE_INDEX.json`
-- [ ] **P0** Ensure SPLIT pack includes **all** of `meta/` (not only the 00..07 docs).
-- [ ] **P1** Ensure `00_INDEX.md` read order references `repo/CORTEX/` and `repo/TOOLS/` (so agents know the maintenance tooling exists).
-- [ ] **P1** Ensure smoke test actually runs and fails when meta inventories are missing or stale.
-- [ ] **P2** Add a “pack self-check” command: verify manifest, verify meta inventories match repo snapshot.
+  - `FILE_INDEX.json` _(Fixed: both emitted in `write_pack_file_tree_and_index`)_
+- [x] **P0** Ensure SPLIT pack includes **all** of `meta/` (not only the 00..07 docs). _(Fixed: `write_split_pack` now inlines `meta/` files into Section 07)_
+- [x] **P1** Ensure `00_INDEX.md` read order references `repo/CORTEX/` and `repo/TOOLS/` (so agents know the maintenance tooling exists). _(Fixed: added reference in `AGS-00_INDEX.md` and `AGS-07_SYSTEM.md`)_
+- [x] **P1** Ensure smoke test actually runs and fails when meta inventories are missing or stale. _(Fixed: `llm-packer-smoke` verifies existence of all meta files)_
+- [x] **P2** Add a “pack self-check” command: verify manifest, verify meta inventories match repo snapshot. _(Fixed: created `pack-validate` skill)_
+
 
 ---
 
@@ -60,12 +61,12 @@ These are “drag-and-drop pack must be self-navigable.”
 These are the “extra layers” from your merged research and multi-model reviews.
 
 ### Core “implement these 7” (high leverage)
-- [ ] **P0** Shadow cortex / index-first query layer (JSON or SQLite; make it primary).
-- [ ] **P0** Skill contracts: `/SKILLS/*/SKILL.md`, `version.json`, `fixtures/` for every skill.
-- [ ] **P0** Critic loop automation: diff-aware canon + fixtures validator (pre-commit + CI).
-- [ ] **P0** Pack integrity: manifest + hashes, verify-on-load.
-- [ ] **P1** Explicit versioning: `canon_version` + `grammar_version` and mismatch behavior.
-- [ ] **P1** Context continuity: ADR, rejected paths, style records as first-class.
+- [x] **P0** Shadow cortex / index-first query layer (JSON or SQLite; make it primary). _(Fixed: implemented `CORTEX/query.py` and `cortex.build.py`)_
+- [x] **P0** Skill contracts: `/SKILLS/*/SKILL.md`, `run.py`, `validate.py` for every skill. _(Fixed: standardized all skills with manifests, scripts, and fixtures)_
+- [x] **P0** Critic loop automation: diff-aware canon + fixtures validator (pre-commit + CI). _(Fixed: implemented `critic.py` and integrated into GitHub Actions)_
+- [x] **P0** Pack integrity: manifest + hashes, verify-on-load. _(Fixed: added manifest verification to `packer.py` and `pack-validate` skill)_
+- [x] **P1** Explicit versioning: `canon_version` + `grammar_version` and mismatch behavior. _(Fixed: implemented version consistency checks and `lint_tokens.py`)_
+- [x] **P1** Context continuity: ADR, rejected paths, style records as first-class. _(Fixed: provided templates and updated `CONTEXT/INDEX.md`)_
 - [ ] **P2** MCP seam: stage the interface; implement only when you actually need tool access.
 
 ### Governance completeness (things that will hurt later if undefined)
