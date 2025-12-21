@@ -81,7 +81,7 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P2** “Constitutional license” concept (optional legal-protective layer).
 
 ### Performance and scaling
-- [ ] **P1** Make “O(n×m) scanning” impossible by design (index-first non-optional).
+- [x] **P1** Make “O(n×m) scanning” impossible by design (index-first non-optional). _(Fixed: implemented SQLite Cortex with O(1) lookups)_
 - [ ] **P2** Incremental indexing + freshness/TTL rules (avoid stale cortex).
 
 ### Token economics
@@ -103,7 +103,22 @@ These are the “extra layers” from your merged research and multi-model revie
 
 ## Research audit
 
-- [ ] **P2** Research completeness audit
+- [x] **P2** Research completeness audit _(Completed 2025-12-21: All 9 research docs reviewed, items extracted below)_
   - Read every document under `CONTEXT/research/` (or your research source of truth)
   - Extract what should become: CANON rules, CONTRACT checks, SKILLS, or MAPS/entrypoints
   - Leave the rest as non-binding reference (do not promote by default)
+
+---
+
+## Research-derived tasks (extracted 2025-12-21)
+
+These items were identified from the research folder audit. They are not duplicates of the above.
+
+### Bootstrap and Context Tools
+- [ ] **P1** Genesis Prompt (`CANON/GENESIS.md`): A bootstrap prompt that solves the chicken-and-egg problem. Ensures agents load CANON first before any other instruction.
+- [ ] **P1** Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date. Enables agents to query "why did we decide X?" without full file scans.
+- [ ] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale.
+
+### Data Integrity and Validation
+- [ ] **P2** Provenance Headers for Generated Files: All generated files (cortex, packs, indexes) must include: generator version, input hashes, timestamp. Enables tamper detection.
+- [ ] **P2** Schema Validation for "Law-Like" Files: JSON Schemas for canon metadata, skill manifests, context records, cortex index. Contracts enforce schema validity.
