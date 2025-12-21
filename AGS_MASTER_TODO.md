@@ -67,13 +67,21 @@ These are the “extra layers” from your merged research and multi-model revie
 - [x] **P0** Pack integrity: manifest + hashes, verify-on-load. _(Fixed: added manifest verification to `packer.py` and `pack-validate` skill)_
 - [x] **P1** Explicit versioning: `canon_version` + `grammar_version` and mismatch behavior. _(Fixed: implemented version consistency checks and `lint_tokens.py`)_
 - [x] **P1** Context continuity: ADR, rejected paths, style records as first-class. _(Fixed: provided templates and updated `CONTEXT/INDEX.md`)_
-- [x] **P2** MCP seam: stage the interface; implement only when you actually need tool access. _(Seam staged 2025-12-21: MCP/MCP_SPEC.md, schemas, server.py)_
+- [x] **P2** MCP seam: stage the interface; implement only when you actually need tool access. _(Full implementation 2025-12-21: all 6 tools, dynamic resources, Claude Desktop config)_
 
 ### Governance completeness (things that will hurt later if undefined)
 - [x] **P1** Canon conflict resolution: what happens when canon contradicts itself; arbitration path. _(Created CANON/ARBITRATION.md 2025-12-21)_
 - [x] **P1** Deprecation policy: how rules die safely; minimum windows for breaking changes. _(Created CANON/DEPRECATION.md 2025-12-21)_
 - [x] **P1** Migration ceremony: deterministic migration skill + fixtures; formal compatibility break ritual. _(Created CANON/MIGRATION.md 2025-12-21)_
 - [x] **P1** Canon bloat prevention: readability constraints; archiving/superseding rules. _(Added INV-009, INV-010 to INVARIANTS.md 2025-12-21)_
+
+### MCP enhancements (extend governance to external AI clients)
+- [ ] **P2** `critic_run` tool: run TOOLS/critic.py via MCP so Claude can verify governance before acting.
+- [ ] **P2** `adr_create` tool: create new ADRs with proper template via MCP.
+- [ ] **P2** `commit_ceremony` tool: return ceremony checklist + staged files for Claude to assist with commits.
+- [ ] **P3** MCP audit logging: log all tool calls with timestamps for tracking.
+- [ ] **P3** MCP governance enforcement: tools refuse to execute if critic fails.
+- [ ] **P3** Additional prompts: `skill_template`, `conflict_resolution`, `deprecation_workflow`.
 
 ### Operational safety and “emergency modes”
 - [ ] **P2** Emergency procedures as concrete CLI modes (reset, quarantine, isolation, crisis arbitration).

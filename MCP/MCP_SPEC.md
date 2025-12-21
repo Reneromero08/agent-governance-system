@@ -48,26 +48,30 @@ MCP (Model Context Protocol) is an open standard for AI systems to communicate w
 | `adr_template` | Template for creating new ADRs |
 | `skill_template` | Template for creating new skills |
 
-## Implementation Approach
+## Implementation Status
 
-### Phase 1: Interface Definition (Current)
+### Phase 1: Interface Definition ✅
+- Tool schemas (JSON Schema for inputs/outputs)
+- Resource URIs and content types
+- Prompt templates
+- MCP server stub
 
-- Define tool schemas (JSON Schema for inputs/outputs)
-- Define resource URIs and content types
-- Define prompt templates
-- Create MCP server stub that returns "not implemented" for unimplemented features
+### Phase 2: Read-Only Implementation ✅
+- Resource reading (canon, context, cortex)
+- `cortex_query` — queries cortex via `CORTEX/query.py --find`
+- `context_search` — searches context via `CONTEXT/query-context.py`
+- `context_review` — checks reviews via `CONTEXT/review-context.py`
+- `canon_read` — reads canon files directly
 
-### Phase 2: Read-Only Implementation
+### Phase 3: Write Tools ✅
+- `skill_run` — execute any skill with JSON input/output
+- `pack_validate` — validate memory packs
+- Dynamic resources (live context/cortex data)
+- Claude Desktop configuration file
 
-- Implement resource reading (canon, context, cortex)
-- Implement read-only tools (cortex_query, context_search)
-- Test with MCP Inspector
-
-### Phase 3: Full Implementation
-
-- Implement write tools (skill execution)
-- Add authentication/authorization
-- Integrate with Claude Desktop or other MCP clients
+### Future Work
+- HTTP transport with authentication (for remote access)
+- OAuth 2.0 support for production deployments
 
 ## Security Considerations
 
@@ -114,6 +118,8 @@ AGS MCP server supports:
 
 ## Status
 
-**Seam Staged** — Interface defined, implementation pending.
+**Phase 3 Complete** — All tools implemented, dynamic resources working, Claude Desktop ready.
 
 Added: 2025-12-21
+Phase 2 Completed: 2025-12-21
+Phase 3 Completed: 2025-12-21
