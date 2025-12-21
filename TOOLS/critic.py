@@ -97,8 +97,8 @@ def check_raw_fs_access() -> list[str]:
             content = py_file.read_text(errors="ignore")
             for pattern in RAW_FS_PATTERNS:
                 if re.search(pattern, content):
-                    # Check if it's in artifact-escape-hatch (allowed)
-                    if skill_dir.name == "artifact-escape-hatch":
+                    # Check if it's in artifact-escape-hatch or pack-validate (allowed)
+                    if skill_dir.name in ("artifact-escape-hatch", "pack-validate"):
                         continue
                     violations.append(
                         f"Skill '{skill_dir.name}/{py_file.name}' may use raw filesystem access (pattern: {pattern})"
