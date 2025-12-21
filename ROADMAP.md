@@ -10,11 +10,11 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Establish the runner and initial fixtures: enforce no raw path access, determinism and canonical output rules.
 - [x] Provide example ADRs and context records to demonstrate decision compounding.
 
-## v0.2 - Governance automation
+## v0.2 - Governance automation ✅
 
-- [ ] Add critic scripts to automatically lint canon, skills and fixtures.
-- [ ] Integrate continuous integration workflows for running the runner and critics on pull requests.
-- [ ] Implement versioning and deprecation machinery for tokens.
+- [x] Add critic scripts to automatically lint canon, skills and fixtures.
+- [x] Integrate continuous integration workflows for running the runner and critics on pull requests.
+- [x] Implement versioning and deprecation machinery for tokens.
 
 ## v0.3 - Extended memory and indexing
 
