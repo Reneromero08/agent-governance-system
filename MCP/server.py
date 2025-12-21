@@ -128,12 +128,18 @@ class AGSMCPServer:
 
         # Dispatch to tool handlers
         tool_handlers = {
+            # Read tools
             "cortex_query": self._tool_cortex_query,
             "context_search": self._tool_context_search,
             "context_review": self._tool_context_review,
             "canon_read": self._tool_canon_read,
+            # Write tools
             "skill_run": self._tool_skill_run,
             "pack_validate": self._tool_pack_validate,
+            # Governance tools
+            "critic_run": self._tool_critic_run,
+            "adr_create": self._tool_adr_create,
+            "commit_ceremony": self._tool_commit_ceremony,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -608,6 +614,199 @@ class AGSMCPServer:
                 "content": [{
                     "type": "text",
                     "text": f"Pack validation error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_critic_run(self, args: Dict) -> Dict:
+        """Run TOOLS/critic.py to check governance compliance."""
+        import subprocess
+        
+        try:
+            result = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            passed = result.returncode == 0
+            output = result.stdout + result.stderr
+            
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "passed": passed,
+                        "output": output.strip(),
+                        "exit_code": result.returncode
+                    }, indent=2)
+                }],
+                "isError": not passed
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Critic run error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_adr_create(self, args: Dict) -> Dict:
+        """Create a new ADR with the proper template."""
+        import re
+        from datetime import datetime
+        
+        title = args.get("title", "")
+        context = args.get("context", "")
+        decision = args.get("decision", "")
+        status = args.get("status", "proposed")
+        
+        if not title:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "Error: 'title' parameter is required"
+                }],
+                "isError": True
+            }
+        
+        # Find next ADR number
+        decisions_dir = PROJECT_ROOT / "CONTEXT" / "decisions"
+        existing = list(decisions_dir.glob("ADR-*.md"))
+        numbers = []
+        for f in existing:
+            match = re.match(r"ADR-(\d+)", f.stem)
+            if match:
+                numbers.append(int(match.group(1)))
+        next_num = max(numbers, default=0) + 1
+        
+        # Generate filename
+        slug = re.sub(r'[^a-z0-9]+', '-', title.lower()).strip('-')[:40]
+        filename = f"ADR-{next_num:03d}-{slug}.md"
+        filepath = decisions_dir / filename
+        
+        # Generate content
+        date = datetime.now().strftime("%Y-%m-%d")
+        content = f"""# ADR-{next_num:03d}: {title}
+
+**Date:** {date}
+**Status:** {status}
+**Tags:** 
+
+## Context
+
+{context if context else "[Describe the context and problem that led to this decision]"}
+
+## Decision
+
+{decision if decision else "[Describe the decision that was made]"}
+
+## Consequences
+
+[Describe the positive and negative consequences of this decision]
+
+## Review
+
+**Review Date:** [Set a date to revisit this decision, e.g., 6 months from now]
+"""
+        
+        try:
+            filepath.write_text(content, encoding="utf-8")
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "created": True,
+                        "path": str(filepath.relative_to(PROJECT_ROOT)),
+                        "adr_number": next_num,
+                        "title": title,
+                        "message": f"Created {filename}. Please review and fill in the remaining sections."
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"ADR creation error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_commit_ceremony(self, args: Dict) -> Dict:
+        """Return the commit ceremony checklist and staged files."""
+        import subprocess
+        
+        try:
+            # Run critic
+            critic_result = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            critic_passed = critic_result.returncode == 0
+            
+            # Run contract runner
+            runner_result = subprocess.run(
+                [sys.executable, str(PROJECT_ROOT / "CONTRACTS" / "runner.py")],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            fixtures_passed = runner_result.returncode == 0
+            
+            # Get staged files
+            staged_result = subprocess.run(
+                ["git", "diff", "--cached", "--name-only"],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            staged_files = [f for f in staged_result.stdout.strip().split("\n") if f]
+            
+            # Get status
+            status_result = subprocess.run(
+                ["git", "status", "--short"],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            ceremony = {
+                "checklist": {
+                    "1_failsafe_critic": {
+                        "passed": critic_passed,
+                        "tool": "TOOLS/critic.py",
+                        "output": critic_result.stdout.strip()[-500:] if critic_result.stdout else critic_result.stderr.strip()[-500:]
+                    },
+                    "2_failsafe_runner": {
+                        "passed": fixtures_passed,
+                        "tool": "CONTRACTS/runner.py",
+                        "output": runner_result.stdout.strip()[-500:] if runner_result.stdout else runner_result.stderr.strip()[-500:]
+                    },
+                    "3_files_staged": len(staged_files) > 0,
+                    "4_ready_for_commit": critic_passed and fixtures_passed and len(staged_files) > 0
+                },
+                "staged_files": staged_files,
+                "staged_count": len(staged_files),
+                "git_status": status_result.stdout.strip(),
+                "ceremony_prompt": f"Ready for the Chunked Commit Ceremony? Shall I commit these {len(staged_files)} files?" if (critic_passed and fixtures_passed and len(staged_files) > 0) else "Ceremony cannot proceed - failsafe checks must pass and files must be staged."
+            }
+            
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(ceremony, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Commit ceremony error: {str(e)}"
                 }],
                 "isError": True
             }

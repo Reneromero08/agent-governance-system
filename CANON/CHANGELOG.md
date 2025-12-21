@@ -17,6 +17,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CANON/INVARIANTS.md` INV-009 and INV-010: Canon bloat prevention (readability limits, archiving).
 - MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
 - MCP full implementation: all 6 tools working, dynamic resources, Claude Desktop config ready.
+- MCP governance tools: `critic_run`, `adr_create`, `commit_ceremony` for Claude-assisted governance.
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
