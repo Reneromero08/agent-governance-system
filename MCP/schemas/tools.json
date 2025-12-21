@@ -153,6 +153,57 @@
                     "file"
                 ]
             }
+        },
+        "critic_run": {
+            "name": "critic_run",
+            "description": "Run TOOLS/critic.py to verify governance compliance before making changes",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "adr_create": {
+            "name": "adr_create",
+            "description": "Create a new Architecture Decision Record with auto-numbering and template",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the ADR (e.g., 'Use SQLite for Cortex')"
+                    },
+                    "context": {
+                        "type": "string",
+                        "description": "Optional context/problem description"
+                    },
+                    "decision": {
+                        "type": "string",
+                        "description": "Optional decision text"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "proposed",
+                            "accepted",
+                            "deprecated",
+                            "superseded"
+                        ],
+                        "default": "proposed",
+                        "description": "Status of the ADR"
+                    }
+                },
+                "required": [
+                    "title"
+                ]
+            }
+        },
+        "commit_ceremony": {
+            "name": "commit_ceremony",
+            "description": "Run failsafe checks and return ceremony checklist with staged files",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
         }
     },
     "tools": [
@@ -173,6 +224,15 @@
         },
         {
             "$ref": "#/definitions/canon_read"
+        },
+        {
+            "$ref": "#/definitions/critic_run"
+        },
+        {
+            "$ref": "#/definitions/adr_create"
+        },
+        {
+            "$ref": "#/definitions/commit_ceremony"
         }
     ]
 }

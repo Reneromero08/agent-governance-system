@@ -76,9 +76,9 @@ These are the “extra layers” from your merged research and multi-model revie
 - [x] **P1** Canon bloat prevention: readability constraints; archiving/superseding rules. _(Added INV-009, INV-010 to INVARIANTS.md 2025-12-21)_
 
 ### MCP enhancements (extend governance to external AI clients)
-- [ ] **P2** `critic_run` tool: run TOOLS/critic.py via MCP so Claude can verify governance before acting.
-- [ ] **P2** `adr_create` tool: create new ADRs with proper template via MCP.
-- [ ] **P2** `commit_ceremony` tool: return ceremony checklist + staged files for Claude to assist with commits.
+- [x] **P2** `critic_run` tool: run TOOLS/critic.py via MCP so Claude can verify governance before acting. _(Implemented 2025-12-21)_
+- [x] **P2** `adr_create` tool: create new ADRs with proper template via MCP. _(Implemented 2025-12-21)_
+- [x] **P2** `commit_ceremony` tool: return ceremony checklist + staged files for Claude to assist with commits. _(Implemented 2025-12-21)_
 - [ ] **P3** MCP audit logging: log all tool calls with timestamps for tracking.
 - [ ] **P3** MCP governance enforcement: tools refuse to execute if critic fails.
 - [ ] **P3** Additional prompts: `skill_template`, `conflict_resolution`, `deprecation_workflow`.
