@@ -1,0 +1,7 @@
+{
+    "check_type": "artifact-escape-hatch",
+    "description": "Verify no artifacts have escaped to unauthorized directories",
+    "escape_check_passed": true,
+    "escaped_artifacts": [],
+    "test_case": "clean_repo"
+}
