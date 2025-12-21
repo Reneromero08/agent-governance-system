@@ -9,7 +9,7 @@ artifact output directories. It is run as a governance fixture.
 Allowed output roots (per INV-006):
 - CONTRACTS/_runs/
 - CORTEX/_generated/
-- MEMORY/LLM-PACKER/_packs/
+- MEMORY/LLM_PACKER/_packs/
 - BUILD/ (user outputs only)
 """
 

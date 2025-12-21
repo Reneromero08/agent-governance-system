@@ -8,12 +8,12 @@
 
 ## Trigger
 
-Use to verify that `MEMORY/packer.py` runs and produces a minimal pack skeleton under `MEMORY/LLM-PACKER/_packs/`.
+Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a minimal pack skeleton under `MEMORY/LLM_PACKER/_packs/`.
 
 ## Inputs
 
 - `input.json`:
-  - `out_dir` (string): output directory for the pack, relative to the repo root and under `MEMORY/LLM-PACKER/_packs/`.
+  - `out_dir` (string): output directory for the pack, relative to the repo root and under `MEMORY/LLM_PACKER/_packs/`.
   - `mode` (string): `full` or `delta`.
   - `combined` (bool): whether to generate `COMBINED/` outputs.
   - `stamp` (string): stamp for timestamped `COMBINED/` outputs.
@@ -25,7 +25,7 @@ Use to verify that `MEMORY/packer.py` runs and produces a minimal pack skeleton 
 
 ## Constraints
 
-- Must only write generated artifacts under `MEMORY/LLM-PACKER/_packs/` (and must not write system artifacts to `BUILD/`).
+- Must only write generated artifacts under `MEMORY/LLM_PACKER/_packs/` (and must not write system artifacts to `BUILD/`).
 - Deterministic and self-contained.
 
 ## Fixtures

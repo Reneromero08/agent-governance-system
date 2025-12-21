@@ -18,7 +18,7 @@ Packs are generated artifacts and should live near the subsystem that owns them.
 
 ## Decision
 
-- The canonical pack output root is `MEMORY/LLM-PACKER/_packs/`.
+- The canonical packs are stored in **`MEMORY/LLM_PACKER/_packs/`**.
 - Delta baseline state is stored under `MEMORY/LLM-PACKER/_packs/_state/`.
 
 ## Alternatives considered

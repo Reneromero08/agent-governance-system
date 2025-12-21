@@ -14,12 +14,12 @@ A pack is a bundled snapshot of the AGS repository optimized for LLM handoff. It
 
 ### Quick (Windows)
 
-Double-click `MEMORY/LLM-PACKER/LLM-PACK.cmd`
+Double-click `MEMORY/LLM_PACKER/LLM-PACK.cmd`
 
 ### PowerShell
 
 ```powershell
-./MEMORY/LLM-PACKER/pack.ps1 -Mode full -Combined
+./MEMORY/LLM_PACKER/pack.ps1 -Mode full -Combined
 ```
 
 ### Python (Cross-platform)
@@ -39,12 +39,12 @@ python MEMORY/packer.py --mode full --combined --zip
 
 Packs are created under:
 ```
-MEMORY/LLM-PACKER/_packs/
+MEMORY/LLM_PACKER/_packs/
 ```
 
 Archives (zip) are stored in:
 ```
-MEMORY/LLM-PACKER/_packs/archive/
+MEMORY/LLM_PACKER/_packs/archive/
 ```
 
 ## Pack Contents
