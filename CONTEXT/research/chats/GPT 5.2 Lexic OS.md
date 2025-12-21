@@ -1,0 +1,233 @@
+## 0) The transferable system approach (the real “OS”)
+
+### What you’re doing that transfers to every future build
+
+1. **Authority gradient as the root primitive**  
+    You don’t “document” code. You define _law_ first, and force implementation to comply. Canon is the root certificate authority.
+    
+    Sonnet 4.5 Lexic OS
+    
+2. **Continuity across sessions via “portable cognition”**  
+    Packs serialize worldview and current state into a deterministic load order, so model switches do not reset intent.
+    
+    Sonnet 4.5 Lexic OS
+    
+3. **Drift-proof evolution via mechanical gates**  
+    “No fixture, no merge” converts philosophy into enforcement, not vibes.
+    
+    Sonnet 4.5 Lexic OS
+    
+4. **Semantic tokenization that decouples intent from implementation**  
+    You define stable tokens (symbolic interface) so you can refactor engines without rewriting content.
+    
+    Kimi K2 Thinking Semiotic OS Re…
+    
+5. **Decision compounding via Context records**  
+    ADRs + rejected records stop endless re-arguing and preserve rationale as an executable constraint surface.
+    
+    Sonnet 4.5 Lexic OS
+    
+
+---
+
+## 1) Repo skeleton (GitHub-ready)
+
+`lexic-os/   README.md   ROADMAP.md   LICENSE   .editorconfig   .gitattributes   .github/     workflows/       contracts.yml       governance.yml    CANON/     CONTRACT.md     INVARIANTS.md     GLOSSARY.md     VERSIONING.md     CHANGELOG.md     SECURITY.md    CONTEXT/     INDEX.md     decisions/       ADR-000-template.md     preferences/       STYLE-000-template.md     rejected/       REJECT-000-template.md     open/       OPEN-000-template.md    MAPS/     ENTRYPOINTS.md     SYSTEM_MAP.md     DATA_FLOW.md     FILE_OWNERSHIP.md    SKILLS/     _TEMPLATE/       SKILL.md       run.sh       validate.py       fixtures/         basic/           input.json           expected.json    CONTRACTS/     runner.py     README.md     fixtures/       governance/         canon-sync/         token-grammar/         no-raw-paths/     schemas/       canon.schema.json       skill.schema.json       context.schema.json    MEMORY/     packer.py     manifest.schema.json     COMBINED/       .gitkeep    CORTEX/     cortex.schema.json     cortex.build.py     cortex.json     query.py     README.md    TOOLS/     critic.py     check_canon_governance.py     lint_tokens.py     freeze.py`
+
+---
+
+## 2) README.md (template)
+
+`# LEXIC OS (Sonnet 4.5 Edition) Language-Executable Intelligence Coordination for durable, multi-agent work.  ## Core premise Text is law. Law is executable. Execution is validated. Validation gates change. Wisdom compounds.  ## Six layers (load order) 1. CANON: rules and invariants (authority) 2. CONTEXT: decisions, rejections, preferences (wisdom) 3. MAPS: where to change what (navigation) 4. SKILLS: modular, versioned capabilities (action) 5. CONTRACTS: fixtures + runner (enforcement) 6. MEMORY: packer snapshots (portable state)  ## Session start protocol (agents) - Load CANON first. - Query CONTEXT before proposing changes. - Use MAPS to select files. - Execute via SKILLS only. - Validate via CONTRACTS. - If behavior changed, update CANON + CHANGELOG in same commit.  ## Repo goals - Prevent drift across model switches and time. - Make intent durable and mechanically enforced. - Make systems refactorable without rewriting authored content.`
+
+---
+
+## 3) CANON templates (the constitution)
+
+### CANON/CONTRACT.md
+
+`# CONTRACT This file is highest authority.  ## Non-negotiable rules 1. Text canon outranks code. 2. No behavior change without:   - fixture update/addition   - canon update (if constraints changed)   - changelog entry 3. Never mutate authored content unless explicitly instructed. 4. Never introduce hidden coupling (raw paths, magic constants). 5. Determinism required: same input => same output.  ## Authority gradient If conflict: 1. CANON/CONTRACT.md 2. CANON/INVARIANTS.md 3. CANON/VERSIONING.md 4. ROADMAP.md 5. CONTRACTS (fixtures as precedent) 6. Implementation  ## Change ceremony (required) - Define: what changes, what stays invariant - Add/adjust fixtures first - Implement - Run contracts - Update canon + changelog in same PR`
+
+### CANON/INVARIANTS.md
+
+`# INVARIANTS Locked decisions that require explicit ceremony to change.  ## Invariant list - [INV-001] Repository structure: 6-layer LEXIC layout is stable. - [INV-002] Token grammar is stable (tokens are API). - [INV-003] No raw path access in skills. Must use Cortex queries. - [INV-004] Fixtures gate merges.  ## How to change invariants Requires: 1. ADR with migration plan 2. Version bump in CANON/VERSIONING.md 3. Deprecation window definition 4. New fixtures proving both old and new paths (during migration)`
+
+### CANON/VERSIONING.md (this is the missing “explicit versioning” layer)
+
+`# VERSIONING  ## Canon version canon_version: 0.1.0  ## Compatibility contracts - Tokens: backward compatible within MINOR version. - Breaking token changes require MAJOR bump and migration tooling. - Skills declare: required_canon_version range.  ## Deprecation policy - Deprecated tokens remain supported for N releases or N days. - Every deprecation must include:   - replacement token   - automated fixer (TOOLS/freeze.py or SKILLS/migrate/*)   - fixtures for deprecated + replacement paths`
+
+### CANON/GLOSSARY.md (keeps “stable semantics” stable)
+
+`# GLOSSARY Define terms used across canon and skills.  - Canon: enforceable law. - Fixture: precedent that must continue passing. - Skill: scoped capability with a contract. - Cortex: shadow index; the only allowed navigation API. - Token grammar: stable symbolic interface for authored content.`
+
+---
+
+## 4) CONTEXT templates (decision compounding)
+
+### CONTEXT/decisions/ADR-000-template.md
+
+`# ADR-000: <Title>  **Status:** Accepted | Experimental | Deprecated | Superseded   **Date:** YYYY-MM-DD   **Review:** YYYY-MM-DD   **Confidence:** High | Medium | Low   **Impact:** Critical | High | Medium | Low   **Tags:** [architecture, tokens, governance, performance, ...]  ## Context What forced this decision?  ## Decision What we are doing, precisely.  ## Alternatives considered Option A, Option B.  ## Rationale Why this choice.  ## Consequences Positive, negative, neutral.  ## Enforcement - Canon refs: - Fixtures: - Skill impacts: - Cortex impacts:  ## Review triggers When to reconsider.`
+
+### CONTEXT/rejected/REJECT-000-template.md
+
+`# REJECT-000: <Approach>  **Date Rejected:** YYYY-MM-DD   **Tags:** [...]  ## What was proposed ## Why it seemed good ## Why we rejected it (primary reason first) ## Conditions for reconsidering ## Related decisions`
+
+---
+
+## 5) MAPS templates (navigation, ownership, and “where to touch”)
+
+### MAPS/ENTRYPOINTS.md
+
+`# ENTRYPOINTS  ## Governance - CANON/CONTRACT.md - CANON/INVARIANTS.md - CANON/VERSIONING.md - CANON/CHANGELOG.md  ## How to add a capability - SKILLS/<name>/SKILL.md - SKILLS/<name>/fixtures/* - CONTRACTS/fixtures/* (if it changes system behavior)  ## How to change tokens - CANON/GLOSSARY.md - CANON/VERSIONING.md - TOOLS/lint_tokens.py - CONTRACTS/fixtures/governance/token-grammar`
+
+### MAPS/FILE_OWNERSHIP.md (stops “AI edits wrong files”)
+
+`# FILE OWNERSHIP  - CANON/*: humans only, unless explicitly instructed - CONTEXT/*: append-only by default, never rewrite history - SKILLS/*: skill owner can edit; must update fixtures - CORTEX/*: generated; do not hand-edit cortex.json`
+
+---
+
+## 6) SKILLS (Claude Skills-style modularity + discovery contracts)
+
+### SKILLS/_TEMPLATE/SKILL.md
+
+`# Skill: <skill_name>  **Version:** 0.1.0   **Status:** Stable | Experimental   **required_canon_version:** ">=0.1.0 <1.0.0"  ## Trigger What user intent routes here?  ## Inputs - name (type) required? - ...  ## Outputs - path pattern - format schema - append vs overwrite rules  ## Constraints - Must not touch CANON/* - Must not use raw paths - Must query Cortex for files - Must be deterministic  ## Fixtures - SKILLS/<skill>/fixtures/basic/* - CONTRACTS fixtures (if governance affected)`
+
+### The “Discovery contract”
+
+Add this to README and enforce with a fixture:
+
+- A skill is only callable if it has `SKILL.md` + `fixtures/` + passes validation.  
+    This is exactly the “skills as text-based API” piece your SystemView called out.
+    
+    Kimi K2 Thinking Semiotic OS Re…
+    
+
+---
+
+## 7) CONTRACTS (mechanical enforcement)
+
+### CONTRACTS/README.md
+
+`# CONTRACTS Fixtures are precedents. If a fixture fails, the change is rejected.  ## Fixture categories - governance: canon sync, token grammar, no raw paths, determinism - skills: per-skill behavior - migrations: deprecated token compatibility  ## Required gates - local: pre-commit runs governance subset - CI: full runner`
+
+### CONTRACTS/runner.py (minimal template)
+
+`#!/usr/bin/env python3 from pathlib import Path import sys, json  def run_fixture_dir(dirpath: Path) -> bool:     # Load input, run target, compare output.     # Keep deterministic. No network.     return True  def main() -> int:     root = Path(__file__).parent / "fixtures"     failed = 0     for fixture in sorted(root.glob("**/*")):         if fixture.is_dir() and (fixture / "input.json").exists():             ok = run_fixture_dir(fixture)             if not ok:                 failed += 1     return 1 if failed else 0  if __name__ == "__main__":     raise SystemExit(main())`
+
+---
+
+## 8) MEMORY (packer + integrity)
+
+### MEMORY/packer.py (template requirements)
+
+- Split files in priority order (Canon, Roadmap, Maps, Skills, Contracts)
+    
+    Sonnet 4.5 Lexic OS
+    
+- Produce `manifest.json` with hashes for tamper detection
+    
+    Sonnet 4.5 Lexic OS
+    
+
+Add one extra rule for future-proofing:
+
+- **Pack must include `canon_version` and `cortex_hash`** so agents can detect mismatch immediately.
+    
+
+---
+
+## 9) CORTEX (Shadow Cortex, made real)
+
+This is the biggest future-proof win: agents stop grepping and stop touching raw paths. Your SystemView already flagged this as “incomplete”.
+
+Kimi K2 Thinking Semiotic OS Re…
+
+### CORTEX/README.md
+
+`# CORTEX Shadow index and query API. This is the only allowed navigation interface for agents.  ## Guarantees - Stable identifiers for entities (pages, assets, projects) - Tag and type queries - No raw filesystem traversal allowed in skills  ## Files - cortex.json: generated index - cortex.build.py: generator - query.py: query CLI/library`
+
+### cortex.json (schema sketch)
+
+`{   "cortex_version": "0.1.0",   "generated_at": "YYYY-MM-DDTHH:MM:SSZ",   "canon_version": "0.1.0",   "entities": [     {       "id": "project:foo-bar",       "type": "project",       "title": "Foo Bar",       "tags": ["featured", "design"],       "paths": {         "source": "vault/projects/foo-bar.md",         "assets_dir": "vault/projects/foo-bar/"       }     }   ] }`
+
+### Enforcement fixture
+
+- CONTRACT: “Skills must not read directories directly.”
+    
+- Fixture: scan skill diffs for `os.listdir`, `glob`, `readdir`, etc unless inside cortex.build.
+    
+
+---
+
+## 10) TOOLS (the missing “Critic” and governance automation)
+
+### TOOLS/critic.py
+
+A pre-commit / CI gate that reads:
+
+- git diff
+    
+- CANON rules
+    
+- SKILL constraints  
+    Then fails commits if violated.
+    
+
+Your SystemView called this out: the critic is still human.
+
+Kimi K2 Thinking Semiotic OS Re…
+
+### .git/hooks/pre-commit (template)
+
+`#!/bin/sh python TOOLS/critic.py --diff --canon CANON/CONTRACT.md python CONTRACTS/runner.py`
+
+### .github/workflows/governance.yml (template)
+
+- run critic
+    
+- run contracts
+    
+- require changelog update if behavior files changed
+    
+
+---
+
+## 11) What to add to make it “better and future proof”
+
+These are the highest leverage upgrades that keep your philosophy intact:
+
+1. **Cortex-first navigation (mandatory)**  
+    No raw paths in skills, ever. Cortex becomes the OS “filesystem API”.
+    
+2. **Explicit versioning and deprecation machinery**  
+    Tokens are an API. Treat them like one: version ranges, migration skills, compatibility fixtures.
+    
+3. **Critic gate (automate the judge)**  
+    A cheap, deterministic “policy linter” prevents 90% of drift before it hits code review.
+    
+4. **Schema validation for everything “law-like”**  
+    JSON Schemas for: canon metadata, skill manifests, context records, cortex index. Contracts enforce schema validity.
+    
+5. **Provenance and determinism rules**
+    
+    - Generated files must include header: generator version, input hashes.
+        
+    - Contracts run offline. No network. Deterministic sorting everywhere.
+        
+6. **Attack surface minimization for agentic workflows**  
+    Skills run in least-privileged mode: read-only by default, explicit write targets only (append-only preferred).
+    
+
+---
+
+## 12) The “Sonnet 4.5” specific note (keep it simple)
+
+Make the repo model-agnostic, but include one line in CANON/CONTRACT.md:
+
+`## Model compatibility This governance system must work across models (example: Sonnet 4.5, GPT-5.x). The authority gradient and fixtures are the compatibility layer.`
+
+That preserves your core point: the OS is the hierarchy and gates, not the model.
+
+---
+
+If you want the absolute minimum set of files to publish first (so the repo is clean and instantly adoptable), publish only: `README.md`, `CANON/*`, `MAPS/*`, `SKILLS/_TEMPLATE/*`, `CONTRACTS/runner.py`, `MEMORY/packer.py`, `CORTEX/*`, `TOOLS/critic.py`. Everything else can be incremental.
