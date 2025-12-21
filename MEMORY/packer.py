@@ -199,6 +199,66 @@ def write_json(path: Path, payload: Any) -> None:
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
+def verify_manifest(pack_dir: Path) -> Tuple[bool, List[str]]:
+    """
+    Verify pack integrity by checking file hashes against manifest.
+    
+    Returns:
+        (is_valid, errors): True if all hashes match, list of errors if any.
+    """
+    errors: List[str] = []
+    
+    # Load the pack manifest
+    manifest_path = pack_dir / "meta" / "REPO_STATE.json"
+    if not manifest_path.exists():
+        errors.append(f"Manifest not found: {manifest_path}")
+        return False, errors
+    
+    try:
+        manifest = json.loads(read_text(manifest_path))
+    except Exception as e:
+        errors.append(f"Failed to load manifest: {e}")
+        return False, errors
+    
+    # Verify each file in the manifest
+    for entry in manifest.get("files", []):
+        rel_path = entry.get("path", "")
+        expected_hash = entry.get("hash", "")
+        expected_size = entry.get("size", 0)
+        
+        file_path = pack_dir / "repo" / rel_path
+        if not file_path.exists():
+            errors.append(f"Missing file: {rel_path}")
+            continue
+        
+        actual_size = file_path.stat().st_size
+        if actual_size != expected_size:
+            errors.append(f"Size mismatch for {rel_path}: expected {expected_size}, got {actual_size}")
+            continue
+        
+        actual_hash = hash_file(file_path)
+        if actual_hash != expected_hash:
+            errors.append(f"Hash mismatch for {rel_path}: expected {expected_hash[:12]}..., got {actual_hash[:12]}...")
+    
+    return len(errors) == 0, errors
+
+
+def load_and_verify_pack(pack_dir: Path) -> Tuple[Optional[Dict[str, Any]], List[str]]:
+    """
+    Load a pack and verify its integrity.
+    
+    Returns:
+        (manifest, errors): The manifest dict if valid, None if invalid. List of errors.
+    """
+    is_valid, errors = verify_manifest(pack_dir)
+    if not is_valid:
+        return None, errors
+    
+    manifest_path = pack_dir / "meta" / "REPO_STATE.json"
+    manifest = json.loads(read_text(manifest_path))
+    return manifest, []
+
+
 def choose_fence(text: str) -> str:
     matches = re.findall(r"`+", text)
     longest = max((len(m) for m in matches), default=0)
