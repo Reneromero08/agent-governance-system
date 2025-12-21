@@ -8,7 +8,25 @@ All notable changes to the Agent Governance System will be documented in this fi
 - None.
 
 ### Changed
-- Bumped `canon_version` to 2.5.2.
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+## [2.5.3] - 2025-12-21
+
+### Added
+- `CONTEXT/decisions/ADR-008-composite-commit-approval.md`.
+- `CONTRACTS/fixtures/governance/commit-ceremony` fixture.
+
+### Changed
+- Commit ceremony now recognizes explicit "commit, push, and release" directives.
+- Updated `CONTRACTS/fixtures/governance/canon-sync` to include `CANON/AGREEMENT.md`.
+- Bumped `canon_version` to 2.5.3.
+- Regenerated `CANON/CODEBOOK.md`.
 
 ### Fixed
 - None.
