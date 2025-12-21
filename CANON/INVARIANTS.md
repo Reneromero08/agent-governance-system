@@ -20,6 +20,7 @@ This file lists decisions that are considered invariant.  Changing an invariant 
   - Moved to `CANON/archive/` (not deleted).
   - Referenced in the superseding rule or ADR.
   - Preserved in git history for audit.
+- **[INV-011] Schema Compliance** - All Law-Like files (ADRs, Skills, Style Preferences) must be valid against their respective JSON Schemas in `MCP/schemas/governance/`.
 
 ## Changing invariants
 

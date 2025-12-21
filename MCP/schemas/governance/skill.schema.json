@@ -1,0 +1,37 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS Skill Schema",
+    "description": "Validation schema for AGS Skill Manifests (Markdown metadata)",
+    "type": "object",
+    "properties": {
+        "skill": {
+            "type": "string",
+            "description": "The name of the skill"
+        },
+        "version": {
+            "type": "string",
+            "pattern": "^\\d+\\.\\d+\\.\\d+$",
+            "description": "Semantic versioning (e.g., 0.1.0)"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "Active",
+                "Experimental",
+                "Deprecated",
+                "Draft",
+                "Reference"
+            ],
+            "description": "The current status of the skill"
+        },
+        "required_canon_version": {
+            "type": "string",
+            "description": "SemVer range for compatible canon versions (e.g., >=0.1.0)"
+        }
+    },
+    "required": [
+        "version",
+        "status",
+        "required_canon_version"
+    ]
+}

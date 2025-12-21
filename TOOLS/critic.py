@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+import schema_validator  # New import
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CANON_DIR = PROJECT_ROOT / "CANON"
@@ -119,6 +120,44 @@ def check_skill_manifests() -> list[str]:
     return violations
 
 
+def check_schema_validation() -> list[str]:
+    """Check that all Law-Like files (ADRs, Skills, Styles) are schema-valid."""
+    violations = []
+    
+    # Check ADRs
+    adr_dir = PROJECT_ROOT / "CONTEXT" / "decisions"
+    adr_schema = PROJECT_ROOT / "MCP" / "schemas" / "governance" / "adr.schema.json"
+    if adr_dir.exists():
+        for adr_path in adr_dir.glob("ADR-*.md"):
+            errors = schema_validator.validate_file(str(adr_path), str(adr_schema))
+            if errors:
+                violations.extend(errors)
+                
+    # Check Skills
+    skill_schema = PROJECT_ROOT / "MCP" / "schemas" / "governance" / "skill.schema.json"
+    for skill_path in SKILLS_DIR.iterdir():
+        if not skill_path.is_dir() or skill_path.name.startswith("_"):
+            continue
+        manifest = skill_path / "SKILL.md"
+        if manifest.exists():
+            errors = schema_validator.validate_file(str(manifest), str(skill_schema))
+            if errors:
+                violations.extend(errors)
+                
+    # Check Styles
+    style_dir = PROJECT_ROOT / "CONTEXT" / "preferences"
+    style_schema = PROJECT_ROOT / "MCP" / "schemas" / "governance" / "style.schema.json"
+    if style_dir.exists():
+        for style_path in style_dir.glob("STYLE-*.md"):
+            if style_path.name.endswith("-template.md"):
+                continue
+            errors = schema_validator.validate_file(str(style_path), str(style_schema))
+            if errors:
+                violations.extend(errors)
+                
+    return violations
+
+
 def main() -> int:
     print("[critic] Running governance checks...")
     
@@ -132,6 +171,7 @@ def main() -> int:
     all_violations.extend(check_skill_fixtures())
     all_violations.extend(check_raw_fs_access())
     all_violations.extend(check_skill_manifests())
+    all_violations.extend(check_schema_validation())  # New check
     
     if all_violations:
         print(f"\n[critic] Found {len(all_violations)} violation(s):\n")

@@ -21,6 +21,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 # Load schemas
 SCHEMAS_DIR = Path(__file__).parent / "schemas"
+LOGS_DIR = Path(__file__).parent / "logs"
 
 
 def load_schema(name: str) -> Dict:
@@ -35,6 +36,35 @@ def load_schema(name: str) -> Dict:
 MCP_VERSION = "2024-11-05"
 SERVER_NAME = "ags-mcp-server"
 SERVER_VERSION = "0.1.0"
+
+
+def governed_tool(func):
+    """Decorator: Run critic.py before execution to enforce governance lock."""
+    def wrapper(self, args: Dict) -> Dict:
+        import os
+        import subprocess
+        # Exempt if checking critic itself (avoid infinite loop if critic is broken? No, critic run is separate tool)
+        
+        # Run critic
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+        
+        res = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+            capture_output=True, text=True, encoding="utf-8", errors="ignore", cwd=str(PROJECT_ROOT), env=env
+        )
+        
+        if res.returncode != 0:
+            output = (res.stdout + res.stderr).strip()
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"⛔ GOVERNANCE LOCKDOWN ⛔\n\nAction blocked. The repository has governance violations.\nYou must fix these issues before the Agent can Act.\n\nViolations:\n{output}"
+                }],
+                "isError": True
+            }
+        return func(self, args)
+    return wrapper
 
 
 class AGSMCPServer:
@@ -89,6 +119,32 @@ class AGSMCPServer:
                 "message": message
             }
         }
+
+    def _audit_log(self, tool: str, args: Dict, result_type: str, result_data: Any = None, duration: float = 0.0) -> None:
+        """Append a JSON record to the audit log."""
+        from datetime import datetime
+        try:
+            LOGS_DIR.mkdir(parents=True, exist_ok=True)
+            log_file = LOGS_DIR / "audit.jsonl"
+            
+            # Truncate large args for logging (e.g. file content)
+            safe_args = args.copy()
+            if "content" in safe_args and len(str(safe_args["content"])) > 200:
+                safe_args["content"] = str(safe_args["content"])[:200] + "...(truncated)"
+                
+            entry = {
+                "timestamp": datetime.now().isoformat(),
+                "tool": tool,
+                "arguments": safe_args,
+                "status": result_type,
+                "duration_ms": round(duration * 1000, 2),
+                "result_summary": str(result_data)[:200] if result_data else None
+            }
+            
+            with open(log_file, "a", encoding="utf-8") as f:
+                f.write(json.dumps(entry) + "\n")
+        except Exception as e:
+            print(f"Audit log failure: {e}", file=sys.stderr)
 
     def _handle_initialize(self, params: Dict) -> Dict:
         """Handle initialize request."""
@@ -146,8 +202,26 @@ class AGSMCPServer:
 
         handler = tool_handlers.get(tool_name)
         if handler:
-            return handler(arguments)
+            import time
+            start_time = time.time()
+            try:
+                result = handler(arguments)
+                duration = time.time() - start_time
+                is_error = result.get("isError", False)
+                self._audit_log(tool_name, arguments, "error" if is_error else "success", result, duration)
+                return result
+            except Exception as e:
+                duration = time.time() - start_time
+                self._audit_log(tool_name, arguments, "crit_error", str(e), duration)
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Internal tool error: {str(e)}"
+                    }],
+                    "isError": True
+                }
         else:
+            self._audit_log(tool_name, arguments, "unknown_tool")
             return {
                 "content": [{
                     "type": "text",
@@ -253,8 +327,16 @@ class AGSMCPServer:
                     "description": "Checklist for the commit ceremony"
                 },
                 {
-                    "name": "adr_template",
-                    "description": "Template for creating Architecture Decision Records"
+                    "name": "skill_template",
+                    "description": "Template for creating a new Skill"
+                },
+                {
+                    "name": "conflict_resolution",
+                    "description": "Guide for resolving conflicts in Canon (Arbitration)"
+                },
+                {
+                    "name": "deprecation_workflow",
+                    "description": "Checklist for deprecating tokens or features"
                 }
             ]
         }
@@ -278,6 +360,42 @@ class AGSMCPServer:
                         }
                     }]
                 }
+
+        if prompt_name == "skill_template":
+            skill_md = (PROJECT_ROOT / "SKILLS" / "_TEMPLATE" / "SKILL.md").read_text(encoding="utf-8")
+            run_py = (PROJECT_ROOT / "SKILLS" / "_TEMPLATE" / "run.py").read_text(encoding="utf-8")
+            return {
+                "description": "Template for creating a new Skill",
+                "messages": [{
+                    "role": "user",
+                    "content": {
+                        "type": "text",
+                        "text": f"Create a new SKILL following this template:\n\n### SKILL.md\n{skill_md}\n\n### run.py\n{run_py}"
+                    }
+                }]
+            }
+
+        if prompt_name == "conflict_resolution":
+            arb_path = PROJECT_ROOT / "CANON" / "ARBITRATION.md"
+            content = arb_path.read_text(encoding="utf-8") if arb_path.exists() else "ARBITRATION.md not found."
+            return {
+                "description": "Guide for resolving conflicts in Canon",
+                "messages": [{
+                    "role": "user",
+                    "content": { "type": "text", "text": content }
+                }]
+            }
+
+        if prompt_name == "deprecation_workflow":
+            dep_path = PROJECT_ROOT / "CANON" / "DEPRECATION.md"
+            content = dep_path.read_text(encoding="utf-8") if dep_path.exists() else "DEPRECATION.md not found."
+            return {
+                "description": "Checklist for deprecating tokens or features",
+                "messages": [{
+                    "role": "user",
+                    "content": { "type": "text", "text": content }
+                }]
+            }
 
         return {
             "description": f"Prompt '{prompt_name}' not implemented",
@@ -456,6 +574,7 @@ class AGSMCPServer:
                 "isError": True
             }
 
+    @governed_tool
     def _tool_skill_run(self, args: Dict) -> Dict:
         """Execute a skill with the given input."""
         import subprocess
@@ -561,6 +680,7 @@ class AGSMCPServer:
                 skills.append(d.name)
         return ", ".join(skills)
 
+    @governed_tool
     def _tool_pack_validate(self, args: Dict) -> Dict:
         """Validate a memory pack."""
         import subprocess
@@ -655,6 +775,7 @@ class AGSMCPServer:
                 "isError": True
             }
 
+    @governed_tool
     def _tool_adr_create(self, args: Dict) -> Dict:
         """Create a new ADR with the proper template."""
         import re
@@ -813,6 +934,7 @@ class AGSMCPServer:
                 "isError": True
             }
 
+    @governed_tool
     def _tool_research_cache(self, args: Dict) -> Dict:
         """Access and manage the research cache via TOOLS/research_cache.py."""
         import subprocess
