@@ -33,7 +33,7 @@ This section is strictly “make the existing roadmap real” and close the hole
 ### v0.3 — Memory + pack discipline
 - [x] **P0** Define persistent memory store + summarization workflow (tiering, promotion rules, what is mutable vs append-only). _(Fixed: created MEMORY/MEMORY_STORE.md documenting 3-tier memory model, promotion rules, and mutability constraints)_
 - [x] **P0** Packer: **manifest integrity** (hashes, deterministic order) and verify-on-load. _(Fixed: added verify_manifest() and load_and_verify_pack() functions to packer.py)_
-- [ ] **P1** Delta packs: baseline state + diff logic + upgrade story (migration notes).
+- [x] **P1** Delta packs: baseline state + diff logic + upgrade story (migration notes). _(Fixed: created MEMORY/DELTA_PACKS.md documenting diff logic, baseline management, and migration workflow)_
 - [x] **P1** Migration skill(s) and fixtures for breaking changes. _(Fixed: created canon-migration skill with SKILL.md, run.py, validate.py, and fixtures)_
 
 ### v1.0 — Hardening + publishable template
