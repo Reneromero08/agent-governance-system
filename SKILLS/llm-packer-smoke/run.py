@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "Engine" / "packer.py"
-PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "_packs"
+PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "Engine" / "packer.py"
+PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
 
 
@@ -24,7 +24,7 @@ def ensure_under_packs(path: Path) -> None:
     try:
         path.resolve().relative_to(packs_root)
     except ValueError as exc:
-        raise ValueError(f"out_dir must be under MEMORY/LLM-PACKER/_packs/: {path}") from exc
+        raise ValueError(f"out_dir must be under MEMORY/LLM_PACKER/_packs/: {path}") from exc
 
 
 def ensure_runner_writes_under_runs(path: Path) -> None:
@@ -42,7 +42,7 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Error reading input JSON: {exc}")
         return 1
 
-    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM-PACKER/_packs/fixture-smoke"))
+    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM_PACKER/_packs/fixture-smoke"))
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))

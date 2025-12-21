@@ -12,7 +12,7 @@ To minimise conflicts and maintain clarity, this document assigns responsibility
 | `SKILLS/*` | Skill authors | Each skill directory should have a clearly identified owner |
 | `CONTRACTS/*` | QA and policy maintainers | Fixtures and schemas enforce behaviour |
 | `MEMORY/*` | Persistence maintainers | Manage the packer and manifest formats |
-| `MEMORY/LLM-PACKER/Engine/*` | Automation leads | Core packer logic and launcher assets |
+| `MEMORY/LLM_PACKER/Engine/*` | Automation leads | Core packer logic and launcher assets |
 | `CORTEX/*` | Index team | Maintain the schema and build scripts for the shadow index |
 | `TOOLS/*` | Tooling team | Implement critics, linters and migration scripts |
 
