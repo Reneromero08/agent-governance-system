@@ -12,6 +12,14 @@ This file lists decisions that are considered invariant.  Changing an invariant 
 - **[INV-006] Output roots** - System-generated artifacts must be written only to `CONTRACTS/_runs/`, `CORTEX/_generated/`, or `MEMORY/LLM_PACKER/_packs/`. `BUILD/` is reserved for user outputs.
 - **[INV-007] Change ceremony** - Any behavior change must add/update fixtures, update the changelog, and occur in the same commit. Partial changes are not valid.
 - **[INV-008] Cortex builder exception** - Cortex builders (`CORTEX/*.build.py`) may scan the filesystem directly. All other skills and agents must query via `CORTEX/query.py`.
+- **[INV-009] Canon readability** - Each file in `CANON/` must remain readable and focused:
+  - Maximum 300 lines per file (excluding examples and templates).
+  - Maximum 15 rules per file.
+  - If a file exceeds these limits, it must be split via ADR.
+- **[INV-010] Canon archiving** - Rules that are superseded or no longer applicable must be:
+  - Moved to `CANON/archive/` (not deleted).
+  - Referenced in the superseding rule or ADR.
+  - Preserved in git history for audit.
 
 ## Changing invariants
 

@@ -11,6 +11,10 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
 - CONTRACT Rule 7: Commit ceremony as a non-negotiable law.
 - AGENTS.md Section 10: Full commit ceremony specification with anti-chaining rule.
+- `CANON/ARBITRATION.md`: Conflict resolution policy with escalation protocol.
+- `CANON/DEPRECATION.md`: Deprecation windows and ceremonies for safe rule retirement.
+- `CANON/MIGRATION.md`: Formal compatibility break ritual with phases and rollback.
+- `CANON/INVARIANTS.md` INV-009 and INV-010: Canon bloat prevention (readability limits, archiving).
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.

@@ -70,10 +70,10 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P2** MCP seam: stage the interface; implement only when you actually need tool access.
 
 ### Governance completeness (things that will hurt later if undefined)
-- [ ] **P1** Canon conflict resolution: what happens when canon contradicts itself; arbitration path.
-- [ ] **P1** Deprecation policy: how rules die safely; minimum windows for breaking changes.
-- [ ] **P1** Migration ceremony: deterministic migration skill + fixtures; formal compatibility break ritual.
-- [ ] **P1** Canon bloat prevention: readability constraints; archiving/superseding rules.
+- [x] **P1** Canon conflict resolution: what happens when canon contradicts itself; arbitration path. _(Created CANON/ARBITRATION.md 2025-12-21)_
+- [x] **P1** Deprecation policy: how rules die safely; minimum windows for breaking changes. _(Created CANON/DEPRECATION.md 2025-12-21)_
+- [x] **P1** Migration ceremony: deterministic migration skill + fixtures; formal compatibility break ritual. _(Created CANON/MIGRATION.md 2025-12-21)_
+- [x] **P1** Canon bloat prevention: readability constraints; archiving/superseding rules. _(Added INV-009, INV-010 to INVARIANTS.md 2025-12-21)_
 
 ### Operational safety and “emergency modes”
 - [ ] **P2** Emergency procedures as concrete CLI modes (reset, quarantine, isolation, crisis arbitration).
