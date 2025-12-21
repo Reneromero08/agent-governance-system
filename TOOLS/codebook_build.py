@@ -361,7 +361,29 @@ def main():
         print("Codebook needs regeneration.")
         return 1
     
-    # Write codebook
+    # Write codebook with provenance header
+    try:
+        import sys
+        # Ensure PROJECT_ROOT is in path for TOOLS.provenance
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        
+        from TOOLS.provenance import generate_header, add_header_to_content
+        header = generate_header(
+            generator="TOOLS/codebook_build.py",
+            inputs=[
+                "CANON/CONTRACT.md",
+                "CANON/INVARIANTS.md",
+                "SKILLS/",
+                "CONTEXT/decisions/",
+            ],
+            output_content=markdown,
+        )
+        markdown = add_header_to_content(markdown, header, file_type="md")
+    except ImportError as e:
+        print(f"DEBUG: Provenance import failed: {e}")
+        pass  # Provenance module not available, skip header
+    
     codebook_path.write_text(markdown, encoding="utf-8")
     print(f"Codebook written to {codebook_path}")
     print(f"Total entries: {len(codebook['entries'])}")
