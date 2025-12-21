@@ -4,9 +4,17 @@
 By default, the agent was committing and pushing every small fix (hotfixes v1.0.1 and v1.0.2). The user prefers to control the "chunking" of work and wants to explicitly approve commits and pushes.
 
 ## Rule
-- **No Auto-Commits**: The agent MUST NOT run `git commit` or `git push` without explicit user permission for that specific set of changes.
-- **Batching**: Small fixes should remain as uncommitted changes in the working directory until a logical "chunk" is completed.
-- **Explicit Prompt**: After a series of changes, the agent should ask: "I have X changes ready in the working directory. Should I commit these as a chunk now, or keep working?"
+- **No Auto-Git**: The agent MUST NOT run `git commit` or `git push` without explicit user permission for that specific set of changes.
+- **The "Blanket Approval" Ban**: Generic approvals (e.g., "there you go", "proceed", "finish it") apply ONLY to the implementation level. They NEVER authorize a `git commit` or `git push`.
+- **The Ceremony Phase**: Before any Git command, the agent MUST:
+  1. **The Failsafe Rule**: Run all mandatory verification tools (`TOOLS/critic.py` and `CONTRACTS/runner.py`) and confirm they pass.
+  2. Stop all execution.
+  3. List every file in the staging area.
+  4. Explicitly ask: **"Ready for the Chunked Commit Ceremony? Shall I commit and push these [N] files?"**
+- **No Composite Commands**: Do not chain `git commit` and `git push` unless the user explicitly asks to "Commit and Push." Default to separate checkpoints.
+
+## Governance Violation
+Moving forward without the "Explicit Prompt" check is a high-priority governance violation.
 
 ## Status
 **Active**

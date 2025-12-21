@@ -11,7 +11,7 @@ This script produces two related artifacts:
    markdown suitable for handoff to another model.
 
 
-All outputs are written under `MEMORY/LLM-PACKER/_packs/`.
+All outputs are written under `MEMORY/LLM_PACKER/_packs/`.
 """
 
 from __future__ import annotations
@@ -853,7 +853,7 @@ def make_pack(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Create AGS memory/LLM packs under MEMORY/LLM-PACKER/_packs/."
+        description="Create AGS memory/LLM packs under MEMORY/LLM_PACKER/_packs/."
     )
     parser.add_argument(
         "--mode",
@@ -864,7 +864,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--out-dir",
         default="",
-        help="Output directory for the pack, relative to the repo root and under MEMORY/LLM-PACKER/_packs/.",
+        help="Output directory for the pack, relative to the repo root and under MEMORY/LLM_PACKER/_packs/.",
     )
     parser.add_argument("--combined", action="store_true", help="Write COMBINED/FULL-COMBINED-* and COMBINED/FULL-TREEMAP-* outputs.")
     parser.add_argument(
@@ -875,7 +875,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--zip",
         action="store_true",
-        help="Write a zip archive under MEMORY/LLM-PACKER/_packs/archive/.",
+        help="Write a zip archive under MEMORY/LLM_PACKER/_packs/archive/.",
     )
     args = parser.parse_args()
 
