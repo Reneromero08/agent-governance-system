@@ -16,6 +16,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CANON/MIGRATION.md`: Formal compatibility break ritual with phases and rollback.
 - `CANON/INVARIANTS.md` INV-009 and INV-010: Canon bloat prevention (readability limits, archiving).
 - MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
+- MCP full implementation: all 6 tools working, dynamic resources, Claude Desktop config ready.
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
