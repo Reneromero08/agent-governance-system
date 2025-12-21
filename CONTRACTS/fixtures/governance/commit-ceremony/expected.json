@@ -5,5 +5,8 @@
     "explicit_approvals": [
         "commit, push, and release"
     ],
+    "ceremony_confirmations": [
+        "go on"
+    ],
     "anti_chaining": true
 }
