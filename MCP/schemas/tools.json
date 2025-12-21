@@ -227,6 +227,44 @@
                     }
                 }
             }
+        },
+        "research_cache": {
+            "name": "research_cache",
+            "description": "Access and manage the persistent research cache to avoid redundant browsing",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "enum": [
+                            "lookup",
+                            "save",
+                            "list",
+                            "clear"
+                        ],
+                        "description": "Action to perform"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "URL to look up or save"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Summary content to save"
+                    },
+                    "tags": {
+                        "type": "string",
+                        "description": "Comma-separated tags for the saved entry"
+                    },
+                    "filter": {
+                        "type": "string",
+                        "description": "Tag filter for listing"
+                    }
+                },
+                "required": [
+                    "action"
+                ]
+            }
         }
     },
     "tools": [
@@ -259,6 +297,9 @@
         },
         {
             "$ref": "#/definitions/codebook_lookup"
+        },
+        {
+            "$ref": "#/definitions/research_cache"
         }
     ]
 }
