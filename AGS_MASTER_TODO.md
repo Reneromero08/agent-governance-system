@@ -115,7 +115,7 @@ These are the “extra layers” from your merged research and multi-model revie
 These items were identified from the research folder audit. They are not duplicates of the above.
 
 ### Bootstrap and Context Tools
-- [ ] **P1** Genesis Prompt (`CANON/GENESIS.md`): A bootstrap prompt that solves the chicken-and-egg problem. Ensures agents load CANON first before any other instruction.
+- [x] **P1** Genesis Prompt (`CANON/GENESIS.md`): A bootstrap prompt that solves the chicken-and-egg problem. Ensures agents load CANON first before any other instruction. _(Created 2025-12-21)_
 - [ ] **P1** Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date. Enables agents to query "why did we decide X?" without full file scans.
 - [ ] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale.
 
