@@ -34,7 +34,7 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Refine "O(1) Cortex" by implementing a proper indexing database (SQLite).
 - [x] Implement Genesis Prompt (`CANON/GENESIS.md`): Bootstrap prompt that ensures agents load CANON first.
 - [x] Add Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date.
-- [ ] Add Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
+- [x] Add Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
 
 ## v1.2 - Protocol Integration & Validation
 
