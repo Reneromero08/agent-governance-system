@@ -37,7 +37,7 @@ ANSI_RESET = "\033[0m"
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MEMORY_DIR = PROJECT_ROOT / "MEMORY"
-LLM_PACKER_DIR = MEMORY_DIR / "LLM-PACKER"
+LLM_PACKER_DIR = MEMORY_DIR / "LLM_PACKER"
 PACKS_ROOT = LLM_PACKER_DIR / "_packs"
 STATE_DIR = PACKS_ROOT / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
@@ -670,7 +670,7 @@ def ensure_under_packs_root(out_dir: Path) -> Path:
         out_dir_resolved.relative_to(packs_root)
     except ValueError as exc:
         raise ValueError(
-            f"OutDir must be under MEMORY/LLM-PACKER/_packs/. Received: {out_dir}"
+            f"OutDir must be under MEMORY/LLM_PACKER/_packs/. Received: {out_dir}"
         ) from exc
     return out_dir_resolved
 
