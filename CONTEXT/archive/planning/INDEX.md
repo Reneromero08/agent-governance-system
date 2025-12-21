@@ -10,5 +10,4 @@ This folder contains archived planning snapshots that are no longer actively mai
 ## Notes
 
 - These are point-in-time copies of prior root planning docs.
-- Keep root pointers (`ROADMAP.md`, `AGS_MASTER_TODO.md`) stable for external references.
-
+- Root planning docs were archived out of the repo root; use these snapshots as the source of truth.

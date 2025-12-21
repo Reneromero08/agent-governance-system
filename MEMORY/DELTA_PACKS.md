@@ -54,7 +54,7 @@ A file is considered **deleted** if:
 These files are **always included** in delta packs to ensure context:
 - `AGENTS.md`
 - `README.md`
-- `ROADMAP.md`
+- `CONTEXT/archive/planning/INDEX.md`
 - `CANON/CONTRACT.md`
 - `CANON/INVARIANTS.md`
 - `CANON/VERSIONING.md`
