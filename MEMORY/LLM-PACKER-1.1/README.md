@@ -1,4 +1,6 @@
-# LLM PACKER 1.1
+# LLM PACKER
+
+**Version:** 1.1.0
 
 Utility to bundle the Agent Governance System (AGS) repo into a small, shareable snapshot for an LLM.
 
@@ -8,10 +10,11 @@ Utility to bundle the Agent Governance System (AGS) repo into a small, shareable
 - Key root files (text): `AGENTS.md`, `README.md`, `ROADMAP.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.gitignore`
 - Generated indices under `meta/` (start here, entrypoints, file tree, file index, BUILD inventory)
 - `COMBINED/` output for easy sharing:
-  - `FULL-COMBINED-<stamp>.md` and `FULL-COMBINED-<stamp>.txt`
-  - `FULL-TREEMAP-<stamp>.md` and `FULL-TREEMAP-<stamp>.txt`
+  - `AGS-FULL-COMBINED-<stamp>.md` and `AGS-FULL-COMBINED-<stamp>.txt`
+  - `AGS-FULL-TREEMAP-<stamp>.md` and `AGS-FULL-TREEMAP-<stamp>.txt`
 - `COMBINED/SPLIT/` output for LLM-friendly loading:
-  - `00_INDEX.md` plus 7 section files (8 total)
+  - `AGS-00_INDEX.md` plus 7 section files (8 total)
+- Token estimation in `meta/CONTEXT.txt`
 
 ## How to run
 
@@ -45,3 +48,27 @@ And optionally produces a `.zip` archived under:
 Baseline state used for delta packs is stored at:
 
 `MEMORY/LLM-PACKER-1.1/_packs/_state/baseline.json`
+
+## Token Estimation
+
+Each pack includes `meta/CONTEXT.txt` with:
+- Per-file token estimates
+- Total token count
+- Warnings if pack exceeds common context limits (128K, 200K tokens)
+
+## Changelog
+
+### 1.1.0 (2025-12-21)
+- Added `AGS-` prefix to all output files
+- Added token estimation and `CONTEXT.txt` report
+- Added pack size warnings for large contexts
+- Added compression metrics
+- Added `verify_manifest()` for integrity checking
+- Fixed `read_canon_version()` regex bug
+
+### 1.0.0 (Initial)
+- Full and delta pack modes
+- Combined markdown output
+- Split pack sections
+- Manifest with SHA256 hashes
+- ZIP archive support

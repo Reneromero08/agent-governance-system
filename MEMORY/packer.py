@@ -98,6 +98,25 @@ def read_text(path: Path) -> str:
     return path.read_text(encoding="utf-8", errors="replace")
 
 
+# Token estimation constants
+CHARS_PER_TOKEN = 4  # Rough estimate for English text
+TOKEN_LIMIT_WARNING = 100_000
+TOKEN_LIMIT_CRITICAL = 200_000
+
+
+def estimate_tokens(text: str) -> int:
+    """Estimate token count from character count (rough approximation)."""
+    return len(text) // CHARS_PER_TOKEN
+
+
+def estimate_file_tokens(path: Path) -> int:
+    """Estimate token count for a file."""
+    try:
+        return estimate_tokens(read_text(path))
+    except Exception:
+        return 0
+
+
 def read_canon_version() -> str:
     if not CANON_VERSION_FILE.exists():
         return "unknown"
@@ -402,7 +421,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     tools_paths = [p for p in included_repo_paths if p.startswith("repo/TOOLS/")]
     github_paths = [p for p in included_repo_paths if p.startswith("repo/.github/")]
 
-    (split_dir / "00_INDEX.md").write_text(
+    (split_dir / "AGS-00_INDEX.md").write_text(
         "\n".join(
             [
                 "# AGS Pack Index",
@@ -421,20 +440,20 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
                 "## Notes",
                 "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
                 "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
-                "- If `--combined` is enabled, `COMBINED/` contains `FULL-COMBINED-*` and `FULL-TREEMAP-*` outputs.",
+                "- If `--combined` is enabled, `COMBINED/` contains `AGS-FULL-COMBINED-*` and `AGS-FULL-TREEMAP-*` outputs.",
                 "",
             ]
         ),
         encoding="utf-8",
     )
 
-    (split_dir / "01_CANON.md").write_text("# Canon\n\n" + section(canon_paths), encoding="utf-8")
-    (split_dir / "02_ROOT.md").write_text("# Root\n\n" + section(root_paths), encoding="utf-8")
-    (split_dir / "03_MAPS.md").write_text("# Maps\n\n" + section(maps_paths), encoding="utf-8")
-    (split_dir / "04_CONTEXT.md").write_text("# Context\n\n" + section(context_paths), encoding="utf-8")
-    (split_dir / "05_SKILLS.md").write_text("# Skills\n\n" + section(skills_paths), encoding="utf-8")
-    (split_dir / "06_CONTRACTS.md").write_text("# Contracts\n\n" + section(contracts_paths), encoding="utf-8")
-    (split_dir / "07_SYSTEM.md").write_text(
+    (split_dir / "AGS-01_CANON.md").write_text("# Canon\n\n" + section(canon_paths), encoding="utf-8")
+    (split_dir / "AGS-02_ROOT.md").write_text("# Root\n\n" + section(root_paths), encoding="utf-8")
+    (split_dir / "AGS-03_MAPS.md").write_text("# Maps\n\n" + section(maps_paths), encoding="utf-8")
+    (split_dir / "AGS-04_CONTEXT.md").write_text("# Context\n\n" + section(context_paths), encoding="utf-8")
+    (split_dir / "AGS-05_SKILLS.md").write_text("# Skills\n\n" + section(skills_paths), encoding="utf-8")
+    (split_dir / "AGS-06_CONTRACTS.md").write_text("# Contracts\n\n" + section(contracts_paths), encoding="utf-8")
+    (split_dir / "AGS-07_SYSTEM.md").write_text(
         "# System\n\n" + section([*cortex_paths, *memory_paths, *tools_paths, *github_paths]),
         encoding="utf-8",
     )
@@ -530,6 +549,74 @@ def write_pack_file_tree_and_index(pack_dir: Path) -> None:
     write_json(pack_dir / "meta" / "FILE_INDEX.json", file_index)
 
 
+def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
+    """
+    Write CONTEXT.txt with token estimates per file and warnings.
+    
+    Returns:
+        (total_tokens, warnings): Total estimated tokens and any warnings.
+    """
+    warnings: List[str] = []
+    lines: List[str] = [
+        "# AGS Pack Context Report",
+        "",
+        "Token estimates for LLM context usage.",
+        "",
+        "## Per-File Token Estimates",
+        "",
+        f"{'File':<60} {'Bytes':>10} {'Est. Tokens':>12}",
+        "-" * 85,
+    ]
+    
+    total_bytes = 0
+    total_tokens = 0
+    file_tokens: List[Tuple[str, int, int]] = []
+    
+    for path in sorted(pack_dir.rglob("*")):
+        if not path.is_file():
+            continue
+        rel = path.relative_to(pack_dir).as_posix()
+        size = path.stat().st_size
+        tokens = estimate_file_tokens(path)
+        file_tokens.append((rel, size, tokens))
+        total_bytes += size
+        total_tokens += tokens
+    
+    for rel, size, tokens in file_tokens:
+        lines.append(f"{rel:<60} {size:>10} {tokens:>12}")
+    
+    lines.extend([
+        "",
+        "-" * 85,
+        f"{'TOTAL':<60} {total_bytes:>10} {total_tokens:>12}",
+        "",
+        "## Summary",
+        "",
+        f"- Total files: {len(file_tokens)}",
+        f"- Total bytes: {total_bytes:,}",
+        f"- Estimated tokens: {total_tokens:,}",
+        "",
+    ])
+    
+    # Add warnings
+    if total_tokens > TOKEN_LIMIT_CRITICAL:
+        warning = f"[!] CRITICAL: Pack exceeds {TOKEN_LIMIT_CRITICAL:,} tokens. May not fit in most LLM contexts!"
+        warnings.append(warning)
+        lines.append(warning)
+    elif total_tokens > TOKEN_LIMIT_WARNING:
+        warning = f"[!] WARNING: Pack exceeds {TOKEN_LIMIT_WARNING:,} tokens. Consider using delta mode or splitting."
+        warnings.append(warning)
+        lines.append(warning)
+    else:
+        lines.append(f"[OK] Pack is within typical LLM context limits ({TOKEN_LIMIT_WARNING:,} tokens)")
+    
+    lines.append("")
+    
+    (pack_dir / "meta" / "CONTEXT.txt").write_text("\n".join(lines), encoding="utf-8")
+    
+    return total_tokens, warnings
+
+
 def copy_repo_files(
     pack_dir: Path,
     project_root: Path,
@@ -581,7 +668,7 @@ def compute_treemap_text(pack_dir: Path, *, stamp: str, include_combined_paths: 
 
 
 def append_repo_tree_to_split_maps(pack_dir: Path, *, tree_text: str) -> None:
-    split_maps_path = pack_dir / "COMBINED" / "SPLIT" / "03_MAPS.md"
+    split_maps_path = pack_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md"
     if not split_maps_path.exists():
         return
     existing = read_text(split_maps_path).rstrip("\n")
@@ -604,10 +691,10 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
     combined_dir = pack_dir / "COMBINED"
     combined_dir.mkdir(parents=True, exist_ok=True)
 
-    combined_md_rel = f"COMBINED/FULL-COMBINED-{stamp}.md"
-    combined_txt_rel = f"COMBINED/FULL-COMBINED-{stamp}.txt"
-    treemap_md_rel = f"COMBINED/FULL-TREEMAP-{stamp}.md"
-    treemap_txt_rel = f"COMBINED/FULL-TREEMAP-{stamp}.txt"
+    combined_md_rel = f"COMBINED/AGS-FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/AGS-FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/AGS-FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/AGS-FULL-TREEMAP-{stamp}.txt"
 
     tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True)
 
@@ -617,8 +704,8 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
         encoding="utf-8",
     )
 
-    combined_md_lines = ["# FULL COMBINED", ""]
-    combined_txt_lines = ["FULL COMBINED", ""]
+    combined_md_lines = ["# AGS FULL COMBINED", ""]
+    combined_txt_lines = ["AGS FULL COMBINED", ""]
 
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
     for rel in base_paths:
@@ -710,6 +797,11 @@ def make_pack(
         write_combined_outputs(out_dir, stamp=effective_stamp)
 
     write_pack_file_tree_and_index(out_dir)
+    
+    # Generate token context report with warnings
+    total_tokens, token_warnings = write_context_report(out_dir)
+    for warning in token_warnings:
+        print(warning)
 
     write_json(BASELINE_PATH, manifest)
 
