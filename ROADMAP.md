@@ -22,8 +22,8 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Support incremental packer updates and manifest integrity checking.
 - [x] Provide migration skills for older versions of the canon.
 
-## v1.0 - Stable release
+## v1.0 - Stable release ✅
 
-- [ ] Freeze the core canon and invariants.
-- [ ] Publish comprehensive documentation and examples.
-- [ ] Harden security: least privilege execution, sandboxing and cryptographic provenance.
+- [x] Freeze the core canon and invariants.
+- [x] Publish comprehensive documentation and examples.
+- [x] Harden security: least privilege execution, sandboxing and cryptographic provenance.

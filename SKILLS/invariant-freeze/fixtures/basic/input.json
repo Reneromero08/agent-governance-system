@@ -1,0 +1,13 @@
+{
+    "description": "Verify all 8 core invariants exist in INVARIANTS.md",
+    "expected_invariants": [
+        "INV-001",
+        "INV-002",
+        "INV-003",
+        "INV-004",
+        "INV-005",
+        "INV-006",
+        "INV-007",
+        "INV-008"
+    ]
+}

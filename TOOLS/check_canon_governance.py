@@ -94,6 +94,22 @@ def check_invariant_numbering() -> list[str]:
     return errors
 
 
+# Core invariants that must always exist (v1.0 freeze)
+FROZEN_INVARIANTS = ["INV-001", "INV-002", "INV-003", "INV-004", "INV-005", "INV-006", "INV-007", "INV-008"]
+
+
+def check_invariant_freeze() -> list[str]:
+    """Check that all frozen invariants still exist."""
+    errors = []
+    content = INVARIANTS_PATH.read_text(errors="ignore")
+    
+    for inv in FROZEN_INVARIANTS:
+        if f"[{inv}]" not in content:
+            errors.append(f"Frozen invariant {inv} missing from INVARIANTS.md")
+    
+    return errors
+
+
 def main() -> int:
     print("[check_canon_governance] Running consistency checks...")
     
@@ -101,6 +117,7 @@ def main() -> int:
     all_errors.extend(check_version_consistency())
     all_errors.extend(check_changelog_current())
     all_errors.extend(check_invariant_numbering())
+    all_errors.extend(check_invariant_freeze())
     
     if all_errors:
         print(f"\n[check_canon_governance] Found {len(all_errors)} error(s):")

@@ -2,6 +2,20 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [1.0.0] - 2025-12-21
+
+### Added
+
+- Invariant freeze fixture to enforce INV-001 through INV-008.
+- `check_invariant_freeze()` in `check_canon_governance.py`.
+- Documentation guides: `EXTENDING.md`, `TESTING.md`, `SHIPPING.md`.
+- Trust boundaries in `SECURITY.md` (read/write access, human approval requirements).
+
+### Changed
+
+- Invariants INV-001 through INV-008 are now frozen (v1.0 stability).
+- SECURITY.md expanded with trust boundary definitions.
+
 ## [0.1.5] - 2025-12-21
 
 ### Added
