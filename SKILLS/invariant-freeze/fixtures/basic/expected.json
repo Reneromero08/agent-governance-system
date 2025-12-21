@@ -10,7 +10,8 @@
         "INV-007",
         "INV-008",
         "INV-009",
-        "INV-010"
+        "INV-010",
+        "INV-011"
     ],
     "found_invariants": [
         "INV-001",
@@ -22,7 +23,8 @@
         "INV-007",
         "INV-008",
         "INV-009",
-        "INV-010"
+        "INV-010",
+        "INV-011"
     ],
     "missing": [],
     "valid": true

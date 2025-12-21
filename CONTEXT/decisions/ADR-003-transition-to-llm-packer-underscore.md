@@ -2,6 +2,9 @@
 
 **Status:** Proposed
 **Date:** 2025-12-21
+**Confidence:** High
+**Impact:** High
+**Tags:** [governance, packaging]
 **Deciders:** Antigravity (Agent), User
 
 ## Context

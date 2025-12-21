@@ -2,7 +2,7 @@
 
 **Version:** 0.1.0
 
-**Status:** Template
+**Status:** Active
 
 **required_canon_version:** ">=0.1.0 <1.0.0"
 

@@ -1,4 +1,8 @@
-# Invariant Freeze
+# Skill: Invariant Freeze
+
+**Version:** 0.1.0
+**Status:** Active
+**required_canon_version:** ">=0.1.0"
 
 ## Purpose
 

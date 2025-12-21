@@ -1,5 +1,12 @@
 # STYLE-001: Chunked Commit Ceremony
 
+**Category:** Governance
+**Status:** Active
+**Scope:** Repository-wide
+**Enforcement:** Strict
+
+---
+
 ## Context
 By default, the agent was committing and pushing every small fix (hotfixes v1.0.1 and v1.0.2). The user prefers to control the "chunking" of work and wants to explicitly approve commits and pushes.
 

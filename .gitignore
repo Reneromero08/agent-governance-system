@@ -13,6 +13,10 @@ CORTEX/_generated/*.sqlite
 # Research Cache
 CONTEXT/research/*.db
 
+# MCP Logs
+MCP/logs/**
+!MCP/logs/.gitkeep
+
 
 MEMORY/LLM_PACKER/_packs/**
 !MEMORY/LLM_PACKER/_packs/

@@ -41,12 +41,12 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Implement initial MCP (Model Context Protocol) seams for external tool access. _(Done 2025-12-21)_
 - [x] Add "Crisis Mode" procedures for automated isolation in case of governance failure. _(Done 2025-12-21)_
 - [x] Add provenance headers to all generated files (generator version, input hashes, timestamp). _(Pack-level done 2025-12-21)_
-- [ ] Implement JSON Schema validation for canon, skills, context records, and cortex index.
+- [x] Implement JSON Schema validation for canon, skills, context records, and cortex index. _(Done 2025-12-21)_
 
 ## v2.0 - Advanced Autonomy
 
 - [x] Advanced conflict resolution: arbitration for contradictory canon rules. _(Done 2025-12-21)_
-- [ ] Constitutional license: formalized legal-protective layer for agentic systems.
+- [x] Constitutional license: formalized legal-protective layer for agentic systems. _(Done 2025-12-21)_
 - [x] Reversible token economics: lossless compression for audit-ready handoffs. _(Done 2025-12-21)_
 - [x] Automated "Stewardship" alerts for human escalation when canon-bound loops fail. _(Done 2025-12-21)_
 - [x] Canon codebook addressing: stable IDs (`@C1`, `@M7`) so prompts reference IDs not prose. _(Done 2025-12-21)_

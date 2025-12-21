@@ -13,7 +13,8 @@ CREATE TABLE IF NOT EXISTS entities (
     id TEXT PRIMARY KEY,
     type TEXT NOT NULL,
     title TEXT,
-    source_path TEXT NOT NULL
+    source_path TEXT NOT NULL,
+    last_modified REAL
 );
 
 -- Tags table for many-to-many relationship

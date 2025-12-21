@@ -81,17 +81,17 @@ These are the “extra layers” from your merged research and multi-model revie
 - [x] **P2** `adr_create` tool: create new ADRs with proper template via MCP. _(Implemented 2025-12-21)_
 - [x] **P2** `commit_ceremony` tool: return ceremony checklist + staged files for Claude to assist with commits. _(Implemented 2025-12-21)_
 - [ ] **P3** MCP audit logging: log all tool calls with timestamps for tracking.
-- [ ] **P3** MCP governance enforcement: tools refuse to execute if critic fails.
+- [x] **P3** MCP governance enforcement: tools refuse to execute if critic fails. _(Done 2025-12-21: Implemented `@governed_tool` in `server.py`)_
 - [ ] **P3** Additional prompts: `skill_template`, `conflict_resolution`, `deprecation_workflow`.
 
 ### Operational safety and “emergency modes”
 - [x] **P2** Emergency procedures as concrete CLI modes (reset, quarantine, isolation, crisis arbitration). _(Created CANON/CRISIS.md, TOOLS/emergency.py 2025-12-21)_
 - [x] **P2** “Stewardship” structure: explicit human escalation path for canon-level failures. _(Created CANON/STEWARDSHIP.md 2025-12-21)_
-- [ ] **P2** “Constitutional license” concept (optional legal-protective layer).
+- [x] **P2** “Constitutional license” concept (optional legal-protective layer). _(Done 2025-12-21: CANON/AGREEMENT.md, ADR-007)_
 
 ### Performance and scaling
 - [x] **P1** Make “O(n×m) scanning” impossible by design (index-first non-optional). _(Fixed: implemented SQLite Cortex with O(1) lookups)_
-- [ ] **P2** Incremental indexing + freshness/TTL rules (avoid stale cortex).
+- [x] **P2** Incremental indexing + freshness/TTL rules (avoid stale cortex). _(Done 2025-12-21: Incremental mtime check, prune deletions, unique IDs)_
 
 ### Token economics
 - [x] **P2** **Codebook & Compression**: Expanded codebook to 37 entries, bidirectional symbolic compression via `TOOLS/compress.py`, and stable IDs (`@C1`, `@M7`). _(Done 2025-12-21)_
@@ -100,12 +100,8 @@ These are the “extra layers” from your merged research and multi-model revie
     - `MEMORY/LLM_PACKER/Engine/packer.py`: Integrated `tiktoken` for 100% accurate token counts in `CONTEXT.txt`.
 
 ### Chat-derived mechanics deltas (small, buildable, low-bloat)
-- [ ] **P2** Pre-compress retrieved context before packing (never compress canon unless reversible).
+- [ ] **P2** Compress the LLM packer if possible.
 - [x] **P1** Research activity cache: persist summaries for URLs to avoid redundant browsing (`TOOLS/research_cache.py`). _(Done 2025-12-21)_
-
----
-
----
 
 ---
 
@@ -130,4 +126,4 @@ These items were identified from the research folder audit. They are not duplica
 ### Data Integrity and Validation
 - [x] **Provenance Headers**: Utility + `meta/PROVENANCE.json` for LLM packs (2025-12-21)
 - [x] **Precise Tokenization**: Integrated `tiktoken` into `packer.py` for accurate context reports (2025-12-21)
-- [ ] **P2** Schema Validation for "Law-Like" Files: JSON Schemas for canon metadata, skill manifests, context records, cortex index. Contracts enforce schema validity.
+- [x] **P2** Schema Validation for "Law-Like" Files: Implement JSON Schema validation for canon, skills, context records, and cortex index. Contracts enforce schema validity. _(Done 2025-12-21)_
