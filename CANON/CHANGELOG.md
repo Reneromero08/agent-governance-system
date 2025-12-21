@@ -18,6 +18,9 @@ All notable changes to the Agent Governance System will be documented in this fi
 - MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
 - MCP full implementation: all 6 tools working, dynamic resources, Claude Desktop config ready.
 - MCP governance tools: `critic_run`, `adr_create`, `commit_ceremony` for Claude-assisted governance.
+- `CANON/CRISIS.md`: Emergency procedures with 5 crisis levels and CLI modes.
+- `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
+- `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, restore, constitutional-reset).
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
