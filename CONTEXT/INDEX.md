@@ -2,9 +2,9 @@
 
 This file serves as the table of contents for the `CONTEXT/` directory. Each subdirectory captures a different type of context record:
 
-- `decisions/` - Architecture Decision Records (ADRs) that document choices and their rationale.
-- `rejected/` - Documents that record ideas that were considered and consciously rejected.
-- `preferences/` - Statements of style, conventions or non-binding preferences.
+- `decisions/` - Architecture Decision Records (ADRs) that document choices and their rationale. Use `ADR-000-template.md` as a starting point.
+- `rejected/` - Documents that record ideas that were considered and consciously rejected. Use `REJECT-000-template.md` as a starting point.
+- `preferences/` - Statements of style, conventions or non-binding preferences. Use `STYLE-000-template.md` as a starting point.
 - `open/` - Open questions or unresolved discussions.
 - `research/` - Non-binding research threads, model notes and external references.
 

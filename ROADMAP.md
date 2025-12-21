@@ -2,13 +2,13 @@
 
 This file outlines the high-level milestones for developing the Agent Governance System (AGS). Because AGS is intended as a reusable kernel for many projects, the roadmap focuses on capabilities rather than application-specific features.
 
-## v0.1 - First usable kernel
+## v0.1 - First usable kernel ✅
 
-- [ ] Finalise the canon: write the constitutional contract, define invariants, versioning policy and glossary.
-- [ ] Implement the shadow cortex: generate `CORTEX/_generated/cortex.json` and provide a query API.
-- [ ] Define and implement basic skills: file reading, querying the cortex, and simple write operations under strict controls.
-- [ ] Establish the runner and initial fixtures: enforce no raw path access, determinism and canonical output rules.
-- [ ] Provide example ADRs and context records to demonstrate decision compounding.
+- [x] Finalise the canon: write the constitutional contract, define invariants, versioning policy and glossary.
+- [x] Implement the shadow cortex: generate `CORTEX/_generated/cortex.json` and provide a query API.
+- [x] Define and implement basic skills: file reading, querying the cortex, and simple write operations under strict controls.
+- [x] Establish the runner and initial fixtures: enforce no raw path access, determinism and canonical output rules.
+- [x] Provide example ADRs and context records to demonstrate decision compounding.
 
 ## v0.2 - Governance automation
 

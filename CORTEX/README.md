@@ -11,3 +11,13 @@ The cortex consists of:
 - `query.py` - A Python module providing functions to query the cortex.
 
 Agents must use `query.py` to discover files instead of using OS calls directly. This ensures that navigation is consistent, efficient and governed by the canon.
+
+## Generated files
+
+The `_generated/` directory is excluded from version control (`.gitignore`). This is intentional:
+
+- **Always rebuildable:** Run `python CORTEX/cortex.build.py` to regenerate the index at any time.
+- **CI validated:** The build script runs in CI to ensure the index can always be generated from the current repo state.
+- **Deterministic:** Given the same repo content and `CORTEX_BUILD_TIMESTAMP` env var, the output is identical.
+
+The repo-tracked `cortex.json` serves as a fallback if `_generated/cortex.json` is not present.
