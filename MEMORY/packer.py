@@ -421,6 +421,13 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     tools_paths = [p for p in included_repo_paths if p.startswith("repo/TOOLS/")]
     github_paths = [p for p in included_repo_paths if p.startswith("repo/.github/")]
 
+    # Also discover meta files for snapshots
+    meta_dir = pack_dir / "meta"
+    meta_paths = []
+    if meta_dir.exists():
+        meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()])
+
+
     (split_dir / "AGS-00_INDEX.md").write_text(
         "\n".join(
             [
@@ -435,7 +442,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
                 "4) `repo/MAPS/ENTRYPOINTS.md`",
                 "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/`",
                 "6) `repo/CORTEX/` and `repo/TOOLS/`",
-                "7) `meta/ENTRYPOINTS.md`",
+                "7) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt` (Snapshot specific)",
                 "",
                 "## Notes",
                 "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
@@ -454,7 +461,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     (split_dir / "AGS-05_SKILLS.md").write_text("# Skills\n\n" + section(skills_paths), encoding="utf-8")
     (split_dir / "AGS-06_CONTRACTS.md").write_text("# Contracts\n\n" + section(contracts_paths), encoding="utf-8")
     (split_dir / "AGS-07_SYSTEM.md").write_text(
-        "# System\n\n" + section([*cortex_paths, *memory_paths, *tools_paths, *github_paths]),
+        "# System\n\n" + section([*cortex_paths, *memory_paths, *tools_paths, *github_paths, *meta_paths]),
         encoding="utf-8",
     )
 

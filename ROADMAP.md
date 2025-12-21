@@ -27,3 +27,18 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Freeze the core canon and invariants.
 - [x] Publish comprehensive documentation and examples.
 - [x] Harden security: least privilege execution, sandboxing and cryptographic provenance.
+
+## v1.1 - Maintenance & Refinement
+
+- [ ] Complete "meta in the split" logic for LLM-PACKER.
+- [ ] Implement initial MCP (Model Context Protocol) seams for external tool access.
+- [ ] Add "Crisis Mode" procedures for automated isolation in case of governance failure.
+- [ ] Refine "O(1) Cortex" by implementing a proper indexing database (SQLite).
+
+## v2.0 - Advanced Autonomy
+
+- [ ] Advanced conflict resolution: arbitration for contradictory canon rules.
+- [ ] Constitutional license: formalized legal-protective layer for agentic systems.
+- [ ] Reversible token economics: lossless compression for audit-ready handoffs.
+- [ ] Automated "Stewardship" alerts for human escalation when canon-bound loops fail.
+
