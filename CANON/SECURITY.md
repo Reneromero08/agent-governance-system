@@ -22,9 +22,10 @@ Agents MAY read:
 - `SKILLS/` — skill definitions and fixtures
 - `CONTRACTS/` — fixture definitions
 - `CORTEX/query.py` — cortex query API
-- `TOOLS/` — tooling scripts
-- `MEMORY/` — packer and memory docs
-- Root files: `AGENTS.md`, `README.md`, `ROADMAP.md`
+- `TOOLS/` - tooling scripts
+- `MEMORY/` - packer and memory docs
+- Root files: `AGENTS.md`, `README.md`
+- Planning archive index: `CONTEXT/archive/planning/INDEX.md`
 
 Agents MUST NOT directly read:
 - Filesystem paths outside the repository

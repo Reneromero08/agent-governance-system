@@ -7,7 +7,8 @@ Utility to bundle the Agent Governance System (AGS) repo into a small, shareable
 ## What it includes (default)
 
 - Repo sources (text only): `CANON/`, `CONTEXT/`, `MAPS/`, `SKILLS/`, `CONTRACTS/`, `MEMORY/`, `CORTEX/`, `TOOLS/`, `.github/`
-- Key root files (text): `AGENTS.md`, `README.md`, `ROADMAP.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.gitignore`
+- Key root files (text): `AGENTS.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.gitignore`
+- Planning archive index: `CONTEXT/archive/planning/INDEX.md`
 - Generated indices under `meta/` (start here, entrypoints, file tree, file index, BUILD inventory)
 - `COMBINED/` output for easy sharing:
   - `AGS-FULL-COMBINED-<stamp>.md` and `AGS-FULL-COMBINED-<stamp>.txt`

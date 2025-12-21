@@ -9,13 +9,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `REPO_FIXES_TASKS.md` checklist for contract-alignment follow-ups.
 
 ### Changed
-- `ROADMAP.md` and `AGS_MASTER_TODO.md` now point at the archived snapshots.
+- Planning references now point at `CONTEXT/archive/planning/INDEX.md`.
 
 ### Fixed
 - None.
 
 ### Removed
-- None.
+- Root planning docs: `ROADMAP.md`, `AGS_MASTER_TODO.md`.
 
 ## [2.5.4] - 2025-12-21
 

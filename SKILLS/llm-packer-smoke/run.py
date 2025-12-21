@@ -122,7 +122,7 @@ def main(input_path: Path, output_path: Path) -> int:
     required_mentions = [
         "`repo/AGENTS.md`",
         "`repo/README.md`",
-        "`repo/ROADMAP.md`",
+        "`repo/CONTEXT/archive/planning/INDEX.md`",
     ]
     for mention in required_mentions:
         if mention not in start_here_text:
