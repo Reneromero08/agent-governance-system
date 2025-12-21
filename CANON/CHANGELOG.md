@@ -16,6 +16,40 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Removed
 - None.
 
+## [2.5.4] - 2025-12-21
+
+### Added
+- None.
+
+### Changed
+- Commit ceremony now accepts short confirmations like "go on" after checks and staged files are listed.
+- Updated `CONTRACTS/fixtures/governance/commit-ceremony` to document confirmations.
+- Bumped `canon_version` to 2.5.4.
+- Regenerated `CANON/CODEBOOK.md`.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+## [2.5.5] - 2025-12-21
+
+### Added
+- `CONTEXT/decisions/ADR-010-authorized-deletions.md`.
+- `CONTRACTS/fixtures/governance/deletion-authorization` fixture.
+
+### Changed
+- Deletions now require explicit instruction and confirmation (CANON rules still archived per INV-010).
+- Bumped `canon_version` to 2.5.5.
+- Regenerated `CANON/CODEBOOK.md`.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [2.5.3] - 2025-12-21
 
 ### Added

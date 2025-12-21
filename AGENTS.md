@@ -66,7 +66,7 @@ Agents MAY:
 
 Agents MAY NOT:
 - modify CANON/* or edit existing CONTEXT records unless explicitly instructed or the task is explicitly about rules or memory updates
-- delete authored content
+- delete authored content without explicit user instruction and confirmation (CANON rules must follow INV-010 archiving)
 - rewrite history in CONTEXT/* without explicit instruction
 - touch generated artifacts outside:
   - CONTRACTS/_runs/
@@ -173,6 +173,10 @@ These authorize **implementation** only. They are **never** implicit commit appr
 Explicit composite directives that include "commit", "push", and "release" (for example,
 "commit, push, and release") count as approval for each action listed in that request.
 This does not authorize additional commits beyond the current task.
+
+### Ceremony confirmations
+When checks have passed and staged files have been listed, short confirmations such as
+"go on" count as approval for the listed actions.
 
 ### The anti-chaining rule
 **One commit approval = one commit.** If the user approves a commit for Task A, and the agent then completes Task B, the agent MUST stop and request a new approval for Task B. Chaining commits under a single approval is forbidden.

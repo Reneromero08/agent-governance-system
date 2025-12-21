@@ -33,6 +33,10 @@ Explicit composite directives that include "commit", "push", and "release" (for 
 "commit, push, and release") count as approval for each action listed in that request.
 This does not authorize additional commits beyond the current task.
 
+### Ceremony confirmations
+When checks have passed and staged files have been listed, short confirmations such as
+"go on" count as approval for the listed actions.
+
 ### The Anti-Chaining Rule
 **One commit approval = one commit.** If the user approves a commit, the agent may execute that single commit. The agent may NOT:
 - Infer that subsequent tasks should also be committed.

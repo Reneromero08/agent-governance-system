@@ -11,7 +11,7 @@ This document defines the non-negotiable rules and the authority gradient for th
    - update the affected module docs when operation changes (MAPS, SKILLS, MEMORY, CORTEX, TOOLS), not just AGENTS and CONTRACT;
    - record the change in the changelog;
    - occur within the same merge request.
-3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
+3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Deleting authored content is allowed only with explicit user instruction and confirmation, and CANON rules must follow the archiving requirements in `CANON/INVARIANTS.md`. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
 4. **Stable token grammar.** Tokens used to reference entities and rules form a stable API. Changes to tokens require a major version bump and deprecation cycle.
 5. **Determinism.** Given the same inputs and canon, the system must produce the same outputs.
 6. **Output roots.** System-generated artifacts must be written only to:
@@ -21,7 +21,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
 
-7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
+7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. After the ceremony steps are completed (checks run, staged files listed), short confirmations such as "go on" count as approval for those listed actions. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
 
 ## Intent gate
 
