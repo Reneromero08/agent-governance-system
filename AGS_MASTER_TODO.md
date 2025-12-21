@@ -97,7 +97,8 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P2** Tokenizer test harness: measure real tokenization against target models.
 
 ### Chat-derived mechanics deltas (small, buildable, low-bloat)
-- [ ] **P2** Canon codebook addressing (stable IDs like `@C1`, `@M7` so prompts reference IDs not prose).
+- [x] **P2** Canon codebook addressing (stable IDs like `@C1`, `@M7` so prompts reference IDs not prose). _(Created CANON/CODEBOOK.md, TOOLS/codebook_build.py, TOOLS/codebook_lookup.py 2025-12-21)_
+
 - [ ] **P2** Pre-compress retrieved context before packing (never compress canon unless reversible).
 - [ ] **P2** Research cache: URL-hash + timestamp so agents avoid repeated browsing/summarizing.
 

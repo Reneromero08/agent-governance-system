@@ -204,6 +204,29 @@
                 "type": "object",
                 "properties": {}
             }
+        },
+        "codebook_lookup": {
+            "name": "codebook_lookup",
+            "description": "Look up codebook entries by ID (e.g., @C0, @I3, @S7) or list all entries",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Codebook ID to look up (e.g., @C0, @I3)"
+                    },
+                    "expand": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If true, return full source content instead of summary"
+                    },
+                    "list": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If true, list all codebook entries"
+                    }
+                }
+            }
         }
     },
     "tools": [
@@ -233,6 +256,9 @@
         },
         {
             "$ref": "#/definitions/commit_ceremony"
+        },
+        {
+            "$ref": "#/definitions/codebook_lookup"
         }
     ]
 }

@@ -21,6 +21,11 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CANON/CRISIS.md`: Emergency procedures with 5 crisis levels and CLI modes.
 - `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
 - `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, restore, constitutional-reset).
+- `CANON/CODEBOOK.md`: Stable ID registry for referencing AGS entities (@C0, @I3, @S7).
+- `TOOLS/codebook_build.py`: Generator for codebook from repo entities.
+- `TOOLS/codebook_lookup.py`: CLI/library for codebook lookups.
+- MCP `codebook_lookup` tool: Look up codebook entries via MCP.
+
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
