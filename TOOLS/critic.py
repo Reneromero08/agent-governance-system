@@ -159,6 +159,10 @@ def check_schema_validation() -> list[str]:
 
 
 def main() -> int:
+    quarantine_file = PROJECT_ROOT / ".quarantine"
+    if quarantine_file.exists():
+        print("[critic] QUARANTINE: System is in quarantine mode. No changes allowed.")
+        return 1
     print("[critic] Running governance checks...")
     
     all_violations = []
@@ -180,7 +184,7 @@ def main() -> int:
         print()
         return 1
     
-    print("[critic] All checks passed ✓")
+    print("[critic] All checks passed")
     return 0
 
 
