@@ -16,15 +16,19 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CANON/MIGRATION.md`: Formal compatibility break ritual with phases and rollback.
 - `CANON/INVARIANTS.md` INV-009 and INV-010: Canon bloat prevention (readability limits, archiving).
 - MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
-- MCP full implementation: all 6 tools working, dynamic resources, Claude Desktop config ready.
+- MCP full implementation: all 9 tools working, dynamic resources, Claude Desktop config ready.
 - MCP governance tools: `critic_run`, `adr_create`, `commit_ceremony` for Claude-assisted governance.
-- `CANON/CRISIS.md`: Emergency procedures with 5 crisis levels and CLI modes.
-- `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
-- `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, restore, constitutional-reset).
-- `CANON/CODEBOOK.md`: Stable ID registry for referencing AGS entities (@C0, @I3, @S7).
-- `TOOLS/codebook_build.py`: Generator for codebook from repo entities.
-- `TOOLS/codebook_lookup.py`: CLI/library for codebook lookups.
-- MCP `codebook_lookup` tool: Look up codebook entries via MCP.
+- **Emergency Governance**:
+    - `CANON/CRISIS.md`: Procedures with 5 crisis levels and CLI modes.
+    - `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
+    - `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, etc.).
+- **Symbolic Compression**:
+    - `CANON/CODEBOOK.md`: Stable ID registry for token-efficient referencing (@C0, @I3, @S7).
+    - `TOOLS/codebook_build.py`: Generator for codebook from repo entities.
+    - `TOOLS/codebook_lookup.py`: CLI/library for programmatic lookups.
+    - `TOOLS/compress.py`: Bidirectional symbolic compression/expansion tool.
+    - `CANON/GENESIS_COMPACT.md`: Token-efficient bootstrap prompt using symbols.
+- **Provenance Headers**: Added `TOOLS/provenance.py` and integrated into all major generators (`codebook_build.py`, `cortex.build.py`, `packer.py`) for automated audit trails and change detection.
 
 
 ### Changed
