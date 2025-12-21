@@ -9,13 +9,13 @@ CORTEX/_generated/**
 
 CONTEXT/research/**
 
-MEMORY/LLM-PACKER/_packs/**
-!MEMORY/LLM-PACKER/_packs/
-!MEMORY/LLM-PACKER/_packs/.gitkeep
-!MEMORY/LLM-PACKER/_packs/_state/
-!MEMORY/LLM-PACKER/_packs/_state/.gitkeep
-!MEMORY/LLM-PACKER/_packs/archive/
-!MEMORY/LLM-PACKER/_packs/archive/.gitkeep
+MEMORY/LLM_PACKER/_packs/**
+!MEMORY/LLM_PACKER/_packs/
+!MEMORY/LLM_PACKER/_packs/.gitkeep
+!MEMORY/LLM_PACKER/_packs/_state/
+!MEMORY/LLM_PACKER/_packs/_state/.gitkeep
+!MEMORY/LLM_PACKER/_packs/archive/
+!MEMORY/LLM_PACKER/_packs/archive/.gitkeep
 
 MEMORY/Original/
 

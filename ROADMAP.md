@@ -30,7 +30,7 @@ This file outlines the high-level milestones for developing the Agent Governance
 
 ## v1.1 - Maintenance & Refinement
 
-- [ ] Complete "meta in the split" logic for LLM-PACKER.
+- [ ] Complete "meta in the split" logic for LLM_PACKER.
 - [ ] Implement initial MCP (Model Context Protocol) seams for external tool access.
 - [ ] Add "Crisis Mode" procedures for automated isolation in case of governance failure.
 - [ ] Refine "O(1) Cortex" by implementing a proper indexing database (SQLite).

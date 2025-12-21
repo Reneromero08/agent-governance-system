@@ -1,4 +1,4 @@
-# LLM PACKER
+# LLM_PACKER
 
 **Version:** 1.1.0
 

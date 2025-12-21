@@ -19,11 +19,13 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 
+PACKS_DIR = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
+
 # Directories that may contain generated artifacts
 ALLOWED_ARTIFACT_ROOTS = {
     PROJECT_ROOT / "CONTRACTS" / "_runs",
     PROJECT_ROOT / "CORTEX" / "_generated",
-    PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "_packs",
+    PACKS_DIR,
     PROJECT_ROOT / "BUILD",
 }
 

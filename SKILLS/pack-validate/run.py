@@ -14,7 +14,7 @@ from typing import Any, Dict, List, Tuple
 # Add parent for imports
 sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
 
-from MEMORY.packer import verify_manifest
+from MEMORY.LLM_PACKER.Engine.packer import verify_manifest
 
 
 def validate_structure(pack_dir: Path) -> Tuple[List[str], List[str]]:
