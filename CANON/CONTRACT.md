@@ -21,7 +21,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
 
-7. **Commit ceremony.** Every `git commit` and `git push` requires explicit, per-instance user approval. Agents may not infer commit authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
+7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
 
 ## Intent gate
 
