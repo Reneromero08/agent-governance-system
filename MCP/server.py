@@ -132,9 +132,8 @@ class AGSMCPServer:
             "context_search": self._tool_context_search,
             "context_review": self._tool_context_review,
             "canon_read": self._tool_canon_read,
-            # Write tools return not implemented
-            "skill_run": self._tool_not_implemented,
-            "pack_validate": self._tool_not_implemented,
+            "skill_run": self._tool_skill_run,
+            "pack_validate": self._tool_pack_validate,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -158,7 +157,7 @@ class AGSMCPServer:
         """Read a resource."""
         uri = params.get("uri", "")
 
-        # Map URI to file
+        # Static file map
         uri_map = {
             "ags://canon/contract": PROJECT_ROOT / "CANON" / "CONTRACT.md",
             "ags://canon/invariants": PROJECT_ROOT / "CANON" / "INVARIANTS.md",
@@ -181,16 +180,57 @@ class AGSMCPServer:
                     "text": content
                 }]
             }
-        elif uri.startswith("ags://context/") or uri.startswith("ags://cortex/"):
-            return {
-                "contents": [{
-                    "uri": uri,
-                    "mimeType": "application/json",
-                    "text": json.dumps({"status": "not_implemented", "message": "Dynamic resources pending implementation"})
-                }]
-            }
+        
+        # Dynamic resources
+        elif uri == "ags://context/decisions":
+            return self._dynamic_context_resource("decisions")
+        elif uri == "ags://context/preferences":
+            return self._dynamic_context_resource("preferences")
+        elif uri == "ags://context/rejected":
+            return self._dynamic_context_resource("rejected")
+        elif uri == "ags://context/open":
+            return self._dynamic_context_resource("open")
+        elif uri == "ags://cortex/index":
+            return self._dynamic_cortex_resource()
         else:
             raise ValueError(f"Unknown resource: {uri}")
+    
+    def _dynamic_context_resource(self, record_type: str) -> Dict:
+        """Generate dynamic context resource content."""
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "query-context.py"),
+             "--type", record_type, "--json"],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT_ROOT)
+        )
+        content = result.stdout if result.returncode == 0 else "[]"
+        return {
+            "contents": [{
+                "uri": f"ags://context/{record_type}",
+                "mimeType": "application/json",
+                "text": content
+            }]
+        }
+    
+    def _dynamic_cortex_resource(self) -> Dict:
+        """Generate dynamic cortex index resource."""
+        import subprocess
+        result = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "CORTEX" / "query.py"), "--json"],
+            capture_output=True,
+            text=True,
+            cwd=str(PROJECT_ROOT)
+        )
+        content = result.stdout if result.returncode == 0 else "{}"
+        return {
+            "contents": [{
+                "uri": "ags://cortex/index",
+                "mimeType": "application/json",
+                "text": content
+            }]
+        }
 
     def _handle_prompts_list(self, params: Dict) -> Dict:
         """List available prompts."""
@@ -238,32 +278,153 @@ class AGSMCPServer:
 
     # Tool implementations
     def _tool_cortex_query(self, args: Dict) -> Dict:
-        """Query the cortex."""
+        """Query the cortex using CORTEX/query.py."""
         try:
-            sys.path.insert(0, str(PROJECT_ROOT / "CORTEX"))
-            from query import search_index
-            results = search_index(args.get("query", ""))
+            import subprocess
+            query = args.get("query", "")
+            entity_type = args.get("type", "")
+            
+            cmd = [sys.executable, str(PROJECT_ROOT / "CORTEX" / "query.py")]
+            
+            # Build command based on arguments
+            if query:
+                cmd.extend(["--find", query])
+            if entity_type and entity_type != "all":
+                cmd.extend(["--type", entity_type])
+            
+            # If no specific query, list all
+            if not query and not entity_type:
+                cmd.append("--list")
+            
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            if result.returncode == 0:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": result.stdout if result.stdout else "No results found."
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Cortex query failed: {result.stderr}"
+                    }],
+                    "isError": True
+                }
+        except Exception as e:
             return {
                 "content": [{
                     "type": "text",
-                    "text": json.dumps(results, indent=2)
-                }]
+                    "text": f"Cortex query error: {str(e)}"
+                }],
+                "isError": True
             }
-        except ImportError:
-            return self._tool_not_implemented(args)
 
     def _tool_context_search(self, args: Dict) -> Dict:
-        """Search context records."""
+        """Search context records using CONTEXT/query-context.py."""
         try:
-            sys.path.insert(0, str(PROJECT_ROOT / "CONTEXT"))
-            # Import would need adjustment for actual module name
-            return self._tool_not_implemented(args)
-        except Exception:
-            return self._tool_not_implemented(args)
+            import subprocess
+            cmd = [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "query-context.py")]
+            
+            # Add arguments
+            if args.get("query"):
+                cmd.append(args["query"])
+            if args.get("tags"):
+                for tag in args["tags"]:
+                    cmd.extend(["--tag", tag])
+            if args.get("status"):
+                cmd.extend(["--status", args["status"]])
+            if args.get("type"):
+                cmd.extend(["--type", args["type"]])
+            
+            # Always use JSON output
+            cmd.append("--json")
+            
+            # If no filters, list all
+            if len(cmd) == 3:  # Only script + --json
+                cmd.insert(2, "--list")
+            
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            if result.returncode == 0:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": result.stdout if result.stdout else "No records found."
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Context search failed: {result.stderr}"
+                    }],
+                    "isError": True
+                }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Context search error: {str(e)}"
+                }],
+                "isError": True
+            }
 
     def _tool_context_review(self, args: Dict) -> Dict:
-        """Check for overdue reviews."""
-        return self._tool_not_implemented(args)
+        """Check for overdue reviews using CONTEXT/review-context.py."""
+        try:
+            import subprocess
+            cmd = [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "review-context.py")]
+            
+            # Add arguments
+            if args.get("days"):
+                cmd.extend(["--due", str(args["days"])])
+            
+            # Always use JSON output
+            cmd.append("--json")
+            
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            if result.returncode == 0 or result.returncode == 1:  # 1 = has overdue
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": result.stdout if result.stdout else "No review data."
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Context review failed: {result.stderr}"
+                    }],
+                    "isError": True
+                }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Context review error: {str(e)}"
+                }],
+                "isError": True
+            }
 
     def _tool_canon_read(self, args: Dict) -> Dict:
         """Read a canon file."""
@@ -283,6 +444,170 @@ class AGSMCPServer:
                 "content": [{
                     "type": "text",
                     "text": f"Canon file not found: {file_name}"
+                }],
+                "isError": True
+            }
+
+    def _tool_skill_run(self, args: Dict) -> Dict:
+        """Execute a skill with the given input."""
+        import subprocess
+        import tempfile
+        
+        skill_name = args.get("skill", "")
+        skill_input = args.get("input", {})
+        
+        if not skill_name:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "Error: 'skill' parameter is required"
+                }],
+                "isError": True
+            }
+        
+        # Validate skill exists
+        skill_dir = PROJECT_ROOT / "SKILLS" / skill_name
+        run_script = skill_dir / "run.py"
+        
+        if not skill_dir.exists():
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Error: Skill '{skill_name}' not found. Available skills: {self._list_skills()}"
+                }],
+                "isError": True
+            }
+        
+        if not run_script.exists():
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Error: Skill '{skill_name}' has no run.py"
+                }],
+                "isError": True
+            }
+        
+        try:
+            # Create temp files for input/output
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_in:
+                json.dump(skill_input, f_in)
+                input_path = f_in.name
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_out:
+                output_path = f_out.name
+            
+            # Run the skill
+            result = subprocess.run(
+                [sys.executable, str(run_script), input_path, output_path],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT),
+                timeout=60  # 60 second timeout
+            )
+            
+            # Read output
+            output_content = Path(output_path).read_text() if Path(output_path).exists() else "{}"
+            
+            # Clean up
+            Path(input_path).unlink(missing_ok=True)
+            Path(output_path).unlink(missing_ok=True)
+            
+            if result.returncode == 0:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": output_content
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Skill failed (exit {result.returncode}):\n{result.stderr}\n\nOutput:\n{output_content}"
+                    }],
+                    "isError": True
+                }
+        except subprocess.TimeoutExpired:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "Error: Skill execution timed out (60s limit)"
+                }],
+                "isError": True
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Skill execution error: {str(e)}"
+                }],
+                "isError": True
+            }
+    
+    def _list_skills(self) -> str:
+        """List available skills."""
+        skills_dir = PROJECT_ROOT / "SKILLS"
+        skills = []
+        for d in skills_dir.iterdir():
+            if d.is_dir() and not d.name.startswith("_") and (d / "run.py").exists():
+                skills.append(d.name)
+        return ", ".join(skills)
+
+    def _tool_pack_validate(self, args: Dict) -> Dict:
+        """Validate a memory pack."""
+        import subprocess
+        import tempfile
+        
+        pack_path = args.get("pack_path", "")
+        
+        if not pack_path:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "Error: 'pack_path' parameter is required"
+                }],
+                "isError": True
+            }
+        
+        try:
+            # Create temp files for input/output
+            skill_input = {"pack_path": pack_path}
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_in:
+                json.dump(skill_input, f_in)
+                input_path = f_in.name
+            
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as f_out:
+                output_path = f_out.name
+            
+            # Run pack-validate skill
+            run_script = PROJECT_ROOT / "SKILLS" / "pack-validate" / "run.py"
+            result = subprocess.run(
+                [sys.executable, str(run_script), input_path, output_path],
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT),
+                timeout=60
+            )
+            
+            # Read output
+            output_content = Path(output_path).read_text() if Path(output_path).exists() else "{}"
+            
+            # Clean up
+            Path(input_path).unlink(missing_ok=True)
+            Path(output_path).unlink(missing_ok=True)
+            
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": output_content
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Pack validation error: {str(e)}"
                 }],
                 "isError": True
             }
@@ -328,8 +653,12 @@ def main():
         sys.exit(1)
 
     if args.test:
-        # Test mode: run a sample request
+        # Test mode: run sample requests for all implemented tools
         server = AGSMCPServer()
+
+        print("="*60)
+        print("AGS MCP SERVER TEST")
+        print("="*60)
 
         # Initialize
         init_response = server.handle_request({
@@ -338,7 +667,7 @@ def main():
             "method": "initialize",
             "params": {}
         })
-        print("Initialize response:", json.dumps(init_response, indent=2))
+        print("\n✓ Initialize:", init_response["result"]["serverInfo"])
 
         # List tools
         tools_response = server.handle_request({
@@ -347,7 +676,8 @@ def main():
             "method": "tools/list",
             "params": {}
         })
-        print("\nTools:", json.dumps(tools_response, indent=2))
+        tool_names = [t["name"] for t in tools_response["result"]["tools"]]
+        print(f"\n✓ Tools available: {tool_names}")
 
         # List resources
         resources_response = server.handle_request({
@@ -356,17 +686,101 @@ def main():
             "method": "resources/list",
             "params": {}
         })
-        print("\nResources:", json.dumps(resources_response, indent=2))
+        print(f"\n✓ Resources available: {len(resources_response['result']['resources'])} resources")
 
-        # Read a resource
-        read_response = server.handle_request({
+        # Test cortex_query
+        print("\n--- Testing cortex_query ---")
+        cortex_response = server.handle_request({
             "jsonrpc": "2.0",
             "id": 4,
+            "method": "tools/call",
+            "params": {"name": "cortex_query", "arguments": {"query": "packer"}}
+        })
+        content = cortex_response["result"]["content"][0]["text"]
+        is_error = cortex_response["result"].get("isError", False)
+        print(f"✓ cortex_query('packer'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        if not is_error and content:
+            try:
+                results = json.loads(content)
+                print(f"  Found {len(results)} results")
+            except:
+                print(f"  Output: {content[:100]}...")
+
+        # Test context_search
+        print("\n--- Testing context_search ---")
+        context_response = server.handle_request({
+            "jsonrpc": "2.0",
+            "id": 5,
+            "method": "tools/call",
+            "params": {"name": "context_search", "arguments": {"type": "decisions"}}
+        })
+        content = context_response["result"]["content"][0]["text"]
+        is_error = context_response["result"].get("isError", False)
+        print(f"✓ context_search(type='decisions'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        if not is_error and content:
+            try:
+                results = json.loads(content)
+                print(f"  Found {len(results)} records")
+            except:
+                print(f"  Output: {content[:100]}...")
+
+        # Test context_review
+        print("\n--- Testing context_review ---")
+        review_response = server.handle_request({
+            "jsonrpc": "2.0",
+            "id": 6,
+            "method": "tools/call",
+            "params": {"name": "context_review", "arguments": {"days": 30}}
+        })
+        content = review_response["result"]["content"][0]["text"]
+        is_error = review_response["result"].get("isError", False)
+        print(f"✓ context_review(days=30): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        if not is_error and content:
+            try:
+                results = json.loads(content)
+                overdue = len(results.get("overdue", []))
+                upcoming = len(results.get("upcoming", []))
+                print(f"  Overdue: {overdue}, Upcoming: {upcoming}")
+            except:
+                print(f"  Output: {content[:100]}...")
+
+        # Test canon_read
+        print("\n--- Testing canon_read ---")
+        canon_response = server.handle_request({
+            "jsonrpc": "2.0",
+            "id": 7,
+            "method": "tools/call",
+            "params": {"name": "canon_read", "arguments": {"file": "CONTRACT"}}
+        })
+        content = canon_response["result"]["content"][0]["text"]
+        is_error = canon_response["result"].get("isError", False)
+        print(f"✓ canon_read('CONTRACT'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+
+        # Test resource reading
+        print("\n--- Testing resources/read ---")
+        read_response = server.handle_request({
+            "jsonrpc": "2.0",
+            "id": 8,
             "method": "resources/read",
             "params": {"uri": "ags://canon/genesis"}
         })
-        print("\nGenesis content length:", len(read_response.get("result", {}).get("contents", [{}])[0].get("text", "")))
+        content = read_response["result"]["contents"][0]["text"]
+        print(f"✓ resources/read('ags://canon/genesis'): {len(content)} chars")
 
+        # Test prompts/get
+        print("\n--- Testing prompts/get ---")
+        prompt_response = server.handle_request({
+            "jsonrpc": "2.0",
+            "id": 9,
+            "method": "prompts/get",
+            "params": {"name": "genesis"}
+        })
+        messages = prompt_response["result"].get("messages", [])
+        print(f"✓ prompts/get('genesis'): {len(messages)} messages")
+
+        print("\n" + "="*60)
+        print("ALL TESTS COMPLETED")
+        print("="*60)
         return
 
     # Default: stdio mode

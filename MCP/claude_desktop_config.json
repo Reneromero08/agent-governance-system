@@ -1,0 +1,11 @@
+{
+    "mcpServers": {
+        "ags": {
+            "command": "python",
+            "args": [
+                "D:/CCC 2.0/AI/agent-governance-system/MCP/server.py"
+            ],
+            "cwd": "D:/CCC 2.0/AI/agent-governance-system"
+        }
+    }
+}
