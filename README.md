@@ -52,5 +52,6 @@ Agents interacting with the system should follow the protocol described in `CANO
 - Add fixtures: place skill fixtures under `SKILLS/<skill-name>/fixtures/` and governance fixtures under `CONTRACTS/fixtures/`.
 - Add ADRs: create a new `CONTEXT/decisions/ADR-xxx-*.md` and reference it in `CONTEXT/INDEX.md`.
 - Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
+- Planning docs (`ROADMAP.md`, `AGS_MASTER_TODO.md`) are kept as stable root entrypoints and snapshotted under `CONTEXT/archive/planning/`.
 
 For more details, see individual files in the respective directories.
