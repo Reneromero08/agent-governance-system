@@ -1,5 +1,12 @@
 # STYLE-002: Engineering Integrity
 
+**Category:** Governance
+**Status:** Active
+**Scope:** Repository-wide
+**Enforcement:** Strict
+
+---
+
 To ensure the long-term stability and maintainability of the Agent Governance System (AGS), all engineering work must prioritize "real fixes" over "temporary patches."
 
 ## Principles

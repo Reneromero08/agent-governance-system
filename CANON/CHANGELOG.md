@@ -2,6 +2,73 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [Unreleased]
+
+### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+## [2.5.0] - 2025-12-21
+
+### Added
+- **Audit Logging**: All MCP tool executions are now logged to `MCP/logs/audit.jsonl` with timestamp, tool name, status, and duration.
+- **Improved Prompts**:
+    - `skill_template`: Injects `SKILLS/_TEMPLATE` content.
+    - `conflict_resolution`: Injects `CANON/ARBITRATION.md`.
+    - `deprecation_workflow`: Injects `CANON/DEPRECATION.md`.
+
+### Added
+- **Security**: Implemented Governance Enforcement in `MCP/server.py`.
+- **Logic**: Tools (`skill_run`, `adr_create`, etc.) are now decorated with `@governed_tool`.
+- **Enforcement**: If `TOOLS/critic.py` reports any violations, dangerous actions are BLOCKED with a "Governance Lockdown" error.
+
+### Changed
+- **Performance**: Promoted Cortex Indexing from O(N) rebuild to Incremental (checking `mtime`).
+
+### Changed
+- **Performance**: Promoted Cortex Indexing from O(N) rebuild to Incremental (checking `mtime`).
+- `CORTEX/cortex.build.py`: Refactored to retain DB, migrate schema, and prune deleted entries.
+- `CORTEX/schema.sql`: Added `last_modified` column to `entities` table.
+- **Strictness**: Changed ID generation to `page:{rel_path}` (unique) to resolve filename collision bugs.
+
+## [2.2.0] - 2025-12-21
+
+### Added
+- **Constitutional License**: `CANON/AGREEMENT.md` defines the liability separation between Human (Sovereign) and Agent (Instrument).
+- `CONTEXT/decisions/ADR-007-constitutional-agreement.md`: Formal decision record for the agreement.
+- `CANON/INDEX.md`: Master index of the law, listing `AGREEMENT.md` as the highest authority.
+
+### Changed
+- **Authority Gradient**: Updated `CANON/CONTRACT.md` to place `AGREEMENT.md` at rank #1, shifting the Contract to rank #2.
+
+## [2.1.0] - 2025-12-21
+
+### Added
+- `CONTEXT/decisions/ADR-004-mcp-integration.md`: Retroactive decision record for the Model Context Protocol (MCP) implementation.
+- `CONTEXT/decisions/ADR-005-persistent-research-cache.md`: Retroactive decision record for the SQLite-backed Research Cache.
+- `CONTEXT/decisions/ADR-006-governance-schemas.md`: Documented the "Governance Object Schemas" decision to legitimize INV-011.
+- **Governance Schemas**: Defined JSON Schemas for `ADR` (Architecture Decision Records), `SKILL` (Skill Manifests), and `STYLE` (Preferences) in `MCP/schemas/governance/`.
+- `TOOLS/schema_validator.py`: Utility to parse Markdown headers and validate against JSON Schemas.
+- **INV-011**: New invariant requiring schema compliance for law-like files.
+- `critic.py` now enforces schema validation on all ADRs, Skills, and Preferences.
+
+### Changed
+- Refactored `SKILLS/_TEMPLATE` and `canon-migration` to use compliant Status (`Draft`, `Active`).
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
 ## [2.0.0] - 2025-12-21
 
 ### Added

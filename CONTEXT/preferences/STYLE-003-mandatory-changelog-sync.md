@@ -1,5 +1,12 @@
 # STYLE-003: Mandatory Changelog Synchronisation
 
+**Category:** Governance
+**Status:** Active
+**Scope:** Repository-wide
+**Enforcement:** Strict
+
+---
+
 To maintain the auditability and integrity of the Agent Governance System (AGS), every commit that impacts system behavior or configuration MUST be documented.
 
 ## Principles

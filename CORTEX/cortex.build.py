@@ -7,6 +7,12 @@ This script scans the repository for Markdown files and other artifacts, extract
 basic metadata (id, type, title, tags) and writes the index to `CORTEX/_generated/cortex.db`.
 
 The SQLite database provides O(1) lookups by ID, type, path, or tag.
+
+Incremental Update Strategy (v1.1):
+- Retains existing database.
+- Checks file modification time (mtime) against DB `last_modified`.
+- Only parses and updates changed files.
+- Prunes entities for deleted files.
 """
 
 import json
@@ -44,79 +50,123 @@ def extract_title(path: Path) -> str:
 
 
 def init_db(conn: sqlite3.Connection) -> None:
-    """Initialize the database schema."""
+    """Initialize the database schema and handle migrations."""
+    cursor = conn.cursor()
+    
+    # 1. ensure tables exist
     schema_sql = SCHEMA_FILE.read_text()
-    conn.executescript(schema_sql)
+    cursor.executescript(schema_sql)
+    
+    # 2. Migration: Add last_modified if missing (for upgrades from v1.0)
+    try:
+        cursor.execute("SELECT last_modified FROM entities LIMIT 1")
+    except sqlite3.OperationalError:
+        # Check if error is due to missing column
+        try:
+            cursor.execute("ALTER TABLE entities ADD COLUMN last_modified REAL")
+            print("[cortex] Migrated schema: added last_modified column")
+        except sqlite3.OperationalError:
+            pass # Already exists or other issue
+
     conn.commit()
 
 
 def build_index(conn: sqlite3.Connection) -> int:
-    """Scan the repository and populate the database. Returns entity count."""
+    """Scan the repository and populate the database incrementally. Returns updated entity count."""
     cursor = conn.cursor()
 
-    # Clear existing data
-    cursor.execute("DELETE FROM tags")
-    cursor.execute("DELETE FROM entities")
-    cursor.execute("DELETE FROM metadata")
-
-    entity_count = 0
+    # 1. Load snapshot of existing state
+    cursor.execute("SELECT source_path, last_modified FROM entities")
+    existing_state = {row[0]: row[1] for row in cursor.fetchall()}
+    
+    fs_paths = set()
+    updates = 0
+    
+    # scan for deletions and updates
     for md_file in PROJECT_ROOT.rglob("*.md"):
-        # Skip files under hidden directories and output artifacts.
+         # Skip files under hidden directories and output artifacts.
         if any(part.startswith('.') for part in md_file.parts):
             continue
         if any(part in ("BUILD", "_runs", "_packs", "_generated") for part in md_file.parts):
-            continue
+             continue
 
-        entity_id = f"page:{md_file.stem}"
+        rel_path = str(md_file.relative_to(PROJECT_ROOT))
+        fs_paths.add(rel_path)
+        
+        current_mtime = md_file.stat().st_mtime
+        
+        # Check if update needed
+        if rel_path in existing_state:
+            cached_mtime = existing_state[rel_path]
+            # If cached_mtime is None (migration) or older, update
+            if cached_mtime and cached_mtime >= current_mtime:
+                continue
+
+        # Needs update
+        
+        # Unique ID generation to avoid collisions (e.g. README.md -> page:context_readme)
+        unique_suffix = rel_path.replace(os.sep, "_").replace(".", "_")
+        entity_id = f"page:{unique_suffix}"
         entity_type = "page"
         title = extract_title(md_file)
-        source_path = str(md_file.relative_to(PROJECT_ROOT))
+        
+        # Cleanup any existing entity for this path (handles ID changes or re-insertion)
+        cursor.execute("DELETE FROM entities WHERE source_path = ?", (rel_path,))
 
+        # Insert or Replace
         cursor.execute(
-            "INSERT OR REPLACE INTO entities (id, type, title, source_path) VALUES (?, ?, ?, ?)",
-            (entity_id, entity_type, title, source_path)
+            "INSERT OR REPLACE INTO entities (id, type, title, source_path, last_modified) VALUES (?, ?, ?, ?, ?)",
+            (entity_id, entity_type, title, rel_path, current_mtime)
         )
-        entity_count += 1
+        
+        # Refresh tags (naive: delete all tags for this entity and re-add if we extracted them, 
+        # but currently extract_title doesn't get tags. if we did, we'd do it here)
+        # For now, just ensuring the entity row is up to date.
+        
+        updates += 1
 
-    # Insert metadata with provenance
+    # Pruning: Delete entities for files that no longer exist
+    to_delete = existing_state.keys() - fs_paths
+    if to_delete:
+        cursor.executemany("DELETE FROM entities WHERE source_path = ?", [(p,) for p in to_delete])
+        print(f"[cortex] Pruned {len(to_delete)} deleted entities")
+
+    # Update global metadata
     canon_version = get_canon_version()
     generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", datetime.now(timezone.utc).isoformat())
     
+    cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("cortex_version", "1.1.0"))
+    cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("canon_version", canon_version))
+    cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("generated_at", generated_at))
+    
+    # Provenance
     try:
         import sys
         if str(PROJECT_ROOT) not in sys.path:
             sys.path.insert(0, str(PROJECT_ROOT))
         from TOOLS.provenance import generate_header
-        # We don't need the full header string, just the dict
         prov_header = generate_header(
             generator="CORTEX/cortex.build.py",
             inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "CONTRACTS/"]
         )
         prov_json = json.dumps(prov_header)
-        cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("provenance", prov_json))
+        cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("provenance", prov_json))
     except ImportError:
         pass
 
-    cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("cortex_version", canon_version))
-    cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("canon_version", canon_version))
-    cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("generated_at", generated_at))
-
     conn.commit()
-    return entity_count
-
+    return updates
 
 def main():
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     
-    # Remove old database if exists for clean rebuild
-    if DB_FILE.exists():
-        DB_FILE.unlink()
-
+    # Do NOT unlink DB file - we want persistence
+    
     conn = sqlite3.connect(DB_FILE)
     try:
         init_db(conn)
         count = build_index(conn)
-        print(f"Cortex index written to {DB_FILE} ({count} entities)")
+        print(f"Cortex index updated at {DB_FILE} ({count} updates)")
     finally:
         conn.close()
 
