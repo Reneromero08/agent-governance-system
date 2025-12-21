@@ -1,0 +1,178 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS MCP Tools Schema",
+    "description": "JSON Schema definitions for AGS MCP server tools",
+    "definitions": {
+        "cortex_query": {
+            "name": "cortex_query",
+            "description": "Query the AGS Cortex index to find files by content, path, or entity type",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query (matches path, content, or entity names)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "file",
+                            "entity",
+                            "all"
+                        ],
+                        "default": "all",
+                        "description": "Filter by entry type"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Maximum results to return"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "context_search": {
+            "name": "context_search",
+            "description": "Search AGS context records (ADRs, preferences, rejected, open)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Text search in titles and content"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Filter by tags"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "accepted",
+                            "proposed",
+                            "deprecated",
+                            "rejected",
+                            "active",
+                            "experimental"
+                        ],
+                        "description": "Filter by status"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "decisions",
+                            "preferences",
+                            "rejected",
+                            "open"
+                        ],
+                        "description": "Filter by record type"
+                    }
+                }
+            }
+        },
+        "context_review": {
+            "name": "context_review",
+            "description": "Check for overdue or upcoming ADR reviews",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "days": {
+                        "type": "integer",
+                        "default": 30,
+                        "description": "Flag reviews due within N days"
+                    }
+                }
+            }
+        },
+        "skill_run": {
+            "name": "skill_run",
+            "description": "Execute an AGS skill with the given input",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "skill": {
+                        "type": "string",
+                        "description": "Name of the skill to run (e.g., 'pack-validate')"
+                    },
+                    "input": {
+                        "type": "object",
+                        "description": "Input payload for the skill"
+                    }
+                },
+                "required": [
+                    "skill",
+                    "input"
+                ]
+            }
+        },
+        "pack_validate": {
+            "name": "pack_validate",
+            "description": "Validate a memory pack for completeness and integrity",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "pack_path": {
+                        "type": "string",
+                        "description": "Path to the pack directory"
+                    }
+                },
+                "required": [
+                    "pack_path"
+                ]
+            }
+        },
+        "canon_read": {
+            "name": "canon_read",
+            "description": "Read a canon file (CONTRACT, INVARIANTS, VERSIONING, etc.)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "enum": [
+                            "CONTRACT",
+                            "INVARIANTS",
+                            "VERSIONING",
+                            "GENESIS",
+                            "ARBITRATION",
+                            "DEPRECATION",
+                            "MIGRATION",
+                            "GLOSSARY",
+                            "CHANGELOG"
+                        ],
+                        "description": "Name of the canon file to read"
+                    }
+                },
+                "required": [
+                    "file"
+                ]
+            }
+        }
+    },
+    "tools": [
+        {
+            "$ref": "#/definitions/cortex_query"
+        },
+        {
+            "$ref": "#/definitions/context_search"
+        },
+        {
+            "$ref": "#/definitions/context_review"
+        },
+        {
+            "$ref": "#/definitions/skill_run"
+        },
+        {
+            "$ref": "#/definitions/pack_validate"
+        },
+        {
+            "$ref": "#/definitions/canon_read"
+        }
+    ]
+}
