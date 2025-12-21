@@ -16,14 +16,14 @@ This section is strictly “make the existing roadmap real” and close the hole
 - [x] **P0** Ensure **Cortex (shadow index)** exists and is part of the standard workflow (build + query) instead of raw filesystem scanning. _(Fixed: ran `cortex.build.py` to populate index)_
 - [x] **P0** Ensure **basic skills exist** and are runnable with fixtures (at least one minimal skill end-to-end). _(Fixed: created `_TEMPLATE/run.py`, verified runner passes)_
 - [x] **P0** Ensure **CONTRACTS runner + fixtures** enforce what the docs claim (fail on hard violations; warn only when explicitly allowed). _(Fixed: added actual fixtures for `no-raw-paths` governance check)_
-- [ ] **P1** Ensure **ADR and context templates** are present and referenced (ADR-*, REJECT-*, STYLE-*).
+- [x] **P1** Ensure **ADR and context templates** are present and referenced (ADR-*, REJECT-*, STYLE-*). _(Already present: ADR-000-template.md, REJECT-000-template.md, STYLE-000-template.md; updated INDEX.md to reference them)_
 
 ### v0.1 — Fixes that make v0.1 true (holes you already hit)
 - [x] **P0** **Determinism leak:** make `CORTEX/_generated/cortex.json` deterministic (timestamp should not change outputs unless explicitly supplied as an input OR fixtures must ignore it). _(Fixed: replaced `datetime.utcnow()` with env var `CORTEX_BUILD_TIMESTAMP` or fixed placeholder)_
-- [ ] **P0** **Exception boundary for “no raw path access”:** canon must explicitly carve out that **cortex builders may scan FS**, while **skills/agents must query** via `CORTEX/query.py`.
-- [ ] **P1** **Legacy fallback deprecation story:** `CORTEX/query.py` still checks `BUILD/cortex.json`. Bless as transitional or set a removal version.
-- [ ] **P0** **Artifact escape hatch fixture:** add a repo-wide test that fails if new files appear outside allowed output dirs (`CONTRACTS/_runs`, `CORTEX/_generated`, `MEMORY/LLM-PACKER-1.1/_packs`, and user-owned `BUILD`).
-- [ ] **P1** Clarify what `CORTEX/_generated/**` ignore means: keep generated index untracked, but ensure it is always buildable and validated.
+- [x] **P0** **Exception boundary for "no raw path access":** canon must explicitly carve out that **cortex builders may scan FS**, while **skills/agents must query** via `CORTEX/query.py`. _(Fixed: added INV-008 "Cortex builder exception" to INVARIANTS.md)_
+- [x] **P1** **Legacy fallback deprecation story:** `CORTEX/query.py` still checks `BUILD/cortex.json`. Bless as transitional or set a removal version. _(Fixed: removed legacy BUILD/cortex.json fallback entirely — clean, no deprecation needed)_
+- [x] **P0** **Artifact escape hatch fixture:** add a repo-wide test that fails if new files appear outside allowed output dirs (`CONTRACTS/_runs`, `CORTEX/_generated`, `MEMORY/LLM-PACKER-1.1/_packs`, and user-owned `BUILD`). _(Fixed: created `artifact-escape-hatch` skill with fixtures)_
+- [x] **P1** Clarify what `CORTEX/_generated/**` ignore means: keep generated index untracked, but ensure it is always buildable and validated. _(Fixed: added "Generated files" section to CORTEX/README.md)_
 
 ### v0.2 — Reliability + enforcement
 - [ ] **P0** Add/finish a **critic gate** (pre-commit or CI) that checks diffs against canon + fixtures before changes land.
