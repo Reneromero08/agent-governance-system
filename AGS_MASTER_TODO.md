@@ -93,6 +93,7 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P2** Incremental indexing + freshness/TTL rules (avoid stale cortex).
 
 ### Token economics
+- [x] **P2** **Improved Codebook**: Expanded codebook to 37 entries and added bidirectional symbolic compression/expansion via `TOOLS/compress.py`.
 - [ ] **P2** Reversible symbol dictionary compiler (compression must expand losslessly for audits).
 - [ ] **P2** Tokenizer test harness: measure real tokenization against target models.
 
@@ -129,5 +130,5 @@ These items were identified from the research folder audit. They are not duplica
 - [x] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale. _(Created 2025-12-21)_
 
 ### Data Integrity and Validation
-- [ ] **P2** Provenance Headers for Generated Files: All generated files (cortex, packs, indexes) must include: generator version, input hashes, timestamp. Enables tamper detection.
+- [x] **Provenance Headers**: Generator version, hashes, timestamps (2025-12-21)
 - [ ] **P2** Schema Validation for "Law-Like" Files: JSON Schemas for canon metadata, skill manifests, context records, cortex index. Contracts enforce schema validity.

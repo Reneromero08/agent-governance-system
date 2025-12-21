@@ -775,12 +775,33 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
     treemap_txt_rel = f"COMBINED/AGS-FULL-TREEMAP-{stamp}.txt"
 
     tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True)
+    tree_md = "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n"
+
+    # Add provenance to treemap outputs
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+        
+        # MD treemap
+        header_md = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=tree_md
+        )
+        tree_md = add_header_to_content(tree_md, header_md, file_type="md")
+        
+        # TXT treemap
+        header_txt = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=tree_text
+        )
+        tree_text = add_header_to_content(tree_text, header_txt, file_type="md")
+    except ImportError:
+        pass
 
     (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
-    (pack_dir / treemap_md_rel).write_text(
-        "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n",
-        encoding="utf-8",
-    )
+    (pack_dir / treemap_md_rel).write_text(tree_md, encoding="utf-8")
 
     combined_md_lines = ["# AGS FULL COMBINED", ""]
     combined_txt_lines = ["AGS FULL COMBINED", ""]
