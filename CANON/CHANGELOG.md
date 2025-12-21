@@ -5,10 +5,11 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
-- None.
+- `CONTEXT/archive/planning/` planning archive with an index and dated snapshots.
+- `REPO_FIXES_TASKS.md` checklist for contract-alignment follow-ups.
 
 ### Changed
-- None.
+- `ROADMAP.md` and `AGS_MASTER_TODO.md` now point at the archived snapshots.
 
 ### Fixed
 - None.
