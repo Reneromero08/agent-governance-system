@@ -67,7 +67,7 @@ These are the “extra layers” from your merged research and multi-model revie
 - [x] **P0** Pack integrity: manifest + hashes, verify-on-load. _(Fixed: added manifest verification to `packer.py` and `pack-validate` skill)_
 - [x] **P1** Explicit versioning: `canon_version` + `grammar_version` and mismatch behavior. _(Fixed: implemented version consistency checks and `lint_tokens.py`)_
 - [x] **P1** Context continuity: ADR, rejected paths, style records as first-class. _(Fixed: provided templates and updated `CONTEXT/INDEX.md`)_
-- [ ] **P2** MCP seam: stage the interface; implement only when you actually need tool access.
+- [x] **P2** MCP seam: stage the interface; implement only when you actually need tool access. _(Seam staged 2025-12-21: MCP/MCP_SPEC.md, schemas, server.py)_
 
 ### Governance completeness (things that will hurt later if undefined)
 - [x] **P1** Canon conflict resolution: what happens when canon contradicts itself; arbitration path. _(Created CANON/ARBITRATION.md 2025-12-21)_

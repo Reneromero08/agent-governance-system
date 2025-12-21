@@ -38,7 +38,7 @@ This file outlines the high-level milestones for developing the Agent Governance
 
 ## v1.2 - Protocol Integration & Validation
 
-- [ ] Implement initial MCP (Model Context Protocol) seams for external tool access.
+- [x] Implement initial MCP (Model Context Protocol) seams for external tool access. _(Seam staged)_
 - [ ] Add "Crisis Mode" procedures for automated isolation in case of governance failure.
 - [ ] Add provenance headers to all generated files (generator version, input hashes, timestamp).
 - [ ] Implement JSON Schema validation for canon, skills, context records, and cortex index.
