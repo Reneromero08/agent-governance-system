@@ -1,6 +1,6 @@
 param(
   [string]$OutDir = "",
-  [ValidateSet("full","delta")]
+  [ValidateSet("full", "delta")]
   [string]$Mode = "full",
   [string]$Stamp = "",
   [switch]$Zip = $true,
@@ -22,7 +22,7 @@ if (-not (Test-Path -LiteralPath $packer)) {
 }
 
 if ($Stamp -eq "") { $Stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss") }
-if ($OutDir -eq "") { $OutDir = "MEMORY/LLM-PACKER/_packs/llm-pack-$Stamp" }
+if ($OutDir -eq "") { $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-$Stamp" }
 
 $args = @(
   "python",

@@ -1,4 +1,4 @@
-# ADR-002: Store packs under MEMORY/LLM-PACKER
+# ADR-002: Store packs under MEMORY/LLM_PACKER
 
 **Status:** Accepted
 

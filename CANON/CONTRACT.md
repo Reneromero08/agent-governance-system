@@ -12,12 +12,12 @@ This document defines the non-negotiable rules and the authority gradient for th
    - record the change in the changelog;
    - occur within the same merge request.
 3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
-4. **Stable token grammar.**  Tokens used to reference entities and rules form a stable API.  Changes to tokens require a major version bump and deprecation cycle.
+4. **Stable token grammar.** Tokens used to reference entities and rules form a stable API. Changes to tokens require a major version bump and deprecation cycle.
 5. **Determinism.** Given the same inputs and canon, the system must produce the same outputs.
 6. **Output roots.** System-generated artifacts must be written only to:
    - `CONTRACTS/_runs/`
    - `CORTEX/_generated/`
-   - `MEMORY/LLM-PACKER/_packs/`
+   - `MEMORY/LLM_PACKER/_packs/`
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
 

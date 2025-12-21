@@ -36,7 +36,7 @@ Agents MUST NOT directly read:
 Agents MAY write to:
 - `CONTRACTS/_runs/` — fixture execution outputs
 - `CORTEX/_generated/` — built indices
-- `MEMORY/LLM-PACKER/_packs/` — generated packs
+- `MEMORY/LLM_PACKER/_packs/` — generated packs
 - `BUILD/` — user-owned build outputs
 
 Agents MUST NOT write to:
