@@ -9,9 +9,11 @@ basic metadata (id, type, title, tags) and writes the index to `CORTEX/_generate
 The SQLite database provides O(1) lookups by ID, type, path, or tag.
 """
 
+import json
 import os
 import re
 import sqlite3
+from datetime import datetime, timezone
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -76,9 +78,25 @@ def build_index(conn: sqlite3.Connection) -> int:
         )
         entity_count += 1
 
-    # Insert metadata
-    generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", "1970-01-01T00:00:00Z")
+    # Insert metadata with provenance
     canon_version = get_canon_version()
+    generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", datetime.now(timezone.utc).isoformat())
+    
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header
+        # We don't need the full header string, just the dict
+        prov_header = generate_header(
+            generator="CORTEX/cortex.build.py",
+            inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "CONTRACTS/"]
+        )
+        prov_json = json.dumps(prov_header)
+        cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("provenance", prov_json))
+    except ImportError:
+        pass
+
     cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("cortex_version", canon_version))
     cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("canon_version", canon_version))
     cursor.execute("INSERT INTO metadata (key, value) VALUES (?, ?)", ("generated_at", generated_at))

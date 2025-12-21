@@ -499,6 +499,21 @@ def write_start_here(pack_dir: Path) -> None:
             "",
         ]
     )
+    
+    # Add provenance to START_HERE.md
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+        header = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=text
+        )
+        text = add_header_to_content(text, header, file_type="md")
+    except ImportError:
+        pass
+
     (pack_dir / "meta" / "START_HERE.md").write_text(text, encoding="utf-8")
 
 
@@ -527,6 +542,21 @@ def write_entrypoints(pack_dir: Path) -> None:
             "",
         ]
     )
+    
+    # Add provenance to ENTRYPOINTS.md
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+        header = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=text
+        )
+        text = add_header_to_content(text, header, file_type="md")
+    except ImportError:
+        pass
+
     (pack_dir / "meta" / "ENTRYPOINTS.md").write_text(text, encoding="utf-8")
 
 
@@ -645,7 +675,23 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
     
     lines.append("")
 
-    (pack_dir / "meta" / "CONTEXT.txt").write_text("\n".join(lines), encoding="utf-8")
+    report_text = "\n".join(lines)
+    
+    # Add provenance to CONTEXT.txt
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+        header = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=report_text
+        )
+        report_text = add_header_to_content(report_text, header, file_type="md") # txt uses md-style header here
+    except ImportError:
+        pass
+
+    (pack_dir / "meta" / "CONTEXT.txt").write_text(report_text, encoding="utf-8")
     return effective_tokens, warnings
 
 
@@ -752,8 +798,34 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
         combined_md_lines.append(build_combined_md_block(rel, text, size))
         combined_txt_lines.append(build_combined_txt_block(rel, text, size))
 
-    (pack_dir / combined_md_rel).write_text("\n".join(combined_md_lines).rstrip() + "\n", encoding="utf-8")
-    (pack_dir / combined_txt_rel).write_text("\n".join(combined_txt_lines).rstrip() + "\n", encoding="utf-8")
+    md_content = "\n".join(combined_md_lines).rstrip() + "\n"
+    txt_content = "\n".join(combined_txt_lines).rstrip() + "\n"
+    
+    # Add provenance to combined outputs
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+        
+        # MD provenance
+        header_md = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=md_content
+        )
+        md_content = add_header_to_content(md_content, header_md, file_type="md")
+        
+        # TXT provenance
+        header_txt = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=txt_content
+        )
+        txt_content = add_header_to_content(txt_content, header_txt, file_type="md") # txt uses md-style header here
+    except ImportError:
+        pass
+
+    (pack_dir / combined_md_rel).write_text(md_content, encoding="utf-8")
+    (pack_dir / combined_txt_rel).write_text(txt_content, encoding="utf-8")
 
 
 def make_pack(
