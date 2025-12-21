@@ -133,6 +133,7 @@ class AGSMCPServer:
             "context_search": self._tool_context_search,
             "context_review": self._tool_context_review,
             "canon_read": self._tool_canon_read,
+            "codebook_lookup": self._tool_codebook_lookup,
             # Write tools
             "skill_run": self._tool_skill_run,
             "pack_validate": self._tool_pack_validate,
@@ -807,6 +808,60 @@ class AGSMCPServer:
                 "content": [{
                     "type": "text",
                     "text": f"Commit ceremony error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_codebook_lookup(self, args: Dict) -> Dict:
+        """Look up a codebook entry by ID."""
+        import subprocess
+        
+        entry_id = args.get("id", "")
+        expand = args.get("expand", False)
+        list_all = args.get("list", False)
+        
+        cmd = [sys.executable, str(PROJECT_ROOT / "TOOLS" / "codebook_lookup.py")]
+        
+        if list_all:
+            cmd.append("--list")
+            cmd.append("--json")
+        elif entry_id:
+            cmd.append(entry_id)
+            if expand:
+                cmd.append("--expand")
+            else:
+                cmd.append("--json")
+        else:
+            cmd.extend(["--list", "--json"])
+        
+        try:
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            if result.returncode == 0:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": result.stdout
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Codebook lookup failed: {result.stderr or result.stdout}"
+                    }],
+                    "isError": True
+                }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Codebook lookup error: {str(e)}"
                 }],
                 "isError": True
             }
