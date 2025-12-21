@@ -4,6 +4,16 @@ The Agent Governance System (AGS) is a constitutional framework for durable, mul
 
 This repository provides a language-driven operating system for AI-native projects. It treats text as law, code as consequence and fixtures as precedent. By enforcing a clear authority gradient and mechanical gates, AGS prevents drift, preserves intent and allows continuous evolution across model swaps and refactors.
 
+## Starting a Session (Mandatory)
+
+Every new agent session **must** begin with the Genesis Prompt to bootstrap the governance system correctly.
+
+1. Read the full prompt from `CANON/GENESIS.md`.
+2. Prepend it as the system message, pack header, or first instruction.
+3. Agents are instructed to remind you if it is missing.
+
+This solves the bootstrap paradox: the agent knows the governance structure exists *before* reading any other file.
+
 ## Project layout
 
 The repository is organised into six layers. Files are loaded in the following order:

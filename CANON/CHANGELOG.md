@@ -4,10 +4,15 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ## [1.1.1] - 2025-12-21
 
+### Added
+- Genesis Prompt (`CANON/GENESIS.md`): Bootstrap prompt that ensures agents load CANON first.
+- Research folder now tracked in git with clarifying README.
+
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
 - `query.py` updated with `--json` export flag for backward-compatible JSON output.
 - Deprecated `cortex.json` emission from build process.
+- Expanded ROADMAP with v1.2 milestone and research-derived tasks.
 
 ## [1.1.0] - 2025-12-21
 
