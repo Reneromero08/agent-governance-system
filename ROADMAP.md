@@ -5,7 +5,7 @@ This file outlines the high-level milestones for developing the Agent Governance
 ## v0.1 - First usable kernel ✅
 
 - [x] Finalise the canon: write the constitutional contract, define invariants, versioning policy and glossary.
-- [x] Implement the shadow cortex: generate `CORTEX/_generated/cortex.json` and provide a query API.
+- [x] Implement the shadow cortex: generate `CORTEX/_generated/cortex.db` and provide a query API.
 - [x] Define and implement basic skills: file reading, querying the cortex, and simple write operations under strict controls.
 - [x] Establish the runner and initial fixtures: enforce no raw path access, determinism and canonical output rules.
 - [x] Provide example ADRs and context records to demonstrate decision compounding.
@@ -50,4 +50,3 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Reversible token economics: lossless compression for audit-ready handoffs. _(Done 2025-12-21)_
 - [x] Automated "Stewardship" alerts for human escalation when canon-bound loops fail. _(Done 2025-12-21)_
 - [x] Canon codebook addressing: stable IDs (`@C1`, `@M7`) so prompts reference IDs not prose. _(Done 2025-12-21)_
-

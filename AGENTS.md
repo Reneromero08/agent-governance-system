@@ -40,14 +40,15 @@ Only change CANON or edit existing CONTEXT records when the task is explicitly a
 
 If instructions conflict, obey in this order:
 
-1. CANON/CONTRACT.md
-2. CANON/INVARIANTS.md
-3. CANON/VERSIONING.md
-4. AGENTS.md
-5. CONTEXT records (ADRs, rejections, preferences)
-6. MAPS/*
-7. User instructions
-8. Implementation convenience
+1. CANON/AGREEMENT.md
+2. CANON/CONTRACT.md
+3. CANON/INVARIANTS.md
+4. CANON/VERSIONING.md
+5. AGENTS.md
+6. CONTEXT records (ADRs, rejections, preferences)
+7. MAPS/*
+8. User instructions
+9. Implementation convenience
 
 Never invert this order.
 

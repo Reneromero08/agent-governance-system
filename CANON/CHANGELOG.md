@@ -16,6 +16,27 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Removed
 - None.
 
+## [2.5.1] - 2025-12-21
+
+### Added
+- `repo-contract-alignment` skill with fixtures for contract alignment workflow.
+- `TOOLS/skill_runtime.py` to enforce skill canon-version compatibility at runtime.
+
+### Changed
+- Regenerated `CANON/CODEBOOK.md` to include the new skill.
+- Bumped `canon_version` to 1.1.1.
+- Updated `AGENTS.md` authority gradient to include `CANON/AGREEMENT.md`.
+- Updated cortex docs to reference the SQLite index (`cortex.db`).
+- Updated skill `required_canon_version` ranges to `>=2.5.1 <3.0.0`.
+- Skills now validate `required_canon_version` before running.
+- `TOOLS/critic.py` now refuses to run while `.quarantine` exists.
+
+### Fixed
+- `TOOLS/critic.py` output uses ASCII to avoid Windows encoding errors.
+
+### Removed
+- None.
+
 ## [2.5.0] - 2025-12-21
 
 ### Added
@@ -29,9 +50,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 - **Security**: Implemented Governance Enforcement in `MCP/server.py`.
 - **Logic**: Tools (`skill_run`, `adr_create`, etc.) are now decorated with `@governed_tool`.
 - **Enforcement**: If `TOOLS/critic.py` reports any violations, dangerous actions are BLOCKED with a "Governance Lockdown" error.
-
-### Changed
-- **Performance**: Promoted Cortex Indexing from O(N) rebuild to Incremental (checking `mtime`).
 
 ### Changed
 - **Performance**: Promoted Cortex Indexing from O(N) rebuild to Incremental (checking `mtime`).

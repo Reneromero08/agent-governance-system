@@ -13,10 +13,17 @@ import sys
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from TOOLS.skill_runtime import ensure_canon_compat
+
 INVARIANTS_FILE = PROJECT_ROOT / "CANON" / "INVARIANTS.md"
 
 
 def main(input_path: Path, output_path: Path) -> int:
+    if not ensure_canon_compat(Path(__file__).resolve().parent):
+        return 1
     try:
         payload = json.loads(input_path.read_text())
     except Exception as exc:
