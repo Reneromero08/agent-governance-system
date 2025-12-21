@@ -30,7 +30,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Contract runner writes fixture outputs under `CONTRACTS/_runs/`.
 - Cortex build writes index under `CORTEX/_generated/cortex.json` (query keeps fallback support).
 - Memory packer produces LLM packs under `MEMORY/_packs/` and records a `BUILD/` file tree inventory.
-- LLM packer tooling relocated under `MEMORY/LLM-PACKER-1.1/` (PowerShell wrapper retained).
+- LLM packer tooling relocated under `MEMORY/LLM-PACKER/` (PowerShell wrapper retained).
 
 ### Removed
 
@@ -40,7 +40,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ### Changed
 
-- LLM pack output root moved to `MEMORY/LLM-PACKER-1.1/_packs/` (from `MEMORY/_packs/`).
+- LLM pack output root moved to `MEMORY/LLM-PACKER/_packs/` (from `MEMORY/_packs/`).
 
 ## [0.1.4] - 2025-12-20
 

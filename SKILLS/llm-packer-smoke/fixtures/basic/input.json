@@ -1,6 +1,6 @@
 {
   "combined": true,
-  "out_dir": "MEMORY/LLM-PACKER-1.1/_packs/fixture-smoke",
+  "out_dir": "MEMORY/LLM-PACKER/_packs/fixture-smoke",
   "stamp": "fixture-smoke",
   "zip": false
 }

@@ -30,5 +30,5 @@ This document lists the primary entrypoints where agents and humans are expected
 
 - `CORTEX/` - Modify when adding new index fields or query capabilities.
 - `MEMORY/packer.py` - Modify when updating the pack format or manifest.
-- `MEMORY/LLM-PACKER-1.1/` - Windows wrapper scripts for running the packer.
+- `MEMORY/LLM-PACKER/` - Windows wrapper scripts for running the packer.
 - `TOOLS/` - Add critics, linters and migration scripts here.

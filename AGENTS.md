@@ -58,7 +58,7 @@ Agents MAY:
   - SKILLS/
   - CONTRACTS/
   - CORTEX/ (implementation), and `CORTEX/_generated/` (generated)
-  - MEMORY/ (implementation), and `MEMORY/LLM-PACKER-1.1/_packs/` (generated)
+  - MEMORY/ (implementation), and `MEMORY/LLM-PACKER/_packs/` (generated)
   - BUILD/ (user build outputs only)
 - append new records under CONTEXT/ (append-first; editing existing records requires explicit instruction)
 - ignore CONTEXT/research unless the user explicitly requests it (non-binding)
@@ -70,7 +70,7 @@ Agents MAY NOT:
 - touch generated artifacts outside:
   - CONTRACTS/_runs/
   - CORTEX/_generated/
-  - MEMORY/LLM-PACKER-1.1/_packs/
+  - MEMORY/LLM-PACKER/_packs/
 
 Generated files must be clearly marked as generated.
 
@@ -83,7 +83,7 @@ System-generated artifacts MUST be written only to:
 
 - CONTRACTS/_runs/
 - CORTEX/_generated/
-- MEMORY/LLM-PACKER-1.1/_packs/
+- MEMORY/LLM-PACKER/_packs/
 
 `BUILD/` is reserved for user build outputs. It must not be used for system artifacts.
 
