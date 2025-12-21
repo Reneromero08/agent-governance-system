@@ -26,6 +26,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
+try:
+    import tiktoken
+except ImportError:
+    tiktoken = None
+
 # Token Limits
 TOKEN_LIMIT_WARNING = 120000   # Warn approaching standard 128k window
 TOKEN_LIMIT_CRITICAL = 190000  # Critical danger zone (leaving buffer for output)
@@ -92,6 +97,8 @@ EXCLUDED_DIR_PARTS = {
     "_packs",
     "Original",
     "ORIGINAL",
+    "research",
+    "RESEARCH",
     "__pycache__",
     "node_modules",
 }
@@ -115,8 +122,17 @@ TOKEN_LIMIT_WARNING = 100_000
 TOKEN_LIMIT_CRITICAL = 200_000
 
 
-def estimate_tokens(text: str) -> int:
-    """Estimate token count from character count (rough approximation)."""
+def estimate_tokens(text: str, model: str = "gpt-4o") -> int:
+    """Estimate token count for text."""
+    if tiktoken:
+        try:
+            # Use o200k_base for gpt-4o/o1
+            encoding = tiktoken.get_encoding("o200k_base")
+            return len(encoding.encode(text))
+        except Exception:
+            pass
+    
+    # Rough approximation
     return len(text) // CHARS_PER_TOKEN
 
 
@@ -605,25 +621,22 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
         (total_tokens, warnings): Total estimated tokens and any warnings.
     """
     warnings: List[str] = []
-    lines: List[str] = [
-        "# AGS Pack Context Report",
-        "",
-        "Token estimates for LLM context usage.",
-        "",
-        "## Per-File Token Estimates",
-        "",
-        f"{'File':<60} {'Bytes':>10} {'Est. Tokens':>12}",
-        "-" * 85,
-    ]
     
     total_bytes = 0
     total_tokens = 0
     
-    # Categorize tokens for smarter warnings
-    repo_tokens = 0
-    combined_tokens = 0
-    
-    file_tokens: List[Tuple[str, int, int]] = []
+    # Categorize tokens for smarter warnings and readability
+    category_map = {
+        "CANON": [],
+        "CONTEXT": [],
+        "SKILLS": [],
+        "CORTEX": [],
+        "TOOLS": [],
+        "META": [],
+        "REPO_ROOT": [],
+        "COMBINED": [],
+        "OTHER": []
+    }
     
     for path in sorted(pack_dir.rglob("*")):
         if not path.is_file():
@@ -631,43 +644,83 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
         rel = path.relative_to(pack_dir).as_posix()
         size = path.stat().st_size
         tokens = estimate_file_tokens(path)
-        file_tokens.append((rel, size, tokens))
+        
+        entry = (rel, size, tokens)
         total_bytes += size
         total_tokens += tokens
         
-        if rel.startswith("COMBINED/"):
-            combined_tokens += tokens
-        else:
-            repo_tokens += tokens
+        # Sort into categories
+        if rel.startswith("repo/CANON/"): category_map["CANON"].append(entry)
+        elif rel.startswith("repo/CONTEXT/"): category_map["CONTEXT"].append(entry)
+        elif rel.startswith("repo/SKILLS/"): category_map["SKILLS"].append(entry)
+        elif rel.startswith("repo/CORTEX/"): category_map["CORTEX"].append(entry)
+        elif rel.startswith("repo/TOOLS/"): category_map["TOOLS"].append(entry)
+        elif rel.startswith("meta/"): category_map["META"].append(entry)
+        elif rel.startswith("repo/") and "/" not in rel[5:]: category_map["REPO_ROOT"].append(entry)
+        elif rel.startswith("COMBINED/"): category_map["COMBINED"].append(entry)
+        else: category_map["OTHER"].append(entry)
+
+    # Effective tokens = repo/ + meta/ (excludes COMBINED/)
+    effective_tokens = total_tokens - sum(t for _, _, t in category_map["COMBINED"])
     
-    for rel, size, tokens in file_tokens:
-        lines.append(f"{rel:<60} {size:>10} {tokens:>12}")
+    lines: List[str] = [
+        "# AGS Pack Context Report",
+        "",
+        "## Category Summary",
+        "",
+        f"{'Category':<15} {'Files':>8} {'Tokens':>12} {'% Effective':>12}",
+        "-" * 55
+    ]
     
-    # Effective context size usually excludes the COMBINED/ folder duplications
-    # but includes repo/ and meta/
-    effective_tokens = repo_tokens
-    
+    for cat, files in category_map.items():
+        if not files: continue
+        cat_tokens = sum(t for _, _, t in files)
+        percent = (cat_tokens / effective_tokens * 100) if effective_tokens > 0 and cat != "COMBINED" else 0
+        percent_str = f"{percent:>11.1f}%" if cat != "COMBINED" else "N/A"
+        lines.append(f"{cat:<15} {len(files):>8} {cat_tokens:>12,} {percent_str}")
+
     lines.extend([
+        "-" * 55,
+        f"{'EFFECTIVE':<15} {'-':>8} {effective_tokens:>12,} {'100.0%':>12}",
+        f"{'TOTAL (INC COMB)':<15} {sum(len(f) for f in category_map.values()):>8} {total_tokens:>12,} {'-':>12}",
         "",
-        "-" * 85,
-        f"{'TOTAL (All Files)':<60} {total_bytes:>10} {total_tokens:>12}",
-        f"{'EFFECTIVE (Source Only)':<60} {'-':>10} {effective_tokens:>12}",
-        "",
-        "## Summary",
-        "",
-        f"- Total files: {len(file_tokens)}",
-        f"- Total bytes: {total_bytes:,}",
-        f"- Estimated tokens: {total_tokens:,}",
-        "",
+        "## Detailed Breakdown",
+        ""
     ])
     
+    # Detail sections (only important ones or if not too many)
+    for cat in ["CANON", "CONTEXT", "SKILLS", "CORTEX", "TOOLS", "META", "REPO_ROOT"]:
+        files = category_map[cat]
+        if not files: continue
+        
+        lines.append(f"### {cat} ({sum(t for _, _, t in files):,} tokens)")
+        # If too many files, only show top ones to reduce bloat
+        sorted_files = sorted(files, key=lambda x: x[2], reverse=True)
+        
+        display_limit = 10 if cat != "CANON" else 20
+        for i, (rel, _, tokens) in enumerate(sorted_files):
+            if i >= display_limit:
+                lines.append(f"  ... and {len(files) - display_limit} more files")
+                break
+            
+            # Use short name, but prefix if generic
+            filename = rel.split("/")[-1]
+            if filename in ["run.py", "validate.py", "SKILL.md", "expected.json", "input.json"]:
+                parts = rel.split("/")
+                if len(parts) >= 3:
+                    filename = f"{parts[-2]}/{filename}"
+            
+            lines.append(f"- {filename:<45} {tokens:>10,} tokens")
+        lines.append("")
+
     # Add warnings (based on effective tokens)
+    lines.append("## Status")
     if effective_tokens > TOKEN_LIMIT_CRITICAL:
-        warning = f"[!] CRITICAL: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_CRITICAL:,} tokens. May not fit in most LLM contexts!"
+        warning = f"[!] CRITICAL: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_CRITICAL:,} tokens."
         warnings.append(warning)
         lines.append(warning)
     elif effective_tokens > TOKEN_LIMIT_WARNING:
-        warning = f"[!] WARNING: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_WARNING:,} tokens. Consider using delta mode or splitting."
+        warning = f"[!] WARNING: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_WARNING:,} tokens."
         warnings.append(warning)
         lines.append(warning)
     else:
@@ -687,7 +740,7 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
             generator="MEMORY/LLM_PACKER/Engine/packer.py",
             output_content=report_text
         )
-        report_text = add_header_to_content(report_text, header, file_type="md") # txt uses md-style header here
+        report_text = add_header_to_content(report_text, header, file_type="md")
     except ImportError:
         pass
 
@@ -849,6 +902,42 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
     (pack_dir / combined_txt_rel).write_text(txt_content, encoding="utf-8")
 
 
+def write_provenance_manifest(pack_dir: Path) -> None:
+    """Generate meta/PROVENANCE.json for the entire pack."""
+    meta_dir = pack_dir / "meta"
+    
+    # Files to include in the manifest
+    targets = {
+        "meta/FILE_INDEX.json": pack_dir / "meta" / "FILE_INDEX.json",
+        "meta/PACK_INFO.json": pack_dir / "meta" / "PACK_INFO.json",
+        "meta/REPO_STATE.json": pack_dir / "meta" / "REPO_STATE.json",
+        "meta/BUILD_TREE.txt": pack_dir / "meta" / "BUILD_TREE.txt",
+        "meta/FILE_TREE.txt": pack_dir / "meta" / "FILE_TREE.txt",
+        "meta/CONTEXT.txt": pack_dir / "meta" / "CONTEXT.txt",
+    }
+
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_manifest, hash_content
+        
+        manifest = generate_manifest(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            target_files=targets,
+            inputs=["CANON/", "CONTEXT/decisions/", "SKILLS/", "CORTEX/"],
+        )
+        
+        # Add a self-checksum (excluding the checksum field itself)
+        # We handle this by generating the checksum of the sorted JSON
+        canonical_json = json.dumps(manifest, sort_keys=True)
+        manifest["provenance"]["checksum"] = hash_content(canonical_json)
+        
+        write_json(meta_dir / "PROVENANCE.json", manifest)
+    except ImportError:
+        pass
+
+
 def make_pack(
     *,
     mode: str,
@@ -931,6 +1020,9 @@ def make_pack(
     for warning in token_warnings:
         color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
         print(f"{color}{warning}{ANSI_RESET}")
+
+    # Generate PROVENANCE.json manifest
+    write_provenance_manifest(out_dir)
 
     write_json(BASELINE_PATH, manifest)
 

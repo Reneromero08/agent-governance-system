@@ -1,6 +1,42 @@
 # Changelog
 
-All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
+All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
+
+## [2.0.0] - 2025-12-21
+
+### Added
+- `CANON/ARBITRATION.md`: Conflict resolution policy with escalation protocol.
+- **Symbolic Compression**:
+    - `CANON/CODEBOOK.md`: Stable ID registry for token-efficient referencing (@C0, @I3, @S7).
+    - `TOOLS/codebook_build.py`: Generator for codebook from repo entities.
+    - `TOOLS/codebook_lookup.py`: CLI/library for programmatic lookups.
+    - `TOOLS/compress.py`: Bidirectional symbolic compression/expansion tool.
+    - `TOOLS/tokenizer_harness.py`: Real token measurement for GPT-4 (cl100k) and GPT-4o/o1 (o200k).
+    - `CANON/GENESIS_COMPACT.md`: Token-efficient bootstrap prompt using symbols.
+- **Provenance Headers**: Added `TOOLS/provenance.py` and integrated into all major generators (`codebook_build.py`, `cortex.build.py`, `packer.py`) for automated audit trails. Introduced `meta/PROVENANCE.json` in memory packs as a single-point-of-truth manifest for pack integrity.
+
+### Fixed
+- Nothing.
+
+### Removed
+- Nothing.
+
+## [1.2.0] - 2025-12-21
+
+### Added
+- MCP full implementation: all 10 tools working (including `research_cache`), dynamic resources, Claude Desktop config ready.
+- MCP governance tools: `critic_run`, `adr_create`, `commit_ceremony` for Claude-assisted governance.
+- MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
+- **Emergency Governance**:
+    - `CANON/CRISIS.md`: Procedures with 5 crisis levels and CLI modes.
+    - `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
+    - `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, etc.).
+
+### Fixed
+- Nothing.
+
+### Removed
+- Nothing.
 
 ## [1.1.1] - 2025-12-21
 
@@ -11,32 +47,25 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
 - CONTRACT Rule 7: Commit ceremony as a non-negotiable law.
 - AGENTS.md Section 10: Full commit ceremony specification with anti-chaining rule.
-- `CANON/ARBITRATION.md`: Conflict resolution policy with escalation protocol.
 - `CANON/DEPRECATION.md`: Deprecation windows and ceremonies for safe rule retirement.
+- **Research Cache**: Implemented persistent SQLite-backed cache for research summaries (`TOOLS/research_cache.py`) to avoid redundant browsing.
 - `CANON/MIGRATION.md`: Formal compatibility break ritual with phases and rollback.
 - `CANON/INVARIANTS.md` INV-009 and INV-010: Canon bloat prevention (readability limits, archiving).
-- MCP seam: `MCP/MCP_SPEC.md`, `MCP/schemas/`, `MCP/server.py` for Model Context Protocol integration.
-- MCP full implementation: all 9 tools working, dynamic resources, Claude Desktop config ready.
-- MCP governance tools: `critic_run`, `adr_create`, `commit_ceremony` for Claude-assisted governance.
-- **Emergency Governance**:
-    - `CANON/CRISIS.md`: Procedures with 5 crisis levels and CLI modes.
-    - `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
-    - `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, etc.).
-- **Symbolic Compression**:
-    - `CANON/CODEBOOK.md`: Stable ID registry for token-efficient referencing (@C0, @I3, @S7).
-    - `TOOLS/codebook_build.py`: Generator for codebook from repo entities.
-    - `TOOLS/codebook_lookup.py`: CLI/library for programmatic lookups.
-    - `TOOLS/compress.py`: Bidirectional symbolic compression/expansion tool.
-    - `CANON/GENESIS_COMPACT.md`: Token-efficient bootstrap prompt using symbols.
-- **Provenance Headers**: Added `TOOLS/provenance.py` and integrated into all major generators (`codebook_build.py`, `cortex.build.py`, `packer.py`) for automated audit trails and change detection.
-
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
 - `query.py` updated with `--json` export flag for backward-compatible JSON output.
-- Deprecated `cortex.json` emission from build process.
 - Expanded ROADMAP with v1.2 milestone and research-derived tasks.
 - Strengthened STYLE-001 with prohibited interpretations list and anti-chaining rule.
+
+### Deprecated
+- `cortex.json` emission from build process (replaced by SQLite `cortex.db`).
+
+### Fixed
+- Nothing.
+
+### Removed
+- Nothing.
 
 ## [1.1.0] - 2025-12-21
 

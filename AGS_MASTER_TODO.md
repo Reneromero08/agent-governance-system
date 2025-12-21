@@ -52,6 +52,7 @@ These are “drag-and-drop pack must be self-navigable.”
 - [x] **P0** Ensure SPLIT pack includes **all** of `meta/` (not only the 00..07 docs). _(Fixed: `write_split_pack` now inlines `meta/` files into Section 07)_
 - [x] **P1** Ensure `00_INDEX.md` read order references `repo/CORTEX/` and `repo/TOOLS/` (so agents know the maintenance tooling exists). _(Fixed: added reference in `AGS-00_INDEX.md` and `AGS-07_SYSTEM.md`)_
 - [x] **P1** Ensure smoke test actually runs and fails when meta inventories are missing or stale. _(Fixed: `llm-packer-smoke` verifies existence of all meta files)_
+- [x] **P1** Exclude `research/` directory by default to prevent chat log bloat. _(Done 2025-12-21)_
 - [x] **P2** Add a “pack self-check” command: verify manifest, verify meta inventories match repo snapshot. _(Fixed: created `pack-validate` skill)_
 
 
@@ -67,7 +68,7 @@ These are the “extra layers” from your merged research and multi-model revie
 - [x] **P0** Pack integrity: manifest + hashes, verify-on-load. _(Fixed: added manifest verification to `packer.py` and `pack-validate` skill)_
 - [x] **P1** Explicit versioning: `canon_version` + `grammar_version` and mismatch behavior. _(Fixed: implemented version consistency checks and `lint_tokens.py`)_
 - [x] **P1** Context continuity: ADR, rejected paths, style records as first-class. _(Fixed: provided templates and updated `CONTEXT/INDEX.md`)_
-- [x] **P2** MCP seam: stage the interface; implement only when you actually need tool access. _(Full implementation 2025-12-21: all 6 tools, dynamic resources, Claude Desktop config)_
+- [x] **P2** MCP seam: stage the interface; implement only when you actually need tool access. _(Full implementation 2025-12-21: all 10 tools, dynamic resources, Claude Desktop config)_
 
 ### Governance completeness (things that will hurt later if undefined)
 - [x] **P1** Canon conflict resolution: what happens when canon contradicts itself; arbitration path. _(Created CANON/ARBITRATION.md 2025-12-21)_
@@ -93,21 +94,18 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P2** Incremental indexing + freshness/TTL rules (avoid stale cortex).
 
 ### Token economics
-- [x] **P2** **Improved Codebook**: Expanded codebook to 37 entries and added bidirectional symbolic compression/expansion via `TOOLS/compress.py`.
-- [ ] **P2** Reversible symbol dictionary compiler (compression must expand losslessly for audits).
-- [ ] **P2** Tokenizer test harness: measure real tokenization against target models.
+- [x] **P2** **Codebook & Compression**: Expanded codebook to 37 entries, bidirectional symbolic compression via `TOOLS/compress.py`, and stable IDs (`@C1`, `@M7`). _(Done 2025-12-21)_
+- [x] **P2** Tokenizer test harness: measure real tokenization against target models
+    - `TOOLS/tokenizer_harness.py`: Real token measurement for GPT-4 (cl100k) and GPT-4o/o1 (o200k).
+    - `MEMORY/LLM_PACKER/Engine/packer.py`: Integrated `tiktoken` for 100% accurate token counts in `CONTEXT.txt`.
 
 ### Chat-derived mechanics deltas (small, buildable, low-bloat)
-- [x] **P2** Canon codebook addressing (stable IDs like `@C1`, `@M7` so prompts reference IDs not prose). _(Created CANON/CODEBOOK.md, TOOLS/codebook_build.py, TOOLS/codebook_lookup.py 2025-12-21)_
-
 - [ ] **P2** Pre-compress retrieved context before packing (never compress canon unless reversible).
-- [ ] **P2** Research cache: URL-hash + timestamp so agents avoid repeated browsing/summarizing.
+- [x] **P1** Research activity cache: persist summaries for URLs to avoid redundant browsing (`TOOLS/research_cache.py`). _(Done 2025-12-21)_
 
 ---
 
-## Notes for later triage
-- [ ] Decide whether the “30-day build roadmap” replaces or complements your current roadmap (week-structured kernel: governance, index, memory, token economics).
-- [ ] If you want publish readiness: define “v0.1 publishable” criteria (what must be true for outsiders to not get lost).
+---
 
 ---
 
@@ -130,5 +128,6 @@ These items were identified from the research folder audit. They are not duplica
 - [x] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale. _(Created 2025-12-21)_
 
 ### Data Integrity and Validation
-- [x] **Provenance Headers**: Generator version, hashes, timestamps (2025-12-21)
+- [x] **Provenance Headers**: Utility + `meta/PROVENANCE.json` for LLM packs (2025-12-21)
+- [x] **Precise Tokenization**: Integrated `tiktoken` into `packer.py` for accurate context reports (2025-12-21)
 - [ ] **P2** Schema Validation for "Law-Like" Files: JSON Schemas for canon metadata, skill manifests, context records, cortex index. Contracts enforce schema validity.

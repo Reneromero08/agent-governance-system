@@ -20,6 +20,9 @@ The repository is organised into six layers. Files are loaded in the following o
 
 1. **CANON** - the constitution and invariants of the system.
 2. **CONTEXT** - decisions, rejections and preferences that record why things are the way they are.
+    - `decisions/` - ADRs (Architecture Decision Records)
+    - `preferences/` - Governance preferences (style, ceremony)
+    - `research/` - Shared research cache (e.g., `research_cache.db` for SQLite)
 3. **MAPS** - entrypoints and data flow descriptions that tell agents where to make changes.
 4. **SKILLS** - modular capabilities packaged with contracts and fixtures.
 5. **CONTRACTS** - fixtures and schemas used to mechanically enforce rules.

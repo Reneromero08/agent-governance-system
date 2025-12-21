@@ -10,6 +10,9 @@ CORTEX/_generated/cortex.db
 CORTEX/_generated/*.sqlite
 !CORTEX/_generated/.gitkeep
 
+# Research Cache
+CONTEXT/research/*.db
+
 
 MEMORY/LLM_PACKER/_packs/**
 !MEMORY/LLM_PACKER/_packs/

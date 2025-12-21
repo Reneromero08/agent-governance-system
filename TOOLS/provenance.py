@@ -126,6 +126,34 @@ def generate_header(
     return header
 
 
+def generate_manifest(
+    generator: str,
+    target_files: Dict[str, Path],
+    inputs: Optional[List[str]] = None,
+    extra: Optional[Dict] = None,
+) -> Dict:
+    """
+    Generate a standalone provenance manifest (PROVENANCE.json).
+    
+    Args:
+        generator: Path to the generator script
+        target_files: Dict of {rel_path: abs_path} to include in the manifest
+        inputs: List of input file paths
+        extra: Additional metadata
+    """
+    manifest = generate_header(generator, inputs, extra=extra)
+    
+    target_hashes = {}
+    for rel_path, abs_path in target_files.items():
+        target_hashes[rel_path] = hash_file(abs_path)
+    
+    manifest["provenance"]["target_hashes"] = target_hashes
+    
+    # Checksum of the manifest itself (excluding the checksum field)
+    # We'll compute this at the end
+    return manifest
+
+
 def format_header_markdown(header: Dict) -> str:
     """Format provenance header as markdown comment block."""
     prov = header.get("provenance", {})
@@ -220,6 +248,49 @@ def verify_provenance(filepath: Path) -> Dict:
     
     content = filepath.read_text(encoding="utf-8", errors="ignore")
     
+    if filepath.name == "PROVENANCE.json":
+        try:
+            data = json.loads(content)
+            prov = data.get("provenance", {})
+            stored_checksum = prov.get("checksum", "")
+            
+            # To verify, we remove checksum and re-hash
+            data_copy = json.loads(content)
+            if "checksum" in data_copy.get("provenance", {}):
+                del data_copy["provenance"]["checksum"]
+            
+            # Re-serialize deterministically for hash
+            canonical_json = json.dumps(data_copy, sort_keys=True)
+            current_checksum = hash_content(canonical_json)
+            
+            # Also verify all target_hashes
+            targets_valid = True
+            mismatched_targets = []
+            if "target_hashes" in prov:
+                for rel_path, stored_hash in prov["target_hashes"].items():
+                    target_path = filepath.parent.parent / rel_path
+                    if not target_path.exists():
+                        targets_valid = False
+                        mismatched_targets.append(f"{rel_path} (missing)")
+                        continue
+                    
+                    actual_hash = hash_file(target_path)
+                    if actual_hash != stored_hash:
+                        targets_valid = False
+                        mismatched_targets.append(f"{rel_path} (mismatch: {actual_hash} != {stored_hash})")
+            
+            return {
+                "valid": stored_checksum == current_checksum and targets_valid,
+                "checksum_valid": stored_checksum == current_checksum,
+                "targets_valid": targets_valid,
+                "mismatched_targets": mismatched_targets,
+                "generator": prov.get("generator", "unknown"),
+                "generated_at": prov.get("generated_at", "unknown"),
+                "canon_version": prov.get("canon_version", "unknown"),
+            }
+        except Exception as e:
+            return {"valid": False, "error": f"JSON parse error: {e}"}
+
     # Match the block (up to the second newline after -->)
     # We added exactly two newlines in add_header_to_content
     match = re.search(r'(<!--\s*PROVENANCE\s*.*?\s*-->\n\n)(.*)', content, re.DOTALL)
@@ -299,8 +370,14 @@ if __name__ == "__main__":
             print(f"✓ Provenance valid")
             print(f"  Generator: {result['generator']}")
             print(f"  Generated: {result['generated_at']}")
+            if "mismatched_targets" in result and not result["mismatched_targets"] and "targets_valid" in result:
+                print(f"✓ All target file hashes valid")
         else:
-            print(f"✗ Provenance invalid: {result.get('error', 'checksum mismatch')}")
+            print(f"✗ Provenance invalid: {result.get('error', 'checksum or target mismatch')}")
+            if result.get("mismatched_targets"):
+                print(f"  Mismatched targets:")
+                for target in result["mismatched_targets"]:
+                    print(f"    - {target}")
         sys.exit(0 if result["valid"] else 1)
     
     elif args.show:
