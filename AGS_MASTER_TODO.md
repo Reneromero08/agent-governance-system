@@ -84,8 +84,8 @@ These are the “extra layers” from your merged research and multi-model revie
 - [ ] **P3** Additional prompts: `skill_template`, `conflict_resolution`, `deprecation_workflow`.
 
 ### Operational safety and “emergency modes”
-- [ ] **P2** Emergency procedures as concrete CLI modes (reset, quarantine, isolation, crisis arbitration).
-- [ ] **P2** “Stewardship” structure: explicit human escalation path for canon-level failures.
+- [x] **P2** Emergency procedures as concrete CLI modes (reset, quarantine, isolation, crisis arbitration). _(Created CANON/CRISIS.md, TOOLS/emergency.py 2025-12-21)_
+- [x] **P2** “Stewardship” structure: explicit human escalation path for canon-level failures. _(Created CANON/STEWARDSHIP.md 2025-12-21)_
 - [ ] **P2** “Constitutional license” concept (optional legal-protective layer).
 
 ### Performance and scaling
