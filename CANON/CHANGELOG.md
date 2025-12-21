@@ -7,12 +7,17 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Added
 - Genesis Prompt (`CANON/GENESIS.md`): Bootstrap prompt that ensures agents load CANON first.
 - Research folder now tracked in git with clarifying README.
+- Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date.
+- Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
+- CONTRACT Rule 7: Commit ceremony as a non-negotiable law.
+- AGENTS.md Section 10: Full commit ceremony specification with anti-chaining rule.
 
 ### Changed
 - Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
 - `query.py` updated with `--json` export flag for backward-compatible JSON output.
 - Deprecated `cortex.json` emission from build process.
 - Expanded ROADMAP with v1.2 milestone and research-derived tasks.
+- Strengthened STYLE-001 with prohibited interpretations list and anti-chaining rule.
 
 ## [1.1.0] - 2025-12-21
 
