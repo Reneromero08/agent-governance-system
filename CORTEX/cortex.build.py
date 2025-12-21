@@ -10,7 +10,7 @@ In a real implementation, more sophisticated parsing and tagging would occur.
 """
 
 import json
-from datetime import datetime
+import os
 from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -42,10 +42,12 @@ def build_index() -> dict:
             }
         }
         entities.append(entity)
+    # Use explicit timestamp from env for reproducibility, otherwise use fixed placeholder
+    generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", "1970-01-01T00:00:00Z")
     return {
         "cortex_version": "0.1.0",
         "canon_version": "0.1.0",
-        "generated_at": datetime.utcnow().isoformat() + "Z",
+        "generated_at": generated_at,
         "entities": entities
     }
 

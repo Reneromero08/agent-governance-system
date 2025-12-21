@@ -12,14 +12,14 @@ Legend:
 This section is strictly “make the existing roadmap real” and close the holes required for it to be true.
 
 ### v0.1 — Foundation (P0 heavy)
-- [ ] **P0** Finalize CANON as working spec (clear authority gradient, minimal ambiguity).
-- [ ] **P0** Ensure **Cortex (shadow index)** exists and is part of the standard workflow (build + query) instead of raw filesystem scanning.
-- [ ] **P0** Ensure **basic skills exist** and are runnable with fixtures (at least one minimal skill end-to-end).
-- [ ] **P0** Ensure **CONTRACTS runner + fixtures** enforce what the docs claim (fail on hard violations; warn only when explicitly allowed).
+- [x] **P0** Finalize CANON as working spec (clear authority gradient, minimal ambiguity). _(Fixed: aligned authority gradient, added 4 new invariants, completed glossary with 9 new terms, added governance fixtures)_
+- [x] **P0** Ensure **Cortex (shadow index)** exists and is part of the standard workflow (build + query) instead of raw filesystem scanning. _(Fixed: ran `cortex.build.py` to populate index)_
+- [x] **P0** Ensure **basic skills exist** and are runnable with fixtures (at least one minimal skill end-to-end). _(Fixed: created `_TEMPLATE/run.py`, verified runner passes)_
+- [x] **P0** Ensure **CONTRACTS runner + fixtures** enforce what the docs claim (fail on hard violations; warn only when explicitly allowed). _(Fixed: added actual fixtures for `no-raw-paths` governance check)_
 - [ ] **P1** Ensure **ADR and context templates** are present and referenced (ADR-*, REJECT-*, STYLE-*).
 
 ### v0.1 — Fixes that make v0.1 true (holes you already hit)
-- [ ] **P0** **Determinism leak:** make `CORTEX/_generated/cortex.json` deterministic (timestamp should not change outputs unless explicitly supplied as an input OR fixtures must ignore it).
+- [x] **P0** **Determinism leak:** make `CORTEX/_generated/cortex.json` deterministic (timestamp should not change outputs unless explicitly supplied as an input OR fixtures must ignore it). _(Fixed: replaced `datetime.utcnow()` with env var `CORTEX_BUILD_TIMESTAMP` or fixed placeholder)_
 - [ ] **P0** **Exception boundary for “no raw path access”:** canon must explicitly carve out that **cortex builders may scan FS**, while **skills/agents must query** via `CORTEX/query.py`.
 - [ ] **P1** **Legacy fallback deprecation story:** `CORTEX/query.py` still checks `BUILD/cortex.json`. Bless as transitional or set a removal version.
 - [ ] **P0** **Artifact escape hatch fixture:** add a repo-wide test that fails if new files appear outside allowed output dirs (`CONTRACTS/_runs`, `CORTEX/_generated`, `MEMORY/LLM-PACKER-1.1/_packs`, and user-owned `BUILD`).
