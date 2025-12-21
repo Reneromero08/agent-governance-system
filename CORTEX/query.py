@@ -16,15 +16,20 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CORTEX_DIR = Path(__file__).resolve().parent
 DEFAULT_INDEX_PATH = CORTEX_DIR / "_generated" / "cortex.json"
 FALLBACK_INDEX_PATH = CORTEX_DIR / "cortex.json"
-LEGACY_INDEX_PATH = PROJECT_ROOT / "BUILD" / "cortex.json"
+
 
 def load_index() -> Dict[str, Any]:
+    """Load the cortex index from the generated path or fallback."""
     global _INDEX
     if _INDEX is None:
-        candidates = (DEFAULT_INDEX_PATH, FALLBACK_INDEX_PATH, LEGACY_INDEX_PATH)
-        path = next((p for p in candidates if p.exists()), None)
-        if path is None:
-            raise FileNotFoundError("No cortex index found in expected locations.")
+        if DEFAULT_INDEX_PATH.exists():
+            path = DEFAULT_INDEX_PATH
+        elif FALLBACK_INDEX_PATH.exists():
+            path = FALLBACK_INDEX_PATH
+        else:
+            raise FileNotFoundError(
+                f"No cortex index found. Run 'python CORTEX/cortex.build.py' to generate."
+            )
         _INDEX = json.loads(path.read_text())
     return _INDEX
 
