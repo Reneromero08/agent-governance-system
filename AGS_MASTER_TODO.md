@@ -26,9 +26,9 @@ This section is strictly “make the existing roadmap real” and close the hole
 - [x] **P1** Clarify what `CORTEX/_generated/**` ignore means: keep generated index untracked, but ensure it is always buildable and validated. _(Fixed: added "Generated files" section to CORTEX/README.md)_
 
 ### v0.2 — Reliability + enforcement
-- [ ] **P0** Add/finish a **critic gate** (pre-commit or CI) that checks diffs against canon + fixtures before changes land.
-- [ ] **P0** CI workflow: run contract runner + governance checks on PR/push.
-- [ ] **P1** Add **versioning + deprecation machinery** for token/grammar changes (even if initially “warn-only”).
+- [x] **P0** Add/finish a **critic gate** (pre-commit or CI) that checks diffs against canon + fixtures before changes land. _(Fixed: implemented real `critic.py` with 4 checks: CANON/CHANGELOG sync, skill fixtures, raw FS access, skill manifests)_
+- [x] **P0** CI workflow: run contract runner + governance checks on PR/push. _(Fixed: enhanced `contracts.yml` to run cortex build, critic, fixtures, and escape hatch)_
+- [x] **P1** Add **versioning + deprecation machinery** for token/grammar changes (even if initially "warn-only"). _(Fixed: implemented `lint_tokens.py` for glossary/deprecation checking, `check_canon_governance.py` for version consistency, cortex.build.py now reads version from VERSIONING.md)_
 
 ### v0.3 — Memory + pack discipline
 - [ ] **P0** Define persistent memory store + summarization workflow (tiering, promotion rules, what is mutable vs append-only).
