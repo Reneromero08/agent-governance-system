@@ -2,6 +2,13 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [1.1.1] - 2025-12-21
+
+### Changed
+- Shadow Cortex now uses SQLite (`cortex.db`) instead of flat JSON for O(1) lookups.
+- `query.py` updated with `--json` export flag for backward-compatible JSON output.
+- Deprecated `cortex.json` emission from build process.
+
 ## [1.1.0] - 2025-12-21
 
 ### Added
