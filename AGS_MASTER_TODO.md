@@ -31,10 +31,10 @@ This section is strictly “make the existing roadmap real” and close the hole
 - [x] **P1** Add **versioning + deprecation machinery** for token/grammar changes (even if initially "warn-only"). _(Fixed: implemented `lint_tokens.py` for glossary/deprecation checking, `check_canon_governance.py` for version consistency, cortex.build.py now reads version from VERSIONING.md)_
 
 ### v0.3 — Memory + pack discipline
-- [ ] **P0** Define persistent memory store + summarization workflow (tiering, promotion rules, what is mutable vs append-only).
-- [ ] **P0** Packer: **manifest integrity** (hashes, deterministic order) and verify-on-load.
+- [x] **P0** Define persistent memory store + summarization workflow (tiering, promotion rules, what is mutable vs append-only). _(Fixed: created MEMORY/MEMORY_STORE.md documenting 3-tier memory model, promotion rules, and mutability constraints)_
+- [x] **P0** Packer: **manifest integrity** (hashes, deterministic order) and verify-on-load. _(Fixed: added verify_manifest() and load_and_verify_pack() functions to packer.py)_
 - [ ] **P1** Delta packs: baseline state + diff logic + upgrade story (migration notes).
-- [ ] **P1** Migration skill(s) and fixtures for breaking changes.
+- [x] **P1** Migration skill(s) and fixtures for breaking changes. _(Fixed: created canon-migration skill with SKILL.md, run.py, validate.py, and fixtures)_
 
 ### v1.0 — Hardening + publishable template
 - [ ] **P0** Freeze core invariants and “what never changes” (or clearly define the ceremony to change them).
