@@ -153,3 +153,32 @@ An agent should stop when:
 - any blocking uncertainty appears
 
 Agents must not continue "optimizing" beyond scope.
+
+## 10. Commit ceremony (CRITICAL)
+
+**Every single `git commit` and `git push` requires explicit, per-instance user approval.**
+
+This is the highest-priority governance rule for agent behavior.
+
+### What does NOT authorize a commit
+- "proceed"
+- "let's move on to the next task"
+- "continue"
+- "yes" (unless in direct response to a commit ceremony prompt)
+
+These authorize **implementation** only. They are **never** implicit commit approvals.
+
+### The anti-chaining rule
+**One commit approval = one commit.** If the user approves a commit for Task A, and the agent then completes Task B, the agent MUST stop and request a new approval for Task B. Chaining commits under a single approval is forbidden.
+
+### The ceremony
+Before any Git command:
+1. Run `TOOLS/critic.py` and `CONTRACTS/runner.py`. Confirm they pass.
+2. Stop all execution.
+3. List every file in the staging area.
+4. Ask: "Ready for the Chunked Commit Ceremony? Shall I commit these [N] files?"
+5. Wait for explicit user approval.
+
+Violation of this ceremony is a **critical governance failure**.
+
+See also: `CONTEXT/preferences/STYLE-001-commit-ceremony.md`
