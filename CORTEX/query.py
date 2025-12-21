@@ -54,6 +54,43 @@ def find_entities_containing_path(path_substring: str) -> List[Dict[str, Any]]:
                 break
     return results
 
+
+def main():
+    import argparse
+    parser = argparse.ArgumentParser(description="Query the AGS Cortex")
+    parser.add_argument("--id", help="Find entity by ID")
+    parser.add_argument("--type", help="Find entities by type")
+    parser.add_argument("--find", help="Find entities containing path substring")
+    parser.add_argument("--list", action="store_true", help="List all entities (summary)")
+    
+    args = parser.parse_args()
+    
+    try:
+        index = load_index()
+    except FileNotFoundError as e:
+        print(f"Error: {e}")
+        return
+
+    if args.id:
+        result = get_entity_by_id(args.id)
+        print(json.dumps(result, indent=2) if result else "Not found.")
+    elif args.type:
+        results = find_entities_by_type(args.type)
+        print(json.dumps(results, indent=2))
+    elif args.find:
+        results = find_entities_containing_path(args.find)
+        print(json.dumps(results, indent=2))
+    elif args.list:
+        entities = index.get("entities", [])
+        print(f"Cortex contains {len(entities)} indexed entities:")
+        for e in entities:
+            print(f"- {e['id']} ({e['type']}) : {e['title']}")
+    else:
+        parser.print_help()
+
+if __name__ == "__main__":
+    main()
+
 __all__ = [
     "get_entity_by_id",
     "find_entities_by_type",
