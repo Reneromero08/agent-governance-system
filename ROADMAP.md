@@ -33,7 +33,7 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Complete "meta in the split" logic for LLM_PACKER.
 - [x] Refine "O(1) Cortex" by implementing a proper indexing database (SQLite).
 - [x] Implement Genesis Prompt (`CANON/GENESIS.md`): Bootstrap prompt that ensures agents load CANON first.
-- [ ] Add Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date.
+- [x] Add Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date.
 - [ ] Add Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews.
 
 ## v1.2 - Protocol Integration & Validation
