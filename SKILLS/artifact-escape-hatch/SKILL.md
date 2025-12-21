@@ -24,7 +24,7 @@ Run this skill as part of CI or pre-commit to verify no generated files have bee
 
 - Must not modify any files.
 - Scans CONTRACTS, CORTEX, MEMORY, SKILLS directories.
-- Allowed roots: `CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM-PACKER-1.1/_packs/`, `BUILD/`.
+- Allowed roots: `CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM-PACKER/_packs/`, `BUILD/`.
 
 ## Fixtures
 

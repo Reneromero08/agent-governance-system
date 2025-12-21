@@ -22,7 +22,7 @@ This section is strictly “make the existing roadmap real” and close the hole
 - [x] **P0** **Determinism leak:** make `CORTEX/_generated/cortex.json` deterministic (timestamp should not change outputs unless explicitly supplied as an input OR fixtures must ignore it). _(Fixed: replaced `datetime.utcnow()` with env var `CORTEX_BUILD_TIMESTAMP` or fixed placeholder)_
 - [x] **P0** **Exception boundary for "no raw path access":** canon must explicitly carve out that **cortex builders may scan FS**, while **skills/agents must query** via `CORTEX/query.py`. _(Fixed: added INV-008 "Cortex builder exception" to INVARIANTS.md)_
 - [x] **P1** **Legacy fallback deprecation story:** `CORTEX/query.py` still checks `BUILD/cortex.json`. Bless as transitional or set a removal version. _(Fixed: removed legacy BUILD/cortex.json fallback entirely — clean, no deprecation needed)_
-- [x] **P0** **Artifact escape hatch fixture:** add a repo-wide test that fails if new files appear outside allowed output dirs (`CONTRACTS/_runs`, `CORTEX/_generated`, `MEMORY/LLM-PACKER-1.1/_packs`, and user-owned `BUILD`). _(Fixed: created `artifact-escape-hatch` skill with fixtures)_
+- [x] **P0** **Artifact escape hatch fixture:** add a repo-wide test that fails if new files appear outside allowed output dirs (`CONTRACTS/_runs`, `CORTEX/_generated`, `MEMORY/LLM-PACKER/_packs`, and user-owned `BUILD`). _(Fixed: created `artifact-escape-hatch` skill with fixtures)_
 - [x] **P1** Clarify what `CORTEX/_generated/**` ignore means: keep generated index untracked, but ensure it is always buildable and validated. _(Fixed: added "Generated files" section to CORTEX/README.md)_
 
 ### v0.2 — Reliability + enforcement

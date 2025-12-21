@@ -9,7 +9,7 @@ This file lists decisions that are considered invariant.  Changing an invariant 
 - **[INV-003] No raw path access** - Skills may not navigate the filesystem directly.  They must query the cortex (`CORTEX/query.py`) to find files.
 - **[INV-004] Fixtures gate merges** - No code or rule change may be accepted if any fixture fails.  Fixtures define the legal behavior.
 - **[INV-005] Determinism** - Given the same inputs and canon, the system must produce the same outputs.  Timestamps, random values, and external state must be injected explicitly or omitted.
-- **[INV-006] Output roots** - System-generated artifacts must be written only to `CONTRACTS/_runs/`, `CORTEX/_generated/`, or `MEMORY/LLM-PACKER-1.1/_packs/`.  `BUILD/` is reserved for user outputs.
+- **[INV-006] Output roots** - System-generated artifacts must be written only to `CONTRACTS/_runs/`, `CORTEX/_generated/`, or `MEMORY/LLM-PACKER/_packs/`.  `BUILD/` is reserved for user outputs.
 - **[INV-007] Change ceremony** - Any behavior change must add/update fixtures, update the changelog, and occur in the same commit.  Partial changes are not valid.
 - **[INV-008] Cortex builder exception** - Cortex builders (`CORTEX/*.build.py`) may scan the filesystem directly.  All other skills and agents must query via `CORTEX/query.py`.
 

@@ -25,7 +25,7 @@ Delta packs contain only files that changed since the last baseline, plus anchor
 
 The baseline is stored at:
 ```
-MEMORY/LLM-PACKER-1.1/_packs/_state/baseline.json
+MEMORY/LLM-PACKER/_packs/_state/baseline.json
 ```
 
 Structure:
@@ -76,7 +76,7 @@ python MEMORY/packer.py --mode full --combined
 
 ### PowerShell:
 ```powershell
-./MEMORY/LLM-PACKER-1.1/pack.ps1 -Mode delta
+./MEMORY/LLM-PACKER/pack.ps1 -Mode delta
 ```
 
 ## Pack Metadata
@@ -111,7 +111,7 @@ When upgrading across major versions:
 
 To reset the baseline (start fresh):
 ```bash
-rm MEMORY/LLM-PACKER-1.1/_packs/_state/baseline.json
+rm MEMORY/LLM-PACKER/_packs/_state/baseline.json
 python MEMORY/packer.py --mode full
 ```
 

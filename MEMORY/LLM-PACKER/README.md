@@ -22,7 +22,7 @@ Double-click: `LLM-PACK.cmd`
 
 Or run in PowerShell:
 
-`powershell -NoProfile -ExecutionPolicy Bypass -File MEMORY/LLM-PACKER-1.1/pack.ps1`
+`powershell -NoProfile -ExecutionPolicy Bypass -File MEMORY/LLM-PACKER/pack.ps1`
 
 Or run cross-platform:
 
@@ -30,7 +30,7 @@ Or run cross-platform:
 
 Optional arguments:
 
-- `-OutDir MEMORY/LLM-PACKER-1.1/_packs/<name>` (must be under `MEMORY/LLM-PACKER-1.1/_packs/`)
+- `-OutDir MEMORY/LLM-PACKER/_packs/<name>` (must be under `MEMORY/LLM-PACKER/_packs/`)
 - `-Mode full` or `-Mode delta`
 - `-Stamp <stamp>` (used for timestamped COMBINED output filenames)
 - `-Zip:$false` or `-Combined:$false`
@@ -39,15 +39,15 @@ Optional arguments:
 
 Creates a pack folder under:
 
-`MEMORY/LLM-PACKER-1.1/_packs/`
+`MEMORY/LLM-PACKER/_packs/`
 
 And optionally produces a `.zip` archived under:
 
-`MEMORY/LLM-PACKER-1.1/_packs/archive/`
+`MEMORY/LLM-PACKER/_packs/archive/`
 
 Baseline state used for delta packs is stored at:
 
-`MEMORY/LLM-PACKER-1.1/_packs/_state/baseline.json`
+`MEMORY/LLM-PACKER/_packs/_state/baseline.json`
 
 ## Token Estimation
 

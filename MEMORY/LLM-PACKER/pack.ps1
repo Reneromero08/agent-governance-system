@@ -22,7 +22,7 @@ if (-not (Test-Path -LiteralPath $packer)) {
 }
 
 if ($Stamp -eq "") { $Stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss") }
-if ($OutDir -eq "") { $OutDir = "MEMORY/LLM-PACKER-1.1/_packs/llm-pack-$Stamp" }
+if ($OutDir -eq "") { $OutDir = "MEMORY/LLM-PACKER/_packs/llm-pack-$Stamp" }
 
 $args = @(
   "python",
