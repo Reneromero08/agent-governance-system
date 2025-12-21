@@ -4,7 +4,7 @@
 
 **Status:** Active
 
-**required_canon_version:** ">=0.1.0"
+**required_canon_version:** ">=2.5.1 <3.0.0"
 
 ## Purpose
 

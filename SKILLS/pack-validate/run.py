@@ -12,9 +12,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 # Add parent for imports
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
 from MEMORY.LLM_PACKER.Engine.packer import verify_manifest
+from TOOLS.skill_runtime import ensure_canon_compat
 
 
 def validate_structure(pack_dir: Path) -> Tuple[List[str], List[str]]:
@@ -91,6 +94,8 @@ def get_stats(pack_dir: Path) -> Dict[str, Any]:
 
 def main(input_path: Path, output_path: Path) -> int:
     """Run the validation skill."""
+    if not ensure_canon_compat(Path(__file__).resolve().parent):
+        return 1
     try:
         payload = json.loads(input_path.read_text())
     except Exception as exc:

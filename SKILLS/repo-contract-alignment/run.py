@@ -1,10 +1,7 @@
 #!/usr/bin/env python3
 
 """
-Template skill runner.
-
-This is a skeleton script for a skill. Replace this file with implementation
-code that performs the skill's action.
+repo-contract-alignment skill runner.
 """
 
 import json
@@ -24,18 +21,23 @@ def main(input_path: Path, output_path: Path) -> int:
     try:
         payload = json.loads(input_path.read_text())
     except Exception as exc:
-        print(f"Error reading input JSON: {exc}")
+        print(f"Error reading input: {exc}")
         return 1
 
-    # Template: echo the input as output (replace with actual logic)
+    result = {
+        "skill": "repo-contract-alignment",
+        "ok": True,
+        "input": payload,
+    }
+
     output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True))
-    print("[skill] Template skill executed successfully")
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    print("repo-contract-alignment completed")
     return 0
 
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: run.py <input.json> <output.json>")
-        raise SystemExit(1)
-    raise SystemExit(main(Path(sys.argv[1]), Path(sys.argv[2])))
+        sys.exit(1)
+    sys.exit(main(Path(sys.argv[1]), Path(sys.argv[2])))

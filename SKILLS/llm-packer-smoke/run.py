@@ -7,6 +7,11 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from TOOLS.skill_runtime import ensure_canon_compat
+
 PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "Engine" / "packer.py"
 PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
@@ -36,6 +41,8 @@ def ensure_runner_writes_under_runs(path: Path) -> None:
 
 
 def main(input_path: Path, output_path: Path) -> int:
+    if not ensure_canon_compat(Path(__file__).resolve().parent):
+        return 1
     try:
         config = json.loads(input_path.read_text())
     except Exception as exc:
