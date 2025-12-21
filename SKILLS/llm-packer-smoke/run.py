@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
-PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "packer.py"
+PACKER_SCRIPT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "Engine" / "packer.py"
 PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
 
