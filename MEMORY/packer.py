@@ -741,6 +741,9 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
 
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
     for rel in base_paths:
+        if rel.startswith("COMBINED/"):
+            continue
+            
         abs_path = pack_dir / rel
         if not abs_path.exists() or not abs_path.is_file():
             continue
