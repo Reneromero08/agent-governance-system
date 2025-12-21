@@ -84,22 +84,23 @@ def main(input_path: Path, output_path: Path) -> int:
         "meta/REPO_STATE.json",
         "meta/PACK_INFO.json",
         "meta/BUILD_TREE.txt",
-        "COMBINED/SPLIT/00_INDEX.md",
-        "COMBINED/SPLIT/01_CANON.md",
-        "COMBINED/SPLIT/02_ROOT.md",
-        "COMBINED/SPLIT/03_MAPS.md",
-        "COMBINED/SPLIT/04_CONTEXT.md",
-        "COMBINED/SPLIT/05_SKILLS.md",
-        "COMBINED/SPLIT/06_CONTRACTS.md",
-        "COMBINED/SPLIT/07_SYSTEM.md",
+        "meta/CONTEXT.txt",
+        "COMBINED/SPLIT/AGS-00_INDEX.md",
+        "COMBINED/SPLIT/AGS-01_CANON.md",
+        "COMBINED/SPLIT/AGS-02_ROOT.md",
+        "COMBINED/SPLIT/AGS-03_MAPS.md",
+        "COMBINED/SPLIT/AGS-04_CONTEXT.md",
+        "COMBINED/SPLIT/AGS-05_SKILLS.md",
+        "COMBINED/SPLIT/AGS-06_CONTRACTS.md",
+        "COMBINED/SPLIT/AGS-07_SYSTEM.md",
     ]
     if combined:
         required.extend(
             [
-                f"COMBINED/FULL-COMBINED-{stamp}.md",
-                f"COMBINED/FULL-COMBINED-{stamp}.txt",
-                f"COMBINED/FULL-TREEMAP-{stamp}.md",
-                f"COMBINED/FULL-TREEMAP-{stamp}.txt",
+                f"COMBINED/AGS-FULL-COMBINED-{stamp}.md",
+                f"COMBINED/AGS-FULL-COMBINED-{stamp}.txt",
+                f"COMBINED/AGS-FULL-TREEMAP-{stamp}.md",
+                f"COMBINED/AGS-FULL-TREEMAP-{stamp}.txt",
             ]
         )
     missing = [p for p in required if not (out_dir / p).exists()]
@@ -124,9 +125,9 @@ def main(input_path: Path, output_path: Path) -> int:
             print(f"ENTRYPOINTS.md missing required mention: {mention}")
             return 1
 
-    maps_text = (out_dir / "COMBINED" / "SPLIT" / "03_MAPS.md").read_text(encoding="utf-8", errors="replace")
+    maps_text = (out_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md").read_text(encoding="utf-8", errors="replace")
     if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
-        print("03_MAPS.md missing embedded repo file tree")
+        print("AGS-03_MAPS.md missing embedded repo file tree")
         return 1
 
     output_payload = {
