@@ -2,6 +2,22 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [0.1.5] - 2025-12-21
+
+### Added
+
+- New invariants: INV-005 (Determinism), INV-006 (Output roots), INV-007 (Change ceremony), INV-008 (Cortex builder exception).
+- New glossary terms: ADR, Pack, Manifest, Critic, Authority gradient, Invariant, Change ceremony, Entity, Query.
+- Governance fixtures for `canon-sync`, `token-grammar`, and `no-raw-paths`.
+- Deterministic timestamp in `cortex.build.py` via `CORTEX_BUILD_TIMESTAMP` env var.
+- Python `run.py` for `_TEMPLATE` skill.
+
+### Changed
+
+- Authority gradient in `CONTRACT.md` aligned with `AGENTS.md` (now 8-level hierarchy).
+- INVARIANTS.md expanded from 4 to 8 invariants.
+- GLOSSARY.md expanded from 11 to 20 terms.
+
 ## [0.1.2] - 2025-12-20
 
 ### Added

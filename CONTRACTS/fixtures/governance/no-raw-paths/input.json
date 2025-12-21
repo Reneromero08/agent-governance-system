@@ -1,0 +1,7 @@
+{
+  "description": "Verify no-raw-paths invariant: skills must query cortex, not access filesystem directly",
+  "check_type": "no-raw-paths",
+  "test_case": "valid_skill",
+  "skill_code_sample": "from CORTEX.query import find_entities_by_type\nresults = find_entities_by_type('page')",
+  "contains_raw_path_access": false
+}

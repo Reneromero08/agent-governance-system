@@ -29,11 +29,16 @@ Only change CANON or edit existing CONTEXT records when the task is explicitly a
 
 When conflicts arise, the following order of precedence applies:
 
-1. `CANON/CONTRACT.md`
-2. Other files in `CANON/`
-3. `ROADMAP.md`
-4. Fixtures in `CONTRACTS/`
-5. Implementation (code and skills)
+1. `CANON/CONTRACT.md` (this file)
+2. `CANON/INVARIANTS.md`
+3. `CANON/VERSIONING.md`
+4. `AGENTS.md`
+5. Context records (`CONTEXT/decisions/`, `CONTEXT/rejected/`, `CONTEXT/preferences/`)
+6. `MAPS/*`
+7. User instructions
+8. Implementation convenience
+
+Never invert this order. Fixtures in `CONTRACTS/` validate behavior but do not override canon.
 
 ## Change ceremony
 
