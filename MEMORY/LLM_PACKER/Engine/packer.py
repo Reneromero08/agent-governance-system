@@ -61,7 +61,6 @@ INCLUDE_DIRS = (
 
 ROOT_FILES = (
     "README.md",
-    "ROADMAP.md",
     "LICENSE",
     "AGENTS.md",
     ".gitignore",
@@ -464,7 +463,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
                 "",
                 "## Read order",
                 "1) `repo/AGENTS.md`",
-                "2) `repo/README.md` and `repo/ROADMAP.md`",
+                "2) `repo/README.md` and `repo/CONTEXT/archive/planning/INDEX.md`",
                 "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
                 "4) `repo/MAPS/ENTRYPOINTS.md`",
                 "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/`",
@@ -502,7 +501,7 @@ def write_start_here(pack_dir: Path) -> None:
             "",
             "## Read order",
             "1) `repo/AGENTS.md` (procedural operating contract)",
-            "2) `repo/README.md` and `repo/ROADMAP.md` (orientation)",
+            "2) `repo/README.md` and `repo/CONTEXT/archive/planning/INDEX.md` (orientation + planning)",
             "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md` (authority)",
             "4) `repo/MAPS/ENTRYPOINTS.md` (where to change what)",
             "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/` (execution and fixtures)",
@@ -542,7 +541,7 @@ def write_entrypoints(pack_dir: Path) -> None:
             "",
             "- `repo/AGENTS.md`",
             "- `repo/README.md`",
-            "- `repo/ROADMAP.md`",
+            "- `repo/CONTEXT/archive/planning/INDEX.md`",
             "- `repo/CANON/CONTRACT.md`",
             "- `repo/CANON/INVARIANTS.md`",
             "- `repo/CANON/VERSIONING.md`",
@@ -960,7 +959,7 @@ def make_pack(
     anchors = {
         "AGENTS.md",
         "README.md",
-        "ROADMAP.md",
+        "CONTEXT/archive/planning/INDEX.md",
         "CANON/CONTRACT.md",
         "CANON/INVARIANTS.md",
         "CANON/VERSIONING.md",
