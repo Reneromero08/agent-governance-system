@@ -1,8 +1,4 @@
 # AGS Master TODO
-
-> [!NOTE]
-> This master TODO is archived as a snapshot. Latest: `CONTEXT/archive/planning/AGS_MASTER_TODO-2025-12-21.md` (see `CONTEXT/archive/planning/INDEX.md`).
-
 _generated: 2025-12-21_
 
 Legend:
