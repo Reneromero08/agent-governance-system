@@ -16,7 +16,7 @@ The memory system allows agents to persist state across sessions through a tiere
 │    - Lost when session ends                                      │
 ├─────────────────────────────────────────────────────────────────┤
 │  Tier 2: Pack Memory (persistent, immutable)                    │
-│    - LLM packs in MEMORY/LLM-PACKER/_packs/                 │
+│    - LLM packs in MEMORY/LLM_PACKER/_packs/                 │
 │    - Full repo snapshots                                         │
 │    - Append-only: new packs created, old ones archived          │
 ├─────────────────────────────────────────────────────────────────┤
