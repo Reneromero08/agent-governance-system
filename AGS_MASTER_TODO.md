@@ -117,7 +117,7 @@ These items were identified from the research folder audit. They are not duplica
 ### Bootstrap and Context Tools
 - [x] **P1** Genesis Prompt (`CANON/GENESIS.md`): A bootstrap prompt that solves the chicken-and-egg problem. Ensures agents load CANON first before any other instruction. _(Created 2025-12-21)_
 - [x] **P1** Context Query Tool (`CONTEXT/query-context.py`): CLI to search decisions by tag, status, review date. Enables agents to query "why did we decide X?" without full file scans. _(Created 2025-12-21)_
-- [ ] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale.
+- [x] **P2** Context Review Tool (`CONTEXT/review-context.py`): Flags overdue ADR reviews. Keeps decision records from going stale. _(Created 2025-12-21)_
 
 ### Data Integrity and Validation
 - [ ] **P2** Provenance Headers for Generated Files: All generated files (cortex, packs, indexes) must include: generator version, input hashes, timestamp. Enables tamper detection.
