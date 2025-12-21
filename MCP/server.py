@@ -141,6 +141,7 @@ class AGSMCPServer:
             "critic_run": self._tool_critic_run,
             "adr_create": self._tool_adr_create,
             "commit_ceremony": self._tool_commit_ceremony,
+            "research_cache": self._tool_research_cache,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -808,6 +809,78 @@ class AGSMCPServer:
                 "content": [{
                     "type": "text",
                     "text": f"Commit ceremony error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_research_cache(self, args: Dict) -> Dict:
+        """Access and manage the research cache via TOOLS/research_cache.py."""
+        import subprocess
+        
+        action = args.get("action")
+        url = args.get("url")
+        summary = args.get("summary")
+        tags = args.get("tags")
+        tag_filter = args.get("filter")
+        
+        if not action:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "Error: 'action' parameter is required"
+                }],
+                "isError": True
+            }
+        
+        cmd = [sys.executable, str(PROJECT_ROOT / "TOOLS" / "research_cache.py")]
+        
+        if action == "lookup":
+            if not url:
+                return {"content": [{"type": "text", "text": "Error: 'url' required for lookup"}], "isError": True}
+            cmd.extend(["--lookup", url])
+        elif action == "save":
+            if not url or not summary:
+                return {"content": [{"type": "text", "text": "Error: 'url' and 'summary' required for save"}], "isError": True}
+            cmd.extend(["--save", url, summary])
+            if tags:
+                cmd.extend(["--tags", tags])
+        elif action == "list":
+            cmd.append("--list")
+            if tag_filter:
+                cmd.extend(["--filter", tag_filter])
+        elif action == "clear":
+            cmd.append("--clear")
+        else:
+            return {"content": [{"type": "text", "text": f"Error: Invalid action '{action}'"}], "isError": True}
+        
+        try:
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                cwd=str(PROJECT_ROOT)
+            )
+            
+            if result.returncode == 0:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": result.stdout if result.stdout else "[OK]"
+                    }]
+                }
+            else:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"Research cache error: {result.stderr}"
+                    }],
+                    "isError": True
+                }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Exception in research cache tool: {str(e)}"
                 }],
                 "isError": True
             }
