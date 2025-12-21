@@ -16,11 +16,11 @@ This file outlines the high-level milestones for developing the Agent Governance
 - [x] Integrate continuous integration workflows for running the runner and critics on pull requests.
 - [x] Implement versioning and deprecation machinery for tokens.
 
-## v0.3 - Extended memory and indexing
+## v0.3 - Extended memory and indexing ✅
 
-- [ ] Introduce a persistent memory store and summarisation tools for long running agents.
-- [ ] Support incremental packer updates and manifest integrity checking.
-- [ ] Provide migration skills for older versions of the canon.
+- [x] Introduce a persistent memory store and summarisation tools for long running agents.
+- [x] Support incremental packer updates and manifest integrity checking.
+- [x] Provide migration skills for older versions of the canon.
 
 ## v1.0 - Stable release
 
