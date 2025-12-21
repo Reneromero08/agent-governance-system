@@ -1,5 +1,12 @@
 # STYLE-004: ADR-First Design Gate
 
+**Category:** Governance
+**Status:** Active
+**Scope:** Repository-wide
+**Enforcement:** Strict
+
+---
+
 To prevent "governance amnesia" and ensure compliance with [INV-007](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/INVARIANTS.md), architectural decisions must be documented BEFORE implementation, not as an afterthought.
 
 ## Principles
