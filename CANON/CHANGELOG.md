@@ -8,10 +8,24 @@ All notable changes to the Agent Governance System will be documented in this fi
 - None.
 
 ### Changed
-- None.
+- Bumped `canon_version` to 2.5.2.
 
 ### Fixed
 - None.
+
+### Removed
+- None.
+
+## [2.5.2] - 2025-12-21
+
+### Added
+- `requirements.txt` with `jsonschema` to satisfy schema validation dependencies in CI.
+
+### Changed
+- None.
+
+### Fixed
+- CI critic failure when `jsonschema` was missing.
 
 ### Removed
 - None.
@@ -24,7 +38,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ### Changed
 - Regenerated `CANON/CODEBOOK.md` to include the new skill.
-- Bumped `canon_version` to 1.1.1.
+- Bumped `canon_version` to 2.5.1.
 - Updated `AGENTS.md` authority gradient to include `CANON/AGREEMENT.md`.
 - Updated cortex docs to reference the SQLite index (`cortex.db`).
 - Updated skill `required_canon_version` ranges to `>=2.5.1 <3.0.0`.
