@@ -10,6 +10,7 @@ This script produces two related artifacts:
 2) A shareable "LLM pack" directory with curated entrypoints, indices and optional combined
    markdown suitable for handoff to another model.
 
+
 All outputs are written under `MEMORY/LLM-PACKER/_packs/`.
 """
 
@@ -20,9 +21,19 @@ import hashlib
 import json
 import re
 import shutil
+import sys
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
+
+# Token Limits
+TOKEN_LIMIT_WARNING = 120000   # Warn approaching standard 128k window
+TOKEN_LIMIT_CRITICAL = 190000  # Critical danger zone (leaving buffer for output)
+
+# ANSI Colors
+ANSI_RED = "\033[91m"
+ANSI_YELLOW = "\033[93m"
+ANSI_RESET = "\033[0m"
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 MEMORY_DIR = Path(__file__).resolve().parent
@@ -577,6 +588,11 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
     
     total_bytes = 0
     total_tokens = 0
+    
+    # Categorize tokens for smarter warnings
+    repo_tokens = 0
+    combined_tokens = 0
+    
     file_tokens: List[Tuple[str, int, int]] = []
     
     for path in sorted(pack_dir.rglob("*")):
@@ -588,14 +604,24 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
         file_tokens.append((rel, size, tokens))
         total_bytes += size
         total_tokens += tokens
+        
+        if rel.startswith("COMBINED/"):
+            combined_tokens += tokens
+        else:
+            repo_tokens += tokens
     
     for rel, size, tokens in file_tokens:
         lines.append(f"{rel:<60} {size:>10} {tokens:>12}")
     
+    # Effective context size usually excludes the COMBINED/ folder duplications
+    # but includes repo/ and meta/
+    effective_tokens = repo_tokens
+    
     lines.extend([
         "",
         "-" * 85,
-        f"{'TOTAL':<60} {total_bytes:>10} {total_tokens:>12}",
+        f"{'TOTAL (All Files)':<60} {total_bytes:>10} {total_tokens:>12}",
+        f"{'EFFECTIVE (Source Only)':<60} {'-':>10} {effective_tokens:>12}",
         "",
         "## Summary",
         "",
@@ -605,23 +631,22 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
         "",
     ])
     
-    # Add warnings
-    if total_tokens > TOKEN_LIMIT_CRITICAL:
-        warning = f"[!] CRITICAL: Pack exceeds {TOKEN_LIMIT_CRITICAL:,} tokens. May not fit in most LLM contexts!"
+    # Add warnings (based on effective tokens)
+    if effective_tokens > TOKEN_LIMIT_CRITICAL:
+        warning = f"[!] CRITICAL: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_CRITICAL:,} tokens. May not fit in most LLM contexts!"
         warnings.append(warning)
         lines.append(warning)
-    elif total_tokens > TOKEN_LIMIT_WARNING:
-        warning = f"[!] WARNING: Pack exceeds {TOKEN_LIMIT_WARNING:,} tokens. Consider using delta mode or splitting."
+    elif effective_tokens > TOKEN_LIMIT_WARNING:
+        warning = f"[!] WARNING: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_WARNING:,} tokens. Consider using delta mode or splitting."
         warnings.append(warning)
         lines.append(warning)
     else:
-        lines.append(f"[OK] Pack is within typical LLM context limits ({TOKEN_LIMIT_WARNING:,} tokens)")
+        lines.append(f"[OK] Effective pack size ({effective_tokens:,} tokens) is within limits.")
     
     lines.append("")
-    
+
     (pack_dir / "meta" / "CONTEXT.txt").write_text("\n".join(lines), encoding="utf-8")
-    
-    return total_tokens, warnings
+    return effective_tokens, warnings
 
 
 def copy_repo_files(
@@ -808,7 +833,8 @@ def make_pack(
     # Generate token context report with warnings
     total_tokens, token_warnings = write_context_report(out_dir)
     for warning in token_warnings:
-        print(warning)
+        color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
+        print(f"{color}{warning}{ANSI_RESET}")
 
     write_json(BASELINE_PATH, manifest)
 
