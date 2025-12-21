@@ -2,6 +2,18 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [1.1.0] - 2025-12-21
+
+### Added
+- STYLE-002: Engineering Integrity preference (foundational fixes over patches).
+- STYLE-003: Mandatory Changelog Synchronisation preference.
+- Official Blue Launcher with icon for LLM_PACKER.
+
+### Changed
+- LLM_PACKER refactoring: Moved core logic to `Engine/` subfolder.
+- Renamed `LLM-PACKER` to `LLM_PACKER` to resolve Python import limitations.
+- Hardened STYLE-001 (Blanket Approval Ban and Mandatory Ceremony Phase).
+
 ## [1.0.0] - 2025-12-21
 
 ### Added
