@@ -1,6 +1,6 @@
 # ADR-003: Transition to LLM_PACKER for Python Compatibility
 
-**Status:** Proposed
+**Status:** Accepted
 **Date:** 2025-12-21
 **Confidence:** High
 **Impact:** High
