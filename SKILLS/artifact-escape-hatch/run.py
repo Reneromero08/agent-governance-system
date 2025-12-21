@@ -9,7 +9,7 @@ artifact output directories. It is run as a governance fixture.
 Allowed output roots (per INV-006):
 - CONTRACTS/_runs/
 - CORTEX/_generated/
-- MEMORY/LLM-PACKER-1.1/_packs/
+- MEMORY/LLM-PACKER/_packs/
 - BUILD/ (user outputs only)
 """
 
@@ -23,7 +23,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 ALLOWED_ARTIFACT_ROOTS = {
     PROJECT_ROOT / "CONTRACTS" / "_runs",
     PROJECT_ROOT / "CORTEX" / "_generated",
-    PROJECT_ROOT / "MEMORY" / "LLM-PACKER-1.1" / "_packs",
+    PROJECT_ROOT / "MEMORY" / "LLM-PACKER" / "_packs",
     PROJECT_ROOT / "BUILD",
 }
 
