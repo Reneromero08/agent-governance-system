@@ -8,8 +8,10 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary rule.
 - `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md` defining LITE + SPLIT_LITE pack behavior.
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
+- `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
 - Governance fixture documenting the privacy boundary rule.
 - Governance fixture documenting log output root compliance.
+- Governance fixture documenting context edit restrictions.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
 - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
@@ -20,7 +22,8 @@ All notable changes to the Agent Governance System will be documented in this fi
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
 - Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/`.
 - Updated canon docs (CONTRACT.md, CRISIS.md, STEWARDSHIP.md) to reflect correct log locations (see ADR-015).
-- Bumped `canon_version` to 2.7.1.
+- Clarified CANON/CONTRACT.md Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (see ADR-016).
+- Bumped `canon_version` to 2.7.2.
 - Commit ceremony now treats an explicit "commit" directive as approval once checks pass and staged files are listed.
 
 ### Fixed

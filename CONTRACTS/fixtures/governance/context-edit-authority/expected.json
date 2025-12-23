@@ -1,0 +1,4 @@
+{
+  "test": "context_edit_authority",
+  "check": "enforce_context_edit_restrictions"
+}
