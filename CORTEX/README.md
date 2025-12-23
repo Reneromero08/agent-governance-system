@@ -17,6 +17,7 @@ Agents must use `query.py` to discover files instead of using OS calls directly.
 To print a section by id from the generated index:
 - `python TOOLS/cortex.py read <section_id>`
 - `python TOOLS/cortex.py resolve <section_id>`
+- `python TOOLS/cortex.py search "<query>"`
 
 Citation format: `section_id:start_line-end_line`
 Example: `CANON/CONTRACT.md::canon-contract::01:1-12`

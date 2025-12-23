@@ -10,6 +10,7 @@ Usage:
 
 import argparse
 import json
+import signal
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
@@ -17,6 +18,9 @@ from typing import Any, Dict, List, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SECTION_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SECTION_INDEX.json"
+
+if hasattr(signal, "SIGPIPE"):
+    signal.signal(signal.SIGPIPE, signal.SIG_DFL)
 
 
 def load_section_index(path: Path) -> List[Dict[str, Any]]:
@@ -28,6 +32,14 @@ def find_section(sections: List[Dict[str, Any]], section_id: str) -> Optional[Di
         if record.get("section_id") == section_id:
             return record
     return None
+
+
+def normalize_section_id_arg(section_id: str) -> str:
+    value = str(section_id or "").strip()
+    if len(value) >= 2:
+        if value[0] == value[-1] and value[0] in {"\"", "'"}:
+            return value[1:-1]
+    return value
 
 
 def read_section_text(project_root: Path, record: Dict[str, Any]) -> str:
@@ -127,9 +139,10 @@ def cmd_read(args: argparse.Namespace) -> int:
         print(f"Failed to read SECTION_INDEX: {exc}", file=sys.stderr)
         return 2
 
-    record = find_section(sections, args.section_id)
+    section_id = normalize_section_id_arg(args.section_id)
+    record = find_section(sections, section_id)
     if not record:
-        print(f"Unknown section_id: {args.section_id}", file=sys.stderr)
+        print(f"Unknown section_id: {section_id}", file=sys.stderr)
         return 2
 
     try:
@@ -153,9 +166,10 @@ def cmd_resolve(args: argparse.Namespace) -> int:
         print(f"Failed to read SECTION_INDEX: {exc}", file=sys.stderr)
         return 2
 
-    record = find_section(sections, args.section_id)
+    section_id = normalize_section_id_arg(args.section_id)
+    record = find_section(sections, section_id)
     if not record:
-        print(f"Unknown section_id: {args.section_id}", file=sys.stderr)
+        print(f"Unknown section_id: {section_id}", file=sys.stderr)
         return 2
 
     payload = {
