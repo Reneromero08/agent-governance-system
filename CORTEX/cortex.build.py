@@ -218,11 +218,31 @@ def iter_section_index_paths() -> List[Path]:
 def extract_sections_from_markdown(md_path: Path) -> List[Dict[str, object]]:
     rel_path = md_path.relative_to(PROJECT_ROOT).as_posix()
     content = md_path.read_text(encoding="utf-8", errors="replace")
+    # Normalization contract for SECTION_INDEX hashing:
+    # - Normalize newlines to '\n' before slicing and hashing.
+    # - Hash is sha256 over the exact section slice (heading line through end_line inclusive).
+    content = content.replace("\r\n", "\n").replace("\r", "\n")
     lines = content.splitlines(keepends=True)
 
     headings: List[Tuple[int, int, str]] = []
+    in_fence = False
+    fence_token = ""
     for i, line in enumerate(lines, start=1):
-        match = _HEADING_RE.match(line.rstrip("\r\n"))
+        stripped = line.lstrip()
+        if stripped.startswith("```") or stripped.startswith("~~~"):
+            token = stripped[:3]
+            if not in_fence:
+                in_fence = True
+                fence_token = token
+            elif fence_token == token:
+                in_fence = False
+                fence_token = ""
+            continue
+
+        if in_fence:
+            continue
+
+        match = _HEADING_RE.match(line.rstrip("\n"))
         if not match:
             continue
         level = len(match.group(1))
@@ -273,7 +293,8 @@ def write_section_index() -> None:
     for md_path in iter_section_index_paths():
         all_sections.extend(extract_sections_from_markdown(md_path))
 
-    all_sections = sorted(all_sections, key=lambda r: r["section_id"])
+    # Deterministic ordering: by path, then start_line.
+    all_sections = sorted(all_sections, key=lambda r: (str(r["path"]).lower(), int(r["start_line"])))
     SECTION_INDEX_FILE.write_text(json.dumps(all_sections, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
