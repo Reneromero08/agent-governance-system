@@ -1,3 +1,5 @@
+Superseded by AGS_ROADMAP_MASTER.md
+
 # Repo Fix Tasks (Post v2.5.5)
 
 This is a task list derived from a contract-doc scan + local checks. It is intended to be implemented as minimal, correctness-first changes.

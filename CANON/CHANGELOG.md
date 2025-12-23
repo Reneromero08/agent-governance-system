@@ -13,9 +13,11 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
 - Bumped `canon_version` to 2.7.0.
+- Commit ceremony now treats an explicit "commit" directive as approval once checks pass and staged files are listed.
 
 ### Fixed
 - MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors when running `--test` on Windows systems.
+- Cortex builds now emit `CORTEX/_generated/cortex.json`, and CI runs canon governance checks to catch version drift.
 
 ### Removed
 - None.
