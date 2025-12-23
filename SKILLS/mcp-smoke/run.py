@@ -121,7 +121,7 @@ def main() -> int:
     output_path = Path(sys.argv[2])
     payload = load_json(input_path)
 
-    entrypoint_substring = payload.get("entrypoint_substring", "CONTRACTS/_runs/ags_mcp_entrypoint.py")
+    entrypoint_substring = payload.get("entrypoint_substring", "CONTRACTS/ags_mcp_entrypoint.py")
     args = payload.get("args", ["--test"])
 
     project_root = Path(__file__).resolve().parents[2]
