@@ -19,8 +19,10 @@ import json
 import os
 import re
 import sqlite3
+from hashlib import sha256
 from datetime import datetime, timezone
 from pathlib import Path
+from typing import Dict, List, Tuple
 
 import query as cortex_query
 
@@ -30,6 +32,23 @@ GENERATED_DIR = CORTEX_DIR / "_generated"
 SCHEMA_FILE = CORTEX_DIR / "schema.sql"
 DB_FILE = GENERATED_DIR / "cortex.db"
 VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
+SECTION_INDEX_FILE = GENERATED_DIR / "SECTION_INDEX.json"
+
+SECTION_INDEX_DIR_ALLOWLIST = {
+    "CANON",
+    "CONTRACTS",
+    "MAPS",
+    "SKILLS",
+    "CORTEX",
+}
+
+SECTION_INDEX_ROOT_ALLOWLIST = {
+    "README.md",
+    "AGENTS.md",
+    "AGS_ROADMAP_MASTER.md",
+}
+
+_HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)(?:\s+#+\s*)?$")
 
 
 def get_canon_version() -> str:
@@ -166,6 +185,98 @@ def write_json_snapshot() -> None:
     data = cortex_query.export_to_json()
     snapshot_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
 
+
+def _slugify_heading(heading: str) -> str:
+    slug = heading.strip().lower()
+    slug = re.sub(r"[^a-z0-9]+", "-", slug)
+    slug = re.sub(r"-{2,}", "-", slug).strip("-")
+    return slug or "section"
+
+
+def _normalize_path_for_id(path: str) -> str:
+    return Path(path).as_posix().lower()
+
+
+def iter_section_index_paths() -> List[Path]:
+    paths: List[Path] = []
+    for md_file in PROJECT_ROOT.rglob("*.md"):
+        if any(part.startswith(".") for part in md_file.parts):
+            continue
+        if any(part in ("BUILD", "_runs", "_packs", "_generated") for part in md_file.parts):
+            continue
+
+        rel = md_file.relative_to(PROJECT_ROOT)
+        if len(rel.parts) == 1 and rel.name in SECTION_INDEX_ROOT_ALLOWLIST:
+            paths.append(md_file)
+            continue
+        if rel.parts and rel.parts[0] in SECTION_INDEX_DIR_ALLOWLIST:
+            paths.append(md_file)
+            continue
+    return sorted(paths, key=lambda p: str(p.relative_to(PROJECT_ROOT)).lower())
+
+
+def extract_sections_from_markdown(md_path: Path) -> List[Dict[str, object]]:
+    rel_path = md_path.relative_to(PROJECT_ROOT).as_posix()
+    content = md_path.read_text(encoding="utf-8", errors="replace")
+    lines = content.splitlines(keepends=True)
+
+    headings: List[Tuple[int, int, str]] = []
+    for i, line in enumerate(lines, start=1):
+        match = _HEADING_RE.match(line.rstrip("\r\n"))
+        if not match:
+            continue
+        level = len(match.group(1))
+        heading = match.group(2).strip()
+        headings.append((i, level, heading))
+
+    if not headings:
+        return []
+
+    slug_counts: Dict[str, int] = {}
+    sections: List[Dict[str, object]] = []
+    for idx, (start_line, level, heading) in enumerate(headings):
+        end_line = len(lines)
+        for next_start, next_level, _ in headings[idx + 1 :]:
+            if next_level <= level:
+                end_line = next_start - 1
+                break
+
+        heading_slug = _slugify_heading(heading)
+        slug_counts[heading_slug] = slug_counts.get(heading_slug, 0) + 1
+        ordinal = slug_counts[heading_slug]
+        section_id = f"{_normalize_path_for_id(rel_path)}::{heading_slug}::{ordinal:02d}"
+
+        slice_text = "".join(lines[start_line - 1 : end_line])
+        slice_hash = sha256(slice_text.encode("utf-8")).hexdigest()
+
+        sections.append(
+            {
+                "section_id": section_id,
+                "path": rel_path,
+                "heading": heading,
+                "start_line": start_line,
+                "end_line": end_line,
+                "hash": slice_hash,
+            }
+        )
+
+    return sections
+
+
+def write_section_index() -> None:
+    """
+    Write SECTION_INDEX.json under CORTEX/_generated/.
+
+    Line numbers are 1-based and inclusive.
+    """
+    all_sections: List[Dict[str, object]] = []
+    for md_path in iter_section_index_paths():
+        all_sections.extend(extract_sections_from_markdown(md_path))
+
+    all_sections = sorted(all_sections, key=lambda r: r["section_id"])
+    SECTION_INDEX_FILE.write_text(json.dumps(all_sections, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+
 def main():
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     
@@ -179,6 +290,7 @@ def main():
     finally:
         conn.close()
     write_json_snapshot()
+    write_section_index()
 
 
 if __name__ == "__main__":
