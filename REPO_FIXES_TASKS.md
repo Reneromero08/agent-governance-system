@@ -28,6 +28,15 @@ This is a task list derived from a contract-doc scan + local checks. It is inten
 
 ## P1 (Missing enforcement / correctness gaps)
 
+- [ ] **LLM pack: add LITE profile + symbolic indexes**
+  - [ ] **[P0]** Implement `--profile lite` in `MEMORY/LLM_PACKER/Engine/packer.py` (FULL unchanged).
+  - [ ] **[P0]** Emit LITE-only indexes under `meta/`:
+    - `LITE_ALLOWLIST.json`, `LITE_OMITTED.json`, `LITE_START_HERE.md`
+    - `SKILL_INDEX.json`, `FIXTURE_INDEX.json`, `CODEBOOK.md`, `CODE_SYMBOLS.json`
+  - [ ] **[P0]** Smoke/CI validates LITE required meta + core.
+  - [ ] **[P1]** Optional: add `profile=test` (fixtures-heavy) for debugging (do not mix with LITE).
+  - [ ] **[P1]** Determinism: document which pack files are stable vs timestamped (no behavior change).
+
 - [ ] **Fix or remove the `governance.yml` workflow**
   - `/.github/workflows/governance.yml` runs `python TOOLS/critic.py --diff`, but `TOOLS/critic.py` does not implement `--diff`.
   - It also does not set up Python or install dependencies.
