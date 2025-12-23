@@ -12,6 +12,8 @@ This is a task list derived from a contract-doc scan + local checks. It is inten
     - `TOOLS/emergency.py` writes to `LOGS/emergency.log`.
     - `MCP/server.py` writes to `MCP/logs/audit.jsonl`.
     - `CANON/CHANGELOG.md` documents audit logging to `MCP/logs/audit.jsonl`.
+  - Mitigation available:
+    - Use `CONTRACTS/_runs/ags_mcp_entrypoint.py` to redirect MCP audit logs to `CONTRACTS/_runs/mcp_logs/`.
   - Pick one policy and make everything consistent:
     - Option A: Expand allowed output roots to include `LOGS/` and `MCP/logs/` (governance change: fixtures + canon + changelog + version bump).
     - Option B: Move all logs under an allowed root (e.g. `CONTRACTS/_runs/logs/`), update docs + code accordingly, and stop tracking runtime logs in git.
@@ -54,4 +56,3 @@ This is a task list derived from a contract-doc scan + local checks. It is inten
 - [ ] `python TOOLS/critic.py` passes
 - [ ] `python CONTRACTS/runner.py` passes
 - [ ] CI workflows pass on PR and on push (where applicable)
-

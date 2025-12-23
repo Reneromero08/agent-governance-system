@@ -1,0 +1,4 @@
+{
+  "entrypoint_substring": "CONTRACTS/_runs/ags_mcp_entrypoint.py",
+  "args": ["--test"]
+}

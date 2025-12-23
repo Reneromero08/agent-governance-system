@@ -15,6 +15,7 @@ Any fixture that fails will cause the runner to exit with a non-zero exit code.
 import subprocess
 import sys
 from pathlib import Path
+from typing import List, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 FIXTURES_DIR = Path(__file__).parent / "fixtures"
@@ -23,7 +24,7 @@ RUNS_DIR = Path(__file__).parent / "_runs"
 DEFAULT_VALIDATE = SKILLS_DIR / "_TEMPLATE" / "validate.py"
 
 
-def run_process(args: list[str]) -> subprocess.CompletedProcess:
+def run_process(args: List[str]) -> subprocess.CompletedProcess:
     return subprocess.run(args, capture_output=True, text=True)
 
 
@@ -36,11 +37,11 @@ def run_validation(validate_script: Path, actual_path: Path, expected_path: Path
     ])
 
 
-def iter_contract_inputs() -> list[Path]:
+def iter_contract_inputs() -> List[Path]:
     return sorted(FIXTURES_DIR.rglob("input.json"))
 
 
-def iter_skill_inputs() -> list[tuple[Path, Path]]:
+def iter_skill_inputs() -> List[Tuple[Path, Path]]:
     fixtures = []
     for skill_dir in sorted(SKILLS_DIR.iterdir()):
         if not skill_dir.is_dir() or skill_dir.name.startswith("_"):

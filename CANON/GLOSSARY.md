@@ -22,3 +22,4 @@ This glossary defines important terms used throughout the Agent Governance Syste
 - **Change ceremony** - The required steps to modify canon: ADR, update canon, add fixtures, bump version, update changelog.
 - **Entity** - A record in the cortex index representing a file or concept. Entities have an id, type, title, tags, and paths.
 - **Query** - A function in `CORTEX/query.py` that retrieves entities from the cortex index. Skills must use queries instead of filesystem access.
+- **MASTER_OVERRIDE** - A Sovereign directive token that authorizes bypassing repository governance rules for a single prompt, with mandatory audit logging and gated log access.

@@ -33,6 +33,13 @@ Additional directories contain tooling:
 - **CORTEX** - a shadow index (e.g. SQLite) that agents query instead of the raw filesystem.
 - **TOOLS** - helper scripts such as critics and linters.
 
+## MCP integration (external clients)
+
+AGS exposes an MCP server for IDEs and desktop clients. Use the entrypoint wrapper
+`CONTRACTS/_runs/ags_mcp_entrypoint.py` to keep audit logs under allowed output
+roots (`CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
+`mcp-extension-verify` skills. See `MCP/README.md` for client config examples.
+
 ## How to use
 
 This repository is a template: most files are placeholders that illustrate the intended structure. To adapt the system for your own project, fill in the canon, add decisions and ADRs, implement skills and write fixtures.

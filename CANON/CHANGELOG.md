@@ -5,14 +5,35 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
+- None.
+
+### Changed
+- None.
+
+### Fixed
+- None.
+
+### Removed
+- None.
+
+## [2.6.0] - 2025-12-23
+
+### Added
+- `CONTEXT/decisions/ADR-011-master-override.md` defining the `MASTER_OVERRIDE` interface.
+- `master-override` skill for override audit logging and gated log access.
+- `mcp-smoke` and `mcp-extension-verify` skills for MCP verification.
+- `doc-update` skill to standardize documentation updates.
 - `CONTEXT/archive/planning/` planning archive with an index and dated snapshots.
 - `REPO_FIXES_TASKS.md` checklist for contract-alignment follow-ups.
 
 ### Changed
+- Added `MASTER_OVERRIDE` to governance docs (Agreement, Contract, Genesis, Agents, Glossary).
+- MCP documentation now recommends logs under `CONTRACTS/_runs/mcp_logs/`.
 - Planning references now point at `CONTEXT/archive/planning/INDEX.md`.
+- Bumped `canon_version` to 2.6.0.
 
 ### Fixed
-- None.
+- Python 3.8 compatibility for governance tooling and contract runner.
 
 ### Removed
 - Root planning docs: `ROADMAP.md`, `AGS_MASTER_TODO.md`.
