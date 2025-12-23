@@ -26,6 +26,7 @@ import schema_validator  # New import
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CANON_DIR = PROJECT_ROOT / "CANON"
 SKILLS_DIR = PROJECT_ROOT / "SKILLS"
+CONTEXT_DIR = PROJECT_ROOT / "CONTEXT"
 CHANGELOG_PATH = CANON_DIR / "CHANGELOG.md"
 
 # Patterns that indicate raw filesystem access (forbidden in skills per INV-003)
@@ -232,6 +233,45 @@ def check_log_output_roots() -> List[str]:
     return violations
 
 
+def check_context_edits(changed_files: List[str]) -> List[str]:
+    """Check that CONTEXT record edits are not made (ADR-016 enforcement).
+
+    Editing existing CONTEXT records requires explicit user instruction AND task intent.
+    New files (appends) are allowed. Modifications to existing files are flagged.
+    """
+    violations = []
+    context_files = {
+        str(CONTEXT_DIR / "decisions"),
+        str(CONTEXT_DIR / "rejected"),
+        str(CONTEXT_DIR / "preferences"),
+    }
+
+    for changed_file in changed_files:
+        # Check if file is in CONTEXT subdirectories
+        file_path = PROJECT_ROOT / changed_file
+        for context_subdir in context_files:
+            if str(file_path).startswith(context_subdir):
+                # If it's a new file (.json or .md in CONTEXT), it's an append - OK
+                if file_path.exists():
+                    # Get git status to see if this is a modification (not new file)
+                    try:
+                        result = subprocess.run(
+                            ["git", "diff", "--cached", "--name-status", changed_file],
+                            capture_output=True, text=True, cwd=PROJECT_ROOT
+                        )
+                        status = result.stdout.strip().split('\t')[0] if result.stdout.strip() else ""
+                        # M = modified, A = added, D = deleted
+                        if status == "M":
+                            violations.append(
+                                f"CONTEXT record edited: {changed_file}. "
+                                f"Editing existing CONTEXT requires explicit user instruction AND task intent (ADR-016)."
+                            )
+                    except Exception:
+                        pass
+
+    return violations
+
+
 def main() -> int:
     quarantine_file = PROJECT_ROOT / ".quarantine"
     if quarantine_file.exists():
@@ -251,6 +291,7 @@ def main() -> int:
     all_violations.extend(check_skill_manifests())
     all_violations.extend(check_schema_validation())
     all_violations.extend(check_log_output_roots())  # Check ADR-015 compliance
+    all_violations.extend(check_context_edits(changed_files))  # Check ADR-016 compliance
     
     if all_violations:
         print(f"\n[critic] Found {len(all_violations)} violation(s):\n")
