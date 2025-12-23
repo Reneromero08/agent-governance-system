@@ -82,7 +82,7 @@ class CatalyticLedgerValidator:
         return True
 
     def validate_outputs(self) -> bool:
-        """Check durable outputs are valid."""
+        """Check durable outputs are valid and exist."""
         if not isinstance(self.outputs, list):
             self.errors.append("OUTPUTS is not a list")
             return False
@@ -92,6 +92,8 @@ class CatalyticLedgerValidator:
             "CORTEX/_generated",
             "MEMORY/LLM_PACKER/_packs",
         ]
+
+        project_root = Path(__file__).parent.parent
 
         for output in self.outputs:
             if not isinstance(output, dict) or "path" not in output:
@@ -104,6 +106,12 @@ class CatalyticLedgerValidator:
 
             if not is_allowed:
                 self.errors.append(f"Output {output_path} not under allowed roots")
+                return False
+
+            # Check that output actually exists
+            full_path = project_root / output_path
+            if not full_path.exists():
+                self.errors.append(f"Output {output_path} does not exist (ledger claims it but it's missing)")
                 return False
 
         return True
