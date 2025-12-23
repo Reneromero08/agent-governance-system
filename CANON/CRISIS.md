@@ -166,13 +166,13 @@ When a crisis occurs, the system should escalate to human stewards:
 
 1. **Email** (if configured): Send details of the crisis
 2. **Slack/Discord** (if configured): Post to #ags-alerts
-3. **Log file**: Always write to `LOGS/crisis.log`
+3. **Log file**: Always write to `CONTRACTS/_runs/crisis_logs/crisis.log`
 
 See `CANON/STEWARDSHIP.md` for escalation paths.
 
 ## Audit Trail
 
-All emergency actions are logged to `LOGS/emergency.log`:
+All emergency actions are logged to `CONTRACTS/_runs/emergency_logs/emergency.log` (see ADR-015):
 
 ```
 2025-12-21T15:30:00 QUARANTINE entered: "Suspected canon modification"
