@@ -6,6 +6,8 @@ Usage:
   python TOOLS/cortex.py read <section_id>
   python TOOLS/cortex.py search "<query>"
   python TOOLS/cortex.py resolve <section_id>
+  python TOOLS/cortex.py summary <section_id>
+  python TOOLS/cortex.py summary --list
 """
 
 import argparse
@@ -22,6 +24,7 @@ from typing import Any, Dict, List, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 SECTION_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SECTION_INDEX.json"
+SUMMARY_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SUMMARY_INDEX.json"
 RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
 SECTION_INDEX_REL = Path("CORTEX") / "_generated" / "SECTION_INDEX.json"
 
@@ -33,8 +36,19 @@ def load_section_index(path: Path) -> List[Dict[str, Any]]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
+def load_summary_index(path: Path) -> List[Dict[str, Any]]:
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
 def find_section(sections: List[Dict[str, Any]], section_id: str) -> Optional[Dict[str, Any]]:
     for record in sections:
+        if record.get("section_id") == section_id:
+            return record
+    return None
+
+
+def find_summary(records: List[Dict[str, Any]], section_id: str) -> Optional[Dict[str, Any]]:
+    for record in records:
         if record.get("section_id") == section_id:
             return record
     return None
@@ -341,6 +355,81 @@ def cmd_resolve(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_summary(args: argparse.Namespace) -> int:
+    if not SUMMARY_INDEX_PATH.exists():
+        print(f"SUMMARY_INDEX not found: {SUMMARY_INDEX_PATH}", file=sys.stderr)
+        if getattr(args, "section_id", None):
+            PROVENANCE.log_event(op="summary", section_id=normalize_section_id_arg(args.section_id))
+        else:
+            PROVENANCE.log_event(op="summary")
+        return 2
+
+    try:
+        records = load_summary_index(SUMMARY_INDEX_PATH)
+    except Exception as exc:
+        print(f"Failed to read SUMMARY_INDEX: {exc}", file=sys.stderr)
+        if getattr(args, "section_id", None):
+            PROVENANCE.log_event(op="summary", section_id=normalize_section_id_arg(args.section_id))
+        else:
+            PROVENANCE.log_event(op="summary")
+        return 2
+
+    if getattr(args, "list", False):
+        for record in sorted(records, key=lambda r: str(r.get("section_id") or "")):
+            section_id = str(record.get("section_id") or "").strip()
+            summary_path = str(record.get("summary_path") or "").strip()
+            if not section_id or not summary_path:
+                continue
+            try:
+                sys.stdout.write(f"{section_id}\t{summary_path}\n")
+            except BrokenPipeError:
+                return 0
+        PROVENANCE.log_event(op="summary")
+        return 0
+
+    if not getattr(args, "section_id", None):
+        print("Missing section_id (or use --list)", file=sys.stderr)
+        PROVENANCE.log_event(op="summary")
+        return 2
+
+    section_id = normalize_section_id_arg(args.section_id)
+    record = find_summary(records, section_id)
+    if not record:
+        print(f"Unknown section_id (no summary): {section_id}", file=sys.stderr)
+        PROVENANCE.log_event(op="summary", section_id=section_id)
+        return 2
+
+    summary_rel = str(record.get("summary_path") or "").strip()
+    if not summary_rel:
+        print(f"Missing summary_path for section_id: {section_id}", file=sys.stderr)
+        PROVENANCE.log_event(
+            op="summary",
+            section_id=section_id,
+            hash_value=str(record.get("section_hash") or "") or None,
+        )
+        return 2
+
+    summary_path = PROJECT_ROOT / Path(summary_rel)
+    try:
+        content = summary_path.read_text(encoding="utf-8", errors="replace")
+    except Exception as exc:
+        print(f"Failed to read summary: {exc}", file=sys.stderr)
+        PROVENANCE.log_event(
+            op="summary",
+            section_id=section_id,
+            hash_value=str(record.get("section_hash") or "") or None,
+        )
+        return 1
+
+    PROVENANCE.log_event(
+        op="summary",
+        section_id=section_id,
+        hash_value=str(record.get("section_hash") or "") or None,
+    )
+    sys.stdout.write(content)
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="cortex", description="Cortex utilities")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -356,6 +445,11 @@ def main() -> int:
     resolve_p = sub.add_parser("resolve", help="Print JSON metadata for a section_id")
     resolve_p.add_argument("section_id", help="Deterministic section id (<path>::<heading_slug>::<ordinal>)")
     resolve_p.set_defaults(func=cmd_resolve)
+
+    summary_p = sub.add_parser("summary", help="Print deterministic advisory summary for a section_id")
+    summary_p.add_argument("section_id", nargs="?", help="Deterministic section id (<path>::<heading_slug>::<ordinal>)")
+    summary_p.add_argument("--list", action="store_true", help="List available summaries (section_id<TAB>summary_path)")
+    summary_p.set_defaults(func=cmd_summary)
 
     args = parser.parse_args()
     return int(args.func(args))

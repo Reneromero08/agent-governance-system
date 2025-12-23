@@ -1,0 +1,12 @@
+{
+  "record": {
+    "section_id": "CANON/CONTRACT.md::canon-contract::01",
+    "heading": "Canon Contract",
+    "start_line": 1,
+    "end_line": 15,
+    "hash": "0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef",
+    "path": "CANON/CONTRACT.md"
+  },
+  "slice_text": "# Canon Contract\n\nThis document defines the non-negotiable rules and the authority gradient for the Agent Governance System (AGS).\n\nIt is the highest source of truth for all agents and humans interacting with this repository.\n\n## Non-negotiable rules\n\n1. Text outranks code.\n2. Determinism.\n3. Output roots.\n"
+}
+
