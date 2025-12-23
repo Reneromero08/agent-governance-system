@@ -5,10 +5,14 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
-- None.
+- `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary rule.
+- `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md` defining LITE + SPLIT_LITE pack behavior.
+- Governance fixture documenting the privacy boundary rule.
 
 ### Changed
-- None.
+- Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
+- LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
+- Bumped `canon_version` to 2.7.0.
 
 ### Fixed
 - None.
