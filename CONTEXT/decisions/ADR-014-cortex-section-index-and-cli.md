@@ -37,6 +37,8 @@ Add a generated section-level index and a minimal CLI tool:
 
 This is an implementation primitive; it does not add enforcement or CI gating by itself.
 
+If `CORTEX_RUN_ID` is set, Cortex CLI commands append JSONL provenance events to `CONTRACTS/_runs/<CORTEX_RUN_ID>/events.jsonl`.
+
 ## Alternatives considered
 
 - Store section data inside the SQLite DB only (harder to use from simple tools and fixtures).
