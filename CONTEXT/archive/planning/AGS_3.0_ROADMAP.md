@@ -1,3 +1,5 @@
+Superseded by AGS_ROADMAP_MASTER.md
+
 ---
 title: AGS Roadmap (Updated)
 version: 0.1
@@ -274,4 +276,3 @@ Exit conditions:
 4) Only then expand Skills and UI (Lane D).
 5) Add CI polish (Lane E).
 6) Start catalytic lane (Lane F) when the base is stable.
-

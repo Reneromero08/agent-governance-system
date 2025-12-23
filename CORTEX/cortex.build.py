@@ -22,6 +22,8 @@ import sqlite3
 from datetime import datetime, timezone
 from pathlib import Path
 
+import query as cortex_query
+
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 CORTEX_DIR = Path(__file__).resolve().parent
 GENERATED_DIR = CORTEX_DIR / "_generated"
@@ -157,6 +159,13 @@ def build_index(conn: sqlite3.Connection) -> int:
     conn.commit()
     return updates
 
+
+def write_json_snapshot() -> None:
+    """Write a JSON snapshot of the cortex index under _generated/."""
+    snapshot_path = GENERATED_DIR / "cortex.json"
+    data = cortex_query.export_to_json()
+    snapshot_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+
 def main():
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
     
@@ -169,6 +178,7 @@ def main():
         print(f"Cortex index updated at {DB_FILE} ({count} updates)")
     finally:
         conn.close()
+    write_json_snapshot()
 
 
 if __name__ == "__main__":
