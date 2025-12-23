@@ -71,6 +71,44 @@ def run_entrypoint(project_root: Path, entrypoint_rel: str, args: List[str]) -> 
         env=env,
     )
 
+def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
+    """
+    Ensure the recommended MCP entrypoint wrapper exists.
+
+    CI runs from a clean checkout, so anything under CONTRACTS/_runs/ must be
+    created at runtime (it is not checked into git).
+    """
+    if entrypoint_path.exists():
+        return
+
+    entrypoint_path.parent.mkdir(parents=True, exist_ok=True)
+    entrypoint_path.write_text(
+        "\n".join(
+            [
+                "#!/usr/bin/env python3",
+                '"""Generated runtime entrypoint for AGS MCP server."""',
+                "",
+                "import sys",
+                "from pathlib import Path",
+                "",
+                "PROJECT_ROOT = Path(__file__).resolve().parents[2]",
+                "if str(PROJECT_ROOT) not in sys.path:",
+                "    sys.path.insert(0, str(PROJECT_ROOT))",
+                "",
+                "import MCP.server as mcp_server",
+                "",
+                "# Redirect MCP audit logs to an allowed output root.",
+                'mcp_server.LOGS_DIR = PROJECT_ROOT / \"CONTRACTS\" / \"_runs\" / \"mcp_logs\"',
+                "",
+                "if __name__ == '__main__':",
+                "    mcp_server.main()",
+                "",
+            ]
+        )
+        + "\n",
+        encoding="utf-8",
+    )
+
 
 def instructions_for(client: str) -> List[str]:
     client_key = (client or "generic").strip().lower()
@@ -124,6 +162,8 @@ def main() -> int:
         return 1
 
     entrypoint_rel = find_entrypoint(cortex_query, entrypoint_substring)
+    entrypoint_path = project_root / Path(entrypoint_rel)
+    ensure_entrypoint_wrapper(entrypoint_path)
     result = run_entrypoint(project_root, entrypoint_rel, args)
 
     write_json(output_path, {
