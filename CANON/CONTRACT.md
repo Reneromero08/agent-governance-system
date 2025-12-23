@@ -6,6 +6,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 
 1. **Text outranks code.**  The canon (this directory) defines the working spec for this repository; implementation must follow.
 2. **No behavior change without ceremony.** Any change to the behavior of the system must:
+   - create an ADR (Architecture Decision Record) under `CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
    - update the affected module docs when operation changes (MAPS, SKILLS, MEMORY, CORTEX, TOOLS), not just AGENTS and CONTRACT;
