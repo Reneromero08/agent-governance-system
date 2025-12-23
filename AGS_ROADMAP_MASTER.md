@@ -55,9 +55,9 @@ Problem:
 - Mitigation exists via `CONTRACTS/_runs/ags_mcp_entrypoint.py` (redirect MCP logs under allowed roots).
 
 Tasks:
-- [ ] [P0] Choose the canonical policy: restrict logs to approved roots (recommended) or expand allowed roots to include `LOGS/` and `MCP/logs/`.
-- [ ] [P0] Update canon docs to match the chosen policy (`CANON/CONTRACT.md`, `CANON/INVARIANTS.md`, `CANON/CRISIS.md`, `CANON/STEWARDSHIP.md`, `CANON/CHANGELOG.md`).
-- [ ] [P0] Update code paths that write logs to comply (`TOOLS/emergency.py`, `MCP/server.py`), using the MCP redirect entrypoint if staying within approved roots.
+- [x] [P0] Choose the canonical policy: restrict logs to approved roots (recommended) or expand allowed roots to include `LOGS/` and `MCP/logs/`.
+- [x] [P0] Update canon docs to match the chosen policy (`CANON/CONTRACT.md`, `CANON/INVARIANTS.md`, `CANON/CRISIS.md`, `CANON/STEWARDSHIP.md`, `CANON/CHANGELOG.md`).
+- [x] [P0] Update code paths that write logs to comply (`TOOLS/emergency.py`, `MCP/server.py`), using the MCP redirect entrypoint if staying within approved roots.
 
 Exit conditions:
 - `TOOLS/critic.py` enforces the chosen output-root policy.
@@ -70,8 +70,8 @@ Problem:
 - Canon and AGENTS disagree on whether agents may modify context.
 
 Tasks:
-- [ ] [P0] Amend Canon wording to forbid editing existing records while allowing append-only additions under explicit `CONTEXT/*` areas.
-- [ ] [P1] Add critic enforcement for illegal edits to existing context records.
+- [x] [P0] Amend Canon wording to forbid editing existing records while allowing append-only additions under explicit `CONTEXT/*` areas.
+- [x] [P1] Add critic enforcement for illegal edits to existing context records.
 
 Exit conditions:
 - No higher-authority file contradicts a lower-authority file on this rule.
@@ -206,8 +206,8 @@ Problem:
 - CI can mask dependency failures and writes artifacts to disallowed roots.
 
 Tasks:
-- [ ] [P0] Remove `|| true` from dependency installs in `.github/workflows/contracts.yml` so missing deps fail fast.
-- [ ] [P0] Stop writing `BUILD/escape-check.json` in CI; write artifact-escape-hatch outputs under an allowed root (e.g., `CONTRACTS/_runs/`).
+- [x] [P0] Remove `|| true` from dependency installs in `.github/workflows/contracts.yml` so missing deps fail fast.
+- [x] [P0] Stop writing `BUILD/escape-check.json` in CI; write artifact-escape-hatch outputs under an allowed root (e.g., `CONTRACTS/_runs/`).
 
 Exit conditions:
 - CI fails loudly on missing dependencies.
@@ -219,9 +219,9 @@ Problem:
 - `/.github/workflows/governance.yml` runs unsupported commands and lacks Python/deps setup.
 
 Tasks:
-- [ ] [P1] Either implement `TOOLS/critic.py --diff` or update the workflow to run supported commands.
-- [ ] [P1] Ensure workflow sets up Python and installs `requirements.txt`.
-- [ ] [P1] Optionally merge into `contracts.yml` to keep a single source of CI truth.
+- [x] [P1] Either implement `TOOLS/critic.py --diff` or update the workflow to run supported commands.
+- [x] [P1] Ensure workflow sets up Python and installs `requirements.txt`.
+- [x] [P1] Optionally merge into `contracts.yml` to keep a single source of CI truth.
 
 Exit conditions:
 - Workflows reflect reality and are not decorative.
