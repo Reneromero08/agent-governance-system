@@ -10,6 +10,8 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Governance fixture documenting the privacy boundary rule.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
 - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
+- `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
+- `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
 ### Changed
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
