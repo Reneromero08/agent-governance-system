@@ -176,8 +176,8 @@ Problem:
 - Skill structure is uneven and not always fixture-verified.
 
 Tasks:
-- [ ] [P1] Ensure each skill has `SKILL.md`, `version.json`, and fixtures (positive + negative).
-- [ ] [P1] Ensure runner can execute skill fixtures in CI.
+- [x] [P1] Ensure each skill has `SKILL.md`, `version.json`, and fixtures (positive + negative).
+- [x] [P1] Ensure runner can execute skill fixtures in CI.
 
 Exit conditions:
 - `CONTRACTS/runner.py` can run skill fixtures in CI.
