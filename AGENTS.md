@@ -184,6 +184,8 @@ This is the highest-priority governance rule for agent behavior.
 
 These authorize **implementation** only. They are **never** implicit commit approvals.
 
+An explicit "commit" directive counts as approval to commit once checks pass and staged files are listed; no extra confirmation prompt is required.
+
 ### Explicit composite approvals
 Explicit composite directives that include "commit", "push", and "release" (for example,
 "commit, push, and release") count as approval for each action listed in that request.
@@ -201,7 +203,7 @@ Before any Git command:
 1. Run `TOOLS/critic.py` and `CONTRACTS/runner.py`. Confirm they pass.
 2. Stop all execution.
 3. List every file in the staging area.
-4. If the user already gave an explicit composite approval, proceed without re-prompting.
+4. If the user already gave an explicit approval for commit (including a standalone "commit" directive or a composite approval), proceed without re-prompting.
 5. Otherwise ask: "Ready for the Chunked Commit Ceremony? Shall I commit these [N] files?"
 6. Wait for explicit user approval.
 

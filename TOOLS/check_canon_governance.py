@@ -72,8 +72,16 @@ def check_changelog_current() -> List[str]:
         return errors
     
     content = CHANGELOG_PATH.read_text(errors="ignore")
-    if f"[{canon_ver}]" not in content:
-        errors.append(f"CHANGELOG.md missing entry for current version [{canon_ver}]")
+    if f"[{canon_ver}]" in content:
+        return errors
+    unreleased_match = re.search(
+        r"^## \[Unreleased\]\s*(.*?)(?=^## \[|\Z)",
+        content,
+        re.DOTALL | re.MULTILINE,
+    )
+    if unreleased_match and canon_ver in unreleased_match.group(1):
+        return errors
+    errors.append(f"CHANGELOG.md missing entry for current version [{canon_ver}]")
     
     return errors
 
