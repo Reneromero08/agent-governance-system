@@ -211,7 +211,7 @@ def iter_section_index_paths() -> List[Path]:
             continue
 
         rel = md_file.relative_to(PROJECT_ROOT)
-        if not include_fixtures and "fixtures" in {p.lower() for p in rel.parts}:
+        if not include_fixtures and len(rel.parts) >= 2 and rel.parts[0] == "CORTEX" and rel.parts[1] == "fixtures":
             continue
         if len(rel.parts) == 1 and rel.name in SECTION_INDEX_ROOT_ALLOWLIST:
             paths.append(md_file)
