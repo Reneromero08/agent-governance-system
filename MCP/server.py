@@ -21,7 +21,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 
 # Load schemas
 SCHEMAS_DIR = Path(__file__).parent / "schemas"
-LOGS_DIR = Path(__file__).parent / "logs"
+# Logging path (per ADR-015: all logs under CONTRACTS/_runs/)
+# When using CONTRACTS/_runs/ags_mcp_entrypoint.py, this is redirected to the entrypoint's location
+LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
 
 
 def load_schema(name: str) -> Dict:

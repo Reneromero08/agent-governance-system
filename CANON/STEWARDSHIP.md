@@ -139,7 +139,7 @@ In a constitutional crisis, stewards may:
 3. **System Reset**: Restore to a known-good tagged release
 4. **Governance Suspension**: Temporarily suspend normal governance (document extensively)
 
-All emergency actions MUST be documented in `LOGS/steward-actions.log`.
+All emergency actions MUST be documented in `CONTRACTS/_runs/steward_logs/steward-actions.log` (see ADR-015).
 
 ## Template: Steward Decision Record
 
