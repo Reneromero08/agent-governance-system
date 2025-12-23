@@ -122,6 +122,8 @@ Tasks:
 - [x] [P0] Add cortex read <section_id> command that resolves section_id via the generated index and prints the exact section content.
 - [x] [P0] Add cortex search <query> that returns matching section_ids (and headings) from SECTION_INDEX; do not return raw paths.
 - [x] [P1] Harden SECTION_INDEX parsing: ignore headings inside fenced code blocks; ensure stable hashing + ID normalization; ensure output path is under the Cortex generated root.
+- [ ] [P0] Add cortex resolve <section_id> to output JSON metadata (section_id, path, start_line, end_line, hash) for toolchain provenance and citations.
+- [ ] [P1] Clean up Cortex section indexing hygiene: ensure full normalized path in section_id, move fixtures under CORTEX/fixtures (or equivalent), write SECTION_INDEX under generated root, and ignore .claude/.
 
 ## C1. Define the Cortex schema (P0)
 

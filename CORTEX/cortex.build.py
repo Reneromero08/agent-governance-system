@@ -194,11 +194,16 @@ def _slugify_heading(heading: str) -> str:
 
 
 def _normalize_path_for_id(path: str) -> str:
-    return Path(path).as_posix().lower()
+    # Path normalization policy for section_id:
+    # - repo-relative
+    # - forward slashes
+    # - preserve repo casing (do not lowercase)
+    return Path(path).as_posix()
 
 
 def iter_section_index_paths() -> List[Path]:
     paths: List[Path] = []
+    include_fixtures = os.environ.get("CORTEX_SECTION_INDEX_INCLUDE_FIXTURES", "").strip().lower() in {"1", "true", "yes"}
     for md_file in PROJECT_ROOT.rglob("*.md"):
         if any(part.startswith(".") for part in md_file.parts):
             continue
@@ -206,6 +211,8 @@ def iter_section_index_paths() -> List[Path]:
             continue
 
         rel = md_file.relative_to(PROJECT_ROOT)
+        if not include_fixtures and "fixtures" in {p.lower() for p in rel.parts}:
+            continue
         if len(rel.parts) == 1 and rel.name in SECTION_INDEX_ROOT_ALLOWLIST:
             paths.append(md_file)
             continue
@@ -294,7 +301,7 @@ def write_section_index() -> None:
         all_sections.extend(extract_sections_from_markdown(md_path))
 
     # Deterministic ordering: by path, then start_line.
-    all_sections = sorted(all_sections, key=lambda r: (str(r["path"]).lower(), int(r["start_line"])))
+    all_sections = sorted(all_sections, key=lambda r: (str(r["path"]), int(r["start_line"])))
     SECTION_INDEX_FILE.write_text(json.dumps(all_sections, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
