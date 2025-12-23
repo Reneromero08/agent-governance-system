@@ -7,7 +7,9 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Added
 - `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary rule.
 - `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md` defining LITE + SPLIT_LITE pack behavior.
+- `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - Governance fixture documenting the privacy boundary rule.
+- Governance fixture documenting log output root compliance.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
 - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
@@ -16,7 +18,9 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Changed
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
-- Bumped `canon_version` to 2.7.0.
+- Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/`.
+- Updated canon docs (CONTRACT.md, CRISIS.md, STEWARDSHIP.md) to reflect correct log locations (see ADR-015).
+- Bumped `canon_version` to 2.7.1.
 - Commit ceremony now treats an explicit "commit" directive as approval once checks pass and staged files are listed.
 
 ### Fixed

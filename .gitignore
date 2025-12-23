@@ -17,9 +17,9 @@ CORTEX/_generated/SECTION_INDEX.json
 # Research Cache
 CONTEXT/research/*.db
 
-# MCP Logs
-MCP/logs/**
-!MCP/logs/.gitkeep
+# Legacy log locations (violate INV-006, moved to CONTRACTS/_runs/ per ADR-015)
+LOGS/
+MCP/logs/
 
 
 MEMORY/LLM_PACKER/_packs/**
