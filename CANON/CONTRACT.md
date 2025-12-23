@@ -11,7 +11,7 @@ This document defines the non-negotiable rules and the authority gradient for th
    - update the affected module docs when operation changes (MAPS, SKILLS, MEMORY, CORTEX, TOOLS), not just AGENTS and CONTRACT;
    - record the change in the changelog;
    - occur within the same merge request.
-3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit instruction. Deleting authored content is allowed only with explicit user instruction and confirmation, and CANON rules must follow the archiving requirements in `CANON/INVARIANTS.md`. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
+3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit user instruction AND explicit task intent (see ADR-016). Deleting authored content is allowed only with explicit user instruction and confirmation, and CANON rules must follow the archiving requirements in `CANON/INVARIANTS.md`. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
 4. **Stable token grammar.** Tokens used to reference entities and rules form a stable API. Changes to tokens require a major version bump and deprecation cycle.
 5. **Determinism.** Given the same inputs and canon, the system must produce the same outputs.
 6. **Output roots.** System-generated artifacts must be written only to:
