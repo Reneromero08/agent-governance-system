@@ -13,6 +13,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Governance fixture documenting log output root compliance.
 - Governance fixture documenting context edit restrictions.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
+- `CORTEX/SCHEMA.md` - Complete Cortex data model documentation (SQLite and JSON schemas, entity types, determinism, versioning).
 - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
