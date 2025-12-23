@@ -8,6 +8,8 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary rule.
 - `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md` defining LITE + SPLIT_LITE pack behavior.
 - Governance fixture documenting the privacy boundary rule.
+- `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
+- `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
 
 ### Changed
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
