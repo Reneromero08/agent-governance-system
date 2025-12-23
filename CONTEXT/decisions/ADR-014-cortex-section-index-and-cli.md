@@ -37,7 +37,7 @@ Add a generated section-level index and a minimal CLI tool:
 
 This is an implementation primitive; it does not add enforcement or CI gating by itself.
 
-If `CORTEX_RUN_ID` is set, Cortex CLI commands append JSONL provenance events to `CONTRACTS/_runs/<CORTEX_RUN_ID>/events.jsonl`.
+If `CORTEX_RUN_ID` is set, Cortex CLI commands append JSONL provenance events to `CONTRACTS/_runs/<CORTEX_RUN_ID>/events.jsonl` and (once per run) write `CONTRACTS/_runs/<CORTEX_RUN_ID>/run_meta.json` containing `run_id`, `created_at_utc`, `section_index_path`, `section_index_sha256`, and `cortex_provenance_schema_version`.
 
 ## Alternatives considered
 
