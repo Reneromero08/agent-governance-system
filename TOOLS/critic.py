@@ -29,6 +29,13 @@ SKILLS_DIR = PROJECT_ROOT / "SKILLS"
 CONTEXT_DIR = PROJECT_ROOT / "CONTEXT"
 CHANGELOG_PATH = CANON_DIR / "CHANGELOG.md"
 
+# Allowed output roots per CONTRACT Rule 6
+ALLOWED_OUTPUT_ROOTS = {
+    str(PROJECT_ROOT / "CONTRACTS" / "_runs"),
+    str(PROJECT_ROOT / "CORTEX" / "_generated"),
+    str(PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"),
+}
+
 # Patterns that indicate raw filesystem access (forbidden in skills per INV-003)
 RAW_FS_PATTERNS = [
     r'\bos\.walk\b',
@@ -272,6 +279,35 @@ def check_context_edits(changed_files: List[str]) -> List[str]:
     return violations
 
 
+def check_output_roots(changed_files: List[str]) -> List[str]:
+    """Check that artifacts are written only to allowed output roots (CONTRACT Rule 6).
+
+    Scans changed files for hardcoded artifact paths outside allowed roots.
+    """
+    violations = []
+    disallowed_patterns = [
+        (r'["\']BUILD/', "References BUILD/ (reserved for user outputs, not system artifacts)"),
+        (r'["\']\.\.?/BUILD/', "References BUILD/ via relative path"),
+        (r'["\']LOGS/', "References LOGS/ (moved to CONTRACTS/_runs/ per ADR-015)"),
+        (r'["\']MCP/logs', "References MCP/logs/ (moved to CONTRACTS/_runs/mcp_logs/ per ADR-015)"),
+    ]
+
+    python_files = [f for f in changed_files if f.endswith('.py')]
+    for file_path in python_files:
+        try:
+            full_path = PROJECT_ROOT / file_path
+            if not full_path.exists():
+                continue
+            content = full_path.read_text(encoding='utf-8', errors='ignore')
+            for pattern, msg in disallowed_patterns:
+                if re.search(pattern, content):
+                    violations.append(f"{file_path}: {msg}")
+        except Exception:
+            pass
+
+    return violations
+
+
 def main() -> int:
     quarantine_file = PROJECT_ROOT / ".quarantine"
     if quarantine_file.exists():
@@ -292,6 +328,7 @@ def main() -> int:
     all_violations.extend(check_schema_validation())
     all_violations.extend(check_log_output_roots())  # Check ADR-015 compliance
     all_violations.extend(check_context_edits(changed_files))  # Check ADR-016 compliance
+    all_violations.extend(check_output_roots(changed_files))  # Check CONTRACT Rule 6
     
     if all_violations:
         print(f"\n[critic] Found {len(all_violations)} violation(s):\n")
