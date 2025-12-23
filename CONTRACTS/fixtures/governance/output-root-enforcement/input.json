@@ -1,0 +1,4 @@
+{
+  "test": "output_root_enforcement",
+  "check": "allowed_artifact_roots"
+}
