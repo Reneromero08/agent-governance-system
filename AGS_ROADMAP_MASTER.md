@@ -117,6 +117,10 @@ This is the "every section indexed and summarized" requirement.
 
 Note: See `CONTEXT/research/iterations/2025-12-23-system1-system2-dual-db.md` for the System 1 (fast retrieval) vs System 2 (governance ledger) research model.
 
+Tasks:
+- [ ] [P0] Emit section-level index (section_id, path, heading, start_line, end_line, hash) as a generated artifact (cortex.json or SECTION_INDEX.json).
+- [ ] [P0] Add cortex read <section_id> command that resolves section_id via the generated index and prints the exact section content.
+
 ## C1. Define the Cortex schema (P0)
 
 Problem:
