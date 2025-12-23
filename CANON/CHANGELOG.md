@@ -5,6 +5,9 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
+- `TOOLS/catalytic_runtime.py` - CMP-01 runtime implementing 5-phase catalytic lifecycle (snapshot, execute, verify, record). Works with any command.
+- `TOOLS/catalytic_validator.py` - Run ledger validator for CMP-01 compliance checking in CI (restoration proof, output roots).
+- `CONTEXT/research/Catalytic Computing/CATALYTIC_IMPLEMENTATION_REPORT.md` - Comprehensive report on working prototype: architecture, PoC, what works well, improvements, integration opportunities.
 - `CANON/CATALYTIC_COMPUTING.md` - Canonical note defining catalytic computing for AGS (formal theory, engineering patterns, boundaries).
 - `CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` documenting the decision to add catalytic computing to canon.
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
