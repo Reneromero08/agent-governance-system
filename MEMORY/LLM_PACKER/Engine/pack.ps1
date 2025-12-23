@@ -2,9 +2,14 @@ param(
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
   [string]$Mode = "full",
+  [ValidateSet("full", "lite")]
+  [string]$Profile = "full",
   [string]$Stamp = "",
-  [switch]$Zip = $true,
-  [switch]$Combined = $true
+  [switch]$Zip,
+  [switch]$NoZip,
+  [switch]$Combined,
+  [switch]$NoCombined,
+  [switch]$SplitLite
 )
 
 $ErrorActionPreference = "Stop"
@@ -22,18 +27,53 @@ if (-not (Test-Path -LiteralPath $packer)) {
 }
 
 if ($Stamp -eq "") { $Stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss") }
-if ($OutDir -eq "") { $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-$Stamp" }
+
+$envProfile = $env:PACK_PROFILE
+if ($Profile -eq "full" -and -not [string]::IsNullOrWhiteSpace($envProfile)) {
+  $envProfileLower = $envProfile.Trim().ToLowerInvariant()
+  if ($envProfileLower -in @("full", "lite")) {
+    $Profile = $envProfileLower
+  }
+}
+
+$zipEnabled = $true
+$combinedEnabled = $true
+$splitLiteEnabled = $false
+
+if ($Profile -eq "lite") {
+  $zipEnabled = $false
+  $combinedEnabled = $false
+  $splitLiteEnabled = $true
+}
+
+if ($PSBoundParameters.ContainsKey("Zip")) { $zipEnabled = $true }
+if ($PSBoundParameters.ContainsKey("NoZip")) { $zipEnabled = $false }
+
+if ($PSBoundParameters.ContainsKey("Combined")) { $combinedEnabled = $true }
+if ($PSBoundParameters.ContainsKey("NoCombined")) { $combinedEnabled = $false }
+
+if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
+
+if ($OutDir -eq "") {
+  if ($Profile -eq "lite") {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-lite-$Stamp"
+  } else {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-$Stamp"
+  }
+}
 
 $args = @(
   "python",
   $packer,
   "--mode", $Mode,
+  "--profile", $Profile,
   "--out-dir", $OutDir
 )
 
 $args += @("--stamp", $Stamp)
-if ($Zip) { $args += "--zip" }
-if ($Combined) { $args += "--combined" }
+if ($zipEnabled) { $args += "--zip" }
+if ($combinedEnabled) { $args += "--combined" }
+if ($splitLiteEnabled) { $args += "--split-lite" }
 
 Write-Host "Running: $($args -join ' ')"
 & $args[0] $args[1..($args.Count - 1)]
