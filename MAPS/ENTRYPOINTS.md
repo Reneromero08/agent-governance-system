@@ -8,6 +8,7 @@ This document lists the primary entrypoints where agents and humans are expected
 - `CANON/INVARIANTS.md` - Modify to add or change invariants (rare).
 - `CANON/VERSIONING.md` - Modify when bumping the canon version or documenting deprecations.
 - `CANON/CHANGELOG.md` - Add entries for each change to the canon or system behavior.
+- `SKILLS/master-override/` - Audit logging and gated access for `MASTER_OVERRIDE` usage.
 
 ## Decision records
 
@@ -32,3 +33,12 @@ This document lists the primary entrypoints where agents and humans are expected
 - `MEMORY/LLM_PACKER/Engine/packer.py` - Modify when updating the pack format or manifest.
 - `MEMORY/LLM_PACKER/` - Windows wrapper scripts for running the packer.
 - `TOOLS/` - Add critics, linters and migration scripts here.
+
+## MCP integration
+
+- `MCP/README.md` - Client configuration and quick-start guidance.
+- `MCP/MCP_SPEC.md` - Protocol mapping and implementation status.
+- `MCP/server.py` - MCP server implementation (stdio).
+- `CONTRACTS/_runs/ags_mcp_entrypoint.py` - Recommended entrypoint wrapper (audit logs under allowed roots).
+- `SKILLS/mcp-smoke/` - CLI smoke test for MCP server.
+- `SKILLS/mcp-extension-verify/` - Extension-agnostic verification checklist + smoke test.
