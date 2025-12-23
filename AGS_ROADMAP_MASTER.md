@@ -232,9 +232,9 @@ Problem:
 - Output-root compliance is not enforced across the repo.
 
 Tasks:
-- [ ] [P1] Extend `TOOLS/critic.py` to detect artifacts written outside allowed roots.
-- [ ] [P1] Ensure enforcement aligns with the policy chosen in Lane A1.
-- [ ] [P1] Run the enforcement in CI and locally.
+- [x] [P1] Extend `TOOLS/critic.py` to detect artifacts written outside allowed roots.
+- [x] [P1] Ensure enforcement aligns with the policy chosen in Lane A1.
+- [x] [P1] Run the enforcement in CI and locally.
 
 Exit conditions:
 - Violations fail builds.
