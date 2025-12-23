@@ -16,6 +16,7 @@ Allowed output roots (per INV-006):
 import json
 import sys
 from pathlib import Path
+from typing import List
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
@@ -84,7 +85,7 @@ def is_runtime_artifact(path: Path) -> bool:
     return False
 
 
-def find_escaped_artifacts(scan_roots: list[Path]) -> list[Path]:
+def find_escaped_artifacts(scan_roots: List[Path]) -> List[Path]:
     """Find any generated runtime files outside allowed roots."""
     escaped = []
     for root in scan_roots:
