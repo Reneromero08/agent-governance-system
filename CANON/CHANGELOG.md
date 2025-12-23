@@ -15,7 +15,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Bumped `canon_version` to 2.7.0.
 
 ### Fixed
-- None.
+- MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors when running `--test` on Windows systems.
 
 ### Removed
 - None.
