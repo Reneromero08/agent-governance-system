@@ -10,9 +10,21 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+
       - name: Run critic
-        run: |
-          python TOOLS/critic.py --diff
+        run: python TOOLS/critic.py
+
       - name: Lint tokens
-        run: |
-          python TOOLS/lint_tokens.py
+        run: python TOOLS/lint_tokens.py
