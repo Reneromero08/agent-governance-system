@@ -119,9 +119,17 @@ All non-trivial work must be performed via a skill:
 - If a suitable skill exists, use it.
 - If no suitable skill exists:
   - propose a new skill
-  - write SKILL.md first
-  - define fixtures
+  - write SKILL.md first (manifest with metadata)
+  - write run.py (implementation)
+  - write validate.py (output validator)
+  - define fixtures (test cases with input.json and expected.json)
   - then implement
+
+Every skill must follow the contract defined in ADR-017:
+- SKILL.md: manifest with metadata
+- run.py: implementation script
+- validate.py: output validator (accept two JSON file paths, return 0/1)
+- fixtures/: test cases with input.json and expected.json
 
 Direct ad-hoc scripting is forbidden.
 
