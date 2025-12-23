@@ -5,34 +5,36 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
-- `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary rule.
-- `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md` defining LITE + SPLIT_LITE pack behavior.
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
-- Governance fixture documenting the privacy boundary rule.
-- Governance fixture documenting log output root compliance.
-- Governance fixture documenting context edit restrictions.
+- `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing skill contract (SKILL.md, run.py, validate.py, fixtures).
+- Governance fixtures for privacy boundary, log output roots, context edit authority, and output-root enforcement.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
+- `CORTEX/_generated/SUMMARY_INDEX.json` and `CORTEX/_generated/summaries/` (generated) for deterministic, advisory section summaries.
 - `CORTEX/SCHEMA.md` - Complete Cortex data model documentation (SQLite and JSON schemas, entity types, determinism, versioning).
-- `TOOLS/cortex.py` commands: `read`, `resolve`, `search`.
+- `TOOLS/cortex.py` commands: `read`, `resolve`, `search`, `summary`.
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
 ### Changed
-- Added a privacy boundary rule to restrict out-of-repo access without explicit user approval.
+- Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
-- Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/`.
-- Updated canon docs (CONTRACT.md, CRISIS.md, STEWARDSHIP.md) to reflect correct log locations (see ADR-015).
-- Clarified CANON/CONTRACT.md Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (see ADR-016).
-- Bumped `canon_version` to 2.7.2.
-- Commit ceremony now treats an explicit "commit" directive as approval once checks pass and staged files are listed.
+- Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/` (ADR-015).
+- Updated canon docs (CONTRACT.md, CRISIS.md, STEWARDSHIP.md, AGENTS.md) to reflect correct log locations and skill contract.
+- Clarified CANON/CONTRACT.md Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (ADR-016).
+- Enhanced CONTRACT.md Rule 2 to explicitly require ADRs for governance decisions and recommend them for significant code changes.
+- Enhanced AGENTS.md Section 5 to explicitly document the skill contract (SKILL.md, run.py, validate.py, fixtures) as defined in ADR-017.
+- Bumped `canon_version` to 2.7.3 (patch: governance clarifications and skill formalization).
 
 ### Fixed
-- MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors when running `--test` on Windows systems.
+- MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors.
 - `lint_tokens.py`: replaced Unicode warning/check marks with ASCII `[WARN]` and `[OK]` for cross-platform compatibility.
 - Cortex builds now emit `CORTEX/_generated/cortex.json`, and CI runs canon governance checks to catch version drift.
-- Consolidated CI workflows: merged governance.yml into contracts.yml (single source of CI truth); governance checks now run in contracts.yml pipeline.
+- Consolidated CI workflows: merged governance.yml into contracts.yml (single source of CI truth).
 - Added output-root enforcement to `critic.py`: detects hardcoded artifact paths outside allowed roots (CONTRACT Rule 6).
+- Fixed `TOOLS/codebook_build.py --check` to properly detect drift by comparing markdown entries (ignoring timestamps).
+- Added `validate.py` to all skills (doc-update, master-override, mcp-extension-verify, mcp-smoke) for uniform validation.
+- Updated README.md to reflect 8 repository layers (not 6): CANON, CONTEXT, MAPS, SKILLS, CONTRACTS, MEMORY, CORTEX, TOOLS.
 
 ### Removed
 - None.
