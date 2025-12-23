@@ -462,7 +462,7 @@ def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
         summary_rel = (Path("CORTEX") / "_generated" / "summaries" / filename).as_posix()
         summary_path = PROJECT_ROOT / Path(summary_rel)
 
-        summary_path.write_text(summary_md, encoding="utf-8", newline="\n")
+        summary_path.write_text(summary_md, encoding="utf-8")
 
         summary_records.append(
             {
