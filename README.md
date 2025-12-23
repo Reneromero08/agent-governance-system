@@ -52,6 +52,7 @@ Agents interacting with the system should follow the protocol described in `CANO
 4. Execute work through skills rather than ad-hoc scripts.
 5. Validate changes using the runner in `CONTRACTS`.
 6. Update the canon and changelog in the same commit when rules change.
+7. Default to repo-only access; request explicit permission before accessing paths outside the repo (see `CONTEXT/decisions/ADR-012-privacy-boundary.md`).
 
 ## How to extend AGS
 
