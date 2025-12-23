@@ -104,6 +104,7 @@ EXCLUDED_DIR_PARTS = {
 }
 
 CANON_VERSION_FILE = PROJECT_ROOT / "CANON" / "VERSIONING.md"
+GRAMMAR_VERSION = "1.0"
 
 def hash_file(path: Path) -> str:
     hasher = hashlib.sha256()
@@ -219,7 +220,11 @@ def build_state_manifest(project_root: Path) -> Tuple[Dict[str, Any], List[Dict[
         )
 
     files.sort(key=lambda e: e["path"])
-    manifest: Dict[str, Any] = {"canon_version": canon_version, "files": files}
+    manifest: Dict[str, Any] = {
+        "canon_version": canon_version,
+        "grammar_version": GRAMMAR_VERSION,
+        "files": files,
+    }
     return manifest, omitted
 
 
@@ -742,7 +747,7 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
                 "7) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt` (Snapshot specific)",
                 "",
                 "## Notes",
-                "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
+        "- `BUILD` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
                 "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
                 "- If `--combined` is enabled, `COMBINED/` contains `AGS-FULL-COMBINED-*` and `AGS-FULL-TREEMAP-*` outputs.",
                 "",
@@ -934,7 +939,7 @@ def write_start_here(pack_dir: Path) -> None:
             "6) `meta/ENTRYPOINTS.md` (snapshot-specific pointers)",
             "",
             "## Notes",
-            "- `BUILD/` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
+            "- `BUILD` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
             "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
             "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
             "",
@@ -977,7 +982,7 @@ def write_entrypoints(pack_dir: Path) -> None:
             "- `repo/CORTEX/query.py`",
             "",
             "Notes:",
-            "- `BUILD/` contents are not included. Only `meta/BUILD_TREE.txt` is captured.",
+            "- `BUILD` contents are not included. Only `meta/BUILD_TREE.txt` is captured.",
             "- Research under `repo/CONTEXT/research/` has no authority.",
             "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
             "",
@@ -1005,7 +1010,7 @@ def write_build_tree(pack_dir: Path, project_root: Path) -> None:
     build_dir = project_root / "BUILD"
     tree_path = pack_dir / "meta" / "BUILD_TREE.txt"
     if not build_dir.exists():
-        tree_path.write_text("BUILD/ does not exist.\n", encoding="utf-8")
+        tree_path.write_text("BUILD does not exist.\n", encoding="utf-8")
         return
     paths = [
         p.relative_to(project_root).as_posix()
@@ -1536,6 +1541,7 @@ def make_pack(
             "mode": mode,
             **({"profile": profile} if profile != "full" else {}),
             "canon_version": manifest.get("canon_version"),
+            "grammar_version": manifest.get("grammar_version"),
             "repo_digest": digest,
             "included_paths": include_paths,
             "deleted_paths": deleted,
