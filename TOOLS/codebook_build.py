@@ -352,13 +352,29 @@ def main():
     
     if args.check:
         if codebook_path.exists():
-            existing = codebook_path.read_text(encoding="utf-8")
-            # Compare entries only (ignore timestamp)
-            if compute_hash(json.dumps(codebook["entries"], sort_keys=True)) == \
-               compute_hash(json.dumps(build_codebook()["entries"], sort_keys=True)):
-                print("Codebook is up to date.")
+            existing_markdown = codebook_path.read_text(encoding="utf-8")
+            generated_markdown = generate_markdown(codebook)
+
+            # Compare markdown content, ignoring timestamp and metadata
+            # Extract entries section (everything between header and "Total entries")
+            def extract_entries_section(md_text):
+                # Remove generated_at line which changes every run
+                lines = [line for line in md_text.split('\n') if 'generated_at' not in line]
+                content = '\n'.join(lines)
+                # Extract from first "## " to "Total entries"
+                start = content.find('## Contract Rules')
+                end = content.find('*Total entries:')
+                if start >= 0 and end > start:
+                    return content[start:end].strip()
+                return content.strip()
+
+            existing_section = extract_entries_section(existing_markdown)
+            generated_section = extract_entries_section(generated_markdown)
+
+            if compute_hash(existing_section) == compute_hash(generated_section):
+                print("[codebook_build] Codebook is up to date.")
                 return 0
-        print("Codebook needs regeneration.")
+        print("[codebook_build] Codebook needs regeneration.")
         return 1
     
     # Write codebook with provenance header
