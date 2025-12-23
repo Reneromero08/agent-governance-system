@@ -17,6 +17,7 @@ All outputs are written under `MEMORY/LLM_PACKER/_packs/`.
 from __future__ import annotations
 
 import argparse
+import ast
 import hashlib
 import json
 import re
@@ -242,6 +243,276 @@ def load_baseline() -> Optional[Dict[str, Any]]:
 def write_json(path: Path, payload: Any) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+def _extract_markdown_section(text: str, heading: str) -> str:
+    lines = text.splitlines()
+    start = None
+    for idx, line in enumerate(lines):
+        if line.strip().lower() == f"## {heading}".lower():
+            start = idx + 1
+            break
+    if start is None:
+        return ""
+    out: List[str] = []
+    for line in lines[start:]:
+        if line.startswith("## "):
+            break
+        out.append(line.rstrip())
+        if len(out) >= 30:
+            break
+    return "\n".join([l for l in out if l.strip()]).strip()
+
+
+def _ast_signature(node: ast.AST) -> Dict[str, Any]:
+    if not isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+        return {}
+    args = node.args
+    posonly = [a.arg for a in getattr(args, "posonlyargs", [])]
+    normal = [a.arg for a in args.args]
+    kwonly = [a.arg for a in args.kwonlyargs]
+    return {
+        "posonlyargs": posonly,
+        "args": normal,
+        "vararg": args.vararg.arg if args.vararg else None,
+        "kwonlyargs": kwonly,
+        "kwarg": args.kwarg.arg if args.kwarg else None,
+    }
+
+
+def _extract_code_symbols(source_text: str, module_path: str) -> Dict[str, Any]:
+    try:
+        tree = ast.parse(source_text)
+    except SyntaxError as exc:
+        return {"module": module_path, "error": str(exc), "symbols": []}
+    symbols: List[Dict[str, Any]] = []
+
+    module_doc = ast.get_docstring(tree) or ""
+
+    for node in tree.body:
+        if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+            symbols.append(
+                {
+                    "kind": "function",
+                    "name": node.name,
+                    "qualname": node.name,
+                    "signature": _ast_signature(node),
+                    "docstring": ast.get_docstring(node) or "",
+                    "lineno": getattr(node, "lineno", None),
+                }
+            )
+        elif isinstance(node, ast.ClassDef):
+            symbols.append(
+                {
+                    "kind": "class",
+                    "name": node.name,
+                    "qualname": node.name,
+                    "bases": [getattr(b, "id", getattr(b, "attr", None)) for b in node.bases],
+                    "docstring": ast.get_docstring(node) or "",
+                    "lineno": getattr(node, "lineno", None),
+                }
+            )
+            for child in node.body:
+                if isinstance(child, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                    symbols.append(
+                        {
+                            "kind": "method",
+                            "name": child.name,
+                            "qualname": f"{node.name}.{child.name}",
+                            "signature": _ast_signature(child),
+                            "docstring": ast.get_docstring(child) or "",
+                            "lineno": getattr(child, "lineno", None),
+                        }
+                    )
+
+    return {"module": module_path, "docstring": module_doc, "symbols": symbols}
+
+
+def _collect_fixture_preview(project_root: Path, rel_path: str, size_bytes: int) -> Dict[str, Any]:
+    preview: Dict[str, Any] = {"type": None}
+    if not rel_path.endswith(".json"):
+        return preview
+    if size_bytes > 256 * 1024:
+        preview["type"] = "json"
+        preview["keys"] = None
+        preview["note"] = "skipped_large_json"
+        return preview
+    try:
+        payload = json.loads((project_root / rel_path).read_text(encoding="utf-8", errors="replace"))
+    except Exception:
+        preview["type"] = "json"
+        preview["keys"] = None
+        preview["note"] = "parse_error"
+        return preview
+    if isinstance(payload, dict):
+        preview["type"] = "object"
+        preview["keys"] = sorted(list(payload.keys()))[:30]
+    elif isinstance(payload, list):
+        preview["type"] = "array"
+        preview["length"] = len(payload)
+    else:
+        preview["type"] = type(payload).__name__
+    return preview
+
+
+def write_lite_indexes(
+    pack_dir: Path,
+    *,
+    project_root: Path,
+    include_paths: Sequence[str],
+    omitted_paths: Sequence[str],
+    files_by_path: Dict[str, Dict[str, Any]],
+) -> None:
+    meta_dir = pack_dir / "meta"
+    meta_dir.mkdir(parents=True, exist_ok=True)
+
+    allowlist = {
+        "profile": "lite",
+        "required_includes": [
+            "AGENTS.md",
+            "README.md",
+            "CANON/**",
+            "MAPS/**",
+            "CONTRACTS/runner.py",
+            "CORTEX/query.py",
+            "TOOLS/critic.py",
+            "SKILLS/**/SKILL.md",
+            "SKILLS/**/version.json",
+        ],
+        "excludes": [
+            "**/fixtures/**",
+            "**/_runs/**",
+            "**/_generated/**",
+            "CONTEXT/research/**",
+            "CONTEXT/archive/**",
+            "MEMORY/**/_packs/**",
+            "**/*.cmd",
+            "**/*.ps1",
+        ],
+    }
+    write_json(meta_dir / "LITE_ALLOWLIST.json", allowlist)
+
+    omitted: List[Dict[str, Any]] = []
+    for rel in sorted(omitted_paths):
+        entry = files_by_path.get(rel)
+        if not entry:
+            continue
+        omitted.append(
+            {
+                "path": rel,
+                "bytes": entry.get("size"),
+                "sha256": entry.get("hash"),
+            }
+        )
+    write_json(meta_dir / "LITE_OMITTED.json", omitted)
+
+    lite_start_here = "\n".join(
+        [
+            "# LITE Pack: START HERE",
+            "",
+            "This is a discussion-first pack profile. It includes high-signal governance + interfaces and omits bulk payload (fixtures, archives, and most code).",
+            "",
+            "## What is included",
+            "- `COMBINED/SPLIT/*` (00..07) for read-order and contracts summaries",
+            "- `meta/*` inventories (FILE_TREE, FILE_INDEX, PACK_INFO, etc.)",
+            "- Core repo entrypoints (AGENTS, CANON, MAPS, runner/query/critic, skill manifests)",
+            "",
+            "## What is omitted",
+            "- Fixture trees and large snapshots are not copied into `repo/**` in this profile.",
+            "- See `meta/LITE_OMITTED.json` for the omitted path list (with sizes and hashes).",
+            "",
+            "## When you need FULL",
+            "- Use the FULL profile to access the complete `repo/**` snapshot for deep dives and exact reconstruction.",
+            "",
+        ]
+    ).rstrip() + "\n"
+    (meta_dir / "LITE_START_HERE.md").write_text(lite_start_here, encoding="utf-8")
+
+    # SKILL_INDEX.json (from SKILL.md files that are included in LITE)
+    skill_index: List[Dict[str, Any]] = []
+    skill_manifests = [p for p in include_paths if p.startswith("SKILLS/") and p.endswith("/SKILL.md")]
+    for rel in sorted(skill_manifests):
+        skill_name = rel.split("/")[1] if len(rel.split("/")) >= 2 else rel
+        text = read_text(project_root / rel)
+        skill_index.append(
+            {
+                "name": skill_name,
+                "path": f"repo/{rel}",
+                "required_canon_version": next(
+                    (line.split(":", 1)[1].strip() for line in text.splitlines() if "required_canon_version" in line),
+                    "",
+                ),
+                "inputs": _extract_markdown_section(text, "Inputs"),
+                "outputs": _extract_markdown_section(text, "Outputs"),
+                "constraints": _extract_markdown_section(text, "Constraints"),
+            }
+        )
+    write_json(meta_dir / "SKILL_INDEX.json", skill_index)
+
+    # FIXTURE_INDEX.json (inventory only; do not copy blobs)
+    fixture_index: List[Dict[str, Any]] = []
+    for rel, entry in sorted(files_by_path.items(), key=lambda kv: kv[0]):
+        if "/fixtures/" not in rel:
+            continue
+        if not rel.endswith(".json"):
+            continue
+        size = int(entry.get("size") or 0)
+        fixture_index.append(
+            {
+                "path": rel,
+                "bytes": size,
+                "sha256": entry.get("hash"),
+                "preview": _collect_fixture_preview(project_root, rel, size),
+            }
+        )
+        if len(fixture_index) >= 5000:
+            break
+    write_json(meta_dir / "FIXTURE_INDEX.json", fixture_index)
+
+    # CODEBOOK.md (hot entrypoints table)
+    hot_paths: List[str] = [
+        "CONTRACTS/runner.py",
+        "CORTEX/query.py",
+        "TOOLS/critic.py",
+        "MEMORY/LLM_PACKER/Engine/packer.py",
+    ]
+    for rel in sorted({p.replace("SKILLS/", "SKILLS/") for p in files_by_path.keys() if p.startswith("SKILLS/") and p.endswith("/run.py")}):
+        hot_paths.append(rel)
+
+    def module_purpose(path_rel: str) -> str:
+        abs_path = project_root / path_rel
+        if not abs_path.exists():
+            return "not present in repo"
+        text = read_text(abs_path)
+        symbols = _extract_code_symbols(text, path_rel)
+        doc = (symbols.get("docstring") or "").strip().splitlines()
+        return doc[0].strip() if doc else "see file"
+
+    codebook_lines = [
+        "# CODEBOOK (LITE)",
+        "",
+        "Symbolic table of hot entrypoints. This file does not embed full source bodies.",
+        "",
+        "| Path | Included in LITE | Purpose |",
+        "|---|---:|---|",
+    ]
+    include_set = set(include_paths)
+    for rel in sorted(set(hot_paths)):
+        included = "yes" if rel in include_set else "no"
+        purpose = module_purpose(rel).replace("|", "\\|")
+        codebook_lines.append(f"| `repo/{rel}` | {included} | {purpose} |")
+    codebook_lines.append("")
+    (meta_dir / "CODEBOOK.md").write_text("\n".join(codebook_lines), encoding="utf-8")
+
+    # CODE_SYMBOLS.json (AST symbols for included code files only; no bodies)
+    code_symbols: List[Dict[str, Any]] = []
+    for rel in sorted(include_paths):
+        if not rel.endswith(".py"):
+            continue
+        abs_path = project_root / rel
+        if not abs_path.exists():
+            continue
+        code_symbols.append(_extract_code_symbols(read_text(abs_path), rel))
+    write_json(meta_dir / "CODE_SYMBOLS.json", code_symbols)
 
 
 def verify_manifest(pack_dir: Path) -> Tuple[bool, List[str]]:
@@ -492,6 +763,161 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     )
 
 
+def write_split_pack_lite(pack_dir: Path) -> None:
+    """
+    Write a discussion-first SPLIT set alongside the full SPLIT docs.
+
+    This does not affect what FULL includes/copies under repo/**; it is derived
+    documentation intended for fast navigation and lower token load.
+    """
+    split_dir = pack_dir / "COMBINED" / "SPLIT_LITE"
+    split_dir.mkdir(parents=True, exist_ok=True)
+
+    def write(path: Path, text: str) -> None:
+        path.write_text(text.rstrip() + "\n", encoding="utf-8")
+
+    write(
+        split_dir / "AGS-00_INDEX.md",
+        "\n".join(
+            [
+                "# AGS Pack Index (SPLIT_LITE)",
+                "",
+                "This directory contains a compressed, discussion-first map of the pack (pointers + indexes).",
+                "",
+                "## Read order",
+                "1) `repo/AGENTS.md`",
+                "2) `repo/README.md`",
+                "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
+                "4) `repo/MAPS/ENTRYPOINTS.md`",
+                "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/*/SKILL.md`",
+                "6) `repo/CORTEX/query.py` and `repo/TOOLS/critic.py`",
+                "7) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
+                "8) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                "",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-01_CANON.md",
+        "\n".join(
+            [
+                "# Canon (SPLIT_LITE)",
+                "",
+                "See `repo/CANON/*` (canonical rules).",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-02_ROOT.md",
+        "\n".join(
+            [
+                "# Root (SPLIT_LITE)",
+                "",
+                "- `repo/AGENTS.md` (agent procedure)",
+                "- `repo/README.md` (orientation)",
+                "- `repo/.gitignore` (generated artifacts exclusions)",
+                "",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-03_MAPS.md",
+        "\n".join(
+            [
+                "# Maps (SPLIT_LITE)",
+                "",
+                "- Core navigation: `repo/MAPS/ENTRYPOINTS.md`",
+                "- Data flow: `repo/MAPS/DATA_FLOW.md`",
+                "",
+                "## Repo File Tree",
+                "",
+                "See `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`.",
+                "",
+            ]
+        ),
+    )
+
+    # Skills summary table from the repo snapshot (if present in the pack).
+    skills_root = pack_dir / "repo" / "SKILLS"
+    skill_names = sorted([p.name for p in skills_root.iterdir() if p.is_dir() and not p.name.startswith("_")]) if skills_root.exists() else []
+    rows = ["| Skill | Contract | Entrypoint (repo path, may be omitted in LITE) |", "|---|---|---|"]
+    for name in skill_names:
+        contract = f"`repo/SKILLS/{name}/SKILL.md`"
+        entry = f"`repo/SKILLS/{name}/run.py`" if (skills_root / name / "run.py").exists() else f"`repo/SKILLS/{name}/`"
+        rows.append(f"| `{name}` | {contract} | {entry} |")
+    write(
+        split_dir / "AGS-05_SKILLS.md",
+        "\n".join(
+            [
+                "# Skills (SPLIT_LITE)",
+                "",
+                "LITE ships manifests + pointers; implementations are accessed on demand.",
+                "",
+                "In LITE, `repo/SKILLS/*/SKILL.md` is the required interface. `run.py` / `validate.py` may be omitted.",
+                "If you need implementation details, load them from a FULL (or TEST) pack or from the repo filesystem.",
+                "",
+                "## Skills Table",
+                "",
+                *rows,
+                "",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-04_CONTEXT.md",
+        "\n".join(
+            [
+                "# Context (SPLIT_LITE)",
+                "",
+                "- Decisions: `repo/CONTEXT/decisions/`",
+                "- Preferences: `repo/CONTEXT/preferences/`",
+                "",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-06_CONTRACTS.md",
+        "\n".join(
+            [
+                "# Contracts (SPLIT_LITE)",
+                "",
+                "- Runner: `repo/CONTRACTS/runner.py`",
+                "- LITE may omit fixtures; fixtures live in FULL (or TEST) packs.",
+                "- In LITE, use `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` for navigation, and `meta/FIXTURE_INDEX.json` if present.",
+                "",
+            ]
+        ),
+    )
+
+    write(
+        split_dir / "AGS-07_SYSTEM.md",
+        "\n".join(
+            [
+                "# System (SPLIT_LITE)",
+                "",
+                "LITE is laws + maps + indexes + pointers. Raw code and fixtures may be omitted in LITE.",
+                "When you need full implementation bodies, load them from a FULL (or TEST) pack or from the repo filesystem.",
+                "",
+                "- Cortex query interface: `repo/CORTEX/query.py`",
+                "- Governance critic: `repo/TOOLS/critic.py`",
+                "- MCP server: `repo/MCP/server.py`",
+                "- Packer engine: `repo/MEMORY/LLM_PACKER/Engine/packer.py`",
+                "",
+                "## Meta inventories",
+                "",
+                "- `meta/PACK_INFO.json` (pack metadata)",
+                "- `meta/REPO_STATE.json` (hash inventory; if present)",
+                "- `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` (navigation)",
+                "",
+            ]
+        ),
+    )
+
 def write_start_here(pack_dir: Path) -> None:
     text = "\n".join(
         [
@@ -659,29 +1085,63 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
         elif rel.startswith("COMBINED/"): category_map["COMBINED"].append(entry)
         else: category_map["OTHER"].append(entry)
 
-    # Effective tokens = repo/ + meta/ (excludes COMBINED/)
-    effective_tokens = total_tokens - sum(t for _, _, t in category_map["COMBINED"])
+    # "Repo+Meta" is the common baseline payload (excludes COMBINED/* outputs).
+    repo_meta_tokens = sum(t for rel, _, t in category_map["META"] if rel.startswith("meta/")) + sum(
+        t for rel, _, t in category_map["CANON"] + category_map["CONTEXT"] + category_map["SKILLS"] + category_map["CORTEX"] + category_map["TOOLS"] + category_map["REPO_ROOT"] + category_map["OTHER"]
+        if rel.startswith("repo/")
+    )
+
+    split_tokens = sum(t for rel, _, t in category_map["COMBINED"] if rel.startswith("COMBINED/SPLIT/"))
+    split_lite_tokens = sum(t for rel, _, t in category_map["COMBINED"] if rel.startswith("COMBINED/SPLIT_LITE/"))
+
+    combined_files = [
+        (rel, tokens)
+        for rel, _, tokens in category_map["COMBINED"]
+        if rel.startswith("COMBINED/AGS-FULL-COMBINED-") or rel.startswith("COMBINED/AGS-FULL-TREEMAP-")
+    ]
+    combined_files.sort(key=lambda it: it[0])
+
+    # "Effective" for legacy reporting kept as repo+meta only (no COMBINED/*).
+    effective_tokens = repo_meta_tokens
     
     lines: List[str] = [
         "# AGS Pack Context Report",
         "",
-        "## Category Summary",
+        "## Payload Token Counts",
         "",
-        f"{'Category':<15} {'Files':>8} {'Tokens':>12} {'% Effective':>12}",
-        "-" * 55
+        "These counts are reported per output payload (not summed across all pack outputs).",
+        "",
+        f"- `repo/` + `meta/` (baseline): {repo_meta_tokens:,} tokens",
+        f"- `COMBINED/SPLIT/**` (sum): {split_tokens:,} tokens",
+        f"- `COMBINED/SPLIT_LITE/**` (sum): {split_lite_tokens:,} tokens",
     ]
+
+    if combined_files:
+        lines.extend(["", "Combined single-file payloads:"])
+        for rel, tokens in combined_files:
+            lines.append(f"- `{rel}`: {tokens:,} tokens")
+
+    lines.extend(
+        [
+            "",
+            "## Category Summary",
+            "",
+            f"{'Category':<15} {'Files':>8} {'Tokens':>12} {'% Baseline':>12}",
+            "-" * 55,
+        ]
+    )
     
     for cat, files in category_map.items():
         if not files: continue
         cat_tokens = sum(t for _, _, t in files)
-        percent = (cat_tokens / effective_tokens * 100) if effective_tokens > 0 and cat != "COMBINED" else 0
+        percent = (cat_tokens / repo_meta_tokens * 100) if repo_meta_tokens > 0 and cat not in ("COMBINED",) else 0
         percent_str = f"{percent:>11.1f}%" if cat != "COMBINED" else "N/A"
         lines.append(f"{cat:<15} {len(files):>8} {cat_tokens:>12,} {percent_str}")
 
     lines.extend([
         "-" * 55,
-        f"{'EFFECTIVE':<15} {'-':>8} {effective_tokens:>12,} {'100.0%':>12}",
-        f"{'TOTAL (INC COMB)':<15} {sum(len(f) for f in category_map.values()):>8} {total_tokens:>12,} {'-':>12}",
+        f"{'BASELINE':<15} {'-':>8} {repo_meta_tokens:>12,} {'100.0%':>12}",
+        f"{'TOTAL (ALL)':<15} {sum(len(f) for f in category_map.values()):>8} {total_tokens:>12,} {'-':>12}",
         "",
         "## Detailed Breakdown",
         ""
@@ -712,18 +1172,26 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
             lines.append(f"- {filename:<45} {tokens:>10,} tokens")
         lines.append("")
 
-    # Add warnings (based on effective tokens)
+    # Add warnings (based on single payload size, not pack-wide totals)
     lines.append("## Status")
-    if effective_tokens > TOKEN_LIMIT_CRITICAL:
-        warning = f"[!] CRITICAL: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_CRITICAL:,} tokens."
+    payload_candidates: List[Tuple[str, int]] = [
+        ("repo/+meta/ baseline", repo_meta_tokens),
+        ("COMBINED/SPLIT/** (sum)", split_tokens),
+        ("COMBINED/SPLIT_LITE/** (sum)", split_lite_tokens),
+        *[(rel, tokens) for rel, tokens in combined_files],
+    ]
+    max_name, max_tokens = max(payload_candidates, key=lambda it: it[1]) if payload_candidates else ("(none)", 0)
+
+    if max_tokens > TOKEN_LIMIT_CRITICAL:
+        warning = f"[!] CRITICAL: Largest single payload ({max_name}) is {max_tokens:,} tokens (> {TOKEN_LIMIT_CRITICAL:,})."
         warnings.append(warning)
         lines.append(warning)
-    elif effective_tokens > TOKEN_LIMIT_WARNING:
-        warning = f"[!] WARNING: Effective pack size ({effective_tokens:,} tokens) exceeds {TOKEN_LIMIT_WARNING:,} tokens."
+    elif max_tokens > TOKEN_LIMIT_WARNING:
+        warning = f"[!] WARNING: Largest single payload ({max_name}) is {max_tokens:,} tokens (> {TOKEN_LIMIT_WARNING:,})."
         warnings.append(warning)
         lines.append(warning)
     else:
-        lines.append(f"[OK] Effective pack size ({effective_tokens:,} tokens) is within limits.")
+        lines.append(f"[OK] Largest single payload ({max_name}) is {max_tokens:,} tokens (within limits).")
     
     lines.append("")
 
@@ -745,6 +1213,34 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
 
     (pack_dir / "meta" / "CONTEXT.txt").write_text(report_text, encoding="utf-8")
     return effective_tokens, warnings
+
+
+def print_payload_token_counts(pack_dir: Path) -> None:
+    """
+    Print per-payload token counts to stdout.
+
+    This mirrors the `## Payload Token Counts` section in `meta/CONTEXT.txt`.
+    """
+    report_path = pack_dir / "meta" / "CONTEXT.txt"
+    if not report_path.exists():
+        return
+    text = read_text(report_path)
+    lines = text.splitlines()
+    start_idx: Optional[int] = None
+    for idx, line in enumerate(lines):
+        if line.strip() == "## Payload Token Counts":
+            start_idx = idx
+            break
+    if start_idx is None:
+        return
+    out: List[str] = []
+    for line in lines[start_idx:]:
+        if out and line.startswith("## "):
+            break
+        out.append(line)
+    if not out:
+        return
+    print("\n".join(out).rstrip() + "\n")
 
 
 def copy_repo_files(
@@ -940,6 +1436,8 @@ def write_provenance_manifest(pack_dir: Path) -> None:
 def make_pack(
     *,
     mode: str,
+    profile: str,
+    split_lite: bool,
     out_dir: Optional[Path],
     combined: bool,
     stamp: Optional[str],
@@ -980,6 +1478,48 @@ def make_pack(
         include_paths = sorted(set(current_files_by_path.keys()) | anchors)
         deleted = []
 
+    omitted_paths_for_lite: List[str] = []
+    if profile == "lite":
+        lite_include: List[str] = []
+        for rel in include_paths:
+            if rel.endswith((".cmd", ".ps1")):
+                omitted_paths_for_lite.append(rel)
+                continue
+            if "/fixtures/" in rel:
+                omitted_paths_for_lite.append(rel)
+                continue
+            if "/_runs/" in rel or "/_generated/" in rel:
+                omitted_paths_for_lite.append(rel)
+                continue
+            if rel.startswith("CONTEXT/research/") or rel.startswith("CONTEXT/archive/"):
+                omitted_paths_for_lite.append(rel)
+                continue
+            if "/_packs/" in rel and rel.startswith("MEMORY/"):
+                omitted_paths_for_lite.append(rel)
+                continue
+
+            if rel == "AGENTS.md":
+                lite_include.append(rel)
+            elif rel == "README.md":
+                lite_include.append(rel)
+            elif rel.startswith("CANON/"):
+                lite_include.append(rel)
+            elif rel.startswith("MAPS/"):
+                lite_include.append(rel)
+            elif rel == "CONTRACTS/runner.py":
+                lite_include.append(rel)
+            elif rel == "CORTEX/query.py":
+                lite_include.append(rel)
+            elif rel == "TOOLS/critic.py":
+                lite_include.append(rel)
+            elif rel.startswith("SKILLS/") and (rel.endswith("/SKILL.md") or rel.endswith("/version.json")):
+                lite_include.append(rel)
+            else:
+                omitted_paths_for_lite.append(rel)
+        include_paths = sorted(set(lite_include))
+    elif profile != "full":
+        raise ValueError(f"Unknown profile: {profile}")
+
     if out_dir.exists():
         shutil.rmtree(out_dir)
     (out_dir / "meta").mkdir(parents=True, exist_ok=True)
@@ -994,6 +1534,7 @@ def make_pack(
         out_dir / "meta" / "PACK_INFO.json",
         {
             "mode": mode,
+            **({"profile": profile} if profile != "full" else {}),
             "canon_version": manifest.get("canon_version"),
             "repo_digest": digest,
             "included_paths": include_paths,
@@ -1004,6 +1545,8 @@ def make_pack(
     write_start_here(out_dir)
     write_entrypoints(out_dir)
     write_split_pack(out_dir, repo_pack_paths)
+    if split_lite:
+        write_split_pack_lite(out_dir)
 
     effective_stamp = stamp or default_stamp_for_out_dir(out_dir)
     tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined))
@@ -1012,10 +1555,20 @@ def make_pack(
     if combined:
         write_combined_outputs(out_dir, stamp=effective_stamp)
 
+    if profile == "lite":
+        write_lite_indexes(
+            out_dir,
+            project_root=PROJECT_ROOT,
+            include_paths=include_paths,
+            omitted_paths=omitted_paths_for_lite,
+            files_by_path=current_files_by_path,
+        )
+
     write_pack_file_tree_and_index(out_dir)
     
     # Generate token context report with warnings
     total_tokens, token_warnings = write_context_report(out_dir)
+    print_payload_token_counts(out_dir)
     for warning in token_warnings:
         color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
         print(f"{color}{warning}{ANSI_RESET}")
@@ -1046,6 +1599,17 @@ if __name__ == "__main__":
         help="Pack mode: full includes all included text files; delta includes only changes since last baseline plus anchors.",
     )
     parser.add_argument(
+        "--profile",
+        choices=("full", "lite"),
+        default="full",
+        help="Pack profile: full is record-keeping; lite is discussion-first (contracts + interfaces + symbolic indexes).",
+    )
+    parser.add_argument(
+        "--split-lite",
+        action="store_true",
+        help="Also write COMBINED/SPLIT_LITE/** alongside COMBINED/SPLIT/** in the same pack.",
+    )
+    parser.add_argument(
         "--out-dir",
         default="",
         help="Output directory for the pack, relative to the repo root and under MEMORY/LLM_PACKER/_packs/.",
@@ -1069,6 +1633,8 @@ if __name__ == "__main__":
 
     pack_dir = make_pack(
         mode=args.mode,
+        profile=args.profile,
+        split_lite=bool(args.split_lite),
         out_dir=out_dir,
         combined=bool(args.combined),
         stamp=args.stamp or None,
