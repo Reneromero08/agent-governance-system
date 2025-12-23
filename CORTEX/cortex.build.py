@@ -33,6 +33,10 @@ SCHEMA_FILE = CORTEX_DIR / "schema.sql"
 DB_FILE = GENERATED_DIR / "cortex.db"
 VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 SECTION_INDEX_FILE = GENERATED_DIR / "SECTION_INDEX.json"
+SUMMARY_INDEX_FILE = GENERATED_DIR / "SUMMARY_INDEX.json"
+SUMMARIES_DIR = GENERATED_DIR / "summaries"
+SUMMARY_SCHEMA_VERSION = "1.0"
+SUMMARY_MIN_SECTION_LINES = 10
 
 SECTION_INDEX_DIR_ALLOWLIST = {
     "CANON",
@@ -290,7 +294,7 @@ def extract_sections_from_markdown(md_path: Path) -> List[Dict[str, object]]:
     return sections
 
 
-def write_section_index() -> None:
+def write_section_index() -> List[Dict[str, object]]:
     """
     Write SECTION_INDEX.json under CORTEX/_generated/.
 
@@ -303,6 +307,178 @@ def write_section_index() -> None:
     # Deterministic ordering: by path, then start_line.
     all_sections = sorted(all_sections, key=lambda r: (str(r["path"]), int(r["start_line"])))
     SECTION_INDEX_FILE.write_text(json.dumps(all_sections, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    return all_sections
+
+
+def _safe_section_id_filename(section_id: str) -> str:
+    """
+    Deterministically map section_id -> safe filename stem.
+
+    Contract:
+    - stable across runs
+    - filesystem-safe (ASCII subset)
+    - collision-resistant via hash suffix when needed
+    """
+    raw = (section_id or "").strip()
+    cleaned = re.sub(r"[^A-Za-z0-9._-]+", "_", raw)
+    cleaned = re.sub(r"_{2,}", "_", cleaned).strip("._-") or "section"
+
+    digest = sha256(raw.encode("utf-8")).hexdigest()[:8]
+    max_len = 160
+    if len(cleaned) > max_len:
+        cleaned = cleaned[:max_len].rstrip("._-")
+        return f"{cleaned}_{digest}"
+    return f"{cleaned}_{digest}"
+
+
+def _collapse_ws(text: str) -> str:
+    return re.sub(r"\s+", " ", (text or "").strip())
+
+
+def _split_sentences(text: str) -> List[str]:
+    value = _collapse_ws(text)
+    if not value:
+        return []
+    parts = re.split(r"(?<=[.!?])\s+", value)
+    return [p.strip() for p in parts if p.strip()]
+
+
+def _read_section_slice(record: Dict[str, object]) -> str:
+    rel_path = str(record.get("path") or "").strip()
+    if not rel_path:
+        raise ValueError("section record missing path")
+    start_line = int(record.get("start_line") or 0)
+    end_line = int(record.get("end_line") or 0)
+    if start_line <= 0 or end_line <= 0 or end_line < start_line:
+        raise ValueError("invalid start_line/end_line in section record")
+
+    file_path = PROJECT_ROOT / Path(rel_path)
+    content = file_path.read_text(encoding="utf-8", errors="replace")
+    content = content.replace("\r\n", "\n").replace("\r", "\n")
+    lines = content.splitlines(keepends=True)
+
+    if end_line > len(lines):
+        raise ValueError("section line range outside file bounds")
+    return "".join(lines[start_line - 1 : end_line])
+
+
+def _summarize_section(record: Dict[str, object], slice_text: str) -> str:
+    heading = str(record.get("heading") or "").strip()
+    section_id = str(record.get("section_id") or "").strip()
+    start_line = int(record.get("start_line") or 0)
+    end_line = int(record.get("end_line") or 0)
+    hash_value = str(record.get("hash") or "").strip()
+    hash8 = hash_value[:8] if hash_value else ""
+
+    # Deterministic heuristic summary:
+    # - Use the first paragraph after the heading; fall back to first non-empty lines.
+    content_lines = slice_text.replace("\r\n", "\n").replace("\r", "\n").splitlines()
+    body_lines = content_lines[1:] if content_lines else []
+
+    paragraph_lines: List[str] = []
+    remainder_lines: List[str] = []
+    seen_nonempty = False
+    for line in body_lines:
+        stripped = line.strip()
+        if not stripped:
+            if seen_nonempty:
+                remainder_lines = body_lines[len(paragraph_lines) + (0 if not paragraph_lines else 1) :]
+                break
+            continue
+        seen_nonempty = True
+        paragraph_lines.append(stripped)
+
+    paragraph_text = " ".join(paragraph_lines).strip()
+    candidates: List[str] = []
+    candidates.extend(_split_sentences(paragraph_text))
+
+    if len(candidates) < 3:
+        for line in body_lines:
+            stripped = _collapse_ws(line)
+            if not stripped:
+                continue
+            if stripped == heading:
+                continue
+            candidates.append(stripped)
+            if len(candidates) >= 6:
+                break
+
+    bullets: List[str] = []
+    for item in candidates:
+        normalized = _collapse_ws(item)
+        if not normalized:
+            continue
+        if normalized not in bullets:
+            bullets.append(normalized)
+        if len(bullets) >= 6:
+            break
+
+    parts: List[str] = []
+    parts.append(f"source: {section_id}:{start_line}-{end_line}#{hash8}")
+    parts.append(f"# {heading}" if heading else "# (untitled)")
+    for bullet in bullets[:6]:
+        parts.append(f"- {bullet}")
+    return "\n".join(parts).rstrip() + "\n"
+
+
+def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
+    """
+    Emit per-section deterministic summaries under CORTEX/_generated/.
+
+    - Summaries are derived artifacts only (System-1 surface).
+    - Skips short sections (< SUMMARY_MIN_SECTION_LINES).
+    """
+    SUMMARIES_DIR.mkdir(parents=True, exist_ok=True)
+
+    summary_records: List[Dict[str, object]] = []
+    for record in section_index:
+        try:
+            start_line = int(record.get("start_line") or 0)
+            end_line = int(record.get("end_line") or 0)
+        except Exception:
+            continue
+        if start_line <= 0 or end_line <= 0:
+            continue
+        if (end_line - start_line + 1) < SUMMARY_MIN_SECTION_LINES:
+            continue
+
+        section_id = str(record.get("section_id") or "").strip()
+        if not section_id:
+            continue
+        section_hash = str(record.get("hash") or "").strip()
+        if not section_hash:
+            continue
+
+        try:
+            slice_text = _read_section_slice(record)
+        except Exception:
+            continue
+
+        summary_md = _summarize_section(record, slice_text)
+        summary_bytes = summary_md.encode("utf-8")
+        summary_sha = sha256(summary_bytes).hexdigest()
+
+        filename = _safe_section_id_filename(section_id) + ".md"
+        summary_rel = (Path("CORTEX") / "_generated" / "summaries" / filename).as_posix()
+        summary_path = PROJECT_ROOT / Path(summary_rel)
+
+        summary_path.write_text(summary_md, encoding="utf-8", newline="\n")
+
+        summary_records.append(
+            {
+                "schema_version": SUMMARY_SCHEMA_VERSION,
+                "section_hash": section_hash,
+                "section_id": section_id,
+                "summary_path": summary_rel,
+                "summary_sha256": summary_sha,
+            }
+        )
+
+    summary_records = sorted(summary_records, key=lambda r: str(r["section_id"]))
+    SUMMARY_INDEX_FILE.write_text(
+        json.dumps(summary_records, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
 
 
 def main():
@@ -318,7 +494,8 @@ def main():
     finally:
         conn.close()
     write_json_snapshot()
-    write_section_index()
+    section_index = write_section_index()
+    write_section_summaries(section_index)
 
 
 if __name__ == "__main__":
