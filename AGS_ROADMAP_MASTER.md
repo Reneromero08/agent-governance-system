@@ -131,8 +131,8 @@ Problem:
 - Cortex data model is underspecified for section-level navigation and summaries.
 
 Tasks:
-- [ ] [P0] Define minimum schema tables for files, sections, summaries, and pointers with required fields and meanings.
-- [ ] [P0] Document the schema in `CORTEX/SCHEMA.md` (or equivalent).
+- [x] [P0] Define minimum schema tables for files, sections, summaries, and pointers with required fields and meanings.
+- [x] [P0] Document the schema in `CORTEX/SCHEMA.md` (or equivalent).
 
 Exit conditions:
 - Schema is documented and unambiguous.
@@ -182,15 +182,15 @@ Tasks:
 Exit conditions:
 - `CONTRACTS/runner.py` can run skill fixtures in CI.
 
-## D2. Add the "dev browser" skill (P1)
+## D2. Add the "dev browser" skill (P3)
 
 Goal:
 - A local web UI that browses Cortex indexes and supports deterministic planning.
 
 Tasks:
-- [ ] [P1] Build a read-only UI for files, sections, summaries, and graph relations.
-- [ ] [P1] Export plans as a migration plan file (no direct edits).
-- [ ] [P1] Optional: apply plans via a separate deterministic, fixture-tested migration skill.
+- [ ] [P3] Build a read-only UI for files, sections, summaries, and graph relations.
+- [ ] [P3] Export plans as a migration plan file (no direct edits).
+- [ ] [P3] Optional: apply plans via a separate deterministic, fixture-tested migration skill.
 
 Exit conditions:
 - You can answer "Where is X?" and "What connects to X?" instantly via the UI.
