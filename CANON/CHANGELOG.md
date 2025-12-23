@@ -28,7 +28,9 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ### Fixed
 - MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors when running `--test` on Windows systems.
+- `lint_tokens.py`: replaced Unicode warning/check marks with ASCII `[WARN]` and `[OK]` for cross-platform compatibility.
 - Cortex builds now emit `CORTEX/_generated/cortex.json`, and CI runs canon governance checks to catch version drift.
+- Consolidated CI workflows: merged governance.yml into contracts.yml (single source of CI truth); governance checks now run in contracts.yml pipeline.
 
 ### Removed
 - None.
