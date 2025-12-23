@@ -159,6 +159,79 @@ def check_schema_validation() -> List[str]:
     return violations
 
 
+def check_log_output_roots() -> List[str]:
+    """Check that logging code complies with ADR-015 (logs under CONTRACTS/_runs/)."""
+    violations = []
+
+    # Patterns that indicate logging to disallowed locations
+    disallowed_patterns = [
+        (r'["\']LOGS/', "References LOGS/ directory (should be CONTRACTS/_runs/<purpose>_logs/)"),
+        (r'["\']MCP/logs/', "References MCP/logs/ (should be CONTRACTS/_runs/mcp_logs/)"),
+    ]
+
+    # Scan Python files that may write logs
+    scan_paths = [
+        PROJECT_ROOT / "TOOLS",
+        PROJECT_ROOT / "MCP",
+        PROJECT_ROOT / "SKILLS",
+    ]
+
+    for scan_dir in scan_paths:
+        if not scan_dir.exists():
+            continue
+        for py_file in scan_dir.rglob("*.py"):
+            # Skip entrypoint (it's explicitly allowed to redirect logs)
+            if "entrypoint" in py_file.name:
+                continue
+            content = py_file.read_text(errors="ignore")
+            for pattern, description in disallowed_patterns:
+                if re.search(pattern, content):
+                    violations.append(
+                        f"{py_file.relative_to(PROJECT_ROOT)}: {description}"
+                    )
+                    break  # Only report once per file
+
+    # Check canon docs for outdated references (except CHANGELOG which documents history)
+    canon_files = [
+        CANON_DIR / "CRISIS.md",
+        CANON_DIR / "STEWARDSHIP.md",
+    ]
+
+    for canon_file in canon_files:
+        if not canon_file.exists():
+            continue
+        content = canon_file.read_text(errors="ignore")
+        # Check for LOGS/ references (but skip ADR context)
+        if re.search(r'`LOGS/[^`]+`', content):
+            violations.append(
+                f"{canon_file.relative_to(PROJECT_ROOT)}: References LOGS/ (should use CONTRACTS/_runs/)"
+            )
+        # Check for MCP/logs/ references (but skip ADR context)
+        if re.search(r'`MCP/logs/[^`]+`', content):
+            violations.append(
+                f"{canon_file.relative_to(PROJECT_ROOT)}: References MCP/logs/ (should use CONTRACTS/_runs/)"
+            )
+
+    # For CHANGELOG, only check Unreleased section (not historical releases)
+    changelog_path = CANON_DIR / "CHANGELOG.md"
+    if changelog_path.exists():
+        content = changelog_path.read_text(errors="ignore")
+        # Extract only Unreleased section
+        unreleased_match = re.search(r'## \[Unreleased\](.*?)(?=## \[)', content, re.DOTALL)
+        if unreleased_match:
+            unreleased_section = unreleased_match.group(1)
+            if re.search(r'`LOGS/[^`]+`', unreleased_section):
+                violations.append(
+                    f"CANON/CHANGELOG.md [Unreleased]: References LOGS/ (should use CONTRACTS/_runs/)"
+                )
+            if re.search(r'`MCP/logs/[^`]+`', unreleased_section):
+                violations.append(
+                    f"CANON/CHANGELOG.md [Unreleased]: References MCP/logs/ (should use CONTRACTS/_runs/)"
+                )
+
+    return violations
+
+
 def main() -> int:
     quarantine_file = PROJECT_ROOT / ".quarantine"
     if quarantine_file.exists():
@@ -176,12 +249,13 @@ def main() -> int:
     all_violations.extend(check_skill_fixtures())
     all_violations.extend(check_raw_fs_access())
     all_violations.extend(check_skill_manifests())
-    all_violations.extend(check_schema_validation())  # New check
+    all_violations.extend(check_schema_validation())
+    all_violations.extend(check_log_output_roots())  # Check ADR-015 compliance
     
     if all_violations:
         print(f"\n[critic] Found {len(all_violations)} violation(s):\n")
         for v in all_violations:
-            print(f"  ✗ {v}")
+            print(f"  [FAIL] {v}")
         print()
         return 1
     

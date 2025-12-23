@@ -22,7 +22,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 QUARANTINE_FILE = PROJECT_ROOT / ".quarantine"
-LOGS_DIR = PROJECT_ROOT / "LOGS"
+LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "emergency_logs"
 EMERGENCY_LOG = LOGS_DIR / "emergency.log"
 
 
