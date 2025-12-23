@@ -245,7 +245,7 @@ Problem:
 - `TOOLS/codebook_build.py --check` can report false "up to date" results.
 
 Tasks:
-- [ ] [P1] Make `--check` compare generated output against `CANON/CODEBOOK.md`.
+- [x] [P1] Make `--check` compare generated output against `CANON/CODEBOOK.md`.
 
 Exit conditions:
 - `--check` fails when codebook output drifts.
