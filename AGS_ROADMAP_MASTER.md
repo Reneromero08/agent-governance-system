@@ -87,9 +87,9 @@ Problem:
 - LITE packs are required for navigation-first workflows but are not guaranteed by the packer or CI.
 
 Tasks:
-- [ ] [P0] Add `--profile lite` to `MEMORY/LLM_PACKER/Engine/packer.py` with FULL output unchanged.
-- [ ] [P0] Emit LITE meta outputs: `meta/LITE_ALLOWLIST.json`, `meta/LITE_OMITTED.json`, `meta/LITE_START_HERE.md`, `meta/SKILL_INDEX.json`, `meta/FIXTURE_INDEX.json`, `meta/CODEBOOK.md`, `meta/CODE_SYMBOLS.json`.
-- [ ] [P0] Add smoke/CI validation that asserts required LITE meta outputs exist.
+- [x] [P0] Add `--profile lite` to `MEMORY/LLM_PACKER/Engine/packer.py` with FULL output unchanged.
+- [x] [P0] Emit LITE meta outputs: `meta/LITE_ALLOWLIST.json`, `meta/LITE_OMITTED.json`, `meta/LITE_START_HERE.md`, `meta/SKILL_INDEX.json`, `meta/FIXTURE_INDEX.json`, `meta/CODEBOOK.md`, `meta/CODE_SYMBOLS.json`.
+- [x] [P0] Add smoke/CI validation that asserts required LITE meta outputs exist.
 - [ ] [P1] Optional: add `--profile test` (fixtures-heavy) for debugging, separate from LITE.
 
 Exit conditions:
