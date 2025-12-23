@@ -14,6 +14,7 @@ This directory contains the "Canon"—the laws, rules, and agreements that gover
 
 ## Processes
 - [ARBITRATION.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/ARBITRATION.md): How to resolve conflicting rules.
+- [CATALYTIC_COMPUTING.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/CATALYTIC_COMPUTING.md): Memory model for scratch-space operations with restore guarantees.
 - [CRISIS.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/CRISIS.md): Emergency procedures.
 - [DEPRECATION.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/DEPRECATION.md): End-of-life workflow for rules.
 - [MIGRATION.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/MIGRATION.md): Managing breaking changes.

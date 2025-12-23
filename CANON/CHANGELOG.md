@@ -5,6 +5,8 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
+- `CANON/CATALYTIC_COMPUTING.md` - Canonical note defining catalytic computing for AGS (formal theory, engineering patterns, boundaries).
+- `CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` documenting the decision to add catalytic computing to canon.
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
 - `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing skill contract (SKILL.md, run.py, validate.py, fixtures).
@@ -24,7 +26,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Clarified CANON/CONTRACT.md Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (ADR-016).
 - Enhanced CONTRACT.md Rule 2 to explicitly require ADRs for governance decisions and recommend them for significant code changes.
 - Enhanced AGENTS.md Section 5 to explicitly document the skill contract (SKILL.md, run.py, validate.py, fixtures) as defined in ADR-017.
-- Bumped `canon_version` to 2.7.3 (patch: governance clarifications and skill formalization).
+- Bumped `canon_version` to 2.8.0 (minor: catalytic computing canonical note, governance clarifications).
 
 ### Fixed
 - MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors.
