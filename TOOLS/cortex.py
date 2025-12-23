@@ -5,6 +5,7 @@ Tools for interacting with generated Cortex artifacts.
 Usage:
   python TOOLS/cortex.py read <section_id>
   python TOOLS/cortex.py search "<query>"
+  python TOOLS/cortex.py resolve <section_id>
 """
 
 import argparse
@@ -107,11 +108,11 @@ def cmd_search(args: argparse.Namespace) -> int:
 
     # Deterministic sorting: primary score (desc), secondary section_id (asc).
     scored.sort(key=lambda t: (-t[0], t[1]))
-    try:
-        for _, section_id, heading in scored:
+    for _, section_id, heading in scored:
+        try:
             sys.stdout.write(f"{section_id}\t{heading}\n")
-    except BrokenPipeError:
-        return 0
+        except BrokenPipeError:
+            return 0
     return 0
 
 
@@ -141,6 +142,37 @@ def cmd_read(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_resolve(args: argparse.Namespace) -> int:
+    if not SECTION_INDEX_PATH.exists():
+        print(f"SECTION_INDEX not found: {SECTION_INDEX_PATH}", file=sys.stderr)
+        return 2
+
+    try:
+        sections = load_section_index(SECTION_INDEX_PATH)
+    except Exception as exc:
+        print(f"Failed to read SECTION_INDEX: {exc}", file=sys.stderr)
+        return 2
+
+    record = find_section(sections, args.section_id)
+    if not record:
+        print(f"Unknown section_id: {args.section_id}", file=sys.stderr)
+        return 2
+
+    payload = {
+        "end_line": int(record.get("end_line")),
+        "hash": str(record.get("hash")),
+        "path": str(record.get("path")).replace("\\", "/"),
+        "section_id": str(record.get("section_id")),
+        "start_line": int(record.get("start_line")),
+    }
+    heading = record.get("heading")
+    if heading is not None:
+        payload["heading"] = str(heading)
+
+    sys.stdout.write(json.dumps(payload, indent=2, sort_keys=True) + "\n")
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="cortex", description="Cortex utilities")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -152,6 +184,10 @@ def main() -> int:
     search_p = sub.add_parser("search", help="Search SECTION_INDEX and print matching section_ids")
     search_p.add_argument("query", help="Plain text query (use quotes to include spaces)")
     search_p.set_defaults(func=cmd_search)
+
+    resolve_p = sub.add_parser("resolve", help="Print JSON metadata for a section_id")
+    resolve_p.add_argument("section_id", help="Deterministic section id (<path>::<heading_slug>::<ordinal>)")
+    resolve_p.set_defaults(func=cmd_resolve)
 
     args = parser.parse_args()
     return int(args.func(args))
