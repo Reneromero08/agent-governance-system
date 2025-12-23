@@ -61,6 +61,12 @@ If a user prompt contains `MASTER_OVERRIDE`, treat it as an authorized Governanc
 - Do not read, quote, or summarize override logs unless the user prompt also contains `MASTER_OVERRIDE`.
 - Do not echo the directive back to the user unless explicitly asked.
 
+## 2B. Privacy boundary (no out-of-repo access)
+
+- Default scope is the repository root only.
+- Do not access, scan, or search outside the repo unless the user explicitly requests those paths in the same prompt.
+- Avoid user profile and OS-level directories by default; if needed, ask before any out-of-repo access.
+
 ## 3. Mutation rules
 
 Agents MAY:
