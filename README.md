@@ -16,7 +16,7 @@ This solves the bootstrap paradox: the agent knows the governance structure exis
 
 ## Project layout
 
-The repository is organised into six layers. Files are loaded in the following order:
+The repository is organised into eight layers. Files are loaded in the following order:
 
 1. **CANON** - the constitution and invariants of the system.
 2. **CONTEXT** - decisions, rejections and preferences that record why things are the way they are.
@@ -27,11 +27,8 @@ The repository is organised into six layers. Files are loaded in the following o
 4. **SKILLS** - modular capabilities packaged with contracts and fixtures.
 5. **CONTRACTS** - fixtures and schemas used to mechanically enforce rules.
 6. **MEMORY** - packers, manifests and combined state for context handoff.
-
-Additional directories contain tooling:
-
-- **CORTEX** - a shadow index (e.g. SQLite) that agents query instead of the raw filesystem.
-- **TOOLS** - helper scripts such as critics and linters.
+7. **CORTEX** - a shadow index (e.g. SQLite) that agents query instead of the raw filesystem.
+8. **TOOLS** - helper scripts such as critics and linters.
 
 ## MCP integration (external clients)
 
