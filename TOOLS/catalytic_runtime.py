@@ -117,13 +117,26 @@ class CatalyticRuntime:
             PROJECT_ROOT / "BUILD",
         ]
 
-        # Check catalytic domains don't overlap forbidden
+        # Check catalytic domains don't overlap forbidden (bidirectional)
         for domain in self.catalytic_domains:
+            # Check if domain is inside forbidden
             for forbidden in forbidden_paths:
                 try:
                     domain.relative_to(forbidden)
                     print(
-                        f"[catalytic] ERROR: Catalytic domain {domain} overlaps forbidden path {forbidden}",
+                        f"[catalytic] ERROR: Catalytic domain {domain} is inside forbidden path {forbidden}",
+                        file=sys.stderr,
+                    )
+                    return False
+                except ValueError:
+                    pass
+
+            # Check if forbidden is inside domain (the dangerous case)
+            for forbidden in forbidden_paths:
+                try:
+                    forbidden.relative_to(domain)
+                    print(
+                        f"[catalytic] ERROR: Forbidden path {forbidden} would be inside catalytic domain {domain}",
                         file=sys.stderr,
                     )
                     return False
