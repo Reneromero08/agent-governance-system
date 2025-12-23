@@ -34,7 +34,10 @@ jobs:
       
       - name: Run critic checks
         run: python TOOLS/critic.py
-      
+
+      - name: Lint tokens
+        run: python TOOLS/lint_tokens.py
+
       - name: Run contract fixtures
         run: python CONTRACTS/runner.py
       
