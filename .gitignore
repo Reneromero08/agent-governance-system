@@ -11,6 +11,9 @@ CORTEX/_generated/*.sqlite
 CORTEX/_generated/SECTION_INDEX.json
 !CORTEX/_generated/.gitkeep
 
+# Local-only editor state (not governance-critical)
+.claude/
+
 # Research Cache
 CONTEXT/research/*.db
 
