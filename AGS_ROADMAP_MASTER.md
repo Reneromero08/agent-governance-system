@@ -105,6 +105,9 @@ Tasks:
 - [ ] [P1] Document which pack files are deterministic vs timestamped, and what is allowed to vary.
 - [ ] [P1] Ensure timestamps do not break cache keys (use content hashes as primary identity).
 - [ ] [P1] Add `canon_version` and `grammar_version` fields and define mismatch behavior.
+- [x] [P1] Document which pack files are deterministic vs timestamped, and what is allowed to vary (`MEMORY/LLM_PACKER/DETERMINISM.md`).
+- [x] [P1] Ensure timestamps do not break cache keys (the digest is built from content hashes and sizes only).
+- [x] [P1] Add `canon_version` and `grammar_version` fields and define mismatch behavior (packed metadata now reports both; mismatch is treated as incompatible).
 
 Exit conditions:
 - Two LITE packs generated from the same repo state have identical content-hash inventories (except explicitly allowed timestamp fields).
@@ -121,6 +124,8 @@ Tasks:
 - [x] [P0] Emit section-level index (section_id, path, heading, start_line, end_line, hash) as a generated artifact (cortex.json or SECTION_INDEX.json).
 - [x] [P0] Add cortex read <section_id> command that resolves section_id via the generated index and prints the exact section content.
 - [x] [P0] Add cortex search <query> that returns matching section_ids (and headings) from SECTION_INDEX; do not return raw paths.
+- [x] [P0] Emit deterministic advisory section summaries derived from SECTION_INDEX as generated artifacts (`CORTEX/_generated/SUMMARY_INDEX.json`, `CORTEX/_generated/summaries/`).
+- [x] [P0] Add cortex summary <section_id> and cortex summary --list commands for reading advisory summaries (provenance op="summary" when `CORTEX_RUN_ID` is set).
 - [x] [P1] Harden SECTION_INDEX parsing: ignore headings inside fenced code blocks; ensure stable hashing + ID normalization; ensure output path is under the Cortex generated root.
 - [x] [P0] Add cortex resolve <section_id> to output JSON metadata (section_id, path, start_line, end_line, hash) for toolchain provenance and citations.
 - [x] [P1] Clean up Cortex section indexing hygiene: ensure full normalized path in section_id, move fixtures under CORTEX/fixtures (or equivalent), write SECTION_INDEX under generated root, and ignore .claude/.
@@ -277,7 +282,7 @@ Deliverable:
 - A dedicated document defining catalytic computing (formal) and the AGS analog (engineering), plus strict boundaries (metaphor vs implementation).
 
 Tasks:
-- [ ] [P1] Write the canonical catalytic computing note with explicit boundaries and non-goals.
+- [/] [P1] Write the canonical catalytic computing note with explicit boundaries and non-goals.
 
 Exit conditions:
 - Any agent can read it and understand what "catalytic compression" means without inventing details.
