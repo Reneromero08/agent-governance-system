@@ -22,7 +22,9 @@ jobs:
           python-version: '3.11'
       
       - name: Install dependencies
-        run: pip install -r requirements.txt || true
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
       
       - name: Build cortex index
         run: python CORTEX/cortex.build.py
@@ -36,5 +38,5 @@ jobs:
       - name: Run artifact escape hatch
         run: |
           cd SKILLS/artifact-escape-hatch
-          python run.py fixtures/basic/input.json ../../BUILD/escape-check.json
-          python validate.py ../../BUILD/escape-check.json fixtures/basic/expected.json
+          python run.py fixtures/basic/input.json ../../CONTRACTS/_runs/escape-check.json
+          python validate.py ../../CONTRACTS/_runs/escape-check.json fixtures/basic/expected.json
