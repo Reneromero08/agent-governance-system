@@ -106,15 +106,15 @@ def main() -> int:
     if warnings:
         print(f"\n[lint_tokens] Warnings ({len(warnings)}):")
         for w in warnings:
-            print(f"  ⚠ {w}")
+            print(f"  [WARN] {w}")
     
     if errors:
         print(f"\n[lint_tokens] Errors ({len(errors)}):")
         for e in errors:
-            print(f"  ✗ {e}")
+            print(f"  [FAIL] {e}")
         return 1
-    
-    print("[lint_tokens] All checks passed ✓")
+
+    print("[lint_tokens] All checks passed [OK]")
     return 0
 
 
