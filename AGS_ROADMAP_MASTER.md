@@ -115,6 +115,8 @@ Exit conditions:
 
 This is the "every section indexed and summarized" requirement.
 
+Note: See `CONTEXT/research/iterations/2025-12-23-system1-system2-dual-db.md` for the System 1 (fast retrieval) vs System 2 (governance ledger) research model.
+
 ## C1. Define the Cortex schema (P0)
 
 Problem:
@@ -258,6 +260,9 @@ Exit conditions:
 
 This lane is optional until fundamentals above are stable.
 
+Note: See `CONTEXT/research/Catalytic Computing/CATALYTIC_COMPUTING_FOR_AGS_REPORT.md` for the formal theory vs AGS analogy.
+Note: See `CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` for the draft engineering contract (not yet Canon).
+
 ## F1. Canonical note: "Catalytic Computing for AGS" (P1)
 
 Deliverable:
@@ -295,6 +300,12 @@ Exit conditions:
 - FULL pack is reconstructible.
 
 ---
+
+# Research References (Non-Binding)
+
+- `CONTEXT/research/iterations/2025-12-23-system1-system2-dual-db.md` - System 1 vs System 2 research model for cortex retrieval and governance ledger concepts.
+- `CONTEXT/research/Catalytic Computing/CATALYTIC_COMPUTING_FOR_AGS_REPORT.md` - Formal catalytic computing theory and AGS analogy framing.
+- `CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` - Draft engineering protocol for catalytic mutation (non-Canon).
 
 # Definition of Done (Global)
 
