@@ -16,6 +16,7 @@ Exit codes:
 import re
 import sys
 from pathlib import Path
+from typing import Dict, List, Set, Tuple
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 GLOSSARY_PATH = PROJECT_ROOT / "CANON" / "GLOSSARY.md"
@@ -25,7 +26,7 @@ VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 SCAN_DIRS = ["CANON", "CONTEXT", "MAPS", "SKILLS", "CONTRACTS", "AGENTS.md", "README.md"]
 
 
-def load_glossary_terms() -> set[str]:
+def load_glossary_terms() -> Set[str]:
     """Extract defined terms from GLOSSARY.md."""
     terms = set()
     content = GLOSSARY_PATH.read_text(errors="ignore")
@@ -35,7 +36,7 @@ def load_glossary_terms() -> set[str]:
     return terms
 
 
-def load_deprecated_tokens() -> dict[str, str]:
+def load_deprecated_tokens() -> Dict[str, str]:
     """Load deprecated tokens from VERSIONING.md."""
     deprecated = {}
     if not VERSIONING_PATH.exists():
@@ -58,7 +59,7 @@ def load_deprecated_tokens() -> dict[str, str]:
     return deprecated
 
 
-def check_term_usage(terms: set[str], deprecated: dict[str, str]) -> tuple[list[str], list[str]]:
+def check_term_usage(terms: Set[str], deprecated: Dict[str, str]) -> Tuple[List[str], List[str]]:
     """Check for term usage issues across the codebase."""
     warnings = []
     errors = []

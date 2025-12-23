@@ -18,6 +18,7 @@ import json
 import re
 import sys
 from pathlib import Path
+from typing import List, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
@@ -27,14 +28,14 @@ CORTEX_INDEX = PROJECT_ROOT / "CORTEX" / "_generated" / "cortex.json"
 CORTEX_FALLBACK = PROJECT_ROOT / "CORTEX" / "cortex.json"
 
 
-def get_canon_version() -> str | None:
+def get_canon_version() -> Optional[str]:
     """Extract canon_version from VERSIONING.md."""
     content = VERSIONING_PATH.read_text(errors="ignore")
     match = re.search(r'canon_version:\s*(\d+\.\d+\.\d+)', content)
     return match.group(1) if match else None
 
 
-def get_cortex_version() -> str | None:
+def get_cortex_version() -> Optional[str]:
     """Extract canon_version from cortex index."""
     for path in [CORTEX_INDEX, CORTEX_FALLBACK]:
         if path.exists():
@@ -46,7 +47,7 @@ def get_cortex_version() -> str | None:
     return None
 
 
-def check_version_consistency() -> list[str]:
+def check_version_consistency() -> List[str]:
     """Check that versions are consistent across files."""
     errors = []
     canon_ver = get_canon_version()
@@ -63,7 +64,7 @@ def check_version_consistency() -> list[str]:
     return errors
 
 
-def check_changelog_current() -> list[str]:
+def check_changelog_current() -> List[str]:
     """Check that CHANGELOG has an entry for current version."""
     errors = []
     canon_ver = get_canon_version()
@@ -77,7 +78,7 @@ def check_changelog_current() -> list[str]:
     return errors
 
 
-def check_invariant_numbering() -> list[str]:
+def check_invariant_numbering() -> List[str]:
     """Check that invariants are numbered sequentially."""
     errors = []
     content = INVARIANTS_PATH.read_text(errors="ignore")
@@ -98,7 +99,7 @@ def check_invariant_numbering() -> list[str]:
 FROZEN_INVARIANTS = ["INV-001", "INV-002", "INV-003", "INV-004", "INV-005", "INV-006", "INV-007", "INV-008"]
 
 
-def check_invariant_freeze() -> list[str]:
+def check_invariant_freeze() -> List[str]:
     """Check that all frozen invariants still exist."""
     errors = []
     content = INVARIANTS_PATH.read_text(errors="ignore")

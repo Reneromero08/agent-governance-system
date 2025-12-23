@@ -69,6 +69,16 @@ MCP (Model Context Protocol) is an open standard for AI systems to communicate w
 - Dynamic resources (live context/cortex data)
 - Claude Desktop configuration file
 
+## Entrypoint and logging
+
+To satisfy output-root invariants, use the wrapper entrypoint:
+- `CONTRACTS/_runs/ags_mcp_entrypoint.py`
+
+This redirects audit logs to:
+- `CONTRACTS/_runs/mcp_logs/`
+
+Verification is available via the `mcp-smoke` and `mcp-extension-verify` skills.
+
 ### Future Work
 - HTTP transport with authentication (for remote access)
 - OAuth 2.0 support for production deployments
@@ -109,6 +119,9 @@ MCP/
     resources.json    # JSON Schema for resources
   config.json         # Server configuration
 ```
+
+Runtime wrapper entrypoint (recommended):
+- `CONTRACTS/_runs/ags_mcp_entrypoint.py`
 
 ## Transport
 

@@ -20,6 +20,7 @@ import re
 import subprocess
 import sys
 from pathlib import Path
+from typing import List
 import schema_validator  # New import
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -38,7 +39,7 @@ RAW_FS_PATTERNS = [
 ]
 
 
-def get_changed_files() -> list[str]:
+def get_changed_files() -> List[str]:
     """Get list of files changed in the current commit/staging."""
     try:
         # Check staged files first
@@ -61,7 +62,7 @@ def get_changed_files() -> list[str]:
     return []
 
 
-def check_canon_changelog(changed_files: list[str]) -> list[str]:
+def check_canon_changelog(changed_files: List[str]) -> List[str]:
     """Check that CANON changes have corresponding CHANGELOG entries."""
     violations = []
     canon_changes = [f for f in changed_files if f.startswith("CANON/") and f != "CANON/CHANGELOG.md"]
@@ -74,7 +75,7 @@ def check_canon_changelog(changed_files: list[str]) -> list[str]:
     return violations
 
 
-def check_skill_fixtures() -> list[str]:
+def check_skill_fixtures() -> List[str]:
     """Check that all skills have fixtures."""
     violations = []
     for skill_dir in SKILLS_DIR.iterdir():
@@ -86,7 +87,7 @@ def check_skill_fixtures() -> list[str]:
     return violations
 
 
-def check_raw_fs_access() -> list[str]:
+def check_raw_fs_access() -> List[str]:
     """Check for raw filesystem access in skill code (violates INV-003)."""
     violations = []
     for skill_dir in SKILLS_DIR.iterdir():
@@ -108,7 +109,7 @@ def check_raw_fs_access() -> list[str]:
     return violations
 
 
-def check_skill_manifests() -> list[str]:
+def check_skill_manifests() -> List[str]:
     """Check that all skills have SKILL.md manifests."""
     violations = []
     for skill_dir in SKILLS_DIR.iterdir():
@@ -120,7 +121,7 @@ def check_skill_manifests() -> list[str]:
     return violations
 
 
-def check_schema_validation() -> list[str]:
+def check_schema_validation() -> List[str]:
     """Check that all Law-Like files (ADRs, Skills, Styles) are schema-valid."""
     violations = []
     
