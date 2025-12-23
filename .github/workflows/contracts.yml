@@ -29,6 +29,9 @@ jobs:
       - name: Build cortex index
         run: python CORTEX/cortex.build.py
       
+      - name: Run canon governance checks
+        run: python TOOLS/check_canon_governance.py
+      
       - name: Run critic checks
         run: python TOOLS/critic.py
       

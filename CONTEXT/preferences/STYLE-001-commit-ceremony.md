@@ -28,7 +28,9 @@ The following phrases do **NOT** authorize commits or pushes:
 
 These authorize **implementation** only. They are **never** implicit commit approvals.
 
-### Explicit composite approvals
+### Explicit approvals
+An explicit "commit" directive counts as approval to commit once checks have passed and staged files are listed; no additional confirmation prompt is required.
+
 Explicit composite directives that include "commit", "push", and "release" (for example,
 "commit, push, and release") count as approval for each action listed in that request.
 This does not authorize additional commits beyond the current task.
@@ -51,7 +53,7 @@ Before any Git command, the agent MUST:
 2. **Stop** all execution.
 3. **List** every file in the staging area.
 4. **Ask**: "Ready for the Chunked Commit Ceremony? Shall I commit and push these [N] files?"
-5. **Wait** for explicit user approval (e.g., "yes, commit" or "commit and push").
+5. **Wait** for explicit user approval (e.g., "yes, commit" or "commit and push"), unless the user already issued an explicit "commit" directive or composite approval for the listed actions.
 
 ### No Composite Commands
 Do not chain `git commit` and `git push` unless the user explicitly says "commit and push."
