@@ -1,0 +1,8 @@
+{
+  "mode": "full",
+  "profile": "lite",
+  "combined": false,
+  "out_dir": "MEMORY/LLM_PACKER/_packs/fixture-smoke-lite",
+  "stamp": "fixture-smoke-lite",
+  "zip": false
+}

@@ -53,7 +53,9 @@ def main(input_path: Path, output_path: Path) -> int:
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))
+    profile = str(config.get("profile", "full"))
     stamp = str(config.get("stamp", "fixture-smoke"))
+    split_lite = bool(config.get("split_lite", False))
 
     out_dir = resolve_out_dir(out_dir_raw)
     ensure_under_packs(out_dir)
@@ -67,6 +69,8 @@ def main(input_path: Path, output_path: Path) -> int:
         str(PACKER_SCRIPT),
         "--mode",
         mode,
+        "--profile",
+        profile,
         "--out-dir",
         out_dir.relative_to(PROJECT_ROOT).as_posix(),
     ]
@@ -76,6 +80,8 @@ def main(input_path: Path, output_path: Path) -> int:
         args.append("--zip")
     if combined:
         args.append("--combined")
+    if split_lite:
+        args.append("--split-lite")
     result = subprocess.run(args, capture_output=True, text=True)
     if result.returncode != 0:
         print(result.stdout)
@@ -101,6 +107,31 @@ def main(input_path: Path, output_path: Path) -> int:
         "COMBINED/SPLIT/AGS-06_CONTRACTS.md",
         "COMBINED/SPLIT/AGS-07_SYSTEM.md",
     ]
+    if split_lite:
+        required.extend(
+            [
+                "COMBINED/SPLIT_LITE/AGS-00_INDEX.md",
+                "COMBINED/SPLIT_LITE/AGS-01_CANON.md",
+                "COMBINED/SPLIT_LITE/AGS-02_ROOT.md",
+                "COMBINED/SPLIT_LITE/AGS-03_MAPS.md",
+                "COMBINED/SPLIT_LITE/AGS-04_CONTEXT.md",
+                "COMBINED/SPLIT_LITE/AGS-05_SKILLS.md",
+                "COMBINED/SPLIT_LITE/AGS-06_CONTRACTS.md",
+                "COMBINED/SPLIT_LITE/AGS-07_SYSTEM.md",
+            ]
+        )
+    if profile == "lite":
+        required.extend(
+            [
+                "meta/LITE_ALLOWLIST.json",
+                "meta/LITE_OMITTED.json",
+                "meta/LITE_START_HERE.md",
+                "meta/SKILL_INDEX.json",
+                "meta/FIXTURE_INDEX.json",
+                "meta/CODEBOOK.md",
+                "meta/CODE_SYMBOLS.json",
+            ]
+        )
     if combined:
         required.extend(
             [
@@ -136,6 +167,24 @@ def main(input_path: Path, output_path: Path) -> int:
     if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
         print("AGS-03_MAPS.md missing embedded repo file tree")
         return 1
+
+    if profile == "lite":
+        # Ensure excluded content is not copied into repo/** in the generated pack.
+        excluded_markers = [
+            "/fixtures/",
+            "/_runs/",
+            "/_generated/",
+            "/CONTEXT/archive/",
+            "/CONTEXT/research/",
+        ]
+        tree_text = (out_dir / "meta/FILE_TREE.txt").read_text(encoding="utf-8", errors="replace")
+        for marker in excluded_markers:
+            if f"repo{marker}" in tree_text:
+                print(f"LITE pack unexpectedly contains excluded content: repo{marker}")
+                return 1
+        if ".cmd" in tree_text or ".ps1" in tree_text:
+            print("LITE pack unexpectedly contains OS wrapper files (*.cmd/*.ps1)")
+            return 1
 
     output_payload = {
         "pack_dir": out_dir.relative_to(PROJECT_ROOT).as_posix(),
