@@ -1116,7 +1116,7 @@ def main():
             "method": "initialize",
             "params": {}
         })
-        print("\n✓ Initialize:", init_response["result"]["serverInfo"])
+        print("\n[OK] Initialize:", init_response["result"]["serverInfo"])
 
         # List tools
         tools_response = server.handle_request({
@@ -1126,7 +1126,7 @@ def main():
             "params": {}
         })
         tool_names = [t["name"] for t in tools_response["result"]["tools"]]
-        print(f"\n✓ Tools available: {tool_names}")
+        print(f"\n[OK] Tools available: {tool_names}")
 
         # List resources
         resources_response = server.handle_request({
@@ -1135,7 +1135,7 @@ def main():
             "method": "resources/list",
             "params": {}
         })
-        print(f"\n✓ Resources available: {len(resources_response['result']['resources'])} resources")
+        print(f"\n[OK] Resources available: {len(resources_response['result']['resources'])} resources")
 
         # Test cortex_query
         print("\n--- Testing cortex_query ---")
@@ -1147,7 +1147,7 @@ def main():
         })
         content = cortex_response["result"]["content"][0]["text"]
         is_error = cortex_response["result"].get("isError", False)
-        print(f"✓ cortex_query('packer'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        print(f"[OK] cortex_query('packer'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
         if not is_error and content:
             try:
                 results = json.loads(content)
@@ -1165,7 +1165,7 @@ def main():
         })
         content = context_response["result"]["content"][0]["text"]
         is_error = context_response["result"].get("isError", False)
-        print(f"✓ context_search(type='decisions'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        print(f"[OK] context_search(type='decisions'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
         if not is_error and content:
             try:
                 results = json.loads(content)
@@ -1183,7 +1183,7 @@ def main():
         })
         content = review_response["result"]["content"][0]["text"]
         is_error = review_response["result"].get("isError", False)
-        print(f"✓ context_review(days=30): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        print(f"[OK] context_review(days=30): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
         if not is_error and content:
             try:
                 results = json.loads(content)
@@ -1203,7 +1203,7 @@ def main():
         })
         content = canon_response["result"]["content"][0]["text"]
         is_error = canon_response["result"].get("isError", False)
-        print(f"✓ canon_read('CONTRACT'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
+        print(f"[OK] canon_read('CONTRACT'): {'ERROR' if is_error else 'OK'} ({len(content)} chars)")
 
         # Test resource reading
         print("\n--- Testing resources/read ---")
@@ -1214,7 +1214,7 @@ def main():
             "params": {"uri": "ags://canon/genesis"}
         })
         content = read_response["result"]["contents"][0]["text"]
-        print(f"✓ resources/read('ags://canon/genesis'): {len(content)} chars")
+        print(f"[OK] resources/read('ags://canon/genesis'): {len(content)} chars")
 
         # Test prompts/get
         print("\n--- Testing prompts/get ---")
@@ -1225,7 +1225,7 @@ def main():
             "params": {"name": "genesis"}
         })
         messages = prompt_response["result"].get("messages", [])
-        print(f"✓ prompts/get('genesis'): {len(messages)} messages")
+        print(f"[OK] prompts/get('genesis'): {len(messages)} messages")
 
         print("\n" + "="*60)
         print("ALL TESTS COMPLETED")
