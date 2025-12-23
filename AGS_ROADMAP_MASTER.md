@@ -256,8 +256,8 @@ Problem:
 - Documentation drift increases confusion for agents and humans.
 
 Tasks:
-- [ ] [P2] Tidy `CANON/CHANGELOG.md` heading drift (e.g., duplicate headings).
-- [ ] [P2] Align `README.md` wording with current structure (e.g., "six layers" mismatch).
+- [x] [P2] Tidy `CANON/CHANGELOG.md` heading drift (e.g., duplicate headings).
+- [x] [P2] Align `README.md` wording with current structure (e.g., "six layers" mismatch).
 
 Exit conditions:
 - Reduced confusion for agents and humans.
