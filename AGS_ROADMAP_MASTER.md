@@ -102,9 +102,6 @@ Problem:
 - Pack determinism is implied but not clearly documented or enforced.
 
 Tasks:
-- [ ] [P1] Document which pack files are deterministic vs timestamped, and what is allowed to vary.
-- [ ] [P1] Ensure timestamps do not break cache keys (use content hashes as primary identity).
-- [ ] [P1] Add `canon_version` and `grammar_version` fields and define mismatch behavior.
 - [x] [P1] Document which pack files are deterministic vs timestamped, and what is allowed to vary (`MEMORY/LLM_PACKER/DETERMINISM.md`).
 - [x] [P1] Ensure timestamps do not break cache keys (the digest is built from content hashes and sizes only).
 - [x] [P1] Add `canon_version` and `grammar_version` fields and define mismatch behavior (packed metadata now reports both; mismatch is treated as incompatible).
