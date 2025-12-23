@@ -15,9 +15,11 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing skill contract (SKILL.md, run.py, validate.py, fixtures).
 - Governance fixtures for privacy boundary, log output roots, context edit authority, and output-root enforcement.
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
-- `CORTEX/_generated/SUMMARY_INDEX.json` and `CORTEX/_generated/summaries/` (generated) for deterministic, advisory section summaries.
-- `CORTEX/SCHEMA.md` - Complete Cortex data model documentation (SQLite and JSON schemas, entity types, determinism, versioning).
-- `TOOLS/cortex.py` commands: `read`, `resolve`, `search`, `summary`.
+ - `CORTEX/_generated/SUMMARY_INDEX.json` and `CORTEX/_generated/summaries/` (generated) for deterministic, advisory section summaries.
+ - `CORTEX/SCHEMA.md` - Complete Cortex data model documentation (SQLite and JSON schemas, entity types, determinism, versioning).
+ - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`, `summary`.
+ - `SKILLS/cortex-summaries/` fixture skill for deterministic summary generation validation.
+ - `MEMORY/LLM_PACKER/DETERMINISM.md` describing the pack determinism contract plus manifest version fields (`canon_version`, `grammar_version`).
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
