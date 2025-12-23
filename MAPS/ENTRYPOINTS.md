@@ -9,6 +9,7 @@ This document lists the primary entrypoints where agents and humans are expected
 - `CANON/VERSIONING.md` - Modify when bumping the canon version or documenting deprecations.
 - `CANON/CHANGELOG.md` - Add entries for each change to the canon or system behavior.
 - `SKILLS/master-override/` - Audit logging and gated access for `MASTER_OVERRIDE` usage.
+- Privacy boundary rule: update `CANON/CONTRACT.md`, `AGENTS.md`, and `CONTRACTS/fixtures/governance/privacy-boundary/`.
 
 ## Decision records
 
