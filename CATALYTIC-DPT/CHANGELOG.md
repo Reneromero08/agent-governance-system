@@ -2,6 +2,35 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.10.0] - 2025-12-24
+
+### Added
+- **Validator Version Integrity**: Deterministic build fingerprint binding in OUTPUT_HASHES.json.
+- **get_validator_build_id() Function**: Returns audit-grade validator provenance:
+  - Preferred: `git:<short-commit>` from repository HEAD
+  - Fallback: `file:<sha256-prefix>` of MCP/server.py file hash
+  - Cached for process lifetime, deterministic within repo state
+- **Enhanced OUTPUT_HASHES.json Schema**:
+  - Added `validator_semver` (semantic version of validator)
+  - Added `validator_build_id` (deterministic build fingerprint)
+  - Renamed from `validator_version` to `validator_semver` for clarity
+- **Strict Build ID Verification**: `verify_spectrum02_bundle(strict_build_id=True)` option:
+  - Rejects bundles if `validator_build_id` differs from current validator
+  - Enables audit-trail and version-lock verification
+- **New Error Codes**:
+  - `VALIDATOR_BUILD_ID_MISSING`: Build ID missing or empty
+  - `VALIDATOR_BUILD_MISMATCH`: Build ID differs from current (strict mode)
+- **Test Suite**: `test_validator_version_integrity.py` with 20 tests covering:
+  - Bundle emission includes both validator fields
+  - Build ID determinism and caching
+  - Strict mode rejection on mismatch
+  - Missing/empty build ID rejection
+
+### Changed
+- `VALIDATOR_VERSION` constant renamed to `VALIDATOR_SEMVER` (semantic clarity)
+- `SUPPORTED_VALIDATOR_VERSIONS` renamed to `SUPPORTED_VALIDATOR_SEMVERS`
+- Updated all tests to use new field names
+
 ## [1.9.0] - 2025-12-24
 
 ### Added

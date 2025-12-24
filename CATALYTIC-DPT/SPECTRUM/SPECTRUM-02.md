@@ -51,13 +51,20 @@ This is an adversarial scenario. The resuming agent has no memory of the prior r
 #### OUTPUT_HASHES.json
 ```json
 {
-  "validator_version": "1.0.0",
+  "validator_semver": "1.0.0",
+  "validator_build_id": "git:abc1234 | file:sha256prefix",
   "generated_at": "ISO8601",
   "hashes": {
     "path/to/output1": "sha256:abc123..."
   }
 }
 ```
+
+**Fields:**
+- `validator_semver`: Semantic version of the validator (must be in SUPPORTED_VALIDATOR_SEMVERS)
+- `validator_build_id`: Deterministic build fingerprint (git commit SHA or file hash of validator code)
+- `generated_at`: ISO8601 timestamp of bundle generation
+- `hashes`: Map of posix-style relative paths to SHA-256 hashes
 
 ### 2.3 Explicitly Forbidden Artifacts
 
@@ -94,8 +101,10 @@ Otherwise the agent MUST reject the run.
    - If `cmp01 != "pass"`, REJECT
 
 2. Parse `OUTPUT_HASHES.json`
-   - Extract `validator_version`
-   - If `validator_version` is unsupported, REJECT
+   - Extract `validator_semver`
+   - If `validator_semver` is unsupported, REJECT
+   - Extract `validator_build_id`
+   - If `validator_build_id` is missing or empty, REJECT
 
 3. For each entry in `hashes`:
    - Verify file exists at declared path
@@ -131,7 +140,9 @@ Otherwise the agent MUST reject the run.
 |------|-----------|
 | `STATUS_NOT_SUCCESS` | `STATUS.status != "success"` |
 | `CMP01_NOT_PASS` | `STATUS.cmp01 != "pass"` |
-| `VALIDATOR_UNSUPPORTED` | `validator_version` not in known set |
+| `VALIDATOR_UNSUPPORTED` | `validator_semver` not in known set |
+| `VALIDATOR_BUILD_ID_MISSING` | `validator_build_id` missing or empty |
+| `VALIDATOR_BUILD_MISMATCH` | `validator_build_id` != current (strict mode only) |
 | `OUTPUT_MISSING` | Declared output file does not exist |
 | `HASH_MISMATCH` | Computed hash != declared hash |
 | `BUNDLE_INCOMPLETE` | Required artifact missing from bundle |
