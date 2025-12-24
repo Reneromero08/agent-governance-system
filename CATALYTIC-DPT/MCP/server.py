@@ -26,6 +26,33 @@ PROJECT_ROOT = Path(__file__).parent.parent.parent
 CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
 SKILLS_DIR = PROJECT_ROOT / "CATALYTIC-DPT" / "SKILLS"
 
+# =============================================================================
+# CMP-01 ROOT RULES - Strict path governance
+# =============================================================================
+
+# Durable output roots (only places files may persist after run)
+DURABLE_ROOTS = [
+    "CONTRACTS/_runs/",
+    "CORTEX/_generated/",
+    "MEMORY/LLM_PACKER/_packs/",
+]
+
+# Catalytic domains (temporary, must be restored byte-identical)
+CATALYTIC_ROOTS = [
+    "CONTRACTS/_runs/_tmp/",
+    "CORTEX/_generated/_tmp/",
+    "MEMORY/LLM_PACKER/_packs/_tmp/",
+    "TOOLS/_tmp/",
+    "MCP/_tmp/",
+]
+
+# Forbidden roots (must never be written to or overlapped)
+FORBIDDEN_ROOTS = [
+    "BUILD/",
+    "CANON/",
+    "AGENTS.md",
+]
+
 class MCPTerminalServer:
     """MCP Server for terminal sharing and monitoring."""
 
@@ -149,7 +176,17 @@ class MCPTerminalServer:
                     "errors": validation["errors"]
                 }
 
+        # 3.5 CMP-01 Path validation (pre-execution)
+        path_validation = self._validate_jobspec_paths(task_spec)
+        if not path_validation["valid"]:
+            return {
+                "status": "error",
+                "message": "CMP-01 path validation failed",
+                "errors": path_validation["errors"]
+            }
+
         # 4. Prepare execution context
+
         execution_context = {
             "run_id": run_id,
             "skill": skill_name,
@@ -270,6 +307,24 @@ class MCPTerminalServer:
                 "message": f"Run directory not found: {run_dir}"
             }
 
+        # CMP-01: Verify declared outputs exist and are in durable roots
+        output_verification = self._verify_post_run_outputs(run_id)
+        if not output_verification["valid"]:
+            # Persist errors and fail the run
+            all_errors = (errors or []) + [
+                f"{e['code']}: {e['message']}" for e in output_verification["errors"]
+            ]
+            with open(run_dir / "ERRORS.json", "w") as f:
+                json.dump({
+                    "errors": all_errors,
+                    "structured_errors": output_verification["errors"]
+                }, f, indent=2)
+            return {
+                "status": "error",
+                "message": "CMP-01 output verification failed",
+                "errors": output_verification["errors"]
+            }
+
         # Save outputs
         with open(run_dir / "OUTPUTS.json", "w") as f:
             json.dump(outputs, f, indent=2)
@@ -278,6 +333,7 @@ class MCPTerminalServer:
         if errors:
             with open(run_dir / "ERRORS.json", "w") as f:
                 json.dump({"errors": errors}, f, indent=2)
+
 
         # Log completion
         self._log_operation({
@@ -384,9 +440,269 @@ class MCPTerminalServer:
         }
 
     # =========================================================================
+    # CMP-01 PATH VALIDATION
+    # Forbidden overlap containment + output existence checks
+    # =========================================================================
+
+    def _is_path_under_root(self, path: Path, root: Path) -> bool:
+        """Component-safe check if path is under root (not just string prefix)."""
+        try:
+            # Python 3.9+ has is_relative_to
+            return path.is_relative_to(root)
+        except AttributeError:
+            # Python 3.8 fallback
+            try:
+                path.relative_to(root)
+                return True
+            except ValueError:
+                return False
+
+    def _validate_single_path(
+        self,
+        raw_path: str,
+        json_pointer: str,
+        allowed_roots: List[str],
+        root_error_code: str
+    ) -> List[Dict]:
+        """Validate a single path against CMP-01 rules.
+        
+        Returns list of error dicts (empty if valid).
+        """
+        errors = []
+
+        # 1. Reject absolute paths
+        if Path(raw_path).is_absolute():
+            errors.append({
+                "code": "PATH_ESCAPES_REPO_ROOT",
+                "message": f"Absolute paths are not allowed: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "reason": "absolute_path"}
+            })
+            return errors
+
+        # 2. Reject traversal segments
+        path_parts = Path(raw_path).parts
+        if ".." in path_parts:
+            errors.append({
+                "code": "PATH_CONTAINS_TRAVERSAL",
+                "message": f"Path contains forbidden traversal segment '..': {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "segments": list(path_parts)}
+            })
+            return errors
+
+        # 3. Resolve and check containment under PROJECT_ROOT
+        abs_path = (PROJECT_ROOT / raw_path).resolve()
+        if not self._is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+            errors.append({
+                "code": "PATH_ESCAPES_REPO_ROOT",
+                "message": f"Path escapes repository root: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "resolved": str(abs_path), "repo_root": str(PROJECT_ROOT)}
+            })
+            return errors
+
+        # 4. Check forbidden overlap
+        for forbidden in FORBIDDEN_ROOTS:
+            forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
+            # Check both directions of containment
+            if self._is_path_under_root(abs_path, forbidden_abs) or self._is_path_under_root(forbidden_abs, abs_path):
+                errors.append({
+                    "code": "FORBIDDEN_PATH_OVERLAP",
+                    "message": f"Path overlaps forbidden root '{forbidden}': {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "forbidden_root": forbidden}
+                })
+                return errors
+
+        # 5. Check under allowed roots
+        under_allowed = False
+        for root in allowed_roots:
+            root_abs = (PROJECT_ROOT / root).resolve()
+            if self._is_path_under_root(abs_path, root_abs):
+                under_allowed = True
+                break
+
+        if not under_allowed:
+            errors.append({
+                "code": root_error_code,
+                "message": f"Path not under any allowed root: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "allowed_roots": allowed_roots}
+            })
+
+        return errors
+
+    def _check_containment_overlap(
+        self,
+        paths: List[str],
+        json_pointer_base: str
+    ) -> List[Dict]:
+        """Check for containment overlap between paths in the same list."""
+        errors = []
+        abs_paths = []
+
+        for raw_path in paths:
+            if not Path(raw_path).is_absolute() and ".." not in Path(raw_path).parts:
+                abs_paths.append((raw_path, (PROJECT_ROOT / raw_path).resolve()))
+
+        for i, (raw_a, abs_a) in enumerate(abs_paths):
+            for j, (raw_b, abs_b) in enumerate(abs_paths):
+                if i >= j:
+                    continue
+                # Check if one contains the other (both directions)
+                if self._is_path_under_root(abs_a, abs_b) or self._is_path_under_root(abs_b, abs_a):
+                    errors.append({
+                        "code": "PATH_OVERLAP",
+                        "message": f"Paths have containment overlap: '{raw_a}' and '{raw_b}'",
+                        "path": f"{json_pointer_base}/{i}",
+                        "details": {"path_a": raw_a, "path_b": raw_b}
+                    })
+
+        return errors
+
+    def _validate_jobspec_paths(self, task_spec: Dict) -> Dict:
+        """Validate all paths in a JobSpec against CMP-01 rules.
+        
+        Checks:
+        - catalytic_domains must be under CATALYTIC_ROOTS
+        - outputs.durable_paths must be under DURABLE_ROOTS
+        - No forbidden overlaps
+        - No traversal escapes
+        - No containment overlap within same list
+        
+        Returns: {"valid": bool, "errors": [error_dict, ...]}
+        """
+        errors = []
+
+        # Validate catalytic_domains
+        catalytic_domains = task_spec.get("catalytic_domains", [])
+        for idx, domain in enumerate(catalytic_domains):
+            path_errors = self._validate_single_path(
+                domain,
+                f"/catalytic_domains/{idx}",
+                CATALYTIC_ROOTS,
+                "CATALYTIC_OUTSIDE_ROOT"
+            )
+            errors.extend(path_errors)
+
+        # Check containment overlap within catalytic_domains
+        if len(catalytic_domains) > 1:
+            errors.extend(self._check_containment_overlap(
+                catalytic_domains,
+                "/catalytic_domains"
+            ))
+
+        # Validate outputs.durable_paths
+        outputs = task_spec.get("outputs", {})
+        durable_paths = outputs.get("durable_paths", [])
+        for idx, dpath in enumerate(durable_paths):
+            path_errors = self._validate_single_path(
+                dpath,
+                f"/outputs/durable_paths/{idx}",
+                DURABLE_ROOTS,
+                "OUTPUT_OUTSIDE_DURABLE_ROOT"
+            )
+            errors.extend(path_errors)
+
+        # Check containment overlap within durable_paths
+        if len(durable_paths) > 1:
+            errors.extend(self._check_containment_overlap(
+                durable_paths,
+                "/outputs/durable_paths"
+            ))
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors
+        }
+
+    def _verify_post_run_outputs(self, run_id: str) -> Dict:
+        """Verify declared outputs exist after run completion.
+        
+        Called from skill_complete to enforce output existence.
+        
+        Returns: {"valid": bool, "errors": [error_dict, ...]}
+        """
+        errors = []
+        run_dir = CONTRACTS_DIR / run_id
+
+        # Load TASK_SPEC.json
+        task_spec_path = run_dir / "TASK_SPEC.json"
+        if not task_spec_path.exists():
+            return {
+                "valid": False,
+                "errors": [{
+                    "code": "TASK_SPEC_MISSING",
+                    "message": f"TASK_SPEC.json not found in run directory",
+                    "path": "/",
+                    "details": {"run_id": run_id, "expected": str(task_spec_path)}
+                }]
+            }
+
+        with open(task_spec_path) as f:
+            task_spec = json.load(f)
+
+        outputs = task_spec.get("outputs", {})
+        durable_paths = outputs.get("durable_paths", [])
+
+        for idx, raw_path in enumerate(durable_paths):
+            json_pointer = f"/outputs/durable_paths/{idx}"
+
+            # Skip if path has basic format issues (already caught pre-run)
+            if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
+                continue
+
+            abs_path = (PROJECT_ROOT / raw_path).resolve()
+
+            # 1. Check forbidden overlap
+            for forbidden in FORBIDDEN_ROOTS:
+                forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
+                if self._is_path_under_root(abs_path, forbidden_abs) or self._is_path_under_root(forbidden_abs, abs_path):
+                    errors.append({
+                        "code": "FORBIDDEN_PATH_OVERLAP",
+                        "message": f"Output overlaps forbidden root '{forbidden}': {raw_path}",
+                        "path": json_pointer,
+                        "details": {"declared": raw_path, "forbidden_root": forbidden}
+                    })
+                    continue
+
+            # 2. Check under DURABLE_ROOTS
+            under_durable = False
+            for root in DURABLE_ROOTS:
+                root_abs = (PROJECT_ROOT / root).resolve()
+                if self._is_path_under_root(abs_path, root_abs):
+                    under_durable = True
+                    break
+
+            if not under_durable:
+                errors.append({
+                    "code": "OUTPUT_OUTSIDE_DURABLE_ROOT",
+                    "message": f"Output not under any durable root: {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "durable_roots": DURABLE_ROOTS}
+                })
+                continue
+
+            # 3. Check existence on disk
+            if not abs_path.exists():
+                errors.append({
+                    "code": "OUTPUT_MISSING",
+                    "message": f"Declared output does not exist: {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "resolved": str(abs_path)}
+                })
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors
+        }
+
+    # =========================================================================
     # AGENT MESSAGING SYSTEM
     # Governor ↔ Ant Worker communication via MCP
     # =========================================================================
+
 
     def dispatch_task(
         self,
