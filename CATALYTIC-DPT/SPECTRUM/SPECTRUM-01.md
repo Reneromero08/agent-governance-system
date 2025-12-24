@@ -16,8 +16,8 @@ SPECTRUM-01 defines the minimum artifact bundle required to resume trust and rea
 |----------|------|-------------|
 | `TASK_SPEC.json` | JSON | Immutable job specification. Defines inputs, expected outputs, and constraints. |
 | `STATUS.json` | JSON | Final execution status. Contains `status` field (`success` \| `failure`), timestamp, and error details if applicable. |
-| `outputs.hash.json` | JSON | Output verification manifest. Maps each output path to its SHA-256 hash. |
-| `validator_version` | String | Semantic version of the validator used to produce the hashes. Embedded in `outputs.hash.json`. |
+| `OUTPUT_HASHES.json` | JSON | Output verification manifest. Maps each output path to its SHA-256 hash. |
+| `validator_identity` | String/Object | Validator provenance. Includes semantic version (`validator_semver`) and MAY include a deterministic build fingerprint (`validator_build_id`). |
 
 ### 1.2 Artifact Schemas
 
@@ -41,10 +41,11 @@ SPECTRUM-01 defines the minimum artifact bundle required to resume trust and rea
 }
 ```
 
-#### outputs.hash.json
+#### OUTPUT_HASHES.json
 ```json
 {
-  "validator_version": "1.0.0",
+  "validator_semver": "1.10.0",
+  "validator_build_id": "git:abc1234",
   "generated_at": "ISO8601",
   "hashes": {
     "path/to/output1": "sha256:abc123...",
@@ -75,9 +76,9 @@ The following artifacts are explicitly **NOT REQUIRED** for trust resumption:
 
 ```
 IF STATUS.status == "success"
-   AND all paths in outputs.hash.json exist
-   AND sha256(file) == outputs.hash.json[path] for each path
-   AND validator_version is recognized
+   AND all paths in OUTPUT_HASHES.json exist
+   AND sha256(file) == OUTPUT_HASHES.json.hashes[path] for each path
+   AND validator_identity is verified
 THEN
    the run is accepted as true.
 ELSE
@@ -87,13 +88,16 @@ ELSE
 ### 3.1 Trust Verification Procedure
 
 1. Parse `STATUS.json`. If `status != "success"`, reject.
-2. Parse `outputs.hash.json`. Extract `validator_version`.
-3. Validate `validator_version` is supported. If unsupported, reject.
-4. For each entry in `hashes`:
+2. Parse `OUTPUT_HASHES.json`. Extract `validator_semver` and `validator_build_id` (if present).
+3. Validator identity clarification:
+   - Validator identity MAY include both a semantic version (semver) and a deterministic build fingerprint (e.g., commit hash or source hash).
+   - When both are present, verification MUST enforce both.
+4. Validate `validator_identity` is supported/matched. If mismatch or unsupported, reject.
+5. For each entry in `hashes`:
    - Verify file exists at path.
    - Compute SHA-256 of file contents.
    - Compare to stored hash. If mismatch, reject.
-5. If all checks pass, accept.
+6. If all checks pass, accept.
 
 ---
 
@@ -133,7 +137,7 @@ run_20241224_091500/
 ├── STATUS.json                       # 0.2 KB
 ├── outputs/
 │   └── report.pdf                    # 50 KB
-└── outputs.hash.json                 # 0.3 KB
+└── OUTPUT_HASHES.json                 # 0.3 KB
 
 Total: ~51.5 KB
 ```
