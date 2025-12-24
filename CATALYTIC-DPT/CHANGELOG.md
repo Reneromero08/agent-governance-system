@@ -2,6 +2,20 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.7.0] - 2025-12-24
+
+### Added
+- **TASK_SPEC Anti-tamper**: SHA-256 integrity hashing of `TASK_SPEC.json` at execution start, verified at completion.
+- **Run Status Persistence**: `STATUS.json` created on completion with `run_id`, `status`, `cmp01` (pass/fail), and timestamp.
+- **Symlink Escape Protection**: Added `.resolve()` containment check against `PROJECT_ROOT` to catch escapes via symlinks in allowed roots.
+- **Audit-Grade Tests**: Expanded `test_cmp01_validator.py` to 31 tests including hermetic symlink escape proofing and integrity tampering simulation.
+
+### Fixed
+- **Index Reporting**: `PATH_OVERLAP` errors now correctly report original `JobSpec` indices in JSON Pointers.
+- **Path Semantics**: Exact duplicate paths are now allowed/deduped (Option 1 policy), avoiding overlapping-self false positives.
+- **Forbidden Loop Bug**: Post-run validation now correctly breaks on forbidden overlap to avoid redundant/shadow errors for the same entry.
+- **Silent Skipping**: Post-run should no longer silenty skip absolute/traversal paths; it now reports `PATH_ESCAPES_REPO_ROOT` or `PATH_CONTAINS_TRAVERSAL`.
+
 ## [1.6.0] - 2025-12-24
 
 ### Added
@@ -12,17 +26,12 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
   - Rejection of traversal (`..`), absolute paths, and forbidden root overlaps.
 - **Root Constants**: `DURABLE_ROOTS`, `CATALYTIC_ROOTS`, `FORBIDDEN_ROOTS` defined per CMP-01 spec.
 - **Structured Error Vectors**: All validation errors now return `{code, message, path, details}` format.
-- **Test Suite**: `TESTBENCH/test_cmp01_validator.py` with 9 unit tests covering:
-  - Traversal rejection
-  - Absolute path rejection
-  - Forbidden overlap detection
-  - Durable/catalytic root enforcement
-  - Nested overlap detection
-  - Missing output post-run detection
+- **Test Suite**: `TESTBENCH/test_cmp01_validator.py` covering traversal, absolute paths, and root containment.
 
 ### Changed
 - `execute_skill()` now calls `_validate_jobspec_paths()` before execution.
 - `skill_complete()` now calls `_verify_post_run_outputs()` to verify declared outputs exist.
+
 
 ## [1.5.0] - 2025-12-24
 
