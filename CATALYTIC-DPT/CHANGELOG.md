@@ -2,6 +2,32 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.9.0] - 2025-12-24
+
+### Added
+- **SPECTRUM-02 Adversarial Resume**: Durable bundle emission for resume without execution history.
+- **OUTPUT_HASHES.json Generation**: Automatic generation on successful skill_complete containing:
+  - SHA-256 hashes for every declared durable output (files and directory contents).
+  - Validator version binding for future compatibility.
+  - Posix-style paths relative to PROJECT_ROOT for deterministic resumption.
+- **verify_spectrum02_bundle() Method**: Verifies resume bundles checking:
+  - Artifact completeness (TASK_SPEC.json, STATUS.json, OUTPUT_HASHES.json).
+  - Status validity (status=success, cmp01=pass).
+  - Validator version support.
+  - Hash integrity across all outputs.
+  - Returns structured errors: BUNDLE_INCOMPLETE, STATUS_NOT_SUCCESS, CMP01_NOT_PASS, VALIDATOR_UNSUPPORTED, OUTPUT_MISSING, HASH_MISMATCH.
+- **SPECTRUM-02 Specification**: Formal spec at `SPECTRUM/SPECTRUM-02.md` defining:
+  - Resume bundle artifact set (minimal, durable-only).
+  - Explicitly forbidden artifacts (logs, tmp, transcripts, reasoning traces).
+  - Resume rule (verification-only, no history inference).
+  - Agent obligations on resume (fail closed, no hallucination).
+- **Test Suites**:
+  - `TESTBENCH/spectrum/test_spectrum02_resume.py`: 30 tests verifying bundle acceptance, rejection, and no-history-dependency.
+  - `TESTBENCH/spectrum/test_spectrum02_emission.py`: 25 integration tests for bundle generation and verification in real MCP flows.
+
+### Fixed
+- **Fail Closed on Bundle Generation**: skill_complete now fails if OUTPUT_HASHES.json generation fails, preventing incomplete bundles.
+
 ## [1.8.0] - 2025-12-24
 
 ### Added
