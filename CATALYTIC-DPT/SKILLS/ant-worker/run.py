@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 """
-CATALYTIC-DPT/SKILLS/grok-executor/run.py
+CATALYTIC-DPT/SKILLS/ant-worker/run.py
 
-Distributed task executor for Grok workers.
+Distributed task executor for Ant Workers.
 
 Executes via MCP to prevent drift and ensure hash verification.
-Reports to Conductor (Google Conductor) and Claude.
+Reports to Governor and logs all operations to immutable ledger.
 
 Task types:
 - file_operation: Copy, move, delete, read files

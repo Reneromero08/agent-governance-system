@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
-CATALYTIC-DPT/SKILLS/gemini-executor/run.py
+CATALYTIC-DPT/SKILLS/governor/run.py
 
-Enables Claude to delegate tasks to Gemini CLI, which runs in YOUR VSCode terminal
-(not Claude's sandbox).
+Enables President (Claude) to delegate tasks to Gemini CLI (Governor),
+which runs in the user's VSCode terminal.
 
 Key insight:
 - Claude sends: {"gemini_prompt": "analyze D:/CCC 2.0/AI/AGI/..."}
@@ -39,10 +39,9 @@ def execute_gemini_prompt(prompt, timeout=60):
         dict with status, response, and metadata
     """
     try:
-        # Call Gemini CLI with the prompt
-        # Using -o json to get structured output
+        # Call Gemini CLI with the prompt using --prompt flag
         result = subprocess.run(
-            ["gemini", "-o", "json", prompt],
+            ["gemini", "--prompt", prompt],
             capture_output=True,
             text=True,
             timeout=timeout
