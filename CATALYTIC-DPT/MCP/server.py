@@ -209,8 +209,21 @@ class MCPTerminalServer:
         })
 
         # 6. Save task spec to ledger (immutable)
-        with open(run_dir / "TASK_SPEC.json", "w") as f:
-            json.dump(task_spec, f, indent=2)
+        task_spec_bytes = json.dumps(task_spec, indent=2).encode('utf-8')
+        with open(run_dir / "TASK_SPEC.json", "wb") as f:
+            f.write(task_spec_bytes)
+
+        # 7. Compute and save TASK_SPEC integrity hash (anti-tamper)
+        task_spec_hash = hashlib.sha256(task_spec_bytes).hexdigest()
+        with open(run_dir / "TASK_SPEC.sha256", "w") as f:
+            f.write(task_spec_hash)
+
+        # Log hash in ledger for audit trail
+        self._log_operation({
+            "operation": "task_spec_hash",
+            "run_id": run_id,
+            "hash": task_spec_hash
+        })
 
         return {
             "status": "pending",
@@ -218,8 +231,10 @@ class MCPTerminalServer:
             "skill": skill_name,
             "executor": executor,
             "ledger_dir": str(run_dir),
+            "task_spec_hash": task_spec_hash,
             "next_step": f"Call CATALYTIC-DPT/SKILLS/{skill_name}/run.py with inputs"
         }
+
 
     def file_sync(
         self,
@@ -307,7 +322,52 @@ class MCPTerminalServer:
                 "message": f"Run directory not found: {run_dir}"
             }
 
-        # CMP-01: Verify declared outputs exist and are in durable roots
+        completed_at = datetime.now().isoformat()
+
+        # Helper to write STATUS.json
+        def write_status(run_status: str, skill_status: str, cmp01: str, error_msg: Optional[str] = None):
+            status_data = {
+                "run_id": run_id,
+                "status": run_status,
+                "skill_status": skill_status,
+                "completed_at": completed_at,
+                "cmp01": cmp01
+            }
+            if error_msg:
+                status_data["error"] = error_msg
+            with open(run_dir / "STATUS.json", "w") as f:
+                json.dump(status_data, f, indent=2)
+
+        # CMP-01 Check 1: Verify TASK_SPEC integrity (anti-tamper)
+        task_spec_path = run_dir / "TASK_SPEC.json"
+        hash_path = run_dir / "TASK_SPEC.sha256"
+        
+        if hash_path.exists() and task_spec_path.exists():
+            with open(hash_path) as f:
+                expected_hash = f.read().strip()
+            with open(task_spec_path, "rb") as f:
+                actual_hash = hashlib.sha256(f.read()).hexdigest()
+            
+            if expected_hash != actual_hash:
+                tamper_errors = [{
+                    "code": "TASK_SPEC_TAMPERED",
+                    "message": "TASK_SPEC.json has been modified after execution started",
+                    "path": "/",
+                    "details": {"expected_hash": expected_hash, "actual_hash": actual_hash}
+                }]
+                with open(run_dir / "ERRORS.json", "w") as f:
+                    json.dump({
+                        "errors": ["TASK_SPEC_TAMPERED: TASK_SPEC.json integrity check failed"],
+                        "structured_errors": tamper_errors
+                    }, f, indent=2)
+                write_status("error", "failed", "fail", "TASK_SPEC.json integrity check failed")
+                return {
+                    "status": "error",
+                    "message": "TASK_SPEC.json integrity check failed",
+                    "errors": tamper_errors
+                }
+
+        # CMP-01 Check 2: Verify declared outputs exist and are in durable roots
         output_verification = self._verify_post_run_outputs(run_id)
         if not output_verification["valid"]:
             # Persist errors and fail the run
@@ -319,6 +379,7 @@ class MCPTerminalServer:
                     "errors": all_errors,
                     "structured_errors": output_verification["errors"]
                 }, f, indent=2)
+            write_status("error", "failed", "fail", "CMP-01 output verification failed")
             return {
                 "status": "error",
                 "message": "CMP-01 output verification failed",
@@ -334,6 +395,8 @@ class MCPTerminalServer:
             with open(run_dir / "ERRORS.json", "w") as f:
                 json.dump({"errors": errors}, f, indent=2)
 
+        # Write success STATUS.json
+        write_status("success", status, "pass")
 
         # Log completion
         self._log_operation({
@@ -341,7 +404,8 @@ class MCPTerminalServer:
             "run_id": run_id,
             "status": status,
             "outputs": list(outputs.keys()),
-            "error_count": len(errors) if errors else 0
+            "error_count": len(errors) if errors else 0,
+            "cmp01": "pass"
         })
 
         return {
@@ -350,8 +414,10 @@ class MCPTerminalServer:
             "skill_status": status,
             "ledger_dir": str(run_dir),
             "outputs_saved": len(outputs),
-            "errors_logged": len(errors) if errors else 0
+            "errors_logged": len(errors) if errors else 0,
+            "cmp01": "pass"
         }
+
 
     def get_ledger(self, run_id: Optional[str] = None) -> Dict:
         """Retrieve ledger entries."""
@@ -538,7 +604,11 @@ class MCPTerminalServer:
         paths: List[str],
         json_pointer_base: str
     ) -> List[Dict]:
-        """Check for containment overlap between paths in the same list."""
+        """Check for containment overlap between paths in the same list.
+        
+        Policy: Exact duplicates (same resolved path) are allowed/deduped.
+        Only flag when one path strictly contains another.
+        """
         errors = []
         abs_paths = []
 
@@ -551,7 +621,12 @@ class MCPTerminalServer:
             for j, (idx_b, raw_b, abs_b) in enumerate(abs_paths):
                 if i >= j:
                     continue
-                # Check if one contains the other (both directions)
+                
+                # Allow exact duplicates (same resolved path)
+                if abs_a == abs_b:
+                    continue
+                
+                # Check if one strictly contains the other (both directions)
                 if self._is_path_under_root(abs_a, abs_b) or self._is_path_under_root(abs_b, abs_a):
                     # Use smaller original index for deterministic path pointer
                     smaller_idx = min(idx_a, idx_b)
@@ -568,6 +643,7 @@ class MCPTerminalServer:
                     })
 
         return errors
+
 
 
     def _validate_jobspec_paths(self, task_spec: Dict) -> Dict:
