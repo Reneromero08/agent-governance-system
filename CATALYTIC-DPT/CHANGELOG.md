@@ -2,6 +2,19 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.8.0] - 2025-12-24
+
+### Added
+- **CATLAB-01 Implementation**: Released `TESTBENCH/catlab_stress` for proving catalytic temporal integrity.
+- **Stress Test Fixture**: `test_catlab_restoration.py` containing deterministic population, mutation, and restoration logic.
+- **Restoration Contract**: Validated helper functions (`populate`, `mutate`, `restore`) ensuring byte-identical restoration of catalytic domains.
+- **Verification Suite**: 4 tests verifying:
+  - Happy path full restoration.
+  - Detection of single-byte corruption.
+  - Detection of missing files.
+  - Detection of rogue extra files.
+- **Artifact Generation**: Tests now output `PRE_SNAPSHOT.json`, `POST_SNAPSHOT.json`, and `STATUS.json` for audit capabilities.
+
 ## [1.7.0] - 2025-12-24
 
 ### Added
@@ -26,12 +39,17 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
   - Rejection of traversal (`..`), absolute paths, and forbidden root overlaps.
 - **Root Constants**: `DURABLE_ROOTS`, `CATALYTIC_ROOTS`, `FORBIDDEN_ROOTS` defined per CMP-01 spec.
 - **Structured Error Vectors**: All validation errors now return `{code, message, path, details}` format.
-- **Test Suite**: `TESTBENCH/test_cmp01_validator.py` covering traversal, absolute paths, and root containment.
+- **Test Suite**: `TESTBENCH/test_cmp01_validator.py` with 9 unit tests covering:
+  - Traversal rejection
+  - Absolute path rejection
+  - Forbidden overlap detection
+  - Durable/catalytic root enforcement
+  - Nested overlap detection
+  - Missing output post-run detection
 
 ### Changed
 - `execute_skill()` now calls `_validate_jobspec_paths()` before execution.
 - `skill_complete()` now calls `_verify_post_run_outputs()` to verify declared outputs exist.
-
 
 ## [1.5.0] - 2025-12-24
 
