@@ -44,6 +44,6 @@
     "mcp_server": {
         "host": "localhost",
         "port": 8765,
-        "ledger_path": "CATALYTIC-DPT/CONTRACTS/_runs"
+        "ledger_path": "CONTRACTS/_runs"
     }
 }

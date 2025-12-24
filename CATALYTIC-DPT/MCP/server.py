@@ -350,12 +350,37 @@ class MCPTerminalServer:
 
     @staticmethod
     def _validate_against_schema(instance: Dict, schema: Dict) -> Dict:
-        """Validate JSON instance against schema."""
-        # This would use jsonschema library in production
-        # For now, return simple validation
+        """Validate JSON instance against schema.
+        
+        Basic validation without jsonschema library:
+        - Checks required fields
+        - Validates enum values for task_type
+        - Returns errors list if invalid
+        """
+        errors = []
+        
+        # Check input_schema if present
+        input_schema = schema.get("input_schema", schema)
+        
+        # Check required fields
+        required_fields = input_schema.get("required", [])
+        for field in required_fields:
+            if field not in instance:
+                errors.append(f"Missing required field: {field}")
+        
+        # Validate properties with enums
+        properties = input_schema.get("properties", {})
+        for field, field_schema in properties.items():
+            if field in instance and "enum" in field_schema:
+                if instance[field] not in field_schema["enum"]:
+                    errors.append(
+                        f"Invalid value for '{field}': '{instance[field]}'. "
+                        f"Must be one of: {field_schema['enum']}"
+                    )
+        
         return {
-            "valid": True,
-            "errors": []
+            "valid": len(errors) == 0,
+            "errors": errors
         }
 
     # =========================================================================
