@@ -15,7 +15,6 @@ CATALYTIC-DPT/
 ├── TESTBENCH.md                 # PoC testing strategy and fixtures
 ├── swarm_config.json            # Model assignments for each role
 ├── GOVERNOR_SOP.json            # Operating manual for autonomous execution
-├── HANDOFF_TO_GOVERNOR.md       # Task description for Governor (CLI Agent)
 ├── ORCHESTRATION_ARCHITECTURE.md # Multi-agent system design
 │
 ├── PRIMITIVES/                  # Core implementations
@@ -47,10 +46,11 @@ CATALYTIC-DPT/
 │   │   └── ledger_tests/
 │   └── adversarial/             # Edge cases
 │
-└── SKILLS/                      # Skills for integration into AGS
-    ├── catlab-jobspec-schema/
-    ├── catlab-validator/
-    └── catlab-executor/
+└── SKILLS/                      # Swarm agent skills
+    ├── governor/                # Governor (Manager) skill
+    ├── ant-worker/              # Ant Worker (Executor) skill
+    ├── file-analyzer/           # File analysis skill
+    └── templates/               # Task templates
 ```
 
 ---

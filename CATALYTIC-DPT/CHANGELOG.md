@@ -2,6 +2,25 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.3.0] - 2025-12-24
+
+### Added
+- `SKILLS/governor/fixtures/phase0_directive.json`: Phase 0 task as structured JSON directive.
+
+### Changed
+- Merged `GOVERNOR_CONTEXT.md` into `SKILLS/governor/SKILL.md` (role + MCP commands now in skill).
+- Converted `HANDOFF_TO_GOVERNOR.md` to skill fixture format.
+- Trimmed `ORCHESTRATION_ARCHITECTURE.md` from 16KB to 7KB (removed verbose examples).
+- Updated `README.md` to reflect actual SKILLS folder structure.
+
+### Removed
+- `HANDOFF_TO_GOVERNOR.md` (now `SKILLS/governor/fixtures/phase0_directive.json`)
+- `GOVERNOR_CONTEXT.md` (merged into `SKILLS/governor/SKILL.md`)
+- `PHASE0_IMPLEMENTATION_GUIDE.md` (redundant with `SCHEMAS/README.md`)
+- `pop_swarm_terminals.py` (redundant with `launch_swarm.ps1`)
+
+---
+
 ## [1.2.0] - 2025-12-24
 
 ### Added
