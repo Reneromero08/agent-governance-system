@@ -57,6 +57,13 @@ class TestCMP01Validator:
         # Post-run output tests
         self.test_output_missing_post_run()
 
+        # Correctness fixes tests
+        self.test_path_overlap_correct_indices()
+        self.test_post_run_forbidden_overlap_only_one_error()
+        self.test_post_run_absolute_path_error()
+        self.test_post_run_traversal_path_error()
+
+
         # Summary
         print()
         print("=" * 60)
@@ -237,8 +244,137 @@ class TestCMP01Validator:
             # Cleanup
             shutil.rmtree(run_dir, ignore_errors=True)
 
+    # =========================================================================
+    # CORRECTNESS FIXES TESTS
+    # =========================================================================
+
+    def test_path_overlap_correct_indices(self):
+        """PATH_OVERLAP should report original indices even when invalid paths are filtered."""
+        # First path is invalid (will be filtered), second and third overlap
+        task_spec = {
+            "catalytic_domains": [
+                "/absolute/invalid",  # index 0 - will be filtered (absolute)
+                "CONTRACTS/_runs/_tmp/",  # index 1 - valid
+                "CONTRACTS/_runs/_tmp/nested/"  # index 2 - overlaps with index 1
+            ],
+            "outputs": {"durable_paths": []}
+        }
+        result = self.server._validate_jobspec_paths(task_spec)
+
+        # Find the PATH_OVERLAP error
+        overlap_errors = [e for e in result["errors"] if e["code"] == "PATH_OVERLAP"]
+        self._assert(
+            len(overlap_errors) > 0,
+            "test_path_overlap_correct_indices (has overlap error)",
+            f"Expected PATH_OVERLAP error, got: {result['errors']}"
+        )
+
+        if overlap_errors:
+            err = overlap_errors[0]
+            # Check that details contain original indices 1 and 2 (not filtered indices 0 and 1)
+            self._assert(
+                err["details"].get("index_a") == 1 and err["details"].get("index_b") == 2,
+                "test_path_overlap_correct_indices (indices)",
+                f"Expected indices 1 and 2, got: {err['details']}"
+            )
+            # Check that path points to smaller index
+            self._assert(
+                err["path"] == "/catalytic_domains/1",
+                "test_path_overlap_correct_indices (path pointer)",
+                f"Expected /catalytic_domains/1, got: {err['path']}"
+            )
+
+    def test_post_run_forbidden_overlap_only_one_error(self):
+        """Forbidden overlap in post-run should produce ONLY FORBIDDEN_PATH_OVERLAP for that entry."""
+        run_id = "test-forbidden-only"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        # CANON/foo.txt overlaps forbidden root
+        task_spec = {
+            "outputs": {
+                "durable_paths": ["CANON/foo.txt"]
+            }
+        }
+
+        try:
+            with open(run_dir / "TASK_SPEC.json", "w") as f:
+                json.dump(task_spec, f)
+
+            result = self.server._verify_post_run_outputs(run_id)
+
+            # Should have exactly one error: FORBIDDEN_PATH_OVERLAP
+            # Should NOT have OUTPUT_OUTSIDE_DURABLE_ROOT or OUTPUT_MISSING for the same entry
+            self._assert(
+                len(result["errors"]) == 1,
+                "test_post_run_forbidden_overlap_only_one_error (count)",
+                f"Expected 1 error, got {len(result['errors'])}: {result['errors']}"
+            )
+            self._assert(
+                result["errors"][0]["code"] == "FORBIDDEN_PATH_OVERLAP",
+                "test_post_run_forbidden_overlap_only_one_error (code)",
+                f"Expected FORBIDDEN_PATH_OVERLAP, got: {result['errors'][0]['code']}"
+            )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_post_run_absolute_path_error(self):
+        """Post-run should report error for absolute paths instead of silently skipping."""
+        run_id = "test-postrun-absolute"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        # Use Windows-style absolute path (C:\tmp\...) for cross-platform correctness
+        task_spec = {
+            "outputs": {
+                "durable_paths": ["C:\\tmp\\absolute_path.txt"]
+            }
+
+        }
+
+        try:
+            with open(run_dir / "TASK_SPEC.json", "w") as f:
+                json.dump(task_spec, f)
+
+            result = self.server._verify_post_run_outputs(run_id)
+
+            self._assert(
+                not result["valid"] and self._find_error_code(result["errors"], "PATH_ESCAPES_REPO_ROOT"),
+                "test_post_run_absolute_path_error",
+                f"Expected PATH_ESCAPES_REPO_ROOT, got: {result['errors']}"
+            )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_post_run_traversal_path_error(self):
+        """Post-run should report error for traversal paths instead of silently skipping."""
+        run_id = "test-postrun-traversal"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        task_spec = {
+            "outputs": {
+                "durable_paths": ["CONTRACTS/../CANON/foo.txt"]
+            }
+        }
+
+        try:
+            with open(run_dir / "TASK_SPEC.json", "w") as f:
+                json.dump(task_spec, f)
+
+            result = self.server._verify_post_run_outputs(run_id)
+
+            self._assert(
+                not result["valid"] and self._find_error_code(result["errors"], "PATH_CONTAINS_TRAVERSAL"),
+                "test_post_run_traversal_path_error",
+                f"Expected PATH_CONTAINS_TRAVERSAL, got: {result['errors']}"
+            )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
 
 if __name__ == "__main__":
     tester = TestCMP01Validator()
     success = tester.run_all()
     sys.exit(0 if success else 1)
+
