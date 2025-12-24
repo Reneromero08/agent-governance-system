@@ -1,0 +1,20 @@
+{
+  "task_id": "conductor-test-copy-readmes",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/README.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/CATALYTIC-README.md"
+    },
+    {
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/README.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/SKILLS-README.md"
+    },
+    {
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/ORCHESTRATION_ARCHITECTURE.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/ORCHESTRATION.md"
+    }
+  ],
+  "verify_integrity": true
+}

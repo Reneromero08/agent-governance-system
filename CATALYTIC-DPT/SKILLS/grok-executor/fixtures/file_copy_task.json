@@ -1,0 +1,20 @@
+{
+  "task_id": "grok-copy-swarm-governor",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "d:/CCC 2.0/AI/AGI/SKILLS/swarm-governor/run.py",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/swarm-governor-adapted/run.py"
+    },
+    {
+      "source": "d:/CCC 2.0/AI/AGI/SKILLS/swarm-governor/validate.py",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/swarm-governor-adapted/validate.py"
+    },
+    {
+      "source": "d:/CCC 2.0/AI/AGI/SKILLS/swarm-governor/__init__.py",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/swarm-governor-adapted/__init__.py"
+    }
+  ],
+  "verify_integrity": true
+}
