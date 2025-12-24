@@ -82,11 +82,20 @@ class SPECTRUM02Verifier:
             self._add_error("BUNDLE_INCOMPLETE", f"OUTPUT_HASHES.json invalid: {e}")
             return self._result()
 
-        validator_version = output_hashes.get("validator_version")
-        if validator_version not in SUPPORTED_VALIDATOR_VERSIONS:
+        validator_semver = output_hashes.get("validator_semver")
+        if validator_semver not in SUPPORTED_VALIDATOR_VERSIONS:
             self._add_error(
                 "VALIDATOR_UNSUPPORTED",
-                f"validator_version={validator_version}, supported={SUPPORTED_VALIDATOR_VERSIONS}"
+                f"validator_semver={validator_semver}, supported={SUPPORTED_VALIDATOR_VERSIONS}"
+            )
+            return self._result()
+
+        # Check validator_build_id exists and is non-empty
+        validator_build_id = output_hashes.get("validator_build_id")
+        if not validator_build_id:
+            self._add_error(
+                "VALIDATOR_BUILD_ID_MISSING",
+                f"validator_build_id is missing or empty"
             )
             return self._result()
 
@@ -222,7 +231,8 @@ class TestSPECTRUM02Resume:
 
         # OUTPUT_HASHES.json
         output_hashes = {
-            "validator_version": "1.0.0",
+            "validator_semver": "1.0.0",
+            "validator_build_id": "test:fixture",
             "generated_at": datetime.now(timezone.utc).isoformat(),
             "hashes": {
                 output_rel: output_hash
@@ -326,10 +336,10 @@ class TestSPECTRUM02Resume:
         """Unsupported validator version should cause rejection."""
         bundle_path = self._create_valid_bundle("validator-mismatch")
 
-        # Modify validator version to unsupported value
+        # Modify validator semver to unsupported value
         hashes_path = bundle_path / "OUTPUT_HASHES.json"
         hashes = json.loads(hashes_path.read_text())
-        hashes["validator_version"] = "99.99.99"  # Unsupported version
+        hashes["validator_semver"] = "99.99.99"  # Unsupported version
         hashes_path.write_text(json.dumps(hashes, indent=2))
 
         verifier = SPECTRUM02Verifier(bundle_path)

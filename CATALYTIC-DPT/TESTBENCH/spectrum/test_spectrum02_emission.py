@@ -25,7 +25,7 @@ spec.loader.exec_module(mcp_server)
 MCPTerminalServer = mcp_server.MCPTerminalServer
 PROJECT_ROOT = mcp_server.PROJECT_ROOT
 CONTRACTS_DIR = mcp_server.CONTRACTS_DIR
-VALIDATOR_VERSION = mcp_server.VALIDATOR_VERSION
+VALIDATOR_SEMVER = mcp_server.VALIDATOR_SEMVER
 
 
 class TestSPECTRUM02Emission:
@@ -43,7 +43,7 @@ class TestSPECTRUM02Emission:
         print("SPECTRUM-02: Bundle Emission Integration Tests")
         print("=" * 60)
         print(f"PROJECT_ROOT: {PROJECT_ROOT}")
-        print(f"VALIDATOR_VERSION: {VALIDATOR_VERSION}")
+        print(f"VALIDATOR_SEMVER: {VALIDATOR_SEMVER}")
         print()
 
         # Core emission tests
@@ -147,9 +147,14 @@ class TestSPECTRUM02Emission:
 
                 # Verify structure
                 self._assert(
-                    "validator_version" in output_hashes,
-                    "test_bundle_emitted_on_success (has validator_version)",
-                    f"Missing validator_version: {output_hashes}"
+                    "validator_semver" in output_hashes,
+                    "test_bundle_emitted_on_success (has validator_semver)",
+                    f"Missing validator_semver: {output_hashes}"
+                )
+                self._assert(
+                    "validator_build_id" in output_hashes,
+                    "test_bundle_emitted_on_success (has validator_build_id)",
+                    f"Missing validator_build_id: {output_hashes}"
                 )
                 self._assert(
                     "generated_at" in output_hashes,
@@ -162,11 +167,11 @@ class TestSPECTRUM02Emission:
                     f"Missing hashes: {output_hashes}"
                 )
 
-                # Verify validator_version matches server
+                # Verify validator_semver matches server
                 self._assert(
-                    output_hashes["validator_version"] == VALIDATOR_VERSION,
-                    "test_bundle_emitted_on_success (validator_version correct)",
-                    f"Expected {VALIDATOR_VERSION}, got {output_hashes['validator_version']}"
+                    output_hashes["validator_semver"] == VALIDATOR_SEMVER,
+                    "test_bundle_emitted_on_success (validator_semver correct)",
+                    f"Expected {VALIDATOR_SEMVER}, got {output_hashes['validator_semver']}"
                 )
 
                 # Verify hash content
