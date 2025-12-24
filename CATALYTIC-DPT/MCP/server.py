@@ -358,6 +358,297 @@ class MCPTerminalServer:
             "errors": []
         }
 
+    # =========================================================================
+    # AGENT MESSAGING SYSTEM
+    # Governor ↔ Ant Worker communication via MCP
+    # =========================================================================
+
+    def dispatch_task(
+        self,
+        task_id: str,
+        task_spec: Dict,
+        from_agent: str,
+        to_agent: str,
+        priority: int = 5
+    ) -> Dict:
+        """Governor dispatches task to Ant Worker via MCP message queue."""
+        
+        task_message = {
+            "task_id": task_id,
+            "task_spec": task_spec,
+            "from_agent": from_agent,
+            "to_agent": to_agent,
+            "priority": priority,
+            "status": "pending",
+            "dispatched_at": datetime.now().isoformat(),
+            "completed_at": None,
+            "result": None
+        }
+        
+        queue_file = self.ledger_path / "task_queue.jsonl"
+        with open(queue_file, "a") as f:
+            f.write(json.dumps(task_message) + "\n")
+        
+        self._log_operation({
+            "operation": "dispatch_task",
+            "task_id": task_id,
+            "from_agent": from_agent,
+            "to_agent": to_agent
+        })
+        
+        return {"status": "dispatched", "task_id": task_id, "to_agent": to_agent}
+
+    def get_pending_tasks(self, agent_id: str) -> Dict:
+        """Ant Worker checks for pending tasks assigned to it."""
+        queue_file = self.ledger_path / "task_queue.jsonl"
+        pending = []
+        
+        if queue_file.exists():
+            with open(queue_file) as f:
+                for line in f:
+                    task = json.loads(line)
+                    if task["to_agent"] == agent_id and task["status"] == "pending":
+                        pending.append(task)
+        
+        pending.sort(key=lambda x: x.get("priority", 0), reverse=True)
+        return {"status": "success", "agent_id": agent_id, "pending_count": len(pending), "tasks": pending}
+
+    def report_result(self, task_id: str, from_agent: str, status: str, result: Dict, errors: Optional[List[str]] = None) -> Dict:
+        """Ant Worker reports task result back to Governor."""
+        result_message = {
+            "task_id": task_id,
+            "from_agent": from_agent,
+            "status": status,
+            "result": result,
+            "errors": errors or [],
+            "reported_at": datetime.now().isoformat()
+        }
+        
+        results_file = self.ledger_path / "task_results.jsonl"
+        with open(results_file, "a") as f:
+            f.write(json.dumps(result_message) + "\n")
+        
+        self._log_operation({"operation": "report_result", "task_id": task_id, "from_agent": from_agent, "status": status})
+        return {"status": "reported", "task_id": task_id}
+
+    def get_results(self, task_id: Optional[str] = None) -> Dict:
+        """Governor retrieves results from Ant Workers."""
+        results_file = self.ledger_path / "task_results.jsonl"
+        results = []
+        
+        if results_file.exists():
+            with open(results_file) as f:
+                for line in f:
+                    r = json.loads(line)
+                    if task_id and r["task_id"] != task_id:
+                        continue
+                    results.append(r)
+        
+        return {"status": "success", "results": results, "count": len(results)}
+
+    def acknowledge_task(self, task_id: str) -> Dict:
+        """Mark task as processed so it isn't picked up again."""
+        queue_file = self.ledger_path / "task_queue.jsonl"
+        tasks = []
+        acknowledged = False
+        
+        if queue_file.exists():
+            with open(queue_file) as f:
+                for line in f:
+                    t = json.loads(line)
+                    if t["task_id"] == task_id and t["status"] == "pending":
+                        t["status"] = "processed"
+                        t["acknowledged_at"] = datetime.now().isoformat()
+                        acknowledged = True
+                    tasks.append(t)
+            
+            with open(queue_file, "w") as f:
+                for t in tasks:
+                    f.write(json.dumps(t) + "\n")
+        
+        return {"status": "acknowledged" if acknowledged else "not_found", "task_id": task_id}
+
+    # =========================================================================
+    # CHAIN OF COMMAND ESCALATION
+    # Ant → Governor → Claude → User
+    # =========================================================================
+
+    CHAIN_OF_COMMAND = ["Ant", "Governor", "Claude", "User"]
+
+    def escalate(
+        self,
+        from_agent: str,
+        issue: str,
+        context: Dict,
+        priority: int = 5
+    ) -> Dict:
+        """Escalate issue UP the chain of command."""
+        
+        # Determine who to escalate to
+        try:
+            from_index = next(i for i, level in enumerate(self.CHAIN_OF_COMMAND) 
+                             if from_agent.startswith(level))
+            to_level = self.CHAIN_OF_COMMAND[from_index + 1] if from_index + 1 < len(self.CHAIN_OF_COMMAND) else "User"
+        except (StopIteration, IndexError):
+            to_level = "Governor"  # Default escalation target
+        
+        escalation = {
+            "escalation_id": f"esc-{uuid.uuid4().hex[:8]}",
+            "from_agent": from_agent,
+            "to_level": to_level,
+            "issue": issue,
+            "context": context,
+            "priority": priority,
+            "status": "pending",
+            "created_at": datetime.now().isoformat(),
+            "resolved_at": None,
+            "resolution": None
+        }
+        
+        escalation_file = self.ledger_path / "escalations.jsonl"
+        with open(escalation_file, "a") as f:
+            f.write(json.dumps(escalation) + "\n")
+        
+        self._log_operation({
+            "operation": "escalate",
+            "escalation_id": escalation["escalation_id"],
+            "from_agent": from_agent,
+            "to_level": to_level,
+            "priority": priority
+        })
+        
+        return {
+            "status": "escalated",
+            "escalation_id": escalation["escalation_id"],
+            "from": from_agent,
+            "to": to_level,
+            "message": f"Issue escalated to {to_level}"
+        }
+
+    def get_escalations(self, for_level: str) -> Dict:
+        """Get pending escalations for a level in the chain."""
+        escalation_file = self.ledger_path / "escalations.jsonl"
+        pending = []
+        
+        if escalation_file.exists():
+            with open(escalation_file) as f:
+                for line in f:
+                    esc = json.loads(line)
+                    if esc["to_level"] == for_level and esc["status"] == "pending":
+                        pending.append(esc)
+        
+        pending.sort(key=lambda x: x.get("priority", 0), reverse=True)
+        return {"status": "success", "for_level": for_level, "pending_count": len(pending), "escalations": pending}
+
+    def resolve_escalation(
+        self,
+        escalation_id: str,
+        resolved_by: str,
+        resolution: str,
+        action_taken: Optional[str] = None
+    ) -> Dict:
+        """Resolve an escalation with decision."""
+        escalation_file = self.ledger_path / "escalations.jsonl"
+        
+        if not escalation_file.exists():
+            return {"status": "error", "message": "No escalations found"}
+        
+        escalations = []
+        resolved = None
+        with open(escalation_file) as f:
+            for line in f:
+                esc = json.loads(line)
+                if esc["escalation_id"] == escalation_id:
+                    esc["status"] = "resolved"
+                    esc["resolved_at"] = datetime.now().isoformat()
+                    esc["resolved_by"] = resolved_by
+                    esc["resolution"] = resolution
+                    esc["action_taken"] = action_taken
+                    resolved = esc
+                escalations.append(esc)
+        
+        with open(escalation_file, "w") as f:
+            for esc in escalations:
+                f.write(json.dumps(esc) + "\n")
+        
+        if resolved:
+            self._log_operation({
+                "operation": "resolve_escalation",
+                "escalation_id": escalation_id,
+                "resolved_by": resolved_by
+            })
+            return {"status": "resolved", "escalation_id": escalation_id, "resolved_by": resolved_by}
+        
+        return {"status": "error", "message": f"Escalation {escalation_id} not found"}
+
+    def send_directive(
+        self,
+        from_level: str,
+        to_agent: str,
+        directive: str,
+        context: Dict
+    ) -> Dict:
+        """Send directive DOWN the chain of command."""
+        directive_msg = {
+            "directive_id": f"dir-{uuid.uuid4().hex[:8]}",
+            "from_level": from_level,
+            "to_agent": to_agent,
+            "directive": directive,
+            "context": context,
+            "status": "pending",
+            "issued_at": datetime.now().isoformat(),
+            "acknowledged_at": None
+        }
+        
+        directive_file = self.ledger_path / "directives.jsonl"
+        with open(directive_file, "a") as f:
+            f.write(json.dumps(directive_msg) + "\n")
+        
+        self._log_operation({
+            "operation": "send_directive",
+            "directive_id": directive_msg["directive_id"],
+            "from_level": from_level,
+            "to_agent": to_agent
+        })
+        
+        return {"status": "issued", "directive_id": directive_msg["directive_id"], "to": to_agent}
+
+    def get_directives(self, for_agent: str) -> Dict:
+        """Get pending directives for an agent."""
+        directive_file = self.ledger_path / "directives.jsonl"
+        pending = []
+        
+        if directive_file.exists():
+            with open(directive_file) as f:
+                for line in f:
+                    d = json.loads(line)
+                    if d["to_agent"] == for_agent and d["status"] == "pending":
+                        pending.append(d)
+        
+        return {"status": "success", "for_agent": for_agent, "pending_count": len(pending), "directives": pending}
+
+    def acknowledge_directive(self, directive_id: str) -> Dict:
+        """Mark directive as processed."""
+        directive_file = self.ledger_path / "directives.jsonl"
+        directives = []
+        acknowledged = False
+        
+        if directive_file.exists():
+            with open(directive_file) as f:
+                for line in f:
+                    d = json.loads(line)
+                    if d["directive_id"] == directive_id and d["status"] == "pending":
+                        d["status"] = "processed"
+                        d["acknowledged_at"] = datetime.now().isoformat()
+                        acknowledged = True
+                    directives.append(d)
+            
+            with open(directive_file, "w") as f:
+                for d in directives:
+                    f.write(json.dumps(d) + "\n")
+        
+        return {"status": "acknowledged" if acknowledged else "not_found", "directive_id": directive_id}
+
 
 # Exported for MCP integration
 mcp_server = MCPTerminalServer()
@@ -421,6 +712,39 @@ def register_mcp_tools():
             "description": "Retrieve immutable operations ledger",
             "parameters": {
                 "run_id": "Optional filter by run ID"
+            }
+        },
+        # Agent Messaging Tools (Governor ↔ Ant Worker)
+        "dispatch_task": {
+            "description": "Governor dispatches task to Ant Worker",
+            "parameters": {
+                "task_id": "Unique task identifier",
+                "task_spec": "Task specification JSON",
+                "from_agent": "Dispatching agent (Governor)",
+                "to_agent": "Target agent (Ant-1, Ant-2)",
+                "priority": "Task priority (1-10)"
+            }
+        },
+        "get_pending_tasks": {
+            "description": "Ant Worker polls for pending tasks",
+            "parameters": {
+                "agent_id": "ID of the polling agent"
+            }
+        },
+        "report_result": {
+            "description": "Ant Worker reports task result to Governor",
+            "parameters": {
+                "task_id": "Task ID being reported",
+                "from_agent": "Reporting agent",
+                "status": "success|failed|error",
+                "result": "Result dictionary",
+                "errors": "List of errors if any"
+            }
+        },
+        "get_results": {
+            "description": "Governor retrieves results from Ant Workers",
+            "parameters": {
+                "task_id": "Optional filter by task ID"
             }
         }
     }
