@@ -2,6 +2,34 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.11.0] - 2024-12-24
+
+### Added
+- **SPECTRUM-03 Chain Verification**: Temporal integrity across sequences of runs using bundle-only memory.
+- **verify_spectrum03_chain() Function**: Verifies chains of SPECTRUM-02 bundles with:
+  - Individual bundle verification via `verify_spectrum02_bundle`
+  - Output registry construction from `OUTPUT_HASHES.json` keys
+  - Reference validation against available outputs (if `references` field present in TASK_SPEC)
+  - Chain order enforcement (currently passed order, with TODO for timestamp parsing)
+  - No history dependency assertion (verification uses only bundle artifacts)
+- **Chain Memory Model**: Defines what persists across runs:
+  - Allowed: `run_id`, durable output paths, SHA-256 hashes, validator identity, status
+  - Forbidden: logs/, tmp/, chat transcripts, reasoning traces, intermediate state
+- **New Error Code**:
+  - `INVALID_CHAIN_REFERENCE`: TASK_SPEC references output not produced by earlier run or self
+- **Test Suite**: `TESTBENCH/spectrum/test_spectrum03_chain.py` with 23 tests covering:
+  - Chain acceptance when all bundles verify
+  - Rejection on middle-run tampering (HASH_MISMATCH)
+  - Rejection on missing bundle artifacts (BUNDLE_INCOMPLETE)
+  - Rejection on invalid output references (INVALID_CHAIN_REFERENCE)
+  - No history dependency (acceptance without logs/tmp/transcripts)
+
+### Security Properties
+- **Tamper Evidence**: Any modification to outputs after bundle generation detected via hash mismatch
+- **Reference Integrity**: Runs cannot claim dependencies on non-existent outputs
+- **Temporal Ordering**: Strict ordering maintained (future enhancement for timestamp-based validation)
+- **Fail Closed**: Chain verification rejects on any ambiguity; partial acceptance not allowed
+
 ## [1.10.0] - 2025-12-24
 
 ### Added
