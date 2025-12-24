@@ -48,9 +48,9 @@ def call_gemini(task_description, repo_path):
     """
 
     try:
-        # Call Gemini CLI with the prompt
+        # Call Gemini CLI with the prompt using --prompt flag
         result = subprocess.run(
-            ["gemini", "-o", "json", prompt],
+            ["gemini", "--prompt", prompt],
             capture_output=True,
             text=True,
             timeout=60
