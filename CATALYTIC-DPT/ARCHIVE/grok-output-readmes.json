@@ -1,0 +1,42 @@
+{
+  "task_id": "conductor-test-copy-readmes",
+  "task_type": "file_operation",
+  "run_id": "conductor-test-copy-readmes-20251224-013552",
+  "status": "success",
+  "timestamp_start": "2025-12-24T01:35:52.797513",
+  "timestamp_end": "2025-12-24T01:35:52.825011",
+  "operations": [
+    {
+      "operation": "copy",
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/README.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/CATALYTIC-README.md",
+      "source_hash": "937cc4b49ae3b772a548436bb95a3b9d42503074d8ee74f957c5d9432c4526b4",
+      "dest_hash": "937cc4b49ae3b772a548436bb95a3b9d42503074d8ee74f957c5d9432c4526b4",
+      "hash_verified": true,
+      "size_bytes": 5055,
+      "timestamp": "2025-12-24T01:35:52.810200"
+    },
+    {
+      "operation": "copy",
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/README.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/SKILLS-README.md",
+      "source_hash": "66c4232a8ce395f1a4223bee64971a94aed69740ac4e291d7a0ed7d18c6df427",
+      "dest_hash": "66c4232a8ce395f1a4223bee64971a94aed69740ac4e291d7a0ed7d18c6df427",
+      "hash_verified": true,
+      "size_bytes": 9057,
+      "timestamp": "2025-12-24T01:35:52.818732"
+    },
+    {
+      "operation": "copy",
+      "source": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/ORCHESTRATION_ARCHITECTURE.md",
+      "destination": "d:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/conductor-test-readmes/ORCHESTRATION.md",
+      "source_hash": "c96e1353685c68d4e26dc0564410170adb98c9227dbf1cff46651aa6ed958388",
+      "dest_hash": "c96e1353685c68d4e26dc0564410170adb98c9227dbf1cff46651aa6ed958388",
+      "hash_verified": true,
+      "size_bytes": 16442,
+      "timestamp": "2025-12-24T01:35:52.825011"
+    }
+  ],
+  "errors": [],
+  "ledger_dir": "D:\\CCC 2.0\\AI\\agent-governance-system\\CONTRACTS\\_runs\\conductor-test-copy-readmes-20251224-013552"
+}
