@@ -6,6 +6,13 @@
                 "D:/CCC 2.0/AI/agent-governance-system/MCP/server.py"
             ],
             "cwd": "D:/CCC 2.0/AI/agent-governance-system"
+        },
+        "catalytic-swarm": {
+            "command": "python",
+            "args": [
+                "D:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/MCP/stdio_server.py"
+            ],
+            "cwd": "D:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT"
         }
     }
 }
