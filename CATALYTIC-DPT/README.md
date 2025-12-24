@@ -123,9 +123,18 @@ When Phase 1 PoC passes:
 
 ## References
 
-- `CONTEXT/research/Catalytic Computing/CATALYTIC_ROADMAP.md` - Full theory and phases
-- `CONTEXT/research/Catalytic Computing/MASTER_PLAN.md` - Implementation blueprint
-- `CANON/CATALYTIC_COMPUTING.md` - Canonical definition (if exists)
+### Core Research (in RESEARCH/)
+- `RESEARCH/New Vision/CATALYTIC_COMPRESSION_REPORT.md` - **Two-plane architecture** (control vs data plane)
+- `RESEARCH/New Vision/CATALYTIC_FINDINGS_REPORT.md` - Full R&D synthesis
+- `RESEARCH/New Vision/CATALYTIC_ROADMAP.md` - Original phase plan
+
+### Implementation
+- `RESEARCH/MASTER_PLAN.md` - Implementation blueprint
+- `RESEARCH/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` - Mutation protocol spec
+
+### AGS Integration
+- `../CANON/CATALYTIC_COMPUTING.md` - Canonical definition
+- `../AGS_ROADMAP_MASTER.md` - Lane F (Catalytic Computing)
 
 ---
 
