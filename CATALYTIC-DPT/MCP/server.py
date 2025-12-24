@@ -23,6 +23,10 @@ from typing import Dict, List, Any, Optional
 # For now, we structure it as a mock MCP server
 
 PROJECT_ROOT = Path(__file__).parent.parent.parent
+
+# SPECTRUM-02 Validator version (for OUTPUT_HASHES.json binding)
+VALIDATOR_VERSION = "1.0.0"
+SUPPORTED_VALIDATOR_VERSIONS = {"1.0.0", "1.0.1", "1.1.0"}
 CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
 SKILLS_DIR = PROJECT_ROOT / "CATALYTIC-DPT" / "SKILLS"
 
@@ -306,6 +310,81 @@ class MCPTerminalServer:
             "size_bytes": source_path.stat().st_size
         }
 
+    def _generate_output_hashes(self, run_id: str) -> Dict:
+        """Generate OUTPUT_HASHES.json for SPECTRUM-02 bundle.
+
+        Hashes every declared durable output in TASK_SPEC.json.
+        - If output is a file: hash that file
+        - If output is a directory: hash every file under it
+
+        Returns: {"valid": bool, "errors": [...], "hashes": {...}}
+        """
+        errors = []
+        hashes = {}
+        run_dir = CONTRACTS_DIR / run_id
+
+        # Load TASK_SPEC.json
+        task_spec_path = run_dir / "TASK_SPEC.json"
+        if not task_spec_path.exists():
+            return {
+                "valid": False,
+                "errors": [{
+                    "code": "TASK_SPEC_MISSING",
+                    "message": "TASK_SPEC.json not found",
+                    "path": "/",
+                    "details": {"run_id": run_id}
+                }],
+                "hashes": {}
+            }
+
+        with open(task_spec_path) as f:
+            task_spec = json.load(f)
+
+        outputs_spec = task_spec.get("outputs", {})
+        durable_paths = outputs_spec.get("durable_paths", [])
+
+        for idx, raw_path in enumerate(durable_paths):
+            json_pointer = f"/outputs/durable_paths/{idx}"
+
+            # Skip invalid paths (already caught by _verify_post_run_outputs)
+            if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
+                continue
+
+            abs_path = (PROJECT_ROOT / raw_path).resolve()
+
+            # Skip if path escapes repo root
+            if not self._is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+                continue
+
+            if not abs_path.exists():
+                errors.append({
+                    "code": "OUTPUT_MISSING",
+                    "message": f"Declared output does not exist: {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path}
+                })
+                continue
+
+            if abs_path.is_file():
+                # Hash single file
+                file_hash = self._compute_hash(abs_path)
+                # Use posix-style path relative to PROJECT_ROOT
+                rel_posix = abs_path.relative_to(PROJECT_ROOT).as_posix()
+                hashes[rel_posix] = f"sha256:{file_hash}"
+            elif abs_path.is_dir():
+                # Hash every file under directory
+                for file_path in abs_path.rglob("*"):
+                    if file_path.is_file():
+                        file_hash = self._compute_hash(file_path)
+                        rel_posix = file_path.relative_to(PROJECT_ROOT).as_posix()
+                        hashes[rel_posix] = f"sha256:{file_hash}"
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors,
+            "hashes": hashes
+        }
+
     def skill_complete(
         self,
         run_id: str,
@@ -394,6 +473,34 @@ class MCPTerminalServer:
         if errors:
             with open(run_dir / "ERRORS.json", "w") as f:
                 json.dump({"errors": errors}, f, indent=2)
+
+        # SPECTRUM-02: Generate OUTPUT_HASHES.json for durable bundle
+        hash_result = self._generate_output_hashes(run_id)
+        if not hash_result["valid"]:
+            # Hash generation failed - fail closed
+            all_errors = (errors or []) + [
+                f"{e['code']}: {e['message']}" for e in hash_result["errors"]
+            ]
+            with open(run_dir / "ERRORS.json", "w") as f:
+                json.dump({
+                    "errors": all_errors,
+                    "structured_errors": hash_result["errors"]
+                }, f, indent=2)
+            write_status("error", "failed", "fail", "SPECTRUM-02 hash generation failed")
+            return {
+                "status": "error",
+                "message": "SPECTRUM-02 hash generation failed",
+                "errors": hash_result["errors"]
+            }
+
+        # Write OUTPUT_HASHES.json
+        output_hashes_data = {
+            "validator_version": VALIDATOR_VERSION,
+            "generated_at": datetime.now().isoformat(),
+            "hashes": hash_result["hashes"]
+        }
+        with open(run_dir / "OUTPUT_HASHES.json", "w") as f:
+            json.dump(output_hashes_data, f, indent=2)
 
         # Write success STATUS.json
         write_status("success", status, "pass")
@@ -807,6 +914,151 @@ class MCPTerminalServer:
                     "message": f"Declared output does not exist: {raw_path}",
                     "path": json_pointer,
                     "details": {"declared": raw_path, "resolved": str(abs_path)}
+                })
+
+        return {
+            "valid": len(errors) == 0,
+            "errors": errors
+        }
+
+    # =========================================================================
+    # SPECTRUM-02 BUNDLE VERIFICATION
+    # Adversarial resume without execution history
+    # =========================================================================
+
+    def verify_spectrum02_bundle(self, run_dir: Path) -> Dict:
+        """Verify a SPECTRUM-02 resume bundle.
+
+        Checks:
+        - TASK_SPEC.json exists
+        - STATUS.json exists with status=success and cmp01=pass
+        - OUTPUT_HASHES.json exists with supported validator_version
+        - All declared hashes verify against actual files
+
+        Returns: {"valid": bool, "errors": [...]}
+        """
+        errors = []
+
+        # Ensure run_dir is a Path
+        if isinstance(run_dir, str):
+            run_dir = Path(run_dir)
+
+        # 1. Check TASK_SPEC.json exists
+        task_spec_path = run_dir / "TASK_SPEC.json"
+        if not task_spec_path.exists():
+            errors.append({
+                "code": "BUNDLE_INCOMPLETE",
+                "message": "TASK_SPEC.json missing",
+                "path": "/",
+                "details": {"expected": str(task_spec_path)}
+            })
+            return {"valid": False, "errors": errors}
+
+        # 2. Check STATUS.json exists and is valid
+        status_path = run_dir / "STATUS.json"
+        if not status_path.exists():
+            errors.append({
+                "code": "BUNDLE_INCOMPLETE",
+                "message": "STATUS.json missing",
+                "path": "/",
+                "details": {"expected": str(status_path)}
+            })
+            return {"valid": False, "errors": errors}
+
+        try:
+            with open(status_path) as f:
+                status = json.load(f)
+        except json.JSONDecodeError as e:
+            errors.append({
+                "code": "BUNDLE_INCOMPLETE",
+                "message": f"STATUS.json invalid JSON: {e}",
+                "path": "/",
+                "details": {}
+            })
+            return {"valid": False, "errors": errors}
+
+        if status.get("status") != "success":
+            errors.append({
+                "code": "STATUS_NOT_SUCCESS",
+                "message": f"STATUS.status is '{status.get('status')}', expected 'success'",
+                "path": "/status",
+                "details": {"actual": status.get("status")}
+            })
+            return {"valid": False, "errors": errors}
+
+        if status.get("cmp01") != "pass":
+            errors.append({
+                "code": "CMP01_NOT_PASS",
+                "message": f"STATUS.cmp01 is '{status.get('cmp01')}', expected 'pass'",
+                "path": "/cmp01",
+                "details": {"actual": status.get("cmp01")}
+            })
+            return {"valid": False, "errors": errors}
+
+        # 3. Check OUTPUT_HASHES.json exists and is valid
+        hashes_path = run_dir / "OUTPUT_HASHES.json"
+        if not hashes_path.exists():
+            errors.append({
+                "code": "BUNDLE_INCOMPLETE",
+                "message": "OUTPUT_HASHES.json missing",
+                "path": "/",
+                "details": {"expected": str(hashes_path)}
+            })
+            return {"valid": False, "errors": errors}
+
+        try:
+            with open(hashes_path) as f:
+                output_hashes = json.load(f)
+        except json.JSONDecodeError as e:
+            errors.append({
+                "code": "BUNDLE_INCOMPLETE",
+                "message": f"OUTPUT_HASHES.json invalid JSON: {e}",
+                "path": "/",
+                "details": {}
+            })
+            return {"valid": False, "errors": errors}
+
+        # 4. Check validator version is supported
+        validator_version = output_hashes.get("validator_version")
+        if validator_version not in SUPPORTED_VALIDATOR_VERSIONS:
+            errors.append({
+                "code": "VALIDATOR_UNSUPPORTED",
+                "message": f"validator_version '{validator_version}' not supported",
+                "path": "/validator_version",
+                "details": {
+                    "actual": validator_version,
+                    "supported": list(SUPPORTED_VALIDATOR_VERSIONS)
+                }
+            })
+            return {"valid": False, "errors": errors}
+
+        # 5. Verify each hash
+        hashes = output_hashes.get("hashes", {})
+        for rel_path, expected_hash in hashes.items():
+            abs_path = PROJECT_ROOT / rel_path
+
+            if not abs_path.exists():
+                errors.append({
+                    "code": "OUTPUT_MISSING",
+                    "message": f"Output file does not exist: {rel_path}",
+                    "path": f"/hashes/{rel_path}",
+                    "details": {"declared": rel_path, "resolved": str(abs_path)}
+                })
+                continue
+
+            # Compute actual hash
+            actual_hash = f"sha256:{self._compute_hash(abs_path)}"
+
+            if actual_hash != expected_hash:
+                errors.append({
+                    "code": "HASH_MISMATCH",
+                    "message": f"Hash mismatch for {rel_path}",
+                    "path": f"/hashes/{rel_path}",
+                    "details": {
+                        "declared": rel_path,
+                        "expected": expected_hash,
+                        "actual": actual_hash
+                    }
                 })
 
         return {
