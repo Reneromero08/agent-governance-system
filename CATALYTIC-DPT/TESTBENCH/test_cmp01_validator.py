@@ -63,6 +63,12 @@ class TestCMP01Validator:
         self.test_post_run_absolute_path_error()
         self.test_post_run_traversal_path_error()
 
+        # Audit hardening tests
+        self.test_duplicate_paths_allowed()
+        self.test_near_prefix_no_overlap()
+        self.test_task_spec_integrity_success()
+        self.test_task_spec_tampered()
+        self.test_status_json_on_cmp01_failure()
 
         # Summary
         print()
@@ -372,9 +378,192 @@ class TestCMP01Validator:
         finally:
             shutil.rmtree(run_dir, ignore_errors=True)
 
+    # =========================================================================
+    # AUDIT HARDENING TESTS
+    # =========================================================================
+
+    def test_duplicate_paths_allowed(self):
+        """Exact duplicate paths should be allowed (no PATH_OVERLAP)."""
+        task_spec = {
+            "catalytic_domains": [
+                "CONTRACTS/_runs/_tmp/",
+                "CONTRACTS/_runs/_tmp/"  # exact duplicate
+            ],
+            "outputs": {"durable_paths": []}
+        }
+        result = self.server._validate_jobspec_paths(task_spec)
+        
+        # Should NOT have PATH_OVERLAP for exact duplicates
+        overlap_errors = [e for e in result["errors"] if e["code"] == "PATH_OVERLAP"]
+        self._assert(
+            len(overlap_errors) == 0,
+            "test_duplicate_paths_allowed",
+            f"Expected no PATH_OVERLAP for exact duplicates, got: {overlap_errors}"
+        )
+
+    def test_near_prefix_no_overlap(self):
+        """Paths like 'a' and 'ab' should not be considered overlapping."""
+        task_spec = {
+            "catalytic_domains": [
+                "CONTRACTS/_runs/_tmp/a",
+                "CONTRACTS/_runs/_tmp/ab"  # near-prefix, not overlap
+            ],
+            "outputs": {"durable_paths": []}
+        }
+        result = self.server._validate_jobspec_paths(task_spec)
+        
+        overlap_errors = [e for e in result["errors"] if e["code"] == "PATH_OVERLAP"]
+        self._assert(
+            len(overlap_errors) == 0,
+            "test_near_prefix_no_overlap",
+            f"Expected no PATH_OVERLAP for near-prefix paths, got: {overlap_errors}"
+        )
+
+    def test_task_spec_integrity_success(self):
+        """TASK_SPEC hash match should pass verification."""
+        run_id = "test-integrity-ok"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        task_spec = {"outputs": {"durable_paths": []}}
+        task_spec_bytes = json.dumps(task_spec, indent=2).encode('utf-8')
+        
+        try:
+            # Write TASK_SPEC.json and hash (simulating execute_skill)
+            with open(run_dir / "TASK_SPEC.json", "wb") as f:
+                f.write(task_spec_bytes)
+            import hashlib
+            with open(run_dir / "TASK_SPEC.sha256", "w") as f:
+                f.write(hashlib.sha256(task_spec_bytes).hexdigest())
+
+            # Call skill_complete - should succeed
+            result = self.server.skill_complete(run_id, "success", {})
+            
+            self._assert(
+                result["status"] == "success",
+                "test_task_spec_integrity_success",
+                f"Expected success, got: {result}"
+            )
+            
+            # Check STATUS.json exists with cmp01=pass
+            status_path = run_dir / "STATUS.json"
+            self._assert(
+                status_path.exists(),
+                "test_task_spec_integrity_success (STATUS.json exists)",
+                "STATUS.json not found"
+            )
+            if status_path.exists():
+                with open(status_path) as f:
+                    status_data = json.load(f)
+                self._assert(
+                    status_data.get("cmp01") == "pass",
+                    "test_task_spec_integrity_success (cmp01=pass)",
+                    f"Expected cmp01=pass, got: {status_data}"
+                )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_task_spec_tampered(self):
+        """Modified TASK_SPEC.json should fail with TASK_SPEC_TAMPERED."""
+        run_id = "test-integrity-fail"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        task_spec = {"outputs": {"durable_paths": []}}
+        task_spec_bytes = json.dumps(task_spec, indent=2).encode('utf-8')
+        
+        try:
+            # Write TASK_SPEC.json and hash
+            with open(run_dir / "TASK_SPEC.json", "wb") as f:
+                f.write(task_spec_bytes)
+            import hashlib
+            with open(run_dir / "TASK_SPEC.sha256", "w") as f:
+                f.write(hashlib.sha256(task_spec_bytes).hexdigest())
+
+            # TAMPER: modify TASK_SPEC.json
+            tampered = {"outputs": {"durable_paths": []}, "tampered": True}
+            with open(run_dir / "TASK_SPEC.json", "w") as f:
+                json.dump(tampered, f)
+
+            # Call skill_complete - should fail
+            result = self.server.skill_complete(run_id, "success", {})
+            
+            self._assert(
+                result["status"] == "error" and self._find_error_code(result.get("errors", []), "TASK_SPEC_TAMPERED"),
+                "test_task_spec_tampered",
+                f"Expected TASK_SPEC_TAMPERED error, got: {result}"
+            )
+            
+            # Check STATUS.json exists with cmp01=fail
+            status_path = run_dir / "STATUS.json"
+            if status_path.exists():
+                with open(status_path) as f:
+                    status_data = json.load(f)
+                self._assert(
+                    status_data.get("cmp01") == "fail",
+                    "test_task_spec_tampered (STATUS.json cmp01=fail)",
+                    f"Expected cmp01=fail, got: {status_data}"
+                )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
+    def test_status_json_on_cmp01_failure(self):
+        """CMP-01 output verification failure should write STATUS.json with cmp01=fail."""
+        run_id = "test-status-cmp01-fail"
+        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir.mkdir(parents=True, exist_ok=True)
+
+        task_spec = {
+            "outputs": {
+                "durable_paths": [f"CONTRACTS/_runs/{run_id}/missing.txt"]
+            }
+        }
+        task_spec_bytes = json.dumps(task_spec, indent=2).encode('utf-8')
+        
+        try:
+            with open(run_dir / "TASK_SPEC.json", "wb") as f:
+                f.write(task_spec_bytes)
+            import hashlib
+            with open(run_dir / "TASK_SPEC.sha256", "w") as f:
+                f.write(hashlib.sha256(task_spec_bytes).hexdigest())
+
+            # Don't create the declared output - trigger OUTPUT_MISSING
+            result = self.server.skill_complete(run_id, "success", {})
+            
+            self._assert(
+                result["status"] == "error",
+                "test_status_json_on_cmp01_failure (status=error)",
+                f"Expected error status, got: {result}"
+            )
+            
+            # Check STATUS.json
+            status_path = run_dir / "STATUS.json"
+            self._assert(
+                status_path.exists(),
+                "test_status_json_on_cmp01_failure (STATUS.json exists)",
+                "STATUS.json not found"
+            )
+            if status_path.exists():
+                with open(status_path) as f:
+                    status_data = json.load(f)
+                self._assert(
+                    status_data.get("cmp01") == "fail" and status_data.get("status") == "error",
+                    "test_status_json_on_cmp01_failure (cmp01=fail, status=error)",
+                    f"Expected cmp01=fail and status=error, got: {status_data}"
+                )
+            
+            # Check ERRORS.json exists
+            errors_path = run_dir / "ERRORS.json"
+            self._assert(
+                errors_path.exists(),
+                "test_status_json_on_cmp01_failure (ERRORS.json exists)",
+                "ERRORS.json not found"
+            )
+        finally:
+            shutil.rmtree(run_dir, ignore_errors=True)
+
 
 if __name__ == "__main__":
     tester = TestCMP01Validator()
     success = tester.run_all()
     sys.exit(0 if success else 1)
-
