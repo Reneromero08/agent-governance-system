@@ -5,17 +5,26 @@ Catalytic Runtime: Enforce catalytic space constraints during execution.
 
 Implements CMP-01 (Catalytic Mutation Protocol) by:
 1. Taking pre-snapshots of catalytic domains
-2. Executing a wrapped subprocess/function
+2. Executing a wrapped subprocess/function (or multi-step pipeline)
 3. Verifying restoration of catalytic domains
 4. Recording run ledger with proof
 
-Usage:
+Usage (single command):
   python catalytic_runtime.py \
     --run-id cortex-build-2025-12-23 \
     --catalytic-domains CORTEX/_generated/_tmp \
     --durable-outputs CORTEX/_generated/cortex.json \
     --intent "Build cortex index" \
     -- python CORTEX/cortex.build.py
+
+Usage (multi-step pipeline):
+  python catalytic_runtime.py \
+    --run-id pipeline-2025-12-23 \
+    --catalytic-domains CORTEX/_generated/_tmp \
+    --durable-outputs CORTEX/_generated/cortex.json \
+    --step "Build scratch index::python build_index.py" \
+    --step "Transform data::python transform.py" \
+    --step "Validate output::python validate.py"
 
 The run ledger is stored in CONTRACTS/_runs/<run_id>/
 """
