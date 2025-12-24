@@ -1,131 +1,44 @@
-# Governor Skill
-
-**Purpose**: Dispatch strict JobSpecs to Ant Workers
-**Role**: The Conductor - analyzes, breaks down, and distributes tasks
-**CLI**: Configurable (default: Gemini CLI)
-
+---
+name: governor
+description: Analyzes high-level goals, breaks them into subtasks, and dispatches to ant-workers. Use when you need task decomposition and worker coordination. Aggregates results and reports to higher authority.
+compatibility: Python 3.8+, Gemini CLI optional
 ---
 
-## Architecture
+# Governor
 
-```
-Higher Authority (Claude/User)
-    ↓
-Governor (analyzes + distributes)
-    ├─ Breaks task into subtasks
-    ├─ Creates ant-task.json for each Ant
-    ├─ Dispatches to Ant Workers
-    └─ Aggregates results
-        ↓
-Ant Workers (execute templates)
-```
-
----
+The Conductor - analyzes, decomposes, and dispatches tasks to Ant Workers.
 
 ## Usage
 
 ```bash
-python run.py input.json output.json
+python scripts/run.py input.json output.json
 ```
 
 ## Input Schema
 
 ```json
 {
-  "goal": "Import swarm files to CATALYTIC-DPT",
-  "task_id": "governor-import-swarm",
-  "break_into_subtasks": true,
-  "max_workers": 2,
-  "timeout_seconds": 120
+  "gemini_prompt": "Analyze D:/path/to/files and summarize",
+  "task_id": "analyze-001",
+  "command_type": "analyze",
+  "timeout_seconds": 60
 }
 ```
 
----
+## Command Types
 
-## Governor Responsibilities
+| Type | Purpose |
+|------|---------|
+| `analyze` | Read/analyze files, return findings |
+| `execute` | Run a command, return results |
+| `research` | Deep research on topic |
+| `report` | Generate comprehensive report |
 
-1. **Analyze**: Understand the high-level goal
-2. **Decompose**: Break into ant-sized subtasks
-3. **Template**: Create strict ant-task.json for each worker
-4. **Dispatch**: Send to Ant Workers via MCP/CLI
-5. **Monitor**: Track worker progress
-6. **Aggregate**: Collect and merge results
-7. **Report**: Send summary to higher authority
+## Workflow
 
----
-
-## Governance Rules
-
-1. **Single Authority**: Governor is the only one that commits
-2. **Strict Templates**: Ants receive templates, not freeform prompts
-3. **Deterministic**: Same input → same subtask breakdown
-4. **Logged**: Every dispatch logged to ledger
-5. **Escalation**: Unknown situations → escalate, don't guess
-
----
-
-## Example Workflow
-
-**Input from Claude:**
-```json
-{
-  "goal": "Copy swarm-governor files to CATALYTIC-DPT",
-  "task_id": "import-swarm-20251224"
-}
-```
-
-**Governor creates ant tasks:**
-```json
-[
-  {
-    "ant_id": "ant-1",
-    "task_id": "ant-copy-run-py",
-    "task_type": "file_operation",
-    "operation": "copy",
-    "files": [{"source": "...", "destination": "..."}]
-  },
-  {
-    "ant_id": "ant-2",
-    "task_id": "ant-copy-validate-py",
-    "task_type": "file_operation",
-    "operation": "copy",
-    "files": [{"source": "...", "destination": "..."}]
-  }
-]
-```
-
-**Governor aggregates results:**
-```json
-{
-  "status": "success",
-  "task_id": "import-swarm-20251224",
-  "workers_used": 2,
-  "files_copied": 3,
-  "ledger": "CONTRACTS/_runs/import-swarm-20251224/"
-}
-```
-
----
-
-## CLI Configuration
-
-The Governor can use different CLIs. Default is Gemini:
-
-```bash
-gemini --experimental-acp
-```
-
-Swappable to other frontier models or local models when needed.
-
----
-
-## Related Skills
-
-- **ant-worker/**: Executes templates dispatched by Governor
-- **file-analyzer/**: Provides file analysis before dispatch
-
----
-
-**Status**: Ready
-**CLI**: Gemini (configurable)
-**Workers**: Dispatches to 2 Ant Workers
+1. Receive directive from Claude
+2. Analyze and decompose into subtasks
+3. Dispatch to Ant Workers via MCP
+4. Monitor progress
+5. Aggregate results
+6. Report to higher authority
