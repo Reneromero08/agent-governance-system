@@ -186,9 +186,9 @@ def main():
 
     # Print summary
     if gemini_result.get("status") == "success":
-        print(f"[gemini-executor] ✓ Success. Results saved to {output_path}")
+        print(f"[gemini-executor] [OK] Success. Results saved to {output_path}")
     else:
-        print(f"[gemini-executor] ✗ Error: {gemini_result.get('message')}")
+        print(f"[gemini-executor] [ERROR] {gemini_result.get('message')}")
         print(f"[gemini-executor] Results saved to {output_path} for review")
 
 if __name__ == "__main__":

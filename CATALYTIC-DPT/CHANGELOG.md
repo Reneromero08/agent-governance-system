@@ -2,6 +2,26 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.4.0] - 2025-12-24
+
+### Changed
+- **Skills Reorganization** (agentskills.io spec compliance):
+  - All skills now have proper YAML frontmatter in `SKILL.md` (name, description, compatibility).
+  - Restructured folder layout: `scripts/`, `assets/`, `references/` per spec.
+  - Moved executables to `scripts/` subdirectory:
+    - `ant-worker/scripts/run.py`
+    - `governor/scripts/run.py`
+    - `file-analyzer/scripts/run.py`
+    - `launch-terminal/scripts/run.py`
+    - `swarm-orchestrator/scripts/poll_and_execute.py`, `poll_tasks.py`, `agent_loop.py`, `launch_swarm.ps1`
+  - Moved test fixtures to `assets/` (renamed from `fixtures/`).
+  - Moved reference docs to `references/` (GEMINI.md → governor/references/, etc.).
+  - Removed redundant skill-level README (use SKILL.md instead).
+
+### Fixed
+- MCP stdio_server: Added `skill_run` tool for proper skill execution via MCP.
+- Fixed import paths in orchestrator scripts after reorganization.
+
 ## [1.3.0] - 2025-12-24
 
 ### Added
