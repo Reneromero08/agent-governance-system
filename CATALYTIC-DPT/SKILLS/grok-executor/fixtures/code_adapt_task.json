@@ -1,0 +1,17 @@
+{
+  "task_id": "grok-adapt-swarm-gemini",
+  "task_type": "code_adapt",
+  "file": "d:/CCC 2.0/AI/agent-governance-system/CATALYTIC-DPT/SKILLS/swarm-governor-adapted/run.py",
+  "adaptations": [
+    {
+      "find": "cline",
+      "replace": "gemini",
+      "reason": "Replace all Cline references with Gemini CLI"
+    },
+    {
+      "find": "from concurrent.futures import ThreadPoolExecutor",
+      "replace": "from concurrent.futures import ThreadPoolExecutor  # Conductor manages parallelism",
+      "reason": "Add note about Conductor managing parallelism"
+    }
+  ]
+}

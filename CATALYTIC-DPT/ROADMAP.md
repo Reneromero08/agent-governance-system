@@ -17,6 +17,44 @@ Build a **catalytic agent system** where:
 
 ---
 
+## Core Architecture: Two-Plane Model
+
+*Source: RESEARCH/New Vision/CATALYTIC_COMPRESSION_REPORT.md*
+
+### Control Plane (LLM-visible)
+Small, structured, text-first artifacts:
+- **SPECTRUM.json**: `{rel_path -> content_hash}`
+- **STRUCTURE.json**: signatures, imports, symbols, AST skeletons
+- **DOMAIN_ROOTS.json**: `{domain -> merkle_root}`
+- **Ledgers, schemas, manifests**: all JSON, all verifiable
+
+**Rule**: LLMs read spectrums, not file bodies. Token cost = O(paths), not O(bytes).
+
+### Data Plane (tool-visible)
+Large byte payloads, optionally compressed:
+- **CAS blobs**: raw bytes stored by content hash
+- **Intermediate artifacts**: AST dumps, indexes, search caches
+- **Expansion on demand**: `read_hash(sha, range)` returns only what's needed
+
+**Rule**: Hash raw bytes (not compressed). Compression is an impl detail.
+
+### Why This Matters
+- **Token efficiency**: LLM reads 2KB spectrum, not 200MB repo
+- **Catalytic guarantees**: Merkle roots prove restoration without reading everything
+- **Tiny model role**: Choose policy (which transform), not generate bitstreams
+- **Verifiable**: Same inputs → same hashes → same roots
+
+### Spectral Artifacts (Per Domain)
+```
+domain/
+├── SPECTRUM.json      # path → hash (LLM reads this)
+├── STRUCTURE.json     # signatures, exports, types (optional)
+├── DOMAIN_ROOT.txt    # single Merkle root (32 bytes)
+└── .cas/              # content-addressed blobs (tools expand)
+```
+
+---
+
 ## Phase 0: Freeze the Contract (1-2 hours)
 
 **Goal**: Define canonical schemas before implementation
@@ -63,11 +101,20 @@ Build a **catalytic agent system** where:
 Build core primitives in `PRIMITIVES/`:
 
 #### catalytic_store.py
-- `put(content: bytes) -> hash` (SHA-256)
-- `get(hash: str) -> bytes`
-- Sharded storage under `CATALYTIC-DPT/TESTBENCH/_store/`
+Content-addressable storage (CAS) for data plane.
+
+**Core Functions**:
+- `put(content: bytes) -> hash` (SHA-256 of raw bytes)
+- `get(hash: str) -> bytes` (auto-decompress if stored compressed)
+- `verify(hash: str, content: bytes) -> bool`
+
+**Storage**:
+- Sharded: `_store/{hash[:2]}/{hash[2:4]}/{hash}`
 - Atomic writes (temp + rename)
-- ~100 LOC
+- Optional compression (zstd) as impl detail
+- **Rule**: Hash raw bytes, not compressed bytes
+
+~120 LOC
 
 #### merkle.py
 - `MerkleTree.__init__(items: List[Tuple[str, str]])`
@@ -77,11 +124,24 @@ Build core primitives in `PRIMITIVES/`:
 - ~150 LOC
 
 #### spectral_codec.py
-- Transform domain (file system state) → spectrum (compact hash map)
-- `domain_to_spectrum(path: Path) -> Dict[str, str]` (path → hash)
-- `spectrum_to_root(spectrum: Dict) -> str`
-- Analogous to Fourier transform: spatial → frequency domain
-- ~100 LOC
+Transform domain (file system state) → spectral artifacts (LLM-visible layer).
+
+**Core Functions**:
+- `encode_domain(path: Path) -> SpectralBundle`
+  - Returns: SPECTRUM.json, STRUCTURE.json (optional), DOMAIN_ROOT.txt
+- `decode_domain(bundle: SpectralBundle, cas: CatalyticStore) -> Path`
+  - Reconstructs directory from spectrum + CAS blobs
+- `verify_domain(path: Path, expected_root: str) -> bool`
+  - O(1) check via Merkle root comparison
+
+**Output Artifacts**:
+- `SPECTRUM.json`: `{rel_path -> content_hash}` (what LLM reads)
+- `STRUCTURE.json`: signatures, imports, symbols (optional, for code)
+- `DOMAIN_ROOT.txt`: single Merkle root (32-byte hex)
+
+**Key Insight**: LLM reads spectrum (2KB), not files (200MB). Expansion by hash on demand.
+
+~150 LOC
 
 #### ledger.py
 - Append-only receipt storage
