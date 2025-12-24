@@ -1,36 +1,31 @@
 ---
 name: launch-terminal
-description: Opens a named terminal tab directly in the user's IDE bottom panel using the Antigravity Bridge.
+description: Opens a named terminal tab in VSCode via Antigravity Bridge (port 4000). Use when spawning agent terminals for swarm workers.
+compatibility: VSCode, Antigravity Bridge extension
 ---
 
-# Launch Terminal Skill
+# Launch Terminal
 
-This skill allows the agent to spawn interactive terminals directly in the user's IDE panel (not the chat area).
-
-## 🚀 How it Works
-It uses the `antigravity-bridge` extension (listening on local port 4000) to trigger VS Code's native `createTerminal` API.
+Spawns VSCode terminals via Antigravity Bridge.
 
 ## Usage
-This skill is executed via the standard runner pattern:
 
 ```bash
-python SKILLS/launch-terminal/run.py <input.json> <output.json>
+python scripts/run.py input.json output.json
 ```
 
-### Input Schema
+## Input Schema
+
 ```json
 {
-  "name": "Terminal Title",
-  "command": "Initial command to run",
-  "cwd": "Absolute working directory"
+  "name": "Governor",
+  "command": "python poll_and_execute.py --role Governor",
+  "cwd": "D:/path/to/CATALYTIC-DPT"
 }
 ```
 
-### Parameters
-You can customize the JSON body:
-- `name`: Title of the terminal tab
-- `cwd`: Working directory (absolute path)
-- `initialCommand`: Optional command to run immediately on startup
+## Requirements
 
-## 📵 Governance Constraint
-As of Canon v2.7.1, the **Legacy Fallback** (external window spawning) is **PROHIBITED** by [INV-014]. If the bridge is down, the agent must inform the user and request a bridge restart, rather than bypassing security via OS-level window spawning.
+Antigravity Bridge must be running on `http://127.0.0.1:4000/terminal`.
+
+If bridge is down, inform user - do not bypass via OS-level spawning (INV-014).
