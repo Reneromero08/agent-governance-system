@@ -2,6 +2,25 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.5.0] - 2025-12-24
+
+### Added
+- Official `mcp-builder` skill from `anthropics/skills`.
+- Official `skill-creator` skill from `anthropics/skills`.
+
+### Changed
+- **Skills Standardization**:
+  - All `SKILL.md` files updated to explicitly link to their bundled resources (scripts, assets, and references).
+  - `governor` skill now correctly references `GOVERNOR_SOP.json`, `HANDOFF_TO_GOVERNOR.md`, and `GOVERNOR_CONTEXT.md`.
+  - `launch-terminal` skill now references `ANTIGRAVITY_BRIDGE.md`.
+  - `ant-worker` skill now references `schema.json` and task fixtures.
+  - `swarm-orchestrator` skill now references launcher scripts.
+  - `file-analyzer` skill now references analysis scripts.
+- **Path Correction**: Fixed `HANDOFF_TO_GOVERNOR.md` pointing to non-existent `GOVERNOR_SOP.json` in the root (now correctly points to `assets/`).
+
+### Removed
+- `LICENSE.txt` from `skill-creator` and `mcp-builder` (non-functional token bloat).
+
 ## [1.4.0] - 2025-12-24
 
 ### Changed
