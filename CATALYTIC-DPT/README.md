@@ -13,7 +13,10 @@ CATALYTIC-DPT/
 ├── README.md                    # This file
 ├── ROADMAP.md                   # Phase 0-7 execution plan
 ├── TESTBENCH.md                 # PoC testing strategy and fixtures
-├── CODEX_SOP.json               # Operating manual for autonomous execution
+├── swarm_config.json            # Model assignments for each role
+├── GOVERNOR_SOP.json            # Operating manual for autonomous execution
+├── HANDOFF_TO_GOVERNOR.md       # Task description for Governor (CLI Agent)
+├── ORCHESTRATION_ARCHITECTURE.md # Multi-agent system design
 │
 ├── PRIMITIVES/                  # Core implementations
 │   ├── catalytic_store.py       # Content-addressable storage
@@ -80,7 +83,7 @@ Tiny R&D proof with real weight updates:
 ### Phase 0 Exit
 - [ ] All three schemas defined and validated
 - [ ] Schemas can validate themselves
-- [ ] Documentation is clear for 200M parameter model
+- [ ] Documentation is clear for Governor/Executor
 
 ### Phase 1 Exit
 - [ ] `catalytic_store.py` passes all fixtures (100-500 test cases)
@@ -101,12 +104,12 @@ Tiny R&D proof with real weight updates:
 
 ## Autonomy and Delegation
 
-This department is designed for **autonomous execution by small models** (e.g., Codex, 200M parameters):
+This department is designed for **autonomous execution by the Governor and Ant Workers**:
 
-1. **SOP**: Follow `CODEX_SOP.json` for step-by-step execution
+1. **SOP**: Follow `GOVERNOR_SOP.json` for step-by-step execution
 2. **MCP Tools**: Call MCP tools for governance, validation, execution
 3. **Logging**: Every decision goes to `task_log.jsonl`
-4. **Fallback**: Escalate to user agent (Claude) if governance fails
+4. **Fallback**: Escalate to President (Orchestrator) if governance fails
 
 ---
 

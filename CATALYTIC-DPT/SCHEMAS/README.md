@@ -12,7 +12,7 @@
 
 **Definition**: Canonical specification for a catalytic computing task.
 
-**Usage**: A 200M model or agent receives a JobSpec and knows exactly what to execute.
+**Usage**: An agent (Governor/Ant) receives a JobSpec and knows exactly what to execute.
 
 **Required Fields**:
 - `job_id`: Unique identifier (kebab-case)
@@ -265,9 +265,9 @@ jsonschema.validate(instance=valid_jobspec, schema=jobspec_schema)
 
 ---
 
-## Documentation for Codex (200M Model)
+## Documentation for Governor/Executor
 
-When a 200M model reads these schemas, it should understand:
+When the Governor reads these schemas, it should understand:
 
 1. **JobSpec**: "This is what I'm asked to do, broken down into fields"
 2. **Validation Error Vector**: "If I produce errors, they follow this deterministic format"
