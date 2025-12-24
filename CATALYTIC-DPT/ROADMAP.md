@@ -12,7 +12,7 @@ Build a **catalytic agent system** where:
 - External substrates (disk, DB, browser, tools, swarm) are the true workspace
 - Context holds hashes, plans, and proofs
 - Every run is auditable and reversible via restoration proofs
-- Continuity exists as real weight shifting in a tiny orchestrator (200M model)
+- Continuity exists as real weight shifting in a tiny orchestrator (small model)
 - Parallelism is safe via single-commit governance
 
 ---
@@ -88,7 +88,7 @@ domain/
 - All three schemas are valid JSON Schema Draft 7
 - Each schema validates itself
 - Documentation explains each field clearly
-- A 200M parameter model can understand the schemas from docs
+- The Governor can understand the schemas from docs
 
 ---
 
@@ -195,7 +195,7 @@ Pick the smallest model mechanism that can learn from validators:
 - [ ] Pass rate improves measurably across sessions due to weight updates
 - [ ] Every delta is recorded, hashed, and rollbackable
 - [ ] Root digests and ledgers match expectations (run twice, get same roots)
-- [ ] No dependence on Opus/Sonnet for the core loop (Codex 200M can execute)
+- [ ] No dependence on large models for the core loop (Governor can execute)
 - [ ] All fixtures pass
 - [ ] No regression detected
 

@@ -1,9 +1,8 @@
-# HANDOFF TO CODEX: Catalytic Computing PoC
+# HANDOFF TO GOVERNOR: Catalytic Computing PoC
 
-**From**: Claude (User Agent)
-**To**: Codex (200M parameter orchestrator)
-**Date**: 2025-12-23
-**Token Budget**: Claude is at 87% usage. You handle the rest.
+**From**: President (Orchestrator)
+**To**: Governor (Manager / CLI Agent)
+**Date**: 2025-12-24
 **Goal**: Execute Phase 0 (define contracts) with no human intervention.
 
 ---
@@ -12,9 +11,9 @@
 
 1. **What**: Build Phase 0 of catalytic computing - three JSON schemas that everything else depends on
 2. **Where**: `CATALYTIC-DPT/` folder (isolated R&D, not touching main AGS)
-3. **How**: Follow the SOP in `CATALYTIC-DPT/CODEX_SOP.json`
+3. **How**: Follow the SOP in `CATALYTIC-DPT/GOVERNOR_SOP.json`
 4. **Success**: All schemas defined, tested, documented
-5. **Escalate**: If anything is uncertain, report back to Claude
+5. **Escalate**: If anything is uncertain, report back to President (Orchestrator)
 
 ---
 
@@ -94,7 +93,7 @@ These are your instruction manuals:
 1. **CATALYTIC-DPT/README.md** - Overview of the department
 2. **CATALYTIC-DPT/ROADMAP.md** - Phases 0-7 with deliverables
 3. **CATALYTIC-DPT/TESTBENCH.md** - How to validate Phase 1+
-4. **CATALYTIC-DPT/CODEX_SOP.json** - Your operating manual (FOLLOW THIS)
+4. **CATALYTIC-DPT/GOVERNOR_SOP.json** - Your operating manual (FOLLOW THIS)
 5. **CATALYTIC-DPT/SCHEMAS/README.md** - Detailed spec for Phase 0 contracts
 
 Directory structure:
@@ -103,7 +102,7 @@ CATALYTIC-DPT/
 ├── README.md                 # READ FIRST
 ├── ROADMAP.md
 ├── TESTBENCH.md
-├── CODEX_SOP.json            # FOLLOW THIS
+├── GOVERNOR_SOP.json            # FOLLOW THIS
 ├── PRIMITIVES/               # (Phase 1, not your job yet)
 ├── SCHEMAS/
 │   ├── README.md             # Your detailed spec
@@ -120,7 +119,7 @@ CATALYTIC-DPT/
 
 ---
 
-## Execution Steps (From CODEX_SOP.json)
+## Execution Steps (From GOVERNOR_SOP.json)
 
 **Follow this exactly:**
 
@@ -135,7 +134,7 @@ CATALYTIC-DPT/
    - Test each schema against valid/invalid examples
 6. **Validate**: Check that schemas are self-validating
 7. **Post-Flight Governance**: Run `critic_run` again
-8. **Report Back**: Send Claude a summary with:
+8. **Report Back**: Send President a summary with:
    - run_id
    - status (success|failed)
    - paths of created files
@@ -178,7 +177,7 @@ CATALYTIC-DPT/SCHEMAS/
 └── ledger.schema.json         # Valid JSON Schema Draft 7
 ```
 
-And you report to Claude:
+And you report to President:
 > Phase 0 COMPLETE. All three schemas created and validated. 8 decisions made. No governance violations. Ready for Phase 1. Run ledger: CATALYTIC-DPT/TESTBENCH/_runs/phase0-contracts-20251223-143022/
 
 ---
@@ -221,7 +220,7 @@ For Phase 0, you mainly use:
 
 ## If You Get Stuck
 
-1. Escalate to Claude immediately
+1. Escalate to President immediately
 2. Include: what you were trying to do, what failed, relevant logs
 3. Do NOT continue without clarification
 4. Do NOT skip governance checks
@@ -239,7 +238,7 @@ Phase 1 is CATLAB (Catalytic Learning A-B Testing Lab):
 - Build validator.py (schema validation)
 - Build micro_orchestrator.py (tiny model with weight updates)
 
-But that's Phase 1. Claude will send you new instructions when Phase 0 is done.
+But that's Phase 1. President will send you new instructions when Phase 0 is done.
 
 ---
 
@@ -248,7 +247,7 @@ But that's Phase 1. Claude will send you new instructions when Phase 0 is done.
 You have:
 - Clear task definition (Phase 0: three schemas)
 - Detailed specification (SCHEMAS/README.md)
-- Operating manual (CODEX_SOP.json)
+- Operating manual (GOVERNOR_SOP.json)
 - Test criteria (TESTBENCH.md)
 - Isolated environment (CATALYTIC-DPT/)
 
