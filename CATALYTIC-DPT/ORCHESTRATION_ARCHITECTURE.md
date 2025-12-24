@@ -1,7 +1,7 @@
 # Multi-Agent Orchestration Architecture
 
 **Date**: 2025-12-24
-**Vision**: Gemini analyzes → Grok executes → Claude orchestrates (via MCP)
+**Vision**: Model-Agnostic Swarm Hierarchy
 **Governance**: Single source of truth via MCP, zero drift, bidirectional terminal monitoring
 
 ---
@@ -10,44 +10,51 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                   CLAUDE (Orchestrator)                      │
-│                 - Decision making                            │
-│                 - Governance logic                           │
-│                 - Monitors terminals (MCP)                   │
-│                 - Token budget aware (~87% used)             │
+│                       GOD (User)                            │
+│                  - The Source of Intent                     │
+│                  - Final Authority                          │
+└──────────────────────┬──────────────────────────────────────┘
+                       │
+                       ↓
+┌─────────────────────────────────────────────────────────────┐
+│                  PRESIDENT (Main Chat)                      │
+│                 - Orchestrator (e.g., Claude)               │
+│                 - High-level decision making                │
+│                 - Governance logic & Token strategy         │
+│                 - Delegates to Governor                     │
 └──────────────────────┬──────────────────────────────────────┘
                        │
                        │ MCP Protocol
                        │ (shared state, zero drift)
                        ↓
 ┌─────────────────────────────────────────────────────────────┐
-│        GOOGLE CONDUCTOR (Manager/Distributor)               │
-│                                                              │
-│  gemini --experimental-acp                                  │
-│    ├─ Analyzes tasks                                        │
-│    ├─ Distributes to workers                                │
-│    ├─ Monitors progress                                     │
-│    └─ Reports back to Claude                                │
+│                   GOVERNOR (CLI Agent)                      │
+│                 - Manager (e.g., Gemini)                    │
+│                 - Resides in terminal loop                  │
+│                 - Analyzes tasks from President             │
+│                 - Distributes subtasks to Ants              │
+│                 - Monitors progress                         │
 └──────────────────────┬──────────────────────────────────────┘
                        │
           ┌────────────┼────────────┐
           │            │            │
           ↓            ↓            ↓
     ┌──────────┐ ┌──────────┐ ┌──────────┐
-    │  GEMINI  │ │GROK 1.5  │ │GROK 1.5  │
-    │ Analyzer │ │ Worker 1 │ │ Worker 2 │
+    │   ANT    │ │   ANT    │ │   ANT    │
+    │ Worker 1 │ │ Worker 2 │ │ Worker 3 │
     │          │ │          │ │          │
-    │ - Deep   │ │- Coding  │ │- File    │
-    │   analysis│ │- File ops│ │  ops     │
-    │ - Research│ │- Exec    │ │- Tests   │
+    │ - Coding │ │- File Ops│ │- Testing │
+    │ (Models: │ │ (Models: │ │ (Models: │
+    │  Grok,   │ │  Haiku,  │ │  Llama)  │
+    │  Small)  │ │  Small)  │ │          │
     └──────────┘ └──────────┘ └──────────┘
           │            │            │
           └────────────┼────────────┘
                        │
                        ↓ MCP Tools/Skills
         ┌──────────────────────────────┐
-        │  Terminal Sharing (YOUR ←→ CLAUDE's)
-        │  File Sync (Antigravity Bridge)
+        │  Terminal Sharing (President ←→ Governor)
+        │  File Sync (VSCode Bridge)
         │  Task Ledger (CONTRACTS/_runs)
         │  Skill Execution (CATALYTIC-DPT)
         └──────────────────────────────┘
@@ -63,7 +70,7 @@
 ### MCP Protocol in This System
 
 ```
-Agent 1 (Claude)     Agent 2 (Gemini)     Agent 3 (Grok)
+Agent 1 (President)   Agent 2 (Governor)    Agent 3 (Ants)
      │                    │                      │
      └────────────────────┼──────────────────────┘
                           │
@@ -80,64 +87,46 @@ Agent 1 (Claude)     Agent 2 (Gemini)     Agent 3 (Grok)
 ```
 
 **Rules**:
-1. No agent directly modifies files
+1. No agent directly modifies files (ideally via MCP tools)
 2. All changes via MCP tools
 3. MCP logs every change
 4. Conflicts resolved by MCP (last-write-wins or merge)
-5. Terminal access shared (you can see Claude's, Claude sees yours)
+5. Terminal access shared (President sees Governor's output)
 
 ---
 
-## Agent Roles
+## Agent Roles (Hierarchy)
 
-### 1. Claude (Orchestrator)
-**Runs**: Your machine
-**Budget**: ~87% used (minimal new tokens)
+> **Configuration**: See [`swarm_config.json`](file:///d:/CCC%202.0/AI/agent-governance-system/CATALYTIC-DPT/swarm_config.json) for current model assignments.
+
+### 1. GOD (The User)
+**Role**: Provides the intent and final judgment. The "human in the loop" who oversees the swarm.
+
+### 2. PRESIDENT (Orchestrator)
+**Implementation**: Defined in `swarm_config.json → roles.president`
 **Role**:
-- Receives tasks from you
-- Delegates to Google Conductor
-- Monitors via MCP terminal server
-- Makes governance decisions
-- Routes results back
+- Receives high-level directives from God.
+- Formulates strategy.
+- Delegates execution blocks to the Governor.
+- Monitors the Governor via MCP terminal tools.
+- **Does NOT**: Microsystem management.
 
-**Does NOT**:
-- Execute code directly (delegates to Grok)
-- Analyze files directly (delegates to Gemini)
-- Modify files directly (uses MCP)
-
-### 2. Google Conductor (Manager)
-**Runs**: `gemini --experimental-acp` in your VSCode terminal
-**Model**: Gemini (frontier model)
+### 3. GOVERNOR (Manager)
+**Implementation**: Defined in `swarm_config.json → roles.governor`
 **Role**:
-- Receives task from Claude
-- Breaks into subtasks
-- Distributes to Grok workers
-- Monitors worker progress
-- Aggregates results
-- Reports to Claude via MCP
+- Resides in the terminal.
+- Receives directives from the President.
+- Breaks directives into mechanical execution steps.
+- Dispatches tasks to Ant Workers.
+- Aggregates results and reports back to the President.
 
-**Example**:
-- Task: "Bring swarm-governor files to CATALYTIC-DPT"
-- Conductor breaks it into:
-  - Subtask 1: Analyze swarm-governor structure
-  - Subtask 2: Identify essential files
-  - Subtask 3: Copy files to CATALYTIC-DPT
-  - Subtask 4: Validate integrity
-
-### 3. Grok Workers (Executors)
-**Runs**: Local (via Kilo Code or similar)
-**Model**: Grok 1.5 Fast (free, fast)
-**Count**: 2-4 workers (configurable)
+### 4. ANT WORKERS (Executors)
+**Implementation**: Defined in `swarm_config.json → roles.ant_worker`
 **Role**:
-- Receives subtasks from Conductor
-- Executes: file operations, code changes, tests
-- Writes results to MCP-controlled ledger
-- Reports to Conductor
-- Can request help from Claude via MCP
-
-**Example**:
-- Grok Worker 1: "Read D:/CCC 2.0/AI/AGI/SKILLS/swarm-governor/run.py and understand its structure"
-- Grok Worker 2: "Copy files from AGI/SKILLS/swarm-governor to CATALYTIC-DPT/SKILLS/swarm-governor-adapted"
+- Stateless execution units.
+- Receive strict templates (inputs/outputs).
+- Execute: file operations, code changes, tests.
+- Report pass/fail signals to Governor.
 
 ---
 

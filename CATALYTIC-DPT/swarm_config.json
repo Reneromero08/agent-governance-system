@@ -1,0 +1,49 @@
+{
+    "version": "1.0.0",
+    "description": "Swarm configuration - defines which models fill each role",
+    "roles": {
+        "president": {
+            "description": "Main chat orchestrator - high-level strategy and governance",
+            "current_implementation": "Claude",
+            "cli": "Antigravity / VSCode Chat",
+            "notes": "Token-limited, delegates to Governor"
+        },
+        "governor": {
+            "description": "CLI manager - breaks tasks into subtasks, dispatches to Ants",
+            "current_implementation": "Gemini 3.0",
+            "cli": "gemini --experimental-acp",
+            "notes": "Runs in VSCode terminal"
+        },
+        "ant_worker": {
+            "description": "Stateless executor - follows templates, no creativity",
+            "current_implementation": "Grok Fast (x-ai/grok-code-fast-1)",
+            "cli": "npx @kilocode/cli",
+            "count": 2,
+            "notes": "Free tier, fast execution"
+        }
+    },
+    "alternatives": {
+        "president": [
+            "Claude",
+            "GPT",
+            "Gemini Pro"
+        ],
+        "governor": [
+            "Gemini",
+            "Claude",
+            "GPT"
+        ],
+        "ant_worker": [
+            "Grok",
+            "Haiku",
+            "Llama",
+            "Mistral",
+            "Local Ollama"
+        ]
+    },
+    "mcp_server": {
+        "host": "localhost",
+        "port": 8765,
+        "ledger_path": "CATALYTIC-DPT/CONTRACTS/_runs"
+    }
+}
