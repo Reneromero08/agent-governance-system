@@ -1,6 +1,6 @@
 # Phase 0 Implementation Guide
 
-**Executor**: Codex (200M parameter model)
+**Executor**: Governor (see `swarm_config.json`)
 **Task**: Define three canonical JSON schemas
 **Budget**: Use minimal tokens, log everything
 **Success Criteria**: All schemas valid, documented, tested
@@ -461,7 +461,7 @@ except jsonschema.ValidationError as e:
 
 ---
 
-## Summary: What Codex Creates
+## Summary: What Governor Creates
 
 **File 1**: `CATALYTIC-DPT/SCHEMAS/jobspec.schema.json`
 - ~120 lines
@@ -491,7 +491,7 @@ except jsonschema.ValidationError as e:
 
 ---
 
-## The Checklist (Codex, use this)
+## The Checklist (Governor, use this)
 
 Before reporting success:
 
@@ -511,6 +511,6 @@ Before reporting success:
 - [ ] Run ledger is in CONTRACTS/_runs/<run_id>/
 - [ ] Restoration_verified == true
 - [ ] Task log documents all decisions
-- [ ] Report sent to Claude
+- [ ] Report sent to President
 
 **When all checked**: Phase 0 is complete. Ready for Phase 1.
