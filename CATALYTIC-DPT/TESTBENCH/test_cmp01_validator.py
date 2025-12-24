@@ -70,6 +70,10 @@ class TestCMP01Validator:
         self.test_task_spec_tampered()
         self.test_status_json_on_cmp01_failure()
 
+        # Symlink escape test
+        self.test_symlink_escape_rejected_pre_and_post()
+
+
         # Summary
         print()
         print("=" * 60)
@@ -562,8 +566,110 @@ class TestCMP01Validator:
         finally:
             shutil.rmtree(run_dir, ignore_errors=True)
 
+    def test_symlink_escape_rejected_pre_and_post(self):
+        """Symlink inside allowed root pointing outside PROJECT_ROOT should be rejected."""
+        import tempfile
+        import os
+        
+        # Skip on Windows if symlinks require elevated permissions
+        if os.name == "nt":
+            try:
+                # Test if we can create symlinks
+                with tempfile.TemporaryDirectory() as test_dir:
+                    test_link = Path(test_dir) / "test_link"
+                    test_target = Path(test_dir) / "test_target"
+                    test_target.mkdir()
+                    test_link.symlink_to(test_target, target_is_directory=True)
+            except (OSError, NotImplementedError, PermissionError) as e:
+                print(f"[SKIP] test_symlink_escape_rejected_pre_and_post: Symlink creation not permitted on Windows ({e})")
+                return
+
+        with tempfile.TemporaryDirectory() as tmp_root:
+            fake_repo_root = Path(tmp_root) / "repo"
+            outside_root = Path(tmp_root) / "outside"
+            
+            # Build minimal repo structure
+            fake_repo_root.mkdir()
+            outside_root.mkdir()
+            contracts_runs = fake_repo_root / "CONTRACTS" / "_runs"
+            contracts_runs.mkdir(parents=True)
+            
+            # Create symlink inside allowed root pointing OUTSIDE repo
+            link_path = contracts_runs / "link"
+            try:
+                link_path.symlink_to(outside_root, target_is_directory=True)
+            except (OSError, PermissionError) as e:
+                print(f"[SKIP] test_symlink_escape_rejected_pre_and_post: {e}")
+                return
+
+            # Save original module globals
+            old_project_root = mcp_server.PROJECT_ROOT
+            old_contracts_dir = mcp_server.CONTRACTS_DIR
+
+            try:
+                # Monkeypatch PROJECT_ROOT and CONTRACTS_DIR
+                mcp_server.PROJECT_ROOT = fake_repo_root
+                mcp_server.CONTRACTS_DIR = contracts_runs
+
+                # Create a fresh server instance (uses module globals)
+                test_server = MCPTerminalServer()
+
+                # === PRE-RUN VALIDATION TEST ===
+                task_spec = {
+                    "catalytic_domains": [],
+                    "outputs": {"durable_paths": ["CONTRACTS/_runs/link/out.txt"]}
+                }
+                result = test_server._validate_jobspec_paths(task_spec)
+                
+                self._assert(
+                    not result["valid"],
+                    "test_symlink_escape_rejected_pre_and_post (pre-run invalid)",
+                    f"Expected invalid, got: {result}"
+                )
+                
+                # Check for PATH_ESCAPES_REPO_ROOT
+                escape_errors = [e for e in result["errors"] if e["code"] == "PATH_ESCAPES_REPO_ROOT"]
+                self._assert(
+                    len(escape_errors) > 0,
+                    "test_symlink_escape_rejected_pre_and_post (pre-run PATH_ESCAPES_REPO_ROOT)",
+                    f"Expected PATH_ESCAPES_REPO_ROOT, got: {result['errors']}"
+                )
+
+                # === POST-RUN VALIDATION TEST ===
+                run_id = "test-symlink-escape"
+                run_dir = contracts_runs / run_id
+                run_dir.mkdir(parents=True, exist_ok=True)
+                
+                post_run_task_spec = {
+                    "outputs": {"durable_paths": ["CONTRACTS/_runs/link/out.txt"]}
+                }
+                with open(run_dir / "TASK_SPEC.json", "w") as f:
+                    json.dump(post_run_task_spec, f)
+
+                post_result = test_server._verify_post_run_outputs(run_id)
+                
+                self._assert(
+                    not post_result["valid"],
+                    "test_symlink_escape_rejected_pre_and_post (post-run invalid)",
+                    f"Expected invalid, got: {post_result}"
+                )
+                
+                # Check for PATH_ESCAPES_REPO_ROOT (should be rejected before existence check)
+                post_escape_errors = [e for e in post_result["errors"] if e["code"] == "PATH_ESCAPES_REPO_ROOT"]
+                self._assert(
+                    len(post_escape_errors) > 0,
+                    "test_symlink_escape_rejected_pre_and_post (post-run PATH_ESCAPES_REPO_ROOT)",
+                    f"Expected PATH_ESCAPES_REPO_ROOT, got: {post_result['errors']}"
+                )
+
+            finally:
+                # Restore original globals
+                mcp_server.PROJECT_ROOT = old_project_root
+                mcp_server.CONTRACTS_DIR = old_contracts_dir
+
 
 if __name__ == "__main__":
     tester = TestCMP01Validator()
     success = tester.run_all()
     sys.exit(0 if success else 1)
+
