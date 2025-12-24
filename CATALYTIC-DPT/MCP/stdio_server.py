@@ -119,6 +119,18 @@ class StdIoServer:
                     },
                     "required": ["command"]
                 }
+            },
+            {
+                "name": "skill_run",
+                "description": "Execute a CATALYTIC-DPT skill with input/output files",
+                "inputSchema": {
+                    "type": "object",
+                    "properties": {
+                        "skill": {"type": "string", "description": "Skill name (e.g., 'ant-worker', 'governor')"},
+                        "input": {"type": "object", "description": "Input parameters for the skill"}
+                    },
+                    "required": ["skill", "input"]
+                }
             }
         ]
 
@@ -230,9 +242,14 @@ class StdIoServer:
                 args.get("exit_code", 0)
             )
         elif name == "dispatch_task":
+            task_spec = args.get("task_spec", {})
+            task_id = task_spec.get("task_id", f"task-{hash(str(task_spec)) % 100000}")
             return self.server.dispatch_task(
-                args.get("to_agent"),
-                args.get("task_spec")
+                task_id=task_id,
+                task_spec=task_spec,
+                from_agent=args.get("from_agent", "Claude"),
+                to_agent=args.get("to_agent"),
+                priority=args.get("priority", 5)
             )
         elif name == "get_pending_tasks":
             return self.server.get_pending_tasks(args.get("agent_id"))
@@ -246,10 +263,10 @@ class StdIoServer:
             )
         elif name == "send_directive":
             return self.server.send_directive(
-                args.get("from_agent"),
-                args.get("to_agent"),
-                args.get("directive"),
-                args.get("metadata", {})
+                from_level=args.get("from_agent", "Claude"),
+                to_agent=args.get("to_agent"),
+                directive=args.get("directive"),
+                context=args.get("metadata", {})
             )
         elif name == "get_directives":
             return self.server.get_directives(args.get("agent_id"))
@@ -259,10 +276,10 @@ class StdIoServer:
             cwd = args.get("cwd")
             try:
                 result = subprocess.run(
-                    cmd, 
-                    shell=True, 
-                    cwd=cwd, 
-                    capture_output=True, 
+                    cmd,
+                    shell=True,
+                    cwd=cwd,
+                    capture_output=True,
                     text=True
                 )
                 return {
@@ -276,7 +293,75 @@ class StdIoServer:
                     "stderr": str(e),
                     "exit_code": -1
                 }
-        
+        elif name == "skill_run":
+            import subprocess
+            import tempfile
+
+            skill_name = args.get("skill", "")
+            skill_input = args.get("input", {})
+
+            # Build skill path
+            skill_dir = Path(__file__).parent.parent / "SKILLS" / skill_name
+            skill_runner = skill_dir / "run.py"
+
+            if not skill_runner.exists():
+                return {
+                    "status": "error",
+                    "message": f"Skill '{skill_name}' not found at {skill_runner}"
+                }
+
+            # Create temp input/output files
+            with tempfile.NamedTemporaryFile(mode='w', suffix='.json', delete=False) as input_file:
+                json.dump(skill_input, input_file, indent=2)
+                input_path = input_file.name
+
+            output_path = input_path.replace('.json', '_output.json')
+
+            try:
+                # Execute skill
+                result = subprocess.run(
+                    [sys.executable, str(skill_runner), input_path, output_path],
+                    capture_output=True,
+                    text=True,
+                    timeout=120
+                )
+
+                # Read output
+                if Path(output_path).exists():
+                    with open(output_path) as f:
+                        output_data = json.load(f)
+                else:
+                    output_data = {
+                        "status": "error",
+                        "message": "No output file generated"
+                    }
+
+                # Cleanup
+                Path(input_path).unlink(missing_ok=True)
+                Path(output_path).unlink(missing_ok=True)
+
+                return {
+                    "status": "success",
+                    "skill": skill_name,
+                    "output": output_data,
+                    "exit_code": result.returncode,
+                    "stdout": result.stdout,
+                    "stderr": result.stderr
+                }
+
+            except subprocess.TimeoutExpired:
+                return {
+                    "status": "timeout",
+                    "skill": skill_name,
+                    "message": "Skill execution timed out after 120s"
+                }
+            except Exception as e:
+                return {
+                    "status": "error",
+                    "skill": skill_name,
+                    "message": str(e)
+                }
+
         raise ValueError(f"Unknown tool: {name}")
 
 if __name__ == "__main__":
