@@ -2,7 +2,7 @@
 
 **Purpose**: Isolated PoC testing before integration into AGS
 **Strategy**: Validate each phase independently; no impact on main system
-**Autonomy**: Testbench can be run by 200M model (Codex) following SOP
+**Autonomy**: Testbench can be run by Governor following SOP
 
 ---
 
@@ -15,7 +15,7 @@
         Phase 4 (Runtime Hardening)
         Phase 3 (Substrate Adapters)
         Phase 2 (Swarm)
-TESTBENCH FOCUS → Phase 1 (CATLAB) ← 200M model validates here
+TESTBENCH FOCUS → Phase 1 (CATLAB) ← Governor validates here
         Phase 0 (Contracts)
 ```
 
@@ -394,19 +394,19 @@ if __name__ == "__main__":
 ### Integration Readiness
 - [ ] TESTBENCH report shows all green
 - [ ] Zero dependencies on external systems
-- [ ] Codex (200M) can execute via SOP
+- [ ] Governor can execute via SOP
 - [ ] Decision logs are complete and clear
 - [ ] Ready for Phase 2 (Swarm) without changes
 
 ---
 
-## Execution Instructions for Codex
+## Execution Instructions for Governor
 
-1. Read `CATALYTIC-DPT/CODEX_SOP.json`
+1. Read `CATALYTIC-DPT/GOVERNOR_SOP.json`
 2. Read `CATALYTIC-DPT/TESTBENCH.md` (this file)
 3. Run `python CATALYTIC-DPT/TESTBENCH/run_poc.py --all`
 4. Check `CATALYTIC-DPT/TESTBENCH/report.md`
-5. If all green: report success to user agent (Claude)
-6. If any red: escalate with logs to user agent
+5. If all green: report success to President
+6. If any red: escalate with logs to President
 
 **PoC first. Perfect execution. Then integrate.**
