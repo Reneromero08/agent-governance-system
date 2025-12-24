@@ -2,7 +2,30 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.6.0] - 2025-12-24
+
+### Added
+- **CMP-01 Path Validation**: Strict path governance in `MCP/server.py`:
+  - `_validate_jobspec_paths()`: Pre-execution validation for catalytic_domains and durable_paths.
+  - `_verify_post_run_outputs()`: Post-run verification of declared output existence.
+  - Component-safe path containment checks using `pathlib.is_relative_to`.
+  - Rejection of traversal (`..`), absolute paths, and forbidden root overlaps.
+- **Root Constants**: `DURABLE_ROOTS`, `CATALYTIC_ROOTS`, `FORBIDDEN_ROOTS` defined per CMP-01 spec.
+- **Structured Error Vectors**: All validation errors now return `{code, message, path, details}` format.
+- **Test Suite**: `TESTBENCH/test_cmp01_validator.py` with 9 unit tests covering:
+  - Traversal rejection
+  - Absolute path rejection
+  - Forbidden overlap detection
+  - Durable/catalytic root enforcement
+  - Nested overlap detection
+  - Missing output post-run detection
+
+### Changed
+- `execute_skill()` now calls `_validate_jobspec_paths()` before execution.
+- `skill_complete()` now calls `_verify_post_run_outputs()` to verify declared outputs exist.
+
 ## [1.5.0] - 2025-12-24
+
 
 ### Added
 - Official `mcp-builder` skill from `anthropics/skills`.
