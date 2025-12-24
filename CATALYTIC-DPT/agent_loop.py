@@ -40,8 +40,8 @@ def run_governor_logic(directive):
     
     try:
         # Launch interactive process
-        # We use a list args which subprocess handles better for escaping
-        retcode = subprocess.call([gemini_cmd, "--prompt", safe_prompt], shell=True)
+        # Use list args without shell=True for proper argument handling
+        retcode = subprocess.call([gemini_cmd, "--prompt", safe_prompt])
         
         if retcode != 0:
             print(f"\n[ERROR] Gemini exited with code {retcode}.")
@@ -77,9 +77,8 @@ def run_ant_logic(role, task):
     try:
         # Usage: npx @kilocode/cli [prompt]
         # We pass just the prompt positionally
-        cmd = f'npx @kilocode/cli "{safe_prompt}"'
-        
-        retcode = subprocess.call(cmd, shell=True)
+        # Use list args for proper escaping
+        retcode = subprocess.call(["npx", "@kilocode/cli", safe_prompt])
         
         if retcode == 0:
             mcp_server.report_result(

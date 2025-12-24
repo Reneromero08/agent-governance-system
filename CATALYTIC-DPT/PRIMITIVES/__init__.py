@@ -35,3 +35,39 @@ __all__ = [
     "Validator",
     "MicroOrchestrator",
 ]
+
+
+class CatalyticStore:
+    """Content-addressable storage. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("CatalyticStore is a Phase 1 primitive - not yet implemented")
+
+
+class MerkleTree:
+    """Merkle tree for root digests. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("MerkleTree is a Phase 1 primitive - not yet implemented")
+
+
+class SpectralCodec:
+    """Domain → spectrum encoding. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("SpectralCodec is a Phase 1 primitive - not yet implemented")
+
+
+class Ledger:
+    """Append-only receipt storage. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("Ledger is a Phase 1 primitive - not yet implemented")
+
+
+class Validator:
+    """Schema validation + error vectors. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("Validator is a Phase 1 primitive - not yet implemented")
+
+
+class MicroOrchestrator:
+    """Tiny model with weight updates. Not yet implemented."""
+    def __init__(self, *args, **kwargs):
+        raise NotImplementedError("MicroOrchestrator is a Phase 1 primitive - not yet implemented")
