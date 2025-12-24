@@ -755,7 +755,18 @@ class MCPTerminalServer:
 
             abs_path = (PROJECT_ROOT / raw_path).resolve()
 
+            # 0.5 Check containment under PROJECT_ROOT (catches symlink escapes)
+            if not self._is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+                errors.append({
+                    "code": "PATH_ESCAPES_REPO_ROOT",
+                    "message": f"Path escapes repository root (possibly via symlink): {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "resolved": str(abs_path), "repo_root": str(PROJECT_ROOT)}
+                })
+                continue  # Skip further checks for this entry
+
             # 1. Check forbidden overlap (hard stop for this entry if found)
+
             forbidden_hit = False
             for forbidden in FORBIDDEN_ROOTS:
                 forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
