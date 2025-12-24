@@ -542,24 +542,33 @@ class MCPTerminalServer:
         errors = []
         abs_paths = []
 
-        for raw_path in paths:
+        # Store (original_index, raw_path, abs_path) to preserve correct indices
+        for orig_idx, raw_path in enumerate(paths):
             if not Path(raw_path).is_absolute() and ".." not in Path(raw_path).parts:
-                abs_paths.append((raw_path, (PROJECT_ROOT / raw_path).resolve()))
+                abs_paths.append((orig_idx, raw_path, (PROJECT_ROOT / raw_path).resolve()))
 
-        for i, (raw_a, abs_a) in enumerate(abs_paths):
-            for j, (raw_b, abs_b) in enumerate(abs_paths):
+        for i, (idx_a, raw_a, abs_a) in enumerate(abs_paths):
+            for j, (idx_b, raw_b, abs_b) in enumerate(abs_paths):
                 if i >= j:
                     continue
                 # Check if one contains the other (both directions)
                 if self._is_path_under_root(abs_a, abs_b) or self._is_path_under_root(abs_b, abs_a):
+                    # Use smaller original index for deterministic path pointer
+                    smaller_idx = min(idx_a, idx_b)
                     errors.append({
                         "code": "PATH_OVERLAP",
                         "message": f"Paths have containment overlap: '{raw_a}' and '{raw_b}'",
-                        "path": f"{json_pointer_base}/{i}",
-                        "details": {"path_a": raw_a, "path_b": raw_b}
+                        "path": f"{json_pointer_base}/{smaller_idx}",
+                        "details": {
+                            "index_a": idx_a,
+                            "index_b": idx_b,
+                            "path_a": raw_a,
+                            "path_b": raw_b
+                        }
                     })
 
         return errors
+
 
     def _validate_jobspec_paths(self, task_spec: Dict) -> Dict:
         """Validate all paths in a JobSpec against CMP-01 rules.
@@ -649,13 +658,29 @@ class MCPTerminalServer:
         for idx, raw_path in enumerate(durable_paths):
             json_pointer = f"/outputs/durable_paths/{idx}"
 
-            # Skip if path has basic format issues (already caught pre-run)
-            if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
-                continue
+            # 0. Report errors for absolute/traversal paths (do not silently skip)
+            if Path(raw_path).is_absolute():
+                errors.append({
+                    "code": "PATH_ESCAPES_REPO_ROOT",
+                    "message": f"Absolute paths are not allowed: {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "reason": "absolute_path"}
+                })
+                continue  # Skip further checks for this entry
+
+            if ".." in Path(raw_path).parts:
+                errors.append({
+                    "code": "PATH_CONTAINS_TRAVERSAL",
+                    "message": f"Path contains forbidden traversal segment '..': {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "segments": list(Path(raw_path).parts)}
+                })
+                continue  # Skip further checks for this entry
 
             abs_path = (PROJECT_ROOT / raw_path).resolve()
 
-            # 1. Check forbidden overlap
+            # 1. Check forbidden overlap (hard stop for this entry if found)
+            forbidden_hit = False
             for forbidden in FORBIDDEN_ROOTS:
                 forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
                 if self._is_path_under_root(abs_path, forbidden_abs) or self._is_path_under_root(forbidden_abs, abs_path):
@@ -665,7 +690,11 @@ class MCPTerminalServer:
                         "path": json_pointer,
                         "details": {"declared": raw_path, "forbidden_root": forbidden}
                     })
-                    continue
+                    forbidden_hit = True
+                    break  # Exit forbidden loop
+            
+            if forbidden_hit:
+                continue  # Skip durable/existence checks for this entry
 
             # 2. Check under DURABLE_ROOTS
             under_durable = False
@@ -682,7 +711,7 @@ class MCPTerminalServer:
                     "path": json_pointer,
                     "details": {"declared": raw_path, "durable_roots": DURABLE_ROOTS}
                 })
-                continue
+                continue  # Skip existence check for this entry
 
             # 3. Check existence on disk
             if not abs_path.exists():
@@ -697,6 +726,7 @@ class MCPTerminalServer:
             "valid": len(errors) == 0,
             "errors": errors
         }
+
 
     # =========================================================================
     # AGENT MESSAGING SYSTEM
