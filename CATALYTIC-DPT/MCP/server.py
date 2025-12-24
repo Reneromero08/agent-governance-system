@@ -15,6 +15,7 @@ import json
 import sys
 import hashlib
 import uuid
+import subprocess
 from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Any, Optional
@@ -25,8 +26,55 @@ from typing import Dict, List, Any, Optional
 PROJECT_ROOT = Path(__file__).parent.parent.parent
 
 # SPECTRUM-02 Validator version (for OUTPUT_HASHES.json binding)
-VALIDATOR_VERSION = "1.0.0"
-SUPPORTED_VALIDATOR_VERSIONS = {"1.0.0", "1.0.1", "1.1.0"}
+VALIDATOR_SEMVER = "1.0.0"
+SUPPORTED_VALIDATOR_SEMVERS = {"1.0.0", "1.0.1", "1.1.0"}
+
+# Cache for build ID (computed once per process)
+_VALIDATOR_BUILD_ID_CACHE: Optional[str] = None
+
+
+def get_validator_build_id() -> str:
+    """Get deterministic validator build fingerprint.
+
+    Preferred: git commit SHA (short) if repo is a git checkout.
+    Fallback: SHA-256 of MCP/server.py file bytes.
+
+    Returns a non-empty string. Result is cached for process lifetime.
+    """
+    global _VALIDATOR_BUILD_ID_CACHE
+
+    if _VALIDATOR_BUILD_ID_CACHE is not None:
+        return _VALIDATOR_BUILD_ID_CACHE
+
+    # Try git commit SHA first
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            _VALIDATOR_BUILD_ID_CACHE = f"git:{result.stdout.strip()}"
+            return _VALIDATOR_BUILD_ID_CACHE
+    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+        pass
+
+    # Fallback: hash of server.py
+    server_path = Path(__file__)
+    if server_path.exists():
+        sha = hashlib.sha256()
+        with open(server_path, "rb") as f:
+            sha.update(f.read())
+        _VALIDATOR_BUILD_ID_CACHE = f"file:{sha.hexdigest()[:12]}"
+        return _VALIDATOR_BUILD_ID_CACHE
+
+    # Ultimate fallback (should never happen)
+    _VALIDATOR_BUILD_ID_CACHE = "unknown"
+    return _VALIDATOR_BUILD_ID_CACHE
+
+
 CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
 SKILLS_DIR = PROJECT_ROOT / "CATALYTIC-DPT" / "SKILLS"
 
@@ -495,7 +543,8 @@ class MCPTerminalServer:
 
         # Write OUTPUT_HASHES.json
         output_hashes_data = {
-            "validator_version": VALIDATOR_VERSION,
+            "validator_semver": VALIDATOR_SEMVER,
+            "validator_build_id": get_validator_build_id(),
             "generated_at": datetime.now().isoformat(),
             "hashes": hash_result["hashes"]
         }
@@ -926,14 +975,23 @@ class MCPTerminalServer:
     # Adversarial resume without execution history
     # =========================================================================
 
-    def verify_spectrum02_bundle(self, run_dir: Path) -> Dict:
+    def verify_spectrum02_bundle(
+        self,
+        run_dir: Path,
+        strict_build_id: bool = False
+    ) -> Dict:
         """Verify a SPECTRUM-02 resume bundle.
 
         Checks:
         - TASK_SPEC.json exists
         - STATUS.json exists with status=success and cmp01=pass
-        - OUTPUT_HASHES.json exists with supported validator_version
+        - OUTPUT_HASHES.json exists with supported validator_semver
+        - validator_build_id exists and is non-empty
         - All declared hashes verify against actual files
+
+        Args:
+            run_dir: Path to the run directory containing the bundle
+            strict_build_id: If True, reject if build_id != current get_validator_build_id()
 
         Returns: {"valid": bool, "errors": [...]}
         """
@@ -1018,21 +1076,47 @@ class MCPTerminalServer:
             })
             return {"valid": False, "errors": errors}
 
-        # 4. Check validator version is supported
-        validator_version = output_hashes.get("validator_version")
-        if validator_version not in SUPPORTED_VALIDATOR_VERSIONS:
+        # 4. Check validator semver is supported
+        validator_semver = output_hashes.get("validator_semver")
+        if validator_semver not in SUPPORTED_VALIDATOR_SEMVERS:
             errors.append({
                 "code": "VALIDATOR_UNSUPPORTED",
-                "message": f"validator_version '{validator_version}' not supported",
-                "path": "/validator_version",
+                "message": f"validator_semver '{validator_semver}' not supported",
+                "path": "/validator_semver",
                 "details": {
-                    "actual": validator_version,
-                    "supported": list(SUPPORTED_VALIDATOR_VERSIONS)
+                    "actual": validator_semver,
+                    "supported": list(SUPPORTED_VALIDATOR_SEMVERS)
                 }
             })
             return {"valid": False, "errors": errors}
 
-        # 5. Verify each hash
+        # 5. Check validator_build_id exists and is non-empty
+        validator_build_id = output_hashes.get("validator_build_id")
+        if not validator_build_id:
+            errors.append({
+                "code": "VALIDATOR_BUILD_ID_MISSING",
+                "message": "validator_build_id is missing or empty",
+                "path": "/validator_build_id",
+                "details": {"actual": validator_build_id}
+            })
+            return {"valid": False, "errors": errors}
+
+        # 6. Strict build ID check (optional)
+        if strict_build_id:
+            current_build_id = get_validator_build_id()
+            if validator_build_id != current_build_id:
+                errors.append({
+                    "code": "VALIDATOR_BUILD_MISMATCH",
+                    "message": f"validator_build_id mismatch: expected '{current_build_id}', got '{validator_build_id}'",
+                    "path": "/validator_build_id",
+                    "details": {
+                        "expected": current_build_id,
+                        "actual": validator_build_id
+                    }
+                })
+                return {"valid": False, "errors": errors}
+
+        # 7. Verify each hash
         hashes = output_hashes.get("hashes", {})
         for rel_path, expected_hash in hashes.items():
             abs_path = PROJECT_ROOT / rel_path
