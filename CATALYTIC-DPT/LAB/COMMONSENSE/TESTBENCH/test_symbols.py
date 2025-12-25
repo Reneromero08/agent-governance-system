@@ -76,5 +76,10 @@ def main() -> int:
     return 0
 
 
+def test_symbols():
+    """Pytest entry point."""
+    assert main() == 0
+
+
 if __name__ == "__main__":
     raise SystemExit(main())
