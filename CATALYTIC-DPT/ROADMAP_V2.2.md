@@ -309,7 +309,7 @@ Deliverables
 
 Acceptance
 - [x] Deterministic cache behavior (tests prove miss→hit and invalidation by key inputs).
-- [ ] Measurable token reduction in an end-to-end demo where the interface is hash-first and dereference is bounded. (not part of this changeset)
+- [x] Measurable token/work reduction in an end-to-end demo where the interface is hash-first and dereference is bounded. (demo: `CONTRACTS/_runs/_demos/memoization_hash_reuse/`) (commit: 25ea034)
 
 ---
 
