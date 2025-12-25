@@ -1,0 +1,12 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "NOT_A_REAL_CODE",
+      "message": "This fixture is invalid due to an unsupported error code."
+    }
+  ],
+  "warnings": [],
+  "timestamp": "2025-12-24T00:00:00Z",
+  "validator_version": "cat-dpt-validator/0.0.0"
+}
