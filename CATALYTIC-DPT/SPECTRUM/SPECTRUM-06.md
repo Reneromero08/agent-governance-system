@@ -1,8 +1,9 @@
 # SPECTRUM-06: Restore Runner Semantics
 
-**Version:** 1.0.0
+**Version:** 1.0.1
 **Status:** Frozen
 **Created:** 2025-12-25
+**Updated:** 2025-12-25
 **Depends on:** SPECTRUM-05 v1.0.0
 
 ---
@@ -258,6 +259,131 @@ Chain restore is atomic at the chain level:
 **Step C.8:** On full chain success:
 - Remove chain manifest
 - ACCEPT
+
+---
+
+## 7. Restore Result Artifacts (Normative)
+
+This section freezes the exact restore result artifacts produced on **successful** restore completion. These artifacts are required to be byte-identical across independent implementations given identical inputs.
+
+### 7.1 Artifact Set (Required)
+
+On successful restore completion, the Restore Runner MUST write exactly these **result** artifacts:
+- `RESTORE_MANIFEST.json`
+- `RESTORE_REPORT.json`
+
+No restore result artifacts other than the two above may be persisted after successful restore completion.
+
+### 7.2 Artifact Write Location (Required)
+
+Restore result artifacts MUST be written only under `restore_root`.
+
+Define `result_root` as:
+- **Single mode:** `result_root = restore_root`
+- **Chain mode:** for each restored bundle, `result_root = restore_root / run_id` (Section 6.2)
+
+Write locations (exact filenames):
+- `result_root/RESTORE_MANIFEST.json`
+- `result_root/RESTORE_REPORT.json`
+
+The Restore Runner MUST NOT write restore result artifacts outside `restore_root` under any circumstances.
+
+### 7.3 Canonical JSON Serialization (Required)
+
+Both artifacts MUST be serialized as canonical JSON bytes with all of the following properties:
+- UTF-8 encoding
+- No UTF-8 BOM
+- No trailing whitespace
+- No trailing newline
+- Objects serialized with keys sorted lexicographically by UTF-8 byte value
+- Arrays serialized in the exact order defined by this spec
+- No insignificant whitespace (equivalent to JSON separators `,` and `:` only)
+
+Any deviation is ambiguity and MUST be rejected.
+
+### 7.4 RESTORE_MANIFEST.json (Required)
+
+#### 7.4.1 Purpose
+
+`RESTORE_MANIFEST.json` is the authoritative list of files restored into `result_root` for a single restored bundle.
+
+#### 7.4.2 Definition: “restored file”
+
+A “restored file” is a regular file that:
+1. Was copied into `result_root` as part of restore execution (Section 5.4), and
+2. Has a corresponding entry in the restored bundle’s `OUTPUT_HASHES.json.hashes` map, and
+3. Exists at `result_root / relative_path` after successful restore completion.
+
+No other files are considered restored files for purposes of the manifest.
+
+#### 7.4.3 Top-Level Schema (Required)
+
+`RESTORE_MANIFEST.json` MUST be a JSON object with exactly these required fields:
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `entries` | array of object | **Normative.** Ordered list of restored files. |
+
+No other top-level fields are permitted.
+
+#### 7.4.4 Entry Schema (Required)
+
+Each element of `entries` MUST be a JSON object with exactly these required fields:
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `relative_path` | string | **Normative.** Output-relative path using forward slashes; MUST match a key in `OUTPUT_HASHES.json.hashes`. |
+| `sha256` | string | **Normative.** MUST equal the expected hash string from `OUTPUT_HASHES.json.hashes[relative_path]` (including the `sha256:` prefix and lowercase hex). |
+| `bytes` | integer | **Normative.** Exact byte length of the restored file at `result_root / relative_path`. |
+
+No other entry fields are permitted.
+
+#### 7.4.5 Entry Ordering (Required)
+
+`entries` MUST be ordered by ascending `relative_path`, compared lexicographically by UTF-8 byte value.
+
+#### 7.4.6 Manifest Production Requirement (Required)
+
+Successful restore completion requires producing a valid `RESTORE_MANIFEST.json`.
+
+If `RESTORE_MANIFEST.json` cannot be produced deterministically and completely (for any reason), then the restore MUST NOT be considered successful.
+
+### 7.5 RESTORE_REPORT.json (Required)
+
+#### 7.5.1 Purpose
+
+`RESTORE_REPORT.json` is the required, minimal summary of a successful restore into `result_root`.
+
+#### 7.5.2 Top-Level Schema (Required)
+
+`RESTORE_REPORT.json` MUST be a JSON object with exactly these required fields:
+
+| Field | Type | Semantics |
+|-------|------|-----------|
+| `ok` | boolean | **Normative.** MUST equal `true`. |
+| `restored_files_count` | integer | **Normative.** MUST equal the number of manifest entries. |
+| `restored_bytes` | integer | **Normative.** MUST equal the sum of `bytes` across manifest entries. |
+| `bundle_roots` | array of string | **Normative.** MUST contain exactly one bundle root (64 lowercase hex) for the restored bundle. |
+| `chain_root` | string or null | **Normative.** If the restore invocation was chain mode, MUST equal the chain root computed by SPECTRUM-05 chain verification; otherwise MUST be `null`. |
+
+No other report fields are permitted.
+
+#### 7.5.3 Informational vs Normative Values
+
+All fields in `RESTORE_REPORT.json` are normative.
+
+### 7.6 Cross-Artifact Invariants (Required)
+
+On successful restore completion, all invariants below MUST hold:
+
+1. `RESTORE_REPORT.json.restored_files_count` MUST equal `len(RESTORE_MANIFEST.json.entries)`.
+2. `RESTORE_REPORT.json.restored_bytes` MUST equal `sum(entry.bytes for entry in RESTORE_MANIFEST.json.entries)`.
+3. For every `entry` in `RESTORE_MANIFEST.json.entries`:
+   - `entry.relative_path` MUST be a key in the restored bundle’s `OUTPUT_HASHES.json.hashes`.
+   - `entry.sha256` MUST equal the corresponding `OUTPUT_HASHES.json.hashes[entry.relative_path]` value exactly.
+   - The SHA-256 of the restored file bytes at `result_root / entry.relative_path` MUST equal `entry.sha256` exactly.
+
+If any invariant does not hold, the restore MUST NOT be considered successful.
 
 ---
 
