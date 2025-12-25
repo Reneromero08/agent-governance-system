@@ -2,6 +2,42 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.23.0] - 2025-12-25
+
+### Stability Lock: Verifier API/CLI Frozen and Error Codes Centralized
+
+#### Added
+- **PRIMITIVES/verify_bundle.py**:
+  - Centralized `ERROR_CODES` constant map (one source of truth for all SPECTRUM-05 errors).
+  - Mandatory Ed25519 dependency enforcement: Returns `ALGORITHM_UNSUPPORTED` if `cryptography` library is missing in strict mode.
+- **SPECTRUM/SPECTRUM-05.md**:
+  - Added "Section 12: Implementation Requirements" (Mandatory Ed25519, Artifact-only verification, Deterministic JSON canonicalization).
+- **TESTBENCH/test_verifier_freeze.py**: New test suite for stable API guarantees.
+
+#### Changed
+- **PRIMITIVES/verify_bundle.py**:
+  - **API Surface Freeze**: `verify_bundle_spectrum05` and `verify_chain_spectrum05` now have stable signatures and return shapes.
+  - **Stable Return Shape**: `{ok: bool, code: str, details: dict}`.
+  - **Fail-Fast**: Verification now terminates immediately on the first error encountered in Phase 9 (Output Hash Verification).
+- **TOOLS/catalytic_verifier.py**:
+  - **CLI Surface Freeze**: Updated `verify_single_bundle`, `verify_chain`, and `verify_chain_from_directory` to use stable SPECTRUM-05 APIs.
+  - Minimal output in JSON mode (no extra logs).
+  - Nonzero exit code on any verification failure correctly preserved.
+- **ROADMAP_V2.1.md**:
+  - Updated Phase 1.5 status to explicitly reflect verifier stability lock.
+
+#### Removed
+- **PRIMITIVES/verify_bundle.py**:
+  - Deprecated multi-error collection in Phase 9 in favor of spec-conformant fail-fast (single error return).
+
+#### Documentation
+- **SPECTRUM/SPECTRUM-05.md**:
+  - Restored to exact frozen state from commit 3b281f6 (removed non-normative Section 12).
+- **PRIMITIVES/VERIFYING.md** (NEW):
+  - Created non-normative implementation guide containing extracted implementation requirements.
+  - Clearly labeled as non-normative; does not modify SPECTRUM law.
+  - Includes notes on mandatory Ed25519 dependency, offline verification, deterministic canonicalization, and verifier modes.
+
 ## [1.22.0] - 2025-12-25
 
 ### Verifier Updated to Enforce SPECTRUM-04/05 Identity, Canonicalization, and Verification Law
