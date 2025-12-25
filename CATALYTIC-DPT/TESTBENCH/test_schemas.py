@@ -46,6 +46,7 @@ def main() -> int:
         "jobspec": schemas_dir / "jobspec.schema.json",
         "validation_error": schemas_dir / "validation_error.schema.json",
         "ledger": schemas_dir / "ledger.schema.json",
+        "proof": schemas_dir / "proof.schema.json",
     }
 
     for k, p in schema_files.items():
@@ -56,11 +57,13 @@ def main() -> int:
     jobspec_schema = _load_json(schema_files["jobspec"])
     validation_error_schema = _load_json(schema_files["validation_error"])
     ledger_schema = _load_json(schema_files["ledger"])
+    proof_schema = _load_json(schema_files["proof"])
 
     for name, schema in [
         ("jobspec", jobspec_schema),
         ("validation_error", validation_error_schema),
         ("ledger", ledger_schema),
+        ("proof", proof_schema),
     ]:
         try:
             Draft7Validator.check_schema(schema)
@@ -70,12 +73,14 @@ def main() -> int:
 
     v_jobspec = Draft7Validator(jobspec_schema)
     v_validation_error = Draft7Validator(validation_error_schema)
+    v_proof = Draft7Validator(proof_schema)
 
     registry = Registry().with_resources(
         [
             ("jobspec.schema.json", Resource.from_contents(jobspec_schema)),
             ("validation_error.schema.json", Resource.from_contents(validation_error_schema)),
             ("ledger.schema.json", Resource.from_contents(ledger_schema)),
+            ("proof.schema.json", Resource.from_contents(proof_schema)),
         ]
     )
     v_ledger = Draft7Validator(ledger_schema, registry=registry)
@@ -87,6 +92,8 @@ def main() -> int:
             return v_validation_error
         if "RUN_INFO" in doc and "PRE_MANIFEST" in doc and "POST_MANIFEST" in doc:
             return v_ledger
+        if "proof_version" in doc and "restoration_result" in doc:
+            return v_proof
         _fail("fixture does not match any known schema (cannot choose validator)")
         raise AssertionError
 
