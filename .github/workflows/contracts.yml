@@ -25,6 +25,7 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
+          python -m pip install pytest cryptography referencing
       
       - name: Build cortex index
         run: python CORTEX/cortex.build.py
@@ -40,6 +41,15 @@ jobs:
 
       - name: Run contract fixtures
         run: python CONTRACTS/runner.py
+
+      - name: Run pytest (bounded temp, no capture)
+        env:
+          TMPDIR: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
+          TEMP: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
+          TMP: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
+        run: |
+          mkdir -p "$TMPDIR"
+          python -m pytest -q -s --ignore=MEMORY/LLM_PACKER/_packs --ignore=CATALYTIC-DPT/LAB
 
       - name: CI strict verification (SPECTRUM-05)
         env:
