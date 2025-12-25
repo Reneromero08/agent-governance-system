@@ -21,6 +21,7 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
+from PIPELINES.pipeline_runtime import PipelineRuntime
 from PRIMITIVES.cas_store import CatalyticStore
 from PRIMITIVES.hash_toolbelt import (
     DEFAULT_AST_MAX_BYTES,
@@ -85,16 +86,41 @@ def main() -> int:
     ast_p.add_argument("--max-nodes", type=int, default=DEFAULT_AST_MAX_NODES)
     ast_p.add_argument("--max-depth", type=int, default=DEFAULT_AST_MAX_DEPTH)
 
+    pipeline_p = sub.add_parser("pipeline", help="Artifact-only pipeline runner")
+    pipeline_sub = pipeline_p.add_subparsers(dest="pipe_cmd", required=True)
+
+    run_p = pipeline_sub.add_parser("run", help="Initialize/resume and run pipeline")
+    run_p.add_argument("pipeline_id", help="Pipeline ID")
+    run_p.add_argument("--spec", required=False, default=None, help="PipelineSpec JSON path (required on first run)")
+
+    status_p = pipeline_sub.add_parser("status", help="Print deterministic pipeline status")
+    status_p.add_argument("pipeline_id", help="Pipeline ID")
+
     args = parser.parse_args()
-
-    cas_root = _resolve_cas_root(run_id=getattr(args, "run_id", None), cas_root=getattr(args, "cas_root", None))
-    store = CatalyticStore(cas_root)
-
-    run_id = getattr(args, "run_id", None)
-    timestamp = getattr(args, "timestamp", "CATALYTIC-DPT-LEDGER-SENTINEL")
-    ledger_path = _resolve_ledger_path(run_id=run_id)
+    store = None
+    run_id = None
+    timestamp = "CATALYTIC-DPT-LEDGER-SENTINEL"
+    ledger_path = None
+    if args.cmd == "hash":
+        cas_root = _resolve_cas_root(run_id=getattr(args, "run_id", None), cas_root=getattr(args, "cas_root", None))
+        store = CatalyticStore(cas_root)
+        run_id = getattr(args, "run_id", None)
+        timestamp = getattr(args, "timestamp", "CATALYTIC-DPT-LEDGER-SENTINEL")
+        ledger_path = _resolve_ledger_path(run_id=run_id)
 
     try:
+        if args.cmd == "pipeline" and args.pipe_cmd == "status":
+            rt = PipelineRuntime(project_root=REPO_ROOT)
+            sys.stdout.write(rt.status_text(pipeline_id=args.pipeline_id))
+            return 0
+
+        if args.cmd == "pipeline" and args.pipe_cmd == "run":
+            rt = PipelineRuntime(project_root=REPO_ROOT)
+            spec_path = Path(args.spec) if args.spec is not None else None
+            rt.run(pipeline_id=args.pipeline_id, spec_path=spec_path)
+            sys.stdout.write(rt.status_text(pipeline_id=args.pipeline_id))
+            return 0
+
         if args.cmd == "hash" and args.hash_cmd == "read":
             out = hash_read_text(
                 store=store,
@@ -189,4 +215,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
