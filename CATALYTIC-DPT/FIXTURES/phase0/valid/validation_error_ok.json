@@ -1,0 +1,25 @@
+{
+  "valid": false,
+  "errors": [
+    {
+      "code": "MISSING_REQUIRED_FIELD",
+      "message": "Field 'phase' is required.",
+      "path": "$.phase",
+      "details": {
+        "required": "phase"
+      }
+    }
+  ],
+  "warnings": [
+    {
+      "code": "TIMEOUT_UNUSUALLY_HIGH",
+      "message": "Requested timeout is unusually high; consider lowering.",
+      "path": "$.metadata.timeout_ms",
+      "details": {
+        "timeout_ms": 600000
+      }
+    }
+  ],
+  "timestamp": "2025-12-24T00:00:00Z",
+  "validator_version": "cat-dpt-validator/0.0.0"
+}
