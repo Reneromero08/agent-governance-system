@@ -277,5 +277,15 @@ def main():
         harness.cleanup()
 
 
+def test_ant_worker():
+    """Pytest entry point."""
+    harness = GrokExecutorTestHarness()
+    try:
+        results = harness.run_all_tests()
+        assert results['summary']['failed'] == 0
+    finally:
+        harness.cleanup()
+
+
 if __name__ == "__main__":
     main()

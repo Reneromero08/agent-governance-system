@@ -16,8 +16,8 @@ import importlib.util
 from pathlib import Path
 
 # Direct file import for MCP/server.py
-REPO_ROOT = Path(__file__).parent.parent.parent
-SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "MCP" / "server.py"
+REPO_ROOT = Path(__file__).resolve().parents[4]
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
 mcp_server = importlib.util.module_from_spec(spec)
@@ -27,7 +27,7 @@ spec.loader.exec_module(mcp_server)
 MCPTerminalServer = mcp_server.MCPTerminalServer
 PROJECT_ROOT = mcp_server.PROJECT_ROOT
 
-class TestCMP01Validator:
+class RunnerCMP01Validator:
     """Test suite for CMP-01 path validation."""
 
     def __init__(self):
@@ -668,8 +668,14 @@ class TestCMP01Validator:
                 mcp_server.CONTRACTS_DIR = old_contracts_dir
 
 
+def test_cmp01_validator():
+    """Pytest entry point."""
+    runner = RunnerCMP01Validator()
+    assert runner.run_all()
+
+
 if __name__ == "__main__":
-    tester = TestCMP01Validator()
-    success = tester.run_all()
+    runner = RunnerCMP01Validator()
+    success = runner.run_all()
     sys.exit(0 if success else 1)
 
