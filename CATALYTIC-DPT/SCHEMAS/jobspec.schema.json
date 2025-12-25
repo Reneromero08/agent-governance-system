@@ -91,14 +91,12 @@
     },
     "swarm_parallel": {
       "type": "boolean",
-      "description": "Hint: safe to run as a parallel worker job.",
-      "default": false
+      "description": "Optional hint: safe to run as a parallel worker job. If omitted, consumers must assume false."
     },
     "metadata": {
       "type": "object",
-      "description": "Optional governance metadata: scheduling, priority, provenance, etc.",
-      "additionalProperties": true,
-      "default": {}
+      "description": "Optional governance metadata: scheduling, priority, provenance, etc. If omitted, consumers must assume empty object.",
+      "additionalProperties": true
     }
   }
 }
