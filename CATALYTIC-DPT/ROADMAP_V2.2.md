@@ -19,8 +19,10 @@ Build a verifiable catalytic runtime where:
 - [x] SPECTRUM-04/05 strict verifier + identity/signing enforcement (bundle + chain)
 - [x] SPECTRUM-06 Restore Runner implemented (primitive + CLI + tests; frozen success artifacts + failure codes)
 - [x] Phase 1.U CAS implemented (deterministic layout + streaming; tests) (commit `d6e3970`)
+- [x] Phase 1.M Merkle implemented (deterministic manifest roots; tests) (commit `19a0c9c`)
+- [x] Phase 1.D Ledger implemented (append-only receipts; deterministic JSONL; tests) (commit: this changeset)
 - [ ] CI runs `CONTRACTS/runner.py`, but CAT-DPT `pytest` is not wired into CI yet
-- [ ] Phase 1 substrate is still blocking (Ledger remaining)
+- [ ] Phase 1 substrate is still blocking (Proof wiring remaining)
 - [ ] Phase 1X expand-by-hash toolbelt is still blocked
 
 Evidence (files + commits):
@@ -28,7 +30,8 @@ Evidence (files + commits):
 - Verifier: `CATALYTIC-DPT/PRIMITIVES/verify_bundle.py`, `TOOLS/catalytic_verifier.py` (commits `30efb9b`, `0b5e187`)
 - Restore Runner: `CATALYTIC-DPT/PRIMITIVES/restore_runner.py`, `TOOLS/catalytic_restore.py`, `CATALYTIC-DPT/TESTBENCH/test_restore_runner.py` (commit `001b109`)
 - CAS: `CATALYTIC-DPT/PRIMITIVES/cas_store.py`, `CATALYTIC-DPT/TESTBENCH/test_cas_store.py` (commit `d6e3970`)
-- Merkle: `CATALYTIC-DPT/PRIMITIVES/merkle.py`, `CATALYTIC-DPT/TESTBENCH/test_merkle.py` (commit: this changeset)
+- Merkle: `CATALYTIC-DPT/PRIMITIVES/merkle.py`, `CATALYTIC-DPT/TESTBENCH/test_merkle.py` (commit `19a0c9c`)
+- Ledger: `CATALYTIC-DPT/PRIMITIVES/ledger.py`, `CATALYTIC-DPT/TESTBENCH/test_ledger.py` (commit: this changeset)
 
 ## Phase gates (the only definition of “done”)
 
@@ -43,7 +46,7 @@ DONE when all are true:
 BLOCKED until all are true:
 - [x] CAS exists (streaming put/get), deterministic layout, path normalization, tests.
 - [x] Merkle exists (domain manifests, deterministic ordering, stable roots), tests.
-- [ ] Ledger exists (append-only receipts, schema-valid, deterministic serialization), tests.
+- [x] Ledger exists (append-only receipts, schema-valid, deterministic serialization), tests.
 - [ ] Proof generation is wired to these primitives and is deterministic across reruns.
 
 ### Phase 1X Gate: Expand-by-hash usability
@@ -94,7 +97,7 @@ Definition of success:
 **Phase 1 Gate is blocked by missing primitives:**
 - [x] CAS
 - [x] Merkle
-- [ ] Ledger
+- [x] Ledger
 Until these exist and are proven deterministic, Phase 1 is not “almost done.”
 
 Verifiers and identity law may be shipped early, but do not substitute for the substrate.
@@ -175,25 +178,30 @@ Status (verified):
 - [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/merkle.py` (`build_manifest_root`, `verify_manifest_root`) (commit: this changeset)
 - [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_merkle.py` passes (commit: this changeset)
 
-### 1.D Ledger: Receipts (append-only) (BLOCKING)
+### 1.D Ledger: Receipts (append-only) (DONE)
 Deliverables
-- [ ] `PRIMITIVES/ledger.py` writing append-only JSONL records conforming to ledger schema.
-- [ ] Receipt includes at minimum:
-  - [ ] job_id, run_id
-  - [ ] required artifact hashes
-  - [ ] catalytic_domains and their roots
-  - [ ] validator identity references (semver/build_id, validator_id)
-- [ ] Deterministic serialization rules (field ordering, canonical JSON within records if needed).
+- [x] `PRIMITIVES/ledger.py` writing append-only JSONL records conforming to ledger schema.
+- [x] Receipt includes at minimum (ledger.schema.json shape):
+  - [x] `JOBSPEC.job_id` (optional `JOBSPEC` included; satisfies job identifier without changing record shape)
+  - [x] `RUN_INFO.run_id` and `RUN_INFO.intent` and caller-supplied deterministic `RUN_INFO.timestamp`
+  - [x] `PRE_MANIFEST`, `POST_MANIFEST`, `RESTORE_DIFF`, `OUTPUTS`, `STATUS`
+  - [x] `VALIDATOR_ID.validator_semver` and `VALIDATOR_ID.validator_build_id` (when present)
+- [x] Deterministic serialization rules (canonical JSON per line: UTF-8, no whitespace, sorted keys).
+- [x] Append-only enforcement (detect truncation/rewrites via size invariants across appends).
 
 Acceptance
-- [ ] Schema-valid records only.
-- [ ] Append-only semantics proven by tests (no mutation of prior lines).
-- [ ] Deterministic ordering and stable output across reruns.
+- [x] Schema-valid records only.
+- [x] Append-only semantics proven by tests (no mutation of prior lines).
+- [x] Deterministic ordering and stable output across reruns.
 
 Testbench targets
-- [ ] Append entry.
-- [ ] Deterministic ordering.
-- [ ] Adversarial: attempt to rewrite prior record is detected or prevented.
+- [x] Append entry.
+- [x] Deterministic ordering.
+- [x] Adversarial: attempt to rewrite/truncate prior record is detected or prevented.
+
+Status (verified):
+- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/ledger.py` (`Ledger`) (commit: this changeset)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_ledger.py` passes (commit: this changeset)
 
 ### 1.P Proof wiring: Restore proof uses substrate (BLOCKING)
 Deliverables

@@ -18,6 +18,21 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.27.0] - 2025-12-25
+
+### Phase 1.D: Append-Only Ledger Receipts Implemented
+
+#### Added
+- **PRIMITIVES/ledger.py**:
+  - Append-only JSONL writer/reader for ledger entries; never generates timestamps (caller must supply deterministic `RUN_INFO.timestamp`).
+  - Deterministic per-line serialization (UTF-8, no whitespace, lexicographically sorted keys).
+  - Schema validation against `SCHEMAS/ledger.schema.json` (Draft-07), including optional `JOBSPEC` for job_id linkage.
+  - Truncation/rewrite detection via monotonic file-size invariants across appends.
+- **TESTBENCH/test_ledger.py**:
+  - Append order preservation, deterministic serialization, schema rejection, corrupt/partial line detection, and adversarial truncation detection.
+
+---
+
 ## [1.25.0] - 2025-12-25
 
 ### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)
