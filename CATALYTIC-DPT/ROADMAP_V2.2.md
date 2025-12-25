@@ -66,10 +66,10 @@ DONE when all are true:
 
 ### Phase 2 Gate: Memoization (never pay twice)
 DONE when all are true:
-- [ ] Cache keys bind to job + inputs + toolchain + validator identity.
-- [ ] Cache hits still emit verifiable receipts and proofs.
-- [ ] Cache misses never bypass verification.
-- [ ] At least one end-to-end demo shows measurable token reduction via hash-first dereference.
+- [x] Cache keys bind to job + inputs + toolchain + validator identity. (commit: dba8efd)
+- [x] Cache hits still emit verifiable receipts and proofs. (commit: dba8efd)
+- [x] Cache misses never bypass verification. (commit: dba8efd)
+- [x] At least one end-to-end demo shows measurable token reduction via hash-first dereference. (demo: `CONTRACTS/_runs/_demos/memoization_hash_reuse/`) (commit: this changeset)
 
 ---
 

@@ -1,0 +1,1 @@
+{"bytes_read_total":6956,"deref_count":2,"hash":"ab3c6d8985a91d8f338091e7d3a140918930a18b46864b6c0d79a53b9dff6cf6","object_size":5932,"ops":[{"bytes_read":1024,"max_bytes":1024,"op":"describe"},{"bytes_read":5932,"max_bytes":8192,"op":"grep"}],"target_run_id":"pipeline-phase2-demo-memo-hash-job-reuse-a1"}
