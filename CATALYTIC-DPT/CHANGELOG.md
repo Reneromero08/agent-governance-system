@@ -2,6 +2,21 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.14.0] - 2025-12-25
+
+### Added
+- `CATALYTIC-DPT/COMMONSENSE/` Phase 0–2 scaffold: schemas (`SCHEMAS/commonsense_entry.schema.json`, `SCHEMAS/resolution_result.schema.json`), deterministic resolver (`resolver.py`, `translate.py`), example DB (`db.example.json`), and symbol codebook (`CODEBOOK.json`).
+- Fixtures + test benches for contract enforcement:
+  - Phase 0 schema validation: `CATALYTIC-DPT/COMMONSENSE/TESTBENCH/test_commonsense_schema.py` over `CATALYTIC-DPT/COMMONSENSE/FIXTURES/phase0/valid|invalid`.
+  - Phase 1 resolver expectations: `CATALYTIC-DPT/COMMONSENSE/TESTBENCH/test_resolver.py` over `CATALYTIC-DPT/COMMONSENSE/FIXTURES/phase1/valid`.
+  - Phase 2 symbolic expansion + resolve: `CATALYTIC-DPT/COMMONSENSE/TESTBENCH/test_symbols.py` over `CATALYTIC-DPT/COMMONSENSE/FIXTURES/phase2/valid`.
+- Semiotic design notes: `CATALYTIC-DPT/ROADMAP_PATCH_SEMIOTIC.md` and `CATALYTIC-DPT/RESEARCH/SEMIOTIC_COMPRESSION_LAYER_REPORT.md`.
+
+### Fixed
+- CommonSense resolver import path and inline JSON error string quoting so `test_resolver.py` and `test_symbols.py` can import and execute `COMMONSENSE/resolver.py` from the repo root without `SyntaxError`/`ModuleNotFoundError`.
+
+### Changed
+- Roadmap v2.1 updated with a new “Semiotic Compression & Expansion” thread (Phase 1.6) to reduce token overhead via deterministic symbolic plans and code addressing.
 ## [1.13.0] - 2025-12-24
 
 ### Added

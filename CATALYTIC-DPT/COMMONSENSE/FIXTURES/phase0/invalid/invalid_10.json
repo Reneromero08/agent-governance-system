@@ -1,0 +1,12 @@
+{
+  "confidence": 0.5,
+  "id": "CS_S",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "version": "0.1.0"
+}

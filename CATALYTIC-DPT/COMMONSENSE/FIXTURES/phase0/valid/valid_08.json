@@ -1,0 +1,13 @@
+{
+  "confidence": 0.88,
+  "id": "CS_DEFAULT_LANGUAGE_UI_ONLY",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "domain:compression"
+    ]
+  },
+  "statement": "Treat natural language as UI; prefer symbolic/structured plans for execution.",
+  "symbolic": "@UI_TEXT_ONLY",
+  "version": "0.1.0"
+}

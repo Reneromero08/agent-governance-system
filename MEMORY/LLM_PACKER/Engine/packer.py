@@ -23,6 +23,7 @@ import json
 import re
 import shutil
 import sys
+from dataclasses import dataclass
 from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
@@ -48,26 +49,100 @@ PACKS_ROOT = LLM_PACKER_DIR / "_packs"
 STATE_DIR = PACKS_ROOT / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
 
-INCLUDE_DIRS = (
-    "CANON",
-    "CONTEXT",
-    "MAPS",
-    "SKILLS",
-    "CONTRACTS",
-    "MEMORY",
-    "CORTEX",
-    "TOOLS",
-    ".github",
+@dataclass(frozen=True)
+class PackScope:
+    key: str
+    title: str
+    file_prefix: str
+    include_dirs: Tuple[str, ...]
+    root_files: Tuple[str, ...]
+    anchors: Tuple[str, ...]
+    excluded_dir_parts: frozenset[str]
+
+
+SCOPE_AGS = PackScope(
+    key="ags",
+    title="Agent Governance System (AGS)",
+    file_prefix="AGS",
+    include_dirs=(
+        "CANON",
+        "CONTEXT",
+        "MAPS",
+        "SKILLS",
+        "CONTRACTS",
+        "MEMORY",
+        "CORTEX",
+        "TOOLS",
+        ".github",
+    ),
+    root_files=(
+        "README.md",
+        "LICENSE",
+        "AGENTS.md",
+        ".gitignore",
+        ".gitattributes",
+        ".editorconfig",
+    ),
+    anchors=(
+        "AGENTS.md",
+        "README.md",
+        "CONTEXT/archive/planning/INDEX.md",
+        "CANON/CONTRACT.md",
+        "CANON/INVARIANTS.md",
+        "CANON/VERSIONING.md",
+        "MAPS/ENTRYPOINTS.md",
+        "CONTRACTS/runner.py",
+        "MEMORY/packer.py",
+    ),
+    excluded_dir_parts=frozenset(
+        {
+            ".git",
+            "BUILD",
+            "_runs",
+            "_generated",
+            "_packs",
+            "Original",
+            "ORIGINAL",
+            "research",
+            "RESEARCH",
+            "__pycache__",
+            "node_modules",
+        }
+    ),
 )
 
-ROOT_FILES = (
-    "README.md",
-    "LICENSE",
-    "AGENTS.md",
-    ".gitignore",
-    ".gitattributes",
-    ".editorconfig",
+
+SCOPE_CATALYTIC_DPT = PackScope(
+    key="catalytic-dpt",
+    title="CATALYTIC-DPT",
+    file_prefix="CATALYTIC-DPT",
+    include_dirs=("CATALYTIC-DPT",),
+    root_files=(),
+    anchors=(
+        "CATALYTIC-DPT/AGENTS.md",
+        "CATALYTIC-DPT/README.md",
+        "CATALYTIC-DPT/ROADMAP_V2.1.md",
+        "CATALYTIC-DPT/swarm_config.json",
+        "CATALYTIC-DPT/CHANGELOG.md",
+    ),
+    excluded_dir_parts=frozenset(
+        {
+            ".git",
+            "BUILD",
+            "_runs",
+            "_generated",
+            "_packs",
+            "__pycache__",
+            "node_modules",
+        }
+    ),
 )
+
+
+SCOPES: Dict[str, PackScope] = {
+    SCOPE_AGS.key: SCOPE_AGS,
+    SCOPE_CATALYTIC_DPT.key: SCOPE_CATALYTIC_DPT,
+}
 
 TEXT_EXTENSIONS = {
     ".md",
@@ -88,20 +163,6 @@ TEXT_EXTENSIONS = {
 }
 
 TEXT_BASENAMES = {".gitignore", ".gitattributes", ".editorconfig", ".htaccess", ".gitkeep", "LICENSE"}
-
-EXCLUDED_DIR_PARTS = {
-    ".git",
-    "BUILD",
-    "_runs",
-    "_generated",
-    "_packs",
-    "Original",
-    "ORIGINAL",
-    "research",
-    "RESEARCH",
-    "__pycache__",
-    "node_modules",
-}
 
 CANON_VERSION_FILE = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 GRAMMAR_VERSION = "1.0"
@@ -160,9 +221,9 @@ def is_text_path(path: Path) -> bool:
     return path.name in TEXT_BASENAMES
 
 
-def is_excluded_rel_path(rel_path: Path) -> bool:
+def is_excluded_rel_path(rel_path: Path, *, excluded_dir_parts: frozenset[str]) -> bool:
     parts = set(rel_path.parts)
-    if parts & EXCLUDED_DIR_PARTS:
+    if parts & excluded_dir_parts:
         return True
     # Allow `.github/` but avoid other hidden folders by default.
     if any(part.startswith(".") and part != ".github" for part in rel_path.parts):
@@ -170,8 +231,8 @@ def is_excluded_rel_path(rel_path: Path) -> bool:
     return False
 
 
-def iter_repo_candidates(project_root: Path) -> Iterable[Path]:
-    for directory in INCLUDE_DIRS:
+def iter_repo_candidates(project_root: Path, *, scope: PackScope) -> Iterable[Path]:
+    for directory in scope.include_dirs:
         base = project_root / directory
         if not base.exists():
             continue
@@ -179,23 +240,23 @@ def iter_repo_candidates(project_root: Path) -> Iterable[Path]:
             if not path.is_file():
                 continue
             rel = path.relative_to(project_root)
-            if is_excluded_rel_path(rel):
+            if is_excluded_rel_path(rel, excluded_dir_parts=scope.excluded_dir_parts):
                 continue
             yield path
 
-    for file_name in ROOT_FILES:
+    for file_name in scope.root_files:
         path = project_root / file_name
         if path.exists() and path.is_file():
             yield path
 
 
-def build_state_manifest(project_root: Path) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
+def build_state_manifest(project_root: Path, *, scope: PackScope) -> Tuple[Dict[str, Any], List[Dict[str, Any]]]:
     canon_version = read_canon_version()
     files: List[Dict[str, Any]] = []
     omitted: List[Dict[str, Any]] = []
 
     seen: set[str] = set()
-    for abs_path in iter_repo_candidates(project_root):
+    for abs_path in iter_repo_candidates(project_root, scope=scope):
         rel = abs_path.relative_to(project_root).as_posix()
         if rel in seen:
             continue
@@ -223,6 +284,7 @@ def build_state_manifest(project_root: Path) -> Tuple[Dict[str, Any], List[Dict[
     manifest: Dict[str, Any] = {
         "canon_version": canon_version,
         "grammar_version": GRAMMAR_VERSION,
+        "scope": scope.key,
         "files": files,
     }
     return manifest, omitted
@@ -236,11 +298,17 @@ def manifest_digest(manifest: Dict[str, Any]) -> str:
     return hasher.hexdigest()
 
 
-def load_baseline() -> Optional[Dict[str, Any]]:
-    if not BASELINE_PATH.exists():
+def baseline_path_for_scope(scope: PackScope) -> Path:
+    if scope.key == SCOPE_AGS.key:
+        return BASELINE_PATH
+    return STATE_DIR / f"baseline-{scope.key}.json"
+
+
+def load_baseline(path: Path) -> Optional[Dict[str, Any]]:
+    if not path.exists():
         return None
     try:
-        return json.loads(read_text(BASELINE_PATH))
+        return json.loads(read_text(path))
     except Exception:
         return None
 
@@ -692,7 +760,7 @@ def build_pack_tree_text(paths: Sequence[str], extra_paths: Sequence[str]) -> st
     return "\n".join(lines).rstrip() + "\n"
 
 
-def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None:
+def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> None:
     split_dir = pack_dir / "COMBINED" / "SPLIT"
     split_dir.mkdir(parents=True, exist_ok=True)
 
@@ -768,7 +836,97 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str]) -> None
     )
 
 
-def write_split_pack_lite(pack_dir: Path) -> None:
+def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope) -> None:
+    split_dir = pack_dir / "COMBINED" / "SPLIT"
+    split_dir.mkdir(parents=True, exist_ok=True)
+
+    def section(paths: Sequence[str]) -> str:
+        out_lines: List[str] = []
+        for rel in paths:
+            src = pack_dir / rel
+            if not src.exists():
+                continue
+            text = read_text(src)
+            fence = choose_fence(text)
+            out_lines.append(f"## `{rel}`")
+            out_lines.append("")
+            out_lines.append(fence)
+            out_lines.append(text.rstrip("\n"))
+            out_lines.append(fence)
+            out_lines.append("")
+        return "\n".join(out_lines).rstrip() + "\n"
+
+    def is_cdpt(path: str) -> bool:
+        return path.startswith("repo/CATALYTIC-DPT/")
+
+    cdpt_paths = [p for p in included_repo_paths if is_cdpt(p)]
+    cdpt_root = [p for p in cdpt_paths if p.count("/") == 2]
+
+    agents_paths = [p for p in cdpt_root if p.endswith("/AGENTS.md")]
+    readme_paths = [p for p in cdpt_root if p.endswith("/README.md")]
+    roadmap_paths = [p for p in cdpt_root if "ROADMAP" in p.upper()]
+    changelog_paths = [p for p in cdpt_root if p.endswith("/CHANGELOG.md")]
+    architecture_docs = [p for p in cdpt_root if p.endswith(".md") and p not in {*agents_paths, *readme_paths, *roadmap_paths, *changelog_paths}]
+
+    config_paths = [p for p in cdpt_root if p.endswith(".json")] + [p for p in cdpt_paths if "/SCHEMAS/" in p or "/MCP/" in p]
+    testbench_paths = [p for p in cdpt_paths if "/TESTBENCH/" in p or "/FIXTURES/" in p]
+
+    docs_paths = [
+        *agents_paths,
+        *readme_paths,
+        *roadmap_paths,
+        *changelog_paths,
+        *architecture_docs,
+    ]
+    docs_paths = sorted(set(docs_paths))
+
+    config_paths = sorted(set(config_paths) - set(docs_paths))
+    testbench_paths = sorted(set(testbench_paths) - set(docs_paths))
+
+    system_paths = sorted(set(cdpt_paths) - set(docs_paths) - set(config_paths) - set(testbench_paths))
+
+    meta_dir = pack_dir / "meta"
+    meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
+
+    (split_dir / f"{scope.file_prefix}-00_INDEX.md").write_text(
+        "\n".join(
+            [
+                f"# {scope.title} Pack Index",
+                "",
+                "This directory contains a generated snapshot intended for LLM handoff.",
+                "",
+                "## Read order",
+                "1) `repo/CATALYTIC-DPT/AGENTS.md`",
+                "2) `repo/CATALYTIC-DPT/README.md`",
+                "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+                "4) `repo/CATALYTIC-DPT/swarm_config.json`",
+                "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
+                "6) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt`",
+                "",
+                "## Notes",
+                f"- If `--combined` is enabled, `COMBINED/` contains `{scope.file_prefix}-FULL-COMBINED-*` and `{scope.file_prefix}-FULL-TREEMAP-*` outputs.",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    (split_dir / f"{scope.file_prefix}-01_DOCS.md").write_text("# Docs\n\n" + section(docs_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-02_CONFIG.md").write_text("# Config\n\n" + section(config_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-03_TESTBENCH.md").write_text("# Testbench\n\n" + section(testbench_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-04_SYSTEM.md").write_text("# System\n\n" + section([*system_paths, *meta_paths]), encoding="utf-8")
+
+
+def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope) -> None:
+    if scope.key == SCOPE_AGS.key:
+        write_split_pack_ags(pack_dir, included_repo_paths)
+    elif scope.key == SCOPE_CATALYTIC_DPT.key:
+        write_split_pack_catalytic_dpt(pack_dir, included_repo_paths, scope=scope)
+    else:
+        raise ValueError(f"Unsupported scope for split pack: {scope.key}")
+
+
+def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
     """
     Write a discussion-first SPLIT set alongside the full SPLIT docs.
 
@@ -781,170 +939,220 @@ def write_split_pack_lite(pack_dir: Path) -> None:
     def write(path: Path, text: str) -> None:
         path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
-    write(
-        split_dir / "AGS-00_INDEX.md",
-        "\n".join(
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-00_INDEX.md",
+            "\n".join(
+                [
+                    "# AGS Pack Index (SPLIT_LITE)",
+                    "",
+                    "This directory contains a compressed, discussion-first map of the pack (pointers + indexes).",
+                    "",
+                    "## Read order",
+                    "1) `repo/AGENTS.md`",
+                    "2) `repo/README.md`",
+                    "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
+                    "4) `repo/MAPS/ENTRYPOINTS.md`",
+                    "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/*/SKILL.md`",
+                    "6) `repo/CORTEX/query.py` and `repo/TOOLS/critic.py`",
+                    "7) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
+                    "8) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                    "",
+                ]
+            ),
+        )
+    else:
+        write(
+            split_dir / f"{scope.file_prefix}-00_INDEX.md",
+            "\n".join(
+                [
+                    f"# {scope.title} Pack Index (SPLIT_LITE)",
+                    "",
+                    "This directory contains a compressed, discussion-first map of the pack (pointers + indexes).",
+                    "",
+                    "## Read order",
+                    "1) `repo/CATALYTIC-DPT/AGENTS.md`",
+                    "2) `repo/CATALYTIC-DPT/README.md`",
+                    "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+                    "4) `repo/CATALYTIC-DPT/swarm_config.json`",
+                    "5) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
+                    "6) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-01_CANON.md",
+            "\n".join(
+                [
+                    "# Canon (SPLIT_LITE)",
+                    "",
+                    "See `repo/CANON/*` (canonical rules).",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-02_ROOT.md",
+            "\n".join(
+                [
+                    "# Root (SPLIT_LITE)",
+                    "",
+                    "- `repo/AGENTS.md` (agent procedure)",
+                    "- `repo/README.md` (orientation)",
+                    "- `repo/.gitignore` (generated artifacts exclusions)",
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-03_MAPS.md",
+            "\n".join(
+                [
+                    "# Maps (SPLIT_LITE)",
+                    "",
+                    "- Core navigation: `repo/MAPS/ENTRYPOINTS.md`",
+                    "- Data flow: `repo/MAPS/DATA_FLOW.md`",
+                    "",
+                    "## Repo File Tree",
+                    "",
+                    "See `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`.",
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        # Skills summary table from the repo snapshot (if present in the pack).
+        skills_root = pack_dir / "repo" / "SKILLS"
+        skill_names = sorted([p.name for p in skills_root.iterdir() if p.is_dir() and not p.name.startswith("_")]) if skills_root.exists() else []
+        rows = ["| Skill | Contract | Entrypoint (repo path, may be omitted in LITE) |", "|---|---|---|"]
+        for name in skill_names:
+            contract = f"`repo/SKILLS/{name}/SKILL.md`"
+            entry = f"`repo/SKILLS/{name}/run.py`" if (skills_root / name / "run.py").exists() else f"`repo/SKILLS/{name}/`"
+            rows.append(f"| `{name}` | {contract} | {entry} |")
+        write(
+            split_dir / "AGS-05_SKILLS.md",
+            "\n".join(
+                [
+                    "# Skills (SPLIT_LITE)",
+                    "",
+                    "LITE ships manifests + pointers; implementations are accessed on demand.",
+                    "",
+                    "In LITE, `repo/SKILLS/*/SKILL.md` is the required interface. `run.py` / `validate.py` may be omitted.",
+                    "If you need implementation details, load them from a FULL (or TEST) pack or from the repo filesystem.",
+                    "",
+                    "## Skills Table",
+                    "",
+                    *rows,
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-04_CONTEXT.md",
+            "\n".join(
+                [
+                    "# Context (SPLIT_LITE)",
+                    "",
+                    "- Decisions: `repo/CONTEXT/decisions/`",
+                    "- Preferences: `repo/CONTEXT/preferences/`",
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-06_CONTRACTS.md",
+            "\n".join(
+                [
+                    "# Contracts (SPLIT_LITE)",
+                    "",
+                    "- Runner: `repo/CONTRACTS/runner.py`",
+                    "- LITE may omit fixtures; fixtures live in FULL (or TEST) packs.",
+                    "- In LITE, use `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` for navigation, and `meta/FIXTURE_INDEX.json` if present.",
+                    "",
+                ]
+            ),
+        )
+
+    if scope.key == SCOPE_AGS.key:
+        write(
+            split_dir / "AGS-07_SYSTEM.md",
+            "\n".join(
+                [
+                    "# System (SPLIT_LITE)",
+                    "",
+                    "LITE is laws + maps + indexes + pointers. Raw code and fixtures may be omitted in LITE.",
+                    "When you need full implementation bodies, load them from a FULL (or TEST) pack or from the repo filesystem.",
+                    "",
+                    "- Cortex query interface: `repo/CORTEX/query.py`",
+                    "- Governance critic: `repo/TOOLS/critic.py`",
+                    "- MCP server: `repo/MCP/server.py`",
+                    "- Packer engine: `repo/MEMORY/LLM_PACKER/Engine/packer.py`",
+                    "",
+                    "## Meta inventories",
+                    "",
+                    "- `meta/PACK_INFO.json` (pack metadata)",
+                    "- `meta/REPO_STATE.json` (hash inventory; if present)",
+                    "- `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` (navigation)",
+                    "",
+                ]
+            ),
+        )
+
+def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
+    if scope.key == SCOPE_AGS.key:
+        text = "\n".join(
             [
-                "# AGS Pack Index (SPLIT_LITE)",
+                "# START HERE",
                 "",
-                "This directory contains a compressed, discussion-first map of the pack (pointers + indexes).",
+                "This snapshot is meant to be shared with any LLM to continue work on the Agent Governance System (AGS) repository.",
                 "",
                 "## Read order",
-                "1) `repo/AGENTS.md`",
-                "2) `repo/README.md`",
-                "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
-                "4) `repo/MAPS/ENTRYPOINTS.md`",
-                "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/*/SKILL.md`",
-                "6) `repo/CORTEX/query.py` and `repo/TOOLS/critic.py`",
-                "7) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
-                "8) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                "1) `repo/AGENTS.md` (procedural operating contract)",
+                "2) `repo/README.md` and `repo/CONTEXT/archive/planning/INDEX.md` (orientation + planning)",
+                "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md` (authority)",
+                "4) `repo/MAPS/ENTRYPOINTS.md` (where to change what)",
+                "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/` (execution and fixtures)",
+                "6) `meta/ENTRYPOINTS.md` (snapshot-specific pointers)",
+                "",
+                "## Notes",
+                "- `BUILD` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
+                "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
                 "",
             ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-01_CANON.md",
-        "\n".join(
+        )
+    else:
+        text = "\n".join(
             [
-                "# Canon (SPLIT_LITE)",
+                "# START HERE",
                 "",
-                "See `repo/CANON/*` (canonical rules).",
-            ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-02_ROOT.md",
-        "\n".join(
-            [
-                "# Root (SPLIT_LITE)",
+                f"This snapshot is meant to be shared with any LLM to continue work on `{scope.title}`.",
                 "",
-                "- `repo/AGENTS.md` (agent procedure)",
-                "- `repo/README.md` (orientation)",
-                "- `repo/.gitignore` (generated artifacts exclusions)",
+                "## Read order",
+                "1) `repo/CATALYTIC-DPT/AGENTS.md`",
+                "2) `repo/CATALYTIC-DPT/README.md`",
+                "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+                "4) `repo/CATALYTIC-DPT/swarm_config.json`",
+                "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
+                "6) `COMBINED/SPLIT/*` (chunked snapshot)",
+                "7) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json` (navigation)",
                 "",
-            ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-03_MAPS.md",
-        "\n".join(
-            [
-                "# Maps (SPLIT_LITE)",
-                "",
-                "- Core navigation: `repo/MAPS/ENTRYPOINTS.md`",
-                "- Data flow: `repo/MAPS/DATA_FLOW.md`",
-                "",
-                "## Repo File Tree",
-                "",
-                "See `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`.",
+                "## Notes",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
                 "",
             ]
-        ),
-    )
-
-    # Skills summary table from the repo snapshot (if present in the pack).
-    skills_root = pack_dir / "repo" / "SKILLS"
-    skill_names = sorted([p.name for p in skills_root.iterdir() if p.is_dir() and not p.name.startswith("_")]) if skills_root.exists() else []
-    rows = ["| Skill | Contract | Entrypoint (repo path, may be omitted in LITE) |", "|---|---|---|"]
-    for name in skill_names:
-        contract = f"`repo/SKILLS/{name}/SKILL.md`"
-        entry = f"`repo/SKILLS/{name}/run.py`" if (skills_root / name / "run.py").exists() else f"`repo/SKILLS/{name}/`"
-        rows.append(f"| `{name}` | {contract} | {entry} |")
-    write(
-        split_dir / "AGS-05_SKILLS.md",
-        "\n".join(
-            [
-                "# Skills (SPLIT_LITE)",
-                "",
-                "LITE ships manifests + pointers; implementations are accessed on demand.",
-                "",
-                "In LITE, `repo/SKILLS/*/SKILL.md` is the required interface. `run.py` / `validate.py` may be omitted.",
-                "If you need implementation details, load them from a FULL (or TEST) pack or from the repo filesystem.",
-                "",
-                "## Skills Table",
-                "",
-                *rows,
-                "",
-            ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-04_CONTEXT.md",
-        "\n".join(
-            [
-                "# Context (SPLIT_LITE)",
-                "",
-                "- Decisions: `repo/CONTEXT/decisions/`",
-                "- Preferences: `repo/CONTEXT/preferences/`",
-                "",
-            ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-06_CONTRACTS.md",
-        "\n".join(
-            [
-                "# Contracts (SPLIT_LITE)",
-                "",
-                "- Runner: `repo/CONTRACTS/runner.py`",
-                "- LITE may omit fixtures; fixtures live in FULL (or TEST) packs.",
-                "- In LITE, use `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` for navigation, and `meta/FIXTURE_INDEX.json` if present.",
-                "",
-            ]
-        ),
-    )
-
-    write(
-        split_dir / "AGS-07_SYSTEM.md",
-        "\n".join(
-            [
-                "# System (SPLIT_LITE)",
-                "",
-                "LITE is laws + maps + indexes + pointers. Raw code and fixtures may be omitted in LITE.",
-                "When you need full implementation bodies, load them from a FULL (or TEST) pack or from the repo filesystem.",
-                "",
-                "- Cortex query interface: `repo/CORTEX/query.py`",
-                "- Governance critic: `repo/TOOLS/critic.py`",
-                "- MCP server: `repo/MCP/server.py`",
-                "- Packer engine: `repo/MEMORY/LLM_PACKER/Engine/packer.py`",
-                "",
-                "## Meta inventories",
-                "",
-                "- `meta/PACK_INFO.json` (pack metadata)",
-                "- `meta/REPO_STATE.json` (hash inventory; if present)",
-                "- `meta/FILE_TREE.txt` / `meta/FILE_INDEX.json` (navigation)",
-                "",
-            ]
-        ),
-    )
-
-def write_start_here(pack_dir: Path) -> None:
-    text = "\n".join(
-        [
-            "# START HERE",
-            "",
-            "This snapshot is meant to be shared with any LLM to continue work on the Agent Governance System (AGS) repository.",
-            "",
-            "## Read order",
-            "1) `repo/AGENTS.md` (procedural operating contract)",
-            "2) `repo/README.md` and `repo/CONTEXT/archive/planning/INDEX.md` (orientation + planning)",
-            "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md` (authority)",
-            "4) `repo/MAPS/ENTRYPOINTS.md` (where to change what)",
-            "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/` (execution and fixtures)",
-            "6) `meta/ENTRYPOINTS.md` (snapshot-specific pointers)",
-            "",
-            "## Notes",
-            "- `BUILD` contents are not included. Only a file tree inventory is captured in `meta/BUILD_TREE.txt`.",
-            "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
-            "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
-            "",
-        ]
-    )
+        )
     
     # Add provenance to START_HERE.md
     try:
@@ -963,31 +1171,51 @@ def write_start_here(pack_dir: Path) -> None:
     (pack_dir / "meta" / "START_HERE.md").write_text(text, encoding="utf-8")
 
 
-def write_entrypoints(pack_dir: Path) -> None:
-    text = "\n".join(
-        [
-            "# Snapshot Entrypoints",
-            "",
-            "Key entrypoints for modifying and verifying this repository:",
-            "",
-            "- `repo/AGENTS.md`",
-            "- `repo/README.md`",
-            "- `repo/CONTEXT/archive/planning/INDEX.md`",
-            "- `repo/CANON/CONTRACT.md`",
-            "- `repo/CANON/INVARIANTS.md`",
-            "- `repo/CANON/VERSIONING.md`",
-            "- `repo/MAPS/ENTRYPOINTS.md`",
-            "- `repo/CONTRACTS/runner.py`",
-            "- `repo/MEMORY/packer.py`",
-            "- `repo/CORTEX/query.py`",
-            "",
-            "Notes:",
-            "- `BUILD` contents are not included. Only `meta/BUILD_TREE.txt` is captured.",
-            "- Research under `repo/CONTEXT/research/` has no authority.",
-            "- If `--combined` is enabled, see `COMBINED/FULL-COMBINED-*` and `COMBINED/FULL-TREEMAP-*`.",
-            "",
-        ]
-    )
+def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
+    if scope.key == SCOPE_AGS.key:
+        text = "\n".join(
+            [
+                "# Snapshot Entrypoints",
+                "",
+                "Key entrypoints for modifying and verifying this repository:",
+                "",
+                "- `repo/AGENTS.md`",
+                "- `repo/README.md`",
+                "- `repo/CONTEXT/archive/planning/INDEX.md`",
+                "- `repo/CANON/CONTRACT.md`",
+                "- `repo/CANON/INVARIANTS.md`",
+                "- `repo/CANON/VERSIONING.md`",
+                "- `repo/MAPS/ENTRYPOINTS.md`",
+                "- `repo/CONTRACTS/runner.py`",
+                "- `repo/MEMORY/packer.py`",
+                "- `repo/CORTEX/query.py`",
+                "",
+                "Notes:",
+                "- `BUILD` contents are not included. Only `meta/BUILD_TREE.txt` is captured.",
+                "- Research under `repo/CONTEXT/research/` has no authority.",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
+                "",
+            ]
+        )
+    else:
+        text = "\n".join(
+            [
+                "# Snapshot Entrypoints",
+                "",
+                f"Key entrypoints for `{scope.title}`:",
+                "",
+                "- `repo/CATALYTIC-DPT/AGENTS.md`",
+                "- `repo/CATALYTIC-DPT/README.md`",
+                "- `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+                "- `repo/CATALYTIC-DPT/swarm_config.json`",
+                "- `repo/CATALYTIC-DPT/CHANGELOG.md`",
+                "- `repo/CATALYTIC-DPT/TESTBENCH/`",
+                "",
+                "Notes:",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
+                "",
+            ]
+        )
     
     # Add provenance to ENTRYPOINTS.md
     try:
@@ -1043,7 +1271,7 @@ def write_pack_file_tree_and_index(pack_dir: Path) -> None:
     write_json(pack_dir / "meta" / "FILE_INDEX.json", file_index)
 
 
-def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
+def write_context_report(pack_dir: Path, *, scope: PackScope) -> Tuple[int, List[str]]:
     """
     Write CONTEXT.txt with token estimates per file and warnings.
     
@@ -1102,7 +1330,7 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
     combined_files = [
         (rel, tokens)
         for rel, _, tokens in category_map["COMBINED"]
-        if rel.startswith("COMBINED/AGS-FULL-COMBINED-") or rel.startswith("COMBINED/AGS-FULL-TREEMAP-")
+        if rel.startswith(f"COMBINED/{scope.file_prefix}-FULL-COMBINED-") or rel.startswith(f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-")
     ]
     combined_files.sort(key=lambda it: it[0])
 
@@ -1110,7 +1338,7 @@ def write_context_report(pack_dir: Path) -> Tuple[int, List[str]]:
     effective_tokens = repo_meta_tokens
     
     lines: List[str] = [
-        "# AGS Pack Context Report",
+        f"# {scope.file_prefix} Pack Context Report",
         "",
         "## Payload Token Counts",
         "",
@@ -1281,16 +1509,22 @@ def default_stamp_for_out_dir(out_dir: Path) -> str:
     return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
 
 
-def compute_treemap_text(pack_dir: Path, *, stamp: str, include_combined_paths: bool) -> str:
+def compute_treemap_text(
+    pack_dir: Path,
+    *,
+    stamp: str,
+    include_combined_paths: bool,
+    scope: PackScope,
+) -> str:
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
 
     if not include_combined_paths:
         return build_pack_tree_text(base_paths, extra_paths=[])
 
-    combined_md_rel = f"COMBINED/FULL-COMBINED-{stamp}.md"
-    combined_txt_rel = f"COMBINED/FULL-COMBINED-{stamp}.txt"
-    treemap_md_rel = f"COMBINED/FULL-TREEMAP-{stamp}.md"
-    treemap_txt_rel = f"COMBINED/FULL-TREEMAP-{stamp}.txt"
+    combined_md_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.txt"
 
     return build_pack_tree_text(
         base_paths,
@@ -1298,11 +1532,14 @@ def compute_treemap_text(pack_dir: Path, *, stamp: str, include_combined_paths: 
     )
 
 
-def append_repo_tree_to_split_maps(pack_dir: Path, *, tree_text: str) -> None:
-    split_maps_path = pack_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md"
-    if not split_maps_path.exists():
+def append_repo_tree_to_split_maps(pack_dir: Path, *, tree_text: str, scope: PackScope) -> None:
+    if scope.key == SCOPE_AGS.key:
+        split_target = pack_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md"
+    else:
+        split_target = pack_dir / "COMBINED" / "SPLIT" / f"{scope.file_prefix}-00_INDEX.md"
+    if not split_target.exists():
         return
-    existing = read_text(split_maps_path).rstrip("\n")
+    existing = read_text(split_target).rstrip("\n")
     updated = "\n".join(
         [
             existing,
@@ -1315,19 +1552,19 @@ def append_repo_tree_to_split_maps(pack_dir: Path, *, tree_text: str) -> None:
             "",
         ]
     )
-    split_maps_path.write_text(updated, encoding="utf-8")
+    split_target.write_text(updated, encoding="utf-8")
 
 
-def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
+def write_combined_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> None:
     combined_dir = pack_dir / "COMBINED"
     combined_dir.mkdir(parents=True, exist_ok=True)
 
-    combined_md_rel = f"COMBINED/AGS-FULL-COMBINED-{stamp}.md"
-    combined_txt_rel = f"COMBINED/AGS-FULL-COMBINED-{stamp}.txt"
-    treemap_md_rel = f"COMBINED/AGS-FULL-TREEMAP-{stamp}.md"
-    treemap_txt_rel = f"COMBINED/AGS-FULL-TREEMAP-{stamp}.txt"
+    combined_md_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.txt"
 
-    tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True)
+    tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True, scope=scope)
     tree_md = "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n"
 
     # Add provenance to treemap outputs
@@ -1356,8 +1593,8 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str) -> None:
     (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
     (pack_dir / treemap_md_rel).write_text(tree_md, encoding="utf-8")
 
-    combined_md_lines = ["# AGS FULL COMBINED", ""]
-    combined_txt_lines = ["AGS FULL COMBINED", ""]
+    combined_md_lines = [f"# {scope.file_prefix} FULL COMBINED", ""]
+    combined_txt_lines = [f"{scope.file_prefix} FULL COMBINED", ""]
 
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
     for rel in base_paths:
@@ -1440,6 +1677,7 @@ def write_provenance_manifest(pack_dir: Path) -> None:
 
 def make_pack(
     *,
+    scope_key: str,
     mode: str,
     profile: str,
     split_lite: bool,
@@ -1448,28 +1686,25 @@ def make_pack(
     stamp: Optional[str],
     zip_enabled: bool,
 ) -> Path:
-    manifest, omitted = build_state_manifest(PROJECT_ROOT)
+    scope = SCOPES.get(scope_key)
+    if not scope:
+        raise ValueError(f"Unknown scope: {scope_key}. Choices: {', '.join(sorted(SCOPES.keys()))}")
+    if scope.key != SCOPE_AGS.key and profile != "full":
+        raise ValueError(f"Only --profile full is supported for scope={scope.key} (received: {profile})")
+
+    manifest, omitted = build_state_manifest(PROJECT_ROOT, scope=scope)
     digest = manifest_digest(manifest)
 
     if out_dir is None:
-        out_dir = PACKS_ROOT / f"llm-pack-{digest[:12]}"
+        out_dir = PACKS_ROOT / f"llm-pack-{scope.key}-{digest[:12]}"
     out_dir = ensure_under_packs_root(out_dir)
 
-    baseline = load_baseline()
+    baseline_path = baseline_path_for_scope(scope)
+    baseline = load_baseline(baseline_path)
     baseline_files_by_path = {f["path"]: f for f in (baseline or {}).get("files", [])}
     current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
 
-    anchors = {
-        "AGENTS.md",
-        "README.md",
-        "CONTEXT/archive/planning/INDEX.md",
-        "CANON/CONTRACT.md",
-        "CANON/INVARIANTS.md",
-        "CANON/VERSIONING.md",
-        "MAPS/ENTRYPOINTS.md",
-        "CONTRACTS/runner.py",
-        "MEMORY/packer.py",
-    }
+    anchors = set(scope.anchors)
 
     if mode == "delta" and baseline is not None:
         changed = []
@@ -1538,6 +1773,7 @@ def make_pack(
     write_json(
         out_dir / "meta" / "PACK_INFO.json",
         {
+            "scope": scope.key,
             "mode": mode,
             **({"profile": profile} if profile != "full" else {}),
             "canon_version": manifest.get("canon_version"),
@@ -1548,20 +1784,20 @@ def make_pack(
         },
     )
     write_build_tree(out_dir, PROJECT_ROOT)
-    write_start_here(out_dir)
-    write_entrypoints(out_dir)
-    write_split_pack(out_dir, repo_pack_paths)
+    write_start_here(out_dir, scope=scope)
+    write_entrypoints(out_dir, scope=scope)
+    write_split_pack(out_dir, repo_pack_paths, scope=scope)
     if split_lite:
-        write_split_pack_lite(out_dir)
+        write_split_pack_lite(out_dir, scope=scope)
 
     effective_stamp = stamp or default_stamp_for_out_dir(out_dir)
-    tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined))
-    append_repo_tree_to_split_maps(out_dir, tree_text=tree_text)
+    tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined), scope=scope)
+    append_repo_tree_to_split_maps(out_dir, tree_text=tree_text, scope=scope)
 
     if combined:
-        write_combined_outputs(out_dir, stamp=effective_stamp)
+        write_combined_outputs(out_dir, stamp=effective_stamp, scope=scope)
 
-    if profile == "lite":
+    if profile == "lite" and scope.key == SCOPE_AGS.key:
         write_lite_indexes(
             out_dir,
             project_root=PROJECT_ROOT,
@@ -1573,7 +1809,7 @@ def make_pack(
     write_pack_file_tree_and_index(out_dir)
     
     # Generate token context report with warnings
-    total_tokens, token_warnings = write_context_report(out_dir)
+    total_tokens, token_warnings = write_context_report(out_dir, scope=scope)
     print_payload_token_counts(out_dir)
     for warning in token_warnings:
         color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
@@ -1582,7 +1818,7 @@ def make_pack(
     # Generate PROVENANCE.json manifest
     write_provenance_manifest(out_dir)
 
-    write_json(BASELINE_PATH, manifest)
+    write_json(baseline_path, manifest)
 
     if zip_enabled:
         archive_dir = PACKS_ROOT / "archive"
@@ -1596,7 +1832,13 @@ def make_pack(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description="Create AGS memory/LLM packs under MEMORY/LLM_PACKER/_packs/."
+        description="Create memory/LLM packs under MEMORY/LLM_PACKER/_packs/."
+    )
+    parser.add_argument(
+        "--scope",
+        choices=tuple(sorted(SCOPES.keys())),
+        default=SCOPE_AGS.key,
+        help="What to pack: default is the full AGS repo; catalytic-dpt packs only CATALYTIC-DPT/.",
     )
     parser.add_argument(
         "--mode",
@@ -1638,6 +1880,7 @@ if __name__ == "__main__":
         out_dir = (PROJECT_ROOT / out_dir).resolve()
 
     pack_dir = make_pack(
+        scope_key=args.scope,
         mode=args.mode,
         profile=args.profile,
         split_lite=bool(args.split_lite),
