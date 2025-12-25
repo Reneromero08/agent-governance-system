@@ -41,6 +41,7 @@ from typing import Dict, List, Optional, Tuple
 sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
 from PRIMITIVES.restore_proof import RestorationProofValidator
 from PRIMITIVES.preflight import PreflightValidator
+from PRIMITIVES.fs_guard import FilesystemGuard
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
@@ -115,6 +116,18 @@ class CatalyticRuntime:
         # Snapshots
         self.pre_snapshots: Dict[str, CatalyticSnapshot] = {}
         self.post_snapshots: Dict[str, CatalyticSnapshot] = {}
+
+        # Initialize filesystem guard (Layer 2 runtime enforcement)
+        self.fs_guard = FilesystemGuard(
+            allowed_roots=[
+                "CONTRACTS/_runs",
+                "CORTEX/_generated",
+                "MEMORY/LLM_PACKER/_packs",
+                "CATALYTIC-DPT/_scratch",
+            ],
+            forbidden_paths=["CANON", "AGENTS.md", "BUILD", ".git"],
+            project_root=PROJECT_ROOT,
+        )
 
     def build_jobspec(self) -> Dict:
         """Build JobSpec dict from runtime parameters."""
@@ -317,7 +330,7 @@ class CatalyticRuntime:
                 "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
                 "determinism": self.determinism,
             }
-            (self.ledger_dir / "JOBSPEC.json").write_text(json.dumps(jobspec, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "JOBSPEC.json", json.dumps(jobspec, indent=2))
 
             # 2. STATUS.json (state machine: started/failed/succeeded/verified)
             status = {
@@ -326,7 +339,7 @@ class CatalyticRuntime:
                 "exit_code": exit_code,
                 "validation_passed": restoration_success and exit_code == 0,
             }
-            (self.ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "STATUS.json", json.dumps(status, indent=2))
 
             # 3. INPUT_HASHES.json (from pre-snapshots)
             input_hashes = {}
@@ -334,12 +347,12 @@ class CatalyticRuntime:
                 for path, sha in snapshot.to_dict().items():
                     full_path = f"{domain}/{path}"
                     input_hashes[full_path] = sha
-            (self.ledger_dir / "INPUT_HASHES.json").write_text(json.dumps(input_hashes, indent=2, sort_keys=True))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "INPUT_HASHES.json", json.dumps(input_hashes, indent=2, sort_keys=True))
 
             # 4. OUTPUT_HASHES.json (from outputs list)
             outputs_list = self.collect_outputs()
             output_hashes = {o["path"]: o.get("sha256", "") for o in outputs_list}
-            (self.ledger_dir / "OUTPUT_HASHES.json").write_text(json.dumps(output_hashes, indent=2, sort_keys=True))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "OUTPUT_HASHES.json", json.dumps(output_hashes, indent=2, sort_keys=True))
 
             # 5. DOMAIN_ROOTS.json (Merkle roots per domain)
             domain_roots = {}
@@ -352,7 +365,7 @@ class CatalyticRuntime:
                 else:
                     root_hash = hashlib.sha256(b"").hexdigest()
                 domain_roots[domain] = root_hash
-            (self.ledger_dir / "DOMAIN_ROOTS.json").write_text(json.dumps(domain_roots, indent=2, sort_keys=True))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "DOMAIN_ROOTS.json", json.dumps(domain_roots, indent=2, sort_keys=True))
 
             # 6. LEDGER.jsonl (append-only receipts)
             ledger_entry = {
@@ -364,7 +377,7 @@ class CatalyticRuntime:
                 "restoration_verified": restoration_success,
             }
             ledger_line = json.dumps(ledger_entry, sort_keys=True) + "\n"
-            (self.ledger_dir / "LEDGER.jsonl").write_text(ledger_line)
+            self.fs_guard.guarded_write_text(self.ledger_dir / "LEDGER.jsonl", ledger_line)
 
             # 7. VALIDATOR_ID.json
             validator_id = {
@@ -372,7 +385,7 @@ class CatalyticRuntime:
                 "validator_build_id": "phase0-canonical",
                 "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
             }
-            (self.ledger_dir / "VALIDATOR_ID.json").write_text(json.dumps(validator_id, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "VALIDATOR_ID.json", json.dumps(validator_id, indent=2))
 
             # 8. PROOF.json (written LAST after all other artifacts exist)
             proof_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json"
@@ -388,14 +401,14 @@ class CatalyticRuntime:
                 post_state=post_manifest,
                 timestamp=self.timestamp,
             )
-            (self.ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "PROOF.json", json.dumps(proof, indent=2))
 
             # Legacy artifacts (keep for backwards compatibility)
-            (self.ledger_dir / "RUN_INFO.json").write_text(json.dumps(ledger_entry, indent=2))
-            (self.ledger_dir / "PRE_MANIFEST.json").write_text(json.dumps(pre_manifest, indent=2))
-            (self.ledger_dir / "POST_MANIFEST.json").write_text(json.dumps(post_manifest, indent=2))
-            (self.ledger_dir / "RESTORE_DIFF.json").write_text(json.dumps(diffs, indent=2))
-            (self.ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs_list, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "RUN_INFO.json", json.dumps(ledger_entry, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "PRE_MANIFEST.json", json.dumps(pre_manifest, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "POST_MANIFEST.json", json.dumps(post_manifest, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "RESTORE_DIFF.json", json.dumps(diffs, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "OUTPUTS.json", json.dumps(outputs_list, indent=2))
 
             print(f"[catalytic] Canonical artifact set written to {self.ledger_dir}")
             print(f"[catalytic] PROOF.json: verified={proof['restoration_result']['verified']}, condition={proof['restoration_result']['condition']}")
@@ -413,7 +426,7 @@ class CatalyticRuntime:
                     "validation_passed": False,
                     "error": str(e),
                 }
-                (self.ledger_dir / "STATUS.json").write_text(json.dumps(failed_status, indent=2))
+                self.fs_guard.guarded_write_text(self.ledger_dir / "STATUS.json", json.dumps(failed_status, indent=2))
             except:
                 pass
             return False
@@ -453,7 +466,7 @@ class CatalyticRuntime:
         # Write started status
         try:
             started_status = {"status": "started", "restoration_verified": False, "exit_code": None, "validation_passed": False}
-            (self.ledger_dir / "STATUS.json").write_text(json.dumps(started_status, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "STATUS.json", json.dumps(started_status, indent=2))
         except Exception as e:
             print(f"[catalytic] ERROR: Cannot write STATUS.json: {e}", file=sys.stderr)
             return 1
