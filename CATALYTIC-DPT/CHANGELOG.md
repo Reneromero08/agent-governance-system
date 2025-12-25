@@ -2,6 +2,15 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.37.0] - 2025-12-25
+
+### Phase 4: Adversarial Fixtures (Fail-Closed Hardening)
+
+#### Added
+- Adversarial test coverage for CAS corruption/truncation/partial writes, ledger corruption, path traversal injection, proof/manifest tampering, and pipeline resume safety.
+
+---
+
 ## [1.36.0] - 2025-12-25
 
 ### Phase 2: Demo of Measurable Reuse via Hash-First Dereference
