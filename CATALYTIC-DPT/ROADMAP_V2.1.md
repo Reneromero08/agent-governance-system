@@ -239,6 +239,30 @@ Acceptance
 - [x] Tamper/missing cases correctly emit verified=false with condition codes.
 - [x] PROOF.json validates against schema (Draft-07).
 
+## 1.5 Bundle/Chain Verifier ✅ COMPLETE (Phase 1 Option #1)
+Deliverables (implemented as PRIMITIVES/verify_bundle.py + TOOLS/catalytic_verifier.py)
+- [x] BundleVerifier primitive for SPECTRUM-02 bundle verification
+  - Single bundle verification (verify_bundle)
+  - Chain verification (verify_chain) with reference integrity
+  - Forbidden artifacts enforcement (logs/, tmp/, transcript.json)
+  - Fail-closed verification (no heuristics, no logs, no side channels)
+  - PROOF.json gating support (verified=true required)
+- [x] CLI entrypoint: catalytic_verifier.py
+  - Single bundle mode: --run-dir
+  - Chain mode: --chain
+  - Chain directory mode: --chain-dir
+  - JSON output support: --json
+
+Acceptance
+- [x] Verifier accepts valid bundles and chains (18/18 tests pass)
+- [x] Verifier rejects missing artifacts (BUNDLE_INCOMPLETE)
+- [x] Verifier rejects tampered outputs (HASH_MISMATCH)
+- [x] Verifier rejects invalid chain references (INVALID_CHAIN_REFERENCE)
+- [x] Verifier rejects forbidden artifacts (FORBIDDEN_ARTIFACT)
+- [x] Verification depends ONLY on bundle artifacts + file hashes + ordering
+- [x] Deterministic: POSIX paths, SHA-256 hashing, stable error codes
+- [x] All tests pass: pytest -q (60/60)
+
 ---
 
 ## Phase 1.1: Expand-by-hash toolbelt (token efficiency layer)
