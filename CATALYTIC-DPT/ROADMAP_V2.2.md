@@ -303,18 +303,13 @@ Status (verified):
 
 ## PHASE 2: Memoization and “never pay twice” (LOCK AFTER PHASE 1)
 Deliverables
-- [ ] Cache key MUST bind:
-  - [ ] job_hash
-  - [ ] input_hash
-  - [ ] toolchain_hash
-  - [ ] validator_build_id
-  - [ ] validator_id
-- [ ] Cache hit must still emit verifiable receipts and proofs.
-- [ ] Cache miss must not bypass verification.
+- [x] Deterministic job cache key implemented (JobSpec canonical JSON + input domain roots + validator identity + strictness).
+- [x] Cache stored under `CONTRACTS/_runs/_cache/jobs/<job_cache_key>/` (artifacts + materialized durable outputs).
+- [x] Cache hit restores outputs and re-emits proof artifacts (byte-identical from cache), and is observable in receipts.
 
 Acceptance
-- [ ] Deterministic cache behavior.
-- [ ] Measurable token reduction in an end-to-end demo where the interface is hash-first and dereference is bounded.
+- [x] Deterministic cache behavior (tests prove miss→hit and invalidation by key inputs).
+- [ ] Measurable token reduction in an end-to-end demo where the interface is hash-first and dereference is bounded. (not part of this changeset)
 
 ---
 

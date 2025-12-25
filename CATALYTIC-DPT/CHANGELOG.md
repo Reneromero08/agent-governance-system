@@ -2,16 +2,20 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
-## [1.32.0] - 2025-12-25
+## [1.34.0] - 2025-12-25
 
-### Phase 4: Independent Verifier Implementation; Interop Proven
+### Phase 2: Deterministic Job Memoization (Never Pay Twice)
 
 #### Added
-- **PRIMITIVES/verify_bundle_alt.py**:
-  - Code-independent SPECTRUM-05 bundle + chain verifier implementation (strict identity/signature enforcement).
-- **TESTBENCH/test_verifier_interop.py**:
-  - Golden interop fixtures (valid bundle + tamper rejection) and deterministic rerun coverage.
-  - Enforces byte-identical serialized verification results across both implementations.
+- **PRIMITIVES/memo_cache.py**:
+  - Deterministic job cache key (JobSpec canonical JSON + input domain roots + validator identity + strictness).
+  - Cache storage under `CONTRACTS/_runs/_cache/jobs/<job_cache_key>/` with cached proof/domain roots/output hashes and materialized durable outputs.
+- **TESTBENCH/test_memoization.py**:
+  - Proves miss→hit behavior, byte-identical proof/domain roots on hits, and deterministic invalidation when strictness changes.
+
+#### Changed
+- **TOOLS/catalytic_runtime.py**:
+  - Adds memoization path that skips execution on cache hits while restoring outputs and re-emitting proof artifacts.
 
 ---
 
@@ -24,6 +28,19 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
   - Makes internal `$ref` targets explicit (`ledger.schema.json#/definitions/...`) so resolution is stable under Draft7 reference loading.
 - **TESTBENCH/test_schemas.py**:
   - Uses Draft7 `RefResolver` + deterministic schema store for ledger validation (no unsupported `registry=` argument).
+
+---
+
+## [1.32.0] - 2025-12-25
+
+### Phase 4: Independent Verifier Implementation; Interop Proven
+
+#### Added
+- **PRIMITIVES/verify_bundle_alt.py**:
+  - Code-independent SPECTRUM-05 bundle + chain verifier implementation (strict identity/signature enforcement).
+- **TESTBENCH/test_verifier_interop.py**:
+  - Golden interop fixtures (valid bundle + tamper rejection) and deterministic rerun coverage.
+  - Enforces byte-identical serialized verification results across both implementations.
 
 ---
 

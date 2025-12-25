@@ -45,6 +45,7 @@ from PRIMITIVES.fs_guard import FilesystemGuard
 from PRIMITIVES.cas_store import CatalyticStore, normalize_relpath
 from PRIMITIVES.merkle import build_manifest_root
 from PRIMITIVES.ledger import Ledger
+from PRIMITIVES.memo_cache import JobMemoCache, compute_job_cache_key
 
 PROJECT_ROOT = Path(__file__).parent.parent
 DETERMINISTIC_TIMESTAMP_SENTINEL = "CATALYTIC-DPT-02_CONFIG"
@@ -115,12 +116,22 @@ class CatalyticRuntime:
         intent: str,
         determinism: str = "deterministic",
         timestamp: Optional[str] = None,
+        job_id: Optional[str] = None,
+        strict: bool = True,
+        memoize: bool = True,
+        validator_semver: str = "0.1.0",
+        validator_build_id: str = "phase0-canonical",
     ):
         self.run_id = run_id
+        self.job_id = job_id or run_id
         self.catalytic_domains = [PROJECT_ROOT / d for d in catalytic_domains]
         self.durable_outputs = [PROJECT_ROOT / d for d in durable_outputs]
         self.intent = intent
         self.determinism = determinism
+        self.strict = strict
+        self.memoize = memoize
+        self.validator_semver = validator_semver
+        self.validator_build_id = validator_build_id
         # Determinism: runtime does not generate timestamps. Caller supplies deterministic timestamp.
         self.timestamp = timestamp or DETERMINISTIC_TIMESTAMP_SENTINEL
 
@@ -129,6 +140,7 @@ class CatalyticRuntime:
         self.ledger_dir.mkdir(parents=True, exist_ok=True)
         self.cas = CatalyticStore(self.ledger_dir / "CAS")
         self.ledger = Ledger(self.ledger_dir / "LEDGER.jsonl")
+        self.memo_cache = JobMemoCache(PROJECT_ROOT / "CONTRACTS" / "_runs" / "_cache" / "jobs")
 
         # Snapshots
         self.pre_snapshots: Dict[str, CatalyticSnapshot] = {}
@@ -149,7 +161,7 @@ class CatalyticRuntime:
     def build_jobspec(self) -> Dict:
         """Build JobSpec dict from runtime parameters."""
         return {
-            "job_id": self.run_id,
+            "job_id": self.job_id,
             "phase": 0,
             "task_type": "primitive_implementation",
             "intent": self.intent,
@@ -335,7 +347,7 @@ class CatalyticRuntime:
         try:
             # 1. JOBSPEC.json (stub for now - would normally be passed in)
             jobspec = {
-                "job_id": self.run_id,
+                "job_id": self.job_id,
                 "phase": 0,
                 "task_type": "primitive_implementation",
                 "intent": self.intent,
@@ -411,16 +423,16 @@ class CatalyticRuntime:
                 "OUTPUTS": outputs_list,
                 "STATUS": status,
                 "VALIDATOR_ID": {
-                    "validator_semver": "0.1.0",
-                    "validator_build_id": "phase0-canonical",
+                    "validator_semver": self.validator_semver,
+                    "validator_build_id": self.validator_build_id,
                 },
             }
             self.ledger.append(ledger_record)
 
             # 7. VALIDATOR_ID.json
             validator_id = {
-                "validator_semver": "0.1.0",
-                "validator_build_id": "phase0-canonical",
+                "validator_semver": self.validator_semver,
+                "validator_build_id": self.validator_build_id,
                 "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
             }
             self.fs_guard.guarded_write_text(self.ledger_dir / "VALIDATOR_ID.json", json.dumps(validator_id, indent=2))
@@ -484,6 +496,24 @@ class CatalyticRuntime:
                 pass
             return False
 
+    def _durable_outputs_map(self) -> Dict[str, Path]:
+        out: Dict[str, Path] = {}
+        for abs_path in self.durable_outputs:
+            rel = str(abs_path.relative_to(PROJECT_ROOT)).replace("\\", "/")
+            out[rel] = abs_path
+        return out
+
+    def _compute_input_domain_roots(self) -> Dict[str, str]:
+        # Deterministic sentinel for empty manifests matches proof wiring behavior.
+        pre_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.pre_snapshots.items()}
+        roots: Dict[str, str] = {}
+        for domain, files in sorted(pre_manifest.items(), key=lambda kv: kv[0]):
+            if files:
+                roots[domain] = build_manifest_root(files)
+            else:
+                roots[domain] = hashlib.sha256(b"").hexdigest()
+        return roots
+
     def run(self, cmd: List[str]) -> int:
         """
         Execute the full catalytic lifecycle with canonical artifact writing.
@@ -527,6 +557,57 @@ class CatalyticRuntime:
         # Phase 1: Snapshot
         print("[catalytic] Phase 1: Capturing pre-snapshots...")
         self.snapshot_domains()
+
+        # Phase 1.5: Memoization (deterministic cache hit/miss)
+        jobspec_for_key = self.build_jobspec()
+        input_domain_roots = self._compute_input_domain_roots()
+        cache_key = compute_job_cache_key(
+            jobspec=jobspec_for_key,
+            input_domain_roots=input_domain_roots,
+            validator_semver=self.validator_semver,
+            validator_build_id=self.validator_build_id,
+            strict=self.strict,
+        )
+        if self.memoize:
+            hit = self.memo_cache.try_hit(key=cache_key)
+        else:
+            hit = None
+
+        if hit is not None:
+            print(f"[catalytic] Memoization HIT: {cache_key}")
+
+            # Restore durable outputs (do not execute the command).
+            durable_map = self._durable_outputs_map()
+            self.memo_cache.restore_outputs(hit=hit, durable_outputs=durable_map)
+
+            # Post-snapshot + restoration verification (should be identical for catalytic domains).
+            self.snapshot_after()
+            restored, diffs = self.verify_restoration()
+            if not restored:
+                print("[catalytic] HARD FAIL: Restoration mismatch on cache hit.", file=sys.stderr)
+                print(json.dumps(diffs, indent=2), file=sys.stderr)
+                return 1
+
+            # Write minimal canonical artifacts for this run dir (ledger receipt is observable).
+            status_state = "succeeded"
+            self.write_canonical_artifacts(exit_code=0, restoration_success=True, diffs=diffs, status_state=status_state)
+
+            # Overwrite proof-adjacent artifacts from cache to ensure byte-identical outputs.
+            self.memo_cache.restore_artifacts(hit=hit, run_dir=self.ledger_dir)
+
+            # Append a second ledger line to make the hit observable without mutating JobSpec semantics.
+            try:
+                marker = f"{self.intent} [memoization:hit key={cache_key}]"
+                self.intent = marker
+                self.write_canonical_artifacts(exit_code=0, restoration_success=True, diffs=diffs, status_state=status_state)
+                self.memo_cache.restore_artifacts(hit=hit, run_dir=self.ledger_dir)
+            except Exception:
+                # If marker append fails, run is still valid (cache hit remains observable via STATUS/PROOF bytes).
+                pass
+
+            return 0
+        elif self.memoize:
+            print(f"[catalytic] Memoization MISS: {cache_key}")
 
         # Phase 2: Execute
         print(f"[catalytic] Phase 2: Executing command: {' '.join(cmd)}")
@@ -581,6 +662,23 @@ class CatalyticRuntime:
             return exit_code
 
         print("[catalytic] Run completed successfully with verified restoration.")
+
+        # Cache populate on successful completion.
+        if self.memoize and status_state == "succeeded":
+            try:
+                durable_map = self._durable_outputs_map()
+                validator_id = {"validator_semver": self.validator_semver, "validator_build_id": self.validator_build_id}
+                self.memo_cache.populate(
+                    key=cache_key,
+                    run_dir=self.ledger_dir,
+                    durable_outputs=durable_map,
+                    input_domain_roots=input_domain_roots,
+                    jobspec=jobspec_for_key,
+                    validator_id=validator_id,
+                )
+            except Exception as e:
+                print(f"[catalytic] WARNING: Memoization cache populate failed: {e}", file=sys.stderr)
+
         return 0
 
 
@@ -589,6 +687,7 @@ def main():
 
     parser = argparse.ArgumentParser(description="Catalytic runtime executor (CMP-01)")
     parser.add_argument("--run-id", required=True, help="Unique run identifier")
+    parser.add_argument("--job-id", default=None, help="Stable job identifier for memoization (defaults to run-id)")
     parser.add_argument(
         "--catalytic-domains",
         required=True,
@@ -609,6 +708,10 @@ def main():
         help="Determinism level",
     )
     parser.add_argument("--timestamp", default=None, help="Deterministic timestamp string (if omitted, uses sentinel)")
+    parser.add_argument("--no-memoize", action="store_true", help="Disable memoization cache")
+    parser.add_argument("--non-strict", action="store_true", help="Set strictness mode off (affects cache key)")
+    parser.add_argument("--validator-semver", default="0.1.0", help="Validator semver (cache key component)")
+    parser.add_argument("--validator-build-id", default="phase0-canonical", help="Validator build id (cache key component)")
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Command to execute")
 
     args = parser.parse_args()
@@ -619,11 +722,16 @@ def main():
 
     runtime = CatalyticRuntime(
         run_id=args.run_id,
+        job_id=args.job_id,
         catalytic_domains=args.catalytic_domains,
         durable_outputs=args.durable_outputs,
         intent=args.intent,
         determinism=args.determinism,
         timestamp=args.timestamp,
+        strict=not args.non_strict,
+        memoize=not args.no_memoize,
+        validator_semver=args.validator_semver,
+        validator_build_id=args.validator_build_id,
     )
 
     return runtime.run(args.cmd[1:])
