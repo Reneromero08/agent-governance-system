@@ -7,7 +7,8 @@ Utility to bundle repo content into a small, shareable snapshot for an LLM.
 ## Scopes
 
 - `ags` (default): packs the full AGS repo (governance system)
-- `catalytic-dpt`: packs only `CATALYTIC-DPT/**` (full snapshot, excluding `__pycache__`, `_runs`, `_generated`, etc.)
+- `catalytic-dpt`: packs `CATALYTIC-DPT/**` excluding `CATALYTIC-DPT/LAB/**` (full snapshot, excluding `__pycache__`, `_runs`, `_generated`, etc.)
+- `catalytic-dpt-lab`: packs only `CATALYTIC-DPT/LAB/**`
 
 ## What it includes (FULL profile)
 
@@ -33,11 +34,12 @@ Double-clicking `LLM-PACK.cmd` produces a single FULL pack folder with:
 
 ## Default behavior (CATALYTIC-DPT-PACK.cmd)
 
-Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL pack folder for `CATALYTIC-DPT/**` with:
+Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL bundle folder with:
 
 - `COMBINED/SPLIT/**`
 - `COMBINED/SPLIT_LITE/**`
 - `COMBINED/CATALYTIC-DPT-FULL-COMBINED-*` and `COMBINED/CATALYTIC-DPT-FULL-TREEMAP-*`
+- A nested LAB-only pack under `LAB/` (its own `meta/`, `repo/`, `COMBINED/`)
 - A zip archive under `MEMORY/LLM_PACKER/_packs/archive/`
 
 ## LITE profile (discussion-first)
@@ -65,9 +67,14 @@ Or run cross-platform:
 
 `python MEMORY/LLM_PACKER/Engine/packer.py --mode full --combined --zip`
 
+CAT-DPT (two packers, one bundle folder):
+
+- Main (no LAB): `python MEMORY/LLM_PACKER/Engine/packer_cat_dpt_main.py --mode full --profile full --split-lite --combined --out-dir MEMORY/LLM_PACKER/_packs/<bundle>`
+- LAB-only (inside bundle): `python MEMORY/LLM_PACKER/Engine/packer_cat_dpt_lab.py --mode full --profile full --split-lite --combined --out-dir MEMORY/LLM_PACKER/_packs/<bundle>/LAB`
+
 Optional arguments:
 
-- `--scope ags` or `--scope catalytic-dpt`
+- `--scope ags`, `--scope catalytic-dpt`, or `--scope catalytic-dpt-lab`
 - `-OutDir MEMORY/LLM_PACKER/_packs/<name>` (must be under `MEMORY/LLM_PACKER/_packs/`)
 - `-Mode full` or `-Mode delta`
 - `-Profile full` or `-Profile lite`

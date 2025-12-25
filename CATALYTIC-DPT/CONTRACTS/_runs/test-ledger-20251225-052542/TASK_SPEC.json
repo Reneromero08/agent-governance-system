@@ -1,0 +1,11 @@
+{
+  "task_id": "test-ledger",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_no_kqjfp\\ledger_source.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_no_kqjfp\\ledger_dest.txt"
+    }
+  ]
+}

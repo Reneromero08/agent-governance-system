@@ -123,7 +123,18 @@ def main(input_path: Path, output_path: Path) -> int:
                 "COMBINED/SPLIT/CATALYTIC-DPT-02_CONFIG.md",
                 "COMBINED/SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
                 "COMBINED/SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
-                "COMBINED/SPLIT/CATALYTIC-DPT-05_LAB.md",
+            ]
+        )
+    elif scope == "catalytic-dpt-lab":
+        required.extend(
+            [
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-00_INDEX.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-01_DOCS.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-02_COMMONSENSE.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-03_MCP.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-04_RESEARCH.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-05_ARCHIVE.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-LAB-06_SYSTEM.md",
             ]
         )
     else:
@@ -143,7 +154,7 @@ def main(input_path: Path, output_path: Path) -> int:
                     "COMBINED/SPLIT_LITE/AGS-07_SYSTEM.md",
                 ]
             )
-        else:
+        elif scope == "catalytic-dpt":
             required.extend(
                 [
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-00_INDEX.md",
@@ -151,7 +162,18 @@ def main(input_path: Path, output_path: Path) -> int:
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-02_CONFIG.md",
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-03_TESTBENCH.md",
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-04_SYSTEM.md",
-                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-05_LAB.md",
+                ]
+            )
+        else:
+            required.extend(
+                [
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-00_INDEX.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-01_DOCS.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-02_COMMONSENSE.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-03_MCP.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-04_RESEARCH.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-05_ARCHIVE.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-LAB-06_SYSTEM.md",
                 ]
             )
     if profile == "lite":
@@ -167,7 +189,12 @@ def main(input_path: Path, output_path: Path) -> int:
             ]
         )
     if combined:
-        prefix = "AGS" if scope == "ags" else "CATALYTIC-DPT"
+        if scope == "ags":
+            prefix = "AGS"
+        elif scope == "catalytic-dpt":
+            prefix = "CATALYTIC-DPT"
+        else:
+            prefix = "CATALYTIC-DPT-LAB"
         required.extend(
             [
                 f"COMBINED/{prefix}-FULL-COMBINED-{stamp}.md",
@@ -191,11 +218,15 @@ def main(input_path: Path, output_path: Path) -> int:
             "`repo/README.md`",
             "`repo/CONTEXT/archive/planning/INDEX.md`",
         ]
-    else:
+    elif scope == "catalytic-dpt":
         required_mentions = [
             "`repo/CATALYTIC-DPT/AGENTS.md`",
             "`repo/CATALYTIC-DPT/README.md`",
             "`repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+        ]
+    else:
+        required_mentions = [
+            "`repo/CATALYTIC-DPT/LAB/`",
         ]
     for mention in required_mentions:
         if mention not in start_here_text:
@@ -210,10 +241,15 @@ def main(input_path: Path, output_path: Path) -> int:
         if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
             print("AGS-03_MAPS.md missing embedded repo file tree")
             return 1
-    else:
+    elif scope == "catalytic-dpt":
         index_text = (out_dir / "COMBINED" / "SPLIT" / "CATALYTIC-DPT-00_INDEX.md").read_text(encoding="utf-8", errors="replace")
         if "## Repo File Tree" not in index_text or "PACK/" not in index_text:
             print("CATALYTIC-DPT-00_INDEX.md missing embedded repo file tree")
+            return 1
+    else:
+        index_text = (out_dir / "COMBINED" / "SPLIT" / "CATALYTIC-DPT-LAB-00_INDEX.md").read_text(encoding="utf-8", errors="replace")
+        if "## Repo File Tree" not in index_text or "PACK/" not in index_text:
+            print("CATALYTIC-DPT-LAB-00_INDEX.md missing embedded repo file tree")
             return 1
 
     if profile == "lite":
