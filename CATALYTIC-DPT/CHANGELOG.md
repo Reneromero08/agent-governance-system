@@ -2,6 +2,67 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.16.0] - 2025-12-25
+
+### Phase 0 Complete: Contract Finalization and Enforcement
+
+Phase 0 establishes the immutable contract that governs all future CAT-DPT work. All schemas, artifact specifications, and enforcement mechanisms are now finalized and frozen.
+
+#### Schemas Finalized
+- **jobspec.schema.json**: Canonical job specification format (Phase, TaskType, Intent, Inputs, Outputs, CatalyticDomains, Determinism)
+- **ledger.schema.json**: Immutable ledger recording all job executions and artifacts
+- **proof.schema.json**: Cryptographic proof of integrity (hash chains, restoration proofs, canonical artifact manifests)
+- **validation_error.schema.json**: Deterministic error reporting with stable codes and paths
+- **commonsense_entry.schema.json**: Knowledge base entries for commonsense reasoning
+- **resolution_result.schema.json**: Results of symbolic resolution
+
+#### Canonical Artifact Set (8 Required Files)
+All runtime outputs must conform to the canonical artifact specification:
+1. **JOBSPEC.json** - Job specification (immutable, validated at preflight)
+2. **STATUS.json** - Run status (failed/completed)
+3. **INPUT_HASHES.json** - SHA256 hashes of all inputs
+4. **OUTPUT_HASHES.json** - SHA256 hashes of all outputs
+5. **DOMAIN_ROOTS.json** - Catalytic domain state (required restoration targets)
+6. **LEDGER.jsonl** - Immutable ledger of execution events
+7. **VALIDATOR_ID.json** - Identity of accepting validator
+8. **PROOF.json** - Cryptographic proof of execution integrity
+
+#### 3-Layer Fail-Closed Enforcement
+
+**Layer 1: Preflight Validation (Before Execution)**
+- Validates JobSpec schema compliance
+- Detects path traversal, absolute paths, forbidden paths
+- Rejects overlapping input/output domains
+- Returns deterministic validation_error objects with stable codes
+- Implementation: `PRIMITIVES/preflight.py` (10/10 tests pass)
+
+**Layer 2: Runtime Write Guard (During Execution)**
+- Enforces allowed roots at write-time for all file operations
+- Detects and rejects writes to forbidden paths (CANON, AGENTS.md, BUILD, .git)
+- Blocks path traversal and absolute path escapes
+- Fails closed immediately with RuntimeError on any violation
+- Wraps all writes through FilesystemGuard class
+- Implementation: `PRIMITIVES/fs_guard.py` (13/13 tests pass)
+
+**Layer 3: CI Validation (After Execution)**
+- Verifies all required canonical artifacts present
+- Validates artifact schema compliance
+- Checks hash integrity of outputs
+- Verifies restoration proofs for catalytic domains
+- Ensures ledger consistency
+- Implementation: CI pipeline validation
+
+#### Exit Criteria Met
+- [x] All schemas finalized and frozen (no breaking changes allowed)
+- [x] Canonical artifact set fully specified
+- [x] Layer 1 (Preflight) enforces contract before execution
+- [x] Layer 2 (Runtime Guard) enforces contract during execution
+- [x] Layer 3 (CI) enforces contract after execution
+- [x] All enforcement layers fail-closed (RuntimeError/validation_error on violation)
+- [x] Error codes deterministic and stable (JOBSPEC_*, WRITE_GUARD_*, etc.)
+- [x] Comprehensive test coverage with all tests passing (38/38)
+- [x] Roadmap reflects completed work accurately
+
 ## [1.15.0] - 2025-12-25
 
 ### Added
