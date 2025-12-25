@@ -14,8 +14,8 @@ import sys
 from pathlib import Path
 
 # Direct file import for MCP/server.py
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
-SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "MCP" / "server.py"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
@@ -28,7 +28,7 @@ CONTRACTS_DIR = mcp_server.CONTRACTS_DIR
 VALIDATOR_SEMVER = mcp_server.VALIDATOR_SEMVER
 
 
-class TestSPECTRUM02Emission:
+class RunnerSPECTRUM02Emission:
     """Integration tests for SPECTRUM-02 bundle emission."""
 
     def __init__(self):
@@ -382,7 +382,13 @@ class TestSPECTRUM02Emission:
             self._cleanup_run(run_id)
 
 
+def test_spectrum02_emission():
+    """Pytest entry point."""
+    runner = RunnerSPECTRUM02Emission()
+    assert runner.run_all()
+
+
 if __name__ == "__main__":
-    tester = TestSPECTRUM02Emission()
-    success = tester.run_all()
+    runner = RunnerSPECTRUM02Emission()
+    success = runner.run_all()
     sys.exit(0 if success else 1)
