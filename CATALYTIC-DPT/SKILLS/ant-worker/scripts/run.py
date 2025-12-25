@@ -23,7 +23,7 @@ from datetime import datetime
 from typing import Dict, Optional, List
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
-MCP_SERVER = PROJECT_ROOT / "CATALYTIC-DPT" / "MCP" / "server.py"
+MCP_SERVER = PROJECT_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
 
 
