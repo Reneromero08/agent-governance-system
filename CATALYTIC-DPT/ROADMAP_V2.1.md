@@ -220,6 +220,47 @@ Note: this is token reduction at the interface, not inside-model token compressi
 
 ---
 
+## Phase 1.6 — Semiotic Compression & Expansion
+
+Goal: Radically reduce LLM context usage by replacing natural language and full code bodies with compact, symbolic handles that expand deterministically outside the model.
+
+### Phase 1.6.a — Semiotic Compression Layer (SCL)
+Focus: **Plan-level symbolic language**
+
+- Define a **CODEBOOK** mapping short symbols → predicate sets / plan macros.
+- Define a minimal **grammar** for symbolic plans (order, scope, composition).
+- Implement a **deterministic decoder**:
+  - symbols → JobSpec JSON / tool plan / audit text
+  - no model reasoning during expansion.
+- Add **validators + fixtures** proving:
+  - invertibility (symbol → expansion → re-symbolization)
+  - determinism (same input → same output)
+  - bounded expansion size.
+- Wire into agent packs so models see only symbols + hashes by default.
+
+Exit criteria:
+- A non-trivial plan executes using ≤10% of the tokens previously required.
+- Decoder output is schema-valid and reproducible byte-for-byte.
+
+### Phase 1.6.b — Semiotic Expansion Layer (SEL)
+Focus: **Code-level symbolic addressing**
+
+- Build `function_index.json` with stable IDs for code entities.
+- Implement `expand.py`:
+  - ID → source / contract summary / patch template.
+- Add fixtures validating:
+  - ID stability across refactors.
+  - expansion determinism.
+  - hash mismatch detection.
+- Update packer:
+  - packs carry indexes + hashes, not full code bodies by default.
+
+Exit criteria:
+- Agents can reference code entities by ID only.
+- Full source is expanded on demand, outside LLM context.
+
+---
+
 # Phase 2: Swarm Parallelism (safe scaling)
 Goal: Many workers can run in parallel without corrupting continuity. Reducer accepts exactly one deterministic update.
 

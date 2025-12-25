@@ -1,0 +1,26 @@
+{
+  "id_prefix": "@",
+  "ids_as_symbols": true,
+  "notes": "Symbolic handles expand to predicate facts before resolution. Keep this small and stable.",
+  "symbols": {
+    "@DOMAIN_GOVERNANCE": [
+      "domain:governance"
+    ],
+    "@DOMAIN_JOBSPEC": [
+      "domain:jobspec"
+    ],
+    "@INVARIANT_VIOLATION": [
+      "violation:invariant"
+    ],
+    "@JOB_PRESENT": [
+      "job:present"
+    ],
+    "@STRICT_VALIDATION": [
+      "policy:strict_validation"
+    ],
+    "@UI_TEXT_ONLY": [
+      "policy:ui_text_only"
+    ]
+  },
+  "version": "0.1.0"
+}

@@ -1,8 +1,13 @@
 # LLM_PACKER
 
-**Version:** 1.1.0
+**Version:** 1.3.0
 
-Utility to bundle the Agent Governance System (AGS) repo into a small, shareable snapshot for an LLM.
+Utility to bundle repo content into a small, shareable snapshot for an LLM.
+
+## Scopes
+
+- `ags` (default): packs the full AGS repo (governance system)
+- `catalytic-dpt`: packs only `CATALYTIC-DPT/**` (full snapshot, excluding `__pycache__`, `_runs`, `_generated`, etc.)
 
 ## What it includes (FULL profile)
 
@@ -26,6 +31,14 @@ Double-clicking `LLM-PACK.cmd` produces a single FULL pack folder with:
 - No combined files (`AGS-FULL-COMBINED-*`, `AGS-FULL-TREEMAP-*`)
 - No zip archive
 
+## Default behavior (CATALYTIC-DPT-PACK.cmd)
+
+Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL pack folder for `CATALYTIC-DPT/**` with:
+
+- `COMBINED/SPLIT/**`
+- `COMBINED/CATALYTIC-DPT-FULL-COMBINED-*` and `COMBINED/CATALYTIC-DPT-FULL-TREEMAP-*`
+- A zip archive under `MEMORY/LLM_PACKER/_packs/archive/`
+
 ## LITE profile (discussion-first)
 
 The LITE profile produces a smaller, high-signal pack:
@@ -41,6 +54,8 @@ The LITE profile produces a smaller, high-signal pack:
 
 Double-click: `MEMORY/LLM_PACKER/Engine/LLM-PACK.cmd`
 
+Double-click: `MEMORY/LLM_PACKER/Engine/CATALYTIC-DPT-PACK.cmd`
+
 Or run in PowerShell:
 
 `powershell -NoProfile -ExecutionPolicy Bypass -File MEMORY/LLM_PACKER/Engine/pack.ps1`
@@ -51,6 +66,7 @@ Or run cross-platform:
 
 Optional arguments:
 
+- `--scope ags` or `--scope catalytic-dpt`
 - `-OutDir MEMORY/LLM_PACKER/_packs/<name>` (must be under `MEMORY/LLM_PACKER/_packs/`)
 - `-Mode full` or `-Mode delta`
 - `-Profile full` or `-Profile lite`
@@ -84,14 +100,19 @@ The packer also prints the per-payload token counts to the terminal after each r
 
 ## Changelog
 
-### 1.2.0 (2025-12-23)
+### 2025-12-25 — 1.3.0
+- Added `--scope catalytic-dpt` (packs only `CATALYTIC-DPT/**` with scope-specific SPLIT/COMBINED prefixes)
+- Added per-scope baseline state files under `MEMORY/LLM_PACKER/_packs/_state/`
+- Changelog headings now show timestamp first, then version
+
+### 2025-12-23 — 1.2.0
 - Added LITE profile with symbolic indexes and allowlist/exclude rules
 - Added optional `COMBINED/SPLIT_LITE/` output for discussion-first loading
 - Added per-payload token reporting in `meta/CONTEXT.txt` and terminal output
 - Updated Windows packer defaults (no combined/zip by default; SPLIT_LITE included)
 - Added `PACK_PROFILE` env override and `-SplitLite` / `-NoCombined` / `-NoZip` flags
 
-### 1.1.0 (2025-12-21)
+### 2025-12-21 — 1.1.0
 - Added `AGS-` prefix to all output files
 - Added token estimation and `CONTEXT.txt` report
 - Added pack size warnings for large contexts
@@ -99,7 +120,7 @@ The packer also prints the per-payload token counts to the terminal after each r
 - Added `verify_manifest()` for integrity checking
 - Fixed `read_canon_version()` regex bug
 
-### 1.0.0 (Initial)
+### Initial — 1.0.0
 - Full and delta pack modes
 - Combined markdown output
 - Split pack sections

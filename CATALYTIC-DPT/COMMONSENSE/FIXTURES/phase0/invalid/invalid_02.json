@@ -1,0 +1,11 @@
+{
+  "confidence": 0.5,
+  "id": "cs_lower",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "bad id"
+}

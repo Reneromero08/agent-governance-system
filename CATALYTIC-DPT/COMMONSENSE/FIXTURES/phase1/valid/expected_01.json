@@ -1,0 +1,11 @@
+{
+  "must_emit": [
+    {
+      "code": "INVARIANT_VIOLATION",
+      "type": "hard_fail"
+    }
+  ],
+  "must_select": [
+    "LR_CONFLICT_HARD_FAIL"
+  ]
+}

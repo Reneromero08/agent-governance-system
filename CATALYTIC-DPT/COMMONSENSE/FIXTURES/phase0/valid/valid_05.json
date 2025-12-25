@@ -1,0 +1,16 @@
+{
+  "confidence": 0.85,
+  "id": "CS_DEFAULT_TRUST_LOW",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "domain:agentic_systems"
+    ]
+  },
+  "statement": "Default trust is low for unverified outputs; prefer tests and validators.",
+  "tags": [
+    "verification",
+    "default"
+  ],
+  "version": "0.1.0"
+}
