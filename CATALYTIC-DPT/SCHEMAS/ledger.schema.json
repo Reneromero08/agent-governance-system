@@ -18,25 +18,25 @@
       "$ref": "jobspec.schema.json"
     },
     "RUN_INFO": {
-      "$ref": "#/definitions/run_info"
+      "$ref": "ledger.schema.json#/definitions/run_info"
     },
     "PRE_MANIFEST": {
-      "$ref": "#/definitions/manifest"
+      "$ref": "ledger.schema.json#/definitions/manifest"
     },
     "POST_MANIFEST": {
-      "$ref": "#/definitions/manifest"
+      "$ref": "ledger.schema.json#/definitions/manifest"
     },
     "RESTORE_DIFF": {
-      "$ref": "#/definitions/restore_diff"
+      "$ref": "ledger.schema.json#/definitions/restore_diff"
     },
     "OUTPUTS": {
-      "$ref": "#/definitions/outputs"
+      "$ref": "ledger.schema.json#/definitions/outputs"
     },
     "STATUS": {
-      "$ref": "#/definitions/status"
+      "$ref": "ledger.schema.json#/definitions/status"
     },
     "VALIDATOR_ID": {
-      "$ref": "#/definitions/validator_id"
+      "$ref": "ledger.schema.json#/definitions/validator_id"
     }
   },
   "definitions": {
@@ -89,7 +89,7 @@
       "additionalProperties": {
         "type": "object",
         "additionalProperties": {
-          "$ref": "#/definitions/sha256"
+          "$ref": "ledger.schema.json#/definitions/sha256"
         }
       }
     },
@@ -108,19 +108,19 @@
           "added": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/definitions/sha256"
+              "$ref": "ledger.schema.json#/definitions/sha256"
             }
           },
           "removed": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/definitions/sha256"
+              "$ref": "ledger.schema.json#/definitions/sha256"
             }
           },
           "changed": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/definitions/sha256"
+              "$ref": "ledger.schema.json#/definitions/sha256"
             }
           }
         }
@@ -148,7 +148,7 @@
             ]
           },
           "sha256": {
-            "$ref": "#/definitions/sha256"
+            "$ref": "ledger.schema.json#/definitions/sha256"
           }
         }
       }
