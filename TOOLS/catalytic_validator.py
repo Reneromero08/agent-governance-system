@@ -18,12 +18,14 @@ Usage:
 
 import json
 import sys
+import hashlib
 from pathlib import Path
 from typing import Dict, Tuple
 
 # Add CATALYTIC-DPT to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
 from PRIMITIVES.restore_proof import RestorationProofValidator
+from PRIMITIVES.merkle import build_manifest_root
 
 
 class CatalyticLedgerValidator:
@@ -76,6 +78,7 @@ class CatalyticLedgerValidator:
             self.restore_diff = json.loads((self.ledger_dir / "RESTORE_DIFF.json").read_text())
             self.outputs = json.loads((self.ledger_dir / "OUTPUTS.json").read_text())
             self.status = json.loads((self.ledger_dir / "STATUS.json").read_text())
+            self.domain_roots = json.loads((self.ledger_dir / "DOMAIN_ROOTS.json").read_text())
             self.proof = json.loads((self.ledger_dir / "PROOF.json").read_text())
         except json.JSONDecodeError as e:
             self.errors.append(f"Invalid JSON: {e}")
@@ -86,6 +89,37 @@ class CatalyticLedgerValidator:
         for field in required_fields:
             if field not in self.run_info:
                 self.errors.append(f"RUN_INFO missing field: {field}")
+                return False
+
+        # If DOMAIN_ROOTS.json is populated, enforce deterministic cross-artifact consistency:
+        # - DOMAIN_ROOTS must match Merkle roots computed from POST_MANIFEST for each domain.
+        # (Empty DOMAIN_ROOTS is treated as legacy/no-op for backwards compatibility.)
+        if isinstance(self.domain_roots, dict) and self.domain_roots:
+            if not isinstance(self.post_manifest, dict):
+                self.errors.append("POST_MANIFEST is not a dict")
+                return False
+
+            expected: Dict[str, str] = {}
+            for domain, files in sorted(self.post_manifest.items(), key=lambda kv: kv[0]):
+                if not isinstance(domain, str):
+                    self.errors.append("POST_MANIFEST has non-string domain key")
+                    return False
+                if not isinstance(files, dict):
+                    self.errors.append(f"POST_MANIFEST[{domain}] is not a dict")
+                    return False
+                if files:
+                    try:
+                        expected[domain] = build_manifest_root(files)
+                    except Exception as e:
+                        self.errors.append(f"POST_MANIFEST[{domain}] invalid for Merkle root: {e}")
+                        return False
+                else:
+                    expected[domain] = hashlib.sha256(b"").hexdigest()
+
+            if self.domain_roots != expected:
+                self.errors.append("DOMAIN_ROOTS mismatch (expected roots from POST_MANIFEST)")
+                self.errors.append(f"expected={expected}")
+                self.errors.append(f"actual={self.domain_roots}")
                 return False
 
         return True

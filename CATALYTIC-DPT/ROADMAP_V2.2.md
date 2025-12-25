@@ -329,7 +329,12 @@ Acceptance
 
 ## PHASE 4: Runtime hardening
 Deliverables
-- [ ] Adversarial test suite expands: corrupted artifacts, partial state, path attacks, malformed proofs, timing side channels (as feasible).
+- [x] Adversarial fixtures: corrupted artifacts, partial state, path attacks, malformed proofs, pipeline interruption/resume safety. (commit: this changeset)
+  - `CATALYTIC-DPT/TESTBENCH/test_adversarial_cas.py`
+  - `CATALYTIC-DPT/TESTBENCH/test_adversarial_ledger.py`
+  - `CATALYTIC-DPT/TESTBENCH/test_adversarial_paths.py`
+  - `CATALYTIC-DPT/TESTBENCH/test_adversarial_proof_tamper.py`
+  - `CATALYTIC-DPT/TESTBENCH/test_adversarial_pipeline_resume.py`
 - [ ] Tighten guards as needed, always with fixtures and regression tests.
 - [x] Fix ledger.schema.json $ref resolution (Draft7) (commit: this changeset)
 Note: currently causes ledger/proof tests to fail; discovered after Phase 1 closure.

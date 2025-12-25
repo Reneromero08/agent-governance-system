@@ -96,7 +96,9 @@ class PipelineRuntime:
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
         spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
         state_obj = json.loads(state_path.read_text(encoding="utf-8"))
-        return spec, self._coerce_state(spec, state_obj)
+        state = self._coerce_state(spec, state_obj)
+        self._assert_state_consistent(spec, state)
+        return spec, state
 
     def status_text(self, *, pipeline_id: str) -> str:
         spec, state = self.load(pipeline_id=pipeline_id)
@@ -279,6 +281,27 @@ class PipelineRuntime:
             "step_run_ids": step_run_ids,
             "attempts": dict(sorted(attempts.items(), key=lambda kv: kv[0])),
         }
+
+    def _assert_state_consistent(self, spec: PipelineSpec, state: Dict[str, Any]) -> None:
+        completed = state.get("completed_steps", [])
+        step_run_ids = state.get("step_run_ids", {})
+        if not isinstance(completed, list) or not isinstance(step_run_ids, dict):
+            raise ValueError("pipeline state is invalid")
+
+        # Fail closed: a completed step must have a recorded run_id, and that run must be verifiable.
+        missing_run_ids = [sid for sid in completed if sid not in step_run_ids]
+        if missing_run_ids:
+            raise ValueError(f"inconsistent pipeline state: completed steps missing run_ids: {missing_run_ids}")
+
+        for step_id in completed:
+            run_id = step_run_ids.get(step_id)
+            if not isinstance(run_id, str) or not run_id:
+                raise ValueError(f"inconsistent pipeline state: invalid run_id for step {step_id!r}")
+            run_dir = self.project_root / "CONTRACTS" / "_runs" / run_id
+            required = ["PROOF.json", "DOMAIN_ROOTS.json", "LEDGER.jsonl"]
+            missing = [name for name in required if not (run_dir / name).exists()]
+            if missing:
+                raise ValueError(f"inconsistent pipeline state: run {run_id} missing artifacts: {missing}")
 
     def _make_run_id(self, pipeline_id: str, step_id: str, attempt: int) -> str:
         return _slug(f"pipeline-{pipeline_id}-{step_id}-a{attempt}")

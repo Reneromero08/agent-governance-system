@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import ast
+import hashlib
 import json
 import os
 import re
@@ -41,6 +42,20 @@ def _get_size(path: Path) -> int:
     return os.stat(path).st_size
 
 
+def _verify_object_integrity(path: Path, expected_hash_hex: str, *, chunk_size: int = 1024 * 1024) -> None:
+    expected_hash_hex = _validate_hash(expected_hash_hex)
+    hasher = hashlib.sha256()
+    with open(path, "rb") as f:
+        while True:
+            chunk = f.read(chunk_size)
+            if not chunk:
+                break
+            hasher.update(chunk)
+    actual = hasher.hexdigest()
+    if actual != expected_hash_hex:
+        raise ValueError(f"CAS_OBJECT_INTEGRITY_MISMATCH expected={expected_hash_hex} actual={actual}")
+
+
 def _read_bytes_range(
     store: CatalyticStore,
     hash_hex: str,
@@ -57,6 +72,9 @@ def _read_bytes_range(
     path = _object_path(store, hash_hex)
     if not path.exists():
         raise FileNotFoundError(str(path))
+
+    # Fail closed on on-disk corruption: the object content must hash to its key.
+    _verify_object_integrity(path, hash_hex)
 
     total_size = _get_size(path)
     effective_end = total_size if end is None else max(0, min(end, total_size))
@@ -347,4 +365,3 @@ def log_dereference_event(
         bounds=bounds,
     )
     ledger.append(record)
-
