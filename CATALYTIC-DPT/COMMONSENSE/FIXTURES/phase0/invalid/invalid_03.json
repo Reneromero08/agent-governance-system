@@ -1,0 +1,13 @@
+{
+  "confidence": 0.5,
+  "extra": 123,
+  "id": "CS_EXTRA_PROP",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "version": "0.1.0"
+}

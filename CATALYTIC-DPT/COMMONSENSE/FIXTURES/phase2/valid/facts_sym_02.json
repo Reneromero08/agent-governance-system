@@ -1,0 +1,6 @@
+{
+  "facts": [
+    "@DOMAIN_JOBSPEC",
+    "@JOB_PRESENT"
+  ]
+}

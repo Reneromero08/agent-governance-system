@@ -1,0 +1,12 @@
+{
+  "confidence": 0.5,
+  "id": "LR_MISSING_RULE",
+  "kind": "logic_rule",
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "version": "0.1.0"
+}

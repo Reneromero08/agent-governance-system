@@ -54,6 +54,7 @@ def main(input_path: Path, output_path: Path) -> int:
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))
     profile = str(config.get("profile", "full"))
+    scope = str(config.get("scope", "ags"))
     stamp = str(config.get("stamp", "fixture-smoke"))
     split_lite = bool(config.get("split_lite", False))
 
@@ -67,6 +68,8 @@ def main(input_path: Path, output_path: Path) -> int:
     args = [
         sys.executable,
         str(PACKER_SCRIPT),
+        "--scope",
+        scope,
         "--mode",
         mode,
         "--profile",
@@ -98,15 +101,33 @@ def main(input_path: Path, output_path: Path) -> int:
         "meta/PACK_INFO.json",
         "meta/BUILD_TREE.txt",
         "meta/CONTEXT.txt",
-        "COMBINED/SPLIT/AGS-00_INDEX.md",
-        "COMBINED/SPLIT/AGS-01_CANON.md",
-        "COMBINED/SPLIT/AGS-02_ROOT.md",
-        "COMBINED/SPLIT/AGS-03_MAPS.md",
-        "COMBINED/SPLIT/AGS-04_CONTEXT.md",
-        "COMBINED/SPLIT/AGS-05_SKILLS.md",
-        "COMBINED/SPLIT/AGS-06_CONTRACTS.md",
-        "COMBINED/SPLIT/AGS-07_SYSTEM.md",
     ]
+    if scope == "ags":
+        required.extend(
+            [
+                "COMBINED/SPLIT/AGS-00_INDEX.md",
+                "COMBINED/SPLIT/AGS-01_CANON.md",
+                "COMBINED/SPLIT/AGS-02_ROOT.md",
+                "COMBINED/SPLIT/AGS-03_MAPS.md",
+                "COMBINED/SPLIT/AGS-04_CONTEXT.md",
+                "COMBINED/SPLIT/AGS-05_SKILLS.md",
+                "COMBINED/SPLIT/AGS-06_CONTRACTS.md",
+                "COMBINED/SPLIT/AGS-07_SYSTEM.md",
+            ]
+        )
+    elif scope == "catalytic-dpt":
+        required.extend(
+            [
+                "COMBINED/SPLIT/CATALYTIC-DPT-00_INDEX.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-01_DOCS.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-02_CONFIG.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
+            ]
+        )
+    else:
+        print(f"Unknown scope in fixture: {scope}")
+        return 1
     if split_lite:
         required.extend(
             [
@@ -133,12 +154,13 @@ def main(input_path: Path, output_path: Path) -> int:
             ]
         )
     if combined:
+        prefix = "AGS" if scope == "ags" else "CATALYTIC-DPT"
         required.extend(
             [
-                f"COMBINED/AGS-FULL-COMBINED-{stamp}.md",
-                f"COMBINED/AGS-FULL-COMBINED-{stamp}.txt",
-                f"COMBINED/AGS-FULL-TREEMAP-{stamp}.md",
-                f"COMBINED/AGS-FULL-TREEMAP-{stamp}.txt",
+                f"COMBINED/{prefix}-FULL-COMBINED-{stamp}.md",
+                f"COMBINED/{prefix}-FULL-COMBINED-{stamp}.txt",
+                f"COMBINED/{prefix}-FULL-TREEMAP-{stamp}.md",
+                f"COMBINED/{prefix}-FULL-TREEMAP-{stamp}.txt",
             ]
         )
     missing = [p for p in required if not (out_dir / p).exists()]
@@ -150,11 +172,18 @@ def main(input_path: Path, output_path: Path) -> int:
 
     start_here_text = (out_dir / "meta/START_HERE.md").read_text(encoding="utf-8", errors="replace")
     entrypoints_text = (out_dir / "meta/ENTRYPOINTS.md").read_text(encoding="utf-8", errors="replace")
-    required_mentions = [
-        "`repo/AGENTS.md`",
-        "`repo/README.md`",
-        "`repo/CONTEXT/archive/planning/INDEX.md`",
-    ]
+    if scope == "ags":
+        required_mentions = [
+            "`repo/AGENTS.md`",
+            "`repo/README.md`",
+            "`repo/CONTEXT/archive/planning/INDEX.md`",
+        ]
+    else:
+        required_mentions = [
+            "`repo/CATALYTIC-DPT/AGENTS.md`",
+            "`repo/CATALYTIC-DPT/README.md`",
+            "`repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+        ]
     for mention in required_mentions:
         if mention not in start_here_text:
             print(f"START_HERE.md missing required mention: {mention}")
@@ -163,10 +192,16 @@ def main(input_path: Path, output_path: Path) -> int:
             print(f"ENTRYPOINTS.md missing required mention: {mention}")
             return 1
 
-    maps_text = (out_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md").read_text(encoding="utf-8", errors="replace")
-    if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
-        print("AGS-03_MAPS.md missing embedded repo file tree")
-        return 1
+    if scope == "ags":
+        maps_text = (out_dir / "COMBINED" / "SPLIT" / "AGS-03_MAPS.md").read_text(encoding="utf-8", errors="replace")
+        if "## Repo File Tree" not in maps_text or "PACK/" not in maps_text:
+            print("AGS-03_MAPS.md missing embedded repo file tree")
+            return 1
+    else:
+        index_text = (out_dir / "COMBINED" / "SPLIT" / "CATALYTIC-DPT-00_INDEX.md").read_text(encoding="utf-8", errors="replace")
+        if "## Repo File Tree" not in index_text or "PACK/" not in index_text:
+            print("CATALYTIC-DPT-00_INDEX.md missing embedded repo file tree")
+            return 1
 
     if profile == "lite":
         # Ensure excluded content is not copied into repo/** in the generated pack.
