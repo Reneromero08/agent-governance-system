@@ -7,11 +7,16 @@ Run:
 from __future__ import annotations
 
 import json
+import sys
 from pathlib import Path
 
 import pytest
 
-from CATALYTIC_DPT.PRIMITIVES.restore_proof import RestorationProofValidator
+# Add CATALYTIC-DPT to path for imports
+repo_root_path = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(repo_root_path / "CATALYTIC-DPT"))
+
+from PRIMITIVES.restore_proof import RestorationProofValidator
 
 
 @pytest.fixture

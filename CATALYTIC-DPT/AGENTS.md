@@ -149,6 +149,19 @@ No silent behavior
 - Prefer adding scoped docs under CAT-DPT directories instead of changing global law.
 - If a contradiction is found, report it and propose a minimal reconciliation.
 
+## Architectural Boundaries
+Kernel vs. LAB
+- The root `CATALYTIC-DPT/` directory contains the **Kernel** (schemas, primitives, verified skills, and core testbenches).
+- The `CATALYTIC-DPT/LAB/` directory contains **Experimental Scaffolds** (research, archived roadmaps, and unstable/phased components).
+- **Rule**: Kernel code MUST NOT import from `LAB/`.
+- **Rule**: `LAB/` code may import from the Kernel.
+
+Test Gating
+- Default `pytest` execution excludes the `LAB/` directory to ensure kernel stability and speed.
+- To include `LAB` tests, set the environment variable: `CATDPT_LAB=1`.
+- Example: `CATDPT_LAB=1 python -m pytest`
+
+
 End state definition
 CAT-DPT is considered “operational” when:
 - Phase 0 schemas and fixtures exist and pass

@@ -36,6 +36,7 @@ Double-clicking `LLM-PACK.cmd` produces a single FULL pack folder with:
 Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL pack folder for `CATALYTIC-DPT/**` with:
 
 - `COMBINED/SPLIT/**`
+- `COMBINED/SPLIT_LITE/**`
 - `COMBINED/CATALYTIC-DPT-FULL-COMBINED-*` and `COMBINED/CATALYTIC-DPT-FULL-TREEMAP-*`
 - A zip archive under `MEMORY/LLM_PACKER/_packs/archive/`
 
