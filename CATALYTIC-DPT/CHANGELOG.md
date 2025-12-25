@@ -2,6 +2,12 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.13.0] - 2025-12-24
+
+### Added
+- Phase 0 contract freeze: three Draft-07 schemas (`SCHEMAS/jobspec.schema.json`, `SCHEMAS/validation_error.schema.json`, `SCHEMAS/ledger.schema.json`) plus the canonical valid/invalid fixtures under `FIXTURES/phase0/`.
+- `CATALYTIC-DPT/TESTBENCH/test_schemas.py` proves the schema contract by loading each Draft-07 definition, ensuring valid fixtures pass and invalid fixtures fail, guarding future contract changes.
+
 ## [1.12.0] - 2025-12-24
 
 ### Changed
