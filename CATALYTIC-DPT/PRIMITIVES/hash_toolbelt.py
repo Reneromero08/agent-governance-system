@@ -6,7 +6,7 @@ import os
 import re
 from dataclasses import dataclass
 from pathlib import Path
-from typing import BinaryIO, Optional
+from typing import Any, BinaryIO, Optional
 
 from .cas_store import CatalyticStore
 
@@ -241,4 +241,110 @@ def hash_ast(
         "outline": items,
     }
     return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
+
+
+def _build_dereference_ledger_record(
+    *,
+    run_id: str,
+    timestamp: str,
+    command: str,
+    hash_hex: str,
+    bounds: dict[str, Any],
+) -> dict[str, Any]:
+    """
+    Build a minimal ledger record for a hash dereference event.
+
+    Args:
+        run_id: Run identifier
+        timestamp: Deterministic timestamp (caller-supplied, may be sentinel)
+        command: Command name (read, grep, describe, ast)
+        hash_hex: SHA-256 hash being dereferenced
+        bounds: Dictionary of bounds used (max_bytes, start, end, max_matches, etc.)
+
+    Returns:
+        A ledger record conforming to ledger.schema.json
+    """
+    # Build minimal JOBSPEC
+    jobspec = {
+        "job_id": f"deref-{command}-{run_id}",
+        "phase": 4,
+        "task_type": "adapter_execution",
+        "intent": f"expand-by-hash: {command}",
+        "inputs": {},
+        "outputs": {"durable_paths": [], "validation_criteria": {}},
+        "catalytic_domains": [],
+        "determinism": "deterministic",
+    }
+
+    # Build OUTPUTS entry to record dereference metadata
+    output_entry = {
+        "path": f"deref/{command}/{hash_hex}",
+        "type": "file",
+        "sha256": hash_hex,
+    }
+
+    # Create ledger record
+    record = {
+        "JOBSPEC": jobspec,
+        "RUN_INFO": {
+            "run_id": run_id,
+            "timestamp": timestamp,
+            "intent": f"hash-{command}: {hash_hex} bounds={json.dumps(bounds, sort_keys=True)}",
+            "catalytic_domains": [],
+            "exit_code": 0,
+            "restoration_verified": True,
+        },
+        "PRE_MANIFEST": {},
+        "POST_MANIFEST": {},
+        "RESTORE_DIFF": {},
+        "OUTPUTS": [output_entry],
+        "STATUS": {
+            "status": "completed",
+            "restoration_verified": True,
+            "exit_code": 0,
+            "validation_passed": True,
+        },
+        "VALIDATOR_ID": {
+            "validator_semver": "0.1.0",
+            "validator_build_id": "phase4-deref-logging",
+        },
+    }
+
+    return record
+
+
+def log_dereference_event(
+    *,
+    run_id: str | None,
+    timestamp: str,
+    ledger_path: Path,
+    command: str,
+    hash_hex: str,
+    bounds: dict[str, Any],
+) -> None:
+    """
+    Log a dereference event to the ledger if run_id is present.
+
+    Args:
+        run_id: Run identifier (if None, skip logging silently)
+        timestamp: Deterministic timestamp
+        ledger_path: Path to LEDGER.jsonl
+        command: Command name (read, grep, describe, ast)
+        hash_hex: SHA-256 hash being dereferenced
+        bounds: Dictionary of bounds used
+    """
+    if run_id is None:
+        return
+
+    from .ledger import Ledger
+
+    ledger = Ledger(ledger_path)
+    record = _build_dereference_ledger_record(
+        run_id=run_id,
+        timestamp=timestamp,
+        command=command,
+        hash_hex=hash_hex,
+        bounds=bounds,
+    )
+    ledger.append(record)
 

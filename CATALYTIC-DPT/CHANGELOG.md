@@ -2,34 +2,54 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
-## [1.26.0] - 2025-12-25
+## [1.31.0] - 2025-12-25
 
-### Phase 1.M: Merkle Roots per Domain Implemented
+### Phase 4: Ledger Observability for Expand-by-Hash Dereferences
 
 #### Added
-- **PRIMITIVES/merkle.py**:
-  - Deterministic Merkle root computation for domain manifests `{ normalized_path -> sha256_hex }`.
-  - Strict path normalization (reuses CAS `normalize_relpath`) and fail-closed validation for malformed paths/hashes.
-  - Deterministic leaf ordering (lexicographic by normalized_path) and standard odd-leaf padding.
-  - Adversarial rejection: non-normalized paths and duplicate hash bound to different paths.
-- **TESTBENCH/test_merkle.py**:
-  - Determinism tests (order-independence, stable roots across runs).
-  - Adversarial tests for non-normalized paths, invalid hashes, duplicate-hash binding, and odd-leaf padding correctness.
+- **PRIMITIVES/hash_toolbelt.py**:
+  - `log_dereference_event()`: Deterministic ledger logging for hash dereference commands.
+  - `_build_dereference_ledger_record()`: Constructs minimal schema-conforming ledger records for dereference events.
+  - Logs include requested hash, command name (read/grep/describe/ast), and bounds (max_bytes, ranges, matches, nodes, depth as applicable).
+  - Logging is opt-in: only occurs when `--run-id` is provided.
+- **TOOLS/catalytic.py**:
+  - `--timestamp` parameter for deterministic timestamp injection (defaults to sentinel).
+  - Ledger logging integrated at command dispatch for all four hash toolbelt commands.
+- **TESTBENCH/test_deref_logging.py**:
+  - Tests for deterministic rerun (identical ledger bytes), schema conformance, opt-in behavior (no run-id → no logging), and exact bounds recording.
+
+#### Changed
+- **ROADMAP_V2.2.md**:
+  - Marked "dereference events logged to ledger" as DONE under Phase 1X status.
 
 ---
 
-## [1.27.0] - 2025-12-25
+## [1.30.0] - 2025-12-25
 
-### Phase 1.D: Append-Only Ledger Receipts Implemented
+### Phase 1V: CI Enforces Strict Verification by Default
+
+#### Changed
+- **.github/workflows/contracts.yml**:
+  - Adds a strict-mode SPECTRUM-05 verification step that generates a deterministic signed bundle and verifies it with `--strict` under `CI=true`.
+  - Runs CAT-DPT `pytest` in CI with a workspace-pinned temp directory (avoids capture temp failures) and ignores `CATALYTIC-DPT/LAB` + `MEMORY/LLM_PACKER/_packs`.
+- **TOOLS/catalytic_verifier.py**:
+  - Refuses to run without `--strict` when `CI` is set (prevents silent downgrade paths in CI).
+
+---
+
+## [1.29.0] - 2025-12-25
+
+### Phase 1X: Expand-by-Hash Toolbelt (Bounded Read/Grep/Ast/Describe)
 
 #### Added
-- **PRIMITIVES/ledger.py**:
-  - Append-only JSONL writer/reader for ledger entries; never generates timestamps (caller must supply deterministic `RUN_INFO.timestamp`).
-  - Deterministic per-line serialization (UTF-8, no whitespace, lexicographically sorted keys).
-  - Schema validation against `SCHEMAS/ledger.schema.json` (Draft-07), including optional `JOBSPEC` for job_id linkage.
-  - Truncation/rewrite detection via monotonic file-size invariants across appends.
-- **TESTBENCH/test_ledger.py**:
-  - Append order preservation, deterministic serialization, schema rejection, corrupt/partial line detection, and adversarial truncation detection.
+- **TOOLS/catalytic.py**:
+  - Unified `catalytic hash` CLI with bounded subcommands: `read`, `grep`, `describe`, `ast`.
+  - Hash-first dereference: operates only on CAS objects by SHA-256 (no path reads).
+  - Requires explicit CAS location via `--run-id` or `--cas-root`.
+- **PRIMITIVES/hash_toolbelt.py**:
+  - Deterministic, bounded implementations for read/grep/describe/ast (Python-only AST; otherwise `UNSUPPORTED_AST_FORMAT`).
+- **TESTBENCH/test_hash_toolbelt.py**:
+  - Tests for bounds enforcement, range reads, deterministic outputs, match limits, AST truncation, and invalid hash rejection.
 
 ---
 
@@ -54,31 +74,34 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
-## [1.29.0] - 2025-12-25
+## [1.27.0] - 2025-12-25
 
-### Phase 1X: Expand-by-Hash Toolbelt (Bounded Read/Grep/Ast/Describe)
+### Phase 1.D: Append-Only Ledger Receipts Implemented
 
 #### Added
-- **TOOLS/catalytic.py**:
-  - Unified `catalytic hash` CLI with bounded subcommands: `read`, `grep`, `describe`, `ast`.
-  - Hash-first dereference: operates only on CAS objects by SHA-256 (no path reads).
-  - Requires explicit CAS location via `--run-id` or `--cas-root`.
-- **PRIMITIVES/hash_toolbelt.py**:
-  - Deterministic, bounded implementations for read/grep/describe/ast (Python-only AST; otherwise `UNSUPPORTED_AST_FORMAT`).
-- **TESTBENCH/test_hash_toolbelt.py**:
-  - Tests for bounds enforcement, range reads, deterministic outputs, match limits, AST truncation, and invalid hash rejection.
+- **PRIMITIVES/ledger.py**:
+  - Append-only JSONL writer/reader for ledger entries; never generates timestamps (caller must supply deterministic `RUN_INFO.timestamp`).
+  - Deterministic per-line serialization (UTF-8, no whitespace, lexicographically sorted keys).
+  - Schema validation against `SCHEMAS/ledger.schema.json` (Draft-07), including optional `JOBSPEC` for job_id linkage.
+  - Truncation/rewrite detection via monotonic file-size invariants across appends.
+- **TESTBENCH/test_ledger.py**:
+  - Append order preservation, deterministic serialization, schema rejection, corrupt/partial line detection, and adversarial truncation detection.
 
 ---
 
-## [1.30.0] - 2025-12-25
+## [1.26.0] - 2025-12-25
 
-### Phase 1V: CI Enforces Strict Verification by Default
+### Phase 1.M: Merkle Roots per Domain Implemented
 
-#### Changed
-- **.github/workflows/contracts.yml**:
-  - Adds a strict-mode SPECTRUM-05 verification step that generates a deterministic signed bundle and verifies it with `--strict` under `CI=true`.
-- **TOOLS/catalytic_verifier.py**:
-  - Refuses to run without `--strict` when `CI` is set (prevents silent downgrade paths in CI).
+#### Added
+- **PRIMITIVES/merkle.py**:
+  - Deterministic Merkle root computation for domain manifests `{ normalized_path -> sha256_hex }`.
+  - Strict path normalization (reuses CAS `normalize_relpath`) and fail-closed validation for malformed paths/hashes.
+  - Deterministic leaf ordering (lexicographic by normalized_path) and standard odd-leaf padding.
+  - Adversarial rejection: non-normalized paths and duplicate hash bound to different paths.
+- **TESTBENCH/test_merkle.py**:
+  - Determinism tests (order-independence, stable roots across runs).
+  - Adversarial tests for non-normalized paths, invalid hashes, duplicate-hash binding, and odd-leaf padding correctness.
 
 ---
 
