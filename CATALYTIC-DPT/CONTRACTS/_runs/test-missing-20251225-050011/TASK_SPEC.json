@@ -1,0 +1,11 @@
+{
+  "task_id": "test-missing",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "/nonexistent/path/file.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_731f2fc5\\dest.txt"
+    }
+  ]
+}
