@@ -30,6 +30,7 @@ from PRIMITIVES.verify_bundle import BundleVerifier
 # Check if cryptography is available for Ed25519
 try:
     from cryptography.hazmat.primitives.asymmetric import ed25519
+    from cryptography.hazmat.primitives import serialization
     CRYPTO_AVAILABLE = True
 except ImportError:
     CRYPTO_AVAILABLE = False
@@ -157,7 +158,10 @@ def test_ed25519_signature_verification():
     # Generate a test key pair
     private_key = ed25519.Ed25519PrivateKey.generate()
     public_key = private_key.public_key()
-    public_key_bytes = public_key.public_bytes_raw()
+    public_key_bytes = public_key.public_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PublicFormat.Raw,
+    )
     public_key_hex = public_key_bytes.hex()
 
     # Sign a test message
@@ -197,7 +201,10 @@ def test_validator_id_derivation():
     # Generate a test key
     private_key = ed25519.Ed25519PrivateKey.generate()
     public_key = private_key.public_key()
-    public_key_bytes = public_key.public_bytes_raw()
+    public_key_bytes = public_key.public_bytes(
+        encoding=serialization.Encoding.Raw,
+        format=serialization.PublicFormat.Raw,
+    )
     public_key_hex = public_key_bytes.hex()
 
     # Compute validator_id
@@ -255,7 +262,10 @@ def test_spectrum05_identity_invalid():
         # Generate a valid key
         private_key = ed25519.Ed25519PrivateKey.generate()
         public_key = private_key.public_key()
-        public_key_hex = public_key.public_bytes_raw().hex()
+        public_key_hex = public_key.public_bytes(
+            encoding=serialization.Encoding.Raw,
+            format=serialization.PublicFormat.Raw,
+        ).hex()
 
         # Create artifacts
         (run_dir / "TASK_SPEC.json").write_text(json.dumps({"task": "test"}))

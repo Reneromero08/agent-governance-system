@@ -15,6 +15,18 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.33.0] - 2025-12-25
+
+### Phase 4: Fix Ledger Schema `$ref` Resolution (Draft7)
+
+#### Changed
+- **SCHEMAS/ledger.schema.json**:
+  - Makes internal `$ref` targets explicit (`ledger.schema.json#/definitions/...`) so resolution is stable under Draft7 reference loading.
+- **TESTBENCH/test_schemas.py**:
+  - Uses Draft7 `RefResolver` + deterministic schema store for ledger validation (no unsupported `registry=` argument).
+
+---
+
 ## [1.31.0] - 2025-12-25
 
 ### Phase 4: Ledger Observability for Expand-by-Hash Dereferences
