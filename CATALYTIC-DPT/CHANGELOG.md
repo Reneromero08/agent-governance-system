@@ -2,6 +2,118 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.20.0] - 2025-12-25
+
+### SPECTRUM-04: Canonical Byte-Serialization Rules Finalized
+
+#### Changed
+- **SPECTRUM/SPECTRUM-04.md** (v1.0.0 → v1.1.0): Removed all ambiguity for byte-level determinism
+
+#### Canonical Serialization Rules (Section 4 - NEW)
+- **Encoding:** UTF-8 (no BOM)
+- **Newline policy:** No newlines; single line with no trailing newline
+- **Whitespace policy:** No whitespace outside string values
+- **JSON rules:** Keys sorted lexicographically by UTF-8 byte value; no spaces after colons/commas; RFC 8259 string escaping; integers without decimal points; booleans/null lowercase
+- **Field presence:** Strict enforcement; missing field → `FIELD_MISSING`; extra field → `FIELD_EXTRA`
+
+#### Bundle Root (Section 5 - Clarified)
+- **Preimage structure:** `{"output_hashes":<object>,"status":<object>,"task_spec_hash":"<64 hex>"}`
+- **output_hashes source:** `OUTPUT_HASHES.json` → extract `hashes` field → canonicalize keys
+- **status source:** `STATUS.json` → entire content → canonicalize keys
+- **task_spec_hash:** `sha256(raw_bytes_of_TASK_SPEC.json)` (NOT canonicalized; raw file bytes)
+
+#### Chain Root (Section 6 - Clarified)
+- **Preimage structure:** `{"bundle_roots":[...],"run_ids":[...]}`
+- **run_id definition:** Directory name (final path component), not full path
+- **Constraints:** Arrays must have identical length; no duplicates → `CHAIN_DUPLICATE_RUN`; empty chain → `CHAIN_EMPTY`
+
+#### Signed Payload (Section 7 - Simplified)
+- **Payload types reduced:** `BUNDLE` only (removed `CHAIN`, `ACCEPTANCE`)
+- **Timestamp removed:** NOT signed (cannot be standardized without trusted time source)
+- **Source of truth:** `SIGNED_PAYLOAD.json` is canonical; verifier reconstructs signature message from it
+- **Signed payload:** `{"bundle_root":"...","decision":"ACCEPT","validator_id":"..."}`
+- **Signature message:** `CAT-DPT-SPECTRUM-04-v1:BUNDLE:<canonical_payload_json>`
+
+#### Revocation (Section 10.3 - Clarified)
+- **Status:** Explicitly OUT OF SCOPE
+- **Rule:** Revocation MUST NOT be required for SPECTRUM-04 verification to succeed
+- **Artifact-only:** Valid signature remains valid regardless of external revocation state
+
+#### Determinism Proof Checklist (Section 13 - NEW)
+- Preimage templates for bundle, chain, signed payload, signature message
+- Determinism requirements: byte-for-byte identical outputs for identical inputs
+- Reject conditions for any ambiguity
+- Informative test vectors for edge cases
+
+#### Error Codes (Updated)
+- Added: `DECISION_INVALID`, `FIELD_MISSING`, `FIELD_EXTRA`, `CHAIN_DUPLICATE_RUN`, `CHAIN_EMPTY`
+- Removed: `VALIDATOR_UNKNOWN`, `VALIDATOR_REVOKED` (revocation out-of-scope)
+
+## [1.19.0] - 2025-12-25
+
+### Validator Identity Pin - Identity and Signing Law Frozen
+
+#### Added
+- **SPECTRUM/SPECTRUM-04.md**: Constitutional specification for validator identity and cryptographic signing
+  - Status: FROZEN (no implementation may deviate)
+  - Defines binding of bundle/chain acceptance to cryptographic authority
+
+#### Validator Identity Model (Final)
+- **Key algorithm:** Ed25519 (singular, no alternatives, no negotiation)
+- **Public key encoding:** Raw 32-byte, lowercase hex (64 chars exactly)
+- **Validator ID derivation:** `validator_id = sha256(public_key_bytes)` (deterministic, globally unique, stable, offline-verifiable)
+- **Identity representation:** `{validator_id, public_key, algorithm: "ed25519"}`
+
+#### Signing Surface (Final)
+- **Domain separation:** `CAT-DPT-SPECTRUM-04-v1:` prefix (mandatory)
+- **Canonical payload:** Domain prefix + payload type + canonical JSON bytes
+- **Payload type:** `BUNDLE` (single type; chains use bundle root semantics)
+- **Canonical JSON:** Sorted keys, no whitespace, UTF-8, no extensions
+- **Bundle root:** `sha256({output_hashes, status, task_spec_hash})`
+- **Chain root:** `sha256({bundle_roots[], run_ids[]})`
+- **Signed payload binds:** bundle/chain root, decision, validator_id
+- **NOT signed:** logs, transcripts, intermediate state, file paths, semver, build_id, timestamps
+
+#### Signature Format (Final)
+- **Signature encoding:** Ed25519, lowercase hex (128 chars exactly)
+- **Signature object:** `{payload_type, signature, validator_id}` (signed_at informational only)
+- **Malformed detection:** Exact character count, lowercase only, no extra fields
+
+#### Artifact Binding (Final)
+- **VALIDATOR_IDENTITY.json:** Contains algorithm, public_key, validator_id
+- **SIGNATURE.json:** Contains payload_type, signature, validator_id
+- **SIGNED_PAYLOAD.json:** Contains bundle_root, decision, validator_id
+- **Verification:** Artifact-only (no network, no external trust, no CA)
+
+#### Mutability and Rotation (Final)
+- **Immutable once accepted:** All bundle artifacts byte-for-byte immutable
+- **Rotation:** NOT ALLOWED (one identity per validator, forever)
+- **Revocation:** Out of scope (not required for acceptance)
+
+#### Fail-Closed Rules
+- Any ambiguity rejects
+- Multiple identities/keys/signatures reject
+- Deviation from canonicalization rejects
+- Partial data rejects
+- No heuristics (binary ACCEPT/REJECT only)
+- No side channels (no timing, no file dates, no network)
+
+#### Error Codes (24 stable codes)
+- Identity: `IDENTITY_AMBIGUOUS`, `IDENTITY_INCOMPLETE`, `IDENTITY_INVALID`, `IDENTITY_MISMATCH`, `IDENTITY_MISSING`, `IDENTITY_MULTIPLE`
+- Algorithm: `ALGORITHM_UNSUPPORTED`
+- Key: `KEY_INVALID`, `KEY_MULTIPLE`
+- Signature: `SIGNATURE_INCOMPLETE`, `SIGNATURE_INVALID`, `SIGNATURE_MALFORMED`, `SIGNATURE_MISSING`, `SIGNATURE_MULTIPLE`
+- Payload: `PAYLOAD_MISSING`, `PAYLOAD_MISMATCH`
+- Root: `BUNDLE_ROOT_MISMATCH`, `CHAIN_ROOT_MISMATCH`
+- Fields: `FIELD_MISSING`, `FIELD_EXTRA`, `DECISION_INVALID`
+- Chain: `CHAIN_DUPLICATE_RUN`, `CHAIN_EMPTY`
+- Serialization: `SERIALIZATION_INVALID`
+
+#### Interoperability
+- Two independent implementations MUST produce byte-for-byte identical results
+- No interpretation required by implementers
+- All rules explicit, unambiguous, complete, testable
+
 ## [1.18.0] - 2025-12-25
 
 ### Phase 1: Bundle/Chain Verifier (Fail-Closed)
