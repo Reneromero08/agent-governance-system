@@ -1,0 +1,22 @@
+{
+  "task_id": "test-copy",
+  "task_type": "file_operation",
+  "run_id": "test-copy-20251225-052526",
+  "status": "success",
+  "timestamp_start": "2025-12-25T05:25:26.154351",
+  "timestamp_end": "2025-12-25T05:25:26.157094",
+  "operations": [
+    {
+      "operation": "copy",
+      "source": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_jzh0i3tg\\source.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_jzh0i3tg\\dest.txt",
+      "source_hash": "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f",
+      "dest_hash": "dffd6021bb2bd5b0af676290809ec3a53191dd81c7f70a4b28688a362182986f",
+      "hash_verified": true,
+      "size_bytes": 13,
+      "timestamp": "2025-12-25T05:25:26.157094"
+    }
+  ],
+  "errors": [],
+  "ledger_dir": "D:\\CCC 2.0\\AI\\agent-governance-system\\CATALYTIC-DPT\\CONTRACTS\\_runs\\test-copy-20251225-052526"
+}
