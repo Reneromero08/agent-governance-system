@@ -978,6 +978,105 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     "5) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
                     "6) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
                     "",
+                    "## SPLIT (full chunks)",
+                    f"- `{scope.file_prefix}-01_DOCS.md`",
+                    f"- `{scope.file_prefix}-02_CONFIG.md`",
+                    f"- `{scope.file_prefix}-03_TESTBENCH.md`",
+                    f"- `{scope.file_prefix}-04_SYSTEM.md`",
+                    "",
+                    "## Repo File Tree",
+                    "",
+                    "See `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`.",
+                    "",
+                ]
+            ),
+        )
+
+        write(
+            split_dir / f"{scope.file_prefix}-01_DOCS.md",
+            "\n".join(
+                [
+                    f"# {scope.title}: Docs (SPLIT_LITE)",
+                    "",
+                    "Pointers to key docs and the full chunked doc payload.",
+                    "",
+                    "## Key docs",
+                    "- `repo/CATALYTIC-DPT/AGENTS.md`",
+                    "- `repo/CATALYTIC-DPT/README.md`",
+                    "- `repo/CATALYTIC-DPT/CHANGELOG.md`",
+                    "- `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
+                    "- `repo/CATALYTIC-DPT/ORCHESTRATION_ARCHITECTURE.md`",
+                    "- `repo/CATALYTIC-DPT/RECURSIVE_SWARM_ARCHITECTURE.md`",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{scope.file_prefix}-01_DOCS.md`",
+                    "",
+                ]
+            ),
+        )
+
+        write(
+            split_dir / f"{scope.file_prefix}-02_CONFIG.md",
+            "\n".join(
+                [
+                    f"# {scope.title}: Config (SPLIT_LITE)",
+                    "",
+                    "Pointers to core config + schema locations.",
+                    "",
+                    "## Key files",
+                    "- `repo/CATALYTIC-DPT/swarm_config.json`",
+                    "- `repo/CATALYTIC-DPT/SCHEMAS/`",
+                    "- `repo/CATALYTIC-DPT/MCP/`",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{scope.file_prefix}-02_CONFIG.md`",
+                    "",
+                ]
+            ),
+        )
+
+        write(
+            split_dir / f"{scope.file_prefix}-03_TESTBENCH.md",
+            "\n".join(
+                [
+                    f"# {scope.title}: Testbench (SPLIT_LITE)",
+                    "",
+                    "Pointers to testing and fixtures for quick validation.",
+                    "",
+                    "## Key folders",
+                    "- `repo/CATALYTIC-DPT/TESTBENCH/`",
+                    "- `repo/CATALYTIC-DPT/FIXTURES/`",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{scope.file_prefix}-03_TESTBENCH.md`",
+                    "",
+                ]
+            ),
+        )
+
+        write(
+            split_dir / f"{scope.file_prefix}-04_SYSTEM.md",
+            "\n".join(
+                [
+                    f"# {scope.title}: System (SPLIT_LITE)",
+                    "",
+                    "Pointers to the full snapshot and meta inventories.",
+                    "",
+                    "## Repo snapshot",
+                    "- `repo/CATALYTIC-DPT/**`",
+                    "",
+                    "## Meta inventories",
+                    "- `meta/START_HERE.md`",
+                    "- `meta/ENTRYPOINTS.md`",
+                    "- `meta/PACK_INFO.json`",
+                    "- `meta/REPO_STATE.json`",
+                    "- `meta/FILE_TREE.txt`",
+                    "- `meta/FILE_INDEX.json`",
+                    "- `meta/CONTEXT.txt`",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{scope.file_prefix}-04_SYSTEM.md`",
+                    "",
                 ]
             ),
         )
