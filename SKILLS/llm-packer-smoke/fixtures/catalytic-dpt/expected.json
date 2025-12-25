@@ -1,5 +1,5 @@
 {
-  "pack_dir": "MEMORY/LLM_PACKER/_packs/fixture-catalytic-dpt",
+  "pack_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-catalytic-dpt",
   "stamp": "fixture-catalytic-dpt",
   "verified": [
     "meta/START_HERE.md",

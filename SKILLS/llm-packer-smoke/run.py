@@ -49,7 +49,7 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Error reading input JSON: {exc}")
         return 1
 
-    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM_PACKER/_packs/fixture-smoke"))
+    out_dir_raw = str(config.get("out_dir", "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke"))
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))

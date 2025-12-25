@@ -1,5 +1,5 @@
 {
-  "pack_dir": "MEMORY/LLM_PACKER/_packs/fixture-smoke-split-lite",
+  "pack_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke-split-lite",
   "stamp": "fixture-smoke-split-lite",
   "verified": [
     "meta/START_HERE.md",
