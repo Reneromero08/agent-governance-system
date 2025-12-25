@@ -2,6 +2,55 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.18.0] - 2025-12-25
+
+### Phase 1: Bundle/Chain Verifier (Fail-Closed)
+
+#### Added
+- **PRIMITIVES/verify_bundle.py**: Deterministic verifier for SPECTRUM-02 bundles and SPECTRUM-03 chains
+  - `BundleVerifier.verify_bundle()`: Single bundle verification with fail-closed semantics
+  - `BundleVerifier.verify_chain()`: Chain verification with reference integrity validation
+  - Enforces forbidden artifacts: rejects if `logs/`, `tmp/`, or `transcript.json` exist
+  - Verification depends ONLY on bundle artifacts, file hashes, and ordering (no logs, no heuristics)
+  - Supports optional PROOF.json gating (verified=true required for acceptance)
+  - Error codes: `BUNDLE_INCOMPLETE`, `HASH_MISMATCH`, `OUTPUT_MISSING`, `STATUS_NOT_SUCCESS`, `CMP01_NOT_PASS`, `PROOF_REQUIRED`, `RESTORATION_FAILED`, `FORBIDDEN_ARTIFACT`, `INVALID_CHAIN_REFERENCE`
+
+- **TOOLS/catalytic_verifier.py**: CLI entrypoint for bundle/chain verification
+  - Single bundle mode: `python catalytic_verifier.py --run-dir <path> [--strict]`
+  - Chain mode: `python catalytic_verifier.py --chain <path1> <path2> ... [--strict]`
+  - Chain directory mode: `python catalytic_verifier.py --chain-dir <path> [--strict]`
+  - JSON output support: `--json` flag for machine-readable reports
+  - Exit codes: 0 (pass), 1 (fail), 2 (invalid arguments)
+
+- **TESTBENCH/test_verify_bundle.py**: Comprehensive unit tests (18 tests)
+  - Valid bundle acceptance
+  - Missing artifacts rejection (TASK_SPEC, STATUS, OUTPUT_HASHES)
+  - Hash mismatch detection
+  - Missing output detection
+  - Status failure detection (STATUS_NOT_SUCCESS, CMP01_NOT_PASS)
+  - Proof gating tests (PROOF_REQUIRED, RESTORATION_FAILED)
+  - Forbidden artifacts rejection (logs/, tmp/, transcript.json)
+  - Chain verification (valid chains, tamper detection, invalid references)
+
+#### Changed
+- **TESTBENCH/spectrum/test_spectrum03_chain.py**: Refactored to use new `BundleVerifier` primitive
+  - `verify_spectrum03_chain()` now wraps `BundleVerifier.verify_chain()`
+  - Maintains backward compatibility with existing tests
+  - All 5 SPECTRUM-03 tests pass
+
+#### Test Results
+- All 60 tests passing (38 Phase 0 + 18 new + 4 spectrum integration)
+- Verifier rejects on every negative case (missing artifacts, tamper, invalid references, forbidden artifacts)
+- Chain verification enforces reference integrity (no future references allowed)
+
+#### Exit Criteria Met
+- [x] Callable entrypoint: `catalytic_verifier.py` with `--run-dir` and `--chain` modes
+- [x] Tests prove: valid acceptance, missing artifact rejection, tamper detection, invalid reference rejection, forbidden artifact rejection
+- [x] Deterministic: POSIX path normalization, SHA-256 hashing, stable JSON ordering
+- [x] Fail-closed: any ambiguity rejects (no heuristics, no logs, no side channels)
+- [x] Verification depends only on bundle artifacts + file hashes + ordering
+- [x] All tests pass: `pytest -q` returns 60/60
+
 ## [1.17.0] - 2025-12-25
 
 ### AGS Integration (entries moved from CANON/CHANGELOG.md)

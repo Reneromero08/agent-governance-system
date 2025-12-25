@@ -27,6 +27,10 @@ MCPTerminalServer = mcp_server_module.MCPTerminalServer
 VALIDATOR_SEMVER = mcp_server_module.VALIDATOR_SEMVER
 get_validator_build_id = mcp_server_module.get_validator_build_id
 
+# Import the new BundleVerifier primitive
+sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+from PRIMITIVES.verify_bundle import BundleVerifier
+
 
 # =============================================================================
 # SPECTRUM-03 CHAIN VERIFICATION HELPER
@@ -38,11 +42,13 @@ def verify_spectrum03_chain(
 ) -> Dict:
     """Verify a chain of SPECTRUM-02 bundles.
 
+    This is a compatibility wrapper that uses the new BundleVerifier primitive.
+
     Checks:
-    1. Each bundle verifies individually via verify_spectrum02_bundle
+    1. Each bundle verifies individually via verify_bundle
     2. Build registry of available outputs from each run
     3. If TASK_SPEC contains "references", validate each against available outputs
-    4. "No history dependency" is asserted but non-failing (see TODO)
+    4. No forbidden artifacts (logs/, tmp/, transcript.json)
 
     Args:
         run_dirs: Ordered list of run directories (chain order is passed order)
@@ -51,101 +57,16 @@ def verify_spectrum03_chain(
     Returns:
         {"valid": bool, "errors": [...]}
 
-    TODO: Chain order is currently the passed order. Add timestamp parsing
-          from STATUS.json or ledger to enforce strict temporal ordering.
+    Note: Chain order is currently the passed order. Future versions may add
+          timestamp parsing from STATUS.json to enforce strict temporal ordering.
     """
-    errors = []
-    server = MCPTerminalServer()
+    verifier = BundleVerifier(project_root=REPO_ROOT)
 
-    # Normalize paths
-    run_dirs = [Path(d) if isinstance(d, str) else d for d in run_dirs]
+    # Use the new verify_chain method with check_proof=False to match old behavior
+    # (old tests don't create PROOF.json)
+    result = verifier.verify_chain(run_dirs, strict=strict_order, check_proof=False)
 
-    # Phase 1: Verify each bundle individually
-    for run_dir in run_dirs:
-        result = server.verify_spectrum02_bundle(run_dir)
-        if not result["valid"]:
-            # Add run_id context to each error
-            for err in result["errors"]:
-                err["run_id"] = run_dir.name
-            errors.extend(result["errors"])
-            return {"valid": False, "errors": errors}
-
-    # Phase 2: Build available output registry and validate references
-    available_outputs: Dict[str, str] = {}  # path -> run_id that produced it
-
-    for run_dir in run_dirs:
-        run_id = run_dir.name
-
-        # Load OUTPUT_HASHES.json to get this run's outputs
-        hashes_path = run_dir / "OUTPUT_HASHES.json"
-        try:
-            with open(hashes_path) as f:
-                output_hashes = json.load(f)
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            errors.append({
-                "code": "BUNDLE_INCOMPLETE",
-                "message": f"Failed to load OUTPUT_HASHES.json: {e}",
-                "run_id": run_id,
-                "path": "/",
-                "details": {"expected": str(hashes_path)}
-            })
-            return {"valid": False, "errors": errors}
-
-        # Get this run's declared outputs (keys of hashes dict)
-        current_run_outputs = set(output_hashes.get("hashes", {}).keys())
-
-        # Load TASK_SPEC.json to check for references
-        task_spec_path = run_dir / "TASK_SPEC.json"
-        try:
-            with open(task_spec_path) as f:
-                task_spec = json.load(f)
-        except (json.JSONDecodeError, FileNotFoundError) as e:
-            errors.append({
-                "code": "BUNDLE_INCOMPLETE",
-                "message": f"Failed to load TASK_SPEC.json: {e}",
-                "run_id": run_id,
-                "path": "/",
-                "details": {"expected": str(task_spec_path)}
-            })
-            return {"valid": False, "errors": errors}
-
-        # Check references if present (skip validation if not present)
-        # References are repo-root-relative POSIX paths
-        references = task_spec.get("references", None)
-        if references is not None:
-            for ref_path in references:
-                # Normalize to POSIX for comparison
-                ref_posix = ref_path.replace("\\", "/")
-
-                # Check if reference exists in available_outputs OR current run outputs
-                in_earlier = ref_posix in available_outputs
-                in_current = ref_posix in current_run_outputs
-
-                if not (in_earlier or in_current):
-                    errors.append({
-                        "code": "INVALID_CHAIN_REFERENCE",
-                        "message": f"Reference '{ref_posix}' not found in chain history or current outputs",
-                        "run_id": run_id,
-                        "path": f"/references",
-                        "details": {
-                            "reference": ref_posix,
-                            "available_outputs": list(available_outputs.keys()),
-                            "current_outputs": list(current_run_outputs)
-                        }
-                    })
-                    return {"valid": False, "errors": errors}
-
-        # Register this run's outputs into available_outputs
-        for output_path in current_run_outputs:
-            available_outputs[output_path] = run_id
-
-    # Phase 3: No history dependency assertion (NON-FAILING for now)
-    # This is a conceptual check: verification depends only on bundle artifacts
-    # and actual file hashes, not execution history.
-    # TODO: Consider adding explicit checks for forbidden artifacts (logs/, tmp/)
-    #       but per requirements, this is non-failing for now.
-
-    return {"valid": True, "errors": []}
+    return result
 
 
 # =============================================================================
