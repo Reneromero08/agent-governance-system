@@ -1,6 +1,6 @@
 {
   "combined": true,
-  "out_dir": "MEMORY/LLM_PACKER/_packs/fixture-catalytic-dpt",
+  "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-catalytic-dpt",
   "scope": "catalytic-dpt",
   "stamp": "fixture-catalytic-dpt",
   "zip": false
