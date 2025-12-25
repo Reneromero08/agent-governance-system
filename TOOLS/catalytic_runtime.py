@@ -37,6 +37,9 @@ from pathlib import Path
 from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
+# Add CATALYTIC-DPT to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
+from PRIMITIVES.restore_proof import RestorationProofValidator
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
@@ -239,7 +242,7 @@ class CatalyticRuntime:
         return outputs
 
     def save_ledger(self, exit_code: int, restoration_success: bool, diffs: Dict) -> None:
-        """Save run ledger to disk."""
+        """Save run ledger to disk, including PROOF.json."""
         run_info = {
             "run_id": self.run_id,
             "timestamp": self.timestamp,
@@ -274,7 +277,22 @@ class CatalyticRuntime:
         }
         (self.ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
 
+        # Generate PROOF.json using RestorationProofValidator
+        proof_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json"
+        validator = RestorationProofValidator(proof_schema_path)
+
+        proof = validator.generate_proof(
+            run_id=self.run_id,
+            catalytic_domains=[str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+            pre_state=pre_manifest,
+            post_state=post_manifest,
+            timestamp=self.timestamp,
+        )
+
+        (self.ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+
         print(f"[catalytic] Run ledger saved to {self.ledger_dir}")
+        print(f"[catalytic] PROOF.json: verified={proof['restoration_result']['verified']}, condition={proof['restoration_result']['condition']}")
 
     def run(self, cmd: List[str]) -> int:
         """Execute the full catalytic lifecycle."""
