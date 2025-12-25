@@ -1,0 +1,12 @@
+{
+  "job_id": "phase0-schema-freeze",
+  "task_type": "schema_definition",
+  "intent": "This fixture is invalid because it is missing the required field 'phase'.",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [],
+    "validation_criteria": {}
+  },
+  "catalytic_domains": [],
+  "determinism": "deterministic"
+}
