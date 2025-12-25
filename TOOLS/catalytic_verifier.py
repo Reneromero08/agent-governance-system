@@ -39,6 +39,7 @@ Contract:
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import List
@@ -285,6 +286,12 @@ def main():
     )
 
     args = parser.parse_args()
+
+    # CI strict enforcement: prevent any silent downgrade path when CI is set.
+    # Local dev remains backward compatible (strict is opt-in).
+    if os.environ.get("CI") and not args.strict:
+        print("ERROR: CI requires strict verification (--strict)", file=sys.stderr)
+        return 2
 
     # Create CLI instance
     cli = VerifierCLI()
