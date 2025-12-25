@@ -2,6 +2,19 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.32.0] - 2025-12-25
+
+### Phase 4: Independent Verifier Implementation; Interop Proven
+
+#### Added
+- **PRIMITIVES/verify_bundle_alt.py**:
+  - Code-independent SPECTRUM-05 bundle + chain verifier implementation (strict identity/signature enforcement).
+- **TESTBENCH/test_verifier_interop.py**:
+  - Golden interop fixtures (valid bundle + tamper rejection) and deterministic rerun coverage.
+  - Enforces byte-identical serialized verification results across both implementations.
+
+---
+
 ## [1.31.0] - 2025-12-25
 
 ### Phase 4: Ledger Observability for Expand-by-Hash Dereferences
