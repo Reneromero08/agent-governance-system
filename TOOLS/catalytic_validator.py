@@ -35,10 +35,31 @@ class CatalyticLedgerValidator:
         self.warnings: list = []
 
     def validate_structure(self) -> bool:
-        """Check required files exist."""
-        required_files = ["RUN_INFO.json", "PRE_MANIFEST.json", "POST_MANIFEST.json", "RESTORE_DIFF.json", "OUTPUTS.json", "STATUS.json", "PROOF.json"]
+        """Check required canonical artifact set exists (Phase 0.2)."""
+        # Canonical artifact set
+        canonical_files = [
+            "JOBSPEC.json",
+            "STATUS.json",
+            "INPUT_HASHES.json",
+            "OUTPUT_HASHES.json",
+            "DOMAIN_ROOTS.json",
+            "LEDGER.jsonl",
+            "VALIDATOR_ID.json",
+            "PROOF.json",
+        ]
 
-        for filename in required_files:
+        # Legacy files (backwards compatibility)
+        legacy_files = [
+            "RUN_INFO.json",
+            "PRE_MANIFEST.json",
+            "POST_MANIFEST.json",
+            "RESTORE_DIFF.json",
+            "OUTPUTS.json",
+        ]
+
+        all_required = canonical_files + legacy_files
+
+        for filename in all_required:
             path = self.ledger_dir / filename
             if not path.exists():
                 self.errors.append(f"Missing required file: {filename}")

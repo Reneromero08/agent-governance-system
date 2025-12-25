@@ -27,7 +27,34 @@ from catalytic_validator import CatalyticLedgerValidator
 
 
 def create_minimal_ledger(ledger_dir: Path, proof: dict) -> None:
-    """Create minimal valid ledger with given PROOF.json."""
+    """Create minimal valid ledger with given PROOF.json (Phase 0.2 canonical set)."""
+    # Canonical artifacts
+    jobspec = {
+        "job_id": "test_run_001",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test proof-gated acceptance",
+        "inputs": {},
+        "outputs": {"durable_paths": [], "validation_criteria": {}},
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+    (ledger_dir / "JOBSPEC.json").write_text(json.dumps(jobspec, indent=2))
+
+    status = {"status": "succeeded", "restoration_verified": True, "exit_code": 0, "validation_passed": True}
+    (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+
+    (ledger_dir / "INPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+    (ledger_dir / "OUTPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+    (ledger_dir / "DOMAIN_ROOTS.json").write_text(json.dumps({}, indent=2))
+    (ledger_dir / "LEDGER.jsonl").write_text("{}\n")
+
+    validator_id = {"validator_semver": "0.1.0", "validator_build_id": "test"}
+    (ledger_dir / "VALIDATOR_ID.json").write_text(json.dumps(validator_id, indent=2))
+
+    (ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+
+    # Legacy artifacts (backwards compatibility)
     run_info = {
         "run_id": "test_run_001",
         "timestamp": "2025-12-25T00:00:00Z",
@@ -48,12 +75,6 @@ def create_minimal_ledger(ledger_dir: Path, proof: dict) -> None:
 
     outputs = []
     (ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs, indent=2))
-
-    status = {"status": "restored", "restoration_verified": True}
-    (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
-
-    # PROOF.json is the critical file
-    (ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
 
 
 @pytest.fixture
@@ -131,7 +152,31 @@ def test_missing_proof_rejected():
         ledger_dir = Path(tmpdir) / "test_run"
         ledger_dir.mkdir()
 
-        # Create all files EXCEPT PROOF.json
+        # Create all canonical files EXCEPT PROOF.json
+        jobspec = {
+            "job_id": "test_run_003",
+            "phase": 0,
+            "task_type": "primitive_implementation",
+            "intent": "Test missing proof",
+            "inputs": {},
+            "outputs": {"durable_paths": [], "validation_criteria": {}},
+            "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+            "determinism": "deterministic",
+        }
+        (ledger_dir / "JOBSPEC.json").write_text(json.dumps(jobspec, indent=2))
+
+        status = {"status": "succeeded", "restoration_verified": True, "exit_code": 0, "validation_passed": True}
+        (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+
+        (ledger_dir / "INPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "OUTPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "DOMAIN_ROOTS.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "LEDGER.jsonl").write_text("{}\n")
+
+        validator_id = {"validator_semver": "0.1.0", "validator_build_id": "test"}
+        (ledger_dir / "VALIDATOR_ID.json").write_text(json.dumps(validator_id, indent=2))
+
+        # Legacy files
         run_info = {
             "run_id": "test_run_003",
             "timestamp": "2025-12-25T00:00:00Z",
@@ -152,9 +197,6 @@ def test_missing_proof_rejected():
 
         outputs = []
         (ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs, indent=2))
-
-        status = {"status": "restored", "restoration_verified": True}
-        (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
 
         # NOTE: PROOF.json is intentionally missing
 
@@ -185,7 +227,34 @@ def test_proof_is_single_source_of_truth(proof_validator):
             timestamp="2025-12-25T00:00:00Z",
         )
 
-        # Create ledger with CLEAN RESTORE_DIFF (contradicts proof)
+        # Create canonical artifacts
+        jobspec = {
+            "job_id": "test_run_004",
+            "phase": 0,
+            "task_type": "primitive_implementation",
+            "intent": "Test proof as single source of truth",
+            "inputs": {},
+            "outputs": {"durable_paths": [], "validation_criteria": {}},
+            "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+            "determinism": "deterministic",
+        }
+        (ledger_dir / "JOBSPEC.json").write_text(json.dumps(jobspec, indent=2))
+
+        status = {"status": "succeeded", "restoration_verified": True, "exit_code": 0, "validation_passed": True}
+        (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+
+        (ledger_dir / "INPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "OUTPUT_HASHES.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "DOMAIN_ROOTS.json").write_text(json.dumps({}, indent=2))
+        (ledger_dir / "LEDGER.jsonl").write_text("{}\n")
+
+        validator_id = {"validator_semver": "0.1.0", "validator_build_id": "test"}
+        (ledger_dir / "VALIDATOR_ID.json").write_text(json.dumps(validator_id, indent=2))
+
+        # But PROOF.json says verified=false
+        (ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+
+        # Legacy artifacts - RESTORE_DIFF claims clean (contradicts proof)
         run_info = {
             "run_id": "test_run_004",
             "timestamp": "2025-12-25T00:00:00Z",
@@ -207,12 +276,6 @@ def test_proof_is_single_source_of_truth(proof_validator):
 
         outputs = []
         (ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs, indent=2))
-
-        status = {"status": "restored", "restoration_verified": True}
-        (ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
-
-        # But PROOF.json says verified=false
-        (ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
 
         # Validate ledger - should REJECT based on proof alone
         validator = CatalyticLedgerValidator(ledger_dir)
