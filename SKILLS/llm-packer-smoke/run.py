@@ -129,18 +129,29 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Unknown scope in fixture: {scope}")
         return 1
     if split_lite:
-        required.extend(
-            [
-                "COMBINED/SPLIT_LITE/AGS-00_INDEX.md",
-                "COMBINED/SPLIT_LITE/AGS-01_CANON.md",
-                "COMBINED/SPLIT_LITE/AGS-02_ROOT.md",
-                "COMBINED/SPLIT_LITE/AGS-03_MAPS.md",
-                "COMBINED/SPLIT_LITE/AGS-04_CONTEXT.md",
-                "COMBINED/SPLIT_LITE/AGS-05_SKILLS.md",
-                "COMBINED/SPLIT_LITE/AGS-06_CONTRACTS.md",
-                "COMBINED/SPLIT_LITE/AGS-07_SYSTEM.md",
-            ]
-        )
+        if scope == "ags":
+            required.extend(
+                [
+                    "COMBINED/SPLIT_LITE/AGS-00_INDEX.md",
+                    "COMBINED/SPLIT_LITE/AGS-01_CANON.md",
+                    "COMBINED/SPLIT_LITE/AGS-02_ROOT.md",
+                    "COMBINED/SPLIT_LITE/AGS-03_MAPS.md",
+                    "COMBINED/SPLIT_LITE/AGS-04_CONTEXT.md",
+                    "COMBINED/SPLIT_LITE/AGS-05_SKILLS.md",
+                    "COMBINED/SPLIT_LITE/AGS-06_CONTRACTS.md",
+                    "COMBINED/SPLIT_LITE/AGS-07_SYSTEM.md",
+                ]
+            )
+        else:
+            required.extend(
+                [
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-00_INDEX.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-01_DOCS.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-02_CONFIG.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-03_TESTBENCH.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-04_SYSTEM.md",
+                ]
+            )
     if profile == "lite":
         required.extend(
             [

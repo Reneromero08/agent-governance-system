@@ -1,0 +1,29 @@
+{
+  "pack_dir": "MEMORY/LLM_PACKER/_packs/fixture-catalytic-dpt-split-lite",
+  "stamp": "fixture-catalytic-dpt-split-lite",
+  "verified": [
+    "meta/START_HERE.md",
+    "meta/ENTRYPOINTS.md",
+    "meta/FILE_TREE.txt",
+    "meta/FILE_INDEX.json",
+    "meta/REPO_OMITTED_BINARIES.json",
+    "meta/REPO_STATE.json",
+    "meta/PACK_INFO.json",
+    "meta/BUILD_TREE.txt",
+    "meta/CONTEXT.txt",
+    "COMBINED/SPLIT/CATALYTIC-DPT-00_INDEX.md",
+    "COMBINED/SPLIT/CATALYTIC-DPT-01_DOCS.md",
+    "COMBINED/SPLIT/CATALYTIC-DPT-02_CONFIG.md",
+    "COMBINED/SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
+    "COMBINED/SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
+    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-00_INDEX.md",
+    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-01_DOCS.md",
+    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-02_CONFIG.md",
+    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-03_TESTBENCH.md",
+    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-04_SYSTEM.md",
+    "COMBINED/CATALYTIC-DPT-FULL-COMBINED-fixture-catalytic-dpt-split-lite.md",
+    "COMBINED/CATALYTIC-DPT-FULL-COMBINED-fixture-catalytic-dpt-split-lite.txt",
+    "COMBINED/CATALYTIC-DPT-FULL-TREEMAP-fixture-catalytic-dpt-split-lite.md",
+    "COMBINED/CATALYTIC-DPT-FULL-TREEMAP-fixture-catalytic-dpt-split-lite.txt"
+  ]
+}

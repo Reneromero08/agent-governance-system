@@ -47,9 +47,6 @@ Purpose: Turn catalytic computing into an operational system: verifiable continu
 ### Repo usability
 - [x] Skills hygiene (scripts/assets/references pattern), MCP stdio server supports skill execution.
 
-### Hygiene to fix soon
-- [ ] Normalize changelog dates (treat changelog as audit material).
-
 ---
 
 # Phase 0: Freeze the Contract (schemas + run artifacts + enforcement)
