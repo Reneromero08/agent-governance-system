@@ -34,6 +34,7 @@ from PRIMITIVES.hash_toolbelt import (
     hash_describe,
     hash_grep,
     hash_read_text,
+    log_dereference_event,
 )
 
 
@@ -45,6 +46,13 @@ def _resolve_cas_root(*, run_id: str | None, cas_root: str | None) -> Path:
     return REPO_ROOT / "CONTRACTS" / "_runs" / run_id / "CAS"
 
 
+def _resolve_ledger_path(*, run_id: str | None) -> Path | None:
+    """Return ledger path if run_id is provided, else None."""
+    if run_id is None:
+        return None
+    return REPO_ROOT / "CONTRACTS" / "_runs" / run_id / "LEDGER.jsonl"
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="catalytic", description="Catalytic CLI")
     sub = parser.add_subparsers(dest="cmd", required=True)
@@ -52,6 +60,7 @@ def main() -> int:
     hash_p = sub.add_parser("hash", help="Expand-by-hash toolbelt")
     hash_p.add_argument("--run-id", default=None, help="Run ID (uses CONTRACTS/_runs/<run_id>/CAS)")
     hash_p.add_argument("--cas-root", default=None, help="CAS root directory (overrides --run-id)")
+    hash_p.add_argument("--timestamp", default="CATALYTIC-DPT-LEDGER-SENTINEL", help="Deterministic timestamp for ledger logging")
     hash_sub = hash_p.add_subparsers(dest="hash_cmd", required=True)
 
     read_p = hash_sub.add_parser("read", help="Read bounded bytes from a CAS object")
@@ -81,6 +90,10 @@ def main() -> int:
     cas_root = _resolve_cas_root(run_id=getattr(args, "run_id", None), cas_root=getattr(args, "cas_root", None))
     store = CatalyticStore(cas_root)
 
+    run_id = getattr(args, "run_id", None)
+    timestamp = getattr(args, "timestamp", "CATALYTIC-DPT-LEDGER-SENTINEL")
+    ledger_path = _resolve_ledger_path(run_id=run_id)
+
     try:
         if args.cmd == "hash" and args.hash_cmd == "read":
             out = hash_read_text(
@@ -91,6 +104,17 @@ def main() -> int:
                 end=args.end,
             )
             sys.stdout.write(out)
+
+            # Log dereference event if run context present
+            if ledger_path is not None:
+                log_dereference_event(
+                    run_id=run_id,
+                    timestamp=timestamp,
+                    ledger_path=ledger_path,
+                    command="read",
+                    hash_hex=args.sha256,
+                    bounds={"max_bytes": args.max_bytes, "start": args.start, "end": args.end},
+                )
             return 0
 
         if args.cmd == "hash" and args.hash_cmd == "grep":
@@ -103,10 +127,32 @@ def main() -> int:
             )
             for m in matches:
                 sys.stdout.write(m.format() + "\n")
+
+            # Log dereference event if run context present
+            if ledger_path is not None:
+                log_dereference_event(
+                    run_id=run_id,
+                    timestamp=timestamp,
+                    ledger_path=ledger_path,
+                    command="grep",
+                    hash_hex=args.sha256,
+                    bounds={"max_bytes": args.max_bytes, "max_matches": args.max_matches, "pattern": args.pattern},
+                )
             return 0
 
         if args.cmd == "hash" and args.hash_cmd == "describe":
             sys.stdout.write(hash_describe(store=store, hash_hex=args.sha256, max_bytes=args.max_bytes) + "\n")
+
+            # Log dereference event if run context present
+            if ledger_path is not None:
+                log_dereference_event(
+                    run_id=run_id,
+                    timestamp=timestamp,
+                    ledger_path=ledger_path,
+                    command="describe",
+                    hash_hex=args.sha256,
+                    bounds={"max_bytes": args.max_bytes},
+                )
             return 0
 
         if args.cmd == "hash" and args.hash_cmd == "ast":
@@ -120,6 +166,17 @@ def main() -> int:
                 )
                 + "\n"
             )
+
+            # Log dereference event if run context present
+            if ledger_path is not None:
+                log_dereference_event(
+                    run_id=run_id,
+                    timestamp=timestamp,
+                    ledger_path=ledger_path,
+                    command="ast",
+                    hash_hex=args.sha256,
+                    bounds={"max_bytes": args.max_bytes, "max_nodes": args.max_nodes, "max_depth": args.max_depth},
+                )
             return 0
 
     except Exception as e:

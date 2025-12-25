@@ -22,7 +22,7 @@ Build a verifiable catalytic runtime where:
 - [x] Phase 1.M Merkle implemented (deterministic manifest roots; tests) (commit `19a0c9c`)
 - [x] Phase 1.D Ledger implemented (append-only receipts; deterministic JSONL; tests) (commit: this changeset)
 - [x] Phase 1.P Proof wiring implemented (CAS/Merkle/Ledger; determinism tests) (commit: this changeset)
-- [ ] CI runs `CONTRACTS/runner.py`, but CAT-DPT `pytest` is not wired into CI yet
+- [x] CI runs CAT-DPT `pytest` (TMPDIR pinned under workspace; LAB + packs ignored). (commit: this changeset)
 - [x] Phase 1 substrate gate satisfied (CAS + Merkle + Ledger + Proof wiring)
 - [x] Phase 1X expand-by-hash toolbelt implemented (bounded read/grep/ast/describe) (commit: this changeset)
 
@@ -231,7 +231,7 @@ Status (verified):
 - [x] CLI: `TOOLS/catalytic.py` (`catalytic hash read|grep|describe|ast`) (commit: this changeset)
 - [x] Implementation: `CATALYTIC-DPT/PRIMITIVES/hash_toolbelt.py` (commit: this changeset)
 - [x] Testbench: `CATALYTIC-DPT/TESTBENCH/test_hash_toolbelt.py` (commit: this changeset)
-- [ ] Optional but recommended: dereference events logged to ledger (hash requested, bounds returned).
+- [x] Dereference events logged to ledger (hash requested, bounds returned) (commit: this changeset)
 
 ---
 
