@@ -95,6 +95,14 @@
       },
       "maxItems": 2048,
       "type": "array"
+    },
+    "expanded_facts": {
+      "type": "array",
+      "items": { "type": "string" }
+    },
+    "unresolved_symbols": {
+      "type": "array",
+      "items": { "type": "string" }
     }
   },
   "required": [

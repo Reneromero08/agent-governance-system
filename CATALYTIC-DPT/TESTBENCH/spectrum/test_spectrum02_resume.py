@@ -16,7 +16,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 # Constants
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
+REPO_ROOT = Path(__file__).resolve().parents[3]
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 SUPPORTED_VALIDATOR_VERSIONS = {"1.0.0", "1.0.1", "1.1.0"}
 
 
@@ -127,7 +128,7 @@ class SPECTRUM02Verifier:
         return {"valid": len(self.errors) == 0, "errors": self.errors}
 
 
-class TestSPECTRUM02Resume:
+class RunnerSPECTRUM02Resume:
     """Test suite for SPECTRUM-02 adversarial resume."""
 
     def __init__(self):
@@ -524,7 +525,13 @@ class TestSPECTRUM02Resume:
         )
 
 
+def test_spectrum02_resume():
+    """Pytest entry point."""
+    runner = RunnerSPECTRUM02Resume()
+    assert runner.run_all()
+
+
 if __name__ == "__main__":
-    tester = TestSPECTRUM02Resume()
-    success = tester.run_all()
+    runner = RunnerSPECTRUM02Resume()
+    success = runner.run_all()
     sys.exit(0 if success else 1)

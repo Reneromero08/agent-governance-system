@@ -15,8 +15,8 @@ import sys
 from pathlib import Path
 
 # Direct file import for MCP/server.py
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
-SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "MCP" / "server.py"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
@@ -30,7 +30,7 @@ VALIDATOR_SEMVER = mcp_server.VALIDATOR_SEMVER
 get_validator_build_id = mcp_server.get_validator_build_id
 
 
-class TestValidatorVersionIntegrity:
+class RunnerValidatorVersionIntegrity:
     """Tests for validator version provenance."""
 
     def __init__(self):
@@ -353,7 +353,13 @@ class TestValidatorVersionIntegrity:
             self._cleanup_run(run_id)
 
 
+def test_validator_version_integrity():
+    """Pytest entry point."""
+    runner = RunnerValidatorVersionIntegrity()
+    assert runner.run_all()
+
+
 if __name__ == "__main__":
-    tester = TestValidatorVersionIntegrity()
-    success = tester.run_all()
+    runner = RunnerValidatorVersionIntegrity()
+    success = runner.run_all()
     sys.exit(0 if success else 1)

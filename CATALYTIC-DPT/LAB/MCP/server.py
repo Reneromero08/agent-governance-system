@@ -23,7 +23,7 @@ from typing import Dict, List, Any, Optional
 # This would be replaced with actual MCP SDK
 # For now, we structure it as a mock MCP server
 
-PROJECT_ROOT = Path(__file__).parent.parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 
 # SPECTRUM-02 Validator version (for OUTPUT_HASHES.json binding)
 VALIDATOR_SEMVER = "1.0.0"

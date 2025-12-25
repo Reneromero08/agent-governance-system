@@ -15,8 +15,8 @@ from pathlib import Path
 from typing import Dict, List
 
 # Direct file import for MCP/server.py
-REPO_ROOT = Path(__file__).parent.parent.parent.parent
-SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "MCP" / "server.py"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
@@ -152,7 +152,7 @@ def verify_spectrum03_chain(
 # TEST CLASS
 # =============================================================================
 
-class TestSPECTRUM03Chain:
+class RunnerSPECTRUM03Chain:
     """Tests for SPECTRUM-03 chain verification."""
 
     def __init__(self):
@@ -563,7 +563,13 @@ class TestSPECTRUM03Chain:
             self._cleanup_test_base()
 
 
+def test_spectrum03_chain():
+    """Pytest entry point."""
+    runner = RunnerSPECTRUM03Chain()
+    assert runner.run_all()
+
+
 if __name__ == "__main__":
-    tester = TestSPECTRUM03Chain()
-    success = tester.run_all()
+    runner = RunnerSPECTRUM03Chain()
+    success = runner.run_all()
     sys.exit(0 if success else 1)
