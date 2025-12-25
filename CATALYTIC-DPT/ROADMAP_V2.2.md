@@ -24,7 +24,7 @@ Build a verifiable catalytic runtime where:
 - [x] Phase 1.P Proof wiring implemented (CAS/Merkle/Ledger; determinism tests) (commit: this changeset)
 - [ ] CI runs `CONTRACTS/runner.py`, but CAT-DPT `pytest` is not wired into CI yet
 - [x] Phase 1 substrate gate satisfied (CAS + Merkle + Ledger + Proof wiring)
-- [ ] Phase 1X expand-by-hash toolbelt is still blocked
+- [x] Phase 1X expand-by-hash toolbelt implemented (bounded read/grep/ast/describe) (commit: this changeset)
 
 Evidence (files + commits):
 - Phase 0: `CATALYTIC-DPT/SCHEMAS/*.schema.json`, `CATALYTIC-DPT/FIXTURES/phase0/`, `CATALYTIC-DPT/PRIMITIVES/preflight.py`, `CATALYTIC-DPT/PRIMITIVES/fs_guard.py`
@@ -52,10 +52,10 @@ DONE when all are true:
 - [x] Proof generation is wired to these primitives and is deterministic across reruns.
 
 ### Phase 1X Gate: Expand-by-hash usability
-BLOCKED until all are true:
-- [ ] `hash read`, `hash grep`, `hash ast`, `hash describe` exist.
-- [ ] Every output is bounded (bytes, matches, ranges) and deterministic.
-- [ ] Any tool capable of unbounded dumping is a violation and must be fixed.
+DONE when all are true:
+- [x] `hash read`, `hash grep`, `hash ast`, `hash describe` exist.
+- [x] Every output is bounded (bytes, matches, ranges) and deterministic.
+- [x] Any tool capable of unbounded dumping is a violation and must be fixed.
 
 ### Phase 1V Gate: Verifiers and validator identity
 DONE when all are true:
@@ -216,16 +216,21 @@ Status (verified):
 
 ---
 
-## PHASE 1X: Expand-by-hash toolbelt (BLOCKING, required for token efficiency)
+## PHASE 1X: Expand-by-hash toolbelt (DONE, required for token efficiency)
 Deliverables
-- [ ] `catalytic hash read <sha> --max-bytes N [--range a:b]`
-- [ ] `catalytic hash grep <sha> <pattern> --max-matches M --max-bytes N`
-- [ ] `catalytic hash ast <sha> --max-nodes K --max-depth D` (language-dependent)
-- [ ] `catalytic hash describe <sha> --max-bytes N`
+- [x] `catalytic hash read <sha> --max-bytes N [--start S] [--end E]`
+- [x] `catalytic hash grep <sha> <pattern> --max-matches M --max-bytes N`
+- [x] `catalytic hash ast <sha> --max-nodes K --max-depth D` (Python-only; otherwise `UNSUPPORTED_AST_FORMAT`)
+- [x] `catalytic hash describe <sha> --max-bytes N`
 
 Acceptance
-- [ ] Every command enforces explicit bounds (bytes, matches, ranges).
-- [ ] Deterministic outputs for same inputs and bounds.
+- [x] Every command enforces explicit bounds (bytes, matches, ranges).
+- [x] Deterministic outputs for same inputs and bounds.
+
+Status (verified):
+- [x] CLI: `TOOLS/catalytic.py` (`catalytic hash read|grep|describe|ast`) (commit: this changeset)
+- [x] Implementation: `CATALYTIC-DPT/PRIMITIVES/hash_toolbelt.py` (commit: this changeset)
+- [x] Testbench: `CATALYTIC-DPT/TESTBENCH/test_hash_toolbelt.py` (commit: this changeset)
 - [ ] Optional but recommended: dereference events logged to ledger (hash requested, bounds returned).
 
 ---
