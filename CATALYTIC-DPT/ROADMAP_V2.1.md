@@ -58,6 +58,7 @@ Deliverables
 - [x] SCHEMAS/validation_error.schema.json
 - [x] SCHEMAS/ledger.schema.json (finalized: strict validation, append-only semantics documented)
 - [x] SCHEMAS/proof.schema.json (NEW: restoration proof protocol)
+- [x] SCHEMAS/examples/ (minimal, human-readable demonstrations)
 - [x] FIXTURES/phase0/valid/ and FIXTURES/phase0/invalid/
 
 Rules
