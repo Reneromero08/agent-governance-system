@@ -107,11 +107,13 @@ Layer 1: Preflight (before execution) ✅ COMPLETE
 - [x] 10/10 preflight tests pass (test_preflight.py).
 - [ ] Resolve all hash references required for the run (or fail) - deferred to Phase 1.
 
-Layer 2: Runtime guard (during execution)
-- [x] Enforce allowed roots and forbid writes elsewhere (validate_config).
-- [x] Preflight validation integrated into catalytic_runtime.py (Phase 0 validation).
-- [ ] Record write events (see Phase 4 write tracing).
-- [x] Fail closed if restoration fails (hard fail if not restored).
+Layer 2: Runtime guard (during execution) ✅ COMPLETE
+- [x] Enforce allowed roots at write-time (PRIMITIVES/fs_guard.py).
+- [x] Guard all runtime file writes through FilesystemGuard wrapper.
+- [x] Fail closed immediately on contract violation (forbidden paths, path escapes).
+- [x] Stable validation_error objects with codes (WRITE_GUARD_*).
+- [x] 13/13 runtime guard tests pass (test_runtime_guard.py).
+- [ ] Record write events (deferred to Phase 4 write tracing).
 
 Layer 3: CI validation (after execution / PR gate) ✅ COMPLETE
 - [x] Verify restoration proof (catalytic_validator.py gates on PROOF.json).
@@ -159,13 +161,23 @@ Layer 3: CI validation (after execution / PR gate) ✅ COMPLETE
   - Error codes: JOBSPEC_SCHEMA_INVALID, PATH_ABSOLUTE, PATH_TRAVERSAL, PATH_ESCAPE, PATH_NOT_ALLOWED, PATH_FORBIDDEN, PATH_OVERLAP
   - Integrated into catalytic_runtime.py (called before execution)
 
+### Runtime Write Guard (Phase 0.3 Layer 2)
+- [x] PRIMITIVES/fs_guard.py: FilesystemGuard class
+  - Enforces allowed roots at write-time (fail-closed)
+  - Validates all write paths before allowing operations
+  - Checks: forbidden paths, path escapes, traversal, allowed roots
+  - Stable error codes: WRITE_GUARD_PATH_FORBIDDEN, WRITE_GUARD_PATH_ABSOLUTE, WRITE_GUARD_PATH_ESCAPE, WRITE_GUARD_PATH_TRAVERSAL, WRITE_GUARD_PATH_NOT_ALLOWED
+  - Wraps all runtime writes in catalytic_runtime.py
+  - guarded_write_text(), guarded_write_bytes(), guarded_mkdir() methods
+
 ### Test Suite
 - [x] test_restore_proof.py: 7 tests covering proof generation
 - [x] test_proof_gating.py: 4 tests covering acceptance logic
 - [x] test_canonical_artifacts.py: 3 tests covering artifact writer
 - [x] test_preflight.py: 10 tests covering preflight validation
+- [x] test_runtime_guard.py: 13 tests covering runtime write enforcement
 - [x] test_schemas.py: validates all 4 schemas (Draft-07)
-- [x] All tests passing (27/27)
+- [x] All tests passing (40/40)
 
 ### Exit Criteria Met
 - [x] Schemas locked (no implicit defaults, strict additionalProperties)
@@ -174,9 +186,11 @@ Layer 3: CI validation (after execution / PR gate) ✅ COMPLETE
 - [x] Proof is single source of truth (overrides all other signals)
 - [x] Deterministic behavior preserved (sorted keys, stable hash)
 - [x] Preflight validation enforces contract before execution (fail-closed)
+- [x] Runtime writes enforced at write-time (fail-closed on violation)
 - [x] Path safety rules enforced (relative, no traversal, allowed roots only)
 - [x] Input/output overlap detection prevents contract violations
-- [x] 3-layer enforcement model complete (preflight, runtime guard, CI validation)
+- [x] 3-layer enforcement model COMPLETE (preflight, runtime guard, CI validation)
+- [x] All layers fail-closed (no execution on preflight fail, no writes on guard fail, no acceptance without proof)
 
 ---
 
