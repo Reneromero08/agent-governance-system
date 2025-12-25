@@ -2,6 +2,18 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.36.0] - 2025-12-25
+
+### Phase 2: Demo of Measurable Reuse via Hash-First Dereference
+
+#### Added
+- **CATALYTIC-DPT/DEMOS/memoization_hash_reuse/**:
+  - Deterministic demo runner (`run_demo.py`) that produces baseline vs reuse artifacts.
+- **CONTRACTS/_runs/_demos/memoization_hash_reuse/**:
+  - Artifact-backed baseline/reuse evidence (PROOF.json, LEDGER.jsonl, bounded deref stats) and a comparison table.
+
+---
+
 ## [1.35.0] - 2025-12-25
 
 ### Phase 5: Artifact-Only Resumable Pipelines
