@@ -2,6 +2,20 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.35.0] - 2025-12-25
+
+### Phase 5: Artifact-Only Resumable Pipelines
+
+#### Added
+- **PIPELINES/pipeline_runtime.py**:
+  - Deterministic pipeline init/run/status with resume-safe state under `CONTRACTS/_runs/_pipelines/<pipeline_id>/`.
+- **TOOLS/catalytic.py**:
+  - Adds `catalytic pipeline run|status` commands (no timestamps; state is artifact-only).
+- **TESTBENCH/test_pipelines.py**:
+  - Proves deterministic init, resume without re-running completed steps, required per-step artifacts, and stable status output.
+
+---
+
 ## [1.34.0] - 2025-12-25
 
 ### Phase 2: Deterministic Job Memoization (Never Pay Twice)
