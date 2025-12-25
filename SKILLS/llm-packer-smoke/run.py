@@ -123,6 +123,7 @@ def main(input_path: Path, output_path: Path) -> int:
                 "COMBINED/SPLIT/CATALYTIC-DPT-02_CONFIG.md",
                 "COMBINED/SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
                 "COMBINED/SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
+                "COMBINED/SPLIT/CATALYTIC-DPT-05_LAB.md",
             ]
         )
     else:
@@ -150,6 +151,7 @@ def main(input_path: Path, output_path: Path) -> int:
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-02_CONFIG.md",
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-03_TESTBENCH.md",
                     "COMBINED/SPLIT_LITE/CATALYTIC-DPT-04_SYSTEM.md",
+                    "COMBINED/SPLIT_LITE/CATALYTIC-DPT-05_LAB.md",
                 ]
             )
     if profile == "lite":
