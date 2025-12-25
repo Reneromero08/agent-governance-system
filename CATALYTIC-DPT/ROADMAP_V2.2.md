@@ -342,10 +342,13 @@ Acceptance
 
 ## PHASE 5: Pipelines
 Deliverables
+- [x] Minimal pipeline runner (init/run/status/resume; artifact-only state). (commit: this changeset)
 - [ ] Compose verified runs into durable workflows.
 - [ ] Pipelines are still artifact-first, replayable, and proof-gated.
 
 Acceptance
+- [x] Pipeline state is resume-safe from artifacts only (STATE.json + per-step RUN_REF.json).
+- [x] Each step produces normal run artifacts under `CONTRACTS/_runs/<run_id>/` (PROOF.json, DOMAIN_ROOTS.json, LEDGER.jsonl).
 - [ ] Pipeline execution produces a verifiable chain of bundles and proofs.
 - [ ] Resume works without chat logs or narrative state.
 
