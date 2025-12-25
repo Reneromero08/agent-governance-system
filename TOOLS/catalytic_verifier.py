@@ -59,67 +59,102 @@ class VerifierCLI:
     def verify_single_bundle(
         self,
         run_dir: Path,
-        strict: bool = False,
+        strict: bool = True,
         check_proof: bool = True
     ) -> tuple[bool, dict]:
-        """Verify a single bundle.
+        """Verify a single bundle using SPECTRUM-05.
 
         Args:
             run_dir: Path to run directory
-            strict: Enable strict verification
-            check_proof: Check PROOF.json
+            strict: Enable strict verification (mandatory crypto)
+            check_proof: Not used (included in SPECTRUM-05)
 
         Returns:
             (success, report)
         """
-        result = self.verifier.verify_bundle(
+        result = self.verifier.verify_bundle_spectrum05(
             run_dir=run_dir,
-            strict=strict,
-            check_proof=check_proof
+            strict=strict
         )
 
+        success = result["ok"]
         report = {
             "type": "bundle",
             "run_dir": str(run_dir),
-            "valid": result["valid"],
-            "errors": result["errors"],
-            "error_count": len(result["errors"])
+            "valid": success,
+            "ok": success,
+            "code": result["code"],
+            "details": result.get("details", {}),
+            "message": result.get("message", ""),
+            "bundle_root": result.get("bundle_root")
         }
 
-        return result["valid"], report
+        # If it failed, we want to match the old 'errors' format slightly for backward compatibility in the report
+        if not success:
+            report["errors"] = [{
+                "code": result["code"],
+                "message": result.get("message", "Verification failed"),
+                "details": result.get("details", {})
+            }]
+            report["error_count"] = 1
+        else:
+            report["errors"] = []
+            report["error_count"] = 0
+
+        return success, report
 
     def verify_chain(
         self,
         run_dirs: List[Path],
-        strict: bool = False,
+        strict: bool = True,
         check_proof: bool = True
     ) -> tuple[bool, dict]:
-        """Verify a chain of bundles.
+        """Verify a chain of bundles using SPECTRUM-05.
 
         Args:
             run_dirs: List of run directories (in chain order)
-            strict: Enable strict verification
-            check_proof: Check PROOF.json
+            strict: Enable strict verification (mandatory crypto)
+            check_proof: Not used
 
         Returns:
             (success, report)
         """
-        result = self.verifier.verify_chain(
+        result = self.verifier.verify_chain_spectrum05(
             run_dirs=run_dirs,
-            strict=strict,
-            check_proof=check_proof
+            strict=strict
         )
 
+        success = result["ok"]
         report = {
             "type": "chain",
             "run_dirs": [str(d) for d in run_dirs],
             "run_count": len(run_dirs),
-            "valid": result["valid"],
-            "errors": result["errors"],
-            "error_count": len(result["errors"])
+            "valid": success,
+            "ok": success,
+            "code": result["code"],
+            "details": result.get("details", {}),
+            "message": result.get("message", ""),
+            "chain_root": result.get("chain_root")
         }
 
-        return result["valid"], report
+        if not success:
+            # Inject run_id if available
+            err_details = result.get("details", {})
+            if "run_id" in result:
+                err_details["run_id"] = result["run_id"]
+
+            report["errors"] = [{
+                "code": result["code"],
+                "message": result.get("message", "Chain verification failed"),
+                "run_id": result.get("run_id"),
+                "details": err_details
+            }]
+            report["error_count"] = 1
+        else:
+            report["errors"] = []
+            report["error_count"] = 0
+
+        return success, report
 
     def verify_chain_from_directory(
         self,
