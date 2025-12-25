@@ -41,6 +41,7 @@ def test_memoization_miss_then_hit_then_invalidate(tmp_path: Path) -> None:
 
     # Clean any prior state.
     _rm(run_dir)
+    _rm(cache_root)
     _rm(REPO_ROOT / durable_output)
     _rm(REPO_ROOT / side_effect)
 
@@ -151,5 +152,6 @@ def test_memoization_miss_then_hit_then_invalidate(tmp_path: Path) -> None:
     finally:
         # Cleanup to keep repo workspace clean.
         _rm(run_dir)
+        _rm(cache_root)
         _rm(REPO_ROOT / durable_output)
         _rm(REPO_ROOT / side_effect)
