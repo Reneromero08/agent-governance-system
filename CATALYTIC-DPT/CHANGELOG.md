@@ -2,6 +2,22 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.26.0] - 2025-12-25
+
+### Phase 1.M: Merkle Roots per Domain Implemented
+
+#### Added
+- **PRIMITIVES/merkle.py**:
+  - Deterministic Merkle root computation for domain manifests `{ normalized_path -> sha256_hex }`.
+  - Strict path normalization (reuses CAS `normalize_relpath`) and fail-closed validation for malformed paths/hashes.
+  - Deterministic leaf ordering (lexicographic by normalized_path) and standard odd-leaf padding.
+  - Adversarial rejection: non-normalized paths and duplicate hash bound to different paths.
+- **TESTBENCH/test_merkle.py**:
+  - Determinism tests (order-independence, stable roots across runs).
+  - Adversarial tests for non-normalized paths, invalid hashes, duplicate-hash binding, and odd-leaf padding correctness.
+
+---
+
 ## [1.25.0] - 2025-12-25
 
 ### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)
