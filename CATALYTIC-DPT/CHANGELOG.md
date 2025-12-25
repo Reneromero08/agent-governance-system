@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.25.0] - 2025-12-25
+
+### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)
+
+#### Added
+- **PRIMITIVES/restore_runner.py**:
+  - Implements `restore_bundle()` and `restore_chain()` exactly per SPECTRUM-06 (preflight/plan/execute/verify), including reject-if-exists, staging+rename, deterministic ordering, and rollback rules.
+  - Enforces strict SPECTRUM-05 verification gating and PROOF.json verified=true requirement.
+  - Emits SPECTRUM-06 frozen success artifacts (`RESTORE_MANIFEST.json`, `RESTORE_REPORT.json`) with canonical JSON bytes and invariant checks.
+  - Implements restore-specific failure codes and deterministic selection rules.
+- **TOOLS/catalytic_restore.py**:
+  - Minimal CLI for restoring a single bundle or explicit chain (JSON output, nonzero exit on failure).
+- **TESTBENCH/test_restore_runner.py**:
+  - Restore-specific tests for gating, path safety, reject-if-exists, rollback cleanup, success artifacts, and chain all-or-nothing behavior.
+
+---
+
 ## [1.24.0] - 2025-12-25
 
 ### SPECTRUM-06: Restore Runner Semantics Frozen
