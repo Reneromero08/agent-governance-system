@@ -33,6 +33,27 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.28.0] - 2025-12-25
+
+### Phase 1.P: Proof Generation Wired to CAS/Merkle/Ledger; Determinism Proven
+
+#### Changed
+- **PRIMITIVES/restore_proof.py**:
+  - Domain root hash now computed via Phase 1 Merkle primitive (with deterministic empty-manifest sentinel) instead of ad-hoc concatenation.
+  - Adds helpers for canonical JSON bytes and CAS-backed domain manifest computation.
+- **TOOLS/catalytic_runtime.py**:
+  - Snapshots now compute bytes hashes via CAS (streaming, idempotent) and normalize paths deterministically.
+  - `DOMAIN_ROOTS.json` now uses Merkle roots per domain (deterministic serialization).
+  - `LEDGER.jsonl` now appends schema-valid records via Phase 1 Ledger (canonical JSONL; caller-supplied deterministic timestamp sentinel).
+  - `PROOF.json` now uses canonical JSON bytes and references hashes for jobspec + ledger.
+
+#### Added
+- **TESTBENCH/test_proof_wiring.py**:
+  - Rerun determinism test: two independent runs emit byte-identical `PROOF.json` and `DOMAIN_ROOTS.json`.
+  - Tamper detection: hash mismatch is detected and fails closed.
+
+---
+
 ## [1.25.0] - 2025-12-25
 
 ### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)
