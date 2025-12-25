@@ -176,8 +176,8 @@ Layer 3: CI validation (after execution / PR gate) ✅ COMPLETE
 - [x] test_canonical_artifacts.py: 3 tests covering artifact writer
 - [x] test_preflight.py: 10 tests covering preflight validation
 - [x] test_runtime_guard.py: 13 tests covering runtime write enforcement
-- [x] test_schemas.py: validates all 4 schemas (Draft-07)
-- [x] All tests passing (40/40)
+- [x] test_schemas.py: 1 test (validates all 4 schemas)
+- [x] All tests passing (38/38)
 
 ### Exit Criteria Met
 - [x] Schemas locked (no implicit defaults, strict additionalProperties)
