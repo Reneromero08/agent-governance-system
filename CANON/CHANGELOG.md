@@ -5,13 +5,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
-- `CATALYTIC-DPT/CHANGELOG.md`: Isolated changelog for the Catalytic Computing department.
-- `CATALYTIC-DPT/swarm_config.json`: Role-to-model mapping configuration for multi-agent swarm.
-- `TOOLS/catalytic_runtime.py` - CMP-01 runtime implementing 5-phase catalytic lifecycle (snapshot, execute, verify, record). Works with any command.
-- `TOOLS/catalytic_validator.py` - Run ledger validator for CMP-01 compliance checking in CI (restoration proof, output roots).
-- `CONTEXT/research/Catalytic Computing/CATALYTIC_IMPLEMENTATION_REPORT.md` - Comprehensive report on working prototype: architecture, PoC, what works well, improvements, integration opportunities.
-- `CANON/CATALYTIC_COMPUTING.md` - Canonical note defining catalytic computing for AGS (formal theory, engineering patterns, boundaries).
-- `CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` documenting the decision to add catalytic computing to canon.
+- (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
 - `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing skill contract (SKILL.md, run.py, validate.py, fixtures).
@@ -26,8 +20,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
 ### Changed
-- Refactored `CATALYTIC-DPT` documentation to be model-agnostic (replaced specific model names with God/President/Governor/Ant roles).
-- Renamed `CODEX_SOP.json` to `GOVERNOR_SOP.json` and `HANDOFF_TO_CODEX.md` to `HANDOFF_TO_GOVERNOR.md` for role alignment.
+- (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
 - Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/` (ADR-015).
