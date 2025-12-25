@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.24.0] - 2025-12-25
+
+### SPECTRUM-06: Restore Runner Semantics Frozen
+
+#### Added
+- **SPECTRUM/SPECTRUM-06.md** (NEW):
+  - SPECTRUM-06: Frozen specification for Restore Runner semantics.
+  - Defines eligibility rules: SPECTRUM-05 strict verification required, PROOF.json verified=true, OUTPUT_HASHES.json present.
+  - Restore target model: explicit restore_root, path safety rules, traversal rejection.
+  - Single-bundle restore: 4-phase procedure (preflight, plan, execute, verify).
+  - Chain restore: per-run subfolder isolation, deterministic order, chain-level atomicity.
+  - Overwrite policy: reject-if-exists (no implicit overwrites).
+  - Atomicity model: staging directory + final rename.
+  - Error codes: RESTORE_INELIGIBLE, PATH_ESCAPE_DETECTED, TARGET_EXISTS, etc.
+
+---
+
 ## [1.23.0] - 2025-12-25
 
 ### Stability Lock: Verifier API/CLI Frozen and Error Codes Centralized
