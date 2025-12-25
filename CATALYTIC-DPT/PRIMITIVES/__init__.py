@@ -36,12 +36,7 @@ __all__ = [
     "MicroOrchestrator",
 ]
 
-
-class CatalyticStore:
-    """Content-addressable storage. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("CatalyticStore is a Phase 1 primitive - not yet implemented")
-
+from .cas_store import CatalyticStore  # noqa: E402
 
 class MerkleTree:
     """Merkle tree for root digests. Not yet implemented."""
