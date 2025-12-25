@@ -10,8 +10,6 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - **PRIMITIVES/verify_bundle.py**:
   - Centralized `ERROR_CODES` constant map (one source of truth for all SPECTRUM-05 errors).
   - Mandatory Ed25519 dependency enforcement: Returns `ALGORITHM_UNSUPPORTED` if `cryptography` library is missing in strict mode.
-- **SPECTRUM/SPECTRUM-05.md**:
-  - Added "Section 12: Implementation Requirements" (Mandatory Ed25519, Artifact-only verification, Deterministic JSON canonicalization).
 - **TESTBENCH/test_verifier_freeze.py**: New test suite for stable API guarantees.
 
 #### Changed
