@@ -1,4 +1,6 @@
 param(
+  [ValidateSet("ags", "catalytic-dpt")]
+  [string]$Scope = "ags",
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
   [string]$Mode = "full",
@@ -55,7 +57,9 @@ if ($PSBoundParameters.ContainsKey("NoCombined")) { $combinedEnabled = $false }
 if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
 
 if ($OutDir -eq "") {
-  if ($Profile -eq "lite") {
+  if ($Scope -eq "catalytic-dpt") {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-$Stamp"
+  } elseif ($Profile -eq "lite") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-lite-$Stamp"
   } else {
     $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-$Stamp"
@@ -65,6 +69,7 @@ if ($OutDir -eq "") {
 $args = @(
   "python",
   $packer,
+  "--scope", $Scope,
   "--mode", $Mode,
   "--profile", $Profile,
   "--out-dir", $OutDir

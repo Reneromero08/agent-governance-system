@@ -1,0 +1,314 @@
+{
+  "$id": "https://example.local/schemas/commonsense_entry.schema.json",
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "additionalProperties": false,
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "logic_rule"
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "rule"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "kind": {
+            "const": "commonsense"
+          }
+        }
+      },
+      "then": {
+        "not": {
+          "required": [
+            "rule"
+          ]
+        }
+      }
+    }
+  ],
+  "properties": {
+    "actions": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "args": {
+            "type": "object"
+          },
+          "target": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "tool": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "assert",
+              "suggest",
+              "derive",
+              "tool_call"
+            ],
+            "type": "string"
+          },
+          "value": {}
+        },
+        "required": [
+          "type"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "type": "array"
+    },
+    "checks": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "args": {
+            "type": "object"
+          },
+          "expected": {},
+          "expr": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "id": {
+            "pattern": "^[A-Z][A-Z0-9_]{2,32}$",
+            "type": "string"
+          },
+          "tool": {
+            "maxLength": 200,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "predicate",
+              "tool_call",
+              "unit_test"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "id",
+          "type"
+        ],
+        "type": "object"
+      },
+      "maxItems": 32,
+      "type": "array"
+    },
+    "confidence": {
+      "description": "Calibration score for retrieval tie-breaks; not truth.",
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "type": "number"
+    },
+    "id": {
+      "description": "Stable uppercase ID used as a symbolic handle (e.g., CS_GRAVITY_01).",
+      "pattern": "^[A-Z][A-Z0-9_]{2,32}$",
+      "type": "string"
+    },
+    "kind": {
+      "description": "Distinguishes a stored prior vs an executable rule.",
+      "enum": [
+        "commonsense",
+        "logic_rule"
+      ],
+      "type": "string"
+    },
+    "priority": {
+      "description": "Deterministic tiebreaker before confidence (higher wins).",
+      "maximum": 1000,
+      "minimum": -1000,
+      "type": "integer"
+    },
+    "rule": {
+      "additionalProperties": false,
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "kind": {
+                "const": "logic_rule"
+              }
+            }
+          },
+          "then": {}
+        }
+      ],
+      "description": "Only for kind=logic_rule",
+      "properties": {
+        "if_all": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "if_any": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "type": "array"
+        },
+        "then": {
+          "items": {
+            "additionalProperties": false,
+            "properties": {
+              "note": {
+                "maxLength": 500,
+                "type": "string"
+              },
+              "op": {
+                "enum": [
+                  "set",
+                  "unset",
+                  "add",
+                  "remove",
+                  "emit"
+                ],
+                "type": "string"
+              },
+              "path": {
+                "maxLength": 200,
+                "minLength": 1,
+                "type": "string"
+              },
+              "value": {}
+            },
+            "required": [
+              "op"
+            ],
+            "type": "object"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "unless": {
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "type": "array"
+        }
+      },
+      "required": [
+        "if_all",
+        "then"
+      ],
+      "type": "object"
+    },
+    "scope": {
+      "additionalProperties": false,
+      "properties": {
+        "applies_when": {
+          "description": "Conjunction of predicates that must all hold for the entry to apply.",
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "type": "array"
+        },
+        "not_when": {
+          "description": "Predicates that veto applicability (any match disables).",
+          "items": {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          "maxItems": 32,
+          "type": "array"
+        }
+      },
+      "required": [
+        "applies_when"
+      ],
+      "type": "object"
+    },
+    "sources": {
+      "items": {
+        "additionalProperties": false,
+        "properties": {
+          "ref": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "type": {
+            "enum": [
+              "note",
+              "url",
+              "paper",
+              "book",
+              "chat",
+              "fixture"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "type",
+          "ref"
+        ],
+        "type": "object"
+      },
+      "maxItems": 16,
+      "type": "array"
+    },
+    "statement": {
+      "description": "Human-readable UI statement (optional for machines, required for audit).",
+      "maxLength": 2000,
+      "minLength": 3,
+      "type": "string"
+    },
+    "symbolic": {
+      "description": "Optional symbolic/IR shorthand for this entry.",
+      "maxLength": 500,
+      "minLength": 1,
+      "type": "string"
+    },
+    "tags": {
+      "items": {
+        "pattern": "^[a-z0-9][a-z0-9_-]{0,40}$",
+        "type": "string"
+      },
+      "maxItems": 64,
+      "type": "array"
+    },
+    "version": {
+      "description": "Semantic version of the entry.",
+      "pattern": "^[0-9]+\\.[0-9]+(\\.[0-9]+)?$",
+      "type": "string"
+    }
+  },
+  "required": [
+    "id",
+    "kind",
+    "statement",
+    "scope",
+    "confidence"
+  ],
+  "title": "CommonSenseEntry",
+  "type": "object"
+}
