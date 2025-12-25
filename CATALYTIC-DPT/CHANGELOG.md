@@ -70,6 +70,18 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.30.0] - 2025-12-25
+
+### Phase 1V: CI Enforces Strict Verification by Default
+
+#### Changed
+- **.github/workflows/contracts.yml**:
+  - Adds a strict-mode SPECTRUM-05 verification step that generates a deterministic signed bundle and verifies it with `--strict` under `CI=true`.
+- **TOOLS/catalytic_verifier.py**:
+  - Refuses to run without `--strict` when `CI` is set (prevents silent downgrade paths in CI).
+
+---
+
 ## [1.25.0] - 2025-12-25
 
 ### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)
