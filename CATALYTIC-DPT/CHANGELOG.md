@@ -54,6 +54,22 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.29.0] - 2025-12-25
+
+### Phase 1X: Expand-by-Hash Toolbelt (Bounded Read/Grep/Ast/Describe)
+
+#### Added
+- **TOOLS/catalytic.py**:
+  - Unified `catalytic hash` CLI with bounded subcommands: `read`, `grep`, `describe`, `ast`.
+  - Hash-first dereference: operates only on CAS objects by SHA-256 (no path reads).
+  - Requires explicit CAS location via `--run-id` or `--cas-root`.
+- **PRIMITIVES/hash_toolbelt.py**:
+  - Deterministic, bounded implementations for read/grep/describe/ast (Python-only AST; otherwise `UNSUPPORTED_AST_FORMAT`).
+- **TESTBENCH/test_hash_toolbelt.py**:
+  - Tests for bounds enforcement, range reads, deterministic outputs, match limits, AST truncation, and invalid hash rejection.
+
+---
+
 ## [1.25.0] - 2025-12-25
 
 ### Implemented Restore Runner per SPECTRUM-06 (Gated by SPECTRUM-05 Strict Acceptance)

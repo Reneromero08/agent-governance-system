@@ -139,6 +139,15 @@ class CatalyticStore:
                     break
                 out.write(chunk)
 
+    def object_path(self, hash_hex: str) -> Path:
+        """
+        Return the deterministic on-disk path for a stored object.
+
+        This is a read-only helper for bounded tooling (expand-by-hash).
+        """
+        hash_hex = self._validate_hash(hash_hex)
+        return self.objects_dir / hash_hex[0:2] / hash_hex[2:4] / hash_hex
+
     def _object_path(self, digest: str) -> Path:
         digest = self._validate_hash(digest)
         return self.objects_dir / digest[0:2] / digest[2:4] / digest
