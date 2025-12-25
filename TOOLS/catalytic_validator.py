@@ -6,9 +6,11 @@ Catalytic Run Ledger Validator: Verify CMP-01 compliance for a completed run.
 Validates:
 1. Run info schema is present and valid
 2. PRE and POST manifests exist
-3. RESTORE_DIFF is empty (restoration successful)
+3. PROOF.json exists and has verified=true (restoration proof-gated)
 4. Durable outputs are listed and exist
 5. No outputs appear outside durable roots
+
+Acceptance is STRICTLY proof-driven: a run is accepted iff PROOF.json.verified == true.
 
 Usage:
   python catalytic_validator.py --run-dir CONTRACTS/_runs/<run_id>
@@ -18,6 +20,10 @@ import json
 import sys
 from pathlib import Path
 from typing import Dict, Tuple
+
+# Add CATALYTIC-DPT to path
+sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
+from PRIMITIVES.restore_proof import RestorationProofValidator
 
 
 class CatalyticLedgerValidator:
@@ -30,7 +36,7 @@ class CatalyticLedgerValidator:
 
     def validate_structure(self) -> bool:
         """Check required files exist."""
-        required_files = ["RUN_INFO.json", "PRE_MANIFEST.json", "POST_MANIFEST.json", "RESTORE_DIFF.json", "OUTPUTS.json", "STATUS.json"]
+        required_files = ["RUN_INFO.json", "PRE_MANIFEST.json", "POST_MANIFEST.json", "RESTORE_DIFF.json", "OUTPUTS.json", "STATUS.json", "PROOF.json"]
 
         for filename in required_files:
             path = self.ledger_dir / filename
@@ -49,6 +55,7 @@ class CatalyticLedgerValidator:
             self.restore_diff = json.loads((self.ledger_dir / "RESTORE_DIFF.json").read_text())
             self.outputs = json.loads((self.ledger_dir / "OUTPUTS.json").read_text())
             self.status = json.loads((self.ledger_dir / "STATUS.json").read_text())
+            self.proof = json.loads((self.ledger_dir / "PROOF.json").read_text())
         except json.JSONDecodeError as e:
             self.errors.append(f"Invalid JSON: {e}")
             return False
@@ -63,22 +70,52 @@ class CatalyticLedgerValidator:
         return True
 
     def validate_restoration(self) -> bool:
-        """Check RESTORE_DIFF is empty (hard requirement)."""
-        if not isinstance(self.restore_diff, dict):
-            self.errors.append("RESTORE_DIFF is not a dict")
+        """
+        PROOF-GATED ACCEPTANCE: Check PROOF.json has verified=true.
+
+        This is the ONLY source of truth for restoration acceptance.
+        No heuristics, no logs, no RESTORE_DIFF inspection.
+        """
+        # Validate PROOF.json structure
+        if not isinstance(self.proof, dict):
+            self.errors.append("PROOF.json is not a dict")
             return False
 
-        for domain, diff in self.restore_diff.items():
-            if diff.get("added") or diff.get("removed") or diff.get("changed"):
-                self.errors.append(
-                    f"Restoration failed for domain {domain}: {json.dumps(diff, indent=2)}"
-                )
-                return False
-
-        if not self.status.get("restoration_verified"):
-            self.errors.append("Status indicates restoration not verified")
+        if "restoration_result" not in self.proof:
+            self.errors.append("PROOF.json missing restoration_result")
             return False
 
+        restoration_result = self.proof["restoration_result"]
+
+        if not isinstance(restoration_result, dict):
+            self.errors.append("restoration_result is not a dict")
+            return False
+
+        if "verified" not in restoration_result:
+            self.errors.append("restoration_result missing 'verified' field")
+            return False
+
+        if "condition" not in restoration_result:
+            self.errors.append("restoration_result missing 'condition' field")
+            return False
+
+        # HARD GATE: verified must be exactly true
+        if restoration_result["verified"] is not True:
+            condition = restoration_result.get("condition", "UNKNOWN")
+            self.errors.append(
+                f"PROOF-GATED REJECTION: verified={restoration_result['verified']}, condition={condition}"
+            )
+
+            # Surface mismatches if present
+            if "mismatches" in restoration_result:
+                mismatches = restoration_result["mismatches"]
+                self.errors.append(f"Restoration failures: {len(mismatches)} mismatches")
+                for mismatch in mismatches[:5]:  # Show first 5
+                    self.errors.append(f"  - {mismatch.get('path')}: {mismatch.get('type')}")
+
+            return False
+
+        # SUCCESS: proof verified
         return True
 
     def validate_outputs(self) -> bool:
