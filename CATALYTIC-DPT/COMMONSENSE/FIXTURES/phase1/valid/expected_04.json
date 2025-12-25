@@ -1,0 +1,6 @@
+{
+  "must_emit": [],
+  "must_select": [
+    "CS_DEFAULT_PHYSICS"
+  ]
+}

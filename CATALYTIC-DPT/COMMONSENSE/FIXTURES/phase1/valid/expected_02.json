@@ -1,0 +1,11 @@
+{
+  "must_emit": [
+    {
+      "target": "jobspec",
+      "type": "schema_validate"
+    }
+  ],
+  "must_select": [
+    "LR_SCHEMA_VALIDATE_BEFORE_RUN"
+  ]
+}

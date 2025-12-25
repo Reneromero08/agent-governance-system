@@ -1,0 +1,23 @@
+{
+  "confidence": 0.5,
+  "id": "LR_BAD_OP",
+  "kind": "logic_rule",
+  "rule": {
+    "if_all": [
+      "a"
+    ],
+    "then": [
+      {
+        "op": "explode",
+        "path": "x"
+      }
+    ]
+  },
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "version": "0.1.0"
+}
