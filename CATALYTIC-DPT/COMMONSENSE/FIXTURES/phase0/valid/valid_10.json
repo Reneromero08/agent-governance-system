@@ -1,0 +1,16 @@
+{
+  "confidence": 0.9,
+  "id": "CS_PREFER_DETERMINISM",
+  "kind": "commonsense",
+  "scope": {
+    "applies_when": [
+      "domain:hashing"
+    ]
+  },
+  "statement": "Prefer deterministic ordering/formatting for artifacts that will be hashed.",
+  "tags": [
+    "determinism",
+    "hash"
+  ],
+  "version": "0.1.0"
+}
