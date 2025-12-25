@@ -336,7 +336,7 @@ Acceptance
 Deliverables
 - [ ] Adversarial test suite expands: corrupted artifacts, partial state, path attacks, malformed proofs, timing side channels (as feasible).
 - [ ] Tighten guards as needed, always with fixtures and regression tests.
-- [ ] Fix ledger.schema.json $ref resolution (Draft7)
+- [x] Fix ledger.schema.json $ref resolution (Draft7) (commit: this changeset)
 Note: currently causes ledger/proof tests to fail; discovered after Phase 1 closure.
 
 Acceptance
