@@ -2,7 +2,14 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
-## [1.11.0] - 2024-12-24
+## [1.12.0] - 2025-12-24
+
+### Changed
+- Roadmap updated to v2.1 with expanded phases, concrete run artifacts, and enforcement model.
+- Archived ROADMAP.md to ARCHIVE/ROADMAP.md as historical intent.
+- Fixed inconsistent changelog dates (normalized all entries to 2025-12-24).
+
+## [1.11.0] - 2025-12-24
 
 ### Added
 - **SPECTRUM-03 Chain Verification**: Temporal integrity across sequences of runs using bundle-only memory.
