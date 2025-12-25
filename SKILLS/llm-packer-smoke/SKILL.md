@@ -13,7 +13,7 @@ Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a mini
 ## Inputs
 
 - `input.json`:
-  - `scope` (string): `ags` (default) or `catalytic-dpt`.
+  - `scope` (string): `ags` (default), `catalytic-dpt` (CAT DPT without LAB), or `catalytic-dpt-lab` (LAB-only).
   - `out_dir` (string): output directory for the pack, relative to the repo root and under `MEMORY/LLM_PACKER/_packs/`.
   - `mode` (string): `full` or `delta`.
   - `profile` (string): `full` or `lite` (LITE is supported for `ags` only).
