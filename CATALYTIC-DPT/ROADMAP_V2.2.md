@@ -283,7 +283,7 @@ Deliverables
 - [x] Implement fail-closed error codes and adversarial fixtures.
 
 Acceptance
-- [ ] Two independent implementations produce identical verification results.
+- [x] Two independent implementations produce identical verification results. (commit: this changeset)
 - [x] Any ambiguity rejects (multiple keys, multiple signatures, malformed fields, deviations from canonicalization).
 
 Status (verified):
@@ -336,6 +336,8 @@ Acceptance
 Deliverables
 - [ ] Adversarial test suite expands: corrupted artifacts, partial state, path attacks, malformed proofs, timing side channels (as feasible).
 - [ ] Tighten guards as needed, always with fixtures and regression tests.
+- [ ] Fix ledger.schema.json $ref resolution (Draft7)
+Note: currently causes ledger/proof tests to fail; discovered after Phase 1 closure.
 
 Acceptance
 - [ ] Fail-closed everywhere.
