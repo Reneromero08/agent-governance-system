@@ -18,7 +18,7 @@ def main() -> int:
     parser.add_argument("--out-dir", default="", help="Output directory (must be under MEMORY/LLM_PACKER/_packs/).")
     parser.add_argument("--combined", action="store_true")
     parser.add_argument("--stamp", default="", help="Stamp for combined output filenames.")
-    parser.add_argument("--zip", action="store_true", help="Write a zip archive under MEMORY/LLM_PACKER/_packs/archive/.")
+    parser.add_argument("--zip", action="store_true", help="Write a zip archive under MEMORY/LLM_PACKER/_packs/_system/archive/.")
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir) if args.out_dir else None
@@ -41,4 +41,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-
