@@ -239,19 +239,17 @@ Acceptance
 - [x] Tamper/missing cases correctly emit verified=false with condition codes.
 - [x] PROOF.json validates against schema (Draft-07).
 
-## 1.5 Bundle/Chain Verifier ✅ COMPLETE (Phase 1 Option #1)
+## 1.5 Bundle/Chain Verifier ✅ COMPLETE (SPECTRUM-05 Stable)
 Deliverables (implemented as PRIMITIVES/verify_bundle.py + TOOLS/catalytic_verifier.py)
-- [x] BundleVerifier primitive for SPECTRUM-02 bundle verification
-  - Single bundle verification (verify_bundle)
-  - Chain verification (verify_chain) with reference integrity
-  - Forbidden artifacts enforcement (logs/, tmp/, transcript.json)
-  - Fail-closed verification (no heuristics, no logs, no side channels)
-  - PROOF.json gating support (verified=true required)
+- [x] BundleVerifier primitive (SPECTRUM-05 stable):
+  - [x] verify_bundle_spectrum05: stable API + return shape
+  - [x] verify_chain_spectrum05: stable API + return shape
+  - [x] Centralized ERROR_CODES map (SPECTRUM-05 conformance)
+  - [x] Mandatory Ed25519 dependency (fail-closed)
 - [x] CLI entrypoint: catalytic_verifier.py
-  - Single bundle mode: --run-dir
-  - Chain mode: --chain
-  - Chain directory mode: --chain-dir
-  - JSON output support: --json
+  - [x] Stable CLI surface (__doc__ verified)
+  - [x] Machine-readable JSON output (--json)
+  - [x] Alphabetical chain-dir ordering rule
 
 Acceptance
 - [x] Verifier accepts valid bundles and chains (18/18 tests pass)

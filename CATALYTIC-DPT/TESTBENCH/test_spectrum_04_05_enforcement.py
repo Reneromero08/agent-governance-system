@@ -178,9 +178,10 @@ def test_ed25519_signature_verification():
     assert not is_valid, "Invalid signature must not verify"
 
     # Verify invalid signature (tampered signature)
-    tampered_sig = signature_hex[:-2] + "00"
+    # Flip the first byte to ensure it's different
+    tampered_sig = ("ff" if signature_hex[:2] == "00" else "00") + signature_hex[2:]
     is_valid = verifier._verify_ed25519_signature(public_key_hex, tampered_sig, message)
-    assert not is_valid, "Tampered signature must not verify"
+    assert not is_valid, f"Tampered signature must not verify (sig: {signature_hex[:10]}... -> {tampered_sig[:10]}...)"
 
     print("[PASS] Ed25519 signature verification")
 
@@ -232,10 +233,9 @@ def test_spectrum05_missing_artifact():
 
         # Verify rejection with ARTIFACT_MISSING
         result = verifier.verify_bundle_spectrum05(run_dir)
-        assert not result["valid"], "Bundle must be rejected"
-        assert len(result["errors"]) == 1, "Should have exactly one error"
-        assert result["errors"][0]["code"] == "ARTIFACT_MISSING", f"Expected ARTIFACT_MISSING, got {result['errors'][0]['code']}"
-        assert "OUTPUT_HASHES.json" in result["errors"][0]["message"], "Error should mention OUTPUT_HASHES.json"
+        assert result["ok"] is False, "Bundle must be rejected"
+        assert result["code"] == "ARTIFACT_MISSING", f"Expected ARTIFACT_MISSING, got {result['code']}"
+        assert "OUTPUT_HASHES.json" in result["message"], "Error should mention OUTPUT_HASHES.json"
 
     print("[PASS] SPECTRUM-05 artifact presence check")
 
@@ -292,9 +292,9 @@ def test_spectrum05_identity_invalid():
 
         # Verify rejection with IDENTITY_INVALID
         result = verifier.verify_bundle_spectrum05(run_dir)
-        assert not result["valid"], "Bundle must be rejected"
-        assert result["errors"][0]["code"] == "IDENTITY_INVALID", f"Expected IDENTITY_INVALID, got {result['errors'][0]['code']}"
-        assert "validator_id" in result["errors"][0]["message"], "Error should mention validator_id"
+        assert result["ok"] is False, "Bundle must be rejected"
+        assert result["code"] == "IDENTITY_INVALID", f"Expected IDENTITY_INVALID, got {result['code']}"
+        assert "validator_id" in result["message"], "Error should mention validator_id"
 
     print("[PASS] SPECTRUM-05 identity verification")
 
@@ -305,8 +305,8 @@ def test_spectrum05_chain_empty():
 
     # Verify rejection with CHAIN_EMPTY
     result = verifier.verify_chain_spectrum05([])
-    assert not result["valid"], "Empty chain must be rejected"
-    assert result["errors"][0]["code"] == "CHAIN_EMPTY", f"Expected CHAIN_EMPTY, got {result['errors'][0]['code']}"
+    assert result["ok"] is False, "Empty chain must be rejected"
+    assert result["code"] == "CHAIN_EMPTY", f"Expected CHAIN_EMPTY, got {result['code']}"
 
     print("[PASS] SPECTRUM-05 chain empty check")
 
@@ -330,10 +330,10 @@ def test_spectrum05_chain_duplicate_run():
         # Verify rejection with CHAIN_DUPLICATE_RUN
         # Note: Both have same .name, so verification should catch duplicate
         result = verifier.verify_chain_spectrum05([run_dir1, run_dir1])  # Same run twice
-        assert not result["valid"], "Chain with duplicate run_ids must be rejected"
+        assert result["ok"] is False, "Chain with duplicate run_ids must be rejected"
         # Should get CHAIN_DUPLICATE_RUN or ARTIFACT_MISSING (depending on whether we check duplicates first)
-        assert result["errors"][0]["code"] in ["CHAIN_DUPLICATE_RUN", "ARTIFACT_MISSING"], \
-            f"Expected CHAIN_DUPLICATE_RUN or ARTIFACT_MISSING, got {result['errors'][0]['code']}"
+        assert result["code"] in ["CHAIN_DUPLICATE_RUN", "ARTIFACT_MISSING"], \
+            f"Expected CHAIN_DUPLICATE_RUN or ARTIFACT_MISSING, got {result['code']}"
 
     print("[PASS] SPECTRUM-05 chain duplicate check")
 
