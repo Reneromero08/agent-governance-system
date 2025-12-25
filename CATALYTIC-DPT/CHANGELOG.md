@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.17.0] - 2025-12-25
+
+### AGS Integration (entries moved from CANON/CHANGELOG.md)
+
+#### Added
+- `CATALYTIC-DPT/CHANGELOG.md`: Isolated changelog for the Catalytic Computing department.
+- `CATALYTIC-DPT/swarm_config.json`: Role-to-model mapping configuration for multi-agent swarm.
+- `TOOLS/catalytic_runtime.py` - CMP-01 runtime implementing 5-phase catalytic lifecycle (snapshot, execute, verify, record). Works with any command.
+- `TOOLS/catalytic_validator.py` - Run ledger validator for CMP-01 compliance checking in CI (restoration proof, output roots).
+- `CONTEXT/research/Catalytic Computing/CATALYTIC_IMPLEMENTATION_REPORT.md` - Comprehensive report on working prototype: architecture, PoC, what works well, improvements, integration opportunities.
+- `CANON/CATALYTIC_COMPUTING.md` - Canonical note defining catalytic computing for AGS (formal theory, engineering patterns, boundaries).
+- `CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` documenting the decision to add catalytic computing to canon.
+
+#### Changed
+- Refactored `CATALYTIC-DPT` documentation to be model-agnostic (replaced specific model names with God/President/Governor/Ant roles).
+- Renamed `CODEX_SOP.json` to `GOVERNOR_SOP.json` and `HANDOFF_TO_CODEX.md` to `HANDOFF_TO_GOVERNOR.md` for role alignment.
+
 ## [1.16.0] - 2025-12-25
 
 ### Phase 0 Complete: Contract Finalization and Enforcement
