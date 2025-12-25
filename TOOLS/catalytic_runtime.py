@@ -241,65 +241,164 @@ class CatalyticRuntime:
                     )
         return outputs
 
-    def save_ledger(self, exit_code: int, restoration_success: bool, diffs: Dict) -> None:
-        """Save run ledger to disk, including PROOF.json."""
-        run_info = {
-            "run_id": self.run_id,
-            "timestamp": self.timestamp,
-            "intent": self.intent,
-            "determinism": self.determinism,
-            "exit_code": exit_code,
-            "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
-            "durable_output_roots": [str(d.relative_to(PROJECT_ROOT)) for d in self.durable_outputs],
-        }
+    def write_canonical_artifacts(
+        self, exit_code: int, restoration_success: bool, diffs: Dict, status_state: str
+    ) -> bool:
+        """
+        Write the complete canonical artifact set.
 
-        (self.ledger_dir / "RUN_INFO.json").write_text(json.dumps(run_info, indent=2))
+        Canonical artifact set (Phase 0.2):
+        - JOBSPEC.json
+        - STATUS.json (state machine)
+        - INPUT_HASHES.json
+        - OUTPUT_HASHES.json
+        - DOMAIN_ROOTS.json
+        - LEDGER.jsonl
+        - VALIDATOR_ID.json
+        - PROOF.json (written last)
 
-        pre_manifest = {
-            domain: snapshot.to_dict() for domain, snapshot in self.pre_snapshots.items()
-        }
-        (self.ledger_dir / "PRE_MANIFEST.json").write_text(json.dumps(pre_manifest, indent=2))
+        Returns True if all artifacts written successfully, False otherwise.
+        """
+        try:
+            # 1. JOBSPEC.json (stub for now - would normally be passed in)
+            jobspec = {
+                "job_id": self.run_id,
+                "phase": 0,
+                "task_type": "primitive_implementation",
+                "intent": self.intent,
+                "inputs": {},
+                "outputs": {
+                    "durable_paths": [str(d.relative_to(PROJECT_ROOT)) for d in self.durable_outputs],
+                    "validation_criteria": {"restoration_verified": True},
+                },
+                "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+                "determinism": self.determinism,
+            }
+            (self.ledger_dir / "JOBSPEC.json").write_text(json.dumps(jobspec, indent=2))
 
-        post_manifest = {
-            domain: snapshot.to_dict() for domain, snapshot in self.post_snapshots.items()
-        }
-        (self.ledger_dir / "POST_MANIFEST.json").write_text(json.dumps(post_manifest, indent=2))
+            # 2. STATUS.json (state machine: started/failed/succeeded/verified)
+            status = {
+                "status": status_state,
+                "restoration_verified": restoration_success,
+                "exit_code": exit_code,
+                "validation_passed": restoration_success and exit_code == 0,
+            }
+            (self.ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
 
-        restore_diff = diffs
-        (self.ledger_dir / "RESTORE_DIFF.json").write_text(json.dumps(restore_diff, indent=2))
+            # 3. INPUT_HASHES.json (from pre-snapshots)
+            input_hashes = {}
+            for domain, snapshot in self.pre_snapshots.items():
+                for path, sha in snapshot.to_dict().items():
+                    full_path = f"{domain}/{path}"
+                    input_hashes[full_path] = sha
+            (self.ledger_dir / "INPUT_HASHES.json").write_text(json.dumps(input_hashes, indent=2, sort_keys=True))
 
-        outputs_list = self.collect_outputs()
-        (self.ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs_list, indent=2))
+            # 4. OUTPUT_HASHES.json (from outputs list)
+            outputs_list = self.collect_outputs()
+            output_hashes = {o["path"]: o.get("sha256", "") for o in outputs_list}
+            (self.ledger_dir / "OUTPUT_HASHES.json").write_text(json.dumps(output_hashes, indent=2, sort_keys=True))
 
-        status = {
-            "status": "restored" if restoration_success else "dirty",
-            "restoration_verified": restoration_success,
-        }
-        (self.ledger_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+            # 5. DOMAIN_ROOTS.json (Merkle roots per domain)
+            domain_roots = {}
+            for domain, snapshot in self.post_snapshots.items():
+                # Compute simple root as hash of concatenated sorted hashes
+                files = snapshot.to_dict()
+                if files:
+                    hash_input = "".join(sha for _, sha in sorted(files.items()))
+                    root_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()
+                else:
+                    root_hash = hashlib.sha256(b"").hexdigest()
+                domain_roots[domain] = root_hash
+            (self.ledger_dir / "DOMAIN_ROOTS.json").write_text(json.dumps(domain_roots, indent=2, sort_keys=True))
 
-        # Generate PROOF.json using RestorationProofValidator
-        proof_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json"
-        validator = RestorationProofValidator(proof_schema_path)
+            # 6. LEDGER.jsonl (append-only receipts)
+            ledger_entry = {
+                "run_id": self.run_id,
+                "timestamp": self.timestamp,
+                "intent": self.intent,
+                "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+                "exit_code": exit_code,
+                "restoration_verified": restoration_success,
+            }
+            ledger_line = json.dumps(ledger_entry, sort_keys=True) + "\n"
+            (self.ledger_dir / "LEDGER.jsonl").write_text(ledger_line)
 
-        proof = validator.generate_proof(
-            run_id=self.run_id,
-            catalytic_domains=[str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
-            pre_state=pre_manifest,
-            post_state=post_manifest,
-            timestamp=self.timestamp,
-        )
+            # 7. VALIDATOR_ID.json
+            validator_id = {
+                "validator_semver": "0.1.0",
+                "validator_build_id": "phase0-canonical",
+                "python_version": f"{sys.version_info.major}.{sys.version_info.minor}.{sys.version_info.micro}",
+            }
+            (self.ledger_dir / "VALIDATOR_ID.json").write_text(json.dumps(validator_id, indent=2))
 
-        (self.ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+            # 8. PROOF.json (written LAST after all other artifacts exist)
+            proof_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json"
+            validator = RestorationProofValidator(proof_schema_path)
 
-        print(f"[catalytic] Run ledger saved to {self.ledger_dir}")
-        print(f"[catalytic] PROOF.json: verified={proof['restoration_result']['verified']}, condition={proof['restoration_result']['condition']}")
+            pre_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.pre_snapshots.items()}
+            post_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.post_snapshots.items()}
+
+            proof = validator.generate_proof(
+                run_id=self.run_id,
+                catalytic_domains=[str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+                pre_state=pre_manifest,
+                post_state=post_manifest,
+                timestamp=self.timestamp,
+            )
+            (self.ledger_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+
+            # Legacy artifacts (keep for backwards compatibility)
+            (self.ledger_dir / "RUN_INFO.json").write_text(json.dumps(ledger_entry, indent=2))
+            (self.ledger_dir / "PRE_MANIFEST.json").write_text(json.dumps(pre_manifest, indent=2))
+            (self.ledger_dir / "POST_MANIFEST.json").write_text(json.dumps(post_manifest, indent=2))
+            (self.ledger_dir / "RESTORE_DIFF.json").write_text(json.dumps(diffs, indent=2))
+            (self.ledger_dir / "OUTPUTS.json").write_text(json.dumps(outputs_list, indent=2))
+
+            print(f"[catalytic] Canonical artifact set written to {self.ledger_dir}")
+            print(f"[catalytic] PROOF.json: verified={proof['restoration_result']['verified']}, condition={proof['restoration_result']['condition']}")
+
+            return True
+
+        except Exception as e:
+            print(f"[catalytic] ERROR writing canonical artifacts: {e}", file=sys.stderr)
+            # Attempt to write failed STATUS
+            try:
+                failed_status = {
+                    "status": "failed",
+                    "restoration_verified": False,
+                    "exit_code": 1,
+                    "validation_passed": False,
+                    "error": str(e),
+                }
+                (self.ledger_dir / "STATUS.json").write_text(json.dumps(failed_status, indent=2))
+            except:
+                pass
+            return False
 
     def run(self, cmd: List[str]) -> int:
-        """Execute the full catalytic lifecycle."""
+        """
+        Execute the full catalytic lifecycle with canonical artifact writing.
+
+        State machine:
+        - started: execution begun
+        - succeeded: command succeeded, restoration verified
+        - failed: command failed OR restoration failed OR artifact writing failed
+        - verified: (future) external validation passed
+        """
         print(f"[catalytic] Starting catalytic run: {self.run_id}")
 
         # Phase 0: Validate config
         if not self.validate_config():
+            # Write failed artifacts
+            self.write_canonical_artifacts(exit_code=1, restoration_success=False, diffs={}, status_state="failed")
+            return 1
+
+        # Write started status
+        try:
+            started_status = {"status": "started", "restoration_verified": False, "exit_code": None, "validation_passed": False}
+            (self.ledger_dir / "STATUS.json").write_text(json.dumps(started_status, indent=2))
+        except Exception as e:
+            print(f"[catalytic] ERROR: Cannot write STATUS.json: {e}", file=sys.stderr)
             return 1
 
         # Phase 1: Snapshot
@@ -326,9 +425,22 @@ class CatalyticRuntime:
             print("[catalytic] Differences:", file=sys.stderr)
             print(json.dumps(diffs, indent=2), file=sys.stderr)
 
-        # Phase 5: Save ledger
-        print("[catalytic] Phase 5: Saving run ledger...")
-        self.save_ledger(exit_code, restored, diffs)
+        # Determine final status state
+        if exit_code == 0 and restored:
+            status_state = "succeeded"
+        else:
+            status_state = "failed"
+
+        # Phase 5: Write canonical artifact set
+        print("[catalytic] Phase 5: Writing canonical artifact set...")
+        artifacts_written = self.write_canonical_artifacts(exit_code, restored, diffs, status_state)
+
+        if not artifacts_written:
+            print(
+                "[catalytic] HARD FAIL: Failed to write canonical artifact set. Run is invalid.",
+                file=sys.stderr,
+            )
+            return 1
 
         # Final decision: hard fail if restoration failed
         if not restored:
@@ -338,7 +450,15 @@ class CatalyticRuntime:
             )
             return 1
 
-        return exit_code
+        if exit_code != 0:
+            print(
+                f"[catalytic] FAIL: Command exited with code {exit_code}.",
+                file=sys.stderr,
+            )
+            return exit_code
+
+        print("[catalytic] Run completed successfully with verified restoration.")
+        return 0
 
 
 def main():
