@@ -1,0 +1,22 @@
+{
+  "task_id": "test-ledger",
+  "task_type": "file_operation",
+  "run_id": "test-ledger-20251225-042210",
+  "status": "success",
+  "timestamp_start": "2025-12-25T04:22:10.001652",
+  "timestamp_end": "2025-12-25T04:22:10.008360",
+  "operations": [
+    {
+      "operation": "copy",
+      "source": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_vjq1msbl\\ledger_source.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_vjq1msbl\\ledger_dest.txt",
+      "source_hash": "c9708ee21f04653031e2780e0e7307bd304ef6f57ac196fdb5cf2fdee1e39dee",
+      "dest_hash": "c9708ee21f04653031e2780e0e7307bd304ef6f57ac196fdb5cf2fdee1e39dee",
+      "hash_verified": true,
+      "size_bytes": 11,
+      "timestamp": "2025-12-25T04:22:10.008360"
+    }
+  ],
+  "errors": [],
+  "ledger_dir": "D:\\CCC 2.0\\AI\\agent-governance-system\\CATALYTIC-DPT\\CONTRACTS\\_runs\\test-ledger-20251225-042210"
+}

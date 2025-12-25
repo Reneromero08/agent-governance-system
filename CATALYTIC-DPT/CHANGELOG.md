@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.15.0] - 2025-12-25
+
+### Added
+- **LAB Directory Structure**: Created `CATALYTIC-DPT/LAB/` to isolate experimental scaffolds (`COMMONSENSE/`, `MCP/`, `RESEARCH/`, `ARCHIVE/`) from the kernel core.
+- **Pytest Gating**: Implemented `conftest.py` with `pytest_collection_modifyitems` to exclude `LAB/` tests by default.
+- **Opt-in Test Variable**: Added `CATDPT_LAB=1` environment variable to enable laboratory testing.
+- **Pytest Integration**: Added `test_*` entry points and `pytest.ini` for standardized test discovery across kernel and laboratory components.
+
+### Fixed
+- **PROJECT_ROOT in LAB**: Corrected absolute path resolution in `LAB/MCP/server.py` after its move into a deeper directory structure.
+- **Spectrum Test Imports**: Updated `test_spectrum02_emission.py` and other spectrum tests to correctly locate the moved MCP server.
+- **CommonSense Schema Mismatch**: Fixed `resolution_result.schema.json` to include Phase 2 fields (`expanded_facts`, `unresolved_symbols`) required for validation.
+
+### Changed
+- **Architectural Cleanup**: Moved semiotic roadmap patches and historical roadmaps into `LAB/`.
+- **Documentation**: Updated `AGENTS.md` with explicit architectural boundaries between Kernel and LAB.
+
 ## [1.14.0] - 2025-12-25
 
 ### Added
