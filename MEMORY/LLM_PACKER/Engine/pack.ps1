@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("ags", "catalytic-dpt")]
+  [ValidateSet("ags", "catalytic-dpt", "catalytic-dpt-lab")]
   [string]$Scope = "ags",
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
