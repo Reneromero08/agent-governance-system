@@ -21,8 +21,9 @@ Build a verifiable catalytic runtime where:
 - [x] Phase 1.U CAS implemented (deterministic layout + streaming; tests) (commit `d6e3970`)
 - [x] Phase 1.M Merkle implemented (deterministic manifest roots; tests) (commit `19a0c9c`)
 - [x] Phase 1.D Ledger implemented (append-only receipts; deterministic JSONL; tests) (commit: this changeset)
+- [x] Phase 1.P Proof wiring implemented (CAS/Merkle/Ledger; determinism tests) (commit: this changeset)
 - [ ] CI runs `CONTRACTS/runner.py`, but CAT-DPT `pytest` is not wired into CI yet
-- [ ] Phase 1 substrate is still blocking (Proof wiring remaining)
+- [x] Phase 1 substrate gate satisfied (CAS + Merkle + Ledger + Proof wiring)
 - [ ] Phase 1X expand-by-hash toolbelt is still blocked
 
 Evidence (files + commits):
@@ -32,6 +33,7 @@ Evidence (files + commits):
 - CAS: `CATALYTIC-DPT/PRIMITIVES/cas_store.py`, `CATALYTIC-DPT/TESTBENCH/test_cas_store.py` (commit `d6e3970`)
 - Merkle: `CATALYTIC-DPT/PRIMITIVES/merkle.py`, `CATALYTIC-DPT/TESTBENCH/test_merkle.py` (commit `19a0c9c`)
 - Ledger: `CATALYTIC-DPT/PRIMITIVES/ledger.py`, `CATALYTIC-DPT/TESTBENCH/test_ledger.py` (commit: this changeset)
+- Proof wiring: `CATALYTIC-DPT/PRIMITIVES/restore_proof.py`, `TOOLS/catalytic_runtime.py`, `CATALYTIC-DPT/TESTBENCH/test_proof_wiring.py` (commit: this changeset)
 
 ## Phase gates (the only definition of “done”)
 
@@ -43,11 +45,11 @@ DONE when all are true:
 - [x] CI runs governance + contract fixtures (`.github/workflows/contracts.yml`).
 
 ### Phase 1 Gate: Kernel substrate
-BLOCKED until all are true:
+DONE when all are true:
 - [x] CAS exists (streaming put/get), deterministic layout, path normalization, tests.
 - [x] Merkle exists (domain manifests, deterministic ordering, stable roots), tests.
 - [x] Ledger exists (append-only receipts, schema-valid, deterministic serialization), tests.
-- [ ] Proof generation is wired to these primitives and is deterministic across reruns.
+- [x] Proof generation is wired to these primitives and is deterministic across reruns.
 
 ### Phase 1X Gate: Expand-by-hash usability
 BLOCKED until all are true:
@@ -94,11 +96,7 @@ Definition of success:
 ---
 
 ## Current truth: what is actually blocking progress
-**Phase 1 Gate is blocked by missing primitives:**
-- [x] CAS
-- [x] Merkle
-- [x] Ledger
-Until these exist and are proven deterministic, Phase 1 is not “almost done.”
+**Phase 1 Gate is DONE. Next blocking gate is Phase 1X (expand-by-hash) or Phase 1V CI strict enforcement.**
 
 Verifiers and identity law may be shipped early, but do not substitute for the substrate.
 
@@ -203,14 +201,18 @@ Status (verified):
 - [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/ledger.py` (`Ledger`) (commit: this changeset)
 - [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_ledger.py` passes (commit: this changeset)
 
-### 1.P Proof wiring: Restore proof uses substrate (BLOCKING)
+### 1.P Proof wiring: Restore proof uses substrate (DONE)
 Deliverables
-- [ ] `PROOF.json` generation uses CAS + Merkle + Ledger primitives (not ad-hoc hashing).
-- [ ] Proof is artifact-only verifiable.
+- [x] `PROOF.json` generation uses CAS + Merkle + Ledger primitives (no ad-hoc root shortcuts).
+- [x] Proof is artifact-only verifiable.
 
 Acceptance
-- [ ] Detects: missing file, extra file, hash mismatch.
-- [ ] Determinism rerun test: run twice yields identical `DOMAIN_ROOTS` and `PROOF.json` (except fields explicitly allowed to vary, ideally none).
+- [x] Detects: missing file, extra file, hash mismatch.
+- [x] Determinism rerun test: run twice yields byte-identical `DOMAIN_ROOTS.json` and `PROOF.json`.
+
+Status (verified):
+- [x] Wired in `TOOLS/catalytic_runtime.py` (CAS-backed snapshots, Merkle `DOMAIN_ROOTS.json`, schema-valid `LEDGER.jsonl`, canonical `PROOF.json`) (commit: this changeset)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_proof_wiring.py` passes (commit: this changeset)
 
 ---
 

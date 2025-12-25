@@ -34,16 +34,20 @@ import sys
 import subprocess
 import hashlib
 from pathlib import Path
-from datetime import datetime
 from typing import Dict, List, Optional, Tuple
 
 # Add CATALYTIC-DPT to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
 from PRIMITIVES.restore_proof import RestorationProofValidator
+from PRIMITIVES.restore_proof import canonical_json_bytes
 from PRIMITIVES.preflight import PreflightValidator
 from PRIMITIVES.fs_guard import FilesystemGuard
+from PRIMITIVES.cas_store import CatalyticStore, normalize_relpath
+from PRIMITIVES.merkle import build_manifest_root
+from PRIMITIVES.ledger import Ledger
 
 PROJECT_ROOT = Path(__file__).parent.parent
+DETERMINISTIC_TIMESTAMP_SENTINEL = "CATALYTIC-DPT-02_CONFIG"
 
 
 class CatalyticSnapshot:
@@ -53,19 +57,28 @@ class CatalyticSnapshot:
         self.domain_path = domain_path
         self.files: Dict[str, str] = {}  # path -> sha256
 
-    def capture(self) -> None:
+    def capture(self, *, cas: Optional[CatalyticStore] = None) -> None:
         """Recursively snapshot all files in domain."""
         if not self.domain_path.exists():
             return
 
+        # rglob ordering is not specified; enforce deterministic ordering by normalized relative path.
+        items = []
         for file_path in self.domain_path.rglob("*"):
             if file_path.is_file():
-                try:
+                rel_path = normalize_relpath(file_path.relative_to(self.domain_path))
+                items.append((rel_path, file_path))
+
+        for rel_path, file_path in sorted(items, key=lambda t: t[0]):
+            try:
+                if cas is None:
                     sha = hashlib.sha256(file_path.read_bytes()).hexdigest()
-                    rel_path = str(file_path.relative_to(self.domain_path))
-                    self.files[rel_path] = sha
-                except Exception as e:
-                    print(f"[catalytic] Warning: Could not snapshot {file_path}: {e}", file=sys.stderr)
+                else:
+                    with open(file_path, "rb") as f:
+                        sha = cas.put_stream(f)
+                self.files[rel_path] = sha
+            except Exception as e:
+                print(f"[catalytic] Warning: Could not snapshot {file_path}: {e}", file=sys.stderr)
 
     def to_dict(self) -> Dict[str, str]:
         """Export snapshot as dict."""
@@ -101,17 +114,21 @@ class CatalyticRuntime:
         durable_outputs: List[str],
         intent: str,
         determinism: str = "deterministic",
+        timestamp: Optional[str] = None,
     ):
         self.run_id = run_id
         self.catalytic_domains = [PROJECT_ROOT / d for d in catalytic_domains]
         self.durable_outputs = [PROJECT_ROOT / d for d in durable_outputs]
         self.intent = intent
         self.determinism = determinism
-        self.timestamp = datetime.utcnow().isoformat()
+        # Determinism: runtime does not generate timestamps. Caller supplies deterministic timestamp.
+        self.timestamp = timestamp or DETERMINISTIC_TIMESTAMP_SENTINEL
 
         # Run ledger directory
         self.ledger_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
         self.ledger_dir.mkdir(parents=True, exist_ok=True)
+        self.cas = CatalyticStore(self.ledger_dir / "CAS")
+        self.ledger = Ledger(self.ledger_dir / "LEDGER.jsonl")
 
         # Snapshots
         self.pre_snapshots: Dict[str, CatalyticSnapshot] = {}
@@ -235,7 +252,7 @@ class CatalyticRuntime:
         """Take pre-snapshots of all catalytic domains."""
         for domain in self.catalytic_domains:
             snapshot = CatalyticSnapshot(domain)
-            snapshot.capture()
+            snapshot.capture(cas=self.cas)
             domain_key = str(domain.relative_to(PROJECT_ROOT))
             self.pre_snapshots[domain_key] = snapshot
             print(f"[catalytic] Snapshots pre: {domain_key} ({len(snapshot.files)} files)")
@@ -253,7 +270,7 @@ class CatalyticRuntime:
         """Take post-snapshots after execution."""
         for domain in self.catalytic_domains:
             snapshot = CatalyticSnapshot(domain)
-            snapshot.capture()
+            snapshot.capture(cas=self.cas)
             domain_key = str(domain.relative_to(PROJECT_ROOT))
             self.post_snapshots[domain_key] = snapshot
             print(f"[catalytic] Snapshots post: {domain_key} ({len(snapshot.files)} files)")
@@ -355,29 +372,50 @@ class CatalyticRuntime:
             self.fs_guard.guarded_write_text(self.ledger_dir / "OUTPUT_HASHES.json", json.dumps(output_hashes, indent=2, sort_keys=True))
 
             # 5. DOMAIN_ROOTS.json (Merkle roots per domain)
+            pre_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.pre_snapshots.items()}
+            post_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.post_snapshots.items()}
             domain_roots = {}
-            for domain, snapshot in self.post_snapshots.items():
-                # Compute simple root as hash of concatenated sorted hashes
-                files = snapshot.to_dict()
+            for domain, files in sorted(post_manifest.items(), key=lambda kv: kv[0]):
                 if files:
-                    hash_input = "".join(sha for _, sha in sorted(files.items()))
-                    root_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()
+                    root_hash = build_manifest_root(files)
                 else:
                     root_hash = hashlib.sha256(b"").hexdigest()
                 domain_roots[domain] = root_hash
-            self.fs_guard.guarded_write_text(self.ledger_dir / "DOMAIN_ROOTS.json", json.dumps(domain_roots, indent=2, sort_keys=True))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "DOMAIN_ROOTS.json", canonical_json_bytes(domain_roots).decode("utf-8"))
 
-            # 6. LEDGER.jsonl (append-only receipts)
-            ledger_entry = {
-                "run_id": self.run_id,
-                "timestamp": self.timestamp,
-                "intent": self.intent,
-                "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
-                "exit_code": exit_code,
-                "restoration_verified": restoration_success,
+            # 6. LEDGER.jsonl (append-only receipts, schema-valid)
+            def _restore_diff(pre_m: dict, post_m: dict) -> dict:
+                out = {}
+                for domain in sorted(set(pre_m.keys()) | set(post_m.keys())):
+                    pre_files = pre_m.get(domain, {})
+                    post_files = post_m.get(domain, {})
+                    added = {p: post_files[p] for p in sorted(set(post_files) - set(pre_files))}
+                    removed = {p: pre_files[p] for p in sorted(set(pre_files) - set(post_files))}
+                    changed = {p: post_files[p] for p in sorted(set(pre_files) & set(post_files)) if pre_files[p] != post_files[p]}
+                    out[domain] = {"added": added, "removed": removed, "changed": changed}
+                return out
+
+            ledger_record = {
+                "JOBSPEC": jobspec,
+                "RUN_INFO": {
+                    "run_id": self.run_id,
+                    "timestamp": self.timestamp,
+                    "intent": self.intent,
+                    "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)).replace("\\", "/") for d in self.catalytic_domains],
+                    "exit_code": exit_code,
+                    "restoration_verified": restoration_success,
+                },
+                "PRE_MANIFEST": pre_manifest,
+                "POST_MANIFEST": post_manifest,
+                "RESTORE_DIFF": _restore_diff(pre_manifest, post_manifest),
+                "OUTPUTS": outputs_list,
+                "STATUS": status,
+                "VALIDATOR_ID": {
+                    "validator_semver": "0.1.0",
+                    "validator_build_id": "phase0-canonical",
+                },
             }
-            ledger_line = json.dumps(ledger_entry, sort_keys=True) + "\n"
-            self.fs_guard.guarded_write_text(self.ledger_dir / "LEDGER.jsonl", ledger_line)
+            self.ledger.append(ledger_record)
 
             # 7. VALIDATOR_ID.json
             validator_id = {
@@ -391,19 +429,34 @@ class CatalyticRuntime:
             proof_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json"
             validator = RestorationProofValidator(proof_schema_path)
 
-            pre_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.pre_snapshots.items()}
-            post_manifest = {domain: snapshot.to_dict() for domain, snapshot in self.post_snapshots.items()}
-
+            jobspec_hash = hashlib.sha256((self.ledger_dir / "JOBSPEC.json").read_bytes()).hexdigest()
+            ledger_hash = hashlib.sha256((self.ledger_dir / "LEDGER.jsonl").read_bytes()).hexdigest()
             proof = validator.generate_proof(
                 run_id=self.run_id,
                 catalytic_domains=[str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
                 pre_state=pre_manifest,
                 post_state=post_manifest,
                 timestamp=self.timestamp,
+                referenced_artifacts={
+                    "ledger_hash": ledger_hash,
+                    "jobspec_hash": jobspec_hash,
+                    "validator_id": {
+                        "validator_semver": validator_id["validator_semver"],
+                        "validator_build_id": validator_id["validator_build_id"],
+                    },
+                },
             )
-            self.fs_guard.guarded_write_text(self.ledger_dir / "PROOF.json", json.dumps(proof, indent=2))
+            self.fs_guard.guarded_write_text(self.ledger_dir / "PROOF.json", canonical_json_bytes(proof).decode("utf-8"))
 
             # Legacy artifacts (keep for backwards compatibility)
+            ledger_entry = {
+                "run_id": self.run_id,
+                "timestamp": self.timestamp,
+                "intent": self.intent,
+                "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+                "exit_code": exit_code,
+                "restoration_verified": restoration_success,
+            }
             self.fs_guard.guarded_write_text(self.ledger_dir / "RUN_INFO.json", json.dumps(ledger_entry, indent=2))
             self.fs_guard.guarded_write_text(self.ledger_dir / "PRE_MANIFEST.json", json.dumps(pre_manifest, indent=2))
             self.fs_guard.guarded_write_text(self.ledger_dir / "POST_MANIFEST.json", json.dumps(post_manifest, indent=2))
@@ -555,6 +608,7 @@ def main():
         choices=["deterministic", "bounded_nondeterministic", "nondeterministic"],
         help="Determinism level",
     )
+    parser.add_argument("--timestamp", default=None, help="Deterministic timestamp string (if omitted, uses sentinel)")
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Command to execute")
 
     args = parser.parse_args()
@@ -569,6 +623,7 @@ def main():
         durable_outputs=args.durable_outputs,
         intent=args.intent,
         determinism=args.determinism,
+        timestamp=args.timestamp,
     )
 
     return runtime.run(args.cmd[1:])
