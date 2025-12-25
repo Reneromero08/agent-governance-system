@@ -2,6 +2,85 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.21.0] - 2025-12-25
+
+### SPECTRUM-05: Verification and Threat Law Frozen for Identity-Pinned Acceptance
+
+#### Added
+- **SPECTRUM/SPECTRUM-05.md** (v1.0.0): Constitutional specification for verification procedure and threat model
+  - Status: FROZEN (no implementation may deviate)
+  - Depends on: SPECTRUM-04 v1.1.0
+
+#### Verification Procedure (10 Phases, Step-Ordered)
+- **Phase 1:** Artifact presence check (7 required artifacts)
+- **Phase 2:** Artifact parse check (JSON validity)
+- **Phase 3:** Identity verification (Ed25519, validator_id derivation)
+- **Phase 4:** Bundle root computation (exact preimage per SPECTRUM-04)
+- **Phase 5:** Signed payload verification (bundle_root, decision, validator_id)
+- **Phase 6:** Signature verification (Ed25519 over domain-separated message)
+- **Phase 7:** Proof verification (PROOF.json verified=true required)
+- **Phase 8:** Forbidden artifact check (logs/, tmp/, transcript.json)
+- **Phase 9:** Output hash verification (all declared outputs must verify)
+- **Phase 10:** Acceptance (all steps pass → ACCEPT)
+
+#### Required Artifacts (7)
+- `TASK_SPEC.json`, `STATUS.json`, `OUTPUT_HASHES.json`, `PROOF.json`
+- `VALIDATOR_IDENTITY.json`, `SIGNED_PAYLOAD.json`, `SIGNATURE.json`
+
+#### Acceptance Gating Rules
+- Exactly one identity artifact, one payload artifact, one signature artifact
+- No forbidden artifacts
+- All output hashes verify
+- No partial acceptance (ACCEPT/REJECT only)
+
+#### Chain Verification Rules
+- Non-empty chain required
+- No duplicate run_ids
+- All bundles must individually verify
+- Chain root computed from bundle_roots and run_ids
+- All-or-nothing semantics (any failure rejects entire chain)
+
+#### Threat Model
+
+**Defended:**
+- Forged acceptance (Ed25519 signature binding)
+- Validator impersonation (cryptographic validator_id derivation)
+- Bundle substitution (bundle_root binding)
+- Replay attacks on modified artifacts
+- Ambiguity-based bypass (fully specified canonicalization)
+- Multiple identity injection
+- Forbidden artifact smuggling
+- Proof bypass
+
+**Not Defended:**
+- Private key compromise
+- Malicious validator acting within spec
+- External coercion/governance failures
+- Network-based attacks (artifact-only)
+- Side-channel attacks on signing
+- Quantum computing attacks (Ed25519 not quantum-resistant)
+
+#### Error Semantics (25 Error Codes)
+- Hard rejects only (no warnings, no partial acceptance, no recovery)
+- Artifact: `ARTIFACT_MISSING`, `ARTIFACT_MALFORMED`, `ARTIFACT_EXTRA`
+- Field: `FIELD_MISSING`, `FIELD_EXTRA`
+- Identity: `IDENTITY_INVALID`, `IDENTITY_MISMATCH`, `IDENTITY_MULTIPLE`
+- Algorithm: `ALGORITHM_UNSUPPORTED`
+- Key: `KEY_INVALID`
+- Signature: `SIGNATURE_MALFORMED`, `SIGNATURE_INCOMPLETE`, `SIGNATURE_INVALID`, `SIGNATURE_MULTIPLE`
+- Root: `BUNDLE_ROOT_MISMATCH`, `CHAIN_ROOT_MISMATCH`
+- Payload: `DECISION_INVALID`, `PAYLOAD_MISMATCH`
+- Serialization: `SERIALIZATION_INVALID`
+- Proof: `RESTORATION_FAILED`
+- Forbidden: `FORBIDDEN_ARTIFACT`
+- Output: `OUTPUT_MISSING`, `HASH_MISMATCH`
+- Chain: `CHAIN_EMPTY`, `CHAIN_DUPLICATE_RUN`
+
+#### Interoperability Requirements
+- Two implementations MUST produce byte-for-byte identical results
+- No interpretation required (all rules explicit, unambiguous, complete, testable)
+- Divergence between implementations → both suspect, investigation required
+
 ## [1.20.0] - 2025-12-25
 
 ### SPECTRUM-04: Canonical Byte-Serialization Rules Finalized
