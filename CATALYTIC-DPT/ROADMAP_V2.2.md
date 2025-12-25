@@ -62,7 +62,7 @@ DONE when all are true:
 - [x] SPECTRUM-02 bundle verifier is strict and fail-closed.
 - [x] SPECTRUM-03 chain verifier is strict and fail-closed.
 - [x] Validator identity pin and signing surface (SPECTRUM-04) are implemented with fixtures and adversarial tests.
-- [ ] CI default is strict verification (explicit pipeline enforcement).
+- [x] CI default is strict verification (explicit pipeline enforcement). (commit: this changeset)
 
 ### Phase 2 Gate: Memoization (never pay twice)
 DONE when all are true:
@@ -252,7 +252,7 @@ Deliverables
 Acceptance
 - [x] Adversarial fixtures cover all rejection classes.
 - [x] Strict mode exists (default strict in `verify_bundle_spectrum05`).
-- [ ] CI default is strict verification (explicit pipeline enforcement).
+- [x] CI default is strict verification (explicit pipeline enforcement). (commit: this changeset)
 
 Status (verified):
 - [x] Strict bundle verification implemented in `CATALYTIC-DPT/PRIMITIVES/verify_bundle.py` (`verify_bundle_spectrum05`)
