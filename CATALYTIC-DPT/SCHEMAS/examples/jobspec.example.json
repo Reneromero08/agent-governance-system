@@ -1,0 +1,19 @@
+{
+    "job_id": "jobspec-example",
+    "phase": 0,
+    "task_type": "schema_definition",
+    "intent": "Demonstrate a minimal, schema-valid JobSpec.",
+    "inputs": {
+        "module": "CATALYTIC-DPT/SCHEMAS/jobspec.schema.json"
+    },
+    "outputs": {
+        "durable_paths": [
+            "SCHEMAS/examples/jobspec.example.json"
+        ],
+        "validation_criteria": {
+            "file_exists": true
+        }
+    },
+    "catalytic_domains": [],
+    "determinism": "deterministic"
+}
