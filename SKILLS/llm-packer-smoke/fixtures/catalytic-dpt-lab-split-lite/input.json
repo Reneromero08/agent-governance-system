@@ -1,6 +1,6 @@
 {
   "combined": true,
-  "out_dir": "MEMORY/LLM_PACKER/_packs/fixture-catalytic-dpt-lab-split-lite",
+  "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-catalytic-dpt-lab-split-lite",
   "scope": "catalytic-dpt-lab",
   "split_lite": true,
   "stamp": "fixture-catalytic-dpt-lab-split-lite",

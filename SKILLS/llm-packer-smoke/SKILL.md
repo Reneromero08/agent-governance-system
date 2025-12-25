@@ -8,7 +8,7 @@
 
 ## Trigger
 
-Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a minimal pack skeleton under `MEMORY/LLM_PACKER/_packs/`.
+Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a minimal pack skeleton under `MEMORY/LLM_PACKER/_packs/` (fixture outputs should go under `_packs/_system/`).
 
 ## Inputs
 

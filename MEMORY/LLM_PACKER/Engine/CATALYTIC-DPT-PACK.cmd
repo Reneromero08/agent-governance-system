@@ -14,4 +14,4 @@ if "%~1"=="" (
 
 echo.
 echo Done.
-pause
+set /p _="Type anything then Enter to close: "
