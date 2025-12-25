@@ -43,6 +43,8 @@ Purpose: Turn catalytic computing into an operational system: verifiable continu
 - [x] Missing output detection.
 - [x] Path constraints (symlink escape protection).
 - [x] Structured error vectors + tests.
+- [x] SPECTRUM-06 Restore Runner LAW frozen (success artifacts, failure codes, threat model).
+- [x] Restore Runner implemented (SPECTRUM-06: primitive + CLI + tests).
 
 ### Repo usability
 - [x] Skills hygiene (scripts/assets/references pattern), MCP stdio server supports skill execution.
