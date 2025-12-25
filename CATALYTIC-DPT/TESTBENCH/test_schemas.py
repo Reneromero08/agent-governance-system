@@ -19,8 +19,7 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
-from jsonschema import Draft7Validator
-from referencing import Registry, Resource
+from jsonschema import Draft7Validator, RefResolver
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
@@ -75,15 +74,19 @@ def main() -> int:
     v_validation_error = Draft7Validator(validation_error_schema)
     v_proof = Draft7Validator(proof_schema)
 
-    registry = Registry().with_resources(
-        [
-            ("jobspec.schema.json", Resource.from_contents(jobspec_schema)),
-            ("validation_error.schema.json", Resource.from_contents(validation_error_schema)),
-            ("ledger.schema.json", Resource.from_contents(ledger_schema)),
-            ("proof.schema.json", Resource.from_contents(proof_schema)),
-        ]
-    )
-    v_ledger = Draft7Validator(ledger_schema, registry=registry)
+    store: Dict[str, Any] = {
+        "jobspec.schema.json": jobspec_schema,
+        "validation_error.schema.json": validation_error_schema,
+        "ledger.schema.json": ledger_schema,
+        "proof.schema.json": proof_schema,
+    }
+    for schema in [jobspec_schema, validation_error_schema, ledger_schema, proof_schema]:
+        schema_id = schema.get("$id")
+        if isinstance(schema_id, str) and schema_id:
+            store[schema_id] = schema
+
+    resolver = RefResolver.from_schema(ledger_schema, store=store)
+    v_ledger = Draft7Validator(ledger_schema, resolver=resolver)
 
     def choose_validator(doc: Dict[str, Any]) -> Draft7Validator:
         if "job_id" in doc and "task_type" in doc:
