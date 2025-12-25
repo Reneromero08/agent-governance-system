@@ -14,18 +14,21 @@ Build a verifiable catalytic runtime where:
 3) Do not merge phases unless this roadmap explicitly says so.
 4) Kernel must not import from LAB; LAB may import Kernel.
 
-## Verified progress checklist (as of commit `001b109`)
+## Verified progress checklist (as of commit `d6e3970`)
 - [x] Phase 0 contract freeze + enforcement (schemas, fixtures, preflight, write guard)
 - [x] SPECTRUM-04/05 strict verifier + identity/signing enforcement (bundle + chain)
 - [x] SPECTRUM-06 Restore Runner implemented (primitive + CLI + tests; frozen success artifacts + failure codes)
+- [x] Phase 1.U CAS implemented (deterministic layout + streaming; tests) (commit `d6e3970`)
 - [ ] CI runs `CONTRACTS/runner.py`, but CAT-DPT `pytest` is not wired into CI yet
-- [ ] Phase 1 substrate (CAS/Merkle/Ledger) is still blocking
+- [ ] Phase 1 substrate is still blocking (Ledger remaining)
 - [ ] Phase 1X expand-by-hash toolbelt is still blocked
 
 Evidence (files + commits):
 - Phase 0: `CATALYTIC-DPT/SCHEMAS/*.schema.json`, `CATALYTIC-DPT/FIXTURES/phase0/`, `CATALYTIC-DPT/PRIMITIVES/preflight.py`, `CATALYTIC-DPT/PRIMITIVES/fs_guard.py`
 - Verifier: `CATALYTIC-DPT/PRIMITIVES/verify_bundle.py`, `TOOLS/catalytic_verifier.py` (commits `30efb9b`, `0b5e187`)
 - Restore Runner: `CATALYTIC-DPT/PRIMITIVES/restore_runner.py`, `TOOLS/catalytic_restore.py`, `CATALYTIC-DPT/TESTBENCH/test_restore_runner.py` (commit `001b109`)
+- CAS: `CATALYTIC-DPT/PRIMITIVES/cas_store.py`, `CATALYTIC-DPT/TESTBENCH/test_cas_store.py` (commit `d6e3970`)
+- Merkle: `CATALYTIC-DPT/PRIMITIVES/merkle.py`, `CATALYTIC-DPT/TESTBENCH/test_merkle.py` (commit: this changeset)
 
 ## Phase gates (the only definition of “done”)
 
@@ -38,8 +41,8 @@ DONE when all are true:
 
 ### Phase 1 Gate: Kernel substrate
 BLOCKED until all are true:
-- [ ] CAS exists (streaming put/get), deterministic layout, path normalization, tests.
-- [ ] Merkle exists (domain manifests, deterministic ordering, stable roots), tests.
+- [x] CAS exists (streaming put/get), deterministic layout, path normalization, tests.
+- [x] Merkle exists (domain manifests, deterministic ordering, stable roots), tests.
 - [ ] Ledger exists (append-only receipts, schema-valid, deterministic serialization), tests.
 - [ ] Proof generation is wired to these primitives and is deterministic across reruns.
 
@@ -89,8 +92,8 @@ Definition of success:
 
 ## Current truth: what is actually blocking progress
 **Phase 1 Gate is blocked by missing primitives:**
-- [ ] CAS
-- [ ] Merkle
+- [x] CAS
+- [x] Merkle
 - [ ] Ledger
 Until these exist and are proven deterministic, Phase 1 is not “almost done.”
 
@@ -127,39 +130,50 @@ Notes:
 
 ### 1.U CAS: Content Addressable Store (BLOCKING)
 Deliverables
-- [ ] `PRIMITIVES/cas_store.py`
-  - [ ] `put(bytes|stream) -> sha256_hex`
-  - [ ] `get(sha256_hex) -> bytes|stream`
-- [ ] Deterministic on-disk layout (no timestamps), stable across OS.
-- [ ] Path normalization helper (repo-relative, posix normalization).
+- [x] `PRIMITIVES/cas_store.py`
+  - [x] `put_bytes(data: bytes) -> sha256_hex`
+  - [x] `get_bytes(hash_hex: str) -> bytes`
+  - [x] `put_stream(stream: BinaryIO, chunk_size: int = 1024*1024) -> sha256_hex`
+  - [x] `get_stream(hash_hex: str, out: BinaryIO, chunk_size: int = 1024*1024) -> None`
+- [x] Deterministic on-disk layout (no timestamps), stable across OS.
+- [x] Path normalization helper (repo-relative, posix normalization).
+- [x] Atomic writes (temp + fsync + idempotent commit; never overwrite existing objects).
 
 Acceptance
-- [ ] Same bytes always map to same hash.
-- [ ] Large files supported (streaming put/get).
-- [ ] Determinism test: two consecutive runs produce identical hashes and artifacts.
-- [ ] Reject non-normalized paths and path traversal.
+- [x] Same bytes always map to same hash.
+- [x] Large files supported (streaming put/get).
+- [x] Determinism test: two consecutive runs produce identical hashes and artifacts.
+- [x] Reject non-normalized paths and path traversal.
 
 Testbench targets
-- [ ] Store and retrieve.
-- [ ] Deterministic hashing.
-- [ ] Large file.
-- [ ] Batch operations.
+- [x] Store and retrieve.
+- [x] Deterministic hashing.
+- [x] Large file.
+- [x] Batch operations.
 
-### 1.M Merkle: Roots per domain (BLOCKING)
+Status (verified):
+- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/cas_store.py` (`CatalyticStore`, `normalize_relpath`) (commit `d6e3970`)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_cas_store.py` passes (commit `d6e3970`)
+
+### 1.M Merkle: Roots per domain (DONE)
 Deliverables
-- [ ] `PRIMITIVES/merkle.py`
-- [ ] Domain manifest: `{ normalized_path: bytes_hash }`
-- [ ] Deterministic leaf ordering and root computation.
+- [x] `PRIMITIVES/merkle.py`
+- [x] Domain manifest: `{ normalized_path: bytes_hash }`
+- [x] Deterministic leaf ordering and root computation.
 
 Acceptance
-- [ ] Roots stable across runs given identical manifests.
-- [ ] Reject duplicates, collisions, and non-normalized paths.
-- [ ] Adversarial fixtures for ordering, path edge cases, and tamper detection.
+- [x] Roots stable across runs given identical manifests.
+- [x] Reject duplicates, collisions, and non-normalized paths.
+- [x] Adversarial fixtures for ordering, path edge cases, and tamper detection.
 
 Testbench targets
-- [ ] Root stability.
-- [ ] Proof verification.
-- [ ] Tamper detection.
+- [x] Root stability.
+- [x] Proof verification.
+- [x] Tamper detection.
+
+Status (verified):
+- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/merkle.py` (`build_manifest_root`, `verify_manifest_root`) (commit: this changeset)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_merkle.py` passes (commit: this changeset)
 
 ### 1.D Ledger: Receipts (append-only) (BLOCKING)
 Deliverables
