@@ -29,6 +29,8 @@ from typing import Any, Dict, List, Optional
 
 from jsonschema import Draft7Validator
 
+from .cas_store import CatalyticStore, normalize_relpath
+from .merkle import build_manifest_root
 
 class RestorationProofValidator:
     """Generates and validates restoration proofs."""
@@ -109,23 +111,12 @@ class RestorationProofValidator:
         Returns:
             domain_state dict with domain_root_hash and file_manifest
         """
-        # Merge all domains into single file manifest (sorted for determinism)
-        all_files: Dict[str, str] = {}
-        for domain, files in sorted(state.items()):
-            for path, sha in sorted(files.items()):
-                all_files[path] = sha
-
-        # Compute domain_root_hash as hash of concatenated sorted file hashes
-        if all_files:
-            hash_input = "".join(sha for _, sha in sorted(all_files.items()))
-            domain_root_hash = hashlib.sha256(hash_input.encode("utf-8")).hexdigest()
-        else:
-            # Empty domain
-            domain_root_hash = hashlib.sha256(b"").hexdigest()
+        file_manifest = flatten_domain_state(state)
+        domain_root_hash = compute_manifest_root(file_manifest)
 
         return {
             "domain_root_hash": domain_root_hash,
-            "file_manifest": all_files,
+            "file_manifest": file_manifest,
         }
 
     def _compute_restoration_result(
@@ -141,16 +132,8 @@ class RestorationProofValidator:
         Returns:
             restoration_result dict
         """
-        # Flatten to single file manifest for comparison
-        pre_files: Dict[str, str] = {}
-        for domain, files in pre_state.items():
-            for path, sha in files.items():
-                pre_files[path] = sha
-
-        post_files: Dict[str, str] = {}
-        for domain, files in post_state.items():
-            for path, sha in files.items():
-                post_files[path] = sha
+        pre_files = flatten_domain_state(pre_state)
+        post_files = flatten_domain_state(post_state)
 
         # Detect mismatches
         mismatches: List[Dict[str, Any]] = []
@@ -220,3 +203,70 @@ class RestorationProofValidator:
         """
         canonical_json = json.dumps(proof_partial, sort_keys=True, separators=(",", ":"))
         return hashlib.sha256(canonical_json.encode("utf-8")).hexdigest()
+
+
+def canonical_json_bytes(obj: Any) -> bytes:
+    return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+
+
+def compute_manifest_root(file_manifest: Dict[str, str]) -> str:
+    """
+    Compute a deterministic root hash for a flat file manifest.
+
+    - If manifest is non-empty: Merkle root via `build_manifest_root`.
+    - If manifest is empty: deterministic sentinel sha256(b"") (keeps backwards compatibility with prior proofs).
+    """
+    if not file_manifest:
+        return hashlib.sha256(b"").hexdigest()
+    return build_manifest_root(file_manifest)
+
+
+def flatten_domain_state(state: Dict[str, Dict[str, str]]) -> Dict[str, str]:
+    """
+    Flatten {domain -> {path -> sha256}} into a single manifest.
+
+    Backwards compatibility:
+    - If exactly one domain exists: keys remain the per-domain relative paths.
+    - If multiple domains exist: keys are normalized as "<domain>/<path>" to avoid collisions.
+    """
+    domains = sorted(state.keys())
+    if len(domains) == 1:
+        domain = domains[0]
+        files = state.get(domain, {})
+        out: Dict[str, str] = {}
+        for path, sha in sorted(files.items(), key=lambda kv: kv[0]):
+            out[normalize_relpath(path)] = sha
+        return out
+
+    out = {}
+    for domain in domains:
+        files = state.get(domain, {})
+        for path, sha in sorted(files.items(), key=lambda kv: kv[0]):
+            combined = normalize_relpath(f"{domain}/{path}")
+            out[combined] = sha
+    return out
+
+
+def compute_domain_manifest(domain_path: Path, *, cas: CatalyticStore) -> Dict[str, str]:
+    """
+    Compute a domain manifest for a directory:
+      { normalized_relpath -> bytes_hash }
+
+    bytes_hash is the SHA-256 of file bytes, sourced via CAS (content addressed, idempotent).
+    """
+    if not domain_path.exists():
+        return {}
+
+    items: list[tuple[str, Path]] = []
+    for p in domain_path.rglob("*"):
+        if p.is_file():
+            rel = normalize_relpath(p.relative_to(domain_path))
+            items.append((rel, p))
+
+    items.sort(key=lambda t: t[0])
+    manifest: Dict[str, str] = {}
+    for rel, p in items:
+        with open(p, "rb") as f:
+            bytes_hash = cas.put_stream(f)
+        manifest[rel] = bytes_hash
+    return manifest
