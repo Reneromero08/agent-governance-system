@@ -10,7 +10,7 @@ for /f %%i in ('powershell -NoProfile -Command "Get-Date -Format yyyy-MM-dd_HH-m
 if "%STAMP%"=="" set "STAMP=manual"
 
 if "%~1"=="" (
-  python "%~dp0packer.py" --scope catalytic-dpt --mode full --profile full --combined --zip --out-dir "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-%STAMP%" --stamp "catalytic-dpt-pack-%STAMP%"
+  python "%~dp0packer.py" --scope catalytic-dpt --mode full --profile full --split-lite --combined --zip --out-dir "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-%STAMP%" --stamp "catalytic-dpt-pack-%STAMP%"
 ) else (
   python "%~dp0packer.py" %* --scope catalytic-dpt
 )
