@@ -1,0 +1,12 @@
+{
+  "task_id": "test-copy",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_0c2lsjwr\\source.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_0c2lsjwr\\dest.txt"
+    }
+  ],
+  "verify_integrity": true
+}

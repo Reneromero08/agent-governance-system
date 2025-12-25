@@ -114,7 +114,7 @@ SCOPE_AGS = PackScope(
 
 SCOPE_CATALYTIC_DPT = PackScope(
     key="catalytic-dpt",
-    title="CATALYTIC-DPT",
+    title="CATALYTIC-DPT (MAIN, no LAB)",
     file_prefix="CATALYTIC-DPT",
     include_dirs=("CATALYTIC-DPT",),
     root_files=(),
@@ -125,6 +125,28 @@ SCOPE_CATALYTIC_DPT = PackScope(
         "CATALYTIC-DPT/swarm_config.json",
         "CATALYTIC-DPT/CHANGELOG.md",
     ),
+    excluded_dir_parts=frozenset(
+        {
+            ".git",
+            "BUILD",
+            "LAB",
+            "_runs",
+            "_generated",
+            "_packs",
+            "__pycache__",
+            "node_modules",
+        }
+    ),
+)
+
+
+SCOPE_CATALYTIC_DPT_LAB = PackScope(
+    key="catalytic-dpt-lab",
+    title="CATALYTIC-DPT (LAB)",
+    file_prefix="CATALYTIC-DPT-LAB",
+    include_dirs=("CATALYTIC-DPT/LAB",),
+    root_files=(),
+    anchors=(),
     excluded_dir_parts=frozenset(
         {
             ".git",
@@ -142,6 +164,7 @@ SCOPE_CATALYTIC_DPT = PackScope(
 SCOPES: Dict[str, PackScope] = {
     SCOPE_AGS.key: SCOPE_AGS,
     SCOPE_CATALYTIC_DPT.key: SCOPE_CATALYTIC_DPT,
+    SCOPE_CATALYTIC_DPT_LAB.key: SCOPE_CATALYTIC_DPT_LAB,
 }
 
 TEXT_EXTENSIONS = {
@@ -883,8 +906,7 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
     config_paths = sorted(set(config_paths) - set(docs_paths))
     testbench_paths = sorted(set(testbench_paths) - set(docs_paths))
 
-    lab_paths = sorted([p for p in cdpt_paths if p.startswith("repo/CATALYTIC-DPT/LAB/")])
-    system_paths = sorted(set(cdpt_paths) - set(docs_paths) - set(config_paths) - set(testbench_paths) - set(lab_paths))
+    system_paths = sorted(set(cdpt_paths) - set(docs_paths) - set(config_paths) - set(testbench_paths))
 
     meta_dir = pack_dir / "meta"
     meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
@@ -904,13 +926,9 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
                 "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
                 "6) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt`",
                 "",
-                "## LAB (separate sub-pack)",
-                "- FULL: `COMBINED/CATALYTIC-DPT-LAB-FULL-COMBINED-*`",
-                "- SPLIT: `COMBINED/LAB/SPLIT/`",
-                "- SPLIT_LITE: `COMBINED/LAB/SPLIT_LITE/`",
-                "",
                 "## Notes",
                 f"- If `--combined` is enabled, `COMBINED/` contains `{scope.file_prefix}-FULL-COMBINED-*` and `{scope.file_prefix}-FULL-TREEMAP-*` outputs.",
+                "- LAB is packed separately into `LAB/` inside the same bundle (use the LAB pack's `LAB/meta/START_HERE.md`).",
                 "",
             ]
         ),
@@ -922,28 +940,69 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
     (split_dir / f"{scope.file_prefix}-03_TESTBENCH.md").write_text("# Testbench\n\n" + section(testbench_paths), encoding="utf-8")
     (split_dir / f"{scope.file_prefix}-04_SYSTEM.md").write_text("# System\n\n" + section([*system_paths, *meta_paths]), encoding="utf-8")
 
-    if lab_paths:
-        lab_split_dir = pack_dir / "COMBINED" / "LAB" / "SPLIT"
-        lab_split_dir.mkdir(parents=True, exist_ok=True)
-        (lab_split_dir / f"{scope.file_prefix}-LAB-00_INDEX.md").write_text(
-            "\n".join(
-                [
-                    f"# {scope.title} — LAB Pack Index",
-                    "",
-                    "This directory contains the LAB subtree only (separate from the main CAT DPT payload).",
-                    "",
-                    "## Read order",
-                    f"1) `COMBINED/LAB/SPLIT/{scope.file_prefix}-LAB-01_LAB.md`",
-                    "2) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
-                    "",
-                ]
-            ),
-            encoding="utf-8",
-        )
-        (lab_split_dir / f"{scope.file_prefix}-LAB-01_LAB.md").write_text(
-            "# LAB\n\n" + section(lab_paths),
-            encoding="utf-8",
-        )
+
+def write_split_pack_catalytic_dpt_lab(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope) -> None:
+    split_dir = pack_dir / "COMBINED" / "SPLIT"
+    split_dir.mkdir(parents=True, exist_ok=True)
+
+    def section(paths: Sequence[str]) -> str:
+        out_lines: List[str] = []
+        for rel in paths:
+            src = pack_dir / rel
+            if not src.exists():
+                continue
+            text = read_text(src)
+            fence = choose_fence(text)
+            out_lines.append(f"## `{rel}`")
+            out_lines.append("")
+            out_lines.append(fence)
+            out_lines.append(text.rstrip("\n"))
+            out_lines.append(fence)
+            out_lines.append("")
+        return "\n".join(out_lines).rstrip() + "\n"
+
+    lab_prefix = "repo/CATALYTIC-DPT/LAB/"
+    lab_paths = sorted([p for p in included_repo_paths if p.startswith(lab_prefix)])
+
+    commonsense_paths = sorted([p for p in lab_paths if "/COMMONSENSE/" in p])
+    mcp_paths = sorted([p for p in lab_paths if "/MCP/" in p])
+    research_paths = sorted([p for p in lab_paths if "/RESEARCH/" in p])
+    archive_paths = sorted([p for p in lab_paths if "/ARCHIVE/" in p])
+
+    used = set(commonsense_paths) | set(mcp_paths) | set(research_paths) | set(archive_paths)
+    root_docs = sorted([p for p in lab_paths if p.count("/") == 3 and p.lower().endswith((".md", ".txt"))])
+    used |= set(root_docs)
+    other_paths = sorted([p for p in lab_paths if p not in used])
+
+    meta_dir = pack_dir / "meta"
+    meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
+
+    (split_dir / f"{scope.file_prefix}-00_INDEX.md").write_text(
+        "\n".join(
+            [
+                f"# {scope.title} Pack Index",
+                "",
+                "This directory contains a generated snapshot of the LAB subtree intended for LLM handoff.",
+                "",
+                "## Read order",
+                "1) `repo/CATALYTIC-DPT/LAB/`",
+                f"2) `COMBINED/SPLIT/{scope.file_prefix}-01_DOCS.md`",
+                f"3) `COMBINED/SPLIT/{scope.file_prefix}-02_COMMONSENSE.md`",
+                f"4) `COMBINED/SPLIT/{scope.file_prefix}-03_MCP.md`",
+                f"5) `COMBINED/SPLIT/{scope.file_prefix}-04_RESEARCH.md`",
+                f"6) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt`",
+                "",
+            ]
+        ),
+        encoding="utf-8",
+    )
+
+    (split_dir / f"{scope.file_prefix}-01_DOCS.md").write_text("# Docs\n\n" + section(root_docs), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-02_COMMONSENSE.md").write_text("# COMMONSENSE\n\n" + section(commonsense_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-03_MCP.md").write_text("# MCP\n\n" + section(mcp_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-04_RESEARCH.md").write_text("# RESEARCH\n\n" + section(research_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-05_ARCHIVE.md").write_text("# ARCHIVE\n\n" + section(archive_paths), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-06_SYSTEM.md").write_text("# System\n\n" + section([*other_paths, *meta_paths]), encoding="utf-8")
 
 
 def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope) -> None:
@@ -951,6 +1010,8 @@ def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str], *, scop
         write_split_pack_ags(pack_dir, included_repo_paths)
     elif scope.key == SCOPE_CATALYTIC_DPT.key:
         write_split_pack_catalytic_dpt(pack_dir, included_repo_paths, scope=scope)
+    elif scope.key == SCOPE_CATALYTIC_DPT_LAB.key:
+        write_split_pack_catalytic_dpt_lab(pack_dir, included_repo_paths, scope=scope)
     else:
         raise ValueError(f"Unsupported scope for split pack: {scope.key}")
 
@@ -990,7 +1051,54 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                 ]
             ),
         )
-    else:
+    if scope.key == SCOPE_CATALYTIC_DPT_LAB.key:
+        write(
+            split_dir / f"{scope.file_prefix}-00_INDEX.md",
+            "\n".join(
+                [
+                    f"# {scope.title} Pack Index (SPLIT_LITE)",
+                    "",
+                    "This directory contains a compressed, discussion-first map of the LAB-only pack (pointers + indexes).",
+                    "",
+                    "## Read order",
+                    "1) `repo/CATALYTIC-DPT/LAB/`",
+                    "2) `meta/PACK_INFO.json` (and `meta/REPO_STATE.json` if present)",
+                    "3) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                    "",
+                    "## SPLIT (full chunks)",
+                    f"- `{scope.file_prefix}-01_DOCS.md`",
+                    f"- `{scope.file_prefix}-02_COMMONSENSE.md`",
+                    f"- `{scope.file_prefix}-03_MCP.md`",
+                    f"- `{scope.file_prefix}-04_RESEARCH.md`",
+                    f"- `{scope.file_prefix}-05_ARCHIVE.md`",
+                    f"- `{scope.file_prefix}-06_SYSTEM.md`",
+                    "",
+                ]
+            ),
+        )
+
+        def pointer(title: str, full_chunk: str) -> str:
+            return "\n".join(
+                [
+                    f"# {scope.title}: {title} (SPLIT_LITE)",
+                    "",
+                    "This is a pointer-only file; load the full chunk for contents.",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{full_chunk}`",
+                    "",
+                ]
+            )
+
+        write(split_dir / f"{scope.file_prefix}-01_DOCS.md", pointer("Docs", f"{scope.file_prefix}-01_DOCS.md"))
+        write(split_dir / f"{scope.file_prefix}-02_COMMONSENSE.md", pointer("COMMONSENSE", f"{scope.file_prefix}-02_COMMONSENSE.md"))
+        write(split_dir / f"{scope.file_prefix}-03_MCP.md", pointer("MCP", f"{scope.file_prefix}-03_MCP.md"))
+        write(split_dir / f"{scope.file_prefix}-04_RESEARCH.md", pointer("RESEARCH", f"{scope.file_prefix}-04_RESEARCH.md"))
+        write(split_dir / f"{scope.file_prefix}-05_ARCHIVE.md", pointer("ARCHIVE", f"{scope.file_prefix}-05_ARCHIVE.md"))
+        write(split_dir / f"{scope.file_prefix}-06_SYSTEM.md", pointer("System", f"{scope.file_prefix}-06_SYSTEM.md"))
+        return
+
+    if scope.key == SCOPE_CATALYTIC_DPT.key:
         write(
             split_dir / f"{scope.file_prefix}-00_INDEX.md",
             "\n".join(
@@ -1012,9 +1120,6 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     f"- `{scope.file_prefix}-02_CONFIG.md`",
                     f"- `{scope.file_prefix}-03_TESTBENCH.md`",
                     f"- `{scope.file_prefix}-04_SYSTEM.md`",
-                    "",
-                    "## LAB (separate sub-pack)",
-                    "- `COMBINED/LAB/SPLIT/` and `COMBINED/LAB/SPLIT_LITE/`",
                     "",
                     "## Repo File Tree",
                     "",
@@ -1095,8 +1200,8 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     "Pointers to the full snapshot and meta inventories.",
                     "",
                     "## Repo snapshot",
-                    "- `repo/CATALYTIC-DPT/**` (main, excludes LAB for loading)",
-                    "- `repo/CATALYTIC-DPT/LAB/**` (separate LAB sub-pack; see `COMBINED/LAB/*`)",
+                    "- `repo/CATALYTIC-DPT/**` (main; LAB excluded)",
+                    "- LAB sub-pack lives under `LAB/` (separate `meta/`, `repo/`, `COMBINED/`)",
                     "",
                     "## Meta inventories",
                     "- `meta/START_HERE.md`",
@@ -1109,41 +1214,6 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     "",
                     "## Full chunk",
                     f"- `COMBINED/SPLIT/{scope.file_prefix}-04_SYSTEM.md`",
-                    "",
-                ]
-            ),
-        )
-
-        lab_split_lite_dir = pack_dir / "COMBINED" / "LAB" / "SPLIT_LITE"
-        lab_split_lite_dir.mkdir(parents=True, exist_ok=True)
-        write(
-            lab_split_lite_dir / f"{scope.file_prefix}-LAB-00_INDEX.md",
-            "\n".join(
-                [
-                    f"# {scope.title} — LAB Pack Index (SPLIT_LITE)",
-                    "",
-                    "This directory is a discussion-first map of the LAB subtree only.",
-                    "",
-                    "## Read order",
-                    f"1) `{scope.file_prefix}-LAB-01_LAB.md`",
-                    "2) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
-                    "",
-                ]
-            ),
-        )
-        write(
-            lab_split_lite_dir / f"{scope.file_prefix}-LAB-01_LAB.md",
-            "\n".join(
-                [
-                    f"# {scope.title}: LAB (SPLIT_LITE)",
-                    "",
-                    "Pointers to the LAB-only payload.",
-                    "",
-                    "## Folder",
-                    "- `repo/CATALYTIC-DPT/LAB/`",
-                    "",
-                    "## Full chunk",
-                    f"- `COMBINED/LAB/SPLIT/{scope.file_prefix}-LAB-01_LAB.md`",
                     "",
                 ]
             ),
@@ -1299,7 +1369,7 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
                 "",
             ]
         )
-    else:
+    elif scope.key == SCOPE_CATALYTIC_DPT.key:
         text = "\n".join(
             [
                 "# START HERE",
@@ -1312,14 +1382,36 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
                 "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
                 "4) `repo/CATALYTIC-DPT/swarm_config.json`",
                 "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
-                "6) `COMBINED/SPLIT/*` (chunked snapshot)",
-                "7) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json` (navigation)",
+                "6) `LAB/meta/START_HERE.md` (LAB sub-pack, separate)",
+                "7) `COMBINED/SPLIT/*` (chunked snapshot)",
+                "8) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json` (navigation)",
                 "",
                 "## Notes",
                 f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
                 "",
             ]
         )
+    elif scope.key == SCOPE_CATALYTIC_DPT_LAB.key:
+        text = "\n".join(
+            [
+                "# START HERE",
+                "",
+                f"This snapshot is meant to be shared with any LLM to continue work on `{scope.title}`.",
+                "",
+                "## Read order",
+                "1) `repo/CATALYTIC-DPT/LAB/`",
+                "2) `repo/CATALYTIC-DPT/LAB/ROADMAP_PATCH_SEMIOTIC.md` (if present)",
+                "3) `repo/CATALYTIC-DPT/LAB/RESEARCH/` (if relevant)",
+                "4) `COMBINED/SPLIT/*` (chunked snapshot)",
+                "5) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json` (navigation)",
+                "",
+                "## Notes",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
+                "",
+            ]
+        )
+    else:
+        raise ValueError(f"Unsupported scope for START_HERE: {scope.key}")
     
     # Add provenance to START_HERE.md
     try:
@@ -1364,7 +1456,7 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
                 "",
             ]
         )
-    else:
+    elif scope.key == SCOPE_CATALYTIC_DPT.key:
         text = "\n".join(
             [
                 "# Snapshot Entrypoints",
@@ -1377,12 +1469,32 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
                 "- `repo/CATALYTIC-DPT/swarm_config.json`",
                 "- `repo/CATALYTIC-DPT/CHANGELOG.md`",
                 "- `repo/CATALYTIC-DPT/TESTBENCH/`",
+                "- `LAB/meta/START_HERE.md` (LAB sub-pack)",
                 "",
                 "Notes:",
                 f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
                 "",
             ]
         )
+    elif scope.key == SCOPE_CATALYTIC_DPT_LAB.key:
+        text = "\n".join(
+            [
+                "# Snapshot Entrypoints",
+                "",
+                f"Key entrypoints for `{scope.title}`:",
+                "",
+                "- `repo/CATALYTIC-DPT/LAB/`",
+                "- `repo/CATALYTIC-DPT/LAB/ROADMAP_PATCH_SEMIOTIC.md`",
+                "- `repo/CATALYTIC-DPT/LAB/COMMONSENSE/`",
+                "- `repo/CATALYTIC-DPT/LAB/MCP/`",
+                "",
+                "Notes:",
+                f"- If `--combined` is enabled, see `COMBINED/{scope.file_prefix}-FULL-COMBINED-*` and `COMBINED/{scope.file_prefix}-FULL-TREEMAP-*`.",
+                "",
+            ]
+        )
+    else:
+        raise ValueError(f"Unsupported scope for ENTRYPOINTS: {scope.key}")
     
     # Add provenance to ENTRYPOINTS.md
     try:
@@ -1741,134 +1853,80 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> N
     combined_dir = pack_dir / "COMBINED"
     combined_dir.mkdir(parents=True, exist_ok=True)
 
-    main_combined_md_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.md"
-    main_combined_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.txt"
-    main_treemap_md_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.md"
-    main_treemap_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.txt"
+    combined_md_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.md"
+    combined_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-COMBINED-{stamp}.txt"
+    treemap_md_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.md"
+    treemap_txt_rel = f"COMBINED/{scope.file_prefix}-FULL-TREEMAP-{stamp}.txt"
 
-    lab_prefix = "repo/CATALYTIC-DPT/LAB/"
-    all_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
-    has_lab = scope.key == SCOPE_CATALYTIC_DPT.key and any(p.startswith(lab_prefix) for p in all_paths)
+    tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True, scope=scope)
+    tree_md = "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n"
 
-    lab_combined_md_rel = f"COMBINED/{scope.file_prefix}-LAB-FULL-COMBINED-{stamp}.md"
-    lab_combined_txt_rel = f"COMBINED/{scope.file_prefix}-LAB-FULL-COMBINED-{stamp}.txt"
-    lab_treemap_md_rel = f"COMBINED/{scope.file_prefix}-LAB-FULL-TREEMAP-{stamp}.md"
-    lab_treemap_txt_rel = f"COMBINED/{scope.file_prefix}-LAB-FULL-TREEMAP-{stamp}.txt"
+    # Add provenance to treemap outputs
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
 
-    def write_combined_pair(*, md_rel: str, txt_rel: str, title: str, include_paths: Sequence[str]) -> None:
-        md_lines = [f"# {title}", ""]
-        txt_lines = [title, ""]
-        for rel in include_paths:
-            if rel.startswith("COMBINED/"):
-                continue
-            abs_path = pack_dir / rel
-            if not abs_path.exists() or not abs_path.is_file():
-                continue
-            text = read_text(abs_path)
-            size = abs_path.stat().st_size
-            md_lines.append(build_combined_md_block(rel, text, size))
-            txt_lines.append(build_combined_txt_block(rel, text, size))
-
-        md_content = "\n".join(md_lines).rstrip() + "\n"
-        txt_content = "\n".join(txt_lines).rstrip() + "\n"
-
-        try:
-            import sys
-            if str(PROJECT_ROOT) not in sys.path:
-                sys.path.insert(0, str(PROJECT_ROOT))
-            from TOOLS.provenance import generate_header, add_header_to_content
-
-            header_md = generate_header(
-                generator="MEMORY/LLM_PACKER/Engine/packer.py",
-                output_content=md_content,
-            )
-            md_content = add_header_to_content(md_content, header_md, file_type="md")
-
-            header_txt = generate_header(
-                generator="MEMORY/LLM_PACKER/Engine/packer.py",
-                output_content=txt_content,
-            )
-            txt_content = add_header_to_content(txt_content, header_txt, file_type="md")
-        except ImportError:
-            pass
-
-        (pack_dir / md_rel).write_text(md_content, encoding="utf-8")
-        (pack_dir / txt_rel).write_text(txt_content, encoding="utf-8")
-
-    includable = [p for p in all_paths if not p.startswith("COMBINED/")]
-
-    if has_lab:
-        main_include = [p for p in includable if not p.startswith(lab_prefix)]
-        lab_include = [p for p in includable if p.startswith("meta/") or p.startswith(lab_prefix)]
-    else:
-        main_include = includable
-        lab_include = []
-
-    write_combined_pair(
-        md_rel=main_combined_md_rel,
-        txt_rel=main_combined_txt_rel,
-        title=f"{scope.file_prefix} FULL COMBINED (MAIN)",
-        include_paths=main_include,
-    )
-
-    if has_lab:
-        write_combined_pair(
-            md_rel=lab_combined_md_rel,
-            txt_rel=lab_combined_txt_rel,
-            title=f"{scope.file_prefix} FULL COMBINED (LAB)",
-            include_paths=lab_include,
+        header_md = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=tree_md,
         )
+        tree_md = add_header_to_content(tree_md, header_md, file_type="md")
 
-    # Treemaps: write after combined files exist so they show up in the tree.
-    all_paths_after = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
+        header_txt = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=tree_text,
+        )
+        tree_text = add_header_to_content(tree_text, header_txt, file_type="md")
+    except ImportError:
+        pass
 
-    def write_treemap(*, txt_rel: str, md_rel: str, tree_paths: Sequence[str]) -> None:
-        tree_text = build_pack_tree_text(tree_paths, extra_paths=[])
-        tree_md = "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n"
-        try:
-            import sys
-            if str(PROJECT_ROOT) not in sys.path:
-                sys.path.insert(0, str(PROJECT_ROOT))
-            from TOOLS.provenance import generate_header, add_header_to_content
+    (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
+    (pack_dir / treemap_md_rel).write_text(tree_md, encoding="utf-8")
 
-            header_md = generate_header(
-                generator="MEMORY/LLM_PACKER/Engine/packer.py",
-                output_content=tree_md,
-            )
-            tree_md_out = add_header_to_content(tree_md, header_md, file_type="md")
+    combined_md_lines = [f"# {scope.file_prefix} FULL COMBINED", ""]
+    combined_txt_lines = [f"{scope.file_prefix} FULL COMBINED", ""]
 
-            header_txt = generate_header(
-                generator="MEMORY/LLM_PACKER/Engine/packer.py",
-                output_content=tree_text,
-            )
-            tree_txt_out = add_header_to_content(tree_text, header_txt, file_type="md")
-        except ImportError:
-            tree_md_out = tree_md
-            tree_txt_out = tree_text
+    base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
+    for rel in base_paths:
+        if rel.startswith("COMBINED/"):
+            continue
 
-        (pack_dir / txt_rel).write_text(tree_txt_out, encoding="utf-8")
-        (pack_dir / md_rel).write_text(tree_md_out, encoding="utf-8")
+        abs_path = pack_dir / rel
+        if not abs_path.exists() or not abs_path.is_file():
+            continue
+        text = read_text(abs_path)
+        size = abs_path.stat().st_size
+        combined_md_lines.append(build_combined_md_block(rel, text, size))
+        combined_txt_lines.append(build_combined_txt_block(rel, text, size))
 
-    if has_lab:
-        main_tree_paths = [
-            p
-            for p in all_paths_after
-            if not p.startswith(lab_prefix)
-            and not p.startswith("COMBINED/LAB/")
-            and not p.startswith(f"COMBINED/{scope.file_prefix}-LAB-")
-        ]
-        lab_tree_paths = [
-            p
-            for p in all_paths_after
-            if p.startswith("meta/")
-            or p.startswith(lab_prefix)
-            or p.startswith("COMBINED/LAB/")
-            or p.startswith(f"COMBINED/{scope.file_prefix}-LAB-")
-        ]
-        write_treemap(txt_rel=main_treemap_txt_rel, md_rel=main_treemap_md_rel, tree_paths=main_tree_paths)
-        write_treemap(txt_rel=lab_treemap_txt_rel, md_rel=lab_treemap_md_rel, tree_paths=lab_tree_paths)
-    else:
-        write_treemap(txt_rel=main_treemap_txt_rel, md_rel=main_treemap_md_rel, tree_paths=all_paths_after)
+    md_content = "\n".join(combined_md_lines).rstrip() + "\n"
+    txt_content = "\n".join(combined_txt_lines).rstrip() + "\n"
+
+    # Add provenance to combined outputs
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.provenance import generate_header, add_header_to_content
+
+        header_md = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=md_content,
+        )
+        md_content = add_header_to_content(md_content, header_md, file_type="md")
+
+        header_txt = generate_header(
+            generator="MEMORY/LLM_PACKER/Engine/packer.py",
+            output_content=txt_content,
+        )
+        txt_content = add_header_to_content(txt_content, header_txt, file_type="md")
+    except ImportError:
+        pass
+
+    (pack_dir / combined_md_rel).write_text(md_content, encoding="utf-8")
+    (pack_dir / combined_txt_rel).write_text(txt_content, encoding="utf-8")
 
 
 def write_provenance_manifest(pack_dir: Path) -> None:
@@ -2070,7 +2128,7 @@ if __name__ == "__main__":
         "--scope",
         choices=tuple(sorted(SCOPES.keys())),
         default=SCOPE_AGS.key,
-        help="What to pack: default is the full AGS repo; catalytic-dpt packs only CATALYTIC-DPT/.",
+        help="What to pack: default is the full AGS repo; catalytic-dpt packs CATALYTIC-DPT without LAB; catalytic-dpt-lab packs only CATALYTIC-DPT/LAB.",
     )
     parser.add_argument(
         "--mode",
