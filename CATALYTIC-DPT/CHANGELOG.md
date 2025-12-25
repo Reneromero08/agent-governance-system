@@ -10,6 +10,7 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - **SPECTRUM/SPECTRUM-06.md** (NEW):
   - SPECTRUM-06: Frozen specification for Restore Runner semantics.
   - SPECTRUM-06: restore result artifacts frozen
+  - SPECTRUM-06: restore failure codes and threat model frozen
   - Defines eligibility rules: SPECTRUM-05 strict verification required, PROOF.json verified=true, OUTPUT_HASHES.json present.
   - Restore target model: explicit restore_root, path safety rules, traversal rejection.
   - Single-bundle restore: 4-phase procedure (preflight, plan, execute, verify).
