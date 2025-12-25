@@ -59,6 +59,8 @@ if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
 if ($OutDir -eq "") {
   if ($Scope -eq "catalytic-dpt") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-$Stamp"
+  } elseif ($Scope -eq "catalytic-dpt-lab") {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-lab-pack-$Stamp"
   } elseif ($Profile -eq "lite") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-lite-$Stamp"
   } else {

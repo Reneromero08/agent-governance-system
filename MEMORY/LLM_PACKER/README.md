@@ -40,7 +40,7 @@ Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL bundle folder wi
 - `COMBINED/SPLIT_LITE/**`
 - `COMBINED/CATALYTIC-DPT-FULL-COMBINED-*` and `COMBINED/CATALYTIC-DPT-FULL-TREEMAP-*`
 - A nested LAB-only pack under `LAB/` (its own `meta/`, `repo/`, `COMBINED/`)
-- A zip archive under `MEMORY/LLM_PACKER/_packs/archive/`
+- A zip archive under `MEMORY/LLM_PACKER/_packs/_system/archive/`
 
 ## LITE profile (discussion-first)
 
@@ -87,15 +87,19 @@ Optional arguments:
 
 Creates a pack folder under:
 
-`MEMORY/LLM_PACKER/_packs/`
+`MEMORY/LLM_PACKER/_packs/` (default for user runs)
+
+Fixture/smoke outputs should go under:
+
+`MEMORY/LLM_PACKER/_packs/_system/fixtures/`
 
 And optionally produces a `.zip` archived under:
 
-`MEMORY/LLM_PACKER/_packs/archive/`
+`MEMORY/LLM_PACKER/_packs/_system/archive/`
 
 Baseline state used for delta packs is stored at:
 
-`MEMORY/LLM_PACKER/_packs/_state/baseline.json`
+`MEMORY/LLM_PACKER/_packs/_system/_state/baseline.json`
 
 ## Token Estimation
 
@@ -110,7 +114,7 @@ The packer also prints the per-payload token counts to the terminal after each r
 
 ### 2025-12-25 — 1.3.0
 - Added `--scope catalytic-dpt` (packs only `CATALYTIC-DPT/**` with scope-specific SPLIT/COMBINED prefixes)
-- Added per-scope baseline state files under `MEMORY/LLM_PACKER/_packs/_state/`
+- Added per-scope baseline state files under `MEMORY/LLM_PACKER/_packs/_system/_state/`
 - Changelog headings now show timestamp first, then version
 
 ### 2025-12-23 — 1.2.0
