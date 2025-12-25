@@ -2,6 +2,106 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.22.0] - 2025-12-25
+
+### Verifier Updated to Enforce SPECTRUM-04/05 Identity, Canonicalization, and Verification Law
+
+#### Added
+- **PRIMITIVES/verify_bundle.py**: SPECTRUM-04/05 enforcement layer
+  - `verify_bundle_spectrum05()`: Full 10-phase verification per SPECTRUM-05 v1.0.0
+  - `verify_chain_spectrum05()`: Chain verification with chain_root computation
+  - Canonical JSON serialization per SPECTRUM-04 v1.1.0 Section 4
+  - Bundle root computation per SPECTRUM-04 v1.1.0 Section 5
+  - Chain root computation per SPECTRUM-04 v1.1.0 Section 6
+  - Ed25519 signature verification per SPECTRUM-04 v1.1.0 Section 9
+  - validator_id derivation and verification (SHA-256 of public_key)
+
+#### SPECTRUM-05 10-Phase Verification
+- **Phase 1:** Artifact presence check (7 required artifacts)
+  - TASK_SPEC.json, STATUS.json, OUTPUT_HASHES.json, PROOF.json
+  - VALIDATOR_IDENTITY.json, SIGNED_PAYLOAD.json, SIGNATURE.json
+- **Phase 2:** Artifact parse check (JSON validity)
+- **Phase 3:** Identity verification
+  - Exactly 3 fields: algorithm, public_key, validator_id
+  - algorithm == "ed25519" (no alternatives)
+  - public_key: exactly 64 lowercase hex characters
+  - validator_id derivation matches sha256(public_key_bytes)
+- **Phase 4:** Bundle root computation
+  - Preimage: {"output_hashes":{...},"status":{...},"task_spec_hash":"..."}
+  - task_spec_hash from raw TASK_SPEC.json bytes (not canonicalized)
+  - All JSON objects canonicalized with sorted keys, no whitespace
+- **Phase 5:** Signed payload verification
+  - Exactly 3 fields: bundle_root, decision, validator_id
+  - bundle_root matches computed value
+  - decision == "ACCEPT" (no alternatives)
+  - validator_id matches VALIDATOR_IDENTITY.validator_id
+- **Phase 6:** Signature verification
+  - payload_type == "BUNDLE"
+  - signature: exactly 128 lowercase hex characters
+  - validator_id matches across all artifacts
+  - Signature message: "CAT-DPT-SPECTRUM-04-v1:BUNDLE:<canonical_payload>"
+  - Ed25519 verification using cryptography library
+- **Phase 7:** Proof verification
+  - PROOF.json.restoration_result.verified == true (boolean)
+  - Condition must be RESTORED_IDENTICAL for acceptance
+- **Phase 8:** Forbidden artifact check
+  - Rejects if logs/, tmp/, or transcript.json exists
+- **Phase 9:** Output hash verification
+  - All declared outputs must exist
+  - SHA-256 hashes must match exactly
+- **Phase 10:** Acceptance (all phases pass → ACCEPT)
+
+#### Chain Verification (SPECTRUM-05 Section 6)
+- Chain must be non-empty (CHAIN_EMPTY error code)
+- No duplicate run_ids (CHAIN_DUPLICATE_RUN error code)
+- Each bundle verified via verify_bundle_spectrum05
+- Chain root computed: sha256({"bundle_roots":[...],"run_ids":[...]})
+- All-or-nothing semantics (any failure rejects entire chain)
+
+#### Error Codes (SPECTRUM-05 Conformance)
+- Artifact: `ARTIFACT_MISSING`, `ARTIFACT_MALFORMED`, `ARTIFACT_EXTRA`
+- Field: `FIELD_MISSING`, `FIELD_EXTRA`
+- Identity: `IDENTITY_INVALID`, `IDENTITY_MISMATCH`, `IDENTITY_MULTIPLE`
+- Algorithm: `ALGORITHM_UNSUPPORTED`
+- Key: `KEY_INVALID`
+- Signature: `SIGNATURE_MALFORMED`, `SIGNATURE_INCOMPLETE`, `SIGNATURE_INVALID`, `SIGNATURE_MULTIPLE`
+- Root: `BUNDLE_ROOT_MISMATCH`, `CHAIN_ROOT_MISMATCH`
+- Payload: `DECISION_INVALID`, `PAYLOAD_MISMATCH`
+- Serialization: `SERIALIZATION_INVALID`
+- Proof: `RESTORATION_FAILED`
+- Forbidden: `FORBIDDEN_ARTIFACT`
+- Output: `OUTPUT_MISSING`, `HASH_MISMATCH`
+- Chain: `CHAIN_EMPTY`, `CHAIN_DUPLICATE_RUN`
+
+#### Test Coverage
+- **TESTBENCH/test_spectrum_04_05_enforcement.py**: 9 new tests
+  - Canonical JSON serialization (sorted keys, no whitespace, UTF-8)
+  - Bundle root computation (deterministic, matches spec preimage)
+  - Chain root computation (deterministic, order-dependent)
+  - Ed25519 signature verification (valid/invalid/tampered)
+  - Validator ID derivation (SHA-256 of public_key)
+  - SPECTRUM-05 artifact presence check
+  - SPECTRUM-05 identity verification (invalid validator_id)
+  - SPECTRUM-05 chain empty check
+  - SPECTRUM-05 chain duplicate run_id check
+- All 69 tests passing (60 legacy + 9 new)
+
+#### Backward Compatibility
+- Legacy methods preserved: `verify_bundle()` and `verify_chain()`
+- New methods: `verify_bundle_spectrum05()` and `verify_chain_spectrum05()`
+- Existing tests unaffected (no breaking changes)
+
+#### Dependencies
+- Requires `cryptography` library for Ed25519 signature verification
+- Graceful fallback if cryptography not available (tests skip, runtime errors clear)
+
+#### Implementation Notes
+- Canonicalization uses `json.dumps(sort_keys=True, separators=(',',':'), ensure_ascii=False)`
+- All hashes lowercase hex (64 characters for SHA-256, 128 for Ed25519 signatures)
+- Domain separation: "CAT-DPT-SPECTRUM-04-v1:BUNDLE:" prefix
+- Fail-closed: any ambiguity or missing artifact → immediate rejection
+- No partial acceptance, no warnings, no recovery paths
+
 ## [1.21.0] - 2025-12-25
 
 ### SPECTRUM-05: Verification and Threat Law Frozen for Identity-Pinned Acceptance
