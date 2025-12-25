@@ -1,0 +1,344 @@
+# CATALYTIC-DPT ROADMAP v2.1
+Date: 2025-12-24  
+Status: Active  
+Supersedes: ROADMAP.md (keep as historical intent)  
+Previous: ROADMAP_V2.md
+
+Purpose: Turn catalytic computing into an operational system: verifiable continuity, token efficiency via hash-referenced memory, and fail-closed execution.
+
+---
+
+## What changed in v2.1 (delta vs v2)
+- Adds a concrete run artifact set + 3-layer enforcement model (preflight, runtime guard, CI).
+- Adds the expand-by-hash toolbelt (the usability layer that actually reduces tokens).
+- Adds explicit PoC demos + metrics as exit criteria (so catalytic is measurable).
+- Adds “never pay twice” memoization (output caching keyed by hashes and identities).
+- Pins a canonical multi-tier orchestration topology (planner → governor → workers).
+- Adds write tracing + transactional commit (hardening: make incorrect success impossible).
+- Keeps Titans-like weight shifting as an optional R&D track unless you decide to make it core.
+
+---
+
+## Definitions
+- Data Plane: raw bytes that matter (outputs, blobs, full artifacts).
+- Control Plane: minimal metadata needed to verify/resume (hashes, manifests, receipts).
+- Bundle (SPECTRUM-02): minimum artifact set to verify a run without logs/transcripts.
+- Chain (SPECTRUM-03): ordered sequence of bundles with artifact-only lineage verification.
+- Dereference: fetch real bytes by hash only when needed.
+
+---
+
+## Already shipped (as of Pack 1.11)
+### Integrity + resume
+- [x] SPECTRUM-02 bundle emission + verification (fail closed).
+- [x] Adversarial resume fixtures proving resume without history.
+- [x] SPECTRUM-03 chain verification (artifact-only lineage).
+
+### Validator identity
+- [x] Bundle binds to validator_semver + validator_build_id.
+- [x] Strict verification mode exists (reject mismatched validator identity).
+
+### Hardening basics
+- [x] Tamper evidence via output hash mismatch.
+- [x] Missing output detection.
+- [x] Path constraints (symlink escape protection).
+- [x] Structured error vectors + tests.
+
+### Repo usability
+- [x] Skills hygiene (scripts/assets/references pattern), MCP stdio server supports skill execution.
+
+### Hygiene to fix soon
+- [ ] Normalize changelog dates (treat changelog as audit material).
+
+---
+
+# Phase 0: Freeze the Contract (schemas + run artifacts + enforcement)
+Goal: Make the “JSON model” real and executable: schemas exist, fixtures exist, validation is deterministic, and the repo enforces the contract in three layers.
+
+## 0.1 JSON Schemas (dialect locked)
+Deliverables
+- [ ] SCHEMAS/jobspec.schema.json
+- [ ] SCHEMAS/validation_error.schema.json
+- [ ] SCHEMAS/ledger.schema.json
+- [ ] SCHEMAS/examples/ (small, human-readable examples)
+- [ ] FIXTURES/phase0/valid/ and FIXTURES/phase0/invalid/
+
+Rules
+- [ ] Choose a JSON Schema dialect (Draft 7 recommended) and lock it.
+- [ ] Every error must map to validation_error with stable codes.
+- [ ] Optional fields require documented default behavior.
+
+Tests (exit criteria)
+- [ ] Testbench validates every valid fixture and rejects every invalid fixture.
+- [ ] Schema validator itself is version-pinned (record in receipts).
+
+## 0.2 Run artifact set (canonical)
+Goal: Every run writes the same minimal artifact set to a stable location.
+
+Location
+- [ ] CONTRACTS/_runs/<run_id>/
+
+Files (minimum set)
+- [ ] JOBSPEC.json (schema-valid)
+- [ ] STATUS.json (state machine: started/failed/succeeded/verified)
+- [ ] OUTPUT_HASHES.json (path -> hash)
+- [ ] INPUT_HASHES.json (path -> hash or hash refs)
+- [ ] DOMAIN_ROOTS.json (per-domain Merkle roots)
+- [ ] LEDGER.jsonl (append-only receipts, schema-valid)
+- [ ] VALIDATOR_ID.json (validator_semver, validator_build_id, substrate versions)
+- [ ] PROOF.json (restoration proof summary, hashable)
+
+Exit
+- [ ] A run is considered successful only if the artifact set is complete and verifies.
+
+## 0.3 3-layer enforcement model (pin it)
+Layer 1: Preflight (before execution)
+- [ ] Validate JobSpec against schema.
+- [ ] Validate path rules (no traversal, no absolute paths, allowed roots only).
+- [ ] Validate forbidden overlaps (inputs vs outputs).
+- [ ] Resolve all hash references required for the run (or fail).
+
+Layer 2: Runtime guard (during execution)
+- [ ] Enforce allowed roots and forbid writes elsewhere.
+- [ ] Record write events (see Phase 4 write tracing).
+- [ ] Fail closed if a write violates policy.
+
+Layer 3: CI validation (after execution / PR gate)
+- [ ] Verify bundles/chains against strict validator identity.
+- [ ] Verify restoration proof for fixtures and required demos.
+- [ ] Reject any change that breaks determinism or contract.
+
+---
+
+# Phase 1: Catalytic Kernel (CAS + Merkle + Ledger + Restore Proof)
+Goal: Build the smallest catalytic substrate that produces verifiable runs and can be resumed from artifacts only.
+
+## 1.1 CAS (Content Addressable Store)
+Deliverables
+- [ ] PRIMITIVES/cas_store.py (put(bytes)->hash, get(hash)->bytes)
+- [ ] Deterministic layout (no timestamps), stable across OS.
+- [ ] Path normalization helper (repo-relative, posix normalization).
+
+Acceptance
+- [ ] Same bytes always map to same hash.
+- [ ] Large files supported (streaming put/get).
+
+## 1.2 Merkle roots per domain
+Deliverables
+- [ ] PRIMITIVES/merkle.py
+- [ ] Domain manifests { normalized_path: bytes_hash }
+- [ ] Deterministic leaf ordering and root computation.
+
+Acceptance
+- [ ] Roots stable across runs given identical manifests.
+- [ ] Reject collisions/duplicates and non-normalized paths.
+
+## 1.3 Ledger receipts (append-only)
+Deliverables
+- [ ] PRIMITIVES/ledger.py emitting records matching ledger.schema.json
+- [ ] Receipt includes: job_id, phase, inputs/outputs hashes, domain roots, validator identity, substrate/toolchain identity.
+
+Acceptance
+- [ ] Append-only and stable.
+- [ ] Identical job produces identical receipt fields except explicitly allowed-to-vary fields.
+
+## 1.4 Restoration proof runner
+Deliverables
+- [ ] TOOLS/prove_restore.py
+  - restore outputs from CAS when possible
+  - verify against OUTPUT_HASHES.json
+  - emit hashable PROOF.json
+
+Acceptance
+- [ ] Restore + verify passes on fixtures.
+- [ ] Tamper/missing cases fail closed.
+
+---
+
+## Phase 1.1: Expand-by-hash toolbelt (token efficiency layer)
+Goal: Give any agent a standard way to operate on large state while keeping prompts tiny.
+
+Deliverables
+- [ ] TOOLS/read_hash.py (range + max_bytes)
+- [ ] TOOLS/grep_hash.py (pattern search over hash-referenced text)
+- [ ] TOOLS/ast_hash.py (tree-sitter/AST extraction to hash-addressed summary)
+- [ ] TOOLS/describe_hash.py (bounded metadata + preview)
+- [ ] Unified CLI: catalytic hash read|grep|ast|describe
+
+Acceptance
+- [ ] Every tool is bounded (max bytes, max matches) and deterministic.
+- [ ] Every tool emits artifacts that can be cached (see Phase 1.2).
+
+---
+
+## Phase 1.2: Never pay twice memoization cache
+Goal: If the same job over the same inputs using the same toolchain/model identity is requested again, reuse the output by hash.
+
+Deliverables
+- [ ] Cache key: job_hash + input_hash + toolchain_hash + model_hash (or validator_build_id when external).
+- [ ] Cache value: output_hash + proof pointer(s).
+- [ ] Cache stored as content-addressed records with receipts.
+
+Acceptance
+- [ ] Re-run identical jobs returns instantly via cache hit and still produces verifiable receipts.
+- [ ] Cache invalidates on any identity/hash mismatch.
+
+---
+
+## Phase 1 Exit Criteria: PoC demos + metrics (no vibes)
+Demos
+- [ ] Holographic roundtrip: encode → store → decode/restore with proofs.
+- [ ] Restoration thrash: repeated restore/verify cycles stable; tamper fails closed.
+- [ ] Token efficiency demo: baseline prompt vs hash+summary+deref; record tokens saved.
+
+Metrics (record per run and trend over time)
+- [ ] root_scan_time_ms
+- [ ] bundle_emit_time_ms
+- [ ] verify_time_ms
+- [ ] CAS compression ratio (stored_bytes / raw_bytes)
+- [ ] Token baseline vs catalytic (tokens_prompt_baseline vs tokens_prompt_catalytic)
+- [ ] Determinism checks (two runs, same inputs → same roots)
+
+---
+
+# Phase 1.5: Streaming Catalytic Loop (runtime feels catalytic)
+Goal: Keep live prompts small during long runs using snapshots + deltas, while preserving verifiability.
+
+Deliverables
+- [ ] Periodic State Snapshot artifact (hashes, roots, minimal intent).
+- [ ] Delta bundling every N tokens or T seconds.
+- [ ] Dereference-on-demand protocol (request hashes, return bounded bytes + proof pointers).
+- [ ] Pause/resume mid-run using only snapshots/deltas + CAS.
+
+Acceptance
+- [ ] Mid-run resume passes without raw history.
+- [ ] Tamper/missing/stale pointer fails closed.
+
+Note: this is token reduction at the interface, not inside-model token compression.
+
+---
+
+# Phase 2: Swarm Parallelism (safe scaling)
+Goal: Many workers can run in parallel without corrupting continuity. Reducer accepts exactly one deterministic update.
+
+## 2.1 Canonical role topology (pin it)
+- [ ] Planner (optional): high-level decomposition, no writes
+- [ ] Governor: policy + acceptance decisions, writes receipts
+- [ ] Workers: execute jobs, emit bundles only
+- [ ] Reducer: deterministic tie-break and commit of accepted outputs
+
+Rules
+- [ ] Workers cannot directly mutate canonical state.
+- [ ] Only reducer/governor appends to the ledger and finalizes commits.
+- [ ] Deterministic acceptance: stable score function + stable ordering.
+
+Acceptance
+- [ ] Completion order does not change acceptance.
+- [ ] Re-running the same batch yields identical accepted update.
+- [ ] Any bundle mismatch rejects the run regardless of score.
+
+---
+
+# Phase 3: Substrate Offload Adapters (browser, DB, CLI, AST)
+Goal: External tools become deterministic executors with hash I/O and full replay.
+
+Deliverables
+- [ ] ADAPTERS/cli_exec.py (tool, args, input_hashes → output_hashes)
+- [ ] ADAPTERS/browser_exec.py (playwright/js recipe → outputs by hash)
+- [ ] ADAPTERS/db_exec.py (query recipe → outputs by hash)
+- [ ] ADAPTERS/ast_exec.py (tree-sitter/static analysis as a substrate)
+
+Rules
+- [ ] Every adapter records substrate version and execution recipe in receipts.
+- [ ] No adapter output accepted without bundle verification + proof.
+
+Exit
+- [ ] At least two substrates run end-to-end: adapter → bundle → verify → restore proof.
+
+---
+
+# Phase 4: Runtime Hardening (make incorrect success impossible)
+Goal: Fail closed under all realistic adversarial conditions.
+
+Deliverables
+- [ ] Forbidden overlap checks both directions (inputs vs outputs).
+- [ ] Strong path rules: no absolute paths, no traversal, allowed roots only.
+- [ ] Write tracing (record every write event; include in receipts/proofs).
+- [ ] Transactional output commit (stage outputs; only finalize after proof passes).
+
+Acceptance
+- [ ] Fuzz fixtures for path tricks + overlap edge cases.
+- [ ] Any hard violation stops immediately.
+- [ ] Proof must pass before outputs can become real.
+
+---
+
+# Phase 5: Catalytic Pipelines (multi-step, one proof boundary)
+Goal: Multi-step workflows where the entire pipeline is verifiable via a chain.
+
+Deliverables
+- [ ] Pipeline runner composes steps via hashes (outputs become next inputs).
+- [ ] Per-step bundles + chain receipt + final proof artifact.
+- [ ] Demo pipeline: index → transform → validate+emit.
+
+Acceptance
+- [ ] End-to-end chain verification passes.
+- [ ] Restoration proof passes for final pipeline state.
+
+---
+
+# Phase 6: Integrate with AGS proper
+Goal: Wrap one real AGS operation in catalytic verification and prove the integration boundary.
+
+Deliverables
+- [ ] Convert one high-risk AGS skill run to: JobSpec → deterministic exec → bundle → strict verify gate → restore proof.
+- [ ] Docs: how AGS calls catalytic runtime and how artifacts are stored.
+
+Exit
+- [ ] One meaningful AGS operation runs catalytically and can be resumed from artifacts only.
+
+---
+
+# Phase 7: Optional R&D tracks (add only if you commit)
+## 7.A Titans-like tiny-module continuity (test-time learning)
+- [ ] Define tiny module interface and allowed update mechanism.
+- [ ] Define evaluation and regression gates.
+- [ ] Ensure updates are hashable and reversible (delta hashes + model hashes).
+- [ ] Prove continuity and rollback under fixtures.
+
+## 7.B Hierarchical Merkle proofs / semantic validators
+- [ ] Only as additive layers, never replacements for byte-level proofs.
+
+---
+
+## Non-goals (stay disciplined)
+- [ ] No packing full repo bodies as context.
+- [ ] No large-model finetuning as a substitute for proofs.
+- [ ] No sweeping refactors unrelated to integrity contracts.
+- [ ] No expanding canon without tests.
+
+---
+
+## Build order (dependency graph)
+1) Phase 0 schemas + run artifacts + enforcement  
+2) CAS + path normalization  
+3) Merkle + domain roots  
+4) Ledger + receipts  
+5) Restore proof runner  
+6) Expand-by-hash toolbelt  
+7) Memoization cache  
+8) Streaming catalytic loop  
+9) Swarm parallelism  
+10) Substrate adapters  
+11) Hardening (write tracing + transactional commit)  
+12) Pipelines  
+13) AGS integration  
+
+---
+
+## Next actions (smallest high-impact sequence)
+- [ ] Create the 3 schema files under SCHEMAS/ and land Phase 0 fixtures + tests.
+- [ ] Pin the run artifact set in CONTRACTS/_runs/<run_id>/ and enforce it in preflight + CI.
+- [ ] Build the expand-by-hash toolbelt (read/grep/ast/describe) with strict bounds.
+- [ ] Add memoization cache keyed by hashes and identities.
+- [ ] Add the Phase 1 PoC demos + metrics as hard exit criteria.
