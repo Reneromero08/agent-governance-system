@@ -1,344 +1,161 @@
-# CATALYTIC-DPT ROADMAP v2.1
-Date: 2025-12-24  
-Status: Active  
-Supersedes: ROADMAP.md (keep as historical intent)  
-Previous: ROADMAP_V2.md
-
-Purpose: Turn catalytic computing into an operational system: verifiable continuity, token efficiency via hash-referenced memory, and fail-closed execution.
-
----
-
-## What changed in v2.1 (delta vs v2)
-- Adds a concrete run artifact set + 3-layer enforcement model (preflight, runtime guard, CI).
-- Adds the expand-by-hash toolbelt (the usability layer that actually reduces tokens).
-- Adds explicit PoC demos + metrics as exit criteria (so catalytic is measurable).
-- Adds “never pay twice” memoization (output caching keyed by hashes and identities).
-- Pins a canonical multi-tier orchestration topology (planner → governor → workers).
-- Adds write tracing + transactional commit (hardening: make incorrect success impossible).
-- Keeps Titans-like weight shifting as an optional R&D track unless you decide to make it core.
-
----
-
-## Definitions
-- Data Plane: raw bytes that matter (outputs, blobs, full artifacts).
-- Control Plane: minimal metadata needed to verify/resume (hashes, manifests, receipts).
-- Bundle (SPECTRUM-02): minimum artifact set to verify a run without logs/transcripts.
-- Chain (SPECTRUM-03): ordered sequence of bundles with artifact-only lineage verification.
-- Dereference: fetch real bytes by hash only when needed.
-
----
-
-## Already shipped (as of Pack 1.11)
-### Integrity + resume
-- [x] SPECTRUM-02 bundle emission + verification (fail closed).
-- [x] Adversarial resume fixtures proving resume without history.
-- [x] SPECTRUM-03 chain verification (artifact-only lineage).
-
-### Validator identity
-- [x] Bundle binds to validator_semver + validator_build_id.
-- [x] Strict verification mode exists (reject mismatched validator identity).
-
-### Hardening basics
-- [x] Tamper evidence via output hash mismatch.
-- [x] Missing output detection.
-- [x] Path constraints (symlink escape protection).
-- [x] Structured error vectors + tests.
-
-### Repo usability
-- [x] Skills hygiene (scripts/assets/references pattern), MCP stdio server supports skill execution.
-
-### Hygiene to fix soon
-- [ ] Normalize changelog dates (treat changelog as audit material).
-
----
-
-# Phase 0: Freeze the Contract (schemas + run artifacts + enforcement)
-Goal: Make the “JSON model” real and executable: schemas exist, fixtures exist, validation is deterministic, and the repo enforces the contract in three layers.
-
-## 0.1 JSON Schemas (dialect locked)
-Deliverables
-- [ ] SCHEMAS/jobspec.schema.json
-- [ ] SCHEMAS/validation_error.schema.json
-- [ ] SCHEMAS/ledger.schema.json
-- [ ] SCHEMAS/examples/ (small, human-readable examples)
-- [ ] FIXTURES/phase0/valid/ and FIXTURES/phase0/invalid/
-
-Rules
-- [ ] Choose a JSON Schema dialect (Draft 7 recommended) and lock it.
-- [ ] Every error must map to validation_error with stable codes.
-- [ ] Optional fields require documented default behavior.
-
-Tests (exit criteria)
-- [ ] Testbench validates every valid fixture and rejects every invalid fixture.
-- [ ] Schema validator itself is version-pinned (record in receipts).
-
-## 0.2 Run artifact set (canonical)
-Goal: Every run writes the same minimal artifact set to a stable location.
-
-Location
-- [ ] CONTRACTS/_runs/<run_id>/
-
-Files (minimum set)
-- [ ] JOBSPEC.json (schema-valid)
-- [ ] STATUS.json (state machine: started/failed/succeeded/verified)
-- [ ] OUTPUT_HASHES.json (path -> hash)
-- [ ] INPUT_HASHES.json (path -> hash or hash refs)
-- [ ] DOMAIN_ROOTS.json (per-domain Merkle roots)
-- [ ] LEDGER.jsonl (append-only receipts, schema-valid)
-- [ ] VALIDATOR_ID.json (validator_semver, validator_build_id, substrate versions)
-- [ ] PROOF.json (restoration proof summary, hashable)
-
-Exit
-- [ ] A run is considered successful only if the artifact set is complete and verifies.
-
-## 0.3 3-layer enforcement model (pin it)
-Layer 1: Preflight (before execution)
-- [ ] Validate JobSpec against schema.
-- [ ] Validate path rules (no traversal, no absolute paths, allowed roots only).
-- [ ] Validate forbidden overlaps (inputs vs outputs).
-- [ ] Resolve all hash references required for the run (or fail).
-
-Layer 2: Runtime guard (during execution)
-- [ ] Enforce allowed roots and forbid writes elsewhere.
-- [ ] Record write events (see Phase 4 write tracing).
-- [ ] Fail closed if a write violates policy.
-
-Layer 3: CI validation (after execution / PR gate)
-- [ ] Verify bundles/chains against strict validator identity.
-- [ ] Verify restoration proof for fixtures and required demos.
-- [ ] Reject any change that breaks determinism or contract.
-
----
-
-# Phase 1: Catalytic Kernel (CAS + Merkle + Ledger + Restore Proof)
-Goal: Build the smallest catalytic substrate that produces verifiable runs and can be resumed from artifacts only.
-
-## 1.1 CAS (Content Addressable Store)
-Deliverables
-- [ ] PRIMITIVES/cas_store.py (put(bytes)->hash, get(hash)->bytes)
-- [ ] Deterministic layout (no timestamps), stable across OS.
-- [ ] Path normalization helper (repo-relative, posix normalization).
-
-Acceptance
-- [ ] Same bytes always map to same hash.
-- [ ] Large files supported (streaming put/get).
-
-## 1.2 Merkle roots per domain
-Deliverables
-- [ ] PRIMITIVES/merkle.py
-- [ ] Domain manifests { normalized_path: bytes_hash }
-- [ ] Deterministic leaf ordering and root computation.
-
-Acceptance
-- [ ] Roots stable across runs given identical manifests.
-- [ ] Reject collisions/duplicates and non-normalized paths.
-
-## 1.3 Ledger receipts (append-only)
-Deliverables
-- [ ] PRIMITIVES/ledger.py emitting records matching ledger.schema.json
-- [ ] Receipt includes: job_id, phase, inputs/outputs hashes, domain roots, validator identity, substrate/toolchain identity.
-
-Acceptance
-- [ ] Append-only and stable.
-- [ ] Identical job produces identical receipt fields except explicitly allowed-to-vary fields.
-
-## 1.4 Restoration proof runner
-Deliverables
-- [ ] TOOLS/prove_restore.py
-  - restore outputs from CAS when possible
-  - verify against OUTPUT_HASHES.json
-  - emit hashable PROOF.json
-
-Acceptance
-- [ ] Restore + verify passes on fixtures.
-- [ ] Tamper/missing cases fail closed.
-
----
-
-## Phase 1.1: Expand-by-hash toolbelt (token efficiency layer)
-Goal: Give any agent a standard way to operate on large state while keeping prompts tiny.
-
-Deliverables
-- [ ] TOOLS/read_hash.py (range + max_bytes)
-- [ ] TOOLS/grep_hash.py (pattern search over hash-referenced text)
-- [ ] TOOLS/ast_hash.py (tree-sitter/AST extraction to hash-addressed summary)
-- [ ] TOOLS/describe_hash.py (bounded metadata + preview)
-- [ ] Unified CLI: catalytic hash read|grep|ast|describe
-
-Acceptance
-- [ ] Every tool is bounded (max bytes, max matches) and deterministic.
-- [ ] Every tool emits artifacts that can be cached (see Phase 1.2).
-
----
-
-## Phase 1.2: Never pay twice memoization cache
-Goal: If the same job over the same inputs using the same toolchain/model identity is requested again, reuse the output by hash.
-
-Deliverables
-- [ ] Cache key: job_hash + input_hash + toolchain_hash + model_hash (or validator_build_id when external).
-- [ ] Cache value: output_hash + proof pointer(s).
-- [ ] Cache stored as content-addressed records with receipts.
-
-Acceptance
-- [ ] Re-run identical jobs returns instantly via cache hit and still produces verifiable receipts.
-- [ ] Cache invalidates on any identity/hash mismatch.
-
----
-
-## Phase 1 Exit Criteria: PoC demos + metrics (no vibes)
-Demos
-- [ ] Holographic roundtrip: encode → store → decode/restore with proofs.
-- [ ] Restoration thrash: repeated restore/verify cycles stable; tamper fails closed.
-- [ ] Token efficiency demo: baseline prompt vs hash+summary+deref; record tokens saved.
-
-Metrics (record per run and trend over time)
-- [ ] root_scan_time_ms
-- [ ] bundle_emit_time_ms
-- [ ] verify_time_ms
-- [ ] CAS compression ratio (stored_bytes / raw_bytes)
-- [ ] Token baseline vs catalytic (tokens_prompt_baseline vs tokens_prompt_catalytic)
-- [ ] Determinism checks (two runs, same inputs → same roots)
-
----
-
-# Phase 1.5: Streaming Catalytic Loop (runtime feels catalytic)
-Goal: Keep live prompts small during long runs using snapshots + deltas, while preserving verifiability.
-
-Deliverables
-- [ ] Periodic State Snapshot artifact (hashes, roots, minimal intent).
-- [ ] Delta bundling every N tokens or T seconds.
-- [ ] Dereference-on-demand protocol (request hashes, return bounded bytes + proof pointers).
-- [ ] Pause/resume mid-run using only snapshots/deltas + CAS.
-
-Acceptance
-- [ ] Mid-run resume passes without raw history.
-- [ ] Tamper/missing/stale pointer fails closed.
-
-Note: this is token reduction at the interface, not inside-model token compression.
-
----
-
-# Phase 2: Swarm Parallelism (safe scaling)
-Goal: Many workers can run in parallel without corrupting continuity. Reducer accepts exactly one deterministic update.
-
-## 2.1 Canonical role topology (pin it)
-- [ ] Planner (optional): high-level decomposition, no writes
-- [ ] Governor: policy + acceptance decisions, writes receipts
-- [ ] Workers: execute jobs, emit bundles only
-- [ ] Reducer: deterministic tie-break and commit of accepted outputs
-
-Rules
-- [ ] Workers cannot directly mutate canonical state.
-- [ ] Only reducer/governor appends to the ledger and finalizes commits.
-- [ ] Deterministic acceptance: stable score function + stable ordering.
-
-Acceptance
-- [ ] Completion order does not change acceptance.
-- [ ] Re-running the same batch yields identical accepted update.
-- [ ] Any bundle mismatch rejects the run regardless of score.
-
----
-
-# Phase 3: Substrate Offload Adapters (browser, DB, CLI, AST)
-Goal: External tools become deterministic executors with hash I/O and full replay.
-
-Deliverables
-- [ ] ADAPTERS/cli_exec.py (tool, args, input_hashes → output_hashes)
-- [ ] ADAPTERS/browser_exec.py (playwright/js recipe → outputs by hash)
-- [ ] ADAPTERS/db_exec.py (query recipe → outputs by hash)
-- [ ] ADAPTERS/ast_exec.py (tree-sitter/static analysis as a substrate)
-
-Rules
-- [ ] Every adapter records substrate version and execution recipe in receipts.
-- [ ] No adapter output accepted without bundle verification + proof.
-
-Exit
-- [ ] At least two substrates run end-to-end: adapter → bundle → verify → restore proof.
-
----
-
-# Phase 4: Runtime Hardening (make incorrect success impossible)
-Goal: Fail closed under all realistic adversarial conditions.
-
-Deliverables
-- [ ] Forbidden overlap checks both directions (inputs vs outputs).
-- [ ] Strong path rules: no absolute paths, no traversal, allowed roots only.
-- [ ] Write tracing (record every write event; include in receipts/proofs).
-- [ ] Transactional output commit (stage outputs; only finalize after proof passes).
-
-Acceptance
-- [ ] Fuzz fixtures for path tricks + overlap edge cases.
-- [ ] Any hard violation stops immediately.
-- [ ] Proof must pass before outputs can become real.
-
----
-
-# Phase 5: Catalytic Pipelines (multi-step, one proof boundary)
-Goal: Multi-step workflows where the entire pipeline is verifiable via a chain.
-
-Deliverables
-- [ ] Pipeline runner composes steps via hashes (outputs become next inputs).
-- [ ] Per-step bundles + chain receipt + final proof artifact.
-- [ ] Demo pipeline: index → transform → validate+emit.
-
-Acceptance
-- [ ] End-to-end chain verification passes.
-- [ ] Restoration proof passes for final pipeline state.
-
----
-
-# Phase 6: Integrate with AGS proper
-Goal: Wrap one real AGS operation in catalytic verification and prove the integration boundary.
-
-Deliverables
-- [ ] Convert one high-risk AGS skill run to: JobSpec → deterministic exec → bundle → strict verify gate → restore proof.
-- [ ] Docs: how AGS calls catalytic runtime and how artifacts are stored.
-
-Exit
-- [ ] One meaningful AGS operation runs catalytically and can be resumed from artifacts only.
-
----
-
-# Phase 7: Optional R&D tracks (add only if you commit)
-## 7.A Titans-like tiny-module continuity (test-time learning)
-- [ ] Define tiny module interface and allowed update mechanism.
-- [ ] Define evaluation and regression gates.
-- [ ] Ensure updates are hashable and reversible (delta hashes + model hashes).
-- [ ] Prove continuity and rollback under fixtures.
-
-## 7.B Hierarchical Merkle proofs / semantic validators
-- [ ] Only as additive layers, never replacements for byte-level proofs.
-
----
-
-## Non-goals (stay disciplined)
-- [ ] No packing full repo bodies as context.
-- [ ] No large-model finetuning as a substitute for proofs.
-- [ ] No sweeping refactors unrelated to integrity contracts.
-- [ ] No expanding canon without tests.
-
----
-
-## Build order (dependency graph)
-1) Phase 0 schemas + run artifacts + enforcement  
-2) CAS + path normalization  
-3) Merkle + domain roots  
-4) Ledger + receipts  
-5) Restore proof runner  
-6) Expand-by-hash toolbelt  
-7) Memoization cache  
-8) Streaming catalytic loop  
-9) Swarm parallelism  
-10) Substrate adapters  
-11) Hardening (write tracing + transactional commit)  
-12) Pipelines  
-13) AGS integration  
-
----
-
-## Next actions (smallest high-impact sequence)
-- [ ] Create the 3 schema files under SCHEMAS/ and land Phase 0 fixtures + tests.
-- [ ] Pin the run artifact set in CONTRACTS/_runs/<run_id>/ and enforce it in preflight + CI.
-- [ ] Build the expand-by-hash toolbelt (read/grep/ast/describe) with strict bounds.
-- [ ] Add memoization cache keyed by hashes and identities.
-- [ ] Add the Phase 1 PoC demos + metrics as hard exit criteria.
+# CAT-DPT AGENTS (Scoped)
+Scope: CAT-DPT (Catalytic DPT runtime, bundles, chain verification, CAS, Merkle, ledger, restore proof, tooling)
+
+Authority and inheritance
+- This file is subordinate to the repo-root AGENTS.md and any CANON/DECISIONS files.
+- If any instruction here conflicts with higher authority, higher authority wins.
+- This file must not be duplicated elsewhere. Keep exactly one scoped CAT-DPT AGENTS file.
+
+Active roadmap (do not waste tokens)
+- The ONLY active execution roadmap for CAT-DPT is: `ROADMAP_V2.1.md`
+- Treat these as historical. Do not load unless explicitly asked:
+  - `ROADMAP_V2.md`
+  - `ROADMAP.md`
+- If unsure what to do next, read `ROADMAP_V2.1.md` and execute the smallest unchecked item that advances Phase 0, then Phase 1, etc.
+
+Primary objective
+Build a verifiable catalytic runtime where:
+- Truth is artifacts, not narration.
+- Runs are resumable and verifiable from bundles and chain proofs.
+- Token efficiency is achieved via hash-referenced memory and bounded dereference, not by dumping blobs.
+
+Non-goals (hard)
+- Do not pack large bodies of repo content into prompts.
+- Do not introduce “helpful” refactors unrelated to contracts, proofs, determinism, or security boundaries.
+- Do not rely on chat logs/transcripts as state.
+- Do not add large-model fine-tuning as a substitute for proofs.
+
+## Contracts are law
+Schemas
+- Implement and enforce these schemas as canon:
+  - `SCHEMAS/jobspec.schema.json`
+  - `SCHEMAS/validation_error.schema.json`
+  - `SCHEMAS/ledger.schema.json`
+- Schema dialect must be explicitly pinned (Draft 7 recommended). Do not change dialect without an explicit decision record and migration plan.
+
+Run artifact set (required)
+Every run MUST write artifacts to:
+- `CONTRACTS/_runs/<run_id>/`
+
+Minimum required files
+- `JOBSPEC.json` (schema-valid)
+- `STATUS.json` (state machine: started/failed/succeeded/verified)
+- `INPUT_HASHES.json`
+- `OUTPUT_HASHES.json`
+- `DOMAIN_ROOTS.json`
+- `LEDGER.jsonl` (append-only, schema-valid)
+- `VALIDATOR_ID.json` (validator_semver, validator_build_id, substrate/toolchain versions)
+- `PROOF.json` (hashable restoration proof summary)
+
+Definition of success
+- A run is not “successful” unless:
+  - all required artifacts exist
+  - bundle verification passes in strict mode
+  - restoration proof passes
+- Missing artifacts or verification failures must fail closed.
+
+Validator identity
+- Bundle and chain verification MUST bind to:
+  - `validator_semver`
+  - `validator_build_id`
+- Strict mode is the default for CI and for any acceptance gate.
+
+## Enforcement model (3 layers)
+Preflight (before execution)
+- Validate JobSpec against schema.
+- Enforce path rules:
+  - no absolute paths
+  - no traversal
+  - allowed roots only
+- Enforce forbidden overlaps (inputs vs outputs).
+- Resolve required hash references or fail.
+
+Runtime guard (during execution)
+- Enforce allowed roots and forbid writes elsewhere.
+- Record write events (at least path and byte count; include hash when feasible).
+- Fail immediately on policy violation.
+
+CI validation (after execution / PR gate)
+- Verify bundles and chains in strict mode.
+- Verify restoration proof for required fixtures and demos.
+- Reject nondeterminism regressions.
+
+## Token efficiency rules (hash-first operations)
+Default interaction pattern
+- Prefer: hashes + bounded previews + targeted dereference.
+- Do not paste large file bodies into prompts.
+- Use the expand-by-hash toolbelt once it exists:
+  - `catalytic hash read`
+  - `catalytic hash grep`
+  - `catalytic hash ast`
+  - `catalytic hash describe`
+
+Bounded outputs (mandatory)
+- Every “read” or “grep” must enforce explicit bounds:
+  - max bytes
+  - max matches
+  - explicit ranges
+- Any tool that can dump unbounded content is a violation and must be fixed.
+
+Dereference protocol
+- Only dereference by hash when needed for:
+  - correctness of an acceptance decision
+  - resolving an ambiguity
+  - producing final outputs that require exact bytes
+- Log dereference events into receipts where feasible (hash requested, byte bounds returned).
+
+## Memoization (never pay twice)
+Caching is required once the cache is implemented.
+- Cache key MUST include identity and inputs:
+  - job_hash
+  - input_hash
+  - toolchain_hash
+  - model_hash (or validator_build_id when model is external)
+- Cache hit must still produce verifiable receipts and proofs.
+- Cache miss must not bypass verification.
+
+## Determinism discipline
+- Do not introduce timestamps or nondeterministic ordering into proofs, roots, manifests, or receipts unless explicitly allowed and documented.
+- Normalize paths and sort deterministically before hashing or generating roots.
+- When determinism is expected, add a test that runs twice and asserts identical roots and artifacts.
+
+## Work style (how agents should operate)
+Implementation workflow
+1) Read `ROADMAP_V2.1.md` and pick the next smallest unchecked item.
+2) Implement the minimum code to satisfy that item.
+3) Add fixtures and tests that prove it.
+4) Run tests locally.
+5) Update docs only to reflect reality (no aspirational docs).
+6) Commit in small, reviewable changes.
+
+Tests are not optional
+- Any new contract or enforcement rule requires tests.
+- Any bug fix requires a regression test.
+- Any security boundary change requires an adversarial fixture.
+
+No silent behavior
+- If the system does something, it must be documented.
+- If docs claim behavior, tests must verify it.
+
+## Roadmap navigation rules
+- Do not “merge phases” unless the roadmap explicitly says so.
+- If you discover the roadmap is wrong relative to reality:
+  - do not rewrite history
+  - propose a new versioned roadmap (v2.2, v2.3) or add a small patch file
+  - keep prior versions intact
+
+## Safety rail for edits
+- Do not modify repo-root AGENTS.md, CANON, or DECISIONS unless explicitly instructed.
+- Prefer adding scoped docs under CAT-DPT directories instead of changing global law.
+- If a contradiction is found, report it and propose a minimal reconciliation.
+
+End state definition
+CAT-DPT is considered “operational” when:
+- Phase 0 schemas and fixtures exist and pass
+- Phase 1 kernel (CAS, Merkle, ledger, restore proof) passes determinism and adversarial fixtures
+- Expand-by-hash toolbelt exists and is bounded and deterministic
+- Bundle and chain verification run in strict mode in CI
+- At least one end-to-end demo proves:
+  - resume without history
+  - proof-gated acceptance
+  - measurable token reduction at the interface
