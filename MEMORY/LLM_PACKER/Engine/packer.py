@@ -11,7 +11,10 @@ This script produces two related artifacts:
    markdown suitable for handoff to another model.
 
 
-All outputs are written under `MEMORY/LLM_PACKER/_packs/`.
+All outputs are written under `MEMORY/LLM_PACKER/_packs/`:
+
+- User-facing packs default to `_packs/`
+- All non-pack artifacts (fixtures, baselines, zips) go under `_packs/_system/`
 """
 
 from __future__ import annotations
@@ -46,7 +49,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MEMORY_DIR = PROJECT_ROOT / "MEMORY"
 LLM_PACKER_DIR = MEMORY_DIR / "LLM_PACKER"
 PACKS_ROOT = LLM_PACKER_DIR / "_packs"
-STATE_DIR = PACKS_ROOT / "_state"
+SYSTEM_DIR = PACKS_ROOT / "_system"
+FIXTURE_PACKS_DIR = SYSTEM_DIR / "fixtures"
+STATE_DIR = SYSTEM_DIR / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
 
 @dataclass(frozen=True)
@@ -2111,7 +2116,7 @@ def make_pack(
     write_json(baseline_path, manifest)
 
     if zip_enabled:
-        archive_dir = PACKS_ROOT / "archive"
+        archive_dir = SYSTEM_DIR / "archive"
         archive_dir.mkdir(parents=True, exist_ok=True)
         zip_path = archive_dir / f"{out_dir.name}.zip"
         if zip_path.exists():
@@ -2161,7 +2166,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--zip",
         action="store_true",
-        help="Write a zip archive under MEMORY/LLM_PACKER/_packs/archive/.",
+        help="Write a zip archive under MEMORY/LLM_PACKER/_packs/_system/archive/.",
     )
     args = parser.parse_args()
 
