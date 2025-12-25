@@ -40,6 +40,7 @@ from typing import Dict, List, Optional, Tuple
 # Add CATALYTIC-DPT to path
 sys.path.insert(0, str(Path(__file__).parent.parent / "CATALYTIC-DPT"))
 from PRIMITIVES.restore_proof import RestorationProofValidator
+from PRIMITIVES.preflight import PreflightValidator
 
 PROJECT_ROOT = Path(__file__).parent.parent
 
@@ -115,8 +116,29 @@ class CatalyticRuntime:
         self.pre_snapshots: Dict[str, CatalyticSnapshot] = {}
         self.post_snapshots: Dict[str, CatalyticSnapshot] = {}
 
+    def build_jobspec(self) -> Dict:
+        """Build JobSpec dict from runtime parameters."""
+        return {
+            "job_id": self.run_id,
+            "phase": 0,
+            "task_type": "primitive_implementation",
+            "intent": self.intent,
+            "inputs": {},
+            "outputs": {
+                "durable_paths": [str(p.relative_to(PROJECT_ROOT)) for p in self.durable_outputs],
+                "validation_criteria": {},
+            },
+            "catalytic_domains": [str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+            "determinism": self.determinism,
+        }
+
     def validate_config(self) -> bool:
-        """Pre-flight: validate that domains and outputs are legal."""
+        """
+        Pre-flight: validate that domains and outputs are legal.
+
+        DEPRECATED: This is legacy validation. Use preflight_validate() instead.
+        Kept for backwards compatibility.
+        """
         allowed_roots = [
             PROJECT_ROOT / "CONTRACTS" / "_runs",
             PROJECT_ROOT / "CORTEX" / "_generated",
@@ -174,6 +196,27 @@ class CatalyticRuntime:
                 return False
 
         return True
+
+    def preflight_validate(self) -> Tuple[bool, List[Dict]]:
+        """
+        Preflight validation: fail closed if JobSpec violates contract.
+
+        Returns:
+            Tuple of (valid, errors)
+        """
+        # Load jobspec schema
+        jobspec_schema_path = PROJECT_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "jobspec.schema.json"
+
+        # Initialize preflight validator
+        preflight = PreflightValidator(jobspec_schema_path)
+
+        # Build JobSpec from runtime parameters
+        jobspec = self.build_jobspec()
+
+        # Validate
+        valid, errors = preflight.validate(jobspec, PROJECT_ROOT)
+
+        return valid, errors
 
     def snapshot_domains(self) -> None:
         """Take pre-snapshots of all catalytic domains."""
@@ -387,7 +430,21 @@ class CatalyticRuntime:
         """
         print(f"[catalytic] Starting catalytic run: {self.run_id}")
 
-        # Phase 0: Validate config
+        # Phase 0: Preflight validation (FAIL CLOSED)
+        print("[catalytic] Phase 0: Preflight validation...")
+        preflight_valid, preflight_errors = self.preflight_validate()
+
+        if not preflight_valid:
+            print("[catalytic] PREFLIGHT REJECTION: JobSpec violates contract", file=sys.stderr)
+            for error in preflight_errors:
+                print(f"  [{error['code']}] {error['message']}", file=sys.stderr)
+            # Write failed artifacts
+            self.write_canonical_artifacts(exit_code=1, restoration_success=False, diffs={}, status_state="failed")
+            return 1
+
+        print(f"[catalytic] Preflight passed: JobSpec is valid")
+
+        # Legacy validation (for backwards compatibility)
         if not self.validate_config():
             # Write failed artifacts
             self.write_canonical_artifacts(exit_code=1, restoration_success=False, diffs={}, status_state="failed")

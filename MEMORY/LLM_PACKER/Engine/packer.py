@@ -883,7 +883,8 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
     config_paths = sorted(set(config_paths) - set(docs_paths))
     testbench_paths = sorted(set(testbench_paths) - set(docs_paths))
 
-    system_paths = sorted(set(cdpt_paths) - set(docs_paths) - set(config_paths) - set(testbench_paths))
+    lab_paths = sorted([p for p in cdpt_paths if "/LAB/" in p or p.endswith("/LAB")])
+    system_paths = sorted(set(cdpt_paths) - set(docs_paths) - set(config_paths) - set(testbench_paths) - set(lab_paths))
 
     meta_dir = pack_dir / "meta"
     meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
@@ -915,6 +916,7 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
     (split_dir / f"{scope.file_prefix}-02_CONFIG.md").write_text("# Config\n\n" + section(config_paths), encoding="utf-8")
     (split_dir / f"{scope.file_prefix}-03_TESTBENCH.md").write_text("# Testbench\n\n" + section(testbench_paths), encoding="utf-8")
     (split_dir / f"{scope.file_prefix}-04_SYSTEM.md").write_text("# System\n\n" + section([*system_paths, *meta_paths]), encoding="utf-8")
+    (split_dir / f"{scope.file_prefix}-05_LAB.md").write_text("# LAB\n\n" + section(lab_paths), encoding="utf-8")
 
 
 def write_split_pack(pack_dir: Path, included_repo_paths: Sequence[str], *, scope: PackScope) -> None:
@@ -983,6 +985,7 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     f"- `{scope.file_prefix}-02_CONFIG.md`",
                     f"- `{scope.file_prefix}-03_TESTBENCH.md`",
                     f"- `{scope.file_prefix}-04_SYSTEM.md`",
+                    f"- `{scope.file_prefix}-05_LAB.md`",
                     "",
                     "## Repo File Tree",
                     "",
@@ -1076,6 +1079,24 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     "",
                     "## Full chunk",
                     f"- `COMBINED/SPLIT/{scope.file_prefix}-04_SYSTEM.md`",
+                    "",
+                ]
+            ),
+        )
+
+        write(
+            split_dir / f"{scope.file_prefix}-05_LAB.md",
+            "\n".join(
+                [
+                    f"# {scope.title}: LAB (SPLIT_LITE)",
+                    "",
+                    "LAB is included in the FULL snapshot but kept as a separate SPLIT chunk.",
+                    "",
+                    "## Folder",
+                    "- `repo/CATALYTIC-DPT/LAB/`",
+                    "",
+                    "## Full chunk",
+                    f"- `COMBINED/SPLIT/{scope.file_prefix}-05_LAB.md`",
                     "",
                 ]
             ),
@@ -1696,13 +1717,27 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> N
     combined_txt_lines = [f"{scope.file_prefix} FULL COMBINED", ""]
 
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
-    for rel in base_paths:
+
+    lab_prefix = "repo/CATALYTIC-DPT/LAB/"
+    has_lab = scope.key == SCOPE_CATALYTIC_DPT.key and any(p.startswith(lab_prefix) for p in base_paths)
+
+    if has_lab:
+        non_lab = [p for p in base_paths if not p.startswith(lab_prefix)]
+        lab = [p for p in base_paths if p.startswith(lab_prefix)]
+        ordered_paths = [*non_lab, *lab]
+    else:
+        ordered_paths = base_paths
+
+    for rel in ordered_paths:
         if rel.startswith("COMBINED/"):
             continue
             
         abs_path = pack_dir / rel
         if not abs_path.exists() or not abs_path.is_file():
             continue
+        if has_lab and rel == lab[0]:
+            combined_md_lines.extend(["", "-----", "# LAB", "-----", ""])
+            combined_txt_lines.extend(["", "-----", "LAB", "-----", ""])
         text = read_text(abs_path)
         size = abs_path.stat().st_size
         combined_md_lines.append(build_combined_md_block(rel, text, size))
