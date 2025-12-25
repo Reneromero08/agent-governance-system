@@ -1,0 +1,272 @@
+"""
+Test preflight validation.
+
+Validates that preflight validator enforces contract before execution:
+- Invalid JobSpec → preflight fails
+- Path traversal → preflight fails
+- Input/output overlap → preflight fails
+- Valid spec → execution allowed
+
+Run:
+    pytest CATALYTIC-DPT/TESTBENCH/test_preflight.py -v
+"""
+from __future__ import annotations
+
+import sys
+from pathlib import Path
+
+import pytest
+
+# Add CATALYTIC-DPT to path
+repo_root_path = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(repo_root_path / "CATALYTIC-DPT"))
+
+from PRIMITIVES.preflight import PreflightValidator
+
+
+@pytest.fixture
+def jobspec_schema_path():
+    return Path(__file__).resolve().parents[2] / "CATALYTIC-DPT" / "SCHEMAS" / "jobspec.schema.json"
+
+
+@pytest.fixture
+def project_root():
+    return Path(__file__).resolve().parents[2]
+
+
+@pytest.fixture
+def preflight_validator(jobspec_schema_path):
+    return PreflightValidator(jobspec_schema_path)
+
+
+def test_valid_jobspec_passes(preflight_validator, project_root):
+    """Test that valid JobSpec passes preflight validation."""
+    jobspec = {
+        "job_id": "test-run-001",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test valid preflight",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["CONTRACTS/_runs/test-run-001/output.json"],
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is True
+    assert errors == []
+
+
+def test_invalid_jobspec_schema_fails(preflight_validator, project_root):
+    """Test that invalid JobSpec fails preflight validation."""
+    jobspec = {
+        "job_id": "test-run-002",
+        "phase": 0,
+        # Missing required field: task_type
+        "intent": "Test invalid schema",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": [],
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "JOBSPEC_SCHEMA_INVALID" for err in errors)
+
+
+def test_path_traversal_fails(preflight_validator, project_root):
+    """Test that path traversal in catalytic_domains fails preflight."""
+    jobspec = {
+        "job_id": "test-run-003",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test path traversal",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": [],
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/../CANON"],  # Path traversal!
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "PATH_TRAVERSAL" for err in errors)
+
+
+def test_absolute_path_fails(preflight_validator, project_root):
+    """Test that absolute paths fail preflight validation."""
+    # Use a path that's absolute on all platforms
+    import os
+    if os.name == 'nt':
+        absolute_path = "C:/tmp/output.json"
+    else:
+        absolute_path = "/tmp/output.json"
+
+    jobspec = {
+        "job_id": "test-run-004",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test absolute path",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": [absolute_path],  # Absolute path!
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "PATH_ABSOLUTE" for err in errors)
+
+
+def test_path_not_under_allowed_root_fails(preflight_validator, project_root):
+    """Test that paths outside allowed roots fail preflight."""
+    jobspec = {
+        "job_id": "test-run-005",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test path not under allowed root",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["AGENTS.md"],  # Not under allowed roots!
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "PATH_NOT_ALLOWED" for err in errors)
+
+
+def test_forbidden_path_fails(preflight_validator, project_root):
+    """Test that forbidden paths fail preflight validation."""
+    jobspec = {
+        "job_id": "test-run-006",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test forbidden path",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": [],
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CANON"],  # Forbidden path!
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "PATH_FORBIDDEN" for err in errors)
+
+
+def test_input_output_overlap_fails(preflight_validator, project_root):
+    """Test that overlapping catalytic_domains and outputs fail preflight."""
+    jobspec = {
+        "job_id": "test-run-007",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test input/output overlap",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["CATALYTIC-DPT/_scratch"],  # Overlaps with catalytic_domains!
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "PATH_OVERLAP" for err in errors)
+
+
+def test_multiple_errors_reported(preflight_validator, project_root):
+    """Test that multiple validation errors are all reported."""
+    jobspec = {
+        "job_id": "test-run-008",
+        "phase": 0,
+        # Missing task_type
+        "intent": "Test multiple errors",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["/tmp/output.json"],  # Absolute path
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/../CANON"],  # Path traversal
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) >= 2  # At least schema error and path error
+
+
+def test_empty_catalytic_domains_valid(preflight_validator, project_root):
+    """Test that empty catalytic_domains is valid (no scratch space needed)."""
+    jobspec = {
+        "job_id": "test-run-009",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test empty catalytic domains",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["CONTRACTS/_runs/test-run-009/output.json"],
+            "validation_criteria": {},
+        },
+        "catalytic_domains": [],  # Empty is valid
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is True
+    assert errors == []
+
+
+def test_empty_outputs_valid(preflight_validator, project_root):
+    """Test that empty outputs.durable_paths is valid."""
+    jobspec = {
+        "job_id": "test-run-010",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test empty outputs",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": [],  # Empty is valid
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["CATALYTIC-DPT/_scratch"],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is True
+    assert errors == []
