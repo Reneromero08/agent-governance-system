@@ -28,6 +28,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ### Changed
 - Installed canon governance pre-commit hook: Now active in `.git/hooks/pre-commit` to enforce governance checks before commits.
+- CAT-DPT LAB reorganization: Moved architecture docs to `LAB/ARCHITECTURE/`, research docs consolidated in `LAB/RESEARCH/`, added index README.
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
