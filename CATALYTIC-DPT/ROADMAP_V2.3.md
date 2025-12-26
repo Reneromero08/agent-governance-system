@@ -247,6 +247,7 @@ A swarm is just many pipelines, with explicit dependencies and audited handoffs.
 
 Deliverables
 - [x] Phase 7.0: deterministic Pipeline DAG scheduling (DAG spec + scheduler + resume + fail-closed DAG verification).
+- [x] Phase 7.1: distributed execution receipts (portable receipts, chained by DAG topology, strict verification).
 - [ ] `swarm.schema.json` for a DAG of pipelines:
   - nodes: pipeline specs or references
   - edges: explicit artifact dependencies
