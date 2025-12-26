@@ -14,6 +14,20 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.48.0] - 2025-12-26
+
+### Phase 6.5: Hash-Addressed Capability Registry
+
+#### Added
+- `CAPABILITIES.json`: deterministic registry mapping `capability_hash` to adapter spec (hash-addressed).
+- `TESTBENCH/test_ags_phase6_capability_registry.py`: fail-closed tests for resolution, unknown capability rejection, and registry tamper detection.
+
+#### Changed
+- `TOOLS/ags.py`: supports `steps[].capability_hash` in plans and resolves it strictly via the registry (unknown/mismatch rejects).
+- `PIPELINES/pipeline_verify.py`: enforces registry resolution and exact spec matching when capability hashes are used.
+
+---
+
 ## [1.46.0] - 2025-12-26
 
 ### Docs: Roadmap Promotion
