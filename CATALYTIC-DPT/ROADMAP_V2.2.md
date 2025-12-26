@@ -41,14 +41,14 @@ DONE when all are true:
 - [x] SPECTRUM-02 bundle verifier is strict and fail-closed.
 - [x] SPECTRUM-03 chain verifier is strict and fail-closed.
 - [x] Validator identity pin and signing surface (SPECTRUM-04) are implemented with fixtures and adversarial tests.
-- [x] CI default is strict verification (explicit pipeline enforcement). (commit: this changeset)
+- [x] CI default is strict verification (explicit pipeline enforcement). (commit: 84b8422)
 
 ### Phase 2 Gate: Memoization (never pay twice)
 DONE when all are true:
 - [x] Cache keys bind to job + inputs + toolchain + validator identity. (commit: dba8efd)
 - [x] Cache hits still emit verifiable receipts and proofs. (commit: dba8efd)
 - [x] Cache misses never bypass verification. (commit: dba8efd)
-- [x] At least one end-to-end demo shows measurable token reduction via hash-first dereference. (demo: `CONTRACTS/_runs/_demos/memoization_hash_reuse/`) (commit: this changeset)
+- [x] At least one end-to-end demo shows measurable token reduction via hash-first dereference. (demo: `CONTRACTS/_runs/_demos/memoization_hash_reuse/`) (commit: 25ea034)
 
 ---
 
@@ -152,8 +152,8 @@ Testbench targets
 - [x] Tamper detection.
 
 Status (verified):
-- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/merkle.py` (`build_manifest_root`, `verify_manifest_root`) (commit: this changeset)
-- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_merkle.py` passes (commit: this changeset)
+- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/merkle.py` (`build_manifest_root`, `verify_manifest_root`) (commit: 19a0c9c)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_merkle.py` passes (commit: 19a0c9c)
 
 ### 1.D Ledger: Receipts (append-only) (DONE)
 Deliverables
@@ -177,8 +177,8 @@ Testbench targets
 - [x] Adversarial: attempt to rewrite/truncate prior record is detected or prevented.
 
 Status (verified):
-- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/ledger.py` (`Ledger`) (commit: this changeset)
-- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_ledger.py` passes (commit: this changeset)
+- [x] Implemented in `CATALYTIC-DPT/PRIMITIVES/ledger.py` (`Ledger`) (commit: 17d10a8)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_ledger.py` passes (commit: 17d10a8)
 
 ### 1.P Proof wiring: Restore proof uses substrate (DONE)
 Deliverables
@@ -190,8 +190,8 @@ Acceptance
 - [x] Determinism rerun test: run twice yields byte-identical `DOMAIN_ROOTS.json` and `PROOF.json`.
 
 Status (verified):
-- [x] Wired in `TOOLS/catalytic_runtime.py` (CAS-backed snapshots, Merkle `DOMAIN_ROOTS.json`, schema-valid `LEDGER.jsonl`, canonical `PROOF.json`) (commit: this changeset)
-- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_proof_wiring.py` passes (commit: this changeset)
+- [x] Wired in `TOOLS/catalytic_runtime.py` (CAS-backed snapshots, Merkle `DOMAIN_ROOTS.json`, schema-valid `LEDGER.jsonl`, canonical `PROOF.json`) (commit: 8eab904)
+- [x] Testbench `CATALYTIC-DPT/TESTBENCH/test_proof_wiring.py` passes (commit: 8eab904)
 
 ---
 
@@ -207,10 +207,10 @@ Acceptance
 - [x] Deterministic outputs for same inputs and bounds.
 
 Status (verified):
-- [x] CLI: `TOOLS/catalytic.py` (`catalytic hash read|grep|describe|ast`) (commit: this changeset)
-- [x] Implementation: `CATALYTIC-DPT/PRIMITIVES/hash_toolbelt.py` (commit: this changeset)
-- [x] Testbench: `CATALYTIC-DPT/TESTBENCH/test_hash_toolbelt.py` (commit: this changeset)
-- [x] Dereference events logged to ledger (hash requested, bounds returned) (commit: this changeset)
+- [x] CLI: `TOOLS/catalytic.py` (`catalytic hash read|grep|describe|ast`) (commit: d6615e3)
+- [x] Implementation: `CATALYTIC-DPT/PRIMITIVES/hash_toolbelt.py` (commit: d6615e3)
+- [x] Testbench: `CATALYTIC-DPT/TESTBENCH/test_hash_toolbelt.py` (commit: d6615e3)
+- [x] Dereference events logged to ledger (hash requested, bounds returned) (commit: e388e6e)
 
 ---
 
@@ -231,7 +231,7 @@ Deliverables
 Acceptance
 - [x] Adversarial fixtures cover all rejection classes.
 - [x] Strict mode exists (default strict in `verify_bundle_spectrum05`).
-- [x] CI default is strict verification (explicit pipeline enforcement). (commit: this changeset)
+- [x] CI default is strict verification (explicit pipeline enforcement). (commit: 84b8422)
 
 Status (verified):
 - [x] Strict bundle verification implemented in `CATALYTIC-DPT/PRIMITIVES/verify_bundle.py` (`verify_bundle_spectrum05`)
@@ -262,7 +262,7 @@ Deliverables
 - [x] Implement fail-closed error codes and adversarial fixtures.
 
 Acceptance
-- [x] Two independent implementations produce identical verification results. (commit: this changeset)
+- [x] Two independent implementations produce identical verification results. (commit: 6e174f5)
 - [x] Any ambiguity rejects (multiple keys, multiple signatures, malformed fields, deviations from canonicalization).
 
 Status (verified):
@@ -294,7 +294,7 @@ Acceptance
 
 ## PHASE 3: Packing hygiene (deterministic, bounded, deduplicated)
 Purpose
-- [x] Prevent context bloat before scale by making packs deterministic, bounded, and auditable. (commit: this changeset)
+- [x] Prevent context bloat before scale by making packs deterministic, bounded, and auditable. (commit: d7ef213)
 
 Deliverables
 - [x] Deterministic ordering: manifest entries sorted by normalized path, then content hash.
@@ -316,14 +316,14 @@ Tests (backstop)
 
 ## PHASE 4: Runtime hardening
 Deliverables
-- [x] Adversarial fixtures: corrupted artifacts, partial state, path attacks, malformed proofs, pipeline interruption/resume safety. (commit: this changeset)
+- [x] Adversarial fixtures: corrupted artifacts, partial state, path attacks, malformed proofs, pipeline interruption/resume safety. (commit: f85f2ca)
   - `CATALYTIC-DPT/TESTBENCH/test_adversarial_cas.py`
   - `CATALYTIC-DPT/TESTBENCH/test_adversarial_ledger.py`
   - `CATALYTIC-DPT/TESTBENCH/test_adversarial_paths.py`
   - `CATALYTIC-DPT/TESTBENCH/test_adversarial_proof_tamper.py`
   - `CATALYTIC-DPT/TESTBENCH/test_adversarial_pipeline_resume.py`
 - [ ] Tighten guards as needed, always with fixtures and regression tests.
-- [x] Fix ledger.schema.json $ref resolution (Draft7) (commit: this changeset)
+- [x] Fix ledger.schema.json $ref resolution (Draft7) (commit: edd39b8)
 Note: currently causes ledger/proof tests to fail; discovered after Phase 1 closure.
 
 Acceptance
@@ -334,7 +334,7 @@ Acceptance
 
 ## PHASE 5: Pipelines
 Deliverables
-- [x] Minimal pipeline runner (init/run/status/resume; artifact-only state). (commit: this changeset)
+- [x] Minimal pipeline runner (init/run/status/resume; artifact-only state). (commit: 1799178)
 - [ ] Compose verified runs into durable workflows.
 - [ ] Pipelines are still artifact-first, replayable, and proof-gated.
 
@@ -342,7 +342,7 @@ Acceptance
 - [x] Pipeline state is resume-safe from artifacts only (STATE.json + per-step RUN_REF.json).
 - [x] Each step produces normal run artifacts under `CONTRACTS/_runs/<run_id>/` (PROOF.json, DOMAIN_ROOTS.json, LEDGER.jsonl).
 - [ ] Pipeline execution produces a verifiable chain of bundles and proofs.
-- [ ] Resume works without chat logs or narrative state.
+- [x] Resume works without chat logs or narrative state.
 
 ---
 
@@ -364,11 +364,11 @@ Deliverables
 ---
 
 ## Immediate next actions (pick one, do the smallest)
-- [ ] Implement **CAS (1.U)** with streaming + deterministic layout + tests.
-- [ ] Implement **Merkle (1.M)** with deterministic manifests/roots + tests.
-- [ ] Implement **Ledger (1.D)** append-only + schema-valid + deterministic + tests.
-- [ ] Wire **Proof (1.P)** to the primitives + rerun determinism test.
-- [ ] Start **Expand-by-hash (Phase 1X)** once CAS exists (it depends on dereference).
+- [x] Implement **CAS (1.U)** with streaming + deterministic layout + tests.
+- [x] Implement **Merkle (1.M)** with deterministic manifests/roots + tests.
+- [x] Implement **Ledger (1.D)** append-only + schema-valid + deterministic + tests.
+- [x] Wire **Proof (1.P)** to the primitives + rerun determinism test.
+- [x] Start **Expand-by-hash (Phase 1X)** once CAS exists (it depends on dereference).
 
 Priority order is strict: 1.U → 1.M → 1.D → 1.P → 1X.
 
