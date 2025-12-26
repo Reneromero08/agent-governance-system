@@ -10,6 +10,7 @@ from typing import Any, Dict, Optional
 from PIPELINES.pipeline_chain import verify_chain
 from PIPELINES.pipeline_runtime import _slug
 from PRIMITIVES.ledger import Ledger, _LEDGER_VALIDATOR  # type: ignore
+from PRIMITIVES.registry_validators import validate_capabilities_registry, validate_capability_pins  # type: ignore
 
 
 _HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -63,6 +64,9 @@ def _load_capabilities_registry(*, project_root: Path) -> Dict[str, Any]:
     path = Path(rel)
     if not path.is_absolute():
         path = project_root / path
+    v = validate_capabilities_registry(path)
+    if not v.ok:
+        raise ValueError(v.code)
     obj = _load_json_obj(path)
     if obj.get("registry_version") != "1.0.0":
         raise ValueError("CAPABILITIES_REGISTRY_INVALID_VERSION")
@@ -77,6 +81,9 @@ def _load_pins(*, project_root: Path) -> Dict[str, Any]:
     path = Path(rel)
     if not path.is_absolute():
         path = project_root / path
+    v = validate_capability_pins(path)
+    if not v.ok:
+        raise ValueError(v.code)
     obj = _load_json_obj(path)
     if obj.get("pins_version") != "1.0.0":
         raise ValueError("PINS_INVALID_VERSION")

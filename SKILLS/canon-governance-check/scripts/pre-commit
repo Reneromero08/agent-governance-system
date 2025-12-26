@@ -1,0 +1,22 @@
+#!/bin/sh
+# Pre-commit hook for canon governance check
+# Install with: cp SKILLS/canon-governance-check/scripts/pre-commit .git/hooks/pre-commit
+
+echo "🔍 Running canon governance check..."
+
+# Run the governance check
+node TOOLS/check-canon-governance.js
+
+# Capture exit code
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "❌ Pre-commit check failed!"
+    echo "   Fix governance issues before committing."
+    echo "   Run 'node TOOLS/check-canon-governance.js --verbose' for details."
+    exit 1
+fi
+
+echo "✅ Governance check passed"
+exit 0
