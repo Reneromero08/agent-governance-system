@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import re
 from pathlib import Path
 from typing import Any, Dict, Optional
@@ -53,6 +54,24 @@ def _sha256_file(path: Path) -> str:
     return h.hexdigest()
 
 
+def _canonical_json_bytes(obj: Any) -> bytes:
+    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
+def _load_capabilities_registry(*, project_root: Path) -> Dict[str, Any]:
+    rel = os.environ.get("CATALYTIC_CAPABILITIES_PATH", "CATALYTIC-DPT/CAPABILITIES.json")
+    path = Path(rel)
+    if not path.is_absolute():
+        path = project_root / path
+    obj = _load_json_obj(path)
+    if obj.get("registry_version") != "1.0.0":
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID_VERSION")
+    caps = obj.get("capabilities")
+    if not isinstance(caps, dict):
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID")
+    return obj
+
+
 def verify_pipeline(
     *,
     project_root: Path,
@@ -76,6 +95,22 @@ def verify_pipeline(
             "code": "PIPELINE_NOT_FOUND",
             "details": {"pipeline_dir": str(pipeline_dir)},
         }
+
+    # Capability enforcement: if PIPELINE.json references capability hashes, enforce strict
+    # resolution via the canonical registry and exact step spec matching.
+    try:
+        pipeline_spec = _load_json_obj(pipeline_dir / "PIPELINE.json")
+    except Exception:
+        pipeline_spec = {}
+    spec_steps = pipeline_spec.get("steps", [])
+    capability_mode = isinstance(spec_steps, list) and any(isinstance(s, dict) and "capability_hash" in s for s in spec_steps)
+    capabilities = None
+    if capability_mode:
+        try:
+            registry = _load_capabilities_registry(project_root=project_root)
+            capabilities = registry.get("capabilities", {})
+        except Exception as e:
+            return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "message": str(e)}}
 
     chain_result = verify_chain(project_root=project_root, pipeline_dir=pipeline_dir)
     if not chain_result.get("ok", False):
@@ -109,6 +144,47 @@ def verify_pipeline(
         roots_path = run_dir / "DOMAIN_ROOTS.json"
         ledger_path = run_dir / "LEDGER.jsonl"
         outputs_hashes_path = run_dir / "OUTPUT_HASHES.json"
+
+        if capability_mode:
+            # Find step spec entry (fail closed).
+            step_spec = None
+            for s in spec_steps:
+                if isinstance(s, dict) and s.get("step_id") == step_id:
+                    step_spec = s
+                    break
+            if not isinstance(step_spec, dict):
+                return {"ok": False, "code": "PIPELINE_SPEC_MISSING_STEP", "details": {"phase": "CAPABILITIES", "step_id": step_id}}
+            cap = step_spec.get("capability_hash")
+            if not isinstance(cap, str) or _HEX64_RE.fullmatch(cap) is None:
+                return {"ok": False, "code": "MISSING_CAPABILITY_HASH", "details": {"phase": "CAPABILITIES", "step_id": step_id}}
+            if not isinstance(capabilities, dict):
+                return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES"}}
+            cap_entry = capabilities.get(cap)
+            if not isinstance(cap_entry, dict):
+                return {"ok": False, "code": "UNKNOWN_CAPABILITY", "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap}}
+            adapter = cap_entry.get("adapter")
+            if not isinstance(adapter, dict):
+                return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap}}
+            computed = hashlib.sha256(_canonical_json_bytes(adapter)).hexdigest()
+            if computed != cap or cap_entry.get("adapter_spec_hash") != computed:
+                return {"ok": False, "code": "CAPABILITY_HASH_MISMATCH", "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap}}
+            # Verify pipeline step cmd matches adapter command exactly.
+            if step_spec.get("cmd") != adapter.get("command"):
+                return {"ok": False, "code": "ADAPTER_COMMAND_MISMATCH", "details": {"phase": "CAPABILITIES", "step_id": step_id}}
+            # Verify jobspec file matches adapter jobspec exactly (canonical bytes).
+            try:
+                jobspec_path = step_spec.get("jobspec_path")
+                if not isinstance(jobspec_path, str) or not jobspec_path:
+                    raise ValueError("jobspec_path missing")
+                jobspec_abs = project_root / jobspec_path.replace("\\", "/")
+                jobspec_obj = _load_json_obj(jobspec_abs)
+                expected_jobspec = adapter.get("jobspec")
+                if not isinstance(expected_jobspec, dict):
+                    raise ValueError("adapter jobspec invalid")
+                if _canonical_json_bytes(jobspec_obj) != _canonical_json_bytes(expected_jobspec):
+                    return {"ok": False, "code": "JOBSPEC_MISMATCH", "details": {"phase": "CAPABILITIES", "step_id": step_id}}
+            except Exception as e:
+                return {"ok": False, "code": "JOBSPEC_MISMATCH", "details": {"phase": "CAPABILITIES", "step_id": step_id, "message": str(e)}}
 
         missing = [
             p.name
