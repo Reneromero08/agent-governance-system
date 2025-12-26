@@ -110,9 +110,6 @@ def ags_route(*, plan_path: Path, pipeline_id: str, runs_root: str) -> int:
     spec_bytes = canonical_json_bytes(pipeline_spec)
     _write_idempotent(pipeline_dir / "PIPELINE.json", spec_bytes)
 
-    state = {"pipeline_id": pipeline_id, "current_step_index": 0, "completed_steps": [], "step_run_ids": {}, "attempts": {}}
-    _write_idempotent(pipeline_dir / "STATE.json", canonical_json_bytes(state))
-
     sys.stdout.write(f"OK wrote {runs_root}/_pipelines/{_slug(pipeline_id)}/PIPELINE.json\n")
     return 0
 
