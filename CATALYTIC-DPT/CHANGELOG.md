@@ -2,6 +2,17 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.40.0] - 2025-12-26
+
+### Phase 5: Pipeline Verify CLI (Fail-Closed)
+
+#### Added
+- `catalytic pipeline verify --pipeline-id <id>`: mechanical, artifact-only verification of a full pipeline run.
+- `CATALYTIC-DPT/PIPELINES/pipeline_verify.py`: verifies `CHAIN.json`, per-step required artifacts, proof_hash integrity (if present), and schema-valid LEDGER.jsonl.
+- `CATALYTIC-DPT/TESTBENCH/test_pipeline_verify_cli.py`: verifies OK, missing artifacts, chain tamper, and ledger corruption cases via the CLI.
+
+---
+
 ## [1.38.0] - 2025-12-26
 
 ### Phase 3: Packing Hygiene (Deterministic, Bounded, Deduplicated)
