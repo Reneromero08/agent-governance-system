@@ -2,6 +2,17 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.41.0] - 2025-12-26
+
+### Phase 6.1: AGS Bridge (Model-Free Pipelines)
+
+#### Added
+- `python -m TOOLS.ags route`: emits deterministic `PIPELINE.json` + `STATE.json` from an explicit JSON plan (idempotent writes).
+- `python -m TOOLS.ags run`: runs `catalytic pipeline run` then `catalytic pipeline verify` (fail-closed).
+- `TESTBENCH/test_ags_phase6_bridge.py`: subprocess tests for deterministic routing, run+verify success, and tamper rejection.
+
+---
+
 ## [1.40.0] - 2025-12-26
 
 ### Phase 5: Pipeline Verify CLI (Fail-Closed)
