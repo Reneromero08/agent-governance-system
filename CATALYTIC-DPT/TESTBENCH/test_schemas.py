@@ -78,8 +78,15 @@ def main() -> int:
         "jobspec.schema.json": jobspec_schema,
         "validation_error.schema.json": validation_error_schema,
         "ledger.schema.json": ledger_schema,
+        "ledger.schema.json#": ledger_schema,
         "proof.schema.json": proof_schema,
     }
+    ledger_uri = (schema_files["ledger"].resolve()).as_uri()
+    jobspec_uri = (schema_files["jobspec"].resolve()).as_uri()
+    store[ledger_uri] = ledger_schema
+    store[ledger_uri + "#"] = ledger_schema
+    store[jobspec_uri] = jobspec_schema
+    store[jobspec_uri + "#"] = jobspec_schema
     for schema in [jobspec_schema, validation_error_schema, ledger_schema, proof_schema]:
         schema_id = schema.get("$id")
         if isinstance(schema_id, str) and schema_id:
