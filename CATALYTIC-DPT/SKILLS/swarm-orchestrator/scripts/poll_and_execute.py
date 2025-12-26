@@ -20,7 +20,7 @@ from datetime import datetime
 
 # Navigate up to CATALYTIC-DPT root
 CATALYTIC_ROOT = Path(__file__).parent.parent.parent
-sys.path.insert(0, str(CATALYTIC_ROOT / "MCP"))
+sys.path.insert(0, str(CATALYTIC_ROOT / "LAB" / "MCP"))
 from server import mcp_server
 
 SKILLS_DIR = CATALYTIC_ROOT / "SKILLS"
@@ -35,7 +35,12 @@ def run_governor(interval: int):
 
     while True:
         try:
-            directives = mcp_server.get_directives("Governor")
+            try:
+                directives = mcp_server.get_directives("Governor")
+            except json.JSONDecodeError as e:
+                print(f"[Governor] JSON parse error in directives: {e}")
+                time.sleep(interval)
+                continue
 
             if directives["pending_count"] > 0:
                 for d in directives["directives"]:
@@ -96,7 +101,12 @@ def run_ant(agent_id: str, interval: int):
 
     while True:
         try:
-            pending = mcp_server.get_pending_tasks(agent_id)
+            try:
+                pending = mcp_server.get_pending_tasks(agent_id)
+            except json.JSONDecodeError as e:
+                print(f"[{agent_id}] JSON parse error in tasks: {e}")
+                time.sleep(interval)
+                continue
 
             if pending["pending_count"] > 0:
                 for task in pending["tasks"]:
