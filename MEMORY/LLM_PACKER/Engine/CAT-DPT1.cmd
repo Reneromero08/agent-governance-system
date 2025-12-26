@@ -32,7 +32,19 @@ for %%I in ("%~dp0..\\_packs") do set "PACKS_DIR=%%~fI"
 for %%I in ("%~dp0..\\_packs\\%BASENAME%") do set "OUT_DIR_ABS=%%~fI"
 for %%I in ("%PACKS_DIR%\\_system\\archive") do set "ARCHIVE_DIR=%%~fI"
 
-powershell -NoProfile -ExecutionPolicy Bypass -Command "New-Item -Force -ItemType Directory \"%ARCHIVE_DIR%\" | Out-Null; $zip = Join-Path \"%ARCHIVE_DIR%\" (\"%BASENAME%\" + '.zip'); if (Test-Path $zip) { Remove-Item -Force $zip }; Compress-Archive -Force -Path (Join-Path \"%OUT_DIR_ABS%\" '*') -DestinationPath $zip"
+echo.
+echo Zip inputs:
+echo - PACKS_DIR=%PACKS_DIR%
+echo - OUT_DIR_ABS=%OUT_DIR_ABS%
+echo - ARCHIVE_DIR=%ARCHIVE_DIR%
+echo.
+
+if not exist "%OUT_DIR_ABS%\\" (
+  echo ERROR: Expected pack folder does not exist: "%OUT_DIR_ABS%"
+  goto :fail
+)
+
+powershell -NoProfile -ExecutionPolicy Bypass -Command "New-Item -Force -ItemType Directory \"%ARCHIVE_DIR%\" | Out-Null; $zip = Join-Path \"%ARCHIVE_DIR%\" (\"%BASENAME%\" + '.zip'); if (Test-Path -LiteralPath $zip) { Remove-Item -Force -LiteralPath $zip }; Compress-Archive -Force -Path (Join-Path \"%OUT_DIR_ABS%\" '*') -DestinationPath $zip"
 if errorlevel 1 goto :fail
 
 echo.
