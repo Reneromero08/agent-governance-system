@@ -28,6 +28,20 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.49.0] - 2025-12-26
+
+### Phase 6.6: Capability Pinning Enforcement
+
+#### Added
+- `CAPABILITY_PINS.json`: deterministic allowlist of permitted `capability_hash` values.
+- `TESTBENCH/test_ags_phase6_capability_pins.py`: route-time and verify-time rejection for unpinned capabilities (fail-closed).
+
+#### Changed
+- `TOOLS/ags.py`: rejects known-but-unpinned capabilities at route time (`CAPABILITY_NOT_PINNED`).
+- `PIPELINES/pipeline_verify.py`: rejects unpinned capabilities even if present in `CAPABILITIES.json` (`CAPABILITY_NOT_PINNED`).
+
+---
+
 ## [1.46.0] - 2025-12-26
 
 ### Docs: Roadmap Promotion
