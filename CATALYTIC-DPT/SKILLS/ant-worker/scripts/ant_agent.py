@@ -39,7 +39,7 @@ def main():
         print(f"Error: Config not found at {config_path}")
         return
 
-    mcp = MCPTerminalServer(config_path)
+    mcp = MCPTerminalServer()
     
     print(f"[{args.agent_id}] Online. Connected to MCP Ledger. Polling every {args.poll_interval}s...")
     print(f"[{args.agent_id}] Backend: Liquid LFM2-2.6B (via transformers)")
