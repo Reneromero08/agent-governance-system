@@ -116,9 +116,15 @@ def build_index(conn: sqlite3.Connection) -> int:
              continue
 
         rel_path = str(md_file.relative_to(PROJECT_ROOT))
-        fs_paths.add(rel_path)
         
-        current_mtime = md_file.stat().st_mtime
+        try:
+            current_mtime = md_file.stat().st_mtime
+        except (FileNotFoundError, OSError):
+            # File disappeared (e.g., pytest temp directory cleaned up)
+            continue
+        
+        # Only add to fs_paths if file actually exists
+        fs_paths.add(rel_path)
         
         # Check if update needed
         if rel_path in existing_state:
@@ -209,26 +215,45 @@ def iter_section_index_paths() -> List[Path]:
     paths: List[Path] = []
     include_fixtures = os.environ.get("CORTEX_SECTION_INDEX_INCLUDE_FIXTURES", "").strip().lower() in {"1", "true", "yes"}
     for md_file in PROJECT_ROOT.rglob("*.md"):
-        if any(part.startswith(".") for part in md_file.parts):
-            continue
-        if any(part in ("BUILD", "_runs", "_packs", "_generated") for part in md_file.parts):
-            continue
+        try:
+            if any(part.startswith(".") for part in md_file.parts):
+                continue
+            if any(part in ("BUILD", "_runs", "_packs", "_generated") for part in md_file.parts):
+                continue
 
-        rel = md_file.relative_to(PROJECT_ROOT)
-        if not include_fixtures and len(rel.parts) >= 2 and rel.parts[0] == "CORTEX" and rel.parts[1] == "fixtures":
+            rel = md_file.relative_to(PROJECT_ROOT)
+            if not include_fixtures and len(rel.parts) >= 2 and rel.parts[0] == "CORTEX" and rel.parts[1] == "fixtures":
+                continue
+            if len(rel.parts) == 1 and rel.name in SECTION_INDEX_ROOT_ALLOWLIST:
+                paths.append(md_file)
+                continue
+            if rel.parts and rel.parts[0] in SECTION_INDEX_DIR_ALLOWLIST:
+                paths.append(md_file)
+                continue
+        except (FileNotFoundError, OSError):
+            # File disappeared during iteration (e.g., pytest temp cleanup)
             continue
-        if len(rel.parts) == 1 and rel.name in SECTION_INDEX_ROOT_ALLOWLIST:
-            paths.append(md_file)
+    
+    # Filter out any paths that no longer exist before sorting
+    valid_paths = []
+    for p in paths:
+        try:
+            p.stat()  # Check if file still exists
+            valid_paths.append(p)
+        except (FileNotFoundError, OSError):
             continue
-        if rel.parts and rel.parts[0] in SECTION_INDEX_DIR_ALLOWLIST:
-            paths.append(md_file)
-            continue
-    return sorted(paths, key=lambda p: str(p.relative_to(PROJECT_ROOT)).lower())
+    
+    return sorted(valid_paths, key=lambda p: str(p.relative_to(PROJECT_ROOT)).lower())
 
 
 def extract_sections_from_markdown(md_path: Path) -> List[Dict[str, object]]:
-    rel_path = md_path.relative_to(PROJECT_ROOT).as_posix()
-    content = md_path.read_text(encoding="utf-8", errors="replace")
+    try:
+        rel_path = md_path.relative_to(PROJECT_ROOT).as_posix()
+        content = md_path.read_text(encoding="utf-8", errors="replace")
+    except (FileNotFoundError, OSError):
+        # File disappeared during processing
+        return []
+    
     # Normalization contract for SECTION_INDEX hashing:
     # - Normalize newlines to '\n' before slicing and hashing.
     # - Hash is sha256 over the exact section slice (heading line through end_line inclusive).
