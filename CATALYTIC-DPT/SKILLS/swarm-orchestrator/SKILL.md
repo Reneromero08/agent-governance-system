@@ -1,5 +1,6 @@
 ---
 name: swarm-orchestrator
+version: "0.1.0"
 description: Launches and coordinates the CATALYTIC-DPT agent swarm. Use to start Governor and Ant Workers for distributed task execution.
 compatibility: Python 3.8+, MCP server
 ---

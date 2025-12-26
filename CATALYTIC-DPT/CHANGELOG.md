@@ -2,6 +2,24 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.51.0] - 2025-12-26
+
+### LAB Reorganization
+
+#### Changed
+- Moved architecture docs to `LAB/ARCHITECTURE/`:
+  - `ORCHESTRATION_ARCHITECTURE.md` → `ARCHITECTURE/ORCHESTRATION.md`
+  - `RECURSIVE_SWARM_ARCHITECTURE.md` → `ARCHITECTURE/RECURSIVE_SWARM.md`
+- Moved `ROADMAP_PATCH_SEMIOTIC.md` → `RESEARCH/SEMIOTIC_COMPRESSION_ROADMAP_PATCH.md`
+
+#### Removed
+- `ROADMAP_PATCH_SEMIOTIC_TESTBENCH.md` (duplicate of ROADMAP_PATCH_SEMIOTIC.md)
+
+#### Added
+- `LAB/README.md`: Index documenting LAB directory structure
+
+---
+
 ## [1.50.0] - 2025-12-26
 
 ### Phase 6.7: Registry Immutability Backstop
