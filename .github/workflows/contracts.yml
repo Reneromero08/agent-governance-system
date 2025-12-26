@@ -30,8 +30,13 @@ jobs:
       - name: Build cortex index
         run: python CORTEX/cortex.build.py
       
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
       - name: Run canon governance checks
-        run: python TOOLS/check_canon_governance.py
+        run: node TOOLS/check-canon-governance.js
       
       - name: Run critic checks
         run: python TOOLS/critic.py

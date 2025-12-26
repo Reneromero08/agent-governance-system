@@ -2,6 +2,20 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.50.0] - 2025-12-26
+
+### Phase 6.7: Registry Immutability Backstop
+
+#### Added
+- `PRIMITIVES/registry_validators.py`: strict, deterministic validation for `CAPABILITIES.json` and `CAPABILITY_PINS.json` (duplicates/noncanonical/tamper fail closed).
+- `TESTBENCH/test_ags_phase6_registry_immutability.py`: adversarial coverage for duplicate hashes, non-canonical JSON, and tamper detection.
+
+#### Changed
+- `TOOLS/ags.py`: fail-closed on malformed/non-canonical/tampered registries during routing.
+- `PIPELINES/pipeline_verify.py`: fail-closed on malformed/non-canonical/tampered registries during verification.
+
+---
+
 ## [1.47.0] - 2025-12-26
 
 ### Phase 6.4: MCP Adapters as Governed Pipeline Steps
