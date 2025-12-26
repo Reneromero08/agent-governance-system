@@ -91,11 +91,15 @@ def main() -> int:
     pipeline_sub = pipeline_p.add_subparsers(dest="pipe_cmd", required=True)
 
     run_p = pipeline_sub.add_parser("run", help="Initialize/resume and run pipeline")
-    run_p.add_argument("pipeline_id", help="Pipeline ID")
+    run_p.add_argument("--pipeline-id", dest="pipeline_id_opt", default=None, help="Pipeline ID")
+    run_p.add_argument("pipeline_id", nargs="?", help="Pipeline ID (positional; deprecated)")
+    run_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
     run_p.add_argument("--spec", required=False, default=None, help="PipelineSpec JSON path (required on first run)")
 
     status_p = pipeline_sub.add_parser("status", help="Print deterministic pipeline status")
-    status_p.add_argument("pipeline_id", help="Pipeline ID")
+    status_p.add_argument("--pipeline-id", dest="pipeline_id_opt", default=None, help="Pipeline ID")
+    status_p.add_argument("pipeline_id", nargs="?", help="Pipeline ID (positional; deprecated)")
+    status_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
 
     verify_p = pipeline_sub.add_parser("verify", help="Fail-closed pipeline verification (artifact-only)")
     verify_p.add_argument("--pipeline-id", required=True, help="Pipeline ID")
@@ -115,6 +119,10 @@ def main() -> int:
         ledger_path = _resolve_ledger_path(run_id=run_id)
 
     try:
+        if args.cmd == "pipeline":
+            if getattr(args, "runs_root", "CONTRACTS/_runs") != "CONTRACTS/_runs":
+                raise RuntimeError("UNSUPPORTED_RUNS_ROOT (only CONTRACTS/_runs is supported)")
+
         if args.cmd == "pipeline" and args.pipe_cmd == "verify":
             runs_root = Path(args.runs_root)
             if not runs_root.is_absolute():
@@ -143,15 +151,21 @@ def main() -> int:
             return 1
 
         if args.cmd == "pipeline" and args.pipe_cmd == "status":
+            pid = args.pipeline_id_opt or args.pipeline_id
+            if pid is None:
+                raise SystemExit("ERROR: provide --pipeline-id")
             rt = PipelineRuntime(project_root=REPO_ROOT)
-            sys.stdout.write(rt.status_text(pipeline_id=args.pipeline_id))
+            sys.stdout.write(rt.status_text(pipeline_id=pid))
             return 0
 
         if args.cmd == "pipeline" and args.pipe_cmd == "run":
+            pid = args.pipeline_id_opt or args.pipeline_id
+            if pid is None:
+                raise SystemExit("ERROR: provide --pipeline-id")
             rt = PipelineRuntime(project_root=REPO_ROOT)
             spec_path = Path(args.spec) if args.spec is not None else None
-            rt.run(pipeline_id=args.pipeline_id, spec_path=spec_path)
-            sys.stdout.write(rt.status_text(pipeline_id=args.pipeline_id))
+            rt.run(pipeline_id=pid, spec_path=spec_path)
+            sys.stdout.write(rt.status_text(pipeline_id=pid))
             return 0
 
         if args.cmd == "hash" and args.hash_cmd == "read":
