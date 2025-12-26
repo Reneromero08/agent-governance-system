@@ -2,6 +2,18 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.47.0] - 2025-12-26
+
+### Phase 6.4: MCP Adapters as Governed Pipeline Steps
+
+#### Changed
+- `PIPELINES/pipeline_verify.py`: re-hashes durable outputs listed in `OUTPUT_HASHES.json` and fails closed on post-run tampering.
+
+#### Added
+- `TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py`: end-to-end adapter step execution using `SKILLS/ant-worker` and strict pipeline verification (including tamper rejection).
+
+---
+
 ## [1.46.0] - 2025-12-26
 
 ### Docs: Roadmap Promotion
