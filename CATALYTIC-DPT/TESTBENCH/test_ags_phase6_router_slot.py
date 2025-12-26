@@ -47,7 +47,7 @@ def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
     plan_obj = {
         "plan_version": "1.0",
         "pipeline_id": "ignored-by-override",
-        "steps": [{"step_id": "s1", "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
+        "steps": [{"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
     }
     router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
 
@@ -144,14 +144,24 @@ def test_ags_plan_caps_bytes(tmp_path: Path) -> None:
 def test_ags_route_rejects_invalid_plan_schema(tmp_path: Path) -> None:
     pipeline_id = "ags-router-invalid-plan"
     plan_path = tmp_path / "bad_plan.json"
-    plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "jobspec": {}}, {"step_id": "s1", "jobspec": {}}]}))
+    plan_path.write_text(
+        json.dumps(
+            {
+                "plan_version": "1.0",
+                "steps": [
+                    {"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": {}},
+                    {"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": {}},
+                ],
+            }
+        )
+    )
     r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
     assert r.returncode != 0
 
 
 def test_ags_plan_jobspec_validation(tmp_path: Path) -> None:
     plan_out = tmp_path / "plan.json"
-    bad = {"plan_version": "1.0", "steps": [{"step_id": "s1", "jobspec": {"task_type": "nope"}}]}
+    bad = {"plan_version": "1.0", "steps": [{"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": {"task_type": "nope"}}]}
     code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(bad)
     r = _run_ags(
         [
@@ -167,3 +177,15 @@ def test_ags_plan_jobspec_validation(tmp_path: Path) -> None:
         ]
     )
     assert r.returncode != 0
+
+
+def test_ags_route_rejects_missing_step_command(tmp_path: Path) -> None:
+    pipeline_id = "ags-router-missing-command"
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(
+        json.dumps({"steps": [{"step_id": "s1", "jobspec": _valid_jobspec(tmp_root="ags_router_missing_cmd")}]}),
+        encoding="utf-8",
+    )
+    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
+    assert r.returncode != 0
+    assert "MISSING_STEP_COMMAND" in r.stderr
