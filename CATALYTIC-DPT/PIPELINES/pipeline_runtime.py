@@ -76,6 +76,28 @@ class PipelineRuntime:
         self.schemas_dir = self.project_root / "CATALYTIC-DPT" / "SCHEMAS"
         self.jobspec_schema_path = self.schemas_dir / "jobspec.schema.json"
 
+    def _load_revoked_capabilities_snapshot(self) -> List[str]:
+        rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CATALYTIC-DPT/CAPABILITY_REVOKES.json")
+        path = Path(rel)
+        if not path.is_absolute():
+            path = self.project_root / path
+        if not path.exists():
+            return []
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        if not isinstance(obj, dict) or obj.get("revokes_version") != "1.0.0":
+            raise ValueError("REVOKES_INVALID")
+        revoked = obj.get("revoked_capabilities")
+        if not isinstance(revoked, list) or not all(isinstance(x, str) and x for x in revoked):
+            raise ValueError("REVOKES_INVALID")
+        return list(revoked)
+
+    def _init_policy_if_missing(self, *, pdir: Path) -> None:
+        policy_path = pdir / "POLICY.json"
+        if policy_path.exists():
+            return
+        revoked = sorted(set(self._load_revoked_capabilities_snapshot()))
+        _atomic_write_canonical_json(policy_path, {"policy_version": "1.0.0", "revoked_capabilities": revoked})
+
     def pipeline_dir(self, pipeline_id: str) -> Path:
         return self.project_root / "CONTRACTS" / "_runs" / "_pipelines" / _slug(pipeline_id)
 
@@ -146,6 +168,7 @@ class PipelineRuntime:
         else:
             self._init_state_if_missing(pipeline_id=pipeline_id, pdir=pdir)
 
+        self._init_policy_if_missing(pdir=pdir)
         spec, state = self.load(pipeline_id=pipeline_id)
         completed_steps = set(state["completed_steps"])
         attempts: Dict[str, int] = dict(state.get("attempts", {}))

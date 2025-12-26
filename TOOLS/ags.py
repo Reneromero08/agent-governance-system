@@ -19,7 +19,11 @@ from PIPELINES.pipeline_runtime import _slug  # type: ignore
 from PRIMITIVES.cas_store import normalize_relpath  # type: ignore
 from PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 from PRIMITIVES.preflight import PreflightValidator  # type: ignore
-from PRIMITIVES.registry_validators import validate_capabilities_registry, validate_capability_pins  # type: ignore
+from PRIMITIVES.registry_validators import (
+    validate_capabilities_registry,
+    validate_capability_pins,
+    validate_capability_revokes,
+)  # type: ignore
 
 from jsonschema import Draft7Validator, RefResolver
 
@@ -60,6 +64,7 @@ GLOBAL_DEREF_MAX_DEPTH = 32
 # Default capabilities registry path (repo-relative).
 DEFAULT_CAPABILITIES_PATH = "CATALYTIC-DPT/CAPABILITIES.json"
 DEFAULT_PINS_PATH = "CATALYTIC-DPT/CAPABILITY_PINS.json"
+DEFAULT_REVOKES_PATH = "CATALYTIC-DPT/CAPABILITY_REVOKES.json"
 
 
 def _read_bytes_bounded(path: Path, max_bytes: int) -> bytes:
@@ -281,6 +286,15 @@ def _pins_path() -> Path:
     return REPO_ROOT / p
 
 
+def _revokes_path() -> Path:
+    env = os.environ.get("CATALYTIC_REVOKES_PATH")
+    rel = env if isinstance(env, str) and env else DEFAULT_REVOKES_PATH
+    p = Path(rel)
+    if p.is_absolute():
+        return p
+    return REPO_ROOT / p
+
+
 def _load_capabilities_registry() -> Dict[str, Any]:
     path = _capabilities_path()
     v = validate_capabilities_registry(path)
@@ -315,6 +329,30 @@ def _load_pins() -> Dict[str, Any]:
     return obj
 
 
+def _load_revokes() -> Dict[str, Any]:
+    path = _revokes_path()
+    if not path.exists():
+        return {"revokes_version": "1.0.0", "revoked_capabilities": []}
+    v = validate_capability_revokes(path)
+    if not v.ok:
+        raise ValueError(v.code)
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(obj, dict):
+        raise ValueError("REVOKES_INVALID")
+    if obj.get("revokes_version") != "1.0.0":
+        raise ValueError("REVOKES_INVALID_VERSION")
+    revoked = obj.get("revoked_capabilities")
+    if not isinstance(revoked, list) or not all(isinstance(x, str) and x for x in revoked):
+        raise ValueError("REVOKES_INVALID")
+    return obj
+
+
+def _is_capability_revoked(capability_hash: str) -> bool:
+    revokes = _load_revokes()
+    revoked = revokes.get("revoked_capabilities", [])
+    return capability_hash in revoked
+
+
 def _is_capability_pinned(capability_hash: str) -> bool:
     pins = _load_pins()
     allowed = pins.get("allowed_capabilities", [])
@@ -331,6 +369,8 @@ def _resolve_capability_hash(capability_hash: str) -> Dict[str, Any]:
     entry = caps.get(capability_hash)
     if not isinstance(entry, dict):
         raise ValueError("UNKNOWN_CAPABILITY")
+    if _is_capability_revoked(capability_hash):
+        raise ValueError("REVOKED_CAPABILITY")
     if not _is_capability_pinned(capability_hash):
         raise ValueError("CAPABILITY_NOT_PINNED")
     adapter = entry.get("adapter")
