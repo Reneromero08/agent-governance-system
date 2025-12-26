@@ -141,6 +141,8 @@ def verify_pipeline(
                 "REGISTRY_TAMPERED",
                 "REGISTRY_INVALID",
             }:
+                if code == "REGISTRY_TAMPERED":
+                    return {"ok": False, "code": "CAPABILITY_HASH_MISMATCH", "details": {"phase": "CAPABILITIES"}}
                 return {"ok": False, "code": code, "details": {"phase": "CAPABILITIES"}}
             return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "message": str(e)}}
 

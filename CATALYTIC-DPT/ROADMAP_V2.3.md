@@ -214,6 +214,19 @@ Acceptance
 
 ---
 
+## PHASE 6.8: Capability versioning semantics (no-history-break)
+Intent
+Make capability versioning semantics explicit: capabilities are immutable-by-content and historical verification must remain possible.
+
+Deliverables
+- [x] Route/verify surfaces use a dedicated boundary error code `CAPABILITY_HASH_MISMATCH` when a capability hash cannot be re-derived from the registry adapter spec bytes.
+- [x] Tests assert that changing adapter spec bytes requires a new capability hash; “in-place upgrade” is rejected deterministically.
+
+Acceptance
+- [x] Existing capability hashes remain verifiable as long as their registry entries remain present and correct.
+
+---
+
 ## PHASE 7: Swarm scheduling (artifact-only, DAG, no narrative state)
 Intent
 A swarm is just many pipelines, with explicit dependencies and audited handoffs.

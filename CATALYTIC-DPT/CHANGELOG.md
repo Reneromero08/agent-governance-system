@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.52.0] - 2025-12-26
+
+### LAB Compression (Cortex-Style Merge)
+
+#### Changed
+- Merged `ARCHITECTURE/ORCHESTRATION.md` + `ARCHITECTURE/RECURSIVE_SWARM.md` → `ARCHITECTURE/SWARM_ARCHITECTURE.md`
+- Merged `RESEARCH/SEMIOTIC_COMPRESSION_LAYER_REPORT.md` + `RESEARCH/SEMIOTIC_COMPRESSION_ROADMAP_PATCH.md` → `RESEARCH/SEMIOTIC_COMPRESSION.md`
+- Added Cortex-style document hashes for versioning (`SHA256:SWARM_ARCH_V1`, `SHA256:SCL_SPEC_V1`)
+
+#### Moved
+- `RESEARCH/CATALYTIC_STACK_COMPRESSED_MERGED GPT 5.2.md` → `ARCHIVE/` (superseded)
+
+#### Removed
+- Duplicate/superseded architecture and research files
+
+---
+
 ## [1.51.0] - 2025-12-26
 
 ### LAB Reorganization
@@ -31,6 +48,18 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 #### Changed
 - `TOOLS/ags.py`: fail-closed on malformed/non-canonical/tampered registries during routing.
 - `PIPELINES/pipeline_verify.py`: fail-closed on malformed/non-canonical/tampered registries during verification.
+
+---
+
+## [1.51.0] - 2025-12-26
+
+### Phase 6.8: Capability Versioning Semantics
+
+#### Changed
+- Route/verify surfaces now report `CAPABILITY_HASH_MISMATCH` when a capability hash cannot be re-derived from the registry adapter spec bytes (internal detection remains registry-based).
+
+#### Added
+- `TESTBENCH/test_ags_phase6_capability_versioning_semantics.py`: asserts fail-closed behavior and the dedicated boundary error code.
 
 ---
 

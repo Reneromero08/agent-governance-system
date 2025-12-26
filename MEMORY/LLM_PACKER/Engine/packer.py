@@ -267,7 +267,11 @@ def iter_repo_candidates(project_root: Path, *, scope: PackScope) -> Iterable[Pa
         if not base.exists():
             continue
         for path in sorted(base.rglob("*")):
-            if not path.is_file():
+            try:
+                is_file = path.is_file()
+            except OSError:
+                is_file = False
+            if not is_file:
                 continue
             rel = path.relative_to(project_root)
             if is_excluded_rel_path(rel, excluded_dir_parts=scope.excluded_dir_parts):
