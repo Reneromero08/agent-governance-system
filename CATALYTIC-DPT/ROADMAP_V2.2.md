@@ -14,27 +14,6 @@ Build a verifiable catalytic runtime where:
 3) Do not merge phases unless this roadmap explicitly says so.
 4) Kernel must not import from LAB; LAB may import Kernel.
 
-## Verified progress checklist (as of commit `d6e3970`)
-- [x] Phase 0 contract freeze + enforcement (schemas, fixtures, preflight, write guard)
-- [x] SPECTRUM-04/05 strict verifier + identity/signing enforcement (bundle + chain)
-- [x] SPECTRUM-06 Restore Runner implemented (primitive + CLI + tests; frozen success artifacts + failure codes)
-- [x] Phase 1.U CAS implemented (deterministic layout + streaming; tests) (commit `d6e3970`)
-- [x] Phase 1.M Merkle implemented (deterministic manifest roots; tests) (commit `19a0c9c`)
-- [x] Phase 1.D Ledger implemented (append-only receipts; deterministic JSONL; tests) (commit: this changeset)
-- [x] Phase 1.P Proof wiring implemented (CAS/Merkle/Ledger; determinism tests) (commit: this changeset)
-- [x] CI runs CAT-DPT `pytest` (TMPDIR pinned under workspace; LAB + packs ignored). (commit: this changeset)
-- [x] Phase 1 substrate gate satisfied (CAS + Merkle + Ledger + Proof wiring)
-- [x] Phase 1X expand-by-hash toolbelt implemented (bounded read/grep/ast/describe) (commit: this changeset)
-
-Evidence (files + commits):
-- Phase 0: `CATALYTIC-DPT/SCHEMAS/*.schema.json`, `CATALYTIC-DPT/FIXTURES/phase0/`, `CATALYTIC-DPT/PRIMITIVES/preflight.py`, `CATALYTIC-DPT/PRIMITIVES/fs_guard.py`
-- Verifier: `CATALYTIC-DPT/PRIMITIVES/verify_bundle.py`, `TOOLS/catalytic_verifier.py` (commits `30efb9b`, `0b5e187`)
-- Restore Runner: `CATALYTIC-DPT/PRIMITIVES/restore_runner.py`, `TOOLS/catalytic_restore.py`, `CATALYTIC-DPT/TESTBENCH/test_restore_runner.py` (commit `001b109`)
-- CAS: `CATALYTIC-DPT/PRIMITIVES/cas_store.py`, `CATALYTIC-DPT/TESTBENCH/test_cas_store.py` (commit `d6e3970`)
-- Merkle: `CATALYTIC-DPT/PRIMITIVES/merkle.py`, `CATALYTIC-DPT/TESTBENCH/test_merkle.py` (commit `19a0c9c`)
-- Ledger: `CATALYTIC-DPT/PRIMITIVES/ledger.py`, `CATALYTIC-DPT/TESTBENCH/test_ledger.py` (commit: this changeset)
-- Proof wiring: `CATALYTIC-DPT/PRIMITIVES/restore_proof.py`, `TOOLS/catalytic_runtime.py`, `CATALYTIC-DPT/TESTBENCH/test_proof_wiring.py` (commit: this changeset)
-
 ## Phase gates (the only definition of “done”)
 
 ### Phase 0 Gate: Contract freeze + enforcement
