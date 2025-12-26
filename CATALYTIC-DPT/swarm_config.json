@@ -4,8 +4,8 @@
     "roles": {
         "president": {
             "description": "Main chat orchestrator - high-level strategy and governance",
-            "current_implementation": "Brains (Claude)",
-            "cli": "Antigravity Chat",
+            "current_implementation": "Claude",
+            "cli": "Antigravity / VSCode Chat",
             "notes": "Token-limited, delegates to Governor"
         },
         "governor": {
@@ -16,10 +16,10 @@
         },
         "ant_worker": {
             "description": "Stateless executor - follows templates, no creativity",
-            "current_implementation": "Local (LFM2-2.6B-Exp)",
-            "cli": "ollama run lfm2-2.6b-exp",
+            "current_implementation": "Grok Fast (x-ai/grok-code-fast-1)",
+            "cli": "npx @kilocode/cli",
             "count": 2,
-            "notes": "Liquid Foundation Model - SCL/Macro execution target"
+            "notes": "Free tier, fast execution"
         }
     },
     "alternatives": {
