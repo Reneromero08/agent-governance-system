@@ -16,10 +16,10 @@
         },
         "ant_worker": {
             "description": "Stateless executor - follows templates, no creativity",
-            "current_implementation": "Local (LFM2-2.6B Python)",
-            "cli": "python CATALYTIC-DPT/SKILLS/ant-worker/scripts/lfm2_runner.py",
+            "current_implementation": "Local (LFM2-2.6B Autonomous Agent)",
+            "cli": "python CATALYTIC-DPT/SKILLS/ant-worker/scripts/ant_agent.py",
             "count": 2,
-            "notes": "Direct Python execution via Transformers"
+            "notes": "Polls MCP Ledger for tasks"
         }
     },
     "alternatives": {
