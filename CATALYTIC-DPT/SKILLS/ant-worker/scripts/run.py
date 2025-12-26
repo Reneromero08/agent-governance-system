@@ -19,8 +19,7 @@ import sys
 import shutil
 import hashlib
 from pathlib import Path
-from datetime import datetime
-from typing import Dict, Optional, List
+from typing import Dict, Optional, List, Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MCP_SERVER = PROJECT_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
@@ -33,10 +32,13 @@ def load_json(path: str) -> Dict:
         return json.load(f)
 
 
+def _canonical_json_bytes(obj: Any) -> bytes:
+    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+
 def save_json(path: str, data: Dict) -> None:
-    """Save JSON to file."""
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=2)
+    """Save JSON deterministically."""
+    Path(path).write_bytes(_canonical_json_bytes(data))
 
 
 def compute_hash(file_path: Path) -> str:
@@ -59,20 +61,26 @@ class GrokExecutor:
         self.task_id = task_spec.get("task_id", "unnamed_task")
         self.task_type = task_spec.get("task_type", "file_operation")
 
+        # Deterministic run_id: caller may supply, else derive from task spec bytes.
         if run_id is None:
-            run_id = f"{self.task_id}-{datetime.now().strftime('%Y%m%d-%H%M%S')}"
+            task_id = self.task_id if isinstance(self.task_id, str) and self.task_id else "unnamed_task"
+            spec_hash = hashlib.sha256(_canonical_json_bytes(self.task_spec)).hexdigest()[:12]
+            run_id = f"{task_id}-{spec_hash}"
 
         self.run_id = run_id
         self.run_dir = CONTRACTS_DIR / run_id
         self.run_dir.mkdir(parents=True, exist_ok=True)
+
+        timestamp = task_spec.get("timestamp", "CATALYTIC-DPT-02_CONFIG")
+        if not isinstance(timestamp, str) or not timestamp:
+            timestamp = "CATALYTIC-DPT-02_CONFIG"
 
         self.results = {
             "task_id": self.task_id,
             "task_type": self.task_type,
             "run_id": run_id,
             "status": "pending",
-            "timestamp_start": datetime.now().isoformat(),
-            "timestamp_end": None,
+            "timestamp": timestamp,
             "operations": [],
             "errors": [],
             "ledger_dir": str(self.run_dir)
@@ -109,11 +117,8 @@ class GrokExecutor:
             self.results["errors"].append(f"Exception: {str(e)}")
 
         finally:
-            self.results["timestamp_end"] = datetime.now().isoformat()
-
             # Save results to ledger
-            with open(self.run_dir / "RESULTS.json", "w") as f:
-                json.dump(self.results, f, indent=2)
+            (self.run_dir / "RESULTS.json").write_bytes(_canonical_json_bytes(self.results))
 
         return self.results
 
@@ -190,7 +195,6 @@ class GrokExecutor:
                     "dest_hash": dest_hash,
                     "hash_verified": hash_match,
                     "size_bytes": source_path.stat().st_size,
-                    "timestamp": datetime.now().isoformat()
                 }
                 self.results["operations"].append(operation_result)
                 print(f"[grok-executor] [OK] Copied: {destination} (hash verified: {hash_match})")
@@ -224,7 +228,6 @@ class GrokExecutor:
                     "operation": "move",
                     "source": source,
                     "destination": destination,
-                    "timestamp": datetime.now().isoformat()
                 })
                 print(f"[grok-executor] [OK] Moved: {source} -> {destination}")
 
@@ -247,7 +250,6 @@ class GrokExecutor:
                     self.results["operations"].append({
                         "operation": "delete",
                         "path": file_path,
-                        "timestamp": datetime.now().isoformat()
                     })
                     print(f"[grok-executor] [OK] Deleted: {file_path}")
             except Exception as e:
@@ -309,7 +311,6 @@ class GrokExecutor:
                             "find": find[:50] + "..." if len(find) > 50 else find,
                             "replace": replace[:50] + "..." if len(replace) > 50 else replace,
                             "reason": reason,
-                            "timestamp": datetime.now().isoformat()
                         })
                         print(f"[grok-executor] [OK] Adapted: {reason}")
                     else:
@@ -348,7 +349,6 @@ class GrokExecutor:
             "checks": checks,
             "status": "simulated",
             "note": "In production, would run syntax checks, fixtures, tests",
-            "timestamp": datetime.now().isoformat()
         })
 
     def _execute_research(self) -> None:
@@ -376,7 +376,6 @@ class GrokExecutor:
             "analysis_type": analysis_type,
             "status": "simulated",
             "note": "In production, would perform actual code analysis",
-            "timestamp": datetime.now().isoformat()
         })
 
 
