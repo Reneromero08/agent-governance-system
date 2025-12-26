@@ -16,10 +16,10 @@
         },
         "ant_worker": {
             "description": "Stateless executor - follows templates, no creativity",
-            "current_implementation": "Grok Fast (x-ai/grok-code-fast-1)",
-            "cli": "npx @kilocode/cli",
+            "current_implementation": "Local (LFM2-2.6B Python)",
+            "cli": "python CATALYTIC-DPT/SKILLS/ant-worker/scripts/lfm2_runner.py",
             "count": 2,
-            "notes": "Free tier, fast execution"
+            "notes": "Direct Python execution via Transformers"
         }
     },
     "alternatives": {
