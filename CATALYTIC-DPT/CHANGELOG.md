@@ -2,6 +2,23 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.38.0] - 2025-12-26
+
+### Phase 3: Packing Hygiene (Deterministic, Bounded, Deduplicated)
+
+#### Changed
+- **MEMORY/LLM_PACKER/Engine/packer.py**:
+  - Enforces deterministic pack generation (no timestamp-derived output; deterministic stamps by repo digest prefix).
+  - Enforces explicit pack ceilings (max_total_bytes, max_entry_bytes, max_entries) and fails closed if exceeded.
+  - Rejects duplicate normalized paths and (for CAT-DPT packs by default) duplicate content hashes.
+  - Makes manifest auditable and content-addressed (`PACK_INFO.repo_state_sha256`) and verifies refs on pack validation.
+
+#### Added
+- **MEMORY/LLM_PACKER/Engine/pack_hygiene.py**: pure hygiene helpers (manifest validation, limit enforcement, canonical hashing).
+- **TESTBENCH/test_packing_hygiene.py**: determinism + bounds + dedup + tamper detection backstop tests.
+
+---
+
 ## [1.37.0] - 2025-12-25
 
 ### Phase 4: Adversarial Fixtures (Fail-Closed Hardening)
