@@ -285,6 +285,8 @@ def _load_capabilities_registry() -> Dict[str, Any]:
     path = _capabilities_path()
     v = validate_capabilities_registry(path)
     if not v.ok:
+        if v.code == "REGISTRY_TAMPERED":
+            raise ValueError("CAPABILITY_HASH_MISMATCH")
         raise ValueError(v.code)
     obj = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(obj, dict):
