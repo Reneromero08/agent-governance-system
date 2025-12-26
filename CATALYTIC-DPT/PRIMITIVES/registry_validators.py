@@ -160,3 +160,55 @@ def validate_capability_pins(path: Path) -> RegistryValidation:
         return RegistryValidation(False, "REGISTRY_DUPLICATE_HASH", {"where": "allowed_capabilities"})
 
     return RegistryValidation(True, "OK", {"path": str(path), "count": len(allowed)})
+
+
+def validate_capability_revokes(path: Path) -> RegistryValidation:
+    """
+    Validates CAPABILITY_REVOKES.json with fail-closed, deterministic semantics.
+
+    Error codes:
+    - REGISTRY_DUPLICATE_HASH: duplicate entry in revoked_capabilities
+    - REGISTRY_NONCANONICAL: file bytes not canonical JSON or list not sorted
+    - REGISTRY_INVALID: schema/shape invalid
+    """
+    raw_bytes = path.read_bytes()
+    try:
+        raw_text = raw_bytes.decode("utf-8")
+    except Exception as e:
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": f"invalid utf-8: {e}"})
+
+    try:
+        obj = _loads_no_dupes(raw_text)
+    except _DupeKeyError as e:
+        return RegistryValidation(False, "REGISTRY_INVALID", {"where": "object_key", "key": str(e)})
+    except Exception as e:
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": f"invalid json: {e}"})
+
+    if not isinstance(obj, dict):
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": "expected object"})
+
+    allowed_top = {"revokes_version", "revoked_capabilities"}
+    if set(obj.keys()) != allowed_top:
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": "unexpected top-level fields"})
+
+    if obj.get("revokes_version") != "1.0.0":
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": "revokes_version must be 1.0.0"})
+
+    revoked = obj.get("revoked_capabilities")
+    if not isinstance(revoked, list):
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": "revoked_capabilities must be array"})
+    if not all(isinstance(x, str) and _is_hex64(x) for x in revoked):
+        return RegistryValidation(False, "REGISTRY_INVALID", {"message": "revoked_capabilities entries must be hex64 strings"})
+
+    canonical = _canonical_json_bytes(obj)
+    raw_cmp = raw_bytes[:-1] if raw_bytes.endswith(b"\n") else raw_bytes
+    if raw_cmp != canonical:
+        return RegistryValidation(False, "REGISTRY_NONCANONICAL", {"path": str(path)})
+
+    if revoked != sorted(revoked):
+        return RegistryValidation(False, "REGISTRY_NONCANONICAL", {"message": "revoked_capabilities not sorted"})
+
+    if len(set(revoked)) != len(revoked):
+        return RegistryValidation(False, "REGISTRY_DUPLICATE_HASH", {"where": "revoked_capabilities"})
+
+    return RegistryValidation(True, "OK", {"path": str(path), "count": len(revoked)})
