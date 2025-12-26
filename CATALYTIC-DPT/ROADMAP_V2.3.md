@@ -66,9 +66,9 @@ DONE when all are true:
 - [x] Phase 6.1 model-free bridge exists (emit pipeline spec, run + verify).
 - [x] Phase 6.2 router slot exists (external plan producer, schema-validated, capped, fail-closed).
 - [x] Phase 6.3 adapter contract exists (skills/MCPs wrap schema-valid jobspec; no runtime bypass).
-- [ ] Phase 6.4 MCP adapter is first-class (schema + tests + caps + deterministic transcript hashing).
+- [x] Phase 6.4 MCP adapter is first-class (schema + tests + caps + deterministic transcript hashing).
 - [x] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs). (commit: this changeset)
-- [ ] Phase 6.6 Capability pinning and revocation exists (explicit, auditable).
+- [x] Phase 6.6 Capability pinning and revocation exists (explicit, auditable). (commit: this changeset)
 
 ---
 
@@ -180,15 +180,18 @@ Acceptance
 Intent
 Make “who/what is allowed to produce accepted work” explicit and reversible.
 
+Implemented (v1)
+- `CAPABILITY_PINS.json` allowlists permitted `capability_hash` values; both `ags route` and `catalytic pipeline verify` reject known-but-unpinned capabilities fail-closed.
+
 Deliverables
-- [ ] Add `CAPABILITIES.json` (canonical) that lists allowed capability hashes for a run/pipeline (or references a pinned set).
-- [ ] Verifiers fail closed if a step uses a capability hash not in the allowed set.
+- [x] Add `CAPABILITY_PINS.json` (canonical) that lists allowed capability hashes for a run/pipeline (or references a pinned set).
+- [x] Verifiers fail closed if a step uses a capability hash not in the allowed set.
 - [ ] Revocation mechanism:
   - an explicit denylist or a new pinned set (no silent mutation)
   - deterministic precedence rules
 
 Acceptance
-- [ ] “Allow” and “deny” decisions are explicit artifacts.
+- [x] “Allow” and “deny” decisions are explicit artifacts.
 - [ ] Changing allowed capabilities changes the proof hash (no invisible policy changes).
 
 ---
