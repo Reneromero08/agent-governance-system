@@ -17,6 +17,10 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - `SKILLS/ant-worker/scripts/lfm2_runner.py`: Direct Python execution script for LFM2 using Transformers.
 - `SKILLS/ant-worker/scripts/ant_agent.py`: MCP-aware agent daemon that polls ledger and invokes LFM2.
 
+#### Fixed
+- `SKILLS/swarm-orchestrator/scripts/poll_and_execute.py`: Corrected MCP import path and added JSON error recovery.
+- `SKILLS/swarm-orchestrator/scripts/launch_swarm.ps1`: Fixed hardcoded paths and script locations.
+
 #### Verified
 - Nervous System: successful dispatch-perform-report loop via MCP ledger (task `TEST-001`).
 - Brain (Cortex): successful indexing and search functionality.
@@ -92,6 +96,17 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 #### Changed
 - `TOOLS/ags.py`: rejects revoked capabilities at route time (`REVOKED_CAPABILITY`).
 - `PIPELINES/pipeline_verify.py`: rejects post-revocation pipelines that use revoked capabilities (`REVOKED_CAPABILITY`), while allowing legacy pipelines without policy snapshots.
+
+---
+
+## [1.55.0] - 2025-12-26
+
+### Phase 7.0: Pipeline DAG Scheduling
+
+#### Added
+- `PIPELINES/pipeline_dag.py`: deterministic DAG spec parsing, topological scheduling, resume-safe receipts, and fail-closed verification integration.
+- `TESTBENCH/test_pipeline_dag.py`: DAG happy path, resume, tamper rejection, and cycle detection.
+- `catalytic pipeline dag run|status|verify`: minimal CLI surface for artifact-only DAG workflows.
 
 ---
 

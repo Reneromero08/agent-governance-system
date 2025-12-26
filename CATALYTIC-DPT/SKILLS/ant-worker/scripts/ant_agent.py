@@ -65,14 +65,14 @@ def main():
                 tasks = []
 
             for task in tasks:
-                task_id = task.get("id")
+                task_id = task.get("task_id")
                 if task_id in processed_tasks:
                     continue
                 
-                print(f"[{args.agent_id}] Received Task {task_id}: {task.get('spec', {}).get('instruction', 'No instruction')}")
+                print(f"[{args.agent_id}] Received Task {task_id}: {task.get('task_spec', {}).get('instruction', 'No instruction')}")
                 
                 # Execute
-                spec = task.get("spec", {})
+                spec = task.get("task_spec", {})
                 prompt = f"TASK: {spec.get('instruction', '')}\nCONTEXT: {spec.get('context', '')}\n\nProvide the result strictly obeying the format."
                 
                 try:
