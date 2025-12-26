@@ -3,6 +3,7 @@
 **Status**: R&D → PoC → Integration
 **Purpose**: Isolated development of catalytic computing system before integration into AGS proper
 **Governance**: Sandboxed from main repo; testable independently; zero impact on AGS until exit criteria met
+**Intent**: See [docs/INTENT.md](docs/INTENT.md) for core guarantees and constraints
 
 ---
 
