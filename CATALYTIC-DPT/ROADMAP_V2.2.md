@@ -356,6 +356,7 @@ Deliverables
   - [x] Owner boundary: AGS emits spec only; pipeline runtime initializes `STATE.json` deterministically when missing.
 - [x] Phase 6.2: Router slot (`ags plan`) executes an external plan producer, enforces schema + caps, and routes to fail-closed pipeline run+verify.
   - [x] Fail-closed plan semantics: steps must declare `command`; no implicit no-op defaults.
+- [x] Phase 6.3: Adapter Contract (skills + MCP pipelining; fail-closed).
 
 Acceptance
 - [ ] At least one integrated workflow: JobSpec in, strict verification out, resumable from artifacts only.
