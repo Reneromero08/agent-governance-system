@@ -2,6 +2,16 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.46.0] - 2025-12-26
+
+### Docs: Roadmap Promotion
+
+#### Changed
+- `ROADMAP_V2.3.md` is the canonical roadmap.
+- `ROADMAP_V2.2.md` restored as a deprecated stub pointer.
+
+---
+
 ## [1.41.0] - 2025-12-26
 
 ### Phase 6.1: AGS Bridge (Model-Free Pipelines)
