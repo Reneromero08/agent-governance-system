@@ -1,5 +1,6 @@
 ---
 name: file-analyzer
+version: "0.1.0"
 description: Analyzes repository structure to identify critical files for integration. Use when you need to understand a codebase before operations.
 compatibility: Python 3.8+
 ---

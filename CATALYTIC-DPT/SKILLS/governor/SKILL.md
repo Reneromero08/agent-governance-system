@@ -1,5 +1,6 @@
 ---
 name: governor
+version: "0.1.0"
 description: Analyzes high-level goals, breaks them into subtasks, and dispatches to ant-workers. Use when you need task decomposition and worker coordination. Aggregates results and reports to higher authority.
 compatibility: Python 3.8+, Gemini CLI optional
 ---

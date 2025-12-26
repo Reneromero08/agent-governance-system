@@ -134,6 +134,14 @@ def verify_pipeline(
             pins = _load_pins(project_root=project_root)
             allowed_caps = set(pins.get("allowed_capabilities", []))
         except Exception as e:
+            code = str(e)
+            if code in {
+                "REGISTRY_DUPLICATE_HASH",
+                "REGISTRY_NONCANONICAL",
+                "REGISTRY_TAMPERED",
+                "REGISTRY_INVALID",
+            }:
+                return {"ok": False, "code": code, "details": {"phase": "CAPABILITIES"}}
             return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "message": str(e)}}
 
     chain_result = verify_chain(project_root=project_root, pipeline_dir=pipeline_dir)
