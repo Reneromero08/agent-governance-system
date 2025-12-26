@@ -63,13 +63,17 @@ def hash_file(filepath: Path) -> str:
     elif filepath.is_dir():
         # Hash directory structure and file contents recursively
         for child in sorted(filepath.rglob("*")):
-            if child.is_file():
-                # Add path relative to parent to hash
-                hasher.update(str(child.relative_to(filepath)).encode())
-                # Add file content to hash
-                with open(child, "rb") as f:
-                    for chunk in iter(lambda: f.read(8192), b""):
-                        hasher.update(chunk)
+            try:
+                if child.is_file():
+                    # Add path relative to parent to hash
+                    hasher.update(str(child.relative_to(filepath)).encode())
+                    # Add file content to hash
+                    with open(child, "rb") as f:
+                        for chunk in iter(lambda: f.read(8192), b""):
+                            hasher.update(chunk)
+            except (FileNotFoundError, OSError):
+                # File disappeared or inaccessible
+                pass
     
     return hasher.hexdigest()[:12]
 
