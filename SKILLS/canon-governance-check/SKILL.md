@@ -1,10 +1,17 @@
 ---
 name: canon-governance-check
+version: "0.1.0"
 description: Enforces changelog updates for significant changes to CANON/, TOOLS/, schemas, and ADRs
 compatibility: all
 ---
 
 # Canon Governance Check Skill
+
+**Version:** 0.1.0
+
+**Status:** Active
+
+**Required Canon Version:** >=2.6.0 <3.0.0
 
 ## Purpose
 Enforces documentation hygiene by requiring changelog updates when significant system changes are made.

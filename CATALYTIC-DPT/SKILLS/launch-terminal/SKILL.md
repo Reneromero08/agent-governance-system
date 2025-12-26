@@ -1,5 +1,6 @@
 ---
 name: launch-terminal
+version: "0.1.0"
 description: Opens a named terminal tab in VSCode via Antigravity Bridge (port 4000). Use when spawning agent terminals for swarm workers.
 compatibility: VSCode, Antigravity Bridge extension
 ---

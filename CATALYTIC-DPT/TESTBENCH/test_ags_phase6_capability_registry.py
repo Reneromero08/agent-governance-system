@@ -133,7 +133,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
 
         r_verify_bad = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify_bad.returncode != 0
-        assert "CAPABILITY_HASH_MISMATCH" in r_verify_bad.stdout
+        assert "REGISTRY_TAMPERED" in r_verify_bad.stdout
     finally:
         _rm(pipeline_dir)
         _rm(run_dir)

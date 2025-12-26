@@ -1,5 +1,6 @@
 ---
 name: ant-worker
+version: "0.1.0"
 description: Executes mechanical file operations, code adaptation, and validation tasks. Use when you need to copy/move files with hash verification, adapt code imports, or run validations. Reports to Governor, logs to immutable ledger.
 compatibility: Python 3.8+, MCP server running
 ---
