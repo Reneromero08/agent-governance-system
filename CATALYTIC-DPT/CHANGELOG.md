@@ -35,6 +35,15 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.44.0] - 2025-12-26
+
+### Phase 6.2: Fail-Closed Plan Semantics
+
+#### Changed
+- Plans must declare an explicit step `command` (no implicit no-op defaults); missing step command rejects.
+
+---
+
 ## [1.40.0] - 2025-12-26
 
 ### Phase 5: Pipeline Verify CLI (Fail-Closed)
