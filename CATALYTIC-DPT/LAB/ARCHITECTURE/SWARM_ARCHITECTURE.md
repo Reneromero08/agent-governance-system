@@ -8,7 +8,7 @@
 
 ## 1. Core Principle
 
-**Claude is President. Claude calls the Governor. Governor appears in VSCode terminal. Governor calls Workers recursively. MCP is the single source of truth.**
+**Big Brains is President. President calls the Governor. Governor appears in VSCode terminal. Governor calls Workers recursively. MCP is the single source of truth.**
 
 ---
 
@@ -23,8 +23,8 @@
                        │
                        ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                  PRESIDENT (Claude)                         │
-│                 - Lives in Antigravity chat                 │
+│                  PRESIDENT (Brains)                         │
+│                 - Lives in Agent Chat                │
 │                 - High-level decisions, governance, tokens  │
 │                 - Delegates to Governor                     │
 │                 - Monitors via MCP ledger                   │
@@ -33,7 +33,7 @@
                        │ (Antigravity Bridge)
                        ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                   GOVERNOR (Gemini CLI)                     │
+│                   GOVERNOR (BIG CLI)                     │
 │                 - Spawns IN VSCode terminal                 │
 │                 - Analyzes tasks from President             │
 │                 - Distributes subtasks to Ants              │
@@ -45,7 +45,7 @@
     ┌──────────┐ ┌──────────┐ ┌──────────┐
     │   ANT    │ │   ANT    │ │   ANT    │
     │ Worker 1 │ │ Worker 2 │ │ Worker N │
-    │ (Kilo)   │ │ (Kilo)   │ │ (Kilo)   │
+    │ (Local)  │ │ (Local)  │ │ (Local)  │
     └──────────┘ └──────────┘ └──────────┘
           │            │            │
           └────────────┼────────────┘
@@ -67,7 +67,7 @@
 Provides intent and final judgment. The human in the loop.
 
 ### PRESIDENT (Orchestrator)
-- **Model**: Claude (Antigravity main chat)
+- **Model**: Brains (Main Agent)
 - **Config**: `swarm_config.json → roles.president`
 - **Responsibilities**:
   - Receives directives from God
@@ -77,7 +77,7 @@ Provides intent and final judgment. The human in the loop.
   - **Does NOT micromanage execution**
 
 ### GOVERNOR (Manager)
-- **Model**: Gemini CLI
+- **Model**: BIG CLI
 - **Config**: `swarm_config.json → roles.governor`
 - **In**: VSCode terminal (user visible)
 - **Responsibilities**:
@@ -88,7 +88,7 @@ Provides intent and final judgment. The human in the loop.
   - Reports back to President
 
 ### ANT WORKERS (Executors)
-- **Model**: Kilo Code CLI
+- **Model**: Local Model
 - **Config**: `swarm_config.json → roles.ant_worker`
 - **In**: VSCode terminals (user visible)
 - **Responsibilities**:
@@ -145,8 +145,8 @@ Agent 1 (President)   Agent 2 (Governor)    Agent 3 (Ants)
 
 | Component | Location |
 |-----------|----------|
-| **Antigravity Bridge** | `D:\CCC 2.0\AI\AGI\EXTENSIONS\antigravity-bridge\` |
-| **Launch Terminal Skill** | `CATALYTIC-DPT/SKILLS/launch-terminal/` |
+| **Antigravity Bridge** | `D:\CCC 2.0\AI\AGI\EXTENSIONS\antigravity-bridge\` | (For Antigravity only)
+| **Launch Terminal Skill** | `CATALYTIC-DPT/SKILLS/launch-terminal/` |  (Needs Vscode version)
 | **MCP Server** | `CATALYTIC-DPT/MCP/server.py` |
 | **Swarm Config** | `CATALYTIC-DPT/swarm_config.json` |
 
@@ -190,7 +190,7 @@ Because all terminals spawn inside VSCode:
 1. **User can see** all agent terminals in the panel
 2. **User can interject** by typing in any terminal
 3. **User can kill** any agent by closing the terminal
-4. **President (Claude)** monitors via MCP ledger, not subprocess
+4. **President (Brains)** monitors via MCP ledger, not subprocess
 
 ---
 
@@ -200,15 +200,15 @@ Because all terminals spawn inside VSCode:
 > 
 > ❌ `Start-Process wt` (Windows Terminal)
 > ❌ `subprocess.Popen` with external windows
-> ❌ Any process Claude cannot see
+> ❌ Any process Brains cannot see
 >
-> ✅ Only use Antigravity Bridge on port 4000
+> ✅ Only use Antigravity Bridge on port 4000 or VSCode terminal    _OUTSIDE OF CHAT_
 
 ---
 
 ## 10. Quick Start
 
-**From Claude (President)**:
+**From Brains (President)**:
 ```python
 import requests
 requests.post("http://127.0.0.1:4000/terminal", json={
