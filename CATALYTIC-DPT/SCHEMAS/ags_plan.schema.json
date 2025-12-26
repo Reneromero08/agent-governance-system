@@ -24,10 +24,6 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": [
-          "step_id",
-          "jobspec"
-        ],
         "properties": {
           "step_id": {
             "type": "string",
@@ -44,12 +40,25 @@
           },
           "jobspec": {
             "type": "object"
+          },
+          "adapter": {
+            "$ref": "adapter.schema.json"
           }
         },
-        "required": [
-          "step_id",
-          "command",
-          "jobspec"
+        "oneOf": [
+          {
+            "required": [
+              "step_id",
+              "command",
+              "jobspec"
+            ]
+          },
+          {
+            "required": [
+              "step_id",
+              "adapter"
+            ]
+          }
         ]
       }
     }

@@ -15,10 +15,11 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import _slug  # type: ignore
+from PRIMITIVES.cas_store import normalize_relpath  # type: ignore
 from PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 from PRIMITIVES.preflight import PreflightValidator  # type: ignore
 
-from jsonschema import Draft7Validator
+from jsonschema import Draft7Validator, RefResolver
 
 
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
@@ -47,6 +48,12 @@ def _as_repo_relpath(path: Path) -> str:
 MAX_PLAN_BYTES_DEFAULT = 262_144
 MAX_STEPS = 64
 MAX_JOBSPEC_BYTES = 65_536
+
+# Global strict caps for bounded dereference (fail-closed).
+GLOBAL_DEREF_MAX_BYTES = 65_536
+GLOBAL_DEREF_MAX_MATCHES = 20
+GLOBAL_DEREF_MAX_NODES = 2_000
+GLOBAL_DEREF_MAX_DEPTH = 32
 
 
 def _read_bytes_bounded(path: Path, max_bytes: int) -> bytes:
@@ -87,12 +94,65 @@ def _validate_jobspec_obj(jobspec: Dict[str, Any]) -> None:
 
 
 def _load_ags_plan_schema() -> Draft7Validator:
-    schema_path = REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "ags_plan.schema.json"
-    schema = json.loads(schema_path.read_text(encoding="utf-8"))
-    return Draft7Validator(schema)
+    schemas_dir = REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS"
+    plan_path = (schemas_dir / "ags_plan.schema.json").resolve()
+    adapter_path = (schemas_dir / "adapter.schema.json").resolve()
+    jobspec_path = (schemas_dir / "jobspec.schema.json").resolve()
+
+    plan_schema = json.loads(plan_path.read_text(encoding="utf-8"))
+    adapter_schema = json.loads(adapter_path.read_text(encoding="utf-8"))
+    jobspec_schema = json.loads(jobspec_path.read_text(encoding="utf-8"))
+
+    store: dict[str, Any] = {
+        plan_schema.get("$id", "ags_plan.schema.json"): plan_schema,
+        adapter_schema.get("$id", "adapter.schema.json"): adapter_schema,
+        jobspec_schema.get("$id", "jobspec.schema.json"): jobspec_schema,
+        "ags_plan.schema.json": plan_schema,
+        "ags_plan.schema.json#": plan_schema,
+        "adapter.schema.json": adapter_schema,
+        "adapter.schema.json#": adapter_schema,
+        "jobspec.schema.json": jobspec_schema,
+        "jobspec.schema.json#": jobspec_schema,
+        plan_path.as_uri(): plan_schema,
+        plan_path.as_uri() + "#": plan_schema,
+        adapter_path.as_uri(): adapter_schema,
+        adapter_path.as_uri() + "#": adapter_schema,
+        jobspec_path.as_uri(): jobspec_schema,
+        jobspec_path.as_uri() + "#": jobspec_schema,
+    }
+
+    resolver = RefResolver.from_schema(plan_schema, store=store)
+    return Draft7Validator(plan_schema, resolver=resolver)
 
 
 _AGS_PLAN_VALIDATOR = _load_ags_plan_schema()
+
+def _load_adapter_schema() -> Draft7Validator:
+    schemas_dir = REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS"
+    adapter_path = (schemas_dir / "adapter.schema.json").resolve()
+    jobspec_path = (schemas_dir / "jobspec.schema.json").resolve()
+
+    adapter_schema = json.loads(adapter_path.read_text(encoding="utf-8"))
+    jobspec_schema = json.loads(jobspec_path.read_text(encoding="utf-8"))
+
+    store: dict[str, Any] = {
+        adapter_schema.get("$id", "adapter.schema.json"): adapter_schema,
+        jobspec_schema.get("$id", "jobspec.schema.json"): jobspec_schema,
+        "adapter.schema.json": adapter_schema,
+        "adapter.schema.json#": adapter_schema,
+        "jobspec.schema.json": jobspec_schema,
+        "jobspec.schema.json#": jobspec_schema,
+        adapter_path.as_uri(): adapter_schema,
+        adapter_path.as_uri() + "#": adapter_schema,
+        jobspec_path.as_uri(): jobspec_schema,
+        jobspec_path.as_uri() + "#": jobspec_schema,
+    }
+
+    resolver = RefResolver.from_schema(adapter_schema, store=store)
+    return Draft7Validator(adapter_schema, resolver=resolver)
+
+
+_ADAPTER_VALIDATOR = _load_adapter_schema()
 
 
 def _validate_plan_schema(obj: Dict[str, Any]) -> None:
@@ -109,6 +169,13 @@ def _parse_step_for_route(step: Any, idx: int) -> Tuple[str, Dict[str, Any], Lis
     if not isinstance(step_id, str) or not step_id.strip():
         raise ValueError(f"steps[{idx}].step_id must be non-empty string")
     _reject_control_chars(step_id)
+    if "adapter" in step:
+        adapter = step.get("adapter")
+        if not isinstance(adapter, dict):
+            raise ValueError(f"steps[{idx}].adapter must be an object")
+        cmd, jobspec = _validate_adapter(adapter, strict=True)
+        return step_id, jobspec, cmd, True, True
+
     jobspec = step.get("jobspec")
     if not isinstance(jobspec, dict):
         raise ValueError(f"steps[{idx}].jobspec must be an object")
@@ -125,6 +192,69 @@ def _parse_step_for_route(step: Any, idx: int) -> Tuple[str, Dict[str, Any], Lis
     if not isinstance(memoize, bool):
         raise ValueError(f"steps[{idx}].memoize must be boolean")
     return step_id, jobspec, cmd, strict, memoize
+
+
+def _validate_adapter(adapter: Dict[str, Any], *, strict: bool) -> Tuple[List[str], Dict[str, Any]]:
+    errors = sorted(_ADAPTER_VALIDATOR.iter_errors(adapter), key=lambda e: e.path)
+    if errors:
+        first = errors[0]
+        raise ValueError(f"adapter schema invalid at {list(first.path)}: {first.message}")
+
+    side_effects = adapter.get("side_effects", {})
+    if strict:
+        if any(side_effects.get(k) is True for k in ["network", "clock", "filesystem_unbounded", "nondeterministic"]):
+            raise ValueError("ADAPTER_SIDE_EFFECTS_FORBIDDEN")
+
+    # Path normalization: keys must already be normalized repo-relative paths.
+    inputs = adapter.get("inputs", {})
+    outputs = adapter.get("outputs", {})
+    if not isinstance(inputs, dict) or not isinstance(outputs, dict):
+        raise ValueError("adapter inputs/outputs must be objects")
+
+    def _check_paths(mapping: Dict[str, Any]) -> None:
+        for raw in mapping.keys():
+            if not isinstance(raw, str) or not raw:
+                raise ValueError("adapter path keys must be non-empty strings")
+            try:
+                norm = normalize_relpath(raw)
+            except Exception:
+                raise ValueError("NON_NORMALIZED_PATH")
+            if norm != raw or norm == ".":
+                raise ValueError("NON_NORMALIZED_PATH")
+
+    _check_paths(inputs)
+    _check_paths(outputs)
+
+    overlap = set(inputs.keys()) & set(outputs.keys())
+    if overlap:
+        raise ValueError("INPUT_OUTPUT_OVERLAP")
+
+    caps = adapter.get("deref_caps", {})
+    if not isinstance(caps, dict):
+        raise ValueError("deref_caps must be object")
+    if int(caps.get("max_bytes", -1)) > GLOBAL_DEREF_MAX_BYTES:
+        raise ValueError("DEREF_CAPS_TOO_LARGE")
+    if int(caps.get("max_matches", -1)) > GLOBAL_DEREF_MAX_MATCHES:
+        raise ValueError("DEREF_CAPS_TOO_LARGE")
+    if int(caps.get("max_nodes", -1)) > GLOBAL_DEREF_MAX_NODES:
+        raise ValueError("DEREF_CAPS_TOO_LARGE")
+    if int(caps.get("max_depth", -1)) > GLOBAL_DEREF_MAX_DEPTH:
+        raise ValueError("DEREF_CAPS_TOO_LARGE")
+
+    cmd = adapter.get("command")
+    if not isinstance(cmd, list) or not cmd or not all(isinstance(x, str) and x for x in cmd):
+        raise ValueError("MISSING_COMMAND")
+
+    jobspec = adapter.get("jobspec")
+    if not isinstance(jobspec, dict):
+        raise ValueError("adapter jobspec must be object")
+    _validate_jobspec_obj(jobspec)
+
+    artifacts = adapter.get("artifacts", {})
+    if not isinstance(artifacts, dict) or not artifacts:
+        raise ValueError("MISSING_ARTIFACTS")
+
+    return cmd, jobspec
 
 
 def _validate_and_extract_steps_for_route(plan: Dict[str, Any]) -> List[Dict[str, Any]]:
@@ -237,6 +367,13 @@ def ags_plan(
         if sid in seen:
             raise ValueError(f"duplicate step_id: {sid}")
         seen.add(sid)
+        if "adapter" in step:
+            adapter = step.get("adapter")
+            if not isinstance(adapter, dict):
+                raise ValueError(f"steps[{idx}].adapter must be an object")
+            _validate_adapter(adapter, strict=True)
+            continue
+
         cmd = step.get("command")
         if not isinstance(cmd, list) or not cmd or not all(isinstance(x, str) and x for x in cmd):
             raise ValueError("MISSING_STEP_COMMAND")

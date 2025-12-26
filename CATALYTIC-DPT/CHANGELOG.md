@@ -44,6 +44,18 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.45.0] - 2025-12-26
+
+### Phase 6.3: Adapter Contract (Skills + MCP Pipelining)
+
+#### Added
+- `SCHEMAS/adapter.schema.json`: strict adapter contract with explicit side effects, bounded deref caps, and required artifact hashes.
+- Adapter validation in AGS: strict-mode rejection on any side effects, non-normalized paths, input/output overlap, or deref caps above global ceilings.
+- Plan schema supports adapter steps (`steps[].adapter`) for pipeline-safe skill/MCP wrappers.
+- `TESTBENCH/test_ags_phase6_adapter_contract.py`: fail-closed tests for missing command, side effects, deref caps, non-normalized paths, and nondeterministic adapters.
+
+---
+
 ## [1.40.0] - 2025-12-26
 
 ### Phase 5: Pipeline Verify CLI (Fail-Closed)
