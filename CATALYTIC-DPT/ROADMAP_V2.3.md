@@ -69,6 +69,7 @@ DONE when all are true:
 - [x] Phase 6.4 MCP adapter is first-class (schema + tests + caps + deterministic transcript hashing).
 - [x] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs). (commit: this changeset)
 - [x] Phase 6.6 Capability pinning and revocation exists (explicit, auditable). (commit: this changeset)
+- [x] Phase 6.7 Registry immutability backstop exists (canonical validation + adversarial tests). (commit: this changeset)
 
 ---
 
@@ -193,6 +194,23 @@ Deliverables
 Acceptance
 - [x] “Allow” and “deny” decisions are explicit artifacts.
 - [ ] Changing allowed capabilities changes the proof hash (no invisible policy changes).
+
+---
+
+## PHASE 6.7: Registry immutability and CI backstop (fail-closed)
+Intent
+Prevent silent mutation and non-canonical registry drift for capability governance artifacts.
+
+Deliverables
+- [x] Canonical validation for `CAPABILITIES.json` and `CAPABILITY_PINS.json` (no duplicates, canonical JSON bytes, sorted ordering).
+- [x] Enforced at route time (`ags route`) and verify time (`catalytic pipeline verify`) with stable error codes:
+  - `REGISTRY_DUPLICATE_HASH`
+  - `REGISTRY_NONCANONICAL`
+  - `REGISTRY_TAMPERED`
+- [x] Adversarial tests exercising duplicate hashes, non-canonical encoding, and tamper detection.
+
+Acceptance
+- [x] Any malformed/non-canonical/tampered registry fails closed before execution and during verification.
 
 ---
 

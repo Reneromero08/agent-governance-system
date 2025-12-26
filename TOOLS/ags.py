@@ -19,6 +19,7 @@ from PIPELINES.pipeline_runtime import _slug  # type: ignore
 from PRIMITIVES.cas_store import normalize_relpath  # type: ignore
 from PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 from PRIMITIVES.preflight import PreflightValidator  # type: ignore
+from PRIMITIVES.registry_validators import validate_capabilities_registry, validate_capability_pins  # type: ignore
 
 from jsonschema import Draft7Validator, RefResolver
 
@@ -282,6 +283,9 @@ def _pins_path() -> Path:
 
 def _load_capabilities_registry() -> Dict[str, Any]:
     path = _capabilities_path()
+    v = validate_capabilities_registry(path)
+    if not v.ok:
+        raise ValueError(v.code)
     obj = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(obj, dict):
         raise ValueError("CAPABILITIES_REGISTRY_INVALID")
@@ -295,6 +299,9 @@ def _load_capabilities_registry() -> Dict[str, Any]:
 
 def _load_pins() -> Dict[str, Any]:
     path = _pins_path()
+    v = validate_capability_pins(path)
+    if not v.ok:
+        raise ValueError(v.code)
     obj = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(obj, dict):
         raise ValueError("PINS_INVALID")
