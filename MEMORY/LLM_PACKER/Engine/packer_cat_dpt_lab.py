@@ -7,6 +7,10 @@ from pathlib import Path
 
 from packer import PROJECT_ROOT, make_pack
 
+DEFAULT_MAX_TOTAL_BYTES = 50 * 1024 * 1024
+DEFAULT_MAX_ENTRY_BYTES = 2 * 1024 * 1024
+DEFAULT_MAX_ENTRIES = 50_000
+
 
 def main() -> int:
     parser = argparse.ArgumentParser(
@@ -34,6 +38,10 @@ def main() -> int:
         combined=bool(args.combined),
         stamp=args.stamp or None,
         zip_enabled=bool(args.zip),
+        max_total_bytes=DEFAULT_MAX_TOTAL_BYTES,
+        max_entry_bytes=DEFAULT_MAX_ENTRY_BYTES,
+        max_entries=DEFAULT_MAX_ENTRIES,
+        allow_duplicate_hashes=None,
     )
     print(f"Pack created: {pack_dir}")
     return 0
