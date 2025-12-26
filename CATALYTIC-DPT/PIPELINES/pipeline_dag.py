@@ -163,17 +163,23 @@ def _load_state(path: Path, *, nodes: List[str]) -> Dict[str, Any]:
     return obj
 
 
-def _receipt_for_pipeline(*, pipeline_dir: Path) -> Dict[str, str]:
+def _pipeline_artifact_hashes(*, pipeline_dir: Path, include_receipt: bool = False) -> Dict[str, str]:
     chain = pipeline_dir / "CHAIN.json"
     state = pipeline_dir / "STATE.json"
     spec = pipeline_dir / "PIPELINE.json"
     if not (chain.exists() and state.exists() and spec.exists()):
         raise ValueError("DAG_DEP_MISSING")
-    return {
+    out = {
         "PIPELINE.json": _sha256_file(spec),
         "STATE.json": _sha256_file(state),
         "CHAIN.json": _sha256_file(chain),
     }
+    if include_receipt:
+        receipt = pipeline_dir / "RECEIPT.json"
+        if not receipt.exists():
+            raise ValueError("RECEIPT_MISSING")
+        out["RECEIPT.json"] = _sha256_file(receipt)
+    return out
 
 
 def _verify_receipt_matches(*, pipeline_dir: Path, expected: Dict[str, Any]) -> None:
@@ -183,9 +189,97 @@ def _verify_receipt_matches(*, pipeline_dir: Path, expected: Dict[str, Any]) -> 
         v = expected.get(k)
         if not (isinstance(v, str) and _is_hex64(v)):
             raise ValueError("DAG_RECEIPT_MISMATCH")
-    actual = _receipt_for_pipeline(pipeline_dir=pipeline_dir)
+    actual = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
     if actual != {k: expected[k] for k in actual.keys()}:
         raise ValueError("DAG_RECEIPT_MISMATCH")
+
+
+def _receipt_executor_id() -> str:
+    env = os.environ.get("CATALYTIC_EXECUTOR_ID")
+    return env if isinstance(env, str) and env.strip() else "CATALYTIC-DPT-EXECUTOR"
+
+
+def _compute_receipt_hash(receipt_obj: Dict[str, Any]) -> str:
+    payload = dict(receipt_obj)
+    payload.pop("receipt_hash", None)
+    return hashlib.sha256(canonical_json_bytes(payload)).hexdigest()
+
+
+def _load_receipt(path: Path) -> Dict[str, Any]:
+    obj = _load_json_obj(path)
+    if not isinstance(obj.get("receipt_hash"), str):
+        raise ValueError("RECEIPT_INVALID")
+    return obj
+
+
+def _emit_receipt(
+    *,
+    pipeline_dir: Path,
+    node_id: str,
+    pipeline_id: str,
+    capability_hash: str,
+    input_artifact_hashes: Dict[str, str],
+    output_artifact_hashes: Dict[str, str],
+    prior_receipt_hashes: List[str],
+) -> Dict[str, Any]:
+    receipt = {
+        "node_id": node_id,
+        "pipeline_id": pipeline_id,
+        "capability_hash": capability_hash,
+        "input_artifact_hashes": dict(sorted(input_artifact_hashes.items(), key=lambda kv: kv[0])),
+        "output_artifact_hashes": dict(sorted(output_artifact_hashes.items(), key=lambda kv: kv[0])),
+        "executor_id": _receipt_executor_id(),
+        "prior_receipt_hashes": list(sorted(prior_receipt_hashes)),
+    }
+    if len(prior_receipt_hashes) == 1:
+        receipt["prior_receipt_hash"] = prior_receipt_hashes[0]
+    receipt["receipt_hash"] = _compute_receipt_hash(receipt)
+    _atomic_write_canon_json(pipeline_dir / "RECEIPT.json", receipt)
+    return receipt
+
+
+def _verify_receipt(
+    *,
+    pipeline_dir: Path,
+    node_id: str,
+    pipeline_id: str,
+    expected_inputs: Dict[str, str],
+    expected_outputs: Dict[str, str],
+    expected_prior: List[str],
+) -> None:
+    path = pipeline_dir / "RECEIPT.json"
+    if not path.exists():
+        raise ValueError("RECEIPT_MISSING")
+    receipt = _load_receipt(path)
+    if receipt.get("node_id") != node_id or receipt.get("pipeline_id") != pipeline_id:
+        raise ValueError("RECEIPT_INVALID")
+    if receipt.get("capability_hash") != "PIPELINE_NODE":
+        raise ValueError("RECEIPT_INVALID")
+    computed = _compute_receipt_hash(receipt)
+    if receipt.get("receipt_hash") != computed:
+        raise ValueError("RECEIPT_HASH_MISMATCH")
+
+    inp = receipt.get("input_artifact_hashes")
+    out = receipt.get("output_artifact_hashes")
+    if not isinstance(inp, dict) or not isinstance(out, dict):
+        raise ValueError("RECEIPT_INVALID")
+    if not all(isinstance(v, str) and _is_hex64(v) for v in inp.values()):
+        raise ValueError("RECEIPT_INVALID")
+    if not all(isinstance(v, str) and _is_hex64(v) for v in out.values()):
+        raise ValueError("RECEIPT_INVALID")
+    if dict(sorted(inp.items(), key=lambda kv: kv[0])) != dict(sorted(expected_inputs.items(), key=lambda kv: kv[0])):
+        raise ValueError("RECEIPT_INPUT_MISMATCH")
+    if dict(sorted(out.items(), key=lambda kv: kv[0])) != dict(sorted(expected_outputs.items(), key=lambda kv: kv[0])):
+        raise ValueError("RECEIPT_OUTPUT_MISMATCH")
+
+    prior = receipt.get("prior_receipt_hashes", [])
+    if not isinstance(prior, list) or not all(isinstance(x, str) and _is_hex64(x) for x in prior):
+        raise ValueError("RECEIPT_CHAIN_INVALID")
+    if sorted(prior) != sorted(expected_prior):
+        raise ValueError("RECEIPT_CHAIN_INVALID")
+    if len(expected_prior) == 1:
+        if receipt.get("prior_receipt_hash") != expected_prior[0]:
+            raise ValueError("RECEIPT_CHAIN_INVALID")
 
 
 def verify_dag(
@@ -215,11 +309,39 @@ def verify_dag(
     rt = PipelineRuntime(project_root=project_root)
     for node in order:
         pipeline_dir = rt.pipeline_dir(node)
+        # Build expected input hashes and prior receipts from DAG edges.
+        expected_inputs: Dict[str, str] = {}
+        expected_prior: List[str] = []
+        for e in spec.edges:
+            if e.dst != node:
+                continue
+            src_dir = rt.pipeline_dir(e.src)
+            for req in e.requires:
+                expected_inputs[f"{e.src}:{req}"] = _sha256_file(src_dir / req)
+            src_receipt = src_dir / "RECEIPT.json"
+            if not src_receipt.exists():
+                return {"ok": False, "code": "RECEIPT_MISSING", "details": {"phase": "RECEIPT", "node": node}}
+            src_obj = _load_receipt(src_receipt)
+            src_hash = src_obj.get("receipt_hash")
+            if not (isinstance(src_hash, str) and _is_hex64(src_hash)):
+                return {"ok": False, "code": "RECEIPT_CHAIN_INVALID", "details": {"phase": "RECEIPT", "node": node}}
+            expected_prior.append(src_hash)
         if node in completed:
             try:
                 _verify_receipt_matches(pipeline_dir=pipeline_dir, expected=receipts.get(node, {}))
             except Exception as e:
                 return {"ok": False, "code": str(e) or "DAG_RECEIPT_MISMATCH", "details": {"phase": "RECEIPT", "node": node}}
+            try:
+                _verify_receipt(
+                    pipeline_dir=pipeline_dir,
+                    node_id=node,
+                    pipeline_id=node,
+                    expected_inputs=expected_inputs,
+                    expected_outputs=_pipeline_artifact_hashes(pipeline_dir=pipeline_dir),
+                    expected_prior=expected_prior,
+                )
+            except Exception as e:
+                return {"ok": False, "code": str(e) or "RECEIPT_INVALID", "details": {"phase": "RECEIPT", "node": node}}
         # Verify pipeline itself whenever it is completed.
         if node in completed:
             res = verify_pipeline(project_root=project_root, pipeline_id=node, runs_root=runs_root, strict=strict)
@@ -300,7 +422,31 @@ def run_dag(
         if not res.get("ok", False):
             return {"ok": False, "code": "DAG_NODE_VERIFY_FAIL", "details": {"node": node, "pipeline_code": res.get("code")}}
 
-        receipt = _receipt_for_pipeline(pipeline_dir=rt.pipeline_dir(node))
+        pipeline_dir = rt.pipeline_dir(node)
+        input_hashes: Dict[str, str] = {}
+        prior_hashes: List[str] = []
+        for e in deps.get(node, []):
+            src_dir = rt.pipeline_dir(e.src)
+            for req in e.requires:
+                input_hashes[f"{e.src}:{req}"] = _sha256_file(src_dir / req)
+            src_receipt = _load_receipt(src_dir / "RECEIPT.json")
+            src_hash = src_receipt.get("receipt_hash")
+            if not (isinstance(src_hash, str) and _is_hex64(src_hash)):
+                return {"ok": False, "code": "RECEIPT_CHAIN_INVALID", "details": {"node": node}}
+            prior_hashes.append(src_hash)
+
+        output_hashes = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
+        _emit_receipt(
+            pipeline_dir=pipeline_dir,
+            node_id=node,
+            pipeline_id=node,
+            capability_hash="PIPELINE_NODE",
+            input_artifact_hashes=input_hashes,
+            output_artifact_hashes=output_hashes,
+            prior_receipt_hashes=prior_hashes,
+        )
+
+        receipt = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
         receipts[node] = receipt
         completed.add(node)
         state["completed"] = [n for n in order if n in completed]
@@ -309,4 +455,3 @@ def run_dag(
         executed += 1
 
     return {"ok": True, "code": "OK", "details": {"dag_id": dag_id, "completed": len(completed), "nodes": len(order)}}
-
