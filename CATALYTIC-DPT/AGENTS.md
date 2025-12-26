@@ -7,12 +7,13 @@ Authority and inheritance
 - This file must not be duplicated elsewhere. Keep exactly one scoped CAT-DPT AGENTS file.
 
 Active roadmap (do not waste tokens)
-- The ONLY active execution roadmap for CAT-DPT is: `ROADMAP_V2.2.md`
+- The ONLY active execution roadmap for CAT-DPT is: `ROADMAP_V2.3.md`
 - Treat these as historical. Do not load unless explicitly asked:
-  - `ROADMAP_V2.1.md`
-  - `ROADMAP_V2.md`
-  - `ROADMAP.md`
-- If unsure what to do next, read `ROADMAP_V2.2.md` and execute the smallest unchecked item that advances Phase 0, then Phase 1, etc.
+  - `LAB/ARCHIVE/ROADMAP_V2.2.md`
+  - `LAB/ARCHIVE/ROADMAP_V2.1.md`
+  - `LAB/ARCHIVE/ROADMAP_V2.md`
+  - `LAB/ARCHIVE/ROADMAP.md`
+- If unsure what to do next, read `ROADMAP_V2.3.md` and execute the smallest unchecked item that advances Phase 0, then Phase 1, etc.
 
 Primary objective
 Build a verifiable catalytic runtime where:
@@ -122,7 +123,7 @@ Caching is required once the cache is implemented.
 
 ## Work style (how agents should operate)
 Implementation workflow
-1) Read `ROADMAP_V2.2.md` and pick the next smallest unchecked item.
+1) Read `ROADMAP_V2.3.md` and pick the next smallest unchecked item.
 2) Implement the minimum code to satisfy that item.
 3) Add fixtures and tests that prove it.
 4) Run tests locally.
