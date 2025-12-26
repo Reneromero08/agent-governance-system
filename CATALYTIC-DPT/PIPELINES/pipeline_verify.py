@@ -42,6 +42,17 @@ def _verify_proof_hash(*, proof_obj: Dict[str, Any]) -> Optional[Dict[str, Any]]
     return None
 
 
+def _sha256_file(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as f:
+        while True:
+            chunk = f.read(1024 * 1024)
+            if not chunk:
+                break
+            h.update(chunk)
+    return h.hexdigest()
+
+
 def verify_pipeline(
     *,
     project_root: Path,
@@ -97,10 +108,11 @@ def verify_pipeline(
         proof_path = run_dir / "PROOF.json"
         roots_path = run_dir / "DOMAIN_ROOTS.json"
         ledger_path = run_dir / "LEDGER.jsonl"
+        outputs_hashes_path = run_dir / "OUTPUT_HASHES.json"
 
         missing = [
             p.name
-            for p in (proof_path, roots_path, ledger_path)
+            for p in (proof_path, roots_path, ledger_path, outputs_hashes_path)
             if not _is_nonempty_file(p)
         ]
         if missing:
@@ -192,5 +204,72 @@ def verify_pipeline(
                 "code": "STEP_RUN_INVALID",
                 "details": {"phase": "STEP_VALIDATE", "step_id": step_id, "run_id": run_id, "report": report},
             }
+
+        # Durable output tamper detection: OUTPUT_HASHES.json is the source of truth.
+        # Recompute hashes over exact bytes and fail closed on any mismatch.
+        try:
+            output_hashes = _load_json_obj(outputs_hashes_path)
+        except Exception as e:
+            return {
+                "ok": False,
+                "code": "OUTPUT_HASHES_INVALID_JSON",
+                "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "message": str(e)},
+            }
+
+        for rel_path, expected in sorted(output_hashes.items(), key=lambda kv: kv[0]):
+            if not isinstance(rel_path, str) or not rel_path:
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_HASHES_INVALID_ENTRY",
+                    "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "message": "non-string path"},
+                }
+            if not isinstance(expected, str):
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_HASHES_INVALID_ENTRY",
+                    "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "path": rel_path, "message": "non-string hash"},
+                }
+            if Path(rel_path).is_absolute():
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_PATH_INVALID",
+                    "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "path": rel_path},
+                }
+            abs_path = project_root / rel_path
+            if not abs_path.exists():
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_MISSING",
+                    "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "path": rel_path},
+                }
+            if abs_path.is_dir():
+                # Directory outputs are allowed to have empty hashes; presence is the check.
+                if expected not in ("",):
+                    return {
+                        "ok": False,
+                        "code": "OUTPUT_HASHES_INVALID_ENTRY",
+                        "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "path": rel_path, "message": "dir must have empty hash"},
+                    }
+                continue
+            if not _HEX64_RE.fullmatch(expected):
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_HASHES_INVALID_ENTRY",
+                    "details": {"phase": "OUTPUT_HASHES", "step_id": step_id, "run_id": run_id, "path": rel_path, "message": "expected hash must be 64 lowercase hex"},
+                }
+            computed = _sha256_file(abs_path)
+            if computed != expected:
+                return {
+                    "ok": False,
+                    "code": "OUTPUT_HASH_MISMATCH",
+                    "details": {
+                        "phase": "OUTPUT_HASHES",
+                        "step_id": step_id,
+                        "run_id": run_id,
+                        "path": rel_path,
+                        "expected": expected,
+                        "computed": computed,
+                    },
+                }
 
     return {"ok": True, "code": "OK", "details": {"pipeline_id": pipeline_id, "steps_verified": len(steps)}}
