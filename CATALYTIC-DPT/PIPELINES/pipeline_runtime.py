@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Tuple
 
 from PRIMITIVES.restore_proof import canonical_json_bytes
 from PRIMITIVES.preflight import PreflightValidator
+from PIPELINES.pipeline_chain import build_chain_obj, compute_step_entry, verify_chain
 
 
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
@@ -62,6 +63,7 @@ class PipelineRuntime:
       CONTRACTS/_runs/_pipelines/<pipeline_id>/
         - PIPELINE.json (canonical JSON)
         - STATE.json (canonical JSON, atomically updated)
+        - CHAIN.json (canonical JSON proof chain)
         - steps/<step_id>/RUN_REF.json
 
     Note: The user-facing spec sometimes references CONTRACTS/_pipelines/.
@@ -143,6 +145,12 @@ class PipelineRuntime:
             if max_steps is not None and steps_executed >= max_steps:
                 break
 
+            # Fail closed: if resuming from prior completed steps, require a valid chain.
+            if completed_steps:
+                v = verify_chain(project_root=self.project_root, pipeline_dir=pdir)
+                if not v.get("ok", False):
+                    raise RuntimeError(f"pipeline chain invalid before step {step.step_id}: {v.get('code')}")
+
             attempt = attempts.get(step.step_id, 0) + 1
             attempts[step.step_id] = attempt
             run_id = self._make_run_id(spec.pipeline_id, step.step_id, attempt)
@@ -152,6 +160,34 @@ class PipelineRuntime:
 
             self._execute_step(spec=spec, step=step, run_id=run_id)
             self._assert_step_outputs(run_dir)
+
+            # Update CHAIN.json (deterministic, fail-closed).
+            chain_entries: List[Dict[str, Any]] = []
+            prev_hash: Optional[str] = None
+            for s in spec.steps:
+                sid = s.step_id
+                if sid not in completed_steps and sid != step.step_id:
+                    continue
+                rid = state["step_run_ids"].get(sid)
+                if sid == step.step_id:
+                    rid = run_id
+                if not isinstance(rid, str) or not rid:
+                    raise RuntimeError(f"missing run_id for chained step {sid}")
+                entry = compute_step_entry(
+                    project_root=self.project_root,
+                    pipeline_id=spec.pipeline_id,
+                    step_id=sid,
+                    run_id=rid,
+                    prev_step_proof_hash=prev_hash,
+                )
+                prev_hash = entry["step_proof_hash"]
+                chain_entries.append(entry)
+
+            chain_obj = build_chain_obj(project_root=self.project_root, pipeline_id=spec.pipeline_id, ordered_steps=chain_entries)
+            _atomic_write_canonical_json(pdir / "CHAIN.json", chain_obj)
+            v = verify_chain(project_root=self.project_root, pipeline_dir=pdir)
+            if not v.get("ok", False):
+                raise RuntimeError(f"pipeline chain invalid after step {step.step_id}: {v.get('code')}")
 
             # Persist step run ref
             step_dir = pdir / "steps" / step.step_id
