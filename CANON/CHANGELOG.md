@@ -5,7 +5,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
-- `TOOLS/check-canon-governance.js`: Governance check script that enforces changelog updates for significant changes to CANON/, TOOLS/, PRIMITIVES/, SCHEMAS/, ADRs, and CI workflows.
+- Canon governance check system (comprehensive integration):
+  - `TOOLS/check-canon-governance.js`: Core governance check script (Node.js)
+  - `SKILLS/canon-governance-check/`: Full skill wrapper with Cortex provenance integration
+  - `SKILLS/canon-governance-check/run.py`: Python wrapper that logs governance results to Cortex
+  - `SKILLS/canon-governance-check/scripts/pre-commit`: Git pre-commit hook for local enforcement
+  - CI integration in `.github/workflows/contracts.yml`: Runs on every push/PR
+  - Cortex provenance tracking: Logs governance check events to `CONTRACTS/_runs/<run_id>/events.jsonl`
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
