@@ -30,6 +30,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Installed canon governance pre-commit hook: Now active in `.git/hooks/pre-commit` to enforce governance checks before commits.
 - CAT-DPT LAB reorganization: Moved architecture docs to `LAB/ARCHITECTURE/`, research docs consolidated in `LAB/RESEARCH/`, added index README.
 - CAT-DPT LAB compression: Merged architecture docs into `SWARM_ARCHITECTURE.md`, semiotic docs into `SEMIOTIC_COMPRESSION.md` with Cortex-style hash refs.
+- Cortex/Provenance hardening: Fixed build crashes caused by volatile pytest temp files in `CORTEX/cortex.build.py` and `TOOLS/provenance.py`.
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
