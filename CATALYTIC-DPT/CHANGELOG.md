@@ -8,10 +8,13 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 #### Changed
 - `swarm_config.json`:
-  - Assigned `LFM2-2.6B-Exp` (Local Ollama) as the canonical Ant Worker.
-  - Assigned `Brains (Claude)` as the President.
+  - Assigned `LFM2-2.6B-Exp` (Python Runner) as the canonical Ant Worker.
+  - Assigned `Claude` as the President (reverted from Brains).
 - `LAB/MCP/mcp_client.py`: Verified functional connectivity (President ↔ Governor ↔ Ledger).
 - `LAB/MCP/server.py`: Verified ledger persistence for dispatch task queue.
+
+#### Added
+- `SKILLS/ant-worker/scripts/lfm2_runner.py`: Direct Python execution script for LFM2 using Transformers.
 
 #### Verified
 - Nervous System: successful dispatch-perform-report loop via MCP ledger (task `TEST-001`).
