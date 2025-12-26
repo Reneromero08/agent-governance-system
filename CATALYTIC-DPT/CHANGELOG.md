@@ -51,7 +51,7 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
-## [1.51.0] - 2025-12-26
+## [1.53.0] - 2025-12-26
 
 ### Phase 6.8: Capability Versioning Semantics
 
