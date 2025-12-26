@@ -19,6 +19,20 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.39.0] - 2025-12-26
+
+### Phase 5: Verifiable Pipeline Proof Chain
+
+#### Added
+- `CONTRACTS/_runs/_pipelines/<pipeline_id>/CHAIN.json`: deterministic, artifact-only proof chain across pipeline steps.
+- `CATALYTIC-DPT/PIPELINES/pipeline_chain.py`: fail-closed verifier that recomputes step proof/root hashes and checks link integrity and step order.
+- `CATALYTIC-DPT/TESTBENCH/test_pipeline_chain.py`: valid, tamper, reorder, and determinism coverage.
+
+#### Changed
+- `CATALYTIC-DPT/PIPELINES/pipeline_runtime.py`: writes/updates `CHAIN.json` during step completion and refuses to resume if chain integrity fails.
+
+---
+
 ## [1.37.0] - 2025-12-25
 
 ### Phase 4: Adversarial Fixtures (Fail-Closed Hardening)
