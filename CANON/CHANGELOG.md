@@ -27,6 +27,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
 ### Changed
+- Installed canon governance pre-commit hook: Now active in `.git/hooks/pre-commit` to enforce governance checks before commits.
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
 - LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
