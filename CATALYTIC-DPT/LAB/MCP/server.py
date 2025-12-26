@@ -100,7 +100,6 @@ CATALYTIC_ROOTS = [
 
 # Forbidden roots (must never be written to or overlapped)
 FORBIDDEN_ROOTS = [
-    "BUILD/",
     "CANON/",
     "AGENTS.md",
 ]

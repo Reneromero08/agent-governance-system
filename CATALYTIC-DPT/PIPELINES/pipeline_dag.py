@@ -182,6 +182,13 @@ def _pipeline_artifact_hashes(*, pipeline_dir: Path, include_receipt: bool = Fal
     return out
 
 
+def _load_restore_report(path: Path) -> Dict[str, Any]:
+    obj = _load_json_obj(path)
+    if obj.get("restore_version") != "1.0.0":
+        raise ValueError("DAG_RESTORE_INVALID")
+    return obj
+
+
 def _verify_receipt_matches(*, pipeline_dir: Path, expected: Dict[str, Any]) -> None:
     if not isinstance(expected, dict):
         raise ValueError("DAG_RECEIPT_MISMATCH")
@@ -236,6 +243,51 @@ def _emit_receipt(
     receipt["receipt_hash"] = _compute_receipt_hash(receipt)
     _atomic_write_canon_json(pipeline_dir / "RECEIPT.json", receipt)
     return receipt
+
+
+def _expected_inputs_and_prior(
+    *,
+    rt: PipelineRuntime,
+    deps: Dict[str, List[DagEdge]],
+    node: str,
+    completed: Set[str],
+) -> Tuple[Dict[str, str], List[str]]:
+    expected_inputs: Dict[str, str] = {}
+    expected_prior: List[str] = []
+    for e in deps.get(node, []):
+        if e.src not in completed:
+            raise ValueError("DAG_DEP_MISSING")
+        src_dir = rt.pipeline_dir(e.src)
+        for req in e.requires:
+            expected_inputs[f"{e.src}:{req}"] = _sha256_file(src_dir / req)
+        src_receipt = _load_receipt(src_dir / "RECEIPT.json")
+        src_hash = src_receipt.get("receipt_hash")
+        if not (isinstance(src_hash, str) and _is_hex64(src_hash)):
+            raise ValueError("RECEIPT_CHAIN_INVALID")
+        expected_prior.append(src_hash)
+    return expected_inputs, expected_prior
+
+
+def _should_skip_node(
+    *,
+    rt: PipelineRuntime,
+    deps: Dict[str, List[DagEdge]],
+    node: str,
+    completed: Set[str],
+) -> bool:
+    try:
+        expected_inputs, expected_prior = _expected_inputs_and_prior(rt=rt, deps=deps, node=node, completed=completed)
+        _verify_receipt(
+            pipeline_dir=rt.pipeline_dir(node),
+            node_id=node,
+            pipeline_id=node,
+            expected_inputs=expected_inputs,
+            expected_outputs=_pipeline_artifact_hashes(pipeline_dir=rt.pipeline_dir(node)),
+            expected_prior=expected_prior,
+        )
+        return True
+    except Exception:
+        return False
 
 
 def _verify_receipt(
@@ -348,7 +400,148 @@ def verify_dag(
             if not res.get("ok", False):
                 return {"ok": False, "code": "DAG_NODE_VERIFY_FAIL", "details": {"node": node, "pipeline_code": res.get("code")}}
 
+    restore_path = dag_dir / "DAG_RESTORE.json"
+    if restore_path.exists():
+        try:
+            restore = _load_restore_report(restore_path)
+            if restore.get("dag_id") != dag_id:
+                raise ValueError("DAG_RESTORE_INVALID")
+            skipped = restore.get("skipped", [])
+            rerun = restore.get("rerun", [])
+            if not (isinstance(skipped, list) and isinstance(rerun, list)):
+                raise ValueError("DAG_RESTORE_INVALID")
+            if not all(isinstance(x, str) and x for x in skipped + rerun):
+                raise ValueError("DAG_RESTORE_INVALID")
+            if len(set(skipped + rerun)) != len(skipped) + len(rerun):
+                raise ValueError("DAG_RESTORE_INVALID")
+            if set(skipped + rerun) != set(completed):
+                raise ValueError("DAG_RESTORE_INVALID")
+            receipt_hashes = restore.get("receipt_hashes", {})
+            if not isinstance(receipt_hashes, dict):
+                raise ValueError("DAG_RESTORE_INVALID")
+            for node in completed:
+                r_path = rt.pipeline_dir(node) / "RECEIPT.json"
+                r_obj = _load_receipt(r_path)
+                r_hash = r_obj.get("receipt_hash")
+                if not (isinstance(r_hash, str) and _is_hex64(r_hash)):
+                    raise ValueError("DAG_RESTORE_INVALID")
+                if receipt_hashes.get(node) != r_hash:
+                    raise ValueError("DAG_RESTORE_INVALID")
+        except Exception as e:
+            return {"ok": False, "code": str(e) or "DAG_RESTORE_INVALID", "details": {"phase": "RESTORE"}}
+
     return {"ok": True, "code": "OK", "details": {"dag_id": dag_id, "nodes": len(order), "completed": len(completed)}}
+
+
+def restore_dag(
+    *,
+    project_root: Path,
+    runs_root: Path,
+    dag_id: str,
+    strict: bool = True,
+) -> Dict[str, Any]:
+    dag_dir = _dag_dir(project_root=project_root, runs_root=runs_root, dag_id=dag_id)
+    dag_spec_path = dag_dir / "PIPELINE_DAG.json"
+    dag_state_path = dag_dir / "DAG_STATE.json"
+    restore_path = dag_dir / "DAG_RESTORE.json"
+    if not dag_spec_path.exists():
+        return {"ok": False, "code": "DAG_NOT_FOUND", "details": {"dag_dir": str(dag_dir)}}
+    try:
+        dag_spec = _parse_dag_spec(_load_json_obj(dag_spec_path))
+        order = topo_sort(dag_spec)
+    except Exception as e:
+        return {"ok": False, "code": str(e) or "DAG_INVALID", "details": {"phase": "LOAD"}}
+
+    deps: Dict[str, List[DagEdge]] = {n: [] for n in order}
+    for e in dag_spec.edges:
+        deps[e.dst].append(e)
+    for k in deps.keys():
+        deps[k] = sorted(deps[k], key=lambda x: (x.src, ",".join(x.requires)))
+
+    rt = PipelineRuntime(project_root=project_root)
+    completed: Set[str] = set()
+    receipts: Dict[str, Any] = {}
+    skipped: List[str] = []
+    rerun: List[str] = []
+
+    # Determine which nodes can be skipped based on valid receipts + artifacts.
+    for node in order:
+        if _should_skip_node(rt=rt, deps=deps, node=node, completed=completed):
+            completed.add(node)
+            skipped.append(node)
+            receipts[node] = _pipeline_artifact_hashes(pipeline_dir=rt.pipeline_dir(node))
+
+    # Re-run incomplete nodes deterministically in topo order.
+    for node in order:
+        if node in completed:
+            continue
+        try:
+            expected_inputs, expected_prior = _expected_inputs_and_prior(rt=rt, deps=deps, node=node, completed=completed)
+        except Exception:
+            return {"ok": False, "code": "RESTORE_AMBIGUOUS_STATE", "details": {"node": node}}
+
+        pipeline_dir = rt.pipeline_dir(node)
+        spec_path = pipeline_dir / "PIPELINE.json"
+        if not spec_path.exists():
+            return {"ok": False, "code": "PIPELINE_NOT_FOUND", "details": {"node": node}}
+        spec_obj = _load_json_obj(spec_path)
+        spec_obj = dict(spec_obj)
+        spec_obj["pipeline_id"] = node
+        try:
+            spec = rt._parse_spec(pipeline_id=node, obj=spec_obj)
+        except Exception:
+            return {"ok": False, "code": "PIPELINE_SPEC_INVALID", "details": {"node": node}}
+        _atomic_write_canon_json(pipeline_dir / "STATE.json", rt._initial_state(spec))
+
+        rt.run(pipeline_id=node)
+        res = verify_pipeline(project_root=project_root, pipeline_id=node, runs_root=runs_root, strict=strict)
+        if not res.get("ok", False):
+            return {"ok": False, "code": "DAG_NODE_VERIFY_FAIL", "details": {"node": node, "pipeline_code": res.get("code")}}
+
+        output_hashes = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
+        _emit_receipt(
+            pipeline_dir=pipeline_dir,
+            node_id=node,
+            pipeline_id=node,
+            capability_hash="PIPELINE_NODE",
+            input_artifact_hashes=expected_inputs,
+            output_artifact_hashes=output_hashes,
+            prior_receipt_hashes=expected_prior,
+        )
+        receipts[node] = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
+        completed.add(node)
+        rerun.append(node)
+
+    state = {
+        "state_version": "1.0.0",
+        "dag_id": dag_spec.dag_id,
+        "order": order,
+        "completed": [n for n in order if n in completed],
+        "receipts": dict(sorted(receipts.items(), key=lambda kv: kv[0])),
+    }
+    _atomic_write_canon_json(dag_state_path, state)
+
+    receipt_hashes: Dict[str, str] = {}
+    for node in completed:
+        rec = _load_receipt(rt.pipeline_dir(node) / "RECEIPT.json")
+        r_hash = rec.get("receipt_hash")
+        if not (isinstance(r_hash, str) and _is_hex64(r_hash)):
+            return {"ok": False, "code": "RECEIPT_INVALID", "details": {"node": node}}
+        receipt_hashes[node] = r_hash
+    restore_obj = {
+        "restore_version": "1.0.0",
+        "dag_id": dag_spec.dag_id,
+        "skipped": [n for n in order if n in skipped],
+        "rerun": [n for n in order if n in rerun],
+        "receipt_hashes": dict(sorted(receipt_hashes.items(), key=lambda kv: kv[0])),
+    }
+    _atomic_write_canon_json(restore_path, restore_obj)
+
+    return {
+        "ok": True,
+        "code": "OK",
+        "details": {"dag_id": dag_id, "skipped": len(skipped), "rerun": len(rerun), "completed": len(completed)},
+    }
 
 
 def run_dag(

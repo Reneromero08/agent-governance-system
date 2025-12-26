@@ -1,0 +1,6 @@
+{
+  "directive": "Analyze code structure",
+  "task_type": "research",
+  "wait_for_result": false,
+  "timeout": 1
+}
