@@ -58,6 +58,7 @@ GLOBAL_DEREF_MAX_DEPTH = 32
 
 # Default capabilities registry path (repo-relative).
 DEFAULT_CAPABILITIES_PATH = "CATALYTIC-DPT/CAPABILITIES.json"
+DEFAULT_PINS_PATH = "CATALYTIC-DPT/CAPABILITY_PINS.json"
 
 
 def _read_bytes_bounded(path: Path, max_bytes: int) -> bytes:
@@ -270,6 +271,15 @@ def _capabilities_path() -> Path:
     return REPO_ROOT / p
 
 
+def _pins_path() -> Path:
+    env = os.environ.get("CATALYTIC_PINS_PATH")
+    rel = env if isinstance(env, str) and env else DEFAULT_PINS_PATH
+    p = Path(rel)
+    if p.is_absolute():
+        return p
+    return REPO_ROOT / p
+
+
 def _load_capabilities_registry() -> Dict[str, Any]:
     path = _capabilities_path()
     obj = json.loads(path.read_text(encoding="utf-8"))
@@ -283,6 +293,25 @@ def _load_capabilities_registry() -> Dict[str, Any]:
     return obj
 
 
+def _load_pins() -> Dict[str, Any]:
+    path = _pins_path()
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(obj, dict):
+        raise ValueError("PINS_INVALID")
+    if obj.get("pins_version") != "1.0.0":
+        raise ValueError("PINS_INVALID_VERSION")
+    allowed = obj.get("allowed_capabilities")
+    if not isinstance(allowed, list) or not all(isinstance(x, str) and x for x in allowed):
+        raise ValueError("PINS_INVALID")
+    return obj
+
+
+def _is_capability_pinned(capability_hash: str) -> bool:
+    pins = _load_pins()
+    allowed = pins.get("allowed_capabilities", [])
+    return capability_hash in allowed
+
+
 def _canonical_hash(obj: Any) -> str:
     return hashlib.sha256(canonical_json_bytes(obj)).hexdigest()
 
@@ -293,6 +322,8 @@ def _resolve_capability_hash(capability_hash: str) -> Dict[str, Any]:
     entry = caps.get(capability_hash)
     if not isinstance(entry, dict):
         raise ValueError("UNKNOWN_CAPABILITY")
+    if not _is_capability_pinned(capability_hash):
+        raise ValueError("CAPABILITY_NOT_PINNED")
     adapter = entry.get("adapter")
     if not isinstance(adapter, dict):
         raise ValueError("CAPABILITIES_REGISTRY_INVALID")
