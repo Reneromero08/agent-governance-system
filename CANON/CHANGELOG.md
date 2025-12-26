@@ -5,6 +5,7 @@ All notable changes to the Agent Governance System will be documented in this fi
 ## [Unreleased]
 
 ### Added
+- `TOOLS/check-canon-governance.js`: Governance check script that enforces changelog updates for significant changes to CANON/, TOOLS/, PRIMITIVES/, SCHEMAS/, ADRs, and CI workflows.
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
 - `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
 - `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
