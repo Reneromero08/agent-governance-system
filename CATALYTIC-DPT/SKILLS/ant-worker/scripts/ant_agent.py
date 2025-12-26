@@ -57,7 +57,8 @@ def main():
             # If not exposed, we might need to read jsonl directly or use mcp_client logic.
             # Assuming functionality exists based on previous file review.
             try:
-                tasks = mcp.get_pending_tasks(args.agent_id)
+                response = mcp.get_pending_tasks(args.agent_id)
+                tasks = response.get("tasks", [])
             except Exception as e:
                 # If get_pending_tasks fails/doesn't exist, log and wait
                 # print(f"Polling error: {e}") 
