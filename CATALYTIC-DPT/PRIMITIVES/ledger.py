@@ -22,19 +22,35 @@ class _LedgerSchemas:
 def _load_schemas() -> _LedgerSchemas:
     cat_dpt_root = Path(__file__).resolve().parents[1]
     schemas_dir = cat_dpt_root / "SCHEMAS"
-    ledger_schema = json.loads((schemas_dir / "ledger.schema.json").read_text(encoding="utf-8"))
-    jobspec_schema = json.loads((schemas_dir / "jobspec.schema.json").read_text(encoding="utf-8"))
+    ledger_schema_path = schemas_dir / "ledger.schema.json"
+    jobspec_schema_path = schemas_dir / "jobspec.schema.json"
+    ledger_schema = json.loads(ledger_schema_path.read_text(encoding="utf-8"))
+    jobspec_schema = json.loads(jobspec_schema_path.read_text(encoding="utf-8"))
     return _LedgerSchemas(ledger=ledger_schema, jobspec=jobspec_schema)
 
 
 def _build_validator() -> Draft7Validator:
     schemas = _load_schemas()
 
+    cat_dpt_root = Path(__file__).resolve().parents[1]
+    schemas_dir = cat_dpt_root / "SCHEMAS"
+    ledger_schema_path = (schemas_dir / "ledger.schema.json").resolve()
+    jobspec_schema_path = (schemas_dir / "jobspec.schema.json").resolve()
+
+    ledger_uri = ledger_schema_path.as_uri()
+    jobspec_uri = jobspec_schema_path.as_uri()
+
     store: dict[str, Any] = {
         schemas.ledger.get("$id", "ledger.schema.json"): schemas.ledger,
         schemas.jobspec.get("$id", "jobspec.schema.json"): schemas.jobspec,
         "ledger.schema.json": schemas.ledger,
+        "ledger.schema.json#": schemas.ledger,
+        ledger_uri: schemas.ledger,
+        ledger_uri + "#": schemas.ledger,
         "jobspec.schema.json": schemas.jobspec,
+        "jobspec.schema.json#": schemas.jobspec,
+        jobspec_uri: schemas.jobspec,
+        jobspec_uri + "#": schemas.jobspec,
     }
 
     resolver = RefResolver.from_schema(schemas.ledger, store=store)
@@ -138,4 +154,3 @@ class Ledger:
             # Keep deterministic, minimal error reporting (no dependency on validator formatting).
             first = errors[0]
             raise ValueError(f"ledger schema invalid at {list(first.path)}: {first.message}")
-
