@@ -22,6 +22,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
+from PIPELINES.pipeline_verify import verify_pipeline
 from PRIMITIVES.cas_store import CatalyticStore
 from PRIMITIVES.hash_toolbelt import (
     DEFAULT_AST_MAX_BYTES,
@@ -96,6 +97,11 @@ def main() -> int:
     status_p = pipeline_sub.add_parser("status", help="Print deterministic pipeline status")
     status_p.add_argument("pipeline_id", help="Pipeline ID")
 
+    verify_p = pipeline_sub.add_parser("verify", help="Fail-closed pipeline verification (artifact-only)")
+    verify_p.add_argument("--pipeline-id", required=True, help="Pipeline ID")
+    verify_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
+    verify_p.add_argument("--strict", action="store_true", help="Enable strict verification (default behavior)")
+
     args = parser.parse_args()
     store = None
     run_id = None
@@ -109,6 +115,33 @@ def main() -> int:
         ledger_path = _resolve_ledger_path(run_id=run_id)
 
     try:
+        if args.cmd == "pipeline" and args.pipe_cmd == "verify":
+            runs_root = Path(args.runs_root)
+            if not runs_root.is_absolute():
+                runs_root = REPO_ROOT / runs_root
+            result = verify_pipeline(
+                project_root=REPO_ROOT,
+                pipeline_id=args.pipeline_id,
+                runs_root=runs_root,
+                strict=True,
+            )
+            if result.get("ok", False):
+                details = result.get("details", {})
+                steps_verified = details.get("steps_verified", 0)
+                sys.stdout.write(f"OK pipeline_id={args.pipeline_id} steps_verified={steps_verified}\n")
+                return 0
+
+            details = result.get("details", {}) if isinstance(result.get("details"), dict) else {}
+            step_id = details.get("step_id")
+            run_id = details.get("run_id")
+            suffix = ""
+            if isinstance(step_id, str) and step_id:
+                suffix += f" step_id={step_id}"
+            if isinstance(run_id, str) and run_id:
+                suffix += f" run_id={run_id}"
+            sys.stdout.write(f"FAIL code={result.get('code', 'ERROR')}{suffix}\n")
+            return 1
+
         if args.cmd == "pipeline" and args.pipe_cmd == "status":
             rt = PipelineRuntime(project_root=REPO_ROOT)
             sys.stdout.write(rt.status_text(pipeline_id=args.pipeline_id))

@@ -336,6 +336,7 @@ Acceptance
 Deliverables
 - [x] Minimal pipeline runner (init/run/status/resume; artifact-only state). (commit: 1799178)
 - [x] Proof chain across pipeline steps (`CHAIN.json` under `CONTRACTS/_runs/_pipelines/<pipeline_id>/`; deterministic; fail-closed verification).
+- [x] Pipeline verifier CLI (`catalytic pipeline verify`; fail-closed; artifact-only).
 - [ ] Compose verified runs into durable workflows.
 - [ ] Pipelines are still artifact-first, replayable, and proof-gated.
 
