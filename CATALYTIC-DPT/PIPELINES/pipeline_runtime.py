@@ -79,6 +79,15 @@ class PipelineRuntime:
     def pipeline_dir(self, pipeline_id: str) -> Path:
         return self.project_root / "CONTRACTS" / "_runs" / "_pipelines" / _slug(pipeline_id)
 
+    def _init_state_if_missing(self, *, pipeline_id: str, pdir: Path) -> None:
+        spec_path = pdir / "PIPELINE.json"
+        state_path = pdir / "STATE.json"
+        if not spec_path.exists() or state_path.exists():
+            return
+        spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
+        spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
+        _atomic_write_canonical_json(state_path, self._initial_state(spec))
+
     def init_from_spec_path(self, *, pipeline_id: str, spec_path: Path) -> PipelineSpec:
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
         spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
@@ -93,6 +102,8 @@ class PipelineRuntime:
         pdir = self.pipeline_dir(pipeline_id)
         spec_path = pdir / "PIPELINE.json"
         state_path = pdir / "STATE.json"
+        if spec_path.exists() and not state_path.exists():
+            self._init_state_if_missing(pipeline_id=pipeline_id, pdir=pdir)
         if not spec_path.exists() or not state_path.exists():
             raise FileNotFoundError(f"pipeline not initialized: {pdir}")
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
@@ -132,6 +143,8 @@ class PipelineRuntime:
             if spec_path is None:
                 raise FileNotFoundError(f"pipeline missing and no spec provided: {pdir}")
             self.init_from_spec_path(pipeline_id=pipeline_id, spec_path=spec_path)
+        else:
+            self._init_state_if_missing(pipeline_id=pipeline_id, pdir=pdir)
 
         spec, state = self.load(pipeline_id=pipeline_id)
         completed_steps = set(state["completed_steps"])

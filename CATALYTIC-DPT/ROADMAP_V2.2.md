@@ -353,6 +353,7 @@ Deliverables
 - [ ] CAT-DPT becomes the execution substrate for AGS.
 - [ ] AGS must conform to CAT-DPT contracts, not the other way around.
 - [x] Phase 6.1: AGS emits deterministic `PIPELINE.json` from a plan and runs `catalytic pipeline run` + `catalytic pipeline verify` (model-free).
+  - [x] Owner boundary: AGS emits spec only; pipeline runtime initializes `STATE.json` deterministically when missing.
 
 Acceptance
 - [ ] At least one integrated workflow: JobSpec in, strict verification out, resumable from artifacts only.

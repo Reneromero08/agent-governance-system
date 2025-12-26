@@ -13,6 +13,16 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.42.0] - 2025-12-26
+
+### Phase 6.1: Runtime-Owned Pipeline State
+
+#### Changed
+- `PipelineRuntime`: initializes `STATE.json` deterministically when `PIPELINE.json` exists but `STATE.json` is missing.
+- `ags route`: emits `PIPELINE.json` only; runtime owns state.
+
+---
+
 ## [1.40.0] - 2025-12-26
 
 ### Phase 5: Pipeline Verify CLI (Fail-Closed)

@@ -93,10 +93,12 @@ def test_ags_route_deterministic_bytes(tmp_path: Path) -> None:
 
         r1 = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
         assert r1.returncode == 0, r1.stdout + r1.stderr
+        assert not (pipeline_dir / "STATE.json").exists()
         b1 = (pipeline_dir / "PIPELINE.json").read_bytes()
 
         r2 = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
         assert r2.returncode == 0, r2.stdout + r2.stderr
+        assert not (pipeline_dir / "STATE.json").exists()
         b2 = (pipeline_dir / "PIPELINE.json").read_bytes()
         assert b1 == b2
     finally:
@@ -123,9 +125,11 @@ def test_ags_run_calls_verify_ok(tmp_path: Path) -> None:
 
         r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
         assert r.returncode == 0, r.stdout + r.stderr
+        assert not (pipeline_dir / "STATE.json").exists()
 
         rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
+        assert (pipeline_dir / "STATE.json").exists()
     finally:
         _rm(plan_dir)
         _rm(pipeline_dir)
@@ -150,9 +154,11 @@ def test_ags_run_fails_closed_on_tamper(tmp_path: Path) -> None:
 
         r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
         assert r.returncode == 0, r.stdout + r.stderr
+        assert not (pipeline_dir / "STATE.json").exists()
 
         rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
+        assert (pipeline_dir / "STATE.json").exists()
 
         state = json.loads((pipeline_dir / "STATE.json").read_text(encoding="utf-8"))
         run_id = state["step_run_ids"]["s1"]
@@ -162,6 +168,46 @@ def test_ags_run_fails_closed_on_tamper(tmp_path: Path) -> None:
 
         v = _run_catalytic_verify(pipeline_id)
         assert v.returncode != 0
+    finally:
+        _rm(plan_dir)
+        _rm(pipeline_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+        _rm(REPO_ROOT / f"CORTEX/_generated/_tmp/{pipeline_id}_ags_step1_out.txt")
+
+
+def test_pipeline_run_creates_state_when_missing(tmp_path: Path) -> None:
+    pipeline_id = "ags-bridge-runtime-init-state"
+    tmp_root = "ags_bridge_runtime_init_state"
+    plan_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
+    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    try:
+        _rm(plan_dir)
+        _rm(pipeline_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+
+        plan_dir.mkdir(parents=True, exist_ok=True)
+        plan_path = plan_dir / "plan.json"
+        plan = _make_plan(pipeline_id=pipeline_id, tmp_root=tmp_root)
+        plan_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+
+        r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
+        assert r.returncode == 0, r.stdout + r.stderr
+        assert (pipeline_dir / "PIPELINE.json").exists()
+        assert not (pipeline_dir / "STATE.json").exists()
+
+        run_cmd = [
+            sys.executable,
+            str(REPO_ROOT / "TOOLS" / "catalytic.py"),
+            "pipeline",
+            "run",
+            "--pipeline-id",
+            pipeline_id,
+            "--runs-root",
+            "CONTRACTS/_runs",
+        ]
+        res = subprocess.run(run_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        assert res.returncode == 0, res.stdout + res.stderr
+        assert (pipeline_dir / "STATE.json").exists()
     finally:
         _rm(plan_dir)
         _rm(pipeline_dir)
