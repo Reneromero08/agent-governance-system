@@ -72,6 +72,20 @@ def _load_capabilities_registry(*, project_root: Path) -> Dict[str, Any]:
     return obj
 
 
+def _load_pins(*, project_root: Path) -> Dict[str, Any]:
+    rel = os.environ.get("CATALYTIC_PINS_PATH", "CATALYTIC-DPT/CAPABILITY_PINS.json")
+    path = Path(rel)
+    if not path.is_absolute():
+        path = project_root / path
+    obj = _load_json_obj(path)
+    if obj.get("pins_version") != "1.0.0":
+        raise ValueError("PINS_INVALID_VERSION")
+    allowed = obj.get("allowed_capabilities")
+    if not isinstance(allowed, list) or not all(isinstance(x, str) and x for x in allowed):
+        raise ValueError("PINS_INVALID")
+    return obj
+
+
 def verify_pipeline(
     *,
     project_root: Path,
@@ -105,10 +119,13 @@ def verify_pipeline(
     spec_steps = pipeline_spec.get("steps", [])
     capability_mode = isinstance(spec_steps, list) and any(isinstance(s, dict) and "capability_hash" in s for s in spec_steps)
     capabilities = None
+    allowed_caps = None
     if capability_mode:
         try:
             registry = _load_capabilities_registry(project_root=project_root)
             capabilities = registry.get("capabilities", {})
+            pins = _load_pins(project_root=project_root)
+            allowed_caps = set(pins.get("allowed_capabilities", []))
         except Exception as e:
             return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "message": str(e)}}
 
@@ -162,6 +179,12 @@ def verify_pipeline(
             cap_entry = capabilities.get(cap)
             if not isinstance(cap_entry, dict):
                 return {"ok": False, "code": "UNKNOWN_CAPABILITY", "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap}}
+            if not isinstance(allowed_caps, set) or cap not in allowed_caps:
+                return {
+                    "ok": False,
+                    "code": "CAPABILITY_NOT_PINNED",
+                    "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap},
+                }
             adapter = cap_entry.get("adapter")
             if not isinstance(adapter, dict):
                 return {"ok": False, "code": "CAPABILITIES_REGISTRY_INVALID", "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap}}
