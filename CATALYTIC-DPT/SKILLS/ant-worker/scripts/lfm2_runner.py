@@ -13,8 +13,8 @@ def run_model(prompt):
         model = AutoModelForCausalLM.from_pretrained(
             MODEL_ID, 
             trust_remote_code=True,
-            torch_dtype=torch.float16, # Use fp16 for speed/mem
-            device_map="auto"          # Use GPU if available
+            torch_dtype=torch.float32, # Safe for CPU
+            # device_map="auto" # Caused meta device error
         )
     except Exception as e:
         print(f"Error loading model: {e}", file=sys.stderr)
