@@ -92,5 +92,4 @@ def test_registry_tamper_detected_fail_closed(tmp_path: Path) -> None:
 
     r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", "reg-tamper"], env=env)
     assert r.returncode != 0
-    assert "REGISTRY_TAMPERED" in (r.stderr + r.stdout)
-
+    assert "CAPABILITY_HASH_MISMATCH" in (r.stderr + r.stdout)
