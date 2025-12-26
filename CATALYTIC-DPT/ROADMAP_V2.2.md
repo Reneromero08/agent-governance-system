@@ -313,17 +313,25 @@ Acceptance
 
 ---
 
-## PHASE 3: Substrate adapters (after kernel is real)
+## PHASE 3: Packing hygiene (deterministic, bounded, deduplicated)
 Purpose
-- [ ] Bridge to external tools and runtimes without weakening trust boundaries.
+- [x] Prevent context bloat before scale by making packs deterministic, bounded, and auditable. (commit: this changeset)
 
 Deliverables
-- [ ] Adapters are additive, never authoritative.
-- [ ] Adapters must output artifacts that can be verified by the same verifiers.
+- [x] Deterministic ordering: manifest entries sorted by normalized path, then content hash.
+- [x] Explicit size ceilings (fail-closed; recorded in metadata):
+  - max_total_bytes (default 50 MiB)
+  - max_entry_bytes (default 2 MiB)
+  - max_entries (default 50,000)
+- [x] Dedup rules:
+  - Duplicate normalized paths are rejected.
+  - Duplicate content hashes are rejected for CAT-DPT packs by default (can be explicitly allowed via CLI flag).
+- [x] Auditable manifest integrity:
+  - `meta/REPO_STATE.json` is schema-like and validated (sorted, unique, stable).
+  - `meta/PACK_INFO.json` records `repo_state_sha256` for content-addressed manifest identity.
 
-Acceptance
-- [ ] No adapter can write outside allowed roots.
-- [ ] Adapter runs are replayable and verifiable without network trust.
+Tests (backstop)
+- [x] `CATALYTIC-DPT/TESTBENCH/test_packing_hygiene.py` (determinism, limits fail-closed, dedup validation, tamper detection)
 
 ---
 
