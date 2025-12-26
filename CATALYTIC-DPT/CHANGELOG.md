@@ -111,6 +111,16 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.56.0] - 2025-12-26
+
+### Phase 7.1: Distributed Execution Receipts
+
+#### Added
+- `PIPELINES/pipeline_dag.py`: node receipts (RECEIPT.json), chained via DAG topology, with strict verification.
+- `TESTBENCH/test_pipeline_dag.py`: receipt chaining, tamper rejection, and cross-machine portability coverage.
+
+---
+
 ## [1.47.0] - 2025-12-26
 
 ### Phase 6.4: MCP Adapters as Governed Pipeline Steps

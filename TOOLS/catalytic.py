@@ -23,6 +23,7 @@ sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
 from PIPELINES.pipeline_verify import verify_pipeline
+from PIPELINES.pipeline_dag import run_dag, verify_dag
 from PRIMITIVES.cas_store import CatalyticStore
 from PRIMITIVES.hash_toolbelt import (
     DEFAULT_AST_MAX_BYTES,
@@ -106,6 +107,24 @@ def main() -> int:
     verify_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
     verify_p.add_argument("--strict", action="store_true", help="Enable strict verification (default behavior)")
 
+    dag_p = pipeline_sub.add_parser("dag", help="Deterministic pipeline DAG scheduler")
+    dag_sub = dag_p.add_subparsers(dest="dag_cmd", required=True)
+
+    dag_run_p = dag_sub.add_parser("run", help="Initialize/resume and run a pipeline DAG")
+    dag_run_p.add_argument("--dag-id", required=True, help="DAG ID")
+    dag_run_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
+    dag_run_p.add_argument("--spec", required=False, default=None, help="DAG spec JSON path (required on first run)")
+    dag_run_p.add_argument("--max-nodes", type=int, default=None, help="Limit nodes executed this invocation")
+
+    dag_status_p = dag_sub.add_parser("status", help="Print DAG state JSON (canonical)")
+    dag_status_p.add_argument("--dag-id", required=True, help="DAG ID")
+    dag_status_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
+
+    dag_verify_p = dag_sub.add_parser("verify", help="Fail-closed DAG verification (artifact-only)")
+    dag_verify_p.add_argument("--dag-id", required=True, help="DAG ID")
+    dag_verify_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
+    dag_verify_p.add_argument("--strict", action="store_true", help="Enable strict verification (default behavior)")
+
     args = parser.parse_args()
     store = None
     run_id = None
@@ -122,6 +141,49 @@ def main() -> int:
         if args.cmd == "pipeline":
             if getattr(args, "runs_root", "CONTRACTS/_runs") != "CONTRACTS/_runs":
                 raise RuntimeError("UNSUPPORTED_RUNS_ROOT (only CONTRACTS/_runs is supported)")
+
+        if args.cmd == "pipeline" and args.pipe_cmd == "dag" and args.dag_cmd == "status":
+            runs_root = Path(args.runs_root)
+            if not runs_root.is_absolute():
+                runs_root = REPO_ROOT / runs_root
+            dag_dir = runs_root / "_pipelines" / "_dags" / args.dag_id
+            state = dag_dir / "DAG_STATE.json"
+            if not state.exists():
+                raise SystemExit("ERROR: DAG not initialized")
+            sys.stdout.write(state.read_text(encoding="utf-8") + "\n")
+            return 0
+
+        if args.cmd == "pipeline" and args.pipe_cmd == "dag" and args.dag_cmd == "verify":
+            runs_root = Path(args.runs_root)
+            if not runs_root.is_absolute():
+                runs_root = REPO_ROOT / runs_root
+            result = verify_dag(project_root=REPO_ROOT, runs_root=runs_root, dag_id=args.dag_id, strict=True)
+            if result.get("ok", False):
+                details = result.get("details", {})
+                sys.stdout.write(f"OK dag_id={args.dag_id} completed={details.get('completed', 0)} nodes={details.get('nodes', 0)}\n")
+                return 0
+            sys.stdout.write(f"FAIL code={result.get('code', 'ERROR')}\n")
+            return 1
+
+        if args.cmd == "pipeline" and args.pipe_cmd == "dag" and args.dag_cmd == "run":
+            runs_root = Path(args.runs_root)
+            if not runs_root.is_absolute():
+                runs_root = REPO_ROOT / runs_root
+            spec_path = Path(args.spec) if args.spec is not None else None
+            result = run_dag(
+                project_root=REPO_ROOT,
+                runs_root=runs_root,
+                dag_id=args.dag_id,
+                spec_path=spec_path,
+                max_nodes=args.max_nodes,
+                strict=True,
+            )
+            if result.get("ok", False):
+                details = result.get("details", {})
+                sys.stdout.write(f"OK dag_id={args.dag_id} completed={details.get('completed', 0)} nodes={details.get('nodes', 0)}\n")
+                return 0
+            sys.stdout.write(f"FAIL code={result.get('code', 'ERROR')}\n")
+            return 1
 
         if args.cmd == "pipeline" and args.pipe_cmd == "verify":
             runs_root = Path(args.runs_root)
