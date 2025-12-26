@@ -92,7 +92,11 @@ def find_escaped_artifacts(scan_roots: List[Path]) -> List[Path]:
         if not root.exists():
             continue
         for path in root.rglob("*"):
-            if path.is_file() and not should_ignore(path):
+            try:
+                is_file = path.is_file()
+            except OSError:
+                is_file = False
+            if is_file and not should_ignore(path):
                 # Only flag files that look like runtime artifacts
                 if is_runtime_artifact(path) and not is_allowed_path(path):
                     escaped.append(path)

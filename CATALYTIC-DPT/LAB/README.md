@@ -5,23 +5,18 @@ Research and experimental development area for CATALYTIC-DPT.
 ## Directory Structure
 
 ### `/ARCHITECTURE/`
-Multi-agent orchestration architecture documentation.
-- `ORCHESTRATION.md` - Multi-agent orchestration with MCP as single source of truth
-- `RECURSIVE_SWARM.md` - Recursive swarm architecture (President → Governor → Ants)
+Multi-agent swarm architecture documentation.
+- `SWARM_ARCHITECTURE.md` - Complete swarm hierarchy (President → Governor → Ants), MCP orchestration, drift prevention
 
 ### `/RESEARCH/`
 Research reports and design specs.
-- `CATALYTIC_INTEGRITY_STACK_REPORT.md` - CMP-01, CATLAB-01, SPECTRUM-01/02/03 implementation report
-- `SEMIOTIC_COMPRESSION_LAYER_REPORT.md` - Symbolic IR for token reduction design spec
-- `SEMIOTIC_COMPRESSION_ROADMAP_PATCH.md` - SCL MVP roadmap patch
-- `CATALYTIC_STACK_COMPRESSED_MERGED GPT 5.2.md` - Merged research context
+- `CATALYTIC_INTEGRITY_STACK_REPORT.md` - CMP-01, CATLAB-01, SPECTRUM-01/02/03 implementation
+- `SEMIOTIC_COMPRESSION.md` - SCL design spec + roadmap (token reduction via symbolic IR)
 
 ### `/ARCHIVE/`
-Historical roadmap versions.
-- `ROADMAP.md` - Original roadmap
-- `ROADMAP_V2.md` - Version 2
-- `ROADMAP_V2.1.md` - Version 2.1
-- `ROADMAP_V2.2.md` - Version 2.2 (superseded by V2.3 in root)
+Historical documents.
+- `ROADMAP.md`, `ROADMAP_V2.md`, `ROADMAP_V2.1.md`, `ROADMAP_V2.2.md` - Old roadmaps
+- `CATALYTIC_STACK_COMPRESSED_MERGED_GPT_5.2.md` - Legacy merged context
 
 ### `/COMMONSENSE/`
 Commonsense reasoning fixtures and tests.
@@ -36,3 +31,9 @@ Catalytic domain stress test scaffolds (CATLAB-01).
 - **Active**: ARCHITECTURE/, RESEARCH/
 - **Archived**: ARCHIVE/
 - **Experimental**: COMMONSENSE/, MCP/, catlab_stress/
+
+## Document Hashes (Cortex References)
+| Document | Hash |
+|----------|------|
+| SWARM_ARCHITECTURE.md | `SHA256:SWARM_ARCH_V1` |
+| SEMIOTIC_COMPRESSION.md | `SHA256:SCL_SPEC_V1` |
