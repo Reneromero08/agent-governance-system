@@ -31,10 +31,7 @@ def run_model(prompt):
     )
     
     result = tokenizer.decode(outputs[0], skip_special_tokens=True)
-    # Strip prompt from result if needed, but usually decoder output includes it.
-    # LLM pattern: usually we want just the answer.
-    # For now, print full result.
-    print(result)
+    return result
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:
@@ -42,4 +39,4 @@ if __name__ == "__main__":
         sys.exit(1)
     
     prompt = sys.argv[1]
-    run_model(prompt)
+    print(run_model(prompt))
