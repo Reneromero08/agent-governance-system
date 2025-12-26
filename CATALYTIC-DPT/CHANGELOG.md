@@ -2,6 +2,20 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.55.0] - 2025-12-26
+
+### Swarm Activation (Nervous System Online)
+
+#### Changed
+- `swarm_config.json`:
+  - Assigned `LFM2-2.6B-Exp` (Local Ollama) as the canonical Ant Worker.
+  - Assigned `Brains (Claude)` as the President.
+- `LAB/MCP/mcp_client.py`: Verified functional connectivity (President ↔ Governor ↔ Ledger).
+- `LAB/MCP/server.py`: Verified ledger persistence for dispatch task queue.
+
+#### Verified
+- Nervous System: successful dispatch-perform-report loop via MCP ledger (task `TEST-001`).
+- Brain (Cortex): successful indexing and search functionality.
 ## [1.52.0] - 2025-12-26
 
 ### LAB Compression (Cortex-Style Merge)
@@ -60,6 +74,20 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 #### Added
 - `TESTBENCH/test_ags_phase6_capability_versioning_semantics.py`: asserts fail-closed behavior and the dedicated boundary error code.
+
+---
+
+## [1.54.0] - 2025-12-26
+
+### Phase 6.9: Capability Revocation Semantics
+
+#### Added
+- `CAPABILITY_REVOKES.json`: deterministic revoked capability list.
+- `TESTBENCH/test_ags_phase6_capability_revokes.py`: route-time rejection and verify-time semantics preserving historical verification.
+
+#### Changed
+- `TOOLS/ags.py`: rejects revoked capabilities at route time (`REVOKED_CAPABILITY`).
+- `PIPELINES/pipeline_verify.py`: rejects post-revocation pipelines that use revoked capabilities (`REVOKED_CAPABILITY`), while allowing legacy pipelines without policy snapshots.
 
 ---
 

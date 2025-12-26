@@ -227,6 +227,20 @@ Acceptance
 
 ---
 
+## PHASE 6.9: Capability revocation semantics (no-history-break)
+Intent
+Block future use of a capability without breaking historical verification of pre-revocation runs.
+
+Deliverables
+- [ ] `CAPABILITY_REVOKES.json` exists (deterministic ordering) and is enforced at route time with `REVOKED_CAPABILITY`.
+- [ ] Pipeline verification rejects post-revocation use while preserving verification of pre-revocation pipelines (policy snapshot).
+- [ ] Tests prove route rejection, historical verify pass, and post-revocation verify failure.
+
+Acceptance
+- [ ] A revoked capability cannot be used in new accepted work, but old work remains mechanically verifiable.
+
+---
+
 ## PHASE 7: Swarm scheduling (artifact-only, DAG, no narrative state)
 Intent
 A swarm is just many pipelines, with explicit dependencies and audited handoffs.

@@ -10,7 +10,11 @@ from typing import Any, Dict, Optional
 from PIPELINES.pipeline_chain import verify_chain
 from PIPELINES.pipeline_runtime import _slug
 from PRIMITIVES.ledger import Ledger, _LEDGER_VALIDATOR  # type: ignore
-from PRIMITIVES.registry_validators import validate_capabilities_registry, validate_capability_pins  # type: ignore
+from PRIMITIVES.registry_validators import (
+    validate_capabilities_registry,
+    validate_capability_pins,
+    validate_capability_revokes,
+)  # type: ignore
 
 
 _HEX64_RE = re.compile(r"^[0-9a-f]{64}$")
@@ -93,6 +97,36 @@ def _load_pins(*, project_root: Path) -> Dict[str, Any]:
     return obj
 
 
+def _load_revokes_snapshot(*, project_root: Path, pipeline_dir: Path) -> set[str]:
+    """
+    Revocation semantics:
+    - If POLICY.json exists, treat it as the pipeline's immutable policy snapshot.
+    - If POLICY.json is missing (legacy pipelines), treat as no revocations (historical verification preserved).
+    """
+    policy_path = pipeline_dir / "POLICY.json"
+    if not policy_path.exists():
+        return set()
+    try:
+        policy = _load_json_obj(policy_path)
+    except Exception as e:
+        raise ValueError(f"POLICY_INVALID: {e}")
+    if policy.get("policy_version") != "1.0.0":
+        raise ValueError("POLICY_INVALID_VERSION")
+    revoked = policy.get("revoked_capabilities")
+    if not isinstance(revoked, list) or not all(isinstance(x, str) and _HEX64_RE.fullmatch(x) is not None for x in revoked):
+        raise ValueError("POLICY_INVALID")
+
+    rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CATALYTIC-DPT/CAPABILITY_REVOKES.json")
+    path = Path(rel)
+    if not path.is_absolute():
+        path = project_root / path
+    if path.exists():
+        v = validate_capability_revokes(path)
+        if not v.ok:
+            raise ValueError(v.code)
+    return set(revoked)
+
+
 def verify_pipeline(
     *,
     project_root: Path,
@@ -133,6 +167,7 @@ def verify_pipeline(
             capabilities = registry.get("capabilities", {})
             pins = _load_pins(project_root=project_root)
             allowed_caps = set(pins.get("allowed_capabilities", []))
+            revoked_caps = _load_revokes_snapshot(project_root=project_root, pipeline_dir=pipeline_dir)
         except Exception as e:
             code = str(e)
             if code in {
@@ -200,6 +235,12 @@ def verify_pipeline(
                 return {
                     "ok": False,
                     "code": "CAPABILITY_NOT_PINNED",
+                    "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap},
+                }
+            if isinstance(revoked_caps, set) and cap in revoked_caps:
+                return {
+                    "ok": False,
+                    "code": "REVOKED_CAPABILITY",
                     "details": {"phase": "CAPABILITIES", "step_id": step_id, "capability_hash": cap},
                 }
             adapter = cap_entry.get("adapter")
