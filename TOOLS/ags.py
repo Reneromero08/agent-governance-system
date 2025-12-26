@@ -113,11 +113,11 @@ def _parse_step_for_route(step: Any, idx: int) -> Tuple[str, Dict[str, Any], Lis
     if not isinstance(jobspec, dict):
         raise ValueError(f"steps[{idx}].jobspec must be an object")
     _validate_jobspec_obj(jobspec)
-    cmd = step.get("cmd")
+    cmd = step.get("command", step.get("cmd"))
     if cmd is None:
-        cmd = ["python3", "-c", "pass"]
+        raise ValueError("MISSING_STEP_COMMAND")
     if not isinstance(cmd, list) or not cmd or not all(isinstance(x, str) and x for x in cmd):
-        raise ValueError(f"steps[{idx}].cmd must be a non-empty list[str]")
+        raise ValueError(f"steps[{idx}].command must be a non-empty list[str]")
     strict = step.get("strict", True)
     memoize = step.get("memoize", True)
     if not isinstance(strict, bool):
@@ -237,6 +237,9 @@ def ags_plan(
         if sid in seen:
             raise ValueError(f"duplicate step_id: {sid}")
         seen.add(sid)
+        cmd = step.get("command")
+        if not isinstance(cmd, list) or not cmd or not all(isinstance(x, str) and x for x in cmd):
+            raise ValueError("MISSING_STEP_COMMAND")
         jobspec = step.get("jobspec")
         if not isinstance(jobspec, dict):
             raise ValueError(f"steps[{idx}].jobspec must be an object")
