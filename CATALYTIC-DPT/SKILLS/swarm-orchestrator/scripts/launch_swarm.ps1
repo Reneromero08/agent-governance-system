@@ -19,7 +19,7 @@ param(
     [string]$Mode = "python"
 )
 
-$ProjectRoot = "d:\CCC 2.0\AI\agent-governance-system"
+$ProjectRoot = (Get-Item $PSScriptRoot).Parent.Parent.Parent.Parent.FullName
 $CatalyticDPT = "$ProjectRoot\CATALYTIC-DPT"
 $BridgeUrl = "http://127.0.0.1:4000/terminal"
 
@@ -60,28 +60,28 @@ switch ($Mode) {
         Write-Host ""
         Write-Host "  Terminal 1 (Governor):" -ForegroundColor Cyan
         Write-Host "    cd `"$CatalyticDPT`"" -ForegroundColor Gray
-        Write-Host "    python SKILLS/swarm-orchestrator/poll_and_execute.py --role Governor" -ForegroundColor Gray
+        Write-Host "    python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Governor" -ForegroundColor Gray
         Write-Host ""
         Write-Host "  Terminal 2 (Ant-1):" -ForegroundColor Cyan
         Write-Host "    cd `"$CatalyticDPT`"" -ForegroundColor Gray
-        Write-Host "    python SKILLS/swarm-orchestrator/poll_and_execute.py --role Ant-1" -ForegroundColor Gray
+        Write-Host "    python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Ant-1" -ForegroundColor Gray
         Write-Host ""
         Write-Host "  Terminal 3 (Ant-2):" -ForegroundColor Cyan
         Write-Host "    cd `"$CatalyticDPT`"" -ForegroundColor Gray
-        Write-Host "    python SKILLS/swarm-orchestrator/poll_and_execute.py --role Ant-2" -ForegroundColor Gray
+        Write-Host "    python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Ant-2" -ForegroundColor Gray
         Write-Host ""
         Write-Host "Or start Governor now? (y/n): " -NoNewline -ForegroundColor Yellow
         $answer = Read-Host
         if ($answer -eq "y") {
             Set-Location $CatalyticDPT
-            python SKILLS/swarm-orchestrator/poll_and_execute.py --role Governor
+            python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Governor
         }
     }
     "bridge" {
         Write-Host "`nLaunching via Antigravity Bridge (port 4000)..." -ForegroundColor Yellow
-        Launch-Bridge -Name "Governor" -Command "python SKILLS/swarm-orchestrator/poll_and_execute.py --role Governor"
-        Launch-Bridge -Name "Ant-1" -Command "python SKILLS/swarm-orchestrator/poll_and_execute.py --role Ant-1"
-        Launch-Bridge -Name "Ant-2" -Command "python SKILLS/swarm-orchestrator/poll_and_execute.py --role Ant-2"
+        Launch-Bridge -Name "Governor" -Command "python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Governor"
+        Launch-Bridge -Name "Ant-1" -Command "python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Ant-1"
+        Launch-Bridge -Name "Ant-2" -Command "python SKILLS/swarm-orchestrator/scripts/poll_and_execute.py --role Ant-2"
         Write-Host "`nSwarm launched in VSCode panel!" -ForegroundColor Green
     }
     "cli" {
