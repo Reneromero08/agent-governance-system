@@ -107,6 +107,7 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - `PIPELINES/pipeline_dag.py`: deterministic DAG spec parsing, topological scheduling, resume-safe receipts, and fail-closed verification integration.
 - `TESTBENCH/test_pipeline_dag.py`: DAG happy path, resume, tamper rejection, and cycle detection.
 - `catalytic pipeline dag run|status|verify`: minimal CLI surface for artifact-only DAG workflows.
+- Deterministic topo sort tie-break: lexicographic node order.
 
 ---
 
