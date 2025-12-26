@@ -1,6 +1,7 @@
 {
   "combined": true,
   "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke",
+  "scope": "catalytic-dpt",
   "stamp": "fixture-smoke",
   "zip": false
 }

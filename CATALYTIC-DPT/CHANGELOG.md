@@ -121,6 +121,16 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.57.0] - 2025-12-26
+
+### Phase 7.2: Multi-node Restore Runner
+
+#### Added
+- `PIPELINES/pipeline_dag.py`: receipt-gated DAG restore with deterministic decisions and fail-closed verification.
+- `TESTBENCH/test_pipeline_dag.py`: restore no-op, missing artifact rerun, tampered receipt rerun, and portability coverage.
+
+---
+
 ## [1.47.0] - 2025-12-26
 
 ### Phase 6.4: MCP Adapters as Governed Pipeline Steps
