@@ -15,6 +15,7 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 #### Added
 - `SKILLS/ant-worker/scripts/lfm2_runner.py`: Direct Python execution script for LFM2 using Transformers.
+- `SKILLS/ant-worker/scripts/ant_agent.py`: MCP-aware agent daemon that polls ledger and invokes LFM2.
 
 #### Verified
 - Nervous System: successful dispatch-perform-report loop via MCP ledger (task `TEST-001`).
