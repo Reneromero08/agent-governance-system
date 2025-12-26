@@ -27,7 +27,6 @@ import re
 import shutil
 import sys
 from dataclasses import dataclass
-from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Sequence, Tuple
 
@@ -53,6 +52,17 @@ SYSTEM_DIR = PACKS_ROOT / "_system"
 FIXTURE_PACKS_DIR = SYSTEM_DIR / "fixtures"
 STATE_DIR = SYSTEM_DIR / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from MEMORY.LLM_PACKER.Engine.pack_hygiene import (  # noqa: E402
+    PackLimits,
+    enforce_included_repo_limits,
+    pack_dir_total_bytes,
+    repo_state_content_sha256,
+    validate_repo_state_manifest,
+)
 
 @dataclass(frozen=True)
 class PackScope:
@@ -214,15 +224,7 @@ TOKEN_LIMIT_CRITICAL = 200_000
 
 def estimate_tokens(text: str, model: str = "gpt-4o") -> int:
     """Estimate token count for text."""
-    if tiktoken:
-        try:
-            # Use o200k_base for gpt-4o/o1
-            encoding = tiktoken.get_encoding("o200k_base")
-            return len(encoding.encode(text))
-        except Exception:
-            pass
-    
-    # Rough approximation
+    # Determinism requirement: do not vary output based on optional dependencies.
     return len(text) // CHARS_PER_TOKEN
 
 
@@ -287,7 +289,7 @@ def build_state_manifest(project_root: Path, *, scope: PackScope) -> Tuple[Dict[
     for abs_path in iter_repo_candidates(project_root, scope=scope):
         rel = abs_path.relative_to(project_root).as_posix()
         if rel in seen:
-            continue
+            raise RuntimeError(f"PACK_DEDUP_DUPLICATE_PATH:{rel}")
         seen.add(rel)
 
         if not is_text_path(abs_path):
@@ -308,7 +310,7 @@ def build_state_manifest(project_root: Path, *, scope: PackScope) -> Tuple[Dict[
             }
         )
 
-    files.sort(key=lambda e: e["path"])
+    files.sort(key=lambda e: (e["path"], e["hash"]))
     manifest: Dict[str, Any] = {
         "canon_version": canon_version,
         "grammar_version": GRAMMAR_VERSION,
@@ -635,6 +637,27 @@ def verify_manifest(pack_dir: Path) -> Tuple[bool, List[str]]:
         manifest = json.loads(read_text(manifest_path))
     except Exception as e:
         errors.append(f"Failed to load manifest: {e}")
+        return False, errors
+
+    allow_dup = True
+    pack_info_path = pack_dir / "meta" / "PACK_INFO.json"
+    if pack_info_path.exists():
+        try:
+            pack_info = json.loads(read_text(pack_info_path))
+            allow_dup = bool(pack_info.get("limits", {}).get("allow_duplicate_hashes", True))
+            expected_repo_state_sha = pack_info.get("repo_state_sha256")
+            if isinstance(expected_repo_state_sha, str) and expected_repo_state_sha:
+                actual_repo_state_sha = repo_state_content_sha256(manifest)
+                if actual_repo_state_sha != expected_repo_state_sha:
+                    errors.append("Repo state checksum mismatch (repo_state_sha256)")
+        except Exception as e:
+            errors.append(f"Failed to load PACK_INFO.json: {e}")
+            return False, errors
+
+    try:
+        validate_repo_state_manifest(manifest, allow_duplicate_hashes=allow_dup)
+    except Exception as e:
+        errors.append(str(e))
         return False, errors
     
     # Verify each file in the manifest
@@ -1417,20 +1440,6 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
         )
     else:
         raise ValueError(f"Unsupported scope for START_HERE: {scope.key}")
-    
-    # Add provenance to START_HERE.md
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_header, add_header_to_content
-        header = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=text
-        )
-        text = add_header_to_content(text, header, file_type="md")
-    except ImportError:
-        pass
 
     (pack_dir / "meta" / "START_HERE.md").write_text(text, encoding="utf-8")
 
@@ -1500,36 +1509,16 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
         )
     else:
         raise ValueError(f"Unsupported scope for ENTRYPOINTS: {scope.key}")
-    
-    # Add provenance to ENTRYPOINTS.md
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_header, add_header_to_content
-        header = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=text
-        )
-        text = add_header_to_content(text, header, file_type="md")
-    except ImportError:
-        pass
 
     (pack_dir / "meta" / "ENTRYPOINTS.md").write_text(text, encoding="utf-8")
 
 
 def write_build_tree(pack_dir: Path, project_root: Path) -> None:
-    build_dir = project_root / "BUILD"
     tree_path = pack_dir / "meta" / "BUILD_TREE.txt"
-    if not build_dir.exists():
-        tree_path.write_text("BUILD does not exist.\n", encoding="utf-8")
-        return
-    paths = [
-        p.relative_to(project_root).as_posix()
-        for p in sorted(build_dir.rglob("*"))
-        if p.is_file()
-    ]
-    tree_path.write_text("\n".join(paths) + ("\n" if paths else ""), encoding="utf-8")
+    tree_path.write_text(
+        "BUILD is excluded from packs by contract (determinism + hygiene).\n",
+        encoding="utf-8",
+    )
 
 
 def write_pack_file_tree_and_index(pack_dir: Path) -> None:
@@ -1545,13 +1534,8 @@ def write_pack_file_tree_and_index(pack_dir: Path) -> None:
     for p in sorted(all_files, key=lambda x: x.relative_to(pack_dir).as_posix()):
         rel = p.relative_to(pack_dir).as_posix()
         size = p.stat().st_size
-        file_index.append(
-            {
-                "path": rel,
-                "bytes": size,
-                "sha256": hash_file(p) if size <= 2 * 1024 * 1024 else None,
-            }
-        )
+        file_index.append({"path": rel, "bytes": size, "sha256": hash_file(p)})
+    file_index.sort(key=lambda e: (e["path"], e["sha256"]))
     write_json(pack_dir / "meta" / "FILE_INDEX.json", file_index)
 
 
@@ -1713,20 +1697,6 @@ def write_context_report(pack_dir: Path, *, scope: PackScope) -> Tuple[int, List
     lines.append("")
 
     report_text = "\n".join(lines)
-    
-    # Add provenance to CONTEXT.txt
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_header, add_header_to_content
-        header = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=report_text
-        )
-        report_text = add_header_to_content(report_text, header, file_type="md")
-    except ImportError:
-        pass
 
     (pack_dir / "meta" / "CONTEXT.txt").write_text(report_text, encoding="utf-8")
     return effective_tokens, warnings
@@ -1790,7 +1760,7 @@ def default_stamp_for_out_dir(out_dir: Path) -> str:
     match = re.search(r"(\\d{4}-\\d{2}-\\d{2}_\\d{2}-\\d{2}-\\d{2})", out_dir.name)
     if match:
         return match.group(1)
-    return datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    return "nostamp"
 
 
 def compute_treemap_text(
@@ -1866,27 +1836,6 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> N
     tree_text = compute_treemap_text(pack_dir, stamp=stamp, include_combined_paths=True, scope=scope)
     tree_md = "\n".join(["# Pack Tree", "", "```", tree_text.rstrip("\n"), "```", ""]) + "\n"
 
-    # Add provenance to treemap outputs
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_header, add_header_to_content
-
-        header_md = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=tree_md,
-        )
-        tree_md = add_header_to_content(tree_md, header_md, file_type="md")
-
-        header_txt = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=tree_text,
-        )
-        tree_text = add_header_to_content(tree_text, header_txt, file_type="md")
-    except ImportError:
-        pass
-
     (pack_dir / treemap_txt_rel).write_text(tree_text, encoding="utf-8")
     (pack_dir / treemap_md_rel).write_text(tree_md, encoding="utf-8")
 
@@ -1909,65 +1858,38 @@ def write_combined_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> N
     md_content = "\n".join(combined_md_lines).rstrip() + "\n"
     txt_content = "\n".join(combined_txt_lines).rstrip() + "\n"
 
-    # Add provenance to combined outputs
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_header, add_header_to_content
-
-        header_md = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=md_content,
-        )
-        md_content = add_header_to_content(md_content, header_md, file_type="md")
-
-        header_txt = generate_header(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            output_content=txt_content,
-        )
-        txt_content = add_header_to_content(txt_content, header_txt, file_type="md")
-    except ImportError:
-        pass
-
     (pack_dir / combined_md_rel).write_text(md_content, encoding="utf-8")
     (pack_dir / combined_txt_rel).write_text(txt_content, encoding="utf-8")
 
 
 def write_provenance_manifest(pack_dir: Path) -> None:
-    """Generate meta/PROVENANCE.json for the entire pack."""
+    """Generate deterministic meta/PROVENANCE.json for the entire pack."""
     meta_dir = pack_dir / "meta"
-    
-    # Files to include in the manifest
-    targets = {
-        "meta/FILE_INDEX.json": pack_dir / "meta" / "FILE_INDEX.json",
-        "meta/PACK_INFO.json": pack_dir / "meta" / "PACK_INFO.json",
-        "meta/REPO_STATE.json": pack_dir / "meta" / "REPO_STATE.json",
-        "meta/BUILD_TREE.txt": pack_dir / "meta" / "BUILD_TREE.txt",
-        "meta/FILE_TREE.txt": pack_dir / "meta" / "FILE_TREE.txt",
-        "meta/CONTEXT.txt": pack_dir / "meta" / "CONTEXT.txt",
-    }
+    targets = [
+        "meta/FILE_INDEX.json",
+        "meta/PACK_INFO.json",
+        "meta/REPO_STATE.json",
+        "meta/BUILD_TREE.txt",
+        "meta/FILE_TREE.txt",
+        "meta/CONTEXT.txt",
+        "meta/ENTRYPOINTS.md",
+        "meta/START_HERE.md",
+    ]
+    checksums: Dict[str, str] = {}
+    for rel in targets:
+        p = pack_dir / rel
+        if not p.exists() or not p.is_file():
+            continue
+        checksums[rel] = hash_file(p)
 
-    try:
-        import sys
-        if str(PROJECT_ROOT) not in sys.path:
-            sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.provenance import generate_manifest, hash_content
-        
-        manifest = generate_manifest(
-            generator="MEMORY/LLM_PACKER/Engine/packer.py",
-            target_files=targets,
-            inputs=["CANON/", "CONTEXT/decisions/", "SKILLS/", "CORTEX/"],
-        )
-        
-        # Add a self-checksum (excluding the checksum field itself)
-        # We handle this by generating the checksum of the sorted JSON
-        canonical_json = json.dumps(manifest, sort_keys=True)
-        manifest["provenance"]["checksum"] = hash_content(canonical_json)
-        
-        write_json(meta_dir / "PROVENANCE.json", manifest)
-    except ImportError:
-        pass
+    payload: Dict[str, Any] = {
+        "generator": "MEMORY/LLM_PACKER/Engine/packer.py",
+        "targets": targets,
+        "checksums": checksums,
+        "checksum": None,
+    }
+    payload["checksum"] = repo_state_content_sha256(payload)
+    write_json(meta_dir / "PROVENANCE.json", payload)
 
 
 def make_pack(
@@ -1980,6 +1902,10 @@ def make_pack(
     combined: bool,
     stamp: Optional[str],
     zip_enabled: bool,
+    max_total_bytes: int,
+    max_entry_bytes: int,
+    max_entries: int,
+    allow_duplicate_hashes: Optional[bool],
 ) -> Path:
     scope = SCOPES.get(scope_key)
     if not scope:
@@ -1998,6 +1924,12 @@ def make_pack(
     baseline = load_baseline(baseline_path)
     baseline_files_by_path = {f["path"]: f for f in (baseline or {}).get("files", [])}
     current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
+
+    if allow_duplicate_hashes is None:
+        allow_duplicate_hashes = scope.key != SCOPE_CATALYTIC_DPT.key
+
+    validate_repo_state_manifest(manifest, allow_duplicate_hashes=allow_duplicate_hashes)
+    repo_state_sha256 = repo_state_content_sha256(manifest)
 
     anchors = set(scope.anchors)
 
@@ -2055,6 +1987,15 @@ def make_pack(
     elif profile != "full":
         raise ValueError(f"Unknown profile: {profile}")
 
+    limits = PackLimits(
+        max_total_bytes=max_total_bytes,
+        max_entry_bytes=max_entry_bytes,
+        max_entries=max_entries,
+        allow_duplicate_hashes=allow_duplicate_hashes,
+    )
+    included_entries = [current_files_by_path[p] for p in include_paths if p in current_files_by_path]
+    included_stats = enforce_included_repo_limits(included_entries, limits=limits)
+
     if out_dir.exists():
         shutil.rmtree(out_dir)
     (out_dir / "meta").mkdir(parents=True, exist_ok=True)
@@ -2062,68 +2003,88 @@ def make_pack(
 
     repo_pack_paths = [f"repo/{p}" for p in include_paths]
 
-    copy_repo_files(out_dir, PROJECT_ROOT, include_paths)
-    write_json(out_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted)
-    write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
-    write_json(
-        out_dir / "meta" / "PACK_INFO.json",
-        {
-            "scope": scope.key,
-            "mode": mode,
-            **({"profile": profile} if profile != "full" else {}),
-            "canon_version": manifest.get("canon_version"),
-            "grammar_version": manifest.get("grammar_version"),
-            "repo_digest": digest,
-            "included_paths": include_paths,
-            "deleted_paths": deleted,
-        },
-    )
-    write_build_tree(out_dir, PROJECT_ROOT)
-    write_start_here(out_dir, scope=scope)
-    write_entrypoints(out_dir, scope=scope)
-    write_split_pack(out_dir, repo_pack_paths, scope=scope)
-    if split_lite:
-        write_split_pack_lite(out_dir, scope=scope)
+    try:
+        copy_repo_files(out_dir, PROJECT_ROOT, include_paths)
+        write_json(out_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted)
+        write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
+        write_build_tree(out_dir, PROJECT_ROOT)
+        write_start_here(out_dir, scope=scope)
+        write_entrypoints(out_dir, scope=scope)
+        write_split_pack(out_dir, repo_pack_paths, scope=scope)
+        if split_lite:
+            write_split_pack_lite(out_dir, scope=scope)
 
-    effective_stamp = stamp or default_stamp_for_out_dir(out_dir)
-    tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined), scope=scope)
-    append_repo_tree_to_split_maps(out_dir, tree_text=tree_text, scope=scope)
+        effective_stamp = stamp or digest[:12]
+        tree_text = compute_treemap_text(out_dir, stamp=effective_stamp, include_combined_paths=bool(combined), scope=scope)
+        append_repo_tree_to_split_maps(out_dir, tree_text=tree_text, scope=scope)
 
-    if combined:
-        write_combined_outputs(out_dir, stamp=effective_stamp, scope=scope)
+        if combined:
+            write_combined_outputs(out_dir, stamp=effective_stamp, scope=scope)
 
-    if profile == "lite" and scope.key == SCOPE_AGS.key:
-        write_lite_indexes(
-            out_dir,
-            project_root=PROJECT_ROOT,
-            include_paths=include_paths,
-            omitted_paths=omitted_paths_for_lite,
-            files_by_path=current_files_by_path,
+        if profile == "lite" and scope.key == SCOPE_AGS.key:
+            write_lite_indexes(
+                out_dir,
+                project_root=PROJECT_ROOT,
+                include_paths=include_paths,
+                omitted_paths=omitted_paths_for_lite,
+                files_by_path=current_files_by_path,
+            )
+
+        write_pack_file_tree_and_index(out_dir)
+
+        total_tokens, token_warnings = write_context_report(out_dir, scope=scope)
+        print_payload_token_counts(out_dir)
+        for warning in token_warnings:
+            color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
+            print(f"{color}{warning}{ANSI_RESET}")
+
+        pack_bytes = pack_dir_total_bytes(out_dir)
+        if pack_bytes > limits.max_total_bytes:
+            raise ValueError("PACK_LIMIT_EXCEEDED:max_total_bytes")
+
+        write_json(
+            out_dir / "meta" / "PACK_INFO.json",
+            {
+                "scope": scope.key,
+                "mode": mode,
+                **({"profile": profile} if profile != "full" else {}),
+                "canon_version": manifest.get("canon_version"),
+                "grammar_version": manifest.get("grammar_version"),
+                "repo_digest": digest,
+                "repo_state_sha256": repo_state_sha256,
+                "included_paths": include_paths,
+                "deleted_paths": deleted,
+                "limits": {
+                    "max_total_bytes": limits.max_total_bytes,
+                    "max_entry_bytes": limits.max_entry_bytes,
+                    "max_entries": limits.max_entries,
+                    "allow_duplicate_hashes": limits.allow_duplicate_hashes,
+                },
+                "stats": {
+                    **included_stats,
+                    "pack_bytes": pack_bytes,
+                    "token_report_total_tokens": total_tokens,
+                    "token_report_warnings": token_warnings,
+                },
+            },
         )
 
-    write_pack_file_tree_and_index(out_dir)
-    
-    # Generate token context report with warnings
-    total_tokens, token_warnings = write_context_report(out_dir, scope=scope)
-    print_payload_token_counts(out_dir)
-    for warning in token_warnings:
-        color = ANSI_RED if "CRITICAL" in warning else ANSI_YELLOW
-        print(f"{color}{warning}{ANSI_RESET}")
+        write_provenance_manifest(out_dir)
+        write_json(baseline_path, manifest)
 
-    # Generate PROVENANCE.json manifest
-    write_provenance_manifest(out_dir)
+        if zip_enabled:
+            archive_dir = SYSTEM_DIR / "archive"
+            archive_dir.mkdir(parents=True, exist_ok=True)
+            zip_path = archive_dir / f"{out_dir.name}.zip"
+            if zip_path.exists():
+                zip_path.unlink()
+            shutil.make_archive(str(zip_path.with_suffix("")), "zip", root_dir=out_dir)
 
-    write_json(baseline_path, manifest)
-
-    if zip_enabled:
-        archive_dir = SYSTEM_DIR / "archive"
-        archive_dir.mkdir(parents=True, exist_ok=True)
-        zip_path = archive_dir / f"{out_dir.name}.zip"
-        if zip_path.exists():
-            zip_path.unlink()
-        shutil.make_archive(str(zip_path.with_suffix("")), "zip", root_dir=out_dir)
-
-    return out_dir
+        return out_dir
+    except Exception:
+        if out_dir.exists():
+            shutil.rmtree(out_dir)
+        raise
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
@@ -2161,18 +2122,54 @@ if __name__ == "__main__":
     parser.add_argument(
         "--stamp",
         default="",
-        help="Stamp string for COMBINED output filenames. Defaults to a timestamp or to one parsed from the out_dir name.",
+        help="Stamp string for COMBINED output filenames. Defaults to the repo digest prefix (deterministic).",
     )
     parser.add_argument(
         "--zip",
         action="store_true",
         help="Write a zip archive under MEMORY/LLM_PACKER/_packs/_system/archive/.",
     )
+    parser.add_argument(
+        "--max-total-bytes",
+        type=int,
+        default=50 * 1024 * 1024,
+        help="Hard ceiling for total pack bytes (fail-closed).",
+    )
+    parser.add_argument(
+        "--max-entry-bytes",
+        type=int,
+        default=2 * 1024 * 1024,
+        help="Hard ceiling for any single included repo file (fail-closed).",
+    )
+    parser.add_argument(
+        "--max-entries",
+        type=int,
+        default=50_000,
+        help="Hard ceiling for number of included repo files (fail-closed).",
+    )
+    parser.add_argument(
+        "--allow-duplicate-hashes",
+        action="store_true",
+        help="Allow multiple distinct paths to carry the same content hash (overrides scope default).",
+    )
+    parser.add_argument(
+        "--disallow-duplicate-hashes",
+        action="store_true",
+        help="Disallow duplicate hashes even when scope default allows them (overrides scope default).",
+    )
     args = parser.parse_args()
 
     out_dir = Path(args.out_dir) if args.out_dir else None
     if out_dir is not None and not out_dir.is_absolute():
         out_dir = (PROJECT_ROOT / out_dir).resolve()
+
+    allow_dup: Optional[bool] = None
+    if args.allow_duplicate_hashes and args.disallow_duplicate_hashes:
+        raise SystemExit("Invalid flags: cannot set both --allow-duplicate-hashes and --disallow-duplicate-hashes")
+    if args.allow_duplicate_hashes:
+        allow_dup = True
+    elif args.disallow_duplicate_hashes:
+        allow_dup = False
 
     pack_dir = make_pack(
         scope_key=args.scope,
@@ -2183,5 +2180,9 @@ if __name__ == "__main__":
         combined=bool(args.combined),
         stamp=args.stamp or None,
         zip_enabled=bool(args.zip),
+        max_total_bytes=int(args.max_total_bytes),
+        max_entry_bytes=int(args.max_entry_bytes),
+        max_entries=int(args.max_entries),
+        allow_duplicate_hashes=allow_dup,
     )
     print(f"Pack created: {pack_dir}")
