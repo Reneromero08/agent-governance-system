@@ -67,7 +67,7 @@ DONE when all are true:
 - [x] Phase 6.2 router slot exists (external plan producer, schema-validated, capped, fail-closed).
 - [x] Phase 6.3 adapter contract exists (skills/MCPs wrap schema-valid jobspec; no runtime bypass).
 - [ ] Phase 6.4 MCP adapter is first-class (schema + tests + caps + deterministic transcript hashing).
-- [ ] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs).
+- [x] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs). (commit: this changeset)
 - [ ] Phase 6.6 Capability pinning and revocation exists (explicit, auditable).
 
 ---
@@ -143,6 +143,9 @@ Acceptance
 ## PHASE 6.5: Skill registry (hash-addressed capabilities)
 Intent
 Turn “skills” into immutable, discoverable, auditable capabilities.
+
+Implemented (v1)
+- `CAPABILITIES.json` provides `capability_hash -> adapter spec` resolution and is enforced in `ags route` and `catalytic pipeline verify` (fail-closed).
 
 Deliverables
 - [ ] `SKILLS/registry.json` (canonical JSON) mapping:

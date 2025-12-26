@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import subprocess
@@ -54,6 +55,9 @@ GLOBAL_DEREF_MAX_BYTES = 65_536
 GLOBAL_DEREF_MAX_MATCHES = 20
 GLOBAL_DEREF_MAX_NODES = 2_000
 GLOBAL_DEREF_MAX_DEPTH = 32
+
+# Default capabilities registry path (repo-relative).
+DEFAULT_CAPABILITIES_PATH = "CATALYTIC-DPT/CAPABILITIES.json"
 
 
 def _read_bytes_bounded(path: Path, max_bytes: int) -> bytes:
@@ -257,6 +261,50 @@ def _validate_adapter(adapter: Dict[str, Any], *, strict: bool) -> Tuple[List[st
     return cmd, jobspec
 
 
+def _capabilities_path() -> Path:
+    env = os.environ.get("CATALYTIC_CAPABILITIES_PATH")
+    rel = env if isinstance(env, str) and env else DEFAULT_CAPABILITIES_PATH
+    p = Path(rel)
+    if p.is_absolute():
+        return p
+    return REPO_ROOT / p
+
+
+def _load_capabilities_registry() -> Dict[str, Any]:
+    path = _capabilities_path()
+    obj = json.loads(path.read_text(encoding="utf-8"))
+    if not isinstance(obj, dict):
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID")
+    if obj.get("registry_version") != "1.0.0":
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID_VERSION")
+    caps = obj.get("capabilities")
+    if not isinstance(caps, dict):
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID")
+    return obj
+
+
+def _canonical_hash(obj: Any) -> str:
+    return hashlib.sha256(canonical_json_bytes(obj)).hexdigest()
+
+
+def _resolve_capability_hash(capability_hash: str) -> Dict[str, Any]:
+    registry = _load_capabilities_registry()
+    caps = registry.get("capabilities", {})
+    entry = caps.get(capability_hash)
+    if not isinstance(entry, dict):
+        raise ValueError("UNKNOWN_CAPABILITY")
+    adapter = entry.get("adapter")
+    if not isinstance(adapter, dict):
+        raise ValueError("CAPABILITIES_REGISTRY_INVALID")
+    computed = _canonical_hash(adapter)
+    if computed != capability_hash:
+        raise ValueError("CAPABILITY_HASH_MISMATCH")
+    spec_hash = entry.get("adapter_spec_hash")
+    if not isinstance(spec_hash, str) or spec_hash != computed:
+        raise ValueError("CAPABILITY_HASH_MISMATCH")
+    return adapter
+
+
 def _validate_and_extract_steps_for_route(plan: Dict[str, Any]) -> List[Dict[str, Any]]:
     if "plan_version" in plan:
         _validate_plan_schema(plan)
@@ -288,7 +336,23 @@ def ags_route(*, plan_path: Path, pipeline_id: str, runs_root: str) -> int:
 
     pipeline_steps: List[Dict[str, Any]] = []
     for idx, raw in enumerate(steps):
-        step_id, jobspec, cmd, strict, memoize = _parse_step_for_route(raw, idx)
+        if isinstance(raw, dict) and "capability_hash" in raw:
+            cap = raw.get("capability_hash")
+            if not isinstance(cap, str) or not cap:
+                raise ValueError("MISSING_CAPABILITY_HASH")
+            adapter = _resolve_capability_hash(cap)
+            cmd, jobspec = _validate_adapter(adapter, strict=True)
+            step_id = raw.get("step_id")
+            if not isinstance(step_id, str) or not step_id.strip():
+                raise ValueError(f"steps[{idx}].step_id must be non-empty string")
+            _reject_control_chars(step_id)
+            strict = True
+            memoize = True
+            capability_hash = cap
+        else:
+            step_id, jobspec, cmd, strict, memoize = _parse_step_for_route(raw, idx)
+            capability_hash = None
+
         if step_id in seen:
             raise ValueError(f"duplicate step_id: {step_id}")
         seen.add(step_id)
@@ -305,6 +369,7 @@ def ags_route(*, plan_path: Path, pipeline_id: str, runs_root: str) -> int:
                 "cmd": cmd,
                 "strict": strict,
                 "memoize": memoize,
+                **({"capability_hash": capability_hash} if isinstance(capability_hash, str) else {}),
             }
         )
 
@@ -367,6 +432,12 @@ def ags_plan(
         if sid in seen:
             raise ValueError(f"duplicate step_id: {sid}")
         seen.add(sid)
+        if "capability_hash" in step:
+            cap = step.get("capability_hash")
+            if not isinstance(cap, str) or not cap:
+                raise ValueError("MISSING_CAPABILITY_HASH")
+            _resolve_capability_hash(cap)
+            continue
         if "adapter" in step:
             adapter = step.get("adapter")
             if not isinstance(adapter, dict):
