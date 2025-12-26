@@ -131,6 +131,7 @@ Deliverables
   - stderr emitted
   - non-canonical JSON
   - non-normalized paths / overlaps in produced jobspec
+  - backstop: adapter step runs in a pipeline and strict verify detects output tampering (`CATALYTIC-DPT/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py`)
 
 Acceptance
 - [ ] MCP step can run in a pipeline and produce proof-valid artifacts.
@@ -255,4 +256,3 @@ Acceptance
 3) **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
 4) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
 5) **PHASE 9**: Write schema versioning policy and release checklist (no code).
-
