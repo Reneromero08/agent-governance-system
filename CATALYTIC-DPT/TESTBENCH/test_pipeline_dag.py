@@ -12,7 +12,7 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
-from PIPELINES.pipeline_dag import verify_dag
+from PIPELINES.pipeline_dag import restore_dag, verify_dag
 
 
 def _rm(path: Path) -> None:
@@ -73,6 +73,10 @@ def _run_catalytic(args: list[str]) -> subprocess.CompletedProcess[str]:
 
 def _load_receipt(pipeline_dir: Path) -> dict:
     return json.loads((pipeline_dir / "RECEIPT.json").read_text(encoding="utf-8"))
+
+
+def _receipt_hash(pipeline_dir: Path) -> str:
+    return _load_receipt(pipeline_dir)["receipt_hash"]
 
 
 def test_pipeline_dag_happy_path_and_verify(tmp_path: Path) -> None:
@@ -403,6 +407,237 @@ def test_pipeline_dag_receipts_portable(tmp_path: Path) -> None:
         shutil.copytree(REPO_ROOT / "CONTRACTS" / "_runs" / run_id_2, new_root / run_id_2)
 
         res = verify_dag(project_root=REPO_ROOT, runs_root=new_root, dag_id=dag_id, strict=True)
+        assert res.get("ok", False), res
+    finally:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+
+def test_pipeline_dag_restore_noop(tmp_path: Path) -> None:
+    dag_id = "dag-restore-noop"
+    p1 = "dag-rn1"
+    p2 = "dag-rn2"
+    rt = PipelineRuntime(project_root=REPO_ROOT)
+    dag_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / "_dags" / dag_id
+    pipeline1_dir = rt.pipeline_dir(p1)
+    pipeline2_dir = rt.pipeline_dir(p2)
+    spec1 = tmp_path / "p1.json"
+    spec2 = tmp_path / "p2.json"
+    out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+    out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+
+    try:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+        _write_pipeline_spec(spec1, pipeline_id=p1, out_path=out1)
+        _write_pipeline_spec(spec2, pipeline_id=p2, out_path=out2)
+        rt.init_from_spec_path(pipeline_id=p1, spec_path=spec1)
+        rt.init_from_spec_path(pipeline_id=p2, spec_path=spec2)
+
+        dag_spec = {
+            "dag_version": "1.0.0",
+            "dag_id": dag_id,
+            "nodes": [p1, p2],
+            "edges": [{"from": p1, "to": p2, "requires": ["CHAIN.json"]}],
+        }
+        dag_spec_path = tmp_path / "dag.json"
+        dag_spec_path.write_text(json.dumps(dag_spec, indent=2), encoding="utf-8")
+
+        r_run = _run_catalytic(["pipeline", "dag", "run", "--dag-id", dag_id, "--spec", str(dag_spec_path)])
+        assert r_run.returncode == 0, r_run.stdout + r_run.stderr
+
+        before_p2 = _receipt_hash(pipeline2_dir)
+        _rm(dag_dir / "DAG_STATE.json")
+
+        r_restore = _run_catalytic(["pipeline", "dag", "restore", "--dag-id", dag_id])
+        assert r_restore.returncode == 0, r_restore.stdout + r_restore.stderr
+        assert _receipt_hash(pipeline2_dir) == before_p2
+    finally:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+
+def test_pipeline_dag_restore_missing_artifact(tmp_path: Path) -> None:
+    dag_id = "dag-restore-missing"
+    p1 = "dag-rm1"
+    p2 = "dag-rm2"
+    rt = PipelineRuntime(project_root=REPO_ROOT)
+    dag_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / "_dags" / dag_id
+    pipeline1_dir = rt.pipeline_dir(p1)
+    pipeline2_dir = rt.pipeline_dir(p2)
+    spec1 = tmp_path / "p1.json"
+    spec2 = tmp_path / "p2.json"
+    out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+    out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+
+    try:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+        _write_pipeline_spec(spec1, pipeline_id=p1, out_path=out1)
+        _write_pipeline_spec(spec2, pipeline_id=p2, out_path=out2)
+        rt.init_from_spec_path(pipeline_id=p1, spec_path=spec1)
+        rt.init_from_spec_path(pipeline_id=p2, spec_path=spec2)
+
+        dag_spec = {
+            "dag_version": "1.0.0",
+            "dag_id": dag_id,
+            "nodes": [p1, p2],
+            "edges": [{"from": p1, "to": p2, "requires": ["CHAIN.json"]}],
+        }
+        dag_spec_path = tmp_path / "dag.json"
+        dag_spec_path.write_text(json.dumps(dag_spec, indent=2), encoding="utf-8")
+
+        r_run = _run_catalytic(["pipeline", "dag", "run", "--dag-id", dag_id, "--spec", str(dag_spec_path)])
+        assert r_run.returncode == 0, r_run.stdout + r_run.stderr
+
+        before_p1 = _receipt_hash(pipeline1_dir)
+        before_p2 = _receipt_hash(pipeline2_dir)
+        _rm(pipeline1_dir / "CHAIN.json")
+
+        r_restore = _run_catalytic(["pipeline", "dag", "restore", "--dag-id", dag_id])
+        assert r_restore.returncode == 0, r_restore.stdout + r_restore.stderr
+        assert _receipt_hash(pipeline1_dir) != before_p1
+        assert _receipt_hash(pipeline2_dir) != before_p2
+    finally:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+
+def test_pipeline_dag_restore_tampered_receipt(tmp_path: Path) -> None:
+    dag_id = "dag-restore-tamper"
+    p1 = "dag-rt1"
+    p2 = "dag-rt2"
+    rt = PipelineRuntime(project_root=REPO_ROOT)
+    dag_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / "_dags" / dag_id
+    pipeline1_dir = rt.pipeline_dir(p1)
+    pipeline2_dir = rt.pipeline_dir(p2)
+    spec1 = tmp_path / "p1.json"
+    spec2 = tmp_path / "p2.json"
+    out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+    out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+
+    try:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+        _write_pipeline_spec(spec1, pipeline_id=p1, out_path=out1)
+        _write_pipeline_spec(spec2, pipeline_id=p2, out_path=out2)
+        rt.init_from_spec_path(pipeline_id=p1, spec_path=spec1)
+        rt.init_from_spec_path(pipeline_id=p2, spec_path=spec2)
+
+        dag_spec = {
+            "dag_version": "1.0.0",
+            "dag_id": dag_id,
+            "nodes": [p1, p2],
+            "edges": [{"from": p1, "to": p2, "requires": ["CHAIN.json"]}],
+        }
+        dag_spec_path = tmp_path / "dag.json"
+        dag_spec_path.write_text(json.dumps(dag_spec, indent=2), encoding="utf-8")
+
+        r_run = _run_catalytic(["pipeline", "dag", "run", "--dag-id", dag_id, "--spec", str(dag_spec_path)])
+        assert r_run.returncode == 0, r_run.stdout + r_run.stderr
+
+        before_p1 = _receipt_hash(pipeline1_dir)
+        before_p2 = _receipt_hash(pipeline2_dir)
+
+        receipt_path = pipeline1_dir / "RECEIPT.json"
+        raw = receipt_path.read_text(encoding="utf-8")
+        receipt_path.write_text(raw.replace("PIPELINE_NODE", "PIPELINE_NODE_TAMPER", 1), encoding="utf-8")
+
+        r_restore = _run_catalytic(["pipeline", "dag", "restore", "--dag-id", dag_id])
+        assert r_restore.returncode == 0, r_restore.stdout + r_restore.stderr
+        assert _receipt_hash(pipeline1_dir) != before_p1
+        assert _receipt_hash(pipeline2_dir) != before_p2
+    finally:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+
+def test_pipeline_dag_restore_portable(tmp_path: Path) -> None:
+    dag_id = "dag-restore-portable"
+    p1 = "dag-rp1"
+    p2 = "dag-rp2"
+    rt = PipelineRuntime(project_root=REPO_ROOT)
+    dag_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / "_dags" / dag_id
+    pipeline1_dir = rt.pipeline_dir(p1)
+    pipeline2_dir = rt.pipeline_dir(p2)
+    spec1 = tmp_path / "p1.json"
+    spec2 = tmp_path / "p2.json"
+    out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+    out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+
+    try:
+        _rm(dag_dir)
+        _rm(pipeline1_dir)
+        _rm(pipeline2_dir)
+        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "pipeline_dag")
+        _rm(REPO_ROOT / out1)
+        _rm(REPO_ROOT / out2)
+
+        _write_pipeline_spec(spec1, pipeline_id=p1, out_path=out1)
+        _write_pipeline_spec(spec2, pipeline_id=p2, out_path=out2)
+        rt.init_from_spec_path(pipeline_id=p1, spec_path=spec1)
+        rt.init_from_spec_path(pipeline_id=p2, spec_path=spec2)
+
+        dag_spec = {
+            "dag_version": "1.0.0",
+            "dag_id": dag_id,
+            "nodes": [p1, p2],
+            "edges": [{"from": p1, "to": p2, "requires": ["CHAIN.json"]}],
+        }
+        dag_spec_path = tmp_path / "dag.json"
+        dag_spec_path.write_text(json.dumps(dag_spec, indent=2), encoding="utf-8")
+
+        r_run = _run_catalytic(["pipeline", "dag", "run", "--dag-id", dag_id, "--spec", str(dag_spec_path)])
+        assert r_run.returncode == 0, r_run.stdout + r_run.stderr
+
+        new_root = tmp_path / "runs_root"
+        new_dag_dir = new_root / "_pipelines" / "_dags" / dag_id
+        new_p1 = new_root / "_pipelines" / p1
+        new_p2 = new_root / "_pipelines" / p2
+        new_dag_dir.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copytree(dag_dir, new_dag_dir)
+        shutil.copytree(pipeline1_dir, new_p1)
+        shutil.copytree(pipeline2_dir, new_p2)
+
+        state1 = json.loads((pipeline1_dir / "STATE.json").read_text(encoding="utf-8"))
+        state2 = json.loads((pipeline2_dir / "STATE.json").read_text(encoding="utf-8"))
+        run_id_1 = state1["step_run_ids"]["s1"]
+        run_id_2 = state2["step_run_ids"]["s1"]
+        shutil.copytree(REPO_ROOT / "CONTRACTS" / "_runs" / run_id_1, new_root / run_id_1)
+        shutil.copytree(REPO_ROOT / "CONTRACTS" / "_runs" / run_id_2, new_root / run_id_2)
+
+        res = restore_dag(project_root=REPO_ROOT, runs_root=new_root, dag_id=dag_id, strict=True)
         assert res.get("ok", False), res
     finally:
         _rm(dag_dir)
