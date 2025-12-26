@@ -23,7 +23,7 @@ sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
 from PIPELINES.pipeline_verify import verify_pipeline
-from PIPELINES.pipeline_dag import run_dag, verify_dag
+from PIPELINES.pipeline_dag import restore_dag, run_dag, verify_dag
 from PRIMITIVES.cas_store import CatalyticStore
 from PRIMITIVES.hash_toolbelt import (
     DEFAULT_AST_MAX_BYTES,
@@ -125,6 +125,11 @@ def main() -> int:
     dag_verify_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
     dag_verify_p.add_argument("--strict", action="store_true", help="Enable strict verification (default behavior)")
 
+    dag_restore_p = dag_sub.add_parser("restore", help="Receipt-gated DAG restore (idempotent)")
+    dag_restore_p.add_argument("--dag-id", required=True, help="DAG ID")
+    dag_restore_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
+    dag_restore_p.add_argument("--strict", action="store_true", help="Enable strict verification (default behavior)")
+
     args = parser.parse_args()
     store = None
     run_id = None
@@ -181,6 +186,20 @@ def main() -> int:
             if result.get("ok", False):
                 details = result.get("details", {})
                 sys.stdout.write(f"OK dag_id={args.dag_id} completed={details.get('completed', 0)} nodes={details.get('nodes', 0)}\n")
+                return 0
+            sys.stdout.write(f"FAIL code={result.get('code', 'ERROR')}\n")
+            return 1
+
+        if args.cmd == "pipeline" and args.pipe_cmd == "dag" and args.dag_cmd == "restore":
+            runs_root = Path(args.runs_root)
+            if not runs_root.is_absolute():
+                runs_root = REPO_ROOT / runs_root
+            result = restore_dag(project_root=REPO_ROOT, runs_root=runs_root, dag_id=args.dag_id, strict=True)
+            if result.get("ok", False):
+                details = result.get("details", {})
+                sys.stdout.write(
+                    f"OK dag_id={args.dag_id} completed={details.get('completed', 0)} rerun={details.get('rerun', 0)} skipped={details.get('skipped', 0)}\n"
+                )
                 return 0
             sys.stdout.write(f"FAIL code={result.get('code', 'ERROR')}\n")
             return 1
