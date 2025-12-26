@@ -23,6 +23,18 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ---
 
+## [1.43.0] - 2025-12-26
+
+### Phase 6.2: Router Slot (External Plan Producer)
+
+#### Added
+- `SCHEMAS/ags_plan.schema.json`: strict plan schema for untrusted router output (no extra fields; capped steps).
+- `ags plan`: runs an external router, hard-bounds stdout bytes, rejects any stderr, validates plan + jobspecs, writes canonical plan JSON.
+- `ags route`: validates plans (schema + caps) before emitting `PIPELINE.json`.
+- `TESTBENCH/test_ags_phase6_router_slot.py`: subprocess tests for router happy path, stderr rejection, byte caps, schema rejection, and jobspec validation.
+
+---
+
 ## [1.40.0] - 2025-12-26
 
 ### Phase 5: Pipeline Verify CLI (Fail-Closed)
