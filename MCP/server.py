@@ -41,15 +41,35 @@ SERVER_VERSION = "0.1.0"
 
 
 def governed_tool(func):
-    """Decorator: Run critic.py before execution to enforce governance lock."""
+    """Decorator: Run preflight + critic.py before execution to enforce governance lock."""
     def wrapper(self, args: Dict) -> Dict:
         import os
         import subprocess
+        # Mandatory preflight (fail-closed)
+        env = os.environ.copy()
+        env["PYTHONIOENCODING"] = "utf-8"
+
+        preflight = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "ags.py"), "preflight"],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            cwd=str(PROJECT_ROOT),
+            env=env,
+        )
+        if preflight.returncode != 0:
+            payload = ((preflight.stdout or "") + "\n" + (preflight.stderr or "")).strip()
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "⛔ PREFLIGHT BLOCKED ⛔\n\nAction blocked. Repository freshness check failed.\n\n" + (payload or "(no details)")
+                }],
+                "isError": True
+            }
         # Exempt if checking critic itself (avoid infinite loop if critic is broken? No, critic run is separate tool)
         
         # Run critic
-        env = os.environ.copy()
-        env["PYTHONIOENCODING"] = "utf-8"
         
         res = subprocess.run(
             [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
