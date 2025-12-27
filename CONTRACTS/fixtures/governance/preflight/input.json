@@ -1,0 +1,35 @@
+{
+  "command": "ags preflight",
+  "exit_codes": {
+    "SAFE": 0,
+    "BLOCKED": 2,
+    "ERROR": 3
+  },
+  "required_fields": [
+    "git_branch",
+    "git_head_sha",
+    "tracked_dirty",
+    "untracked_count",
+    "canon_sha256",
+    "cortex_present",
+    "cortex_generated_at",
+    "cortex_sha256",
+    "verdict",
+    "reasons"
+  ],
+  "blocking_rules_default": [
+    "DIRTY_TRACKED",
+    "CORTEX_MISSING",
+    "CANON_CHANGED_SINCE_CORTEX"
+  ],
+  "warnings_default": [
+    "UNTRACKED_PRESENT",
+    "HANDOFF_MISSING"
+  ],
+  "flags": [
+    "--strict",
+    "--allow-dirty-tracked",
+    "--json"
+  ]
+}
+
