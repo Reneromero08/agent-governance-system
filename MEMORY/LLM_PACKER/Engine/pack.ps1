@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("ags", "catalytic-dpt", "catalytic-dpt-lab")]
+  [ValidateSet("ags", "catalytic-dpt", "lab")]
   [string]$Scope = "ags",
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
@@ -22,11 +22,7 @@ function Get-RepoRoot {
 }
 
 $repoRoot = Get-RepoRoot
-$packer = Join-Path $PSScriptRoot "packer.py"
-
-if (-not (Test-Path -LiteralPath $packer)) {
-  throw "Missing Python packer at: $packer"
-}
+$pythonModule = "MEMORY.LLM_PACKER.Engine.packer"
 
 if ($Stamp -eq "") { $Stamp = (Get-Date).ToString("yyyy-MM-dd_HH-mm-ss") }
 
@@ -59,18 +55,17 @@ if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
 if ($OutDir -eq "") {
   if ($Scope -eq "catalytic-dpt") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-$Stamp"
-  } elseif ($Scope -eq "catalytic-dpt-lab") {
-    $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-lab-pack-$Stamp"
-  } elseif ($Profile -eq "lite") {
-    $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-lite-$Stamp"
+  } elseif ($Scope -eq "lab") {
+    $OutDir = "MEMORY/LLM_PACKER/_packs/lab-pack-$Stamp"
   } else {
-    $OutDir = "MEMORY/LLM_PACKER/_packs/llm-pack-$Stamp"
+    $OutDir = "MEMORY/LLM_PACKER/_packs/ags-pack-$Stamp"
   }
 }
 
 $args = @(
   "python",
-  $packer,
+  "-m",
+  $pythonModule,
   "--scope", $Scope,
   "--mode", $Mode,
   "--profile", $Profile,
@@ -83,5 +78,10 @@ if ($combinedEnabled) { $args += "--combined" }
 if ($splitLiteEnabled) { $args += "--split-lite" }
 
 Write-Host "Running: $($args -join ' ')"
-& $args[0] $args[1..($args.Count - 1)]
-if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+Push-Location $repoRoot
+try {
+  & $args[0] $args[1..($args.Count - 1)]
+  if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+} finally {
+  Pop-Location
+}
