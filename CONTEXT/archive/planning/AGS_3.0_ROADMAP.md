@@ -1,7 +1,6 @@
-Superseded by AGS_ROADMAP_MASTER.md
+# AGS Roadmap (Superseded)
 
----
-title: AGS Roadmap (Updated)
+**NOTE: This document is superseded by `AGS_ROADMAP_MASTER.md`.**
 version: 0.1
 last_updated: 2025-12-23
 scope: Agent Governance System (repo + packer + cortex)
