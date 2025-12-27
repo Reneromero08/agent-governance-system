@@ -2,6 +2,31 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.10.0] - 2025-12-27
+
+### LLM Packer Refactor (created 2025-12-26; modified 2025-12-27)
+
+#### Added
+- Modular Packer Architecture: Refactored monolithic script into `MEMORY/LLM_PACKER/Engine/packer/` package with dedicated `core`, `split`, `lite`, and `archive` components.
+- New Launchers: `1-AGS-PACK.cmd`, `2-CAT-PACK.cmd`, `3-LAB-PACK.cmd` for scoped packing.
+- `lab` scope support for `CATALYTIC-DPT/LAB` research packs.
+- `MEMORY/LLM_PACKER/CHANGELOG.md` as the single source of truth for packer history.
+- Migration tooling: `packer_legacy_backup.py`, `migrate_phase1.py`, `verify_phase1.py`, `refactor_packer.py`, `scan_old_refs.py`.
+- `MEMORY/LLM_PACKER/Engine/run_tests.cmd` for smoke test execution.
+
+#### Changed
+- Consolidated packer documentation into `MEMORY/LLM_PACKER/README.md`.
+- Strict output structure enforcement: `FULL/`, `SPLIT/`, `LITE/`, `archive/`.
+- `pack.zip` now exclusively contains `meta/` and `repo/`.
+- Updated smoke tests (`llm-packer-smoke`) and `pack-validate` skill to align with new structure.
+- Updated `SKILLS/llm-packer-smoke/run.py` to support `allow_duplicate_hashes` flag.
+- Updated all smoke test fixtures to enable `allow_duplicate_hashes: true`.
+- Updated `CONTEXT/decisions/ADR-002-llm-packs-under-llm-packer.md`.
+- Updated `CONTEXT/decisions/ADR-013-llm-packer-lite-split-lite.md`.
+- Updated `CONTEXT/guides/SHIPPING.md` with new launcher references.
+- Moved historic/legacy packer changelog entries to `MEMORY/LLM_PACKER/CHANGELOG.md`.
+- Updated `TOOLS/critic.py` to allow `llm-packer-smoke` skill to use raw filesystem access.
+
 ## [2.9.0] - 2025-12-26
 
 ### MCP Startup Skill (created 2025-12-26)
@@ -11,9 +36,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Comprehensive documentation: `SKILL.md`, `README.md`, `INSTALLATION.md`, `USAGE.md`, `INDEX.md`, `CHECKLIST.md`, `MODEL-SETUP.md`, `QUICKREF.txt`.
 - Startup scripts: `startup.ps1` and `startup.py`.
 
-## [Unreleased]
 
-### Added
+
+## [2.8.6] - 2025-12-26
+
+### Governance & CI (created 2025-12-19; modified 2025-12-26)
+
+#### Added
 - Canon governance check system (comprehensive integration):
   - `TOOLS/check-canon-governance.js`: Core governance check script (Node.js)
   - `SKILLS/canon-governance-check/`: Full skill wrapper with Cortex provenance integration
@@ -21,47 +50,79 @@ All notable changes to the Agent Governance System will be documented in this fi
   - `SKILLS/canon-governance-check/scripts/pre-commit`: Git pre-commit hook for local enforcement
   - CI integration in `.github/workflows/contracts.yml`: Runs on every push/PR
   - Cortex provenance tracking: Logs governance check events to `CONTRACTS/_runs/<run_id>/events.jsonl`
+
+#### Changed
+- CI workflows consolidated: merged governance workflow into `.github/workflows/contracts.yml` (single source of CI truth).
+- Installed canon governance pre-commit hook locally into `.git/hooks/pre-commit` (from `SKILLS/canon-governance-check/scripts/pre-commit`).
+- Bumped `canon_version` to 2.8.6.
+
+## [2.8.5] - 2025-12-26
+
+### CAT-DPT (created 2025-12-24; modified 2025-12-26)
+
+#### Changed
+- CAT-DPT LAB reorganization: Moved architecture docs to `CATALYTIC-DPT/LAB/ARCHITECTURE/`, research docs consolidated in `CATALYTIC-DPT/LAB/RESEARCH/`, added index README.
+- CAT-DPT LAB compression: Merged architecture docs into `CATALYTIC-DPT/LAB/ARCHITECTURE/SWARM_ARCHITECTURE.md`, semiotic docs into `CATALYTIC-DPT/LAB/RESEARCH/SEMIOTIC_COMPRESSION.md` with Cortex-style hash refs.
 - (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
-- `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
-- `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
-- `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing skill contract (SKILL.md, run.py, validate.py, fixtures).
-- Governance fixtures for privacy boundary, log output roots, context edit authority, and output-root enforcement.
+
+### Cortex & Provenance (created 2025-12-19; modified 2025-12-26)
+
+#### Changed
+- Cortex/Provenance hardening: Fixed build crashes caused by volatile pytest temp files in `CORTEX/cortex.build.py` and `TOOLS/provenance.py`.
+
+## [2.8.4] - 2025-12-23
+
+### Cross-Platform Fixes (created 2025-12-19; modified 2025-12-23)
+
+#### Fixed
+- MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors.
+- `TOOLS/lint_tokens.py`: replaced Unicode warning/check marks with ASCII `[WARN]` and `[OK]` for cross-platform compatibility.
+- `TOOLS/critic.py`: detects hardcoded artifact paths outside allowed roots (CONTRACT Rule 6).
+- `TOOLS/codebook_build.py --check` now properly detects drift by comparing markdown entries (ignoring timestamps).
+- Added `validate.py` to all skills (doc-update, master-override, mcp-extension-verify, mcp-smoke) for uniform validation.
+- Updated `README.md` to reflect 8 repository layers (not 6): CANON, CONTEXT, MAPS, SKILLS, CONTRACTS, MEMORY, CORTEX, TOOLS.
+
+## [2.8.3] - 2025-12-23
+
+### Catalytic Computing (created 2025-12-23; modified 2025-12-23)
+
+#### Added
+- `CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` documenting the canonical note.
+
+#### Changed
+- `CANON/CATALYTIC_COMPUTING.md` updated with the catalytic computing canonical note.
+
+## [2.8.1] - 2025-12-23
+
+### Cortex & Navigation (created 2025-12-23; modified 2025-12-23)
+
+#### Added
 - `CORTEX/_generated/SECTION_INDEX.json` (generated) for section-level navigation and citation hashes.
- - `CORTEX/_generated/SUMMARY_INDEX.json` and `CORTEX/_generated/summaries/` (generated) for deterministic, advisory section summaries.
- - `CORTEX/SCHEMA.md` - Complete Cortex data model documentation (SQLite and JSON schemas, entity types, determinism, versioning).
- - `TOOLS/cortex.py` commands: `read`, `resolve`, `search`, `summary`.
- - `SKILLS/cortex-summaries/` fixture skill for deterministic summary generation validation.
- - `MEMORY/LLM_PACKER/DETERMINISM.md` describing the pack determinism contract plus manifest version fields (`canon_version`, `grammar_version`).
+- `CORTEX/_generated/SUMMARY_INDEX.json` and `CORTEX/_generated/summaries/` (generated) for deterministic, advisory section summaries.
+- `CORTEX/SCHEMA.md` documenting the Cortex data model (SQLite and JSON schemas, entity types, determinism, versioning).
+- `TOOLS/cortex.py` commands: `read`, `resolve`, `search`, `summary`.
+- `SKILLS/cortex-summaries/` fixture skill for deterministic summary generation validation.
 - `CONTRACTS/_runs/<run_id>/events.jsonl` (generated) for Cortex provenance events when `CORTEX_RUN_ID` is set.
 - `CONTRACTS/_runs/<run_id>/run_meta.json` (generated) anchoring provenance runs to a specific `CORTEX/_generated/SECTION_INDEX.json` hash.
 
-### Changed
-- Installed canon governance pre-commit hook: Now active in `.git/hooks/pre-commit` to enforce governance checks before commits.
-- CAT-DPT LAB reorganization: Moved architecture docs to `LAB/ARCHITECTURE/`, research docs consolidated in `LAB/RESEARCH/`, added index README.
-- CAT-DPT LAB compression: Merged architecture docs into `SWARM_ARCHITECTURE.md`, semiotic docs into `SEMIOTIC_COMPRESSION.md` with Cortex-style hash refs.
-- Cortex/Provenance hardening: Fixed build crashes caused by volatile pytest temp files in `CORTEX/cortex.build.py` and `TOOLS/provenance.py`.
-- (Catalytic Computing entries moved to `CATALYTIC-DPT/CHANGELOG.md`)
-- Added a privacy boundary rule to restrict out-of-repo access without explicit user approval (ADR-014).
-- LLM packer supports a LITE profile, SPLIT_LITE docs, and per-payload token reporting.
+## [2.8.0] - 2025-12-23
+
+### Privacy, Context, and Governance (created 2025-12-23; modified 2025-12-23)
+
+#### Added
+- `CONTEXT/decisions/ADR-012-privacy-boundary.md` defining the privacy boundary (no out-of-repo access without explicit user approval).
+- `CONTEXT/decisions/ADR-015-logging-output-roots.md` defining logging output root policy and enforcement.
+- `CONTEXT/decisions/ADR-016-context-edit-authority.md` clarifying when agents may edit existing CONTEXT records.
+- `CONTEXT/decisions/ADR-017-skill-formalization.md` formalizing the skill contract (SKILL.md, run.py, validate.py, fixtures).
+- Governance fixtures for privacy boundary, log output roots, context edit authority, and output-root enforcement.
+
+#### Changed
 - Aligned all logging with INV-006 output roots: logs now written under `CONTRACTS/_runs/<purpose>_logs/` (ADR-015).
-- Updated canon docs (CONTRACT.md, CRISIS.md, STEWARDSHIP.md, AGENTS.md) to reflect correct log locations and skill contract.
-- Clarified CANON/CONTRACT.md Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (ADR-016).
-- Enhanced CONTRACT.md Rule 2 to explicitly require ADRs for governance decisions and recommend them for significant code changes.
-- Enhanced AGENTS.md Section 5 to explicitly document the skill contract (SKILL.md, run.py, validate.py, fixtures) as defined in ADR-017.
+- Updated canon docs (`CANON/CONTRACT.md`, `CANON/CRISIS.md`, `CANON/STEWARDSHIP.md`, `AGENTS.md`) to reflect correct log locations and the skill contract.
+- Clarified `CANON/CONTRACT.md` Rule 3 to require both explicit user instruction AND explicit task intent for CONTEXT edits (ADR-016).
+- Enhanced `CANON/CONTRACT.md` Rule 2 to explicitly require ADRs for governance decisions and recommend them for significant code changes.
+- Enhanced `AGENTS.md` to explicitly document the skill contract (SKILL.md, run.py, validate.py, fixtures) as defined in ADR-017.
 - Bumped `canon_version` to 2.8.0 (minor: catalytic computing canonical note, governance clarifications).
-
-### Fixed
-- MCP server test mode: replaced Unicode checkmark characters (`✓`) with ASCII `[OK]` to fix Windows `cp1252` encoding errors.
-- `lint_tokens.py`: replaced Unicode warning/check marks with ASCII `[WARN]` and `[OK]` for cross-platform compatibility.
-- Cortex builds now emit `CORTEX/_generated/cortex.json`, and CI runs canon governance checks to catch version drift.
-- Consolidated CI workflows: merged governance.yml into contracts.yml (single source of CI truth).
-- Added output-root enforcement to `critic.py`: detects hardcoded artifact paths outside allowed roots (CONTRACT Rule 6).
-- Fixed `TOOLS/codebook_build.py --check` to properly detect drift by comparing markdown entries (ignoring timestamps).
-- Added `validate.py` to all skills (doc-update, master-override, mcp-extension-verify, mcp-smoke) for uniform validation.
-- Updated README.md to reflect 8 repository layers (not 6): CANON, CONTEXT, MAPS, SKILLS, CONTRACTS, MEMORY, CORTEX, TOOLS.
-
-### Removed
-- None.
 
 ## [2.6.0] - 2025-12-23
 
@@ -85,23 +146,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Removed
 - Root planning docs: `ROADMAP.md`, `AGS_MASTER_TODO.md`.
 
-## [2.5.4] - 2025-12-21
-
-### Added
-- None.
-
-### Changed
-- Commit ceremony now accepts short confirmations like "go on" after checks and staged files are listed.
-- Updated `CONTRACTS/fixtures/governance/commit-ceremony` to document confirmations.
-- Bumped `canon_version` to 2.5.4.
-- Regenerated `CANON/CODEBOOK.md`.
-
-### Fixed
-- None.
-
-### Removed
-- None.
-
 ## [2.5.5] - 2025-12-21
 
 ### Added
@@ -113,11 +157,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Bumped `canon_version` to 2.5.5.
 - Regenerated `CANON/CODEBOOK.md`.
 
-### Fixed
-- None.
+## [2.5.4] - 2025-12-21
 
-### Removed
-- None.
+### Changed
+- Commit ceremony now accepts short confirmations like "go on" after checks and staged files are listed.
+- Updated `CONTRACTS/fixtures/governance/commit-ceremony` to document confirmations.
+- Bumped `canon_version` to 2.5.4.
+- Regenerated `CANON/CODEBOOK.md`.
 
 ## [2.5.3] - 2025-12-21
 
@@ -131,25 +177,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Bumped `canon_version` to 2.5.3.
 - Regenerated `CANON/CODEBOOK.md`.
 
-### Fixed
-- None.
-
-### Removed
-- None.
-
 ## [2.5.2] - 2025-12-21
 
 ### Added
 - `requirements.txt` with `jsonschema` to satisfy schema validation dependencies in CI.
 
-### Changed
-- None.
-
 ### Fixed
 - CI critic failure when `jsonschema` was missing.
-
-### Removed
-- None.
 
 ## [2.5.1] - 2025-12-21
 
@@ -168,9 +202,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 ### Fixed
 - `TOOLS/critic.py` output uses ASCII to avoid Windows encoding errors.
-
-### Removed
-- None.
 
 ## [2.5.0] - 2025-12-21
 
@@ -216,12 +247,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Changed
 - Refactored `SKILLS/_TEMPLATE` and `canon-migration` to use compliant Status (`Draft`, `Active`).
 
-### Fixed
-- None.
-
-### Removed
-- None.
-
 ## [2.0.0] - 2025-12-21
 
 ### Added
@@ -235,12 +260,6 @@ All notable changes to the Agent Governance System will be documented in this fi
     - `CANON/GENESIS_COMPACT.md`: Token-efficient bootstrap prompt using symbols.
 - **Provenance Headers**: Added `TOOLS/provenance.py` and integrated into all major generators (`codebook_build.py`, `cortex.build.py`, `packer.py`) for automated audit trails. Introduced `meta/PROVENANCE.json` in memory packs as a single-point-of-truth manifest for pack integrity.
 
-### Fixed
-- Nothing.
-
-### Removed
-- Nothing.
-
 ## [1.2.0] - 2025-12-21
 
 ### Added
@@ -251,12 +270,6 @@ All notable changes to the Agent Governance System will be documented in this fi
     - `CANON/CRISIS.md`: Procedures with 5 crisis levels and CLI modes.
     - `CANON/STEWARDSHIP.md`: Human escalation paths and steward authority.
     - `TOOLS/emergency.py`: CLI for crisis handling (validate, rollback, quarantine, etc.).
-
-### Fixed
-- Nothing.
-
-### Removed
-- Nothing.
 
 ## [1.1.1] - 2025-12-21
 
@@ -281,22 +294,11 @@ All notable changes to the Agent Governance System will be documented in this fi
 ### Deprecated
 - `cortex.json` emission from build process (replaced by SQLite `cortex.db`).
 
-### Fixed
-- Nothing.
-
-### Removed
-- Nothing.
-
 ## [1.1.0] - 2025-12-21
 
 ### Added
 - STYLE-002: Engineering Integrity preference (foundational fixes over patches).
 - STYLE-003: Mandatory Changelog Synchronisation preference.
-- Official Blue Launcher with icon for LLM_PACKER.
-
-### Changed
-- LLM_PACKER refactoring: Moved core logic to `Engine/` subfolder.
-- Renamed `LLM-PACKER` to `LLM_PACKER` to resolve Python import limitations.
 - Hardened STYLE-001 (Blanket Approval Ban and Mandatory Ceremony Phase).
 
 ## [1.0.0] - 2025-12-21
@@ -340,24 +342,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `BUILD/` is reserved for user build outputs, not system artifacts.
 - Contract runner writes fixture outputs under `CONTRACTS/_runs/`.
 - Cortex build writes index under `CORTEX/_generated/cortex.json` (query keeps fallback support).
-- Memory packer produces LLM packs under `MEMORY/_packs/` and records a `BUILD/` file tree inventory.
-- LLM packer tooling relocated under `MEMORY/LLM-PACKER/` (PowerShell wrapper retained).
-
-### Removed
-
-- Nothing.
-
-## [0.1.3] - 2025-12-20
-
-### Changed
-
-- LLM pack output root moved to `MEMORY/LLM-PACKER/_packs/` (from `MEMORY/_packs/`).
-
-## [0.1.4] - 2025-12-20
-
-### Removed
-
-- Legacy `MEMORY/_packs/` directory (no longer used).
 
 ## [0.1.1] - 2025-12-19
 
@@ -373,10 +357,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Contract runner to execute skill fixtures and write outputs under `BUILD/`.
 - Cortex build to emit its index under `BUILD/` and skip indexing `BUILD/`.
 
-### Removed
-
-- Nothing.
-
 ## [0.1.0] - 2025-12-19
 
 ### Added
@@ -385,11 +365,3 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Templates for ADRs, rejections, preferences and open issues.
 - Basic runner script and placeholder fixtures.
 - Versioning policy and invariants.
-
-### Changed
-
-- Nothing. This is the first release.
-
-### Removed
-
-- Nothing.
