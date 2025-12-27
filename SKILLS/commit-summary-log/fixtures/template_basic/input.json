@@ -1,0 +1,8 @@
+{
+  "action": "template",
+  "type": "feat",
+  "scope": "commit",
+  "subject": "add commit message template rules",
+  "normalize": true,
+  "warn_if_changelog_missing": false
+}

@@ -2,6 +2,36 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.2] - 2025-12-27
+
+### Research & Cleanup (created 2025-12-27)
+
+#### Added
+- `CATALYTIC-DPT/LAB/RESEARCH/SWARM_BUG_REPORT.md` - Bug report documentation.
+- `CATALYTIC-DPT/LAB/RESEARCH/CANON_COMPRESSION_ANALYSIS.md` - Analysis documentation.
+- `CATALYTIC-DPT/LAB/RESEARCH/SKILL and TOOLS BUG_REPORT.md` - Skill and tools bug report.
+- `CATALYTIC-DPT/LAB/RESEARCH/2025-12-23-system1-system2-dual-db.md` - Research notes.
+- `SKILLS/commit-summary-log/` - Skill for generating structured commit summaries.
+
+## [2.11.1] - 2025-12-27
+
+### MAPS Updates (created 2025-12-27)
+
+#### Changed
+- Updated `MAPS/SYSTEM_MAP.md` for new packer architecture.
+- Updated `MAPS/DATA_FLOW.md` for new packer architecture.
+- Updated `MAPS/FILE_OWNERSHIP.md` for new packer architecture.
+- Updated `MAPS/ENTRYPOINTS.md` for new packer architecture.
+
+## [2.11] - 2025-12-27
+
+### Documentation Cleanup (created 2025-12-26; modified 2025-12-27)
+
+#### Changed
+- Updated `AGS_ROADMAP_MASTER.md` with latest planning.
+- Updated `CONTEXT/archive/planning/AGS_3.0_ROADMAP.md`.
+- Updated `CONTEXT/archive/planning/REPO_FIXES_TASKS.md`.
+
 ## [2.10.0] - 2025-12-27
 
 ### LLM Packer Refactor (created 2025-12-26; modified 2025-12-27)
