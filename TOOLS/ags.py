@@ -608,6 +608,11 @@ def main(argv: List[str] | None = None) -> int:
     run_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
     run_p.add_argument("--strict", action="store_true", help="Strict verification (always on)")
 
+    preflight_p = sub.add_parser("preflight", help="Emit JSON preflight verdict (fail-closed)")
+    preflight_p.add_argument("--strict", action="store_true", help="Treat untracked files as blocking")
+    preflight_p.add_argument("--allow-dirty-tracked", action="store_true", help="Allow dirty tracked files (still reported)")
+    preflight_p.add_argument("--json", action="store_true", help="Emit JSON (default)")
+
     args = parser.parse_args(argv)
 
     try:
@@ -627,6 +632,17 @@ def main(argv: List[str] | None = None) -> int:
             )
         if args.cmd == "run":
             return ags_run(pipeline_id=args.pipeline_id, runs_root=args.runs_root, strict=bool(args.strict))
+        if args.cmd == "preflight":
+            preflight = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py")]
+            forwarded: List[str] = []
+            if bool(args.strict):
+                forwarded.append("--strict")
+            if bool(args.allow_dirty_tracked):
+                forwarded.append("--allow-dirty-tracked")
+            if bool(args.json):
+                forwarded.append("--json")
+            res = subprocess.run(preflight + forwarded, cwd=str(REPO_ROOT))
+            return int(res.returncode)
     except Exception as e:
         sys.stderr.write(f"ERROR: {e}\n")
         return 2

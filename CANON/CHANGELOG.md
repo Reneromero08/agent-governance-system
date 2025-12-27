@@ -2,6 +2,20 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.6] - 2025-12-27
+
+### Governance Preflight Freshness Gate (created 2025-12-27)
+
+#### Added
+- `ags preflight` command (JSON-only) enforcing repository freshness checks before governed execution.
+- Cortex metadata for preflight drift detection: `CORTEX/_generated/CORTEX_META.json` (`generated_at`, `canon_sha256`, `cortex_sha256`).
+- `CONTRACTS/fixtures/governance/preflight/` fixture documenting the preflight contract.
+- `CONTEXT/decisions/ADR-019-preflight-freshness-gate.md` defining the preflight gate as a governance requirement.
+
+#### Changed
+- Governed MCP tool execution now runs preflight before `TOOLS/critic.py` (fail-closed).
+- `CORTEX/cortex.build.py` now records `canon_sha256` and `generated_at` for drift detection.
+
 ## [2.11.2] - 2025-12-27
 
 ### Research & Cleanup (created 2025-12-27)
