@@ -2,6 +2,15 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.9.0] - 2025-12-26
+
+### MCP Startup Skill (created 2025-12-26)
+
+#### Added
+- `CATALYTIC-DPT/SKILLS/mcp-startup/` skill for MCP server startup automation.
+- Comprehensive documentation: `SKILL.md`, `README.md`, `INSTALLATION.md`, `USAGE.md`, `INDEX.md`, `CHECKLIST.md`, `MODEL-SETUP.md`, `QUICKREF.txt`.
+- Startup scripts: `startup.ps1` and `startup.py`.
+
 ## [Unreleased]
 
 ### Added
