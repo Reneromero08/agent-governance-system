@@ -5,3 +5,6 @@ _packs/**
 !_packs/archive/.gitkeep
 !_packs/_state/
 !_packs/_state/.gitkeep
+!_packs/_system/
+!_packs/_system/archive/
+!_packs/_system/archive/*.zip
