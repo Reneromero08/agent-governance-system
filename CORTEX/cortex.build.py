@@ -35,6 +35,7 @@ VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 SECTION_INDEX_FILE = GENERATED_DIR / "SECTION_INDEX.json"
 SUMMARY_INDEX_FILE = GENERATED_DIR / "SUMMARY_INDEX.json"
 SUMMARIES_DIR = GENERATED_DIR / "summaries"
+CORTEX_META_FILE = GENERATED_DIR / "CORTEX_META.json"
 SUMMARY_SCHEMA_VERSION = "1.0"
 SUMMARY_MIN_SECTION_LINES = 10
 
@@ -165,10 +166,19 @@ def build_index(conn: sqlite3.Connection) -> int:
     # Update global metadata
     canon_version = get_canon_version()
     generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", datetime.now(timezone.utc).isoformat())
+    try:
+        import sys
+        if str(PROJECT_ROOT) not in sys.path:
+            sys.path.insert(0, str(PROJECT_ROOT))
+        from TOOLS.preflight import compute_canon_sha256
+        canon_sha256 = compute_canon_sha256(PROJECT_ROOT)
+    except Exception:
+        canon_sha256 = ""
     
     cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("cortex_version", "1.1.0"))
     cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("canon_version", canon_version))
     cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("generated_at", generated_at))
+    cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("canon_sha256", canon_sha256))
     
     # Provenance
     try:
@@ -508,6 +518,10 @@ def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
 
 def main():
     GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+
+    # Pin generated_at for this build (single value for DB + metadata outputs).
+    if not os.environ.get("CORTEX_BUILD_TIMESTAMP"):
+        os.environ["CORTEX_BUILD_TIMESTAMP"] = datetime.now(timezone.utc).isoformat()
     
     # Do NOT unlink DB file - we want persistence
     
@@ -521,6 +535,29 @@ def main():
     write_json_snapshot()
     section_index = write_section_index()
     write_section_summaries(section_index)
+
+    # Emit cortex build metadata for preflight drift detection.
+    try:
+        canon_sha = ""
+        try:
+            import sys
+            if str(PROJECT_ROOT) not in sys.path:
+                sys.path.insert(0, str(PROJECT_ROOT))
+            from TOOLS.preflight import compute_canon_sha256
+            canon_sha = compute_canon_sha256(PROJECT_ROOT)
+        except Exception:
+            canon_sha = ""
+
+        generated_at = os.environ.get("CORTEX_BUILD_TIMESTAMP", datetime.now(timezone.utc).isoformat())
+        cortex_sha = sha256(SECTION_INDEX_FILE.read_bytes()).hexdigest() if SECTION_INDEX_FILE.exists() else ""
+        meta = {
+            "generated_at": generated_at,
+            "canon_sha256": canon_sha,
+            "cortex_sha256": cortex_sha,
+        }
+        CORTEX_META_FILE.write_text(json.dumps(meta, ensure_ascii=True, separators=(",", ":"), sort_keys=False) + "\n", encoding="utf-8")
+    except Exception:
+        pass
 
 
 if __name__ == "__main__":
