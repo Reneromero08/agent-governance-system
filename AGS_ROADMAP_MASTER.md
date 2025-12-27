@@ -21,14 +21,14 @@ This roadmap assumes:
 
 # Current state snapshot (what you already have)
 
-From the SPLIT_LITE pack pointers, the system expects these major components to exist in-repo:
+From the LITE pack pointers, the system expects these major components to exist in-repo:
 - Governance: `repo/AGENTS.md`, `repo/CANON/*`
 - Maps: `repo/MAPS/ENTRYPOINTS.md`
 - Contracts: `repo/CONTRACTS/runner.py`
 - Skills: `repo/SKILLS/*/SKILL.md`
 - Tools: `repo/TOOLS/critic.py`
 - Cortex interface: `repo/CORTEX/query.py`
-- Packer engine: `repo/MEMORY/LLM_PACKER/Engine/packer.py`
+- Packer engine: `repo/MEMORY/LLM_PACKER/Engine/packer/`
 - MCP seam: `repo/MCP/server.py`
 
 (Those pointers are present in your LITE pack index and root stubs.)
@@ -87,7 +87,7 @@ Problem:
 - LITE packs are required for navigation-first workflows but are not guaranteed by the packer or CI.
 
 Tasks:
-- [x] [P0] Add `--profile lite` to `MEMORY/LLM_PACKER/Engine/packer.py` with FULL output unchanged.
+- [x] [P0] Add `--profile lite` to `MEMORY/LLM_PACKER/Engine/packer/` with FULL output unchanged.
 - [x] [P0] Emit LITE meta outputs: `meta/LITE_ALLOWLIST.json`, `meta/LITE_OMITTED.json`, `meta/LITE_START_HERE.md`, `meta/SKILL_INDEX.json`, `meta/FIXTURE_INDEX.json`, `meta/CODEBOOK.md`, `meta/CODE_SYMBOLS.json`.
 - [x] [P0] Add smoke/CI validation that asserts required LITE meta outputs exist.
 - [ ] [P1] Optional: add `--profile test` (fixtures-heavy) for debugging, separate from LITE.

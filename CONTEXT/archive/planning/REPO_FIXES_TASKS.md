@@ -1,6 +1,7 @@
-Superseded by AGS_ROADMAP_MASTER.md
+# Repo Fix Tasks (Superseded)
 
-# Repo Fix Tasks (Post v2.5.5)
+**NOTE: This document is superseded by `AGS_ROADMAP_MASTER.md` and `MEMORY/PACKER_ROADMAP.md`.
+References to `SPLIT_LITE` and `packer.py` are outdated as of v1.3.1 (see `MEMORY/LLM_PACKER/README.md`).**
 
 This is a task list derived from a contract-doc scan + local checks. It is intended to be implemented as minimal, correctness-first changes.
 

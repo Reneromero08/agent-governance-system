@@ -32,7 +32,7 @@ This document lists the primary entrypoints where agents and humans are expected
 
 - `CORTEX/` - Modify when adding new index fields or query capabilities.
 - `TOOLS/cortex.py` - Cortex section index CLI (`read`, `resolve`, `search`).
-- `MEMORY/LLM_PACKER/Engine/packer.py` - Modify when updating the pack format or manifest.
+- `MEMORY/LLM_PACKER/Engine/packer/` - Modify when updating the pack format or manifest.
 - `MEMORY/LLM_PACKER/` - Windows wrapper scripts for running the packer.
 - `TOOLS/` - Add critics, linters and migration scripts here.
 
@@ -44,3 +44,18 @@ This document lists the primary entrypoints where agents and humans are expected
 - `CONTRACTS/ags_mcp_entrypoint.py` - Recommended entrypoint wrapper (audit logs under allowed roots).
 - `SKILLS/mcp-smoke/` - CLI smoke test for MCP server.
 - `SKILLS/mcp-extension-verify/` - Extension-agnostic verification checklist + smoke test.
+
+## CATALYTIC-DPT (Distributed Pipeline Toolkit)
+
+- `CATALYTIC-DPT/AGENTS.md` - Agent definitions for pipeline execution.
+- `CATALYTIC-DPT/SKILLS/` - Pipeline-specific skills:
+  - `swarm-orchestrator/` - Coordinates distributed task execution
+  - `ant-worker/` - Individual task execution agents
+  - `mcp-startup/` - MCP integration for pipelines
+- `CATALYTIC-DPT/PIPELINES/` - DAG definitions and pipeline configurations.
+- `CATALYTIC-DPT/PRIMITIVES/` - Core building blocks (nodes, executors).
+- `CATALYTIC-DPT/CONTRACTS/` - Pipeline-specific fixtures and validation.
+- `CATALYTIC-DPT/SCHEMAS/` - JSON schemas for pipeline structures.
+- `CATALYTIC-DPT/SPECTRUM/` - Capability spectrum definitions.
+- `CATALYTIC-DPT/LAB/` - Experimental features and research.
+- `CATALYTIC-DPT/TESTBENCH/` - Testing infrastructure for pipelines.
