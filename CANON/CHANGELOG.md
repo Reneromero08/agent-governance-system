@@ -19,6 +19,8 @@ All notable changes to the Agent Governance System will be documented in this fi
 - Strict output structure enforcement: `FULL/`, `SPLIT/`, `LITE/`, `archive/`.
 - `pack.zip` now exclusively contains `meta/` and `repo/`.
 - Updated smoke tests (`llm-packer-smoke`) and `pack-validate` skill to align with new structure.
+- Updated `llm-packer-smoke` to run the modular packer CLI (`python -m MEMORY.LLM_PACKER.Engine.packer`) and validate `FULL/` + `SPLIT/` (+ `LITE/` when enabled), replacing legacy `Engine/packer.py` + `COMBINED/` expectations.
+- Removed legacy packer launchers/shortcuts and deprecated scripts (superseded by the modular packer + numbered launchers).
 - Updated `SKILLS/llm-packer-smoke/run.py` to support `allow_duplicate_hashes` flag.
 - Updated all smoke test fixtures to enable `allow_duplicate_hashes: true`.
 - Updated `CONTEXT/decisions/ADR-002-llm-packs-under-llm-packer.md`.
