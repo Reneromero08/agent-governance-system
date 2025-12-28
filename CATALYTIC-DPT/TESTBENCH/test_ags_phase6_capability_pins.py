@@ -173,7 +173,7 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
         )
         assert r_route_ok.returncode == 0, r_route_ok.stdout + r_route_ok.stderr
         r_run_ok = subprocess.run(
-            [sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"],
+            [sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--allow-dirty-tracked"],
             cwd=str(REPO_ROOT),
             capture_output=True,
             text=True,

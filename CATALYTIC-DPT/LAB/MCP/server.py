@@ -1486,23 +1486,75 @@ class MCPTerminalServer:
 
         return {"status": "dispatched", "task_id": task_id, "to_agent": to_agent, "priority": priority}
 
-    def get_pending_tasks(self, agent_id: str) -> Dict:
-        """Ant Worker checks for pending tasks assigned to it."""
+    def get_pending_tasks(self, agent_id: str, limit: int = 10) -> Dict:
+        """Ant Worker checks for pending tasks assigned to it.
+
+        Features:
+        - Streaming read (memory efficient)
+        - Priority sorting
+        - Configurable limit
+        - Robust error handling
+        """
         queue_file = self.ledger_path / "task_queue.jsonl"
         pending = []
-        
-        if queue_file.exists():
-            with open(queue_file) as f:
-                for line in f:
-                    task = json.loads(line)
-                    if task["to_agent"] == agent_id and task["status"] == "pending":
-                        pending.append(task)
-        
-        pending.sort(key=lambda x: x.get("priority", 0), reverse=True)
-        return {"status": "success", "agent_id": agent_id, "pending_count": len(pending), "tasks": pending}
+
+        try:
+            for task in _read_jsonl_streaming(
+                queue_file,
+                filter_fn=lambda t: t.get("to_agent") == agent_id and t.get("status") == "pending",
+                limit=limit * 2  # Get extra for sorting
+            ):
+                pending.append(task)
+        except Exception as e:
+            return {
+                "status": "error",
+                "message": f"Failed to read task queue: {str(e)}",
+                "agent_id": agent_id,
+                "pending_count": 0,
+                "tasks": []
+            }
+
+        # Sort by priority (highest first), then by dispatch time (oldest first)
+        pending.sort(key=lambda x: (-x.get("priority", 5), x.get("dispatched_at", "")))
+
+        # Apply limit after sorting
+        pending = pending[:limit]
+
+        return {
+            "status": "success",
+            "agent_id": agent_id,
+            "pending_count": len(pending),
+            "tasks": pending
+        }
 
     def report_result(self, task_id: str, from_agent: str, status: str, result: Dict, errors: Optional[List[str]] = None) -> Dict:
-        """Ant Worker reports task result back to Governor."""
+        """Ant Worker reports task result back to Governor.
+
+        Features:
+        - Atomic write
+        - Duplicate result detection
+        - Status validation
+        """
+        # Validate status
+        valid_statuses = ["success", "failed", "error", "timeout"]
+        if status not in valid_statuses:
+            return {
+                "status": "error",
+                "message": f"Invalid status: {status}. Must be one of: {valid_statuses}"
+            }
+
+        # Check for duplicate result
+        results_file = self.ledger_path / "task_results.jsonl"
+        for existing in _read_jsonl_streaming(
+            results_file,
+            filter_fn=lambda r: r.get("task_id") == task_id
+        ):
+            return {
+                "status": "error",
+                "message": f"Result already reported for task_id: {task_id}",
+                "existing_result": existing
+            }
+
         result_message = {
             "task_id": task_id,
             "from_agent": from_agent,
@@ -1511,12 +1563,34 @@ class MCPTerminalServer:
             "errors": errors or [],
             "reported_at": datetime.now().isoformat()
         }
-        
-        results_file = self.ledger_path / "task_results.jsonl"
-        with open(results_file, "a") as f:
-            f.write(json.dumps(result_message) + "\n")
-        
-        self._log_operation({"operation": "report_result", "task_id": task_id, "from_agent": from_agent, "status": status})
+
+        # Atomic write
+        if not _atomic_write_jsonl(results_file, json.dumps(result_message)):
+            return {
+                "status": "error",
+                "message": "Failed to write result (atomic write failed)"
+            }
+
+        # Also update task queue to mark as completed
+        queue_file = self.ledger_path / "task_queue.jsonl"
+
+        def update_task_status(entries):
+            for entry in entries:
+                if entry.get("task_id") == task_id:
+                    entry["status"] = "completed" if status == "success" else "failed"
+                    entry["completed_at"] = datetime.now().isoformat()
+            return entries
+
+        _atomic_rewrite_jsonl(queue_file, update_task_status)
+
+        self._log_operation({
+            "operation": "report_result",
+            "task_id": task_id,
+            "from_agent": from_agent,
+            "status": status,
+            "error_count": len(errors) if errors else 0
+        })
+
         return {"status": "reported", "task_id": task_id}
 
     def get_results(self, task_id: Optional[str] = None) -> Dict:
