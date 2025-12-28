@@ -24,9 +24,9 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 # Lane B: Core Stability & Bug Squashing (P0)
 
 ## B1. Critical Bug Triage (P0)
-- [ ] Fix critical Swarm race conditions (missing `await`, unsafe locks).
+- [x] Fix critical Swarm race conditions (missing `await`, unsafe locks) - Reviewed, no async issues found.
 - [x] Resolve JSON error recovery/encoding failures in MCP server (Fixed in v2.15.1).
-- [ ] Harden `poll_and_execute.py` against subprocess zombies.
+- [x] Harden `poll_and_execute.py` against subprocess zombies (Added zombie-safe kill, no bare except).
 
 ## B2. Engineering Culture (P1)
 - [x] Enforce "No Bare Excepts" in `CANON/STEWARDSHIP.md` (Section 1).
