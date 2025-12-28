@@ -27,6 +27,17 @@ All notable changes to the Agent Governance System will be documented in this fi
 - `MCP/server.py` to implement message board handlers.
 - `MCP/schemas/tools.json` to register message board tools.
 
+## [2.13.0] - 2025-12-29
+
+### Invariant Infrastructure (created 2025-12-29)
+
+#### Added
+- `CONTEXT/decisions/ADR-025-antigravity-bridge-invariant.md`: Defined Antigravity Bridge as "Always On" infrastructure.
+- `CANON/INVARIANTS.md`: Added **INV-012 (Visible Execution)** prohibiting external windows and mandating Bridge usage.
+
+#### Changed
+- `CATALYTIC-DPT/LAB/ARCHITECTURE/SWARM_ARCHITECTURE.md`: Updated to reference INV-012 and clarify Bridge status.
+
 ## [2.12.0] - 2025-12-29
 
 ### Swarm Runtime & Schema Hardening (created 2025-12-29)
