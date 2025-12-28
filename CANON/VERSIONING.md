@@ -5,7 +5,7 @@ This file defines the versioning policy for the Agent Governance System.  It tra
 ## Canon version
 
 ```
-canon_version: 2.13.0
+canon_version: 2.15.1
 ```
 
 The version consists of three numbers:
