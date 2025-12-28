@@ -18,6 +18,7 @@ This release establishes The Living Formula as the primary driver for navigating
 - `CANON/INDEX.md`: Elevated `FORMULA.md` to "The Driver" (Rank 1).
 - `CANON/GENESIS.md` & `GENESIS_COMPACT.md`: Updated load order to prioritize the Formula.
 - `TOOLS/codebook_build.py`: Added support for `@F0` generation.
+- **Discontinued**: Marked `CATALYTIC-DPT` (Swarm Terminal) as **UNDER CONSTRUCTION (NOT USEABLE)** in `AGENTS.md`, `CANON/INDEX.md`, and `MAPS/ENTRYPOINTS.md`.
 
 ## [2.13.1] - 2025-12-28
 
