@@ -44,7 +44,8 @@ def execute_gemini_prompt(prompt, timeout=60):
             ["gemini", "--prompt", prompt],
             capture_output=True,
             text=True,
-            timeout=timeout
+            timeout=timeout,
+            shell=True  # Required for Windows .cmd/.bat execution
         )
 
         if result.returncode == 0:
