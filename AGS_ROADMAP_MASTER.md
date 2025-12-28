@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (Master)
 version: 3.0
-last_updated: 2025-12-23
+last_updated: 2025-12-27
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
 source_docs:
