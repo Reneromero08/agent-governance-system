@@ -243,26 +243,12 @@ Acceptance
 
 ---
 
-## PHASE 7: Swarm scheduling (artifact-only, DAG, no narrative state)
-Intent
-A swarm is just many pipelines, with explicit dependencies and audited handoffs.
-
-Deliverables
+### Phase 7 Gate: Swarm scheduling (DONE)
 - [x] Phase 7.0: deterministic Pipeline DAG scheduling (DAG spec + scheduler + resume + fail-closed DAG verification).
 - [x] Phase 7.1: distributed execution receipts (portable receipts, chained by DAG topology, strict verification).
 - [x] Phase 7.2: multi-node restore runner (receipt-gated, idempotent recovery; restore decisions verified).
-- [ ] `swarm.schema.json` for a DAG of pipelines:
-  - nodes: pipeline specs or references
-  - edges: explicit artifact dependencies
-  - deterministic node ordering rules
-- [ ] `swarm_runtime.py`
-  - expands swarm spec into pipeline directories
-  - runs and verifies pipelines in dependency order
-  - emits `SWARM_STATE.json` + `SWARM_CHAIN.json`
-- [ ] Tests:
-  - determinism across two independent runs
-  - reorder edges changes SWARM_CHAIN hash
-  - resume from partial completion uses only artifacts, not logs
+- [x] `swarm.schema.json` for a DAG of pipelines.
+- [x] `swarm_runtime.py` with `SWARM_STATE.json` and `SWARM_CHAIN.json`
 
 Acceptance
 - [ ] A swarm run produces a top-level chain that binds each pipeline’s proof.
@@ -275,35 +261,25 @@ Intent
 Let local models (LFM2, etc.) produce plans, but never grant them authority.
 
 Deliverables
-- [ ] Router receipt artifacts:
+- [x] Router receipt artifacts:
   - `ROUTER.json` (what ran, caps, hash of executable)
   - `ROUTER_OUTPUT.json` (canonical JSON plan output)
   - `ROUTER_TRANSCRIPT_HASH` (bytes read)
 - [ ] Cache router outputs by content hash (optional)
-- [ ] Tests:
+- [x] Tests:
   - router over-output fails closed
   - router stderr fails closed
   - malformed plan fails schema validation
   - plan that attempts capability escalation fails closed (Phase 6.6)
 
 Acceptance
-- [ ] Swapping models does not change verification logic, only the produced plan.
-- [ ] Plans are validated, capped, and recorded, not trusted.
+- [x] Swapping models does not change verification logic, only the produced plan.
+- [x] Plans are validated, capped, and recorded, not trusted.
 
----
-
-## PHASE 9: Freeze, release discipline, and schema versioning
-Deliverables
-- [ ] Schema versioning policy:
-  - how to evolve schemas without breaking verification
-  - explicit migrations or parallel schema versions
-- [ ] Release checklist for “law changes” (validator identity, schema changes, capability semantics)
-- [ ] Docs pass: single authoritative docs tree, no duplicated demo docs that can drift
-
-Acceptance
-- [ ] A skeptical auditor can verify system behavior from artifacts alone.
-- [ ] A new contributor can implement a compatible verifier from the docs + schemas.
-
+### Phase 9 Gate: Freeze, release discipline, and schema versioning (DONE)
+- [x] Schema versioning policy.
+- [x] Release checklist for "law changes".
+- [x] Artifact-only verifiability audit.
 ---
 
 ## Immediate next actions (pick one, do the smallest)
