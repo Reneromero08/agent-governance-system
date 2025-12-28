@@ -2,6 +2,20 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.17] - 2025-12-27
+
+### CAT-DPT Phase 6.9: Capability Revocation Semantics (created 2025-12-27)
+
+#### Added
+- `CONTEXT/decisions/ADR-023-capability-revocation-semantics.md`: Decision record for no-history-break revocation snapshots.
+- `CATALYTIC-DPT/TESTBENCH/test_ags_phase6_capability_revokes.py`: Regression test for historical pass.
+
+#### Changed
+- `TOOLS/ags.py`: Unified policy proofing into `POLICY.json` and added `revoked_capabilities` snapshotting.
+- `CATALYTIC-DPT/PIPELINES/pipeline_runtime.py`: Hardened for cross-platform (Windows) support using `sys.executable` and `os.environ` inheritance.
+- `CATALYTIC-DPT/PRIMITIVES/ledger.py`: Fixed Windows CRLF bug by forcing `O_BINARY` in `Ledger.append`.
+- `CATALYTIC-DPT/SCHEMAS/ags_plan.schema.json`: Added `memoize` and `strict` properties.
+
 ## [2.11.16] - 2025-12-29
 
 ### Policy Proof Receipts
