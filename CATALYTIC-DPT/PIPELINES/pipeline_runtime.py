@@ -120,8 +120,11 @@ class PipelineRuntime:
         pdir = self.pipeline_dir(pipeline_id)
         pdir.mkdir(parents=True, exist_ok=True)
         _atomic_write_canonical_json(pdir / "PIPELINE.json", self._spec_to_json(spec))
-        state = self._initial_state(spec)
-        _atomic_write_canonical_json(pdir / "STATE.json", state)
+        
+        state_path = pdir / "STATE.json"
+        if not state_path.exists():
+            state = self._initial_state(spec)
+            _atomic_write_canonical_json(state_path, state)
         return spec
 
     def load(self, *, pipeline_id: str) -> Tuple[PipelineSpec, Dict[str, Any]]:

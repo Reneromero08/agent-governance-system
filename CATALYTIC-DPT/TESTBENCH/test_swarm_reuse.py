@@ -71,6 +71,10 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
     _rm(pipeline_dir)
     _rm(REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "elision_test")
     _rm(REPO_ROOT / out1)
+    
+    # Ensure they are gone to prevent zombie state from confusing the test
+    assert not dag_dir.exists()
+    assert not pipeline_dir.exists()
 
     unique_intent = "elision-intent-v1-unique"
 

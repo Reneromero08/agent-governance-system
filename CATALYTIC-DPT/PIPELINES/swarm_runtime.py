@@ -243,27 +243,29 @@ class SwarmRuntime:
         dag_state = json.loads((dag_dir / "DAG_STATE.json").read_text(encoding="utf-8"))
         _atomic_write_canon_json(swarm_dir / "SWARM_STATE.json", dag_state)
 
-        # Emit SWARM_CHAIN.json
+        # Emit SWARM_CHAIN.json (top-level chain across pipelines)
         swarm_chain = self._build_swarm_chain(swarm_id=swarm_id, dag_state=dag_state)
         _atomic_write_canon_json(swarm_dir / "SWARM_CHAIN.json", swarm_chain)
+
+        details = dag_res.get("details", {})
+        executed = details.get("executed", 0)
         
-        # Emit SWARM_RECEIPT.json (Run Receipt)
-        run_receipt = {
+        # Emit SWARM_RECEIPT.json
+        receipt = {
             "swarm_id": swarm_id,
-            "elided": False,
-            "swarm_hash": swarm_hash
+            "nodes": len(dag_nodes),
+            "elided": executed == 0,
+            "state_hash": hashlib.sha256(canonical_json_bytes(dag_state)).hexdigest(),
+            "chain_hash": hashlib.sha256(canonical_json_bytes(swarm_chain)).hexdigest()
         }
-        _atomic_write_canon_json(swarm_dir / "SWARM_RECEIPT.json", run_receipt)
-
-        # Persist Reusable Receipt
-        self._emit_swarm_receipt(
-            swarm_hash=swarm_hash, 
-            swarm_id=swarm_id, 
-            dag_state=dag_state, 
-            chain=swarm_chain
-        )
-
-        return {"ok": True, "swarm_id": swarm_id, "nodes": len(dag_nodes), "elided": False}
+        _atomic_write_canon_json(swarm_dir / "SWARM_RECEIPT.json", receipt)
+        
+        return {
+            "ok": True, 
+            "swarm_id": swarm_id, 
+            "nodes": len(dag_nodes),
+            "elided": executed == 0
+        }
 
     def _build_swarm_chain(self, swarm_id: str, dag_state: Dict[str, Any]) -> Dict[str, Any]:
         """

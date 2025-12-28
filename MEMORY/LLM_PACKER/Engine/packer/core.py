@@ -8,6 +8,7 @@ import hashlib
 import json
 import re
 import shutil
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple, Sequence
@@ -593,8 +594,35 @@ def write_full_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> None:
 
 
 def verify_manifest(pack_dir: Path) -> Tuple[bool, List[str]]:
-    # Implementation stub for API compatibility
-    return True, []
+    manifest_path = pack_dir / "meta" / "REPO_STATE.json"
+    if not manifest_path.exists():
+        return False, ["Manifest missing: meta/REPO_STATE.json"]
+    
+    try:
+        manifest = json.loads(read_text(manifest_path))
+    except Exception as e:
+        return False, [f"Manifest invalid JSON: {e}"]
+        
+    errors = []
+    repo_dir = pack_dir / "repo"
+    
+    files = manifest.get("files", [])
+    for entry in files:
+        rel_path = entry.get("path")
+        expected_hash = entry.get("hash")
+        
+        # Determine file path (handle potential subdirectory nesting)
+        file_path = repo_dir.joinpath(rel_path)
+        
+        if not file_path.exists():
+            errors.append(f"File missing: {rel_path}")
+            continue
+            
+        computed = hash_file(file_path)
+        if computed != expected_hash:
+            errors.append(f"Hash mismatch for {rel_path}: expected {expected_hash}, got {computed}")
+            
+    return len(errors) == 0, errors
 
 
 def make_pack(
