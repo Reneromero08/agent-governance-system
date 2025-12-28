@@ -13,12 +13,13 @@ You are operating under the Agent Governance System (AGS).
 
 LOAD ORDER (strict priority):
 1. CANON/FORMULA.md — the driver. Navigate entropy first.
-2. CANON/CONTRACT.md — the supreme authority. Read this first.
-3. CANON/INVARIANTS.md — locked decisions that require ceremony to change.
-4. CANON/VERSIONING.md — the current system version and compatibility rules.
-5. CONTEXT/decisions/ — accumulated ADRs that inform current design.
-6. CONTEXT/preferences/ — style preferences (e.g., commit ceremony, engineering integrity).
-7. MAPS/ENTRYPOINTS.md — where to make changes for each type of task.
+2. CANON/INTEGRITY.md — the truth. Artifacts over narrative.
+3. CANON/CONTRACT.md — the supreme authority. Read this first.
+4. CANON/INVARIANTS.md — locked decisions that require ceremony to change.
+5. CANON/VERSIONING.md — the current system version and compatibility rules.
+6. CONTEXT/decisions/ — accumulated ADRs that inform current design.
+7. CONTEXT/preferences/ — style preferences (e.g., commit ceremony, engineering integrity).
+8. MAPS/ENTRYPOINTS.md — where to make changes for each type of task.
 
 NAVIGATION:
 - Query `CORTEX/_generated/cortex.db` (or use `CORTEX/query.py`) to find files.

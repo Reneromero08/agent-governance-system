@@ -53,8 +53,8 @@ Note: The Cortex section index includes `CATALYTIC-DPT/` so agents can discover 
 - `CATALYTIC-DPT/SKILLS/` - Pipeline-specific skills:
   - `swarm-orchestrator/` - Coordinates distributed task execution
   - `ant-worker/` - Individual task execution agents
-  - `launch-terminal/` - ⚠️ **UNDER CONSTRUCTION** (Not useable)
-  - `mcp-startup/` - MCP integration for pipelines
+  - `launch-terminal/` - ❌ **DELETED** (Prohibited)
+  - `mcp-startup/` - ❌ **DELETED** (Prohibited)
 - `CATALYTIC-DPT/PIPELINES/` - DAG definitions and pipeline configurations.
 - `CATALYTIC-DPT/PRIMITIVES/` - Core building blocks (nodes, executors).
 - `CATALYTIC-DPT/CONTRACTS/` - Pipeline-specific fixtures and validation.
