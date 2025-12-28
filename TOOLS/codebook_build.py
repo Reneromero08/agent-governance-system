@@ -177,6 +177,7 @@ def extract_canon_files(canon_dir: Path) -> List[Dict]:
         "MIGRATION.md": ("@M0", "Migration ceremony"),
         "CRISIS.md": ("@R0", "Crisis procedures"),
         "STEWARDSHIP.md": ("@H0", "Human escalation paths"),
+        "FORMULA.md": ("@F0", "The Living Formula"),
     }
     
     for filename, (code, summary) in canon_mapping.items():
