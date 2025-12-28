@@ -2,6 +2,27 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.61.0] - 2025-12-27
+
+### Phase 7.3: Catalytic Swarm Execution Elision
+
+#### Added
+- `PIPELINES/swarm_runtime.py`: Swarm-level reuse detection and execution elision.
+  - Computes deterministic swarm hash from canonical spec + pipeline intents + capability hashes.
+  - Persists swarm receipts in `_swarms/_receipts/` keyed by swarm hash.
+  - On identical swarm re-run: skips ALL pipeline/skill/model execution; emits new `SWARM_RECEIPT.json` and `SWARM_CHAIN.json` referencing prior proofs.
+  - Fail-closed: if any referenced pipeline receipt is missing or tampered, reuse is rejected.
+- `TESTBENCH/test_swarm_reuse.py`: Fixture proving:
+  - First run executes normally (`elided: false`).
+  - Identical re-run elides execution (`elided: true`).
+  - Chain/receipt artifacts re-emitted correctly.
+  - Tampered pipeline proof fails reuse verification.
+
+#### Changed
+- `ROADMAP_V2.3.md`: Phase 7.3 marked DONE with acceptance criteria.
+
+---
+
 ## [1.60.0] - 2025-12-27
 
 ### Phase 6.4: MCP Adapter Contracts
