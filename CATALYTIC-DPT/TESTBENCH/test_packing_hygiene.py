@@ -32,6 +32,9 @@ def _dir_digest(root: Path) -> str:
 
 
 def test_packer_determinism_catalytic_dpt() -> None:
+    import os
+    os.environ["LLM_PACKER_DETERMINISTIC_TIMESTAMP"] = "2025-01-01T00:00:00"
+    
     packs_root = Path("MEMORY/LLM_PACKER/_packs").resolve()
     tmp_root = packs_root / "_system" / "_tmp_test_phase3_packing_hygiene"
     out_a = tmp_root / "pack-a"
