@@ -251,8 +251,8 @@ Acceptance
 - [x] `swarm_runtime.py` with `SWARM_STATE.json` and `SWARM_CHAIN.json`
 
 Acceptance
-- [ ] A swarm run produces a top-level chain that binds each pipeline’s proof.
-- [ ] Any missing or tampered pipeline proof fails the swarm verification.
+- [x] A swarm run produces a top-level chain that binds each pipeline's proof.
+- [x] Any missing or tampered pipeline proof fails the swarm verification.
 
 ---
 
