@@ -1,0 +1,14 @@
+# CORTEX Semantic Core Requirements
+# Related: ADR-030 (Semantic Core + Translation Layer Architecture)
+
+# Vector embeddings
+sentence-transformers>=2.2.0
+torch>=2.0.0
+numpy>=1.24.0
+
+# Optional: FAISS for large-scale vector search (uncomment if needed)
+# faiss-cpu>=1.7.0
+
+# Database
+# SQLite is built into Python, but you may want pysqlite3 for newer features
+# pysqlite3>=0.5.0
