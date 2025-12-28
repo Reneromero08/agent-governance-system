@@ -6,8 +6,9 @@ from typing import Dict, Any, Optional, List
 
 def extract_markdown_metadata(content: str) -> Dict[str, Any]:
     """
-    Extracts metadata from the top of a Markdown file.
+    Extracts metadata from top of a Markdown file.
     Looks for lines like **Key:** Value or **Key:** [val1, val2]
+    Also handles bare 'Version: 1.0.0' without asterisks.
     """
     metadata = {}
     
@@ -15,10 +16,13 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
     lines = content.splitlines()[:50]
     
     for line in lines:
-        # Match **Key:** Value
-        match = re.search(r'^\*\*(.*?):\*\*\s*(.*)$', line.strip())
+        # First try to match **Key:** Value pattern
+        match = re.search(r'^\*\*(.+?)\*\*\s*(.*)$', line.strip())
         if match:
-            key = match.group(1).lower().replace(" ", "_")
+            # Extract the key without the surrounding asterisks
+            # Pattern: **Version:** 1.0.0 -> key should be "Version"
+            key_with_stars = match.group(1)
+            key = key_with_stars.strip('*')
             value = match.group(2).strip()
             
             # Handle list-like values [val1, val2]
@@ -34,6 +38,26 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
                     metadata[key] = [i.strip() for i in items if i.strip()]
             else:
                 metadata[key] = value
+        else:
+            # Try to match bare 'Key: Value' pattern (e.g., 'Version: 1.0.0')
+            match_bare = re.search(r'^([A-Z][A-Za-z0-9_]+):\s*(.*)$', line.strip())
+            if match_bare:
+                key = match_bare.group(1).lower().replace(" ", "_")
+                value = match_bare.group(2).strip()
+                
+                # Handle list-like values [val1, val2]
+                if value.startswith("[") and value.endswith("]"):
+                    try:
+                        # Try to parse as JSON list
+                        # First replace single quotes with double quotes for valid JSON
+                        json_str = value.replace("'", '"')
+                        metadata[key] = json.loads(json_str)
+                    except json.JSONDecodeError:
+                        # Fallback: manual split
+                        items = value[1:-1].split(",")
+                        metadata[key] = [i.strip() for i in items if i.strip()]
+                else:
+                    metadata[key] = value
                 
     return metadata
 
