@@ -59,10 +59,10 @@ def _pipeline_dir(pipeline_id: str) -> Path:
     return path
 
 
-def _write_policy_proof(pipeline_id: str, policy: Dict[str, Any]) -> None:
+def _write_policy(pipeline_id: str, policy: Dict[str, Any]) -> None:
     pdir = _pipeline_dir(pipeline_id)
     pdir.mkdir(parents=True, exist_ok=True)
-    policy_path = pdir / "POLICY_PROOF.json"
+    policy_path = pdir / "POLICY.json"
     _atomic_write_bytes(policy_path, canonical_json_bytes(policy))
 
 
@@ -662,7 +662,13 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
     preflight_data = _load_json_output(preflight_res.stdout)
     admission_data = _load_json_output(admit_res.stdout)
     intent_sha256 = hashlib.sha256(Path(intent_path).read_bytes()).hexdigest()
+    
+    revokes = _load_revokes()
+    revoked_list = sorted(set(revokes.get("revoked_capabilities", [])))
+
     policy = {
+        "policy_version": "1.0.0",
+        "revoked_capabilities": revoked_list,
         "preflight": {
             "verdict": preflight_data.get("verdict"),
             "canon_sha256": preflight_data.get("canon_sha256"),
@@ -677,7 +683,7 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
             "reasons": admission_data.get("reasons", []),
         },
     }
-    _write_policy_proof(pipeline_id, policy)
+    _write_policy(pipeline_id, policy)
 
     sys.stdout.write("AGS: running pipeline\n")
     res = subprocess.run(run_cmd, cwd=str(REPO_ROOT))

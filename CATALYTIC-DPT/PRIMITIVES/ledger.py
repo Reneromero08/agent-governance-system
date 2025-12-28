@@ -85,7 +85,11 @@ class Ledger:
         if self._expected_size is not None and prior_size < self._expected_size:
             raise RuntimeError("attempted non-append write detected (file truncated or rewritten)")
 
-        fd = os.open(str(self.path), os.O_WRONLY | os.O_CREAT | os.O_APPEND, 0o644)
+        flags = os.O_WRONLY | os.O_CREAT | os.O_APPEND
+        if hasattr(os, "O_BINARY"):
+            flags |= os.O_BINARY
+
+        fd = os.open(str(self.path), flags, 0o644)
         try:
             written = 0
             while written < len(line):
@@ -99,7 +103,8 @@ class Ledger:
 
         after_size = self.path.stat().st_size
         if after_size != prior_size + len(line):
-            raise RuntimeError("attempted non-append write detected (unexpected size delta)")
+            # print(f"DEBUG: Ledger append mismatch: prior={prior_size} len={len(line)} after={after_size}", file=sys.stderr)
+            raise RuntimeError(f"attempted non-append write detected (unexpected size delta: expected {prior_size + len(line)}, got {after_size})")
         self._expected_size = after_size
 
     def read_all(self) -> list[dict[str, Any]]:

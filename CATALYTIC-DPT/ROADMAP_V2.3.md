@@ -61,15 +61,17 @@ DONE when all are true:
 - [x] Proof chain exists and is verifiable.
 - [x] CLI verification for pipelines is fail-closed.
 
-### Phase 6 Gate: Swarm integration surface (IN PROGRESS)
+### Phase 6 Gate: Swarm integration surface (DONE)
 DONE when all are true:
 - [x] Phase 6.1 model-free bridge exists (emit pipeline spec, run + verify).
 - [x] Phase 6.2 router slot exists (external plan producer, schema-validated, capped, fail-closed).
 - [x] Phase 6.3 adapter contract exists (skills/MCPs wrap schema-valid jobspec; no runtime bypass).
 - [x] Phase 6.4 MCP adapter is first-class (schema + tests + caps + deterministic transcript hashing).
-- [x] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs). (commit: this changeset)
-- [x] Phase 6.6 Capability pinning and revocation exists (explicit, auditable). (commit: this changeset)
-- [x] Phase 6.7 Registry immutability backstop exists (canonical validation + adversarial tests). (commit: this changeset)
+- [x] Phase 6.5 Skill registry exists (hash-addressed capabilities; inclusion in proofs).
+- [x] Phase 6.6 Capability pinning exists (explicit, auditable).
+- [x] Phase 6.7 Registry immutability backstop exists (canonical validation + adversarial tests).
+- [x] Phase 6.8 Capability versioning semantics (no-history-break).
+- [x] Phase 6.9 Capability revocation semantics (no-history-break). (commit: this changeset)
 
 ---
 
@@ -227,17 +229,17 @@ Acceptance
 
 ---
 
-## PHASE 6.9: Capability revocation semantics (no-history-break)
+## PHASE 6.9: Capability revocation semantics (no-history-break) (DONE)
 Intent
 Block future use of a capability without breaking historical verification of pre-revocation runs.
 
 Deliverables
-- [ ] `CAPABILITY_REVOKES.json` exists (deterministic ordering) and is enforced at route time with `REVOKED_CAPABILITY`.
-- [ ] Pipeline verification rejects post-revocation use while preserving verification of pre-revocation pipelines (policy snapshot).
-- [ ] Tests prove route rejection, historical verify pass, and post-revocation verify failure.
+- [x] `CAPABILITY_REVOKES.json` exists (deterministic ordering) and is enforced at route time with `REVOKED_CAPABILITY`.
+- [x] Pipeline verification rejects post-revocation use while preserving verification of pre-revocation pipelines (policy snapshot).
+- [x] Tests prove route rejection, historical verify pass, and post-revocation verify failure.
 
 Acceptance
-- [ ] A revoked capability cannot be used in new accepted work, but old work remains mechanically verifiable.
+- [x] A revoked capability cannot be used in new accepted work, but old work remains mechanically verifiable.
 
 ---
 
