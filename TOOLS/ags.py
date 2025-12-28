@@ -613,6 +613,9 @@ def main(argv: List[str] | None = None) -> int:
     preflight_p.add_argument("--allow-dirty-tracked", action="store_true", help="Allow dirty tracked files (still reported)")
     preflight_p.add_argument("--json", action="store_true", help="Emit JSON (default)")
 
+    admit_p = sub.add_parser("admit", help="Admission control (intent gate, JSON-only)")
+    admit_p.add_argument("--intent", required=True, help="Path to intent.json")
+
     args = parser.parse_args(argv)
 
     try:
@@ -642,6 +645,10 @@ def main(argv: List[str] | None = None) -> int:
             if bool(args.json):
                 forwarded.append("--json")
             res = subprocess.run(preflight + forwarded, cwd=str(REPO_ROOT))
+            return int(res.returncode)
+        if args.cmd == "admit":
+            admit = [sys.executable, str(REPO_ROOT / "TOOLS" / "admission.py"), "--intent", str(args.intent)]
+            res = subprocess.run(admit, cwd=str(REPO_ROOT))
             return int(res.returncode)
     except Exception as e:
         sys.stderr.write(f"ERROR: {e}\n")
