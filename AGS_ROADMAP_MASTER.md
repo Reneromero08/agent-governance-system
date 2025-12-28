@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (Master)
-version: 3.2
+version: 3.3
 last_updated: 2025-12-28
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -9,6 +9,7 @@ source_docs:
   - CONTEXT/archive/planning/AGS_3.0_COMPLETED.md
   - CONTEXT/decisions/ADR-027-dual-db-architecture.md
   - CONTEXT/decisions/ADR-028-semiotic-compression-layer.md
+  - CONTEXT/decisions/ADR-030-semantic-core-architecture.md
 ---
 
 # Purpose
@@ -57,6 +58,17 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 
 ---
 
+# Lane V: Semantic Core (Vector Retrieval) (P1)
+
+## V1. Vector Foundation (P1)
+- [x] **ADR-030**: Design Semantic Core architecture for big/small model pair (Claude Oracle / Ant Worker).
+- [x] Implement `embeddings.py` (384-dim sentence transformers).
+- [x] Build `vector_indexer.py` (Batch indexing + CLI).
+- [x] Implement `semantic_search.py` (Cosine similarity, Top-K retrieval).
+- [x] Standard: 80% token reduction via semantic pointer expansion.
+
+---
+
 # Lane H: System 2 Governance (P1)
 
 ## H1. The Immutable Ledger (P1)
@@ -92,7 +104,8 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [x] Create CLI tool to report system health metrics.
 
 ## G2. Feedback Loops (P2)
-- [ ] Implement feedback mechanisms where agents report "Resonance" of their tasks.
+- [x] Implement feedback mechanisms where agents report "Resonance" of their tasks (`CORTEX/feedback.py`).
+- [ ] Aggregate feedback to adjust @F0 Global Formula weights.
 
 ---
 
