@@ -4,14 +4,20 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 
 ## [1.60.0] - 2025-12-27
 
-### Phase 6.4: MCP Adapter Contracts (Schema Only)
+### Phase 6.4: MCP Adapter Contracts
 - **Added** `SCHEMAS/mcp_adapter.schema.json`: Strict schema for MCP adapter execution (caps, transcript hashing).
+- **Added** `SKILLS/mcp-adapter/`: Official skill wrapper for MCP servers.
+- **Added** `SKILLS/mcp-adapter/scripts/wrapper.py`: Subprocess executor enforcing strict governance caps.
+- **Verified** `TESTBENCH/test_mcp_adapter_schema.py` and `test_ags_phase6_mcp_adapter_e2e.py`: Verified schema and runtime governance.
 
 ### Phase 6.5: Skill Registry (Hash-Addressed Capabilities)
 - **Added** `SKILLS/registry.json`: Canonical, versioned mapping of Skill IDs to Capability Hashes.
 - **Added** `PRIMITIVES/skills.py`: Skill registry loading, resolution, and strict integrity verification.
 - **Verified** `TESTBENCH/test_skills_registry.py`: Tests for registry loading, resolution, and integrity checks (fail-closed).
 - **Changed** `TOOLS/ags.py`: Integrated `skill_id` resolution into routing logic.
+
+### Performance
+- **Optimized** `PRIMITIVES/cas_store.py`: Eliminated redundant file copy in `put_stream` (100% write IO reduction).
 
 ## [1.55.0] - 2025-12-26
 

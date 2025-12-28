@@ -108,19 +108,8 @@ class CatalyticStore:
                 return digest
 
             final_path.parent.mkdir(parents=True, exist_ok=True)
-            tmp_path = self._temp_path(final_path.parent)
-            try:
-                with open(staging_path, "rb") as src, open(tmp_path, "wb") as dst:
-                    while True:
-                        chunk = src.read(chunk_size)
-                        if not chunk:
-                            break
-                        dst.write(chunk)
-                    dst.flush()
-                    os.fsync(dst.fileno())
-                self._commit_temp(tmp_path, final_path)
-            finally:
-                tmp_path.unlink(missing_ok=True)
+
+            self._commit_temp(staging_path, final_path)
             return digest
         finally:
             staging_path.unlink(missing_ok=True)

@@ -122,9 +122,11 @@ class AGSMCPServer:
     """AGS MCP Server implementation."""
 
     def __init__(self):
+        import uuid
         self.tools_schema = load_schema("tools")
         self.resources_schema = load_schema("resources")
         self._initialized = False
+        self.session_id = str(uuid.uuid4())
 
     def handle_request(self, request: Dict) -> Dict:
         """Handle a JSON-RPC 2.0 request."""
@@ -185,6 +187,7 @@ class AGSMCPServer:
                 
             entry = {
                 "timestamp": datetime.now().isoformat(),
+                "session_id": self.session_id,
                 "tool": tool,
                 "arguments": safe_args,
                 "status": result_type,

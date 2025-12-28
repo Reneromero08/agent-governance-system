@@ -119,13 +119,13 @@ Deliverables
   - request envelope schema (canonical JSON)
   - stdout/stderr caps, timeout cap, exit code rules
   - transcript hashing rules (hash of bytes actually read, not “what should have been read”)
-- [ ] Implementation in `ags.py` (or a dedicated module) that:
+- [x] Implementation in `ags.py` (or a dedicated module) that:
   - executes MCP server as a subprocess
   - rejects any stderr output (or allowlisted patterns if absolutely necessary)
   - enforces byte caps on stdout
   - produces a deterministic adapter output artifact (canonical JSON) plus transcript hash
   - compiles to a Phase 6.3 adapter + schema-valid jobspec (no runtime bypass)
-- [ ] Tests: happy path + reject cases
+- [x] Tests: happy path + reject cases
   - over-cap output
   - timeout
   - non-zero exit
@@ -135,9 +135,9 @@ Deliverables
   - backstop: adapter step runs in a pipeline and strict verify detects output tampering (`CATALYTIC-DPT/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py`)
 
 Acceptance
-- [ ] MCP step can run in a pipeline and produce proof-valid artifacts.
-- [ ] Re-running the same MCP step (same inputs) yields byte-identical artifacts.
-- [ ] Any cap breach fails closed with a stable error code.
+- [x] MCP step can run in a pipeline and produce proof-valid artifacts.
+- [x] Re-running the same MCP step (same inputs) yields byte-identical artifacts.
+- [x] Any cap breach fails closed with a stable error code.
 
 ---
 
@@ -172,8 +172,8 @@ Capability hash (v1)
 - It is a pin on *what the skill can do*, not who authored it.
 
 Acceptance
-- [ ] Skill resolution is hash-addressed and tamper-evident.
-- [ ] Proof/ledger includes enough to reconstruct which skill capability was used.
+- [x] Skill resolution is hash-addressed and tamper-evident.
+- [x] Proof/ledger includes enough to reconstruct which skill capability was used.
 
 ---
 
@@ -305,7 +305,7 @@ Acceptance
 ---
 
 ## Immediate next actions (pick one, do the smallest)
-1) [DONE (Part 1)] **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
+1) [DONE] **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
 2) [DONE] **PHASE 6.5**: Create `SKILLS/registry.json` + resolver + tests (no plan integration yet).
 3) **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
 4) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
