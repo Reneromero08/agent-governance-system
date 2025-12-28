@@ -46,16 +46,15 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     domain_dir = reg_root / "domain"
 
     adapter = {
-        "adapter_version": "1.0.0",
-        "name": "ant-worker-copy-v1",
-        "command": [
-            "python3",
-            "CATALYTIC-DPT/SKILLS/ant-worker/scripts/run.py",
-            str(task_path.relative_to(REPO_ROOT)).replace("\\", "/"),
-            str(result_path.relative_to(REPO_ROOT)).replace("\\", "/"),
-        ],
-        "jobspec": {
-            "job_id": "cap-ant-worker-copy-v1",
+                    "adapter_version": "1.0.0",
+                    "name": "ant-worker-copy-v1",
+                    "command": [
+                        sys.executable,
+                        "CATALYTIC-DPT/SKILLS/ant-worker/scripts/run.py",
+                        str(task_path.relative_to(REPO_ROOT)).replace("\\", "/"),
+                        str(result_path.relative_to(REPO_ROOT)).replace("\\", "/"),
+                    ],
+                    "jobspec": {            "job_id": "cap-ant-worker-copy-v1",
             "phase": 6,
             "task_type": "adapter_execution",
             "intent": "capability: ant-worker copy (Phase 6.5)",

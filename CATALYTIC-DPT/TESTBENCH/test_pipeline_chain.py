@@ -74,7 +74,7 @@ def _setup_pipeline(tmp_root: Path, *, pipeline_id: str) -> tuple[Path, Path]:
                 "jobspec_path": jobspec1_rel,
                 "memoize": False,
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     (
                         "from pathlib import Path;"
@@ -88,7 +88,7 @@ def _setup_pipeline(tmp_root: Path, *, pipeline_id: str) -> tuple[Path, Path]:
                 "jobspec_path": jobspec2_rel,
                 "memoize": False,
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     (
                         "from pathlib import Path;"
