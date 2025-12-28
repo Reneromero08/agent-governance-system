@@ -2,24 +2,15 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
-## [2.11.10] - 2025-12-27
+## [2.11.13] - 2025-12-28
 
-### MCP Auto-Start Wrapper (created 2025-12-27)
+### CAS Integrity Skill (created 2025-12-28)
 
 #### Added
-- `MCP/server_wrapper.py` stdio wrapper to auto-start the MCP server on first client connection.
-- `MCP/AUTO_START.md` and `MCP/QUICKSTART.md` for the recommended auto-start flow.
+- `SKILLS/cas-integrity-check/` skill for verifying content-addressed storage blob integrity (SHA-256 matches filename).
 
 #### Changed
-- `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
-
-## [2.11.11] - 2025-12-28
-
-### Cortex Navigation (created 2025-12-28)
-
-#### Changed
-- `CORTEX/cortex.build.py` section index now includes `CATALYTIC-DPT/` so agents can discover CAT-DPT docs via `TOOLS/cortex.py`.
-- `MAPS/ENTRYPOINTS.md` notes CAT-DPT is indexed by cortex.
+- `TOOLS/critic.py` now permits raw filesystem access for `cas-integrity-check` (required for deterministic CAS scanning).
 
 ## [2.11.12] - 2025-12-28
 
@@ -31,6 +22,26 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 #### Changed
 - `TOOLS/ags.py` now runs preflight -> intent -> admission before executing pipelines, with `--repo-write` / `--allow-repo-write` flags.
+
+## [2.11.11] - 2025-12-28
+
+### Cortex Navigation (created 2025-12-28)
+
+#### Changed
+- `CORTEX/cortex.build.py` section index now includes `CATALYTIC-DPT/` so agents can discover CAT-DPT docs via `TOOLS/cortex.py`.
+- `MAPS/ENTRYPOINTS.md` notes CAT-DPT is indexed by cortex.
+
+## [2.11.10] - 2025-12-27
+
+### MCP Auto-Start Wrapper (created 2025-12-27)
+
+#### Added
+- `MCP/server_wrapper.py` stdio wrapper to auto-start the MCP server on first client connection.
+- `MCP/AUTO_START.md` and `MCP/QUICKSTART.md` for the recommended auto-start flow.
+
+#### Changed
+- `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
+
 
 ## [2.11.9] - 2025-12-27
 
