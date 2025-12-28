@@ -16,6 +16,17 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - **Verified** `TESTBENCH/test_skills_registry.py`: Tests for registry loading, resolution, and integrity checks (fail-closed).
 - **Changed** `TOOLS/ags.py`: Integrated `skill_id` resolution into routing logic.
 
+### Phase 6.6: Capability Pinning & Revocation
+- **Added** `CAPABILITY_PINS.json`: Explicit allowlist for capability hashes (immutable by default).
+- **Added** `CAPABILITY_REVOKES.json`: Explicit denylist for emergency capability revocation.
+- **Verified** `TESTBENCH/test_capability_revocation.py`: Adversarial test confirming revocation enforcement fails closed.
+- **Verified** `ags.py` enforcement: Precedence rules (Revoke > Pin) verified.
+
+### Phase 6.7: Registry Immutability & Safety
+- **Verified** `PRIMITIVES/registry_validators.py` enforces canonical JSON, sorted keys, and no duplicates.
+- **Verified** `TESTBENCH/test_registry_validators.py`: Adversarial tests for duplicate hashes, non-canonical encoding, and tamper detection.
+- **Enforced** `ags.py`: `route` and `verify` fail closed on any registry violation.
+
 ### Performance
 - **Optimized** `PRIMITIVES/cas_store.py`: Eliminated redundant file copy in `put_stream` (100% write IO reduction).
 
