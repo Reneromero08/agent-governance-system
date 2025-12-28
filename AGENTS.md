@@ -218,3 +218,47 @@ Before any Git command:
 Violation of this ceremony is a **critical governance failure**.
 
 See also: `CONTEXT/preferences/STYLE-001-commit-ceremony.md`
+
+## 11. The Law (pre-commit test requirement)
+
+**🚨 NO COMMIT WITH FAILING TESTS 🚨**
+
+This section exists because on 2025-12-27, an agent committed code with failing tests
+using `--no-verify`, causing governance violations. See `CONTEXT/decisions/ADR-022-why-flash-bypassed-the-law.md`.
+
+### Before ANY commit, agents MUST:
+
+#### 11.1 Run tests and verify they pass
+```bash
+py -m pytest CATALYTIC-DPT/TESTBENCH/ -v
+```
+**If tests fail, DO NOT COMMIT. Fix them first.**
+
+#### 11.2 Read FULL test output
+When tests fail:
+- **DO NOT** assume what the error is
+- **READ** the actual error message (look for `FAIL`, `ERROR`, `rc=`)
+- **LOOK** for the root cause, not just the assertion message
+
+#### 11.3 Never use `--no-verify` without:
+- Running tests manually and confirming they PASS
+- Documenting WHY you're bypassing hooks
+- Getting explicit user approval
+- Adding justification to the commit message
+
+#### 11.4 Preflight failures are not logic bugs
+If you see `FAIL preflight rc=2` with reasons like `DIRTY_TRACKED`:
+- This is NOT a governance logic bug
+- This is because the git repo has uncommitted changes
+- Tests that call `ags run` will fail on dirty repos
+- **FIX**: Test governance logic directly using:
+  - `ags route` for routing/revocation checks
+  - `catalytic pipeline verify` for verification checks
+
+#### 11.5 The test output truncation trap
+Test output in agent tools may be truncated. If you see partial output:
+1. Redirect output to a file: `py -m pytest ... 2>&1 | Out-File test.txt`
+2. Read the file to see the FULL error
+3. Never assume the error from truncated output
+
+**Violation of The Law is a critical governance failure.**
