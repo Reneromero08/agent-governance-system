@@ -17,6 +17,11 @@ All notable changes to Agent Governance System will be documented in this file.
 - **TOOLS/terminal_hunter.py**: Scanner for terminal-spawning code patterns.
 - **CORTEX/system1_builder.py**: System 1 Database with SQLite FTS5 for fast retrieval (schema complete, runtime testing pending).
 - **CORTEX/indexer.py**: Markdown parser and indexer for CANON directory (Lane C2).
+- **CORTEX/summarizer.py**: Automated summarization agent using local LLM integration (Lane C3).
+- **CORTEX/query.py**: CLI query tool for System 1 Database (Lane C3).
+- **CORTEX/scl.py**: Semiotic Compression Layer (SCL) for symbol generation and expansion (Lane I1).
+- **CORTEX/formula.py**: Living Formula metrics calculator (Essence, Entropy, Resonance, Fractal Dimension) (Lane G1).
+- **CORTEX/system2_ledger.py**: System 2 Immutable Ledger with Merkle root verification (Lane H1).
 - **SKILLS/system1-verify**: Verification skill to ensure system1.db matches repository state.
 - **TOOLS/verify_f3.py**: Verification script for F3 CAS prototype.
 - **meta/FILE_INDEX.json**: File-level index with content hashes and section metadata.
