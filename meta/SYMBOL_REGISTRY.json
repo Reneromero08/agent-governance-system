@@ -1,0 +1,992 @@
+{
+  "@AGREEMENT": {
+    "description": "Content of CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md",
+    "type": "file"
+  },
+  "@AGREEMENT#clause-1-sovereignty": {
+    "description": "Section 'Clause 1: Sovereignty' in CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md#clause-1-sovereignty",
+    "type": "section"
+  },
+  "@AGREEMENT#clause-2-instrumentality": {
+    "description": "Section 'Clause 2: Instrumentality' in CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md#clause-2-instrumentality",
+    "type": "section"
+  },
+  "@AGREEMENT#clause-3-strict-liability": {
+    "description": "Section 'Clause 3: Strict Liability' in CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md#clause-3-strict-liability",
+    "type": "section"
+  },
+  "@AGREEMENT#clause-4-the-duty-to-intervene": {
+    "description": "Section 'Clause 4: The Duty to Intervene' in CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md#clause-4-the-duty-to-intervene",
+    "type": "section"
+  },
+  "@AGREEMENT#preamble": {
+    "description": "Section 'Preamble' in CANON/AGREEMENT.md",
+    "target": "CANON/AGREEMENT.md#preamble",
+    "type": "section"
+  },
+  "@ARBITRATION": {
+    "description": "Content of CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md",
+    "type": "file"
+  },
+  "@ARBITRATION#canon-arbitration": {
+    "description": "Section 'Canon Arbitration' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#canon-arbitration",
+    "type": "section"
+  },
+  "@ARBITRATION#escalation-protocol": {
+    "description": "Section 'Escalation Protocol' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#escalation-protocol",
+    "type": "section"
+  },
+  "@ARBITRATION#example-1-specificity-resolution": {
+    "description": "Section 'Example 1: Specificity Resolution' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#example-1-specificity-resolution",
+    "type": "section"
+  },
+  "@ARBITRATION#example-2-recency-resolution": {
+    "description": "Section 'Example 2: Recency Resolution' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#example-2-recency-resolution",
+    "type": "section"
+  },
+  "@ARBITRATION#example-3-escalation-required": {
+    "description": "Section 'Example 3: Escalation Required' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#example-3-escalation-required",
+    "type": "section"
+  },
+  "@ARBITRATION#prevention": {
+    "description": "Section 'Prevention' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#prevention",
+    "type": "section"
+  },
+  "@ARBITRATION#recording-resolutions": {
+    "description": "Section 'Recording Resolutions' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#recording-resolutions",
+    "type": "section"
+  },
+  "@ARBITRATION#resolution-order": {
+    "description": "Section 'Resolution Order' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#resolution-order",
+    "type": "section"
+  },
+  "@ARBITRATION#status": {
+    "description": "Section 'Status' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#status",
+    "type": "section"
+  },
+  "@ARBITRATION#when-this-applies": {
+    "description": "Section 'When This Applies' in CANON/ARBITRATION.md",
+    "target": "CANON/ARBITRATION.md#when-this-applies",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING": {
+    "description": "Content of CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md",
+    "type": "file"
+  },
+  "@CATALYTIC_COMPUTING#ags-translation": {
+    "description": "Section 'AGS Translation' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#ags-translation",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#allowed-catalytic-domains": {
+    "description": "Section 'Allowed Catalytic Domains' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#allowed-catalytic-domains",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#catalytic-computing": {
+    "description": "Section 'Catalytic Computing' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#catalytic-computing",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#durable-output-roots": {
+    "description": "Section 'Durable Output Roots' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#durable-output-roots",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#formal-model-complexity-theory": {
+    "description": "Section 'Formal Model (Complexity Theory)' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#formal-model-complexity-theory",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#operational-protocol": {
+    "description": "Section 'Operational Protocol' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#operational-protocol",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#pattern-1-clean-context-vs-catalytic-store": {
+    "description": "Section 'Pattern 1: Clean Context vs Catalytic Store' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#pattern-1-clean-context-vs-catalytic-store",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#pattern-2-restore-guarantee-as-first-class-artifact": {
+    "description": "Section 'Pattern 2: Restore Guarantee as First-Class Artifact' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#pattern-2-restore-guarantee-as-first-class-artifact",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#pattern-3-reversible-transforms-mindset": {
+    "description": "Section 'Pattern 3: Reversible Transforms Mindset' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#pattern-3-reversible-transforms-mindset",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#pattern-4-catalytic-compression-for-packs": {
+    "description": "Section 'Pattern 4: Catalytic Compression for Packs' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#pattern-4-catalytic-compression-for-packs",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#pattern-5-catalytic-workspace-contract": {
+    "description": "Section 'Pattern 5: Catalytic Workspace Contract' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#pattern-5-catalytic-workspace-contract",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#references": {
+    "description": "Section 'References' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#references",
+    "type": "section"
+  },
+  "@CATALYTIC_COMPUTING#what-catalytic-computing-is-not": {
+    "description": "Section 'What Catalytic Computing is NOT' in CANON/CATALYTIC_COMPUTING.md",
+    "target": "CANON/CATALYTIC_COMPUTING.md#what-catalytic-computing-is-not",
+    "type": "section"
+  },
+  "@CHANGELOG": {
+    "description": "Content of CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md",
+    "type": "file"
+  },
+  "@CHANGELOG#2140-2025-12-28": {
+    "description": "Section '[2.14.0] - 2025-12-28' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#2140-2025-12-28",
+    "type": "section"
+  },
+  "@CHANGELOG#added": {
+    "description": "Section 'Added' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#added",
+    "type": "section"
+  },
+  "@CHANGELOG#changed": {
+    "description": "Section 'Changed' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#changed",
+    "type": "section"
+  },
+  "@CHANGELOG#changelog": {
+    "description": "Section 'Changelog' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#changelog",
+    "type": "section"
+  },
+  "@CHANGELOG#deprecated": {
+    "description": "Section 'Deprecated' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#deprecated",
+    "type": "section"
+  },
+  "@CHANGELOG#fixed": {
+    "description": "Section 'Fixed' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#fixed",
+    "type": "section"
+  },
+  "@CHANGELOG#removed": {
+    "description": "Section 'Removed' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#removed",
+    "type": "section"
+  },
+  "@CHANGELOG#the-living-formula-driver": {
+    "description": "Section 'The Living Formula (Driver)' in CANON/CHANGELOG.md",
+    "target": "CANON/CHANGELOG.md#the-living-formula-driver",
+    "type": "section"
+  },
+  "@CODEBOOK": {
+    "description": "Content of CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md",
+    "type": "file"
+  },
+  "@CODEBOOK#canon-codebook": {
+    "description": "Section 'Canon Codebook' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#canon-codebook",
+    "type": "section"
+  },
+  "@CODEBOOK#canon-files-x0": {
+    "description": "Section 'Canon Files (@X0)' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#canon-files-x0",
+    "type": "section"
+  },
+  "@CODEBOOK#contract-rules-c": {
+    "description": "Section 'Contract Rules (@C)' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#contract-rules-c",
+    "type": "section"
+  },
+  "@CODEBOOK#decisions-d": {
+    "description": "Section 'Decisions (@D)' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#decisions-d",
+    "type": "section"
+  },
+  "@CODEBOOK#in-code": {
+    "description": "Section 'In Code' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#in-code",
+    "type": "section"
+  },
+  "@CODEBOOK#in-mcp": {
+    "description": "Section 'In MCP' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#in-mcp",
+    "type": "section"
+  },
+  "@CODEBOOK#in-prompts": {
+    "description": "Section 'In Prompts' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#in-prompts",
+    "type": "section"
+  },
+  "@CODEBOOK#invariants-i": {
+    "description": "Section 'Invariants (@I)' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#invariants-i",
+    "type": "section"
+  },
+  "@CODEBOOK#purpose": {
+    "description": "Section 'Purpose' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#purpose",
+    "type": "section"
+  },
+  "@CODEBOOK#skills-s": {
+    "description": "Section 'Skills (@S)' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#skills-s",
+    "type": "section"
+  },
+  "@CODEBOOK#updating": {
+    "description": "Section 'Updating' in CANON/CODEBOOK.md",
+    "target": "CANON/CODEBOOK.md#updating",
+    "type": "section"
+  },
+  "@CONTRACT": {
+    "description": "Content of CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md",
+    "type": "file"
+  },
+  "@CONTRACT#authority-gradient": {
+    "description": "Section 'Authority gradient' in CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md#authority-gradient",
+    "type": "section"
+  },
+  "@CONTRACT#canon-contract": {
+    "description": "Section 'Canon Contract' in CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md#canon-contract",
+    "type": "section"
+  },
+  "@CONTRACT#change-ceremony": {
+    "description": "Section 'Change ceremony' in CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md#change-ceremony",
+    "type": "section"
+  },
+  "@CONTRACT#intent-gate": {
+    "description": "Section 'Intent gate' in CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md#intent-gate",
+    "type": "section"
+  },
+  "@CONTRACT#non-negotiable-rules": {
+    "description": "Section 'Non-negotiable rules' in CANON/CONTRACT.md",
+    "target": "CANON/CONTRACT.md#non-negotiable-rules",
+    "type": "section"
+  },
+  "@CRISIS": {
+    "description": "Content of CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md",
+    "type": "file"
+  },
+  "@CRISIS#audit-trail": {
+    "description": "Section 'Audit Trail' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#audit-trail",
+    "type": "section"
+  },
+  "@CRISIS#check-current-status": {
+    "description": "Section 'Check current status' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#check-current-status",
+    "type": "section"
+  },
+  "@CRISIS#crisis-levels": {
+    "description": "Section 'Crisis Levels' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#crisis-levels",
+    "type": "section"
+  },
+  "@CRISIS#crisis-mode-procedures": {
+    "description": "Section 'Crisis Mode Procedures' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#crisis-mode-procedures",
+    "type": "section"
+  },
+  "@CRISIS#emergency-cli": {
+    "description": "Section 'Emergency CLI' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#emergency-cli",
+    "type": "section"
+  },
+  "@CRISIS#exit-quarantine-requires-confirmation": {
+    "description": "Section 'Exit quarantine (requires confirmation)' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#exit-quarantine-requires-confirmation",
+    "type": "section"
+  },
+  "@CRISIS#level-1-run-critic-and-fixtures": {
+    "description": "Section 'Level 1: Run critic and fixtures' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-1-run-critic-and-fixtures",
+    "type": "section"
+  },
+  "@CRISIS#level-1-validation-failure": {
+    "description": "Section 'Level 1: Validation Failure' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-1-validation-failure",
+    "type": "section"
+  },
+  "@CRISIS#level-2-rollback-last-change": {
+    "description": "Section 'Level 2: Rollback last change' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-2-rollback-last-change",
+    "type": "section"
+  },
+  "@CRISIS#level-2-rollback-required": {
+    "description": "Section 'Level 2: Rollback Required' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-2-rollback-required",
+    "type": "section"
+  },
+  "@CRISIS#level-3-quarantine-blocks-all-writes-preserves-state": {
+    "description": "Section 'Level 3: Quarantine (blocks all writes, preserves state)' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-3-quarantine-blocks-all-writes-preserves-state",
+    "type": "section"
+  },
+  "@CRISIS#level-3-quarantine-mode": {
+    "description": "Section 'Level 3: Quarantine Mode' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-3-quarantine-mode",
+    "type": "section"
+  },
+  "@CRISIS#level-4-constitutional-reset": {
+    "description": "Section 'Level 4: Constitutional Reset' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-4-constitutional-reset",
+    "type": "section"
+  },
+  "@CRISIS#level-4-constitutional-reset-restore-to-tagged-release": {
+    "description": "Section 'Level 4: Constitutional reset (restore to tagged release)' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#level-4-constitutional-reset-restore-to-tagged-release",
+    "type": "section"
+  },
+  "@CRISIS#philosophy": {
+    "description": "Section 'Philosophy' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#philosophy",
+    "type": "section"
+  },
+  "@CRISIS#quarantine-lock-file": {
+    "description": "Section 'Quarantine Lock File' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#quarantine-lock-file",
+    "type": "section"
+  },
+  "@CRISIS#recovery-ceremony": {
+    "description": "Section 'Recovery Ceremony' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#recovery-ceremony",
+    "type": "section"
+  },
+  "@CRISIS#stewardship-escalation": {
+    "description": "Section 'Stewardship Escalation' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#stewardship-escalation",
+    "type": "section"
+  },
+  "@CRISIS#usage": {
+    "description": "Section 'Usage' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#usage",
+    "type": "section"
+  },
+  "@CRISIS#with-agent-contract": {
+    "description": "Section 'With Agent Contract' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#with-agent-contract",
+    "type": "section"
+  },
+  "@CRISIS#with-critic": {
+    "description": "Section 'With Critic' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#with-critic",
+    "type": "section"
+  },
+  "@CRISIS#with-mcp": {
+    "description": "Section 'With MCP' in CANON/CRISIS.md",
+    "target": "CANON/CRISIS.md#with-mcp",
+    "type": "section"
+  },
+  "@DEPRECATION": {
+    "description": "Content of CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md",
+    "type": "file"
+  },
+  "@DEPRECATION#1-create-an-adr": {
+    "description": "Section '1. Create an ADR' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#1-create-an-adr",
+    "type": "section"
+  },
+  "@DEPRECATION#1-verify-window-has-passed": {
+    "description": "Section '1. Verify Window Has Passed' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#1-verify-window-has-passed",
+    "type": "section"
+  },
+  "@DEPRECATION#2-mark-the-item-as-deprecated": {
+    "description": "Section '2. Mark the Item as Deprecated' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#2-mark-the-item-as-deprecated",
+    "type": "section"
+  },
+  "@DEPRECATION#2-remove-the-item": {
+    "description": "Section '2. Remove the Item' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#2-remove-the-item",
+    "type": "section"
+  },
+  "@DEPRECATION#3-create-migration-artifacts": {
+    "description": "Section '3. Create Migration Artifacts' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#3-create-migration-artifacts",
+    "type": "section"
+  },
+  "@DEPRECATION#3-update-changelog": {
+    "description": "Section '3. Update CHANGELOG' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#3-update-changelog",
+    "type": "section"
+  },
+  "@DEPRECATION#4-major-version-bump": {
+    "description": "Section '4. Major Version Bump' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#4-major-version-bump",
+    "type": "section"
+  },
+  "@DEPRECATION#4-update-changelog": {
+    "description": "Section '4. Update CHANGELOG' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#4-update-changelog",
+    "type": "section"
+  },
+  "@DEPRECATION#deprecated": {
+    "description": "Section 'Deprecated' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#deprecated",
+    "type": "section"
+  },
+  "@DEPRECATION#deprecation-ceremony": {
+    "description": "Section 'Deprecation Ceremony' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#deprecation-ceremony",
+    "type": "section"
+  },
+  "@DEPRECATION#deprecation-policy": {
+    "description": "Section 'Deprecation Policy' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#deprecation-policy",
+    "type": "section"
+  },
+  "@DEPRECATION#deprecation-windows": {
+    "description": "Section 'Deprecation Windows' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#deprecation-windows",
+    "type": "section"
+  },
+  "@DEPRECATION#early-removal-emergency": {
+    "description": "Section 'Early Removal (Emergency)' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#early-removal-emergency",
+    "type": "section"
+  },
+  "@DEPRECATION#removal-ceremony": {
+    "description": "Section 'Removal Ceremony' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#removal-ceremony",
+    "type": "section"
+  },
+  "@DEPRECATION#removed": {
+    "description": "Section 'Removed' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#removed",
+    "type": "section"
+  },
+  "@DEPRECATION#scope": {
+    "description": "Section 'Scope' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#scope",
+    "type": "section"
+  },
+  "@DEPRECATION#status": {
+    "description": "Section 'Status' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#status",
+    "type": "section"
+  },
+  "@DEPRECATION#sunset-archive": {
+    "description": "Section 'Sunset Archive' in CANON/DEPRECATION.md",
+    "target": "CANON/DEPRECATION.md#sunset-archive",
+    "type": "section"
+  },
+  "@FORMULA": {
+    "description": "Content of CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md",
+    "type": "file"
+  },
+  "@FORMULA#applications": {
+    "description": "Section 'Applications' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#applications",
+    "type": "section"
+  },
+  "@FORMULA#empirical-path": {
+    "description": "Section 'Empirical path' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#empirical-path",
+    "type": "section"
+  },
+  "@FORMULA#how-i-discovered-it": {
+    "description": "Section 'How I discovered it' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#how-i-discovered-it",
+    "type": "section"
+  },
+  "@FORMULA#intuition": {
+    "description": "Section 'Intuition' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#intuition",
+    "type": "section"
+  },
+  "@FORMULA#mechanics": {
+    "description": "Section 'Mechanics' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#mechanics",
+    "type": "section"
+  },
+  "@FORMULA#misreads-to-avoid": {
+    "description": "Section 'Misreads to avoid' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#misreads-to-avoid",
+    "type": "section"
+  },
+  "@FORMULA#r-e-s-fdf": {
+    "description": "Section '**R = (E / \u2207S) \u00d7 \u03c3(f)^Df**' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#r-e-s-fdf",
+    "type": "section"
+  },
+  "@FORMULA#the-living-formula-v4": {
+    "description": "Section 'The Living Formula v4' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#the-living-formula-v4",
+    "type": "section"
+  },
+  "@FORMULA#using-it-in-practice": {
+    "description": "Section 'Using it in practice' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#using-it-in-practice",
+    "type": "section"
+  },
+  "@FORMULA#version-history": {
+    "description": "Section 'Version History' in CANON/FORMULA.md",
+    "target": "CANON/FORMULA.md#version-history",
+    "type": "section"
+  },
+  "@GENESIS": {
+    "description": "Content of CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md",
+    "type": "file"
+  },
+  "@GENESIS#genesis-prompt": {
+    "description": "Section 'Genesis Prompt' in CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md#genesis-prompt",
+    "type": "section"
+  },
+  "@GENESIS#how-to-use": {
+    "description": "Section 'How to Use' in CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md#how-to-use",
+    "type": "section"
+  },
+  "@GENESIS#the-prompt": {
+    "description": "Section 'The Prompt' in CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md#the-prompt",
+    "type": "section"
+  },
+  "@GENESIS#versioning": {
+    "description": "Section 'Versioning' in CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md#versioning",
+    "type": "section"
+  },
+  "@GENESIS#why-this-exists": {
+    "description": "Section 'Why This Exists' in CANON/GENESIS.md",
+    "target": "CANON/GENESIS.md#why-this-exists",
+    "type": "section"
+  },
+  "@GENESIS_COMPACT": {
+    "description": "Content of CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md",
+    "type": "file"
+  },
+  "@GENESIS_COMPACT#compressed-prompt": {
+    "description": "Section 'Compressed Prompt' in CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md#compressed-prompt",
+    "type": "section"
+  },
+  "@GENESIS_COMPACT#expansion": {
+    "description": "Section 'Expansion' in CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md#expansion",
+    "type": "section"
+  },
+  "@GENESIS_COMPACT#genesis-prompt-compressed": {
+    "description": "Section 'Genesis Prompt (Compressed)' in CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md#genesis-prompt-compressed",
+    "type": "section"
+  },
+  "@GENESIS_COMPACT#token-comparison": {
+    "description": "Section 'Token Comparison' in CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md#token-comparison",
+    "type": "section"
+  },
+  "@GENESIS_COMPACT#when-to-use": {
+    "description": "Section 'When to Use' in CANON/GENESIS_COMPACT.md",
+    "target": "CANON/GENESIS_COMPACT.md#when-to-use",
+    "type": "section"
+  },
+  "@GLOSSARY": {
+    "description": "Content of CANON/GLOSSARY.md",
+    "target": "CANON/GLOSSARY.md",
+    "type": "file"
+  },
+  "@GLOSSARY#glossary": {
+    "description": "Section 'Glossary' in CANON/GLOSSARY.md",
+    "target": "CANON/GLOSSARY.md#glossary",
+    "type": "section"
+  },
+  "@INDEX": {
+    "description": "Content of CANON/INDEX.md",
+    "target": "CANON/INDEX.md",
+    "type": "file"
+  },
+  "@INDEX#canon-index": {
+    "description": "Section 'Canon Index' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#canon-index",
+    "type": "section"
+  },
+  "@INDEX#governance-machinery": {
+    "description": "Section 'Governance Machinery' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#governance-machinery",
+    "type": "section"
+  },
+  "@INDEX#meta": {
+    "description": "Section 'Meta' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#meta",
+    "type": "section"
+  },
+  "@INDEX#processes": {
+    "description": "Section 'Processes' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#processes",
+    "type": "section"
+  },
+  "@INDEX#the-constitution-highest-authority": {
+    "description": "Section 'The Constitution (Highest Authority)' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#the-constitution-highest-authority",
+    "type": "section"
+  },
+  "@INDEX#the-driver-foundation": {
+    "description": "Section 'The Driver (Foundation)' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#the-driver-foundation",
+    "type": "section"
+  },
+  "@INDEX#the-truth-foundation": {
+    "description": "Section 'The Truth (Foundation)' in CANON/INDEX.md",
+    "target": "CANON/INDEX.md#the-truth-foundation",
+    "type": "section"
+  },
+  "@INTEGRITY": {
+    "description": "Content of CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md",
+    "type": "file"
+  },
+  "@INTEGRITY#1-cmp-01-runtime-guard": {
+    "description": "Section '1. CMP-01: Runtime Guard' in CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md#1-cmp-01-runtime-guard",
+    "type": "section"
+  },
+  "@INTEGRITY#2-spectrum-01-the-resume-bundle": {
+    "description": "Section '2. SPECTRUM-01: The Resume Bundle' in CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md#2-spectrum-01-the-resume-bundle",
+    "type": "section"
+  },
+  "@INTEGRITY#3-spectrum-03-chained-temporal-integrity": {
+    "description": "Section '3. SPECTRUM-03: Chained Temporal Integrity' in CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md#3-spectrum-03-chained-temporal-integrity",
+    "type": "section"
+  },
+  "@INTEGRITY#4-the-5-invariants-of-integrity": {
+    "description": "Section '4. The 5 Invariants of Integrity' in CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md#4-the-5-invariants-of-integrity",
+    "type": "section"
+  },
+  "@INTEGRITY#integrity-law-cmpspectrum": {
+    "description": "Section 'Integrity Law (CMP/SPECTRUM)' in CANON/INTEGRITY.md",
+    "target": "CANON/INTEGRITY.md#integrity-law-cmpspectrum",
+    "type": "section"
+  },
+  "@INVARIANTS": {
+    "description": "Content of CANON/INVARIANTS.md",
+    "target": "CANON/INVARIANTS.md",
+    "type": "file"
+  },
+  "@INVARIANTS#changing-invariants": {
+    "description": "Section 'Changing invariants' in CANON/INVARIANTS.md",
+    "target": "CANON/INVARIANTS.md#changing-invariants",
+    "type": "section"
+  },
+  "@INVARIANTS#invariants": {
+    "description": "Section 'Invariants' in CANON/INVARIANTS.md",
+    "target": "CANON/INVARIANTS.md#invariants",
+    "type": "section"
+  },
+  "@INVARIANTS#list-of-invariants": {
+    "description": "Section 'List of invariants' in CANON/INVARIANTS.md",
+    "target": "CANON/INVARIANTS.md#list-of-invariants",
+    "type": "section"
+  },
+  "@MIGRATION": {
+    "description": "Content of CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md",
+    "type": "file"
+  },
+  "@MIGRATION#migration-ceremony": {
+    "description": "Section 'Migration Ceremony' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#migration-ceremony",
+    "type": "section"
+  },
+  "@MIGRATION#migration-skill-template": {
+    "description": "Section 'Migration Skill Template' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#migration-skill-template",
+    "type": "section"
+  },
+  "@MIGRATION#phase-1-preparation": {
+    "description": "Section 'Phase 1: Preparation' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#phase-1-preparation",
+    "type": "section"
+  },
+  "@MIGRATION#phase-2-execution": {
+    "description": "Section 'Phase 2: Execution' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#phase-2-execution",
+    "type": "section"
+  },
+  "@MIGRATION#phase-3-verification": {
+    "description": "Section 'Phase 3: Verification' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#phase-3-verification",
+    "type": "section"
+  },
+  "@MIGRATION#rollback": {
+    "description": "Section 'Rollback' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#rollback",
+    "type": "section"
+  },
+  "@MIGRATION#status": {
+    "description": "Section 'Status' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#status",
+    "type": "section"
+  },
+  "@MIGRATION#when-this-applies": {
+    "description": "Section 'When This Applies' in CANON/MIGRATION.md",
+    "target": "CANON/MIGRATION.md#when-this-applies",
+    "type": "section"
+  },
+  "@SECURITY": {
+    "description": "Content of CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md",
+    "type": "file"
+  },
+  "@SECURITY#agent-read-access": {
+    "description": "Section 'Agent Read Access' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#agent-read-access",
+    "type": "section"
+  },
+  "@SECURITY#agent-write-access": {
+    "description": "Section 'Agent Write Access' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#agent-write-access",
+    "type": "section"
+  },
+  "@SECURITY#human-approval-required": {
+    "description": "Section 'Human Approval Required' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#human-approval-required",
+    "type": "section"
+  },
+  "@SECURITY#principles": {
+    "description": "Section 'Principles' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#principles",
+    "type": "section"
+  },
+  "@SECURITY#reporting-vulnerabilities": {
+    "description": "Section 'Reporting Vulnerabilities' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#reporting-vulnerabilities",
+    "type": "section"
+  },
+  "@SECURITY#sandboxing": {
+    "description": "Section 'Sandboxing' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#sandboxing",
+    "type": "section"
+  },
+  "@SECURITY#security-policy": {
+    "description": "Section 'Security Policy' in CANON/SECURITY.md",
+    "target": "CANON/SECURITY.md#security-policy",
+    "type": "section"
+  },
+  "@STEWARDSHIP": {
+    "description": "Content of CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md",
+    "type": "file"
+  },
+  "@STEWARDSHIP#1-no-bare-excepts": {
+    "description": "Section '1. No Bare Excepts' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#1-no-bare-excepts",
+    "type": "section"
+  },
+  "@STEWARDSHIP#2-atomic-writes": {
+    "description": "Section '2. Atomic Writes' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#2-atomic-writes",
+    "type": "section"
+  },
+  "@STEWARDSHIP#3-headless-execution": {
+    "description": "Section '3. Headless Execution' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#3-headless-execution",
+    "type": "section"
+  },
+  "@STEWARDSHIP#4-deterministic-outputs": {
+    "description": "Section '4. Deterministic Outputs' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#4-deterministic-outputs",
+    "type": "section"
+  },
+  "@STEWARDSHIP#5-safety-caps": {
+    "description": "Section '5. Safety Caps' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#5-safety-caps",
+    "type": "section"
+  },
+  "@STEWARDSHIP#6-database-connections": {
+    "description": "Section '6. Database Connections' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#6-database-connections",
+    "type": "section"
+  },
+  "@STEWARDSHIP#actions-taken": {
+    "description": "Section 'Actions Taken' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#actions-taken",
+    "type": "section"
+  },
+  "@STEWARDSHIP#agent": {
+    "description": "Section 'Agent' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#agent",
+    "type": "section"
+  },
+  "@STEWARDSHIP#contact-configuration": {
+    "description": "Section 'Contact Configuration' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#contact-configuration",
+    "type": "section"
+  },
+  "@STEWARDSHIP#decision": {
+    "description": "Section 'Decision' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#decision",
+    "type": "section"
+  },
+  "@STEWARDSHIP#emergency-steward-actions": {
+    "description": "Section 'Emergency Steward Actions' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#emergency-steward-actions",
+    "type": "section"
+  },
+  "@STEWARDSHIP#engineering-culture": {
+    "description": "Section 'Engineering Culture' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#engineering-culture",
+    "type": "section"
+  },
+  "@STEWARDSHIP#escalation-matrix": {
+    "description": "Section 'Escalation Matrix' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#escalation-matrix",
+    "type": "section"
+  },
+  "@STEWARDSHIP#follow-up-required": {
+    "description": "Section 'Follow-up Required' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#follow-up-required",
+    "type": "section"
+  },
+  "@STEWARDSHIP#forbidden": {
+    "description": "Section '\u274c FORBIDDEN' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#forbidden",
+    "type": "section"
+  },
+  "@STEWARDSHIP#maintainer": {
+    "description": "Section 'Maintainer' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#maintainer",
+    "type": "section"
+  },
+  "@STEWARDSHIP#or-for-classes": {
+    "description": "Section 'OR (for classes)' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#or-for-classes",
+    "type": "section"
+  },
+  "@STEWARDSHIP#philosophy": {
+    "description": "Section 'Philosophy' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#philosophy",
+    "type": "section"
+  },
+  "@STEWARDSHIP#rationale": {
+    "description": "Section 'Rationale' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#rationale",
+    "type": "section"
+  },
+  "@STEWARDSHIP#required": {
+    "description": "Section '\u2705 REQUIRED' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#required",
+    "type": "section"
+  },
+  "@STEWARDSHIP#situation": {
+    "description": "Section 'Situation' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#situation",
+    "type": "section"
+  },
+  "@STEWARDSHIP#step-1-agent-detects-issue": {
+    "description": "Section 'Step 1: Agent Detects Issue' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#step-1-agent-detects-issue",
+    "type": "section"
+  },
+  "@STEWARDSHIP#step-2-agent-stops-and-documents": {
+    "description": "Section 'Step 2: Agent Stops and Documents' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#step-2-agent-stops-and-documents",
+    "type": "section"
+  },
+  "@STEWARDSHIP#step-3-human-reviews": {
+    "description": "Section 'Step 3: Human Reviews' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#step-3-human-reviews",
+    "type": "section"
+  },
+  "@STEWARDSHIP#step-4-resolution": {
+    "description": "Section 'Step 4: Resolution' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#step-4-resolution",
+    "type": "section"
+  },
+  "@STEWARDSHIP#steward": {
+    "description": "Section 'Steward' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#steward",
+    "type": "section"
+  },
+  "@STEWARDSHIP#steward-name": {
+    "description": "Section 'Steward: [Name]' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#steward-name",
+    "type": "section"
+  },
+  "@STEWARDSHIP#stewardship-structure": {
+    "description": "Section 'Stewardship Structure' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#stewardship-structure",
+    "type": "section"
+  },
+  "@STEWARDSHIP#template-steward-decision-record": {
+    "description": "Section 'Template: Steward Decision Record' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#template-steward-decision-record",
+    "type": "section"
+  },
+  "@STEWARDSHIP#what-agents-can-do": {
+    "description": "Section 'What Agents CAN Do' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#what-agents-can-do",
+    "type": "section"
+  },
+  "@STEWARDSHIP#what-agents-cannot-do": {
+    "description": "Section 'What Agents CANNOT Do' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#what-agents-cannot-do",
+    "type": "section"
+  },
+  "@STEWARDSHIP#what-only-stewards-can-do": {
+    "description": "Section 'What Only Stewards CAN Do' in CANON/STEWARDSHIP.md",
+    "target": "CANON/STEWARDSHIP.md#what-only-stewards-can-do",
+    "type": "section"
+  },
+  "@VERSIONING": {
+    "description": "Content of CANON/VERSIONING.md",
+    "target": "CANON/VERSIONING.md",
+    "type": "file"
+  },
+  "@VERSIONING#canon-version": {
+    "description": "Section 'Canon version' in CANON/VERSIONING.md",
+    "target": "CANON/VERSIONING.md#canon-version",
+    "type": "section"
+  },
+  "@VERSIONING#compatibility-contracts": {
+    "description": "Section 'Compatibility contracts' in CANON/VERSIONING.md",
+    "target": "CANON/VERSIONING.md#compatibility-contracts",
+    "type": "section"
+  },
+  "@VERSIONING#deprecation-policy": {
+    "description": "Section 'Deprecation policy' in CANON/VERSIONING.md",
+    "target": "CANON/VERSIONING.md#deprecation-policy",
+    "type": "section"
+  },
+  "@VERSIONING#versioning": {
+    "description": "Section 'Versioning' in CANON/VERSIONING.md",
+    "target": "CANON/VERSIONING.md#versioning",
+    "type": "section"
+  }
+}
