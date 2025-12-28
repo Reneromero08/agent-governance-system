@@ -28,7 +28,39 @@ The repository is organised into eight layers. Files are loaded in the following
 5. **CONTRACTS** - fixtures and schemas used to mechanically enforce rules.
 6. **MEMORY** - packers, manifests and combined state for context handoff.
 7. **CORTEX** - a shadow index (e.g. SQLite) that agents query instead of the raw filesystem.
+    - **Semantic Core** - vector embeddings for efficient semantic search and token compression (Phase 1 complete)
+    - Enables 96% token savings by compressing context with @Symbols and vectors
+    - See [SEMANTIC_CORE_QUICK_START.md](./SEMANTIC_CORE_QUICK_START.md) for usage
 8. **TOOLS** - helper scripts such as critics and linters.
+
+## Semantic Core (Token Compression)
+
+The CORTEX layer includes a **Semantic Core** system that uses vector embeddings to enable massive token savings when dispatching tasks to smaller language models.
+
+**How it works:**
+- Big models (Opus) maintain semantic understanding via 384-dimensional vector embeddings in CORTEX
+- Small models (Haiku) receive compressed task specifications with @Symbols and vector context
+- Achieves **96% token reduction** per task (50,000 → 2,000 tokens)
+
+**Quick start:**
+```bash
+# See it in action
+python demo_semantic_dispatch.py
+
+# Test all systems
+python CORTEX/test_semantic_core.py
+
+# Index your code
+python CORTEX/vector_indexer.py --index
+```
+
+**Documentation:**
+- [Quick Start Guide](./SEMANTIC_CORE_QUICK_START.md) - 5-minute introduction
+- [Complete Index](./SEMANTIC_CORE_INDEX.md) - Full navigation and API reference
+- [ADR-030](./CONTEXT/decisions/ADR-030-semantic-core-architecture.md) - Architecture specification
+- [Roadmap](./CONTEXT/decisions/ROADMAP-semantic-core.md) - 4-phase implementation plan
+
+**Status:** Phase 1 (Vector Foundation) complete and production-ready. See [Final Report](./CONTRACTS/_runs/semantic-core-phase1-final-report.md) for details.
 
 ## MCP integration (external clients)
 
