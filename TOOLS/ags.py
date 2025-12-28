@@ -38,6 +38,33 @@ def _atomic_write_bytes(path: Path, data: bytes) -> None:
     tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
     tmp.write_bytes(data)
     os.replace(tmp, path)
++
+
+def _load_json_output(text: str) -> Dict[str, Any]:
+    if not text:
+        return {}
+    try:
+        obj = json.loads(text.strip())
+        if isinstance(obj, dict):
+            return obj
+    except Exception:
+        pass
+    return {}
+
+
+def _pipeline_dir(pipeline_id: str) -> Path:
+    slugged = _slug(pipeline_id)
+    path = Path("CONTRACTS") / "_runs" / "_pipelines" / slugged
+    if not path.is_absolute():
+        path = REPO_ROOT / path
+    return path
+
+
+def _write_policy_proof(pipeline_id: str, policy: Dict[str, Any]) -> None:
+    pdir = _pipeline_dir(pipeline_id)
+    pdir.mkdir(parents=True, exist_ok=True)
+    policy_path = pdir / "POLICY_PROOF.json"
+    _atomic_write_bytes(policy_path, canonical_json_bytes(policy))
 
 
 def _write_idempotent(path: Path, data: bytes) -> None:
@@ -621,7 +648,7 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
         return preflight_res.returncode
 
     intent_mode = "repo-write" if repo_write else "artifact-only"
-    intent_path, _ = generate_intent(
+    intent_path, intent_data = generate_intent(
         pipeline_id,
         runs_root,
         mode=intent_mode,
@@ -632,6 +659,26 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
     if admit_res.returncode != 0:
         sys.stdout.write(f"FAIL admission rc={admit_res.returncode}\n")
         return admit_res.returncode
+
+    preflight_data = _load_json_output(preflight_res.stdout)
+    admission_data = _load_json_output(admit_res.stdout)
+    intent_sha256 = hashlib.sha256(Path(intent_path).read_bytes()).hexdigest()
+    policy = {
+        "preflight": {
+            "verdict": preflight_data.get("verdict"),
+            "canon_sha256": preflight_data.get("canon_sha256"),
+            "cortex_sha256": preflight_data.get("cortex_sha256"),
+            "git_head_sha": preflight_data.get("git_head_sha"),
+            "generated_at": preflight_data.get("cortex_generated_at"),
+        },
+        "admission": {
+            "verdict": admission_data.get("verdict"),
+            "intent_sha256": intent_sha256,
+            "mode": intent_data.get("mode"),
+            "reasons": admission_data.get("reasons", []),
+        },
+    }
+    _write_policy_proof(pipeline_id, policy)
 
     sys.stdout.write("AGS: running pipeline\n")
     res = subprocess.run(run_cmd, cwd=str(REPO_ROOT))

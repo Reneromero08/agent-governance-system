@@ -48,6 +48,19 @@ def _atomic_write_canon_json(path: Path, obj: Any) -> None:
     _atomic_write(path, canonical_json_bytes(obj))
 
 
+def _load_policy_proof(pipeline_dir: Path) -> Dict[str, Any]:
+    path = pipeline_dir / "POLICY_PROOF.json"
+    if not path.exists():
+        return {}
+    try:
+        obj = json.loads(path.read_text(encoding="utf-8"))
+        if isinstance(obj, dict):
+            return obj
+    except Exception:
+        pass
+    return {}
+
+
 @dataclass(frozen=True)
 class DagEdge:
     src: str
@@ -229,6 +242,7 @@ def _emit_receipt(
     output_artifact_hashes: Dict[str, str],
     prior_receipt_hashes: List[str],
 ) -> Dict[str, Any]:
+    policy = _load_policy_proof(pipeline_dir)
     receipt = {
         "node_id": node_id,
         "pipeline_id": pipeline_id,
@@ -240,6 +254,8 @@ def _emit_receipt(
     }
     if len(prior_receipt_hashes) == 1:
         receipt["prior_receipt_hash"] = prior_receipt_hashes[0]
+    if policy:
+        receipt["policy"] = policy
     receipt["receipt_hash"] = _compute_receipt_hash(receipt)
     _atomic_write_canon_json(pipeline_dir / "RECEIPT.json", receipt)
     return receipt
