@@ -51,18 +51,18 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
 
 ## C3. Summarization layer (P1)
-- [ ] [P1] Add a summarizer that writes summaries into the DB (not into source files).
-- [ ] [P1] Define max summary length and "summary freshness" policy.
-- [ ] [P1] Extend `CORTEX/query.py` with section-level queries (`find`, `get`, `neighbors`).
+- [x] [P1] Add a summarizer that writes summaries into the DB (not into source files) (`CORTEX/summarizer.py`).
+- [x] [P1] Define max summary length and "summary freshness" policy (Implemented via `summary_hash`).
+- [x] [P1] Extend `CORTEX/query.py` with section-level queries (`find`, `get`, `neighbors`).
 
 ---
 
 # Lane H: System 2 Governance (P1)
 
 ## H1. The Immutable Ledger (P1)
-- [ ] Formalize `mcp_ledger` as `system2.db`.
-- [ ] Implement query tools for provenance (Who ran what?).
-- [ ] Add cryptographic Merkle root verification for run bundles.
+- [x] Formalize `mcp_ledger` as `system2.db` (Schema and API implemented in `CORTEX/system2_ledger.py`).
+- [x] Implement query tools for provenance (Who ran what?) (Via System2Ledger class).
+- [x] Add cryptographic Merkle root verification for run bundles.
 
 ---
 
