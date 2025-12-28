@@ -278,7 +278,16 @@ class GrokExecutor:
             self.results["file_contents"] = contents
 
     def _execute_code_adapt(self) -> None:
-        """Adapt code (find and replace)."""
+        """Adapt code with safe, controlled replacements.
+
+        Supports:
+        - Exact string replacement (default, safer)
+        - Regex replacement (opt-in via "regex": true)
+        - Count-limited replacement (via "count": N)
+        - Line-anchored replacement for precision
+        """
+        import re as regex_module
+
         file_path = self.task_spec.get("file")
         adaptations = self.task_spec.get("adaptations", [])
 
@@ -291,35 +300,108 @@ class GrokExecutor:
             self.results["errors"].append(f"File not found: {file_path}")
             return
 
+        # Check file size before reading
+        file_size = p.stat().st_size
+        max_size = 5 * 1024 * 1024  # 5MB limit for code files
+        if file_size > max_size:
+            self.results["errors"].append(
+                f"File too large for code adaptation: {file_size} bytes (max {max_size})"
+            )
+            return
+
         try:
             # Read original file
             original_content = p.read_text(encoding='utf-8')
             adapted_content = original_content
+            total_replacements = 0
 
             # Apply adaptations
-            for adapt in adaptations:
+            for idx, adapt in enumerate(adaptations):
                 find = adapt.get("find")
                 replace = adapt.get("replace")
                 reason = adapt.get("reason", "")
+                use_regex = adapt.get("regex", False)
+                count = adapt.get("count", 0)  # 0 = replace all occurrences
 
-                if find and replace:
-                    if find in adapted_content:
-                        adapted_content = adapted_content.replace(find, replace)
-                        self.results["operations"].append({
-                            "operation": "code_adapt",
-                            "file": file_path,
-                            "find": find[:50] + "..." if len(find) > 50 else find,
-                            "replace": replace[:50] + "..." if len(replace) > 50 else replace,
-                            "reason": reason,
-                        })
-                        print(f"[grok-executor] [OK] Adapted: {reason}")
-                    else:
+                if not find:
+                    self.results["errors"].append(f"Adaptation {idx}: missing 'find' pattern")
+                    continue
+
+                if replace is None:
+                    self.results["errors"].append(f"Adaptation {idx}: missing 'replace' value")
+                    continue
+
+                # Count occurrences before replacement
+                if use_regex:
+                    try:
+                        pattern = regex_module.compile(find)
+                        matches = pattern.findall(adapted_content)
+                        occurrence_count = len(matches)
+                    except regex_module.error as e:
                         self.results["errors"].append(
-                            f"Pattern not found in {file_path}: {find[:50]}"
+                            f"Adaptation {idx}: invalid regex pattern: {e}"
                         )
+                        continue
+                else:
+                    occurrence_count = adapted_content.count(find)
+
+                if occurrence_count == 0:
+                    self.results["errors"].append(
+                        f"Pattern not found in {file_path}: {find[:50]}{'...' if len(find) > 50 else ''}"
+                    )
+                    continue
+
+                # Perform replacement
+                if use_regex:
+                    if count > 0:
+                        adapted_content = pattern.sub(replace, adapted_content, count=count)
+                        replacements_made = min(count, occurrence_count)
+                    else:
+                        adapted_content = pattern.sub(replace, adapted_content)
+                        replacements_made = occurrence_count
+                else:
+                    if count > 0:
+                        # Limited replacement - do it count times
+                        for _ in range(count):
+                            if find in adapted_content:
+                                adapted_content = adapted_content.replace(find, replace, 1)
+                        replacements_made = min(count, occurrence_count)
+                    else:
+                        adapted_content = adapted_content.replace(find, replace)
+                        replacements_made = occurrence_count
+
+                total_replacements += replacements_made
+
+                self.results["operations"].append({
+                    "operation": "code_adapt",
+                    "file": file_path,
+                    "find": find[:50] + "..." if len(find) > 50 else find,
+                    "replace": replace[:50] + "..." if len(replace) > 50 else replace,
+                    "reason": reason,
+                    "regex": use_regex,
+                    "occurrences_found": occurrence_count,
+                    "replacements_made": replacements_made,
+                })
+                print(f"[ant-worker] [OK] Adapted ({replacements_made}x): {reason}")
+
+            # Validate adapted content is different and non-empty
+            if adapted_content == original_content:
+                self.results["errors"].append("No changes were made to the file")
+                return
+
+            if not adapted_content.strip():
+                self.results["errors"].append("Adapted content would be empty - aborting")
+                return
 
             # Write adapted file
             p.write_text(adapted_content, encoding='utf-8')
+
+            self.results["summary"] = {
+                "total_adaptations": len(adaptations),
+                "total_replacements": total_replacements,
+                "original_size": len(original_content),
+                "adapted_size": len(adapted_content),
+            }
 
         except Exception as e:
             self.results["errors"].append(f"Error adapting {file_path}: {str(e)}")
