@@ -41,7 +41,7 @@ SERVER_VERSION = "0.1.0"
 
 
 def governed_tool(func):
-    """Decorator: Run preflight + critic.py before execution to enforce governance lock."""
+    """Decorator: Run preflight + admission + critic.py before execution to enforce governance lock."""
     def wrapper(self, args: Dict) -> Dict:
         import os
         import subprocess
@@ -64,6 +64,35 @@ def governed_tool(func):
                 "content": [{
                     "type": "text",
                     "text": "⛔ PREFLIGHT BLOCKED ⛔\n\nAction blocked. Repository freshness check failed.\n\n" + (payload or "(no details)")
+                }],
+                "isError": True
+            }
+
+        # Mandatory admission control (fail-closed)
+        intent_path = env.get("AGS_INTENT_PATH", "").strip()
+        if not intent_path:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "⛔ ADMISSION BLOCKED ⛔\n\nAction blocked. Missing AGS_INTENT_PATH for admission control."
+                }],
+                "isError": True
+            }
+        admit = subprocess.run(
+            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "ags.py"), "admit", "--intent", intent_path],
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            errors="ignore",
+            cwd=str(PROJECT_ROOT),
+            env=env,
+        )
+        if admit.returncode != 0:
+            payload = ((admit.stdout or "") + "\n" + (admit.stderr or "")).strip()
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "⛔ ADMISSION BLOCKED ⛔\n\nAction blocked. Admission control rejected intent.\n\n" + (payload or "(no details)")
                 }],
                 "isError": True
             }
