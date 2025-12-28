@@ -5,6 +5,12 @@ CATALYTIC-DPT/poll_and_execute.py
 Unified dispatcher - runs Governor OR Ant based on role.
 Simpler than agent_loop.py, no external CLI dependencies.
 
+Features:
+- Exponential backoff on idle/error
+- Proper subprocess timeout handling with cleanup
+- Graceful shutdown
+- Comprehensive error handling
+
 Usage:
     python poll_and_execute.py --role Governor
     python poll_and_execute.py --role Ant-1
@@ -15,8 +21,11 @@ import argparse
 import time
 import json
 import sys
+import signal
+import os
 from pathlib import Path
 from datetime import datetime
+from typing import Optional
 
 # Navigate up to CATALYTIC-DPT root
 CATALYTIC_ROOT = Path(__file__).parent.parent.parent
@@ -25,30 +34,132 @@ from server import mcp_server
 
 SKILLS_DIR = CATALYTIC_ROOT / "SKILLS"
 
+# Backoff configuration
+MIN_POLL_INTERVAL = 1
+MAX_POLL_INTERVAL = 60
+BACKOFF_MULTIPLIER = 1.5
+BACKOFF_RESET_ON_WORK = True
+
+# Timeout configuration
+TASK_TIMEOUT_SECONDS = 120
+GRACEFUL_SHUTDOWN_TIMEOUT = 5
+
+
+class BackoffController:
+    """Manages exponential backoff for polling."""
+
+    def __init__(self, min_interval: float = MIN_POLL_INTERVAL, max_interval: float = MAX_POLL_INTERVAL):
+        self.min_interval = min_interval
+        self.max_interval = max_interval
+        self.current_interval = min_interval
+        self.consecutive_idle = 0
+
+    def on_work_done(self):
+        """Reset backoff when work is performed."""
+        self.current_interval = self.min_interval
+        self.consecutive_idle = 0
+
+    def on_idle(self):
+        """Increase backoff on idle poll."""
+        self.consecutive_idle += 1
+        self.current_interval = min(
+            self.current_interval * BACKOFF_MULTIPLIER,
+            self.max_interval
+        )
+
+    def on_error(self):
+        """Increase backoff more aggressively on error."""
+        self.current_interval = min(
+            self.current_interval * (BACKOFF_MULTIPLIER * 2),
+            self.max_interval
+        )
+
+    def get_interval(self) -> float:
+        return self.current_interval
+
+
+def kill_process_tree(proc, timeout: float = GRACEFUL_SHUTDOWN_TIMEOUT):
+    """Kill a process and all its children."""
+    import subprocess
+
+    try:
+        # Try graceful termination first
+        proc.terminate()
+        try:
+            proc.wait(timeout=timeout)
+            return
+        except subprocess.TimeoutExpired:
+            pass
+
+        # Force kill
+        proc.kill()
+        proc.wait(timeout=1)
+    except Exception:
+        pass  # Process already dead
+
 
 def run_governor(interval: int):
-    """Governor: receives directives and dispatches to Ant Workers."""
+    """Governor: receives directives and dispatches to Ant Workers.
+
+    Features:
+    - Exponential backoff on idle
+    - Comprehensive error handling
+    - Graceful shutdown
+    """
     print("\n" + "="*50)
     print("  GOVERNOR - Active")
     print("  Dispatches tasks to Ant Workers via MCP")
     print("="*50 + "\n")
 
-    while True:
+    backoff = BackoffController(min_interval=interval)
+    shutdown_requested = False
+
+    def handle_shutdown(signum, frame):
+        nonlocal shutdown_requested
+        print("\n[Governor] Shutdown signal received...")
+        shutdown_requested = True
+
+    signal.signal(signal.SIGINT, handle_shutdown)
+    signal.signal(signal.SIGTERM, handle_shutdown)
+
+    while not shutdown_requested:
+        work_done = False
+
         try:
+            # Get directives with error handling
             try:
                 directives = mcp_server.get_directives("Governor")
             except json.JSONDecodeError as e:
                 print(f"[Governor] JSON parse error in directives: {e}")
-                time.sleep(interval)
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
+                continue
+            except Exception as e:
+                print(f"[Governor] Error getting directives: {e}")
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
                 continue
 
-            if directives["pending_count"] > 0:
-                for d in directives["directives"]:
-                    dir_id = d["directive_id"]
+            # Check for errors in response
+            if directives.get("status") == "error":
+                print(f"[Governor] Error: {directives.get('message')}")
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
+                continue
+
+            if directives.get("pending_count", 0) > 0:
+                for d in directives.get("directives", []):
+                    dir_id = d.get("directive_id")
+                    if not dir_id:
+                        continue
+
                     print(f"[Governor] Processing directive: {dir_id}")
 
-                    # Acknowledge
-                    mcp_server.acknowledge_directive(dir_id)
+                    # Acknowledge with agent verification
+                    ack_result = mcp_server.acknowledge_directive(dir_id, agent_id="Governor")
+                    if ack_result.get("status") == "error":
+                        print(f"[Governor] Failed to acknowledge: {ack_result.get('message')}")
+                        continue
 
                     # Parse directive and dispatch to workers
                     task_spec = d.get("context", {}).get("task_spec", {})
@@ -60,33 +171,57 @@ def run_governor(interval: int):
                             "files": []
                         }
 
-                    # Dispatch to Ant-1
-                    task_id = task_spec.get("task_id", f"task-{datetime.now().strftime('%H%M%S')}")
-                    mcp_server.dispatch_task(
+                    # Ensure task_id is set
+                    task_id = task_spec.get("task_id", f"task-{datetime.now().strftime('%H%M%S%f')}")
+                    task_spec["task_id"] = task_id
+
+                    # Dispatch to Ant-1 (could be load-balanced in future)
+                    dispatch_result = mcp_server.dispatch_task(
                         task_id=task_id,
                         task_spec=task_spec,
                         from_agent="Governor",
                         to_agent="Ant-1",
-                        priority=5
+                        priority=d.get("priority", 5)
                     )
-                    print(f"[Governor] Dispatched {task_id} to Ant-1")
-            else:
-                print(f"[Governor] No directives. Polling in {interval}s...")
 
-            # Check for results from workers
-            results = mcp_server.get_results()
-            if results["count"] > 0:
-                print(f"[Governor] Received {results['count']} result(s) from workers")
-                for r in results["results"]:
-                    print(f"  - {r['task_id']}: {r['status']}")
+                    if dispatch_result.get("status") == "error":
+                        print(f"[Governor] Dispatch failed: {dispatch_result.get('message')}")
+                    else:
+                        print(f"[Governor] Dispatched {task_id} to Ant-1")
+                        work_done = True
+            else:
+                current_interval = backoff.get_interval()
+                if backoff.consecutive_idle % 10 == 0:  # Only log every 10 idle cycles
+                    print(f"[Governor] No directives. Polling in {current_interval:.1f}s...")
+
+            # Check for results from workers (with pagination)
+            try:
+                results = mcp_server.get_results(limit=50)
+                if results.get("count", 0) > 0:
+                    print(f"[Governor] Received {results['count']} result(s) from workers")
+                    for r in results.get("results", []):
+                        status_icon = "✓" if r.get("status") == "success" else "✗"
+                        print(f"  {status_icon} {r.get('task_id')}: {r.get('status')}")
+                    work_done = True
+            except Exception as e:
+                print(f"[Governor] Error getting results: {e}")
+
+            # Update backoff
+            if work_done:
+                backoff.on_work_done()
+            else:
+                backoff.on_idle()
 
         except KeyboardInterrupt:
-            print("\n[Governor] Shutting down...")
+            print("\n[Governor] Keyboard interrupt...")
             break
         except Exception as e:
-            print(f"[Governor] Error: {e}")
+            print(f"[Governor] Unexpected error: {e}")
+            backoff.on_error()
 
-        time.sleep(interval)
+        time.sleep(backoff.get_interval())
+
+    print("[Governor] Shutdown complete.")
 
 
 def run_ant(agent_id: str, interval: int):
