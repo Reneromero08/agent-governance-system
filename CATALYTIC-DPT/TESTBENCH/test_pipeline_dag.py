@@ -79,6 +79,44 @@ def _receipt_hash(pipeline_dir: Path) -> str:
     return _load_receipt(pipeline_dir)["receipt_hash"]
 
 
+def test_receipt_includes_policy_proof(tmp_path: Path) -> None:
+    dummy_hash = hashlib.sha256(b"policy-proof").hexdigest()
+    policy = {
+        "preflight": {
+            "verdict": "SAFE",
+            "canon_sha256": "a" * 64,
+            "cortex_sha256": "b" * 64,
+            "git_head_sha": "c" * 64,
+            "generated_at": "2025-01-01T00:00:00.000000+00:00",
+        },
+        "admission": {
+            "verdict": "ALLOW",
+            "intent_sha256": "d" * 64,
+            "mode": "artifact-only",
+            "reasons": ["ARTIFACT_ONLY"],
+        },
+    }
+
+    receipts: List[Dict[str, Any]] = []
+    for idx in range(2):
+        node_dir = tmp_path / f"policy-node-{idx}"
+        node_dir.mkdir(parents=True, exist_ok=True)
+        (node_dir / "POLICY_PROOF.json").write_bytes(canonical_json_bytes(policy))
+        receipt = _emit_receipt(
+            pipeline_dir=node_dir,
+            node_id=f"node-{idx}",
+            pipeline_id=f"pipeline-{idx}",
+            capability_hash="PIPELINE_NODE",
+            input_artifact_hashes={"in": dummy_hash},
+            output_artifact_hashes={"out": dummy_hash},
+            prior_receipt_hashes=[],
+        )
+        receipts.append(receipt)
+
+    assert receipts[0]["policy"] == policy
+    assert receipts[1]["policy"] == policy
+
+
 def test_pipeline_dag_happy_path_and_verify(tmp_path: Path) -> None:
     dag_id = "dag-ok"
     p1 = "dag-p1"
