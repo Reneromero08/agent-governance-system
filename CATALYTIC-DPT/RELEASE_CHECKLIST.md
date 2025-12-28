@@ -27,4 +27,5 @@ Use this checklist when changing schemas, validator identity, or capability sema
 - [x] Verify `POLICY.json` captures all relevant snapshots.
 
 ## 6. Known Issues / Investigations (Post-v2.12.0)
-- [ ] **Packer Hygiene:** `test_packer_determinism_catalytic_dpt` fails with hash mismatch on Windows. Investigate CRLF/normalization in `packer.make_pack`.
+- [x] **Packer Hygiene:** `test_packer_determinism_catalytic_dpt` fails with hash mismatch on Windows. Investigate CRLF/normalization in `packer.make_pack`. **(FIXED via timestamp pinning)**
+- [ ] **Swarm Terminal Instability:** External terminals are flaky. Avoid `use_terminal=True` for now.

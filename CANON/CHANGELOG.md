@@ -2,6 +2,16 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.13.1] - 2025-12-28
+
+### Phase 6/7 Release Hardening
+
+#### Fixed
+- **Packer Determinism:** Enforced deterministic `generated_at` timestamps in `MEMORY/LLM_PACKER` via `LLM_PACKER_DETERMINISTIC_TIMESTAMP` env var.
+- **AGS CLI Robustness:** Added `--skip-preflight` flag to `ags run` and silenced `jsonschema` deprecation warnings.
+- **Swarm Integrity:** Hardened `test_swarm_reuse.py` artifact verification to strictly detect tampering.
+- **Governance Alignment:** Synced `invariant-freeze` skill fixtures with the new 12-invariant reality (Added `INV-012`).
+
 ## [2.12.1] - 2025-12-29
 
 ### Commit Queue (created 2025-12-29)
