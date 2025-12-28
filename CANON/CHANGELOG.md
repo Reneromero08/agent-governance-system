@@ -10,7 +10,9 @@ This release establishes The Living Formula as the primary driver for navigating
 
 #### Added
 - `CANON/FORMULA.md`: The Living Formula (`R = (E / ∇S) × σ(f)^Df`).
+- `CONTEXT/decisions/ADR-∞-living-formula.md`: Formal decision adoption of the Formula.
 - `@F0` Codebook ID for the Formula.
+- `@D∞` Codebook ID for the Formula-as-Driver decision.
 
 #### Changed
 - `CANON/INDEX.md`: Elevated `FORMULA.md` to "The Driver" (Rank 1).
