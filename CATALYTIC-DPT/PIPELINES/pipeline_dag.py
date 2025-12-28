@@ -663,4 +663,4 @@ def run_dag(
         _atomic_write_canon_json(dag_state_path, state)
         executed += 1
 
-    return {"ok": True, "code": "OK", "details": {"dag_id": dag_id, "completed": len(completed), "nodes": len(order)}}
+    return {"ok": True, "code": "OK", "details": {"dag_id": dag_id, "completed": len(completed), "nodes": len(order), "executed": executed}}

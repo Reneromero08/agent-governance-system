@@ -20,9 +20,12 @@ def _dir_digest(root: Path) -> str:
     # Sort files deterministically for digest.
     files = sorted(p for p in root.rglob("*") if p.is_file())
     for p in files:
-        rel = p.relative_to(root).as_posix().encode("utf-8")
+        rel = p.relative_to(root).as_posix()
+        if rel == "meta/PROVENANCE.json":
+            continue
+        rel_bytes = rel.encode("utf-8")
         data = p.read_bytes()
-        hasher.update(rel + b"\0")
+        hasher.update(rel_bytes + b"\0")
         hasher.update(hashlib.sha256(data).digest())
         hasher.update(len(data).to_bytes(8, "big"))
     return hasher.hexdigest()
