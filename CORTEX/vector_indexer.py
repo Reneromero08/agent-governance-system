@@ -66,7 +66,7 @@ class VectorIndexer:
                     dimensions INTEGER NOT NULL DEFAULT 384,
                     created_at TEXT NOT NULL DEFAULT (datetime('now')),
                     updated_at TEXT,
-                    FOREIGN KEY (hash) REFERENCES sections(hash) ON DELETE CASCADE
+                    FOREIGN KEY (hash) REFERENCES chunks(chunk_hash) ON DELETE CASCADE
                 );
 
                 CREATE INDEX IF NOT EXISTS idx_section_vectors_model ON section_vectors(model_id);
@@ -106,16 +106,19 @@ class VectorIndexer:
         # Get sections to index
         if force:
             cursor = self.conn.execute("""
-                SELECT hash, content FROM sections
-                WHERE content IS NOT NULL AND content != ''
+                SELECT c.chunk_hash as hash, fts.content
+                FROM chunks c
+                JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+                WHERE fts.content IS NOT NULL AND fts.content != ''
             """)
         else:
             cursor = self.conn.execute("""
-                SELECT s.hash, s.content
-                FROM sections s
-                LEFT JOIN section_vectors sv ON s.hash = sv.hash
-                WHERE s.content IS NOT NULL
-                  AND s.content != ''
+                SELECT c.chunk_hash as hash, fts.content
+                FROM chunks c
+                JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+                LEFT JOIN section_vectors sv ON c.chunk_hash = sv.hash
+                WHERE fts.content IS NOT NULL
+                  AND fts.content != ''
                   AND sv.hash IS NULL
             """)
 
@@ -259,10 +262,11 @@ class VectorIndexer:
         # Count sections without embeddings
         cursor = self.conn.execute("""
             SELECT COUNT(*) as unindexed
-            FROM sections s
-            LEFT JOIN section_vectors sv ON s.hash = sv.hash
-            WHERE s.content IS NOT NULL
-              AND s.content != ''
+            FROM chunks c
+            JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+            LEFT JOIN section_vectors sv ON c.chunk_hash = sv.hash
+            WHERE fts.content IS NOT NULL
+              AND fts.content != ''
               AND sv.hash IS NULL
         """)
         unindexed = cursor.fetchone()['unindexed']
@@ -288,8 +292,8 @@ class VectorIndexer:
         cursor = self.conn.execute("""
             SELECT COUNT(*) as count
             FROM section_vectors sv
-            LEFT JOIN sections s ON sv.hash = s.hash
-            WHERE s.hash IS NULL
+            LEFT JOIN chunks c ON sv.hash = c.chunk_hash
+            WHERE c.chunk_hash IS NULL
         """)
         orphaned = cursor.fetchone()['count']
         if orphaned > 0:
