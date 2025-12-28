@@ -247,12 +247,14 @@ Acceptance
 - [x] Phase 7.0: deterministic Pipeline DAG scheduling (DAG spec + scheduler + resume + fail-closed DAG verification).
 - [x] Phase 7.1: distributed execution receipts (portable receipts, chained by DAG topology, strict verification).
 - [x] Phase 7.2: multi-node restore runner (receipt-gated, idempotent recovery; restore decisions verified).
+- [x] Phase 7.3: catalytic swarm execution elision (identical swarms skip execution; emit valid, verifiable proofs).
 - [x] `swarm.schema.json` for a DAG of pipelines.
 - [x] `swarm_runtime.py` with `SWARM_STATE.json` and `SWARM_CHAIN.json`
 
 Acceptance
 - [x] A swarm run produces a top-level chain that binds each pipeline's proof.
 - [x] Any missing or tampered pipeline proof fails the swarm verification.
+- [x] Identical swarm re-execution elides all pipeline/skill/model execution and emits a valid swarm receipt.
 
 ---
 
