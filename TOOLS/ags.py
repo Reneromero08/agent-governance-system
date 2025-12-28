@@ -38,7 +38,6 @@ def _atomic_write_bytes(path: Path, data: bytes) -> None:
     tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
     tmp.write_bytes(data)
     os.replace(tmp, path)
-+
 
 def _load_json_output(text: str) -> Dict[str, Any]:
     if not text:

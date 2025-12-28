@@ -2,6 +2,20 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.15] - 2025-12-27
+
+### Mandatory Agent Identity (created 2025-12-27)
+
+#### Added
+- `CONTEXT/decisions/ADR-021-mandatory-agent-identity.md`: Decision record for mandatory session tracking and logging.
+- `SKILLS/agent-activity/`: New skill to monitor active agents via the audit log.
+- `MCP/server.py`: Added session ID generation and session-tagged audit logging.
+- `MCP/schemas/tools.json`: Added `agent_activity` tool definition.
+
+#### Changed
+- `CANON/CONTRACT.md`: Added Rule 10 "Traceable Identity" to Non-negotiable rules.
+- `MCP/server.py`: Now enforces session IDs for all connections.
+
 ## [2.11.14] - 2025-12-28
 
 ### CAT-DPT Skill Registry Wiring (created 2025-12-28)
