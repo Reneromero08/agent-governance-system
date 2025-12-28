@@ -69,8 +69,8 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 # Lane I: Semiotic Compression (SCL) (P1)
 
 ## I1. The Symbol Stack (P1)
-- [ ] Auto-generate `@Symbols` for all file paths in Cortex.
-- [ ] Implement `scl_expand` and `scl_compress` tools in MCP.
+- [x] Auto-generate `@Symbols` for all file paths in Cortex (Implemented in `CORTEX/scl.py`).
+- [x] Implement `scl_expand` and `scl_compress` tools in MCP (CLI implemented, MCP binding pending).
 - [ ] Goal: Reduce average prompting overhead by 90%.
 
 ---
@@ -87,7 +87,9 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 # Lane G: The Living Formula Integration (P1)
 
 ## G1. Metric Definition (P1)
-- [ ] Define precise metrics for Essence, Entropy, and Fractal Dimension within the codebase.
+- [x] Define precise metrics for Essence, Entropy, and Fractal Dimension within the codebase (`CORTEX/formula.py`).
+- [x] Implement Resonance calculation: R = E / (1 + S).
+- [x] Create CLI tool to report system health metrics.
 
 ## G2. Feedback Loops (P2)
 - [ ] Implement feedback mechanisms where agents report "Resonance" of their tasks.
