@@ -26,6 +26,7 @@ from PRIMITIVES.registry_validators import (
     validate_capability_pins,
     validate_capability_revokes,
 )  # type: ignore
+from PRIMITIVES.skills import SkillRegistry  # type: ignore
 
 from jsonschema import Draft7Validator, RefResolver
 
@@ -69,6 +70,7 @@ GLOBAL_DEREF_MAX_DEPTH = 32
 DEFAULT_CAPABILITIES_PATH = "CATALYTIC-DPT/CAPABILITIES.json"
 DEFAULT_PINS_PATH = "CATALYTIC-DPT/CAPABILITY_PINS.json"
 DEFAULT_REVOKES_PATH = "CATALYTIC-DPT/CAPABILITY_REVOKES.json"
+DEFAULT_SKILLS_PATH = "CATALYTIC-DPT/SKILLS/registry.json"
 
 
 def _read_bytes_bounded(path: Path, max_bytes: int) -> bytes:
@@ -299,6 +301,15 @@ def _revokes_path() -> Path:
     return REPO_ROOT / p
 
 
+def _skills_path() -> Path:
+    env = os.environ.get("CATALYTIC_SKILLS_PATH")
+    rel = env if isinstance(env, str) and env else DEFAULT_SKILLS_PATH
+    p = Path(rel)
+    if p.is_absolute():
+        return p
+    return REPO_ROOT / p
+
+
 def _load_capabilities_registry() -> Dict[str, Any]:
     path = _capabilities_path()
     v = validate_capabilities_registry(path)
@@ -389,6 +400,13 @@ def _resolve_capability_hash(capability_hash: str) -> Dict[str, Any]:
     return adapter
 
 
+def _resolve_skill_to_hash(skill_id: str) -> str:
+    path = _skills_path()
+    registry = SkillRegistry.load(path)
+    skill = registry.resolve(skill_id)
+    return skill.capability_hash
+
+
 def _validate_and_extract_steps_for_route(plan: Dict[str, Any]) -> List[Dict[str, Any]]:
     if "plan_version" in plan:
         _validate_plan_schema(plan)
@@ -420,7 +438,28 @@ def ags_route(*, plan_path: Path, pipeline_id: str, runs_root: str) -> int:
 
     pipeline_steps: List[Dict[str, Any]] = []
     for idx, raw in enumerate(steps):
-        if isinstance(raw, dict) and "capability_hash" in raw:
+        if isinstance(raw, dict) and "skill_id" in raw and "capability_hash" not in raw and "adapter" not in raw:
+            sid = raw.get("skill_id")
+            if not isinstance(sid, str) or not sid:
+                raise ValueError("MISSING_SKILL_ID")
+            # Resolve skill_id to capability_hash immediately
+            # Note: We do not modify 'raw' in place to avoid side effects if reused, 
+            # effectively treating skill_id as a pointer to a capability_hash.
+            cap_hash = _resolve_skill_to_hash(sid)
+            # Proceed to capability_hash branch logic by synthesizing a check
+            # We copy raw logic below but specialized for this case to avoid messing with types
+            
+            adapter = _resolve_capability_hash(cap_hash)
+            cmd, jobspec = _validate_adapter(adapter, strict=True)
+            step_id = raw.get("step_id")
+            if not isinstance(step_id, str) or not step_id.strip():
+                raise ValueError(f"steps[{idx}].step_id must be non-empty string")
+            _reject_control_chars(step_id)
+            strict = True
+            memoize = True
+            capability_hash = cap_hash
+
+        elif isinstance(raw, dict) and "capability_hash" in raw:
             cap = raw.get("capability_hash")
             if not isinstance(cap, str) or not cap:
                 raise ValueError("MISSING_CAPABILITY_HASH")
