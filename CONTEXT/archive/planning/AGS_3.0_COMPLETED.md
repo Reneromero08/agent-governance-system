@@ -292,31 +292,6 @@ Tasks:
 Exit conditions:
 - Any agent can read it and understand what "catalytic compression" means without inventing details.
 
-## F2. Prototype: "Catalytic Scratch Layer" (P3)
-
-Goal:
-- Enable high-impact operations using large disk state as scratch while guaranteeing restoration.
-
-Tasks:
-- [ ] [P3] Define the scratch workflow (worktree/overlay + patch set + restore plan).
-- [ ] [P3] Prototype the scratch layer with deterministic outputs under allowed roots.
-
-Exit conditions:
-- A full run ends with a clean git state while still producing required outputs.
-
-## F3. Prototype: "Catalytic Context Compression" (P3)
-
-Goal:
-- Keep LITE packs minimal while enabling deep recovery when needed.
-
-Tasks:
-- [ ] [P3] Define content-addressed cache strategy and retrieval instructions.
-- [ ] [P3] Prove FULL pack reconstruction from hashes and pointers.
-
-Exit conditions:
-- LITE pack remains small and stable.
-- FULL pack is reconstructible.
-
 ## F4. Lock Phase 7 catalytic swarm acceptance (P1)
 
 Problem:
