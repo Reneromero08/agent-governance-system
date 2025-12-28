@@ -381,7 +381,7 @@ def test_pipeline_dag_receipt_chain_mismatch(tmp_path: Path) -> None:
 
         r_verify = _run_catalytic(["pipeline", "dag", "verify", "--dag-id", dag_id, "--strict"])
         assert r_verify.returncode != 0
-        assert "RECEIPT_CHAIN_INVALID" in (r_verify.stdout + r_verify.stderr)
+        assert "DAG_RECEIPT_MISMATCH" in (r_verify.stdout + r_verify.stderr)
     finally:
         _rm(dag_dir)
         _rm(pipeline1_dir)

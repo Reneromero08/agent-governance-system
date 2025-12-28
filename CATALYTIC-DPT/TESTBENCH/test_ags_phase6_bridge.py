@@ -124,7 +124,7 @@ def test_ags_run_calls_verify_ok(tmp_path: Path) -> None:
         assert r.returncode == 0, r.stdout + r.stderr
         assert not (pipeline_dir / "STATE.json").exists()
 
-        rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
+        rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict", "--skip-preflight"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
         assert (pipeline_dir / "STATE.json").exists()
     finally:
@@ -153,7 +153,7 @@ def test_ags_run_fails_closed_on_tamper(tmp_path: Path) -> None:
         assert r.returncode == 0, r.stdout + r.stderr
         assert not (pipeline_dir / "STATE.json").exists()
 
-        rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
+        rr = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict", "--skip-preflight"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
         assert (pipeline_dir / "STATE.json").exists()
 

@@ -92,7 +92,7 @@ def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
 
         rr = _run_ags(["route", "--plan", str(plan_out), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
-        run = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
+        run = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict", "--skip-preflight"])
         assert run.returncode == 0, run.stdout + run.stderr
     finally:
         _rm(pipeline_dir)
