@@ -187,13 +187,13 @@ Implemented (v1)
 Deliverables
 - [x] Add `CAPABILITY_PINS.json` (canonical) that lists allowed capability hashes for a run/pipeline (or references a pinned set).
 - [x] Verifiers fail closed if a step uses a capability hash not in the allowed set.
-- [ ] Revocation mechanism:
+- [x] Revocation mechanism:
   - an explicit denylist or a new pinned set (no silent mutation)
   - deterministic precedence rules
 
 Acceptance
 - [x] “Allow” and “deny” decisions are explicit artifacts.
-- [ ] Changing allowed capabilities changes the proof hash (no invisible policy changes).
+- [x] Changing allowed capabilities changes the proof hash (no invisible policy changes).
 
 ---
 
@@ -307,6 +307,8 @@ Acceptance
 ## Immediate next actions (pick one, do the smallest)
 1) [DONE] **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
 2) [DONE] **PHASE 6.5**: Create `SKILLS/registry.json` + resolver + tests (no plan integration yet).
-3) **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
-4) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
-5) **PHASE 9**: Write schema versioning policy and release checklist (no code).
+3) [DONE] **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
+4) [DONE] **PHASE 6.7**: Registry immutability (Code complete + tests).
+5) **PHASE 6.8**: Capability versioning semantics.
+6) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
+7) **PHASE 9**: Write schema versioning policy and release checklist (no code).
