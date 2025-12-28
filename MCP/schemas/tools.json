@@ -265,6 +265,71 @@
                     "action"
                 ]
             }
+        },
+        "message_board_list": {
+            "name": "message_board_list",
+            "description": "List messages from the MCP message board",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "board": {
+                        "type": "string",
+                        "default": "default",
+                        "description": "Board name"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Maximum messages to return"
+                    },
+                    "include_deleted": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Include deleted messages"
+                    },
+                    "pinned_first": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Sort pinned messages first"
+                    }
+                }
+            }
+        },
+        "message_board_write": {
+            "name": "message_board_write",
+            "description": "Write to the MCP message board (post, pin, unpin, delete, purge)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "board": {
+                        "type": "string",
+                        "default": "default",
+                        "description": "Board name"
+                    },
+                    "action": {
+                        "type": "string",
+                        "enum": [
+                            "post",
+                            "pin",
+                            "unpin",
+                            "delete",
+                            "purge"
+                        ],
+                        "description": "Message board action"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message text (required for post)"
+                    },
+                    "ref_id": {
+                        "type": "string",
+                        "description": "Target message id (required for pin/unpin/delete)"
+                    }
+                },
+                "required": [
+                    "action"
+                ]
+            }
         }
     },
     "tools": [
@@ -300,6 +365,12 @@
         },
         {
             "$ref": "#/definitions/research_cache"
+        },
+        {
+            "$ref": "#/definitions/message_board_list"
+        },
+        {
+            "$ref": "#/definitions/message_board_write"
         }
     ]
 }
