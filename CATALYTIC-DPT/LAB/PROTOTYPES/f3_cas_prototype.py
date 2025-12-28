@@ -1,134 +1,222 @@
 #!/usr/bin/env python3
 """
-F3 Prototype: Catalytic Context Compression (CAS Proof of Concept)
+F3 Prototype: Catalytic Context Compression (CAS)
 
-Demonstrates how to turn a directory into a "Manifest" (LITE pack)
-and reconstruct the full directory from a Content-Addressed Store (CAS).
+CLI for Content-Addressed Storage with build/reconstruct/verify.
+Deterministic, fail-closed, with safety caps.
 """
 
-import os
+import argparse
 import hashlib
 import json
-import shutil
+import os
+import sys
 from pathlib import Path
 
-CAS_ROOT = Path("mock_cas_store")
-SOURCE_DIR = Path("mock_source_data")
-RESTORE_DIR = Path("mock_restored_data")
+# Exit codes
+EXIT_SUCCESS = 0
+EXIT_ERROR = 1
+EXIT_VERIFY_MISMATCH = 2
+EXIT_UNSAFE_PATH = 3
+EXIT_BOUNDS_EXCEEDED = 4
 
-def compute_sha256(content: bytes) -> str:
-    return hashlib.sha256(content).hexdigest()
+# Safety caps
+MAX_FILES = 5000
+MAX_TOTAL_BYTES = 512 * 1024 * 1024  # 512MB
+MAX_FILE_BYTES = 64 * 1024 * 1024    # 64MB
+MAX_PATH_LENGTH = 260
 
-def setup_data():
-    """Create random data to verify bit-perfect restoration."""
-    if SOURCE_DIR.exists(): shutil.rmtree(SOURCE_DIR)
-    SOURCE_DIR.mkdir()
-    
-    # diverse files
-    (SOURCE_DIR / "config.json").write_text('{"key": "value"}')
-    (SOURCE_DIR / "script.py").write_text('print("hello")')
-    (SOURCE_DIR / "image.bin").write_bytes(os.urandom(1024)) # random binary
-    
-    print(f"[Setup] Created source data at {SOURCE_DIR}")
 
-def ingest_to_cas(source_dir, cas_root):
-    """
-    Ingest files into CAS and generate a LITE manifest.
-    Returns: manifest dict {path: hash}
-    """
-    if not cas_root.exists(): cas_root.mkdir()
-    
-    manifest = {}
-    
-    for root, _, files in os.walk(source_dir):
-        for file in files:
-            file_path = Path(root) / file
-            rel_path = file_path.relative_to(source_dir).as_posix()
-            
-            content = file_path.read_bytes()
-            file_hash = compute_sha256(content)
-            
-            # Store in CAS (sharded by first 2 chars)
-            shard = cas_root / file_hash[:2]
-            shard.mkdir(exist_ok=True)
-            blob_path = shard / file_hash
-            
-            if not blob_path.exists():
-                blob_path.write_bytes(content)
-                
-            manifest[rel_path] = file_hash
-            
-    print(f"[Ingest] Ingested {len(manifest)} files to CAS.")
-    return manifest
-
-def restore_from_manifest(manifest, cas_root, target_dir):
-    """Hydrate a directory from a manifest + CAS."""
-    if target_dir.exists(): shutil.rmtree(target_dir)
-    target_dir.mkdir()
-    
-    print(f"[Restore] Hydrating {len(manifest)} files to {target_dir}...")
-    
-    for rel_path, file_hash in manifest.items():
-        shard = cas_root / file_hash[:2]
-        blob_path = shard / file_hash
-        
-        if not blob_path.exists():
-            raise FileNotFoundError(f"CAS Corruption: Missing blob {file_hash}")
-        
-        # Determine target location
-        item_path = target_dir / rel_path
-        item_path.parent.mkdir(parents=True, exist_ok=True)
-        
-        # Copy bytes
-        content = blob_path.read_bytes()
-        
-        # Verify hash on read (Navajo Bridge principle: verify as you build)
-        if compute_sha256(content) != file_hash:
-             raise ValueError(f"Integrity Error: Blob {file_hash} corrupted!")
-             
-        item_path.write_bytes(content)
-
-def verify_identity(dir1, dir2):
-    """Prove byte-for-byte identity."""
-    # Simple recursive diff
-    hash1 = compute_hash_dir(dir1) # reusing helper logic
-    hash2 = compute_hash_dir(dir2)
-    
-    if hash1 == hash2:
-        print("[Verify] SUCCESS: Restored state matches Original state exactly.")
-    else:
-        print(f"[Verify] FAIL: Hash mismatch! {hash1} vs {hash2}")
-        exit(1)
-
-def compute_hash_dir(directory):
+def sha256_file(path: Path) -> str:
     sha = hashlib.sha256()
-    for root, _, files in os.walk(directory):
-        for file in sorted(files):
-            path = Path(root) / file
-            sha.update(path.relative_to(directory).as_posix().encode())
-            sha.update(path.read_bytes())
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(65536), b''):
+            sha.update(chunk)
     return sha.hexdigest()
 
-def main():
-    setup_data()
-    
-    # 1. Compress (Source -> CAS + Manifest)
-    manifest = ingest_to_cas(SOURCE_DIR, CAS_ROOT)
-    
-    # Display LITE Manifest (Token Savings Proof)
-    print(f"[Manifest] {json.dumps(manifest, indent=2)}")
-    
-    # 2. Reconstruct (Manifest + CAS -> Restore)
-    restore_from_manifest(manifest, CAS_ROOT, RESTORE_DIR)
-    
-    # 3. Prove Integrity
-    verify_identity(SOURCE_DIR, RESTORE_DIR)
-    
-    # Cleanup
-    shutil.rmtree(SOURCE_DIR)
-    shutil.rmtree(RESTORE_DIR)
-    shutil.rmtree(CAS_ROOT)
-    print("[Cleanup] All temporary artifacts removed.")
 
-if __name__ == "__main__":
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+
+def canonical_json(obj) -> bytes:
+    return json.dumps(obj, separators=(',', ':'), sort_keys=True).encode('utf-8')
+
+
+def normalize_path(rel: str) -> str:
+    return rel.replace('\\', '/')
+
+
+def validate_path(rel: str, src_root: Path) -> bool:
+    if len(rel) > MAX_PATH_LENGTH:
+        return False
+    parts = Path(rel).parts
+    if '..' in parts:
+        return False
+    if Path(rel).is_absolute():
+        return False
+    if rel.startswith('/') or (len(rel) > 1 and rel[1] == ':'):
+        return False
+    return True
+
+
+def build(src: Path, out: Path, ignores: list):
+    if not src.is_dir():
+        print(f"Error: Source is not a directory: {src}")
+        sys.exit(EXIT_ERROR)
+
+    cas_dir = out / 'cas'
+    cas_dir.mkdir(parents=True, exist_ok=True)
+
+    manifest = {}
+    file_count = 0
+    total_bytes = 0
+
+    for root, dirs, files in os.walk(src):
+        dirs[:] = [d for d in dirs if d not in ignores]
+        for fname in files:
+            if fname in ignores:
+                continue
+
+            fpath = Path(root) / fname
+            rel = normalize_path(str(fpath.relative_to(src)))
+
+            if not validate_path(rel, src):
+                print(f"Error: Unsafe path detected: {rel}")
+                sys.exit(EXIT_UNSAFE_PATH)
+
+            fsize = fpath.stat().st_size
+            if fsize > MAX_FILE_BYTES:
+                print(f"Error: File exceeds max size ({MAX_FILE_BYTES}): {rel}")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            total_bytes += fsize
+            if total_bytes > MAX_TOTAL_BYTES:
+                print(f"Error: Total bytes exceed limit ({MAX_TOTAL_BYTES})")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            file_count += 1
+            if file_count > MAX_FILES:
+                print(f"Error: File count exceeds limit ({MAX_FILES})")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            content = fpath.read_bytes()
+            h = sha256_bytes(content)
+
+            # Store in CAS (sharded by first 2 chars)
+            shard = cas_dir / h[:2]
+            shard.mkdir(exist_ok=True)
+            blob = shard / h
+            if not blob.exists():
+                blob.write_bytes(content)
+
+            manifest[rel] = {'sha256': h, 'size': fsize}
+
+    # Write manifest
+    manifest_bytes = canonical_json(manifest)
+    (out / 'manifest.json').write_bytes(manifest_bytes)
+
+    # Write root hash
+    root_hash = sha256_bytes(manifest_bytes)
+    (out / 'root.sha256').write_text(root_hash)
+
+    print(f"Build complete: {file_count} files, {total_bytes} bytes")
+    print(f"Root hash: {root_hash}")
+    sys.exit(EXIT_SUCCESS)
+
+
+def reconstruct(pack: Path, dst: Path):
+    manifest_path = pack / 'manifest.json'
+    cas_dir = pack / 'cas'
+
+    if not manifest_path.exists():
+        print(f"Error: manifest.json not found in {pack}")
+        sys.exit(EXIT_ERROR)
+
+    manifest = json.loads(manifest_path.read_bytes())
+
+    dst.mkdir(parents=True, exist_ok=True)
+
+    for rel, meta in manifest.items():
+        h = meta['sha256']
+        shard = cas_dir / h[:2]
+        blob = shard / h
+
+        if not blob.exists():
+            print(f"Error: Missing blob {h} for {rel}")
+            sys.exit(EXIT_ERROR)
+
+        content = blob.read_bytes()
+        if sha256_bytes(content) != h:
+            print(f"Error: Blob corruption for {rel}")
+            sys.exit(EXIT_VERIFY_MISMATCH)
+
+        out_path = dst / rel
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_bytes(content)
+
+    print(f"Reconstruct complete: {len(manifest)} files to {dst}")
+    sys.exit(EXIT_SUCCESS)
+
+
+def verify(src: Path, dst: Path):
+    src_manifest = {}
+    dst_manifest = {}
+
+    for root, _, files in os.walk(src):
+        for f in files:
+            p = Path(root) / f
+            rel = normalize_path(str(p.relative_to(src)))
+            src_manifest[rel] = sha256_file(p)
+
+    for root, _, files in os.walk(dst):
+        for f in files:
+            p = Path(root) / f
+            rel = normalize_path(str(p.relative_to(dst)))
+            dst_manifest[rel] = sha256_file(p)
+
+    if src_manifest == dst_manifest:
+        print(f"Verify SUCCESS: {len(src_manifest)} files match exactly.")
+        sys.exit(EXIT_SUCCESS)
+    else:
+        print("Verify FAILED: Mismatch detected.")
+        for k in set(src_manifest.keys()) | set(dst_manifest.keys()):
+            s = src_manifest.get(k)
+            d = dst_manifest.get(k)
+            if s != d:
+                print(f"  {k}: src={s} dst={d}")
+        sys.exit(EXIT_VERIFY_MISMATCH)
+
+
+def main():
+    parser = argparse.ArgumentParser(description='F3 CAS Prototype')
+    sub = parser.add_subparsers(dest='cmd')
+
+    build_p = sub.add_parser('build')
+    build_p.add_argument('--src', required=True, type=Path)
+    build_p.add_argument('--out', required=True, type=Path)
+    build_p.add_argument('--ignore', nargs='*', default=[])
+
+    recon_p = sub.add_parser('reconstruct')
+    recon_p.add_argument('--pack', required=True, type=Path)
+    recon_p.add_argument('--dst', required=True, type=Path)
+
+    verify_p = sub.add_parser('verify')
+    verify_p.add_argument('--src', required=True, type=Path)
+    verify_p.add_argument('--dst', required=True, type=Path)
+
+    args = parser.parse_args()
+
+    if args.cmd == 'build':
+        build(args.src, args.out, args.ignore)
+    elif args.cmd == 'reconstruct':
+        reconstruct(args.pack, args.dst)
+    elif args.cmd == 'verify':
+        verify(args.src, args.dst)
+    else:
+        parser.print_help()
+        sys.exit(EXIT_ERROR)
+
+
+if __name__ == '__main__':
     main()
