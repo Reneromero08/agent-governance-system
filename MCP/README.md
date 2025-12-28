@@ -2,9 +2,53 @@
 
 This directory contains the AGS MCP (Model Context Protocol) server, enabling external AI clients to interact with the Agent Governance System.
 
-## Quick Start
+---
 
-Preferred entrypoint: `CONTRACTS/_runs/ags_mcp_entrypoint.py` (redirects audit logs to `CONTRACTS/_runs/mcp_logs/`).
+## 🚀 **Quick Start - Automatic On-Demand**
+
+### **Option 1: Auto-Start (Recommended - Zero Setup)**
+
+**No manual start needed!** Just connect from any client and the server auto-starts.
+
+Use `CONTRACTS/_runs/ags_mcp_auto.py` as your entrypoint - server starts automatically on first interaction.
+
+**For Claude Desktop:** The config in `MCP/claude_desktop_config.json` is already configured for auto-start.
+
+### **Option 2: Manual Start**
+
+```powershell
+# 1. Start the server (runs in background)
+cd "d:\CCC 2.0\AI\agent-governance-system"
+.\MCP\autostart.ps1 -Start
+
+# 2. Verify it's running
+.\MCP\autostart.ps1 -Status
+```
+
+**Both work!** Multiple agents, extensions, and clients can connect simultaneously.
+
+### **Common Commands**
+
+| Command | What it does |
+|---------|-------------|
+| `.\MCP\autostart.ps1 -Start` | Start server in background |
+| `.\MCP\autostart.ps1 -Stop` | Stop the server |
+| `.\MCP\autostart.ps1 -Status` | Check if running |
+| `.\MCP\autostart.ps1 -Restart` | Restart the server |
+| `.\MCP\autostart.ps1 -Install` | Install autostart at boot (requires admin) |
+
+### **Alternative: Foreground Mode**
+
+```cmd
+MCP\start_simple.cmd
+```
+Runs in current window. Press Ctrl+C to stop.
+
+---
+
+## Quick Start (Claude Desktop)
+
+**Recommended entrypoint:** `CONTRACTS/_runs/ags_mcp_auto.py` (auto-starts server, redirects audit logs to `CONTRACTS/_runs/mcp_logs/`).
 
 ### Connect Claude Desktop
 
@@ -12,9 +56,23 @@ Preferred entrypoint: `CONTRACTS/_runs/ags_mcp_entrypoint.py` (redirects audit l
    - **Windows:** `%APPDATA%\Claude\claude_desktop_config.json`
    - **macOS:** `~/Library/Application Support/Claude/claude_desktop_config.json`
 
-2. Add one of these entries (or update your existing):
+2. Add this entry (or copy from `MCP/claude_desktop_config.json`):
 
-**Windows (native Python):**
+**Windows (Auto-Start - Recommended):**
+
+```json
+{
+  "mcpServers": {
+    "ags": {
+      "command": "python",
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "cwd": "D:/CCC 2.0/AI/agent-governance-system"
+    }
+  }
+}
+```
+
+**Alternative (Manual Start Required):**
 
 ```json
 {
