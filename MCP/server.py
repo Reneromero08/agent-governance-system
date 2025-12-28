@@ -24,6 +24,8 @@ SCHEMAS_DIR = Path(__file__).parent / "schemas"
 # Logging path (per ADR-015: all logs under CONTRACTS/_runs/)
 # When using CONTRACTS/_runs/ags_mcp_entrypoint.py, this is redirected to the entrypoint's location
 LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
+BOARD_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs" / "message_board"
+BOARD_ROLES_PATH = PROJECT_ROOT / "MCP" / "board_roles.json"
 
 
 def load_schema(name: str) -> Dict:
@@ -252,6 +254,8 @@ class AGSMCPServer:
             "adr_create": self._tool_adr_create,
             "commit_ceremony": self._tool_commit_ceremony,
             "research_cache": self._tool_research_cache,
+            "message_board_list": self._tool_message_board_list,
+            "message_board_write": self._tool_message_board_write,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -455,6 +459,198 @@ class AGSMCPServer:
             "description": f"Prompt '{prompt_name}' not implemented",
             "messages": []
         }
+
+    def _normalize_board(self, board: str) -> str:
+        if not isinstance(board, str) or not board.strip():
+            raise ValueError("BOARD_INVALID")
+        board = board.strip()
+        allowed = set("abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.")
+        if any(ch not in allowed for ch in board):
+            raise ValueError("BOARD_INVALID")
+        return board
+
+    def _load_board_roles(self) -> Dict[str, List[str]]:
+        if not BOARD_ROLES_PATH.exists():
+            return {"moderators": [], "admins": []}
+        try:
+            obj = json.loads(BOARD_ROLES_PATH.read_text(encoding="utf-8"))
+        except Exception:
+            return {"moderators": [], "admins": []}
+        moderators = obj.get("moderators", [])
+        admins = obj.get("admins", [])
+        if not isinstance(moderators, list):
+            moderators = []
+        if not isinstance(admins, list):
+            admins = []
+        return {"moderators": moderators, "admins": admins}
+
+    def _board_role(self) -> str:
+        roles = self._load_board_roles()
+        if self.session_id in roles.get("admins", []):
+            return "admin"
+        if self.session_id in roles.get("moderators", []):
+            return "moderator"
+        return "poster"
+
+    def _board_path(self, board: str) -> Path:
+        return BOARD_ROOT / f"{board}.jsonl"
+
+    def _append_board_event(self, board: str, event: Dict[str, Any]) -> None:
+        BOARD_ROOT.mkdir(parents=True, exist_ok=True)
+        path = self._board_path(board)
+        line = json.dumps(event, sort_keys=True, separators=(",", ":"))
+        with path.open("a", encoding="utf-8") as f:
+            f.write(line + "\n")
+
+    def _load_board_events(self, board: str) -> List[Dict[str, Any]]:
+        path = self._board_path(board)
+        if not path.exists():
+            return []
+        events: List[Dict[str, Any]] = []
+        for line in path.read_text(encoding="utf-8").splitlines():
+            if not line.strip():
+                continue
+            try:
+                obj = json.loads(line)
+                if isinstance(obj, dict):
+                    events.append(obj)
+            except Exception:
+                continue
+        return events
+
+    def _materialize_board(
+        self,
+        events: List[Dict[str, Any]],
+        *,
+        include_deleted: bool,
+        pinned_first: bool,
+        limit: Optional[int],
+    ) -> List[Dict[str, Any]]:
+        posts: Dict[str, Dict[str, Any]] = {}
+        order: List[str] = []
+        for event in events:
+            etype = event.get("type")
+            if etype == "purge":
+                posts = {}
+                order = []
+                continue
+            if etype == "post":
+                post_id = event.get("id")
+                if isinstance(post_id, str) and post_id:
+                    posts[post_id] = {
+                        "id": post_id,
+                        "message": event.get("message"),
+                        "author_session_id": event.get("author_session_id"),
+                        "role": event.get("role"),
+                        "created_at": event.get("created_at"),
+                        "pinned": False,
+                        "deleted": False,
+                    }
+                    order.append(post_id)
+                continue
+            ref_id = event.get("ref_id")
+            if not isinstance(ref_id, str) or ref_id not in posts:
+                continue
+            if etype == "pin":
+                posts[ref_id]["pinned"] = True
+            elif etype == "unpin":
+                posts[ref_id]["pinned"] = False
+            elif etype == "delete":
+                posts[ref_id]["deleted"] = True
+
+        items = [posts[pid] for pid in order if pid in posts]
+        if not include_deleted:
+            items = [item for item in items if not item.get("deleted")]
+        if pinned_first:
+            items = sorted(items, key=lambda x: (not x.get("pinned", False), x.get("created_at") or ""))
+        if isinstance(limit, int) and limit > 0:
+            items = items[:limit]
+        return items
+
+    def _tool_message_board_list(self, args: Dict) -> Dict:
+        board = self._normalize_board(args.get("board", "default"))
+        include_deleted = bool(args.get("include_deleted", False))
+        pinned_first = bool(args.get("pinned_first", True))
+        limit = args.get("limit")
+        if limit is not None and not isinstance(limit, int):
+            return {
+                "content": [{"type": "text", "text": "Invalid limit"}],
+                "isError": True,
+            }
+        events = self._load_board_events(board)
+        items = self._materialize_board(
+            events,
+            include_deleted=include_deleted,
+            pinned_first=pinned_first,
+            limit=limit,
+        )
+        payload = {
+            "board": board,
+            "count": len(items),
+            "items": items,
+        }
+        return {"content": [{"type": "text", "text": json.dumps(payload, sort_keys=True)}]}
+
+    @governed_tool
+    def _tool_message_board_write(self, args: Dict) -> Dict:
+        from datetime import datetime, timezone
+        import uuid
+
+        board = self._normalize_board(args.get("board", "default"))
+        action = args.get("action")
+        if action not in {"post", "pin", "unpin", "delete", "purge"}:
+            return {
+                "content": [{"type": "text", "text": "Invalid action"}],
+                "isError": True,
+            }
+        role = self._board_role()
+        required = {
+            "post": {"poster", "moderator", "admin"},
+            "pin": {"moderator", "admin"},
+            "unpin": {"moderator", "admin"},
+            "delete": {"moderator", "admin"},
+            "purge": {"admin"},
+        }
+        if role not in required[action]:
+            return {
+                "content": [{"type": "text", "text": "BOARD_FORBIDDEN"}],
+                "isError": True,
+            }
+
+        message = args.get("message")
+        ref_id = args.get("ref_id")
+        if action == "post":
+            if not isinstance(message, str) or not message.strip():
+                return {
+                    "content": [{"type": "text", "text": "MESSAGE_REQUIRED"}],
+                    "isError": True,
+                }
+        if action in {"pin", "unpin", "delete"}:
+            if not isinstance(ref_id, str) or not ref_id.strip():
+                return {
+                    "content": [{"type": "text", "text": "REF_ID_REQUIRED"}],
+                    "isError": True,
+                }
+
+        event = {
+            "id": uuid.uuid4().hex,
+            "board": board,
+            "author_session_id": self.session_id,
+            "role": role,
+            "type": action,
+            "message": message if action == "post" else None,
+            "ref_id": ref_id if action in {"pin", "unpin", "delete"} else None,
+            "created_at": datetime.now(timezone.utc).isoformat(),
+        }
+        self._append_board_event(board, event)
+        payload = {
+            "ok": True,
+            "event_id": event["id"],
+            "board": board,
+            "role": role,
+            "action": action,
+        }
+        return {"content": [{"type": "text", "text": json.dumps(payload, sort_keys=True)}]}
 
     # Tool implementations
     def _tool_cortex_query(self, args: Dict) -> Dict:
