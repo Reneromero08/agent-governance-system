@@ -2,6 +2,35 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.18] - 2025-12-29
+
+### MCP Message Board
+
+#### Added
+- `MCP/board_roles.json` role allowlist for message board moderation.
+- MCP tools: `message_board_list`, `message_board_write` (post/pin/unpin/delete/purge).
+- Append-only storage under `CONTRACTS/_runs/message_board/`.
+- `SKILLS/mcp-message-board/` governance placeholder skill with fixtures.
+- `CONTEXT/decisions/ADR-024-mcp-message-board.md`.
+
+#### Changed
+- `MCP/server.py` to implement message board handlers.
+- `MCP/schemas/tools.json` to register message board tools.
+
+## [2.12.0] - 2025-12-29
+
+### Swarm Runtime & Schema Hardening (created 2025-12-29)
+
+#### Added
+- **Phase 7 (Swarm):** `CATALYTIC-DPT/SCHEMAS/swarm.schema.json` and `PIPELINES/swarm_runtime.py` for executing DAGs of pipelines.
+- **Phase 8 (Model Binding):** Router receipt artifacts (`ROUTER.json`, `ROUTER_OUTPUT.json`) in `ags plan` for auditing model outputs.
+- **Phase 9 (Release):** `CATALYTIC-DPT/SCHEMAS/VERSIONING_POLICY.md` and `RELEASE_CHECKLIST.md` for disciplined schema evolution.
+- **Windows Support:** Hardened testbench by replacing `python3` with `sys.executable` and ensuring `os.environ` inheritance.
+
+#### Changed
+- `TOOLS/ags.py`: Updated `ags plan` to emit router receipts and `ags run` to use unified `POLICY.json`.
+- `CATALYTIC-DPT/SCHEMAS/ags_plan.schema.json`: Added `router` metadata property.
+
 ## [2.11.17] - 2025-12-27
 
 ### CAT-DPT Phase 6.9: Capability Revocation Semantics (created 2025-12-27)
