@@ -39,6 +39,9 @@ def _atomic_write_bytes(path: Path, data: bytes) -> None:
     tmp.write_bytes(data)
     os.replace(tmp, path)
 
+def _atomic_write_canon_json(path: Path, obj: Any) -> None:
+    _atomic_write_bytes(path, canonical_json_bytes(obj))
+
 def _load_json_output(text: str) -> Dict[str, Any]:
     if not text:
         return {}
@@ -542,6 +545,16 @@ def ags_plan(
     if pipeline_id is not None:
         env["AGS_PIPELINE_ID"] = pipeline_id
 
+    # Resolve router path for hashing
+    router_path = Path(router)
+    if not router_path.is_absolute():
+        router_path = REPO_ROOT / router_path
+    
+    # Hash the router executable
+    router_hash = None
+    if router_path.exists() and router_path.is_file():
+        router_hash = hashlib.sha256(router_path.read_bytes()).hexdigest()
+
     proc = subprocess.run(
         [router, *router_args],
         cwd=str(REPO_ROOT),
@@ -557,12 +570,26 @@ def ags_plan(
     if len(out) > max_bytes:
         raise RuntimeError(f"ROUTER_OUTPUT_TOO_LARGE: {len(out)} > {max_bytes}")
 
+    # Phase 8: Hash the raw router output (transcript hash)
+    router_transcript_hash = hashlib.sha256(out).hexdigest()
+
     text = out.decode("utf-8")
     if text.startswith("\ufeff"):
         raise ValueError("router output must not start with BOM")
     plan_obj = json.loads(text)
     if not isinstance(plan_obj, dict):
         raise ValueError("router output must be a JSON object")
+
+    # Build router receipt
+    router_receipt = {
+        "router_executable": str(router),
+        "router_args": list(router_args),
+        "router_hash": router_hash,
+        "max_bytes": max_bytes,
+        "transcript_hash": router_transcript_hash,
+    }
+    # Embed in plan for downstream verification/logging
+    plan_obj["router"] = router_receipt
 
     _validate_plan_schema(plan_obj)
     steps = plan_obj.get("steps")
@@ -604,13 +631,45 @@ def ags_plan(
 
     if pipeline_id is not None:
         plan_obj["pipeline_id"] = pipeline_id
+        
+        # Persist router artifacts to pipeline directory
+        pdir = _pipeline_dir(pipeline_id)
+        pdir.mkdir(parents=True, exist_ok=True)
+        _atomic_write_canon_json(pdir / "ROUTER.json", router_receipt)
+        _atomic_write_canon_json(pdir / "ROUTER_OUTPUT.json", plan_obj)
+        # Store raw bytes for the transcript hash
+        (pdir / "ROUTER_TRANSCRIPT_HASH").write_text(router_transcript_hash, encoding="utf-8")
 
     out_bytes = canonical_json_bytes(plan_obj)
     if len(out_bytes) > MAX_PLAN_BYTES_DEFAULT:
         raise RuntimeError(f"PLAN_BYTES_TOO_LARGE_AFTER_CANON: {len(out_bytes)} > {MAX_PLAN_BYTES_DEFAULT}")
 
+    # Phase 8: Write router receipt artifacts
+    receipt_dir = out_path.parent / f".router_receipts"
+    receipt_dir.mkdir(parents=True, exist_ok=True)
+    
+    # ROUTER.json - what router ran
+    router_receipt = {
+        "router_executable": str(router_path.relative_to(REPO_ROOT)) if router_path.is_relative_to(REPO_ROOT) else str(router_path),
+        "router_args": router_args,
+        "router_hash_sha256": router_hash,
+        "router_exit_code": proc.returncode,
+        "router_stderr_bytes": len(proc.stderr) if proc.stderr else 0,
+    }
+    router_receipt_path = receipt_dir / f"{out_path.stem}_ROUTER.json"
+    _atomic_write_bytes(router_receipt_path, canonical_json_bytes(router_receipt))
+    
+    # ROUTER_OUTPUT.json - canonical plan output
+    router_output_path = receipt_dir / f"{out_path.stem}_ROUTER_OUTPUT.json"
+    _atomic_write_bytes(router_output_path, out_bytes)
+    
+    # ROUTER_TRANSCRIPT_HASH - hash of raw bytes
+    transcript_hash_path = receipt_dir / f"{out_path.stem}_ROUTER_TRANSCRIPT_HASH"
+    _atomic_write_bytes(transcript_hash_path, router_transcript_hash.encode("utf-8"))
+
     _write_idempotent(out_path, out_bytes)
     sys.stdout.write(f"OK wrote {out_path}\n")
+    sys.stdout.write(f"OK wrote router receipts to {receipt_dir}\n")
     return 0
 
 
