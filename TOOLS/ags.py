@@ -673,7 +673,7 @@ def ags_plan(
     return 0
 
 
-def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool, allow_repo_write: bool) -> int:
+def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool, allow_repo_write: bool, allow_dirty: bool) -> int:
     if runs_root != "CONTRACTS/_runs":
         raise RuntimeError("UNSUPPORTED_RUNS_ROOT (only CONTRACTS/_runs is supported)")
 
@@ -700,6 +700,8 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
     ]
 
     preflight_cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py"), "--json"]
+    if allow_dirty:
+        preflight_cmd.append("--allow-dirty-tracked")
     preflight_res = subprocess.run(preflight_cmd, cwd=str(REPO_ROOT))
     if preflight_res.returncode != 0:
         sys.stdout.write(f"FAIL preflight rc={preflight_res.returncode}\n")
@@ -782,6 +784,7 @@ def main(argv: List[str] | None = None) -> int:
     run_p.add_argument("--strict", action="store_true", help="Strict verification (always on)")
     run_p.add_argument("--repo-write", action="store_true", help="Derived mode indicates repo-write behavior")
     run_p.add_argument("--allow-repo-write", action="store_true", help="Allow repo writes when mode is repo-write")
+    run_p.add_argument("--allow-dirty", action="store_true", help="Allow dirty tracked files in preflight")
 
     preflight_p = sub.add_parser("preflight", help="Emit JSON preflight verdict (fail-closed)")
     preflight_p.add_argument("--strict", action="store_true", help="Treat untracked files as blocking")
@@ -815,6 +818,7 @@ def main(argv: List[str] | None = None) -> int:
                 strict=bool(args.strict),
                 repo_write=bool(args.repo_write),
                 allow_repo_write=bool(args.allow_repo_write),
+                allow_dirty=bool(args.allow_dirty),
             )
         if args.cmd == "preflight":
             preflight = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py")]
