@@ -1,0 +1,12 @@
+{
+  "status": "error",
+  "task_id": "gov-dispatch-001",
+  "command_type": "dispatch",
+  "executed_in": "YOUR_VSCode_Terminal_via_Gemini_CLI",
+  "timestamp": "2025-12-28T00:55:02.509065",
+  "gemini_analysis": {
+    "status": "error",
+    "message": "Gemini call timed out after 60s",
+    "recommendation": "Increase timeout or simplify the prompt"
+  }
+}
