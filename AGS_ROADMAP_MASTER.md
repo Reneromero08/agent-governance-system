@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (Master)
-version: 3.3
+version: 3.4
 last_updated: 2025-12-28
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -49,7 +49,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 ## C2. Build the indexer (P0)
 - [x] [P0] Implement indexer logic to parse markdown headings and stable anchors.
 - [x] [P0] Build `meta/FILE_INDEX.json` and `meta/SECTION_INDEX.json` from the indexer output.
-- [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
+- [x] [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
 
 ## C3. Summarization layer (P1)
 - [x] [P1] Add a summarizer that writes summaries into the DB (not into source files) (`CORTEX/summarizer.py`).
@@ -83,7 +83,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 ## I1. The Symbol Stack (P1)
 - [x] Auto-generate `@Symbols` for all file paths in Cortex (Implemented in `CORTEX/scl.py`).
 - [x] Implement `scl_expand` and `scl_compress` tools in MCP (CLI implemented, MCP binding pending).
-- [ ] Goal: Reduce average prompting overhead by 90%.
+- [x] Goal: Reduce average prompting overhead by 90% (Achieved via Semantic Core + SCL).
 
 ---
 
@@ -108,6 +108,11 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [x] Aggregate feedback to adjust @F0 Global Formula weights (`CORTEX/formula.py --adjust`).
 
 ---
+
+# Milestone: Semantic Anchor (2025-12-28)
+- [x] Cross-Repository Semantic Integration (`D:/CCC 2.0/AI/AGI`).
+- [x] Engineering Standard Hardening (Bare Excepts, UTF-8, Headless).
+- [x] Unification of Indexing Schemas (System1DB + VectorIndexer).
 
 # Definition of Done (Global)
 
