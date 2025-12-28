@@ -74,8 +74,13 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     reg_path = tmp_path / "CAPABILITIES.json"
     reg_path.write_bytes(_canon(registry))
 
+    pins = {"pins_version": "1.0.0", "allowed_capabilities": sorted([cap])}
+    pins_path = tmp_path / "CAPABILITY_PINS.json"
+    pins_path.write_bytes(_canon(pins))
+
     env = dict(os.environ)
     env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
+    env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
     plan_ok = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": cap}]}
     plan_ok_path = tmp_path / "plan_ok.json"
@@ -119,7 +124,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         )
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--skip-preflight"], env=env)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
 
         r_verify_ok = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)

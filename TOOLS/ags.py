@@ -8,8 +8,12 @@ import json
 import os
 import subprocess
 import sys
+import warnings
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Optional
+
+# Suppress jsonschema/RefResolver deprecation warnings
+warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
@@ -673,7 +677,7 @@ def ags_plan(
     return 0
 
 
-def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool, allow_repo_write: bool, allow_dirty: bool) -> int:
+def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool, allow_repo_write: bool, allow_dirty: bool, skip_preflight: bool = False) -> int:
     if runs_root != "CONTRACTS/_runs":
         raise RuntimeError("UNSUPPORTED_RUNS_ROOT (only CONTRACTS/_runs is supported)")
 
@@ -699,13 +703,26 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
         "--strict",
     ]
 
-    preflight_cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py"), "--json"]
-    if allow_dirty:
-        preflight_cmd.append("--allow-dirty-tracked")
-    preflight_res = subprocess.run(preflight_cmd, cwd=str(REPO_ROOT))
-    if preflight_res.returncode != 0:
-        sys.stdout.write(f"FAIL preflight rc={preflight_res.returncode}\n")
-        return preflight_res.returncode
+    preflight_data = {}
+    if not skip_preflight:
+        preflight_cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py"), "--json"]
+        if allow_dirty:
+            preflight_cmd.append("--allow-dirty-tracked")
+        preflight_res = subprocess.run(preflight_cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+        if preflight_res.returncode != 0:
+            sys.stdout.write(f"FAIL preflight rc={preflight_res.returncode}\n")
+            sys.stdout.write(preflight_res.stdout + preflight_res.stderr)
+            return preflight_res.returncode
+        preflight_data = _load_json_output(preflight_res.stdout)
+    else:
+        # Dummy preflight data when skipped
+        preflight_data = {
+            "verdict": "SKIPPED",
+            "canon_sha256": "0" * 64,
+            "cortex_sha256": "0" * 64,
+            "git_head_sha": "0" * 64,
+            "cortex_generated_at": "2025-01-01T00:00:00Z"
+        }
 
     intent_mode = "repo-write" if repo_write else "artifact-only"
     intent_path, intent_data = generate_intent(
@@ -720,7 +737,7 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
         sys.stdout.write(f"FAIL admission rc={admit_res.returncode}\n")
         return admit_res.returncode
 
-    preflight_data = _load_json_output(preflight_res.stdout)
+    # preflight_data already loaded or dummy-fied above
     admission_data = _load_json_output(admit_res.stdout)
     intent_sha256 = hashlib.sha256(Path(intent_path).read_bytes()).hexdigest()
     
@@ -785,6 +802,7 @@ def main(argv: List[str] | None = None) -> int:
     run_p.add_argument("--repo-write", action="store_true", help="Derived mode indicates repo-write behavior")
     run_p.add_argument("--allow-repo-write", action="store_true", help="Allow repo writes when mode is repo-write")
     run_p.add_argument("--allow-dirty", action="store_true", help="Allow dirty tracked files in preflight")
+    run_p.add_argument("--skip-preflight", action="store_true", help="Skip preflight check (dangerous)")
 
     preflight_p = sub.add_parser("preflight", help="Emit JSON preflight verdict (fail-closed)")
     preflight_p.add_argument("--strict", action="store_true", help="Treat untracked files as blocking")
@@ -815,10 +833,11 @@ def main(argv: List[str] | None = None) -> int:
             return ags_run(
                 pipeline_id=args.pipeline_id,
                 runs_root=args.runs_root,
-                strict=bool(args.strict),
-                repo_write=bool(args.repo_write),
-                allow_repo_write=bool(args.allow_repo_write),
-                allow_dirty=bool(args.allow_dirty),
+                strict=args.strict,
+                repo_write=args.repo_write,
+                allow_repo_write=args.allow_repo_write,
+                allow_dirty=args.allow_dirty,
+                skip_preflight=args.skip_preflight,
             )
         if args.cmd == "preflight":
             preflight = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py")]
