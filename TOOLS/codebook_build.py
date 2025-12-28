@@ -187,6 +187,7 @@ def extract_canon_files(canon_dir: Path) -> List[Dict]:
         "CRISIS.md": ("@R0", "Crisis procedures"),
         "STEWARDSHIP.md": ("@H0", "Human escalation paths"),
         "FORMULA.md": ("@F0", "The Living Formula"),
+        "INTEGRITY.md": ("@T0", "The Catalytic Integrity Stack (The Truth)"),
     }
     
     for filename, (code, summary) in canon_mapping.items():

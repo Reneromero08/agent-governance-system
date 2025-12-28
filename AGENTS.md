@@ -2,7 +2,7 @@
 
 Agent Operating Contract for the Agent Governance System (AGS)
 
-> **⚠️ TERMINAL DISCONTINUATION**: The **interactive terminal bridge** (VSCode terminal tabs) and its associated `launch-terminal` skill are currently **UNDER CONSTRUCTION** and marked as **NOT USEABLE**. However, the **Swarm Orchestrator (Parallel DAG Execution)** is **ACTIVE** and remains the primary engine for distributed tasks. Use programmatic swarm calls only.
+> **⛔ HARD PROHIBITION**: The **interactive terminal bridge** (VSCode terminal tabs) has been **AMPUTATED** from the system. The `launch-terminal` skill has been deleted. Agents are STRICTLY FORBIDDEN from attempting to spawn terminal windows or using interactive bridge tools. All work must be conducted via background processes and verified artifacts. The Swarm remains active for background task execution only.
 
 This file defines how autonomous or semi-autonomous agents operate inside this
 repository. It is procedural authority. If unclear, defer to CANON.

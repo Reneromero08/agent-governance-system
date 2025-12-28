@@ -5,6 +5,9 @@ This directory contains the "Canon"—the laws, rules, and agreements that gover
 ## The Driver (Foundation)
 - [FORMULA.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/FORMULA.md): The Living Formula. Navigating entropy with symbols that scale.
 
+## The Truth (Foundation)
+- [INTEGRITY.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/INTEGRITY.md): The Catalytic Integrity Stack. Truth is artifacts, not narrative.
+
 ## The Constitution (Highest Authority)
 - [AGREEMENT.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/AGREEMENT.md): The separation of liability. Human = Sovereign, Agent = Instrument.
 - [CONTRACT.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/CONTRACT.md): The operational rules and authority gradient.
