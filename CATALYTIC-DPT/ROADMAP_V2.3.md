@@ -261,32 +261,43 @@ Intent
 Let local models (LFM2, etc.) produce plans, but never grant them authority.
 
 Deliverables
+
 - [x] Router receipt artifacts:
+
   - `ROUTER.json` (what ran, caps, hash of executable)
+
   - `ROUTER_OUTPUT.json` (canonical JSON plan output)
+
   - `ROUTER_TRANSCRIPT_HASH` (bytes read)
-- [ ] Cache router outputs by content hash (optional)
+
+- [x] Cache router outputs by content hash (optional)
+
 - [x] Tests:
+
   - router over-output fails closed
+
   - router stderr fails closed
+
   - malformed plan fails schema validation
+
   - plan that attempts capability escalation fails closed (Phase 6.6)
 
+
+
 Acceptance
+
 - [x] Swapping models does not change verification logic, only the produced plan.
+
 - [x] Plans are validated, capped, and recorded, not trusted.
 
-### Phase 9 Gate: Freeze, release discipline, and schema versioning (DONE)
-- [x] Schema versioning policy.
-- [x] Release checklist for "law changes".
-- [x] Artifact-only verifiability audit.
----
 
-## Immediate next actions (pick one, do the smallest)
-1) [DONE] **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
-2) [DONE] **PHASE 6.5**: Create `SKILLS/registry.json` + resolver + tests (no plan integration yet).
-3) [DONE] **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
-4) [DONE] **PHASE 6.7**: Registry immutability (Code complete + tests).
-5) **PHASE 6.8**: Capability versioning semantics.
-6) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
-7) **PHASE 9**: Write schema versioning policy and release checklist (no code).
+
+### Phase 9 Gate: Freeze, release discipline, and schema versioning (DONE)
+
+- [x] Schema versioning policy.
+
+- [x] Release checklist for "law changes".
+
+- [x] Artifact-only verifiability audit.
+
+- [x] Docs pass: single authoritative docs tree, no duplicated demo docs that can drift
