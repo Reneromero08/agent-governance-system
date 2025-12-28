@@ -21,6 +21,7 @@ This file lists decisions that are considered invariant.  Changing an invariant 
   - Referenced in the superseding rule or ADR.
   - Preserved in git history for audit.
 - **[INV-011] Schema Compliance** - All Law-Like files (ADRs, Skills, Style Preferences) must be valid against their respective JSON Schemas in `MCP/schemas/governance/`.
+- **[INV-012] Visible Execution** - Agents must not spawn hidden or external terminal windows (e.g., `start wt`, `xterm`). All interactive or long-running execution must occur via the Antigravity Bridge (invariant infrastructure) or within the current process. The Bridge is considered "Always On".
 
 ## Changing invariants
 

@@ -209,9 +209,18 @@ def _verify_receipt_matches(*, pipeline_dir: Path, expected: Dict[str, Any]) -> 
         v = expected.get(k)
         if not (isinstance(v, str) and _is_hex64(v)):
             raise ValueError("DAG_RECEIPT_MISMATCH")
-    actual = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
-    if actual != {k: expected[k] for k in actual.keys()}:
-        raise ValueError("DAG_RECEIPT_MISMATCH")
+    # Enforce strict receipt integrity: include RECEIPT.json in hash check
+    actual = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir, include_receipt=True)
+    
+    # If expected doesn't have RECEIPT.json (legacy), fallback to partial check? 
+    # No, strict mode requires it. But for upgrade safety during dev, we might conditionally check.
+    # However, for this fix, we simply check whatever actual returns.
+    
+    for k, v in actual.items():
+        print(f"DEBUG: Check {k}: Exp={expected.get(k)} Act={v} Pdir={pipeline_dir}")
+        if expected.get(k) != v:
+            # This covers mismatch AND missing key in expected
+             raise ValueError("DAG_RECEIPT_MISMATCH")
 
 
 def _receipt_executor_id() -> str:
@@ -485,7 +494,7 @@ def restore_dag(
         if _should_skip_node(rt=rt, deps=deps, node=node, completed=completed):
             completed.add(node)
             skipped.append(node)
-            receipts[node] = _pipeline_artifact_hashes(pipeline_dir=rt.pipeline_dir(node))
+            receipts[node] = _pipeline_artifact_hashes(pipeline_dir=rt.pipeline_dir(node), include_receipt=True)
 
     # Re-run incomplete nodes deterministically in topo order.
     for node in order:
@@ -524,7 +533,7 @@ def restore_dag(
             output_artifact_hashes=output_hashes,
             prior_receipt_hashes=expected_prior,
         )
-        receipts[node] = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
+        receipts[node] = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir, include_receipt=True)
         completed.add(node)
         rerun.append(node)
 
@@ -655,7 +664,7 @@ def run_dag(
             prior_receipt_hashes=prior_hashes,
         )
 
-        receipt = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
+        receipt = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir, include_receipt=True)
         receipts[node] = receipt
         completed.add(node)
         state["completed"] = [n for n in order if n in completed]
