@@ -1,8 +1,25 @@
 # Changelog
 
-All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
+All notable changes to the Agent Governance System will be documented in this file.
+
+## [2.15.0] - 2025-12-28
+
+### Fixed
+- **Headless Swarm Execution**: Modified `d:/CCC 2.0/AI/AGI/MCP/server.py` to use `subprocess.Popen` with `CREATE_NO_WINDOW` flag instead of Antigravity Bridge terminal API. Workers now run silently in the background.
+- **Terminal Prohibition**: Deleted `launch-terminal` and `mcp-startup` skills. Enforced INV-012 (Visible Execution).
+
+### Added
+- **ADR-029**: Headless Swarm Execution policy and implementation.
+- **F3 Prototype**: Catalytic Context Compression (CAS) with CLI for build/reconstruct/verify.
+- **F2 Prototype**: Catalytic Scratch Layer with byte-identical restoration.
+- **TOOLS/terminal_hunter.py**: Scanner for terminal-spawning code patterns.
+
+### Changed
+- **AGENTS.md**: Hard prohibition on terminal spawning.
+- **MAPS/ENTRYPOINTS.md**: Marked deleted skills.
 
 ## [2.14.0] - 2025-12-28
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
 ### The Living Formula (Driver)
 
