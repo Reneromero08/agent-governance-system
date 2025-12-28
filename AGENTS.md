@@ -23,6 +23,16 @@ Before taking any action, an agent MUST:
 
 If any of the above steps are skipped, the agent must stop.
 
+## 1C. Multi-agent workflow (worktrees)
+
+When multiple agents are active in the same repo, each agent MUST use a separate Git worktree (or branch + worktree) to avoid shared working-tree conflicts that break governance checks.
+
+Minimum practice:
+- One agent = one worktree directory.
+- Each agent updates `CANON/CHANGELOG.md` by adding a topmost entry, then rebases before push.
+- Do not run tests or commit from a shared dirty worktree.
+- Use `commit-queue` to enqueue and stage per-agent commit slices before the commit ceremony.
+
 ## 1A. Question-first gate (no-write)
 
 If the user is asking questions, requesting analysis, or requesting a strategy without explicitly approving implementation, the agent MUST:

@@ -1,10 +1,10 @@
 # ADR-023: Router/Model Trust Boundary
 
-## Status
-Accepted
-
-## Date
-2025-12-27
+**Status:** Accepted
+**Date:** 2025-12-27
+**Confidence:** High
+**Impact:** High
+**Tags:** [governance, routers, receipts]
 
 ## Context
 

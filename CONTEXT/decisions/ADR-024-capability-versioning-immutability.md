@@ -1,10 +1,10 @@
 # ADR-024: Capability Versioning Semantics (Immutability-by-Content)
 
-## Status
-Accepted
-
-## Date
-2025-12-27
+**Status:** Accepted
+**Date:** 2025-12-27
+**Confidence:** High
+**Impact:** High
+**Tags:** [governance, capability-versioning, security]
 
 ## Context
 

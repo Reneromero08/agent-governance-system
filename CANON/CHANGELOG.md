@@ -2,6 +2,16 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.12.1] - 2025-12-29
+
+### Commit Queue (created 2025-12-29)
+
+#### Added
+- `SKILLS/commit-queue/` skill with fixtures for deterministic commit queueing and staging.
+
+#### Changed
+- `AGENTS.md` multi-agent workflow guidance now references `commit-queue`.
+
 ## [2.11.18] - 2025-12-29
 
 ### MCP Message Board

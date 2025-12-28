@@ -256,6 +256,10 @@ Acceptance
 - [x] Any missing or tampered pipeline proof fails the swarm verification.
 - [x] Identical swarm re-execution elides all pipeline/skill/model execution and emits a valid swarm receipt.
 
+Clarification: “Identical” is determined solely by the canonical swarm spec hash combined with the ordered pipeline intent hashes (plus the capability + policy hashes that govern the execution context).
+
+Elided re-executions must still emit a new swarm receipt and top-level chain, reference the prior pipeline proofs by hash, and pass verification end-to-end without performing any pipeline/skill/model execution.
+
 ---
 
 ## PHASE 8: Model binding (optional, replaceable, never trusted)
