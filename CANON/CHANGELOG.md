@@ -34,6 +34,19 @@ All notable changes to Agent Governance System will be documented in this file.
 - **AGS_ROADMAP_MASTER.md**: Updated to reflect completed tasks (F3, INV-012, System 1 DB schema, Lane B2, Lane C1/C2).
 - **CANON/STEWARDSHIP.md**: Added 6 mandatory engineering practices (no bare excepts, atomic writes, headless execution, deterministic outputs, safety caps, database best practices).
 
+## [2.16.0] - 2025-12-28
+### Added
+- **CORTEX/feedback.py**: Agent resonance reporting system (Lane G2).
+- **CORTEX/embeddings.py**: Vector embedding engine for semantic search (Lane V1).
+- **CORTEX/vector_indexer.py**: Batch vector indexer for CORTEX sections (Lane V1).
+- **CORTEX/semantic_search.py**: Cosine similarity retrieval interface (Lane V1).
+- **ADR-030**: Semantic Core Architecture for hybrid model swarms.
+- **schema/002_vectors.sql**: Vector database schema for SQLite.
+
+### Changed
+- **AGS_ROADMAP_MASTER.md**: Updated to v3.3; marked Lane G2 and Lane V1 as complete.
+- **CANON/STEWARDSHIP.md**: Codified database best practices and resonance reporting.
+
 ## [2.14.0] - 2025-12-28
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
