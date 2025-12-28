@@ -13,6 +13,8 @@ from typing import Any, Dict, List, Tuple, Optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[1]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import _slug  # type: ignore
@@ -26,6 +28,8 @@ from PRIMITIVES.registry_validators import (
 )  # type: ignore
 
 from jsonschema import Draft7Validator, RefResolver
+
+from TOOLS.intent import generate_intent
 
 
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
@@ -545,7 +549,7 @@ def ags_plan(
     return 0
 
 
-def ags_run(*, pipeline_id: str, runs_root: str, strict: bool) -> int:
+def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool, allow_repo_write: bool) -> int:
     if runs_root != "CONTRACTS/_runs":
         raise RuntimeError("UNSUPPORTED_RUNS_ROOT (only CONTRACTS/_runs is supported)")
 
@@ -570,6 +574,25 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool) -> int:
         runs_root,
         "--strict",
     ]
+
+    preflight_cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py"), "--json"]
+    preflight_res = subprocess.run(preflight_cmd, cwd=str(REPO_ROOT))
+    if preflight_res.returncode != 0:
+        sys.stdout.write(f"FAIL preflight rc={preflight_res.returncode}\n")
+        return preflight_res.returncode
+
+    intent_mode = "repo-write" if repo_write else "artifact-only"
+    intent_path, _ = generate_intent(
+        pipeline_id,
+        runs_root,
+        mode=intent_mode,
+        allow_repo_write=allow_repo_write,
+    )
+    admit_cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "admission.py"), "--intent", str(intent_path)]
+    admit_res = subprocess.run(admit_cmd, cwd=str(REPO_ROOT))
+    if admit_res.returncode != 0:
+        sys.stdout.write(f"FAIL admission rc={admit_res.returncode}\n")
+        return admit_res.returncode
 
     sys.stdout.write("AGS: running pipeline\n")
     res = subprocess.run(run_cmd, cwd=str(REPO_ROOT))
@@ -607,6 +630,8 @@ def main(argv: List[str] | None = None) -> int:
     run_p.add_argument("--pipeline-id", required=True, help="Pipeline ID")
     run_p.add_argument("--runs-root", default="CONTRACTS/_runs", help="Runs root (default: CONTRACTS/_runs)")
     run_p.add_argument("--strict", action="store_true", help="Strict verification (always on)")
+    run_p.add_argument("--repo-write", action="store_true", help="Derived mode indicates repo-write behavior")
+    run_p.add_argument("--allow-repo-write", action="store_true", help="Allow repo writes when mode is repo-write")
 
     preflight_p = sub.add_parser("preflight", help="Emit JSON preflight verdict (fail-closed)")
     preflight_p.add_argument("--strict", action="store_true", help="Treat untracked files as blocking")
@@ -634,7 +659,13 @@ def main(argv: List[str] | None = None) -> int:
                 runs_root=args.runs_root,
             )
         if args.cmd == "run":
-            return ags_run(pipeline_id=args.pipeline_id, runs_root=args.runs_root, strict=bool(args.strict))
+            return ags_run(
+                pipeline_id=args.pipeline_id,
+                runs_root=args.runs_root,
+                strict=bool(args.strict),
+                repo_write=bool(args.repo_write),
+                allow_repo_write=bool(args.allow_repo_write),
+            )
         if args.cmd == "preflight":
             preflight = [sys.executable, str(REPO_ROOT / "TOOLS" / "preflight.py")]
             forwarded: List[str] = []
