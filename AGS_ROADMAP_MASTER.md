@@ -309,6 +309,26 @@ Exit conditions:
 - LITE pack remains small and stable.
 - FULL pack is reconstructible.
 
+## F4. Lock Phase 7 catalytic swarm acceptance (P1)
+
+Problem:
+- Phase 7.3 is marked DONE, but its acceptance criteria remain informal and vulnerable to interpretation drift; agents need a precise, hash-based definition before final approval.
+
+Tasks:
+- [x] Ensure the Phase 7 Gate section explicitly lists “Phase 7.3: catalytic swarm execution elision (identical swarms skip execution; emit valid, verifiable proofs).”
+- [x] Capture acceptance bullets that mention the top-level chain, tamper-resistant pipeline proofs, and the identical re-execution elision behavior.
+- [x] Add a short, hash-focused clarification that defines “identical” (canonical swarm spec hash, ordered pipeline intent hashes, capability and policy hashes).
+- [x] State that any elided re-execution must still emit a new swarm receipt/top-level chain, reference the prior pipeline proofs by hash, and pass verification even without execution.
+
+Acceptance
+- [x] A swarm run produces a top-level chain that binds each pipeline's proof.
+- [x] Any missing or tampered pipeline proof fails the swarm verification.
+- [x] Identical swarm re-execution elides all pipeline/skill/model execution and emits a valid swarm receipt.
+
+Clarification: “Identical” is determined solely by the canonical swarm spec hash combined with the ordered pipeline intent hashes plus the capability/policy hashes that govern the run.
+
+Elided re-executions must still emit a new swarm receipt and top-level chain, reference the prior pipeline proofs by hash, and pass verification end-to-end without executing the original pipeline/skill/model work.
+
 ---
 
 # Research References (Non-Binding)

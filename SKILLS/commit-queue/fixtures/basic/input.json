@@ -1,0 +1,13 @@
+{
+  "action": "enqueue",
+  "queue_id": "fixture-basic",
+  "entry": {
+    "message": "test commit queue",
+    "files": [
+      "CANON/CHANGELOG.md"
+    ],
+    "author": "fixture",
+    "notes": "basic",
+    "created_at": "2025-12-29T00:00:00Z"
+  }
+}
