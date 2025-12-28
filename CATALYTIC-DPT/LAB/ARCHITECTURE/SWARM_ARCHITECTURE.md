@@ -196,13 +196,13 @@ Because all terminals spawn inside VSCode:
 
 ## 9. PROHIBITED
 
-> **INV-014**: External window spawning is PROHIBITED
+> **INV-012**: Visible Execution (External window spawning is PROHIBITED)
 > 
 > ❌ `Start-Process wt` (Windows Terminal)
 > ❌ `subprocess.Popen` with external windows
 > ❌ Any process Brains cannot see
 >
-> ✅ Only use Antigravity Bridge on port 4000 or VSCode terminal    _OUTSIDE OF CHAT_
+> ✅ Only use Antigravity Bridge on port 4000 or VSCode terminal. **The Bridge is Invariant Infrastructure (Always On).**
 
 ---
 

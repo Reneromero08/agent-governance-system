@@ -123,6 +123,7 @@ class SwarmRuntime:
                 
             # Verify all referenced pipeline proofs still exist and match
             links = receipt.get("swarm_chain_links", [])
+            print(f"DEBUG: Checking {len(links)} links for elision of {swarm_hash}")
             for link in links:
                 node_id = link["node_id"]
                 expected_hash = link["receipt_hash"]
@@ -131,13 +132,19 @@ class SwarmRuntime:
                 pdir = self.rt.pipeline_dir(node_id)
                 current_receipt_path = pdir / "RECEIPT.json"
                 if not current_receipt_path.exists():
+                    print(f"DEBUG: Missing receipt for {node_id}")
                     return None
                 
                 current = json.loads(current_receipt_path.read_text(encoding="utf-8"))
-                if current.get("receipt_hash") != expected_hash:
+                current_hash = current.get("receipt_hash")
+                print(f"DEBUG: {node_id} expected={expected_hash[:8]}... current={current_hash[:8]}...")
+                
+                if current_hash != expected_hash:
+                    print(f"DEBUG: Hash mismatch for {node_id}")
                     return None # Tampered or overwritten
                     
             # All good - reconstruct artifacts
+            print("DEBUG: Elision verified")
             return receipt
         except Exception:
             return None
