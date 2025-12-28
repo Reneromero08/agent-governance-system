@@ -1,10 +1,13 @@
 # Canon Contract
 
+> **Driven by [The Living Formula (@F0)](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/FORMULA.md).**
+> The Formula defines the *Direction*. This Contract defines the *Boundaries*.
+
 This document defines the non-negotiable rules and the authority gradient for the Agent Governance System (AGS). It is the highest source of truth for all agents and humans interacting with this repository.
 
 ## Non-negotiable rules
 
-1. **Text outranks code.**  The canon (this directory) defines the working spec for this repository; implementation must follow.
+1. **Text outranks code.** The canon (this directory) defines the working spec for this repository; implementation must follow.
 2. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - create an ADR (Architecture Decision Record) under `CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);
    - add or update appropriate fixtures;
