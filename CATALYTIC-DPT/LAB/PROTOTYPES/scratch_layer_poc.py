@@ -30,18 +30,48 @@ def setup_environment():
     
     print(f"[Setup] Created mock repo at {PROJECT_ROOT}")
 
-def compute_hash(directory):
-    """Compute Merkle-like hash of a directory."""
-    sha = hashlib.sha256()
-    for root, _, files in os.walk(directory):
-        for file in sorted(files):
-            path = Path(root) / file
-            # Hash filename
-            rel_path = path.relative_to(directory).as_posix()
-            sha.update(rel_path.encode())
-            # Hash content
-            sha.update(path.read_bytes())
-    return sha.hexdigest()
+class CatalyticScratch:
+    """
+    Manages a catalytic scratch layer for destructive operations.
+    Guarantees isolation and restoration.
+    """
+    def __init__(self, source_root: Path, scratch_root: Path):
+        self.source = source_root
+        self.scratch = scratch_root
+        self.initial_hash = None
+
+    def __enter__(self):
+        """Initialize the scratch layer."""
+        self.initial_hash = self.compute_hash(self.source)
+        if self.scratch.exists():
+            shutil.rmtree(self.scratch)
+        shutil.copytree(self.source, self.scratch)
+        return self.scratch
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Teardown and verify integrity."""
+        # 1. Verification
+        final_hash = self.compute_hash(self.source)
+        integrity_ok = (final_hash == self.initial_hash)
+        
+        # 2. Cleanup
+        if self.scratch.exists():
+            shutil.rmtree(self.scratch)
+            
+        if not integrity_ok:
+            raise RuntimeError(f"INTEGRITY FAILURE: Source repo modified during scratch session! ({self.initial_hash} -> {final_hash})")
+            
+    @staticmethod
+    def compute_hash(directory: Path) -> str:
+        """Compute Merkle-like hash of a directory."""
+        sha = hashlib.sha256()
+        for root, _, files in os.walk(directory):
+            for file in sorted(files):
+                path = Path(root) / file
+                rel_path = path.relative_to(directory).as_posix()
+                sha.update(rel_path.encode())
+                sha.update(path.read_bytes())
+        return sha.hexdigest()
 
 def operations_phase(scratch_dir):
     """Perform DESTRUCTIVE operations in the scratch layer."""
@@ -58,47 +88,21 @@ def operations_phase(scratch_dir):
     
     print("[Operate] Destruction complete.")
 
-def restore_phase(original_dir, scratch_dir):
-    """
-    In a real git worktree, we would just `git checkout .` or delete the worktree.
-    Here, we simulate restoration by verifying the original inputs were untouched
-    and the scratch output yielded a specific artifact.
-    """
-    # Define what we WANTED to keep (the artifact)
-    artifact = (scratch_dir / "src" / "main.py").read_text()
+def demo_workflow():
+    """Demonstrate the CatalyticScratch context manager."""
+    setup_environment() # (Defined above)
+    print(f"[State] Initializing Catalytic Session...")
     
-    print(f"[Restore] Extracted artifact: {artifact.strip()}")
-    print("[Restore] Discarding scratch layer...")
-    shutil.rmtree(scratch_dir)
-
-def main():
-    setup_environment()
-    
-    # 1. Capture State (Hash)
-    initial_hash = compute_hash(PROJECT_ROOT)
-    print(f"[State] Initial Hash: {initial_hash}")
-    
-    # 2. Create Scratch Layer (Copy for POC, Worktree for Prod)
-    if SCRATCH_ROOT.exists():
-        shutil.rmtree(SCRATCH_ROOT)
-    shutil.copytree(PROJECT_ROOT, SCRATCH_ROOT)
-    print(f"[Catalyst] Created scratch layer at {SCRATCH_ROOT}")
-    
-    # 3. Execute Destructive Work
-    operations_phase(SCRATCH_ROOT)
-    
-    # 4. Verify original repo is UNTOUCHED (Isolation check)
-    current_hash = compute_hash(PROJECT_ROOT)
-    if current_hash != initial_hash:
-        print("[CRITICAL] FAIL: Main repo was tainted!")
+    try:
+        with CatalyticScratch(PROJECT_ROOT, SCRATCH_ROOT) as scratch_dir:
+            print(f"[Catalyst] Active in {scratch_dir}")
+            operations_phase(scratch_dir)
+            print("[Catalyst] Operations complete.")
+            
+        print("[Success] Session closed. Integrity verified.")
+    except Exception as e:
+        print(f"[CRITICAL] {e}")
         exit(1)
-    else:
-        print("[Success] Main repo integrity maintained.")
-        
-    # 5. Restore/Cleanup
-    restore_phase(PROJECT_ROOT, SCRATCH_ROOT)
-    
-    print("[Done] Experiment complete.")
 
 if __name__ == "__main__":
-    main()
+    demo_workflow()
