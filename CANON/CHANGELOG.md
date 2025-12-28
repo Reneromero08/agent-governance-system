@@ -25,7 +25,8 @@ All notable changes to Agent Governance System will be documented in this file.
 ### Changed
 - **AGENTS.md**: Hard prohibition on terminal spawning.
 - **MAPS/ENTRYPOINTS.md**: Marked deleted skills.
-- **AGS_ROADMAP_MASTER.md**: Updated to reflect completed tasks (F3, INV-012, System 1 DB schema).
+- **AGS_ROADMAP_MASTER.md**: Updated to reflect completed tasks (F3, INV-012, System 1 DB schema, Lane B2, Lane C1/C2).
+- **CANON/STEWARDSHIP.md**: Added 6 mandatory engineering practices (no bare excepts, atomic writes, headless execution, deterministic outputs, safety caps, database best practices).
 
 ## [2.14.0] - 2025-12-28
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
