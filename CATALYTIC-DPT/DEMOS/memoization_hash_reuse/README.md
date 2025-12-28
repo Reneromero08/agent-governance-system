@@ -29,7 +29,7 @@ Key checks (falsifiable from artifacts):
 
 Run:
 
-- `python3 CATALYTIC-DPT/DEMOS/memoization_hash_reuse/run_demo.py`
+- `python CATALYTIC-DPT/DEMOS/memoization_hash_reuse/run_demo.py`
 
 The script:
 - creates deterministic inputs under `CONTRACTS/_runs/_tmp/`
