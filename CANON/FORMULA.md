@@ -55,6 +55,7 @@ Imagine one equation you can use to analyze any system, predict how it will evol
 |**Society**|Shared values|Inequality, conflict|Institutions, culture, laws|Nested civic layers (local → global)|Charters, rituals, interfaces|Legitimate, just, and durable civilization|
 |**Consciousness**|Awareness|Stress, cognitive dissonance|Recursive thought, memory|Nested narratives of mind|Language, symbols|Coherent thought, flow states, deep insight|
 |Cybernetics|Goal / purpose|Disturbance, noise, uncertainty|Signals, feedback, models, error-correction data|Nested feedback loops across scales|Control laws, feedback rules, protocols|Adaptive, viable systems that persist and evolve through feedback|
+|**AGI Governance**|Alignment intent (Human)|Token entropy, model drift|Codebook, ADRs, Context|Symbolic IR recursive depth|**SCL** (Semiotic Compression Layer)|Resonant, verifiable agent behavior with minimal token cost|
 
 ---
 

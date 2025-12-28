@@ -22,6 +22,9 @@ This file lists decisions that are considered invariant.  Changing an invariant 
   - Preserved in git history for audit.
 - **[INV-011] Schema Compliance** - All Law-Like files (ADRs, Skills, Style Preferences) must be valid against their respective JSON Schemas in `MCP/schemas/governance/`.
 - **[INV-012] Visible Execution** - Agents must not spawn hidden or external terminal windows (e.g., `start wt`, `xterm`). All interactive or long-running execution must occur via the Antigravity Bridge (invariant infrastructure) or within the current process. The Bridge is considered "Always On".
+- **[INV-013] Declared Truth** - Every system-generated artifact MUST be declared in a hash manifest (`OUTPUT_HASHES.json`). If it is not hashed, it is not truth.
+- **[INV-014] Disposable Space** - Files under `_tmp/` directories (Catalytic domains) are strictly for scratch-work. They must never be used as a source of truth for verification.
+- **[INV-015] Narrative Independence** - Verification Success (`STATUS: success`) is bound only to artifact integrity, not to execution logs, reasoning traces, or chat history.
 
 ## Changing invariants
 

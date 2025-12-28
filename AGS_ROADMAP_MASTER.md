@@ -1,101 +1,94 @@
 ---
 title: AGS Roadmap (Master)
-version: 3.1
+version: 3.2
 last_updated: 2025-12-28
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
 driver: @F0 (The Living Formula)
 source_docs:
   - CONTEXT/archive/planning/AGS_3.0_COMPLETED.md
+  - CONTEXT/decisions/ADR-027-dual-db-architecture.md
+  - CONTEXT/decisions/ADR-028-semiotic-compression-layer.md
 ---
 
 # Purpose
 
 Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution ($f$) through low-Entropy ($\nabla S$) governance.
 
-**Note:** Fully completed lanes (A, B, E) have been archived to `CONTEXT/archive/planning/AGS_3.0_COMPLETED.md` to reduce entropy and focus attention on active work.
+**Note:** Fully completed lanes (A, E) have been archived to `CONTEXT/archive/planning/AGS_3.0_COMPLETED.md`.
 
 # Active Lanes
 
 ---
 
+# Lane B: Core Stability & Bug Squashing (P0)
+
+## B1. Critical Bug Triage (P0)
+- [ ] Fix critical Swarm race conditions (missing `await`, unsafe locks).
+- [ ] Resolve JSON error recovery failures in MCP server.
+- [ ] Harden `poll_and_execute.py` against subprocess zombies.
+
+## B2. Engineering Culture (P1)
+- [ ] Enforce "No Bare Excepts" in `CANON/STEWARDSHIP.md`.
+- [ ] Mandate atomic writes for all artifacts (temp-write + rename).
+
+---
+
 # Lane C: Index database (Cortex) (P0 to P1)
 
+## C1. System 1 (Fast Retrieval) (P0)
+- [ ] **F3 Strategy**: Implement Content-Addressed Storage (CAS) for artifacts.
+- [ ] Build `system1.db`: SQLite FTS + Chunk Index.
+- [ ] Implement `system1-verify` skill to ensure DB matches Repo.
+
 ## C2. Build the indexer (P0)
-
-Problem:
-- Section-level indexing and stable anchors are not guaranteed.
-
-Tasks:
 - [ ] [P0] Implement indexer logic to parse markdown headings and stable anchors.
 - [ ] [P0] Build `meta/FILE_INDEX.json` and `meta/SECTION_INDEX.json` from the indexer output.
 - [ ] [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
 
 ## C3. Summarization layer (P1)
-
-Problem:
-- Summaries are needed for navigation but not defined or stored.
-
-Tasks:
 - [ ] [P1] Add a summarizer that writes summaries into the DB (not into source files).
 - [ ] [P1] Define max summary length and "summary freshness" policy.
 - [ ] [P1] Extend `CORTEX/query.py` with section-level queries (`find`, `get`, `neighbors`).
 
 ---
 
-# Lane D: Skills library expansion (P1)
+# Lane H: System 2 Governance (P1)
 
-## D2. Add the "dev browser" skill (P3)
-
-Goal:
-- A local web UI that browses Cortex indexes and supports deterministic planning.
-
-Tasks:
-- [ ] [P3] Build a read-only UI for files, sections, summaries, and graph relations.
-- [ ] [P3] Export plans as a migration plan file (no direct edits).
-- [ ] [P3] Optional: apply plans via a separate deterministic, fixture-tested migration skill.
+## H1. The Immutable Ledger (P1)
+- [ ] Formalize `mcp_ledger` as `system2.db`.
+- [ ] Implement query tools for provenance (Who ran what?).
+- [ ] Add cryptographic Merkle root verification for run bundles.
 
 ---
 
-# Lane F: Catalytic computing (Research -> Integration) (P1 to P3)
+# Lane I: Semiotic Compression (SCL) (P1)
 
-## F1. Canonical note: "Catalytic Computing for AGS" (P1)
+## I1. The Symbol Stack (P1)
+- [ ] Auto-generate `@Symbols` for all file paths in Cortex.
+- [ ] Implement `scl_expand` and `scl_compress` tools in MCP.
+- [ ] Goal: Reduce average prompting overhead by 90%.
 
-Deliverable:
-- A dedicated document defining catalytic computing (formal) and the AGS analog (engineering), plus strict boundaries (metaphor vs implementation).
+---
 
-Tasks:
-- [/] [P1] Write the canonical catalytic computing note with explicit boundaries and non-goals.
+# Lane S: Spectral Verification (P0)
 
-## F2. Prototype: "Catalytic Scratch Layer" (P3)
-
-Goal:
-- Enable high-impact operations using large disk state as scratch while guaranteeing restoration.
-
-Tasks:
-- [ ] [P3] Define the scratch workflow (worktree/overlay + patch set + restore plan).
-- [ ] [P3] Prototype the scratch layer with deterministic outputs under allowed roots.
-
-## F3. Prototype: "Catalytic Context Compression" (P3)
-
-Goal:
-- Keep LITE packs minimal while enabling deep recovery when needed.
-
-Tasks:
-- [ ] [P3] Define content-addressed cache strategy and retrieval instructions.
-- [ ] [P3] Prove FULL pack reconstruction from hashes and pointers.
+## S1. The Integrity Stack (P0)
+- [ ] **SPECTRUM-02**: Enforce "Resume Bundles" for all Swarm tasks.
+- [ ] **CMP-01**: Hard-fail on any artifact not in `OUTPUT_HASHES.json`.
+- [ ] **INV-012**: Enforce "Visible Execution" (via Bridge/Headless), strictly prohibiting hidden terminals.
 
 ---
 
 # Lane G: The Living Formula Integration (P1)
-
-Goal: Deeply measure and optimize Resonance ($R$).
 
 ## G1. Metric Definition (P1)
 - [ ] Define precise metrics for Essence, Entropy, and Fractal Dimension within the codebase.
 
 ## G2. Feedback Loops (P2)
 - [ ] Implement feedback mechanisms where agents report "Resonance" of their tasks.
+
+---
 
 # Definition of Done (Global)
 
