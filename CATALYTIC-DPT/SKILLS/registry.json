@@ -1,0 +1,11 @@
+{
+  "registry_version": "1.0.0",
+  "skills": {
+    "ant-worker-copy-v1": {
+      "capability_hash": "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34",
+      "version": "1.0.0",
+      "human_name": "Ant Worker Copy",
+      "description": "Standard file copy capability for ant workers"
+    }
+  }
+}
