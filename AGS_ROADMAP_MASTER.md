@@ -38,7 +38,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 
 ## C1. System 1 (Fast Retrieval) (P0)
 - [x] **F3 Strategy**: Implement Content-Addressed Storage (CAS) for artifacts (LAB Prototype verified).
-- [ ] Build `system1.db`: SQLite FTS + Chunk Index.
+- [x] Build `system1.db`: SQLite FTS5 + Chunk Index (Schema implemented, runtime testing pending).
 - [ ] Implement `system1-verify` skill to ensure DB matches Repo.
 
 ## C2. Build the indexer (P0)
