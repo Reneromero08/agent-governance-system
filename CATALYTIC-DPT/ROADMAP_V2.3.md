@@ -114,7 +114,7 @@ Intent
 Make MCP servers usable as governed adapters inside pipelines without expanding trust boundaries.
 
 Deliverables
-- [ ] `mcp_adapter.schema.json` with strict, fail-closed constraints:
+- [x] `mcp_adapter.schema.json` with strict, fail-closed constraints:
   - server command vector (non-empty list of strings)
   - request envelope schema (canonical JSON)
   - stdout/stderr caps, timeout cap, exit code rules
@@ -149,19 +149,19 @@ Implemented (v1)
 - `CAPABILITIES.json` provides `capability_hash -> adapter spec` resolution and is enforced in `ags route` and `catalytic pipeline verify` (fail-closed).
 
 Deliverables
-- [ ] `SKILLS/registry.json` (canonical JSON) mapping:
+- [x] `SKILLS/registry.json` (canonical JSON) mapping:
   - `skill_id` -> `adapter_hash` (or `adapter_spec_path` + hash)
   - `version`
   - `capability_hash` (defined below)
   - `human_name`, `description` (optional, non-normative)
-- [ ] `skills.py` helper to:
+- [x] `skills.py` helper to:
   - load registry deterministically
   - resolve skill -> adapter spec by hash
   - reject unknown skills and mismatched hashes
-- [ ] `ags.py` integration:
+- [x] `ags.py` integration:
   - allow plan steps to reference `skill_id` instead of embedding full adapter
   - expand `skill_id` deterministically into adapter+jobspec before routing
-- [ ] Tests:
+- [x] Tests:
   - registry determinism
   - tamper in adapter spec changes capability hash and fails verification
   - unknown skill fails closed
@@ -305,8 +305,8 @@ Acceptance
 ---
 
 ## Immediate next actions (pick one, do the smallest)
-1) **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
-2) **PHASE 6.5**: Create `SKILLS/registry.json` + resolver + tests (no plan integration yet).
+1) [DONE (Part 1)] **PHASE 6.4**: Implement `mcp_adapter.schema.json` + reject-case tests first (no integration yet).
+2) [DONE] **PHASE 6.5**: Create `SKILLS/registry.json` + resolver + tests (no plan integration yet).
 3) **PHASE 6.6**: Add `CAPABILITIES.json` pin + verifier check + one adversarial test.
 4) **PHASE 7**: Draft `swarm.schema.json` + determinism tests (runtime later).
 5) **PHASE 9**: Write schema versioning policy and release checklist (no code).
