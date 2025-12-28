@@ -468,9 +468,15 @@ def write_pack_info(pack_dir: Path, scope: PackScope, stamp: str) -> None:
 def write_provenance(pack_dir: Path, scope: PackScope) -> None:
     import os
     import datetime
+    
+    # Allow deterministic timestamp for tests
+    timestamp = os.getenv("LLM_PACKER_DETERMINISTIC_TIMESTAMP")
+    if not timestamp:
+        timestamp = datetime.datetime.now().isoformat()
+        
     prov = {
         "generator": "LLM_PACKER",
-        "generated_at": datetime.datetime.now().isoformat(),
+        "generated_at": timestamp,
         "host": os.getenv("COMPUTERNAME", "unknown"),
         "user": os.getenv("USERNAME", "unknown"),
         "scope": scope.key
