@@ -6,6 +6,8 @@
 **Impact:** Low
 **Tags:** [verification, cortex, system1]
 
+**Version:** 1.0.0
+
 ## Purpose
 Ensures system1.db is in sync with repository state and verifies system1 indexer is working correctly.
 
