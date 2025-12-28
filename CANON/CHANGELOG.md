@@ -14,6 +14,13 @@ All notable changes to the Agent Governance System will be documented in this fi
 #### Changed
 - Governed MCP tool execution now runs admission immediately after preflight (fail-closed).
 
+## [2.11.8] - 2025-12-27
+
+### Pre-Commit Preflight Hook (created 2025-12-27)
+
+#### Changed
+- `SKILLS/canon-governance-check/scripts/pre-commit` now runs `ags preflight` before `check-canon-governance` (fail-closed).
+
 ## [2.11.6] - 2025-12-27
 
 ### Governance Preflight Freshness Gate (created 2025-12-27)
