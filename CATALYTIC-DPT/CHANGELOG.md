@@ -27,6 +27,15 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - **Verified** `TESTBENCH/test_registry_validators.py`: Adversarial tests for duplicate hashes, non-canonical encoding, and tamper detection.
 - **Enforced** `ags.py`: `route` and `verify` fail closed on any registry violation.
 
+### Phase 6.8: Capability Versioning Semantics (Immutability-by-Content)
+- **Enforced** `PRIMITIVES/registry_validators.py`: Capabilities are immutable-by-content.
+  - Registry validator computes SHA-256 of adapter spec and verifies it matches capability hash.
+  - Any mismatch returns `REGISTRY_TAMPERED`, preventing "in-place upgrades".
+- **Verified** `TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_tamper_detected_fail_closed`:
+  - Tampered adapter spec (hash mismatch) fails routing with `CAPABILITY_HASH_MISMATCH`.
+- **Principle**: Upgrading a capability requires creating a new hash, not modifying existing entry.
+  - Historical pipelines remain verifiable as long as their capability registry entries are present and correct.
+
 ### Phase 8: Model Binding (Optional, Replaceable, Never Trusted)
 - **Added** Router receipt artifacts in `ags_plan`:
   - `ROUTER.json`: Records router executable, args, hash, exit code, and stderr bytes.
