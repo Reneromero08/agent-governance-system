@@ -7,16 +7,21 @@ All notable changes to Agent Governance System will be documented in this file.
 ### Fixed
 - **Headless Swarm Execution**: Modified `d:/CCC 2.0/AI/AGI/MCP/server.py` to use `subprocess.Popen` with `CREATE_NO_WINDOW` flag instead of Antigravity Bridge terminal API. Workers now run silently in the background.
 - **Terminal Prohibition**: Deleted `launch-terminal` and `mcp-startup` skills. Enforced INV-012 (Visible Execution).
+- **Swarm Safety Caps**: Added max cycle limits (10), UTF-8 encoding fixes, and automated exit logic to prevent infinite loops.
+- **Worker Logging**: All worker output now logged to `%TEMP%\antigravity_worker_logs\` for debugging.
 
 ### Added
-- **ADR-029**: Headless Swarm Execution policy and implementation.
+- **ADR-029**: Headless Swarm Execution policy and implementation (with post-implementation bug fixes documented).
 - **F3 Prototype**: Catalytic Context Compression (CAS) with CLI for build/reconstruct/verify.
 - **F2 Prototype**: Catalytic Scratch Layer with byte-identical restoration.
 - **TOOLS/terminal_hunter.py**: Scanner for terminal-spawning code patterns.
+- **CORTEX/system1_builder.py**: System 1 Database with SQLite FTS5 for fast retrieval (schema complete, runtime testing pending).
+- **TOOLS/verify_f3.py**: Verification script for F3 CAS prototype.
 
 ### Changed
 - **AGENTS.md**: Hard prohibition on terminal spawning.
 - **MAPS/ENTRYPOINTS.md**: Marked deleted skills.
+- **AGS_ROADMAP_MASTER.md**: Updated to reflect completed tasks (F3, INV-012, System 1 DB schema).
 
 ## [2.14.0] - 2025-12-28
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.

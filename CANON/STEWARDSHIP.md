@@ -103,6 +103,75 @@ Maintainer or Steward:
 
 Agent receives the decision and can proceed.
 
+## Engineering Culture
+
+The following engineering practices are **mandatory** for all code contributions to AGS:
+
+### 1. No Bare Excepts
+**Rule**: Never use `except:` without specifying the exception type.
+
+```python
+# ❌ FORBIDDEN
+try:
+    risky_operation()
+except:
+    pass
+
+# ✅ REQUIRED
+try:
+    risky_operation()
+except (ValueError, KeyError) as e:
+    logger.error(f"Operation failed: {e}")
+    raise
+```
+
+**Rationale**: Bare excepts mask critical errors (KeyboardInterrupt, SystemExit) and make debugging impossible.
+
+### 2. Atomic Writes
+**Rule**: All file writes MUST use temp-write + atomic rename.
+
+```python
+# ❌ FORBIDDEN
+with open("output.json", "w") as f:
+    json.dump(data, f)
+
+# ✅ REQUIRED
+import tempfile, os
+fd, tmp = tempfile.mkstemp(dir=os.path.dirname("output.json"))
+try:
+    with os.fdopen(fd, 'w') as f:
+        json.dump(data, f)
+    os.replace(tmp, "output.json")  # Atomic on POSIX
+except:
+    os.unlink(tmp)
+    raise
+```
+
+**Rationale**: Prevents partial writes that corrupt state during crashes.
+
+### 3. Headless Execution
+**Rule**: No code may spawn visible terminal windows (see ADR-029).
+
+**Enforcement**: `TOOLS/terminal_hunter.py` scans for violations.
+
+### 4. Deterministic Outputs
+**Rule**: All artifacts (JSON, manifests, hashes) MUST be deterministic across runs.
+
+**Requirements**:
+- Sorted keys in JSON (`sort_keys=True`)
+- Stable iteration order (sorted lists, OrderedDict)
+- No timestamps in filenames (use content hashes or explicit versioning)
+
+### 5. Safety Caps
+**Rule**: All loops and recursive operations MUST have explicit bounds.
+
+**Examples**:
+- Max iterations: `for i in range(MAX_CYCLES):`
+- Max file size: `if size > MAX_BYTES: raise`
+- Timeout: `subprocess.run(..., timeout=30)`
+
+**Rationale**: Prevents infinite loops, resource exhaustion, and runaway processes (see ADR-029 Terminator Mode incident).
+
 ## Authority Boundaries
 
 ### What Agents CAN Do
