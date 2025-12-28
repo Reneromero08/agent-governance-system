@@ -1,8 +1,8 @@
 # Changelog
 
-All notable changes to the Agent Governance System will be documented in this file.
+All notable changes to Agent Governance System will be documented in this file.
 
-## [2.15.0] - 2025-12-28
+## [2.15.1] - 2025-12-28
 
 ### Fixed
 - **Headless Swarm Execution**: Modified `d:/CCC 2.0/AI/AGI/MCP/server.py` to use `subprocess.Popen` with `CREATE_NO_WINDOW` flag instead of Antigravity Bridge terminal API. Workers now run silently in the background.

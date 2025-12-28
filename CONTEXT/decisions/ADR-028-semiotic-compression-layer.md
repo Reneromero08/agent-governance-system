@@ -1,5 +1,11 @@
 # ADR-028: Semiotic Compression Layer (SCL)
 
+**Status:** Accepted
+**Date:** 2025-12-28
+**Confidence:** High
+**Impact:** High
+**Tags:** [compression, semiotics, tokens, optimization]
+
 ## Context
 Standard RAG and context-stuffing methods are token-inefficient. "The Living Formula" suggests maximizing minimal information ($f$) raised to the power of fractal depth ($D_f$). We observe that 90% of token usage in agentic systems is repetitive boilerplate (structure, headers, known context).
 
