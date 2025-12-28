@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Any, Dict, List
 
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -13,6 +15,7 @@ sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
 from PIPELINES.pipeline_dag import restore_dag, verify_dag
+from PRIMITIVES.restore_proof import canonical_json_bytes
 
 
 def _rm(path: Path) -> None:

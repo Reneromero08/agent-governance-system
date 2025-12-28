@@ -2,6 +2,15 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.16] - 2025-12-29
+
+### Policy Proof Receipts
+
+#### Added
+- `TOOLS/ags.py`: persisting `POLICY_PROOF.json` (preflight + admission verdicts + intent hash) before pipeline execution.
+- `CATALYTIC-DPT/PIPELINES/pipeline_dag.py`: receipts now load the policy proof, embed it deterministically, and include it in the receipt hash.
+- `CATALYTIC-DPT/TESTBENCH/test_pipeline_dag.py`: regression that asserts receipts preserve the policy proof and remain byte-identical across runs.
+
 ## [2.11.15] - 2025-12-27
 
 ### Mandatory Agent Identity (created 2025-12-27)
@@ -66,7 +75,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 #### Changed
 - `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
-
 
 ## [2.11.9] - 2025-12-27
 
