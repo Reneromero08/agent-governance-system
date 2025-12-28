@@ -78,8 +78,8 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 # Lane S: Spectral Verification (P0)
 
 ## S1. The Integrity Stack (P0)
-- [ ] **SPECTRUM-02**: Enforce "Resume Bundles" for all Swarm tasks.
-- [ ] **CMP-01**: Hard-fail on any artifact not in `OUTPUT_HASHES.json`.
+- [x] **SPECTRUM-02**: Enforce "Resume Bundles" for all Swarm tasks (`TOOLS/integrity_stack.py`).
+- [x] **CMP-01**: Hard-fail on any artifact not in `OUTPUT_HASHES.json` (Implemented with verify).
 - [x] **INV-012**: Enforce "Visible Execution" (strictly prohibiting hidden terminals via Headless/Logging).
 
 ---
