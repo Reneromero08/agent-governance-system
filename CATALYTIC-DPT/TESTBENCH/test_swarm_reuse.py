@@ -122,7 +122,9 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         # =========================================
         # 1. First Run: Full Execution
         # =========================================
+        print("\n--- RUN 1 ---")
         res1 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+        print(f"Res1: {res1}")
         assert res1.get("ok") is True, f"First run should succeed: {res1}"
         assert res1.get("elided") is False, "First run should NOT be elided"
         assert (swarm_dir / "SWARM_RECEIPT.json").exists()
@@ -138,7 +140,9 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         # =========================================
         # 2. Second Run: Identical Swarm -> Elision
         # =========================================
+        print("\n--- RUN 2 ---")
         res2 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+        print(f"Res2: {res2}")
         assert res2.get("ok") is True, f"Second run should succeed: {res2}"
         assert res2.get("elided") is True, "Second run MUST be elided"
         
@@ -153,6 +157,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         # =========================================
         # 3. Tamper Test: Mutate pipeline receipt, verify reuse fails
         # =========================================
+        print("\n--- RUN 3 (TAMPER) ---")
         pdir = rt_pipeline.pipeline_dir(p1)
         receipt_path = pdir / "RECEIPT.json"
         original_receipt = receipt_path.read_text()
@@ -160,20 +165,25 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         # Tamper: overwrite with invalid receipt
         receipt_path.write_text(json.dumps({"receipt_hash": "0" * 64}))
         
-        # Now elision check should fail (hash mismatch), and execution re-attempt should fail too
-        # because DAG/pipeline state says "completed" but receipt doesn't match
-        
-        # The exact failure mode depends on run_dag behavior: 
-        # It should either return ok=False or raise ValueError
         try:
             res3 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
-            # If it returns, it should be failure
-            assert res3.get("ok") is False or res3.get("elided") is False
+            print(f"Res3: {res3}")
+            # If it returns, verification MUST have failed somewhere? 
+            # If elision worked, it means tamper wasn't detected.
+            if res3.get("elided") is True:
+                 pytest.fail("Tampered receipt should NOT allow elision!")
+            
+            # If elision failed, run_dag proceeds. 
+            # verify_chain inside run_dag should fail.
+            # So ok should be False.
+            assert res3.get("ok") is False
+            
         except ValueError as e:
             # Expected: DAG verification fails hard
+            print(f"Caught expected error: {e}")
             assert "MISMATCH" in str(e) or "DEP" in str(e)
         
-        # Restore original receipt for cleanup idempotency
+        # Restore original receipt
         receipt_path.write_text(original_receipt)
 
     finally:
