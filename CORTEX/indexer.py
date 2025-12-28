@@ -17,33 +17,46 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from CORTEX.system1_builder import System1DB
 
-# Configuration
+# Default Configuration
 CANON_DIR = Path("CANON")
 META_DIR = Path("meta")
 DB_PATH = Path("CORTEX/system1.db")
 
 class CortexIndexer:
-    def __init__(self, db: System1DB):
+    def __init__(self, db: System1DB, target_dir: Path = CANON_DIR):
         self.db = db
+        self.target_dir = target_dir
         self.file_index = {}
         self.section_index = []
         META_DIR.mkdir(exist_ok=True)
 
     def index_all(self):
-        """Walk CANON and index all markdown files."""
-        print(f"[Indexer] Starting index of {CANON_DIR}...")
+        """Walk target directory and index all markdown files."""
+        print(f"[Indexer] Starting index of {self.target_dir}...")
         
-        # Files to ignore (e.g. non-canonical or too large)
-        ignore_files = {".DS_Store", "README.md"} # README is often just overview
+        # Files and directories to ignore
+        ignore_files = {".DS_Store", "README.md"}
+        ignore_dirs = {"node_modules", ".venv", ".git", "__pycache__"}
         
-        for root, _, files in os.walk(CANON_DIR):
+        target_abs = self.target_dir.resolve()
+        cwd_abs = Path.cwd().resolve()
+        
+        for root, dirs, files in os.walk(target_abs):
+            # Prune ignored directories in-place
+            dirs[:] = [d for d in dirs if d not in ignore_dirs]
+            
             for file in files:
                 if file.endswith(".md") and file not in ignore_files:
                     full_path = (Path(root) / file).resolve()
                     try:
-                        rel_path = full_path.relative_to(Path.cwd().resolve()).as_posix()
+                        # Try to make path relative to CWD if possible, else use absolute
+                        try:
+                            rel_path = full_path.relative_to(cwd_abs).as_posix()
+                        except ValueError:
+                            rel_path = full_path.as_posix()
+                            
                         self._index_file(full_path, rel_path)
-                    except ValueError as e:
+                    except Exception as e:
                         print(f"Skipping {file}: {e}")
                     
         self._write_artifacts()
@@ -145,7 +158,16 @@ class CortexIndexer:
         print(f"[Indexer] Wrote artifacts to {META_DIR}")
 
 if __name__ == "__main__":
-    db = System1DB(DB_PATH)
-    indexer = CortexIndexer(db)
+    import argparse
+    parser = argparse.ArgumentParser(description="Cortex Indexer CLI")
+    parser.add_argument("--dir", type=str, help="Directory to index (default: CANON)")
+    parser.add_argument("--db", type=str, default=str(DB_PATH), help="Database path")
+    args = parser.parse_args()
+
+    db_path = Path(args.db)
+    target_dir = Path(args.dir) if args.dir else CANON_DIR
+    
+    db = System1DB(db_path)
+    indexer = CortexIndexer(db, target_dir=target_dir)
     indexer.index_all()
     db.close()
