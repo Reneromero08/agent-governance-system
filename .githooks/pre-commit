@@ -1,0 +1,10 @@
+#!/bin/sh
+set -e
+
+echo "[PRE-COMMIT] Running preflight..."
+python3 TOOLS/ags.py preflight --allow-dirty-tracked
+
+echo "[PRE-COMMIT] Running canon governance check..."
+node TOOLS/check-canon-governance.js
+
+echo "[PRE-COMMIT] OK"
