@@ -2,6 +2,18 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.7] - 2025-12-27
+
+### Admission Control Gate (created 2025-12-27)
+
+#### Added
+- `ags admit --intent <intent.json>` admission control gate for mechanical allow/block decisions.
+- `SKILLS/admission-control/` fixture skill validating admission decisions.
+- `CONTEXT/decisions/ADR-020-admission-control-gate.md` defining admission control policy.
+
+#### Changed
+- Governed MCP tool execution now runs admission immediately after preflight (fail-closed).
+
 ## [2.11.6] - 2025-12-27
 
 ### Governance Preflight Freshness Gate (created 2025-12-27)
