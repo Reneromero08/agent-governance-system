@@ -105,7 +105,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 
 ## G2. Feedback Loops (P2)
 - [x] Implement feedback mechanisms where agents report "Resonance" of their tasks (`CORTEX/feedback.py`).
-- [ ] Aggregate feedback to adjust @F0 Global Formula weights.
+- [x] Aggregate feedback to adjust @F0 Global Formula weights (`CORTEX/formula.py --adjust`).
 
 ---
 
