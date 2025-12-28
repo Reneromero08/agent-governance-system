@@ -113,6 +113,9 @@ class PipelineRuntime:
 
     def init_from_spec_path(self, *, pipeline_id: str, spec_path: Path) -> PipelineSpec:
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
+        return self.init_from_spec_obj(pipeline_id=pipeline_id, spec_obj=spec_obj)
+
+    def init_from_spec_obj(self, *, pipeline_id: str, spec_obj: Dict[str, Any]) -> PipelineSpec:
         spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
         pdir = self.pipeline_dir(pipeline_id)
         pdir.mkdir(parents=True, exist_ok=True)

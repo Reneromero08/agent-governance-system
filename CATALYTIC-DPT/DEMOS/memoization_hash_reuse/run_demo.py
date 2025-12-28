@@ -6,6 +6,7 @@ import json
 import os
 import shutil
 import subprocess
+import sys
 from pathlib import Path
 from typing import Any, Dict
 
@@ -208,7 +209,7 @@ def main() -> int:
 
     # Job command: hash all inputs (forces real I/O) and write deterministic durable output.
     cmd_job = [
-        "python3",
+        sys.executable,
         "-c",
         "\n".join(
             [
@@ -231,10 +232,10 @@ def main() -> int:
 
     # Deref command template: read job run_id from pipeline STATE.json, pick a stable input hash,
     # then run bounded `catalytic hash ...` reads against that job's CAS root.
-    def deref_cmd(*, target_step_id: str, mode: str, stats_rel: str) -> list[str]:
+    def deref_cmd(target_step_id: str, mode: str, stats_rel: str) -> List[str]:
         mode_literal = mode
         return [
-            "python3",
+            sys.executable,
             "-c",
             "\n".join(
                 [
@@ -260,31 +261,31 @@ def main() -> int:
                     "count = 0",
                     f"mode = {mode_literal!r}",
                     "if mode == 'baseline':",
-                    "    out = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'read',h,'--max-bytes','65536'])",
+                    "    out = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'read',h,'--max-bytes','65536'])",
                     "    m = re.search(r'bytes_returned=(\\d+)', out.split('\\n',1)[0])",
                     "    br = int(m.group(1)) if m else 0",
                     "    ops.append({'op':'read','max_bytes':65536,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
-                    "    _ = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'grep',h,'def','--max-bytes','65536','--max-matches','20'])",
+                    "    _ = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'grep',h,'def','--max-bytes','65536','--max-matches','20'])",
                     "    br = min(65536, size)",
                     "    ops.append({'op':'grep','max_bytes':65536,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
-                    "    _ = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'ast',h,'--max-bytes','65536','--max-nodes','200','--max-depth','6'])",
+                    "    _ = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'ast',h,'--max-bytes','65536','--max-nodes','200','--max-depth','6'])",
                     "    br = min(65536, size)",
                     "    ops.append({'op':'ast','max_bytes':65536,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
-                    "    desc = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'describe',h,'--max-bytes','8192']).strip()",
+                    "    desc = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'describe',h,'--max-bytes','8192']).strip()",
                     "    j = json.loads(desc)",
                     "    br = int(j.get('bytes_preview_len', 0))",
                     "    ops.append({'op':'describe','max_bytes':8192,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
                     "else:",
-                    "    desc = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'describe',h,'--max-bytes','1024']).strip()",
+                    "    desc = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'describe',h,'--max-bytes','1024']).strip()",
                     "    j = json.loads(desc)",
                     "    br = int(j.get('bytes_preview_len', 0))",
                     "    ops.append({'op':'describe','max_bytes':1024,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
-                    "    _ = sh(['python3','TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'grep',h,'def','--max-bytes','8192','--max-matches','5'])",
+                    "    _ = sh([sys.executable,'TOOLS/catalytic.py','hash','--cas-root',str(cas_root),'grep',h,'def','--max-bytes','8192','--max-matches','5'])",
                     "    br = min(8192, size)",
                     "    ops.append({'op':'grep','max_bytes':8192,'bytes_read':br})",
                     "    bytes_total += br; count += 1",
@@ -322,7 +323,7 @@ def main() -> int:
 
     # Run pipeline.
     subprocess.check_call(
-        ["python3", "TOOLS/catalytic.py", "pipeline", "run", pipeline_id, "--spec", str(spec_abs.relative_to(REPO_ROOT))],
+        [sys.executable, "TOOLS/catalytic.py", "pipeline", "run", pipeline_id, "--spec", str(spec_abs.relative_to(REPO_ROOT))],
         cwd=str(REPO_ROOT),
     )
 

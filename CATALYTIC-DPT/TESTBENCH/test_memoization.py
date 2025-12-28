@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import shutil
+import sys
 from pathlib import Path
 
 import pytest
@@ -58,7 +59,7 @@ def test_memoization_miss_then_hit_then_invalidate(tmp_path: Path) -> None:
         )
 
         cmd_a = [
-            "python3",
+            sys.executable,
             "-c",
             (
                 "from pathlib import Path;"
@@ -101,7 +102,7 @@ def test_memoization_miss_then_hit_then_invalidate(tmp_path: Path) -> None:
             validator_build_id="memo-test",
         )
         cmd_b = [
-            "python3",
+            sys.executable,
             "-c",
             (
                 "from pathlib import Path;"
@@ -138,7 +139,7 @@ def test_memoization_miss_then_hit_then_invalidate(tmp_path: Path) -> None:
             validator_build_id="memo-test",
         )
         cmd_c = [
-            "python3",
+            sys.executable,
             "-c",
             (
                 "from pathlib import Path;"

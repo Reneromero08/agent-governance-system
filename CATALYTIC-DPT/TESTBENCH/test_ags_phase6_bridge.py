@@ -55,6 +55,11 @@ def _make_plan(*, pipeline_id: str, tmp_root: str) -> dict:
         "catalytic_domains": [domain],
         "determinism": "deterministic",
     }
+    cmd_code = (
+        "from pathlib import Path;"
+        f"Path('{out1}').parent.mkdir(parents=True, exist_ok=True);"
+        f"Path('{out1}').write_text('ONE', encoding='utf-8')"
+    )
     return {
         "pipeline_id": pipeline_id,
         "steps": [
@@ -62,15 +67,7 @@ def _make_plan(*, pipeline_id: str, tmp_root: str) -> dict:
                 "step_id": "s1",
                 "jobspec": jobspec,
                 "memoize": False,
-                "cmd": [
-                    "python3",
-                    "-c",
-                    (
-                        "from pathlib import Path;"
-                        f"Path('{out1}').parent.mkdir(parents=True, exist_ok=True);"
-                        f"Path('{out1}').write_text('ONE', encoding='utf-8')"
-                    ),
-                ],
+            "cmd": [sys.executable, "-c", cmd_code],
             }
         ],
     }
