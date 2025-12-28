@@ -45,6 +45,7 @@ SECTION_INDEX_DIR_ALLOWLIST = {
     "MAPS",
     "SKILLS",
     "CORTEX",
+    "CATALYTIC-DPT",
 }
 
 SECTION_INDEX_ROOT_ALLOWLIST = {
@@ -188,7 +189,7 @@ def build_index(conn: sqlite3.Connection) -> int:
         from TOOLS.provenance import generate_header
         prov_header = generate_header(
             generator="CORTEX/cortex.build.py",
-            inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "CONTRACTS/"]
+            inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "CONTRACTS/", "CATALYTIC-DPT/"]
         )
         prov_json = json.dumps(prov_header)
         cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("provenance", prov_json))
