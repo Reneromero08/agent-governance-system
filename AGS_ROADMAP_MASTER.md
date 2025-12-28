@@ -29,8 +29,12 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [ ] Harden `poll_and_execute.py` against subprocess zombies.
 
 ## B2. Engineering Culture (P1)
-- [ ] Enforce "No Bare Excepts" in `CANON/STEWARDSHIP.md`.
-- [ ] Mandate atomic writes for all artifacts (temp-write + rename).
+- [x] Enforce "No Bare Excepts" in `CANON/STEWARDSHIP.md` (Section 1).
+- [x] Mandate atomic writes for all artifacts (temp-write + rename) (Section 2).
+- [x] Add headless execution rule (Section 3).
+- [x] Add deterministic outputs requirement (Section 4).
+- [x] Add safety caps for loops and bounds (Section 5).
+- [x] Add database connection best practices (Section 6).
 
 ---
 
