@@ -234,6 +234,8 @@ def check_log_output_roots() -> List[str]:
         unreleased_match = re.search(r'## \[Unreleased\](.*?)(?=## \[)', content, re.DOTALL)
         if unreleased_match:
             unreleased_section = unreleased_match.group(1)
+    
+    # Check for bare excepts (see CANON/STEWARDSHIP.md "No Bare Excepts" rule)
             if re.search(r'`LOGS/[^`]+`', unreleased_section):
                 violations.append(
                     f"CANON/CHANGELOG.md [Unreleased]: References LOGS/ (should use CONTRACTS/_runs/)"
