@@ -50,11 +50,11 @@ Non-negotiables:
 ### Phase 3 Gate: Packing hygiene (DONE)
 - [x] Packs are deterministic, bounded, deduplicated, fail-closed.
 
-### Phase 4 Gate: Runtime hardening (IN PROGRESS, never “done forever”)
+### Phase 4 Gate: Runtime hardening (DONE)
 DONE when all are true:
 - [x] Adversarial fixtures exist for corruption, partial state, path attacks, malformed proofs, pipeline interruption/resume safety.
-- [ ] Fail-closed everywhere (no “warn and continue” in any verifier path).
-- [ ] No silent acceptance (every acceptance has an explicit reason code).
+- [x] Fail-closed everywhere (no "warn and continue" in any verifier path).
+- [x] No silent acceptance (every acceptance has an explicit reason code).
 
 ### Phase 5 Gate: Pipelines (DONE)
 - [x] Artifact-only pipeline runner with resume-safe STATE.
