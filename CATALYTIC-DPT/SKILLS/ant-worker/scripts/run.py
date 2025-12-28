@@ -256,9 +256,20 @@ class GrokExecutor:
                 self.results["errors"].append(f"Error deleting {file_path}: {str(e)}")
 
     def _read_files(self) -> None:
-        """Read and return file contents."""
+        """Read and return file contents with size limits and streaming.
+
+        Features:
+        - File size limit (10MB default, configurable)
+        - Truncation with indicator
+        - Total memory limit across all files
+        """
         files = self.task_spec.get("files", [])
+        max_file_size = self.task_spec.get("max_file_size", 10 * 1024 * 1024)  # 10MB
+        max_total_size = self.task_spec.get("max_total_size", 50 * 1024 * 1024)  # 50MB
+        truncate = self.task_spec.get("truncate", True)
+
         contents = {}
+        total_bytes_read = 0
 
         for file_path in files:
             try:
@@ -267,15 +278,61 @@ class GrokExecutor:
                     self.results["errors"].append(f"File not found: {file_path}")
                     continue
 
-                with open(p, 'r', encoding='utf-8') as f:
+                file_size = p.stat().st_size
+
+                # Check file size limit
+                if file_size > max_file_size:
+                    if truncate:
+                        # Read only the first max_file_size bytes
+                        with open(p, 'r', encoding='utf-8', errors='replace') as f:
+                            content = f.read(max_file_size)
+                        contents[file_path] = content + f"\n\n... [TRUNCATED: file is {file_size:,} bytes, showing first {max_file_size:,}] ..."
+                        total_bytes_read += max_file_size
+                        self.results["operations"].append({
+                            "operation": "read",
+                            "path": file_path,
+                            "size": file_size,
+                            "truncated": True,
+                            "bytes_read": max_file_size
+                        })
+                        print(f"[ant-worker] [OK] Read (truncated): {file_path}")
+                    else:
+                        self.results["errors"].append(
+                            f"File too large: {file_path} ({file_size:,} bytes > {max_file_size:,} max)"
+                        )
+                    continue
+
+                # Check total memory limit
+                if total_bytes_read + file_size > max_total_size:
+                    self.results["errors"].append(
+                        f"Total size limit reached: cannot read {file_path} ({file_size:,} bytes would exceed {max_total_size:,} limit)"
+                    )
+                    continue
+
+                with open(p, 'r', encoding='utf-8', errors='replace') as f:
                     contents[file_path] = f.read()
 
-                print(f"[grok-executor] [OK] Read: {file_path}")
+                total_bytes_read += file_size
+                self.results["operations"].append({
+                    "operation": "read",
+                    "path": file_path,
+                    "size": file_size,
+                    "truncated": False,
+                    "bytes_read": file_size
+                })
+                print(f"[ant-worker] [OK] Read: {file_path} ({file_size:,} bytes)")
+
+            except UnicodeDecodeError as e:
+                self.results["errors"].append(f"Binary/encoding error reading {file_path}: {str(e)}")
             except Exception as e:
                 self.results["errors"].append(f"Error reading {file_path}: {str(e)}")
 
         if contents:
             self.results["file_contents"] = contents
+            self.results["read_summary"] = {
+                "files_read": len(contents),
+                "total_bytes": total_bytes_read
+            }
 
     def _execute_code_adapt(self) -> None:
         """Adapt code with safe, controlled replacements.

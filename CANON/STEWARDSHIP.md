@@ -172,6 +172,43 @@ except:
 
 **Rationale**: Prevents infinite loops, resource exhaustion, and runaway processes (see ADR-029 Terminator Mode incident).
 
+### 6. Database Connections
+**Rule**: Always use context managers or explicit cleanup for database connections.
+
+```python
+# ❌ FORBIDDEN
+db = sqlite3.connect("data.db")
+cursor = db.execute("SELECT * FROM table")
+# Connection may leak
+
+# ✅ REQUIRED
+with sqlite3.connect("data.db") as conn:
+    cursor = conn.execute("SELECT * FROM table")
+    # Auto-commit and close
+
+# OR (for classes)
+class MyDB:
+    def __init__(self, path):
+        self.conn = sqlite3.connect(path)
+    
+    def close(self):
+        self.conn.close()
+    
+    def __enter__(self):
+        return self
+    
+    def __exit__(self, *args):
+        self.close()
+```
+
+**Additional Requirements**:
+- Set `conn.row_factory = sqlite3.Row` for dict-like access
+- Use parameterized queries (`?` placeholders) to prevent SQL injection
+- Call `conn.commit()` explicitly after writes
+- On Windows: Add `time.sleep(0.5)` after `close()` before unlinking DB files
+
+**Rationale**: Prevents file handle leaks, ensures transactions commit, avoids Windows file locking issues.
+
 ## Authority Boundaries
 
 ### What Agents CAN Do
