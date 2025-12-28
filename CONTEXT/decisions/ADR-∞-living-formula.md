@@ -1,7 +1,12 @@
 # ADR-∞: The Living Formula as System Driver
 
-## Status
-Accepted
+**Status:** Accepted
+**Date:** 2025-12-28
+**Confidence:** Very High
+**Impact:** Critical
+**Tags:** [formula, driver, resonance, philosophy]
+
+## Context
 
 ## Context
 The Agent Governance System (AGS) has successfully established a "Rule of Law" via `CANON/CONTRACT.md` and `CANON/INVARIANTS.md`. These provide necessary constraints (negative liberty) but lack an explicit generative driver (positive liberty). The system knows *what not to do*, but relies on implicit prompt instructions for *how to orient*.
