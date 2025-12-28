@@ -369,10 +369,10 @@ def main():
     print(f"Total:  {tests_passed + tests_failed}")
 
     if tests_failed == 0:
-        print("\n✓ All tests passed!")
+        print("\n[OK] All tests passed!")
         return 0
     else:
-        print(f"\n✗ {tests_failed} test(s) failed")
+        print(f"\n[FAIL] {tests_failed} test(s) failed")
         return 1
 
 

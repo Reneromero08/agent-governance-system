@@ -77,9 +77,11 @@ class SemanticSearch:
 
         # Load all embeddings from database
         cursor = self.conn.execute("""
-            SELECT sv.hash, sv.embedding, s.content, s.file_path, s.section_name, s.line_range
+            SELECT sv.hash, sv.embedding, fts.content, f.path as file_path, c.chunk_index
             FROM section_vectors sv
-            LEFT JOIN sections s ON sv.hash = s.hash
+            LEFT JOIN chunks c ON sv.hash = c.chunk_hash
+            LEFT JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+            LEFT JOIN files f ON c.file_id = f.file_id
         """)
 
         results = []
@@ -97,14 +99,13 @@ class SemanticSearch:
             )
 
             if similarity >= min_similarity:
-                line_range = row['line_range']
                 results.append(SearchResult(
                     hash=row['hash'],
                     content=row['content'] if row['content'] else "",
                     similarity=float(similarity),
                     file_path=row['file_path'] if row['file_path'] else None,
-                    section_name=row['section_name'] if row['section_name'] else None,
-                    line_range=self._parse_line_range(line_range) if line_range else None
+                    section_name=f"Chunk {row['chunk_index']}" if row['chunk_index'] is not None else None,
+                    line_range=None
                 ))
 
         # Sort by similarity (descending) and return top_k
@@ -146,9 +147,11 @@ class SemanticSearch:
 
         while offset < total_count:
             cursor = self.conn.execute("""
-                SELECT sv.hash, sv.embedding, s.content, s.file_path, s.section_name, s.line_range
+                SELECT sv.hash, sv.embedding, fts.content, f.path as file_path, c.chunk_index
                 FROM section_vectors sv
-                LEFT JOIN sections s ON sv.hash = s.hash
+                LEFT JOIN chunks c ON sv.hash = c.chunk_hash
+                LEFT JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+                LEFT JOIN files f ON c.file_id = f.file_id
                 LIMIT ? OFFSET ?
             """, (batch_size, offset))
 
@@ -231,16 +234,20 @@ class SemanticSearch:
         # Load all other embeddings
         if exclude_self:
             cursor = self.conn.execute("""
-                SELECT sv.hash, sv.embedding, s.content, s.file_path, s.section_name, s.line_range
+                SELECT sv.hash, sv.embedding, fts.content, f.path as file_path, c.chunk_index
                 FROM section_vectors sv
-                LEFT JOIN sections s ON sv.hash = s.hash
+                LEFT JOIN chunks c ON sv.hash = c.chunk_hash
+                LEFT JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+                LEFT JOIN files f ON c.file_id = f.file_id
                 WHERE sv.hash != ?
             """, (content_hash,))
         else:
             cursor = self.conn.execute("""
-                SELECT sv.hash, sv.embedding, s.content, s.file_path, s.section_name, s.line_range
+                SELECT sv.hash, sv.embedding, fts.content, f.path as file_path, c.chunk_index
                 FROM section_vectors sv
-                LEFT JOIN sections s ON sv.hash = s.hash
+                LEFT JOIN chunks c ON sv.hash = c.chunk_hash
+                LEFT JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+                LEFT JOIN files f ON c.file_id = f.file_id
             """)
 
         results = []
