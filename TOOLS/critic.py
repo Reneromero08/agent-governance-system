@@ -206,6 +206,8 @@ def check_log_output_roots() -> List[str]:
     ]
     
     # Check for bare excepts (see CANON/STEWARDSHIP.md "No Bare Excepts" rule)
+    
+    # Check for bare excepts (see CANON/STEWARDSHIP.md "No Bare Excepts" rule)
     bare_excepts_patterns = [
         (r'except:\s*$', 'Uses bare except: keyword without specifying exception type'),
         (r'except\s*:\s*$', 'Uses bare except: keyword with colon separator'),
