@@ -1,0 +1,6 @@
+#!/bin/sh
+set -e
+
+# post-checkout runs: <old-ref> <new-ref> <flag>
+python3 TOOLS/cortex_refresh.py || true
+
