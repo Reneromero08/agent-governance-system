@@ -2,6 +2,17 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.10] - 2025-12-27
+
+### MCP Auto-Start Wrapper (created 2025-12-27)
+
+#### Added
+- `MCP/server_wrapper.py` stdio wrapper to auto-start the MCP server on first client connection.
+- `MCP/AUTO_START.md` and `MCP/QUICKSTART.md` for the recommended auto-start flow.
+
+#### Changed
+- `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
+
 ## [2.11.9] - 2025-12-27
 
 ### Repo-Wide Hooks & Cortex Refresh (created 2025-12-27)
