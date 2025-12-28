@@ -14,7 +14,7 @@ sys.path.insert(0, str(REPO_ROOT))
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
 from PIPELINES.pipeline_runtime import PipelineRuntime
-from PIPELINES.pipeline_dag import restore_dag, verify_dag
+from PIPELINES.pipeline_dag import restore_dag, verify_dag, _emit_receipt
 from PRIMITIVES.restore_proof import canonical_json_bytes
 
 
@@ -40,7 +40,7 @@ def _write_pipeline_spec(path: Path, *, pipeline_id: str, out_path: str) -> None
                 "jobspec_path": f"CONTRACTS/_runs/_tmp/pipeline_dag/{pipeline_id}_jobspec.json",
                 "memoize": False,
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     (
                         "from pathlib import Path;"

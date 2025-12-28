@@ -112,10 +112,9 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
             {
                 "step_id": "s1",
                 "jobspec_path": str(jobspec1.relative_to(REPO_ROOT)).replace("\\", "/"),
-                "cmd": [
-                    "python3",
-                    "-c",
-                    f"from pathlib import Path; Path('{out1}').parent.mkdir(parents=True, exist_ok=True); Path('{out1}').write_text('ONE', encoding='utf-8')",
+                                    "cmd": [
+                                        sys.executable,
+                                        "-c",                    f"from pathlib import Path; Path('{out1}').parent.mkdir(parents=True, exist_ok=True); Path('{out1}').write_text('ONE', encoding='utf-8')",
                 ],
                 "strict": True,
                 "memoize": False,
@@ -123,10 +122,9 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
             {
                 "step_id": "s2",
                 "jobspec_path": str(jobspec2.relative_to(REPO_ROOT)).replace("\\", "/"),
-                "cmd": [
-                    "python3",
-                    "-c",
-                    f"from pathlib import Path; Path('{out2}').parent.mkdir(parents=True, exist_ok=True); Path('{out2}').write_text('TWO', encoding='utf-8')",
+                                    "cmd": [
+                                        sys.executable,
+                                        "-c",                    f"from pathlib import Path; Path('{out2}').parent.mkdir(parents=True, exist_ok=True); Path('{out2}').write_text('TWO', encoding='utf-8')",
                 ],
                 "strict": True,
                 "memoize": False,
