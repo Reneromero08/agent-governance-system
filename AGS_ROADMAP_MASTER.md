@@ -25,7 +25,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 
 ## B1. Critical Bug Triage (P0)
 - [ ] Fix critical Swarm race conditions (missing `await`, unsafe locks).
-- [ ] Resolve JSON error recovery failures in MCP server.
+- [x] Resolve JSON error recovery/encoding failures in MCP server (Fixed in v2.15.1).
 - [ ] Harden `poll_and_execute.py` against subprocess zombies.
 
 ## B2. Engineering Culture (P1)
@@ -37,14 +37,14 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 # Lane C: Index database (Cortex) (P0 to P1)
 
 ## C1. System 1 (Fast Retrieval) (P0)
-- [ ] **F3 Strategy**: Implement Content-Addressed Storage (CAS) for artifacts.
+- [x] **F3 Strategy**: Implement Content-Addressed Storage (CAS) for artifacts (LAB Prototype verified).
 - [ ] Build `system1.db`: SQLite FTS + Chunk Index.
 - [ ] Implement `system1-verify` skill to ensure DB matches Repo.
 
 ## C2. Build the indexer (P0)
 - [ ] [P0] Implement indexer logic to parse markdown headings and stable anchors.
 - [ ] [P0] Build `meta/FILE_INDEX.json` and `meta/SECTION_INDEX.json` from the indexer output.
-- [ ] [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
+- [P1] Ensure index build is deterministic and does not modify authored files unless explicitly enabled.
 
 ## C3. Summarization layer (P1)
 - [ ] [P1] Add a summarizer that writes summaries into the DB (not into source files).
@@ -76,7 +76,7 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 ## S1. The Integrity Stack (P0)
 - [ ] **SPECTRUM-02**: Enforce "Resume Bundles" for all Swarm tasks.
 - [ ] **CMP-01**: Hard-fail on any artifact not in `OUTPUT_HASHES.json`.
-- [ ] **INV-012**: Enforce "Visible Execution" (via Bridge/Headless), strictly prohibiting hidden terminals.
+- [x] **INV-012**: Enforce "Visible Execution" (strictly prohibiting hidden terminals via Headless/Logging).
 
 ---
 
