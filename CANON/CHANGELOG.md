@@ -16,7 +16,11 @@ All notable changes to Agent Governance System will be documented in this file.
 - **F2 Prototype**: Catalytic Scratch Layer with byte-identical restoration.
 - **TOOLS/terminal_hunter.py**: Scanner for terminal-spawning code patterns.
 - **CORTEX/system1_builder.py**: System 1 Database with SQLite FTS5 for fast retrieval (schema complete, runtime testing pending).
+- **CORTEX/indexer.py**: Markdown parser and indexer for CANON directory (Lane C2).
+- **SKILLS/system1-verify**: Verification skill to ensure system1.db matches repository state.
 - **TOOLS/verify_f3.py**: Verification script for F3 CAS prototype.
+- **meta/FILE_INDEX.json**: File-level index with content hashes and section metadata.
+- **meta/SECTION_INDEX.json**: Section-level index with anchors and token counts.
 
 ### Changed
 - **AGENTS.md**: Hard prohibition on terminal spawning.
