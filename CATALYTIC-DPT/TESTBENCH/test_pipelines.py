@@ -75,10 +75,9 @@ def test_pipeline_init_is_deterministic_and_resume_safe() -> None:
                     "step_id": "s1",
                     "jobspec_path": jobspec1_rel,
                     "memoize": False,
-                    "cmd": [
-                        "python3",
-                        "-c",
-                        (
+                                            "cmd": [
+                                                sys.executable,
+                                                "-c",                        (
                             "from pathlib import Path;"
                             f"m=Path('{marker1}');"
                             "import sys;"
@@ -94,10 +93,9 @@ def test_pipeline_init_is_deterministic_and_resume_safe() -> None:
                     "step_id": "s2",
                     "jobspec_path": jobspec2_rel,
                     "memoize": False,
-                    "cmd": [
-                        "python3",
-                        "-c",
-                        (
+                                            "cmd": [
+                                                sys.executable,
+                                                "-c",                        (
                             "from pathlib import Path;"
                             f"Path('{out2}').parent.mkdir(parents=True, exist_ok=True);"
                             f"Path('{out2}').write_text('TWO', encoding='utf-8')"

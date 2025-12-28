@@ -47,6 +47,14 @@
           },
           "adapter": {
             "$ref": "adapter.schema.json"
+          },
+          "memoize": {
+            "type": "boolean",
+            "default": true
+          },
+          "strict": {
+            "type": "boolean",
+            "default": true
           }
         },
         "oneOf": [

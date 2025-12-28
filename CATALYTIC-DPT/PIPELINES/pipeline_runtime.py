@@ -4,6 +4,7 @@ import json
 import os
 import re
 import subprocess
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
@@ -409,7 +410,7 @@ class PipelineRuntime:
             raise ValueError("jobspec job_id must be non-empty string")
 
         cmd = [
-            "python3",
+            sys.executable,
             str(self.project_root / "TOOLS" / "catalytic_runtime.py"),
             "--run-id",
             run_id,
