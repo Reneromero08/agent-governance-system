@@ -1,0 +1,6 @@
+{
+  "pipeline_id": "intent-pipeline",
+  "mode": "artifact-only",
+  "allow_repo_write": false,
+  "run_id": "fixture-artifact"
+}

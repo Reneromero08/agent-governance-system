@@ -36,6 +36,8 @@ This document lists the primary entrypoints where agents and humans are expected
 - `MEMORY/LLM_PACKER/` - Windows wrapper scripts for running the packer.
 - `TOOLS/` - Add critics, linters and migration scripts here.
 
+Note: The Cortex section index includes `CATALYTIC-DPT/` so agents can discover and navigate CAT-DPT docs via `TOOLS/cortex.py` without manual filesystem searching.
+
 ## MCP integration
 
 - `MCP/README.md` - Client configuration and quick-start guidance.
