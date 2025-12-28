@@ -1,6 +1,10 @@
 # Agent Activity Monitor
 
-**Skill ID:** `agent-activity`
+**Skill:** `agent-activity`
+**Version:** 0.1.0
+**Status:** Active
+**Required_canon_version:** >=2.11.15
+
 **Description:** Monitors active agents and their current tasks by analyzing the MCP audit log.
 **Usage:** `skill_run(skill="agent-activity", input={})`
 
