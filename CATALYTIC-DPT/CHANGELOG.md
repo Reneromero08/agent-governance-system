@@ -2,6 +2,17 @@
 
 All notable changes to the Catalytic Computing Department (Isolated R&D) will be documented in this file.
 
+## [1.60.0] - 2025-12-27
+
+### Phase 6.4: MCP Adapter Contracts (Schema Only)
+- **Added** `SCHEMAS/mcp_adapter.schema.json`: Strict schema for MCP adapter execution (caps, transcript hashing).
+
+### Phase 6.5: Skill Registry (Hash-Addressed Capabilities)
+- **Added** `SKILLS/registry.json`: Canonical, versioned mapping of Skill IDs to Capability Hashes.
+- **Added** `PRIMITIVES/skills.py`: Skill registry loading, resolution, and strict integrity verification.
+- **Verified** `TESTBENCH/test_skills_registry.py`: Tests for registry loading, resolution, and integrity checks (fail-closed).
+- **Changed** `TOOLS/ags.py`: Integrated `skill_id` resolution into routing logic.
+
 ## [1.55.0] - 2025-12-26
 
 ### Swarm Activation (Nervous System Online)
