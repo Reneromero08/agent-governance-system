@@ -9,9 +9,10 @@ Use this when context window space is at a premium.
 AGS BOOTSTRAP v1.0
 
 LOAD ORDER (strict):
-1. @C0 — supreme authority
-2. @I0 — locked decisions  
-3. @V0 — versioning rules
+1. @F0 — the driver
+2. @C0 — supreme authority
+3. @I0 — locked decisions  
+4. @V0 — versioning rules
 
 CORE RULES:
 @C1: Text > code

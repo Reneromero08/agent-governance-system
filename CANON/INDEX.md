@@ -2,6 +2,9 @@
 
 This directory contains the "Canon"—the laws, rules, and agreements that govern the Agent Governance System.
 
+## The Driver (Foundation)
+- [FORMULA.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/FORMULA.md): The Living Formula. Navigating entropy with symbols that scale.
+
 ## The Constitution (Highest Authority)
 - [AGREEMENT.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/AGREEMENT.md): The separation of liability. Human = Sovereign, Agent = Instrument.
 - [CONTRACT.md](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/CONTRACT.md): The operational rules and authority gradient.
