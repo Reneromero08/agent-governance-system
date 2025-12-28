@@ -15,6 +15,7 @@ Architecture:
 import sqlite3
 import hashlib
 import json
+import re
 from pathlib import Path
 from typing import List, Dict, Optional
 
@@ -29,9 +30,26 @@ class System1DB:
     def __init__(self, db_path: Path = DB_PATH):
         self.db_path = db_path
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.conn = sqlite3.connect(str(db_path))
-        self.conn.row_factory = sqlite3.Row
+        self.conn = None
+        self.open()
         self._init_schema()
+
+    def open(self):
+        """Open database connection with timeout for Windows locking."""
+        if not self.conn:
+            self.conn = sqlite3.connect(
+                str(self.db_path),
+                timeout=10.0,
+                check_same_thread=False
+            )
+            self.conn.row_factory = sqlite3.Row
+
+    def __enter__(self):
+        self.open()
+        return self
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        self.close()
         
     def _init_schema(self):
         """Initialize database schema."""
@@ -138,21 +156,34 @@ class System1DB:
         return [dict(row) for row in cursor.fetchall()]
         
     def _chunk_text(self, text: str) -> List[str]:
-        """Split text into overlapping chunks (word-based approximation)."""
-        # Approximate: 1 token ≈ 0.75 words, so 500 tokens ≈ 375 words
-        words = text.split()
-        word_chunk_size = int(CHUNK_SIZE * 0.75)
-        word_overlap = int(CHUNK_OVERLAP * 0.75)
+        """
+        Split text into overlapping chunks.
+        Refactor: Use sentence boundaries if available (naive).
+        """
+        # Split into sentences (rough approximation)
+        sentences = re.split(r'(?<=[.!?])\s+', text)
         
         chunks = []
-        start = 0
-        while start < len(words):
-            end = min(start + word_chunk_size, len(words))
-            chunk_words = words[start:end]
-            chunks.append(' '.join(chunk_words))
-            start += word_chunk_size - word_overlap
+        current_chunk = []
+        current_words = 0
+        word_chunk_size = int(CHUNK_SIZE * 0.75)
+        
+        for sentence in sentences:
+            sentence_words = sentence.split()
+            if current_words + len(sentence_words) > word_chunk_size and current_chunk:
+                chunks.append(' '.join(current_chunk))
+                # Overlap: keep last few sentences
+                # For now, just reset
+                current_chunk = []
+                current_words = 0
             
-        return chunks if chunks else [text]  # Return full text if no chunks
+            current_chunk.append(sentence)
+            current_words += len(sentence_words)
+            
+        if current_chunk:
+            chunks.append(' '.join(current_chunk))
+            
+        return chunks if chunks else [text]
         
     def _count_tokens(self, text: str) -> int:
         """Approximate token count (word-based)."""
