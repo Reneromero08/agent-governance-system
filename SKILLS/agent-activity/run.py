@@ -50,11 +50,20 @@ def main():
 
     limit = params.get("limit", 10)
     active_within_seconds = params.get("active_within", 3600)  # Default 1 hour
+    
+    # Allow log path override for testing
+    if "log_path" in params:
+        log_file_path = Path(params["log_path"])
+        # If relative, make it relative to PROJECT_ROOT
+        if not log_file_path.is_absolute():
+            log_file_path = PROJECT_ROOT / log_file_path
+    else:
+        log_file_path = LOG_FILE
 
-    if not LOG_FILE.exists():
+    if not log_file_path.exists():
         # No logs yet
         with open(output_path, 'w') as f:
-            json.dump({"active_agents": [], "message": "No audit logs found."}, f)
+            json.dump({"active_agents": [], "message": f"No audit logs found at {log_file_path}"}, f)
         return
 
     sessions = {}
@@ -64,7 +73,7 @@ def main():
     # We'll read all valid lines.
     
     try:
-        with open(LOG_FILE, 'r', encoding='utf-8') as f:
+        with open(log_file_path, 'r', encoding='utf-8') as f:
             for line in f:
                 line = line.strip()
                 if not line:
