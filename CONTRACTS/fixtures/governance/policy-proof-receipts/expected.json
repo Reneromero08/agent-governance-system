@@ -1,0 +1,27 @@
+{
+  "artifact": "POLICY.json",
+  "required_fields": [
+    "policy_version",
+    "revoked_capabilities",
+    "preflight",
+    "admission"
+  ],
+  "preflight_fields": [
+    "verdict",
+    "canon_sha256",
+    "cortex_sha256",
+    "git_head_sha",
+    "generated_at"
+  ],
+  "admission_fields": [
+    "verdict",
+    "intent_sha256",
+    "mode",
+    "reasons"
+  ],
+  "invariants": [
+    "MUST_EXIST_BEFORE_EXECUTION",
+    "MUST_INCLUDE_REVOCATION_SNAPSHOT",
+    "MUST_BE_CANONICAL_JSON"
+  ]
+}
