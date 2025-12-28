@@ -204,6 +204,12 @@ def check_log_output_roots() -> List[str]:
         CANON_DIR / "CRISIS.md",
         CANON_DIR / "STEWARDSHIP.md",
     ]
+    
+    # Check for bare excepts (see CANON/STEWARDSHIP.md "No Bare Excepts" rule)
+    bare_excepts_patterns = [
+        (r'except:\s*$', 'Uses bare except: keyword without specifying exception type'),
+        (r'except\s*:\s*$', 'Uses bare except: keyword with colon separator'),
+    ]
 
     for canon_file in canon_files:
         if not canon_file.exists():
