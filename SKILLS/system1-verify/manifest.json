@@ -1,0 +1,11 @@
+{
+  "name": "system1-verify",
+  "description": "Verify system1.db is in sync with repository",
+  "version": "1.0.0",
+  "entrypoint": "run.py",
+  "inputs": {},
+  "outputs": {
+    "status": "verification status (pass/fail)"
+  },
+  "tags": ["cortex", "verification", "system1"]
+}
