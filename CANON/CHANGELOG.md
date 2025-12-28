@@ -2,7 +2,22 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [2.15.1] - 2025-12-28
+## [2.17.0] - 2025-12-28
+### Added
+- **Semantic Anchor**: Live semantic integration and indexing of the external `D:/CCC 2.0/AI/AGI` repository.
+- **Unified Indexing Schema**: Refactored `VectorIndexer` and `SemanticSearch` to utilize the `System1DB` chunk-based architecture (Schema 001/002 hybrid).
+- **agi-hardener Skill**: Automated ant-driven repository hardening (Bare Excepts, UTF-8, Headless, Atomic Writes).
+
+### Changed
+- **AGS_ROADMAP_MASTER.md**: Updated to v3.4; marked Lane C2, Lane I1, and Lane V1 as completed with "Semantic Anchor" milestone.
+- **CORTEX/vector_indexer.py**: Now joins against `chunks` and `chunks_fts` for high-granularity vector search.
+- **CORTEX/semantic_search.py**: Now performs cross-table joins to retrieve file paths and chunk metadata for vector matches.
+
+### Fixed
+- **AGI Repository Resilience**: Hardened `SKILLS/ant`, `SKILLS/swarm-governor`, and `MCP/server.py` against Windows encoding issues and unsafe error handling.
+- **Indexer Determinism**: Ensured index builds are stable and reproducible across multiple repositories.
+
+## [2.16.0] - 2025-12-28
 
 ### Fixed
 - **Headless Swarm Execution**: Modified `d:/CCC 2.0/AI/AGI/MCP/server.py` to use `subprocess.Popen` with `CREATE_NO_WINDOW` flag instead of Antigravity Bridge terminal API. Workers now run silently in the background.
