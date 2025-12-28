@@ -3,9 +3,10 @@
         "ags": {
             "command": "python",
             "args": [
-                "D:/CCC 2.0/AI/agent-governance-system/MCP/server.py"
+                "D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"
             ],
-            "cwd": "D:/CCC 2.0/AI/agent-governance-system"
+            "cwd": "D:/CCC 2.0/AI/agent-governance-system",
+            "comment": "Auto-starts MCP server on first interaction - no manual start needed!"
         },
         "catalytic-swarm": {
             "command": "python",
