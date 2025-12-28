@@ -1,0 +1,13 @@
+{
+  "task_id": "ant-worker-copy",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "verify_integrity": true,
+  "timestamp": "CATALYTIC-DPT-02_CONFIG",
+  "files": [
+    {
+      "source": "D:\\CCC 2.0\\AI\\agent-governance-system\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\in.txt",
+      "destination": "D:\\CCC 2.0\\AI\\agent-governance-system\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\out.txt"
+    }
+  ]
+}
