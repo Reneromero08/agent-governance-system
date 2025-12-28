@@ -27,6 +27,19 @@ All notable changes to the Catalytic Computing Department (Isolated R&D) will be
 - **Verified** `TESTBENCH/test_registry_validators.py`: Adversarial tests for duplicate hashes, non-canonical encoding, and tamper detection.
 - **Enforced** `ags.py`: `route` and `verify` fail closed on any registry violation.
 
+### Phase 8: Model Binding (Optional, Replaceable, Never Trusted)
+- **Added** Router receipt artifacts in `ags_plan`:
+  - `ROUTER.json`: Records router executable, args, hash, exit code, and stderr bytes.
+  - `ROUTER_OUTPUT.json`: Canonical JSON plan output for deterministic verification.
+  - `ROUTER_TRANSCRIPT_HASH`: SHA-256 hash of raw router stdout bytes.
+- **Verified** `TESTBENCH/test_phase8_router_receipts.py`: 5 tests confirming:
+  - Router receipts are created and contain correct metadata.
+  - Router over-output fails closed (`ROUTER_OUTPUT_TOO_LARGE`).
+  - Router stderr fails closed (`ROUTER_STDERR_NOT_EMPTY`).
+  - Malformed plans fail schema validation.
+  - Capability escalation attempts fail closed (Phase 6.6 enforcement).
+- **Principle**: Models are replaceable and untrusted. Governance validates everything they produce.
+
 ### Performance
 - **Optimized** `PRIMITIVES/cas_store.py`: Eliminated redundant file copy in `put_stream` (100% write IO reduction).
 
