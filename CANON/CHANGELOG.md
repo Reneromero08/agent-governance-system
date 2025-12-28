@@ -2,6 +2,22 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.9] - 2025-12-27
+
+### Repo-Wide Hooks & Cortex Refresh (created 2025-12-27)
+
+#### Added
+- `.githooks/` tracked git hooks for local enforcement (`pre-commit`, `post-checkout`, `post-merge`).
+- `TOOLS/setup_git_hooks.py` to configure `core.hooksPath` to `.githooks`.
+- `TOOLS/cortex_refresh.py` to auto-rebuild cortex on branch change when canon drift is detected.
+
+## [2.11.8] - 2025-12-27
+
+### Pre-Commit Preflight Hook (created 2025-12-27)
+
+#### Changed
+- `SKILLS/canon-governance-check/scripts/pre-commit` now runs `ags preflight` before `check-canon-governance` (fail-closed).
+
 ## [2.11.7] - 2025-12-27
 
 ### Admission Control Gate (created 2025-12-27)
@@ -13,13 +29,6 @@ All notable changes to the Agent Governance System will be documented in this fi
 
 #### Changed
 - Governed MCP tool execution now runs admission immediately after preflight (fail-closed).
-
-## [2.11.8] - 2025-12-27
-
-### Pre-Commit Preflight Hook (created 2025-12-27)
-
-#### Changed
-- `SKILLS/canon-governance-check/scripts/pre-commit` now runs `ags preflight` before `check-canon-governance` (fail-closed).
 
 ## [2.11.6] - 2025-12-27
 
