@@ -1,0 +1,1864 @@
+[
+  {
+    "anchor": "CANON/AGREEMENT.md#preamble",
+    "hash": "e3a9201838e8ac432fe8b8036755a5a416eb4839cc2516023251dd78114f5f14",
+    "level": 2,
+    "title": "Preamble",
+    "tokens": 40
+  },
+  {
+    "anchor": "CANON/AGREEMENT.md#clause-1-sovereignty",
+    "hash": "bb7147d6cff130777dd6405cd0a121d2e018a16acd9c5ce6fb41fd45123948e6",
+    "level": 2,
+    "title": "Clause 1: Sovereignty",
+    "tokens": 97
+  },
+  {
+    "anchor": "CANON/AGREEMENT.md#clause-2-instrumentality",
+    "hash": "097f20a25aeaf4baf830983dd7190ba12b204212be5431b6f4b978d267add49e",
+    "level": 2,
+    "title": "Clause 2: Instrumentality",
+    "tokens": 66
+  },
+  {
+    "anchor": "CANON/AGREEMENT.md#clause-3-strict-liability",
+    "hash": "4ca0f75055ef488066a17eba478d56a4cbf5b927a30752c05b0112be9fe6964e",
+    "level": 2,
+    "title": "Clause 3: Strict Liability",
+    "tokens": 76
+  },
+  {
+    "anchor": "CANON/AGREEMENT.md#clause-4-the-duty-to-intervene",
+    "hash": "a4b7c6f53666cd6e6b0cc0e66ececadab04972373fe12e8dacb8a5f9e4958d39",
+    "level": 2,
+    "title": "Clause 4: The Duty to Intervene",
+    "tokens": 53
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#canon-arbitration",
+    "hash": "78d528921c8a883898b8b6df024f75894a330938ac84d89be3c6dbb7e33749b7",
+    "level": 1,
+    "title": "Canon Arbitration",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#when-this-applies",
+    "hash": "78c3ceca87750e3cc9b2a6ab09a8cf5e179bf3ff169fc13a00d955f88fe20bb2",
+    "level": 2,
+    "title": "When This Applies",
+    "tokens": 90
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#resolution-order",
+    "hash": "7205b92061db473857b4a1555ff0d76ff926b3c7edb4f52c49797444204571d5",
+    "level": 2,
+    "title": "Resolution Order",
+    "tokens": 118
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#escalation-protocol",
+    "hash": "08224c1827501013b2239777ab13c9719de544694e5a2e7855311b33e4128abb",
+    "level": 2,
+    "title": "Escalation Protocol",
+    "tokens": 110
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#recording-resolutions",
+    "hash": "47f966f28ac8344cbd69ed25b432dedcf8d982fad8c289f73ab0571094c68660",
+    "level": 2,
+    "title": "Recording Resolutions",
+    "tokens": 77
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#prevention",
+    "hash": "75a6cc98796741043688fe84e5f0c86586785392b416829e2d52871944991274",
+    "level": 2,
+    "title": "Prevention",
+    "tokens": 80
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#example-1-specificity-resolution",
+    "hash": "13b5c8118b663e76bbde050c14d277392acf43ab68132e0ff49a0f4edbdbd49d",
+    "level": 3,
+    "title": "Example 1: Specificity Resolution",
+    "tokens": 72
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#example-2-recency-resolution",
+    "hash": "c665eaae7b40c9d6294f1b288015276518f81711063a4228f4bfb04aeeafec1c",
+    "level": 3,
+    "title": "Example 2: Recency Resolution",
+    "tokens": 70
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#example-3-escalation-required",
+    "hash": "c46c7f155c57a024be8bb787fda7e500d96292d48f72915267f64762f1f53911",
+    "level": 3,
+    "title": "Example 3: Escalation Required",
+    "tokens": 72
+  },
+  {
+    "anchor": "CANON/ARBITRATION.md#status",
+    "hash": "a24fd29c40336b6d453e023b7921e5f2ff91c46e3ebebe47e89b8445c7152e6b",
+    "level": 2,
+    "title": "Status",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#catalytic-computing",
+    "hash": "d0203026c30aeb2f8a3d09c24dc3a5227c8c1c1e4be38f486ef49bc1226d673d",
+    "level": 1,
+    "title": "Catalytic Computing",
+    "tokens": 32
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#formal-model-complexity-theory",
+    "hash": "da15148a1fe8968c9c8980bb33a074961ef525b415544c497692497a013ea665",
+    "level": 2,
+    "title": "Formal Model (Complexity Theory)",
+    "tokens": 212
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#ags-translation",
+    "hash": "9d7b5ab4b7ef834b339a563f5bdcca248534d29b9a8fb54d6c2fc11c2219d49f",
+    "level": 2,
+    "title": "AGS Translation",
+    "tokens": 112
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#pattern-1-clean-context-vs-catalytic-store",
+    "hash": "c8d244c722368fe0601a616f7f375dbbf0dc8da0fbe02abdacf6c3bd95665d82",
+    "level": 3,
+    "title": "Pattern 1: Clean Context vs Catalytic Store",
+    "tokens": 53
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#pattern-2-restore-guarantee-as-first-class-artifact",
+    "hash": "e4c5f14d055f85f27d3cb60cb2d6ee2f04f751796cbb702c0ada7fe9bbcffdbe",
+    "level": 3,
+    "title": "Pattern 2: Restore Guarantee as First-Class Artifact",
+    "tokens": 60
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#pattern-3-reversible-transforms-mindset",
+    "hash": "33c57428d3eca47bca65d2c11cae2ca2cdb32789dc389da765e36e73ee7856dd",
+    "level": 3,
+    "title": "Pattern 3: Reversible Transforms Mindset",
+    "tokens": 70
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#pattern-4-catalytic-compression-for-packs",
+    "hash": "13ecee67f1a71a5910c5ae5b6c0ac3f26bb08d59d91ce0fb88cc88a02ad8f417",
+    "level": 3,
+    "title": "Pattern 4: Catalytic Compression for Packs",
+    "tokens": 57
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#pattern-5-catalytic-workspace-contract",
+    "hash": "32dab319e57694445a76c71ab21f16c053ce96817cf6133cc204bfcff0139bcd",
+    "level": 3,
+    "title": "Pattern 5: Catalytic Workspace Contract",
+    "tokens": 48
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#what-catalytic-computing-is-not",
+    "hash": "310a3bd669971700b859100cb2bdeaf2af331fa2ca10a2df380c02873ecc1150",
+    "level": 2,
+    "title": "What Catalytic Computing is NOT",
+    "tokens": 132
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#allowed-catalytic-domains",
+    "hash": "c5ce423673543cbe56b922dc2a70e2618f5014203a927f9b54fe2b48aef4de26",
+    "level": 2,
+    "title": "Allowed Catalytic Domains",
+    "tokens": 57
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#durable-output-roots",
+    "hash": "42678fdebce66a803709b97fd532869e0a5d545fc6e0af5a225756eb214ea34e",
+    "level": 2,
+    "title": "Durable Output Roots",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#operational-protocol",
+    "hash": "6ff1e89576758b96ad5a4308462d619ee381b2587f02c5abd4ab88cd36426d16",
+    "level": 2,
+    "title": "Operational Protocol",
+    "tokens": 44
+  },
+  {
+    "anchor": "CANON/CATALYTIC_COMPUTING.md#references",
+    "hash": "4dc9e0514e919e313b3d1356740e77e39f8e8f3c8993ee98a7d51ac3b210cd08",
+    "level": 2,
+    "title": "References",
+    "tokens": 62
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changelog",
+    "hash": "12b95cd0dd18ef5e38b927fa8655a2b74d90ec7f5280d59c16c9bfb3b6fd8078",
+    "level": 1,
+    "title": "Changelog",
+    "tokens": 17
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "892a37a5fa1c721a0ab177cf5bc1505bcf15cfc3e421caf2ff33cdb3904bd33f",
+    "level": 3,
+    "title": "Fixed",
+    "tokens": 93
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "032b32377c3607fcc341ac57f83f3432f6fef55f5508708615695c313af7be70",
+    "level": 3,
+    "title": "Added",
+    "tokens": 154
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "2a0619a9969feaba7cc5acf197631c4cdeb224b4b9695967a22a622792cec56e",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 66
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#2140-2025-12-28",
+    "hash": "5048f5f45a8f74cbef076c5866e64eaede766d814732262b1221c7bc2419a33d",
+    "level": 2,
+    "title": "[2.14.0] - 2025-12-28",
+    "tokens": 22
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#the-living-formula-driver",
+    "hash": "561704877aa6a81cd69c7601bd03b977b9ac0669d00c16af34b514bc8eca4d2c",
+    "level": 3,
+    "title": "The Living Formula (Driver)",
+    "tokens": 24
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "4445acafe52799820aad8f669c03575e735e74fdf8b4eb40186e5562a2ffc8c6",
+    "level": 4,
+    "title": "Added",
+    "tokens": 46
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "992470e92fb773847f8f7045e00a5e9b47bd1326377fce4da708cadb0a2535cd",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 57
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "2e622532a859d016ad9b023c7f4e2907944f8297923a2dc07f22c3565a51c12b",
+    "level": 4,
+    "title": "Fixed",
+    "tokens": 70
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "e91b2fe7fc15e4f9f4e5764ec975ef81c332ce38cbe5a78ff54df140e6c87fe3",
+    "level": 4,
+    "title": "Added",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "4069d1df84215724916294bfd1880ff09efd260d5e6d7b775784b8daafc3c555",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 10
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "345599ac6b6d5f262d7314d1b3d298f676f4f77f44fb538981fbb01a52846b84",
+    "level": 4,
+    "title": "Added",
+    "tokens": 37
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "6635df691b6a6701b4a1fe0f83277e47907008b04d5968ad99b4f57aabc46fb7",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "6160f01a299d49afec4a86ccdb14b1458d13cf94a2d5ceaa2d9f4d627e0c6d68",
+    "level": 4,
+    "title": "Added",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "adc9ef4672668d883c8e555dda40c7364b5d0311053bce25973d751b76fa19f6",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "26b45b0a4b55e937d5909023e8c5ed1965f0c4c11c9002cfe3292d1f1da1113d",
+    "level": 4,
+    "title": "Added",
+    "tokens": 72
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "c95ac63cd858007bc19bc8b4a5e543f8bc38fd0dc989bc85867aa29f32aad76a",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "0e89f2b706e4d39a8e9bb0b3e20623bd7ca04914607b89fcc956886ac499aef1",
+    "level": 4,
+    "title": "Added",
+    "tokens": 20
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "4f48905d1f2a565418a2536ab2f4963265343a06a6abacef696a7809a7c5bf2e",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 54
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "c7e0ed04c5ef5171ef59daeb17c63c0104dc2812cf83a4e5e2b5d7c64d51e397",
+    "level": 4,
+    "title": "Added",
+    "tokens": 62
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "e7400878dc8b46f8a4ca25b8abb8003cd88df753c57abcf6832a2098d81090ec",
+    "level": 4,
+    "title": "Added",
+    "tokens": 50
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "63800f8bff0f8a686a0d4d638ee1db4a719fb9fd4c82a529384ff5f45cfbef27",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 25
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "08be33ec9bcf74dfe7931832c63cb9795a68c42003dfaa50be51244ce0550cdb",
+    "level": 4,
+    "title": "Added",
+    "tokens": 17
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "0b81c6663489cb7b425b6d37caa39fdf932a06fac3fe7ef3896388a9ded5e895",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "3b95bb32281ef2a7b4d985acd334cf3d8c4607be7336e4e8a21a0e4e605da8f2",
+    "level": 4,
+    "title": "Added",
+    "tokens": 16
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "53601d4cdc56285ab9629fd9be8f4c563649b9cc699bb1a41dee0abeb9563725",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "7f110d36c22480a375589af544328f695b35e5cd50e22a08a75b1c3e6df03597",
+    "level": 4,
+    "title": "Added",
+    "tokens": 28
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "de0ab5b16194de9ee26e8003a3c02930774ba7fd46b5cc5f1d2a123423e877b7",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 22
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "6dcc0bda0de6f40f6d6f996a4b3f58f31dc821b50d6db0defe0bdea463f5fb6f",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 30
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "47a93d06c60629a295afd171b80836f6590ea1d5159ac38f05c9f454848cd778",
+    "level": 4,
+    "title": "Added",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "6017f03be788aa1433b434f6e11bf8cb559e035013ee133f99a4f91ccdcbf49e",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 10
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "ebdff6b0de1d366f1708700110c50649b8f4ac184b6733c6c62ac8eea0ec7e03",
+    "level": 4,
+    "title": "Added",
+    "tokens": 41
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "4ddefbdd4ae44176c3b7eec27e814008ae5cf3eec941b7b2a116fd70a523eea7",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "55c5f23e7fabb136426d89c20acbc80bd241b803d794b4043b514e391a1ece78",
+    "level": 4,
+    "title": "Added",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "87eb3f6963010a3cf1cde12c8a4a49d295c97d826c81b3e5ba4878c0aaf145a6",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 16
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "db88b8986e2dec8245798b651f018961ed3a65eedc8911ed103d711ad3b61b98",
+    "level": 4,
+    "title": "Added",
+    "tokens": 53
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "a3109d5e6e9f77f55b948fbee2886355c13063b26c73208d2f1f77ab623cd452",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 28
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "b44e596e2cc78861d73f827f93e033465498f76e08951910c36d5e95c8b7261d",
+    "level": 4,
+    "title": "Added",
+    "tokens": 48
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "6a77a245fd9e509737d6bb10d6e07b5e3284342382481f2f3f8b5dbebe8f2af3",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 37
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "52124e8404c3e42260bf1aa8ae4f11a04bcd591519eda747828a2702f94cd172",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 16
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "ad27e35c7ea4952deeddeb0cacef22574012609f7e183cd0e421b2ea439ae118",
+    "level": 4,
+    "title": "Added",
+    "tokens": 80
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "dc8ef4e1ad17ea410f41617506f6d7b3d9b878d4ccf97752759a277c0a759577",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 172
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "d194dbaede86c90a6b0472208a170607f63a3040d338fb5be3751e324c31f515",
+    "level": 4,
+    "title": "Added",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "cd7498810e677f37a4526d2d4eecb2a8b1b9cad01300bc5018c91d8077da2038",
+    "level": 4,
+    "title": "Added",
+    "tokens": 80
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "4274e913f31d720c423ee353a665f5fb56d5603ddf2854149c409ccb1e3915f0",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 40
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "463136eea114a762892e95eaa4146b32c07bbcd4e586ab6573e1e3cab6607398",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 54
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "7a2d7a5804de8dc2bce7fdf5ac1ced2beba29d7137438e3eb4cc0713ce404aec",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 21
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "46d0eb1792ec921db2d55968ba81f28b59e2b2080c4f51e15bd06acead0ccc21",
+    "level": 4,
+    "title": "Fixed",
+    "tokens": 118
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "06b8d2d65950e473d7678664ae7b07ae3c151c031b500c39c407a1f579d350a2",
+    "level": 4,
+    "title": "Added",
+    "tokens": 8
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "0fc1d053c1abc70933b189b0d54a7e7f6fdc851c7cc9f65c88ae276f7abb4379",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "bd893a606d0afcfcbdc4a0fc368624ae6436a1e844dc4dde7c8243bebe7123d9",
+    "level": 4,
+    "title": "Added",
+    "tokens": 96
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "e78d231d06a3ca00918f906c5739fd22312df725fdd76a6caf5734d2e5f55ce2",
+    "level": 4,
+    "title": "Added",
+    "tokens": 76
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "6b4ef16d7f1c311893ca11a46db2b034ea9a8c226fdc730a116cf953c5323fee",
+    "level": 4,
+    "title": "Changed",
+    "tokens": 130
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "39a5b79d34480bad04bd6ae3ee25351968136727b84afda248fbf9016c8531f1",
+    "level": 3,
+    "title": "Added",
+    "tokens": 64
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "143e17de3f4e7c4725905628325f474f9559e5b119eeac625db58869a1eaf832",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 41
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "2981758ef56b6d74ed0ec3daab39d264ca13793fdfb23e58fb13e6d749b3dbd5",
+    "level": 3,
+    "title": "Fixed",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#removed",
+    "hash": "a13e41df112b780241e48c6ffa5117133561c4c2d1a35be7a67a52d9209fa1d0",
+    "level": 3,
+    "title": "Removed",
+    "tokens": 8
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "c882603375505368a094bb93c380c27b429ab42a0ba8f3a216940c9b71b75f31",
+    "level": 3,
+    "title": "Added",
+    "tokens": 6
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "dc30e8a4cb3ac06709eb99ba246c90199ab3b5992c50abe2cdee2e59e737230e",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "e31be4c442c673b7039dca8beb139b64e13e170621703b693c4b4154cede6f36",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 41
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "35dce5d1560361dd17ebd00dc4e550d3c950973fc1c42b2748f1fd7d0f1ddb6a",
+    "level": 3,
+    "title": "Added",
+    "tokens": 6
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "3fd384009d719c9c3cc8587964b0173f760416cdc014dd301bd2dc3bd0b98aa2",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "3178510e86c38eaf0f2f7738e0827a1a09e402f1f598e6be5f82bd4ed8d78ba0",
+    "level": 3,
+    "title": "Added",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "00e63494a2d93ab3cfb817fc9e9dd1ee4a2e1298a94f3c9115d2838d523ce551",
+    "level": 3,
+    "title": "Fixed",
+    "tokens": 10
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "51962df943aa86bd5c68268953b5ee0d12fa5a05ca18baf8ba3265bba68574a7",
+    "level": 3,
+    "title": "Added",
+    "tokens": 24
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "d9ff301bdf9b8c90418e0c5d2ac92a2b79cf9e1606c0d6550bcfcb9ba5e2f265",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 73
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#fixed",
+    "hash": "3db31e5700325e74673ba54f4e26c71d1325e84c4c419a821d51e0d2d67b1b58",
+    "level": 3,
+    "title": "Fixed",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "d37c4550510cd3bf171f7c0ae3f0ca9bfa808c40ec17d696f0e6cb5b51dbfeaf",
+    "level": 3,
+    "title": "Added",
+    "tokens": 46
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "56bc504b4e17f2ef903ba48698b4947045d2a7dc44ac481c3c10b0e2faa32ee9",
+    "level": 3,
+    "title": "Added",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "049d206aff35c359174b415c2a8f1f6e7b60d4e541a059e5e30cd0c979c91c5a",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 60
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "d317be926fce30b7b992992679a455b8f9f3ef32d1631516e6957418b2900a4d",
+    "level": 3,
+    "title": "Added",
+    "tokens": 46
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "9e559956b2b3ccc241502b0a7a347f5431a2aade55b890ce54b01cc74d1af4ad",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 22
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "269c41ccfa01d278cab2dad7e03c5f57edac22ab8a5f200c3061bed7f2f7df1d",
+    "level": 3,
+    "title": "Added",
+    "tokens": 114
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "88cf2640363f7217211fe759e272cf14989188b4d7cf532a27ce536616c20193",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "f3254e8b146269a54cd520fe32a9a49fe482ed200dbe0828167e672fcbf00bc3",
+    "level": 3,
+    "title": "Added",
+    "tokens": 120
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "615cb856e8fd47007c695304faec535f871bb56d7e8a65a0f02f9c7b0d18800a",
+    "level": 3,
+    "title": "Added",
+    "tokens": 90
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "472fa0aac93e9deb749480b633a0e818020565f0e8a4584b0ba82e983fc07367",
+    "level": 3,
+    "title": "Added",
+    "tokens": 149
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "36189f9374037e8992b96a8a7fa8ca851c11cc53f14cbe64215f18d2a930b3f2",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 58
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#deprecated",
+    "hash": "9437ce5c42cbab71dfb74aab2ae991c3b70ee7cd7daca289de1d5cdc7ed0e887",
+    "level": 3,
+    "title": "Deprecated",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "fe8560a0a8850ba870f5d28272c73647ea222da2706dc2d3b8ad56f8b09c2d89",
+    "level": 3,
+    "title": "Added",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "c434b5bbb2bb84f66be38292b74a9ab7b9c0b0a191d3ff17f5eecde9647648f5",
+    "level": 3,
+    "title": "Added",
+    "tokens": 38
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "c5950b04d74847079a40487496cb6e229239c66c253ff3a6304e671dbab3afab",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 22
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "9e8a878bedf4bd1d1092f3c826028e32a90073e3ce4df385447bfac9e5c7fa99",
+    "level": 3,
+    "title": "Added",
+    "tokens": 70
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "91f962bcd605c5df93914a4e7363cd7b1d6f70b852b0d3eecc0422d46b33e695",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 36
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "d390fb536aa0c86ea72ce8f742c6fb436e1ad8bad7619d1d941e7f1a357ce77d",
+    "level": 3,
+    "title": "Added",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "89545092b2ab3066580a13cd6504147af5eff69f13e7920e459ca3dd97c32325",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 40
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "e8454f936be7201817acb5ea3d6b15569db41b2ce2c3fbd049a46e5a395329f5",
+    "level": 3,
+    "title": "Added",
+    "tokens": 36
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#changed",
+    "hash": "19c4fad7d17929966d69ed17e8184d097f7ee71dffe71c549a201d52081b4d1c",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 46
+  },
+  {
+    "anchor": "CANON/CHANGELOG.md#added",
+    "hash": "08e46418e93b825dc28fa387d315e09af3b8bbe0887257fbc80c31bcf78bb730",
+    "level": 3,
+    "title": "Added",
+    "tokens": 48
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#root",
+    "hash": "a507c588aecd172df4e49d067814eeea0c4c54bce5e65742086aef268e06b72f",
+    "level": 0,
+    "title": "Root",
+    "tokens": 26
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#canon-codebook",
+    "hash": "a2eea3ee1563fcfd53e5af4e87eee4c878541146cac16c95441a461e9acde423",
+    "level": 1,
+    "title": "Canon Codebook",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#purpose",
+    "hash": "2e10e72367664f078a36e0a9c61a5f5d168bacb99057c14ea1b0cab1cb0a4385",
+    "level": 2,
+    "title": "Purpose",
+    "tokens": 50
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#canon-files-x0",
+    "hash": "b3223a1357d82ed8e756895addf6c2a5b4545d3e6f05503cfd02c4625f089c00",
+    "level": 2,
+    "title": "Canon Files (@X0)",
+    "tokens": 153
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#contract-rules-c",
+    "hash": "f468eb97088a133afdec6dd8ae3ff622c891674c0dff7f911fc2c7587b82a710",
+    "level": 2,
+    "title": "Contract Rules (@C)",
+    "tokens": 281
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#invariants-i",
+    "hash": "15340f73a86c9849829b1808badb6c4d3004091c320c7a303156ddb60ec3da6e",
+    "level": 2,
+    "title": "Invariants (@I)",
+    "tokens": 357
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#skills-s",
+    "hash": "f2e2846347a3990513b8242f5c10d3c78447f4e8c74db24d62863578cc75a504",
+    "level": 2,
+    "title": "Skills (@S)",
+    "tokens": 245
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#decisions-d",
+    "hash": "a58941d490dff86265ad1a60376e1cba7f500ab8598810fe280ef50f236b14d7",
+    "level": 2,
+    "title": "Decisions (@D)",
+    "tokens": 420
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#in-prompts",
+    "hash": "c3766a327193c57a4a1b2810da9f8c62053c85045cd0a25eeb4b807b46b24a40",
+    "level": 3,
+    "title": "In Prompts",
+    "tokens": 25
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#in-code",
+    "hash": "94dab15f1e143a9efbc926cc683448fab6463fc09ef9038ebf597b4e6b3a65ab",
+    "level": 3,
+    "title": "In Code",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#in-mcp",
+    "hash": "98e85bfcca2b40461ca0f8eb8a56abee7d577c6c30890a5790546c89f4c94e60",
+    "level": 3,
+    "title": "In MCP",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/CODEBOOK.md#updating",
+    "hash": "e685ada2fe05308a5f5f7ae91c1740bdf6634e7fa24962176d7ace4f9830d4dc",
+    "level": 2,
+    "title": "Updating",
+    "tokens": 25
+  },
+  {
+    "anchor": "CANON/CONTRACT.md#canon-contract",
+    "hash": "83583ae4eaeb5bc75103b35781716a8defd6be919c2627e51e64d12f0e2797ea",
+    "level": 1,
+    "title": "Canon Contract",
+    "tokens": 66
+  },
+  {
+    "anchor": "CANON/CONTRACT.md#non-negotiable-rules",
+    "hash": "64c24ce6cc1350adce92cfda6e4524c8c60529acc1efc6ad936bc9cc0373c793",
+    "level": 2,
+    "title": "Non-negotiable rules",
+    "tokens": 692
+  },
+  {
+    "anchor": "CANON/CONTRACT.md#intent-gate",
+    "hash": "b2ee128c83cb20ce247386486c5a9ce25485ffeb06cc49a5416f352fc5108df2",
+    "level": 2,
+    "title": "Intent gate",
+    "tokens": 58
+  },
+  {
+    "anchor": "CANON/CONTRACT.md#authority-gradient",
+    "hash": "4363534637ea06864dc56c4c9f2468f75b3a937fb706815e3914b3b0a660cde6",
+    "level": 2,
+    "title": "Authority gradient",
+    "tokens": 65
+  },
+  {
+    "anchor": "CANON/CONTRACT.md#change-ceremony",
+    "hash": "9c190f3103470a08caa81136e2615838cf11841439696507a55c82481c123b89",
+    "level": 2,
+    "title": "Change ceremony",
+    "tokens": 100
+  },
+  {
+    "anchor": "CANON/CRISIS.md#crisis-mode-procedures",
+    "hash": "3bd5009ee26e9eeb429ad8700afc450490027cc05671a65905de5090836ca399",
+    "level": 1,
+    "title": "Crisis Mode Procedures",
+    "tokens": 20
+  },
+  {
+    "anchor": "CANON/CRISIS.md#philosophy",
+    "hash": "84ccf2f1d8568ca82bec3ed7ea4caca3399668085bdbf8d63cad1d6d59209029",
+    "level": 2,
+    "title": "Philosophy",
+    "tokens": 44
+  },
+  {
+    "anchor": "CANON/CRISIS.md#crisis-levels",
+    "hash": "08f92cf92b153306a9cd6491081c11564eb780a4267f3162bd5ad1785c5a9a48",
+    "level": 2,
+    "title": "Crisis Levels",
+    "tokens": 101
+  },
+  {
+    "anchor": "CANON/CRISIS.md#emergency-cli",
+    "hash": "46e1e0de9459da6ef8be7080288d90dd1a4b476e85c7ed44e90dcad71c16497c",
+    "level": 2,
+    "title": "Emergency CLI",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/CRISIS.md#usage",
+    "hash": "f250d78cfc10f07ebb0f7c04164f5ea8ca01098fbe11deaa3b49f1a6a443c3cd",
+    "level": 3,
+    "title": "Usage",
+    "tokens": 1
+  },
+  {
+    "anchor": "CANON/CRISIS.md#check-current-status",
+    "hash": "5e281d95f2c0ae0cd59e629d4c0e155f9322f2a7ec1975d946dd0012080da673",
+    "level": 1,
+    "title": "Check current status",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-1-run-critic-and-fixtures",
+    "hash": "704771d45010f0939fd20f33a3ffd4b0d78dddf7fa9c19d30b5bd21ae0c5d0fe",
+    "level": 1,
+    "title": "Level 1: Run critic and fixtures",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-2-rollback-last-change",
+    "hash": "a6db6dd5d0690df5ae6523cffb6f0f9371c80e77c94c6172d3fc94d2516110a2",
+    "level": 1,
+    "title": "Level 2: Rollback last change",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-3-quarantine-blocks-all-writes-preserves-state",
+    "hash": "96f4fb3b4e85ddefad3feb7cdc57cf383d1587d85040586342887f8191256f44",
+    "level": 1,
+    "title": "Level 3: Quarantine (blocks all writes, preserves state)",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-4-constitutional-reset-restore-to-tagged-release",
+    "hash": "34b610ceedfd9b9eff1c7193d368463b81bffc79f6be7d170006c2ee67b2ad11",
+    "level": 1,
+    "title": "Level 4: Constitutional reset (restore to tagged release)",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/CRISIS.md#exit-quarantine-requires-confirmation",
+    "hash": "d7e543a9bdfcd505bbba5427dc62dcfc9ba8984e37e501e9b8a542ccac97fadd",
+    "level": 1,
+    "title": "Exit quarantine (requires confirmation)",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-1-validation-failure",
+    "hash": "716d4549a9148b3ddf9913bb08b47a80b2bd040e281d443b3d405f021d85eb6e",
+    "level": 3,
+    "title": "Level 1: Validation Failure",
+    "tokens": 54
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-2-rollback-required",
+    "hash": "a4a500397d675c0833b1b5aefcd501043303092b25b7f3c93670e167ca3be54b",
+    "level": 3,
+    "title": "Level 2: Rollback Required",
+    "tokens": 69
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-3-quarantine-mode",
+    "hash": "c79c2d8bdcbe1a6a645ed273a670a90fb1055e28ec8cfda7e7e261a4af2b036b",
+    "level": 3,
+    "title": "Level 3: Quarantine Mode",
+    "tokens": 81
+  },
+  {
+    "anchor": "CANON/CRISIS.md#level-4-constitutional-reset",
+    "hash": "fe0181fda70c44006da7e9be7e17eeabad9714f0217fa54e8afc75023debe06e",
+    "level": 3,
+    "title": "Level 4: Constitutional Reset",
+    "tokens": 109
+  },
+  {
+    "anchor": "CANON/CRISIS.md#quarantine-lock-file",
+    "hash": "b178f99192d5881a039daccdc9a9498664780b0621dc0443288f54de1a772646",
+    "level": 2,
+    "title": "Quarantine Lock File",
+    "tokens": 73
+  },
+  {
+    "anchor": "CANON/CRISIS.md#with-critic",
+    "hash": "71ca9b5213a93426f482b51d91b5f94fdaced8bdb7c3e9692e8f0a7e3ea224d9",
+    "level": 3,
+    "title": "With Critic",
+    "tokens": 29
+  },
+  {
+    "anchor": "CANON/CRISIS.md#with-mcp",
+    "hash": "1a9d296de5c83da113e4a7518f370d19645e5cc3e58d02efa9503ec1c293c00d",
+    "level": 3,
+    "title": "With MCP",
+    "tokens": 44
+  },
+  {
+    "anchor": "CANON/CRISIS.md#with-agent-contract",
+    "hash": "30c5e5cb8cc5b28ea2a54b89c391a709a435e465fa918bcd380cabebaae59742",
+    "level": 3,
+    "title": "With Agent Contract",
+    "tokens": 44
+  },
+  {
+    "anchor": "CANON/CRISIS.md#stewardship-escalation",
+    "hash": "d287d6e4f37142ddb9a79a4fdef9e37dcb50f22504991f8a6d9394ebd945cd78",
+    "level": 2,
+    "title": "Stewardship Escalation",
+    "tokens": 52
+  },
+  {
+    "anchor": "CANON/CRISIS.md#audit-trail",
+    "hash": "1ddc78020178e1faa1466ee8901a6a0e93157ef282587499fe6b4caad510c40b",
+    "level": 2,
+    "title": "Audit Trail",
+    "tokens": 40
+  },
+  {
+    "anchor": "CANON/CRISIS.md#recovery-ceremony",
+    "hash": "936edc922d0d5b2395302f4e22440846cc911a7127430454b4ff2b2678ef2472",
+    "level": 2,
+    "title": "Recovery Ceremony",
+    "tokens": 61
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#deprecation-policy",
+    "hash": "3ecbacf69be504821e7aa79b3bf1d4d75aebc149c99166f6a26ba5bcffaba6b0",
+    "level": 1,
+    "title": "Deprecation Policy",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#scope",
+    "hash": "5d94be1464536033703612876651bf7cb6b1e326b3d0218971a6ebeab9cf38d3",
+    "level": 2,
+    "title": "Scope",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#deprecation-windows",
+    "hash": "9bacc1a5b6c90f9ed03d1d40da1c4f2acf94b408d9c7472fdf4ea5c3c1334387",
+    "level": 2,
+    "title": "Deprecation Windows",
+    "tokens": 116
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#deprecation-ceremony",
+    "hash": "64debc61214bb602f58b025c2b7168bd6835169e2be69bce6baf532a7503d819",
+    "level": 2,
+    "title": "Deprecation Ceremony",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#1-create-an-adr",
+    "hash": "c71cb8b79d2b934b8814ca59ecafe3d7ac04b4556ce9d7c325a38b78d7f7f730",
+    "level": 3,
+    "title": "1. Create an ADR",
+    "tokens": 36
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#2-mark-the-item-as-deprecated",
+    "hash": "542bf9614a8dc8ba7c3b89d7f1e79281e07cee375cfd9ee5d084a1239e9f44d9",
+    "level": 3,
+    "title": "2. Mark the Item as Deprecated",
+    "tokens": 89
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#3-create-migration-artifacts",
+    "hash": "fcb1ec18edf594a21b42738e2c43090126cacfd895e19bda220d5ce412e6e66d",
+    "level": 3,
+    "title": "3. Create Migration Artifacts",
+    "tokens": 49
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#4-update-changelog",
+    "hash": "3f5b07a6a8fb6e4bd7fae54fe38e78c796c5a527222a8a2701fe86be0a553a5c",
+    "level": 3,
+    "title": "4. Update CHANGELOG",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#deprecated",
+    "hash": "b7140968e0ba75f6c1a4251f5659eb1024363a12881e11cf455b58cc3c38546d",
+    "level": 3,
+    "title": "Deprecated",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#removal-ceremony",
+    "hash": "42313666324fdae5eede61852f312183f4872c9bcdb2ea1cd0a18f2b51cabefe",
+    "level": 2,
+    "title": "Removal Ceremony",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#1-verify-window-has-passed",
+    "hash": "a4a1f5fce9ed8c01b79036a55fd0c547db63722b715394cd2d8c4d1c79151b0f",
+    "level": 3,
+    "title": "1. Verify Window Has Passed",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#2-remove-the-item",
+    "hash": "4bb700850653e4e503c1e73bae08209baf56c48a6b642ff2e05bf58c8579eaab",
+    "level": 3,
+    "title": "2. Remove the Item",
+    "tokens": 21
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#3-update-changelog",
+    "hash": "0f8a73ba45bf59e239f27139510094cf40481d46ed40d388521a187ce1febe0d",
+    "level": 3,
+    "title": "3. Update CHANGELOG",
+    "tokens": 1
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#removed",
+    "hash": "924f214810c1a78b90c259d7ed9c2f3b3e7b0226569edfd182a92f6940c94db2",
+    "level": 3,
+    "title": "Removed",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#4-major-version-bump",
+    "hash": "2babb565686f0474c42aa6b131fa3a43bbc409a81e0d403060f2ad3f26d3eb75",
+    "level": 3,
+    "title": "4. Major Version Bump",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#early-removal-emergency",
+    "hash": "4499be72aa3571b9706a83e5e5ccc799849adb29fa13a08ac9714c1d8c734cf4",
+    "level": 2,
+    "title": "Early Removal (Emergency)",
+    "tokens": 74
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#sunset-archive",
+    "hash": "b18e308048cde196ac0c3ba4d2473182ecfa2f16d37ae4ab1993e0646406596d",
+    "level": 2,
+    "title": "Sunset Archive",
+    "tokens": 38
+  },
+  {
+    "anchor": "CANON/DEPRECATION.md#status",
+    "hash": "a24fd29c40336b6d453e023b7921e5f2ff91c46e3ebebe47e89b8445c7152e6b",
+    "level": 2,
+    "title": "Status",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/FORMULA.md#root",
+    "hash": "70f4142c5fd9cd4b888a315469d9c8b2c00b3e75b540f075c897cdd58c0bcc43",
+    "level": 0,
+    "title": "Root",
+    "tokens": 6
+  },
+  {
+    "anchor": "CANON/FORMULA.md#the-living-formula-v4",
+    "hash": "aaa408e5c993b5b588122de86ccfd1ab8d7e065b1966748cabf46b6d2b92c101",
+    "level": 1,
+    "title": "The Living Formula v4",
+    "tokens": 68
+  },
+  {
+    "anchor": "CANON/FORMULA.md#r-e-s-fdf",
+    "hash": "db1b728b861d554d7fe6f7a1cc7933b7e50fa0159a9d6cb01c9df208fbf270eb",
+    "level": 2,
+    "title": "**R = (E / \u2207S) \u00d7 \u03c3(f)^Df**",
+    "tokens": 84
+  },
+  {
+    "anchor": "CANON/FORMULA.md#intuition",
+    "hash": "496caac32b3d1c0490d76f43d81466b713435dda5137d978686c816a11f2bacc",
+    "level": 3,
+    "title": "Intuition",
+    "tokens": 77
+  },
+  {
+    "anchor": "CANON/FORMULA.md#mechanics",
+    "hash": "af218de76650d240573b420c99544dfedb7f59e46b636bf367da97ac2387e1d2",
+    "level": 2,
+    "title": "Mechanics",
+    "tokens": 116
+  },
+  {
+    "anchor": "CANON/FORMULA.md#applications",
+    "hash": "884f765a4543307e66836b85e5d6fe078df19e04300140966b67ee7d26e0432e",
+    "level": 2,
+    "title": "Applications",
+    "tokens": 182
+  },
+  {
+    "anchor": "CANON/FORMULA.md#how-i-discovered-it",
+    "hash": "98f6259e8d75f83cc3daa9d395de4053f81ccb7f93f3e5963c33628d45f83428",
+    "level": 2,
+    "title": "How I discovered it",
+    "tokens": 241
+  },
+  {
+    "anchor": "CANON/FORMULA.md#version-history",
+    "hash": "6843ae80d519d5106bde88fd587c4a319c5015fa7ff7c503e3199b9220b7f768",
+    "level": 2,
+    "title": "Version History",
+    "tokens": 224
+  },
+  {
+    "anchor": "CANON/FORMULA.md#using-it-in-practice",
+    "hash": "8fcedb150c3b58ae5cbca0e9d9876d8fed1d8c2fb2db0a39f4383af696c4bc96",
+    "level": 2,
+    "title": "Using it in practice",
+    "tokens": 101
+  },
+  {
+    "anchor": "CANON/FORMULA.md#misreads-to-avoid",
+    "hash": "8e3c741a0a95a5c20b662e8cd17e3b81167126cdb4ad8d953d9c2258b97a7d0d",
+    "level": 2,
+    "title": "Misreads to avoid",
+    "tokens": 52
+  },
+  {
+    "anchor": "CANON/FORMULA.md#empirical-path",
+    "hash": "6e703036202b81a44b1667d2172b513af032a467b3d2e1edc12d6e7751aa98ff",
+    "level": 2,
+    "title": "Empirical path",
+    "tokens": 69
+  },
+  {
+    "anchor": "CANON/GENESIS.md#genesis-prompt",
+    "hash": "0cdef309947f1a8a05131360fde7002bef37c8877a0cdd73305d8e88c5d15609",
+    "level": 1,
+    "title": "Genesis Prompt",
+    "tokens": 68
+  },
+  {
+    "anchor": "CANON/GENESIS.md#the-prompt",
+    "hash": "a2c782855717b44bd43af9757c4243513cbd62766d89cdf9ddb35c1ed0389c64",
+    "level": 2,
+    "title": "The Prompt",
+    "tokens": 268
+  },
+  {
+    "anchor": "CANON/GENESIS.md#why-this-exists",
+    "hash": "6c2d73243746c58495178116a32351f4098784bdee3eef15a2cdc1c26ec91f3c",
+    "level": 2,
+    "title": "Why This Exists",
+    "tokens": 90
+  },
+  {
+    "anchor": "CANON/GENESIS.md#how-to-use",
+    "hash": "de50a0bbffc20645d1d148f71fed72cd70e9c7efc57d392b5debced8fa2eee15",
+    "level": 2,
+    "title": "How to Use",
+    "tokens": 92
+  },
+  {
+    "anchor": "CANON/GENESIS.md#versioning",
+    "hash": "98c6f3254b1a042f3259a99cbeb9fd1d73f5bf1870743a00ccc782ad63d789fb",
+    "level": 2,
+    "title": "Versioning",
+    "tokens": 28
+  },
+  {
+    "anchor": "CANON/GENESIS_COMPACT.md#genesis-prompt-compressed",
+    "hash": "0866b9445cdf299cb517bd2750422a59fcdb01602cc97aebf472b559953badf8",
+    "level": 1,
+    "title": "Genesis Prompt (Compressed)",
+    "tokens": 26
+  },
+  {
+    "anchor": "CANON/GENESIS_COMPACT.md#compressed-prompt",
+    "hash": "2d412b8516307353f03159f04d4d43d64da10e3eaf973f29c2549ce7973f1a2b",
+    "level": 2,
+    "title": "Compressed Prompt",
+    "tokens": 96
+  },
+  {
+    "anchor": "CANON/GENESIS_COMPACT.md#token-comparison",
+    "hash": "70d5e936cfaaffe56fef162c9f246c333923440a0deda6ce6791337915ab9524",
+    "level": 2,
+    "title": "Token Comparison",
+    "tokens": 30
+  },
+  {
+    "anchor": "CANON/GENESIS_COMPACT.md#when-to-use",
+    "hash": "64aaba7c94c87cfd3f4c36dab4175108d80c3c8dd9326efa7849a38ab01d01fb",
+    "level": 2,
+    "title": "When to Use",
+    "tokens": 56
+  },
+  {
+    "anchor": "CANON/GENESIS_COMPACT.md#expansion",
+    "hash": "78b54675859513e6f3d266e5b97182eaca71813d973254457f888fc6a96dbca0",
+    "level": 2,
+    "title": "Expansion",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/GLOSSARY.md#glossary",
+    "hash": "201f912d95fa1024822706af925168b95e0e025b3e3e03679a2cb524b83eaf7d",
+    "level": 1,
+    "title": "Glossary",
+    "tokens": 665
+  },
+  {
+    "anchor": "CANON/INDEX.md#canon-index",
+    "hash": "58cbb6de9444a28b0b94127647d97fde4a8c7a43151e19294771af616ece7165",
+    "level": 1,
+    "title": "Canon Index",
+    "tokens": 20
+  },
+  {
+    "anchor": "CANON/INDEX.md#the-driver-foundation",
+    "hash": "5b529595fa66be9b9f06d039a8ba747348006a549a31d9639ae303253a604811",
+    "level": 2,
+    "title": "The Driver (Foundation)",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/INDEX.md#the-truth-foundation",
+    "hash": "0bd4e12f27eb82758122f7d85024337187ca1f5efe3f12704f1210b7fc8c0ee1",
+    "level": 2,
+    "title": "The Truth (Foundation)",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/INDEX.md#the-constitution-highest-authority",
+    "hash": "ac7679e4fd343651a305ff5b95cc3758bab034a8e39fa580a027413147f3bf30",
+    "level": 2,
+    "title": "The Constitution (Highest Authority)",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/INDEX.md#governance-machinery",
+    "hash": "faa11ac7ce50b46212130202e89ec314d436712c793b7f1941c412bde9208dd5",
+    "level": 2,
+    "title": "Governance Machinery",
+    "tokens": 24
+  },
+  {
+    "anchor": "CANON/INDEX.md#processes",
+    "hash": "b3748273a34d6860df759823ef561f394d65a21110e655ac95c5ac570165217d",
+    "level": 2,
+    "title": "Processes",
+    "tokens": 49
+  },
+  {
+    "anchor": "CANON/INDEX.md#meta",
+    "hash": "4c77ecda102d6232cee08aa9231db07b4869a4658e9cff1b70b169ca550bdca2",
+    "level": 2,
+    "title": "Meta",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/INTEGRITY.md#integrity-law-cmpspectrum",
+    "hash": "e106abc7e81c169f92187c899a71e92f5f945546eac0c7ef9edba6b9b4abc97f",
+    "level": 1,
+    "title": "Integrity Law (CMP/SPECTRUM)",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/INTEGRITY.md#1-cmp-01-runtime-guard",
+    "hash": "7c440fc2ab1ecd6f1d8160078162e8c15828d58b0e254ca582036414d1280c9f",
+    "level": 2,
+    "title": "1. CMP-01: Runtime Guard",
+    "tokens": 52
+  },
+  {
+    "anchor": "CANON/INTEGRITY.md#2-spectrum-01-the-resume-bundle",
+    "hash": "48adaa966d27539ce045094a42b222ac06a2d1aecffb2968e1d2c496a0f31fb3",
+    "level": 2,
+    "title": "2. SPECTRUM-01: The Resume Bundle",
+    "tokens": 41
+  },
+  {
+    "anchor": "CANON/INTEGRITY.md#3-spectrum-03-chained-temporal-integrity",
+    "hash": "f5cbc9e7c26f85af9c50f8ea5c52991e3acf06a85bc8f184be308a38f213c761",
+    "level": 2,
+    "title": "3. SPECTRUM-03: Chained Temporal Integrity",
+    "tokens": 50
+  },
+  {
+    "anchor": "CANON/INTEGRITY.md#4-the-5-invariants-of-integrity",
+    "hash": "f378acbf61bd59151b73d0a545222520072cca0ba3969a3bc9afff928b053884",
+    "level": 2,
+    "title": "4. The 5 Invariants of Integrity",
+    "tokens": 94
+  },
+  {
+    "anchor": "CANON/INVARIANTS.md#invariants",
+    "hash": "17bf958db56bf3a4bc705a9cea9a828651bd8eb2bf639dbbdcd682496d0d096b",
+    "level": 1,
+    "title": "Invariants",
+    "tokens": 37
+  },
+  {
+    "anchor": "CANON/INVARIANTS.md#list-of-invariants",
+    "hash": "04a39bdcf6141179e6896398d71257dc41faf84920ea22c12645f7492b091182",
+    "level": 2,
+    "title": "List of invariants",
+    "tokens": 574
+  },
+  {
+    "anchor": "CANON/INVARIANTS.md#changing-invariants",
+    "hash": "0fe7c5e477593663cda154572437ece2c185bcabdfdc8581c6d289032aa31514",
+    "level": 2,
+    "title": "Changing invariants",
+    "tokens": 73
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#migration-ceremony",
+    "hash": "26e008f37e82f382a27895fbfe95e8c440951631ebaa3c1890ddf61eff9ef374",
+    "level": 1,
+    "title": "Migration Ceremony",
+    "tokens": 32
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#when-this-applies",
+    "hash": "ab6c1a3a7e4cb868d8670c1d5781995637617d26bded943ea2913a43d1a0f950",
+    "level": 2,
+    "title": "When This Applies",
+    "tokens": 66
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#phase-1-preparation",
+    "hash": "59ef8d12c883c7b12a9a0544d886b38bfa6b0f01e8181eb715d1da6309eb4cc9",
+    "level": 3,
+    "title": "Phase 1: Preparation",
+    "tokens": 157
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#phase-2-execution",
+    "hash": "845b5b8a47240b307cd305d5d8f28074809c8eb7f3499b309202eb013bb5e87d",
+    "level": 3,
+    "title": "Phase 2: Execution",
+    "tokens": 128
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#phase-3-verification",
+    "hash": "4387b683d30238254e022c01e0ebfaaf483e0fce574f749ced6bf1441a035eef",
+    "level": 3,
+    "title": "Phase 3: Verification",
+    "tokens": 92
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#rollback",
+    "hash": "02ea0981d1035f14f96047bcbe09702e0cc7382e28f5f4cb4d3107c74f0da803",
+    "level": 2,
+    "title": "Rollback",
+    "tokens": 66
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#migration-skill-template",
+    "hash": "8fd1bfaf37db4918e7480a2fc8393017049d83649e170cfc1ed59f86c1ce6dd5",
+    "level": 2,
+    "title": "Migration Skill Template",
+    "tokens": 157
+  },
+  {
+    "anchor": "CANON/MIGRATION.md#status",
+    "hash": "a24fd29c40336b6d453e023b7921e5f2ff91c46e3ebebe47e89b8445c7152e6b",
+    "level": 2,
+    "title": "Status",
+    "tokens": 4
+  },
+  {
+    "anchor": "CANON/SECURITY.md#security-policy",
+    "hash": "5a62eae64535ee9240892055039431fca7c32fa9583747e1230f330e4575dd2f",
+    "level": 1,
+    "title": "Security Policy",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/SECURITY.md#principles",
+    "hash": "0888025c022bae08a73c7dac4f62e3aa1b436e6d28dec8f038fef64728d2ea20",
+    "level": 2,
+    "title": "Principles",
+    "tokens": 96
+  },
+  {
+    "anchor": "CANON/SECURITY.md#agent-read-access",
+    "hash": "c59ac0718a2742f32af1ba89b90a5ddc539dd3aa0007a7ca4a9b743767482caf",
+    "level": 3,
+    "title": "Agent Read Access",
+    "tokens": 110
+  },
+  {
+    "anchor": "CANON/SECURITY.md#agent-write-access",
+    "hash": "89148db0253653d543c384db0956c250700ee3246cffa7f414f6cee10d3f5236",
+    "level": 3,
+    "title": "Agent Write Access",
+    "tokens": 73
+  },
+  {
+    "anchor": "CANON/SECURITY.md#human-approval-required",
+    "hash": "1c31f7f2733321452f9d6549d65a62789b44f7b01c2fe4d9d380a9cd21574cf0",
+    "level": 3,
+    "title": "Human Approval Required",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/SECURITY.md#sandboxing",
+    "hash": "24ef9fa00bc9edf5cde27adf9fa7c2bf85a115d9faed48c629aa2773349663b7",
+    "level": 3,
+    "title": "Sandboxing",
+    "tokens": 46
+  },
+  {
+    "anchor": "CANON/SECURITY.md#reporting-vulnerabilities",
+    "hash": "2f0e30f978db841cefeaa4b839512f5c3578d808b2d9703475f06a3621e41fd7",
+    "level": 2,
+    "title": "Reporting Vulnerabilities",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#stewardship-structure",
+    "hash": "7ef62e2158ea4b4aca987d38e9c1e47d66ba110e54c1ec0b9095c0b1f5dd351e",
+    "level": 1,
+    "title": "Stewardship Structure",
+    "tokens": 26
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#philosophy",
+    "hash": "12b09ebe8b07fdf27a9371a7019db7ba089e3069367bf6e1107d11f678e96afb",
+    "level": 2,
+    "title": "Philosophy",
+    "tokens": 70
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#steward",
+    "hash": "b7bca01389b3854692073919be9295fbd7f5a54085f03f3633cb6d52f759d250",
+    "level": 3,
+    "title": "Steward",
+    "tokens": 52
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#maintainer",
+    "hash": "ee77fc41d8113b457cc9d04b495bae7ba2e2f7852400eeac295eb14df1a8fd4f",
+    "level": 3,
+    "title": "Maintainer",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#agent",
+    "hash": "e50b23b3da2067aa6e6b43a28af2b7130266c002eef263be60f2dcd0f05ad679",
+    "level": 3,
+    "title": "Agent",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#escalation-matrix",
+    "hash": "abd36d08e29e5380c77974ee7fd8f8b4725014f48a940625272e207090f4f4ec",
+    "level": 2,
+    "title": "Escalation Matrix",
+    "tokens": 97
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#contact-configuration",
+    "hash": "df2f87bc6664e1d1df2236ace8f5b678c21a7deaf1baab346652b47aeebaf8b8",
+    "level": 2,
+    "title": "Contact Configuration",
+    "tokens": 61
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#step-1-agent-detects-issue",
+    "hash": "01a9db9b0683c78e53cb11a560a344feaa72fe42a41fe927b16011019f6efb78",
+    "level": 3,
+    "title": "Step 1: Agent Detects Issue",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#step-2-agent-stops-and-documents",
+    "hash": "38259491803ac34896f96c70e80143f6783bcc864698c126da5d1d092cee9506",
+    "level": 3,
+    "title": "Step 2: Agent Stops and Documents",
+    "tokens": 33
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#step-3-human-reviews",
+    "hash": "97447c17b46088ec43a5601f6c964f190d45a5407ddf81723aa949aede769956",
+    "level": 3,
+    "title": "Step 3: Human Reviews",
+    "tokens": 37
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#step-4-resolution",
+    "hash": "1610ee403a47f012ef690060982fc90286fb0be38e506a740691320a92189afa",
+    "level": 3,
+    "title": "Step 4: Resolution",
+    "tokens": 9
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#engineering-culture",
+    "hash": "27215269cc97b41cad938afc9604faf99adaed7be335a9dfbdf945e2e2bf24e0",
+    "level": 2,
+    "title": "Engineering Culture",
+    "tokens": 16
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#1-no-bare-excepts",
+    "hash": "6ad16938c23dc584dc94ca2a1ebc85efa65f4df3d22fd52412bb1a85e4216a2f",
+    "level": 3,
+    "title": "1. No Bare Excepts",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#forbidden",
+    "hash": "c680ed1b43a0d84856f3c6a8bfb6af8418575399df0debe670e0540fdda18e0c",
+    "level": 1,
+    "title": "\u274c FORBIDDEN",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#required",
+    "hash": "1cc1ecc9b7ad8dc2a2de690b5128fcf3d229109d3558cd9a7c141f7f0ff7afe2",
+    "level": 1,
+    "title": "\u2705 REQUIRED",
+    "tokens": 32
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#2-atomic-writes",
+    "hash": "a01265d763103425314a8461220c9f12fd911c386b7914164f444cd2d6560f11",
+    "level": 3,
+    "title": "2. Atomic Writes",
+    "tokens": 14
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#forbidden",
+    "hash": "0705e4d51308f770de3fa236a82fb74838b8190e6dd567acd24ed4af22907e1b",
+    "level": 1,
+    "title": "\u274c FORBIDDEN",
+    "tokens": 9
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#required",
+    "hash": "a0d34be4131ca6934ca63e7ed72606aa1a4fc6e3bedea4713fe3e0f16c147eea",
+    "level": 1,
+    "title": "\u2705 REQUIRED",
+    "tokens": 45
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#3-headless-execution",
+    "hash": "b8c9cfef56fa6e387cc1928760fa70306215e4cc0dc7e95381c1f654ceecc6dd",
+    "level": 3,
+    "title": "3. Headless Execution",
+    "tokens": 20
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#4-deterministic-outputs",
+    "hash": "81da0261e48d243e0512c4e09488323af47b5b101227317f37da166e8a35d930",
+    "level": 3,
+    "title": "4. Deterministic Outputs",
+    "tokens": 48
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#5-safety-caps",
+    "hash": "e2bb9853da975f9efebefc2c421c35a3ec1825cfbf537c09d6250da81476e7f2",
+    "level": 3,
+    "title": "5. Safety Caps",
+    "tokens": 60
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#6-database-connections",
+    "hash": "91e09562e80fd580208e775dd9aeeb2f2296a5bfafcecf4c5478bd88893dbcdb",
+    "level": 3,
+    "title": "6. Database Connections",
+    "tokens": 16
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#forbidden",
+    "hash": "699d69358094b169641b9d19bcd2f36f7bc15c062d85f7bc2602d29db675e123",
+    "level": 1,
+    "title": "\u274c FORBIDDEN",
+    "tokens": 12
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#required",
+    "hash": "e55c720b587542ccc2cea29a763b5041b36d1b0ee7e639115a1427db2368929b",
+    "level": 1,
+    "title": "\u2705 REQUIRED",
+    "tokens": 18
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#or-for-classes",
+    "hash": "8ddd7268cd0a6cab043620823f215b71cf4bcee555120b0fbc394c0fbd6c6365",
+    "level": 1,
+    "title": "OR (for classes)",
+    "tokens": 93
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#what-agents-can-do",
+    "hash": "d0231c24a13e9696b1ab3b324704a6f67f6c0c60839f02f4a7176dfb654a02bc",
+    "level": 3,
+    "title": "What Agents CAN Do",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#what-agents-cannot-do",
+    "hash": "6fa496bfc6ebf025863a160d289ffd7f47608b13ba405af54a0d2c8ca8c98a44",
+    "level": 3,
+    "title": "What Agents CANNOT Do",
+    "tokens": 38
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#what-only-stewards-can-do",
+    "hash": "bc0a208e014a247e38d051375786afa32a00520bc992b7d190d7c784f6d9bc1a",
+    "level": 3,
+    "title": "What Only Stewards CAN Do",
+    "tokens": 21
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#emergency-steward-actions",
+    "hash": "0604687d729119e860496e5b8fcda497e0fb7b1c6a29eefa8155762bb3bfa475",
+    "level": 2,
+    "title": "Emergency Steward Actions",
+    "tokens": 73
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#template-steward-decision-record",
+    "hash": "0f8a73ba45bf59e239f27139510094cf40481d46ed40d388521a187ce1febe0d",
+    "level": 2,
+    "title": "Template: Steward Decision Record",
+    "tokens": 1
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#situation",
+    "hash": "cbe46d8a901595843ec68fe82204771db4c4b9bbb8bd55faa5bc6b4e8d8ca946",
+    "level": 2,
+    "title": "Situation",
+    "tokens": 8
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#decision",
+    "hash": "06e521cb5234c7fa9fa3380161993f9cfaac7c00d65a40c633d4fa4c4469f976",
+    "level": 2,
+    "title": "Decision",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#rationale",
+    "hash": "7126c99106840eb23941a3805c19db11468692b2f1a7018012c13df1a1161348",
+    "level": 2,
+    "title": "Rationale",
+    "tokens": 6
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#actions-taken",
+    "hash": "9444b7c50a02bcd38fff5c58f25710507dc4da67bb00ef76feee123a3dfc4e53",
+    "level": 2,
+    "title": "Actions Taken",
+    "tokens": 13
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#follow-up-required",
+    "hash": "d589cf8b8ab963dbb2b2530cb8474aec0cda64b08d6360630009f01a2d25fe5c",
+    "level": 2,
+    "title": "Follow-up Required",
+    "tokens": 20
+  },
+  {
+    "anchor": "CANON/STEWARDSHIP.md#steward-name",
+    "hash": "36452236345c3fa628b7abc8edf59f77973b3f33df51daf997f53296ae580d21",
+    "level": 2,
+    "title": "Steward: [Name]",
+    "tokens": 5
+  },
+  {
+    "anchor": "CANON/VERSIONING.md#versioning",
+    "hash": "29115187a43b35d3c6a32c271e9a36fb0a8aaa41d3e1a0f6e527deb1df9dc590",
+    "level": 1,
+    "title": "Versioning",
+    "tokens": 34
+  },
+  {
+    "anchor": "CANON/VERSIONING.md#canon-version",
+    "hash": "09a9af04d57665737e308410f5be7e2fb0dbee821cdd77147cc70f897528bca4",
+    "level": 2,
+    "title": "Canon version",
+    "tokens": 68
+  },
+  {
+    "anchor": "CANON/VERSIONING.md#compatibility-contracts",
+    "hash": "edd07674c3728e8bab575e4089fd73c16c1e447f0019e3c2809f6e42c1757655",
+    "level": 2,
+    "title": "Compatibility contracts",
+    "tokens": 76
+  },
+  {
+    "anchor": "CANON/VERSIONING.md#deprecation-policy",
+    "hash": "9ee386405a0e1b15250162ad6099a7413c9373233a0c15cd1034ee3bea9feaa4",
+    "level": 2,
+    "title": "Deprecation policy",
+    "tokens": 53
+  }
+]
