@@ -96,15 +96,15 @@ For swarm (Phase 7+):
 
 ---
 
-## PHASE 4: Runtime hardening (ONGOING)
+## PHASE 4: Runtime hardening (DONE)
 Deliverables
 - [x] Adversarial fixtures: corrupted artifacts, partial state, path attacks, malformed proofs, pipeline interruption/resume safety.
-- [ ] Tighten guards as needed, always with fixtures and regression tests.
+- [x] Tighten guards as needed, always with fixtures and regression tests.
 - [x] Fix ledger.schema.json $ref resolution (Draft7)
 
 Acceptance
-- [ ] Fail-closed everywhere.
-- [ ] No silent acceptance.
+- [x] Fail-closed everywhere.
+- [x] No silent acceptance.
 
 Notes
 - This phase never fully ends. It is the “immune system”: add fixtures first, then guards, then regressions.
@@ -263,41 +263,23 @@ Let local models (LFM2, etc.) produce plans, but never grant them authority.
 Deliverables
 
 - [x] Router receipt artifacts:
-
   - `ROUTER.json` (what ran, caps, hash of executable)
-
   - `ROUTER_OUTPUT.json` (canonical JSON plan output)
-
   - `ROUTER_TRANSCRIPT_HASH` (bytes read)
-
 - [x] Cache router outputs by content hash (optional)
-
 - [x] Tests:
-
   - router over-output fails closed
-
   - router stderr fails closed
-
   - malformed plan fails schema validation
-
   - plan that attempts capability escalation fails closed (Phase 6.6)
 
-
-
 Acceptance
-
 - [x] Swapping models does not change verification logic, only the produced plan.
-
 - [x] Plans are validated, capped, and recorded, not trusted.
-
-
 
 ### Phase 9 Gate: Freeze, release discipline, and schema versioning (DONE)
 
 - [x] Schema versioning policy.
-
 - [x] Release checklist for "law changes".
-
 - [x] Artifact-only verifiability audit.
-
 - [x] Docs pass: single authoritative docs tree, no duplicated demo docs that can drift
