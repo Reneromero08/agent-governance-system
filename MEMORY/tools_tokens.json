@@ -1,0 +1,192 @@
+{
+  "files": [
+    {
+      "original": 1330,
+      "compressed": 1351,
+      "savings": -21,
+      "percent": -1.58,
+      "path": "TOOLS\\admission.py"
+    },
+    {
+      "original": 8294,
+      "compressed": 8400,
+      "savings": -106,
+      "percent": -1.28,
+      "path": "TOOLS\\ags.py"
+    },
+    {
+      "original": 3676,
+      "compressed": 3741,
+      "savings": -65,
+      "percent": -1.77,
+      "path": "TOOLS\\catalytic.py"
+    },
+    {
+      "original": 541,
+      "compressed": 542,
+      "savings": -1,
+      "percent": -0.18,
+      "path": "TOOLS\\catalytic_restore.py"
+    },
+    {
+      "original": 6662,
+      "compressed": 6793,
+      "savings": -131,
+      "percent": -1.97,
+      "path": "TOOLS\\catalytic_runtime.py"
+    },
+    {
+      "original": 2139,
+      "compressed": 2182,
+      "savings": -43,
+      "percent": -2.01,
+      "path": "TOOLS\\catalytic_validator.py"
+    },
+    {
+      "original": 2375,
+      "compressed": 2427,
+      "savings": -52,
+      "percent": -2.19,
+      "path": "TOOLS\\catalytic_verifier.py"
+    },
+    {
+      "original": 1058,
+      "compressed": 1057,
+      "savings": 1,
+      "percent": 0.09,
+      "path": "TOOLS\\check_canon_governance.py"
+    },
+    {
+      "original": 3175,
+      "compressed": 3157,
+      "savings": 18,
+      "percent": 0.57,
+      "path": "TOOLS\\codebook_build.py"
+    },
+    {
+      "original": 878,
+      "compressed": 878,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "TOOLS\\codebook_lookup.py"
+    },
+    {
+      "original": 2665,
+      "compressed": 2530,
+      "savings": 135,
+      "percent": 5.07,
+      "path": "TOOLS\\compress.py"
+    },
+    {
+      "original": 3832,
+      "compressed": 3861,
+      "savings": -29,
+      "percent": -0.76,
+      "path": "TOOLS\\cortex.py"
+    },
+    {
+      "original": 528,
+      "compressed": 530,
+      "savings": -2,
+      "percent": -0.38,
+      "path": "TOOLS\\cortex_refresh.py"
+    },
+    {
+      "original": 3006,
+      "compressed": 3032,
+      "savings": -26,
+      "percent": -0.86,
+      "path": "TOOLS\\critic.py"
+    },
+    {
+      "original": 2638,
+      "compressed": 2660,
+      "savings": -22,
+      "percent": -0.83,
+      "path": "TOOLS\\emergency.py"
+    },
+    {
+      "original": 120,
+      "compressed": 122,
+      "savings": -2,
+      "percent": -1.67,
+      "path": "TOOLS\\freeze.py"
+    },
+    {
+      "original": 742,
+      "compressed": 745,
+      "savings": -3,
+      "percent": -0.4,
+      "path": "TOOLS\\intent.py"
+    },
+    {
+      "original": 926,
+      "compressed": 931,
+      "savings": -5,
+      "percent": -0.54,
+      "path": "TOOLS\\lint_tokens.py"
+    },
+    {
+      "original": 1846,
+      "compressed": 1858,
+      "savings": -12,
+      "percent": -0.65,
+      "path": "TOOLS\\preflight.py"
+    },
+    {
+      "original": 3176,
+      "compressed": 3213,
+      "savings": -37,
+      "percent": -1.16,
+      "path": "TOOLS\\provenance.py"
+    },
+    {
+      "original": 1138,
+      "compressed": 1152,
+      "savings": -14,
+      "percent": -1.23,
+      "path": "TOOLS\\research_cache.py"
+    },
+    {
+      "original": 2161,
+      "compressed": 2165,
+      "savings": -4,
+      "percent": -0.19,
+      "path": "TOOLS\\review_context.py"
+    },
+    {
+      "original": 745,
+      "compressed": 758,
+      "savings": -13,
+      "percent": -1.74,
+      "path": "TOOLS\\schema_validator.py"
+    },
+    {
+      "original": 193,
+      "compressed": 193,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "TOOLS\\setup_git_hooks.py"
+    },
+    {
+      "original": 789,
+      "compressed": 795,
+      "savings": -6,
+      "percent": -0.76,
+      "path": "TOOLS\\skill_runtime.py"
+    },
+    {
+      "original": 1344,
+      "compressed": 1346,
+      "savings": -2,
+      "percent": -0.15,
+      "path": "TOOLS\\tokenizer_harness.py"
+    }
+  ],
+  "total": {
+    "original": 55977,
+    "compressed": 56419,
+    "savings": -442,
+    "percent": -0.79
+  }
+}

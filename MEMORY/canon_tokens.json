@@ -1,0 +1,136 @@
+{
+  "files": [
+    {
+      "original": 406,
+      "compressed": 412,
+      "savings": -6,
+      "percent": -1.48,
+      "path": "CANON\\AGREEMENT.md"
+    },
+    {
+      "original": 865,
+      "compressed": 870,
+      "savings": -5,
+      "percent": -0.58,
+      "path": "CANON\\ARBITRATION.md"
+    },
+    {
+      "original": 1316,
+      "compressed": 1328,
+      "savings": -12,
+      "percent": -0.91,
+      "path": "CANON\\CATALYTIC_COMPUTING.md"
+    },
+    {
+      "original": 8026,
+      "compressed": 8035,
+      "savings": -9,
+      "percent": -0.11,
+      "path": "CANON\\CHANGELOG.md"
+    },
+    {
+      "original": 2884,
+      "compressed": 2774,
+      "savings": 110,
+      "percent": 3.81,
+      "path": "CANON\\CODEBOOK.md"
+    },
+    {
+      "original": 1232,
+      "compressed": 1246,
+      "savings": -14,
+      "percent": -1.14,
+      "path": "CANON\\CONTRACT.md"
+    },
+    {
+      "original": 1390,
+      "compressed": 1403,
+      "savings": -13,
+      "percent": -0.94,
+      "path": "CANON\\CRISIS.md"
+    },
+    {
+      "original": 879,
+      "compressed": 892,
+      "savings": -13,
+      "percent": -1.48,
+      "path": "CANON\\DEPRECATION.md"
+    },
+    {
+      "original": 1805,
+      "compressed": 1838,
+      "savings": -33,
+      "percent": -1.83,
+      "path": "CANON\\FORMULA.md"
+    },
+    {
+      "original": 629,
+      "compressed": 618,
+      "savings": 11,
+      "percent": 1.75,
+      "path": "CANON\\GENESIS.md"
+    },
+    {
+      "original": 404,
+      "compressed": 401,
+      "savings": 3,
+      "percent": 0.74,
+      "path": "CANON\\GENESIS_COMPACT.md"
+    },
+    {
+      "original": 694,
+      "compressed": 709,
+      "savings": -15,
+      "percent": -2.16,
+      "path": "CANON\\GLOSSARY.md"
+    },
+    {
+      "original": 668,
+      "compressed": 619,
+      "savings": 49,
+      "percent": 7.34,
+      "path": "CANON\\INDEX.md"
+    },
+    {
+      "original": 730,
+      "compressed": 746,
+      "savings": -16,
+      "percent": -2.19,
+      "path": "CANON\\INVARIANTS.md"
+    },
+    {
+      "original": 1107,
+      "compressed": 1108,
+      "savings": -1,
+      "percent": -0.09,
+      "path": "CANON\\MIGRATION.md"
+    },
+    {
+      "original": 562,
+      "compressed": 581,
+      "savings": -19,
+      "percent": -3.38,
+      "path": "CANON\\SECURITY.md"
+    },
+    {
+      "original": 1024,
+      "compressed": 1033,
+      "savings": -9,
+      "percent": -0.88,
+      "path": "CANON\\STEWARDSHIP.md"
+    },
+    {
+      "original": 259,
+      "compressed": 267,
+      "savings": -8,
+      "percent": -3.09,
+      "path": "CANON\\VERSIONING.md"
+    }
+  ],
+  "total": {
+    "original": 24880,
+    "compressed": 24880,
+    "savings": 0,
+    "percent": 0.0
+  }
+}
