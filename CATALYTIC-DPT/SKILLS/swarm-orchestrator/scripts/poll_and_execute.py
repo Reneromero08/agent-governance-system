@@ -79,10 +79,17 @@ class BackoffController:
 
 
 def kill_process_tree(proc, timeout: float = GRACEFUL_SHUTDOWN_TIMEOUT):
-    """Kill a process and all its children."""
+    """Kill a process and all its children (zombie-safe)."""
     import subprocess
 
+    if proc is None:
+        return
+        
     try:
+        # Check if process is still alive
+        if proc.poll() is not None:
+            return  # Already dead
+            
         # Try graceful termination first
         proc.terminate()
         try:
@@ -93,9 +100,12 @@ def kill_process_tree(proc, timeout: float = GRACEFUL_SHUTDOWN_TIMEOUT):
 
         # Force kill
         proc.kill()
-        proc.wait(timeout=1)
-    except Exception:
-        pass  # Process already dead
+        try:
+            proc.wait(timeout=1)
+        except subprocess.TimeoutExpired:
+            pass  # Give up, OS will clean eventually
+    except (OSError, ProcessLookupError):
+        pass  # Process already dead or inaccessible
 
 
 def run_governor(interval: int):
@@ -225,88 +235,207 @@ def run_governor(interval: int):
 
 
 def run_ant(agent_id: str, interval: int):
-    """Ant Worker: polls for tasks, executes them, reports back."""
+    """Ant Worker: polls for tasks, executes them, reports back.
+
+    Features:
+    - Exponential backoff on idle
+    - Proper subprocess timeout with cleanup
+    - Agent ownership verification
+    - Comprehensive error handling
+    """
     print("\n" + "-"*50)
     print(f"  {agent_id} - Active")
     print("  Executes tasks dispatched by Governor")
     print("-"*50 + "\n")
 
     import subprocess
-    ant_worker = SKILLS_DIR / "ant-worker" / "run.py"
+    ant_worker = SKILLS_DIR / "ant-worker" / "scripts" / "run.py"
 
-    while True:
+    # Verify ant_worker exists
+    if not ant_worker.exists():
+        # Try alternate path
+        ant_worker = SKILLS_DIR / "ant-worker" / "run.py"
+        if not ant_worker.exists():
+            print(f"[{agent_id}] ERROR: ant-worker script not found")
+            return
+
+    backoff = BackoffController(min_interval=interval)
+    shutdown_requested = False
+    current_process: Optional[subprocess.Popen] = None
+
+    def handle_shutdown(signum, frame):
+        nonlocal shutdown_requested, current_process
+        print(f"\n[{agent_id}] Shutdown signal received...")
+        shutdown_requested = True
+        if current_process:
+            kill_process_tree(current_process)
+
+    signal.signal(signal.SIGINT, handle_shutdown)
+    signal.signal(signal.SIGTERM, handle_shutdown)
+
+    while not shutdown_requested:
+        work_done = False
+
         try:
+            # Get pending tasks with error handling
             try:
                 pending = mcp_server.get_pending_tasks(agent_id)
             except json.JSONDecodeError as e:
                 print(f"[{agent_id}] JSON parse error in tasks: {e}")
-                time.sleep(interval)
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
+                continue
+            except Exception as e:
+                print(f"[{agent_id}] Error getting tasks: {e}")
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
                 continue
 
-            if pending["pending_count"] > 0:
-                for task in pending["tasks"]:
-                    task_id = task["task_id"]
+            # Check for errors in response
+            if pending.get("status") == "error":
+                print(f"[{agent_id}] Error: {pending.get('message')}")
+                backoff.on_error()
+                time.sleep(backoff.get_interval())
+                continue
+
+            if pending.get("pending_count", 0) > 0:
+                for task in pending.get("tasks", []):
+                    if shutdown_requested:
+                        break
+
+                    task_id = task.get("task_id")
+                    if not task_id:
+                        continue
+
                     task_spec = task.get("task_spec", {})
 
                     print(f"[{agent_id}] Executing: {task_id}")
-                    mcp_server.acknowledge_task(task_id)
 
-                    # Create temp files
-                    run_dir = Path(__file__).parent.parent / "CONTRACTS" / "_runs" / f"{task_id}"
+                    # Acknowledge with agent verification
+                    ack_result = mcp_server.acknowledge_task(task_id, agent_id=agent_id)
+                    if ack_result.get("status") == "error":
+                        print(f"[{agent_id}] Failed to acknowledge {task_id}: {ack_result.get('message')}")
+                        continue
+
+                    # Create run directory
+                    run_dir = CATALYTIC_ROOT / "CONTRACTS" / "_runs" / f"{agent_id}-{task_id}"
                     run_dir.mkdir(parents=True, exist_ok=True)
 
                     input_file = run_dir / "input.json"
                     output_file = run_dir / "output.json"
 
-                    with open(input_file, 'w') as f:
-                        json.dump(task_spec, f, indent=2)
-
-                    # Execute
+                    # Write input file
                     try:
-                        result = subprocess.run(
+                        with open(input_file, 'w', encoding='utf-8') as f:
+                            json.dump(task_spec, f, indent=2)
+                    except Exception as e:
+                        print(f"[{agent_id}] Failed to write input: {e}")
+                        mcp_server.report_result(
+                            task_id=task_id,
+                            from_agent=agent_id,
+                            status="error",
+                            result={},
+                            errors=[f"Failed to write input file: {str(e)}"]
+                        )
+                        continue
+
+                    # Execute with proper timeout handling
+                    try:
+                        current_process = subprocess.Popen(
                             [sys.executable, str(ant_worker), str(input_file), str(output_file)],
-                            capture_output=True,
-                            text=True,
-                            timeout=120
+                            stdout=subprocess.PIPE,
+                            stderr=subprocess.PIPE,
+                            text=True
                         )
 
+                        try:
+                            stdout, stderr = current_process.communicate(timeout=TASK_TIMEOUT_SECONDS)
+                            return_code = current_process.returncode
+                        except subprocess.TimeoutExpired:
+                            # Kill the process tree
+                            kill_process_tree(current_process)
+                            stdout, stderr = "", ""
+                            return_code = -1
+
+                            mcp_server.report_result(
+                                task_id=task_id,
+                                from_agent=agent_id,
+                                status="timeout",
+                                result={"timeout_seconds": TASK_TIMEOUT_SECONDS},
+                                errors=[f"Task timed out after {TASK_TIMEOUT_SECONDS}s"]
+                            )
+                            print(f"[{agent_id}] [TIMEOUT] {task_id}")
+                            work_done = True
+                            continue
+                        finally:
+                            current_process = None
+
+                        # Process result
                         if output_file.exists():
-                            with open(output_file) as f:
-                                output = json.load(f)
-                            status = output.get("status", "success")
+                            try:
+                                with open(output_file, encoding='utf-8') as f:
+                                    output = json.load(f)
+                                status = output.get("status", "success" if return_code == 0 else "failed")
+                            except json.JSONDecodeError as e:
+                                status = "error"
+                                output = {"error": f"Invalid output JSON: {e}", "stderr": stderr}
                         else:
                             status = "failed"
-                            output = {"error": result.stderr}
+                            output = {
+                                "error": "No output file produced",
+                                "return_code": return_code,
+                                "stderr": stderr[:1000] if stderr else ""
+                            }
 
-                        mcp_server.report_result(
+                        # Report result
+                        report_result = mcp_server.report_result(
                             task_id=task_id,
                             from_agent=agent_id,
                             status=status,
                             result=output,
                             errors=output.get("errors", [])
                         )
-                        print(f"[{agent_id}] [OK] {task_id} -> {status}")
 
-                    except subprocess.TimeoutExpired:
+                        if report_result.get("status") == "error":
+                            print(f"[{agent_id}] Failed to report: {report_result.get('message')}")
+                        else:
+                            status_icon = "✓" if status == "success" else "✗"
+                            print(f"[{agent_id}] [{status_icon}] {task_id} -> {status}")
+
+                        work_done = True
+
+                    except Exception as e:
+                        print(f"[{agent_id}] Execution error: {e}")
                         mcp_server.report_result(
                             task_id=task_id,
                             from_agent=agent_id,
-                            status="timeout",
+                            status="error",
                             result={},
-                            errors=["Task timed out after 120s"]
+                            errors=[f"Execution exception: {str(e)}"]
                         )
-                        print(f"[{agent_id}] [TIMEOUT] {task_id}")
+                        work_done = True
 
             else:
-                print(f"[{agent_id}] No tasks. Polling in {interval}s...")
+                current_interval = backoff.get_interval()
+                if backoff.consecutive_idle % 10 == 0:
+                    print(f"[{agent_id}] No tasks. Polling in {current_interval:.1f}s...")
+
+            # Update backoff
+            if work_done:
+                backoff.on_work_done()
+            else:
+                backoff.on_idle()
 
         except KeyboardInterrupt:
-            print(f"\n[{agent_id}] Shutting down...")
+            print(f"\n[{agent_id}] Keyboard interrupt...")
             break
         except Exception as e:
-            print(f"[{agent_id}] Error: {e}")
+            print(f"[{agent_id}] Unexpected error: {e}")
+            backoff.on_error()
 
-        time.sleep(interval)
+        time.sleep(backoff.get_interval())
+
+    print(f"[{agent_id}] Shutdown complete.")
 
 
 def main():

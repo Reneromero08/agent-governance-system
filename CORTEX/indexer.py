@@ -39,9 +39,12 @@ class CortexIndexer:
         for root, _, files in os.walk(CANON_DIR):
             for file in files:
                 if file.endswith(".md") and file not in ignore_files:
-                    full_path = Path(root) / file
-                    rel_path = full_path.relative_to(Path.cwd()).as_posix()
-                    self._index_file(full_path, rel_path)
+                    full_path = (Path(root) / file).resolve()
+                    try:
+                        rel_path = full_path.relative_to(Path.cwd().resolve()).as_posix()
+                        self._index_file(full_path, rel_path)
+                    except ValueError as e:
+                        print(f"Skipping {file}: {e}")
                     
         self._write_artifacts()
         print("[Indexer] Indexing complete.")

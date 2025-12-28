@@ -21,6 +21,7 @@ All notable changes to Agent Governance System will be documented in this file.
 - **CORTEX/query.py**: CLI query tool for System 1 Database (Lane C3).
 - **CORTEX/scl.py**: Semiotic Compression Layer (SCL) for symbol generation and expansion (Lane I1).
 - **CORTEX/formula.py**: Living Formula metrics calculator (Essence, Entropy, Resonance, Fractal Dimension) (Lane G1).
+- **TOOLS/integrity_stack.py**: SPECTRUM-02 Resume Bundles + CMP-01 Output Hash Enforcement (Lane S1).
 - **CORTEX/system2_ledger.py**: System 2 Immutable Ledger with Merkle root verification (Lane H1).
 - **SKILLS/system1-verify**: Verification skill to ensure system1.db matches repository state.
 - **TOOLS/verify_f3.py**: Verification script for F3 CAS prototype.

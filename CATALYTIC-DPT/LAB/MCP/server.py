@@ -204,13 +204,11 @@ def _atomic_rewrite_jsonl(
 ) -> bool:
     """Atomically rewrite a JSONL file with a transformation function.
 
-    Uses read-transform-write pattern with file locking:
-    1. Lock file exclusively
-    2. Read all lines
-    3. Apply transformation
-    4. Write to temp file
-    5. Atomic rename over original
-    6. Unlock
+    Uses read-transform-write pattern:
+    1. Read all lines (with lock on read)
+    2. Apply transformation
+    3. Write to temp file
+    4. Atomic rename over original
 
     Returns True on success, False on failure.
     """
@@ -221,12 +219,11 @@ def _atomic_rewrite_jsonl(
         if not file_path.exists():
             file_path.touch()
 
-        with open(file_path, 'r+', encoding='utf-8') as f:
-            _lock_file(f, exclusive=True)
+        # Read phase - use lock to read
+        entries = []
+        with open(file_path, 'r', encoding='utf-8') as f:
+            _lock_file(f, exclusive=False)
             try:
-                # Read existing entries
-                entries = []
-                f.seek(0)
                 for line in f:
                     line = line.strip()
                     if line:
@@ -234,48 +231,59 @@ def _atomic_rewrite_jsonl(
                             entries.append(json.loads(line))
                         except json.JSONDecodeError:
                             continue  # Skip malformed lines
-
-                # Apply transformation
-                transformed = transform(entries)
-
-                # Write to temp file
-                fd, temp_path = tempfile.mkstemp(
-                    suffix='.tmp',
-                    prefix='jsonl_',
-                    dir=file_path.parent
-                )
-                try:
-                    for entry in transformed:
-                        os.write(fd, (json.dumps(entry) + '\n').encode('utf-8'))
-                    os.fsync(fd)
-                finally:
-                    os.close(fd)
-
-                # Atomic rename (works on Unix, best-effort on Windows)
-                temp_path_obj = Path(temp_path)
-                if sys.platform == 'win32':
-                    # Windows doesn't support atomic rename over existing file
-                    backup_path = file_path.with_suffix('.bak')
-                    try:
-                        if file_path.exists():
-                            file_path.rename(backup_path)
-                        temp_path_obj.rename(file_path)
-                        if backup_path.exists():
-                            backup_path.unlink()
-                    except Exception:
-                        # Restore from backup on failure
-                        if backup_path.exists() and not file_path.exists():
-                            backup_path.rename(file_path)
-                        raise
-                else:
-                    os.rename(temp_path, file_path)
-
             finally:
                 _unlock_file(f)
+
+        # Apply transformation
+        transformed = transform(entries)
+
+        # Write to temp file
+        fd, temp_path = tempfile.mkstemp(
+            suffix='.tmp',
+            prefix='jsonl_',
+            dir=file_path.parent
+        )
+        try:
+            for entry in transformed:
+                os.write(fd, (json.dumps(entry) + '\n').encode('utf-8'))
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+        # Atomic rename (works on Unix, best-effort on Windows)
+        temp_path_obj = Path(temp_path)
+        if sys.platform == 'win32':
+            # Windows needs file to be closed before rename
+            # Use replace for atomic overwrite (Python 3.3+)
+            import shutil
+            backup_path = file_path.with_suffix('.bak')
+            try:
+                # Create backup
+                if file_path.exists():
+                    shutil.copy2(file_path, backup_path)
+                # Replace original with temp
+                shutil.move(str(temp_path_obj), str(file_path))
+                # Remove backup
+                if backup_path.exists():
+                    backup_path.unlink()
+            except Exception:
+                # Restore from backup on failure
+                if backup_path.exists():
+                    shutil.copy2(backup_path, file_path)
+                    backup_path.unlink()
+                raise
+        else:
+            os.replace(temp_path, file_path)
 
         return True
 
     except Exception as e:
+        # Clean up temp file if it exists
+        try:
+            if 'temp_path' in locals() and Path(temp_path).exists():
+                Path(temp_path).unlink()
+        except Exception:
+            pass
         return False
 
 
