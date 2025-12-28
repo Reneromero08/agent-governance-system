@@ -1,9 +1,13 @@
 # ADR-029: Headless Swarm Execution (Terminal Prohibition)
 
+**Status:** Accepted
+**Date:** 2025-12-28
+**Confidence:** High
+**Impact:** High
+**Tags:** [security, execution, terminal, invariants]
+
 ## Status
 **Accepted**
-
-## Context
 The CATALYTIC-DPT Swarm Orchestrator originally supported two execution modes:
 1.  **Programmatic (Headless)**: Background processes with no visible UI.
 2.  **Interactive (Terminal Bridge)**: VSCode terminal tabs via `launch-terminal` skill.
