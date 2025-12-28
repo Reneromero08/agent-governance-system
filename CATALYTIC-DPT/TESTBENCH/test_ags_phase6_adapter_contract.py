@@ -47,7 +47,7 @@ def _adapter(tmp_root: str, **overrides: object) -> dict:
     base = {
         "adapter_version": "1.0.0",
         "name": "test-adapter",
-        "command": ["python3", "-c", "pass"],
+            "command": [sys.executable, "-c", "print('hello')"],
         "jobspec": _jobspec(tmp_root),
         "inputs": {"CONTRACTS/_runs/_tmp/%s/in.txt" % tmp_root: _hex("a")},
         "outputs": {"CONTRACTS/_runs/_tmp/%s/out.txt" % tmp_root: _hex("b")},

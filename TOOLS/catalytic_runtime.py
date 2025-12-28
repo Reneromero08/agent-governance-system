@@ -30,6 +30,7 @@ The run ledger is stored in CONTRACTS/_runs/<run_id>/
 """
 
 import json
+import os
 import sys
 import subprocess
 import hashlib
@@ -271,8 +272,9 @@ class CatalyticRuntime:
 
     def execute(self, cmd: List[str]) -> int:
         """Execute a command. Return exit code."""
+        print(f"DEBUG: execute cmd={cmd}", file=sys.stderr)
         try:
-            result = subprocess.run(cmd, cwd=PROJECT_ROOT)
+            result = subprocess.run(cmd, cwd=PROJECT_ROOT, env=os.environ)
             return result.returncode
         except Exception as e:
             print(f"[catalytic] ERROR executing command: {e}", file=sys.stderr)

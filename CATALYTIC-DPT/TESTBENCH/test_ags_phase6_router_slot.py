@@ -47,10 +47,9 @@ def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
     plan_obj = {
         "plan_version": "1.0",
         "pipeline_id": "ignored-by-override",
-        "steps": [{"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
+        "steps": [{"step_id": "s1", "command": [sys.executable, "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
     }
     router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
-
     r1 = _run_ags(
         [
             "plan",
@@ -161,7 +160,7 @@ def test_ags_route_rejects_invalid_plan_schema(tmp_path: Path) -> None:
 
 def test_ags_plan_jobspec_validation(tmp_path: Path) -> None:
     plan_out = tmp_path / "plan.json"
-    bad = {"plan_version": "1.0", "steps": [{"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": {"task_type": "nope"}}]}
+    bad = {"plan_version": "1.0", "steps": [{"step_id": "s1", "command": [sys.executable, "-c", "pass"], "jobspec": {"task_type": "nope"}}]}
     code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(bad)
     r = _run_ags(
         [

@@ -1,0 +1,91 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "swarm.schema.json",
+  "title": "CAT-DPT Swarm Specification (DAG of Pipelines)",
+  "description": "Defines a directed acyclic graph of pipelines with explicit artifact dependencies.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "swarm_version",
+    "swarm_id",
+    "nodes"
+  ],
+  "properties": {
+    "swarm_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema version."
+    },
+    "swarm_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 128,
+      "description": "Unique identifier for the swarm."
+    },
+    "nodes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "node_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "Logical ID of the node in the DAG."
+          },
+          "pipeline_id": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 128,
+            "description": "References an existing pipeline directory by ID."
+          },
+          "pipeline_spec_path": {
+            "type": "string",
+            "description": "Path to a PipelineSpec JSON file."
+          },
+          "pipeline_spec": {
+            "type": "object",
+            "description": "Inline PipelineSpec object."
+          }
+        },
+        "required": ["node_id"],
+        "oneOf": [
+          { "required": ["node_id", "pipeline_id"] },
+          { "required": ["node_id", "pipeline_spec_path"] },
+          { "required": ["node_id", "pipeline_spec"] }
+        ]
+      },
+      "description": "Nodes in the DAG. Tie-breaking during topo sort uses node_id lexicographical order."
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["from", "to", "requires"],
+        "properties": {
+          "from": {
+            "type": "string",
+            "description": "node_id of the source node."
+          },
+          "to": {
+            "type": "string",
+            "description": "node_id of the destination node."
+          },
+          "requires": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "enum": ["PIPELINE.json", "STATE.json", "CHAIN.json", "RECEIPT.json"],
+              "description": "Artifact name required from the source node."
+            }
+          }
+        }
+      },
+      "description": "Directed edges representing dependencies."
+    }
+  }
+}
