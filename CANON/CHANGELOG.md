@@ -2,6 +2,21 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.14.0] - 2025-12-28
+
+### The Living Formula (Driver)
+
+This release establishes The Living Formula as the primary driver for navigating entropy in the Agent Governance System.
+
+#### Added
+- `CANON/FORMULA.md`: The Living Formula (`R = (E / ∇S) × σ(f)^Df`).
+- `@F0` Codebook ID for the Formula.
+
+#### Changed
+- `CANON/INDEX.md`: Elevated `FORMULA.md` to "The Driver" (Rank 1).
+- `CANON/GENESIS.md` & `GENESIS_COMPACT.md`: Updated load order to prioritize the Formula.
+- `TOOLS/codebook_build.py`: Added support for `@F0` generation.
+
 ## [2.13.1] - 2025-12-28
 
 ### Phase 6/7 Release Hardening
