@@ -16,9 +16,34 @@ import sys
 import hashlib
 import uuid
 import subprocess
+import tempfile
+import os
+import re
 from pathlib import Path
 from datetime import datetime
-from typing import Dict, List, Any, Optional
+from typing import Dict, List, Any, Optional, Callable, Iterator
+
+# Windows-compatible file locking
+if sys.platform == 'win32':
+    import msvcrt
+    def _lock_file(f, exclusive: bool = True):
+        """Lock file on Windows."""
+        msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK if exclusive else msvcrt.LK_NBRLCK, 1)
+    def _unlock_file(f):
+        """Unlock file on Windows."""
+        try:
+            f.seek(0)
+            msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+        except Exception:
+            pass
+else:
+    import fcntl
+    def _lock_file(f, exclusive: bool = True):
+        """Lock file on Unix."""
+        fcntl.flock(f.fileno(), fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH)
+    def _unlock_file(f):
+        """Unlock file on Unix."""
+        fcntl.flock(f.fileno(), fcntl.LOCK_UN)
 
 # This would be replaced with actual MCP SDK
 # For now, we structure it as a mock MCP server
@@ -103,6 +128,241 @@ FORBIDDEN_ROOTS = [
     "CANON/",
     "AGENTS.md",
 ]
+
+# Task state machine transitions (valid state changes)
+TASK_STATES = {
+    "pending": ["acknowledged", "cancelled"],
+    "acknowledged": ["processing", "cancelled"],
+    "processing": ["completed", "failed", "timeout", "cancelled"],
+    "completed": [],  # Terminal state
+    "failed": [],     # Terminal state
+    "timeout": [],    # Terminal state
+    "cancelled": [],  # Terminal state
+}
+
+# Configuration constants
+MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10MB limit for file reads
+MAX_RESULTS_PER_PAGE = 100
+DEFAULT_POLL_INTERVAL = 5
+MAX_POLL_INTERVAL = 60
+BACKOFF_MULTIPLIER = 1.5
+
+
+def _atomic_write_jsonl(file_path: Path, line: str) -> bool:
+    """Atomically append a single line to a JSONL file.
+
+    Uses write-to-temp-then-append pattern with file locking to prevent:
+    1. Partial writes from crashes
+    2. Interleaved writes from concurrent processes
+
+    Returns True on success, False on failure.
+    """
+    try:
+        # Ensure parent directory exists
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write to temp file first (atomic on most filesystems)
+        fd, temp_path = tempfile.mkstemp(
+            suffix='.tmp',
+            prefix='jsonl_',
+            dir=file_path.parent
+        )
+        try:
+            os.write(fd, (line.rstrip('\n') + '\n').encode('utf-8'))
+            os.fsync(fd)  # Force flush to disk
+        finally:
+            os.close(fd)
+
+        # Now append temp content to target with locking
+        with open(file_path, 'a', encoding='utf-8') as f:
+            _lock_file(f, exclusive=True)
+            try:
+                with open(temp_path, 'r', encoding='utf-8') as tmp:
+                    f.write(tmp.read())
+                f.flush()
+                os.fsync(f.fileno())
+            finally:
+                _unlock_file(f)
+
+        # Clean up temp file
+        os.unlink(temp_path)
+        return True
+
+    except Exception as e:
+        # Clean up temp file on error
+        try:
+            if 'temp_path' in locals():
+                os.unlink(temp_path)
+        except Exception:
+            pass
+        return False
+
+
+def _atomic_rewrite_jsonl(
+    file_path: Path,
+    transform: Callable[[List[Dict]], List[Dict]]
+) -> bool:
+    """Atomically rewrite a JSONL file with a transformation function.
+
+    Uses read-transform-write pattern with file locking:
+    1. Lock file exclusively
+    2. Read all lines
+    3. Apply transformation
+    4. Write to temp file
+    5. Atomic rename over original
+    6. Unlock
+
+    Returns True on success, False on failure.
+    """
+    try:
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Create/touch file if it doesn't exist
+        if not file_path.exists():
+            file_path.touch()
+
+        with open(file_path, 'r+', encoding='utf-8') as f:
+            _lock_file(f, exclusive=True)
+            try:
+                # Read existing entries
+                entries = []
+                f.seek(0)
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        try:
+                            entries.append(json.loads(line))
+                        except json.JSONDecodeError:
+                            continue  # Skip malformed lines
+
+                # Apply transformation
+                transformed = transform(entries)
+
+                # Write to temp file
+                fd, temp_path = tempfile.mkstemp(
+                    suffix='.tmp',
+                    prefix='jsonl_',
+                    dir=file_path.parent
+                )
+                try:
+                    for entry in transformed:
+                        os.write(fd, (json.dumps(entry) + '\n').encode('utf-8'))
+                    os.fsync(fd)
+                finally:
+                    os.close(fd)
+
+                # Atomic rename (works on Unix, best-effort on Windows)
+                temp_path_obj = Path(temp_path)
+                if sys.platform == 'win32':
+                    # Windows doesn't support atomic rename over existing file
+                    backup_path = file_path.with_suffix('.bak')
+                    try:
+                        if file_path.exists():
+                            file_path.rename(backup_path)
+                        temp_path_obj.rename(file_path)
+                        if backup_path.exists():
+                            backup_path.unlink()
+                    except Exception:
+                        # Restore from backup on failure
+                        if backup_path.exists() and not file_path.exists():
+                            backup_path.rename(file_path)
+                        raise
+                else:
+                    os.rename(temp_path, file_path)
+
+            finally:
+                _unlock_file(f)
+
+        return True
+
+    except Exception as e:
+        return False
+
+
+def _read_jsonl_streaming(
+    file_path: Path,
+    filter_fn: Optional[Callable[[Dict], bool]] = None,
+    limit: int = MAX_RESULTS_PER_PAGE,
+    offset: int = 0
+) -> Iterator[Dict]:
+    """Stream JSONL file with optional filtering and pagination.
+
+    Yields entries one at a time without loading entire file into memory.
+    """
+    if not file_path.exists():
+        return
+
+    count = 0
+    skipped = 0
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        _lock_file(f, exclusive=False)  # Shared lock for reading
+        try:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                try:
+                    entry = json.loads(line)
+                except json.JSONDecodeError:
+                    continue  # Skip malformed lines
+
+                # Apply filter
+                if filter_fn and not filter_fn(entry):
+                    continue
+
+                # Apply offset
+                if skipped < offset:
+                    skipped += 1
+                    continue
+
+                # Apply limit
+                if count >= limit:
+                    break
+
+                yield entry
+                count += 1
+        finally:
+            _unlock_file(f)
+
+
+def _validate_task_state_transition(current: str, target: str) -> bool:
+    """Validate that a task state transition is allowed."""
+    if current not in TASK_STATES:
+        return False
+    return target in TASK_STATES.get(current, [])
+
+
+def _validate_task_spec(task_spec: Dict) -> Dict:
+    """Validate task_spec has required fields and valid structure.
+
+    Returns: {"valid": bool, "errors": [...]}
+    """
+    errors = []
+
+    # Required fields
+    required_fields = ["task_id", "task_type"]
+    for field in required_fields:
+        if field not in task_spec:
+            errors.append(f"Missing required field: {field}")
+
+    # Validate task_type
+    valid_task_types = ["file_operation", "code_adapt", "validate", "research"]
+    if "task_type" in task_spec and task_spec["task_type"] not in valid_task_types:
+        errors.append(f"Invalid task_type: {task_spec['task_type']}. Must be one of: {valid_task_types}")
+
+    # Validate task_id format (alphanumeric with hyphens/underscores)
+    if "task_id" in task_spec:
+        task_id = task_spec["task_id"]
+        if not isinstance(task_id, str) or not re.match(r'^[\w\-]+$', task_id):
+            errors.append(f"Invalid task_id format: must be alphanumeric with hyphens/underscores")
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
 
 class MCPTerminalServer:
     """MCP Server for terminal sharing and monitoring."""
@@ -1164,8 +1424,38 @@ class MCPTerminalServer:
         to_agent: str,
         priority: int = 5
     ) -> Dict:
-        """Governor dispatches task to Ant Worker via MCP message queue."""
-        
+        """Governor dispatches task to Ant Worker via MCP message queue.
+
+        Features:
+        - Task spec validation before dispatch
+        - Duplicate task detection
+        - Atomic file writes
+        - Priority validation (1-10)
+        """
+        # Validate task_spec
+        validation = _validate_task_spec(task_spec)
+        if not validation["valid"]:
+            return {
+                "status": "error",
+                "message": "Task spec validation failed",
+                "errors": validation["errors"]
+            }
+
+        # Validate priority
+        priority = max(1, min(10, priority))
+
+        # Check for duplicate task_id (already pending or processing)
+        queue_file = self.ledger_path / "task_queue.jsonl"
+        for entry in _read_jsonl_streaming(
+            queue_file,
+            filter_fn=lambda e: e.get("task_id") == task_id and e.get("status") in ["pending", "acknowledged", "processing"]
+        ):
+            return {
+                "status": "error",
+                "message": f"Duplicate task_id: {task_id} already exists with status '{entry.get('status')}'",
+                "existing_task": entry
+            }
+
         task_message = {
             "task_id": task_id,
             "task_spec": task_spec,
@@ -1174,22 +1464,27 @@ class MCPTerminalServer:
             "priority": priority,
             "status": "pending",
             "dispatched_at": datetime.now().isoformat(),
+            "acknowledged_at": None,
             "completed_at": None,
             "result": None
         }
-        
-        queue_file = self.ledger_path / "task_queue.jsonl"
-        with open(queue_file, "a") as f:
-            f.write(json.dumps(task_message) + "\n")
-        
+
+        # Atomic write to queue
+        if not _atomic_write_jsonl(queue_file, json.dumps(task_message)):
+            return {
+                "status": "error",
+                "message": "Failed to write task to queue (atomic write failed)"
+            }
+
         self._log_operation({
             "operation": "dispatch_task",
             "task_id": task_id,
             "from_agent": from_agent,
-            "to_agent": to_agent
+            "to_agent": to_agent,
+            "priority": priority
         })
-        
-        return {"status": "dispatched", "task_id": task_id, "to_agent": to_agent}
+
+        return {"status": "dispatched", "task_id": task_id, "to_agent": to_agent, "priority": priority}
 
     def get_pending_tasks(self, agent_id: str) -> Dict:
         """Ant Worker checks for pending tasks assigned to it."""
