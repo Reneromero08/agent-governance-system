@@ -137,22 +137,31 @@ def extract_decisions(decisions_dir: Path) -> List[Dict]:
     adr_files = sorted(decisions_dir.glob("ADR-*.md"))
     
     for adr_file in adr_files:
-        # Extract ADR number from filename
-        match = re.match(r'ADR-(\d+)', adr_file.stem)
+        # Extract ADR number/symbol from filename
+        match = re.match(r'ADR-([\d∞INF]+)', adr_file.stem)
         if not match:
             continue
         
-        num = int(match.group(1))
+        raw_id = match.group(1)
+        if raw_id in ['∞', 'INF']:
+            code = "@D∞"
+            num = float('inf') # Sort last
+            sort_key = 999999999
+        else:
+            code = f"@D{int(raw_id)}"
+            num = int(raw_id)
+            sort_key = int(raw_id)
+
         content = adr_file.read_text(encoding="utf-8", errors="ignore")
         
         # Extract title
-        title_match = re.search(r'#\s*ADR-\d+[:\s]+(.+)', content)
+        title_match = re.search(r'#\s*ADR-[^\s:]+[:\s]+(.+)', content)
         summary = title_match.group(1).strip() if title_match else adr_file.stem
         
         decisions.append({
-            "id": f"@D{num}",
+            "id": code,
             "type": "decision",
-            "number": num,
+            "number": sort_key, # Use int for sorting
             "summary": summary[:100],
             "source": f"CONTEXT/decisions/{adr_file.name}"
         })
