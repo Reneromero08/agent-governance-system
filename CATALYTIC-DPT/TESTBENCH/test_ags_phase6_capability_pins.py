@@ -88,7 +88,7 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
         r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
     
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--allow-dirty-tracked"], "--allow-dirty-tracked"], env=env)
+        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--allow-dirty-tracked"], env=env)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
     
     finally:
