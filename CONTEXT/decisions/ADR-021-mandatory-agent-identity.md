@@ -2,6 +2,9 @@
 
 **Date:** 2025-12-27
 **Status:** Accepted
+**Confidence:** High
+**Impact:** High
+**Tags:** [governance, observability, swarm]
 
 ## Context
 As the swarm of agents grows, anonymous or untraceable execution becomes a governance risk. We need a way to know "who is doing what" at any given time, both for real-time monitoring (via `agent-activity`) and for post-hoc auditing. Currently, agents could theoretically operate without a trace if logs weren't strictly enforced.
