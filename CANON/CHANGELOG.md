@@ -13,6 +13,25 @@ All notable changes to the Agent Governance System will be documented in this fi
 #### Changed
 - `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
 
+## [2.11.11] - 2025-12-28
+
+### Cortex Navigation (created 2025-12-28)
+
+#### Changed
+- `CORTEX/cortex.build.py` section index now includes `CATALYTIC-DPT/` so agents can discover CAT-DPT docs via `TOOLS/cortex.py`.
+- `MAPS/ENTRYPOINTS.md` notes CAT-DPT is indexed by cortex.
+
+## [2.11.12] - 2025-12-28
+
+### Intent Guarding (created 2025-12-28)
+
+#### Added
+- `TOOLS/intent.py` to derive deterministic `intent.json` artifacts for every governed run.
+- `SKILLS/intent-guard/` fixtures validating intent format, determinism, and admission responses.
+
+#### Changed
+- `TOOLS/ags.py` now runs preflight -> intent -> admission before executing pipelines, with `--repo-write` / `--allow-repo-write` flags.
+
 ## [2.11.9] - 2025-12-27
 
 ### Repo-Wide Hooks & Cortex Refresh (created 2025-12-27)
