@@ -2,6 +2,17 @@
 
 All notable changes to the Agent Governance System will be documented in this file.  The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and the versioning follows the rules defined in `CANON/VERSIONING.md`.
 
+## [2.11.14] - 2025-12-28
+
+### CAT-DPT Skill Registry Wiring (created 2025-12-28)
+
+#### Added
+- `CATALYTIC-DPT/SKILLS/registry.json` minimal skill-id → capability-hash registry.
+- `CATALYTIC-DPT/PRIMITIVES/skills.py` registry loader and resolver.
+
+#### Changed
+- `TOOLS/ags.py` now supports plan steps that reference `skill_id` (resolved to `capability_hash` during routing).
+
 ## [2.11.13] - 2025-12-28
 
 ### CAS Integrity Skill (created 2025-12-28)
