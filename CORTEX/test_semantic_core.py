@@ -17,7 +17,10 @@ import sqlite3
 import tempfile
 import shutil
 from pathlib import Path
-import numpy as np
+try:
+    import numpy as np
+except ImportError:
+    np = None
 
 # Test status tracking
 tests_passed = 0
@@ -28,6 +31,9 @@ def test(name):
     def decorator(func):
         def wrapper():
             global tests_passed, tests_failed
+            if np is None:
+                print(f"  [SKIP] {name} (numpy missing)")
+                return
             try:
                 print(f"\n[TEST] {name}")
                 func()
