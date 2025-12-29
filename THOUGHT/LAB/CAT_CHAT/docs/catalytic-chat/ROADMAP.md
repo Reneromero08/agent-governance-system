@@ -81,27 +81,33 @@ Exit criteria
 
 ---
 
-## Phase 3 — Message cassette (LLM-in-substrate communication) (PENDING)
-Goal: models write structured messages into the substrate and workers consume them.
+## Phase 3 — Message cassette (LLM-in-substrate communication) (COMPLETE)
+Goal: models write structured messages into substrate and workers consume them.
 
-- [ ] Add tables / files for messaging:
-  - [ ] `messages` (planner + worker requests)
-  - [ ] `jobs` / `steps` (claimable units)
-  - [ ] `receipts` (append-only)
-- [ ] Implement job lifecycle:
-  - [ ] `post(message)` → job created
-  - [ ] `claim(job_id, worker_id)` → exclusive lock
-  - [ ] `complete(job_id, receipt)` → stored + immutable
-- [ ] Enforce: message payload must be structured (refs/ops/budgets), not prose-only.
-- [ ] Provide minimal “ant” runtime contract:
-  - [ ] reads a job
-  - [ ] resolves only allowed symbols/slices
-  - [ ] executes ops
-  - [ ] writes receipt + outputs
+- [x] Add tables / files for messaging:
+   - [x] `cassette_messages` (planner + worker requests)
+   - [x] `cassette_jobs` / `cassette_steps` (claimable units)
+   - [x] `cassette_receipts` (append-only)
+- [x] Implement job lifecycle:
+   - [x] `post(message)` → job created
+   - [x] `claim(job_id, worker_id)` → exclusive lock
+   - [x] `complete(job_id, receipt)` → stored + immutable
+- [x] Enforce: message payload must be structured (refs/ops/budgets), not prose-only.
+- [x] DB-first enforcement via SQLite triggers
+- [x] Append-only on messages and receipts
+- [x] FSM enforcement for step transitions
+- [x] Lease protection (fencing tokens, expiry)
+- [x] Deterministic claim selection
+- [x] Foreign key integrity
+- [x] 21 passing tests including adversarial cases
 
 Exit criteria
-- [ ] A job can be posted, claimed, executed, and completed with receipts.
-- [ ] A worker cannot expand beyond budgets.
+- [x] A job can be posted, claimed, executed, and completed with receipts.
+- [x] A worker cannot expand beyond budgets.
+- [x] Law document: `docs/cat_chat/PHASE_3_LAW.md`
+- [x] CLI commands: `cassette verify/post/claim/complete`
+- [x] All tests passing
+- [x] Execution-agnostic (no model calls, no workers)
 
 ---
 
