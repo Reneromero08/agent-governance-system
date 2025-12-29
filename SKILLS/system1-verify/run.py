@@ -51,6 +51,24 @@ def should_verify(path: Path) -> bool:
     return True
 
 
+import subprocess
+import os
+
+def get_tracked_files(root: Path) -> set:
+    """Return set of tracked files (absolute paths). Returns None if git fails."""
+    try:
+        cmd = ["git", "ls-files", "-z"]
+        result = subprocess.run(cmd, cwd=root, capture_output=True)
+        if result.returncode != 0:
+            return None
+        paths = set()
+        for p in result.stdout.split(b'\0'):
+            if p:
+                paths.add(root / os.fsdecode(p))
+        return paths
+    except Exception:
+        return None
+
 def verify_system1():
     """Verify system1.db matches repository state."""
     if not DB_PATH.exists():
@@ -59,6 +77,12 @@ def verify_system1():
         
     conn = sqlite3.connect(str(DB_PATH))
     conn.row_factory = sqlite3.Row
+    
+    # Git Filter
+    tracked_files = get_tracked_files(PROJECT_ROOT)
+    if tracked_files is not None:
+         print(f"[INFO] Git filter active: {len(tracked_files)} tracked files found")
+
     
     # Get all indexed files from DB
     cursor = conn.execute("SELECT path, content_hash FROM files")
@@ -74,6 +98,11 @@ def verify_system1():
         for md_file in target_dir.rglob("*.md"):
             if not should_verify(md_file):
                 continue
+
+            # Git Filter
+            if tracked_files is not None and md_file.resolve() not in tracked_files:
+                continue
+
             rel_path = md_file.relative_to(PROJECT_ROOT).as_posix()
             try:
                 content = md_file.read_text(encoding='utf-8')

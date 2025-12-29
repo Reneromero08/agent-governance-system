@@ -49,6 +49,15 @@ All notable changes to Agent Governance System will be documented in this file.
 - **SKILLS/system1-verify**: Fixed Windows compatibility.
   - Removed Unicode characters from output to prevent `cp1252` encoding errors.
   - Fixed syntax error in validation logic.
+  
+  - **Git-Aware Verification**: Now only verifies files tracked by git, ignoring untracked WIP files.
+
+- **CORTEX/build_system1.py**: Implemented Git-Aware Indexing.
+  - Now filters `system1.db` content to include only git-tracked files.
+  - Prevents untracked sensitive/WIP files from leaking into the index.
+
+- **CORTEX/cortex.build.py**: Implemented Git-Aware Indexing.
+  - Now filters `cortex.db` content to include only git-tracked files.
 
 ## [2.20.0] - 2025-12-28
 ### Fixed
