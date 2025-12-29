@@ -144,7 +144,7 @@ def _validate_jobspec_obj(jobspec: Dict[str, Any]) -> None:
 
 
 def _load_ags_plan_schema() -> Draft7Validator:
-    schemas_dir = REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS"
+    schemas_dir = REPO_ROOT / "CONTEXT" / "schemas"
     plan_path = (schemas_dir / "ags_plan.schema.json").resolve()
     adapter_path = (schemas_dir / "adapter.schema.json").resolve()
     jobspec_path = (schemas_dir / "jobspec.schema.json").resolve()

@@ -7,7 +7,7 @@ Usage:
     from CATALYTIC_DPT.PRIMITIVES.restore_proof import RestorationProofValidator
 
     validator = RestorationProofValidator(
-        proof_schema_path="CATALYTIC-DPT/SCHEMAS/proof.schema.json"
+        proof_schema_path="CONTEXT/schemas/proof.schema.json"
     )
 
     proof = validator.generate_proof(
