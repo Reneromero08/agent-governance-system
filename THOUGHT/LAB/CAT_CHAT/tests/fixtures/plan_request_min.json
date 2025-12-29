@@ -1,0 +1,17 @@
+{
+  "run_id": "test_plan_001",
+  "request_id": "req_001",
+  "intent": "Test simple plan with one symbol",
+  "inputs": {
+    "symbols": [
+      "@TEST/example"
+    ],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 5,
+    "max_bytes": 10000000,
+    "max_symbols": 3
+  }
+}

@@ -1,0 +1,206 @@
+[
+  {
+    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_cas.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_ledger.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_paths.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_pipeline_resume.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_proof_tamper.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_hash_toolbelt.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_merkle.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_schemas.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/fixtures/dummy_mcp.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\fixtures`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_cortex_integration.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_deref_logging.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_governance_coverage.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_memoization.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_preflight.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_skills_registry.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_spectrum_04_05_enforcement.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_adapter_contract.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_registry.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_versioning_semantics.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_mcp_adapter_e2e.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_router_slot.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_runtime.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase8_router`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase8_router`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_canonical_artifacts.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_ledger.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipelines.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_chain.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_dag.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_verify_cli.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_gating.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_wiring.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_proof.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_runner.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_runtime_guard.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_verifier_freeze.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_verifier_interop.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_verify_bundle.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_validator_version_integrity.py",
+    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+  }
+]

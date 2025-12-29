@@ -13,6 +13,10 @@ from pathlib import Path
 from typing import Optional, Dict, Any, Tuple
 
 from catalytic_chat.message_cassette_db import MessageCassetteDB
+from catalytic_chat.symbol_registry import SymbolRegistry
+from catalytic_chat.section_indexer import SectionIndexer
+from catalytic_chat.symbol_resolver import SymbolResolver
+from catalytic_chat.slice_resolver import SliceResolver, SliceError
 
 
 class MessageCassetteError(Exception):
@@ -41,7 +45,8 @@ class MessageCassette:
         payload: Dict[str, Any],
         run_id: str,
         source: str,
-        idempotency_key: Optional[str] = None
+        idempotency_key: Optional[str] = None,
+        create_job_and_step: bool = True
     ) -> Tuple[str, str]:
         conn = self._get_conn()
         
@@ -61,18 +66,19 @@ class MessageCassette:
                 VALUES (?, ?, ?, ?, ?)
             """, (message_id, run_id, source, idempotency_key, payload_json))
             
-            conn.execute("""
-                INSERT INTO cassette_jobs 
-                (job_id, message_id, intent, ordinal)
-                VALUES (?, ?, ?, 1)
-            """, (job_id, message_id, intent))
-            
-            step_id = _generate_id("step", job_id, "1")
-            conn.execute("""
-                INSERT INTO cassette_steps 
-                (step_id, job_id, ordinal, status, payload_json)
-                VALUES (?, ?, 1, 'PENDING', ?)
-            """, (step_id, job_id, payload_json))
+            if create_job_and_step:
+                conn.execute("""
+                    INSERT INTO cassette_jobs 
+                    (job_id, message_id, intent, ordinal)
+                    VALUES (?, ?, ?, 1)
+                """, (job_id, message_id, intent))
+                
+                step_id = _generate_id("step", job_id, "1")
+                conn.execute("""
+                    INSERT INTO cassette_steps 
+                    (step_id, job_id, ordinal, status, payload_json)
+                    VALUES (?, ?, 1, 'PENDING', ?)
+                """, (step_id, job_id, payload_json))
             
             conn.commit()
             return (message_id, job_id)
@@ -222,6 +228,226 @@ class MessageCassette:
         except sqlite3.IntegrityError as e:
             conn.rollback()
             raise MessageCassetteError(f"Complete failed: {e}")
+    
+    def execute_step(
+        self,
+        run_id: str,
+        step_id: str,
+        worker_id: str,
+        fencing_token: int,
+        repo_root: Optional[Path] = None
+    ) -> Dict[str, Any]:
+        conn = self._get_conn()
+        
+        try:
+            cursor = conn.execute("""
+                SELECT s.step_id, s.job_id, s.payload_json, m.payload_json as request_json, m.run_id
+                FROM cassette_steps s
+                JOIN cassette_jobs j ON s.job_id = j.job_id
+                JOIN cassette_messages m ON j.message_id = m.message_id
+                WHERE s.step_id = ?
+            """, (step_id,))
+            
+            row = cursor.fetchone()
+            if row is None:
+                raise MessageCassetteError(f"Step not found: {step_id}")
+            
+            if row["run_id"] != run_id:
+                raise MessageCassetteError(f"Step run_id mismatch: expected {run_id}, got {row['run_id']}")
+            
+            step_payload = json.loads(row["payload_json"])
+            request_payload = json.loads(row["request_json"])
+            
+            op = step_payload.get("op")
+            refs = step_payload.get("refs", {})
+            constraints = step_payload.get("constraints", {})
+            
+            budgets = request_payload.get("budgets", {})
+            max_bytes = budgets.get("max_bytes", 10000000)
+            max_symbols = budgets.get("max_symbols", 100)
+            
+            receipt_payload = {
+                "step_id": step_id,
+                "op": op,
+                "status": "STARTED"
+            }
+            
+            if op == "READ_SYMBOL":
+                symbol_id = refs.get("symbol_id")
+                
+                if not symbol_id:
+                    raise MessageCassetteError("READ_SYMBOL missing refs.symbol_id")
+                
+                symbol_registry = SymbolRegistry(repo_root=repo_root)
+                symbol = symbol_registry.get_symbol(symbol_id)
+                
+                if symbol is None:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Symbol not found: {symbol_id}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                section_id = symbol.target_ref
+                slice_expr = constraints.get("slice") or symbol.default_slice
+                
+                if slice_expr and slice_expr.lower() == "all":
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"slice=ALL is forbidden for symbol {symbol_id}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                section_indexer = SectionIndexer(repo_root=repo_root)
+                
+                try:
+                    content, content_hash, applied_slice, lines_applied, chars_applied = \
+                        section_indexer.get_section_content(section_id, slice_expr)
+                except Exception as e:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Failed to read section {section_id}: {e}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                bytes_read = len(content.encode('utf-8'))
+                
+                if bytes_read > max_bytes:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                receipt_payload["status"] = "SUCCESS"
+                receipt_payload["section_id"] = section_id
+                receipt_payload["symbol_id"] = symbol_id
+                receipt_payload["slice"] = applied_slice
+                receipt_payload["content_hash"] = content_hash
+                receipt_payload["lines_applied"] = lines_applied
+                receipt_payload["chars_applied"] = chars_applied
+                receipt_payload["bytes_read"] = bytes_read
+                
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="SUCCESS"
+                )
+                
+            elif op == "READ_SECTION":
+                section_id = refs.get("section_id")
+                
+                if not section_id:
+                    raise MessageCassetteError("READ_SECTION missing refs.section_id")
+                
+                slice_expr = constraints.get("slice")
+                
+                section_indexer = SectionIndexer(repo_root=repo_root)
+                
+                try:
+                    content, content_hash, applied_slice, lines_applied, chars_applied = \
+                        section_indexer.get_section_content(section_id, slice_expr)
+                except Exception as e:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Failed to read section {section_id}: {e}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                bytes_read = len(content.encode('utf-8'))
+                
+                if bytes_read > max_bytes:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                receipt_payload["status"] = "SUCCESS"
+                receipt_payload["section_id"] = section_id
+                receipt_payload["slice"] = applied_slice
+                receipt_payload["content_hash"] = content_hash
+                receipt_payload["lines_applied"] = lines_applied
+                receipt_payload["chars_applied"] = chars_applied
+                receipt_payload["bytes_read"] = bytes_read
+                
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="SUCCESS"
+                )
+                
+            else:
+                receipt_payload["status"] = "FAILURE"
+                receipt_payload["error"] = f"Unsupported op: {op}"
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="FAILURE"
+                )
+            
+            return receipt_payload
+            
+        except Exception as e:
+            receipt_payload = {
+                "step_id": step_id,
+                "status": "FAILURE",
+                "error": str(e)
+            }
+            self.complete_step(
+                run_id=run_id,
+                step_id=step_id,
+                worker_id=worker_id,
+                fencing_token=fencing_token,
+                receipt_payload=receipt_payload,
+                outcome="FAILURE"
+            )
+            return receipt_payload
     
     def verify_cassette(self, run_id: Optional[str] = None) -> None:
         conn = self._get_conn()

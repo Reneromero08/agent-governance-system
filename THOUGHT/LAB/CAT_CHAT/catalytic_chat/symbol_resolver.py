@@ -60,10 +60,8 @@ class SymbolResolver:
         self.repo_root = Path(repo_root)
         self.substrate_mode = substrate_mode
         self.slice_resolver = SliceResolver()
-        self.symbol_registry = symbol_registry
         self.section_indexer = SectionIndexer(repo_root, substrate_mode)
         self.symbol_registry = symbol_registry
-        self.section_indexer = section_indexer
 
         if substrate_mode == "sqlite":
             self.db_path = repo_root / "CORTEX" / "db" / "system1.db"

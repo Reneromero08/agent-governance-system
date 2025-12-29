@@ -1,0 +1,140 @@
+[
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 14.78,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py",
+    "status": "success",
+    "reason": "ok_tier3",
+    "elapsed_seconds": 22.622,
+    "attempted_tiers": [
+      "qwen2.5:1.5b",
+      "qwen2.5:5b",
+      "qwen2.5:7b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:7b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py",
+    "status": "success",
+    "reason": "ok_tier3",
+    "elapsed_seconds": 57.403,
+    "attempted_tiers": [
+      "qwen2.5:1.5b",
+      "qwen2.5:5b",
+      "qwen2.5:7b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:7b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 27.785,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 13.61,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 9.666,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_merkle.py",
+    "status": "success",
+    "reason": "ok_tier3",
+    "elapsed_seconds": 27.253,
+    "attempted_tiers": [
+      "qwen2.5:1.5b",
+      "qwen2.5:5b",
+      "qwen2.5:7b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:7b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_cas_store.py",
+    "status": "success",
+    "reason": "ok_tier3",
+    "elapsed_seconds": 53.984,
+    "attempted_tiers": [
+      "qwen2.5:1.5b",
+      "qwen2.5:5b",
+      "qwen2.5:7b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:7b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_phase7_acceptance.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 35.919,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_phase8_router_receipts.py",
+    "status": "success",
+    "reason": "ok_tier1",
+    "elapsed_seconds": 26.352,
+    "attempted_tiers": [
+      "qwen2.5:1.5b"
+    ],
+    "validators": [
+      "py_compile"
+    ],
+    "model_tier": "qwen2.5:1.5b"
+  }
+]
