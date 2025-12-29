@@ -37,7 +37,7 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
 def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None:
     pipeline_id = "ags-capability-versioning"
     step_id = "s1"
-    base_cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    base_cap = "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
 
     # Canonical registry derived from repo CAPABILITIES, but tamper adapter bytes under same key.
     reg_path = tmp_path / "CAPABILITIES.json"
