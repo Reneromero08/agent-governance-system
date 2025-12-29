@@ -22,7 +22,7 @@ This document defines the non-negotiable rules and the authority gradient for th
 3. **INBOX requirement for human-readable documents.** All documents, research, reports, roadmaps, and any content requiring human review ("god mode") MUST be stored in `INBOX/` directory at repository root. This includes:
    - Implementation reports → `INBOX/reports/`
    - Research documents → `INBOX/research/`
-   - Roadmaps and planning → `INBOX/roadmaps/`
+   - Roadmaps and planning → `INBOX/roadCONTEXT/maps/`
    - ADRs and decisions → `INBOX/decisions/`
    - Session summaries → `INBOX/summaries/`
    
@@ -71,7 +71,7 @@ When conflicts arise, the following order of precedence applies:
 4. `CANON/VERSIONING.md`
 5. `AGENTS.md`
 6. Context records (`CONTEXT/decisions/`, `CONTEXT/rejected/`, `CONTEXT/preferences/`)
-7. `MAPS/*`
+7. `CONTEXT/maps/*`
 8. User instructions
 9. Implementation convenience
 
