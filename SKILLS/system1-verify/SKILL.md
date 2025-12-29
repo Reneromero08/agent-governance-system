@@ -1,12 +1,15 @@
 # System 1 Verify Skill
 
-**Status:** Proposed
+**Version:** 1.0.0
+
+**Status:** Experimental
+
+**Required_Canon_Version:** >=2.0.0
+
 **Date:** 2025-12-28
 **Confidence:** Medium
 **Impact:** Low
 **Tags:** [verification, cortex, system1]
-
-**Version:** 1.0.0
 
 ## Purpose
 Ensures system1.db is in sync with repository state and verifies system1 indexer is working correctly.

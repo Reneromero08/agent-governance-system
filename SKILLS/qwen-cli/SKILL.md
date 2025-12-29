@@ -1,5 +1,11 @@
 # Qwen CLI - Local AI Assistant
 
+**Version:** 1.0.0
+
+**Status:** Active
+
+**Required_Canon_Version:** >=2.0.0
+
 **Purpose**: Provides a local CLI interface to Qwen 7B via Ollama for fast, offline AI assistance.
 
 **Model**: Qwen2.5 7B (via Ollama)

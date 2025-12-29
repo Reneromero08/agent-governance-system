@@ -8,7 +8,12 @@
 
 ## 1. Core Principle
 
-**Big Brains is President. President calls the Governor. Governor appears in VSCode terminal. Governor calls Workers recursively. MCP is the single source of truth.**
+**User is God (President). Governor (SOTA AI) makes complex decisions. Manager (CLI) breaks tasks down. Ants execute mechanically. MCP is the single source of truth.**
+
+**Capability Hierarchy:**
+- **Governor (Claude Sonnet)**: SOTA - handles complex strategy, governance, analysis
+- **Manager (Qwen 7B)**: Mid-tier - cannot do complex tasks, coordinates execution
+- **Ants (Ollama tiny)**: Mechanical - follows templates, zero creativity
 
 ---
 
@@ -16,28 +21,30 @@
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                       GOD (User)                            │
+│                  PRESIDENT (God / User)                     │
 │                  - The Source of Intent                     │
 │                  - Final Authority                          │
+│                  - Can override any agent                   │
 └──────────────────────┬──────────────────────────────────────┘
                        │
                        ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                  PRESIDENT (Brains)                         │
-│                 - Lives in Agent Chat                │
-│                 - High-level decisions, governance, tokens  │
-│                 - Delegates to Governor                     │
+│              GOVERNOR (Claude Sonnet 4.5 - SOTA)            │
+│                 - Lives in Agent Chat                       │
+│                 - Complex decisions, governance, strategy   │
+│                 - Delegates to Manager for execution        │
 │                 - Monitors via MCP ledger                   │
 └──────────────────────┬──────────────────────────────────────┘
                        │ HTTP POST to port 4000
                        │ (Antigravity Bridge)
                        ↓
 ┌─────────────────────────────────────────────────────────────┐
-│                   GOVERNOR (BIG CLI)                     │
+│                 MANAGER (Qwen 7B - CLI)                     │
 │                 - Spawns IN VSCode terminal                 │
-│                 - Analyzes tasks from President             │
+│                 - Receives tasks from Governor              │
+│                 - Breaks into mechanical subtasks           │
 │                 - Distributes subtasks to Ants              │
-│                 - Calls launch-terminal (recursive pattern) │
+│                 - CANNOT do complex analysis                │
 └──────────────────────┬──────────────────────────────────────┘
                        │ HTTP POST to port 4000 (recursive)
           ┌────────────┼────────────┐
@@ -63,29 +70,41 @@
 
 ## 3. Agent Roles
 
-### GOD (The User)
-Provides intent and final judgment. The human in the loop.
-
-### PRESIDENT (Orchestrator)
-- **Model**: Brains (Main Agent)
-- **Config**: `swarm_config.json → roles.president`
+### PRESIDENT (God / The User)
+- **Implementation**: Human
+- **Authority**: Absolute
 - **Responsibilities**:
-  - Receives directives from God
-  - Formulates strategy
-  - Delegates execution blocks to Governor
-  - Monitors Governor via MCP terminal tools
+  - Provides intent and final judgment
+  - Can override any agent decision
+  - Monitors all activity
+  - The human in the loop
+
+### GOVERNOR (Strategic Commander)
+- **Model**: Claude Sonnet 4.5 (SOTA)
+- **Config**: `swarm_config.json → roles.governor`
+- **Capabilities**: FULL - Complex analysis, governance, strategic planning
+- **In**: Agent Chat (VSCode)
+- **Responsibilities**:
+  - Receives directives from President (User)
+  - Analyzes complex problems
+  - Makes strategic decisions
+  - Designs governance and architecture
+  - Delegates execution to Manager
+  - Monitors Manager via MCP ledger
   - **Does NOT micromanage execution**
 
-### GOVERNOR (Manager)
-- **Model**: BIG CLI
-- **Config**: `swarm_config.json → roles.governor`
+### MANAGER (Task Coordinator)
+- **Model**: Qwen 2.5:7b
+- **Config**: `swarm_config.json → roles.manager`
+- **Capabilities**: LIMITED - Cannot do complex tasks or strategic planning
 - **In**: VSCode terminal (user visible)
 - **Responsibilities**:
-  - Receives directives from President (`get_directives`)
+  - Receives tasks from Governor
   - Breaks into mechanical steps
   - Dispatches tasks to Ants (`dispatch_task`)
   - Monitors results (`get_results`)
-  - Reports back to President
+  - Reports back to Governor
+  - **CANNOT**: Make strategic decisions, analyze complex problems, governance
 
 ### ANT WORKERS (Executors)
 - **Model**: Local Model

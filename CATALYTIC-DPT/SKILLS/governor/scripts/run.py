@@ -2,15 +2,16 @@
 """
 CATALYTIC-DPT/SKILLS/governor/run.py
 
-Enables President (Claude) to delegate tasks to Gemini CLI (Governor),
+Enables Governor (Claude Sonnet 4.5 - SOTA) to delegate tasks to Manager CLI,
 which runs in the user's VSCode terminal.
 
-Key insight:
-- Claude sends: {"gemini_prompt": "analyze D:/CCC 2.0/AI/AGI/..."}
-- Gemini (your terminal): gemini --prompt "analyze ..."
-- Result: back to Claude with Gemini's analysis
+NOTE: This skill may be deprecated. Current hierarchy:
+- President: User (God, final authority)
+- Governor: Claude Sonnet 4.5 (SOTA - complex decisions)
+- Manager: Qwen 7B CLI (cannot do complex tasks, coordinates execution)
+- Ants: Ollama tiny models (mechanical execution)
 
-This preserves token budget AND gives you control over what Gemini does.
+Legacy functionality preserved for reference.
 """
 
 import json

@@ -20,9 +20,10 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
         match = re.search(r'^\*\*(.+?)\*\*\s*(.*)$', line.strip())
         if match:
             # Extract the key without the surrounding asterisks
-            # Pattern: **Version:** 1.0.0 -> key should be "Version"
+            # Pattern: **Version:** 1.0.0 -> key should be "version"
             key_with_stars = match.group(1)
-            key = key_with_stars.strip('*')
+            # Strip asterisks, colon, and normalize to lowercase with underscores
+            key = key_with_stars.strip('*:').lower().replace(' ', '_')
             value = match.group(2).strip()
             
             # Handle list-like values [val1, val2]
