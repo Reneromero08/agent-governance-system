@@ -2,6 +2,26 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [2.18.1] - 2025-12-28
+### Fixed
+- **CORTEX/query.py**: Added missing `export_to_json()` function required by `cortex.build.py`.
+  - Fixes `AttributeError: module 'query' has no attribute 'export_to_json'` in CI builds.
+  - Function exports entities from cortex.db to JSON-serializable format for snapshots.
+
+- **.githooks/pre-commit**: Fixed cross-platform Python invocation.
+  - Hook now tries `python3` first (Linux/macOS), falls back to `python` (Windows).
+  - Resolves "Python was not found" error on Windows systems.
+
+- **Consolidated git hooks**: Removed duplicate `.git/hooks/pre-commit` (git uses `.githooks/` via core.hookspath).
+
+### Added
+- **CORTEX/test_query.py**: Regression test for query module.
+  - Verifies `export_to_json()` exists and returns valid structure.
+  - Verifies `CortexQuery` class has all required methods.
+
+- **.github/workflows/contracts.yml**: Added pre-build gate.
+  - Runs `test_query.py` BEFORE `cortex.build.py` to catch missing functions early.
+
 ## [2.18.0] - 2025-12-28
 ### Added
 - **Semantic Core Phase 1 (Vector Foundation)**: Complete vector embedding system for token compression.
