@@ -4,203 +4,63 @@ All notable changes to Catalytic Chat System will be documented in this file.
 
 ## [Unreleased] - 2025-12-29
 
-### Major Refactoring
-- **Refactored to align with canonical roadmap** (`CAT_CHAT_ROADMAP_V1.md`)
-  - Replaced Claude Code triple-write implementation with Catalytic Chat substrate
-  - Terminology normalized: Section, Symbol, Message, Expansion, Receipt
-  - All changes follow `docs/catalytic-chat/CONTRACT.md`
+### Added - Phase 4 (Deterministic Planner) (COMPLETE)
+- **`docs/cat_chat/PHASE_4_LAW.md`** (390 lines)
+- **`SCHEMAS/plan_request.schema.json`** (88 lines)
+- **`SCHEMAS/plan_step.schema.json`** (159 lines)
+- **`SCHEMAS/plan_output.schema.json`** (113 lines)
+- **`catalytic_chat/planner.py`** (427 lines)
+- **`catalytic_chat/message_cassette.py`** (modified: integrated with planner)
+- **`tests/test_planner.py`** (443 lines)
+- **`tests/fixtures/plan_request_min.json`** (minimal)
+- **`tests/fixtures/plan_request_files.json`** (with file reference)
+- **`tests/fixtures/plan_request_max_steps_exceeded.json`** (max_steps exceeded)
+- **`tests/fixtures/plan_request_max_bytes_exceeded.json`** (max_bytes exceeded)
+- **`tests/fixtures/plan_request_max_symbols_exceeded.json`** (max_symbols exceeded)
+- **`tests/fixtures/plan_request_slice_all_forbidden.json`** (slice=ALL forbidden)
+- **`tests/fixtures/plan_request_invalid_symbol.json`** (invalid symbol_id)
 
-### Added - Phase 0 (Complete)
-- **`docs/catalytic-chat/CONTRACT.md`** (193 lines)
-  - Immutable contract defining: Section, Symbol, Message, Expansion, Receipt schemas
-  - Budget definitions: max_symbols, max_sections, max_bytes_expanded, max_expands_per_step
-  - Error policy: fail-closed on missing symbol, missing slice, budget breach
-  - Receipt schema (append-only) with minimum required fields
-  - Canonical sources specification (folders + file types)
-  - Determinism requirements
+Phase 4 Features:
+- **Deterministic Compiler**: Request -> Plan (steps with stable IDs and ordering)
+- **Budget Enforcement**: max_steps, max_bytes, max_symbols (fail-closed)
+- **Symbol Bounds**: slice=ALL forbidden, uses default_slice
+- **Phase 3 Integration**: post_request_and_plan() stores request + plan in cassette
+- **Idempotency**: Same (run_id, idempotency_key) returns same job_id/steps
+- **CLI Commands**: `cortex plan --request-file <json> [--dry-run]`, `cassette plan-verify`
 
-### Added - Phase 1 (Complete)
-- **`catalytic_chat/section_extractor.py`** (247 lines)
-  - `Section` dataclass with deterministic section_id
-  - `SectionExtractor` class for markdown and code file extraction
-  - Markdown headings → section ranges
-  - Code files → file-level sections
-  - SHA-256 content hashing
-  - Heading path tracking
-
-- **`catalytic_chat/section_indexer.py`** (419 lines)
-  - `SectionIndexer` class with dual substrate support
-  - SQLite substrate mode (primary): `CORTEX/db/system1.db`
-  - JSONL substrate mode (fallback): `CORTEX/_generated/section_index.jsonl`
-  - Incremental rebuild support (only changed files)
-  - Index hash computation for determinism verification
-  - Section retrieval by `section_id`
-  - `get_section_content(section_id, slice_expr)` API
-  - Content reading with hash validation
-
-- **`catalytic_chat/cli.py`** (197 lines)
-  - `build` command: Build full or incremental index
-  - `verify` command: Verify determinism (consecutive builds produce identical hash)
-  - `get` command: Fetch section by ID with optional slice expression
-  - `extract` command: Extract sections from a single file
-
-- **`catalytic_chat/slice_resolver.py`** (188 lines)
-  - `SliceResolver` class for parsing and applying slice expressions
-  - Supported slices: `lines[a:b]`, `chars[a:b]`, `head(n)`, `tail(n)`
-  - Fail-closed validation (negative indices, out of bounds, malformed syntax)
-  - `slice=ALL` forbidden (unbounded expansion)
-  - SHA-256 hash computation for sliced content
-  - `SliceError` exception class
-
-- **`catalytic_chat/README.md`** - Phase 1 architecture documentation
-### Added - Phase 2.2 (Symbol Resolver + Expansion Cache - IN PROGRESS)
-- **`catalytic_chat/symbol_resolver.py`** (415 lines)
-  - `SymbolResolver` class for bounded symbol resolution
-  - `ExpansionCacheEntry` dataclass for cache entries
-  - `ResolverError` exception class
-  - `resolve(symbol_id, slice, run_id)` → (payload, cache_hit)
-  - SQLite substrate: `expansion_cache` table
-  - JSONL substrate: expansion_cache.jsonl
-  - Cache keyed by: (run_id, symbol_id, slice, section_content_hash)
-  - Cache hit returns payload without re-expanding
-  - Cache miss expands, stores, then returns
-
-### Added - CLI (Phase 2.2)
-- **`catalytic_chat/cli.py`** - Updated with resolve command
-  - `cortex resolve @Symbol --slice "<expr>" --run-id <id>`
-  - stdout: payload
-  - stderr: [CACHE HIT] or [CACHE MISS]
-  - Non-zero exit on failure
+Phase 4 Tests (31 tests passing):
+- `test_plan_determinism_same_request_same_output` ✅
+- `test_plan_determinism_step_ids_stable` ✅
+- `test_plan_rejects_too_many_steps` ✅
+- `test_plan_rejects_too_many_bytes` ✅
+- `test_plan_rejects_too_many_symbols` ✅
+- `test_plan_rejects_slice_all_forbidden` ✅
+- `test_plan_rejects_invalid_symbol_id` ✅
+- `test_plan_idempotency_same_idempotency_key` ✅
+- `test_plan_dry_run_does_not_touch_db` ✅
+- `test_plan_verify_matches_stored_hash` ✅
+- `test_plan_verify_fails_on_mismatch` ✅
 
 ### Verified
-- **Symbol Resolver Tests** (Phase 2.2):
-  - Valid symbol resolve with run_id ✅ (cache miss, then cache hit)
-  - Duplicate symbol rejection ✅
-  - Invalid symbol_id rejected ✅
-  - Invalid slice rejected ✅
-  - Nonexistent section_id rejected ✅
-
-### Verified
-- **Symbol Registry Tests** (Phase 2.1):
-  - Valid symbol add ✅ (`@TEST/example` → section_id)
-  - Invalid symbol ID rejected ✅ (missing '@")
-  - Nonexistent section_id rejected ✅
-  - Invalid default slice rejected ✅ (ALL forbidden)
-  - Duplicate symbol ID rejected ✅
-  - Symbol list by prefix ✅ (`@TEST/` filter)
-  - Symbol get details ✅
-  - Verify integrity ✅
-
-### Deprecated / Legacy
-- **Previous Claude Code triple-write implementation** (misaligned with roadmap)
-  - `chat_db.py` - Database for Claude Code messages
-  - `embedding_engine.py` - Vector embeddings for chat messages
-  - `message_writer.py` - Triple-write to DB + JSONL + MD
-  - `catalytic-chat-research.md` - Claude Code research
-  - `catalytic-chat-phase1-implementation-report.md` - Old phase report
-  - `archive/catalytic-chat-roadmap.md` - Old roadmap
-  - `SYMBOLIC_README.md` - Symbol encoding (different from roadmap "Symbol" concept)
-
-**Note**: Legacy files preserved but not aligned with canonical roadmap. Consider archiving.
-
-### Verified
-- **Determinism Test**: Two consecutive builds on unchanged repo produce identical SECTION_INDEX
-  - Hash: `6098cac893b26aaa...`
-  - Sections extracted: 611
-  - Status: ✅ PASS
-
-- **Slice Resolver Test**: All slice forms work correctly
-  - `lines[0:3]` ✅ (3 lines, 184 chars)
-  - `chars[0:100]` ✅ (100 chars)
-  - `head(50)` ✅ (first 50 chars)
-  - `tail(50)` ✅ (last 50 chars)
-  - `ALL` ✅ FAILS (forbidden)
-  - `lines[5:10]` ✅ FAILS (out of bounds)
-  - `lines[-1:5]` ✅ FAILS (negative indices)
-
-- **Section Retrieval Test**: CLI `get` command works correctly
-  - Prints content to stdout
-  - Prints metadata to stderr (section_id, slice, hash, lines_applied, chars_applied)
-  - Returns non-zero on failure
-
-- **Symbol Registry Tests** (Phase 2.1):
-  - Valid symbol add ✅ (`@TEST/example` → section_id)
-  - Invalid symbol ID rejected ✅ (missing '@")
-  - Nonexistent section_id rejected ✅
-  - Invalid default slice rejected ✅ (ALL forbidden)
-  - Duplicate symbol ID rejected ✅
-  - Symbol list by prefix ✅ (`@TEST/` filter)
-  - Symbol get details ✅
-  - Verify integrity ✅
-
-- **Symbol Resolver Tests** (Phase 2.2):
-  - Valid symbol resolve with run_id ✅ (cache miss, then cache hit)
-  - Duplicate symbol rejection ✅
-  - Invalid symbol_id rejected ✅
-  - Invalid slice rejected ✅
-  - Nonexistent section_id rejected ✅
-  - Expansion cache append-only ✅
-  - Cache key generation ✅ (run_id, symbol_id, slice, section_content_hash)
-  - SQLite substrate ✅
-  - JSONL substrate ✅
-
-- **CLI Integration Tests** (Phase 2):
-  - `cortex resolve @Symbol --slice ...` --run-id <id>` ✅
-  - stdout: payload
-  - stderr: [CACHE HIT] or [CACHE MISS]
-  - Non-zero exit on failure
-  - Package-relative imports ✅
-  - pytest.ini test isolation ✅
-
-- **Symbol Resolver Tests** (Phase 2.2):
-  - Valid symbol resolve with run_id ✅ (cache miss, then cache hit)
-  - Duplicate symbol rejection ✅
-  - Invalid symbol_id rejected ✅
-  - Invalid slice rejected ✅
-  - Nonexistent section_id rejected ✅
-
-### Packaging Fixes
-- Fixed package-relative imports in `symbol_resolver.py` and `section_indexer.py`
-- Changed `from module import` to `from .module import` for proper package structure
-- Created `pytest.ini` to quarantine test files and enable proper test isolation
-
-### Added - Phase 2.2 (Symbol Resolver + Expansion Cache - COMPLETE)
-- **`catalytic_chat/symbol_resolver.py`** (415 lines)
-  - `SymbolResolver` class for bounded symbol resolution
-  - `ExpansionCacheEntry` dataclass for cache entries
-  - `ResolverError` exception class
-  - `resolve(symbol_id, slice, run_id)` → (payload, cache_hit)
-  - SQLite substrate: `expansion_cache` table in system1.db
-  - JSONL substrate: expansion_cache.jsonl in CORTEX/_generated/
-  - Cache keyed by: (run_id, symbol_id, slice, section_content_hash)
-  - Cache hit detection: return cached payload without re-expanding
-  - Cache miss expands, stores, then returns payload
-
-- **`catalytic_chat/cli.py`** (344 lines)
-  - Added `resolve` command
-  - CLI: `cortex resolve @Symbol --slice "<expr>" --run-id <id>`
-  - stdout: payload
-  - stderr: [CACHE HIT] or [CACHE MISS]
-  - Non-zero exit on failure
-
-### Verified
-- **Symbol Resolver Tests** (Phase 2.2):
-  - Valid symbol resolve with run_id ✅ (cache miss, then cache hit)
-  - Duplicate symbol rejection ✅
-  - Invalid symbol_id rejected ✅
-  - Invalid slice rejected ✅
-  - Nonexistent section_id rejected ✅
-
-### Packaging Fixes
-- Fixed package-relative imports in `symbol_resolver.py` and `section_indexer.py`
-- Changed `from module import` to `from .module import` for proper package structure
-- Created `pytest.ini` to quarantine test files and enable proper test isolation
+- **Phase 4 Tests**: All 31 tests passing
+- **CLI Verify**: `python -m catalytic_chat.cli plan --request-file tests/fixtures/plan_request_min.json --dry-run` → valid plan
 
 ### Roadmap Progress
 - Phase 0: ✅ COMPLETE (CONTRACT.md, all schemas, budgets, error policy)
 - Phase 1: ✅ COMPLETE (substrate, extractor, indexer, CLI, slice resolver, section retrieval)
 - Phase 2: ✅ COMPLETE (symbol registry, symbol resolver, expansion cache, CLI)
-- Phase 3: ⏳ NOT STARTED
+- Phase 2.5: ✅ COMPLETE (experimental vector sandbox)
+- Phase 3: ✅ COMPLETE (message cassette, DB-first enforcement, lease handling, tests)
+- Phase 4: ✅ COMPLETE (deterministic planner + governed step pipeline)
+- Phase 5: ⏳ NOT STARTED
+- Phase 6: ⏳ NOT STARTED
+
+### Roadmap Progress
+- Phase 0: ✅ COMPLETE (CONTRACT.md, all schemas, budgets, error policy)
+- Phase 1: ✅ COMPLETE (substrate, extractor, indexer, CLI, slice resolver, section retrieval)
+- Phase 2: ✅ COMPLETE (symbol registry, symbol resolver, expansion cache, CLI)
+- Phase 2.5: ✅ COMPLETE (experimental vector sandbox)
+- Phase 3: ✅ COMPLETE (message cassette, DB-first enforcement, lease handling, tests)
 - Phase 4: ⏳ NOT STARTED
 - Phase 5: ⏳ NOT STARTED
 - Phase 6: ⏳ NOT STARTED

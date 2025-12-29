@@ -1,0 +1,18 @@
+{
+  "run_id": "test_plan_005",
+  "request_id": "req_005",
+  "intent": "Test invalid symbol_id",
+  "inputs": {
+    "symbols": [
+      "INVALID_NO_AT_SYMBOL"
+    ],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 5,
+    "max_bytes": 10000000,
+    "max_symbols": 100
+  }
+}
+}
