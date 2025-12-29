@@ -19,8 +19,8 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
-from CORTEX.system1_builder import System1DB
-from CORTEX.indexer import CortexIndexer
+from CORTEX.db.system1_builder import System1DB
+from CORTEX.semantic.indexer import CortexIndexer
 
 def test_system1_db():
     """Test System1DB basic functionality."""

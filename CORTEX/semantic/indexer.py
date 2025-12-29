@@ -15,7 +15,7 @@ import re
 import hashlib
 from pathlib import Path
 from typing import List, Dict, Optional
-from CORTEX.system1_builder import System1DB
+from CORTEX.db.system1_builder import System1DB
 
 # Default Configuration
 CANON_DIR = Path("CANON")

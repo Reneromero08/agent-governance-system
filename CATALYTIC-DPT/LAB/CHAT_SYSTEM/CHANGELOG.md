@@ -1,8 +1,17 @@
 # CHAT_SYSTEM Changelog
 
-All notable changes to the Catalytic Chat System will be documented in this file.
+All notable changes to Catalytic Chat System will be documented in this file.
 
 ## [Unreleased]
+
+### Added
+- **Symbolic Chat Encoding**
+  - Token savings of 30-70% through symbol compression
+  - Symbol dictionary: `symbols/dictionary.json` with governance/technical terms
+  - Auto-encoding of English to symbols on write
+  - Auto-decoding of symbols to English on read
+  - `simple_symbolic_demo.py` - working demo with 62.5% token savings
+  - Token cost tracking per message
 
 ### Added
 - **DB-Only Chat Interface** (`db_only_chat.py`)

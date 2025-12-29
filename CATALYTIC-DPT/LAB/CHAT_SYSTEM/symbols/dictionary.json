@@ -1,0 +1,84 @@
+{
+  "version": "1.0.0",
+  "description": "Agent Governance System Symbol Dictionary",
+  "created": "2025-12-29",
+  "symbols": {
+    "common": {
+      "hello": "s001",
+      "thank you": "s002",
+      "goodbye": "s003",
+      "please": "s004",
+      "sorry": "s005",
+      "yes": "s006",
+      "no": "s007",
+      "maybe": "s008",
+      "ok": "s009"
+    },
+    "governance": {
+      "AGI hardener": "g001",
+      "Canon check": "g002",
+      "Invariant freeze": "g003",
+      "Master override": "g004",
+      "Intent guard": "g005",
+      "Swarm governor": "g006",
+      "Pipeline execution": "g007",
+      "Catalytic elision": "g008"
+    },
+    "status": {
+      "success": "st001",
+      "failed": "st002",
+      "error occurred": "st003",
+      "permission denied": "st004",
+      "not found": "st005",
+      "in progress": "st006",
+      "completed": "st007"
+    },
+    "actions": {
+      "running tests": "a001",
+      "building": "a002",
+      "deploying": "a003",
+      "refactoring": "a004",
+      "testing": "a005",
+      "debugging": "a006",
+      "analyzing": "a007",
+      "processing": "a008"
+    },
+    "technical": {
+      "database": "t001",
+      "vector embedding": "t002",
+      "similarity search": "t003",
+      "chunking": "t004",
+      "serialization": "t005",
+      "hash collision": "t006",
+      "migration": "t007"
+    },
+    "errors": {
+      "File not found": "e001",
+      "Permission denied": "e002",
+      "Connection failed": "e003",
+      "Timeout": "e004",
+      "Invalid input": "e005",
+      "Missing dependency": "e006",
+      "Test failed": "e007"
+    },
+    "code": {
+      "Python": "c001",
+      "JavaScript": "c002",
+      "SQL": "c003",
+      "Bash": "c004",
+      "TypeScript": "c005",
+      "Rust": "c006",
+      "Go": "c007"
+    },
+    "questions": {
+      "how are you": "q001",
+      "what is this": "q002",
+      "why did that happen": "q003",
+      "can you help me": "q004",
+      "how do I": "q005",
+      "what should I do": "q006"
+      "is this correct": "q007",
+      "any suggestions": "q008"
+    }
+  }
+}

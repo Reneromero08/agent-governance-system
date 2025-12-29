@@ -14,7 +14,7 @@ sys.path.insert(0, str(PROJECT_ROOT / "CATALYTIC-DPT"))
 from PIPELINES.pipeline_runtime import _slug  # type: ignore
 from PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 
-from TOOLS.intent import generate_intent
+from TOOLS.utilities.intent import generate_intent
 
 
 def _repo_rel(path: Path) -> str:

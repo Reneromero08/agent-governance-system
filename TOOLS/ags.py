@@ -34,7 +34,7 @@ from PRIMITIVES.skills import SkillRegistry  # type: ignore
 
 from jsonschema import Draft7Validator, RefResolver
 
-from TOOLS.intent import generate_intent
+from TOOLS.utilities.intent import generate_intent
 
 
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
