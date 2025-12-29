@@ -1,6 +1,6 @@
-# Research Index
+# Inbox Index
 
-This directory stores non-binding research and exploratory notes. It is optional input and never overrides canon.
+This directory stores new research, reports, and roadmaps for user approval.
 
 ## Purpose
 
@@ -17,6 +17,6 @@ This directory stores non-binding research and exploratory notes. It is optional
 
 Inbox → User Approval → Correct Area
 
-## No authority rule
+## Authority rule
 
-Inbox is for user approval. All new research, reports, and roadmaps must go through user approval before being moved to the correct area.
+All new research, reports, and roadmaps must go through user approval before being moved to the correct area.

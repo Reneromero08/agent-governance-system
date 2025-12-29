@@ -1,0 +1,70 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\CCC 2.0\AI\agent-governance-system\CATALYTIC-DPT
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 3 items
+
+CATALYTIC-DPT\TESTBENCH\test_ags_phase6_capability_pins.py ..F           [100%]
+
+================================== FAILURES ===================================
+________ test_verify_rejects_unpinned_even_if_pipeline_artifact_exists ________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-153/test_verify_rejects_unpinned_e0')
+
+    def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-verify-bypass"
+        pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_id = "pipeline-ags-capability-pins-verify-bypass-s1-a1"
+        run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / run_id
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE66\n")
+            task_path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "ant-worker-copy",
+                        "task_type": "file_operation",
+                        "operation": "copy",
+                        "verify_integrity": True,
+                        "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                        "files": [{"source": str(in_path), "destination": str(out_path)}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+    
+            # Create a real run with the pinned capability (using default pins).
+            plan_ok = tmp_path / "plan_ok.json"
+            plan_ok.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+            r_route_ok = subprocess.run(
+                [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+            )
+>           assert r_route_ok.returncode == 0, r_route_ok.stdout + r_route_ok.stderr
+E           AssertionError: ERROR: CAPABILITY_NOT_PINNED
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags',...--pipeline-id', 'ags-capability-pins-verify-bypass'], returncode=2, stdout='', stderr='ERROR: CAPABILITY_NOT_PINNED\n').returncode
+
+CATALYTIC-DPT\TESTBENCH\test_ags_phase6_capability_pins.py:170: AssertionError
+=========================== short test summary info ===========================
+FAILED CATALYTIC-DPT\TESTBENCH\test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists
+========================= 1 failed, 2 passed in 2.29s =========================

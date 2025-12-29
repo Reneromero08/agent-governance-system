@@ -26,7 +26,7 @@ except ImportError:
 tests_passed = 0
 tests_failed = 0
 
-def test(name):
+def cortex_test(name):
     """Decorator for test functions."""
     def decorator(func):
         def wrapper():
@@ -49,7 +49,7 @@ def test(name):
     return decorator
 
 
-@test("EmbeddingEngine initialization")
+@cortex_test("EmbeddingEngine initialization")
 def test_embedding_init():
     from embeddings import EmbeddingEngine
 
@@ -59,7 +59,7 @@ def test_embedding_init():
     print(f"    Model: {engine.MODEL_ID}, Dimensions: {engine.DIMENSIONS}")
 
 
-@test("Single text embedding")
+@cortex_test("Single text embedding")
 def test_single_embedding():
     from embeddings import EmbeddingEngine
 
@@ -76,7 +76,7 @@ def test_single_embedding():
     print(f"    Sample values: {embedding[:5]}")
 
 
-@test("Batch embedding")
+@cortex_test("Batch embedding")
 def test_batch_embedding():
     from embeddings import EmbeddingEngine
 
@@ -103,7 +103,7 @@ def test_batch_embedding():
     assert sim_1_3 > sim_1_2, "Related sentences should have higher similarity"
 
 
-@test("Embedding serialization")
+@cortex_test("Embedding serialization")
 def test_serialization():
     from embeddings import EmbeddingEngine
 
@@ -124,7 +124,7 @@ def test_serialization():
     print(f"    Match after deserialization: {np.allclose(original, restored)}")
 
 
-@test("Cosine similarity")
+@cortex_test("Cosine similarity")
 def test_cosine_similarity():
     from embeddings import EmbeddingEngine
 
@@ -150,7 +150,7 @@ def test_cosine_similarity():
     print(f"    Unrelated text similarity: {sim_unrelated:.4f}")
 
 
-@test("Batch similarity computation")
+@cortex_test("Batch similarity computation")
 def test_batch_similarity():
     from embeddings import EmbeddingEngine
 
@@ -172,7 +172,7 @@ def test_batch_similarity():
     print(f"    Similarities: {similarities}")
 
 
-@test("Vector schema creation")
+@cortex_test("Vector schema creation")
 def test_schema_creation():
     from vector_indexer import VectorIndexer
 
@@ -207,7 +207,7 @@ def test_schema_creation():
         shutil.rmtree(temp_dir)
 
 
-@test("Vector indexing")
+@cortex_test("Vector indexing")
 def test_vector_indexing():
     from vector_indexer import VectorIndexer
     import hashlib
@@ -261,7 +261,7 @@ def test_vector_indexing():
         shutil.rmtree(temp_dir)
 
 
-@test("Semantic search")
+@cortex_test("Semantic search")
 def test_semantic_search():
     from vector_indexer import VectorIndexer
     from semantic_search import SemanticSearch
@@ -325,7 +325,7 @@ def test_semantic_search():
         shutil.rmtree(temp_dir)
 
 
-@test("Empty text handling")
+@cortex_test("Empty text handling")
 def test_empty_text():
     from embeddings import EmbeddingEngine
 

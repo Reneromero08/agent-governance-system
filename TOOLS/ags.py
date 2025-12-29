@@ -801,7 +801,7 @@ def main(argv: List[str] | None = None) -> int:
     run_p.add_argument("--strict", action="store_true", help="Strict verification (always on)")
     run_p.add_argument("--repo-write", action="store_true", help="Derived mode indicates repo-write behavior")
     run_p.add_argument("--allow-repo-write", action="store_true", help="Allow repo writes when mode is repo-write")
-    run_p.add_argument("--allow-dirty", action="store_true", help="Allow dirty tracked files in preflight")
+    run_p.add_argument("--allow-dirty-tracked", action="store_true", help="Allow dirty tracked files in preflight")
     run_p.add_argument("--skip-preflight", action="store_true", help="Skip preflight check (dangerous)")
 
     preflight_p = sub.add_parser("preflight", help="Emit JSON preflight verdict (fail-closed)")
@@ -836,7 +836,7 @@ def main(argv: List[str] | None = None) -> int:
                 strict=args.strict,
                 repo_write=args.repo_write,
                 allow_repo_write=args.allow_repo_write,
-                allow_dirty=args.allow_dirty,
+                allow_dirty=args.allow_dirty_tracked,
                 skip_preflight=args.skip_preflight,
             )
         if args.cmd == "preflight":
