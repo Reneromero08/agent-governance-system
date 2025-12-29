@@ -8,7 +8,7 @@ from MCP.server import AGSMCPServer
 
 server = AGSMCPServer()
 
-def test_tool(name, args={}):
+def _run_tool_test(name, args={}):
     response = server.handle_request({
         "jsonrpc": "2.0",
         "id": 1,
@@ -26,7 +26,7 @@ print("=" * 60)
 
 # Test critic_run
 print("\n--- critic_run ---")
-content, error = test_tool("critic_run")
+content, error = _run_tool_test("critic_run")
 try:
     result = json.loads(content)
     print(f"✓ Passed: {result['passed']}")
@@ -35,7 +35,7 @@ except:
 
 # Test commit_ceremony
 print("\n--- commit_ceremony ---")
-content, error = test_tool("commit_ceremony")
+content, error = _run_tool_test("commit_ceremony")
 try:
     result = json.loads(content)
     print(f"✓ Critic passed: {result['checklist']['1_failsafe_critic']['passed']}")
@@ -47,7 +47,7 @@ except:
 
 # Test adr_create (don't actually create one in test)
 print("\n--- adr_create (validation only) ---")
-content, error = test_tool("adr_create", {"title": ""})  # Should fail
+content, error = _run_tool_test("adr_create", {"title": ""})  # Should fail
 if error:
     print("✓ Correctly rejects empty title")
 else:
