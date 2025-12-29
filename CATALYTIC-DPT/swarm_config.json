@@ -3,16 +3,22 @@
     "description": "Swarm configuration - defines which models fill each role",
     "roles": {
         "president": {
-            "description": "Main chat orchestrator - high-level strategy and governance",
-            "current_implementation": "Claude",
-            "cli": "Antigravity / VSCode Chat",
-            "notes": "Token-limited, delegates to Governor"
+            "description": "God - The User - Final authority and source of intent",
+            "current_implementation": "Human (User)",
+            "cli": "VSCode / Terminal",
+            "notes": "Ultimate decision maker, can override any agent"
         },
         "governor": {
-            "description": "CLI manager - breaks tasks into subtasks, dispatches to Ants",
-            "current_implementation": "Gemini 3.0",
-            "cli": "gemini --experimental-acp",
-            "notes": "Runs in VSCode terminal"
+            "description": "SOTA AI - Complex decisions, strategic planning, governance",
+            "current_implementation": "Claude Sonnet 4.5 (Main Agent)",
+            "cli": "Antigravity / VSCode Chat",
+            "notes": "Most capable model, handles complex tasks, delegates to Manager"
+        },
+        "manager": {
+            "description": "CLI coordinator - breaks tasks into subtasks, dispatches to Ants",
+            "current_implementation": "Qwen 2.5:7b (via Kilo CLI)",
+            "cli": "kilo",
+            "notes": "Cannot do complex tasks, delegates mechanical work to Ants"
         },
         "ant_worker": {
             "description": "Stateless executor - follows templates, no creativity",
@@ -24,14 +30,20 @@
     },
     "alternatives": {
         "president": [
-            "Claude",
-            "GPT",
-            "Gemini Pro"
+            "Human (always)",
+            "No alternatives - humans only"
         ],
         "governor": [
-            "Gemini",
-            "Claude",
-            "GPT"
+            "Claude Sonnet 4.5 (SOTA)",
+            "Claude Opus 4.5",
+            "GPT-4",
+            "Gemini Pro"
+        ],
+        "manager": [
+            "Qwen 2.5:7b",
+            "Qwen 2.5:14b",
+            "Llama 3.1:8b",
+            "Gemini Flash"
         ],
         "ant_worker": [
             "Grok",

@@ -31,7 +31,7 @@ if errorlevel 1 (
 )
 
 REM Build command
-set "CMD=%PYTHON% "%SKILL_DIR%qwen_cli.py""
+set "CMD=%PYTHON% "%SKILL_DIR%run.py""
 
 REM No arguments - interactive mode
 if "%~1"=="" (

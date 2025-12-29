@@ -111,7 +111,14 @@ def main():
         sys.exit(1)
 
     # Filter and format output
-    now = datetime.now()
+    if "reference_time" in params:
+        try:
+            now = datetime.fromisoformat(params["reference_time"])
+        except ValueError:
+            now = datetime.now()
+    else:
+        now = datetime.now()
+        
     cutoff = now - timedelta(seconds=active_within_seconds)
     
     active_agents = []

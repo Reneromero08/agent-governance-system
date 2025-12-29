@@ -116,6 +116,50 @@ class CortexQuery:
         """Find related files (placeholder for embedding search)."""
         return []
 
+    def get_metadata(self, key: str) -> Optional[str]:
+        """Get metadata value from cortex.db."""
+        path = CORTEX_DB_PATH
+        if not path.exists():
+            return None
+        try:
+            with sqlite3.connect(str(path)) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.execute("SELECT value FROM metadata WHERE key = ?", (key,))
+                row = cursor.fetchone()
+                if row:
+                    val = row['value']
+                    # Some values are JSON strings, some are plain.
+                    # The caller typically expects the raw value or parsed? 
+                    # Looking at usage: cortex_query.get_metadata("canon_version")
+                    # In schema.sql, canon_version is a string.
+                    # JSON decoding might be risky if it's just a string like "2.0.0" (which is valid JSON string "2.0.0"?)
+                    # Let's try to decode, fallback to raw.
+                    try:
+                        return json.loads(val)
+                    except (json.JSONDecodeError, TypeError):
+                        return val
+                return None
+        except Exception:
+            return None
+
+    def find_entities_containing_path(self, path_query: str) -> List[Dict]:
+        """Find entities where path contains substring (cortex.db)."""
+        path = CORTEX_DB_PATH
+        if not path.exists():
+            return []
+        try:
+            with sqlite3.connect(str(path)) as conn:
+                conn.row_factory = sqlite3.Row
+                cursor = conn.execute("SELECT * FROM entities WHERE path LIKE ?", (f"%{path_query}%",))
+                results = []
+                for row in cursor.fetchall():
+                    res = dict(row)
+                    res['paths'] = {'source': row['path']}
+                    results.append(res)
+                return results
+        except Exception:
+            return []
+
 def main():
     import argparse
     parser = argparse.ArgumentParser(description="Query Cortex System 1")
@@ -137,6 +181,14 @@ def main():
         summary = cq.get_summary(top_path)
         if summary:
             print(f"\nSummary for {top_path}:\n{summary}")
+
+def get_metadata(key: str) -> Optional[str]:
+    """Module-level wrapper for get_metadata."""
+    return CortexQuery().get_metadata(key)
+
+def find_entities_containing_path(path_query: str) -> List[Dict]:
+    """Module-level wrapper for find_entities_containing_path."""
+    return CortexQuery().find_entities_containing_path(path_query)
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,40 @@
+#!/usr/bin/env python3
+"""
+Pre-commit hook for INBOX policy enforcement.
+
+Runs before git commits to ensure all human-readable documents
+are stored in INBOX with content hashes.
+"""
+
+import subprocess
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+
+
+def main():
+    """Run pre-commit checks."""
+    print("[PRE-COMMIT] Running INBOX policy check...")
+
+    # Run INBOX policy check
+    result = subprocess.run(
+        [sys.executable, "TOOLS/check_inbox_policy.py"],
+        cwd=PROJECT_ROOT,
+        capture_output=True,
+        text=True
+    )
+
+    if result.returncode != 0:
+        print()
+        print("[PRE-COMMIT] INBOX policy check FAILED")
+        print(result.stdout)
+        print()
+        print("Commit blocked. Fix violations and try again.")
+        sys.exit(1)
+
+    print(result.stdout)
+
+
+if __name__ == "__main__":
+    main()

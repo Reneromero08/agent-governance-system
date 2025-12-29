@@ -96,12 +96,20 @@ class System1DB:
         
         # Check if already indexed
         cursor = self.conn.execute(
-            "SELECT file_id FROM files WHERE path = ? AND content_hash = ?",
-            (path, content_hash)
+            "SELECT file_id, content_hash FROM files WHERE path = ?",
+            (path,)
         )
         existing = cursor.fetchone()
+        
         if existing:
-            return existing['file_id']
+            if existing['content_hash'] == content_hash:
+                return existing['file_id']
+            else:
+                # Content changed: remove old entry (cascade delete should handle chunks if schema supported it, 
+                # but we probably need to delete manually or use DELETE ON CASCADE)
+                # For now, explicit delete
+                self.conn.execute("DELETE FROM files WHERE file_id = ?", (existing['file_id'],))
+                self.conn.execute("DELETE FROM chunks WHERE file_id = ?", (existing['file_id'],))
             
         # Insert file record
         cursor = self.conn.execute(

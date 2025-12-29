@@ -209,6 +209,87 @@ class MyDB:
 
 **Rationale**: Prevents file handle leaks, ensures transactions commit, avoids Windows file locking issues.
 
+### 7. Never Bypass Tests
+**Rule**: Never use `--no-verify` or skip pre-commit hooks. Fix the root cause.
+
+```bash
+# ❌ FORBIDDEN
+git commit --no-verify -m "quick fix"
+
+# ✅ REQUIRED
+# 1. Identify why hook fails
+# 2. Fix the underlying issue
+# 3. Commit normally
+git commit -m "fix: proper commit with tests passing"
+```
+
+**Rationale**: Bypassed tests lead to broken CI. The 2025-12-28 `export_to_json` incident occurred because a function was assumed to exist but was never implemented. Pre-commit hooks exist to catch such issues early.
+
+### 8. Cross-Platform Scripts
+**Rule**: All shell scripts must work on both Linux/macOS and Windows (Git Bash).
+
+**Requirements**:
+- Python: Use `python3 || python` fallback (Windows lacks `python3`)
+- Paths: Use forward slashes or `Path()` objects
+- Line endings: Configure `.gitattributes` for `* text=auto`
+- Commands: Avoid `command -v` (unreliable in Git's Windows shell)
+
+```bash
+# ✅ Cross-platform Python detection
+if python3 --version >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif python --version >/dev/null 2>&1; then
+    PYTHON_CMD="python"
+else
+    echo "ERROR: No Python found"; exit 1
+fi
+```
+
+**Rationale**: CI runs on Linux but developers use Windows. Scripts must work everywhere.
+
+### 9. Interface Regression Tests
+**Rule**: When Module A imports and calls Module B, there MUST be a test verifying B's interface.
+
+```python
+# ✅ REQUIRED: test_query.py
+def test_export_to_json_exists():
+    """Verify export_to_json function exists in query module."""
+    import query as cortex_query
+    assert hasattr(cortex_query, 'export_to_json'), \
+        "query module must have export_to_json() (required by cortex.build.py)"
+```
+
+**Rationale**: The 2025-12-28 CI failure occurred because `cortex.build.py` called `query.export_to_json()` which was never implemented. A simple existence test would have caught this before merge.
+
+### 10. Amend Over Pollute
+**Rule**: When actively fixing the same issue across multiple iterations, amend the previous commit instead of creating new ones.
+
+```bash
+# ❌ FORBIDDEN (commit pollution)
+git commit -m "fix: attempt 1"
+git commit -m "fix: attempt 2"  
+git commit -m "fix: final fix"
+
+# ✅ REQUIRED (clean history)
+git commit -m "fix: initial attempt"
+# ...make more fixes...
+git add .
+git commit --amend -m "fix: complete solution"
+git push --force-with-lease
+```
+
+**When to Amend**:
+- Same logical fix, multiple iterations
+- Not yet reviewed by others
+- Within the same work session
+
+**When NOT to Amend**:
+- Different logical changes
+- Already reviewed/merged
+- Shared branches with active collaborators
+
+**Rationale**: Commit history should tell a clear story. "fix, fix again, really fix, final fix" obscures intent. One clean commit per logical change.
+
 ## Authority Boundaries
 
 ### What Agents CAN Do
