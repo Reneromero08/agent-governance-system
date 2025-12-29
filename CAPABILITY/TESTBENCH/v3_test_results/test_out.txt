@@ -1,0 +1,43 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collected 1 item
+
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/swarm-p1.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/swarm-p1.txt').write_text('swarm-p1')"]
+CAPABILITY\TESTBENCH\test_swarm_runtime.py [catalytic] Starting catalytic run: pipeline-swarm-p1-s1-a1
+[catalytic] Phase 0: Preflight validation...
+[catalytic] Preflight passed: JobSpec is valid
+[catalytic] Phase 1: Capturing pre-snapshots...
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\swarm_test\domain (0 files)
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/swarm-p1.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/swarm-p1.txt').write_text('swarm-p1')
+[catalytic] Command exited with code 0
+[catalytic] Phase 3: Capturing post-snapshots...
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\swarm_test\domain (0 files)
+[catalytic] Phase 4: Verifying restoration...
+[catalytic] SUCCESS: Catalytic domains fully restored
+[catalytic] Phase 5: Writing canonical artifact set...
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-swarm-p1-s1-a1
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+[catalytic] Run completed successfully with verified restoration.
+DEBUG: Swarm failure: {'ok': False, 'code': 'DAG_NODE_VERIFY_FAIL', 'details': {'node': 'swarm-p1', 'pipeline_code': 'STEP_RUN_INVALID'}}
+F
+
+================================== FAILURES ===================================
+________________________ test_swarm_runtime_happy_path ________________________
+CAPABILITY\TESTBENCH\test_swarm_runtime.py:128: in test_swarm_runtime_happy_path
+    assert res.get("ok") is True
+E   AssertionError: assert False is True
+E    +  where False = <built-in method get of dict object at 0x0000018B707F8880>('ok')
+E    +    where <built-in method get of dict object at 0x0000018B707F8880> = {'code': 'DAG_NODE_VERIFY_FAIL', 'details': {'node': 'swarm-p1', 'pipeline_code': 'STEP_RUN_INVALID'}, 'ok': False}.get
+============================== warnings summary ===============================
+CAPABILITY\PRIMITIVES\ledger.py:9
+CAPABILITY\PRIMITIVES\ledger.py:9
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\ledger.py:9: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_swarm_runtime.py::test_swarm_runtime_happy_path
+======================== 1 failed, 2 warnings in 0.49s ========================

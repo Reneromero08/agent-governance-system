@@ -1,0 +1,17 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.1, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+collecting ... collected 1 item
+
+CAPABILITY/TESTBENCH/test_swarm_runtime.py::test_swarm_runtime_happy_path PASSED [100%]
+
+============================== warnings summary ===============================
+CAPABILITY\PRIMITIVES\ledger.py:9
+CAPABILITY\PRIMITIVES\ledger.py:9
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\ledger.py:9: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================== 1 passed, 2 warnings in 1.15s ========================

@@ -1,0 +1,166 @@
+diff --git a/HANDOFF.md b/HANDOFF.md
+new file mode 100644
+index 0000000..bfc6789
+--- /dev/null
++++ b/HANDOFF.md
+@@ -0,0 +1,3 @@
++# Handoff
++
++Policy proof receipts enable traceable governance by embedding preflight/admission verdicts in each pipeline receipt. New tests and changelog entries capture the update so downstream agents can rely on deterministic proofs.
+diff --git a/debug_revocation.py b/debug_revocation.py
+index 83d3196..9cc09fb 100644
+--- a/debug_revocation.py
++++ b/debug_revocation.py
+@@ -1,41 +1,126 @@
+-
+-import os
+-import sys
+ import json
++import os
++import shutil
+ import subprocess
++import sys
++import hashlib
+ from pathlib import Path
+ 
+-REPO_ROOT = Path.cwd()
++# Repo root: .
++REPO_ROOT = Path(__file__).resolve().parent
+ CAP = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+ 
+-def test_manual():
++def _run(cmd, env):
++    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
++
++def main():
+     tmp_path = REPO_ROOT / "temp_reproduce"
+-    tmp_path.mkdir(exist_ok=True)
++    if tmp_path.exists():
++        shutil.rmtree(tmp_path)
++    tmp_path.mkdir()
++
++    # 1. Patch CAPABILITIES to use current python and update hashes for Windows compatibility
++    caps_src = REPO_ROOT / "CATALYTIC-DPT" / "CAPABILITIES.json"
++    print(f"DEBUG: Reading from {caps_src}")
++    caps_data = json.loads(caps_src.read_text(encoding="utf-8"))
++    patched_caps = {}
++    old_to_new_hash = {}
++    
++    print(f"DEBUG: Found {len(caps_data.get('capabilities', {}))} capabilities in source")
++    for old_hash, cap_entry in caps_data["capabilities"].items():
++        adapter = cap_entry["adapter"]
++        if adapter["command"][0] == "python3":
++            adapter["command"][0] = sys.executable
++        
++        # Re-compute hash
++        new_hash = hashlib.sha256(json.dumps(adapter, sort_keys=True, separators=( ",", ":")).encode("utf-8")).hexdigest()
++        cap_entry["adapter_spec_hash"] = new_hash
++        patched_caps[new_hash] = cap_entry
++        old_to_new_hash[old_hash] = new_hash
+     
+-    revokes_path = tmp_path / "REVOKES.json"
+-    revokes_path.write_bytes(json.dumps({"revokes_version": "1.0.0", "revoked_capabilities": [CAP]}, sort_keys=True, separators=(",", ":")).encode("utf-8"))
++    caps_data["capabilities"] = patched_caps
++    (tmp_path / "CAPABILITIES.json").write_text(json.dumps(caps_data, sort_keys=True, separators=( ",", ":")), encoding="utf-8")
++    print(f"DEBUG: Patched {len(patched_caps)} capabilities")
++    
++    # Patch PINS
++    pins_data = json.loads((REPO_ROOT / "CATALYTIC-DPT" / "CAPABILITY_PINS.json").read_text(encoding="utf-8"))
++    pins_data["allowed_capabilities"] = [old_to_new_hash.get(h, h) for h in pins_data["allowed_capabilities"]]
++    (tmp_path / "PINS.json").write_text(json.dumps(pins_data, sort_keys=True, separators=( ",", ":")), encoding="utf-8")
+ 
+-    plan_path = tmp_path / "plan.json"
+-    plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}))
++    current_cap = old_to_new_hash.get(CAP, CAP)
+ 
+-    env = dict(os.environ)
+-    # Only override Revokes, use real Caps/Pins from repo
+-    env["CATALYTIC_REVOKES_PATH"] = str(revokes_path)
++    pipeline_id = "test-historical-pass"
+     
+-    cmd = [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", "debug-fail"]
+-    
+-    print(f"Running: {cmd}")
+-    print(f"REVOKES_PATH: {env['CATALYTIC_REVOKES_PATH']}")
++    # Cleanup previous runs if any
++    pdir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
++    if pdir.exists():
++        shutil.rmtree(pdir)
++    pdir_new = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / "test-new-fail"
++    if pdir_new.exists():
++        shutil.rmtree(pdir_new)
++
++    plan_path = tmp_path / "plan.json"
++    plan_path.write_text(json.dumps({
++        "plan_version": "1.0", 
++        "steps": [
++            {
++                "step_id": "s1", 
++                "capability_hash": current_cap
++            }
++        ]
++    }))
+     
+-    r = subprocess.run(cmd, env=env, capture_output=True, text=True, cwd=str(REPO_ROOT))
+-    print(f"RC: {r.returncode}")
+-    print(f"STDOUT: {r.stdout}")
+-    print(f"STDERR: {r.stderr}")
++    empty_revokes = tmp_path / "REVOKES.json"
++    empty_revokes.write_bytes(json.dumps({"revokes_version": "1.0.0", "revoked_capabilities": []}, sort_keys=True, separators=( ",", ":")).encode("utf-8"))
++
++    # Env 1: Route and Run allowed
++    env1 = dict(os.environ)
++    env1["CATALYTIC_CAPABILITIES_PATH"] = str(tmp_path / "CAPABILITIES.json")
++    env1["CATALYTIC_PINS_PATH"] = str(tmp_path / "PINS.json")
++    env1["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
++
++    print("--- 1. Routing pipeline ---")
++    cmd_route = [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id]
++    r1 = _run(cmd_route, env1)
++    if r1.returncode != 0:
++        print(f"Route failed: {r1.stderr}")
++        return
++    print("Route OK")
++
++    print("--- 2. Running pipeline ---")
++    # Use catalytic.py directly to bypass AGS preflight/admission for this test
++    cmd_run = [sys.executable, str(REPO_ROOT / "TOOLS" / "catalytic.py"), "pipeline", "run", "--pipeline-id", pipeline_id]
++    r2 = _run(cmd_run, env1)
++    if r2.returncode != 0:
++        print(f"Run failed: {r2.stdout}\n{r2.stderr}")
++        return
++    print("Run OK")
++
++    # Now revoke CAP
++    print("--- 3. Revoking capability ---")
++    revoked_revokes = tmp_path / "REVOKES.json" # Overwrite
++    revoked_revokes.write_bytes(json.dumps({"revokes_version": "1.0.0", "revoked_capabilities": [current_cap]}, sort_keys=True, separators=( ",", ":")).encode("utf-8"))
++
++    # Env 2: CAP is revoked
++    env2 = env1.copy()
+     
+-    if "REVOKED_CAPABILITY" in r.stderr:
+-        print("SUCCESS: Revocation detected.")
++    print("--- 4. Verifying historical pipeline (should pass because of snapshot) ---")
++    # Verify using catalytic.py pipeline verify
++    cmd_verify = [sys.executable, str(REPO_ROOT / "TOOLS" / "catalytic.py"), "pipeline", "verify", "--pipeline-id", pipeline_id]
++    r3 = _run(cmd_verify, env2)
++    if r3.returncode != 0:
++        print(f"Verification failed (unexpected): {r3.stdout}\n{r3.stderr}")
++    else:
++        print("Verification OK (Historical pass works!)")
++
++    print("--- 5. Attempting to route new pipeline with revoked CAP (should fail) ---")
++    pipeline_id_new = "test-new-fail"
++    cmd_route_new = [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id_new]
++    r4 = _run(cmd_route_new, env2)
++    if r4.returncode == 0:
++        print("New route succeeded (unexpectedly!)")
+     else:
+-        print("FAILURE: Revocation NOT detected.")
++        print(f"New route failed as expected: {r4.stderr or r4.stdout}")
+ 
+ if __name__ == "__main__":
+-    test_manual()
++    main()
+\ No newline at end of file

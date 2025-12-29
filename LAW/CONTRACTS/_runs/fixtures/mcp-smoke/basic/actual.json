@@ -1,0 +1,8 @@
+{
+  "ok": true,
+  "returncode": 0,
+  "entrypoint": "CONTRACTS/ags_mcp_entrypoint.py",
+  "args": [
+    "--test"
+  ]
+}

@@ -1,0 +1,11 @@
+M	CATALYTIC-DPT/PIPELINES/pipeline_runtime.py
+M	CATALYTIC-DPT/PIPELINES/pipeline_verify.py
+M	CATALYTIC-DPT/TESTBENCH/test_ags_phase6_capability_revokes.py
+M	CORTEX/_generated/CORTEX_META.json
+A	HANDOFF.md
+M	TOOLS/catalytic_runtime.py
+M	debug_revocation.py
+D	temp_reproduce/CAPABILITIES.json
+D	temp_reproduce/PINS.json
+D	temp_reproduce/REVOKES.json
+D	temp_reproduce/plan.json

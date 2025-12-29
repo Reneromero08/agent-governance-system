@@ -1,0 +1,25 @@
+{
+  "proof_version": "1.0.0",
+  "run_id": "adv-domain-roots",
+  "timestamp": "CATALYTIC-DPT-02_CONFIG",
+  "catalytic_domains": [
+    "CONTRACTS/_runs/_tmp/adversarial/domain_roots_tamper/domain"
+  ],
+  "pre_state": {
+    "domain_root_hash": "1585cfb6a906b000bd6efde3a594532c70848ed7e55238dadd0a9fe449388e85",
+    "file_manifest": {
+      "file.txt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "post_state": {
+    "domain_root_hash": "1585cfb6a906b000bd6efde3a594532c70848ed7e55238dadd0a9fe449388e85",
+    "file_manifest": {
+      "file.txt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  },
+  "restoration_result": {
+    "verified": true,
+    "condition": "RESTORED_IDENTICAL"
+  },
+  "proof_hash": "fdd74b76e1d405a35b8e0271c8537f272318110630b3809b19b9544bf0b5babc"
+}

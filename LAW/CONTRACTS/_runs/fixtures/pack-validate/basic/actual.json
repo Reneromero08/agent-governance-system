@@ -1,0 +1,10 @@
+{
+  "description": "Test pack-validate with non-existent pack",
+  "errors": [
+    "Pack not found: "
+  ],
+  "pack_path": "",
+  "stats": {},
+  "valid": false,
+  "warnings": []
+}

@@ -1,0 +1,2 @@
+{"symbol_id": "@TEST/example", "target_type": "SECTION", "target_ref": "018ddffd3037047c1a6365408e0d1ec1897bd3d2fdeffb0d625aa7cee3c2e900", "default_slice": "head(100)", "created_at": "2025-12-29T15:27:04.242132Z", "updated_at": "2025-12-29T15:27:04.242132Z"}
+{"symbol_id": "@TEST/duplicate", "target_type": "SECTION", "target_ref": "018ddffd3037047c1a6365408e0d1ec1897bd3d2fdeffb0d625aa7cee3c2e900", "default_slice": null, "created_at": "2025-12-29T15:27:39.961184Z", "updated_at": "2025-12-29T15:27:39.961184Z"}

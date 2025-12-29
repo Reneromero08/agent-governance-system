@@ -1,0 +1,20 @@
+{
+  "task_id": "test-adapt",
+  "task_type": "code_adapt",
+  "run_id": "test-adapt-20251225-052737",
+  "status": "success",
+  "timestamp_start": "2025-12-25T05:27:37.597258",
+  "timestamp_end": "2025-12-25T05:27:37.598335",
+  "operations": [
+    {
+      "operation": "code_adapt",
+      "file": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_0c2lsjwr\\code.py",
+      "find": "cline",
+      "replace": "gemini",
+      "reason": "Replace with gemini",
+      "timestamp": "2025-12-25T05:27:37.598335"
+    }
+  ],
+  "errors": [],
+  "ledger_dir": "D:\\CCC 2.0\\AI\\agent-governance-system\\CATALYTIC-DPT\\CONTRACTS\\_runs\\test-adapt-20251225-052737"
+}

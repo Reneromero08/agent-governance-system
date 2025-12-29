@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+
+"""
+repo-contract-alignment skill runner.
+"""
+
+import json
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+
+
+def main(input_path: Path, output_path: Path) -> int:
+    if not ensure_canon_compat(Path(__file__).resolve().parent):
+        return 1
+    try:
+        payload = json.loads(input_path.read_text())
+    except Exception as exc:
+        print(f"Error reading input: {exc}")
+        return 1
+
+    result = {
+        "skill": "repo-contract-alignment",
+        "ok": True,
+        "input": payload,
+    }
+
+    output_path.parent.mkdir(parents=True, exist_ok=True)
+    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    print("repo-contract-alignment completed")
+    return 0
+
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: run.py <input.json> <output.json>")
+        sys.exit(1)
+    sys.exit(main(Path(sys.argv[1]), Path(sys.argv[2])))

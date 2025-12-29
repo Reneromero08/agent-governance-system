@@ -1,0 +1,10 @@
+{
+  "run_id": "pipeline-swarm-p1-s1-a1",
+  "timestamp": "CATALYTIC-DPT-02_CONFIG",
+  "intent": "swarm-p1",
+  "catalytic_domains": [
+    "LAW\\CONTRACTS\\_runs\\_tmp\\swarm_test\\domain"
+  ],
+  "exit_code": 0,
+  "restoration_verified": true
+}

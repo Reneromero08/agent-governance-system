@@ -1,0 +1,16 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 6 items
+
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_determinism_catalytic_dpt PASSED [ 16%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits0-PACK_LIMIT_EXCEEDED:max_total_bytes] PASSED [ 33%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits1-PACK_LIMIT_EXCEEDED:max_entry_bytes] PASSED [ 50%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits2-PACK_LIMIT_EXCEEDED:max_entries] PASSED [ 66%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_repo_state_manifest_validation_and_dedup PASSED [ 83%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_verify_manifest_detects_tamper PASSED [100%]
+
+============================== 6 passed in 5.20s ==============================

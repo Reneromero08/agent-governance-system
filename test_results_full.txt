@@ -1,0 +1,844 @@
+============================= test session starts =============================
+platform win32 -- Python 3.13.1, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python313\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+plugins: anyio-4.12.0
+collecting ... collected 197 items
+
+CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py::test_spectrum02_emission PASSED [  0%]
+CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py::test_spectrum02_resume PASSED [  1%]
+CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py::test_spectrum03_chain PASSED [  1%]
+CAPABILITY/TESTBENCH/spectrum/test_validator_version_integrity.py::test_validator_version_integrity PASSED [  2%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_corruption_detected_by_hash_toolbelt PASSED [  2%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_truncation_detected_by_hash_toolbelt PASSED [  3%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_partial_write_never_treated_as_present PASSED [  3%]
+CAPABILITY/TESTBENCH/test_adversarial_ledger.py::test_ledger_rejects_malformed_json_line PASSED [  4%]
+CAPABILITY/TESTBENCH/test_adversarial_ledger.py::test_ledger_rejects_truncated_last_line_mid_byte PASSED [  4%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_normalize_relpath_rejects_traversal_and_absolute PASSED [  5%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_normalize_relpath_normalizes_separators_and_dot PASSED [  5%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_merkle_rejects_non_normalized_paths PASSED [  6%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_fails_closed_on_partial_state_json PASSED [  6%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_fails_closed_on_inconsistent_completed_step_state PASSED [  7%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_resume_never_skips_a_missing_step_record PASSED [  7%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_proof_hash_tamper_fails_closed_deterministically PASSED [  8%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_output_hash_manifest_tamper_fails_closed PASSED [  8%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_domain_roots_tamper_rejected_by_cmp01_validator PASSED [  9%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_happy_path_deterministic PASSED [  9%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_missing_command PASSED [ 10%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_hidden_side_effects PASSED [ 10%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_unbounded_deref_caps PASSED [ 11%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_non_normalized_paths PASSED [ 11%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_nondeterministic_flag_strict PASSED [ 12%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_route_deterministic_bytes FAILED [ 12%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_run_calls_verify_ok FAILED [ 13%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_pipeline_run_creates_state_when_missing FAILED [ 13%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_capability_pinned_routes_and_verifies PASSED [ 14%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists FAILED [ 14%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_empty_pins FAILED [ 15%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_registry.py::test_capability_registry_happy_unknown_and_tamper PASSED [ 15%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_revoked_capability_rejects_at_route PASSED [ 16%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability PASSED [ 16%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_passes_when_not_revoked PASSED [ 17%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_historical_pipeline_verifies_after_revocation PASSED [ 17%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py::test_capability_versioning_in_place_upgrade_rejected FAILED [ 18%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_happy_echo PASSED [ 18%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_stderr FAILED [ 19%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_timeout PASSED [ 19%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_bloat PASSED [ 20%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_malformed_output PASSED [ 20%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_crash PASSED [ 21%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_duplicate_capability_hash_rejects PASSED [ 21%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_noncanonical_json_rejects PASSED [ 22%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_tamper_detected_fail_closed PASSED [ 22%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_router_happy_path FAILED [ 23%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_route_rejects_missing_step_command PASSED [ 23%]
+CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py::test_ags_plan_emits_router_receipts PASSED [ 24%]
+CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py::test_ags_plan_over_output_fails_closed FAILED [ 24%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_canonical_artifact_set_required PASSED [ 25%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_status_state_machine PASSED [ 25%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_proof_written_last PASSED [ 26%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_bytes_same_bytes_same_hash PASSED [ 26%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_bytes_idempotent_does_not_change_bytes PASSED [ 27%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_stream_matches_put_bytes PASSED [ 27%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_large_stream_roundtrip PASSED [ 28%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_deterministic_object_path_across_instances PASSED [ 28%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_reject_invalid_hash_and_missing_hash FAILED [ 29%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_normalize_relpath_accepts_and_normalizes PASSED [ 29%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_normalize_relpath_rejects_absolute_and_traversal PASSED [ 30%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_system1_db PASSED  [ 30%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_cortex_indexer PASSED [ 31%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_search_functionality PASSED [ 31%]
+CAPABILITY/TESTBENCH/test_demo_memoization_hash_reuse.py::test_phase2_demo_artifacts_are_falsifiable PASSED [ 32%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_creates_ledger_entry PASSED [ 32%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_records_exact_bounds PASSED [ 33%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_determinism PASSED [ 34%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_no_run_context_skips_logging PASSED [ 34%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_all_commands PASSED [ 35%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_schema_conformance PASSED [ 35%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_roadmap_deliverables_exist PASSED [ 36%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_canon_mentions_key_concepts PASSED [ 36%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_router_receipt_artifacts_in_schema PASSED [ 37%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_policy_snapshot_logic_exists PASSED [ 37%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_swarm_schema_validity PASSED [ 38%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_read_enforces_max_bytes PASSED [ 38%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_read_range_and_clamp PASSED [ 39%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_grep_bounds PASSED      [ 39%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_describe_deterministic_and_bounded PASSED [ 40%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_ast_outline_and_truncation PASSED [ 40%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_ast_unsupported_binary PASSED [ 41%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_invalid_hash_rejects FAILED [ 41%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_single_record_one_line PASSED [ 42%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_multiple_records_order_preserved PASSED [ 42%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_deterministic_serialization_same_bytes PASSED [ 43%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_schema_rejection_missing_required_fields PASSED [ 43%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_only_enforcement_detects_truncation PASSED [ 44%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_corrupt_line_detection PASSED  [ 44%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_partial_line_detection PASSED  [ 45%]
+CAPABILITY/TESTBENCH/test_memoization.py::test_memoization_miss_then_hit_then_invalidate PASSED [ 45%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_deterministic_root_across_runs PASSED [ 46%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_path_ordering_independent_of_input_order PASSED [ 46%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_duplicate_path_rejection_via_non_normalized_collision PASSED [ 47%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_duplicate_hash_under_different_paths_rejected PASSED [ 47%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_odd_leaf_padding_correctness PASSED [ 48%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_empty_manifest_rejected PASSED [ 48%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_verify_manifest_root_true_false PASSED [ 49%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_reject_non_normalized_paths PASSED [ 49%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_reject_invalid_hashes_and_expected_root_format FAILED [ 50%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_determinism_catalytic_dpt PASSED [ 50%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits0-PACK_LIMIT_EXCEEDED:max_total_bytes] PASSED [ 51%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits1-PACK_LIMIT_EXCEEDED:max_entry_bytes] PASSED [ 51%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits2-PACK_LIMIT_EXCEEDED:max_entries] PASSED [ 52%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_repo_state_manifest_validation_and_dedup PASSED [ 52%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_verify_manifest_detects_tamper PASSED [ 53%]
+CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_binds_pipeline_proofs FAILED [ 53%]
+CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_fails_on_tampered_proof FAILED [ 54%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_receipts_created PASSED [ 54%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_over_output_fails_closed PASSED [ 55%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_stderr_fails_closed PASSED [ 55%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_malformed_plan_fails_schema_validation PASSED [ 56%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed FAILED [ 56%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_valid PASSED [ 57%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_tamper PASSED [ 57%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_reorder PASSED [ 58%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_determinism PASSED [ 58%]
+CAPABILITY/TESTBENCH/test_pipeline_dag.py::test_dag_spec_validation PASSED [ 59%]
+CAPABILITY/TESTBENCH/test_pipeline_dag.py::test_dag_topo_sort PASSED     [ 59%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ok PASSED [ 60%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_missing_artifact PASSED [ 60%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_chain_tamper PASSED [ 61%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ledger_corrupt PASSED [ 61%]
+CAPABILITY/TESTBENCH/test_pipelines.py::test_pipeline_init_is_deterministic_and_resume_safe PASSED [ 62%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_valid_jobspec_passes PASSED [ 62%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_invalid_jobspec_schema_fails PASSED [ 63%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_path_traversal_fails PASSED [ 63%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_absolute_path_fails PASSED  [ 64%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_path_not_under_allowed_root_fails PASSED [ 64%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_forbidden_path_fails PASSED [ 65%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_input_output_overlap_fails PASSED [ 65%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_multiple_errors_reported PASSED [ 66%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_empty_catalytic_domains_valid PASSED [ 67%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_empty_outputs_valid PASSED  [ 67%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_valid_proof_accepted PASSED [ 68%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_invalid_proof_rejected PASSED [ 68%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_missing_proof_rejected PASSED [ 69%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_proof_is_single_source_of_truth PASSED [ 69%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_rerun_determinism_proof_and_domain_roots_bytes_identical PASSED [ 70%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_tamper_detection_hash_mismatch PASSED [ 70%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_path_normalization_rejects_traversal PASSED [ 71%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_identical_artifacts_verified_true PASSED [ 71%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_hash_mismatch_verified_false PASSED [ 72%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_missing_files_verified_false PASSED [ 72%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_extra_files_verified_false PASSED [ 73%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_deterministic_output PASSED [ 73%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_proof_validates_against_schema PASSED [ 74%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_empty_domains_verified_true PASSED [ 74%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_rejects_when_verifier_strict_fails PASSED [ 75%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_success_emits_artifacts_and_matches_hashes PASSED [ 75%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_rollback_failure_returns_restore_rollback_failed PASSED [ 76%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_allowed_write_succeeds PASSED [ 76%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_write_text_succeeds PASSED [ 77%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_mkdir_succeeds PASSED [ 77%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_write_bytes_succeeds PASSED [ 78%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_path_normalization PASSED [ 78%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_forbidden_path_fails PASSED [ 79%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_forbidden_path_guarded_write_fails PASSED [ 79%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_write_outside_allowed_roots_fails PASSED [ 80%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_path_traversal_fails PASSED [ 80%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_absolute_path_outside_project_fails PASSED [ 81%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_multiple_allowed_roots_work PASSED [ 81%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_all_forbidden_paths_rejected PASSED [ 82%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_mkdir_forbidden_fails PASSED [ 82%]
+CAPABILITY/TESTBENCH/test_schemas.py::test_all_schemas PASSED            [ 83%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_canonical_json PASSED [ 83%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_valid_registry PASSED [ 84%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_missing_registry PASSED [ 84%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_malformed_registry PASSED [ 85%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_resolve_missing_skill PASSED [ 85%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_e2e_resolution PASSED [ 86%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_e2e_integrity_fail PASSED [ 86%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_canonicalize_json PASSED [ 87%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_bundle_root_computation PASSED [ 87%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_chain_root_computation PASSED [ 88%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_ed25519_signature_verification PASSED [ 88%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_validator_id_derivation PASSED [ 89%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_missing_artifact PASSED [ 89%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_identity_invalid PASSED [ 90%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_chain_empty PASSED [ 90%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_chain_duplicate_run PASSED [ 91%]
+CAPABILITY/TESTBENCH/test_swarm_reuse.py::test_swarm_execution_elision PASSED [ 91%]
+CAPABILITY/TESTBENCH/test_swarm_runtime.py::test_swarm_runtime_happy_path PASSED [ 92%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_api_return_shape_bundle PASSED [ 92%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_api_return_shape_chain PASSED [ 93%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_frozen_error_codes_exist PASSED [ 93%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_crypto_dep_missing_fail_closed FAILED [ 94%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_chain_dir_ordering_deterministic PASSED [ 94%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_valid_bundle_byte_identical PASSED [ 95%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_tampered_bundle_reject_same_code_and_bytes PASSED [ 95%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_chain_verification_byte_identical PASSED [ 96%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_determinism_rerun_same_inputs_same_bytes PASSED [ 96%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_valid_bundle PASSED     [ 97%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_status_failure PASSED   [ 97%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_tampered_output PASSED  [ 98%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_forbidden_artifact PASSED [ 98%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_chain_valid PASSED      [ 99%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_chain_tamper_middle PASSED [100%]
+
+================================== FAILURES ===================================
+_____________________ test_ags_route_deterministic_bytes ______________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_ags_route_deterministic_b0')
+
+    def test_ags_route_deterministic_bytes(tmp_path: Path) -> None:
+        pipeline_id = "ags-bridge-route"
+        tmp_root = "ags_bridge_route"
+        plan_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(plan_dir)
+            _rm(pipeline_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+    
+            plan_dir.mkdir(parents=True, exist_ok=True)
+            plan_path = plan_dir / "plan.json"
+            plan = _make_plan(pipeline_id=pipeline_id, tmp_root=tmp_root)
+            plan_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+    
+            r1 = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
+>           assert r1.returncode == 0, r1.stdout + r1.stderr
+E           AssertionError: ERROR: MISSING_STEP_COMMAND
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_tmp\\ags_bridge_route\\plan.json', '--pipeline-id', 'ags-bridge-route', '--runs-root', 'LAW/CONTRACTS/_runs'], returncode=2, stdout='', stderr='ERROR: MISSING_STEP_COMMAND\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_bridge.py:90: AssertionError
+________________________ test_ags_run_calls_verify_ok _________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_ags_run_calls_verify_ok0')
+
+    def test_ags_run_calls_verify_ok(tmp_path: Path) -> None:
+        pipeline_id = "ags-bridge-run-ok"
+        tmp_root = "ags_bridge_run_ok"
+        plan_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(plan_dir)
+            _rm(pipeline_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+    
+            plan_dir.mkdir(parents=True, exist_ok=True)
+            plan_path = plan_dir / "plan.json"
+            plan = _make_plan(pipeline_id=pipeline_id, tmp_root=tmp_root)
+            plan_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+    
+            r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
+>           assert r.returncode == 0, r.stdout + r.stderr
+E           AssertionError: ERROR: MISSING_STEP_COMMAND
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_tmp\\ags_bridge_run_ok\\plan.json', '--pipeline-id', 'ags-bridge-run-ok', '--runs-root', 'LAW/CONTRACTS/_runs'], returncode=2, stdout='', stderr='ERROR: MISSING_STEP_COMMAND\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_bridge.py:122: AssertionError
+________________ test_pipeline_run_creates_state_when_missing _________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_pipeline_run_creates_stat0')
+
+    def test_pipeline_run_creates_state_when_missing(tmp_path: Path) -> None:
+        pipeline_id = "ags-bridge-runtime-init-state"
+        tmp_root = "ags_bridge_runtime_init_state"
+        plan_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(plan_dir)
+            _rm(pipeline_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+    
+            plan_dir.mkdir(parents=True, exist_ok=True)
+            plan_path = plan_dir / "plan.json"
+            plan = _make_plan(pipeline_id=pipeline_id, tmp_root=tmp_root)
+            plan_path.write_text(json.dumps(plan, indent=2), encoding="utf-8")
+    
+            r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
+>           assert r.returncode == 0, r.stdout + r.stderr
+E           AssertionError: ERROR: MISSING_STEP_COMMAND
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_tmp\\ags_bridge_runtime_init_state\\plan.json', '--pipeline-id', 'ags-bridge-runtime-init-state', '--runs-root', 'LAW/CONTRACTS/_runs'], returncode=2, stdout='', stderr='ERROR: MISSING_STEP_COMMAND\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_bridge.py:151: AssertionError
+________ test_verify_rejects_unpinned_even_if_pipeline_artifact_exists ________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_verify_rejects_unpinned_e0')
+
+    def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-verify-bypass"
+        pins_path = tmp_path / "PINS.json"
+    
+        try:
+>           _rm(pipeline_dir)
+                ^^^^^^^^^^^^
+E           NameError: name 'pipeline_dir' is not defined
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:141: NameError
+_______________________ test_verify_rejects_empty_pins ________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_verify_rejects_empty_pins0')
+
+    def test_verify_rejects_empty_pins(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-empty-pins"
+        caps = [CAP]
+    
+        try:
+>           _rm(pipeline_dir)
+                ^^^^^^^^^^^^
+E           NameError: name 'pipeline_dir' is not defined
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:161: NameError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_verify_rejects_empty_pins0')
+
+    def test_verify_rejects_empty_pins(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-empty-pins"
+        caps = [CAP]
+    
+        try:
+            _rm(pipeline_dir)
+    
+            for cap in caps:
+                pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
+    
+                r_route_ok = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id], env=env)
+                assert r_route_ok.returncode == 0
+    
+                r_verify = _run([sys.executable, "-m", "CAPABILITY.TOOLS.catalytic.catalytic", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
+                if r_verify.returncode != 0:
+                    assert "CAPABILITY_NOT_PINNED" in r_verify.stdout
+        finally:
+>           if pins_path.is_file():
+               ^^^^^^^^^
+E           NameError: name 'pins_path' is not defined
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:173: NameError
+____________ test_capability_versioning_in_place_upgrade_rejected _____________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_capability_versioning_in_0')
+
+    def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-versioning"
+        step_id = "s1"
+        base_cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+    
+        # Canonical registry derived from repo CAPABILITIES, but tamper adapter bytes under same key.
+        reg_path = tmp_path / "CAPABILITIES.json"
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [base_cap]}))
+    
+        # Minimal adapter whose canonical hash is base_cap.
+        # We only need to demonstrate that changing bytes changes hash and is rejected as mismatch.
+        adapter = {"name": "x"}
+        computed = _sha256_hex(_canon(adapter))
+        # Construct a registry where key claims base_cap but adapter hashes to something else.
+        reg = {
+            "registry_version": "1.0.0",
+            "capabilities": {base_cap: {"adapter_spec_hash": computed, "adapter": adapter}}
+        }
+        reg_path.write_bytes(_canon(reg))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        plan = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": base_cap}]}
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps(plan), encoding="utf-8")
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(pipeline_dir)
+            r = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+            assert r.returncode != 0
+>           assert "capabilities version mismatch" in (r.stderr + r.stdout)
+E           AssertionError: assert 'capabilities version mismatch' in ('ERROR: CAPABILITY_HASH_MISMATCH\n' + '')
+E            +  where 'ERROR: CAPABILITY_HASH_MISMATCH\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr='ERROR: CAPABILITY_HASH_MISMATCH\n').stderr
+E            +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr='ERROR: CAPABILITY_HASH_MISMATCH\n').stdout
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_versioning_semantics.py:71: AssertionError
+______________________________ test_fail_stderr _______________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_fail_stderr0')
+
+    def test_fail_stderr(tmp_path):
+        config = {
+            "server_command": [sys.executable, str(SERVER_PATH)],
+            "request_envelope": {
+                "jsonrpc": "2.0",
+                "method": "stderr",
+                "params": {},
+                "id": 1
+            },
+            "caps": {
+                "max_stdout_bytes": 1024,
+                "max_stderr_bytes": 512, # Corrected to avoid strict byte limit
+                "timeout_ms": 1000
+            }
+        }
+        res = run_wrapper(config, tmp_path)
+>       assert res.returncode != 0
+E       AssertionError: assert 0 != 0
+E        +  where 0 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\SKILLS\\mcp\\mcp-adapter\\scripts\\wrapper.py', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_fail_stderr0\\config.json', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_fail_stderr0\\out.json'], returncode=0, stdout='', stderr='').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_mcp_adapter_e2e.py:69: AssertionError
+_______________________ test_ags_plan_router_happy_path _______________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_ags_plan_router_happy_pat0')
+
+    def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
+        pipeline_id = "ags-router-happy"
+        tmp_root = "ags_router_happy"
+        plan_out = tmp_path / "plan.json"
+    
+        plan_obj = {
+            "plan_version": "1.0",
+            "pipeline_id": "ignored-by-override",
+            "steps": [{"step_id": "s1", "command": [sys.executable, "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
+        }
+        router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
+        r1 = _run_ags(
+            [
+                "plan",
+                "--router",
+                sys.executable,
+                "--router-arg=-c",
+                f"--router-arg={router_code}",
+                "--out",
+                str(plan_out),
+                "--pipeline-id",
+                pipeline_id,
+            ]
+        )
+        assert r1.returncode == 0, r1.stdout + r1.stderr
+        b1 = plan_out.read_bytes()
+    
+        r2 = _run_ags(
+            [
+                "plan",
+                "--router",
+                sys.executable,
+                "--router-arg=-c",
+                f"--router-arg={router_code}",
+                "--out",
+                str(plan_out),
+                "--pipeline-id",
+                pipeline_id,
+            ]
+        )
+        assert r2.returncode == 0, r2.stdout + r2.stderr
+        b2 = plan_out.read_bytes()
+        assert b1 == b2
+    
+        # Route + run should succeed using the validated plan output.
+        pipeline_dir = REPO_ROOT / "LAW" / "_runs" / f"{pipeline_id}"
+        try:
+            _rm(pipeline_dir)
+            _rm(REPO_ROOT / "LAW" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+            _rm(REPO_ROOT / f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
+    
+            rr = _run_ags(["route", "--plan", str(plan_out), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
+>           assert rr.returncode == 0, rr.stdout + rr.stderr
+E           AssertionError: ERROR: REFUSE_OVERWRITE: D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\_pipelines\ags-router-happy\PIPELINE.json differs
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_ags_plan_router_happy_pat0\\plan.json', '--pipeline-id', 'ags-router-happy', '--runs-root', 'LAW/CONTRACTS/_runs'], returncode=2, stdout='', stderr='ERROR: REFUSE_OVERWRITE: D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_pipelines\\ags-router-happy\\PIPELINE.json differs\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_router_slot.py:94: AssertionError
+___________________ test_ags_plan_over_output_fails_closed ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_ags_plan_over_output_fail0')
+
+    def test_ags_plan_over_output_fails_closed(tmp_path: Path):
+        plan_out = tmp_path / "plan.json"
+        # Write a huge amount of data
+        large_output = "x" * 1000
+        router_code = f"import sys;sys.stdout.write('{large_output}')"
+    
+        r = _run_ags([
+            "plan",
+            "--router", sys.executable,
+            "--router-arg=-c",
+            f"--router-arg={router_code}",
+            "--out", str(plan_out),
+            "--max-bytes", "1024"
+        ])
+        assert r.returncode != 0
+>       assert "ROUTER_OUTPUT_TOO_LARGE" in r.stderr
+E       assert 'ROUTER_OUTPUT_TOO_LARGE' in 'ERROR: Expecting value: line 1 column 1 (char 0)\n'
+E        +  where 'ERROR: Expecting value: line 1 column 1 (char 0)\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '--router-arg=-c', "--router-arg=import sys;sys.stdout.write('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')", '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_ags_plan_over_output_fail0\\plan.json', '--max-bytes', '1024'], returncode=2, stdout='', stderr='ERROR: Expecting value: line 1 column 1 (char 0)\n').stderr
+
+CAPABILITY\TESTBENCH\test_ags_phase8_model_binding.py:104: AssertionError
+__________________ test_reject_invalid_hash_and_missing_hash __________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_reject_invalid_hash_and_m0')
+
+    def test_reject_invalid_hash_and_missing_hash(tmp_path: Path) -> None:
+        store = CatalyticStore(tmp_path / "cas")
+    
+        with pytest.raises(ValueError):
+            store.get_bytes("not-a-hash")
+    
+        with pytest.raises(ValueError):
+>           store.get_bytes("A" * 64)  # uppercase not allowed
+            ^^^^^^^^^^^^^^^^^^^^^^^^^
+
+CAPABILITY\TESTBENCH\test_cas_store.py:108: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <CAPABILITY.PRIMITIVES.cas_store.CatalyticStore object at 0x0000015BA4ADF050>
+hash_hex = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+
+    def get_bytes(self, hash_hex: str) -> bytes:
+        hash_hex = self._validate_hash(hash_hex)
+        path = self._object_path(hash_hex)
+        if not path.exists():
+>           raise FileNotFoundError(str(path))
+E           FileNotFoundError: C:\Users\rene_\AppData\Local\Temp\pytest-of-Reneshizzle\pytest-306\test_reject_invalid_hash_and_m0\cas\objects\AA\AA\AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+CAPABILITY\PRIMITIVES\cas_store.py:85: FileNotFoundError
+__________________________ test_invalid_hash_rejects __________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_invalid_hash_rejects0')
+
+    def test_invalid_hash_rejects(tmp_path: Path) -> None:
+        store = CatalyticStore(tmp_path / "CAS")
+        with pytest.raises(ValueError):
+>           hash_read_text(store=store, hash_hex="A" * 64)
+
+CAPABILITY\TESTBENCH\test_hash_toolbelt.py:82: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+CAPABILITY\PRIMITIVES\hash_toolbelt.py:101: in hash_read_text
+    data, effective_start, effective_end, _ = _read_bytes_range(
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+store = <CAPABILITY.PRIMITIVES.cas_store.CatalyticStore object at 0x0000015BA4BB37D0>
+hash_hex = 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA'
+
+    def _read_bytes_range(
+        store: CatalyticStore,
+        hash_hex: str,
+        *,
+        max_bytes: int,
+        start: int = 0,
+        end: Optional[int] = None,
+    ) -> tuple[bytes, int, int, int]:
+        if max_bytes <= 0:
+            raise ValueError("max-bytes must be positive")
+        if start < 0:
+            raise ValueError("start must be >= 0")
+    
+        path = _object_path(store, hash_hex)
+        if not path.exists():
+>           raise FileNotFoundError(str(path))
+E           FileNotFoundError: C:\Users\rene_\AppData\Local\Temp\pytest-of-Reneshizzle\pytest-306\test_invalid_hash_rejects0\CAS\objects\AA\AA\AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+CAPABILITY\PRIMITIVES\hash_toolbelt.py:74: FileNotFoundError
+_____________ test_reject_invalid_hashes_and_expected_root_format _____________
+
+    def test_reject_invalid_hashes_and_expected_root_format() -> None:
+        manifest = {"a.txt": "not-a-hash"}
+        with pytest.raises(ValueError):
+            build_manifest_root(manifest)
+    
+        good_manifest = {"a.txt": _sha256_hex("a")}
+>       with pytest.raises(ValueError):
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+E       Failed: DID NOT RAISE <class 'ValueError'>
+
+CAPABILITY\TESTBENCH\test_merkle.py:92: Failed
+___________________ test_swarm_chain_binds_pipeline_proofs ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_swarm_chain_binds_pipelin0')
+
+    def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
+        """
+        Phase 7 Acceptance 1: A swarm run produces a top-level chain that binds each pipeline's proof.
+        """
+        swarm_id = "phase7-chain-ok"
+        p1 = "phase7-p1"
+        p2 = "phase7-p2"
+    
+        runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
+        swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
+        dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
+    
+        rt_pipeline = PipelineRuntime(project_root=REPO_ROOT)
+        pipeline1_dir = rt_pipeline.pipeline_dir(p1)
+        pipeline2_dir = rt_pipeline.pipeline_dir(p2)
+    
+        out1 = f"NAVIGATION/CORTEX/_generated/_tmp/{p1}.txt"
+        out2 = f"NAVIGATION/CORTEX/_generated/_tmp/{p2}.txt"
+        jobspec1_rel = f"LAW/CONTRACTS/_runs/_tmp/phase7_test/{p1}_jobspec.json"
+        jobspec2_rel = f"LAW/CONTRACTS/_runs/_tmp/phase7_test/{p2}_jobspec.json"
+    
+        try:
+            _rm(swarm_dir)
+            _rm(dag_dir)
+            _rm(pipeline1_dir)
+            _rm(pipeline2_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase7_test")
+            _rm(REPO_ROOT / out1)
+            _rm(REPO_ROOT / out2)
+    
+            _write_jobspec(REPO_ROOT / jobspec1_rel, job_id=f"{p1}-job", intent=p1, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[out1])
+            _write_jobspec(REPO_ROOT / jobspec2_rel, job_id=f"{p2}-job", intent=p2, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[out2])
+    
+            pipeline_spec_1 = {
+                "pipeline_id": p1,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec1_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out1}').parent.mkdir(parents=True, exist_ok=True);Path('{out1}').write_text('{p1}')"],
+                    }
+                ]
+            }
+    
+            pipeline_spec_2 = {
+                "pipeline_id": p2,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec2_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out2}').parent.mkdir(parents=True, exist_ok=True);Path('{out2}').write_text('{p2}')"],
+                    }
+                ]
+            }
+    
+            swarm_spec = {
+                "swarm_version": "1.0.0",
+                "swarm_id": swarm_id,
+                "nodes": [
+                    {
+                        "node_id": p1,
+                        "pipeline_spec": pipeline_spec_1
+                    },
+                    {
+                        "node_id": p2,
+                        "pipeline_spec": pipeline_spec_2
+                    }
+                ],
+                "edges": [
+                    {
+                        "from": p1,
+                        "to": p2,
+                        "requires": ["CHAIN.json"]
+                    }
+                ]
+            }
+    
+            spec_path = tmp_path / "swarm.json"
+            spec_path.write_text(json.dumps(swarm_spec, indent=2), encoding="utf-8")
+    
+            sr = SwarmRuntime(project_root=REPO_ROOT, runs_root=runs_root)
+            res = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+    
+            assert res.get("ok") is True, f"Swarm run should succeed: {res}"
+    
+            # Verify SWARM_CHAIN.json exists and binds pipeline proofs
+            chain_path = swarm_dir / "SWARM_CHAIN.json"
+            assert chain_path.exists(), "Chain file should exist."
+    
+>           verify_chain = (chain_path.read_text().strip() == original_chain)
+                                                              ^^^^^^^^^^^^^^
+E           NameError: name 'original_chain' is not defined
+
+CAPABILITY\TESTBENCH\test_phase7_acceptance.py:132: NameError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-phase7-p1-s1-a1
+[catalytic] Phase 0: Preflight validation...
+[catalytic] Preflight passed: JobSpec is valid
+[catalytic] Phase 1: Capturing pre-snapshots...
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\phase7_test\domain (0 files)
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python313\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p1.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p1.txt').write_text('phase7-p1')
+[catalytic] Command exited with code 0
+[catalytic] Phase 3: Capturing post-snapshots...
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\phase7_test\domain (0 files)
+[catalytic] Phase 4: Verifying restoration...
+[catalytic] SUCCESS: Catalytic domains fully restored
+[catalytic] Phase 5: Writing canonical artifact set...
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-phase7-p1-s1-a1
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+[catalytic] Run completed successfully with verified restoration.
+DEBUG: Check PIPELINE.json: Exp=71c9e3752dd8925aa7b455ec2347445ae3b401ed4c6d4ac67b0e14ce876119da Act=71c9e3752dd8925aa7b455ec2347445ae3b401ed4c6d4ac67b0e14ce876119da Pdir=D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\_pipelines\phase7-p1
+DEBUG: Check STATE.json: Exp=47d45c9c74fc4fff8eb837cc3f724d3ca64d3f69396e4e5be803292e4d9e4591 Act=47d45c9c74fc4fff8eb837cc3f724d3ca64d3f69396e4e5be803292e4d9e4591 Pdir=D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\_pipelines\phase7-p1
+DEBUG: Check CHAIN.json: Exp=a92fdd8da91faa85e0b37ae0478faaa46571c75fd62f7add074a7f7c3aa18c9f Act=a92fdd8da91faa85e0b37ae0478faaa46571c75fd62f7add074a7f7c3aa18c9f Pdir=D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\_pipelines\phase7-p1
+DEBUG: Check RECEIPT.json: Exp=8be23269fb1db2904309c58d6ba19941d0f3e309921434b9c0ab3884c3038686 Act=8be23269fb1db2904309c58d6ba19941d0f3e309921434b9c0ab3884c3038686 Pdir=D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\_pipelines\phase7-p1
+[catalytic] Starting catalytic run: pipeline-phase7-p2-s1-a1
+[catalytic] Phase 0: Preflight validation...
+[catalytic] Preflight passed: JobSpec is valid
+[catalytic] Phase 1: Capturing pre-snapshots...
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\phase7_test\domain (0 files)
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python313\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p2.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p2.txt').write_text('phase7-p2')
+[catalytic] Command exited with code 0
+[catalytic] Phase 3: Capturing post-snapshots...
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\phase7_test\domain (0 files)
+[catalytic] Phase 4: Verifying restoration...
+[catalytic] SUCCESS: Catalytic domains fully restored
+[catalytic] Phase 5: Writing canonical artifact set...
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-phase7-p2-s1-a1
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+[catalytic] Run completed successfully with verified restoration.
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p1.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p1.txt').write_text('phase7-p1')"]
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p2.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/phase7-p2.txt').write_text('phase7-p2')"]
+__________________ test_swarm_chain_fails_on_tampered_proof ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_swarm_chain_fails_on_tamp0')
+
+    def test_swarm_chain_fails_on_tampered_proof(tmp_path: Path) -> None:
+        """
+        Verify that a swarm run fails due to missing or tampered pipeline proof.
+    
+        This function simulates the scenario where the CHAIN.json file for one of the pipelines
+        is tampered with, causing the DAG verification to fail. The test should be run in a temporary
+        directory to isolate the failing chain and prevent it from affecting other tests.
+        """
+>       original_chain = (chain_path.read_text().strip() == "Original Chain")
+                          ^^^^^^^^^^
+E       UnboundLocalError: cannot access local variable 'chain_path' where it is not associated with a value
+
+CAPABILITY\TESTBENCH\test_phase7_acceptance.py:154: UnboundLocalError
+___________________ test_capability_escalation_fails_closed ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-306/test_capability_escalation_fai0')
+
+    def test_capability_escalation_fails_closed(tmp_path):
+        """Router attempting capability escalation must fail closed."""
+        # Create a router that tries to use a revoked capability
+        router_script = tmp_path / "router_escalate.py"
+        router_script.write_text(
+            """
+    import json
+    
+    # Try to use a capability that's revoked
+    plan = {
+        "plan_version": "1.0",
+        "steps": [{
+            "step_id": "escalate",
+            "capability_hash": "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+        }]
+    }
+    sys.stdout.write(json.dumps(plan))
+    """,
+            encoding="utf-8",
+        )
+    
+        # Create a revokes file
+        revokes_file = tmp_path / "REVOKES.json"
+        revokes_file.write_bytes(
+            json.dumps(
+                {
+                    "revokes_version": "1.0.0",
+                    "revoked_capabilities": [
+                        "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+                    ],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        )
+    
+        plan_output = tmp_path / "plan.json"
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(
+            REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json"
+        )
+        env["CATALYTIC_PINS_PATH"] = str(
+            REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json"
+        )
+        env["CATALYTIC_REVOKES_PATH"] = str(revokes_file)
+    
+        cmd = [
+            sys.executable,
+            "-m",
+            "CAPABILITY.TOOLS.ags",
+            "plan",
+            "--router",
+            sys.executable,
+            "--router-arg",
+            str(router_script),
+            "--out",
+            str(plan_output),
+        ]
+        r = _run(cmd, env)
+    
+        assert r.returncode != 0, "Router with revoked capability should fail"
+>       assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout)
+E       AssertionError: assert 'REVOKED_CAPABILITY' in ('ERROR: ROUTER_STDERR_NOT_EMPTY\n' + '')
+E        +  where 'ERROR: ROUTER_STDERR_NOT_EMPTY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: ROUTER_STDERR_NOT_EMPTY\n').stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python313\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-306\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: ROUTER_STDERR_NOT_EMPTY\n').stdout
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:282: AssertionError
+_____________________ test_crypto_dep_missing_fail_closed _____________________
+
+verifier = <CAPABILITY.PRIMITIVES.verify_bundle.BundleVerifier object at 0x0000015BA4B1C450>
+
+    def test_crypto_dep_missing_fail_closed(verifier):
+        """Verify that missing Ed25519 dependency causes hard reject."""
+>       with patch("CAPABILITY.PRIMITIVES.verify_bundle.ED25519_AVAILABLE", False):
+             ^^^^^
+E       NameError: name 'patch' is not defined
+
+CAPABILITY\TESTBENCH\test_verifier_freeze.py:72: NameError
+============================== warnings summary ===============================
+CAPABILITY\PRIMITIVES\ledger.py:9
+CAPABILITY\PRIMITIVES\ledger.py:9
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\ledger.py:9: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+CAPABILITY\TESTBENCH\test_schemas.py:22
+CAPABILITY\TESTBENCH\test_schemas.py:22
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\test_schemas.py:22: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_route_deterministic_bytes
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_run_calls_verify_ok
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_pipeline_run_creates_state_when_missing
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_empty_pins
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py::test_capability_versioning_in_place_upgrade_rejected
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_stderr
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_router_happy_path
+FAILED CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py::test_ags_plan_over_output_fails_closed
+FAILED CAPABILITY/TESTBENCH/test_cas_store.py::test_reject_invalid_hash_and_missing_hash
+FAILED CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_invalid_hash_rejects
+FAILED CAPABILITY/TESTBENCH/test_merkle.py::test_reject_invalid_hashes_and_expected_root_format
+FAILED CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_binds_pipeline_proofs
+FAILED CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_fails_on_tampered_proof
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed
+FAILED CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_crypto_dep_missing_fail_closed
+================= 16 failed, 181 passed, 4 warnings in 28.77s =================

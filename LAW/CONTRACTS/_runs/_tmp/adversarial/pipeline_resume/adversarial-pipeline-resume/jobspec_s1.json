@@ -1,0 +1,17 @@
+{
+  "job_id": "adv-pipe-s1",
+  "phase": 4,
+  "task_type": "pipeline_execution",
+  "intent": "adversarial pipeline test",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [
+      "NAVIGATION/CORTEX/_generated/_tmp/adversarial_pipeline_step1.txt"
+    ],
+    "validation_criteria": {}
+  },
+  "catalytic_domains": [
+    "LAW/CONTRACTS/_runs/_tmp/adversarial/pipeline_resume/domain"
+  ],
+  "determinism": "deterministic"
+}

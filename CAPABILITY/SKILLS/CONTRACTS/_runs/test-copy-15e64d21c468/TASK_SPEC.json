@@ -1,0 +1,12 @@
+{
+  "task_id": "test-copy",
+  "task_type": "file_operation",
+  "operation": "copy",
+  "files": [
+    {
+      "source": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_zkc_nfsy\\source.txt",
+      "destination": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_zkc_nfsy\\dest.txt"
+    }
+  ],
+  "verify_integrity": true
+}

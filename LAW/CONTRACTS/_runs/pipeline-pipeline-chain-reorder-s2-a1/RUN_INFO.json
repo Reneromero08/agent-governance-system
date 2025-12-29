@@ -1,0 +1,10 @@
+{
+  "run_id": "pipeline-pipeline-chain-reorder-s2-a1",
+  "timestamp": "CATALYTIC-DPT-02_CONFIG",
+  "intent": "step2",
+  "catalytic_domains": [
+    "LAW\\CONTRACTS\\_runs\\_tmp\\pipeline_chain_reorder\\domain"
+  ],
+  "exit_code": 0,
+  "restoration_verified": true
+}

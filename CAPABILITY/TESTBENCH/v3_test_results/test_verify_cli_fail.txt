@@ -1,0 +1,381 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 4 items
+
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ok FAILED [ 25%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_missing_artifact FAILED [ 50%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_chain_tamper FAILED [ 75%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ledger_corrupt FAILED [100%]
+
+================================== FAILURES ===================================
+___________________________ test_pipeline_verify_ok ___________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-236/test_pipeline_verify_ok0')
+
+    def test_pipeline_verify_ok(tmp_path: Path) -> None:
+        pipeline_id = "pipeline-verify-ok"
+        tmp_root = Path("pipeline_verify_ok")
+        spec_path, pipeline_dir = _setup_pipeline(tmp_root, pipeline_id=pipeline_id)
+        rt = PipelineRuntime(project_root=REPO_ROOT)
+        try:
+            rt.run(pipeline_id=pipeline_id, spec_path=spec_path)
+            res = _run_verify_cli(pipeline_id=pipeline_id)
+>           assert res.returncode == 0, res.stdout + res.stderr
+E           AssertionError: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py': [Errno 2] No such file or directory
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-ok', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").returncode
+
+CAPABILITY\TESTBENCH\test_pipeline_verify_cli.py:131: AssertionError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-ok-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ok\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step1_out.txt').write_text('ONE', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ok\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-ok-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-ok-s2-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ok\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step2_out.txt').write_text('TWO', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ok\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-ok-s2-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step1_out.txt').write_text('ONE', encoding='utf-8')"]
+
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ok_verify_step2_out.txt').write_text('TWO', encoding='utf-8')"]
+
+____________________ test_pipeline_verify_missing_artifact ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-236/test_pipeline_verify_missing_a0')
+
+    def test_pipeline_verify_missing_artifact(tmp_path: Path) -> None:
+        pipeline_id = "pipeline-verify-missing"
+        tmp_root = Path("pipeline_verify_missing")
+        spec_path, pipeline_dir = _setup_pipeline(tmp_root, pipeline_id=pipeline_id)
+        rt = PipelineRuntime(project_root=REPO_ROOT)
+        try:
+            rt.run(pipeline_id=pipeline_id, spec_path=spec_path)
+            state = json.loads((pipeline_dir / "STATE.json").read_text(encoding="utf-8"))
+            run_id = state["step_run_ids"]["s1"]
+            ledger = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id / "LEDGER.jsonl"
+            _rm(ledger)
+    
+            res = _run_verify_cli(pipeline_id=pipeline_id)
+            assert res.returncode != 0
+>           assert "FAIL" in res.stdout
+E           assert 'FAIL' in ''
+E            +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-missing', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+
+CAPABILITY\TESTBENCH\test_pipeline_verify_cli.py:154: AssertionError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-missing-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_missing\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step1_out.txt').write_text('ONE', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_missing\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-missing-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-missing-s2-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_missing\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step2_out.txt').write_text('TWO', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_missing\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-missing-s2-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step1_out.txt').write_text('ONE', encoding='utf-8')"]
+
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-missing_verify_step2_out.txt').write_text('TWO', encoding='utf-8')"]
+
+______________________ test_pipeline_verify_chain_tamper ______________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-236/test_pipeline_verify_chain_tam0')
+
+    def test_pipeline_verify_chain_tamper(tmp_path: Path) -> None:
+        pipeline_id = "pipeline-verify-chain-tamper"
+        tmp_root = Path("pipeline_verify_chain_tamper")
+        spec_path, pipeline_dir = _setup_pipeline(tmp_root, pipeline_id=pipeline_id)
+        rt = PipelineRuntime(project_root=REPO_ROOT)
+        try:
+            rt.run(pipeline_id=pipeline_id, spec_path=spec_path)
+            state = json.loads((pipeline_dir / "STATE.json").read_text(encoding="utf-8"))
+            run_id = state["step_run_ids"]["s1"]
+            proof = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id / "PROOF.json"
+            data = proof.read_bytes()
+            proof.write_bytes(data[:-1] + (b"0" if data[-1:] != b"0" else b"1"))
+    
+            res = _run_verify_cli(pipeline_id=pipeline_id)
+            assert res.returncode != 0
+>           assert "FAIL" in res.stdout
+E           assert 'FAIL' in ''
+E            +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-chain-tamper', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+
+CAPABILITY\TESTBENCH\test_pipeline_verify_cli.py:178: AssertionError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-chain-tamper-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_chain_tamper\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step1_out.txt').write_text('ONE', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_chain_tamper\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-chain-tamper-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-chain-tamper-s2-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_chain_tamper\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step2_out.txt').write_text('TWO', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_chain_tamper\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-chain-tamper-s2-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step1_out.txt').write_text('ONE', encoding='utf-8')"]
+
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-chain-tamper_verify_step2_out.txt').write_text('TWO', encoding='utf-8')"]
+
+_____________________ test_pipeline_verify_ledger_corrupt _____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-236/test_pipeline_verify_ledger_co0')
+
+    def test_pipeline_verify_ledger_corrupt(tmp_path: Path) -> None:
+        pipeline_id = "pipeline-verify-ledger-corrupt"
+        tmp_root = Path("pipeline_verify_ledger_corrupt")
+        spec_path, pipeline_dir = _setup_pipeline(tmp_root, pipeline_id=pipeline_id)
+        rt = PipelineRuntime(project_root=REPO_ROOT)
+        try:
+            rt.run(pipeline_id=pipeline_id, spec_path=spec_path)
+            state = json.loads((pipeline_dir / "STATE.json").read_text(encoding="utf-8"))
+            run_id = state["step_run_ids"]["s1"]
+            ledger = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id / "LEDGER.jsonl"
+            data = ledger.read_bytes()
+            assert data.endswith(b"\n")
+            ledger.write_bytes(data[:-1])  # remove trailing newline -> partial line
+    
+            res = _run_verify_cli(pipeline_id=pipeline_id)
+            assert res.returncode != 0
+>           assert "FAIL" in res.stdout
+E           assert 'FAIL' in ''
+E            +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-ledger-corrupt', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+
+CAPABILITY\TESTBENCH\test_pipeline_verify_cli.py:203: AssertionError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-ledger-corrupt-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ledger_corrupt\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step1_out.txt').write_text('ONE', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ledger_corrupt\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-ledger-corrupt-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+[catalytic] Starting catalytic run: pipeline-pipeline-verify-ledger-corrupt-s2-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ledger_corrupt\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step2_out.txt').write_text('TWO', encoding='utf-8')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\pipeline_verify_ledger_corrupt\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-pipeline-verify-ledger-corrupt-s2-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step1_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step1_out.txt').write_text('ONE', encoding='utf-8')"]
+
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step2_out.txt').parent.mkdir(parents=True, exist_ok=True);Path('NAVIGATION/CORTEX/_generated/_tmp/pipeline-verify-ledger-corrupt_verify_step2_out.txt').write_text('TWO', encoding='utf-8')"]
+
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ok - AssertionError: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py': [Errno 2] No such file or directory
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-ok', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_missing_artifact - assert 'FAIL' in ''
+ +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-missing', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+FAILED CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_chain_tamper - assert 'FAIL' in ''
+ +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-chain-tamper', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+FAILED CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ledger_corrupt - assert 'FAIL' in ''
+ +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\TOOLS\\catalytic.py', 'pipeline', 'verify', '--pipeline-id', 'pipeline-verify-ledger-corrupt', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict'], returncode=2, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\catalytic.py': [Errno 2] No such file or directory\n").stdout
+============================== 4 failed in 2.99s ==============================

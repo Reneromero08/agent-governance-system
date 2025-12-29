@@ -1,0 +1,5 @@
+{
+  "action": "log",
+  "log_path": "CONTRACTS/_runs/override_logs/master_override.jsonl",
+  "ok": true
+}

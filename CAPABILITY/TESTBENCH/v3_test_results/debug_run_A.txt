@@ -1,0 +1,24 @@
+STDOUT:
+{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}
+[catalytic] Starting catalytic run: pipeline-ags-capability-pins-ok-s1-a1
+[catalytic] Phase 0: Preflight validation...
+[catalytic] Preflight passed: JobSpec is valid
+[catalytic] Phase 1: Capturing pre-snapshots...
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+[catalytic] Memoization HIT: dd9e593f4fdf523dc12c5a7ec48b2cd26059de923d270cb1ef7e3b444acf1c97
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-ags-capability-pins-ok-s1-a1
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-ags-capability-pins-ok-s1-a1
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+pipeline_id: ags-capability-pins-ok
+steps_total: 1
+steps_completed: 1
+next_step: NONE
+s1: DONE run_id=pipeline-ags-capability-pins-ok-s1-a1
+FAIL code=CAPABILITIES_REGISTRY_INVALID
+AGS: running pipeline
+AGS: verifying pipeline (fail-closed)
+FAIL pipeline verify rc=1
+
+STDERR:

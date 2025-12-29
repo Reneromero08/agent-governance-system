@@ -1,0 +1,17 @@
+{
+  "append": false,
+  "entry": {
+    "author_date": "2025-12-26T04:30:00-07:00",
+    "commit": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
+    "committer_date": "2025-12-26T04:30:00-07:00",
+    "files": [
+      "CANON/CHANGELOG.md",
+      "CANON/VERSIONING.md",
+      "CATALYTIC-DPT/SKILLS/mcp-startup/SKILL.md"
+    ],
+    "note": "manual fixture entry",
+    "subject": "2.9.0: add mcp-startup skill"
+  },
+  "log_path": "CONTRACTS/_runs/commit_logs/commit_summaries.jsonl",
+  "ok": true
+}

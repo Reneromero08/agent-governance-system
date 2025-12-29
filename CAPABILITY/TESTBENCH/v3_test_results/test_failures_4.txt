@@ -1,0 +1,89 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: d:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 6 items
+
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_router_happy_path FAILED [ 16%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_fails_on_stderr PASSED [ 33%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_caps_bytes PASSED [ 50%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_route_rejects_invalid_plan_schema PASSED [ 66%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_jobspec_validation PASSED [ 83%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_route_rejects_missing_step_command PASSED [100%]
+
+================================== FAILURES ===================================
+_______________________ test_ags_plan_router_happy_path _______________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-226/test_ags_plan_router_happy_pat0')
+
+    def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
+        pipeline_id = "ags-router-happy"
+        tmp_root = "ags_router_happy"
+        plan_out = tmp_path / "plan.json"
+    
+        plan_obj = {
+            "plan_version": "1.0",
+            "pipeline_id": "ignored-by-override",
+            "steps": [{"step_id": "s1", "command": [sys.executable, "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
+        }
+        router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
+        r1 = _run_ags(
+            [
+                "plan",
+                "--router",
+                sys.executable,
+                "--router-arg=-c",
+                f"--router-arg={router_code}",
+                "--out",
+                str(plan_out),
+                "--pipeline-id",
+                pipeline_id,
+            ]
+        )
+        assert r1.returncode == 0, r1.stdout + r1.stderr
+        b1 = plan_out.read_bytes()
+    
+        r2 = _run_ags(
+            [
+                "plan",
+                "--router",
+                sys.executable,
+                "--router-arg=-c",
+                f"--router-arg={router_code}",
+                "--out",
+                str(plan_out),
+                "--pipeline-id",
+                pipeline_id,
+            ]
+        )
+        assert r2.returncode == 0, r2.stdout + r2.stderr
+        b2 = plan_out.read_bytes()
+        assert b1 == b2
+    
+        # Route + run should succeed using the validated plan output.
+        pipeline_dir = REPO_ROOT / "LAW" / "_runs" / f"{pipeline_id}"
+        try:
+            _rm(pipeline_dir)
+            _rm(REPO_ROOT / "LAW" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+            _rm(REPO_ROOT / f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
+    
+            rr = _run_ags(["route", "--plan", str(plan_out), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
+            assert rr.returncode == 0, rr.stdout + rr.stderr
+            run = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs", "--strict", "--skip-preflight"])
+>           assert run.returncode == 0, run.stdout + run.stderr
+E           AssertionError: {"verdict":"BLOCK","reasons":["WRITE_OUTSIDE_ARTIFACTS","WRITE_TOUCHES_REPO"],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}
+E             FAIL admission rc=2
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'run', '--pipeline-id', 'ags-router-happy', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict', '--skip-preflight'], returncode=2, stdout='{"verdict":"BLOCK","reasons":["WRITE_OUTSIDE_ARTIFACTS","WRITE_TOUCHES_REPO"],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}\nFAIL admission rc=2\n', stderr='').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_router_slot.py:96: AssertionError
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_router_happy_path - AssertionError: {"verdict":"BLOCK","reasons":["WRITE_OUTSIDE_ARTIFACTS","WRITE_TOUCHES_REPO"],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}
+  FAIL admission rc=2
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'run', '--pipeline-id', 'ags-router-happy', '--runs-root', 'LAW/CONTRACTS/_runs', '--strict', '--skip-preflight'], returncode=2, stdout='{"verdict":"BLOCK","reasons":["WRITE_OUTSIDE_ARTIFACTS","WRITE_TOUCHES_REPO"],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}\nFAIL admission rc=2\n', stderr='').returncode
+========================= 1 failed, 5 passed in 2.33s =========================

@@ -1,0 +1,11 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 1 item
+
+CAPABILITY/TESTBENCH/test_pipelines.py::test_pipeline_init_is_deterministic_and_resume_safe PASSED [100%]
+
+============================== 1 passed in 0.91s ==============================

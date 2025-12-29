@@ -1,0 +1,1 @@
+{"pipeline_id":"intent-pipeline","steps":[{"cmd":["echo","test"],"jobspec_path":"CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json","memoize":true,"step_id":"step1","strict":true}]}
