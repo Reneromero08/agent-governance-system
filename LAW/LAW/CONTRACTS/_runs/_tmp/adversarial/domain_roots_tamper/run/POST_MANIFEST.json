@@ -1,0 +1,5 @@
+{
+  "CONTRACTS/_runs/_tmp/adversarial/domain_roots_tamper/domain": {
+    "file.txt": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+  }
+}

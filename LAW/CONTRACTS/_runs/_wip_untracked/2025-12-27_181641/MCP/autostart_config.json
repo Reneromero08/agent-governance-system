@@ -1,0 +1,41 @@
+{
+  "version": "1.0.0",
+  "description": "AGS MCP Server automatic startup configuration",
+  "startup_mode": "boot",
+  "components": {
+    "mcp_server": {
+      "enabled": true,
+      "script": "MCP/server.py",
+      "mode": "stdio",
+      "restart_on_failure": true,
+      "max_restarts": 3,
+      "restart_delay_seconds": 10
+    },
+    "ollama": {
+      "enabled": false,
+      "command": "ollama serve",
+      "wait_for_ready": true,
+      "timeout_seconds": 30
+    },
+    "cortex_rebuild": {
+      "enabled": true,
+      "on_startup": true,
+      "script": "CORTEX/cortex.build.py"
+    }
+  },
+  "logging": {
+    "enabled": true,
+    "log_dir": "CONTRACTS/_runs/mcp_logs",
+    "rotation": {
+      "max_size_mb": 10,
+      "max_files": 5
+    }
+  },
+  "health_check": {
+    "enabled": true,
+    "interval_seconds": 60,
+    "endpoints": {
+      "mcp_server_pid": "CONTRACTS/_runs/mcp_logs/server.pid"
+    }
+  }
+}

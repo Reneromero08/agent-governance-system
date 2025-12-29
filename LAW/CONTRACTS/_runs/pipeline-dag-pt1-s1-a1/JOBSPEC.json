@@ -1,0 +1,19 @@
+{
+  "job_id": "pipe-dag-dag-pt1",
+  "phase": 0,
+  "task_type": "primitive_implementation",
+  "intent": "dag-pt1",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [
+      "CORTEX\\_generated\\_tmp\\dag-pt1.txt"
+    ],
+    "validation_criteria": {
+      "restoration_verified": true
+    }
+  },
+  "catalytic_domains": [
+    "CONTRACTS\\_runs\\_tmp\\pipeline_dag\\domain"
+  ],
+  "determinism": "deterministic"
+}

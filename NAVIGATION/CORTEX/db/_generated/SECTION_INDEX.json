@@ -1,0 +1,490 @@
+[
+  {
+    "end_line": 276,
+    "hash": "4bb18a54cf9603872ba0b186a3f12a13c3078255ba5a81976752af672631c282",
+    "heading": "AGENTS.md",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::agents-md::01",
+    "start_line": 1
+  },
+  {
+    "end_line": 27,
+    "hash": "028ad5038bb84911132747b4bbb9c4a3796157497352decd615655eedbc7d5d5",
+    "heading": "1. Required startup sequence (non-negotiable)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::1-required-startup-sequence-non-negotiable::01",
+    "start_line": 10
+  },
+  {
+    "end_line": 37,
+    "hash": "b0195b4a1f977ce1a694a7b036b1362b9dded33fea6ba1cbbaf23ca6a516585c",
+    "heading": "1C. Multi-agent workflow (worktrees)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::1c-multi-agent-workflow-worktrees::01",
+    "start_line": 28
+  },
+  {
+    "end_line": 46,
+    "hash": "e792cdd6aefdc5d05756f001f9b37d2f8d29d682328b345ea9e32180fa4112fd",
+    "heading": "1A. Question-first gate (no-write)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::1a-question-first-gate-no-write::01",
+    "start_line": 38
+  },
+  {
+    "end_line": 50,
+    "hash": "445c0e48672d69107fd39c22b44e30ecb403d46af8f260033270c6d50afa3a96",
+    "heading": "1B. Intent gate (canon and context)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::1b-intent-gate-canon-and-context::01",
+    "start_line": 47
+  },
+  {
+    "end_line": 66,
+    "hash": "87813aed51e721eecdeef335e670c23e222efddacdf8aca20ff6a81159ba3ff8",
+    "heading": "2. Authority gradient",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::2-authority-gradient::01",
+    "start_line": 51
+  },
+  {
+    "end_line": 75,
+    "hash": "fef947cb544ed2ea15fe9226c42a814fb5575a1a648504a28f0bffe00e907ad8",
+    "heading": "2A. Sovereign override interface (`MASTER_OVERRIDE`)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::2a-sovereign-override-interface-master-override::01",
+    "start_line": 67
+  },
+  {
+    "end_line": 81,
+    "hash": "d0bd67205349c7d8f9e22954a305b6431e8a80a0d0c8e09308fa2e9d92bb2831",
+    "heading": "2B. Privacy boundary (no out-of-repo access)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::2b-privacy-boundary-no-out-of-repo-access::01",
+    "start_line": 76
+  },
+  {
+    "end_line": 107,
+    "hash": "e669ec4a88fe0c145539a960a678e5808a2a7f71ce8ab408ac878d110c28d8b0",
+    "heading": "3. Mutation rules",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::3-mutation-rules::01",
+    "start_line": 82
+  },
+  {
+    "end_line": 124,
+    "hash": "6d58283c27d1a4cab13e4a5ca645ca9d867a759711a9245d3152dd3e1cf45b4e",
+    "heading": "4. Build output rules",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::4-build-output-rules::01",
+    "start_line": 108
+  },
+  {
+    "end_line": 147,
+    "hash": "afb4b31dce5a8c70995c880d6bc5403c5b4a6f6c09907145ebf0e9af0e0a2824",
+    "heading": "5. Skills-first execution",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::5-skills-first-execution::01",
+    "start_line": 125
+  },
+  {
+    "end_line": 158,
+    "hash": "fcf7aebc34376a1d82edd502a9411678b4c3c262b5bd19e9708bb46a47f8801a",
+    "heading": "6. Fixtures gate changes",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::6-fixtures-gate-changes::01",
+    "start_line": 148
+  },
+  {
+    "end_line": 170,
+    "hash": "507f93ee6727d19fb558183ea8df9fcf670037e2f7d701a80fd2f5283f63a6c7",
+    "heading": "7. Uncertainty protocol",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::7-uncertainty-protocol::01",
+    "start_line": 159
+  },
+  {
+    "end_line": 182,
+    "hash": "4666eef42409f022847a863252725d7d7a0eacf507ff464af1671ededc069ad6",
+    "heading": "8. Determinism requirement",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::8-determinism-requirement::01",
+    "start_line": 171
+  },
+  {
+    "end_line": 192,
+    "hash": "b81018cfe3bd29ac501ba24b65c9e506fdd1e7c58c73e221eb5e1c3589be1cad",
+    "heading": "9. Exit conditions",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::9-exit-conditions::01",
+    "start_line": 183
+  },
+  {
+    "end_line": 233,
+    "hash": "a0448b6298b100b7f4602afd0144545a33df98fea8d92646f2a1095f2300a98e",
+    "heading": "10. Commit ceremony (CRITICAL)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::10-commit-ceremony-critical::01",
+    "start_line": 193
+  },
+  {
+    "end_line": 208,
+    "hash": "4acc2efbfaa4ff5919b3a1403f9bd9a202f1a78bc551729258f30e22726714b4",
+    "heading": "What does NOT authorize a commit",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::what-does-not-authorize-a-commit::01",
+    "start_line": 199
+  },
+  {
+    "end_line": 213,
+    "hash": "cdfb66d88c49e32c5a4928d4afc48c572a0ba43bd8d7ba4f36a99a6e36652385",
+    "heading": "Explicit composite approvals",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::explicit-composite-approvals::01",
+    "start_line": 209
+  },
+  {
+    "end_line": 217,
+    "hash": "ccbcdfb9457aad7a4b2c6e18592635d65f97075ae7d22157028ec02ffcbf6874",
+    "heading": "Ceremony confirmations",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::ceremony-confirmations::01",
+    "start_line": 214
+  },
+  {
+    "end_line": 220,
+    "hash": "d41e3d8e80fc05099bbb9dd66f7df8734eed711dbeb22c841135b7cdb1b7e353",
+    "heading": "The anti-chaining rule",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::the-anti-chaining-rule::01",
+    "start_line": 218
+  },
+  {
+    "end_line": 233,
+    "hash": "53bf7949caf00bddd77885949297a17ea615a443c00f8823ef2588b755130bb5",
+    "heading": "The ceremony",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::the-ceremony::01",
+    "start_line": 221
+  },
+  {
+    "end_line": 276,
+    "hash": "212134e4008553e6d22a7a5d5b410611ee31fcbdcdf6aae6a95cafa59af85faf",
+    "heading": "11. The Law (pre-commit test requirement)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-the-law-pre-commit-test-requirement::01",
+    "start_line": 234
+  },
+  {
+    "end_line": 276,
+    "hash": "7f94fed5bed753e815cfdd21754a5e51d127c5cc857463b24b019b84aff57e0b",
+    "heading": "Before ANY commit, agents MUST:",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::before-any-commit-agents-must::01",
+    "start_line": 241
+  },
+  {
+    "end_line": 248,
+    "hash": "7a08d1af4334526d16d2903abc84c353bf5511421e4d1ed0844736ec32ce14a2",
+    "heading": "11.1 Run tests and verify they pass",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-1-run-tests-and-verify-they-pass::01",
+    "start_line": 243
+  },
+  {
+    "end_line": 254,
+    "hash": "2daf5a67aedea61aa482466b77c03d7c88715133a1fdf627470194a52f4f900e",
+    "heading": "11.2 Read FULL test output",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-2-read-full-test-output::01",
+    "start_line": 249
+  },
+  {
+    "end_line": 260,
+    "hash": "ea90639233189bdbb6cf4cfc3aa9bda430930c52d25a3ea6a49d30b257e6754e",
+    "heading": "11.3 Never use `--no-verify` without:",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-3-never-use-no-verify-without::01",
+    "start_line": 255
+  },
+  {
+    "end_line": 269,
+    "hash": "03813acf1262ad648be34eed5a75a3ce465d11b67ba2cd4a543998d8c74d9f67",
+    "heading": "11.4 Preflight failures are not logic bugs",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-4-preflight-failures-are-not-logic-bugs::01",
+    "start_line": 261
+  },
+  {
+    "end_line": 276,
+    "hash": "704a65ccdcae38939c3b9b0ecd19a5c4ec9eba5f643bc2b86d7f331740bec32b",
+    "heading": "11.5 The test output truncation trap",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::11-5-the-test-output-truncation-trap::01",
+    "start_line": 270
+  },
+  {
+    "end_line": 20,
+    "hash": "7a060be5328ae2bb18125075d2b180aa595ab7fa5d01ccba508b2744e17ad541",
+    "heading": "Purpose",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::purpose::01",
+    "start_line": 15
+  },
+  {
+    "end_line": 24,
+    "hash": "7d6857f858063fd529ba2628c8aec09e763136a28f771e2d72c0116c84052eb7",
+    "heading": "Active Lanes",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::active-lanes::01",
+    "start_line": 21
+  },
+  {
+    "end_line": 41,
+    "hash": "3f321c940aac90fea5e096126f4ebc351fbf6245215670cb78d167417d7f7bc4",
+    "heading": "Lane B: Core Stability & Bug Squashing (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-b-core-stability-bug-squashing-p0::01",
+    "start_line": 25
+  },
+  {
+    "end_line": 31,
+    "hash": "96b05809bda4d1e6c2751dd8caa9cb28ea4a6f978d5676fac6df76529ff34063",
+    "heading": "B1. Critical Bug Triage (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::b1-critical-bug-triage-p0::01",
+    "start_line": 27
+  },
+  {
+    "end_line": 41,
+    "hash": "fd3026b4d97899853b25c2b73205cdd943662a65fe54f110dffa2bb331890e7a",
+    "heading": "B2. Engineering Culture (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::b2-engineering-culture-p1::01",
+    "start_line": 32
+  },
+  {
+    "end_line": 60,
+    "hash": "9afc7893f634c0651f9ae5b22b4693098ea33efe4596787bf0b7d19581383398",
+    "heading": "Lane C: Index database (Cortex) (P0 to P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-c-index-database-cortex-p0-to-p1::01",
+    "start_line": 42
+  },
+  {
+    "end_line": 48,
+    "hash": "23d430a9e437847a914a6dcdef0eec234bc2c865d956aa1f4e9c9961a72a162a",
+    "heading": "C1. System 1 (Fast Retrieval) (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::c1-system-1-fast-retrieval-p0::01",
+    "start_line": 44
+  },
+  {
+    "end_line": 53,
+    "hash": "db72e158e197cbe6f3cbebc93f999cdba14edcf8f4021c3ed256952f86b42edc",
+    "heading": "C2. Build the indexer (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::c2-build-the-indexer-p0::01",
+    "start_line": 49
+  },
+  {
+    "end_line": 60,
+    "hash": "cf66067ea85d392ea2bc658a10c7a5507c8a1f5106ac808521390ff5faeb5400",
+    "heading": "C3. Summarization layer (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::c3-summarization-layer-p1::01",
+    "start_line": 54
+  },
+  {
+    "end_line": 71,
+    "hash": "53a5a607bc1bc91c24bb58c531d7dbb912cf415a0e35b761ac5d8ab2651086d2",
+    "heading": "Lane V: Semantic Core (Vector Retrieval) (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-v-semantic-core-vector-retrieval-p1::01",
+    "start_line": 61
+  },
+  {
+    "end_line": 71,
+    "hash": "5605e14f375bd535b3d41bea33912d9af26308d182f35b60adcc690df5175aec",
+    "heading": "V1. Vector Foundation (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::v1-vector-foundation-p1::01",
+    "start_line": 63
+  },
+  {
+    "end_line": 80,
+    "hash": "8ce602eba639c15a509f8ee3dfe85f214486e733c5d333cbdde5b319f674d236",
+    "heading": "Lane H: System 2 Governance (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-h-system-2-governance-p1::01",
+    "start_line": 72
+  },
+  {
+    "end_line": 80,
+    "hash": "8ab76daa204ba11a7e6135625705ff1eee29a880ffa99ede544431b26af500f6",
+    "heading": "H1. The Immutable Ledger (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::h1-the-immutable-ledger-p1::01",
+    "start_line": 74
+  },
+  {
+    "end_line": 89,
+    "hash": "4d192cf3f9374e4efee15ad3be54bbe984e63c3eaedf3b8cafcf95afec7e6b30",
+    "heading": "Lane I: Semiotic Compression (SCL) (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-i-semiotic-compression-scl-p1::01",
+    "start_line": 81
+  },
+  {
+    "end_line": 89,
+    "hash": "3bc957c9a8e2fcdb46d00bacca9ba847d9cce8e8ccd0c250da2dd5e5d0a23821",
+    "heading": "I1. The Symbol Stack (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::i1-the-symbol-stack-p1::01",
+    "start_line": 83
+  },
+  {
+    "end_line": 98,
+    "hash": "ed879211833e49a7870715c527c782fb05697210d731cbed90642e18735cd2d2",
+    "heading": "Lane S: Spectral Verification (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-s-spectral-verification-p0::01",
+    "start_line": 90
+  },
+  {
+    "end_line": 98,
+    "hash": "50929f7675074c151c3ed3ad2e278f67ded36aea61ad8ef2a305d4be267062f6",
+    "heading": "S1. The Integrity Stack (P0)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::s1-the-integrity-stack-p0::01",
+    "start_line": 92
+  },
+  {
+    "end_line": 111,
+    "hash": "3e2a9836188ac41988d7124166f4377b11abdab6dc6ede1e52da6768125f47aa",
+    "heading": "Lane G: The Living Formula Integration (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-g-the-living-formula-integration-p1::01",
+    "start_line": 99
+  },
+  {
+    "end_line": 105,
+    "hash": "dd58a3a705d70e89047b83b1f25c04c4ec85d3e582b4c4ef2be7c0add733e776",
+    "heading": "G1. Metric Definition (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::g1-metric-definition-p1::01",
+    "start_line": 101
+  },
+  {
+    "end_line": 111,
+    "hash": "0e8f21f698b05a10d8531b0ca07873ccfa441c88af63c20a93db80df4e49a2e0",
+    "heading": "G2. Feedback Loops (P2)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::g2-feedback-loops-p2::01",
+    "start_line": 106
+  },
+  {
+    "end_line": 131,
+    "hash": "fa41767860fe4c1e9d32a172bac03044c17456dd099fc220cb59159b7c65d73c",
+    "heading": "Lane X: 6-Bucket Architecture (P2)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-x-6-bucket-architecture-p2::01",
+    "start_line": 112
+  },
+  {
+    "end_line": 122,
+    "hash": "f1a0d53f452f4b0681297b723c15cbeed7cb6ae1709d94d89373607bec74ca2f",
+    "heading": "X1. Bucket Structure (P2)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::x1-bucket-structure-p2::01",
+    "start_line": 114
+  },
+  {
+    "end_line": 127,
+    "hash": "65b4cc8c0ab12ce725261efc55d274ab9ba4dcae314a9573bef8f5ef50d17789",
+    "heading": "X2. Import Path Updates (P2)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::x2-import-path-updates-p2::01",
+    "start_line": 123
+  },
+  {
+    "end_line": 131,
+    "hash": "6a505ed878a440c4dc0fc0720b56e5c18b4f97e13de34c37638178097a67e9f0",
+    "heading": "X3. Bucket Enforcement (P2)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::x3-bucket-enforcement-p2::01",
+    "start_line": 128
+  },
+  {
+    "end_line": 136,
+    "hash": "044dde5a985f24711a2e9a1f87e468ee6944d1eb279e09bca1fc9326bb1170b7",
+    "heading": "Milestone: Semantic Anchor (2025-12-28)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::milestone-semantic-anchor-2025-12-28::01",
+    "start_line": 132
+  },
+  {
+    "end_line": 141,
+    "hash": "3a0059eeb411ff7bef6099cc912036536b1113de905bfe3df004eb7c93ad73ea",
+    "heading": "Definition of Done (Global)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::definition-of-done-global::01",
+    "start_line": 137
+  },
+  {
+    "end_line": 94,
+    "hash": "4373509a18c075bc92eda7288a4cf1a516210a3df004bdc6a5544c41babb8247",
+    "heading": "Agent Governance System (AGS)",
+    "path": "README.md",
+    "section_id": "README.md::agent-governance-system-ags::01",
+    "start_line": 1
+  },
+  {
+    "end_line": 16,
+    "hash": "8fdb4ad0d779cdb389cb62476825fb098e25d82e66f40819434f6ff331c460a0",
+    "heading": "Starting a Session (Mandatory)",
+    "path": "README.md",
+    "section_id": "README.md::starting-a-session-mandatory::01",
+    "start_line": 7
+  },
+  {
+    "end_line": 35,
+    "hash": "561182208a7bd1e3a705b758c9e4e459de70228583016a0a6d820e36cb17a2fc",
+    "heading": "Project layout",
+    "path": "README.md",
+    "section_id": "README.md::project-layout::01",
+    "start_line": 17
+  },
+  {
+    "end_line": 64,
+    "hash": "e80029b2d90c50445394994737f999c63825f64a288b758920aefec477e1f8ce",
+    "heading": "Semantic Core (Token Compression)",
+    "path": "README.md",
+    "section_id": "README.md::semantic-core-token-compression::01",
+    "start_line": 36
+  },
+  {
+    "end_line": 71,
+    "hash": "6a5b25bddf2cad5bcb3835fba6a358232e16646062b1a85bd03be4f8a5e10768",
+    "heading": "MCP integration (external clients)",
+    "path": "README.md",
+    "section_id": "README.md::mcp-integration-external-clients::01",
+    "start_line": 65
+  },
+  {
+    "end_line": 85,
+    "hash": "4f2a05a141b73227d71fdb668a72e417e5e0776d8c02e931233bb4ff90b2fb85",
+    "heading": "How to use",
+    "path": "README.md",
+    "section_id": "README.md::how-to-use::01",
+    "start_line": 72
+  },
+  {
+    "end_line": 94,
+    "hash": "29be7a26f6e9d950cbc011686eed3f71df9c53f7d79be7f63f5c313317a6077b",
+    "heading": "How to extend AGS",
+    "path": "README.md",
+    "section_id": "README.md::how-to-extend-ags::01",
+    "start_line": 86
+  }
+]

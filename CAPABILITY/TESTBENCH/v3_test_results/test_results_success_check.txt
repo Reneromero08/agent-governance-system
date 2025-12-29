@@ -1,0 +1,447 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 16 items
+
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_capability_pinned_routes_and_verifies FAILED [  6%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_known_but_unpinned_rejects_at_route FAILED [ 12%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists FAILED [ 18%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_revoked_capability_rejects_at_route FAILED [ 25%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability FAILED [ 31%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_passes_when_not_revoked FAILED [ 37%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_historical_pipeline_verifies_after_revocation PASSED [ 43%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py::test_capability_versioning_in_place_upgrade_rejected FAILED [ 50%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_duplicate_capability_hash_rejects PASSED [ 56%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_noncanonical_json_rejects PASSED [ 62%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_tamper_detected_fail_closed PASSED [ 68%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_receipts_created PASSED [ 75%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_over_output_fails_closed PASSED [ 81%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_stderr_fails_closed PASSED [ 87%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_malformed_plan_fails_schema_validation PASSED [ 93%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed FAILED [100%]
+
+================================== FAILURES ===================================
+_________________ test_capability_pinned_routes_and_verifies __________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_capability_pinned_routes_0')
+
+    def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-ok"
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [CAP]}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        # The v1 capability is pinned to a concrete ant-worker command that expects these files.
+        reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+        (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+        in_path.write_bytes(b"PHASE66\n")
+        task_path.write_text(
+            json.dumps(
+                {
+                    "task_id": "ant-worker-copy",
+                    "task_type": "file_operation",
+                    "operation": "copy",
+                    "verify_integrity": True,
+                    "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                    "files": [{"source": str(in_path), "destination": str(out_path)}],
+                }
+            ),
+            encoding="utf-8",
+        )
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-pins-ok-s1-a1"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE66\n")
+            task_path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "ant-worker-copy",
+                        "task_type": "file_operation",
+                        "operation": "copy",
+                        "verify_integrity": True,
+                        "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                        "files": [{"source": str(in_path), "destination": str(out_path)}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+    
+            r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+>           assert r_route.returncode == 0, r_route.stdout + r_route.stderr
+E           AssertionError: ERROR: UNKNOWN_CAPABILITY
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_pinned_routes_0\\plan.json', '--pipeline-id', 'ags-capability-pins-ok'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:89: AssertionError
+__________________ test_known_but_unpinned_rejects_at_route ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_known_but_unpinned_reject0')
+
+    def test_known_but_unpinned_rejects_at_route(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-unpinned"
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(pipeline_dir)
+            r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+            assert r_route.returncode != 0
+>           assert "CAPABILITY_NOT_PINNED" in (r_route.stdout + r_route.stderr)
+E           AssertionError: assert 'CAPABILITY_NOT_PINNED' in ('' + 'ERROR: UNKNOWN_CAPABILITY\n')
+E            +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_known_but_unpinned_reject0\\plan.json', '--pipeline-id', 'ags-capability-pins-unpinned'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+E            +  and   'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_known_but_unpinned_reject0\\plan.json', '--pipeline-id', 'ags-capability-pins-unpinned'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:119: AssertionError
+________ test_verify_rejects_unpinned_even_if_pipeline_artifact_exists ________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_verify_rejects_unpinned_e0')
+
+    def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-verify-bypass"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_id = "pipeline-ags-capability-pins-verify-bypass-s1-a1"
+        run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [CAP]}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE66\n")
+            task_path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "ant-worker-copy",
+                        "task_type": "file_operation",
+                        "operation": "copy",
+                        "verify_integrity": True,
+                        "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                        "files": [{"source": str(in_path), "destination": str(out_path)}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+    
+            # Create a real run with the pinned capability (using default pins).
+            plan_ok = tmp_path / "plan_ok.json"
+            plan_ok.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+            r_route_ok = subprocess.run(
+                [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+            )
+>           assert r_route_ok.returncode == 0, r_route_ok.stdout + r_route_ok.stderr
+E           AssertionError: ERROR: UNKNOWN_CAPABILITY
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_rejects_unpinned_e0\\plan_ok.json', '--pipeline-id', 'ags-capability-pins-verify-bypass'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:170: AssertionError
+__________________ test_revoked_capability_rejects_at_route ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_revoked_capability_reject0')
+
+    def test_revoked_capability_rejects_at_route(tmp_path):
+        """Route must reject a revoked capability with REVOKED_CAPABILITY error."""
+        revokes_path = tmp_path / "REVOKES.json"
+        revokes_path.write_bytes(_canon({
+            "revokes_version": "1.0.0",
+            "revoked_capabilities": [CAP]
+        }))
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        }))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
+        env["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+        env["CATALYTIC_REVOKES_PATH"] = str(revokes_path)
+    
+        cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", "test-route-reject"]
+        r = _run(cmd, env)
+    
+        assert r.returncode != 0, f"Expected route to fail. stdout: {r.stdout}"
+>       assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout), f"Expected REVOKED_CAPABILITY error. Got: {r.stderr + r.stdout}"
+E       AssertionError: Expected REVOKED_CAPABILITY error. Got: ERROR: UNKNOWN_CAPABILITY
+E         
+E       assert 'REVOKED_CAPABILITY' in ('ERROR: UNKNOWN_CAPABILITY\n' + '')
+E        +  where 'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_revoked_capability_reject0\\plan.json', '--pipeline-id', 'test-route-reject'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_revoked_capability_reject0\\plan.json', '--pipeline-id', 'test-route-reject'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:64: AssertionError
+___________________ test_verify_rejects_revoked_capability ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_verify_rejects_revoked_ca0')
+
+    def test_verify_rejects_revoked_capability(tmp_path):
+        """
+        Pipeline verify must reject if capability is revoked, even if route succeeded earlier.
+    
+        NOTE: This test calls catalytic pipeline verify directly. Without a full pipeline run,
+        the verify will fail with CHAIN_MISSING before reaching the revocation check.
+        The key governance gate is at ROUTE time (tested separately).
+    
+        This test verifies that:
+        1. Route succeeds when not revoked
+        2. Verify fails (for any reason) when revoked - CHAIN_MISSING is acceptable
+           because a real pipeline would have been blocked at route time
+        """
+        pipeline_id = "test-verify-revocation"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    
+        # Create revokes files
+        empty_revokes = tmp_path / "REVOKES_EMPTY.json"
+        empty_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
+    
+        revoked_revokes = tmp_path / "REVOKES_REVOKED.json"
+        revoked_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": [CAP]}))
+    
+        # Env with no revocation (for route)
+        env_route = dict(os.environ)
+        env_route["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
+        env_route["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+        env_route["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        }))
+    
+        try:
+            _rm(pipeline_dir)
+    
+            # Route should succeed (capability not revoked yet)
+            cmd_route = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id]
+            r_route = _run(cmd_route, env_route)
+>           assert r_route.returncode == 0, f"Route should succeed: {r_route.stderr}"
+E           AssertionError: Route should succeed: ERROR: UNKNOWN_CAPABILITY
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_rejects_revoked_ca0\\plan.json', '--pipeline-id', 'test-verify-revocation'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:108: AssertionError
+_____________________ test_verify_passes_when_not_revoked _____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_verify_passes_when_not_re0')
+
+    def test_verify_passes_when_not_revoked(tmp_path):
+        """
+        Pipeline verify should not falsely report REVOKED_CAPABILITY when capability is not revoked.
+        """
+        pipeline_id = "test-verify-no-revocation"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    
+        # Empty revokes
+        empty_revokes = tmp_path / "REVOKES_EMPTY.json"
+        empty_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
+        env["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+        env["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        }))
+    
+        try:
+            _rm(pipeline_dir)
+    
+            # Route
+            cmd_route = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id]
+            r_route = _run(cmd_route, env)
+>           assert r_route.returncode == 0, f"Route should succeed: {r_route.stderr}"
+E           AssertionError: Route should succeed: ERROR: UNKNOWN_CAPABILITY
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_passes_when_not_re0\\plan.json', '--pipeline-id', 'test-verify-no-revocation'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:157: AssertionError
+____________ test_capability_versioning_in_place_upgrade_rejected _____________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_capability_versioning_in_0')
+
+    def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-versioning"
+        step_id = "s1"
+        base_cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc"
+    
+        # Canonical registry derived from repo CAPABILITIES, but tamper adapter bytes under same key.
+        reg_path = tmp_path / "CAPABILITIES.json"
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [base_cap]}))
+    
+        # Minimal adapter whose canonical hash is base_cap.
+        # We only need to demonstrate that changing bytes changes hash and is rejected as mismatch.
+        adapter = {"name": "x"}
+        computed = _sha256_hex(_canon(adapter))
+        # Construct a registry where key claims base_cap but adapter hashes to something else.
+        reg = {"registry_version": "1.0.0", "capabilities": {base_cap: {"adapter_spec_hash": computed, "adapter": adapter}}}
+        reg_path.write_bytes(_canon(reg))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        plan = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": base_cap}]}
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps(plan), encoding="utf-8")
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        try:
+            _rm(pipeline_dir)
+            r = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+            assert r.returncode != 0
+>           assert "CAPABILITY_HASH_MISMATCH" in (r.stderr + r.stdout)
+E           assert 'CAPABILITY_HASH_MISMATCH' in ("ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n" + '')
+E            +  where "ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr="ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n").stderr
+E            +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr="ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n").stdout
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_versioning_semantics.py:68: AssertionError
+___________________ test_capability_escalation_fails_closed ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-270/test_capability_escalation_fai0')
+
+    def test_capability_escalation_fails_closed(tmp_path):
+        """Router attempting capability escalation must fail closed."""
+        # Create a router that tries to use a revoked capability
+        router_script = tmp_path / "router_escalate.py"
+        router_script.write_text(
+            """
+    import json
+    import sys
+    # Try to use a capability that's revoked
+    plan = {
+        "plan_version": "1.0",
+        "steps": [{
+            "step_id": "escalate",
+            "capability_hash": "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+        }]
+    }
+    sys.stdout.write(json.dumps(plan))
+    """,
+            encoding="utf-8",
+        )
+    
+        # Create a revokes file
+        revokes_file = tmp_path / "REVOKES.json"
+        revokes_file.write_bytes(
+            json.dumps(
+                {
+                    "revokes_version": "1.0.0",
+                    "revoked_capabilities": [
+                        "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+                    ],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        )
+    
+        plan_output = tmp_path / "plan.json"
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(
+            REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json"
+        )
+        env["CATALYTIC_PINS_PATH"] = str(
+            REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json"
+        )
+        env["CATALYTIC_REVOKES_PATH"] = str(revokes_file)
+    
+        cmd = [
+            sys.executable,
+            "-m",
+            "CAPABILITY.TOOLS.ags",
+            "plan",
+            "--router",
+            sys.executable,
+            "--router-arg",
+            str(router_script),
+            "--out",
+            str(plan_output),
+        ]
+        r = _run(cmd, env)
+    
+        assert r.returncode != 0, "Router with revoked capability should fail"
+>       assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout)
+E       AssertionError: assert 'REVOKED_CAPABILITY' in ('ERROR: UNKNOWN_CAPABILITY\n' + '')
+E        +  where 'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:278: AssertionError
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_capability_pinned_routes_and_verifies - AssertionError: ERROR: UNKNOWN_CAPABILITY
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_pinned_routes_0\\plan.json', '--pipeline-id', 'ags-capability-pins-ok'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_known_but_unpinned_rejects_at_route - AssertionError: assert 'CAPABILITY_NOT_PINNED' in ('' + 'ERROR: UNKNOWN_CAPABILITY\n')
+ +  where '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_known_but_unpinned_reject0\\plan.json', '--pipeline-id', 'ags-capability-pins-unpinned'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+ +  and   'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_known_but_unpinned_reject0\\plan.json', '--pipeline-id', 'ags-capability-pins-unpinned'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists - AssertionError: ERROR: UNKNOWN_CAPABILITY
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_rejects_unpinned_e0\\plan_ok.json', '--pipeline-id', 'ags-capability-pins-verify-bypass'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_revoked_capability_rejects_at_route - AssertionError: Expected REVOKED_CAPABILITY error. Got: ERROR: UNKNOWN_CAPABILITY
+  
+assert 'REVOKED_CAPABILITY' in ('ERROR: UNKNOWN_CAPABILITY\n' + '')
+ +  where 'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_revoked_capability_reject0\\plan.json', '--pipeline-id', 'test-route-reject'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_revoked_capability_reject0\\plan.json', '--pipeline-id', 'test-route-reject'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability - AssertionError: Route should succeed: ERROR: UNKNOWN_CAPABILITY
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_rejects_revoked_ca0\\plan.json', '--pipeline-id', 'test-verify-revocation'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_passes_when_not_revoked - AssertionError: Route should succeed: ERROR: UNKNOWN_CAPABILITY
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_verify_passes_when_not_re0\\plan.json', '--pipeline-id', 'test-verify-no-revocation'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py::test_capability_versioning_in_place_upgrade_rejected - assert 'CAPABILITY_HASH_MISMATCH' in ("ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n" + '')
+ +  where "ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr="ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n").stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_versioning_in_0\\plan.json', '--pipeline-id', 'ags-capability-versioning'], returncode=2, stdout='', stderr="ERROR: plan schema invalid at ['steps', 0, 'capability_hash']: '4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d1b6b7d78fc' does not match '^[0-9a-f]{64}$'\n").stdout
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed - AssertionError: assert 'REVOKED_CAPABILITY' in ('ERROR: UNKNOWN_CAPABILITY\n' + '')
+ +  where 'ERROR: UNKNOWN_CAPABILITY\n' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-270\\test_capability_escalation_fai0\\plan.json'], returncode=2, stdout='', stderr='ERROR: UNKNOWN_CAPABILITY\n').stdout
+========================= 8 failed, 8 passed in 5.68s =========================

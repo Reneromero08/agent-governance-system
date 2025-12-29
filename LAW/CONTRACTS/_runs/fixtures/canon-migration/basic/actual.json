@@ -1,0 +1,11 @@
+{
+  "description": "Test migration skill with no-op migration",
+  "migration_log": [
+    "Could not detect source version"
+  ],
+  "pack_path": "",
+  "source_version": "0.1.5",
+  "success": false,
+  "target_version": "0.1.5",
+  "warnings": []
+}

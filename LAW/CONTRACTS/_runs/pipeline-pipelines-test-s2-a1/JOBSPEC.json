@@ -1,0 +1,19 @@
+{
+  "job_id": "pipe-step2",
+  "phase": 0,
+  "task_type": "primitive_implementation",
+  "intent": "step2",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [
+      "NAVIGATION\\CORTEX\\_generated\\_tmp\\pipelines_step2_out.txt"
+    ],
+    "validation_criteria": {
+      "restoration_verified": true
+    }
+  },
+  "catalytic_domains": [
+    "LAW\\CONTRACTS\\_runs\\_tmp\\pipelines_test\\domain"
+  ],
+  "determinism": "deterministic"
+}

@@ -8,7 +8,7 @@ from pathlib import Path
 # Add current directory to path so we can import server
 sys.path.append(str(Path(__file__).parent.parent))
 
-from MCP.server import MCPTerminalServer
+from CAPABILITY.MCP.server import MCPTerminalServer
 
 # Configure logging to stderr so it doesn't interfere with stdout JSON-RPC
 logging.basicConfig(stream=sys.stderr, level=logging.INFO)
