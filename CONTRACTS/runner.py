@@ -43,14 +43,18 @@ def iter_contract_inputs() -> List[Path]:
 
 def iter_skill_inputs() -> List[Tuple[Path, Path]]:
     fixtures = []
-    for skill_dir in sorted(SKILLS_DIR.iterdir()):
-        if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
+    for category_dir in sorted(SKILLS_DIR.iterdir()):
+        if not category_dir.is_dir() or category_dir.name.startswith("_"):
             continue
-        fixtures_root = skill_dir / "fixtures"
-        if not fixtures_root.exists():
-            continue
-        for input_path in sorted(fixtures_root.rglob("input.json")):
-            fixtures.append((skill_dir, input_path))
+        # Iterate through skills in each category
+        for skill_dir in sorted(category_dir.iterdir()):
+            if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
+                continue
+            fixtures_root = skill_dir / "fixtures"
+            if not fixtures_root.exists():
+                continue
+            for input_path in sorted(fixtures_root.rglob("input.json")):
+                fixtures.append((skill_dir, input_path))
     return fixtures
 
 
