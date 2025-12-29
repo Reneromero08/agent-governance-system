@@ -18,6 +18,6 @@ echo "[PRE-COMMIT] Running canon governance check..."
 node TOOLS/check-canon-governance.js
 
 echo "[PRE-COMMIT] Running INBOX policy check..."
-$PYTHON_CMD TOOLS/check_inbox_policy.py
+$PYTHON_CMD TOOLS/governance/check_inbox_policy.py
 
 echo "[PRE-COMMIT] OK"

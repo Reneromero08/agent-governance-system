@@ -196,7 +196,7 @@ def build_index(conn: sqlite3.Connection) -> int:
         import sys
         if str(PROJECT_ROOT) not in sys.path:
             sys.path.insert(0, str(PROJECT_ROOT))
-        from TOOLS.preflight import compute_canon_sha256
+        from TOOLS.governance.preflight import compute_canon_sha256
         canon_sha256 = compute_canon_sha256(PROJECT_ROOT)
     except Exception:
         canon_sha256 = ""
@@ -569,7 +569,7 @@ def main():
             import sys
             if str(PROJECT_ROOT) not in sys.path:
                 sys.path.insert(0, str(PROJECT_ROOT))
-            from TOOLS.preflight import compute_canon_sha256
+            from TOOLS.governance.preflight import compute_canon_sha256
             canon_sha = compute_canon_sha256(PROJECT_ROOT)
         except Exception:
             canon_sha = ""

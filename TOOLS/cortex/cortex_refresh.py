@@ -42,7 +42,7 @@ def _git_head_timestamp() -> Optional[str]:
 
 def _needs_refresh() -> bool:
     try:
-        from TOOLS.preflight import compute_canon_sha256
+        from TOOLS.governance.preflight import compute_canon_sha256
     except Exception as exc:
         raise RuntimeError(f"PRECHECK_IMPORT_ERROR: {exc}")
 
