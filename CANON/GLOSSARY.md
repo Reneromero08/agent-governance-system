@@ -4,7 +4,7 @@ This glossary defines important terms used throughout the Agent Governance Syste
 
 - **Canon** - The collection of files under `CANON/` that define the law and invariants of the system.
 - **Context** - Records in `CONTEXT/` such as ADRs, rejections and preferences that provide rationale and decision history.
-- **Map** - Documents in `MAPS/` that describe the structure of the repository and direct agents to the correct entrypoints for changes.
+- **Map** - Documents in `CONTEXT/maps/` that describe the structure of the repository and direct agents to the correct entrypoints for changes.
 - **Skill** - A modular, versioned capability encapsulated in its own directory under `SKILLS/`. A skill includes a manifest (`SKILL.md`), scripts, and fixtures.
 - **Contract** - A rule or constraint encoded as fixtures and schemas in `CONTRACTS/`. Contracts are enforced by the runner.
 - **Fixture** - A concrete test case that captures an invariant or precedent. Fixtures must pass in order for changes to be merged.

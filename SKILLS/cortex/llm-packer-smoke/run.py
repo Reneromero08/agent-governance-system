@@ -10,7 +10,7 @@ PROJECT_ROOT = Path(__file__).resolve().parents[2]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from TOOLS.skill_runtime import ensure_canon_compat
+from TOOLS.agents.skill_runtime import ensure_canon_compat
 
 PACKER_MODULE = "MEMORY.LLM_PACKER.Engine.packer"
 PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"

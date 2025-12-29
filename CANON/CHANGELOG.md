@@ -134,7 +134,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - All reports, research, roadmaps must go to `INBOX/`
   - Requires content hashes in all INBOX documents
   - Pre-commit hook enforces INBOX placement and hash requirements
-  - INBOX structure: reports/, research/, roadmaps/, decisions/, summaries/, ARCHIVE/
+  - INBOX structure: reports/, research/, roadCONTEXT/maps/, decisions/, summaries/, ARCHIVE/
 
 - **Updated canon documents**:
   - `CANON/CONTRACT.md` Rule 3: Added INBOX requirement (reports → INBOX/reports/)
@@ -158,12 +158,12 @@ All notable changes to Agent Governance System will be documented in this file.
   - `MECHANICAL_INDEXING_REPORT.md` → `INBOX/reports/mechanical-indexing-report.md` (with hash)
 
 - **Moved roadmaps to INBOX**:
-  - `ROADMAP-semantic-core.md` → `INBOX/roadmaps/semantic-core.md`
-  - `ROADMAP-database-cassette-network.md` → `INBOX/roadmaps/database-cassette-network.md`
+  - `ROADMAP-semantic-core.md` → `INBOX/roadCONTEXT/maps/semantic-core.md`
+  - `ROADMAP-database-cassette-network.md` → `INBOX/roadCONTEXT/maps/database-cassette-network.md`
 
 ### Created INBOX structure
 - `INBOX/reports/` - All implementation and test reports (4 reports moved)
-- `INBOX/roadmaps/` - Roadmap documents (2 roadmaps moved)
+- `INBOX/roadCONTEXT/maps/` - Roadmap documents (2 roadmaps moved)
 - `INBOX/research/` - Research documents directory (ready for future research)
 - `INBOX/decisions/` - Decision records directory (ready for future ADRs)
 - `INBOX/summaries/` - Session summaries directory (ready for future summaries)
@@ -250,7 +250,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ### Changed
 - **AGENTS.md**: Hard prohibition on terminal spawning.
-- **MAPS/ENTRYPOINTS.md**: Marked deleted skills.
+- **CONTEXT/maps/ENTRYPOINTS.md**: Marked deleted skills.
 - **AGS_ROADMAP_MASTER.md**: Updated to reflect completed tasks (F3, INV-012, System 1 DB schema, Lane B2, Lane C1/C2).
 - **CANON/STEWARDSHIP.md**: Added 6 mandatory engineering practices (no bare excepts, atomic writes, headless execution, deterministic outputs, safety caps, database best practices).
 
@@ -284,7 +284,7 @@ This release establishes The Living Formula as the primary driver for navigating
 - `CANON/INDEX.md`: Elevated `FORMULA.md` to "The Driver" (Rank 1).
 - `CANON/GENESIS.md` & `GENESIS_COMPACT.md`: Updated load order to prioritize the Formula.
 - `TOOLS/codebook_build.py`: Added support for `@F0` generation.
-- **Discontinued**: Marked `CATALYTIC-DPT` (Swarm Terminal) as **UNDER CONSTRUCTION (NOT USEABLE)** in `AGENTS.md`, `CANON/INDEX.md`, and `MAPS/ENTRYPOINTS.md`.
+- **Discontinued**: Marked `CATALYTIC-DPT` (Swarm Terminal) as **UNDER CONSTRUCTION (NOT USEABLE)** in `AGENTS.md`, `CANON/INDEX.md`, and `CONTEXT/maps/ENTRYPOINTS.md`.
 
 ## [2.13.1] - 2025-12-28
 
@@ -421,7 +421,7 @@ This release establishes The Living Formula as the primary driver for navigating
 
 #### Changed
 - `CORTEX/cortex.build.py` section index now includes `CATALYTIC-DPT/` so agents can discover CAT-DPT docs via `TOOLS/cortex.py`.
-- `MAPS/ENTRYPOINTS.md` notes CAT-DPT is indexed by cortex.
+- `CONTEXT/maps/ENTRYPOINTS.md` notes CAT-DPT is indexed by cortex.
 
 ## [2.11.10] - 2025-12-27
 
@@ -492,10 +492,10 @@ This release establishes The Living Formula as the primary driver for navigating
 ### MAPS Updates (created 2025-12-27)
 
 #### Changed
-- Updated `MAPS/SYSTEM_MAP.md` for new packer architecture.
-- Updated `MAPS/DATA_FLOW.md` for new packer architecture.
-- Updated `MAPS/FILE_OWNERSHIP.md` for new packer architecture.
-- Updated `MAPS/ENTRYPOINTS.md` for new packer architecture.
+- Updated `CONTEXT/maps/SYSTEM_MAP.md` for new packer architecture.
+- Updated `CONTEXT/maps/DATA_FLOW.md` for new packer architecture.
+- Updated `CONTEXT/maps/FILE_OWNERSHIP.md` for new packer architecture.
+- Updated `CONTEXT/maps/ENTRYPOINTS.md` for new packer architecture.
 
 ## [2.11] - 2025-12-27
 
@@ -919,7 +919,7 @@ This release establishes The Living Formula as the primary driver for navigating
   - All reports, research, roadmaps must go to `INBOX/`
   - Requires content hashes in all INBOX documents
   - Pre-commit hook enforces INBOX placement and hash requirements
-  - INBOX structure: reports/, research/, roadmaps/, decisions/, summaries/, ARCHIVE/
+  - INBOX structure: reports/, research/, roadCONTEXT/maps/, decisions/, summaries/, ARCHIVE/
 
 - **Updated canon documents**:
   - `CANON/CONTRACT.md` Rule 3: Added INBOX requirement (reports → INBOX/reports/)
