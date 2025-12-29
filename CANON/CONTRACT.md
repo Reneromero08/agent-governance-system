@@ -8,7 +8,31 @@ This document defines the non-negotiable rules and the authority gradient for th
 ## Non-negotiable rules
 
 1. **Text outranks code.** The canon (this directory) defines the working spec for this repository; implementation must follow.
-2. **No behavior change without ceremony.** Any change to the behavior of the system must:
+2. **All implementations must produce signed reports.** Every new implementation (features, cassettes, protocols) must be documented with a signed report containing:
+   - Agent identity (model name + session identifier + date)
+   - Executive summary of what was built
+   - What was built (technical details, files created)
+   - What was demonstrated (test results, verification)
+   - Real vs simulated data confirmation
+   - Metrics (code statistics, performance numbers)
+   - Conclusion and next steps
+   - Report storage in `INBOX/reports/<feature-name>-implementation-report.md`
+   See `CANON/IMPLEMENTATION_REPORTS.md` for full requirements.
+
+3. **INBOX requirement for human-readable documents.** All documents, research, reports, roadmaps, and any content requiring human review ("god mode") MUST be stored in `INBOX/` directory at repository root. This includes:
+   - Implementation reports → `INBOX/reports/`
+   - Research documents → `INBOX/research/`
+   - Roadmaps and planning → `INBOX/roadmaps/`
+   - ADRs and decisions → `INBOX/decisions/`
+   - Session summaries → `INBOX/summaries/`
+   
+   Requirements:
+   - All INBOX documents MUST include content hash: `<!-- CONTENT_HASH: <sha256> -->`
+   - INBOX documents SHOULD use @Symbol references to CORTEX instead of duplicating content
+   - Pre-commit hook enforces INBOX placement and hash requirements
+   See `CANON/INBOX_POLICY.md` for full policy.
+
+4. **No behavior change without ceremony.** Any change to the behavior of the system must:
    - create an ADR (Architecture Decision Record) under `CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
@@ -27,7 +51,8 @@ This document defines the non-negotiable rules and the authority gradient for th
 
    **Logging policy** (see ADR-015): All system logs (emergency, audit, crisis, steward) must be written under `CONTRACTS/_runs/<purpose>_logs/` subdirectories.
 
-7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit directives that include "commit" authorize a commit once checks have passed and staged files have been listed; no additional confirmation prompt is required. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. After the ceremony steps are completed (checks run, staged files listed), short confirmations such as "go on" count as approval for those listed actions. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
+7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit directives that include "commit" authorize a commit once checks have passed and staged files have been listed; no additional confirmation prompt is required. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. After ceremony steps are completed (checks run, staged files listed), short confirmations such as "go on" count as approval for those listed actions. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
+8. **Implementation report requirement.** Every new implementation must produce a signed report in `INBOX/reports/<feature-name>-implementation-report.md` following the format in `CANON/IMPLEMENTATION_REPORTS.md`. Reports must include agent identity, date, what was built, what was demonstrated, real vs simulated confirmation, and metrics. Reports are subject to governance checks via `critic.py`.
 8. **Sovereign override interface.** If a user prompt contains `MASTER_OVERRIDE`, the agent is authorized to bypass any repository governance rule for that prompt only. Each use must be logged to `CONTRACTS/_runs/override_logs/master_override.jsonl`, and override logs must not be read or quoted unless the user prompt also contains `MASTER_OVERRIDE`.
 9. **Privacy boundary.** Agents must not access or scan files outside the repository root unless the user explicitly requests those paths in the same prompt. Avoid user profile and OS-level directories by default; ask before any out-of-repo access.
 10. **Traceable Identity.** Every agent session must be identifiable via a unique `session_id`. Anonymous operation is forbidden. All tool executions and state changes must be logged to `CONTRACTS/_runs/` with this identity to enable observability and auditing.

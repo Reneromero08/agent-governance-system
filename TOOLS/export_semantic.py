@@ -3,11 +3,12 @@
 Export Semantic Core data for Tiny Agents
 
 Queries system1.db and exports section data compressed with @Symbols
-for consumption by small AI models (tiny agents in the swarm architecture).
+for consumption by small AI models (tiny agents in swarm architecture).
 """
 
 import sqlite3
 import json
+import numpy as np
 from pathlib import Path
 
 DB_PATH = Path("CORTEX/system1.db")
@@ -36,14 +37,14 @@ def export_for_tiny_agents():
     # Get all sections with their embeddings
     cursor = conn.execute("""
         SELECT 
-            s.hash,
-            s.content,
-            s.file_path,
-            s.section_name,
+            c.chunk_hash as hash,
+            fts.content,
+            c.chunk_id,
             sv.embedding,
             sv.model_id
-        FROM sections s
-        JOIN section_vectors sv ON s.hash = sv.hash
+        FROM chunks c
+        JOIN chunks_fts fts ON c.chunk_id = fts.chunk_id
+        JOIN section_vectors sv ON c.chunk_hash = sv.hash
     """)
     
     sections = cursor.fetchall()
@@ -56,11 +57,9 @@ def export_for_tiny_agents():
         content_hash = section['hash']  # Use same hash as key
         
         # Parse embedding (stored as BLOB in SQLite)
-        import struct
         embedding_blob = section['embedding']
         
         # Reconstruct numpy array from bytes
-        import numpy as np
         embedding = np.frombuffer(embedding_blob, dtype=np.float32)
         
         # Compress to small float16 representation for tiny agents
@@ -69,8 +68,7 @@ def export_for_tiny_agents():
         compressed[content_hash] = {
             "symbol": f"@C:{section_hash[:8]}",
             "content_hash": content_hash,
-            "section_name": section['section_name'],
-            "source_path": section['file_path'],
+            "chunk_id": section['chunk_id'],
             "embedding_compressed": embedding_compressed[:256],  # First 256 chars
             "model": section['model_id']
         }
@@ -81,7 +79,7 @@ def export_for_tiny_agents():
     output = json.dumps(compressed, indent=2)
     print(output)
     
-    print(f"✓ Exported {len(compressed)} sections with compressed embeddings")
+    print(f"Exported {len(compressed)} sections with compressed embeddings")
     print(f"  Embedding precision: float32 → float16 (50% size reduction)")
     
     return True

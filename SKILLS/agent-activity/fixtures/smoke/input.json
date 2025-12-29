@@ -1,4 +1,5 @@
 {
   "log_path": "SKILLS/agent-activity/fixtures/smoke/audit.jsonl",
-  "active_within": 86400
+  "active_within": 86400,
+  "reference_time": "2025-12-27T21:00:00"
 }
