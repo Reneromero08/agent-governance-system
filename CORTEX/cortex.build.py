@@ -98,6 +98,23 @@ def init_db(conn: sqlite3.Connection) -> None:
     conn.commit()
 
 
+import subprocess
+
+def get_tracked_files(root: Path) -> set:
+    """Return set of tracked files (absolute paths). Returns None if git fails."""
+    try:
+        cmd = ["git", "ls-files", "-z"]
+        result = subprocess.run(cmd, cwd=root, capture_output=True)
+        if result.returncode != 0:
+            return None
+        paths = set()
+        for p in result.stdout.split(b'\0'):
+            if p:
+                paths.add(root / os.fsdecode(p))
+        return paths
+    except Exception:
+        return None
+
 def build_index(conn: sqlite3.Connection) -> int:
     """Scan the repository and populate the database incrementally. Returns updated entity count."""
     cursor = conn.cursor()
@@ -109,6 +126,10 @@ def build_index(conn: sqlite3.Connection) -> int:
     fs_paths = set()
     updates = 0
     
+    tracked_files = get_tracked_files(PROJECT_ROOT)
+    if tracked_files is not None:
+        print(f"[cortex] Git filter active: {len(tracked_files)} tracked files found")
+
     # scan for deletions and updates
     for md_file in PROJECT_ROOT.rglob("*.md"):
          # Skip files under hidden directories and output artifacts.
@@ -116,6 +137,10 @@ def build_index(conn: sqlite3.Connection) -> int:
             continue
         if any(part in ("BUILD", "_runs", "_packs", "_generated") for part in md_file.parts):
              continue
+
+        # Git Filter
+        if tracked_files is not None and md_file.resolve() not in tracked_files:
+            continue
 
         rel_path = str(md_file.relative_to(PROJECT_ROOT))
         

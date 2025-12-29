@@ -45,12 +45,37 @@ def should_index(path: Path) -> bool:
     return True
 
 
+import subprocess
+import os
+
+def get_tracked_files(root: Path) -> set:
+    """Return set of tracked files (absolute paths). Returns None if git fails."""
+    try:
+        cmd = ["git", "ls-files", "-z"]
+        result = subprocess.run(cmd, cwd=root, capture_output=True)
+        if result.returncode != 0:
+            return None
+        paths = set()
+        for p in result.stdout.split(b'\0'):
+            if p:
+                paths.add(root / os.fsdecode(p))
+        return paths
+    except Exception:
+        return None
+
 def reindex_all():
     print("🚀 Reindexing all repo files into system1.db...")
+    import os
     
     # Initialize DB (creates schema)
     db = System1DB()
     
+    tracked_files = get_tracked_files(PROJECT_ROOT)
+    if tracked_files is not None:
+        print(f"ℹ️  Git filter active: {len(tracked_files)} tracked files found")
+    else:
+        print("⚠️  Git filter inactive (using filesystem only)")
+
     count = 0
     for dir_name in INDEX_DIRS:
         target_dir = PROJECT_ROOT / dir_name
@@ -61,6 +86,13 @@ def reindex_all():
         for md_file in target_dir.rglob("*.md"):
             if not should_index(md_file):
                 continue
+            
+            # Git Filter
+            if tracked_files is not None and md_file.resolve() not in tracked_files:
+                # Skip untracked files
+                continue
+                
+            rel_path = md_file.relative_to(PROJECT_ROOT).as_posix()
                 
             rel_path = md_file.relative_to(PROJECT_ROOT).as_posix()
             try:
