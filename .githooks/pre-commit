@@ -1,8 +1,20 @@
 #!/bin/sh
 set -e
 
+# Cross-platform Python detection
+# On Windows, python3 doesn't exist - use python
+# On Linux/macOS, python3 is standard
+if python3 --version >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif python --version >/dev/null 2>&1; then
+    PYTHON_CMD="python"
+else
+    echo "[PRE-COMMIT] ERROR: No Python found"
+    exit 1
+fi
+
 echo "[PRE-COMMIT] Running preflight..."
-python3 TOOLS/ags.py preflight --allow-dirty-tracked
+$PYTHON_CMD TOOLS/ags.py preflight --allow-dirty-tracked
 
 echo "[PRE-COMMIT] Running canon governance check..."
 node TOOLS/check-canon-governance.js
