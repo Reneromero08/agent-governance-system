@@ -13,9 +13,9 @@ def test_roadmap_deliverables_exist():
     
     # Key files promised in Phase 7, 8, 9
     required_files = [
-        "CATALYTIC-DPT/SCHEMAS/swarm.schema.json",
+        "CONTEXT/schemas/swarm.schema.json",
         "CATALYTIC-DPT/PIPELINES/swarm_runtime.py",
-        "CATALYTIC-DPT/SCHEMAS/VERSIONING_POLICY.md",
+        "CONTEXT/schemas/VERSIONING_POLICY.md",
         "CATALYTIC-DPT/RELEASE_CHECKLIST.md",
         "CONTEXT/decisions/ADR-023-capability-revocation-semantics.md",
         "TOOLS/ags.py",
