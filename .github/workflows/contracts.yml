@@ -27,6 +27,9 @@ jobs:
           python -m pip install -r requirements.txt
           python -m pip install pytest cryptography referencing
       
+      - name: Test query module (pre-build gate)
+        run: python CORTEX/test_query.py
+      
       - name: Build cortex index
         run: python CORTEX/cortex.build.py
       

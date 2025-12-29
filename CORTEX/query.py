@@ -16,6 +16,60 @@ from typing import List, Dict, Optional
 
 # Configuration
 DB_PATH = Path("CORTEX/system1.db")
+CORTEX_DB_PATH = Path(__file__).resolve().parent / "_generated" / "cortex.db"
+
+
+def export_to_json() -> Dict:
+    """
+    Export the cortex index to a JSON-serializable dictionary.
+    
+    Called by cortex.build.py to create the cortex.json snapshot file.
+    Returns all entities from the database in a structured format.
+    """
+    db_path = CORTEX_DB_PATH
+    if not db_path.exists():
+        return {"entities": [], "metadata": {"error": "cortex.db not found"}}
+    
+    result = {
+        "entities": [],
+        "metadata": {}
+    }
+    
+    try:
+        with sqlite3.connect(str(db_path)) as conn:
+            conn.row_factory = sqlite3.Row
+            
+            # Export entities table
+            cursor = conn.execute("""
+                SELECT id, type, path, title, tags, summary, last_modified, content_hash
+                FROM entities
+                ORDER BY path
+            """)
+            for row in cursor.fetchall():
+                entity = {
+                    "id": row["id"],
+                    "type": row["type"],
+                    "path": row["path"],
+                    "title": row["title"],
+                    "tags": json.loads(row["tags"]) if row["tags"] else [],
+                    "summary": row["summary"],
+                    "last_modified": row["last_modified"],
+                    "content_hash": row["content_hash"]
+                }
+                result["entities"].append(entity)
+            
+            # Export metadata table
+            meta_cursor = conn.execute("SELECT key, value FROM metadata")
+            for row in meta_cursor.fetchall():
+                try:
+                    result["metadata"][row["key"]] = json.loads(row["value"])
+                except (json.JSONDecodeError, TypeError):
+                    result["metadata"][row["key"]] = row["value"]
+                    
+    except sqlite3.OperationalError as e:
+        result["metadata"]["error"] = str(e)
+    
+    return result
 
 class CortexQuery:
     def __init__(self, db_path: Path = DB_PATH):
