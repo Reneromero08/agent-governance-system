@@ -20,7 +20,7 @@ def _canon(obj: object) -> bytes:
 
 
 def test_registry_duplicate_capability_hash_rejects(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
     # Duplicate keys inside capabilities object (must be detected via object_pairs_hook).
     raw = (
         '{"registry_version":"1.0.0","capabilities":{'
@@ -48,7 +48,7 @@ def test_registry_duplicate_capability_hash_rejects(tmp_path: Path) -> None:
 
 
 def test_registry_noncanonical_json_rejects(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
     obj = {"registry_version": "1.0.0", "capabilities": {cap: {"adapter_spec_hash": cap, "adapter": {}}}}
     reg_path = tmp_path / "CAPABILITIES.json"
     reg_path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -70,7 +70,7 @@ def test_registry_noncanonical_json_rejects(tmp_path: Path) -> None:
 
 
 def test_registry_tamper_detected_fail_closed(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
     reg_path = tmp_path / "CAPABILITIES.json"
     # Canonical bytes but internally inconsistent (hash mismatch) -> tampered.
     obj = {

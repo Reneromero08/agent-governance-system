@@ -17,7 +17,7 @@ import sys
 from pathlib import Path
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
-CAP = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+CAP = "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
 
 
 def _run(cmd, env):

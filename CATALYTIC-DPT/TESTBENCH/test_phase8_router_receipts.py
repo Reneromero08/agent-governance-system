@@ -236,7 +236,7 @@ plan = {
     "plan_version": "1.0",
     "steps": [{
         "step_id": "escalate",
-        "capability_hash": "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+        "capability_hash": "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
     }]
 }
 sys.stdout.write(json.dumps(plan))
@@ -251,7 +251,7 @@ sys.stdout.write(json.dumps(plan))
             {
                 "revokes_version": "1.0.0",
                 "revoked_capabilities": [
-                    "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+                    "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
                 ],
             },
             sort_keys=True,
