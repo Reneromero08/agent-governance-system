@@ -2,6 +2,19 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [2.21.10] - 2025-12-29
+### Added
+- **Phase 8 (Commit Model Binding)**: Router receipt artifacts (`ROUTER.json`, `ROUTER_OUTPUT.json`) in `ags plan` for auditing model outputs.
+- **Phase 7 (Swarm Topology)**: `CATALYTIC-DPT/SCHEMAS/swarm.schema.json` and `PIPELINES/swarm_runtime.py` for executing DAGs of pipelines.
+- **AGS CLI**: Added `--allow-dirty-tracked` to `ags run` subcommand to support dirty tracked preflight bypass in Phase 6 tests.
+
+### Fixed
+- **CI Stabilization**: Resolved pytest collection collisions and fixed CLI argument mismatches.
+  - Renamed `@test` and `test_tool` in `test_semantic_core.py` and `test_governance.py`.
+  - Fixed path derivations in `test_cortex_integration.py` for repository-root alignment.
+- **Windows Compatibility**: Hardened testbench and skills by replacing `python3` with `sys.executable` and removing Unicode characters from outputs.
+- **Capability Registry**: Updated `CAPABILITIES.json` to use `python` instead of `python3`, ensuring Phase 6 tests pass on Windows.
+
 ## [2.21.0] - 2025-12-29
 ### Changed
 - **CORTEX/system1.db**: Rebuilt full repository index.

@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).parent.parent
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from CORTEX.system1_builder import System1DB
@@ -45,7 +45,6 @@ def test_system1_db():
     db.close()
     db_path.unlink()
     print("✓ System1DB test passed")
-    return True
 
 def test_cortex_indexer():
     """Test Cortex Indexer."""
@@ -96,7 +95,6 @@ def test_cortex_indexer():
     shutil.rmtree(meta_dir)
     
     print("✓ Cortex Indexer test passed")
-    return True
 
 def test_search_functionality():
     """Test search across indexed content."""
@@ -144,7 +142,6 @@ def test_search_functionality():
         db_path.unlink()
     
     print("✓ Search functionality test passed")
-    return True
 
 def main():
     """Run all tests."""
