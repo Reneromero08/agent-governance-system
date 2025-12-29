@@ -91,13 +91,9 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
         r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--allow-dirty-tracked"], env=env)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
     
-    finally:
-        _rm(pipeline_dir)
-        _rm(run_dir)
-        _rm(reg_root)
-
         r_verify = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify.returncode == 0, r_verify.stdout + r_verify.stderr
+
     finally:
         _rm(pipeline_dir)
         _rm(run_dir)
