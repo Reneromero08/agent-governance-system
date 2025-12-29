@@ -17,7 +17,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from MEMORY.LLM_PACKER.Engine.packer import verify_manifest
-from TOOLS.skill_runtime import ensure_canon_compat
+from TOOLS.agents.skill_runtime import ensure_canon_compat
 
 
 def validate_structure(pack_dir: Path) -> Tuple[List[str], List[str]]:

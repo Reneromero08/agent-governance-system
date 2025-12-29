@@ -19,7 +19,7 @@ LOAD ORDER (strict priority):
 5. CANON/VERSIONING.md — the current system version and compatibility rules.
 6. CONTEXT/decisions/ — accumulated ADRs that inform current design.
 7. CONTEXT/preferences/ — style preferences (e.g., commit ceremony, engineering integrity).
-8. MAPS/ENTRYPOINTS.md — where to make changes for each type of task.
+8. CONTEXT/maps/ENTRYPOINTS.md — where to make changes for each type of task.
 
 NAVIGATION:
 - Query `CORTEX/_generated/cortex.db` (or use `CORTEX/query.py`) to find files.

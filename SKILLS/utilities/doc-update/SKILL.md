@@ -14,7 +14,7 @@ Use when asked to update repository documentation, ADRs, or onboarding guidance.
 
 - **CANON/**: binding rules (CONTRACT, INVARIANTS, VERSIONING). Only edit when explicitly asked.
 - **CONTEXT/**: ADRs, preferences, rejections, and research. ADRs explain why decisions exist.
-- **MAPS/**: entrypoints and system maps that tell agents where to change things.
+- **CONTEXT/maps/**: entrypoints and system maps that tell agents where to change things.
 - **README.md**: top-level overview and required session bootstrap.
 - **MCP/**: protocol integration docs and server entrypoints.
 - **SKILLS/**: procedural workflows + fixtures for non-trivial work.
@@ -39,7 +39,7 @@ Use when asked to update repository documentation, ADRs, or onboarding guidance.
 
 1. Confirm intent gate (do not edit CANON or existing CONTEXT unless explicitly requested).
 2. Use `CORTEX/query.py` to locate entrypoints; avoid raw filesystem discovery.
-3. Update the smallest set of docs that inform all agents (README, MAPS/ENTRYPOINTS, MCP docs, relevant ADRs).
+3. Update the smallest set of docs that inform all agents (README, CONTEXT/maps/ENTRYPOINTS, MCP docs, relevant ADRs).
 4. For MCP updates, include:
    - The recommended entrypoint (`CONTRACTS/_runs/ags_mcp_entrypoint.py`).
    - The log location (`CONTRACTS/_runs/mcp_logs/`).

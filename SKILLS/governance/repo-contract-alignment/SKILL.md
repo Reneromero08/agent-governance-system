@@ -23,7 +23,7 @@ Use when asked to align repo behavior with canon/contract docs, audit governance
    - Use `python CORTEX/query.py --json` or `--find` for file discovery; avoid raw filesystem scans.
 
 3. Identify contract docs
-   - From the cortex index, collect docs matching: `README.md`, `AGENTS.md`, `CANON/`, `CONTEXT/decisions/` (ADRs), `ROADMAP`, `CONTRIBUTING`, `SECURITY`, `MAPS/*`, and any explicit “contract” docs.
+   - From the cortex index, collect docs matching: `README.md`, `AGENTS.md`, `CANON/`, `CONTEXT/decisions/` (ADRs), `ROADMAP`, `CONTRIBUTING`, `SECURITY`, `CONTEXT/maps/*`, and any explicit “contract” docs.
 
 4. Extract explicit rules
    - Read only those contract docs and list their rules.

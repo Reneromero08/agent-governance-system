@@ -43,12 +43,12 @@ def _deterministic_check(changed_files: List[str]) -> Dict[str, Any]:
     significant_prefixes = (
         "CANON/",
         "TOOLS/",
-        "CATALYTIC-DPT/PRIMITIVES/",
-        "CATALYTIC-DPT/PIPELINES/",
+        "PRIMITIVES/",
+        "PIPELINES/",
         "SKILLS/",
         ".github/workflows/",
         "SCHEMAS/",
-        "CATALYTIC-DPT/SPECTRUM/",
+        "CONTEXT/spectrum/",
         "CONTEXT/decisions/",
     )
     requires_changelog = any(any(p.startswith(pref) for pref in significant_prefixes) for p in changed_files)

@@ -18,7 +18,7 @@ This document outlines the security considerations for the Agent Governance Syst
 Agents MAY read:
 - `CANON/` — rules and invariants
 - `CONTEXT/` — decisions, guides, research
-- `MAPS/` — navigation and entrypoints
+- `CONTEXT/maps/` — navigation and entrypoints
 - `SKILLS/` — skill definitions and fixtures
 - `CONTRACTS/` — fixture definitions
 - `CORTEX/query.py` — cortex query API

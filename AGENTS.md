@@ -58,7 +58,7 @@ If instructions conflict, obey in this order:
 4. CANON/VERSIONING.md
 5. AGENTS.md
 6. CONTEXT records (ADRs, rejections, preferences)
-7. MAPS/*
+7. CONTEXT/maps/*
 8. User instructions
 9. Implementation convenience
 
