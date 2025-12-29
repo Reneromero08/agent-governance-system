@@ -109,6 +109,26 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 
 ---
 
+# Lane X: 6-Bucket Architecture (P2)
+
+## X1. Bucket Structure (P2)
+- [ ] Create top-level bucket directories: `LAW/`, `CAPABILITY/`, `NAVIGATION/`, `DIRECTION/`, `THOUGHT/`, `MEMORY/`
+- [ ] Move `CANON/`, `CONTRACTS/` → `LAW/`
+- [ ] Move `SKILLS/`, `TOOLS/`, `MCP/`, `PRIMITIVES/`, `PIPELINES/` → `CAPABILITY/`
+- [ ] Move `CORTEX/`, `CONTEXT/maps/` → `NAVIGATION/`
+- [ ] Create `DIRECTION/` with roadmaps consolidation
+- [ ] Move `CONTEXT/research/`, `LAB/`, `demos/` → `THOUGHT/`
+- [ ] Move `CONTEXT/archive/`, `MEMORY/`, reports → `MEMORY/`
+
+## X2. Import Path Updates (P2)
+- [ ] Update all Python imports to new bucket paths
+- [ ] Update pre-commit hooks and CI workflows
+- [ ] Update documentation references
+
+## X3. Bucket Enforcement (P2)
+- [ ] Add preflight check: "Artifact must belong to exactly one bucket"
+- [ ] Update `AGENTS.md` with bucket-aware mutation rules
+
 # Milestone: Semantic Anchor (2025-12-28)
 - [x] Cross-Repository Semantic Integration (`D:/CCC 2.0/AI/AGI`).
 - [x] Engineering Standard Hardening (Bare Excepts, UTF-8, Headless).

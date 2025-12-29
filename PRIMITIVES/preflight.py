@@ -8,7 +8,7 @@ Usage:
     from CATALYTIC_DPT.PRIMITIVES.preflight import PreflightValidator
 
     validator = PreflightValidator(
-        jobspec_schema_path="CATALYTIC-DPT/SCHEMAS/jobspec.schema.json"
+        jobspec_schema_path="CONTEXT/schemas/jobspec.schema.json"
     )
 
     valid, errors = validator.validate(jobspec_dict, project_root)
