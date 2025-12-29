@@ -1,0 +1,74 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 1 item
+
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_determinism_catalytic_dpt FAILED [100%]
+
+================================== FAILURES ===================================
+____________________ test_packer_determinism_catalytic_dpt ____________________
+
+    def test_packer_determinism_catalytic_dpt() -> None:
+        import os
+        os.environ["LLM_PACKER_DETERMINISTIC_TIMESTAMP"] = "2025-01-01T00:00:00"
+    
+        packs_root = Path("MEMORY/LLM_PACKER/_packs").resolve()
+        tmp_root = packs_root / "_system" / "_tmp_test_phase3_packing_hygiene"
+        out_a = tmp_root / "pack-a"
+        out_b = tmp_root / "pack-b"
+    
+        if tmp_root.exists():
+            shutil.rmtree(tmp_root)
+        tmp_root.mkdir(parents=True, exist_ok=True)
+    
+        try:
+>           packer.make_pack(
+                scope_key="catalytic-dpt",
+                mode="full",
+                profile="full",
+                split_lite=False,
+                out_dir=out_a,
+                combined=False,
+                stamp=None,
+                zip_enabled=False,
+                max_total_bytes=50 * 1024 * 1024,
+                max_entry_bytes=2 * 1024 * 1024,
+                max_entries=50_000,
+                allow_duplicate_hashes=None,
+            )
+
+CAPABILITY\TESTBENCH\test_packing_hygiene.py:48: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+MEMORY\LLM_PACKER\Engine\packer\core.py:698: in make_pack
+    included_stats = enforce_included_repo_limits(included_entries, limits=limits)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+entries = [{'hash': '4f975fb4e320f120378c84f3e51d71e7bb7762399c64a7a822aa224c27559533', 'path': 'CAPABILITY/MCP/AUTO_START.md', ...0724227b0f862a53f731c330fe910a6d7638fff618a307076022ac3b', 'path': 'CAPABILITY/MCP/board_roles.json', 'size': 67}, ...]
+limits = PackLimits(max_total_bytes=52428800, max_entry_bytes=2097152, max_entries=50000, allow_duplicate_hashes=False)
+
+    def enforce_included_repo_limits(entries: List[Dict[str, Any]], limits: PackLimits) -> Dict[str, Any]:
+        total_bytes = sum(e["size"] for e in entries)
+        if total_bytes > limits.max_total_bytes:
+            raise ValueError(f"PACK_LIMIT_EXCEEDED:max_total_bytes ({total_bytes} > {limits.max_total_bytes})")
+    
+        if len(entries) > limits.max_entries:
+            raise ValueError(f"PACK_LIMIT_EXCEEDED:max_entries ({len(entries)} > {limits.max_entries})")
+    
+        for e in entries:
+            if e["size"] > limits.max_entry_bytes:
+                raise ValueError(f"PACK_LIMIT_EXCEEDED:max_entry_bytes ({e['path']} {e['size']} > {limits.max_entry_bytes})")
+    
+        if limits.allow_duplicate_hashes is False:
+            hashes = [e["hash"] for e in entries]
+            if len(hashes) != len(set(hashes)):
+>               raise ValueError("PACK_LIMIT_EXCEEDED:duplicate_hashes")
+E               ValueError: PACK_LIMIT_EXCEEDED:duplicate_hashes
+
+MEMORY\LLM_PACKER\Engine\packer\core.py:297: ValueError
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_determinism_catalytic_dpt - ValueError: PACK_LIMIT_EXCEEDED:duplicate_hashes
+============================== 1 failed in 0.38s ==============================

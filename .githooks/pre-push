@@ -1,0 +1,45 @@
+#!/bin/sh
+# Pre-push hook - blocks push without approval token
+set -e
+
+TOKEN_FILE="LAW/CONTRACTS/_runs/ALLOW_PUSH.token"
+
+echo "[PRE-PUSH] Checking push approval..."
+
+# Check if token exists
+if [ ! -f "$TOKEN_FILE" ]; then
+    echo ""
+    echo "❌ PUSH BLOCKED: No push approval token found"
+    echo ""
+    echo "Run: echo \"my-push-reason\" > $TOKEN_FILE"
+    echo "Scope this push, create a token, then push."
+    echo ""
+    exit 1
+fi
+
+# Read token
+TOKEN_SCOPE=$(cat "$TOKEN_FILE")
+echo "[PRE-PUSH] Token found: $TOKEN_SCOPE"
+echo "The token will be consumed (deleted) after successful push."
+
+# Run minimal contracts validation
+echo "[PRE-PUSH] Running contracts validation..."
+python LAW/CONTRACTS/runner.py
+if [ $? -ne 0 ]; then
+    echo ""
+    echo "❌ PUSH BLOCKED: Contracts validation failed"
+    echo ""
+    echo "Fix failing contracts before pushing."
+    echo "Token preserved for retry."
+    echo ""
+    exit 1
+fi
+
+echo "[PRE-PUSH] ✅ Contracts passed"
+echo "[PRE-PUSH] ✅ Push approved - consuming token"
+
+# Delete token (one-time use)
+rm "$TOKEN_FILE"
+
+echo "[PRE-PUSH] Proceeding with push..."
+exit 0

@@ -1,0 +1,82 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+testpaths: .
+plugins: anyio-4.12.0
+collecting ... collected 14 items / 2 errors
+
+<Dir agent-governance-system>
+  <Package CAPABILITY>
+    <Dir CORTEX>
+      <Package tests>
+        <Module test_query.py>
+          Tests for CORTEX/query.py module.
+          
+          Ensures the query module has all required functions that other modules depend on.
+          This test was added to prevent the AttributeError regression where export_to_json()
+          was missing but called by cortex.build.py.
+          <Function test_export_to_json_exists>
+            Verify export_to_json function exists in query module.
+          <Function test_export_to_json_returns_dict>
+            Verify export_to_json returns expected structure.
+          <Function test_cortex_query_class_exists>
+            Verify CortexQuery class exists with required methods.
+        <Module test_semantic_core.py>
+          Test suite for Semantic Core (Phase 1: Vector Foundation)
+          
+          Tests:
+          1. EmbeddingEngine functionality
+          2. Vector serialization/deserialization
+          3. Similarity computation
+          4. Database schema creation
+          5. Vector indexing
+          6. Semantic search
+          
+          Run: python test_semantic_core.py
+          <Function test_embedding_init>
+          <Function test_single_embedding>
+          <Function test_batch_embedding>
+          <Function test_serialization>
+          <Function test_cosine_similarity>
+          <Function test_batch_similarity>
+          <Function test_schema_creation>
+          <Function test_vector_indexing>
+          <Function test_semantic_search>
+          <Function test_empty_text>
+    <Dir SKILLS>
+      <Dir agents>
+        <Dir ant-worker>
+          <Dir scripts>
+            <Module test_ant_worker.py>
+              Test harness for grok-executor skill.
+              
+              Validates:
+              1. Task execution with hash verification
+              2. Immutable ledger creation
+              3. Error handling and rollback
+              4. Integration with MCP server
+              <Function test_ant_worker>
+                Pytest entry point.
+
+=================================== ERRORS ====================================
+___________ ERROR collecting NAVIGATION/CORTEX/tests/test_query.py ____________
+import file mismatch:
+imported module 'tests.test_query' has this __file__ attribute:
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\CORTEX\tests\test_query.py
+which is not the same as the test file we want to collect:
+  D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\tests\test_query.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+_______ ERROR collecting NAVIGATION/CORTEX/tests/test_semantic_core.py ________
+import file mismatch:
+imported module 'tests.test_semantic_core' has this __file__ attribute:
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\CORTEX\tests\test_semantic_core.py
+which is not the same as the test file we want to collect:
+  D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\tests\test_semantic_core.py
+HINT: remove __pycache__ / .pyc files and/or use a unique basename for your test file modules
+=========================== short test summary info ===========================
+ERROR NAVIGATION/CORTEX/tests/test_query.py
+ERROR NAVIGATION/CORTEX/tests/test_semantic_core.py
+!!!!!!!!!!!!!!!!!!! Interrupted: 2 errors during collection !!!!!!!!!!!!!!!!!!!
+==================== 14 tests collected, 2 errors in 0.81s ====================

@@ -1,0 +1,62 @@
+[
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py",
+    "tests": ["test_ags_route_deterministic_bytes", "test_ags_run_calls_verify_ok", "test_pipeline_run_creates_state_when_missing"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py\n2. ANALYZE failures: test_ags_route_deterministic_bytes, test_ags_run_calls_verify_ok, test_pipeline_run_creates_state_when_missing\n3. ERROR: MISSING_STEP_COMMAND - investigate _make_plan() function, ensure step_id maps to a command in adapter\n4. FIX ONLY THE SPECIFIED FAILURES.\n5. DO NOT REFACTOR ARCHITECTURE.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py",
+    "tests": ["test_verify_rejects_unpinned_even_if_pipeline_artifact_exists", "test_verify_rejects_empty_pins"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py\n2. ANALYZE failures: test_verify_rejects_unpinned_even_if_pipeline_artifact_exists, test_verify_rejects_empty_pins\n3. ERROR: NameError - pipeline_dir and pins_path undefined before use\n4. Define pipeline_dir and pins_path variables at the start of the test function\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py",
+    "tests": ["test_capability_versioning_in_place_upgrade_rejected"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py\n2. ANALYZE failures: test_capability_versioning_in_place_upgrade_rejected\n3. ERROR: Assertion failed - expected 'capabilities version mismatch' but got 'CAPABILITY_HASH_MISMATCH'\n4. Update assertion to match actual error message from system\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py",
+    "tests": ["test_fail_stderr"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py\n2. ANALYZE failures: test_fail_stderr\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py",
+    "tests": ["test_ags_plan_router_happy_path"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py\n2. ANALYZE failures: test_ags_plan_router_happy_path\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py",
+    "tests": ["test_ags_plan_over_output_fails_closed"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py\n2. ANALYZE failures: test_ags_plan_over_output_fails_closed\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_cas_store.py",
+    "tests": ["test_reject_invalid_hash_and_missing_hash"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_cas_store.py\n2. ANALYZE failures: test_reject_invalid_hash_and_missing_hash\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_hash_toolbelt.py",
+    "tests": ["test_invalid_hash_reject"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_hash_toolbelt.py\n2. ANALYZE failures: test_invalid_hash_reject\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_merkle.py",
+    "tests": ["test_reject_invalid_hashes_and_expected_root_format"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_merkle.py\n2. ANALYZE failures: test_reject_invalid_hashes_and_expected_root_format\n3. ERROR: Assertion failed - check test output for expected vs actual\n4. Update assertion to match actual behavior\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_phase7_acceptance.py",
+    "tests": ["test_swarm_chain_binds_pipeline_proofs", "test_swarm_chain_fails_on_tampered_proof"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_phase7_acceptance.py\n2. ANALYZE failures: test_swarm_chain_binds_pipeline_proofs, test_swarm_chain_fails_on_tampered_proof\n3. ERROR: NameError - original_chain and chain_path undefined before use\n4. Define chain_path and original_chain variables at the start of the test functions\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_phase8_router_receipts.py",
+    "tests": ["test_capability_escalation_fails_closed"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_phase8_router_receipts.py\n2. ANALYZE failures: test_capability_escalation_fails_closed\n3. ERROR: Assertion failed - expected 'REVOKED_CAPABILITY' but got 'ROUTER_STDERR_NOT_EMPTY'\n4. Update assertion to match actual error message 'ROUTER_STDERR_NOT_EMPTY'\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/test_verifier_freeze.py",
+    "tests": ["test_crypto_dep_missing_fail_closed"],
+    "instruction": "\nSTRICT MECHANICAL INSTRUCTION:\n1. READ file: CAPABILITY/TESTBENCH/test_verifier_freeze.py\n2. ANALYZE failures: test_crypto_dep_missing_fail_closed\n3. ERROR: NameError - 'patch' undefined (missing import)\n4. Add 'from unittest.mock import patch' at the top of the file\n5. FIX ONLY THE SPECIFIED FAILURES.\n6. RETURN the full content of the fixed file.\n"
+  }
+]

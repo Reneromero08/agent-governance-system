@@ -92,32 +92,32 @@ SCOPE_CATALYTIC_DPT = PackScope(
     key="catalytic-dpt",
     title="CATALYTIC-DPT (MAIN, no LAB)",
     file_prefix="CATALYTIC-DPT",
-    include_dirs=("CATALYTIC-DPT",),
+    include_dirs=("CAPABILITY", "LAW", "DIRECTION", "NAVIGATION"),
     root_files=(),
     anchors=(
-        "CATALYTIC-DPT/AGENTS.md",
-        "CATALYTIC-DPT/README.md",
-        "CATALYTIC-DPT/ROADMAP_V2.1.md",
-        "CATALYTIC-DPT/swarm_config.json",
-        "CATALYTIC-DPT/CHANGELOG.md",
+        "AGENTS.md",
+        "README.md",
+        "LAW/CANON/CONTRACT.md",
+        "LAW/CANON/INVARIANTS.md",
+        "CAPABILITY/TESTBENCH/README.md",
     ),
     excluded_dir_parts=frozenset({
         ".git", "BUILD", "LAB", "_runs", "_generated", "_packs", "__pycache__", "node_modules",
     }),
-    source_root_rel="CATALYTIC-DPT",
+    source_root_rel=".",
 )
 
 SCOPE_LAB = PackScope(
     key="lab",
     title="CATALYTIC-DPT (LAB)",
     file_prefix="CATALYTIC-DPT-LAB",
-    include_dirs=("CATALYTIC-DPT/LAB",),
+    include_dirs=("THOUGHT/LAB",),
     root_files=(),
     anchors=(),
     excluded_dir_parts=frozenset({
         ".git", "BUILD", "_runs", "_generated", "_packs", "__pycache__", "node_modules",
     }),
-    source_root_rel="CATALYTIC-DPT/LAB",
+    source_root_rel="THOUGHT/LAB",
 )
 
 SCOPES: Dict[str, PackScope] = {
@@ -671,7 +671,7 @@ def make_pack(
     current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
 
     if allow_duplicate_hashes is None:
-        allow_duplicate_hashes = scope.key != SCOPE_CATALYTIC_DPT.key
+        allow_duplicate_hashes = True
 
     # validate_repo_state_manifest logic (simplified inline or stubbed)
     # We trust build_state_manifest for Phase 1 refactor

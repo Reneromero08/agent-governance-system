@@ -1,0 +1,16 @@
+{
+  "rc": 2,
+  "result": {
+    "normalized_paths": {
+      "read": [],
+      "write": [
+        "CANON/CHANGELOG.md"
+      ]
+    },
+    "policy_version": "1",
+    "reasons": [
+      "REPO_WRITE_FLAG_REQUIRED"
+    ],
+    "verdict": "BLOCK"
+  }
+}

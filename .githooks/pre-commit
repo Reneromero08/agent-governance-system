@@ -12,12 +12,12 @@ else
 fi
 
 echo "[PRE-COMMIT] Running preflight..."
-$PYTHON_CMD TOOLS/ags.py preflight --allow-dirty-tracked
+$PYTHON_CMD CAPABILITY/TOOLS/ags.py preflight --allow-dirty-tracked
 
 echo "[PRE-COMMIT] Running canon governance check..."
-node TOOLS/check-canon-governance.js
+node CAPABILITY/TOOLS/check-canon-governance.js
 
 echo "[PRE-COMMIT] Running INBOX policy check..."
-$PYTHON_CMD TOOLS/governance/check_inbox_policy.py
+$PYTHON_CMD CAPABILITY/TOOLS/governance/check_inbox_policy.py
 
 echo "[PRE-COMMIT] OK"

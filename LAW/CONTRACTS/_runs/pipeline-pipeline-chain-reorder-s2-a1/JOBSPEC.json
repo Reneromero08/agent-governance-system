@@ -1,0 +1,19 @@
+{
+  "job_id": "pipe-chain-step2",
+  "phase": 0,
+  "task_type": "primitive_implementation",
+  "intent": "step2",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [
+      "LAW\\CONTRACTS\\_runs\\_tmp\\pipeline-pipeline-chain-reorder-s2-a1_out.txt"
+    ],
+    "validation_criteria": {
+      "restoration_verified": true
+    }
+  },
+  "catalytic_domains": [
+    "LAW\\CONTRACTS\\_runs\\_tmp\\pipeline_chain_reorder\\domain"
+  ],
+  "determinism": "deterministic"
+}

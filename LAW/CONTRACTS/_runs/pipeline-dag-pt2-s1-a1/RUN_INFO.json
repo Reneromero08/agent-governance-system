@@ -1,0 +1,10 @@
+{
+  "run_id": "pipeline-dag-pt2-s1-a1",
+  "timestamp": "CATALYTIC-DPT-02_CONFIG",
+  "intent": "dag-pt2",
+  "catalytic_domains": [
+    "CONTRACTS\\_runs\\_tmp\\pipeline_dag\\domain"
+  ],
+  "exit_code": 0,
+  "restoration_verified": true
+}

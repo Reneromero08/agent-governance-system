@@ -1,0 +1,4 @@
+stash@{0}: WIP on main: 0cda01c feat(mcp): enforce mandatory agent identity and add agent-activity skill (ADR-021)
+stash@{1}: WIP on main: 0cda01c feat(mcp): enforce mandatory agent identity and add agent-activity skill (ADR-021)
+stash@{2}: WIP on main: 0cda01c feat(mcp): enforce mandatory agent identity and add agent-activity skill (ADR-021)
+stash@{3}: WIP on main: 0cda01c feat(mcp): enforce mandatory agent identity and add agent-activity skill (ADR-021)

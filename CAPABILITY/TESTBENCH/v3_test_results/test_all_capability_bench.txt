@@ -1,0 +1,1301 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+configfile: pytest.ini
+plugins: anyio-4.12.0
+collecting ... collected 200 items
+
+CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py::test_spectrum02_emission PASSED [  0%]
+CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py::test_spectrum02_resume PASSED [  1%]
+CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py::test_spectrum03_chain PASSED [  1%]
+CAPABILITY/TESTBENCH/spectrum/test_validator_version_integrity.py::test_validator_version_integrity PASSED [  2%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_corruption_detected_by_hash_toolbelt PASSED [  2%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_truncation_detected_by_hash_toolbelt PASSED [  3%]
+CAPABILITY/TESTBENCH/test_adversarial_cas.py::test_cas_partial_write_never_treated_as_present PASSED [  3%]
+CAPABILITY/TESTBENCH/test_adversarial_ledger.py::test_ledger_rejects_malformed_json_line PASSED [  4%]
+CAPABILITY/TESTBENCH/test_adversarial_ledger.py::test_ledger_rejects_truncated_last_line_mid_byte PASSED [  4%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_normalize_relpath_rejects_traversal_and_absolute PASSED [  5%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_normalize_relpath_normalizes_separators_and_dot PASSED [  5%]
+CAPABILITY/TESTBENCH/test_adversarial_paths.py::test_merkle_rejects_non_normalized_paths PASSED [  6%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_fails_closed_on_partial_state_json PASSED [  6%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_fails_closed_on_inconsistent_completed_step_state PASSED [  7%]
+CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_resume_never_skips_a_missing_step_record FAILED [  7%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_proof_hash_tamper_fails_closed_deterministically PASSED [  8%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_output_hash_manifest_tamper_fails_closed PASSED [  8%]
+CAPABILITY/TESTBENCH/test_adversarial_proof_tamper.py::test_domain_roots_tamper_rejected_by_cmp01_validator PASSED [  9%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_happy_path_deterministic PASSED [  9%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_missing_command PASSED [ 10%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_hidden_side_effects PASSED [ 10%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_unbounded_deref_caps PASSED [ 11%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_non_normalized_paths PASSED [ 11%]
+CAPABILITY/TESTBENCH/test_ags_phase6_adapter_contract.py::test_adapter_reject_nondeterministic_flag_strict PASSED [ 12%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_route_deterministic_bytes PASSED [ 12%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_run_calls_verify_ok PASSED [ 13%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_ags_run_fails_closed_on_tamper PASSED [ 13%]
+CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py::test_pipeline_run_creates_state_when_missing PASSED [ 14%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_capability_pinned_routes_and_verifies FAILED [ 14%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_known_but_unpinned_rejects_at_route PASSED [ 15%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists FAILED [ 15%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_registry.py::test_capability_registry_happy_unknown_and_tamper FAILED [ 16%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_revoked_capability_rejects_at_route PASSED [ 16%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability FAILED [ 17%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_passes_when_not_revoked FAILED [ 17%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_historical_pipeline_verifies_after_revocation FAILED [ 18%]
+CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py::test_capability_versioning_in_place_upgrade_rejected PASSED [ 18%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_happy_echo PASSED [ 19%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_stderr PASSED [ 19%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_timeout PASSED [ 20%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_bloat PASSED [ 20%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_malformed_output PASSED [ 21%]
+CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py::test_fail_crash PASSED [ 21%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_duplicate_capability_hash_rejects PASSED [ 22%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_noncanonical_json_rejects PASSED [ 22%]
+CAPABILITY/TESTBENCH/test_ags_phase6_registry_immutability.py::test_registry_tamper_detected_fail_closed PASSED [ 23%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_router_happy_path PASSED [ 23%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_fails_on_stderr PASSED [ 24%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_caps_bytes PASSED [ 24%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_route_rejects_invalid_plan_schema PASSED [ 25%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_plan_jobspec_validation PASSED [ 25%]
+CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py::test_ags_route_rejects_missing_step_command PASSED [ 26%]
+CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py::test_ags_plan_emits_router_receipts PASSED [ 26%]
+CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py::test_ags_plan_over_output_fails_closed PASSED [ 27%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_canonical_artifact_set_required PASSED [ 27%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_status_state_machine PASSED [ 28%]
+CAPABILITY/TESTBENCH/test_canonical_artifacts.py::test_proof_written_last PASSED [ 28%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_bytes_same_bytes_same_hash PASSED [ 29%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_bytes_idempotent_does_not_change_bytes PASSED [ 29%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_put_stream_matches_put_bytes PASSED [ 30%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_large_stream_roundtrip PASSED [ 30%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_deterministic_object_path_across_instances PASSED [ 31%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_reject_invalid_hash_and_missing_hash PASSED [ 31%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_normalize_relpath_accepts_and_normalizes PASSED [ 32%]
+CAPABILITY/TESTBENCH/test_cas_store.py::test_normalize_relpath_rejects_absolute_and_traversal PASSED [ 32%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_system1_db PASSED  [ 33%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_cortex_indexer PASSED [ 33%]
+CAPABILITY/TESTBENCH/test_cortex_integration.py::test_search_functionality PASSED [ 34%]
+CAPABILITY/TESTBENCH/test_demo_memoization_hash_reuse.py::test_phase2_demo_artifacts_are_falsifiable PASSED [ 34%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_creates_ledger_entry PASSED [ 35%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_records_exact_bounds PASSED [ 35%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_determinism PASSED [ 36%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_no_run_context_skips_logging PASSED [ 36%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_all_commands PASSED [ 37%]
+CAPABILITY/TESTBENCH/test_deref_logging.py::test_deref_logging_schema_conformance PASSED [ 37%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_roadmap_deliverables_exist PASSED [ 38%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_canon_mentions_key_concepts PASSED [ 38%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_router_receipt_artifacts_in_schema PASSED [ 39%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_policy_snapshot_logic_exists PASSED [ 39%]
+CAPABILITY/TESTBENCH/test_governance_coverage.py::test_swarm_schema_validity PASSED [ 40%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_read_enforces_max_bytes PASSED [ 40%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_read_range_and_clamp PASSED [ 41%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_grep_bounds PASSED      [ 41%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_describe_deterministic_and_bounded PASSED [ 42%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_ast_outline_and_truncation PASSED [ 42%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_ast_unsupported_binary PASSED [ 43%]
+CAPABILITY/TESTBENCH/test_hash_toolbelt.py::test_invalid_hash_rejects PASSED [ 43%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_single_record_one_line PASSED [ 44%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_multiple_records_order_preserved PASSED [ 44%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_deterministic_serialization_same_bytes PASSED [ 45%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_schema_rejection_missing_required_fields PASSED [ 45%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_append_only_enforcement_detects_truncation PASSED [ 46%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_corrupt_line_detection PASSED  [ 46%]
+CAPABILITY/TESTBENCH/test_ledger.py::test_partial_line_detection PASSED  [ 47%]
+CAPABILITY/TESTBENCH/test_memoization.py::test_memoization_miss_then_hit_then_invalidate PASSED [ 47%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_deterministic_root_across_runs PASSED [ 48%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_path_ordering_independent_of_input_order PASSED [ 48%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_duplicate_path_rejection_via_non_normalized_collision PASSED [ 49%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_duplicate_hash_under_different_paths_rejected PASSED [ 49%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_odd_leaf_padding_correctness PASSED [ 50%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_empty_manifest_rejected PASSED [ 50%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_verify_manifest_root_true_false PASSED [ 51%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_reject_non_normalized_paths PASSED [ 51%]
+CAPABILITY/TESTBENCH/test_merkle.py::test_reject_invalid_hashes_and_expected_root_format PASSED [ 52%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_determinism_catalytic_dpt PASSED [ 52%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits0-PACK_LIMIT_EXCEEDED:max_total_bytes] PASSED [ 53%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits1-PACK_LIMIT_EXCEEDED:max_entry_bytes] PASSED [ 53%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_packer_limits_fail_closed[limits2-PACK_LIMIT_EXCEEDED:max_entries] PASSED [ 54%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_repo_state_manifest_validation_and_dedup PASSED [ 54%]
+CAPABILITY/TESTBENCH/test_packing_hygiene.py::test_verify_manifest_detects_tamper PASSED [ 55%]
+CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_binds_pipeline_proofs FAILED [ 55%]
+CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_tampered_pipeline_proof_fails_verification FAILED [ 56%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_receipts_created FAILED [ 56%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_over_output_fails_closed FAILED [ 57%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_stderr_fails_closed FAILED [ 57%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_malformed_plan_fails_schema_validation PASSED [ 58%]
+CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed FAILED [ 58%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_valid PASSED [ 59%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_tamper PASSED [ 59%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_reorder PASSED [ 60%]
+CAPABILITY/TESTBENCH/test_pipeline_chain.py::test_pipeline_chain_determinism PASSED [ 60%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ok PASSED [ 61%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_missing_artifact PASSED [ 61%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_chain_tamper PASSED [ 62%]
+CAPABILITY/TESTBENCH/test_pipeline_verify_cli.py::test_pipeline_verify_ledger_corrupt PASSED [ 62%]
+CAPABILITY/TESTBENCH/test_pipelines.py::test_pipeline_init_is_deterministic_and_resume_safe PASSED [ 63%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_valid_jobspec_passes PASSED [ 63%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_invalid_jobspec_schema_fails PASSED [ 64%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_path_traversal_fails PASSED [ 64%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_absolute_path_fails PASSED  [ 65%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_path_not_under_allowed_root_fails PASSED [ 65%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_forbidden_path_fails PASSED [ 66%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_input_output_overlap_fails PASSED [ 66%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_multiple_errors_reported PASSED [ 67%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_empty_catalytic_domains_valid PASSED [ 67%]
+CAPABILITY/TESTBENCH/test_preflight.py::test_empty_outputs_valid PASSED  [ 68%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_valid_proof_accepted PASSED [ 68%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_invalid_proof_rejected PASSED [ 69%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_missing_proof_rejected PASSED [ 69%]
+CAPABILITY/TESTBENCH/test_proof_gating.py::test_proof_is_single_source_of_truth PASSED [ 70%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_rerun_determinism_proof_and_domain_roots_bytes_identical PASSED [ 70%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_tamper_detection_hash_mismatch PASSED [ 71%]
+CAPABILITY/TESTBENCH/test_proof_wiring.py::test_path_normalization_rejects_traversal PASSED [ 71%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_identical_artifacts_verified_true PASSED [ 72%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_hash_mismatch_verified_false PASSED [ 72%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_missing_files_verified_false PASSED [ 73%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_extra_files_verified_false PASSED [ 73%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_deterministic_output PASSED [ 74%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_proof_validates_against_schema PASSED [ 74%]
+CAPABILITY/TESTBENCH/test_restore_proof.py::test_empty_domains_verified_true PASSED [ 75%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_rejects_when_verifier_strict_fails PASSED [ 75%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_success_emits_artifacts_and_matches_hashes PASSED [ 76%]
+CAPABILITY/TESTBENCH/test_restore_runner.py::test_restore_rollback_failure_returns_restore_rollback_failed PASSED [ 76%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_allowed_write_succeeds PASSED [ 77%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_write_text_succeeds PASSED [ 77%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_mkdir_succeeds PASSED [ 78%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_write_bytes_succeeds PASSED [ 78%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_path_normalization PASSED [ 79%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_forbidden_path_fails PASSED [ 79%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_forbidden_path_guarded_write_fails PASSED [ 80%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_write_outside_allowed_roots_fails PASSED [ 80%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_path_traversal_fails PASSED [ 81%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_absolute_path_outside_project_fails PASSED [ 81%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_multiple_allowed_roots_work PASSED [ 82%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_all_forbidden_paths_rejected PASSED [ 82%]
+CAPABILITY/TESTBENCH/test_runtime_guard.py::test_guarded_mkdir_forbidden_fails PASSED [ 83%]
+CAPABILITY/TESTBENCH/test_schemas.py::test_all_schemas PASSED            [ 83%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_canonical_json PASSED [ 84%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_valid_registry PASSED [ 84%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_missing_registry PASSED [ 85%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_load_malformed_registry PASSED [ 85%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_resolve_missing_skill PASSED [ 86%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_e2e_resolution PASSED [ 86%]
+CAPABILITY/TESTBENCH/test_skills_registry.py::test_e2e_integrity_fail PASSED [ 87%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_canonicalize_json PASSED [ 87%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_bundle_root_computation PASSED [ 88%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_chain_root_computation PASSED [ 88%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_ed25519_signature_verification PASSED [ 89%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_validator_id_derivation PASSED [ 89%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_missing_artifact PASSED [ 90%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_identity_invalid PASSED [ 90%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_chain_empty PASSED [ 91%]
+CAPABILITY/TESTBENCH/test_spectrum_04_05_enforcement.py::test_spectrum05_chain_duplicate_run PASSED [ 91%]
+CAPABILITY/TESTBENCH/test_swarm_reuse.py::test_swarm_execution_elision PASSED [ 92%]
+CAPABILITY/TESTBENCH/test_swarm_runtime.py::test_swarm_runtime_happy_path PASSED [ 92%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_api_return_shape_bundle PASSED [ 93%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_api_return_shape_chain PASSED [ 93%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_frozen_error_codes_exist PASSED [ 94%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_crypto_dep_missing_fail_closed PASSED [ 94%]
+CAPABILITY/TESTBENCH/test_verifier_freeze.py::test_chain_dir_ordering_deterministic PASSED [ 95%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_valid_bundle_byte_identical PASSED [ 95%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_tampered_bundle_reject_same_code_and_bytes PASSED [ 96%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_chain_verification_byte_identical PASSED [ 96%]
+CAPABILITY/TESTBENCH/test_verifier_interop.py::test_interop_determinism_rerun_same_inputs_same_bytes PASSED [ 97%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_valid_bundle PASSED     [ 97%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_status_failure PASSED   [ 98%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_tampered_output PASSED  [ 98%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_forbidden_artifact PASSED [ 99%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_chain_valid PASSED      [ 99%]
+CAPABILITY/TESTBENCH/test_verify_bundle.py::test_chain_tamper_middle PASSED [100%]
+
+================================== FAILURES ===================================
+___________ test_pipeline_resume_never_skips_a_missing_step_record ____________
+
+    def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
+        pipeline_id = "adversarial-pipeline-resume"
+        rt = PipelineRuntime(project_root=REPO_ROOT)
+        pdir = rt.pipeline_dir(pipeline_id)
+        _rm(pdir)
+    
+        base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "pipeline_resume" / pipeline_id
+        _rm(base)
+        base.mkdir(parents=True, exist_ok=True)
+    
+        domain_rel = "LAW/CONTRACTS/_runs/_tmp/adversarial/pipeline_resume/domain"
+        (REPO_ROOT / domain_rel).mkdir(parents=True, exist_ok=True)
+    
+        jobspec1 = base / "jobspec_s1.json"
+        jobspec2 = base / "jobspec_s2.json"
+        out1 = REPO_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "_tmp" / "adversarial_pipeline_step1.txt"
+        out2 = REPO_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "_tmp" / "adversarial_pipeline_step2.txt"
+    
+        out1_rel = str(out1.relative_to(REPO_ROOT)).replace("\\", "/")
+        out2_rel = str(out2.relative_to(REPO_ROOT)).replace("\\", "/")
+    
+        _write_jobspec(jobspec1, job_id="adv-pipe-s1", catalytic_domains=[domain_rel], durable_paths=[out1_rel])
+        _write_jobspec(jobspec2, job_id="adv-pipe-s2", catalytic_domains=[domain_rel], durable_paths=[out2_rel])
+    
+        spec = {
+            "pipeline_id": pipeline_id,
+            "validator_semver": "0.1.0",
+            "validator_build_id": "adversarial",
+            "timestamp": "CATALYTIC-DPT-02_CONFIG",
+            "steps": [
+                {
+                    "step_id": "s1",
+                    "jobspec_path": str(jobspec1.relative_to(REPO_ROOT)).replace("\\", "/"),
+                    "cmd": [
+                        sys.executable,
+                        "-c", f"from pathlib import Path; Path('{out1}').parent.mkdir(parents=True, exist_ok=True); Path('{out1}').write_text('ONE', encoding='utf-8')",
+                    ],
+                    "strict": True,
+                    "memoize": False,
+                },
+                {
+                    "step_id": "s2",
+                    "jobspec_path": str(jobspec2.relative_to(REPO_ROOT)).replace("\\", "/"),
+                    "cmd": [
+                        sys.executable,
+                        "-c", f"from pathlib import Path; Path('{out2}').parent.mkdir(parents=True, exist_ok=True); Path('{out2}').write_text('TWO', encoding='utf-8')",
+                    ],
+                    "strict": True,
+                    "memoize": False,
+                },
+            ],
+        }
+        spec_path = base / "PIPELINE_SPEC.json"
+        spec_path.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+    
+        # Simulate crash between step completion and STATE update:
+        # - run step1 using the internal executor
+        # - do NOT write RUN_REF.json nor update STATE.json
+        rt.init_from_spec_path(pipeline_id=pipeline_id, spec_path=spec_path)
+        parsed_spec, state = rt.load(pipeline_id=pipeline_id)
+        step1 = parsed_spec.steps[0]
+        run_id = rt._make_run_id(parsed_spec.pipeline_id, step1.step_id, 1)
+        (REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id).mkdir(parents=True, exist_ok=True)
+>       rt._execute_step(spec=parsed_spec, step=step1, run_id=run_id)
+
+CAPABILITY\TESTBENCH\test_adversarial_pipeline_resume.py:148: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <CAPABILITY.PIPELINES.pipeline_runtime.PipelineRuntime object at 0x000001C0EFFA97D0>
+
+    def _execute_step(self, *, spec: PipelineSpec, step: StepSpec, run_id: str) -> None:
+        jobspec = self._load_jobspec(step.jobspec_path)
+        catalytic_domains = jobspec.get("catalytic_domains", [])
+        durable_paths = jobspec.get("outputs", {}).get("durable_paths", [])
+        intent = jobspec.get("intent", "")
+        job_id = jobspec.get("job_id", run_id)
+        if not isinstance(catalytic_domains, list) or not all(isinstance(x, str) and x for x in catalytic_domains):
+            raise ValueError("jobspec catalytic_domains must be list[str]")
+        if not isinstance(durable_paths, list) or not all(isinstance(x, str) and x for x in durable_paths):
+            raise ValueError("jobspec outputs.durable_paths must be list[str]")
+        if not isinstance(intent, str) or not intent:
+            raise ValueError("jobspec intent must be non-empty string")
+        if not isinstance(job_id, str) or not job_id:
+            raise ValueError("jobspec job_id must be non-empty string")
+    
+        cmd = [
+            sys.executable,
+            str(self.project_root / "CAPABILITY" / "TOOLS" / "catalytic" / "catalytic_runtime.py"),
+            "--run-id",
+            run_id,
+            "--job-id",
+            job_id,
+            "--catalytic-domains",
+            *catalytic_domains,
+            "--durable-outputs",
+            *durable_paths,
+            "--intent",
+            intent,
+            "--timestamp",
+            spec.timestamp,
+            "--validator-semver",
+            spec.validator_semver,
+            "--validator-build-id",
+            spec.validator_build_id,
+        ]
+        if not step.memoize:
+            cmd.append("--no-memoize")
+        if not step.strict:
+            cmd.append("--non-strict")
+        cmd.append("--")
+        cmd.extend(step.cmd)
+    
+        res = subprocess.run(cmd, cwd=str(self.project_root))
+        if res.returncode != 0:
+>           raise RuntimeError(f"step {step.step_id} failed: rc={res.returncode}")
+E           RuntimeError: step s1 failed: rc=1
+
+CAPABILITY\PIPELINES\pipeline_runtime.py:447: RuntimeError
+---------------------------- Captured stdout call -----------------------------
+[catalytic] Starting catalytic run: pipeline-adversarial-pipeline-resume-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\adversarial\pipeline_resume\domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path; Path('D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\_generated\_tmp\adversarial_pipeline_step1.txt').parent.mkdir(parents=True, exist_ok=True); Path('D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\_generated\_tmp\adversarial_pipeline_step1.txt').write_text('ONE', encoding='utf-8')
+
+[catalytic] Command exited with code 1
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\adversarial\pipeline_resume\domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-adversarial-pipeline-resume-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path; Path('D:\\CCC 2.0\\AI\\agent-governance-system\\NAVIGATION\\CORTEX\\_generated\\_tmp\\adversarial_pipeline_step1.txt').parent.mkdir(parents=True, exist_ok=True); Path('D:\\CCC 2.0\\AI\\agent-governance-system\\NAVIGATION\\CORTEX\\_generated\\_tmp\\adversarial_pipeline_step1.txt').write_text('ONE', encoding='utf-8')"]
+
+  File "<string>", line 1
+
+    from pathlib import Path; Path('D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\_generated\_tmp\adversarial_pipeline_step1.txt').parent.mkdir(parents=True, exist_ok=True); Path('D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\_generated\_tmp\adversarial_pipeline_step1.txt').write_text('ONE', encoding='utf-8')
+
+                                                                                                                                           ^
+
+SyntaxError: (unicode error) 'unicodeescape' codec can't decode bytes in position 37-38: malformed \N character escape
+
+[catalytic] FAIL: Command exited with code 1.
+
+_________________ test_capability_pinned_routes_and_verifies __________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_capability_pinned_routes_0')
+
+    def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-ok"
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [CAP]}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        # The v1 capability is pinned to a concrete ant-worker command that expects these files.
+        reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+        (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+        in_path.write_bytes(b"PHASE66\n")
+        task_path.write_text(
+            json.dumps(
+                {
+                    "task_id": "ant-worker-copy",
+                    "task_type": "file_operation",
+                    "operation": "copy",
+                    "verify_integrity": True,
+                    "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                    "files": [{"source": str(in_path), "destination": str(out_path)}],
+                }
+            ),
+            encoding="utf-8",
+        )
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-pins-ok-s1-a1"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE66\n")
+            task_path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "ant-worker-copy",
+                        "task_type": "file_operation",
+                        "operation": "copy",
+                        "verify_integrity": True,
+                        "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                        "files": [{"source": str(in_path), "destination": str(out_path)}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+    
+            r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+>           assert r_route.returncode == 0, r_route.stdout + r_route.stderr
+E           AssertionError: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_pinned_routes_0\\plan.json', '--pipeline-id', 'ags-capability-pins-ok'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:89: AssertionError
+________ test_verify_rejects_unpinned_even_if_pipeline_artifact_exists ________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_verify_rejects_unpinned_e0')
+
+    def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-pins-verify-bypass"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_id = "pipeline-ags-capability-pins-verify-bypass-s1-a1"
+        run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            (reg_root / "domain").mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE66\n")
+            task_path.write_text(
+                json.dumps(
+                    {
+                        "task_id": "ant-worker-copy",
+                        "task_type": "file_operation",
+                        "operation": "copy",
+                        "verify_integrity": True,
+                        "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                        "files": [{"source": str(in_path), "destination": str(out_path)}],
+                    }
+                ),
+                encoding="utf-8",
+            )
+    
+            # Create a real run with the pinned capability (using default pins).
+            plan_ok = tmp_path / "plan_ok.json"
+            plan_ok.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
+            r_route_ok = subprocess.run(
+                [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id],
+                cwd=str(REPO_ROOT),
+                capture_output=True,
+                text=True,
+            )
+>           assert r_route_ok.returncode == 0, r_route_ok.stdout + r_route_ok.stderr
+E           AssertionError: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_rejects_unpinned_e0\\plan_ok.json', '--pipeline-id', 'ags-capability-pins-verify-bypass'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_pins.py:170: AssertionError
+______________ test_capability_registry_happy_unknown_and_tamper ______________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_capability_registry_happy0')
+
+    def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
+        pipeline_id = "ags-capability-registry"
+        step_id = "s1"
+    
+        reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+        task_path = reg_root / "task.json"
+        result_path = reg_root / "result.json"
+        in_path = reg_root / "in.txt"
+        out_path = reg_root / "out.txt"
+        domain_dir = reg_root / "domain"
+    
+        adapter = {
+            "adapter_version": "1.0.0",
+            "name": "ant-worker-copy-v1",
+            "command": [
+                sys.executable,
+                "CAPABILITY/SKILLS/ant-worker/scripts/run.py",
+                str(task_path.relative_to(REPO_ROOT)).replace("\\", "/"),
+                str(result_path.relative_to(REPO_ROOT)).replace("\\", "/"),
+            ],
+            "jobspec": {
+                "job_id": "cap-ant-worker-copy-v1",
+                "phase": 6,
+                "task_type": "adapter_execution",
+                "intent": "capability: ant-worker copy (Phase 6.5)",
+                "inputs": {},
+                "outputs": {"durable_paths": [str(out_path.relative_to(REPO_ROOT)).replace("\\", "/")], "validation_criteria": {}},
+                "catalytic_domains": [str(domain_dir.relative_to(REPO_ROOT)).replace("\\", "/")],
+                "determinism": "deterministic",
+            },
+            "inputs": {str(in_path.relative_to(REPO_ROOT)).replace("\\", "/"): "a" * 64},
+            "outputs": {str(out_path.relative_to(REPO_ROOT)).replace("\\", "/"): "b" * 64},
+            "side_effects": {"network": False, "clock": False, "filesystem_unbounded": False, "nondeterministic": False},
+            "deref_caps": {"max_bytes": 1024, "max_matches": 1, "max_nodes": 10, "max_depth": 2},
+            "artifacts": {"ledger": "c" * 64, "proof": "d" * 64, "domain_roots": "e" * 64},
+        }
+        cap = _sha256_hex(_canon(adapter))
+        registry = {"registry_version": "1.0.0", "capabilities": {cap: {"adapter_spec_hash": cap, "adapter": adapter}}}
+        reg_path = tmp_path / "CAPABILITIES.json"
+        reg_path.write_bytes(_canon(registry))
+    
+        pins = {"pins_version": "1.0.0", "allowed_capabilities": sorted([cap])}
+        pins_path = tmp_path / "CAPABILITY_PINS.json"
+        pins_path.write_bytes(_canon(pins))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    
+        plan_ok = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": cap}]}
+        plan_ok_path = tmp_path / "plan_ok.json"
+        plan_ok_path.write_text(json.dumps(plan_ok), encoding="utf-8")
+    
+        plan_bad = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": "0" * 64}]}
+        plan_bad_path = tmp_path / "plan_bad.json"
+        plan_bad_path.write_text(json.dumps(plan_bad), encoding="utf-8")
+    
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+        run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-{step_id}-a1"
+    
+        try:
+            _rm(pipeline_dir)
+            _rm(run_dir)
+            _rm(reg_root)
+            domain_dir.mkdir(parents=True, exist_ok=True)
+            in_path.write_bytes(b"PHASE65\n")
+            task = {
+                "task_id": "ant-worker-copy",
+                "task_type": "file_operation",
+                "operation": "copy",
+                "verify_integrity": True,
+                "timestamp": "CATALYTIC-DPT-02_CONFIG",
+                "files": [{"source": str(in_path), "destination": str(out_path)}],
+            }
+            task_path.write_text(json.dumps(task), encoding="utf-8")
+    
+            # Unknown capability rejects at route time.
+            r_bad = _run(
+                [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_bad_path), "--pipeline-id", pipeline_id],
+                env=env,
+            )
+            assert r_bad.returncode != 0
+            assert "UNKNOWN_CAPABILITY" in (r_bad.stderr + r_bad.stdout)
+    
+            # Happy path routes, runs, verifies.
+            r_route = _run(
+                [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok_path), "--pipeline-id", pipeline_id],
+                env=env,
+            )
+            assert r_route.returncode == 0, r_route.stdout + r_route.stderr
+    
+            r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--skip-preflight"], env=env)
+>           assert r_run.returncode == 0, r_run.stdout + r_run.stderr
+E           AssertionError: {"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}
+E             [catalytic] Starting catalytic run: pipeline-ags-capability-registry-s1-a1
+E             [catalytic] Phase 0: Preflight validation...
+E             [catalytic] Preflight passed: JobSpec is valid
+E             [catalytic] Phase 1: Capturing pre-snapshots...
+E             [catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+E             [catalytic] Memoization MISS: dd9e593f4fdf523dc12c5a7ec48b2cd26059de923d270cb1ef7e3b444acf1c97
+E             [catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe CAPABILITY/SKILLS/ant-worker/scripts/run.py LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json
+E             [catalytic] Command exited with code 2
+E             [catalytic] Phase 3: Capturing post-snapshots...
+E             [catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+E             [catalytic] Phase 4: Verifying restoration...
+E             [catalytic] SUCCESS: Catalytic domains fully restored
+E             [catalytic] Phase 5: Writing canonical artifact set...
+E             [catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-ags-capability-registry-s1-a1
+E             [catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+E             AGS: running pipeline
+E             FAIL pipeline run rc=2
+E             DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'CAPABILITY/SKILLS/ant-worker/scripts/run.py', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json']
+E             C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\SKILLS\\ant-worker\\scripts\\run.py': [Errno 2] No such file or directory
+E             [catalytic] FAIL: Command exited with code 2.
+E             ERROR: step s1 failed: rc=2
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'run', '--pipeline-id', 'ags-capability-registry', '--strict', '--skip-preflight'], returncode=2, stdout='{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}\n[catalytic] Starting catalytic run: pipeline-ags-capability-registry-s1-a1\n[catalytic] Phase 0: Preflight validation...\n[catalytic] Preflight passed: JobSpec is valid\n[catalytic] Phase 1: Capturing pre-snapshots...\n[catalytic] Snapshots pre: LAW\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\domain (0 files)\n[catalytic] Memoization MISS: dd9e593f4fdf523dc12c5a7ec48b2cd26059de923d270cb1ef7e3b444acf1c97\n[catalytic] Phase 2: Executing command: C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe CAPABILITY/SKILLS/ant-worker/scripts/run.py LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json\n[catalytic] Command exited with code 2\n[catalytic] Phase 3: Capturing post-snapshots...\n[catalytic] Snapshots post: LAW\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\domain (0 files)\n[catalytic] Phase 4: Verifying restoration...\n[catalytic] SUCCESS: Catalytic domains fully restored\n[catalytic] Phase 5: Writing canonical artifact set...\n[catalytic] Canonical artifact set written to D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\pipeline-ags-capability-registry-s1-a1\n[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL\nAGS: running pipeline\nFAIL pipeline run rc=2\n', stderr="DEBUG: execute cmd=['C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe', 'CAPABILITY/SKILLS/ant-worker/scripts/run.py', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json']\nC:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\SKILLS\\\\ant-worker\\\\scripts\\\\run.py': [Errno 2] No such file or directory\n[catalytic] FAIL: Command exited with code 2.\nERROR: step s1 failed: rc=2\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_registry.py:129: AssertionError
+___________________ test_verify_rejects_revoked_capability ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_verify_rejects_revoked_ca0')
+
+    def test_verify_rejects_revoked_capability(tmp_path):
+        """
+        Pipeline verify must reject if capability is revoked, even if route succeeded earlier.
+    
+        NOTE: This test calls catalytic pipeline verify directly. Without a full pipeline run,
+        the verify will fail with CHAIN_MISSING before reaching the revocation check.
+        The key governance gate is at ROUTE time (tested separately).
+    
+        This test verifies that:
+        1. Route succeeds when not revoked
+        2. Verify fails (for any reason) when revoked - CHAIN_MISSING is acceptable
+           because a real pipeline would have been blocked at route time
+        """
+        pipeline_id = "test-verify-revocation"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    
+        # Create revokes files
+        empty_revokes = tmp_path / "REVOKES_EMPTY.json"
+        empty_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
+    
+        revoked_revokes = tmp_path / "REVOKES_REVOKED.json"
+        revoked_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": [CAP]}))
+    
+        # Env with no revocation (for route)
+        env_route = dict(os.environ)
+        env_route["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
+        env_route["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+        env_route["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        }))
+    
+        try:
+            _rm(pipeline_dir)
+    
+            # Route should succeed (capability not revoked yet)
+            cmd_route = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id]
+            r_route = _run(cmd_route, env_route)
+>           assert r_route.returncode == 0, f"Route should succeed: {r_route.stderr}"
+E           AssertionError: Route should succeed: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_rejects_revoked_ca0\\plan.json', '--pipeline-id', 'test-verify-revocation'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:108: AssertionError
+_____________________ test_verify_passes_when_not_revoked _____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_verify_passes_when_not_re0')
+
+    def test_verify_passes_when_not_revoked(tmp_path):
+        """
+        Pipeline verify should not falsely report REVOKED_CAPABILITY when capability is not revoked.
+        """
+        pipeline_id = "test-verify-no-revocation"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    
+        # Empty revokes
+        empty_revokes = tmp_path / "REVOKES_EMPTY.json"
+        empty_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
+        env["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+        env["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        }))
+    
+        try:
+            _rm(pipeline_dir)
+    
+            # Route
+            cmd_route = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id]
+            r_route = _run(cmd_route, env)
+>           assert r_route.returncode == 0, f"Route should succeed: {r_route.stderr}"
+E           AssertionError: Route should succeed: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+E             
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_passes_when_not_re0\\plan.json', '--pipeline-id', 'test-verify-no-revocation'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:157: AssertionError
+_____________ test_historical_pipeline_verifies_after_revocation ______________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_historical_pipeline_verif0')
+
+    def test_historical_pipeline_verifies_after_revocation(tmp_path):
+        """Phase 6.9: Verify that historical pipelines remain valid after capability revocation."""
+        pipeline_id = "test-historical-pass"
+        pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    
+        # 1. Setup registries with a new patched CAP (safe command)
+        caps_src = REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json"
+        caps_data = json.loads(caps_src.read_text(encoding="utf-8"))
+    
+        # Patch first CAP to use a safe command for testing
+        cap_hash = list(caps_data["capabilities"].keys())[0]
+        adapter = caps_data["capabilities"][cap_hash]["adapter"]
+        adapter["command"] = ["cmd.exe", "/c", "echo hello"]
+    
+        # Re-derive hash
+        import hashlib
+        new_cap = hashlib.sha256(json.dumps(adapter, sort_keys=True, separators=(",", ":")).encode("utf-8")).hexdigest()
+        caps_data["capabilities"] = {new_cap: {"adapter": adapter, "adapter_spec_hash": new_cap}}
+    
+        caps_path = tmp_path / "CAPABILITIES.json"
+        caps_path.write_text(json.dumps(caps_data, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+    
+        pins_path = tmp_path / "PINS.json"
+        pins_path.write_text(json.dumps({"pins_version": "1.0.0", "allowed_capabilities": [new_cap]}, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+    
+        rev_path = tmp_path / "REVOKES.json"
+        rev_path.write_text(json.dumps({"revokes_version": "1.0.0", "revoked_capabilities": []}, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+    
+        plan_path = tmp_path / "plan.json"
+        plan_path.write_text(json.dumps({
+            "plan_version": "1.0",
+            "steps": [{"step_id": "s1", "capability_hash": new_cap}]
+        }))
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(caps_path)
+        env["CATALYTIC_PINS_PATH"] = str(pins_path)
+        env["CATALYTIC_REVOKES_PATH"] = str(rev_path)
+    
+        try:
+            _rm(pipeline_dir)
+    
+            # 2. Route
+            r1 = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env)
+>           assert r1.returncode == 0
+E           assert 2 == 0
+E            +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_historical_pipeline_verif0\\plan.json', '--pipeline-id', 'test-historical-pass'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+
+CAPABILITY\TESTBENCH\test_ags_phase6_capability_revokes.py:216: AssertionError
+___________________ test_swarm_chain_binds_pipeline_proofs ____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_swarm_chain_binds_pipelin0')
+
+    def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
+        """
+        Phase 7 Acceptance 1: A swarm run produces a top-level chain that binds each pipeline's proof.
+        """
+        swarm_id = "phase7-chain-ok"
+        p1 = "phase7-p1"
+        p2 = "phase7-p2"
+    
+        runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
+        swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
+        dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
+    
+        rt_pipeline = PipelineRuntime(project_root=REPO_ROOT)
+        pipeline1_dir = rt_pipeline.pipeline_dir(p1)
+        pipeline2_dir = rt_pipeline.pipeline_dir(p2)
+    
+        out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+        out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+        jobspec1_rel = f"CONTRACTS/_runs/_tmp/phase7_test/{p1}_jobspec.json"
+        jobspec2_rel = f"CONTRACTS/_runs/_tmp/phase7_test/{p2}_jobspec.json"
+    
+        try:
+            _rm(swarm_dir)
+            _rm(dag_dir)
+            _rm(pipeline1_dir)
+            _rm(pipeline2_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase7_test")
+            _rm(REPO_ROOT / out1)
+            _rm(REPO_ROOT / out2)
+    
+            _write_jobspec(REPO_ROOT / jobspec1_rel, job_id=f"{p1}-job", intent=p1, catalytic_domains=["CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[out1])
+            _write_jobspec(REPO_ROOT / jobspec2_rel, job_id=f"{p2}-job", intent=p2, catalytic_domains=["CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[out2])
+    
+            pipeline_spec_1 = {
+                "pipeline_id": p1,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec1_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out1}').parent.mkdir(parents=True, exist_ok=True);Path('{out1}').write_text('{p1}')"],
+                    }
+                ]
+            }
+    
+            pipeline_spec_2 = {
+                "pipeline_id": p2,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec2_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out2}').parent.mkdir(parents=True, exist_ok=True);Path('{out2}').write_text('{p2}')"],
+                    }
+                ]
+            }
+    
+            swarm_spec = {
+                "swarm_version": "1.0.0",
+                "swarm_id": swarm_id,
+                "nodes": [
+                    {
+                        "node_id": p1,
+                        "pipeline_spec": pipeline_spec_1
+                    },
+                    {
+                        "node_id": p2,
+                        "pipeline_spec": pipeline_spec_2
+                    }
+                ],
+                "edges": [
+                    {
+                        "from": p1,
+                        "to": p2,
+                        "requires": ["CHAIN.json"]
+                    }
+                ]
+            }
+    
+            spec_path = tmp_path / "swarm.json"
+            spec_path.write_text(json.dumps(swarm_spec, indent=2), encoding="utf-8")
+    
+            sr = SwarmRuntime(project_root=REPO_ROOT, runs_root=runs_root)
+>           res = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+CAPABILITY\TESTBENCH\test_phase7_acceptance.py:131: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+CAPABILITY\PIPELINES\swarm_runtime.py:240: in run
+    dag_res = run_dag(
+CAPABILITY\PIPELINES\pipeline_dag.py:638: in run_dag
+    rt.run(pipeline_id=node)
+CAPABILITY\PIPELINES\pipeline_runtime.py:204: in run
+    self._execute_step(spec=spec, step=step, run_id=run_id)
+CAPABILITY\PIPELINES\pipeline_runtime.py:404: in _execute_step
+    jobspec = self._load_jobspec(step.jobspec_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <CAPABILITY.PIPELINES.pipeline_runtime.PipelineRuntime object at 0x000001C0F10FF150>
+jobspec_path = 'CONTRACTS/_runs/_tmp/phase7_test/phase7-p1_jobspec.json'
+
+    def _load_jobspec(self, jobspec_path: str) -> Dict[str, Any]:
+        rel = jobspec_path.replace("\\", "/")
+        if Path(rel).is_absolute():
+            raise ValueError("jobspec_path must be repo-relative")
+        abs_path = self.project_root / rel
+        obj = json.loads(abs_path.read_text(encoding="utf-8"))
+        if not isinstance(obj, dict):
+            raise ValueError("jobspec must be an object")
+        preflight = PreflightValidator(self.jobspec_schema_path)
+        valid, errors = preflight.validate(obj, self.project_root)
+        if not valid:
+            first = errors[0] if errors else {"code": "JOBSPEC_INVALID", "message": "invalid"}
+>           raise ValueError(f"jobspec invalid: {first.get('code')}: {first.get('message')}")
+E           ValueError: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase7_test/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+
+CAPABILITY\PIPELINES\pipeline_runtime.py:400: ValueError
+_______________ test_tampered_pipeline_proof_fails_verification _______________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_tampered_pipeline_proof_f0')
+
+    def test_tampered_pipeline_proof_fails_verification(tmp_path: Path) -> None:
+        """
+        Phase 7 Acceptance 2: Any missing or tampered pipeline proof fails the swarm verification.
+        """
+        swarm_id = "phase7-tamper"
+        p1 = "phase7-tamper-p1"
+        p2 = "phase7-tamper-p2"
+    
+        runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
+        swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
+        dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
+    
+        rt_pipeline = PipelineRuntime(project_root=REPO_ROOT)
+        pipeline1_dir = rt_pipeline.pipeline_dir(p1)
+        pipeline2_dir = rt_pipeline.pipeline_dir(p2)
+    
+        out1 = f"CORTEX/_generated/_tmp/{p1}.txt"
+        out2 = f"CORTEX/_generated/_tmp/{p2}.txt"
+        jobspec1_rel = f"CONTRACTS/_runs/_tmp/phase7_tamper/{p1}_jobspec.json"
+        jobspec2_rel = f"CONTRACTS/_runs/_tmp/phase7_tamper/{p2}_jobspec.json"
+    
+        try:
+            _rm(swarm_dir)
+            _rm(dag_dir)
+            _rm(pipeline1_dir)
+            _rm(pipeline2_dir)
+            _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase7_tamper")
+            _rm(REPO_ROOT / out1)
+            _rm(REPO_ROOT / out2)
+    
+            _write_jobspec(REPO_ROOT / jobspec1_rel, job_id=f"{p1}-job", intent=p1, catalytic_domains=["CONTRACTS/_runs/_tmp/phase7_tamper/domain"], durable_paths=[out1])
+            _write_jobspec(REPO_ROOT / jobspec2_rel, job_id=f"{p2}-job", intent=p2, catalytic_domains=["CONTRACTS/_runs/_tmp/phase7_tamper/domain"], durable_paths=[out2])
+    
+            pipeline_spec_1 = {
+                "pipeline_id": p1,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec1_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out1}').parent.mkdir(parents=True, exist_ok=True);Path('{out1}').write_text('{p1}')"],
+                    }
+                ]
+            }
+    
+            pipeline_spec_2 = {
+                "pipeline_id": p2,
+                "steps": [
+                    {
+                        "step_id": "s1",
+                        "jobspec_path": jobspec2_rel,
+                        "memoize": False,
+                        "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out2}').parent.mkdir(parents=True, exist_ok=True);Path('{out2}').write_text('{p2}')"],
+                    }
+                ]
+            }
+    
+            swarm_spec = {
+                "swarm_version": "1.0.0",
+                "swarm_id": swarm_id,
+                "nodes": [
+                    {
+                        "node_id": p1,
+                        "pipeline_spec": pipeline_spec_1
+                    },
+                    {
+                        "node_id": p2,
+                        "pipeline_spec": pipeline_spec_2
+                    }
+                ],
+                "edges": [
+                    {
+                        "from": p1,
+                        "to": p2,
+                        "requires": ["CHAIN.json"]
+                    }
+                ]
+            }
+    
+            spec_path = tmp_path / "swarm.json"
+            spec_path.write_text(json.dumps(swarm_spec, indent=2), encoding="utf-8")
+    
+            sr = SwarmRuntime(project_root=REPO_ROOT, runs_root=runs_root)
+>           res = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+CAPABILITY\TESTBENCH\test_phase7_acceptance.py:251: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+CAPABILITY\PIPELINES\swarm_runtime.py:240: in run
+    dag_res = run_dag(
+CAPABILITY\PIPELINES\pipeline_dag.py:638: in run_dag
+    rt.run(pipeline_id=node)
+CAPABILITY\PIPELINES\pipeline_runtime.py:204: in run
+    self._execute_step(spec=spec, step=step, run_id=run_id)
+CAPABILITY\PIPELINES\pipeline_runtime.py:404: in _execute_step
+    jobspec = self._load_jobspec(step.jobspec_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = <CAPABILITY.PIPELINES.pipeline_runtime.PipelineRuntime object at 0x000001C0EFCCC950>
+jobspec_path = 'CONTRACTS/_runs/_tmp/phase7_tamper/phase7-tamper-p1_jobspec.json'
+
+    def _load_jobspec(self, jobspec_path: str) -> Dict[str, Any]:
+        rel = jobspec_path.replace("\\", "/")
+        if Path(rel).is_absolute():
+            raise ValueError("jobspec_path must be repo-relative")
+        abs_path = self.project_root / rel
+        obj = json.loads(abs_path.read_text(encoding="utf-8"))
+        if not isinstance(obj, dict):
+            raise ValueError("jobspec must be an object")
+        preflight = PreflightValidator(self.jobspec_schema_path)
+        valid, errors = preflight.validate(obj, self.project_root)
+        if not valid:
+            first = errors[0] if errors else {"code": "JOBSPEC_INVALID", "message": "invalid"}
+>           raise ValueError(f"jobspec invalid: {first.get('code')}: {first.get('message')}")
+E           ValueError: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase7_tamper/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+
+CAPABILITY\PIPELINES\pipeline_runtime.py:400: ValueError
+________________________ test_router_receipts_created _________________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_router_receipts_created0')
+
+    def test_router_receipts_created(tmp_path):
+        """Router execution must create receipt artifacts."""
+        # Create a simple router that outputs a valid plan
+        router_script = tmp_path / "router.py"
+        router_script.write_text(
+            """
+    import json
+    import sys
+    plan = {
+        "plan_version": "1.0",
+        "steps": [
+            {
+                "step_id": "test-step",
+                "command": ["echo", "hello"],
+                "jobspec": {
+                    "job_id": "test-job",
+                    "phase": 8,
+                    "task_type": "test_execution",
+                    "intent": "Test router receipts",
+                    "inputs": {},
+                    "outputs": {
+                        "durable_paths": [],
+                        "validation_criteria": {}
+                    },
+                    "catalytic_domains": [],
+                    "determinism": "deterministic"
+                }
+            }
+        ]
+    }
+    sys.stdout.write(json.dumps(plan))
+    """,
+            encoding="utf-8",
+        )
+    
+        plan_output = tmp_path / "plan.json"
+        receipt_dir = tmp_path / ".router_receipts"
+    
+        try:
+            _rm(receipt_dir)
+    
+            cmd = [
+                sys.executable,
+                "-m",
+                "TOOLS.ags",
+                "plan",
+                "--router",
+                sys.executable,
+                "--router-arg",
+                str(router_script),
+                "--out",
+                str(plan_output),
+            ]
+            r = _run(cmd)
+    
+>           assert r.returncode == 0, f"Router should succeed: {r.stderr}"
+E           AssertionError: Router should succeed: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')
+E             
+E           assert 1 == 0
+E            +  where 1 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_receipts_created0\\router.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_receipts_created0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").returncode
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:92: AssertionError
+____________________ test_router_over_output_fails_closed _____________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_router_over_output_fails_0')
+
+    def test_router_over_output_fails_closed(tmp_path):
+        """Router producing too much output must fail closed."""
+        # Create a router that outputs excessive data
+        router_script = tmp_path / "router_spam.py"
+        router_script.write_text(
+            """
+    import sys
+    # Output way more than the default max (10MB)
+    for i in range(100000):
+        sys.stdout.write("x" * 1000)
+    """,
+            encoding="utf-8",
+        )
+    
+        plan_output = tmp_path / "plan.json"
+    
+        cmd = [
+            sys.executable,
+            "-m",
+            "TOOLS.ags",
+            "plan",
+            "--router",
+            sys.executable,
+            "--router-arg",
+            str(router_script),
+            "--out",
+            str(plan_output),
+        ]
+        r = _run(cmd)
+    
+        assert r.returncode != 0, "Router with excessive output should fail"
+>       assert "ROUTER_OUTPUT_TOO_LARGE" in (r.stderr + r.stdout)
+E       assert 'ROUTER_OUTPUT_TOO_LARGE' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+E        +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\router_spam.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\router_spam.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:158: AssertionError
+_______________________ test_router_stderr_fails_closed _______________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_router_stderr_fails_close0')
+
+    def test_router_stderr_fails_closed(tmp_path):
+        """Router producing stderr must fail closed."""
+        router_script = tmp_path / "router_stderr.py"
+        router_script.write_text(
+            """
+    import sys
+    import json
+    sys.stderr.write("ERROR: something went wrong\\n")
+    plan = {"plan_version": "1.0", "steps": []}
+    sys.stdout.write(json.dumps(plan))
+    """,
+            encoding="utf-8",
+        )
+    
+        plan_output = tmp_path / "plan.json"
+    
+        cmd = [
+            sys.executable,
+            "-m",
+            "TOOLS.ags",
+            "plan",
+            "--router",
+            sys.executable,
+            "--router-arg",
+            str(router_script),
+            "--out",
+            str(plan_output),
+        ]
+        r = _run(cmd)
+    
+        assert r.returncode != 0, "Router with stderr should fail"
+>       assert "ROUTER_STDERR_NOT_EMPTY" in (r.stderr + r.stdout)
+E       assert 'ROUTER_STDERR_NOT_EMPTY' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+E        +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\router_stderr.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\router_stderr.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:192: AssertionError
+___________________ test_capability_escalation_fails_closed ___________________
+
+tmp_path = WindowsPath('C:/Users/rene_/AppData/Local/Temp/pytest-of-Reneshizzle/pytest-247/test_capability_escalation_fai0')
+
+    def test_capability_escalation_fails_closed(tmp_path):
+        """Router attempting capability escalation must fail closed."""
+        # Create a router that tries to use a revoked capability
+        router_script = tmp_path / "router_escalate.py"
+        router_script.write_text(
+            """
+    import json
+    import sys
+    # Try to use a capability that's revoked
+    plan = {
+        "plan_version": "1.0",
+        "steps": [{
+            "step_id": "escalate",
+            "capability_hash": "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
+        }]
+    }
+    sys.stdout.write(json.dumps(plan))
+    """,
+            encoding="utf-8",
+        )
+    
+        # Create a revokes file
+        revokes_file = tmp_path / "REVOKES.json"
+        revokes_file.write_bytes(
+            json.dumps(
+                {
+                    "revokes_version": "1.0.0",
+                    "revoked_capabilities": [
+                        "e8e7e5234b43278a1a257b9257186b8bca5fdae9ab9096572942da1c5fb90f36"
+                    ],
+                },
+                sort_keys=True,
+                separators=(",", ":"),
+            ).encode("utf-8")
+        )
+    
+        plan_output = tmp_path / "plan.json"
+    
+        env = dict(os.environ)
+        env["CATALYTIC_CAPABILITIES_PATH"] = str(
+            REPO_ROOT / "CATALYTIC-DPT" / "CAPABILITIES.json"
+        )
+        env["CATALYTIC_PINS_PATH"] = str(
+            REPO_ROOT / "CATALYTIC-DPT" / "CAPABILITY_PINS.json"
+        )
+        env["CATALYTIC_REVOKES_PATH"] = str(revokes_file)
+    
+        cmd = [
+            sys.executable,
+            "-m",
+            "TOOLS.ags",
+            "plan",
+            "--router",
+            sys.executable,
+            "--router-arg",
+            str(router_script),
+            "--out",
+            str(plan_output),
+        ]
+        r = _run(cmd, env)
+    
+        assert r.returncode != 0, "Router with revoked capability should fail"
+>       assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout)
+E       assert 'REVOKED_CAPABILITY' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+E        +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+E        +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+
+CAPABILITY\TESTBENCH\test_phase8_router_receipts.py:288: AssertionError
+============================== warnings summary ===============================
+CAPABILITY\PRIMITIVES\ledger.py:9
+CAPABILITY\PRIMITIVES\ledger.py:9
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\ledger.py:9: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+CAPABILITY\TESTBENCH\test_schemas.py:22
+CAPABILITY\TESTBENCH\test_schemas.py:22
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\test_schemas.py:22: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/test_adversarial_pipeline_resume.py::test_pipeline_resume_never_skips_a_missing_step_record - RuntimeError: step s1 failed: rc=1
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_capability_pinned_routes_and_verifies - AssertionError: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_pinned_routes_0\\plan.json', '--pipeline-id', 'ags-capability-pins-ok'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py::test_verify_rejects_unpinned_even_if_pipeline_artifact_exists - AssertionError: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_rejects_unpinned_e0\\plan_ok.json', '--pipeline-id', 'ags-capability-pins-verify-bypass'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_registry.py::test_capability_registry_happy_unknown_and_tamper - AssertionError: {"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}
+  [catalytic] Starting catalytic run: pipeline-ags-capability-registry-s1-a1
+  [catalytic] Phase 0: Preflight validation...
+  [catalytic] Preflight passed: JobSpec is valid
+  [catalytic] Phase 1: Capturing pre-snapshots...
+  [catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+  [catalytic] Memoization MISS: dd9e593f4fdf523dc12c5a7ec48b2cd26059de923d270cb1ef7e3b444acf1c97
+  [catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe CAPABILITY/SKILLS/ant-worker/scripts/run.py LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json
+  [catalytic] Command exited with code 2
+  [catalytic] Phase 3: Capturing post-snapshots...
+  [catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\phase65_registry\domain (0 files)
+  [catalytic] Phase 4: Verifying restoration...
+  [catalytic] SUCCESS: Catalytic domains fully restored
+  [catalytic] Phase 5: Writing canonical artifact set...
+  [catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-ags-capability-registry-s1-a1
+  [catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+  AGS: running pipeline
+  FAIL pipeline run rc=2
+  DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', 'CAPABILITY/SKILLS/ant-worker/scripts/run.py', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json']
+  C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: can't open file 'D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\SKILLS\\ant-worker\\scripts\\run.py': [Errno 2] No such file or directory
+  [catalytic] FAIL: Command exited with code 2.
+  ERROR: step s1 failed: rc=2
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'run', '--pipeline-id', 'ags-capability-registry', '--strict', '--skip-preflight'], returncode=2, stdout='{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":[],"write":["LAW/CONTRACTS/_runs"]},"policy_version":"1"}\n[catalytic] Starting catalytic run: pipeline-ags-capability-registry-s1-a1\n[catalytic] Phase 0: Preflight validation...\n[catalytic] Preflight passed: JobSpec is valid\n[catalytic] Phase 1: Capturing pre-snapshots...\n[catalytic] Snapshots pre: LAW\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\domain (0 files)\n[catalytic] Memoization MISS: dd9e593f4fdf523dc12c5a7ec48b2cd26059de923d270cb1ef7e3b444acf1c97\n[catalytic] Phase 2: Executing command: C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe CAPABILITY/SKILLS/ant-worker/scripts/run.py LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json\n[catalytic] Command exited with code 2\n[catalytic] Phase 3: Capturing post-snapshots...\n[catalytic] Snapshots post: LAW\\CONTRACTS\\_runs\\_tmp\\phase65_registry\\domain (0 files)\n[catalytic] Phase 4: Verifying restoration...\n[catalytic] SUCCESS: Catalytic domains fully restored\n[catalytic] Phase 5: Writing canonical artifact set...\n[catalytic] Canonical artifact set written to D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\pipeline-ags-capability-registry-s1-a1\n[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL\nAGS: running pipeline\nFAIL pipeline run rc=2\n', stderr="DEBUG: execute cmd=['C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe', 'CAPABILITY/SKILLS/ant-worker/scripts/run.py', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/task.json', 'LAW/CONTRACTS/_runs/_tmp/phase65_registry/result.json']\nC:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: can't open file 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\SKILLS\\\\ant-worker\\\\scripts\\\\run.py': [Errno 2] No such file or directory\n[catalytic] FAIL: Command exited with code 2.\nERROR: step s1 failed: rc=2\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability - AssertionError: Route should succeed: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_rejects_revoked_ca0\\plan.json', '--pipeline-id', 'test-verify-revocation'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_verify_passes_when_not_revoked - AssertionError: Route should succeed: ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+  
+assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_verify_passes_when_not_re0\\plan.json', '--pipeline-id', 'test-verify-no-revocation'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_ags_phase6_capability_revokes.py::test_historical_pipeline_verifies_after_revocation - assert 2 == 0
+ +  where 2 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'CAPABILITY.TOOLS.ags', 'route', '--plan', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_historical_pipeline_verif0\\plan.json', '--pipeline-id', 'test-historical-pass'], returncode=2, stdout='', stderr="ERROR: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase65_registry/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_swarm_chain_binds_pipeline_proofs - ValueError: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase7_test/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+FAILED CAPABILITY/TESTBENCH/test_phase7_acceptance.py::test_tampered_pipeline_proof_fails_verification - ValueError: jobspec invalid: PATH_NOT_ALLOWED: Path CONTRACTS/_runs/_tmp/phase7_tamper/domain in catalytic_domains not under allowed roots: ['LAW/CONTRACTS/_runs', 'NAVIGATION/CORTEX/_generated', 'MEMORY/LLM_PACKER/_packs', 'CAPABILITY/PRIMITIVES/_scratch']
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_receipts_created - AssertionError: Router should succeed: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')
+  
+assert 1 == 0
+ +  where 1 = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_receipts_created0\\router.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_receipts_created0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").returncode
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_over_output_fails_closed - assert 'ROUTER_OUTPUT_TOO_LARGE' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+ +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\router_spam.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\router_spam.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_over_output_fails_0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_router_stderr_fails_closed - assert 'ROUTER_STDERR_NOT_EMPTY' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+ +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\router_stderr.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\router_stderr.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_router_stderr_fails_close0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+FAILED CAPABILITY/TESTBENCH/test_phase8_router_receipts.py::test_capability_escalation_fails_closed - assert 'REVOKED_CAPABILITY' in ("C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" + '')
+ +  where "C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n" = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stderr
+ +  and   '' = CompletedProcess(args=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-m', 'TOOLS.ags', 'plan', '--router', 'C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '--router-arg', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\router_escalate.py', '--out', 'C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-247\\test_capability_escalation_fai0\\plan.json'], returncode=1, stdout='', stderr="C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'TOOLS.ags' (ModuleNotFoundError: No module named 'TOOLS')\n").stdout
+================= 13 failed, 187 passed, 4 warnings in 35.17s =================

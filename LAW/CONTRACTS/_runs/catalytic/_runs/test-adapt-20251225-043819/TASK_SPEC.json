@@ -1,0 +1,12 @@
+{
+  "task_id": "test-adapt",
+  "task_type": "code_adapt",
+  "file": "C:\\Users\\rene_\\AppData\\Local\\Temp\\grok_test_e9f5p0eu\\code.py",
+  "adaptations": [
+    {
+      "find": "cline",
+      "replace": "gemini",
+      "reason": "Replace with gemini"
+    }
+  ]
+}
