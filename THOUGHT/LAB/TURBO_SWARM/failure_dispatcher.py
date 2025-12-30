@@ -235,11 +235,63 @@ def cmd_status() -> None:
     print(f"   COMPLETED_TASKS/: {len(completed_files)} files")
     print(f"   FAILED_TASKS/:    {len(failed_files)} files")
     
+    # Track active agents
     if active_files:
         print("\n🔵 Currently Active:")
+        agents = {}
         for f in active_files:
             task = json.loads(f.read_text(encoding="utf-8"))
-            print(f"   {task['task_id']}: {task['target_file']} (assigned: {task.get('assigned_to', 'unknown')})")
+            agent = task.get('assigned_to', 'unknown')
+            if agent not in agents:
+                agents[agent] = []
+            agents[agent].append(task)
+        
+        for agent, tasks in agents.items():
+            print(f"\n   👤 {agent} ({len(tasks)} task{'s' if len(tasks) > 1 else ''}):")
+            for task in tasks:
+                claimed_at = task.get('claimed_at', 'unknown')
+                elapsed = "unknown"
+                if claimed_at != 'unknown':
+                    try:
+                        from datetime import datetime
+                        claimed = datetime.fromisoformat(claimed_at.replace('Z', '+00:00'))
+                        now = datetime.now(claimed.tzinfo)
+                        elapsed_sec = (now - claimed).total_seconds()
+                        if elapsed_sec < 60:
+                            elapsed = f"{int(elapsed_sec)}s"
+                        elif elapsed_sec < 3600:
+                            elapsed = f"{int(elapsed_sec/60)}m"
+                        else:
+                            elapsed = f"{int(elapsed_sec/3600)}h {int((elapsed_sec%3600)/60)}m"
+                    except:
+                        pass
+                
+                print(f"      • {task['task_id']}: {task['target_file']}")
+                print(f"        Working for: {elapsed}")
+                
+                # Show progress log if available
+                if 'progress_log' in task and task['progress_log']:
+                    latest = task['progress_log'][-1]
+                    print(f"        Latest: {latest['message'][:60]}...")
+    
+    # Track completed agents
+    if completed_files:
+        print("\n✅ Recently Completed:")
+        recent_completions = []
+        for f in completed_files:
+            task = json.loads(f.read_text(encoding="utf-8"))
+            recent_completions.append(task)
+        
+        # Sort by completion time, most recent first
+        recent_completions.sort(key=lambda t: t.get('completed_at', ''), reverse=True)
+        
+        for task in recent_completions[:5]:  # Show last 5
+            agent = task.get('assigned_to', 'unknown')
+            completed_at = task.get('completed_at', 'unknown')
+            result_summary = task.get('result', {}).get('summary', 'No summary')[:60]
+            print(f"   • {task['task_id']} by {agent}")
+            print(f"     {result_summary}...")
+
 
 
 def cmd_sync() -> None:

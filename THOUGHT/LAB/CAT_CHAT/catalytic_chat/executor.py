@@ -18,12 +18,14 @@ class BundleExecutor:
         self,
         bundle_dir: Path,
         receipt_out: Optional[Path] = None,
-        signing_key: Optional[Path] = None
+        signing_key: Optional[Path] = None,
+        previous_receipt: Optional[Path] = None
     ):
         self.bundle_dir = Path(bundle_dir)
         self.receipt_out = receipt_out or self.bundle_dir / "receipt.json"
         self.signing_key_path = signing_key
         self.signing_key = None
+        self.previous_receipt = previous_receipt
 
         if signing_key:
             self.signing_key = self._load_signing_key(signing_key)
@@ -36,15 +38,22 @@ class BundleExecutor:
         return key_bytes
 
     def execute(self) -> dict:
-        """Execute the bundle plan and write a receipt."""
+        """Execute bundle plan and write a receipt."""
         bundle_json = self.bundle_dir / "bundle.json"
         if not bundle_json.exists():
             raise FileNotFoundError(f"Bundle manifest not found: {bundle_json}")
 
         manifest = json.loads(bundle_json.read_text())
 
-        from catalytic_chat.receipt import receipt_canonical_bytes
+        from catalytic_chat.receipt import receipt_canonical_bytes, compute_receipt_hash, load_receipt
         from catalytic_chat.attestation import sign_receipt_bytes
+
+        parent_receipt_hash = None
+
+        if self.previous_receipt:
+            prev_receipt = load_receipt(self.previous_receipt)
+            if prev_receipt:
+                parent_receipt_hash = prev_receipt.get("receipt_hash")
 
         steps_results = []
         for step in manifest["steps"]:
@@ -79,7 +88,25 @@ class BundleExecutor:
             "steps": steps_results,
             "artifacts": artifact_hashes,
             "root_hash": root_hash,
+            "parent_receipt_hash": parent_receipt_hash,
+            "receipt_hash": None,
             "attestation": None
+        }
+
+        receipt_bytes = receipt_canonical_bytes(receipt, attestation_override=None)
+        receipt["receipt_hash"] = compute_receipt_hash(receipt)
+
+        if self.signing_key:
+            receipt["attestation"] = sign_receipt_bytes(receipt_bytes, self.signing_key)
+
+        receipt_bytes = receipt_canonical_bytes(receipt)
+
+        self.receipt_out.write_bytes(receipt_bytes)
+
+        return {
+            "receipt_path": str(self.receipt_out),
+            "attestation": receipt.get("attestation"),
+            **receipt
         }
 
         receipt_bytes = receipt_canonical_bytes(receipt, attestation_override=None)

@@ -786,6 +786,7 @@ def cmd_bundle_run(args) -> int:
     attest = getattr(args, 'attest', False)
     signing_key = getattr(args, 'signing_key', None)
     verify_attestation = getattr(args, 'verify_attestation', False)
+    verify_chain = getattr(args, 'verify_chain', False)
 
     if attest and not signing_key:
         print("[FAIL] --attest requires --signing-key")
@@ -803,6 +804,10 @@ def cmd_bundle_run(args) -> int:
         print(f"[OK] Bundle executed")
         print(f"      receipt: {result['receipt_path']}")
         print(f"      outcome: {result['outcome']}")
+        print(f"      receipt_hash: {result.get('receipt_hash', 'N/A')}")
+
+        if result.get('parent_receipt_hash'):
+            print(f"      parent_receipt_hash: {result['parent_receipt_hash']}")
 
         if verify_attestation and result['attestation'] is not None:
             from catalytic_chat.attestation import verify_receipt_bytes
@@ -816,6 +821,25 @@ def cmd_bundle_run(args) -> int:
                 print(f"      attestation: VALID")
             except Exception as e:
                 print(f"      attestation: INVALID ({e})")
+
+        if verify_chain:
+            from catalytic_chat.receipt import find_receipt_chain, verify_receipt_chain
+
+            receipts_dir = receipt_out.parent if receipt_out else bundle_dir
+            run_id = result.get('run_id')
+
+            if run_id:
+                receipts = find_receipt_chain(receipts_dir, run_id)
+
+                if len(receipts) > 1:
+                    try:
+                        verify_receipt_chain(receipts, verify_attestation=verify_attestation)
+                        print(f"      chain: VALID ({len(receipts)} receipts)")
+                    except Exception as e:
+                        print(f"      chain: INVALID ({e})")
+                        return 1
+                elif len(receipts) == 1:
+                    print(f"      chain: N/A (single receipt, no chain to verify)")
 
         return 0
     except BundleError as e:
@@ -986,6 +1010,7 @@ def main():
     bundle_run_parser.add_argument("--attest", action="store_true", help="Emit receipt with attestation (requires --signing-key)")
     bundle_run_parser.add_argument("--signing-key", type=Path, required=False, help="Private signing key for attestation (32 bytes, ed25519)")
     bundle_run_parser.add_argument("--verify-attestation", action="store_true", help="Verify attestation if present")
+    bundle_run_parser.add_argument("--verify-chain", action="store_true", help="Verify receipt chain linkage for the run")
 
     args = parser.parse_args()
 
