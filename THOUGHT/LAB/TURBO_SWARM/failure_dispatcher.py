@@ -367,12 +367,30 @@ def cmd_observe() -> None:
             completed = list(COMPLETED_DIR.glob("*.json")) if COMPLETED_DIR.exists() else []
             failed = list(FAILED_DIR.glob("*.json")) if FAILED_DIR.exists() else []
             
+            # Read last few log lines
+            log_lines = []
+            if os.path.exists("swarm_debug.log"):
+                try:
+                    with open("swarm_debug.log", "r") as f:
+                        # Simple tail
+                        lines = f.readlines()
+                        log_lines = lines[-5:] if lines else []
+                except:
+                    pass
+
             # Clear line and print status
-            print(f"\r[{datetime.now().strftime('%H:%M:%S')}] "
-                  f"🟡 {len(pending)} pending | "
-                  f"🔵 {len(active)} active | "
-                  f"✅ {len(completed)} done | "
-                  f"❌ {len(failed)} failed", end="", flush=True)
+            os.system("cls" if os.name == "nt" else "clear")
+            print(f"👁️ Observing swarm activity (Ctrl+C to stop)...")
+            print(f"[{datetime.now().strftime('%H:%M:%S')}] Status:")
+            print(f"   🟡 Pending:   {len(pending)}")
+            print(f"   🔵 Active:    {len(active)}")
+            print(f"   ✅ Done:      {len(completed)}")
+            print(f"   ❌ Failed:    {len(failed)}")
+            
+            if log_lines:
+                print("\n📜 Latest Swarm Logs:")
+                for line in log_lines:
+                    print(f"   {line.strip()}")
             
             time.sleep(2)
     except KeyboardInterrupt:
@@ -534,13 +552,14 @@ def kill_swarm() -> None:
 
 def cmd_guard() -> None:
     """Monitor pipeline health and agent activity continuously."""
-    print("🛡️ Pipeline Sentinel ACTIVE")
+    print("🛡️ Pipeline Sentinel ACTIVE (Auto-Spawn Enabled)")
     print("   Monitoring: Git status, Pipeline Integrity, Agent Operations")
     print("   Press Ctrl+C to stop")
     print("-" * 60)
     
     last_mod_count = -1
     last_status_hash = ""
+    spawn_cooldown = 0
     
     while True:
         try:
@@ -568,17 +587,24 @@ def cmd_guard() -> None:
                     print(f"\n[{timestamp}] 📝 Clean git status (no active mods)")
                 last_mod_count = len(modified)
             
-            # 4. Status Update (One line summary)
-            pending = len(list(PENDING_DIR.glob("*.json"))) if PENDING_DIR.exists() else 0
-            active = len(list(ACTIVE_DIR.glob("*.json"))) if ACTIVE_DIR.exists() else 0
-            completed = len(list(COMPLETED_DIR.glob("*.json"))) if COMPLETED_DIR.exists() else 0
+            # 4. Status Check & Auto-Spawn
+            pending_count = len(list(PENDING_DIR.glob("*.json"))) if PENDING_DIR.exists() else 0
+            active_count = len(list(ACTIVE_DIR.glob("*.json"))) if ACTIVE_DIR.exists() else 0
+            completed_count = len(list(COMPLETED_DIR.glob("*.json"))) if COMPLETED_DIR.exists() else 0
             
-            # Simple scrolling log if status changes
-            status_hash = f"{pending}-{active}-{completed}"
+            # Status Log
+            status_hash = f"{pending_count}-{active_count}-{completed_count}"
             if status_hash != last_status_hash:
-                 print(f"[{timestamp}] 📊 Status: 🟡 {pending} | 🔵 {active} | ✅ {completed}")
+                 print(f"[{timestamp}] 📊 Status: 🟡 {pending_count} | 🔵 {active_count} | ✅ {completed_count}")
                  last_status_hash = status_hash
             
+            # Auto-Spawn Logic
+            # If pending tasks exist AND few active agents AND cooldown passed
+            if pending_count > 0 and active_count < 2 and time.time() > spawn_cooldown:
+                print(f"\n[{timestamp}] 🚀 Auto-Spawning agents for {pending_count} pending tasks...")
+                cmd_spawn("caddy")
+                spawn_cooldown = time.time() + 60  # Wait 60s before spawning again
+                
             # Periodic heartbeat (optional, or just sleep)
             time.sleep(2)
             
