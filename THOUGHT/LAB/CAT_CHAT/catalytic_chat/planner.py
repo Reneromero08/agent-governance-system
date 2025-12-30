@@ -214,12 +214,12 @@ class Planner:
                     raise PlannerError(f"Failed to resolve symbol {symbol_id}: {e}")
         
         steps: List[Dict[str, Any]] = []
-        
+
         for i, symbol_ref in enumerate(resolved_symbols):
             step_ordinal = len(steps)
             if step_ordinal + 1 > max_steps:
                 raise PlannerError(f"Budget exceeded: step_ordinal={step_ordinal} would exceed max_steps={max_steps}")
-            
+
             canonical_json = json.dumps({
                 "ordinal": step_ordinal,
                 "op": "READ_SYMBOL",
@@ -232,19 +232,28 @@ class Planner:
                     "symbols_referenced": [symbol_ref["symbol_id"]]
                 }
             }, sort_keys=True)
-            
+
             step_id = self._compute_step_id(canonical_json)
-            steps.append({
+
+            step = {
                 "step_id": step_id,
                 "ordinal": step_ordinal,
                 "op": "READ_SYMBOL",
                 "refs": {
                     "symbol_id": symbol_ref["symbol_id"]
-                },
-                "expected_outputs": {
+                }
+            }
+
+            if symbol_ref["section_id"] is None:
+                step["expected_outputs"] = {
+                    "unresolved_symbols": [symbol_ref["symbol_id"]]
+                }
+            else:
+                step["expected_outputs"] = {
                     "symbols_referenced": [symbol_ref["symbol_id"]]
                 }
-            })
+
+            steps.append(step)
         
         plan_output = {
             "run_id": run_id,
@@ -265,67 +274,92 @@ def post_request_and_plan(
 ) -> Tuple[str, str, List[str]]:
     cassette = MessageCassette(repo_root=repo_root)
     planner = Planner(repo_root=repo_root)
-    
+
     try:
         conn = cassette._get_conn()
-        
         intent = request_payload.get("intent", "")
-        
+
         cursor = conn.execute("""
             SELECT m.message_id, j.job_id
             FROM cassette_messages m
             JOIN cassette_jobs j ON m.message_id = j.message_id
             WHERE m.run_id = ? AND m.idempotency_key = ? AND m.source = 'PLANNER'
         """, (run_id, idempotency_key))
-        
+
         existing_row = cursor.fetchone()
-        
+
         if existing_row:
             message_id = existing_row["message_id"]
             job_id = existing_row["job_id"]
-            
+
             cursor = conn.execute("""
                 SELECT step_id FROM cassette_steps
                 WHERE job_id = ?
                 ORDER BY ordinal
             """, (job_id,))
-            
+
             steps_ids = [row["step_id"] for row in cursor.fetchall()]
-            
+
             return (message_id, job_id, steps_ids)
-        
+
         message_id = _generate_id("msg", run_id, idempotency_key or "")
         job_id = _generate_id("job", message_id)
-        
+
         conn.execute("""
-            INSERT INTO cassette_messages 
+            INSERT OR IGNORE INTO cassette_messages
             (message_id, run_id, source, idempotency_key, payload_json)
             VALUES (?, ?, ?, ?, ?)
         """, (message_id, run_id, "PLANNER", idempotency_key, json.dumps(request_payload)))
-        
+
         conn.execute("""
-            INSERT INTO cassette_jobs 
+            INSERT OR IGNORE INTO cassette_jobs
             (job_id, message_id, intent, ordinal)
             VALUES (?, ?, ?, 1)
         """, (job_id, message_id, intent))
-        
+
+        conn.execute("""
+            INSERT OR IGNORE INTO cassette_job_budgets
+            (job_id, bytes_consumed, symbols_consumed)
+            VALUES (?, 0, 0)
+        """, (job_id,))
+
         plan_output = planner.plan_request(request_payload)
-        
+
         steps_ids = []
         for step in plan_output["steps"]:
             step_id = step["step_id"]
             steps_ids.append(step_id)
-            
+
             conn.execute("""
-                INSERT INTO cassette_steps
+                INSERT OR IGNORE INTO cassette_steps
                 (step_id, job_id, ordinal, status, payload_json)
                 VALUES (?, ?, ?, 'PENDING', ?)
             """, (step_id, job_id, step["ordinal"], json.dumps(step)))
-        
+
         conn.commit()
-        
+
+        cursor = conn.execute("""
+            SELECT m.message_id, j.job_id
+            FROM cassette_messages m
+            JOIN cassette_jobs j ON m.message_id = j.message_id
+            WHERE m.run_id = ? AND m.idempotency_key = ? AND m.source = 'PLANNER'
+        """, (run_id, idempotency_key))
+
+        result_row = cursor.fetchone()
+
+        message_id = result_row["message_id"]
+        job_id = result_row["job_id"]
+
+        cursor = conn.execute("""
+            SELECT step_id FROM cassette_steps
+            WHERE job_id = ?
+            ORDER BY ordinal
+        """, (job_id,))
+
+        steps_ids = [row["step_id"] for row in cursor.fetchall()]
+
         return (message_id, job_id, steps_ids)
-        
+
     except (MessageCassetteError, PlannerError) as e:
         raise PlannerError(f"Failed to post request and plan: {e}")
     finally:

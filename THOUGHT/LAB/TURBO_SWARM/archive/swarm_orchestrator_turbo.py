@@ -4,7 +4,6 @@ import os
 import subprocess
 import sys
 import re
-import threading
 import time
 from pathlib import Path
 from tqdm import tqdm
@@ -22,11 +21,6 @@ RUN_PY_PATH = REPO_ROOT / "CAPABILITY" / "SKILLS" / "agents" / "qwen-cli" / "run
 # Swarm Configuration
 MODELS = ["qwen2.5:1.5b", "qwen2.5:5b", "qwen2.5:7b"]
 DEFAULT_MAX_WORKERS = 16
-DEFAULT_GPU_SLOTS = 1
-
-# Global State
-GPU_SEMAPHORE = None
-SWARM_CUDA_ENABLED = False
 
 PAUSE_FLAG = REPO_ROOT / "SWARM_PAUSE.flag"
 STOP_FLAG = REPO_ROOT / "SWARM_STOP.flag"
@@ -113,31 +107,13 @@ Output format: ```python
     ]
     
     try:
-        # Pass CUDA environment if enabled
-        env = os.environ.copy() if SWARM_CUDA_ENABLED else None
-        if SWARM_CUDA_ENABLED:
-            env["CUDA_VISIBLE_DEVICES"] = os.environ.get("CUDA_VISIBLE_DEVICES", "0")
-
-        # Serialized GPU access if enabled, otherwise uncapped
-        if SWARM_CUDA_ENABLED:
-            with GPU_SEMAPHORE:
-                result = subprocess.run(
-                    cmd,
-                    capture_output=True,
-                    text=True,
-                    timeout=120, 
-                    encoding='utf-8',
-                    env=env
-                )
-        else:
-             result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                timeout=120, 
-                encoding='utf-8',
-                env=env
-            )
+        result = subprocess.run(
+            cmd,
+            capture_output=True,
+            text=True,
+            timeout=120, 
+            encoding='utf-8'
+        )
         
         if result.returncode != 0:
             return None
@@ -200,20 +176,9 @@ def process_task(task):
 # --------------------------------------------------------------------------------
 
 def main():
-    global GPU_SEMAPHORE
-    global SWARM_CUDA_ENABLED
-
-    parser = argparse.ArgumentParser(description="Turbo swarm orchestrator (Sonnet Restore)")
+    parser = argparse.ArgumentParser(description="Turbo swarm orchestrator (Full Parallel)")
     parser.add_argument("--max-workers", type=int, default=DEFAULT_MAX_WORKERS)
-    parser.add_argument("--gpu-slots", type=int, default=DEFAULT_GPU_SLOTS)
     args = parser.parse_args()
-
-    # CUDA Setup
-    SWARM_CUDA_ENABLED = os.environ.get("SWARM_CUDA") == "1"
-    if SWARM_CUDA_ENABLED:
-        print("SWARM_CUDA enabled.")
-    
-    GPU_SEMAPHORE = threading.Semaphore(args.gpu_slots)
 
     # Manifest Logic
     if not MANIFEST_PATH.exists():
@@ -230,7 +195,7 @@ def main():
     tasks = [t for t in manifest if t.get("file") not in SKIP_FILES]
     report = []
     
-    print(f"Deploying {args.max_workers} Ants... (Simulated 3-Tier Escalation)")
+    print(f"Deploying {args.max_workers} Ants... (3-Tier Escalation, Full Parallel)")
     
     success_count = 0
     fail_count = 0

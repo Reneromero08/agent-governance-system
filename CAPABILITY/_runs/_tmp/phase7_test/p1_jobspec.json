@@ -1,0 +1,9 @@
+{
+  "job_id": "p1-job",
+  "phase": 7,
+  "task_type": "test",
+  "intent": "p1",
+  "inputs": {},
+  "outputs": {
+    "durable_paths": [
+      

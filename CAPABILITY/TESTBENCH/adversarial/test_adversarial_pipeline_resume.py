@@ -4,11 +4,7 @@ import sys
 
 from pathlib import Path
 
-import pytest
+sys.path.insert(0, Path(__file__).resolve().parents[3])
+if str(Path(__file__).resolve().parents[3]) not in sys.path:
+    sys.path.insert(1, str(Path(__file__).resolve().parents[3]))
 
-
-# Change the REPO_ROOT calculation to use parents[3] instead of 2.
-REPO_ROOT = Path(__file__).resolve().parents[3]
-# Update sys.path to include the repo root relative to this new location.
-
-sys.path.insert(0, str(REPO_ROOT))

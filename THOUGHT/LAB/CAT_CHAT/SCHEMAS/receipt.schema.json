@@ -1,0 +1,144 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/receipt.schema.json",
+  "title": "Bundle Execution Receipt",
+  "description": "Deterministic receipt from bundle execution",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "receipt_version",
+    "run_id",
+    "job_id",
+    "bundle_id",
+    "plan_hash",
+    "executor_version",
+    "outcome",
+    "error",
+    "steps",
+    "artifacts",
+    "root_hash"
+  ],
+  "properties": {
+    "receipt_version": {
+      "type": "string",
+      "description": "Receipt schema version"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Run ID from bundle"
+    },
+    "job_id": {
+      "type": "string",
+      "description": "Job ID from bundle"
+    },
+    "bundle_id": {
+      "type": "string",
+      "description": "Bundle ID (SHA256 hex)"
+    },
+    "plan_hash": {
+      "type": "string",
+      "description": "Plan hash from bundle"
+    },
+    "executor_version": {
+      "type": "string",
+      "description": "Executor version"
+    },
+    "outcome": {
+      "type": "string",
+      "enum": ["SUCCESS", "FAILURE"],
+      "description": "Execution outcome"
+    },
+    "error": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["code", "message"],
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Short error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Short error message"
+        },
+        "step_id": {
+          "type": ["string", "null"],
+          "description": "Step ID that caused error, if applicable"
+        }
+      }
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered list of step execution results",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["ordinal", "step_id", "op", "outcome"],
+        "properties": {
+          "ordinal": {
+            "type": "integer",
+            "description": "Step ordinal"
+          },
+          "step_id": {
+            "type": "string",
+            "description": "Step ID"
+          },
+          "op": {
+            "type": "string",
+            "description": "Step operation type"
+          },
+          "outcome": {
+            "type": "string",
+            "enum": ["SUCCESS", "FAILURE", "SKIPPED"],
+            "description": "Step execution outcome"
+          },
+          "result": {
+            "type": ["object", "null"],
+            "description": "Step result data"
+          },
+          "error": {
+            "type": ["object", "null"],
+            "additionalProperties": false,
+            "properties": {
+              "code": {
+                "type": "string",
+                "description": "Error code"
+              },
+              "message": {
+                "type": "string",
+                "description": "Error message"
+              }
+            }
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Ordered list of artifact hashes",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["artifact_id", "sha256", "bytes"],
+        "properties": {
+          "artifact_id": {
+            "type": "string",
+            "description": "Artifact ID"
+          },
+          "sha256": {
+            "type": "string",
+            "description": "Artifact content SHA256"
+          },
+          "bytes": {
+            "type": "integer",
+            "description": "Artifact byte count"
+          }
+        }
+      }
+    },
+    "root_hash": {
+      "type": "string",
+      "description": "Root hash over artifacts (SHA256 hex)"
+    }
+  }
+}

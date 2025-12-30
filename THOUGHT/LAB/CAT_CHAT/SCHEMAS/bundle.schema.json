@@ -1,0 +1,154 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Catalytic Chat Bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["bundle_version", "bundle_id", "run_id", "job_id", "message_id", "plan_hash", "steps", "inputs", "artifacts", "hashes", "provenance"],
+  "properties": {
+    "bundle_version": {
+      "type": "string",
+      "description": "Bundle format version"
+    },
+    "bundle_id": {
+      "type": "string",
+      "description": "SHA256 hash of canonical bundle manifest (empty pre-manifest)"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Run context for this bundle"
+    },
+    "job_id": {
+      "type": "string",
+      "description": "Job ID this bundle represents"
+    },
+    "message_id": {
+      "type": "string",
+      "description": "Message ID associated with this job"
+    },
+    "plan_hash": {
+      "type": "string",
+      "description": "SHA256 hash of the plan steps"
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered list of steps (by ordinal asc, step_id asc)",
+      "items": {
+        "$ref": "#/definitions/BundleStep"
+      }
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "symbols": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "slices": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "description": "Artifacts included in bundle (ordered by artifact_id asc)",
+      "items": {
+        "$ref": "#/definitions/Artifact"
+      }
+    },
+    "hashes": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["root_hash"],
+      "properties": {
+        "root_hash": {
+          "type": "string",
+          "description": "SHA256 of artifact_id:hash concatenated with newlines"
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [],
+      "properties": {}
+    }
+  },
+  "definitions": {
+    "BundleStep": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["step_id", "ordinal", "op"],
+      "properties": {
+        "step_id": {
+          "type": "string"
+        },
+        "ordinal": {
+          "type": "integer"
+        },
+        "op": {
+          "type": "string",
+          "enum": ["READ_SYMBOL", "READ_SECTION"]
+        },
+        "refs": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "constraints": {
+          "type": "object",
+          "additionalProperties": true
+        },
+        "expected_outputs": {
+          "type": "object",
+          "additionalProperties": true
+        }
+      }
+    },
+    "Artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "kind", "ref", "slice", "path", "sha256", "bytes"],
+      "properties": {
+        "artifact_id": {
+          "type": "string",
+          "description": "Stable deterministic artifact ID"
+        },
+        "kind": {
+          "type": "string",
+          "enum": ["SYMBOL_SLICE", "SECTION_SLICE"]
+        },
+        "ref": {
+          "type": "string",
+          "description": "@SYMBOL_ID or SECTION_ID/path"
+        },
+        "slice": {
+          "type": "string",
+          "description": "Slice expression used"
+        },
+        "path": {
+          "type": "string",
+          "description": "Relative path within bundle (artifacts/<artifact_id>.txt)"
+        },
+        "sha256": {
+          "type": "string",
+          "description": "SHA256 hash of artifact content"
+        },
+        "bytes": {
+          "type": "integer",
+          "description": "Size in bytes"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,11 @@
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_super_entropy_crusher.py", line 954, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_super_entropy_crusher.py", line 838, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>

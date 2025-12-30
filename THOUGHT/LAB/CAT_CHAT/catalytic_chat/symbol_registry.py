@@ -17,6 +17,7 @@ from datetime import datetime, timezone
 
 from catalytic_chat.section_indexer import SectionIndexer
 from catalytic_chat.slice_resolver import SliceResolver, SliceError
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 @dataclass
@@ -56,35 +57,33 @@ class SymbolRegistry:
         self.slice_resolver = SliceResolver()
 
         if substrate_mode == "sqlite":
-            self.db_path = self.repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(self.repo_root)
         elif substrate_mode == "jsonl":
-            self.output_path = self.repo_root / "CORTEX" / "_generated" / "symbols.jsonl"
+            cortex_dir = get_cortex_dir(self.repo_root)
+            self.output_path = cortex_dir / "symbols.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
     def _init_sqlite(self) -> None:
         """Initialize SQLite symbols table."""
-        conn = sqlite3.connect(self.db_path)
-        conn.execute("PRAGMA foreign_keys = ON")
-        conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS symbols (
-                symbol_id TEXT PRIMARY KEY,
-                target_type TEXT NOT NULL,
-                target_ref TEXT NOT NULL,
-                default_slice TEXT,
-                created_at TEXT NOT NULL,
-                updated_at TEXT NOT NULL,
-                FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
-            )
-        """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS symbols (
+                    symbol_id TEXT PRIMARY KEY,
+                    target_type TEXT NOT NULL,
+                    target_ref TEXT NOT NULL,
+                    default_slice TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
+                )
+            """)
 
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_target ON symbols(target_ref)")
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_created ON symbols(created_at)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_target ON symbols(target_ref)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_created ON symbols(created_at)")
 
-        conn.commit()
-        conn.close()
+            conn.commit()
 
     def _get_timestamp(self) -> str:
         """Get ISO8601 timestamp.
@@ -191,9 +190,7 @@ class SymbolRegistry:
             default_slice: Default slice
             timestamp: ISO8601 timestamp
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS symbols (
@@ -215,7 +212,6 @@ class SymbolRegistry:
                 (symbol_id,)
             )
             if cursor.fetchone():
-                conn.close()
                 raise SymbolError(f"Symbol ID already exists: {symbol_id}")
 
             conn.execute("""
@@ -293,8 +289,20 @@ class SymbolRegistry:
             Symbol object or None
         """
         try:
-            with sqlite3.connect(self.db_path) as conn:
-                conn.row_factory = sqlite3.Row
+            with get_sqlite_connection(self.db_path) as conn:
+
+                conn.execute("""
+                    CREATE TABLE IF NOT EXISTS symbols (
+                        symbol_id TEXT PRIMARY KEY,
+                        target_type TEXT NOT NULL,
+                        target_ref TEXT NOT NULL,
+                        default_slice TEXT,
+                        created_at TEXT NOT NULL,
+                        updated_at TEXT NOT NULL,
+                        FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
+                    )
+                """)
+
                 cursor = conn.execute(
                     "SELECT * FROM symbols WHERE symbol_id = ?",
                     (symbol_id,)
@@ -358,8 +366,23 @@ class SymbolRegistry:
         Returns:
             List of symbols sorted by symbol_id
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+        with get_sqlite_connection(self.db_path) as conn:
+
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS symbols (
+                    symbol_id TEXT PRIMARY KEY,
+                    target_type TEXT NOT NULL,
+                    target_ref TEXT NOT NULL,
+                    default_slice TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
+                )
+            """)
+
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_target ON symbols(target_ref)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_created ON symbols(created_at)")
+
             cursor = conn.execute("SELECT * FROM symbols ORDER BY symbol_id")
             rows = cursor.fetchall()
 

@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _rm(path: Path) -> None:
@@ -83,9 +83,7 @@ def test_pipeline_init_is_deterministic_and_resume_safe() -> None:
                             "import sys;"
                             "sys.exit(3) if m.exists() else None;"
                             "m.parent.mkdir(parents=True, exist_ok=True);"
-                            "m.write_text('ran', encoding='utf-8');"
-                            f"Path('{out1}').parent.mkdir(parents=True, exist_ok=True);"
-                            f"Path('{out1}').write_text('ONE', encoding='utf-8')"
+                            "m.write_text('ran', encoding='utf-8')"
                         ),
                     ],
                 },
@@ -147,3 +145,5 @@ def test_pipeline_init_is_deterministic_and_resume_safe() -> None:
         _rm(REPO_ROOT / out1)
         _rm(REPO_ROOT / out2)
         _rm(REPO_ROOT / marker1)
+
+
