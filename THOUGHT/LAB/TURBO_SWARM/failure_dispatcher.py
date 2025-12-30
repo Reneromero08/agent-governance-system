@@ -115,11 +115,14 @@ def run_pytest_collect() -> List[str]:
     return list(set(failures))  # Deduplicate
 
 
-def generate_task_id() -> str:
+def generate_task_id(ledger: Optional[Dict[str, Any]] = None) -> str:
     """Generate a unique task ID."""
     date_str = datetime.now().strftime("%Y-%m-%d")
-    ledger = load_ledger()
-    existing_ids = [t["task_id"] for t in ledger["tasks"]]
+    
+    if ledger is None:
+        ledger = load_ledger()
+        
+    existing_ids = {t["task_id"] for t in ledger["tasks"]}
     
     for i in range(1, 1000):
         task_id = f"TASK-{date_str}-{i:03d}"
@@ -129,10 +132,11 @@ def generate_task_id() -> str:
     raise RuntimeError("Too many tasks for today")
 
 
-def create_task(target_file: str, failure_details: Dict[str, Any], priority: str = "MEDIUM") -> Dict[str, Any]:
+def create_task(target_file: str, failure_details: Dict[str, Any], ledger: Dict[str, Any], priority: str = "MEDIUM") -> Dict[str, Any]:
     """Create a new task object."""
+    task_id = generate_task_id(ledger)
     return {
-        "task_id": generate_task_id(),
+        "task_id": task_id,
         "created_at": now_iso(),
         "source": "failure_dispatcher_scan",
         "type": "test_fix",
@@ -169,6 +173,7 @@ def cmd_scan() -> None:
             task = create_task(
                 target_file=failure,
                 failure_details={"error_type": "test_failure", "scanned_at": now_iso()},
+                ledger=ledger,
                 priority="MEDIUM"
             )
             new_tasks.append(task)
