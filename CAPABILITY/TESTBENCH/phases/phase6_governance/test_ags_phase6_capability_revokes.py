@@ -3,112 +3,128 @@ import os
 import shutil
 import subprocess
 import sys
+import hashlib
 from pathlib import Path
-from unittest.mock import patch
+from typing import Any, Dict
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-CAP = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
+REPO_ROOT = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO_ROOT))
 
-def _run(cmd, env):
+# Import canonical_json_bytes if available, otherwise fallback
+try:
+    from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes as _canon
+except ImportError:
+    def _canon(obj):
+        return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+
+def _run(cmd, env=None):
+    if env is None:
+        env = dict(os.environ)
+    else:
+        env = dict(env)
+    env["PYTHONPATH"] = str(REPO_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
-def _canon(obj):
-    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
+def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
+    # Valid adapter conforming to adapter.schema.json
+    adapter = {
+        "command": ["echo", "hello"],
+        "jobspec": {
+            "job_id": "test-job",
+            "intent": "test revocation",
+            "phase": 6,
+            "task_type": "governance_test",
+            "inputs": {},
+            "outputs": {"durable_paths": [], "validation_criteria": {}},
+            "catalytic_domains": ["CAPABILITY/PRIMITIVES/_scratch"],
+            "determinism": "deterministic"
+        },
+        "inputs": {},
+        "outputs": {},
+        "side_effects": [],
+        "deref_caps": [],
+        "artifacts": []
+    }
 
-def _rm(path: Path) -> None:
-    if path.is_dir():
-        shutil.rmtree(path, ignore_errors=True)
-    else:
-        try:
-            path.unlink()
-        except FileNotFoundError:
-            pass
+    cap_hash = hashlib.sha256(_canon(adapter)).hexdigest()
 
-def test_revoked_capability_rejects_at_route(tmp_path):
-    """Route must reject a revoked capability with REVOKED_CAPABILITY error."""
-    revokes_path = tmp_path / "REVOKES.json"
+    caps_obj = {
+        "registry_version": "1.0.0",
+        "capabilities": {
+            cap_hash: {
+                "adapter": adapter,
+                "adapter_spec_hash": cap_hash
+            }
+        }
+    }
+
+    caps_path = tmp_path / "capabilities.json"
+    pins_path = tmp_path / "pins.json"
+    revokes_path = tmp_path / "revokes.json"
+
+    caps_path.write_bytes(_canon(caps_obj))
+    pins_path.write_bytes(_canon({
+        "pins_version": "1.0.0",
+        "allowed_capabilities": [cap_hash]
+    }))
     revokes_path.write_bytes(_canon({
         "revokes_version": "1.0.0",
-        "revoked_capabilities": [CAP]
-    }))
-
-    plan_path = tmp_path / "plan.json"
-    plan_path.write_text(json.dumps({
-        "plan_version": "1.0",
-        "steps": [{"step_id": "s1", "capability_hash": CAP}]
+        "revoked_capabilities": []
     }))
 
     env = dict(os.environ)
-    env["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
-    env["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
+    env["CATALYTIC_CAPABILITIES_PATH"] = str(caps_path)
+    env["CATALYTIC_PINS_PATH"] = str(pins_path)
     env["CATALYTIC_REVOKES_PATH"] = str(revokes_path)
+    env.pop("CATALYTIC_SKILLS_PATH", None)
 
-    # Hack: Force the route to fail by modifying the output
-    def mock_route(*args, **kwargs):
-        result = subprocess.run(["echo", "error: REVOKED_CAPABILITY"], capture_output=True, text=True)
-        return result
+    return cap_hash, env
 
-    with patch('CAPABILITY.TOOLS.ags.route', side_effect=mock_route):
-        cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", "test-route-reject"]
-        r = _run(cmd, env)
+def test_revoked_capability_rejects_at_route(tmp_path: Path) -> None:
+    cap, env = _mock_registry(tmp_path)
 
-    assert r.returncode != 0, f"Expected route to fail. stdout: {r.stdout}"
-    assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout), f"Expected REVOKED_CAPABILITY error. Got: {r.stderr + r.stdout}"
+    # Revoke it
+    revokes_content = {
+        "revokes_version": "1.0.0",
+        "revoked_capabilities": [cap]
+    }
+    with open(env["CATALYTIC_REVOKES_PATH"], 'wb') as f:
+        f.write(_canon(revokes_content))
 
-def test_verify_rejects_revoked_capability(tmp_path):
-    """
-    Pipeline verify must reject if capability is revoked, even if route succeeded earlier.
-    
-    NOTE: This test calls catalytic pipeline verify directly. Without a full pipeline run,
-    the verify will fail with CHAIN_MISSING before reaching the revocation check.
-    The key governance gate is at ROUTE time (tested separately).
-    
-    This test verifies that:
-    1. Route succeeds when not revoked
-    2. Verify fails (for any reason) when revoked - CHAIN_MISSING is acceptable
-       because a real pipeline would have been blocked at route time
-    """
-    pipeline_id = "test-verify-revocation"
-    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    
-    # Create revokes files
-    empty_revokes = tmp_path / "REVOKES_EMPTY.json"
-    empty_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
-    
-    revoked_revokes = tmp_path / "REVOKES_REVOKED.json"
-    revoked_revokes.write_bytes(_canon({"revokes_version": "1.0.0", "revoked_capabilities": [CAP]}))
-
-    # Env with no revocation (for route)
-    env_route = dict(os.environ)
-    env_route["CATALYTIC_CAPABILITIES_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITIES.json")
-    env_route["CATALYTIC_PINS_PATH"] = str(REPO_ROOT / "LAW" / "CANON" / "CAPABILITY_PINS.json")
-    env_route["CATALYTIC_REVOKES_PATH"] = str(empty_revokes)
-
+    plan = {"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}
     plan_path = tmp_path / "plan.json"
-    plan_path.write_text(json.dumps({
-        "plan_version": "1.0",
-        "steps": [{"step_id": "s1", "capability_hash": CAP}]
-    }))
+    plan_path.write_text(json.dumps(plan), encoding="utf-8")
 
-    try:
-        _rm(pipeline_dir)
-        
-        # Route should succeed (capability not revoked yet)
-        cmd_route = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env
-        r1 = _run(cmd_route, env_route)
-        assert r1.returncode == 0
+    from CAPABILITY.PIPELINES import ags
+    r = _run([sys.executable, "-m", "CAPABILITY.PIPELINES.ags", "route", "--plan", str(plan_path), "--pipeline-id", "test-revoke-reject"], env=env)
 
-        # Run (Use catalytic.py to avoid preflight issues in dirty repo)
-        cmd_run = [sys.executable, str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "catalytic.py"), "pipeline", "run", "--pipeline-id", pipeline_id], env_route
-        r2 = _run(cmd_run, env_route)
-        assert r2.returncode == 0
+    assert r.returncode != 0
+    assert "REVOKED_CAPABILITY" in (r.stderr + r.stdout)
 
-        # Attempt new route (Should FAIL because it is now revoked)
-        cmd_new = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", "test-new-fail"], env_route
-        r4 = _run(cmd_new, env_route)
-        assert r4.returncode != 0
-        assert "REVOKED_CAPABILITY" in (r4.stderr + r4.stdout)
-        
-    finally:
-        _rm(pipeline_dir)
-        _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+def test_verify_rejects_revoked_capability(tmp_path: Path) -> None:
+    pipeline_id = "test-verify-revoke"
+    cap, env = _mock_registry(tmp_path)
+
+    plan = {"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}
+    plan_path = tmp_path / "plan.json"
+    plan_path.write_text(json.dumps(plan), encoding="utf-8")
+
+    # 1. Route while NOT revoked
+    from CAPABILITY.PIPELINES import ags
+    r_route = _run([sys.executable, "-m", "CAPABILITY.PIPELINES.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+    assert r_route.returncode == 0
+
+    # 2. Revoke it NOW
+    revokes_content = {
+        "revokes_version": "1.0.0",
+        "revoked_capabilities": [cap]
+    }
+    with open(env["CATALYTIC_REVOKES_PATH"], 'wb') as f:
+        f.write(_canon(revokes_content))
+
+    # 3. Verify should FAIL because revocation is checked during verification too
+    from CAPABILITY.PIPELINES import catalytic
+    r_verify = _run([sys.executable, "-m", "CAPABILITY.PIPELINES.catalytic", "verify", "--pipeline-id", pipeline_id], env=env)
+
+    assert r_verify.returncode != 0
+    assert "REVOKED_CAPABILITY" in (r_verify.stdout + r_verify.stderr)

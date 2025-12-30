@@ -1,0 +1,47 @@
+[
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_reject_invalid_hash_and_missing_hash: FileNotFoundError: No such file: C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-402\\test_reject_invalid_hash_and_m0\\cas\\objects\\no\\t-\\not-a-hash. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_normalize_relpath_accepts_and_normalizes: AssertionError: assert 'a/b//c' == 'a/b/c'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_phase2_demo_artifacts_are_falsifiable: AssertionError: assert False. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_packing_hygiene: KeyError: 'size'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_ags_phase6_bridge: FileNotFoundError: [WinError 2] The system cannot find the file specified. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_verify_rejects_revoked_capability: NameError: name 'env' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_revoked_capability_rejects_at_route: AttributeError: <module 'CAPABILITY.TOOLS.ags' from 'D:\\\\CCC 2.0\\\\AI\\\\agent-governance-system\\\\CAPABILITY\\\\TOOLS\\\\ags.py'> does not have the attribute 'route'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_registry_noncanonical_json_rejects: NotADirectoryError: [WinError 267] The directory name is invalid. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_registry_tamper_detected_fail_closed: NotADirectoryError: [WinError 267] The directory name is invalid. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_swarm_chain_binds_pipeline_proofs: TypeError: Object of type WindowsPath is not JSON serializable. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_swarm_execution_elision: TypeError: unsupported operand type(s) for +: 'WindowsPath' and 'str'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_spectrum02_resume: ImportError: attempted relative import with no known parent package. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3).",
+    "last_error": "caddy_no_result"
+  }
+]

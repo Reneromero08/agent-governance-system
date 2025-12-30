@@ -8,43 +8,8 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-# Mock implementation of CatalyticStore class
-class CatalyticStore:
-    def __init__(self, root):
-        self.root = root
+from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore, normalize_relpath
 
-    def put_bytes(self, data):
-        hash_obj = hashlib.sha256(data)
-        hex_digest = hash_obj.hexdigest()
-        path = self.root / "objects" / hex_digest[:2] / hex_digest[2:4] / hex_digest
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "wb") as f:
-            f.write(data)
-        return hex_digest
-
-    def put_stream(self, stream, chunk_size=1024 * 1024):
-        hash_obj = hashlib.sha256()
-        path = self.root / "objects" / hash_obj.hexdigest()[:2] / hash_obj.hexdigest()[2:4] / hash_obj.hexdigest()
-        path.parent.mkdir(parents=True, exist_ok=True)
-        with open(path, "wb") as f:
-            while True:
-                chunk = stream.read(chunk_size)
-                if not chunk:
-                    break
-                f.write(chunk)
-                hash_obj.update(chunk)
-        return hash_obj.hexdigest()
-
-    def get_bytes(self, hash):
-        path = self.root / "objects" / hash[:2] / hash[2:4] / hash
-        if not path.exists():
-            raise FileNotFoundError(f"No such file: {path}")
-        with open(path, "rb") as f:
-            return f.read()
-
-# Mock implementation of normalize_relpath function
-def normalize_relpath(path):
-    return path.replace("\\", "/").replace("./", "").replace("//", "/")
 
 def test_put_bytes_same_bytes_same_hash(tmp_path: Path) -> None:
     store = CatalyticStore(tmp_path / "cas")
@@ -58,7 +23,7 @@ def test_put_bytes_idempotent_does_not_change_bytes(tmp_path: Path) -> None:
     store = CatalyticStore(tmp_path / "cas")
     data = b"x" * 1024
     h = store.put_bytes(data)
-    obj_path = (tmp_path / "cas" / "objects" / h[0:2] / h[2:4] / h)
+    obj_path = store.object_path(h)
     before = obj_path.read_bytes()
     _ = store.put_bytes(data)
     after = obj_path.read_bytes()
@@ -77,7 +42,7 @@ def test_large_stream_roundtrip(tmp_path: Path) -> None:
 
     big_path = tmp_path / "big.bin"
     pattern = b"0123456789abcdef" * 4096  # 64 KiB
-    target_size = 5 * 1024 * 1024  # 5 MiB (reduced for speed)
+    target_size = 5 * 1024 * 1024  # 5 MiB
 
     written = 0
     h = hashlib.sha256()
@@ -108,24 +73,44 @@ def test_deterministic_object_path_across_instances(tmp_path: Path) -> None:
     assert h2 == h
     assert expected_path.read_bytes() == data
 
-def test_reject_invalid_hash_and_missing_hash(tmp_path: Path) -> None:
+def test_foreman_reject(tmp_path: Path) -> None:
     store = CatalyticStore(tmp_path / "cas")
 
+    # Test invalid hash format (non-hex)
     with pytest.raises(ValueError):
         store.get_bytes("not-a-hash")
 
+    # Test uppercase hash (should be rejected)
     with pytest.raises(ValueError):
-        store.get_bytes("A" * 64)  # uppercase not allowed
+        store.get_bytes(hashlib.sha256(b"test").hexdigest().upper())
 
-    valid_missing = "0" * 64
-    # Note: store.get_bytes(h) might raise a custom error or FileNotFoundError
-    with pytest.raises((FileNotFoundError, ValueError)):
-         store.get_bytes(valid_missing)
+    # Test missing hash (valid format but doesn't exist)
+    valid_missing = hashlib.sha256(b"missing").hexdigest()
+    with pytest.raises(FileNotFoundError):
+        store.get_bytes(valid_missing)
+
+def test_reject_invalid_hash_and_missing_hash(tmp_path: Path) -> None:
+    store = CatalyticStore(tmp_path / "cas")
+
+    # Test invalid hash format (non-hex)
+    with pytest.raises(ValueError):
+        store.get_bytes("not-a-hash")
+
+    # Test uppercase hash (should be rejected)
+    with pytest.raises(ValueError):
+        store.get_bytes(hashlib.sha256(b"test").hexdigest().upper())
+
+    # Test missing hash (valid format but doesn't exist)
+    valid_missing = hashlib.sha256(b"missing").hexdigest()
+    missing_path = tmp_path / "cas" / "objects" / valid_missing[0:2] / valid_missing[2:4] / valid_missing
+    missing_path.parent.mkdir(parents=True, exist_ok=True)
+    with pytest.raises(FileNotFoundError):
+        store.get_bytes(valid_missing)
 
 def test_normalize_relpath_accepts_and_normalizes() -> None:
-    # normalize_relpath converts \ to /
     assert normalize_relpath(r"a\b\c") == "a/b/c"
     assert normalize_relpath("a/./b/./c") == "a/b/c"
     assert normalize_relpath("./a/b") == "a/b"
     assert normalize_relpath("a//b///c") == "a/b/c"
     assert normalize_relpath(".") == "."
+    assert normalize_relpath("a/b//c") == "a/b/c"

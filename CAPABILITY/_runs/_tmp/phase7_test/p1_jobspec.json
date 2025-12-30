@@ -6,4 +6,12 @@
   "inputs": {},
   "outputs": {
     "durable_paths": [
-      
+      "D:\\CCC 2.0\\AI\\agent-governance-system\\CAPABILITY\\_runs\\_tmp\\p1.txt"
+    ],
+    "validation_criteria": {}
+  },
+  "catalytic_domains": [
+    "LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"
+  ],
+  "determinism": "deterministic"
+}

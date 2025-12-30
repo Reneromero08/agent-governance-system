@@ -117,6 +117,7 @@ def test_slice_all_rejected():
 def test_cli_dry_run():
     """Dry-run does not touch DB."""
     import subprocess
+    import os
     
     cmd = [
         sys.executable, "-m", "catalytic_chat.cli", "plan", "request",
@@ -124,7 +125,10 @@ def test_cli_dry_run():
         "--dry-run"
     ]
     
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    env = os.environ.copy()
+    env["PYTHONPATH"] = str(Path(__file__).parent.parent)
+    
+    result = subprocess.run(cmd, capture_output=True, text=True, env=env)
     
     # In dry-run mode, should succeed even if symbol doesn't exist
     assert result.returncode == 0, f"Dry-run should succeed, got: {result.stderr}"

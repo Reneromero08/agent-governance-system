@@ -22,6 +22,18 @@ from catalytic_chat.ants import spawn_ants, run_ant_worker
 from catalytic_chat.bundle import BundleBuilder, BundleVerifier, BundleError
 from catalytic_chat.executor import BundleExecutor
 
+try:
+    from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
+except ImportError:
+    sign_receipt_bytes = None
+    verify_receipt_bytes = None
+
+try:
+    from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
+except ImportError:
+    sign_receipt_bytes = None
+    verify_receipt_bytes = None
+
 
 def cmd_build(args) -> int:
     """Build section index.
@@ -767,24 +779,50 @@ def cmd_bundle_verify(args) -> int:
 
 
 def cmd_bundle_run(args) -> int:
-    """Run bundle and output receipt path.
-    
+    """Run bundle and output receipt path with optional attestation verification.
+
     Args:
         args: Parsed command-line arguments
-    
+
     Returns:
         Exit code (0 for success, 1 on failure)
     """
     bundle_dir = Path(args.bundle)
-    
+    receipt_out = getattr(args, 'receipt_out', None)
+    attest = getattr(args, 'attest', False)
+    signing_key = getattr(args, 'signing_key', None)
+    verify_attestation = getattr(args, 'verify_attestation', False)
+
+    if attest and not signing_key:
+        print("[FAIL] --attest requires --signing-key")
+        return 1
+
     try:
-        receipt_out = getattr(args, 'receipt_out', None)
-        executor = BundleExecutor(bundle_dir, receipt_out=receipt_out)
+        executor = BundleExecutor(
+            bundle_dir=bundle_dir,
+            receipt_out=receipt_out,
+            signing_key=signing_key if attest else None
+        )
+
         result = executor.execute()
-        
+
         print(f"[OK] Bundle executed")
         print(f"      receipt: {result['receipt_path']}")
         print(f"      outcome: {result['outcome']}")
+
+        if verify_attestation and result['attestation'] is not None:
+            from catalytic_chat.attestation import verify_receipt_bytes
+            from catalytic_chat.receipt import receipt_canonical_bytes
+
+            receipt_path = Path(result['receipt_path'])
+            receipt_bytes = receipt_path.read_bytes()
+
+            try:
+                verify_receipt_bytes(receipt_bytes, result['attestation'])
+                print(f"      attestation: VALID")
+            except Exception as e:
+                print(f"      attestation: INVALID ({e})")
+
         return 0
     except BundleError as e:
         sys.stderr.write(f"[FAIL] {e}\n")
@@ -951,6 +989,9 @@ def main():
     bundle_run_parser = bundle_subparsers.add_parser("run", help="Run bundle and output execution result")
     bundle_run_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
     bundle_run_parser.add_argument("--receipt-out", type=Path, required=False, help="Receipt output path (default: <bundle>/receipt.json)")
+    bundle_run_parser.add_argument("--attest", action="store_true", help="Emit receipt with attestation (requires --signing-key)")
+    bundle_run_parser.add_argument("--signing-key", type=Path, required=False, help="Private signing key for attestation (32 bytes, ed25519)")
+    bundle_run_parser.add_argument("--verify-attestation", action="store_true", help="Verify attestation if present")
 
     args = parser.parse_args()
 

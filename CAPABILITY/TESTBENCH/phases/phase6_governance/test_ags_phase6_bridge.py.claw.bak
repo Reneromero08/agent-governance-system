@@ -1,36 +1,31 @@
 import os
 import subprocess
+import sys
 import pytest
 from pathlib import Path
 
-def get_repo_root() -> Path:
-    """Get the repository root path using common patterns."""
-    # Try common patterns to find repo root
-    current_path = Path.cwd()
-    for candidate in ['.git', 'pyproject.toml', 'setup.py']:
-        if (current_path / candidate).exists():
-            return current_path
-        current_path = current_path.parent
-    raise RuntimeError("Could not determine repository root")
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
-# Use the function to get repo root
-REPO_ROOT = get_repo_root()
+def _run(args):
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(REPO_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
+    return subprocess.run([sys.executable, "-m", "CAPABILITY.TOOLS.ags"] + args, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
-def test_ags_phase6_bridge():
-    # Example usage of REPO_ROOT
-    repo_path = Path(REPO_ROOT)
+def test_ags_cli_connectivity():
+    """Verify that the ags CLI is reachable and responds to --help."""
+    result = _run(["--help"])
+    assert result.returncode == 0
+    assert "AGS CLI" in result.stdout
 
-    # Safer alternative to subprocess.call using subprocess.run()
+def test_ags_preflight_verdict():
+    """Verify that ags preflight returns a valid JSON verdict."""
+    # We use --allow-dirty-tracked to avoid failures in the dev environment
+    result = _run(["preflight", "--allow-dirty-tracked", "--json"])
+    assert result.returncode in (0, 2, 3) # Any valid exit code from preflight
+    import json
     try:
-        result = subprocess.run(
-            ["ls", "-l"],
-            check=True,
-            capture_output=True,
-            text=True
-        )
-        assert result.returncode == 0, f"Command failed with error: {result.stderr}"
-    except subprocess.CalledProcessError as e:
-        assert False, f"Command failed with error: {e.stderr}"
-
-# Fix the import error by defining REPO_ROOT before using it in the test function
-REPO_ROOT = get_repo_root()
+        verdict = json.loads(result.stdout)
+        assert "verdict" in verdict
+        assert "reasons" in verdict
+    except json.JSONDecodeError:
+        pytest.fail(f"ags preflight did not emit valid JSON:\n{result.stdout}\n{result.stderr}")

@@ -16,7 +16,8 @@
     "error",
     "steps",
     "artifacts",
-    "root_hash"
+    "root_hash",
+    "attestation"
   ],
   "properties": {
     "receipt_version": {
@@ -139,6 +140,25 @@
     "root_hash": {
       "type": "string",
       "description": "Root hash over artifacts (SHA256 hex)"
+    },
+    "attestation": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["scheme", "public_key", "signature"],
+      "properties": {
+        "scheme": {
+          "type": "string",
+          "description": "Signing scheme (e.g., ed25519)"
+        },
+        "public_key": {
+          "type": "string",
+          "description": "Public key (hex or base64)"
+        },
+        "signature": {
+          "type": "string",
+          "description": "Signature (hex or base64)"
+        }
+      }
     }
   }
 }
