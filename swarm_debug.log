@@ -1,0 +1,22 @@
+2025-12-30 14:39:11,112 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 14:39:11,112 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 14:39:11,112 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 14:39:11,122 [INFO] Warming Ant model...
+2025-12-30 14:39:11,122 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 14:39:23,564 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 14:39:23,565 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 14:39:23,565 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 14:39:23,565 [INFO] Starting swarm: workers=4 slots=6 tasks=9
+2025-12-30 14:39:37,491 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 14:39:48,312 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
