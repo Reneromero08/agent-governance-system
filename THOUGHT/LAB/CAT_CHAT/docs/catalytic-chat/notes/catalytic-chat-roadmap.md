@@ -470,3 +470,80 @@ python -m pytest -q THOUGHT/LAB/CAT_CHAT/tests
 - ✓ Attestation still fail-closed
 - ✓ No CLI or executor regressions
 - ✓ Minimal fix (only test environment issue addressed)
+
+---
+
+## Phase 6.3: Receipt Chain Anchoring (Completed 2025-12-30)
+
+**Status:** Complete ✓
+
+### Changes
+- `catalytic_chat/receipt.py`: Added chain functions
+  - `compute_receipt_hash()`: deterministic hash from canonical bytes (excluding receipt_hash field)
+  - `load_receipt()`: load receipt from JSON file
+  - `verify_receipt_chain()`: verify chain linkage and receipt hashes
+  - `find_receipt_chain()`: find all receipts for a run in execution order
+- `catalytic_chat/executor.py`: Added chain support
+  - `previous_receipt` parameter to `BundleExecutor.__init__()`
+  - Sets `parent_receipt_hash` from previous receipt's `receipt_hash`
+  - First receipt has `parent_receipt_hash=null`
+- `SCHEMAS/receipt.schema.json`: Added chain fields
+  - `parent_receipt_hash`: string | null
+  - `receipt_hash`: string
+- `catalytic_chat/cli.py`: Added `--verify-chain` flag
+  - Verifies full receipt chain for a run
+  - Outputs chain status and Merkle root
+- `tests/test_receipt_chain.py`: Added 4 chain tests
+  - Deterministic chain verification
+  - Chain break detection
+  - Sequential order enforcement
+
+### Verification
+```bash
+cd THOUGHT/LAB/CAT_CHAT
+python -m pytest -q tests/test_receipt_chain.py
+# 4 passed in 0.21s
+```
+
+### Hard Constraints Met
+- ✓ Identical inputs produce identical chain
+- ✓ Chain verification fails on tamper or reorder
+- ✓ No timestamps, randomness, absolute paths
+- ✓ Minimal diffs; only extended receipt/verify paths
+
+---
+
+## Phase 6.4: Receipt Merkle Root + External Anchor (Completed 2025-12-30)
+
+**Status:** Complete ✓
+
+### Changes
+- `catalytic_chat/receipt.py`: Added Merkle root computation
+  - `compute_merkle_root()`: deterministic Merkle tree from receipt hashes
+  - Pairwise concatenation of hex-decoded bytes (left||right) → SHA256
+  - Odd leaf duplication at each level (not just once)
+  - Preserves deterministic ordering from `find_receipt_chain()`
+  - `verify_receipt_chain()` now returns Merkle root string
+- `catalytic_chat/cli.py`: Added Merkle output
+  - `--print-merkle` flag (requires `--verify-chain`)
+  - Prints ONLY Merkle root hex to stdout
+  - Fails immediately if `--print-merkle` without `--verify-chain`
+- `tests/test_merkle_root.py`: Added 3 Merkle root tests
+  - Deterministic root computation
+  - Tamper detection
+  - `--verify-chain` requirement enforcement
+
+### Verification
+```bash
+cd THOUGHT/LAB/CAT_CHAT
+python -m pytest -q tests/test_merkle_root.py
+# 3 passed in 0.16s
+```
+
+### Hard Constraints Met
+- ✓ Identical chains produce identical Merkle roots
+- ✓ Fail-closed: tampering, ordering, hash mismatches abort
+- ✓ No timestamps, randomness, absolute paths, network calls
+- ✓ Merkle root NOT stored in individual receipts (chain-only metadata)
+- ✓ `--print-merkle` prints ONLY hex to stdout
+- ✓ `--print-merkle` requires `--verify-chain` (fail-closed)

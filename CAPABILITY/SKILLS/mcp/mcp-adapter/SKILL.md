@@ -1,9 +1,7 @@
-
----
-name: mcp-adapter
-version: "0.1.0"
-description: Generic adapter for executing Model Context Protocol (MCP) servers as governed pipeline steps. Use this to wrap any standard MCP server (Python/Node) into a verifiable CAT-DPT pipeline step with strict I/O caps and transcript hashing.
----
+# Skill: mcp-adapter
+**Version:** 0.1.0
+**Status:** Active
+**Required_canon_version:** ">=3.0.0 <4.0.0"
 
 # MCP Adapter
 

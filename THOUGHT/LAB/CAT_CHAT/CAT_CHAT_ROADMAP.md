@@ -246,6 +246,84 @@ Exit criteria
 
 ---
 
+## Phase 6.3 — Receipt Chain Anchoring (COMPLETE 2025-12-30)
+
+Goal: extend receipt + attestation system to support deterministic, verifiable receipt chaining across executions.
+
+### Completed
+
+- [x] **Chain fields** in receipt schema
+  - `parent_receipt_hash`: hash of previous receipt (null for first receipt)
+  - `receipt_hash`: SHA256 of canonical receipt bytes without attestation
+
+- [x] **Executor chain support** in `executor.py`
+  - `previous_receipt` parameter to `BundleExecutor.__init__()`
+  - Loads previous receipt and extracts `receipt_hash` for `parent_receipt_hash`
+  - First receipt has `parent_receipt_hash=null`
+
+- [x] **Chain verification** in `receipt.py`
+  - `compute_receipt_hash()`: deterministic hash computation excluding `receipt_hash` field
+  - `load_receipt()`: load receipt from file
+  - `verify_receipt_chain()`: verifies chain linkage and receipt hashes
+  - `find_receipt_chain()`: finds and loads all receipts for a run
+
+- [x] **Schema update** in `SCHEMAS/receipt.schema.json`
+  - Added `parent_receipt_hash` (string | null)
+  - Added `receipt_hash` (string)
+
+- [x] **CLI chain verification** in `cli.py`
+  - `--verify-chain` flag to verify full receipt chain
+  - Chain linkage verified with attestation signature checks
+
+- [x] **Tests** in `tests/test_receipt_chain.py`
+  - `test_receipt_chain_deterministic`: identical inputs produce identical chain
+  - `test_receipt_chain_verification_passes`: chain verification succeeds
+  - `test_receipt_chain_break_fails`: tamper detection
+  - `test_receipt_chain_requires_sequential_order`: reordering fails
+
+Exit criteria
+- [x] Identical inputs and execution order produce identical receipt chain bytes
+- [x] Fail-closed: any break in chain or hash mismatch hard-fails
+- [x] No timestamps, randomness, absolute paths, or environment-dependent data
+- [x] Minimal diffs; only extended receipt/verify paths
+
+---
+
+## Phase 6.4 — Receipt Merkle Root + External Anchor (COMPLETE 2025-12-30)
+
+Goal: introduce deterministic Merkle root over verified receipt chain and expose optional verifier-gated anchoring surface.
+
+### Completed
+
+- [x] **Merkle root computation** in `receipt.py`
+  - `compute_merkle_root()`: deterministic Merkle tree from receipt hashes
+  - Pairwise concatenate hex-decoded bytes (left||right), SHA256
+  - Odd leaf duplication at each level (not just once at leaves)
+  - Follows `find_receipt_chain()` deterministic ordering
+
+- [x] **Chain verification extended** in `receipt.py`
+  - `verify_receipt_chain()` now returns Merkle root as string
+  - Returns root only after full validation (chain integrity + attestation)
+
+- [x] **CLI Merkle output** in `cli.py`
+  - `--print-merkle` flag requires `--verify-chain`
+  - Prints ONLY merkle_root hex to stdout (no extra text)
+  - Fails immediately if `--print-merkle` without `--verify-chain`
+
+- [x] **Tests** in `tests/test_merkle_root.py`
+  - `test_merkle_root_deterministic`: same hashes produce identical Merkle root
+  - `test_merkle_root_changes_on_tamper`: tampering changes root
+  - `test_merkle_root_requires_verify_chain`: --print-merkle without --verify-chain fails
+
+Exit criteria
+- [x] Deterministic: identical receipt chains produce identical Merkle roots
+- [x] Fail-closed: any tamper, ordering violation, or hash mismatch aborts
+- [x] No timestamps, randomness, absolute paths, or network calls
+- [x] Merkle root NOT stored in individual receipt files (chain-only metadata)
+- [x] CLI prints ONLY Merkle root hex when `--print-merkle` is set
+
+---
+
 ## Optional track — No-DB mode (file substrate) (PENDING)
 Goal: keep the same contract with JSONL + deterministic files for environments without SQLite.
 

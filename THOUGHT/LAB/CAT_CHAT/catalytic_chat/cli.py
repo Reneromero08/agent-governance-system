@@ -788,6 +788,10 @@ def cmd_bundle_run(args) -> int:
     verify_attestation = getattr(args, 'verify_attestation', False)
     verify_chain = getattr(args, 'verify_chain', False)
     print_merkle = getattr(args, 'print_merkle', False)
+    attest_merkle = getattr(args, 'attest_merkle', False)
+    merkle_key = getattr(args, 'merkle_key', None)
+    verify_merkle_attestation_path = getattr(args, 'verify_merkle_attestation', None)
+    merkle_attestation_out = getattr(args, 'merkle_attestation_out', None)
 
     if attest and not signing_key:
         print("[FAIL] --attest requires --signing-key")
@@ -795,6 +799,26 @@ def cmd_bundle_run(args) -> int:
 
     if print_merkle and not verify_chain:
         print("[FAIL] --print-merkle requires --verify-chain")
+        return 1
+
+    if attest_merkle and not verify_chain:
+        print("[FAIL] --attest-merkle requires --verify-chain")
+        return 1
+
+    if attest_merkle and not merkle_key:
+        print("[FAIL] --attest-merkle requires --merkle-key")
+        return 1
+
+    if print_merkle and attest_merkle:
+        print("[FAIL] --print-merkle and --attest-merkle are mutually exclusive")
+        return 1
+
+    if verify_merkle_attestation_path and not verify_chain:
+        print("[FAIL] --verify-merkle-attestation requires --verify-chain")
+        return 1
+
+    if attest_merkle and verify_merkle_attestation_path:
+        print("[FAIL] --attest-merkle and --verify-merkle-attestation are mutually exclusive")
         return 1
 
     try:
@@ -806,7 +830,9 @@ def cmd_bundle_run(args) -> int:
 
         result = executor.execute()
 
-        if not print_merkle:
+        verbose_output = not print_merkle and not (attest_merkle and not merkle_attestation_out)
+
+        if verbose_output:
             print(f"[OK] Bundle executed")
             print(f"      receipt: {result['receipt_path']}")
             print(f"      outcome: {result['outcome']}")
@@ -815,7 +841,10 @@ def cmd_bundle_run(args) -> int:
             if result.get('parent_receipt_hash'):
                 print(f"      parent_receipt_hash: {result['parent_receipt_hash']}")
 
-        if verify_attestation and result['attestation'] is not None and not print_merkle:
+        merkle_root = None
+        receipts = []
+
+        if verify_attestation and result['attestation'] is not None and verbose_output:
             from catalytic_chat.attestation import verify_receipt_bytes
             from catalytic_chat.receipt import receipt_canonical_bytes
 
@@ -824,10 +853,10 @@ def cmd_bundle_run(args) -> int:
 
             try:
                 verify_receipt_bytes(receipt_bytes, result['attestation'])
-                if not print_merkle:
+                if verbose_output:
                     print(f"      attestation: VALID")
             except Exception as e:
-                if not print_merkle:
+                if verbose_output:
                     print(f"      attestation: INVALID ({e})")
                 return 1
 
@@ -846,16 +875,82 @@ def cmd_bundle_run(args) -> int:
 
                         if print_merkle:
                             print(merkle_root)
-                        else:
+                        elif verbose_output:
                             print(f"      chain: VALID ({len(receipts)} receipts)")
                             print(f"      merkle_root: {merkle_root}")
                     except Exception as e:
-                        if not print_merkle:
+                        if verbose_output:
                             print(f"      chain: INVALID ({e})")
                         return 1
                 else:
-                    if not print_merkle:
+                    if verbose_output:
                         print(f"      chain: N/A (no receipts found)")
+
+        if attest_merkle and merkle_root:
+            from catalytic_chat.merkle_attestation import sign_merkle_root, write_merkle_attestation
+
+            if not isinstance(merkle_key, str):
+                if merkle_key is None:
+                    sys.stderr.write(f"[FAIL] --merkle-key is required for --attest-merkle\n")
+                    return 1
+                try:
+                    merkle_key_hex = Path(merkle_key).read_text().strip()
+                except Exception as e:
+                    sys.stderr.write(f"[FAIL] Failed to read merkle key file: {e}\n")
+                    return 1
+            else:
+                merkle_key_hex = merkle_key
+
+            try:
+                att = sign_merkle_root(merkle_root, merkle_key_hex)
+
+                if len(receipts) > 0:
+                    att["receipt_count"] = len(receipts)
+                    att["receipt_chain_head_hash"] = receipts[-1].get("receipt_hash")
+                att["run_id"] = result.get('run_id')
+                att["job_id"] = result.get('job_id')
+                att["bundle_id"] = result.get('bundle_id')
+
+                if merkle_attestation_out:
+                    att_path = Path(merkle_attestation_out)
+                    write_merkle_attestation(att_path, att)
+                    if verbose_output:
+                        print(f"      merkle_attestation: {att_path}")
+                else:
+                    from catalytic_chat.receipt import canonical_json_bytes
+                    att_bytes = canonical_json_bytes(att)
+                    sys.stdout.buffer.write(att_bytes)
+                    sys.stdout.buffer.flush()
+
+            except Exception as e:
+                sys.stderr.write(f"[FAIL] Merkle attestation failed: {e}\n")
+                return 1
+
+        if verify_merkle_attestation_path and merkle_root:
+            from catalytic_chat.merkle_attestation import load_merkle_attestation, verify_merkle_attestation, MerkleAttestationError
+
+            try:
+                att_path = Path(verify_merkle_attestation_path)
+                att = load_merkle_attestation(att_path)
+
+                if att is None:
+                    sys.stderr.write(f"[FAIL] Merkle attestation file not found: {att_path}\n")
+                    return 1
+
+                if att.get("merkle_root") != merkle_root:
+                    sys.stderr.write(f"[FAIL] Merkle root mismatch: computed={merkle_root!r}, attestation={att.get('merkle_root')!r}\n")
+                    return 1
+
+                verify_merkle_attestation(att)
+
+                if verbose_output:
+                    print(f"      merkle_attestation: VALID")
+            except MerkleAttestationError as e:
+                sys.stderr.write(f"[FAIL] Merkle attestation verification failed: {e}\n")
+                return 1
+            except Exception as e:
+                sys.stderr.write(f"[FAIL] Merkle attestation error: {e}\n")
+                return 1
 
         return 0
     except BundleError as e:
@@ -1028,6 +1123,10 @@ def main():
     bundle_run_parser.add_argument("--verify-attestation", action="store_true", help="Verify attestation if present")
     bundle_run_parser.add_argument("--verify-chain", action="store_true", help="Verify receipt chain linkage for run")
     bundle_run_parser.add_argument("--print-merkle", action="store_true", help="Print Merkle root to stdout (requires --verify-chain)")
+    bundle_run_parser.add_argument("--attest-merkle", action="store_true", help="Sign Merkle root and emit attestation (requires --verify-chain and --merkle-key)")
+    bundle_run_parser.add_argument("--merkle-key", type=str, required=False, help="Ed25519 signing key hex (64 hex chars) for Merkle attestation")
+    bundle_run_parser.add_argument("--verify-merkle-attestation", type=Path, required=False, help="Verify Merkle attestation file (requires --verify-chain)")
+    bundle_run_parser.add_argument("--merkle-attestation-out", type=Path, required=False, help="Write Merkle attestation to this path (default: print to stdout)")
 
     args = parser.parse_args()
 

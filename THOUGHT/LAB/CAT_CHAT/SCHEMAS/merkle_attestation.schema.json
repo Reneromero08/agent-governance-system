@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/merkle_attestation.schema.json",
+  "title": "Merkle Root Attestation",
+  "description": "Deterministic Ed25519 signature over receipt chain Merkle root",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "scheme",
+    "merkle_root",
+    "public_key",
+    "signature"
+  ],
+  "properties": {
+    "scheme": {
+      "type": "string",
+      "const": "ed25519",
+      "description": "Signing scheme"
+    },
+    "merkle_root": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "SHA256 Merkle root hex (64 characters)"
+    },
+    "public_key": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "Ed25519 public key hex (64 characters, 32 bytes)"
+    },
+    "signature": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{128}$",
+      "description": "Ed25519 signature hex (128 characters, 64 bytes)"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Optional run ID for reference"
+    },
+    "job_id": {
+      "type": "string",
+      "description": "Optional job ID for reference"
+    },
+    "bundle_id": {
+      "type": "string",
+      "description": "Optional bundle ID for reference"
+    },
+    "receipt_count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Optional receipt count in chain"
+    },
+    "receipt_chain_head_hash": {
+      "type": "string",
+      "pattern": "^[0-9a-fA-F]{64}$",
+      "description": "Optional hash of last receipt in chain"
+    }
+  }
+}

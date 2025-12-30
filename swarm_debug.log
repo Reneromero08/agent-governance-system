@@ -24,3 +24,740 @@ UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in posit
 2025-12-30 14:42:53,638 [INFO] [CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py] Consultant advice: To address the test failure and ensure all necessa...
 2025-12-30 14:43:17,026 [INFO] done: success=1 failed=8 total=233.5s avg=25.9s/task
 2025-12-30 14:43:17,028 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+======================================================================
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
+    main()
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
+    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
