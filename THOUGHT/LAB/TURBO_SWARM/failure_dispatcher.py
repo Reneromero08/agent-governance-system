@@ -537,9 +537,15 @@ def cmd_guard() -> None:
     print("🛡️ Pipeline Sentinel ACTIVE")
     print("   Monitoring: Git status, Pipeline Integrity, Agent Operations")
     print("   Press Ctrl+C to stop")
+    print("-" * 60)
+    
+    last_mod_count = -1
+    last_status_hash = ""
     
     while True:
         try:
+            timestamp = datetime.now().strftime('%H:%M:%S')
+            
             # 1. Check Git Status (what are they touching?)
             status = subprocess.check_output(["git", "status", "--porcelain"], text=True)
             modified = [line for line in status.splitlines() if line.strip()]
@@ -549,35 +555,38 @@ def cmd_guard() -> None:
             for mod in modified:
                 for p in protected:
                     if p in mod:
-                        print(f"⚠️ ALERT: Agent modified protected file: {mod}")
+                        print(f"\n[{timestamp}] ⚠️ ALERT: Agent modified protected file: {mod}")
             
-            # 3. Pipeline Health Check (Periodic)
-            # Run every 5th verification loop (approx every 60s)
+            # 3. Log active modifications if changed
+            if len(modified) != last_mod_count:
+                if modified:
+                    print(f"\n[{timestamp}] 📝 Active modifications ({len(modified)}):")
+                    for m in modified[:3]:
+                        print(f"   {m.strip()}")
+                    if len(modified) > 3: print(f"   ...and {len(modified)-3} more")
+                else:
+                    print(f"\n[{timestamp}] 📝 Clean git status (no active mods)")
+                last_mod_count = len(modified)
             
-            # 4. Display Status
-            os.system("cls" if os.name == "nt" else "clear")
-            print(f"🛡️ PIPELINE SENTINEL [{now_iso()}]")
-            print("=" * 60)
+            # 4. Status Update (One line summary)
+            pending = len(list(PENDING_DIR.glob("*.json"))) if PENDING_DIR.exists() else 0
+            active = len(list(ACTIVE_DIR.glob("*.json"))) if ACTIVE_DIR.exists() else 0
+            completed = len(list(COMPLETED_DIR.glob("*.json"))) if COMPLETED_DIR.exists() else 0
             
-            # Active Modifications
-            if modified:
-                print(f"📝 Files modified by agents ({len(modified)}):")
-                for m in modified[:5]:
-                    print(f"   {m.strip()}")
-                if len(modified) > 5: print(f"   ...and {len(modified)-5} more")
-            else:
-                print("📝 No active file modifications")
-                
-            # Task Status
-            subprocess.run([sys.executable, __file__, "status"], check=False)
+            # Simple scrolling log if status changes
+            status_hash = f"{pending}-{active}-{completed}"
+            if status_hash != last_status_hash:
+                 print(f"[{timestamp}] 📊 Status: 🟡 {pending} | 🔵 {active} | ✅ {completed}")
+                 last_status_hash = status_hash
             
-            time.sleep(5)
+            # Periodic heartbeat (optional, or just sleep)
+            time.sleep(2)
             
         except KeyboardInterrupt:
             print("\n🛡️ Sentinel stopped.")
             break
         except Exception as e:
-            print(f"Error in sentinel: {e}")
+            print(f"\nError in sentinel: {e}")
             time.sleep(5)
 
 def main():

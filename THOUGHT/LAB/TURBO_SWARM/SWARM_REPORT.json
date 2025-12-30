@@ -1,0 +1,330 @@
+[
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
+    "status": "success",
+    "reason": "ok",
+    "elapsed": 35.17,
+    "model_used": "qwen2.5-coder:0.5b",
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": true,
+        "info": "ok",
+        "time": 27.62,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "foreman_verify",
+        "success": true,
+        "info": "risky_gate",
+        "time": 7.53,
+        "risky": true,
+        "ratio": 0.0227
+      }
+    ],
+    "plan": "",
+    "last_error": "",
+    "code_preview": "",
+    "diff_line_ratio": 0.0227,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
+    "status": "failed",
+    "reason": "foreman_reject",
+    "elapsed": 36.06,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": true,
+        "info": "ok",
+        "time": 29.77,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "foreman_verify",
+        "success": false,
+        "info": "risky_gate",
+        "time": 6.28,
+        "risky": true,
+        "ratio": 0.0172
+      }
+    ],
+    "plan": "",
+    "last_error": "",
+    "code_preview": "from __future__ import annotations\nfrom pathlib import Path\nimport sys\n\nREPO_ROOT = Path(__file__).resolve().parents[3]\nif str(REPO_ROOT) not in sys.path:\n    sys.path.insert(0, str(REPO_ROOT))\n\nfrom MEMORY.LLM_PACKER.Engine.packer.core import enforce_included_repo_limits, PackLimits\n\ndef test_packing_hygiene() -> None:\n    # PackLimits requires allow_duplicate_hashes\n    limits = {\n        \"max_total_bytes\": 100,\n        \"max_entry_bytes\": 50,\n        \"max_entries\": 10,\n        \"allow_duplicate_hashes\": True\n    }\n\n    # 1. Empty list should return stats\n    res = enforce_included_repo_limits([], PackLimits(**limits))\n    assert res[\"repo_bytes\"] == 0\n    assert res[\"repo_files\"] == 0\n\n    # 2. Exceed total bytes\n    too_big = [{\"path\": \"a.txt\", \"hash\": \"f\" * 64, \"size\": 101}]\n    with py",
+    "diff_line_ratio": 0.0172,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
+    "status": "failed",
+    "reason": "foreman_reject",
+    "elapsed": 74.44,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": true,
+        "info": "ok",
+        "time": 71.59,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "foreman_verify",
+        "success": false,
+        "info": "risky_gate",
+        "time": 2.84,
+        "risky": true,
+        "ratio": 0.0517
+      }
+    ],
+    "plan": "",
+    "last_error": "",
+    "code_preview": "from pathlib import Path\nimport sys\nimport pytest\nimport hashlib\n\nREPO_ROOT = Path(__file__).resolve().parents[3]\nif str(REPO_ROOT) not in sys.path:\n    sys.path.insert(0, str(REPO_ROOT))\n\nfrom CAPABILITY.PRIMITIVES.cas_store import CatalyticStore, normalize_relpath\n\n\ndef test_put_bytes_same_bytes_same_hash(tmp_path: Path) -> None:\n    store = CatalyticStore(tmp_path / \"cas\")\n    data = b\"hello world\"\n    h1 = store.put_bytes(data)\n    h2 = store.put_bytes(data)\n    assert h1 == h2\n    assert h1 == hashlib.sha256(data).hexdigest()\n\ndef test_put_bytes_idempotent_does_not_change_bytes(tmp_path: Path) -> None:\n    store = CatalyticStore(tmp_path / \"cas\")\n    data = b\"x\" * 1024\n    h = store.put_bytes(data)\n    obj_path = store.object_path(h)\n    before = obj_path.read_bytes()\n    _ = store.pu",
+    "diff_line_ratio": 0.0517,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+    "status": "failed",
+    "reason": "unknown",
+    "elapsed": 83.86,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 32.25,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 7.09,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "architect_plan",
+        "success": false,
+        "info": "invalid_plan_or_timeout",
+        "time": 44.5
+      }
+    ],
+    "plan": "",
+    "last_error": "dangerous_ops",
+    "code_preview": "",
+    "diff_line_ratio": null,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
+    "status": "failed",
+    "reason": "unknown",
+    "elapsed": 75.86,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 8.59,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 35.33,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "architect_plan",
+        "success": false,
+        "info": "invalid_plan_or_timeout",
+        "time": 31.94
+      }
+    ],
+    "plan": "",
+    "last_error": "dangerous_ops",
+    "code_preview": "",
+    "diff_line_ratio": null,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
+    "status": "failed",
+    "reason": "unknown",
+    "elapsed": 103.59,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 10.55,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 49.72,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "architect_plan",
+        "success": false,
+        "info": "invalid_plan_or_timeout",
+        "time": 43.33
+      }
+    ],
+    "plan": "",
+    "last_error": "dangerous_ops",
+    "code_preview": "",
+    "diff_line_ratio": null,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
+    "status": "failed",
+    "reason": "foreman_reject",
+    "elapsed": 28.66,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": true,
+        "info": "ok",
+        "time": 26.51,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "foreman_verify",
+        "success": false,
+        "info": "risky_gate",
+        "time": 2.14,
+        "risky": true,
+        "ratio": 0.0
+      }
+    ],
+    "plan": "",
+    "last_error": "",
+    "code_preview": "#!/usr/bin/env python3\n\"\"\"\nSPECTRUM-02 Bundle Resume Test\n\nTests that bundle resume/verification works correctly per SPECTRUM-02 specification.\nThis tests the actual implementation in CAPABILITY.PRIMITIVES.verify_bundle.\n\"\"\"\n\nimport json\nimport sys\nfrom pathlib import Path\nimport pytest\n\nREPO_ROOT = Path(__file__).resolve().parents[3]\nsys.path.insert(0, str(REPO_ROOT))\n\nfrom CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier\n\n\ndef test_spectrum02_resume():\n    \"\"\"Test that SPECTRUM-02 bundle verification is operational.\"\"\"\n    verifier = BundleVerifier()\n    \n    # Verify the verifier has the required methods\n    assert hasattr(verifier, 'verify_bundle_spectrum05')\n    assert callable(verifier.verify_bundle_spectrum05)\n    \n    # Verify error codes are defined\n    from CAPABILITY.PR",
+    "diff_line_ratio": 0.0,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
+    "status": "failed",
+    "reason": "unknown",
+    "elapsed": 92.67,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 34.58,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 31.8,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "architect_plan",
+        "success": false,
+        "info": "invalid_plan_or_timeout",
+        "time": 26.28
+      }
+    ],
+    "plan": "",
+    "last_error": "dangerous_ops",
+    "code_preview": "",
+    "diff_line_ratio": null,
+    "critical": true
+  },
+  {
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
+    "status": "failed",
+    "reason": "no_valid_candidate",
+    "elapsed": 159.02,
+    "model_used": null,
+    "steps": [
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 16.17,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 52.52,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "architect_plan",
+        "success": true,
+        "info": "ok",
+        "time": 4.25
+      },
+      {
+        "step": "ant_planned",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 11.98,
+        "attempt": 1,
+        "temp": 0.1
+      },
+      {
+        "step": "ant_planned",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 9.25,
+        "attempt": 2,
+        "temp": 0.3
+      },
+      {
+        "step": "foreman_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 17.2
+      },
+      {
+        "step": "architect_direct",
+        "success": false,
+        "info": "dangerous_ops",
+        "time": 47.64
+      }
+    ],
+    "plan": "- Import `json` at the top of the file.\n- Ensure all necessary imports (`pytest`, `Path`, `sys`) are present.\n- Use `from CAPABILITY.PRIMITIVES import ...` or `from CAPABILITY.PIPELINES import ...`.\n- Replace `str(durable_path)` with `durable_path.as_posix()` to ensure JSON serialization compatibility.",
+    "last_error": "dangerous_ops",
+    "code_preview": "",
+    "diff_line_ratio": null,
+    "critical": true
+  }
+]
