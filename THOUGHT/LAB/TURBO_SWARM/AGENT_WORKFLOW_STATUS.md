@@ -24,7 +24,7 @@ Last Updated: 2025-12-30
   - Dual-mode operation (Level 1: Restrictive, Level 2: Thinking)
   - Import test: PASSED
 
-- **Adaptive Orchestrator** - ⚠️ ARCHIVED
+- **Adaptive Orchestrator** - ⚠️ BEING FIXED
   - Located in `archive/swarm_orchestrator_adaptive(main needs fix).py`
   - Not currently used in production pipeline
   - Caddy → Professional escalation handled manually
@@ -35,7 +35,6 @@ Last Updated: 2025-12-30
   - `llama3.2-vision:latest` (7.8 GB)
   - `nomic-embed-text:latest` (274 MB)
 - **Required Models** (for full swarm capability):
-  - ⚠️ `qwen2.5:1.5b` - NOT INSTALLED
   - ⚠️ `llama3.2:1b` - NOT INSTALLED
 
 ### Manifest System

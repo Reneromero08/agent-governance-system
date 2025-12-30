@@ -28,12 +28,6 @@ except ImportError:
     sign_receipt_bytes = None
     verify_receipt_bytes = None
 
-try:
-    from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
-except ImportError:
-    sign_receipt_bytes = None
-    verify_receipt_bytes = None
-
 
 def cmd_build(args) -> int:
     """Build section index.

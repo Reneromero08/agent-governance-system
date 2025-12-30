@@ -440,3 +440,33 @@ python -m pytest -q tests/test_attestation.py tests/test_receipt.py
 - ✓ Hex-only for `public_key`/`signature` with validation
 - ✓ No timestamps, randomness, absolute paths, or env-dependent behavior
 - ✓ Minimal diffs; changes localized to canonicalization and signing flow
+
+---
+
+## Phase 6.2.1: Attestation Stabilization (Completed 2025-12-30)
+
+**Status:** Complete ✓
+
+### Issue Fixed
+`test_cli_dry_run` was failing because the subprocess call to `python -m catalytic_chat.cli` could not find the module due to missing PYTHONPATH environment variable.
+
+### Solution
+Added 3 lines to `tests/test_planner.py`:
+- Import `os`
+- Copy environment variables and set `PYTHONPATH` to `Path(__file__).parent.parent`
+- Pass `env` parameter to `subprocess.run()`
+
+### Verification
+```bash
+cd THOUGHT/LAB/CAT_CHAT
+python -m pytest -q THOUGHT/LAB/CAT_CHAT/tests
+# 59 passed, 13 skipped in 6.10s
+```
+
+### Hard Constraints Met
+- ✓ Entire test suite green (no new failures)
+- ✓ No test skips added (same 13 skips)
+- ✓ Deterministic receipts unchanged
+- ✓ Attestation still fail-closed
+- ✓ No CLI or executor regressions
+- ✓ Minimal fix (only test environment issue addressed)

@@ -170,13 +170,79 @@ Goal: make "catalytic" measurable and prevent regressions.
   - [ ] budget enforcement tests
   - [ ] receipt completeness tests
 - [ ] Add benchmark scenarios:
-  - [ ] “find and patch 1 function” task
-  - [ ] “refactor N files” task
-  - [ ] “generate roadmap from corpus” task
+  - [ ] "find and patch 1 function" task
+  - [ ] "refactor N files" task
+  - [ ] "generate roadmap from corpus" task
 
 Exit criteria
 - [ ] A dashboard (or printed report) shows token and expansion savings over baseline.
 - [ ] Regressions fail tests deterministically.
+
+## Phase 6.2 — Receipt Attestation (COMPLETE 2025-12-30)
+
+Goal: add cryptographic signing and verification to bundle execution receipts.
+
+**Related:**
+- Provisional ADR: `docs/provisional/ADR-attestation.md`
+- Commit plan: `commit-plan-phase-6-2-attestation.md`
+
+### Completed
+
+- [x] **receipt_canonical_bytes(receipt, attestation_override=None)** in `catalytic_chat/receipt.py`
+  - Single source of truth for receipt canonicalization
+  - Used by signer, verifier, and executor
+
+- [x] **sign_receipt_bytes()** in `catalytic_chat/attestation.py`
+  - Ed25519 signing
+  - Hex output for public_key and signature
+
+- [x] **verify_receipt_bytes()** in `catalytic_chat/attestation.py`
+  - Ed25519 verification
+  - Validates hex, lengths, scheme
+  - Recomputes canonical bytes with `attestation_override=None`
+
+- [x] **executor.py** enhanced
+  - Uses `receipt_canonical_bytes()` for signing
+  - Uses `receipt_canonical_bytes()` for writing
+  - Returns `receipt_path` and `attestation` fields
+
+- [x] **cli.py** enhanced
+  - `bundle run --attest --signing-key <path>` to sign receipts
+  - `bundle run --verify-attestation` to verify receipts
+
+- [x] **Tests** in `tests/test_attestation.py`
+  - All 6 tests passing
+  - Roundtrip sign/verify
+  - Tamper detection
+  - Input validation (hex, lengths, scheme)
+  - Null handling
+
+Exit criteria
+- [x] Receipts can be signed with ed25519 private keys
+- [x] Receipts can be verified against public keys
+- [x] Canonical bytes are deterministic (single source of truth)
+- [x] All validation rules enforced (hex-only, length checks, scheme check)
+- [x] All tests passing
+
+---
+
+## Phase 6.2.1 — Attestation Stabilization (COMPLETE 2025-12-30)
+
+Goal: fix test environment issue preventing full test suite from passing.
+
+### Completed
+
+- [x] **test_cli_dry_run** fix in `tests/test_planner.py`
+  - Added `PYTHONPATH` environment variable to subprocess call
+  - Subprocess now finds `catalytic_chat.cli` module correctly
+  - Minimal change: only 3 lines added
+
+Exit criteria
+- [x] Entire test suite green: 59 passed, 13 skipped
+- [x] No test skips added
+- [x] Deterministic receipts unchanged
+- [x] Attestation still fail-closed
+- [x] No CLI or executor regressions
 
 ---
 
