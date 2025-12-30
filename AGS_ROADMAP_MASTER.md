@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (Master)
-version: 3.4
-last_updated: 2025-12-28
+version:3.4
+last_updated:2025-12-30
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
 driver: @F0 (The Living Formula)
