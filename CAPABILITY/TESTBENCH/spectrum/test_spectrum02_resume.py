@@ -1,18 +1,17 @@
-# This is a comment
+import sys
+import pytest
+from pathlib import Path
+
+# Define REPO_ROOT as the parent directory 3 levels up from this file
+REPO_ROOT = Path(__file__).resolve().parents[3]
+
+# Add REPO_ROOT to Python path to ensure imports work
+sys.path.insert(0, str(REPO_ROOT))
 
 def test_spectrum02_resume():
     """Pytest entry point."""
-    from ..spectrum import RunnerSPECTRUM02Resume  # Update sys.path to include parents[3]
+    from CAPABILITY.PIPELINES.spectrum.runner_spectrum02_resume import RunnerSPECTRUM02Resume
     assert RunnerSPECTRUM02Resume().run_all()
 
 if __name__ == "__main__":
-    from ..spectrum import RunnerSPECTRUM02Resume  # Ensure correct relative imports
-    success = RunnerSPECTRUM02Resume().run_all()
-    sys.exit(0 if success else 1)
-
-# Necessary imports
-import pytest
-import sys
-from pathlib import Path
-
-# REPO_ROOT should be 'Path(__file__).resolve().parents[3]'
+    pytest.main([__file__])

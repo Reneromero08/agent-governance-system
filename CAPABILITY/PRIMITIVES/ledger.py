@@ -6,7 +6,22 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
 
-from jsonschema import Draft7Validator, RefResolver
+import warnings
+
+try:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        from jsonschema import Draft7Validator
+        from jsonschema import RefResolver
+    HAS_REFRESOLVER = True
+except ImportError:
+    from jsonschema import Draft7Validator
+    try:
+        from referencing import Registry, Resource
+        HAS_REFRESOLVER = False
+    except ImportError:
+        # Fallback for broken environments: define dummy
+        HAS_REFRESOLVER = None
 
 
 def _canonical_json_line(record: dict[str, Any]) -> bytes:
@@ -40,21 +55,37 @@ def _build_validator() -> Draft7Validator:
     ledger_uri = ledger_schema_path.as_uri()
     jobspec_uri = jobspec_schema_path.as_uri()
 
-    store: dict[str, Any] = {
-        schemas.ledger.get("$id", "ledger.schema.json"): schemas.ledger,
-        schemas.jobspec.get("$id", "jobspec.schema.json"): schemas.jobspec,
-        "ledger.schema.json": schemas.ledger,
-        "ledger.schema.json#": schemas.ledger,
-        ledger_uri: schemas.ledger,
-        ledger_uri + "#": schemas.ledger,
-        "jobspec.schema.json": schemas.jobspec,
-        "jobspec.schema.json#": schemas.jobspec,
-        jobspec_uri: schemas.jobspec,
-        jobspec_uri + "#": schemas.jobspec,
-    }
+    if HAS_REFRESOLVER:
+        store: dict[str, Any] = {
+            schemas.ledger.get("$id", "ledger.schema.json"): schemas.ledger,
+            schemas.jobspec.get("$id", "jobspec.schema.json"): schemas.jobspec,
+            "ledger.schema.json": schemas.ledger,
+            "ledger.schema.json#": schemas.ledger,
+            ledger_uri: schemas.ledger,
+            ledger_uri + "#": schemas.ledger,
+            "jobspec.schema.json": schemas.jobspec,
+            "jobspec.schema.json#": schemas.jobspec,
+            jobspec_uri: schemas.jobspec,
+            jobspec_uri + "#": schemas.jobspec,
+        }
 
-    resolver = RefResolver.from_schema(schemas.ledger, store=store)
-    return Draft7Validator(schemas.ledger, resolver=resolver)
+        resolver = RefResolver.from_schema(schemas.ledger, store=store)
+        return Draft7Validator(schemas.ledger, resolver=resolver)
+    elif HAS_REFRESOLVER is False:
+        # Use referencing
+        resources = [
+             (schemas.ledger.get("$id", "ledger.schema.json"), Resource.from_contents(schemas.ledger)),
+             (schemas.jobspec.get("$id", "jobspec.schema.json"), Resource.from_contents(schemas.jobspec)),
+             ("ledger.schema.json", Resource.from_contents(schemas.ledger)),
+             (ledger_uri, Resource.from_contents(schemas.ledger)),
+             ("jobspec.schema.json", Resource.from_contents(schemas.jobspec)),
+             (jobspec_uri, Resource.from_contents(schemas.jobspec)),
+        ]
+        registry = Registry().with_resources(resources)
+        return Draft7Validator(schemas.ledger, registry=registry)
+    else:
+        # No validation capability (should not happen if deps are correct)
+        return Draft7Validator(schemas.ledger)
 
 
 _LEDGER_VALIDATOR = _build_validator()

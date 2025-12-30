@@ -14,7 +14,6 @@ def start_mcp_server() -> Optional[subprocess.Popen]:
         subprocess.Popen object if successful, None otherwise
     """
     # Define the command to start the MCP server
-    # Replace with actual path to your MCP server executable
     command = [
         "mcp_server",  # Replace with actual executable name/path
         "--port", "8080"  # or whatever port your MCP server uses
@@ -38,12 +37,12 @@ def start_mcp_server() -> Optional[subprocess.Popen]:
             try:
                 # Try to connect to the server
                 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-                    s.settimeout(2)  # Increased timeout
-                    s.connect(('127.0.0.1', port))  # Use 127.0.0.1 instead of localhost
+                    s.settimeout(2)  # Timeout for connection attempt
+                    s.connect(('127.0.0.1', port))
                     print("MCP server started successfully")
                     return process
             except (socket.timeout, ConnectionRefusedError, OSError):
-                if attempt < max_attempts - 1:  # Don't print on last attempt
+                if attempt < max_attempts - 1:
                     print(f"Waiting for MCP server to start... (attempt {attempt + 1}/{max_attempts})")
                 time.sleep(1)
 
@@ -73,6 +72,9 @@ def start_mcp_server() -> Optional[subprocess.Popen]:
 
         return None
 
+    except subprocess.CalledProcessError as e:
+        print(f"MCP server failed to start with error: {e}")
+        return None
     except FileNotFoundError:
         print(f"Error: MCP server executable not found. Command: {' '.join(command)}")
         return None

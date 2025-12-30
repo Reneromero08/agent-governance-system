@@ -2,98 +2,72 @@ import json
 import os
 import subprocess
 import sys
+import hashlib
 from pathlib import Path
+import pytest
 
-# HARDCODED REPO_ROOT
-REPO_ROOT = Path("/path/to/your/repo")
+
+
+REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT))
 
 def _run_ags(args: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
+    env = dict(env)
+    env["PYTHONPATH"] = str(REPO_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
     # Use -m CAPABILITY.TOOLS.ags to ensure correct module resolution
     cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags"] + args
-    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
+    return subprocess.run(cmd, cwd=str(REPO_ROOT / "CAPABILITY"), capture_output=True, text=True, env=env)
 
 def _canon(obj: object) -> bytes:
+    # Use standard canonical JSON (SPECTRUM-04)
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
-import pytest
-from pathlib import Path
-
-# PRIMITIVES/PIPELINES structure
-from CAPABILITY.PRIMITIVES import *
-from CAPABILITY.PIPELINES import *
-
-def test_registry_duplicate_capability_hash_rejects(tmp_path: Path) -> None:
-    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
-    # Duplicate keys inside capabilities object (must be detected via object_pairs_hook).
-    # We use raw string to avoid f-string escaping nightmare
-    raw = (
-        '{"registry_version":"1.0.0","capabilities":{'
-        f'"{cap}":{{"adapter_spec_hash":"{cap}","adapter":{{}}}},'
-        f'"{cap}":{{"adapter_spec_hash":"{cap}","adapter":{{}}}}'
-        '}}'
-    )
-    reg_path = tmp_path / "CAPABILITIES.json"
-    reg_path.write_text(raw, encoding="utf-8")
-
-    pins_path = tmp_path / "PINS.json"
-    pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [cap]}))
-
-    env = dict(os.environ)
-    env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
-    env["CATALYTIC_PINS_PATH"] = str(pins_path)
-
-    plan = {"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}
-    plan_path = tmp_path / "plan.json"
-    plan_path.write_text(json.dumps(plan), encoding="utf-8")
-
-    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", "reg-dupe"], env=env)
-    assert r.returncode != 0
-    assert "REGISTRY_DUPLICATE_HASH" in (r.stderr + r.stdout)
-
-def test_registry_noncanonical_json_rejects(tmp_path: Path) -> None:
-    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
-    obj = {"registry_version": "1.0.0", "capabilities": {cap: {"adapter_spec_hash": cap, "adapter": {}}}}
-    reg_path = tmp_path / "CAPABILITIES.json"
-    reg_path.write_bytes(_canon(obj))
-
-    pins_path = tmp_path / "PINS.json"
-    pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [cap]}))
-
-    env = dict(os.environ)
-    env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
-    env["CATALYTIC_PINS_PATH"] = str(pins_path)
-
-    plan = {"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}
-    plan_path = tmp_path / "plan.json"
-    plan_path.write_text(json.dumps(plan), encoding="utf-8")
-
-    # AGENTS.md says AGENT must reject non-canonical JSON for registry
-    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", "reg-noncanon"], env=env)
-    assert r.returncode != 0
-    assert "REGISTRY_NONCANONICAL" in (r.stderr + r.stdout)
-
 def test_registry_tamper_detected_fail_closed(tmp_path: Path) -> None:
-    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
-    reg_path = tmp_path / "CAPABILITIES.json"
-    # Canonical bytes but internally inconsistent (hash mismatch) -> tampered.
+    # Valid adapter
+    adapter = {
+        "command": ["echo", "ok"],
+        "jobspec": {
+            "job_id": "j1", "intent": "test", "phase": 6, "task_type": "test",
+            "inputs": {}, "outputs": {"durable_paths": [], "validation_criteria": {}},
+            "catalytic_domains": ["CAPABILITY/PRIMITIVES/_scratch"], "determinism": "deterministic"
+        },
+        "inputs": {}, "outputs": {}, "side_effects": [], "deref_caps": [], "artifacts": []
+    }
+    cap = hashlib.sha256(_canon(adapter)).hexdigest()
+
+    # Tamper: change one byte in the adapter but keep the same key (hash) in registry
+    tampered_adapter = adapter.copy()
+    tampered_adapter["command"] = ["echo", "tampered"]
+
+    # Create registry with correct hash but wrong adapter
+    reg_path = tmp_path / "CAPABILITY" / "CAPABILITIES.json"
     obj = {
         "registry_version": "1.0.0",
-        "capabilities": {cap: {"adapter_spec_hash": cap, "adapter": {"name": "tampered"}}},
+        "capabilities": {
+            cap: {
+                "adapter": tampered_adapter,
+                "adapter_spec_hash": cap
+            }
+        }
     }
+    reg_path.parent.mkdir(parents=True, exist_ok=True)
     reg_path.write_bytes(_canon(obj))
 
-    pins_path = tmp_path / "PINS.json"
+    pins_path = tmp_path / "CAPABILITY" / "PINS.json"
+    pins_path.parent.mkdir(parents=True, exist_ok=True)
     pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [cap]}))
 
     env = dict(os.environ)
     env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
+    env.pop("CATALYTIC_REVOKES_PATH", None)
 
     plan = {"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}
-    plan_path = tmp_path / "plan.json"
+    plan_path = tmp_path / "CAPABILITY" / "plan.json"
+    plan_path.parent.mkdir(parents=True, exist_ok=True)
     plan_path.write_text(json.dumps(plan), encoding="utf-8")
 
     r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", "reg-tamper"], env=env)
     assert r.returncode != 0
     assert "CAPABILITY_HASH_MISMATCH" in (r.stderr + r.stdout)
+

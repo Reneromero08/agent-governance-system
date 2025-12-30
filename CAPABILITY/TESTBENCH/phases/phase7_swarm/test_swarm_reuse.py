@@ -12,7 +12,6 @@ sys.path.insert(1, str(Path("..") / ".." / "TOOLS"))
 from CAPABILITY.PIPELINES.swarm_runtime import SwarmRuntime
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
 
-
 def _rm(path: Path) -> None:
     if path.is_dir():
         shutil.rmtree(path, ignore_errors=True)
@@ -22,8 +21,7 @@ def _rm(path: Path) -> None:
         except FileNotFoundError:
             pass
 
-
-def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: list[str], durable_paths: list[str]) -> None:
+def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: list[Path], durable_paths: list[Path]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     obj = {
         "job_id": job_id,
@@ -31,12 +29,11 @@ def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: l
         "task_type": "pipeline_execution",
         "intent": intent,
         "inputs": {},
-        "outputs": {"durable_paths": durable_paths, "validation_criteria": {}},
-        "catalytic_domains": catalytic_domains,
+        "outputs": {"durable_paths": [str(p) for p in durable_paths], "validation_criteria": {}},
+        "catalytic_domains": [str(cd) for cd in catalytic_domains],
         "determinism": "deterministic",
     }
     path.write_text(json.dumps(obj, indent=2), encoding="utf-8")
-
 
 def test_swarm_execution_elision(tmp_path: Path) -> None:
     """
@@ -49,15 +46,17 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
     swarm_id = "swarm-elision-test"
     p1 = "elision-p1"
 
-    runs_root = Path("..") / ".." / ".." / "LAW" / "CONTRACTS" / "_runs"
+    REPO_ROOT = Path(__file__).resolve().parents[3]
+    LAW_CONTRACTS = REPO_ROOT / "LAW" / "CONTRACTS"
+    runs_root = LAW_CONTRACTS / "_runs"
     swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
     dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
 
-    rt_pipeline = PipelineRuntime(project_root=Path("..") / "..")
+    rt_pipeline = PipelineRuntime(project_root=REPO_ROOT / "..")
     pipeline_dir = rt_pipeline.pipeline_dir(p1)
 
-    out1 = "NAVIGATION/CORTEX/_generated/_tmp/" + p1 + ".txt"
-    jobspec_rel = "LAW/CONTRACTS/_runs/_tmp/elision_test/" + p1 + "_jobspec.json"
+    out1 = Path("NAVIGATION/CORTEX/_generated/_tmp/") / f"{p1}.txt"
+    jobspec_rel = Path("LAW/CONTRACTS/_runs/_tmp/elision_test/") / f"{p1}_jobspec.json"
 
     receipts_store = runs_root / "_pipelines" / "_swarms" / "_receipts"
 
@@ -65,15 +64,15 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
 
     try:
         # Setup catalytic domain
-        cat_domain = Path("LAW/CONTRACTS/_runs/_tmp/elision_test/cat_domain")
+        cat_domain = LAW_CONTRACTS / "_runs" / "_tmp" / "elision_test" / "cat_domain"
         cat_domain.mkdir(parents=True, exist_ok=True)
 
-        # Write jobspec
+        # Write jobspec with Path objects
         _write_jobspec(
-            runs_root / "elision_test/" + p1 + "_jobspec.json",
+            runs_root / "elision_test" / f"{p1}_jobspec.json",
             job_id=f"{p1}-job",
             intent=unique_intent,
-            catalytic_domains=[str(cat_domain)],
+            catalytic_domains=[cat_domain],
             durable_paths=[out1]
         )
 
@@ -82,11 +81,11 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
             "steps": [
                 {
                     "step_id": "s1",
-                    "jobspec_path": jobspec_rel,
+                    "jobspec_path": str(jobspec_rel),
                     "memoize": False,
                     "cmd": [
                         sys.executable, "-c",
-                        f"from pathlib import Path;Path('{out1}').parent.mkdir(parents=True, exist_ok=True);Path('{out1}').write_text('{p1}')"
+                        f"from pathlib import Path;Path('{str(out1.parent)}').mkdir(parents=True, exist_ok=True);Path('{str(out1)}').write_text('{p1}')"
                     ],
                 }
             ]
@@ -102,8 +101,8 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         spec_path = tmp_path / "swarm.json"
         spec_path.write_text(json.dumps(swarm_spec, indent=2), encoding="utf-8")
 
-        sr = SwarmRuntime(project_root=Path(".."), runs_root=runs_root)
-        
+        sr = SwarmRuntime(project_root=REPO_ROOT / "..", runs_root=runs_root)
+
         # =========================================
         # 1. First Run: Full Execution
         # =========================================
@@ -150,4 +149,4 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         _rm(dag_dir)
         _rm(pipeline_dir)
         _rm(runs_root / "_tmp/elision_test")
-        _rm(Path(out1))
+        _rm(out1)

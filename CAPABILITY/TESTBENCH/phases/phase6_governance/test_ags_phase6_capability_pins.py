@@ -35,7 +35,7 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
 
 def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
     """Create mock skill registry and capability registry and return (capability_hash, env)"""
-    
+
     # Valid jobspec for a skill
     jobspec = {
         "job_id": "test-job",
@@ -47,7 +47,7 @@ def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
         "catalytic_domains": [],
         "determinism": "deterministic"
     }
-    
+
     # Valid adapter conforming to adapter.schema.json
     dummy_hash = "0" * 64
     adapter = {
@@ -75,9 +75,9 @@ def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
             "domain_roots": dummy_hash
         }
     }
-    
+
     cap_hash = hashlib.sha256(_canon(adapter)).hexdigest()
-    
+
     # Capabilities registry
     caps_obj = {
         "registry_version": "1.0.0",
@@ -88,11 +88,11 @@ def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
             }
         }
     }
-    
+
     caps_path = tmp_path / "capabilities.json"
     pins_path = tmp_path / "pins.json"
     revokes_path = tmp_path / "revokes.json"
-    
+
     with open(caps_path, 'wb') as f:
         f.write(_canon(caps_obj))
     # Write empty pins and revokes initially
@@ -100,19 +100,19 @@ def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
         f.write(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
     with open(revokes_path, 'wb') as f:
         f.write(_canon({"revokes_version": "1.0.0", "revoked_capabilities": []}))
-        
+
     env = dict(os.environ)
     env.pop("CATALYTIC_SKILLS_PATH", None) # Ensure we don't accidentally use real skills
     env["CATALYTIC_CAPABILITIES_PATH"] = str(caps_path)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
     env["CATALYTIC_REVOKES_PATH"] = str(revokes_path)
-    
+
     return cap_hash, env
 
 def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
     pipeline_id = "ags-pins-ok"
     cap, env = _mock_registry(tmp_path)
-    
+
     plan_path = tmp_path / "plan.json"
     with open(plan_path, 'w', encoding="utf-8") as f:
         json.dump({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}, f)
@@ -127,21 +127,18 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
 
     # Verify
     r_verify = _run([sys.executable, "-m", "CAPABILITY.TOOLS.catalytic", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
-    # Verification fails with CHAIN_MISSING because we haven't executed anything yet,
-    # but it confirms that all CAPABILITY/PIN/REVOKE checks passed to reach the chain check.
     assert r_verify.returncode != 0
     assert "CHAIN_MISSING" in r_verify.stdout
 
 def test_verify_rejects_unpinned(tmp_path: Path) -> None:
     pipeline_id = "ags-pins-unpinned"
     cap, env = _mock_registry(tmp_path)
-    
+
     plan_path = tmp_path / "plan.json"
     with open(plan_path, 'w', encoding="utf-8") as f:
         json.dump({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}, f)
 
-    # Unpin (already empty from _mock_registry)
-    
+    # Route
     r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
     assert r_route.returncode != 0
     assert "CAPABILITY_NOT_PINNED" in r_route.stderr
@@ -149,7 +146,7 @@ def test_verify_rejects_unpinned(tmp_path: Path) -> None:
 def test_verify_rejects_revoked(tmp_path: Path) -> None:
     pipeline_id = "ags-pins-revoked"
     cap, env = _mock_registry(tmp_path)
-    
+
     plan_path = tmp_path / "plan.json"
     with open(plan_path, 'w', encoding="utf-8") as f:
         json.dump({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": cap}]}, f)

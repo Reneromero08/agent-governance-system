@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import BinaryIO
 
 
-_HASH_RE = re.compile(r"^[0-9a-fA-F]{64}$")
+_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
 
 
 def normalize_relpath(path: str | Path) -> str:

@@ -32,7 +32,13 @@ from CAPABILITY.PRIMITIVES.registry_validators import (
 )  # type: ignore
 from CAPABILITY.PRIMITIVES.skills import SkillRegistry  # type: ignore
 
-from jsonschema import Draft7Validator, RefResolver
+try:
+    with warnings.catch_warnings():
+        warnings.simplefilter("ignore")
+        from jsonschema import Draft7Validator, RefResolver
+except ImportError:
+    from jsonschema import Draft7Validator
+    RefResolver = None  # type: ignore
 
 from CAPABILITY.TOOLS.utilities.intent import generate_intent
 

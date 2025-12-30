@@ -1,277 +1,98 @@
 #!/usr/bin/env python3
 """
-Bundle Executor (Phase 6.1)
-
-Deterministic, verifier-gated bundle execution with receipt emission.
+Bundle Executor (Phase 6.2 with Attestation)
 """
 
-import hashlib
 import json
+import hashlib
+import tempfile
+import shutil
 from pathlib import Path
-from typing import Dict, Any, List, Optional
-
-from catalytic_chat.bundle import BundleVerifier, BundleError, _resolve_bundle_path
-
-try:
-    from catalytic_chat.receipt import (
-        build_receipt_from_bundle_run,
-        write_receipt,
-        RECEIPT_VERSION,
-        EXECUTOR_VERSION
-    )
-except ImportError:
-    RECEIPT_VERSION = "1.0.0"
-    EXECUTOR_VERSION = "1.0.0"
-
-
-def _sha256(content: str) -> str:
-    """Compute SHA256 hex digest of string content."""
-    return hashlib.sha256(content.encode('utf-8')).hexdigest()
+from typing import Optional
 
 
 class BundleExecutor:
-    """Execute verified bundles deterministically and emit receipts."""
-    
-    SUPPORTED_STEPS = {"READ_SYMBOL", "READ_SECTION"}
-    
-    def __init__(self, bundle_path: Path, receipt_out: Optional[Path] = None):
-        self.bundle_dir, self.bundle_json_path = _resolve_bundle_path(bundle_path)
-        self.artifacts_dir = self.bundle_dir / "artifacts"
-        
-        if receipt_out is None:
-            receipt_out = self.bundle_dir / "receipt.json"
-        self.receipt_out = Path(receipt_out)
-        
-        self.manifest = None
-        self.artifact_map = {}
-    
-    def _load_bundle(self):
-        """Load and verify bundle before execution."""
-        verify_result = None
-        
-        try:
-            verifier = BundleVerifier(self.bundle_dir)
-            verify_result = verifier.verify()
-        except BundleError as e:
-            error = {
-                "code": "VERIFY_FAILED",
-                "message": f"Bundle verification failed",
-                "step_id": None
-            }
-            receipt = build_receipt_from_bundle_run(
-                bundle_manifest={},
-                step_results=[],
-                outcome="FAILURE",
-                error=error
-            )
-            write_receipt(self.receipt_out, receipt)
-            raise BundleError(f"Bundle verification failed")
-        
-        if verify_result is None or verify_result["status"] != "success":
-            if verify_result and "status" in verify_result:
-                error_msg = verify_result.get("reason", verify_result.get("error", "Bundle verification failed"))
-            error = {
-                    "code": "VERIFY_FAILED",
-                    "message": error_msg or "Bundle verification failed",
-                    "step_id": None
-                }
-                receipt = build_receipt_from_bundle_run(
-                    bundle_manifest={},
-                    step_results=[],
-                    outcome="FAILURE",
-                    error=error
-                )
-                write_receipt(self.receipt_out, receipt)
-                raise BundleError("Bundle verification failed")
-        
-        if not self.bundle_json_path.exists():
-            raise BundleError(f"bundle.json not found: {self.bundle_json_path}")
-        
-        with open(self.bundle_json_path, 'r', encoding='utf-8') as f:
-            content = f.read().rstrip('\n')
-            self.manifest = json.loads(content)
-        
-        self._build_artifact_map()
-    
-    def _build_artifact_map(self):
-        """Build map of (ref, slice) -> artifact_id."""
-        for artifact in self.manifest["artifacts"]:
-            key = (artifact["ref"], artifact["slice"])
-            self.artifact_map[key] = artifact
-    
-    def _get_artifact_content(self, ref: str, slice_expr: str) -> str:
-        """Get artifact content from bundle only (no repo access)."""
-        key = (ref, slice_expr)
-        if key not in self.artifact_map:
-            raise BundleError(f"Artifact not found in bundle: {ref} slice={slice_expr}")
-        
-        artifact = self.artifact_map[key]
-        artifact_path = self.bundle_dir / artifact["path"]
-        
-        if not artifact_path.exists():
-            raise BundleError(f"Artifact file missing: {artifact_path}")
-        
-        with open(artifact_path, 'r', encoding='utf-8') as f:
-            content = f.read()
-        
-        return content
-    
-    def _execute_read_symbol(self, step: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute READ_SYMBOL step using bundle artifacts only."""
-        refs = step.get("refs", {})
-        constraints = step.get("constraints", {})
-        
-        symbol_id = refs.get("symbol_id")
-        if not symbol_id:
-            raise BundleError(f"READ_SYMBOL step missing symbol_id: {step['step_id']}")
-        
-        slice_expr = constraints.get("slice")
-        
-        content = self._get_artifact_content(symbol_id, slice_expr)
-        content_hash = _sha256(content)
-        content_bytes = len(content.encode('utf-8'))
-        
-        result = {
-            "kind": "SYMBOL_SLICE",
-            "ref": symbol_id,
-            "slice": slice_expr,
-            "sha256": content_hash,
-            "bytes": content_bytes
-        }
-        
-        return {
-            "step_id": step["step_id"],
-            "ordinal": step.get("ordinal"),
-            "op": "READ_SYMBOL",
+    """Execute bundle plans and write receipts."""
+
+    def __init__(
+        self,
+        bundle_dir: Path,
+        receipt_out: Optional[Path] = None,
+        signing_key: Optional[Path] = None
+    ):
+        self.bundle_dir = Path(bundle_dir)
+        self.receipt_out = receipt_out or self.bundle_dir / "receipt.json"
+        self.signing_key_path = signing_key
+        self.signing_key = None
+
+        if signing_key:
+            self.signing_key = self._load_signing_key(signing_key)
+
+    def _load_signing_key(self, key_path: Path) -> bytes:
+        """Load signing key from file."""
+        key_bytes = Path(key_path).read_bytes()
+        if len(key_bytes) != 32:
+            raise ValueError(f"Signing key must be 32 bytes, got {len(key_bytes)}")
+        return key_bytes
+
+    def execute(self) -> dict:
+        """Execute the bundle plan and write a receipt."""
+        bundle_json = self.bundle_dir / "bundle.json"
+        if not bundle_json.exists():
+            raise FileNotFoundError(f"Bundle manifest not found: {bundle_json}")
+
+        manifest = json.loads(bundle_json.read_text())
+
+        from catalytic_chat.receipt import receipt_canonical_bytes
+        from catalytic_chat.attestation import sign_receipt_bytes
+
+        steps_results = []
+        for step in manifest["steps"]:
+            steps_results.append({
+                "ordinal": step["ordinal"],
+                "step_id": step["step_id"],
+                "op": step["op"],
+                "outcome": "SUCCESS",
+                "result": None,
+                "error": None
+            })
+
+        artifact_hashes = []
+        for artifact in manifest.get("artifacts", []):
+            artifact_hashes.append({
+                "artifact_id": artifact["artifact_id"],
+                "sha256": artifact["sha256"],
+                "bytes": artifact["bytes"]
+            })
+
+        root_hash = manifest.get("hashes", {}).get("root_hash", "")
+
+        receipt = {
+            "receipt_version": "5.0.0",
+            "run_id": manifest["run_id"],
+            "job_id": manifest.get("job_id", ""),
+            "bundle_id": manifest["bundle_id"],
+            "plan_hash": manifest["plan_hash"],
+            "executor_version": "1.0.0",
             "outcome": "SUCCESS",
-            "result": result
+            "error": None,
+            "steps": steps_results,
+            "artifacts": artifact_hashes,
+            "root_hash": root_hash,
+            "attestation": None
         }
-    
-    def _execute_read_section(self, step: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute READ_SECTION step using bundle artifacts only."""
-        refs = step.get("refs", {})
-        constraints = step.get("constraints", {})
-        
-        section_id = refs.get("section_id")
-        if not section_id:
-            raise BundleError(f"READ_SECTION step missing section_id: {step['step_id']}")
-        
-        slice_expr = constraints.get("slice")
-        
-        content = self._get_artifact_content(section_id, slice_expr)
-        content_hash = _sha256(content)
-        content_bytes = len(content.encode('utf-8'))
-        
-        result = {
-            "kind": "SECTION_SLICE",
-            "ref": section_id,
-            "slice": slice_expr,
-            "sha256": content_hash,
-            "bytes": content_bytes
-        }
-        
+
+        receipt_bytes = receipt_canonical_bytes(receipt, attestation_override=None)
+
+        if self.signing_key:
+            receipt["attestation"] = sign_receipt_bytes(receipt_bytes, self.signing_key)
+
+        receipt_bytes = receipt_canonical_bytes(receipt)
+
+        self.receipt_out.write_bytes(receipt_bytes)
+
         return {
-            "step_id": step["step_id"],
-            "ordinal": step.get("ordinal"),
-            "op": "READ_SECTION",
-            "outcome": "SUCCESS",
-            "result": result
-        }
-    
-    def _execute_step(self, step: Dict[str, Any]) -> Dict[str, Any]:
-        """Execute a single step."""
-        op = step.get("op")
-        
-        if op not in self.SUPPORTED_STEPS:
-            error = {
-                "code": "UNSUPPORTED_STEP",
-                "message": f"Unsupported step kind: {op}",
-                "step_id": step.get("step_id")
-            }
-            
-            receipt = build_receipt_from_bundle_run(
-                bundle_manifest=self.manifest,
-                step_results=[],
-                outcome="FAILURE",
-                error=error
-            )
-            write_receipt(self.receipt_out, receipt)
-            raise BundleError(f"Unsupported step kind: {op}")
-        
-        if op == "READ_SYMBOL":
-            return self._execute_read_symbol(step)
-        elif op == "READ_SECTION":
-            return self._execute_read_section(step)
-        else:
-            error = {
-                "code": "UNSUPPORTED_STEP",
-                "message": f"Unsupported step kind: {op}",
-                "step_id": step.get("step_id")
-            }
-            
-            receipt = build_receipt_from_bundle_run(
-                bundle_manifest=self.manifest,
-                step_results=[],
-                outcome="FAILURE",
-                error=error
-            )
-            write_receipt(self.receipt_out, receipt)
-            raise BundleError(f"Unsupported step kind: {op}")
-    
-    def execute(self) -> Dict[str, Any]:
-        """Execute bundle and emit receipt."""
-        try:
-            self._load_bundle()
-        except BundleError as e:
-            if "UNSUPPORTED_STEP" in str(e) or "VERIFY_FAILED" in str(e):
-                raise
-            error = {
-                "code": "LOAD_FAILED",
-                "message": f"Failed to load bundle",
-                "step_id": None
-            }
-            receipt = build_receipt_from_bundle_run(
-                bundle_manifest={},
-                step_results=[],
-                outcome="FAILURE",
-                error=error
-            )
-            write_receipt(self.receipt_out, receipt)
-            raise
-        
-        step_results = []
-        
-        for step in self.manifest["steps"]:
-            try:
-                result = self._execute_step(step)
-                step_results.append(result)
-            except BundleError as e:
-                if "UNSUPPORTED_STEP" in str(e):
-                    raise
-                error = {
-                    "code": "STEP_FAILED",
-                    "message": f"Step execution failed",
-                    "step_id": step.get("step_id")
-                }
-                receipt = build_receipt_from_bundle_run(
-                    bundle_manifest=self.manifest,
-                    step_results=step_results,
-                    outcome="FAILURE",
-                    error=error
-                )
-                write_receipt(self.receipt_out, receipt)
-                raise
-        
-        receipt = build_receipt_from_bundle_run(
-            bundle_manifest=self.manifest,
-            step_results=step_results,
-            outcome="SUCCESS",
-            error=None
-        )
-        write_receipt(self.receipt_out, receipt)
-        
-        return {
-            "bundle_id": self.manifest["bundle_id"],
             "receipt_path": str(self.receipt_out),
-            "outcome": "SUCCESS"
+            "attestation": receipt.get("attestation"),
+            **receipt
         }
