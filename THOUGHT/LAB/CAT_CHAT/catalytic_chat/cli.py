@@ -1010,7 +1010,8 @@ def main():
     bundle_run_parser.add_argument("--attest", action="store_true", help="Emit receipt with attestation (requires --signing-key)")
     bundle_run_parser.add_argument("--signing-key", type=Path, required=False, help="Private signing key for attestation (32 bytes, ed25519)")
     bundle_run_parser.add_argument("--verify-attestation", action="store_true", help="Verify attestation if present")
-    bundle_run_parser.add_argument("--verify-chain", action="store_true", help="Verify receipt chain linkage for the run")
+    bundle_run_parser.add_argument("--verify-chain", action="store_true", help="Verify receipt chain linkage for run")
+    bundle_run_parser.add_argument("--print-merkle", action="store_true", help="Print Merkle root to stdout (requires --verify-chain)")
 
     args = parser.parse_args()
 

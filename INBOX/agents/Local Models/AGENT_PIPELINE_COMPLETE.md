@@ -210,6 +210,58 @@ CAPABILITY/TESTBENCH/
 
 ---
 
+## 🧠 Context Window Management
+
+### Architecture: Stateless Design
+
+The dispatcher uses a **stateless architecture** that prevents context window issues:
+
+**How it works:**
+1. Each command runs independently
+2. All state stored in filesystem (JSON)
+3. Process exits after each command
+4. No context accumulation
+
+**Current metrics:**
+- Ledger tasks: 1
+- Estimated tokens: ~290
+- Context capacity: 8192 (ministral-3:8b)
+- **Usage: 3.5%** ✅
+
+### Monitoring
+
+The dispatcher automatically tracks context usage:
+```
+📊 Context Metrics:
+   Ledger tasks: 1
+   Estimated tokens: 290
+   Context capacity: 8192 (ministral-3:8b)
+   Usage: 3.5%
+```
+
+**Warning threshold**: 6000 tokens (73% capacity)
+
+### Why This Works
+
+1. **Filesystem as State** - All data in JSON files
+2. **No Memory Growth** - Process exits after each operation
+3. **Deterministic** - Same inputs = same outputs
+4. **Scalable** - Can handle thousands of tasks
+
+### Future-Proof
+
+If LLM reasoning is added later:
+- Use minimal context (summary only, not full history)
+- Prune old completed tasks
+- Limit progress log entries
+- Archive after 7 days
+
+**Current status**: ✅ **OPTIMAL** - No tuning needed
+
+See `THOUGHT/LAB/TURBO_SWARM/CONTEXT_MANAGEMENT.md` for details.
+
+---
+
 ## 📈 Next Steps
 
 ### Immediate
