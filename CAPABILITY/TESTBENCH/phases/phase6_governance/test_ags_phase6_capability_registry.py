@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _rm(path: Path) -> None:
@@ -150,3 +150,5 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         _rm(pipeline_dir)
         _rm(run_dir)
         _rm(reg_root)
+
+

@@ -13,13 +13,21 @@ This directory stores new research, reports, and roadmaps for user approval.
   - **Modified:** UNKNOWN
   - **Summary:** Sections processing report. (Restored)
 
-- [ ] **[git-protocol-implementation-report.md](reports/git-protocol-implementation-report.md)**
+ - [ ] **[git-protocol-implementation-report.md](reports/git-protocol-implementation-report.md)**
   - **Section:** #report
   - **Author:** Antigravity
   - **Priority:** High
   - **Created:** 2025-12-29 05:36
   - **Modified:** 2025-12-29 05:36
   - **Summary:** Implementation report for STYLE-005 Git protocol enforcement.
+
+- [ ] **[cli-restore-commit-plan.md](reports/cli-restore-commit-plan.md)**
+  - **Section:** #report
+  - **Author:** System
+  - **Priority:** Medium
+  - **Created:** 2025-12-29
+  - **Modified:** 2025-12-29
+  - **Summary:** Commit plan for CLI restoration and execute command addition.
 
 - [ ] **[semantic-core-implementation-report.md](reports/semantic-core-implementation-report.md)**
   - **Section:** #report

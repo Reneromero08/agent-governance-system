@@ -1,0 +1,191 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+plugins: anyio-4.12.0
+collected 109 items / 12 errors
+
+=================================== ERRORS ====================================
+__ ERROR collecting CAPABILITY/TESTBENCH/adversarial/test_adversarial_cas.py __
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\adversarial\test_adversarial_cas.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\adversarial\test_adversarial_cas.py:11: in <module>
+    from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+____ ERROR collecting CAPABILITY/TESTBENCH/integration/test_memoization.py ____
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\integration\test_memoization.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\integration\test_memoization.py:15: in <module>
+    from catalytic_runtime import CatalyticRuntime
+CAPABILITY\TOOLS\catalytic\catalytic_runtime.py:53: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_____ ERROR collecting CAPABILITY/TESTBENCH/integration/test_preflight.py _____
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\integration\test_preflight.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\integration\test_preflight.py:8: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+__ ERROR collecting CAPABILITY/TESTBENCH/integration/test_skills_registry.py __
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\integration\test_skills_registry.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\integration\test_skills_registry.py:10: in <module>
+    from CAPABILITY.PRIMITIVES import (
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_router_slot.py _
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\phases\phase6_governance\test_ags_phase6_router_slot.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\phases\phase6_governance\test_ags_phase6_router_slot.py:10: in <module>
+    from CAPABILITY.PRIMITIVES import (
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py _
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\phases\phase7_swarm\test_swarm_reuse.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\phases\phase7_swarm\test_swarm_reuse.py:14: in <module>
+    from CAPABILITY.PIPELINES.swarm_runtime import SwarmRuntime
+CAPABILITY\PIPELINES\swarm_runtime.py:10: in <module>
+    from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime, _slug
+CAPABILITY\PIPELINES\pipeline_runtime.py:13: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_runtime.py _
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\phases\phase7_swarm\test_swarm_runtime.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\phases\phase7_swarm\test_swarm_runtime.py:18: in <module>
+    from CAPABILITY.PIPELINES.swarm_runtime import SwarmRuntime
+CAPABILITY\PIPELINES\swarm_runtime.py:10: in <module>
+    from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime, _slug
+CAPABILITY\PIPELINES\pipeline_runtime.py:13: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+____ ERROR collecting CAPABILITY/TESTBENCH/pipeline/test_pipeline_chain.py ____
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\pipeline\test_pipeline_chain.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\pipeline\test_pipeline_chain.py:12: in <module>
+    from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
+CAPABILITY\PIPELINES\pipeline_runtime.py:13: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_____ ERROR collecting CAPABILITY/TESTBENCH/pipeline/test_pipeline_dag.py _____
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\pipeline\test_pipeline_dag.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\pipeline\test_pipeline_dag.py:3: in <module>
+    from CAPABILITY.PIPELINES.pipeline_dag import topo_sort, _parse_dag_spec, DagSpec, DagEdge
+CAPABILITY\PIPELINES\pipeline_dag.py:10: in <module>
+    from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime, _slug
+CAPABILITY\PIPELINES\pipeline_runtime.py:13: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+_ ERROR collecting CAPABILITY/TESTBENCH/pipeline/test_pipeline_verify_cli.py __
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\pipeline\test_pipeline_verify_cli.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\pipeline\test_pipeline_verify_cli.py:17: in <module>
+    from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
+CAPABILITY\PIPELINES\pipeline_runtime.py:13: in <module>
+    from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+____ ERROR collecting CAPABILITY/TESTBENCH/pipeline/test_runtime_guard.py _____
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\pipeline\test_runtime_guard.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\pipeline\test_runtime_guard.py:25: in <module>
+    from CAPABILITY.PRIMITIVES.fs_guard import FilesystemGuard
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+___ ERROR collecting CAPABILITY/TESTBENCH/pipeline/test_verifier_interop.py ___
+ImportError while importing test module 'D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH\pipeline\test_verifier_interop.py'.
+Hint: make sure your test modules/packages have valid Python names.
+Traceback:
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\importlib\__init__.py:126: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\TESTBENCH\pipeline\test_verifier_interop.py:21: in <module>
+    from CAPABILITY.PRIMITIVES.verify_bundle_alt import AltBundleVerifier
+CAPABILITY\PRIMITIVES\__init__.py:14: in <module>
+    from .verify_bundle import verify_bundle
+E   ImportError: cannot import name 'verify_bundle' from 'CAPABILITY.PRIMITIVES.verify_bundle' (D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\verify_bundle.py)
+============================== warnings summary ===============================
+CAPABILITY\PRIMITIVES\ledger.py:9
+CAPABILITY\PRIMITIVES\ledger.py:9
+  D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\PRIMITIVES\ledger.py:9: DeprecationWarning: jsonschema.RefResolver is deprecated as of v4.18.0, in favor of the https://github.com/python-jsonschema/referencing library, which provides more compliant referencing behavior as well as more flexible APIs for customization. A future release will remove RefResolver. Please file a feature request (on referencing) if you are missing an API for the kind of customization you need.
+    from jsonschema import Draft7Validator, RefResolver
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+ERROR CAPABILITY/TESTBENCH/adversarial/test_adversarial_cas.py
+ERROR CAPABILITY/TESTBENCH/integration/test_memoization.py
+ERROR CAPABILITY/TESTBENCH/integration/test_preflight.py
+ERROR CAPABILITY/TESTBENCH/integration/test_skills_registry.py
+ERROR CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_router_slot.py
+ERROR CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py
+ERROR CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_runtime.py
+ERROR CAPABILITY/TESTBENCH/pipeline/test_pipeline_chain.py
+ERROR CAPABILITY/TESTBENCH/pipeline/test_pipeline_dag.py
+ERROR CAPABILITY/TESTBENCH/pipeline/test_pipeline_verify_cli.py
+ERROR CAPABILITY/TESTBENCH/pipeline/test_runtime_guard.py
+ERROR CAPABILITY/TESTBENCH/pipeline/test_verifier_interop.py
+!!!!!!!!!!!!!!!!!! Interrupted: 12 errors during collection !!!!!!!!!!!!!!!!!!!
+======================= 2 warnings, 12 errors in 0.64s ========================

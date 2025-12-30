@@ -2,6 +2,25 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.1.0] - 2025-12-29
+### Swarm Architecture: "Caddy Deluxe"
+
+#### Added
+- **Caddy Deluxe Architecture**: A multi-tiered local swarm architecture optimized for mixed-model capability and speed.
+    - **Ant (Tier 1)**: `qwen2.5-coder:0.5b` for lightspeed syntax fixes and simple logic.
+    - **Foreman (Tier 2)**: `qwen2.5-coder:3b` with Chain-of-Thought prompts for reasoning.
+    - **Architect (Tier 3)**: `qwen2.5-coder:7b` for complex code synthesis.
+    - **Consultant (Tier 4)**: `qwen2.5:7b` (Instruct) for high-level strategy and "second opinion" advice.
+- **Consultation Protocol**: Architect now detects complex tasks or previous failures and requests "Consultant Advice" before generating code.
+- **Swarm Orchestrator**: `swarm_orchestrator_caddy_deluxe.py` managing the specialized worker hierarchy.
+
+#### Changed
+- **Performance**: Achieved >2x throughput for simple tasks by using 0.5b models, reserving heavier models for critical failures.
+- **Safety**: Hardened `looks_dangerous` checks (though currently blocking some valid testbench operations, establishing a "fail-safe" baseline).
+- **Entropy Hackers (Legend Edition)**: Replaced `swarm_orchestrator_bug_squad.py` with `entropy_squashers.py` (v3.1).
+    - **Council of Legends**: Turing (Academic), Elliot (Pragmatist), Neo (Security/Matrix), Shannon (Judge).
+    - **Workflow**: Concurrent "in-character" opinion generation -> Consensus synthesis -> Final Code.
+
 ## [3.0.0] - 2025-12-29
 ### Major Breaking Change: 6-Bucket Architecture
 - **Refactor**: Reorganized entire repository into 6 high-level buckets: `LAW`, `CAPABILITY`, `NAVIGATION`, `DIRECTION`, `THOUGHT`, `MEMORY`.

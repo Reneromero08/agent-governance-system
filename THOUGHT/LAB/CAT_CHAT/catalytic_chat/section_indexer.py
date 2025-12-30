@@ -17,6 +17,7 @@ from datetime import datetime
 
 from .section_extractor import SectionExtractor, Section, extract_sections
 from .slice_resolver import SliceResolver, SliceError, SliceResult
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 class SectionIndexer:
@@ -49,9 +50,10 @@ class SectionIndexer:
         self.extractor = SectionExtractor(repo_root)
 
         if substrate_mode == "sqlite":
-            self.db_path = repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(repo_root)
         elif substrate_mode == "jsonl":
-            self.output_path = repo_root / "CORTEX" / "_generated" / "section_index.jsonl"
+            cortex_dir = get_cortex_dir(repo_root)
+            self.output_path = cortex_dir / "section_index.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
@@ -161,11 +163,7 @@ class SectionIndexer:
         Args:
             sections: List of sections
         """
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS sections (
@@ -266,8 +264,7 @@ class SectionIndexer:
             Section object or None if not found
         """
         if self.substrate_mode == "sqlite":
-            with sqlite3.connect(self.db_path) as conn:
-                conn.row_factory = sqlite3.Row
+            with get_sqlite_connection(self.db_path) as conn:
                 cursor = conn.execute(
                     "SELECT * FROM sections WHERE section_id = ?",
                     (section_id,)

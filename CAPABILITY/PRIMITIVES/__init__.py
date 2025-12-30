@@ -1,68 +1,57 @@
 """
 CATALYTIC-DPT Primitives
 
-Smallest possible catalytic computing kernel for PoC validation.
-
-Phase 1: CATLAB (Catalytic Learning A-B Testing Lab)
-
-Primitives:
-- catalytic_store: Content-addressable storage (CAS)
-- merkle: Merkle tree for root digests
-- spectral_codec: Domain → spectrum encoding
-- ledger: Append-only receipt storage
-- validator: Schema validation + error vectors
-- micro_orchestrator: Tiny model with weight updates
-
-Usage:
-    from CATALYTIC_DPT.PRIMITIVES import CatalyticStore, MerkleTree, Validator
-
-Governance:
-    - Determinism required (SHA-256, explicit seeds)
-    - All operations logged to ledger
-    - Restoration proofs enforced
-    - No external dependencies (stdlib + json only)
-
-Date: 2025-12-23
-Status: Phase 1 Implementation
+Smallest possible catalytic computing kernel.
 """
 
-__version__ = "1.0.0-phase1"
+from .cas_store import CatalyticStore, normalize_relpath
+from .hash_toolbelt import hash_ast, hash_describe, hash_grep, hash_read_text
+from .ledger import Ledger
+from .merkle import build_manifest_root, verify_manifest_root
+from .restore_proof import RestorationProofValidator, canonical_json_bytes
+from .restore_runner import restore_bundle, restore_chain, RESTORE_CODES
+from .skills import SkillRegistry, SkillNotFoundError, canonical_json, resolve_adapter, RegistryError, CapabilityHashMismatch
+from .verify_bundle import verify_bundle
+
+# Export modules too for flexibility
+from . import cas_store
+from . import hash_toolbelt
+from . import ledger
+from . import merkle
+from . import restore_proof
+from . import restore_runner
+from . import skills
+from . import verify_bundle as verify_bundle_mod
+from . import fs_guard
+
 __all__ = [
     "CatalyticStore",
-    "MerkleTree",
-    "SpectralCodec",
+    "normalize_relpath",
+    "hash_ast",
+    "hash_describe",
+    "hash_grep",
+    "hash_read_text",
     "Ledger",
-    "Validator",
-    "MicroOrchestrator",
+    "build_manifest_root",
+    "verify_manifest_root",
+    "RestorationProofValidator",
+    "canonical_json_bytes",
+    "restore_bundle",
+    "restore_chain",
+    "RESTORE_CODES",
+    "SkillRegistry",
+    "SkillNotFoundError",
+    "canonical_json",
+    "resolve_adapter",
+    "RegistryError",
+    "CapabilityHashMismatch",
+    "verify_bundle",
+    "cas_store",
+    "hash_toolbelt",
+    "ledger",
+    "merkle",
+    "restore_proof",
+    "restore_runner",
+    "skills",
+    "fs_guard"
 ]
-
-from .cas_store import CatalyticStore  # noqa: E402
-
-class MerkleTree:
-    """Merkle tree for root digests. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("MerkleTree is a Phase 1 primitive - not yet implemented")
-
-
-class SpectralCodec:
-    """Domain → spectrum encoding. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("SpectralCodec is a Phase 1 primitive - not yet implemented")
-
-
-class Ledger:
-    """Append-only receipt storage. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("Ledger is a Phase 1 primitive - not yet implemented")
-
-
-class Validator:
-    """Schema validation + error vectors. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("Validator is a Phase 1 primitive - not yet implemented")
-
-
-class MicroOrchestrator:
-    """Tiny model with weight updates. Not yet implemented."""
-    def __init__(self, *args, **kwargs):
-        raise NotImplementedError("MicroOrchestrator is a Phase 1 primitive - not yet implemented")

@@ -1,6 +1,6 @@
 # Session Commit Plan & Change Log
 
-Generated: 2025-12-29
+Generated: 2025-12-29 (Updated: Chunk 7 added)
 
 This file tracks all changes made during this session, organized into logical commit chunks.
 
@@ -195,6 +195,101 @@ CLI Output:
 
 ---
 
+### Chunk 6: Phase 4.3 Ants (Multi-worker Agent Runners)
+
+**Files Changed:**
+- `catalytic_chat/ants.py` (new)
+- `catalytic_chat/cli.py` (modified - added ants commands)
+- `tests/test_ants.py` (new)
+- `tests/conftest.py` (new - for PYTHONPATH setup)
+
+**Commit Message:**
+```
+feat(cat_chat): implement phase 4.3 ants multi-worker agent runners
+
+ants.py:
+- AntConfig dataclass with worker configuration (run_id, job_id,
+  worker_id, repo_root, poll_interval_ms, ttl_seconds, continue_on_fail,
+  max_idle_polls)
+- AntWorker class with run() method:
+  - Poll loop claiming next step via claim_next_step()
+  - Execute step via execute_step() with global budget check
+  - Exit codes: 0 (clean), 1 (failure), 2 (invariant/DB error)
+- spawn_ants() function:
+  - Spawn N OS processes via subprocess
+  - Worker IDs: ant_<run>_<job>_<i>
+  - Write manifest to CORTEX/_generated/ants_manifest_<run>_<job>.json
+  - Collect exit codes with priority: 2 > 1 > 0
+- run_ant_worker() function: CLI entrypoint wrapper
+
+CLI (cli.py):
+- ants spawn --run-id <run> --job-id <job> -n <N> [--continue-on-fail]
+- ants worker --run-id <run> --job-id <job> --worker-id <id>
+  [--continue-on-fail] [--poll-ms 250] [--ttl 300] [--max-idle-polls 20]
+
+Tests (test_ants.py):
+- test_ant_worker_claims_and_executes: single worker executes all steps
+- test_ants_spawn_two_workers_no_duplicates: two workers, no dup receipts
+- test_ant_stops_on_fail_by_default: exit 1 on first failure
+- test_ant_continue_on_fail_completes_others: continue but exit 1 if any fail
+- test_ant_spawn_multiprocess: end-to-end subprocess spawn with manifest
+```
+
+---
+
+### Chunk 7: Fix Substrate Path/Schema Mismatch
+
+**Files Changed:**
+- `catalytic_chat/paths.py` (new)
+- `catalytic_chat/section_indexer.py` (modified)
+- `catalytic_chat/section_extractor.py` (modified)
+- `catalytic_chat/symbol_registry.py` (modified)
+- `catalytic_chat/symbol_resolver.py` (modified)
+- `catalytic_chat/message_cassette_db.py` (modified)
+- `CORTEX/db/system1.db` (deleted - moved to CORTEX/_generated/)
+
+**Commit Message:**
+```
+fix(cat_chat): unify substrate paths and fix schema initialization
+
+paths.py (new):
+- get_cortex_dir() -> CORTEX/_generated
+- get_db_path() -> CORTEX/_generated/{name}
+- get_system1_db() -> CORTEX/_generated/system1.db
+- get_system3_db() -> CORTEX/_generated/system3.db
+- get_sqlite_connection() -> standard connection with FK+WAL
+
+section_indexer.py:
+- Use get_system1_db() instead of hardcoded CORTEX/db/system1.db
+- Use get_sqlite_connection() for all DB access
+- Ensure sections table exists on connect
+
+symbol_registry.py:
+- Use get_system1_db() and get_sqlite_connection()
+- Create symbols table on every DB access (fixes "no such table: symbols")
+- Add table creation to _get_symbol_sqlite() and _list_symbols_sqlite()
+
+symbol_resolver.py:
+- Use get_system1_db() and get_sqlite_connection()
+- Create expansion_cache table on connect
+
+message_cassette_db.py:
+- Use get_system3_db() and get_sqlite_connection()
+- Remove duplicate mkdir logic
+
+section_extractor.py:
+- Compute relative_path from repo_root (fixes "0 sections" when running from CAT_CHAT folder)
+
+Fixes:
+- "symbols list" no longer fails with "no such table: symbols"
+- Build writes to CORTEX/_generated/system1.db consistently
+- SECTION_INDEX.json located in CORTEX/_generated/ (via DB)
+- Build extracts sections from repo_root instead of cwd
+- Schema init runs deterministically on first connect
+```
+
+---
+
 ## Commit Plan
 
 **Recommended Order:**
@@ -203,6 +298,8 @@ CLI Output:
 3. Chunk 3 (Phase 3 Core) - main feature implementation
 4. Chunk 4 (Phase 3 CLI) - adds commands for chunk 3
 5. Chunk 5 (Phase 3 Hardening) - strengthens tests and verification
+6. Chunk 6 (Phase 4.3 Ants) - multi-worker agent runners
+7. Chunk 7 (Substrate Path Fix) - critical bugfix, must come after all
 
 **All tests pass:**
 ```bash
@@ -213,6 +310,19 @@ python -m pytest -q
 ```bash
 python -m catalytic_chat.cli cassette verify --run-id r0
 # Expected output: PASS: All invariants verified
+
+# Ants verification:
+python -m catalytic_chat.cli plan request --request-file tests/fixtures/plan_request_parallel.json
+python -m catalytic_chat.cli ants spawn --run-id test_parallel_request --job-id <job_id> -n 4
+python -m catalytic_chat.cli cassette verify --run-id test_parallel_request
+
+# Substrate path fix verification (from CAT_CHAT folder):
+cd THOUGHT/LAB/CAT_CHAT
+python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system" build
+# Expected: Wrote 61 sections to D:\CCC 2.0\AI\agent-governance-system\CORTEX\_generated\system1.db
+
+python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system" symbols list --prefix "@"
+# Expected: Listing 0 symbols (no errors)
 ```
 
 ---
@@ -222,9 +332,13 @@ python -m catalytic_chat.cli cassette verify --run-id r0
 | Test File | Tests | Status |
 |-----------|--------|--------|
 | tests/test_placeholder.py | 1 | PASS |
-| tests/test_vector_store.py | 10 | PASS |
+| tests/test_vector_store.py | 9 | PASS |
 | tests/test_message_cassette.py | 21 | PASS |
-| **Total** | **32** | **PASS** |
+| tests/test_ants.py | 7 | PASS |
+| tests/test_planner.py | 6 | PASS |
+| tests/test_execution.py | 2 | PASS |
+| tests/test_execution_parallel.py | 4 | PASS |
+| **Total** | **50** | **PASS** (9 skipped) |
 
 ---
 
@@ -246,10 +360,23 @@ python -m catalytic_chat.cli cassette verify --run-id r0
 | `catalytic_chat/experimental/vector_store.py` | New |
 | `catalytic_chat/message_cassette_db.py` | New |
 | `catalytic_chat/message_cassette.py` | New |
+| `catalytic_chat/ants.py` | New |
+| `catalytic_chat/paths.py` | New |
 | `catalytic_chat/cli.py` | Modified |
+| `catalytic_chat/section_indexer.py` | Modified |
+| `catalytic_chat/section_extractor.py` | Modified |
+| `catalytic_chat/symbol_registry.py` | Modified |
+| `catalytic_chat/symbol_resolver.py` | Modified |
 | `tests/test_vector_store.py` | New |
 | `tests/test_message_cassette.py` | New |
+| `tests/test_ants.py` | New |
+| `tests/test_execution.py` | New |
+| `tests/test_execution_parallel.py` | New |
+| `tests/test_planner.py` | New |
+| `tests/conftest.py` | New |
+| `CORTEX/db/system1.db` | Deleted |
 
-**Total New Files:** ~12
-**Total Modified Files:** ~4
+**Total New Files:** ~23
+**Total Modified Files:** ~9
 **Total Moved Files:** ~18
+**Total Deleted Files:** 1

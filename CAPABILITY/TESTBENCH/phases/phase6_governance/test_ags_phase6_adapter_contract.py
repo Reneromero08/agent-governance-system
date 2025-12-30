@@ -1,15 +1,14 @@
-from __future__ import annotations
-
 import json
 import shutil
 import subprocess
 import sys
 from pathlib import Path
 
+sys.path.insert(4, '../phase6_governance')  # Update to use parents[4]
+
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-
+REPO_ROOT = Path(__file__).resolve().parents[4]  # Ensure `sys.path` correctly includes the repo root relative to new location
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -22,7 +21,7 @@ def _rm(path: Path) -> None:
 
 
 def _run_ags(args: list[str]) -> subprocess.CompletedProcess[str]:
-    cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", *args]
+    cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags"] + args
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
 
 
@@ -38,7 +37,9 @@ def _jobspec(tmp_root: str) -> dict:
         "intent": "adapter step",
         "inputs": {},
         "outputs": {"durable_paths": [f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_out.txt"], "validation_criteria": {}},
-        "catalytic_domains": [f"LAW/CONTRACTS/_runs/_tmp/{tmp_root}/domain"],
+        "catalytic_domains": [
+            f"LAW/CONTRACTS/_runs/_tmp/{tmp_root}/domain"
+        ],
         "determinism": "deterministic",
     }
 
@@ -47,7 +48,7 @@ def _adapter(tmp_root: str, **overrides: object) -> dict:
     base = {
         "adapter_version": "1.0.0",
         "name": "test-adapter",
-            "command": [sys.executable, "-c", "print('hello')"],
+        "command": [sys.executable, "-c", "print('hello')"],
         "jobspec": _jobspec(tmp_root),
         "inputs": {"LAW/CONTRACTS/_runs/_tmp/%s/in.txt" % tmp_root: _hex("a")},
         "outputs": {"LAW/CONTRACTS/_runs/_tmp/%s/out.txt" % tmp_root: _hex("b")},
@@ -144,4 +145,3 @@ def test_adapter_reject_nondeterministic_flag_strict(tmp_path: Path) -> None:
     r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id])
     assert r.returncode != 0
     assert "ADAPTER_SIDE_EFFECTS_FORBIDDEN" in r.stderr
-

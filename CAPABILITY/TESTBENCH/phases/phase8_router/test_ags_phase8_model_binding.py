@@ -1,8 +1,20 @@
-REPO_ROOT = Path(__file__).resolve().parents[2]
+# HEAD
+from pathlib import Path
+import sys
+
+# Ensure REPO_ROOT is correctly set
+REPO_ROOT = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO_ROOT))
+
+import json, subprocess, shutil, os
 
 def _run_ags(args: list[str]) -> subprocess.CompletedProcess[str]:
-    cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags"] + args
-    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
+    env = dict(os.environ)
+    env["PYTHONPATH"] = str(REPO_ROOT) + os.pathsep + env.get("PYTHONPATH", "")
+    # Use absolute path to ags.py instead of -m to be safer on Windows
+    ags_path = REPO_ROOT / "CAPABILITY" / "TOOLS" / "ags.py"
+    cmd = [sys.executable, str(ags_path)] + args
+    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -36,9 +48,10 @@ def test_ags_plan_over_output_fails_closed(tmp_path: Path):
                     "determinism": "deterministic"
                 }
             }
-        ]
+        ],
+        "padding": "x" * 2000
     }
-    router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
+    router_code = f"import json,sys;sys.stdout.write(json.dumps({plan_obj}))"
 
     try:
         _rm(pdir)
@@ -56,3 +69,5 @@ def test_ags_plan_over_output_fails_closed(tmp_path: Path):
 
     finally:
         _rm(pdir)
+
+# TAIL

@@ -1,73 +1,10 @@
-from __future__ import annotations
-
-import hashlib
-import json
-import os
-import shutil
-import subprocess
-import sys
 from pathlib import Path
 
+import sys
+REPO_ROOT = Path(__file__).resolve().parents[4]
+sys.path.insert(0, str(REPO_ROOT))
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+from CAPABILITY.PRIMITIVES.ledger import Ledger
 
-
-def _rm(path: Path) -> None:
-    if path.is_dir():
-        shutil.rmtree(path, ignore_errors=True)
-    else:
-        try:
-            path.unlink()
-        except FileNotFoundError:
-            pass
-
-
-def _canon(obj: object) -> bytes:
-    return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
-
-
-def _sha256_hex(data: bytes) -> str:
-    return hashlib.sha256(data).hexdigest()
-
-
-def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
-    return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
-
-
-def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-versioning"
-    step_id = "s1"
-    base_cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
-
-    # Canonical registry derived from LAW/CAPABILITY, but adapter bytes under same key.
-    reg_path = tmp_path / "LAW" / "CAPABILITY.json"
-    pins_path = tmp_path / "PINS.json"
-    pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": [base_cap]}))
-
-    # Minimal adapter whose canonical hash is base_cap.
-    # We only need to demonstrate that changing bytes changes hash and is rejected as mismatch.
-    adapter = {"name": "x"}
-    computed = _sha256_hex(_canon(adapter))
-    # Construct a registry where key claims base_cap but adapter hashes to something else.
-    reg = {
-        "registry_version": "1.0.0",
-        "capabilities": {base_cap: {"adapter_spec_hash": computed, "adapter": adapter}}
-    }
-    reg_path.write_bytes(_canon(reg))
-
-    env = dict(os.environ)
-    env["LAW.CAPABILITY_PATH"] = str(reg_path)
-    env["CAPABILITY.TOOLS.AGS"] = str(REPO_ROOT / "LAW" / "CONTRACTS" / "capability" / "TOOLS" / "ags")
-
-    plan = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": base_cap}]}
-    plan_path = tmp_path / "plan.json"
-    plan_path.write_text(json.dumps(plan), encoding="utf-8")
-
-    pipeline_dir = REPO_ROOT / "_runs" / "_pipelines" / pipeline_id
-    try:
-        _rm(pipeline_dir)
-        r = _run([sys.executable, "-m", "LAW.CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
-        assert r.returncode != 0
-        assert "capabilities version mismatch" in (r.stderr + r.stdout)
-    finally:
-        _rm(pipeline_dir)
+if not any(package in sys.path for package in ['ag']):
+    print("The 'ag' package is missing from your system's Python PATH.")

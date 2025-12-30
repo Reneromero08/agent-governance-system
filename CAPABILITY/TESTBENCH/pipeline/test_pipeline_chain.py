@@ -5,10 +5,8 @@ import shutil
 import sys
 from pathlib import Path
 
-import pytest
-
-REPO_ROOT = Path(__file__).resolve().parents[2]
-# sys.path cleanup
+# Update REPO_ROOT calculation to use parents[3]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 from CAPABILITY.PIPELINES.pipeline_chain import verify_chain
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime

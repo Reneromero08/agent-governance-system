@@ -18,6 +18,7 @@ from datetime import datetime, timezone
 from catalytic_chat.section_indexer import SectionIndexer
 from catalytic_chat.slice_resolver import SliceResolver, SliceError
 from catalytic_chat.symbol_registry import SymbolRegistry, SymbolError
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 @dataclass
@@ -64,9 +65,10 @@ class SymbolResolver:
         self.symbol_registry = symbol_registry
 
         if substrate_mode == "sqlite":
-            self.db_path = repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(repo_root)
         elif substrate_mode == "jsonl":
-            self.cache_path = repo_root / "CORTEX" / "_generated" / "expansion_cache.jsonl"
+            cortex_dir = get_cortex_dir(repo_root)
+            self.cache_path = cortex_dir / "expansion_cache.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
@@ -108,8 +110,7 @@ class SymbolResolver:
         Returns:
             Cache entry or None if not found
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+        with get_sqlite_connection(self.db_path) as conn:
             cursor = conn.execute("""
                 SELECT * FROM expansion_cache
                 WHERE run_id = ? AND symbol_id = ? AND slice_expr = ? AND section_id = ?
@@ -169,9 +170,7 @@ class SymbolResolver:
         Args:
             entry: Cache entry to store
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS expansion_cache (

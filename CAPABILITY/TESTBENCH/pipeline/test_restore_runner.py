@@ -9,7 +9,8 @@ from cryptography.hazmat.primitives.asymmetric import ed25519
 from cryptography.hazmat.primitives import serialization
 
 # Add CATALYTIC-DPT to path
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
 # sys.path cleanup
 
 from CAPABILITY.PRIMITIVES.restore_runner import restore_bundle, restore_chain, RESTORE_CODES
@@ -175,4 +176,3 @@ def test_restore_rollback_failure_returns_restore_rollback_failed(work_area, mon
     assert result["ok"] is False
     assert result["code"] == RESTORE_CODES["RESTORE_ROLLBACK_FAILED"]
     assert result["details"]["cause_code"] == RESTORE_CODES["RESTORE_STAGING_HASH_MISMATCH"]
-

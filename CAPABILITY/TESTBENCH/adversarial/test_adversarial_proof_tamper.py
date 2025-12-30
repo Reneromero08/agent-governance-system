@@ -1,16 +1,23 @@
-from __future__ import annotations
-
-import hashlib
+from pathlib import Path
+import sys
 import json
 import shutil
-import sys
-from pathlib import Path
+import hashlib
+import os
+import shutil
+import tempfile
+import pytest
+import cryptography
+from cryptography.hazmat.primitives.asymmetric import ed25519
+from cryptography.hazmat.primitives import serialization
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+
+sys.path.insert(0, str(REPO_ROOT))
+
 from CAPABILITY.PRIMITIVES.restore_proof import RestorationProofValidator
 from CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier
 from CAPABILITY.TOOLS.catalytic.catalytic_validator import CatalyticLedgerValidator
-
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -25,15 +32,9 @@ def _sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 def _make_valid_spectrum05_run(run_dir: Path) -> tuple[BundleVerifier, Path]:
-    # Update the paths to reflect the new directory structure
-    run_dir = REPO_ROOT / "TESTBENCH" / "adversarial" / "run"
-    try:
-        from cryptography.hazmat.primitives.asymmetric import ed25519
-        from cryptography.hazmat.primitives import serialization
-    except Exception as e:  # pragma: no cover
-        raise RuntimeError("cryptography is required for SPECTRUM-05 strict verifier tests") from e
-
+    run_dir = REPO_ROOT / "CAPABILITY" / "TESTBENCH" / "adversarial" / "run"
     run_dir.mkdir(parents=True, exist_ok=True)
+
     verifier = BundleVerifier(project_root=REPO_ROOT)
 
     out_dir = run_dir / "out"
@@ -99,7 +100,6 @@ def _make_valid_spectrum05_run(run_dir: Path) -> tuple[BundleVerifier, Path]:
     )
 
     return verifier, output_path
-
 
 def test_proof_hash_tamper_fails_closed_deterministic() -> None:
     # Add your deterministic check here

@@ -1,206 +1,78 @@
 [
   {
-    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_cas.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_ledger.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_paths.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_pipeline_resume.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/adversarial/test_adversarial_proof_tamper.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\adversarial`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
     "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/core/test_hash_toolbelt.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/core/test_merkle.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/core/test_schemas.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\core`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/fixtures/dummy_mcp.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\fixtures`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_cortex_integration.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_reject_invalid_hash_and_missing_hash: FileNotFoundError: C:\\Users\\rene_\\AppData\\Local\\Temp\\pytest-of-Reneshizzle\\pytest-345\\test_reject_invalid_hash_and_m0\\cas\\objects\\AA\\AA\\AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_deref_logging.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_governance_coverage.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_memoization.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_phase2_demo_artifacts_are_falsifiable: AssertionError: assert False. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_preflight.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_packing_hygiene: AssertionError: assert {'repo_bytes': 0, 'repo_files': 0} is None. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/integration/test_skills_registry.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/integration/test_spectrum_04_05_enforcement.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\integration`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_adapter_contract.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_canonical_json_determinism: assert b'{\"a\":1,\"b\":2}' == '{\"a\": 1, \"b\": 2}'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_ags_route_deterministic_bytes: NameError: name 'REPO_ROOT' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_pipeline_run_creates_state_when_missing: NameError: name 'REPO_ROOT' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_ags_run_calls_verify_ok: NameError: name 'REPO_ROOT' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_registry.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_verify_rejects_empty_pins: NameError: name 'CAP' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_capability_pinned_routes_and_verifies: NameError: name '_mock_registry' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_versioning_semantics.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_revoked_capability_rejects_at_route: AssertionError: Expected REVOKED_CAPABILITY error. Got: C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe: Error while finding module specification for 'CAPABILITY.TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY'). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_verify_rejects_revoked_capability: NameError: name 'env' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_mcp_adapter_e2e.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_fail_timeout: assert 'TIMEOUT' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: can't open file 'D:\\\\\\\\CCC 2.0\\\\\\\\AI\\\\\\\\ag...ITY\\\\\\\\SKILLS\\\\\\\\LAW\\\\\\\\CONTRACTS\\\\\\\\CAPABILITY_TOOLS\\\\\\\\scripts\\\\\\\\wrapper.py': [Errno 2] No such file or directory\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_happy_echo: NameError: name 'pytest' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_fail_bloat: assert 'STDOUT_OVERFLOW' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: can't open file 'D:\\\\\\\\CCC 2.0\\\\\\\\AI\\\\\\\\ag...ITY\\\\\\\\SKILLS\\\\\\\\LAW\\\\\\\\CONTRACTS\\\\\\\\CAPABILITY_TOOLS\\\\\\\\scripts\\\\\\\\wrapper.py': [Errno 2] No such file or directory\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_fail_stderr: assert 'STDERR_EMITTED' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: can't open file 'D:\\\\\\\\CCC 2.0\\\\\\\\AI\\\\\\\\ag...ITY\\\\\\\\SKILLS\\\\\\\\LAW\\\\\\\\CONTRACTS\\\\\\\\CAPABILITY_TOOLS\\\\\\\\scripts\\\\\\\\wrapper.py': [Errno 2] No such file or directory\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_fail_malformed_output: assert 'INVALID_JSON_OUTPUT' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: can't open file 'D:\\\\\\\\CCC 2.0\\\\\\\\AI\\\\\\\\ag...ITY\\\\\\\\SKILLS\\\\\\\\LAW\\\\\\\\CONTRACTS\\\\\\\\CAPABILITY_TOOLS\\\\\\\\scripts\\\\\\\\wrapper.py': [Errno 2] No such file or directory\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_fail_crash: assert 'BAD_EXIT_CODE' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: can't open file 'D:\\\\\\\\CCC 2.0\\\\\\\\AI\\\\\\\\ag...ITY\\\\\\\\SKILLS\\\\\\\\LAW\\\\\\\\CONTRACTS\\\\\\\\CAPABILITY_TOOLS\\\\\\\\scripts\\\\\\\\wrapper.py': [Errno 2] No such file or directory\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_router_slot.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase6_governance`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_registry_noncanonical_json_rejects: assert 'REGISTRY_NONCANONICAL' in (\"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification for 'CAPABILITY.TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY')\\n\" + ''). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_registry_tamper_detected_fail_closed: assert 'CAPABILITY_HASH_MISMATCH' in (\"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification for 'CAPABILITY.TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY')\\n\" + ''). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_swarm_chain_binds_pipeline_proofs: NameError: name 'PipelineRuntime' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_runtime.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase7_swarm`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_swarm_execution_elision: TypeError: unsupported operand type(s) for +: 'WindowsPath' and 'str'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase8_router`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_ags_plan_over_output_fails_closed: assert 'ROUTER_OUTPUT_TOO_LARGE' in \"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification for 'CAPABILITY.TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY')\\n\". Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\phases\\phase8_router`. Update the REPO_ROOT calculation to use `parents[4]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_capability_escalation_fails_closed: assert 'REVOKED_CAPABILITY' in (\"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification f...ILITY/TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY/TESTBENCH/phases/phase8_router/CAPABILITY/TOOLS')\\n\" + ''). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_router_stderr_fails_closed: assert 'ROUTER_STDERR_NOT_EMPTY' in (\"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification f...ILITY/TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY/TESTBENCH/phases/phase8_router/CAPABILITY/TOOLS')\\n\" + ''). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_router_escalation_fails_closed: assert 'REVOKED_CAPABILITY' in (\"C:\\\\Users\\\\rene_\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python311\\\\python.exe: Error while finding module specification f...ILITY/TOOLS.ags' (ModuleNotFoundError: No module named 'CAPABILITY/TESTBENCH/phases/phase8_router/CAPABILITY/TOOLS')\\n\" + ''). Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_router_receipts_created: AssertionError: Router with valid plan should not fail. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/pipeline/test_canonical_artifacts.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_ledger.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipelines.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_chain.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_dag.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_pipeline_verify_cli.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_status_state_machine: NameError: name 'TemporaryDirectory' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_proof_written_last: NameError: name 'TemporaryDirectory' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n- Fix the failure in test_canonical_artifact_set_required: NameError: name 'TemporaryDirectory' is not defined. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_gating.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_wiring.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_valid_proof_accepted: assert False is True. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_proof.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_runner.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_runtime_guard.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_missing_files_verified_false: assert True is False. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/pipeline/test_verifier_freeze.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_verifier_interop.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/pipeline/test_verify_bundle.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\pipeline`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_ledger_import: ModuleNotFoundError: No module named 'CAPABILITY.PIPELINES.ledger'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_spectrum02_emission: AttributeError: 'MCPTerminalServer' object has no attribute 'emit_bundle'. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   },
   {
     "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
-  },
-  {
-    "file": "CAPABILITY/TESTBENCH/spectrum/test_validator_version_integrity.py",
-    "instruction": "This file has been moved to `CAPABILITY\\TESTBENCH\\spectrum`. Update the REPO_ROOT calculation to use `parents[3]`. Ensure `sys.path` correctly includes the repo root relative to this new location. Fix any local relative imports if they broke."
+    "instruction": "Fix the following test failures:\n- Fix the failure in test_spectrum02_resume: ImportError: attempted relative import with no known parent package. Ensure all necessary imports (pytest, Path, sys, etc.) are present and use the correct PRIMITIVES/PIPELINES structure.\n\nIMPORTANT:\n1. Use 'from CAPABILITY.PRIMITIVES import ...' or 'from CAPABILITY.PIPELINES import ...'.\n2. Always include 'import pytest', 'import sys', and 'from pathlib import Path' if used.\n3. REPO_ROOT should be Path(__file__).resolve().parents[N] where N is the depth (core=3, phases=4, integration=3, pipeline=3)."
   }
 ]

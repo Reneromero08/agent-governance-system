@@ -10,6 +10,8 @@ import sqlite3
 from pathlib import Path
 from typing import Optional
 
+from .paths import get_system3_db, get_sqlite_connection
+
 
 class MessageCassetteDB:
     
@@ -20,20 +22,14 @@ class MessageCassetteDB:
         if db_path is not None:
             self.db_path = db_path
         else:
-            if repo_root is None:
-                repo_root = Path.cwd()
-            self.db_path = repo_root / "CORTEX" / "_generated" / self.DB_NAME
+            self.db_path = get_system3_db(repo_root)
         
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._conn = None
         self._init_db()
     
     def _get_conn(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(str(self.db_path))
-            self._conn.row_factory = sqlite3.Row
-            self._conn.execute("PRAGMA foreign_keys = ON")
-            self._conn.execute("PRAGMA journal_mode = WAL")
+            self._conn = get_sqlite_connection(self.db_path)
         return self._conn
     
     def _init_db(self):
@@ -206,10 +202,24 @@ class MessageCassetteDB:
             WHEN (NEW.lease_owner <> OLD.lease_owner OR 
                    NEW.lease_expires_at <> OLD.lease_expires_at OR 
                    NEW.fencing_token <> OLD.fencing_token) AND 
-                  NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
+                   NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
             BEGIN
-                SELECT RAISE(ABORT, 'Lease fields can only be set when status is PENDING and remains PENDING');
+                SELECT RAISE(ABORT, 'Lease fields can only be set during PENDING -> LEASED transition');
             END
+        """)
+        
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS cassette_job_budgets (
+                job_id TEXT PRIMARY KEY,
+                bytes_consumed INTEGER DEFAULT 0,
+                symbols_consumed INTEGER DEFAULT 0,
+                FOREIGN KEY (job_id) REFERENCES cassette_jobs(job_id)
+            )
+        """)
+        
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_job_budgets_job_id 
+            ON cassette_job_budgets(job_id)
         """)
     
     def close(self):

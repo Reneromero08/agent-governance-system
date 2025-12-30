@@ -84,16 +84,16 @@ class SectionExtractor:
         """
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
+                content = f.read()
+                lines = content.count('\n') + 1
         except Exception as e:
             raise ValueError(f"Failed to read {file_path}: {e}")
-
+ 
         try:
-            relative_path = file_path.as_posix()
+            relative_path = file_path.relative_to(self.repo_root).as_posix()
         except ValueError:
             relative_path = file_path.as_posix()
-        lines = content.count('\n') + 1
-
+ 
         content_hash = self.compute_content_hash(content)
 
         section = Section(

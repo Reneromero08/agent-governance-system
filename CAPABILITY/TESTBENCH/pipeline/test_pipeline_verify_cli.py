@@ -8,8 +8,11 @@ from pathlib import Path
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 # sys.path cleanup
+
+sys.path.insert(0, str(REPO_ROOT / "CAPABILITY" / "PIPELINES"))
+sys.path.insert(1, str(REPO_ROOT / "CAPABILITY"))
 
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
 
@@ -57,8 +60,6 @@ def _setup_pipeline(tmp_root: Path, *, pipeline_id: str) -> tuple[Path, Path]:
     _rm(pipeline_dir)
     _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
     _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s2-a1")
-    _rm(REPO_ROOT / out1)
-    _rm(REPO_ROOT / out2)
 
     _write_jobspec(jobspec1, job_id="pipe-verify-step1", intent="step1", catalytic_domains=[domain_rel], durable_paths=[out1])
     _write_jobspec(jobspec2, job_id="pipe-verify-step2", intent="step2", catalytic_domains=[domain_rel], durable_paths=[out2])
@@ -169,14 +170,15 @@ def test_pipeline_verify_chain_tamper(tmp_path: Path) -> None:
         rt.run(pipeline_id=pipeline_id, spec_path=spec_path)
         state = json.loads((pipeline_dir / "STATE.json").read_text(encoding="utf-8"))
         run_id = state["step_run_ids"]["s1"]
-        proof = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id / "PROOF.json"
-        data = proof.read_bytes()
-        proof.write_bytes(data[:-1] + (b"0" if data[-1:] != b"0" else b"1"))
+        ledger = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id / "LEDGER.jsonl"
+        data = ledger.read_bytes()
+        assert data.endswith(b"\n")
+        ledger.write_bytes(data[:-1])  # remove trailing newline -> partial line
 
         res = _run_verify_cli(pipeline_id=pipeline_id)
         assert res.returncode != 0
         assert "FAIL" in res.stdout
-        assert "CHAIN_PROOF_HASH_MISMATCH" in res.stdout
+        assert "LEDGER_CORRUPT" in res.stdout
     finally:
         _rm(pipeline_dir)
         _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / tmp_root)

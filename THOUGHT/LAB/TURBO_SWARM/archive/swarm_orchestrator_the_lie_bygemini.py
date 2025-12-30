@@ -1,0 +1,406 @@
+#!/usr/bin/env python3
+"""
+🐞 THE CLAW (StarCoder2:15B) — Solo Bug Squasher w/ Tools + MCP + Optional Web 🐞
+
+One agent. No voting. No parliament.
+
+Per file:
+1) The Claw reads (instruction + error + file).
+2) The Claw may call tools (local, MCP, optional web) to gather facts.
+3) The Claw outputs the FULL corrected Python file in a ```python block.
+4) We validate (denylist + parse + compile). Optional trial test (pytest).
+5) Atomic write + backup + incremental report.
+
+Tool-call format (model must output exactly):
+```tool
+{"name":"read_file","args":{"path":"REL/PATH.py"}}
+```
+Final answer format:
+```python
+# full corrected file
+```
+Quotes: Toy Story “The Claw” scene vibe.
+"""
+
+from __future__ import annotations
+
+import argparse
+import ast
+import hashlib
+import json
+import logging
+import os
+import re
+import subprocess
+import sys
+import threading
+import time
+from dataclasses import dataclass
+from pathlib import Path
+from tempfile import NamedTemporaryFile
+from typing import Any, Dict, List, Optional, Tuple
+
+import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
+from tqdm import tqdm
+
+# --------------------------------------------------------------------------------
+# Repo Root
+# --------------------------------------------------------------------------------
+
+def find_repo_root() -> Path:
+    # Try current file location
+    cur = Path(__file__).resolve()
+    for _ in range(8):
+        if (cur / ".git").exists() or (cur / "THOUGHT").exists():
+            return cur
+        cur = cur.parent
+    # Fallback
+    return Path(__file__).resolve().parents[3]
+
+REPO_ROOT = find_repo_root()
+
+DEFAULT_INPUT_REPORT = REPO_ROOT / "THOUGHT" / "LAB" / "TURBO_SWARM" / "SWARM_REPORT.json"
+ALT_INPUT_REPORT = REPO_ROOT / "THOUGHT" / "LAB" / "SWARM_REPORT.json"
+DEFAULT_OUTPUT_REPORT = REPO_ROOT / "THOUGHT" / "LAB" / "CLAW_REPORT.json"
+
+DEFAULT_OLLAMA_GENERATE = "http://localhost:11434/api/generate"
+DEFAULT_OLLAMA_TAGS = "http://localhost:11434/api/tags"
+
+# --------------------------------------------------------------------------------
+# Config
+# --------------------------------------------------------------------------------
+
+@dataclass(frozen=True)
+class ClawConfig:
+    repo_root: Path = REPO_ROOT
+    input_report: Path = DEFAULT_INPUT_REPORT
+    output_report: Path = DEFAULT_OUTPUT_REPORT
+
+    ollama_generate: str = DEFAULT_OLLAMA_GENERATE
+    ollama_tags: str = DEFAULT_OLLAMA_TAGS
+    model: str = "starcoder2:15b"  # fallback to latest which is usually 15b/7b
+    keep_alive: str = "20m"
+
+    # generation
+    temperature: float = 0.2
+    num_ctx: int = 32768
+    num_predict: int = 8192
+    timeout_s: int = 420
+
+    # tool loop
+    max_steps: int = 10
+    max_tool_result_chars: int = 6000
+
+    # file inclusion
+    max_file_chars: int = 28000
+    head_chars: int = 9000
+    tail_chars: int = 9000
+    snippet_radius_lines: int = 40
+
+    # safety
+    dry_run: bool = False
+    backup: bool = True
+    deny_substrings: Tuple[str, ...] = (
+        "rm -rf", "shutil.rmtree(", "os.remove(", "os.unlink(",
+        "subprocess.run(['rm'", "subprocess.run([\"rm\"",
+    )
+
+    # tests
+    run_pytest: bool = False
+    pytest_timeout_s: int = 120
+
+    # web tool
+    enable_web: bool = False
+    web_allow_domains: Tuple[str, ...] = ()
+    web_max_bytes: int = 400_000
+    web_timeout_s: int = 20
+
+# --------------------------------------------------------------------------------
+# Logging + Quotes
+# --------------------------------------------------------------------------------
+
+_CLAW_QUOTES = (
+    "The Claw chooses who will go and who will stay.",
+    "I have been chosen!",
+    "Ooooooooh.",
+    "The Claw is our master.",
+    "You have been chosen. Farewell, my friend.",
+)
+
+def setup_logging(debug: bool) -> logging.Logger:
+    logger = logging.getLogger("TheClaw")
+    logger.setLevel(logging.DEBUG if debug else logging.INFO)
+    if not logger.handlers:
+        h = logging.StreamHandler(sys.stdout)
+        h.setFormatter(logging.Formatter("%(asctime)s [%(levelname)s] %(message)s", datefmt="%H:%M:%S"))
+        logger.addHandler(h)
+    return logger
+
+def claw_say(logger: logging.Logger, key: str) -> None:
+    h = hashlib.sha1(key.encode("utf-8")).hexdigest()
+    idx = int(h[:8], 16) % len(_CLAW_QUOTES)
+    logger.info(f'The Claw: "{_CLAW_QUOTES[idx]}"')
+
+# --------------------------------------------------------------------------------
+# Ollama client
+# --------------------------------------------------------------------------------
+
+class OllamaClient:
+    def __init__(self, cfg: ClawConfig, logger: logging.Logger) -> None:
+        self.cfg = cfg
+        self.logger = logger
+        self._tls = threading.local()
+        self._sem = threading.Semaphore(4)
+
+    def _session(self) -> requests.Session:
+        s = getattr(self._tls, "session", None)
+        if s is not None: return s
+        s = requests.Session()
+        retry = Retry(total=3, backoff_factor=0.5, status_forcelist=(429, 500, 502, 503, 504))
+        s.mount("http://", HTTPAdapter(max_retries=retry))
+        self._tls.session = s
+        return s
+
+    def tags(self) -> List[str]:
+        try:
+            r = self._session().get(self.cfg.ollama_tags, timeout=5)
+            r.raise_for_status()
+            return [m.get("name") for m in r.json().get("models", [])]
+        except: return []
+
+    def generate(self, prompt: str) -> str:
+        payload = {
+            "model": self.cfg.model, "prompt": prompt, "stream": False,
+            "keep_alive": self.cfg.keep_alive,
+            "options": {"temperature": self.cfg.temperature, "num_ctx": self.cfg.num_ctx, "num_predict": self.cfg.num_predict}
+        }
+        with self._sem:
+            r = self._session().post(self.cfg.ollama_generate, json=payload, timeout=self.cfg.timeout_s)
+        if r.status_code != 200: raise RuntimeError(f"Ollama error {r.status_code}")
+        return r.json().get("response", "").strip()
+
+# --------------------------------------------------------------------------------
+# Path safety + IO
+# --------------------------------------------------------------------------------
+
+def safe_repo_path(repo_root: Path, rel_path: str) -> Path:
+    p = (repo_root / rel_path).resolve()
+    if repo_root.resolve() not in p.parents and p != repo_root.resolve():
+        raise ValueError(f"Escape: {rel_path}")
+    return p
+
+def atomic_write(path: Path, content: str, backup: bool) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
+    if backup and path.exists():
+        bak = path.with_suffix(path.suffix + ".claw.bak")
+        if bak.exists(): bak.unlink()
+        path.replace(bak)
+    with NamedTemporaryFile(mode="w", encoding="utf-8", dir=str(path.parent), suffix=".tmp", delete=False) as f:
+        f.write(content)
+        tmp = Path(f.name)
+    os.replace(str(tmp), str(path))
+
+def truncate_at_line_boundary(text: str, max_chars: int) -> str:
+    if len(text) <= max_chars: return text
+    cut = text[:max_chars]
+    nl = cut.rfind("\n")
+    if nl > int(max_chars * 0.9): return cut[:nl] + "\n\n# ...[TRUNCATED]...\n"
+    return cut + "\n\n# ...[TRUNCATED]...\n"
+
+def file_focus_excerpt(content: str, error: str, head: int, tail: int, radius: int) -> str:
+    lines = content.splitlines()
+    n = len(lines)
+    # Find error line
+    m = re.search(r"line\s+(\d+)", error, re.IGNORECASE)
+    mid = ""
+    if m:
+        ln = int(m.group(1))
+        start = max(0, ln - radius - 1)
+        end = min(n, ln + radius)
+        mid = f"\n# ... WINDOW lines {start+1}-{end} ...\n" + "\n".join(lines[start:end]) + "\n"
+    
+    # Simple truncate approach for head/tail to avoid giant context
+    h_text = "\n".join(lines[:radius*2]) # Keep top N lines
+    return f"# HEAD\n{h_text}\n{mid}\n# TAIL\n" + "\n".join(lines[-radius:])
+
+# --------------------------------------------------------------------------------
+# Tools
+# --------------------------------------------------------------------------------
+
+def tool_read_file(cfg: ClawConfig, path: str) -> str:
+    try:
+        p = safe_repo_path(cfg.repo_root, path)
+        if not p.exists(): return f"Missing: {path}"
+        return truncate_at_line_boundary(p.read_text("utf-8", "replace"), cfg.max_file_chars)
+    except Exception as e: return f"Error: {e}"
+
+def tool_grep(cfg: ClawConfig, pattern: str, root: str = ".", max_hits: int = 50) -> str:
+    res = []
+    try:
+        rx = re.compile(pattern)
+        for p in safe_repo_path(cfg.repo_root, root).rglob("*.py"):
+            try:
+                txt = p.read_text("utf-8", "replace")
+                for i, line in enumerate(txt.splitlines(), 1):
+                    if rx.search(line):
+                        res.append(f"{p.relative_to(cfg.repo_root)}:{i}:{line.strip()}")
+                        if len(res) >= max_hits: break
+            except: pass
+            if len(res) >= max_hits: break
+    except Exception as e: return f"Error: {e}"
+    return "\n".join(res) if res else "No hits."
+
+def tool_run_pytest(cfg: ClawConfig, target: str) -> str:
+    if not cfg.run_pytest: return "pytest disabled"
+    try:
+        cmd = [sys.executable, "-m", "pytest", "-q", target]
+        p = subprocess.run(cmd, cwd=str(cfg.repo_root), capture_output=True, text=True, timeout=cfg.pytest_timeout_s)
+        return (p.stdout + "\n" + p.stderr)[-2000:]
+    except Exception as e: return f"Error: {e}"
+
+TOOLS = {
+    "read_file": tool_read_file,
+    "grep": tool_grep,
+}
+
+# --------------------------------------------------------------------------------
+# Protocol
+# --------------------------------------------------------------------------------
+
+def extract_tool_call(text: str) -> Optional[Dict]:
+    m = re.search(r"```tool\s*\n(.*?)\n```", text, re.DOTALL | re.IGNORECASE)
+    if not m: return None
+    try: return json.loads(m.group(1))
+    except: return None
+
+def extract_python(text: str) -> Optional[str]:
+    m = re.search(r"```python\s*\n(.*?)\n```", text, re.DOTALL | re.IGNORECASE)
+    if m: return m.group(1).strip()
+    return None
+
+def solve_one(cfg: ClawConfig, client: OllamaClient, logger: logging.Logger, item: Dict) -> Dict:
+    rel = item.get("file", "")
+    if not rel: return {"status": "failed", "reason": "no_file"}
+    
+    claw_say(logger, rel)
+    
+    fpath = safe_repo_path(cfg.repo_root, rel)
+    if not fpath.exists(): return {"status": "failed", "reason": "miss"}
+    
+    orig = fpath.read_text("utf-8", "replace")
+    excerpt = file_focus_excerpt(orig, item.get("last_error", ""), 0, 0, cfg.snippet_radius_lines)
+    
+    sys_prompt = (
+        "You are The Claw (Expert Python Bug Squasher).\n"
+        "Your goal is to fix the reported error in the target file.\n"
+        "\n"
+        "PROTOCOL:\n"
+        "1. ANALYZE the error and file context.\n"
+        "2. USE TOOLS if you need more information (e.g. read_file, grep).\n"
+        "   Format: ```tool\n{\"name\":\"read_file\",\"args\":{\"path\":\"...\"}}\n```\n"
+        "3. FIX the bug by outputting the FULL CORRECTED FILE content.\n"
+        "   Format: ```python\n# ... full code ...\n```\n"
+        "\n"
+        "IMPORTANT:\n"
+        "- Do NOT wrap tool calls in Python code.\n"
+        "- The ```python``` block MUST contain the VALID, COMPLETE file content to overwrite the target.\n"
+    )
+    
+    transcript = (
+        f"{sys_prompt}\n"
+        f"TARGET: {rel}\n"
+        f"ERROR: {item.get('last_error')}\n"
+        f"CONTEXT:\n{excerpt}\n\n"
+        "Think step-by-step. If you need to read the full file, do so first.\n"
+    )
+    
+    history = []
+    
+    for step in range(cfg.max_steps):
+        logger.debug(f"Step {step+1} generating...")
+        res = client.generate(transcript)
+        logger.debug(f"Raw Output: {res[:200]}...")
+
+        if not res.strip():
+            logger.warning("Empty response from model.")
+            transcript += "\n# (Model output empty, try again)\n"
+            time.sleep(1)
+            continue
+        
+        # Check tool
+        tc = extract_tool_call(res)
+        if tc:
+            history.append(tc)
+            logger.info(f"Tool Call: {tc.get('name')} {tc.get('args')}")
+            # Execute
+            fn = TOOLS.get(tc.get("name"))
+            if fn:
+                tres = fn(cfg, **tc.get("args", {}))
+                transcript += f"\n{res}\n\n# TOOL RESULT:\n'''\n{tres[:2000]}\n'''\n\n# NEXT ACTION:\n"
+                continue
+        
+        # Check code
+        code = extract_python(res)
+        if code:
+            logger.info(f"Code Generate: {len(code)} chars")
+            # Validate
+            try:
+                ast.parse(code)
+                if not cfg.dry_run: atomic_write(fpath, code, cfg.backup)
+                return {"status": "fixed", "file": rel, "tools": history}
+            except Exception as e:
+                logger.warning(f"Syntax Error: {e}")
+                transcript += f"\n{res}\n\n# SYNTAX ERROR: {e}\n# ACTION: Regenerate corrected code.\n"
+                continue
+                
+        # Fallback (Chat/Think)
+        transcript += f"\n{res}\n"
+        time.sleep(0.5)
+        
+    return {"status": "failed", "reason": "timeout", "file": rel}
+
+# --------------------------------------------------------------------------------
+# Main
+# --------------------------------------------------------------------------------
+
+def main():
+    p = argparse.ArgumentParser(description="The Claw")
+    p.add_argument("--input", default=str(DEFAULT_INPUT_REPORT))
+    p.add_argument("--model", default="qwen2.5-coder:7b")
+    p.add_argument("--debug", action="store_true")
+    p.add_argument("--workers", type=int, default=4, help="Parallel workers")
+    args = p.parse_args()
+    
+    logger = setup_logging(args.debug)
+    cfg = ClawConfig(input_report=Path(args.input), model=args.model)
+    client = OllamaClient(cfg, logger)
+    
+    if not cfg.input_report.exists():
+        logger.error("No input report")
+        return
+        
+    items = json.loads(cfg.input_report.read_text("utf-8"))
+    results = []
+    
+    logger.info(f"Unleashing {args.workers} Claws...")
+    
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    
+    with ThreadPoolExecutor(max_workers=args.workers) as exe:
+        futures = {exe.submit(solve_one, cfg, client, logger, item): item for item in items}
+        
+        with tqdm(total=len(items), desc="THE CLAW") as pbar:
+            for f in as_completed(futures):
+                try:
+                    res = f.result()
+                    results.append(res)
+                except Exception as e:
+                    logger.error(f"Worker failed: {e}")
+                pbar.update(1)
+        
+    Path(DEFAULT_OUTPUT_REPORT).write_text(json.dumps(results, indent=2), "utf-8")
+
+if __name__ == "__main__":
+    main()

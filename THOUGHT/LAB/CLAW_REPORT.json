@@ -1,0 +1,43 @@
+[
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py",
+    "tools": []
+  },
+  {
+    "status": "failed",
+    "reason": "denied_pattern",
+    "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_gating.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_proof.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_mcp_adapter_e2e.py",
+    "tools": []
+  }
+]
