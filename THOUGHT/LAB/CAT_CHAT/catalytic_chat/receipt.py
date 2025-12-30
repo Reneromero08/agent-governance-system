@@ -141,10 +141,33 @@ def build_receipt_from_bundle_run(
         "error": error,
         "steps": receipt_steps,
         "artifacts": receipt_artifacts,
-        "root_hash": root_hash
+        "root_hash": root_hash,
+        "attestation": None
     }
     
     return receipt
+
+
+def receipt_canonical_bytes(receipt: Dict[str, Any], attestation_override: Any = None) -> bytes:
+    """Compute canonical receipt bytes with optional attestation override.
+
+    This is the single source of truth for receipt canonicalization.
+    Used by signer, verifier, and executor to ensure consistent behavior.
+
+    Args:
+        receipt: Receipt dictionary
+        attestation_override: If provided, override the attestation field.
+                           Useful for verification where we set to None.
+
+    Returns:
+        Canonical JSON bytes with trailing newline
+    """
+    receipt_copy = dict(receipt)
+
+    if "attestation" in receipt_copy:
+        receipt_copy["attestation"] = attestation_override
+
+    return canonical_json_bytes(receipt_copy)
 
 
 def write_receipt(out_path: Path, receipt: Dict[str, Any]) -> None:

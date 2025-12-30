@@ -22,11 +22,11 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-SECTION_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SECTION_INDEX.json"
-SUMMARY_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SUMMARY_INDEX.json"
-RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
-SECTION_INDEX_REL = Path("CORTEX") / "_generated" / "SECTION_INDEX.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+SECTION_INDEX_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json"
+SUMMARY_INDEX_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SUMMARY_INDEX.json"
+RUNS_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
+SECTION_INDEX_REL = Path("NAVIGATION") / "CORTEX" / "_generated" / "SECTION_INDEX.json"
 
 if hasattr(signal, "SIGPIPE"):
     signal.signal(signal.SIGPIPE, signal.SIG_DFL)

@@ -10,8 +10,8 @@ from pathlib import Path
 from typing import Any, Dict, Optional
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CORTEX_META_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "CORTEX_META.json"
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+CORTEX_META_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "CORTEX_META.json"
 
 # Ensure repo root is importable when running as a file.
 if str(PROJECT_ROOT) not in sys.path:
@@ -67,7 +67,7 @@ def main() -> int:
         if head_ts is not None:
             env["CORTEX_BUILD_TIMESTAMP"] = head_ts
         res = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "CORTEX" / "cortex.build.py")],
+            [sys.executable, str(PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "cortex.build.py")],
             cwd=str(PROJECT_ROOT),
             env=env,
         )
