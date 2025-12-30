@@ -481,7 +481,8 @@ Provide a REFINED strategy for the next attempt that overcomes the previous obst
                 
                 # Update task for retry
                 task["status"] = "PENDING"
-                task["strategic_plan"] = f"ESCALATION PLAN:\n{new_strategy}"
+                task["orchestrator_upgrade"] = "professional" # Smart Escalation: Upgrade to 8B Professional
+                task["strategic_plan"] = f"ESCALATION PLAN (UPGRADED TO PROFESSIONAL):\n{new_strategy}"
                 task_map[tid].update(task)
                 
                 # Move back to pending on disk
@@ -796,12 +797,30 @@ def cmd_guard() -> None:
 
             print("\n" + "=" * 60)
             
-            # 5. Auto-Spawn Logic
+            # 5. Auto-Spawn Logic (Smart Escalation)
             if pending > 0 and active < 2 and time.time() > spawn_cooldown:
+                # Check if we have upgraded tasks
+                p_tasks = list(PENDING_DIR.glob("*.json"))
+                has_upgraded = False
+                for p in p_tasks:
+                    try:
+                        tdata = json.loads(p.read_text(encoding="utf-8"))
+                        if tdata.get("orchestrator_upgrade") == "professional":
+                            has_upgraded = True
+                            break
+                    except:
+                        pass
+
                 # Flashing Launch Message
                 launch_msg = "🚀 AUTO-SPAWN TRIGGERED" if led_state else "   AUTO-SPAWN TRIGGERED"
-                print(f"{launch_msg}: Launching agents...")
-                cmd_spawn("caddy")
+                
+                if has_upgraded:
+                    print(f"{launch_msg}: Launching PROFESSIONAL (8B) for escalated tasks...")
+                    cmd_spawn("professional")
+                else:
+                    print(f"{launch_msg}: Launching CADDY (0.5B/7B) for fresh tasks...")
+                    cmd_spawn("caddy")
+                    
                 spawn_cooldown = time.time() + 60
                 time.sleep(2) 
             else:
