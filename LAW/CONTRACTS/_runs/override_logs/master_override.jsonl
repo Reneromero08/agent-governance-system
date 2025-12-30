@@ -85,3 +85,4 @@
 {"ts": "2025-12-29T18:10:05.799363+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Override to modify swarm_orchestrator_turbo.py"}
 {"ts": "2025-12-29T18:19:30.786654+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Override to run tests and edit SYSTEM_FAILURE_PROTOCOL_1.md"}
 {"ts": "2025-12-29T18:56:51.309798+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Override to move root test result files into CAPABILITY/TESTBENCH/v3_test_results"}
+{"ts": "2025-12-30T22:44:58.077544+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "User authorized session-wide override for under-construction refactor; proceed without governance friction."}

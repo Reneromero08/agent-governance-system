@@ -2,6 +2,20 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.1.1] - 2025-12-30
+### Governed Swarm & Neo3000
+
+#### Added
+- **Neo3000 Dashboard**: Restored the advanced agent monitoring dashboard and network topology viewer.
+    - Integrated with `TURBO_SWARM` for live log streaming and agent PID tracking.
+    - Linked to `CORTEX` for repository constellation visualization.
+- **Failure Dispatcher (v1.2)**: Upgraded with "Governor" autonomous mechanics.
+    - **Strategic Pre-Briefing**: Uses `ministral-3:8b` to generate combat plans for agents before dispatch.
+    - **Escalation Loop**: Automated analyze-and-retry logic for agent failures.
+    - **Dynamic Scaling**: Auto-scales swarm worker threads based on task volume (up to 32 parallel workers).
+- **Pipeline Sentinel**: Real-time dashboard with auto-sync heartbeat and regression detection.
+- **Swarm Monitor**: `monitor_swarm.ps1` for multi-terminal log tracking.
+
 ## [3.1.0] - 2025-12-29
 ### Swarm Architecture: "Caddy Deluxe"
 
