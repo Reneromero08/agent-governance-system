@@ -143,6 +143,14 @@
       "type": "string",
       "description": "Root hash over artifacts (SHA256 hex)"
     },
+    "parent_receipt_hash": {
+      "type": ["string", "null"],
+      "description": "Hash of previous receipt in chain, or null for first receipt"
+    },
+    "receipt_hash": {
+      "type": "string",
+      "description": "SHA256 hash of canonical receipt bytes without attestation field"
+    },
     "attestation": {
       "type": ["object", "null"],
       "additionalProperties": false,
