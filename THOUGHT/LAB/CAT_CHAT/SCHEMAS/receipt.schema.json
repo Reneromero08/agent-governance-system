@@ -17,6 +17,8 @@
     "steps",
     "artifacts",
     "root_hash",
+    "parent_receipt_hash",
+    "receipt_hash",
     "attestation"
   ],
   "properties": {
