@@ -334,22 +334,130 @@ def cmd_status() -> None:
 
 
 
+def update_protocol_entry(target_file: str, task: Dict[str, Any]) -> bool:
+    """Update the Failure Protocol MD file with completion details."""
+    if not PROTOCOL_PATH.exists():
+        return False
+        
+    content = PROTOCOL_PATH.read_text(encoding="utf-8")
+    sections = content.split("## PROTOCOL")
+    if len(sections) < 2:
+        return False
+        
+    # We want to find the section for "PROTOCOL 3"
+    p3_idx = -1
+    for i, s in enumerate(sections):
+        if s.startswith(" 3"):
+            p3_idx = i
+            break
+            
+    if p3_idx == -1:
+        return False
+        
+    p3_content = "## PROTOCOL" + sections[p3_idx]
+    lines = p3_content.splitlines()
+    new_p3_lines = []
+    updated = False
+    found_target = False
+    
+    # Details for insertion
+    completion_time = task.get("completed_at", now_iso())
+    tid = task["task_id"]
+    agent = task.get("assigned_to", "local-swarm")
+    # Result can be a string or a dict
+    res = task.get("result", {})
+    if isinstance(res, str):
+        summary = res
+    else:
+        summary = res.get("summary", "Automated fix applied.")
+    
+    in_target_block = False
+    
+    for i in range(len(lines)):
+        line = lines[i]
+        
+        # Look for the target file in a header or list item
+        if target_file in line:
+            in_target_block = True
+            found_target = True
+            # If it's a checkbox line like "- [ ] path/to/file.py", mark it fixed
+            if "- [ ]" in line:
+                line = line.replace("- [ ]", "- [x]") + " ✅"
+        
+        # Update specific status/resolution inside the block
+        if in_target_block:
+            if "**Status**:" in line or "- **Status**:" in line:
+                line = f"- **Status**: ✅ COMPLETED ({tid} at {completion_time})"
+            if "⬜ PENDING" in line:
+                line = line.replace("⬜ PENDING", f"✅ COMPLETED ({tid})")
+            
+            # Check for end of block (next header or horizontal rule)
+            if i + 1 < len(lines) and (lines[i+1].startswith("####") or lines[i+1].startswith("---")):
+                # Add resolution details before closing block
+                new_p3_lines.append(line)
+                new_p3_lines.append(f"- **Resolution**: {summary}")
+                new_p3_lines.append(f"- **Fixed By**: {agent}")
+                in_target_block = False
+                updated = True
+                continue
+
+        new_p3_lines.append(line)
+
+    if not updated and found_target:
+        updated = True
+        p3_content = "\n".join(new_p3_lines)
+    elif updated:
+        p3_content = "\n".join(new_p3_lines)
+    else:
+        return False
+        
+    # Update Status Summary counters for THIS section
+    try:
+        pass_match = re.search(r"- \*\*Passed\*\*: (\d+)", p3_content)
+        fail_match = re.search(r"- \*\*Failed\*\*: (\d+)", p3_content)
+        if pass_match and fail_match:
+            passed = int(pass_match.group(1)) + 1
+            failed = max(0, int(fail_match.group(1)) - 1)
+            total = passed + failed
+            pct = (passed / total) * 100 if total > 0 else 100
+            p3_content = re.sub(r"- \*\*Passed\*\*: \d+.*", f"- **Passed**: {passed} ({pct:.1f}%)", p3_content)
+            p3_content = re.sub(r"- \*\*Failed\*\*: \d+.*", f"- **Failed**: {failed} ({100-pct:.1f}%)", p3_content)
+    except:
+        pass
+
+    sections[p3_idx] = p3_content.replace("## PROTOCOL", "", 1)
+    new_content = "## PROTOCOL".join(sections)
+    PROTOCOL_PATH.write_text(new_content, encoding="utf-8")
+    return True
+
+import re
+
 def cmd_sync() -> None:
     """Sync completed tasks back to ledger and update protocol (Escalation Loop)."""
-    print("🔄 Syncing completed tasks and Eskalating failures...")
+    print("🔄 Syncing completed tasks and Escalating failures...")
     
     ledger = load_ledger()
     task_map = {t["task_id"]: t for t in ledger["tasks"]}
     
     synced = 0
     escalated = 0
+    fixed_in_protocol = 0
     
     # 1. Sync completed tasks
     for task_file in COMPLETED_DIR.glob("*.json") if COMPLETED_DIR.exists() else []:
         task = json.loads(task_file.read_text(encoding="utf-8"))
         if task["task_id"] in task_map:
+            # Check if this is a new completion we haven't processed
+            was_already_done = task_map[task["task_id"]].get("status") == "COMPLETED"
+            
             task_map[task["task_id"]].update(task)
             synced += 1
+            
+            # If newly completed, update the Protocol MD
+            if not was_already_done:
+                if update_protocol_entry(task["target_file"], task):
+                    print(f"📝 Marked off {task['target_file']} in Failure Protocol.")
+                    fixed_in_protocol += 1
     
     # 2. Sync and ESCALATE failed tasks
     for task_file in FAILED_DIR.glob("*.json") if FAILED_DIR.exists() else []:
@@ -398,7 +506,7 @@ Provide a REFINED strategy for the next attempt that overcomes the previous obst
     ledger["tasks"] = list(task_map.values())
     save_ledger(ledger)
     
-    print(f"✅ Synced {synced} tasks | 🚀 Escalated {escalated} failures back to PENDING")
+    print(f"✅ Synced {synced} tasks | 🚀 Escalated {escalated} failures | 📝 Protocol Updated: {fixed_in_protocol}")
     cmd_status()
 
 
