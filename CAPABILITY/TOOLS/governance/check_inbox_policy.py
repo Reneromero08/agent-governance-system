@@ -105,6 +105,11 @@ def check_inbox_policy() -> dict:
         if any(part in ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", "BUILD", ".git"] for part in parts):
             continue
 
+        # Exempt root-level canon files
+        root_exempt = ["CHANGELOG.md", "AGENTS.md", "README.md", "pyproject.toml"]
+        if str(rel_path) in root_exempt:
+            continue
+
         # Check if file is in INBOX
         if not is_inbox_file(file_path):
             violations.append({

@@ -134,8 +134,24 @@ def generate_task_id(ledger: Optional[Dict[str, Any]] = None) -> str:
 
 
 def create_task(target_file: str, failure_details: Dict[str, Any], ledger: Dict[str, Any], priority: str = "MEDIUM") -> Dict[str, Any]:
-    """Create a new task object."""
+    """Create a new task object with strategic analysis from the Dispatcher."""
     task_id = generate_task_id(ledger)
+    
+    # --- STRATEGY REASONING ---
+    # The General (Dispatcher) provides tactical guidance for the Tiny Agents.
+    print(f"🧠 General Thinking: Drafting combat plan for {target_file}...")
+    error_msg = failure_details.get("message", "Unknown error")
+    prompt = f"""
+TACTICAL ANALYSIS FOR TASK {task_id}:
+File: {target_file}
+Error: {error_msg}
+
+INSTRUCTION FOR WORKER: Analyze this failure and propose a fix.
+The worker model is small (Qwen-0.5B). Give it 3 bullet points of specific advice.
+"""
+    strategy = ollama_generate(prompt) if ollama_available() else "No tactical strategy provided."
+    # -------------------------
+
     return {
         "task_id": task_id,
         "created_at": now_iso(),
@@ -144,6 +160,7 @@ def create_task(target_file: str, failure_details: Dict[str, Any], ledger: Dict[
         "priority": priority,
         "target_file": target_file,
         "failure_details": failure_details,
+        "strategic_plan": strategy, # Attached guidance
         "status": "PENDING",
         "assigned_to": None,
         "attempts": 0,
@@ -318,29 +335,60 @@ def cmd_status() -> None:
 
 
 def cmd_sync() -> None:
-    """Sync completed tasks back to ledger and update protocol."""
-    print("🔄 Syncing completed tasks...")
+    """Sync completed tasks back to ledger and update protocol (Escalation Loop)."""
+    print("🔄 Syncing completed tasks and Eskalating failures...")
     
     ledger = load_ledger()
     task_map = {t["task_id"]: t for t in ledger["tasks"]}
     
     synced = 0
+    escalated = 0
     
-    # Sync completed tasks
+    # 1. Sync completed tasks
     for task_file in COMPLETED_DIR.glob("*.json") if COMPLETED_DIR.exists() else []:
         task = json.loads(task_file.read_text(encoding="utf-8"))
         if task["task_id"] in task_map:
             task_map[task["task_id"]].update(task)
             synced += 1
     
-    # Sync failed tasks
+    # 2. Sync and ESCALATE failed tasks
     for task_file in FAILED_DIR.glob("*.json") if FAILED_DIR.exists() else []:
         task = json.loads(task_file.read_text(encoding="utf-8"))
         if task["task_id"] in task_map:
-            task_map[task["task_id"]].update(task)
-            synced += 1
+            tid = task["task_id"]
+            if task["attempts"] < task["max_attempts"]:
+                # HELP LOOP: General analyzes the failure
+                print(f"🆘 Escalating FAILED task {tid}... General is analyzing...")
+                
+                re_prompt = f"""
+ANALYZE AGENT FAILURE FOR TASK {tid}:
+Target: {task['target_file']}
+Last Plan: {task.get('strategic_plan', 'None')}
+Failure Result: {task.get('result', 'No result reported')}
+
+WHY DID THE AGENT FAIL? 
+Provide a REFINED strategy for the next attempt that overcomes the previous obstacle.
+"""
+                new_strategy = ollama_generate(re_prompt) if ollama_available() else "No escalation strategy available."
+                
+                # Update task for retry
+                task["status"] = "PENDING"
+                task["strategic_plan"] = f"ESCALATION PLAN:\n{new_strategy}"
+                task_map[tid].update(task)
+                
+                # Move back to pending on disk
+                new_path = PENDING_DIR / f"{tid}.json"
+                with open(new_path, "w") as f:
+                    json.dump(task, f, indent=2)
+                
+                # Delete from failed dir
+                task_file.unlink()
+                escalated += 1
+            else:
+                task_map[tid].update(task)
+                synced += 1
     
-    # Sync active tasks
+    # 3. Sync active tasks
     for task_file in ACTIVE_DIR.glob("*.json") if ACTIVE_DIR.exists() else []:
         task = json.loads(task_file.read_text(encoding="utf-8"))
         if task["task_id"] in task_map:
@@ -350,7 +398,7 @@ def cmd_sync() -> None:
     ledger["tasks"] = list(task_map.values())
     save_ledger(ledger)
     
-    print(f"✅ Synced {synced} tasks")
+    print(f"✅ Synced {synced} tasks | 🚀 Escalated {escalated} failures back to PENDING")
     cmd_status()
 
 
@@ -481,7 +529,7 @@ def cmd_test() -> None:
 
 
 def cmd_spawn(orchestrator_type: str = "caddy") -> None:
-    """Spawn worker agents to process pending tasks."""
+    """Spawn worker agents with Dynamic Scaling."""
     ledger = load_ledger()
     pending = [t for t in ledger["tasks"] if t["status"] == "PENDING"]
     
@@ -489,7 +537,11 @@ def cmd_spawn(orchestrator_type: str = "caddy") -> None:
         print("✅ No pending tasks to spawn for.")
         return
         
-    print(f"🚀 Spawning swarm for {len(pending)} pending tasks...")
+    # Dynamic Scaling: 1 thread per task, capped at 32
+    count = len(pending)
+    workers = min(max(4, count), 32)
+    
+    print(f"🚀 Spawning swarm for {count} pending tasks (Scaling: {workers} workers)...")
     
     # Determine command based on type
     if orchestrator_type == "professional":
@@ -497,8 +549,6 @@ def cmd_spawn(orchestrator_type: str = "caddy") -> None:
         cmd = [sys.executable, str(script)]
     else:  # Default to caddy
         script = SWARM_ROOT / "swarm_orchestrator_caddy_deluxe.py"
-        # Scale workers based on task count (max 6)
-        workers = min(len(pending), 6)
         cmd = [sys.executable, str(script), "--max-workers", str(workers)]
     
     print(f"   Command: {' '.join(cmd)}")
@@ -555,12 +605,18 @@ def cmd_guard() -> None:
     
     last_mod_count = -1
     spawn_cooldown = 0
+    sync_cooldown = 0
     spinner_idx = 0
     spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
     
     while True:
         try:
             timestamp = datetime.now().strftime('%H:%M:%S')
+            
+            # --- AUTO SYNC (Escalation Phase) ---
+            if time.time() > sync_cooldown:
+                cmd_sync()
+                sync_cooldown = time.time() + 15 # Sync every 15s
             
             # 1. Check State
             # Git Status
@@ -603,7 +659,7 @@ def cmd_guard() -> None:
                 os.system("clear")
             
             # Header with Blinking LED
-            print(f"{led} PIPELINE SENTINEL v1.1   [{timestamp}]   {spinners[spinner_idx]}")
+            print(f"{led} PIPELINE SENTINEL v1.2   [{timestamp}]   {spinners[spinner_idx]}")
             print("=" * 60)
             print(f"STATUS: {system_state}")
             print("-" * 60)

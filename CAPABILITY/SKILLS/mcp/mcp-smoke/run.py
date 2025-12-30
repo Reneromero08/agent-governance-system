@@ -19,7 +19,7 @@ def get_cortex_query(project_root: Path) -> Tuple[Any, str]:
     if str(project_root) not in sys.path:
         sys.path.insert(0, str(project_root))
 
-    import NAVIGATION.CORTEX.query as cortex_query
+    import NAVIGATION.CORTEX.semantic.query as cortex_query
 
     try:
         cortex_query.get_metadata("canon_version")
@@ -65,6 +65,8 @@ def run_entrypoint(project_root: Path, entrypoint_rel: str, args: List[str]) -> 
     entrypoint_path = project_root / Path(entrypoint_rel)
     env = os.environ.copy()
     env["PYTHONIOENCODING"] = "utf-8"
+    existing_pythonpath = env.get("PYTHONPATH", "")
+    env["PYTHONPATH"] = str(project_root) if not existing_pythonpath else f"{project_root}{os.pathsep}{existing_pythonpath}"
     return subprocess.run(
         [sys.executable, str(entrypoint_path), *args],
         capture_output=True,
@@ -124,7 +126,7 @@ def main() -> int:
     entrypoint_substring = payload.get("entrypoint_substring", "CONTRACTS/ags_mcp_entrypoint.py")
     args = payload.get("args", ["--test"])
 
-    project_root = Path(__file__).resolve().parents[2]
+    project_root = Path(__file__).resolve().parents[4]
     cortex_query, error = get_cortex_query(project_root)
     if cortex_query is None:
         write_json(output_path, {

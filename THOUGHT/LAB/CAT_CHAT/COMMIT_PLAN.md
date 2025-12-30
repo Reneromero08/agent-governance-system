@@ -325,6 +325,85 @@ Verification:
 
 ---
 
+### Chunk 9: Phase 6.3 Receipt Chain Anchoring
+
+**Files Changed:**
+- `catalytic_chat/receipt.py` (modified - added chain functions)
+- `catalytic_chat/executor.py` (modified - added previous_receipt param)
+- `SCHEMAS/receipt.schema.json` (modified - added chain fields)
+- `catalytic_chat/cli.py` (modified - added --verify-chain flag)
+- `tests/test_receipt_chain.py` (new - 4 chain tests)
+
+**Commit Message:**
+```
+feat(cat_chat): add phase 6.3 receipt chain anchoring
+
+Add deterministic receipt chaining with parent_receipt_hash linkage.
+
+receipt.py:
+- compute_receipt_hash(): compute hash from canonical bytes (excluding receipt_hash field)
+- load_receipt(): load receipt from JSON file
+- verify_receipt_chain(): verify chain linkage and receipt hashes
+- find_receipt_chain(): find all receipts for a run in execution order
+
+executor.py:
+- Add previous_receipt parameter to BundleExecutor
+- Load previous receipt and set parent_receipt_hash from its receipt_hash
+- First receipt has parent_receipt_hash=null
+
+receipt.schema.json:
+- Add parent_receipt_hash field (string | null)
+- Add receipt_hash field (string)
+
+cli.py:
+- Add --verify-chain flag to bundle run command
+- Verify full receipt chain when --verify-chain is set
+- Output chain status and receipt count
+
+tests/test_receipt_chain.py:
+- test_receipt_chain_deterministic: identical inputs produce identical chain
+- test_receipt_chain_verification_passes: chain verification succeeds
+- test_receipt_chain_break_fails: tamper detection
+- test_receipt_chain_requires_sequential_order: reorder fails
+```
+
+---
+
+### Chunk 10: Phase 6.4 Receipt Merkle Root + External Anchor
+
+**Files Changed:**
+- `catalytic_chat/receipt.py` (modified - added Merkle functions)
+- `catalytic_chat/cli.py` (modified - added --print-merkle flag)
+- `tests/test_merkle_root.py` (new - 3 Merkle root tests)
+
+**Commit Message:**
+```
+feat(cat_chat): add phase 6.4 merkle root over receipt chains
+
+Add deterministic Merkle root computation for receipt chains.
+
+receipt.py:
+- compute_merkle_root(): compute Merkle root from receipt hashes
+  - Pairwise concatenate hex-decoded bytes (left||right)
+  - SHA256 on concatenated bytes
+  - Duplicate last node at each level if odd count
+  - Preserve deterministic ordering (no re-sorting)
+- verify_receipt_chain(): now returns Merkle root string
+
+cli.py:
+- Add --print-merkle flag to bundle run command
+- --print-merkle requires --verify-chain (fail-closed)
+- Print ONLY Merkle root hex to stdout when set
+- Suppress all other output when --print-merkle is set
+
+tests/test_merkle_root.py:
+- test_merkle_root_deterministic: same hashes produce identical Merkle root
+- test_merkle_root_changes_on_tamper: tampering changes root
+- test_merkle_root_requires_verify_chain: --print-merkle without --verify-chain fails
+```
+
+---
+
 ## Commit Plan
 
 **Recommended Order:**
@@ -336,6 +415,8 @@ Verification:
 6. Chunk 6 (Phase 4.3 Ants) - multi-worker agent runners
 7. Chunk 7 (Substrate Path Fix) - critical bugfix, must come after all
 8. Chunk 8 (Phase 6.2.1 Stabilization) - fix test_cli_dry_run subprocess issue
+9. Chunk 9 (Phase 6.3 Receipt Chain Anchoring) - deterministic receipt chaining
+10. Chunk 10 (Phase 6.4 Merkle Root) - Merkle root over receipt chains
 
 **All tests pass:**
 ```bash
@@ -378,7 +459,9 @@ python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system"
 | tests/test_receipt.py | 5 | PASS |
 | tests/test_bundle.py | 2 | PASS |
 | tests/test_bundle_execution.py | 5 | PASS |
-| **Total** | **59** | **PASS** (13 skipped) |
+| tests/test_receipt_chain.py | 4 | PASS |
+| tests/test_merkle_root.py | 3 | PASS |
+| **Total** | **66** | **PASS** (13 skipped) |
 
 ---
 
@@ -402,11 +485,11 @@ python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system"
 | `catalytic_chat/message_cassette.py` | New |
 | `catalytic_chat/ants.py` | New |
 | `catalytic_chat/paths.py` | New |
-| `catalytic_chat/receipt.py` | Modified (attestation) |
+| `catalytic_chat/receipt.py` | Modified (attestation, chain, merkle) |
 | `catalytic_chat/attestation.py` | New (signing/verification) |
-| `catalytic_chat/executor.py` | Modified (attestation support) |
+| `catalytic_chat/executor.py` | Modified (attestation, chain support) |
 | `catalytic_chat/bundle_execution.py` | Modified (verification) |
-| `catalytic_chat/cli.py` | Modified (attestation CLI flags) |
+| `catalytic_chat/cli.py` | Modified (attestation, chain, merkle flags) |
 | `catalytic_chat/section_indexer.py` | Modified |
 | `catalytic_chat/section_extractor.py` | Modified |
 | `catalytic_chat/symbol_registry.py` | Modified |
@@ -422,11 +505,14 @@ python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system"
 | `tests/test_receipt.py` | New |
 | `tests/test_bundle.py` | New |
 | `tests/test_bundle_execution.py` | New |
+| `tests/test_receipt_chain.py` | New (chunk 9) |
+| `tests/test_merkle_root.py` | New (chunk 10) |
 | `tests/conftest.py` | New |
 | `tests/fixtures/*` | New (plan request fixtures) |
+| `SCHEMAS/receipt.schema.json` | Modified (added chain fields) |
 | `CORTEX/db/system1.db` | Deleted |
 
-**Total New Files:** ~30
-**Total Modified Files:** ~13
+**Total New Files:** ~34
+**Total Modified Files:** ~15
 **Total Moved Files:** ~18
 **Total Deleted Files:** 1
