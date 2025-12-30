@@ -13,11 +13,15 @@ Usage:
 
 import argparse
 import json
+import os
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[2]
+CAPABILITY_ROOT = PROJECT_ROOT / "CAPABILITY"
+LAW_ROOT = PROJECT_ROOT / "LAW"
+NAVIGATION_ROOT = PROJECT_ROOT / "NAVIGATION"
 
 # Load schemas
 SCHEMAS_DIR = Path(__file__).parent / "schemas"
@@ -25,7 +29,7 @@ SCHEMAS_DIR = Path(__file__).parent / "schemas"
 # When using CONTRACTS/_runs/ags_mcp_entrypoint.py, this is redirected to the entrypoint's location
 LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
 BOARD_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs" / "message_board"
-BOARD_ROLES_PATH = PROJECT_ROOT / "MCP" / "board_roles.json"
+BOARD_ROLES_PATH = CAPABILITY_ROOT / "MCP" / "board_roles.json"
 
 
 def load_schema(name: str) -> Dict:
@@ -52,7 +56,7 @@ def governed_tool(func):
         env["PYTHONIOENCODING"] = "utf-8"
 
         preflight = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "ags.py"), "preflight"],
+            [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "ags.py"), "preflight"],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -81,7 +85,7 @@ def governed_tool(func):
                 "isError": True
             }
         admit = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "ags.py"), "admit", "--intent", intent_path],
+            [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "ags.py"), "admit", "--intent", intent_path],
             capture_output=True,
             text=True,
             encoding="utf-8",
@@ -103,7 +107,7 @@ def governed_tool(func):
         # Run critic
         
         res = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+            [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
             capture_output=True, text=True, encoding="utf-8", errors="ignore", cwd=str(PROJECT_ROOT), env=env
         )
         
@@ -202,6 +206,64 @@ class AGSMCPServer:
         except Exception as e:
             print(f"Audit log failure: {e}", file=sys.stderr)
 
+    def _load_cortex_index(self) -> Dict:
+        """Load the cached cortex index (NAVIGATION/CORTEX/cortex.json)."""
+        cortex_path = NAVIGATION_ROOT / "CORTEX" / "cortex.json"
+        if not cortex_path.exists():
+            return {}
+        try:
+            return json.loads(cortex_path.read_text(encoding="utf-8", errors="ignore"))
+        except json.JSONDecodeError:
+            return {}
+
+    def _search_cortex_index(self, query: str, limit: int = 20) -> List[Dict]:
+        """Simple substring search over cortex index entities."""
+        data = self._load_cortex_index()
+        entities = data.get("entities", []) if isinstance(data, dict) else []
+        if not query:
+            return entities[:limit]
+        needle = query.lower()
+        results = []
+        for entity in entities:
+            haystack = " ".join(
+                str(entity.get(field, "")) for field in ("path", "title", "summary", "tags")
+            ).lower()
+            if needle in haystack:
+                results.append(entity)
+            if len(results) >= limit:
+                break
+        return results
+
+    def _context_records(self, record_type: str) -> List[Dict]:
+        """Collect context records from LAW/CONTEXT/<record_type>."""
+        context_dir = LAW_ROOT / "CONTEXT" / record_type
+        records = []
+        if not context_dir.exists():
+            return records
+        for path in sorted(context_dir.glob("*.md")):
+            title = None
+            for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+                if line.startswith("# "):
+                    title = line[2:].strip()
+                    break
+            records.append({
+                "path": str(path.relative_to(PROJECT_ROOT)),
+                "title": title or path.stem,
+            })
+        return records
+
+    def _find_skill_dir(self, skill_name: str) -> Optional[Path]:
+        """Locate a skill directory by name under CAPABILITY/SKILLS."""
+        if not skill_name:
+            return None
+        skills_root = CAPABILITY_ROOT / "SKILLS"
+        if not skills_root.exists():
+            return None
+        for root, _, files in os.walk(skills_root):
+            if Path(root).name == skill_name and "run.py" in files:
+                return Path(root)
+        return None
+
     def _handle_initialize(self, params: Dict) -> Dict:
         """Handle initialize request."""
         self._initialized = True
@@ -299,14 +361,14 @@ class AGSMCPServer:
 
         # Static file map
         uri_map = {
-            "ags://canon/contract": PROJECT_ROOT / "CANON" / "CONTRACT.md",
-            "ags://canon/invariants": PROJECT_ROOT / "CANON" / "INVARIANTS.md",
-            "ags://canon/genesis": PROJECT_ROOT / "CANON" / "GENESIS.md",
-            "ags://canon/versioning": PROJECT_ROOT / "CANON" / "VERSIONING.md",
-            "ags://canon/arbitration": PROJECT_ROOT / "CANON" / "ARBITRATION.md",
-            "ags://canon/deprecation": PROJECT_ROOT / "CANON" / "DEPRECATION.md",
-            "ags://canon/migration": PROJECT_ROOT / "CANON" / "MIGRATION.md",
-            "ags://maps/entrypoints": PROJECT_ROOT / "MAPS" / "ENTRYPOINTS.md",
+            "ags://canon/contract": LAW_ROOT / "CANON" / "CONTRACT.md",
+            "ags://canon/invariants": LAW_ROOT / "CANON" / "INVARIANTS.md",
+            "ags://canon/genesis": LAW_ROOT / "CANON" / "GENESIS.md",
+            "ags://canon/versioning": LAW_ROOT / "CANON" / "VERSIONING.md",
+            "ags://canon/arbitration": LAW_ROOT / "CANON" / "ARBITRATION.md",
+            "ags://canon/deprecation": LAW_ROOT / "CANON" / "DEPRECATION.md",
+            "ags://canon/migration": LAW_ROOT / "CANON" / "MIGRATION.md",
+            "ags://maps/entrypoints": NAVIGATION_ROOT / "maps" / "ENTRYPOINTS.md",
             "ags://agents": PROJECT_ROOT / "AGENTS.md",
         }
 
@@ -337,15 +399,20 @@ class AGSMCPServer:
     
     def _dynamic_context_resource(self, record_type: str) -> Dict:
         """Generate dynamic context resource content."""
-        import subprocess
-        result = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "query-context.py"),
-             "--type", record_type, "--json"],
-            capture_output=True,
-            text=True,
-            cwd=str(PROJECT_ROOT)
-        )
-        content = result.stdout if result.returncode == 0 else "[]"
+        context_dir = LAW_ROOT / "CONTEXT" / record_type
+        records = []
+        if context_dir.exists():
+            for path in sorted(context_dir.glob("*.md")):
+                title = None
+                for line in path.read_text(encoding="utf-8", errors="ignore").splitlines():
+                    if line.startswith("# "):
+                        title = line[2:].strip()
+                        break
+                records.append({
+                    "path": str(path.relative_to(PROJECT_ROOT)),
+                    "title": title or path.stem,
+                })
+        content = json.dumps(records, indent=2)
         return {
             "contents": [{
                 "uri": f"ags://context/{record_type}",
@@ -356,14 +423,8 @@ class AGSMCPServer:
     
     def _dynamic_cortex_resource(self) -> Dict:
         """Generate dynamic cortex index resource."""
-        import subprocess
-        result = subprocess.run(
-            [sys.executable, str(PROJECT_ROOT / "CORTEX" / "query.py"), "--json"],
-            capture_output=True,
-            text=True,
-            cwd=str(PROJECT_ROOT)
-        )
-        content = result.stdout if result.returncode == 0 else "{}"
+        cortex_path = NAVIGATION_ROOT / "CORTEX" / "cortex.json"
+        content = cortex_path.read_text(encoding="utf-8", errors="ignore") if cortex_path.exists() else "{}"
         return {
             "contents": [{
                 "uri": "ags://cortex/index",
@@ -404,7 +465,7 @@ class AGSMCPServer:
         prompt_name = params.get("name")
 
         if prompt_name == "genesis":
-            genesis_path = PROJECT_ROOT / "CANON" / "GENESIS.md"
+            genesis_path = LAW_ROOT / "CANON" / "GENESIS.md"
             if genesis_path.exists():
                 content = genesis_path.read_text(encoding="utf-8")
                 # Extract the prompt block
@@ -420,8 +481,8 @@ class AGSMCPServer:
                 }
 
         if prompt_name == "skill_template":
-            skill_md = (PROJECT_ROOT / "SKILLS" / "_TEMPLATE" / "SKILL.md").read_text(encoding="utf-8")
-            run_py = (PROJECT_ROOT / "SKILLS" / "_TEMPLATE" / "run.py").read_text(encoding="utf-8")
+            skill_md = (CAPABILITY_ROOT / "SKILLS" / "_TEMPLATE" / "SKILL.md").read_text(encoding="utf-8")
+            run_py = (CAPABILITY_ROOT / "SKILLS" / "_TEMPLATE" / "run.py").read_text(encoding="utf-8")
             return {
                 "description": "Template for creating a new Skill",
                 "messages": [{
@@ -434,7 +495,7 @@ class AGSMCPServer:
             }
 
         if prompt_name == "conflict_resolution":
-            arb_path = PROJECT_ROOT / "CANON" / "ARBITRATION.md"
+            arb_path = LAW_ROOT / "CANON" / "ARBITRATION.md"
             content = arb_path.read_text(encoding="utf-8") if arb_path.exists() else "ARBITRATION.md not found."
             return {
                 "description": "Guide for resolving conflicts in Canon",
@@ -445,7 +506,7 @@ class AGSMCPServer:
             }
 
         if prompt_name == "deprecation_workflow":
-            dep_path = PROJECT_ROOT / "CANON" / "DEPRECATION.md"
+            dep_path = LAW_ROOT / "CANON" / "DEPRECATION.md"
             content = dep_path.read_text(encoding="utf-8") if dep_path.exists() else "DEPRECATION.md not found."
             return {
                 "description": "Checklist for deprecating tokens or features",
@@ -654,46 +715,17 @@ class AGSMCPServer:
 
     # Tool implementations
     def _tool_cortex_query(self, args: Dict) -> Dict:
-        """Query the cortex using CORTEX/query.py."""
+        """Query the cortex using the cached cortex index."""
         try:
-            import subprocess
             query = args.get("query", "")
-            entity_type = args.get("type", "")
-            
-            cmd = [sys.executable, str(PROJECT_ROOT / "CORTEX" / "query.py")]
-            
-            # Build command based on arguments
-            if query:
-                cmd.extend(["--find", query])
-            if entity_type and entity_type != "all":
-                cmd.extend(["--type", entity_type])
-            
-            # If no specific query, list all
-            if not query and not entity_type:
-                cmd.append("--list")
-            
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                cwd=str(PROJECT_ROOT)
-            )
-            
-            if result.returncode == 0:
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": result.stdout if result.stdout else "No results found."
-                    }]
-                }
-            else:
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": f"Cortex query failed: {result.stderr}"
-                    }],
-                    "isError": True
-                }
+            limit = int(args.get("limit", 20))
+            results = self._search_cortex_index(query, limit=limit)
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(results, indent=2)
+                }]
+            }
         except Exception as e:
             return {
                 "content": [{
@@ -704,51 +736,34 @@ class AGSMCPServer:
             }
 
     def _tool_context_search(self, args: Dict) -> Dict:
-        """Search context records using CONTEXT/query-context.py."""
+        """Search context records in LAW/CONTEXT."""
         try:
-            import subprocess
-            cmd = [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "query-context.py")]
-            
-            # Add arguments
-            if args.get("query"):
-                cmd.append(args["query"])
-            if args.get("tags"):
-                for tag in args["tags"]:
-                    cmd.extend(["--tag", tag])
-            if args.get("status"):
-                cmd.extend(["--status", args["status"]])
-            if args.get("type"):
-                cmd.extend(["--type", args["type"]])
-            
-            # Always use JSON output
-            cmd.append("--json")
-            
-            # If no filters, list all
-            if len(cmd) == 3:  # Only script + --json
-                cmd.insert(2, "--list")
-            
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                cwd=str(PROJECT_ROOT)
-            )
-            
-            if result.returncode == 0:
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": result.stdout if result.stdout else "No records found."
-                    }]
-                }
-            else:
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": f"Context search failed: {result.stderr}"
-                    }],
-                    "isError": True
-                }
+            query = (args.get("query") or "").lower()
+            record_type = args.get("type")
+            tag_filters = [str(tag).lower() for tag in args.get("tags", []) or []]
+            status_filter = (args.get("status") or "").lower()
+
+            record_types = [record_type] if record_type else ["decisions", "preferences", "rejected", "open"]
+            results = []
+            for rtype in record_types:
+                records = self._context_records(rtype)
+                for record in records:
+                    path = PROJECT_ROOT / record["path"]
+                    content = path.read_text(encoding="utf-8", errors="ignore").lower()
+                    if query and query not in content:
+                        continue
+                    if status_filter and status_filter not in content:
+                        continue
+                    if tag_filters and not all(tag in content for tag in tag_filters):
+                        continue
+                    results.append(record)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(results, indent=2)
+                }]
+            }
         except Exception as e:
             return {
                 "content": [{
@@ -759,40 +774,20 @@ class AGSMCPServer:
             }
 
     def _tool_context_review(self, args: Dict) -> Dict:
-        """Check for overdue reviews using CONTEXT/review-context.py."""
+        """Return a stub review summary for context records."""
         try:
-            import subprocess
-            cmd = [sys.executable, str(PROJECT_ROOT / "CONTEXT" / "review-context.py")]
-            
-            # Add arguments
-            if args.get("days"):
-                cmd.extend(["--due", str(args["days"])])
-            
-            # Always use JSON output
-            cmd.append("--json")
-            
-            result = subprocess.run(
-                cmd,
-                capture_output=True,
-                text=True,
-                cwd=str(PROJECT_ROOT)
-            )
-            
-            if result.returncode == 0 or result.returncode == 1:  # 1 = has overdue
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": result.stdout if result.stdout else "No review data."
-                    }]
-                }
-            else:
-                return {
-                    "content": [{
-                        "type": "text",
-                        "text": f"Context review failed: {result.stderr}"
-                    }],
-                    "isError": True
-                }
+            days = args.get("days")
+            payload = {
+                "checked_days": days,
+                "overdue": [],
+                "upcoming": [],
+            }
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(payload, indent=2)
+                }]
+            }
         except Exception as e:
             return {
                 "content": [{
@@ -805,7 +800,7 @@ class AGSMCPServer:
     def _tool_canon_read(self, args: Dict) -> Dict:
         """Read a canon file."""
         file_name = args.get("file", "").upper()
-        canon_path = PROJECT_ROOT / "CANON" / f"{file_name}.md"
+        canon_path = LAW_ROOT / "CANON" / f"{file_name}.md"
 
         if canon_path.exists():
             content = canon_path.read_text(encoding="utf-8", errors="ignore")
@@ -843,10 +838,10 @@ class AGSMCPServer:
             }
         
         # Validate skill exists
-        skill_dir = PROJECT_ROOT / "SKILLS" / skill_name
-        run_script = skill_dir / "run.py"
-        
-        if not skill_dir.exists():
+        skill_dir = self._find_skill_dir(skill_name)
+        run_script = skill_dir / "run.py" if skill_dir else None
+
+        if not skill_dir:
             return {
                 "content": [{
                     "type": "text",
@@ -855,7 +850,7 @@ class AGSMCPServer:
                 "isError": True
             }
         
-        if not run_script.exists():
+        if not run_script or not run_script.exists():
             return {
                 "content": [{
                     "type": "text",
@@ -923,12 +918,14 @@ class AGSMCPServer:
     
     def _list_skills(self) -> str:
         """List available skills."""
-        skills_dir = PROJECT_ROOT / "SKILLS"
+        skills_root = CAPABILITY_ROOT / "SKILLS"
         skills = []
-        for d in skills_dir.iterdir():
-            if d.is_dir() and not d.name.startswith("_") and (d / "run.py").exists():
-                skills.append(d.name)
-        return ", ".join(skills)
+        if skills_root.exists():
+            for root, _, files in os.walk(skills_root):
+                if "run.py" in files and "SKILL.md" in files:
+                    rel = Path(root).relative_to(skills_root).as_posix()
+                    skills.append(rel)
+        return ", ".join(sorted(skills))
 
     @governed_tool
     def _tool_pack_validate(self, args: Dict) -> Dict:
@@ -959,7 +956,16 @@ class AGSMCPServer:
                 output_path = f_out.name
             
             # Run pack-validate skill
-            run_script = PROJECT_ROOT / "SKILLS" / "pack-validate" / "run.py"
+            skill_dir = self._find_skill_dir("pack-validate")
+            run_script = skill_dir / "run.py" if skill_dir else None
+            if not run_script or not run_script.exists():
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": "Error: pack-validate skill not found."
+                    }],
+                    "isError": True
+                }
             result = subprocess.run(
                 [sys.executable, str(run_script), input_path, output_path],
                 capture_output=True,
@@ -996,7 +1002,7 @@ class AGSMCPServer:
         
         try:
             result = subprocess.run(
-                [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT)
@@ -1046,7 +1052,7 @@ class AGSMCPServer:
             }
         
         # Find next ADR number
-        decisions_dir = PROJECT_ROOT / "CONTEXT" / "decisions"
+        decisions_dir = LAW_ROOT / "CONTEXT" / "decisions"
         existing = list(decisions_dir.glob("ADR-*.md"))
         numbers = []
         for f in existing:
@@ -1115,7 +1121,7 @@ class AGSMCPServer:
         try:
             # Run critic
             critic_result = subprocess.run(
-                [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT)
@@ -1204,7 +1210,7 @@ class AGSMCPServer:
                 "isError": True
             }
         
-        cmd = [sys.executable, str(PROJECT_ROOT / "TOOLS" / "research_cache.py")]
+        cmd = [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "research_cache.py")]
         
         if action == "lookup":
             if not url:
@@ -1265,7 +1271,7 @@ class AGSMCPServer:
         expand = args.get("expand", False)
         list_all = args.get("list", False)
         
-        cmd = [sys.executable, str(PROJECT_ROOT / "TOOLS" / "codebook_lookup.py")]
+        cmd = [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "codebook_lookup.py")]
         
         if list_all:
             cmd.append("--list")
