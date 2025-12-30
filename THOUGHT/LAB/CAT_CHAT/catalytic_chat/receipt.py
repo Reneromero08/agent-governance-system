@@ -223,15 +223,45 @@ def load_receipt(receipt_path: Path) -> Optional[Dict[str, Any]]:
     return json.loads(receipt_text)
 
 
+def compute_merkle_root(receipt_hashes: List[str]) -> str:
+    """Compute Merkle root from list of receipt hashes.
+
+    Args:
+        receipt_hashes: List of receipt_hash hex strings
+
+    Returns:
+        Merkle root as SHA256 hex string
+    """
+    if not receipt_hashes:
+        raise ValueError("Cannot compute Merkle root from empty list")
+
+    level = [bytes.fromhex(h) for h in receipt_hashes]
+
+    while len(level) > 1:
+        next_level = []
+        for i in range(0, len(level), 2):
+            if i + 1 < len(level):
+                combined = level[i] + level[i + 1]
+            else:
+                combined = level[i] + level[i]
+            next_level.append(hashlib.sha256(combined).digest())
+        level = next_level
+
+    return level[0].hex()
+
+
 def verify_receipt_chain(
     receipts: List[Dict[str, Any]],
     verify_attestation: bool = True
-) -> None:
-    """Verify receipt chain integrity.
+) -> str:
+    """Verify receipt chain integrity and return Merkle root.
 
     Args:
         receipts: List of receipts in execution order
         verify_attestation: If True, verify attestation signatures
+
+    Returns:
+        Merkle root of the receipt chain
 
     Raises:
         ValueError: If chain verification fails
@@ -239,12 +269,16 @@ def verify_receipt_chain(
     if not receipts:
         raise ValueError("Receipt chain cannot be empty")
 
+    receipt_hashes = []
+
     for i, receipt in enumerate(receipts):
         receipt_hash = receipt.get("receipt_hash")
         parent_receipt_hash = receipt.get("parent_receipt_hash")
 
         if receipt_hash is None:
             raise ValueError(f"Receipt {i} missing receipt_hash field")
+
+        receipt_hashes.append(receipt_hash)
 
         if i == 0:
             if parent_receipt_hash is not None:
@@ -278,6 +312,8 @@ def verify_receipt_chain(
                 from .attestation import verify_receipt_bytes
                 receipt_bytes = receipt_canonical_bytes(receipt)
                 verify_receipt_bytes(receipt_bytes, attestation)
+
+    return compute_merkle_root(receipt_hashes)
 
 
 def find_receipt_chain(receipts_dir: Path, run_id: str) -> List[Dict[str, Any]]:
