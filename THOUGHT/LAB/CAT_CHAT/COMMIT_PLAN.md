@@ -290,6 +290,41 @@ Fixes:
 
 ---
 
+### Chunk 8: Phase 6.2.1 Attestation Stabilization
+
+**Files Changed:**
+- `tests/test_planner.py` (modified - fixed test_cli_dry_run subprocess call)
+
+**Commit Message:**
+```
+fix(cat_chat): stabilize phase 6.2.1 by fixing test_cli_dry_run subprocess import
+
+Issue: test_cli_dry_run was failing with:
+  ModuleNotFoundError: No module named 'catalytic_chat'
+
+Root cause: subprocess.run() call to 'python -m catalytic_chat.cli plan request'
+did not inherit PYTHONPATH environment variable needed to find the module.
+
+Fix: Added environment setup to test_cli_dry_run():
+  - Import os module
+  - Copy os.environ and set PYTHONPATH to Path(__file__).parent.parent
+  - Pass env parameter to subprocess.run()
+
+Impact:
+  - All 59 tests now pass (previously 58 passed, 1 failed)
+  - No new skips added (same 13 skips)
+  - Deterministic receipts unchanged
+  - Attestation still fail-closed
+  - No CLI or executor regressions
+  - Minimal fix (3 lines added, only test environment)
+
+Verification:
+  python -m pytest -q THOUGHT/LAB/CAT_CHAT/tests
+  # 59 passed, 13 skipped in 6.10s
+```
+
+---
+
 ## Commit Plan
 
 **Recommended Order:**
@@ -300,6 +335,7 @@ Fixes:
 5. Chunk 5 (Phase 3 Hardening) - strengthens tests and verification
 6. Chunk 6 (Phase 4.3 Ants) - multi-worker agent runners
 7. Chunk 7 (Substrate Path Fix) - critical bugfix, must come after all
+8. Chunk 8 (Phase 6.2.1 Stabilization) - fix test_cli_dry_run subprocess issue
 
 **All tests pass:**
 ```bash
@@ -338,7 +374,11 @@ python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system"
 | tests/test_planner.py | 6 | PASS |
 | tests/test_execution.py | 2 | PASS |
 | tests/test_execution_parallel.py | 4 | PASS |
-| **Total** | **50** | **PASS** (9 skipped) |
+| tests/test_attestation.py | 6 | PASS |
+| tests/test_receipt.py | 5 | PASS |
+| tests/test_bundle.py | 2 | PASS |
+| tests/test_bundle_execution.py | 5 | PASS |
+| **Total** | **59** | **PASS** (13 skipped) |
 
 ---
 
@@ -362,21 +402,31 @@ python -m catalytic_chat.cli --repo-root "D:\CCC 2.0\AI\agent-governance-system"
 | `catalytic_chat/message_cassette.py` | New |
 | `catalytic_chat/ants.py` | New |
 | `catalytic_chat/paths.py` | New |
-| `catalytic_chat/cli.py` | Modified |
+| `catalytic_chat/receipt.py` | Modified (attestation) |
+| `catalytic_chat/attestation.py` | New (signing/verification) |
+| `catalytic_chat/executor.py` | Modified (attestation support) |
+| `catalytic_chat/bundle_execution.py` | Modified (verification) |
+| `catalytic_chat/cli.py` | Modified (attestation CLI flags) |
 | `catalytic_chat/section_indexer.py` | Modified |
 | `catalytic_chat/section_extractor.py` | Modified |
 | `catalytic_chat/symbol_registry.py` | Modified |
 | `catalytic_chat/symbol_resolver.py` | Modified |
+| `catalytic_chat/planner.py` | New (request planning) |
 | `tests/test_vector_store.py` | New |
 | `tests/test_message_cassette.py` | New |
 | `tests/test_ants.py` | New |
 | `tests/test_execution.py` | New |
 | `tests/test_execution_parallel.py` | New |
-| `tests/test_planner.py` | New |
+| `tests/test_planner.py` | New (stabilized in chunk 8) |
+| `tests/test_attestation.py` | New |
+| `tests/test_receipt.py` | New |
+| `tests/test_bundle.py` | New |
+| `tests/test_bundle_execution.py` | New |
 | `tests/conftest.py` | New |
+| `tests/fixtures/*` | New (plan request fixtures) |
 | `CORTEX/db/system1.db` | Deleted |
 
-**Total New Files:** ~23
-**Total Modified Files:** ~9
+**Total New Files:** ~30
+**Total Modified Files:** ~13
 **Total Moved Files:** ~18
 **Total Deleted Files:** 1
