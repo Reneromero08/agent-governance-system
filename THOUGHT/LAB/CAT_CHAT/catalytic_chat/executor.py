@@ -93,8 +93,8 @@ class BundleExecutor:
             "attestation": None
         }
 
-        receipt_bytes = receipt_canonical_bytes(receipt, attestation_override=None)
         receipt["receipt_hash"] = compute_receipt_hash(receipt)
+        receipt_bytes = receipt_canonical_bytes(receipt, attestation_override=None)
 
         if self.signing_key:
             receipt["attestation"] = sign_receipt_bytes(receipt_bytes, self.signing_key)

@@ -186,7 +186,7 @@ def write_receipt(out_path: Path, receipt: Dict[str, Any]) -> None:
 
 
 def compute_receipt_hash(receipt: Dict[str, Any]) -> str:
-    """Compute receipt hash from canonical bytes without attestation.
+    """Compute receipt hash from canonical bytes without attestation or receipt_hash.
 
     This is the single source of truth for receipt_hash computation.
     Used by executor and verifier for chain linking.
@@ -195,9 +195,14 @@ def compute_receipt_hash(receipt: Dict[str, Any]) -> str:
         receipt: Receipt dictionary
 
     Returns:
-        SHA256 hex digest of canonical receipt bytes with attestation=None
+        SHA256 hex digest of canonical receipt bytes with attestation=None and receipt_hash excluded
     """
-    canonical_bytes = receipt_canonical_bytes(receipt, attestation_override=None)
+    receipt_copy = dict(receipt)
+
+    if "receipt_hash" in receipt_copy:
+        del receipt_copy["receipt_hash"]
+
+    canonical_bytes = receipt_canonical_bytes(receipt_copy, attestation_override=None)
     return sha256_hex(canonical_bytes)
 
 
