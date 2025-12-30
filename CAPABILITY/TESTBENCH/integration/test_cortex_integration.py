@@ -16,7 +16,7 @@ import shutil
 from pathlib import Path
 
 # Add project root to path
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from NAVIGATION.CORTEX.db.system1_builder import System1DB

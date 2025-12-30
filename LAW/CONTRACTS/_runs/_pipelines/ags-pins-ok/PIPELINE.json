@@ -1,0 +1,1 @@
+{"pipeline_id":"ags-pins-ok","steps":[{"capability_hash":"9a79684b42c8978ff7916d0c4da0b41de458eb1bd612d0298fef3f4f2a793eea","cmd":["python","--version"],"jobspec_path":"LAW/CONTRACTS/_runs/_pipelines/ags-pins-ok/steps/s1/JOBSPEC.json","memoize":true,"step_id":"s1","strict":true}]}

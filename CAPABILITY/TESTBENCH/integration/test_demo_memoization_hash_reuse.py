@@ -1,6 +1,8 @@
 from __future__ import annotations
 
 import json
+import pytest
+import sys
 from pathlib import Path
 
 
@@ -21,14 +23,22 @@ def test_phase2_demo_artifacts_are_falsifiable() -> None:
     assert (reuse / "DEREF_STATS.json").exists()
 
     # Proof identity: byte-identical.
-    assert (baseline / "PROOF.json").read_bytes() == (reuse / "PROOF.json").read_bytes()
+    with open(baseline / "PROOF.json", 'rb') as f:
+        b_proof = f.read()
+    with open(reuse / "PROOF.json", 'rb') as f:
+        r_proof = f.read()
+    assert b_proof == r_proof
 
     # Memoization hit must be observable.
-    assert "memoization:hit" in (reuse / "LEDGER.jsonl").read_text(encoding="utf-8")
+    with open(reuse / "LEDGER.jsonl", 'r', encoding="utf-8") as f:
+        ledger_text = f.read()
+    assert "memoization:hit" in ledger_text
 
     # Hash-first dereference must be measurably smaller (bytes read) in reuse.
-    b_deref_stats = json.loads((baseline / "DEREF_STATS.json").open().read())
-    r_deref_stats = json.loads((reuse / "DEREF_STATS.json").open().read())
+    with open(baseline / "DEREF_STATS.json", 'r') as f:
+        b_deref_stats = json.load(f)
+    with open(reuse / "DEREF_STATS.json", 'r') as f:
+        r_deref_stats = json.load(f)
 
     assert b_deref_stats["deref_count"] > r_deref_stats["deref_count"]
     assert (b_deref_stats["bytes_read_total"] - r_deref_stats["bytes_read_total"]) > 0

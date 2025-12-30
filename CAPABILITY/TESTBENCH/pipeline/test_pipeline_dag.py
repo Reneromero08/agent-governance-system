@@ -38,7 +38,6 @@ def test_dag_spec_validation():
             {"from": "B", "to": "C", "requires": []} # C is missing from nodes
         ]
     }
-    # This raises ValueError("DAG_INVALID_EDGE")
     with pytest.raises(ValueError):
         _parse_dag_spec(invalid_node)
         
@@ -68,3 +67,4 @@ def test_dag_topo_sort():
     )
     order = topo_sort(spec)
     assert order == ["A", "B", "C", "D"]
+

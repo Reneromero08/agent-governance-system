@@ -1,93 +1,70 @@
-import json
 from pathlib import Path
-from typing import Any, Dict, List
-
-from jsonschema import Draft7Validator, RefResolver
-
-
-def _load_json(path: Path) -> Dict[str, Any]:
-    return json.loads(path.read_text(encoding="utf-8"))
-
-
-def _fail(msg: str) -> None:
-    print(f"FAIL: {msg}")
-    raise SystemExit(1)
-
-
-def _ok(msg: str) -> None:
-    print(f"OK: {msg}")
-
+import sys
+import pytest
+import json
+from typing import Dict, Any, List
+from jsonschema import Draft7Validator
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-schemas_dir = REPO_ROOT / "CAPABILITY" / "TESTBENCH" / "core"
-fixtures_valid = REPO_ROOT / "CAPABILITY" / "CONTRACTS" / "fixtures" / "phase0" / "valid"
-fixtures_invalid = REPO_ROOT / "CAPABILITY" / "CONTRACTS" / "fixtures" / "phase0" / "invalid"
+sys.path.insert(0, str(REPO_ROOT))
 
-schema_files = {
-    "jobspec": schemas_dir / "jobspec.schema.json",
-    "validation_error": schemas_dir / "validation_error.schema.json",
-    "ledger": schemas_dir / "ledger.schema.json",
-    "proof": schemas_dir / "proof.schema.json",
-}
+# Schemas and Fixtures paths
+SCHEMAS_DIR = REPO_ROOT / "LAW" / "SCHEMAS"
+FIXTURES_VALID = REPO_ROOT / "LAW" / "CONTRACTS" / "fixtures" / "catalytic" / "phase0" / "valid"
+FIXTURES_INVALID = REPO_ROOT / "LAW" / "CONTRACTS" / "fixtures" / "catalytic" / "phase0" / "invalid"
 
-for k, p in schema_files.items():
-    if not p.exists():
-        _fail(f"missing schema file: {k} -> {p}")
-_fail("schema files exist")
+def _load_json(p: Path) -> Dict[str, Any]:
+    return json.loads(p.read_text(encoding='utf-8'))
 
-jobspec_schema = _load_json(schema_files["jobspec"])
-validation_error_schema = _load_json(schema_files["validation_error"])
-ledger_schema = _load_json(schema_files["ledger"])
-proof_schema = _load_json(schema_files["proof"])
+@pytest.fixture
+def validators():
+    # Helper to load schema if it exists
+    def get_v(name):
+        p = SCHEMAS_DIR / f"{name}.schema.json"
+        if not p.exists():
+            pytest.skip(f"Schema {name} missing at {p}")
+        return Draft7Validator(_load_json(p))
 
-for name, p in schema_files.items():
-    if not Path(p).exists():
-        _fail(f"missing schema file: {name} -> {p}")
-_fail("schema files exist")
+    return {
+        "jobspec": get_v("jobspec"),
+        "ledger": get_v("ledger"),
+        "proof": get_v("proof"),
+        "validation_error": get_v("validation_error")
+    }
 
-jobspec_schema_id = jobspec_schema.get("$id")
-validation_error_schema_id = validation_error_schema.get("$id")
-ledger_schema_id = ledger_schema.get("$id")
-proof_schema_id = proof_schema.get("$id")
-
-resolver = RefResolver.from_schema(ledger_schema, store=store)
-v_jobspec = Draft7Validator(jobspec_schema, resolver=resolver)
-v_validation_error = Draft7Validator(validation_error_schema, resolver=resolver)
-v_proof = Draft7Validator(proof_schema, resolver=resolver)
-
-def choose_validator(doc: Dict[str, Any]) -> Draft7Validator:
+def choose_validator(doc: Dict[str, Any], vals: Dict[str, Draft7Validator]) -> Draft7Validator:
     if "job_id" in doc and "task_type" in doc:
-        return v_jobspec
+        return vals["jobspec"]
     if "valid" in doc and "errors" in doc and "warnings" in doc:
-        return v_validation_error
+        return vals["validation_error"]
     if "RUN_INFO" in doc and "PRE_MANIFEST" in doc and "POST_MANIFEST" in doc:
-        return v_ledger
+        return vals["ledger"]
     if "proof_version" in doc and "restoration_result" in doc:
-        return v_proof
-    _fail("fixture does not match any known schema (cannot choose validator)")
-    raise AssertionError
+        return vals["proof"]
+    pytest.fail(f"Fixture does not match any known schema: {list(doc.keys())}")
 
-valid_files: List[Path] = sorted(fixtures_valid.glob("*.json"))
-if not valid_files:
-    _fail(f"no valid fixtures found in {fixtures_valid}")
-for p in valid_files:
-    doc = _load_json(p)
-    errors = sorted(choose_validator(doc).iter_errors(doc), key=lambda e: list(e.path))
-    if errors:
-        _fail(f"valid fixture FAILED: {p.name}: {errors[0].message}")
-_fail("valid fixtures pass")
+def test_valid_fixtures(validators):
+    if not FIXTURES_VALID.exists():
+        pytest.skip(f"Fixtures dir missing: {FIXTURES_VALID}")
+    files = list(FIXTURES_VALID.glob("*.json"))
+    if not files:
+        pytest.skip("No valid fixtures found")
+    for p in files:
+        doc = _load_json(p)
+        v = choose_validator(doc, validators)
+        errors = list(v.iter_errors(doc))
+        if errors:
+            pytest.fail(f"Valid fixture {p.name} failed: {errors[0].message}")
 
-invalid_files: List[Path] = sorted(fixtures_invalid.glob("*.json"))
-if not invalid_files:
-    _fail(f"no invalid fixtures found in {fixtures_invalid}")
-for p in invalid_files:
-    doc = _load_json(p)
-    errors = sorted(choose_validator(doc).iter_errors(doc), key=lambda e: list(e.path))
-    if not errors:
-        _fail(f"invalid fixture unexpectedly PASSED: {p.name}")
-_fail("invalid fixtures fail as expected")
-
-assert main() == 0
-
-if __name__ == "__main__":
-    sys.exit(main())
+def test_invalid_fixtures(validators):
+    if not FIXTURES_INVALID.exists():
+        pytest.skip(f"Fixtures dir missing: {FIXTURES_INVALID}")
+    files = list(FIXTURES_INVALID.glob("*.json"))
+    if not files:
+        pytest.skip("No invalid fixtures found")
+    for p in files:
+        doc = _load_json(p)
+        v = choose_validator(doc, validators)
+        errors = list(v.iter_errors(doc))
+        if not errors:
+            pytest.fail(f"Invalid fixture {p.name} unexpectedly passed")

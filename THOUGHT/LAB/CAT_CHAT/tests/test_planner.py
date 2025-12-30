@@ -140,9 +140,10 @@ def test_cli_dry_run():
     # Verify step ordinal is 0-based
     assert plan_output["steps"][0]["ordinal"] == 0, "First step ordinal should be 0"
     
-    # Verify expected_outputs uses "symbols_referenced" not "symbols_resolved"
+    # Verify expected_outputs uses "symbols_referenced" or "unresolved_symbols"
     expected_outputs = plan_output["steps"][0].get("expected_outputs", {})
-    assert "symbols_referenced" in expected_outputs, "Expected outputs should have symbols_referenced"
+    assert "symbols_referenced" in expected_outputs or "unresolved_symbols" in expected_outputs, \
+        "Expected outputs should have symbols_referenced or unresolved_symbols"
     assert "symbols_resolved" not in expected_outputs, "Expected outputs should not have symbols_resolved in dry-run"
     
     print("[PASS] test_cli_dry_run")
@@ -150,8 +151,140 @@ def test_cli_dry_run():
 
 def test_idempotency():
     """Rerunning same plan request returns same job_id and step_ids."""
-    # This test can't run without a symbol in registry, so skip
-    print("[SKIP] test_idempotency (requires symbol in registry)")
+    print("[SKIP] test_idempotency (replaced by test_plan_request_idempotent_rerun_no_unique_constraint)")
+
+
+def test_plan_request_dry_run_missing_symbol_does_not_fail():
+    """Dry-run with missing symbol succeeds and emits unresolved step."""
+    import tempfile
+    import shutil
+    from catalytic_chat.message_cassette import MessageCassette
+
+    tmp_root = None
+    cassette = None
+
+    try:
+        tmp_path = tempfile.mkdtemp()
+        tmp_root = Path(tmp_path)
+
+        shutil.copytree(
+            Path.cwd() / "THOUGHT" / "LAB" / "CAT_CHAT",
+            tmp_root / "THOUGHT" / "LAB" / "CAT_CHAT"
+        )
+
+        fixture_path = TESTS_DIR / "plan_request_missing_symbol.json"
+        request = load_fixture("plan_request_missing_symbol.json")
+
+        planner = Planner(repo_root=tmp_root)
+        cassette = MessageCassette(repo_root=tmp_root)
+
+        conn = cassette._get_conn()
+
+        cursor = conn.execute("SELECT COUNT(*) as count FROM cassette_messages")
+        before_count = cursor.fetchone()["count"]
+
+        plan_output = planner.plan_request(request, dry_run=True)
+
+        assert "steps" in plan_output
+        assert len(plan_output["steps"]) == 1
+
+        step = plan_output["steps"][0]
+        assert step["op"] == "READ_SYMBOL"
+        assert step["refs"]["symbol_id"] == "@TEST/MISSING"
+
+        expected_outputs = step.get("expected_outputs", {})
+        assert "unresolved_symbols" in expected_outputs
+        assert "@TEST/MISSING" in expected_outputs["unresolved_symbols"]
+
+        cursor = conn.execute("SELECT COUNT(*) as count FROM cassette_messages")
+        after_count = cursor.fetchone()["count"]
+
+        assert before_count == after_count
+
+        print("[PASS] test_plan_request_dry_run_missing_symbol_does_not_fail")
+    finally:
+        if cassette is not None:
+            try:
+                cassette.close()
+            except:
+                pass
+        if tmp_root is not None:
+            try:
+                shutil.rmtree(tmp_root, ignore_errors=True)
+            except:
+                pass
+
+
+def test_plan_request_idempotent_rerun_no_unique_constraint():
+    """Rerunning same plan request returns same ids without UNIQUE crash."""
+    import tempfile
+    import shutil
+
+    tmp_root = None
+
+    try:
+        tmp_path = tempfile.mkdtemp()
+        tmp_root = Path(tmp_path)
+
+        shutil.copytree(
+            Path.cwd() / "THOUGHT" / "LAB" / "CAT_CHAT",
+            tmp_root / "THOUGHT" / "LAB" / "CAT_CHAT"
+        )
+
+        request = load_fixture("plan_request_no_symbols.json")
+
+        message_id1, job_id1, step_ids1 = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=tmp_root
+        )
+
+        message_id2, job_id2, step_ids2 = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=tmp_root
+        )
+
+        assert message_id1 == message_id2
+        assert job_id1 == job_id2
+        assert step_ids1 == step_ids2
+
+        from catalytic_chat.message_cassette import MessageCassette
+        cassette = MessageCassette(repo_root=tmp_root)
+        conn = cassette._get_conn()
+
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_messages
+            WHERE run_id = ? AND idempotency_key = ?
+        """, (request["run_id"], request["request_id"]))
+        messages_count = cursor.fetchone()["count"]
+        assert messages_count == 1
+
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_jobs
+            WHERE job_id = ?
+        """, (job_id1,))
+        jobs_count = cursor.fetchone()["count"]
+        assert jobs_count == 1
+
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps
+            WHERE job_id = ?
+        """, (job_id1,))
+        steps_count = cursor.fetchone()["count"]
+        assert steps_count == len(step_ids1)
+
+        cassette.close()
+
+        print("[PASS] test_plan_request_idempotent_rerun_no_unique_constraint")
+    finally:
+        if tmp_root is not None:
+            try:
+                shutil.rmtree(tmp_root, ignore_errors=True)
+            except:
+                pass
 
 
 def main():
@@ -163,8 +296,10 @@ def main():
         test_slice_all_rejected,
         test_cli_dry_run,
         test_idempotency,
+        test_plan_request_dry_run_missing_symbol_does_not_fail,
+        test_plan_request_idempotent_rerun_no_unique_constraint,
     ]
-    
+
     for test in tests:
         try:
             test()
@@ -176,7 +311,7 @@ def main():
             import traceback
             traceback.print_exc()
             sys.exit(1)
-    
+
     print("\nAll tests passed!")
 
 

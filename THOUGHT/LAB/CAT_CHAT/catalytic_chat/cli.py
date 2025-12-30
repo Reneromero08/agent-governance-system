@@ -17,6 +17,10 @@ from catalytic_chat.section_indexer import SectionIndexer, build_index
 from catalytic_chat.symbol_registry import SymbolRegistry, SymbolError
 from catalytic_chat.symbol_resolver import SymbolResolver, ResolverError, resolve_symbol
 from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
+from catalytic_chat.planner import Planner, PlannerError, post_request_and_plan
+from catalytic_chat.ants import spawn_ants, run_ant_worker
+from catalytic_chat.bundle import BundleBuilder, BundleVerifier, BundleError
+from catalytic_chat.executor import BundleExecutor
 
 
 def cmd_build(args) -> int:
@@ -28,25 +32,17 @@ def cmd_build(args) -> int:
     Returns:
         Exit code (0 for success)
     """
-    indexer = SectionIndexer(
-        repo_root=args.repo_root,
-        substrate_mode=args.substrate
-    )
-
     try:
-        sections = extract_sections(file_path, args.repo_root)
-        print(f"Extracted {len(sections)} sections from {file_path}\n")
-
-        for i, section in enumerate(sections, 1):
-            print(f"[{i}] {section.section_id[:16]}...")
-            print(f"    Heading: {' > '.join(section.heading_path)}")
-            print(f"    Lines: {section.line_start}-{section.line_end}")
-            print(f"    Hash: {section.content_hash[:16]}...")
-            print()
-
+        index_hash = build_index(
+            repo_root=args.repo_root,
+            substrate_mode=args.substrate,
+            incremental=args.incremental
+        )
+        print(f"[OK] Index built")
+        print(f"      index_hash: {index_hash[:16]}...")
         return 0
     except Exception as e:
-        print(f"[FAIL] Extraction failed: {e}")
+        print(f"[FAIL] Build failed: {e}")
         return 1
 
 
@@ -410,6 +406,391 @@ def cmd_cassette_complete(args) -> int:
         cassette.close()
 
 
+def cmd_plan_request(args) -> int:
+    try:
+        plan_output = None
+        if args.dry_run:
+            with open(args.request_file, 'r') as f:
+                request = json.load(f)
+            
+            planner = Planner(repo_root=args.repo_root)
+            plan_output = planner.plan_request(request, dry_run=True)
+            
+            print(json.dumps(plan_output, indent=2))
+        else:
+            with open(args.request_file, 'r') as f:
+                request = json.load(f)
+            
+            message_id, job_id, step_ids = post_request_and_plan(
+                run_id=request.get("run_id", "default"),
+                request_payload=request,
+                idempotency_key=request.get("request_id"),
+                repo_root=args.repo_root
+            )
+            
+            print(f"[OK] Plan created")
+            print(f"      message_id: {message_id}")
+            print(f"      job_id: {job_id}")
+            print(f"      steps: {len(step_ids)}")
+            for i, step_id in enumerate(step_ids, 1):
+                print(f"      step_id_{i}: {step_id}")
+        
+        return 0
+    except PlannerError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except FileNotFoundError:
+        sys.stderr.write(f"[FAIL] File not found: {args.request_file}\n")
+        return 1
+    except json.JSONDecodeError as e:
+        sys.stderr.write(f"[FAIL] Invalid JSON: {e}\n")
+        return 1
+
+
+def cmd_execute(args) -> int:
+    """Execute PENDING steps for a given job_id in ordinal order.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    if args.workers > 1:
+        return cmd_execute_parallel(args)
+    
+    cassette = MessageCassette(repo_root=args.repo_root)
+    worker_id = f"cli_worker_{args.run_id}"
+    
+    try:
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT s.step_id, s.ordinal
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'PENDING'
+            ORDER BY s.ordinal ASC
+        """, (args.run_id, args.job_id))
+        
+        steps = cursor.fetchall()
+        
+        if not steps:
+            print(f"[INFO] No PENDING steps found for run_id={args.run_id}, job_id={args.job_id}")
+            return 0
+        
+        for step_row in steps:
+            step_id = step_row["step_id"]
+            ordinal = step_row["ordinal"]
+            
+            try:
+                claim_result = cassette.claim_step(
+                    run_id=args.run_id,
+                    worker_id=worker_id,
+                    ttl_seconds=300
+                )
+                
+                if claim_result["step_id"] != step_id:
+                    print(f"[FAIL] step_id {step_id}: Claimed wrong step {claim_result['step_id']}")
+                    return 1
+                
+                receipt = cassette.execute_step(
+                    run_id=args.run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=claim_result["fencing_token"],
+                    repo_root=args.repo_root
+                )
+                
+                if receipt.get("status") == "SUCCESS":
+                    print(f"[OK] {step_id}")
+                else:
+                    error = receipt.get("error", "Unknown error")
+                    print(f"[FAIL] {step_id}: {error}")
+                    return 1
+                    
+            except MessageCassetteError as e:
+                print(f"[FAIL] {step_id}: {e}")
+                return 1
+        
+        return 0
+        
+    finally:
+        cassette.close()
+
+
+def cmd_execute_parallel(args) -> int:
+    """Execute PENDING steps for a given job_id using parallel workers.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import threading
+    
+    results_lock = threading.Lock()
+    stop_flag = threading.Event()
+    
+    success_count = 0
+    failure_count = 0
+    
+    def worker_task(worker_index: int) -> tuple:
+        nonlocal success_count, failure_count
+        
+        cassette = MessageCassette(repo_root=args.repo_root)
+        local_success = 0
+        local_failure = 0
+        worker_id = f"cli_worker_{args.run_id}_w{worker_index}"
+        
+        try:
+            while not stop_flag.is_set():
+                try:
+                    claim_result = cassette.claim_next_step(
+                        run_id=args.run_id,
+                        job_id=args.job_id,
+                        worker_id=worker_id,
+                        ttl_seconds=300
+                    )
+                    
+                    if claim_result is None:
+                        break
+                    
+                    step_id = claim_result["step_id"]
+                    
+                    receipt = cassette.execute_step(
+                        run_id=args.run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=claim_result["fencing_token"],
+                        repo_root=args.repo_root,
+                        check_global_budget=True
+                    )
+                    
+                    with results_lock:
+                        if receipt.get("status") == "SUCCESS":
+                            print(f"[OK] {step_id}")
+                            local_success += 1
+                        else:
+                            error = receipt.get("error", "Unknown error")
+                            print(f"[FAIL] {step_id}: {error}")
+                            local_failure += 1
+                    
+                    if local_failure > 0 and not args.continue_on_fail:
+                        stop_flag.set()
+                        break
+                        
+                except MessageCassetteError as e:
+                    with results_lock:
+                        print(f"[FAIL] {e}")
+                        local_failure += 1
+                    stop_flag.set()
+                    break
+        finally:
+            cassette.close()
+        
+        return (local_success, local_failure)
+    
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = [executor.submit(worker_task, i) for i in range(args.workers)]
+        
+        for future in as_completed(futures):
+            local_success, local_failure = future.result()
+            with results_lock:
+                success_count += local_success
+                failure_count += local_failure
+    
+    if failure_count > 0:
+        print(f"[FAIL] job failed: {success_count} succeeded, {failure_count} failed")
+        return 1
+    else:
+        print(f"[OK] job complete")
+        return 0
+
+
+def cmd_ants_spawn(args) -> int:
+    """Spawn multiple ant workers.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    try:
+        exit_code = spawn_ants(
+            run_id=args.run_id,
+            job_id=args.job_id,
+            num_workers=args.n,
+            repo_root=args.repo_root or Path.cwd(),
+            continue_on_fail=args.continue_on_fail
+        )
+        
+        if exit_code == 0:
+            print("[OK] All ants completed successfully")
+        elif exit_code == 1:
+            print("[FAIL] Some ants failed")
+        else:
+            print("[FAIL] Invariant/DB error occurred")
+        
+        return exit_code
+    except Exception as e:
+        print(f"[FAIL] Spawn failed: {e}")
+        return 2
+
+
+def cmd_ants_worker(args) -> int:
+    """Run a single ant worker.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    try:
+        exit_code = run_ant_worker(
+            run_id=args.run_id,
+            job_id=args.job_id,
+            worker_id=args.worker_id,
+            repo_root=args.repo_root or Path.cwd(),
+            continue_on_fail=args.continue_on_fail,
+            poll_interval_ms=args.poll_ms,
+            ttl_seconds=args.ttl,
+            max_idle_polls=args.max_idle_polls
+        )
+        
+        if exit_code == 0:
+            print("[OK] Worker completed")
+        elif exit_code == 1:
+            print("[FAIL] Worker failed")
+        else:
+            print("[FAIL] Invariant/DB error occurred")
+        
+        return exit_code
+    except Exception as e:
+        print(f"[FAIL] Worker failed: {e}")
+        return 2
+
+
+def cmd_ants_status(args) -> int:
+    """Show job status counts.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, 1 on failure)
+    """
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        status = cassette.get_job_status(run_id=args.run_id, job_id=args.job_id)
+
+        if status is None:
+            print("[FAIL] job_id or run_id not found")
+            return 1
+
+        print(f"PENDING: {status['pending']}")
+        print(f"LEASED: {status['leased']}")
+        print(f"COMMITTED: {status['committed']}")
+        print(f"RECEIPTS: {status['receipts']}")
+        print(f"WORKERS_SEEN: {status['workers_seen']}")
+
+        return 0
+    except MessageCassetteError as e:
+        print(f"[FAIL] {e}")
+        return 1
+    finally:
+        cassette.close()
+
+
+def cmd_bundle_build(args) -> int:
+    """Build bundle from completed job.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, 1 on failure)
+    """
+    bundle_builder = BundleBuilder(repo_root=args.repo_root)
+
+    try:
+        output_dir = Path(args.out)
+        result = bundle_builder.build(
+            run_id=args.run_id,
+            job_id=args.job_id,
+            output_dir=output_dir
+        )
+
+        print(f"[OK] Bundle built")
+        print(f"      bundle_id: {result['bundle_id']}")
+        print(f"      output_dir: {result['output_dir']}")
+        print(f"      artifacts: {result['artifact_count']}")
+        print(f"      root_hash: {result['root_hash']}")
+        return 0
+    except BundleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    finally:
+        bundle_builder.close()
+
+
+def cmd_bundle_verify(args) -> int:
+    """Verify bundle integrity.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, 1 on failure)
+    """
+    bundle_dir = Path(args.bundle)
+
+    try:
+        verifier = BundleVerifier(bundle_dir)
+        result = verifier.verify()
+
+        print(f"[OK] Bundle verified")
+        print(f"      bundle_id: {result['bundle_id']}")
+        print(f"      run_id: {result['run_id']}")
+        print(f"      job_id: {result['job_id']}")
+        print(f"      artifacts: {result['artifact_count']}")
+        print(f"      root_hash: {result['root_hash']}")
+        return 0
+    except BundleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_bundle_run(args) -> int:
+    """Run bundle and output receipt path.
+    
+    Args:
+        args: Parsed command-line arguments
+    
+    Returns:
+        Exit code (0 for success, 1 on failure)
+    """
+    bundle_dir = Path(args.bundle)
+    
+    try:
+        receipt_out = getattr(args, 'receipt_out', None)
+        executor = BundleExecutor(bundle_dir, receipt_out=receipt_out)
+        result = executor.execute()
+        
+        print(f"[OK] Bundle executed")
+        print(f"      receipt: {result['receipt_path']}")
+        print(f"      outcome: {result['outcome']}")
+        return 0
+    except BundleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -470,6 +851,19 @@ def main():
     symbols_verify_parser = symbols_subparsers.add_parser("verify", help="Verify symbol registry")
 
     resolve_parser = subparsers.add_parser("resolve", help="Resolve symbol to content with caching")
+    resolve_parser.add_argument("symbol_id", help="Symbol ID")
+    resolve_parser.add_argument(
+        "--slice",
+        type=str,
+        default=None,
+        help="Slice expression (e.g., lines[0:100], chars[0:500], head(50), tail(20))"
+    )
+    resolve_parser.add_argument(
+        "--run-id",
+        type=str,
+        default=None,
+        help="Run ID for caching"
+    )
 
     cassette_parser = subparsers.add_parser("cassette", help="Message cassette commands (Phase 3)")
     cassette_subparsers = cassette_parser.add_subparsers(dest="cassette_command", help="Cassette commands")
@@ -497,19 +891,66 @@ def main():
     cassette_complete_parser.add_argument("--receipt", type=Path, required=True, help="JSON file with receipt payload")
     cassette_complete_parser.add_argument("--outcome", type=str, required=True,
                                         choices=["SUCCESS", "FAILURE", "ABORTED"], help="Outcome")
-    resolve_parser.add_argument("symbol_id", help="Symbol ID")
-    resolve_parser.add_argument(
-        "--slice",
-        type=str,
-        default=None,
-        help="Slice expression (e.g., lines[0:100], chars[0:500], head(50), tail(20))"
-    )
-    resolve_parser.add_argument(
-        "--run-id",
-        type=str,
-        default=None,
-        help="Run ID for caching"
-    )
+
+    plan_parser = subparsers.add_parser("plan", help="Deterministic planner (Phase 4)")
+    plan_subparsers = plan_parser.add_subparsers(dest="plan_command", help="Plan commands")
+
+    plan_request_parser = plan_subparsers.add_parser("request", help="Create plan from request JSON")
+    plan_request_parser.add_argument("--request-file", type=Path, required=True, help="Path to plan request JSON")
+    plan_request_parser.add_argument("--dry-run", action="store_true", help="Print plan to stdout without DB writes")
+
+    plan_verify_parser = plan_subparsers.add_parser("verify", help="Verify stored plan hash")
+    plan_verify_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    plan_verify_parser.add_argument("--request-id", type=str, required=True, help="Request ID")
+
+    execute_parser = subparsers.add_parser("execute", help="Execute PENDING steps for a job (Phase 4.1/4.2)")
+    execute_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    execute_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    execute_parser.add_argument("--workers", type=int, default=1, help="Number of parallel workers (default: 1)")
+    execute_parser.add_argument("--continue-on-fail", action="store_true", help="Continue execution on failure")
+
+    ants_parser = subparsers.add_parser("ants", help="Ant worker commands (Phase 4.3)")
+    ants_subparsers = ants_parser.add_subparsers(dest="ants_command", help="Ants commands")
+
+    ants_spawn_parser = ants_subparsers.add_parser("spawn", help="Spawn multiple ant workers")
+    ants_spawn_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_spawn_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_spawn_parser.add_argument("-n", type=int, required=True, help="Number of workers")
+    ants_spawn_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+
+    ants_run_parser = ants_subparsers.add_parser("run", help="Alias for 'spawn' - spawn multiple ant workers")
+    ants_run_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_run_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_run_parser.add_argument("-n", type=int, required=True, help="Number of workers")
+    ants_run_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+
+    ants_status_parser = ants_subparsers.add_parser("status", help="Show job status counts")
+    ants_status_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_status_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+
+    ants_worker_parser = ants_subparsers.add_parser("worker", help="Run a single ant worker")
+    ants_worker_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_worker_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_worker_parser.add_argument("--worker-id", type=str, required=True, help="Worker ID")
+    ants_worker_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+    ants_worker_parser.add_argument("--poll-ms", type=int, default=250, help="Poll interval in ms")
+    ants_worker_parser.add_argument("--ttl", type=int, default=300, help="Lease TTL in seconds")
+    ants_worker_parser.add_argument("--max-idle-polls", type=int, default=20, help="Max idle polls before exit")
+
+    bundle_parser = subparsers.add_parser("bundle", help="Bundle commands (Phase 5)")
+    bundle_subparsers = bundle_parser.add_subparsers(dest="bundle_command", help="Bundle commands")
+
+    bundle_build_parser = bundle_subparsers.add_parser("build", help="Build bundle from completed job")
+    bundle_build_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    bundle_build_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    bundle_build_parser.add_argument("--out", type=Path, required=True, help="Output directory")
+
+    bundle_verify_parser = bundle_subparsers.add_parser("verify", help="Verify bundle integrity")
+    bundle_verify_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
+
+    bundle_run_parser = bundle_subparsers.add_parser("run", help="Run bundle and output execution result")
+    bundle_run_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
+    bundle_run_parser.add_argument("--receipt-out", type=Path, required=False, help="Receipt output path (default: <bundle>/receipt.json)")
 
     args = parser.parse_args()
 
@@ -522,15 +963,8 @@ def main():
         "verify": cmd_verify,
         "get": cmd_get,
         "extract": cmd_extract,
-        "symbols": cmd_symbols_add,
-        "resolve": cmd_resolve,
-        "cassette": cmd_cassette_verify
+        "resolve": cmd_resolve
     }
-
-    if args.command not in commands:
-        print(f"[FAIL] Unknown command: {args.command}")
-        parser.print_help()
-        sys.exit(1)
 
     if args.command == "symbols":
         symbols_commands = {
@@ -545,7 +979,7 @@ def main():
             parser.print_help()
             sys.exit(1)
 
-        sys.exit(commands[args.command](args))
+        sys.exit(symbols_commands[args.symbols_command](args))
 
     if args.command == "cassette":
         cassette_commands = {
@@ -561,6 +995,58 @@ def main():
             sys.exit(1)
 
         sys.exit(cassette_commands[args.cassette_command](args))
+
+    if args.command == "plan":
+        plan_commands = {
+            "request": cmd_plan_request,
+            "verify": cmd_cassette_verify
+        }
+        
+        if args.plan_command not in plan_commands:
+            print(f"[FAIL] Unknown plan command: {args.plan_command}")
+            parser.print_help()
+            sys.exit(1)
+        
+        sys.exit(plan_commands[args.plan_command](args))
+
+    if args.command == "execute":
+        sys.exit(cmd_execute(args))
+
+    if args.command == "ants":
+        ants_commands = {
+            "spawn": cmd_ants_spawn,
+            "run": cmd_ants_spawn,
+            "worker": cmd_ants_worker,
+            "status": cmd_ants_status
+        }
+        
+        if args.ants_command not in ants_commands:
+            print(f"[FAIL] Unknown ants command: {args.ants_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(ants_commands[args.ants_command](args))
+
+    if args.command == "bundle":
+        bundle_commands = {
+            "build": cmd_bundle_build,
+            "verify": cmd_bundle_verify,
+            "run": cmd_bundle_run
+        }
+
+        if args.bundle_command not in bundle_commands:
+            print(f"[FAIL] Unknown bundle command: {args.bundle_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(bundle_commands[args.bundle_command](args))
+
+    if args.command not in commands:
+        print(f"[FAIL] Unknown command: {args.command}")
+        parser.print_help()
+        sys.exit(1)
+
+    sys.exit(commands[args.command](args))
 
 
 if __name__ == '__main__':

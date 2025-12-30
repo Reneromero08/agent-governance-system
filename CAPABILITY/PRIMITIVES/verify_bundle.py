@@ -846,3 +846,8 @@ class BundleVerifier:
             return True
         except (ValueError, InvalidSignature):
             return False
+
+def verify_bundle(run_dir: Path, strict: bool = False, check_proof: bool = True) -> dict:
+    """Standalone convenience wrapper for BundleVerifier.verify_bundle_spectrum05."""
+    verifier = BundleVerifier()
+    return verifier.verify_bundle_spectrum05(run_dir, strict=strict, check_proof=check_proof)

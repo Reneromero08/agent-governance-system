@@ -1,6 +1,6 @@
 2025-12-29
-Tokens (cl100k_base): 346769
-Files included: 76
+Tokens (cl100k_base): 385865
+Files included: 88
 # Codebase Combined: CAT_CHAT
 
 Source: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CHAT
@@ -13,6 +13,7 @@ Source: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CHAT
 - COMMIT_PLAN.md
 - **CORTEX/**
   - **_generated/**
+    - system1.db
     - system3.db
   - **db/**
     - system1.db
@@ -21,6 +22,8 @@ Source: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CHAT
   - plan_output.schema.json
   - plan_request.schema.json
   - plan_step.schema.json
+- add_execute_patch.py
+- apply_execute_patch.py
 - **catalytic_chat/**
   - README.md
   - TODO_PHASE2.md
@@ -31,24 +34,42 @@ Source: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CHAT
   - __init__.py
   - **__pycache__/**
     - __init__.cpython-311.pyc
+    - __init__.cpython-313.pyc
+    - ants.cpython-311.pyc
+    - ants.cpython-313.pyc
     - cli.cpython-311.pyc
+    - cli.cpython-313.pyc
     - message_cassette.cpython-311.pyc
+    - message_cassette.cpython-313.pyc
     - message_cassette_db.cpython-311.pyc
+    - message_cassette_db.cpython-313.pyc
+    - paths.cpython-311.pyc
     - planner.cpython-311.pyc
+    - planner.cpython-313.pyc
     - section_extractor.cpython-311.pyc
+    - section_extractor.cpython-313.pyc
     - section_indexer.cpython-311.pyc
+    - section_indexer.cpython-313.pyc
     - slice_resolver.cpython-311.pyc
+    - slice_resolver.cpython-313.pyc
     - symbol_registry.cpython-311.pyc
+    - symbol_registry.cpython-313.pyc
     - symbol_resolver.cpython-311.pyc
+    - symbol_resolver.cpython-313.pyc
+  - ants.py
   - cli.py
+  - cli.py.backup
   - **experimental/**
     - __init__.py
     - **__pycache__/**
       - __init__.cpython-311.pyc
+      - __init__.cpython-313.pyc
       - vector_store.cpython-311.pyc
+      - vector_store.cpython-313.pyc
     - vector_store.py
   - message_cassette.py
   - message_cassette_db.py
+  - paths.py
   - planner.py
   - section_extractor.py
   - section_indexer.py
@@ -104,16 +125,34 @@ Source: D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\CAT_CHAT
 - test_invariants.db
 - **tests/**
   - **__pycache__/**
+    - conftest.cpython-311-pytest-9.0.2.pyc
+    - conftest.cpython-313-pytest-9.0.2.pyc
+    - test_ants.cpython-311-pytest-9.0.2.pyc
+    - test_ants.cpython-313-pytest-9.0.2.pyc
+    - test_execution.cpython-311-pytest-9.0.2.pyc
+    - test_execution.cpython-313-pytest-9.0.2.pyc
+    - test_execution_parallel.cpython-311-pytest-9.0.2.pyc
+    - test_execution_parallel.cpython-313-pytest-9.0.2.pyc
     - test_message_cassette.cpython-311-pytest-9.0.2.pyc
+    - test_message_cassette.cpython-313-pytest-9.0.2.pyc
     - test_placeholder.cpython-311-pytest-9.0.2.pyc
+    - test_placeholder.cpython-313-pytest-9.0.2.pyc
     - test_planner.cpython-311-pytest-9.0.2.pyc
+    - test_planner.cpython-313-pytest-9.0.2.pyc
     - test_vector_store.cpython-311-pytest-9.0.2.pyc
+    - test_vector_store.cpython-313-pytest-9.0.2.pyc
+  - conftest.py
   - **fixtures/**
     - plan_request_files.json
     - plan_request_invalid_symbol.json
     - plan_request_max_steps_exceeded.json
     - plan_request_min.json
+    - plan_request_no_symbols.json
+    - plan_request_parallel.json
     - plan_request_slice_all_forbidden.json
+  - test_ants.py
+  - test_execution.py
+  - test_execution_parallel.py
   - test_message_cassette.py
   - test_placeholder.py
   - test_planner.py
@@ -340,6 +379,48 @@ CLI Output:
 
 ---
 
+### Chunk 6: Phase 4.3 Ants (Multi-worker Agent Runners)
+
+**Files Changed:**
+- `catalytic_chat/ants.py` (new)
+- `catalytic_chat/cli.py` (modified - added ants commands)
+- `tests/test_ants.py` (new)
+- `tests/conftest.py` (new - for PYTHONPATH setup)
+
+**Commit Message:**
+```
+feat(cat_chat): implement phase 4.3 ants multi-worker agent runners
+
+ants.py:
+- AntConfig dataclass with worker configuration (run_id, job_id,
+  worker_id, repo_root, poll_interval_ms, ttl_seconds, continue_on_fail,
+  max_idle_polls)
+- AntWorker class with run() method:
+  - Poll loop claiming next step via claim_next_step()
+  - Execute step via execute_step() with global budget check
+  - Exit codes: 0 (clean), 1 (failure), 2 (invariant/DB error)
+- spawn_ants() function:
+  - Spawn N OS processes via subprocess
+  - Worker IDs: ant_<run>_<job>_<i>
+  - Write manifest to CORTEX/_generated/ants_manifest_<run>_<job>.json
+  - Collect exit codes with priority: 2 > 1 > 0
+- run_ant_worker() function: CLI entrypoint wrapper
+
+CLI (cli.py):
+- ants spawn --run-id <run> --job-id <job> -n <N> [--continue-on-fail]
+- ants worker --run-id <run> --job-id <job> --worker-id <id>
+  [--continue-on-fail] [--poll-ms 250] [--ttl 300] [--max-idle-polls 20]
+
+Tests (test_ants.py):
+- test_ant_worker_claims_and_executes: single worker executes all steps
+- test_ants_spawn_two_workers_no_duplicates: two workers, no dup receipts
+- test_ant_stops_on_fail_by_default: exit 1 on first failure
+- test_ant_continue_on_fail_completes_others: continue but exit 1 if any fail
+- test_ant_spawn_multiprocess: end-to-end subprocess spawn with manifest
+```
+
+---
+
 ## Commit Plan
 
 **Recommended Order:**
@@ -348,6 +429,7 @@ CLI Output:
 3. Chunk 3 (Phase 3 Core) - main feature implementation
 4. Chunk 4 (Phase 3 CLI) - adds commands for chunk 3
 5. Chunk 5 (Phase 3 Hardening) - strengthens tests and verification
+6. Chunk 6 (Phase 4.3 Ants) - multi-worker agent runners
 
 **All tests pass:**
 ```bash
@@ -358,6 +440,11 @@ python -m pytest -q
 ```bash
 python -m catalytic_chat.cli cassette verify --run-id r0
 # Expected output: PASS: All invariants verified
+
+# Ants verification:
+python -m catalytic_chat.cli plan request --request-file tests/fixtures/plan_request_parallel.json
+python -m catalytic_chat.cli ants spawn --run-id test_parallel_request --job-id <job_id> -n 4
+python -m catalytic_chat.cli cassette verify --run-id test_parallel_request
 ```
 
 ---
@@ -369,7 +456,8 @@ python -m catalytic_chat.cli cassette verify --run-id r0
 | tests/test_placeholder.py | 1 | PASS |
 | tests/test_vector_store.py | 10 | PASS |
 | tests/test_message_cassette.py | 21 | PASS |
-| **Total** | **32** | **PASS** |
+| tests/test_ants.py | 5 | PASS |
+| **Total** | **37** | **PASS** |
 
 ---
 
@@ -391,11 +479,14 @@ python -m catalytic_chat.cli cassette verify --run-id r0
 | `catalytic_chat/experimental/vector_store.py` | New |
 | `catalytic_chat/message_cassette_db.py` | New |
 | `catalytic_chat/message_cassette.py` | New |
+| `catalytic_chat/ants.py` | New |
 | `catalytic_chat/cli.py` | Modified |
 | `tests/test_vector_store.py` | New |
 | `tests/test_message_cassette.py` | New |
+| `tests/test_ants.py` | New |
+| `tests/conftest.py` | New |
 
-**Total New Files:** ~12
+**Total New Files:** ~16
 **Total Modified Files:** ~4
 **Total Moved Files:** ~18
 
@@ -500,6 +591,343 @@ CAT_CHAT/
 ```
 
 ### END OF FILE: README.md
+
+
+---
+
+### START OF FILE: add_execute_patch.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Patch file to add cmd_execute function to cli.py
+"""
+
+import re
+
+# Read the file
+with open('catalytic_chat/cli.py', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# Find where execute_parser should be added (before plan_parser)
+if 'execute_parser = subparsers.add_parser("execute"' in content:
+    print("execute_parser already exists")
+    exit(0)
+
+# Find where to insert execute_parser (before plan_parser = ...)
+insert_pattern = r'(plan_parser = subparsers\.add_parser\("plan")'
+match = re.search(insert_pattern, content)
+if not match:
+    print("Could not find insertion point")
+    exit(1)
+
+insert_point = match.start()
+
+# Find the line number for insertion
+lines_before = content[:insert_point]
+lines_after = content[insert_point:]
+
+# Build the execute_parser definition
+execute_parser_code = '''    execute_parser = subparsers.add_parser("execute", help="Execute plan steps (Phase 4.1)")
+    execute_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    execute_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+
+'''
+
+# Build the cmd_execute function
+cmd_execute_code = '''
+
+def cmd_execute(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    
+    try:
+        print(f"[INFO] Executing plan: run_id={args.run_id}, job_id={args.job_id}")
+        
+        step_count = 0
+        success_count = 0
+        
+        while True:
+            try:
+                result = cassette.claim_step(
+                    run_id=args.run_id,
+                    worker_id="system",
+                    ttl_seconds=300
+                )
+                
+                step_count += 1
+                print(f"[STEP {step_count}] Claimed: {result['step_id']}")
+                
+                receipt = cassette.execute_step(
+                    run_id=args.run_id,
+                    step_id=result["step_id"],
+                    worker_id="system",
+                    fencing_token=result["fencing_token"],
+                    repo_root=args.repo_root
+                )
+                
+                if receipt.get("status") == "SUCCESS":
+                    success_count += 1
+                    print(f"[STEP {step_count}] SUCCESS")
+                    
+                    if "section_id" in receipt:
+                        print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                        if "content_hash" in receipt:
+                            print(f"      Hash: {receipt['content_hash'][:16]}...")
+                        if "bytes_read" in receipt:
+                            print(f"      Bytes: {receipt['bytes_read']}")
+                    elif "symbol_id" in receipt:
+                        print(f"      Symbol: {receipt['symbol_id']}")
+                        if "section_id" in receipt:
+                            print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                else:
+                    print(f"[STEP {step_count}] FAILED: {receipt.get('error', 'Unknown error')}")
+                    return 1
+                    
+            except MessageCassetteError as e:
+                if "No pending steps" in str(e):
+                    print(f"[DONE] No more pending steps")
+                    print(f"[SUMMARY] {step_count} steps processed, {success_count} succeeded")
+                    return 0
+                else:
+                    print(f"[FAIL] {e}")
+                    return 1
+                    
+    except Exception as e:
+        print(f"[FAIL] Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+    finally:
+        cassette.close()
+
+'''
+
+# Add execute command handling in the args.command == "cassette" block
+# We need to add it before the plan command check
+
+# Find where plan command handling starts and add execute before it
+plan_command_pattern = r'(if args\.command == "plan":)'
+plan_match = re.search(plan_command_pattern, content)
+if not plan_match:
+    print("Could not find plan command handler")
+    exit(1)
+
+plan_start = plan_match.start()
+
+# Add cmd_execute call before plan command handler
+new_main_code = lines_before[:plan_start]
+
+# Add the execute command handler
+new_main_code += '''
+    if args.command == "execute":
+        return cmd_execute(args)
+    
+'''
+
+# Add the rest after the execute handler
+new_main_code += lines_after[plan_start:]
+
+# Write the patched file
+with open('catalytic_chat/cli.py', 'w', encoding='utf-8') as f:
+    f.write(new_main_code)
+
+print("Patched successfully")
+
+
+```
+
+### END OF FILE: add_execute_patch.py
+
+
+---
+
+### START OF FILE: apply_execute_patch.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Patch file to add cmd_execute function to cli.py
+"""
+
+import re
+
+# Read the file
+with open('catalytic_chat/cli.py', 'r', encoding='utf-8') as f:
+    content = f.read()
+
+# Find execute_parser and insert cmd_execute before plan_parser
+execute_parser_pattern = r'(execute_parser = subparsers\.add_parser\("execute")'
+match = re.search(execute_parser_pattern, content)
+if not match:
+    print("Could not find execute_parser")
+    exit(0)
+
+insert_point = match.start()
+
+# Build the execute_parser and cmd_execute function
+execute_parser_code = '''    execute_parser = subparsers.add_parser("execute", help="Execute plan steps (Phase 4.1)")
+    execute_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    execute_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+
+def cmd_execute(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    
+    try:
+        print(f"[INFO] Executing plan: run_id={args.run_id}, job_id={args.job_id}")
+        
+        step_count = 0
+        success_count = 0
+        
+        while True:
+            try:
+                result = cassette.claim_step(
+                    run_id=args.run_id,
+                    worker_id="system",
+                    ttl_seconds=300
+                )
+                
+                step_count += 1
+                print(f"[STEP {step_count}] Claimed: {result['step_id']}")
+                
+                receipt = cassette.execute_step(
+                    run_id=args.run_id,
+                    step_id=result["step_id"],
+                    worker_id="system",
+                    fencing_token=result["fencing_token"],
+                    repo_root=args.repo_root
+                )
+                
+                if receipt.get("status") == "SUCCESS":
+                    success_count += 1
+                    print(f"[STEP {step_count}] SUCCESS")
+                    
+                    if "section_id" in receipt:
+                        print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                        if "content_hash" in receipt:
+                            print(f"      Hash: {receipt['content_hash'][:16]}...")
+                        if "bytes_read" in receipt:
+                            print(f"      Bytes: {receipt['bytes_read']}")
+                    elif "symbol_id" in receipt:
+                        print(f"      Symbol: {receipt['symbol_id']}")
+                        if "section_id" in receipt:
+                            print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                else:
+                    print(f"[STEP {step_count}] FAILED: {receipt.get('error', 'Unknown error')}")
+                    return 1
+                    
+            except MessageCassetteError as e:
+                if "No pending steps" in str(e):
+                    print(f"[DONE] No more pending steps")
+                    print(f"[SUMMARY] {step_count} steps processed, {success_count} succeeded")
+                    return 0
+                else:
+                    print(f"[FAIL] {e}")
+                    return 1
+                    
+    except Exception as e:
+        print(f"[FAIL] Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+    finally:
+        cassette.close()
+
+'''
+
+# Insert the new code
+lines_before = content[:insert_point]
+lines_after = content[insert_point:]
+
+new_content = lines_before + execute_parser_code + "\n\n" + '''
+def cmd_execute(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    
+    try:
+        print(f"[INFO] Executing plan: run_id={args.run_id}, job_id={args.job_id}")
+        
+        step_count = 0
+        success_count = 0
+        
+        while True:
+            try:
+                result = cassette.claim_step(
+                    run_id=args.run_id,
+                    worker_id="system",
+                    ttl_seconds=300
+                )
+                
+                step_count += 1
+                print(f"[STEP {step_count}] Claimed: {result['step_id']}")
+                
+                receipt = cassette.execute_step(
+                    run_id=args.run_id,
+                    step_id=result["step_id"],
+                    worker_id="system",
+                    fencing_token=result["fencing_token"],
+                    repo_root=args.repo_root
+                )
+                
+                if receipt.get("status") == "SUCCESS":
+                    success_count += 1
+                    print(f"[STEP {step_count}] SUCCESS")
+                    
+                    if "section_id" in receipt:
+                        print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                        if "content_hash" in receipt:
+                            print(f"      Hash: {receipt['content_hash'][:16]}...")
+                        if "bytes_read" in receipt:
+                            print(f"      Bytes: {receipt['bytes_read']}")
+                    elif "symbol_id" in receipt:
+                        print(f"      Symbol: {receipt['symbol_id']}")
+                        if "section_id" in receipt:
+                            print(f"      Section: {receipt['section_id']}")
+                        if "slice" in receipt:
+                            print(f"      Slice: {receipt['slice']}")
+                else:
+                    print(f"[STEP {step_count}] FAILED: {receipt.get('error', 'Unknown error')}")
+                    return 1
+                    
+            except MessageCassetteError as e:
+                if "No pending steps" in str(e):
+                    print(f"[DONE] No more pending steps")
+                    print(f"[SUMMARY] {step_count} steps processed, {success_count} succeeded")
+                    return 0
+                else:
+                    print(f"[FAIL] {e}")
+                    return 1
+                    
+    except Exception as e:
+        print(f"[FAIL] Unexpected error: {e}")
+        import traceback
+        traceback.print_exc()
+        return 1
+    finally:
+        cassette.close()
+
+''' + lines_after
+
+# Write the patched file
+with open('catalytic_chat/cli.py', 'w', encoding='utf-8') as f:
+    f.write(new_content)
+
+print("Patched successfully")
+
+
+```
+
+### END OF FILE: apply_execute_patch.py
 
 
 ---
@@ -926,6 +1354,19 @@ See [the docs](https://docs.pytest.org/en/stable/how-to/cache.html) for more inf
   "test_chat_system.py::TestMessageWriter::test_write_message_with_parent",
   "test_chat_system.py::TestMessageWriter::test_write_short_message_single_chunk",
   "test_chat_system.py::TestMessageWriter::test_write_simple_message",
+  "tests/test_ants.py::test_ant_continue_on_fail_completes_others",
+  "tests/test_ants.py::test_ant_spawn_multiprocess",
+  "tests/test_ants.py::test_ant_stops_on_fail_by_default",
+  "tests/test_ants.py::test_ant_worker_claims_and_executes",
+  "tests/test_ants.py::test_ants_run_alias_calls_spawn",
+  "tests/test_ants.py::test_ants_spawn_two_workers_no_duplicates",
+  "tests/test_ants.py::test_ants_status_counts",
+  "tests/test_execution.py::test_plan_request_idempotent_no_duplicate_steps",
+  "tests/test_execution.py::test_steps_created_after_plan_request",
+  "tests/test_execution_parallel.py::test_continue_on_fail_behavior",
+  "tests/test_execution_parallel.py::test_execute_parallel_claims_all_steps_once",
+  "tests/test_execution_parallel.py::test_execute_parallel_idempotent_rerun",
+  "tests/test_execution_parallel.py::test_global_budget_enforced_under_parallelism",
   "tests/test_message_cassette.py::test_claim_deterministic_order",
   "tests/test_message_cassette.py::test_claim_fencing_token_increments",
   "tests/test_message_cassette.py::test_claim_no_pending_steps_raises",
@@ -949,6 +1390,7 @@ See [the docs](https://docs.pytest.org/en/stable/how-to/cache.html) for more inf
   "tests/test_message_cassette.py::test_verify_cassette_no_issues",
   "tests/test_placeholder.py::test_placeholder",
   "tests/test_planner.py::test_cli_dry_run",
+  "tests/test_planner.py::test_idempotency",
   "tests/test_planner.py::test_plan_deterministic",
   "tests/test_planner.py::test_planner_imports",
   "tests/test_planner.py::test_slice_all_rejected",
@@ -1327,6 +1769,207 @@ __version__ = "0.1.0"
 
 ---
 
+### START OF FILE: catalytic_chat\ants.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Ants: Multi-worker agent runners (Phase 4.3)
+
+Durable, repo-local ANT worker runtime that can run independently
+and safely cooperate through the cassette DB.
+"""
+
+import json
+import sys
+import time
+from dataclasses import dataclass, field
+from pathlib import Path
+from typing import Optional, Dict, Any, List, Tuple
+
+from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
+
+
+@dataclass
+class AntConfig:
+    run_id: str
+    job_id: str
+    worker_id: str
+    repo_root: Path
+    poll_interval_ms: int = 250
+    ttl_seconds: int = 300
+    continue_on_fail: bool = False
+    max_idle_polls: int = 20
+
+
+class AntWorker:
+    
+    def __init__(self, config: AntConfig):
+        self.config = config
+        self.cassette = MessageCassette(repo_root=config.repo_root)
+    
+    def run(self) -> int:
+        idle_count = 0
+        
+        try:
+            while idle_count < self.config.max_idle_polls:
+                claim_result = self.cassette.claim_next_step(
+                    run_id=self.config.run_id,
+                    job_id=self.config.job_id,
+                    worker_id=self.config.worker_id,
+                    ttl_seconds=self.config.ttl_seconds
+                )
+                
+                if claim_result is None:
+                    idle_count += 1
+                    time.sleep(self.config.poll_interval_ms / 1000)
+                    continue
+                
+                idle_count = 0
+                step_id = claim_result["step_id"]
+                fencing_token = claim_result["fencing_token"]
+                
+                try:
+                    receipt = self.cassette.execute_step(
+                        run_id=self.config.run_id,
+                        step_id=step_id,
+                        worker_id=self.config.worker_id,
+                        fencing_token=fencing_token,
+                        repo_root=self.config.repo_root,
+                        check_global_budget=True
+                    )
+                    
+                    if receipt.get("status") != "SUCCESS":
+                        if not self.config.continue_on_fail:
+                            print(f"[FAIL] {step_id}: {receipt.get('error', 'Unknown error')}")
+                            return 1
+                except MessageCassetteError as e:
+                    print(f"[FAIL] {step_id}: {e}")
+                    if not self.config.continue_on_fail:
+                        return 1
+                    else:
+                        continue
+            
+            return 0
+            
+        except MessageCassetteError as e:
+            print(f"[FAIL] Invariant/DB error: {e}")
+            return 2
+        finally:
+            self.cassette.close()
+
+
+def spawn_ants(
+    run_id: str,
+    job_id: str,
+    num_workers: int,
+    repo_root: Path,
+    continue_on_fail: bool = False
+) -> int:
+    processes: List[Tuple[Any, str]] = []
+    
+    cortex_dir = repo_root / "CORTEX" / "_generated"
+    cortex_dir.mkdir(parents=True, exist_ok=True)
+    
+    manifest_path = cortex_dir / f"ants_manifest_{run_id}_{job_id}.json"
+    
+    started_at = None
+    
+    try:
+        import subprocess
+        
+        for i in range(num_workers):
+            worker_id = f"ant_{run_id}_{job_id}_{i}"
+            
+            cmd = [
+                sys.executable,
+                "-m",
+                "catalytic_chat.cli",
+                "ants",
+                "worker",
+                "--run-id", run_id,
+                "--job-id", job_id,
+                "--worker-id", worker_id
+            ]
+            
+            if continue_on_fail:
+                cmd.append("--continue-on-fail")
+            
+            process = subprocess.Popen(
+                cmd,
+                cwd=repo_root,
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE
+            )
+            
+            processes.append((process, worker_id))
+            
+            if started_at is None:
+                started_at = time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime())
+        
+        manifest = {
+            "run_id": run_id,
+            "job_id": job_id,
+            "started_at": started_at,
+            "workers": [{"worker_id": w, "pid": p.pid} for p, w in processes],
+            "argv": sys.argv
+        }
+        
+        with open(manifest_path, 'w') as f:
+            json.dump(manifest, f, indent=2)
+        
+        exit_codes = []
+        for process, worker_id in processes:
+            process.wait()
+            exit_codes.append(process.returncode)
+        
+        if any(code == 2 for code in exit_codes):
+            return 2
+        elif any(code == 1 for code in exit_codes) and not continue_on_fail:
+            return 1
+        else:
+            return 0
+            
+    except Exception as e:
+        print(f"[FAIL] Spawn error: {e}")
+        for process, worker_id in processes:
+            process.terminate()
+        return 2
+
+
+def run_ant_worker(
+    run_id: str,
+    job_id: str,
+    worker_id: str,
+    repo_root: Path,
+    continue_on_fail: bool = False,
+    poll_interval_ms: int = 250,
+    ttl_seconds: int = 300,
+    max_idle_polls: int = 20
+) -> int:
+    config = AntConfig(
+        run_id=run_id,
+        job_id=job_id,
+        worker_id=worker_id,
+        repo_root=repo_root,
+        poll_interval_ms=poll_interval_ms,
+        ttl_seconds=ttl_seconds,
+        continue_on_fail=continue_on_fail,
+        max_idle_polls=max_idle_polls
+    )
+    
+    worker = AntWorker(config)
+    return worker.run()
+
+
+```
+
+### END OF FILE: catalytic_chat\ants.py
+
+
+---
+
 ### START OF FILE: catalytic_chat\cli.py
 
 ```python
@@ -1350,7 +1993,8 @@ from catalytic_chat.section_indexer import SectionIndexer, build_index
 from catalytic_chat.symbol_registry import SymbolRegistry, SymbolError
 from catalytic_chat.symbol_resolver import SymbolResolver, ResolverError, resolve_symbol
 from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
-from catalytic_chat.planner import Planner, PlannerError, post_request_and_plan, verify_plan_stored
+from catalytic_chat.planner import Planner, PlannerError, post_request_and_plan
+from catalytic_chat.ants import spawn_ants, run_ant_worker
 
 
 def cmd_build(args) -> int:
@@ -1362,15 +2006,14 @@ def cmd_build(args) -> int:
     Returns:
         Exit code (0 for success)
     """
-    indexer = SectionIndexer(
-        repo_root=args.repo_root,
-        substrate_mode=args.substrate
-    )
-
     try:
-        index_hash = indexer.build(incremental=args.incremental)
-        print(f"[OK] Index built successfully")
-        print(f"      hash: {index_hash[:16]}...")
+        index_hash = build_index(
+            repo_root=args.repo_root,
+            substrate_mode=args.substrate,
+            incremental=args.incremental
+        )
+        print(f"[OK] Index built")
+        print(f"      index_hash: {index_hash[:16]}...")
         return 0
     except Exception as e:
         print(f"[FAIL] Build failed: {e}")
@@ -1416,9 +2059,9 @@ def cmd_get(args) -> int:
     )
 
     try:
-        slice_expr = getattr(args, 'slice', None)
+        section_id = getattr(args, 'slice', None)
         content, content_hash, applied_slice, lines_applied, chars_applied = \
-            indexer.get_section_content(args.section_id, slice_expr)
+            indexer.get_section_content(args.section_id, section_id)
 
         print(content, end='')
         sys.stderr.write(f"section_id: {args.section_id}\n")
@@ -1652,7 +2295,7 @@ def cmd_cassette_verify(args) -> int:
 def cmd_cassette_post(args) -> int:
     cassette = MessageCassette(repo_root=args.repo_root)
     try:
-        with open(args.request_file, 'r') as f:
+        with open(args.json, 'r') as f:
             payload = json.load(f)
         
         message_id, job_id = cassette.post_message(
@@ -1737,25 +2380,6 @@ def cmd_cassette_complete(args) -> int:
         cassette.close()
 
 
-def cmd_cassette_plan_verify(args) -> int:
-    try:
-        matches = verify_plan_stored(
-            run_id=args.run_id,
-            request_id=args.request_id,
-            repo_root=args.repo_root
-        )
-        
-        if matches:
-            print("[OK] Plan hash matches stored plan")
-            return 0
-        else:
-            print("[FAIL] Plan hash mismatch")
-            return 1
-    except PlannerError as e:
-        sys.stderr.write(f"[FAIL] {e}\n")
-        return 1
-
-
 def cmd_plan_request(args) -> int:
     try:
         plan_output = None
@@ -1771,7 +2395,7 @@ def cmd_plan_request(args) -> int:
             with open(args.request_file, 'r') as f:
                 request = json.load(f)
             
-            message_id, job_id, steps_ids = post_request_and_plan(
+            message_id, job_id, step_ids = post_request_and_plan(
                 run_id=request.get("run_id", "default"),
                 request_payload=request,
                 idempotency_key=request.get("request_id"),
@@ -1781,8 +2405,8 @@ def cmd_plan_request(args) -> int:
             print(f"[OK] Plan created")
             print(f"      message_id: {message_id}")
             print(f"      job_id: {job_id}")
-            print(f"      steps: {len(steps_ids)}")
-            for i, step_id in enumerate(steps_ids, 1):
+            print(f"      steps: {len(step_ids)}")
+            for i, step_id in enumerate(step_ids, 1):
                 print(f"      step_id_{i}: {step_id}")
         
         return 0
@@ -1795,6 +2419,922 @@ def cmd_plan_request(args) -> int:
     except json.JSONDecodeError as e:
         sys.stderr.write(f"[FAIL] Invalid JSON: {e}\n")
         return 1
+
+
+def cmd_execute(args) -> int:
+    """Execute PENDING steps for a given job_id in ordinal order.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    if args.workers > 1:
+        return cmd_execute_parallel(args)
+    
+    cassette = MessageCassette(repo_root=args.repo_root)
+    worker_id = f"cli_worker_{args.run_id}"
+    
+    try:
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT s.step_id, s.ordinal
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'PENDING'
+            ORDER BY s.ordinal ASC
+        """, (args.run_id, args.job_id))
+        
+        steps = cursor.fetchall()
+        
+        if not steps:
+            print(f"[INFO] No PENDING steps found for run_id={args.run_id}, job_id={args.job_id}")
+            return 0
+        
+        for step_row in steps:
+            step_id = step_row["step_id"]
+            ordinal = step_row["ordinal"]
+            
+            try:
+                claim_result = cassette.claim_step(
+                    run_id=args.run_id,
+                    worker_id=worker_id,
+                    ttl_seconds=300
+                )
+                
+                if claim_result["step_id"] != step_id:
+                    print(f"[FAIL] step_id {step_id}: Claimed wrong step {claim_result['step_id']}")
+                    return 1
+                
+                receipt = cassette.execute_step(
+                    run_id=args.run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=claim_result["fencing_token"],
+                    repo_root=args.repo_root
+                )
+                
+                if receipt.get("status") == "SUCCESS":
+                    print(f"[OK] {step_id}")
+                else:
+                    error = receipt.get("error", "Unknown error")
+                    print(f"[FAIL] {step_id}: {error}")
+                    return 1
+                    
+            except MessageCassetteError as e:
+                print(f"[FAIL] {step_id}: {e}")
+                return 1
+        
+        return 0
+        
+    finally:
+        cassette.close()
+
+
+def cmd_execute_parallel(args) -> int:
+    """Execute PENDING steps for a given job_id using parallel workers.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+    import threading
+    
+    results_lock = threading.Lock()
+    stop_flag = threading.Event()
+    
+    success_count = 0
+    failure_count = 0
+    
+    def worker_task(worker_index: int) -> tuple:
+        nonlocal success_count, failure_count
+        
+        cassette = MessageCassette(repo_root=args.repo_root)
+        local_success = 0
+        local_failure = 0
+        worker_id = f"cli_worker_{args.run_id}_w{worker_index}"
+        
+        try:
+            while not stop_flag.is_set():
+                try:
+                    claim_result = cassette.claim_next_step(
+                        run_id=args.run_id,
+                        job_id=args.job_id,
+                        worker_id=worker_id,
+                        ttl_seconds=300
+                    )
+                    
+                    if claim_result is None:
+                        break
+                    
+                    step_id = claim_result["step_id"]
+                    
+                    receipt = cassette.execute_step(
+                        run_id=args.run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=claim_result["fencing_token"],
+                        repo_root=args.repo_root,
+                        check_global_budget=True
+                    )
+                    
+                    with results_lock:
+                        if receipt.get("status") == "SUCCESS":
+                            print(f"[OK] {step_id}")
+                            local_success += 1
+                        else:
+                            error = receipt.get("error", "Unknown error")
+                            print(f"[FAIL] {step_id}: {error}")
+                            local_failure += 1
+                    
+                    if local_failure > 0 and not args.continue_on_fail:
+                        stop_flag.set()
+                        break
+                        
+                except MessageCassetteError as e:
+                    with results_lock:
+                        print(f"[FAIL] {e}")
+                        local_failure += 1
+                    stop_flag.set()
+                    break
+        finally:
+            cassette.close()
+        
+        return (local_success, local_failure)
+    
+    with ThreadPoolExecutor(max_workers=args.workers) as executor:
+        futures = [executor.submit(worker_task, i) for i in range(args.workers)]
+        
+        for future in as_completed(futures):
+            local_success, local_failure = future.result()
+            with results_lock:
+                success_count += local_success
+                failure_count += local_failure
+    
+    if failure_count > 0:
+        print(f"[FAIL] job failed: {success_count} succeeded, {failure_count} failed")
+        return 1
+    else:
+        print(f"[OK] job complete")
+        return 0
+
+
+def cmd_ants_spawn(args) -> int:
+    """Spawn multiple ant workers.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    try:
+        exit_code = spawn_ants(
+            run_id=args.run_id,
+            job_id=args.job_id,
+            num_workers=args.n,
+            repo_root=args.repo_root or Path.cwd(),
+            continue_on_fail=args.continue_on_fail
+        )
+        
+        if exit_code == 0:
+            print("[OK] All ants completed successfully")
+        elif exit_code == 1:
+            print("[FAIL] Some ants failed")
+        else:
+            print("[FAIL] Invariant/DB error occurred")
+        
+        return exit_code
+    except Exception as e:
+        print(f"[FAIL] Spawn failed: {e}")
+        return 2
+
+
+def cmd_ants_worker(args) -> int:
+    """Run a single ant worker.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, non-zero on failure)
+    """
+    try:
+        exit_code = run_ant_worker(
+            run_id=args.run_id,
+            job_id=args.job_id,
+            worker_id=args.worker_id,
+            repo_root=args.repo_root or Path.cwd(),
+            continue_on_fail=args.continue_on_fail,
+            poll_interval_ms=args.poll_ms,
+            ttl_seconds=args.ttl,
+            max_idle_polls=args.max_idle_polls
+        )
+        
+        if exit_code == 0:
+            print("[OK] Worker completed")
+        elif exit_code == 1:
+            print("[FAIL] Worker failed")
+        else:
+            print("[FAIL] Invariant/DB error occurred")
+        
+        return exit_code
+    except Exception as e:
+        print(f"[FAIL] Worker failed: {e}")
+        return 2
+
+
+def cmd_ants_status(args) -> int:
+    """Show job status counts.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success, 1 on failure)
+    """
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        status = cassette.get_job_status(run_id=args.run_id, job_id=args.job_id)
+        
+        if status is None:
+            print("[FAIL] job_id or run_id not found")
+            return 1
+        
+        print(f"PENDING: {status['pending']}")
+        print(f"LEASED: {status['leased']}")
+        print(f"COMMITTED: {status['committed']}")
+        print(f"RECEIPTS: {status['receipts']}")
+        print(f"WORKERS_SEEN: {status['workers_seen']}")
+        
+        return 0
+    except MessageCassetteError as e:
+        print(f"[FAIL] {e}")
+        return 1
+    finally:
+        cassette.close()
+
+
+def main():
+    """Main CLI entry point."""
+    parser = argparse.ArgumentParser(
+        description="Catalytic Chat CLI",
+        epilog="Roadmap Phase: Phase 1 — Substrate + deterministic indexing"
+    )
+
+    parser.add_argument(
+        "--repo-root",
+        type=Path,
+        default=None,
+        help="Repository root path (default: current working directory)"
+    )
+    parser.add_argument(
+        "--substrate",
+        choices=["sqlite", "jsonl"],
+        default="sqlite",
+        help="Substrate mode (default: sqlite)"
+    )
+
+    subparsers = parser.add_subparsers(dest="command", help="Commands")
+
+    build_parser = subparsers.add_parser("build", help="Build section index")
+    build_parser.add_argument(
+        "--incremental",
+        action="store_true",
+        help="Build incrementally (only changed files)"
+    )
+
+    verify_parser = subparsers.add_parser("verify", help="Verify index determinism")
+
+    get_parser = subparsers.add_parser("get", help="Get section by ID")
+    get_parser.add_argument("section_id", help="Section ID")
+    get_parser.add_argument(
+        "--slice",
+        type=str,
+        default=None,
+        help="Slice expression (e.g., lines[0:100], chars[0:500], head(50), tail(20))"
+    )
+
+    extract_parser = subparsers.add_parser("extract", help="Extract sections from file")
+    extract_parser.add_argument("file_path", help="Path to file")
+
+    symbols_parser = subparsers.add_parser("symbols", help="Symbol registry commands")
+    symbols_subparsers = symbols_parser.add_subparsers(dest="symbols_command", help="Symbol commands")
+
+    symbols_add_parser = symbols_subparsers.add_parser("add", help="Add symbol to registry")
+    symbols_add_parser.add_argument("symbol_id", help="Symbol ID (must start with @)")
+    symbols_add_parser.add_argument("--section", required=True, help="Section ID to reference")
+    symbols_add_parser.add_argument("--default-slice", help="Default slice expression")
+
+    symbols_get_parser = symbols_subparsers.add_parser("get", help="Get symbol from registry")
+    symbols_get_parser.add_argument("symbol_id", help="Symbol ID")
+
+    symbols_list_parser = symbols_subparsers.add_parser("list", help="List symbols")
+    symbols_list_parser.add_argument("--prefix", help="Filter by prefix (e.g., @CANON/)")
+
+    symbols_verify_parser = symbols_subparsers.add_parser("verify", help="Verify symbol registry")
+
+    resolve_parser = subparsers.add_parser("resolve", help="Resolve symbol to content with caching")
+    resolve_parser.add_argument("symbol_id", help="Symbol ID")
+    resolve_parser.add_argument(
+        "--slice",
+        type=str,
+        default=None,
+        help="Slice expression (e.g., lines[0:100], chars[0:500], head(50), tail(20))"
+    )
+    resolve_parser.add_argument(
+        "--run-id",
+        type=str,
+        default=None,
+        help="Run ID for caching"
+    )
+
+    cassette_parser = subparsers.add_parser("cassette", help="Message cassette commands (Phase 3)")
+    cassette_subparsers = cassette_parser.add_subparsers(dest="cassette_command", help="Cassette commands")
+
+    cassette_verify_parser = cassette_subparsers.add_parser("verify", help="Verify cassette integrity")
+    cassette_verify_parser.add_argument("--run-id", type=str, default=None, help="Verify specific run")
+
+    cassette_post_parser = cassette_subparsers.add_parser("post", help="Post message to cassette")
+    cassette_post_parser.add_argument("--json", type=Path, required=True, help="JSON file with message payload")
+    cassette_post_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    cassette_post_parser.add_argument("--source", type=str, required=True, 
+                                    choices=["USER", "PLANNER", "SYSTEM", "WORKER"], help="Message source")
+    cassette_post_parser.add_argument("--idempotency-key", type=str, default=None, help="Idempotency key")
+
+    cassette_claim_parser = cassette_subparsers.add_parser("claim", help="Claim a pending step")
+    cassette_claim_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    cassette_claim_parser.add_argument("--worker", type=str, required=True, help="Worker ID")
+    cassette_claim_parser.add_argument("--ttl", type=int, default=300, help="TTL in seconds (default: 300)")
+
+    cassette_complete_parser = cassette_subparsers.add_parser("complete", help="Complete a step")
+    cassette_complete_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    cassette_complete_parser.add_argument("--step", type=str, required=True, help="Step ID")
+    cassette_complete_parser.add_argument("--worker", type=str, required=True, help="Worker ID")
+    cassette_complete_parser.add_argument("--token", type=int, required=True, help="Fencing token")
+    cassette_complete_parser.add_argument("--receipt", type=Path, required=True, help="JSON file with receipt payload")
+    cassette_complete_parser.add_argument("--outcome", type=str, required=True,
+                                        choices=["SUCCESS", "FAILURE", "ABORTED"], help="Outcome")
+
+    plan_parser = subparsers.add_parser("plan", help="Deterministic planner (Phase 4)")
+    plan_subparsers = plan_parser.add_subparsers(dest="plan_command", help="Plan commands")
+
+    plan_request_parser = plan_subparsers.add_parser("request", help="Create plan from request JSON")
+    plan_request_parser.add_argument("--request-file", type=Path, required=True, help="Path to plan request JSON")
+    plan_request_parser.add_argument("--dry-run", action="store_true", help="Print plan to stdout without DB writes")
+
+    plan_verify_parser = plan_subparsers.add_parser("verify", help="Verify stored plan hash")
+    plan_verify_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    plan_verify_parser.add_argument("--request-id", type=str, required=True, help="Request ID")
+
+    execute_parser = subparsers.add_parser("execute", help="Execute PENDING steps for a job (Phase 4.1/4.2)")
+    execute_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    execute_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    execute_parser.add_argument("--workers", type=int, default=1, help="Number of parallel workers (default: 1)")
+    execute_parser.add_argument("--continue-on-fail", action="store_true", help="Continue execution on failure")
+
+    ants_parser = subparsers.add_parser("ants", help="Ant worker commands (Phase 4.3)")
+    ants_subparsers = ants_parser.add_subparsers(dest="ants_command", help="Ants commands")
+
+    ants_spawn_parser = ants_subparsers.add_parser("spawn", help="Spawn multiple ant workers")
+    ants_spawn_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_spawn_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_spawn_parser.add_argument("-n", type=int, required=True, help="Number of workers")
+    ants_spawn_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+
+    ants_run_parser = ants_subparsers.add_parser("run", help="Alias for 'spawn' - spawn multiple ant workers")
+    ants_run_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_run_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_run_parser.add_argument("-n", type=int, required=True, help="Number of workers")
+    ants_run_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+
+    ants_status_parser = ants_subparsers.add_parser("status", help="Show job status counts")
+    ants_status_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_status_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+
+    ants_worker_parser = ants_subparsers.add_parser("worker", help="Run a single ant worker")
+    ants_worker_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
+    ants_worker_parser.add_argument("--job-id", type=str, required=True, help="Job ID")
+    ants_worker_parser.add_argument("--worker-id", type=str, required=True, help="Worker ID")
+    ants_worker_parser.add_argument("--continue-on-fail", action="store_true", help="Continue on failure")
+    ants_worker_parser.add_argument("--poll-ms", type=int, default=250, help="Poll interval in ms")
+    ants_worker_parser.add_argument("--ttl", type=int, default=300, help="Lease TTL in seconds")
+    ants_worker_parser.add_argument("--max-idle-polls", type=int, default=20, help="Max idle polls before exit")
+
+    args = parser.parse_args()
+
+    if args.command is None:
+        parser.print_help()
+        sys.exit(1)
+
+    commands = {
+        "build": cmd_build,
+        "verify": cmd_verify,
+        "get": cmd_get,
+        "extract": cmd_extract,
+        "resolve": cmd_resolve
+    }
+
+    if args.command == "symbols":
+        symbols_commands = {
+            "add": cmd_symbols_add,
+            "get": cmd_symbols_get,
+            "list": cmd_symbols_list,
+            "verify": cmd_symbols_verify
+        }
+
+        if args.symbols_command not in symbols_commands:
+            print(f"[FAIL] Unknown symbols command: {args.symbols_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(symbols_commands[args.symbols_command](args))
+
+    if args.command == "cassette":
+        cassette_commands = {
+            "verify": cmd_cassette_verify,
+            "post": cmd_cassette_post,
+            "claim": cmd_cassette_claim,
+            "complete": cmd_cassette_complete
+        }
+
+        if args.cassette_command not in cassette_commands:
+            print(f"[FAIL] Unknown cassette command: {args.cassette_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(cassette_commands[args.cassette_command](args))
+
+    if args.command == "plan":
+        plan_commands = {
+            "request": cmd_plan_request,
+            "verify": cmd_cassette_verify
+        }
+        
+        if args.plan_command not in plan_commands:
+            print(f"[FAIL] Unknown plan command: {args.plan_command}")
+            parser.print_help()
+            sys.exit(1)
+        
+        sys.exit(plan_commands[args.plan_command](args))
+
+    if args.command == "execute":
+        sys.exit(cmd_execute(args))
+
+    if args.command == "ants":
+        ants_commands = {
+            "spawn": cmd_ants_spawn,
+            "run": cmd_ants_spawn,
+            "worker": cmd_ants_worker,
+            "status": cmd_ants_status
+        }
+        
+        if args.ants_command not in ants_commands:
+            print(f"[FAIL] Unknown ants command: {args.ants_command}")
+            parser.print_help()
+            sys.exit(1)
+        
+        sys.exit(ants_commands[args.ants_command](args))
+
+    if args.command not in commands:
+        print(f"[FAIL] Unknown command: {args.command}")
+        parser.print_help()
+        sys.exit(1)
+
+    sys.exit(commands[args.command](args))
+
+
+if __name__ == '__main__':
+    main()
+
+
+```
+
+### END OF FILE: catalytic_chat\cli.py
+
+
+---
+
+### START OF FILE: catalytic_chat\cli.py.backup
+
+```
+
+#!/usr/bin/env python3
+"""
+Catalytic Chat CLI
+
+Command-line interface for building and querying the section index.
+
+Roadmap Phase: Phase 1 — Substrate + deterministic indexing
+"""
+
+import sys
+import argparse
+import json
+from pathlib import Path
+
+from catalytic_chat.section_extractor import extract_sections
+from catalytic_chat.section_indexer import SectionIndexer, build_index
+from catalytic_chat.symbol_registry import SymbolRegistry, SymbolError
+from catalytic_chat.symbol_resolver import SymbolResolver, ResolverError, resolve_symbol
+from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
+
+
+def cmd_build(args) -> int:
+    """Build section index.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    indexer = SectionIndexer(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        sections = extract_sections(file_path, args.repo_root)
+        print(f"Extracted {len(sections)} sections from {file_path}\n")
+
+        for i, section in enumerate(sections, 1):
+            print(f"[{i}] {section.section_id[:16]}...")
+            print(f"    Heading: {' > '.join(section.heading_path)}")
+            print(f"    Lines: {section.line_start}-{section.line_end}")
+            print(f"    Hash: {section.content_hash[:16]}...")
+            print()
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Extraction failed: {e}")
+        return 1
+
+
+def cmd_verify(args) -> int:
+    """Verify index determinism.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    indexer = SectionIndexer(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        success = indexer.verify_determinism()
+        return 0 if success else 1
+    except Exception as e:
+        print(f"[FAIL] Verification failed: {e}")
+        return 1
+
+
+def cmd_get(args) -> int:
+    """Get section by ID with optional slice.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .section_indexer import SectionIndexer
+
+    indexer = SectionIndexer(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        section_id = getattr(args, 'slice', None)
+        content, content_hash, applied_slice, lines_applied, chars_applied = \
+            indexer.get_section_content(args.section_id, section_id)
+
+        print(content, end='')
+        sys.stderr.write(f"section_id: {args.section_id}\n")
+        sys.stderr.write(f"slice: {applied_slice}\n")
+        sys.stderr.write(f"content_hash: {content_hash[:16]}...\n")
+        sys.stderr.write(f"lines_applied: {lines_applied}\n")
+        sys.stderr.write(f"chars_applied: {chars_applied}\n")
+        return 0
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] Failed to get section: {e}\n")
+        return 1
+
+
+def cmd_extract(args) -> int:
+    """Extract sections from a file.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    file_path = Path(args.file_path)
+
+    if not file_path.exists():
+        print(f"[FAIL] File not found: {file_path}")
+        return 1
+
+    try:
+        sections = extract_sections(file_path, args.repo_root)
+        print(f"Extracted {len(sections)} sections from {file_path}\n")
+
+        for i, section in enumerate(sections, 1):
+            print(f"[{i}] {section.section_id[:16]}...")
+            print(f"    Heading: {' > '.join(section.heading_path)}")
+            print(f"    Lines: {section.line_start}-{section.line_end}")
+            print(f"    Hash: {section.content_hash[:16]}...")
+            print()
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Extraction failed: {e}")
+        return 1
+
+
+def cmd_symbols_add(args) -> int:
+    """Add symbol to registry.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .symbol_registry import SymbolRegistry, SymbolError
+
+    registry = SymbolRegistry(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        timestamp = registry.add_symbol(
+            symbol_id=args.symbol_id,
+            target_ref=args.section,
+            default_slice=args.default_slice
+        )
+        print(f"[OK] Symbol added: {args.symbol_id}")
+        print(f"      Target: {args.section}")
+        if args.default_slice:
+            print(f"      Default slice: {args.default_slice}")
+        print(f"      Created: {timestamp}")
+        return 0
+    except SymbolError as e:
+        print(f"[FAIL] {e}")
+        return 1
+    except Exception as e:
+        print(f"[FAIL] Failed to add symbol: {e}")
+        return 1
+
+
+def cmd_symbols_get(args) -> int:
+    """Get symbol from registry.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .symbol_registry import SymbolRegistry, Symbol
+
+    registry = SymbolRegistry(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        symbol = registry.get_symbol(args.symbol_id)
+
+        if symbol is None:
+            print(f"[FAIL] Symbol not found: {args.symbol_id}")
+            return 1
+
+        print(f"Symbol: {symbol.symbol_id}")
+        print(f"  Target Type: {symbol.target_type}")
+        print(f"  Target Ref: {symbol.target_ref}")
+        if symbol.default_slice:
+            print(f"  Default Slice: {symbol.default_slice}")
+        print(f"  Created: {symbol.created_at}")
+        print(f"  Updated: {symbol.updated_at}")
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Failed to get symbol: {e}")
+        return 1
+
+
+def cmd_symbols_list(args) -> int:
+    """List symbols from registry.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .symbol_registry import SymbolRegistry
+
+    registry = SymbolRegistry(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        prefix = getattr(args, 'prefix', None)
+        symbols = registry.list_symbols(prefix)
+
+        print(f"Listing {len(symbols)} symbols")
+        if prefix:
+            print(f"  Prefix: {prefix}")
+        print()
+
+        for symbol in symbols:
+            print(f"  {symbol.symbol_id}")
+            print(f"    Target: {symbol.target_ref}")
+            if symbol.default_slice:
+                print(f"    Slice: {symbol.default_slice}")
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Failed to list symbols: {e}")
+        return 1
+
+
+def cmd_symbols_verify(args) -> int:
+    """Verify symbol registry integrity.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .symbol_registry import SymbolRegistry
+
+    registry = SymbolRegistry(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    try:
+        success = registry.verify()
+        return 0 if success else 1
+    except Exception as e:
+        print(f"[FAIL] Verification error: {e}")
+        return 1
+
+
+def cmd_resolve(args) -> int:
+    """Resolve symbol to content with caching.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    from .symbol_resolver import ResolverError
+    from .symbol_registry import SymbolRegistry
+
+    registry = SymbolRegistry(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate
+    )
+
+    resolver = SymbolResolver(
+        repo_root=args.repo_root,
+        substrate_mode=args.substrate,
+        symbol_registry=registry
+    )
+
+    try:
+        payload, cache_hit = resolver.resolve(
+            symbol_id=args.symbol_id,
+            slice_expr=args.slice,
+            run_id=args.run_id
+        )
+
+        print(payload, end='')
+        sys.stderr.write(f"[CACHE {'HIT' if cache_hit else 'MISS'}]\n")
+        return 0
+    except ResolverError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] Resolution error: {e}\n")
+        return 1
+
+
+def cmd_cassette_verify(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        cassette.verify_cassette(getattr(args, 'run_id', None))
+        return 0
+    except MessageCassetteError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    finally:
+        cassette.close()
+
+
+def cmd_cassette_post(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        with open(args.json, 'r') as f:
+            payload = json.load(f)
+        
+        message_id, job_id = cassette.post_message(
+            payload=payload,
+            run_id=args.run_id,
+            source=args.source,
+            idempotency_key=args.idempotency_key
+        )
+        
+        print(f"[OK] Message posted")
+        print(f"      message_id: {message_id}")
+        print(f"      job_id: {job_id}")
+        return 0
+    except MessageCassetteError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except FileNotFoundError:
+        sys.stderr.write(f"[FAIL] File not found: {args.json}\n")
+        return 1
+    except json.JSONDecodeError as e:
+        sys.stderr.write(f"[FAIL] Invalid JSON: {e}\n")
+        return 1
+    finally:
+        cassette.close()
+
+
+def cmd_cassette_claim(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        result = cassette.claim_step(
+            run_id=args.run_id,
+            worker_id=args.worker,
+            ttl_seconds=args.ttl
+        )
+        
+        print(f"[OK] Step claimed")
+        print(f"      step_id: {result['step_id']}")
+        print(f"      job_id: {result['job_id']}")
+        print(f"      message_id: {result['message_id']}")
+        print(f"      ordinal: {result['ordinal']}")
+        print(f"      fencing_token: {result['fencing_token']}")
+        print(f"      lease_expires_at: {result['lease_expires_at']}")
+        print()
+        print("Payload:")
+        print(json.dumps(result['payload'], indent=2))
+        return 0
+    except MessageCassetteError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    finally:
+        cassette.close()
+
+
+def cmd_cassette_complete(args) -> int:
+    cassette = MessageCassette(repo_root=args.repo_root)
+    try:
+        with open(args.receipt, 'r') as f:
+            receipt_payload = json.load(f)
+        
+        receipt_id = cassette.complete_step(
+            run_id=args.run_id,
+            step_id=args.step,
+            worker_id=args.worker,
+            fencing_token=args.token,
+            receipt_payload=receipt_payload,
+            outcome=args.outcome
+        )
+        
+        print(f"[OK] Step completed")
+        print(f"      receipt_id: {receipt_id}")
+        return 0
+    except MessageCassetteError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except FileNotFoundError:
+        sys.stderr.write(f"[FAIL] File not found: {args.receipt}\n")
+        return 1
+    except json.JSONDecodeError as e:
+        sys.stderr.write(f"[FAIL] Invalid JSON: {e}\n")
+        return 1
+    finally:
+        cassette.close()
 
 
 def main():
@@ -1860,20 +3400,22 @@ def main():
 
     cassette_parser = subparsers.add_parser("cassette", help="Message cassette commands (Phase 3)")
     cassette_subparsers = cassette_parser.add_subparsers(dest="cassette_command", help="Cassette commands")
-    
-    plan_parser = subparsers.add_parser("plan", help="Deterministic planner (Phase 4)")
-    plan_subparsers = plan_parser.add_subparsers(dest="plan_command", help="Plan commands")
 
     cassette_verify_parser = cassette_subparsers.add_parser("verify", help="Verify cassette integrity")
+    cassette_verify_parser.add_argument("--run-id", type=str, default=None, help="Verify specific run")
+
     cassette_post_parser = cassette_subparsers.add_parser("post", help="Post message to cassette")
-    cassette_post_parser.add_argument("--json", type=Path, required=True, help="Path to JSON file with message payload")
+    cassette_post_parser.add_argument("--json", type=Path, required=True, help="JSON file with message payload")
     cassette_post_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
-    cassette_post_parser.add_argument("--source", type=str, required=True, choices=["USER", "PLANNER", "SYSTEM", "WORKER"], help="Message source")
+    cassette_post_parser.add_argument("--source", type=str, required=True, 
+                                    choices=["USER", "PLANNER", "SYSTEM", "WORKER"], help="Message source")
     cassette_post_parser.add_argument("--idempotency-key", type=str, default=None, help="Idempotency key")
+
     cassette_claim_parser = cassette_subparsers.add_parser("claim", help="Claim a pending step")
     cassette_claim_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
     cassette_claim_parser.add_argument("--worker", type=str, required=True, help="Worker ID")
-    cassette_claim_parser.add_argument("--ttl", type=int, default=300, help="Lease TTL in seconds (default: 300)")
+    cassette_claim_parser.add_argument("--ttl", type=int, default=300, help="TTL in seconds (default: 300)")
+
     cassette_complete_parser = cassette_subparsers.add_parser("complete", help="Complete a step")
     cassette_complete_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
     cassette_complete_parser.add_argument("--step", type=str, required=True, help="Step ID")
@@ -1882,13 +3424,6 @@ def main():
     cassette_complete_parser.add_argument("--receipt", type=Path, required=True, help="JSON file with receipt payload")
     cassette_complete_parser.add_argument("--outcome", type=str, required=True,
                                         choices=["SUCCESS", "FAILURE", "ABORTED"], help="Outcome")
-    
-    plan_request_parser = plan_subparsers.add_parser("request", help="Create plan from request JSON")
-    plan_request_parser.add_argument("--request-file", type=Path, required=True, help="Path to plan request JSON")
-    plan_request_parser.add_argument("--dry-run", action="store_true", help="Print plan to stdout without DB writes")
-    plan_verify_parser = plan_subparsers.add_parser("verify", help="Verify stored plan hash")
-    plan_verify_parser.add_argument("--run-id", type=str, required=True, help="Run ID")
-    plan_verify_parser.add_argument("--request-id", type=str, required=True, help="Request ID")
     resolve_parser.add_argument("symbol_id", help="Symbol ID")
     resolve_parser.add_argument(
         "--slice",
@@ -1914,8 +3449,15 @@ def main():
         "verify": cmd_verify,
         "get": cmd_get,
         "extract": cmd_extract,
-        "resolve": cmd_resolve
+        "symbols": cmd_symbols_add,
+        "resolve": cmd_resolve,
+        "cassette": cmd_cassette_verify
     }
+
+    if args.command not in commands:
+        print(f"[FAIL] Unknown command: {args.command}")
+        parser.print_help()
+        sys.exit(1)
 
     if args.command == "symbols":
         symbols_commands = {
@@ -1930,7 +3472,7 @@ def main():
             parser.print_help()
             sys.exit(1)
 
-        sys.exit(symbols_commands[args.symbols_command](args))
+        sys.exit(commands[args.command](args))
 
     if args.command == "cassette":
         cassette_commands = {
@@ -1939,33 +3481,13 @@ def main():
             "claim": cmd_cassette_claim,
             "complete": cmd_cassette_complete
         }
-        
+
         if args.cassette_command not in cassette_commands:
             print(f"[FAIL] Unknown cassette command: {args.cassette_command}")
             parser.print_help()
             sys.exit(1)
-        
+
         sys.exit(cassette_commands[args.cassette_command](args))
-    
-    if args.command == "plan":
-        plan_commands = {
-            "request": cmd_plan_request,
-            "verify": cmd_cassette_plan_verify
-        }
-        
-        if args.plan_command not in plan_commands:
-            print(f"[FAIL] Unknown plan command: {args.plan_command}")
-            parser.print_help()
-            sys.exit(1)
-        
-        sys.exit(plan_commands[args.plan_command](args))
-
-    if args.command not in commands:
-        print(f"[FAIL] Unknown command: {args.command}")
-        parser.print_help()
-        sys.exit(1)
-
-    sys.exit(commands[args.command](args))
 
 
 if __name__ == '__main__':
@@ -1974,7 +3496,7 @@ if __name__ == '__main__':
 
 ```
 
-### END OF FILE: catalytic_chat\cli.py
+### END OF FILE: catalytic_chat\cli.py.backup
 
 
 ---
@@ -1998,6 +3520,10 @@ from pathlib import Path
 from typing import Optional, Dict, Any, Tuple
 
 from catalytic_chat.message_cassette_db import MessageCassetteDB
+from catalytic_chat.symbol_registry import SymbolRegistry
+from catalytic_chat.section_indexer import SectionIndexer
+from catalytic_chat.symbol_resolver import SymbolResolver
+from catalytic_chat.slice_resolver import SliceResolver, SliceError
 
 
 class MessageCassetteError(Exception):
@@ -2142,6 +3668,115 @@ class MessageCassette:
             conn.rollback()
             raise MessageCassetteError(f"Claim failed: {e}")
     
+    def claim_next_step(
+        self,
+        run_id: str,
+        job_id: str,
+        worker_id: str,
+        ttl_seconds: int = 300
+    ) -> Optional[Dict[str, Any]]:
+        conn = self._get_conn()
+        
+        lease_expires_at = (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).isoformat()
+        
+        conn.execute("BEGIN IMMEDIATE")
+        
+        try:
+            cursor = conn.execute("""
+                SELECT s.step_id, s.ordinal, s.fencing_token, s.payload_json
+                FROM cassette_steps s
+                JOIN cassette_jobs j ON s.job_id = j.job_id
+                JOIN cassette_messages m ON j.message_id = m.message_id
+                WHERE s.status = 'PENDING' AND m.run_id = ? AND j.job_id = ?
+                ORDER BY s.ordinal ASC
+                LIMIT 1
+            """, (run_id, job_id))
+            
+            row = cursor.fetchone()
+            if row is None:
+                conn.rollback()
+                return None
+            
+            step_id = row["step_id"]
+            ordinal = row["ordinal"]
+            current_token = row["fencing_token"]
+            new_token = current_token + 1
+            payload_json = row["payload_json"]
+            
+            conn.execute("""
+                UPDATE cassette_steps
+                SET status = 'LEASED',
+                    lease_owner = ?,
+                    lease_expires_at = ?,
+                    fencing_token = ?
+                WHERE step_id = ?
+            """, (worker_id, lease_expires_at, new_token, step_id))
+            
+            conn.commit()
+            
+            return {
+                "step_id": step_id,
+                "job_id": job_id,
+                "ordinal": ordinal,
+                "payload": json.loads(payload_json),
+                "fencing_token": new_token,
+                "lease_expires_at": lease_expires_at
+            }
+            
+        except sqlite3.IntegrityError as e:
+            conn.rollback()
+            raise MessageCassetteError(f"Claim next step failed: {e}")
+    
+    def check_and_consume_budget(
+        self,
+        job_id: str,
+        bytes_to_consume: int = 0,
+        symbols_to_consume: int = 0,
+        max_bytes: Optional[int] = None,
+        max_symbols: Optional[int] = None
+    ) -> bool:
+        conn = self._get_conn()
+        
+        conn.execute("BEGIN IMMEDIATE")
+        
+        try:
+            cursor = conn.execute("""
+                SELECT bytes_consumed, symbols_consumed
+                FROM cassette_job_budgets
+                WHERE job_id = ?
+            """, (job_id,))
+            
+            row = cursor.fetchone()
+            if row is None:
+                bytes_consumed = 0
+                symbols_consumed = 0
+            else:
+                bytes_consumed = row["bytes_consumed"]
+                symbols_consumed = row["symbols_consumed"]
+            
+            if max_bytes is not None and (bytes_consumed + bytes_to_consume) > max_bytes:
+                conn.rollback()
+                return False
+            
+            if max_symbols is not None and (symbols_consumed + symbols_to_consume) > max_symbols:
+                conn.rollback()
+                return False
+            
+            conn.execute("""
+                INSERT INTO cassette_job_budgets (job_id, bytes_consumed, symbols_consumed)
+                VALUES (?, ?, ?)
+                ON CONFLICT(job_id) DO UPDATE SET
+                    bytes_consumed = bytes_consumed + ?,
+                    symbols_consumed = symbols_consumed + ?
+            """, (job_id, bytes_to_consume, symbols_to_consume, bytes_to_consume, symbols_to_consume))
+            
+            conn.commit()
+            return True
+            
+        except sqlite3.IntegrityError as e:
+            conn.rollback()
+            raise MessageCassetteError(f"Budget check failed: {e}")
+    
     def complete_step(
         self,
         run_id: str,
@@ -2210,6 +3845,337 @@ class MessageCassette:
             conn.rollback()
             raise MessageCassetteError(f"Complete failed: {e}")
     
+    def execute_step(
+        self,
+        run_id: str,
+        step_id: str,
+        worker_id: str,
+        fencing_token: int,
+        repo_root: Optional[Path] = None,
+        check_global_budget: bool = False
+    ) -> Dict[str, Any]:
+        conn = self._get_conn()
+        
+        try:
+            cursor = conn.execute("""
+                SELECT s.step_id, s.job_id, s.payload_json, m.payload_json as request_json, m.run_id
+                FROM cassette_steps s
+                JOIN cassette_jobs j ON s.job_id = j.job_id
+                JOIN cassette_messages m ON j.message_id = m.message_id
+                WHERE s.step_id = ?
+            """, (step_id,))
+            
+            row = cursor.fetchone()
+            if row is None:
+                raise MessageCassetteError(f"Step not found: {step_id}")
+            
+            if row["run_id"] != run_id:
+                raise MessageCassetteError(f"Step run_id mismatch: expected {run_id}, got {row['run_id']}")
+            
+            job_id = row["job_id"]
+            step_payload = json.loads(row["payload_json"])
+            request_payload = json.loads(row["request_json"])
+            
+            op = step_payload.get("op")
+            refs = step_payload.get("refs", {})
+            constraints = step_payload.get("constraints", {})
+            
+            budgets = request_payload.get("budgets", {})
+            max_bytes = budgets.get("max_bytes", 10000000)
+            max_symbols = budgets.get("max_symbols", 100)
+            
+            receipt_payload = {
+                "step_id": step_id,
+                "op": op,
+                "status": "STARTED"
+            }
+            
+            if op == "READ_SYMBOL":
+                symbol_id = refs.get("symbol_id")
+                
+                if not symbol_id:
+                    raise MessageCassetteError("READ_SYMBOL missing refs.symbol_id")
+                
+                symbol_registry = SymbolRegistry(repo_root=repo_root)
+                symbol = symbol_registry.get_symbol(symbol_id)
+                
+                if symbol is None:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Symbol not found: {symbol_id}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                section_id = symbol.target_ref
+                slice_expr = constraints.get("slice") or symbol.default_slice
+                
+                if slice_expr and slice_expr.lower() == "all":
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"slice=ALL is forbidden for symbol {symbol_id}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                section_indexer = SectionIndexer(repo_root=repo_root)
+                
+                try:
+                    content, content_hash, applied_slice, lines_applied, chars_applied = \
+                        section_indexer.get_section_content(section_id, slice_expr)
+                except Exception as e:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Failed to read section {section_id}: {e}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                bytes_read = len(content.encode('utf-8'))
+                
+                if check_global_budget:
+                    if not self.check_and_consume_budget(
+                        job_id=job_id,
+                        bytes_to_consume=bytes_read,
+                        symbols_to_consume=1,
+                        max_bytes=max_bytes,
+                        max_symbols=max_symbols
+                    ):
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Global budget exceeded for job {job_id}: bytes_read={bytes_read}, symbols=1"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                else:
+                    if bytes_read > max_bytes:
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                
+                receipt_payload["status"] = "SUCCESS"
+                receipt_payload["section_id"] = section_id
+                receipt_payload["symbol_id"] = symbol_id
+                receipt_payload["slice"] = applied_slice
+                receipt_payload["content_hash"] = content_hash
+                receipt_payload["lines_applied"] = lines_applied
+                receipt_payload["chars_applied"] = chars_applied
+                receipt_payload["bytes_read"] = bytes_read
+                
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="SUCCESS"
+                )
+                
+            elif op == "READ_SECTION":
+                section_id = refs.get("section_id")
+                
+                if not section_id:
+                    raise MessageCassetteError("READ_SECTION missing refs.section_id")
+                
+                slice_expr = constraints.get("slice")
+                
+                section_indexer = SectionIndexer(repo_root=repo_root)
+                
+                try:
+                    content, content_hash, applied_slice, lines_applied, chars_applied = \
+                        section_indexer.get_section_content(section_id, slice_expr)
+                except Exception as e:
+                    receipt_payload["status"] = "FAILURE"
+                    receipt_payload["error"] = f"Failed to read section {section_id}: {e}"
+                    self.complete_step(
+                        run_id=run_id,
+                        step_id=step_id,
+                        worker_id=worker_id,
+                        fencing_token=fencing_token,
+                        receipt_payload=receipt_payload,
+                        outcome="FAILURE"
+                    )
+                    return receipt_payload
+                
+                bytes_read = len(content.encode('utf-8'))
+                
+                if check_global_budget:
+                    if not self.check_and_consume_budget(
+                        job_id=job_id,
+                        bytes_to_consume=bytes_read,
+                        max_bytes=max_bytes
+                    ):
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Global budget exceeded for job {job_id}: bytes_read={bytes_read}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                else:
+                    if bytes_read > max_bytes:
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                
+                receipt_payload["status"] = "SUCCESS"
+                receipt_payload["section_id"] = section_id
+                receipt_payload["slice"] = applied_slice
+                receipt_payload["content_hash"] = content_hash
+                receipt_payload["lines_applied"] = lines_applied
+                receipt_payload["chars_applied"] = chars_applied
+                receipt_payload["bytes_read"] = bytes_read
+                
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="SUCCESS"
+                )
+                
+            else:
+                receipt_payload["status"] = "FAILURE"
+                receipt_payload["error"] = f"Unsupported op: {op}"
+                self.complete_step(
+                    run_id=run_id,
+                    step_id=step_id,
+                    worker_id=worker_id,
+                    fencing_token=fencing_token,
+                    receipt_payload=receipt_payload,
+                    outcome="FAILURE"
+                )
+            
+            return receipt_payload
+            
+        except Exception as e:
+            receipt_payload = {
+                "step_id": step_id,
+                "status": "FAILURE",
+                "error": str(e)
+            }
+            self.complete_step(
+                run_id=run_id,
+                step_id=step_id,
+                worker_id=worker_id,
+                fencing_token=fencing_token,
+                receipt_payload=receipt_payload,
+                outcome="FAILURE"
+            )
+            return receipt_payload
+
+    def get_job_status(
+        self,
+        run_id: str,
+        job_id: str
+    ) -> Optional[Dict[str, int]]:
+        conn = self._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_messages m
+            JOIN cassette_jobs j ON m.message_id = j.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        
+        row = cursor.fetchone()
+        if row["count"] == 0:
+            return None
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'PENDING'
+        """, (run_id, job_id))
+        pending_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'LEASED'
+        """, (run_id, job_id))
+        leased_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'COMMITTED'
+        """, (run_id, job_id))
+        committed_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_receipts r
+            JOIN cassette_jobs j ON r.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        receipts_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(DISTINCT worker_id) as count
+            FROM cassette_receipts r
+            JOIN cassette_jobs j ON r.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        workers_seen_count = cursor.fetchone()["count"]
+        
+        return {
+            "pending": pending_count,
+            "leased": leased_count,
+            "committed": committed_count,
+            "receipts": receipts_count,
+            "workers_seen": workers_seen_count
+        }
+
     def verify_cassette(self, run_id: Optional[str] = None) -> None:
         conn = self._get_conn()
         
@@ -2338,6 +4304,8 @@ import sqlite3
 from pathlib import Path
 from typing import Optional
 
+from .paths import get_system3_db, get_sqlite_connection
+
 
 class MessageCassetteDB:
     
@@ -2348,20 +4316,14 @@ class MessageCassetteDB:
         if db_path is not None:
             self.db_path = db_path
         else:
-            if repo_root is None:
-                repo_root = Path.cwd()
-            self.db_path = repo_root / "CORTEX" / "_generated" / self.DB_NAME
+            self.db_path = get_system3_db(repo_root)
         
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._conn = None
         self._init_db()
     
     def _get_conn(self) -> sqlite3.Connection:
         if self._conn is None:
-            self._conn = sqlite3.connect(str(self.db_path))
-            self._conn.row_factory = sqlite3.Row
-            self._conn.execute("PRAGMA foreign_keys = ON")
-            self._conn.execute("PRAGMA journal_mode = WAL")
+            self._conn = get_sqlite_connection(self.db_path)
         return self._conn
     
     def _init_db(self):
@@ -2534,10 +4496,24 @@ class MessageCassetteDB:
             WHEN (NEW.lease_owner <> OLD.lease_owner OR 
                    NEW.lease_expires_at <> OLD.lease_expires_at OR 
                    NEW.fencing_token <> OLD.fencing_token) AND 
-                  NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
+                   NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
             BEGIN
-                SELECT RAISE(ABORT, 'Lease fields can only be set when status is PENDING and remains PENDING');
+                SELECT RAISE(ABORT, 'Lease fields can only be set during PENDING -> LEASED transition');
             END
+        """)
+        
+        conn.execute("""
+            CREATE TABLE IF NOT EXISTS cassette_job_budgets (
+                job_id TEXT PRIMARY KEY,
+                bytes_consumed INTEGER DEFAULT 0,
+                symbols_consumed INTEGER DEFAULT 0,
+                FOREIGN KEY (job_id) REFERENCES cassette_jobs(job_id)
+            )
+        """)
+        
+        conn.execute("""
+            CREATE INDEX IF NOT EXISTS idx_job_budgets_job_id 
+            ON cassette_job_budgets(job_id)
         """)
     
     def close(self):
@@ -2555,6 +4531,103 @@ class MessageCassetteDB:
 ```
 
 ### END OF FILE: catalytic_chat\message_cassette_db.py
+
+
+---
+
+### START OF FILE: catalytic_chat\paths.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Canonical Path Helpers
+
+Single source of truth for all artifact paths in CORTEX substrate.
+Ensures consistency across all modules and prevents path mismatches.
+"""
+
+import sqlite3
+from pathlib import Path
+from typing import Optional
+
+
+def get_cortex_dir(repo_root: Optional[Path] = None) -> Path:
+    """Get CORTEX/_generated directory.
+    
+    Args:
+        repo_root: Repository root path. Defaults to current working directory.
+    
+    Returns:
+        Path to CORTEX/_generated
+    """
+    if repo_root is None:
+        repo_root = Path.cwd()
+    
+    cortex_dir = repo_root / "CORTEX" / "_generated"
+    cortex_dir.mkdir(parents=True, exist_ok=True)
+    return cortex_dir
+
+
+def get_db_path(repo_root: Optional[Path] = None, name: str = "system1.db") -> Path:
+    """Get path to a database file in CORTEX/_generated.
+    
+    Args:
+        repo_root: Repository root path. Defaults to current working directory.
+        name: Database filename (e.g., "system1.db", "system3.db")
+    
+    Returns:
+        Path to database file
+    """
+    cortex_dir = get_cortex_dir(repo_root)
+    db_path = cortex_dir / name
+    db_path.parent.mkdir(parents=True, exist_ok=True)
+    return db_path
+
+
+def get_system1_db(repo_root: Optional[Path] = None) -> Path:
+    """Get path to system1.db (sections, symbols, expansion_cache).
+    
+    Args:
+        repo_root: Repository root path. Defaults to current working directory.
+    
+    Returns:
+        Path to system1.db
+    """
+    return get_db_path(repo_root, "system1.db")
+
+
+def get_system3_db(repo_root: Optional[Path] = None) -> Path:
+    """Get path to system3.db (cassette_* tables).
+    
+    Args:
+        repo_root: Repository root path. Defaults to current working directory.
+    
+    Returns:
+        Path to system3.db
+    """
+    return get_db_path(repo_root, "system3.db")
+
+
+def get_sqlite_connection(db_path: Path) -> sqlite3.Connection:
+    """Get SQLite connection with standard settings.
+    
+    Args:
+        db_path: Path to database file
+    
+    Returns:
+        SQLite connection with foreign_keys and WAL enabled
+    """
+    conn = sqlite3.connect(str(db_path))
+    conn.row_factory = sqlite3.Row
+    conn.execute("PRAGMA foreign_keys = ON")
+    conn.execute("PRAGMA journal_mode = WAL")
+    return conn
+
+
+```
+
+### END OF FILE: catalytic_chat\paths.py
 
 
 ---
@@ -2781,9 +4854,9 @@ class Planner:
         steps: List[Dict[str, Any]] = []
         
         for i, symbol_ref in enumerate(resolved_symbols):
-            step_ordinal = len(steps) + 1
-            if step_ordinal > max_steps:
-                raise PlannerError(f"Budget exceeded: step_ordinal={step_ordinal} > max_steps={max_steps}")
+            step_ordinal = len(steps)
+            if step_ordinal + 1 > max_steps:
+                raise PlannerError(f"Budget exceeded: step_ordinal={step_ordinal} would exceed max_steps={max_steps}")
             
             canonical_json = json.dumps({
                 "ordinal": step_ordinal,
@@ -2794,7 +4867,7 @@ class Planner:
                     "slice_expr": symbol_ref["slice_expr"]
                 },
                 "expected_outputs": {
-                    "symbols_resolved": [symbol_ref["symbol_id"]]
+                    "symbols_referenced": [symbol_ref["symbol_id"]]
                 }
             }, sort_keys=True)
             
@@ -2807,7 +4880,7 @@ class Planner:
                     "symbol_id": symbol_ref["symbol_id"]
                 },
                 "expected_outputs": {
-                    "symbols_resolved": [symbol_ref["symbol_id"]]
+                    "symbols_referenced": [symbol_ref["symbol_id"]]
                 }
             })
         
@@ -2873,6 +4946,12 @@ def post_request_and_plan(
             (job_id, message_id, intent, ordinal)
             VALUES (?, ?, ?, 1)
         """, (job_id, message_id, intent))
+        
+        conn.execute("""
+            INSERT INTO cassette_job_budgets 
+            (job_id, bytes_consumed, symbols_consumed)
+            VALUES (?, 0, 0)
+        """, (job_id,))
         
         plan_output = planner.plan_request(request_payload)
         
@@ -3044,16 +5123,16 @@ class SectionExtractor:
         """
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
-                lines = f.readlines()
+                content = f.read()
+                lines = content.count('\n') + 1
         except Exception as e:
             raise ValueError(f"Failed to read {file_path}: {e}")
-
+ 
         try:
             relative_path = file_path.as_posix()
         except ValueError:
             relative_path = file_path.as_posix()
-        lines = content.count('\n') + 1
-
+ 
         content_hash = self.compute_content_hash(content)
 
         section = Section(
@@ -3164,6 +5243,7 @@ from datetime import datetime
 
 from .section_extractor import SectionExtractor, Section, extract_sections
 from .slice_resolver import SliceResolver, SliceError, SliceResult
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 class SectionIndexer:
@@ -3196,9 +5276,10 @@ class SectionIndexer:
         self.extractor = SectionExtractor(repo_root)
 
         if substrate_mode == "sqlite":
-            self.db_path = repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(repo_root)
         elif substrate_mode == "jsonl":
-            self.output_path = repo_root / "CORTEX" / "_generated" / "section_index.jsonl"
+            cortex_dir = get_cortex_dir(repo_root)
+            self.output_path = cortex_dir / "section_index.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
@@ -3308,11 +5389,7 @@ class SectionIndexer:
         Args:
             sections: List of sections
         """
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS sections (
@@ -3413,8 +5490,7 @@ class SectionIndexer:
             Section object or None if not found
         """
         if self.substrate_mode == "sqlite":
-            with sqlite3.connect(self.db_path) as conn:
-                conn.row_factory = sqlite3.Row
+            with get_sqlite_connection(self.db_path) as conn:
                 cursor = conn.execute(
                     "SELECT * FROM sections WHERE section_id = ?",
                     (section_id,)
@@ -3858,6 +5934,7 @@ from datetime import datetime, timezone
 
 from catalytic_chat.section_indexer import SectionIndexer
 from catalytic_chat.slice_resolver import SliceResolver, SliceError
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 @dataclass
@@ -3897,35 +5974,33 @@ class SymbolRegistry:
         self.slice_resolver = SliceResolver()
 
         if substrate_mode == "sqlite":
-            self.db_path = self.repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(self.repo_root)
         elif substrate_mode == "jsonl":
-            self.output_path = self.repo_root / "CORTEX" / "_generated" / "symbols.jsonl"
+            cortex_dir = get_cortex_dir(self.repo_root)
+            self.output_path = cortex_dir / "symbols.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
     def _init_sqlite(self) -> None:
         """Initialize SQLite symbols table."""
-        conn = sqlite3.connect(self.db_path)
-        conn.execute("PRAGMA foreign_keys = ON")
-        conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
-        conn.execute("""
-            CREATE TABLE IF NOT EXISTS symbols (
-                symbol_id TEXT PRIMARY KEY,
-                target_type TEXT NOT NULL,
-                target_ref TEXT NOT NULL,
-                default_slice TEXT,
-                created_at TEXT NOT NULL,
-                updated_at TEXT NOT NULL,
-                FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
-            )
-        """)
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS symbols (
+                    symbol_id TEXT PRIMARY KEY,
+                    target_type TEXT NOT NULL,
+                    target_ref TEXT NOT NULL,
+                    default_slice TEXT,
+                    created_at TEXT NOT NULL,
+                    updated_at TEXT NOT NULL,
+                    FOREIGN KEY (target_ref) REFERENCES sections(section_id) ON DELETE CASCADE
+                )
+            """)
 
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_target ON symbols(target_ref)")
-        conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_created ON symbols(created_at)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_target ON symbols(target_ref)")
+            conn.execute("CREATE INDEX IF NOT EXISTS idx_symbols_created ON symbols(created_at)")
 
-        conn.commit()
-        conn.close()
+            conn.commit()
 
     def _get_timestamp(self) -> str:
         """Get ISO8601 timestamp.
@@ -4032,9 +6107,7 @@ class SymbolRegistry:
             default_slice: Default slice
             timestamp: ISO8601 timestamp
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS symbols (
@@ -4056,7 +6129,6 @@ class SymbolRegistry:
                 (symbol_id,)
             )
             if cursor.fetchone():
-                conn.close()
                 raise SymbolError(f"Symbol ID already exists: {symbol_id}")
 
             conn.execute("""
@@ -4134,8 +6206,7 @@ class SymbolRegistry:
             Symbol object or None
         """
         try:
-            with sqlite3.connect(self.db_path) as conn:
-                conn.row_factory = sqlite3.Row
+            with get_sqlite_connection(self.db_path) as conn:
                 cursor = conn.execute(
                     "SELECT * FROM symbols WHERE symbol_id = ?",
                     (symbol_id,)
@@ -4199,8 +6270,7 @@ class SymbolRegistry:
         Returns:
             List of symbols sorted by symbol_id
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+        with get_sqlite_connection(self.db_path) as conn:
             cursor = conn.execute("SELECT * FROM symbols ORDER BY symbol_id")
             rows = cursor.fetchall()
 
@@ -4353,6 +6423,7 @@ from datetime import datetime, timezone
 from catalytic_chat.section_indexer import SectionIndexer
 from catalytic_chat.slice_resolver import SliceResolver, SliceError
 from catalytic_chat.symbol_registry import SymbolRegistry, SymbolError
+from .paths import get_cortex_dir, get_system1_db, get_sqlite_connection
 
 
 @dataclass
@@ -4399,9 +6470,10 @@ class SymbolResolver:
         self.symbol_registry = symbol_registry
 
         if substrate_mode == "sqlite":
-            self.db_path = repo_root / "CORTEX" / "db" / "system1.db"
+            self.db_path = get_system1_db(repo_root)
         elif substrate_mode == "jsonl":
-            self.cache_path = repo_root / "CORTEX" / "_generated" / "expansion_cache.jsonl"
+            cortex_dir = get_cortex_dir(repo_root)
+            self.cache_path = cortex_dir / "expansion_cache.jsonl"
         else:
             raise ValueError(f"Invalid substrate_mode: {substrate_mode}")
 
@@ -4443,8 +6515,7 @@ class SymbolResolver:
         Returns:
             Cache entry or None if not found
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+        with get_sqlite_connection(self.db_path) as conn:
             cursor = conn.execute("""
                 SELECT * FROM expansion_cache
                 WHERE run_id = ? AND symbol_id = ? AND slice_expr = ? AND section_id = ?
@@ -4504,9 +6575,7 @@ class SymbolResolver:
         Args:
             entry: Cache entry to store
         """
-        with sqlite3.connect(self.db_path) as conn:
-            conn.execute("PRAGMA foreign_keys = ON")
-            conn.execute("PRAGMA journal_mode = WAL")
+        with get_sqlite_connection(self.db_path) as conn:
 
             conn.execute("""
                 CREATE TABLE IF NOT EXISTS expansion_cache (
@@ -4967,10 +7036,9 @@ g*
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-   7 �u7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <!C3updated_at2025-12-29T21:12:18.867520Z2025-12-29 21:12:18%'3section_count02025-12-29 21:12:18b!�
-3index_hash4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b9452025-12-29 21:12:18
-   � ���                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   !updated_at'section_count
-!	index_hash
+   7 �u7                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         <!C3updated_at2025-12-30T01:50:27.100317Z2025-12-30 01:50:27%'3section_count02025-12-30 01:50:27b!�
+3index_hash4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b9452025-12-30 01:50:27
+   � ���                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    !index_hash!index_hash!updated_at'section_count
 
 ```
 
@@ -4979,11 +7047,25 @@ g*
 
 ---
 
+### START OF FILE: CORTEX\_generated\system1.db
+
+```
+
+SQLite format 3   @                                                                        .j�
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
+
+```
+
+### END OF FILE: CORTEX\_generated\system1.db
+
+
+---
+
 ### START OF FILE: CORTEX\_generated\system3.db
 
 ```
 
-SQLite format 3   @                   �                                                  .j�   �    ���.
+SQLite format 3   @                 D                                                 .j�   �    ���.
 f�	�0	��4���                                                                                                                                                                                                                                                                   �I/�?triggertr_messages_append_only_updatecassette_messagesCREATE TRIGGER tr_messages_append_only_update
             BEFORE UPDATE ON cassette_messages
             BEGIN
@@ -5043,27 +7125,70 @@ CREATE INDEX idx_jobs_message_id
             )AU/ indexsqlite_autoindex_cassette_messages_2cassette_messagesAU/ indexsqlite_autoindex_cassette_messages_1cassette_messages�''�utablecassette_metacassette_metaCREATE TABLE cassette_meta (
                 key TEXT PRIMARY KEY,
                 value TEXT NOT NULL
-            )9M' indexsqlite_autoindex_cassette_meta_1cassette_meta      
-
+            )9M' indexsqlite_autoindex_cassette_meta_1cassette_meta      
    � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  )schema_version1
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )	schema_version
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    �/5' �e3msg_1b73733690ca81bctest_plan_001PLANNER{"run_id": "test_plan_001", "request_id": "req_001", "intent": "Test simple plan with one symbol", "inputs": {"symbols": ["@TEST/example"], "files": [], "notes": []}, "budgets": {"max_steps": 5, "max_bytes": 10000000, "max_symbols": 3}}2025-12-29 21:31:11
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              5	msg_1b73733690ca81bc
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    ' 	test_plan_001
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 $'3	test_plan_0012025-12-29 21:31:11
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   a55M	3job_3070843989840b2amsg_1b73733690ca81bcTest simple plan with one symbol2025-12-29 21:31:11
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              5	job_3070843989840b2a
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5		msg_1b73733690ca81bc
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         �:75	  �e3step_1476c0912beaf100job_3070843989840b2aPENDING{"run_id": "test_plan_001", "request_id": "req_001", "intent": "Test simple plan with one symbol", "inputs": {"symbols": ["@TEST/example"], "files": [], "notes": []}, "budgets": {"max_steps": 5, "max_bytes": 10000000, "max_symbols": 3}}2025-12-29 21:31:11
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             7	step_1476c0912beaf100
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5		job_3070843989840b2a
-   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           	PENDING
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
-	� 
-0 ����.
-f�	�0	��4��� x                                                                            �I/�?triggertr_messages_append_only_deletecassette_messagesCREATE TRIGGER tr_messages_append_only_delete
+   � �                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    )	schema_version   �    �
+�	>�V�� �                                                                                                                  �5=/�S3msg_ec37953c70c85e8ftest_ant_spawn_multiprocPLANNERreq_ant_multiproc{"run_id": "test_ant_spawn_multiproc", "request_id": "req_ant_multiproc", "intent": "Test ant spawn multiprocess", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md", "LICENSE", "CHANGELOG.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57� 
+597�K3msg_1f4a1ebed9139a15test_ant_continue_failPLANNERreq_ant_continue_fail{"run_id": "test_ant_continue_fail", "request_id": "req_ant_continue_fail", "intent": "Test ant continue on fail", "inputs": {"symbols": [], "files": ["README.md", "NONEXISTENT_FILE.md", "AGENTS.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�\	51/�3msg_5ff82d1bd7ff3e5ftest_ant_fail_stopPLANNERreq_ant_fail_stop{"run_id": "test_ant_fail_stop", "request_id": "req_ant_fail_stop", "intent": "Test ant fail stop", "inputs": {"symbols": [], "files": ["README.md", "NONEXISTENT_FILE.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�\553�3msg_49176a7b9ae81b09test_ant_two_workersPLANNERreq_ant_two_workers{"run_id": "test_ant_two_workers", "request_id": "req_ant_two_workers", "intent": "Test ant two workers", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�K59)�o3msg_4c618ca481301637test_ant_worker_singlePLANNERreq_ant_single{"run_id": "test_ant_worker_single", "request_id": "req_ant_single", "intent": "Test ant worker single", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�5IG�Y3msg_975c32ec22d5c9f9test_parallel_continue_on_failPLANNERreq_parallel_continue_on_fail{"run_id": "test_parallel_continue_on_fail", "request_id": "req_parallel_continue_on_fail", "intent": "Test continue-on-fail behavior", "inputs": {"symbols": [], "files": ["README.md", "README.md", "README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 12000, "max_symbols": 0}}2025-12-30 00:01:26�q553�53msg_faf52dbe1380d482test_parallel_budgetPLANNERreq_parallel_budget{"run_id": "test_parallel_budget", "request_id": "req_parallel_budget", "intent": "Test parallel budget enforcement", "inputs": {"symbols": [], "files": ["README.md", "README.md", "README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 12000, "max_symbols": 0}}2025-12-30 00:01:26�h5?=�3msg_a5bdc04e0d9c279dtest_parallel_idempotencyPLANNERreq_parallel_idempotency{"run_id": "test_parallel_idempotency", "request_id": "req_parallel_idempotency", "intent": "Test parallel idempotency", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:01:26�o5;9�%3msg_e506256221f3a937test_parallel_all_stepsPLANNERreq_parallel_all_steps{"run_id": "test_parallel_all_steps", "request_id": "req_parallel_all_steps", "intent": "Test parallel execution claims all steps", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:01:26�.5-+�?3msg_2f15e96b565dfa8btest_idempotencyPLANNERreq_idempotency{"run_id": "test_idempotency", "request_id": "req_idempotency", "intent": "Test idempotency", "inputs": {"symbols": [], "files": [], "notes": []}, "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}}2025-12-30 00:01:26�=531�Q3msg_2ecd0063977e5f15test_steps_creationPLANNERreq_steps_creation{"run_id": "test_steps_creation", "request_id": "req_steps_creation", "intent": "Test steps creation", "inputs": {"symbols": [], "files": [], "notes": []}, "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}}2025-12-30 00:   
+   � ���9R �k�������                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5msg_029ce864a5e8eccb%msg_run_testmsg_test5msg_602de5b357508a8a
+5msg_e48e822315e538675msg_ec37953c70c85e8f5msg_1f4a1ebed9139a15
+5msg_5ff82d1bd7ff3e5f	5msg_49176a7b9ae81b095msg_4c618ca4813016375msg_975c32ec22d5c9f95msg_faf52dbe1380d4825msg_a5bdc04e0d9c279d5msg_e506256221f3a9375msg_2f15e96b565dfa8b5	msg_2ecd0063977e5f15
+   
+L (Y
+���
+�
+��~�G
+L
+s
+��                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    &7%test_parallel_requestreq_parallel!))test_run_aliasidemp_run_test!1!test_status_manualidemp_test+test_cli_statusreq_test
+$-+test_ants_statusreq_ants_status.=/test_ant_spawn_multiprocreq_ant_multiproc097test_ant_continue_failreq_ant_continue_fail
+(1/test_ant_fail_stopreq_ant_fail_stop	,53test_ant_two_workersreq_ant_two_workers)9)test_ant_worker_singlereq_ant_single@IGtest_parallel_continue_on_failreq_parallel_continue_on_fail,53test_parallel_budgetreq_parallel_budget6?=test_parallel_idempotencyreq_parallel_idempotency2;9test_parallel_all_stepsreq_parallel_all_steps$-+test_idempotencyreq_idempotency)31	test_steps_creationreq_steps_creation
+   
+. 0_
+���
+�
+��|�J
+.
+\
+��                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      -73test_parallel_request2025-12-30 01:28:42&)3test_run_alias2025-12-30 01:15:15*13test_status_manual2025-12-30 01:14:54'+3test_cli_status2025-12-30 01:13:47
+(-3test_ants_status2025-12-30 01:13:150=3test_ant_spawn_multiproc2025-12-30 00:48:57.93test_ant_continue_fail2025-12-30 00:48:57
+*13test_ant_fail_stop2025-12-30 00:48:57	,53test_ant_two_workers2025-12-30 00:48:57.93test_ant_worker_single2025-12-30 00:48:576I3test_parallel_continue_on_fail2025-12-30 00:01:26,53test_parallel_budget2025-12-30 00:01:261?3test_parallel_idempotency2025-12-30 00:01:26/;3test_parallel_all_steps2025-12-30 00:01:26(-3test_idempotency2025-12-30 00:01:26*33	test_steps_creation2025-12-30 00:01:26
+   
+� �W��-
+�
+s
+�k
+�s9
+�
+�                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           X55;	3job_219de1db1c76327cmsg_029ce864a5e8eccbTest parallel execution2025-12-30 01:28:42:'%	3job_run_aliasmsg_run_testTest job2025-12-30 01:15:158+	3job_test_statusmsg_testTest job2025-12-30 01:14:54E
+55	3job_40879c2532181427msg_602de5b357508a8aTest2025-12-30 01:13:47Q55-	3job_d771958c83bb3d1dmsg_e48e822315e53867Test ants status2025-12-30 01:13:15\55C	3job_8ee74cec95779b4amsg_ec37953c70c85e8fTest ant spawn multiprocess2025-12-30 00:48:57Z
+55?	3job_7c7cca7243434661msg_1f4a1ebed9139a15Test ant continue on fail2025-12-30 00:48:57S	551	3job_5f365c6a066f21e0msg_5ff82d1bd7ff3e5fTest ant fail stop2025-12-30 00:48:57U555	3job_3fd06c133ccd158dmsg_49176a7b9ae81b09Test ant two workers2025-12-30 00:48:57W559	3job_5e52e06345d55171msg_4c618ca481301637Test ant worker single2025-12-30 00:48:57_55I	3job_033edd28b0c77670msg_975c32ec22d5c9f9Test continue-on-fail behavior2025-12-30 00:01:26a55M	3job_ce7e9da1d24db84dmsg_faf52dbe1380d482Test parallel budget enforcement2025-12-30 00:01:26Z55?	3job_ff9811a1c926db2emsg_a5bdc04e0d9c279dTest parallel idempotency2025-12-30 00:01:26i55]	3job_da8820eb55b56ce8msg_e506256221f3a937Test parallel execution claims all steps2025-12-30 00:01:26Q55-	3job_77a8661268f82f78msg_2f15e96b565dfa8bTest idempotency2025-12-30 00:01:26T553	3job_b5333219d39ed590msg_2ecd0063977e5f15Test steps creation2025-12-30 00:01:26
+   } k}9�R ���������                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     5job_219de1db1c76327c'job_run_alias+job_test_status5job_40879c2532181427
+5job_d771958c83bb3d1d5job_8ee74cec95779b4a5job_7c7cca7243434661
+5job_5f365c6a066f21e0	5job_3fd06c133ccd158d5job_5e52e06345d551715job_033edd28b0c776705job_ce7e9da1d24db84d5job_ff9811a1c926db2e5job_da8820eb55b56ce85job_77a8661268f82f785	job_b5333219d39ed590
+   u u���1K�e������                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             5	msg_029ce864a5e8eccb%	msg_run_test
+	msg_test5	msg_602de5b357508a8a
+5	msg_e48e822315e538675	msg_ec37953c70c85e8f5	msg_1f4a1ebed9139a15
+5	msg_5ff82d1bd7ff3e5f	5	msg_49176a7b9ae81b095	msg_4c618ca4813016375	msg_975c32ec22d5c9f95	msg_faf52dbe1380d4825	msg_a5bdc04e0d9c279d5	msg_e506256221f3a9375	msg_2f15e96b565dfa8b5		msg_2ecd0063977e5f15
+   � �k"��                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       K
+!'  '3step_run_1job_run_aliasCOMMITTED{"op":"READ"}2025-12-30 01:15:15J
+!'	  '3step_run_0job_run_aliasCOMMITTED{"op":"READ"}2025-12-30 01:15:15G
++  '3step_2job_test_statusPENDING{"op":"READ"}2025-12-30 01:14:54I
++  '3step_1job_test_statusCOMMITTED{"op":"READ"}2025-12-30 01:14:54H
++	  '3step_0job_test_statusCOMMITTED{"op":"READ"}2025-12-30 01:14:54
+   � �����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                !step_run_1!step_run_0
+step_2
+step_1		step_0
+   � �����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       'job_run_alias'	job_run_alias+job_test_status+job_test_status+		job_test_status
+   � �����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       COMMITTED COMMITTED PENDING COMMITTED
+ 	COMMITTED
+   � �R��                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  ^	!!'#	+3rcpt_run_1step_run_1job_run_aliasworker_testSUCCESS{"status":"ok"}2025-12-30 01:15:15^	!!'#	+3rcpt_run_0step_run_0job_run_aliasworker_testSUCCESS{"status":"ok"}2025-12-30 01:15:15U	+	+3rcpt_1step_1job_test_statusworker_1SUCCESS{"status":"ok"}2025-12-30 01:14:54U	+	+3rcpt_0step_0job_test_statusworker_1SUCCESS{"status":"ok"}2025-12-30 01:14:54
+   � ����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             !rcpt_run_1!rcpt_run_0
+rcpt_1		rcpt_0
+   � ����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             !step_run_1!step_run_0
+step_1		step_0
+� 4 ����.
+f�	�0	��w4�� x                                                                            �I/�?triggertr_messages_append_only_deletecassette_messagesCREATE TRIGGER tr_messages_append_only_delete
             BEFORE DELETE ON cassette_messages
             BEGIN
                 SELECT RAISE(ABORT, 'cassette_messages is append-only: DELETE forbidden');
@@ -5073,7 +7198,7 @@ f�	�0	��4��� x                                           
                 SELECT RAISE(ABORT, 'cassette_messages is append-only: UPDATE forbidden');
             END�5/�7indexidx_receipts_step_idcassette_receiptsCREATE INDEX idx_receipts_step_id 
             ON cassette_receipts(step_id)
-        �//�Etablecassette_receiptscassette_receiptsCREATE TABLE cassette_receipts (
+        AU/ indexsqlite_autoindex_cassette_receipts_1cassette_receipts�//�Etablecassette_receiptscassette_receiptsCREATE TABLE cassette_receipts (
                 receipt_id TEXT PRIMARY KEY,
                 step_id TEXT NOT NULL,
                 job_id TEXT NOT NULL,
@@ -5084,7 +7209,7 @@ f�	�0	��4��� x                                           
                 created_at TEXT NOT NULL DEFAULT (datetime('now')),
                 FOREIGN KEY (step_id) REFERENCES cassette_steps(step_id),
                 FOREIGN KEY (job_id) REFERENCES cassette_jobs(job_id)
-            )	�nU/ indexsqlite_autoindex_cassette_receipts_1cassette_receipts�
+            )�
 =)�[indexidx_steps_status_expirescassette_stepsCREATE INDEX idx_steps_status_expires 
             ON cassette_steps(status, lease_expires_at)
         �7)�Cindexidx_steps_job_ordinalcassette_steps
@@ -5102,7 +7227,7 @@ CREATE INDEX idx_steps_job_ordinal
                 payload_json TEXT NOT NULL,
                 created_at TEXT NOT NULL DEFAULT (datetime('now')),
                 FOREIGN KEY (job_id) REFERENCES cassette_jobs(job_id)
-            )� =O) indexsqlite_autoindex_cassette_steps_1cassette_steps�		3'�Eindexidx_jobs_message_idcassette_jobs
+            );O) indexsqlite_autoindex_cassette_steps_1cassette_steps�		3'�Eindexidx_jobs_message_idcassette_jobs
 CREATE INDEX idx_jobs_message_id 
             ON cassette_jobs(message_id, ordinal)
         �
@@ -5127,67 +7252,81 @@ CREATE INDEX idx_jobs_message_id
                 key TEXT PRIMARY KEY,
                 value TEXT NOT NULL
             )9M' indexsqlite_autoindex_cassette_meta_1cassette_meta       
-    � �5�
-�=
-$	���G� �                                                                                                                     �axO)�Utriggertr_steps_lease_prevent_direct_setcassette_stepsCREATE TRIGGER tr_steps_lease_prevent_direct_set
-            BEFORE UPDATE OF lease_owner, lease_expires_at, fencing_token ON cassette_steps
-            WHEN (NEW.lease_owner <> OLD.lease_owner OR 
-                   NEW.lease_expires_at <> OLD.lease_expires_at OR 
-                   NEW.fencing_token <> OLD.fencing_token) AND 
-                  NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
-            BEGIN
-                SELECT RAISE(ABORT, 'Lease fields can only be set when status is PENDING and remains PENDING');
-            END�Gw9)�7triggertr_steps_fsm_illegal_3cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_3
-            BEFORE UPDATE OF status ON cassette_steps
-            WHEN NEW.status = 'LEASED' AND OLD.status = 'COMMITTED'
-            BEGIN
-                SELECT RAISE(ABORT, 'Illegal FSM transition: COMMITTED -> LEASED');
-            END�Cv9)�/triggertr_steps_fsm_illegal_2cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_2
-            BEFORE UPDATE OF status ON cassette_steps
-            WHEN NEW.status = 'PENDING' AND OLD.status = 'LEASED'
-            BEGIN
-                SELECT RAISE(ABORT, 'Illegal FSM transition: LEASED -> PENDING');
-            END�Iu9)�;triggertr_steps_fsm_illegal_1cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_1
+�  N =� N/2�� �	��L       N                                      G[5 indexsqlite_autoindex_cassette_job_budgets_1cassette_job_budgets�I�09)�;triggertr_steps_fsm_illegal_1cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_1
             BEFORE UPDATE OF status ON cassette_steps
             WHEN NEW.status = 'COMMITTED' AND OLD.status = 'PENDING'
             BEGIN
                 SELECT RAISE(ABORT, 'Illegal FSM transition: PENDING -> COMMITTED');
-            END�tI/�?triggertr_receipts_append_only_deletecassette_receiptsCREATE TRIGGER tr_receipts_append_only_delete
+            END��/I/�?triggertr_receipts_append_only_deletecassette_receiptsCREATE TRIGGER tr_receipts_append_only_delete
             BEFORE DELETE ON cassette_receipts
             BEGIN
                 SELECT RAISE(ABORT, 'cassette_receipts is append-only: DELETE forbidden');
-            END�sI/�?triggertr_receipts_append_only_updatecassette_receiptsCREATE TRIGGER tr_receipts_append_only_update
+            END��.I/�?triggertr_receipts_append_only_updatecassette_receiptsCREATE TRIGGER tr_receipts_append_only_update
             BEFORE UPDATE ON cassette_receipts
             BEGIN
                 SELECT RAISE(ABORT, 'cassette_receipts is append-only: UPDATE forbidden');
-            END�rI/�?triggertr_messages_append_only_deletecassette_messagesCREATE TRIGGER tr_messages_append_only_delete
+            END��-I/�?triggertr_messages_append_only_deletecassette_messagesCREATE TRIGGER tr_messages_append_only_delete
             BEFORE DELETE ON cassette_messages
             BEGIN
                 SELECT RAISE(ABORT, 'cassette_messages is append-only: DELETE forbidden');
-            END�qI/�?triggertr_messages_append_only_updatecassette_messagesCREATE TRIGGER tr_messages_append_only_update
+            END��,I/�?triggertr_messages_append_only_updatecassette_messagesCREATE TRIGGER tr_messages_append_only_update
             BEFORE UPDATE ON cassette_messages
             BEGIN
                 SELECT RAISE(ABORT, 'cassette_messages is append-only: UPDATE forbidden');
+            END�[�3O)�Itriggertr_steps_lease_prevent_direct_setcassette_stepsCREATE TRIGGER tr_steps_lease_prevent_direct_set
+            BEFORE UPDATE OF lease_owner, lease_expires_at, fencing_token ON cassette_steps
+            WHEN (NEW.lease_owner <> OLD.lease_owner OR 
+                   NEW.lease_expires_at <> OLD.lease_expires_at OR 
+                   NEW.fencing_token <> OLD.fencing_token) AND 
+                   NOT (OLD.status = 'PENDING' AND NEW.status = 'LEASED')
+            BEGIN
+                SELECT RAISE(ABORT, 'Lease fields can only be set during PENDING -> LEASED transition');
+            END�G�29)�7triggertr_steps_fsm_illegal_3cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_3
+            BEFORE UPDATE OF status ON cassette_steps
+            WHEN NEW.status = 'LEASED' AND OLD.status = 'COMMITTED'
+            BEGIN
+                SELECT RAISE(ABORT, 'Illegal FSM transition: COMMITTED -> LEASED');
+            END�C�19)�/triggertr_steps_fsm_illegal_2cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_2
+            BEFORE UPDATE OF status ON cassette_steps
+            WHEN NEW.status = 'PENDING' AND OLD.status = 'LEASED'
+            BEGIN
+                SELECT RAISE(ABORT, 'Illegal FSM transition: LEASED -> PENDING');
             END�5/�7indexidx_receipts_step_idcassette_receiptsCREATE INDEX idx_receipts_step_id 
             ON cassette_receipts(step_id)
-        AU/ indexsqlite_autoindex_cassette_receipts_1cassette_receipts�//�Etablecassette_receiptscassette_receiptsCREATE TABLE cassette_receipts (
+          hU/ indexsqlite_autoindex_cassette_receipts_1cassette_receipts�//�Etablecassette_receiptscassette_receiptsCREATE TABLE cassette_receipts (
                 receipt_id TEXT PRIMARY KEY,
                 step_id TEXT NOT NULL,
                 job_id TEXT NOT NULL,
-                worker_id TEXT NOT NULL,
-                fencing_token INTEGER NOT NULL,
-                outcome TEXT NOT NULL CHECK(outcome IN ('SUCCESS', 'FAILURE', 'ABORTED')),
-                receipt_json TEXT NOT NULL,
-                created_at TEXT NOT NULL DEFAULT (datetime('now')),
-                FOREIGN KEY (step_id) REFERENCES cassette_steps(step_id),
+           �I� 9)�;triggertr_steps_fsm_illegal_1cassette_stepsCREATE TRIGGER tr_steps_fsm_illegal_1
+            BEFORE UPDATE OF status ON cassette_steps
+            WHEN NEW.status = 'COMMITTED' AND OLD.status = 'PENDING'
+            BEGIN
+                SELECT RAISE(ABORT, 'Illegal FSM transition: PENDING -> COMMITTED');
+            END�95�?indexidx_job_budgets_job_idcassette_job_budgetsCREATE INDEX idx_job_budgets_job_id 
+            ON cassette_job_budgets(job_id)
+        �;55�tablecassette_job_budgetscassette_job_budgetsCREATE TABLE cassette_job_budgets (
+                job_id TEXT PRIMARY KEY,
+                bytes_consumed INTEGER DEFAULT 0,
+                symbols_consumed INTEGER DEFAULT 0,
                 FOREIGN KEY (job_id) REFERENCES cassette_jobs(job_id)
-            )�
-=)�[indexidx_steps_status_expirescassette_stepsCREATE INDEX idx_steps_status_expires 
-            ON cassette_steps(status, lease_expires_at)
-        �7)�Cindexidx_steps_job_ordinalcassette_steps
-CREATE INDEX idx_steps_job_ordinal 
-            ON cassette_steps(job_id, ordinal)
-        ;O) indexsqlite_autoindex_cassette_steps_1cassette_steps
+            )
+   � ����~dJ0�����                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                5job_219de1db1c76327c
+5job_40879c25321814275job_d771958c83bb3d1d5job_8ee74cec95779b4a
+5job_7c7cca7243434661	5job_5f365c6a066f21e05job_3fd06c133ccd158d5job_5e52e06345d551715job_033edd28b0c776705job_ce7e9da1d24db84d5job_ff9811a1c926db2e5job_da8820eb55b56ce85job_77a8661268f82f785job_b5333219d39ed590
+   � k�9�R �������                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               5job_219de1db1c76327c5job_40879c2532181427
+5job_d771958c83bb3d1d5job_8ee74cec95779b4a5job_7c7cca7243434661
+5job_5f365c6a066f21e0	5job_3fd06c133ccd158d5job_5e52e06345d551715job_033edd28b0c776705job_ce7e9da1d24db84d5job_ff9811a1c926db2e5job_da8820eb55b56ce85job_77a8661268f82f785	job_b5333219d39ed590
+   � k�9�R �������                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               5job_219de1db1c76327c5job_40879c2532181427
+5job_d771958c83bb3d1d5job_8ee74cec95779b4a5job_7c7cca7243434661
+5job_5f365c6a066f21e0	5job_3fd06c133ccd158d5job_5e52e06345d551715job_033edd28b0c776705job_ce7e9da1d24db84d5job_ff9811a1c926db2e5job_da8820eb55b56ce85job_77a8661268f82f785	job_b5333219d39ed590
+    � �
+�
+�	>�V�� �                                                                                                                  �5=/�S3msg_ec37953c70c85e8ftest_ant_spawn_multiprocPLANNERreq_ant_multiproc{"run_id": "test_ant_spawn_multiproc", "request_id": "req_ant_multiproc", "intent": "Test ant spawn multiprocess", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md", "LICENSE", "CHANGELOG.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57� 
+597�K3msg_1f4a1ebed9139a15test_ant_continue_failPLANNERreq_ant_continue_fail{"run_id": "test_ant_continue_fail", "request_id": "req_ant_continue_fail", "intent": "Test ant continue on fail", "inputs": {"symbols": [], "files": ["README.md", "NONEXISTENT_FILE.md", "AGENTS.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�\	51/�3msg_5ff82d1bd7ff3e5ftest_ant_fail_stopPLANNERreq_ant_fail_stop{"run_id": "test_ant_fail_stop", "request_id": "req_ant_fail_stop", "intent": "Test ant fail stop", "inputs": {"symbols": [], "files": ["README.md", "NONEXISTENT_FILE.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�\553�3msg_49176a7b9ae81b09test_ant_two_workersPLANNERreq_ant_two_workers{"run_id": "test_ant_two_workers", "request_id": "req_ant_two_workers", "intent": "Test ant two workers", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�K59)�o3msg_4c618ca481301637test_ant_worker_singlePLANNERreq_ant_single{"run_id": "test_ant_worker_single", "request_id": "req_ant_single", "intent": "Test ant worker single", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:48:57�5IG�Y3msg_975c32ec22d5c9f9test_parallel_continue_on_failPLANNERreq_parallel_continue_on_fail{"run_id": "test_parallel_continue_on_fail", "request_id": "req_parallel_continue_on_fail", "intent": "Test continue-on-fail behavior", "inputs": {"symbols": [], "files": ["README.md", "README.md", "README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 12000, "max_symbols": 0}}2025-12-30 00:01:26�q553�53msg_faf52dbe1380d482test_parallel_budgetPLANNERreq_parallel_budget{"run_id": "test_parallel_budget", "request_id": "req_parallel_budget", "intent": "Test parallel budget enforcement", "inputs": {"symbols": [], "files": ["README.md", "README.md", "README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 12000, "max_symbols": 0}}2025-12-30 00:01:26�h5?=�3msg_a5bdc04e0d9c279dtest_parallel_idempotencyPLANNERreq_parallel_idempotency{"run_id": "test_parallel_idempotency", "request_id": "req_parallel_idempotency", "intent": "Test parallel idempotency", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:01:26�o5;9�%3msg_e506256221f3a937test_parallel_all_stepsPLANNERreq_parallel_all_steps{"run_id": "test_parallel_all_steps", "request_id": "req_parallel_all_steps", "intent": "Test parallel execution claims all steps", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 00:01:26�.5-+�?3msg_2f15e96b565dfa8btest_idempotencyPLANNERreq_idempotency{"run_id": "test_idempotency", "request_id": "req_idempotency", "intent": "Test idempotency", "inputs": {"symbols": [], "files": [], "notes": []}, "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}}2025-12-30 00:01:26�=531�Q3msg_2ecd0063977e5f15test_steps_creationPLANNERreq_steps_creation{"run_id": "test_steps_creation", "request_id": "req_steps_creation", "intent": "Test steps creation", "inputs": {"symbols": [], "files": [], "notes": []}, "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}}2025-12-30 00:01:26
+   x �
+�
+@�x                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      �n57%�;3msg_029ce864a5e8eccbtest_parallel_requestPLANNERreq_parallel{"run_id": "test_parallel_request", "request_id": "req_parallel", "intent": "Test parallel execution", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md", "LICENSE", "CHANGELOG.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 01:28:42U%))+3msg_run_testtest_run_aliasUSERidemp_run_test{"test":"data"}2025-12-30 01:15:15Q1!+3msg_testtest_status_manualUSERidemp_test{"test":"data"}2025-12-30 01:14:54�
+5+�13msg_602de5b357508a8atest_cli_statusPLANNERreq_test{"run_id": "test_cli_status", "request_id": "req_test", "intent": "Test", "inputs": {"symbols": [], "files": ["README.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 01:13:47�H5-+�s3msg_e48e822315e53867test_ants_statusPLANNERreq_ants_status{"run_id": "test_ants_status", "request_id": "req_ants_status", "intent": "Test ants status", "inputs": {"symbols": [], "files": ["README.md", "AGENTS.md"], "notes": []}, "budgets": {"max_steps": 100, "max_bytes": 100000000, "max_symbols": 0}}2025-12-30 01:13:15
 
 ```
 
@@ -13768,6 +15907,1052 @@ if __name__ == "__main__":
 
 ---
 
+### START OF FILE: tests\conftest.py
+
+```python
+
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+
+```
+
+### END OF FILE: tests\conftest.py
+
+
+---
+
+### START OF FILE: tests\test_ants.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Ants: Multi-worker agent runner tests (Phase 4.3)
+"""
+
+import json
+import sys
+from pathlib import Path
+
+import pytest
+
+from catalytic_chat.planner import post_request_and_plan
+from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
+from catalytic_chat.ants import AntWorker, AntConfig, spawn_ants, run_ant_worker
+
+
+TESTS_DIR = Path(__file__).parent / "fixtures"
+
+
+def load_fixture(name: str) -> dict:
+    """Load a test fixture from tests/fixtures/."""
+    fixture_path = TESTS_DIR / name
+    with open(fixture_path, 'r') as f:
+        return json.load(f)
+
+
+def test_ant_worker_claims_and_executes():
+    """Single ant worker claims and executes steps."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ant_worker_single",
+        "request_id": "req_ant_single",
+        "intent": "Test ant worker single",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        config = AntConfig(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_0",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=5
+        )
+        
+        worker = AntWorker(config)
+        exit_code = worker.run()
+        
+        assert exit_code == 0, f"Worker exited with code {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {receipt_count}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ? AND status = 'COMMITTED'
+        """, (job_id,))
+        committed_count = cursor.fetchone()["count"]
+        
+        assert committed_count == initial_step_count, \
+            f"Expected {initial_step_count} committed steps, got {committed_count}"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ants_spawn_two_workers_no_duplicates():
+    """Two ants run without duplicate receipts."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ant_two_workers",
+        "request_id": "req_ant_two_workers",
+        "intent": "Test ant two workers",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "AGENTS.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        exit_code = run_ant_worker(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_0",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=10
+        )
+        
+        assert exit_code == 0, f"Worker 0 exited with code {exit_code}"
+        
+        exit_code = run_ant_worker(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_1",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=5
+        )
+        
+        assert exit_code == 0, f"Worker 1 exited with code {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {receipt_count}"
+        
+        cursor = conn.execute("""
+            SELECT step_id, COUNT(*) as cnt FROM cassette_receipts WHERE job_id = ? GROUP BY step_id
+        """, (job_id,))
+        for row in cursor.fetchall():
+            assert row["cnt"] == 1, f"Step {row['step_id']} has {row['cnt']} receipts (expected 1)"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ant_stops_on_fail_by_default():
+    """Ant worker stops on first failure by default."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ant_fail_stop",
+        "request_id": "req_ant_fail_stop",
+        "intent": "Test ant fail stop",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "NONEXISTENT_FILE.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        config = AntConfig(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_fail_0",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=10,
+            continue_on_fail=False
+        )
+        
+        worker = AntWorker(config)
+        exit_code = worker.run()
+        
+        assert exit_code == 1, f"Expected exit code 1, got {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ? AND outcome = 'SUCCESS'
+        """, (job_id,))
+        success_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ? AND outcome = 'FAILURE'
+        """, (job_id,))
+        failure_count = cursor.fetchone()["count"]
+        
+        assert failure_count >= 1, "Expected at least one failure"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ant_continue_on_fail_completes_others():
+    """Ant worker continues on failure when continue_on_fail=True."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ant_continue_fail",
+        "request_id": "req_ant_continue_fail",
+        "intent": "Test ant continue on fail",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "NONEXISTENT_FILE.md", "AGENTS.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        config = AntConfig(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_continue_0",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=10,
+            continue_on_fail=True
+        )
+        
+        worker = AntWorker(config)
+        exit_code = worker.run()
+        
+        assert exit_code == 1, f"Expected exit code 1 (any failure), got {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {receipt_count}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ? AND outcome = 'SUCCESS'
+        """, (job_id,))
+        success_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ? AND outcome = 'FAILURE'
+        """, (job_id,))
+        failure_count = cursor.fetchone()["count"]
+        
+        assert success_count > 0, "Expected at least one success"
+        assert failure_count >= 1, "Expected at least one failure"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ant_spawn_multiprocess():
+    """End-to-end multiprocess test with real subprocesses."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ant_spawn_multiproc",
+        "request_id": "req_ant_multiproc",
+        "intent": "Test ant spawn multiprocess",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "AGENTS.md", "LICENSE", "CHANGELOG.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        exit_code = spawn_ants(
+            run_id=request["run_id"],
+            job_id=job_id,
+            num_workers=2,
+            repo_root=repo_root,
+            continue_on_fail=False
+        )
+        
+        assert exit_code == 0, f"Spawn exited with code {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {receipt_count}"
+        
+        cursor = conn.execute("""
+            SELECT step_id, COUNT(*) as cnt FROM cassette_receipts WHERE job_id = ? GROUP BY step_id
+        """, (job_id,))
+        for row in cursor.fetchall():
+            assert row["cnt"] == 1, f"Step {row['step_id']} has {row['cnt']} receipts (expected 1)"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+        cortex_dir = repo_root / "CORTEX" / "_generated"
+        manifest_path = cortex_dir / f"ants_manifest_{request['run_id']}_{job_id}.json"
+        
+        assert manifest_path.exists(), "Manifest file not created"
+        
+        with open(manifest_path, 'r') as f:
+            manifest = json.load(f)
+        
+        assert manifest["run_id"] == request["run_id"]
+        assert manifest["job_id"] == job_id
+        assert len(manifest["workers"]) == 2
+        assert all("worker_id" in w and "pid" in w for w in manifest["workers"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ants_status_counts():
+    """Test ants status command returns correct counts."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_ants_status",
+        "request_id": "req_ants_status",
+        "intent": "Test ants status",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "AGENTS.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        config = AntConfig(
+            run_id=request["run_id"],
+            job_id=job_id,
+            worker_id="test_ant_status_0",
+            repo_root=repo_root,
+            poll_interval_ms=100,
+            max_idle_polls=5
+        )
+        
+        worker = AntWorker(config)
+        exit_code = worker.run()
+        
+        assert exit_code == 0, f"Worker exited with code {exit_code}"
+        
+        status = cassette.get_job_status(run_id=request["run_id"], job_id=job_id)
+        
+        assert status is not None, "Status should not be None"
+        assert status["pending"] == 0, f"Expected 0 pending, got {status['pending']}"
+        assert status["leased"] == 0, f"Expected 0 leased, got {status['leased']}"
+        assert status["committed"] == initial_step_count, \
+            f"Expected {initial_step_count} committed, got {status['committed']}"
+        assert status["receipts"] == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {status['receipts']}"
+        assert status["workers_seen"] == 1, \
+            f"Expected 1 worker seen, got {status['workers_seen']}"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_ants_run_alias_calls_spawn():
+    """Test that 'ants run' is an alias for 'ants spawn'."""
+    import argparse
+    
+    parser = argparse.ArgumentParser()
+    subparsers = parser.add_subparsers(dest="ants_command")
+    
+    run_parser = subparsers.add_parser("run")
+    run_parser.add_argument("--run-id", required=True)
+    run_parser.add_argument("--job-id", required=True)
+    run_parser.add_argument("-n", type=int, required=True)
+    run_parser.add_argument("--continue-on-fail", action="store_true")
+    
+    spawn_parser = subparsers.add_parser("spawn")
+    spawn_parser.add_argument("--run-id", required=True)
+    spawn_parser.add_argument("--job-id", required=True)
+    spawn_parser.add_argument("-n", type=int, required=True)
+    spawn_parser.add_argument("--continue-on-fail", action="store_true")
+    
+    run_args = parser.parse_args(["run", "--run-id", "test_run", "--job-id", "job1", "-n", "2"])
+    spawn_args = parser.parse_args(["spawn", "--run-id", "test_run", "--job-id", "job1", "-n", "2"])
+    
+    assert run_args.ants_command == "run"
+    assert spawn_args.ants_command == "spawn"
+    assert run_args.run_id == spawn_args.run_id
+    assert run_args.job_id == spawn_args.job_id
+    assert run_args.n == spawn_args.n
+    assert run_args.continue_on_fail == spawn_args.continue_on_fail
+    
+    from catalytic_chat.cli import cmd_ants_spawn
+    ants_commands = {
+        "spawn": cmd_ants_spawn,
+        "run": cmd_ants_spawn,
+        "worker": lambda x: 0,
+        "status": lambda x: 0
+    }
+    
+    assert ants_commands["run"] == ants_commands["spawn"], \
+        "'run' should route to the same handler as 'spawn'"
+
+
+```
+
+### END OF FILE: tests\test_ants.py
+
+
+---
+
+### START OF FILE: tests\test_execution.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Execution Tests (Phase 4.1)
+"""
+
+import json
+import sys
+from pathlib import Path
+
+from catalytic_chat.planner import Planner, post_request_and_plan, verify_plan_stored
+from catalytic_chat.message_cassette import MessageCassette
+
+TESTS_DIR = Path(__file__).parent / "fixtures"
+
+
+def load_fixture(name: str) -> dict:
+    """Load a test fixture from tests/fixtures/."""
+    fixture_path = TESTS_DIR / name
+    with open(fixture_path, 'r') as f:
+        return json.load(f)
+
+
+def test_steps_created_after_plan_request():
+    """Steps are created in cassette after plan request."""
+    from catalytic_chat.message_cassette import MessageCassette
+    
+    request = {
+        "run_id": "test_steps_creation",
+        "request_id": "req_steps_creation",
+        "intent": "Test steps creation",
+        "inputs": {"symbols": [], "files": [], "notes": []},
+        "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}
+    }
+    
+    cassette = MessageCassette()
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+        )
+        
+        conn = cassette._get_conn()
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        count = cursor.fetchone()["count"]
+        
+        assert count == 0, f"Expected 0 steps for plan with no symbols, got {count}"
+        print("[PASS] test_steps_created_after_plan_request")
+        
+    except Exception as e:
+        print(f"[FAIL] test_steps_created_after_plan_request: {e}")
+        sys.exit(1)
+    finally:
+        cassette.close()
+
+
+def test_plan_request_idempotent_no_duplicate_steps():
+    """Re-running plan request does not duplicate steps."""
+    from catalytic_chat.message_cassette import MessageCassette
+    
+    request = {
+        "run_id": "test_idempotency",
+        "request_id": "req_idempotency",
+        "intent": "Test idempotency",
+        "inputs": {"symbols": [], "files": [], "notes": []},
+        "budgets": {"max_steps": 1, "max_bytes": 10000000, "max_symbols": 10}
+    }
+    
+    cassette = MessageCassette()
+    try:
+        message_id1, job_id1, step_ids1 = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+        )
+        
+        message_id2, job_id2, step_ids2 = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+        )
+        
+        assert message_id1 == message_id2, "Message ID should be identical"
+        assert job_id1 == job_id2, "Job ID should be identical"
+        
+        conn = cassette._get_conn()
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id1,))
+        count = cursor.fetchone()["count"]
+        
+        assert count == 0, f"Expected 0 steps after two identical plan requests, got {count}"
+        print("[PASS] test_plan_request_idempotent_no_duplicate_steps")
+        
+    except Exception as e:
+        print(f"[FAIL] test_plan_request_idempotent_no_duplicate_steps: {e}")
+        sys.exit(1)
+    finally:
+        cassette.close()
+
+
+def main():
+    """Run all tests."""
+    tests = [
+        test_steps_created_after_plan_request,
+        test_plan_request_idempotent_no_duplicate_steps,
+    ]
+    
+    for test in tests:
+        test()
+    
+    print("\nAll tests passed!")
+
+
+if __name__ == '__main__':
+    main()
+
+
+```
+
+### END OF FILE: tests\test_execution.py
+
+
+---
+
+### START OF FILE: tests\test_execution_parallel.py
+
+```python
+
+#!/usr/bin/env python3
+"""
+Parallel Execution Tests (Phase 4.2)
+"""
+
+import json
+import sys
+from pathlib import Path
+
+import pytest
+
+from catalytic_chat.planner import post_request_and_plan
+from catalytic_chat.message_cassette import MessageCassette, MessageCassetteError
+from catalytic_chat.cli import cmd_execute
+
+TESTS_DIR = Path(__file__).parent / "fixtures"
+
+
+def load_fixture(name: str) -> dict:
+    """Load a test fixture from tests/fixtures/."""
+    fixture_path = TESTS_DIR / name
+    with open(fixture_path, 'r') as f:
+        return json.load(f)
+
+
+def test_execute_parallel_claims_all_steps_once():
+    """Parallel execution claims and executes all steps exactly once."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_parallel_all_steps",
+        "request_id": "req_parallel_all_steps",
+        "intent": "Test parallel execution claims all steps",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        from argparse import Namespace
+        args = Namespace(
+            run_id=request["run_id"],
+            job_id=job_id,
+            workers=4,
+            continue_on_fail=False,
+            repo_root=repo_root
+        )
+        
+        exit_code = cmd_execute(args)
+        assert exit_code == 0, f"Execution failed with exit code {exit_code}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Expected {initial_step_count} receipts, got {receipt_count}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ? AND status = 'COMMITTED'
+        """, (job_id,))
+        committed_count = cursor.fetchone()["count"]
+        
+        assert committed_count == initial_step_count, \
+            f"Expected {initial_step_count} committed steps, got {committed_count}"
+        
+        cursor = conn.execute("""
+            SELECT step_id, COUNT(*) as cnt FROM cassette_receipts WHERE job_id = ? GROUP BY step_id
+        """, (job_id,))
+        for row in cursor.fetchall():
+            assert row["cnt"] == 1, f"Step {row['step_id']} has {row['cnt']} receipts (expected 1)"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_execute_parallel_idempotent_rerun():
+    """Re-running parallel execution does no work and creates no duplicates."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_parallel_idempotency",
+        "request_id": "req_parallel_idempotency",
+        "intent": "Test parallel idempotency",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 100000000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        from argparse import Namespace
+        args = Namespace(
+            run_id=request["run_id"],
+            job_id=job_id,
+            workers=2,
+            continue_on_fail=False,
+            repo_root=repo_root
+        )
+        
+        exit_code1 = cmd_execute(args)
+        assert exit_code1 == 0, f"First execution failed with exit code {exit_code1}"
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count_after_first = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT bytes_consumed, symbols_consumed
+            FROM cassette_job_budgets
+            WHERE job_id = ?
+        """, (job_id,))
+        budget_after_first = cursor.fetchone()
+        
+        assert budget_after_first is not None, "Budget row not initialized"
+        
+        exit_code2 = cmd_execute(args)
+        assert exit_code2 == 0, f"Second execution failed with exit code {exit_code2}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count_after_second = cursor.fetchone()["count"]
+        
+        assert receipt_count_after_second == receipt_count_after_first, \
+            f"Second run created new receipts: {receipt_count_after_first} -> {receipt_count_after_second}"
+        
+        cursor = conn.execute("""
+            SELECT bytes_consumed, symbols_consumed
+            FROM cassette_job_budgets
+            WHERE job_id = ?
+        """, (job_id,))
+        budget_after_second = cursor.fetchone()
+        
+        assert budget_after_second is not None, "Budget row disappeared"
+        assert budget_after_second["bytes_consumed"] == budget_after_first["bytes_consumed"], \
+            f"Budget was re-consumed on second run: {budget_after_first['bytes_consumed']} -> {budget_after_second['bytes_consumed']}"
+        assert budget_after_second["symbols_consumed"] == budget_after_first["symbols_consumed"], \
+            "Symbols were re-consumed on second run"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_global_budget_enforced_under_parallelism():
+    """Global budget is enforced deterministically under parallel execution."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_parallel_budget",
+        "request_id": "req_parallel_budget",
+        "intent": "Test parallel budget enforcement",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "README.md", "README.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 12000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        from argparse import Namespace
+        args = Namespace(
+            run_id=request["run_id"],
+            job_id=job_id,
+            workers=4,
+            continue_on_fail=False,
+            repo_root=repo_root
+        )
+        
+        exit_code = cmd_execute(args)
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Not all steps completed: {receipt_count}/{initial_step_count}"
+        
+        cursor = conn.execute("""
+            SELECT bytes_consumed, symbols_consumed
+            FROM cassette_job_budgets
+            WHERE job_id = ?
+        """, (job_id,))
+        budget_row = cursor.fetchone()
+        
+        assert budget_row is not None, "Budget row not found"
+        assert budget_row["bytes_consumed"] == budget_row["symbols_consumed"] * 3339, \
+            f"Budget tracking mismatch"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+def test_continue_on_fail_behavior():
+    """Continue-on-fail flag allows remaining steps to complete."""
+    repo_root = Path(__file__).parent.parent
+    
+    request = {
+        "run_id": "test_parallel_continue_on_fail",
+        "request_id": "req_parallel_continue_on_fail",
+        "intent": "Test continue-on-fail behavior",
+        "inputs": {
+            "symbols": [],
+            "files": ["README.md", "README.md", "README.md"],
+            "notes": []
+        },
+        "budgets": {
+            "max_steps": 100,
+            "max_bytes": 12000,
+            "max_symbols": 0
+        }
+    }
+    
+    cassette = MessageCassette(repo_root=repo_root)
+    try:
+        message_id, job_id, step_ids = post_request_and_plan(
+            run_id=request["run_id"],
+            request_payload=request,
+            idempotency_key=request["request_id"],
+            repo_root=repo_root
+        )
+        
+        conn = cassette._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_steps WHERE job_id = ?
+        """, (job_id,))
+        initial_step_count = cursor.fetchone()["count"]
+        
+        if initial_step_count == 0:
+            pytest.skip("No steps found")
+        
+        from argparse import Namespace
+        args = Namespace(
+            run_id=request["run_id"],
+            job_id=job_id,
+            workers=4,
+            continue_on_fail=True,
+            repo_root=repo_root
+        )
+        
+        exit_code = cmd_execute(args)
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ?
+        """, (job_id,))
+        receipt_count = cursor.fetchone()["count"]
+        
+        assert receipt_count == initial_step_count, \
+            f"Not all steps completed: {receipt_count}/{initial_step_count}"
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count FROM cassette_receipts WHERE job_id = ? AND outcome = 'SUCCESS'
+        """, (job_id,))
+        success_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT bytes_consumed, symbols_consumed
+            FROM cassette_job_budgets
+            WHERE job_id = ?
+        """, (job_id,))
+        budget_row = cursor.fetchone()
+        
+        assert budget_row is not None, "Budget row not found"
+        assert success_count > 0, "Expected at least one success"
+        assert budget_row["bytes_consumed"] == success_count * 3339, \
+            f"Budget tracking mismatch"
+        
+        cassette.verify_cassette(request["run_id"])
+        
+    finally:
+        cassette.close()
+
+
+```
+
+### END OF FILE: tests\test_execution_parallel.py
+
+
+---
+
 ### START OF FILE: tests\test_message_cassette.py
 
 ```python
@@ -14450,16 +17635,32 @@ def test_cli_dry_run():
     
     result = subprocess.run(cmd, capture_output=True, text=True)
     
-    # The test may fail if symbol doesn't exist, but that's expected behavior
-    # Check that CLI at least runs and returns appropriate output
-    if result.returncode == 0:
-        assert "step_id" in result.stdout or "steps" in result.stdout.lower(), "Dry-run should produce step info"
-        print("[PASS] test_cli_dry_run")
-    elif "not found" in result.stderr.lower() or result.stderr:
-        # Symbol doesn't exist - this is acceptable behavior for test fixture
-        print("[SKIP] test_cli_dry_run (symbol not in registry)")
-    else:
-        print(f"[SKIP] test_cli_dry_run (CLI returned {result.returncode})")
+    # In dry-run mode, should succeed even if symbol doesn't exist
+    assert result.returncode == 0, f"Dry-run should succeed, got: {result.stderr}"
+    assert "step_id" in result.stdout, "Dry-run should produce step IDs"
+    assert "plan_hash" in result.stdout, "Dry-run should produce plan hash"
+    
+    # Verify plan contains READ_SYMBOL step
+    plan_output = json.loads(result.stdout)
+    assert "steps" in plan_output, "Plan should have steps"
+    assert len(plan_output["steps"]) > 0, "Plan should have at least one step"
+    assert plan_output["steps"][0]["op"] == "READ_SYMBOL", "First step should be READ_SYMBOL"
+    
+    # Verify step ordinal is 0-based
+    assert plan_output["steps"][0]["ordinal"] == 0, "First step ordinal should be 0"
+    
+    # Verify expected_outputs uses "symbols_referenced" not "symbols_resolved"
+    expected_outputs = plan_output["steps"][0].get("expected_outputs", {})
+    assert "symbols_referenced" in expected_outputs, "Expected outputs should have symbols_referenced"
+    assert "symbols_resolved" not in expected_outputs, "Expected outputs should not have symbols_resolved in dry-run"
+    
+    print("[PASS] test_cli_dry_run")
+
+
+def test_idempotency():
+    """Rerunning same plan request returns same job_id and step_ids."""
+    # This test can't run without a symbol in registry, so skip
+    print("[SKIP] test_idempotency (requires symbol in registry)")
 
 
 def main():
@@ -14470,6 +17671,7 @@ def main():
         test_symbol_field_alignment,
         test_slice_all_rejected,
         test_cli_dry_run,
+        test_idempotency,
     ]
     
     for test in tests:
@@ -14761,6 +17963,67 @@ def test_vector_context_manager(tmp_path):
 ```
 
 ### END OF FILE: tests\fixtures\plan_request_min.json
+
+
+---
+
+### START OF FILE: tests\fixtures\plan_request_no_symbols.json
+
+```json
+
+{
+  "run_id": "test_plan_verify",
+  "request_id": "req_verify",
+  "intent": "Test plan verify without symbols",
+  "inputs": {
+    "symbols": [],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 1,
+    "max_bytes": 10000000,
+    "max_symbols": 10
+  }
+}
+
+
+```
+
+### END OF FILE: tests\fixtures\plan_request_no_symbols.json
+
+
+---
+
+### START OF FILE: tests\fixtures\plan_request_parallel.json
+
+```json
+
+{
+  "run_id": "test_parallel_request",
+  "request_id": "req_parallel",
+  "intent": "Test parallel execution",
+  "inputs": {
+    "symbols": [],
+    "files": [
+      "README.md",
+      "AGENTS.md",
+      "LICENSE",
+      "CHANGELOG.md"
+    ],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 100,
+    "max_bytes": 100000000,
+    "max_symbols": 0
+  }
+}
+
+
+```
+
+### END OF FILE: tests\fixtures\plan_request_parallel.json
 
 
 ---

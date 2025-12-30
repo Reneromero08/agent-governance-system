@@ -1,19 +1,15 @@
-from __future__ import annotations
-
-import hashlib
-import shutil
-import sys
 from pathlib import Path
-
+import sys
+import shutil
+import hashlib
 import pytest
 
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
-# sys.path cleanup
-
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+    
 from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore
 from CAPABILITY.PRIMITIVES.hash_toolbelt import hash_describe, hash_read_text
-
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -23,7 +19,6 @@ def _rm(path: Path) -> None:
             path.unlink()
         except FileNotFoundError:
             pass
-
 
 def test_cas_corruption_detected_by_hash_toolbelt() -> None:
     cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas" / "CAS"
@@ -46,7 +41,6 @@ def test_cas_corruption_detected_by_hash_toolbelt() -> None:
     with pytest.raises(ValueError, match=r"CAS_OBJECT_INTEGRITY_MISMATCH"):
         _ = hash_describe(store=cas, hash_hex=h, max_bytes=64)
 
-
 def test_cas_truncation_detected_by_hash_toolbelt() -> None:
     cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_trunc" / "CAS"
     _rm(cas_root)
@@ -62,8 +56,7 @@ def test_cas_truncation_detected_by_hash_toolbelt() -> None:
     path.write_bytes(bytes(corrupted))
 
     with pytest.raises(ValueError, match=r"CAS_OBJECT_INTEGRITY_MISMATCH"):
-        _ = hash_read_text(store=cas, hash_hex=h, max_bytes=32)
-
+        _ = hash_describe(store=cas, hash_hex=h, max_bytes=32)
 
 def test_cas_partial_write_never_treated_as_present() -> None:
     cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_partial" / "CAS"

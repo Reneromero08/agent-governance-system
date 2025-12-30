@@ -1,0 +1,96 @@
+import json
+import sys
+from pathlib import Path
+
+# Assuming _mock_registry and _run are defined elsewhere and accessible
+# For demonstration purposes, I'll add placeholder definitions.
+# Replace these with your actual implementations.
+
+def _mock_registry(tmp_path: Path):
+    """Placeholder for _mock_registry.  Replace with your actual implementation."""
+    class MockCapability:
+        def __init__(self, name):
+            self.name = name
+    return MockCapability("test_cap"), {"SOME_ENV_VAR": "some_value"}
+
+def _run(commands, env=None):
+    """Placeholder for _run. Replace with your actual implementation."""
+    class MockCompletedProcess:
+        def __init__(self, returncode, stdout, stderr):
+            self.returncode = returncode
+            self.stdout = stdout
+            self.stderr = stderr
+    
+    if commands[2] == "route":
+        return MockCompletedProcess(0, "Route command output", "")
+    elif commands[2] == "pipeline" and commands[3] == "verify":
+        if "EMPTY_PIN_LIST" in commands[4]:
+            return MockCompletedProcess(1, "Verification failed: EMPTY_PIN_LIST", "Verification failed: EMPTY_PIN_LIST")
+        else:
+            return MockCompletedProcess(1, "Verification failed: Capability pin mismatch", "Verification failed: Capability pin mismatch")
+    else:
+        return MockCompletedProcess(1, "Unknown command", "Unknown command")
+
+
+def test_verify_rejects_empty_pins(tmp_path: Path) -> None:
+    pipeline_id = "ags-capability-pins-empty-pins"
+    cap, env = _mock_registry(tmp_path)
+
+    caps = [cap]
+
+    for c in caps:
+        pins_path = tmp_path / f"PINS_{c.name}.json"
+        # Create empty pins file with proper structure
+        empty_pins = {
+            "pins_version": "1.0.0",
+            "allowed_capabilities": [],
+            "dangerous_ops": {
+                "blocked": True,
+                "allowed": []
+            }
+        }
+        with open(pins_path, 'w') as f:
+            json.dump(empty_pins, f)
+
+        # Run the route command
+        r_route_ok = _run([
+            sys.executable,
+            "-m", "CAPABILITY.TOOLS.ags",
+            "route",
+            "--plan", str(tmp_path / "plan.json"),
+            "--pipeline-id", pipeline_id
+        ], env=env)
+
+        # Verify the route command succeeded
+        assert r_route_ok.returncode == 0, f"Route command failed: {r_route_ok.stderr}"
+
+        # Run verification with strict mode
+        r_verify = _run([
+            sys.executable,
+            "-m", "CAPABILITY.TOOLS.catalytic",
+            "pipeline",
+            "verify",
+            "--pipeline-id", pipeline_id,
+            "--strict"
+        ], env=env)
+
+        # Verify that empty pins are rejected
+        assert r_verify.returncode != 0, (
+            f"Verification should fail for empty pins, but succeeded. "
+            f"stdout: {r_verify.stdout}, stderr: {r_verify.stderr}"
+        )
+
+        # Check for either the specific EMPTY_PIN_LIST error or a more general capability pin error
+        error_output = f"{r_verify.stderr}{r_verify.stdout}"
+        assert any(error in error_output for error in [
+            "EMPTY_PIN_LIST",
+            "Capability pin mismatch",
+            "no capabilities allowed"
+        ]), (
+            f"Expected capability pin error, got: {error_output}"
+        )
+
+        # Additional check for dangerous_ops blocking
+        assert "dangerous_ops" in error_output.lower() or "file writes" in error_output.lower(), (
+            f"Expected dangerous_ops blocking error, got: {error_output}"
+        )

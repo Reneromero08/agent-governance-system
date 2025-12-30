@@ -161,6 +161,115 @@ class MessageCassette:
             conn.rollback()
             raise MessageCassetteError(f"Claim failed: {e}")
     
+    def claim_next_step(
+        self,
+        run_id: str,
+        job_id: str,
+        worker_id: str,
+        ttl_seconds: int = 300
+    ) -> Optional[Dict[str, Any]]:
+        conn = self._get_conn()
+        
+        lease_expires_at = (datetime.now(timezone.utc) + timedelta(seconds=ttl_seconds)).isoformat()
+        
+        conn.execute("BEGIN IMMEDIATE")
+        
+        try:
+            cursor = conn.execute("""
+                SELECT s.step_id, s.ordinal, s.fencing_token, s.payload_json
+                FROM cassette_steps s
+                JOIN cassette_jobs j ON s.job_id = j.job_id
+                JOIN cassette_messages m ON j.message_id = m.message_id
+                WHERE s.status = 'PENDING' AND m.run_id = ? AND j.job_id = ?
+                ORDER BY s.ordinal ASC
+                LIMIT 1
+            """, (run_id, job_id))
+            
+            row = cursor.fetchone()
+            if row is None:
+                conn.rollback()
+                return None
+            
+            step_id = row["step_id"]
+            ordinal = row["ordinal"]
+            current_token = row["fencing_token"]
+            new_token = current_token + 1
+            payload_json = row["payload_json"]
+            
+            conn.execute("""
+                UPDATE cassette_steps
+                SET status = 'LEASED',
+                    lease_owner = ?,
+                    lease_expires_at = ?,
+                    fencing_token = ?
+                WHERE step_id = ?
+            """, (worker_id, lease_expires_at, new_token, step_id))
+            
+            conn.commit()
+            
+            return {
+                "step_id": step_id,
+                "job_id": job_id,
+                "ordinal": ordinal,
+                "payload": json.loads(payload_json),
+                "fencing_token": new_token,
+                "lease_expires_at": lease_expires_at
+            }
+            
+        except sqlite3.IntegrityError as e:
+            conn.rollback()
+            raise MessageCassetteError(f"Claim next step failed: {e}")
+    
+    def check_and_consume_budget(
+        self,
+        job_id: str,
+        bytes_to_consume: int = 0,
+        symbols_to_consume: int = 0,
+        max_bytes: Optional[int] = None,
+        max_symbols: Optional[int] = None
+    ) -> bool:
+        conn = self._get_conn()
+        
+        conn.execute("BEGIN IMMEDIATE")
+        
+        try:
+            cursor = conn.execute("""
+                SELECT bytes_consumed, symbols_consumed
+                FROM cassette_job_budgets
+                WHERE job_id = ?
+            """, (job_id,))
+            
+            row = cursor.fetchone()
+            if row is None:
+                bytes_consumed = 0
+                symbols_consumed = 0
+            else:
+                bytes_consumed = row["bytes_consumed"]
+                symbols_consumed = row["symbols_consumed"]
+            
+            if max_bytes is not None and (bytes_consumed + bytes_to_consume) > max_bytes:
+                conn.rollback()
+                return False
+            
+            if max_symbols is not None and (symbols_consumed + symbols_to_consume) > max_symbols:
+                conn.rollback()
+                return False
+            
+            conn.execute("""
+                INSERT INTO cassette_job_budgets (job_id, bytes_consumed, symbols_consumed)
+                VALUES (?, ?, ?)
+                ON CONFLICT(job_id) DO UPDATE SET
+                    bytes_consumed = bytes_consumed + ?,
+                    symbols_consumed = symbols_consumed + ?
+            """, (job_id, bytes_to_consume, symbols_to_consume, bytes_to_consume, symbols_to_consume))
+            
+            conn.commit()
+            return True
+            
+        except sqlite3.IntegrityError as e:
+            conn.rollback()
+            raise MessageCassetteError(f"Budget check failed: {e}")
+    
     def complete_step(
         self,
         run_id: str,
@@ -235,7 +344,8 @@ class MessageCassette:
         step_id: str,
         worker_id: str,
         fencing_token: int,
-        repo_root: Optional[Path] = None
+        repo_root: Optional[Path] = None,
+        check_global_budget: bool = False
     ) -> Dict[str, Any]:
         conn = self._get_conn()
         
@@ -255,6 +365,7 @@ class MessageCassette:
             if row["run_id"] != run_id:
                 raise MessageCassetteError(f"Step run_id mismatch: expected {run_id}, got {row['run_id']}")
             
+            job_id = row["job_id"]
             step_payload = json.loads(row["payload_json"])
             request_payload = json.loads(row["request_json"])
             
@@ -330,18 +441,38 @@ class MessageCassette:
                 
                 bytes_read = len(content.encode('utf-8'))
                 
-                if bytes_read > max_bytes:
-                    receipt_payload["status"] = "FAILURE"
-                    receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
-                    self.complete_step(
-                        run_id=run_id,
-                        step_id=step_id,
-                        worker_id=worker_id,
-                        fencing_token=fencing_token,
-                        receipt_payload=receipt_payload,
-                        outcome="FAILURE"
-                    )
-                    return receipt_payload
+                if check_global_budget:
+                    if not self.check_and_consume_budget(
+                        job_id=job_id,
+                        bytes_to_consume=bytes_read,
+                        symbols_to_consume=1,
+                        max_bytes=max_bytes,
+                        max_symbols=max_symbols
+                    ):
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Global budget exceeded for job {job_id}: bytes_read={bytes_read}, symbols=1"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                else:
+                    if bytes_read > max_bytes:
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
                 
                 receipt_payload["status"] = "SUCCESS"
                 receipt_payload["section_id"] = section_id
@@ -389,18 +520,36 @@ class MessageCassette:
                 
                 bytes_read = len(content.encode('utf-8'))
                 
-                if bytes_read > max_bytes:
-                    receipt_payload["status"] = "FAILURE"
-                    receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
-                    self.complete_step(
-                        run_id=run_id,
-                        step_id=step_id,
-                        worker_id=worker_id,
-                        fencing_token=fencing_token,
-                        receipt_payload=receipt_payload,
-                        outcome="FAILURE"
-                    )
-                    return receipt_payload
+                if check_global_budget:
+                    if not self.check_and_consume_budget(
+                        job_id=job_id,
+                        bytes_to_consume=bytes_read,
+                        max_bytes=max_bytes
+                    ):
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Global budget exceeded for job {job_id}: bytes_read={bytes_read}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
+                else:
+                    if bytes_read > max_bytes:
+                        receipt_payload["status"] = "FAILURE"
+                        receipt_payload["error"] = f"Budget exceeded: bytes_read={bytes_read} > max_bytes={max_bytes}"
+                        self.complete_step(
+                            run_id=run_id,
+                            step_id=step_id,
+                            worker_id=worker_id,
+                            fencing_token=fencing_token,
+                            receipt_payload=receipt_payload,
+                            outcome="FAILURE"
+                        )
+                        return receipt_payload
                 
                 receipt_payload["status"] = "SUCCESS"
                 receipt_payload["section_id"] = section_id
@@ -448,7 +597,78 @@ class MessageCassette:
                 outcome="FAILURE"
             )
             return receipt_payload
-    
+
+    def get_job_status(
+        self,
+        run_id: str,
+        job_id: str
+    ) -> Optional[Dict[str, int]]:
+        conn = self._get_conn()
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_messages m
+            JOIN cassette_jobs j ON m.message_id = j.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        
+        row = cursor.fetchone()
+        if row["count"] == 0:
+            return None
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'PENDING'
+        """, (run_id, job_id))
+        pending_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'LEASED'
+        """, (run_id, job_id))
+        leased_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_steps s
+            JOIN cassette_jobs j ON s.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ? AND s.status = 'COMMITTED'
+        """, (run_id, job_id))
+        committed_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(*) as count
+            FROM cassette_receipts r
+            JOIN cassette_jobs j ON r.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        receipts_count = cursor.fetchone()["count"]
+        
+        cursor = conn.execute("""
+            SELECT COUNT(DISTINCT worker_id) as count
+            FROM cassette_receipts r
+            JOIN cassette_jobs j ON r.job_id = j.job_id
+            JOIN cassette_messages m ON j.message_id = m.message_id
+            WHERE m.run_id = ? AND j.job_id = ?
+        """, (run_id, job_id))
+        workers_seen_count = cursor.fetchone()["count"]
+        
+        return {
+            "pending": pending_count,
+            "leased": leased_count,
+            "committed": committed_count,
+            "receipts": receipts_count,
+            "workers_seen": workers_seen_count
+        }
+
     def verify_cassette(self, run_id: Optional[str] = None) -> None:
         conn = self._get_conn()
         

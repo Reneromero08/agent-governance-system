@@ -1,32 +1,16 @@
-"""
-Test preflight validation.
-
-Validates that preflight validator enforces contract before execution:
-- Invalid JobSpec → preflight fails
-- Path traversal → preflight fails
-- Input/output overlap → preflight fails
-- Valid spec → execution allowed
-
-Run:
-    pytest CAPABILITY/TESTBENCH/test_preflight.py -v
-"""
-from __future__ import annotations
-
 import sys
+import pytest
 from pathlib import Path
 
-import pytest
-
-# Add CATALYTIC-DPT to path
-repo_root_path = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(repo_root_path / "CATALYTIC-DPT"))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT / "CAPABILITY/TOOLS"))
 
 from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
 
 
 @pytest.fixture
 def jobspec_schema_path():
-    return Path(__file__).resolve().parents[2] / "LAW" / "SCHEMAS" / "jobspec.schema.json"
+    return Path(__file__).resolve().parents[3] / "LAW" / "SCHEMAS" / "jobspec.schema.json"
 
 
 @pytest.fixture
@@ -109,8 +93,8 @@ def test_path_traversal_fails(preflight_validator, project_root):
 
 def test_absolute_path_fails(preflight_validator, project_root):
     """Test that absolute paths fail preflight validation."""
-    # Use a path that's absolute on all platforms
     import os
+
     if os.name == 'nt':
         absolute_path = "C:/tmp/output.json"
     else:

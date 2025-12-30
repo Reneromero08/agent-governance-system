@@ -1,0 +1,11 @@
+import os
+import pytest
+
+@pytest.fixture
+def repo_root():
+    # Assuming this is a fixture that provides the root directory of your repository
+    return "/path/to/your/repository"
+
+@pytest.fixture
+def proof_schema_path(repo_root):
+    return os.path.join(repo_root, "schemas", "proof_v1.json")

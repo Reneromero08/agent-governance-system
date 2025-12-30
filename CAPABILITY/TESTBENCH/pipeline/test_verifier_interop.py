@@ -14,7 +14,7 @@ from pathlib import Path
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 # sys.path cleanup
 
 from CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier
@@ -163,4 +163,3 @@ def test_interop_determinism_rerun_same_inputs_same_bytes():
         assert _result_bytes(r1a) == _result_bytes(r1b)
         assert _result_bytes(r2a) == _result_bytes(r2b)
         assert _result_bytes(r1a) == _result_bytes(r2a)
-

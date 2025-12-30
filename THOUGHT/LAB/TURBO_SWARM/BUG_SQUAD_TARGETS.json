@@ -1,0 +1,50 @@
+[
+    {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+        "last_error": "ImportError: cannot import name 'REPO_ROOT'. Also, BlockedDangerousOp: subprocess.call detected in test environment.",
+        "instruction": "Fix dangerous ops block by using safer mocks or whitelisted paths. Ensure REPO_ROOT is preserved.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py",
+        "last_error": "AssertionError: Capability pin mismatch. Also possible dangerous_ops block on file writes.",
+        "instruction": "Fix assertion logic and ensure file operations are whitelisted for tests.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_mcp_adapter_e2e.py",
+        "last_error": "ConnectionRefusedError: MCP server not starting. dangerous_ops blocking subprocess.Popen?",
+        "instruction": "Ensure subprocess.Popen is allowed in this test file (it's E2E). Fix imports.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_mcp_adapter_e2e.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py",
+        "last_error": "ModuleNotFoundError: No module named 'TOOLS'. REPO_ROOT setup missing or stripped.",
+        "instruction": "Restore REPO_ROOT setup verbatim at the top of the file.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py",
+        "last_error": "ValidationError: Receipt schema mismatch. 'timestamp' field missing.",
+        "instruction": "Align test data with the actual Receipt schema.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py",
+        "last_error": "PermissionError: Access denied to MockServer. dangerous_ops blocking socket binding?",
+        "instruction": "Allow network/socket ops for mock server in this test.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/spectrum/test_spectrum02_emission.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/pipeline/test_restore_proof.py",
+        "last_error": "FileNotFoundError: 'schemas/proof_v1.json'. Path resolution error.",
+        "instruction": "Fix path resolution relative to REPO_ROOT.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/pipeline/test_restore_proof.py"
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/pipeline/test_proof_gating.py",
+        "last_error": "AssertionError: Gate did not close on invalid proof.",
+        "instruction": "Fix gate logic to correctly handle invalid proofs.",
+        "test_command": "python -m pytest CAPABILITY/TESTBENCH/pipeline/test_proof_gating.py"
+    }
+]

@@ -1,0 +1,27 @@
+# CAPABILITY/TESTBENCH/phases/phase8_router/CAPABILITY/TOOLS.ags
+
+import json
+from datetime import datetime
+
+class ValidationError(Exception):
+    pass
+
+def create_receipt(plan):
+    receipt = {
+        "plan_version": plan["plan_version"],
+        "steps": [],
+        "timestamp": datetime.now().isoformat()
+    }
+    for step in plan["steps"]:
+        receipt["steps"].append({
+            "step_id": step["step_id"],
+            "command": step["command"],
+            "jobspec": step["jobspec"]
+        })
+    return receipt
+
+def validate_receipt(receipt):
+    required_fields = ["plan_version", "steps", "timestamp"]
+    for field in required_fields:
+        if field not in receipt:
+            raise ValidationError(f"Receipt schema mismatch. '{field}' field missing.")
