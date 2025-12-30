@@ -787,9 +787,14 @@ def cmd_bundle_run(args) -> int:
     signing_key = getattr(args, 'signing_key', None)
     verify_attestation = getattr(args, 'verify_attestation', False)
     verify_chain = getattr(args, 'verify_chain', False)
+    print_merkle = getattr(args, 'print_merkle', False)
 
     if attest and not signing_key:
         print("[FAIL] --attest requires --signing-key")
+        return 1
+
+    if print_merkle and not verify_chain:
+        print("[FAIL] --print-merkle requires --verify-chain")
         return 1
 
     try:
@@ -801,15 +806,16 @@ def cmd_bundle_run(args) -> int:
 
         result = executor.execute()
 
-        print(f"[OK] Bundle executed")
-        print(f"      receipt: {result['receipt_path']}")
-        print(f"      outcome: {result['outcome']}")
-        print(f"      receipt_hash: {result.get('receipt_hash', 'N/A')}")
+        if not print_merkle:
+            print(f"[OK] Bundle executed")
+            print(f"      receipt: {result['receipt_path']}")
+            print(f"      outcome: {result['outcome']}")
+            print(f"      receipt_hash: {result.get('receipt_hash', 'N/A')}")
 
-        if result.get('parent_receipt_hash'):
-            print(f"      parent_receipt_hash: {result['parent_receipt_hash']}")
+            if result.get('parent_receipt_hash'):
+                print(f"      parent_receipt_hash: {result['parent_receipt_hash']}")
 
-        if verify_attestation and result['attestation'] is not None:
+        if verify_attestation and result['attestation'] is not None and not print_merkle:
             from catalytic_chat.attestation import verify_receipt_bytes
             from catalytic_chat.receipt import receipt_canonical_bytes
 
@@ -818,9 +824,12 @@ def cmd_bundle_run(args) -> int:
 
             try:
                 verify_receipt_bytes(receipt_bytes, result['attestation'])
-                print(f"      attestation: VALID")
+                if not print_merkle:
+                    print(f"      attestation: VALID")
             except Exception as e:
-                print(f"      attestation: INVALID ({e})")
+                if not print_merkle:
+                    print(f"      attestation: INVALID ({e})")
+                return 1
 
         if verify_chain:
             from catalytic_chat.receipt import find_receipt_chain, verify_receipt_chain
@@ -831,15 +840,22 @@ def cmd_bundle_run(args) -> int:
             if run_id:
                 receipts = find_receipt_chain(receipts_dir, run_id)
 
-                if len(receipts) > 1:
+                if len(receipts) > 0:
                     try:
-                        verify_receipt_chain(receipts, verify_attestation=verify_attestation)
-                        print(f"      chain: VALID ({len(receipts)} receipts)")
+                        merkle_root = verify_receipt_chain(receipts, verify_attestation=verify_attestation)
+
+                        if print_merkle:
+                            print(merkle_root)
+                        else:
+                            print(f"      chain: VALID ({len(receipts)} receipts)")
+                            print(f"      merkle_root: {merkle_root}")
                     except Exception as e:
-                        print(f"      chain: INVALID ({e})")
+                        if not print_merkle:
+                            print(f"      chain: INVALID ({e})")
                         return 1
-                elif len(receipts) == 1:
-                    print(f"      chain: N/A (single receipt, no chain to verify)")
+                else:
+                    if not print_merkle:
+                        print(f"      chain: N/A (no receipts found)")
 
         return 0
     except BundleError as e:
