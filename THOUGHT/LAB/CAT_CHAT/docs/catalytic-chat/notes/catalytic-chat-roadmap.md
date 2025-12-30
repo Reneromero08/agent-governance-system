@@ -401,3 +401,42 @@ This approach ensures:
 3. Start Phase 1: Database schema and models
 4. Set up development environment with test data
 5. Begin implementation
+
+---
+
+## Phase 6.2: Attestation (Completed 2025-12-30)
+
+**Status:** Complete ✓
+**Related:** commit-plan-phase-6-2-attestation.md
+
+### Tasks Completed
+- [x] **receipt_canonical_bytes(receipt, attestation_override=None)** in `catalytic_chat/receipt.py`
+  - Single source of truth for receipt canonicalization
+  - Used by signer, verifier, and executor
+- [x] **verify_receipt_bytes()** updated in `catalytic_chat/attestation.py`
+  - Now uses `receipt_canonical_bytes()` with `attestation_override=None`
+  - Ensures verification computes exact same canonical bytes as signing
+- [x] **executor.py** updated to use `receipt_canonical_bytes()`
+  - For signing (with `attestation=None`)
+  - For writing (with or without attestation)
+- [x] **cli.py** updated with `--attest` flag
+  - `bundle run` now supports `--attest` (requires `--signing-key`)
+  - `--verify-attestation` flag for verification
+- [x] **test_attestation.py** fixed
+  - All 6 attestation tests pass
+  - Fixed tamper test to verify canonical byte differences
+
+### Verification
+```bash
+cd THOUGHT/LAB/CAT_CHAT
+python -m pytest -q tests/test_attestation.py tests/test_receipt.py
+# 12 passed, 2 skipped in 0.26s
+```
+
+### Hard Constraints Met
+- ✓ Single source of truth for canonicalization
+- ✓ Signing input is canonical receipt bytes with `attestation=null/None`
+- ✓ Verifying recomputes exact same canonical bytes
+- ✓ Hex-only for `public_key`/`signature` with validation
+- ✓ No timestamps, randomness, absolute paths, or env-dependent behavior
+- ✓ Minimal diffs; changes localized to canonicalization and signing flow
