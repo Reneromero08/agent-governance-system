@@ -246,16 +246,29 @@ All 14 tests in this cohort were successfully fixed during the initial migration
 ## PROTOCOL 3: Current Active Failures (2025-12-30)
 
 ### Status Summary
-- **Date**: 2025-12-30
-- **Total Tests**: 134 collected
-- **Passed**: 124 (92.5%)
-- **Failed**: 10 (7.5%)
-- **Test Run Time**: ~18s
+- **Date**: 2025-12-30 (Updated 14:02 MST)
+- **Total Tests**: 138 collected
+- **Passed**: 129 (93.5%)
+- **Failed**: 9 (6.5%)
+- **Test Run Time**: ~16s
+- **Agent Pipeline**: ✅ OPERATIONAL (ministral-3:8b dispatcher)
+
+### Recent Fixes (2025-12-30)
+- ✅ **SPECTRUM-02/03 Integration** - All 6 SPECTRUM tests now passing
+  - Rewired tests to use actual `BundleVerifier` from `CAPABILITY.PRIMITIVES.verify_bundle`
+  - Removed dependency on non-existent runner modules
+  - Fixed API expectations (`ok` vs `verified`)
+- ✅ **Agent Pipeline Integration** - Full coordination system operational
+  - Failure dispatcher with ministral-3:8b
+  - INBOX task queue system
+  - Agent reporter for Antigravity-dispatcher communication
+  - All 6 pipeline integration tests passing
 
 ### Detailed Failure Analysis
 
 #### 1. `CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py::test_phase2_demo_artifacts_are_falsifiable`
 - **Priority**: HIGH
+- **Status**: ⬜ PENDING
 - **Error**: `AssertionError: assert False` (directory not found)
 - **Root Cause**: Missing `CAPABILITY/TESTBENCH/integration/_demos/memoization_hash_reuse/` directory
 - **Details**: 
@@ -270,6 +283,7 @@ All 14 tests in this cohort were successfully fixed during the initial migration
 
 #### 2. `CAPABILITY/TESTBENCH/integration/test_memoization.py::test_memoization_miss_then_hit_then_invalidate`
 - **Priority**: MEDIUM
+- **Status**: ⬜ PENDING
 - **Error**: State persistence or invalidation logic mismatch
 - **Root Cause**: Memoization cache invalidation not working as expected
 - **Details**:
@@ -278,8 +292,9 @@ All 14 tests in this cohort were successfully fixed during the initial migration
   - Cache may not be properly clearing on invalidation
 - **Fix**: Review `memo_cache.py` invalidation logic and test expectations
 
-#### 3. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py::test_ags_cli_connectivity`
+#### 3-5. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py` (3 tests)
 - **Priority**: HIGH
+- **Status**: ⬜ PENDING
 - **Error**: `ModuleNotFoundError: No module named 'CAPABILITY.PIPELINES.ags'`
 - **Root Cause**: Test calling wrong module path
 - **Details**:
@@ -287,21 +302,14 @@ All 14 tests in this cohort were successfully fixed during the initial migration
   - Should be: `[sys.executable, "-m", "CAPABILITY.TOOLS.ags"]`
   - AGS CLI moved from PIPELINES to TOOLS during 6-bucket migration
 - **Fix**: Update line 19 in `test_ags_phase6_bridge.py`
+- **Tests Affected**:
+  - `test_ags_cli_connectivity`
+  - `test_ags_preflight_verdict`
+  - `test_ags_phase6_bridge`
 
-#### 4. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py::test_ags_preflight_verdict`
-- **Priority**: HIGH
-- **Error**: Same as #3
-- **Root Cause**: Same as #3
-- **Fix**: Same as #3
-
-#### 5. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py::test_ags_phase6_bridge`
-- **Priority**: HIGH
-- **Error**: Same as #3
-- **Root Cause**: Same as #3
-- **Fix**: Same as #3
-
-#### 6. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py::test_revoked_capability_rejects_at_route`
+#### 6-7. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py` (2 tests)
 - **Priority**: MEDIUM
+- **Status**: ⬜ PENDING
 - **Error**: Assertion mismatch on error message
 - **Root Cause**: Error code format changed
 - **Details**:
@@ -309,15 +317,13 @@ All 14 tests in this cohort were successfully fixed during the initial migration
   - Current system may return different error code or format
   - Need to inspect actual vs expected error output
 - **Fix**: Update assertion to match current `REVOKED_CAPABILITY` error format
-
-#### 7. `CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py::test_verify_rejects_revoked_capability`
-- **Priority**: MEDIUM
-- **Error**: Same as #6
-- **Root Cause**: Same as #6
-- **Fix**: Same as #6
+- **Tests Affected**:
+  - `test_revoked_capability_rejects_at_route`
+  - `test_verify_rejects_revoked_capability`
 
 #### 8. `CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py::test_swarm_chain_binds_pipeline_proofs`
 - **Priority**: HIGH
+- **Status**: ⬜ PENDING
 - **Error**: `NameError: name 'original_chain' is not defined` OR chain binding failure
 - **Root Cause**: Missing variable definition in test
 - **Details**:
@@ -331,6 +337,7 @@ All 14 tests in this cohort were successfully fixed during the initial migration
 
 #### 9. `CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py::test_swarm_execution_elision`
 - **Priority**: MEDIUM
+- **Status**: ⬜ PENDING
 - **Error**: Execution elision logic mismatch
 - **Root Cause**: Swarm reuse detection not working as expected
 - **Details**:
@@ -339,26 +346,22 @@ All 14 tests in this cohort were successfully fixed during the initial migration
   - Check if memoization integration is working correctly
 - **Fix**: Review swarm runtime elision logic and update test expectations
 
-#### 10. `CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py::test_spectrum02_resume`
-- **Priority**: HIGH
-- **Error**: Resume state mismatch
-- **Root Cause**: SPECTRUM-02 resume validation failing
-- **Details**:
-  - SPECTRUM-02 defines bundle resume semantics
-  - Test verifies that interrupted runs can be resumed
-  - State restoration may not be working correctly
-  - Check `DOMAIN_ROOTS.json` and `OUTPUT_HASHES.json` handling
-- **Fix**: 
-  1. Review SPECTRUM-02 specification
-  2. Verify bundle state persistence
-  3. Update test to match current resume behavior
+#### 10. ~~`CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py::test_spectrum02_resume`~~ ✅ FIXED
+- **Priority**: ~~HIGH~~ **RESOLVED**
+- **Status**: ✅ **COMPLETED** (2025-12-30)
+- **Resolution**: Rewired to use actual `BundleVerifier` implementation
+- **Fixed By**: Antigravity (Claude Sonnet 4.5)
+- **Details**: 
+  - Removed dependency on non-existent `CAPABILITY.PIPELINES.spectrum.runner_spectrum02_resume`
+  - Updated to import directly from `CAPABILITY.PRIMITIVES.verify_bundle`
+  - All 6 SPECTRUM tests now passing
 
 ---
 
 ## Action Items by Priority
 
 ### 🔴 CRITICAL (Must Fix First)
-1. **Fix AGS module path** (Failures #3, #4, #5)
+1. **Fix AGS module path** (Failures #3-5)
    - Single line change in `test_ags_phase6_bridge.py`
    - Will immediately fix 3 failures
    
@@ -370,31 +373,45 @@ All 14 tests in this cohort were successfully fixed during the initial migration
    - Core Phase 7 functionality
    - Blocks swarm acceptance
 
-4. **Fix SPECTRUM-02 resume** (Failure #10)
-   - Core temporal integrity feature
-   - Critical for production use
-
 ### 🟡 MEDIUM (Fix After Critical)
-5. **Fix revoke assertions** (Failures #6, #7)
+4. **Fix revoke assertions** (Failures #6-7)
    - Governance feature validation
    - Likely simple assertion updates
    
-6. **Fix memoization invalidation** (Failure #2)
+5. **Fix memoization invalidation** (Failure #2)
    - Cache correctness validation
    
-7. **Fix swarm elision** (Failure #9)
+6. **Fix swarm elision** (Failure #9)
    - Performance optimization validation
 
 ---
 
 ## Completion Criteria
 
-- [ ] All 10 active failures resolved
-- [ ] Full test suite at 100% pass rate (134/134)
+- [ ] All 9 active failures resolved (was 10, SPECTRUM-02 now fixed ✅)
+- [ ] Full test suite at 100% pass rate (138/138)
 - [ ] No regression in previously fixed tests
 - [ ] All fixes comply with 6-bucket architecture
-- [ ] SPECTRUM-01 through SPECTRUM-06 fully validated
+- [x] SPECTRUM-01 through SPECTRUM-06 fully validated ✅
+- [x] Agent pipeline operational with dispatcher coordination ✅
+- [x] Antigravity-dispatcher communication established ✅
+
+## Progress Tracking
+
+### Completed (2025-12-30)
+- ✅ SPECTRUM-02/03 integration (6/6 tests passing)
+- ✅ Agent pipeline with ministral-3:8b dispatcher
+- ✅ INBOX coordination system
+- ✅ Agent reporter for task claiming/completion
+- ✅ Full pipeline integration tests (6/6 passing)
+- ✅ Failure protocol maintenance and updates
+
+### In Progress
+- ⬜ 9 remaining test failures (tracked in dispatcher)
+- ⬜ Automatic agent activity tracking
+- ⬜ Cross-agent coordination monitoring
 
 ---
 
 **⚠️ REMINDER: This document MUST stay in `CAPABILITY/TESTBENCH/`. Moving it to repo root is FORBIDDEN.**
+
