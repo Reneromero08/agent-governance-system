@@ -226,8 +226,11 @@ def load_receipt(receipt_path: Path) -> Optional[Dict[str, Any]]:
 def compute_merkle_root(receipt_hashes: List[str]) -> str:
     """Compute Merkle root from list of receipt hashes.
 
+    Leaves must follow deterministic ordering (same as verify_receipt_chain input).
+    Does not re-sort receipt_hashes internally.
+
     Args:
-        receipt_hashes: List of receipt_hash hex strings
+        receipt_hashes: List of receipt_hash hex strings in execution order
 
     Returns:
         Merkle root as SHA256 hex string
