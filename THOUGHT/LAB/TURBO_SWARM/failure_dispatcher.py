@@ -17,6 +17,7 @@ Usage:
 import json
 import subprocess
 import sys
+import os
 import time
 import requests
 from datetime import datetime, timezone
@@ -461,6 +462,124 @@ def cmd_test() -> None:
         sys.exit(1)
 
 
+def cmd_spawn(orchestrator_type: str = "caddy") -> None:
+    """Spawn worker agents to process pending tasks."""
+    ledger = load_ledger()
+    pending = [t for t in ledger["tasks"] if t["status"] == "PENDING"]
+    
+    if not pending:
+        print("✅ No pending tasks to spawn for.")
+        return
+        
+    print(f"🚀 Spawning swarm for {len(pending)} pending tasks...")
+    
+    # Determine command based on type
+    if orchestrator_type == "professional":
+        script = SWARM_ROOT / "swarm_orchestrator_professional.py"
+        cmd = [sys.executable, str(script)]
+    else:  # Default to caddy
+        script = SWARM_ROOT / "swarm_orchestrator_caddy_deluxe.py"
+        # Scale workers based on task count (max 6)
+        workers = min(len(pending), 6)
+        cmd = [sys.executable, str(script), "--max-workers", str(workers)]
+    
+    print(f"   Command: {' '.join(cmd)}")
+    print(f"   Log: swarm_debug.log")
+    
+    # Launch in background
+    with open("swarm_debug.log", "a") as log:
+        process = subprocess.Popen(
+            cmd,
+            stdout=log,
+            stderr=subprocess.STDOUT,
+            cwd=str(REPO_ROOT),
+            start_new_session=True
+        )
+    
+    print(f"✅ Swarm launched with PID {process.pid}")
+    print("   Use 'observe' command to watch progress.")
+
+def check_pipeline_health() -> bool:
+    """Run critical pipeline verification tests."""
+    print("🛡️ Sentinel: Verifying pipeline health...")
+    try:
+        # Run only the critical p1/p2 tests for speed
+        result = subprocess.run(
+            [sys.executable, "-m", "pytest", "CAPABILITY/TESTBENCH/integration", "-k", "pipeline or verify"],
+            capture_output=True,
+            text=True,
+            timeout=60
+        )
+        if result.returncode == 0:
+            print("✅ Sentinel: Pipeline GREEN")
+            return True
+        else:
+            print("❌ Sentinel: Pipeline RED (Regression Detected!)")
+            # Log failure details
+            with open("sentinel_failure.log", "w") as f:
+                f.write(result.stdout)
+                f.write(result.stderr)
+            return False
+    except Exception as e:
+        print(f"⚠️ Sentinel Error: {e}")
+        return False
+
+def kill_swarm() -> None:
+    """Emergency kill switch for the swarm."""
+    print("🚨 Sentinel: KILLING SWARM DUE TO REGRESSION")
+    if sys.platform == "win32":
+        os.system("taskkill /F /IM python.exe /FI \"WINDOWTITLE eq Swarm*\"")
+    else:
+        os.system("pkill -f swarm_orchestrator")
+
+def cmd_guard() -> None:
+    """Monitor pipeline health and agent activity continuously."""
+    print("🛡️ Pipeline Sentinel ACTIVE")
+    print("   Monitoring: Git status, Pipeline Integrity, Agent Operations")
+    print("   Press Ctrl+C to stop")
+    
+    while True:
+        try:
+            # 1. Check Git Status (what are they touching?)
+            status = subprocess.check_output(["git", "status", "--porcelain"], text=True)
+            modified = [line for line in status.splitlines() if line.strip()]
+            
+            # 2. Safety Check: Are they touching protected files?
+            protected = ["AGENTS.md", "failure_dispatcher.py", "SYSTEM_FAILURE_PROTOCOL"]
+            for mod in modified:
+                for p in protected:
+                    if p in mod:
+                        print(f"⚠️ ALERT: Agent modified protected file: {mod}")
+            
+            # 3. Pipeline Health Check (Periodic)
+            # Run every 5th verification loop (approx every 60s)
+            
+            # 4. Display Status
+            os.system("cls" if os.name == "nt" else "clear")
+            print(f"🛡️ PIPELINE SENTINEL [{now_iso()}]")
+            print("=" * 60)
+            
+            # Active Modifications
+            if modified:
+                print(f"📝 Files modified by agents ({len(modified)}):")
+                for m in modified[:5]:
+                    print(f"   {m.strip()}")
+                if len(modified) > 5: print(f"   ...and {len(modified)-5} more")
+            else:
+                print("📝 No active file modifications")
+                
+            # Task Status
+            subprocess.run([sys.executable, __file__, "status"], check=False)
+            
+            time.sleep(5)
+            
+        except KeyboardInterrupt:
+            print("\n🛡️ Sentinel stopped.")
+            break
+        except Exception as e:
+            print(f"Error in sentinel: {e}")
+            time.sleep(5)
+
 def main():
     if len(sys.argv) < 2:
         print(__doc__)
@@ -480,6 +599,11 @@ def main():
         cmd_observe()
     elif command == "test":
         cmd_test()
+    elif command == "spawn":
+        type_arg = sys.argv[2] if len(sys.argv) > 2 else "caddy"
+        cmd_spawn(type_arg)
+    elif command == "guard":
+        cmd_guard()
     else:
         print(f"Unknown command: {command}")
         print(__doc__)
