@@ -581,20 +581,29 @@ def cmd_guard() -> None:
                         alerts.append(f"PROTECTED FILE MODIFIED: {mod}")
             
             # 3. Determine System State
+            led_state = (spinner_idx % 2 == 0) # Toggle for blinking
+            
             if alerts:
                 system_state = "🔴 CRITICAL ALERT"
-                led = "🚨"
+                # Blinking Red Siren
+                led = "🚨" if led_state else "  "
             elif modified:
                 system_state = "🟡 ACTIVE WORK"
-                led = "⚡"
+                # Alternating Lightning/Construction
+                led = "⚡" if led_state else "🚧"
             else:
                 system_state = "🟢 SYSTEM NOMINAL"
-                led = "🛡️"
+                # Heartbeat Shield
+                led = "🛡️" if led_state else "  "
                 
             # 4. Render Dashboard (Fixed Layout)
-            os.system("cls" if os.name == "nt" else "clear")
+            if sys.platform == "win32":
+                os.system("cls")
+            else:
+                os.system("clear")
             
-            print(f"{led} PIPELINE SENTINEL v1.0   [{timestamp}]   {spinners[spinner_idx]}")
+            # Header with Blinking LED
+            print(f"{led} PIPELINE SENTINEL v1.1   [{timestamp}]   {spinners[spinner_idx]}")
             print("=" * 60)
             print(f"STATUS: {system_state}")
             print("-" * 60)
@@ -603,9 +612,11 @@ def cmd_guard() -> None:
             print(f"        Completed: {completed}  (Done)")
             print("-" * 60)
             
-            # Alert Section
+            # Alert Section (Flash if critical)
             if alerts:
-                print("\n⚠️  ACTIVE ALERTS:")
+                # Flash the header
+                header = "⚠️  ACTIVE ALERTS:" if led_state else "   ACTIVE ALERTS:"
+                print(f"\n{header}")
                 for alert in alerts:
                     print(f"   🔥 {alert}")
             
@@ -623,19 +634,21 @@ def cmd_guard() -> None:
             
             # 5. Auto-Spawn Logic
             if pending > 0 and active < 2 and time.time() > spawn_cooldown:
-                print(f"🚀 AUTO-SPAWN TRIGGERED: Launching agents...")
+                # Flashing Launch Message
+                launch_msg = "🚀 AUTO-SPAWN TRIGGERED" if led_state else "   AUTO-SPAWN TRIGGERED"
+                print(f"{launch_msg}: Launching agents...")
                 cmd_spawn("caddy")
                 spawn_cooldown = time.time() + 60
-                time.sleep(2) # Show the spawn message briefly
+                time.sleep(2) 
             else:
                 if active > 0:
                     print("👁️  Watching swarm operations...")
                 else:
                     print("💤 Idle. Waiting for tasks.")
 
-            # Update spinner
+            # Update spinner (Faster refresh for smooth animation)
             spinner_idx = (spinner_idx + 1) % len(spinners)
-            time.sleep(1)
+            time.sleep(0.5) # Faster tick for animation effect
             
         except KeyboardInterrupt:
             print("\n🛡️ Sentinel stopped.")
