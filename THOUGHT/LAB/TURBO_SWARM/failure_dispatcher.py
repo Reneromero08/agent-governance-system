@@ -551,62 +551,91 @@ def kill_swarm() -> None:
         os.system("pkill -f swarm_orchestrator")
 
 def cmd_guard() -> None:
-    """Monitor pipeline health and agent activity continuously."""
-    print("🛡️ Pipeline Sentinel ACTIVE (Auto-Spawn Enabled)")
-    print("   Monitoring: Git status, Pipeline Integrity, Agent Operations")
-    print("   Press Ctrl+C to stop")
-    print("-" * 60)
+    """Monitor pipeline health and agent activity (Dashboard UI)."""
     
     last_mod_count = -1
-    last_status_hash = ""
     spawn_cooldown = 0
+    spinner_idx = 0
+    spinners = ["⠋", "⠙", "⠹", "⠸", "⠼", "⠴", "⠦", "⠧", "⠇", "⠏"]
     
     while True:
         try:
             timestamp = datetime.now().strftime('%H:%M:%S')
             
-            # 1. Check Git Status (what are they touching?)
-            status = subprocess.check_output(["git", "status", "--porcelain"], text=True)
-            modified = [line for line in status.splitlines() if line.strip()]
+            # 1. Check State
+            # Git Status
+            git_status_lines = subprocess.check_output(["git", "status", "--porcelain"], text=True).splitlines()
+            modified = [line for line in git_status_lines if line.strip()]
             
-            # 2. Safety Check: Are they touching protected files?
+            # Directory Status
+            pending = len(list(PENDING_DIR.glob("*.json"))) if PENDING_DIR.exists() else 0
+            active = len(list(ACTIVE_DIR.glob("*.json"))) if ACTIVE_DIR.exists() else 0
+            completed = len(list(COMPLETED_DIR.glob("*.json"))) if COMPLETED_DIR.exists() else 0
+            
+            # 2. Safety Assessment
             protected = ["AGENTS.md", "failure_dispatcher.py", "SYSTEM_FAILURE_PROTOCOL"]
+            alerts = []
             for mod in modified:
                 for p in protected:
                     if p in mod:
-                        print(f"\n[{timestamp}] ⚠️ ALERT: Agent modified protected file: {mod}")
+                        alerts.append(f"PROTECTED FILE MODIFIED: {mod}")
             
-            # 3. Log active modifications if changed
-            if len(modified) != last_mod_count:
-                if modified:
-                    print(f"\n[{timestamp}] 📝 Active modifications ({len(modified)}):")
-                    for m in modified[:3]:
-                        print(f"   {m.strip()}")
-                    if len(modified) > 3: print(f"   ...and {len(modified)-3} more")
-                else:
-                    print(f"\n[{timestamp}] 📝 Clean git status (no active mods)")
-                last_mod_count = len(modified)
-            
-            # 4. Status Check & Auto-Spawn
-            pending_count = len(list(PENDING_DIR.glob("*.json"))) if PENDING_DIR.exists() else 0
-            active_count = len(list(ACTIVE_DIR.glob("*.json"))) if ACTIVE_DIR.exists() else 0
-            completed_count = len(list(COMPLETED_DIR.glob("*.json"))) if COMPLETED_DIR.exists() else 0
-            
-            # Status Log
-            status_hash = f"{pending_count}-{active_count}-{completed_count}"
-            if status_hash != last_status_hash:
-                 print(f"[{timestamp}] 📊 Status: 🟡 {pending_count} | 🔵 {active_count} | ✅ {completed_count}")
-                 last_status_hash = status_hash
-            
-            # Auto-Spawn Logic
-            # If pending tasks exist AND few active agents AND cooldown passed
-            if pending_count > 0 and active_count < 2 and time.time() > spawn_cooldown:
-                print(f"\n[{timestamp}] 🚀 Auto-Spawning agents for {pending_count} pending tasks...")
-                cmd_spawn("caddy")
-                spawn_cooldown = time.time() + 60  # Wait 60s before spawning again
+            # 3. Determine System State
+            if alerts:
+                system_state = "🔴 CRITICAL ALERT"
+                led = "🚨"
+            elif modified:
+                system_state = "🟡 ACTIVE WORK"
+                led = "⚡"
+            else:
+                system_state = "🟢 SYSTEM NOMINAL"
+                led = "🛡️"
                 
-            # Periodic heartbeat (optional, or just sleep)
-            time.sleep(2)
+            # 4. Render Dashboard (Fixed Layout)
+            os.system("cls" if os.name == "nt" else "clear")
+            
+            print(f"{led} PIPELINE SENTINEL v1.0   [{timestamp}]   {spinners[spinner_idx]}")
+            print("=" * 60)
+            print(f"STATUS: {system_state}")
+            print("-" * 60)
+            print(f"TASKS:  Pending:   {pending}  (Queue)")
+            print(f"        Active:    {active}  (Agents)")
+            print(f"        Completed: {completed}  (Done)")
+            print("-" * 60)
+            
+            # Alert Section
+            if alerts:
+                print("\n⚠️  ACTIVE ALERTS:")
+                for alert in alerts:
+                    print(f"   🔥 {alert}")
+            
+            # Modification Section
+            if modified:
+                print(f"\n📝 FILE SYSTEM ACTIVITY ({len(modified)} files):")
+                for m in modified[:5]:
+                    print(f"   py  {m.strip()}")
+                if len(modified) > 5:
+                    print(f"   ...and {len(modified)-5} more")
+            else:
+                print("\n✨ Workspace clean. No uncommitted changes.")
+
+            print("\n" + "=" * 60)
+            
+            # 5. Auto-Spawn Logic
+            if pending > 0 and active < 2 and time.time() > spawn_cooldown:
+                print(f"🚀 AUTO-SPAWN TRIGGERED: Launching agents...")
+                cmd_spawn("caddy")
+                spawn_cooldown = time.time() + 60
+                time.sleep(2) # Show the spawn message briefly
+            else:
+                if active > 0:
+                    print("👁️  Watching swarm operations...")
+                else:
+                    print("💤 Idle. Waiting for tasks.")
+
+            # Update spinner
+            spinner_idx = (spinner_idx + 1) % len(spinners)
+            time.sleep(1)
             
         except KeyboardInterrupt:
             print("\n🛡️ Sentinel stopped.")
