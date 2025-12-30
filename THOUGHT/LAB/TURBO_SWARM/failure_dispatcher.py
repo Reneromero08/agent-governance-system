@@ -291,6 +291,23 @@ def cmd_status() -> None:
             result_summary = task.get('result', {}).get('summary', 'No summary')[:60]
             print(f"   • {task['task_id']} by {agent}")
             print(f"     {result_summary}...")
+    
+    # Context metrics
+    total_tasks = len(ledger["tasks"])
+    ledger_json = json.dumps(ledger)
+    estimated_tokens = len(ledger_json) // 4  # ~4 chars per token
+    context_capacity = 8192  # ministral-3:8b context window
+    usage_pct = (estimated_tokens / context_capacity) * 100
+    
+    print(f"\n📊 Context Metrics:")
+    print(f"   Ledger tasks: {total_tasks}")
+    print(f"   Estimated tokens: {estimated_tokens}")
+    print(f"   Context capacity: {context_capacity} (ministral-3:8b)")
+    print(f"   Usage: {usage_pct:.1f}%")
+    
+    if estimated_tokens > 6000:
+        print(f"   ⚠️ Warning: Consider pruning ledger (use sync to clean up)")
+
 
 
 

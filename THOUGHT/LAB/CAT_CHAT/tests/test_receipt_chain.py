@@ -101,7 +101,7 @@ def test_receipt_chain_deterministic():
             bundle_dir = create_minimal_bundle(tmpdir / f"bundle_{i}")
             manifest_path = bundle_dir / "bundle.json"
             manifest = json.loads(manifest_path.read_text())
-            manifest["run_id"] = f"{run_id}_{i}"
+            manifest["run_id"] = run_id
 
             manifest_path.write_text(json.dumps(manifest, sort_keys=True, separators=(",", ":")))
 
@@ -222,6 +222,7 @@ def test_receipt_chain_requires_sequential_order():
     run_id = "test_chain_order"
 
     with tempfile.TemporaryDirectory() as tmpdir:
+        tmpdir = Path(tmpdir)
         receipts = []
 
         for i in range(3):
