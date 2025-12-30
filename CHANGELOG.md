@@ -2,6 +2,13 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [Unreleased] - 2025-12-30
+### Fixed
+- MCP server pathing aligned to 6-bucket layout (LAW/CAPABILITY/NAVIGATION) for canon/resources, prompts, context, and tool helpers.
+- MCP context/cortex tools now read from LAW/CONTEXT and NAVIGATION/CORTEX index during refactor.
+- MCP entrypoint root resolution corrected for consistent imports and logging.
+- mcp-smoke skill updated for canon 3.x compatibility and Cortex discovery changes.
+
 ## [3.1.1] - 2025-12-30
 ### Governed Swarm & Neo3000
 
@@ -987,4 +994,3 @@ This release establishes The Living Formula as the primary driver for navigating
 ### Changed
 - `.githooks/pre-commit`: Added INBOX policy check after canon governance check
 - `TOOLS/check_inbox_policy.py`: New governance check script for INBOX enforcement
-
