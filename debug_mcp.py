@@ -7,16 +7,16 @@ def run_probe():
     cmd = [sys.executable, "LAW/CONTRACTS/ags_mcp_entrypoint.py"]
     print(f"Launching: {cmd}")
     
+    # Force binary streams
     proc = subprocess.Popen(
         cmd,
         stdin=subprocess.PIPE,
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         cwd="D:\\CCC 2.0\\AI\\agent-governance-system",
-        bufsize=0  # Unbuffered
+        # bufsize=0 is fine, but let's rely on explicit file handles
     )
 
-    # Initialize request
     req = {
         "jsonrpc": "2.0",
         "id": 1,
@@ -31,48 +31,53 @@ def run_probe():
     msg = json.dumps(req).encode("utf-8")
     header = f"Content-Length: {len(msg)}\r\n\r\n".encode("ascii")
     
-    print("Sending initialize...")
-    try:
-        proc.stdin.write(header + msg)
-        proc.stdin.flush()
-    except Exception as e:
-        print(f"Write failed: {e}")
-        return
-
-    # Read response
-    print("Reading response...")
-    start = time.time()
+    print(f"Sending {len(header) + len(msg)} bytes...")
+    proc.stdin.write(header + msg)
+    proc.stdin.flush()
     
-    # Read header
-    headers = {}
-    while True:
-        if time.time() - start > 5:
-            print("TIMEOUT waiting for headers")
-            break
-            
-        raw_line = proc.stdout.readline()
-        if not raw_line:
-            break
-        line = raw_line.decode("ascii", errors="ignore").strip()
-        if not line:
-            break
-        print(f"Header received: {line}")
+    print("Reading response header...")
+    line = proc.stdout.readline()
+    print(f"HEADER RAW: {line}")
+    
+    # Read rest if header ok
+    if b"Content-Length" in line:
         try:
-            k, v = line.split(":", 1)
-            headers[k.strip().lower()] = v.strip()
-        except:
-            pass
+           val = int(line.split(b":")[1].strip())
+           proc.stdout.readline() # \r\n
+           body = proc.stdout.read(val)
+           print(f"BODY: {body.decode('utf-8')}")
+           
+           # Call tool loop
+           print("\nCalling read_canon...")
+           
+           # Notify initialized
+           notify = json.dumps({"jsonrpc": "2.0", "method": "notifications/initialized"}).encode("utf-8")
+           proc.stdin.write(f"Content-Length: {len(notify)}\r\n\r\n".encode("ascii") + notify)
+           proc.stdin.flush()
 
-    if "content-length" in headers:
-        length = int(headers["content-length"])
-        body = proc.stdout.read(length)
-        print(f"Body: {body.decode('utf-8')}")
-    else:
-        print("No content-length header found or timeout")
-        # Check stderr
-        err = proc.stderr.read()
-        if err:
-            print(f"STDERR: {err.decode('utf-8')}")
+           # Call tool
+           tool = json.dumps({
+               "jsonrpc": "2.0", 
+               "id": 2, 
+               "method": "tools/call", 
+               "params": {"name": "read_canon", "arguments": {"doc": "GENESIS.md"}}
+           }).encode("utf-8")
+           proc.stdin.write(f"Content-Length: {len(tool)}\r\n\r\n".encode("ascii") + tool)
+           proc.stdin.flush()
+           
+           # Read tool response
+           print("Reading tool response...")
+           while True:
+                h = proc.stdout.readline()
+                if h and b"Content-Length" in h:
+                    l = int(h.split(b":")[1].strip())
+                    proc.stdout.readline()
+                    b = proc.stdout.read(l)
+                    print(f"TOOL RES: {b.decode('utf-8')}")
+                    break
+                    
+        except Exception as e:
+            print(f"Error: {e}")
 
     proc.terminate()
 
