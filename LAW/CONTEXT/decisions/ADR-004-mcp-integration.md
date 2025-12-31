@@ -16,8 +16,8 @@ The Agent Governance System (AGS) needs a standardized way to expose its tools (
 We will implement the **Model Context Protocol (MCP)** specification.
 
 1.  **Transport**: We will use `stdio` (Standard Input/Output) as the transport layer. This is the simplest and most robust method for local desktop integration.
-2.  **Server Location**: The implementation will reside in `MCP/server.py` and `MCP/schemas/`.
-    - The recommended runtime entrypoint is `CONTRACTS/_runs/ags_mcp_entrypoint.py` to keep audit logs under allowed output roots.
+2.  **Server Location**: The implementation will reside in `CAPABILITY/MCP/server.py` and `CAPABILITY/MCP/schemas/`.
+    - The recommended runtime entrypoint is `LAW/CONTRACTS/ags_mcp_entrypoint.py` to keep audit logs under allowed output roots.
 3.  **Governance Integration**: We will expose governance-critical tools (`critic`, `ceremony`) via MCP, turning the IDE into a governed environment.
 4.  **Verification**: MCP readiness is verified via `mcp-smoke` (CLI) and `mcp-extension-verify` (extension checklist).
 
@@ -38,10 +38,10 @@ MCP is emerging as the standard for connecting AI models to local context. Adopt
 
 - **Dependency**: We implicitly depend on the stability of the MCP spec.
 - **Security**: Exposing `run_command` or file write tools via MCP requires strict `critic` gates (implemented via `heuristic_safe` flags).
-- **Audit Logs**: When launched via the wrapper entrypoint, MCP audit logs are written to `CONTRACTS/_runs/mcp_logs/`.
+- **Audit Logs**: When launched via the wrapper entrypoint, MCP audit logs are written to `LAW/CONTRACTS/_runs/mcp_logs/`.
 
 ## Enforcement
 
-- All new external tools must be added to `MCP/schemas/tools.json`.
-- The `MCP/server.py` implementation is the reference implementation.
+- All new external tools must be added to `CAPABILITY/MCP/schemas/tools.json`.
+- The `CAPABILITY/MCP/server.py` implementation is the reference implementation.
 - MCP verification uses the `mcp-smoke` and `mcp-extension-verify` skills.

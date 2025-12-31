@@ -9,7 +9,7 @@ This document lists the primary entrypoints where agents and humans are expected
 - `CANON/VERSIONING.md` - Modify when bumping the canon version or documenting deprecations.
 - `CANON/CHANGELOG.md` - Add entries for each change to the canon or system behavior.
 - `SKILLS/master-override/` - Audit logging and gated access for `MASTER_OVERRIDE` usage.
-- Privacy boundary rule: update `CANON/CONTRACT.md`, `AGENTS.md`, and `CONTRACTS/fixtures/governance/privacy-boundary/`.
+- Privacy boundary rule: update `CANON/CONTRACT.md`, `AGENTS.md`, and `LAW/CONTRACTS/fixtures/governance/privacy-boundary/`.
 
 ## Decision records
 
@@ -25,7 +25,7 @@ This document lists the primary entrypoints where agents and humans are expected
 
 ## Contracts
 
-- `CONTRACTS/fixtures/` - Add new fixture directories as you formalise behavior. Use descriptive names.
+- `LAW/CONTRACTS/fixtures/` - Add new fixture directories as you formalise behavior. Use descriptive names.
 - `CONTRACTS/schemas/` - Add JSON schemas to validate structures (canon, skills, context, cortex, etc.).
 
 ## Tools and memory
@@ -42,8 +42,8 @@ Note: The Cortex section index includes `CATALYTIC-DPT/` so agents can discover 
 
 - `MCP/README.md` - Client configuration and quick-start guidance.
 - `MCP/MCP_SPEC.md` - Protocol mapping and implementation status.
-- `MCP/server.py` - MCP server implementation (stdio).
-- `CONTRACTS/ags_mcp_entrypoint.py` - Recommended entrypoint wrapper (audit logs under allowed roots).
+- `CAPABILITY/MCP/server.py` - MCP server implementation (stdio).
+- `LAW/CONTRACTS/ags_mcp_entrypoint.py` - Recommended entrypoint wrapper (audit logs under allowed roots).
 - `SKILLS/mcp-smoke/` - CLI smoke test for MCP server.
 - `SKILLS/mcp-extension-verify/` - Extension-agnostic verification checklist + smoke test.
 

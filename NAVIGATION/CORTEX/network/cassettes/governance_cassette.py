@@ -18,7 +18,7 @@ class GovernanceCassette(DatabaseCassette):
     """Cassette for governance documents (CANON, ADRs, SKILLS, MAPS)."""
 
     def __init__(self):
-        db_path = Path("CORTEX/system1.db")
+        db_path = Path("NAVIGATION/CORTEX/db/system1.db")
         super().__init__(
             db_path=db_path,
             cassette_id="governance"

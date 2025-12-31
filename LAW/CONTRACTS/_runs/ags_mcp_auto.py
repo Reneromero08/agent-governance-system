@@ -7,7 +7,7 @@ It automatically starts the MCP server on first connection if not already runnin
 
 Key features:
 - Auto-starts server on first interaction (no manual start needed)
-- Logs to CONTRACTS/_runs/mcp_logs/ (governance-compliant)
+- Logs to LAW/CONTRACTS/_runs/mcp_logs/ (governance-compliant)
 - Checks server health before connecting
 - Falls back to direct server if auto-start fails
 
@@ -16,7 +16,7 @@ Usage in Claude Desktop config:
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -28,21 +28,21 @@ import os
 from pathlib import Path
 
 # Add repo root to path so we can import the server
-REPO_ROOT = Path(__file__).resolve().parents[3]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(REPO_ROOT))
 
 # Import the actual MCP server
 from CAPABILITY.MCP.server import main as server_main, AGSMCPServer
 
 # Override logging directory to be governance-compliant
-os.environ['MCP_LOG_DIR'] = str(REPO_ROOT / 'CONTRACTS' / '_runs' / 'mcp_logs')
+os.environ['MCP_LOG_DIR'] = str(REPO_ROOT / 'LAW' / 'CONTRACTS' / '_runs' / 'mcp_logs')
 
 # Auto-start logic
 def ensure_server_running():
     """Ensure MCP server is running, start if needed."""
     import subprocess
 
-    PID_FILE = REPO_ROOT / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
+    PID_FILE = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
 
     # Check if already running
     if PID_FILE.exists():
@@ -69,7 +69,7 @@ def ensure_server_running():
             pass
 
     # Server not running - start it in background
-    autostart_script = REPO_ROOT / "MCP" / "autostart.ps1"
+    autostart_script = REPO_ROOT / "CAPABILITY" / "MCP" / "autostart.ps1"
     if autostart_script.exists():
         try:
             # Use PowerShell autostart script

@@ -1,0 +1,39 @@
+{
+  "task_id": "TASK-2025-12-31-002",
+  "title": "Complete Agent Onboarding Improvements - Phase 2",
+  "description": "Implement remaining improvements identified in the agent onboarding gap analysis, including ADR-021 UUID gap fix, additional ADR reviews, and validation testing.",
+  "status": "COMPLETED",
+  "priority": "HIGH",
+  "created": "2025-12-31T01:02:44Z",
+  "updated": "2025-12-31T01:38:30Z",
+  "completed": "2025-12-31T01:38:30Z",
+  "assignee": "Kilo Code",
+  "agent_id": "17cb4e78-ae76-49df-b336-c0cccbf5878d",
+  "category": "governance",
+  "tags": ["onboarding", "ADR-021", "cortex", "MCP", "testing"],
+  "dependencies": ["TASK-2025-12-31-001"],
+  "related_reports": ["INBOX/reports/agents-cortex-connection-gap-report.md"],
+  "deliverables": [
+    "session_info MCP tool implementation",
+    "Additional ADR review summary",
+    "Cortex Quick Reference appendix",
+    "Simulated agent bootstrap test design",
+    "AGENTS.md final improvements"
+  ],
+  "notes": "This task continues the work from TASK-2025-12-31-001 to address all remaining gaps in the agent onboarding process. Critical priority is fixing the ADR-021 UUID gap where agents cannot discover their own session_id. Work completed by agent Kilo Code with agent_id 17cb4e78-ae76-49df-b336-c0cccbf5878d.",
+  "estimated_effort": "medium",
+  "acceptance_criteria": [
+    "Agents can query their own session_id via MCP",
+    "All relevant ADRs reviewed for onboarding implications",
+    "Cortex Quick Reference available in AGENTS.md",
+    "Bootstrap test validates new agent connection flow"
+  ],
+  "results": [
+    "Implemented session_info MCP tool in CAPABILITY/MCP/server.py",
+    "Reviewed 13 additional ADRs beyond initial 10",
+    "Created INBOX/reports/cortex-quick-reference.md",
+    "Created INBOX/reports/agent-bootstrap-test-design.md",
+    "Updated AGENTS.md Sections 0.2, 0.4, 0.6, and 1",
+    "Verified audit logs include session_id for ADR-021 compliance"
+  ]
+}

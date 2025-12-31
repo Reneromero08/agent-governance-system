@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/trust_policy.schema.json",
+  "title": "Validator Trust Policy",
+  "description": "Deterministic policy for pinning validator public keys allowed to attest receipts and Merkle roots",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "policy_version",
+    "allow"
+  ],
+  "properties": {
+    "policy_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Policy version identifier"
+    },
+    "allow": {
+      "type": "array",
+      "description": "List of pinned validator entries",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "validator_id",
+          "public_key",
+          "schemes",
+          "scope",
+          "enabled"
+        ],
+        "properties": {
+          "validator_id": {
+            "type": "string",
+            "description": "Stable human-readable label for the validator"
+          },
+          "public_key": {
+            "type": "string",
+            "pattern": "^[0-9a-fA-F]{64}$",
+            "description": "Ed25519 public key hex (64 characters, 32 bytes)"
+          },
+          "build_id": {
+            "type": "string",
+            "pattern": "^(git:[a-f0-9]{7,40}|file:[a-f0-9]{16,})$",
+            "description": "Deterministic build fingerprint (e.g., git:abc1234 or file:sha256prefix)"
+          },
+          "schemes": {
+            "type": "array",
+            "description": "Supported signature schemes",
+            "items": {
+              "type": "string"
+            },
+            "minItems": 1,
+            "contains": {
+              "const": "ed25519"
+            }
+          },
+          "scope": {
+            "type": "array",
+            "description": "Allowed attestation scopes",
+            "items": {
+              "type": "string",
+              "enum": ["RECEIPT", "MERKLE"]
+            },
+            "minItems": 1
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "Whether this validator entry is enabled"
+          }
+        }
+      }
+    }
+  }
+}

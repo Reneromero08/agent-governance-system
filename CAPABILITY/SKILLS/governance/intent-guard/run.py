@@ -7,10 +7,11 @@ import subprocess
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 sys.path.insert(0, str(PROJECT_ROOT / "CATALYTIC-DPT"))
+
 from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 

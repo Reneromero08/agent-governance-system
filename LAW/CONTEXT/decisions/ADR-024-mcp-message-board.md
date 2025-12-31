@@ -22,7 +22,7 @@ Add MCP message board tools:
 - `message_board_list` (read)
 - `message_board_write` (post/pin/unpin/delete/purge)
 
-Events are stored as append-only JSONL under `CONTRACTS/_runs/message_board/`. Role enforcement uses a small allowlist at `MCP/board_roles.json` keyed by session id. Default role is `poster`, with `moderator` and `admin` escalation.
+Events are stored as append-only JSONL under `LAW/CONTRACTS/_runs/message_board/`. Role enforcement uses a small allowlist at `CAPABILITY/MCP/board_roles.json` keyed by session id. Default role is `poster`, with `moderator` and `admin` escalation.
 
 ## Alternatives considered
 
@@ -31,18 +31,18 @@ Events are stored as append-only JSONL under `CONTRACTS/_runs/message_board/`. R
 
 ## Rationale
 
-The MCP tool interface provides a consistent, governed surface for agent coordination. JSONL storage is append-only and auditable while staying inside `CONTRACTS/_runs/`. Role allowlists keep moderation explicit and reversible.
+The MCP tool interface provides a consistent, governed surface for agent coordination. JSONL storage is append-only and auditable while staying inside `LAW/CONTRACTS/_runs/`. Role allowlists keep moderation explicit and reversible.
 
 ## Consequences
 
 - Adds new MCP tools and a roles config file.
-- Adds new runtime artifacts under `CONTRACTS/_runs/message_board/`.
+- Adds new runtime artifacts under `LAW/CONTRACTS/_runs/message_board/`.
 - Requires changelog + version bump and fixtures for governance compliance.
 
 ## Enforcement
 
 - MCP tool schema additions in `MCP/schemas/tools.json`.
-- Role allowlist file `MCP/board_roles.json`.
+- Role allowlist file `CAPABILITY/MCP/board_roles.json`.
 - Skill fixtures for the message board skill.
 
 ## Review triggers

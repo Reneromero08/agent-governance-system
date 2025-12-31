@@ -1,0 +1,92 @@
+import shutil
+import sys
+from pathlib import Path
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+# Adjust path to find catalytic_runtime
+CATALYTIC_PATH = REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic"
+if str(CATALYTIC_PATH) not in sys.path:
+    sys.path.insert(0, str(CATALYTIC_PATH))
+
+from catalytic_runtime import CatalyticRuntime
+
+def _rm(path: Path) -> None:
+    if path.is_dir():
+        shutil.rmtree(path, ignore_errors=True)
+    else:
+        try:
+            path.unlink()
+        except FileNotFoundError:
+            pass
+
+def test_memoization_miss_then_hit_then_invalidate() -> None:
+    # Use paths relative to REPO_ROOT to satisfy relative_to(PROJECT_ROOT) checks
+    test_subdir = "LAW/CONTRACTS/_runs/_tmp/test_memoization"
+    test_root = REPO_ROOT / test_subdir
+    _rm(test_root)
+    test_root.mkdir(parents=True, exist_ok=True)
+
+    run_id = "memoization-test-run"
+    domain_rel = f"{test_subdir}/domain"
+    output_rel = f"{test_subdir}/output.txt"
+    side_effect_rel = f"{test_subdir}/side_effect.txt"
+
+    domain_abs = REPO_ROOT / domain_rel
+    domain_abs.mkdir(parents=True, exist_ok=True)
+    output_abs = REPO_ROOT / output_rel
+    side_effect_abs = REPO_ROOT / side_effect_rel
+
+    try:
+        # 1. First run: MISS
+        runtime = CatalyticRuntime(
+            run_id=run_id,
+            catalytic_domains=[domain_rel],
+            durable_outputs=[output_rel],
+            intent="memoization test",
+            memoize=True
+        )
+        
+        # Use absolute paths for the command as subprocess doesn't know about REPO_ROOT necessarily
+        cmd_a = [
+            sys.executable,
+            "-c",
+            f"from pathlib import Path; Path(r'{output_abs}').write_text('A', encoding='utf-8'); Path(r'{side_effect_abs}').write_text('EXEC_A', encoding='utf-8')"
+        ]
+        
+        assert runtime.run(cmd_a) == 0
+        assert output_abs.read_text(encoding='utf-8') == "A"
+        assert side_effect_abs.read_text(encoding='utf-8') == "EXEC_A"
+
+        # 2. Second run: HIT
+        _rm(output_abs)
+        _rm(side_effect_abs)
+        
+        runtime_hit = CatalyticRuntime(
+            run_id=run_id,
+            catalytic_domains=[domain_rel],
+            durable_outputs=[output_rel],
+            intent="memoization test",
+            memoize=True
+        )
+        
+        # Command that would produce 'B' if executed
+        cmd_b = [
+            sys.executable,
+            "-c",
+            f"from pathlib import Path; Path(r'{output_abs}').write_text('B', encoding='utf-8'); Path(r'{side_effect_abs}').write_text('EXEC_B', encoding='utf-8')"
+        ]
+        
+        assert runtime_hit.run(cmd_b) == 0
+        
+        # Verify it was a HIT: output should be 'A' (from cache), not 'B'
+        assert output_abs.read_text(encoding='utf-8') == "A"
+        # Side effect file should NOT exist because command was elided
+        assert not side_effect_abs.exists()
+        
+    finally:
+        _rm(test_root)
+        _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id)

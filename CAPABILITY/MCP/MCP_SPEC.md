@@ -72,10 +72,10 @@ MCP (Model Context Protocol) is an open standard for AI systems to communicate w
 ## Entrypoint and logging
 
 To satisfy output-root invariants, use the wrapper entrypoint:
-- `CONTRACTS/_runs/ags_mcp_entrypoint.py`
+- `LAW/CONTRACTS/ags_mcp_entrypoint.py`
 
 This redirects audit logs to:
-- `CONTRACTS/_runs/mcp_logs/`
+- `LAW/CONTRACTS/_runs/mcp_logs/`
 
 Verification is available via the `mcp-smoke` and `mcp-extension-verify` skills.
 
@@ -121,7 +121,7 @@ MCP/
 ```
 
 Runtime wrapper entrypoint (recommended):
-- `CONTRACTS/_runs/ags_mcp_entrypoint.py`
+- `LAW/CONTRACTS/ags_mcp_entrypoint.py`
 
 ## Transport
 

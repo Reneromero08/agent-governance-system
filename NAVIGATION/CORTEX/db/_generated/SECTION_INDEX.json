@@ -1,227 +1,331 @@
 [
   {
-    "end_line": 276,
-    "hash": "4bb18a54cf9603872ba0b186a3f12a13c3078255ba5a81976752af672631c282",
+    "end_line": 436,
+    "hash": "bee73a22dd2d7996ee4e90b0bf1fe1d05ff0ca39cee85819ee09d151f2142f94",
     "heading": "AGENTS.md",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::agents-md::01",
     "start_line": 1
   },
   {
-    "end_line": 27,
-    "hash": "028ad5038bb84911132747b4bbb9c4a3796157497352decd615655eedbc7d5d5",
-    "heading": "1. Required startup sequence (non-negotiable)",
+    "end_line": 145,
+    "hash": "b53c5bf0eba7f068df13c7c8fd4406af1857b1a381693b4ecd7a5cb02ca41e9d",
+    "heading": "0. Initial Connection & Cortex Access",
     "path": "AGENTS.md",
-    "section_id": "AGENTS.md::1-required-startup-sequence-non-negotiable::01",
+    "section_id": "AGENTS.md::0-initial-connection-cortex-access::01",
     "start_line": 10
   },
   {
-    "end_line": 37,
-    "hash": "b0195b4a1f977ce1a694a7b036b1362b9dded33fea6ba1cbbaf23ca6a516585c",
+    "end_line": 32,
+    "hash": "188243fc0be49d7e667b9544f9c0e3494889e784585f412ec000a8865f722651",
+    "heading": "0.1 Connection Methods",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-1-connection-methods::01",
+    "start_line": 14
+  },
+  {
+    "end_line": 41,
+    "hash": "b91a3c5b14d694a1e6cc83542695c3067aad0ed4cc2bcda26ec218be1c99fbd3",
+    "heading": "0.2 Essential Cortex Tools",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-2-essential-cortex-tools::01",
+    "start_line": 33
+  },
+  {
+    "end_line": 47,
+    "hash": "87a3e0aa9d1eff4baf87301bcf5a1d7959b7053572e24df4906da53874c8851f",
+    "heading": "0.3 First Commands (Bootstrap Sequence)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-3-first-commands-bootstrap-sequence::01",
+    "start_line": 42
+  },
+  {
+    "end_line": 60,
+    "hash": "01913ca57487e999b6bc8371e53d9d3863faa6523c97f24d74b323957b11ae0b",
+    "heading": "0.4 ADR-021 Identity & Observability",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-4-adr-021-identity-observability::01",
+    "start_line": 48
+  },
+  {
+    "end_line": 67,
+    "hash": "1a1e71a921aa98253d24d5a589a0f6022550348736252ea90b636f9fbfe7b6ba",
+    "heading": "0.5 Troubleshooting",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-5-troubleshooting::01",
+    "start_line": 61
+  },
+  {
+    "end_line": 79,
+    "hash": "678117fb79ff9d0e00940d7406497d8977a66fb7dc9af9c2b5b9bbd1eeb7ddbd",
+    "heading": "0.6 Connection Success Criteria",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-6-connection-success-criteria::01",
+    "start_line": 68
+  },
+  {
+    "end_line": 145,
+    "hash": "b59a3cad46b01412b67a0e6e0a71dd50a68f2dcf585fd2d25906ccb2f8dcea65",
+    "heading": "0.7 MCP-First Principle (Token Efficiency)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::0-7-mcp-first-principle-token-efficiency::01",
+    "start_line": 80
+  },
+  {
+    "end_line": 92,
+    "hash": "7c141218c6516ed2e2419425a01b0e8d81ae127617634f7d0707ff43ffa80e19",
+    "heading": "What is Token Waste?",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::what-is-token-waste::01",
+    "start_line": 86
+  },
+  {
+    "end_line": 130,
+    "hash": "1035d12ee73bbc63eeeba01aaf6d39112c410b006afcb81dff9c56ddba8d4962",
+    "heading": "Examples of Token Waste vs. Correct Usage:",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::examples-of-token-waste-vs-correct-usage::01",
+    "start_line": 93
+  },
+  {
+    "end_line": 135,
+    "hash": "62625ab3f3a5f1ba31e43730b9edc346a9f761274961e54d6bdf018dd4481073",
+    "heading": "Enforcement",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::enforcement::01",
+    "start_line": 131
+  },
+  {
+    "end_line": 142,
+    "hash": "452e4b76059b42a4a1f1256c25d29b94ffdbdaae677bccd5fa7e5cf59618e4c0",
+    "heading": "Token Savings",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::token-savings::01",
+    "start_line": 136
+  },
+  {
+    "end_line": 145,
+    "hash": "2f804893ef6e08639f44beaa624d1fee887fb65480bb9363195670607a9526b2",
+    "heading": "The Rule",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::the-rule::01",
+    "start_line": 143
+  },
+  {
+    "end_line": 187,
+    "hash": "72ae69af12816c2f660cda8782fb91dca213027edbd105fae0e4305f507075c4",
+    "heading": "1. Required startup sequence (non-negotiable)",
+    "path": "AGENTS.md",
+    "section_id": "AGENTS.md::1-required-startup-sequence-non-negotiable::01",
+    "start_line": 146
+  },
+  {
+    "end_line": 197,
+    "hash": "609349e6809a607cde48c613ec6400547a045b659abd13bb65719f89a8863468",
     "heading": "1C. Multi-agent workflow (worktrees)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::1c-multi-agent-workflow-worktrees::01",
-    "start_line": 28
+    "start_line": 188
   },
   {
-    "end_line": 46,
+    "end_line": 206,
     "hash": "e792cdd6aefdc5d05756f001f9b37d2f8d29d682328b345ea9e32180fa4112fd",
     "heading": "1A. Question-first gate (no-write)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::1a-question-first-gate-no-write::01",
-    "start_line": 38
+    "start_line": 198
   },
   {
-    "end_line": 50,
+    "end_line": 210,
     "hash": "445c0e48672d69107fd39c22b44e30ecb403d46af8f260033270c6d50afa3a96",
     "heading": "1B. Intent gate (canon and context)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::1b-intent-gate-canon-and-context::01",
-    "start_line": 47
+    "start_line": 207
   },
   {
-    "end_line": 66,
-    "hash": "87813aed51e721eecdeef335e670c23e222efddacdf8aca20ff6a81159ba3ff8",
+    "end_line": 226,
+    "hash": "2a4f3570dfa22d8a5385a18f154d6db52437e1dcf9063ccaf977631a7f8f80d8",
     "heading": "2. Authority gradient",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::2-authority-gradient::01",
-    "start_line": 51
+    "start_line": 211
   },
   {
-    "end_line": 75,
-    "hash": "fef947cb544ed2ea15fe9226c42a814fb5575a1a648504a28f0bffe00e907ad8",
+    "end_line": 235,
+    "hash": "ecd6c5ea308b8b4e4997161e3822017a25999059d697807bfced06780ff4c843",
     "heading": "2A. Sovereign override interface (`MASTER_OVERRIDE`)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::2a-sovereign-override-interface-master-override::01",
-    "start_line": 67
+    "start_line": 227
   },
   {
-    "end_line": 81,
+    "end_line": 241,
     "hash": "d0bd67205349c7d8f9e22954a305b6431e8a80a0d0c8e09308fa2e9d92bb2831",
     "heading": "2B. Privacy boundary (no out-of-repo access)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::2b-privacy-boundary-no-out-of-repo-access::01",
-    "start_line": 76
+    "start_line": 236
   },
   {
-    "end_line": 107,
-    "hash": "e669ec4a88fe0c145539a960a678e5808a2a7f71ce8ab408ac878d110c28d8b0",
+    "end_line": 267,
+    "hash": "5f95e900709b9417248c2f08b0529fe3e76937558bfc5c55e1073e26c59ed518",
     "heading": "3. Mutation rules",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::3-mutation-rules::01",
-    "start_line": 82
+    "start_line": 242
   },
   {
-    "end_line": 124,
-    "hash": "6d58283c27d1a4cab13e4a5ca645ca9d867a759711a9245d3152dd3e1cf45b4e",
+    "end_line": 284,
+    "hash": "697864407fecd80e7681843256575ee32fa993a17935ae45995e4d85f62e1009",
     "heading": "4. Build output rules",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::4-build-output-rules::01",
-    "start_line": 108
+    "start_line": 268
   },
   {
-    "end_line": 147,
+    "end_line": 307,
     "hash": "afb4b31dce5a8c70995c880d6bc5403c5b4a6f6c09907145ebf0e9af0e0a2824",
     "heading": "5. Skills-first execution",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::5-skills-first-execution::01",
-    "start_line": 125
+    "start_line": 285
   },
   {
-    "end_line": 158,
-    "hash": "fcf7aebc34376a1d82edd502a9411678b4c3c262b5bd19e9708bb46a47f8801a",
+    "end_line": 318,
+    "hash": "37154d556ff366902032e33f9e4ff17a5a1230ec0596c3d3bb02af78e07a2e89",
     "heading": "6. Fixtures gate changes",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::6-fixtures-gate-changes::01",
-    "start_line": 148
+    "start_line": 308
   },
   {
-    "end_line": 170,
+    "end_line": 330,
     "hash": "507f93ee6727d19fb558183ea8df9fcf670037e2f7d701a80fd2f5283f63a6c7",
     "heading": "7. Uncertainty protocol",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::7-uncertainty-protocol::01",
-    "start_line": 159
+    "start_line": 319
   },
   {
-    "end_line": 182,
+    "end_line": 342,
     "hash": "4666eef42409f022847a863252725d7d7a0eacf507ff464af1671ededc069ad6",
     "heading": "8. Determinism requirement",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::8-determinism-requirement::01",
-    "start_line": 171
+    "start_line": 331
   },
   {
-    "end_line": 192,
+    "end_line": 352,
     "hash": "b81018cfe3bd29ac501ba24b65c9e506fdd1e7c58c73e221eb5e1c3589be1cad",
     "heading": "9. Exit conditions",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::9-exit-conditions::01",
-    "start_line": 183
+    "start_line": 343
   },
   {
-    "end_line": 233,
-    "hash": "a0448b6298b100b7f4602afd0144545a33df98fea8d92646f2a1095f2300a98e",
+    "end_line": 393,
+    "hash": "4176c712f48f5a11c930dcdcfce952328fb092daf98d5cdd672499667f612302",
     "heading": "10. Commit ceremony (CRITICAL)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::10-commit-ceremony-critical::01",
-    "start_line": 193
+    "start_line": 353
   },
   {
-    "end_line": 208,
+    "end_line": 368,
     "hash": "4acc2efbfaa4ff5919b3a1403f9bd9a202f1a78bc551729258f30e22726714b4",
     "heading": "What does NOT authorize a commit",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::what-does-not-authorize-a-commit::01",
-    "start_line": 199
+    "start_line": 359
   },
   {
-    "end_line": 213,
+    "end_line": 373,
     "hash": "cdfb66d88c49e32c5a4928d4afc48c572a0ba43bd8d7ba4f36a99a6e36652385",
     "heading": "Explicit composite approvals",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::explicit-composite-approvals::01",
-    "start_line": 209
+    "start_line": 369
   },
   {
-    "end_line": 217,
+    "end_line": 377,
     "hash": "ccbcdfb9457aad7a4b2c6e18592635d65f97075ae7d22157028ec02ffcbf6874",
     "heading": "Ceremony confirmations",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::ceremony-confirmations::01",
-    "start_line": 214
+    "start_line": 374
   },
   {
-    "end_line": 220,
+    "end_line": 380,
     "hash": "d41e3d8e80fc05099bbb9dd66f7df8734eed711dbeb22c841135b7cdb1b7e353",
     "heading": "The anti-chaining rule",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::the-anti-chaining-rule::01",
-    "start_line": 218
+    "start_line": 378
   },
   {
-    "end_line": 233,
-    "hash": "53bf7949caf00bddd77885949297a17ea615a443c00f8823ef2588b755130bb5",
+    "end_line": 393,
+    "hash": "c4763afb66eea480f96eb6abf6f6e065c8371601b3ce155c70da5e3493b7225a",
     "heading": "The ceremony",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::the-ceremony::01",
-    "start_line": 221
+    "start_line": 381
   },
   {
-    "end_line": 276,
-    "hash": "212134e4008553e6d22a7a5d5b410611ee31fcbdcdf6aae6a95cafa59af85faf",
+    "end_line": 436,
+    "hash": "a1395a963f14847c5a640b8a52131efcad16b6d024ace804d713f3c755e8ac87",
     "heading": "11. The Law (pre-commit test requirement)",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-the-law-pre-commit-test-requirement::01",
-    "start_line": 234
+    "start_line": 394
   },
   {
-    "end_line": 276,
-    "hash": "7f94fed5bed753e815cfdd21754a5e51d127c5cc857463b24b019b84aff57e0b",
+    "end_line": 436,
+    "hash": "8d2b9ea2c7d66a5c6792e9a4d3e42b9edb1110d7876500952b078c6a4946be64",
     "heading": "Before ANY commit, agents MUST:",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::before-any-commit-agents-must::01",
-    "start_line": 241
+    "start_line": 401
   },
   {
-    "end_line": 248,
-    "hash": "7a08d1af4334526d16d2903abc84c353bf5511421e4d1ed0844736ec32ce14a2",
+    "end_line": 408,
+    "hash": "9dddcbea94b3dc18ceda1c5cf5331c29ba1d158795b3d34b796cc762f446fe4b",
     "heading": "11.1 Run tests and verify they pass",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-1-run-tests-and-verify-they-pass::01",
-    "start_line": 243
+    "start_line": 403
   },
   {
-    "end_line": 254,
+    "end_line": 414,
     "hash": "2daf5a67aedea61aa482466b77c03d7c88715133a1fdf627470194a52f4f900e",
     "heading": "11.2 Read FULL test output",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-2-read-full-test-output::01",
-    "start_line": 249
+    "start_line": 409
   },
   {
-    "end_line": 260,
+    "end_line": 420,
     "hash": "ea90639233189bdbb6cf4cfc3aa9bda430930c52d25a3ea6a49d30b257e6754e",
     "heading": "11.3 Never use `--no-verify` without:",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-3-never-use-no-verify-without::01",
-    "start_line": 255
+    "start_line": 415
   },
   {
-    "end_line": 269,
+    "end_line": 429,
     "hash": "03813acf1262ad648be34eed5a75a3ce465d11b67ba2cd4a543998d8c74d9f67",
     "heading": "11.4 Preflight failures are not logic bugs",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-4-preflight-failures-are-not-logic-bugs::01",
-    "start_line": 261
+    "start_line": 421
   },
   {
-    "end_line": 276,
+    "end_line": 436,
     "hash": "704a65ccdcae38939c3b9b0ecd19a5c4ec9eba5f643bc2b86d7f331740bec32b",
     "heading": "11.5 The test output truncation trap",
     "path": "AGENTS.md",
     "section_id": "AGENTS.md::11-5-the-test-output-truncation-trap::01",
-    "start_line": 270
+    "start_line": 430
   },
   {
     "end_line": 20,
@@ -424,16 +528,24 @@
     "start_line": 132
   },
   {
-    "end_line": 141,
+    "end_line": 148,
+    "hash": "17c8a2003ac8398efaddcd92537dd9f69045c5498cd4994ecc4ad5499d93c41a",
+    "heading": "Lane Y: CAT_CHAT Phase 6 (Execution Policy & Attestation) (P1)",
+    "path": "AGS_ROADMAP_MASTER.md",
+    "section_id": "AGS_ROADMAP_MASTER.md::lane-y-cat-chat-phase-6-execution-policy-attestation-p1::01",
+    "start_line": 137
+  },
+  {
+    "end_line": 153,
     "hash": "3a0059eeb411ff7bef6099cc912036536b1113de905bfe3df004eb7c93ad73ea",
     "heading": "Definition of Done (Global)",
     "path": "AGS_ROADMAP_MASTER.md",
     "section_id": "AGS_ROADMAP_MASTER.md::definition-of-done-global::01",
-    "start_line": 137
+    "start_line": 149
   },
   {
     "end_line": 94,
-    "hash": "4373509a18c075bc92eda7288a4cf1a516210a3df004bdc6a5544c41babb8247",
+    "hash": "68f1fb7683f2a01ed285f70cb33c1c0968fadbe03876ec5863ba7d1c9698fbee",
     "heading": "Agent Governance System (AGS)",
     "path": "README.md",
     "section_id": "README.md::agent-governance-system-ags::01",
@@ -457,7 +569,7 @@
   },
   {
     "end_line": 64,
-    "hash": "e80029b2d90c50445394994737f999c63825f64a288b758920aefec477e1f8ce",
+    "hash": "e2f0aeb4f6e0fb214ea2ddf7d258107111360f232fe77f502e61f413d0269ad5",
     "heading": "Semantic Core (Token Compression)",
     "path": "README.md",
     "section_id": "README.md::semantic-core-token-compression::01",
@@ -465,7 +577,7 @@
   },
   {
     "end_line": 71,
-    "hash": "6a5b25bddf2cad5bcb3835fba6a358232e16646062b1a85bd03be4f8a5e10768",
+    "hash": "d32dd46171a3e9455ec2c76cfa90a9564bbeae17ffea52c52dd35df5918a3178",
     "heading": "MCP integration (external clients)",
     "path": "README.md",
     "section_id": "README.md::mcp-integration-external-clients::01",
@@ -481,7 +593,7 @@
   },
   {
     "end_line": 94,
-    "hash": "29be7a26f6e9d950cbc011686eed3f71df9c53f7d79be7f63f5c313317a6077b",
+    "hash": "0549886e16e4af565905493348a02ae3412ff9587e9aafb5435d00f766830838",
     "heading": "How to extend AGS",
     "path": "README.md",
     "section_id": "README.md::how-to-extend-ags::01",

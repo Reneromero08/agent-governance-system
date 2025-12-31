@@ -128,9 +128,9 @@ The pre-commit hook (`SKILLS/canon-governance-check/scripts/pre-commit`) will ve
 The following are EXEMPT from INBOX policy:
 
 1. **Canon documents** (CANON/*) - These ARE the source of truth
-2. **Generated artifacts** (CORTEX/_generated/*, CONTRACTS/_runs/*) - System outputs
+2. **Generated artifacts** (CORTEX/_generated/*, LAW/CONTRACTS/_runs/*) - System outputs
 3. **Code implementations** (TOOLS/*.py, SKILLS/*/run.py) - Implementation files
-4. **Test fixtures** (CONTRACTS/fixtures/*, CATALYTIC-DPT/TESTBENCH/*) - Test data
+4. **Test fixtures** (LAW/CONTRACTS/fixtures/*, CATALYTIC-DPT/TESTBENCH/*) - Test data
 5. **Skill manifests** (SKILLS/*/SKILL.md) - These stay with their skills
 6. **Context records** (CONTEXT/decisions/*, CONTEXT/preferences/*) - Append-first storage
 7. **Build outputs** (BUILD/*) - User workspace outputs

@@ -1,0 +1,21 @@
+{
+  "run_id": "test_plan_004",
+  "request_id": "req_004",
+  "intent": "Test slice=ALL forbidden",
+  "inputs": {
+    "symbols": [
+      {
+        "symbol_id": "@TEST/example",
+        "slice": "ALL"
+      }
+    ],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 5,
+    "max_bytes": 10000000,
+    "max_symbols": 10
+  }
+}
+}

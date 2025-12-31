@@ -30,4 +30,32 @@ if [ $EXIT_CODE -ne 0 ]; then
 fi
 
 echo "✅ Governance check passed"
+
+echo "🔍 Running MCP pre-commit checks..."
+CHECK_DIR="LAW/CONTRACTS/_runs/_tmp"
+CHECK_IN="$CHECK_DIR/mcp_precommit_input.json"
+CHECK_OUT="$CHECK_DIR/mcp_precommit_output.json"
+mkdir -p "$CHECK_DIR"
+cat > "$CHECK_IN" <<'EOF'
+{
+  "entrypoint": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
+  "auto_entrypoint": "LAW/CONTRACTS/_runs/ags_mcp_auto.py",
+  "args": ["--test"],
+  "auto_args": ["--test"],
+  "require_running": true,
+  "require_autostart": true,
+  "dry_run": false
+}
+EOF
+
+python3 CAPABILITY/SKILLS/mcp/mcp-precommit-check/run.py "$CHECK_IN" "$CHECK_OUT"
+CHECK_EXIT=$?
+if [ $CHECK_EXIT -ne 0 ]; then
+    echo ""
+    echo "❌ MCP pre-commit checks failed!"
+    echo "   Ensure the MCP server is running and autostart is enabled."
+    exit 1
+fi
+
+echo "✅ MCP pre-commit checks passed"
 exit 0

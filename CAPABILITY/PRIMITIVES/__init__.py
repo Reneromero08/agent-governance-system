@@ -12,6 +12,7 @@ from .restore_proof import RestorationProofValidator, canonical_json_bytes
 from .restore_runner import restore_bundle, restore_chain, RESTORE_CODES
 from .skills import SkillRegistry, SkillNotFoundError, canonical_json, resolve_adapter, RegistryError, CapabilityHashMismatch
 from .verify_bundle import verify_bundle
+from .scratch import CatalyticScratch
 
 # Export modules too for flexibility
 from . import cas_store
@@ -23,6 +24,7 @@ from . import restore_runner
 from . import skills
 from . import verify_bundle as verify_bundle_mod
 from . import fs_guard
+from . import scratch
 
 __all__ = [
     "CatalyticStore",
@@ -53,5 +55,7 @@ __all__ = [
     "restore_proof",
     "restore_runner",
     "skills",
-    "fs_guard"
+    "fs_guard",
+    "scratch",
+    "CatalyticScratch"
 ]

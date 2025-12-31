@@ -1,5 +1,5 @@
 {
-  "safe_filename": "CANON_CONTRACT.md_canon-contract_01_b61689d2",
-  "summary_md": "source: CANON/CONTRACT.md::canon-contract::01:1-15#01234567\n# Canon Contract\n- This document defines the non-negotiable rules and the authority gradient for the Agent Governance System (AGS).\n- It is the highest source of truth for all agents and humans interacting with this repository.\n- ## Non-negotiable rules\n- 1. Text outranks code.\n- 2. Determinism.\n",
-  "summary_sha256": "af258237c87540f61133e8ff7d048f3c1d242b7dc4f4196a64faa3eee80f1dc1"
+  "safe_filename": "CANON_CONTRACT.md::canon-contract::01",
+  "summary_md": "Summary for CANON/CONTRACT.md::canon-contract::01: # Canon Contract\n\nThis document defines the non-negotiable rules and the authority gradient for the ...",
+  "summary_sha256": "589b8ecbff3b8515d3b18ed535707e977933fb7cccdbd86c9954ecc9168c9ba5"
 }

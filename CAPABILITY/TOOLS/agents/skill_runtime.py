@@ -62,8 +62,19 @@ def _read_required_range(skill_dir: Path) -> Optional[str]:
     return None
 
 
+def _find_repo_root(start: Path) -> Optional[Path]:
+    for candidate in [start] + list(start.parents):
+        if (candidate / "LAW" / "CANON" / "VERSIONING.md").exists():
+            return candidate
+        if (candidate / "CANON" / "VERSIONING.md").exists():
+            return candidate
+    return None
+
+
 def _read_canon_version(project_root: Path) -> Optional[str]:
-    versioning = project_root / "CANON" / "VERSIONING.md"
+    versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
+    if not versioning.exists():
+        versioning = project_root / "CANON" / "VERSIONING.md"
     if not versioning.exists():
         return None
     content = versioning.read_text(errors="ignore")
@@ -72,7 +83,10 @@ def _read_canon_version(project_root: Path) -> Optional[str]:
 
 
 def ensure_canon_compat(skill_dir: Path) -> bool:
-    project_root = skill_dir.resolve().parents[1]
+    project_root = _find_repo_root(skill_dir.resolve())
+    if not project_root:
+        print("[skill] Could not locate repository root from skill path.")
+        return False
     required_range = _read_required_range(skill_dir)
     if not required_range:
         print(f"[skill] Missing required_canon_version in {skill_dir / 'SKILL.md'}")

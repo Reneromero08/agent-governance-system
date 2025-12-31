@@ -1,6 +1,6 @@
 {
   "action": "read",
   "error": "unauthorized",
-  "log_path": "CONTRACTS/_runs/override_logs/master_override.jsonl",
+  "log_path": "LAW/CONTRACTS/_runs/override_logs/master_override.jsonl",
   "ok": false
 }

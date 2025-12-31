@@ -19,7 +19,7 @@ from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 
-from embeddings import EmbeddingEngine
+from .embeddings import EmbeddingEngine
 
 
 @dataclass
@@ -343,7 +343,7 @@ class SemanticSearch:
 
 def search_cortex(
     query: str,
-    db_path: Path = Path("CORTEX/system1.db"),
+    db_path: Path = Path("NAVIGATION/CORTEX/db/system1.db"),
     top_k: int = 10
 ) -> List[SearchResult]:
     """Convenience function for semantic search.
@@ -367,7 +367,7 @@ if __name__ == "__main__":
 
     print("Testing SemanticSearch...")
 
-    db_path = Path("CORTEX/system1.db")
+    db_path = Path("NAVIGATION/CORTEX/db/system1.db")
     if not db_path.exists():
         print(f"Database not found: {db_path}")
         print("Skipping tests (database needs to be initialized first)")
