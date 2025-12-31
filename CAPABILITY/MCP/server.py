@@ -134,33 +134,58 @@ class AGSMCPServer:
         self.resources_schema = load_schema("resources")
         self._initialized = False
         self.session_id = str(uuid.uuid4())
-        
-        # Initialize semantic adapter
+        # Semantic adapter is lazy-initialized on first semantic tool call.
+        self.semantic_adapter = None
+        self.semantic_available = False
+        self._semantic_init_attempted = False
+
+
+
+
+
+
+    def _ensure_semantic_adapter(self) -> None:
+        """Lazy initialization of the semantic adapter.
+
+        VS Code/Antigravity expect the server to respond quickly to `initialize`.
+        Any heavy/optional init must be deferred until a semantic tool is actually called.
+        """
+        if getattr(self, "_semantic_init_attempted", False):
+            return
+
+        self._semantic_init_attempted = True
         try:
-            # Try relative import first
             try:
                 from .semantic_adapter import SemanticMCPAdapter
-            except ImportError:
-                # Fall back to absolute import
-                from semantic_adapter import SemanticMCPAdapter
-            self.semantic_adapter = SemanticMCPAdapter()
-            self.semantic_adapter.initialize()
+            except Exception:
+                from semantic_adapter import SemanticMCPAdapter  # type: ignore
+
+            adapter = SemanticMCPAdapter()
+            adapter.initialize()
+            self.semantic_adapter = adapter
             self.semantic_available = True
-        except ImportError as e:
-            print(f"[INFO] Semantic adapter not available: {e}", file=sys.stderr)
+            print("[INFO] Semantic adapter initialized", file=sys.stderr)
+        except Exception as e:
             self.semantic_adapter = None
             self.semantic_available = False
+            print(f"[INFO] Semantic adapter unavailable: {e}", file=sys.stderr)
+    def handle_request(self, request: Dict) -> Optional[Dict]:
+        """Handle a JSON-RPC 2.0 request.
 
-    def handle_request(self, request: Dict) -> Dict:
-        """Handle a JSON-RPC 2.0 request."""
-        method = request.get("method", "")
-        params = request.get("params", {})
-        request_id = request.get("id")
+        Important: notifications (requests without an `id`, or with `id: null`) must not
+        receive a response. Some MCP clients validate strictly and will error if we
+        reply with `id: null`.
+        """
+        method = request.get("method", "") or ""
+        params = request.get("params", {}) or {}
 
-        # Route to handler
+        has_id = ("id" in request) and (request.get("id") is not None)
+        request_id = request.get("id") if has_id else None
+
         handlers = {
             "initialize": self._handle_initialize,
-            "initialized": self._handle_initialized,
+            "initialized": self._handle_initialized,  # legacy alias
+            "notifications/initialized": self._handle_initialized,
             "tools/list": self._handle_tools_list,
             "tools/call": self._handle_tools_call,
             "resources/list": self._handle_resources_list,
@@ -170,31 +195,30 @@ class AGSMCPServer:
         }
 
         handler = handlers.get(method)
-        if handler:
-            try:
-                result = handler(params)
-                return self._success_response(request_id, result)
-            except Exception as e:
-                return self._error_response(request_id, -32603, str(e))
-        else:
-            return self._error_response(request_id, -32601, f"Method not found: {method}")
+        if not handler:
+            return None if not has_id else self._error_response(request_id, -32601, f"Method not found: {method}")
 
+        try:
+            result = handler(params)
+        except Exception as e:
+            return None if not has_id else self._error_response(request_id, -32603, str(e))
+
+        return None if not has_id else self._success_response(request_id, result)
     def _success_response(self, request_id: Any, result: Any) -> Dict:
-        return {
-            "jsonrpc": "2.0",
-            "id": request_id,
-            "result": result
-        }
-
+        resp: Dict[str, Any] = {"jsonrpc": "2.0", "result": result}
+        if request_id is not None:
+            resp["id"] = request_id
+        return resp
     def _error_response(self, request_id: Any, code: int, message: str) -> Dict:
-        return {
+        resp: Dict[str, Any] = {
             "jsonrpc": "2.0",
-            "id": request_id,
-            "error": {
-                "code": code,
-                "message": message
-            }
+            "error": {"code": code, "message": message},
         }
+        if request_id is not None:
+            resp["id"] = request_id
+        return resp
+
+
 
     def _audit_log(self, tool: str, args: Dict, result_type: str, result_data: Any = None, duration: float = 0.0) -> None:
         """Append a JSON record to the audit log."""
@@ -1529,6 +1553,7 @@ class AGSMCPServer:
 
     def _tool_semantic_search(self, args: Dict) -> Dict:
         """Semantic search using vector embeddings."""
+        self._ensure_semantic_adapter()
         if not self.semantic_available or not self.semantic_adapter:
             return {
                 "content": [{"type": "text", "text": "Semantic search not available"}],
@@ -1545,6 +1570,7 @@ class AGSMCPServer:
     
     def _tool_cassette_network_query(self, args: Dict) -> Dict:
         """Query the cassette network."""
+        self._ensure_semantic_adapter()
         if not self.semantic_available or not self.semantic_adapter:
             return {
                 "content": [{"type": "text", "text": "Cassette network not available"}],
@@ -1561,6 +1587,7 @@ class AGSMCPServer:
     
     def _tool_semantic_stats(self, args: Dict) -> Dict:
         """Get statistics about semantic embeddings and cassette network."""
+        self._ensure_semantic_adapter()
         if not self.semantic_available or not self.semantic_adapter:
             return {
                 "content": [{"type": "text", "text": "Semantic tools not available"}],
@@ -1671,27 +1698,129 @@ class AGSMCPServer:
         }
 
 
+def _read_exact(stream, n: int) -> bytes:
+    """Read exactly n bytes from a buffered binary stream."""
+    buf = bytearray()
+    while len(buf) < n:
+        chunk = stream.read(n - len(buf))
+        if not chunk:
+            raise EOFError("EOF while reading message body")
+        buf.extend(chunk)
+    return bytes(buf)
+
+
+def _read_message(stdin, mode: Optional[str]) -> tuple[Optional[Dict], Optional[str]]:
+    """Read one MCP message in either framed (Content-Length) or JSONL mode.
+
+    Returns: (request_dict_or_none, detected_mode)
+    """
+    if mode == "jsonl":
+        line = stdin.readline()
+        if not line:
+            return None, None
+        # Skip blank lines
+        while line in (b"\r\n", b"\n"):
+            line = stdin.readline()
+            if not line:
+                return None, None
+        return json.loads(line.decode("utf-8", errors="replace")), "jsonl"
+
+    # framed or auto-detect
+    first = stdin.readline()
+    if not first:
+        return None, None
+
+    # Skip blank lines
+    while first in (b"\r\n", b"\n"):
+        first = stdin.readline()
+        if not first:
+            return None, None
+
+    if not first.lower().startswith(b"content-length:"):
+        # Auto-detect fallback: treat as JSONL.
+        if mode == "framed":
+            raise ValueError("Expected Content-Length header, got JSON line")
+        return json.loads(first.decode("utf-8", errors="replace")), "jsonl"
+
+    # Framed: read headers until blank line
+    headers = [first]
+    while True:
+        line = stdin.readline()
+        if not line:
+            raise EOFError("EOF while reading headers")
+        if line in (b"\r\n", b"\n"):
+            break
+        headers.append(line)
+
+    content_length: Optional[int] = None
+    for h in headers:
+        if h.lower().startswith(b"content-length:"):
+            content_length = int(h.split(b":", 1)[1].strip())
+            break
+    if content_length is None:
+        raise ValueError("Missing Content-Length header")
+
+    body = _read_exact(stdin, content_length)
+    return json.loads(body.decode("utf-8", errors="replace")), "framed"
+
+
+def _write_framed_json(stdout, message: Dict) -> None:
+    body = json.dumps(message, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    header = f"Content-Length: {len(body)}\r\n\r\n".encode("ascii")
+    stdout.write(header)
+    stdout.write(body)
+    stdout.flush()
+
+
 def run_stdio():
-    """Run the server in stdio mode."""
+    """Run the server in stdio mode.
+
+    Supports:
+    - MCP/LSP Content-Length framing (VS Code, Antigravity, most MCP clients)
+    - Legacy newline-delimited JSON (some simpler clients)
+    """
     server = AGSMCPServer()
 
-    for line in sys.stdin:
+    stdin = sys.stdin.buffer
+    stdout = sys.stdout.buffer
+
+    mode: Optional[str] = None  # "framed" | "jsonl" (auto-detected on first request)
+
+    while True:
         try:
-            request = json.loads(line)
+            request, detected = _read_message(stdin, mode)
+            if request is None:
+                break
+            if detected is None:
+                break
+            if mode is None:
+                mode = detected
+
+            if not isinstance(request, dict):
+                continue
+
             response = server.handle_request(request)
-            if response.get("result") is not None or response.get("error") is not None:
-                print(json.dumps(response), flush=True)
+            if response is None:
+                continue
+
+            if mode == "framed":
+                _write_framed_json(stdout, response)
+            else:
+                stdout.write(json.dumps(response, ensure_ascii=False).encode("utf-8") + b"\n")
+                stdout.flush()
+
         except json.JSONDecodeError:
-            error = {
-                "jsonrpc": "2.0",
-                "id": None,
-                "error": {"code": -32700, "message": "Parse error"}
-            }
-            print(json.dumps(error), flush=True)
-    if os.environ.get("MCP_KEEPALIVE") == "1":
-        import time
-        while True:
-            time.sleep(5)
+            if mode == "framed":
+                _write_framed_json(stdout, {"jsonrpc": "2.0", "error": {"code": -32700, "message": "Parse error"}})
+            continue
+        except EOFError:
+            break
+        except Exception as e:
+            if mode == "framed":
+                _write_framed_json(stdout, {"jsonrpc": "2.0", "error": {"code": -32603, "message": str(e)}})
+            else:
+                print(f"[ERROR] MCP stdio loop: {e}", file=sys.stderr)
+            continue
 
 
 def main():
