@@ -20,9 +20,17 @@ import sys
 import os
 import time
 import requests
+import uuid
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+
+# --- UNICODE FIX FOR WINDOWS ---
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+# ------------------------------
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SWARM_ROOT = REPO_ROOT / "THOUGHT" / "LAB" / "TURBO_SWARM"
@@ -51,13 +59,132 @@ def ollama_generate(prompt: str, model: str = DISPATCHER_MODEL) -> Optional[str]
         response = requests.post(
             f"{OLLAMA_URL}/api/generate",
             json={"model": model, "prompt": prompt, "stream": False},
-            timeout=120
+            timeout=180
         )
         if response.status_code == 200:
             return response.json().get("response", "")
+        else:
+            print(f"⚠️ Ollama error {response.status_code}: {response.text}")
     except Exception as e:
-        print(f"⚠️ Ollama error: {e}")
+        print(f"⚠️ Ollama exception: {e}")
     return None
+
+
+def mcp_call(method: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Call the MCP server using subprocess (stdio)."""
+    mcp_script = REPO_ROOT / "CAPABILITY" / "MCP" / "server.py"
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": method,
+        "params": params
+    }
+    
+    # We need an intent path for tool calls
+    intent_data = {
+        "agent": "governor-dispatcher",
+        "intent": f"Governor acting on {method} for swarm coordination",
+        "timestamp": now_iso()
+    }
+    # Per ADR: Logs/runs under LAW/CONTRACTS/_runs/
+    RUNS_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
+    intent_path = RUNS_DIR / f"intent_governor_{uuid.uuid4().hex}.json"
+    intent_path.write_text(json.dumps(intent_data))
+    
+    try:
+        env = os.environ.copy()
+        env["AGS_INTENT_PATH"] = str(intent_path)
+        
+        # We also need to set the project root for the server
+        env["AGS_PROJECT_ROOT"] = str(REPO_ROOT)
+        
+        res = subprocess.run(
+            [sys.executable, str(mcp_script)],
+            input=json.dumps(payload),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            env=env
+        )
+        if res.stderr:
+            print(f"📡 MCP DEBUG: {res.stderr.strip()}")
+            
+        if res.returncode == 0:
+            return json.loads(res.stdout)
+        else:
+            print(f"⚠️ MCP Error: {res.stderr}")
+    except Exception as e:
+        print(f"⚠️ MCP call error: {e}")
+    finally:
+        if intent_path.exists():
+            intent_path.unlink()
+    return {"error": {"message": "Failed to call MCP server"}}
+
+def broadcast_message(message: str, board: str = "swarm"):
+    """Post a message to the governor's board for all agents."""
+    return mcp_call("tools/call", {
+        "name": "message_board_write",
+        "arguments": {
+            "board": board,
+            "action": "post",
+            "message": f"🏛️ GOVERNOR: {message}"
+        }
+    })
+
+def cmd_solo(task_id: str):
+    """Run a single task using the Professional model immediately."""
+    print(f"🎯 SOLO MISSION: Sentinel taking on {task_id}...")
+    script = SWARM_ROOT / "swarm_orchestrator_professional.py"
+    # Create a temporary manifest for one task
+    ledger = load_ledger()
+    task = next((t for t in ledger["tasks"] if t["task_id"] == task_id), None)
+    if not task:
+        print(f"❌ Task {task_id} not found.")
+        return
+    
+    # We'll just run the professional script with the --inbox flag and it will pick up what it can, 
+    # but to be specific we can pass a temporary manifest.
+    temp_manifest = REPO_ROOT / "THOUGHT" / "LAB" / "TEMP_SOLO.json"
+    temp_manifest.write_text(json.dumps([task], indent=2))
+    
+    subprocess.run([sys.executable, str(script), "--input", str(temp_manifest)], cwd=str(REPO_ROOT))
+    if temp_manifest.exists():
+        temp_manifest.unlink()
+
+def cmd_troubleshoot(target_file: str):
+    """Deep analysis of a file using the 8B model."""
+    print(f"🔍 Deep Troubleshooting: {target_file}...")
+    path = REPO_ROOT / target_file
+    if not path.exists():
+        print(f"❌ File not found: {target_file}")
+        return
+    
+    content = path.read_text(encoding="utf-8")
+    # Get last error from protocol if available
+    error_msg = "Unknown error"
+    if PROTOCOL_PATH.exists():
+        proto = PROTOCOL_PATH.read_text(encoding="utf-8")
+        match = re.search(f"### {target_file}.*?Error: (.*?)\n", proto, re.DOTALL)
+        if match:
+             error_msg = match.group(1).strip()
+
+    prompt = f"""
+deep_TROUBLESHOOT: {target_file}
+Error: {error_msg}
+Content:
+```python
+{content[:10000]}
+```
+
+Provide a detailed root cause analysis and a step-by-step fix plan. 
+Be highly technical.
+"""
+    analysis = ollama_generate(prompt, model="qwen2.5-coder:7b")
+    print(f"\n🧠 ANALYSIS:\n{analysis}")
+    
+    broadcast_message(f"DEEP TROUBLESHOOT for {target_file}:\n{analysis}")
+    print("\n✅ Analysis broadcast to message board.")
 
 
 def ollama_available() -> bool:
@@ -655,7 +782,7 @@ def cmd_spawn(orchestrator_type: str = "caddy") -> None:
     # Determine command based on type
     if orchestrator_type == "professional":
         script = SWARM_ROOT / "swarm_orchestrator_professional.py"
-        cmd = [sys.executable, str(script)]
+        cmd = [sys.executable, str(script), "--inbox"]
     else:  # Default to caddy
         script = SWARM_ROOT / "swarm_orchestrator_caddy_deluxe.py"
         cmd = [sys.executable, str(script), "--max-workers", str(workers)]
@@ -663,13 +790,18 @@ def cmd_spawn(orchestrator_type: str = "caddy") -> None:
     print(f"   Command: {' '.join(cmd)}")
     print(f"   Log: swarm_debug.log")
     
+    # Environment with UTF-8 enforcement for Windows
+    env = os.environ.copy()
+    env["PYTHONIOENCODING"] = "utf-8"
+    
     # Launch in background
-    with open("swarm_debug.log", "a") as log:
+    with open("swarm_debug.log", "a", encoding="utf-8") as log:
         process = subprocess.Popen(
             cmd,
             stdout=log,
             stderr=subprocess.STDOUT,
             cwd=str(REPO_ROOT),
+            env=env,
             start_new_session=True
         )
     
@@ -864,6 +996,35 @@ def main():
         cmd_spawn(type_arg)
     elif command == "guard":
         cmd_guard()
+    elif command == "broadcast":
+        if len(sys.argv) < 3:
+            print("Usage: python failure_dispatcher.py broadcast <message>")
+            sys.exit(1)
+        res = broadcast_message(" ".join(sys.argv[2:]))
+        print(f"✅ Broadcast sent: {res}")
+    elif command == "board-list":
+        res = mcp_call("tools/call", {
+            "name": "message_board_list",
+            "arguments": {"board": "swarm"}
+        })
+        print(json.dumps(res, indent=2))
+    elif command == "inbox":
+        status_arg = sys.argv[2] if len(sys.argv) > 2 else "pending"
+        res = mcp_call("tools/call", {
+            "name": "agent_inbox_list",
+            "arguments": {"status": status_arg}
+        })
+        print(json.dumps(res, indent=2))
+    elif command == "solo":
+        if len(sys.argv) < 3:
+            print("Usage: python failure_dispatcher.py solo <task_id>")
+            sys.exit(1)
+        cmd_solo(sys.argv[2])
+    elif command == "troubleshoot":
+        if len(sys.argv) < 3:
+            print("Usage: python failure_dispatcher.py troubleshoot <file_path>")
+            sys.exit(1)
+        cmd_troubleshoot(sys.argv[2])
     else:
         print(f"Unknown command: {command}")
         print(__doc__)

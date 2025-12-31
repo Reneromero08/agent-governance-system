@@ -7,8 +7,8 @@ It defines the interface but returns "not implemented" for most features.
 Full implementation will be added when MCP integration is needed.
 
 Usage:
-  python MCP/server.py          # Start server (stdio mode)
-  python MCP/server.py --http   # Start server (HTTP mode, not implemented)
+  python CAPABILITY/MCP/server.py          # Start server (stdio mode)
+  python CAPABILITY/MCP/server.py --http   # Start server (HTTP mode, not implemented)
 """
 
 import argparse
@@ -25,11 +25,12 @@ NAVIGATION_ROOT = PROJECT_ROOT / "NAVIGATION"
 
 # Load schemas
 SCHEMAS_DIR = Path(__file__).parent / "schemas"
-# Logging path (per ADR-015: all logs under CONTRACTS/_runs/)
-# When using CONTRACTS/_runs/ags_mcp_entrypoint.py, this is redirected to the entrypoint's location
-LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
-BOARD_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs" / "message_board"
+# Per ADR: Logs/runs under LAW/CONTRACTS/_runs/
+RUNS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
+LOGS_DIR = LAW_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
+BOARD_ROOT = LAW_ROOT / "CONTRACTS" / "_runs" / "message_board"
 BOARD_ROLES_PATH = CAPABILITY_ROOT / "MCP" / "board_roles.json"
+INBOX_ROOT = PROJECT_ROOT / "INBOX" / "agents" / "Local Models"
 
 
 def load_schema(name: str) -> Dict:
@@ -318,6 +319,9 @@ class AGSMCPServer:
             "research_cache": self._tool_research_cache,
             "message_board_list": self._tool_message_board_list,
             "message_board_write": self._tool_message_board_write,
+            "agent_inbox_list": self._tool_agent_inbox_list,
+            "agent_inbox_claim": self._tool_agent_inbox_claim,
+            "agent_inbox_finalize": self._tool_agent_inbox_finalize,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -712,6 +716,118 @@ class AGSMCPServer:
             "action": action,
         }
         return {"content": [{"type": "text", "text": json.dumps(payload, sort_keys=True)}]}
+
+    def _tool_agent_inbox_list(self, args: Dict) -> Dict:
+        """List tasks from the agent inbox."""
+        status = args.get("status", "pending").upper()
+        if status == "PENDING":
+            target_dir = INBOX_ROOT / "PENDING_TASKS"
+        elif status == "ACTIVE":
+            target_dir = INBOX_ROOT / "ACTIVE_TASKS"
+        elif status == "COMPLETED":
+            target_dir = INBOX_ROOT / "COMPLETED_TASKS"
+        elif status == "FAILED":
+            target_dir = INBOX_ROOT / "FAILED_TASKS"
+        else:
+             return {"content": [{"type": "text", "text": "Invalid status"}], "isError": True}
+
+        if not target_dir.exists():
+            return {"content": [{"type": "text", "text": json.dumps({"tasks": []})}]}
+
+        limit = args.get("limit", 20)
+        tasks = []
+        for p in sorted(target_dir.glob("*.json"), key=os.path.getmtime, reverse=True)[:limit]:
+            try:
+                tasks.append(json.loads(p.read_text(encoding="utf-8")))
+            except:
+                continue
+        
+        return {"content": [{"type": "text", "text": json.dumps({"tasks": tasks}, indent=2)}]}
+
+    def _tool_agent_inbox_claim(self, args: Dict) -> Dict:
+        """Claim a pending task."""
+        from datetime import datetime
+        task_id = args.get("task_id")
+        agent_id = args.get("agent_id")
+        
+        if not task_id or not agent_id:
+            return {"content": [{"type": "text", "text": "task_id and agent_id required"}], "isError": True}
+
+        pending_dir = INBOX_ROOT / "PENDING_TASKS"
+        active_dir = INBOX_ROOT / "ACTIVE_TASKS"
+        
+        pending_dir.mkdir(parents=True, exist_ok=True)
+        active_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Find the task file
+        task_file = None
+        for p in pending_dir.glob("*.json"):
+            try:
+                data = json.loads(p.read_text(encoding="utf-8"))
+                if data.get("task_id") == task_id:
+                    task_file = p
+                    break
+            except:
+                continue
+        
+        if not task_file:
+             return {"content": [{"type": "text", "text": f"Task {task_id} not found in PENDING"}], "isError": True}
+
+        # Atomically move and update
+        try:
+            data = json.loads(task_file.read_text(encoding="utf-8"))
+            data["status"] = "ACTIVE"
+            data["assigned_to"] = agent_id
+            data["claimed_at"] = datetime.now().isoformat()
+            
+            new_path = active_dir / task_file.name
+            new_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            task_file.unlink()
+            
+            return {"content": [{"type": "text", "text": json.dumps({"status": "success", "task_id": task_id, "path": str(new_path)})}]}
+        except Exception as e:
+            return {"content": [{"type": "text", "text": f"Claim failed: {str(e)}"}], "isError": True}
+
+    def _tool_agent_inbox_finalize(self, args: Dict) -> Dict:
+        """Finalize a task."""
+        from datetime import datetime
+        task_id = args.get("task_id")
+        status = args.get("status", "").upper()
+        result_text = args.get("result", "")
+        
+        if not task_id or status not in {"COMPLETED", "FAILED"}:
+            return {"content": [{"type": "text", "text": "task_id and valid status (COMPLETED/FAILED) required"}], "isError": True}
+
+        active_dir = INBOX_ROOT / "ACTIVE_TASKS"
+        target_dir = INBOX_ROOT / f"{status}_TASKS"
+        target_dir.mkdir(parents=True, exist_ok=True)
+        
+        task_file = None
+        for p in active_dir.glob("*.json"):
+            try:
+                data = json.loads(p.read_text(encoding="utf-8"))
+                if data.get("task_id") == task_id:
+                    task_file = p
+                    break
+            except:
+                continue
+                
+        if not task_file:
+             return {"content": [{"type": "text", "text": f"Task {task_id} not found in ACTIVE"}], "isError": True}
+             
+        try:
+            data = json.loads(task_file.read_text(encoding="utf-8"))
+            data["status"] = status
+            data["result"] = result_text
+            data["finished_at"] = datetime.now().isoformat()
+            
+            new_path = target_dir / task_file.name
+            new_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            task_file.unlink()
+            
+            return {"content": [{"type": "text", "text": json.dumps({"status": "success", "task_id": task_id})}]}
+        except Exception as e:
+            return {"content": [{"type": "text", "text": f"Finalize failed: {str(e)}"}], "isError": True}
 
     # Tool implementations
     def _tool_cortex_query(self, args: Dict) -> Dict:
@@ -1130,7 +1246,7 @@ class AGSMCPServer:
             
             # Run contract runner
             runner_result = subprocess.run(
-                [sys.executable, str(PROJECT_ROOT / "CONTRACTS" / "runner.py")],
+                [sys.executable, str(PROJECT_ROOT / "LAW" / "CONTRACTS" / "runner.py")],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT)
@@ -1163,7 +1279,7 @@ class AGSMCPServer:
                     },
                     "2_failsafe_runner": {
                         "passed": fixtures_passed,
-                        "tool": "CONTRACTS/runner.py",
+                        "tool": "LAW/CONTRACTS/runner.py",
                         "output": runner_result.stdout.strip()[-500:] if runner_result.stdout else runner_result.stderr.strip()[-500:]
                     },
                     "3_files_staged": len(staged_files) > 0,
