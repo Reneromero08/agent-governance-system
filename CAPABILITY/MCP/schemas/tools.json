@@ -330,6 +330,81 @@
                     "action"
                 ]
             }
+        },
+        "agent_inbox_list": {
+            "name": "agent_inbox_list",
+            "description": "List tasks from the agent inbox",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "active",
+                            "completed",
+                            "failed"
+                        ],
+                        "default": "pending",
+                        "description": "Filter by task status"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Maximum tasks to return"
+                    }
+                }
+            }
+        },
+        "agent_inbox_claim": {
+            "name": "agent_inbox_claim",
+            "description": "Claim a pending task from the inbox",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "type": "string",
+                        "description": "ID of the task to claim"
+                    },
+                    "agent_id": {
+                        "type": "string",
+                        "description": "ID of the agent claiming the task"
+                    }
+                },
+                "required": [
+                    "task_id",
+                    "agent_id"
+                ]
+            }
+        },
+        "agent_inbox_finalize": {
+            "name": "agent_inbox_finalize",
+            "description": "Finalize an active task with result and status",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "type": "string",
+                        "description": "ID of the task to finalize"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "completed",
+                            "failed"
+                        ],
+                        "description": "Final status of the task"
+                    },
+                    "result": {
+                        "type": "string",
+                        "description": "Technical summary of the result"
+                    }
+                },
+                "required": [
+                    "task_id",
+                    "status"
+                ]
+            }
         }
     },
     "tools": [
@@ -371,6 +446,15 @@
         },
         {
             "$ref": "#/definitions/message_board_write"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_list"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_claim"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_finalize"
         }
     ]
 }

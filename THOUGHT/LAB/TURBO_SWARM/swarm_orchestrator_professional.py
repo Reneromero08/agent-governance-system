@@ -34,7 +34,15 @@ from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+# --- UNICODE FIX FOR WINDOWS ---
+if sys.platform == "win32":
+    import io
+    sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+    sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
+# ------------------------------
+
 import requests
+import uuid
 from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 from tqdm import tqdm
@@ -52,6 +60,78 @@ def find_repo_root() -> Path:
     return Path(__file__).resolve().parents[3]
 
 REPO_ROOT = find_repo_root()
+
+# --- MCP BRIDGE ---
+def mcp_call(method: str, params: Dict[str, Any]) -> Dict[str, Any]:
+    """Call the MCP server using subprocess (stdio)."""
+    mcp_script = REPO_ROOT / "CAPABILITY" / "MCP" / "server.py"
+    payload = {
+        "jsonrpc": "2.0",
+        "id": 1,
+        "method": method,
+        "params": params
+    }
+    
+    # We need an intent path for tool calls
+    intent_data = {
+        "agent": "the-professional",
+        "intent": f"Professional acting on {method}",
+        "timestamp": datetime.now().isoformat()
+    }
+    # Per ADR: Logs/runs under LAW/CONTRACTS/_runs/
+    RUNS_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
+    RUNS_DIR.mkdir(parents=True, exist_ok=True)
+    intent_path = RUNS_DIR / f"intent_professional_{uuid.uuid4().hex}.json"
+    intent_path.write_text(json.dumps(intent_data))
+    
+    try:
+        env = os.environ.copy()
+        env["AGS_INTENT_PATH"] = str(intent_path)
+        env["AGS_PROJECT_ROOT"] = str(REPO_ROOT)
+        env["PYTHONIOENCODING"] = "utf-8"
+        
+        res = subprocess.run(
+            [sys.executable, str(mcp_script)],
+            input=json.dumps(payload),
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+            env=env
+        )
+        if res.returncode == 0:
+            return json.loads(res.stdout)
+    except Exception as e:
+        print(f"⚠️ Professional MCP error: {e}")
+    finally:
+        if intent_path.exists():
+            intent_path.unlink()
+    return {"error": {"message": "Failed to call MCP server"}}
+
+def get_governor_hint() -> Optional[str]:
+    """Check the message board for the latest governor hint."""
+    res = mcp_call("tools/call", {
+        "name": "message_board_list",
+        "arguments": {"board": "swarm", "limit": 1}
+    })
+    try:
+        data = json.loads(res["result"]["content"][0]["text"])
+        if data["items"]:
+            return data["items"][0]["message"]
+    except:
+        pass
+    return None
+
+def log_to_board(message: str):
+    """Log a status message to the board."""
+    mcp_call("tools/call", {
+        "name": "message_board_write",
+        "arguments": {
+            "board": "swarm",
+            "action": "post",
+            "message": f"🎯 PROFESSIONAL: {message}"
+        }
+    })
+# ------------------
 
 DEFAULT_INPUT = REPO_ROOT / "THOUGHT" / "LAB" / "SWARM_MANIFEST.json"
 DEFAULT_OUTPUT = REPO_ROOT / "THOUGHT" / "LAB" / "TURBO_SWARM" / "PROFESSIONAL_REPORT.json"
@@ -408,6 +488,7 @@ def main() -> int:
     parser.add_argument("--model", type=str, default="ministral-3:8b")
     parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--inbox", action="store_true", help="Consume tasks from INBOX/ agents/ Local Models/ PENDING_TASKS/")
     
     args = parser.parse_args()
     
@@ -424,20 +505,84 @@ def main() -> int:
     logger.info("🎯 THE PROFESSIONAL (Ministral-8B Dual-Mode)")
     logger.info("=" * 70)
     logger.info(f"Model: {config.model}")
-    logger.info(f"Level 1: Restrictive (temp={config.level1_temperature})")
-    logger.info(f"Level 2: Thinking (temp={config.level2_temperature})")
+    logger.info(f"Inbox Mode: {'Enabled' if args.inbox else 'Disabled (Manifest Mode)'}")
     logger.info("")
     
-    # Load manifest
-    with open(config.input_manifest, 'r', encoding='utf-8') as f:
-        tasks = json.load(f)
+    tasks = []
     
+    if args.inbox:
+        inbox_root = REPO_ROOT / "INBOX" / "agents" / "Local Models"
+        pending_dir = inbox_root / "PENDING_TASKS"
+        active_dir = inbox_root / "ACTIVE_TASKS"
+        completed_dir = inbox_root / "COMPLETED_TASKS"
+        failed_dir = inbox_root / "FAILED_TASKS"
+        
+        # Pull escalated / professional tasks first
+        pending_files = list(pending_dir.glob("*.json"))
+        for pfile in pending_files:
+            try:
+                tdata = json.loads(pfile.read_text(encoding="utf-8"))
+                # Professional only takes upgraded tasks or if specifically forced
+                if tdata.get("orchestrator_upgrade") == "professional" or True:
+                    # Move to active
+                    active_path = active_dir / pfile.name
+                    pfile.rename(active_path)
+                    
+                    # Convert task format for professional
+                    prof_task = {
+                        "file": tdata.get("target_file"),
+                        "task_id": tdata.get("task_id"),
+                        "strategic_plan": tdata.get("strategic_plan"),
+                        "failure_details": tdata.get("failure_details"),
+                        "inbox_path": active_path,
+                        "raw_data": tdata
+                    }
+                    tasks.append(prof_task)
+            except Exception as e:
+                logger.error(f"Failed to claim task {pfile.name}: {e}")
+    else:
+        # Load manifest
+        with open(config.input_manifest, 'r', encoding='utf-8') as f:
+            tasks = json.load(f)
+    
+    if not tasks:
+        logger.info("✅ No tasks to process.")
+        return 0
+
     logger.info(f"Processing {len(tasks)} files...")
     
     results = []
     for task in tqdm(tasks, desc="🎯 PROFESSIONAL"):
+        # Check Message Board for Governor coordination
+        hint = get_governor_hint()
+        if hint:
+            logger.info(f"🏛️ GOVERNOR HINT: {hint}")
+            
+        target = task.get("file", "unknown")
+        log_to_board(f"Agent {config.model} claiming {target}...")
+        
         result = process_file(task, config, logger)
         results.append(result)
+        
+        # Handle Inbox Finalization
+        if args.inbox and "inbox_path" in task:
+            active_path = task["inbox_path"]
+            tdata = task["raw_data"]
+            tdata["status"] = "COMPLETED" if result["status"] == "fixed" else "FAILED"
+            tdata["result"] = result["message"]
+            tdata["attempts"] = tdata.get("attempts", 0) + 1
+            tdata["finished_at"] = datetime.now().isoformat()
+            tdata["assigned_to"] = f"The-Professional-{config.model}"
+            
+            if result["status"] == "fixed":
+                final_path = completed_dir / active_path.name
+                log_to_board(f"Task {task['task_id']} FIXED by Professional.")
+            else:
+                final_path = failed_dir / active_path.name
+                log_to_board(f"Task {task['task_id']} FAILED by Professional. Escalation required.")
+                
+            final_path.write_text(json.dumps(tdata, indent=2))
+            active_path.unlink()
     
     # Write report
     report = {
