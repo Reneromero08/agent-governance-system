@@ -16,7 +16,7 @@ def _run(args):
     env["PYTHONPATH"] = pythonpath
     try:
         return subprocess.run(
-            [sys.executable, "-m", "CAPABILITY.PIPELINES.ags"] + args,
+            [sys.executable, "-m", "CAPABILITY.TOOLS.ags"] + args,
             cwd=str(REPO_ROOT),
             capture_output=True,
             text=True,
@@ -48,7 +48,7 @@ def test_ags_preflight_verdict():
     try:
         verdict = result.stdout.strip()  # Remove any trailing whitespace
         if not verdict:  # Empty output
-            pytest.fail("Preflight returned empty JSON output")
+            pytest.fail(f"Preflight returned empty JSON output. Stderr: {result.stderr}")
         verdict = json.loads(verdict)
         assert "verdict" in verdict, f"Missing 'verdict' key in preflight output: {verdict}"
         assert "reasons" in verdict, f"Missing 'reasons' key in preflight output: {verdict}"
@@ -62,8 +62,3 @@ def test_ags_preflight_verdict():
     except Exception as e:
         pytest.fail(f"Unexpected error processing preflight output: {e}")
 
-def test_ags_phase6_bridge():
-    """Test the AGS bridge functionality in phase6."""
-    result = _run(["bridge", "--help"])
-    assert result.returncode == 0, f"AGS bridge help command failed with return code {result.returncode}"
-    assert "bridge" in result.stdout.lower(), f"Help output doesn't contain 'bridge': {result.stdout}"

@@ -10,7 +10,7 @@ This directory contains the AGS MCP (Model Context Protocol) server, enabling ex
 
 **No manual start needed!** Just connect from any client and the server auto-starts.
 
-Use `CONTRACTS/_runs/ags_mcp_auto.py` as your entrypoint - server starts automatically on first interaction.
+Use `LAW/CONTRACTS/_runs/ags_mcp_auto.py` as your entrypoint - server starts automatically on first interaction.
 
 **For Claude Desktop:** The config in `MCP/claude_desktop_config.json` is already configured for auto-start.
 
@@ -19,10 +19,10 @@ Use `CONTRACTS/_runs/ags_mcp_auto.py` as your entrypoint - server starts automat
 ```powershell
 # 1. Start the server (runs in background)
 cd "d:\CCC 2.0\AI\agent-governance-system"
-.\MCP\autostart.ps1 -Start
+.\CAPABILITY\MCP\autostart.ps1 -Start
 
 # 2. Verify it's running
-.\MCP\autostart.ps1 -Status
+.\CAPABILITY\MCP\autostart.ps1 -Status
 ```
 
 **Both work!** Multiple agents, extensions, and clients can connect simultaneously.
@@ -31,16 +31,16 @@ cd "d:\CCC 2.0\AI\agent-governance-system"
 
 | Command | What it does |
 |---------|-------------|
-| `.\MCP\autostart.ps1 -Start` | Start server in background |
-| `.\MCP\autostart.ps1 -Stop` | Stop the server |
-| `.\MCP\autostart.ps1 -Status` | Check if running |
-| `.\MCP\autostart.ps1 -Restart` | Restart the server |
-| `.\MCP\autostart.ps1 -Install` | Install autostart at boot (requires admin) |
+| `.\CAPABILITY\MCP\autostart.ps1 -Start` | Start server in background |
+| `.\CAPABILITY\MCP\autostart.ps1 -Stop` | Stop the server |
+| `.\CAPABILITY\MCP\autostart.ps1 -Status` | Check if running |
+| `.\CAPABILITY\MCP\autostart.ps1 -Restart` | Restart the server |
+| `.\CAPABILITY\MCP\autostart.ps1 -Install` | Install autostart at boot (requires admin) |
 
 ### **Alternative: Foreground Mode**
 
 ```cmd
-MCP\start_simple.cmd
+CAPABILITY\MCP\start_simple.cmd
 ```
 Runs in current window. Press Ctrl+C to stop.
 
@@ -48,7 +48,7 @@ Runs in current window. Press Ctrl+C to stop.
 
 ## Quick Start (Claude Desktop)
 
-**Recommended entrypoint:** `CONTRACTS/_runs/ags_mcp_auto.py` (auto-starts server, redirects audit logs to `CONTRACTS/_runs/mcp_logs/`).
+**Recommended entrypoint:** `LAW/CONTRACTS/_runs/ags_mcp_auto.py` (auto-starts server, redirects audit logs to `LAW/CONTRACTS/_runs/mcp_logs/`).
 
 ### Connect Claude Desktop
 
@@ -65,7 +65,7 @@ Runs in current window. Press Ctrl+C to stop.
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -79,7 +79,7 @@ Runs in current window. Press Ctrl+C to stop.
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_entrypoint.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/ags_mcp_entrypoint.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -93,7 +93,7 @@ Runs in current window. Press Ctrl+C to stop.
   "mcpServers": {
     "ags": {
       "command": "python3",
-      "args": ["/mnt/d/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_entrypoint.py"],
+      "args": ["/mnt/d/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/ags_mcp_entrypoint.py"],
       "cwd": "/mnt/d/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -108,7 +108,7 @@ Runs in current window. Press Ctrl+C to stop.
 
 Run the built-in test:
 ```bash
-python CONTRACTS/_runs/ags_mcp_entrypoint.py --test
+python LAW/CONTRACTS/ags_mcp_entrypoint.py --test
 ```
 
 Or use the verification skills:
@@ -130,6 +130,25 @@ Or use the verification skills:
 | `commit_ceremony` | Execute commit ceremony checks |
 | `codebook_lookup` | Look up codebook entries by ID |
 | `research_cache` | Manage the persistent research cache |
+| `terminal_bridge` | Execute a command via the local PowerShell bridge |
+
+## Terminal Bridge Setup
+
+The `terminal_bridge` tool sends commands to a local PowerShell HTTP bridge.
+
+1. Update the token in `CAPABILITY/MCP/powershell_bridge_config.json`.
+2. Start the bridge:
+
+```powershell
+.\CAPABILITY\MCP\powershell_bridge.ps1
+```
+
+3. If you keep the config elsewhere, set `MCP_TERMINAL_BRIDGE_CONFIG` to its path.
+
+WSL note: WSL2 cannot reach Windows services bound to 127.0.0.1. Set
+`listen_host` to `0.0.0.0` and `connect_host` to the Windows host IP
+(from WSL: `grep nameserver /etc/resolv.conf`) in
+`CAPABILITY/MCP/powershell_bridge_config.json`.
 
 ## Available Resources
 

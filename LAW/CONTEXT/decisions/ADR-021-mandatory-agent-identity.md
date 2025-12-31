@@ -13,7 +13,7 @@ As the swarm of agents grows, anonymous or untraceable execution becomes a gover
 We mandate **Traceable Identity** as a core canon rule.
 
 1.  **Session Identity:** Every distinct agent session must be assigned a unique `session_id` (UUID) upon connection or initialization.
-2.  **Audit Logging:** Every tool execution, state change, or resource access must be logged to the immutable audit log (`CONTRACTS/_runs/mcp_logs/audit.jsonl`), tagged with this `session_id`.
+2.  **Audit Logging:** Every tool execution, state change, or resource access must be logged to the immutable audit log (`LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl`), tagged with this `session_id`.
 3.  **Observability:** The system must provide mechanisms (like the `agent-activity` skill) to query this state.
 
 ## Consequences
@@ -27,5 +27,5 @@ We mandate **Traceable Identity** as a core canon rule.
 - Slightly increases log volume.
 
 ## Compliance
-- `MCP/server.py` has been updated to generate `session_id` and include it in logs.
+- `CAPABILITY/MCP/server.py` has been updated to generate `session_id` and include it in logs.
 - `CANON/CONTRACT.md` will be updated to reflect this requirement.

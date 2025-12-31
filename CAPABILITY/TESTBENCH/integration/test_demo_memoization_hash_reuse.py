@@ -7,7 +7,7 @@ from pathlib import Path
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-DEMO_ROOT = REPO_ROOT / "CAPABILITY" / "TESTBENCH" / "integration" / "_demos" / "memoization_hash_reuse"
+DEMO_ROOT = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_demos" / "memoization_hash_reuse"
 
 def test_phase2_demo_artifacts_are_falsifiable() -> None:
     baseline = DEMO_ROOT / "baseline"

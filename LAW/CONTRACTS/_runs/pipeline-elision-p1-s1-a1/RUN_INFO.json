@@ -1,7 +1,7 @@
 {
   "run_id": "pipeline-elision-p1-s1-a1",
   "timestamp": "CATALYTIC-DPT-02_CONFIG",
-  "intent": "elision-intent-v1-unique",
+  "intent": "elision-intent-v1-unique [memoization:hit key=018f8abd84ddc90b068a593445e0096493db763c4d395bfd077ec76f762d8572]",
   "catalytic_domains": [
     "LAW\\CONTRACTS\\_runs\\_tmp\\elision_test\\cat_domain"
   ],

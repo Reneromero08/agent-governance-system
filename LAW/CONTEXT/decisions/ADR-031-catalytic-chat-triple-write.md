@@ -139,7 +139,7 @@ Hash-based indexing ensures identical messages are stored once, regardless of ho
 None required. This is an experimental prototype in CATALYTIC-DPT/LAB.
 
 ### Fixtures
-Create fixtures in `CONTRACTS/fixtures/` for:
+Create fixtures in `LAW/CONTRACTS/fixtures/` for:
 - Triple-write atomicity (all three writes succeed or none)
 - Hash-based deduplication (identical content = single record)
 - JSONL export format (matches Claude Code spec)

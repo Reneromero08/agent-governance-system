@@ -20,7 +20,7 @@ from pathlib import Path
 from typing import Any, Dict, List
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
 
 def _canonical_json_bytes(obj: Any) -> bytes:

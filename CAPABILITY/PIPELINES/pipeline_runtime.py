@@ -8,6 +8,7 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
+import time
 
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes
 from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
@@ -18,7 +19,15 @@ def _atomic_write_bytes(path: Path, data: bytes) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
     tmp.write_bytes(data)
-    os.replace(tmp, path)
+    tmp.write_bytes(data)
+    for i in range(5):
+        try:
+            os.replace(tmp, path)
+            return
+        except PermissionError:
+            if i == 4:
+                raise
+            time.sleep(0.1)
 
 
 def _atomic_write_canonical_json(path: Path, obj: Any) -> None:

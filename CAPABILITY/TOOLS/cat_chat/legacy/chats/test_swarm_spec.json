@@ -1,0 +1,18 @@
+{
+  "swarm_version": "1.0.0",
+  "swarm_id": "test-chat-swarm",
+  "nodes": [
+    {
+      "node_id": "node-1",
+      "pipeline_id": "test-pipeline-1",
+      "dependencies": []
+    },
+    {
+      "node_id": "node-2",
+      "pipeline_id": "test-pipeline-2",
+      "dependencies": [
+        "node-1"
+      ]
+    }
+  ]
+}

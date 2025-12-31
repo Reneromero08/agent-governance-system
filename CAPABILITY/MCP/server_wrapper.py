@@ -6,7 +6,7 @@ This wrapper ensures the MCP server is running before forwarding requests.
 If the server isn't running, it starts automatically on first connection.
 
 Usage:
-    python MCP/server_wrapper.py
+    python CAPABILITY/MCP/server_wrapper.py
 
 This is the script you should configure in Claude Desktop and other clients.
 """
@@ -18,10 +18,10 @@ import time
 import json
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
-SERVER_SCRIPT = REPO_ROOT / "MCP" / "server.py"
-PID_FILE = REPO_ROOT / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
-LOG_DIR = REPO_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"
+REPO_ROOT = Path(__file__).resolve().parents[2]
+SERVER_SCRIPT = REPO_ROOT / "CAPABILITY" / "MCP" / "server.py"
+PID_FILE = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
+LOG_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs"
 
 def is_server_running():
     """Check if server is already running."""

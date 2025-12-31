@@ -1,0 +1,52 @@
+============================= test session starts ==============================
+platform linux -- Python 3.8.10, pytest-8.3.5, pluggy-1.5.0 -- /usr/bin/python
+cachedir: .pytest_cache
+rootdir: /mnt/d/CCC 2.0/AI/agent-governance-system
+plugins: anyio-4.5.2
+collecting ... The 'ag' package is missing from your system's Python PATH.
+collected 121 items / 8 errors
+
+==================================== ERRORS ====================================
+_ ERROR collecting CAPABILITY/TESTBENCH/adversarial/test_adversarial_proof_tamper.py _
+CAPABILITY/TESTBENCH/adversarial/test_adversarial_proof_tamper.py:34: in <module>
+    def _make_valid_spectrum05_run(run_dir: Path) -> tuple[BundleVerifier, Path]:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_adapter_contract.py _
+CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_adapter_contract.py:23: in <module>
+    def _run_ags(args: list[str]) -> subprocess.CompletedProcess[str]:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py _
+CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py:33: in <module>
+    def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py _
+CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py:28: in <module>
+    def _mock_registry(tmp_path: Path) -> tuple[str, dict[str, str]]:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py _
+CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py:14: in <module>
+    def _run_ags(args: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py _
+CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py:17: in <module>
+    def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: list[str], durable_paths: list[str]) -> None:
+E   TypeError: 'type' object is not subscriptable
+_ ERROR collecting CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py _
+CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py:11: in <module>
+    def _run_ags(args: list[str]) -> subprocess.CompletedProcess[str]:
+E   TypeError: 'type' object is not subscriptable
+___ ERROR collecting CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py ____
+CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py:21: in <module>
+    run_dirs: list[Path],
+E   TypeError: 'type' object is not subscriptable
+=========================== short test summary info ============================
+ERROR CAPABILITY/TESTBENCH/adversarial/test_adversarial_proof_tamper.py - Typ...
+ERROR CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_adapter_contract.py
+ERROR CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_pins.py
+ERROR CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py
+ERROR CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py
+ERROR CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py - Ty...
+ERROR CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py
+ERROR CAPABILITY/TESTBENCH/spectrum/test_spectrum03_chain.py - TypeError: 'ty...
+!!!!!!!!!!!!!!!!!!! Interrupted: 8 errors during collection !!!!!!!!!!!!!!!!!!!!
+============================== 8 errors in 4.89s ===============================

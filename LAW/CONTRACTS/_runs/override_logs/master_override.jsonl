@@ -86,3 +86,18 @@
 {"ts": "2025-12-29T18:19:30.786654+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Override to run tests and edit SYSTEM_FAILURE_PROTOCOL_1.md"}
 {"ts": "2025-12-29T18:56:51.309798+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Override to move root test result files into CAPABILITY/TESTBENCH/v3_test_results"}
 {"ts": "2025-12-30T22:44:58.077544+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "User authorized session-wide override for under-construction refactor; proceed without governance friction."}
+{"ts": "2025-12-30T23:08:45.570863+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "User requested persistent override for session; proceed with changelog + commit despite governance friction."}
+{"ts": "2025-12-31T02:20:55.224577+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "User requested governance bypass; fixing master-override skill before continuing."}
+{"ts": "2025-12-31T02:26:31.749373+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Implement terminal bridge MCP tool per user override."}
+{"ts": "2025-12-31T02:34:31.902579+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Add MCP terminal bridge smoke check and update mcp-smoke wrapper path."}
+{"ts": "2025-12-31T03:13:28.616118+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "Update mcp-precommit-check to use PowerShell bridge on non-Windows for running/autostart checks."}
+{"ts": "2025-12-31T04:10:09.810763+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:24:11.503232+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:26:49.496922+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:28:25.633766+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:29:06.525938+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:30:04.907153+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:33:00.040576+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T04:55:27.178889+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T05:01:30.756745+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T05:51:48.389139+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}

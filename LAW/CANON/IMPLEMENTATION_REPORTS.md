@@ -147,7 +147,7 @@ All reports MUST include:
 All implementation reports must be stored under:
 
 ```
-CONTRACTS/_runs/<feature-name>-implementation-report.md
+LAW/CONTRACTS/_runs/<feature-name>-implementation-report.md
 ```
 
 ## Examples
@@ -163,7 +163,7 @@ The `critic.py` tool and governance checks will verify:
 1. Reports exist for all implementations
 2. Reports are signed (agent + date)
 3. Reports contain all required sections
-4. Reports are stored in `CONTRACTS/_runs/`
+4. Reports are stored in `LAW/CONTRACTS/_runs/`
 
 ## Rationale
 

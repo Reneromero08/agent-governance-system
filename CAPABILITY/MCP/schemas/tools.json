@@ -127,6 +127,31 @@
                 ]
             }
         },
+        "terminal_bridge": {
+            "name": "terminal_bridge",
+            "description": "Execute a command via the local terminal bridge (PowerShell HTTP bridge)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "command": {
+                        "type": "string",
+                        "description": "Command to execute via the bridge"
+                    },
+                    "cwd": {
+                        "type": "string",
+                        "description": "Optional working directory"
+                    },
+                    "timeout_seconds": {
+                        "type": "integer",
+                        "default": 30,
+                        "description": "Timeout for the bridge request in seconds"
+                    }
+                },
+                "required": [
+                    "command"
+                ]
+            }
+        },
         "canon_read": {
             "name": "canon_read",
             "description": "Read a canon file (CONTRACT, INVARIANTS, VERSIONING, etc.)",
@@ -405,6 +430,25 @@
                     "status"
                 ]
             }
+        },
+        "session_info": {
+            "name": "session_info",
+            "description": "Get information about the current MCP session including session_id for ADR-021 compliance",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "include_audit_log": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Include recent audit log entries for this session"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum audit log entries to include"
+                    }
+                }
+            }
         }
     },
     "tools": [
@@ -422,6 +466,9 @@
         },
         {
             "$ref": "#/definitions/pack_validate"
+        },
+        {
+            "$ref": "#/definitions/terminal_bridge"
         },
         {
             "$ref": "#/definitions/canon_read"
@@ -455,6 +502,9 @@
         },
         {
             "$ref": "#/definitions/agent_inbox_finalize"
+        },
+        {
+            "$ref": "#/definitions/session_info"
         }
     ]
 }

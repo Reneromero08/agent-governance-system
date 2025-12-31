@@ -1,0 +1,15 @@
+{
+  "run_id": "test_plan_003",
+  "request_id": "req_003",
+  "intent": "Test max_steps enforcement",
+  "inputs": {
+    "symbols": [],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 1,
+    "max_bytes": 10000000,
+    "max_symbols": 100
+  }
+}

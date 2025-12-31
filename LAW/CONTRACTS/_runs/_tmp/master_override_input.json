@@ -1,0 +1,5 @@
+{
+  "action": "log",
+  "token": "MASTER_OVERRIDE",
+  "note": "Update mcp-precommit-check to use PowerShell bridge on non-Windows for running/autostart checks."
+}

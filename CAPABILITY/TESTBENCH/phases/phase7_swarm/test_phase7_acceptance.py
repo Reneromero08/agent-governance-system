@@ -3,7 +3,8 @@ import shutil
 import sys
 from pathlib import Path
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
+
+REPO_ROOT = Path(__file__).resolve().parents[4]
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -40,7 +41,7 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
     p1 = "p1"
     p2 = "p2"
 
-    runs_root = REPO_ROOT / "_runs"
+    runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
     swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
     dag_dir = runs_root / "_dags" / swarm_id
 

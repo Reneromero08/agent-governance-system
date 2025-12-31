@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "repo_root": "D:\\CCC 2.0\\AI\\agent-governance-system",
+    "total_files": 9,
+    "caddy_fixed": 0,
+    "prof_fixed": 9,
+    "still_failing": 0
+  },
+  "results": {
+    "caddy_fixed": [],
+    "prof_fixed": [
+      {
+        "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      },
+      {
+        "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
+        "status": "fixed",
+        "level": 1,
+        "message": "Level 1 success"
+      }
+    ],
+    "failed": []
+  }
+}

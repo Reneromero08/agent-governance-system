@@ -17,7 +17,7 @@ Use the config in `MCP/claude_desktop_config.json`:
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -36,10 +36,10 @@ If you prefer to start manually:
 cd "d:\CCC 2.0\AI\agent-governance-system"
 
 # Start server
-.\MCP\autostart.ps1 -Start
+.\CAPABILITY\MCP\autostart.ps1 -Start
 
 # Verify it's running
-.\MCP\autostart.ps1 -Status
+.\CAPABILITY\MCP\autostart.ps1 -Status
 ```
 
 ---
@@ -47,10 +47,10 @@ cd "d:\CCC 2.0\AI\agent-governance-system"
 ## Common Commands
 
 ```powershell
-.\MCP\autostart.ps1 -Start     # Start server
-.\MCP\autostart.ps1 -Stop      # Stop server
-.\MCP\autostart.ps1 -Status    # Check status
-.\MCP\autostart.ps1 -Restart   # Restart server
+.\CAPABILITY\MCP\autostart.ps1 -Start     # Start server
+.\CAPABILITY\MCP\autostart.ps1 -Stop      # Stop server
+.\CAPABILITY\MCP\autostart.ps1 -Status    # Check status
+.\CAPABILITY\MCP\autostart.ps1 -Restart   # Restart server
 ```
 
 ---
@@ -59,12 +59,12 @@ cd "d:\CCC 2.0\AI\agent-governance-system"
 
 **Option 1: Windows Startup Folder (No Admin)**
 1. Press `Win+R`, type `shell:startup`
-2. Create shortcut to: `MCP\start_simple.cmd`
+2. Create shortcut to: `CAPABILITY\MCP\start_simple.cmd`
 
 **Option 2: Task Scheduler (Admin Required)**
 ```powershell
 # Run PowerShell as Administrator
-.\MCP\autostart.ps1 -Install
+.\CAPABILITY\MCP\autostart.ps1 -Install
 ```
 Server now starts automatically on boot.
 
@@ -97,7 +97,7 @@ python MCP\server.py --test
 
 **Check logs:**
 ```powershell
-Get-Content CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
+Get-Content LAW\CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
 ```
 
 ---
@@ -105,7 +105,7 @@ Get-Content CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
 ## Next Steps
 
 - **Full Setup Guide:** [README.md](README.md)
-- **Connection Status:** Check with `.\MCP\autostart.ps1 -Status`
+- **Connection Status:** Check with `.\CAPABILITY\MCP\autostart.ps1 -Status`
 - **Research Report:** [CATALYTIC-DPT/LAB/RESEARCH/MULTI_AGENT_MCP_COORDINATION.md](../CATALYTIC-DPT/LAB/RESEARCH/MULTI_AGENT_MCP_COORDINATION.md)
 
 ---

@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Execution Policy Schema",
+  "description": "Deterministic policy for bundle execution and verification requirements",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["policy_version"],
+  "properties": {
+    "policy_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Policy version for compatibility checks"
+    },
+    "require_verify_bundle": {
+      "type": "boolean",
+      "default": false,
+      "description": "Require bundle verification before execution"
+    },
+    "require_verify_chain": {
+      "type": "boolean",
+      "default": false,
+      "description": "Require receipt chain verification"
+    },
+    "require_receipt_attestation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Require every receipt to have valid attestation"
+    },
+    "require_merkle_attestation": {
+      "type": "boolean",
+      "default": false,
+      "description": "Require valid Merkle attestation for the receipt chain"
+    },
+    "strict_trust": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enforce strict trust policy checking (requires trust_policy_path)"
+    },
+    "strict_identity": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enforce strict identity pinning (build_id matching)"
+    },
+    "trust_policy_path": {
+      "type": ["string", "null"],
+      "description": "Path to trust policy JSON file, or null to skip trust checks"
+    }
+  }
+}

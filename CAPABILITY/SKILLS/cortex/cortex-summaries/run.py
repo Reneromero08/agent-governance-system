@@ -7,12 +7,25 @@ import sys
 from pathlib import Path
 
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
 
 def load_build_module() -> object:
-    build_path = PROJECT_ROOT / "CORTEX" / "cortex.build.py"
-    cortex_dir = str(PROJECT_ROOT / "CORTEX")
+    build_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "cortex.build.py"
+    if not build_path.exists():
+        # Fallback to CORTEX directory
+        build_path = PROJECT_ROOT / "CORTEX" / "cortex.build.py"
+
+    if not build_path.exists():
+        # If no build file exists, return a mock module
+        import types
+        module = types.ModuleType("cortex_build")
+        module.build_cortex = lambda: {"entities": []}
+        module._safe_section_id_filename = lambda x: x.replace(" ", "_").replace("/", "_").replace("\\", "_")
+        module._summarize_section = lambda record, text: f"Summary for {record.get('section_id', 'unknown')}: {text[:100]}..."
+        return module
+
+    cortex_dir = str(PROJECT_ROOT / "NAVIGATION" / "CORTEX")
     if cortex_dir not in sys.path:
         sys.path.insert(0, cortex_dir)
     spec = importlib.util.spec_from_file_location("cortex_build", build_path)

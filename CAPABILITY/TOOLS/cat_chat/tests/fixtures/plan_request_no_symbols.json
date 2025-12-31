@@ -1,0 +1,15 @@
+{
+  "run_id": "test_plan_verify",
+  "request_id": "req_verify",
+  "intent": "Test plan verify without symbols",
+  "inputs": {
+    "symbols": [],
+    "files": [],
+    "notes": []
+  },
+  "budgets": {
+    "max_steps": 1,
+    "max_bytes": 10000000,
+    "max_symbols": 10
+  }
+}

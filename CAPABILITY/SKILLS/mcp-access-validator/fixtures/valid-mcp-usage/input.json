@@ -1,0 +1,6 @@
+{
+  "agent_action": "I want to search for catalytic content using the MCP server",
+  "agent_code_snippet": "cortex_query({'query': 'catalytic', 'limit': 5})",
+  "files_accessed": [],
+  "databases_queried": []
+}

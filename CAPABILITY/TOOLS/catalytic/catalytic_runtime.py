@@ -468,7 +468,16 @@ class CatalyticRuntime:
                     },
                 },
             )
-            self.fs_guard.guarded_write_text(self.ledger_dir / "PROOF.json", canonical_json_bytes(proof).decode("utf-8"))
+            # Retry logic for Windows file locking/permission issues
+            import time
+            for i in range(5):
+                try:
+                     self.fs_guard.guarded_write_text(self.ledger_dir / "PROOF.json", canonical_json_bytes(proof).decode("utf-8"))
+                     break
+                except (PermissionError, OSError):
+                     if i == 4:
+                         raise
+                     time.sleep(0.1)
 
             # Legacy artifacts (keep for backwards compatibility)
             ledger_entry = {

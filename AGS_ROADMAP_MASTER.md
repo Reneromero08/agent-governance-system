@@ -134,6 +134,18 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [x] Engineering Standard Hardening (Bare Excepts, UTF-8, Headless).
 - [x] Unification of Indexing Schemas (System1DB + VectorIndexer).
 
+# Lane Y: CAT_CHAT Phase 6 (Execution Policy & Attestation) (P1)
+- [x] **Phase 6.1**: Merkle Root Computation from Receipt Chain.
+- [x] **Phase 6.2**: Receipt Hashing and Canonicalization.
+- [x] **Phase 6.3**: Basic Attestation Support (Signature Verification).
+- [x] **Phase 6.4**: Attestation CLI Integration (`attest` command).
+- [x] **Phase 6.5**: Receipt Chain Verification (Merkle Root).
+- [x] **Phase 6.6**: Validator Identity Pinning + Trust Policy.
+- [x] **Phase 6.7**: Attestation + Trust Policy Integration (Sanity Fixes).
+- [x] **Phase 6.8**: Execution Policy Gate (Centralized Enforcement).
+- [x] **Phase 6.9**: Stabilization (Test Flakiness Fixes).
+- [x] **Phase 6.10**: Receipt Chain Ordering Hardening.
+
 # Definition of Done (Global)
 
 - [ ] [P0] `python TOOLS/critic.py` passes

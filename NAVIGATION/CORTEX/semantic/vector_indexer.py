@@ -18,7 +18,7 @@ from pathlib import Path
 from typing import List, Dict, Optional
 from datetime import datetime
 
-from embeddings import EmbeddingEngine
+from .embeddings import EmbeddingEngine
 
 
 class VectorIndexer:
@@ -26,7 +26,7 @@ class VectorIndexer:
 
     def __init__(
         self,
-        db_path: Path = Path("CORTEX/system1.db"),
+        db_path: Path = Path("NAVIGATION/CORTEX/db/system1.db"),
         embedding_engine: Optional[EmbeddingEngine] = None
     ):
         """Initialize vector indexer.
@@ -52,7 +52,7 @@ class VectorIndexer:
 
     def _init_schema(self):
         """Initialize vector schema if not exists."""
-        schema_file = Path("CORTEX/schema/002_vectors.sql")
+        schema_file = Path("NAVIGATION/CORTEX/db/schema/002_vectors.sql")
         if schema_file.exists():
             with open(schema_file) as f:
                 self.conn.executescript(f.read())

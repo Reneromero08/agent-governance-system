@@ -1,763 +1,384 @@
-2025-12-30 14:39:11,112 [INFO] ant     -> qwen2.5-coder:0.5b
-2025-12-30 14:39:11,112 [INFO] foreman -> qwen2.5-coder:3b
-2025-12-30 14:39:11,112 [INFO] architect -> qwen2.5-coder:7b
-2025-12-30 14:39:11,122 [INFO] Warming Ant model...
-2025-12-30 14:39:11,122 [INFO] Warming ant (qwen2.5-coder:0.5b)...
-2025-12-30 14:39:23,564 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
-2025-12-30 14:39:23,565 [INFO] Warming foreman (qwen2.5-coder:3b)...
-2025-12-30 14:39:23,565 [INFO] Warming architect (qwen2.5-coder:7b)...
-2025-12-30 14:39:23,565 [INFO] Starting swarm: workers=4 slots=6 tasks=9
-2025-12-30 14:39:37,491 [INFO] [OK] architect ready (qwen2.5-coder:7b)
-2025-12-30 14:39:48,312 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-2025-12-30 14:42:29,394 [INFO] [CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py] Architect requests Consultant help...
-2025-12-30 14:42:53,638 [INFO] [CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py] Consultant advice: To address the test failure and ensure all necessa...
-2025-12-30 14:43:17,026 [INFO] done: success=1 failed=8 total=233.5s avg=25.9s/task
-2025-12-30 14:43:17,028 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
-
-======================================================================
-Traceback (most recent call last):
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 1006, in <module>
-    main()
-  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\swarm_orchestrator_caddy_deluxe.py", line 888, in main
-    print("\U0001f41c Super Entropy Crusher v4.5".center(70))
-  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
-    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-UnicodeEncodeError: 'charmap' codec can't encode character '\U0001f41c' in position 21: character maps to <undefined>
+
+2025-12-30 20:49:00,278 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 20:49:00,278 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 20:49:00,278 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 20:49:00,290 [INFO] Warming Ant model...
+2025-12-30 20:49:00,290 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 20:49:02,770 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 20:49:02,771 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 20:49:02,772 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 20:49:02,772 [INFO] Starting swarm: workers=2 slots=6 tasks=5
+2025-12-30 20:49:17,616 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 20:49:30,396 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 20:49:52,927 [INFO] done: success=1 failed=4 total=50.2s avg=10.0s/task
+2025-12-30 20:49:52,928 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+2025-12-30 20:54:20,367 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 20:54:20,367 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 20:54:20,367 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 20:54:20,377 [INFO] Warming Ant model...
+2025-12-30 20:54:20,377 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 20:54:23,695 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 20:54:23,695 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 20:54:23,695 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 20:54:23,695 [INFO] Starting swarm: workers=2 slots=6 tasks=4
+2025-12-30 20:54:26,238 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 20:54:32,117 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 20:54:52,692 [INFO] done: success=1 failed=3 total=29.0s avg=7.2s/task
+2025-12-30 20:54:52,692 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:07:02,533 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:07:02,533 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:07:02,533 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:07:02,535 [INFO] Warming Ant model...
+2025-12-30 21:07:02,535 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:07:05,073 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:07:05,073 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:07:05,073 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:07:05,073 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+🐜 Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:07:19,238 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:07:25,517 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+🐜 Swarm:   0%|                                        | 0/3 [00:32<?]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:32<01:05]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:32<01:05]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:32<00:13]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:33<00:13]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:33<00:00]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:33<00:00]2025-12-30 21:07:38,853 [INFO] done: success=1 failed=2 total=33.8s avg=11.3s/task
+2025-12-30 21:07:38,853 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:08:07,585 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:08:07,585 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:08:07,585 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:08:07,587 [INFO] Warming Ant model...
+2025-12-30 21:08:07,587 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:08:11,088 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:08:11,088 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:08:11,089 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:08:11,089 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+🐜 Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:08:13,690 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:08:19,642 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+🐜 Swarm:   0%|                                        | 0/3 [00:21<?]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:21<00:43]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:22<00:43]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:22<00:09]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:22<00:09]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:22<00:00]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:22<00:00]2025-12-30 21:08:33,987 [INFO] done: success=0 failed=3 total=22.9s avg=7.6s/task
+2025-12-30 21:08:33,988 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:08:59,322 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:08:59,322 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:08:59,322 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:08:59,322 [INFO] Warming Ant model...
+2025-12-30 21:08:59,322 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:09:02,541 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:09:02,541 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:09:02,542 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:09:02,542 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+🐜 Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:09:05,205 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:09:10,880 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+🐜 Swarm:   0%|                                        | 0/3 [00:21<?]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:21<00:42]🐜 Swarm:  33%|█████████████▎                          | 1/3 [00:22<00:42]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:22<00:09]🐜 Swarm:  67%|██████████████████████████▋             | 2/3 [00:22<00:09]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:22<00:00]🐜 Swarm: 100%|████████████████████████████████████████| 3/3 [00:22<00:00]2025-12-30 21:09:25,170 [INFO] done: success=0 failed=3 total=22.6s avg=7.5s/task
+2025-12-30 21:09:25,172 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:10:04,402 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:10:04,402 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:10:04,402 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:10:04,404 [INFO] Warming Ant model...
+2025-12-30 21:10:04,404 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:10:08,057 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:10:08,058 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:10:08,059 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:10:08,059 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:10:10,753 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:10:16,673 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:18<?]Swarm:  33%|#############3                          | 1/3 [00:18<00:37]Swarm:  33%|#############3                          | 1/3 [00:19<00:37]Swarm:  67%|##########################6             | 2/3 [00:19<00:08]Swarm:  67%|##########################6             | 2/3 [00:23<00:08]Swarm: 100%|########################################| 3/3 [00:23<00:00]Swarm: 100%|########################################| 3/3 [00:23<00:00]2025-12-30 21:10:31,216 [INFO] done: success=0 failed=3 total=23.2s avg=7.7s/task
+2025-12-30 21:10:31,216 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:11:04,448 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:11:04,448 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:11:04,448 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:11:04,449 [INFO] Warming Ant model...
+2025-12-30 21:11:04,449 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:11:06,810 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:11:06,811 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:11:06,811 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:11:06,811 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:11:09,475 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:11:11,921 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:14<?]Swarm:  33%|#############3                          | 1/3 [00:14<00:28]Swarm:  33%|#############3                          | 1/3 [00:16<00:28]Swarm:  67%|##########################6             | 2/3 [00:16<00:06]Swarm:  67%|##########################6             | 2/3 [00:16<00:06]Swarm: 100%|########################################| 3/3 [00:16<00:00]Swarm: 100%|########################################| 3/3 [00:16<00:00]2025-12-30 21:11:23,382 [INFO] done: success=0 failed=3 total=16.6s avg=5.5s/task
+2025-12-30 21:11:23,383 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:12:15,756 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:12:15,756 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:12:15,756 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:12:15,757 [INFO] Warming Ant model...
+2025-12-30 21:12:15,757 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:12:18,037 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:12:18,038 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:12:18,038 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:12:18,038 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:12:20,200 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:12:25,212 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:11<?]Swarm:  33%|#############3                          | 1/3 [00:11<00:23]Swarm:  33%|#############3                          | 1/3 [00:12<00:23]Swarm:  67%|##########################6             | 2/3 [00:12<00:05]Swarm:  67%|##########################6             | 2/3 [00:13<00:05]Swarm: 100%|########################################| 3/3 [00:13<00:00]Swarm: 100%|########################################| 3/3 [00:13<00:00]2025-12-30 21:12:31,561 [INFO] done: success=0 failed=3 total=13.5s avg=4.5s/task
+2025-12-30 21:12:31,562 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:13:20,881 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:13:20,881 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:13:20,881 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:13:20,882 [INFO] Warming Ant model...
+2025-12-30 21:13:20,882 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:13:23,593 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:13:23,594 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:13:23,595 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:13:23,595 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:13:25,759 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:13:28,659 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:13<?]Swarm:  33%|#############3                          | 1/3 [00:13<00:26]Swarm:  33%|#############3                          | 1/3 [00:14<00:26]Swarm:  67%|##########################6             | 2/3 [00:14<00:06]Swarm:  67%|##########################6             | 2/3 [00:16<00:06]Swarm: 100%|########################################| 3/3 [00:16<00:00]Swarm: 100%|########################################| 3/3 [00:16<00:00]2025-12-30 21:13:40,281 [INFO] done: success=0 failed=3 total=16.7s avg=5.6s/task
+2025-12-30 21:13:40,281 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:14:26,784 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:14:26,784 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:14:26,784 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:14:26,786 [INFO] Warming Ant model...
+2025-12-30 21:14:26,786 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:14:30,228 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:14:30,228 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:14:30,229 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:14:30,229 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:14:32,878 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:15:04,363 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:15:04,363 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:15:04,363 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:15:04,366 [INFO] Warming Ant model...
+2025-12-30 21:15:04,366 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:15:12,087 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:15:12,088 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:15:12,089 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:15:12,089 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:15:14,276 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:15:20,121 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:14<?]Swarm:  33%|#############3                          | 1/3 [00:14<00:28]Swarm:  33%|#############3                          | 1/3 [00:15<00:28]Swarm:  67%|##########################6             | 2/3 [00:15<00:06]Swarm:  67%|##########################6             | 2/3 [00:23<00:06]Swarm: 100%|########################################| 3/3 [00:23<00:00]Swarm: 100%|########################################| 3/3 [00:23<00:00]2025-12-30 21:15:35,168 [INFO] done: success=3 failed=0 total=23.1s avg=7.7s/task
+2025-12-30 21:15:35,168 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:16:09,377 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:16:09,377 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:16:09,377 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:16:09,378 [INFO] Warming Ant model...
+2025-12-30 21:16:09,378 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:16:11,933 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:16:11,933 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:16:11,934 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:16:11,934 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:16:14,118 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:16:14,629 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:14]Swarm:  33%|#############3                          | 1/3 [00:08<00:14]Swarm:  67%|##########################6             | 2/3 [00:08<00:03]Swarm:  67%|##########################6             | 2/3 [00:12<00:03]Swarm: 100%|########################################| 3/3 [00:12<00:00]Swarm: 100%|########################################| 3/3 [00:12<00:00]2025-12-30 21:16:24,036 [INFO] done: success=3 failed=0 total=12.1s avg=4.0s/task
+2025-12-30 21:16:24,037 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:17:15,474 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:17:15,474 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:17:15,474 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:17:15,476 [INFO] Warming Ant model...
+2025-12-30 21:17:15,476 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:17:17,706 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:17:17,706 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:17:17,706 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:17:17,706 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:17:19,872 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:17:20,278 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:06<?]Swarm:  33%|#############3                          | 1/3 [00:06<00:13]Swarm:  33%|#############3                          | 1/3 [00:08<00:13]Swarm:  67%|##########################6             | 2/3 [00:08<00:03]Swarm:  67%|##########################6             | 2/3 [00:11<00:03]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:17:29,125 [INFO] done: success=3 failed=0 total=11.4s avg=3.8s/task
+2025-12-30 21:17:29,126 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:18:19,301 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:18:19,301 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:18:19,301 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:18:19,301 [INFO] Warming Ant model...
+2025-12-30 21:18:19,302 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:18:21,593 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:18:21,593 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:18:21,595 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:18:21,595 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:18:23,763 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:18:23,771 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:06<?]Swarm:  33%|#############3                          | 1/3 [00:06<00:13]Swarm:  33%|#############3                          | 1/3 [00:08<00:13]Swarm:  67%|##########################6             | 2/3 [00:08<00:03]Swarm:  67%|##########################6             | 2/3 [00:11<00:03]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:18:32,811 [INFO] done: success=3 failed=0 total=11.2s avg=3.7s/task
+2025-12-30 21:18:32,811 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:19:21,348 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:19:21,348 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:19:21,348 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:19:21,349 [INFO] Warming Ant model...
+2025-12-30 21:19:21,349 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:19:24,082 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:19:24,082 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:19:24,083 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:19:24,083 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:19:26,257 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:19:26,739 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:14]Swarm:  33%|#############3                          | 1/3 [00:10<00:14]Swarm:  67%|##########################6             | 2/3 [00:10<00:04]Swarm:  67%|##########################6             | 2/3 [00:12<00:04]Swarm: 100%|########################################| 3/3 [00:12<00:00]Swarm: 100%|########################################| 3/3 [00:12<00:00]2025-12-30 21:19:36,126 [INFO] done: success=3 failed=0 total=12.0s avg=4.0s/task
+2025-12-30 21:19:36,127 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:20:24,342 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:20:24,343 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:20:24,343 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:20:24,344 [INFO] Warming Ant model...
+2025-12-30 21:20:24,344 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:20:26,883 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:20:26,883 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:20:26,883 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:20:26,883 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:20:29,065 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:20:29,070 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:15]Swarm:  33%|#############3                          | 1/3 [00:10<00:15]Swarm:  67%|##########################6             | 2/3 [00:10<00:04]Swarm:  67%|##########################6             | 2/3 [00:11<00:04]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:20:38,658 [INFO] done: success=3 failed=0 total=11.8s avg=3.9s/task
+2025-12-30 21:20:38,659 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:21:29,296 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:21:29,296 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:21:29,296 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:21:29,296 [INFO] Warming Ant model...
+2025-12-30 21:21:29,297 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:21:31,581 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:21:31,581 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:21:31,582 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:21:31,582 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:21:33,768 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+2025-12-30 21:21:33,770 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:14]Swarm:  33%|#############3                          | 1/3 [00:08<00:14]Swarm:  67%|##########################6             | 2/3 [00:08<00:03]Swarm:  67%|##########################6             | 2/3 [00:11<00:03]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:21:43,261 [INFO] done: success=3 failed=0 total=11.7s avg=3.9s/task
+2025-12-30 21:21:43,261 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:22:29,419 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:22:29,419 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:22:29,419 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:22:29,420 [INFO] Warming Ant model...
+2025-12-30 21:22:29,420 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:22:34,492 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:22:34,494 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:22:34,495 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:22:34,495 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:22:36,729 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:22:36,737 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:08<?]Swarm:  33%|#############3                          | 1/3 [00:08<00:16]Swarm:  33%|#############3                          | 1/3 [00:09<00:16]Swarm:  67%|##########################6             | 2/3 [00:09<00:04]Swarm:  67%|##########################6             | 2/3 [00:12<00:04]Swarm: 100%|########################################| 3/3 [00:12<00:00]Swarm: 100%|########################################| 3/3 [00:12<00:00]2025-12-30 21:22:47,511 [INFO] done: success=3 failed=0 total=13.0s avg=4.3s/task
+2025-12-30 21:22:47,512 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:23:34,398 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:23:34,398 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:23:34,398 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:23:34,403 [INFO] Warming Ant model...
+2025-12-30 21:23:34,403 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:23:36,743 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:23:36,743 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:23:36,744 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:23:36,744 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:23:38,898 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:23:38,919 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:14]Swarm:  33%|#############3                          | 1/3 [00:10<00:14]Swarm:  67%|##########################6             | 2/3 [00:10<00:04]Swarm:  67%|##########################6             | 2/3 [00:11<00:04]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:23:48,334 [INFO] done: success=3 failed=0 total=11.6s avg=3.9s/task
+2025-12-30 21:23:48,335 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:24:34,350 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:24:34,350 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:24:34,350 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:24:34,351 [INFO] Warming Ant model...
+2025-12-30 21:24:34,351 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:24:36,824 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:24:36,824 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:24:36,824 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:24:36,824 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:24:38,994 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:24:39,021 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:06<?]Swarm:  33%|#############3                          | 1/3 [00:06<00:12]Swarm:  33%|#############3                          | 1/3 [00:08<00:12]Swarm:  67%|##########################6             | 2/3 [00:08<00:04]Swarm:  67%|##########################6             | 2/3 [00:11<00:04]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:24:48,499 [INFO] done: success=3 failed=0 total=11.7s avg=3.9s/task
+2025-12-30 21:24:48,500 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+
+
+======================================================================
+                     🐜 Super Entropy Crusher v4.5                     
+======================================================================
+
+2025-12-30 21:25:34,385 [INFO] ant     -> qwen2.5-coder:0.5b
+2025-12-30 21:25:34,385 [INFO] foreman -> qwen2.5-coder:3b
+2025-12-30 21:25:34,385 [INFO] architect -> qwen2.5-coder:7b
+2025-12-30 21:25:34,386 [INFO] Warming Ant model...
+2025-12-30 21:25:34,386 [INFO] Warming ant (qwen2.5-coder:0.5b)...
+2025-12-30 21:25:36,663 [INFO] [OK] ant ready (qwen2.5-coder:0.5b)
+2025-12-30 21:25:36,663 [INFO] Warming foreman (qwen2.5-coder:3b)...
+2025-12-30 21:25:36,664 [INFO] Warming architect (qwen2.5-coder:7b)...
+2025-12-30 21:25:36,664 [INFO] Starting swarm: workers=4 slots=6 tasks=3
+Swarm:   0%|                                        | 0/3 [00:00<?]2025-12-30 21:25:38,877 [INFO] [OK] foreman ready (qwen2.5-coder:3b)
+2025-12-30 21:25:39,314 [INFO] [OK] architect ready (qwen2.5-coder:7b)
+Swarm:   0%|                                        | 0/3 [00:07<?]Swarm:  33%|#############3                          | 1/3 [00:07<00:14]Swarm:  33%|#############3                          | 1/3 [00:08<00:14]Swarm:  67%|##########################6             | 2/3 [00:08<00:03]Swarm:  67%|##########################6             | 2/3 [00:11<00:03]Swarm: 100%|########################################| 3/3 [00:11<00:00]Swarm: 100%|########################################| 3/3 [00:11<00:00]2025-12-30 21:25:48,173 [INFO] done: success=3 failed=0 total=11.5s avg=3.8s/task
+2025-12-30 21:25:48,173 [INFO] report -> D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\TURBO_SWARM\SWARM_REPORT.json
+

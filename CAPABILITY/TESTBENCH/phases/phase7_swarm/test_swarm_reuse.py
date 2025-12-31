@@ -46,7 +46,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
     swarm_id = "swarm-elision-test"
     p1 = "elision-p1"
 
-    REPO_ROOT = Path(__file__).resolve().parents[3]
+    REPO_ROOT = Path(__file__).resolve().parents[4]
     LAW_CONTRACTS = REPO_ROOT / "LAW" / "CONTRACTS"
     runs_root = LAW_CONTRACTS / "_runs"
     swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id

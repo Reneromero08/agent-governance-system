@@ -1,9 +1,9 @@
 {
   "status": "success",
-  "task_id": "swarm-1767001082",
+  "task_id": "swarm-1767160304",
   "message": "Directive sent to Governor",
   "task_spec": {
-    "task_id": "swarm-1767001082",
+    "task_id": "swarm-1767160304",
     "task_type": "research",
     "instruction": "Analyze code structure"
   },

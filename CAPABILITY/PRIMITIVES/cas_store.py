@@ -1,185 +1,240 @@
-from __future__ import annotations
+#!/usr/bin/env python3
+"""
+F3 Prototype: Catalytic Context Compression (CAS)
 
+CLI for Content-Addressed Storage with build/reconstruct/verify.
+Deterministic, fail-closed, with safety caps.
+"""
+
+import argparse
 import hashlib
+import json
 import os
-import errno
-import re
-import tempfile
+import sys
 from pathlib import Path
-from typing import BinaryIO
+
+# Exit codes
+EXIT_SUCCESS = 0
+EXIT_ERROR = 1
+EXIT_VERIFY_MISMATCH = 2
+EXIT_UNSAFE_PATH = 3
+EXIT_BOUNDS_EXCEEDED = 4
+
+# Safety caps
+MAX_FILES = 5000
+MAX_TOTAL_BYTES = 512 * 1024 * 1024  # 512MB
+MAX_FILE_BYTES = 64 * 1024 * 1024    # 64MB
+MAX_PATH_LENGTH = 260
 
 
-_HASH_RE = re.compile(r"^[0-9a-f]{64}$")
+def sha256_file(path: Path) -> str:
+    sha = hashlib.sha256()
+    with open(path, 'rb') as f:
+        for chunk in iter(lambda: f.read(65536), b''):
+            sha.update(chunk)
+    return sha.hexdigest()
 
 
-def normalize_relpath(path: str | Path) -> str:
-    """
-    Normalize a path into a repo-relative, POSIX-style relative path.
+def sha256_bytes(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
 
-    Rules:
-    - Converts Windows backslashes to '/'
-    - Collapses '.' segments
-    - Rejects absolute paths
-    - Rejects traversal ('..' anywhere)
-    - Returns normalized posix relative path
-    """
-    raw = str(path).replace("\\", "/")
 
-    # Reject POSIX absolute and UNC-like roots.
-    if raw.startswith("/") or raw.startswith("//"):
-        raise ValueError(f"absolute paths are not allowed: {path!r}")
+def canonical_json(obj) -> bytes:
+    return json.dumps(obj, separators=(',', ':'), sort_keys=True).encode('utf-8')
 
-    # Reject Windows drive absolute/anchored paths (e.g. C:\ or C:/).
-    if re.match(r"^[A-Za-z]:", raw):
-        raise ValueError(f"absolute paths are not allowed: {path!r}")
 
-    parts: list[str] = []
-    for segment in raw.split("/"):
-        if segment in ("", "."):
-            continue
-        if segment == "..":
-            raise ValueError(f"path traversal is not allowed: {path!r}")
-        parts.append(segment)
+def normalize_path(rel: str) -> str:
+    return rel.replace('\\', '/')
 
-    return "/".join(parts) if parts else "."
+normalize_relpath = normalize_path
+
+
+def validate_path(rel: str, src_root: Path) -> bool:
+    if len(rel) > MAX_PATH_LENGTH:
+        return False
+    parts = Path(rel).parts
+    if '..' in parts:
+        return False
+    if Path(rel).is_absolute():
+        return False
+    if rel.startswith('/') or (len(rel) > 1 and rel[1] == ':'):
+        return False
+    return True
+
+
+def build(src: Path, out: Path, ignores: list):
+    if not src.is_dir():
+        print(f"Error: Source is not a directory: {src}")
+        sys.exit(EXIT_ERROR)
+
+    cas_dir = out / 'cas'
+    cas_dir.mkdir(parents=True, exist_ok=True)
+
+    manifest = {}
+    file_count = 0
+    total_bytes = 0
+
+    for root, dirs, files in os.walk(src):
+        dirs[:] = [d for d in dirs if d not in ignores]
+        for fname in files:
+            if fname in ignores:
+                continue
+
+            fpath = Path(root) / fname
+            rel = normalize_path(str(fpath.relative_to(src)))
+
+            if not validate_path(rel, src):
+                print(f"Error: Unsafe path detected: {rel}")
+                sys.exit(EXIT_UNSAFE_PATH)
+
+            fsize = fpath.stat().st_size
+            if fsize > MAX_FILE_BYTES:
+                print(f"Error: File exceeds max size ({MAX_FILE_BYTES}): {rel}")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            total_bytes += fsize
+            if total_bytes > MAX_TOTAL_BYTES:
+                print(f"Error: Total bytes exceed limit ({MAX_TOTAL_BYTES})")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            file_count += 1
+            if file_count > MAX_FILES:
+                print(f"Error: File count exceeds limit ({MAX_FILES})")
+                sys.exit(EXIT_BOUNDS_EXCEEDED)
+
+            content = fpath.read_bytes()
+            h = sha256_bytes(content)
+
+            # Store in CAS (sharded by first 2 chars)
+            shard = cas_dir / h[:2]
+            shard.mkdir(exist_ok=True)
+            blob = shard / h
+            if not blob.exists():
+                blob.write_bytes(content)
+
+            manifest[rel] = {'sha256': h, 'size': fsize}
+
+    # Write manifest
+    manifest_bytes = canonical_json(manifest)
+    (out / 'manifest.json').write_bytes(manifest_bytes)
+
+    # Write root hash
+    root_hash = sha256_bytes(manifest_bytes)
+    (out / 'root.sha256').write_text(root_hash)
+
+    print(f"Build complete: {file_count} files, {total_bytes} bytes")
+    print(f"Root hash: {root_hash}")
+    sys.exit(EXIT_SUCCESS)
+
+
+def reconstruct(pack: Path, dst: Path):
+    manifest_path = pack / 'manifest.json'
+    cas_dir = pack / 'cas'
+
+    if not manifest_path.exists():
+        print(f"Error: manifest.json not found in {pack}")
+        sys.exit(EXIT_ERROR)
+
+    manifest = json.loads(manifest_path.read_bytes())
+
+    dst.mkdir(parents=True, exist_ok=True)
+
+    for rel, meta in manifest.items():
+        h = meta['sha256']
+        shard = cas_dir / h[:2]
+        blob = shard / h
+
+        if not blob.exists():
+            print(f"Error: Missing blob {h} for {rel}")
+            sys.exit(EXIT_ERROR)
+
+        content = blob.read_bytes()
+        if sha256_bytes(content) != h:
+            print(f"Error: Blob corruption for {rel}")
+            sys.exit(EXIT_VERIFY_MISMATCH)
+
+        out_path = dst / rel
+        out_path.parent.mkdir(parents=True, exist_ok=True)
+        out_path.write_bytes(content)
+
+    print(f"Reconstruct complete: {len(manifest)} files to {dst}")
+    sys.exit(EXIT_SUCCESS)
+
+
+def verify(src: Path, dst: Path):
+    src_manifest = {}
+    dst_manifest = {}
+
+    for root, _, files in os.walk(src):
+        for f in files:
+            p = Path(root) / f
+            rel = normalize_path(str(p.relative_to(src)))
+            src_manifest[rel] = sha256_file(p)
+
+    for root, _, files in os.walk(dst):
+        for f in files:
+            p = Path(root) / f
+            rel = normalize_path(str(p.relative_to(dst)))
+            dst_manifest[rel] = sha256_file(p)
+
+    if src_manifest == dst_manifest:
+        print(f"Verify SUCCESS: {len(src_manifest)} files match exactly.")
+        sys.exit(EXIT_SUCCESS)
+    else:
+        print("Verify FAILED: Mismatch detected.")
+        for k in set(src_manifest.keys()) | set(dst_manifest.keys()):
+            s = src_manifest.get(k)
+            d = dst_manifest.get(k)
+            if s != d:
+                print(f"  {k}: src={s} dst={d}")
+        sys.exit(EXIT_VERIFY_MISMATCH)
+
+
+def main():
+    parser = argparse.ArgumentParser(description='F3 CAS Prototype')
+    sub = parser.add_subparsers(dest='cmd')
+
+    build_p = sub.add_parser('build')
+    build_p.add_argument('--src', required=True, type=Path)
+    build_p.add_argument('--out', required=True, type=Path)
+    build_p.add_argument('--ignore', nargs='*', default=[])
+
+    recon_p = sub.add_parser('reconstruct')
+    recon_p.add_argument('--pack', required=True, type=Path)
+    recon_p.add_argument('--dst', required=True, type=Path)
+
+    verify_p = sub.add_parser('verify')
+    verify_p.add_argument('--src', required=True, type=Path)
+    verify_p.add_argument('--dst', required=True, type=Path)
+
+    args = parser.parse_args()
+
+    if args.cmd == 'build':
+        build(args.src, args.out, args.ignore)
+    elif args.cmd == 'reconstruct':
+        reconstruct(args.pack, args.dst)
+    elif args.cmd == 'verify':
+        verify(args.src, args.dst)
+    else:
+        parser.print_help()
+        sys.exit(EXIT_ERROR)
+
 
 
 class CatalyticStore:
-    """
-    Content Addressable Store (CAS) with deterministic on-disk layout.
+    """Wrapper class for CAS operations."""
+    
+    @staticmethod
+    def build(src: Path, out: Path, ignores: list = None):
+        return build(src, out, ignores or [])
 
-    Objects are stored by SHA-256 hash (lowercase hex) under:
-      <root_dir>/objects/<h[0:2]>/<h[2:4]>/<h>
-    """
+    @staticmethod
+    def reconstruct(pack: Path, dst: Path):
+        return reconstruct(pack, dst)
 
-    def __init__(self, root_dir: str | Path):
-        self.root_dir = Path(root_dir)
-        self.objects_dir = self.root_dir / "objects"
-        self.tmp_dir = self.root_dir / "tmp"
-        self.objects_dir.mkdir(parents=True, exist_ok=True)
-        self.tmp_dir.mkdir(parents=True, exist_ok=True)
+    @staticmethod
+    def verify(src: Path, dst: Path):
+        return verify(src, dst)
 
-    def put_bytes(self, data: bytes) -> str:
-        digest = hashlib.sha256(data).hexdigest()
-        final_path = self._object_path(digest)
-        if final_path.exists():
-            return digest
-
-        final_path.parent.mkdir(parents=True, exist_ok=True)
-        tmp_path = self._temp_path(final_path.parent)
-        try:
-            with open(tmp_path, "wb") as f:
-                f.write(data)
-                f.flush()
-                os.fsync(f.fileno())
-            self._commit_temp(tmp_path, final_path)
-        finally:
-            if tmp_path.exists():
-                tmp_path.unlink(missing_ok=True)
-        return digest
-
-    def get_bytes(self, hash_hex: str) -> bytes:
-        hash_hex = self._validate_hash(hash_hex)
-        path = self._object_path(hash_hex)
-        if not path.exists():
-            raise FileNotFoundError(str(path))
-        return path.read_bytes()
-
-    def put_stream(self, stream: BinaryIO, chunk_size: int = 1024 * 1024) -> str:
-        if chunk_size <= 0:
-            raise ValueError("chunk_size must be positive")
-
-        staging_path = self._temp_path(self.tmp_dir)
-        hasher = hashlib.sha256()
-        try:
-            with open(staging_path, "wb") as staging:
-                while True:
-                    chunk = stream.read(chunk_size)
-                    if not chunk:
-                        break
-                    hasher.update(chunk)
-                    staging.write(chunk)
-                staging.flush()
-                os.fsync(staging.fileno())
-
-            digest = hasher.hexdigest()
-            final_path = self._object_path(digest)
-            if final_path.exists():
-                return digest
-
-            final_path.parent.mkdir(parents=True, exist_ok=True)
-
-            self._commit_temp(staging_path, final_path)
-            return digest
-        finally:
-            staging_path.unlink(missing_ok=True)
-
-    def get_stream(self, hash_hex: str, out: BinaryIO, chunk_size: int = 1024 * 1024) -> None:
-        if chunk_size <= 0:
-            raise ValueError("chunk_size must be positive")
-        hash_hex = self._validate_hash(hash_hex)
-        path = self._object_path(hash_hex)
-        if not path.exists():
-            raise FileNotFoundError(str(path))
-        with open(path, "rb") as f:
-            while True:
-                chunk = f.read(chunk_size)
-                if not chunk:
-                    break
-                out.write(chunk)
-
-    def object_path(self, hash_hex: str) -> Path:
-        """
-        Return the deterministic on-disk path for a stored object.
-
-        This is a read-only helper for bounded tooling (expand-by-hash).
-        """
-        hash_hex = self._validate_hash(hash_hex)
-        return self.objects_dir / hash_hex[0:2] / hash_hex[2:4] / hash_hex
-
-    def _object_path(self, digest: str) -> Path:
-        digest = self._validate_hash(digest)
-        return self.objects_dir / digest[0:2] / digest[2:4] / digest
-
-    def _validate_hash(self, hash_hex: str) -> str:
-        if not isinstance(hash_hex, str) or _HASH_RE.fullmatch(hash_hex) is None:
-            raise ValueError(f"invalid hash: {hash_hex!r}")
-        return hash_hex
-
-    def _temp_path(self, dir_path: Path) -> Path:
-        dir_path.mkdir(parents=True, exist_ok=True)
-        fd, name = tempfile.mkstemp(prefix="cas_tmp_", dir=str(dir_path))
-        os.close(fd)
-        return Path(name)
-
-    def _commit_temp(self, tmp_path: Path, final_path: Path) -> None:
-        # Idempotent: never overwrite an existing object.
-        if final_path.exists():
-            return
-
-        try:
-            os.link(tmp_path, final_path)
-        except FileExistsError:
-            return
-        except OSError as e:
-            # Fallback path for platforms/filesystems that don't support hardlinks.
-            if e.errno not in (errno.EPERM, errno.EOPNOTSUPP, errno.ENOTSUP):
-                raise
-            fd = os.open(final_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o644)
-            try:
-                with open(fd, "wb", closefd=True) as dst, open(tmp_path, "rb") as src:
-                    while True:
-                        chunk = src.read(1024 * 1024)
-                        if not chunk:
-                            break
-                        dst.write(chunk)
-                    dst.flush()
-                    os.fsync(dst.fileno())
-            except Exception:
-                try:
-                    os.unlink(final_path)
-                finally:
-                    raise
-            return
-        else:
-            tmp_path.unlink(missing_ok=True)
+if __name__ == '__main__':
+    main()

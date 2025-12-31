@@ -15,6 +15,11 @@ Use when asked to verify that the AGS MCP server is runnable (stdio mode) and to
 - `input.json` with:
   - `entrypoint_substring` (string, optional): Relative path to the MCP entrypoint.
   - `args` (array, optional): Arguments to pass to the entrypoint (default: `["--test"]`).
+  - `bridge_smoke` (object, optional):
+    - `enabled` (boolean): If true, call the local terminal bridge after the server check.
+    - `command` (string, optional): Command to execute via the bridge.
+    - `cwd` (string, optional): Working directory for the bridge command.
+    - `timeout_seconds` (integer, optional): Bridge request timeout (default: 30).
 
 ## Outputs
 
@@ -23,6 +28,11 @@ Use when asked to verify that the AGS MCP server is runnable (stdio mode) and to
   - `returncode` (number)
   - `entrypoint` (string, relative path)
   - `args` (array)
+  - `bridge_smoke` (object):
+    - `enabled` (boolean)
+    - `ok` (boolean)
+    - `exit_code` (number, optional)
+    - `error` (string, optional)
 
 ## Constraints
 

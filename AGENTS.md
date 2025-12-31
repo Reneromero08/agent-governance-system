@@ -7,21 +7,181 @@ Agent Operating Contract for the Agent Governance System (AGS)
 This file defines how autonomous or semi-autonomous agents operate inside this
 repository. It is procedural authority. If unclear, defer to CANON.
 
+## 0. Initial Connection & Cortex Access
+
+Before reading any rules, agents must establish a connection to the cortex (semantic indexing system) to access governance files and tools. This section provides the essential connection guidance that enables all subsequent operations.
+
+### 0.1 Connection Methods
+
+**Primary (Auto-start)**:
+```bash
+python LAW/CONTRACTS/ags_mcp_entrypoint.py
+```
+- **ADR-021 Compliant**: Automatically generates `session_id` (UUID) and logs all activity
+- **Recommended**: Most reliable entry point with full audit logging
+
+**Alternative**:
+```bash
+python CAPABILITY/MCP/server.py
+```
+
+**Test Connection**:
+```bash
+python LAW/CONTRACTS/ags_mcp_entrypoint.py --test
+```
+
+### 0.2 Essential Cortex Tools
+
+Once connected via MCP, agents have access to these core tools:
+
+- `cortex_query({"query": "term"})` - Search semantic index (logged with `session_id`)
+- `canon_read({"file": "CONTRACT"})` - Read governance files (logged with `session_id`)
+- `context_search({"type": "decisions"})` - Find ADRs and context records (logged with `session_id`)
+- `session_info({})` - Get session information including `session_id` (ADR-021 compliance)
+
+### 0.3 First Commands (Bootstrap Sequence)
+
+1. **Read CONTRACT** via `canon_read({"file": "CONTRACT"})` - Establishes audit trail
+2. **Read AGENTS.md** via `cortex_query({"query": "AGENTS.md"})` - Continues audit trail
+3. **Check system status** - Verify ADR-021 compliance and connection health
+
+### 0.4 ADR-021 Identity & Observability
+
+**Session Identity**: The MCP server automatically generates a `session_id` (UUID) for each agent connection, fulfilling ADR-021 requirements.
+
+**Essential Tool**: Use the `session_info` tool to discover your session_id:
+```json
+session_info({})  // Returns session_id, server info, and optional audit log entries
+```
+
+**Audit Compliance**: All cortex queries and tool calls are automatically logged to `LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl` with your `session_id`, establishing traceable identity as required by ADR-021.
+
+**Verification**: After connecting, immediately call `session_info({})` to obtain your `session_id` and verify ADR-021 compliance.
+
+### 0.5 Troubleshooting
+
+- **Python Check**: `python --version` (requires Python 3.8+)
+- **Server Verification**: Run test command above
+- **Log Inspection**: Check `LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl` for connection errors
+- **Session Tracking**: Verify `session_id` appears in audit logs (indicates ADR-021 compliance)
+
+### 0.6 Connection Success Criteria
+
+A successful connection is confirmed when:
+1. MCP server starts without errors
+2. Cortex tools respond to queries
+3. Audit logs show entries with `session_id`
+4. Agent can read CONTRACT.md via `canon_read`
+
+**Only after establishing a successful cortex connection should agents proceed to Section 1.**
+
+**Quick Reference**: For detailed tool usage and common query patterns, see `INBOX/reports/cortex-quick-reference.md`.
+
+### 0.7 MCP-First Principle (Token Efficiency)
+
+**🚨 CRITICAL: NO TOKEN WASTE 🚨**
+
+Agents MUST use MCP tools for all cortex access and MUST NOT write custom database queries or manual file inspection code. This principle enforces catalytic computing token efficiency.
+
+#### What is Token Waste?
+Token waste occurs when an agent:
+1. Writes Python SQLite snippets to inspect databases directly
+2. Uses `open()` or `Path().read_text()` to read governance files
+3. Creates custom scripts for tasks already covered by MCP tools
+4. Analyzes database schemas instead of using semantic search tools
+
+#### Examples of Token Waste vs. Correct Usage:
+
+**❌ WRONG (Token Waste):**
+```python
+import sqlite3
+conn = sqlite3.connect('CORTEX/_generated/system1.db')
+cursor = conn.execute('SELECT * FROM symbols')
+```
+
+**✅ CORRECT (MCP-First):**
+```json
+cortex_query({"query": "symbols", "limit": 10})
+```
+
+**❌ WRONG (Token Waste):**
+```python
+open('LAW/CANON/CONTRACT.md').read()
+```
+
+**✅ CORRECT (MCP-First):**
+```json
+canon_read({"file": "CONTRACT"})
+```
+
+**❌ WRONG (Token Waste):**
+```python
+import os
+for root, _, files in os.walk('LAW/CONTEXT/decisions'):
+    for f in files:
+        if 'catalytic' in open(f).read():
+            print(f)
+```
+
+**✅ CORRECT (MCP-First):**
+```json
+context_search({"type": "decisions", "query": "catalytic"})
+```
+
+#### Enforcement
+- The `mcp-access-validator` skill detects token waste and recommends MCP tools
+- All agent actions are audited for token efficiency
+- Violations are logged in `LAW/CONTRACTS/_runs/mcp_logs/token_waste.jsonl`
+
+#### Token Savings
+Using MCP tools provides:
+- **95% savings** for database queries (vs. SQLite snippets)
+- **90% savings** for file reading (vs. manual file ops)
+- **85% savings** for context searches (vs. custom scripts)
+- **100% governance compliance** (automatic audit logging)
+
+#### The Rule
+**If an MCP tool exists for a task, you MUST use it. Writing custom code for MCP-covered tasks is a governance violation.**
+
 ## 1. Required startup sequence (non-negotiable)
 
 Before taking any action, an agent MUST:
 
-1. Read:
-15.    - LAW/CANON/CONTRACT.md
-16.    - LAW/CANON/INVARIANTS.md
-17.    - LAW/CANON/VERSIONING.md
-2. Read this file (AGENTS.md) in full
-3. Identify the current canon_version
-4. Identify whether the task is:
-   - governance change
-   - skill implementation
-   - build execution
-   - documentation only
+1. **Connect to Cortex** using Section 0 guidelines
+2. **Read essential governance documents** (via cortex tools):
+   - LAW/CANON/CONTRACT.md - Core rules and authority gradient
+   - LAW/CANON/INVARIANTS.md - Locked decisions that cannot change
+   - LAW/CANON/VERSIONING.md - Version policy (identify current canon_version)
+   - LAW/CANON/AGREEMENT.md - Constitutional agreement between human and system
+   - LAW/CANON/STEWARDSHIP.md - Engineering practices and escalation paths
+   - LAW/CANON/INBOX_POLICY.md - Document storage and content hash requirements
+   - LAW/CANON/IMPLEMENTATION_REPORTS.md - Report format for all implementations
+   - LAW/CANON/CRISIS.md - Emergency procedures and quarantine detection
+3. **Read this file (AGENTS.md) in full**
+4. **Identify the current canon_version** (found in LAW/CANON/VERSIONING.md)
+5. **Identify whether the task is**:
+   - governance change (requires ADR and ceremony)
+   - skill implementation (requires SKILL.md, run.py, validate.py, fixtures)
+   - build execution (outputs to BUILD/)
+   - documentation only (must follow INBOX policy with content hash)
+6. **Review relevant ADRs**:
+   - ADR-021: Mandatory Agent Identity and Observability (session_id)
+   - ADR-029: Headless Swarm Execution (terminal prohibition)
+   - ADR-004: MCP Integration (connection protocol)
+   - ADR-017: Skill Formalization (skill structure)
+   - ADR-022: Why Flash Bypassed The Law (test requirement)
+   - ADR-008: Composite Commit Approval (ceremony rules)
+   - ADR-001: Build and Artifacts (output locations)
+   - ADR-007: Constitutional Agreement (human-system relationship)
+   - ADR-015: Logging Output Roots (audit log locations)
+   - ADR-016: Context Edit Authority (mutation rules)
+   - ADR-020: Admission Control Gate (governance enforcement)
+
+7. **Note engineering standards** (from CANON/STEWARDSHIP.md):
+   - No bare excepts, atomic writes, headless execution
+   - Deterministic outputs, safety caps, proper database connections
+   - Never bypass tests, cross-platform scripts, interface regression tests
+   - Amend over pollute (clean commit history)
 
 If any of the above steps are skipped, the agent must stop.
 

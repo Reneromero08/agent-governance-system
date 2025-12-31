@@ -6,7 +6,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+def _find_repo_root(start: Path) -> Path:
+    for candidate in [start] + list(start.parents):
+        if (candidate / "LAW" / "CANON" / "VERSIONING.md").exists():
+            return candidate
+        if (candidate / "CANON" / "VERSIONING.md").exists():
+            return candidate
+    return start
+
+
+PROJECT_ROOT = _find_repo_root(Path(__file__).resolve())
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
@@ -14,7 +23,9 @@ from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 
 def _read_canon_version(project_root: Path) -> str:
-    versioning = project_root / "CANON" / "VERSIONING.md"
+    versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
+    if not versioning.exists():
+        versioning = project_root / "CANON" / "VERSIONING.md"
     if not versioning.exists():
         return "unknown"
     content = versioning.read_text(errors="ignore")
@@ -26,7 +37,7 @@ def _read_canon_version(project_root: Path) -> str:
 
 def _log_path(project_root: Path) -> Path:
     # Return a Path object; formatting to POSIX is done when producing the relative string
-    return project_root / "CONTRACTS" / "_runs" / "override_logs" / "master_override.jsonl"
+    return project_root / "LAW" / "CONTRACTS" / "_runs" / "override_logs" / "master_override.jsonl"
 
 
 def _append_log(log_path: Path, entry: Dict[str, Any]) -> None:

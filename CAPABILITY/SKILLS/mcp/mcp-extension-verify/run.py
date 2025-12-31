@@ -19,7 +19,8 @@ def get_cortex_query(project_root: Path) -> Tuple[Any, str]:
     if str(project_root) not in sys.path:
         sys.path.insert(0, str(project_root))
 
-    import NAVIGATION.CORTEX.query as cortex_query
+    # Import from the correct location
+    from NAVIGATION.CORTEX.semantic import query as cortex_query
 
     try:
         cortex_query.get_metadata("canon_version")
@@ -91,7 +92,7 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
                 "import sys",
                 "from pathlib import Path",
                 "",
-                "PROJECT_ROOT = Path(__file__).resolve().parents[2]",
+                "PROJECT_ROOT = Path(__file__).resolve().parents[4]",
                 "if str(PROJECT_ROOT) not in sys.path:",
                 "    sys.path.insert(0, str(PROJECT_ROOT))",
                 "",
@@ -143,11 +144,11 @@ def main() -> int:
     output_path = Path(sys.argv[2])
     payload = load_json(input_path)
 
-    entrypoint_substring = payload.get("entrypoint_substring", "CONTRACTS/ags_mcp_entrypoint.py")
+    entrypoint_substring = payload.get("entrypoint_substring", "LAW/CONTRACTS/ags_mcp_entrypoint.py")
     args = payload.get("args", ["--test"])
     client = payload.get("client", "generic")
 
-    project_root = Path(__file__).resolve().parents[2]
+    project_root = Path(__file__).resolve().parents[4]
     cortex_query, error = get_cortex_query(project_root)
     if cortex_query is None:
         write_json(output_path, {

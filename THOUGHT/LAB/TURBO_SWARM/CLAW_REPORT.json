@@ -1,0 +1,49 @@
+[
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/integration/test_demo_memoization_hash_reuse.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/integration/test_packing_hygiene.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/core/test_cas_store.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_bridge.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_capability_revokes.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/phases/phase6_governance/test_ags_phase6_registry_immutability.py",
+    "tools": []
+  },
+  {
+    "status": "failed",
+    "reason": "denied_pattern",
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_phase7_acceptance.py",
+    "tools": []
+  },
+  {
+    "status": "failed",
+    "reason": "denied_pattern",
+    "file": "CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py",
+    "tools": []
+  },
+  {
+    "status": "fixed",
+    "file": "CAPABILITY/TESTBENCH/spectrum/test_spectrum02_resume.py",
+    "tools": []
+  }
+]

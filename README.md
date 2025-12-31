@@ -60,13 +60,13 @@ python CORTEX/vector_indexer.py --index
 - [ADR-030](./CONTEXT/decisions/ADR-030-semantic-core-architecture.md) - Architecture specification
 - [Roadmap](./CONTEXT/decisions/ROADMAP-semantic-core.md) - 4-phase implementation plan
 
-**Status:** Phase 1 (Vector Foundation) complete and production-ready. See [Final Report](./CONTRACTS/_runs/semantic-core-phase1-final-report.md) for details.
+**Status:** Phase 1 (Vector Foundation) complete and production-ready. See [Final Report](./INBOX/reports/semantic-core-phase1-final-report.md) for details.
 
 ## MCP integration (external clients)
 
 AGS exposes an MCP server for IDEs and desktop clients. Use the entrypoint wrapper
-`CONTRACTS/_runs/ags_mcp_entrypoint.py` to keep audit logs under allowed output
-roots (`CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
+`LAW/CONTRACTS/ags_mcp_entrypoint.py` to keep audit logs under allowed output
+roots (`LAW/CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
 `mcp-extension-verify` skills. See `MCP/README.md` for client config examples.
 
 ## How to use
@@ -86,9 +86,9 @@ Agents interacting with the system should follow the protocol described in `CANO
 ## How to extend AGS
 
 - Add a skill: create `SKILLS/<skill-name>/` with `SKILL.md`, a run script, a validation script, and `fixtures/<case>/input.json` plus `expected.json`.
-- Add fixtures: place skill fixtures under `SKILLS/<skill-name>/fixtures/` and governance fixtures under `CONTRACTS/fixtures/`.
+- Add fixtures: place skill fixtures under `SKILLS/<skill-name>/fixtures/` and governance fixtures under `LAW/CONTRACTS/fixtures/`.
 - Add ADRs: create a new `CONTEXT/decisions/ADR-xxx-*.md` and reference it in `CONTEXT/INDEX.md`.
-- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
+- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `LAW/CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
 - Planning snapshots live under `CONTEXT/archive/planning/` (see `CONTEXT/archive/planning/INDEX.md`).
 
 For more details, see individual files in the respective directories.

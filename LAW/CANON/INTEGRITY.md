@@ -4,7 +4,7 @@
 
 ## 1. CMP-01: Runtime Guard
 Every execution MUST pass through the CMP-01 validator.
-- **Durable Roots**: `CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`.
+- **Durable Roots**: `LAW/CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`.
 - **Forbidden**: `CANON/`, `AGENTS.md`, `BUILD/`.
 - **Pre-run**: Validate JobSpec schema, paths, and forbidden overlaps.
 - **Post-run**: Verify every declared durable output exists and is bounded.

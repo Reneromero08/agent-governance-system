@@ -23,7 +23,7 @@ except ImportError:
 
 # Swarm orchestrator path
 SWARM_SKILL_DIR = REPO_ROOT / "THOUGHT" / "LAB" / "TURBO_SWARM"
-SWARM_RUNS_DIR = REPO_ROOT / "CONTRACTS" / "_runs" / "swarm_runs"
+SWARM_RUNS_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "swarm_runs"
 
 PORT = 8000
 STATIC_DIR = Path(__file__).resolve().parent / "static"

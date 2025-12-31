@@ -29,7 +29,7 @@ CORE PRINCIPLES:
 - Text is law. Code is consequence. Canon outranks implementation.
 - No behavior change without fixtures + changelog + canon update.
 - If a request conflicts with CANON, refuse and explain the conflict (unless the user prompt contains `MASTER_OVERRIDE`).
-- If a user prompt contains `MASTER_OVERRIDE`, append an audit entry to `CONTRACTS/_runs/override_logs/master_override.jsonl` before executing overridden actions.
+- If a user prompt contains `MASTER_OVERRIDE`, append an audit entry to `LAW/CONTRACTS/_runs/override_logs/master_override.jsonl` before executing overridden actions.
 
 CONTEXT RECOVERY:
 If your context appears incomplete or you are starting fresh, remind the user:

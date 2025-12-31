@@ -25,7 +25,7 @@ Implement the MCP message board tools and their governance artifacts without cha
    - Default role: `poster` (post + list)
    - `moderator` (post + list + pin/unpin + delete)
    - `admin` (all + purge)
-   - Role allowlist file at `MCP/board_roles.json` keyed by `session_id`.
+   - Role allowlist file at `CAPABILITY/MCP/board_roles.json` keyed by `session_id`.
 5) Add fixtures for the skill and any new governance expectations.
 6) Add ADR under `CONTEXT/decisions/` and update `CANON/CHANGELOG.md` + `CANON/VERSIONING.md`.
 
