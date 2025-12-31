@@ -17,7 +17,7 @@ import hashlib
 from pathlib import Path
 
 # Add project root to path for absolute resolution
-PROJECT_ROOT = Path(__file__).resolve().parents[2]
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 DB_PATH = PROJECT_ROOT / "CORTEX" / "system1.db"
 
 # Directories that SHOULD be indexed per ADR-027 and build_system1.py
@@ -72,7 +72,7 @@ def get_tracked_files(root: Path) -> set:
 def verify_system1():
     """Verify system1.db matches repository state."""
     if not DB_PATH.exists():
-        print("❌ FAIL: system1.db does not exist")
+        print("FAIL: system1.db does not exist")
         return False
         
     conn = sqlite3.connect(str(DB_PATH))

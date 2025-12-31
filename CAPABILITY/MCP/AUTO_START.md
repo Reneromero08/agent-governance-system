@@ -34,7 +34,7 @@ Client connects → Check PID file → Server not running? → Start it → Conn
   "mcpServers": {
     "ags": {
       "command": "python",
-      "args": ["D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"],
+      "args": ["D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"],
       "cwd": "D:/CCC 2.0/AI/agent-governance-system"
     }
   }
@@ -49,7 +49,7 @@ Copy to: `%APPDATA%\Claude\claude_desktop_config.json`
 
 Point your extension config to:
 ```
-D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py
+D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py
 ```
 
 ### For Custom Scripts
@@ -59,7 +59,7 @@ import subprocess
 
 result = subprocess.run([
     "python",
-    "D:/CCC 2.0/AI/agent-governance-system/CONTRACTS/_runs/ags_mcp_auto.py"
+    "D:/CCC 2.0/AI/agent-governance-system/LAW/CONTRACTS/_runs/ags_mcp_auto.py"
 ], cwd="D:/CCC 2.0/AI/agent-governance-system")
 ```
 
@@ -69,9 +69,9 @@ result = subprocess.run([
 
 When the first client connects:
 
-1. **MCP Server** starts in background
-2. **Cortex rebuild** (if configured - see `MCP/autostart_config.json`)
-3. **PID tracking** (saved to `CONTRACTS/_runs/mcp_logs/server.pid`)
+1. **MCP Server** starts in background (keepalive enabled for always-on mode)
+2. **Cortex rebuild** (if configured - see `CAPABILITY/MCP/autostart_config.json`)
+3. **PID tracking** (saved to `LAW/CONTRACTS/_runs/mcp_logs/server.pid`)
 4. **Logging** starts (audit trail to `audit.jsonl`)
 
 **Subsequent clients** just connect to the already-running server.
@@ -90,7 +90,7 @@ When the first client connects:
 
 ## Advanced: How Auto-Start Works
 
-### File: `CONTRACTS/_runs/ags_mcp_auto.py`
+### File: `LAW/CONTRACTS/_runs/ags_mcp_auto.py`
 
 ```python
 def ensure_server_running():
@@ -103,7 +103,7 @@ def ensure_server_running():
             return True  # Server running, we're good
 
     # Server not running - start it
-    subprocess.run(["powershell", "-File", "MCP/autostart.ps1", "-Start"])
+    subprocess.run(["powershell", "-File", "CAPABILITY/MCP/autostart.ps1", "-Start"])
     time.sleep(2)  # Give it a moment
     return True
 
@@ -122,7 +122,7 @@ If auto-start fails (e.g., PowerShell not available):
 
 ## Configuration
 
-Edit `MCP/autostart_config.json`:
+Edit `CAPABILITY/MCP/autostart_config.json`:
 
 ```json
 {
@@ -152,12 +152,12 @@ powershell -ExecutionPolicy Bypass -Command "echo 'OK'"
 
 **Check autostart.ps1 exists:**
 ```powershell
-Test-Path MCP\autostart.ps1
+Test-Path CAPABILITY\MCP\autostart.ps1
 ```
 
 **Manually start once:**
 ```powershell
-.\MCP\autostart.ps1 -Start
+.\CAPABILITY\MCP\autostart.ps1 -Start
 ```
 
 ### "Multiple servers starting"
@@ -167,10 +167,10 @@ Only one server can run at a time (protected by PID file).
 If you see errors:
 ```powershell
 # Stop all instances
-.\MCP\autostart.ps1 -Stop
+.\CAPABILITY\MCP\autostart.ps1 -Stop
 
 # Clean PID file
-Remove-Item CONTRACTS\_runs\mcp_logs\server.pid -Force
+Remove-Item LAW\CONTRACTS\_runs\mcp_logs\server.pid -Force
 
 # Try auto-start again
 ```
@@ -179,13 +179,13 @@ Remove-Item CONTRACTS\_runs\mcp_logs\server.pid -Force
 
 **Verify server is running:**
 ```powershell
-.\MCP\autostart.ps1 -Status
+.\CAPABILITY\MCP\autostart.ps1 -Status
 ```
 
 **Check logs:**
 ```powershell
-Get-Content CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
-Get-Content CONTRACTS\_runs\mcp_logs\server_stderr.log -Tail 20
+Get-Content LAW\CONTRACTS\_runs\mcp_logs\autostart.log -Tail 20
+Get-Content LAW\CONTRACTS\_runs\mcp_logs\server_stderr.log -Tail 20
 ```
 
 ---
@@ -216,6 +216,6 @@ Get-Content CONTRACTS\_runs\mcp_logs\server_stderr.log -Tail 20
 
 **Status:** ✅ Fully Implemented
 **Files:**
-- `CONTRACTS/_runs/ags_mcp_auto.py` - Auto-start entrypoint
-- `MCP/autostart.ps1` - Background server manager
-- `MCP/autostart_config.json` - Configuration
+- `LAW/CONTRACTS/_runs/ags_mcp_auto.py` - Auto-start entrypoint
+- `CAPABILITY/MCP/autostart.ps1` - Background server manager
+- `CAPABILITY/MCP/autostart_config.json` - Configuration

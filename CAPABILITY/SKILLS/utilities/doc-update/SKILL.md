@@ -41,8 +41,8 @@ Use when asked to update repository documentation, ADRs, or onboarding guidance.
 2. Use `CORTEX/query.py` to locate entrypoints; avoid raw filesystem discovery.
 3. Update the smallest set of docs that inform all agents (README, CONTEXT/maps/ENTRYPOINTS, MCP docs, relevant ADRs).
 4. For MCP updates, include:
-   - The recommended entrypoint (`CONTRACTS/_runs/ags_mcp_entrypoint.py`).
-   - The log location (`CONTRACTS/_runs/mcp_logs/`).
+   - The recommended entrypoint (`LAW/CONTRACTS/ags_mcp_entrypoint.py`).
+   - The log location (`LAW/CONTRACTS/_runs/mcp_logs/`).
    - The verification skills (`mcp-smoke`, `mcp-extension-verify`).
    - Client config examples for Windows and WSL where relevant.
 5. Run `python3 TOOLS/critic.py` and `python3 CONTRACTS/runner.py` after changes.

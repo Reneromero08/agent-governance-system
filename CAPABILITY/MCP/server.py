@@ -312,6 +312,7 @@ class AGSMCPServer:
             # Write tools
             "skill_run": self._tool_skill_run,
             "pack_validate": self._tool_pack_validate,
+            "terminal_bridge": self._tool_terminal_bridge,
             # Governance tools
             "critic_run": self._tool_critic_run,
             "adr_create": self._tool_adr_create,
@@ -322,6 +323,8 @@ class AGSMCPServer:
             "agent_inbox_list": self._tool_agent_inbox_list,
             "agent_inbox_claim": self._tool_agent_inbox_claim,
             "agent_inbox_finalize": self._tool_agent_inbox_finalize,
+            # Session info tool
+            "session_info": self._tool_session_info,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -1112,6 +1115,77 @@ class AGSMCPServer:
                 "isError": True
             }
 
+    def _tool_terminal_bridge(self, args: Dict) -> Dict:
+        """Execute a command via the local terminal bridge HTTP server."""
+        import socket
+        import urllib.error
+        import urllib.request
+
+        command = args.get("command")
+        if not isinstance(command, str) or not command.strip():
+            return {
+                "content": [{"type": "text", "text": "Error: 'command' is required"}],
+                "isError": True,
+            }
+
+        cwd = args.get("cwd")
+        timeout_seconds = args.get("timeout_seconds", 30)
+        if not isinstance(timeout_seconds, int) or timeout_seconds <= 0:
+            return {
+                "content": [{"type": "text", "text": "Error: 'timeout_seconds' must be a positive integer"}],
+                "isError": True,
+            }
+
+        config_path = os.environ.get(
+            "MCP_TERMINAL_BRIDGE_CONFIG",
+            str(CAPABILITY_ROOT / "MCP" / "powershell_bridge_config.json"),
+        )
+        try:
+            config = json.loads(Path(config_path).read_text(encoding="utf-8"))
+        except Exception as exc:
+            return {
+                "content": [{"type": "text", "text": f"Error reading bridge config: {exc}"}],
+                "isError": True,
+            }
+
+        host = str(config.get("connect_host", "127.0.0.1"))
+        port = int(config.get("port", 8765))
+        token = str(config.get("token", ""))
+        payload = {"command": command}
+        if isinstance(cwd, str) and cwd.strip():
+            payload["cwd"] = cwd
+
+        url = f"http://{host}:{port}/run"
+        data = json.dumps(payload).encode("utf-8")
+        headers = {"Content-Type": "application/json"}
+        if token and token != "CHANGE_ME":
+            headers["X-Bridge-Token"] = token
+
+        request = urllib.request.Request(url, data=data, headers=headers, method="POST")
+        try:
+            with urllib.request.urlopen(request, timeout=timeout_seconds) as resp:
+                raw = resp.read().decode("utf-8", errors="ignore")
+        except urllib.error.HTTPError as exc:
+            return {
+                "content": [{"type": "text", "text": f"Bridge HTTP error: {exc.code} {exc.reason}"}],
+                "isError": True,
+            }
+        except (urllib.error.URLError, socket.timeout) as exc:
+            return {
+                "content": [{"type": "text", "text": f"Bridge connection error: {exc}"}],
+                "isError": True,
+            }
+
+        try:
+            result = json.loads(raw)
+        except Exception:
+            result = {"ok": False, "error": "INVALID_JSON", "raw": raw}
+
+        return {
+            "content": [{"type": "text", "text": json.dumps(result, indent=2)}],
+            "isError": not bool(result.get("ok", False)),
+        }
+
     def _tool_critic_run(self, args: Dict) -> Dict:
         """Run TOOLS/critic.py to check governance compliance."""
         import subprocess
@@ -1433,6 +1507,64 @@ class AGSMCPServer:
                 "isError": True
             }
 
+    def _tool_session_info(self, args: Dict) -> Dict:
+        """Get information about the current MCP session including session_id for ADR-021 compliance."""
+        from datetime import datetime
+        import os
+        
+        try:
+            include_audit_log = args.get("include_audit_log", False)
+            limit = int(args.get("limit", 10))
+            
+            # Basic session info
+            session_info = {
+                "session_id": self.session_id,
+                "server_name": SERVER_NAME,
+                "server_version": SERVER_VERSION,
+                "mcp_version": MCP_VERSION,
+                "connected_at": datetime.now().isoformat(),
+                "project_root": str(PROJECT_ROOT),
+                "audit_log_path": str(LOGS_DIR / "audit.jsonl"),
+                "adr_021_compliant": True,
+                "adr_021_note": "This session_id is automatically logged with all cortex queries and tool calls"
+            }
+            
+            # Add audit log entries if requested
+            if include_audit_log:
+                audit_entries = []
+                log_file = LOGS_DIR / "audit.jsonl"
+                if log_file.exists():
+                    lines = log_file.read_text(encoding="utf-8", errors="ignore").strip().split("\n")
+                    # Filter for this session_id and get most recent
+                    for line in reversed(lines):
+                        if not line.strip():
+                            continue
+                        try:
+                            entry = json.loads(line)
+                            if entry.get("session_id") == self.session_id:
+                                audit_entries.append(entry)
+                                if len(audit_entries) >= limit:
+                                    break
+                        except:
+                            continue
+                session_info["audit_log_entries"] = audit_entries
+                session_info["audit_log_count"] = len(audit_entries)
+            
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(session_info, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Session info error: {str(e)}"
+                }],
+                "isError": True
+            }
+
     def _tool_not_implemented(self, args: Dict) -> Dict:
         """Placeholder for unimplemented tools."""
         return {
@@ -1461,6 +1593,10 @@ def run_stdio():
                 "error": {"code": -32700, "message": "Parse error"}
             }
             print(json.dumps(error), flush=True)
+    if os.environ.get("MCP_KEEPALIVE") == "1":
+        import time
+        while True:
+            time.sleep(5)
 
 
 def main():

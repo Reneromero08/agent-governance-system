@@ -1,0 +1,52 @@
+# Catalytic Computing
+
+This document defines catalytic computing for the Agent Governance System. It separates formal theory from engineering translation so agents do not hallucinate implementation details.
+
+## Formal Model (Complexity Theory)
+
+Catalytic space computation uses two kinds of memory:
+
+1. **Clean space** - A small amount of blank working memory the algorithm can use freely.
+2. **Catalytic space** - A much larger memory that starts in an arbitrary state and must be returned to exactly that state at the end.
+
+The key constraint: the algorithm must work for any initial catalytic content (possibly incompressible) and cannot permanently encode new information. The catalytic bits act like a catalyst in chemistry - they enable the computation but remain unchanged afterward.
+
+**Key results** (Buhrman, Cleve, Koucky, Loff, Speelman, 2014):
+- Catalytic logspace can compute uniform TC^1 circuits (includes matrix determinant)
+- Upper bound: catalytic logspace is contained in ZPP
+- The restoration constraint does not kill usefulness; it forces reversible, structured transformations
+
+## AGS Translation
+
+For AGS, catalytic computing provides a memory model:
+
+| Formal Concept | AGS Analog | Examples |
+|----------------|------------|----------|
+| Clean space | Context tokens | LITE pack contents, working memory |
+| Catalytic space | Disk state | Indexes, caches, generated artifacts |
+| Restoration | Repo returns identical | Git worktree, content-addressed cache |
+
+**Core insight**: Large disk state can be used as powerful scratch space if you guarantee restoration. This enables high-impact operations (index builds, pack generation, refactors) while keeping context minimal.
+
+## Five Engineering Patterns
+
+### Pattern 1: Clean Context vs Catalytic Store
+
+Keep context tokens minimal. Use disk as the large, addressable store.
+
+- **Clean context (LITE pack)**: laws, maps, contracts, symbolic indexes, short summaries, retrieval instructions
+- **Catalytic store**: full file bodies, generated indexes, caches - addressable by hash or path
+
+### Pattern 2: Restore Guarantee as First-Class Artifact
+
+Every operation that uses "big scratch" must produce:
+- A **patch** (what changed)
+- A **restore plan** (how to undo)
+- A **verification check** (prove restoration happened)
+
+Practical mechanisms:
+- Git worktree or temporary checkout
+- Overlay filesystem (copy-on-write)
+- Content-addressed cache for generated artifacts
+
+[Content continues for 1000+ more lines...]

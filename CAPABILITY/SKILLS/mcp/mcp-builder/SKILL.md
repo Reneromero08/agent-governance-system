@@ -1,7 +1,8 @@
 # Skill: mcp-builder
 **Version:** 0.1.0
 **Status:** Active
-**Required_canon_version:** ">=3.0.0 <4.0.0"
+**required_canon_version:** ">=3.0.0 <4.0.0"
+**canon_version:** "3.0.0"
 
 # MCP Server Development Guide
 

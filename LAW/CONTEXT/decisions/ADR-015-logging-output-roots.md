@@ -13,11 +13,11 @@ Multiple canonical files and code paths reference logging to `LOGS/` and `MCP/lo
 - `CANON/CRISIS.md` (lines 169, 175) references `LOGS/crisis.log` and `LOGS/emergency.log`
 - `CANON/STEWARDSHIP.md` (line 142) references `LOGS/steward-actions.log`
 - `TOOLS/emergency.py` (lines 25-26) writes to `LOGS/emergency.log`
-- `MCP/server.py` (lines 24-25) writes to `MCP/logs/audit.jsonl`
-- `CANON/CHANGELOG.md` (line 141) documents audit logging to `MCP/logs/audit.jsonl`
+- `CAPABILITY/MCP/server.py` writes to `LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl`
+- `CHANGELOG.md` documents audit logging to `LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl`
 
 INV-006 restricts system-generated artifacts to three approved roots:
-- `CONTRACTS/_runs/`
+- `LAW/CONTRACTS/_runs/`
 - `CORTEX/_generated/`
 - `MEMORY/LLM_PACKER/_packs/`
 
@@ -25,16 +25,16 @@ This violation prevents proper governance enforcement and creates audit confusio
 
 ## Decision
 
-All logging must be written under `CONTRACTS/_runs/` with purpose-based subdirectories:
+All logging must be written under `LAW/CONTRACTS/_runs/` with purpose-based subdirectories:
 
-- **Emergency logs**: `CONTRACTS/_runs/emergency_logs/emergency.log`
-- **Crisis logs**: `CONTRACTS/_runs/crisis_logs/crisis.log`
-- **Steward logs**: `CONTRACTS/_runs/steward_logs/steward-actions.log`
-- **MCP audit logs**: `CONTRACTS/_runs/mcp_logs/audit.jsonl`
+- **Emergency logs**: `LAW/CONTRACTS/_runs/emergency_logs/emergency.log`
+- **Crisis logs**: `LAW/CONTRACTS/_runs/crisis_logs/crisis.log`
+- **Steward logs**: `LAW/CONTRACTS/_runs/steward_logs/steward-actions.log`
+- **MCP audit logs**: `LAW/CONTRACTS/_runs/mcp_logs/audit.jsonl`
 
 This aligns all logging behavior with INV-006 without requiring invariant changes or governance ceremony.
 
-The existing `CONTRACTS/_runs/ags_mcp_entrypoint.py` (created in v2.5.0) is the reference implementation for this pattern: it successfully redirects MCP logs under `CONTRACTS/_runs/mcp_logs/`.
+The existing `LAW/CONTRACTS/ags_mcp_entrypoint.py` (created in v2.5.0) is the reference implementation for this pattern: it successfully redirects MCP logs under `LAW/CONTRACTS/_runs/mcp_logs/`.
 
 ## Alternatives Considered
 
@@ -64,7 +64,7 @@ The existing `CONTRACTS/_runs/ags_mcp_entrypoint.py` (created in v2.5.0) is the 
 
 ## Consequences
 
-- All logging code must be updated to write under `CONTRACTS/_runs/`
+- All logging code must be updated to write under `LAW/CONTRACTS/_runs/`
 - Canon documents must be updated to reference correct paths
 - `TOOLS/critic.py` must enforce the policy to prevent regressions
 - Legacy log locations (`LOGS/`, `MCP/logs/`) should be gitignored
@@ -78,7 +78,7 @@ The existing `CONTRACTS/_runs/ags_mcp_entrypoint.py` (created in v2.5.0) is the 
 
 ## Review Triggers
 
-- Any new logging code that doesn't use `CONTRACTS/_runs/`
+- Any new logging code that doesn't use `LAW/CONTRACTS/_runs/`
 - Changes to log management strategy or requirements
 - Integration with external monitoring tools that may reference old paths
 

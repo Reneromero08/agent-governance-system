@@ -30,11 +30,13 @@ def test_memoization_miss_then_hit_then_invalidate() -> None:
     _rm(test_root)
     test_root.mkdir(parents=True, exist_ok=True)
 
-    run_id = "memoization-test-run"
+    import uuid
+    run_id = f"memoization-test-run-{uuid.uuid4().hex[:8]}"
+    _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id)
     domain_rel = f"{test_subdir}/domain"
     output_rel = f"{test_subdir}/output.txt"
     side_effect_rel = f"{test_subdir}/side_effect.txt"
-    
+
     domain_abs = REPO_ROOT / domain_rel
     domain_abs.mkdir(parents=True, exist_ok=True)
     output_abs = REPO_ROOT / output_rel

@@ -77,7 +77,7 @@ Approach:
 
 Operations may use a temporary workspace but must end with:
 - A clean repo state
-- Committed outputs only under allowed artifact roots (`CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`)
+- Committed outputs only under allowed artifact roots (`LAW/CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`)
 
 See CMP-01 (Catalytic Mutation Protocol) for the full operational specification.
 
@@ -96,7 +96,7 @@ Agents must not misinterpret the metaphor:
 ## Allowed Catalytic Domains
 
 Operations declared as "catalytic" may temporarily mutate only these paths:
-- `CONTRACTS/_runs/_tmp/`
+- `LAW/CONTRACTS/_runs/_tmp/`
 - `CORTEX/_generated/_tmp/`
 - `MEMORY/LLM_PACKER/_packs/_tmp/`
 
@@ -108,7 +108,7 @@ Forbidden domains (never catalytic):
 ## Durable Output Roots
 
 After a catalytic run, artifacts may persist only under:
-- `CONTRACTS/_runs/`
+- `LAW/CONTRACTS/_runs/`
 - `CORTEX/_generated/`
 - `MEMORY/LLM_PACKER/_packs/`
 

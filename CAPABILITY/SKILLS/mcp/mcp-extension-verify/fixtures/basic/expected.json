@@ -1,7 +1,7 @@
 {
   "ok": true,
   "returncode": 0,
-  "entrypoint": "CONTRACTS/ags_mcp_entrypoint.py",
+  "entrypoint": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
   "args": ["--test"],
   "client": "generic",
   "instructions": [

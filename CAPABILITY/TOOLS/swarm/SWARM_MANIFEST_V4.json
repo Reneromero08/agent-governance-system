@@ -1,0 +1,42 @@
+[
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase6_bridge.py",
+        "instruction": "Fix failing tests: test_ags_route_deterministic_bytes, test_ags_run_calls_verify_ok, test_pipeline_run_creates_state_when_missing. Ensure all steps in the test plan have BOTH 'step_id' AND 'cmd' fields. Restore missing imports (json, shutil, subprocess, sys, Path). Fix REPO_ROOT to Path(__file__).resolve().parents[2]. Ensure absolute paths are converted to relative paths using REPO_ROOT where possible."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_pins.py",
+        "instruction": "Fix failing tests: test_capability_pinned_routes_and_verifies, test_verify_rejects_unpinned_even_if_pipeline_artifact_exists, test_verify_rejects_empty_pins. Restore missing imports and helper functions (_rm, _run_ags, etc.) that might have been stripped. Ensure the project root is correctly added to sys.path using Path(__file__).resolve().parents[2]."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py",
+        "instruction": "Fix failing tests: test_capability_versioning_in_place_upgrade_rejected. Ensure correct module paths for CAPABILITY.PRIMITIVES. Fix REPO_ROOT and imports."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py",
+        "instruction": "Fix failing tests: test_happy_echo, test_fail_stderr, test_fail_timeout, test_fail_bloat, test_fail_malformed_output, test_fail_crash. Restore essential test setup, imports, and helper functions. Ensure it uses the new 6-bucket structure for paths."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase6_router_slot.py",
+        "instruction": "Fix failing tests: test_ags_plan_router_happy_path, test_ags_route_rejects_missing_step_command. Ensure the test plan steps are correctly formed with 'step_id' and 'cmd'. Restore missing setup."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_ags_phase8_model_binding.py",
+        "instruction": "Fix failing test: test_ags_plan_over_output_fails_closed. Ensure the test correctly simulates an 'over output' scenario within the new directory structure."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_cas_store.py",
+        "instruction": "Fix failing test: test_reject_invalid_hash_and_missing_hash. Restore missing imports (hashlib, io, sys, Path) and REPO_ROOT definition. Ensure sys.path is correctly updated to include REPO_ROOT."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_merkle.py",
+        "instruction": "Fix failing test: test_reject_invalid_hashes_and_expected_root_format. Restore missing imports and setup. Ensure it uses the correct module path for MerkleTree."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_phase7_acceptance.py",
+        "instruction": "Fix failing tests: test_swarm_chain_binds_pipeline_proofs, test_swarm_chain_fails_on_tampered_proof. Restore missing imports (json, shutil, subprocess, sys, Path), PipelineRuntime, SwarmRuntime, and helper functions (_rm, _write_jobspec). Fix REPO_ROOT."
+    },
+    {
+        "file": "CAPABILITY/TESTBENCH/test_phase8_router_receipts.py",
+        "instruction": "Fix failing tests: test_router_receipts_created, test_router_over_output_fails_closed, test_router_stderr_fails_closed, test_capability_escalation_fails_closed. Restore missing setup and imports."
+    }
+]

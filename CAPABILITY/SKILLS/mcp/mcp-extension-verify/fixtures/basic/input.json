@@ -1,5 +1,5 @@
 {
   "client": "generic",
-  "entrypoint_substring": "CONTRACTS/ags_mcp_entrypoint.py",
+  "entrypoint_substring": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
   "args": ["--test"]
 }

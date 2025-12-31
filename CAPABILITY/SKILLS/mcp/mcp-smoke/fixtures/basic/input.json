@@ -1,4 +1,7 @@
 {
-  "entrypoint_substring": "CONTRACTS/ags_mcp_entrypoint.py",
-  "args": ["--test"]
+  "entrypoint_substring": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
+  "args": ["--test"],
+  "bridge_smoke": {
+    "enabled": false
+  }
 }

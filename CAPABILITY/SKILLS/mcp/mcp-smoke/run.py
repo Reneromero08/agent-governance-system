@@ -3,6 +3,8 @@ import json
 import os
 import subprocess
 import sys
+import urllib.error
+import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
@@ -102,7 +104,7 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
                 "import CAPABILITY.MCP.server as mcp_server",
                 "",
                 "# Redirect MCP audit logs to an allowed output root.",
-                'mcp_server.LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "mcp_logs"',
+                'mcp_server.LOGS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs"',
                 "",
                 "if __name__ == '__main__':",
                 "    mcp_server.main()",
@@ -114,6 +116,48 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
     )
 
 
+def run_bridge_smoke(project_root: Path, config_path: str, payload: Dict[str, Any], timeout_seconds: int) -> Dict[str, Any]:
+    bridge_config_path = Path(config_path)
+    if not bridge_config_path.is_absolute():
+        bridge_config_path = project_root / bridge_config_path
+
+    try:
+        config = json.loads(bridge_config_path.read_text(encoding="utf-8"))
+    except Exception as exc:
+        return {"enabled": True, "ok": False, "error": f"CONFIG_READ_FAILED: {exc}"}
+
+    host = str(config.get("connect_host", "127.0.0.1"))
+    port = int(config.get("port", 8765))
+    token = str(config.get("token", ""))
+
+    url = f"http://{host}:{port}/run"
+    data = json.dumps(payload).encode("utf-8")
+    headers = {"Content-Type": "application/json"}
+    if token and token != "CHANGE_ME":
+        headers["X-Bridge-Token"] = token
+
+    request = urllib.request.Request(url, data=data, headers=headers, method="POST")
+    try:
+        with urllib.request.urlopen(request, timeout=timeout_seconds) as resp:
+            raw = resp.read().decode("utf-8", errors="ignore")
+    except urllib.error.HTTPError as exc:
+        return {"enabled": True, "ok": False, "error": f"HTTP_ERROR: {exc.code} {exc.reason}"}
+    except urllib.error.URLError as exc:
+        return {"enabled": True, "ok": False, "error": f"CONNECTION_ERROR: {exc}"}
+
+    try:
+        result = json.loads(raw)
+    except Exception:
+        return {"enabled": True, "ok": False, "error": "INVALID_JSON", "raw": raw}
+
+    return {
+        "enabled": True,
+        "ok": bool(result.get("ok", False)),
+        "exit_code": result.get("exit_code"),
+        "error": result.get("error"),
+    }
+
+
 def main() -> int:
     if len(sys.argv) < 3:
         print("Usage: run.py <input.json> <output.json>")
@@ -123,8 +167,10 @@ def main() -> int:
     output_path = Path(sys.argv[2])
     payload = load_json(input_path)
 
-    entrypoint_substring = payload.get("entrypoint_substring", "CONTRACTS/ags_mcp_entrypoint.py")
+    entrypoint_substring = payload.get("entrypoint_substring", "LAW/CONTRACTS/ags_mcp_entrypoint.py")
     args = payload.get("args", ["--test"])
+    bridge_smoke = payload.get("bridge_smoke", {})
+    bridge_enabled = bool(bridge_smoke.get("enabled", False))
 
     project_root = Path(__file__).resolve().parents[4]
     cortex_query, error = get_cortex_query(project_root)
@@ -134,6 +180,7 @@ def main() -> int:
             "returncode": 1,
             "entrypoint": Path(entrypoint_substring).as_posix(),
             "args": args,
+            "bridge_smoke": {"enabled": bridge_enabled, "ok": False, "error": "CORTEX_UNAVAILABLE"},
         })
         print(error)
         return 1
@@ -143,11 +190,23 @@ def main() -> int:
     ensure_entrypoint_wrapper(entrypoint_path)
     result = run_entrypoint(project_root, entrypoint_rel, args)
 
+    bridge_result = {"enabled": bridge_enabled, "ok": True}
+    if bridge_enabled:
+        config_path = bridge_smoke.get("config_path", "CAPABILITY/MCP/powershell_bridge_config.json")
+        command = bridge_smoke.get("command", "Get-Date")
+        cwd = bridge_smoke.get("cwd")
+        timeout_seconds = int(bridge_smoke.get("timeout_seconds", 30))
+        bridge_payload: Dict[str, Any] = {"command": command}
+        if isinstance(cwd, str) and cwd.strip():
+            bridge_payload["cwd"] = cwd
+        bridge_result = run_bridge_smoke(project_root, config_path, bridge_payload, timeout_seconds)
+
     write_json(output_path, {
         "ok": result.returncode == 0,
         "returncode": result.returncode,
         "entrypoint": Path(entrypoint_rel).as_posix(),
         "args": args,
+        "bridge_smoke": bridge_result,
     })
 
     if result.returncode != 0:

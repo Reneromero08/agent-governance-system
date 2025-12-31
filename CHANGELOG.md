@@ -3,6 +3,27 @@
 All notable changes to Agent Governance System will be documented in this file.
 
 ## [Unreleased] - 2025-12-30
+
+### Fixed
+- **Phase 6.10 Receipt Chain Ordering Hardening**: Deterministic ordering and fail-closed ambiguity detection.
+  - `SCHEMAS/receipt.schema.json`: Added `receipt_index` field (type: integer|null) for explicit chain ordering.
+  - `catalytic_chat/receipt.py`: Updated `find_receipt_chain()` to sort by explicit ordering key (receipt_index > receipt_hash > filename), reject duplicate ordering keys, fail-closed on ambiguity.
+  - `catalytic_chat/receipt.py`: Added `receipt_signed_bytes()` function for proper attestation verification.
+  - `tests/test_receipt_chain_ordering.py`: Created deterministic ordering tests (explicit sorting, ambiguous order failure, filesystem independence).
+  - All ordering is deterministic and filesystem-independent; identical inputs produce identical receipt order.
+- **Phase 6.9 Stabilization**: Eliminated execution policy test flakiness; hardened determinism guarantees.
+  - `tests/test_execution_policy.py`: Fixed test result capture to use return value from `executor.execute()` instead of accessing non-existent `executor.result` attribute; wrapped failing tests in `pytest.raises()` for proper error detection.
+  - Determinism audit of executor and policy enforcement: Confirmed no unordered iteration, no filesystem ordering dependence, no environment leakage. All policy checks use explicit ordering (sorted keys, ordered lists from JSON).
+  - Zero flaky tests confirmed: All 113 tests pass deterministically across runs.
+- **Phase 6.8 Policy Gate**: Centralized execution policy enforcement in executor.
+  - `catalytic_chat/executor.py`: Added `policy` parameter to `BundleExecutor.__init__`, added `_enforce_policy_after_execution()` method with deterministic enforcement order (verify bundle → execute steps → verify chain → verify receipt attestation → verify merkle attestation).
+  - `cli.py`: Refactored `cmd_bundle_run()` to compile exactly one policy dict (from file or CLI args), removed duplicate trust policy loading logic, fixed `cmd_trust_show()` to iterate over correct index structure.
+  - `tests/test_execution_policy.py`: Added comprehensive policy enforcement tests (trust policy requirement, missing attestation, missing merkle attestation, full stack, CLI back-compatibility).
+- **Phase 6 Sanity Check Fixes**: Critical bug fixes for attestation and merkle verification.
+  - `catalytic_chat/attestation.py`: Fixed SyntaxError (duplicate code at lines 280-293), fixed verification logic to reconstruct signing stub correctly
+  - `catalytic_chat/merkle_attestation.py`: Fixed verification message exactness (added VID, BID, PK fields), corrected signing key length validation (64/128 hex chars for 32/64 bytes)
+  - `tests/test_trust_identity_patch.py`: Fixed test to use mismatched validator_id correctly
+
 ### Added
 - **Phase 6.6 (Validator Identity Pinning + Trust Policy)**: Complete deterministic trust policy system for CAT_CHAT.
   - `SCHEMAS/trust_policy.schema.json`: Schema enforcing `policy_version="1.0.0"`, 64-char hex public keys, ed25519 scheme, scopes limited to RECEIPT/MERKLE.
@@ -30,6 +51,13 @@ All notable changes to Agent Governance System will be documented in this file.
 - MCP entrypoint root resolution corrected for consistent imports and logging.
 - mcp-smoke skill updated for canon 3.x compatibility and Cortex discovery changes.
 - MCP auto-start and governance paths migrated to LAW/CONTRACTS with updated autostart config/script under CAPABILITY/MCP.
+- MCP autostart now enables a keepalive mode to prevent stdio server exit when running as a background task.
+
+### Added
+- MCP pre-commit enforcement for entrypoint/auto checks, server running, and autostart enabled.
+
+### Fixed
+- MCP autostart task install now handles non-admin installs, falling back to schtasks or Startup folder shortcuts when needed, and reports failures clearly.
 
 ## [3.1.1] - 2025-12-30
 ### Governed Swarm & Neo3000
