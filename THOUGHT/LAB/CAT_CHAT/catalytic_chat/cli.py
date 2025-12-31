@@ -21,6 +21,7 @@ from catalytic_chat.planner import Planner, PlannerError, post_request_and_plan
 from catalytic_chat.ants import spawn_ants, run_ant_worker
 from catalytic_chat.bundle import BundleBuilder, BundleVerifier, BundleError
 from catalytic_chat.executor import BundleExecutor
+from catalytic_chat.compression_validator import validate_compression_claim
 
 try:
     from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
@@ -1298,6 +1299,75 @@ def cmd_trust_show(args) -> int:
         return 1
 
 
+def cmd_compress_verify(args) -> int:
+    """Verify compression claim.
+
+    Exit codes:
+        0: OK
+        1: Verification failed (metrics mismatch, policy violation)
+        2: Invalid input (missing files, schema errors)
+        3: Internal error
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0-3)
+    """
+    quiet = getattr(args, 'quiet', False)
+    json_mode = getattr(args, 'json', False)
+
+    is_invalid_input = False
+    is_verification_failure = False
+    is_internal_error = False
+    errors = []
+
+    try:
+        result = validate_compression_claim(
+            bundle_path=args.bundle,
+            receipts_dir=args.receipts,
+            trust_policy_path=getattr(args, 'trust_policy', None),
+            claim_json_path=args.claim,
+            strict_trust=getattr(args, 'strict_trust', False),
+            strict_identity=getattr(args, 'strict_identity', False),
+            require_attestation=getattr(args, 'require_attestation', False)
+        )
+
+        if not json_mode:
+            if result["ok"]:
+                sys.stderr.write("[OK] Compression claim verified\n")
+                sys.stderr.write(f"      bundle_id: {result['claim'].get('bundle_id', 'N/A')}\n")
+                computed = result.get("computed", {})
+                sys.stderr.write(f"      compression_ratio: {computed.get('compression_ratio', 0):.4f}\n")
+                sys.stderr.write(f"      uncompressed_tokens: {computed.get('uncompressed_tokens', 0)}\n")
+                sys.stderr.write(f"      compressed_tokens: {computed.get('compressed_tokens', 0)}\n")
+            else:
+                for err in result.get("errors", []):
+                    sys.stderr.write(f"[FAIL] {err['code']}: {err['message']}\n")
+
+        if json_mode:
+            import json
+            sys.stdout.buffer.write(json.dumps(result).encode('utf-8'))
+            sys.stdout.buffer.write(b'\n')
+            sys.stdout.buffer.flush()
+
+        return 0 if result["ok"] else 1
+
+    except Exception as e:
+        error_msg = f"Internal error: {e}"
+        if not json_mode:
+            sys.stderr.write(f"[FAIL] {error_msg}\n")
+        else:
+            import json
+            sys.stdout.buffer.write(json.dumps({
+                "ok": False,
+                "errors": [{"code": "INTERNAL_ERROR", "message": error_msg}]
+            }).encode('utf-8'))
+            sys.stdout.buffer.write(b'\n')
+            sys.stdout.buffer.flush()
+        return 3
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -1489,6 +1559,20 @@ def main():
     trust_show_parser = trust_subparsers.add_parser("show", help="Print trust policy summary")
     trust_show_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path")
 
+    compress_parser = subparsers.add_parser("compress", help="Compression protocol commands (Phase 7)")
+    compress_subparsers = compress_parser.add_subparsers(dest="compress_command", help="Compression commands")
+
+    compress_verify_parser = compress_subparsers.add_parser("verify", help="Verify compression claim")
+    compress_verify_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
+    compress_verify_parser.add_argument("--receipts", type=Path, required=True, help="Receipts directory path")
+    compress_verify_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path (optional)")
+    compress_verify_parser.add_argument("--claim", type=Path, required=True, help="Claim JSON file path")
+    compress_verify_parser.add_argument("--strict-trust", action="store_true", help="Enable strict trust verification")
+    compress_verify_parser.add_argument("--strict-identity", action="store_true", help="Enable strict identity pinning")
+    compress_verify_parser.add_argument("--require-attestation", action="store_true", help="Require attestation on all receipts")
+    compress_verify_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON report to stdout (human logs to stderr)")
+    compress_verify_parser.add_argument("--quiet", action="store_true", help="Suppress non-error stderr output")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -1591,6 +1675,18 @@ def main():
             sys.exit(1)
 
         sys.exit(trust_commands[args.trust_command](args))
+
+    if args.command == "compress":
+        compress_commands = {
+            "verify": cmd_compress_verify
+        }
+
+        if args.compress_command not in compress_commands:
+            print(f"[FAIL] Unknown compress command: {args.compress_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(compress_commands[args.compress_command](args))
 
     if args.command not in commands:
         print(f"[FAIL] Unknown command: {args.command}")

@@ -5,6 +5,27 @@ See: [docs/catalytic-chat/CHANGELOG.md](docs/catalytic-chat/CHANGELOG.md)
 ---
 
 ## [Unreleased] - 2025-12-31
+n### Added
+- **Phase 6.13 — Multi-Validator Aggregation**: Multi-validator attestations for quorum validation (RECEIPT + MERKLE)
+  - `SCHEMAS/receipt.schema.json` - added optional `attestations[]` array
+  - `SCHEMAS/execution_policy.schema.json` - added `receipt_attestation_quorum` and `merkle_attestation_quorum`
+  - `SCHEMAS/aggregated_merkle_attestations.schema.json` - new schema for aggregated attestations
+  - `catalytic_chat/attestation.py` - added `verify_receipt_attestation_single()` and `verify_receipt_attestations_with_quorum()`
+  - `catalytic_chat/merkle_attestation.py` - added `load_aggregated_merkle_attestations()` and `verify_merkle_attestations_with_quorum()`
+  - `tests/test_multi_validator_attestations.py` - comprehensive tests for ordering, quorum, backward compatibility
+  - Deterministic ordering by (validator_id, public_key.lower(), build_id or "")
+  - Reuses existing trust policy (strict_trust, strict_identity)
+  - Purely additive: single attestation path unchanged
+- **Phase 6.14 — External Verifier UX Improvements**: CI-friendly output modes and machine-readable summaries
+  - `catalytic_chat/cli_output.py` - new module with standardized exit codes and JSON output helpers
+  - `catalytic_chat/cli.py` - added `--json` and `--quiet` flags to `bundle verify`, `bundle run`, `trust verify`
+  - `catalytic_chat/__main__.py` - entry point for `python -m catalytic_chat.cli`
+  - `tests/test_cli_output.py` - tests for JSON stdout purity, exit code classification, deterministic outputs
+  - Standardized exit codes: 0 (OK), 1 (verification failed), 2 (invalid input), 3 (internal error)
+  - JSON output uses `canonical_json_bytes()` for deterministic field ordering
+  - No verification behavior changes; purely additive UX improvements
+
+
 
 ### Fixed
 - **Phase 6.12 — Receipt Index Determinism (Redo)**: Executor-derived receipt_index with no caller control
