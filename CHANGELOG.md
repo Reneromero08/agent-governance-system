@@ -4,6 +4,38 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ## [Unreleased] - 2025-12-31
 
+### Added
+- **Phase 7: Compression Protocol Specification & Validator** (THOUGHT/LAB/CAT_CHAT): Deterministic, bounded, fail-closed compression protocol validation.
+  - `THOUGHT/LAB/CAT_CHAT/PHASE_7_COMPRESSION_SPEC.md`: 320-line specification defining compression metrics, components, reconstruction procedures, invariants, threat model, verification checklist, error codes, deterministic computation rules.
+  - `THOUGHT/LAB/CAT_CHAT/SCHEMAS/compression_claim.schema.json`: 67-line schema with additionalProperties: false, required fields (claim_version, run_id, bundle_id, components, reported_metrics, claim_hash), component definitions (vector_db_only, symbol_lang, f3, cas).
+  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/compression_validator.py`: 470-line validator with 8-phase pipeline (input → claim → bundle → trust → receipts → attestations → metrics → claim), deterministic metric computation, strict_trust/strict_identity/require_attestation flags, comprehensive error handling with 28 error codes.
+  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cli.py`: Added `compress verify` command with --bundle, --receipts, --trust-policy, --claim, --strict-trust, --strict-identity, --require-attestation, --json, --quiet flags. Exit codes: 0 (OK), 1 (verification failed), 2 (invalid input), 3 (internal error).
+  - `THOUGHT/LAB/CAT_CHAT/tests/test_compression_validator.py`: 5 tests (token estimation, pass with matching claim, fail on metric mismatch, fail if not strictly verified, deterministic output).
+  - Deterministic guarantees: Identical inputs produce identical outputs via canonical JSON (sort_keys=True, separators=(",", ":")), SHA-256 hashing, artifact ordering by artifact_id, receipt ordering by receipt_index.
+  - Fail-closed guarantees: All failures have explicit error codes (BUNDLE_NOT_FOUND, INVALID_CLAIM_SCHEMA, METRIC_MISMATCH, NOT_IMPLEMENTED, etc.), no silent failures.
+  - Bounded guarantees: Only reads bundle.json, artifacts/, receipts/, claim.json, trust_policy.json (if provided). No repo-wide searches, no timestamps, no absolute paths.
+  - Reuses existing code: BundleVerifier, find_receipt_chain, verify_receipt_chain, receipt_canonical_bytes, canonical_json_bytes, verify_receipt_bytes, load_trust_policy_bytes, parse_trust_policy, build_trust_index.
+
+- **Phase 6.13 Multi-Validator Aggregation** (THOUGHT/LAB/CAT_CHAT): Multi-validator attestations for quorum validation (RECEIPT + MERKLE).
+  - `SCHEMAS/receipt.schema.json`: Added optional `attestations[]` array.
+  - `SCHEMAS/execution_policy.schema.json`: Added `receipt_attestation_quorum` and `merkle_attestation_quorum` fields.
+  - `SCHEMAS/aggregated_merkle_attestations.schema.json`: New schema for aggregated attestations.
+  - `catalytic_chat/attestation.py`: Added `verify_receipt_attestation_single()` and `verify_receipt_attestations_with_quorum()`.
+  - `catalytic_chat/merkle_attestation.py`: Added `load_aggregated_merkle_attestations()` and `verify_merkle_attestations_with_quorum()`.
+  - `tests/test_multi_validator_attestations.py`: Tests for deterministic ordering, quorum enforcement, backward compatibility.
+  - Deterministic ordering: attestations must be sorted by (validator_id, public_key.lower(), build_id or "").
+  - Reuses existing trust policy (strict_trust, strict_identity) for validation.
+  - Purely additive: single attestation path remains unchanged.
+- **Phase 6.14 External Verifier UX Improvements** (THOUGHT/LAB/CAT_CHAT): CI-friendly output modes and machine-readable summaries.
+  - `catalytic_chat/cli_output.py`: New module with standardized exit codes and JSON output helpers.
+  - `catalytic_chat/cli.py`: Added `--json` and `--quiet` flags to `bundle verify`, `bundle run`, `trust verify`.
+  - `catalytic_chat/__main__.py`: Entry point for `python -m catalytic_chat.cli`.
+  - `tests/test_cli_output.py`: Tests for JSON stdout purity, exit code classification, deterministic outputs.
+  - Standardized exit codes: 0 (OK), 1 (verification failed), 2 (invalid input), 3 (internal error).
+  - JSON output uses `canonical_json_bytes()` for deterministic field ordering.
+  - No verification behavior changes; purely additive UX improvements.
+
+
 ### Fixed
 - **Phase 6.11 Receipt Index Propagation**: Deterministic receipt_index assignment with strict verification.
   - `catalytic_chat/executor.py`: Assign receipt_index deterministically (filesystem scanning), emit contiguous [0,1,2] for chains.
