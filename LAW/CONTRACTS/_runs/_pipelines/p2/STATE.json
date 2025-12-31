@@ -1,1 +1,1 @@
-{"attempts":{},"completed_steps":[],"current_step_index":0,"pipeline_id":"p2","step_run_ids":{}}
+{"attempts":{"s1":1},"completed_steps":["s1"],"current_step_index":1,"pipeline_id":"p2","step_run_ids":{"s1":"pipeline-p2-s1-a1"}}

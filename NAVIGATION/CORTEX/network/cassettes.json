@@ -1,0 +1,39 @@
+{
+  "cassettes": [
+    {
+      "id": "governance",
+      "name": "Governance Documents",
+      "db_path": "NAVIGATION/CORTEX/db/system1.db",
+      "enabled": true,
+      "description": "Governance documents (CANON, ADRs, SKILLS, MAPS)",
+      "capabilities": ["vectors", "fts", "semantic_search"],
+      "type": "generic"
+    },
+    {
+      "id": "cat_chat",
+      "name": "CAT_CHAT Documentation Index",
+      "db_path": "THOUGHT/LAB/CAT_CHAT/cat_chat_index.db",
+      "enabled": true,
+      "description": "CAT_CHAT documentation and indexing information",
+      "capabilities": ["fts", "indexing_info", "merge_analysis"],
+      "type": "generic",
+      "query_template": "SELECT * FROM indexing_info_fts WHERE indexing_info_fts MATCH '{query}' ORDER BY rank LIMIT {limit}"
+    },
+    {
+      "id": "agi_research",
+      "name": "AGI Research Database",
+      "db_path": "THOUGHT/LAB/CAT_CHAT/CORTEX/_generated/system3.db",
+      "enabled": true,
+      "description": "AGI research database",
+      "capabilities": ["vectors", "research"],
+      "type": "generic"
+    }
+  ],
+  "auto_discover": true,
+  "discovery_paths": [
+    "NAVIGATION/CORTEX/network/cassettes/",
+    "THOUGHT/LAB/CAT_CHAT/"
+  ],
+  "config_version": "2.0",
+  "default_type": "generic"
+}

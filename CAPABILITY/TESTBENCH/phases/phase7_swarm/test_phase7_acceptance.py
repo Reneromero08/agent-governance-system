@@ -20,7 +20,7 @@ def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: l
     jobspec = {
         "job_id": job_id,
         "phase": 7,
-        "task_type": "test",
+        "task_type": "test_execution",
         "intent": intent,
         "inputs": {},
         "outputs": {
@@ -56,17 +56,17 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
         _rm(out1)
         _rm(out2)
 
-        _write_jobspec(jobspec1_rel, job_id=f"{p1}-job", intent=p1, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[str(out1)])
-        _write_jobspec(jobspec2_rel, job_id=f"{p2}-job", intent=p2, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[str(out2)])
+        _write_jobspec(jobspec1_rel, job_id=f"{p1}-job", intent=p1, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[str(out1.relative_to(REPO_ROOT)).replace("\\", "/")])
+        _write_jobspec(jobspec2_rel, job_id=f"{p2}-job", intent=p2, catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/phase7_test/domain"], durable_paths=[str(out2.relative_to(REPO_ROOT)).replace("\\", "/")])
 
         pipeline_spec_1 = {
             "pipeline_id": p1,
             "steps": [
                 {
                     "step_id": "s1",
-                    "jobspec_path": str(jobspec1_rel),
+                    "jobspec_path": str(jobspec1_rel.relative_to(REPO_ROOT)).replace("\\", "/"),
                     "memoize": False,
-                    "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{str(out1)}').parent.mkdir(parents=True, exist_ok=True);Path('{str(out1)}').write_text('{p1}')"],
+                    "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out1.as_posix()}').parent.mkdir(parents=True, exist_ok=True);Path('{out1.as_posix()}').write_text('{p1}')"],
                 }
             ]
         }
@@ -76,9 +76,9 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
             "steps": [
                 {
                     "step_id": "s1",
-                    "jobspec_path": str(jobspec2_rel),
+                    "jobspec_path": str(jobspec2_rel.relative_to(REPO_ROOT)).replace("\\", "/"),
                     "memoize": False,
-                    "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{str(out2)}').parent.mkdir(parents=True, exist_ok=True);Path('{str(out2)}').write_text('{p2}')"],
+                    "cmd": [sys.executable, "-c", f"from pathlib import Path;Path('{out2.as_posix()}').parent.mkdir(parents=True, exist_ok=True);Path('{out2.as_posix()}').write_text('{p2}')"],
                 }
             ]
         }
@@ -116,8 +116,8 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
         assert res.get("ok") is True, "The swarm run should succeed."
 
         # Verify chain exists
-        chain_path = tmp_path / "CHAIN.json"
-        assert chain_path.exists(), "CHAIN.json should be created by the swarm run"
+        chain_path = swarm_dir / "CHAIN.json"
+        assert chain_path.exists(), f"CHAIN.json should be created at {chain_path}"
 
     finally:
         chain_path = tmp_path / "CHAIN.json"

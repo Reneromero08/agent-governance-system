@@ -81,8 +81,8 @@ class PipelineRuntime:
     restricting system artifacts to CONTRACTS/_runs/.
     """
 
-    def __init__(self, *, project_root: Path):
-        self.project_root = project_root
+    def __init__(self, *, project_root: Path | str):
+        self.project_root = Path(project_root)
         self.schemas_dir = self.project_root / "LAW" / "SCHEMAS"
         self.jobspec_schema_path = self.schemas_dir / "jobspec.schema.json"
 
