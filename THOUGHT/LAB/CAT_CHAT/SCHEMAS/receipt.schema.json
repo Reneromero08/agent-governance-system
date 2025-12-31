@@ -180,6 +180,38 @@
         }
       }
     },
+    "attestations": {
+      "type": ["array", "null"],
+      "description": "Multiple attestation objects for multi-validator quorum. If present, takes precedence over attestation.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["scheme", "public_key", "signature"],
+        "properties": {
+          "scheme": {
+            "type": "string",
+            "description": "Signing scheme (e.g., ed25519)"
+          },
+          "public_key": {
+            "type": "string",
+            "description": "Public key (hex or base64)"
+          },
+          "validator_id": {
+            "type": "string",
+            "description": "Validator identifier"
+          },
+          "build_id": {
+            "type": "string",
+            "pattern": "^(git:[a-f0-9]{7,40}|file:[a-f0-9]{16,})$",
+            "description": "Deterministic build fingerprint"
+          },
+          "signature": {
+            "type": "string",
+            "description": "Signature (hex or base64)"
+          }
+        }
+      }
+    },
     "receipt_index": {
       "type": ["integer", "null"],
       "description": "Sequential index in receipt chain for deterministic ordering"

@@ -2,10 +2,20 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [Unreleased] - 2025-12-30
+## [Unreleased] - 2025-12-31
 
 ### Fixed
-- **Phase 6.10 Receipt Chain Ordering Hardening**: Deterministic ordering and fail-closed ambiguity detection.
+- **Phase 6.11 Receipt Index Propagation**: Deterministic receipt_index assignment with strict verification.
+  - `catalytic_chat/executor.py`: Assign receipt_index deterministically (filesystem scanning), emit contiguous [0,1,2] for chains.
+  - `catalytic_chat/receipt.py`: Hardened `verify_receipt_chain()` to enforce receipt_index contiguity, start at 0, strictly increasing.
+  - `tests/test_receipt_index_propagation.py`: Added tests for contiguous index enforcement, gap detection, nonzero start, mixed null/int.
+  - All receipt_index rules are fail-closed; indices must be exactly [0, 1, 2, ..., n-1] when present.
+- **Phase 6.12 Receipt Index Determinism (Redo)**: Executor-derived receipt_index with no caller control.
+  - `catalytic_chat/executor.py`: Removed `receipt_index` parameter from `__init__()`; executor always assigns receipt_index=0 deterministically.
+  - `catalytic_chat/executor.py`: No filesystem scanning for index assignment; receipt_index is pure execution order function.
+  - `tests/test_receipt_index_propagation.py`: Updated tests to verify receipt_index=0 (no caller control, no filesystem dependence).
+  - receipt_index is now executor-derived (always 0 per bundle), not caller-controlled, guaranteeing determinism.
+- **Phase 6.10 Receipt Chain Ordering**: Deterministic ordering and fail-closed ambiguity detection.
   - `SCHEMAS/receipt.schema.json`: Added `receipt_index` field (type: integer|null) for explicit chain ordering.
   - `catalytic_chat/receipt.py`: Updated `find_receipt_chain()` to sort by explicit ordering key (receipt_index > receipt_hash > filename), reject duplicate ordering keys, fail-closed on ambiguity.
   - `catalytic_chat/receipt.py`: Added `receipt_signed_bytes()` function for proper attestation verification.

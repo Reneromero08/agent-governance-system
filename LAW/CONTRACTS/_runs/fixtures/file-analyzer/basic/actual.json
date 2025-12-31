@@ -1,6 +1,4 @@
 {
-  "task": {
-    "id": "basic-test",
-    "type": "validate"
-  }
+  "status": "success",
+  "task_id": "basic-test"
 }

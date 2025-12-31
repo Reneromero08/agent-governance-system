@@ -6,7 +6,20 @@ See: [docs/catalytic-chat/CHANGELOG.md](docs/catalytic-chat/CHANGELOG.md)
 
 ## [Unreleased] - 2025-12-31
 
+### Fixed
+- **Phase 6.12 — Receipt Index Determinism (Redo)**: Executor-derived receipt_index with no caller control
+  - `catalytic_chat/executor.py` - removed `receipt_index` parameter from `__init__()`
+  - `catalytic_chat/executor.py` - removed `_find_next_receipt_index()` (no filesystem scanning)
+  - `catalytic_chat/executor.py` - always assigns `receipt_index = 0` deterministically
+  - `tests/test_receipt_index_propagation.py` - updated tests to verify receipt_index=0 with no caller control
+  - receipt_index is executor-derived, no filesystem scanning, pure execution order function
+
 ### Added
+- **Phase 6.11 — Receipt Index Propagation**: Deterministic receipt_index assignment with strict verification
+  - `catalytic_chat/executor.py` - assign receipt_index deterministically (no filesystem scanning)
+  - `catalytic_chat/receipt.py` - hardened `verify_receipt_chain()` to enforce contiguity, start at 0, strictly increasing
+  - `tests/test_receipt_index_propagation.py` - tests for contiguous index enforcement, gap detection, nonzero start, mixed null/int
+  - All receipt_index rules are fail-closed; indices must be exactly [0, 1, 2, ..., n-1] when present
 - **Phase 6.10 — Receipt Chain Ordering Hardening** - Deterministic, fail-closed receipt chain ordering
   - `SCHEMAS/receipt.schema.json` - added `receipt_index` field (integer | null) for explicit sequential ordering
   - `catalytic_chat/receipt.py` - `find_receipt_chain()` enhanced:

@@ -223,7 +223,10 @@ def main():
 
 class CatalyticStore:
     """Wrapper class for CAS operations."""
-    
+
+    def __init__(self, objects_dir: Path):
+        self.objects_dir = objects_dir
+
     @staticmethod
     def build(src: Path, out: Path, ignores: list = None):
         return build(src, out, ignores or [])
