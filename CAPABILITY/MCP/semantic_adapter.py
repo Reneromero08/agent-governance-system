@@ -28,7 +28,7 @@ except ImportError as e:
 
 try:
     from network.network_hub import SemanticNetworkHub
-    from network.cassettes.governance_cassette import GovernanceCassette
+    from network.generic_cassette import load_cassettes_from_json, create_cassette_from_config
     NETWORK_AVAILABLE = True
 except ImportError as e:
     print(f"[WARNING] Network tools not available: {e}", file=sys.stderr)
@@ -58,8 +58,7 @@ class SemanticMCPAdapter:
             # Initialize cassette network if available
             if NETWORK_AVAILABLE:
                 self.network_hub = SemanticNetworkHub()
-                governance_cassette = GovernanceCassette()
-                self.network_hub.register_cassette(governance_cassette)
+                self._load_cassettes_from_config()
             
             return {
                 "status": "initialized",
@@ -69,6 +68,24 @@ class SemanticMCPAdapter:
             }
         except Exception as e:
             return {"error": f"Initialization failed: {str(e)}"}
+    
+    def _load_cassettes_from_config(self):
+        """Load cassettes from JSON configuration using generic cassette system."""
+        config_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "network" / "cassettes.json"
+        if not config_path.exists():
+            print(f"[WARNING] Cassette config not found at {config_path}", file=sys.stderr)
+            return
+        
+        try:
+            # Use generic cassette loader with project root
+            cassettes = load_cassettes_from_json(config_path, PROJECT_ROOT)
+            
+            for cassette in cassettes:
+                self.network_hub.register_cassette(cassette)
+                print(f"[INFO] Loaded cassette: {cassette.cassette_id} ({cassette.description})")
+        
+        except Exception as e:
+            print(f"[ERROR] Failed to load cassette config: {e}", file=sys.stderr)
     
     def semantic_search_tool(self, args: Dict) -> Dict:
         """MCP tool: Semantic search using vector embeddings."""

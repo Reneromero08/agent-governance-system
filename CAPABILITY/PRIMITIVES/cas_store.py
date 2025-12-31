@@ -44,7 +44,36 @@ def canonical_json(obj) -> bytes:
 
 
 def normalize_path(rel: str) -> str:
-    return rel.replace('\\', '/')
+    """
+    Normalizes a repo-relative path:
+    - Replaces backslashes with forward slashes.
+    - Collapses '.' and '..' components.
+    - Rejects absolute paths or paths that escape the root via '..'.
+    """
+    if not isinstance(rel, str):
+        # Handle Path objects if passed
+        rel = str(rel)
+    
+    # Standardize separators
+    rel = rel.replace('\\', '/')
+    
+    # Reject absolute paths
+    if rel.startswith('/') or (len(rel) > 1 and rel[1] == ':'):
+        raise ValueError(f"Absolute path not allowed: {rel}")
+    
+    # Normalize components
+    parts = []
+    for part in rel.split('/'):
+        if not part or part == '.':
+            continue
+        if part == '..':
+            if not parts:
+                raise ValueError(f"Path traversal detected: {rel}")
+            parts.pop()
+        else:
+            parts.append(part)
+    
+    return '/'.join(parts)
 
 normalize_relpath = normalize_path
 
@@ -52,12 +81,14 @@ normalize_relpath = normalize_path
 def validate_path(rel: str, src_root: Path) -> bool:
     if len(rel) > MAX_PATH_LENGTH:
         return False
-    parts = Path(rel).parts
-    if '..' in parts:
-        return False
-    if Path(rel).is_absolute():
-        return False
-    if rel.startswith('/') or (len(rel) > 1 and rel[1] == ':'):
+    try:
+        normalized = normalize_path(rel)
+        if normalized != rel.replace('\\', '/').strip('/'):
+             # If normalization changed it significantly (like stripping dots), 
+             # we might want to check if it's still considered "valid" in the caller's eyes.
+             # But usually validate_path is used to check BEFORE normalization or AS part of it.
+             pass
+    except ValueError:
         return False
     return True
 
@@ -225,7 +256,37 @@ class CatalyticStore:
     """Wrapper class for CAS operations."""
 
     def __init__(self, objects_dir: Path):
-        self.objects_dir = objects_dir
+        # objects_dir should point to the 'cas' subdirectory if using build() structure,
+        # or the root of the CAS storage.
+        self.objects_dir = Path(objects_dir)
+
+    def object_path(self, hash_hex: str) -> Path:
+        """Returns the deterministic path for a hash."""
+        if not hash_hex or len(hash_hex) < 2:
+             raise ValueError(f"Invalid hash: {hash_hex}")
+        return self.objects_dir / hash_hex[:2] / hash_hex
+
+    def put_bytes(self, data: bytes) -> str:
+        """Writes bytes to CAS and returns the hash."""
+        h = sha256_bytes(data)
+        path = self.object_path(h)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        if not path.exists():
+            # Use atomic write to avoid partial files
+            tmp = path.with_name(path.name + ".tmp")
+            tmp.write_bytes(data)
+            os.replace(tmp, path)
+        return h
+
+    def get_bytes(self, hash_hex: str) -> bytes:
+        """Reads bytes from CAS."""
+        path = self.object_path(hash_hex)
+        if not path.exists():
+            raise FileNotFoundError(f"Hash not found in CAS: {hash_hex}")
+        data = path.read_bytes()
+        if sha256_bytes(data) != hash_hex:
+            raise ValueError(f"CAS corruption detected for {hash_hex}")
+        return data
 
     @staticmethod
     def build(src: Path, out: Path, ignores: list = None):

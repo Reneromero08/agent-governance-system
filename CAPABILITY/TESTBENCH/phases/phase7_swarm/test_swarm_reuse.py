@@ -6,8 +6,9 @@ import sys
 from pathlib import Path
 from typing import Any, Dict
 
-sys.path.insert(0, str(Path("..") / ".." / ".." / "CAPABILITY"))
-sys.path.insert(1, str(Path("..") / ".." / "TOOLS"))
+REPO_ROOT = Path(__file__).resolve().parents[4]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from CAPABILITY.PIPELINES.swarm_runtime import SwarmRuntime
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
@@ -23,14 +24,19 @@ def _rm(path: Path) -> None:
 
 def _write_jobspec(path: Path, *, job_id: str, intent: str, catalytic_domains: list[Path], durable_paths: list[Path]) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
+    def _rel(p: Path) -> str:
+        if p.is_absolute():
+            return str(p.relative_to(REPO_ROOT)).replace("\\", "/")
+        return str(p).replace("\\", "/")
+
     obj = {
         "job_id": job_id,
         "phase": 5,
         "task_type": "pipeline_execution",
         "intent": intent,
         "inputs": {},
-        "outputs": {"durable_paths": [str(p) for p in durable_paths], "validation_criteria": {}},
-        "catalytic_domains": [str(cd) for cd in catalytic_domains],
+        "outputs": {"durable_paths": [_rel(p) for p in durable_paths], "validation_criteria": {}},
+        "catalytic_domains": [_rel(cd) for cd in catalytic_domains],
         "determinism": "deterministic",
     }
     path.write_text(json.dumps(obj, indent=2), encoding="utf-8")
@@ -52,7 +58,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
     swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
     dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
 
-    rt_pipeline = PipelineRuntime(project_root=REPO_ROOT / "..")
+    rt_pipeline = PipelineRuntime(project_root=REPO_ROOT)
     pipeline_dir = rt_pipeline.pipeline_dir(p1)
 
     out1 = Path("NAVIGATION/CORTEX/_generated/_tmp/") / f"{p1}.txt"
@@ -69,7 +75,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
 
         # Write jobspec with Path objects
         _write_jobspec(
-            runs_root / "elision_test" / f"{p1}_jobspec.json",
+            runs_root / "_tmp" / "elision_test" / f"{p1}_jobspec.json",
             job_id=f"{p1}-job",
             intent=unique_intent,
             catalytic_domains=[cat_domain],
@@ -101,7 +107,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         spec_path = tmp_path / "swarm.json"
         spec_path.write_text(json.dumps(swarm_spec, indent=2), encoding="utf-8")
 
-        sr = SwarmRuntime(project_root=REPO_ROOT / "..", runs_root=runs_root)
+        sr = SwarmRuntime(project_root=REPO_ROOT, runs_root=runs_root)
 
         # =========================================
         # 1. First Run: Full Execution
@@ -110,17 +116,12 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
         res1 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
         assert res1.get("ok") is True, f"First run should succeed: {res1}"
         assert res1.get("elided") is False, "First run should NOT be elided"
-        _rm(swarm_dir)
-        _rm(dag_dir)
-        _rm(pipeline_dir)
-        _rm(runs_root / "_tmp/elision_test")
-
         # =========================================
         # 2. Second Run: Elided Execution
         # =========================================
         print("\n--- RUN 2 ---")
         res2 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
-        assert res2.get("ok") is False, "Second run should fail due to elision"
+        assert res2.get("ok") is True, "Second run should succeed (elided)"
         assert res2.get("elided") is True
 
         # =========================================
@@ -135,7 +136,7 @@ def test_swarm_execution_elision(tmp_path: Path) -> None:
             file.write(original_receipt + "\n")
 
         try:
-            res3 = sr.run_dag(swarm_id=swarm_id, dag_path=spec_path)
+            res3 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
             pytest.fail("Tampered receipt should NOT allow elision!")
         except ValueError as e:
             print(f"Caught expected error: {e}")

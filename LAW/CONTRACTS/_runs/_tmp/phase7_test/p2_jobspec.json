@@ -1,12 +1,12 @@
 {
   "job_id": "p2-job",
   "phase": 7,
-  "task_type": "test",
+  "task_type": "test_execution",
   "intent": "p2",
   "inputs": {},
   "outputs": {
     "durable_paths": [
-      "D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_tmp\\p2.txt"
+      "LAW/CONTRACTS/_runs/_tmp/p2.txt"
     ],
     "validation_criteria": {}
   },
