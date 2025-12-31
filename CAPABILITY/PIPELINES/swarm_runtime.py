@@ -25,10 +25,10 @@ class SwarmRuntime:
     Expands swarm specifications into a runnable Pipeline DAG.
     """
 
-    def __init__(self, *, project_root: Path, runs_root: Path):
-        self.project_root = project_root
-        self.runs_root = runs_root
-        self.rt = PipelineRuntime(project_root=project_root)
+    def __init__(self, *, project_root: Path | str, runs_root: Path | str):
+        self.project_root = Path(project_root)
+        self.runs_root = Path(runs_root)
+        self.rt = PipelineRuntime(project_root=self.project_root)
         self.receipts_store = self.runs_root / "_pipelines" / "_swarms" / "_receipts"
         self.receipts_store.mkdir(parents=True, exist_ok=True)
 
@@ -149,7 +149,7 @@ class SwarmRuntime:
         except Exception:
             return None
 
-    def run(self, *, swarm_id: str, spec_path: Path) -> Dict[str, Any]:
+    def run(self, *, swarm_id: str, spec_path: Path | str) -> Dict[str, Any]:
         """
         1. Compute swarm equivalence hash.
         2. Check for reuse (elision).
@@ -157,6 +157,7 @@ class SwarmRuntime:
         4. Else: Expand node specs, Init pipelines, Run DAG.
         5. Verify & Emit receipts.
         """
+        spec_path = Path(spec_path)
         swarm_dir = self._swarm_dir(swarm_id)
         swarm_dir.mkdir(parents=True, exist_ok=True)
 

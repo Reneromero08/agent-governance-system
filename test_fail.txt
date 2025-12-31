@@ -1,0 +1,74 @@
+============================= test session starts =============================
+platform win32 -- Python 3.11.6, pytest-9.0.2, pluggy-1.6.0 -- C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe
+cachedir: .pytest_cache
+rootdir: D:\CCC 2.0\AI\agent-governance-system
+plugins: anyio-4.12.0
+collecting ... collected 1 item
+
+CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py::test_swarm_execution_elision FAILED [100%]
+
+================================== FAILURES ===================================
+________________________ test_swarm_execution_elision _________________________
+CAPABILITY\TESTBENCH\phases\phase7_swarm\test_swarm_reuse.py:128: in test_swarm_execution_elision
+    res2 = sr.run(swarm_id=swarm_id, spec_path=spec_path)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\PIPELINES\swarm_runtime.py:240: in run
+    dag_res = run_dag(
+CAPABILITY\PIPELINES\pipeline_dag.py:638: in run_dag
+    rt.run(pipeline_id=node)
+CAPABILITY\PIPELINES\pipeline_runtime.py:213: in run
+    self._execute_step(spec=spec, step=step, run_id=run_id)
+CAPABILITY\PIPELINES\pipeline_runtime.py:413: in _execute_step
+    jobspec = self._load_jobspec(step.jobspec_path)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+CAPABILITY\PIPELINES\pipeline_runtime.py:402: in _load_jobspec
+    obj = json.loads(abs_path.read_text(encoding="utf-8"))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\pathlib.py:1058: in read_text
+    with self.open(mode='r', encoding=encoding, errors=errors) as f:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\pathlib.py:1044: in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   FileNotFoundError: [Errno 2] No such file or directory: 'D:\\CCC 2.0\\AI\\agent-governance-system\\LAW\\CONTRACTS\\_runs\\_tmp\\elision_test\\elision-p1_jobspec.json'
+---------------------------- Captured stdout call -----------------------------
+
+--- RUN 1 ---
+[catalytic] Starting catalytic run: pipeline-elision-p1-s1-a1
+
+[catalytic] Phase 0: Preflight validation...
+
+[catalytic] Preflight passed: JobSpec is valid
+
+[catalytic] Phase 1: Capturing pre-snapshots...
+
+[catalytic] Snapshots pre: LAW\CONTRACTS\_runs\_tmp\elision_test\cat_domain (0 files)
+
+[catalytic] Phase 2: Executing command: C:\Users\rene_\AppData\Local\Programs\Python\Python311\python.exe -c from pathlib import Path;Path('NAVIGATION\CORTEX\_generated\_tmp').mkdir(parents=True, exist_ok=True);Path('NAVIGATION\CORTEX\_generated\_tmp\elision-p1.txt').write_text('elision-p1')
+
+[catalytic] Command exited with code 0
+
+[catalytic] Phase 3: Capturing post-snapshots...
+
+[catalytic] Snapshots post: LAW\CONTRACTS\_runs\_tmp\elision_test\cat_domain (0 files)
+
+[catalytic] Phase 4: Verifying restoration...
+
+[catalytic] SUCCESS: Catalytic domains fully restored
+
+[catalytic] Phase 5: Writing canonical artifact set...
+
+[catalytic] Canonical artifact set written to D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\pipeline-elision-p1-s1-a1
+
+[catalytic] PROOF.json: verified=True, condition=RESTORED_IDENTICAL
+
+[catalytic] Run completed successfully with verified restoration.
+
+
+--- RUN 2 ---
+---------------------------- Captured stderr call -----------------------------
+DEBUG: execute cmd=['C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe', '-c', "from pathlib import Path;Path('NAVIGATION\\CORTEX\\_generated\\_tmp').mkdir(parents=True, exist_ok=True);Path('NAVIGATION\\CORTEX\\_generated\\_tmp\\elision-p1.txt').write_text('elision-p1')"]
+
+=========================== short test summary info ===========================
+FAILED CAPABILITY/TESTBENCH/phases/phase7_swarm/test_swarm_reuse.py::test_swarm_execution_elision
+============================== 1 failed in 0.62s ==============================

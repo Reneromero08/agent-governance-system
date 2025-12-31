@@ -1,0 +1,1 @@
+{"pipeline_id":"p1","steps":[{"pipeline_id":"p1","prev_step_proof_hash":null,"run_id":"pipeline-p1-s1-a1","step_domain_roots_hash":"b517cc0a1db4a8634c82493dfa9fc0a970e687a3e440116f5f88717a0ee3fd01","step_id":"s1","step_proof_hash":"bf7c424c7936a034c16c5dbc8fe9ac0dc1a4f48af1992adca51beae7c1d31381"}]}
