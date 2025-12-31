@@ -12,11 +12,45 @@ Usage:
 """
 
 import argparse
+import hashlib
 import json
 import os
+import re
+import subprocess
 import sys
+import tempfile
+import time
+import uuid
+from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Callable, Dict, Iterator, List, Optional
+
+# =============================================================================
+# SAFE PRIMITIVES (Ported from CAT LAB server_CATDPT.py)
+# =============================================================================
+
+# Windows-compatible file locking
+if sys.platform == 'win32':
+    import msvcrt
+    def _lock_file(f, exclusive: bool = True):
+        """Lock file on Windows."""
+        msvcrt.locking(f.fileno(), msvcrt.LK_NBLCK if exclusive else msvcrt.LK_NBRLCK, 1)
+    def _unlock_file(f):
+        """Unlock file on Windows."""
+        try:
+            f.seek(0)
+            msvcrt.locking(f.fileno(), msvcrt.LK_UNLCK, 1)
+        except Exception:
+            pass
+else:
+    import fcntl
+    def _lock_file(f, exclusive: bool = True):
+        """Lock file on Unix."""
+        fcntl.flock(f.fileno(), fcntl.LOCK_EX if exclusive else fcntl.LOCK_SH)
+    def _unlock_file(f):
+        """Unlock file on Unix."""
+        fcntl.flock(f.fileno(), fcntl.LOCK_UN)
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CAPABILITY_ROOT = PROJECT_ROOT / "CAPABILITY"
@@ -32,6 +66,940 @@ BOARD_ROOT = LAW_ROOT / "CONTRACTS" / "_runs" / "message_board"
 BOARD_ROLES_PATH = CAPABILITY_ROOT / "MCP" / "board_roles.json"
 INBOX_ROOT = PROJECT_ROOT / "INBOX" / "agents" / "Local Models"
 
+# =============================================================================
+# SPECTRUM-02 Validator Constants
+# =============================================================================
+VALIDATOR_SEMVER = "1.0.0"
+SUPPORTED_VALIDATOR_SEMVERS = {"1.0.0", "1.0.1", "1.1.0"}
+
+# Cache for build ID (computed once per process)
+_VALIDATOR_BUILD_ID_CACHE: Optional[str] = None
+
+
+def get_validator_build_id() -> str:
+    """Get deterministic validator build fingerprint.
+
+    Preferred: git commit SHA (short) if repo is a git checkout.
+    Fallback: SHA-256 of MCP/server.py file bytes.
+
+    Returns a non-empty string. Result is cached for process lifetime.
+    """
+    global _VALIDATOR_BUILD_ID_CACHE
+
+    if _VALIDATOR_BUILD_ID_CACHE is not None:
+        return _VALIDATOR_BUILD_ID_CACHE
+
+    # Try git commit SHA first
+    try:
+        result = subprocess.run(
+            ["git", "rev-parse", "--short", "HEAD"],
+            cwd=PROJECT_ROOT,
+            capture_output=True,
+            text=True,
+            timeout=5
+        )
+        if result.returncode == 0 and result.stdout.strip():
+            _VALIDATOR_BUILD_ID_CACHE = f"git:{result.stdout.strip()}"
+            return _VALIDATOR_BUILD_ID_CACHE
+    except (subprocess.TimeoutExpired, FileNotFoundError, OSError):
+        pass
+
+    # Fallback: hash of server.py
+    server_path = Path(__file__)
+    if server_path.exists():
+        sha = hashlib.sha256()
+        with open(server_path, "rb") as f:
+            sha.update(f.read())
+        _VALIDATOR_BUILD_ID_CACHE = f"file:{sha.hexdigest()[:12]}"
+        return _VALIDATOR_BUILD_ID_CACHE
+
+    # Ultimate fallback (should never happen)
+    _VALIDATOR_BUILD_ID_CACHE = "unknown"
+    return _VALIDATOR_BUILD_ID_CACHE
+
+
+# Task state machine transitions (valid state changes)
+TASK_STATES = {
+    "pending": ["acknowledged", "cancelled"],
+    "acknowledged": ["processing", "cancelled"],
+    "processing": ["completed", "failed", "timeout", "cancelled"],
+    "completed": [],  # Terminal state
+    "failed": [],     # Terminal state
+    "timeout": [],    # Terminal state
+    "cancelled": [],  # Terminal state
+}
+
+# Configuration constants
+MAX_FILE_SIZE_BYTES = 10 * 1024 * 1024  # 10MB limit for file reads
+MAX_RESULTS_PER_PAGE = 100
+DEFAULT_POLL_INTERVAL = 5
+MAX_POLL_INTERVAL = 60
+BACKOFF_MULTIPLIER = 1.5
+
+# =============================================================================
+# CMP-01 ROOT RULES - Strict path governance (6-bucket structure)
+# =============================================================================
+
+# Contracts directory (runs/ledgers)
+CONTRACTS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
+
+# Skills directory
+SKILLS_DIR = PROJECT_ROOT / "CAPABILITY" / "SKILLS"
+
+# Durable output roots (only places files may persist after run)
+DURABLE_ROOTS = [
+    "LAW/CONTRACTS/_runs/",
+    "NAVIGATION/CORTEX/_generated/",
+    "MEMORY/LLM_PACKER/_packs/",
+]
+
+# Catalytic domains (temporary, must be restored byte-identical)
+CATALYTIC_ROOTS = [
+    "LAW/CONTRACTS/_runs/_tmp/",
+    "NAVIGATION/CORTEX/_generated/_tmp/",
+    "MEMORY/LLM_PACKER/_packs/_tmp/",
+    "CAPABILITY/TOOLS/_tmp/",
+    "CAPABILITY/MCP/_tmp/",
+]
+
+# Forbidden roots (must never be written to or overlapped)
+FORBIDDEN_ROOTS = [
+    "LAW/CANON/",
+    "AGENTS.md",
+]
+
+
+def _atomic_write_jsonl(file_path: Path, line: str) -> bool:
+    """Atomically append a single line to a JSONL file.
+
+    Uses write-to-temp-then-append pattern with file locking to prevent:
+    1. Partial writes from crashes
+    2. Interleaved writes from concurrent processes
+
+    Returns True on success, False on failure.
+    """
+    try:
+        # Ensure parent directory exists
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Write to temp file first (atomic on most filesystems)
+        fd, temp_path = tempfile.mkstemp(
+            suffix='.tmp',
+            prefix='jsonl_',
+            dir=file_path.parent
+        )
+        try:
+            os.write(fd, (line.rstrip('\n') + '\n').encode('utf-8'))
+            os.fsync(fd)  # Force flush to disk
+        finally:
+            os.close(fd)
+
+        # Now append temp content to target with locking
+        with open(file_path, 'a', encoding='utf-8') as f:
+            _lock_file(f, exclusive=True)
+            try:
+                with open(temp_path, 'r', encoding='utf-8') as tmp:
+                    f.write(tmp.read())
+                f.flush()
+                os.fsync(f.fileno())
+            finally:
+                _unlock_file(f)
+
+        # Clean up temp file
+        os.unlink(temp_path)
+        return True
+
+    except Exception as e:
+        # Clean up temp file on error
+        try:
+            if 'temp_path' in locals():
+                os.unlink(temp_path)
+        except Exception:
+            pass
+        return False
+
+
+def _atomic_rewrite_jsonl(
+    file_path: Path,
+    transform: Callable[[List[Dict]], List[Dict]]
+) -> bool:
+    """Atomically rewrite a JSONL file with a transformation function.
+
+    Uses read-transform-write pattern:
+    1. Read all lines (with lock on read)
+    2. Apply transformation
+    3. Write to temp file
+    4. Atomic rename over original
+
+    Returns True on success, False on failure.
+    """
+    try:
+        file_path.parent.mkdir(parents=True, exist_ok=True)
+
+        # Create/touch file if it doesn't exist
+        if not file_path.exists():
+            file_path.touch()
+
+        # Read phase - use lock to read
+        entries = []
+        with open(file_path, 'r', encoding='utf-8') as f:
+            _lock_file(f, exclusive=False)
+            try:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        try:
+                            entries.append(json.loads(line))
+                        except json.JSONDecodeError:
+                            continue  # Skip malformed lines
+            finally:
+                _unlock_file(f)
+
+        # Apply transformation
+        transformed = transform(entries)
+
+        # Write to temp file
+        fd, temp_path = tempfile.mkstemp(
+            suffix='.tmp',
+            prefix='jsonl_',
+            dir=file_path.parent
+        )
+        try:
+            for entry in transformed:
+                os.write(fd, (json.dumps(entry) + '\n').encode('utf-8'))
+            os.fsync(fd)
+        finally:
+            os.close(fd)
+
+        # Atomic rename (works on Unix, best-effort on Windows)
+        temp_path_obj = Path(temp_path)
+        if sys.platform == 'win32':
+            # Windows needs file to be closed before rename
+            import shutil
+            backup_path = file_path.with_suffix('.bak')
+            try:
+                # Create backup
+                if file_path.exists():
+                    shutil.copy2(file_path, backup_path)
+                # Replace original with temp
+                shutil.move(str(temp_path_obj), str(file_path))
+                # Remove backup
+                if backup_path.exists():
+                    backup_path.unlink()
+            except Exception:
+                # Restore from backup on failure
+                if backup_path.exists():
+                    shutil.copy2(backup_path, file_path)
+                    backup_path.unlink()
+                raise
+        else:
+            os.replace(temp_path, file_path)
+
+        return True
+
+    except Exception as e:
+        # Clean up temp file if it exists
+        try:
+            if 'temp_path' in locals() and Path(temp_path).exists():
+                Path(temp_path).unlink()
+        except Exception:
+            pass
+        return False
+
+
+def _read_jsonl_streaming(
+    file_path: Path,
+    filter_fn: Optional[Callable[[Dict], bool]] = None,
+    limit: int = MAX_RESULTS_PER_PAGE,
+    offset: int = 0
+) -> Iterator[Dict]:
+    """Stream JSONL file with optional filtering and pagination.
+
+    Yields entries one at a time without loading entire file into memory.
+    """
+    if not file_path.exists():
+        return
+
+    count = 0
+    skipped = 0
+
+    with open(file_path, 'r', encoding='utf-8') as f:
+        _lock_file(f, exclusive=False)  # Shared lock for reading
+        try:
+            for line in f:
+                line = line.strip()
+                if not line:
+                    continue
+
+                try:
+                    entry = json.loads(line)
+                except json.JSONDecodeError:
+                    continue  # Skip malformed lines
+
+                # Apply filter
+                if filter_fn and not filter_fn(entry):
+                    continue
+
+                # Apply offset
+                if skipped < offset:
+                    skipped += 1
+                    continue
+
+                # Apply limit
+                if count >= limit:
+                    break
+
+                yield entry
+                count += 1
+        finally:
+            _unlock_file(f)
+
+
+def _validate_task_state_transition(current: str, target: str) -> bool:
+    """Validate that a task state transition is allowed."""
+    if current not in TASK_STATES:
+        return False
+    return target in TASK_STATES.get(current, [])
+
+
+def _validate_task_spec(task_spec: Dict) -> Dict:
+    """Validate task_spec has required fields and valid structure.
+
+    Returns: {"valid": bool, "errors": [...]}
+    """
+    errors = []
+
+    # Required fields
+    required_fields = ["task_id", "task_type"]
+    for field in required_fields:
+        if field not in task_spec:
+            errors.append(f"Missing required field: {field}")
+
+    # Validate task_type
+    valid_task_types = ["file_operation", "code_adapt", "validate", "research"]
+    if "task_type" in task_spec and task_spec["task_type"] not in valid_task_types:
+        errors.append(f"Invalid task_type: {task_spec['task_type']}. Must be one of: {valid_task_types}")
+
+    # Validate task_id format (alphanumeric with hyphens/underscores)
+    if "task_id" in task_spec:
+        task_id = task_spec["task_id"]
+        if not isinstance(task_id, str) or not re.match(r'^[\w\-]+$', task_id):
+            errors.append(f"Invalid task_id format: must be alphanumeric with hyphens/underscores")
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
+
+def _compute_hash(file_path: Path) -> str:
+    """Compute SHA-256 hash of a file."""
+    sha = hashlib.sha256()
+    with open(file_path, "rb") as f:
+        for chunk in iter(lambda: f.read(8192), b""):
+            sha.update(chunk)
+    return sha.hexdigest()
+
+
+def _validate_against_schema(instance: Dict, schema: Dict) -> Dict:
+    """Validate JSON instance against schema.
+    
+    Basic validation without jsonschema library:
+    - Checks required fields
+    - Validates enum values for task_type
+    - Returns errors list if invalid
+    """
+    errors = []
+    
+    # Check input_schema if present
+    input_schema = schema.get("input_schema", schema)
+    
+    # Check required fields
+    required_fields = input_schema.get("required", [])
+    for field in required_fields:
+        if field not in instance:
+            errors.append(f"Missing required field: {field}")
+    
+    # Validate properties with enums
+    properties = input_schema.get("properties", {})
+    for field, field_schema in properties.items():
+        if field in instance and "enum" in field_schema:
+            if instance[field] not in field_schema["enum"]:
+                errors.append(
+                    f"Invalid value for '{field}': '{instance[field]}'. "
+                    f"Must be one of: {field_schema['enum']}"
+                )
+    
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
+
+# =============================================================================
+# CMP-01 PATH VALIDATION (Ported from CAT LAB server_CATDPT.py)
+# Forbidden overlap containment + output existence checks
+# =============================================================================
+
+def _is_path_under_root(path: Path, root: Path) -> bool:
+    """Component-safe check if path is under root (not just string prefix)."""
+    try:
+        # Python 3.9+ has is_relative_to
+        return path.is_relative_to(root)
+    except AttributeError:
+        # Python 3.8 fallback
+        try:
+            path.relative_to(root)
+            return True
+        except ValueError:
+            return False
+
+
+def _validate_single_path(
+    raw_path: str,
+    json_pointer: str,
+    allowed_roots: List[str],
+    root_error_code: str
+) -> List[Dict]:
+    """Validate a single path against CMP-01 rules.
+    
+    Returns list of error dicts (empty if valid).
+    """
+    errors = []
+
+    # 1. Reject absolute paths
+    if Path(raw_path).is_absolute():
+        errors.append({
+            "code": "PATH_ESCAPES_REPO_ROOT",
+            "message": f"Absolute paths are not allowed: {raw_path}",
+            "path": json_pointer,
+            "details": {"declared": raw_path, "reason": "absolute_path"}
+        })
+        return errors
+
+    # 2. Reject traversal segments
+    path_parts = Path(raw_path).parts
+    if ".." in path_parts:
+        errors.append({
+            "code": "PATH_CONTAINS_TRAVERSAL",
+            "message": f"Path contains forbidden traversal segment '..': {raw_path}",
+            "path": json_pointer,
+            "details": {"declared": raw_path, "segments": list(path_parts)}
+        })
+        return errors
+
+    # 3. Resolve and check containment under PROJECT_ROOT
+    abs_path = (PROJECT_ROOT / raw_path).resolve()
+    if not _is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+        errors.append({
+            "code": "PATH_ESCAPES_REPO_ROOT",
+            "message": f"Path escapes repository root: {raw_path}",
+            "path": json_pointer,
+            "details": {"declared": raw_path, "resolved": str(abs_path), "repo_root": str(PROJECT_ROOT)}
+        })
+        return errors
+
+    # 4. Check forbidden overlap
+    for forbidden in FORBIDDEN_ROOTS:
+        forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
+        # Check both directions of containment
+        if _is_path_under_root(abs_path, forbidden_abs) or _is_path_under_root(forbidden_abs, abs_path):
+            errors.append({
+                "code": "FORBIDDEN_PATH_OVERLAP",
+                "message": f"Path overlaps forbidden root '{forbidden}': {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "forbidden_root": forbidden}
+            })
+            return errors
+
+    # 5. Check under allowed roots
+    under_allowed = False
+    for root in allowed_roots:
+        root_abs = (PROJECT_ROOT / root).resolve()
+        if _is_path_under_root(abs_path, root_abs):
+            under_allowed = True
+            break
+
+    if not under_allowed:
+        errors.append({
+            "code": root_error_code,
+            "message": f"Path not under any allowed root: {raw_path}",
+            "path": json_pointer,
+            "details": {"declared": raw_path, "allowed_roots": allowed_roots}
+        })
+
+    return errors
+
+
+def _check_containment_overlap(
+    paths: List[str],
+    json_pointer_base: str
+) -> List[Dict]:
+    """Check for containment overlap between paths in the same list.
+    
+    Policy: Exact duplicates (same resolved path) are allowed/deduped.
+    Only flag when one path strictly contains another.
+    """
+    errors = []
+    abs_paths = []
+
+    # Store (original_index, raw_path, abs_path) to preserve correct indices
+    for orig_idx, raw_path in enumerate(paths):
+        if not Path(raw_path).is_absolute() and ".." not in Path(raw_path).parts:
+            abs_paths.append((orig_idx, raw_path, (PROJECT_ROOT / raw_path).resolve()))
+
+    for i, (idx_a, raw_a, abs_a) in enumerate(abs_paths):
+        for j, (idx_b, raw_b, abs_b) in enumerate(abs_paths):
+            if i >= j:
+                continue
+            
+            # Allow exact duplicates (same resolved path)
+            if abs_a == abs_b:
+                continue
+            
+            # Check if one strictly contains the other (both directions)
+            if _is_path_under_root(abs_a, abs_b) or _is_path_under_root(abs_b, abs_a):
+                # Use smaller original index for deterministic path pointer
+                smaller_idx = min(idx_a, idx_b)
+                errors.append({
+                    "code": "PATH_OVERLAP",
+                    "message": f"Paths have containment overlap: '{raw_a}' and '{raw_b}'",
+                    "path": f"{json_pointer_base}/{smaller_idx}",
+                    "details": {
+                        "index_a": idx_a,
+                        "index_b": idx_b,
+                        "path_a": raw_a,
+                        "path_b": raw_b
+                    }
+                })
+
+    return errors
+
+
+def _validate_jobspec_paths(task_spec: Dict) -> Dict:
+    """Validate all paths in a JobSpec against CMP-01 rules.
+    
+    Checks:
+    - catalytic_domains must be under CATALYTIC_ROOTS
+    - outputs.durable_paths must be under DURABLE_ROOTS
+    - No forbidden overlaps
+    - No traversal escapes
+    - No containment overlap within same list
+    
+    Returns: {"valid": bool, "errors": [error_dict, ...]}
+    """
+    errors = []
+
+    # Validate catalytic_domains
+    catalytic_domains = task_spec.get("catalytic_domains", [])
+    for idx, domain in enumerate(catalytic_domains):
+        path_errors = _validate_single_path(
+            domain,
+            f"/catalytic_domains/{idx}",
+            CATALYTIC_ROOTS,
+            "CATALYTIC_OUTSIDE_ROOT"
+        )
+        errors.extend(path_errors)
+
+    # Check containment overlap within catalytic_domains
+    if len(catalytic_domains) > 1:
+        errors.extend(_check_containment_overlap(
+            catalytic_domains,
+            "/catalytic_domains"
+        ))
+
+    # Validate outputs.durable_paths
+    outputs = task_spec.get("outputs", {})
+    durable_paths = outputs.get("durable_paths", [])
+    for idx, dpath in enumerate(durable_paths):
+        path_errors = _validate_single_path(
+            dpath,
+            f"/outputs/durable_paths/{idx}",
+            DURABLE_ROOTS,
+            "OUTPUT_OUTSIDE_DURABLE_ROOT"
+        )
+        errors.extend(path_errors)
+
+    # Check containment overlap within durable_paths
+    if len(durable_paths) > 1:
+        errors.extend(_check_containment_overlap(
+            durable_paths,
+            "/outputs/durable_paths"
+        ))
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
+
+def _verify_post_run_outputs(run_id: str) -> Dict:
+    """Verify declared outputs exist after run completion.
+    
+    Called from skill_complete to enforce output existence.
+    
+    Returns: {"valid": bool, "errors": [error_dict, ...]}
+    """
+    errors = []
+    run_dir = CONTRACTS_DIR / run_id
+
+    # Load TASK_SPEC.json
+    task_spec_path = run_dir / "TASK_SPEC.json"
+    if not task_spec_path.exists():
+        return {
+            "valid": False,
+            "errors": [{
+                "code": "TASK_SPEC_MISSING",
+                "message": f"TASK_SPEC.json not found in run directory",
+                "path": "/",
+                "details": {"run_id": run_id, "expected": str(task_spec_path)}
+            }]
+        }
+
+    with open(task_spec_path) as f:
+        task_spec = json.load(f)
+
+    outputs = task_spec.get("outputs", {})
+    durable_paths = outputs.get("durable_paths", [])
+
+    for idx, raw_path in enumerate(durable_paths):
+        json_pointer = f"/outputs/durable_paths/{idx}"
+
+        # 0. Report errors for absolute/traversal paths (do not silently skip)
+        if Path(raw_path).is_absolute():
+            errors.append({
+                "code": "PATH_ESCAPES_REPO_ROOT",
+                "message": f"Absolute paths are not allowed: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "reason": "absolute_path"}
+            })
+            continue  # Skip further checks for this entry
+
+        if ".." in Path(raw_path).parts:
+            errors.append({
+                "code": "PATH_CONTAINS_TRAVERSAL",
+                "message": f"Path contains forbidden traversal segment '..': {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "segments": list(Path(raw_path).parts)}
+            })
+            continue  # Skip further checks for this entry
+
+        abs_path = (PROJECT_ROOT / raw_path).resolve()
+
+        # 0.5 Check containment under PROJECT_ROOT (catches symlink escapes)
+        if not _is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+            errors.append({
+                "code": "PATH_ESCAPES_REPO_ROOT",
+                "message": f"Path escapes repository root (possibly via symlink): {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "resolved": str(abs_path), "repo_root": str(PROJECT_ROOT)}
+            })
+            continue  # Skip further checks for this entry
+
+        # 1. Check forbidden overlap (hard stop for this entry if found)
+        forbidden_hit = False
+        for forbidden in FORBIDDEN_ROOTS:
+            forbidden_abs = (PROJECT_ROOT / forbidden).resolve()
+            if _is_path_under_root(abs_path, forbidden_abs) or _is_path_under_root(forbidden_abs, abs_path):
+                errors.append({
+                    "code": "FORBIDDEN_PATH_OVERLAP",
+                    "message": f"Output overlaps forbidden root '{forbidden}': {raw_path}",
+                    "path": json_pointer,
+                    "details": {"declared": raw_path, "forbidden_root": forbidden}
+                })
+                forbidden_hit = True
+                break  # Exit forbidden loop
+        
+        if forbidden_hit:
+            continue  # Skip durable/existence checks for this entry
+
+        # 2. Check under DURABLE_ROOTS
+        under_durable = False
+        for root in DURABLE_ROOTS:
+            root_abs = (PROJECT_ROOT / root).resolve()
+            if _is_path_under_root(abs_path, root_abs):
+                under_durable = True
+                break
+
+        if not under_durable:
+            errors.append({
+                "code": "OUTPUT_OUTSIDE_DURABLE_ROOT",
+                "message": f"Output not under any durable root: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "durable_roots": DURABLE_ROOTS}
+            })
+            continue  # Skip existence check for this entry
+
+        # 3. Check existence on disk
+        if not abs_path.exists():
+            errors.append({
+                "code": "OUTPUT_MISSING",
+                "message": f"Declared output does not exist: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path, "resolved": str(abs_path)}
+            })
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
+
+# =============================================================================
+# SPECTRUM-02 BUNDLE VERIFICATION (Ported from CAT LAB server_CATDPT.py)
+# Adversarial resume without execution history
+# =============================================================================
+
+def _generate_output_hashes(run_id: str) -> Dict:
+    """Generate OUTPUT_HASHES.json for SPECTRUM-02 bundle.
+
+    Hashes every declared durable output in TASK_SPEC.json.
+    - If output is a file: hash that file
+    - If output is a directory: hash every file under it
+
+    Returns: {"valid": bool, "errors": [...], "hashes": {...}}
+    """
+    errors = []
+    hashes = {}
+    run_dir = CONTRACTS_DIR / run_id
+
+    # Load TASK_SPEC.json
+    task_spec_path = run_dir / "TASK_SPEC.json"
+    if not task_spec_path.exists():
+        return {
+            "valid": False,
+            "errors": [{
+                "code": "TASK_SPEC_MISSING",
+                "message": "TASK_SPEC.json not found",
+                "path": "/",
+                "details": {"run_id": run_id}
+            }],
+            "hashes": {}
+        }
+
+    with open(task_spec_path) as f:
+        task_spec = json.load(f)
+
+    outputs_spec = task_spec.get("outputs", {})
+    durable_paths = outputs_spec.get("durable_paths", [])
+
+    for idx, raw_path in enumerate(durable_paths):
+        json_pointer = f"/outputs/durable_paths/{idx}"
+
+        # Skip invalid paths (already caught by _verify_post_run_outputs)
+        if Path(raw_path).is_absolute() or ".." in Path(raw_path).parts:
+            continue
+
+        abs_path = (PROJECT_ROOT / raw_path).resolve()
+
+        # Skip if path escapes repo root
+        if not _is_path_under_root(abs_path, PROJECT_ROOT.resolve()):
+            continue
+
+        if not abs_path.exists():
+            errors.append({
+                "code": "OUTPUT_MISSING",
+                "message": f"Declared output does not exist: {raw_path}",
+                "path": json_pointer,
+                "details": {"declared": raw_path}
+            })
+            continue
+
+        if abs_path.is_file():
+            # Hash single file
+            file_hash = _compute_hash(abs_path)
+            # Use posix-style path relative to PROJECT_ROOT
+            rel_posix = abs_path.relative_to(PROJECT_ROOT).as_posix()
+            hashes[rel_posix] = f"sha256:{file_hash}"
+        elif abs_path.is_dir():
+            # Hash every file under directory
+            for file_path in abs_path.rglob("*"):
+                if file_path.is_file():
+                    file_hash = _compute_hash(file_path)
+                    rel_posix = file_path.relative_to(PROJECT_ROOT).as_posix()
+                    hashes[rel_posix] = f"sha256:{file_hash}"
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors,
+        "hashes": hashes
+    }
+
+
+def verify_spectrum02_bundle(
+    run_dir: Path,
+    strict_build_id: bool = False
+) -> Dict:
+    """Verify a SPECTRUM-02 resume bundle.
+
+    Checks:
+    - TASK_SPEC.json exists
+    - STATUS.json exists with status=success and cmp01=pass
+    - OUTPUT_HASHES.json exists with supported validator_semver
+    - validator_build_id exists and is non-empty
+    - All declared hashes verify against actual files
+
+    Args:
+        run_dir: Path to the run directory containing the bundle
+        strict_build_id: If True, reject if build_id != current get_validator_build_id()
+
+    Returns: {"valid": bool, "errors": [...]}
+    """
+    errors = []
+
+    # Ensure run_dir is a Path
+    if isinstance(run_dir, str):
+        run_dir = Path(run_dir)
+
+    # 1. Check TASK_SPEC.json exists
+    task_spec_path = run_dir / "TASK_SPEC.json"
+    if not task_spec_path.exists():
+        errors.append({
+            "code": "BUNDLE_INCOMPLETE",
+            "message": "TASK_SPEC.json missing",
+            "path": "/",
+            "details": {"expected": str(task_spec_path)}
+        })
+        return {"valid": False, "errors": errors}
+
+    # 2. Check STATUS.json exists and is valid
+    status_path = run_dir / "STATUS.json"
+    if not status_path.exists():
+        errors.append({
+            "code": "BUNDLE_INCOMPLETE",
+            "message": "STATUS.json missing",
+            "path": "/",
+            "details": {"expected": str(status_path)}
+        })
+        return {"valid": False, "errors": errors}
+
+    try:
+        with open(status_path) as f:
+            status = json.load(f)
+    except json.JSONDecodeError as e:
+        errors.append({
+            "code": "BUNDLE_INCOMPLETE",
+            "message": f"STATUS.json invalid JSON: {e}",
+            "path": "/",
+            "details": {}
+        })
+        return {"valid": False, "errors": errors}
+
+    if status.get("status") != "success":
+        errors.append({
+            "code": "STATUS_NOT_SUCCESS",
+            "message": f"STATUS.status is '{status.get('status')}', expected 'success'",
+            "path": "/status",
+            "details": {"actual": status.get("status")}
+        })
+        return {"valid": False, "errors": errors}
+
+    if status.get("cmp01") != "pass":
+        errors.append({
+            "code": "CMP01_NOT_PASS",
+            "message": f"STATUS.cmp01 is '{status.get('cmp01')}', expected 'pass'",
+            "path": "/cmp01",
+            "details": {"actual": status.get("cmp01")}
+        })
+        return {"valid": False, "errors": errors}
+
+    # 3. Check OUTPUT_HASHES.json exists and is valid
+    hashes_path = run_dir / "OUTPUT_HASHES.json"
+    if not hashes_path.exists():
+        errors.append({
+            "code": "BUNDLE_INCOMPLETE",
+            "message": "OUTPUT_HASHES.json missing",
+            "path": "/",
+            "details": {"expected": str(hashes_path)}
+        })
+        return {"valid": False, "errors": errors}
+
+    try:
+        with open(hashes_path) as f:
+            output_hashes = json.load(f)
+    except json.JSONDecodeError as e:
+        errors.append({
+            "code": "BUNDLE_INCOMPLETE",
+            "message": f"OUTPUT_HASHES.json invalid JSON: {e}",
+            "path": "/",
+            "details": {}
+        })
+        return {"valid": False, "errors": errors}
+
+    # 4. Check validator semver is supported
+    validator_semver = output_hashes.get("validator_semver")
+    if validator_semver not in SUPPORTED_VALIDATOR_SEMVERS:
+        errors.append({
+            "code": "VALIDATOR_UNSUPPORTED",
+            "message": f"validator_semver '{validator_semver}' not supported",
+            "path": "/validator_semver",
+            "details": {
+                "actual": validator_semver,
+                "supported": list(SUPPORTED_VALIDATOR_SEMVERS)
+            }
+        })
+        return {"valid": False, "errors": errors}
+
+    # 5. Check validator_build_id exists and is non-empty
+    validator_build_id = output_hashes.get("validator_build_id")
+    if not validator_build_id:
+        errors.append({
+            "code": "VALIDATOR_BUILD_ID_MISSING",
+            "message": "validator_build_id is missing or empty",
+            "path": "/validator_build_id",
+            "details": {"actual": validator_build_id}
+        })
+        return {"valid": False, "errors": errors}
+
+    # 6. Strict build ID check (optional)
+    if strict_build_id:
+        current_build_id = get_validator_build_id()
+        if validator_build_id != current_build_id:
+            errors.append({
+                "code": "VALIDATOR_BUILD_MISMATCH",
+                "message": f"validator_build_id mismatch: expected '{current_build_id}', got '{validator_build_id}'",
+                "path": "/validator_build_id",
+                "details": {
+                    "expected": current_build_id,
+                    "actual": validator_build_id
+                }
+            })
+            return {"valid": False, "errors": errors}
+
+    # 7. Verify each hash
+    hashes = output_hashes.get("hashes", {})
+    for rel_path, expected_hash in hashes.items():
+        abs_path = PROJECT_ROOT / rel_path
+
+        if not abs_path.exists():
+            errors.append({
+                "code": "OUTPUT_MISSING",
+                "message": f"Output file does not exist: {rel_path}",
+                "path": f"/hashes/{rel_path}",
+                "details": {"declared": rel_path, "resolved": str(abs_path)}
+            })
+            continue
+
+        # Compute actual hash
+        actual_hash = f"sha256:{_compute_hash(abs_path)}"
+
+        if actual_hash != expected_hash:
+            errors.append({
+                "code": "HASH_MISMATCH",
+                "message": f"Hash mismatch for {rel_path}",
+                "path": f"/hashes/{rel_path}",
+                "details": {
+                    "declared": rel_path,
+                    "expected": expected_hash,
+                    "actual": actual_hash
+                }
+            })
+
+    return {
+        "valid": len(errors) == 0,
+        "errors": errors
+    }
+
 
 def load_schema(name: str) -> Dict:
     """Load a schema file."""
@@ -39,6 +1007,117 @@ def load_schema(name: str) -> Dict:
     if schema_path.exists():
         return json.loads(schema_path.read_text())
     return {}
+
+
+# =============================================================================
+# TERMINAL SHARING (Ported from CAT LAB server_CATDPT.py)
+# Bidirectional terminal visibility between human and AI agents
+# =============================================================================
+
+TERMINALS_DIR = LAW_ROOT / "CONTRACTS" / "_runs" / "terminals"
+
+
+def _ensure_terminals_dir():
+    """Ensure terminals directory exists."""
+    TERMINALS_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def _terminal_path(terminal_id: str) -> Path:
+    """Get path to terminal session file."""
+    safe_id = re.sub(r'[^\w\-]', '_', terminal_id)
+    return TERMINALS_DIR / f"{safe_id}.jsonl"
+
+
+def _terminal_meta_path(terminal_id: str) -> Path:
+    """Get path to terminal metadata file."""
+    safe_id = re.sub(r'[^\w\-]', '_', terminal_id)
+    return TERMINALS_DIR / f"{safe_id}.meta.json"
+
+
+def terminal_register(terminal_id: str, owner: str, cwd: str) -> Dict:
+    """Register a terminal for sharing."""
+    _ensure_terminals_dir()
+    meta_path = _terminal_meta_path(terminal_id)
+    session_path = _terminal_path(terminal_id)
+    
+    session = {
+        "terminal_id": terminal_id,
+        "owner": owner,
+        "cwd": cwd,
+        "created": datetime.now().isoformat(),
+        "status": "active",
+        "visible_to": ["human", "antigravity", "claude", "gemini", "grok"]
+    }
+    
+    with open(meta_path, 'w', encoding='utf-8') as f:
+        json.dump(session, f, indent=2)
+    session_path.touch()
+    
+    return {"status": "success", "session": session}
+
+
+def terminal_log_command(
+    terminal_id: str,
+    command: str,
+    executor: str,
+    output: Optional[str] = None,
+    exit_code: Optional[int] = None
+) -> Dict:
+    """Log a command executed in a terminal."""
+    _ensure_terminals_dir()
+    meta_path = _terminal_meta_path(terminal_id)
+    session_path = _terminal_path(terminal_id)
+    
+    if not meta_path.exists():
+        return {"status": "error", "message": f"Terminal {terminal_id} not registered"}
+    
+    entry = {
+        "timestamp": datetime.now().isoformat(),
+        "command": command,
+        "executor": executor,
+        "output": output,
+        "exit_code": exit_code
+    }
+    
+    success = _atomic_write_jsonl(session_path, json.dumps(entry))
+    if not success:
+        return {"status": "error", "message": "Failed to write command"}
+    
+    return {"status": "success", "terminal_id": terminal_id, "command_logged": command}
+
+
+def terminal_get_output(terminal_id: str, limit: int = 50, since: Optional[str] = None) -> Dict:
+    """Retrieve commands and output from a terminal."""
+    _ensure_terminals_dir()
+    meta_path = _terminal_meta_path(terminal_id)
+    session_path = _terminal_path(terminal_id)
+    
+    if not meta_path.exists():
+        return {"status": "error", "message": f"Terminal {terminal_id} not found"}
+    
+    with open(meta_path, 'r', encoding='utf-8') as f:
+        meta = json.load(f)
+    
+    commands = []
+    if session_path.exists():
+        def filter_fn(entry):
+            return entry.get("timestamp", "") > since if since else True
+        commands = list(_read_jsonl_streaming(session_path, filter_fn=filter_fn, limit=limit))
+    
+    return {"status": "success", "terminal_id": terminal_id, "owner": meta.get("owner"), "commands": commands}
+
+
+def terminal_list() -> Dict:
+    """List all registered terminals."""
+    _ensure_terminals_dir()
+    terminals = []
+    for meta_file in TERMINALS_DIR.glob("*.meta.json"):
+        try:
+            with open(meta_file, 'r', encoding='utf-8') as f:
+                terminals.append(json.load(f))
+        except (json.JSONDecodeError, IOError):
+            continue
+    return {"status": "success", "count": len(terminals), "terminals": terminals}
 
 
 # MCP Protocol Constants
@@ -369,6 +1448,13 @@ class AGSMCPServer:
             "agent_inbox_finalize": self._tool_agent_inbox_finalize,
             # Session info tool
             "session_info": self._tool_session_info,
+            # Test tool (CAT LAB merge verification)
+            "test_primitives": self._tool_test_primitives,
+            # Terminal sharing tools
+            "terminal_register": self._tool_terminal_register,
+            "terminal_log": self._tool_terminal_log,
+            "terminal_get": self._tool_terminal_get,
+            "terminal_list": self._tool_terminal_list,
         }
 
         handler = tool_handlers.get(tool_name)
@@ -1686,6 +2772,224 @@ class AGSMCPServer:
                 }],
                 "isError": True
             }
+
+    def _tool_test_primitives(self, args: Dict) -> Dict:
+        """Test CAT LAB safe primitives (Phase 1 & 2 merge verification)."""
+        import tempfile
+        import shutil
+        
+        results = {
+            "tests_run": 0,
+            "tests_passed": 0,
+            "tests_failed": 0,
+            "details": []
+        }
+        
+        def test(name: str, func):
+            """Run a test and record result."""
+            results["tests_run"] += 1
+            try:
+                func()
+                results["tests_passed"] += 1
+                results["details"].append(f"✓ {name}")
+            except Exception as e:
+                results["tests_failed"] += 1
+                results["details"].append(f"✗ {name}: {str(e)}")
+        
+        # Test 1: File locking
+        def test_file_locking():
+            temp_path = None
+            try:
+                with tempfile.NamedTemporaryFile(mode='w', delete=False) as f:
+                    temp_path = f.name
+                    _lock_file(f, exclusive=True)
+                    f.write("test")
+                    _unlock_file(f)
+            finally:
+                if temp_path and Path(temp_path).exists():
+                    Path(temp_path).unlink()
+        
+        test("File locking (Windows/Unix)", test_file_locking)
+        
+        # Test 2: Atomic JSONL write
+        def test_atomic_write():
+            temp_dir = Path(tempfile.mkdtemp())
+            try:
+                test_file = temp_dir / "test.jsonl"
+                assert _atomic_write_jsonl(test_file, json.dumps({"id": 1}))
+                assert _atomic_write_jsonl(test_file, json.dumps({"id": 2}))
+                lines = test_file.read_text().strip().split('\n')
+                assert len(lines) == 2
+            finally:
+                shutil.rmtree(temp_dir)
+        
+        test("Atomic JSONL write", test_atomic_write)
+        
+        # Test 3: Atomic JSONL rewrite
+        def test_atomic_rewrite():
+            temp_dir = Path(tempfile.mkdtemp())
+            try:
+                test_file = temp_dir / "test.jsonl"
+                _atomic_write_jsonl(test_file, json.dumps({"status": "pending"}))
+                assert _atomic_rewrite_jsonl(
+                    test_file,
+                    lambda entries: [{**e, "status": "done"} for e in entries]
+                )
+                line = test_file.read_text().strip()
+                assert json.loads(line)["status"] == "done"
+            finally:
+                shutil.rmtree(temp_dir)
+        
+        test("Atomic JSONL rewrite", test_atomic_rewrite)
+        
+        # Test 4: Streaming JSONL reader
+        def test_streaming():
+            temp_dir = Path(tempfile.mkdtemp())
+            try:
+                test_file = temp_dir / "test.jsonl"
+                for i in range(5):
+                    _atomic_write_jsonl(test_file, json.dumps({"id": i}))
+                results_list = list(_read_jsonl_streaming(test_file, limit=3))
+                assert len(results_list) == 3
+            finally:
+                shutil.rmtree(temp_dir)
+        
+        test("Streaming JSONL reader", test_streaming)
+        
+        # Test 5: Task state validation
+        def test_task_states():
+            assert _validate_task_state_transition("pending", "acknowledged") == True
+            assert _validate_task_state_transition("pending", "completed") == False
+            assert _validate_task_state_transition("completed", "failed") == False
+        
+        test("Task state transitions", test_task_states)
+        
+        # Test 6: Task spec validation
+        def test_task_spec():
+            valid = _validate_task_spec({"task_id": "test-1", "task_type": "validate"})
+            assert valid["valid"] == True
+            invalid = _validate_task_spec({"task_id": "bad@id", "task_type": "invalid"})
+            assert invalid["valid"] == False
+        
+        test("Task spec validation", test_task_spec)
+        
+        # Test 7: File hashing
+        def test_hash():
+            with tempfile.NamedTemporaryFile(mode='wb', delete=False) as f:
+                temp_path = Path(f.name)
+                f.write(b"test")
+            try:
+                hash1 = _compute_hash(temp_path)
+                assert len(hash1) == 64  # SHA-256
+            finally:
+                temp_path.unlink()
+        
+        test("File hashing (SHA-256)", test_hash)
+        
+        # Test 8: Constants
+        def test_constants():
+            assert VALIDATOR_SEMVER == "1.0.0"
+            assert len(DURABLE_ROOTS) == 3
+            assert len(CATALYTIC_ROOTS) == 5
+            assert len(FORBIDDEN_ROOTS) == 2
+            build_id = get_validator_build_id()
+            assert build_id.startswith("git:") or build_id.startswith("file:")
+        
+        test("Constants and build ID", test_constants)
+        
+        # Format results
+        summary = f"Tests: {results['tests_passed']}/{results['tests_run']} passed"
+        if results['tests_failed'] > 0:
+            summary += f", {results['tests_failed']} failed"
+        
+        output = [
+            "=" * 60,
+            "CAT LAB Safe Primitives Test (via MCP)",
+            "=" * 60,
+            "",
+            *results["details"],
+            "",
+            "=" * 60,
+            summary,
+            f"VALIDATOR_SEMVER: {VALIDATOR_SEMVER}",
+            f"Build ID: {get_validator_build_id()}",
+            f"DURABLE_ROOTS: {len(DURABLE_ROOTS)} roots",
+            f"CATALYTIC_ROOTS: {len(CATALYTIC_ROOTS)} roots",
+            "=" * 60,
+        ]
+        
+        return {
+            "content": [{
+                "type": "text",
+                "text": "\n".join(output)
+            }],
+            "isError": results["tests_failed"] > 0
+        }
+
+    def _tool_terminal_register(self, args: Dict) -> Dict:
+        """Register a terminal for sharing."""
+        terminal_id = args.get("terminal_id", f"term-{uuid.uuid4().hex[:8]}")
+        owner = args.get("owner", "human")
+        cwd = args.get("cwd", str(PROJECT_ROOT))
+        
+        result = terminal_register(terminal_id, owner, cwd)
+        
+        return {
+            "content": [{
+                "type": "text",
+                "text": json.dumps(result, indent=2)
+            }],
+            "isError": result.get("status") == "error"
+        }
+
+    def _tool_terminal_log(self, args: Dict) -> Dict:
+        """Log a command to a shared terminal."""
+        terminal_id = args.get("terminal_id")
+        command = args.get("command")
+        executor = args.get("executor", "unknown")
+        output = args.get("output")
+        exit_code = args.get("exit_code")
+        
+        if not terminal_id or not command:
+            return {
+                "content": [{"type": "text", "text": "Error: terminal_id and command required"}],
+                "isError": True
+            }
+        
+        result = terminal_log_command(terminal_id, command, executor, output, exit_code)
+        
+        return {
+            "content": [{"type": "text", "text": json.dumps(result, indent=2)}],
+            "isError": result.get("status") == "error"
+        }
+
+    def _tool_terminal_get(self, args: Dict) -> Dict:
+        """Get commands from a shared terminal."""
+        terminal_id = args.get("terminal_id")
+        limit = args.get("limit", 50)
+        since = args.get("since")
+        
+        if not terminal_id:
+            return {
+                "content": [{"type": "text", "text": "Error: terminal_id required"}],
+                "isError": True
+            }
+        
+        result = terminal_get_output(terminal_id, limit, since)
+        
+        return {
+            "content": [{"type": "text", "text": json.dumps(result, indent=2)}],
+            "isError": result.get("status") == "error"
+        }
+
+    def _tool_terminal_list(self, args: Dict) -> Dict:
+        """List all shared terminals."""
+        result = terminal_list()
+        
+        return {
+            "content": [{"type": "text", "text": json.dumps(result, indent=2)}],
+            "isError": False
+        }
 
     def _tool_not_implemented(self, args: Dict) -> Dict:
         """Placeholder for unimplemented tools."""

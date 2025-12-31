@@ -1,0 +1,1 @@
+{"pipeline_id":"ags-adapter-bad-paths","steps":[{"cmd":["C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe","-c","print('hello')"],"jobspec_path":"LAW/CONTRACTS/_runs/_pipelines/ags-adapter-bad-paths/steps/s1/JOBSPEC.json","memoize":true,"step_id":"s1","strict":true}]}

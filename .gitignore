@@ -45,3 +45,7 @@ __pycache__/
 env/
 venv/
 THOUGHT/LAB/CAT_CHAT/nul
+
+# Misplaced Root Artifacts (Should be in LAW/CONTRACTS or NAVIGATION/CORTEX)
+/CONTRACTS/
+/CORTEX/

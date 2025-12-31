@@ -16,8 +16,8 @@ import importlib.util
 from pathlib import Path
 
 # Direct file import for MCP/server.py
-REPO_ROOT = Path(__file__).resolve().parents[4]
-SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
+REPO_ROOT = Path(__file__).resolve().parents[2]  # Go up 2 levels from TESTBENCH to MCP
+SERVER_PATH = REPO_ROOT / "server_CATDPT.py"
 
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
 mcp_server = importlib.util.module_from_spec(spec)
