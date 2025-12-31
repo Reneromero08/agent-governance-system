@@ -4,6 +4,10 @@ import sys
 REPO_ROOT = Path(__file__).resolve().parents[3]
 SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP" / "server_CATDPT.py"
 
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+# Load MCP server dynamically (it's in a lab path)
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
 mcp_server_module = importlib.util.module_from_spec(spec)
@@ -13,7 +17,6 @@ MCPTerminalServer = mcp_server_module.MCPTerminalServer
 VALIDATOR_SEMVER = mcp_server_module.VALIDATOR_SEMVER
 get_validator_build_id = mcp_server_module.get_validator_build_id
 
-sys.path.append(REPO_ROOT / "spectrum")
 from CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier
 
 
