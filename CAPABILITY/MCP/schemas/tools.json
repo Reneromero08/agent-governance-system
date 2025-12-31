@@ -449,6 +449,65 @@
                     }
                 }
             }
+        },
+        "semantic_search": {
+            "name": "semantic_search",
+            "description": "Semantic search using vector embeddings (96% token savings)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query for semantic similarity"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum results to return"
+                    },
+                    "min_similarity": {
+                        "type": "number",
+                        "default": 0.0,
+                        "description": "Minimum similarity threshold (0.0-1.0)"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "cassette_network_query": {
+            "name": "cassette_network_query",
+            "description": "Query the cassette network for distributed semantic search",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum results per cassette"
+                    },
+                    "capability": {
+                        "type": "string",
+                        "description": "Filter by cassette capability (e.g., 'vectors', 'fts')"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "semantic_stats": {
+            "name": "semantic_stats",
+            "description": "Get statistics about semantic embeddings and cassette network",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
         }
     },
     "tools": [
@@ -460,6 +519,15 @@
         },
         {
             "$ref": "#/definitions/context_review"
+        },
+        {
+            "$ref": "#/definitions/semantic_search"
+        },
+        {
+            "$ref": "#/definitions/cassette_network_query"
+        },
+        {
+            "$ref": "#/definitions/semantic_stats"
         },
         {
             "$ref": "#/definitions/skill_run"

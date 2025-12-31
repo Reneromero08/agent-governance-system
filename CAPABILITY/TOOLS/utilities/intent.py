@@ -8,7 +8,7 @@ from typing import Dict, List, Optional, Set, Tuple
 
 from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
 
-REPO_ROOT = Path(__file__).resolve().parents[1]
+REPO_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_RUNS_ROOT = "CONTRACTS/_runs"
 
 

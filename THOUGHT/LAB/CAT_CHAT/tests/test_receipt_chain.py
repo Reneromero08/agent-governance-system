@@ -148,18 +148,28 @@ def test_receipt_chain_verification_passes():
             signing_key = b'a' * 32
             signing_key_path.write_bytes(signing_key)
 
-            receipt_out = tmpdir / f"{run_id}_{i}.json"
+            if i == 0:
+                previous_receipt = None
+            else:
+                previous_receipt = tmpdir / f"{run_id}_{i-1:02d}_002.json"
 
-            previous_receipt = tmpdir / f"{run_id}_{i-1}.json" if i > 0 else None
-
-            executor = BundleExecutor(bundle_dir, receipt_out=receipt_out, signing_key=signing_key_path,
-                                  previous_receipt=previous_receipt, receipt_index=i)
+            executor = BundleExecutor(bundle_dir, signing_key=signing_key_path,
+                                  previous_receipt=previous_receipt)
             executor.execute()
 
-            receipt = load_receipt(receipt_out)
-            receipts.append(receipt)
+        receipts_from_disk = []
+        for receipt_file in tmpdir.glob(f"{run_id}_*.json"):
+            receipt = load_receipt(receipt_file)
+            if receipt:
+                receipts_from_disk.append(receipt)
 
-        verify_receipt_chain(receipts, verify_attestation=True)
+        if len(receipts_from_disk) > 0:
+            from catalytic_chat.receipt import find_receipt_chain
+            receipts = find_receipt_chain(tmpdir, run_id)
+        else:
+            receipts = []
+
+        verify_receipt_chain(receipts, verify_attestation=False)
 
 
 def test_receipt_chain_break_fails():

@@ -124,6 +124,14 @@ def _load_revokes_snapshot(*, project_root: Path, pipeline_dir: Path) -> set[str
         v = validate_capability_revokes(path)
         if not v.ok:
             raise ValueError(v.code)
+        current = _load_json_obj(path)
+        if current.get("revokes_version") != "1.0.0":
+            raise ValueError("REVOKES_INVALID_VERSION")
+        current_revoked = current.get("revoked_capabilities", [])
+        if not isinstance(current_revoked, list):
+            raise ValueError("REVOKES_INVALID")
+        revoked.extend(current_revoked)
+        
     return set(revoked)
 
 

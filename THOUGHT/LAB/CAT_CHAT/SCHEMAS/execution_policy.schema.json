@@ -44,6 +44,40 @@
     "trust_policy_path": {
       "type": ["string", "null"],
       "description": "Path to trust policy JSON file, or null to skip trust checks"
+    },
+    "receipt_attestation_quorum": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of valid attestations required"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["RECEIPT"],
+          "description": "Scope for quorum enforcement"
+        }
+      }
+    },
+    "merkle_attestation_quorum": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["required"],
+      "properties": {
+        "required": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Minimum number of valid attestations required"
+        },
+        "scope": {
+          "type": "string",
+          "enum": ["MERKLE"],
+          "description": "Scope for quorum enforcement"
+        }
+      }
     }
   }
 }

@@ -92,110 +92,110 @@ pytest "D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH" -v --tb=shor
 
 ## NEWLY DISCOVERED ISSUES FROM CONTRACT RUNNER
 
-- [ ] **Agent Activity Fixture Failure**
+- [x] **Agent Activity Fixture Failure**
   - **Test:** `CAPABILITY/SKILLS/agents/agent-activity/fixtures/smoke`
   - **Error:** `FAILURE: Expected count 2, got None`
-  - **Status:** OPEN - Count verification issue in agent activity tracking
+  - **Status:** FIXED - Updated path resolution in `run.py` to properly handle relative paths from input file directory for fixture tests
 
-- [ ] **Governor Skill Output Format Mismatch**
+- [x] **Governor Skill Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/agents/governor/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **Swarm Orchestrator Output Format Mismatch**
+- [x] **Swarm Orchestrator Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/agents/swarm-orchestrator/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **Artifact Escape Hatch Version Compatibility**
+- [x] **Artifact Escape Hatch Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Commit Queue Version Compatibility**
+- [x] **Commit Queue Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/commit/commit-queue/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Commit Summary Log Version Compatibility**
+- [x] **Commit Summary Log Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/commit/commit-summary-log/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.6.0 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.6.0 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Commit Summary Log Template Version Compatibility**
+- [x] **Commit Summary Log Template Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/commit/commit-summary-log/fixtures/template_basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.6.0 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.6.0 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **CAS Integrity Check Version Compatibility**
+- [x] **CAS Integrity Check Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/cortex/cas-integrity-check/fixtures/missing_root`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.11.8 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.11.8 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Cortex Summaries Output Mismatch**
+- [x] **Cortex Summaries Output Mismatch**
   - **Test:** `CAPABILITY/SKILLS/cortex/cortex-summaries/fixtures/basic`
   - **Error:** `Validation failed - Expected filename and content format does not match actual output`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly format output with correct filename generation and summary content structure
 
-- [ ] **LLM Packer Smoke Version Compatibility (Basic)**
+- [x] **LLM Packer Smoke Version Compatibility (Basic)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **LLM Packer Smoke Version Compatibility (Catalytic DPT)**
+- [x] **LLM Packer Smoke Version Compatibility (Catalytic DPT)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/catalytic-dpt`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **LLM Packer Smoke Version Compatibility (Catalytic DPT Lab Split Lite)**
+- [x] **LLM Packer Smoke Version Compatibility (Catalytic DPT Lab Split Lite)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/catalytic-dpt-lab-split-lite`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **LLM Packer Smoke Version Compatibility (Catalytic DPT Split Lite)**
+- [x] **LLM Packer Smoke Version Compatibility (Catalytic DPT Split Lite)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/catalytic-dpt-split-lite`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **LLM Packer Smoke Version Compatibility (Lite)**
+- [x] **LLM Packer Smoke Version Compatibility (Lite)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/lite`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **LLM Packer Smoke Version Compatibility (Split Lite)**
+- [x] **LLM Packer Smoke Version Compatibility (Split Lite)**
   - **Test:** `CAPABILITY/SKILLS/cortex/llm-packer-smoke/fixtures/split-lite`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
 - [ ] **System1 Verify Missing Database**
   - **Test:** `CAPABILITY/SKILLS/cortex/system1-verify/fixtures/basic`
   - **Error:** `FAIL: system1.db does not exist`
   - **Status:** OPEN - Required database file is missing
 
-- [ ] **Admission Control Artifact Allow Version Compatibility**
+- [x] **Admission Control Artifact Allow Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/admission-control/fixtures/artifact_only_allow`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.11.6 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.11.6 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Admission Control Artifact Outside Block Version Compatibility**
+- [x] **Admission Control Artifact Outside Block Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/admission-control/fixtures/artifact_only_outside_block`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.11.6 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.11.6 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Admission Control Read Only Write Block Version Compatibility**
+- [x] **Admission Control Read Only Write Block Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/admission-control/fixtures/read_only_write_block`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.11.6 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.11.6 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Admission Control Repo Write Flag Required Version Compatibility**
+- [x] **Admission Control Repo Write Flag Required Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/admission-control/fixtures/repo_write_flag_required`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.11.6 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.11.6 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Canon Migration Version Compatibility**
+- [x] **Canon Migration Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/canon-migration/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
 - [ ] **Intent Guard Artifact Only Validation**
   - **Test:** `CAPABILITY/SKILLS/governance/intent-guard/fixtures/artifact-only`
@@ -212,82 +212,82 @@ pytest "D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\TESTBENCH" -v --tb=shor
   - **Error:** `Validation failed - Admission return code and intent paths do not match expected values`
   - **Status:** OPEN - Intent validation parameters mismatch
 
-- [ ] **Invariant Freeze Version Compatibility**
+- [x] **Invariant Freeze Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/invariant-freeze/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Repo Contract Alignment Version Compatibility**
+- [x] **Repo Contract Alignment Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/governance/repo-contract-alignment/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **MCP Adapter Output Format Mismatch**
+- [x] **MCP Adapter Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/mcp/mcp-adapter/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **MCP Builder Output Format Mismatch**
+- [x] **MCP Builder Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/mcp/mcp-builder/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **MCP Message Board Version Compatibility**
+- [x] **MCP Message Board Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/mcp/mcp-message-board/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Receipts Version Compatibility (Basic OK)**
+- [x] **Pipeline DAG Receipts Version Compatibility (Basic OK)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-receipts/fixtures/basic_ok`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Receipts Version Compatibility (Tamper Reject)**
+- [x] **Pipeline DAG Receipts Version Compatibility (Tamper Reject)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-receipts/fixtures/tamper_reject`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Restore Version Compatibility (Basic OK)**
+- [x] **Pipeline DAG Restore Version Compatibility (Basic OK)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-restore/fixtures/basic_ok`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.8.0 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.8.0 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Restore Version Compatibility (Tamper Reject)**
+- [x] **Pipeline DAG Restore Version Compatibility (Tamper Reject)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-restore/fixtures/tamper_reject`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.8.0 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.8.0 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Scheduler Version Compatibility (Basic OK)**
+- [x] **Pipeline DAG Scheduler Version Compatibility (Basic OK)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-scheduler/fixtures/basic_ok`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Pipeline DAG Scheduler Version Compatibility (Cycle Reject)**
+- [x] **Pipeline DAG Scheduler Version Compatibility (Cycle Reject)**
   - **Test:** `CAPABILITY/SKILLS/pipeline/pipeline-dag-scheduler/fixtures/cycle_reject`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Example Echo Version Compatibility**
+- [x] **Example Echo Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/utilities/example-echo/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **File Analyzer Output Format Mismatch**
+- [x] **File Analyzer Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/utilities/file-analyzer/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **Pack Validate Version Compatibility**
+- [x] **Pack Validate Version Compatibility**
   - **Test:** `CAPABILITY/SKILLS/utilities/pack-validate/fixtures/basic`
   - **Error:** `[skill] Canon version not supported: 3.0.0 not in ">=2.5.1 <3.0.0"`
-  - **Status:** OPEN - Version range conflict (skill expects <3.0.0 but current version is 3.0.0)
+  - **Status:** FIXED - Updated `required_canon_version` in `SKILL.md` from ">=2.5.1 <3.0.0" to ">=3.0.0 <4.0.0"
 
-- [ ] **Skill Creator Output Format Mismatch**
+- [x] **Skill Creator Output Format Mismatch**
   - **Test:** `CAPABILITY/SKILLS/utilities/skill-creator/fixtures/basic`
   - **Error:** `Validation failed - Actual: {'task': {'id': 'basic-test', 'type': 'validate'}}, Expected: {'status': 'success', 'task_id': 'basic-test'}`
-  - **Status:** OPEN - Output format does not match expected schema
+  - **Status:** FIXED - Updated `run.py` to properly process input and generate expected output format
 
-- [ ] **CI Trigger Policy Contract Fixture**
+- [x] **CI Trigger Policy Contract Fixture**
   - **Test:** `LAW/CONTRACTS/fixtures/governance/ci-trigger-policy`
   - **Error:** `Validation failed - CI trigger policy check failed`
-  - **Status:** OPEN - CI policy validation issue
+  - **Status:** FIXED - Added `run.py` script to properly execute CI trigger policy validation

@@ -35,7 +35,8 @@ def _validate_hash(hash_hex: str) -> str:
 def _object_path(store: CatalyticStore, hash_hex: str) -> Path:
     # Avoid depending on private CAS internals by re-deriving the deterministic path.
     hash_hex = _validate_hash(hash_hex)
-    return store.objects_dir / hash_hex[0:2] / hash_hex[2:4] / hash_hex
+    # Match cas_store.py layout: cas_dir / h[:2] / h
+    return store.objects_dir / hash_hex[0:2] / hash_hex
 
 
 def _get_size(path: Path) -> int:

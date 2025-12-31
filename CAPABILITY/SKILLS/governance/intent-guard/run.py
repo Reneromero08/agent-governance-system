@@ -77,7 +77,7 @@ def main(input_path: Path, actual_path: Path) -> int:
     )
 
     admit_res = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "TOOLS" / "admission.py"), "--intent", str(intent_path)],
+        [sys.executable, str(PROJECT_ROOT / "CAPABILITY" / "TOOLS" / "governance" / "admission.py"), "--intent", str(intent_path)],
         cwd=str(PROJECT_ROOT),
     )
 
