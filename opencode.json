@@ -1,0 +1,10 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "ags-governance": {
+      "type": "local",
+      "command": ["python", "LAW/CONTRACTS/ags_mcp_entrypoint.py"],
+      "enabled": true
+    }
+  }
+}
