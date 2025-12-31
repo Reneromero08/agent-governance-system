@@ -508,6 +508,101 @@
                 "type": "object",
                 "properties": {}
             }
+        },
+        "test_primitives": {
+            "name": "test_primitives",
+            "description": "Test CAT LAB safe primitives (file locking, atomic ops, validation)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "terminal_register": {
+            "name": "terminal_register",
+            "description": "Register a shared terminal for bidirectional visibility between human and AI",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the terminal (auto-generated if omitted)"
+                    },
+                    "owner": {
+                        "type": "string",
+                        "description": "Who owns this terminal (e.g., 'human', 'antigravity')"
+                    },
+                    "cwd": {
+                        "type": "string",
+                        "description": "Current working directory"
+                    }
+                }
+            }
+        },
+        "terminal_log": {
+            "name": "terminal_log",
+            "description": "Log a command executed in a shared terminal",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Terminal session ID"
+                    },
+                    "command": {
+                        "type": "string",
+                        "description": "The command that was executed"
+                    },
+                    "executor": {
+                        "type": "string",
+                        "description": "Who executed it (e.g., 'human', 'antigravity')"
+                    },
+                    "output": {
+                        "type": "string",
+                        "description": "Command output (optional)"
+                    },
+                    "exit_code": {
+                        "type": "integer",
+                        "description": "Exit code (optional)"
+                    }
+                },
+                "required": [
+                    "terminal_id",
+                    "command"
+                ]
+            }
+        },
+        "terminal_get": {
+            "name": "terminal_get",
+            "description": "Get commands from a shared terminal",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Terminal session ID"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Maximum commands to return"
+                    },
+                    "since": {
+                        "type": "string",
+                        "description": "ISO timestamp - only return commands after this time"
+                    }
+                },
+                "required": [
+                    "terminal_id"
+                ]
+            }
+        },
+        "terminal_list": {
+            "name": "terminal_list",
+            "description": "List all registered shared terminals",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
         }
     },
     "tools": [
@@ -573,6 +668,21 @@
         },
         {
             "$ref": "#/definitions/session_info"
+        },
+        {
+            "$ref": "#/definitions/test_primitives"
+        },
+        {
+            "$ref": "#/definitions/terminal_register"
+        },
+        {
+            "$ref": "#/definitions/terminal_log"
+        },
+        {
+            "$ref": "#/definitions/terminal_get"
+        },
+        {
+            "$ref": "#/definitions/terminal_list"
         }
     ]
 }

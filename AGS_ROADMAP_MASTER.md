@@ -155,6 +155,61 @@ Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution
 - [x] **Phase 6.9**: Stabilization (Test Flakiness Fixes).
 - [x] **Phase 6.10**: Receipt Chain Ordering Hardening.
 
+# Lane Z: Catalytic Refactoring (P0)
+
+## Z.1: MCP Server Merge
+Port safe primitives from `THOUGHT/LAB/MCP/server_CATDPT.py` to canonical `CAPABILITY/MCP/server.py`.
+- [x] **Z.1.1**: Safe Primitives - File locking, atomic JSONL, validation logic
+- [x] **Z.1.2**: CMP-01 Path Constants - 6-bucket durable/catalytic/forbidden roots
+- [x] **Z.1.3**: CMP-01 Validation Functions - Path escape prevention, overlap detection
+- [x] **Z.1.4**: SPECTRUM-02 Bundle Verification - Adversarial resume proof
+- [x] **Z.1.5**: Terminal Sharing - Bidirectional human/AI terminal visibility
+- [ ] **Z.1.6**: Skill Execution - Canonical skill launch with CMP-01 pre-validation
+- [ ] **Z.1.7**: Deprecate Lab Server - Mark `server_CATDPT.py` as archived
+
+## Z.2: F3 / Content-Addressable Storage
+Implement F3 prototype from `THOUGHT/LAB/f3_cas_prototype.py`.
+- [ ] **Z.2.1**: Core CAS primitives - `put(bytes) → hash`, `get(hash) → bytes`
+- [ ] **Z.2.2**: CAS-backed artifact store - Replace file paths with content hashes
+- [ ] **Z.2.3**: Immutable run artifacts - TASK_SPEC, STATUS, OUTPUT_HASHES via CAS
+- [ ] **Z.2.4**: Deduplication - Identical outputs share storage
+- [ ] **Z.2.5**: GC strategy - Unreferenced blobs cleanup policy
+
+## Z.3: CAT Chat Stabilization
+Get `THOUGHT/LAB/CAT_CHAT/` to a functional state.
+- [ ] **Z.3.1**: Router stabilization - Model selection & fallback
+- [ ] **Z.3.2**: Memory integration - Context window management
+- [ ] **Z.3.3**: Tool binding - MCP tool access from chat
+- [ ] **Z.3.4**: Session persistence - Resume conversations
+
+## Z.4: Catalytic Architecture
+Make all transient state catalytic (restored byte-identical after run).
+- [ ] **Z.4.1**: Identify all catalytic domains - List every _tmp/ directory
+- [ ] **Z.4.2**: Pre-run snapshot - Hash catalytic state before execution
+- [ ] **Z.4.3**: Post-run restoration - Verify byte-identical restoration
+- [ ] **Z.4.4**: Failure mode - Hard-reject on restoration mismatch
+
+## Z.5: Symbolic / Vector Integration
+Turn everything addressable by vector embedding.
+- [ ] **Z.5.1**: Embed all canon files - LAW/CANON/* → vectors
+- [ ] **Z.5.2**: Embed all ADRs - decisions/* → vectors
+- [ ] **Z.5.3**: Model weights in vectors - Store model files in vector-indexed CAS
+- [ ] **Z.5.4**: Semantic skill discovery - Find skills by description similarity
+- [ ] **Z.5.5**: Cross-reference indexing - Link related artifacts by embedding distance
+
+## Z.6: Swarm Architecture (Pending 0.5B Model Testing)
+Task dispatch and chain of command for tiny models (if MCP compatible).
+- [ ] **Z.6.1**: Test MCP with 0.5B models - Verify tool calling works
+- [ ] **Z.6.2**: Task Queue - dispatch, acknowledge, complete primitives
+- [ ] **Z.6.3**: Chain of Command - escalate, directive, resolve primitives
+- [ ] **Z.6.4**: Governor pattern - Central orchestrator for ant workers
+
+## Z.7: Merge Back to Main
+- [ ] **Z.7.1**: All tests pass on refactored code
+- [ ] **Z.7.2**: LAB experiments archived or integrated
+- [ ] **Z.7.3**: THOUGHT/LAB cleaned up
+- [ ] **Z.7.4**: Main branch updated
+
 # Definition of Done (Global)
 
 - [ ] [P0] `python TOOLS/critic.py` passes
