@@ -116,11 +116,11 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
         assert res.get("ok") is True, "The swarm run should succeed."
 
         # Verify chain exists
-        chain_path = swarm_dir / "CHAIN.json"
-        assert chain_path.exists(), f"CHAIN.json should be created at {chain_path}"
+        chain_path = swarm_dir / "SWARM_CHAIN.json"
+        assert chain_path.exists(), f"SWARM_CHAIN.json should be created at {chain_path}"
 
     finally:
-        chain_path = tmp_path / "CHAIN.json"
+        chain_path = swarm_dir / "SWARM_CHAIN.json"
         if chain_path.exists():
             print(f"Cleaning up: {chain_path}")
             chain_path.unlink()

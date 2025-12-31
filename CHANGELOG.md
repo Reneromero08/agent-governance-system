@@ -2,9 +2,40 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [Unreleased] - 2025-12-31
+
+## [3.2.0] - 2025-12-31
+
+### V3 System Stabilization (The "Green" Release)
+**Summary:** Achieved 100% stability across the entire system. Resolved 99 critical failures across Protocols 1-4.
+
+#### Fixed (99 Total Fixes)
+- **Core Primitives:**
+  - Hardened `CAS` path normalization to strictly reject `..` traversal and absolute paths.
+  - Implemented atomic, thread-safe write operations with Windows file locking.
+  - Added missing `CatalyticStore` methods (`put_bytes`, `put_stream`).
+- **Swarm Runtime:**
+  - Fixed execution elision and repo-relative pathing logic.
+  - Corrected chain artifact binding (`SWARM_CHAIN.json`).
+- **Governance:**
+  - Restored `ags` CLI connectivity and module resolution.
+  - Enabled direct `preflight` CLI execution for reliable gating.
+  - Validated 25+ skills against Canon v3.0.0.
+- **Test Infrastructure:**
+  - Standardized `REPO_ROOT` and `sys.path` across 140 tests.
+  - Unblocked collection of 3 major test suites.
+  - Achieved **140/140 tests passing**.
 
 ### Added
+
+- **Mechanical Chat Translation** (THOUGHT/LAB/CAT_CHAT): Pure Python translator from chat DB to Markdown with no LLM dependencies.
+  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/chat_db.py`: SQLite chat database with deterministic ordering by (created_at, msg_id).
+  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/chat_translate.py`: Mechanical translator producing idempotent Markdown, preserving code fences.
+  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cli.py`: Added `chatdb` command group (init, put, export, directives).
+  - `THOUGHT/LAB/CAT_CHAT/tests/test_chat_translate.py`: Tests for deterministic bytes, code fence preservation, ordering, directive extraction.
+  - Directive format: ` ```cat_directive {...}` `` supporting PLAN_REQUEST, BUNDLE_BUILD, BUNDLE_RUN operations.
+  - Deterministic guarantees: Identical DB state produces identical Markdown bytes, SHA256 hash verification.
+  - Fail-closed directive validation: Malformed JSON ignored, unknown ops raise ValueError, required keys enforced.
+  - Suggested DB path: `THOUGHT/LAB/CAT_CHAT/CORTEX/_generated/chat/chat.db`.
 - **Phase 7: Compression Protocol Specification & Validator** (THOUGHT/LAB/CAT_CHAT): Deterministic, bounded, fail-closed compression protocol validation.
   - `THOUGHT/LAB/CAT_CHAT/PHASE_7_COMPRESSION_SPEC.md`: 320-line specification defining compression metrics, components, reconstruction procedures, invariants, threat model, verification checklist, error codes, deterministic computation rules.
   - `THOUGHT/LAB/CAT_CHAT/SCHEMAS/compression_claim.schema.json`: 67-line schema with additionalProperties: false, required fields (claim_version, run_id, bundle_id, components, reported_metrics, claim_hash), component definitions (vector_db_only, symbol_lang, f3, cas).

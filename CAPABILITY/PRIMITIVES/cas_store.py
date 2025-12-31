@@ -67,11 +67,8 @@ def normalize_path(rel: str) -> str:
         if not part or part == '.':
             continue
         if part == '..':
-            if not parts:
-                raise ValueError(f"Path traversal detected: {rel}")
-            parts.pop()
-        else:
-            parts.append(part)
+            raise ValueError(f"Path traversal ('..') not allowed: {rel}")
+        parts.append(part)
     
     return '/'.join(parts)
 
@@ -277,6 +274,34 @@ class CatalyticStore:
             tmp.write_bytes(data)
             os.replace(tmp, path)
         return h
+
+    def put_stream(self, stream) -> str:
+        """Writes content of a stream to CAS and returns the hash."""
+        h = hashlib.sha256()
+        # Use a temporary file to store the stream until we have the full hash
+        import tempfile
+        fd, tmp_path = tempfile.mkstemp(dir=str(self.objects_dir) if self.objects_dir.exists() else None)
+        try:
+            with os.fdopen(fd, 'wb') as f:
+                while True:
+                    chunk = stream.read(65536)
+                    if not chunk:
+                        break
+                    f.write(chunk)
+                    h.update(chunk)
+            
+            digest = h.hexdigest()
+            target = self.object_path(digest)
+            if target.exists():
+                os.remove(tmp_path)
+            else:
+                target.parent.mkdir(parents=True, exist_ok=True)
+                os.replace(tmp_path, str(target))
+            return digest
+        except Exception:
+            if os.path.exists(tmp_path):
+                os.remove(tmp_path)
+            raise
 
     def get_bytes(self, hash_hex: str) -> bytes:
         """Reads bytes from CAS."""
