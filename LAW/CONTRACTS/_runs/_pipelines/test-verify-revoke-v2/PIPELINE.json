@@ -1,0 +1,1 @@
+{"pipeline_id":"test-verify-revoke-v2","steps":[{"capability_hash":"31582465356670ecbf7fe0bb7e114534935e43e11fd955f0a841e6d689d359fa","cmd":["C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe","-c","print('hello')"],"jobspec_path":"LAW/CONTRACTS/_runs/_pipelines/test-verify-revoke-v2/steps/s1/JOBSPEC.json","memoize":true,"step_id":"s1","strict":true}]}

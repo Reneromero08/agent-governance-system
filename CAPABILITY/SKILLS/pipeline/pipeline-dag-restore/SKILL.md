@@ -4,7 +4,7 @@
 
 **Status:** Draft
 
-**required_canon_version:** ">=2.8.0 <3.0.0"
+**required_canon_version:** ">=3.0.0 <4.0.0"
 
 ## Trigger
 

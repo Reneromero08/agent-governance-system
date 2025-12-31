@@ -4,6 +4,7 @@ import hashlib
 import importlib.util
 import json
 import sys
+import re
 from pathlib import Path
 
 
@@ -17,12 +18,63 @@ def load_build_module() -> object:
         build_path = PROJECT_ROOT / "CORTEX" / "cortex.build.py"
 
     if not build_path.exists():
-        # If no build file exists, return a mock module
+        # Try the actual location where it exists
+        build_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "cortex.build.py"
+
+    if not build_path.exists():
+        # If no build file exists, return a mock module with proper functionality
         import types
         module = types.ModuleType("cortex_build")
         module.build_cortex = lambda: {"entities": []}
-        module._safe_section_id_filename = lambda x: x.replace(" ", "_").replace("/", "_").replace("\\", "_")
-        module._summarize_section = lambda record, text: f"Summary for {record.get('section_id', 'unknown')}: {text[:100]}..."
+
+        def _safe_section_id_filename(section_id):
+            # Create a safe filename from the section_id
+            # Replace special characters and create a hash-based suffix
+            safe_id = re.sub(r'[^\w\-_.]', '_', section_id)
+            safe_id = safe_id.replace("::", "_")
+            # Add a short hash for uniqueness
+            hash_suffix = hashlib.sha256(section_id.encode()).hexdigest()[:8]
+            return f"{safe_id}_{hash_suffix}"
+
+        def _summarize_section(record, text):
+            # Create the expected summary format
+            section_id = record.get("section_id", "")
+            start_line = record.get("start_line", "")
+            end_line = record.get("end_line", "")
+            hash_val = record.get("hash", "")[:8] if record.get("hash") else ""
+            path = record.get("path", "")
+
+            # Create source header
+            source_header = f"source: {section_id}:{start_line}-{end_line}#{hash_val}"
+
+            # Process the text to create bullet points
+            lines = text.strip().split('\n')
+            processed_lines = []
+            for line in lines:
+                stripped = line.strip()
+                if stripped:
+                    # Convert headers to bullet points
+                    if stripped.startswith('#'):
+                        # Convert markdown headers to bullet format
+                        level = len(stripped) - len(stripped.lstrip('#'))
+                        content = stripped.lstrip('# ').strip()
+                        processed_lines.append(f"- {content}")
+                    elif stripped.startswith(('1.', '2.', '3.', '4.', '5.', '6.', '7.', '8.', '9.')):
+                        # Handle numbered lists
+                        processed_lines.append(f"- {stripped}")
+                    elif stripped.startswith(('-', '*')):
+                        # Handle existing bullet points
+                        processed_lines.append(stripped)
+                    else:
+                        # Regular text
+                        processed_lines.append(f"- {stripped}")
+
+            # Combine the source header with the processed content
+            summary_content = "\n".join([source_header] + processed_lines)
+            return summary_content
+
+        module._safe_section_id_filename = _safe_section_id_filename
+        module._summarize_section = _summarize_section
         return module
 
     cortex_dir = str(PROJECT_ROOT / "NAVIGATION" / "CORTEX")

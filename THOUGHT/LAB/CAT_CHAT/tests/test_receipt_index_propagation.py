@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Receipt Index Propagation Tests (Phase 6.11)
+Receipt Index Propagation Tests (Phase 6.12)
 """
 
 import json
@@ -86,23 +86,6 @@ def create_minimal_bundle(bundle_dir, run_id="test_run", num_steps=3):
     return bundle_dir
 
 
-def receipt_canonical_bytes(receipt):
-    """Convert dict to canonical JSON bytes."""
-    json_str = json.dumps(receipt, sort_keys=True, separators=(",", ":"))
-    return (json_str + "\n").encode('utf-8')
-
-
-def compute_receipt_hash(receipt):
-    """Compute receipt hash."""
-    receipt_copy = dict(receipt)
-
-    if "receipt_hash" in receipt_copy:
-        del receipt_copy["receipt_hash"]
-
-    canonical_bytes = receipt_canonical_bytes(receipt_copy)
-    return hashlib.sha256(canonical_bytes).hexdigest()
-
-
 def create_minimal_receipt(receipt_index, run_id="test_run"):
     """Create a minimal receipt for testing."""
     receipt = {
@@ -126,6 +109,24 @@ def create_minimal_receipt(receipt_index, run_id="test_run"):
     return receipt
 
 
+def receipt_canonical_bytes(receipt):
+    """Convert dict to canonical JSON bytes."""
+    json_str = json.dumps(receipt, sort_keys=True, separators=(",", ":"))
+    return (json_str + "\n").encode('utf-8')
+
+
+def compute_receipt_hash(receipt):
+    """Compute receipt hash."""
+    from catalytic_chat.receipt import sha256_hex
+    receipt_copy = dict(receipt)
+
+    if "receipt_hash" in receipt_copy:
+        del receipt_copy["receipt_hash"]
+
+    canonical_bytes = receipt_canonical_bytes(receipt_copy)
+    return sha256_hex(canonical_bytes)
+
+
 def link_receipt_chain(receipts):
     """Link a chain of receipts by setting parent_receipt_hash and recomputing receipt_hash."""
     for i, receipt in enumerate(receipts):
@@ -136,51 +137,48 @@ def link_receipt_chain(receipts):
 
 
 def test_executor_emits_contiguous_receipt_index():
-    """Executor emits receipt_index=0 for each bundle run (deterministic, no filesystem scanning)."""
+    """Executor emits receipt_index=0 deterministically (no caller control)."""
     from catalytic_chat.executor import BundleExecutor
+    from catalytic_chat.receipt import load_receipt
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir = Path(tmpdir)
 
         bundle_dir = create_minimal_bundle(tmpdir / "bundle", run_id="test_run", num_steps=3)
-        receipt_out = tmpdir / "test_run_001.json"
 
-        executor = BundleExecutor(bundle_dir, receipt_out=receipt_out)
+        executor = BundleExecutor(bundle_dir)
         result = executor.execute()
 
-        assert result["receipt_index"] == 0, f"Receipt should have index 0, got {result['receipt_index']}"
+        receipt_path = result.get("receipt_path")
+        assert receipt_path is not None, "Executor should return receipt_path"
+
+        receipt = load_receipt(Path(receipt_path))
+        assert receipt["receipt_index"] == 0, f"Receipt should have index 0 (deterministic, no caller control), got {receipt['receipt_index']}"
 
 
 def test_multiple_runs_do_not_affect_each_other_indices():
-    """Multiple runs with same run_id each produce receipt_index=0 (independent)."""
+    """Multiple runs with same run_id each produce receipt_index=0 (independent, no caller control)."""
     from catalytic_chat.executor import BundleExecutor
+    from catalytic_chat.receipt import load_receipt
 
     with tempfile.TemporaryDirectory() as tmpdir:
         tmpdir = Path(tmpdir)
 
         bundle1_dir = create_minimal_bundle(tmpdir / "bundle1", run_id="test_run", num_steps=3)
-        receipt1_out = tmpdir / "test_run_run1.json"
 
-        executor1 = BundleExecutor(bundle1_dir, receipt_out=receipt1_out)
+        executor1 = BundleExecutor(bundle1_dir)
         result1 = executor1.execute()
 
-        assert result1["receipt_index"] == 0, f"First run receipt should have index 0, got {result1['receipt_index']}"
+        receipt1 = load_receipt(Path(result1.get("receipt_path")))
+        assert receipt1["receipt_index"] == 0, f"First run receipt should have index 0 (no caller control), got {receipt1['receipt_index']}"
 
         bundle2_dir = create_minimal_bundle(tmpdir / "bundle2", run_id="test_run", num_steps=3)
-        receipt2_out = tmpdir / "test_run_run2.json"
 
-        executor2 = BundleExecutor(bundle2_dir, receipt_out=receipt2_out)
+        executor2 = BundleExecutor(bundle2_dir)
         result2 = executor2.execute()
 
-        assert result2["receipt_index"] == 0, f"Second run receipt should have index 0 (independent), got {result2['receipt_index']}"
-
-        bundle3_dir = create_minimal_bundle(tmpdir / "bundle3", run_id="test_run", num_steps=3)
-        receipt3_out = tmpdir / "test_run_run3.json"
-
-        executor3 = BundleExecutor(bundle3_dir, receipt_out=receipt3_out)
-        result3 = executor3.execute()
-
-        assert result3["receipt_index"] == 0, f"Third run receipt should have index 0 (independent), got {result3['receipt_index']}"
+        receipt2 = load_receipt(Path(result2.get("receipt_path")))
+        assert receipt2["receipt_index"] == 0, f"Second run receipt should have index 0 (independent, no caller control), got {receipt2['receipt_index']}"
 
 
 def test_verify_chain_fails_on_gap():

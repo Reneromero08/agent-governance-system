@@ -1,5 +1,6 @@
 {
   "description": "Verify all 10 core invariants exist in INVARIANTS.md",
+  "error": "CANON/INVARIANTS.md not found",
   "expected_invariants": [
     "INV-001",
     "INV-002",
@@ -17,7 +18,8 @@
     "INV-014",
     "INV-015"
   ],
-  "found_invariants": [
+  "found_invariants": [],
+  "missing": [
     "INV-001",
     "INV-002",
     "INV-003",
@@ -34,6 +36,5 @@
     "INV-014",
     "INV-015"
   ],
-  "missing": [],
-  "valid": true
+  "valid": false
 }

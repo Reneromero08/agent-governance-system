@@ -289,3 +289,179 @@ def verify_receipt_attestation(
                         attestation_build_id = attestation.get("build_id")
                         if attestation_build_id != pinned_build_id:
                             raise AttestationError(f"BUILD_ID_MISMATCH: attestation build_id={attestation_build_id}, pinned={pinned_build_id}")
+
+
+def verify_receipt_attestation_single(
+    receipt: Dict[str, Any],
+    attestation: Dict[str, Any],
+    trust_index: Optional[Dict[str, Any]],
+    strict: bool,
+    strict_identity: bool = False
+) -> None:
+    """Verify a single receipt attestation with optional strict trust checking.
+
+    Args:
+        receipt: Receipt dictionary (may have attestations array or attestation field)
+        attestation: Single attestation dictionary to verify
+        trust_index: Trust index from trust_policy.build_trust_index, or None
+        strict: If True, enforce trust policy checking
+        strict_identity: If True, enforce build_id pinning in strict mode
+
+    Raises:
+        AttestationError: If verification or trust check fails
+    """
+    if not isinstance(attestation, dict):
+        raise AttestationError("attestation must be an object")
+
+    from catalytic_chat.receipt import receipt_signed_bytes
+
+    receipt_copy = dict(receipt)
+    receipt_copy["attestation"] = attestation
+    if "attestations" in receipt_copy:
+        del receipt_copy["attestations"]
+    canonical_bytes = receipt_signed_bytes(receipt_copy)
+
+    try:
+        from nacl.signing import VerifyKey
+        from nacl.exceptions import BadSignatureError
+    except ImportError:
+        raise AttestationError("PyNaCl library required for verification. Install: pip install pynacl")
+
+    scheme = attestation.get("scheme")
+    if scheme != "ed25519":
+        raise AttestationError(f"unsupported scheme: {scheme!r}")
+
+    pub_hex = attestation.get("public_key")
+    sig_hex = attestation.get("signature")
+    if not isinstance(pub_hex, str) or not isinstance(sig_hex, str):
+        raise AttestationError("public_key and signature must be strings")
+
+    vk_bytes = _hex_to_bytes(pub_hex)
+    sig_bytes = _hex_to_bytes(sig_hex)
+
+    if len(vk_bytes) != 32:
+        raise AttestationError("invalid public_key length")
+    if len(sig_bytes) != 64:
+        raise AttestationError("invalid signature length")
+
+    vk = VerifyKey(vk_bytes)
+    try:
+        vk.verify(canonical_bytes, sig_bytes)
+    except BadSignatureError:
+        raise AttestationError("bad signature")
+
+    if strict:
+        if trust_index is None:
+            raise AttestationError("UNTRUSTED_VALIDATOR_KEY")
+
+        from catalytic_chat.trust_policy import get_validator_by_id, get_validator_by_public_key, is_key_allowed
+
+        validator_id = attestation.get("validator_id")
+
+        if validator_id is not None:
+            validator_entry = get_validator_by_id(trust_index, validator_id)
+            if validator_entry is None:
+                raise AttestationError(f"VALIDATOR_ID_NOT_FOUND: {validator_id}")
+
+            validator_pub_key = validator_entry.get("public_key")
+            if validator_pub_key is None:
+                raise AttestationError("VALIDATOR_ENTRY_MISSING_PUBLIC_KEY")
+
+            validator_pub_key_lower = validator_pub_key.lower()
+            pub_key_lower = pub_hex.lower()
+
+            if validator_pub_key_lower != pub_key_lower:
+                raise AttestationError(f"PUBLIC_KEY_MISMATCH: validator_id={validator_id} expects {validator_pub_key_lower}, got {pub_key_lower}")
+
+            if not is_key_allowed(trust_index, pub_hex, "RECEIPT", "ed25519"):
+                raise AttestationError("UNTRUSTED_VALIDATOR_KEY")
+
+            if strict_identity:
+                pinned_build_id = validator_entry.get("build_id")
+                if pinned_build_id:
+                    attestation_build_id = attestation.get("build_id")
+                    if attestation_build_id != pinned_build_id:
+                        raise AttestationError(f"BUILD_ID_MISMATCH: attestation build_id={attestation_build_id}, pinned={pinned_build_id}")
+        else:
+            if not is_key_allowed(trust_index, pub_hex, "RECEIPT", "ed25519"):
+                raise AttestationError("UNTRUSTED_VALIDATOR_KEY")
+
+            if strict_identity:
+                entry = get_validator_by_public_key(trust_index, pub_hex)
+                if entry:
+                    pinned_build_id = entry.get("build_id")
+                    if pinned_build_id:
+                        attestation_build_id = attestation.get("build_id")
+                        if attestation_build_id != pinned_build_id:
+                            raise AttestationError(f"BUILD_ID_MISMATCH: attestation build_id={attestation_build_id}, pinned={pinned_build_id}")
+
+
+def verify_receipt_attestations_with_quorum(
+    receipt: Dict[str, Any],
+    policy: Dict[str, Any],
+    trust_index: Optional[Dict[str, Any]],
+    strict: bool,
+    strict_identity: bool = False
+) -> int:
+    """Verify receipt attestations (single or multiple) and return count of valid attestations.
+
+    Args:
+        receipt: Receipt dictionary with attestation or attestations field
+        policy: Execution policy dictionary
+        trust_index: Trust index from trust_policy.build_trust_index, or None
+        strict: If True, enforce trust policy checking
+        strict_identity: If True, enforce build_id pinning in strict mode
+
+    Returns:
+        Number of valid attestations
+
+    Raises:
+        AttestationError: If verification fails or quorum not met
+    """
+    attestations = receipt.get("attestations")
+    single_attestation = receipt.get("attestation")
+
+    if attestations is not None:
+        if not isinstance(attestations, list):
+            raise AttestationError("attestations must be an array")
+
+        if len(attestations) == 0:
+            return 0
+
+        sorted_attestations = sorted(
+            attestations,
+            key=lambda a: (
+                a.get("validator_id", ""),
+                a.get("public_key", "").lower(),
+                a.get("build_id", "")
+            )
+        )
+
+        for i, att in enumerate(attestations):
+            sorted_att = sorted_attestations[i]
+            if (att.get("validator_id", "") != sorted_att.get("validator_id", "") or
+                att.get("public_key", "").lower() != sorted_att.get("public_key", "").lower() or
+                att.get("build_id", "") != sorted_att.get("build_id", "")):
+                raise AttestationError("attestations must be sorted by (validator_id, public_key, build_id)")
+
+        valid_count = 0
+        for att in attestations:
+            try:
+                verify_receipt_attestation_single(receipt, att, trust_index, strict, strict_identity)
+                valid_count += 1
+            except AttestationError:
+                pass
+
+        quorum = policy.get("receipt_attestation_quorum")
+        if quorum is not None:
+            required = quorum.get("required", 0)
+            if valid_count < required:
+                raise AttestationError(f"QUORUM_NOT_MET: need {required} valid attestations, got {valid_count}")
+
+        return valid_count
+
+    elif single_attestation is not None:
+        verify_receipt_attestation(receipt, trust_index, strict, strict_identity)
+        return 1
+
+    return 0

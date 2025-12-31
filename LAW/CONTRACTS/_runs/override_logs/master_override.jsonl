@@ -101,3 +101,5 @@
 {"ts": "2025-12-31T04:55:27.178889+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
 {"ts": "2025-12-31T05:01:30.756745+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
 {"ts": "2025-12-31T05:51:48.389139+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T08:38:49.174017+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}
+{"ts": "2025-12-31T08:57:46.222756+00:00", "event": "MASTER_OVERRIDE", "canon_version": "3.0.0", "note": "fixture"}

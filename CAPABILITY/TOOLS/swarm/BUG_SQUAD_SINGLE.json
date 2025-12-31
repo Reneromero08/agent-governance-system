@@ -1,7 +1,0 @@
-[
-    {
-        "file": "CAPABILITY/TESTBENCH/phases/phase8_router/test_ags_phase8_model_binding.py",
-        "last_error": "FileNotFoundError: [WinError 2] The system cannot find the file specified",
-        "instruction": "Fix subprocess calls to use sys.executable instead of hardcoded /usr/bin/python3."
-    }
-]

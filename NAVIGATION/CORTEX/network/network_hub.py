@@ -5,6 +5,7 @@ Semantic Network Hub - Central coordinator for cassette network.
 Manages all cassettes and routes queries based on capabilities.
 """
 
+import sys
 from typing import Dict, List
 from cassette_protocol import DatabaseCassette
 
@@ -15,9 +16,10 @@ class SemanticNetworkHub:
     Coordinates query routing across multiple cassettes.
     """
 
-    def __init__(self):
+    def __init__(self, verbose: bool = False):
         self.cassettes: Dict[str, DatabaseCassette] = {}
         self.protocol_version = "1.0"
+        self.verbose = verbose
 
     def register_cassette(self, cassette: DatabaseCassette) -> Dict:
         """Register a new cassette in network.
@@ -30,11 +32,12 @@ class SemanticNetworkHub:
         """
         handshake = cassette.handshake()
         self.cassettes[handshake['cassette_id']] = cassette
-        print(f"[NETWORK] Registered cassette: {handshake['cassette_id']}")
-        print(f"  Path: {handshake['db_path']}")
-        print(f"  Hash: {handshake['db_hash']}")
-        print(f"  Capabilities: {handshake['capabilities']}")
-        print(f"  Stats: {handshake['stats']}")
+        if self.verbose:
+            print(f"[NETWORK] Registered cassette: {handshake['cassette_id']}", file=sys.stderr)
+            print(f"  Path: {handshake['db_path']}", file=sys.stderr)
+            print(f"  Hash: {handshake['db_hash']}", file=sys.stderr)
+            print(f"  Capabilities: {handshake['capabilities']}", file=sys.stderr)
+            print(f"  Stats: {handshake['stats']}", file=sys.stderr)
         return handshake
 
     def query_all(self, query: str, top_k: int = 10) -> Dict[str, List[dict]]:
@@ -47,16 +50,18 @@ class SemanticNetworkHub:
         Returns:
             Dict mapping cassette_id to list of results
         """
-        print(f"[NETWORK] Routing query to all cassettes: '{query}'")
+        if self.verbose:
+            print(f"[NETWORK] Routing query to all cassettes: '{query}'", file=sys.stderr)
 
         results = {}
         for cassette_id, cassette in self.cassettes.items():
             try:
                 cassette_results = cassette.query(query, top_k)
                 results[cassette_id] = cassette_results
-                print(f"  {cassette_id}: {len(cassette_results)} results")
+                if self.verbose:
+                    print(f"  {cassette_id}: {len(cassette_results)} results", file=sys.stderr)
             except Exception as e:
-                print(f"  {cassette_id}: ERROR - {e}")
+                print(f"  {cassette_id}: ERROR - {e}", file=sys.stderr)
                 results[cassette_id] = []
 
         return results
@@ -72,7 +77,8 @@ class SemanticNetworkHub:
         Returns:
             Dict mapping cassette_id to list of results
         """
-        print(f"[NETWORK] Routing query to cassettes with capability '{capability}': '{query}'")
+        if self.verbose:
+            print(f"[NETWORK] Routing query to cassettes with capability '{capability}': '{query}'", file=sys.stderr)
 
         results = {}
         for cassette_id, cassette in self.cassettes.items():
@@ -80,9 +86,10 @@ class SemanticNetworkHub:
                 try:
                     cassette_results = cassette.query(query, top_k)
                     results[cassette_id] = cassette_results
-                    print(f"  {cassette_id}: {len(cassette_results)} results")
+                    if self.verbose:
+                        print(f"  {cassette_id}: {len(cassette_results)} results", file=sys.stderr)
                 except Exception as e:
-                    print(f"  {cassette_id}: ERROR - {e}")
+                    print(f"  {cassette_id}: ERROR - {e}", file=sys.stderr)
                     results[cassette_id] = []
 
         return results

@@ -1,0 +1,110 @@
+{
+  "input_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {
+        "type": "string",
+        "description": "Unique task identifier"
+      },
+      "task_type": {
+        "type": "string",
+        "enum": ["file_operation", "code_adapt", "validate", "research"],
+        "description": "Type of task to execute"
+      },
+      "operation": {
+        "type": "string",
+        "enum": ["copy", "move", "delete", "read"],
+        "description": "For file_operation tasks: which operation to perform"
+      },
+      "file": {
+        "type": "string",
+        "description": "For code_adapt, validate, research: single file path"
+      },
+      "files": {
+        "type": "array",
+        "items": {
+          "oneOf": [
+            {
+              "type": "object",
+              "properties": {
+                "source": {"type": "string"},
+                "destination": {"type": "string"}
+              },
+              "required": ["source", "destination"]
+            },
+            {"type": "string"}
+          ]
+        },
+        "description": "For file_operation: list of files or file pairs"
+      },
+      "verify_integrity": {
+        "type": "boolean",
+        "default": true,
+        "description": "For copy operations: verify SHA-256 hash match"
+      },
+      "adaptations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "find": {"type": "string"},
+            "replace": {"type": "string"},
+            "reason": {"type": "string"}
+          },
+          "required": ["find", "replace"]
+        },
+        "description": "For code_adapt: find/replace patterns"
+      },
+      "checks": {
+        "type": "array",
+        "items": {"type": "string"},
+        "description": "For validate: list of checks to perform"
+      },
+      "analysis_type": {
+        "type": "string",
+        "enum": ["general", "code_structure", "dependencies", "imports"],
+        "description": "For research: type of analysis"
+      }
+    },
+    "required": ["task_id", "task_type"]
+  },
+  "output_schema": {
+    "type": "object",
+    "properties": {
+      "task_id": {"type": "string"},
+      "task_type": {"type": "string"},
+      "run_id": {"type": "string"},
+      "status": {
+        "type": "string",
+        "enum": ["success", "error", "pending"]
+      },
+      "timestamp_start": {"type": "string", "format": "date-time"},
+      "timestamp_end": {"type": "string", "format": "date-time"},
+      "operations": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "operation": {"type": "string"},
+            "source": {"type": "string"},
+            "destination": {"type": "string"},
+            "source_hash": {"type": "string"},
+            "dest_hash": {"type": "string"},
+            "hash_verified": {"type": "boolean"},
+            "size_bytes": {"type": "integer"},
+            "timestamp": {"type": "string", "format": "date-time"}
+          }
+        }
+      },
+      "errors": {
+        "type": "array",
+        "items": {"type": "string"}
+      },
+      "ledger_dir": {
+        "type": "string",
+        "description": "Path to CONTRACTS/_runs/<run_id>/ for immutable audit trail"
+      }
+    },
+    "required": ["task_id", "task_type", "run_id", "status", "operations", "errors", "ledger_dir"]
+  }
+}

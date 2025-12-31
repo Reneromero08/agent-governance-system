@@ -7,7 +7,7 @@ Deterministic Ed25519 signing and verification of receipt chain Merkle root.
 
 import json
 from pathlib import Path
-from typing import Dict, Any, Optional
+from typing import Dict, Any, Optional, List
 
 
 class MerkleAttestationError(RuntimeError):
@@ -337,3 +337,83 @@ def load_merkle_attestation(att_path: Path) -> Optional[Dict[str, Any]]:
     att_bytes = att_path.read_bytes()
     att_text = att_bytes.decode('utf-8').rstrip('\n')
     return json.loads(att_text)
+
+
+def load_aggregated_merkle_attestations(att_path: Path) -> Optional[Dict[str, Any]]:
+    """Load aggregated merkle attestations from file.
+
+    Args:
+        att_path: Path to aggregated attestations file
+
+    Returns:
+        Aggregated attestations dictionary or None if file doesn't exist
+    """
+    if not att_path.exists():
+        return None
+
+    att_bytes = att_path.read_bytes()
+    att_text = att_bytes.decode('utf-8').rstrip('\n')
+    return json.loads(att_text)
+
+
+def verify_merkle_attestations_with_quorum(
+    attestations: List[Dict[str, Any]],
+    merkle_root_hex: str,
+    policy: Dict[str, Any],
+    trust_index: Optional[Dict[str, Any]],
+    strict: bool,
+    strict_identity: bool = False
+) -> int:
+    """Verify multiple merkle attestations and return count of valid attestations.
+
+    Args:
+        attestations: List of merkle attestation dictionaries
+        merkle_root_hex: Expected Merkle root hex string
+        policy: Execution policy dictionary
+        trust_index: Trust index from trust_policy.build_trust_index, or None
+        strict: If True, enforce trust policy checking
+        strict_identity: If True, enforce build_id pinning in strict mode
+
+    Returns:
+        Number of valid attestations
+
+    Raises:
+        MerkleAttestationError: If verification fails or quorum not met
+    """
+    if not isinstance(attestations, list):
+        raise MerkleAttestationError("attestations must be an array")
+
+    if len(attestations) == 0:
+        return 0
+
+    sorted_attestations = sorted(
+        attestations,
+        key=lambda a: (
+            a.get("validator_id", ""),
+            a.get("public_key", "").lower(),
+            a.get("build_id", "")
+        )
+    )
+
+    for i, att in enumerate(attestations):
+        sorted_att = sorted_attestations[i]
+        if (att.get("validator_id", "") != sorted_att.get("validator_id", "") or
+            att.get("public_key", "").lower() != sorted_att.get("public_key", "").lower() or
+            att.get("build_id", "") != sorted_att.get("build_id", "")):
+            raise MerkleAttestationError("attestations must be sorted by (validator_id, public_key, build_id)")
+
+    valid_count = 0
+    for att in attestations:
+        try:
+            verify_merkle_attestation_with_trust(att, merkle_root_hex, trust_index, strict, strict_identity)
+            valid_count += 1
+        except MerkleAttestationError:
+            pass
+
+    quorum = policy.get("merkle_attestation_quorum")
+    if quorum is not None:
+        required = quorum.get("required", 0)
+        if valid_count < required:
+            raise MerkleAttestationError(f"QUORUM_NOT_MET: need {required} valid attestations, got {valid_count}")
+
+    return valid_count

@@ -748,38 +748,117 @@ def cmd_bundle_build(args) -> int:
 def cmd_bundle_verify(args) -> int:
     """Verify bundle integrity.
 
+    Exit codes:
+        0: OK
+        1: Verification failed
+        2: Invalid input
+        3: Internal error
+
     Args:
         args: Parsed command-line arguments
 
     Returns:
-        Exit code (0 for success, 1 on failure)
+        Exit code (0-3)
     """
+    from catalytic_chat.cli_output import (
+        write_json_report,
+        write_info,
+        write_error,
+        format_json_report,
+        classify_exit_code,
+        EXIT_OK
+    )
+
     bundle_dir = Path(args.bundle)
+    quiet = getattr(args, 'quiet', False)
+    json_mode = getattr(args, 'json', False)
 
-    try:
-        verifier = BundleVerifier(bundle_dir)
-        result = verifier.verify()
+    is_invalid_input = False
+    is_verification_failure = False
+    is_internal_error = False
+    errors = []
 
-        print(f"[OK] Bundle verified")
-        print(f"      bundle_id: {result['bundle_id']}")
-        print(f"      run_id: {result['run_id']}")
-        print(f"      job_id: {result['job_id']}")
-        print(f"      artifacts: {result['artifact_count']}")
-        print(f"      root_hash: {result['root_hash']}")
-        return 0
-    except BundleError as e:
-        sys.stderr.write(f"[FAIL] {e}\n")
-        return 1
+    if not bundle_dir.exists():
+        error_msg = f"Bundle directory not found: {bundle_dir}"
+        write_error(error_msg)
+        errors.append({"code": "BUNDLE_NOT_FOUND", "message": error_msg})
+        is_invalid_input = True
+    else:
+        try:
+            verifier = BundleVerifier(bundle_dir)
+            result = verifier.verify()
+
+            if not json_mode:
+                write_info(f"[OK] Bundle verified", quiet)
+                write_info(f"      bundle_id: {result['bundle_id']}", quiet)
+                write_info(f"      run_id: {result['run_id']}", quiet)
+                write_info(f"      job_id: {result['job_id']}", quiet)
+                write_info(f"      artifacts: {result['artifact_count']}", quiet)
+                write_info(f"      root_hash: {result['root_hash']}", quiet)
+
+            if json_mode:
+                report = format_json_report(
+                    ok=True,
+                    command="bundle_verify",
+                    bundle_id=result.get("bundle_id"),
+                    run_id=result.get("run_id"),
+                    job_id=result.get("job_id"),
+                    counts={"artifacts": result.get("artifact_count", 0)}
+                )
+                write_json_report(report, quiet)
+
+            return EXIT_OK
+
+        except BundleError as e:
+            error_msg = f"{e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "VERIFICATION_ERROR", "message": error_msg})
+            is_verification_failure = True
+        except FileNotFoundError as e:
+            error_msg = f"File not found: {e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "FILE_NOT_FOUND", "message": error_msg})
+            is_invalid_input = True
+        except json.JSONDecodeError as e:
+            error_msg = f"Invalid JSON: {e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "INVALID_JSON", "message": error_msg})
+            is_invalid_input = True
+        except Exception as e:
+            error_msg = f"Internal error: {e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "INTERNAL_ERROR", "message": error_msg})
+            is_internal_error = True
+
+    if json_mode and errors:
+        report = format_json_report(
+            ok=False,
+            command="bundle_verify",
+            errors=errors
+        )
+        write_json_report(report, quiet)
+
+    return classify_exit_code(
+        is_verification_failure=is_verification_failure,
+        is_invalid_input=is_invalid_input,
+        is_internal_error=is_internal_error
+    )
 
 
 def cmd_bundle_run(args) -> int:
     """Run bundle and output receipt path with optional attestation verification.
 
+    Exit codes:
+        0: OK
+        1: Verification failed
+        2: Invalid input
+        3: Internal error
+
     Args:
         args: Parsed command-line arguments
 
     Returns:
-        Exit code (0 for success, 1 on failure)
+        Exit code (0-3)
     """
     from catalytic_chat.execution_policy import (
         policy_from_cli_args,
@@ -799,6 +878,15 @@ def cmd_bundle_run(args) -> int:
     merkle_key = getattr(args, 'merkle_key', None)
     verify_merkle_attestation_path = getattr(args, 'verify_merkle_attestation', None)
     merkle_attestation_out = getattr(args, 'merkle_attestation_out', None)
+    receipt_out = getattr(args, 'receipt_out', None)
+    verify_attestation = getattr(args, 'verify_attestation', False)
+    verify_chain = getattr(args, 'verify_chain', False)
+    require_attestation = getattr(args, 'require_attestation', False)
+    require_merkle_attestation = getattr(args, 'require_merkle_attestation', False)
+    strict_trust = getattr(args, 'strict_trust', False)
+    strict_identity = getattr(args, 'strict_identity', False)
+    quiet = getattr(args, 'quiet', False)
+    json_mode = getattr(args, 'json', False)
 
     try:
         if policy_path:
@@ -1053,14 +1141,28 @@ def cmd_trust_init(args) -> int:
 def cmd_trust_verify(args) -> int:
     """Verify trust policy against schema and uniqueness rules.
 
+    Exit codes:
+        0: OK
+        1: Verification failed
+        2: Invalid input
+        3: Internal error
+
     Args:
         args: Parsed command-line arguments
 
     Returns:
-        Exit code (0 for success, 1 on failure)
+        Exit code (0-3)
     """
     from catalytic_chat.trust_policy import load_trust_policy_bytes, parse_trust_policy, build_trust_index, TrustPolicyError
     from catalytic_chat.validator_identity import parse_build_id, ValidatorIdentityError
+    from catalytic_chat.cli_output import (
+        write_json_report,
+        write_info,
+        write_error,
+        format_json_report,
+        classify_exit_code,
+        EXIT_OK
+    )
 
     if args.trust_policy:
         policy_path = Path(args.trust_policy)
@@ -1068,28 +1170,84 @@ def cmd_trust_verify(args) -> int:
         repo_root = args.repo_root or Path.cwd()
         policy_path = repo_root / "THOUGHT" / "LAB" / "CAT_CHAT" / "CORTEX" / "_generated" / "TRUST_POLICY.json"
 
-    try:
-        policy_bytes = load_trust_policy_bytes(policy_path)
-        policy = parse_trust_policy(policy_bytes)
+    quiet = getattr(args, 'quiet', False)
+    json_mode = getattr(args, 'json', False)
 
-        for entry in policy.get("allow", []):
-            build_id = entry.get("build_id")
-            if build_id:
-                try:
-                    parse_build_id(build_id)
-                except ValidatorIdentityError as e:
-                    sys.stderr.write(f"[FAIL] invalid build_id in validator '{entry.get('validator_id')}': {e}\n")
-                    return 1
+    is_invalid_input = False
+    is_verification_failure = False
+    is_internal_error = False
+    errors = []
 
-        build_trust_index(policy)
-        sys.stderr.write("[OK] trust policy valid\n")
-        return 0
-    except TrustPolicyError as e:
-        sys.stderr.write(f"[FAIL] {e}\n")
-        return 1
-    except Exception as e:
-        sys.stderr.write(f"[FAIL] {e}\n")
-        return 1
+    if not policy_path.exists():
+        error_msg = f"Trust policy file not found: {policy_path}"
+        write_error(error_msg)
+        errors.append({"code": "FILE_NOT_FOUND", "message": error_msg})
+        is_invalid_input = True
+    else:
+        try:
+            policy_bytes = load_trust_policy_bytes(policy_path)
+            policy = parse_trust_policy(policy_bytes)
+
+            for entry in policy.get("allow", []):
+                build_id = entry.get("build_id")
+                if build_id:
+                    try:
+                        parse_build_id(build_id)
+                    except ValidatorIdentityError as e:
+                        error_msg = f"invalid build_id in validator '{entry.get('validator_id')}': {e}"
+                        write_error(f"[FAIL] {error_msg}")
+                        errors.append({"code": "INVALID_BUILD_ID", "message": error_msg})
+                        is_verification_failure = True
+
+            if not is_verification_failure:
+                build_trust_index(policy)
+                if not json_mode:
+                    write_info("[OK] trust policy valid", quiet)
+
+            if json_mode:
+                report = format_json_report(
+                    ok=not is_verification_failure,
+                    command="trust_verify",
+                    errors=errors if errors else None
+                )
+                write_json_report(report, quiet)
+
+            return EXIT_OK if not is_verification_failure else 1
+
+        except TrustPolicyError as e:
+            error_msg = f"{e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "TRUST_POLICY_ERROR", "message": error_msg})
+            is_verification_failure = True
+        except FileNotFoundError:
+            error_msg = f"Trust policy file not found: {policy_path}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "FILE_NOT_FOUND", "message": error_msg})
+            is_invalid_input = True
+        except json.JSONDecodeError as e:
+            error_msg = f"Invalid JSON: {e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "INVALID_JSON", "message": error_msg})
+            is_invalid_input = True
+        except Exception as e:
+            error_msg = f"Internal error: {e}"
+            write_error(f"[FAIL] {error_msg}")
+            errors.append({"code": "INTERNAL_ERROR", "message": error_msg})
+            is_internal_error = True
+
+    if json_mode and errors:
+        report = format_json_report(
+            ok=False,
+            command="trust_verify",
+            errors=errors
+        )
+        write_json_report(report, quiet)
+
+    return classify_exit_code(
+        is_verification_failure=is_verification_failure,
+        is_invalid_input=is_invalid_input,
+        is_internal_error=is_internal_error
+    )
 
 
 def cmd_trust_show(args) -> int:
@@ -1296,6 +1454,8 @@ def main():
 
     bundle_verify_parser = bundle_subparsers.add_parser("verify", help="Verify bundle integrity")
     bundle_verify_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
+    bundle_verify_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON report to stdout (human logs to stderr)")
+    bundle_verify_parser.add_argument("--quiet", action="store_true", help="Suppress non-error stderr output")
 
     bundle_run_parser = bundle_subparsers.add_parser("run", help="Run bundle and output execution result")
     bundle_run_parser.add_argument("--bundle", type=Path, required=True, help="Bundle directory path")
@@ -1315,6 +1475,8 @@ def main():
     bundle_run_parser.add_argument("--require-attestation", action="store_true", help="Require receipt attestation to be present")
     bundle_run_parser.add_argument("--require-merkle-attestation", action="store_true", help="Require merkle attestation to be present and valid")
     bundle_run_parser.add_argument("--policy", type=Path, required=False, help="Execution policy file path (unifies verification flags)")
+    bundle_run_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON report to stdout (human logs to stderr)")
+    bundle_run_parser.add_argument("--quiet", action="store_true", help="Suppress non-error stderr output")
 
     trust_parser = subparsers.add_parser("trust", help="Trust policy commands (Phase 6.6)")
     trust_subparsers = trust_parser.add_subparsers(dest="trust_command", help="Trust commands")
@@ -1322,6 +1484,8 @@ def main():
     trust_init_parser = trust_subparsers.add_parser("init", help="Initialize empty trust policy")
     trust_verify_parser = trust_subparsers.add_parser("verify", help="Verify trust policy against schema")
     trust_verify_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path")
+    trust_verify_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON report to stdout (human logs to stderr)")
+    trust_verify_parser.add_argument("--quiet", action="store_true", help="Suppress non-error stderr output")
     trust_show_parser = trust_subparsers.add_parser("show", help="Print trust policy summary")
     trust_show_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path")
 
