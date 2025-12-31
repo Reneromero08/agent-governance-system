@@ -3,11 +3,33 @@
 All notable changes to Agent Governance System will be documented in this file.
 
 ## [Unreleased] - 2025-12-30
+### Added
+- **Phase 6.6 (Validator Identity Pinning + Trust Policy)**: Complete deterministic trust policy system for CAT_CHAT.
+  - `SCHEMAS/trust_policy.schema.json`: Schema enforcing `policy_version="1.0.0"`, 64-char hex public keys, ed25519 scheme, scopes limited to RECEIPT/MERKLE.
+  - `catalytic_chat/trust_policy.py`: Trust policy loader and verifier with deterministic indexing and uniqueness enforcement.
+  - `catalytic_chat/attestation.py`: Added `verify_receipt_attestation()` with strict trust checking.
+  - `catalytic_chat/merkle_attestation.py`: Added `verify_merkle_attestation_with_trust()` with strict trust checking.
+  - `cli.py`: Added `trust {init,verify,show}` commands and strict trust flags to `bundle run`.
+  - `tests/test_trust_policy.py`: Comprehensive tests for trust policy, receipt/merkle strict trust, and CLI integration.
+  - `CORTEX/_generated/TRUST_POLICY.json`: Default empty trust policy.
+
+### Added
+- **MCP Swarm Coordination (ADR-024)**: Integrated MCP Message Board into Failure Dispatcher and Professional Orchestrator for real-time swarm coordination.
+- **Agent Inbox Governance**: Formalized task management via new MCP tools: `agent_inbox_list`, `agent_inbox_claim`, and `agent_inbox_finalize`.
+- **The Professional (v2.0)**: Upgraded high-tier orchestrator to be inbox-aware and linked to the Governor via the MCP message board.
+- **Sentinel (Dispatcher) v1.5**:
+    - **Solo Protocol**: New `solo` command to manually trigger high-tier task execution.
+    - **Deep Troubleshoot**: New `troubleshoot` command using `qwen2.5-coder:7b` for autonomous root cause analysis.
+    - **Swarm Broadcast**: Integrated `broadcast` command for sending real-time tactical guidance to all agents.
+
 ### Fixed
+- **Path Alignment (6-Bucket Layout)**: Migrated Message Board and Intent logs to `LAW/CONTRACTS/_runs/` for governance compliance.
+- **Windows Unicode Stability**: Force-enabled UTF-8 encoding for all agent subprocesses, preventing crashes during multi-model execution on Windows.
 - MCP server pathing aligned to 6-bucket layout (LAW/CAPABILITY/NAVIGATION) for canon/resources, prompts, context, and tool helpers.
 - MCP context/cortex tools now read from LAW/CONTEXT and NAVIGATION/CORTEX index during refactor.
 - MCP entrypoint root resolution corrected for consistent imports and logging.
 - mcp-smoke skill updated for canon 3.x compatibility and Cortex discovery changes.
+- MCP auto-start and governance paths migrated to LAW/CONTRACTS with updated autostart config/script under CAPABILITY/MCP.
 
 ## [3.1.1] - 2025-12-30
 ### Governed Swarm & Neo3000
@@ -372,7 +394,7 @@ This release establishes The Living Formula as the primary driver for navigating
 ### MCP Message Board
 
 #### Added
-- `MCP/board_roles.json` role allowlist for message board moderation.
+- `CAPABILITY/MCP/board_roles.json` role allowlist for message board moderation.
 - MCP tools: `message_board_list`, `message_board_write` (post/pin/unpin/delete/purge).
 - Append-only storage under `CONTRACTS/_runs/message_board/`.
 - `SKILLS/mcp-message-board/` governance placeholder skill with fixtures.
@@ -493,7 +515,7 @@ This release establishes The Living Formula as the primary driver for navigating
 - `MCP/AUTO_START.md` and `MCP/QUICKSTART.md` for the recommended auto-start flow.
 
 #### Changed
-- `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `CONTRACTS/_runs/ags_mcp_auto.py`.
+- `MCP/README.md` and `MCP/claude_desktop_config.json` updated to prefer `LAW/CONTRACTS/_runs/ags_mcp_auto.py`.
 
 ## [2.11.9] - 2025-12-27
 
@@ -703,7 +725,7 @@ This release establishes The Living Formula as the primary driver for navigating
 
 ### Changed
 - Added `MASTER_OVERRIDE` to governance docs (Agreement, Contract, Genesis, Agents, Glossary).
-- MCP documentation now recommends logs under `CONTRACTS/_runs/mcp_logs/`.
+- MCP documentation now recommends logs under `LAW/CONTRACTS/_runs/mcp_logs/`.
 - Planning references now point at `CONTEXT/archive/planning/INDEX.md`.
 - Bumped `canon_version` to 2.6.0.
 
