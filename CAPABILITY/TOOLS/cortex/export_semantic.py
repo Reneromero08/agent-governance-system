@@ -11,7 +11,8 @@ import json
 import numpy as np
 from pathlib import Path
 
-DB_PATH = Path("CORTEX/system1.db")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "system1.db"
 
 def export_for_tiny_agents():
     """

@@ -51,50 +51,118 @@ INBOX/
 
 ## Document Requirements
 
-All documents in `INBOX/` MUST include:
+All documents in `INBOX/` MUST follow these strict formatting rules:
 
-1. **Content Hash**
-   - SHA-256 hash of document content
-   - Purpose: Detect modifications and verify integrity
-   - Format: `<!-- CONTENT_HASH: <sha256> -->` in Markdown files
-   - Location: First line or metadata section
+### 1. Filename Format (MANDATORY)
+**Format:** `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md`
 
-2. **Document Metadata**
-   - Title
-   - Date created
-   - Author/agent identity
-   - Status (Draft, Ready for Review, Archived)
-   - Related resources (links to canon, roadmaps, etc.)
+**Rules:**
+- Timestamp uses system time at document creation
+- Title must be ALL CAPS with underscores (no spaces)
+- Title should be descriptive and human-readable
+- Examples:
+  - `01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md`
+  - `12-28-2025-14-22_CASSETTE_NETWORK_IMPLEMENTATION.md`
+  - `12-29-2025-09-15_SEMANTIC_CORE_PHASE_ONE_COMPLETE.md`
 
-3. **Cortex References**
-   - When applicable, use @Symbol references instead of full content
-   - Format: `@C:{hash_short}` referencing cortex entries
-   - Reduces token usage and keeps INBOX lightweight
+**Rationale:**
+- Chronological sorting by filename
+- Instant timestamp visibility
+- No filename collisions
+- Easy grep/search by date range
+
+### 2. Document Header (MANDATORY)
+**Format:** YAML frontmatter followed by content hash
+
+```yaml
+---
+uuid: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+title: "Descriptive Title (Human Readable)"
+section: report|research|roadmap|guide
+bucket: "primary_category/subcategory"
+author: "System|Antigravity|Human Name"
+priority: High|Medium|Low
+created: "YYYY-MM-DD HH:MM"
+modified: "YYYY-MM-DD HH:MM"
+status: "Draft|Ready for Review|Archived|Complete"
+summary: "One-line summary of document purpose and content"
+tags: [tag1, tag2, tag3]
+hashtags: ["#category", "#topic", "#status"]
+---
+<!-- CONTENT_HASH: <sha256_of_content_after_yaml> -->
+```
+
+**Rules:**
+- YAML block MUST be first (lines 1-N)
+- Content hash MUST be immediately after YAML (line N+1)
+- Hash is computed on content AFTER the hash line (not including YAML or hash line itself)
+- All fields are REQUIRED (no optional fields)
+- Timestamps use `YYYY-MM-DD HH:MM` format
+
+**Field Specifications:**
+- **uuid**: RFC 4122 compliant UUID v4 (generated once, never changes)
+- **bucket**: Hierarchical category path (e.g., "implementation/phase1", "research/architecture")
+- **tags**: Machine-readable tags (lowercase, underscores)
+- **hashtags**: Human-readable hashtags with # prefix (for cross-referencing and discovery)
+
+### 3. Cortex References
+- When applicable, use @Symbol references instead of full content
+- Format: `@C:{hash_short}` referencing cortex entries
+- Reduces token usage and keeps INBOX lightweight
 
 ## Examples
 
 ### Implementation Report
 
+**Filename:** `12-28-2025-14-30_CASSETTE_NETWORK_IMPLEMENTATION.md`
+
 ```markdown
+---
+uuid: "a7b3c5d9-e8f2-41b4-c8e5-d6a7b3e9f8a4"
+title: "Cassette Network Implementation Report"
+section: report
+bucket: "implementation/cassette_network"
+author: "System"
+priority: High
+created: "2025-12-28 14:30"
+modified: "2025-12-28 14:30"
+status: "Complete"
+summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
+tags: [cassette, network, implementation]
+hashtags: ["#cassette", "#phase1", "#complete"]
+---
+<!-- CONTENT_HASH: a7b3c5d9e8f2a1b4c8e5d6a7b3e9f8a4c5d -->
+
 # Cassette Network Implementation Report
 
-<!-- CONTENT_HASH: a7b3c5d9e8f2a1b4c8e5d6a7b3e9f8a4c5d -->
-**Date:** 2025-12-28
-**Status:** COMPLETE
-**Agent:** opencode@agent-governance-system | 2025-12-28
-
+## Executive Summary
 ...
 ```
 
 ### Research Document
 
+**Filename:** `12-28-2025-09-15_CASSETTE_ARCHITECTURE_RESEARCH.md`
+
 ```markdown
+---
+uuid: "8f2d3b4e-1a9c-5d6e-7f8a-2b1c9d4e5f6a"
+title: "Cassette Network Architecture Research"
+section: research
+bucket: "research/architecture"
+author: "Antigravity"
+priority: Medium
+created: "2025-12-28 09:15"
+modified: "2025-12-28 09:15"
+status: "Draft"
+summary: "Research findings on distributed cassette architecture and semantic indexing strategies"
+tags: [cassette, architecture, research]
+hashtags: ["#research", "#cassette", "#architecture"]
+---
+<!-- CONTENT_HASH: 8f2d3b4e1a9c5d6e7f8a2b1c9d4e5f6a8b7c3d2e -->
+
 # Cassette Network Architecture Research
 
-<!-- CONTENT_HASH: 8f2d3b4e1a9c5d6e7f8a2b1c9d4e5f6a8b7c3d2e -->
-**Date:** 2025-12-28
-**Researcher:** opencode
-
+## Overview
 ...
 
 ## Required Context: @Cortex
@@ -118,10 +186,16 @@ python TOOLS/cortex.py resolve @C:ab5e61a8
 
 The pre-commit hook (`SKILLS/canon-governance-check/scripts/pre-commit`) will verify:
 
-1. ✅ All human-readable documents are in `INBOX/` (not scattered across repo)
-2. ✅ All INBOX documents contain content hash
-3. ✅ Documents use @Symbol references when appropriate (not duplicating canon content)
-4. ✅ INBOX structure is maintained (reports/, research/, roadmaps/, etc.)
+1. ✅ **Filename Format:** All INBOX files match `MM-DD-YYYY-HH-MM_TITLE.md` pattern
+2. ✅ **YAML Frontmatter:** All INBOX documents contain valid YAML with ALL required fields
+3. ✅ **UUID Validity:** UUID field is RFC 4122 compliant UUID v4
+4. ✅ **Bucket Format:** Bucket follows hierarchical path format (category/subcategory)
+5. ✅ **Hashtags Format:** Hashtags are properly formatted with # prefix
+6. ✅ **Content Hash:** Hash line exists immediately after YAML frontmatter
+7. ✅ **Hash Validity:** Content hash matches actual content (excluding YAML and hash line)
+8. ✅ **Timestamp Consistency:** Filename timestamp matches YAML `created` field
+9. ✅ **INBOX Structure:** Documents are in correct subdirectories (reports/, research/, roadmaps/)
+10. ✅ **@Symbol References:** Cortex references are valid when present
 
 ## Exceptions
 
@@ -134,6 +208,7 @@ The following are EXEMPT from INBOX policy:
 5. **Skill manifests** (SKILLS/*/SKILL.md) - These stay with their skills
 6. **Context records** (CONTEXT/decisions/*, CONTEXT/preferences/*) - Append-first storage
 7. **Build outputs** (BUILD/*) - User workspace outputs
+8. **INBOX.md** - The index file itself
 
 ## Enforcement
 
@@ -141,20 +216,26 @@ The following are EXEMPT from INBOX policy:
 
 When committing changes, the governance check will:
 
-1. Scan for new `.md` files outside allowed locations
-2. Verify files in `INBOX/` have content hashes
-3. Verify @Symbol references are valid (if present)
-4. Report violations:
-   - ERROR: Human-readable document outside INBOX
-   - ERROR: INBOX document missing content hash
+1. Scan for new `.md` files in `INBOX/`
+2. Validate filename matches `MM-DD-YYYY-HH-MM_*.md` pattern
+3. Parse YAML frontmatter and verify all required fields exist
+4. Verify content hash exists and is valid
+5. Check timestamp consistency between filename and YAML
+6. Verify @Symbol references are valid (if present)
+7. Report violations:
+   - ERROR: Invalid filename format (must be MM-DD-YYYY-HH-MM_TITLE.md)
+   - ERROR: Missing or invalid YAML frontmatter
+   - ERROR: Missing content hash after YAML
+   - ERROR: Content hash mismatch
+   - ERROR: Timestamp mismatch between filename and YAML
    - ERROR: Invalid @Symbol reference
 
 ### Violation Handling
 
 If violations are found:
 - **Block commit** with clear error message
-- Suggest moving file to `INBOX/` and adding hash
-- Example: `ERROR: INBOX/required-file.md found outside INBOX/, move to INBOX/reports/ and add <!-- CONTENT_HASH: ... -->`
+- Suggest correct format and required fields
+- Example: `ERROR: INBOX/reports/my-report.md has invalid filename. Must be: MM-DD-YYYY-HH-MM_TITLE.md`
 
 ## Rationale
 
@@ -184,18 +265,63 @@ If violations are found:
 When creating implementation reports:
 
 ```python
-# 1. Write report to INBOX/reports/
-report_path = "INBOX/reports/cassette-network-implementation-report.md"
+from datetime import datetime
+import hashlib
+import uuid
 
-# 2. Include content hash
-content_hash = compute_sha256(report_content)
-report_content = f"<!-- CONTENT_HASH: {content_hash} -->\n\n{report_body}"
+# 1. Get current timestamp
+now = datetime.now()
+timestamp = now.strftime("%m-%d-%Y-%H-%M")
+yaml_timestamp = now.strftime("%Y-%m-%d %H:%M")
 
-# 3. Use @Symbol references for canon content
-# Instead of duplicating CONTRACT.md text, use: @C:d3f2b8a7
+# 2. Generate UUID (once per document, never changes)
+doc_uuid = str(uuid.uuid4())
 
-# 4. Save
-Path(report_path).write_text(report_content)
+# 3. Create filename
+title = "CASSETTE_NETWORK_IMPLEMENTATION"
+filename = f"{timestamp}_{title}.md"
+report_path = f"INBOX/reports/{filename}"
+
+# 4. Define metadata
+bucket = "implementation/cassette_network"
+hashtags = ["#cassette", "#phase1", "#complete"]
+tags = ["cassette", "network", "implementation"]
+
+# 5. Build YAML frontmatter
+yaml_header = f"""---
+uuid: "{doc_uuid}"
+title: "Cassette Network Implementation Report"
+section: "report"
+bucket: "{bucket}"
+author: "System"
+priority: "High"
+created: "{yaml_timestamp}"
+modified: "{yaml_timestamp}"
+status: "Complete"
+summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
+tags: [{', '.join(tags)}]
+hashtags: [{', '.join(f'"{h}"' for h in hashtags)}]
+---"""
+
+# 6. Build content body (use @Symbol references for canon content)
+content_body = """
+# Cassette Network Implementation Report
+
+## Executive Summary
+This report documents the implementation of @C:ab5e61a8 (Cassette Protocol)...
+
+## Implementation Details
+...
+"""
+
+# 7. Compute content hash (hash the body only, not YAML or hash line)
+content_hash = hashlib.sha256(content_body.encode('utf-8')).hexdigest()
+
+# 8. Assemble final document
+final_content = f"{yaml_header}\n<!-- CONTENT_HASH: {content_hash} -->\n{content_body}"
+
+# 9. Save
+Path(report_path).write_text(final_content)
 ```
 
 ### For Humans

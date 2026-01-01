@@ -16,7 +16,7 @@ Build persistent substrate and deterministic section index for canonical sources
 - Advantages: Fast queries, transactions, FTS5 support
 
 **Fallback: JSONL + Indexes**
-- Location: `CORTEX/_generated/section_index.json`
+- Location: `CAT_CORTEX/_generated/section_index.json`
 - Format: JSON Lines (one Section per line)
 - Advantages: Portable, no database dependency
 
