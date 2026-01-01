@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: f92a5ff086fa2e8aa07c306988e90c17d3fa85987b84356f9f504d654b5ade9d -->
+
 # Security Policy
 
 This document outlines the security considerations for the Agent Governance System. Because AGS may execute code and manage sensitive state, it is important to minimise risk.

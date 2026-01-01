@@ -13,7 +13,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat  # type: ignore
 
-QUEUE_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs" / "commit_queue"
+QUEUE_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "commit_queue"
 
 
 def _normalize_queue_id(queue_id: str) -> str:

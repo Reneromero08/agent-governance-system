@@ -1,6 +1,8 @@
+<!-- CONTENT_HASH: 6b9242b12883e7540c5d34eb5d53efd23c2345374977a3aa4695f3224f6a4e6d -->
+
 # Canon Contract
 
-> **Driven by [The Living Formula (@F0)](file:///d:/CCC%202.0/AI/agent-governance-system/CANON/FORMULA.md).**
+> **Driven by [The Living Formula (@F0)](file:///d:/CCC%202.0/AI/agent-governance-system/LAW/CANON/FORMULA.md).**
 > The Formula defines the *Direction*. This Contract defines the *Boundaries*.
 
 This document defines the non-negotiable rules and the authority gradient for the Agent Governance System (AGS). It is the highest source of truth for all agents and humans interacting with this repository.
@@ -17,12 +19,12 @@ This document defines the non-negotiable rules and the authority gradient for th
    - Metrics (code statistics, performance numbers)
    - Conclusion and next steps
    - Report storage in `INBOX/reports/<feature-name>-implementation-report.md`
-   See `CANON/IMPLEMENTATION_REPORTS.md` for full requirements.
+   See `LAW/CANON/IMPLEMENTATION_REPORTS.md` for full requirements.
 
 3. **INBOX requirement for human-readable documents.** All documents, research, reports, roadmaps, and any content requiring human review ("god mode") MUST be stored in `INBOX/` directory at repository root. This includes:
    - Implementation reports → `INBOX/reports/`
    - Research documents → `INBOX/research/`
-   - Roadmaps and planning → `INBOX/roadCONTEXT/maps/`
+   - Roadmaps and planning → `INBOX/roadmaps/`
    - ADRs and decisions → `INBOX/decisions/`
    - Session summaries → `INBOX/summaries/`
    
@@ -30,29 +32,29 @@ This document defines the non-negotiable rules and the authority gradient for th
    - All INBOX documents MUST include content hash: `<!-- CONTENT_HASH: <sha256> -->`
    - INBOX documents SHOULD use @Symbol references to CORTEX instead of duplicating content
    - Pre-commit hook enforces INBOX placement and hash requirements
-   See `CANON/INBOX_POLICY.md` for full policy.
+   See `LAW/CANON/INBOX_POLICY.md` for full policy.
 
 4. **No behavior change without ceremony.** Any change to the behavior of the system must:
-   - create an ADR (Architecture Decision Record) under `CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);
+   - create an ADR (Architecture Decision Record) under `LAW/CONTEXT/decisions/` to document the decision, rationale, and consequences (required for governance decisions; recommended for significant code changes);
    - add or update appropriate fixtures;
    - update the canon (if constraints change);
-   - update the affected module docs when operation changes (MAPS, SKILLS, MEMORY, CORTEX, TOOLS), not just AGENTS and CONTRACT;
+   - update the affected module docs when operation changes (NAVIGATION, CAPABILITY, MEMORY), not just AGENTS and CONTRACT;
    - record the change in the changelog;
    - occur within the same merge request.
-3. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit user instruction AND explicit task intent (see ADR-016). Deleting authored content is allowed only with explicit user instruction and confirmation, and CANON rules must follow the archiving requirements in `CANON/INVARIANTS.md`. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
+4. **Intent-gated canon and context edits.** CANON is a working spec and may be updated during system design and rule updates. CONTEXT is append-first; editing existing records requires explicit user instruction AND explicit task intent (see ADR-016). Deleting authored content is allowed only with explicit user instruction and confirmation, and CANON rules must follow the archiving requirements in `LAW/CANON/INVARIANTS.md`. Do not modify CANON or edit existing CONTEXT records as a side effect of unrelated tasks.
 4. **Stable token grammar.** Tokens used to reference entities and rules form a stable API. Changes to tokens require a major version bump and deprecation cycle.
 5. **Determinism.** Given the same inputs and canon, the system must produce the same outputs.
 6. **Output roots.** System-generated artifacts must be written only to:
    - `LAW/CONTRACTS/_runs/` (includes fixtures, logs, entrypoint outputs)
-   - `CORTEX/_generated/`
+   - `NAVIGATION/CORTEX/_generated/`
    - `MEMORY/LLM_PACKER/_packs/`
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
 
    **Logging policy** (see ADR-015): All system logs (emergency, audit, crisis, steward) must be written under `LAW/CONTRACTS/_runs/<purpose>_logs/` subdirectories.
 
-7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit directives that include "commit" authorize a commit once checks have passed and staged files have been listed; no additional confirmation prompt is required. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. After ceremony steps are completed (checks run, staged files listed), short confirmations such as "go on" count as approval for those listed actions. See `AGENTS.md` Section 10 and `CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
-8. **Implementation report requirement.** Every new implementation must produce a signed report in `INBOX/reports/<feature-name>-implementation-report.md` following the format in `CANON/IMPLEMENTATION_REPORTS.md`. Reports must include agent identity, date, what was built, what was demonstrated, real vs simulated confirmation, and metrics. Reports are subject to governance checks via `critic.py`.
+7. **Commit ceremony.** Every `git commit`, `git push`, and release publication requires explicit, per-instance user approval. Agents may not infer authorization from phrases like "proceed," "continue," or "let's move on to the next task." One approval authorizes one commit only; subsequent work requires a new approval. Explicit directives that include "commit" authorize a commit once checks have passed and staged files have been listed; no additional confirmation prompt is required. Explicit composite directives that include "commit", "push", and "release" (for example, "commit, push, and release") count as approval for each action listed in that request. After ceremony steps are completed (checks run, staged files listed), short confirmations such as "go on" count as approval for those listed actions. See `AGENTS.md` Section 10 and `LAW/CONTEXT/preferences/STYLE-001-commit-ceremony.md`.
+8. **Implementation report requirement.** Every new implementation must produce a signed report in `INBOX/reports/<feature-name>-implementation-report.md` following the format in `LAW/CANON/IMPLEMENTATION_REPORTS.md`. Reports must include agent identity, date, what was built, what was demonstrated, real vs simulated confirmation, and metrics. Reports are subject to governance checks via `critic.py`.
 8. **Sovereign override interface.** If a user prompt contains `MASTER_OVERRIDE`, the agent is authorized to bypass any repository governance rule for that prompt only. Each use must be logged to `LAW/CONTRACTS/_runs/override_logs/master_override.jsonl`, and override logs must not be read or quoted unless the user prompt also contains `MASTER_OVERRIDE`.
 9. **Privacy boundary.** Agents must not access or scan files outside the repository root unless the user explicitly requests those paths in the same prompt. Avoid user profile and OS-level directories by default; ask before any out-of-repo access.
 10. **Traceable Identity.** Every agent session must be identifiable via a unique `session_id`. Anonymous operation is forbidden. All tool executions and state changes must be logged to `LAW/CONTRACTS/_runs/` with this identity to enable observability and auditing.
@@ -65,25 +67,25 @@ Only change CANON or edit existing CONTEXT records when the task is explicitly a
 
 When conflicts arise, the following order of precedence applies:
 
-1. `CANON/AGREEMENT.md`
-2. `CANON/CONTRACT.md` (this file)
-3. `CANON/INVARIANTS.md`
-4. `CANON/VERSIONING.md`
+1. `LAW/CANON/AGREEMENT.md`
+2. `LAW/CANON/CONTRACT.md` (this file)
+3. `LAW/CANON/INVARIANTS.md`
+4. `LAW/CANON/VERSIONING.md`
 5. `AGENTS.md`
-6. Context records (`CONTEXT/decisions/`, `CONTEXT/rejected/`, `CONTEXT/preferences/`)
-7. `CONTEXT/maps/*`
+6. Context records (`LAW/CONTEXT/decisions/`, `LAW/CONTEXT/rejected/`, `LAW/CONTEXT/preferences/`)
+7. `NAVIGATION/MAPS/*`
 8. User instructions
 9. Implementation convenience
 
-Never invert this order. Fixtures in `CONTRACTS/` validate behavior but do not override canon.
+Never invert this order. Fixtures in `LAW/CONTRACTS/` validate behavior but do not override canon.
 
 ## Change ceremony
 
 To change the canon:
 
-1. Draft an Architecture Decision Record (ADR) under `CONTEXT/decisions/` explaining the context, decision and rationale.
+1. Draft an Architecture Decision Record (ADR) under `LAW/CONTEXT/decisions/` explaining the context, decision and rationale.
 2. Update the relevant canon file(s) with the new rule or modification.
 3. Add or update fixtures in `LAW/CONTRACTS/fixtures/` to enforce the new rule.
-4. Increment the version in `CANON/VERSIONING.md` accordingly.
-5. Add an entry to `CANON/CHANGELOG.md` describing the change.
+4. Increment the version in `LAW/CANON/VERSIONING.md` accordingly.
+5. Add an entry to `LAW/CANON/CHANGELOG.md` describing the change.
 6. Submit a merge request. The critic and runner must pass before the change is accepted.

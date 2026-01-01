@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 06c3fec9b31e86c056666078c91ad0f2b851e4a3c1f1e99d619f4a4c443d5580 -->
+
 # TURBO SWARM Agent Coordinator
 
 **⚠️ COORDINATION SYSTEM: Agent code lives here, tasks live in INBOX.**

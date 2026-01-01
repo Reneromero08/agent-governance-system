@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 6e67c7497bd255c84f66de909fd4ebf43a1780e0c6410210af4d93d91f9a1fda -->
+
+<!-- CONTENT_HASH: 7836a14fde40bd823a293ebca76b88d8e2e3b607106f4bc165a2e1b606ece737 -->
 
 # Swarm Orchestrator Bug Report & Debug Plan
 

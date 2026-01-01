@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 69dec784c5ce5c8d7ac16cf711b8061a6a2b6b6d90e98d7f0ccc46ce5cce6281 -->
+
 # CAT-DPT Schema Versioning Policy
 
 Status: ACTIVE

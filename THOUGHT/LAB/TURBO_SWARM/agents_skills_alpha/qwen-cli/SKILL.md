@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 0f69dfe537f3e6cd8b1fdb353c9ab7c031ef8b08379fde8a98c137bb604d799d -->
+
 # Qwen CLI - Local AI Assistant
 
 **Version:** 1.0.0

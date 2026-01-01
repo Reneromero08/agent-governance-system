@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 7b643dca3adc4d38de7030cb1e962a5130ea4b36ae04ad4bf97ed8889de2a3dc -->
+
 # Skill: governor
 **Version:** 0.1.0
 **Status:** Active

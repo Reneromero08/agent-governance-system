@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 20c8a78ad90ccff474e9165c132177e5e07bbe00b4029050a4ca523bd6d1acbe -->
+
 # Stewardship Structure
 
 This document defines the human escalation path when the Agent Governance System itself fails or when decisions exceed agent authority.
@@ -87,7 +89,7 @@ Agent encounters a situation outside its authority:
 
 Agent MUST:
 1. Stop the current action
-2. Document the issue in `CONTEXT/open/`
+2. Document the issue in `LAW/CONTEXT/open/`
 3. Notify the user of the escalation
 4. Wait for human response
 
@@ -152,7 +154,7 @@ except:
 ### 3. Headless Execution
 **Rule**: No code may spawn visible terminal windows (see ADR-029).
 
-**Enforcement**: `TOOLS/terminal_hunter.py` scans for violations.
+**Enforcement**: `CAPABILITY/TOOLS/terminal_hunter.py` scans for violations.
 
 ### 4. Deterministic Outputs
 **Rule**: All artifacts (JSON, manifests, hashes) MUST be deterministic across runs.
@@ -290,6 +292,19 @@ git push --force-with-lease
 
 **Rationale**: Commit history should tell a clear story. "fix, fix again, really fix, final fix" obscures intent. One clean commit per logical change.
 
+### 11. Repository Hygiene
+**Rule**: The repository MUST remain clean of ephemeral trash.
+
+**Requirements**:
+- **Logs**: MUST go to `LAW/CONTRACTS/_runs/` or designated `logs/` folders. Never root.
+- **Temp Files**: `*.tmp`, `*.bak`, `*.swp` MUST be ignored or deleted immediately.
+- **Cache**: `__pycache__` MUST be gitignored and regularly purged.
+- **Old Runs**: `LAW/CONTRACTS/_runs/` should be pruned of stale test artifacts.
+
+**Tooling**: Run `python CAPABILITY/TOOLS/cleanup.py` to enforce this.
+
+**Rationale**: A cluttered repository hides real issues and bloats git history with garbage. Cleanliness is godliness (and governance).
+
 ## Authority Boundaries
 
 ### What Agents CAN Do
@@ -303,7 +318,7 @@ git push --force-with-lease
 
 ### What Agents CANNOT Do
 
-- Modify CANON/* without completing full ceremony
+- Modify LAW/CANON/* files directly (bypassing ceremony in emergencies)
 - Lift quarantine mode
 - Bypass the commit ceremony
 - Ignore critic failures

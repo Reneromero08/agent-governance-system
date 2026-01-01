@@ -1,20 +1,95 @@
+<!-- CONTENT_HASH: b3710225ed27cf3ea009b089dd1dff9f74c9659884ed572d59cb3c0be6381085 -->
+
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.2.2] - 2026-01-02
 
-## [3.2.1] - 2026-01-01
+### Systemic Intelligence & Compression (Lab Updates)
 
-### Housekeeping (Inbox Governance & Path Hardening)
+#### Added
+- **Lane T: Tiny Model Compression Lab** (`THOUGHT/LAB/TINY_COMPRESS/`): Experimental lane for training a 10M-50M parameter model to learn symbolic compression via RL (without semantic understanding).
+  - `README.md`: Lab overview and success criteria.
+  - `TINY_COMPRESS_ROADMAP.md`: 5-phase plan (Gym, Dataset, Architecture, Training, Eval) + Research Phase.
+- **Lane E: Vector ELO Scoring** (`THOUGHT/LAB/VECTOR_ELO/`): Systemic intuition prototype using free energy principle.
+  - `VECTOR_ELO_SPEC.md`: Detailed design for ELO-based vector/file ranking and memory pruning.
+  - `VECTOR_ELO_ROADMAP.md`: 7-phase implementation plan.
+  - Added Lane E to `AGS_ROADMAP_MASTER.md`.
+- **Search Governance**:
+  - `LAW/CANON/AGENT_SEARCH_PROTOCOL.md`: Protocol defining when agents **MUST** use semantic search vs keyword search.
+  - Updated `AGENTS.md` to make search protocol mandatory.
+
+#### Changed
+- **LLM Packer Roadmap**:
+  - Added **Lane P** to `AGS_ROADMAP_MASTER.md` to track packer evolution.
+  - Updated `MEMORY/PACKER_ROADMAP.md` with:
+    - **6-Bucket Migration (P0)**: Update paths to `LAW`, `CAPABILITY`, `NAVIGATION`, etc.
+    - **CAS Integration**: Future plan for content-addressed LITE packs.
+    - **Clarified Role**: Packer = Compression Strategy, CAS = Storage Layer.
+- **CAT_CHAT v1.1 Housekeeping** (`THOUGHT/LAB/CAT_CHAT/`):
+  - Consolidated multiple conflicting versions of README, CHANGELOG, and ROADMAP into canonical `_1.1.md` files
+  - Archived legacy versions to `archive/docs/canon/` with deprecation notices
+  - Applied canonical filename compliance (timestamp + ALL_CAPS) to status documents
+  - Added content hashes to all canon and status documents
+  - Relocated demo scripts to `archive/legacy/`
+  - Migrated stray CAT_CHAT entries from main changelog to lab changelog
+  - Moved Lane Ω (God-Tier) to `AGS_ROADMAP_MASTER.md`
+  - Moved Lane T (Tiny Model) to `THOUGHT/LAB/TINY_COMPRESS/`
+  - Consolidated all previous reports into canonical.
+  - *(See `THOUGHT/LAB/CAT_CHAT/CAT_CHAT_CHANGELOG_1.1.md` for full details)*
+- **Systematic Governance & Architecture Cleanup**:
+  - **ADR Collision Fixes**: Re-numbered `ADR-023` to `ADR-026` and `ADR-024` to `ADR-033` to resolve governance collisions.
+  - **Lab Standardization**: Capitalized `NEO3000` lab and `TURBO_SWARM` subfolders for consistency.
+  - **Architecture Synchronization**: Updated root `README.md`, `LAW/CANON/INVARIANTS.md`, `MIGRATION.md`, `AGREEMENT.md`, `CRISIS.md`, `STEWARDSHIP.md`, and `INDEX.md` to reflect the 6-bucket architecture and current paths.
+  - **Bucket Consolidation**: Deprecated the `DIRECTION` bucket. Merged strategy into `NAVIGATION/ROADMAPS/`. Updated `LAW/CANON/SYSTEM_BUCKETS.md`.
+  - **Metadata Compliance**: Updated ADR IDs in YAML frontmatter to match new filenames and restored `ADR-∞` foundation.
 
 #### Added
 - **Inbox Governance Hardening**: Mandated `uuid`, `bucket`, and `hashtags` fields for all human-readable documents in `LAW/CANON/INBOX_POLICY.md`.
 - **Bulk Migration**: Migrated 60+ `INBOX` documents (reports, research, roadmaps) to the new timestamped convention with mandatory content hashes and metadata.
 
 #### Fixed
-- **Root Directory Pollution**: Resolved issues causing `CAT_CORTEX`, `CONTRACTS`, and `TOOLS` to be created in the repository root.
+- **Root Directory Pollution**: Resolved issues causing `CAT_CORTEX`, `CONTRACTS`, and `CORTEX` to be created in the repository root.
 - **Path Alignment**: Corrected path logic in `THOUGHT/LAB/CAT_CHAT/catalytic_chat/paths.py`, `THOUGHT/LAB/MCP/server_CATDPT.py`, and `CAPABILITY/TOOLS/utilities/emergency.py`.
 - **Inbox Policy Enforcement**: Updated `check_inbox_policy.py` to scan for hashes after YAML frontmatter and corrected legacy tool paths in git hooks.
+- **Path Resolution \u0026 6-Bucket Compliance**: Definitively prevented `CONTRACTS` and `CORTEX` directory creation in repository root.
+  - Updated 24+ files across skills, tests, and core code to use `LAW/CONTRACTS` and `NAVIGATION/CORTEX` prefixes
+  - Fixed `NAVIGATION/CORTEX/db/cortex.build.py` to output artifacts to `NAVIGATION/CORTEX/_generated` (not `db/_generated`)
+  - Updated `CAPABILITY/TOOLS/utilities/compress.py` compression rules for new paths
+  - Fixed `CAPABILITY/SKILLS/commit/artifact-escape-hatch/run.py` to scan correct buckets
+  - Updated skills: `doc-update`, `mcp-extension-verify`, `commit-queue`, `ant-worker`
+  - Moved `TOOLS/reset_system1.py` → `NAVIGATION/CORTEX/db/reset_system1.py` with corrected `PROJECT_ROOT` calculation
+  - Updated `THOUGHT/LAB/CAT_CHAT/catalytic_chat/section_indexer.py` canonical source paths
+  - Corrected provenance inputs in `NAVIGATION/CORTEX/db/cortex.build.py`
+  - Updated `MEMORY/LLM_PACKER/Engine/packer/core.py` to reference `LAW/CONTRACTS/runner.py`
+  - All 59 contract fixtures and 140 pytest tests passing
+- **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.
+  - Added proper UTF-8 encoding configuration for Windows console
+  - Created `safe_print()` function to handle Unicode characters safely
+  - Replaced all print statements with Unicode-safe alternatives
+- **System Database Sync**: Rebuilt `system1.db` to resolve `system1-verify` fixture failure.
+  - The `system1.db` database was out of sync with repository state causing the `system1-verify` skill to fail
+  - Ran `NAVIGATION/CORTEX/db/reset_system1.py` to rebuild the database with current repository content
+  - All contract and skill fixtures now pass consistently
+- **Contract Runner Stability**: All pytest and contract fixtures now pass reliably.
+  - Fixed the root cause of fixture failures related to database synchronization
+  - Ensured Windows compatibility for all indexing operations
+  - Verified all 100+ fixtures pass in the contract runner
+
+
+#### Added
+- **Repository Hygiene Protocol**: Established Rule 11 in `CANON/STEWARDSHIP.md` mandating clean artifacts.
+- **Cleanup Tool**: Added `CAPABILITY/TOOLS/cleanup.py` to automate removal of caches, logs, and temp files.
+- **Gitignore Hardening**: Updated `.gitignore` to strictly exclude ephemeral extension types globally.
+
+#### Changed
+- **Bucket Consolidation**: Deprecated the `DIRECTION` bucket. All roadmaps and plans moved to `NAVIGATION/ROADMAPS/`. Updated `LAW/CANON/SYSTEM_BUCKETS.md`.
+- **MEMORY Cleanup**: Moved orphaned token analysis artifacts to `THOUGHT/LAB/CAT_CHAT/archive/token_analysis/`. Relocated `manifest.schema.json` to `LAW/SCHEMAS/`. Removed architectural mistakes (`__init__.py`, empty `economy_snapshot.json`).
+- **Cat Chat Hygiene**: Canonicalized archive filenames, deduplicated documentation, and updated roadmap (Phase 8).
+- **New Tools**: Added `rename_canon.py` for canonical file renaming. Fixed `doc-merge-batch-skill` NameError and subprocess calls.
+- **ADR YAML Migration**: Converted all Architectural Decision Records in `LAW/CONTEXT/decisions/` to standardized YAML frontmatter for metadata.
+- **Universal Document Hashing**: Applied SHA-256 content hashes to all `.md` files with YAML-aware placement (Line 1 for non-YAML, post-frontmatter for YAML).
 
 ## [3.2.0] - 2025-12-31
 
@@ -37,88 +112,6 @@ All notable changes to Agent Governance System will be documented in this file.
   - Standardized `REPO_ROOT` and `sys.path` across 140 tests.
   - Unblocked collection of 3 major test suites.
   - Achieved **140/140 tests passing**.
-
-### Added
-
-- **Mechanical Chat Translation** (THOUGHT/LAB/CAT_CHAT): Pure Python translator from chat DB to Markdown with no LLM dependencies.
-  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/chat_db.py`: SQLite chat database with deterministic ordering by (created_at, msg_id).
-  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/chat_translate.py`: Mechanical translator producing idempotent Markdown, preserving code fences.
-  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cli.py`: Added `chatdb` command group (init, put, export, directives).
-  - `THOUGHT/LAB/CAT_CHAT/tests/test_chat_translate.py`: Tests for deterministic bytes, code fence preservation, ordering, directive extraction.
-  - Directive format: ` ```cat_directive {...}` `` supporting PLAN_REQUEST, BUNDLE_BUILD, BUNDLE_RUN operations.
-  - Deterministic guarantees: Identical DB state produces identical Markdown bytes, SHA256 hash verification.
-  - Fail-closed directive validation: Malformed JSON ignored, unknown ops raise ValueError, required keys enforced.
-  - Suggested DB path: `THOUGHT/LAB/CAT_CHAT/CORTEX/_generated/chat/chat.db`.
-- **Phase 7: Compression Protocol Specification & Validator** (THOUGHT/LAB/CAT_CHAT): Deterministic, bounded, fail-closed compression protocol validation.
-  - `THOUGHT/LAB/CAT_CHAT/PHASE_7_COMPRESSION_SPEC.md`: 320-line specification defining compression metrics, components, reconstruction procedures, invariants, threat model, verification checklist, error codes, deterministic computation rules.
-  - `THOUGHT/LAB/CAT_CHAT/SCHEMAS/compression_claim.schema.json`: 67-line schema with additionalProperties: false, required fields (claim_version, run_id, bundle_id, components, reported_metrics, claim_hash), component definitions (vector_db_only, symbol_lang, f3, cas).
-  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/compression_validator.py`: 470-line validator with 8-phase pipeline (input → claim → bundle → trust → receipts → attestations → metrics → claim), deterministic metric computation, strict_trust/strict_identity/require_attestation flags, comprehensive error handling with 28 error codes.
-  - `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cli.py`: Added `compress verify` command with --bundle, --receipts, --trust-policy, --claim, --strict-trust, --strict-identity, --require-attestation, --json, --quiet flags. Exit codes: 0 (OK), 1 (verification failed), 2 (invalid input), 3 (internal error).
-  - `THOUGHT/LAB/CAT_CHAT/tests/test_compression_validator.py`: 5 tests (token estimation, pass with matching claim, fail on metric mismatch, fail if not strictly verified, deterministic output).
-  - Deterministic guarantees: Identical inputs produce identical outputs via canonical JSON (sort_keys=True, separators=(",", ":")), SHA-256 hashing, artifact ordering by artifact_id, receipt ordering by receipt_index.
-  - Fail-closed guarantees: All failures have explicit error codes (BUNDLE_NOT_FOUND, INVALID_CLAIM_SCHEMA, METRIC_MISMATCH, NOT_IMPLEMENTED, etc.), no silent failures.
-  - Bounded guarantees: Only reads bundle.json, artifacts/, receipts/, claim.json, trust_policy.json (if provided). No repo-wide searches, no timestamps, no absolute paths.
-  - Reuses existing code: BundleVerifier, find_receipt_chain, verify_receipt_chain, receipt_canonical_bytes, canonical_json_bytes, verify_receipt_bytes, load_trust_policy_bytes, parse_trust_policy, build_trust_index.
-
-- **Phase 6.13 Multi-Validator Aggregation** (THOUGHT/LAB/CAT_CHAT): Multi-validator attestations for quorum validation (RECEIPT + MERKLE).
-  - `SCHEMAS/receipt.schema.json`: Added optional `attestations[]` array.
-  - `SCHEMAS/execution_policy.schema.json`: Added `receipt_attestation_quorum` and `merkle_attestation_quorum` fields.
-  - `SCHEMAS/aggregated_merkle_attestations.schema.json`: New schema for aggregated attestations.
-  - `catalytic_chat/attestation.py`: Added `verify_receipt_attestation_single()` and `verify_receipt_attestations_with_quorum()`.
-  - `catalytic_chat/merkle_attestation.py`: Added `load_aggregated_merkle_attestations()` and `verify_merkle_attestations_with_quorum()`.
-  - `tests/test_multi_validator_attestations.py`: Tests for deterministic ordering, quorum enforcement, backward compatibility.
-  - Deterministic ordering: attestations must be sorted by (validator_id, public_key.lower(), build_id or "").
-  - Reuses existing trust policy (strict_trust, strict_identity) for validation.
-  - Purely additive: single attestation path remains unchanged.
-- **Phase 6.14 External Verifier UX Improvements** (THOUGHT/LAB/CAT_CHAT): CI-friendly output modes and machine-readable summaries.
-  - `catalytic_chat/cli_output.py`: New module with standardized exit codes and JSON output helpers.
-  - `catalytic_chat/cli.py`: Added `--json` and `--quiet` flags to `bundle verify`, `bundle run`, `trust verify`.
-  - `catalytic_chat/__main__.py`: Entry point for `python -m catalytic_chat.cli`.
-  - `tests/test_cli_output.py`: Tests for JSON stdout purity, exit code classification, deterministic outputs.
-  - Standardized exit codes: 0 (OK), 1 (verification failed), 2 (invalid input), 3 (internal error).
-  - JSON output uses `canonical_json_bytes()` for deterministic field ordering.
-  - No verification behavior changes; purely additive UX improvements.
-
-
-### Fixed
-- **Phase 6.11 Receipt Index Propagation**: Deterministic receipt_index assignment with strict verification.
-  - `catalytic_chat/executor.py`: Assign receipt_index deterministically (filesystem scanning), emit contiguous [0,1,2] for chains.
-  - `catalytic_chat/receipt.py`: Hardened `verify_receipt_chain()` to enforce receipt_index contiguity, start at 0, strictly increasing.
-  - `tests/test_receipt_index_propagation.py`: Added tests for contiguous index enforcement, gap detection, nonzero start, mixed null/int.
-  - All receipt_index rules are fail-closed; indices must be exactly [0, 1, 2, ..., n-1] when present.
-- **Phase 6.12 Receipt Index Determinism (Redo)**: Executor-derived receipt_index with no caller control.
-  - `catalytic_chat/executor.py`: Removed `receipt_index` parameter from `__init__()`; executor always assigns receipt_index=0 deterministically.
-  - `catalytic_chat/executor.py`: No filesystem scanning for index assignment; receipt_index is pure execution order function.
-  - `tests/test_receipt_index_propagation.py`: Updated tests to verify receipt_index=0 (no caller control, no filesystem dependence).
-  - receipt_index is now executor-derived (always 0 per bundle), not caller-controlled, guaranteeing determinism.
-- **Phase 6.10 Receipt Chain Ordering**: Deterministic ordering and fail-closed ambiguity detection.
-  - `SCHEMAS/receipt.schema.json`: Added `receipt_index` field (type: integer|null) for explicit chain ordering.
-  - `catalytic_chat/receipt.py`: Updated `find_receipt_chain()` to sort by explicit ordering key (receipt_index > receipt_hash > filename), reject duplicate ordering keys, fail-closed on ambiguity.
-  - `catalytic_chat/receipt.py`: Added `receipt_signed_bytes()` function for proper attestation verification.
-  - `tests/test_receipt_chain_ordering.py`: Created deterministic ordering tests (explicit sorting, ambiguous order failure, filesystem independence).
-  - All ordering is deterministic and filesystem-independent; identical inputs produce identical receipt order.
-- **Phase 6.9 Stabilization**: Eliminated execution policy test flakiness; hardened determinism guarantees.
-  - `tests/test_execution_policy.py`: Fixed test result capture to use return value from `executor.execute()` instead of accessing non-existent `executor.result` attribute; wrapped failing tests in `pytest.raises()` for proper error detection.
-  - Determinism audit of executor and policy enforcement: Confirmed no unordered iteration, no filesystem ordering dependence, no environment leakage. All policy checks use explicit ordering (sorted keys, ordered lists from JSON).
-  - Zero flaky tests confirmed: All 113 tests pass deterministically across runs.
-- **Phase 6.8 Policy Gate**: Centralized execution policy enforcement in executor.
-  - `catalytic_chat/executor.py`: Added `policy` parameter to `BundleExecutor.__init__`, added `_enforce_policy_after_execution()` method with deterministic enforcement order (verify bundle → execute steps → verify chain → verify receipt attestation → verify merkle attestation).
-  - `cli.py`: Refactored `cmd_bundle_run()` to compile exactly one policy dict (from file or CLI args), removed duplicate trust policy loading logic, fixed `cmd_trust_show()` to iterate over correct index structure.
-  - `tests/test_execution_policy.py`: Added comprehensive policy enforcement tests (trust policy requirement, missing attestation, missing merkle attestation, full stack, CLI back-compatibility).
-- **Phase 6 Sanity Check Fixes**: Critical bug fixes for attestation and merkle verification.
-  - `catalytic_chat/attestation.py`: Fixed SyntaxError (duplicate code at lines 280-293), fixed verification logic to reconstruct signing stub correctly
-  - `catalytic_chat/merkle_attestation.py`: Fixed verification message exactness (added VID, BID, PK fields), corrected signing key length validation (64/128 hex chars for 32/64 bytes)
-  - `tests/test_trust_identity_patch.py`: Fixed test to use mismatched validator_id correctly
-
-### Added
-- **Phase 6.6 (Validator Identity Pinning + Trust Policy)**: Complete deterministic trust policy system for CAT_CHAT.
-  - `SCHEMAS/trust_policy.schema.json`: Schema enforcing `policy_version="1.0.0"`, 64-char hex public keys, ed25519 scheme, scopes limited to RECEIPT/MERKLE.
-  - `catalytic_chat/trust_policy.py`: Trust policy loader and verifier with deterministic indexing and uniqueness enforcement.
-  - `catalytic_chat/attestation.py`: Added `verify_receipt_attestation()` with strict trust checking.
-  - `catalytic_chat/merkle_attestation.py`: Added `verify_merkle_attestation_with_trust()` with strict trust checking.
-  - `cli.py`: Added `trust {init,verify,show}` commands and strict trust flags to `bundle run`.
-  - `tests/test_trust_policy.py`: Comprehensive tests for trust policy, receipt/merkle strict trust, and CLI integration.
-  - `CORTEX/_generated/TRUST_POLICY.json`: Default empty trust policy.
 
 ### Added
 - **MCP Swarm Coordination (ADR-024)**: Integrated MCP Message Board into Failure Dispatcher and Professional Orchestrator for real-time swarm coordination.
@@ -340,7 +333,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 - **Updated implementation report**:
   - `INBOX/reports/cassette-network-implementation-report.md` (moved from root)
-  - Added content hash: `<!-- CONTENT_HASH: f7aca682b4616109a7f8d5f9060fdc8f05d3ec6877dd4538bba76f38c30919d0 -->`
+  - Added content hash: ``
   - Now follows INBOX policy
 
 ### Changed
@@ -1125,7 +1118,7 @@ This release establishes The Living Formula as the primary driver for navigating
 
 - **Updated implementation report**:
   - `INBOX/reports/cassette-network-implementation-report.md` (moved from root)
-  - Added content hash: `<!-- CONTENT_HASH: f7aca682b4616109a7f8d5f9060fdc8f05d3ec6877dd4538bba76f38c30919d0 -->`
+  - Added content hash: ``
 
 ### Changed
 - `.githooks/pre-commit`: Added INBOX policy check after canon governance check

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: aa8752dad68e92e8099a757d34638b5d4441ce51ae3435cbe85b242574b8db9a -->
+
 # Context
 
 **Essence ($E$):** The long-term memory and decision record of the Agent Governance System.

@@ -5,6 +5,10 @@ description: Opens a named terminal tab in VSCode via Antigravity Bridge (port 4
 compatibility: VSCode, Antigravity Bridge extension
 ---
 
+<!-- CONTENT_HASH: 8f370f438786a09460b00a58ad9a1b524a6e33256cc90003640fbae121049dac -->
+
+
+
 # Launch Terminal
 
 Spawns VSCode terminals via Antigravity Bridge.

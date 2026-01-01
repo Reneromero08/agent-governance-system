@@ -1,8 +1,0 @@
-{
-  "task_id": "add_docstrings_99668c46",
-  "task_type": "code_refactor",
-  "worker_type": "ant",
-  "file_path": "CATALYTIC-DPT\\LAB\\MCP\\mcp_client.py",
-  "file_hash": "99668c46a7c469a6",
-  "timestamp": "2025-12-28T23:48:17.884429"
-}

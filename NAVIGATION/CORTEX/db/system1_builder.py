@@ -22,7 +22,7 @@ from typing import List, Dict, Optional
 # Configuration
 CHUNK_SIZE = 500  # tokens
 CHUNK_OVERLAP = 50  # tokens
-DB_PATH = Path("CORTEX/system1.db")
+DB_PATH = Path(__file__).resolve().parent.parent / "system1.db"
 
 class System1DB:
     """Fast retrieval database using SQLite FTS5."""

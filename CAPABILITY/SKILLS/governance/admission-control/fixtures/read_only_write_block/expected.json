@@ -6,7 +6,7 @@
         "README.md"
       ],
       "write": [
-        "CONTRACTS/_runs/tmp.json"
+        "LAW/CONTRACTS/_runs/tmp.json"
       ]
     },
     "policy_version": "1",

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 3151aa479f66e2897d0f86c904a19fbdb4233d1e56666f440be4173011656ee0 -->
+
 # AGI Hardener Skill
 
 **Version:** 1.0.0

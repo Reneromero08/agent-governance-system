@@ -4,7 +4,7 @@
     "normalized_paths": {
       "read": [],
       "write": [
-        "CONTRACTS/_runs/admit-ok.json"
+        "LAW/CONTRACTS/_runs/admit-ok.json"
       ]
     },
     "policy_version": "1",

@@ -1,10 +1,16 @@
-# ADR-018: Catalytic Computing Canonical Note
+---
+id: "ADR-018"
+title: "Catalytic Computing Canonical Note"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Medium"
+tags: ["governance", "catalytic-computing", "memory-model", "restore-guarantee"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [governance, catalytic-computing, memory-model, restore-guarantee]
+<!-- CONTENT_HASH: 458559ffefd3a48563bc7c16810002e6af8f98928e9376924319604861329e08 -->
+
+# ADR-018: Catalytic Computing Canonical Note
 
 ## Problem
 

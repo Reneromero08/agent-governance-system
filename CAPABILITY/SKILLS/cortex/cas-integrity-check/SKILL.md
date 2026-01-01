@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: d3375ef099b88e5ef47ebae81e81bfe116399e6724bb4938397d56a361642aec -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: cas-integrity-check
 
 **Version:** 1.0.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -38,4 +43,6 @@ Writes `output.json` containing:
 ## Fixtures
 
 - `fixtures/missing_root/`
+
+**required_canon_version:** >=3.0.0
 

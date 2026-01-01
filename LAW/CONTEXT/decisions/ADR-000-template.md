@@ -1,16 +1,16 @@
+---
+id: "ADR-000"
+title: "Title Goes Here"
+status: "Proposed"
+date: "2025-12-19"
+confidence: "Low"
+impact: "Low"
+tags: ["architecture"]
+---
+
+<!-- CONTENT_HASH: 37df89aa3ab6a9dbd1e3e108bfe0caf93d5afa71d6fc08b4be90e08588b89a5b -->
+
 # ADR-000: Title Goes Here
-
-**Status:** Proposed
-
-**Date:** 2025-12-19
-
-**Review date:** (optional)
-
-**Confidence:** Low
-
-**Impact:** Low
-
-**Tags:** [architecture]
 
 ## Context
 

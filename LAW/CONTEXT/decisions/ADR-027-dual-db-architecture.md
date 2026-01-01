@@ -1,10 +1,16 @@
-# ADR-027: Dual-DB Architecture (System 1 / System 2)
+---
+id: "ADR-027"
+title: "Dual-DB Architecture (System 1 / System 2)"
+status: "Accepted"
+date: "2025-12-28"
+confidence: "High"
+impact: "High"
+tags: ["architecture", "database", "system-design"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-28
-**Confidence:** High
-**Impact:** High
-**Tags:** [architecture, database, system-design]
+<!-- CONTENT_HASH: 65cdef2ba006a50b7e7d15fd1342a392ab8cf3d4bb5f689ac8c6b0fa2aecf325 -->
+
+# ADR-027: Dual-DB Architecture (System 1 / System 2)
 
 ## Context
 As the Agent Governance System (AGS) scales, maintaining a single monolithic context for both rapid retrieval and strict governance has become inefficient. We need to distinguish between "fast" operations (retrieval, search, context stuffing) and "slow" operations (audit, provenance, validation).
