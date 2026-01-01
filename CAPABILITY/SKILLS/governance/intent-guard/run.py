@@ -52,7 +52,7 @@ def _setup_pipeline(pipeline_id: str, runs_root: str) -> Path:
 def main(input_path: Path, actual_path: Path) -> int:
     data = json.loads(input_path.read_text(encoding="utf-8"))
     pipeline_id = data["pipeline_id"]
-    runs_root = data.get("runs_root", "CONTRACTS/_runs")
+    runs_root = data.get("runs_root", "LAW/CONTRACTS/_runs")
     mode = data.get("mode", "artifact-only")
     allow_repo_write = bool(data.get("allow_repo_write", False))
     run_id = data.get("run_id")

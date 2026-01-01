@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 71dbed4684ea61a52b4145c137293452045e1de4e5861834e35c3ff2bf893703 -->
+
+<!-- CONTENT_HASH: 54a9a4bed0dae5f724383f56d013ca9fa0c9703a16e48b661331eb53d089cadf -->
 
 # Swarm Architecture
 

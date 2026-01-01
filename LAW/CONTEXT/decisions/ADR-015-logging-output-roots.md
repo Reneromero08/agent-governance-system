@@ -1,10 +1,16 @@
-# ADR-015: Logging Output Roots
+---
+id: "ADR-015"
+title: "Logging Output Roots"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Medium"
+tags: ["governance", "logging", "artifacts"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [governance, logging, artifacts]
+<!-- CONTENT_HASH: 15123a08fb11ad026dd13c28d3f3228c4f7237d4d3d43b11661c49e11abc6040 -->
+
+# ADR-015: Logging Output Roots
 
 ## Context
 

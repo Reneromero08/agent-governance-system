@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 9bd07a4ed03d6eea49673a43682a62ca7df8b0cabb7ff424ac91cd35e9e7bea7 -->
+
 # Skill: swarm-directive
 
 **Version:** 0.1.0

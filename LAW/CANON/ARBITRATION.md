@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: f8fd4c1bb2ec551cde2d04440dc47e946a136b8deca69164a93d1d8edbf16866 -->
+
 # Canon Arbitration
 
 This document defines how to resolve conflicts when canon rules contradict each other. It is part of the CANON layer and has authority immediately below `CONTRACT.md`.

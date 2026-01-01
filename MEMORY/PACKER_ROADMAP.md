@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 1423eea527b9d3fcbebd6ec045ab982c24552cb7d5af51c11398824cac0f6cf9 -->
+
 # LLM Packer Roadmap
 
 ## Target Pack Structure
@@ -26,6 +28,68 @@ pack/
 - AGS: excludes CAT and LAB
 - CAT: excludes AGS and LAB
 - LAB: excludes AGS and CAT
+
+---
+
+## LLM Packer Role in AGS
+
+The **LLM Packer** is the **context compression engine** for AGS. It creates compressed "memory packs" that give LLMs a bounded view of the repository without loading everything into context.
+
+### How It Fits with CAS and Cassette Network
+
+```
+┌─────────────────────────────────────────┐
+│   LLM Packer (Compression Strategy)     │
+│   "What should the LLM see?"            │
+└─────────────────┬───────────────────────┘
+                  ↓
+┌─────────────────────────────────────────┐
+│   CAS (Storage Layer)                   │
+│   "How should we store it?"             │
+│   - Deduplication (same hash = one blob)│
+│   - Immutable (hash = content)          │
+└─────────────────┬───────────────────────┘
+                  ↓
+┌─────────────────────────────────────────┐
+│   Cassette Network (Discovery)          │
+│   "How do we find what we need?"        │
+│   - Semantic search (vectors)           │
+│   - Symbol resolution (@Symbols)        │
+└─────────────────────────────────────────┘
+```
+
+**Key Insight:** LLM Packer decides *what* to include (compression logic), CAS stores *how* (deduplicated blobs), and Cassette Network enables *discovery* (semantic search).
+
+**Future Integration (Lane Z.2):** LITE packs will become manifests (pointers to CAS hashes) instead of storing full file bodies.
+
+---
+
+## Phase 0: 6-Bucket Migration (P0)
+
+**Status:** ❌ **Not Started**  
+**Blocker:** LLM Packer still references old paths (CANON/, CONTEXT/, etc.)
+
+### Tasks
+- [ ] Update `Engine/packer/core.py` to use new bucket paths:
+  - `CANON/` → `LAW/CANON/`
+  - `CONTEXT/` → `LAW/CONTEXT/` (decisions, preferences, rejected, open)
+  - `CONTRACTS/` → `LAW/CONTRACTS/`
+  - `SKILLS/` → `CAPABILITY/SKILLS/`
+  - `TOOLS/` → `CAPABILITY/TOOLS/`
+  - `MCP/` → `CAPABILITY/MCP/`
+  - `PRIMITIVES/` → `CAPABILITY/PRIMITIVES/`
+  - `CORTEX/` → `NAVIGATION/CORTEX/`
+  - `MAPS/` → `NAVIGATION/MAPS/`
+- [ ] Update `Engine/packer/split.py` to scan new bucket roots
+- [ ] Update `Engine/packer/lite.py` to prioritize new bucket structure (HIGH ELO: LAW/CANON/, NAVIGATION/MAPS/)
+- [ ] Update all scope configs (AGS, CAT, LAB) to reference new paths
+- [ ] Update tests in `CONTRACTS/` to verify new bucket paths
+- [ ] Update documentation (README, AGENTS.md) to reference new structure
+
+### Exit Criteria
+- Packer successfully generates packs using new bucket paths
+- All tests pass with new structure
+- No references to old paths (CANON/, CONTEXT/, etc.) in packer code
 
 ---
 
@@ -164,7 +228,39 @@ Not implementing now. Research needed.
 
 ---
 
-## Phase 6: Research (Future)
+## Phase 6: CAS Integration (Future)
+
+**Goal:** Integrate LLM Packer with Content-Addressed Storage (CAS) to enable deduplication and immutable artifact storage.
+
+**Depends on:** Lane Z.2 (F3 / Content-Addressable Storage) must be complete.
+
+### Tasks
+- [ ] **Refactor LITE packs to use CAS references**
+  - Instead of storing full file bodies, store CAS hashes
+  - LITE pack manifest becomes: `{"file": "LAW/CANON/INTEGRITY.md", "hash": "sha256:abc123..."}`
+  - File bodies stored in `.cas/` directory (deduplicated)
+- [ ] **Update packer to write to CAS**
+  - `write_split_pack()` → writes file bodies to CAS, returns hashes
+  - `write_lite_pack()` → stores only manifest (pointers to CAS hashes)
+- [ ] **Add CAS verification**
+  - `verify_manifest()` → checks CAS hashes match file bodies
+  - Fail-closed: missing CAS blob = verification failure
+- [ ] **Implement garbage collection**
+  - Track which CAS blobs are referenced by active packs
+  - Prune unreferenced blobs (with safety margin)
+- [ ] **Benchmark deduplication savings**
+  - Measure storage reduction (same file across multiple packs = one CAS blob)
+  - Measure pack generation speed (no need to re-hash identical files)
+
+### Exit Criteria
+- LITE packs are 80%+ smaller (manifests only, not full bodies)
+- CAS deduplication works (same file = one blob)
+- Verification passes (CAS hashes match file bodies)
+- Garbage collection is safe (no accidental deletion of active blobs)
+
+---
+
+## Phase 7: Research (Future)
 
 - [ ] **Context Indexing:** Include RAG or index like Cortex?
 - [ ] **Competitive Analysis:** What are others doing that works?

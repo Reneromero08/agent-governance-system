@@ -1,10 +1,16 @@
-# ADR-011: Master Override Directive
+---
+id: "ADR-011"
+title: "Master Override Directive"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Critical"
+tags: ["governance", "override", "interface"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** Critical
-**Tags:** [governance, override, interface]
+<!-- CONTENT_HASH: 0f5f39ad830f3b9c9d0e49ba448836aee9e0cd47d5492940da6f0271e86ad84b -->
+
+# ADR-011: Master Override Directive
 
 ## Context
 

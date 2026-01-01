@@ -1,10 +1,16 @@
-# ADR-024: Capability Versioning Semantics (Immutability-by-Content)
+---
+id: "ADR-024"
+title: "Capability Versioning Semantics (Immutability-by-Content)"
+status: "Accepted"
+date: "2025-12-27"
+confidence: "High"
+impact: "High"
+tags: ["governance", "capability-versioning", "security"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-27
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, capability-versioning, security]
+<!-- CONTENT_HASH: 608f6529c2133ef9aafaf142a3d9f0108eb4985e3ac959163ab5b258fc8ed26a -->
+
+# ADR-024: Capability Versioning Semantics (Immutability-by-Content)
 
 ## Context
 

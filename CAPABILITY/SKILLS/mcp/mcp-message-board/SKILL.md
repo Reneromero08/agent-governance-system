@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 7e9a19ab3465161e49b31bc2a5ea38ad9591d82fc6cf02410938122840ea77e9 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-message-board
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -46,3 +51,6 @@ Each event record is a JSON object with:
 - Use only standard library.
 - Keep logic deterministic where possible.
 - Write artifacts only under allowed roots.
+
+**required_canon_version:** >=3.0.0
+

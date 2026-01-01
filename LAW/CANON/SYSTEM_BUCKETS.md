@@ -1,172 +1,132 @@
+<!-- CONTENT_HASH: 36e1b2bc23a1f9d5e7c8a9b2d3f4e5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2 -->
+
 # SYSTEM BUCKETS
 
-**Authority:** CANON  
-**Version:** 1.0.0
+**Authority:** LAW/CANON  
+**Version:** 2.0.0 (6-Bucket Migration)
 
-This document defines the classification buckets used throughout the system.
-**All artifacts MUST belong to exactly one bucket.**
+This document defines the classification buckets of the Agent Governance System (AGS).
+**All files and artifacts MUST belong to exactly one bucket.**
 
 ---
 
-## 1. LAW
+## 1. LAW (Supreme Authority)
 
-**Purpose:** Define what is allowed.
+**Purpose:** Define what is allowed. The "Constitution" and "Legislation" of the system.
 
-**Includes:**
-- `CANON/*`
-- `CONTRACTS/*`
-- `AGENTS.md`
-- `CONTEXT/decisions/*`
+**Key Directories:**
+- `LAW/CANON/` - Constitutional rules (Invariants, Contract, Glossary).
+- `LAW/CONTEXT/` - Decision trace (ADRs) and Preferences.
+- `LAW/CONTRACTS/` - Mechanical enforcement (Schemas, Fixtures, Precedent).
+- `AGENTS.md` - Operating contract.
 
 **Prohibitions:**
-- No execution logic
-- No speculation
-- No summaries that alter meaning
-
-**Operations:**
-- Append-only
-- Change requires explicit authority
+- No execution logic (scripts).
+- No speculative research.
+- No history distortion.
 
 ---
 
-## 2. CAPABILITY
+## 2. CAPABILITY (Instruments)
 
-**Purpose:** Define what the system can do.
+**Purpose:** Define what the system can do. The "Tools" and "Skills" of the agents.
 
-**Includes:**
-- `SKILLS/*`
-- `TOOLS/*`
-- `MCP/*`
-- `PRIMITIVES/*`
-- `PIPELINES/*`
+**Key Directories:**
+- `CAPABILITY/SKILLS/` - Atomic agent toolkits.
+- `CAPABILITY/TOOLS/` - Helper scripts, critics, and automation.
+- `CAPABILITY/MCP/` - Client adapters and Semantic Core logic.
+- `CAPABILITY/PIPELINES/` - DAG definitions.
+- `CAPABILITY/PRIMITIVES/` - Low-level execution logic.
+- `CAPABILITY/TESTBENCH/` - Validation suites.
 
 **Prohibitions:**
-- No authority
-- No direction
-- No self-modifying behavior
-
-**Operations:**
-- Implement
-- Test
-- Version
+- No self-authored governance rules.
+- No navigation planning (Roadmaps).
 
 ---
 
-## 3. NAVIGATION
+## 3. NAVIGATION (Direction & Cortex)
 
-**Purpose:** Define how information is found.
+**Purpose:** Define where we are going and how to find things. Consolidates the old **DIRECTION** and **CORTEX** buckets.
 
-**Includes:**
-- `CORTEX/*`
-- `CONTEXT/maps/*`
-- `INDEX.md` files (anywhere)
+**Key Directories:**
+- `NAVIGATION/MAPS/` - Ownership and data flow maps.
+- `NAVIGATION/ROADMAPS/` - Master strategy and lane tracking.
+- `NAVIGATION/CORTEX/` - Semantic index and metadata.
+
+**Operations:**
+- **Index**: Build semantic models.
+- **Map**: Define repo boundaries.
+- **Orient**: Update roadmaps to reflect completion.
+
+---
+
+## 4. MEMORY (Historical Trace)
+
+**Purpose:** Record what has happened across sessions.
+
+**Key Directories:**
+- `MEMORY/LLM_PACKER/` - Context compression and archive storage.
+- `LAW/CONTEXT/archive/` - Archived decision history.
+- `LAW/CONTRACTS/_runs/` - Temporary logs/outputs (Disposable but traceable).
 
 **Prohibitions:**
-- No decisions
-- No execution
-- No authority claims
-
-**Operations:**
-- Index
-- Query
-- Resolve
+- No new planning (Roadmaps).
+- No modified rules.
 
 ---
 
-## 4. DIRECTION
+## 5. THOUGHT (Experimental Labs)
 
-**Purpose:** Define what should be done next.
+**Purpose:** Explore possibilities and build prototypes without risking system stability.
 
-**Includes:**
-- `AGS_ROADMAP_MASTER.md`
-- `*_ROADMAP*.md` files
-- `INBOX/roadmaps/*`
-- Active plans
+**Key Directories:**
+- `THOUGHT/LAB/` - Volatile features (e.g., `CAT_CHAT`, `NEO3000`, `TURBO_SWARM`).
+- `THOUGHT/CONTEXT/` - Lab-specific research and notes.
 
 **Prohibitions:**
-- No enforcement
-- No execution
-
-**Operations:**
-- Revise
-- Archive when superseded
+- No binding force on the main system.
+- No production dependencies.
 
 ---
 
-## 5. THOUGHT
+## 6. INBOX (Human Gate)
 
-**Purpose:** Explore possibilities.
+**Purpose:** Centralized location for artifacts requiring human review or "God Mode" approval.
 
-**Includes:**
-- `CONTEXT/research/*`
-- `CATALYTIC-DPT/LAB/*`
-- `CONTEXT/demos/*`
-- Experiments
-- Notes
-- Drafts
-
-**Prohibitions:**
-- No binding force
-- No implicit decisions
-
-**Operations:**
-- Freeform writing
-- Contradiction allowed
+**Key Directories:**
+- `INBOX/reports/` - Mandatory completion reports.
+- `INBOX/research/` - In-progress study and findings.
+- `INBOX/roadmaps/` - Roadmaps currently under review.
+- `INBOX/decisions/` - Proposed policy/ADR changes.
 
 ---
 
-## 6. MEMORY
+## Directory → Bucket Mapping (V2)
 
-**Purpose:** Record what has happened.
-
-**Includes:**
-- `CONTEXT/archive/*`
-- `CONTEXT/session_reports/*`
-- `INBOX/reports/*`
-- `MEMORY/*`
-- Snapshots
-- Historical records
-
-**Prohibitions:**
-- No future intent
-- No edits after archival
-
-**Operations:**
-- Reference only
-
----
-
-## Directory → Bucket Mapping
-
-| Directory | Bucket |
-|-----------|--------|
-| `CANON/` | LAW |
-| `CONTRACTS/` | LAW |
-| `AGENTS.md` | LAW |
-| `CONTEXT/decisions/` | LAW |
-| `SKILLS/` | CAPABILITY |
-| `TOOLS/` | CAPABILITY |
-| `MCP/` | CAPABILITY |
-| `PRIMITIVES/` | CAPABILITY |
-| `PIPELINES/` | CAPABILITY |
-| `CORTEX/` | NAVIGATION |
-| `CONTEXT/maps/` | NAVIGATION |
-| `AGS_ROADMAP_MASTER.md` | DIRECTION |
-| `INBOX/roadmaps/` | DIRECTION |
-| `CONTEXT/research/` | THOUGHT |
-| `CATALYTIC-DPT/LAB/` | THOUGHT |
-| `CONTEXT/demos/` | THOUGHT |
-| `CONTEXT/archive/` | MEMORY |
-| `CONTEXT/session_reports/` | MEMORY |
-| `INBOX/reports/` | MEMORY |
-| `MEMORY/` | MEMORY |
+| Directory | Bucket | Authority |
+|-----------|--------|-----------|
+| `LAW/CANON/` | **LAW** | SUPREME |
+| `LAW/CONTEXT/` | **LAW** | SUPREME |
+| `LAW/CONTRACTS/` | **LAW** | SUPREME |
+| `AGENTS.md` | **LAW** | SUPREME |
+| `CAPABILITY/SKILLS/` | **CAPABILITY** | INSTRUMENT |
+| `CAPABILITY/TOOLS/` | **CAPABILITY** | INSTRUMENT |
+| `CAPABILITY/MCP/` | **CAPABILITY** | INSTRUMENT |
+| `CAPABILITY/TESTBENCH/` | **CAPABILITY** | INSTRUMENT |
+| `NAVIGATION/MAPS/` | **NAVIGATION** | DIRECTION |
+| `NAVIGATION/ROADMAPS/` | **NAVIGATION** | DIRECTION |
+| `NAVIGATION/CORTEX/` | **NAVIGATION** | DIRECTION |
+| `MEMORY/LLM_PACKER/` | **MEMORY** | HISTORY |
+| `MEMORY/_packs/` | **MEMORY** | HISTORY |
+| `THOUGHT/LAB/` | **THOUGHT** | EXPERIMENT |
+| `INBOX/` | **INBOX** | GATE |
 
 ---
 
 ## Enforcement
 
 Agents MUST:
-1. Identify the bucket before modifying any artifact
-2. Respect the prohibitions for that bucket
-3. Use only the allowed operations for that bucket
-4. Ask for clarification if bucket is ambiguous
+1. Identify the target bucket before creating or moving a file.
+2. Use the correct prefix (`LAW/`, `CAPABILITY/`, etc.) for all new components.
+3. Treat files in `INBOX` as "Requests for Review" until moved to their final bucket.

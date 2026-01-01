@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 64b5d8da5aa0215d860aa8344464ed6dd43696e558fee034698b50f5dc81b457 -->
+
 # Antigravity Bridge Extension
 
 > Local copy of extension from `D:\CCC 2.0\AI\AGI\EXTENSIONS\antigravity-bridge`

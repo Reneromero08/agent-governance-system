@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: a12c0e171fe02afafbe72745d816c24ac5ad1a50a27594b11f10b7cd06ae1531 -->
+
+<!-- CONTENT_HASH: ee830f0cf7cccb22d26a00c6520d7a4ab79c47f6380748740cb246628b6ec631 -->
 
 # AI Chats Master Merge
 
@@ -115,7 +116,6 @@ not as a build requirement.
 
 ## 7) Tiny excerpt bank (verbatim fragments, short)
 These are included only to preserve the original wording anchors that helped you.
-
 
 ### Ministry of Truth
 - [C4] Gemini 3 AGS_1.md: " Benefit:** Given your interest in Orwell and semiotics, you are essentially creating a "Ministry of Truth" for your codebase—but a benevolent one. You are mechanizing the preservation of intent.

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 2f1a7ace3e672207d920b2bcdd3a2a7d13fa982ce29f1d2548bb7d0a2ec7c174 -->
+
 # STYLE-002: Engineering Integrity
 
 **Category:** Governance

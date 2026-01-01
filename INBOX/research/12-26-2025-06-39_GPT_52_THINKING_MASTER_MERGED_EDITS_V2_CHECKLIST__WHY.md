@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: a5b86129bf38efd5e056fdd85c2e13ea61f6c4216bb754e5c2906ef454373b1b -->
+
+<!-- CONTENT_HASH: 94bbbd67329f351b631ae326e04bf97290138b7208e613bebcc8125a0c0b1d3a -->
 
 # ♥ Master Merged Edits v2 (Checklist + Why, Preserved Phrasings)
 
@@ -207,4 +208,3 @@ These are the places where reviewers differ, and you must choose a stance:
 - [ ] Make key canon rules machine-checkable where possible
 - [ ] Decide naming and document canonical terms + aliases
 - [ ] Stage MCP integration seam (then implement)
-

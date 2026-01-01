@@ -1,4 +1,17 @@
 {
   "rc": 2,
-  "result": null
+  "result": {
+    "normalized_paths": {
+      "read": [],
+      "write": [
+        "CANON/CHANGELOG.md"
+      ]
+    },
+    "policy_version": "1",
+    "reasons": [
+      "WRITE_OUTSIDE_ARTIFACTS",
+      "WRITE_TOUCHES_REPO"
+    ],
+    "verdict": "BLOCK"
+  }
 }

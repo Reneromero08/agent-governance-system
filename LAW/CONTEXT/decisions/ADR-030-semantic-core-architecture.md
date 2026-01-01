@@ -1,16 +1,21 @@
+---
+id: "ADR-030"
+title: "Semantic Core + Translation Layer Architecture"
+status: "Proposed"
+date: "2025-12-28"
+confidence: "Low"
+impact: "High"
+tags: ["architecture", "semantics", "swarm", "token-optimization"]
+---
+
+<!-- CONTENT_HASH: 1b4cb57a852ed9e46bcb17aca41d0bb642139609c0c661c827c2e4b1daf04a7b -->
+
 # ADR-030: Semantic Core + Translation Layer Architecture
 
-**Status:** Proposed
-**Date:** 2025-12-28
-**Confidence:** Low
-**Impact:** High
-**Tags:** [architecture, semantics, swarm, token-optimization]
 **Deciders:** System Architect
 **Supersedes:** None
 **Related:** ADR-027 (Dual-DB), ADR-028 (Semiotic Compression Layer)
-
 ---
-
 ## Context
 
 The current swarm architecture uses uniform models for all agents. This is inefficient:

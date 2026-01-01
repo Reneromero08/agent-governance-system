@@ -5,6 +5,13 @@ description: Enforces changelog updates for significant changes to CANON/, TOOLS
 compatibility: all
 ---
 
+<!-- CONTENT_HASH: 6ccf92d5a58730e071eab8db36222e2c03e3779f43e2056dcceac11528ab4ba1 -->
+
+**required_canon_version:** >=3.0.0
+
+
+
+
 # Canon Governance Check Skill
 
 **Version:** 0.1.0
@@ -73,3 +80,6 @@ When run with `CORTEX_RUN_ID` set, logs governance check events to the Cortex pr
 - **Core script**: `TOOLS/check-canon-governance.js` (Node.js)
 - **Skill wrapper**: `SKILLS/canon-governance-check/run.py`
 - **Pre-commit hook**: `SKILLS/canon-governance-check/scripts/pre-commit`
+
+**required_canon_version:** >=3.0.0
+

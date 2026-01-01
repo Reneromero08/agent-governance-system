@@ -18,7 +18,7 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
-INVARIANTS_FILE = PROJECT_ROOT / "CANON" / "INVARIANTS.md"
+INVARIANTS_FILE = PROJECT_ROOT / "LAW" / "CANON" / "INVARIANTS.md"
 
 
 def main(input_path: Path, output_path: Path) -> int:

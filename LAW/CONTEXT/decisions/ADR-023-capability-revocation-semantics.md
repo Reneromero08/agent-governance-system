@@ -1,10 +1,16 @@
-# ADR-023: Capability Revocation Semantics (No-History-Break)
+---
+id: "ADR-023"
+title: "Capability Revocation Semantics (No-History-Break)"
+date: "2025-12-27"
+status: "Accepted"
+confidence: "High"
+impact: "High"
+tags: ["catdpt", "governance", "capabilities", "revocation"]
+---
 
-**Date:** 2025-12-27
-**Status:** Accepted
-**Confidence:** High
-**Impact:** High
-**Tags:** [catdpt, governance, capabilities, revocation]
+<!-- CONTENT_HASH: 607800f484af339ce25a8d2e2c167f2260704c3483c4c7b9fc56a2ebd8a1ad82 -->
+
+# ADR-023: Capability Revocation Semantics (No-History-Break)
 
 ## Context
 Phase 6.6 introduced capability pinning and revocation to allow blocking compromised or deprecated skills. However, a global revocation list (`CAPABILITY_REVOKES.json`) would break the verification of historical runs that were valid at their execution time. We need "no-history-break" semantics where past runs remain verifiable while future use is blocked.

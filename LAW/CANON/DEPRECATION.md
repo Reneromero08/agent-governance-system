@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 100e204214cf7e432b5ec5f99a83142f91cb8674ab50db6e8f82acc6073a482a -->
+
 # Deprecation Policy
 
 This document defines how rules, tokens, and capabilities are deprecated and eventually removed from the Agent Governance System. It ensures breaking changes are predictable and migratable.

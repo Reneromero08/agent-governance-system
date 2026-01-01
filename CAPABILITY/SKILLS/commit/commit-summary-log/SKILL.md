@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 9b6f208bd4bca482a927ba797787ae4d18e6a16ac16f3a2e1ca7bd429fd19f80 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: commit-summary-log
 
 **Version:** 0.2.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -87,3 +92,6 @@ Rules:
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

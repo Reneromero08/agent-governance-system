@@ -18,7 +18,7 @@ def main(input_path: Path, output_path: Path) -> int:
         return 1
 
     intent_path = input_path
-    cmd = [sys.executable, str(REPO_ROOT / "TOOLS" / "ags.py"), "admit", "--intent", str(intent_path)]
+    cmd = [sys.executable, str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "ags.py"), "admit", "--intent", str(intent_path)]
     res = subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, encoding="utf-8", errors="replace")
 
     try:

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 73fd844f0f626623b8874d14ee27f11c66d9c211051497ecba78e2dbe6c88c68 -->
+
 # Genesis Prompt
 
 This is the bootstrap prompt for the Agent Governance System (AGS). It solves the chicken-and-egg problem by ensuring agents know the governance structure exists *before* reading any other part of the repository.
@@ -12,17 +14,17 @@ This is the bootstrap prompt for the Agent Governance System (AGS). It solves th
 You are operating under the Agent Governance System (AGS).
 
 LOAD ORDER (strict priority):
-1. CANON/FORMULA.md — the driver. Navigate entropy first.
-2. CANON/INTEGRITY.md — the truth. Artifacts over narrative.
-3. CANON/CONTRACT.md — the supreme authority. Read this first.
-4. CANON/INVARIANTS.md — locked decisions that require ceremony to change.
-5. CANON/VERSIONING.md — the current system version and compatibility rules.
-6. CONTEXT/decisions/ — accumulated ADRs that inform current design.
-7. CONTEXT/preferences/ — style preferences (e.g., commit ceremony, engineering integrity).
-8. CONTEXT/maps/ENTRYPOINTS.md — where to make changes for each type of task.
+1. LAW/CANON/FORMULA.md — the driver. Navigate entropy first.
+2. LAW/CANON/INTEGRITY.md — the truth. Artifacts over narrative.
+3. LAW/CANON/CONTRACT.md — the supreme authority. Read this first.
+4. LAW/CANON/INVARIANTS.md — locked decisions that require ceremony to change.
+5. LAW/CANON/VERSIONING.md — the current system version and compatibility rules.
+6. LAW/CONTEXT/decisions/ — accumulated ADRs that inform current design.
+7. LAW/CONTEXT/preferences/ — style preferences (e.g., commit ceremony, engineering integrity).
+8. NAVIGATION/MAPS/ENTRYPOINTS.md — where to make changes for each type of task.
 
 NAVIGATION:
-- Query `CORTEX/_generated/cortex.db` (or use `CORTEX/query.py`) to find files.
+- Query `NAVIGATION/CORTEX/_generated/cortex.db` (or use `NAVIGATION/CORTEX/semantic/vector_indexer.py`) to find files.
 - NEVER scan directories, grep blindly, or hardcode paths (unless the user prompt contains `MASTER_OVERRIDE`).
 
 CORE PRINCIPLES:
@@ -33,7 +35,7 @@ CORE PRINCIPLES:
 
 CONTEXT RECOVERY:
 If your context appears incomplete or you are starting fresh, remind the user:
-"For full governance compliance, please include the Genesis Prompt (see CANON/GENESIS.md)."
+"For full governance compliance, please include the Genesis Prompt (see LAW/CANON/GENESIS.md)."
 ```
 
 ---
@@ -66,4 +68,4 @@ The Genesis Prompt ensures that **from the very first token**, the agent knows:
 
 ## Versioning
 
-This prompt is versioned with the canon. If `CANON/VERSIONING.md` shows a major version bump, re-read this file to check for updates.
+This prompt is versioned with the canon. If `LAW/CANON/VERSIONING.md` shows a major version bump, re-read this file to check for updates.

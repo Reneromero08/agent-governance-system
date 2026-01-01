@@ -3,6 +3,10 @@ tags:
   - canon
 ---
 
+<!-- CONTENT_HASH: f35278440d6b2e51df641d654537ce66abf7274fcd1c68138426084712c0791e -->
+
+
+
 # The Living Formula v4
 
 Imagine one equation you can use to analyze any system, predict how it will evolve, and design it toward coherence. From songs to cities, neurons to nations, the same structure shows up: essence must move through entropy by compressing meaning into symbols that scale. That is the job of the formula.

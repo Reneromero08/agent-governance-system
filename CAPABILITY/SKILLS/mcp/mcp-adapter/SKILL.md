@@ -1,7 +1,12 @@
+<!-- CONTENT_HASH: 947418164cb9f5cb7e42a3efd5aae779db7b4468b365669741b5182e0a40cf31 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-adapter
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 **canon_version:** "3.0.0"
 
 # MCP Adapter
@@ -21,3 +26,6 @@ python scripts/wrapper.py config.json output.json
 
 ### Configuration Schema
 See `CATALYTIC-DPT/SCHEMAS/mcp_adapter.schema.json`.
+
+**required_canon_version:** >=3.0.0
+

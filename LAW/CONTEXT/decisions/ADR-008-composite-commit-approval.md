@@ -1,16 +1,16 @@
+---
+id: "ADR-008"
+title: "Commit ceremony approvals and confirmations"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "Medium"
+tags: ["governance", "commit", "release"]
+---
+
+<!-- CONTENT_HASH: 0b20012ba7b0901632dd3de76f95ba4896d643e81e4bf8ecc1225cdccb4a60ff -->
+
 # ADR-008: Commit ceremony approvals and confirmations
-
-**Status:** Accepted
-
-**Date:** 2025-12-21
-
-**Review date:** (optional)
-
-**Confidence:** High
-
-**Impact:** Medium
-
-**Tags:** [governance, commit, release]
 
 ## Context
 

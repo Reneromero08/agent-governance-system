@@ -1,7 +1,7 @@
 {
   "mode": "manual",
   "append": false,
-  "log_path": "CONTRACTS/_runs/commit_logs/commit_summaries.jsonl",
+  "log_path": "LAW/CONTRACTS/_runs/commit_logs/commit_summaries.jsonl",
   "entry": {
     "commit": "deadbeefdeadbeefdeadbeefdeadbeefdeadbeef",
     "subject": "2.9.0: add mcp-startup skill",

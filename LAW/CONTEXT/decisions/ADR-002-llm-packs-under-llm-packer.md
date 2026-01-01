@@ -1,16 +1,16 @@
+---
+id: "ADR-002"
+title: "Store packs under MEMORY/LLM_PACKER"
+status: "Accepted"
+date: "2025-12-20"
+confidence: "Medium"
+impact: "Low"
+tags: ["artifacts", "memory"]
+---
+
+<!-- CONTENT_HASH: cf3bbd951f67a8819df8cc3bae5ae6ae74f9861ac7b34af237d481825f83fe07 -->
+
 # ADR-002: Store packs under MEMORY/LLM_PACKER
-
-**Status:** Accepted
-
-**Date:** 2025-12-20
-
-**Review date:** (optional)
-
-**Confidence:** Medium
-
-**Impact:** Low
-
-**Tags:** [artifacts, memory]
 
 ## Context
 

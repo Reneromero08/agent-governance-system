@@ -17,7 +17,7 @@ from pathlib import Path
 
 # Direct file import for MCP/server.py
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP" / "server_CATDPT.py"
+SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
@@ -87,7 +87,7 @@ class RunnerValidatorVersionIntegrity:
         run_dir.mkdir(parents=True, exist_ok=True)
 
         # Create output file
-        output_rel = f"CONTRACTS/_runs/{run_id}/output.txt"
+        output_rel = f"LAW/CONTRACTS/_runs/{run_id}/output.txt"
         output_path = run_dir / "output.txt"
         output_path.write_bytes(output_content)
 
