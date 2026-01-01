@@ -820,6 +820,15 @@ def main(argv: List[str] | None = None) -> int:
 
     args = parser.parse_args(argv)
 
+    # Repo-local invariant: HTTPS transport for GitHub remotes.
+    # Safe + idempotent; avoids SSH remote flipping across WSL/VS Code contexts.
+    try:
+        ensure_script = REPO_ROOT / "CAPABILITY" / "TOOLS" / "utilities" / "ensure_https_remote.sh"
+        if ensure_script.exists():
+            subprocess.run(["bash", str(ensure_script), str(REPO_ROOT)], cwd=str(REPO_ROOT), check=False)
+    except Exception:
+        pass
+
     try:
         if args.cmd == "plan":
             return ags_plan(

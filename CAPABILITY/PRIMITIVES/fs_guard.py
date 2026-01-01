@@ -8,18 +8,18 @@ Usage:
     from CATALYTIC_DPT.PRIMITIVES.fs_guard import FilesystemGuard
 
     guard = FilesystemGuard(
-        allowed_roots=["CONTRACTS/_runs", "CORTEX/_generated"],
-        forbidden_paths=["CANON", "AGENTS.md", "BUILD", ".git"],
+        allowed_roots=["LAW/CONTRACTS/_runs", "NAVIGATION/CORTEX/_generated"],
+        forbidden_paths=["LAW/CANON", "AGENTS.md", "BUILD", ".git"],
         project_root=Path("/path/to/project")
     )
 
     # Before any write operation
-    valid, error = guard.validate_write_path("CONTRACTS/_runs/output.json")
+    valid, error = guard.validate_write_path("LAW/CONTRACTS/_runs/output.json")
     if not valid:
         raise RuntimeError(f"Write violation: {error}")
 
     # Perform the write
-    Path("CONTRACTS/_runs/output.json").write_text(data)
+    Path("LAW/CONTRACTS/_runs/output.json").write_text(data)
 """
 from __future__ import annotations
 

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: e0ba44e39e5812099582e5a276476b89ccb8a3d9cbb3dc9d2ede0b1f87440674 -->
+
 # AGENTS.md
 
 Agent Operating Contract for the Agent Governance System (AGS)
@@ -38,6 +40,12 @@ Once connected via MCP, agents have access to these core tools:
 - `canon_read({"file": "CONTRACT"})` - Read governance files (logged with `session_id`)
 - `context_search({"type": "decisions"})` - Find ADRs and context records (logged with `session_id`)
 - `session_info({})` - Get session information including `session_id` (ADR-021 compliance)
+
+**Search Protocol (MANDATORY):**
+- **MUST** use `semantic_search` for conceptual queries ("How does X work?")
+- **MUST** use `grep_search` for exact string matches ("SPECTRUM-02", file paths)
+- **SHOULD** try semantic search first for ambiguous queries
+- **See:** `LAW/CANON/AGENT_SEARCH_PROTOCOL.md` for full decision tree
 
 ### 0.3 First Commands (Bootstrap Sequence)
 

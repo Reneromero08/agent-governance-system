@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: fa7c56f42429ed12a93aa7d48fba28d052dec755346f3c0e2912e457690ae916 -->
+
 # STYLE-003: Mandatory Changelog Synchronisation
 
 **Category:** Governance

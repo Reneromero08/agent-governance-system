@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427 -->
+
 # MCP Server Evaluation Guide
 
 ## Overview

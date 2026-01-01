@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 218fe4601f6ba5e2a8bdbc8241dd60a9fcfcc585f1636101c495e2076a23b8a5 -->
+
+<!-- CONTENT_HASH: 718e1ba507ed9f448ee9c4411afa550ed1fa397d898c1fe901bdd0df8ab0630a -->
 
 # Bug Report: SKILLS and TOOLS Folders
 

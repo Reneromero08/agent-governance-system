@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 648a22830edaa1fac73bb5b77b37be17dd77145500e738eede3c16095d675f90 -->
+
 # Versioning
 
 This file defines the versioning policy for the Agent Governance System.  It tracks changes to the canon and describes the compatibility guarantees provided by each version.

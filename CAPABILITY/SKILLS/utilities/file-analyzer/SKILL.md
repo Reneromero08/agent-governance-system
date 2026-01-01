@@ -1,7 +1,12 @@
+<!-- CONTENT_HASH: 373d9bb6438898b8652edb9871c3572fc594135267e9af172fcbd5796ac4af67 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: file-analyzer
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 **canon_version:** "3.0.0"
 
 # File Analyzer
@@ -33,3 +38,6 @@ python scripts/run.py input.json output.json
 | `find_config` | Locate configuration files |
 | `identify_dependencies` | Find skill dependencies |
 | `list_critical_files` | List essential files |
+
+**required_canon_version:** >=3.0.0
+

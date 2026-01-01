@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 82169ad2a1976e7041c636aeb9753816c946acd35754ceb3e84bb6d58f647a3f -->
+
 # Agent Governance System (AGS)
 
 The Agent Governance System (AGS) is a constitutional framework for durable, multi-agent intelligence.
@@ -8,7 +10,7 @@ This repository provides a language-driven operating system for AI-native projec
 
 Every new agent session **must** begin with the Genesis Prompt to bootstrap the governance system correctly.
 
-1. Read the full prompt from `CANON/GENESIS.md`.
+1. Read the full prompt from `LAW/CANON/GENESIS.md`.
 2. Prepend it as the system message, pack header, or first instruction.
 3. Agents are instructed to remind you if it is missing.
 
@@ -18,20 +20,20 @@ This solves the bootstrap paradox: the agent knows the governance structure exis
 
 The repository is organised into eight layers. Files are loaded in the following order:
 
-1. **CANON** - the constitution and invariants of the system.
-2. **CONTEXT** - decisions, rejections and preferences that record why things are the way they are.
-    - `decisions/` - ADRs (Architecture Decision Records)
-    - `preferences/` - Governance preferences (style, ceremony)
-    - `research/` - Shared research cache (e.g., `research_cache.db` for SQLite)
-3. **MAPS** - entrypoints and data flow descriptions that tell agents where to make changes.
-4. **SKILLS** - modular capabilities packaged with contracts and fixtures.
-5. **CONTRACTS** - fixtures and schemas used to mechanically enforce rules.
-6. **MEMORY** - packers, manifests and combined state for context handoff.
-7. **CORTEX** - a shadow index (e.g. SQLite) that agents query instead of the raw filesystem.
-    - **Semantic Core** - vector embeddings for efficient semantic search and token compression (Phase 1 complete)
-    - Enables 96% token savings by compressing context with @Symbols and vectors
-    - See [SEMANTIC_CORE_QUICK_START.md](./SEMANTIC_CORE_QUICK_START.md) for usage
-8. **TOOLS** - helper scripts such as critics and linters.
+1. **LAW** - The constitution, decisions, and mechanical contracts.
+    - `CANON/` - Constitutional rules (Genesis, Versioning, Glossary).
+    - `CONTEXT/` - ADRs, preferences, and research history.
+    - `CONTRACTS/` - Schemas and fixtures (Precedent).
+2. **CAPABILITY** - Modular skills, tools, and MCP adapters.
+    - `SKILLS/` - Atomic agent capabilities.
+    - `MCP/` - Client integration and Semantic Core logic.
+    - `TOOLS/` - Helper scripts (Critics, Linters).
+3. **NAVIGATION** - Maps and roadmaps.
+    - `MAPS/` - Data flows and ownership maps.
+    - `CORTEX/` - Semantic index and search tools.
+4. **MEMORY** - Packers and long-term state.
+5. **THOUGHT** - Experimental labs and prototypes.
+6. **INBOX** - Reports, research, and items for human review.
 
 ## Semantic Core (Token Compression)
 
@@ -44,30 +46,29 @@ The CORTEX layer includes a **Semantic Core** system that uses vector embeddings
 
 **Quick start:**
 ```bash
-# See it in action
-python demo_semantic_dispatch.py
+# Test the semantic adapter
+python CAPABILITY/MCP/semantic_adapter.py --test
 
-# Test all systems
-python CORTEX/test_semantic_core.py
+# Rebuild the semantic index
+python NAVIGATION/CORTEX/semantic/vector_indexer.py --rebuild
 
-# Index your code
-python CORTEX/vector_indexer.py --index
+# Search the codebase
+python CAPABILITY/MCP/semantic_adapter.py search --query "how to add a skill"
 ```
 
 **Documentation:**
-- [Quick Start Guide](./SEMANTIC_CORE_QUICK_START.md) - 5-minute introduction
-- [Complete Index](./SEMANTIC_CORE_INDEX.md) - Full navigation and API reference
-- [ADR-030](./CONTEXT/decisions/ADR-030-semantic-core-architecture.md) - Architecture specification
-- [Roadmap](./CONTEXT/decisions/ROADMAP-semantic-core.md) - 4-phase implementation plan
+- [Semantic Core Quick Start](./NAVIGATION/CORTEX/README.md)
+- [ADR-030](./LAW/CONTEXT/decisions/ADR-030-semantic-core-architecture.md)
+- [Final Report](./INBOX/reports/12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md)
 
-**Status:** Phase 1 (Vector Foundation) complete and production-ready. See [Final Report](./INBOX/reports/semantic-core-phase1-final-report.md) for details.
+**Status:** Phase 1 (Vector Foundation) complete. See [Final Report](./INBOX/reports/12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md) for details.
 
 ## MCP integration (external clients)
 
 AGS exposes an MCP server for IDEs and desktop clients. Use the entrypoint wrapper
 `LAW/CONTRACTS/ags_mcp_entrypoint.py` to keep audit logs under allowed output
 roots (`LAW/CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
-`mcp-extension-verify` skills. See `MCP/README.md` for client config examples.
+`mcp-extension-verify` skills. See `CAPABILITY/MCP/README.md` for client config examples.
 
 ## How to use
 
@@ -79,16 +80,16 @@ Agents interacting with the system should follow the protocol described in `CANO
 2. Consult context records before making changes.
 3. Use the maps to find the right entrypoints.
 4. Execute work through skills rather than ad-hoc scripts.
-5. Validate changes using the runner in `CONTRACTS`.
+5. Validate changes using the runner in `LAW/CONTRACTS`.
 6. Update the canon and changelog in the same commit when rules change.
-7. Default to repo-only access; request explicit permission before accessing paths outside the repo (see `CONTEXT/decisions/ADR-012-privacy-boundary.md`).
+7. Default to repo-only access (see `LAW/CONTEXT/decisions/ADR-012-privacy-boundary.md`).
 
 ## How to extend AGS
 
-- Add a skill: create `SKILLS/<skill-name>/` with `SKILL.md`, a run script, a validation script, and `fixtures/<case>/input.json` plus `expected.json`.
-- Add fixtures: place skill fixtures under `SKILLS/<skill-name>/fixtures/` and governance fixtures under `LAW/CONTRACTS/fixtures/`.
-- Add ADRs: create a new `CONTEXT/decisions/ADR-xxx-*.md` and reference it in `CONTEXT/INDEX.md`.
-- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `LAW/CONTRACTS/_runs/`, `CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
-- Planning snapshots live under `CONTEXT/archive/planning/` (see `CONTEXT/archive/planning/INDEX.md`).
+- Add a skill: create `CAPABILITY/SKILLS/<skill-name>/` with `SKILL.md`, a run script, a validation script, and `fixtures/<case>/input.json` plus `expected.json`.
+- Add fixtures: place skill fixtures under `CAPABILITY/SKILLS/<skill-name>/fixtures/` and governance fixtures under `LAW/CONTRACTS/fixtures/`.
+- Add ADRs: create a new `LAW/CONTEXT/decisions/ADR-xxx-*.md` and reference it in `LAW/CONTEXT/INDEX.md`.
+- Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `LAW/CONTRACTS/_runs/`, `NAVIGATION/CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
+- Planning snapshots live under `LAW/CONTEXT/archive/planning/` (see `LAW/CONTEXT/archive/planning/INDEX.md`).
 
 For more details, see individual files in the respective directories.

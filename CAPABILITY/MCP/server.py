@@ -23,7 +23,7 @@ import time
 import uuid
 from datetime import datetime
 from pathlib import Path
-from typing import Any, Callable, Dict, Iterator, List, Optional
+from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
 # =============================================================================
 # SAFE PRIMITIVES (Ported from CAT LAB server_CATDPT.py)
@@ -3013,7 +3013,7 @@ def _read_exact(stream, n: int) -> bytes:
     return bytes(buf)
 
 
-def _read_message(stdin, mode: Optional[str]) -> tuple[Optional[Dict], Optional[str]]:
+def _read_message(stdin, mode: Optional[str]) -> Tuple[Optional[Dict], Optional[str]]:
     """Read one MCP message in either framed (Content-Length) or JSONL mode.
 
     Returns: (request_dict_or_none, detected_mode)
@@ -3274,4 +3274,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
