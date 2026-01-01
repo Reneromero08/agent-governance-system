@@ -1539,7 +1539,7 @@ def main():
     bundle_run_parser.add_argument("--merkle-key", type=str, required=False, help="Ed25519 signing key hex (64 hex chars) for Merkle attestation")
     bundle_run_parser.add_argument("--verify-merkle-attestation", type=Path, required=False, help="Verify Merkle attestation file (requires --verify-chain)")
     bundle_run_parser.add_argument("--merkle-attestation-out", type=Path, required=False, help="Write Merkle attestation to this path (default: print to stdout)")
-    bundle_run_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path (default: CORTEX/_generated/TRUST_POLICY.json)")
+    bundle_run_parser.add_argument("--trust-policy", type=Path, required=False, help="Trust policy file path (default: CAT_CORTEX/_generated/TRUST_POLICY.json)")
     bundle_run_parser.add_argument("--strict-trust", action="store_true", help="Enable strict trust verification (requires trust policy)")
     bundle_run_parser.add_argument("--strict-identity", action="store_true", help="Enable strict identity pinning (enforces build_id matching in trust policy)")
     bundle_run_parser.add_argument("--require-attestation", action="store_true", help="Require receipt attestation to be present")

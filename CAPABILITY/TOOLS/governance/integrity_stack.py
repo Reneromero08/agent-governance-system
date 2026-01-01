@@ -16,7 +16,8 @@ from typing import Dict, List, Optional
 from datetime import datetime
 
 # Configuration
-RUNS_DIR = Path("CONTRACTS/_runs")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+RUNS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 
 class IntegrityStack:
     """Enforces SPECTRUM-02 and CMP-01."""

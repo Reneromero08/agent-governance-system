@@ -20,15 +20,19 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+# Correctly resolving PROJECT_ROOT from CAPABILITY/TOOLS/utilities/emergency.py
+# parents[0]=utilities, parents[1]=TOOLS, parents[2]=CAPABILITY, parents[3]=repo_root
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
 QUARANTINE_FILE = PROJECT_ROOT / ".quarantine"
-LOGS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs" / "emergency_logs"
+LOGS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "emergency_logs"
 EMERGENCY_LOG = LOGS_DIR / "emergency.log"
-
+CRITIC_PATH = PROJECT_ROOT / "CAPABILITY" / "TOOLS" / "governance" / "critic.py"
+RUNNER_PATH = PROJECT_ROOT / "LAW" / "CONTRACTS" / "runner.py"
 
 def log_event(event_type: str, message: str):
     """Log an emergency event."""
-    LOGS_DIR.mkdir(exist_ok=True)
+    # Ensure parent directories exist
+    LOGS_DIR.mkdir(exist_ok=True, parents=True)
     timestamp = datetime.now().isoformat()
     with open(EMERGENCY_LOG, "a", encoding="utf-8") as f:
         f.write(f"{timestamp} {event_type}: {message}\n")
@@ -53,8 +57,12 @@ def check_status():
     
     # Run critic
     print("\n--- Running critic ---")
+    if not CRITIC_PATH.exists():
+         print(f"✗ Critic file not found at: {CRITIC_PATH}")
+         return 1
+
     critic_result = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+        [sys.executable, str(CRITIC_PATH)],
         capture_output=True,
         text=True
     )
@@ -67,8 +75,12 @@ def check_status():
     
     # Run contract runner
     print("\n--- Running fixtures ---")
+    if not RUNNER_PATH.exists():
+         print(f"✗ Runner file not found at: {RUNNER_PATH}")
+         return 1
+         
     runner_result = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "CONTRACTS" / "runner.py")],
+        [sys.executable, str(RUNNER_PATH)],
         capture_output=True,
         text=True
     )
@@ -93,14 +105,14 @@ def validate():
     # Critic
     print("\n--- Critic ---")
     critic_result = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "TOOLS" / "critic.py")],
+        [sys.executable, str(CRITIC_PATH)],
         cwd=str(PROJECT_ROOT)
     )
     
     # Fixtures
     print("\n--- Contract Runner ---")
     runner_result = subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "CONTRACTS" / "runner.py")],
+        [sys.executable, str(RUNNER_PATH)],
         cwd=str(PROJECT_ROOT)
     )
     
