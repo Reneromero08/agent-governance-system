@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 6cd3be5be3af699574e28b5c93e12683f8435c5e43cbe5bd5da88de25bae4a66 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: artifact-escape-hatch
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -29,3 +34,6 @@ Run this skill as part of CI or pre-commit to verify no generated files have bee
 ## Fixtures
 
 - `fixtures/basic/` - Verifies the check passes on a clean repo.
+
+**required_canon_version:** >=3.0.0
+

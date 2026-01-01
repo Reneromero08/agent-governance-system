@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: b22de257a144f83b390075074e3d6a4552ecbc1ec53fc5d4960c6e76dc9807dd -->
+
 # Skill: swarm-orchestrator
 **Version:** 0.1.0
 **Status:** Active

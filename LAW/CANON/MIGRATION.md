@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 0a1c692830e9ce6661ed81e25aa9c9b00adf31bd3951fdce4bd949fdce6eb9fe -->
+
 # Migration Ceremony
 
 This document defines the formal process for breaking compatibility in the Agent Governance System. It ensures that breaking changes are predictable, testable, and reversible.
@@ -5,8 +7,8 @@ This document defines the formal process for breaking compatibility in the Agent
 ## When This Applies
 
 A **migration ceremony** is required when:
-- A major version bump is planned (per `CANON/VERSIONING.md`).
-- A deprecated item is being removed.
+- A major version bump is planned (per `LAW/CANON/VERSIONING.md`).
+- A deprecated item is being removed (per `LAW/CANON/DEPRECATION.md`).
 - The canon structure is being reorganized.
 - Token grammar is changing in a non-backward-compatible way.
 - Cortex schema is changing in a way that breaks existing queries.
@@ -16,19 +18,19 @@ A **migration ceremony** is required when:
 ### Phase 1: Preparation
 
 1. **Create a Migration ADR**
-   Draft `CONTEXT/decisions/ADR-xxx-migration-*.md` documenting:
+   Draft `LAW/CONTEXT/decisions/ADR-xxx-migration-*.md` documenting:
    - What is changing
    - Why the change requires a migration (why it's breaking)
    - The migration path (step-by-step)
    - Rollback plan (if migration fails)
 
 2. **Verify Deprecation Window**
-   Confirm that all items being removed have passed their deprecation window (per `CANON/DEPRECATION.md`).
+   Confirm that all items being removed have passed their deprecation window (per `LAW/CANON/DEPRECATION.md`).
 
 3. **Create Migration Skill**
-   If the migration can be automated, create `SKILLS/migrate-vX-to-vY/`:
+   If the migration can be automated, create `CAPABILITY/SKILLS/migrate-vX-to-vY/`:
    ```
-   SKILLS/migrate-vX-to-vY/
+   CAPABILITY/SKILLS/migrate-vX-to-vY/
      SKILL.md       # Describes the migration
      run.py         # Executes the migration
      validate.py    # Verifies migration success
@@ -47,52 +49,52 @@ A **migration ceremony** is required when:
 ### Phase 2: Execution
 
 1. **Announce the Migration**
-   Update `CANON/CHANGELOG.md` with a clear migration notice:
+   Update `LAW/CANON/CHANGELOG.md` with a clear migration notice:
    ```markdown
    ## [2.0.0] - YYYY-MM-DD
 
    ### ⚠️ BREAKING CHANGES
    - [Description of breaking change]
-   - Migration: Run `python SKILLS/migrate-v1-to-v2/run.py`
+   - Migration: Run `python CAPABILITY/SKILLS/migrate-v1-to-v2/run.py`
    - See: ADR-xxx for full migration guide
    ```
 
 2. **Execute Migration Skill**
    Run the migration skill on the codebase:
    ```bash
-   python SKILLS/migrate-vX-to-vY/run.py
+   python CAPABILITY/SKILLS/migrate-vX-to-vY/run.py
    ```
 
 3. **Validate Migration**
    Run the validation script:
    ```bash
-   python SKILLS/migrate-vX-to-vY/validate.py
+   python CAPABILITY/SKILLS/migrate-vX-to-vY/validate.py
    ```
    
    Then run all fixtures:
    ```bash
-   python CONTRACTS/runner.py
+   python LAW/CONTRACTS/runner.py
    ```
 
 4. **Remove Deprecated Items**
-   After validation passes, remove the deprecated items (per `CANON/DEPRECATION.md` removal ceremony).
+   After validation passes, remove the deprecated items (per `LAW/CANON/DEPRECATION.md` removal ceremony).
 
 5. **Bump Version**
-   Increment the major version in `CANON/VERSIONING.md`.
+   Increment the major version in `LAW/CANON/VERSIONING.md`.
 
 ### Phase 3: Verification
 
 1. **Run Full Test Suite**
    ```bash
-   python TOOLS/critic.py
-   python CONTRACTS/runner.py
+   python CAPABILITY/TOOLS/critic.py
+   python LAW/CONTRACTS/runner.py
    ```
 
 2. **Verify Cortex**
    Rebuild the cortex and verify queries still work:
    ```bash
-   python CORTEX/cortex.build.py
-   python CORTEX/query.py --list
+   python NAVIGATION/CORTEX/semantic/vector_indexer.py --rebuild
+   python CAPABILITY/MCP/semantic_adapter.py --list
    ```
 
 3. **Generate Fresh Pack**
@@ -126,7 +128,7 @@ Migrations must be atomic. Partial migrations are not acceptable.
 Migration Skill: vX to vY
 
 This skill migrates the AGS from version X to version Y.
-Run with: python SKILLS/migrate-vX-to-vY/run.py
+Run with: python CAPABILITY/SKILLS/migrate-vX-to-vY/run.py
 """
 
 import sys

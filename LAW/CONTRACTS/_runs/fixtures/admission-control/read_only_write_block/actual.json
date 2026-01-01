@@ -1,4 +1,18 @@
 {
   "rc": 2,
-  "result": null
+  "result": {
+    "normalized_paths": {
+      "read": [
+        "README.md"
+      ],
+      "write": [
+        "LAW/CONTRACTS/_runs/tmp.json"
+      ]
+    },
+    "policy_version": "1",
+    "reasons": [
+      "WRITE_NOT_ALLOWED"
+    ],
+    "verdict": "BLOCK"
+  }
 }

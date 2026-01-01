@@ -1,10 +1,16 @@
-# ADR-031: Catalytic Chat Triple-Write Architecture
+---
+id: "ADR-031"
+title: "Catalytic Chat Triple-Write Architecture"
+status: "Proposed"
+date: "2025-12-29"
+confidence: "High"
+impact: "High"
+tags: ["chat", "storage", "optimization", "vector"]
+---
 
-**Status:** Proposed
-**Date:** 2025-12-29
-**Confidence:** High
-**Impact:** High
-**Tags:** [chat, storage, optimization, vector]
+<!-- CONTENT_HASH: 85e6f5e56bfac486697813420190c9471e8564c3da4ded8044e48beff3147a0d -->
+
+# ADR-031: Catalytic Chat Triple-Write Architecture
 
 ## Context
 

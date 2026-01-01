@@ -1,10 +1,16 @@
-# ADR-∞: The Living Formula as System Driver
+---
+id: "ADR-∞"
+title: "The Living Formula as System Driver"
+status: "Accepted"
+date: "2025-12-28"
+confidence: "Very High"
+impact: "Critical"
+tags: ["formula", "driver", "resonance", "philosophy"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-28
-**Confidence:** Very High
-**Impact:** Critical
-**Tags:** [formula, driver, resonance, philosophy]
+<!-- CONTENT_HASH: 6b0ec72a9a1cc431c39b649aa92cccd3e626fb92c07d4f321c72cdf31392af03 -->
+
+# ADR-∞: The Living Formula as System Driver
 
 ## Context
 

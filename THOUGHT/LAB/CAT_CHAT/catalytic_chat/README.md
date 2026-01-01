@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 7408c01a07c93e58165994fdc0b16122eeede9a2c2ce5a1e1be119219453e7fa -->
+
 # Catalytic Chat Substrate
 
 **Roadmap Phase:** Phase 2 Complete — Substrate + Symbol Registry + Bounded Resolver

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 55eeb16e56b78ed05fa1a660de69f8eb09452fa9d39d533bbeb2b0a0c365edf2 -->
+
 # Agent Workflow Integration Status
 
 ## Overview

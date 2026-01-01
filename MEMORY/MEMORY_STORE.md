@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: e7605ce8b44ac3dc4f67cd7051b722385246b36cd76dc66e94b3ec487dceeccb -->
+
 # Memory Store
 
 This document describes the persistent memory architecture for AGS agents.

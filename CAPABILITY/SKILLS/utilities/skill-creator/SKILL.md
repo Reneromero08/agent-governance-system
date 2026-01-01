@@ -1,7 +1,12 @@
+<!-- CONTENT_HASH: 557d712831d40cc332e58fbc007ee4bd2eb8a6d0e9e502a1091f3f37ecbff3d4 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: skill-creator
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 **canon_version:** "3.0.0"
 
 # Skill Creator
@@ -354,3 +359,6 @@ After testing the skill, users may request improvements. Often this happens righ
 2. Notice struggles or inefficiencies
 3. Identify how SKILL.md or bundled resources should be updated
 4. Implement changes and test again
+
+**required_canon_version:** >=3.0.0
+

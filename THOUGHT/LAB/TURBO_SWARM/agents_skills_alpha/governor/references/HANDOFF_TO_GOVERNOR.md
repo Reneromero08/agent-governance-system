@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 3dfe69e0149af7b7e1df8d55f688ee78d7881a2b2aced4b3380a3a15ce72c7d5 -->
+
 # HANDOFF TO GOVERNOR: Catalytic Computing PoC
 
 **From**: President (Orchestrator)

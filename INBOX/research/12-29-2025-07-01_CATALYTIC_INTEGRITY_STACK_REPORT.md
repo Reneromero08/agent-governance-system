@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 8ceb0fc1da5ebef67fb39f2c280178233b7e1ffe829733dd23eed3f5fbfdf084 -->
+
+<!-- CONTENT_HASH: 637d260617e37b295a882b9f651bc45aba415167c6b3cd2ba96792199b44fcf4 -->
 
 # Catalytic Integrity Stack — Work Report (CMP-01, CATLAB-01, SPECTRUM-01/02/03)
 

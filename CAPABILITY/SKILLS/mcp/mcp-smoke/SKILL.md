@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 3500ba9ad1d99cf179c71ea71d756c5d30401724592a3accda58abb61a45d26f -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-smoke
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -44,3 +49,6 @@ Use when asked to verify that the AGS MCP server is runnable (stdio mode) and to
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

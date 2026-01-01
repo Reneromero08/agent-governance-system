@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import List, Dict, Optional, Any
 
 # Configuration
-DB_PATH = Path("CORTEX/system2.db")
+DB_PATH = Path(__file__).resolve().parent / "system2.db"
 
 class System2Ledger:
     """Immutable ledger for governance and provenance."""

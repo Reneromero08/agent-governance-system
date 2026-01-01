@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: a1dd5cf4d98a478229f7a38b80b82d40118e9788309296ea7b1c37241a863fd5 -->
+
 # Canon Governance Check - System Integration Map
 
 ## Overview

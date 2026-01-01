@@ -1,27 +1,29 @@
 BUILD/**
 !BUILD/.gitkeep
 
-CONTRACTS/_runs/**
-!CONTRACTS/_runs/.gitkeep
+LAW/CONTRACTS/_runs/**
+!LAW/CONTRACTS/_runs/.gitkeep
 
 # Generated Cortex index
-CORTEX/_generated/cortex.json
-CORTEX/_generated/cortex.db
-CORTEX/_generated/*.sqlite
-CORTEX/_generated/SECTION_INDEX.json
-CORTEX/_generated/SUMMARY_INDEX.json
-CORTEX/_generated/summaries/
-!CORTEX/_generated/.gitkeep
+NAVIGATION/CORTEX/_generated/cortex.json
+NAVIGATION/CORTEX/_generated/cortex.db
+NAVIGATION/CORTEX/_generated/*.sqlite
+NAVIGATION/CORTEX/_generated/SECTION_INDEX.json
+NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json
+NAVIGATION/CORTEX/_generated/summaries/
+!NAVIGATION/CORTEX/_generated/.gitkeep
 
 # Local-only editor state (not governance-critical)
 .claude/
+.kilocode/
 
 # Research Cache
-CONTEXT/research/*.db
+LAW/CONTEXT/research/*.db
+INBOX/research/*.db
 
-# Legacy log locations (violate INV-006, moved to CONTRACTS/_runs/ per ADR-015)
+# Legacy log locations (violate INV-006, moved to LAW/CONTRACTS/_runs/ per ADR-015)
 LOGS/
-MCP/logs/
+CAPABILITY/MCP/logs/
 
 
 MEMORY/LLM_PACKER/_packs/**
@@ -46,6 +48,24 @@ env/
 venv/
 THOUGHT/LAB/CAT_CHAT/nul
 
-# Misplaced Root Artifacts (Should be in LAW/CONTRACTS or NAVIGATION/CORTEX)
+# Misplaced Root Artifacts (Legacy paths, should be in LAW/ or NAVIGATION/)
 /CONTRACTS/
 /CORTEX/
+/DIRECTION/
+/MAPS/
+/SKILLS/
+
+# ------------------------------------
+# Hygiene Protocol (Garbage to Ignore)
+# ------------------------------------
+*.log
+*.tmp
+*.bak
+*.swp
+*.swo
+*_cache/
+*_tmp/
+.DS_Store
+Thumbs.db
+Desktop.ini
+

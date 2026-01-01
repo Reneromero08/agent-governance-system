@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 40f0f3fbd0dee70bd2737e7ac8a1f26ea61c53c9032f1d0730c750aeea89e690 -->
+
 # CORTEX Semantic Core - Phase 1: Vector Foundation
 
 **Status:** Implemented

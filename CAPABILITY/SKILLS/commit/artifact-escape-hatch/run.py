@@ -28,8 +28,8 @@ PACKS_DIR = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
 
 # Directories that may contain generated artifacts
 ALLOWED_ARTIFACT_ROOTS = {
-    PROJECT_ROOT / "CONTRACTS" / "_runs",
-    PROJECT_ROOT / "CORTEX" / "_generated",
+    PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs",
+    PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated",
     PACKS_DIR,
     PROJECT_ROOT / "BUILD",
 }
@@ -47,9 +47,9 @@ IGNORE_PATTERNS = {
 
 # Directories that contain source code, not runtime artifacts
 SOURCE_DIRS = {
-    "SKILLS",
-    "CONTRACTS",
-    "CORTEX",
+    "CAPABILITY",
+    "LAW",
+    "NAVIGATION",
     "CANON",
     "CONTEXT", 
     "MAPS",
@@ -115,10 +115,10 @@ def main(input_path: Path, output_path: Path) -> int:
 
     # Scan the project for escaped artifacts
     scan_dirs = [
-        PROJECT_ROOT / "CONTRACTS",
-        PROJECT_ROOT / "CORTEX", 
+        PROJECT_ROOT / "LAW",
+        PROJECT_ROOT / "NAVIGATION", 
         PROJECT_ROOT / "MEMORY",
-        PROJECT_ROOT / "SKILLS",
+        PROJECT_ROOT / "CAPABILITY",
     ]
     
     escaped = find_escaped_artifacts(scan_dirs)

@@ -1,12 +1,18 @@
+---
+id: "ADR-004"
+title: "Model Context Protocol (MCP) Integration"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "High"
+tags: ["integration", "protocol", "architecture"]
+---
+
+<!-- CONTENT_HASH: b0893e86492deb00f8420a0f12a22a8583a49830b3fbd10a46741c634de7c2fc -->
+
 # ADR-004: Model Context Protocol (MCP) Integration
 
-**Status:** Accepted
-**Date:** 2025-12-21
-**Confidence:** High
-**Impact:** High
-**Tags:** [integration, protocol, architecture]
 **Deciders:** Antigravity (Agent), User
-
 ## Context
 
 The Agent Governance System (AGS) needs a standardized way to expose its tools (`cortex_query`, `policy_check`, `context_search`) to external LLM clients (like Claude Desktop or IDE extensions) without rewriting custom glue code for every client.

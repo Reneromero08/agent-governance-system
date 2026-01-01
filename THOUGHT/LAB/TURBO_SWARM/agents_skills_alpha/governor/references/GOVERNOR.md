@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: e04e77540e754b1bbd632c2d1c06991c3238cbdfd6e650fb28bee362fe8d59b1 -->
+
 # PROMPT: Manager (Legacy Governor)
 
 **⚠️ DEPRECATED - Hierarchy Updated**

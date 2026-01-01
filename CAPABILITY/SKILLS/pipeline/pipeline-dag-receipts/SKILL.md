@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 34e78399fa67a452129b5d956d27c8765382dd89943630e6221db8456c9ba80b -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: pipeline-dag-receipts
 
 **Version:** 0.1.0
 
 **Status:** Draft
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -33,3 +38,6 @@ JSON object:
 
 - `fixtures/basic_ok`: placeholder runner output (governance-only).
 - `fixtures/tamper_reject`: placeholder runner output (governance-only).
+
+**required_canon_version:** >=3.0.0
+

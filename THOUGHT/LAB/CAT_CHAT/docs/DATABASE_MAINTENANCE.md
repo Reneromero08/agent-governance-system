@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 2276208121ecdde7cbe879124e7abf9e727f5d2bae99dbdf707a8624f6858619 -->
+
 # CAT_CHAT Database Maintenance
 
 ## Current State
@@ -53,7 +55,7 @@ To make this automatic, you could:
 The database is accessible via:
 - **MCP tools:** `cassette_network_query(query="your search")`
 - **Direct SQL:** `sqlite3 cat_chat_index.db "SELECT * FROM content_fts WHERE content_fts MATCH 'catalytic'"`
-- **Python:** See `docs/examples/` for demo scripts
+- **Python:** See `archive/legacy/` for demo scripts
 
 ## Schema
 

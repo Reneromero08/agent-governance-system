@@ -1,8 +1,13 @@
+<!-- CONTENT_HASH: e37d6aefb24a29bd64525f913dd0fef7d8d5b235612ac395a6ae8a0a8d625207 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: Invariant Freeze
 
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -29,3 +34,6 @@ Verifies that all core invariants (INV-001 through INV-008) exist in `CANON/INVA
 
 - Must search for exact `[INV-XXX]` tags.
 - Must not allow gaps or removals from the frozen list.
+
+**required_canon_version:** >=3.0.0
+

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: dc66c0e1ba1bf5f05550a634764adf0e423269c4aa926dead216ddad50faf213 -->
+
 # Qwen CLI Skill
 
 **Status**: ✓ Ready to use

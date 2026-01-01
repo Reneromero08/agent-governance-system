@@ -74,7 +74,10 @@ def run_contract_fixture(input_path: Path) -> int:
         print(result.stderr)
     else:
         print(result.stdout)
-    return 0 if result.returncode == 0 else 1
+    if result.returncode != 0:
+        print(f"!!! FAILURE: {fixture_dir} !!!")
+        return 1
+    return 0
 
 
 def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
@@ -107,14 +110,19 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
+        print(f"!!! FAILURE (EXEC): {fixture_dir} !!!")
         return 1
 
     result = run_validation(validate_script, actual_path, expected)
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
+        print(f"!!! FAILURE (VAL): {fixture_dir} !!!")
         return 1
     print(result.stdout)
+    if result.returncode != 0:
+        print(f"!!! FAILURE: {fixture_dir} !!!")
+        return 1
     return 0
 
 
@@ -130,7 +138,10 @@ def run_fixtures() -> int:
 if __name__ == "__main__":
     failures = run_fixtures()
     if failures:
-        print(f"{failures} fixture(s) failed")
+        print(f"\n{failures} fixture(s) failed.")
+        print("FAILED FIXTURES:")
+        # We need to track names, but changing return type of run_fixtures is invasive.
+        # Instead, let's print failure immediately with a distinct marker.
         sys.exit(1)
     print("All fixtures passed")
     sys.exit(0)

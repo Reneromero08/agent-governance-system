@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: cdea6af20df2c636695562d50702ce394d57908fe36ab1c17af0df51998200ab -->
+
 # STYLE-004: ADR-First Design Gate
 
 **Category:** Governance

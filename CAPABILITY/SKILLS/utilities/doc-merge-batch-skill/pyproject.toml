@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "doc-merge-batch"
+version = "0.1.0"
+description = "Deterministic diff → merge → verify for housekeeping"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+doc-merge-batch = "doc_merge_batch.cli:run_cli"

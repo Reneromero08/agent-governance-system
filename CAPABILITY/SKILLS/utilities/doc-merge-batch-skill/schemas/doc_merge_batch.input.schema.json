@@ -1,0 +1,184 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "doc-merge-batch input",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "mode": {
+      "type": "string",
+      "enum": [
+        "scan",
+        "compare",
+        "plan",
+        "apply",
+        "verify",
+        "prune_quarantine"
+      ]
+    },
+    "root": {
+      "type": "string",
+      "description": "Root directory to scan (optional)."
+    },
+    "pairs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "a": {
+            "type": "string"
+          },
+          "b": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "a",
+          "b"
+        ]
+      }
+    },
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "out_dir": {
+      "type": "string",
+      "default": "./MERGE_OUT"
+    },
+    "max_pairs": {
+      "type": "integer",
+      "minimum": 1,
+      "default": 5000
+    },
+    "max_file_mb": {
+      "type": "number",
+      "minimum": 0.1,
+      "default": 20
+    },
+    "normalization": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "newline": {
+          "type": "string",
+          "enum": [
+            "preserve",
+            "lf"
+          ],
+          "default": "lf"
+        },
+        "strip_trailing_ws": {
+          "type": "boolean",
+          "default": false
+        },
+        "collapse_blank_lines": {
+          "type": "boolean",
+          "default": false
+        }
+      },
+      "default": {
+        "newline": "lf",
+        "strip_trailing_ws": false,
+        "collapse_blank_lines": false
+      }
+    },
+    "diff": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "max_diff_lines": {
+          "type": "integer",
+          "minimum": 50,
+          "default": 500
+        },
+        "context_lines": {
+          "type": "integer",
+          "minimum": 0,
+          "default": 3
+        }
+      },
+      "default": {
+        "max_diff_lines": 500,
+        "context_lines": 3
+      }
+    },
+    "merge": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "base": {
+          "type": "string",
+          "enum": [
+            "a",
+            "b"
+          ],
+          "default": "a"
+        },
+        "strategy": {
+          "type": "string",
+          "enum": [
+            "append_unique_blocks"
+          ],
+          "default": "append_unique_blocks"
+        }
+      },
+      "default": {
+        "base": "a",
+        "strategy": "append_unique_blocks"
+      }
+    },
+    "post_actions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "on_success": {
+          "type": "string",
+          "enum": [
+            "none",
+            "delete_tracked",
+            "quarantine"
+          ],
+          "default": "none"
+        },
+        "ttl_days": {
+          "type": "integer",
+          "minimum": 1,
+          "default": 14
+        },
+        "require_committed": {
+          "type": "boolean",
+          "default": true
+        }
+      },
+      "default": {
+        "on_success": "none",
+        "ttl_days": 14,
+        "require_committed": true
+      }
+    },
+    "git_commit": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "default": false
+        },
+        "message": {
+          "type": "string",
+          "default": "housekeeping: merge+prune originals"
+        }
+      },
+      "default": {
+        "enabled": false,
+        "message": "housekeeping: merge+prune originals"
+      }
+    }
+  },
+  "required": [
+    "mode"
+  ]
+}

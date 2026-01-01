@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 55953d3f2d0c74f7484ec25c0fd578a511b96088951229aed3af97d00eca40e1 -->
+
 # Catalytic Computing
 
 This document defines catalytic computing for the Agent Governance System. It separates formal theory from engineering translation so agents do not hallucinate implementation details.

@@ -1,10 +1,16 @@
-# ADR-013: LLM_PACKER LITE Profile + SPLIT_LITE Outputs
+---
+id: "ADR-013"
+title: "LLM_PACKER LITE Profile + SPLIT_LITE Outputs"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "High"
+tags: ["packer", "memory", "handoff"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** High
-**Tags:** [packer, memory, handoff]
+<!-- CONTENT_HASH: 1a73512b1877bf07c7ff3ce45f5aeca4b734dc25be6d90ac77dc90e5bf4775d3 -->
+
+# ADR-013: LLM_PACKER LITE Profile + SPLIT_LITE Outputs
 
 ## Context
 

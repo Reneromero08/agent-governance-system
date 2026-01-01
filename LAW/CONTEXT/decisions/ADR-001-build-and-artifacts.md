@@ -1,16 +1,16 @@
+---
+id: "ADR-001"
+title: "BUILD is user output, artifacts are subsystem-owned"
+status: "Accepted"
+date: "2025-12-20"
+confidence: "Medium"
+impact: "Medium"
+tags: ["architecture", "artifacts"]
+---
+
+<!-- CONTENT_HASH: 615d67501c391a6af686bed7dd830fc136279982b60c9e831c973cda1fe27ed2 -->
+
 # ADR-001: BUILD is user output, artifacts are subsystem-owned
-
-**Status:** Accepted
-
-**Date:** 2025-12-20
-
-**Review date:** (optional)
-
-**Confidence:** Medium
-
-**Impact:** Medium
-
-**Tags:** [architecture, artifacts]
 
 ## Context
 

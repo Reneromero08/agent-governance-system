@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: a78620c93498aa25b0b5ed02b3264e51d565f2ea82f334f57bac9415b4bdaca9 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: canon-migration
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -57,3 +62,6 @@ Run this skill when:
 
 - `fixtures/basic/` - Test migration from previous version
 - `fixtures/roundtrip/` - Verify data survives migration cycle
+
+**required_canon_version:** >=3.0.0
+

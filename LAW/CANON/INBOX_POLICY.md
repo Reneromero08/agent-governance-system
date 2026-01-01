@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 007a53ac9558cefec29b758d74d77fc428cdf08a7aa97e15fc37cfaf05d2527b -->
+
 # INBOX Policy
 
 **Purpose:** All documentation, research, reports, and roadmaps intended for human review ("god mode") must be stored in a centralized INBOX folder for consistent discoverability.
@@ -176,15 +178,15 @@ extends @C:ce89a30e (Network Hub) as defined in @C:d3f2b8a7 (ADR-030).
 
 ### Finding Cortex References
 
-Use `TOOLS/cortex.py` to resolve @Symbols:
+Use `CAPABILITY/TOOLS/cortex_query.py` (or equivalent) to resolve @Symbols:
 
 ```bash
-python TOOLS/cortex.py resolve @C:ab5e61a8
+python CAPABILITY/TOOLS/cortex_query.py resolve @C:ab5e61a8
 ```
 
 ## Governance Enforcement
 
-The pre-commit hook (`SKILLS/canon-governance-check/scripts/pre-commit`) will verify:
+The pre-commit hook (`.githooks/pre-commit` or `CAPABILITY/SKILLS/governance/canon-governance-check/scripts/pre-commit`) will verify:
 
 1. ✅ **Filename Format:** All INBOX files match `MM-DD-YYYY-HH-MM_TITLE.md` pattern
 2. ✅ **YAML Frontmatter:** All INBOX documents contain valid YAML with ALL required fields
@@ -201,12 +203,12 @@ The pre-commit hook (`SKILLS/canon-governance-check/scripts/pre-commit`) will ve
 
 The following are EXEMPT from INBOX policy:
 
-1. **Canon documents** (CANON/*) - These ARE the source of truth
-2. **Generated artifacts** (CORTEX/_generated/*, LAW/CONTRACTS/_runs/*) - System outputs
-3. **Code implementations** (TOOLS/*.py, SKILLS/*/run.py) - Implementation files
-4. **Test fixtures** (LAW/CONTRACTS/fixtures/*, CATALYTIC-DPT/TESTBENCH/*) - Test data
-5. **Skill manifests** (SKILLS/*/SKILL.md) - These stay with their skills
-6. **Context records** (CONTEXT/decisions/*, CONTEXT/preferences/*) - Append-first storage
+1. **Canon documents** (`LAW/CANON/*`) - These ARE the source of truth
+2. **Generated artifacts** (`NAVIGATION/CORTEX/_generated/*`, `LAW/CONTRACTS/_runs/*`) - System outputs
+3. **Code implementations** (`CAPABILITY/TOOLS/*.py`, `CAPABILITY/SKILLS/*/run.py`) - Implementation files
+4. **Test fixtures** (`LAW/CONTRACTS/fixtures/*`, `CAPABILITY/TESTBENCH/*`) - Test data
+5. **Skill manifests** (`CAPABILITY/SKILLS/*/SKILL.md`) - These stay with their skills
+6. **Context records** (`LAW/CONTEXT/decisions/*`, `LAW/CONTEXT/preferences/`) - Append-first storage
 7. **Build outputs** (BUILD/*) - User workspace outputs
 8. **INBOX.md** - The index file itself
 
@@ -338,7 +340,7 @@ ls INBOX/roadmaps/
 grep "CONTENT_HASH:" INBOX/reports/*.md
 
 # Resolve cortex references
-python TOOLS/cortex.py resolve @C:ab5e61a8
+python CAPABILITY/TOOLS/cortex_query.py resolve @C:ab5e61a8
 ```
 
 ## Migration Guide

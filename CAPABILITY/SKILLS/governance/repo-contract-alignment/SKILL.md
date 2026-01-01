@@ -1,8 +1,13 @@
+<!-- CONTENT_HASH: dc5da4881546efe848cbadf457ccc141e4512024375fae7f5649fa98839fc310 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: repo-contract-alignment
 
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -44,3 +49,6 @@ Use when asked to align repo behavior with canon/contract docs, audit governance
 ## Output format
 
 Always respond with: Findings, Plan, Changes, Commands run, Next.
+
+**required_canon_version:** >=3.0.0
+

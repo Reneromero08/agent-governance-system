@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 49074ec22830377e0417793f0c711f975a598826378c3ad82c421e3e099e94a0 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-precommit-check
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -43,3 +48,6 @@ server running, and Windows autostart status.
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

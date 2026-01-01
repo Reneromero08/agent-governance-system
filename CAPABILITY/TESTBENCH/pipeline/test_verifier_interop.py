@@ -41,7 +41,7 @@ def _make_valid_bundle(tmp_root: Path, run_id: str = "run_ok") -> Path:
     run_dir = tmp_root / "LAW" / "CONTRACTS" / "_runs" / run_id
     run_dir.mkdir(parents=True, exist_ok=True)
 
-    output_rel = "CORTEX/_generated/interop_output.txt"
+    output_rel = "NAVIGATION/CORTEX/_generated/interop_output.txt"
     output_abs = tmp_root / output_rel
     output_abs.parent.mkdir(parents=True, exist_ok=True)
     output_bytes = b"interop"
@@ -116,7 +116,7 @@ def test_interop_tampered_bundle_reject_same_code_and_bytes():
         run_dir = _make_valid_bundle(root, "interop-tamper")
 
         # Tamper output bytes after hashes/signatures already written.
-        output_abs = root / "CORTEX/_generated/interop_output.txt"
+        output_abs = root / "NAVIGATION/CORTEX/_generated/interop_output.txt"
         output_abs.write_bytes(b"INTEROP-TAMPERED")
 
         primary = BundleVerifier(project_root=root)

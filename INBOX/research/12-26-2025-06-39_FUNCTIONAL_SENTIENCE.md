@@ -9,12 +9,12 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: a275521587e53e120f40ebd74c342a8bb8067a584f07c1760a0c2e2686585605 -->
+
+<!-- CONTENT_HASH: 3c8307edc3e71bf22fe78de6fa90b7cd2e7d0d8de19cdd9d57acd4dd65f804f2 -->
 
 Notes:
 Turn important memories into latent space weights somehow without retraining, just like an additional tokenizer added on top. Like weights on top of weights, is that possible?
 Leverage ram ssds and cpus, not just gpus.
-
 
 ## Functional sentience, operationally
 

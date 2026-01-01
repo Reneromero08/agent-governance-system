@@ -1,12 +1,18 @@
+---
+id: "ADR-005"
+title: "Persistent Research Cache"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "Medium"
+tags: ["research", "optimization", "persistence"]
+---
+
+<!-- CONTENT_HASH: 4cc797fc536f33fd24a4be05670185314144bb5f6c4a8b62b0ffc17c71e69272 -->
+
 # ADR-005: Persistent Research Cache
 
-**Status:** Accepted
-**Date:** 2025-12-21
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [research, optimization, persistence]
 **Deciders:** Antigravity (Agent), User
-
 ## Context
 
 Agents frequently research similar topics or URLs across different sessions. Without a persistent cache, the agent wastes tokens and time re-browsing the same pages, and risks inconsistent summaries if the page content changes slightly.

@@ -15,8 +15,8 @@ import json
 import sqlite3
 import time
 from pathlib import Path
-
-DB_PATH = Path("CORTEX/system1.db")
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
 
 def get_symbol_content(db, symbol: str) -> str:
     """
