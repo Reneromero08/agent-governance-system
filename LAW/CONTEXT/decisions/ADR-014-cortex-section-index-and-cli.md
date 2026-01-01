@@ -1,16 +1,16 @@
+---
+id: "ADR-014"
+title: "Cortex section index and CLI primitives"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Medium"
+tags: ["cortex", "navigation", "tooling"]
+---
+
+<!-- CONTENT_HASH: d31579600a0f6868f404c5761b7e04b0ca1a4cc81679ae56108d4c78a827f917 -->
+
 # ADR-014: Cortex section index and CLI primitives
-
-**Status:** Accepted
-
-**Date:** 2025-12-23
-
-**Review date:** (optional)
-
-**Confidence:** High
-
-**Impact:** Medium
-
-**Tags:** [cortex, navigation, tooling]
 
 ## Context
 

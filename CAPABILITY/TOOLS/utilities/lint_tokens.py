@@ -18,17 +18,40 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Set, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-GLOSSARY_PATH = PROJECT_ROOT / "CANON" / "GLOSSARY.md"
-VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
+def find_repo_root(start: Path) -> Path:
+    for candidate in [start] + list(start.parents):
+        if (candidate / "LAW" / "CANON" / "VERSIONING.md").exists():
+            return candidate
+        if (candidate / "CANON" / "VERSIONING.md").exists():
+            return candidate
+    return start
+
+
+PROJECT_ROOT = find_repo_root(Path(__file__).resolve())
+GLOSSARY_PATH = PROJECT_ROOT / "LAW" / "CANON" / "GLOSSARY.md"
+if not GLOSSARY_PATH.exists():
+    GLOSSARY_PATH = PROJECT_ROOT / "CANON" / "GLOSSARY.md"
+VERSIONING_PATH = PROJECT_ROOT / "LAW" / "CANON" / "VERSIONING.md"
+if not VERSIONING_PATH.exists():
+    VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 
 # Directories to scan for token usage
-SCAN_DIRS = ["CANON", "CONTEXT", "MAPS", "SKILLS", "CONTRACTS", "AGENTS.md", "README.md"]
+SCAN_DIRS = [
+    "LAW/CANON",
+    "LAW/CONTEXT",
+    "NAVIGATION/MAPS",
+    "CAPABILITY/SKILLS",
+    "LAW/CONTRACTS",
+    "AGENTS.md",
+    "README.md",
+]
 
 
 def load_glossary_terms() -> Set[str]:
     """Extract defined terms from GLOSSARY.md."""
     terms = set()
+    if not GLOSSARY_PATH.exists():
+        return terms
     content = GLOSSARY_PATH.read_text(errors="ignore")
     # Match lines like: - **Term** - Description
     for match in re.finditer(r'^\s*-\s*\*\*([^*]+)\*\*', content, re.MULTILINE):

@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 88b9e58c965d51414dc6f300f7cf84ef02b0f91c341acb159dea97c4da4f05af -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: pack-validate
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -39,3 +44,6 @@ Validates that a pack is complete, correctly structured, and navigable.
 - `errors`: List of validation errors
 - `warnings`: List of warnings (non-fatal)
 - `stats`: Pack statistics (file count, bytes, tokens)
+
+**required_canon_version:** >=3.0.0
+

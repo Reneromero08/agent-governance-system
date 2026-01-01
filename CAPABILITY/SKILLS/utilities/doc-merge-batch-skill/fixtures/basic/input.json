@@ -1,0 +1,11 @@
+{
+  "mode": "verify",
+  "pairs": [
+    {
+      "a": "CAPABILITY/SKILLS/utilities/doc-merge-batch-skill/fixtures/basic/a.md",
+      "b": "CAPABILITY/SKILLS/utilities/doc-merge-batch-skill/fixtures/basic/b.md"
+    }
+  ],
+  "out_dir": "LAW/CONTRACTS/_runs/fixtures/doc-merge-batch-skill/basic/out"
+}
+

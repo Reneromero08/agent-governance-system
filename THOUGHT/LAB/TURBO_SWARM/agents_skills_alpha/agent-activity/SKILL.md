@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: ab80fb27c93feefc9d6f259227b7f6bc7e79917beb06ecd59692663d42e22cb2 -->
+
 # Agent Activity Monitor
 
 **Skill:** `agent-activity`

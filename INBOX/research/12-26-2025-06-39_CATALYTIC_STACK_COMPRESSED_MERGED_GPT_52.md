@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 9e357ccf88b262e489136ae7999a5fdd6a794698ec70e2125f3718e05c3754ba -->
+
+<!-- CONTENT_HASH: 1bbbb516afb2247fe4acc50a46fc6289eea6bfd8ead909e959044fcc2541edf4 -->
 
 # Catalytic Computing Stack (Compressed + Merged)
 
@@ -260,4 +261,3 @@ If you keep this merged doc, it can still be split cleanly later into:
 The key is: **one place for norms** (CMP-01), everything else non-normative.
 
 ---
-

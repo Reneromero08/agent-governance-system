@@ -28,8 +28,8 @@ class SectionIndexer:
         "LAW/CONTEXT/**/*.md",
         "SKILLS/**/*.md",
         "TOOLS/**/*.md",
-        "CONTRACTS/**/*.md",
-        "CORTEX/db/**/*.sql",
+        "LAW/CONTRACTS/**/*.md",
+        "NAVIGATION/CORTEX/db/**/*.sql",
     ]
 
     def __init__(

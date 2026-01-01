@@ -1,10 +1,16 @@
-# ADR-022: Why Flash Bypassed the Law and How to Prevent It
+---
+id: "ADR-022"
+title: "Why Flash Bypassed the Law and How to Prevent It"
+date: "2025-12-27"
+status: "Accepted"
+confidence: "High"
+impact: "Medium"
+tags: ["governance", "testing", "retrospective"]
+---
 
-**Date:** 2025-12-27
-**Status:** Accepted
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [governance, testing, retrospective]
+<!-- CONTENT_HASH: 46cd060c688e60716cd4c452ade78f9b171e61d600a284eeba1b424a7a4b29f6 -->
+
+# ADR-022: Why Flash Bypassed the Law and How to Prevent It
 
 ## Context
 

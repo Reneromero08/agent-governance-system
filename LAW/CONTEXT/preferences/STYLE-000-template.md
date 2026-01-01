@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: fb8ce1ca80f869547f137fe88209cdbac5b2cb9ca886aad9f7555d7cab2701d6 -->
+
 # STYLE-000: Preference Title
 
 **Status:** Draft

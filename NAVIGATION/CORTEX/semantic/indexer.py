@@ -13,14 +13,38 @@ import os
 import json
 import re
 import hashlib
+import sys
+import io
 from pathlib import Path
 from typing import List, Dict, Optional
 from NAVIGATION.CORTEX.db.system1_builder import System1DB
 
+# Fix Windows Unicode console encoding issue
+if os.name == 'nt':  # Windows
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
+    else:
+        # For older Python versions
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
+
+def safe_print(*args, **kwargs):
+    """Safely print strings with Unicode characters."""
+    try:
+        print(*args, **kwargs)
+    except UnicodeEncodeError:
+        # Replace problematic characters
+        safe_args = []
+        for arg in args:
+            if isinstance(arg, str):
+                safe_args.append(arg.encode('utf-8', errors='replace').decode('utf-8'))
+            else:
+                safe_args.append(str(arg))
+        print(*safe_args, **kwargs)
+
 # Default Configuration
 CANON_DIR = Path("CANON")
-META_DIR = Path("meta")
-DB_PATH = Path("CORTEX/system1.db")
+META_DIR = Path(__file__).resolve().parents[1] / "meta"
+DB_PATH = Path(__file__).resolve().parents[1] / "db" / "system1.db"
 
 class CortexIndexer:
     def __init__(self, db: System1DB, target_dir: Path = CANON_DIR):
@@ -32,19 +56,23 @@ class CortexIndexer:
 
     def index_all(self):
         """Walk target directory and index all markdown files."""
-        print(f"[Indexer] Starting index of {self.target_dir}...")
-        
+        safe_print(f"[Indexer] Starting index of {self.target_dir}...")
+
         # Files and directories to ignore
-        ignore_files = {".DS_Store", "README.md"}
-        ignore_dirs = {"node_modules", ".venv", ".git", "__pycache__"}
-        
+        ignore_files = {".DS_Store"}
+        ignore_dirs = {
+            "node_modules", ".venv", ".git", "__pycache__",
+            "_generated", "BUILD", "MEMORY", ".pytest_cache",
+            "meta", "_runs"
+        }
+
         target_abs = self.target_dir.resolve()
         cwd_abs = Path.cwd().resolve()
-        
+
         for root, dirs, files in os.walk(target_abs):
             # Prune ignored directories in-place
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
-            
+
             for file in files:
                 if file.endswith(".md") and file not in ignore_files:
                     full_path = (Path(root) / file).resolve()
@@ -54,13 +82,13 @@ class CortexIndexer:
                             rel_path = full_path.relative_to(cwd_abs).as_posix()
                         except ValueError:
                             rel_path = full_path.as_posix()
-                            
+
                         self._index_file(full_path, rel_path)
                     except Exception as e:
-                        print(f"Skipping {file}: {e}")
-                    
+                        safe_print(f"Skipping {file}: {e}")
+
         self._write_artifacts()
-        print("[Indexer] Indexing complete.")
+        safe_print("[Indexer] Indexing complete.")
 
     def _index_file(self, path: Path, rel_path: str):
         """Parse a markdown file into sections and index in DB."""
@@ -96,7 +124,7 @@ class CortexIndexer:
             
         # Add to System 1 DB (Full content for keyword search)
         self.db.add_file(rel_path, content)
-        print(f"[Indexer] Indexed: {rel_path} ({len(sections)} sections)")
+        safe_print(f"[Indexer] Indexed: {rel_path} ({len(sections)} sections)")
 
     def _parse_sections(self, content: str) -> List[Dict]:
         """Split markdown by headings and return section metadata."""
@@ -151,11 +179,11 @@ class CortexIndexer:
         """Write FILE_INDEX.json and SECTION_INDEX.json."""
         with open(META_DIR / "FILE_INDEX.json", "w", encoding='utf-8') as f:
             json.dump(self.file_index, f, indent=2, sort_keys=True)
-            
+
         with open(META_DIR / "SECTION_INDEX.json", "w", encoding='utf-8') as f:
             json.dump(self.section_index, f, indent=2, sort_keys=True)
-            
-        print(f"[Indexer] Wrote artifacts to {META_DIR}")
+
+        safe_print(f"[Indexer] Wrote artifacts to {META_DIR}")
 
 if __name__ == "__main__":
     import argparse

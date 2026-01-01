@@ -9,10 +9,10 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: d03297932a0856b484c0873ab49364d9e7b2f800943e87493f846ed9754bf4b8 -->
+
+<!-- CONTENT_HASH: 0eb677548780a46051752b1f84c7c9f1147ba1059b0287918fcced7c27dd2071 -->
 
 I was thinking about Kanji, Cuneiform, Hanzi, Heiroglyphs, and symbols in general the other day and how they compress concepts into 1 token but lights up an entire conceptual space in a latent space. Could this help efficiency and compression? What's the most compressed language for AI?
-
 
 How can I compress constants into symbols for token efficiency? Research the frontier of symbolic AI.
 

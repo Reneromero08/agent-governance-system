@@ -14,7 +14,13 @@ def main() -> int:
         return 1
     actual = load(Path(sys.argv[1]))
     expected = load(Path(sys.argv[2]))
-    return 0 if actual == expected else 1
+    if actual == expected:
+        print("Validation passed")
+        return 0
+    print("Validation failed")
+    print("Actual:", json.dumps(actual, indent=2))
+    print("Expected:", json.dumps(expected, indent=2))
+    return 1
 
 
 if __name__ == "__main__":

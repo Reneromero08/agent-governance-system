@@ -16,13 +16,14 @@ import sqlite3
 import hashlib
 import json
 import re
+import time
 from pathlib import Path
 from typing import List, Dict, Optional
 
 # Configuration
 CHUNK_SIZE = 500  # tokens
 CHUNK_OVERLAP = 50  # tokens
-DB_PATH = Path("CORTEX/system1.db")
+DB_PATH = Path(__file__).resolve().parent.parent / "system1.db"
 
 class System1DB:
     """Fast retrieval database using SQLite FTS5."""
@@ -43,6 +44,13 @@ class System1DB:
                 check_same_thread=False
             )
             self.conn.row_factory = sqlite3.Row
+            try:
+                # Improve cross-platform reliability (especially on network/mounted filesystems).
+                self.conn.execute("PRAGMA journal_mode=WAL;")
+                self.conn.execute("PRAGMA synchronous=NORMAL;")
+                self.conn.execute("PRAGMA busy_timeout=10000;")
+            except Exception:
+                pass
 
     def __enter__(self):
         self.open()
@@ -91,58 +99,74 @@ class System1DB:
         
     def add_file(self, path: str, content: str) -> int:
         """Add a file and its chunks to the database."""
-        # Compute content hash
-        content_hash = hashlib.sha256(content.encode('utf-8')).hexdigest()
-        
-        # Check if already indexed
-        cursor = self.conn.execute(
-            "SELECT file_id, content_hash FROM files WHERE path = ?",
-            (path,)
-        )
-        existing = cursor.fetchone()
-        
-        if existing:
-            if existing['content_hash'] == content_hash:
-                return existing['file_id']
-            else:
-                # Content changed: remove old entry (cascade delete should handle chunks if schema supported it, 
-                # but we probably need to delete manually or use DELETE ON CASCADE)
-                # For now, explicit delete
-                self.conn.execute("DELETE FROM files WHERE file_id = ?", (existing['file_id'],))
-                self.conn.execute("DELETE FROM chunks WHERE file_id = ?", (existing['file_id'],))
-            
-        # Insert file record
-        cursor = self.conn.execute(
-            "INSERT INTO files (path, content_hash, size_bytes) VALUES (?, ?, ?)",
-            (path, content_hash, len(content.encode('utf-8')))
-        )
-        file_id = cursor.lastrowid
-        
-        # Chunk the content
-        chunks = self._chunk_text(content)
-        
-        # Insert chunks
-        for idx, chunk_text in enumerate(chunks):
-            chunk_hash = hashlib.sha256(chunk_text.encode('utf-8')).hexdigest()
-            token_count = self._count_tokens(chunk_text)
-            
-            # Insert chunk metadata
-            cursor = self.conn.execute(
-                """INSERT INTO chunks 
-                   (file_id, chunk_index, chunk_hash, token_count, start_offset, end_offset)
-                   VALUES (?, ?, ?, ?, ?, ?)""",
-                (file_id, idx, chunk_hash, token_count, 0, len(chunk_text))  # TODO: track actual offsets
-            )
-            chunk_id = cursor.lastrowid
-            
-            # Insert into FTS
-            self.conn.execute(
-                "INSERT INTO chunks_fts (rowid, content, chunk_id) VALUES (?, ?, ?)",
-                (chunk_id, chunk_text, chunk_id)
-            )
-            
-        self.conn.commit()
-        return file_id
+        # Mounted filesystems can intermittently raise sqlite "disk I/O error" / "database is locked".
+        # Retry a few times to keep the indexer deterministic and cross-platform.
+        for attempt in range(5):
+            try:
+                # Compute content hash
+                content_hash = hashlib.sha256(content.encode('utf-8')).hexdigest()
+
+                # Check if already indexed
+                cursor = self.conn.execute(
+                    "SELECT file_id, content_hash FROM files WHERE path = ?",
+                    (path,)
+                )
+                existing = cursor.fetchone()
+
+                if existing:
+                    if existing['content_hash'] == content_hash:
+                        return existing['file_id']
+                    else:
+                        self.conn.execute("DELETE FROM files WHERE file_id = ?", (existing['file_id'],))
+                        self.conn.execute("DELETE FROM chunks WHERE file_id = ?", (existing['file_id'],))
+
+                # Insert file record
+                cursor = self.conn.execute(
+                    "INSERT INTO files (path, content_hash, size_bytes) VALUES (?, ?, ?)",
+                    (path, content_hash, len(content.encode('utf-8')))
+                )
+                file_id = cursor.lastrowid
+
+                # Chunk the content
+                chunks = self._chunk_text(content)
+
+                # Insert chunks
+                for idx, chunk_text in enumerate(chunks):
+                    chunk_hash = hashlib.sha256(chunk_text.encode('utf-8')).hexdigest()
+                    token_count = self._count_tokens(chunk_text)
+
+                    cursor = self.conn.execute(
+                        """INSERT INTO chunks 
+                           (file_id, chunk_index, chunk_hash, token_count, start_offset, end_offset)
+                           VALUES (?, ?, ?, ?, ?, ?)""",
+                        (file_id, idx, chunk_hash, token_count, 0, len(chunk_text))
+                    )
+                    chunk_id = cursor.lastrowid
+
+                    self.conn.execute(
+                        "INSERT INTO chunks_fts (rowid, content, chunk_id) VALUES (?, ?, ?)",
+                        (chunk_id, chunk_text, chunk_id)
+                    )
+
+                self.conn.commit()
+                return file_id
+            except sqlite3.OperationalError as exc:
+                msg = str(exc).lower()
+                if "disk i/o error" not in msg and "database is locked" not in msg and "busy" not in msg:
+                    raise
+                try:
+                    self.conn.rollback()
+                except Exception:
+                    pass
+                try:
+                    self.close()
+                except Exception:
+                    pass
+                self.conn = None
+                self.open()
+                time.sleep(0.2 * (attempt + 1))
+                continue
+        raise sqlite3.OperationalError("system1_builder: exhausted retries while writing sqlite database")
         
     def search(self, query: str, limit: int = 10) -> List[Dict]:
         """Full-text search across all chunks."""

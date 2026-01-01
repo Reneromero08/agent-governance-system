@@ -66,8 +66,8 @@ COMPRESSION_RULES = {
     
     # Tools and paths
     r"TOOLS/critic\.py": "@T:critic",
-    r"CONTRACTS/runner\.py": "@T:runner",
-    r"CORTEX/query\.py": "@T:cortex",
+    r"LAW/CONTRACTS/runner\.py": "@T:runner",
+    r"NAVIGATION/CORTEX/semantic/query\.py": "@T:cortex",
     r"TOOLS/emergency\.py": "@T:emergency",
     
     # Common patterns (operators from the brief)
@@ -118,8 +118,8 @@ EXPANSION_RULES = {
     "@B0": "CANON/CODEBOOK.md",
     
     "@T:critic": "TOOLS/critic.py",
-    "@T:runner": "CONTRACTS/runner.py",
-    "@T:cortex": "CORTEX/query.py",
+    "@T:runner": "LAW/CONTRACTS/runner.py",
+    "@T:cortex": "NAVIGATION/CORTEX/semantic/query.py",
     "@T:emergency": "TOOLS/emergency.py",
     
     "∧": "and",

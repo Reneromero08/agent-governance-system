@@ -4,6 +4,54 @@ import json
 import jsonschema
 from typing import Dict, Any, Optional, List
 
+_FRONTMATTER_BOUNDARY = "---"
+
+
+def _parse_scalar(value: str) -> Any:
+    value = value.strip()
+    if value in ("null", "Null", "NULL", "~", ""):
+        return None
+    if (value.startswith('"') and value.endswith('"')) or (value.startswith("'") and value.endswith("'")):
+        return value[1:-1]
+    if value.startswith("[") and value.endswith("]"):
+        try:
+            return json.loads(value.replace("'", '"'))
+        except json.JSONDecodeError:
+            items = value[1:-1].split(",")
+            return [i.strip().strip("'\"") for i in items if i.strip()]
+    return value
+
+
+def extract_yaml_frontmatter(content: str) -> Dict[str, Any]:
+    """
+    Extract YAML frontmatter from a Markdown file.
+
+    Supports a conservative subset used by this repo:
+      - key: value scalars (strings, null)
+      - key: [a, b, c] inline lists
+    """
+    lines = content.splitlines()
+    if not lines:
+        return {}
+    if lines[0].strip() != _FRONTMATTER_BOUNDARY:
+        return {}
+
+    meta: Dict[str, Any] = {}
+    for line in lines[1:]:
+        if line.strip() == _FRONTMATTER_BOUNDARY:
+            break
+        stripped = line.strip()
+        if not stripped or stripped.startswith("#"):
+            continue
+        match = re.match(r"^([A-Za-z_][A-Za-z0-9_-]*):\s*(.*)$", stripped)
+        if not match:
+            continue
+        key = match.group(1).strip()
+        raw = match.group(2).strip()
+        meta[key] = _parse_scalar(raw)
+    return meta
+
+
 def extract_markdown_metadata(content: str) -> Dict[str, Any]:
     """
     Extracts metadata from top of a Markdown file.
@@ -11,6 +59,14 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
     Also handles bare 'Version: 1.0.0' without asterisks.
     """
     metadata = {}
+
+    # Prefer YAML frontmatter when present (used by ADRs/skills in this repo).
+    # This is a "real fix" for schema validation: schemas require fields that live in frontmatter.
+    try:
+        metadata.update(extract_yaml_frontmatter(content))
+    except Exception:
+        # Fall back to markdown metadata extraction below.
+        pass
     
     # We only look at the first 50 lines to avoid parsing the whole file
     lines = content.splitlines()[:50]

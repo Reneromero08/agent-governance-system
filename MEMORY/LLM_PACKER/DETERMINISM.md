@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 12624a977f71ab48ded52f330899bac291b0fa1e5a6c87691c564714daf93934 -->
+
 # Pack Determinism Contract
 
 This document records the **B2 determinism contract** for AGS memory packs. The goal is to ensure that packs built from the same repo state are reproducible, traceable, and reject mismatched governance versions.

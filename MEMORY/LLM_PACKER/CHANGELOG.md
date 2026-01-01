@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 79ce086589bb08acfed34367493b0c68f6826d6b77744e60f4cd9a0f2a313eb0 -->
+
 # Changelog
 
 All notable changes to the LLM Packer will be documented in this file.

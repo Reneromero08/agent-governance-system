@@ -31,9 +31,10 @@ if str(PROJECT_ROOT) not in sys.path:
 
 import NAVIGATION.CORTEX.semantic.query as cortex_query
 
-CORTEX_DIR = Path(__file__).resolve().parent
+CORTEX_DIR = Path(__file__).resolve().parents[1]
+DB_DIR = Path(__file__).resolve().parent
 GENERATED_DIR = CORTEX_DIR / "_generated"
-SCHEMA_FILE = CORTEX_DIR / "schema.sql"
+SCHEMA_FILE = DB_DIR / "schema.sql"
 DB_FILE = GENERATED_DIR / "cortex.db"
 VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 SECTION_INDEX_FILE = GENERATED_DIR / "SECTION_INDEX.json"
@@ -217,8 +218,8 @@ def build_index(conn: sqlite3.Connection) -> int:
             sys.path.insert(0, str(PROJECT_ROOT))
         from CAPABILITY.TOOLS.provenance import generate_header
         prov_header = generate_header(
-            generator="CORTEX/cortex.build.py",
-            inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "CONTRACTS/", "CATALYTIC-DPT/"]
+            generator="NAVIGATION/CORTEX/db/cortex.build.py",
+            inputs=["CANON/", "CONTEXT/", "MAPS/", "SKILLS/", "LAW/CONTRACTS/", "CATALYTIC-DPT/"]
         )
         prov_json = json.dumps(prov_header)
         cursor.execute("INSERT OR REPLACE INTO metadata (key, value) VALUES (?, ?)", ("provenance", prov_json))
@@ -524,7 +525,7 @@ def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
         summary_sha = sha256(summary_bytes).hexdigest()
 
         filename = _safe_section_id_filename(section_id) + ".md"
-        summary_rel = (Path("CORTEX") / "_generated" / "summaries" / filename).as_posix()
+        summary_rel = (Path("NAVIGATION") / "CORTEX" / "_generated" / "summaries" / filename).as_posix()
         summary_path = PROJECT_ROOT / Path(summary_rel)
 
         summary_path.write_text(summary_md, encoding="utf-8")

@@ -1,10 +1,16 @@
-# ADR-020: Admission Control Gate
+---
+id: "ADR-020"
+title: "Admission Control Gate"
+status: "Accepted"
+date: "2025-12-27"
+confidence: "High"
+impact: "High"
+tags: ["governance", "admission-control", "determinism", "policy"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-27
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, admission-control, determinism, policy]
+<!-- CONTENT_HASH: 8a8c9bcd3b5686256c46e946f7a4a4b3e8e67b11bb006413d8d53c8dd93b7c41 -->
+
+# ADR-020: Admission Control Gate
 
 ## Problem
 
@@ -59,4 +65,3 @@ Governance wiring:
 - ADR-019: Preflight Freshness Gate
 - INV-005: Determinism
 - INV-006: Output Roots
-

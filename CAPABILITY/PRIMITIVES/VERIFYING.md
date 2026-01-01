@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 4a452ea25c5c6b434f959a664d13fdbe49f66522f40127c9c3ca4d265f3326b8 -->
+
 # Verifier Implementation Guide
 
 **STATUS: NON-NORMATIVE**

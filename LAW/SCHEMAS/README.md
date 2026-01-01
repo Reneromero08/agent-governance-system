@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 73bdd10b294fa7cd5231829fa07510917c4902c6acc3074987783a34f59a984f -->
+
 # CATALYTIC-DPT Schemas (Phase 0)
 
 **Phase**: 0 - Freeze the Contract

@@ -1,12 +1,18 @@
+---
+id: "ADR-007"
+title: "Constitutional Agreement"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "High"
+tags: ["governance", "legal", "liability", "constitution"]
+---
+
+<!-- CONTENT_HASH: 22822aa1f23f5f2941741eb9d04f60b3e601685c2b6a0e65b0124c8cbeb3a1a8 -->
+
 # ADR-007: Constitutional Agreement
 
-**Status:** Accepted
-**Date:** 2025-12-21
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, legal, liability, constitution]
 **Deciders:** Antigravity (Agent), User
-
 ## Context
 
 Autonomous agents operate in a gray area of liability. While the code is Open Source (MIT/Apache), the *actions* taken by the agent (API calls, financial transactions, data deletion) have real-world consequences.

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 89c06983d85bcdfb50ed3b6318757b32548d4619d9be9f0fc6e373b4546e5e9d -->
+
 # Integrity Law (CMP/SPECTRUM)
 
 **Essence ($E$):** Truth is found in declared artifacts and deterministic verification, not narrative history.

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 3755bc81a93b528f44392783860c4b3a59ae1059158b51e22e78a790aace98b2 -->
+
 # Cortex
 
 The cortex is a shadow index of the repository. It allows agents and skills to query metadata about files, pages and tokens without scanning the filesystem or loading full documents into context.

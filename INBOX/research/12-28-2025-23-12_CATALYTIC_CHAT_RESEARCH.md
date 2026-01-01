@@ -9,7 +9,8 @@ status: "Complete"
 summary: "Complete research on Claude Code architecture, token management"
 tags: [catalytic_chat, research, architecture]
 ---
-<!-- CONTENT_HASH: d3d4f831c961d098555143060c7f49ec979a96e2e5f0c5a38b01c35bfbe1622e -->
+
+<!-- CONTENT_HASH: 03d66bbef5e4e24a5c59a26d8d7fb5b2aacab538124dabf81e3f69a19b86fb55 -->
 
 # Catalytic Chat Research Report
 

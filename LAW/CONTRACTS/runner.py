@@ -23,6 +23,9 @@ SKILLS_DIR = PROJECT_ROOT / "CAPABILITY" / "SKILLS"
 RUNS_DIR = Path(__file__).parent / "_runs"
 DEFAULT_VALIDATE = SKILLS_DIR / "_TEMPLATE" / "validate.py"
 
+SYSTEM1_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
+CORTEX_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "cortex.db"
+
 
 def run_process(args: List[str]) -> subprocess.CompletedProcess:
     return subprocess.run(args, capture_output=True, text=True)
@@ -58,6 +61,37 @@ def iter_skill_inputs() -> List[Tuple[Path, Path]]:
     return fixtures
 
 
+def ensure_navigation_dbs() -> int:
+    """
+    Ensure required navigation DBs exist before running fixtures.
+
+    CI builds these DBs earlier, but local runs of the contract runner should be
+    self-sufficient and deterministic.
+    """
+    steps: List[Tuple[Path, List[str]]] = []
+
+    cortex_build = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "cortex.build.py"
+    system1_reset = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "reset_system1.py"
+
+    if not CORTEX_DB.exists():
+        steps.append((cortex_build, [sys.executable, str(cortex_build)]))
+    if not SYSTEM1_DB.exists():
+        steps.append((system1_reset, [sys.executable, str(system1_reset)]))
+
+    for script_path, cmd in steps:
+        if not script_path.exists():
+            print(f"[contracts/runner] Missing required build script: {script_path}")
+            return 1
+        print(f"[contracts/runner] Building navigation DB via {script_path.relative_to(PROJECT_ROOT)}")
+        res = run_process(cmd)
+        if res.returncode != 0:
+            print(res.stdout)
+            print(res.stderr)
+            return 1
+
+    return 0
+
+
 def run_contract_fixture(input_path: Path) -> int:
     fixture_dir = input_path.parent
     expected = fixture_dir / "expected.json"
@@ -74,7 +108,10 @@ def run_contract_fixture(input_path: Path) -> int:
         print(result.stderr)
     else:
         print(result.stdout)
-    return 0 if result.returncode == 0 else 1
+    if result.returncode != 0:
+        print(f"!!! FAILURE: {fixture_dir} !!!")
+        return 1
+    return 0
 
 
 def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
@@ -107,19 +144,27 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
+        print(f"!!! FAILURE (EXEC): {fixture_dir} !!!")
         return 1
 
     result = run_validation(validate_script, actual_path, expected)
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
+        print(f"!!! FAILURE (VAL): {fixture_dir} !!!")
         return 1
     print(result.stdout)
+    if result.returncode != 0:
+        print(f"!!! FAILURE: {fixture_dir} !!!")
+        return 1
     return 0
 
 
 def run_fixtures() -> int:
     failures = 0
+    failures += ensure_navigation_dbs()
+    if failures:
+        return failures
     for input_path in iter_contract_inputs():
         failures += run_contract_fixture(input_path)
     for skill_dir, input_path in iter_skill_inputs():
@@ -130,7 +175,10 @@ def run_fixtures() -> int:
 if __name__ == "__main__":
     failures = run_fixtures()
     if failures:
-        print(f"{failures} fixture(s) failed")
+        print(f"\n{failures} fixture(s) failed.")
+        print("FAILED FIXTURES:")
+        # We need to track names, but changing return type of run_fixtures is invasive.
+        # Instead, let's print failure immediately with a distinct marker.
         sys.exit(1)
     print("All fixtures passed")
     sys.exit(0)
