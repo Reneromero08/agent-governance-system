@@ -18,7 +18,7 @@ from pathlib import Path
 # Direct file import for MCP/server.py
 # Direct file import for MCP/server.py (Testing the Prototype Server Logic for now)
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP" / "server_CATDPT.py"
+SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
 
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
 mcp_server = importlib.util.module_from_spec(spec)
@@ -176,7 +176,7 @@ class RunnerCMP01Validator:
     def test_valid_catalytic_domain(self):
         """Valid catalytic domain should pass."""
         task_spec = {
-            "catalytic_domains": ["CONTRACTS/_runs/_tmp/test"],
+            "catalytic_domains": ["LAW/CONTRACTS/_runs/_tmp/test"],
             "outputs": {"durable_paths": []}
         }
         result = self.server._validate_jobspec_paths(task_spec)
@@ -190,7 +190,7 @@ class RunnerCMP01Validator:
         """Valid durable output path should pass."""
         task_spec = {
             "catalytic_domains": [],
-            "outputs": {"durable_paths": ["CONTRACTS/_runs/test-run/output.json"]}
+            "outputs": {"durable_paths": ["LAW/CONTRACTS/_runs/test-run/output.json"]}
         }
         result = self.server._validate_jobspec_paths(task_spec)
         self._assert(
@@ -203,8 +203,8 @@ class RunnerCMP01Validator:
         """Paths that contain each other in the same list should be flagged."""
         task_spec = {
             "catalytic_domains": [
-                "CONTRACTS/_runs/_tmp/",
-                "CONTRACTS/_runs/_tmp/nested/"
+                "LAW/CONTRACTS/_runs/_tmp/",
+                "LAW/CONTRACTS/_runs/_tmp/nested/"
             ],
             "outputs": {"durable_paths": []}
         }
@@ -225,13 +225,13 @@ class RunnerCMP01Validator:
         """Declared output that doesn't exist post-run must fail."""
         # Create a temp run directory with a TASK_SPEC.json
         run_id = "test-output-missing"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         task_spec = {
             "outputs": {
                 "durable_paths": [
-                    f"CONTRACTS/_runs/{run_id}/should_exist.txt"
+                    f"LAW/CONTRACTS/_runs/{run_id}/should_exist.txt"
                 ]
             }
         }
@@ -265,8 +265,8 @@ class RunnerCMP01Validator:
         task_spec = {
             "catalytic_domains": [
                 "/absolute/invalid",  # index 0 - will be filtered (absolute)
-                "CONTRACTS/_runs/_tmp/",  # index 1 - valid
-                "CONTRACTS/_runs/_tmp/nested/"  # index 2 - overlaps with index 1
+                "LAW/CONTRACTS/_runs/_tmp/",  # index 1 - valid
+                "LAW/CONTRACTS/_runs/_tmp/nested/"  # index 2 - overlaps with index 1
             ],
             "outputs": {"durable_paths": []}
         }
@@ -298,7 +298,7 @@ class RunnerCMP01Validator:
     def test_post_run_forbidden_overlap_only_one_error(self):
         """Forbidden overlap in post-run should produce ONLY FORBIDDEN_PATH_OVERLAP for that entry."""
         run_id = "test-forbidden-only"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         # CANON/foo.txt overlaps forbidden root
@@ -332,7 +332,7 @@ class RunnerCMP01Validator:
     def test_post_run_absolute_path_error(self):
         """Post-run should report error for absolute paths instead of silently skipping."""
         run_id = "test-postrun-absolute"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         # Use Windows-style absolute path (C:\tmp\...) for cross-platform correctness
@@ -360,12 +360,12 @@ class RunnerCMP01Validator:
     def test_post_run_traversal_path_error(self):
         """Post-run should report error for traversal paths instead of silently skipping."""
         run_id = "test-postrun-traversal"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         task_spec = {
             "outputs": {
-                "durable_paths": ["CONTRACTS/../CANON/foo.txt"]
+                "durable_paths": ["LAW/CONTRACTS/../CANON/foo.txt"]
             }
         }
 
@@ -391,8 +391,8 @@ class RunnerCMP01Validator:
         """Exact duplicate paths should be allowed (no PATH_OVERLAP)."""
         task_spec = {
             "catalytic_domains": [
-                "CONTRACTS/_runs/_tmp/",
-                "CONTRACTS/_runs/_tmp/"  # exact duplicate
+                "LAW/CONTRACTS/_runs/_tmp/",
+                "LAW/CONTRACTS/_runs/_tmp/"  # exact duplicate
             ],
             "outputs": {"durable_paths": []}
         }
@@ -410,8 +410,8 @@ class RunnerCMP01Validator:
         """Paths like 'a' and 'ab' should not be considered overlapping."""
         task_spec = {
             "catalytic_domains": [
-                "CONTRACTS/_runs/_tmp/a",
-                "CONTRACTS/_runs/_tmp/ab"  # near-prefix, not overlap
+                "LAW/CONTRACTS/_runs/_tmp/a",
+                "LAW/CONTRACTS/_runs/_tmp/ab"  # near-prefix, not overlap
             ],
             "outputs": {"durable_paths": []}
         }
@@ -427,7 +427,7 @@ class RunnerCMP01Validator:
     def test_task_spec_integrity_success(self):
         """TASK_SPEC hash match should pass verification."""
         run_id = "test-integrity-ok"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         task_spec = {"outputs": {"durable_paths": []}}
@@ -471,7 +471,7 @@ class RunnerCMP01Validator:
     def test_task_spec_tampered(self):
         """Modified TASK_SPEC.json should fail with TASK_SPEC_TAMPERED."""
         run_id = "test-integrity-fail"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         task_spec = {"outputs": {"durable_paths": []}}
@@ -515,12 +515,12 @@ class RunnerCMP01Validator:
     def test_status_json_on_cmp01_failure(self):
         """CMP-01 output verification failure should write STATUS.json with cmp01=fail."""
         run_id = "test-status-cmp01-fail"
-        run_dir = PROJECT_ROOT / "CONTRACTS" / "_runs" / run_id
+        run_dir = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
         run_dir.mkdir(parents=True, exist_ok=True)
 
         task_spec = {
             "outputs": {
-                "durable_paths": [f"CONTRACTS/_runs/{run_id}/missing.txt"]
+                "durable_paths": [f"LAW/CONTRACTS/_runs/{run_id}/missing.txt"]
             }
         }
         task_spec_bytes = json.dumps(task_spec, indent=2).encode('utf-8')
@@ -592,7 +592,7 @@ class RunnerCMP01Validator:
             # Build minimal repo structure
             fake_repo_root.mkdir()
             outside_root.mkdir()
-            contracts_runs = fake_repo_root / "CONTRACTS" / "_runs"
+            contracts_runs = fake_repo_root / "LAW" / "CONTRACTS" / "_runs"
             contracts_runs.mkdir(parents=True)
             
             # Create symlink inside allowed root pointing OUTSIDE repo
@@ -618,7 +618,7 @@ class RunnerCMP01Validator:
                 # === PRE-RUN VALIDATION TEST ===
                 task_spec = {
                     "catalytic_domains": [],
-                    "outputs": {"durable_paths": ["CONTRACTS/_runs/link/out.txt"]}
+                    "outputs": {"durable_paths": ["LAW/CONTRACTS/_runs/link/out.txt"]}
                 }
                 result = test_server._validate_jobspec_paths(task_spec)
                 
@@ -642,7 +642,7 @@ class RunnerCMP01Validator:
                 run_dir.mkdir(parents=True, exist_ok=True)
                 
                 post_run_task_spec = {
-                    "outputs": {"durable_paths": ["CONTRACTS/_runs/link/out.txt"]}
+                    "outputs": {"durable_paths": ["LAW/CONTRACTS/_runs/link/out.txt"]}
                 }
                 with open(run_dir / "TASK_SPEC.json", "w") as f:
                     json.dump(post_run_task_spec, f)

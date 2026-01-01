@@ -1,12 +1,18 @@
+---
+id: "ADR-003"
+title: "Transition to LLM_PACKER for Python Compatibility"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "High"
+tags: ["governance", "packaging"]
+---
+
+<!-- CONTENT_HASH: 967819bd25016010f544d4e374c2113e03e85eb7e7ab1e9e12ab2f345342946c -->
+
 # ADR-003: Transition to LLM_PACKER for Python Compatibility
 
-**Status:** Accepted
-**Date:** 2025-12-21
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, packaging]
 **Deciders:** Antigravity (Agent), User
-
 ## Context
 The repository previously used the directory `MEMORY/LLM-PACKER/` for system-generated packs. This naming convention (hyphenated) prevented Python from importing the core engine as a package, causing "ModuleNotFoundError" in GitHub CI environments that require strict import validation.
 

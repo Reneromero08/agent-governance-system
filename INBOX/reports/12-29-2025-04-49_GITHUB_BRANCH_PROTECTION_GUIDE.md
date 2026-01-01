@@ -9,7 +9,8 @@ status: "Active"
 summary: "Step-by-step setup for GitHub branch protection rules"
 tags: [github, security, guide]
 ---
-<!-- CONTENT_HASH: 60638dac7d271c7e27b0f9d1696a889ceb7d00362915af2dcd157c0fd0ad903f -->
+
+<!-- CONTENT_HASH: 6453e06ed50370d90dc2b705127b22b9a0edf04ef302b5e891fc09630f0f016c -->
 
 # GitHub Branch Protection Setup
 
@@ -85,4 +86,3 @@ After setup, verify:
 - **CI:** Only runs on PRs, not direct pushes
 
 See: `CONTEXT/preferences/STYLE-005-git-commit-push-protocol.md`
-

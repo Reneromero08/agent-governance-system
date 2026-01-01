@@ -28,13 +28,13 @@ jobs:
           python -m pip install pytest cryptography referencing
       
       - name: Test query module (pre-build gate)
-        run: python CORTEX/test_query.py
+        run: python NAVIGATION/CORTEX/tests/test_query.py
       
       - name: Build cortex index
-        run: python CORTEX/cortex.build.py
+        run: python NAVIGATION/CORTEX/db/cortex.build.py
       
       - name: Build system1 index
-        run: python CORTEX/build_system1.py
+        run: python NAVIGATION/CORTEX/db/reset_system1.py
       
       - name: Set up Node.js
         uses: actions/setup-node@v4
@@ -42,22 +42,22 @@ jobs:
           node-version: '20'
       
       - name: Run canon governance checks
-        run: node TOOLS/check-canon-governance.js
+        run: node CAPABILITY/TOOLS/check-canon-governance.js
       
       - name: Run critic checks
-        run: python TOOLS/critic.py
+        run: python CAPABILITY/TOOLS/governance/critic.py
 
       - name: Lint tokens
-        run: python TOOLS/lint_tokens.py
+        run: python CAPABILITY/TOOLS/utilities/lint_tokens.py
 
       - name: Run contract fixtures
-        run: python CONTRACTS/runner.py
+        run: python LAW/CONTRACTS/runner.py
 
       - name: Run pytest (bounded temp, no capture)
         env:
-          TMPDIR: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
-          TEMP: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
-          TMP: ${{ github.workspace }}/CONTRACTS/_runs/_tmp/pytest
+          TMPDIR: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
+          TEMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
+          TMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
         run: |
           mkdir -p "$TMPDIR"
           python -m pytest -q -s --ignore=MEMORY/LLM_PACKER/_packs --ignore=CATALYTIC-DPT/LAB
@@ -77,11 +77,11 @@ jobs:
           
           repo_root = Path.cwd()
           run_id = "ci-strict-bundle"
-          run_dir = repo_root / "CONTRACTS" / "_runs" / run_id
+          run_dir = repo_root / "LAW" / "CONTRACTS" / "_runs" / run_id
           run_dir.mkdir(parents=True, exist_ok=True)
           
           # Deterministic output file within allowed roots.
-          output_rel = "CORTEX/_generated/ci_strict_output.txt"
+          output_rel = "NAVIGATION/CORTEX/_generated/ci_strict_output.txt"
           output_abs = repo_root / output_rel
           output_abs.parent.mkdir(parents=True, exist_ok=True)
           output_bytes = b"ci-strict"
@@ -133,7 +133,7 @@ jobs:
           (run_dir / "SIGNATURE.json").write_text(json.dumps(sig_obj, indent=2))
           
           # Verify with strict mode (CI requires --strict).
-          cmd = ["python", "TOOLS/catalytic_verifier.py", "--run-dir", str(run_dir), "--strict", "--json"]
+          cmd = ["python", "CAPABILITY/TOOLS/catalytic/catalytic_verifier.py", "--run-dir", str(run_dir), "--strict", "--json"]
           res = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
           if res.returncode != 0:
             raise SystemExit(f"strict verifier failed: rc={res.returncode}\\nstdout={res.stdout}\\nstderr={res.stderr}")
@@ -144,6 +144,5 @@ jobs:
       
       - name: Run artifact escape hatch
         run: |
-          cd SKILLS/artifact-escape-hatch
-          python run.py fixtures/basic/input.json ../../CONTRACTS/_runs/escape-check.json
-          python validate.py ../../CONTRACTS/_runs/escape-check.json fixtures/basic/expected.json
+          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/run.py CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/input.json LAW/CONTRACTS/_runs/escape-check.json
+          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/validate.py LAW/CONTRACTS/_runs/escape-check.json CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/expected.json

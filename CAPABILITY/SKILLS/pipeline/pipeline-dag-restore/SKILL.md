@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 419edd6bb0ec051bbe08e2de9bd01ec57bcba07908dbe2ace02201659ae10fd0 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: pipeline-dag-restore
 
 **Version:** 0.1.0
 
 **Status:** Draft
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -34,3 +39,6 @@ Use when implementing or modifying the pipeline DAG restore runner, including re
 
 - `fixtures/basic_ok`
 - `fixtures/tamper_reject`
+
+**required_canon_version:** >=3.0.0
+

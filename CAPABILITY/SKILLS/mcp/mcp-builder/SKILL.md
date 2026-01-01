@@ -1,7 +1,12 @@
+<!-- CONTENT_HASH: fd1b69daf795f227c42b49714692e6fac2530cd61da1110ac9ee8c20118d0782 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-builder
 **Version:** 0.1.0
 **Status:** Active
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 **canon_version:** "3.0.0"
 
 # MCP Server Development Guide
@@ -234,3 +239,6 @@ Load these resources as needed during development:
   - XML format specifications
   - Example questions and answers
   - Running an evaluation with the provided scripts
+
+**required_canon_version:** >=3.0.0
+

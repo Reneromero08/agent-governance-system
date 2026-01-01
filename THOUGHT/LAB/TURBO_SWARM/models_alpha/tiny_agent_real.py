@@ -11,7 +11,8 @@ import json
 import random
 from pathlib import Path
 
-DB_PATH = Path("CORTEX/system1.db")
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
 
 def estimate_tokens(text: str) -> int:
     """Rough token estimation (4 chars ~= 1 token)."""

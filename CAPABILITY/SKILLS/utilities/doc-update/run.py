@@ -12,7 +12,7 @@ DOC_SYSTEM = [
     "README.md (project overview + session bootstrap)",
     "MCP/ (protocol integration docs)",
     "SKILLS/ (procedures + fixtures)",
-    "CONTRACTS/ (fixtures + schemas)",
+    "LAW/CONTRACTS/ (fixtures + schemas)",
     "TOOLS/ (critics, linters, migration helpers)",
 ]
 

@@ -1,1 +1,0 @@
-{"catalytic_domains":["CAPABILITY/PRIMITIVES/_scratch"],"determinism":"deterministic","inputs":{},"intent":"test revocation","job_id":"test-job","outputs":{"durable_paths":["LAW/CONTRACTS/_runs/_tmp/out.txt"],"validation_criteria":{}},"phase":6,"task_type":"test_execution"}

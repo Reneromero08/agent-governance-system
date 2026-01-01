@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 8fc47145aff0ac6bdeeacfc09d9f8c7cfd383263c054668c48152704a6e646de -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: pipeline-dag-scheduler
 
 **Version:** 0.1.0
 
 **Status:** Draft
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -39,3 +44,6 @@ Side effects:
 
 - `fixtures/basic_ok`: a 2-node DAG executes deterministically and is verifiable.
 - `fixtures/cycle_reject`: a cycle is rejected with a stable error code.
+
+**required_canon_version:** >=3.0.0
+

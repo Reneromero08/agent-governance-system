@@ -1,10 +1,16 @@
-# ADR-025: Antigravity Bridge as Invariant Infrastructure
+---
+id: "ADR-025"
+title: "Antigravity Bridge as Invariant Infrastructure"
+date: "2025-12-27"
+status: "Accepted"
+confidence: "High"
+impact: "High"
+tags: ["governance", "swarm", "infrastructure", "invariants"]
+---
 
-**Date:** 2025-12-27
-**Status:** Accepted
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, swarm, infrastructure, invariants]
+<!-- CONTENT_HASH: efdd8aacde3810338625e3063d5d58652103aa041b533a68902330535a739cb0 -->
+
+# ADR-025: Antigravity Bridge as Invariant Infrastructure
 
 ## Context
 The Swarm Architecture relies on the "Antigravity Bridge" (listening on localhost:4000) to spawn visible terminals inside VSCode. Previously, agents treated this as an optional or check-required component. Additionally, `SWARM_ARCHITECTURE.md` referenced `INV-014` (Prohibited External Windows), but this invariant was missing from the actual `CANON/INVARIANTS.md` file.

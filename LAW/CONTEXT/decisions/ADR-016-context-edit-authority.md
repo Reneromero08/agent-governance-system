@@ -1,10 +1,16 @@
-# ADR-016: Context Edit Authority
+---
+id: "ADR-016"
+title: "Context Edit Authority"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Medium"
+tags: ["context", "governance", "amendment"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [context, governance, amendment]
+<!-- CONTENT_HASH: 92f859a18441b71453ff9d36e91d7e45b9a489acd4d8a2ab4d6e9ce46523fe48 -->
+
+# ADR-016: Context Edit Authority
 
 ## Problem
 

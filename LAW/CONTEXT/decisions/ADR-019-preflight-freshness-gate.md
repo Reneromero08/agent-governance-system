@@ -1,10 +1,16 @@
-# ADR-019: Preflight Freshness Gate
+---
+id: "ADR-019"
+title: "Preflight Freshness Gate"
+status: "Accepted"
+date: "2025-12-27"
+confidence: "High"
+impact: "High"
+tags: ["governance", "preflight", "cortex", "determinism"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-27
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, preflight, cortex, determinism]
+<!-- CONTENT_HASH: c518319f5689dcd18e156cff14e06a81810aae5905d7a5b36c252faf2a610272 -->
+
+# ADR-019: Preflight Freshness Gate
 
 ## Problem
 
@@ -56,4 +62,3 @@ Governance wiring:
 - ADR-015: Logging Output Roots
 - INV-005: Determinism
 - INV-006: Output Roots
-

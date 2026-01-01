@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: e9b3918a7aa216870420a0d5852f11f7e78c5647138300d6ae772490d6e79ffc -->
+
 # Skill: ant-worker
 **Version:** 0.1.0
 **Status:** Active

@@ -1,1 +1,0 @@
-{"allow_repo_write":false,"mode":"artifact-only","paths":{"read":["CONTRACTS/_runs/_pipelines/ags-router-happy/PIPELINE.json","CONTRACTS/_runs/_pipelines/ags-router-happy/steps/s1/JOBSPEC.json"],"write":["CONTRACTS/_runs","CONTRACTS/_runs/_pipelines/ags-router-happy"]}}

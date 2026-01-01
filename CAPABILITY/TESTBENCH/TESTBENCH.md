@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 2255a8cb593a4333a8d4e7ca4652deafd2709e34718e58ce79427302fe6073d3 -->
+
 # CATALYTIC-DPT TESTBENCH
 
 **Purpose**: Isolated PoC testing before integration into AGS

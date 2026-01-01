@@ -5,12 +5,12 @@
     "mode": "artifact-only",
     "paths": {
       "read": [
-        "CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json",
-        "CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"
+        "LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json",
+        "LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"
       ],
       "write": [
-        "CONTRACTS/_runs",
-        "CONTRACTS/_runs/_pipelines/intent-pipeline"
+        "LAW/CONTRACTS/_runs",
+        "LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"
       ]
     }
   },

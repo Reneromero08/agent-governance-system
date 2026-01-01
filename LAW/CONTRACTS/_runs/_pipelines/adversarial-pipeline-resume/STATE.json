@@ -1,1 +1,0 @@
-{"attempts":{"s1":1,"s2":1},"completed_steps":["s1","s2"],"current_step_index":2,"pipeline_id":"adversarial-pipeline-resume","step_run_ids":{"s1":"pipeline-adversarial-pipeline-resume-s1-a1","s2":"pipeline-adversarial-pipeline-resume-s2-a1"}}

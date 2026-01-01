@@ -23,7 +23,7 @@ from typing import Dict, Optional, List, Any
 
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 MCP_SERVER = PROJECT_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
-CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
+CONTRACTS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 
 
 def load_json(path: str) -> Dict:

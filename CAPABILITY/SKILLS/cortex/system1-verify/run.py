@@ -18,17 +18,10 @@ from pathlib import Path
 
 # Add project root to path for absolute resolution
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
-DB_PATH = PROJECT_ROOT / "CORTEX" / "system1.db"
+DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
 
 # Directories that SHOULD be indexed per ADR-027 and build_system1.py
-INDEX_DIRS = [
-    "CANON",
-    "CONTEXT",
-    "SKILLS",
-    "CATALYTIC-DPT",
-    "CONTRACTS",
-    "INBOX",
-]
+INDEX_DIRS = ["."]
 
 # Directories to EXCLUDE from verification
 EXCLUDE_DIRS = [
@@ -39,6 +32,8 @@ EXCLUDE_DIRS = [
     "BUILD",
     "MEMORY",
     ".pytest_cache",
+    "meta",
+    "LAW/CONTRACTS/_runs",
 ]
 
 

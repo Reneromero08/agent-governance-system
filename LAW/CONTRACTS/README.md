@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: da1395c91505ae6043329f512d43e4ee191120357e96243ab97cbc0a08b7b000 -->
+
 # Contracts
 
 The `CONTRACTS/` directory contains the machinery that enforces rules within the Agent Governance System.

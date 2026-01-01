@@ -1,3 +1,6 @@
+# py3.8 compatibility: use postponed evaluation for builtin generics in annotations.
+from __future__ import annotations
+
 # HEAD
 from pathlib import Path
 import sys

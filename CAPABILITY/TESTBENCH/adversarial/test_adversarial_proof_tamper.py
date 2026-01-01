@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from pathlib import Path
 import sys
 import json
@@ -64,9 +66,9 @@ def _make_valid_spectrum05_run(run_dir: Path) -> tuple[BundleVerifier, Path]:
     proof_validator = RestorationProofValidator(REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json")
     proof = proof_validator.generate_proof(
         run_id=run_dir.name,
-        catalytic_domains=["CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain"],
-        pre_state={"CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
-        post_state={"CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
+        catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain"],
+        pre_state={"LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
+        post_state={"LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
         timestamp="CATALYTIC-DPT-02_CONFIG",
     )
     (run_dir / "PROOF.json").write_text(json.dumps(proof, sort_keys=True, separators=(",", ":")), encoding="utf-8")

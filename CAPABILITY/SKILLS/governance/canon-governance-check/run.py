@@ -19,8 +19,13 @@ import sys
 from pathlib import Path
 from typing import Any, Dict, List
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
 
-REPO_ROOT = Path(__file__).resolve().parents[4]
+from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+
+REPO_ROOT = PROJECT_ROOT
 
 
 def _canonical_json_bytes(obj: Any) -> bytes:
@@ -80,6 +85,10 @@ def main(argv: List[str]) -> int:
         return 2
     input_path = Path(argv[1])
     output_path = Path(argv[2])
+    
+    if not ensure_canon_compat(Path(__file__).resolve().parent):
+        sys.exit(1)
+        
     inp = _load_json(input_path)
     verbose = bool(inp.get("verbose", False))
     changed_files = inp.get("changed_files")
@@ -95,4 +104,3 @@ def main(argv: List[str]) -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main(sys.argv))
-

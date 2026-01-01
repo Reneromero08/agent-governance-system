@@ -1,0 +1,13 @@
+{
+  "mode": "verify",
+  "ok": true,
+  "out_dir": "LAW/CONTRACTS/_runs/fixtures/doc-merge-batch-skill/basic/out",
+  "pairs": [
+    {
+      "a": "CAPABILITY/SKILLS/utilities/doc-merge-batch-skill/fixtures/basic/a.md",
+      "b": "CAPABILITY/SKILLS/utilities/doc-merge-batch-skill/fixtures/basic/b.md"
+    }
+  ],
+  "report_path": "LAW/CONTRACTS/_runs/fixtures/doc-merge-batch-skill/basic/out/report.json"
+}
+

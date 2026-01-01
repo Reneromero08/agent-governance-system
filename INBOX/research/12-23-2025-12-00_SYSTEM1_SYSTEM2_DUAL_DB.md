@@ -9,7 +9,8 @@ status: "Active"
 summary: "Analysis of System 1 and System 2 dual database architecture"
 tags: ["system1", "system2", "database", "architecture"]
 ---
-<!-- CONTENT_HASH: c921b0753146f2637e51fd8c2b457d6aca78ddbca3af0bf118bf4406f8fc8967 -->
+
+<!-- CONTENT_HASH: 6e211b2081e4c1b5d5a18eb700fe7defaa9733f8a1781180946937da144c97b1 -->
 
 # Dual-DB Architecture (System 1 / System 2) for AGS
 
@@ -238,4 +239,3 @@ All state-changing MCP tools should remain governed (critic gate; commit ceremon
 - Vector search implementation: SQLite extension vs separate vector store?
 - Security boundary: what MCP tools are allowed on a workstation vs remote?
 - How to handle binary files / large vendor directories?
-

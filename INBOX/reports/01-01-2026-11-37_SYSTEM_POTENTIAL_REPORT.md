@@ -9,7 +9,8 @@ status: "Draft"
 summary: "Executive summary of AGS potential and strategic value"
 tags: [strategy, potential, overview]
 ---
-<!-- CONTENT_HASH: 45a5bb13ee9d2285461130945e388b3f1926f89fa0cdc4e9730f0f9814b338ef -->
+
+<!-- CONTENT_HASH: 8b43c0879a7b9c182264298e23f9540c0c588d761b33f0c410fa6eb865f4b337 -->
 
 # AGS System Potential Report
 **Date:** 2026-01-01

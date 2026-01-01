@@ -1,8 +1,10 @@
+from __future__ import annotations
+
 from pathlib import Path
 import sys
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP" / "server_CATDPT.py"
+SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
 
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))

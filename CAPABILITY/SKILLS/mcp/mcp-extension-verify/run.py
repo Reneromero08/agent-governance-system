@@ -99,7 +99,7 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
                 "import CAPABILITY.MCP.server as mcp_server",
                 "",
                 "# Redirect MCP audit logs to an allowed output root.",
-                'mcp_server.LOGS_DIR = PROJECT_ROOT / \"CONTRACTS\" / \"_runs\" / \"mcp_logs\"',
+                'mcp_server.LOGS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs"',
                 "",
                 "if __name__ == '__main__':",
                 "    mcp_server.main()",

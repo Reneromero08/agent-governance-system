@@ -1,1 +1,0 @@
-{"dag_id":"phase7-chain-ok","dag_version":"1.0.0","edges":[{"from":"p1","requires":["CHAIN.json"],"to":"p2"}],"nodes":["p1","p2"]}

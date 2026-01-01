@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 1d2e06ae70981658a1adeab5c04340b5db54f1f761f6bf49fc9d0d1a0db8ce25 -->
+
 # MCP Integration Specification
 
 This document defines how the Agent Governance System (AGS) integrates with the Model Context Protocol (MCP). It stages the interface without full implementation, following the principle: "implement only when you actually need tool access."

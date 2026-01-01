@@ -1,10 +1,16 @@
-# ADR-012: Privacy Boundary for Agent File Access
+---
+id: "ADR-012"
+title: "Privacy Boundary for Agent File Access"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "High"
+tags: ["governance", "privacy", "access"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, privacy, access]
+<!-- CONTENT_HASH: 4b2de9898635920a9e35ee8143474df6c567a959ecd8d5ff38b85fff3237a7cf -->
+
+# ADR-012: Privacy Boundary for Agent File Access
 
 ## Context
 

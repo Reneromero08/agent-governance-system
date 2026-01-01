@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 3c72cb2e36daf44b1c85755da59503b718442489ee4b6b4c4dfbfb6c99e59532 -->
+
 <!--
 PROVENANCE
   generator: TOOLS/codebook_build.py

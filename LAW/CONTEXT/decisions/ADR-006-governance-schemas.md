@@ -1,12 +1,18 @@
+---
+id: "ADR-006"
+title: "Governance Object Schemas"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "High"
+tags: ["governance", "scaling", "validation"]
+---
+
+<!-- CONTENT_HASH: b554df3ea7da772f1b6702c7ea4310871cb19f5c0ef0cbd64cdd6da7b008ec31 -->
+
 # ADR-006: Governance Object Schemas
 
-**Status:** Accepted
-**Date:** 2025-12-21
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, scaling, validation]
 **Deciders:** Antigravity (Agent), User
-
 ## Context
 
 As the system grows, the number of "Law-Like" files (ADRs, Skills, Style Preferences) is increasing. These files carry critical metadata (Status, Context, Versioning) that drives automated governance logic.

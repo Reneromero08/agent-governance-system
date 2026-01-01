@@ -1,10 +1,16 @@
-# ADR-021: Mandatory Agent Identity and Observability
+---
+id: "ADR-021"
+title: "Mandatory Agent Identity and Observability"
+date: "2025-12-27"
+status: "Accepted"
+confidence: "High"
+impact: "High"
+tags: ["governance", "observability", "swarm"]
+---
 
-**Date:** 2025-12-27
-**Status:** Accepted
-**Confidence:** High
-**Impact:** High
-**Tags:** [governance, observability, swarm]
+<!-- CONTENT_HASH: 338dd0130dd416cf2741ca80bca66ec4006bdbf1a6082c5ddc663263de142567 -->
+
+# ADR-021: Mandatory Agent Identity and Observability
 
 ## Context
 As the swarm of agents grows, anonymous or untraceable execution becomes a governance risk. We need a way to know "who is doing what" at any given time, both for real-time monitoring (via `agent-activity`) and for post-hoc auditing. Currently, agents could theoretically operate without a trace if logs weren't strictly enforced.

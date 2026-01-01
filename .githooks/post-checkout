@@ -2,5 +2,5 @@
 set -e
 
 # post-checkout runs: <old-ref> <new-ref> <flag>
-python3 TOOLS/cortex_refresh.py || true
-
+# Prefer the canonical location; keep best-effort fallback for older layouts.
+python3 CAPABILITY/TOOLS/cortex/cortex_refresh.py 2>/dev/null || python CAPABILITY/TOOLS/cortex/cortex_refresh.py 2>/dev/null || true

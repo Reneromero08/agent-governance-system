@@ -7,6 +7,7 @@ import shutil
 import subprocess
 import sys
 from pathlib import Path
+from typing import Dict, Optional
 
 
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -30,7 +31,7 @@ def _sha256_hex(data: bytes) -> str:
     return hashlib.sha256(data).hexdigest()
 
 
-def _run(cmd: list[str], *, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
+def _run(cmd: list[str], *, env: Optional[Dict[str, str]] = None) -> subprocess.CompletedProcess[str]:
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
 

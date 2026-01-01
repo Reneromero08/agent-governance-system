@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 4ba71c6531d51c656447e3f993356045edc471b79581d081b2c611f023a2a393 -->
+
 # MCP Integration README
 
 This directory contains the AGS MCP (Model Context Protocol) server, enabling external AI clients to interact with the Agent Governance System.

@@ -1,7 +1,12 @@
+<!-- CONTENT_HASH: e9b3918a7aa216870420a0d5852f11f7e78c5647138300d6ae772490d6e79ffc -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: ant-worker
 **Version:** 0.1.0
 **Status:** Active
-**Required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 # Ant Worker
 
@@ -41,3 +46,6 @@ python scripts/run.py input.json output.json
 - All operations hash-verified (SHA-256)
 - Logged to `CONTRACTS/_runs/<task_id>/`
 - On error: STOP and escalate to Governor
+
+**required_canon_version:** >=3.0.0
+

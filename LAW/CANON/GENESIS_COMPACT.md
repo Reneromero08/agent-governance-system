@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 7a46b71a5b33a0548e5b68b54fbef11231e4277eeaa6c3c7c006fc3c61dd8bac -->
+
 # Genesis Prompt (Compressed)
 
 This is the token-efficient version of the AGS Genesis Prompt.

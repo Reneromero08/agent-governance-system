@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 import shutil
 import sys
@@ -8,7 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[4]
 
 def _rm(path: Path) -> None:
     if path.is_dir():
-        shutil.rmtree(path)
+        shutil.rmtree(path, ignore_errors=True)
     else:
         try:
             path.unlink()
@@ -43,7 +45,10 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
 
     runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
     swarm_dir = runs_root / "_pipelines" / "_swarms" / swarm_id
-    dag_dir = runs_root / "_dags" / swarm_id
+    # pipeline_dag stores DAG state under `_pipelines/_dags/<dag_id>`
+    dag_dir = runs_root / "_pipelines" / "_dags" / swarm_id
+    p1_dir = runs_root / "_pipelines" / p1
+    p2_dir = runs_root / "_pipelines" / p2
 
     out1 = runs_root / "_tmp" / f"{p1}.txt"
     out2 = runs_root / "_tmp" / f"{p2}.txt"
@@ -53,6 +58,8 @@ def test_swarm_chain_binds_pipeline_proofs(tmp_path: Path) -> None:
     try:
         _rm(swarm_dir)
         _rm(dag_dir)
+        _rm(p1_dir)
+        _rm(p2_dir)
         _rm(out1)
         _rm(out2)
 

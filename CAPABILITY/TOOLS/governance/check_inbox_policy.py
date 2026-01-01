@@ -8,6 +8,8 @@ and contain content hashes.
 This script is run by the pre-commit hook.
 """
 
+from __future__ import annotations
+
 import hashlib
 import os
 import re
@@ -105,8 +107,8 @@ def check_inbox_policy() -> dict:
         rel_path = file_path.relative_to(PROJECT_ROOT)
         parts = str(rel_path).split(os.sep)
 
-        # Exempt directories
-        if any(part in ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", "BUILD", ".git"] for part in parts):
+        # Exempt directories (repo-owned documentation lives under docs/)
+        if any(part in ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", "BUILD", "docs", ".git"] for part in parts):
             continue
 
         # Exempt root-level canon files

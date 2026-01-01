@@ -6,7 +6,7 @@
     "properties": {
         "id": {
             "type": "string",
-            "pattern": "^ADR-\\d{3}$",
+            "pattern": "^ADR-(\\d{3}|∞)$",
             "description": "The ADR ID (e.g., ADR-001)"
         },
         "title": {

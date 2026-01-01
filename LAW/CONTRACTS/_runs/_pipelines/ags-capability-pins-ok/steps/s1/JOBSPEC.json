@@ -1,1 +1,0 @@
-{"catalytic_domains":["LAW/CONTRACTS/_runs/_tmp/phase65_registry/domain"],"determinism":"deterministic","inputs":{},"intent":"capability: ant-worker copy (Phase 6.5)","job_id":"cap-ant-worker-copy-v1","outputs":{"durable_paths":["LAW/CONTRACTS/_runs/_tmp/phase65_registry/out.txt"],"validation_criteria":{}},"phase":6,"task_type":"adapter_execution"}

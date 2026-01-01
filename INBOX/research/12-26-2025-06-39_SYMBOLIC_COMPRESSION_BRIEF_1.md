@@ -9,7 +9,8 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-<!-- CONTENT_HASH: 86690d644e2b2d25b936a885239951b98b1a9b8432c9bc87ed6fb5351421d581 -->
+
+<!-- CONTENT_HASH: c6206a792c99df29e25ce275a154e541efcddce20eaa18729daf0f1eaa06d4cd -->
 
 # Symbolic Compression for AI Governance
 ## A Token-Optimized Language for LLM Systems
