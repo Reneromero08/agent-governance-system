@@ -122,7 +122,7 @@ class CompressionValidator:
         claim_copy = dict(self.claim)
         claim_hash = claim_copy.pop("claim_hash", None)
         claim_bytes = _canonical_json_bytes(claim_copy)
-        computed_hash = _sha256(claim_bytes.decode('utf-8'))
+        computed_hash = _sha256(claim_bytes)
 
         if claim_hash != computed_hash:
             self._fail("INVALID_CLAIM_SCHEMA", f"claim_hash mismatch: expected {computed_hash}, got {claim_hash}")

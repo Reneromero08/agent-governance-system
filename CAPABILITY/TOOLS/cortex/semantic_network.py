@@ -11,7 +11,8 @@ from typing import Dict, List
 from dataclasses import dataclass, asdict
 from enum import Enum
 
-AGENT_DB = Path("CORTEX/system1.db")
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+AGENT_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "system1.db"
 AGI_DB = Path("D:/CCC 2.0/AI/AGI/CORTEX/_generated/system1.db")
 
 class MessageType(Enum):

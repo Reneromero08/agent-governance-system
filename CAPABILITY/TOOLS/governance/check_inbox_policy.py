@@ -39,8 +39,11 @@ def has_content_hash(file_path: Path) -> bool:
     """Check if file has content hash comment."""
     try:
         with open(file_path, "r", encoding="utf-8") as f:
-            first_lines = f.readlines()[:5]
-            for line in first_lines:
+            # Check first 100 lines to account for long YAML frontmatter
+            for _ in range(100):
+                line = f.readline()
+                if not line:
+                    break
                 if "CONTENT_HASH:" in line:
                     return True
         return False
@@ -55,6 +58,7 @@ def is_inbox_file(file_path: Path) -> bool:
         return True
     except ValueError:
         return False
+
 
 
 def get_staged_files() -> list[Path]:
@@ -124,7 +128,7 @@ def check_inbox_policy() -> dict:
             violations.append({
                 "file": str(file_path.relative_to(INBOX_DIR)),
                 "error": "Missing content hash",
-                "fix": "Add <!-- CONTENT_HASH: <sha256> --> to top of file"
+                "fix": "Add <!-- CONTENT_HASH: <sha256> --> immediately after YAML frontmatter"
             })
             continue
 

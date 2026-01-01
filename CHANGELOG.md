@@ -3,6 +3,19 @@
 All notable changes to Agent Governance System will be documented in this file.
 
 
+## [3.2.1] - 2026-01-01
+
+### Housekeeping (Inbox Governance & Path Hardening)
+
+#### Added
+- **Inbox Governance Hardening**: Mandated `uuid`, `bucket`, and `hashtags` fields for all human-readable documents in `LAW/CANON/INBOX_POLICY.md`.
+- **Bulk Migration**: Migrated 60+ `INBOX` documents (reports, research, roadmaps) to the new timestamped convention with mandatory content hashes and metadata.
+
+#### Fixed
+- **Root Directory Pollution**: Resolved issues causing `CAT_CORTEX`, `CONTRACTS`, and `TOOLS` to be created in the repository root.
+- **Path Alignment**: Corrected path logic in `THOUGHT/LAB/CAT_CHAT/catalytic_chat/paths.py`, `THOUGHT/LAB/MCP/server_CATDPT.py`, and `CAPABILITY/TOOLS/utilities/emergency.py`.
+- **Inbox Policy Enforcement**: Updated `check_inbox_policy.py` to scan for hashes after YAML frontmatter and corrected legacy tool paths in git hooks.
+
 ## [3.2.0] - 2025-12-31
 
 ### V3 System Stabilization (The "Green" Release)

@@ -1,8 +1,8 @@
 # Catalytic Chat System
 
-**Roadmap:** [docs/catalytic-chat/ROADMAP.md](docs/catalytic-chat/ROADMAP.md)
-**Status:** Phase 2 Complete (Substrate + Symbol Registry + Bounded Resolver)
-**Date:** 2025-12-29
+**Roadmap:** [CAT_CHAT_ROADMAP.md](CAT_CHAT_ROADMAP.md)
+**Status:** Phase 7 Complete (All Phases Complete)
+**Date:** 2025-12-31
 
 ## Overview
 
@@ -13,16 +13,16 @@ Build a chat substrate where models write compact, structured messages that refe
 - **Phase 0:** ✅ COMPLETE (Contract frozen)
 - **Phase 1:** ✅ COMPLETE (Substrate + deterministic indexing)
 - **Phase 2:** ✅ COMPLETE (Symbol registry + bounded resolver)
-- **Phase 3:** ⏳ NOT STARTED (Message cassette)
+- **Phase 3:** ✅ COMPLETE (Message cassette)
 - **Phase 4:** ⏳ NOT STARTED (Discovery: FTS + vectors)
 - **Phase 5:** ⏳ NOT STARTED (Translation protocol)
-- **Phase 6:** ⏳ NOT STARTED (Measurement and regression harness)
+- **Phase 6:** ✅ COMPLETE (Measurement and regression harness)
 
 ## Documentation
 
 - **Roadmap:** [docs/catalytic-chat/ROADMAP.md](docs/catalytic-chat/ROADMAP.md)
-- **Changelog:** [docs/catalytic-chat/CHANGELOG.md](docs/catalytic-chat/CHANGELOG.md)
-- **Contract:** [docs/catalytic-chat/CONTRACT.md](docs/catalytic-chat/CONTRACT.md)
+- **Changelog:** [CHANGELOG.md](CHANGELOG.md)
+- **Contract:** [CAT_CHAT_CONTRACT.md](CAT_CHAT_CONTRACT.md)
 - **Phase Reports:** [docs/catalytic-chat/phases/](docs/catalytic-chat/phases/)
 - **Notes:** [docs/catalytic-chat/notes/](docs/catalytic-chat/notes/)
 
@@ -57,6 +57,32 @@ Deprecated scripts and data are quarantined in [legacy/](legacy/) for historical
 ```
 CAT_CHAT/
 ├── README.md                  # This file
+├── ROADMAP.md                 # Roadmap
+├── CHANGELOG.md               # Canonical changelog (639 lines, all Phase 1-7)
+├── pytest.ini                 # Test config (excludes legacy/)
+├── catalytic_chat/            # Canonical package
+│   ├── CONTRACT.md            # Immutable contract
+│   ├── ROADMAP.md            # Canonical roadmap
+│   ├── CHANGELOG.md          # Canonical changelog
+│   └── [all CAT_CHAT files]
+├── archive/                   # Historical documentation (40 files, organized)
+└── tests/                     # Canonical tests (excludes legacy/)
+│   ├── cli.py                 # CLI entry point
+│   ├── section_extractor.py     # Section extraction
+│   ├── section_indexer.py      # Indexing and storage
+│   ├── symbol_registry.py       # Symbol management
+│   ├── symbol_resolver.py       # Symbol resolution with cache
+│   └── slice_resolver.py       # Slice parsing
+├── tests/                     # Canonical tests (excludes legacy/)
+├── legacy/                    # Deprecated scripts (NOT CANONICAL)
+│   ├── README.md              # Legacy explanation
+│   ├── tests/                 # Legacy test files
+│   ├── chats/                 # Legacy chat data
+│   └── symbols/               # Legacy symbol dictionary
+└── archive/                   # Historical documentation (organized)
+```
+CAT_CHAT/
+├── README.md                  # This file
 ├── ROADMAP.md                 # Stub -> docs/catalytic-chat/ROADMAP.md
 ├── CHANGELOG.md               # Stub -> docs/catalytic-chat/CHANGELOG.md
 ├── pytest.ini                 # Test config (excludes legacy/)
@@ -67,13 +93,7 @@ CAT_CHAT/
 │   ├── symbol_registry.py     # Symbol management
 │   ├── symbol_resolver.py     # Symbol resolution with cache
 │   └── slice_resolver.py      # Slice parsing
-├── docs/
-│   └── catalytic-chat/
-│       ├── CONTRACT.md        # Immutable contract
-│       ├── ROADMAP.md         # Canonical roadmap
-│       ├── CHANGELOG.md       # Canonical changelog
-│       ├── phases/            # Phase completion reports
-│       └── notes/             # Historical notes
+├── archive/                   # Historical documentation (organized)
 ├── legacy/                    # Deprecated scripts (NOT CANONICAL)
 │   ├── README.md              # Legacy explanation
 │   ├── tests/                 # Legacy test files

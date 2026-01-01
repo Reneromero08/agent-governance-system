@@ -103,7 +103,7 @@ def get_validator_build_id() -> str:
     return _VALIDATOR_BUILD_ID_CACHE
 
 
-CONTRACTS_DIR = PROJECT_ROOT / "CONTRACTS" / "_runs"
+CONTRACTS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 SKILLS_DIR = PROJECT_ROOT / "CATALYTIC-DPT" / "SKILLS"
 
 # =============================================================================

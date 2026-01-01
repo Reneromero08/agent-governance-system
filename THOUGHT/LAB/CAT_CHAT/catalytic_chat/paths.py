@@ -2,7 +2,7 @@
 """
 Canonical Path Helpers
 
-Single source of truth for all artifact paths in CORTEX substrate.
+Single source of truth for all artifact paths in CAT_CORTEX substrate.
 Ensures consistency across all modules and prevents path mismatches.
 """
 
@@ -12,24 +12,24 @@ from typing import Optional
 
 
 def get_cortex_dir(repo_root: Optional[Path] = None) -> Path:
-    """Get CORTEX/_generated directory.
+    """Get CAT_CORTEX/_generated directory.
     
     Args:
         repo_root: Repository root path. Defaults to current working directory.
     
     Returns:
-        Path to CORTEX/_generated
+        Path to CAT_CORTEX/_generated
     """
     if repo_root is None:
         repo_root = Path.cwd()
     
-    cortex_dir = repo_root / "CORTEX" / "_generated"
+    cortex_dir = repo_root / "THOUGHT" / "LAB" / "CAT_CHAT" / "CAT_CORTEX" / "_generated"
     cortex_dir.mkdir(parents=True, exist_ok=True)
     return cortex_dir
 
 
 def get_db_path(repo_root: Optional[Path] = None, name: str = "system1.db") -> Path:
-    """Get path to a database file in CORTEX/_generated.
+    """Get path to a database file in CAT_CORTEX/_generated.
     
     Args:
         repo_root: Repository root path. Defaults to current working directory.
