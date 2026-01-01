@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 459a7259d4910561c1b3125e514658c2923ae543f50563fe810345c0a0bcf328 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: cortex-summaries
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=2.7.0 <3.0.0"
+
 
 ## Trigger
 
@@ -43,4 +48,6 @@ Use when adding or validating deterministic, advisory section summaries (System-
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
 

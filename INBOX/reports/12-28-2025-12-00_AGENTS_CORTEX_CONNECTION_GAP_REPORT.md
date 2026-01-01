@@ -9,7 +9,8 @@ status: "Complete"
 summary: "Analysis of gaps in agent-cortex connection (Restored)"
 tags: [cortex, connection, gap]
 ---
-<!-- CONTENT_HASH: 1fa40600aad94cbf6279b2cd62c8699fa0b932297b9fab610de5ff58c09dfd76 -->
+
+<!-- CONTENT_HASH: 584fbdec92b758c5138d6989a8c6189aad94d81fb6aec75666f09356dffe84b2 -->
 
 # AGENTS.md Cortex Connection Gap Analysis Report
 

@@ -1,6 +1,6 @@
 {
   "entities": [],
   "metadata": {
-    "error": "no such column: path"
+    "error": "cortex.db not found"
   }
 }

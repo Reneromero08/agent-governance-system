@@ -26,9 +26,10 @@ class SwarmTaskDispatcher:
     """Dispatches refactoring tasks to swarm ant workers."""
 
     def __init__(self):
-        self.instruction_db = sqlite3.connect("CORTEX/instructions.db")
-        self.codebase_db = sqlite3.connect("CORTEX/codebase_full.db")
-        self.mcp_ledger_dir = Path("CONTRACTS/_runs")
+        project_root = Path(__file__).resolve().parents[3]
+        self.instruction_db = sqlite3.connect(str(project_root / "NAVIGATION" / "CORTEX" / "db" / "instructions.db"))
+        self.codebase_db = sqlite3.connect(str(project_root / "NAVIGATION" / "CORTEX" / "db" / "codebase_full.db"))
+        self.mcp_ledger_dir = project_root / "LAW" / "CONTRACTS" / "_runs"
         self.mcp_ledger_dir.mkdir(parents=True, exist_ok=True)
 
     def get_simple_tasks(self, limit: int = 5) -> list:
@@ -323,7 +324,7 @@ def main():
     print()
     print("Swarm hierarchy verified:")
     print("  God (User) -> Governor (Claude SOTA) -> Ants (Ollama)")
-    print("  All executions logged to CONTRACTS/_runs")
+    print("  All executions logged to LAW/CONTRACTS/_runs")
 
 
 if __name__ == "__main__":

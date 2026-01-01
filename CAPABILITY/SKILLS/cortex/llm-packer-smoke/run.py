@@ -14,7 +14,7 @@ from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 PACKER_MODULE = "MEMORY.LLM_PACKER.Engine.packer"
 PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
-RUNS_ROOT = PROJECT_ROOT / "CONTRACTS" / "_runs"
+RUNS_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 
 
 def resolve_out_dir(out_dir: str) -> Path:

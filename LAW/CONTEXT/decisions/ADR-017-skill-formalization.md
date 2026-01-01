@@ -1,10 +1,16 @@
-# ADR-017: Skill Formalization and Validation
+---
+id: "ADR-017"
+title: "Skill Formalization and Validation"
+status: "Accepted"
+date: "2025-12-23"
+confidence: "High"
+impact: "Medium"
+tags: ["skills", "governance", "validation"]
+---
 
-**Status:** Accepted
-**Date:** 2025-12-23
-**Confidence:** High
-**Impact:** Medium
-**Tags:** [skills, governance, validation]
+<!-- CONTENT_HASH: b83dab94ee8db91847ce941642e01999c4ef6671517199efe7cf13955e04b877 -->
+
+# ADR-017: Skill Formalization and Validation
 
 ## Problem
 

@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: f17b6808aebd2da4dbf1585ff1f7a48505ab8139ca1de0bce230787dd10ace50 -->
+
 # Canon Governance Check - Cortex Integration
 
 ## Overview

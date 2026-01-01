@@ -1,1 +1,0 @@
-{"pipeline_id":"ags-router-happy","steps":[{"cmd":["C:\\Users\\rene_\\AppData\\Local\\Programs\\Python\\Python311\\python.exe","-c","pass"],"jobspec_path":"LAW/CONTRACTS/_runs/_pipelines/ags-router-happy/steps/s1/JOBSPEC.json","memoize":true,"step_id":"s1","strict":true}]}
