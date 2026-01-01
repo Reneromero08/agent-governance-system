@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: d338978a5114e2c9e6bbef66f42348333bf63944d41d57faf59c1f6983b8cc93 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: llm-packer-smoke
 
 **Version:** 0.1.0
 
 **Status:** Reference
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -34,3 +39,6 @@ Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a mini
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

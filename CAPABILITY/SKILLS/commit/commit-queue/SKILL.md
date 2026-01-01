@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 2acfc1d9ccc3d523edf7118e48beccae7b879b278e946f016b310644793d5539 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: commit-queue
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -48,3 +53,6 @@ Provide a deterministic commit queue stored under `CONTRACTS/_runs/commit_queue/
 - Append-only queue at `CONTRACTS/_runs/commit_queue/<queue_id>.jsonl`.
 - No automatic `git commit` inside the skill; commits remain manual and ceremony-gated.
 - Repo-relative paths only.
+
+**required_canon_version:** >=3.0.0
+

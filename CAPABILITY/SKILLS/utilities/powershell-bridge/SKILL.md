@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: fae1d6a08e7c5deaa0171dd9199751aa4c806741dda235d1172b845a784faa00 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: powershell-bridge
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -30,3 +35,6 @@ Use when asked to set up a local PowerShell bridge for controlled command execut
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

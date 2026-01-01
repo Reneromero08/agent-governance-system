@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: ef4846877d5dab47511a01a6cf31476ad64f5bc5945635459295794575338980 -->
+
 # Workflow Patterns
 
 ## Sequential Workflows

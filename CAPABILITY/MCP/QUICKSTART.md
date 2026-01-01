@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: ace4594b641ccc8c284e72ff1d1066667032311bf074b3eb843cbfbcd61149a3 -->
+
 # MCP Server Quick Start
 
 ⚡ **Zero-setup auto-start: Just connect and it works!**

@@ -12,7 +12,7 @@
     "note": "manual fixture entry",
     "subject": "2.9.0: add mcp-startup skill"
   },
-  "log_path": "CONTRACTS/_runs/commit_logs/commit_summaries.jsonl",
+  "log_path": "LAW/CONTRACTS/_runs/commit_logs/commit_summaries.jsonl",
   "ok": true
 }
 

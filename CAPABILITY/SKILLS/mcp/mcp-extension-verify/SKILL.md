@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 94a604067049421f647271e3d6d14a0dc88c16412de0e761e261d40b7a1ffb68 -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: mcp-extension-verify
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Trigger
 
@@ -37,3 +42,6 @@ Use when asked to verify the AGS MCP server inside any IDE extension or MCP-comp
 ## Fixtures
 
 - `fixtures/basic/`
+
+**required_canon_version:** >=3.0.0
+

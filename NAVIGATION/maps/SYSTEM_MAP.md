@@ -1,73 +1,60 @@
+<!-- CONTENT_HASH: 92393a477f10ec776f55900edf553fd33b0fbe3066a62dfb76366b1dc70d1630 -->
+
 # System Map
 
-This map describes the overall architecture of the Agent Governance System. It provides a high-level view of the interactions between layers.
+This map describes the 5-Bucket Architecture of the Agent Governance System.
 
-```
-┌──────────────┐
-│   CANON      │ ← highest authority
-└───────┬──────┘
-        │
-┌───────▼──────┐
-│   CONTEXT    │ - why and when
-└───────┬──────┘
-        │
-┌───────▼──────┐
-│    MAPS      │ - where
-└───────┬──────┘
-        │
-┌───────▼──────┐
-│    SKILLS    │ - how
-└───────┬──────┘
-        │
-┌───────▼──────┐
-│  CONTRACTS   │ - enforce
-└───────┬──────┘
-        │
-┌───────▼──────┐
-│   MEMORY     │ - persist and pack
-└──────────────┘
+```mermaid
+graph TD
+    LAW[1. LAW] -->|Governs| CAPABILITY[2. CAPABILITY]
+    LAW -->|Governs| NAVIGATION[3. NAVIGATION]
+    LAW -->|Governs| THOUGHT[4. THOUGHT]
+    LAW -->|Governs| MEMORY[5. MEMORY]
+
+    NAVIGATION -->|Directs| CAPABILITY
+    CAPABILITY -->|Writes| MEMORY
+    THOUGHT -->|Proposes| LAW
+    THOUGHT -->|Proposes| CAPABILITY
 ```
 
-## Supporting Components
+## 1. LAW (The Rules)
+*Purpose: Permissibility & Authority*
+- `CANON/`: Immutable laws and contracts
+- `CONTRACTS/`: Run ledgers and enforcement
+- `CONTEXT/decisions/`: ADRs and precedents
+- `AGENTS.md`: Operating strictures
 
-```
-┌──────────────┐
-│   CORTEX     │ - indexing and querying across all layers
-└──────────────┘
+## 2. CAPABILITY (The Tools)
+*Purpose: Potential Action*
+- `SKILLS/`: Agent toolkits
+- `TOOLS/`: Maintenance scripts & Critics
+- `MCP/`: Hardware interface
+- `PIPELINES/`: Distributed execution patterns
+- `PRIMITIVES/`: Core safety blocks
 
-┌──────────────┐
-│    TOOLS     │ - critics, linters, validators, runtime utilities
-└──────────────┘
+## 3. NAVIGATION (The Map & Plan)
+*Purpose: Orientation & Strategy*
+- `CORTEX/`: Semantic database & Index
+- `ROADMAPS/`: Strategy and Master Plans
+- `maps/`: Data flow and ownership maps
 
-┌──────────────┐
-│     MCP      │ - Model Context Protocol server for IDE integration
-└──────────────┘
-```
+## 4. THOUGHT (The Lab)
+*Purpose: Exploration*
+- `LAB/`: Experimental features
+- `CONTEXT/research/`: Non-binding analysis
+- `CONTEXT/demos/`: Proof of concepts
 
-## Subsystem: CATALYTIC-DPT
+## 5. MEMORY (The Record)
+*Purpose: History*
+- `MEMORY/`: Packed archives
+- `INBOX/reports/`: Signed implementation reports
+- `CONTEXT/archive/`: Deprecated content
+- `_runs/`: Execution ledgers (logically here, physically in LAW/CONTRACTS/_runs due to INV-006)
 
-CATALYTIC-DPT is a self-contained distributed pipeline toolkit with its own governance structure:
+---
 
-```
-CATALYTIC-DPT/
-├── AGENTS.md        - agent definitions for pipeline execution
-├── SKILLS/          - pipeline-specific skills (swarm-orchestrator, ant-worker, etc.)
-├── PIPELINES/       - DAG definitions and pipeline configurations
-├── PRIMITIVES/      - core building blocks (nodes, executors)
-├── CONTRACTS/       - pipeline-specific fixtures and validation
-├── SCHEMAS/         - JSON schemas for pipeline structures
-├── SPECTRUM/        - capability spectrum definitions
-├── LAB/             - experimental features and research
-├── TESTBENCH/       - testing infrastructure
-├── FIXTURES/        - test fixtures for pipeline validation
-└── CONTEXT/demos/           - demonstration pipelines
-```
+## Data Flow
+See `DATA_FLOW.md` for artifact lifecycles.
 
-## Other Directories
-
-| Directory | Purpose |
-|-----------|---------|
-| `CONTEXT/demos/` | Project-level demonstration scripts |
-| `.github/` | GitHub workflows and CI configuration |
-
-Each arrow in the main hierarchy represents a dependency. For example, skills depend on maps to know where to operate, and contracts enforce the correct behaviour of skills.
+## File Ownership
+See `FILE_OWNERSHIP.md` for team responsibilities.

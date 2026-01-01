@@ -1,16 +1,16 @@
+---
+id: "ADR-010"
+title: "Authorized deletions with confirmation"
+status: "Accepted"
+date: "2025-12-21"
+confidence: "High"
+impact: "Medium"
+tags: ["governance", "deletion"]
+---
+
+<!-- CONTENT_HASH: f021284dcde33d77ed40c8507eaa8326675e6cbd49af5f157325010b74d1eac7 -->
+
 # ADR-010: Authorized deletions with confirmation
-
-**Status:** Accepted
-
-**Date:** 2025-12-21
-
-**Review date:** (optional)
-
-**Confidence:** High
-
-**Impact:** Medium
-
-**Tags:** [governance, deletion]
 
 ## Context
 

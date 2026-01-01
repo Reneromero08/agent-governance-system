@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Optional
 
 # Configuration
-DB_PATH = Path("CORTEX/system1.db")
+DB_PATH = Path(__file__).resolve().parents[1] / "db" / "system1.db"
 MODEL = "qwen2.5:7b"  # Or parameterize
 OLLAMA_URL = "http://localhost:11434/api/generate"
 

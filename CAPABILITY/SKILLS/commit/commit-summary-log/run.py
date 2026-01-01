@@ -12,7 +12,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 
-DEFAULT_LOG_PATH = "CONTRACTS/_runs/commit_logs/commit_summaries.jsonl"
+DEFAULT_LOG_PATH = "LAW/CONTRACTS/_runs/commit_logs/commit_summaries.jsonl"
 ALLOWED_TYPES = {"feat", "fix", "docs", "chore", "refactor", "test"}
 
 
@@ -60,8 +60,8 @@ def git_commit_entry(commit_ref: str, note: Optional[str], include_body: bool) -
 def assert_allowed_log_path(log_path: Path) -> None:
     rel = log_path.resolve().relative_to(PROJECT_ROOT.resolve())
     rel_posix = rel.as_posix()
-    if not (rel_posix == "CONTRACTS/_runs" or rel_posix.startswith("CONTRACTS/_runs/")):
-        raise ValueError("log_path must be under CONTRACTS/_runs/")
+    if not (rel_posix == "LAW/CONTRACTS/_runs" or rel_posix.startswith("LAW/CONTRACTS/_runs/")):
+        raise ValueError("log_path must be under LAW/CONTRACTS/_runs/")
 
 
 def append_jsonl(path: Path, entry: Dict[str, Any]) -> None:

@@ -1,1 +1,0 @@
-{"pipeline_id": "adversarial-pipeline-inconsistent-state", "validator_semver": "0.1.0", "validator_build_id": "adversarial", "timestamp": "CATALYTIC-DPT-02_CONFIG", "steps": [{"step_id": "s1", "jobspec_path": "x.json", "cmd": ["true"], "strict": true, "memoize": false}, {"step_id": "s2", "jobspec_path": "y.json", "cmd": ["true"], "strict": true, "memoize": false}]}

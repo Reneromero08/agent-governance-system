@@ -1,10 +1,15 @@
+<!-- CONTENT_HASH: 163bb0800b06a8adabb867a11a091bef3d9c250e22335393f5a4ae6411c65e5f -->
+
+**required_canon_version:** >=3.0.0
+
+
 # Skill: admission-control
 
 **Version:** 0.1.0
 
 **Status:** Active
 
-**required_canon_version:** ">=3.0.0 <4.0.0"
+
 
 ## Purpose
 
@@ -35,3 +40,6 @@ Use when you need to verify admission control policy behavior via fixtures.
 - `fixtures/artifact_only_outside_block/`
 - `fixtures/repo_write_flag_required/`
 - `fixtures/artifact_only_allow/`
+
+**required_canon_version:** >=3.0.0
+

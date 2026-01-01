@@ -51,7 +51,7 @@ def test_cortex_indexer():
     print("\n=== Test 2: Cortex Indexer ===")
     
     # Clean previous artifacts
-    meta_dir = PROJECT_ROOT / "meta"
+    meta_dir = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "meta"
     if meta_dir.exists():
         shutil.rmtree(meta_dir)
     

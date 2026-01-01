@@ -117,7 +117,7 @@ def test_restore_rejects_when_verifier_strict_fails(work_area):
 def test_restore_success_emits_artifacts_and_matches_hashes(work_area):
     run_id = "success"
     run_dir = work_area / run_id
-    output_rel = f"CONTRACTS/_runs/_test_restore_runner/{run_id}/out/result.txt"
+    output_rel = f"LAW/CONTRACTS/_runs/_test_restore_runner/{run_id}/out/result.txt"
     payload = b"hello\n"
     _write_signed_bundle(run_dir=run_dir, output_rel=output_rel, output_bytes=payload)
 
@@ -159,7 +159,7 @@ def test_restore_rollback_failure_returns_restore_rollback_failed(work_area, mon
 
     run_id = "rollback-fail"
     run_dir = work_area / run_id
-    output_rel = f"CONTRACTS/_runs/_test_restore_runner/{run_id}/out/result.txt"
+    output_rel = f"LAW/CONTRACTS/_runs/_test_restore_runner/{run_id}/out/result.txt"
     _write_signed_bundle(run_dir=run_dir, output_rel=output_rel, output_bytes=b"hello")
 
     restore_root = work_area / "dest"

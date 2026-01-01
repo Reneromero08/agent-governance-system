@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 7baa28a2c245c2519d9a2642ab49216b0e0f994f851cb1da6fa3ca9563c3d366 -->
+
 # STYLE-001: Chunked Commit Ceremony
 
 **Category:** Governance
