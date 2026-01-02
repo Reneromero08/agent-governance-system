@@ -284,7 +284,7 @@ Port safe primitives from `THOUGHT/LAB/MCP/server_CATDPT.py` to canonical `CAPAB
 ## Z.2: F3 / Content-Addressable Storage
 Implement F3 prototype from `THOUGHT/LAB/f3_cas_prototype.py`.
 - [x] **Z.2.1**: Core CAS primitives - `put(bytes) → hash`, `get(hash) → bytes`
-- [ ] **Z.2.2**: CAS-backed artifact store - Replace file paths with content hashes
+- [x] **Z.2.2**: CAS-backed artifact store - Replace file paths with content hashes (Completed 2026-01-02)
 - [ ] **Z.2.3**: Immutable run artifacts - TASK_SPEC, STATUS, OUTPUT_HASHES via CAS
 - [ ] **Z.2.4**: Deduplication - Identical outputs share storage
 - [ ] **Z.2.5**: GC strategy - Unreferenced blobs cleanup policy
