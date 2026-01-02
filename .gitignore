@@ -6,6 +6,9 @@ LAW/CONTRACTS/_runs/**
 !LAW/CONTRACTS/_runs/_demos/
 !LAW/CONTRACTS/_runs/_demos/**
 
+# CAS runtime storage (never commit)
+CAPABILITY/CAS/storage/
+
 # Generated Cortex index
 NAVIGATION/CORTEX/_generated/cortex.json
 NAVIGATION/CORTEX/_generated/cortex.db
