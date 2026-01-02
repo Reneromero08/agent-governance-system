@@ -31,6 +31,20 @@ All notable changes to Agent Governance System will be documented in this file.
   - Created test suite with 13 test cases covering all functionality
   - Implemented atomic writes with integrity verification
   - Added write-once semantics to prevent overwriting existing objects
+- **Z.2.2 – CAS-backed artifact store** (Completed 2026-01-02)
+  - **Module**: `CAPABILITY/ARTIFACTS/` with dual-mode support for CAS refs and legacy file paths
+  - **Public API**:
+    - `store_bytes(data: bytes) -> str` - Stores bytes into CAS, returns `"sha256:<hash>"`
+    - `load_bytes(ref: str) -> bytes` - Loads from CAS ref or legacy file path (dual mode)
+    - `store_file(path: str) -> str` - Reads file and stores in CAS
+    - `materialize(ref: str, out_path: str, *, atomic: bool = True) -> None` - Writes bytes to disk
+  - **CAS Reference Format**: `"sha256:<64-lowercase-hex>"` (strict validation, fail-closed)
+  - **Behavior Guarantees**: Deterministic (same bytes → same hash), strict validation, no silent fallbacks
+  - **Test Coverage**: 32/32 tests passing (comprehensive roundtrip, validation, error handling, determinism)
+  - **Backward Compatibility**: Full support for legacy file path references during migration
+  - **Documentation**: Complete API docs, usage examples, implementation summary
+  - Full implementation: `CAPABILITY/ARTIFACTS/IMPLEMENTATION.md`
+
 
 ### Fixed
 - **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.
