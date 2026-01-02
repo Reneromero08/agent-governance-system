@@ -23,6 +23,14 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Mapping**: Identified 40+ directories across the repository including `__pycache__`, test caches, and dedicated scratch spaces.
   - **Subsystem Trace**: Linked each domain to its owning subsystem and observed purpose for auditability.
   - **Governance Compliance**: Established a read-only inventory that clarifies the boundaries of disposable space per INV-014.
+- Z.2.1 – Core CAS primitives implementation
+  - Added `cas_put(data: bytes) -> str` function for storing data with SHA-256 hashing
+  - Added `cas_get(hash: str) -> bytes` function for retrieving data by hash
+  - Implemented deterministic path derivation using prefix directories (first char / next 2 chars / full hash)
+  - Added comprehensive error handling with specific exceptions (InvalidHashException, ObjectNotFoundException, CorruptObjectException)
+  - Created test suite with 13 test cases covering all functionality
+  - Implemented atomic writes with integrity verification
+  - Added write-once semantics to prevent overwriting existing objects
 
 ### Fixed
 - **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.
