@@ -6,6 +6,19 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ## [Unreleased] - 2026-01-02
 
+### Added
+- **Z.1.6 Canonical Skill Execution with CMP-01 Pre-Validation** - Enforces deterministic, auditable skill execution
+  - **Canonical Entry Point**: `execute_skill()` in `CAPABILITY/TOOLS/agents/skill_runtime.py` (606 lines)
+  - **CMP-01 Enforcement**: Mandatory pre-validation before any skill execution (fail-closed)
+    - Skill manifest integrity validation (SKILL.md, run.py existence)
+    - Canon version compatibility checking
+    - JobSpec path validation (no absolute paths, no traversal, no forbidden overlaps, allowed roots only)
+    - Deterministic receipt generation with SHA-256 hashes
+  - **Ledger Integration**: Append-only JSONL validation receipts with canonical JSON encoding
+  - **Enforcement Proofs**: 15 comprehensive tests proving no bypass paths exist (100% pass rate)
+  - **No Regressions**: All 33 tests pass (18 existing + 15 new)
+  - Full implementation summary: `CAPABILITY/TOOLS/agents/Z_1_6_IMPLEMENTATION_SUMMARY.md`
+
 ### Fixed
 - **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.
   - Added proper UTF-8 encoding configuration for Windows console
@@ -20,7 +33,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - Ensured Windows compatibility for all indexing operations
   - Verified all 100+ fixtures pass in the contract runner
 - **CI & Validation**:
-  - Fixed `.github/workflows/contracts.yml` to use the repo’s actual paths (NAVIGATION/Law/Capability layout) and removed invalid tab indentation that broke YAML parsing.
+  - Fixed `.github/workflows/contracts.yml` to use the repo's actual paths (NAVIGATION/Law/Capability layout) and removed invalid tab indentation that broke YAML parsing.
   - Fixed governance schema validation by parsing YAML frontmatter (ADRs/skills) instead of only `**Key:**` metadata.
   - Hardened System1 DB indexing against intermittent SQLite disk I/O errors (retry + WAL/busy_timeout), and made `LAW/CONTRACTS/runner.py` auto-build missing navigation DBs for deterministic local runs.
   - Kept `ags preflight --json` machine-readable by suppressing HTTPS-remote guard output.
