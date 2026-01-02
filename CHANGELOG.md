@@ -4,9 +4,26 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [Unreleased] - 2026-01-02
+## [3.2.3] - 2026-01-02
 
 ### Added
+- **Z.2.3 – Immutable run artifacts** (Completed 2026-01-02)
+  - **Module**: `CAPABILITY/RUNS/` with CAS-backed immutable run records
+  - **Public API**:
+    - `put_task_spec(spec: dict) -> str` - Store immutable task specification with canonical JSON encoding
+    - `put_status(status: dict) -> str` - Store immutable status record (requires 'state' field)
+    - `put_output_hashes(hashes: list[str]) -> str` - Store deterministic ordered list of CAS hashes
+    - `load_task_spec(hash: str) -> dict` - Load task spec by CAS hash
+    - `load_status(hash: str) -> dict` - Load status by CAS hash
+    - `load_output_hashes(hash: str) -> list[str]` - Load output hash list by CAS hash
+  - **Record Types**:
+    - TASK_SPEC: Immutable bytes representing exact task input (canonically encoded dict)
+    - STATUS: Small structured record describing state (PENDING, RUNNING, SUCCESS, FAILURE) with optional error info
+    - OUTPUT_HASHES: Deterministic ordered list of CAS hashes produced by the run (order preserved)
+  - **Guarantees**: Immutable (no updates/overwrites), deterministic (same input → same hash), fail-closed (invalid input rejected), canonical encoding (sorted keys, stable JSON)
+  - **Test Coverage**: 68/68 tests passing (canonical encoding, roundtrip, immutability, corruption detection, edge cases)
+  - **Dependencies**: Uses Z.2.1 CAS primitives (cas_put/cas_get) exclusively
+  - **Representational Only**: No execution logic, no orchestration, no enforcement - pure data storage
 - **Z.1.6 Canonical Skill Execution with CMP-01 Pre-Validation** - Enforces deterministic, auditable skill execution
   - **Canonical Entry Point**: `execute_skill()` in `CAPABILITY/TOOLS/agents/skill_runtime.py` (606 lines)
   - **CMP-01 Enforcement**: Mandatory pre-validation before any skill execution (fail-closed)
