@@ -18,6 +18,11 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Enforcement Proofs**: 15 comprehensive tests proving no bypass paths exist (100% pass rate)
   - **No Regressions**: All 33 tests pass (18 existing + 15 new)
   - Full implementation summary: `CAPABILITY/TOOLS/agents/Z_1_6_IMPLEMENTATION_SUMMARY.md`
+- **Z.4.1 Catalytic Domains Inventory** - Produced a complete, deterministic map of all transient (catalytic) domains in the repository.
+  - **Inventory File**: `NAVIGATION/MAPS/CATALYTIC_DOMAINS.md`
+  - **Mapping**: Identified 40+ directories across the repository including `__pycache__`, test caches, and dedicated scratch spaces.
+  - **Subsystem Trace**: Linked each domain to its owning subsystem and observed purpose for auditability.
+  - **Governance Compliance**: Established a read-only inventory that clarifies the boundaries of disposable space per INV-014.
 
 ### Fixed
 - **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.
