@@ -299,7 +299,7 @@ Get `THOUGHT/LAB/CAT_CHAT/` to a functional state.
 
 ## Z.4: Catalytic Architecture
 Make all transient state catalytic (restored byte-identical after run).
-- [ ] **Z.4.1**: Identify all catalytic domains - List every _tmp/ directory
+- [x] **Z.4.1**: Identify all catalytic domains - Produced complete, deterministic inventory at `NAVIGATION/MAPS/CATALYTIC_DOMAINS.md` (Completed 2026-01-02)
 - [ ] **Z.4.2**: Pre-run snapshot - Hash catalytic state before execution
 - [ ] **Z.4.3**: Post-run restoration - Verify byte-identical restoration
 - [ ] **Z.4.4**: Failure mode - Hard-reject on restoration mismatch
