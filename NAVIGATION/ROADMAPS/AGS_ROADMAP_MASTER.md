@@ -278,7 +278,7 @@ Port safe primitives from `THOUGHT/LAB/MCP/server_CATDPT.py` to canonical `CAPAB
 - [x] **Z.1.3**: CMP-01 Validation Functions - Path escape prevention, overlap detection
 - [x] **Z.1.4**: SPECTRUM-02 Bundle Verification - Adversarial resume proof
 - [x] **Z.1.5**: Terminal Sharing - Bidirectional human/AI terminal visibility
-- [ ] **Z.1.6**: Skill Execution - Canonical skill launch with CMP-01 pre-validation
+- [x] **Z.1.6**: Skill Execution - Canonical skill launch with CMP-01 pre-validation (Completed 2026-01-02)
 - [ ] **Z.1.7**: Deprecate Lab Server - Mark `server_CATDPT.py` as archived
 
 ## Z.2: F3 / Content-Addressable Storage
