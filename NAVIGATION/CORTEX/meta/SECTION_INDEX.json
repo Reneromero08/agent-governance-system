@@ -302,10 +302,10 @@
   },
   {
     "anchor": "CHANGELOG.md#fixed",
-    "hash": "9d4d85e014d92555e17dc3822ccfd2329ece0566c2d157ab72a6e2e5eeba286a",
+    "hash": "010dbbd7ca2b52ee79f8987ad3cb6091b5f0b3905375d8d57b00b2ecc1a722a3",
     "level": 3,
     "title": "Fixed",
-    "tokens": 265
+    "tokens": 296
   },
   {
     "anchor": "CHANGELOG.md#added",
@@ -6109,6 +6109,13 @@
     "level": 2,
     "title": "4. Conclusion",
     "tokens": 66
+  },
+  {
+    "anchor": "docs/git-transport.md#git-transport-https-only",
+    "hash": "af38ed49cc9030fd84ad44d7eb708a8cf355e36d1423e7681ed0de258c1c6418",
+    "level": 1,
+    "title": "Git transport: HTTPS-only",
+    "tokens": 42
   },
   {
     "anchor": "INBOX/INBOX.md#root",
