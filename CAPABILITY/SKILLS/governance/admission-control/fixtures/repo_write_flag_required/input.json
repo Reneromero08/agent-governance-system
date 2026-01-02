@@ -1,0 +1,10 @@
+{
+  "mode": "repo-write",
+  "paths": {
+    "read": [],
+    "write": [
+      "CANON/CHANGELOG.md"
+    ]
+  }
+}
+

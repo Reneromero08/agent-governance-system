@@ -1,0 +1,12 @@
+{
+  "mode": "read-only",
+  "paths": {
+    "read": [
+      "README.md"
+    ],
+    "write": [
+      "LAW/CONTRACTS/_runs/tmp.json"
+    ]
+  }
+}
+

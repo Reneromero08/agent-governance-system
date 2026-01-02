@@ -1,0 +1,38 @@
+<!-- CONTENT_HASH: b22de257a144f83b390075074e3d6a4552ecbc1ec53fc5d4960c6e76dc9807dd -->
+
+# Skill: swarm-orchestrator
+**Version:** 0.1.0
+**Status:** Active
+**required_canon_version:** ">=3.0.0 <4.0.0"
+**canon_version:** "3.0.0"
+
+# Swarm Orchestrator
+
+Launches and coordinates Governor + Ant Workers.
+
+## Usage
+
+```bash
+# Launch Governor
+python scripts/poll_and_execute.py --role Governor
+
+# Launch Ant Workers
+python scripts/poll_and_execute.py --role Ant-1
+python scripts/poll_and_execute.py --role Ant-2
+```
+
+## PowerShell Launcher
+
+```powershell
+.\scripts\launch_swarm.ps1              # Python mode
+.\scripts\launch_swarm.ps1 -Mode cli    # Direct CLI mode
+```
+
+## Architecture
+
+```
+Claude → send_directive → Governor
+Governor → dispatch_task → Ant Workers
+Ant Workers → report_result → Governor
+Governor → (aggregates) → Claude
+```

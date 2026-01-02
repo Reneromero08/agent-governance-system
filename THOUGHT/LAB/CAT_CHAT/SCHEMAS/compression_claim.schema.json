@@ -1,0 +1,122 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/compression_claim.schema.json",
+  "title": "Compression Claim",
+  "description": "Deterministic claim about compression efficiency for a bundle",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "claim_version",
+    "run_id",
+    "bundle_id",
+    "components",
+    "reported_metrics",
+    "claim_hash"
+  ],
+  "properties": {
+    "claim_version": {
+      "type": "string",
+      "description": "Claim schema version",
+      "const": "1.0.0"
+    },
+    "run_id": {
+      "type": "string",
+      "description": "Run ID (matches bundle)"
+    },
+    "bundle_id": {
+      "type": "string",
+      "description": "Bundle ID (matches bundle)",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "components": {
+      "type": "array",
+      "description": "Compression components included in this claim",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "included"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "enum": ["vector_db_only", "symbol_lang", "f3", "cas"],
+            "description": "Component name"
+          },
+          "included": {
+            "type": "boolean",
+            "description": "Whether this component is included in the claim"
+          }
+        }
+      },
+      "minItems": 1
+    },
+    "reported_metrics": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "compression_ratio",
+        "uncompressed_tokens",
+        "compressed_tokens",
+        "artifact_count",
+        "total_bytes"
+      ],
+      "properties": {
+        "compression_ratio": {
+          "type": "number",
+          "description": "Compressed / uncompressed token ratio (0 < ratio <= 1)",
+          "minimum": 0.0,
+          "maximum": 1.0,
+          "exclusiveMinimum": 0.0
+        },
+        "uncompressed_tokens": {
+          "type": "integer",
+          "description": "Estimated token count of uncompressed transmission",
+          "minimum": 0
+        },
+        "compressed_tokens": {
+          "type": "integer",
+          "description": "Actual token count of compressed transmission",
+          "minimum": 0
+        },
+        "artifact_count": {
+          "type": "integer",
+          "description": "Number of artifacts in bundle",
+          "minimum": 0
+        },
+        "total_bytes": {
+          "type": "integer",
+          "description": "Total byte count of all artifacts",
+          "minimum": 0
+        },
+        "vector_db_tokens": {
+          "type": "integer",
+          "description": "Tokens for vector_db_only component (if included)",
+          "minimum": 0
+        },
+        "symbol_lang_tokens": {
+          "type": "integer",
+          "description": "Tokens for symbol_lang component (if included)",
+          "minimum": 0
+        },
+        "f3_tokens": {
+          "type": "integer",
+          "description": "Tokens for f3 component (if included, theoretical)",
+          "minimum": 0
+        },
+        "cas_tokens": {
+          "type": "integer",
+          "description": "Tokens for cas component (if included)",
+          "minimum": 0
+        }
+      }
+    },
+    "notes": {
+      "type": "string",
+      "description": "Optional notes about the claim"
+    },
+    "claim_hash": {
+      "type": "string",
+      "description": "SHA256 hash of canonical claim bytes (without claim_hash field)",
+      "pattern": "^[a-f0-9]{64}$"
+    }
+  }
+}

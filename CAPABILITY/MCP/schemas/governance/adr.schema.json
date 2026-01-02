@@ -1,0 +1,75 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS ADR Schema",
+    "description": "Validation schema for AGS Architecture Decision Records (Markdown metadata)",
+    "type": "object",
+    "properties": {
+        "id": {
+            "type": "string",
+            "pattern": "^ADR-(\\d{3}|∞)$",
+            "description": "The ADR ID (e.g., ADR-001)"
+        },
+        "title": {
+            "type": "string",
+            "description": "The title of the decision"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "Proposed",
+                "Accepted",
+                "Deprecated",
+                "Superseded",
+                "Rejected"
+            ],
+            "description": "The current status of the decision"
+        },
+        "date": {
+            "type": "string",
+            "format": "date",
+            "description": "The date the ADR was created or last updated"
+        },
+        "review_date": {
+            "type": [
+                "string",
+                "null"
+            ],
+            "format": "date",
+            "description": "The scheduled review date (optional)"
+        },
+        "confidence": {
+            "type": "string",
+            "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Very High"
+            ],
+            "description": "Confidence level in the decision"
+        },
+        "impact": {
+            "type": "string",
+            "enum": [
+                "Low",
+                "Medium",
+                "High",
+                "Critical"
+            ],
+            "description": "Estimated impact of the decision"
+        },
+        "tags": {
+            "type": "array",
+            "items": {
+                "type": "string"
+            },
+            "description": "List of tags associated with the decision"
+        }
+    },
+    "required": [
+        "status",
+        "date",
+        "confidence",
+        "impact",
+        "tags"
+    ]
+}

@@ -1,0 +1,144 @@
+<!-- CONTENT_HASH: 3cf3cf666d23d368f1762a9ddba6ea577bc90b480203b7de06d3887aa13dfaa3 -->
+
+CATALYTIC COMMONS LICENSE (CCL) v1.4
+Non-Commercial, Attribution, Share-Alike, Anti-Extraction, No State/Police/Military/Intel Use, With Attestation-Gated Protected Artifacts
+
+Copyright (c) 2026 Raúl René Romero Ramos
+All rights reserved except as expressly granted below.
+
+∞) No rights are granted to any entity exercising coercive authority or operating coercive infrastructure, whether directly or via contractors.
+
+0) Core Rule
+This License grants NO rights to any Prohibited Entity (defined below). Prohibited Entities have zero permission to use, copy, modify, distribute, or benefit from the Software. Any interaction by a Prohibited Entity is unlicensed.
+
+1) Definitions
+"Software" means the source code, documentation, data artifacts, schemas, prompts, proofs, indexes, embeddings, vectors, datasets, packs, and other materials distributed with this project, including any portion thereof.
+
+"Use" means to run, execute, copy, modify, merge, publish, distribute, sublicense, make available, deploy, host, integrate, train on, or otherwise exploit the Software.
+
+"Derivative" means any work based on or incorporating the Software, including modifications, forks, ports, translations, or substantial portions.
+
+"Non-Commercial" means not primarily intended for or directed toward commercial advantage or monetary compensation.
+
+"Commercial Use" means any Use that is not Non-Commercial, including any Use:
+(a) by or for a for-profit entity,
+(b) connected to revenue, fees, subscriptions, licensing, paid services, ads, sponsorships, or monetized distribution,
+(c) to develop, improve, or operate products or services offered for a fee or other commercial benefit,
+(d) for internal business purposes of a for-profit entity, even if not directly sold.
+
+"Offering as a Service" means making the Software or any material functionality available to third parties over a network, API, hosted platform, or managed service.
+
+"Extractive Use" means any Use that takes value from the Software while restricting others from comparable access to resulting improvements, and/or converting it into proprietary advantage, closed control, coercive power, surveillance, targeting, or repression.
+
+"Protected Artifacts" means any subset of the Software that is distributed with access controls, including encrypted or keyed vector indexes, manifold state, CAS bundles, receipts, proofs, pack outputs, or any other artifact designated as protected (for example, under a directory name containing "_PROTECTED", "_SEALED", or similar).
+
+"Access Controls" means cryptographic controls or protocol gates applied to Protected Artifacts, including encryption, keyed derivation, signatures, attestations, capability tokens, or any mechanism intended to restrict access to eligible users under this License.
+
+"Compliance Attestation" means a signed statement (digital signature) by the requester asserting, at minimum:
+(i) they are not a Prohibited Entity and are not acting on behalf of a Prohibited Entity,
+(ii) they will Use the Software only as permitted by this License,
+(iii) they will not perform any Prohibited Use (Section 3),
+(iv) the attestation is made to obtain access to Protected Artifacts or key material, and is a material representation relied upon by the provider of such access.
+
+"Digital Signature" means a cryptographic signature that binds the attestation text to a specific signer-controlled key, and that can be verified using the signer’s public key. Acceptable formats include, for example, OpenPGP (GPG) signatures, X.509/PKI signatures, or equivalent cryptographic signatures. A typed name, email-only confirmation, or unchecked checkbox is NOT a Digital Signature unless the Licensor explicitly permits it in writing.
+
+"Acting on behalf of" means (a) acting under direction, contract, request, agency, employment, funding, deputization, partnership, tasking, or operational coordination with a Prohibited Entity, OR (b) acting with knowledge that the Use will directly or indirectly benefit a Prohibited Entity, OR (c) acting with reckless disregard as to whether the Use will directly or indirectly benefit a Prohibited Entity.
+
+"Prohibited Entity" means any of the following, anywhere in the world, including any successor, affiliate, subsidiary, joint task force, partner, contractor, subcontractor, vendor, grantee, agent, intermediary, or any person or organization acting directly or indirectly on their behalf:
+
+(A) State and Government
+Any national, federal, state, provincial, municipal, local, tribal, or supranational governmental body, department, agency, court, legislature, regulator, or instrumentality.
+
+(B) Military and Defense
+Any armed forces, defense ministry/department, defense agency, defense contractor, weapons manufacturer, military R&D program, or any organization supporting military operations, targeting, weapons, or force projection.
+
+(C) Intelligence and Security Services
+Any intelligence, security, signals intelligence, cyber-intelligence, national security, covert operations, or surveillance organization, and any organization primarily engaged in intelligence collection or analysis for state actors.
+
+(D) Law Enforcement and Carceral Systems
+Any police, sheriff, constabulary, border enforcement, immigration enforcement, corrections, prisons, detention, probation, parole, or any law-enforcement or carceral body, including fusion centers and any surveillance or intelligence unit serving them.
+
+(E) Surveillance and Social Control Contractors
+Any organization that builds, sells, operates, or supports surveillance, tracking, biometric identification, predictive policing, mass data collection, targeting, propaganda, censorship, or coercive social control for any entity in (A) through (D).
+
+2) License Grant (Non-Commercial, Non-Prohibited Only)
+Subject to the terms of this License, the Licensor grants you a worldwide, royalty-free, non-exclusive license to Use the Software for Non-Commercial purposes only, provided that you are NOT a Prohibited Entity and are not acting on behalf of a Prohibited Entity, and provided you comply with Sections 3 and 4.
+
+Access to Protected Artifacts is additionally conditioned under Section 4.4.
+
+2.1 Safe Harbor for Accidental Violation (Non-Prohibited Only)
+If you are not a Prohibited Entity and not acting on behalf of a Prohibited Entity, and you violate this License unintentionally, your license is reinstated if you (i) cease the violating activity promptly after discovery, (ii) remediate the violation to the extent practical, and (iii) provide written confirmation of cure upon request. This safe harbor does NOT apply to Sections 3.1 (Prohibited Entities), 3.6 (Circumvention), or 3.7 (False Attestation).
+
+3) Prohibitions (Absolute)
+You may NOT:
+
+3.1 Prohibited Entities
+Use the Software if you are a Prohibited Entity or acting on behalf of a Prohibited Entity, for any purpose, commercial or non-commercial, including research, evaluation, testing, procurement, training, deployment, or operations.
+
+3.2 Commercial Use
+Use the Software for any Commercial Use.
+
+3.3 Offering as a Service
+Offer the Software or any Derivative as a Service. Exception: a purely free public service may be permitted only with prior written permission from the Licensor.
+
+3.4 Proprietary Model Training and Closed Exploitation
+Use the Software (including prompts, corpora, artifacts, proofs, indexes, embeddings, vectors, or derived datasets) to train, fine-tune, align, or improve any proprietary or closed-access model, or any model whose outputs, weights, or access are commercially restricted.
+
+3.5 No Rights Removal
+Apply legal terms or technical measures that restrict recipients from exercising the rights granted by this License on any distributed copy of the Software or Derivative.
+
+3.6 No Circumvention of Access Controls (Protected Artifacts)
+You may NOT bypass, disable, defeat, tamper with, reverse, brute-force, or otherwise circumvent Access Controls protecting Protected Artifacts, nor assist others in doing so, nor distribute any tooling or instructions whose primary purpose is to circumvent Access Controls.
+Any such act is unlicensed and terminates all rights under this License immediately.
+
+3.7 No False Attestation
+You may NOT submit, cause to be submitted, or rely upon any Compliance Attestation that is false, misleading, incomplete in a material way, or submitted on behalf of a Prohibited Entity.
+A false Compliance Attestation is a material breach and terminates all rights under this License immediately.
+
+4) Conditions (Attribution, Share-Alike, Source, Attestation for Protected Artifacts)
+Your rights are conditioned on the following:
+
+4.1 Attribution
+You must preserve:
+(a) this LICENSE text,
+(b) copyright notices,
+(c) a NOTICE file (or equivalent) that includes at minimum:
+    - "Includes software from the agent-governance-system project by Raúl R. Romero, licensed under CCL v1.4."
+    - a list of material modifications if you distribute a Derivative.
+
+4.2 Share-Alike
+If you distribute the Software or any Derivative, you must license the entire distributed work under this same License (CCL v1.4), without additional restrictions.
+
+4.3 Source Availability on Distribution
+If you distribute a Derivative in any form, you must make the complete corresponding source of that Derivative available to recipients under this License at no charge, in a reasonable and accessible way.
+
+4.4 Protected Artifacts Access Condition (Cryptographic Handshake)
+If any portion of the Software is distributed as Protected Artifacts, then access to those Protected Artifacts (including any decryption keys, capability tokens, or equivalent key material) is granted only to recipients who provide a Compliance Attestation containing a Digital Signature to the party providing such access.
+
+If you distribute Protected Artifacts, you must:
+(a) keep Access Controls intact,
+(b) provide access (keys/tokens) only upon receipt of a Compliance Attestation that meets the Digital Signature requirement,
+(c) treat a Compliance Attestation as a required condition of access under this License.
+
+Nothing in this section obligates any person to provide access to Protected Artifacts. It defines the minimum conditions under which such access, if provided, is licensed.
+
+5) Patent Grant (Non-Commercial, Non-Prohibited Only)
+To the extent the Licensor holds patent rights that read on the Software, the Licensor grants you a non-exclusive, worldwide, royalty-free patent license solely for Non-Commercial use under this License, provided you are not a Prohibited Entity.
+If you initiate patent litigation alleging the Software infringes a patent, your patent license terminates immediately.
+
+6) No Warranty
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, AND NON-INFRINGEMENT.
+
+7) Limitation of Liability
+IN NO EVENT SHALL THE LICENSOR OR CONTRIBUTORS BE LIABLE FOR ANY CLAIM, DAMAGES, OR OTHER LIABILITY ARISING FROM OR RELATED TO THE SOFTWARE OR ITS USE.
+
+8) Termination
+Any breach of Sections 2 through 4 terminates this License immediately.
+
+9) Permissions
+Any use outside this License requires prior written permission from the Licensor.
+
+10) Miscellaneous (Governing Law; Venue)
+This License is governed by the laws of the State of California, USA, excluding its conflict of laws rules.
+Any dispute arising from or related to this License shall be brought exclusively in the state or federal courts located in Santa Clara County, California, and the parties consent to personal jurisdiction and venue there.
+If any provision is held unenforceable, the remainder remains in effect. This License is the complete agreement regarding the Software’s licensing unless the Licensor provides separate written terms.

@@ -1,0 +1,6 @@
+{
+  "topic": "mcp",
+  "extra_targets": [
+    "REPO_FIXES_TASKS.md"
+  ]
+}

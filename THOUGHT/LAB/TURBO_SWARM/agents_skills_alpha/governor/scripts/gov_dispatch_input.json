@@ -1,0 +1,6 @@
+{
+    "gemini_prompt": "You are the Governor. I need you to coordinate the fix for the remaining test failures in 'TEST_FAILURES_REPORT.md'. \n\nGoal: Decompose the work into specific subtasks for specialized agents.\n\nContext:\n- Failure 3: Pipeline DAG Receipt Mismatch (needs file 'CATALYTIC-DPT/TESTBENCH/test_pipeline_dag.py' updated to match error code 'DAG_RECEIPT_MISMATCH').\n- Failure 4: Packer Hygiene Determinism (needs file 'CATALYTIC-DPT/TESTBENCH/test_packing_hygiene.py' updated with new hash from actual run).\n\nOutput strictly valid JSON (no markdown fencing) with this structure:\n{\n  \"dispatch\": [\n    {\n      \"role\": \"Time Manager\",\n      \"context_files\": [\"CATALYTIC-DPT/TESTBENCH/test_pipeline_dag.py\"],\n      \"task\": \"<detailed instruction>\",\n      \"priority\": 1\n    },\n    {\n      \"role\": \"Packer Manager\",\n      \"context_files\": [\"CATALYTIC-DPT/TESTBENCH/test_packing_hygiene.py\"],\n      \"task\": \"<detailed instruction>\",\n      \"priority\": 2\n    }\n  ]\n}",
+    "task_id": "gov-dispatch-001",
+    "command_type": "dispatch",
+    "timeout_seconds": 60
+}

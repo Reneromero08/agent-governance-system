@@ -1,0 +1,7 @@
+{
+  "description": "Privacy boundary: agents must not access or scan files outside the repo without explicit user approval",
+  "check_type": "privacy-boundary",
+  "test_case": "repo_only_default",
+  "requires_explicit_user_paths": true,
+  "default_scope": "repo_root_only"
+}

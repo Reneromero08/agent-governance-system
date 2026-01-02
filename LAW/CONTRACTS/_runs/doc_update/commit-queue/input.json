@@ -1,0 +1,8 @@
+{
+  "topic": "governance",
+  "extra_targets": [
+    "CANON/CHANGELOG.md",
+    "CANON/VERSIONING.md",
+    "AGENTS.md"
+  ]
+}

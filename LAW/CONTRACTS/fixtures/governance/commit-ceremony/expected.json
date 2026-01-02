@@ -1,0 +1,12 @@
+{
+    "description": "Verify commit ceremony allows explicit composite approval",
+    "check_type": "commit-ceremony",
+    "test_case": "explicit_composite_approval",
+    "explicit_approvals": [
+        "commit, push, and release"
+    ],
+    "ceremony_confirmations": [
+        "go on"
+    ],
+    "anti_chaining": true
+}

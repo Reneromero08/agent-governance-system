@@ -1,0 +1,4 @@
+{
+  "test": "log_output_roots",
+  "check": "enforce_approved_log_locations"
+}

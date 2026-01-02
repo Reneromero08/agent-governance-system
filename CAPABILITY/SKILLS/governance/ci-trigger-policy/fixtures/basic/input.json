@@ -1,0 +1,4 @@
+{
+    "workflow_file": ".github/workflows/contracts.yml",
+    "check_type": "ci_trigger_policy"
+}

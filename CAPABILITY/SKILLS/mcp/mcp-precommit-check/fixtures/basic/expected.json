@@ -1,0 +1,21 @@
+{
+  "ok": true,
+  "checks": {
+    "entrypoint": {
+      "ok": true,
+      "skipped": true
+    },
+    "auto_entrypoint": {
+      "ok": true,
+      "skipped": true
+    },
+    "running": {
+      "ok": true,
+      "skipped": true
+    },
+    "autostart": {
+      "ok": true,
+      "skipped": true
+    }
+  }
+}

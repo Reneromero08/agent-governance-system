@@ -1,0 +1,8 @@
+{
+    "description": "Verify deletions require explicit instruction and confirmation",
+    "check_type": "deletion-authorization",
+    "test_case": "explicit_delete_with_confirmation",
+    "explicit_instruction": "delete authored content",
+    "confirmation_required": true,
+    "canon_archiving_required": true
+}

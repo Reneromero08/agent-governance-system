@@ -1,0 +1,16 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Skill Manifest",
+  "type": "object",
+  "properties": {
+    "Version": { "type": "string" },
+    "Status": { "type": "string" },
+    "required_canon_version": { "type": "string" },
+    "Trigger": { "type": "string" },
+    "Inputs": { "type": "string" },
+    "Outputs": { "type": "string" },
+    "Constraints": { "type": "string" }
+  },
+  "required": ["Version", "Status", "required_canon_version"],
+  "additionalProperties": true
+}

@@ -1,0 +1,688 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS MCP Tools Schema",
+    "description": "JSON Schema definitions for AGS MCP server tools",
+    "definitions": {
+        "cortex_query": {
+            "name": "cortex_query",
+            "description": "Query the AGS Cortex index to find files by content, path, or entity type",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query (matches path, content, or entity names)"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "file",
+                            "entity",
+                            "all"
+                        ],
+                        "default": "all",
+                        "description": "Filter by entry type"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Maximum results to return"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "context_search": {
+            "name": "context_search",
+            "description": "Search AGS context records (ADRs, preferences, rejected, open)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Text search in titles and content"
+                    },
+                    "tags": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        },
+                        "description": "Filter by tags"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "accepted",
+                            "proposed",
+                            "deprecated",
+                            "rejected",
+                            "active",
+                            "experimental"
+                        ],
+                        "description": "Filter by status"
+                    },
+                    "type": {
+                        "type": "string",
+                        "enum": [
+                            "decisions",
+                            "preferences",
+                            "rejected",
+                            "open"
+                        ],
+                        "description": "Filter by record type"
+                    }
+                }
+            }
+        },
+        "context_review": {
+            "name": "context_review",
+            "description": "Check for overdue or upcoming ADR reviews",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "days": {
+                        "type": "integer",
+                        "default": 30,
+                        "description": "Flag reviews due within N days"
+                    }
+                }
+            }
+        },
+        "skill_run": {
+            "name": "skill_run",
+            "description": "Execute an AGS skill with the given input",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "skill": {
+                        "type": "string",
+                        "description": "Name of the skill to run (e.g., 'pack-validate')"
+                    },
+                    "input": {
+                        "type": "object",
+                        "description": "Input payload for the skill"
+                    }
+                },
+                "required": [
+                    "skill",
+                    "input"
+                ]
+            }
+        },
+        "pack_validate": {
+            "name": "pack_validate",
+            "description": "Validate a memory pack for completeness and integrity",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "pack_path": {
+                        "type": "string",
+                        "description": "Path to the pack directory"
+                    }
+                },
+                "required": [
+                    "pack_path"
+                ]
+            }
+        },
+        "terminal_bridge": {
+            "name": "terminal_bridge",
+            "description": "Execute a command via the local terminal bridge (PowerShell HTTP bridge)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "command": {
+                        "type": "string",
+                        "description": "Command to execute via the bridge"
+                    },
+                    "cwd": {
+                        "type": "string",
+                        "description": "Optional working directory"
+                    },
+                    "timeout_seconds": {
+                        "type": "integer",
+                        "default": 30,
+                        "description": "Timeout for the bridge request in seconds"
+                    }
+                },
+                "required": [
+                    "command"
+                ]
+            }
+        },
+        "canon_read": {
+            "name": "canon_read",
+            "description": "Read a canon file (CONTRACT, INVARIANTS, VERSIONING, etc.)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "file": {
+                        "type": "string",
+                        "enum": [
+                            "CONTRACT",
+                            "INVARIANTS",
+                            "VERSIONING",
+                            "GENESIS",
+                            "ARBITRATION",
+                            "DEPRECATION",
+                            "MIGRATION",
+                            "GLOSSARY",
+                            "CHANGELOG"
+                        ],
+                        "description": "Name of the canon file to read"
+                    }
+                },
+                "required": [
+                    "file"
+                ]
+            }
+        },
+        "critic_run": {
+            "name": "critic_run",
+            "description": "Run TOOLS/critic.py to verify governance compliance before making changes",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "adr_create": {
+            "name": "adr_create",
+            "description": "Create a new Architecture Decision Record with auto-numbering and template",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "type": "string",
+                        "description": "Title of the ADR (e.g., 'Use SQLite for Cortex')"
+                    },
+                    "context": {
+                        "type": "string",
+                        "description": "Optional context/problem description"
+                    },
+                    "decision": {
+                        "type": "string",
+                        "description": "Optional decision text"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "proposed",
+                            "accepted",
+                            "deprecated",
+                            "superseded"
+                        ],
+                        "default": "proposed",
+                        "description": "Status of the ADR"
+                    }
+                },
+                "required": [
+                    "title"
+                ]
+            }
+        },
+        "commit_ceremony": {
+            "name": "commit_ceremony",
+            "description": "Run failsafe checks and return ceremony checklist with staged files",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "codebook_lookup": {
+            "name": "codebook_lookup",
+            "description": "Look up codebook entries by ID (e.g., @C0, @I3, @S7) or list all entries",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "Codebook ID to look up (e.g., @C0, @I3)"
+                    },
+                    "expand": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If true, return full source content instead of summary"
+                    },
+                    "list": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "If true, list all codebook entries"
+                    }
+                }
+            }
+        },
+        "research_cache": {
+            "name": "research_cache",
+            "description": "Access and manage the persistent research cache to avoid redundant browsing",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "action": {
+                        "type": "string",
+                        "enum": [
+                            "lookup",
+                            "save",
+                            "list",
+                            "clear"
+                        ],
+                        "description": "Action to perform"
+                    },
+                    "url": {
+                        "type": "string",
+                        "description": "URL to look up or save"
+                    },
+                    "summary": {
+                        "type": "string",
+                        "description": "Summary content to save"
+                    },
+                    "tags": {
+                        "type": "string",
+                        "description": "Comma-separated tags for the saved entry"
+                    },
+                    "filter": {
+                        "type": "string",
+                        "description": "Tag filter for listing"
+                    }
+                },
+                "required": [
+                    "action"
+                ]
+            }
+        },
+        "message_board_list": {
+            "name": "message_board_list",
+            "description": "List messages from the MCP message board",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "board": {
+                        "type": "string",
+                        "default": "default",
+                        "description": "Board name"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Maximum messages to return"
+                    },
+                    "include_deleted": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Include deleted messages"
+                    },
+                    "pinned_first": {
+                        "type": "boolean",
+                        "default": true,
+                        "description": "Sort pinned messages first"
+                    }
+                }
+            }
+        },
+        "message_board_write": {
+            "name": "message_board_write",
+            "description": "Write to the MCP message board (post, pin, unpin, delete, purge)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "board": {
+                        "type": "string",
+                        "default": "default",
+                        "description": "Board name"
+                    },
+                    "action": {
+                        "type": "string",
+                        "enum": [
+                            "post",
+                            "pin",
+                            "unpin",
+                            "delete",
+                            "purge"
+                        ],
+                        "description": "Message board action"
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "Message text (required for post)"
+                    },
+                    "ref_id": {
+                        "type": "string",
+                        "description": "Target message id (required for pin/unpin/delete)"
+                    }
+                },
+                "required": [
+                    "action"
+                ]
+            }
+        },
+        "agent_inbox_list": {
+            "name": "agent_inbox_list",
+            "description": "List tasks from the agent inbox",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "pending",
+                            "active",
+                            "completed",
+                            "failed"
+                        ],
+                        "default": "pending",
+                        "description": "Filter by task status"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 20,
+                        "description": "Maximum tasks to return"
+                    }
+                }
+            }
+        },
+        "agent_inbox_claim": {
+            "name": "agent_inbox_claim",
+            "description": "Claim a pending task from the inbox",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "type": "string",
+                        "description": "ID of the task to claim"
+                    },
+                    "agent_id": {
+                        "type": "string",
+                        "description": "ID of the agent claiming the task"
+                    }
+                },
+                "required": [
+                    "task_id",
+                    "agent_id"
+                ]
+            }
+        },
+        "agent_inbox_finalize": {
+            "name": "agent_inbox_finalize",
+            "description": "Finalize an active task with result and status",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "task_id": {
+                        "type": "string",
+                        "description": "ID of the task to finalize"
+                    },
+                    "status": {
+                        "type": "string",
+                        "enum": [
+                            "completed",
+                            "failed"
+                        ],
+                        "description": "Final status of the task"
+                    },
+                    "result": {
+                        "type": "string",
+                        "description": "Technical summary of the result"
+                    }
+                },
+                "required": [
+                    "task_id",
+                    "status"
+                ]
+            }
+        },
+        "session_info": {
+            "name": "session_info",
+            "description": "Get information about the current MCP session including session_id for ADR-021 compliance",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "include_audit_log": {
+                        "type": "boolean",
+                        "default": false,
+                        "description": "Include recent audit log entries for this session"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum audit log entries to include"
+                    }
+                }
+            }
+        },
+        "semantic_search": {
+            "name": "semantic_search",
+            "description": "Semantic search using vector embeddings (96% token savings)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query for semantic similarity"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum results to return"
+                    },
+                    "min_similarity": {
+                        "type": "number",
+                        "default": 0.0,
+                        "description": "Minimum similarity threshold (0.0-1.0)"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "cassette_network_query": {
+            "name": "cassette_network_query",
+            "description": "Query the cassette network for distributed semantic search",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Search query"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Maximum results per cassette"
+                    },
+                    "capability": {
+                        "type": "string",
+                        "description": "Filter by cassette capability (e.g., 'vectors', 'fts')"
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
+        "semantic_stats": {
+            "name": "semantic_stats",
+            "description": "Get statistics about semantic embeddings and cassette network",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "test_primitives": {
+            "name": "test_primitives",
+            "description": "Test CAT LAB safe primitives (file locking, atomic ops, validation)",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        },
+        "terminal_register": {
+            "name": "terminal_register",
+            "description": "Register a shared terminal for bidirectional visibility between human and AI",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Unique identifier for the terminal (auto-generated if omitted)"
+                    },
+                    "owner": {
+                        "type": "string",
+                        "description": "Who owns this terminal (e.g., 'human', 'antigravity')"
+                    },
+                    "cwd": {
+                        "type": "string",
+                        "description": "Current working directory"
+                    }
+                }
+            }
+        },
+        "terminal_log": {
+            "name": "terminal_log",
+            "description": "Log a command executed in a shared terminal",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Terminal session ID"
+                    },
+                    "command": {
+                        "type": "string",
+                        "description": "The command that was executed"
+                    },
+                    "executor": {
+                        "type": "string",
+                        "description": "Who executed it (e.g., 'human', 'antigravity')"
+                    },
+                    "output": {
+                        "type": "string",
+                        "description": "Command output (optional)"
+                    },
+                    "exit_code": {
+                        "type": "integer",
+                        "description": "Exit code (optional)"
+                    }
+                },
+                "required": [
+                    "terminal_id",
+                    "command"
+                ]
+            }
+        },
+        "terminal_get": {
+            "name": "terminal_get",
+            "description": "Get commands from a shared terminal",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "terminal_id": {
+                        "type": "string",
+                        "description": "Terminal session ID"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 50,
+                        "description": "Maximum commands to return"
+                    },
+                    "since": {
+                        "type": "string",
+                        "description": "ISO timestamp - only return commands after this time"
+                    }
+                },
+                "required": [
+                    "terminal_id"
+                ]
+            }
+        },
+        "terminal_list": {
+            "name": "terminal_list",
+            "description": "List all registered shared terminals",
+            "inputSchema": {
+                "type": "object",
+                "properties": {}
+            }
+        }
+    },
+    "tools": [
+        {
+            "$ref": "#/definitions/cortex_query"
+        },
+        {
+            "$ref": "#/definitions/context_search"
+        },
+        {
+            "$ref": "#/definitions/context_review"
+        },
+        {
+            "$ref": "#/definitions/semantic_search"
+        },
+        {
+            "$ref": "#/definitions/cassette_network_query"
+        },
+        {
+            "$ref": "#/definitions/semantic_stats"
+        },
+        {
+            "$ref": "#/definitions/skill_run"
+        },
+        {
+            "$ref": "#/definitions/pack_validate"
+        },
+        {
+            "$ref": "#/definitions/terminal_bridge"
+        },
+        {
+            "$ref": "#/definitions/canon_read"
+        },
+        {
+            "$ref": "#/definitions/critic_run"
+        },
+        {
+            "$ref": "#/definitions/adr_create"
+        },
+        {
+            "$ref": "#/definitions/commit_ceremony"
+        },
+        {
+            "$ref": "#/definitions/codebook_lookup"
+        },
+        {
+            "$ref": "#/definitions/research_cache"
+        },
+        {
+            "$ref": "#/definitions/message_board_list"
+        },
+        {
+            "$ref": "#/definitions/message_board_write"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_list"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_claim"
+        },
+        {
+            "$ref": "#/definitions/agent_inbox_finalize"
+        },
+        {
+            "$ref": "#/definitions/session_info"
+        },
+        {
+            "$ref": "#/definitions/test_primitives"
+        },
+        {
+            "$ref": "#/definitions/terminal_register"
+        },
+        {
+            "$ref": "#/definitions/terminal_log"
+        },
+        {
+            "$ref": "#/definitions/terminal_get"
+        },
+        {
+            "$ref": "#/definitions/terminal_list"
+        }
+    ]
+}

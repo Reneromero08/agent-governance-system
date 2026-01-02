@@ -1,0 +1,4 @@
+{
+    "description": "Test pack-validate with non-existent pack",
+    "pack_path": ""
+}

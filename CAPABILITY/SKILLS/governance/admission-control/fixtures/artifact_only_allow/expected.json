@@ -1,0 +1,15 @@
+{
+  "rc": 0,
+  "result": {
+    "normalized_paths": {
+      "read": [],
+      "write": [
+        "LAW/CONTRACTS/_runs/admit-ok.json"
+      ]
+    },
+    "policy_version": "1",
+    "reasons": [],
+    "verdict": "ALLOW"
+  }
+}
+

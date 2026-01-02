@@ -1,0 +1,52 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS Style Schema",
+    "description": "Validation schema for AGS Preference/Style records (Markdown metadata)",
+    "type": "object",
+    "properties": {
+        "style": {
+            "type": "string",
+            "pattern": "^STYLE-\\d{3}$",
+            "description": "The Style ID (e.g., STYLE-001)"
+        },
+        "category": {
+            "type": "string",
+            "enum": [
+                "Workflow",
+                "Formatting",
+                "Safety",
+                "Governance",
+                "Economics"
+            ],
+            "description": "The category of the preference"
+        },
+        "status": {
+            "type": "string",
+            "enum": [
+                "Active",
+                "Experimental",
+                "Deprecated"
+            ],
+            "description": "The current status of the preference"
+        },
+        "scope": {
+            "type": "string",
+            "description": "The scope of application (e.g., 'Repository-wide', 'Skills only')"
+        },
+        "enforcement": {
+            "type": "string",
+            "enum": [
+                "Strict",
+                "Advisory",
+                "Manual"
+            ],
+            "description": "How the preference is enforced"
+        }
+    },
+    "required": [
+        "category",
+        "status",
+        "scope",
+        "enforcement"
+    ]
+}

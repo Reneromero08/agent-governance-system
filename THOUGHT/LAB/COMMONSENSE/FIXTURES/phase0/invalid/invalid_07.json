@@ -1,0 +1,17 @@
+{
+  "confidence": 0.5,
+  "id": "LR_BAD_RULE",
+  "kind": "logic_rule",
+  "rule": {
+    "if_all": [
+      "a"
+    ]
+  },
+  "scope": {
+    "applies_when": [
+      "x"
+    ]
+  },
+  "statement": "x",
+  "version": "0.1.0"
+}

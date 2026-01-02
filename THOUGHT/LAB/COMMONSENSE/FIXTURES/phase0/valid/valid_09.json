@@ -1,0 +1,27 @@
+{
+  "confidence": 0.92,
+  "id": "LR_DONT_APPLY_IF_VETO",
+  "kind": "logic_rule",
+  "rule": {
+    "if_all": [
+      "candidate:present",
+      "candidate.not_when:match"
+    ],
+    "then": [
+      {
+        "op": "emit",
+        "path": "resolver.skips[]",
+        "value": {
+          "reason": "veto"
+        }
+      }
+    ]
+  },
+  "scope": {
+    "applies_when": [
+      "domain:resolver"
+    ]
+  },
+  "statement": "If any not_when predicate matches, do not apply the entry.",
+  "version": "0.1.0"
+}

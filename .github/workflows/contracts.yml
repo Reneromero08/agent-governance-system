@@ -1,0 +1,148 @@
+name: Contracts
+
+on:
+  pull_request:
+    branches: [main]
+  push:
+    branches: [main]
+
+jobs:
+  governance:
+    name: Governance Checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 2  # Need history for diff checks
+      
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+      
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -r requirements.txt
+          python -m pip install pytest cryptography referencing
+      
+      - name: Test query module (pre-build gate)
+        run: python NAVIGATION/CORTEX/tests/test_query.py
+      
+      - name: Build cortex index
+        run: python NAVIGATION/CORTEX/db/cortex.build.py
+      
+      - name: Build system1 index
+        run: python NAVIGATION/CORTEX/db/reset_system1.py
+      
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      
+      - name: Run canon governance checks
+        run: node CAPABILITY/TOOLS/check-canon-governance.js
+      
+      - name: Run critic checks
+        run: python CAPABILITY/TOOLS/governance/critic.py
+
+      - name: Lint tokens
+        run: python CAPABILITY/TOOLS/utilities/lint_tokens.py
+
+      - name: Run contract fixtures
+        run: python LAW/CONTRACTS/runner.py
+
+      - name: Run pytest (bounded temp, no capture)
+        env:
+          TMPDIR: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
+          TEMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
+          TMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
+        run: |
+          mkdir -p "$TMPDIR"
+          python -m pytest -q -s --ignore=MEMORY/LLM_PACKER/_packs --ignore=CATALYTIC-DPT/LAB
+
+      - name: CI strict verification (SPECTRUM-05)
+        env:
+          CI: "true"
+        run: |
+          python - <<'PY'
+          import json
+          import hashlib
+          import subprocess
+          from pathlib import Path
+          
+          from cryptography.hazmat.primitives.asymmetric import ed25519
+          from cryptography.hazmat.primitives import serialization
+          
+          repo_root = Path.cwd()
+          run_id = "ci-strict-bundle"
+          run_dir = repo_root / "LAW" / "CONTRACTS" / "_runs" / run_id
+          run_dir.mkdir(parents=True, exist_ok=True)
+          
+          # Deterministic output file within allowed roots.
+          output_rel = "NAVIGATION/CORTEX/_generated/ci_strict_output.txt"
+          output_abs = repo_root / output_rel
+          output_abs.parent.mkdir(parents=True, exist_ok=True)
+          output_bytes = b"ci-strict"
+          output_abs.write_bytes(output_bytes)
+          
+          def canonical(obj) -> bytes:
+            return json.dumps(obj, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+          
+          task_spec = {"task_id": run_id, "outputs": {"durable_paths": [output_rel]}}
+          task_spec_bytes = json.dumps(task_spec, indent=2).encode("utf-8")
+          (run_dir / "TASK_SPEC.json").write_bytes(task_spec_bytes)
+          
+          status = {"status": "success", "cmp01": "pass", "run_id": run_id}
+          (run_dir / "STATUS.json").write_text(json.dumps(status, indent=2))
+          
+          output_hashes = {
+            "validator_semver": "1.0.0",
+            "validator_build_id": "ci",
+            "hashes": {output_rel: "sha256:" + hashlib.sha256(output_bytes).hexdigest()},
+          }
+          (run_dir / "OUTPUT_HASHES.json").write_text(json.dumps(output_hashes, indent=2))
+          
+          proof = {"restoration_result": {"verified": True, "condition": "RESTORED_IDENTICAL"}}
+          (run_dir / "PROOF.json").write_text(json.dumps(proof, indent=2))
+          
+          # SPECTRUM-04 identity + signing artifacts.
+          private_key = ed25519.Ed25519PrivateKey.generate()
+          public_key = private_key.public_key()
+          public_key_bytes = public_key.public_bytes(
+            encoding=serialization.Encoding.Raw,
+            format=serialization.PublicFormat.Raw,
+          )
+          public_key_hex = public_key_bytes.hex()
+          validator_id = hashlib.sha256(public_key_bytes).hexdigest()
+          
+          identity = {"algorithm": "ed25519", "public_key": public_key_hex, "validator_id": validator_id}
+          (run_dir / "VALIDATOR_IDENTITY.json").write_text(json.dumps(identity, indent=2))
+          
+          task_spec_hash = hashlib.sha256(task_spec_bytes).hexdigest()
+          bundle_preimage = {"output_hashes": output_hashes["hashes"], "status": status, "task_spec_hash": task_spec_hash}
+          bundle_root = hashlib.sha256(canonical(bundle_preimage)).hexdigest()
+          
+          signed_payload = {"bundle_root": bundle_root, "decision": "ACCEPT", "validator_id": validator_id}
+          (run_dir / "SIGNED_PAYLOAD.json").write_text(json.dumps(signed_payload, indent=2))
+          
+          signature_message = b"CAT-DPT-SPECTRUM-04-v1:BUNDLE:" + canonical(signed_payload)
+          signature = private_key.sign(signature_message).hex()
+          sig_obj = {"payload_type": "BUNDLE", "signature": signature, "validator_id": validator_id}
+          (run_dir / "SIGNATURE.json").write_text(json.dumps(sig_obj, indent=2))
+          
+          # Verify with strict mode (CI requires --strict).
+          cmd = ["python", "CAPABILITY/TOOLS/catalytic/catalytic_verifier.py", "--run-dir", str(run_dir), "--strict", "--json"]
+          res = subprocess.run(cmd, cwd=str(repo_root), capture_output=True, text=True)
+          if res.returncode != 0:
+            raise SystemExit(f"strict verifier failed: rc={res.returncode}\\nstdout={res.stdout}\\nstderr={res.stderr}")
+          report = json.loads(res.stdout)
+          if not report.get("ok"):
+            raise SystemExit(f"strict verifier reported ok=false: {report}")
+          PY
+      
+      - name: Run artifact escape hatch
+        run: |
+          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/run.py CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/input.json LAW/CONTRACTS/_runs/escape-check.json
+          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/validate.py LAW/CONTRACTS/_runs/escape-check.json CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/expected.json

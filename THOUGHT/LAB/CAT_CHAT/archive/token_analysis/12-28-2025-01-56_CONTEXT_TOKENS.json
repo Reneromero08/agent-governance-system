@@ -1,0 +1,430 @@
+{
+  "files": [
+    {
+      "original": 3750,
+      "compressed": 3779,
+      "savings": -29,
+      "percent": -0.77,
+      "path": "CONTEXT\\archive\\planning\\AGS_3.0_COMPLETED.md"
+    },
+    {
+      "original": 2231,
+      "compressed": 2262,
+      "savings": -31,
+      "percent": -1.39,
+      "path": "CONTEXT\\archive\\planning\\AGS_3.0_ROADMAP.md"
+    },
+    {
+      "original": 3225,
+      "compressed": 3268,
+      "savings": -43,
+      "percent": -1.33,
+      "path": "CONTEXT\\archive\\planning\\AGS_MASTER_TODO-2025-12-21.md"
+    },
+    {
+      "original": 86,
+      "compressed": 86,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "CONTEXT\\archive\\planning\\INDEX.md"
+    },
+    {
+      "original": 1193,
+      "compressed": 1181,
+      "savings": 12,
+      "percent": 1.01,
+      "path": "CONTEXT\\archive\\planning\\REPO_FIXES_TASKS.md"
+    },
+    {
+      "original": 765,
+      "compressed": 781,
+      "savings": -16,
+      "percent": -2.09,
+      "path": "CONTEXT\\archive\\planning\\ROADMAP-2025-12-21.md"
+    },
+    {
+      "original": 211,
+      "compressed": 216,
+      "savings": -5,
+      "percent": -2.37,
+      "path": "CONTEXT\\decisions\\ADR-000-template.md"
+    },
+    {
+      "original": 407,
+      "compressed": 409,
+      "savings": -2,
+      "percent": -0.49,
+      "path": "CONTEXT\\decisions\\ADR-001-build-and-artifacts.md"
+    },
+    {
+      "original": 389,
+      "compressed": 394,
+      "savings": -5,
+      "percent": -1.29,
+      "path": "CONTEXT\\decisions\\ADR-002-llm-packs-under-llm-packer.md"
+    },
+    {
+      "original": 317,
+      "compressed": 321,
+      "savings": -4,
+      "percent": -1.26,
+      "path": "CONTEXT\\decisions\\ADR-003-transition-to-llm-packer-underscore.md"
+    },
+    {
+      "original": 552,
+      "compressed": 562,
+      "savings": -10,
+      "percent": -1.81,
+      "path": "CONTEXT\\decisions\\ADR-004-mcp-integration.md"
+    },
+    {
+      "original": 390,
+      "compressed": 395,
+      "savings": -5,
+      "percent": -1.28,
+      "path": "CONTEXT\\decisions\\ADR-005-persistent-research-cache.md"
+    },
+    {
+      "original": 653,
+      "compressed": 665,
+      "savings": -12,
+      "percent": -1.84,
+      "path": "CONTEXT\\decisions\\ADR-006-governance-schemas.md"
+    },
+    {
+      "original": 474,
+      "compressed": 478,
+      "savings": -4,
+      "percent": -0.84,
+      "path": "CONTEXT\\decisions\\ADR-007-constitutional-agreement.md"
+    },
+    {
+      "original": 423,
+      "compressed": 431,
+      "savings": -8,
+      "percent": -1.89,
+      "path": "CONTEXT\\decisions\\ADR-008-composite-commit-approval.md"
+    },
+    {
+      "original": 272,
+      "compressed": 272,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "CONTEXT\\decisions\\ADR-010-authorized-deletions.md"
+    },
+    {
+      "original": 464,
+      "compressed": 472,
+      "savings": -8,
+      "percent": -1.72,
+      "path": "CONTEXT\\decisions\\ADR-011-master-override.md"
+    },
+    {
+      "original": 438,
+      "compressed": 446,
+      "savings": -8,
+      "percent": -1.83,
+      "path": "CONTEXT\\decisions\\ADR-012-privacy-boundary.md"
+    },
+    {
+      "original": 541,
+      "compressed": 554,
+      "savings": -13,
+      "percent": -2.4,
+      "path": "CONTEXT\\decisions\\ADR-013-llm-packer-lite-split-lite.md"
+    },
+    {
+      "original": 632,
+      "compressed": 644,
+      "savings": -12,
+      "percent": -1.9,
+      "path": "CONTEXT\\decisions\\ADR-014-cortex-section-index-and-cli.md"
+    },
+    {
+      "original": 947,
+      "compressed": 947,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "CONTEXT\\decisions\\ADR-015-logging-output-roots.md"
+    },
+    {
+      "original": 440,
+      "compressed": 449,
+      "savings": -9,
+      "percent": -2.05,
+      "path": "CONTEXT\\decisions\\ADR-016-context-edit-authority.md"
+    },
+    {
+      "original": 477,
+      "compressed": 503,
+      "savings": -26,
+      "percent": -5.45,
+      "path": "CONTEXT\\decisions\\ADR-017-skill-formalization.md"
+    },
+    {
+      "original": 511,
+      "compressed": 510,
+      "savings": 1,
+      "percent": 0.2,
+      "path": "CONTEXT\\decisions\\ADR-018-catalytic-computing-canonical-note.md"
+    },
+    {
+      "original": 458,
+      "compressed": 459,
+      "savings": -1,
+      "percent": -0.22,
+      "path": "CONTEXT\\decisions\\ADR-019-preflight-freshness-gate.md"
+    },
+    {
+      "original": 539,
+      "compressed": 540,
+      "savings": -1,
+      "percent": -0.19,
+      "path": "CONTEXT\\decisions\\ADR-020-admission-control-gate.md"
+    },
+    {
+      "original": 359,
+      "compressed": 362,
+      "savings": -3,
+      "percent": -0.84,
+      "path": "CONTEXT\\decisions\\ADR-021-mandatory-agent-identity.md"
+    },
+    {
+      "original": 825,
+      "compressed": 857,
+      "savings": -32,
+      "percent": -3.88,
+      "path": "CONTEXT\\decisions\\ADR-022-why-flash-bypassed-the-law.md"
+    },
+    {
+      "original": 465,
+      "compressed": 475,
+      "savings": -10,
+      "percent": -2.15,
+      "path": "CONTEXT\\decisions\\ADR-023-capability-revocation-semantics.md"
+    },
+    {
+      "original": 739,
+      "compressed": 754,
+      "savings": -15,
+      "percent": -2.03,
+      "path": "CONTEXT\\decisions\\ADR-023-router-model-trust-boundary.md"
+    },
+    {
+      "original": 1035,
+      "compressed": 1051,
+      "savings": -16,
+      "percent": -1.55,
+      "path": "CONTEXT\\decisions\\ADR-024-capability-versioning-immutability.md"
+    },
+    {
+      "original": 388,
+      "compressed": 396,
+      "savings": -8,
+      "percent": -2.06,
+      "path": "CONTEXT\\decisions\\ADR-024-mcp-message-board.md"
+    },
+    {
+      "original": 387,
+      "compressed": 376,
+      "savings": 11,
+      "percent": 2.84,
+      "path": "CONTEXT\\decisions\\ADR-025-antigravity-bridge-invariant.md"
+    },
+    {
+      "original": 483,
+      "compressed": 478,
+      "savings": 5,
+      "percent": 1.04,
+      "path": "CONTEXT\\decisions\\ADR-\u221e-living-formula.md"
+    },
+    {
+      "original": 396,
+      "compressed": 399,
+      "savings": -3,
+      "percent": -0.76,
+      "path": "CONTEXT\\feedback\\formula_drive_session_1.md"
+    },
+    {
+      "original": 453,
+      "compressed": 453,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "CONTEXT\\guides\\EXTENDING.md"
+    },
+    {
+      "original": 555,
+      "compressed": 568,
+      "savings": -13,
+      "percent": -2.34,
+      "path": "CONTEXT\\guides\\SHIPPING.md"
+    },
+    {
+      "original": 436,
+      "compressed": 441,
+      "savings": -5,
+      "percent": -1.15,
+      "path": "CONTEXT\\guides\\TESTING.md"
+    },
+    {
+      "original": 196,
+      "compressed": 202,
+      "savings": -6,
+      "percent": -3.06,
+      "path": "CONTEXT\\INDEX.md"
+    },
+    {
+      "original": 111,
+      "compressed": 116,
+      "savings": -5,
+      "percent": -4.5,
+      "path": "CONTEXT\\open\\OPEN-000-template.md"
+    },
+    {
+      "original": 108,
+      "compressed": 112,
+      "savings": -4,
+      "percent": -3.7,
+      "path": "CONTEXT\\preferences\\STYLE-000-template.md"
+    },
+    {
+      "original": 660,
+      "compressed": 682,
+      "savings": -22,
+      "percent": -3.33,
+      "path": "CONTEXT\\preferences\\STYLE-001-commit-ceremony.md"
+    },
+    {
+      "original": 262,
+      "compressed": 268,
+      "savings": -6,
+      "percent": -2.29,
+      "path": "CONTEXT\\preferences\\STYLE-002-engineering-integrity.md"
+    },
+    {
+      "original": 310,
+      "compressed": 311,
+      "savings": -1,
+      "percent": -0.32,
+      "path": "CONTEXT\\preferences\\STYLE-003-mandatory-changelog-sync.md"
+    },
+    {
+      "original": 329,
+      "compressed": 328,
+      "savings": 1,
+      "percent": 0.3,
+      "path": "CONTEXT\\preferences\\STYLE-004-adr-first-design-gate.md"
+    },
+    {
+      "original": 2238,
+      "compressed": 2249,
+      "savings": -11,
+      "percent": -0.49,
+      "path": "CONTEXT\\query-context.py"
+    },
+    {
+      "original": 195,
+      "compressed": 197,
+      "savings": -2,
+      "percent": -1.03,
+      "path": "CONTEXT\\README.md"
+    },
+    {
+      "original": 114,
+      "compressed": 117,
+      "savings": -3,
+      "percent": -2.63,
+      "path": "CONTEXT\\rejected\\REJECT-000-template.md"
+    },
+    {
+      "original": 937,
+      "compressed": 949,
+      "savings": -12,
+      "percent": -1.28,
+      "path": "CONTEXT\\research\\chats\\AGS Claude Sonnet 4.5 Suggestions.md"
+    },
+    {
+      "original": 460,
+      "compressed": 464,
+      "savings": -4,
+      "percent": -0.87,
+      "path": "CONTEXT\\research\\chats\\Functional Sentience.md"
+    },
+    {
+      "original": 3256,
+      "compressed": 3238,
+      "savings": 18,
+      "percent": 0.55,
+      "path": "CONTEXT\\research\\chats\\GPT 5.2 Lexic OS.md"
+    },
+    {
+      "original": 12033,
+      "compressed": 11938,
+      "savings": 95,
+      "percent": 0.79,
+      "path": "CONTEXT\\research\\chats\\Sonnet 4.5 Lexic OS.md"
+    },
+    {
+      "original": 2815,
+      "compressed": 2839,
+      "savings": -24,
+      "percent": -0.85,
+      "path": "CONTEXT\\research\\chats\\\u2665 Symbolic Compression Brief_1.md"
+    },
+    {
+      "original": 351,
+      "compressed": 355,
+      "savings": -4,
+      "percent": -1.14,
+      "path": "CONTEXT\\research\\chats\\\u2665 Symbolic Compression.md"
+    },
+    {
+      "original": 1473,
+      "compressed": 1505,
+      "savings": -32,
+      "percent": -2.17,
+      "path": "CONTEXT\\research\\chats\\\u2665 \u2665 GPT 5.2 Thinking Chat Merge_1_2.md"
+    },
+    {
+      "original": 1958,
+      "compressed": 2006,
+      "savings": -48,
+      "percent": -2.45,
+      "path": "CONTEXT\\research\\chats\\\u2665 \u2665 GPT 5.2 Thinking Deep Research Merge_1_2.md"
+    },
+    {
+      "original": 2103,
+      "compressed": 2137,
+      "savings": -34,
+      "percent": -1.62,
+      "path": "CONTEXT\\research\\chats\\\u2665 \u2665 GPT 5.2 Thinking Master Merged Edits v2 (Checklist + Why).md"
+    },
+    {
+      "original": 136,
+      "compressed": 144,
+      "savings": -8,
+      "percent": -5.88,
+      "path": "CONTEXT\\research\\INDEX.md"
+    },
+    {
+      "original": 1933,
+      "compressed": 1954,
+      "savings": -21,
+      "percent": -1.09,
+      "path": "CONTEXT\\research\\iterations\\2025-12-23-system1-system2-dual-db.md"
+    },
+    {
+      "original": 231,
+      "compressed": 236,
+      "savings": -5,
+      "percent": -2.16,
+      "path": "CONTEXT\\research\\README.md"
+    }
+  ],
+  "total": {
+    "original": 59515,
+    "compressed": 59981,
+    "savings": -466,
+    "percent": -0.78
+  }
+}

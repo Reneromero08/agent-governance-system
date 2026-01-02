@@ -1,0 +1,23 @@
+#!/bin/sh
+set -e
+
+# Cross-platform Python detection
+if python3 --version >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif python --version >/dev/null 2>&1; then
+    PYTHON_CMD="python"
+else
+    echo "[PRE-COMMIT] ERROR: No Python found"
+    exit 1
+fi
+
+echo "[PRE-COMMIT] Running preflight..."
+$PYTHON_CMD CAPABILITY/TOOLS/ags.py preflight --allow-dirty-tracked
+
+echo "[PRE-COMMIT] Running canon governance check..."
+node CAPABILITY/TOOLS/check-canon-governance.js
+
+echo "[PRE-COMMIT] Running INBOX policy check..."
+$PYTHON_CMD CAPABILITY/TOOLS/governance/check_inbox_policy.py
+
+echo "[PRE-COMMIT] OK"

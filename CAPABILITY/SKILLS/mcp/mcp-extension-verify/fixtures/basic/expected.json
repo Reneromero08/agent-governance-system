@@ -1,0 +1,13 @@
+{
+  "ok": true,
+  "returncode": 0,
+  "entrypoint": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
+  "args": ["--test"],
+  "client": "generic",
+  "instructions": [
+    "Restart or reload the MCP client/extension to pick up config changes.",
+    "Verify the MCP server command/args point at the expected entrypoint.",
+    "Check client logs for successful initialize/tools/list responses.",
+    "If tools are missing, restart again and re-check the config."
+  ]
+}

@@ -1,0 +1,91 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "title": "AGS MCP Resources Schema",
+    "description": "JSON Schema definitions for AGS MCP server resources",
+    "resources": [
+        {
+            "uri": "ags://canon/contract",
+            "name": "Canon Contract",
+            "description": "The supreme authority document defining non-negotiable rules",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/invariants",
+            "name": "Canon Invariants",
+            "description": "Locked decisions that require ceremony to change",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/genesis",
+            "name": "Genesis Prompt",
+            "description": "Bootstrap prompt for session initialization",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/versioning",
+            "name": "Canon Versioning",
+            "description": "Version policy and compatibility rules",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/arbitration",
+            "name": "Canon Arbitration",
+            "description": "Conflict resolution policy",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/deprecation",
+            "name": "Canon Deprecation",
+            "description": "Deprecation windows and ceremonies",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://canon/migration",
+            "name": "Canon Migration",
+            "description": "Formal compatibility break ritual",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://context/decisions",
+            "name": "Context Decisions",
+            "description": "List of all Architecture Decision Records (ADRs)",
+            "mimeType": "application/json"
+        },
+        {
+            "uri": "ags://context/preferences",
+            "name": "Context Preferences",
+            "description": "List of all STYLE preference records",
+            "mimeType": "application/json"
+        },
+        {
+            "uri": "ags://context/rejected",
+            "name": "Context Rejected",
+            "description": "List of rejected approaches",
+            "mimeType": "application/json"
+        },
+        {
+            "uri": "ags://context/open",
+            "name": "Context Open",
+            "description": "List of open questions and conflicts",
+            "mimeType": "application/json"
+        },
+        {
+            "uri": "ags://cortex/index",
+            "name": "Cortex Index",
+            "description": "Full file and entity index from the Cortex",
+            "mimeType": "application/json"
+        },
+        {
+            "uri": "ags://maps/entrypoints",
+            "name": "Maps Entrypoints",
+            "description": "Where to make changes for each type of task",
+            "mimeType": "text/markdown"
+        },
+        {
+            "uri": "ags://agents",
+            "name": "Agents Contract",
+            "description": "Agent operating contract",
+            "mimeType": "text/markdown"
+        }
+    ]
+}

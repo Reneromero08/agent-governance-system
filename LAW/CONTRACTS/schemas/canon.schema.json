@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Canon Schema",
+  "description": "Schema for validating canon metadata",
+  "type": "object",
+  "properties": {
+    "canon_version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    }
+  },
+  "required": ["canon_version"],
+  "additionalProperties": true
+}
