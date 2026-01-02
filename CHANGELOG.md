@@ -44,6 +44,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Backward Compatibility**: Full support for legacy file path references during migration
   - **Documentation**: Complete API docs, usage examples, implementation summary
   - Full implementation: `CAPABILITY/ARTIFACTS/IMPLEMENTATION.md`
+- Add governance guardrail test to ensure foundational directories (CAPABILITY/CAS, CAPABILITY/ARTIFACTS) exist
 
 
 ### Fixed
