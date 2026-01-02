@@ -1,0 +1,17 @@
+# DEPRECATED: Merged into contracts.yml (single CI source of truth)
+# See .github/workflows/contracts.yml for active governance checks
+
+name: Governance [DEPRECATED]
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  deprecated_notice:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Notice
+        run: |
+          echo "This workflow is deprecated. See contracts.yml for active checks."
+          exit 0

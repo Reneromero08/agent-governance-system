@@ -1,0 +1,61 @@
+{
+    "version": "1.0.0",
+    "description": "Swarm configuration - defines which models fill each role",
+    "roles": {
+        "president": {
+            "description": "God - The User - Final authority and source of intent",
+            "current_implementation": "Human (User)",
+            "cli": "VSCode / Terminal",
+            "notes": "Ultimate decision maker, can override any agent"
+        },
+        "governor": {
+            "description": "SOTA AI - Complex decisions, strategic planning, governance",
+            "current_implementation": "Claude Sonnet 4.5 (Main Agent)",
+            "cli": "Antigravity / VSCode Chat",
+            "notes": "Most capable model, handles complex tasks, delegates to Manager"
+        },
+        "manager": {
+            "description": "CLI coordinator - breaks tasks into subtasks, dispatches to Ants",
+            "current_implementation": "Qwen 2.5:7b (via Kilo CLI)",
+            "cli": "kilo",
+            "notes": "Cannot do complex tasks, delegates mechanical work to Ants"
+        },
+        "ant_worker": {
+            "description": "Stateless executor - follows templates, no creativity",
+            "current_implementation": "Local (LFM2-2.6B Autonomous Agent)",
+            "cli": "python CATALYTIC-DPT/SKILLS/ant-worker/scripts/ant_agent.py",
+            "count": 2,
+            "notes": "Polls MCP Ledger for tasks"
+        }
+    },
+    "alternatives": {
+        "president": [
+            "Human (always)",
+            "No alternatives - humans only"
+        ],
+        "governor": [
+            "Claude Sonnet 4.5 (SOTA)",
+            "Claude Opus 4.5",
+            "GPT-4",
+            "Gemini Pro"
+        ],
+        "manager": [
+            "Qwen 2.5:7b",
+            "Qwen 2.5:14b",
+            "Llama 3.1:8b",
+            "Gemini Flash"
+        ],
+        "ant_worker": [
+            "Grok",
+            "Haiku",
+            "Llama",
+            "Mistral",
+            "Local Ollama"
+        ]
+    },
+    "mcp_server": {
+        "host": "localhost",
+        "port": 8765,
+        "ledger_path": "LAW/CONTRACTS/_runs"
+    }
+}

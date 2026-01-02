@@ -1,0 +1,58 @@
+from __future__ import annotations
+from pathlib import Path
+import sys
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from MEMORY.LLM_PACKER.Engine.packer.core import enforce_included_repo_limits, PackLimits
+
+def test_packing_hygiene() -> None:
+    # PackLimits requires allow_duplicate_hashes
+    limits = {
+        "max_total_bytes": 100,
+        "max_entry_bytes": 50,
+        "max_entries": 10,
+        "allow_duplicate_hashes": True
+    }
+
+    # 1. Empty list should return stats
+    res = enforce_included_repo_limits([], PackLimits(**limits))
+    assert res["repo_bytes"] == 0
+    assert res["repo_files"] == 0
+
+    # 2. Exceed total bytes
+    too_big = [{"path": "a.txt", "hash": "f" * 64, "size": 101}]
+    with pytest.raises(ValueError) as exc_info:
+        enforce_included_repo_limits(too_big, PackLimits(**limits))
+        assert "PACK_LIMIT_EXCEEDED:max_total_bytes" in str(exc_info.value)
+
+    # 3. Exceed entry bytes
+    too_big_entry = [{"path": "a.txt", "hash": "f" * 64, "size": 51}]
+    with pytest.raises(ValueError) as exc_info:
+        enforce_included_repo_limits(too_big_entry, PackLimits(**limits))
+        assert "PACK_LIMIT_EXCEEDED:max_entry_bytes" in str(exc_info.value)
+
+    # 4. Exceed max entries
+    too_many_entries = [{"path": f"file{i}.txt", "hash": "f" * 64, "size": 10}
+                        for i in range(11)]
+    with pytest.raises(ValueError) as exc_info:
+        enforce_included_repo_limits(too_many_entries, PackLimits(**limits))
+        assert "PACK_LIMIT_EXCEEDED:max_entries" in str(exc_info.value)
+
+    # 5. Test duplicate hashes when not allowed
+    limits_no_duplicates = {
+        "max_total_bytes": 100,
+        "max_entry_bytes": 50,
+        "max_entries": 10,
+        "allow_duplicate_hashes": False
+    }
+    duplicate_hashes = [
+        {"path": "a.txt", "hash": "f" * 64, "size": 10},
+        {"path": "b.txt", "hash": "f" * 64, "size": 10}  # Same hash
+    ]
+    with pytest.raises(ValueError) as exc_info:
+        enforce_included_repo_limits(duplicate_hashes, PackLimits(**limits_no_duplicates))
+        assert "DUPLICATE_HASH_DETECTED" in str(exc_info.value)

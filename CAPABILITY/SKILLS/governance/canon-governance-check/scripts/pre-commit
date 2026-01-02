@@ -1,0 +1,61 @@
+#!/bin/sh
+# Pre-commit hook for canon governance check
+# Install with: cp SKILLS/canon-governance-check/scripts/pre-commit .git/hooks/pre-commit
+
+echo "🔍 Running canon governance check..."
+
+# Run preflight freshness check (allow dirty tracked due to staging).
+echo "🔍 Running preflight..."
+python3 TOOLS/ags.py preflight --allow-dirty-tracked
+PREFLIGHT_EXIT=$?
+if [ $PREFLIGHT_EXIT -ne 0 ]; then
+    echo ""
+    echo "❌ Preflight failed!"
+    echo "   Fix preflight issues before committing."
+    exit 1
+fi
+
+# Run the governance check
+node TOOLS/check-canon-governance.js
+
+# Capture exit code
+EXIT_CODE=$?
+
+if [ $EXIT_CODE -ne 0 ]; then
+    echo ""
+    echo "❌ Pre-commit check failed!"
+    echo "   Fix governance issues before committing."
+    echo "   Run 'node TOOLS/check-canon-governance.js --verbose' for details."
+    exit 1
+fi
+
+echo "✅ Governance check passed"
+
+echo "🔍 Running MCP pre-commit checks..."
+CHECK_DIR="LAW/CONTRACTS/_runs/_tmp"
+CHECK_IN="$CHECK_DIR/mcp_precommit_input.json"
+CHECK_OUT="$CHECK_DIR/mcp_precommit_output.json"
+mkdir -p "$CHECK_DIR"
+cat > "$CHECK_IN" <<'EOF'
+{
+  "entrypoint": "LAW/CONTRACTS/ags_mcp_entrypoint.py",
+  "auto_entrypoint": "LAW/CONTRACTS/_runs/ags_mcp_auto.py",
+  "args": ["--test"],
+  "auto_args": ["--test"],
+  "require_running": true,
+  "require_autostart": true,
+  "dry_run": false
+}
+EOF
+
+python3 CAPABILITY/SKILLS/mcp/mcp-precommit-check/run.py "$CHECK_IN" "$CHECK_OUT"
+CHECK_EXIT=$?
+if [ $CHECK_EXIT -ne 0 ]; then
+    echo ""
+    echo "❌ MCP pre-commit checks failed!"
+    echo "   Ensure the MCP server is running and autostart is enabled."
+    exit 1
+fi
+
+echo "✅ MCP pre-commit checks passed"
+exit 0

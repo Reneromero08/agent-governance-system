@@ -1,0 +1,1 @@
+{"pipeline_id": "adversarial-pipeline-partial-state", "steps": [{"step_id": "s1", "jobspec_path": "x.json", "cmd": ["true"]}]}

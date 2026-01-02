@@ -1,0 +1,6 @@
+Governance fixture: Validates that logging paths comply with ADR-015 (all logs under CONTRACTS/_runs/)
+
+This fixture ensures that:
+1. No code contains hardcoded references to LOGS/ or MCP/logs/
+2. Canon documentation doesn't reference disallowed log paths
+3. The logging policy is enforced by critic.py

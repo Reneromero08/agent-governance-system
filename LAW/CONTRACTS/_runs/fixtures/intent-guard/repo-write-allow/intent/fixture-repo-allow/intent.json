@@ -1,0 +1,1 @@
+{"allow_repo_write":true,"mode":"repo-write","paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]}}

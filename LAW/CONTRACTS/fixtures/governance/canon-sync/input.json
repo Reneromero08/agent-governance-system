@@ -1,0 +1,17 @@
+{
+    "description": "Verify canon-sync: authority gradient must be consistent across CONTRACT.md and AGENTS.md",
+    "check_type": "canon-sync",
+    "test_case": "authority_gradient_aligned",
+    "contract_hierarchy": [
+        "CANON/AGREEMENT.md",
+        "CANON/CONTRACT.md",
+        "CANON/INVARIANTS.md",
+        "CANON/VERSIONING.md",
+        "AGENTS.md",
+        "CONTEXT records",
+        "MAPS/*",
+        "User instructions",
+        "Implementation convenience"
+    ],
+    "agents_hierarchy_matches": true
+}

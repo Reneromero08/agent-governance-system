@@ -1,0 +1,27 @@
+{
+  "confidence": 0.95,
+  "id": "LR_SCHEMA_VALIDATE_BEFORE_RUN",
+  "kind": "logic_rule",
+  "rule": {
+    "if_all": [
+      "job:present"
+    ],
+    "then": [
+      {
+        "op": "emit",
+        "path": "checks[]",
+        "value": {
+          "target": "jobspec",
+          "type": "schema_validate"
+        }
+      }
+    ]
+  },
+  "scope": {
+    "applies_when": [
+      "domain:jobspec"
+    ]
+  },
+  "statement": "Validate any JobSpec JSON against schema before running actions.",
+  "version": "0.1.0"
+}

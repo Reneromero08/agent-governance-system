@@ -1,0 +1,10 @@
+{
+  "mode": "full",
+  "profile": "full",
+  "split_lite": true,
+  "combined": false,
+  "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke-split-lite",
+  "scope": "catalytic-dpt",
+  "stamp": "fixture-smoke-split-lite",
+  "zip": false
+}

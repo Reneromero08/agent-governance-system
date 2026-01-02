@@ -1,0 +1,10 @@
+{
+  "mode": "artifact-only",
+  "paths": {
+    "read": [],
+    "write": [
+      "LAW/CONTRACTS/_runs/admit-ok.json"
+    ]
+  }
+}
+

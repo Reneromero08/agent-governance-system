@@ -1,0 +1,5 @@
+{
+    "description": "Verify no artifacts have escaped to unauthorized directories",
+    "check_type": "artifact-escape-hatch",
+    "test_case": "clean_repo"
+}

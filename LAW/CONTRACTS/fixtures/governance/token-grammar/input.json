@@ -1,0 +1,18 @@
+{
+    "description": "Verify token-grammar invariant: glossary terms are stable API",
+    "check_type": "token-grammar",
+    "test_case": "core_terms_present",
+    "required_terms": [
+        "Canon",
+        "Context",
+        "Map",
+        "Skill",
+        "Contract",
+        "Fixture",
+        "Runner",
+        "Cortex",
+        "Memory",
+        "Token grammar"
+    ],
+    "all_terms_defined": true
+}

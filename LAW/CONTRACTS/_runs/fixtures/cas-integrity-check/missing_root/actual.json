@@ -1,0 +1,5 @@
+{
+  "status": "failure",
+  "error": "CAS_ROOT_NOT_FOUND: D:\\CCC 2.0\\AI\\agent-governance-system\\CONTRACTS\\_runs\\non_existent_cas_path",
+  "cas_root": "D:\\CCC 2.0\\AI\\agent-governance-system\\CONTRACTS\\_runs\\non_existent_cas_path"
+}

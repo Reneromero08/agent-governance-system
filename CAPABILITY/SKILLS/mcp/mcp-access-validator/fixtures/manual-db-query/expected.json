@@ -1,0 +1,33 @@
+{
+  "validation_passed": false,
+  "token_waste_detected": true,
+  "agent_action": "I need to check what's in the system1.db database to see if there are any symbols",
+  "code_snippet_length": 155,
+  "files_accessed_count": 1,
+  "databases_queried_count": 1,
+  "recommended_mcp_tool": "cortex_query",
+  "tool_description": "Search the cortex index for content",
+  "tool_usage_example": {
+    "query": "symbols",
+    "limit": 10
+  },
+  "estimated_token_savings": 0.95,
+  "governance_compliance": "ADR-004, ADR-021",
+  "action_required": "Use MCP tool instead of manual operations",
+  "token_waste_metrics": {
+    "code_tokens": 31,
+    "tool_tokens": 4,
+    "raw_savings": 0.871,
+    "baseline_savings": 0.95
+  },
+  "audit_entry": {
+    "audit_id": "string",
+    "timestamp": "string",
+    "skill": "mcp-access-validator",
+    "validation_passed": false,
+    "token_waste_detected": true,
+    "recommended_tool": "cortex_query",
+    "estimated_savings": 0.95,
+    "action_taken": "validation_only"
+  }
+}

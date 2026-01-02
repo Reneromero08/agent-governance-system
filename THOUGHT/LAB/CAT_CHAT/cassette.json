@@ -1,0 +1,8 @@
+{
+  "cassette_id": "cat_chat",
+  "name": "CAT_CHAT Documentation Index",
+  "version": "1.0.0",
+  "db_path": "cat_chat_index.db",
+  "capabilities": ["vectors", "fts"],
+  "description": "Searchable index of all CAT_CHAT documentation for merge analysis"
+}

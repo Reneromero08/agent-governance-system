@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "doc-merge-batch output",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "mode": {
+      "type": "string"
+    },
+    "generated_at": {
+      "type": "string"
+    },
+    "scan": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "exact_duplicates": {
+          "type": "array"
+        },
+        "near_duplicates": {
+          "type": "array"
+        },
+        "near_duplicate_candidate_pairs": {
+          "type": "array"
+        }
+      }
+    },
+    "comparisons": {
+      "type": "array"
+    },
+    "plans": {
+      "type": "array"
+    },
+    "artifacts": {
+      "type": "array"
+    },
+    "receipts": {
+      "type": "array"
+    },
+    "errors": {
+      "type": "array"
+    },
+    "post_actions": {
+      "type": "object"
+    },
+    "prune_report": {
+      "type": "object"
+    },
+    "git_commit_result": {
+      "type": "object"
+    }
+  },
+  "required": [
+    "mode",
+    "generated_at"
+  ]
+}

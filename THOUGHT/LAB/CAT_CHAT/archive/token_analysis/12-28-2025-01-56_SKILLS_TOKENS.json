@@ -1,0 +1,1102 @@
+{
+  "files": [
+    {
+      "original": 1,
+      "compressed": 1,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\_TEMPLATE\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 1,
+      "compressed": 1,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\_TEMPLATE\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 284,
+      "compressed": 286,
+      "savings": -2,
+      "percent": -0.7,
+      "path": "SKILLS\\_TEMPLATE\\run.py"
+    },
+    {
+      "original": 184,
+      "compressed": 192,
+      "savings": -8,
+      "percent": -4.35,
+      "path": "SKILLS\\_TEMPLATE\\SKILL.md"
+    },
+    {
+      "original": 255,
+      "compressed": 266,
+      "savings": -11,
+      "percent": -4.31,
+      "path": "SKILLS\\_TEMPLATE\\validate.py"
+    },
+    {
+      "original": 70,
+      "compressed": 70,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\admission-control\\fixtures\\artifact_only_allow\\expected.json"
+    },
+    {
+      "original": 41,
+      "compressed": 41,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\admission-control\\fixtures\\artifact_only_allow\\input.json"
+    },
+    {
+      "original": 87,
+      "compressed": 83,
+      "savings": 4,
+      "percent": 4.6,
+      "path": "SKILLS\\admission-control\\fixtures\\artifact_only_outside_block\\expected.json"
+    },
+    {
+      "original": 38,
+      "compressed": 34,
+      "savings": 4,
+      "percent": 10.53,
+      "path": "SKILLS\\admission-control\\fixtures\\artifact_only_outside_block\\input.json"
+    },
+    {
+      "original": 83,
+      "compressed": 83,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\admission-control\\fixtures\\read_only_write_block\\expected.json"
+    },
+    {
+      "original": 46,
+      "compressed": 46,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\admission-control\\fixtures\\read_only_write_block\\input.json"
+    },
+    {
+      "original": 77,
+      "compressed": 73,
+      "savings": 4,
+      "percent": 5.19,
+      "path": "SKILLS\\admission-control\\fixtures\\repo_write_flag_required\\expected.json"
+    },
+    {
+      "original": 38,
+      "compressed": 34,
+      "savings": 4,
+      "percent": 10.53,
+      "path": "SKILLS\\admission-control\\fixtures\\repo_write_flag_required\\input.json"
+    },
+    {
+      "original": 337,
+      "compressed": 337,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\admission-control\\run.py"
+    },
+    {
+      "original": 188,
+      "compressed": 192,
+      "savings": -4,
+      "percent": -2.13,
+      "path": "SKILLS\\admission-control\\SKILL.md"
+    },
+    {
+      "original": 165,
+      "compressed": 168,
+      "savings": -3,
+      "percent": -1.82,
+      "path": "SKILLS\\admission-control\\validate.py"
+    },
+    {
+      "original": 1,
+      "compressed": 1,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\agent-activity\\fixtures\\smoke\\expected.json"
+    },
+    {
+      "original": 34,
+      "compressed": 34,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\agent-activity\\fixtures\\smoke\\input.json"
+    },
+    {
+      "original": 1060,
+      "compressed": 1066,
+      "savings": -6,
+      "percent": -0.57,
+      "path": "SKILLS\\agent-activity\\run.py"
+    },
+    {
+      "original": 193,
+      "compressed": 194,
+      "savings": -1,
+      "percent": -0.52,
+      "path": "SKILLS\\agent-activity\\SKILL.md"
+    },
+    {
+      "original": 434,
+      "compressed": 439,
+      "savings": -5,
+      "percent": -1.15,
+      "path": "SKILLS\\agent-activity\\validate.py"
+    },
+    {
+      "original": 53,
+      "compressed": 54,
+      "savings": -1,
+      "percent": -1.89,
+      "path": "SKILLS\\artifact-escape-hatch\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 37,
+      "compressed": 38,
+      "savings": -1,
+      "percent": -2.7,
+      "path": "SKILLS\\artifact-escape-hatch\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1011,
+      "compressed": 1014,
+      "savings": -3,
+      "percent": -0.3,
+      "path": "SKILLS\\artifact-escape-hatch\\run.py"
+    },
+    {
+      "original": 210,
+      "compressed": 214,
+      "savings": -4,
+      "percent": -1.9,
+      "path": "SKILLS\\artifact-escape-hatch\\SKILL.md"
+    },
+    {
+      "original": 198,
+      "compressed": 202,
+      "savings": -4,
+      "percent": -2.02,
+      "path": "SKILLS\\artifact-escape-hatch\\validate.py"
+    },
+    {
+      "original": 555,
+      "compressed": 560,
+      "savings": -5,
+      "percent": -0.9,
+      "path": "SKILLS\\canon-governance-check\\CORTEX_INTEGRATION.md"
+    },
+    {
+      "original": 17,
+      "compressed": 17,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\canon-governance-check\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\canon-governance-check\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1389,
+      "compressed": 1392,
+      "savings": -3,
+      "percent": -0.22,
+      "path": "SKILLS\\canon-governance-check\\INTEGRATION_MAP.md"
+    },
+    {
+      "original": 791,
+      "compressed": 790,
+      "savings": 1,
+      "percent": 0.13,
+      "path": "SKILLS\\canon-governance-check\\run.py"
+    },
+    {
+      "original": 563,
+      "compressed": 557,
+      "savings": 6,
+      "percent": 1.07,
+      "path": "SKILLS\\canon-governance-check\\SKILL.md"
+    },
+    {
+      "original": 187,
+      "compressed": 188,
+      "savings": -1,
+      "percent": -0.53,
+      "path": "SKILLS\\canon-governance-check\\validate.py"
+    },
+    {
+      "original": 72,
+      "compressed": 72,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\canon-migration\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 45,
+      "compressed": 45,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\canon-migration\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1073,
+      "compressed": 1075,
+      "savings": -2,
+      "percent": -0.19,
+      "path": "SKILLS\\canon-migration\\run.py"
+    },
+    {
+      "original": 383,
+      "compressed": 390,
+      "savings": -7,
+      "percent": -1.83,
+      "path": "SKILLS\\canon-migration\\SKILL.md"
+    },
+    {
+      "original": 197,
+      "compressed": 201,
+      "savings": -4,
+      "percent": -2.03,
+      "path": "SKILLS\\canon-migration\\validate.py"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\cas-integrity-check\\fixtures\\missing_root\\expected.json"
+    },
+    {
+      "original": 20,
+      "compressed": 20,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\cas-integrity-check\\fixtures\\missing_root\\input.json"
+    },
+    {
+      "original": 747,
+      "compressed": 751,
+      "savings": -4,
+      "percent": -0.54,
+      "path": "SKILLS\\cas-integrity-check\\run.py"
+    },
+    {
+      "original": 227,
+      "compressed": 233,
+      "savings": -6,
+      "percent": -2.64,
+      "path": "SKILLS\\cas-integrity-check\\SKILL.md"
+    },
+    {
+      "original": 175,
+      "compressed": 177,
+      "savings": -2,
+      "percent": -1.14,
+      "path": "SKILLS\\cas-integrity-check\\validate.py"
+    },
+    {
+      "original": 76,
+      "compressed": 76,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\commit-queue\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 84,
+      "compressed": 80,
+      "savings": 4,
+      "percent": 4.76,
+      "path": "SKILLS\\commit-queue\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1730,
+      "compressed": 1753,
+      "savings": -23,
+      "percent": -1.33,
+      "path": "SKILLS\\commit-queue\\run.py"
+    },
+    {
+      "original": 392,
+      "compressed": 397,
+      "savings": -5,
+      "percent": -1.28,
+      "path": "SKILLS\\commit-queue\\SKILL.md"
+    },
+    {
+      "original": 190,
+      "compressed": 193,
+      "savings": -3,
+      "percent": -1.58,
+      "path": "SKILLS\\commit-queue\\validate.py"
+    },
+    {
+      "original": 183,
+      "compressed": 175,
+      "savings": 8,
+      "percent": 4.37,
+      "path": "SKILLS\\commit-summary-log\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 184,
+      "compressed": 176,
+      "savings": 8,
+      "percent": 4.35,
+      "path": "SKILLS\\commit-summary-log\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 27,
+      "compressed": 27,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\commit-summary-log\\fixtures\\template_basic\\expected.json"
+    },
+    {
+      "original": 50,
+      "compressed": 50,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\commit-summary-log\\fixtures\\template_basic\\input.json"
+    },
+    {
+      "original": 1712,
+      "compressed": 1718,
+      "savings": -6,
+      "percent": -0.35,
+      "path": "SKILLS\\commit-summary-log\\run.py"
+    },
+    {
+      "original": 815,
+      "compressed": 821,
+      "savings": -6,
+      "percent": -0.74,
+      "path": "SKILLS\\commit-summary-log\\SKILL.md"
+    },
+    {
+      "original": 199,
+      "compressed": 202,
+      "savings": -3,
+      "percent": -1.51,
+      "path": "SKILLS\\commit-summary-log\\validate.py"
+    },
+    {
+      "original": 172,
+      "compressed": 171,
+      "savings": 1,
+      "percent": 0.58,
+      "path": "SKILLS\\cortex-summaries\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 171,
+      "compressed": 164,
+      "savings": 7,
+      "percent": 4.09,
+      "path": "SKILLS\\cortex-summaries\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 428,
+      "compressed": 432,
+      "savings": -4,
+      "percent": -0.93,
+      "path": "SKILLS\\cortex-summaries\\run.py"
+    },
+    {
+      "original": 344,
+      "compressed": 346,
+      "savings": -2,
+      "percent": -0.58,
+      "path": "SKILLS\\cortex-summaries\\SKILL.md"
+    },
+    {
+      "original": 165,
+      "compressed": 168,
+      "savings": -3,
+      "percent": -1.82,
+      "path": "SKILLS\\cortex-summaries\\validate.py"
+    },
+    {
+      "original": 237,
+      "compressed": 238,
+      "savings": -1,
+      "percent": -0.42,
+      "path": "SKILLS\\doc-update\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 28,
+      "compressed": 28,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\doc-update\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 551,
+      "compressed": 553,
+      "savings": -2,
+      "percent": -0.36,
+      "path": "SKILLS\\doc-update\\run.py"
+    },
+    {
+      "original": 538,
+      "compressed": 549,
+      "savings": -11,
+      "percent": -2.04,
+      "path": "SKILLS\\doc-update\\SKILL.md"
+    },
+    {
+      "original": 198,
+      "compressed": 202,
+      "savings": -4,
+      "percent": -2.02,
+      "path": "SKILLS\\doc-update\\validate.py"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\example-echo\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\example-echo\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 230,
+      "compressed": 230,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\example-echo\\run.py"
+    },
+    {
+      "original": 140,
+      "compressed": 145,
+      "savings": -5,
+      "percent": -3.57,
+      "path": "SKILLS\\example-echo\\SKILL.md"
+    },
+    {
+      "original": 178,
+      "compressed": 181,
+      "savings": -3,
+      "percent": -1.69,
+      "path": "SKILLS\\example-echo\\validate.py"
+    },
+    {
+      "original": 128,
+      "compressed": 128,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\artifact-only\\expected.json"
+    },
+    {
+      "original": 38,
+      "compressed": 38,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\artifact-only\\input.json"
+    },
+    {
+      "original": 128,
+      "compressed": 128,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\repo-write-allow\\expected.json"
+    },
+    {
+      "original": 40,
+      "compressed": 40,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\repo-write-allow\\input.json"
+    },
+    {
+      "original": 128,
+      "compressed": 128,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\repo-write-block\\expected.json"
+    },
+    {
+      "original": 39,
+      "compressed": 39,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\fixtures\\repo-write-block\\input.json"
+    },
+    {
+      "original": 779,
+      "compressed": 779,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\intent-guard\\run.py"
+    },
+    {
+      "original": 162,
+      "compressed": 165,
+      "savings": -3,
+      "percent": -1.85,
+      "path": "SKILLS\\intent-guard\\SKILL.md"
+    },
+    {
+      "original": 195,
+      "compressed": 194,
+      "savings": 1,
+      "percent": 0.51,
+      "path": "SKILLS\\invariant-freeze\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 103,
+      "compressed": 102,
+      "savings": 1,
+      "percent": 0.97,
+      "path": "SKILLS\\invariant-freeze\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 526,
+      "compressed": 511,
+      "savings": 15,
+      "percent": 2.85,
+      "path": "SKILLS\\invariant-freeze\\run.py"
+    },
+    {
+      "original": 215,
+      "compressed": 207,
+      "savings": 8,
+      "percent": 3.72,
+      "path": "SKILLS\\invariant-freeze\\SKILL.md"
+    },
+    {
+      "original": 208,
+      "compressed": 212,
+      "savings": -4,
+      "percent": -1.92,
+      "path": "SKILLS\\invariant-freeze\\validate.py"
+    },
+    {
+      "original": 246,
+      "compressed": 246,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 58,
+      "compressed": 58,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 258,
+      "compressed": 258,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt\\expected.json"
+    },
+    {
+      "original": 64,
+      "compressed": 64,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt\\input.json"
+    },
+    {
+      "original": 293,
+      "compressed": 293,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt-lab-split-lite\\expected.json"
+    },
+    {
+      "original": 82,
+      "compressed": 82,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt-lab-split-lite\\input.json"
+    },
+    {
+      "original": 285,
+      "compressed": 285,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt-split-lite\\expected.json"
+    },
+    {
+      "original": 78,
+      "compressed": 78,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\catalytic-dpt-split-lite\\input.json"
+    },
+    {
+      "original": 210,
+      "compressed": 210,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\lite\\expected.json"
+    },
+    {
+      "original": 74,
+      "compressed": 74,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\lite\\input.json"
+    },
+    {
+      "original": 229,
+      "compressed": 229,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\split-lite\\expected.json"
+    },
+    {
+      "original": 86,
+      "compressed": 86,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\llm-packer-smoke\\fixtures\\split-lite\\input.json"
+    },
+    {
+      "original": 1882,
+      "compressed": 1883,
+      "savings": -1,
+      "percent": -0.05,
+      "path": "SKILLS\\llm-packer-smoke\\run.py"
+    },
+    {
+      "original": 381,
+      "compressed": 391,
+      "savings": -10,
+      "percent": -2.62,
+      "path": "SKILLS\\llm-packer-smoke\\SKILL.md"
+    },
+    {
+      "original": 179,
+      "compressed": 182,
+      "savings": -3,
+      "percent": -1.68,
+      "path": "SKILLS\\llm-packer-smoke\\validate.py"
+    },
+    {
+      "original": 34,
+      "compressed": 34,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\master-override\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 24,
+      "compressed": 24,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\master-override\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 42,
+      "compressed": 42,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\master-override\\fixtures\\unauthorized-read\\expected.json"
+    },
+    {
+      "original": 16,
+      "compressed": 16,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\master-override\\fixtures\\unauthorized-read\\input.json"
+    },
+    {
+      "original": 948,
+      "compressed": 950,
+      "savings": -2,
+      "percent": -0.21,
+      "path": "SKILLS\\master-override\\run.py"
+    },
+    {
+      "original": 256,
+      "compressed": 263,
+      "savings": -7,
+      "percent": -2.73,
+      "path": "SKILLS\\master-override\\SKILL.md"
+    },
+    {
+      "original": 199,
+      "compressed": 203,
+      "savings": -4,
+      "percent": -2.01,
+      "path": "SKILLS\\master-override\\validate.py"
+    },
+    {
+      "original": 114,
+      "compressed": 117,
+      "savings": -3,
+      "percent": -2.63,
+      "path": "SKILLS\\mcp-extension-verify\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 36,
+      "compressed": 36,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-extension-verify\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1396,
+      "compressed": 1404,
+      "savings": -8,
+      "percent": -0.57,
+      "path": "SKILLS\\mcp-extension-verify\\run.py"
+    },
+    {
+      "original": 270,
+      "compressed": 277,
+      "savings": -7,
+      "percent": -2.59,
+      "path": "SKILLS\\mcp-extension-verify\\SKILL.md"
+    },
+    {
+      "original": 201,
+      "compressed": 206,
+      "savings": -5,
+      "percent": -2.49,
+      "path": "SKILLS\\mcp-extension-verify\\validate.py"
+    },
+    {
+      "original": 42,
+      "compressed": 42,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-message-board\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-message-board\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 292,
+      "compressed": 292,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-message-board\\run.py"
+    },
+    {
+      "original": 397,
+      "compressed": 396,
+      "savings": 1,
+      "percent": 0.25,
+      "path": "SKILLS\\mcp-message-board\\SKILL.md"
+    },
+    {
+      "original": 190,
+      "compressed": 193,
+      "savings": -3,
+      "percent": -1.58,
+      "path": "SKILLS\\mcp-message-board\\validate.py"
+    },
+    {
+      "original": 41,
+      "compressed": 41,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-smoke\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-smoke\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1151,
+      "compressed": 1151,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\mcp-smoke\\run.py"
+    },
+    {
+      "original": 230,
+      "compressed": 235,
+      "savings": -5,
+      "percent": -2.17,
+      "path": "SKILLS\\mcp-smoke\\SKILL.md"
+    },
+    {
+      "original": 200,
+      "compressed": 204,
+      "savings": -4,
+      "percent": -2.0,
+      "path": "SKILLS\\mcp-smoke\\validate.py"
+    },
+    {
+      "original": 52,
+      "compressed": 53,
+      "savings": -1,
+      "percent": -1.92,
+      "path": "SKILLS\\pack-validate\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 22,
+      "compressed": 23,
+      "savings": -1,
+      "percent": -4.55,
+      "path": "SKILLS\\pack-validate\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 1123,
+      "compressed": 1143,
+      "savings": -20,
+      "percent": -1.78,
+      "path": "SKILLS\\pack-validate\\run.py"
+    },
+    {
+      "original": 252,
+      "compressed": 260,
+      "savings": -8,
+      "percent": -3.17,
+      "path": "SKILLS\\pack-validate\\SKILL.md"
+    },
+    {
+      "original": 197,
+      "compressed": 202,
+      "savings": -5,
+      "percent": -2.54,
+      "path": "SKILLS\\pack-validate\\validate.py"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-receipts\\fixtures\\basic_ok\\expected.json"
+    },
+    {
+      "original": 19,
+      "compressed": 19,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-receipts\\fixtures\\basic_ok\\input.json"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-receipts\\fixtures\\tamper_reject\\expected.json"
+    },
+    {
+      "original": 19,
+      "compressed": 19,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-receipts\\fixtures\\tamper_reject\\input.json"
+    },
+    {
+      "original": 290,
+      "compressed": 290,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-receipts\\run.py"
+    },
+    {
+      "original": 221,
+      "compressed": 225,
+      "savings": -4,
+      "percent": -1.81,
+      "path": "SKILLS\\pipeline-dag-receipts\\SKILL.md"
+    },
+    {
+      "original": 135,
+      "compressed": 136,
+      "savings": -1,
+      "percent": -0.74,
+      "path": "SKILLS\\pipeline-dag-receipts\\validate.py"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-restore\\fixtures\\basic_ok\\expected.json"
+    },
+    {
+      "original": 5,
+      "compressed": 5,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-restore\\fixtures\\basic_ok\\input.json"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-restore\\fixtures\\tamper_reject\\expected.json"
+    },
+    {
+      "original": 6,
+      "compressed": 6,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-restore\\fixtures\\tamper_reject\\input.json"
+    },
+    {
+      "original": 289,
+      "compressed": 289,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-restore\\run.py"
+    },
+    {
+      "original": 247,
+      "compressed": 251,
+      "savings": -4,
+      "percent": -1.62,
+      "path": "SKILLS\\pipeline-dag-restore\\SKILL.md"
+    },
+    {
+      "original": 134,
+      "compressed": 135,
+      "savings": -1,
+      "percent": -0.75,
+      "path": "SKILLS\\pipeline-dag-restore\\validate.py"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-scheduler\\fixtures\\basic_ok\\expected.json"
+    },
+    {
+      "original": 19,
+      "compressed": 19,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-scheduler\\fixtures\\basic_ok\\input.json"
+    },
+    {
+      "original": 29,
+      "compressed": 29,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-scheduler\\fixtures\\cycle_reject\\expected.json"
+    },
+    {
+      "original": 19,
+      "compressed": 19,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\pipeline-dag-scheduler\\fixtures\\cycle_reject\\input.json"
+    },
+    {
+      "original": 332,
+      "compressed": 334,
+      "savings": -2,
+      "percent": -0.6,
+      "path": "SKILLS\\pipeline-dag-scheduler\\run.py"
+    },
+    {
+      "original": 308,
+      "compressed": 318,
+      "savings": -10,
+      "percent": -3.25,
+      "path": "SKILLS\\pipeline-dag-scheduler\\SKILL.md"
+    },
+    {
+      "original": 135,
+      "compressed": 136,
+      "savings": -1,
+      "percent": -0.74,
+      "path": "SKILLS\\pipeline-dag-scheduler\\validate.py"
+    },
+    {
+      "original": 32,
+      "compressed": 32,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\repo-contract-alignment\\fixtures\\basic\\expected.json"
+    },
+    {
+      "original": 9,
+      "compressed": 9,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\repo-contract-alignment\\fixtures\\basic\\input.json"
+    },
+    {
+      "original": 273,
+      "compressed": 273,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\repo-contract-alignment\\run.py"
+    },
+    {
+      "original": 496,
+      "compressed": 505,
+      "savings": -9,
+      "percent": -1.81,
+      "path": "SKILLS\\repo-contract-alignment\\SKILL.md"
+    },
+    {
+      "original": 203,
+      "compressed": 207,
+      "savings": -4,
+      "percent": -1.97,
+      "path": "SKILLS\\repo-contract-alignment\\validate.py"
+    },
+    {
+      "original": 28,
+      "compressed": 28,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\swarm-directive\\fixtures\\basic_ok\\expected.json"
+    },
+    {
+      "original": 34,
+      "compressed": 34,
+      "savings": 0,
+      "percent": 0.0,
+      "path": "SKILLS\\swarm-directive\\fixtures\\basic_ok\\input.json"
+    },
+    {
+      "original": 848,
+      "compressed": 849,
+      "savings": -1,
+      "percent": -0.12,
+      "path": "SKILLS\\swarm-directive\\run.py"
+    },
+    {
+      "original": 1216,
+      "compressed": 1223,
+      "savings": -7,
+      "percent": -0.58,
+      "path": "SKILLS\\swarm-directive\\SKILL.md"
+    },
+    {
+      "original": 298,
+      "compressed": 300,
+      "savings": -2,
+      "percent": -0.67,
+      "path": "SKILLS\\swarm-directive\\validate.py"
+    }
+  ],
+  "total": {
+    "original": 41271,
+    "compressed": 41512,
+    "savings": -241,
+    "percent": -0.58
+  }
+}

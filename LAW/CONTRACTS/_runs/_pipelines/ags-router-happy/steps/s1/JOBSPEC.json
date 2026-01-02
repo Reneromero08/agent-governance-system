@@ -1,0 +1,1 @@
+{"catalytic_domains":["LAW/CONTRACTS/_runs/_tmp/ags_router_happy/domain"],"determinism":"deterministic","inputs":{},"intent":"router produced step","job_id":"ags-router-step1","outputs":{"durable_paths":["NAVIGATION/CORTEX/_generated/_tmp/ags_router_happy_noop.txt"],"validation_criteria":{}},"phase":6,"task_type":"pipeline_execution"}

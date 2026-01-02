@@ -1,0 +1,6 @@
+{
+  "pipeline_id": "intent-pipeline",
+  "mode": "repo-write",
+  "allow_repo_write": true,
+  "run_id": "fixture-repo-allow"
+}

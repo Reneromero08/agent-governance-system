@@ -1,0 +1,1 @@
+{"pipeline_id":"test-verify-revoke-v2","steps":[{"pipeline_id":"test-verify-revoke-v2","prev_step_proof_hash":null,"run_id":"pipeline-test-verify-revoke-v2-s1-a1","step_domain_roots_hash":"c78db8bf57b3d19107c5ea40741b519fd6f3e913e347908855076805c0661bb2","step_id":"s1","step_proof_hash":"9f3450608f9fcdb1f360cc7061b5ebd122f11e826fc64811c486193b6abe1b58"}]}

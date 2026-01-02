@@ -1,0 +1,100 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "adapter.schema.json",
+  "title": "Adapter Contract (Skills + MCP Wrappers)",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "adapter_version",
+    "name",
+    "command",
+    "jobspec",
+    "inputs",
+    "outputs",
+    "side_effects",
+    "deref_caps",
+    "artifacts"
+  ],
+  "properties": {
+    "adapter_version": {
+      "type": "string",
+      "minLength": 1
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "command": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "jobspec": {
+      "$ref": "jobspec.schema.json"
+    },
+    "inputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "outputs": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string",
+        "pattern": "^[0-9a-f]{64}$"
+      }
+    },
+    "side_effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "network",
+        "clock",
+        "filesystem_unbounded",
+        "nondeterministic"
+      ],
+      "properties": {
+        "network": { "type": "boolean" },
+        "clock": { "type": "boolean" },
+        "filesystem_unbounded": { "type": "boolean" },
+        "nondeterministic": { "type": "boolean" }
+      }
+    },
+    "deref_caps": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "max_bytes",
+        "max_matches",
+        "max_nodes",
+        "max_depth"
+      ],
+      "properties": {
+        "max_bytes": { "type": "integer", "minimum": 0 },
+        "max_matches": { "type": "integer", "minimum": 0 },
+        "max_nodes": { "type": "integer", "minimum": 0 },
+        "max_depth": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "artifacts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "ledger",
+        "proof",
+        "domain_roots"
+      ],
+      "properties": {
+        "ledger": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "proof": { "type": "string", "pattern": "^[0-9a-f]{64}$" },
+        "domain_roots": { "type": "string", "pattern": "^[0-9a-f]{64}$" }
+      }
+    }
+  }
+}
+

@@ -1,0 +1,8 @@
+{
+    "task": {
+        "id": "test-task-001",
+        "type": "copy",
+        "source": "/tmp/input.txt",
+        "destination": "/tmp/output.txt"
+    }
+}

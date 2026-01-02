@@ -1,0 +1,16 @@
+from pathlib import Path
+import sys
+import pytest
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+# Test that ensure we can import the primitives
+def test_verifier_import():
+    from CAPABILITY.PRIMITIVES.verify_bundle import verify_bundle
+    assert verify_bundle is not None
+
+def test_ledger_import():
+    from CAPABILITY.PRIMITIVES.ledger import Ledger
+    assert Ledger is not None
