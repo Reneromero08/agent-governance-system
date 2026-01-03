@@ -5,7 +5,8 @@ Output structure (canonical):
 - FULL/     : Single-file combined outputs
 - SPLIT/    : Chunked section files
 - LITE/     : Compressed high-signal outputs
-- archive/  : pack.zip (meta/ + repo/ only) + scope-prefixed txt siblings
+- Internal Archive (inside pack): `<pack>/archive/pack.zip` + scope-prefixed `.txt` siblings
+- External Archive (outside pack): `MEMORY/LLM_PACKER/_packs/_archive/<pack_name>.zip`
 
 FORBIDDEN: COMBINED/, FULL_COMBINED/, SPLIT_LITE/
 """
@@ -13,7 +14,6 @@ FORBIDDEN: COMBINED/, FULL_COMBINED/, SPLIT_LITE/
 from .core import (
     PackScope,
     SCOPE_AGS,
-    SCOPE_CATALYTIC_DPT,
     SCOPE_LAB,
     SCOPES,
     hash_file,
@@ -34,7 +34,6 @@ from .cli import main
 __all__ = [
     "PackScope",
     "SCOPE_AGS",
-    "SCOPE_CATALYTIC_DPT",
     "SCOPE_LAB",
     "SCOPES",
     "hash_file",

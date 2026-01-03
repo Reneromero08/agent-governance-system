@@ -17,7 +17,7 @@ def reset_db():
         db_path.unlink()
     
     db = System1DB(db_path)
-    # Index everything from root
+    # Index the repo root; the CortexIndexer prunes large dirs and (when available) filters to git-tracked markdown files.
     indexer = CortexIndexer(db, target_dir=PROJECT_ROOT)
     indexer.index_all()
     db.close()

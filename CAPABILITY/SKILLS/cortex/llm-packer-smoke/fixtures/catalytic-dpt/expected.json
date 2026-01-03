@@ -11,12 +11,13 @@
     "meta/PACK_INFO.json",
     "meta/BUILD_TREE.txt",
     "meta/PROVENANCE.json",
-    "SPLIT/CATALYTIC-DPT-00_INDEX.md",
-    "SPLIT/CATALYTIC-DPT-01_DOCS.md",
-    "SPLIT/CATALYTIC-DPT-02_CONFIG.md",
-    "SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
-    "SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
-    "FULL/CATALYTIC-DPT-FULL-fixture-catalytic-dpt.md",
-    "FULL/CATALYTIC-DPT-FULL-TREEMAP-fixture-catalytic-dpt.md"
+    "SPLIT/AGS-00_INDEX.md",
+    "SPLIT/AGS-01_LAW.md",
+    "SPLIT/AGS-02_CAPABILITY.md",
+    "SPLIT/AGS-03_NAVIGATION.md",
+    "SPLIT/AGS-06_MEMORY.md",
+    "SPLIT/AGS-07_ROOT_FILES.md",
+    "FULL/AGS-FULL-fixture-catalytic-dpt.md",
+    "FULL/AGS-FULL-TREEMAP-fixture-catalytic-dpt.md"
   ]
 }

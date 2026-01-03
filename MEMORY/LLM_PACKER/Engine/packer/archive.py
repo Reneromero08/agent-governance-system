@@ -2,9 +2,12 @@
 Archive generation (Phase 1).
 
 Output structure:
-- pack_dir/archive/pack.zip (contains ONLY meta/ and repo/)
-- pack_dir/archive/{SCOPE}-FULL.txt (scope-prefixed siblings)
-- pack_dir/archive/{SCOPE}-SPLIT-INDEX.txt
+- Internal Archive (inside the pack folder):
+  - <pack_dir>/archive/pack.zip (contains ONLY meta/ and repo/)
+  - <pack_dir>/archive/{SCOPE}-FULL*.txt (scope-prefixed siblings)
+  - <pack_dir>/archive/{SCOPE}-SPLIT-*.txt
+- External Archive (top-level, outside the pack folder):
+  - MEMORY/LLM_PACKER/_packs/_archive/<pack_name>.zip (zips the entire final pack folder)
 - etc.
 
 FORBIDDEN: 
@@ -19,7 +22,7 @@ import zipfile
 from pathlib import Path
 from typing import List, Sequence
 
-from .core import PackScope, SCOPE_AGS, read_text
+from .core import PackScope, PACKS_ROOT, read_text
 
 def _iter_files_under(base: Path) -> List[Path]:
     if not base.exists():
@@ -60,10 +63,9 @@ def write_pack_internal_archives(
     pack_dir: Path,
     *,
     scope: PackScope,
-    system_archive_dir: Path,
 ) -> None:
     """
-    Write per-pack archive zips under `<pack>/archive/` and generate sibling text files.
+    Write the Internal Archive under `<pack_dir>/archive/`.
     """
     internal_archive_dir = pack_dir / "archive"
     internal_archive_dir.mkdir(parents=True, exist_ok=True)
@@ -72,11 +74,7 @@ def write_pack_internal_archives(
     pack_zip = internal_archive_dir / "pack.zip"
     _write_zip(pack_zip, pack_dir=pack_dir, roots=[pack_dir / "repo", pack_dir / "meta"])
 
-    # 2. Copy to system archive
-    system_archive_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(pack_zip, system_archive_dir / f"{pack_dir.name}.zip")
-
-    # 3. Generate sibling text files from FULL/ outputs
+    # 2. Generate sibling text files from FULL/ outputs
     # Must use scope prefix
     full_dir = pack_dir / "FULL"
     if full_dir.exists():
@@ -97,7 +95,7 @@ def write_pack_internal_archives(
             dest = internal_archive_dir / name
             shutil.copy2(p, dest)
 
-    # 4. Generate sibling text files from SPLIT/ outputs
+    # 3. Generate sibling text files from SPLIT/ outputs
     split_dir = pack_dir / "SPLIT"
     if split_dir.exists():
         for p in sorted(split_dir.glob("*.md")):
@@ -120,3 +118,33 @@ def write_pack_internal_archives(
             dest = internal_archive_dir / txt_name
             dest.write_text(read_text(p), encoding="utf-8")
 
+
+def write_pack_external_archive(pack_dir: Path, *, scope: PackScope) -> Path:
+    """
+    Write the External Archive zip under `MEMORY/LLM_PACKER/_packs/_archive/`.
+
+    The external zip contains the entire final pack folder (FULL/SPLIT/LITE/archive).
+    """
+    external_dir = PACKS_ROOT / "_archive"
+    external_dir.mkdir(parents=True, exist_ok=True)
+    zip_path = external_dir / f"{pack_dir.name}.zip"
+
+    # Create zip deterministically (sorted by path).
+    zip_path.parent.mkdir(parents=True, exist_ok=True)
+    temp_zip = zip_path.parent / f"{zip_path.name}.tmp"
+    if temp_zip.exists():
+        temp_zip.unlink()
+    if zip_path.exists():
+        try:
+            zip_path.unlink()
+        except OSError:
+            pass
+
+    with zipfile.ZipFile(temp_zip, "w", compression=zipfile.ZIP_DEFLATED, compresslevel=6) as zf:
+        for file_path in _iter_files_under(pack_dir):
+            rel = file_path.relative_to(pack_dir).as_posix()
+            arcname = f"{pack_dir.name}/{rel}"
+            zf.write(file_path, arcname)
+
+    shutil.move(str(temp_zip), str(zip_path))
+    return zip_path

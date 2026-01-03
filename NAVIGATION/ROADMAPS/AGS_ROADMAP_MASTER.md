@@ -12,10 +12,7 @@ source_docs:
   - LAW/CONTEXT/decisions/ADR-030-semantic-core-architecture.md
 ---
 
-<!-- CONTENT_HASH: 306dc1c406dfa958879e460535a7bf6e4af65cb9316c4f62f753381622af4602 -->
-
-
-
+<!-- CONTENT_HASH: febb847efa20f0bdb1a978d246585b72d655d367af8d4cae8839a8a6c131486d -->
 # Purpose
 
 Maximize Resonance ($R$) by aligning Essence ($E$) (Human Intent) with Execution ($f$) through low-Entropy ($\nabla S$) governance.
@@ -232,26 +229,27 @@ Update LLM Packer to work with new bucket structure.
 - [x] **P.1.1**: Update `Engine/packer/core.py` to use new bucket paths (LAW/, CAPABILITY/, NAVIGATION/)
 - [x] **P.1.2**: Update `Engine/packer/split.py` to scan new bucket roots
 - [x] **P.1.3**: Update `Engine/packer/lite.py` to prioritize new bucket structure (HIGH ELO: LAW/CANON/, NAVIGATION/MAPS/)
-- [ ] **P.1.4**: Update all scope configs (AGS, CAT, LAB) to reference new paths
+- [x] **P.1.4**: Update scope configs to reference new paths (AGS + LAB; CAT integrated into main repo)
 - [x] **P.1.5**: Update tests in `LAW/CONTRACTS/` to verify new bucket paths
 - [x] **P.1.6**: Update documentation (README, AGENTS.md) to reference new structure
+- [x] **P.1.7**: Clarify Internal vs External archives and enable safe pack rotation (External archive under `_packs/_archive/`; Internal archive inside each pack)
 - **Exit Criteria:**
   - [x] Packer successfully generates packs using new bucket paths
   - [x] All tests pass with new structure
   - [x] No references to old paths (CANON/, CONTEXT/, etc.) in packer code
 
-## P.2: CAS Integration (Future)
+## P.2: CAS Integration (P0)
 Integrate LLM Packer with Content-Addressed Storage (depends on Lane Z.2).
-- [ ] **P.2.1**: Refactor LITE packs to use CAS references (manifests only, not full bodies)
-- [ ] **P.2.2**: Update packer to write file bodies to CAS, return hashes
-- [ ] **P.2.3**: Add CAS verification (fail-closed if CAS blob missing)
+- [x] **P.2.1**: Refactor LITE packs to use CAS references (manifests only, not full bodies)
+- [x] **P.2.2**: Update packer to write file bodies to CAS and emit `sha256:` refs
+- [x] **P.2.3**: Add CAS verification (fail-closed if CAS blob missing)
 - [ ] **P.2.4**: Implement garbage collection (prune unreferenced CAS blobs)
 - [ ] **P.2.5**: Benchmark deduplication savings (same file = one CAS blob)
 - **Exit Criteria:**
-  - LITE packs are 80%+ smaller (manifests only)
-  - CAS deduplication works
-  - Verification passes
-  - GC is safe
+  - [x] LITE packs are manifest-only (no repo file bodies)
+  - [x] CAS deduplication works
+  - [x] Verification passes (root audit + CAS presence)
+  - [ ] GC is safe
 
 **See:** `MEMORY/PACKER_ROADMAP.md` for detailed packer-specific roadmap.
 

@@ -11,13 +11,11 @@
     "meta/PACK_INFO.json",
     "meta/BUILD_TREE.txt",
     "meta/PROVENANCE.json",
-    "SPLIT/CATALYTIC-DPT-00_INDEX.md",
-    "SPLIT/CATALYTIC-DPT-01_DOCS.md",
-    "SPLIT/CATALYTIC-DPT-02_CONFIG.md",
-    "SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
-    "SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
-    "LITE/CATALYTIC-DPT-00_INDEX.md",
-    "FULL/CATALYTIC-DPT-FULL-fixture-catalytic-dpt-lab-split-lite.md",
-    "FULL/CATALYTIC-DPT-FULL-TREEMAP-fixture-catalytic-dpt-lab-split-lite.md"
+    "SPLIT/LAB-00_INDEX.md",
+    "SPLIT/LAB-01_DOCS.md",
+    "SPLIT/LAB-02_SYSTEM.md",
+    "LITE/LAB-00_INDEX.md",
+    "FULL/LAB-FULL-fixture-catalytic-dpt-lab-split-lite.md",
+    "FULL/LAB-FULL-TREEMAP-fixture-catalytic-dpt-lab-split-lite.md"
   ]
 }

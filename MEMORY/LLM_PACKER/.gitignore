@@ -1,10 +1,9 @@
 _packs/**
 !_packs/
 !_packs/.gitkeep
-!_packs/archive/
-!_packs/archive/.gitkeep
+!_packs/_archive/
+!_packs/_archive/.gitkeep
+!_packs/_archive/**
 !_packs/_state/
 !_packs/_state/.gitkeep
 !_packs/_system/
-!_packs/_system/archive/
-!_packs/_system/archive/*.zip

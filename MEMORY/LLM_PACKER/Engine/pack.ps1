@@ -1,5 +1,5 @@
 param(
-  [ValidateSet("ags", "catalytic-dpt", "lab")]
+  [ValidateSet("ags", "lab")]
   [string]$Scope = "ags",
   [string]$OutDir = "",
   [ValidateSet("full", "delta")]
@@ -53,9 +53,7 @@ if ($PSBoundParameters.ContainsKey("NoCombined")) { $combinedEnabled = $false }
 if ($PSBoundParameters.ContainsKey("SplitLite")) { $splitLiteEnabled = $true }
 
 if ($OutDir -eq "") {
-  if ($Scope -eq "catalytic-dpt") {
-    $OutDir = "MEMORY/LLM_PACKER/_packs/catalytic-dpt-pack-$Stamp"
-  } elseif ($Scope -eq "lab") {
+  if ($Scope -eq "lab") {
     $OutDir = "MEMORY/LLM_PACKER/_packs/lab-pack-$Stamp"
   } else {
     $OutDir = "MEMORY/LLM_PACKER/_packs/ags-pack-$Stamp"

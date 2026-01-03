@@ -31,6 +31,17 @@ def run_process(args: List[str]) -> subprocess.CompletedProcess:
     return subprocess.run(args, capture_output=True, text=True)
 
 
+def run_process_stream(args: List[str], *, cwd: Path) -> int:
+    """
+    Run a subprocess while streaming stdout/stderr to the console.
+
+    The contract runner is often executed in environments where stdout can be
+    buffered; streaming avoids "looks stuck" behavior for long-running steps.
+    """
+    res = subprocess.run(args, cwd=str(cwd))
+    return res.returncode
+
+
 def run_validation(validate_script: Path, actual_path: Path, expected_path: Path) -> subprocess.CompletedProcess:
     return run_process([
         sys.executable,
@@ -84,11 +95,10 @@ def ensure_navigation_dbs() -> int:
         if not script_path.exists():
             print(f"[contracts/runner] Missing required build script: {script_path}")
             return 1
-        print(f"[contracts/runner] Building navigation DB via {script_path.relative_to(PROJECT_ROOT)}")
-        res = run_process(cmd)
-        if res.returncode != 0:
-            print(res.stdout)
-            print(res.stderr)
+        print(f"[contracts/runner] Building navigation DB via {script_path.relative_to(PROJECT_ROOT)}", flush=True)
+        rc = run_process_stream(cmd, cwd=PROJECT_ROOT)
+        if rc != 0:
+            print(f"[contracts/runner] Build failed (rc={rc})", flush=True)
             return 1
 
     return 0
@@ -103,7 +113,7 @@ def run_contract_fixture(input_path: Path) -> int:
     if not DEFAULT_VALIDATE.exists():
         print(f"Missing default validator at {DEFAULT_VALIDATE}")
         return 1
-    print(f"Running contract fixture in {fixture_dir}.")
+    print(f"Running contract fixture in {fixture_dir}.", flush=True)
     result = run_validation(DEFAULT_VALIDATE, input_path, expected)
     if result.returncode != 0:
         print(result.stdout)
@@ -136,16 +146,15 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
     output_dir.mkdir(parents=True, exist_ok=True)
     actual_path = output_dir / "actual.json"
 
-    print(f"Running skill fixture in {fixture_dir}.")
-    result = run_process([
+    print(f"Running skill fixture in {fixture_dir}.", flush=True)
+    rc = run_process_stream([
         sys.executable,
+        "-u",
         str(run_script),
         str(input_path),
         str(actual_path),
-    ])
-    if result.returncode != 0:
-        print(result.stdout)
-        print(result.stderr)
+    ], cwd=PROJECT_ROOT)
+    if rc != 0:
         print(f"!!! FAILURE (EXEC): {fixture_dir} !!!")
         return 1
 

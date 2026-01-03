@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 1423eea527b9d3fcbebd6ec045ab982c24552cb7d5af51c11398824cac0f6cf9 -->
+<!-- CONTENT_HASH: 989e618d2405bee643d4a04f67bf0ccf30ee24d49cf9bf6e274047b0a3ec231d -->
 
 # LLM Packer Roadmap
 
@@ -148,7 +148,7 @@ Do NOT fix code then modularize. Modularize AS you fix so we only do it once.
 - [x] Delete old `Engine/packer.py` after migration complete
 - [x] Update `Engine/pack.ps1` to use canonical `python -m MEMORY.LLM_PACKER.Engine.packer` entry point
 - [x] Update `Engine/verify_phase1.py` to verify treemap presence and COMBINED-free output
-- [x] Update Launchers (`1-AGS-PACK.cmd`, `2-CAT-PACK.cmd`, `3-LAB-PACK.cmd`)
+- [x] Update Launchers (`1-AGS-PACK.cmd`, `2-CAT-PACK.cmd`, `2-LAB-PACK.cmd`)
 - [x] Refactor `lab` scope key and naming logic
 
 ---

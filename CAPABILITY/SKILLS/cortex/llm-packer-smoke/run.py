@@ -112,31 +112,16 @@ def main(input_path: Path, output_path: Path) -> int:
                 "SPLIT/AGS-01_LAW.md",
                 "SPLIT/AGS-02_CAPABILITY.md",
                 "SPLIT/AGS-03_NAVIGATION.md",
-                "SPLIT/AGS-04_DIRECTION.md",
-                "SPLIT/AGS-05_THOUGHT.md",
                 "SPLIT/AGS-06_MEMORY.md",
                 "SPLIT/AGS-07_ROOT_FILES.md",
-            ]
-        )
-    elif scope == "catalytic-dpt":
-        required.extend(
-            [
-                "SPLIT/CATALYTIC-DPT-00_INDEX.md",
-                "SPLIT/CATALYTIC-DPT-01_DOCS.md",
-                "SPLIT/CATALYTIC-DPT-02_CONFIG.md",
-                "SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
-                "SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
             ]
         )
     elif scope == "lab":
         required.extend(
             [
-                "SPLIT/CATALYTIC-DPT-LAB-00_INDEX.md",
-                "SPLIT/CATALYTIC-DPT-LAB-01_DOCS.md",
-                "SPLIT/CATALYTIC-DPT-LAB-02_COMMONSENSE.md",
-                "SPLIT/CATALYTIC-DPT-LAB-03_MCP.md",
-                "SPLIT/CATALYTIC-DPT-LAB-04_RESEARCH.md",
-                "SPLIT/CATALYTIC-DPT-LAB-05_SYSTEM.md",
+                "SPLIT/LAB-00_INDEX.md",
+                "SPLIT/LAB-01_DOCS.md",
+                "SPLIT/LAB-02_SYSTEM.md",
             ]
         )
     else:
@@ -146,16 +131,14 @@ def main(input_path: Path, output_path: Path) -> int:
     if split_lite or profile == "lite":
         if scope == "ags":
             required.append("LITE/AGS-00_INDEX.md")
-        elif scope == "catalytic-dpt":
-            required.append("LITE/CATALYTIC-DPT-00_INDEX.md")
         else:
-            required.append("LITE/CATALYTIC-DPT-LAB-00_INDEX.md")
+            required.append("LITE/LAB-00_INDEX.md")
 
     if combined:
         required.extend(
             [
-                f"FULL/{'AGS' if scope == 'ags' else ('CATALYTIC-DPT' if scope == 'catalytic-dpt' else 'CATALYTIC-DPT-LAB')}-FULL-{stamp}.md",
-                f"FULL/{'AGS' if scope == 'ags' else ('CATALYTIC-DPT' if scope == 'catalytic-dpt' else 'CATALYTIC-DPT-LAB')}-FULL-TREEMAP-{stamp}.md",
+                f"FULL/{'AGS' if scope == 'ags' else 'LAB'}-FULL-{stamp}.md",
+                f"FULL/{'AGS' if scope == 'ags' else 'LAB'}-FULL-TREEMAP-{stamp}.md",
             ]
         )
     missing = [p for p in required if not (out_dir / p).exists()]
@@ -170,12 +153,9 @@ def main(input_path: Path, output_path: Path) -> int:
     if scope == "ags":
         start_here_mentions = ["`repo/AGENTS.md`", "`repo/README.md`"]
         entrypoints_mentions = ["`repo/AGENTS.md`", "`repo/README.md`"]
-    elif scope == "catalytic-dpt":
-        start_here_mentions = ["`repo/CATALYTIC-DPT/AGENTS.md`", "`repo/CATALYTIC-DPT/README.md`"]
-        entrypoints_mentions = ["`repo/CATALYTIC-DPT/AGENTS.md`", "`repo/CATALYTIC-DPT/README.md`"]
     else:
-        start_here_mentions = ["`repo/CATALYTIC-DPT/LAB/`"]
-        entrypoints_mentions = ["`repo/CATALYTIC-DPT/LAB/`"]
+        start_here_mentions = ["`repo/THOUGHT/LAB/`"]
+        entrypoints_mentions = ["`repo/THOUGHT/LAB/`"]
 
     for mention in start_here_mentions:
         if mention not in start_here_text:

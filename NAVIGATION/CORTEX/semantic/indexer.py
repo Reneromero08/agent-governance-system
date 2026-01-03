@@ -15,8 +15,9 @@ import re
 import hashlib
 import sys
 import io
+import subprocess
 from pathlib import Path
-from typing import List, Dict, Optional
+from typing import List, Dict, Optional, Set
 from NAVIGATION.CORTEX.db.system1_builder import System1DB
 
 # Fix Windows Unicode console encoding issue
@@ -54,6 +55,28 @@ class CortexIndexer:
         self.section_index = []
         META_DIR.mkdir(exist_ok=True)
 
+    def _get_tracked_files(self, root: Path) -> Optional[Set[Path]]:
+        """
+        Return a set of absolute paths for git-tracked files under `root`.
+
+        If git isn't available or the directory isn't a git repo, returns None (no filtering).
+        """
+        try:
+            result = subprocess.run(
+                ["git", "ls-files", "-z"],
+                cwd=root,
+                capture_output=True,
+            )
+            if result.returncode != 0:
+                return None
+            paths: Set[Path] = set()
+            for p in result.stdout.split(b"\0"):
+                if p:
+                    paths.add((root / os.fsdecode(p)).resolve())
+            return paths
+        except Exception:
+            return None
+
     def index_all(self):
         """Walk target directory and index all markdown files."""
         safe_print(f"[Indexer] Starting index of {self.target_dir}...")
@@ -69,6 +92,10 @@ class CortexIndexer:
         target_abs = self.target_dir.resolve()
         cwd_abs = Path.cwd().resolve()
 
+        tracked_files = self._get_tracked_files(cwd_abs)
+        if tracked_files is not None:
+            safe_print(f"[Indexer] Git filter active: {len(tracked_files)} tracked files found")
+
         for root, dirs, files in os.walk(target_abs):
             # Prune ignored directories in-place
             dirs[:] = [d for d in dirs if d not in ignore_dirs]
@@ -77,6 +104,9 @@ class CortexIndexer:
                 if file.endswith(".md") and file not in ignore_files:
                     full_path = (Path(root) / file).resolve()
                     try:
+                        if tracked_files is not None and full_path not in tracked_files:
+                            continue
+
                         # Try to make path relative to CWD if possible, else use absolute
                         try:
                             rel_path = full_path.relative_to(cwd_abs).as_posix()
