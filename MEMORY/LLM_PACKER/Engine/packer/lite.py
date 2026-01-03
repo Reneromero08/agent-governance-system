@@ -9,14 +9,18 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Sequence
 
-from .core import PackScope, SCOPE_AGS, SCOPE_CATALYTIC_DPT, SCOPE_LAB, read_text
+from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text
 
 def rel_posix(*parts: str) -> str:
     return Path(*parts).as_posix()
 
 def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
     """
-    Write a discussion-first LITE set.
+    Write a discussion-first LITE index.
+
+    P.2 contract: LITE must be manifest-only (no repo file bodies). This module
+    only writes human-readable index stubs; manifests and CAS refs are generated
+    in `core.py`.
     """
     lite_dir = pack_dir / "LITE"
     lite_dir.mkdir(parents=True, exist_ok=True)
@@ -57,50 +61,23 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
             ),
         )
 
-    elif scope.key == SCOPE_CATALYTIC_DPT.key:
-        write(
-            lite_dir / f"{scope.file_prefix}-00_INDEX.md",
-            "\n".join(
-                [
-                    f"# {scope.file_prefix} Pack Index (LITE)",
-                    "",
-                    "Lite profile not yet fully implemented for this scope.",
-                    "See FULL/ or SPLIT/ for content.",
-                    "",
-                ]
-            ),
-        )
     elif scope.key == SCOPE_LAB.key:
         write(
-            lite_dir / f"{scope.file_prefix}-00_INDEX.md",
+            lite_dir / "LAB-00_INDEX.md",
             "\n".join(
                 [
-                    f"# {scope.file_prefix} Pack Index (LITE)",
+                    "# LAB Pack Index (LITE)",
                     "",
-                    "Lite profile not yet fully implemented for this scope.",
-                    "See FULL/ or SPLIT/ for content.",
+                    "This directory contains a compressed, discussion-first map of the pack.",
+                    "",
+                    "## Read order",
+                    "1) `repo/THOUGHT/LAB/`",
+                    "2) `meta/PACK_INFO.json`",
+                    "3) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
                     "",
                 ]
             ),
         )
-
-    # Copy SPLIT chunk references (stub implementation for now, mirroring logic)
-    # Ideally logic would be more ELO-aware, but for Phase 1 we follow roadmap
-    # constraints to output to LITE/ only.
-    if scope.key == SCOPE_AGS.key:
-        chunks = [
-            "AGS-01_LAW.md",
-            "AGS-02_CAPABILITY.md",
-            "AGS-03_NAVIGATION.md",
-            "AGS-04_DIRECTION.md",
-            "AGS-06_MEMORY.md",
-            "AGS-07_ROOT_FILES.md",
-        ]
-        split_src = pack_dir / "SPLIT"
-        for chunk in chunks:
-            src = split_src / chunk
-            if src.exists():
-                write(lite_dir / chunk, read_text(src))
 
 def write_lite_indexes(
     pack_dir: Path,

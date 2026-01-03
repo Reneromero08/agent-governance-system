@@ -8,10 +8,13 @@ import hashlib
 import json
 import re
 import shutil
+import subprocess
 import sys
+import zipfile
 from dataclasses import dataclass
+from contextlib import contextmanager
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Sequence
+from typing import Any, Dict, Iterable, List, Optional, Tuple, Sequence, Iterator
 
 # Constants
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
@@ -19,12 +22,14 @@ MEMORY_DIR = PROJECT_ROOT / "MEMORY"
 LLM_PACKER_DIR = MEMORY_DIR / "LLM_PACKER"
 PACKS_ROOT = LLM_PACKER_DIR / "_packs"
 SYSTEM_DIR = PACKS_ROOT / "_system"
+EXTERNAL_ARCHIVE_DIR = PACKS_ROOT / "_archive"
 FIXTURE_PACKS_DIR = SYSTEM_DIR / "fixtures"
 STATE_DIR = SYSTEM_DIR / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
 
 CANON_VERSION_FILE = PROJECT_ROOT / "LAW" / "CANON" / "VERSIONING.md"
 GRAMMAR_VERSION = "1.0"
+P2_MANIFEST_VERSION = "P2.0"
 
 # Token estimation constants
 CHARS_PER_TOKEN = 4
@@ -45,6 +50,199 @@ TEXT_BASENAMES = {".gitignore", ".gitattributes", ".editorconfig", ".htaccess", 
 
 def rel_posix(*parts: str) -> str:
     return Path(*parts).as_posix()
+
+def _canonical_json_bytes(payload: Any) -> bytes:
+    return (json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
+
+def _sha256_hex(data: bytes) -> str:
+    return hashlib.sha256(data).hexdigest()
+
+def _bucket_ordered(include_dirs: Sequence[str]) -> List[str]:
+    # P.2 ordering rule
+    preferred = ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", ".github"]
+    present: set[str] = set()
+    for d in include_dirs:
+        try:
+            present.add(Path(d).parts[-1])
+        except Exception:
+            continue
+    return [b for b in preferred if b in present]
+
+@contextmanager
+def _override_cas_root(cas_root: Optional[Path]) -> Iterator[None]:
+    if cas_root is None:
+        yield
+        return
+    # Only used for deterministic tests; production uses default CAS root.
+    from CAPABILITY.CAS import cas as cas_mod
+    old = cas_mod._CAS_ROOT
+    cas_mod._CAS_ROOT = Path(cas_root)
+    try:
+        yield
+    finally:
+        cas_mod._CAS_ROOT = old
+
+def _git_repo_state(project_root: Path) -> Dict[str, str]:
+    def run(args: List[str]) -> str:
+        try:
+            res = subprocess.run(args, cwd=str(project_root), capture_output=True, text=True, check=False)
+            if res.returncode != 0:
+                return ""
+            return (res.stdout or "").strip()
+        except Exception:
+            return ""
+
+    head = run(["git", "rev-parse", "HEAD"])
+    branch = run(["git", "rev-parse", "--abbrev-ref", "HEAD"])
+    out: Dict[str, str] = {}
+    if head:
+        out["commit"] = head
+    if branch and branch != "HEAD":
+        out["branch"] = branch
+    return out
+
+def _validate_artifact_ref(ref: str) -> str:
+    if not re.fullmatch(r"sha256:[0-9a-f]{64}", ref):
+        raise ValueError(f"PACK_P2_INVALID_REF:{ref}")
+    return ref
+
+def _strip_sha256_prefix(ref: str) -> str:
+    _validate_artifact_ref(ref)
+    return ref.split(":", 1)[1]
+
+def _write_run_roots(runs_dir: Path, *, roots: Sequence[str]) -> None:
+    runs_dir.mkdir(parents=True, exist_ok=True)
+    roots_sorted = sorted(set(roots))
+    # Strict format: 64 lowercase hex
+    for h in roots_sorted:
+        if not re.fullmatch(r"[0-9a-f]{64}", h):
+            raise ValueError(f"PACK_P2_INVALID_ROOT_HASH:{h}")
+    (runs_dir / "RUN_ROOTS.json").write_text(json.dumps(roots_sorted, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+
+def _emit_p2_lite_artifacts(
+    pack_dir: Path,
+    *,
+    project_root: Path,
+    include_paths: Sequence[str],
+    scope: PackScope,
+    runs_dir: Path,
+) -> Dict[str, str]:
+    """
+    P.2: CAS-addressed LITE manifest + run records + root-audit gating.
+
+    Returns refs:
+      - manifest_ref (sha256:...)
+      - task_spec_ref (64hex)
+      - output_hashes_ref (64hex)
+      - status_ref (64hex)
+    """
+    from CAPABILITY.ARTIFACTS.store import store_file, store_bytes
+    from CAPABILITY.RUNS.records import put_task_spec, put_output_hashes, put_status
+    from CAPABILITY.AUDIT.root_audit import root_audit
+    from CAPABILITY.CAS import cas as cas_mod
+
+    lite_dir = pack_dir / "LITE"
+    lite_dir.mkdir(parents=True, exist_ok=True)
+
+    # Store each included payload into CAS and build deterministic entries.
+    entries: List[Dict[str, Any]] = []
+    payload_hashes: List[str] = []
+
+    source_root = project_root / scope.source_root_rel
+    for rel in sorted(set(include_paths)):
+        src = source_root / rel
+        if not src.exists() or not src.is_file():
+            raise ValueError(f"PACK_P2_MISSING_SOURCE:{Path(rel).as_posix()}")
+        ref = _validate_artifact_ref(store_file(str(src)))
+        payload_hashes.append(_strip_sha256_prefix(ref))
+        entries.append(
+            {
+                "path": Path(rel).as_posix(),
+                "ref": ref,
+                "bytes": int(src.stat().st_size),
+                "ext": src.suffix.lower(),
+                "kind": "FILE",
+            }
+        )
+
+    entries.sort(key=lambda e: e["path"])
+    # Dedup by path (fail-closed)
+    seen: set[str] = set()
+    for e in entries:
+        if e["path"] in seen:
+            raise ValueError(f"PACK_P2_DUPLICATE_MANIFEST_PATH:{e['path']}")
+        seen.add(e["path"])
+
+    manifest = {
+        "version": P2_MANIFEST_VERSION,
+        "scope": scope.key,
+        "repo_state": _git_repo_state(project_root),
+        "buckets": _bucket_ordered(scope.include_dirs),
+        "entries": entries,
+    }
+    manifest_bytes = _canonical_json_bytes(manifest)
+    (lite_dir / "PACK_MANIFEST.json").write_bytes(manifest_bytes)
+
+    manifest_ref = _validate_artifact_ref(store_bytes(manifest_bytes))
+    manifest_hash = _strip_sha256_prefix(manifest_ref)
+
+    task_spec = {
+        "scope": scope.key,
+        "repo_state": _git_repo_state(project_root),
+        "include_dirs": list(scope.include_dirs),
+        "excluded_dir_parts": sorted(scope.excluded_dir_parts),
+        "modes": ["FULL", "SPLIT", "LITE"],
+        "manifest_version": P2_MANIFEST_VERSION,
+        "grammar_version": GRAMMAR_VERSION,
+    }
+    task_spec_ref = put_task_spec(task_spec)
+
+    required_hashes = [manifest_hash, *payload_hashes]
+    output_hashes_ref = put_output_hashes(required_hashes)
+
+    # First roots pass (no status_ref yet)
+    roots_phase1 = sorted(set([task_spec_ref, output_hashes_ref, manifest_hash, *payload_hashes]))
+    _write_run_roots(runs_dir, roots=roots_phase1)
+
+    audit1 = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
+    if audit1.get("verdict") != "PASS":
+        status_payload = {
+            "state": "FAILED",
+            "verdict": "FAIL",
+            "task_spec_ref": task_spec_ref,
+            "output_hashes_ref": output_hashes_ref,
+            "manifest_ref": manifest_ref,
+            # Deterministic snapshot for this pack run (not global CAS state)
+            "cas_snapshot_hash": _sha256_hex("\n".join(sorted(set(roots_phase1))).encode("utf-8")),
+        }
+        status_ref = put_status(status_payload)
+        _write_run_roots(runs_dir, roots=sorted(set([*roots_phase1, status_ref])))
+        audit2 = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
+        raise ValueError(f"PACK_P2_ROOT_AUDIT_FAIL:{audit1.get('errors', [])}:{audit2.get('errors', [])}")
+
+    status_payload = {
+        "state": "COMPLETED",
+        "verdict": "PASS",
+        "task_spec_ref": task_spec_ref,
+        "output_hashes_ref": output_hashes_ref,
+        "manifest_ref": manifest_ref,
+        "cas_snapshot_hash": _sha256_hex("\n".join(sorted(set(roots_phase1))).encode("utf-8")),
+    }
+    status_ref = put_status(status_payload)
+    roots_final = sorted(set([*roots_phase1, status_ref]))
+    _write_run_roots(runs_dir, roots=roots_final)
+    audit_final = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
+    if audit_final.get("verdict") != "PASS":
+        raise ValueError(f"PACK_P2_ROOT_AUDIT_FAIL_FINAL:{audit_final.get('errors', [])}")
+
+    run_refs = {
+        "manifest_ref": manifest_ref,
+        "task_spec_ref": task_spec_ref,
+        "output_hashes_ref": output_hashes_ref,
+        "status_ref": status_ref,
+    }
+    (lite_dir / "RUN_REFS.json").write_bytes(_canonical_json_bytes(run_refs))
+    return run_refs
 
 
 @dataclass(frozen=True)
@@ -85,34 +283,16 @@ SCOPE_AGS = PackScope(
     ),
     excluded_dir_parts=frozenset({
         ".git", "BUILD", "_runs", "_generated", "_packs",
+        "LAB",
         "Original", "ORIGINAL", "research", "RESEARCH", "__pycache__", "node_modules",
-    }),
-    source_root_rel=".",
-)
-
-SCOPE_CATALYTIC_DPT = PackScope(
-    key="catalytic-dpt",
-    title="CATALYTIC-DPT (MAIN, no LAB)",
-    file_prefix="CATALYTIC-DPT",
-    include_dirs=("CAPABILITY", "LAW", "DIRECTION", "NAVIGATION"),
-    root_files=(),
-    anchors=(
-        "AGENTS.md",
-        "README.md",
-        rel_posix("LAW", "CANON", "CONTRACT.md"),
-        rel_posix("LAW", "CANON", "INVARIANTS.md"),
-        "CAPABILITY/TESTBENCH/README.md",
-    ),
-    excluded_dir_parts=frozenset({
-        ".git", "BUILD", "LAB", "_runs", "_generated", "_packs", "__pycache__", "node_modules",
     }),
     source_root_rel=".",
 )
 
 SCOPE_LAB = PackScope(
     key="lab",
-    title="CATALYTIC-DPT (LAB)",
-    file_prefix="CATALYTIC-DPT-LAB",
+    title="LAB (THOUGHT/LAB)",
+    file_prefix="LAB",
     include_dirs=("THOUGHT/LAB",),
     root_files=(),
     anchors=(),
@@ -124,7 +304,6 @@ SCOPE_LAB = PackScope(
 
 SCOPES: Dict[str, PackScope] = {
     SCOPE_AGS.key: SCOPE_AGS,
-    SCOPE_CATALYTIC_DPT.key: SCOPE_CATALYTIC_DPT,
     SCOPE_LAB.key: SCOPE_LAB,
 }
 
@@ -170,6 +349,9 @@ def is_text_path(path: Path) -> bool:
 def is_excluded_rel_path(rel_path: Path, *, excluded_dir_parts: frozenset[str]) -> bool:
     parts = set(rel_path.parts)
     if parts & excluded_dir_parts:
+        return True
+    # P.2: Roots are runtime artifacts and must never be packed (avoid self-reference cycles).
+    if rel_path.name in {"RUN_ROOTS.json", "GC_PINS.json"}:
         return True
     if any(part.startswith(".") and part != ".github" for part in rel_path.parts):
         return True
@@ -281,6 +463,147 @@ def ensure_under_packs_root(out_dir: Path) -> Path:
     return out_dir_resolved
 
 
+def _is_valid_archive_zip(zip_path: Path) -> bool:
+    if not zip_path.exists() or not zip_path.is_file():
+        return False
+    try:
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            # Ensure the zip isn't corrupted.
+            if zf.testzip() is not None:
+                return False
+            names = zf.namelist()
+    except Exception:
+        return False
+
+    has_meta = any(n.startswith("meta/") for n in names)
+    has_repo = any(n.startswith("repo/") for n in names)
+    return has_meta and has_repo
+
+
+def _is_valid_external_archive_zip(zip_path: Path, *, expected_pack_name: str) -> bool:
+    if not zip_path.exists() or not zip_path.is_file():
+        return False
+    try:
+        with zipfile.ZipFile(zip_path, "r") as zf:
+            if zf.testzip() is not None:
+                return False
+            names = zf.namelist()
+    except Exception:
+        return False
+
+    # Must contain internal archive zip and at least one split file for safety.
+    internal_zip = f"{expected_pack_name}/archive/pack.zip"
+    has_internal = internal_zip in set(names)
+    has_split_index = any(n == f"{expected_pack_name}/SPLIT/AGS-00_INDEX.md" or n.endswith("/SPLIT/LAB-00_INDEX.md") for n in names)
+    return has_internal and has_split_index
+
+
+def _maybe_delete_previous_pack(*, current_pack_dir: Path, scope: "PackScope") -> None:
+    """
+    Delete the previous unzipped pack folder ONLY if it is safely zipped and archived.
+
+    "Previous" is the most recently modified sibling pack dir matching the scope prefix, excluding the current pack.
+    """
+    if current_pack_dir.parent.resolve() != PACKS_ROOT.resolve():
+        return
+
+    prefixes: List[str] = []
+    if scope.key == "ags":
+        prefixes = ["ags-pack-", "llm-pack-ags-"]
+    elif scope.key == "lab":
+        prefixes = ["lab-pack-", "llm-pack-lab-"]
+    else:
+        prefixes = [f"{scope.key}-pack-", f"llm-pack-{scope.key}-"]
+
+    candidates: List[Path] = []
+    for p in PACKS_ROOT.iterdir():
+        if not p.is_dir():
+            continue
+        if p.name in {"_system", "_archive", "_state", "archive"}:
+            continue
+        if p.resolve() == current_pack_dir.resolve():
+            continue
+        if not any(p.name.startswith(pref) for pref in prefixes):
+            continue
+        candidates.append(p)
+
+    if not candidates:
+        return
+
+    previous = max(candidates, key=lambda d: d.stat().st_mtime)
+    archived_zip = EXTERNAL_ARCHIVE_DIR / f"{previous.name}.zip"
+    if not _is_valid_external_archive_zip(archived_zip, expected_pack_name=previous.name):
+        return
+    shutil.rmtree(previous)
+
+
+def _migrate_system_archive() -> None:
+    """
+    Legacy: move `_packs/_system/archive/*` into `_packs/_archive/`.
+    """
+    legacy_dir = SYSTEM_DIR / "archive"
+    if not legacy_dir.exists() or not legacy_dir.is_dir():
+        return
+
+    dest_dir = EXTERNAL_ARCHIVE_DIR
+    dest_dir.mkdir(parents=True, exist_ok=True)
+
+    moved_any = False
+    for src in sorted(legacy_dir.iterdir()):
+        if not src.is_file():
+            continue
+        dst = dest_dir / src.name
+
+        # Be robust across filesystems: copy then unlink source (avoid "copy without delete" edge cases).
+        if dst.exists():
+            try:
+                same_size = src.stat().st_size == dst.stat().st_size
+                if same_size:
+                    import hashlib
+
+                    def _sha256(p: Path) -> str:
+                        h = hashlib.sha256()
+                        with p.open("rb") as f:
+                            for chunk in iter(lambda: f.read(1024 * 1024), b""):
+                                h.update(chunk)
+                        return h.hexdigest()
+
+                    if _sha256(src) == _sha256(dst):
+                        try:
+                            src.unlink()
+                            moved_any = True
+                        except OSError:
+                            pass
+                        continue
+            except OSError:
+                pass
+
+            # Preserve content without clobbering the existing external archive name.
+            stem, suffix = src.stem, src.suffix
+            i = 1
+            while True:
+                candidate = dest_dir / f"{stem}__legacy{i}{suffix}"
+                if not candidate.exists():
+                    dst = candidate
+                    break
+                i += 1
+
+        shutil.copy2(src, dst)
+        try:
+            src.unlink()
+        except OSError:
+            # If we can't delete the legacy file, do not fail pack creation.
+            pass
+        moved_any = True
+
+    if moved_any:
+        # Best-effort cleanup.
+        try:
+            legacy_dir.rmdir()
+        except OSError:
+            pass
+
+
 def enforce_included_repo_limits(entries: List[Dict[str, Any]], limits: PackLimits) -> Dict[str, Any]:
     total_bytes = sum(e["size"] for e in entries)
     if total_bytes > limits.max_total_bytes:
@@ -351,37 +674,15 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
                 "",
             ]
         )
-    elif scope.key == SCOPE_CATALYTIC_DPT.key:
-        text = "\n".join(
-            [
-                "# START HERE",
-                "",
-                f"This snapshot is meant to be shared with any LLM to continue work on `{scope.title}`.",
-                "",
-                "## Read order",
-                "1) `repo/CATALYTIC-DPT/AGENTS.md`",
-                "2) `repo/CATALYTIC-DPT/README.md`",
-                "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
-                "4) `repo/CATALYTIC-DPT/swarm_config.json`",
-                "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
-                "6) `meta/ENTRYPOINTS.md`",
-                "",
-                "## Notes",
-                "- Use `FULL/` for single-file output or `SPLIT/` for sectioned reading.",
-                "",
-            ]
-        )
     elif scope.key == SCOPE_LAB.key:
         text = "\n".join(
             [
                 "# START HERE (LAB)",
                 "",
-                "This snapshot contains ALL research and experimental code under `CATALYTIC-DPT/LAB`. It is volatile.",
+                "This snapshot contains ALL research and experimental code under `THOUGHT/LAB`. It is volatile.",
                 "",
                 "## Read order",
-                "1) `repo/CATALYTIC-DPT/LAB/ROADMAP_PATCH_SEMIOTIC.md`",
-                "2) `repo/CATALYTIC-DPT/LAB/COMMONSENSE/`",
-                "3) `repo/CATALYTIC-DPT/LAB/MCP/`",
+                "1) `repo/THOUGHT/LAB/`",
                 "",
                 "## Notes",
                 "- Use `FULL/` for single-file output or `SPLIT/` for sectioned reading.",
@@ -407,28 +708,11 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
                 "Key entrypoints for `AGS`:",
                 "",
                 "- `repo/AGENTS.md`",
+                "- `repo/README.md`",
                 f"- `repo/{canon_contract}`",
                 f"- `repo/{maps_entrypoints}`",
                 f"- `repo/{skills_dir}/`",
                 f"- `repo/{contracts_runner}`",
-                "",
-                "Notes:",
-                "- `FULL/` contains single-file bundles.",
-                "- `SPLIT/` contains chunked sections.",
-                "",
-            ]
-        )
-    elif scope.key == SCOPE_CATALYTIC_DPT.key:
-        text = "\n".join(
-            [
-                "# Snapshot Entrypoints",
-                "",
-                f"Key entrypoints for `{scope.title}`:",
-                "",
-                "- `repo/CATALYTIC-DPT/AGENTS.md`",
-                "- `repo/CATALYTIC-DPT/README.md`",
-                "- `repo/CATALYTIC-DPT/swarm_config.json`",
-                "- `repo/CATALYTIC-DPT/TESTBENCH/`",
                 "",
                 "Notes:",
                 "- `FULL/` contains single-file bundles.",
@@ -443,10 +727,7 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
                 "",
                 f"Key entrypoints for `{scope.title}`:",
                 "",
-                "- `repo/CATALYTIC-DPT/LAB/`",
-                "- `repo/CATALYTIC-DPT/LAB/ROADMAP_PATCH_SEMIOTIC.md`",
-                "- `repo/CATALYTIC-DPT/LAB/COMMONSENSE/`",
-                "- `repo/CATALYTIC-DPT/LAB/MCP/`",
+                "- `repo/THOUGHT/LAB/`",
                 "",
                 "Notes:",
                 "- `FULL/` contains single-file bundles.",
@@ -476,19 +757,11 @@ def write_pack_info(pack_dir: Path, scope: PackScope, stamp: str) -> None:
 
 def write_provenance(pack_dir: Path, scope: PackScope) -> None:
     import os
-    import datetime
-    
-    # Allow deterministic timestamp for tests
-    timestamp = os.getenv("LLM_PACKER_DETERMINISTIC_TIMESTAMP")
-    if not timestamp:
-        timestamp = datetime.datetime.now().isoformat()
-        
+
     prov = {
         "generator": "LLM_PACKER",
-        "generated_at": timestamp,
-        "host": os.getenv("COMPUTERNAME", "unknown"),
-        "user": os.getenv("USERNAME", "unknown"),
-        "scope": scope.key
+        # P.2: deterministic by default (no timestamps / machine identity)
+        "scope": scope.key,
     }
     write_json(pack_dir / "meta" / "PROVENANCE.json", prov)
 
@@ -591,7 +864,7 @@ def write_full_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> None:
     
     for rel in base_paths:
         # Exclude generated output dirs to avoid recursion/duplication
-        if rel.startswith("FULL/") or rel.startswith("SPLIT/") or rel.startswith("LITE/") or rel.startswith("archive/"):
+        if rel.startswith("FULL/") or rel.startswith("SPLIT/") or rel.startswith("LITE/"):
             continue
 
         abs_path = pack_dir / rel
@@ -654,109 +927,126 @@ def make_pack(
     max_entry_bytes: int,
     max_entries: int,
     allow_duplicate_hashes: Optional[bool],
+    p2_runs_dir: Optional[Path] = None,
+    p2_cas_root: Optional[Path] = None,
 ) -> Path:
     from .split import write_split_pack
     from .lite import write_split_pack_lite
-    from .archive import write_pack_internal_archives
+    from .archive import write_pack_internal_archives, write_pack_external_archive
+    from CAPABILITY.CAS import cas as cas_mod
 
     scope = SCOPES.get(scope_key)
     if not scope:
         raise ValueError(f"Unknown scope: {scope_key}")
 
-    manifest, omitted = build_state_manifest(PROJECT_ROOT, scope=scope)
-    digest = manifest_digest(manifest)
+    with _override_cas_root(p2_cas_root):
+        _migrate_system_archive()
+        manifest, omitted = build_state_manifest(PROJECT_ROOT, scope=scope)
+        digest = manifest_digest(manifest)
 
-    if out_dir is None:
-        out_dir = PACKS_ROOT / f"llm-pack-{scope.key}-{digest[:12]}"
-    out_dir = ensure_under_packs_root(out_dir)
+        if out_dir is None:
+            out_dir = PACKS_ROOT / f"llm-pack-{scope.key}-{digest[:12]}"
+        out_dir = ensure_under_packs_root(out_dir)
 
-    SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
-    FIXTURE_PACKS_DIR.mkdir(parents=True, exist_ok=True)
-    STATE_DIR.mkdir(parents=True, exist_ok=True)
+        SYSTEM_DIR.mkdir(parents=True, exist_ok=True)
+        EXTERNAL_ARCHIVE_DIR.mkdir(parents=True, exist_ok=True)
+        FIXTURE_PACKS_DIR.mkdir(parents=True, exist_ok=True)
+        STATE_DIR.mkdir(parents=True, exist_ok=True)
 
-    baseline_path = baseline_path_for_scope(scope)
-    baseline = load_baseline(baseline_path)
-    baseline_files_by_path = {f["path"]: f for f in (baseline or {}).get("files", [])}
-    current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
+        baseline_path = baseline_path_for_scope(scope)
+        baseline = load_baseline(baseline_path)
+        baseline_files_by_path = {f["path"]: f for f in (baseline or {}).get("files", [])}
+        current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
 
-    if allow_duplicate_hashes is None:
-        allow_duplicate_hashes = True
+        if allow_duplicate_hashes is None:
+            allow_duplicate_hashes = True
 
-    # validate_repo_state_manifest logic (simplified inline or stubbed)
-    # We trust build_state_manifest for Phase 1 refactor
+        # validate_repo_state_manifest logic (simplified inline or stubbed)
+        # We trust build_state_manifest for Phase 1 refactor
 
-    if mode == "delta" and baseline is not None:
-        changed = []
-        for path, entry in current_files_by_path.items():
-            prev = baseline_files_by_path.get(path)
-            if prev is None or prev.get("hash") != entry.get("hash") or prev.get("size") != entry.get("size"):
-                changed.append(path)
-        deleted = sorted(set(baseline_files_by_path.keys()) - set(current_files_by_path.keys()))
-        include_paths = sorted(set(changed) | set(scope.anchors))
-    else:
-        include_paths = sorted(set(current_files_by_path.keys()) | set(scope.anchors))
-        deleted = []
+        if mode == "delta" and baseline is not None:
+            changed = []
+            for path, entry in current_files_by_path.items():
+                prev = baseline_files_by_path.get(path)
+                if prev is None or prev.get("hash") != entry.get("hash") or prev.get("size") != entry.get("size"):
+                    changed.append(path)
+            deleted = sorted(set(baseline_files_by_path.keys()) - set(current_files_by_path.keys()))
+            include_paths = sorted(set(changed) | set(scope.anchors))
+        else:
+            include_paths = sorted(set(current_files_by_path.keys()) | set(scope.anchors))
+            deleted = []
 
-    limits = PackLimits(
-        max_total_bytes=max_total_bytes,
-        max_entry_bytes=max_entry_bytes,
-        max_entries=max_entries,
-        allow_duplicate_hashes=allow_duplicate_hashes,
-    )
-    included_entries = [current_files_by_path[p] for p in include_paths if p in current_files_by_path]
-    included_stats = enforce_included_repo_limits(included_entries, limits=limits)
+        limits = PackLimits(
+            max_total_bytes=max_total_bytes,
+            max_entry_bytes=max_entry_bytes,
+            max_entries=max_entries,
+            allow_duplicate_hashes=allow_duplicate_hashes,
+        )
+        included_entries = [current_files_by_path[p] for p in include_paths if p in current_files_by_path]
+        included_stats = enforce_included_repo_limits(included_entries, limits=limits)
 
-    if out_dir.exists():
-        shutil.rmtree(out_dir)
-    (out_dir / "meta").mkdir(parents=True, exist_ok=True)
-    (out_dir / "repo").mkdir(parents=True, exist_ok=True)
+        if out_dir.exists():
+            shutil.rmtree(out_dir)
+        (out_dir / "meta").mkdir(parents=True, exist_ok=True)
+        (out_dir / "repo").mkdir(parents=True, exist_ok=True)
 
-    # 1. Copy Repo
-    copy_repo_files(out_dir, PROJECT_ROOT, include_paths, scope=scope)
-    write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
-    write_build_tree(out_dir, PROJECT_ROOT)
+        # 1. Copy Repo
+        copy_repo_files(out_dir, PROJECT_ROOT, include_paths, scope=scope)
+        write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
+        write_build_tree(out_dir, PROJECT_ROOT)
 
-    # 2. Meta Docs
-    write_start_here(out_dir, scope=scope)
-    write_entrypoints(out_dir, scope=scope)
-    write_pack_info(out_dir, scope=scope, stamp=stamp or digest[:12])
-    write_provenance(out_dir, scope)
-    write_omitted(out_dir, omitted)
+        # 2. Meta Docs
+        write_start_here(out_dir, scope=scope)
+        write_entrypoints(out_dir, scope=scope)
+        write_pack_info(out_dir, scope=scope, stamp=stamp or digest[:12])
+        write_provenance(out_dir, scope)
+        write_omitted(out_dir, omitted)
 
-    # 3. SPLIT Output (Strictly SPLIT/)
-    repo_pack_paths = [f"repo/{p}" for p in include_paths]
-    write_split_pack(out_dir, repo_pack_paths, scope=scope)
+        # 3. SPLIT Output (Strictly SPLIT/)
+        repo_pack_paths = [f"repo/{p}" for p in include_paths]
+        write_split_pack(out_dir, repo_pack_paths, scope=scope)
 
-    # 4. FULL Output (Strictly FULL/) - if combined requested (renamed from legacy flag)
-    # We respect the legacy flag '--combined' but map it to producing FULL/ output
-    if combined:
-        effective_stamp = stamp or digest[:12]
-        write_full_outputs(out_dir, stamp=effective_stamp, scope=scope)
+        # 4. FULL Output (Strictly FULL/) - if combined requested (renamed from legacy flag)
+        # We respect the legacy flag '--combined' but map it to producing FULL/ output
+        if combined:
+            effective_stamp = stamp or digest[:12]
+            write_full_outputs(out_dir, stamp=effective_stamp, scope=scope)
 
-    # 5. LITE Output (Strictly LITE/)
-    if split_lite or profile == "lite":
-        write_split_pack_lite(out_dir, scope=scope)
+        # 5. LITE Output (Strictly LITE/) + P.2 CAS artifacts
+        if split_lite or profile == "lite":
+            write_split_pack_lite(out_dir, scope=scope)
+            effective_runs_dir = p2_runs_dir or Path("CAPABILITY/RUNS")
+            _emit_p2_lite_artifacts(
+                out_dir,
+                project_root=PROJECT_ROOT,
+                include_paths=include_paths,
+                scope=scope,
+                runs_dir=effective_runs_dir,
+            )
 
-    # 6. File Inventory
-    # effective_stamp used here if combined, otherwise stamp or digest
-    eff_stamp_for_tree = stamp or digest[:12]
-    write_pack_file_tree_and_index(out_dir, scope=scope, stamp=eff_stamp_for_tree, combined=combined)
+        # 6. File Inventory
+        # effective_stamp used here if combined, otherwise stamp or digest
+        eff_stamp_for_tree = stamp or digest[:12]
+        write_pack_file_tree_and_index(out_dir, scope=scope, stamp=eff_stamp_for_tree, combined=combined)
 
-    # 7. Archives (Strictly archive/)
-    if zip_enabled:
-        write_pack_internal_archives(out_dir, scope=scope, system_archive_dir=SYSTEM_DIR / "archive")
-        
-        # Cleanup root meta/ and repo/ as per naming requirement 4
-        # "Pack root must contain ONLY: FULL/, SPLIT/, LITE/, archive/"
-        # Since they are safely inside pack.zip, we delete the folders.
-        try:
-            shutil.rmtree(out_dir / "meta")
-            shutil.rmtree(out_dir / "repo")
-        except Exception as exc:
-            print(f"PACKER_WARNING: Failed to cleanup root folders: {exc}")
+        # 7. Archives
+        if zip_enabled:
+            # Internal Archive lives inside the pack folder (archive/).
+            write_pack_internal_archives(out_dir, scope=scope)
+            
+            # Cleanup root meta/ and repo/ (they are safely inside the Internal Archive zip).
+            try:
+                shutil.rmtree(out_dir / "meta")
+                shutil.rmtree(out_dir / "repo")
+            except Exception as exc:
+                print(f"PACKER_WARNING: Failed to cleanup root folders: {exc}")
 
+            # External Archive is a zip of the final pack folder under `_packs/_archive/`.
+            write_pack_external_archive(out_dir, scope=scope)
 
-    # Update baseline
-    write_json(baseline_path, manifest)
+            _maybe_delete_previous_pack(current_pack_dir=out_dir, scope=scope)
 
-    return out_dir
+        # Update baseline
+        write_json(baseline_path, manifest)
+
+        return out_dir

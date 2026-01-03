@@ -41,8 +41,9 @@ MEMORY/LLM_PACKER/_packs/**
 !MEMORY/LLM_PACKER/_packs/.gitkeep
 !MEMORY/LLM_PACKER/_packs/_state/
 !MEMORY/LLM_PACKER/_packs/_state/.gitkeep
-!MEMORY/LLM_PACKER/_packs/archive/
-!MEMORY/LLM_PACKER/_packs/archive/.gitkeep
+!MEMORY/LLM_PACKER/_packs/_archive/
+!MEMORY/LLM_PACKER/_packs/_archive/.gitkeep
+!MEMORY/LLM_PACKER/_packs/_archive/**
 
 MEMORY/Original/
 

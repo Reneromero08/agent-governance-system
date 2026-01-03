@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 12624a977f71ab48ded52f330899bac291b0fa1e5a6c87691c564714daf93934 -->
+<!-- CONTENT_HASH: 2835948d02cfe366c4b5b97a83e6632ed1167264cd01362d3f30d7c2b2653348 -->
 
 # Pack Determinism Contract
 
@@ -18,8 +18,10 @@ The following metadata files are deterministic by construction:
 3. `meta/REPO_STATE.json` – manifest with `canon_version`, `grammar_version`, and sorted `files`.
 4. `meta/PACK_INFO.json` – reports `scope`, `title`, `stamp`, and `version`.
 5. `NAVIGATION/CORTEX/_generated/SECTION_INDEX.json` and `NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json` (via repository upstream) are regenerated deterministically before packaging.
+6. `LITE/PACK_MANIFEST.json` – deterministic CAS-addressed manifest (P.2), with entries sorted by `path`.
+7. `LITE/RUN_REFS.json` – deterministic refs for run records (P.2).
 
-Some artifacts (e.g., `meta/PROVENANCE.json`, `meta/BUILD_TREE.txt`, and optional `FULL/*` outputs) may include timestamps or environment-derived data. They are explicitly **not** part of the digest and should not be used for cache keys.
+Some artifacts (e.g., `meta/BUILD_TREE.txt` and optional `FULL/*` outputs) may include derived stats. They are explicitly **not** part of the digest and should not be used for cache keys.
 
 ## Version Fields & Mismatch Behavior
 

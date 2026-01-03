@@ -1,8 +1,16 @@
-<!-- CONTENT_HASH: 79ce086589bb08acfed34367493b0c68f6826d6b77744e60f4cd9a0f2a313eb0 -->
+<!-- CONTENT_HASH: ad1b23c844c456cfb6ecca2c57a35ddc825ff317bc644cdf9566952eaf1e1500 -->
 
 # Changelog
 
 All notable changes to the LLM Packer will be documented in this file.
+
+### 2026-01-03 — 1.3.3
+- Added distinct Internal vs External archives (Internal stays inside the pack; External zips the whole pack under `_packs/_archive/`)
+- Pack rotation deletes the previous unzipped pack only after its External Archive validates
+
+### 2026-01-03 — 1.3.2
+- Removed `catalytic-dpt` scope and the `Engine/2-CAT-PACK.cmd` launcher
+- AGS scope excludes `THOUGHT/LAB/**`; LAB scope packs `THOUGHT/LAB/**` only
 
 ### 2025-12-27 — 1.3.1
 **Modular Infrastructure Refactor & Strict Structure Enforcement**
@@ -15,7 +23,7 @@ All notable changes to the LLM Packer will be documented in this file.
     *   Archive sibling filenames are strictly scope-prefixed (e.g., `AGS-SPLIT-00_INDEX.txt`).
     *   implemented safe zip writing (write to `.tmp` then atomic move) to resolve Windows file locking issues.
 *   **Naming & Organization**:
-    *   Root shortcuts numbered for organization: `1-AGS-PACK.lnk`, `2-CAT-PACK.lnk`, `3-LAB-PACK.lnk`.
+    *   Root shortcuts numbered for organization: `1-AGS-PACK.lnk`, `2-CAT-PACK.lnk`, `2-LAB-PACK.lnk`.
     *   Internal pack directories follow `{scope}-pack-{timestamp}` format.
     *   LAB scope refactored to use key `lab` and output folder `lab-pack-{timestamp}`.
 *   **Scope & Context**:

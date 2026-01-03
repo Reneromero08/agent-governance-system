@@ -1,8 +1,20 @@
-<!-- CONTENT_HASH: b3710225ed27cf3ea009b089dd1dff9f74c9659884ed572d59cb3c0be6381085 -->
+<!-- CONTENT_HASH: 922b86dec7b1f976777f299a5e50b988544a5f60acdd6bd3445fd4ba745b3c31 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.2] - 2026-01-03
+
+### Changed
+- **P.2: CAS Integration (P0)** — integrated LLM Packer LITE outputs with CAS (manifest-only) and root-audit gating.
+  - LITE writes `LITE/PACK_MANIFEST.json` (path → `sha256:` ref) and `LITE/RUN_REFS.json` (TASK_SPEC/OUTPUT_HASHES/STATUS refs).
+  - Packer emits roots to `CAPABILITY/RUNS/RUN_ROOTS.json` and gates completion on `CAPABILITY/AUDIT/root_audit.py` (Mode B).
+- **Packer scopes** — removed `catalytic-dpt` scope (CAT integrated into main repo); AGS scope excludes `THOUGHT/LAB/**` and LAB is a separate scope.
+- **Packer archives** — clarified and separated archives:
+  - **Internal Archive**: `<pack>/archive/pack.zip` (meta+repo only) + scope-prefixed `.txt` siblings.
+  - **External Archive**: `MEMORY/LLM_PACKER/_packs/_archive/<pack_name>.zip` (whole pack folder).
+  - Safe rotation: previous unzipped pack is deleted only after its External Archive validates.
 
 ## [3.3.1] - 2026-01-02
 
@@ -804,7 +816,7 @@ This release establishes The Living Formula as the primary driver for navigating
 
 #### Added
 - Modular Packer Architecture: Refactored monolithic script into `MEMORY/LLM_PACKER/Engine/packer/` package with dedicated `core`, `split`, `lite`, and `archive` components.
-- New Launchers: `1-AGS-PACK.cmd`, `2-CAT-PACK.cmd`, `3-LAB-PACK.cmd` for scoped packing.
+- New Launchers: `1-AGS-PACK.cmd`, `2-CAT-PACK.cmd`, `2-LAB-PACK.cmd` for scoped packing.
 - `lab` scope support for `CATALYTIC-DPT/LAB` research packs.
 - `MEMORY/LLM_PACKER/CHANGELOG.md` as the single source of truth for packer history.
 - Migration tooling: `packer_legacy_backup.py`, `migrate_phase1.py`, `verify_phase1.py`, `refactor_packer.py`, `scan_old_refs.py`.

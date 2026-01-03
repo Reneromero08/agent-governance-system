@@ -59,7 +59,7 @@ def main():
     parser.add_argument(
         "--zip",
         action="store_true",
-        help="Write a zip archive under MEMORY/LLM_PACKER/_packs/_system/archive/.",
+        help="Write archives: Internal (<pack>/archive/pack.zip) and External (MEMORY/LLM_PACKER/_packs/_archive/<pack_name>.zip).",
     )
     parser.add_argument(
         "--max-total-bytes",
