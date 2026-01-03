@@ -4,7 +4,7 @@
 Contract runner for the Agent Governance System.
 
 This script discovers and runs fixtures under the `LAW/CONTRACTS/fixtures/` directory
-and skill fixtures under `SKILLS/*/fixtures/`. A fixture consists of an input
+and skill fixtures under `CAPABILITY/SKILLS/*/fixtures/`. A fixture consists of an input
 (`input.json` or other files) and an expected output (`expected.json`).
 The runner executes the relevant skill or validation script, then compares
 actual output to expected output.

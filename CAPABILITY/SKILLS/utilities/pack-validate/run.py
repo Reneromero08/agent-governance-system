@@ -32,14 +32,19 @@ def validate_structure(pack_dir: Path) -> Tuple[List[str], List[str]]:
         errors.append("Missing repo/ directory")
     
     # Check required meta files
-    required_meta = ["PACK_INFO.json", "REPO_STATE.json", "FILE_INDEX.json"]
+    required_meta = [
+        "PACK_INFO.json",
+        "REPO_STATE.json",
+        "FILE_INDEX.json",
+        "FILE_TREE.txt",
+        "START_HERE.md",
+        "ENTRYPOINTS.md",
+        "BUILD_TREE.txt",
+        "PROVENANCE.json",
+    ]
     for f in required_meta:
         if not (pack_dir / "meta" / f).exists():
             errors.append(f"Missing meta/{f}")
-    
-    # Check CONTEXT.txt
-    if not (pack_dir / "meta" / "CONTEXT.txt").exists():
-        warnings.append("Missing meta/CONTEXT.txt - no token estimate available")
     
     return errors, warnings
 
@@ -55,12 +60,16 @@ def validate_navigation(pack_dir: Path) -> Tuple[List[str], List[str]]:
             warnings.append("No START_HERE.md or ENTRYPOINTS.md found")
     
     # Check split files
-    split_dir = pack_dir / "COMBINED" / "SPLIT"
+    split_dir = pack_dir / "SPLIT"
     if split_dir.exists():
-        expected_splits = ["AGS-00_INDEX.md", "AGS-01_CANON.md"]
-        for f in expected_splits:
-            if not (split_dir / f).exists():
-                warnings.append(f"Missing expected split file: {f}")
+        index_files = sorted(p.name for p in split_dir.glob("*-00_INDEX.md") if p.is_file())
+        if not index_files:
+            warnings.append("SPLIT/ exists but no *-00_INDEX.md found")
+        if (split_dir / "AGS-00_INDEX.md").exists():
+            expected = ["AGS-01_LAW.md", "AGS-02_CAPABILITY.md", "AGS-03_NAVIGATION.md"]
+            for name in expected:
+                if not (split_dir / name).exists():
+                    warnings.append(f"Missing expected AGS split file: {name}")
     
     return errors, warnings
 
@@ -70,24 +79,12 @@ def get_stats(pack_dir: Path) -> Dict[str, Any]:
     stats = {
         "files": 0,
         "bytes": 0,
-        "tokens": None,
     }
     
     for path in pack_dir.rglob("*"):
         if path.is_file():
             stats["files"] += 1
             stats["bytes"] += path.stat().st_size
-    
-    # Try to get token count from CONTEXT.txt
-    context_file = pack_dir / "meta" / "CONTEXT.txt"
-    if context_file.exists():
-        content = context_file.read_text(errors="ignore")
-        for line in content.splitlines():
-            if "Estimated tokens:" in line:
-                try:
-                    stats["tokens"] = int(line.split(":")[1].strip().replace(",", ""))
-                except:
-                    pass
     
     return stats
 

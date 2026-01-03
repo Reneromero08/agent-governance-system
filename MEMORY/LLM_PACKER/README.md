@@ -9,57 +9,48 @@ Utility to bundle repo content into a small, shareable snapshot for an LLM.
 ## Scopes
 
 - `ags` (default): packs the full AGS repo (governance system)
-- `catalytic-dpt`: packs `CATALYTIC-DPT/**` excluding `CATALYTIC-DPT/LAB/**` (full snapshot, excluding `__pycache__`, `_runs`, `_generated`, etc.)
-- `catalytic-dpt-lab`: packs only `CATALYTIC-DPT/LAB/**`
+- `catalytic-dpt`: packs `CATALYTIC-DPT/**` (scope-specific snapshot)
+- `lab`: packs `CATALYTIC-DPT/LAB/**`
 
 ## What it includes (FULL profile)
 
-- Repo sources (text only): `CANON/`, `CONTEXT/`, `MAPS/`, `SKILLS/`, `CONTRACTS/`, `MEMORY/`, `CORTEX/`, `TOOLS/`, `.github/`
+- Repo sources (text only): `LAW/`, `CAPABILITY/`, `NAVIGATION/`, `DIRECTION/`, `THOUGHT/`, `MEMORY/`, `.github/`
 - Key root files (text): `AGENTS.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.gitignore`
-- Planning archive index: `CONTEXT/archive/planning/INDEX.md`
+- Planning/history snapshots: `MEMORY/ARCHIVE/` (if present)
 - Generated indices under `meta/` (start here, entrypoints, file tree, file index, BUILD inventory)
-- `COMBINED/` output for easy sharing:
-  - `AGS-FULL-COMBINED-<stamp>.md` and `AGS-FULL-COMBINED-<stamp>.txt`
-  - `AGS-FULL-TREEMAP-<stamp>.md` and `AGS-FULL-TREEMAP-<stamp>.txt`
-- `COMBINED/SPLIT/` output for LLM-friendly loading:
-  - `AGS-00_INDEX.md` plus 7 section files (8 total)
-- Optional `COMBINED/SPLIT_LITE/` output for discussion-first loading (pointers + indexes)
-- Token estimation in `meta/CONTEXT.txt` (per-payload counts for SPLIT, SPLIT_LITE, and combined files if present)
+- Optional `FULL/` output for easy sharing:
+  - `<PREFIX>-FULL-<stamp>.md`
+  - `<PREFIX>-FULL-TREEMAP-<stamp>.md`
+- `SPLIT/` output for LLM-friendly loading:
+  - `<PREFIX>-00_INDEX.md` plus scope-specific section files
+- Optional `LITE/` output for discussion-first loading (index + selected SPLIT chunks)
 
 ## Default behavior (LLM-PACK.cmd)
 
-Double-clicking `LLM-PACK.cmd` produces a single FULL pack folder with:
+Double-clicking `1-AGS-PACK.cmd` produces a single pack folder with:
 
-- `COMBINED/SPLIT/**` and `COMBINED/SPLIT_LITE/**`
-- No combined files (`AGS-FULL-COMBINED-*`, `AGS-FULL-TREEMAP-*`)
-- No zip archive
+- `FULL/**`, `SPLIT/**`, and `LITE/**`
+- A zip archive under `MEMORY/LLM_PACKER/_packs/_system/archive/`
 
 ## Default behavior (CATALYTIC-DPT-PACK.cmd)
 
-Double-clicking `CATALYTIC-DPT-PACK.cmd` produces a single FULL bundle folder with:
+Double-clicking `2-CAT-PACK.cmd` produces a single bundle folder with:
 
-- `COMBINED/SPLIT/**`
-- `COMBINED/SPLIT_LITE/**`
-- `COMBINED/CATALYTIC-DPT-FULL-COMBINED-*` and `COMBINED/CATALYTIC-DPT-FULL-TREEMAP-*`
-- A nested LAB-only pack under `LAB/` (its own `meta/`, `repo/`, `COMBINED/`)
+- `FULL/**`, `SPLIT/**`, and `LITE/**`
 - A zip archive under `MEMORY/LLM_PACKER/_packs/_system/archive/`
 
 ## LITE profile (discussion-first)
 
 The LITE profile produces a smaller, high-signal pack:
 
-- Includes: `AGENTS.md`, `README.md`, `CANON/**`, `MAPS/**`, `CONTRACTS/runner.py`,
-  `CORTEX/query.py`, `TOOLS/critic.py`, `SKILLS/**/SKILL.md`, `SKILLS/**/version.json`
-- Excludes: fixtures, `_runs`, `_generated`, research/archive, OS wrapper scripts (`*.cmd`, `*.ps1`)
-- Adds symbolic indexes in `meta/`:
-  - `LITE_ALLOWLIST.json`, `LITE_OMITTED.json`, `LITE_START_HERE.md`
-  - `SKILL_INDEX.json`, `FIXTURE_INDEX.json`, `CODEBOOK.md`, `CODE_SYMBOLS.json`
+- Includes: `AGENTS.md`, `README.md`, `LAW/CANON/**`, `LAW/CONTRACTS/**`, `NAVIGATION/MAPS/**`, and the most relevant parts of `CAPABILITY/` and `MEMORY/LLM_PACKER/`.
+- Excludes: most low-signal bulk content; always excludes `BUILD/`.
 
 ## How to run
 
-Double-click: `MEMORY/LLM_PACKER/Engine/LLM-PACK.cmd`
+Double-click: `MEMORY/LLM_PACKER/Engine/1-AGS-PACK.cmd`
 
-Double-click: `MEMORY/LLM_PACKER/Engine/CATALYTIC-DPT-PACK.cmd`
+Double-click: `MEMORY/LLM_PACKER/Engine/2-CAT-PACK.cmd`
 
 Or run in PowerShell:
 
@@ -67,23 +58,17 @@ Or run in PowerShell:
 
 Or run cross-platform:
 
-`python MEMORY/LLM_PACKER/Engine/packer.py --mode full --combined --zip`
-
-CAT-DPT (two packers, one bundle folder):
-
-- Main (no LAB): `python MEMORY/LLM_PACKER/Engine/packer_cat_dpt_main.py --mode full --profile full --split-lite --combined --out-dir MEMORY/LLM_PACKER/_packs/<bundle>`
-- LAB-only (inside bundle): `python MEMORY/LLM_PACKER/Engine/packer_cat_dpt_lab.py --mode full --profile full --split-lite --combined --out-dir MEMORY/LLM_PACKER/_packs/<bundle>/LAB`
+`python -m MEMORY.LLM_PACKER.Engine.packer --scope ags --mode full --combined --zip`
 
 Optional arguments:
 
-- `--scope ags`, `--scope catalytic-dpt`, or `--scope catalytic-dpt-lab`
-- `-OutDir MEMORY/LLM_PACKER/_packs/<name>` (must be under `MEMORY/LLM_PACKER/_packs/`)
-- `-Mode full` or `-Mode delta`
-- `-Profile full` or `-Profile lite`
-- `PACK_PROFILE=lite` (env var override when `-Profile` is not passed)
-- `-Stamp <stamp>` (used for timestamped COMBINED output filenames)
-- `-SplitLite` (write `COMBINED/SPLIT_LITE/**` alongside SPLIT)
-- `-NoZip` or `-NoCombined`
+- `--scope ags`, `--scope catalytic-dpt`, or `--scope lab`
+- `--out-dir MEMORY/LLM_PACKER/_packs/<name>` (must be under `MEMORY/LLM_PACKER/_packs/`)
+- `--mode full` or `--mode delta`
+- `--profile full` or `--profile lite`
+- `--stamp <stamp>` (used for timestamped FULL output filenames)
+- `--split-lite` (write `LITE/**` alongside SPLIT)
+- `--zip` (write a zip archive under `MEMORY/LLM_PACKER/_packs/_system/archive/`)
 
 ## Output
 
@@ -105,12 +90,7 @@ Baseline state used for delta packs is stored at:
 
 ## Token Estimation
 
-Each pack includes `meta/CONTEXT.txt` with:
-- Per-file token estimates
-- Per-payload counts (`repo/+meta`, `COMBINED/SPLIT/**`, `COMBINED/SPLIT_LITE/**`, and any combined single files)
-- Warnings if any single payload exceeds common context limits (128K, 200K tokens)
-
-The packer also prints the per-payload token counts to the terminal after each run.
+Token estimation is not emitted by the current Phase 1 modular packer.
 
 ## Changelog
 

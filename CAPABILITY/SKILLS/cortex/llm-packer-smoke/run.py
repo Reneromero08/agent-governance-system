@@ -37,7 +37,7 @@ def ensure_runner_writes_under_runs(path: Path) -> None:
     try:
         path.resolve().relative_to(runs_root)
     except ValueError as exc:
-        raise ValueError(f"runner output must be under CONTRACTS/_runs/: {path}") from exc
+        raise ValueError(f"runner output must be under LAW/CONTRACTS/_runs/: {path}") from exc
 
 
 def main(input_path: Path, output_path: Path) -> int:
@@ -109,13 +109,13 @@ def main(input_path: Path, output_path: Path) -> int:
         required.extend(
             [
                 "SPLIT/AGS-00_INDEX.md",
-                "SPLIT/AGS-01_CANON.md",
-                "SPLIT/AGS-02_ROOT.md",
-                "SPLIT/AGS-03_MAPS.md",
-                "SPLIT/AGS-04_CONTEXT.md",
-                "SPLIT/AGS-05_SKILLS.md",
-                "SPLIT/AGS-06_CONTRACTS.md",
-                "SPLIT/AGS-07_SYSTEM.md",
+                "SPLIT/AGS-01_LAW.md",
+                "SPLIT/AGS-02_CAPABILITY.md",
+                "SPLIT/AGS-03_NAVIGATION.md",
+                "SPLIT/AGS-04_DIRECTION.md",
+                "SPLIT/AGS-05_THOUGHT.md",
+                "SPLIT/AGS-06_MEMORY.md",
+                "SPLIT/AGS-07_ROOT_FILES.md",
             ]
         )
     elif scope == "catalytic-dpt":
@@ -136,8 +136,7 @@ def main(input_path: Path, output_path: Path) -> int:
                 "SPLIT/CATALYTIC-DPT-LAB-02_COMMONSENSE.md",
                 "SPLIT/CATALYTIC-DPT-LAB-03_MCP.md",
                 "SPLIT/CATALYTIC-DPT-LAB-04_RESEARCH.md",
-                "SPLIT/CATALYTIC-DPT-LAB-05_ARCHIVE.md",
-                "SPLIT/CATALYTIC-DPT-LAB-06_SYSTEM.md",
+                "SPLIT/CATALYTIC-DPT-LAB-05_SYSTEM.md",
             ]
         )
     else:

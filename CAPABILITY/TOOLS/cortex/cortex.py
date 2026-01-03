@@ -10,6 +10,8 @@ Usage:
   python TOOLS/cortex.py summary --list
 """
 
+from __future__ import annotations
+
 import argparse
 import hashlib
 import json

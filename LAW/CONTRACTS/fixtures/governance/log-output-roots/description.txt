@@ -1,4 +1,4 @@
-Governance fixture: Validates that logging paths comply with ADR-015 (all logs under CONTRACTS/_runs/)
+Governance fixture: Validates that logging paths comply with ADR-015 (all logs under `LAW/CONTRACTS/_runs/`)
 
 This fixture ensures that:
 1. No code contains hardcoded references to LOGS/ or MCP/logs/

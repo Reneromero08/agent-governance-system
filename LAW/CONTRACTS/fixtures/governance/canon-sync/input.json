@@ -3,13 +3,13 @@
     "check_type": "canon-sync",
     "test_case": "authority_gradient_aligned",
     "contract_hierarchy": [
-        "CANON/AGREEMENT.md",
-        "CANON/CONTRACT.md",
-        "CANON/INVARIANTS.md",
-        "CANON/VERSIONING.md",
+        "LAW/CANON/AGREEMENT.md",
+        "LAW/CANON/CONTRACT.md",
+        "LAW/CANON/INVARIANTS.md",
+        "LAW/CANON/VERSIONING.md",
         "AGENTS.md",
         "CONTEXT records",
-        "MAPS/*",
+        "NAVIGATION/MAPS/*",
         "User instructions",
         "Implementation convenience"
     ],

@@ -4,6 +4,17 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.1] - 2026-01-02
+
+### Changed
+- **P.1: 6-Bucket Migration (P0)** — migrated LLM Packer to the 6-bucket repo layout (LAW/CAPABILITY/NAVIGATION/DIRECTION/THOUGHT/MEMORY).
+  - Updated pack roots, anchors, split grouping, and lite priorities in `MEMORY/LLM_PACKER/Engine/packer/core.py`.
+  - Replaced legacy split outputs with bucket outputs in `MEMORY/LLM_PACKER/Engine/packer/split.py` and `MEMORY/LLM_PACKER/Engine/packer/lite.py`.
+  - Updated smoke/validators and docs to match new pack structure (`CAPABILITY/SKILLS/cortex/llm-packer-smoke/run.py`, `CAPABILITY/SKILLS/utilities/pack-validate/run.py`, `README.md`, `AGENTS.md`, `MEMORY/LLM_PACKER/README.md`).
+  - Updated contract fixtures/docs for bucket paths (`LAW/CONTRACTS/fixtures/governance/canon-sync/input.json`, `LAW/CONTRACTS/fixtures/governance/canon-sync/expected.json`, `LAW/CONTRACTS/README.md`).
+
+
+
 ## [3.3.0] - 2026-01-02
 
 ### Added
