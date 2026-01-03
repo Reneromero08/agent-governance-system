@@ -50,6 +50,8 @@ def main(input_path: Path, output_path: Path) -> int:
         return 1
 
     out_dir_raw = str(config.get("out_dir", "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke"))
+    project_root_raw = config.get("project_root")
+    p2_runs_dir_raw = config.get("p2_runs_dir")
     combined = bool(config.get("combined", False))
     zip_enabled = bool(config.get("zip", False))
     mode = str(config.get("mode", "full"))
@@ -63,10 +65,26 @@ def main(input_path: Path, output_path: Path) -> int:
     ensure_under_packs(out_dir)
     ensure_runner_writes_under_runs(output_path)
 
+    project_root = None
+    if project_root_raw:
+        project_root = resolve_out_dir(str(project_root_raw))
+
+    p2_runs_dir = None
+    if p2_runs_dir_raw:
+        p2_runs_dir = resolve_out_dir(str(p2_runs_dir_raw))
+        ensure_runner_writes_under_runs(p2_runs_dir / "RUN_ROOTS.json")
+
     args = [
         sys.executable,
+        "-u",
         "-m",
         PACKER_MODULE,
+    ]
+    if project_root is not None:
+        args.extend(["--project-root", project_root.relative_to(PROJECT_ROOT).as_posix()])
+    if p2_runs_dir is not None:
+        args.extend(["--p2-runs-dir", p2_runs_dir.relative_to(PROJECT_ROOT).as_posix()])
+    args.extend([
         "--scope",
         scope,
         "--mode",
@@ -75,7 +93,7 @@ def main(input_path: Path, output_path: Path) -> int:
         profile,
         "--out-dir",
         out_dir.relative_to(PROJECT_ROOT).as_posix(),
-    ]
+    ])
     if stamp:
         args.extend(["--stamp", stamp])
     if zip_enabled:
@@ -88,10 +106,8 @@ def main(input_path: Path, output_path: Path) -> int:
         args.append("--allow-duplicate-hashes")
     elif allow_duplicate_hashes is False:
         args.append("--disallow-duplicate-hashes")
-    result = subprocess.run(args, capture_output=True, text=True, cwd=str(PROJECT_ROOT))
+    result = subprocess.run(args, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
-        print(result.stdout)
-        print(result.stderr)
         return result.returncode
 
     required = [

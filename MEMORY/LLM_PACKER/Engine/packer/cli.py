@@ -19,6 +19,11 @@ def main():
         description="Create memory/LLM packs under MEMORY/LLM_PACKER/_packs/."
     )
     parser.add_argument(
+        "--project-root",
+        default="",
+        help="Source project root to pack (defaults to this repo root). Output still goes under MEMORY/LLM_PACKER/_packs/ of this repo.",
+    )
+    parser.add_argument(
         "--scope",
         choices=tuple(sorted(SCOPES.keys())),
         default=SCOPE_AGS.key,
@@ -84,7 +89,24 @@ def main():
         "--disallow-duplicate-hashes",
         action="store_true",
     )
+    parser.add_argument(
+        "--p2-runs-dir",
+        default="",
+        help="Where to write P2 RUN_ROOTS artifacts (defaults to CAPABILITY/RUNS).",
+    )
+    parser.add_argument(
+        "--p2-cas-root",
+        default="",
+        help="Override CAS root (deterministic tests only).",
+    )
     args = parser.parse_args()
+
+    project_root = None
+    if args.project_root:
+        project_root = Path(args.project_root)
+        if not project_root.is_absolute():
+            project_root = (PROJECT_ROOT / project_root).resolve()
+        project_root = project_root.resolve()
 
     out_dir = Path(args.out_dir) if args.out_dir else None
     if out_dir is not None and not out_dir.is_absolute():
@@ -95,6 +117,20 @@ def main():
         allow_dup = True
     elif args.disallow_duplicate_hashes:
         allow_dup = False
+
+    p2_runs_dir = None
+    if args.p2_runs_dir:
+        p2_runs_dir = Path(args.p2_runs_dir)
+        if not p2_runs_dir.is_absolute():
+            p2_runs_dir = (PROJECT_ROOT / p2_runs_dir).resolve()
+        p2_runs_dir = p2_runs_dir.resolve()
+
+    p2_cas_root = None
+    if args.p2_cas_root:
+        p2_cas_root = Path(args.p2_cas_root)
+        if not p2_cas_root.is_absolute():
+            p2_cas_root = (PROJECT_ROOT / p2_cas_root).resolve()
+        p2_cas_root = p2_cas_root.resolve()
 
     pack_dir = make_pack(
         scope_key=args.scope,
@@ -109,6 +145,9 @@ def main():
         max_entry_bytes=int(args.max_entry_bytes),
         max_entries=int(args.max_entries),
         allow_duplicate_hashes=allow_dup,
+        project_root=project_root,
+        p2_runs_dir=p2_runs_dir,
+        p2_cas_root=p2_cas_root,
     )
     print(f"Pack created: {pack_dir}")
     return 0

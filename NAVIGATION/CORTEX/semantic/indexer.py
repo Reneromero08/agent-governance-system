@@ -53,7 +53,7 @@ class CortexIndexer:
         self.target_dir = target_dir
         self.file_index = {}
         self.section_index = []
-        META_DIR.mkdir(exist_ok=True)
+        META_DIR.mkdir(parents=True, exist_ok=True)
 
     def _get_tracked_files(self, root: Path) -> Optional[Set[Path]]:
         """
@@ -207,6 +207,7 @@ class CortexIndexer:
 
     def _write_artifacts(self):
         """Write FILE_INDEX.json and SECTION_INDEX.json."""
+        META_DIR.mkdir(parents=True, exist_ok=True)
         with open(META_DIR / "FILE_INDEX.json", "w", encoding='utf-8') as f:
             json.dump(self.file_index, f, indent=2, sort_keys=True)
 

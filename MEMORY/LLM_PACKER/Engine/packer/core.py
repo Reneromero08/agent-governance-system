@@ -766,8 +766,8 @@ def write_provenance(pack_dir: Path, scope: PackScope) -> None:
     write_json(pack_dir / "meta" / "PROVENANCE.json", prov)
 
 def write_omitted(pack_dir: Path, omitted: List[Dict[str, Any]]) -> None:
-    if omitted:
-        write_json(pack_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted)
+    # Always emit for determinism and fixture stability (empty list is meaningful).
+    write_json(pack_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted)
 
 def render_tree(paths: Sequence[str]) -> str:
     """Render a visual tree from a list of relative paths."""
@@ -927,6 +927,7 @@ def make_pack(
     max_entry_bytes: int,
     max_entries: int,
     allow_duplicate_hashes: Optional[bool],
+    project_root: Optional[Path] = None,
     p2_runs_dir: Optional[Path] = None,
     p2_cas_root: Optional[Path] = None,
 ) -> Path:
@@ -939,9 +940,12 @@ def make_pack(
     if not scope:
         raise ValueError(f"Unknown scope: {scope_key}")
 
+    source_project_root = (project_root or PROJECT_ROOT).resolve()
+    use_shared_baseline = source_project_root == PROJECT_ROOT.resolve()
+
     with _override_cas_root(p2_cas_root):
         _migrate_system_archive()
-        manifest, omitted = build_state_manifest(PROJECT_ROOT, scope=scope)
+        manifest, omitted = build_state_manifest(source_project_root, scope=scope)
         digest = manifest_digest(manifest)
 
         if out_dir is None:
@@ -954,7 +958,7 @@ def make_pack(
         STATE_DIR.mkdir(parents=True, exist_ok=True)
 
         baseline_path = baseline_path_for_scope(scope)
-        baseline = load_baseline(baseline_path)
+        baseline = load_baseline(baseline_path) if use_shared_baseline else None
         baseline_files_by_path = {f["path"]: f for f in (baseline or {}).get("files", [])}
         current_files_by_path = {f["path"]: f for f in manifest.get("files", [])}
 
@@ -964,6 +968,8 @@ def make_pack(
         # validate_repo_state_manifest logic (simplified inline or stubbed)
         # We trust build_state_manifest for Phase 1 refactor
 
+        anchors = scope.anchors if use_shared_baseline else ()
+
         if mode == "delta" and baseline is not None:
             changed = []
             for path, entry in current_files_by_path.items():
@@ -971,9 +977,9 @@ def make_pack(
                 if prev is None or prev.get("hash") != entry.get("hash") or prev.get("size") != entry.get("size"):
                     changed.append(path)
             deleted = sorted(set(baseline_files_by_path.keys()) - set(current_files_by_path.keys()))
-            include_paths = sorted(set(changed) | set(scope.anchors))
+            include_paths = sorted(set(changed) | set(anchors))
         else:
-            include_paths = sorted(set(current_files_by_path.keys()) | set(scope.anchors))
+            include_paths = sorted(set(current_files_by_path.keys()) | set(anchors))
             deleted = []
 
         limits = PackLimits(
@@ -991,9 +997,9 @@ def make_pack(
         (out_dir / "repo").mkdir(parents=True, exist_ok=True)
 
         # 1. Copy Repo
-        copy_repo_files(out_dir, PROJECT_ROOT, include_paths, scope=scope)
+        copy_repo_files(out_dir, source_project_root, include_paths, scope=scope)
         write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
-        write_build_tree(out_dir, PROJECT_ROOT)
+        write_build_tree(out_dir, source_project_root)
 
         # 2. Meta Docs
         write_start_here(out_dir, scope=scope)
@@ -1018,7 +1024,7 @@ def make_pack(
             effective_runs_dir = p2_runs_dir or Path("CAPABILITY/RUNS")
             _emit_p2_lite_artifacts(
                 out_dir,
-                project_root=PROJECT_ROOT,
+                project_root=source_project_root,
                 include_paths=include_paths,
                 scope=scope,
                 runs_dir=effective_runs_dir,
@@ -1047,6 +1053,7 @@ def make_pack(
             _maybe_delete_previous_pack(current_pack_dir=out_dir, scope=scope)
 
         # Update baseline
-        write_json(baseline_path, manifest)
+        if use_shared_baseline:
+            write_json(baseline_path, manifest)
 
         return out_dir

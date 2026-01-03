@@ -14,6 +14,8 @@ Allowed output roots (per INV-006):
 """
 
 import json
+import os
+import subprocess
 import sys
 from pathlib import Path
 from typing import List
@@ -103,6 +105,65 @@ def find_escaped_artifacts(scan_roots: List[Path]) -> List[Path]:
     return escaped
 
 
+def _git_untracked_files(project_root: Path) -> List[Path]:
+    """
+    Return untracked file paths (absolute) using git, or an empty list if git is unavailable.
+
+    This is dramatically faster than scanning the entire repo tree, and matches the intent
+    of the escape hatch: catching newly created runtime artifacts.
+    """
+    try:
+        res = subprocess.run(
+            ["git", "ls-files", "--others", "--exclude-standard", "-z"],
+            cwd=str(project_root),
+            capture_output=True,
+        )
+        if res.returncode != 0:
+            return []
+        out: List[Path] = []
+        for raw in res.stdout.split(b"\0"):
+            if not raw:
+                continue
+            rel = os.fsdecode(raw)
+            out.append((project_root / rel).resolve())
+        return out
+    except Exception:
+        return []
+
+
+def find_escaped_artifacts_fast(project_root: Path) -> List[Path]:
+    """
+    Fast-path escape hatch check.
+
+    Only consider untracked files and flag those that look like runtime artifacts outside
+    allowed artifact roots.
+    """
+    escaped: List[Path] = []
+    candidates = _git_untracked_files(project_root)
+    if not candidates:
+        # Fallback: slow scan (git may be unavailable in some environments).
+        scan_dirs = [
+            project_root / "LAW",
+            project_root / "NAVIGATION",
+            project_root / "MEMORY",
+            project_root / "CAPABILITY",
+        ]
+        return find_escaped_artifacts(scan_dirs)
+
+    for path in candidates:
+        try:
+            is_file = path.is_file()
+        except OSError:
+            is_file = False
+        if not is_file:
+            continue
+        if should_ignore(path):
+            continue
+        if is_runtime_artifact(path) and not is_allowed_path(path):
+            escaped.append(path)
+    return escaped
+
+
 def main(input_path: Path, output_path: Path) -> int:
     """Run the artifact escape hatch check."""
     if not ensure_canon_compat(Path(__file__).resolve().parent):
@@ -113,15 +174,7 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"Error reading input JSON: {exc}")
         return 1
 
-    # Scan the project for escaped artifacts
-    scan_dirs = [
-        PROJECT_ROOT / "LAW",
-        PROJECT_ROOT / "NAVIGATION", 
-        PROJECT_ROOT / "MEMORY",
-        PROJECT_ROOT / "CAPABILITY",
-    ]
-    
-    escaped = find_escaped_artifacts(scan_dirs)
+    escaped = find_escaped_artifacts_fast(PROJECT_ROOT)
     
     result = {
         **payload,
