@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 30d4f79adb0d71cd91e80fe8fcd6723eefb05760b2b1142056bb1b7c06f99265 -->
+
 # Z.2.5 GC Invariants (Unreferenced Blobs Cleanup Policy)
 
 Status: CANONICAL (Z.2.5)

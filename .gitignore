@@ -5,6 +5,8 @@ LAW/CONTRACTS/_runs/**
 !LAW/CONTRACTS/_runs/.gitkeep
 !LAW/CONTRACTS/_runs/_demos/
 !LAW/CONTRACTS/_runs/_demos/**
+LAW/CONTRACTS/_runs/
+LAW/CONTRACTS/_runs/_tmp/
 
 # CAS runtime storage (never commit)
 CAPABILITY/CAS/storage/
