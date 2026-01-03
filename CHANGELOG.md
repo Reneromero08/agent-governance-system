@@ -15,6 +15,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Determinism**: Guaranteed stable ordering for candidate selection, deletion, and reporting.
   - **Safety**: Single-instance execution enforced via global GC lock.
   - **Verification**: 15 comprehensive tests passing (Policy B, deterministic order, malformed inputs).
+  - **Operational Proof**: `NAVIGATION/PROOFS/01-02-2026-19-22_Z2_5_GC_OPERATIONAL_PROOF.md` (Confirmed safety, determinism, and fail-closed behavior on 2026-01-02).
   - **Documentation**: New invariants in `Z2_5_GC_INVARIANTS.md` and detailed test matrix.
 - **Z.2.4 – Deduplication proof for CAS + Artifact Store** (Completed 2026-01-02)
   - **Mechanical Proof**: Deduplication is satisfied by content addressing and write-once semantics
@@ -31,6 +32,8 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Documentation**: Added Z.2.4 section to `NAVIGATION/INVARIANTS/Z2_CAS_AND_RUN_INVARIANTS.md`
   - **Guarantees**: Identical content shares storage, no rewrites on duplicate puts, deterministic refs
   - **Proof Mechanism**: File modification time (mtime) verification for no-rewrite guarantee
+- **Document Cleanup**: Added hashes and made documents canonical.
+- **Cortex Index**: Cortex indexed updates.
 
 ## [3.2.3] - 2026-01-02
 
@@ -90,7 +93,6 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Documentation**: Complete API docs, usage examples, implementation summary
   - Full implementation: `CAPABILITY/ARTIFACTS/IMPLEMENTATION.md`
 - Add governance guardrail test to ensure foundational directories (CAPABILITY/CAS, CAPABILITY/ARTIFACTS) exist
-
 
 ### Fixed
 - **Windows Unicode Compatibility**: Fixed Unicode encoding issues in `NAVIGATION/CORTEX/semantic/indexer.py` that were causing system1 database build failures on Windows.

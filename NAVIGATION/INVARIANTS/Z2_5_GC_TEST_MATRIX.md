@@ -1,3 +1,5 @@
+<!-- CONTENT_HASH: 08a3c456d2956a4403e591e329888baf4c8a705f83ddb5e32eae94c9285fae95 -->
+
 # Z.2.5 GC Test Matrix (Mechanical Proof Plan)
 
 Status: CANONICAL (Z.2.5)
