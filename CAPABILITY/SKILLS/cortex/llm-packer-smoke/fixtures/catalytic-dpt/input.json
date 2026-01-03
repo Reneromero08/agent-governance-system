@@ -1,5 +1,7 @@
 {
   "combined": true,
+  "project_root": "CAPABILITY/TESTBENCH/fixtures/packer_p2_repo",
+  "p2_runs_dir": "LAW/CONTRACTS/_runs/_tmp/llm_packer_smoke_runs",
   "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-catalytic-dpt",
   "scope": "ags",
   "stamp": "fixture-catalytic-dpt",

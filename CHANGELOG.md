@@ -1,8 +1,18 @@
-<!-- CONTENT_HASH: 922b86dec7b1f976777f299a5e50b988544a5f60acdd6bd3445fd4ba745b3c31 -->
+<!-- CONTENT_HASH: 40c4f528690b26391ad29d1181d51b5628249f325c98c1d8c311f3a5fbb8b051 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.2] - 2026-01-03
+
+### Changed
+- **Contract runner UX/perf** — `LAW/CONTRACTS/runner.py` now streams subprocess output and prints per-fixture timing so long runs no longer appear stuck.
+- **Artifact escape hatch perf** — `CAPABILITY/SKILLS/commit/artifact-escape-hatch/run.py` now scans `git` untracked files first (fast-path) instead of walking the full repo tree.
+- **LLM packer smoke perf** — `CAPABILITY/SKILLS/cortex/llm-packer-smoke/run.py` now streams packer output and packs a tiny fixture repo via `project_root` to keep fixtures fast/deterministic.
+
+### Fixed
+- **Cortex index artifacts** — `NAVIGATION/CORTEX/semantic/indexer.py` now ensures `NAVIGATION/CORTEX/meta/` exists before writing `FILE_INDEX.json` / `SECTION_INDEX.json`.
 
 ## [3.3.1] - 2026-01-02
 

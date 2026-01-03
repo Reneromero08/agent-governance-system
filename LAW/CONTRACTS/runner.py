@@ -14,6 +14,7 @@ Any fixture that fails will cause the runner to exit with a non-zero exit code.
 
 import subprocess
 import sys
+import time
 from pathlib import Path
 from typing import List, Tuple
 
@@ -96,10 +97,13 @@ def ensure_navigation_dbs() -> int:
             print(f"[contracts/runner] Missing required build script: {script_path}")
             return 1
         print(f"[contracts/runner] Building navigation DB via {script_path.relative_to(PROJECT_ROOT)}", flush=True)
+        start = time.perf_counter()
         rc = run_process_stream(cmd, cwd=PROJECT_ROOT)
         if rc != 0:
             print(f"[contracts/runner] Build failed (rc={rc})", flush=True)
             return 1
+        elapsed = time.perf_counter() - start
+        print(f"[contracts/runner] Build OK ({elapsed:.2f}s)", flush=True)
 
     return 0
 
@@ -114,7 +118,9 @@ def run_contract_fixture(input_path: Path) -> int:
         print(f"Missing default validator at {DEFAULT_VALIDATE}")
         return 1
     print(f"Running contract fixture in {fixture_dir}.", flush=True)
+    start = time.perf_counter()
     result = run_validation(DEFAULT_VALIDATE, input_path, expected)
+    elapsed = time.perf_counter() - start
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
@@ -123,6 +129,7 @@ def run_contract_fixture(input_path: Path) -> int:
     if result.returncode != 0:
         print(f"!!! FAILURE: {fixture_dir} !!!")
         return 1
+    print(f"[contracts/runner] OK ({elapsed:.2f}s)", flush=True)
     return 0
 
 
@@ -147,6 +154,7 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
     actual_path = output_dir / "actual.json"
 
     print(f"Running skill fixture in {fixture_dir}.", flush=True)
+    fixture_start = time.perf_counter()
     rc = run_process_stream([
         sys.executable,
         "-u",
@@ -158,7 +166,11 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
         print(f"!!! FAILURE (EXEC): {fixture_dir} !!!")
         return 1
 
+    exec_elapsed = time.perf_counter() - fixture_start
+
+    validate_start = time.perf_counter()
     result = run_validation(validate_script, actual_path, expected)
+    validate_elapsed = time.perf_counter() - validate_start
     if result.returncode != 0:
         print(result.stdout)
         print(result.stderr)
@@ -168,6 +180,11 @@ def run_skill_fixture(skill_dir: Path, input_path: Path) -> int:
     if result.returncode != 0:
         print(f"!!! FAILURE: {fixture_dir} !!!")
         return 1
+    total_elapsed = time.perf_counter() - fixture_start
+    print(
+        f"[contracts/runner] OK (exec={exec_elapsed:.2f}s, validate={validate_elapsed:.2f}s, total={total_elapsed:.2f}s)",
+        flush=True,
+    )
     return 0
 
 
