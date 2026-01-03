@@ -26,7 +26,7 @@ def get_cortex_query(project_root: Path) -> Tuple[Any, str]:
         cortex_query.get_metadata("canon_version")
         return cortex_query, ""
     except FileNotFoundError:
-        build_script = project_root / "CORTEX" / "cortex.build.py"
+        build_script = project_root / "NAVIGATION" / "CORTEX" / "db" / "cortex.build.py"
         env = os.environ.copy()
         env["PYTHONIOENCODING"] = "utf-8"
         result = subprocess.run(

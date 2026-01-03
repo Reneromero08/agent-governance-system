@@ -293,7 +293,7 @@ def constitutional_reset(tag: str):
     # Rebuild cortex
     print("\nRebuilding cortex...")
     subprocess.run(
-        [sys.executable, str(PROJECT_ROOT / "CORTEX" / "cortex.build.py")],
+        [sys.executable, str(PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "reset_system1.py")],
         cwd=str(PROJECT_ROOT)
     )
     
