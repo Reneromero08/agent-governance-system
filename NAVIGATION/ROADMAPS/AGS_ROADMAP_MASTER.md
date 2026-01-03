@@ -287,7 +287,7 @@ Implement F3 prototype from `THOUGHT/LAB/f3_cas_prototype.py`.
 - [x] **Z.2.2**: CAS-backed artifact store - Replace file paths with content hashes (Completed 2026-01-02)
 - [x] **Z.2.3**: Immutable run artifacts - TASK_SPEC, STATUS, OUTPUT_HASHES via CAS
 - [x] **Z.2.4**: Deduplication proof - Identical content shares storage, no rewrites (Completed 2026-01-02)
-- [ ] **Z.2.5**: GC strategy - Unreferenced blobs cleanup policy
+- [x] **Z.2.5**: GC strategy - Unreferenced blobs cleanup policy (Completed 2026-01-02)
 - [ ] **Z.2.6**: LLM Packer Integration - LITE packs use CAS hashes instead of full file bodies (see `MEMORY/PACKER_ROADMAP.md` Phase 6)
 
 ## Z.3: CAT Chat Stabilization

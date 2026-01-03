@@ -4,9 +4,18 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [3.2.4] - 2026-01-02
+## [3.3.0] - 2026-01-02
 
 ### Added
+- **Z.2.5 – GC strategy for CAS (unreferenced blob cleanup)** (Completed 2026-01-02)
+  - **Module**: `CAPABILITY/GC/` implementing a two-phase Mark-and-Sweep garbage collector.
+  - **Policy Lock (Choice B)**: Mandatory fail-closed behavior if roots are zero (unless override provided).
+  - **Public API**: `gc_collect(dry_run: bool = True, allow_empty_roots: bool = False) -> dict`.
+  - **Root Sources**: Supports `RUN_ROOTS.json` and `GC_PINS.json` root enumeration.
+  - **Determinism**: Guaranteed stable ordering for candidate selection, deletion, and reporting.
+  - **Safety**: Single-instance execution enforced via global GC lock.
+  - **Verification**: 15 comprehensive tests passing (Policy B, deterministic order, malformed inputs).
+  - **Documentation**: New invariants in `Z2_5_GC_INVARIANTS.md` and detailed test matrix.
 - **Z.2.4 – Deduplication proof for CAS + Artifact Store** (Completed 2026-01-02)
   - **Mechanical Proof**: Deduplication is satisfied by content addressing and write-once semantics
   - **CAS Deduplication Tests**: `CAPABILITY/TESTBENCH/cas/test_cas_dedup.py` (8 tests)
