@@ -1,11 +1,11 @@
 <!-- CONTENT_HASH: cfe9fdad729fe560a9c101b77d337152278ad7432ec49b4f1b7afb70d3cb505b -->
 
 # Z2 CAS + Artifact + Run Invariants (Fence)
-Status: CANONICAL (Z.2.1–Z.2.3)
+Status: CANONICAL (Z.2.1–Z.2.4)
 Last updated: 2026-01-02
 
 Purpose
-This document freezes the non-negotiable invariants introduced by Lane Z, phases Z.2.1–Z.2.3.
+This document freezes the non-negotiable invariants introduced by Lane Z, phases Z.2.1–Z.2.4.
 Agents and humans must treat these as hard constraints. Any change requires a new explicit roadmap task.
 
 ---
@@ -110,9 +110,46 @@ Failure Mode
 
 ---
 
+## Z.2.4 Deduplication Invariants
+
+Deduplication Guarantee
+- Identical content MUST share storage.
+- Identical content MUST NOT be rewritten on subsequent storage operations.
+
+CAS Deduplication
+- CAS implements deduplication via content addressing:
+  - Same bytes → same SHA-256 hash
+  - Same hash → same storage path
+- Write-once semantics ensure no rewrites:
+  - If object exists at computed path, cas_put returns hash without writing
+  - Underlying file is NOT modified on duplicate puts
+
+Artifact Store Deduplication
+- Artifact store inherits CAS deduplication:
+  - store_bytes(data) twice → same "sha256:<hash>" ref
+  - store_file on identical files → same "sha256:<hash>" ref
+- Deduplication is deterministic and automatic (no explicit dedup API needed)
+
+Mechanical Proof
+- Z.2.4 compliance is mechanically proven by tests:
+  - `CAPABILITY/TESTBENCH/cas/test_cas_dedup.py`
+    - Proves cas_put returns same hash for identical bytes
+    - Proves underlying object is not rewritten (via file mtime verification)
+  - `CAPABILITY/TESTBENCH/artifacts/test_artifact_dedup.py`
+    - Proves store_bytes returns same ref for identical bytes
+    - Proves store_file returns same ref for identical files
+
+Explicit Non-Features (NOT IMPLEMENTED IN Z.2.4)
+- No reference counting
+- No garbage collection triggers
+- No storage reclamation
+- No dedup statistics or reporting
+
+---
+
 ## Forbidden Before Explicit Roadmap Tasks
 
-The following are NOT allowed to be introduced implicitly within Z.2.1–Z.2.3 scope and require a new explicit roadmap item:
+The following are NOT allowed to be introduced implicitly within Z.2.1–Z.2.4 scope and require a new explicit roadmap item:
 
 Enforcement
 - Mandatory hash-only mode (disallowing legacy paths)
