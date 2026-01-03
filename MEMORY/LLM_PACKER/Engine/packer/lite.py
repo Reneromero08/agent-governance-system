@@ -11,6 +11,9 @@ from typing import Any, Dict, Sequence
 
 from .core import PackScope, SCOPE_AGS, SCOPE_CATALYTIC_DPT, SCOPE_LAB, read_text
 
+def rel_posix(*parts: str) -> str:
+    return Path(*parts).as_posix()
+
 def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
     """
     Write a discussion-first LITE set.
@@ -22,6 +25,14 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
         path.write_text(text.rstrip() + "\n", encoding="utf-8")
 
     if scope.key == SCOPE_AGS.key:
+        canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
+        canon_invariants = rel_posix("LAW", "CANON", "INVARIANTS.md")
+        canon_versioning = rel_posix("LAW", "CANON", "VERSIONING.md")
+        contracts_runner = rel_posix("LAW", "CONTRACTS", "runner.py")
+        maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
+        critic_tool = rel_posix("CAPABILITY", "TOOLS", "critic.py")
+        skills_dir = rel_posix("CAPABILITY", "SKILLS")
+        packer_readme = rel_posix("MEMORY", "LLM_PACKER", "README.md")
         write(
             lite_dir / "AGS-00_INDEX.md",
             "\n".join(
@@ -33,12 +44,14 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                     "## Read order",
                     "1) `repo/AGENTS.md`",
                     "2) `repo/README.md`",
-                    "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
-                    "4) `repo/MAPS/ENTRYPOINTS.md`",
-                    "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/*/SKILL.md`",
-                    "6) `repo/CORTEX/query.py` and `repo/TOOLS/critic.py`",
-                    "7) `meta/PACK_INFO.json`",
-                    "8) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
+                    f"3) `repo/{canon_contract}` and `repo/{canon_invariants}` and `repo/{canon_versioning}`",
+                    f"4) `repo/{contracts_runner}`",
+                    f"5) `repo/{maps_entrypoints}`",
+                    f"6) `repo/{critic_tool}` and `repo/{skills_dir}/*/SKILL.md`",
+                    "7) `repo/DIRECTION/` (roadmaps, if used)",
+                    f"8) `repo/{packer_readme}`",
+                    "9) `meta/PACK_INFO.json`",
+                    "10) `meta/FILE_TREE.txt` and `meta/FILE_INDEX.json`",
                     "",
                 ]
             ),
@@ -76,10 +89,12 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
     # constraints to output to LITE/ only.
     if scope.key == SCOPE_AGS.key:
         chunks = [
-            "AGS-01_CANON.md",
-            "AGS-02_ROOT.md", 
-            "AGS-03_MAPS.md",
-            "AGS-06_CONTRACTS.md"
+            "AGS-01_LAW.md",
+            "AGS-02_CAPABILITY.md",
+            "AGS-03_NAVIGATION.md",
+            "AGS-04_DIRECTION.md",
+            "AGS-06_MEMORY.md",
+            "AGS-07_ROOT_FILES.md",
         ]
         split_src = pack_dir / "SPLIT"
         for chunk in chunks:

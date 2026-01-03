@@ -18,29 +18,31 @@ This solves the bootstrap paradox: the agent knows the governance structure exis
 
 ## Project layout
 
-The repository is organised into eight layers. Files are loaded in the following order:
+The repository is organised into 6 authoritative buckets:
 
-1. **LAW** - The constitution, decisions, and mechanical contracts.
-    - `CANON/` - Constitutional rules (Genesis, Versioning, Glossary).
-    - `CONTEXT/` - ADRs, preferences, and research history.
-    - `CONTRACTS/` - Schemas and fixtures (Precedent).
-2. **CAPABILITY** - Modular skills, tools, and MCP adapters.
-    - `SKILLS/` - Atomic agent capabilities.
-    - `MCP/` - Client integration and Semantic Core logic.
-    - `TOOLS/` - Helper scripts (Critics, Linters).
-3. **NAVIGATION** - Maps and roadmaps.
-    - `MAPS/` - Data flows and ownership maps.
-    - `CORTEX/` - Semantic index and search tools.
-4. **MEMORY** - Packers and long-term state.
-5. **THOUGHT** - Experimental labs and prototypes.
-6. **INBOX** - Reports, research, and items for human review.
+1. **LAW** (`LAW/`) - Constitution, decisions, and mechanical contracts.
+    - `LAW/CANON/` - Constitutional rules (Genesis, Versioning, Glossary).
+    - `LAW/CONTEXT/` - ADRs and preferences.
+    - `LAW/CONTRACTS/` - Schemas and fixtures (precedent).
+2. **CAPABILITY** (`CAPABILITY/`) - Skills, tools, and adapters.
+    - `CAPABILITY/SKILLS/` - Atomic agent capabilities.
+    - `CAPABILITY/MCP/` - Client integration and MCP server.
+    - `CAPABILITY/TOOLS/` - Helper scripts (critics, linters).
+3. **NAVIGATION** (`NAVIGATION/`) - Maps, invariants, and indices.
+    - `NAVIGATION/MAPS/` - Entrypoints and ownership maps.
+    - `NAVIGATION/CORTEX/` - Semantic index and search resources.
+4. **DIRECTION** (`DIRECTION/`) - Roadmaps and forward plans (if used).
+5. **THOUGHT** (`THOUGHT/`) - Experimental labs and prototypes.
+6. **MEMORY** (`MEMORY/`) - Packers, archives, and durable state.
+
+Non-bucket top-level directories (supporting, not authoritative): `INBOX/` (reports), `.github/`, and `BUILD/` (disposable build outputs).
 
 ## Semantic Core (Token Compression)
 
-The CORTEX layer includes a **Semantic Core** system that uses vector embeddings to enable massive token savings when dispatching tasks to smaller language models.
+The `NAVIGATION/CORTEX/` layer includes a **Semantic Core** system that uses vector embeddings to enable massive token savings when dispatching tasks to smaller language models.
 
 **How it works:**
-- Big models (Opus) maintain semantic understanding via 384-dimensional vector embeddings in CORTEX
+- Big models (Opus) maintain semantic understanding via 384-dimensional vector embeddings in `NAVIGATION/CORTEX/`
 - Small models (Haiku) receive compressed task specifications with @Symbols and vector context
 - Achieves **96% token reduction** per task (50,000 → 2,000 tokens)
 
@@ -74,7 +76,7 @@ roots (`LAW/CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
 
 This repository is a template: most files are placeholders that illustrate the intended structure. To adapt the system for your own project, fill in the canon, add decisions and ADRs, implement skills and write fixtures.
 
-Agents interacting with the system should follow the protocol described in `CANON/CONTRACT.md`. In brief:
+Agents interacting with the system should follow the protocol described in `LAW/CANON/CONTRACT.md`. In brief:
 
 1. Load the canon first and respect its authority.
 2. Consult context records before making changes.
@@ -90,6 +92,6 @@ Agents interacting with the system should follow the protocol described in `CANO
 - Add fixtures: place skill fixtures under `CAPABILITY/SKILLS/<skill-name>/fixtures/` and governance fixtures under `LAW/CONTRACTS/fixtures/`.
 - Add ADRs: create a new `LAW/CONTEXT/decisions/ADR-xxx-*.md` and reference it in `LAW/CONTEXT/INDEX.md`.
 - Use `BUILD/` for your project's build outputs (dist). It is disposable and should not contain authored content. The template writes its own artifacts under `LAW/CONTRACTS/_runs/`, `NAVIGATION/CORTEX/_generated/`, and `MEMORY/LLM_PACKER/_packs/`.
-- Planning snapshots live under `LAW/CONTEXT/archive/planning/` (see `LAW/CONTEXT/archive/planning/INDEX.md`).
+- Planning snapshots (if present) live under `MEMORY/ARCHIVE/planning/`.
 
 For more details, see individual files in the respective directories.

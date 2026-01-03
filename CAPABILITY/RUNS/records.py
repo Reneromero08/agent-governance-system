@@ -21,6 +21,8 @@ Public API:
 - load_output_hashes(hash: str) -> list[str]
 """
 
+from __future__ import annotations
+
 import json
 from typing import Any
 

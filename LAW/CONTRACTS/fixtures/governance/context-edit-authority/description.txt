@@ -1,6 +1,6 @@
 Verify that critic enforces ADR-016: Context records cannot be edited without explicit user instruction AND task intent.
 
-This fixture ensures agents cannot modify existing CONTEXT/decisions/, CONTEXT/rejected/, or CONTEXT/preferences/ files as side effects of unrelated tasks.
+This fixture ensures agents cannot modify existing `LAW/CONTEXT/decisions/` or `LAW/CONTEXT/preferences/` files as side effects of unrelated tasks.
 
 The test checks that:
 1. critic.py detects when existing CONTEXT records are modified

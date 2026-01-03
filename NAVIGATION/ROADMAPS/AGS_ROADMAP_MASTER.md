@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (Master)
 version: 3.5
-last_updated: 2026-01-02
+last_updated: 2026-01-03
 scope: Agent Governance System (repo + packer + cortex + CI)
 style: agent-readable, task-oriented, minimal ambiguity
 driver: @F0 (The Living Formula)
@@ -229,16 +229,16 @@ Dashboard for ELO visibility.
 
 ## P.1: 6-Bucket Migration (P0)
 Update LLM Packer to work with new bucket structure.
-- [ ] **P.1.1**: Update `Engine/packer/core.py` to use new bucket paths (LAW/, CAPABILITY/, NAVIGATION/)
-- [ ] **P.1.2**: Update `Engine/packer/split.py` to scan new bucket roots
-- [ ] **P.1.3**: Update `Engine/packer/lite.py` to prioritize new bucket structure (HIGH ELO: LAW/CANON/, NAVIGATION/MAPS/)
+- [x] **P.1.1**: Update `Engine/packer/core.py` to use new bucket paths (LAW/, CAPABILITY/, NAVIGATION/)
+- [x] **P.1.2**: Update `Engine/packer/split.py` to scan new bucket roots
+- [x] **P.1.3**: Update `Engine/packer/lite.py` to prioritize new bucket structure (HIGH ELO: LAW/CANON/, NAVIGATION/MAPS/)
 - [ ] **P.1.4**: Update all scope configs (AGS, CAT, LAB) to reference new paths
-- [ ] **P.1.5**: Update tests in `LAW/CONTRACTS/` to verify new bucket paths
-- [ ] **P.1.6**: Update documentation (README, AGENTS.md) to reference new structure
+- [x] **P.1.5**: Update tests in `LAW/CONTRACTS/` to verify new bucket paths
+- [x] **P.1.6**: Update documentation (README, AGENTS.md) to reference new structure
 - **Exit Criteria:**
-  - Packer successfully generates packs using new bucket paths
-  - All tests pass with new structure
-  - No references to old paths (CANON/, CONTEXT/, etc.) in packer code
+  - [x] Packer successfully generates packs using new bucket paths
+  - [x] All tests pass with new structure
+  - [x] No references to old paths (CANON/, CONTEXT/, etc.) in packer code
 
 ## P.2: CAS Integration (Future)
 Integrate LLM Packer with Content-Addressed Storage (depends on Lane Z.2).

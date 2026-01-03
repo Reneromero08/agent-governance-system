@@ -23,7 +23,7 @@ FIXTURE_PACKS_DIR = SYSTEM_DIR / "fixtures"
 STATE_DIR = SYSTEM_DIR / "_state"
 BASELINE_PATH = STATE_DIR / "baseline.json"
 
-CANON_VERSION_FILE = PROJECT_ROOT / "CANON" / "VERSIONING.md"
+CANON_VERSION_FILE = PROJECT_ROOT / "LAW" / "CANON" / "VERSIONING.md"
 GRAMMAR_VERSION = "1.0"
 
 # Token estimation constants
@@ -42,6 +42,9 @@ TEXT_EXTENSIONS = {
 }
 
 TEXT_BASENAMES = {".gitignore", ".gitattributes", ".editorconfig", ".htaccess", ".gitkeep", "LICENSE"}
+
+def rel_posix(*parts: str) -> str:
+    return Path(*parts).as_posix()
 
 
 @dataclass(frozen=True)
@@ -68,17 +71,16 @@ SCOPE_AGS = PackScope(
     key="ags",
     title="Agent Governance System (AGS)",
     file_prefix="AGS",
-    include_dirs=("CANON", "CONTEXT", "MAPS", "SKILLS", "CONTRACTS", "MEMORY", "CORTEX", "TOOLS", ".github"),
+    include_dirs=("LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", ".github"),
     root_files=("README.md", "LICENSE", "AGENTS.md", ".gitignore", ".gitattributes", ".editorconfig"),
     anchors=(
         "AGENTS.md",
         "README.md",
-        "CONTEXT/archive/planning/INDEX.md",
-        "CANON/CONTRACT.md",
-        "CANON/INVARIANTS.md",
-        "CANON/VERSIONING.md",
-        "MAPS/ENTRYPOINTS.md",
-        "LAW/CONTRACTS/runner.py",
+        rel_posix("LAW", "CANON", "CONTRACT.md"),
+        rel_posix("LAW", "CANON", "INVARIANTS.md"),
+        rel_posix("LAW", "CANON", "VERSIONING.md"),
+        rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md"),
+        rel_posix("LAW", "CONTRACTS", "runner.py"),
         "MEMORY/LLM_PACKER/README.md",
     ),
     excluded_dir_parts=frozenset({
@@ -97,8 +99,8 @@ SCOPE_CATALYTIC_DPT = PackScope(
     anchors=(
         "AGENTS.md",
         "README.md",
-        "LAW/CANON/CONTRACT.md",
-        "LAW/CANON/INVARIANTS.md",
+        rel_posix("LAW", "CANON", "CONTRACT.md"),
+        rel_posix("LAW", "CANON", "INVARIANTS.md"),
         "CAPABILITY/TESTBENCH/README.md",
     ),
     excluded_dir_parts=frozenset({
@@ -326,6 +328,9 @@ def copy_repo_files(pack_dir: Path, project_root: Path, included_paths: Sequence
 
 def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
     if scope.key == SCOPE_AGS.key:
+        canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
+        maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
+        contracts_runner = rel_posix("LAW", "CONTRACTS", "runner.py")
         text = "\n".join(
             [
                 "# START HERE",
@@ -335,13 +340,13 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
                 "## Read order",
                 "1) `repo/AGENTS.md`",
                 "2) `repo/README.md`",
-                "3) `repo/CANON/CONTRACT.md`",
-                "4) `repo/MAPS/ENTRYPOINTS.md`",
-                "5) `repo/LAW/CONTRACTS/runner.py`",
+                f"3) `repo/{canon_contract}`",
+                f"4) `repo/{maps_entrypoints}`",
+                f"5) `repo/{contracts_runner}`",
                 "6) `meta/ENTRYPOINTS.md`",
                 "",
                 "## Notes",
-                "- `BUILD` contents exclued.",
+                "- `BUILD` contents excluded.",
                 "- Use `FULL/` for single-file output or `SPLIT/` for sectioned reading.",
                 "",
             ]
@@ -391,6 +396,10 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
 
 def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
     if scope.key == SCOPE_AGS.key:
+        canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
+        maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
+        skills_dir = rel_posix("CAPABILITY", "SKILLS")
+        contracts_runner = rel_posix("LAW", "CONTRACTS", "runner.py")
         text = "\n".join(
             [
                 "# Snapshot Entrypoints",
@@ -398,10 +407,10 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
                 "Key entrypoints for `AGS`:",
                 "",
                 "- `repo/AGENTS.md`",
-                "- `repo/CANON/CONTRACT.md`",
-                "- `repo/MAPS/ENTRYPOINTS.md`",
-                "- `repo/SKILLS/`",
-                "- `repo/LAW/CONTRACTS/runner.py`",
+                f"- `repo/{canon_contract}`",
+                f"- `repo/{maps_entrypoints}`",
+                f"- `repo/{skills_dir}/`",
+                f"- `repo/{contracts_runner}`",
                 "",
                 "Notes:",
                 "- `FULL/` contains single-file bundles.",
@@ -713,11 +722,6 @@ def make_pack(
     write_pack_info(out_dir, scope=scope, stamp=stamp or digest[:12])
     write_provenance(out_dir, scope)
     write_omitted(out_dir, omitted)
-    
-    # Context if available
-    context_src = PROJECT_ROOT / scope.source_root_rel / "CONTEXT/CONTEXT.txt"
-    if context_src.exists():
-         (out_dir / "meta" / "CONTEXT.txt").write_text(read_text(context_src), encoding="utf-8")
 
     # 3. SPLIT Output (Strictly SPLIT/)
     repo_pack_paths = [f"repo/{p}" for p in include_paths]

@@ -37,6 +37,8 @@ Contract:
   - Enforces forbidden artifacts: rejects if logs/, tmp/, transcript.json exist
 """
 
+from __future__ import annotations
+
 import argparse
 import json
 import os

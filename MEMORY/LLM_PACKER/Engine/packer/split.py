@@ -11,6 +11,9 @@ from typing import List, Sequence
 
 from .core import PackScope, SCOPE_AGS, SCOPE_CATALYTIC_DPT, SCOPE_LAB, read_text
 
+def rel_posix(*parts: str) -> str:
+    return Path(*parts).as_posix()
+
 def choose_fence(text: str) -> str:
     """Choose a fence that doesn't conflict with existing fences in text."""
     if "````" in text:
@@ -51,20 +54,27 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
             out_lines.append("")
         return "\n".join(out_lines).rstrip() + "\n"
 
-    # Group paths
-    canon_paths = [p for p in included_repo_paths if p.startswith("repo/CANON/")]
-    root_paths = [p for p in included_repo_paths if p.startswith("repo/") and p.count("/") == 1]
-    maps_paths = [p for p in included_repo_paths if p.startswith("repo/MAPS/")]
-    context_paths = [p for p in included_repo_paths if p.startswith("repo/CONTEXT/")]
-    skills_paths = [p for p in included_repo_paths if p.startswith("repo/SKILLS/")]
-    contracts_paths = [p for p in included_repo_paths if p.startswith("repo/CONTRACTS/")]
-    cortex_paths = [p for p in included_repo_paths if p.startswith("repo/CORTEX/")]
+    # Group paths (6-bucket structure + optional root files)
+    law_paths = [p for p in included_repo_paths if p.startswith("repo/LAW/")]
+    capability_paths = [p for p in included_repo_paths if p.startswith("repo/CAPABILITY/")]
+    navigation_paths = [p for p in included_repo_paths if p.startswith("repo/NAVIGATION/")]
+    direction_paths = [p for p in included_repo_paths if p.startswith("repo/DIRECTION/")]
+    thought_paths = [p for p in included_repo_paths if p.startswith("repo/THOUGHT/")]
     memory_paths = [p for p in included_repo_paths if p.startswith("repo/MEMORY/")]
-    tools_paths = [p for p in included_repo_paths if p.startswith("repo/TOOLS/")]
+    root_paths = [p for p in included_repo_paths if p.startswith("repo/") and p.count("/") == 1]
     github_paths = [p for p in included_repo_paths if p.startswith("repo/.github/")]
 
     meta_dir = pack_dir / "meta"
     meta_paths = sorted([f"meta/{p.name}" for p in meta_dir.iterdir() if p.is_file()]) if meta_dir.exists() else []
+
+    canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
+    canon_invariants = rel_posix("LAW", "CANON", "INVARIANTS.md")
+    canon_versioning = rel_posix("LAW", "CANON", "VERSIONING.md")
+    maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
+    contracts_runner = rel_posix("LAW", "CONTRACTS", "runner.py")
+    skills_dir = rel_posix("CAPABILITY", "SKILLS")
+    cortex_dir = rel_posix("NAVIGATION", "CORTEX")
+    tools_dir = rel_posix("CAPABILITY", "TOOLS")
 
     # Write Index (NO COMBINED references)
     (split_dir / "AGS-00_INDEX.md").write_text(
@@ -76,16 +86,15 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
                 "",
                 "## Read order",
                 "1) `repo/AGENTS.md`",
-                "2) `repo/README.md` and `repo/CONTEXT/archive/planning/INDEX.md`",
-                "3) `repo/CANON/CONTRACT.md` and `repo/CANON/INVARIANTS.md` and `repo/CANON/VERSIONING.md`",
-                "4) `repo/MAPS/ENTRYPOINTS.md`",
-                "5) `repo/CONTRACTS/runner.py` and `repo/SKILLS/`",
-                "6) `repo/CORTEX/` and `repo/TOOLS/`",
-                "7) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt` (Snapshot specific)",
+                "2) `repo/README.md`",
+                f"3) `repo/{canon_contract}` and `repo/{canon_invariants}` and `repo/{canon_versioning}`",
+                f"4) `repo/{maps_entrypoints}`",
+                f"5) `repo/{contracts_runner}` and `repo/{skills_dir}/`",
+                f"6) `repo/{cortex_dir}/` and `repo/{tools_dir}/`",
+                "7) `meta/ENTRYPOINTS.md` and `meta/PACK_INFO.json` (Snapshot specific)",
                 "",
                 "## Notes",
                 "- `BUILD` contents are excluded.",
-                "- Research under `repo/CONTEXT/research/` is non-binding and opt-in.",
                 "- Single-file bundles available in `FULL/`.",
                 "",
             ]
@@ -93,14 +102,14 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
         encoding="utf-8",
     )
 
-    (split_dir / "AGS-01_CANON.md").write_text("# Canon\n\n" + section(canon_paths), encoding="utf-8")
-    (split_dir / "AGS-02_ROOT.md").write_text("# Root\n\n" + section(root_paths), encoding="utf-8")
-    (split_dir / "AGS-03_MAPS.md").write_text("# Maps\n\n" + section(maps_paths), encoding="utf-8")
-    (split_dir / "AGS-04_CONTEXT.md").write_text("# Context\n\n" + section(context_paths), encoding="utf-8")
-    (split_dir / "AGS-05_SKILLS.md").write_text("# Skills\n\n" + section(skills_paths), encoding="utf-8")
-    (split_dir / "AGS-06_CONTRACTS.md").write_text("# Contracts\n\n" + section(contracts_paths), encoding="utf-8")
-    (split_dir / "AGS-07_SYSTEM.md").write_text(
-        "# System\n\n" + section([*cortex_paths, *memory_paths, *tools_paths, *github_paths, *meta_paths]),
+    (split_dir / "AGS-01_LAW.md").write_text("# LAW\n\n" + section(law_paths), encoding="utf-8")
+    (split_dir / "AGS-02_CAPABILITY.md").write_text("# CAPABILITY\n\n" + section(capability_paths), encoding="utf-8")
+    (split_dir / "AGS-03_NAVIGATION.md").write_text("# NAVIGATION\n\n" + section(navigation_paths), encoding="utf-8")
+    (split_dir / "AGS-04_DIRECTION.md").write_text("# DIRECTION\n\n" + section(direction_paths), encoding="utf-8")
+    (split_dir / "AGS-05_THOUGHT.md").write_text("# THOUGHT\n\n" + section(thought_paths), encoding="utf-8")
+    (split_dir / "AGS-06_MEMORY.md").write_text("# MEMORY\n\n" + section(memory_paths), encoding="utf-8")
+    (split_dir / "AGS-07_ROOT_FILES.md").write_text(
+        "# ROOT_FILES\n\n" + section([*root_paths, *github_paths, *meta_paths]),
         encoding="utf-8",
     )
 
@@ -160,7 +169,7 @@ def write_split_pack_catalytic_dpt(pack_dir: Path, included_repo_paths: Sequence
                 "3) `repo/CATALYTIC-DPT/ROADMAP_V2.1.md`",
                 "4) `repo/CATALYTIC-DPT/swarm_config.json`",
                 "5) `repo/CATALYTIC-DPT/CHANGELOG.md`",
-                "6) `meta/ENTRYPOINTS.md` and `meta/CONTEXT.txt`",
+                "6) `meta/ENTRYPOINTS.md` and `meta/PACK_INFO.json`",
                 "",
                 "## Notes",
                 "- See `FULL/` for single-file bundles.",
