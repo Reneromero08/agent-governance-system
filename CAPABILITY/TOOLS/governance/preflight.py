@@ -13,9 +13,9 @@ from typing import Any, Dict, List, Optional, Tuple
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-CORTEX_META_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "CORTEX_META.json"
-SECTION_INDEX_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "SECTION_INDEX.json"
-DB_PATH = PROJECT_ROOT / "CORTEX" / "_generated" / "cortex.db"
+CORTEX_META_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "CORTEX_META.json"
+SECTION_INDEX_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json"
+DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "cortex.db"
 
 
 def _sha256_bytes(data: bytes) -> str:

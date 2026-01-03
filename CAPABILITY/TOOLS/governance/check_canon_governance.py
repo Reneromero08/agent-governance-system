@@ -24,8 +24,8 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 VERSIONING_PATH = PROJECT_ROOT / "CANON" / "VERSIONING.md"
 CHANGELOG_PATH = PROJECT_ROOT / "CANON" / "CHANGELOG.md"
 INVARIANTS_PATH = PROJECT_ROOT / "CANON" / "INVARIANTS.md"
-CORTEX_INDEX = PROJECT_ROOT / "CORTEX" / "_generated" / "cortex.json"
-CORTEX_FALLBACK = PROJECT_ROOT / "CORTEX" / "cortex.json"
+CORTEX_INDEX = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "cortex.json"
+CORTEX_FALLBACK = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "cortex.json"
 
 
 def get_canon_version() -> Optional[str]:

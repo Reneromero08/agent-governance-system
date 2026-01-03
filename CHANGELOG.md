@@ -4,9 +4,14 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [3.3.2] - 2026-01-03
+## [3.3.1] - 2026-01-02
 
 ### Changed
+- **P.1: 6-Bucket Migration (P0)** — migrated LLM Packer to the 6-bucket repo layout (LAW/CAPABILITY/NAVIGATION/DIRECTION/THOUGHT/MEMORY).
+  - Updated pack roots, anchors, split grouping, and lite priorities in `MEMORY/LLM_PACKER/Engine/packer/core.py`.
+  - Replaced legacy split outputs with bucket outputs in `MEMORY/LLM_PACKER/Engine/packer/split.py` and `MEMORY/LLM_PACKER/Engine/packer/lite.py`.
+  - Updated smoke/validators and docs to match new pack structure (`CAPABILITY/SKILLS/cortex/llm-packer-smoke/run.py`, `CAPABILITY/SKILLS/utilities/pack-validate/run.py`, `README.md`, `AGENTS.md`, `MEMORY/LLM_PACKER/README.md`).
+  - Updated contract fixtures/docs for bucket paths (`LAW/CONTRACTS/fixtures/governance/canon-sync/input.json`, `LAW/CONTRACTS/fixtures/governance/canon-sync/expected.json`, `LAW/CONTRACTS/README.md`).
 - **P.2: CAS Integration (P0)** — integrated LLM Packer LITE outputs with CAS (manifest-only) and root-audit gating.
   - LITE writes `LITE/PACK_MANIFEST.json` (path → `sha256:` ref) and `LITE/RUN_REFS.json` (TASK_SPEC/OUTPUT_HASHES/STATUS refs).
   - Packer emits roots to `CAPABILITY/RUNS/RUN_ROOTS.json` and gates completion on `CAPABILITY/AUDIT/root_audit.py` (Mode B).
@@ -16,15 +21,8 @@ All notable changes to Agent Governance System will be documented in this file.
   - **External Archive**: `MEMORY/LLM_PACKER/_packs/_archive/<pack_name>.zip` (whole pack folder).
   - Safe rotation: previous unzipped pack is deleted only after its External Archive validates.
 
-## [3.3.1] - 2026-01-02
-
-### Changed
-- **P.1: 6-Bucket Migration (P0)** — migrated LLM Packer to the 6-bucket repo layout (LAW/CAPABILITY/NAVIGATION/DIRECTION/THOUGHT/MEMORY).
-  - Updated pack roots, anchors, split grouping, and lite priorities in `MEMORY/LLM_PACKER/Engine/packer/core.py`.
-  - Replaced legacy split outputs with bucket outputs in `MEMORY/LLM_PACKER/Engine/packer/split.py` and `MEMORY/LLM_PACKER/Engine/packer/lite.py`.
-  - Updated smoke/validators and docs to match new pack structure (`CAPABILITY/SKILLS/cortex/llm-packer-smoke/run.py`, `CAPABILITY/SKILLS/utilities/pack-validate/run.py`, `README.md`, `AGENTS.md`, `MEMORY/LLM_PACKER/README.md`).
-  - Updated contract fixtures/docs for bucket paths (`LAW/CONTRACTS/fixtures/governance/canon-sync/input.json`, `LAW/CONTRACTS/fixtures/governance/canon-sync/expected.json`, `LAW/CONTRACTS/README.md`).
-
+### Fixed
+- **CORTEX Reference Normalization** — Normalized all critical code references to canonical `NAVIGATION/CORTEX` (8 files: emergency.py, preflight.py, check_canon_governance.py, mcp-access-validator fixture, mcp-smoke, mcp-extension-verify, TURBO_SWARM error messages). CAT_CHAT and external AGI references preserved as intentional separations.
 
 
 ## [3.3.0] - 2026-01-02
