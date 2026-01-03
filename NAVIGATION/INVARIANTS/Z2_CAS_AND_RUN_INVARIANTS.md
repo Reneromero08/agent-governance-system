@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: cfe9fdad729fe560a9c101b77d337152278ad7432ec49b4f1b7afb70d3cb505b -->
+<!-- CONTENT_HASH: d259cefff4358a2d79f51343e25a66c1a1fa62db6bce490b60c1f13c492f65d3 -->
 
 # Z2 CAS + Artifact + Run Invariants (Fence)
 Status: CANONICAL (Z.2.1–Z.2.4)
