@@ -4,6 +4,25 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.2.4] - 2026-01-02
+
+### Added
+- **Z.2.4 – Deduplication proof for CAS + Artifact Store** (Completed 2026-01-02)
+  - **Mechanical Proof**: Deduplication is satisfied by content addressing and write-once semantics
+  - **CAS Deduplication Tests**: `CAPABILITY/TESTBENCH/cas/test_cas_dedup.py` (8 tests)
+    - Proves `cas_put(same_bytes)` twice returns same hash
+    - Proves underlying stored object is NOT rewritten on second put (verified via file mtime)
+    - Tests for empty data, large data, binary data, multiple puts, retrieval after dedup
+  - **Artifact Store Deduplication Tests**: `CAPABILITY/TESTBENCH/artifacts/test_artifact_dedup.py` (14 tests)
+    - Proves `store_bytes(same_bytes)` twice returns same `sha256:` ref
+    - Proves `store_file` on identical files returns same `sha256:` ref
+    - Cross-function deduplication (store_bytes and store_file deduplicate to same ref)
+    - Tests for different paths, different names, mixed operations
+  - **Test Coverage**: 22/22 new tests passing (8 CAS + 14 artifact store)
+  - **Documentation**: Added Z.2.4 section to `NAVIGATION/INVARIANTS/Z2_CAS_AND_RUN_INVARIANTS.md`
+  - **Guarantees**: Identical content shares storage, no rewrites on duplicate puts, deterministic refs
+  - **Proof Mechanism**: File modification time (mtime) verification for no-rewrite guarantee
+
 ## [3.2.3] - 2026-01-02
 
 ### Added
