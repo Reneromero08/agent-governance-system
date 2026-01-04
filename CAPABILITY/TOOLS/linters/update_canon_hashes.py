@@ -21,27 +21,31 @@ print("Updating canon file frontmatter hashes...\n")
 
 for filename in canon_files:
     filepath = prompts_dir / filename
-    
+
     # Read content
-    content = filepath.read_bytes()
     text = filepath.read_text(encoding='utf-8')
-    
-    # Compute hash (excluding the hash line itself for consistency)
-    # We'll compute hash, update the file, then recompute
-    actual_hash = hashlib.sha256(content).hexdigest()
-    
-    # Update sha256 in frontmatter
+
+    # Compute hash of content EXCLUDING the CANON_HASH line
+    # Remove the entire HTML comment line containing the hash
+    lines = text.split('\n')
+    lines_without_hash = [line for line in lines if not re.match(r'<!-- CANON_HASH:', line)]
+    content_without_hash = '\n'.join(lines_without_hash)
+
+    # Compute hash of content without the hash line
+    actual_hash = hashlib.sha256(content_without_hash.encode('utf-8')).hexdigest()
+
+    # Update CANON_HASH in the HTML comment
     updated_text = re.sub(
-        r'(sha256:\s*)[a-f0-9]{64}',
-        f'\\g<1>{actual_hash}',
+        r'(<!-- CANON_HASH:\s*)[a-f0-9]{64}(\s*-->)',
+        f'\\g<1>{actual_hash}\\g<2>',
         text
     )
     
     if updated_text != text:
         filepath.write_text(updated_text, encoding='utf-8')
-        print(f"✓ Updated {filename}")
+        print(f"[OK] Updated {filename}")
         print(f"  New hash: {actual_hash}")
     else:
-        print(f"- {filename} (no change needed)")
-    
-print("\n✅ All canon frontmatter hashes updated")
+        print(f"[SKIP] {filename} (no change needed)")
+
+    print("\n[OK] All canon frontmatter hashes updated")

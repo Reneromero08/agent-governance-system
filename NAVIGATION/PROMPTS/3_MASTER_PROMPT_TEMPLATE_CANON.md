@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Governor workflow template for generating all remaining per-task prompts
 ---
-<!-- CANON_HASH: c344e760b4d5f0e5ace3d6084276289f86fb9143ea90008b19468682ad842df1 -->
+<!-- CANON_HASH: 032ab3efda97e8294e8474d41ba9462dc3a914e124e8042bcffc14a55278f67f -->
 
 ## 0) Authority
 Subordinate to:
@@ -47,8 +47,8 @@ Pack manifest MUST include:
       - DEFERRABLE: generate prompt with FILL_ME__ tokens; record warning
    f) Draft prompt using canonical template.
    g) Run prompt QA checklist.
-   h) If scripts/lint-prompt.sh exists:
-      - run it on the prompt
+   h) If scripts/lint-prompt.sh exists (requires bash-compatible shell, e.g. WSL):
+      - run it via `bash` on the prompt
       - exit 1 blocks pack generation
       - exit 2 records a warning and continues
    i) Write prompt file.
@@ -56,3 +56,10 @@ Pack manifest MUST include:
 
 ## 5) STOP behavior
 STOP is per-task only. Continue generating prompts for unrelated tasks.
+
+## 6) Receipt requirements (lint metadata)
+Receipts MUST include the following REQUIRED fields for lint verification:
+- lint_command: the exact linter command executed
+- lint_exit_code: exit status (0=PASS, 1=FAIL, 2=WARNING)
+- lint_result: one of PASS, FAIL, or WARNING
+- linter_ref: optional (path/version/hash of the linter used)

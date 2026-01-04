@@ -1,22 +1,22 @@
 {
   "pack_version": "canon-aligned",
-  "generated_utc": "2026-01-04T00:09:05Z",
+  "generated_utc": "2026-01-04T06:12:05Z",
   "canon": {
     "orientation": {
       "path": "NAVIGATION/PROMPTS/0_ORIENTATION_CANON.md",
-      "sha256": "3ee7aa8436041c3253d7831a7c409259bbe484b24669b60038be778b9bbfc1c9"
+      "sha256": "99d0ede4ed7710767b90d37efd0ea9444ecb41d9c82ae38a79f0952dd25c22f3"
     },
     "policy": {
       "path": "NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md",
-      "sha256": "6b3d1a1c6062aaa11b348a76d2ea6d39760927917b6d26a75ef4d413847ab516"
+      "sha256": "29ed1cec0104314dea9bb5844e9fd7c15a162313ef7cc3a19e8b898d9cea2624"
     },
     "guide": {
       "path": "NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md",
-      "sha256": "cef08c3510f5420f69c228d32d01d5b8bd74d4339f7b800598cf9ae4fbdb0247"
+      "sha256": "9acc1b9772579720e3c8bc19a80a9a3908323b411c6d06d04952323668f4efe4"
     },
     "template": {
       "path": "NAVIGATION/PROMPTS/3_MASTER_PROMPT_TEMPLATE_CANON.md",
-      "sha256": "df7c260a9954068cb7265c0b6c2b0fd702d83dbffa9e41f1ead88432853c9073"
+      "sha256": "bf7019da38e5ff1d9696c64ba2c53312cad3e6de701d602b758ea40680fb9967"
     },
     "handoff_full": {
       "path": "NAVIGATION/PROMPTS/4_FULL_HANDOFF_TEMPLATE_CANON.md",
@@ -28,7 +28,7 @@
     },
     "routing": {
       "path": "NAVIGATION/PROMPTS/6_MODEL_ROUTING_CANON.md",
-      "sha256": "4c5f57358a518755315ca8d2c020908a52456147259bffb7d6d8b195ca9b0848"
+      "sha256": "70022eda441e80518d3bdd4c48fad1194e9cc4abd887a2a893078752bb81fbc3"
     }
   },
   "lint_script": {

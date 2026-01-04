@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Model routing decision ladder for optimal token efficiency
 ---
-<!-- CANON_HASH: 1d59306ce7937fb7851e58ec1808cd8ee933c9308998829f84f778e0d77b5548 -->
+<!-- CANON_HASH: db13df040be8f37535ce3db87631a2fb4251af6cfb0fadbdde226fc5c9933636 -->
 
 # MODEL_ROUTING_CANON
 
@@ -18,6 +18,11 @@ Models are execution units. Prefer **procedural execution** over “designing in
 - **Thinking OFF by default** on every model.
 - Turn thinking ON only when the task requires invention or a true design fork that cannot be resolved from repo canon/contracts/packs.
 - Escalate models **only** after acceptance checks fail or coherence requirements exceed the current model.
+
+## Authority Tiers (Policy)
+- **Planner-capable Models**: Claude Sonnet (Thinking), Claude Opus (Thinking/Non-thinking). Designated for planning, repository navigation, and complex decomposition.
+- **Non-planner Models**: Gemini Flash, Gemini Pro Low, GPT Codex, Grok Code Fast. Restricted to mechanical execution only.
+- **Enforcement**: Non-planner models MUST carry a `plan_ref` artifact or identifier from a planner-capable model. Execution without a valid reference is a policy breach.
 
 ## Decision ladder (strict)
 1) **Mechanical from an explicit checklist/spec?**  
@@ -130,3 +135,7 @@ Do not escalate because a task “feels important.” Escalate only when:
 ## Opus constraint (critical)
 Opus is a **high-authority execution model**, not an exploration model.
 Prompts to Opus must be fully specified, procedural, and bounded.
+
+## Lint precondition (hard stop)
+If lint status is missing or FAIL, routing to any execution model is forbidden.
+The only allowed action is to run the canonical linter or repair the prompt pack to pass lint.

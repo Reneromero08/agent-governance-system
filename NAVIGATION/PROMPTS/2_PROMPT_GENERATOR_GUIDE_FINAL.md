@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Procedures + templates for generating per-task prompts (subordinate to PROMPT_POLICY_CANON)
 ---
-<!-- CANON_HASH: 9e7c07643dd2a2dc00f15b13a8d86a381c7c08e67a81fbf4d88f86cc26252ed2 -->
+<!-- CANON_HASH: 5124e8a9882381092199f3a13669927e5be64bfb9c9ad7b4aa76ea8a22a816e0 -->
 
 ## 0) Authority
 Subordinate to NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md.
@@ -40,7 +40,7 @@ A prompt is invalid unless it passes:
 - ARTIFACTS includes receipt and report paths and matches header paths
 - No forbidden inference terms (use hex-escaped regex as in policy)
 
-If scripts/lint-prompt.sh exists, the Governor MUST run it on each generated prompt.
+If scripts/lint-prompt.sh exists, the Governor MUST run it via `bash` on each generated prompt (requires bash-compatible shell, e.g. WSL).
 
 ## 4) Canonical per-task prompt template
 ```text

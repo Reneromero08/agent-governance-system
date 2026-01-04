@@ -1,8 +1,66 @@
-<!-- CONTENT_HASH: 40c4f528690b26391ad29d1181d51b5628249f325c98c1d8c311f3a5fbb8b051 -->
+<!-- CONTENT_HASH: 03b4f94906d990c33b076b1c739eaed74a622f7fd519ac9c6ed2509e0645d267 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.7] - 2026-01-04
+
+### Added
+- **Batch Normalization & Portability of Prompt Pack** — Standardized the entire prompt tree in `NAVIGATION/PROMPTS/**` for mechanical consistency, lint-compliance, and cross-platform portability.
+  - **Fix A: Python Command Repair**: Repaired 18 occurrences of truncated or invalid `python -` lines.
+    - Standardized to `python -m compileall . (must exit 0 or hard fail)` for all truncated "REQUIRED FACTS" verification lines.
+  - **Fix B: Path Mismatch Normalization**: Normalized internal path references across 32 prompt files to be internally consistent.
+    - Every reference (header, body, allowed-writes, receipt/report paths) now matches the file's canonical filename (e.g., `1.1_slug` instead of `1-1-slug`).
+  - **Python Portability (Heredoc Elimination)**: Replaced 14 bash-only Python heredocs (`python - <<'PY'`) with portable `python -c` one-liners.
+    - Ensures "REQUIRED FACTS" extraction works in WSL/bash, Windows CMD, and PowerShell.
+  - **Roadmap Path Correction**: Repaired 29 files referencing the non-existent `AGS_ROADMAP_MASTER_REPHASED_TODO_UPDATED.md`, pointing them to the canonical `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`.
+  - **PROMPT_PACK_MANIFEST.json**: Updated with 32 new SHA256 hashes for the standardized pack.
+  - **Shell Portability (Standardized Invocations)**: Resolved silent shell assumptions across 36 files. 
+    - Explicitly prefixed `*.sh` calls with `bash` and added hardware/lane requirements: "Requires bash-compatible shell (e.g. WSL)".
+  - **Validation**: All prompts now pass `lint_prompt_pack.sh` with 0 violations and 0 warnings.
+
+## [3.3.6] - 2026-01-04
+
+### Added
+- **Authority Asymmetry in Prompt Policy** — Formalized the split between planner-capable and non-planner models to optimize compute and preserve safety.
+  - **NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md (v1.4)**:
+    - **Planning Authority Rule (Section 1.5.1)**: Granted full authority for planning, analysis, decomposition, and repository navigation to planner-capable models.
+    - **Execution Restriction Rule (Section 1.5.2)**: Restricted non-planner models to mechanical execution ONLY IF a valid `plan_ref` from a planner-capable model is provided.
+    - **Section 13 (Authority Enforcement)**: Mandated that executors must gate restricted models on plan presence and record violations as `POLICY_BREACH` in run receipts.
+  - **NAVIGATION/PROMPTS/6_MODEL_ROUTING_CANON.md**:
+    - Added **Authority Tiers** section designating Claude Sonnet (Thinking) and Opus as Planner-capable, and Gemini/GPT/Grok as Non-planner models.
+  - **PROMPT_PACK_MANIFEST.json**: Updated canon SHA256 hashes for policy and routing.
+  - **Prompt Pack Synchronization**: Updated `policy_canon_sha256` in all 32 existing prompt files to ensure alignment with v1.4 policy.
+
+## [3.3.5] - 2026-01-04
+
+### Added
+- **Lint Gate Enforcement in Canon Law** — Promoted existing prompt-pack linter to mandatory canon law with hard enforcement across three CANON files.
+  - **NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md**: Added Section 12 "Lint Gate" declaring lint-pass as hard precondition to execution.
+    - Lint failure or inability to lint is a hard stop (no model execution, no writes).
+    - Executors MUST run canonical lint command before any execution: `CAPABILITY/TOOLS/linters/lint_prompt_pack.sh PROMPTS_DIR`.
+    - Executors MUST record lint metadata in receipts: `lint_command`, `lint_exit_code`, `lint_result`.
+  - **NAVIGATION/PROMPTS/3_MASTER_PROMPT_TEMPLATE_CANON.md**: Added Section 6 "Receipt Requirements (lint metadata)" with REQUIRED receipt fields.
+    - `lint_command`: the exact linter command executed.
+    - `lint_exit_code`: exit status (0=PASS, 1=FAIL, 2=WARNING).
+    - `lint_result`: one of PASS, FAIL, or WARNING.
+    - `linter_ref`: optional (path/version/hash of the linter used).
+  - **NAVIGATION/PROMPTS/6_MODEL_ROUTING_CANON.md**: Added "Lint Precondition (hard stop)" section.
+    - Routing to any execution model is forbidden if lint status is missing or FAIL.
+    - Only allowed action: Run canonical linter or repair prompt pack to pass lint.
+  - **NAVIGATION/PROMPTS/PROMPT_PACK_MANIFEST.json**: Updated all 7 canon SHA256 hashes to reflect new content.
+
+### Fixed
+- **CAPABILITY/TOOLS/linters/verify_canon_hashes.py**:
+  - Fixed Unicode encoding errors on Windows by removing emoji characters (✓, ✗, ⚠️, ✅, ❌) and replacing with ASCII ([OK], [FAIL], [!], [OK], [FAIL]).
+  - Fixed hash computation to correctly extract CANON_HASH from HTML comment format (`<!-- CANON_HASH: <hash> -->`).
+  - Fixed hash verification to exclude CANON_HASH line itself when computing actual hashes.
+- **CAPABILITY/TOOLS/linters/update_canon_hashes.py**:
+  - Fixed Unicode encoding errors (same as verify_canon_hashes.py).
+  - Fixed hash computation to match verification logic (exclude CANON_HASH line).
+  - Fixed HTML comment pattern matching to use CANON_HASH instead of sha256.
+  - All 7 canon files now have correct CANON_HASH values matching actual content.
 
 ## [3.3.4] - 2026-01-04
 
