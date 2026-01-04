@@ -4,6 +4,25 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.4] - 2026-01-04
+
+### Added
+- **Prompt Pack Linter** — `CAPABILITY/TOOLS/linters/lint_prompt_pack.sh` enforces `NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md` mechanically with deterministic, read-only validation.
+  - **Exit Codes**: 0=PASS, 1=POLICY_VIOLATION (blocking), 2=WARNING (non-blocking)
+  - **Checks Implemented**:
+    - A) Manifest validity (JSON structure, required fields, path existence)
+    - B) INDEX link validity (markdown links resolve correctly)
+    - C) YAML frontmatter (required fields, format validation)
+    - D) Canon hash consistency (detects version skew)
+    - E) Forbidden terms (hex-escaped regex for "assume" variants)
+    - F) Empty bullet lines (WARNING for `^\s*-\s*$` pattern)
+    - G) FILL token containment (`FILL_ME__` only in REQUIRED FACTS)
+  - **Dependencies**: Bash + Python 3 only (no jq, ripgrep, node)
+  - **Performance**: <5 seconds typical, deterministic output
+  - **Documentation**: Comprehensive README, implementation summary, quick reference
+  - **Testing**: Validation and unit test scripts included
+  - **Location**: `CAPABILITY/TOOLS/linters/` (organized in dedicated folder)
+
 ## [3.3.3] - 2026-01-03
 
 ### Added
