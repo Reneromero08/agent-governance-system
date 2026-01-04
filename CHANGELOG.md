@@ -4,6 +4,18 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.3] - 2026-01-03
+
+### Added
+- **CI-local gate helper** — `CAPABILITY/TOOLS/utilities/ci_local_gate.py` supports a fast default (critic-only) for frequent commits and a `--full` mode that runs `critic` + `runner` + `pytest` (with safe temp dir) and mints a one-time `LAW/CONTRACTS/_runs/ALLOW_PUSH.token` tied to `HEAD`.
+
+### Changed
+- **Pre-push fast path** — `.githooks/pre-push` consumes the one-time token to skip re-running heavy checks when the local CI gate already passed for the current `HEAD`.
+- **Pre-push alignment** — legacy/manual tokens now run the full CI-aligned gate (`ci_local_gate.py --full`) on push, not just `runner`.
+
+### Fixed
+- **Canon governance messaging** — `CAPABILITY/TOOLS/check-canon-governance.js` now correctly requires `CHANGELOG.md` (matching the enforced policy).
+
 ## [3.3.2] - 2026-01-03
 
 ### Changed

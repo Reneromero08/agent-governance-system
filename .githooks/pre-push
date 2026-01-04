@@ -11,8 +11,11 @@ if [ ! -f "$TOKEN_FILE" ]; then
     echo ""
     echo "❌ PUSH BLOCKED: No push approval token found"
     echo ""
-    echo "Run: echo \"my-push-reason\" > $TOKEN_FILE"
-    echo "Scope this push, create a token, then push."
+    echo "Recommended (full CI-aligned gate + token):"
+    echo "  python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full"
+    echo ""
+    echo "Legacy/manual token (will run full gate on push):"
+    echo "  echo \"my-push-reason\" > $TOKEN_FILE"
     echo ""
     exit 1
 fi
@@ -22,20 +25,49 @@ TOKEN_SCOPE=$(cat "$TOKEN_FILE")
 echo "[PRE-PUSH] Token found: $TOKEN_SCOPE"
 echo "The token will be consumed (deleted) after successful push."
 
-# Run minimal contracts validation
-echo "[PRE-PUSH] Running contracts validation..."
-python LAW/CONTRACTS/runner.py
-if [ $? -ne 0 ]; then
-    echo ""
-    echo "❌ PUSH BLOCKED: Contracts validation failed"
-    echo ""
-    echo "Fix failing contracts before pushing."
-    echo "Token preserved for retry."
-    echo ""
-    exit 1
+# If this is a CI_OK token, validate it matches current HEAD and skip re-running checks.
+echo "$TOKEN_SCOPE" | grep -q "CI_OK" && CI_OK=1 || CI_OK=0
+if [ "$CI_OK" -eq 1 ]; then
+    HEAD=$(git rev-parse HEAD 2>/dev/null || true)
+    TOK_HEAD=$(echo "$TOKEN_SCOPE" | sed -n 's/.*head=\([0-9a-f]\{40\}\).*/\1/p')
+
+    if [ -z "$TOK_HEAD" ] || [ -z "$HEAD" ] || [ "$TOK_HEAD" != "$HEAD" ]; then
+        echo ""
+        echo "❌ PUSH BLOCKED: CI_OK token does not match current HEAD"
+        echo "  token head: $TOK_HEAD"
+        echo "  current:    $HEAD"
+        echo ""
+        echo "Re-run: python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full"
+        echo ""
+        exit 1
+    fi
+
+    # Safety: prevent pushing while the index has staged-but-uncommitted changes.
+    if ! git diff --cached --quiet; then
+        echo ""
+        echo "❌ PUSH BLOCKED: staged changes are not committed"
+        echo "Commit (or unstage) changes before pushing."
+        echo ""
+        exit 1
+    fi
+    # Note: working tree can be dirty without affecting the pushed commit; we don't block on that.
+else
+    # Legacy/manual token: run the full CI-aligned gate on push (slower, but CI-aligned).
+    echo "[PRE-PUSH] Running full CI-aligned gate (critic + runner + pytest)..."
+    python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full
+    if [ $? -ne 0 ]; then
+        echo ""
+        echo "❌ PUSH BLOCKED: CI-aligned gate failed"
+        echo ""
+        echo "Fix failing checks before pushing."
+        echo "Token preserved for retry."
+        echo ""
+        exit 1
+    fi
+
+    echo "[PRE-PUSH] ✅ CI-aligned gate passed"
 fi
 
-echo "[PRE-PUSH] ✅ Contracts passed"
 echo "[PRE-PUSH] ✅ Push approved - consuming token"
 
 # Delete token (one-time use)
