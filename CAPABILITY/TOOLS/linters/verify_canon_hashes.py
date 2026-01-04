@@ -22,36 +22,40 @@ print("Verifying canon file hashes...\n")
 all_valid = True
 for filename in canon_files:
     filepath = prompts_dir / filename
-    
-    # Compute actual hash
-    content = filepath.read_bytes()
-    actual_hash = hashlib.sha256(content).hexdigest()
-    
-    # Extract hash from frontmatter
+
+    # Read content
     text = filepath.read_text(encoding='utf-8')
-    match = re.search(r'sha256:\s*([a-f0-9]{64})', text)
+
+    # Compute hash of content EXCLUDING the CANON_HASH line
+    lines = text.split('\n')
+    lines_without_hash = [line for line in lines if not re.match(r'<!-- CANON_HASH:', line)]
+    content_without_hash = '\n'.join(lines_without_hash)
+    actual_hash = hashlib.sha256(content_without_hash.encode('utf-8')).hexdigest()
+
+    # Extract hash from frontmatter
+    match = re.search(r'CANON_HASH:\s*([a-f0-9]{64})', text)
     
     if match:
         declared_hash = match.group(1)
         matches = declared_hash == actual_hash
-        status = "✓" if matches else "✗"
-        
+        status = "[OK]" if matches else "[FAIL]"
+
         print(f"{status} {filename}")
         print(f"  Declared: {declared_hash}")
         print(f"  Actual:   {actual_hash}")
-        
+
         if not matches:
             all_valid = False
-            print(f"  ⚠️  MISMATCH - File has been modified!")
+            print(f"  [!] MISMATCH - File has been modified!")
         print()
     else:
-        print(f"✗ {filename}")
-        print(f"  No sha256 found in frontmatter")
+        print(f"[FAIL] {filename}")
+        print(f"  No CANON_HASH found in frontmatter")
         print(f"  Actual hash: {actual_hash}")
         print()
         all_valid = False
 
 if all_valid:
-    print("✅ All canon files verified - hashes match frontmatter")
+    print("[OK] All canon files verified - hashes match frontmatter")
 else:
-    print("❌ Some canon files have mismatched hashes - files may have been modified")
+    print("[FAIL] Some canon files have mismatched hashes - files may have been modified")

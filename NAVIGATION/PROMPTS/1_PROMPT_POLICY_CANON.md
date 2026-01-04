@@ -1,11 +1,11 @@
 ---
 title: PROMPT_POLICY_CANON
-version: 1.3
+version: 1.4
 status: CANONICAL
 generated_on: 2026-01-04
 scope: Prompt generation + execution governance for AGS
 ---
-<!-- CANON_HASH: 6c79d610ea7d2592a1e9d8e52eb8f529f727936dbf3a388b131c974f431a8c8f -->
+<!-- CANON_HASH: 58360609880fa536cf90e9e7f08a892de7f38edf360831a0edf8458026835ed2 -->
 
 ## 0) Authority and precedence
 This file is normative.
@@ -51,12 +51,26 @@ Unknowns MUST be classified per-task:
 Prompts MUST be explicit and procedural (about 99.99% of the time).
 Especially for executor-class models.
 
-### 1.5 Hierarchy
-Prompts MUST encode a strict role split:
-- Planner (manager model): decides plan up front.
-- Executor (worker model): executes the plan exactly.
+### 1.5 Authority Asymmetry (Hierarchy)
+### 1.5.1 Planning Authority Rule
+Models designated as planner-capable MAY:
+- perform planning, analysis, and decomposition
+- navigate the repository
+- read and write files within existing allowlists
+- generate patches and diffs
+- invoke tools, linters, and verification scripts
+Planner-capable status imposes no artificial execution restriction.
 
-Executors MUST NOT improvise architecture or reinterpret goals.
+### 1.5.2 Execution Restriction Rule (Non-Planner Models)
+Models below the planner-capable tier MUST NOT:
+- introduce new structure, policy, or scope
+- plan or re-plan tasks
+- infer intent or architectural direction
+Such models MAY execute mechanical tasks ONLY IF:
+- an explicit plan identifier or plan artifact is provided
+- the plan was produced by a planner-capable model
+Absence of a valid plan reference is a hard failure (fail-closed).
+
 
 ### 1.6 Scope control
 Every prompt MUST declare:
@@ -155,7 +169,8 @@ Required fields:
 - validations: list[{"name": string, "command": string, "exit_code": int}]
 - inputs: list[{"path": string, "sha256": string}]
 - outputs: list[{"path": string, "sha256": string}]
-- result: string (OK | VERIFICATION_FAILED | BLOCKED_UNKNOWN | INTERNAL_ERROR)
+- result: string (OK | VERIFICATION_FAILED | BLOCKED_UNKNOWN | INTERNAL_ERROR | POLICY_BREACH)
+- plan_ref: string (required for non-planner models; matches plan_id or artifact path)
 
 Optional fields:
 - compliance_check_command: string
@@ -178,7 +193,7 @@ Minimal schema sketch:
 - Executor MUST verify dependency receipts exist and have result OK before running the dependent task.
 
 ## 7) Prompt linting and blocking behavior
-If scripts/lint-prompt.sh exists:
+If scripts/lint-prompt.sh exists (requires bash-compatible shell, e.g. WSL):
 - Governor MUST run it on each generated prompt.
 - Exit code 1 MUST block pack generation.
 - Exit code 2 MUST be recorded as a warning and pack generation may continue.
@@ -214,3 +229,23 @@ Forbidden terms include the 6-letter inference verb and its noun variants.
 Lint SHOULD detect them using hex-escaped regex, for example:
 - \b\x61\x73\x73\x75\x6d\x65\b
 - \b\x61\x73\x73\x75\x6d\x70\x74\x69\x6f\x6e(s)?\b
+
+## 12) Lint Gate
+A prompt pack is invalid for execution unless it passes the canonical linter.
+
+Executors MUST run the canonical lint command before any execution.
+The canonical lint command is: `bash CAPABILITY/TOOLS/linters/lint_prompt_pack.sh PROMPTS_DIR` (requires bash-compatible shell, e.g. WSL)
+
+Lint failure or inability to lint is a hard stop: no model execution, no writes.
+Lint warnings (exit code 2) are non-blocking but MUST be recorded in receipts.
+
+Executors MUST record the following lint metadata in receipts/run artifacts:
+- lint_command: the exact command run
+- lint_exit_code: exit status (0=PASS, 1=FAIL, 2=WARNING)
+- lint_result: PASS, FAIL, or WARNING
+- optional: linter_ref (path/version/hash) if available
+
+## 13) Authority Enforcement
+Executors MUST gate non-planner models on presence of a valid plan reference.
+Violations MUST be recorded as policy breaches in run receipts.
+Routing MUST escalate to a planner-capable model before execution if no plan exists.

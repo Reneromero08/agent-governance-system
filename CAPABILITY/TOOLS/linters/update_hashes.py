@@ -5,8 +5,8 @@ import re
 from pathlib import Path
 
 # Current canon hashes (final - after moving to HTML comments)
-POLICY_HASH = "6b3d1a1c6062aaa11b348a76d2ea6d39760927917b6d26a75ef4d413847ab516"
-GUIDE_HASH = "cef08c3510f5420f69c228d32d01d5b8bd74d4339f7b800598cf9ae4fbdb0247"
+POLICY_HASH = "29ed1cec0104314dea9bb5844e9fd7c15a162313ef7cc3a19e8b898d9cea2624"
+GUIDE_HASH = "9acc1b9772579720e3c8bc19a80a9a3908323b411c6d06d04952323668f4efe4"
 
 
 

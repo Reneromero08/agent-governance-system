@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Repository-wide AGS orientation document
 ---
-<!-- CANON_HASH: f2880df34aa33d8174272492715b3d4695a8178b68e992d8704d8bf454e29ed9 -->
+<!-- CANON_HASH: 0a3198a2918f4925aa9894bfa421029112396123e73c808f2bd4be729589e497 -->
 
 # ORIENTATION_CANON
 
@@ -147,7 +147,7 @@ Canon files (as of the last prompt pack build):
 - Dependencies declared in header `depends_on`, resolved via `PROMPTS/PROMPT_PACK_MANIFEST.json`
 - Receipts and reports required for every task with explicit `receipt_path` and `report_path`
 - Deterministic receipt schema and stable ordering everywhere
-- If `scripts/lint-prompt.sh` exists: exit 1 blocks, exit 2 warns
+- If `scripts/lint-prompt.sh` exists: run via `bash` (requires bash-compatible shell, e.g. WSL); exit 1 blocks, exit 2 warns
 
 ## Execution discipline (how work is done)
 
