@@ -168,10 +168,10 @@ function run() {
     let hasError = false;
     let hasWarning = false;
 
-    // Check 1: AGS changes require CANON/CHANGELOG
+    // Check 1: AGS changes require CHANGELOG.md
     if (hasAgsChanges && !changelogUpdated) {
         hasError = true;
-        console.error("❌ CANON/CHANGELOG.md REQUIRED\n");
+        console.error("❌ CHANGELOG.md REQUIRED\n");
 
         if (behaviorChanges.length > 0) {
             console.error("   System behavior changes:");
@@ -189,7 +189,7 @@ function run() {
             decisionChanges.forEach(p => console.error(`     • ${p}`));
         }
 
-        console.error("\n   → Update CANON/CHANGELOG.md before committing.\n");
+        console.error("\n   → Update CHANGELOG.md before committing.\n");
     }
 
     // Check 2: CAT-DPT changes require CATALYTIC-DPT/CHANGELOG

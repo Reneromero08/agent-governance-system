@@ -388,7 +388,9 @@ When checks have passed and staged files have been listed, short confirmations s
 
 ### The ceremony
 Before any Git command:
-1. Run `CAPABILITY/TOOLS/critic.py` and `LAW/CONTRACTS/runner.py`. Confirm they pass.
+1. Run the required checks for the action:
+   - **Before commit (fast):** `python CAPABILITY/TOOLS/governance/critic.py`
+   - **Before push (full):** `python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full` (mints the one-time `CI_OK` token used by `.githooks/pre-push`)
 2. Stop all execution.
 3. List every file in the staging area.
 4. If the user already gave an explicit approval for commit (including a standalone "commit" directive or a composite approval), proceed without re-prompting.
@@ -399,20 +401,19 @@ Violation of this ceremony is a **critical governance failure**.
 
 See also: `LAW/CONTEXT/preferences/STYLE-001-commit-ceremony.md`
 
-## 11. The Law (pre-commit test requirement)
+## 11. The Law (fast commit, full push)
 
-**🚨 NO COMMIT WITH FAILING TESTS 🚨**
+**🚨 DO NOT PUSH WITHOUT FULL GATE PASSING 🚨**
 
-This section exists because on 2025-12-27, an agent committed code with failing tests
-using `--no-verify`, causing governance violations. See `LAW/CONTEXT/decisions/ADR-022-why-flash-bypassed-the-law.md`.
+This section exists to keep iteration fast (commit often) while keeping shared history safe (full verification at push time). See `LAW/CONTEXT/decisions/ADR-034-fast-commit-full-push-gate.md`.
 
-### Before ANY commit, agents MUST:
+### Before ANY push, agents MUST:
 
-#### 11.1 Run tests and verify they pass
+#### 11.1 Run the full CI-aligned gate and verify it passes
 ```bash
-py -m pytest CAPABILITY/TESTBENCH/ -v
+python CAPABILITY/TOOLS/utilities/ci_local_gate.py --full
 ```
-**If tests fail, DO NOT COMMIT. Fix them first.**
+**If it fails, DO NOT PUSH. Fix it first.**
 
 #### 11.2 Read FULL test output
 When tests fail:
