@@ -8,6 +8,8 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ### Added
 - **CI-local gate helper** — `CAPABILITY/TOOLS/utilities/ci_local_gate.py` supports a fast default (critic-only) for frequent commits and a `--full` mode that runs `critic` + `runner` + `pytest` (with safe temp dir) and mints a one-time `LAW/CONTRACTS/_runs/ALLOW_PUSH.token` tied to `HEAD`.
+- **Prompt Engineering**: Created prompts for all phases,standardized them, and created handoff templates for continuity.
+Canonical Normalization: Standardized all 6 canon files with YAML front matter and updated PROMPT_PACK_MANIFEST.json with new hashes.
 
 ### Changed
 - **Pre-push fast path** — `.githooks/pre-push` consumes the one-time token to skip re-running heavy checks when the local CI gate already passed for the current `HEAD`.
