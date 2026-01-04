@@ -99,6 +99,16 @@ def main():
         default="",
         help="Override CAS root (deterministic tests only).",
     )
+    parser.add_argument(
+        "--skip-proofs",
+        action="store_true",
+        help="Skip proof regeneration (Navigation/Proofs/_LATEST).",
+    )
+    parser.add_argument(
+        "--with-proofs",
+        action="store_true",
+        help="Force proof regeneration even if context implies skipping.",
+    )
     args = parser.parse_args()
 
     project_root = None
@@ -148,6 +158,7 @@ def main():
         project_root=project_root,
         p2_runs_dir=p2_runs_dir,
         p2_cas_root=p2_cas_root,
+        skip_proofs=args.skip_proofs and not args.with_proofs,
     )
     print(f"Pack created: {pack_dir}")
     return 0

@@ -23,6 +23,15 @@ NAVIGATION/CORTEX/_generated/summaries/
 # Generated System1 DB (rebuilt in CI and by runner.py)
 NAVIGATION/CORTEX/db/system1.db
 
+# Generated Proof Artifacts (dispersed)
+NAVIGATION/PROOFS/GREEN_STATE.json
+NAVIGATION/PROOFS/GREEN_STATE.md
+NAVIGATION/PROOFS/PROOF_MANIFEST.json
+NAVIGATION/PROOFS/CATALYTIC/PROOF_LOG.txt
+NAVIGATION/PROOFS/CATALYTIC/PROOF_SUMMARY.md
+NAVIGATION/PROOFS/COMPRESSION/PROOF_LOG.txt
+NAVIGATION/PROOFS/_RUNS/
+
 # Local-only editor state (not governance-critical)
 .claude/
 .kilocode/

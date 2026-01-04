@@ -13,8 +13,21 @@ import sys
 import zipfile
 from dataclasses import dataclass
 from contextlib import contextmanager
+from datetime import datetime, timezone
 from pathlib import Path
-from typing import Any, Dict, Iterable, List, Optional, Tuple, Sequence, Iterator
+from .proofs import refresh_proofs
+from typing import (
+    Any,
+    Dict,
+    FrozenSet,
+    Iterable,
+    List,
+    Optional,
+    Sequence,
+    Set,
+    Tuple,
+    Union,
+)
 
 # Constants
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
@@ -930,6 +943,7 @@ def make_pack(
     project_root: Optional[Path] = None,
     p2_runs_dir: Optional[Path] = None,
     p2_cas_root: Optional[Path] = None,
+    skip_proofs: bool = False,
 ) -> Path:
     from .split import write_split_pack
     from .lite import write_split_pack_lite
@@ -943,8 +957,23 @@ def make_pack(
     source_project_root = (project_root or PROJECT_ROOT).resolve()
     use_shared_baseline = source_project_root == PROJECT_ROOT.resolve()
 
+
     with _override_cas_root(p2_cas_root):
         _migrate_system_archive()
+
+        # 0. Proof Refresh (Fail-closed)
+        # Must happen BEFORE manifest build so new proofs are picked up.
+        if scope.key == SCOPE_AGS.key and not skip_proofs:
+            # We use a derived stamp for the proof run if one isn't provided yet.
+            # However, core.py generates digest-based stamps later.
+            # For proofs, we'll use a temp timestamp if stamp is None,
+            # but the Pack ID will stick to the digest or user stamp.
+            proof_stamp = stamp or datetime.now(timezone.utc).strftime("%Y-%m-%d_%H-%M-%S")
+            print(f"Refreshing proofs (stamp={proof_stamp})...")
+            success, err = refresh_proofs(source_project_root, stamp=proof_stamp)
+            if not success:
+                raise RuntimeError(err)
+
         manifest, omitted = build_state_manifest(source_project_root, scope=scope)
         digest = manifest_digest(manifest)
 
@@ -1020,7 +1049,7 @@ def make_pack(
 
         # 5. LITE Output (Strictly LITE/) + P.2 CAS artifacts
         if split_lite or profile == "lite":
-            write_split_pack_lite(out_dir, scope=scope)
+            write_split_pack_lite(out_dir, scope=scope, project_root=source_project_root)
             effective_runs_dir = p2_runs_dir or Path("CAPABILITY/RUNS")
             _emit_p2_lite_artifacts(
                 out_dir,

@@ -1,0 +1,236 @@
+{
+  "baselines": {
+    "BaselineA_tokens": 276085,
+    "BaselineB_filter_rule": "Include files under existing roots: LAW/, NAVIGATION/; plus ADR-like paths containing `/decisions/` or `ADR-`; plus paths containing `ROADMAP`.",
+    "BaselineB_tokens": 67375
+  },
+  "queries": [
+    {
+      "NewWayTokensFiltered": 351,
+      "NewWayTokensPointer": 18,
+      "PointerSavingsPctA": 0.999935,
+      "PointerSavingsPctB": 0.999733,
+      "SavingsPctA": 0.998729,
+      "SavingsPctB": 0.99479,
+      "missing_hashes": [],
+      "query_text": "Translation Layer architecture",
+      "results": [
+        {
+          "file_path": "INBOX/reports/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+          "hash": "84fb3671ed2b624a083cf55c97e9ed0235d68960b7cc8ac36c64508a22b9049c",
+          "section_name": "CORTEX Semantic Core - Phase 1 Technical Index",
+          "similarity": 0.560112
+        },
+        {
+          "file_path": "LAW/CONTEXT/decisions/ADR-030-semantic-core-architecture.md",
+          "hash": "5ea54f3de22ccb2e53f75673cedcaab0baf0e1921bbce1168761fea7b50f91dd",
+          "section_name": "Root",
+          "similarity": 0.428845
+        },
+        {
+          "file_path": "INBOX/roadmaps/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+          "hash": "04a94a433fa29cf5bbc8c6558456097f776f0873b7e4b2740d0d6edacc3745c9",
+          "section_name": "Goal",
+          "similarity": 0.348155
+        },
+        {
+          "file_path": "CHANGELOG.md",
+          "hash": "51962df943aa86bd5c68268953b5ee0d12fa5a05ca18baf8ba3265bba68574a7",
+          "section_name": "Added",
+          "similarity": 0.333333
+        },
+        {
+          "file_path": "LAW/CANON/ARBITRATION.md",
+          "hash": "78d528921c8a883898b8b6df024f75894a330938ac84d89be3c6dbb7e33749b7",
+          "section_name": "Canon Arbitration",
+          "similarity": 0.333333
+        },
+        {
+          "file_path": "INBOX/research/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+          "hash": "0243a7d58e28de22f452ab3f49386e870c3f01029f95aa6eb281c0b897b1eedc",
+          "section_name": "1.11 \u201cConstitutional License\u201d concept (DeepSeek)",
+          "similarity": 0.333333
+        },
+        {
+          "file_path": "INBOX/roadmaps/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+          "hash": "58c903341cb860dfb6de962e14d81af93aee5c1eb1c33c55e0359e39b44354d6",
+          "section_name": "Overview",
+          "similarity": 0.328976
+        },
+        {
+          "file_path": "NAVIGATION/CORTEX/semantic/README.md",
+          "hash": "5441cc6f534f8218016e95def76458d8b6a1e7c5e8a07afb305fe038bb6d69db",
+          "section_name": "References",
+          "similarity": 0.322543
+        },
+        {
+          "file_path": "LAW/CANON/CATALYTIC_COMPUTING.md",
+          "hash": "d0203026c30aeb2f8a3d09c24dc3a5227c8c1c1e4be38f486ef49bc1226d673d",
+          "section_name": "Catalytic Computing",
+          "similarity": 0.316228
+        },
+        {
+          "file_path": "INBOX/reports/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+          "hash": "12adadee3deb1257703bc3710fa7571219c0873dbd4af711214caf95a7c28ccc",
+          "section_name": "Summary",
+          "similarity": 0.31427
+        }
+      ],
+      "threshold_adjustment_notes": [
+        "Lowered min_similarity 0.50 -> 0.40 (too few results).",
+        "Lowered min_similarity 0.40 -> 0.00 (too few results)."
+      ],
+      "threshold_used": 0.0,
+      "top_k": 10,
+      "verification_hit_file": "NAVIGATION/CORTEX/semantic/README.md"
+    },
+    {
+      "NewWayTokensFiltered": 86,
+      "NewWayTokensPointer": 18,
+      "PointerSavingsPctA": 0.999935,
+      "PointerSavingsPctB": 0.999733,
+      "SavingsPctA": 0.999689,
+      "SavingsPctB": 0.998724,
+      "missing_hashes": [],
+      "query_text": "AGS BOOTSTRAP v1.0",
+      "results": [
+        {
+          "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/swarm-orchestrator/SKILL.md",
+          "hash": "2283291ab06afe953fd2441bdb6a8dff060e37a35241745492510ac7854223ae",
+          "section_name": "Skill: swarm-orchestrator",
+          "similarity": 0.46188
+        },
+        {
+          "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/ant-worker/SKILL.md",
+          "hash": "c01b5fc0180b53ee3d3f22bbae106a44c5e0296c63415cc2aa7bd50c24cd2e94",
+          "section_name": "Skill: ant-worker",
+          "similarity": 0.457496
+        },
+        {
+          "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/swarm-directive/SKILL.md",
+          "hash": "e65b6b86f97ac70a20dd07dda43d93131e6ad4b5383ca289d61548a9352738ca",
+          "section_name": "Skill: swarm-directive",
+          "similarity": 0.435194
+        },
+        {
+          "file_path": "CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md",
+          "hash": "034578501999f700d2c9e9553f504c273ea705b094e29ec7df23d2c2c9291ca0",
+          "section_name": "Skill: skill-creator",
+          "similarity": 0.426401
+        },
+        {
+          "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/agi-hardener/SKILL.md",
+          "hash": "a0acb0fda11f37924f049c1de5734410f09d816235789e1af5e0c60822e231ef",
+          "section_name": "AGI Hardener Skill",
+          "similarity": 0.426401
+        },
+        {
+          "file_path": "CAPABILITY/SKILLS/governance/canon-governance-check/SKILL.md",
+          "hash": "aed87fcbfb3909a75a7099df5904a0d37a6643c14199deec863e8587f8e0ac4f",
+          "section_name": "Canon Governance Check Skill",
+          "similarity": 0.410997
+        },
+        {
+          "file_path": "THOUGHT/LAB/CAT_CHAT/archive/docs/status/12-29-2025-10-00_VECTOR_SANDBOX_DOC.md",
+          "hash": "7c12055a788c1451e63623c87d8805bb60ef18da143327e57b7519bd9b75d7b9",
+          "section_name": "query_topk(namespace, query_vector, k=5) -> list[dict]",
+          "similarity": 0.406867
+        }
+      ],
+      "threshold_adjustment_notes": [
+        "Lowered min_similarity 0.50 -> 0.40 (too few results)."
+      ],
+      "threshold_used": 0.4,
+      "top_k": 10,
+      "verification_hit_file": "LAW/CANON/GENESIS_COMPACT.md"
+    },
+    {
+      "NewWayTokensFiltered": 241,
+      "NewWayTokensPointer": 20,
+      "PointerSavingsPctA": 0.999928,
+      "PointerSavingsPctB": 0.999703,
+      "SavingsPctA": 0.999127,
+      "SavingsPctB": 0.996423,
+      "missing_hashes": [],
+      "query_text": "Mechanical indexer scans codebase",
+      "results": [
+        {
+          "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/qwen-cli/README.md",
+          "hash": "6db0ff5cc1d436e1ea43ddc9f2242bca9ec90caf8a3577e164bdf9e0b1362821",
+          "section_name": "Root",
+          "similarity": 0.353553
+        },
+        {
+          "file_path": "INBOX/research/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+          "hash": "35218173f53a6afc9e5f607cefed980304b447f363ac042afa46f9b25a52df00",
+          "section_name": "Conditions for Reconsidering",
+          "similarity": 0.33541
+        },
+        {
+          "file_path": "INBOX/research/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+          "hash": "d7dcdf1e4ef4f4cfc40bf9542aeca1fef5e710eb9da46e7de1c8e8dfaf2687da",
+          "section_name": "2. **FIXED: Hard-Coded Project Path**",
+          "similarity": 0.3125
+        },
+        {
+          "file_path": "INBOX/reports/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+          "hash": "e791371907b285f52e973ae897912050c04c90e38a69a557bc0f7cfe967fd582",
+          "section_name": "Indexing",
+          "similarity": 0.306186
+        },
+        {
+          "file_path": "INBOX/research/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+          "hash": "8a31589166af645276abfb74784cac3092a021772f8b89751a7ee75825590e45",
+          "section_name": "Line 12 - AFTER:",
+          "similarity": 0.306186
+        },
+        {
+          "file_path": "INBOX/research/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+          "hash": "0fa722c03379a8607af9d904214dbe860ccb5259d3ec5e3a60dadeade6b67a11",
+          "section_name": "5. Validate before committing",
+          "similarity": 0.288675
+        },
+        {
+          "file_path": "CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md",
+          "hash": "804f370157cd12e0a6aaf116b06144be50d905b5b8aa23579f7f9b4c352ff7a3",
+          "section_name": "Creating documents",
+          "similarity": 0.288675
+        },
+        {
+          "file_path": "INBOX/reports/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+          "hash": "73cc86f5cb6d31037873a81103326bd41b27a578b9928a72db680dea6fef8e3c",
+          "section_name": "Next Steps",
+          "similarity": 0.280056
+        },
+        {
+          "file_path": "THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md",
+          "hash": "8e3dfa3f78a9e68416e701d7c0a63f0728421442fe2ee1b1a7ceeec23a3a37a6",
+          "section_name": "Dependencies",
+          "similarity": 0.246598
+        },
+        {
+          "file_path": "THOUGHT/LAB/CAT_CHAT/CAT_CHAT_CHANGELOG_1.1.md",
+          "hash": "2fa7eb7e6566a046d2f075978faf2c79f5423b7f11570cd35929da9347305946",
+          "section_name": "Security",
+          "similarity": 0.237171
+        }
+      ],
+      "threshold_adjustment_notes": [
+        "Lowered min_similarity 0.50 -> 0.40 (too few results).",
+        "Lowered min_similarity 0.40 -> 0.00 (too few results)."
+      ],
+      "threshold_used": 0.0,
+      "top_k": 10,
+      "verification_hit_file": "INBOX/reports/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md"
+    }
+  ],
+  "repo_head_commit": "9f61f774ecc730e56b70ad3d54011c82e8f138c2",
+  "semantic_eval_db": {
+    "dimensions": 384,
+    "model_id": "featurehash-384-v1",
+    "path": "LAW/CONTRACTS/_runs/_tmp/compression_proof/semantic_eval.db",
+    "sections_indexed": 4441,
+    "total_sections_parsed": 4855
+  },
+  "timestamp_utc": "2026-01-04T19:29:34Z"
+}
