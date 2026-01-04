@@ -9,8 +9,7 @@ status: "Complete"
 summary: "Terminal amputation report (Restored)"
 tags: [terminal, security, cortex]
 ---
-
-<!-- CONTENT_HASH: 7563f05f1f2651135a66c4f1500e747a36ae24bd9c0914afd94e7b81be59299a -->
+<!-- CONTENT_HASH: b7492e080c6d2d303d6ef37939c1e379f4055eb163255d789ed989b972b34379 -->
 
 # Session Report: Terminal Amputation & Cortex Implementation
 **Date**: 2025-12-28  

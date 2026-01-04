@@ -9,8 +9,7 @@ status: "Archived"
 summary: "Index of deliverables (Restored)"
 tags: [deliverables, index, archive]
 ---
-
-<!-- CONTENT_HASH: d593177808a4992863cf6f7c04919a8cd2d094756b68e231ba4f0026bd9eaf63 -->
+<!-- CONTENT_HASH: 983053c647131350bbcebffe85d08ba0cf36e47b89a08fbae02e922f969afb9a -->
 
 # CORTEX Semantic Core - Phase 1 Technical Index
 

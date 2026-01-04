@@ -9,8 +9,7 @@ status: "Active"
 summary: "Test failures report (Restored)"
 tags: [tests, failures, report]
 ---
-
-<!-- CONTENT_HASH: 28c819f3bc05c8db6469d33c9e5524551bc78b14897229f071c216f8f8a268b4 -->
+<!-- CONTENT_HASH: be36bfbe0ce37ca71872880235c9417f220310238e38e90f24cfc70783e93cd0 -->
 
 # Test Failures Report
 

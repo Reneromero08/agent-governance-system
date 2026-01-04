@@ -9,8 +9,7 @@ status: "Complete"
 summary: "Report on CI stabilization and platform hardening"
 tags: [ci, stabilization, hardening]
 ---
-
-<!-- CONTENT_HASH: 20db2ff2319751460e0ce91045ed198dfefb892c0982af92c42bef8cd4fe6e22 -->
+<!-- CONTENT_HASH: 7012653d1bc18a25078083b2743d73c5295399c8af4d5bde745f9fcd8cfe24c0 -->
 
 # CI Stabilization & Platform Hardening Final Report
 **Date**: 2025-12-29

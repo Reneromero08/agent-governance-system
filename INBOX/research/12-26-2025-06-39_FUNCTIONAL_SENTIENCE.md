@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: 3c8307edc3e71bf22fe78de6fa90b7cd2e7d0d8de19cdd9d57acd4dd65f804f2 -->
+<!-- CONTENT_HASH: 5cd8cd37a89a82ad38a3f015bdf8ab15191d37c48fc24bba08baf70ae2a4df5c -->
 
 Notes:
 Turn important memories into latent space weights somehow without retraining, just like an additional tokenizer added on top. Like weights on top of weights, is that possible?

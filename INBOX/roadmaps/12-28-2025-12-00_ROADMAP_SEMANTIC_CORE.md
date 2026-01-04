@@ -9,8 +9,7 @@ status: "Active"
 summary: "Roadmap for semantic core development (Restored)"
 tags: [semantic_core, roadmap]
 ---
-
-<!-- CONTENT_HASH: a3c7c7fe2dbcb565f49a5182e0a53dff9c7d0f34c8e2688692ef335da02917f1 -->
+<!-- CONTENT_HASH: 5d3fb4a418d586bfad9d6b36e30c2fe2e25fac37d0ffb41be98630be057e91b6 -->
 
 # Semantic Core Implementation Roadmap
 

@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: 94bbbd67329f351b631ae326e04bf97290138b7208e613bebcc8125a0c0b1d3a -->
+<!-- CONTENT_HASH: 618fbaae9b02f9868d847f205e21692b6c963723eecc55a9ee0960f8f4f561de -->
 
 # ♥ Master Merged Edits v2 (Checklist + Why, Preserved Phrasings)
 

@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: e188cf54b542439ae8576dee3edd3e06ba9b2d5275f4ce67d16964740408d7ee -->
+<!-- CONTENT_HASH: 5c293c9043c90c197ecf8a6e9e125868d606fac0511811bef0d5fa0794f4a4bb -->
 
 # Semiotic OS Deep Research Master Merge v2
 

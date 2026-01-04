@@ -9,8 +9,7 @@ status: "Active"
 summary: "Quick reference for Cortex tools (Restored)"
 tags: [cortex, reference, guide]
 ---
-
-<!-- CONTENT_HASH: 3d9b888979c2db7484557416c7b7798489af69d592e5ae1837a9a8ac28f0bd6a -->
+<!-- CONTENT_HASH: aea7e2df1f61aa08ef940fb028a212a2927c26edc1af38c06dd06ac04540acb7 -->
 
 # Cortex Quick Reference for Agents
 

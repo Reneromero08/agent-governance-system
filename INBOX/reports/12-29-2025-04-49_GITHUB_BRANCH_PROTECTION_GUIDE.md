@@ -9,8 +9,7 @@ status: "Active"
 summary: "Step-by-step setup for GitHub branch protection rules"
 tags: [github, security, guide]
 ---
-
-<!-- CONTENT_HASH: 6453e06ed50370d90dc2b705127b22b9a0edf04ef302b5e891fc09630f0f016c -->
+<!-- CONTENT_HASH: 07e8f211f8cd87e4a2701c8c56c236a56dafd79e9d890951e39d809059940877 -->
 
 # GitHub Branch Protection Setup
 

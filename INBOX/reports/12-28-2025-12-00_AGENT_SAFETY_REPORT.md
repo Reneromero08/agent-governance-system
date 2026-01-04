@@ -9,8 +9,7 @@ status: "Complete"
 summary: "Report on agent safety protocols (Restored)"
 tags: [safety, agent]
 ---
-
-<!-- CONTENT_HASH: a89d973932581877701a948b2f6a7e82f5376ad0455d57b0cc43ef7867eb8c4c -->
+<!-- CONTENT_HASH: ecda6dca37c3e8b62382cc1ea506c1711dda005f0a4260130fd71aa02f6c63e5 -->
 
 # Agent Safety & Failure Handling Report
 

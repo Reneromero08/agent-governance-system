@@ -9,8 +9,7 @@ status: "Active"
 summary: "Analysis of System 1 and System 2 dual database architecture"
 tags: ["system1", "system2", "database", "architecture"]
 ---
-
-<!-- CONTENT_HASH: 6e211b2081e4c1b5d5a18eb700fe7defaa9733f8a1781180946937da144c97b1 -->
+<!-- CONTENT_HASH: 4b1efdee9a09412b28ffd48ae644796a6df6d51131059272a76468d8e9aa600f -->
 
 # Dual-DB Architecture (System 1 / System 2) for AGS
 

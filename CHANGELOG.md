@@ -1,8 +1,54 @@
-<!-- CONTENT_HASH: 03b4f94906d990c33b076b1c739eaed74a622f7fd519ac9c6ed2509e0645d267 -->
+<!-- CONTENT_HASH: f8a9751ef8bddb780579550fbac006567eb43a7bfe912f12af726089ea056bae -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.8] - 2026-01-04
+
+### Added
+- **Task 1.1: Hardened Inbox Governance (S.2)** — Implemented comprehensive INBOX integrity system with automatic hash management and validation.
+  - **inbox-report-writer Skill** (`CAPABILITY/SKILLS/inbox/inbox-report-writer/`):
+    - `hash_inbox_file.py`: Core hash computation, insertion, update, and verification (192 lines)
+    - `generate_inbox_ledger.py`: Automatic YAML ledger generation with metadata and statistics (210 lines)
+    - `update_inbox_index.py`: Automatic INBOX.md index regeneration with file listings (180 lines)
+    - `check_inbox_hashes.py`: Pre-commit hash validation script (90 lines)
+    - `inbox_write_guard.py`: Runtime interceptor with decorators and context managers (200 lines)
+    - `test_inbox_hash.py`: Comprehensive test suite - 5/5 tests passing (145 lines)
+    - `README.md`: Complete documentation with usage examples and integration guide
+  - **Hash Format**: `<!-- CONTENT_HASH: <sha256> -->` placed after frontmatter with one blank line after
+  - **Pre-commit Integration**: Modified `CAPABILITY/SKILLS/governance/canon-governance-check/scripts/pre-commit`
+    - Automatically updates INBOX.md and LEDGER.yaml before validation
+    - Validates all staged INBOX/*.md files for valid content hashes
+    - Blocks commits with invalid/missing hashes
+  - **Runtime Protection**: `inbox_write_guard.py` provides fail-closed write protection
+    - `@inbox_write_guard` decorator for function-level protection
+    - `InboxWriteGuard()` context manager for scope-level protection
+    - `validate_inbox_write()` for explicit validation
+    - Raises `InboxWriteError` with detailed fix instructions
+  - **Automatic Updates**: Pre-commit hook now automatically:
+    - Regenerates `INBOX/INBOX.md` with current file listings and hash status
+    - Regenerates `INBOX/LEDGER.yaml` with full metadata and statistics
+    - Stages updated files for commit
+    - Zero manual maintenance required
+  - **INBOX.md Features**:
+    - Auto-generated index of all INBOX files by category
+    - Shows first 8 characters of each file's hash for quick verification
+    - Displays metadata: section, author, priority, created/modified dates, summary
+    - Hash validation indicator (✅/⚠️) for each file
+  - **LEDGER.yaml Features**:
+    - Human-readable YAML format with full metadata
+    - Summary statistics (total files, valid/invalid/missing hashes, errors)
+    - Files organized by category (reports, research, roadmaps, agents, etc.)
+    - Complete metadata per file: path, size, modified date, hash status, frontmatter
+  - **Hash Coverage**: All 62 INBOX markdown files now have valid SHA256 content hashes
+  - **Test Coverage**: 5/5 unit tests passing (hash computation, insertion, update, runtime guard, validation)
+  - **Exit Criteria Met**:
+    - ✅ Unhashed INBOX writes fail-closed with clear errors
+    - ✅ Pre-commit rejects invalid INBOX changes deterministically
+    - ✅ All tests pass
+    - ✅ Receipts and reports emitted
+    - ✅ Scope respected (only allowlisted files modified)
 
 ## [3.3.7] - 2026-01-04
 
