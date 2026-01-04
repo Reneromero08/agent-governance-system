@@ -1,16 +1,19 @@
-# PROMPT_POLICY_CANON.md
+---
+title: PROMPT_POLICY_CANON
 version: 1.3
 status: CANONICAL
-generated_on: 2026-01-03
+generated_on: 2026-01-04
 scope: Prompt generation + execution governance for AGS
+---
+<!-- CANON_HASH: 6c79d610ea7d2592a1e9d8e52eb8f529f727936dbf3a388b131c974f431a8c8f -->
 
 ## 0) Authority and precedence
 This file is normative.
 
 Precedence (highest to lowest):
-1) PROMPT_POLICY_CANON.md
-2) PROMPT_GENERATOR_GUIDE_FINAL.md
-3) MASTER_PROMPT_TEMPLATE_CANON.md
+1) NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md
+2) NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md
+3) NAVIGATION/PROMPTS/3_MASTER_PROMPT_TEMPLATE_CANON.md
 4) Per-task prompts under PROMPTS/
 
 If conflict exists, higher precedence wins.
@@ -123,8 +126,8 @@ Every per-task prompt header MUST include:
 - phase: <N>
 - task_id: <N.M or N.M.K>
 - slug: <kebab-case>
-- policy_canon_sha256: <sha256 of PROMPT_POLICY_CANON.md>
-- guide_canon_sha256: <sha256 of PROMPT_GENERATOR_GUIDE_FINAL.md>
+- policy_canon_sha256: <sha256 of NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md>
+- guide_canon_sha256: <sha256 of NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md>
 - depends_on: [] (or list of task_ids)
 - primary_model: <string>
 - fallback_chain: [<string>, ...]

@@ -1,11 +1,14 @@
-# PROMPT_GENERATOR_GUIDE_FINAL.md
+---
+title: 2_PROMPT_GENERATOR_GUIDE_FINAL
 version: 1.4
-status: CANONICAL_PROCEDURE
-generated_on: 2026-01-03
+status: CANONICAL
+generated_on: 2026-01-04
 scope: Procedures + templates for generating per-task prompts (subordinate to PROMPT_POLICY_CANON)
+---
+<!-- CANON_HASH: 9e7c07643dd2a2dc00f15b13a8d86a381c7c08e67a81fbf4d88f86cc26252ed2 -->
 
 ## 0) Authority
-Subordinate to PROMPT_POLICY_CANON.md.
+Subordinate to NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md.
 
 ## 1) Operating principle
 No guessing. STOP is per-task. Continue generating prompts for unrelated tasks.

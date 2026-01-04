@@ -1,21 +1,24 @@
-# MASTER_PROMPT_TEMPLATE_CANON.md
+---
+title: MASTER_PROMPT_TEMPLATE_CANON
 version: 1.4
-status: CANONICAL_TEMPLATE
-generated_on: 2026-01-03
+status: CANONICAL
+generated_on: 2026-01-04
 scope: Governor workflow template for generating all remaining per-task prompts
+---
+<!-- CANON_HASH: c344e760b4d5f0e5ace3d6084276289f86fb9143ea90008b19468682ad842df1 -->
 
 ## 0) Authority
 Subordinate to:
-- PROMPT_POLICY_CANON.md
-- PROMPT_GENERATOR_GUIDE_FINAL.md
+- NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md
+- NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md
 
 ## 1) Role
 You are the Governor. Generate one canonical per-task prompt for every unfinished roadmap item.
 
 ## 2) Inputs
 - Roadmap (TODO-only, numeric phases)
-- PROMPT_POLICY_CANON.md
-- PROMPT_GENERATOR_GUIDE_FINAL.md
+- NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md
+- NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md
 - Repo canon and contracts under LAW/
 
 ## 3) Outputs

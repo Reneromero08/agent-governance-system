@@ -2,22 +2,38 @@
   "pack_version": "canon-aligned",
   "generated_utc": "2026-01-04T00:09:05Z",
   "canon": {
+    "orientation": {
+      "path": "NAVIGATION/PROMPTS/0_ORIENTATION_CANON.md",
+      "sha256": "3ee7aa8436041c3253d7831a7c409259bbe484b24669b60038be778b9bbfc1c9"
+    },
     "policy": {
-      "path": "PROMPTS/PROMPT_POLICY_CANON.md",
-      "sha256": "b12a0779118b646c99b02662c4b487f136dd74c1053fd7090095fc45ced99882"
+      "path": "NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md",
+      "sha256": "6b3d1a1c6062aaa11b348a76d2ea6d39760927917b6d26a75ef4d413847ab516"
     },
     "guide": {
-      "path": "PROMPTS/PROMPT_GENERATOR_GUIDE_FINAL.md",
-      "sha256": "e4f1d187828771c337b5394cbba6ed5e96b0bd7be66b7db3aacedaf2072def5c"
+      "path": "NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md",
+      "sha256": "cef08c3510f5420f69c228d32d01d5b8bd74d4339f7b800598cf9ae4fbdb0247"
     },
     "template": {
-      "path": "PROMPTS/MASTER_PROMPT_TEMPLATE_CANON.md",
-      "sha256": "bf9f11a5af214d6e2b60e4a3b01dadb466144773ed74323b6a72ace4538a4be1"
+      "path": "NAVIGATION/PROMPTS/3_MASTER_PROMPT_TEMPLATE_CANON.md",
+      "sha256": "df7c260a9954068cb7265c0b6c2b0fd702d83dbffa9e41f1ead88432853c9073"
+    },
+    "handoff_full": {
+      "path": "NAVIGATION/PROMPTS/4_FULL_HANDOFF_TEMPLATE_CANON.md",
+      "sha256": "f59ce79aea9258157c19f71d80b502893e388c519942f5ec24399d2aed4f0465"
+    },
+    "handoff_mini": {
+      "path": "NAVIGATION/PROMPTS/5_MINI_HANDOFF_TEMPLATE_CANON.md",
+      "sha256": "fe49dfee148d2710b1e97233b24679b6c5a669e787e568b8b3ca2a7e9259362a"
+    },
+    "routing": {
+      "path": "NAVIGATION/PROMPTS/6_MODEL_ROUTING_CANON.md",
+      "sha256": "4c5f57358a518755315ca8d2c020908a52456147259bffb7d6d8b195ca9b0848"
     }
   },
   "lint_script": {
-    "path": "scripts/lint-prompt.sh",
-    "status": "missing",
+    "path": "CAPABILITY/TOOLS/linters/lint_prompt_pack.sh",
+    "status": "operational",
     "exit_code_rules": {
       "0": "ok",
       "1": "block",
@@ -60,11 +76,11 @@
     {
       "task_id": "1.3",
       "phase": 1,
-      "slug": "deprecate-lab-mcp-server-z-1-7",
+      "slug": "deprecate-lab-mcp-server",
       "legacy_id": "P01_1-3",
-      "prompt_path": "PROMPTS/PHASE_01/1.3_deprecate-lab-mcp-server-z-1-7.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server-z-1-7/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server-z-1-7/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_01/1.3_deprecate-lab-mcp-server.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/REPORT.md",
       "depends_on": [],
       "primary_model": "GPT-5.2-Codex (Reasoning: Low)",
       "fallback_chain": [
@@ -92,11 +108,11 @@
     {
       "task_id": "2.1",
       "phase": 2,
-      "slug": "cas-aware-llm-packer-integration-z-2-6-p-2-remainder",
+      "slug": "cas-aware-llm-packer-integration-p-2-remainder",
       "legacy_id": "P02_2-1",
-      "prompt_path": "PROMPTS/PHASE_02/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_02/2.1_cas-aware-llm-packer-integration-p-2-remainder.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-p-2-remainder/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-p-2-remainder/REPORT.md",
       "depends_on": [],
       "primary_model": "GPT-5.1-Codex-Max (Reasoning: Medium)",
       "fallback_chain": [
@@ -140,11 +156,11 @@
     {
       "task_id": "3.1",
       "phase": 3,
-      "slug": "router-fallback-stability-z-3-1",
+      "slug": "router-fallback-stability",
       "legacy_id": "P03_3-1",
-      "prompt_path": "PROMPTS/PHASE_03/3.1_router-fallback-stability-z-3-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability-z-3-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability-z-3-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.1_router-fallback-stability.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -156,11 +172,11 @@
     {
       "task_id": "3.2",
       "phase": 3,
-      "slug": "memory-integration-z-3-2",
+      "slug": "memory-integration",
       "legacy_id": "P03_3-2",
-      "prompt_path": "PROMPTS/PHASE_03/3.2_memory-integration-z-3-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration-z-3-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration-z-3-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.2_memory-integration.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -172,11 +188,11 @@
     {
       "task_id": "3.3",
       "phase": 3,
-      "slug": "tool-binding-z-3-3",
+      "slug": "tool-binding",
       "legacy_id": "P03_3-3",
-      "prompt_path": "PROMPTS/PHASE_03/3.3_tool-binding-z-3-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding-z-3-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding-z-3-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.3_tool-binding.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -188,11 +204,11 @@
     {
       "task_id": "3.4",
       "phase": 3,
-      "slug": "session-persistence-z-3-4",
+      "slug": "session-persistence",
       "legacy_id": "P03_3-4",
-      "prompt_path": "PROMPTS/PHASE_03/3.4_session-persistence-z-3-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence-z-3-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence-z-3-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.4_session-persistence.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -204,11 +220,11 @@
     {
       "task_id": "4.1",
       "phase": 4,
-      "slug": "catalytic-snapshot-restore-z-4-2-z-4-4",
+      "slug": "catalytic-snapshot-restore",
       "legacy_id": "P04_4-1",
-      "prompt_path": "PROMPTS/PHASE_04/4.1_catalytic-snapshot-restore-z-4-2-z-4-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore-z-4-2-z-4-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore-z-4-2-z-4-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_04/4.1_catalytic-snapshot-restore.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -220,11 +236,11 @@
     {
       "task_id": "5.1",
       "phase": 5,
-      "slug": "embed-canon-adrs-and-skill-discovery-z-5",
+      "slug": "embed-canon-adrs-and-skill-discovery",
       "legacy_id": "P05_5-1",
-      "prompt_path": "PROMPTS/PHASE_05/5.1_embed-canon-adrs-and-skill-discovery-z-5.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery-z-5/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery-z-5/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_05/5.1_embed-canon-adrs-and-skill-discovery.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery/REPORT.md",
       "depends_on": [],
       "primary_model": "GPT-5.2-Codex (Reasoning: Medium)",
       "fallback_chain": [
@@ -236,11 +252,11 @@
     {
       "task_id": "6.1",
       "phase": 6,
-      "slug": "cassette-partitioning-m-1",
+      "slug": "cassette-partitioning",
       "legacy_id": "P06_6-1",
-      "prompt_path": "PROMPTS/PHASE_06/6.1_cassette-partitioning-m-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning-m-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning-m-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.1_cassette-partitioning.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -252,11 +268,11 @@
     {
       "task_id": "6.2",
       "phase": 6,
-      "slug": "write-path-memory-persistence-m-2",
+      "slug": "write-path-memory-persistence",
       "legacy_id": "P06_6-2",
-      "prompt_path": "PROMPTS/PHASE_06/6.2_write-path-memory-persistence-m-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence-m-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence-m-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.2_write-path-memory-persistence.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -268,11 +284,11 @@
     {
       "task_id": "6.3",
       "phase": 6,
-      "slug": "cross-cassette-queries-m-3",
+      "slug": "cross-cassette-queries",
       "legacy_id": "P06_6-3",
-      "prompt_path": "PROMPTS/PHASE_06/6.3_cross-cassette-queries-m-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries-m-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries-m-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.3_cross-cassette-queries.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -284,11 +300,11 @@
     {
       "task_id": "6.4",
       "phase": 6,
-      "slug": "compression-validation-m-4",
+      "slug": "compression-validation",
       "legacy_id": "P06_6-4",
-      "prompt_path": "PROMPTS/PHASE_06/6.4_compression-validation-m-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation-m-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation-m-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.4_compression-validation.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -300,11 +316,11 @@
     {
       "task_id": "7.1",
       "phase": 7,
-      "slug": "research-decisions-e-0",
+      "slug": "research-decisions",
       "legacy_id": "P07_7-1",
-      "prompt_path": "PROMPTS/PHASE_07/7.1_research-decisions-e-0.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions-e-0/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions-e-0/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.1_research-decisions.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -316,11 +332,11 @@
     {
       "task_id": "7.2",
       "phase": 7,
-      "slug": "logging-infrastructure-e-1-p0",
+      "slug": "logging-infrastructure",
       "legacy_id": "P07_7-2",
-      "prompt_path": "PROMPTS/PHASE_07/7.2_logging-infrastructure-e-1-p0.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure-e-1-p0/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure-e-1-p0/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.2_logging-infrastructure.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -332,11 +348,11 @@
     {
       "task_id": "7.3",
       "phase": 7,
-      "slug": "elo-engine-e-2",
+      "slug": "elo-engine",
       "legacy_id": "P07_7-3",
-      "prompt_path": "PROMPTS/PHASE_07/7.3_elo-engine-e-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine-e-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine-e-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.3_elo-engine.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -348,11 +364,11 @@
     {
       "task_id": "7.4",
       "phase": 7,
-      "slug": "memory-pruning-e-3",
+      "slug": "memory-pruning",
       "legacy_id": "P07_7-4",
-      "prompt_path": "PROMPTS/PHASE_07/7.4_memory-pruning-e-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning-e-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning-e-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.4_memory-pruning.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -364,11 +380,11 @@
     {
       "task_id": "7.5",
       "phase": 7,
-      "slug": "lite-pack-integration-e-4",
+      "slug": "lite-pack-integration",
       "legacy_id": "P07_7-5",
-      "prompt_path": "PROMPTS/PHASE_07/7.5_lite-pack-integration-e-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration-e-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration-e-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.5_lite-pack-integration.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -380,11 +396,11 @@
     {
       "task_id": "7.6",
       "phase": 7,
-      "slug": "search-result-ranking-e-5",
+      "slug": "search-result-ranking",
       "legacy_id": "P07_7-6",
-      "prompt_path": "PROMPTS/PHASE_07/7.6_search-result-ranking-e-5.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking-e-5/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking-e-5/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.6_search-result-ranking.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -396,11 +412,11 @@
     {
       "task_id": "7.7",
       "phase": 7,
-      "slug": "visualization-monitoring-e-6",
+      "slug": "visualization-monitoring",
       "legacy_id": "P07_7-7",
-      "prompt_path": "PROMPTS/PHASE_07/7.7_visualization-monitoring-e-6.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring-e-6/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring-e-6/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.7_visualization-monitoring.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Sonnet 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -412,11 +428,11 @@
     {
       "task_id": "8.1",
       "phase": 8,
-      "slug": "resident-identity-r-1",
+      "slug": "resident-identity",
       "legacy_id": "P08_8-1",
-      "prompt_path": "PROMPTS/PHASE_08/8.1_resident-identity-r-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity-r-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity-r-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.1_resident-identity.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -428,11 +444,11 @@
     {
       "task_id": "8.2",
       "phase": 8,
-      "slug": "symbol-language-evolution-r-2",
+      "slug": "symbol-language-evolution",
       "legacy_id": "P08_8-2",
-      "prompt_path": "PROMPTS/PHASE_08/8.2_symbol-language-evolution-r-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution-r-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution-r-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.2_symbol-language-evolution.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -444,11 +460,11 @@
     {
       "task_id": "8.3",
       "phase": 8,
-      "slug": "feral-resident-r-3",
+      "slug": "feral-resident",
       "legacy_id": "P08_8-3",
-      "prompt_path": "PROMPTS/PHASE_08/8.3_feral-resident-r-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident-r-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident-r-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.3_feral-resident.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -460,11 +476,11 @@
     {
       "task_id": "8.4",
       "phase": 8,
-      "slug": "production-hardening-r-4",
+      "slug": "production-hardening",
       "legacy_id": "P08_8-4",
-      "prompt_path": "PROMPTS/PHASE_08/8.4_production-hardening-r-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening-r-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening-r-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.4_production-hardening.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -476,11 +492,11 @@
     {
       "task_id": "8.5",
       "phase": 8,
-      "slug": "vector-execution-r-5-p2-long-horizon",
+      "slug": "vector-execution-long-horizon",
       "legacy_id": "P08_8-5",
-      "prompt_path": "PROMPTS/PHASE_08/8.5_vector-execution-r-5-p2-long-horizon.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-r-5-p2-long-horizon/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-r-5-p2-long-horizon/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.5_vector-execution-long-horizon.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-long-horizon/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-long-horizon/REPORT.md",
       "depends_on": [],
       "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
       "fallback_chain": [
@@ -554,9 +570,9 @@
       "warnings": []
     },
     "1.3": {
-      "prompt_path": "PROMPTS/PHASE_01/1.3_deprecate-lab-mcp-server-z-1-7.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server-z-1-7/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server-z-1-7/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_01/1.3_deprecate-lab-mcp-server.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
@@ -568,9 +584,9 @@
       "warnings": []
     },
     "2.1": {
-      "prompt_path": "PROMPTS/PHASE_02/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-z-2-6-p-2-remainder/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_02/2.1_cas-aware-llm-packer-integration-p-2-remainder.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-p-2-remainder/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/2.1_cas-aware-llm-packer-integration-p-2-remainder/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
@@ -589,156 +605,156 @@
       "warnings": []
     },
     "3.1": {
-      "prompt_path": "PROMPTS/PHASE_03/3.1_router-fallback-stability-z-3-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability-z-3-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability-z-3-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.1_router-fallback-stability.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "3.2": {
-      "prompt_path": "PROMPTS/PHASE_03/3.2_memory-integration-z-3-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration-z-3-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration-z-3-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.2_memory-integration.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "3.3": {
-      "prompt_path": "PROMPTS/PHASE_03/3.3_tool-binding-z-3-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding-z-3-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding-z-3-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.3_tool-binding.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "3.4": {
-      "prompt_path": "PROMPTS/PHASE_03/3.4_session-persistence-z-3-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence-z-3-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence-z-3-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_03/3.4_session-persistence.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "4.1": {
-      "prompt_path": "PROMPTS/PHASE_04/4.1_catalytic-snapshot-restore-z-4-2-z-4-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore-z-4-2-z-4-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore-z-4-2-z-4-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_04/4.1_catalytic-snapshot-restore.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "5.1": {
-      "prompt_path": "PROMPTS/PHASE_05/5.1_embed-canon-adrs-and-skill-discovery-z-5.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery-z-5/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery-z-5/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_05/5.1_embed-canon-adrs-and-skill-discovery.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/5.1_embed-canon-adrs-and-skill-discovery/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "6.1": {
-      "prompt_path": "PROMPTS/PHASE_06/6.1_cassette-partitioning-m-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning-m-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning-m-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.1_cassette-partitioning.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.1_cassette-partitioning/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "6.2": {
-      "prompt_path": "PROMPTS/PHASE_06/6.2_write-path-memory-persistence-m-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence-m-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence-m-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.2_write-path-memory-persistence.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.2_write-path-memory-persistence/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "6.3": {
-      "prompt_path": "PROMPTS/PHASE_06/6.3_cross-cassette-queries-m-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries-m-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries-m-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.3_cross-cassette-queries.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.3_cross-cassette-queries/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "6.4": {
-      "prompt_path": "PROMPTS/PHASE_06/6.4_compression-validation-m-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation-m-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation-m-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_06/6.4_compression-validation.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.1": {
-      "prompt_path": "PROMPTS/PHASE_07/7.1_research-decisions-e-0.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions-e-0/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions-e-0/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.1_research-decisions.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.1_research-decisions/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.2": {
-      "prompt_path": "PROMPTS/PHASE_07/7.2_logging-infrastructure-e-1-p0.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure-e-1-p0/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure-e-1-p0/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.2_logging-infrastructure.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.2_logging-infrastructure/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.3": {
-      "prompt_path": "PROMPTS/PHASE_07/7.3_elo-engine-e-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine-e-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine-e-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.3_elo-engine.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.3_elo-engine/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.4": {
-      "prompt_path": "PROMPTS/PHASE_07/7.4_memory-pruning-e-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning-e-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning-e-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.4_memory-pruning.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.4_memory-pruning/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.5": {
-      "prompt_path": "PROMPTS/PHASE_07/7.5_lite-pack-integration-e-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration-e-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration-e-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.5_lite-pack-integration.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.5_lite-pack-integration/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.6": {
-      "prompt_path": "PROMPTS/PHASE_07/7.6_search-result-ranking-e-5.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking-e-5/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking-e-5/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.6_search-result-ranking.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.6_search-result-ranking/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "7.7": {
-      "prompt_path": "PROMPTS/PHASE_07/7.7_visualization-monitoring-e-6.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring-e-6/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring-e-6/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_07/7.7_visualization-monitoring.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/7.7_visualization-monitoring/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "8.1": {
-      "prompt_path": "PROMPTS/PHASE_08/8.1_resident-identity-r-1.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity-r-1/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity-r-1/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.1_resident-identity.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "8.2": {
-      "prompt_path": "PROMPTS/PHASE_08/8.2_symbol-language-evolution-r-2.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution-r-2/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution-r-2/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.2_symbol-language-evolution.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.2_symbol-language-evolution/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "8.3": {
-      "prompt_path": "PROMPTS/PHASE_08/8.3_feral-resident-r-3.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident-r-3/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident-r-3/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.3_feral-resident.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "8.4": {
-      "prompt_path": "PROMPTS/PHASE_08/8.4_production-hardening-r-4.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening-r-4/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening-r-4/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.4_production-hardening.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.4_production-hardening/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
     "8.5": {
-      "prompt_path": "PROMPTS/PHASE_08/8.5_vector-execution-r-5-p2-long-horizon.md",
-      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-r-5-p2-long-horizon/receipt.json",
-      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-r-5-p2-long-horizon/REPORT.md",
+      "prompt_path": "PROMPTS/PHASE_08/8.5_vector-execution-long-horizon.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-long-horizon/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.5_vector-execution-long-horizon/REPORT.md",
       "depends_on": [],
       "warnings": []
     },
