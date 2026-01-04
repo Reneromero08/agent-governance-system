@@ -6,12 +6,11 @@ Automatically updates INBOX/INBOX.md with current file listings and metadata.
 import sys
 from pathlib import Path
 from datetime import datetime
-import re
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 from hash_inbox_file import verify_hash
-from generate_inbox_ledger import extract_frontmatter
+from generate_inbox_ledger import extract_frontmatter, list_inbox_markdown_files
 
 
 def get_file_entry(filepath: Path, inbox_root: Path) -> dict:
@@ -51,7 +50,7 @@ def generate_inbox_index(inbox_path: Path = None) -> str:
     
     # Find all markdown files except INBOX.md and LEDGER.yaml
     md_files = [
-        f for f in inbox_path.rglob("*.md") 
+        f for f in list_inbox_markdown_files(inbox_path)
         if f.name not in ['INBOX.md', 'LEDGER.yaml'] and not f.name.startswith('.')
     ]
     

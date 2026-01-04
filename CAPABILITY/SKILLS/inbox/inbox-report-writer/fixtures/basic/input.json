@@ -1,0 +1,5 @@
+{
+  "operation": "generate_ledger",
+  "inbox_path": "INBOX",
+  "ledger_path": "LAW/CONTRACTS/_runs/_tmp/fixtures/inbox-report-writer/LEDGER.yaml"
+}

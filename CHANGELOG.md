@@ -4,6 +4,15 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.9] - 2026-01-04
+
+### Added
+- **prompt-runner Skill** (`CAPABILITY/SKILLS/utilities/prompt-runner/`): Enforces prompt canon gates (lint, hashes, FILL_ME__ blocking), allowlists, dependency checks, and emits canonical receipts/reports.
+- **inbox-report-writer Skill manifest + fixtures** (`CAPABILITY/SKILLS/inbox/inbox-report-writer/`): Added skill runner, validator, and fixtures for ledger generation and hash validation.
+
+### Changed
+- **INBOX ledger/index scanning** now uses cortex section indexes instead of raw filesystem traversal in `CAPABILITY/SKILLS/inbox/inbox-report-writer/generate_inbox_ledger.py` and `CAPABILITY/SKILLS/inbox/inbox-report-writer/update_inbox_index.py`.
+
 ## [3.3.8] - 2026-01-04
 
 ### Added
@@ -49,6 +58,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - ✅ All tests pass
     - ✅ Receipts and reports emitted
     - ✅ Scope respected (only allowlisted files modified)
+- **prompt-runner Skill** (`CAPABILITY/SKILLS/utilities/prompt-runner/`): Enforces prompt canon gates (lint, hashes, FILL_ME__ blocking), allowlists, dependency checks, and emits canonical receipts/reports.
 
 ## [3.3.7] - 2026-01-04
 
