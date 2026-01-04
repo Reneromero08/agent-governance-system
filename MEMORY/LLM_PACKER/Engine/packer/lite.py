@@ -9,12 +9,14 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Any, Dict, Sequence
 
-from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text
+import json
+from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text, PROJECT_ROOT
+from .proofs import get_lite_proof_summary
 
 def rel_posix(*parts: str) -> str:
     return Path(*parts).as_posix()
 
-def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
+def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Path) -> None:
     """
     Write a discussion-first LITE index.
 
@@ -60,6 +62,10 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope) -> None:
                 ]
             ),
         )
+
+        # LITE PROOFS Summary (AGS Only)
+        lite_proofs = get_lite_proof_summary(project_root)
+        (lite_dir / "PROOFS.json").write_text(json.dumps(lite_proofs, indent=2) + "\n", encoding="utf-8")
 
     elif scope.key == SCOPE_LAB.key:
         write(

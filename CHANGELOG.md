@@ -4,14 +4,39 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.10] - 2026-01-04
+
+### Added
+- **Proofs as First-Class Pack Artifacts** — Integrated rigorous proof generation into the LLM Packer pipeline to ensure every pack contains fresh verification evidence.
+  - **Fail-Closed Generation**: Pack generation triggers `refresh_proofs` and aborts immediately if any proof command fails (e.g. tests, scripts).
+  - **Dispersed Artifacts**: Proof artifacts are now atomically generated and distributed to:
+    - `NAVIGATION/PROOFS/GREEN_STATE.json` & `.md`: Git state, timestamps, and command execution logs.
+    - `NAVIGATION/PROOFS/PROOF_MANIFEST.json`: Signed inventory of all proof files.
+    - `NAVIGATION/PROOFS/CATALYTIC/`: Catalytic proof logs and summaries.
+    - `NAVIGATION/PROOFS/COMPRESSION/`: Compression proof reports.
+  - **Pack Integration**:
+    - **FULL / SPLIT Packs**: Include `AGS-04_PROOFS.md` containing all proof text/JSON.
+    - **LITE Packs**: Include `LITE/PROOFS.json` with a verifiable summary (hashes + status).
+  - **CLI Control**: Added `--skip-proofs` (for speed) and `--with-proofs` (force refresh) flags to `packer/cli.py`.
+  - **Test Coverage**: Added `CAPABILITY/TESTBENCH/integration/test_packer_proofs.py` verifying atomic updates and fail-closed behavior.
+
+### Changed
+- **License Update (CCL v1.2)** — Updated `LICENSE` to Catalytic Commons License v1.2.
+  - Added **No State/Police/Military/Intel Use** clause (Section 0 & 3.1).
+  - Explicitly defined "Prohibited Entity" types.
+  - Clarified "Extractive Use" regarding surveillance and coercive control.
+- **Pytest Configuration**: Updated `pytest.ini` to exclude build artifact directories (`_runs`, `_packs`, `_generated`, `BUILD`) prevents Windows file lock errors during self-test collection.
+
 ## [3.3.9] - 2026-01-04
 
 ### Added
 - **prompt-runner Skill** (`CAPABILITY/SKILLS/utilities/prompt-runner/`): Enforces prompt canon gates (lint, hashes, FILL_ME__ blocking), allowlists, dependency checks, and emits canonical receipts/reports.
 - **inbox-report-writer Skill manifest + fixtures** (`CAPABILITY/SKILLS/inbox/inbox-report-writer/`): Added skill runner, validator, and fixtures for ledger generation and hash validation.
+- **cortex-build Skill** (`CAPABILITY/SKILLS/cortex/cortex-build/`): Rebuilds cortex index + SECTION_INDEX and verifies expected prompt paths are present.
 
 ### Changed
 - **INBOX ledger/index scanning** now uses cortex section indexes instead of raw filesystem traversal in `CAPABILITY/SKILLS/inbox/inbox-report-writer/generate_inbox_ledger.py` and `CAPABILITY/SKILLS/inbox/inbox-report-writer/update_inbox_index.py`.
+- **SECTION_INDEX coverage** now includes `NAVIGATION/PROMPTS/**` for prompt discovery in `NAVIGATION/CORTEX/db/cortex.build.py`.
 
 ## [3.3.8] - 2026-01-04
 

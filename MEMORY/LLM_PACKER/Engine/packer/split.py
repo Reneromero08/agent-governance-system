@@ -52,10 +52,15 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
             out_lines.append("")
         return "\n".join(out_lines).rstrip() + "\n"
 
-    # Group paths (6-bucket structure + optional root files)
+    # Group paths (6-bucket structure + optional root files + PROOFS)
+    # Extract PROOFS from NAVIGATION
+    navigation_all = [p for p in included_repo_paths if p.startswith("repo/NAVIGATION/")]
+    proof_paths = [p for p in navigation_all if p.startswith("repo/NAVIGATION/PROOFS/")]
+    navigation_paths = [p for p in navigation_all if not p.startswith("repo/NAVIGATION/PROOFS/")]
+
     law_paths = [p for p in included_repo_paths if p.startswith("repo/LAW/")]
     capability_paths = [p for p in included_repo_paths if p.startswith("repo/CAPABILITY/")]
-    navigation_paths = [p for p in included_repo_paths if p.startswith("repo/NAVIGATION/")]
+    # navigation_paths defined above
     direction_paths = [p for p in included_repo_paths if p.startswith("repo/DIRECTION/")]
     thought_paths = [p for p in included_repo_paths if p.startswith("repo/THOUGHT/")]
     memory_paths = [p for p in included_repo_paths if p.startswith("repo/MEMORY/")]
@@ -103,14 +108,21 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
     (split_dir / "AGS-01_LAW.md").write_text("# LAW\n\n" + section(law_paths), encoding="utf-8")
     (split_dir / "AGS-02_CAPABILITY.md").write_text("# CAPABILITY\n\n" + section(capability_paths), encoding="utf-8")
     (split_dir / "AGS-03_NAVIGATION.md").write_text("# NAVIGATION\n\n" + section(navigation_paths), encoding="utf-8")
+    
+    # AGS-04_PROOFS (New)
+    (split_dir / "AGS-04_PROOFS.md").write_text("# PROOFS\n\n" + section(proof_paths), encoding="utf-8")
+
     direction_body = section(direction_paths)
     if direction_body.strip():
-        (split_dir / "AGS-04_DIRECTION.md").write_text("# DIRECTION\n\n" + direction_body, encoding="utf-8")
+        (split_dir / "AGS-05_DIRECTION.md").write_text("# DIRECTION\n\n" + direction_body, encoding="utf-8")
+    
     thought_body = section(thought_paths)
     if thought_body.strip():
-        (split_dir / "AGS-05_THOUGHT.md").write_text("# THOUGHT\n\n" + thought_body, encoding="utf-8")
-    (split_dir / "AGS-06_MEMORY.md").write_text("# MEMORY\n\n" + section(memory_paths), encoding="utf-8")
-    (split_dir / "AGS-07_ROOT_FILES.md").write_text(
+        (split_dir / "AGS-06_THOUGHT.md").write_text("# THOUGHT\n\n" + thought_body, encoding="utf-8")
+    
+    (split_dir / "AGS-07_MEMORY.md").write_text("# MEMORY\n\n" + section(memory_paths), encoding="utf-8")
+    
+    (split_dir / "AGS-08_ROOT_FILES.md").write_text(
         "# ROOT_FILES\n\n" + section([*root_paths, *github_paths, *meta_paths]),
         encoding="utf-8",
     )
