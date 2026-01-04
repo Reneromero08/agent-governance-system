@@ -139,7 +139,7 @@ class InboxWriteGuard:
     Usage:
         with InboxWriteGuard():
             # Any INBOX writes here will be validated
-            Path("INBOX/reports/my_report.md").write_text(content)
+            # Example: Path.cwd().joinpath("INBOX", "reports", "my_report.md").write_text(content)
     """
     
     def __init__(self):

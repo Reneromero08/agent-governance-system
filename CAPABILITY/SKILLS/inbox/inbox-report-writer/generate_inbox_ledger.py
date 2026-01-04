@@ -3,15 +3,22 @@
 INBOX Ledger Generator
 Scans INBOX directory and generates a YAML ledger with metadata for all files.
 """
+import json
 import sys
 from pathlib import Path
 from datetime import datetime
+from typing import List
 import yaml
-import re
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
-from hash_inbox_file import verify_hash, compute_content_hash
+from hash_inbox_file import verify_hash
+
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+SECTION_INDEX_PATHS = [
+    PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json",
+    PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "meta" / "SECTION_INDEX.json",
+]
 
 
 def extract_frontmatter(content: str) -> dict:
@@ -30,7 +37,40 @@ def extract_frontmatter(content: str) -> dict:
         return {}
 
 
-def get_file_metadata(filepath: Path) -> dict:
+def _normalize_path(value: str) -> str:
+    return value.replace("\\", "/").strip()
+
+
+def _load_section_index() -> List[dict]:
+    for index_path in SECTION_INDEX_PATHS:
+        if index_path.exists():
+            return json.loads(index_path.read_text(encoding="utf-8"))
+    raise FileNotFoundError("SECTION_INDEX.json not found in cortex outputs")
+
+
+def list_inbox_markdown_files(inbox_root: Path) -> List[Path]:
+    """List INBOX markdown files using the cortex index."""
+    records = _load_section_index()
+    paths = set()
+    for record in records:
+        record_path = str(record.get("path", "")) if "path" in record else ""
+        anchor = str(record.get("anchor", "")) if "anchor" in record else ""
+        anchor_path = anchor.split("#", 1)[0] if anchor else ""
+        candidate = record_path or anchor_path
+        normalized = _normalize_path(candidate)
+        if not normalized.startswith("INBOX/") or not normalized.endswith(".md"):
+            continue
+        paths.add(normalized)
+
+    results: List[Path] = []
+    for rel_path in sorted(paths):
+        full_path = PROJECT_ROOT / rel_path
+        if full_path.exists() and full_path.is_file():
+            results.append(full_path)
+    return results
+
+
+def get_file_metadata(filepath: Path, inbox_root: Path) -> dict:
     """Get metadata for a single INBOX file."""
     try:
         content = filepath.read_text(encoding='utf-8')
@@ -46,7 +86,7 @@ def get_file_metadata(filepath: Path) -> dict:
         
         # Determine relative path from INBOX
         try:
-            rel_path = filepath.relative_to(Path.cwd() / "INBOX")
+            rel_path = filepath.relative_to(inbox_root)
         except ValueError:
             rel_path = filepath
         
@@ -93,7 +133,7 @@ def scan_inbox_directory(inbox_path: Path) -> dict:
         raise FileNotFoundError(f"INBOX directory not found: {inbox_path}")
     
     # Find all markdown files
-    md_files = list(inbox_path.rglob("*.md"))
+    md_files = list_inbox_markdown_files(inbox_path)
     
     # Organize by subdirectory
     ledger = {
@@ -110,7 +150,7 @@ def scan_inbox_directory(inbox_path: Path) -> dict:
     }
     
     for md_file in md_files:
-        metadata = get_file_metadata(md_file)
+        metadata = get_file_metadata(md_file, inbox_path)
         
         # Update summary
         if 'error' in metadata:
