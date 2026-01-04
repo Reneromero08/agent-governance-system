@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: 1ef6dd2260d86b6d42fbf1df4d0baa4e6a73dc3a3c1a2f8b34ef22f5f62c2737 -->
+<!-- CONTENT_HASH: d68578f118821b765364f96df8ee0657711744f829a00e8516729c70eccf0efb -->
 
 # CANON Folder Compression Analysis
 

@@ -31,6 +31,25 @@ fi
 
 echo "✅ Governance check passed"
 
+echo "📊 Updating INBOX index and ledger..."
+python3 CAPABILITY/SKILLS/inbox/inbox-report-writer/update_inbox_index.py --quiet
+python3 CAPABILITY/SKILLS/inbox/inbox-report-writer/generate_inbox_ledger.py --quiet
+
+# Stage the updated files if they changed
+git add INBOX/INBOX.md INBOX/LEDGER.yaml 2>/dev/null || true
+
+echo "🔍 Running INBOX hash validation..."
+python3 CAPABILITY/SKILLS/inbox/inbox-report-writer/check_inbox_hashes.py
+INBOX_EXIT=$?
+if [ $INBOX_EXIT -ne 0 ]; then
+    echo ""
+    echo "❌ INBOX hash validation failed!"
+    echo "   All INBOX/*.md files must have valid CONTENT_HASH comments."
+    exit 1
+fi
+
+echo "✅ INBOX hash validation passed"
+
 echo "🔍 Running MCP pre-commit checks..."
 CHECK_DIR="LAW/CONTRACTS/_runs/_tmp"
 CHECK_IN="$CHECK_DIR/mcp_precommit_input.json"

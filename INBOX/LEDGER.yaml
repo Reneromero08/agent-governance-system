@@ -1,0 +1,1218 @@
+generated: '2026-01-04T13:53:04.763572'
+inbox_path: D:\CCC 2.0\AI\agent-governance-system\INBOX
+total_files: 62
+summary:
+  valid_hashes: 2
+  invalid_hashes: 60
+  missing_hashes: 0
+  errors: 0
+files_by_category:
+  root:
+  - path: INBOX.md
+    filename: INBOX.md
+    size_bytes: 22711
+    modified: '2026-01-04T13:53:04.666850'
+    hash:
+      valid: true
+      stored: c6b827945a7b611c3db4a642e71c5101bc50aca2dd0c08c57a8ebd41b2f1f8a6
+      computed: c6b827945a7b611c3db4a642e71c5101bc50aca2dd0c08c57a8ebd41b2f1f8a6
+      match: true
+  reports:
+  - path: reports/01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md
+    filename: 01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md
+    size_bytes: 3129
+    modified: '2026-01-04T13:52:51.554999'
+    hash:
+      valid: true
+      stored: 65f3a2daa834a3ce43fca2f7c1ac2d61d385d5e361049ceb0d84959860da1f48
+      computed: 65f3a2daa834a3ce43fca2f7c1ac2d61d385d5e361049ceb0d84959860da1f48
+      match: true
+    frontmatter:
+      title: System Potential Report
+      section: report
+      author: System
+      priority: High
+      status: Draft
+      created: 2026-01-01 11:37
+      tags:
+      - strategy
+      - potential
+      - overview
+  - path: reports/01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md
+    filename: 01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md
+    size_bytes: 2902
+    modified: '2026-01-04T13:52:51.648883'
+    hash:
+      valid: false
+      stored: d2949091d4c4bf0e89df5b1cad8244b39e5fb70baff94f6fcd669021b738e578
+      computed: b761d36d27e0726e95ea4307554a266aadff0a4c05e33d164054ba8b2900c749
+      match: false
+    frontmatter:
+      title: Document Merge Tooling Strategy Report
+      section: report
+      author: Antigravity
+      priority: High
+      status: Complete
+      created: 2026-01-01 13:36
+      tags:
+      - tooling
+      - document-merge
+      - efficiency
+  - path: reports/01-02-2026-18-48_LANE_Z_RISKS_REPORT.md
+    filename: 01-02-2026-18-48_LANE_Z_RISKS_REPORT.md
+    size_bytes: 3687
+    modified: '2026-01-04T13:52:51.751727'
+    hash:
+      valid: false
+      stored: 9ae9babf0eb7f64d9e15dc8dd4dd134b88f7da95065f82cce823b1cbb89645e7
+      computed: e953adb825811c91564ede2bddc3fc413f887aa4a402c240ae22cc4e35d7986e
+      match: false
+    frontmatter:
+      title: Lane Z Risks Report
+      section: report
+      author: Antigravity
+      priority: High
+      status: Draft
+      created: 2026-01-02 18:48
+      tags:
+      - lane-z
+      - risks
+      - cas
+      - integration
+  - path: reports/12-27-2025-22-18_TEST_FAILURES_REPORT.md
+    filename: 12-27-2025-22-18_TEST_FAILURES_REPORT.md
+    size_bytes: 2860
+    modified: '2026-01-04T13:52:51.854970'
+    hash:
+      valid: false
+      stored: be36bfbe0ce37ca71872880235c9417f220310238e38e90f24cfc70783e93cd0
+      computed: fd956c9677f308593f44657e82adbf73472827eb8e342cd9c16f440fe77ee9c9
+      match: false
+    frontmatter:
+      title: Test Failures Report
+      section: report
+      author: System
+      priority: High
+      status: Active
+      created: 2025-12-27 22:18
+      tags:
+      - tests
+      - failures
+      - report
+  - path: reports/12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md
+    filename: 12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md
+    size_bytes: 15061
+    modified: '2026-01-04T13:52:52.337885'
+    hash:
+      valid: false
+      stored: 4df35bca158c22b27d527dc5ef16c0cd1ea2f6904a7e07aab041e208102dae42
+      computed: 2cadd65fd76579e38e9cfac7c219c42e1bd6f5293aeaaf21a3c7da9c021c30d8
+      match: false
+    frontmatter:
+      title: Agents Cortex Connection Gap Report
+      section: report
+      author: System
+      priority: High
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - cortex
+      - connection
+      - gap
+  - path: reports/12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md
+    filename: 12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md
+    size_bytes: 10112
+    modified: '2026-01-04T13:52:51.971183'
+    hash:
+      valid: false
+      stored: 3c8bf64d2c0c8b1605757ca35635d1e97ba018869e52cedfd4d3ede74ba11cfb
+      computed: f3f9630f352e252223f6ddda62a179b3582b9f96da806392fd6547bceb851f09
+      match: false
+    frontmatter:
+      title: Agent Bootstrap Test Design
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - bootstrap
+      - test
+      - design
+  - path: reports/12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md
+    filename: 12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md
+    size_bytes: 11157
+    modified: '2026-01-04T13:52:52.086205'
+    hash:
+      valid: false
+      stored: da0bb738caaeac746c3457c6197b3e883b3633b28cd9311431be121fe5585330
+      computed: e3a10d1026008dad42b912b6d35df4c7f1c5b2d5d9cb20f6d111a36896b733a0
+      match: false
+    frontmatter:
+      title: Agent Pipeline Complete
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - pipeline
+      - agent
+  - path: reports/12-28-2025-12-00_AGENT_SAFETY_REPORT.md
+    filename: 12-28-2025-12-00_AGENT_SAFETY_REPORT.md
+    size_bytes: 9111
+    modified: '2026-01-04T13:52:52.191258'
+    hash:
+      valid: false
+      stored: ecda6dca37c3e8b62382cc1ea506c1711dda005f0a4260130fd71aa02f6c63e5
+      computed: 245cfbcd41f5087e35219327459de5492f153f00ff8bace484e254f308c69ad5
+      match: false
+    frontmatter:
+      title: Agent Safety Report
+      section: report
+      author: System
+      priority: High
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - safety
+      - agent
+  - path: reports/12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md
+    filename: 12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md
+    size_bytes: 7074
+    modified: '2026-01-04T13:52:52.469253'
+    hash:
+      valid: false
+      stored: aea7e2df1f61aa08ef940fb028a212a2927c26edc1af38c06dd06ac04540acb7
+      computed: 8d111d2665a46778a1950fb453bda4caf1a4f42aff222dd246f4d1a6596d2440
+      match: false
+    frontmatter:
+      title: Cortex Quick Reference
+      section: guide
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-28 12:00
+      tags:
+      - cortex
+      - reference
+      - guide
+  - path: reports/12-28-2025-12-00_DISPATCHER_TEST_REPORT.md
+    filename: 12-28-2025-12-00_DISPATCHER_TEST_REPORT.md
+    size_bytes: 6535
+    modified: '2026-01-04T13:52:52.564261'
+    hash:
+      valid: false
+      stored: bdeaa94939827cc3ca716e53ef9410c7531938dc388cc77d223c0f88c88a88cc
+      computed: 336071dda4dfa795ce8d855331b0684e72170c2115c6ba16b5a4f8c81080ed12
+      match: false
+    frontmatter:
+      title: Dispatcher Test Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - dispatcher
+      - test
+  - path: reports/12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md
+    filename: 12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md
+    size_bytes: 2352
+    modified: '2026-01-04T13:52:52.668370'
+    hash:
+      valid: false
+      stored: 863dd0c81b8dfd52c9ef945f290254a25a3c2e71613cfd99e7c79e2ef47cffd4
+      computed: d5ddf2a914880fda5faf2673404c70e1a2d83ccf0a45a6560e96ac96197f9b41
+      match: false
+    frontmatter:
+      title: Dispatcher Watcher Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - dispatcher
+      - watcher
+  - path: reports/12-28-2025-12-00_INTEGRATION_REPORT.md
+    filename: 12-28-2025-12-00_INTEGRATION_REPORT.md
+    size_bytes: 8846
+    modified: '2026-01-04T13:52:52.794225'
+    hash:
+      valid: false
+      stored: 525e2f291f462254a7b4852daf2756c7c8eafd60c5ea4111e2baa44558b1a2b1
+      computed: 54cae9a30b5cbeedf9505fe50a80bbdbdc5b22a234ee8ce9202397034565c9aa
+      match: false
+    frontmatter:
+      title: Integration Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - integration
+      - status
+  - path: reports/12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md
+    filename: 12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md
+    size_bytes: 4440
+    modified: '2026-01-04T13:52:52.942239'
+    hash:
+      valid: false
+      stored: 5d4bc1786dfa1cb8cfad04c5cb1b2270f7cb8ba815372e2e640af4c23803ac49
+      computed: ed082d040f42b2d58b669a23fd46b628b560450a66999ec9b9a29a8a6b6aefdf
+      match: false
+    frontmatter:
+      title: MCP First Demonstration
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - mcp
+      - demonstration
+  - path: reports/12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md
+    filename: 12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md
+    size_bytes: 2023
+    modified: '2026-01-04T13:52:53.098210'
+    hash:
+      valid: false
+      stored: 061ebf287bfb40709c0a821b29c0b14fc096e708be7b3c2dedcdda97db9abf1c
+      computed: 44b7a153021d8f579e61bd6ca3e2df7efdf8f7ad820176c101b27323871e4510
+      match: false
+    frontmatter:
+      title: Pipeline Sentinel Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 12:00
+      tags:
+      - pipeline
+      - sentinel
+  - path: reports/12-28-2025-12-00_SCRATCH_WORKFLOW.md
+    filename: 12-28-2025-12-00_SCRATCH_WORKFLOW.md
+    size_bytes: 1988
+    modified: '2026-01-04T13:52:53.221502'
+    hash:
+      valid: false
+      stored: df2f0f45af2eae9e519725770dbf9c5cd21008e24bb8f09b90e358ceca815cde
+      computed: cbc78288e1c016079ca2bfbf59779f6cb9b77eb4f255f08571c8aa638cd84041
+      match: false
+    frontmatter:
+      title: Scratch Workflow
+      section: report
+      author: System
+      priority: Low
+      status: Archived
+      created: 2025-12-28 12:00
+      tags:
+      - workflow
+      - scratch
+  - path: reports/12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md
+    filename: 12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md
+    size_bytes: 9504
+    modified: '2026-01-04T13:52:53.357318'
+    hash:
+      valid: false
+      stored: 3ce8734559aa1e672f075d3adb852c1b572a96c2f53546de60a7acd74d01fe37
+      computed: de62f360af5cf69242d09abdd3eae1b9c1d474168e8c3678a2017df8145738bb
+      match: false
+    frontmatter:
+      title: Cassette Network Implementation Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 23:12
+      tags:
+      - cassette
+      - network
+      - implementation
+  - path: reports/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md
+    filename: 12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md
+    size_bytes: 41755
+    modified: '2026-01-04T13:52:53.480291'
+    hash:
+      valid: false
+      stored: 983053c647131350bbcebffe85d08ba0cf36e47b89a08fbae02e922f969afb9a
+      computed: d02d813668fa1b94361dc1865348891c3cd1789124b401d3fd3562da4c3bdc46
+      match: false
+    frontmatter:
+      title: Deliverables Index Report
+      section: report
+      author: System
+      priority: Low
+      status: Archived
+      created: 2025-12-28 23:12
+      tags:
+      - deliverables
+      - index
+      - archive
+  - path: reports/12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md
+    filename: 12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md
+    size_bytes: 12548
+    modified: '2026-01-04T13:52:53.630298'
+    hash:
+      valid: false
+      stored: 63808348bcec0ca3ed5b43a9f346ec0242c2eabbd9fd17174758250530b99d2a
+      computed: 806df3d179ea6cf8780ec2fe3ac351df20248779b9dbfc62e45843fd95dcdecc
+      match: false
+    frontmatter:
+      title: Mechanical Indexing Report
+      section: report
+      author: System
+      priority: Low
+      status: Complete
+      created: 2025-12-28 23:12
+      tags:
+      - indexing
+      - regex
+      - legacy
+  - path: reports/12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md
+    filename: 12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md
+    size_bytes: 9492
+    modified: '2026-01-04T13:52:53.719193'
+    hash:
+      valid: false
+      stored: 70148c96d99e250a663f51e611aa70e565b19469d0069c45c1ad128f93a45f90
+      computed: d9fbb506312f0265f99c985f4a977567390c1c788ff1ae3b191b62a2010019a1
+      match: false
+    frontmatter:
+      title: Semantic Database Network Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 23:12
+      tags:
+      - semantic_db
+      - network
+      - report
+  - path: reports/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md
+    filename: 12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md
+    size_bytes: 10387
+    modified: '2026-01-04T13:52:53.829729'
+    hash:
+      valid: false
+      stored: 2a23677ab7f3455d02ebb36372bdbef58b9e283fa2d23a9832f30a5fb8a87d4e
+      computed: 72c89dfced2a055e7cbccd1fc68ae027b54af8af0128b41ff19c7d90c9541046
+      match: false
+    frontmatter:
+      title: Swarm Verification Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 23:12
+      tags:
+      - swarm
+      - verification
+      - report
+  - path: reports/12-28-2025-23-12_TEST_RESULTS_2025_12_28.md
+    filename: 12-28-2025-23-12_TEST_RESULTS_2025_12_28.md
+    size_bytes: 7736
+    modified: '2026-01-04T13:52:53.949954'
+    hash:
+      valid: false
+      stored: f954c08677b2134c4de72c80327b6c89500502c122eddfb05f071d366742abfa
+      computed: 97bfb05f98a3a6abfc226470cd1c23c3059c1c4ba1106b476420b851522e781c
+      match: false
+    frontmatter:
+      title: Test Results 2025-12-28
+      section: report
+      author: System
+      priority: Low
+      status: Archived
+      created: 2025-12-28 23:12
+      tags:
+      - tests
+      - results
+      - archive
+  - path: reports/12-29-2025-02-45_CI_STABILIZATION_REPORT.md
+    filename: 12-29-2025-02-45_CI_STABILIZATION_REPORT.md
+    size_bytes: 2298
+    modified: '2026-01-04T13:52:54.071488'
+    hash:
+      valid: false
+      stored: 7012653d1bc18a25078083b2743d73c5295399c8af4d5bde745f9fcd8cfe24c0
+      computed: 31cc4a2a82e312dc3feb2c67a9829fa28aba0232039cf28d42ec7dea2ccc610e
+      match: false
+    frontmatter:
+      title: CI Stabilization Report
+      section: report
+      author: System
+      priority: High
+      status: Complete
+      created: 2025-12-29 02:45
+      tags:
+      - ci
+      - stabilization
+      - hardening
+  - path: reports/12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md
+    filename: 12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md
+    size_bytes: 2562
+    modified: '2026-01-04T13:52:54.202814'
+    hash:
+      valid: false
+      stored: 07e8f211f8cd87e4a2701c8c56c236a56dafd79e9d890951e39d809059940877
+      computed: c108b5b6eac52be51d54303e79c59eda87e24e848790c052cc79ee1d07f1db3d
+      match: false
+    frontmatter:
+      title: GitHub Branch Protection Guide
+      section: guide
+      author: Antigravity
+      priority: High
+      status: Active
+      created: 2025-12-29 04:49
+      tags:
+      - github
+      - security
+      - guide
+  - path: reports/12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md
+    filename: 12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md
+    size_bytes: 1017
+    modified: '2026-01-04T13:52:54.317044'
+    hash:
+      valid: false
+      stored: bbf24b4562104376d57ca42c83f22921bf7a6b213a027d243498f811f359ee5d
+      computed: 618d73803e06821420f97b665ef9f54d3db28bed83478186c795344b2689fe5f
+      match: false
+    frontmatter:
+      title: Git Protocol Implementation Report
+      section: report
+      author: Antigravity
+      priority: High
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - git
+      - protocol
+      - security
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md
+    size_bytes: 10677
+    modified: '2026-01-04T13:52:54.414473'
+    hash:
+      valid: false
+      stored: 66af23e7caecd13a75ced73da4e0716857800b3de5dd1aaa11ffc945285e78fd
+      computed: 80f9d254c271d7adb57fb1a2ac6f429abd1b56c36ea8148a2684a5e94ac62cd8
+      match: false
+    frontmatter:
+      title: Semantic Core Build Complete
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - build
+      - status
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md
+    size_bytes: 29608
+    modified: '2026-01-04T13:52:54.528713'
+    hash:
+      valid: false
+      stored: 3e14c8b89b411be55e876aa8f73bf0b8e857bc6e61e278edb831e8a9581cebd1
+      computed: 80050b39009971273600ba1a37031a5abfa752f9883978f1032f07443b206f89
+      match: false
+    frontmatter:
+      title: Semantic Core Implementation Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - implementation
+      - context
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_INDEX.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_INDEX.md
+    size_bytes: 10565
+    modified: '2026-01-04T13:52:54.646507'
+    hash:
+      valid: false
+      stored: dd8fad948a61897ab3437e0cd9681cf476e12b21006af5ec24ba843b437c1d29
+      computed: 8c5301d663a8e03da19570dfe8f0fe49a3c30e5eb0b17e3dff91e142bed91ad2
+      match: false
+    frontmatter:
+      title: Semantic Core Index
+      section: report
+      author: System
+      priority: Low
+      status: Active
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - index
+      - reference
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md
+    size_bytes: 9934
+    modified: '2026-01-04T13:52:54.761597'
+    hash:
+      valid: false
+      stored: 248e1ac5175a42c53fa0ded7fd0c93960a3a02cc45a2c161670ad65ef1509a0c
+      computed: f9995c24c5ad0eed541cea7a53634da4aac8fa674a06bc7998aba5b2bfe50919
+      match: false
+    frontmatter:
+      title: Semantic Core Phase 1 Complete
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - phase1
+      - status
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md
+    size_bytes: 33212
+    modified: '2026-01-04T13:52:54.866134'
+    hash:
+      valid: false
+      stored: 70108195fc069c57ec02da78cccbf52a23939c5abbcc3a6e57a031bcf7d4a4a9
+      computed: 909e33543c7d4f8326207ccc704764aaef2df4858382b21829a2ab91448c77e0
+      match: false
+    frontmatter:
+      title: Semantic Core Phase 1 Final Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - phase1
+      - report
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md
+    size_bytes: 5919
+    modified: '2026-01-04T13:52:54.972902'
+    hash:
+      valid: false
+      stored: 4ac5abba38f5f7bcf63430e60005050631428ecf7ee0cccf8dd846b985a2e568
+      computed: a6e625ac0676456b72cd67ffafd5482620c152c4286729fed8d2cb755cbccfad
+      match: false
+    frontmatter:
+      title: Semantic Core Quick Start
+      section: report
+      author: System
+      priority: Low
+      status: Active
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - guide
+      - quickstart
+  - path: reports/12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md
+    filename: 12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md
+    size_bytes: 12799
+    modified: '2026-01-04T13:52:55.068318'
+    hash:
+      valid: false
+      stored: 09f13089e544d3836011b3b4aa7ea10c9e60eb5d1e53f460c422c3ca81e53570
+      computed: d780b3ec2b7554073457c40c6f197c0de28bf88a53cabd1af3a3f520bba3b971
+      match: false
+    frontmatter:
+      title: Semantic Core Workflow Complete
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - semantic_core
+      - workflow
+      - status
+  - path: reports/12-29-2025-05-36_SESSION_REPORT_2025_12_28.md
+    filename: 12-29-2025-05-36_SESSION_REPORT_2025_12_28.md
+    size_bytes: 24697
+    modified: '2026-01-04T13:52:55.156326'
+    hash:
+      valid: false
+      stored: 22f523c6ff0e34dab29b22f55a8cfc720f6a7394ead0e9395c258d2424ad5c36
+      computed: 04ef97d04c4ed6c1a615a6febb1ef3b2615553ebbd23e7bd3e82866f4906c561
+      match: false
+    frontmatter:
+      title: Session Report 2025-12-28
+      section: report
+      author: System
+      priority: Medium
+      status: Archived
+      created: 2025-12-29 05:36
+      tags:
+      - session
+      - report
+      - archive
+  - path: reports/12-29-2025-05-36_SWARM_REFACTORING_REPORT.md
+    filename: 12-29-2025-05-36_SWARM_REFACTORING_REPORT.md
+    size_bytes: 8238
+    modified: '2026-01-04T13:52:55.251074'
+    hash:
+      valid: false
+      stored: 6beec970eea6dfc9e60d947e4006501cd0042f58009191bd5c77b01496c67fcf
+      computed: e597e205b3a754d0bd5134420fc9d66cf6a7406aae31dbfcda8529da4713068f
+      match: false
+    frontmatter:
+      title: Swarm Refactoring Report
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - swarm
+      - refactoring
+      - maintenance
+  - path: reports/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md
+    filename: 12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md
+    size_bytes: 7252
+    modified: '2026-01-04T13:52:55.342659'
+    hash:
+      valid: false
+      stored: b7492e080c6d2d303d6ef37939c1e379f4055eb163255d789ed989b972b34379
+      computed: 9ab65db5e24deba9b59bc871189895203ada68bd97227d6884dad50ace749659
+      match: false
+    frontmatter:
+      title: Terminal Amputation Cortex
+      section: report
+      author: System
+      priority: Medium
+      status: Complete
+      created: 2025-12-29 05:36
+      tags:
+      - terminal
+      - security
+      - cortex
+  research:
+  - path: research/12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md
+    filename: 12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md
+    size_bytes: 8432
+    modified: '2026-01-04T13:52:55.459363'
+    hash:
+      valid: false
+      stored: 4b1efdee9a09412b28ffd48ae644796a6df6d51131059272a76468d8e9aa600f
+      computed: d25dc90ac35eca590565aa010864357d2213f7120390ac8085f68856477e8301
+      match: false
+    frontmatter:
+      title: System1 System2 Dual DB
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-23 12:00
+      tags:
+      - system1
+      - system2
+      - database
+      - architecture
+  - path: research/12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md
+    filename: 12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md
+    size_bytes: 5042
+    modified: '2026-01-04T13:52:55.564078'
+    hash:
+      valid: false
+      stored: fa0757b3712951d898c22590a1bc08e7b8e7db100ae90a3f0c68f6c34fed7ede
+      computed: 786c69aeb8fbecc918bacf9fb97a35229320b79d5cca2a8a0c124b47853ab200
+      match: false
+    frontmatter:
+      title: AGS Claude Sonnet 4.5 Suggestions
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md
+    filename: 12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md
+    size_bytes: 8896
+    modified: '2026-01-04T13:52:55.668476'
+    hash:
+      valid: false
+      stored: c1bf9b77b59c4bb51906019952c0df375690ec9e2c414b4ce4a99a6d704336f5
+      computed: e89b8147d441b26e81341d1be8a5030fe08d42d4afb07ca02e29d8570d7eef0b
+      match: false
+    frontmatter:
+      title: CATALYTIC_STACK_COMPRESSED_MERGED_GPT_5.2
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md
+    filename: 12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md
+    size_bytes: 2369
+    modified: '2026-01-04T13:52:55.769536'
+    hash:
+      valid: false
+      stored: 5cd8cd37a89a82ad38a3f015bdf8ab15191d37c48fc24bba08baf70ae2a4df5c
+      computed: 51b4962f084638cf794bdd3cf7e9d79dfa71ba2c658c6495b0004a149a44665e
+      match: false
+    frontmatter:
+      title: Functional Sentience
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_GPT_52_LEXIC_OS.md
+    filename: 12-26-2025-06-39_GPT_52_LEXIC_OS.md
+    size_bytes: 14018
+    modified: '2026-01-04T13:52:55.864105'
+    hash:
+      valid: false
+      stored: 640af4f59e5e6a05e925ac88b4fcbe9fbc89a114ca337d097c92e2f3bb8d0cb5
+      computed: 6d371c41740f2539f7fb7a49b9b9c9e36670e21819eacf0d2f1b48ed81d5933d
+      match: false
+    frontmatter:
+      title: GPT 5.2 Lexic OS
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md
+    filename: 12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md
+    size_bytes: 6293
+    modified: '2026-01-04T13:52:55.960260'
+    hash:
+      valid: false
+      stored: 2b3c3ea0033a4caa11b39e9c7251b6eb543ebc3800fa3c747d64c9725883ee8f
+      computed: faaf957a068dd9891b3bb52d7d33271523022d4407a41262d5fc49163fa4d696
+      match: false
+    frontmatter:
+      title: ♥ ♥ GPT 5.2 Thinking Chat Merge_1_2
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md
+    filename: 12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md
+    size_bytes: 8299
+    modified: '2026-01-04T13:52:56.065872'
+    hash:
+      valid: false
+      stored: 5c293c9043c90c197ecf8a6e9e125868d606fac0511811bef0d5fa0794f4a4bb
+      computed: 0203dff094de88ec4905b5547a64f5b4e63e87857dcada7d0b479adbff4b8fc1
+      match: false
+    frontmatter:
+      title: ♥ ♥ GPT 5.2 Thinking Deep Research Merge_1_2
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md
+    filename: 12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md
+    size_bytes: 9050
+    modified: '2026-01-04T13:52:56.136400'
+    hash:
+      valid: false
+      stored: 618fbaae9b02f9868d847f205e21692b6c963723eecc55a9ee0960f8f4f561de
+      computed: bdf6bcbb06b8a479345aac6ba132191091407b9c946a788ad00c0ca87a7fd425
+      match: false
+    frontmatter:
+      title: ♥ ♥ GPT 5.2 Thinking Master Merged Edits v2 (Checklist + Why)
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_SONNET_45_LEXIC_OS.md
+    filename: 12-26-2025-06-39_SONNET_45_LEXIC_OS.md
+    size_bytes: 50980
+    modified: '2026-01-04T13:52:56.202332'
+    hash:
+      valid: false
+      stored: e67ec821129927d9a72bcd4e512fb170da132eff90357c8deacff55616b0116a
+      computed: 37c86822006d6fb37e21dac73ad030b23336067205a56383aa236a8ede835069
+      match: false
+    frontmatter:
+      title: Sonnet 4.5 Lexic OS
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md
+    filename: 12-26-2025-06-39_SYMBOLIC_COMPRESSION.md
+    size_bytes: 1901
+    modified: '2026-01-04T13:52:56.324953'
+    hash:
+      valid: false
+      stored: f21ebbf0ea65865a3946518f21e21a023c112bd08ad6b3e00838840f8c601a68
+      computed: d16f4fc3c35064431d34d0a5ca5873f071668abbeb2bd8d0c5091ffb7cd7fefb
+      match: false
+    frontmatter:
+      title: ♥ Symbolic Compression
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md
+    filename: 12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md
+    size_bytes: 12606
+    modified: '2026-01-04T13:52:56.265149'
+    hash:
+      valid: false
+      stored: 7d99227c2fcb9c2ffd4b0291f1f7822c758a9b10820ae8c51526a34acac503fb
+      computed: 3e1eac95c66ac1b8c6f4058aa79eb9257ecbbfaa09473570fddf023b294ef0cd
+      match: false
+    frontmatter:
+      title: ♥ Symbolic Compression Brief_1
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-26 06:39
+      tags:
+      - research
+      - legacy
+  - path: research/12-28-2025-12-00_GPT_ROADMAP_VARIANT.md
+    filename: 12-28-2025-12-00_GPT_ROADMAP_VARIANT.md
+    size_bytes: 3651
+    modified: '2026-01-04T13:52:56.384471'
+    hash:
+      valid: false
+      stored: 6663947ef3e12777ecca153a7304b02951e071693f96362cb0393dc69b7661b5
+      computed: d0481e117b13497db6766b5918bf3ef774eb3b2fb443bf79e8d2901db2817ea9
+      match: false
+    frontmatter:
+      title: GPT Roadmap Variant
+      section: research
+      author: Raúl R Romero
+      priority: Low
+      status: Archived
+      created: 2025-12-28 12:00
+      tags:
+      - roadmap
+      - gpt
+      - archive
+  - path: research/12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md
+    filename: 12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md
+    size_bytes: 18526
+    modified: '2026-01-04T13:52:56.442956'
+    hash:
+      valid: false
+      stored: ab5e909f4c2e7338453e4885bbad13e724ef44ce987eab8450298ec0876c9cd2
+      computed: 2acf753fbc98d7ced39387112152bf9c396294d36bb40fdad267eccf280db61d
+      match: false
+    frontmatter:
+      title: Original 8 Week Roadmap
+      section: research
+      author: Raúl R Romero
+      priority: Low
+      status: Archived
+      created: 2025-12-28 12:00
+      tags:
+      - roadmap
+      - archive
+      - legacy
+  - path: research/12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md
+    filename: 12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md
+    size_bytes: 10817
+    modified: '2026-01-04T13:52:56.502720'
+    hash:
+      valid: false
+      stored: b3fe5ef620366bc9c68db9d98e3b54b86cdf66dcb179fca9e7d0f29264ad71f4
+      computed: 8cc7e51ea89a63704b53cabb137b8e4b803b4ee7c5ddbcf07708a76f2da4e093
+      match: false
+    frontmatter:
+      title: Original Triple Write Research
+      section: research
+      author: Raúl R Romero
+      priority: Low
+      status: Archived
+      created: 2025-12-28 12:00
+      tags:
+      - triple_write
+      - research
+      - archive
+  - path: research/12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md
+    filename: 12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md
+    size_bytes: 8752
+    modified: '2026-01-04T13:52:56.566648'
+    hash:
+      valid: false
+      stored: ab0a00e097aa527f8aa0058c9bc8def96d57ef4242d09557e5adb02fa3819ef8
+      computed: 0614475dc3089b795b8671cda46c5848e5259b7c82571e2df9d6f460c2cc7ea5
+      match: false
+    frontmatter:
+      title: Phase 1 Triple Write Implementation
+      section: research
+      author: Raúl R Romero
+      priority: Low
+      status: Archived
+      created: 2025-12-28 12:00
+      tags:
+      - triple_write
+      - implementation
+      - archive
+  - path: research/12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md
+    filename: 12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md
+    size_bytes: 10828
+    modified: '2026-01-04T13:52:56.633760'
+    hash:
+      valid: false
+      stored: 07b54791afdaf128944fbd6ca2b15b555272888c86129775777db64a92d4cfe3
+      computed: 3512068cbd7de02080f05ded44d2e61b150c99ef62c110b081bf72341ede4400
+      match: false
+    frontmatter:
+      title: Catalytic Chat Research
+      section: research
+      author: Raúl R Romero
+      priority: Medium
+      status: Complete
+      created: 2025-12-28 23:12
+      tags:
+      - catalytic_chat
+      - research
+      - architecture
+  - path: research/12-28-2025-23-52_SWARM_ARCHITECTURE.md
+    filename: 12-28-2025-23-52_SWARM_ARCHITECTURE.md
+    size_bytes: 11116
+    modified: '2026-01-04T13:52:56.691903'
+    hash:
+      valid: false
+      stored: 1db04d8c95c97ad40274ae40d88450ccca1d729df699f9f65b3cfe2b2bfdc8bf
+      computed: 65d54a8e969c8aa24e470437c6c6ca0837fbfbc010cf88da429d6ddb3aff9967
+      match: false
+    frontmatter:
+      title: SWARM_ARCHITECTURE
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-28 23:52
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md
+    filename: 12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md
+    size_bytes: 8076
+    modified: '2026-01-04T13:52:56.748511'
+    hash:
+      valid: false
+      stored: d68578f118821b765364f96df8ee0657711744f829a00e8516729c70eccf0efb
+      computed: dcbdad04b2a62057802d6f90026d12d8c4cf37ae5e7ed31940fcd97eae01d5f2
+      match: false
+    frontmatter:
+      title: CANON_COMPRESSION_ANALYSIS
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md
+    filename: 12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md
+    size_bytes: 8284
+    modified: '2026-01-04T13:52:56.803044'
+    hash:
+      valid: false
+      stored: 9536c2fb1345119bc59dfbe53adb4d4a4ea6b887b61f02efffb607d065fe3cf3
+      computed: caff27b0b23117ffe85b2d0275610a6812d4d682ec92da3ff3afa92d54a4d188
+      match: false
+    frontmatter:
+      title: CATALYTIC_INTEGRITY_STACK_REPORT
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_F3_STRATEGY.md
+    filename: 12-29-2025-07-01_F3_STRATEGY.md
+    size_bytes: 2496
+    modified: '2026-01-04T13:52:56.861322'
+    hash:
+      valid: false
+      stored: cdd482f9a724b4d934846a4d33bfc4448843c4ff72e117b15f32943720d7856f
+      computed: f5175c5f04b514db0a947939d3a3d1d7df25723043e6e52cbc381d3d25a7c502
+      match: false
+    frontmatter:
+      title: F3_STRATEGY
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md
+    filename: 12-29-2025-07-01_SEMIOTIC_COMPRESSION.md
+    size_bytes: 6320
+    modified: '2026-01-04T13:52:56.922219'
+    hash:
+      valid: false
+      stored: 07346cf1f6f9ea82f4ed2a0b6cc775eec23f1a1bac432f53e583c806c670199b
+      computed: 709d53f5e95e387d6536270975126675d523b25556a206c4c497de1e6af5f5c3
+      match: false
+    frontmatter:
+      title: SEMIOTIC_COMPRESSION
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md
+    filename: 12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md
+    size_bytes: 7457
+    modified: '2026-01-04T13:52:56.982902'
+    hash:
+      valid: false
+      stored: 6354d774c99a9a57a3f842a5789033f1937b81c471ba21e0167af1bc6421aea8
+      computed: 9575c455d27d74aa5bda82d4644cfe991713674e284526940986152eb91f615e
+      match: false
+    frontmatter:
+      title: SKILL and TOOLS BUG_REPORT
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  - path: research/12-29-2025-07-01_SWARM_BUG_REPORT.md
+    filename: 12-29-2025-07-01_SWARM_BUG_REPORT.md
+    size_bytes: 9429
+    modified: '2026-01-04T13:52:57.040468'
+    hash:
+      valid: false
+      stored: ec59aecddd25a564d3bdfa25c1455b45fa5846e172b047d5e50797ddf8a3bac6
+      computed: 8d5f25f220a378c2fc6fdcaad78d3c3efea5c23c9f0b1e7cd3dbcd1d60610c16
+      match: false
+    frontmatter:
+      title: SWARM_BUG_REPORT
+      section: research
+      author: System
+      priority: Medium
+      status: Active
+      created: 2025-12-29 07:01
+      tags:
+      - research
+      - legacy
+  roadmaps:
+  - path: roadmaps/12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md
+    filename: 12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md
+    size_bytes: 6578
+    modified: '2026-01-04T13:52:57.100965'
+    hash:
+      valid: false
+      stored: de3c981833ad4c9b139072e68de5b62f9463e34d6cb47ad2ce8601e0771d4700
+      computed: 1e85fff5548b8a31de3758d7efb70601fc3f3acc942c6528f4dfaa9c6423503c
+      match: false
+    frontmatter:
+      title: Cassette Network Roadmap Final Checklist
+      section: roadmap
+      author: System
+      priority: High
+      status: Active
+      created: 2025-12-28 12:00
+      tags:
+      - cassette
+      - network
+      - roadmap
+  - path: roadmaps/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md
+    filename: 12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md
+    size_bytes: 29853
+    modified: '2026-01-04T13:52:57.159527'
+    hash:
+      valid: false
+      stored: d926e0c4ad913bf15927409c85a4694d8c3c2409858ffc3a51fb4c15ecbb6892
+      computed: 4ed3d5a3ef2481ac38fa42115ef3d584158f209b05af1f515472a881d66851d8
+      match: false
+    frontmatter:
+      title: Roadmap Database Cassette Network
+      section: roadmap
+      author: System
+      priority: High
+      status: Active
+      created: 2025-12-28 12:00
+      tags:
+      - database
+      - cassette
+      - roadmap
+  - path: roadmaps/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md
+    filename: 12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md
+    size_bytes: 15657
+    modified: '2026-01-04T13:52:57.215751'
+    hash:
+      valid: false
+      stored: 5d3fb4a418d586bfad9d6b36e30c2fe2e25fac37d0ffb41be98630be057e91b6
+      computed: b953e2c63e7938f075b88edd2c55eb4430961d805a280a299cb686311ca74612
+      match: false
+    frontmatter:
+      title: Roadmap Semantic Core
+      section: roadmap
+      author: System
+      priority: High
+      status: Active
+      created: 2025-12-28 12:00
+      tags:
+      - semantic_core
+      - roadmap
+  - path: roadmaps/12-29-2025-03-47_CORTEX_ROADMAP.md
+    filename: 12-29-2025-03-47_CORTEX_ROADMAP.md
+    size_bytes: 5299
+    modified: '2026-01-04T13:52:57.273882'
+    hash:
+      valid: false
+      stored: 426cb168184c332bff853093fe8af33dbf3bcb25d63dc35f3d88165d31b80b07
+      computed: 61a0d9185954e126dbb3e90006f12cf92725dcc4cfc8702b6667d94c80cbceb2
+      match: false
+    frontmatter:
+      title: Cortex Roadmap
+      section: roadmap
+      author: System
+      priority: High
+      status: Active
+      created: 2025-12-29 03:47
+      tags:
+      - cortex
+      - roadmap
+      - planning

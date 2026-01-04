@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: 1bbbb516afb2247fe4acc50a46fc6289eea6bfd8ead909e959044fcc2541edf4 -->
+<!-- CONTENT_HASH: c1bf9b77b59c4bb51906019952c0df375690ec9e2c414b4ce4a99a6d704336f5 -->
 
 # Catalytic Computing Stack (Compressed + Merged)
 

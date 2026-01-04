@@ -9,8 +9,7 @@ status: "Active"
 summary: "Detailed roadmap for CORTEX semantic core and capabilities"
 tags: [cortex, roadmap, planning]
 ---
-
-<!-- CONTENT_HASH: 57f6602b613abcaaef9ad53f3dcbaa28c45571f9b737b9abebb66aca0960d76c -->
+<!-- CONTENT_HASH: 426cb168184c332bff853093fe8af33dbf3bcb25d63dc35f3d88165d31b80b07 -->
 
 # ROADMAP: Semantic Core Phase 2–3
 

@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: ee830f0cf7cccb22d26a00c6520d7a4ab79c47f6380748740cb246628b6ec631 -->
+<!-- CONTENT_HASH: 2b3c3ea0033a4caa11b39e9c7251b6eb543ebc3800fa3c747d64c9725883ee8f -->
 
 # AI Chats Master Merge
 

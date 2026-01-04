@@ -31,12 +31,12 @@ notes:
 
 # Phase 1: Integrity Gates & Repo Safety (highest leverage)
 ## 1.1 Hardened Inbox Governance (S.2)
-- [ ] 1.1.1 Create `SKILLS/inbox-report-writer` to auto-hash and format reports (S.2.1)
-- [ ] 1.1.2 Add strict pre-commit protocol: reject commits touching `INBOX/*.md` without valid header hash (S.2.2)
-- [ ] 1.1.3 Add runtime interceptor: block unhashed writes to `INBOX/` at tool level (S.2.3)
+- [x] 1.1.1 Create `SKILLS/inbox-report-writer` to auto-hash and format reports (S.2.1)
+- [x] 1.1.2 Add strict pre-commit protocol: reject commits touching `INBOX/*.md` without valid header hash (S.2.2)
+- [x] 1.1.3 Add runtime interceptor: block unhashed writes to `INBOX/` at tool level (S.2.3)
 - **Exit Criteria**
-  - [ ] Attempts to write unhashed INBOX artifacts fail-closed with clear error
-  - [ ] Pre-commit rejects invalid INBOX changes deterministically
+  - [x] Attempts to write unhashed INBOX artifacts fail-closed with clear error
+  - [x] Pre-commit rejects invalid INBOX changes deterministically
 
 ## 1.2 Bucket Enforcement (X3)
 - [ ] 1.2.1 Add preflight check: every artifact must belong to exactly one bucket (X3)
@@ -180,9 +180,23 @@ notes:
 - [ ] 6.4.2 Run benchmark tasks (baseline vs compressed context) (M.4.2)
 - [ ] 6.4.3 Measure success rates (code compiles, tests pass, bugs found) (M.4.3)
 - [ ] 6.4.4 Validate compressed success rate ≥ baseline (M.4.4)
+- [ ] 6.4.5 Define **token measurement** for all claims (M.4.5)
+  - Must specify tokenizer + encoding (e.g. `tiktoken` + `o200k_base` or `cl100k_base`)
+  - Must record tokenizer version + encoding name in receipts
+- [ ] 6.4.6 Define **baseline corpus** precisely (M.4.6)
+  - Must be an explicit file allowlist (paths) + integrity anchors (hashes or git rev)
+  - Must define aggregation rule (sum per-file counts vs tokenize concatenated corpus)
+- [ ] 6.4.7 Define **compressed context** precisely (M.4.7)
+  - Must specify retrieval method (semantic / FTS fallback) and parameters (`top_k`, thresholds)
+  - Must record retrieved identifiers (hashes) and provide deterministic tie-breaking
+- [ ] 6.4.8 Emit **auditable proof bundle** for math correctness (M.4.8)
+  - A machine-readable JSON data file containing raw counts + formulas + inputs/outputs
+  - A human-readable report summarizing baselines, per-benchmark results, and reproduction commands
 - **Exit Criteria**
   - [ ] Benchmarks reproducible from fixtures
   - [ ] Compression claimed only when nutritious (success parity)
+  - [ ] Token counts are reproducible via the declared tokenizer/encoding (no proxy counts)
+  - [ ] Proof bundle contains raw counts, formulas, and retrieved hashes (independent audit possible)
 
 # Phase 7: Vector ELO (Systemic Intuition) (P1)
 ## 7.1 Research Decisions (E.0)

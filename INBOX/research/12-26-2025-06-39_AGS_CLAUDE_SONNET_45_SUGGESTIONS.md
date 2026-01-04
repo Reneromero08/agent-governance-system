@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: ba28f9dd0c0eab572c7a1c5d87604e6f2bd09c39dc305724134cf70c26b3b7dd -->
+<!-- CONTENT_HASH: fa0757b3712951d898c22590a1bc08e7b8e7db100ae90a3f0c68f6c34fed7ede -->
 
 Claude:
 

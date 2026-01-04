@@ -9,8 +9,7 @@ status: "Complete"
 summary: "Design for agent bootstrap testing (Restored)"
 tags: [bootstrap, test, design]
 ---
-
-<!-- CONTENT_HASH: fecbf2ca5486f59b90bd0cdf6008708d4e76f3c150c20b10678d08a14f31e025 -->
+<!-- CONTENT_HASH: 3c8bf64d2c0c8b1605757ca35635d1e97ba018869e52cedfd4d3ede74ba11cfb -->
 
 # Simulated Agent Bootstrap Test Design
 

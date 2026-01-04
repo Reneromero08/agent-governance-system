@@ -9,8 +9,7 @@ status: "Active"
 summary: "Legacy research document migrated to canon format"
 tags: ["research", "legacy"]
 ---
-
-<!-- CONTENT_HASH: 9f5ba1a0ddf74aa0529c18edd718532f68eb44bdb134aabb40aa32460384db64 -->
+<!-- CONTENT_HASH: 07346cf1f6f9ea82f4ed2a0b6cc775eec23f1a1bac432f53e583c806c670199b -->
 
 # Semiotic Compression Layer (SCL)
 

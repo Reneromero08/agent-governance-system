@@ -9,8 +9,7 @@ status: "Archived"
 summary: "Original 8-week roadmap plan (Archived)"
 tags: [roadmap, archive, legacy]
 ---
-
-<!-- CONTENT_HASH: d631bf32ce6bf9b5d6f512604e90bbf015affaa03d5691ee59180b08312f120f -->
+<!-- CONTENT_HASH: ab5e909f4c2e7338453e4885bbad13e724ef44ce987eab8450298ec0876c9cd2 -->
 
 # Catalytic Chat Implementation Roadmap
 
