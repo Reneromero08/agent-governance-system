@@ -47,6 +47,11 @@ def main():
         help="Generate LITE/ output (renamed from SPLIT_LITE).",
     )
     parser.add_argument(
+        "--emit-pruned",
+        action="store_true",
+        help="Generate PRUNED/ output (reduced planning context for LLM navigation).",
+    )
+    parser.add_argument(
         "--out-dir",
         default="",
         help="Output directory.",
