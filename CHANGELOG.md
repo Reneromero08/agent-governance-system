@@ -40,6 +40,11 @@ All notable changes to Agent Governance System will be documented in this file.
     - Deletion guidelines (safe vs. never delete with explicit examples)
     - Recovery procedures (corrupted objects, malformed roots, failed verification, unreachable outputs)
     - 125 lines of operational guidance for CAS/Run subsystem failures
+  - **1.4.2 Recovery Appendix (Extended)**: Added Recovery Appendices to remaining major invariant docs:
+    - `Z2_5_GC_INVARIANTS.md` (GC Safety)
+    - `Z2_6_ROOT_AUDIT_INVARIANTS.md` (Root Audit)
+    - `Z2_6_PACKER_INVARIANTS_DRAFT.md` (Packer Integration - status updated to CANONICAL)
+  - **Phase 2.4 Prompt**: Created `NAVIGATION/PROMPTS/PHASE_02/2.4_crypto-safe-packs.md` to unblock work.
   - **1.1.3 Runtime INBOX Guard (S.2.3)**: Implemented active runtime enforcement of INBOX hash integrity
     - Inlined validation logic directly into `CAPABILITY/TOOLS/ags.py` (avoids import issues with hyphenated directory)
     - Added `_validate_inbox_write_inline()` function checking all writes to `INBOX/*.md` files

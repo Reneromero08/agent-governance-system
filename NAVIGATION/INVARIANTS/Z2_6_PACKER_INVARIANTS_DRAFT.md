@@ -1,8 +1,8 @@
 <!-- CONTENT_HASH: f23a03a6df505d33546df479bd7a277b6e7d93a6a1fc74b6417309bd01adcc40 -->
 
-# Z.2.6 LLM Packer Integration Invariants (Draft)
+# Z.2.6 LLM Packer Integration Invariants
 
-Status: DRAFT
+Status: CANONICAL (Z.2.6)
 Scope: How LLM Packer interacts with CAS, ARTIFACTS, RUNS, and GC (Z.2.5). This document defines what must be rooted, when run records are emitted, and what must never be collected.
 
 ## Goals
@@ -99,3 +99,46 @@ GC must not run concurrently with an active pack run unless strict locking is im
 - A pack run produces and registers the required roots.
 - GC dry-run never proposes deletion of any pack outputs referenced by those roots.
 - A pack run is reproducible from TASK_SPEC and OUTPUT_HASHES alone (plus code).
+
+---
+
+## Recovery: Packer Invariant Violations
+
+### Where receipts live
+
+Packer receipts and audit trails are stored in:
+- **MEMORY/LLM_PACKER/_packs/** - Pack outputs (manifests, archives)
+- **CAPABILITY/RUNS/RUN_ROOTS.json** - Root registration for pack outputs
+- **LAW/CONTRACTS/_runs/audit_logs/** - Audit logs from pre/post pack checks
+
+### How to re-run verification
+
+To verify pack integrity:
+
+```bash
+# Verify a specific pack's manifest and blobs
+python -m MEMORY.LLM_PACKER.Engine.packer.consumer verify --manifest-ref sha256:PACK_MANIFEST_HASH
+
+# Verify GC safety of packer roots
+python CAPABILITY/AUDIT/root_audit.py --mode B --output-hashes-record RUN_OUTPUT_HASHES_HASH
+```
+
+### What to delete vs never delete
+
+**Safe to delete:**
+- **Intermediate artifacts**: In `_runs/_tmp/` or local `_packs/` if not shared.
+- **Unsealed/Uncompressed copies**: If the canonical sealed version exists and is rooted.
+
+**Never delete (protected by invariants):**
+- **Blobs referenced by active packs**: Deleting these breaks the pack.
+- **Pack Manifests**: These are the entry points to the pack graph.
+- **RUN_ROOTS.json entries for active packs**: Removing these allows GC to eat the pack's blobs.
+
+**Recovery procedures:**
+- **Pack Verification Failed**:
+  - Re-run the pack generation with the same `TASK_SPEC` to regenerate missing blobs (determinism guarantees identical hashes).
+- **GC Ate My Pack**:
+  - If a root was missing and GC ran, the blobs are gone.
+  - Re-generate the pack from source.
+- **Root Conflict**:
+  - If multiple packs claim conflicting roots (unlikely with CAS), trust the union of both.
