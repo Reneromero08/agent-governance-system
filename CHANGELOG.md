@@ -4,6 +4,24 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.11] - 2026-01-04
+
+### Changed
+- **License Upgrade (CCL v1.4)** — Complete git history rewrite replacing MIT License with Catalytic Commons License v1.4 across all commits.
+  - Added **Attestation-Gated Protected Artifacts** mechanism (Section 4.4) for cryptographic enforcement.
+  - Added **Digital Signature** definition (Section 1) requiring GPG/X.509 signatures.
+  - Added **"Acting on behalf of"** definition (Section 1) with knowledge/reckless disregard standards.
+  - Added **Safe Harbor** clause (Section 2.1) for accidental violations by non-prohibited entities.
+  - Added **Circumvention Prohibition** (Section 3.6) covering access control bypass.
+  - Added **False Attestation Prohibition** (Section 3.7) making false attestations a material breach.
+  - Added **California Governing Law** clause (Section 10) with Santa Clara County venue.
+  - Retroactive license application: CCL v1.4 now appears in all historical commits.
+
+### Fixed
+- **cortex-build fixtures** — Updated expected outputs to match current cortex index format.
+- **llm-packer-smoke fixtures** — Updated expected outputs to match current pack proof integration.
+- **prompt-runner fixtures** — Updated expected outputs to match current prompt validation logic.
+
 ## [3.3.10] - 2026-01-04
 
 ### Added

@@ -94,6 +94,8 @@ def main(input_path: Path, output_path: Path) -> int:
         "--out-dir",
         out_dir.relative_to(PROJECT_ROOT).as_posix(),
     ])
+    # Fixtures should stay fast/deterministic; proof regeneration is a repo-wide gate that can be run separately.
+    args.append("--skip-proofs")
     if stamp:
         args.extend(["--stamp", stamp])
     if zip_enabled:
@@ -128,8 +130,9 @@ def main(input_path: Path, output_path: Path) -> int:
                 "SPLIT/AGS-01_LAW.md",
                 "SPLIT/AGS-02_CAPABILITY.md",
                 "SPLIT/AGS-03_NAVIGATION.md",
-                "SPLIT/AGS-06_MEMORY.md",
-                "SPLIT/AGS-07_ROOT_FILES.md",
+                "SPLIT/AGS-04_PROOFS.md",
+                "SPLIT/AGS-07_MEMORY.md",
+                "SPLIT/AGS-08_ROOT_FILES.md",
             ]
         )
     elif scope == "lab":
@@ -147,6 +150,7 @@ def main(input_path: Path, output_path: Path) -> int:
     if split_lite or profile == "lite":
         if scope == "ags":
             required.append("LITE/AGS-00_INDEX.md")
+            required.append("LITE/PROOFS.json")
         else:
             required.append("LITE/LAB-00_INDEX.md")
 

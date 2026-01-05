@@ -7,6 +7,7 @@ import hashlib
 import re
 import sys
 from pathlib import Path
+from typing import Optional, Tuple
 
 
 def compute_content_hash(content: str) -> str:
@@ -32,7 +33,7 @@ def compute_content_hash(content: str) -> str:
     return hashlib.sha256(cleaned_content.encode('utf-8')).hexdigest()
 
 
-def insert_or_update_hash(filepath: Path) -> tuple[bool, str, str]:
+def insert_or_update_hash(filepath: Path) -> Tuple[bool, Optional[str], str]:
     """
     Insert or update the CONTENT_HASH comment in an INBOX file.
     
@@ -52,7 +53,7 @@ def insert_or_update_hash(filepath: Path) -> tuple[bool, str, str]:
     hash_pattern = r'<!--\s*CONTENT_HASH:\s*([a-f0-9]+)\s*-->\n*'
     match = re.search(hash_pattern, content, re.IGNORECASE)
     
-    old_hash = match.group(1) if match else None
+    old_hash: Optional[str] = match.group(1) if match else None
     
     # Remove any existing hash to get clean content
     clean_content = re.sub(hash_pattern, '', content, flags=re.IGNORECASE)
@@ -97,7 +98,7 @@ def insert_or_update_hash(filepath: Path) -> tuple[bool, str, str]:
     return True, old_hash, new_hash
 
 
-def verify_hash(filepath: Path) -> tuple[bool, str | None, str]:
+def verify_hash(filepath: Path) -> Tuple[bool, Optional[str], str]:
     """
     Verify that a file has a valid CONTENT_HASH comment.
     
