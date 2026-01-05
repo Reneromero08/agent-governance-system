@@ -4,6 +4,47 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.24] - 2026-01-05
+
+### Completed
+- **Phase 2.4.1A: Write Surface Discovery & Coverage Map (Read-Only)** — Completed comprehensive, deterministic discovery of all filesystem write surfaces in the repository.
+  - **Total surfaces discovered**: 169 Python files with write operations
+  - **Production surfaces**: 103 files requiring Phase 1.5 enforcement
+  - **Test files**: 54 files (excluded from enforcement scope)
+  - **Lab/experimental**: 12 files (excluded from enforcement scope)
+  - **Guard status breakdown**:
+    - Fully guarded (WriteFirewall): 4 files (2.4%)
+    - Partially guarded: 8 files (4.7%)
+    - Unguarded: 157 files (92.9%)
+  - **Critical enforcement gaps identified** (prioritized):
+    1. INBOX automation (3 surfaces) — CRITICAL
+    2. Repo digest & proofs (1 surface) — CRITICAL
+    3. LLM Packer (6 surfaces) — CRITICAL
+    4. Pipeline runtime (4 surfaces) — CRITICAL
+    5. MCP server (2 surfaces) — CRITICAL
+    6. Cortex semantic index (2 surfaces) — HIGH
+    7. Skills (15+ surfaces) — HIGH
+  - **Artifacts generated**:
+    - `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_WRITE_SURFACE_MAP.md` (15KB coverage map)
+    - `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_DISCOVERY_RECEIPT.json` (5KB discovery receipt)
+  - **Coverage map sections**:
+    - Executive summary with statistics
+    - Governance layer (WriteFirewall infrastructure)
+    - 9 categories of critical production surfaces
+    - Test & development surfaces (out of scope)
+    - Lab & experimental surfaces (out of scope)
+    - Coverage analysis with enforcement gaps
+    - Ambiguities & unresolved questions (CAS exemption, linter policy, skill standardization)
+    - Specific enforcement hook recommendations for each category
+  - **Discovery method**: Deterministic read-only analysis via Grep, Glob, and code inspection
+  - **Hard invariants verified**:
+    - ✓ Read-only operation (zero writes except artifacts)
+    - ✓ No assumptions (verified every path via code inspection)
+    - ✓ Deterministic output (canonical ordering throughout)
+    - ✓ Explicit uncertainty (ambiguities documented)
+    - ✓ Complete enumeration (all surfaces cataloged)
+  - **Next steps**: Phase 2.4.1B enforcement integration (target: 95%+ guarded)
+
 ## [3.3.23] - 2026-01-05
 
 ### Completed
