@@ -7,6 +7,28 @@ All notable changes to Agent Governance System will be documented in this file.
 ## [3.3.23] - 2026-01-05
 
 ### Completed
+- **INBOX Governance Update — Weekly & Monthly Subfolder Normalization** — Normalized INBOX structure with YYYY-MM/Week-XX subfolders while preserving all governance invariants.
+  - **70 files moved** into temporal subfolders based on embedded filename timestamps
+  - **5 files excluded** (INBOX.md, LEDGER.yaml, DISPATCH_LEDGER.json, LEDGER_ARCHIVE.json, inbox_normalize.py)
+  - **1 conflict resolved** by preserving subfolder structure for duplicate task filenames
+  - **Folder structure created**:
+    - `2025-12/Week-01/` (27 files - late December)
+    - `2025-12/Week-52/` (40 files - mid December)
+    - `2026-01/Week-01/` (3 files - January 2026)
+  - **Governance compliance verified**:
+    - ✅ Determinism: All target paths computed from timestamps
+    - ✅ Reversibility: Restore proof with reverse move instructions
+    - ✅ Integrity: SHA256 hash verification pre/post execution
+    - ✅ Purity: No temp files, no unexpected artifacts
+    - ✅ No data loss: All 75 files accounted for
+  - **Receipts generated**:
+    - `INBOX_DRY_RUN.json` - Classification and move plan
+    - `INBOX_EXECUTION.json` - Execution results
+    - `PRE_DIGEST.json` / `POST_DIGEST.json` - Hash verification
+    - `PURITY_SCAN.json` - Artifact verification
+    - `RESTORE_PROOF.json` - Rollback instructions
+  - **Report**: `INBOX/reports/01-05-2026-20-29_INBOX_NORMALIZATION_REPORT.md`
+
 - **Phase 1: Integrity Gates & Repo Safety (Critical Fixes)** — Fixed broken pre-commit hooks and completed runtime INBOX guard integration.
   - **1.1.2 Pre-commit Path Fix**: Corrected broken path references in `CAPABILITY/SKILLS/governance/canon-governance-check/scripts/pre-commit`
     - Fixed `TOOLS/ags.py` → `CAPABILITY/TOOLS/ags.py`

@@ -1,0 +1,392 @@
+{
+  "operation": "PURITY_SCAN",
+  "version": "1.0.0",
+  "version_hash": "53658e57694ff5dc",
+  "timestamp": "2026-01-05T20:29:16.399752Z",
+  "total_files": 76,
+  "tmp_residue": [],
+  "unexpected_files": [],
+  "status": "PASS",
+  "files_scanned": [
+    {
+      "path": "2025-12/Week-01/12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
+      "name": "12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
+      "size": 2298
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-03-47_CORTEX_ROADMAP.md",
+      "name": "12-29-2025-03-47_CORTEX_ROADMAP.md",
+      "size": 5299
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
+      "name": "12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
+      "size": 2562
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
+      "name": "12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
+      "size": 1017
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
+      "size": 10677
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+      "size": 29608
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
+      "size": 10565
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+      "size": 9934
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
+      "size": 33212
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
+      "size": 5919
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
+      "name": "12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
+      "size": 12799
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
+      "name": "12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
+      "size": 24697
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
+      "name": "12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
+      "size": 8238
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+      "name": "12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+      "size": 7252
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
+      "name": "12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
+      "size": 8076
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
+      "name": "12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
+      "size": 8284
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_F3_STRATEGY.md",
+      "name": "12-29-2025-07-01_F3_STRATEGY.md",
+      "size": 2496
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
+      "name": "12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
+      "size": 6320
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
+      "name": "12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
+      "size": 7457
+    },
+    {
+      "path": "2025-12/Week-01/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+      "name": "12-29-2025-07-01_SWARM_BUG_REPORT.md",
+      "size": 9429
+    },
+    {
+      "path": "2025-12/Week-01/PENDING_TASKS/TASK-2025-12-30-002.json",
+      "name": "TASK-2025-12-30-002.json",
+      "size": 703
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-001.json",
+      "name": "TASK-2025-12-30-001.json",
+      "size": 911
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-002.json",
+      "name": "TASK-2025-12-30-002.json",
+      "size": 981
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-003.json",
+      "name": "TASK-2025-12-30-003.json",
+      "size": 484
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-004.json",
+      "name": "TASK-2025-12-30-004.json",
+      "size": 482
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-005.json",
+      "name": "TASK-2025-12-30-005.json",
+      "size": 1383
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-30-006.json",
+      "name": "TASK-2025-12-30-006.json",
+      "size": 1360
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-31-001.json",
+      "name": "TASK-2025-12-31-001.json",
+      "size": 4967
+    },
+    {
+      "path": "2025-12/Week-01/TASK-2025-12-31-002.json",
+      "name": "TASK-2025-12-31-002.json",
+      "size": 1988
+    },
+    {
+      "path": "2025-12/Week-52/12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
+      "name": "12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
+      "size": 8432
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md",
+      "name": "12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md",
+      "size": 5042
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md",
+      "name": "12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md",
+      "size": 8896
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md",
+      "name": "12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md",
+      "size": 2369
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_GPT_52_LEXIC_OS.md",
+      "name": "12-26-2025-06-39_GPT_52_LEXIC_OS.md",
+      "size": 14018
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md",
+      "name": "12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md",
+      "size": 6293
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md",
+      "name": "12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md",
+      "size": 8299
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+      "name": "12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+      "size": 9050
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+      "name": "12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+      "size": 50980
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
+      "name": "12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
+      "size": 1901
+    },
+    {
+      "path": "2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
+      "name": "12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
+      "size": 12606
+    },
+    {
+      "path": "2025-12/Week-52/12-27-2025-22-18_TEST_FAILURES_REPORT.md",
+      "name": "12-27-2025-22-18_TEST_FAILURES_REPORT.md",
+      "size": 2860
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md",
+      "name": "12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md",
+      "size": 10112
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md",
+      "name": "12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md",
+      "size": 11157
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_AGENT_SAFETY_REPORT.md",
+      "name": "12-28-2025-12-00_AGENT_SAFETY_REPORT.md",
+      "size": 9111
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md",
+      "name": "12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md",
+      "size": 15061
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md",
+      "name": "12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md",
+      "size": 6578
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md",
+      "name": "12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md",
+      "size": 7074
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_DISPATCHER_TEST_REPORT.md",
+      "name": "12-28-2025-12-00_DISPATCHER_TEST_REPORT.md",
+      "size": 6535
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md",
+      "name": "12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md",
+      "size": 2352
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_GPT_ROADMAP_VARIANT.md",
+      "name": "12-28-2025-12-00_GPT_ROADMAP_VARIANT.md",
+      "size": 3651
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_INTEGRATION_REPORT.md",
+      "name": "12-28-2025-12-00_INTEGRATION_REPORT.md",
+      "size": 8846
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md",
+      "name": "12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md",
+      "size": 4440
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md",
+      "name": "12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md",
+      "size": 18526
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md",
+      "name": "12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md",
+      "size": 10817
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md",
+      "name": "12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md",
+      "size": 8752
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md",
+      "name": "12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md",
+      "size": 2023
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+      "name": "12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+      "size": 29853
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+      "name": "12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+      "size": 15657
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-12-00_SCRATCH_WORKFLOW.md",
+      "name": "12-28-2025-12-00_SCRATCH_WORKFLOW.md",
+      "size": 1988
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md",
+      "name": "12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md",
+      "size": 9504
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md",
+      "name": "12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md",
+      "size": 10828
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+      "name": "12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+      "size": 41755
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
+      "name": "12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
+      "size": 12548
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md",
+      "name": "12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md",
+      "size": 9492
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md",
+      "name": "12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md",
+      "size": 10387
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-12_TEST_RESULTS_2025_12_28.md",
+      "name": "12-28-2025-23-12_TEST_RESULTS_2025_12_28.md",
+      "size": 7736
+    },
+    {
+      "path": "2025-12/Week-52/12-28-2025-23-52_SWARM_ARCHITECTURE.md",
+      "name": "12-28-2025-23-52_SWARM_ARCHITECTURE.md",
+      "size": 11116
+    },
+    {
+      "path": "2026-01/Week-01/01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
+      "name": "01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
+      "size": 3129
+    },
+    {
+      "path": "2026-01/Week-01/01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md",
+      "name": "01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md",
+      "size": 2902
+    },
+    {
+      "path": "2026-01/Week-01/01-02-2026-18-48_LANE_Z_RISKS_REPORT.md",
+      "name": "01-02-2026-18-48_LANE_Z_RISKS_REPORT.md",
+      "size": 3687
+    },
+    {
+      "path": "agents/Local Models/DISPATCH_LEDGER.json",
+      "name": "DISPATCH_LEDGER.json",
+      "size": 272
+    },
+    {
+      "path": "agents/Local Models/LEDGER_ARCHIVE.json",
+      "name": "LEDGER_ARCHIVE.json",
+      "size": 59505
+    },
+    {
+      "path": "generate_verification_receipts.py",
+      "name": "generate_verification_receipts.py",
+      "size": 4902
+    },
+    {
+      "path": "INBOX.md",
+      "name": "INBOX.md",
+      "size": 22709
+    },
+    {
+      "path": "inbox_normalize.py",
+      "name": "inbox_normalize.py",
+      "size": 15109
+    },
+    {
+      "path": "LEDGER.yaml",
+      "name": "LEDGER.yaml",
+      "size": 40387
+    }
+  ]
+}

@@ -1,0 +1,306 @@
+{
+  "timestamp": "2026-01-05T20:27:28.190882Z",
+  "files": {
+    "INBOX.md": {
+      "hash": "64705e824f36be78744e1bfe7ae81419506971142ed69977eb4157a0d8064c85",
+      "size": 22709
+    },
+    "LEDGER.yaml": {
+      "hash": "88ebf117c85eb26907dd6dbc819d5517b9069fb592e13fb0b81874be0841044d",
+      "size": 40387
+    },
+    "inbox_normalize.py": {
+      "hash": "b3a9e479bc53cf617efda6a88151ee0107ce629fe614c02109e29de8f3a476d0",
+      "size": 15109
+    },
+    "2025-12\\Week-01\\12-29-2025-02-45_CI_STABILIZATION_REPORT.md": {
+      "hash": "81dc17b14de8470efaeb461d4dc90cd47dd92ec3fd9087bab48ac38218f92f77",
+      "size": 2298
+    },
+    "2025-12\\Week-01\\12-29-2025-03-47_CORTEX_ROADMAP.md": {
+      "hash": "0dd1d2168d5acf863b0b632c761e0341d584b19f04e8139dbb3900b86663f91a",
+      "size": 5299
+    },
+    "2025-12\\Week-01\\12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md": {
+      "hash": "0fa9b228dd8892911901ddc6503a1ea3883ef472c1cccc930bf7ae9f27de7aa7",
+      "size": 2562
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md": {
+      "hash": "57b7cbf25d5972d042a5707cb32251b50a54ebf5d38d27b01c2d8bd48893c504",
+      "size": 1017
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md": {
+      "hash": "25ec686079447b5540221f80697ebda9d5b105372e371586a8cebd9aeb0652d4",
+      "size": 10677
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md": {
+      "hash": "e784dd2b320e1a0800f27010b2b9d43905f855552cf26c0a30b73099ae930551",
+      "size": 29608
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_INDEX.md": {
+      "hash": "f2734fa61d26bcced72bba9bc455d85e56c8892dc2d947bfe5086e708e51b0a3",
+      "size": 10565
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md": {
+      "hash": "fd78b647d4865a5e1c1357673bdc8667b16ca01b5423e4063bc16e01c6602e92",
+      "size": 9934
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md": {
+      "hash": "fbc2fcf9fc5830f76b0c07560075651aa2e4dba04f8707ae9d185b1f3e961f4f",
+      "size": 33212
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md": {
+      "hash": "3d930f318247fafcf477daf2172cd72c2eca9df8080cb157e9925b944e6d633f",
+      "size": 5919
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md": {
+      "hash": "b13290d3ff409a53383178f5ecf60e6060d530cdd0247872e3bcb6a3281cfced",
+      "size": 12799
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SESSION_REPORT_2025_12_28.md": {
+      "hash": "80ec81862e0c0fe0b7ff087227f604f7dfec2bfe1a6ac43aeefe3aab37e747e3",
+      "size": 24697
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_SWARM_REFACTORING_REPORT.md": {
+      "hash": "5aa3c6e5e162c7885de813900e48b8ef3203d9dbf55e7bec041c93bedc71b264",
+      "size": 8238
+    },
+    "2025-12\\Week-01\\12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md": {
+      "hash": "da7a23f7c26c18aa58e928f5e894bf85fa0f4fbb48a179c18fbc6e3460270379",
+      "size": 7252
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md": {
+      "hash": "e337537c60a9b26c9a45c46107939a3be83973c8a295808790c672d69a4a6c3f",
+      "size": 8076
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md": {
+      "hash": "34fe955627615f34098358bdb13015d817bb22156b009d349ead558be6df5bda",
+      "size": 8284
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_F3_STRATEGY.md": {
+      "hash": "8f3f4fef3348bb09fd54f52fe502606be869acd9be9e59a34f4692f1efd4ced2",
+      "size": 2496
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_SEMIOTIC_COMPRESSION.md": {
+      "hash": "4363471925921738edd2386a4a52328d4dcb1a3f0045250baa2dbf19a64f1398",
+      "size": 6320
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md": {
+      "hash": "261c33eecd091ef92efa9226ee2daf9c826affec4c6a400f5ce42943bbde8705",
+      "size": 7457
+    },
+    "2025-12\\Week-01\\12-29-2025-07-01_SWARM_BUG_REPORT.md": {
+      "hash": "787c172b44d3bef8d4f5ddee2e5da83f03541c25056d0229b434777ab444e813",
+      "size": 9429
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-001.json": {
+      "hash": "602d204693c4758e007bbca552aae93da22ac21aed5822c6991677a2a598f15b",
+      "size": 911
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-002.json": {
+      "hash": "1bcc13c2763965a0df9f878000eaf1969c403568c5beeaf04b5226af7447d746",
+      "size": 981
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-003.json": {
+      "hash": "e8f5355a368495507d2810f66ce45b3803ccfa93d57b84c3f83e36b86bdd5923",
+      "size": 484
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-004.json": {
+      "hash": "21efa2df72364504226213aec47aa026714be15559c3a47ca9c603a366be12f1",
+      "size": 482
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-005.json": {
+      "hash": "c33782fda0359fba5bd62857f13396b49f9493fe0374b3fad2d881f5f1a8a033",
+      "size": 1383
+    },
+    "2025-12\\Week-01\\TASK-2025-12-30-006.json": {
+      "hash": "0c5999e61f8bc44047d3e70d374be50ee0959986d364da0db5af4a9c2f4d00e2",
+      "size": 1360
+    },
+    "2025-12\\Week-01\\TASK-2025-12-31-001.json": {
+      "hash": "d9d677c4555bf229d381fa395caeb1d3beb039444e7a5b18218561325c1aa35b",
+      "size": 4967
+    },
+    "2025-12\\Week-01\\TASK-2025-12-31-002.json": {
+      "hash": "dab036f584703f11a3d240616e9e2b4913a1c2f573a7396e99ab63a4c443bc91",
+      "size": 1988
+    },
+    "2025-12\\Week-01\\PENDING_TASKS\\TASK-2025-12-30-002.json": {
+      "hash": "fda477ca5127e7c007ec18f8801c5f0173f65dd3ce3e733b2760cb9c3b25bbaa",
+      "size": 703
+    },
+    "2025-12\\Week-52\\12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md": {
+      "hash": "6a47f348f8c61abd4b17a704d99072b39f217bbf6a979774e95511b2261c2129",
+      "size": 8432
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md": {
+      "hash": "fa10d6ff2caa5e3157ccc1124e9678172d67ad18c951f1daee0188f2b9fc43db",
+      "size": 5042
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md": {
+      "hash": "af2bc45d61be631c49a48ce7103d1eeaf613f34378c3c903219233196c97edf1",
+      "size": 8896
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md": {
+      "hash": "e637810e414d5c9d5c3abdbf5475f95eaee767795d3fd32da967a47f48487f51",
+      "size": 2369
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_GPT_52_LEXIC_OS.md": {
+      "hash": "b7bc1b22c2c17c15f230eb8ed3cc9843c5419c71595f5bde6e62a6aa06d2c68d",
+      "size": 14018
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md": {
+      "hash": "e68ca70bb42d26fb11b270d547876db22aba5f69b45309bb9381a9b83174a2be",
+      "size": 6293
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md": {
+      "hash": "8b2a6d08ffe8c68c987677b78ef75cd4bb2595e95cfb539ea33df23d53ebbedb",
+      "size": 8299
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md": {
+      "hash": "8698537c141aa54bf7fe0814469f7745caa56a6d5e6c2fcb8b1291264f123fd2",
+      "size": 9050
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_SONNET_45_LEXIC_OS.md": {
+      "hash": "d5155d7955fcceff3b5196d410c33acd6af730d087423627fc3ac1288a4b8f6a",
+      "size": 50980
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_SYMBOLIC_COMPRESSION.md": {
+      "hash": "a46337f2dd53b2d7fa522cf742ad90075b4410bd3b40cc545773d8bca1194bb2",
+      "size": 1901
+    },
+    "2025-12\\Week-52\\12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md": {
+      "hash": "54d33a98dd0cd23ffc1c30abc75a25822ce7188d1a5b9d0660e529a97f01d326",
+      "size": 12606
+    },
+    "2025-12\\Week-52\\12-27-2025-22-18_TEST_FAILURES_REPORT.md": {
+      "hash": "ceed556cdc538d4ea6c05ca4ac73a2452e3e8f49dbb0a2e6aaff3426c20d2b47",
+      "size": 2860
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md": {
+      "hash": "f7329d79c434079122f7b8318623da30b6bd649e81b6b9a761ca08e5a7736b20",
+      "size": 15061
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md": {
+      "hash": "69dcec7fccb83d147930fa095458767d3f138a0b5b2647203d886efe8e84a231",
+      "size": 10112
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md": {
+      "hash": "9db83af33d7c0d1a2520f5beb78e0eb81cb4247821c5052e598933743d801301",
+      "size": 11157
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_AGENT_SAFETY_REPORT.md": {
+      "hash": "1fa197545d83eded1cb36976b3109f9d2aabcd551a4703fbe34a3d8fbe088292",
+      "size": 9111
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md": {
+      "hash": "2d4ecd590b531f3146b3729a7a0d258326697ede4263683e85b3f92a9fe73581",
+      "size": 6578
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md": {
+      "hash": "b51b215cc7bf6c6d9a8327b2c46f96625db9101807489b787a6df666533e2884",
+      "size": 7074
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_DISPATCHER_TEST_REPORT.md": {
+      "hash": "4d79602354ff11b457cc64918db2a9957e21970d7bb2558636fb0f3ba7412bee",
+      "size": 6535
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md": {
+      "hash": "d96db56bf85597b70b3cf842faa31b8d32b705003a5f1be10af8c6f6c5cadc57",
+      "size": 2352
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_GPT_ROADMAP_VARIANT.md": {
+      "hash": "fdb2033e27e7e1e46360b40bbb61caf2d826cc7fec31f9bf35547086d556a465",
+      "size": 3651
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_INTEGRATION_REPORT.md": {
+      "hash": "fcd7d3cefd8052a5fa32d810831dca6eec0f3cda4a0280048bd6893c45734838",
+      "size": 8846
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md": {
+      "hash": "d1ac3c95695343bbe920c408a318aa7b25abf54847c8f2ca112a77c5f8a184cf",
+      "size": 4440
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md": {
+      "hash": "ece92defa30d67907b88dbd9d4ec4b63f0923226e96f529e9ee1de4dde4a6fe2",
+      "size": 18526
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md": {
+      "hash": "4559d17714ce564f1e9abaeb49c72642df1388880b4d2f9fbc713a632e388649",
+      "size": 10817
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md": {
+      "hash": "2de6f8857f0e5e061739443f207c2dc7121043a3f48d7922749749215efb6927",
+      "size": 8752
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md": {
+      "hash": "a49231b7e78a51c9816dedfc0a14f3beb0f8fe9d4536fb1543b9706e6149584a",
+      "size": 2023
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md": {
+      "hash": "0551abe7664bac94854b4fb3f4427d88fb81150958cdeec1e5c91cb64bd93ebe",
+      "size": 29853
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md": {
+      "hash": "26703e6b39d6a25db001b1a3cdab0c8458460cf8ea067345b5ff62b620929832",
+      "size": 15657
+    },
+    "2025-12\\Week-52\\12-28-2025-12-00_SCRATCH_WORKFLOW.md": {
+      "hash": "67580cff33e713dcba269c177dece97a040c056c78a92166eec6dc77e46413cc",
+      "size": 1988
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md": {
+      "hash": "83759dfdbefa97e7955163bed3cd191a9b9dfa383863e181d29329e277d7dfdb",
+      "size": 9504
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md": {
+      "hash": "f8bd55ada1103dd21b52046ba8739edcb985a0f905c4b3dbdd7e287f644f07b9",
+      "size": 10828
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md": {
+      "hash": "4c8785c8c8647a31fea46ab5b260ed54e3e8ea93fe0d9ff5bd25a606268de5ce",
+      "size": 41755
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md": {
+      "hash": "77c18f88592324da67f5fe1bcc3dff4b44244da5a605897a267965bef27b2874",
+      "size": 12548
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md": {
+      "hash": "1d4071ba8555b21882c4df0756bab02d4facba9f15ed3e6357a82e04da86f1b9",
+      "size": 9492
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md": {
+      "hash": "b79ea9e2ef2c87fd09cd23a4bda3ae20634e53df5b5977b11dd25ce62d602522",
+      "size": 10387
+    },
+    "2025-12\\Week-52\\12-28-2025-23-12_TEST_RESULTS_2025_12_28.md": {
+      "hash": "ae4fb07535026b10119d81ec3986f28f7728cef50d8ceeb49fa9ba358f40579b",
+      "size": 7736
+    },
+    "2025-12\\Week-52\\12-28-2025-23-52_SWARM_ARCHITECTURE.md": {
+      "hash": "1c784d8710b5fa63cd389a1518cd4f7e930ac077be0ef10b05321d2c04e2d34d",
+      "size": 11116
+    },
+    "2026-01\\Week-01\\01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md": {
+      "hash": "289352e472a0cf120a61ed844db05334821cd40f97579cb51cab19ae394c704d",
+      "size": 3129
+    },
+    "2026-01\\Week-01\\01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md": {
+      "hash": "22d40ba104da5016313fe91bdbbc22a03e958520d3563dd897e0c50fec1f197c",
+      "size": 2902
+    },
+    "2026-01\\Week-01\\01-02-2026-18-48_LANE_Z_RISKS_REPORT.md": {
+      "hash": "87a1d9696888ce5f6600d2fe331a62f889088221091edcf534130264b96262a9",
+      "size": 3687
+    },
+    "agents\\Local Models\\DISPATCH_LEDGER.json": {
+      "hash": "9b864527706a267617c01d56f3a8bd2807158dd42c48ca74ef5d83477981c270",
+      "size": 272
+    },
+    "agents\\Local Models\\LEDGER_ARCHIVE.json": {
+      "hash": "c12de1b4dd8644a4bd2f9cf1fca276625ba3ec8641433c08947f7bebf8f8f515",
+      "size": 59505
+    }
+  },
+  "file_count": 75
+}
