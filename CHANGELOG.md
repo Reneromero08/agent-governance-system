@@ -4,6 +4,17 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.25] - 2026-01-05
+
+### INBOX Governance Hardening
+
+- **Explicit Schema & Timestamp Policy**: Updated `inbox_normalize.py` to v1.1.0 with `SCHEMA` constant (YYYY-MM/Week-XX per ISO 8601) and `TIMESTAMP_POLICY` with `fallback_mtime: False` (fail-closed)
+- **Digest Semantics**: Separated `content_integrity` from `tree_digest` in receipts to clarify that content hashes remain stable while paths change
+- **Standing Rule**: Added INBOX normalization section to `LAW/CANON/INBOX_POLICY.md` with folder schema, timestamp authority rules, and hard invariants
+- **Weekly Automation**: Created `INBOX/weekly_normalize.py` with safety check to verify `inbox_normalize.py` exists before execution, wired to output receipts to `LAW/CONTRACTS/_runs/`
+- **Encoding Fix**: Fixed UTF-8 encoding issues in receipt generation
+- **Test Coverage**: Added `CAPABILITY/TESTBENCH/inbox/test_inbox_normalize_automation.py` for automation safety verification
+
 ## [3.3.24] - 2026-01-05
 
 ### Completed
@@ -44,6 +55,9 @@ All notable changes to Agent Governance System will be documented in this file.
     - ✓ Explicit uncertainty (ambiguities documented)
     - ✓ Complete enumeration (all surfaces cataloged)
   - **Next steps**: Phase 2.4.1B enforcement integration (target: 95%+ guarded)
+
+### Changed
+- **Inbox Normalization**: Moved `inbox_normalize.py` to `CAPABILITY/TOOLS/governance/inbox_normalize.py` and updated `weekly_normalize.py` to `CAPABILITY/TOOLS/governance/weekly_normalize.py` 
 
 ## [3.3.23] - 2026-01-05
 

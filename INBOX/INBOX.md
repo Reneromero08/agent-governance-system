@@ -8,6 +8,22 @@ This directory stores new research, reports, and roadmaps for user approval.
 
 ---
 
+ - [ ] **[01-05-2026-15-45_PROMPT_PACK_AUDIT_REPORT.md](reports/01-05-2026-15-45_PROMPT_PACK_AUDIT_REPORT.md)** ⚠️ `1bc673e7...`
+   - **Section:** #report
+   - **Author:** Antigravity
+   - **Priority:** High
+   - **Created:** 2026-01-05 15:45
+   - **Modified:** 2026-01-05 15:45
+   - **Summary:** Audit of prompt pack structure and links
+
+ - [ ] **[01-05-2026-15-40_PROMPT_PACK_REFACTOR_FIX.md](prompts/01-05-2026-15-40_PROMPT_PACK_REFACTOR_FIX.md)** ⚠️ `739a3e82...`
+   - **Section:** #prompt
+   - **Author:** Antigravity
+   - **Priority:** CRITICAL
+   - **Created:** 2026-01-05 15:40
+   - **Modified:** 2026-01-05 15:40
+   - **Summary:** Prompt Pack Refactor & Remediation check
+
  - [ ] **[01-02-2026-18-48_LANE_Z_RISKS_REPORT.md](reports/01-02-2026-18-48_LANE_Z_RISKS_REPORT.md)** ⚠️ `9ae9babf...`
    - **Section:** #report
    - **Author:** Antigravity
