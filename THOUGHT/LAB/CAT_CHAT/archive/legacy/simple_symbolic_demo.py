@@ -37,7 +37,7 @@ with db.get_connection() as conn:
         (session_id, msg1_uuid, "user", "hello world how are you", db.compute_content_hash("hello world how are you"), timestamp, '{"encoding": "english"}')
     )
 
-print("User: "hello world how are you (7 words)")
+print('User: "hello world how are you (7 words)"')
 
 msg2_uuid = str(uuid_lib.uuid4())
 timestamp = datetime.utcnow().isoformat() + "Z"

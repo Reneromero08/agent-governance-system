@@ -42,10 +42,10 @@ notes:
 - **Exit Criteria**
   - [x] Violations fail-closed before writes occur
 
-## 1.3 Deprecate Lab MCP Server (Z.1.7)
-- [ ] 1.3.1 Mark `THOUGHT/LAB/MCP/server_CATDPT.py` archived/deprecated with clear pointer to canonical server (Z.1.7)
+## 1.3 Deprecate Lab MCP Server (Z.1.7) ✅
+- [x] 1.3.1 Mark `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` archived/deprecated with clear pointer to canonical server (Z.1.7)
 - **Exit Criteria**
-  - [ ] No tooling still imports/executes the deprecated server in normal flows
+  - [x] No tooling still imports/executes the deprecated server in normal flows
 
 ## 1.4 Failure Taxonomy & Recovery Playbooks (ops-grade)
 - [ ] 1.4.1 Create `NAVIGATION/OPS/FAILURE_CATALOG.md` listing expected fail-closed errors by subsystem (CAS, ARTIFACTS, RUNS, GC, AUDIT, SKILL_RUNTIME, PACKER)
@@ -70,25 +70,25 @@ notes:
   - [x] Dedup benchmark reproducible and stored as an artifact
 
 ## 2.2 Pack Consumer (verification + rehydration)
-- [ ] 2.2.1 Define Pack Manifest v1 (schema + invariants)
+- [x] 2.2.1 Define Pack Manifest v1 (schema + invariants)
   - Must include: pack_id, scope (AGS/CAT/LAB), bucket list, path→ref mapping (`sha256:`), build metadata, and declared roots/pins
   - Must be canonical-JSON encoded and stored in CAS (manifest itself is addressable)
-- [ ] 2.2.2 Implement `pack_consume(manifest_ref, out_dir, *, dry_run=False)` (tool/CLI)
+- [x] 2.2.2 Implement `pack_consume(manifest_ref, out_dir, *, dry_run=False)` (tool/CLI)
   - Verify manifest integrity (hash, canonical encoding, schema)
   - Verify every referenced blob exists in CAS (or fail-closed)
   - Materialize tree to `out_dir` atomically (write to temp + rename)
   - Enforce strict path safety (no absolute paths, no `..`, no writing outside `out_dir`)
-- [ ] 2.2.3 Emit a consumption receipt
+- [x] 2.2.3 Emit a consumption receipt
   - Inputs: manifest_ref, cas_snapshot_hash
   - Outputs: out_dir tree hash (or deterministic listing hash), verification summary
   - Commands run, exit status
-- [ ] 2.2.4 Tests (fixture-backed)
+- [x] 2.2.4 Tests (fixture-backed)
   - Tamper detection: modify manifest bytes or blob bytes → FAIL
   - Determinism: consume twice → identical tree hash/listing
   - Partial CAS: missing blob → FAIL (no partial materialization)
 - **Exit Criteria**
-  - [ ] Packs are not write-only: they can be consumed and verified deterministically
-  - [ ] Any corruption or missing data fails-closed before producing an output tree
+  - [x] Packs are not write-only: they can be consumed and verified deterministically
+  - [x] Any corruption or missing data fails-closed before producing an output tree
 
 ## 2.3 Run Bundle Contract (freezing “what is a run”)
 - [ ] 2.3.1 Freeze the per-run directory contract

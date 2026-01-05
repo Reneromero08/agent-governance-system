@@ -1,5 +1,28 @@
 #!/usr/bin/env python3
 """
+*** DEPRECATED / ARCHIVED ***
+
+This file is DEPRECATED and no longer maintained.
+
+Use the canonical MCP server instead:
+- Canonical location: CAPABILITY/MCP/server.py
+- Entry point: LAW/CONTRACTS/ags_mcp_entrypoint.py
+- Reference: Z.1.7 (Catalytic Architecture)
+
+This file is preserved for historical reference only.
+It was the original experimental MCP server implementation.
+
+The canonical server has been hardened and validated with:
+- CMP-01 path validation
+- SPECTRUM-02 bundle verification
+- Production-grade atomic file operations
+- Full test coverage in CAPABILITY/TESTBENCH/
+
+Last updated: 2026-01-04 (deprecation notice added)
+Task: 1.3 (Deprecate Lab MCP Server)
+
+=========================================================================
+
 CATALYTIC-DPT MCP Server
 
 Core infrastructure for multi-agent orchestration:

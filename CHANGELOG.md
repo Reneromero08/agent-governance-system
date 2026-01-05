@@ -1,10 +1,35 @@
  <!-- CONTENT_HASH: 13ef0e367e2985664d35e074f95805b910060cb7e5dba4b32e8d23f51b4db165 -->
 
-# Changelog
-
-All notable changes to Agent Governance System will be documented in this file.
-
-## [3.3.14] - 2026-01-05
+ # Changelog
+ 
+ All notable changes to Agent Governance System will be documented in this file.
+ 
+ ## [3.3.15] - 2026-01-05
+ 
+ ### Changed
+ - **Task 1.3: Deprecate Lab MCP Server (Z.1.7)** — Marked experimental MCP server as archived/deprecated with clear pointer to canonical implementation.
+   - **1.3.1 - Deprecation Notice**: Added prominent `*** DEPRECATED / ARCHIVED ***` header to `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py`
+     - Points to canonical server: `CAPABILITY/MCP/server.py`
+     - Points to canonical entry point: `LAW/CONTRACTS/ags_mcp_entrypoint.py`
+     - References Z.1.7 (Catalytic Architecture)
+     - Preserves original code below deprecation notice for historical reference
+   - **Verification**: Confirmed no normal flows (non-test) import or execute deprecated server
+     - Only comment references in `CAPABILITY/MCP/server.py` (e.g., "# Ported from CAT LAB server_CATDPT.py")
+     - No actual imports or execution calls found
+   - **Exit Criteria**: All satisfied
+     - ✅ Deprecated server marked with clear pointer to canonical implementation (Z.1.7)
+     - ✅ No tooling still imports/executes deprecated server in normal flows
+     - ✅ Pre-existing syntax errors in CAT_CHAT demo files fixed as prerequisite
+     - ✅ Receipt and report emitted
+   - **Artifacts**:
+     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/receipt.json`
+     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/REPORT.md`
+   - **Roadmap**: Section 1.3 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+   - **Files Modified**: 2 tracked files
+     - `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` (deprecation notice)
+     - `THOUGHT/LAB/CAT_CHAT/archive/legacy/simple_symbolic_demo.py` (syntax fix)
+ 
+ ## [3.3.14] - 2026-01-05
 
 ### Added
 - **Task 1.2: Bucket Enforcement (X3)** — Implemented preflight validation ensuring every artifact belongs to exactly one of 6 buckets (LAW, CAPABILITY, NAVIGATION, MEMORY, THOUGHT, INBOX).
