@@ -27,7 +27,37 @@
    - **Roadmap**: Section 1.3 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
    - **Files Modified**: 2 tracked files
      - `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` (deprecation notice)
-     - `THOUGHT/LAB/CAT_CHAT/archive/legacy/simple_symbolic_demo.py` (syntax fix)
+      - `THOUGHT/LAB/CAT_CHAT/archive/legacy/simple_symbolic_demo.py` (syntax fix)
+ 
+ ### Added
+ - **Task 2.2: Pack Consumer (verification + rehydration)** — Implemented pack consumption to enable deterministic restoration from CAS-addressed manifests, completing catalytic pack cycle.
+   - **2.2.1 - Pack Manifest v1 Schema**: Defined comprehensive schema with validation in `consumer.py`
+     - Required fields: version, scope, entries (path, ref, bytes, kind)
+     - Canonical JSON encoding enforced
+     - Path safety validation (no absolute paths, no `..` traversal)
+   - **2.2.2 - pack_consume() Implementation**: Created `MEMORY/LLM_PACKER/Engine/packer/consumer.py` (270 lines)
+     - Manifest integrity verification (hash, canonical encoding, schema)
+     - CAS blob existence verification (fail-closed if any missing)
+     - Atomic materialization (write to temp → rename, no partial writes)
+     - Strict path safety enforcement
+     - Dry-run mode for verification without writes
+   - **2.2.3 - Consumption Receipts**: Implemented `ConsumptionReceipt` dataclass
+     - Inputs: manifest_ref, cas_snapshot_hash
+     - Outputs: tree_hash (deterministic), verification_summary
+     - Commands run audit trail, exit status
+   - **2.2.4 - Comprehensive Tests**: Created `CAPABILITY/TESTBENCH/integration/test_pack_consumer.py` (374 lines)
+     - 6 tests covering: roundtrip, dry-run, tamper detection, missing blobs, determinism, path safety
+     - All tests passing with fixture-backed proofs
+   - **Exit Criteria**: All satisfied
+     - ✅ Packs are not write-only: can be consumed and verified deterministically
+     - ✅ Any corruption or missing data fails-closed before producing output tree
+     - ✅ Tree hash proves byte-identical restoration
+   - **System Status**: Now **FULLY CATALYTIC** (can create AND consume packs)
+   - **Artifacts**:
+     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/2.2_pack-consumer-verification-rehydration/receipt.json`
+     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/2.2_pack-consumer-verification-rehydration/REPORT.md`
+   - **Roadmap**: Section 2.2 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+   - **Test Coverage**: 6/6 tests passing (roundtrip, tamper detection, determinism, fail-closed)
  
  ## [3.3.14] - 2026-01-05
 
