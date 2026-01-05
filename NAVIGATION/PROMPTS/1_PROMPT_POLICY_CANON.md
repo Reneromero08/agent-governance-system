@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Prompt generation + execution governance for AGS
 ---
-<!-- CANON_HASH: 58360609880fa536cf90e9e7f08a892de7f38edf360831a0edf8458026835ed2 -->
+<!-- CANON_HASH: E31D9F3A97E2F234A50AC9B2E7EE59E893A9FCC1690666A5E5F7DD0BAD2BBEC3 -->
 
 ## 0) Authority and precedence
 This file is normative.

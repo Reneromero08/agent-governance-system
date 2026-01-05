@@ -5,7 +5,7 @@ status: CANONICAL
 generated_on: 2026-01-04
 scope: Governor workflow template for generating all remaining per-task prompts
 ---
-<!-- CANON_HASH: 032ab3efda97e8294e8474d41ba9462dc3a914e124e8042bcffc14a55278f67f -->
+<!-- CANON_HASH: 8A7D325BE355AA03E5232B3158A9AFFECC48ABFF6370C70F36478B1D8FEAB6D6 -->
 
 ## 0) Authority
 Subordinate to:
