@@ -5,6 +5,32 @@
  All notable changes to Agent Governance System will be documented in this file.
  
  ## [3.3.15] - 2026-01-05
+## [3.3.16] - 2026-01-04
+
+### Completed
+- **Task 4.1: Catalytic Snapshot & Restore (Z.4.2–Z.4.4)** — Verified and documented complete implementation of catalytic space restoration guarantees.
+  - **4.1.1 - Pre-run Snapshot**: Implemented in `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py:272-279`
+    - `snapshot_domains()` captures SHA-256 hashes of all files in catalytic domains before execution
+    - Deterministic ordering enforced by normalized relative paths
+    - Hashes persisted to `PRE_MANIFEST.json` in run ledger
+  - **4.1.2 - Byte-identical Restoration Verification**: Implemented in `catalytic_runtime.py:291-314`
+    - `snapshot_after()` captures post-execution state
+    - `verify_restoration()` compares pre/post hashes for exact byte-identical match
+    - Diff report details: added files, removed files, changed files (by hash)
+    - Results persisted to `POST_MANIFEST.json` and `RESTORE_DIFF.json`
+  - **4.1.3 - Hard-fail on Restoration Mismatch**: Implemented in `catalytic_runtime.py:643-674`
+    - Runtime returns exit code 1 if restoration verification fails
+    - `STATUS.json` written with `status: "failed"` and `restoration_verified: false`
+    - `PROOF.json` contains `restoration_result.verified: false` with failure condition
+    - Failure is deterministic and fail-closed (no partial success)
+  - **Exit Criteria**: All satisfied ✅
+    - Catalytic domains restore byte-identical (fixture-backed): `test_catlab_restoration.py::test_catlab_restoration_pass` (500-file fixture)
+    - Failure mode is deterministic and fail-closed: `test_catlab_restoration.py::test_catlab_detects_*` suite
+  - **Artifacts**:
+    - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/receipt.json`
+    - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/REPORT.md`
+  - **Roadmap**: Section 4.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+
  
  ### Changed
  - **Task 1.3: Deprecate Lab MCP Server (Z.1.7)** — Marked experimental MCP server as archived/deprecated with clear pointer to canonical implementation.

@@ -91,21 +91,21 @@ notes:
   - [x] Any corruption or missing data fails-closed before producing an output tree
 
 ## 2.3 Run Bundle Contract (freezing “what is a run”)
-- [ ] 2.3.1 Freeze the per-run directory contract
+- [x] 2.3.1 Freeze the per-run directory contract
   - Required artifacts: TASK_SPEC, STATUS timeline, OUTPUT_HASHES, receipts
   - Naming conventions, immutability rules, and deterministic ordering requirements
-- [ ] 2.3.2 Implement `run_bundle_create(run_id) -> sha256:<hash>`
+- [x] 2.3.2 Implement `run_bundle_create(run_id) -> sha256:<hash>`
   - Bundle is a manifest that references run artifacts in CAS (no raw file paths)
   - Bundle manifest is canonical-JSON encoded and stored in CAS
-- [ ] 2.3.3 Define rooting and retention semantics (ties into GC)
+- [x] 2.3.3 Define rooting and retention semantics (ties into GC)
   - What becomes a root by default (active runs, explicit pins, pack manifests)
   - Minimum retention policy for safety (e.g., never GC pinned runs)
-- [ ] 2.3.4 Implement `run_bundle_verify(bundle_ref)` (dry-run verifier)
+- [x] 2.3.4 Implement `run_bundle_verify(bundle_ref)` (dry-run verifier)
   - Ensures: all referenced artifacts exist, hashes match, required outputs are reachable
   - Emits deterministic verification receipt
 - **Exit Criteria**
-  - [ ] “Run = proof-carrying bundle” is explicit and machine-checkable
-  - [ ] GC can safely treat bundles/pins as authoritative roots
+  - [x] “Run = proof-carrying bundle” is explicit and machine-checkable
+  - [x] GC can safely treat bundles/pins as authoritative roots
 
 
 # Phase 3: CAT Chat Stabilization (make the interface reliable)
@@ -123,13 +123,13 @@ notes:
   - [ ] One end-to-end CAT Chat run can: route → use tools → persist → resume with identical behavior
 
 # Phase 4: Catalytic Architecture (restore guarantees)
-## 4.1 Catalytic Snapshot & Restore (Z.4.2–Z.4.4)
-- [ ] 4.1.1 Pre-run snapshot: hash catalytic state before execution (Z.4.2)
-- [ ] 4.1.2 Post-run restoration: verify byte-identical restoration (Z.4.3)
-- [ ] 4.1.3 Hard-fail on restoration mismatch (Z.4.4)
+## 4.1 Catalytic Snapshot & Restore (Z.4.2–Z.4.4) ✅
+- [x] 4.1.1 Pre-run snapshot: hash catalytic state before execution (Z.4.2)
+- [x] 4.1.2 Post-run restoration: verify byte-identical restoration (Z.4.3)
+- [x] 4.1.3 Hard-fail on restoration mismatch (Z.4.4)
 - **Exit Criteria**
-  - [ ] Catalytic domains restore byte-identical (fixture-backed)
-  - [ ] Failure mode is deterministic and fail-closed
+  - [x] Catalytic domains restore byte-identical (fixture-backed)
+  - [x] Failure mode is deterministic and fail-closed
 
 # Phase 5: Vector/Symbol Integration (addressability)
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
