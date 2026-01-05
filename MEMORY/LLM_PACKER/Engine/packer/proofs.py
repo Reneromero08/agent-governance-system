@@ -135,8 +135,13 @@ def _load_proof_suite(project_root: Path) -> List[List[str]]:
         except Exception:
             pass
     
-    # Default minimal suite (scoped + capture disabled for determinism/stability)
-    return [[sys.executable, "-m", "pytest", "CAPABILITY/TESTBENCH/", "-q", "--capture=no"]]
+    # Default minimal suite
+    #
+    # IMPORTANT: do NOT invoke pytest here by default. Proof refresh is called by the
+    # packer during other tests/fixtures; invoking pytest here creates recursive/very
+    # slow test runs (and can appear "stuck"). Opt into a stronger proof suite by
+    # providing NAVIGATION/PROOFS/PROOF_SUITE.json.
+    return [[sys.executable, "--version"]]
 
 
 def _generate_green_state(

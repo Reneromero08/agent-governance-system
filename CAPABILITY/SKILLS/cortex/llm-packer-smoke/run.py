@@ -131,8 +131,8 @@ def main(input_path: Path, output_path: Path) -> int:
                 "SPLIT/AGS-02_CAPABILITY.md",
                 "SPLIT/AGS-03_NAVIGATION.md",
                 "SPLIT/AGS-04_PROOFS.md",
-                "SPLIT/AGS-07_MEMORY.md",
-                "SPLIT/AGS-08_ROOT_FILES.md",
+                "SPLIT/AGS-05_MEMORY.md",
+                "SPLIT/AGS-06_ROOT_FILES.md",
             ]
         )
     elif scope == "lab":

@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: f8a9751ef8bddb780579550fbac006567eb43a7bfe912f12af726089ea056bae -->
+<!-- CONTENT_HASH: 8f83ea08f4dd3f1c879f25fef5215848277eebd670c7d1195687b6d15df5ff2f -->
 
 # Changelog
 
@@ -21,6 +21,8 @@ All notable changes to Agent Governance System will be documented in this file.
 - **cortex-build fixtures** — Updated expected outputs to match current cortex index format.
 - **llm-packer-smoke fixtures** — Updated expected outputs to match current pack proof integration.
 - **prompt-runner fixtures** — Updated expected outputs to match current prompt validation logic.
+- **Packer proof refresh stability/perf** — Default proof suite no longer runs `pytest` (avoids recursive/slow runs during packer fixtures); opt into stronger suites via `NAVIGATION/PROOFS/PROOF_SUITE.json`.
+- **SPLIT numbering** — Renumbered AGS split files to remove gaps after dropping DIRECTION/THOUGHT (MEMORY=`AGS-05_*`, ROOT_FILES=`AGS-06_*`).
 
 ## [3.3.10] - 2026-01-04
 

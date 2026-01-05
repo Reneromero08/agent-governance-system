@@ -112,17 +112,12 @@ def write_split_pack_ags(pack_dir: Path, included_repo_paths: Sequence[str]) -> 
     # AGS-04_PROOFS (New)
     (split_dir / "AGS-04_PROOFS.md").write_text("# PROOFS\n\n" + section(proof_paths), encoding="utf-8")
 
-    direction_body = section(direction_paths)
-    if direction_body.strip():
-        (split_dir / "AGS-05_DIRECTION.md").write_text("# DIRECTION\n\n" + direction_body, encoding="utf-8")
+    # DIRECTION/THOUGHT are intentionally omitted from the AGS pack.
+    # Keep SPLIT numbering contiguous.
+
+    (split_dir / "AGS-05_MEMORY.md").write_text("# MEMORY\n\n" + section(memory_paths), encoding="utf-8")
     
-    thought_body = section(thought_paths)
-    if thought_body.strip():
-        (split_dir / "AGS-06_THOUGHT.md").write_text("# THOUGHT\n\n" + thought_body, encoding="utf-8")
-    
-    (split_dir / "AGS-07_MEMORY.md").write_text("# MEMORY\n\n" + section(memory_paths), encoding="utf-8")
-    
-    (split_dir / "AGS-08_ROOT_FILES.md").write_text(
+    (split_dir / "AGS-06_ROOT_FILES.md").write_text(
         "# ROOT_FILES\n\n" + section([*root_paths, *github_paths, *meta_paths]),
         encoding="utf-8",
     )
