@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.6.1
-last_updated: 2026-01-03
+version: 3.6.2
+last_updated: 2026-01-05
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
 notes:
@@ -24,6 +24,10 @@ notes:
 - If Phase 4.1 (Catalytic Snapshot & Restore) is not green, deprioritize UI/interface stabilization work (Phase 3) to avoid debugging on a moving substrate.
 - Destructive operations (GC deletions, pruning, eviction) must remain gated behind deterministic audits (roots + required outputs) and fixture-backed proofs.
 - Any new automation that can modify repo state must:
+
+- Compression claims and proof bundles should be produced in two regimes:
+  - Pre-ELO baseline (pure similarity / deterministic retrieval)
+  - Post-ELO baseline (ELO-tier filtered LITE packs) once Phase 7.5 is green
   - Declare write allowlists per ticket
   - Emit receipts (inputs/outputs/hashes)
   - Run relevant tests before “DONE”
@@ -58,6 +62,30 @@ notes:
 - **Exit Criteria**
   - [x] A new contributor can identify and recover from common failures without tribal knowledge
   - [x] Recovery steps are deterministic and reference exact commands and artifacts
+
+## 1.5 Catalytic IO Guardrails (write firewall + purity scan)
+- [x] 1.5.1 Implement runtime write firewall for catalytic domains ✅ (Phase 1.5A complete)
+  - Only allow writes under declared tmp roots during execution
+  - Only allow durable writes under declared durable roots at commit time
+  - Reject all other writes fail-closed with clear error
+  - **Completed**: `CAPABILITY/PRIMITIVES/write_firewall.py` with commit gate mechanism
+  - **Tests**: 26 tests, all passing (100% coverage)
+  - **Integration**: `CAPABILITY/TOOLS/utilities/guarded_writer.py`
+  - **Documentation**: `CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md`
+- [ ] 1.5.2 Add repo state digest primitive (tree hash with allowlisted exclusions)
+  - Canonical ordering
+  - Exclusion spec must be declared in receipts
+- [ ] 1.5.3 Add catalytic purity scanner (post-run)
+  - Detect any new/modified files outside durable roots (and outside declared exclusions)
+  - Require tmp roots are empty (or explicitly allowlisted residuals) after restore
+  - Fail-closed if any violation is detected
+- [ ] 1.5.4 Additional tests (fixture-backed)
+  - New file outside durable roots → FAIL
+  - Tmp not cleaned → FAIL
+  - Deterministic digest across reruns with fixed inputs
+- **Exit Criteria**
+  - [x] IO policy is enforced mechanically (not by prompt discipline) ✅
+  - [ ] Purity scanner produces deterministic receipts and failure signals
 
 # Phase 2: CAS + Packer Completion (context cost collapse)
 ## 2.1 CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)
@@ -107,6 +135,45 @@ notes:
   - [x] “Run = proof-carrying bundle” is explicit and machine-checkable
   - [x] GC can safely treat bundles/pins as authoritative roots
 
+## 2.4 Crypto-Safe Packs & Protected Artifacts (CRYPTO_SAFE)
+Goal: prevent “download = extraction” by sealing protected artifacts for public distribution while keeping verification mechanical.
+
+### 2.4.1 Protected Artifact Inventory (CRYPTO_SAFE.0)
+- [ ] 2.4.1.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
+- [ ] 2.4.1.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
+
+### 2.4.2 Git Hygiene (CRYPTO_SAFE.1)
+- [ ] 2.4.2.1 Ensure `_PACK_RUN/` outputs are never tracked (reject if git status indicates staging/tracking)
+- [ ] 2.4.2.2 Add CI check: protected roots must be ignored unless explicitly allowed
+
+### 2.4.3 Sealing Primitive (CRYPTO_SAFE.2)
+- [ ] 2.4.3.1 Implement `crypto_seal(input_path, output_path, meta) -> receipt`
+  - Default: age-encryption (or equivalent) with fail-closed behavior
+  - No keys in logs; receipts include algorithm + parameters + hashes
+- [ ] 2.4.3.2 Implement `crypto_open(sealed_path, out_path, key_ref) -> receipt` (local only)
+
+### 2.4.4 Attestation Schema (optional) (CRYPTO_SAFE.3)
+- [ ] 2.4.4.1 Define sealed artifact manifest schema (what is sealed, why, hashes, policy version)
+- [ ] 2.4.4.2 (Optional) Add signature support (offline signing) without changing fail-closed verification semantics
+
+### 2.4.5 Packer Integration (CRYPTO_SAFE.4)
+- [ ] 2.4.5.1 Add packer hook: seal protected artifacts during `_PACK_RUN/` for public pack modes
+- [ ] 2.4.5.2 Emit `SEALED_ARTIFACTS.json` + receipt into run bundle + pack output
+- [ ] 2.4.5.3 Ensure packs remain verifiable without decryption keys (integrity-only verification)
+
+### 2.4.6 One-Command Verifier (CRYPTO_SAFE.5)
+- [ ] 2.4.6.1 Add `crypto_safe_verify(pack_dir, mode)` that checks:
+  - protected inventory completeness
+  - no plaintext protected artifacts in public pack outputs
+  - sealed manifest integrity + receipts present
+  - deterministic ordering and canonical JSON where applicable
+
+### 2.4.7 Tests + Docs (CRYPTO_SAFE.6–.7)
+- [ ] 2.4.7.1 Fixtures: missing seal → FAIL, tampered seal → FAIL, plaintext leak → FAIL
+- [ ] 2.4.7.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` report template + reproduction commands
+- **Exit Criteria**
+  - [ ] Public packs contain no plaintext protected artifacts
+  - [ ] Verification is mechanical and fail-closed (no “trust me” paths)
 
 # Phase 3: CAT Chat Stabilization (make the interface reliable)
 - Precondition: If Phase 4.1 is not green, treat Phase 3 as provisional and expect churn.
@@ -120,6 +187,17 @@ notes:
 ## 3.4 Session Persistence (Z.3.4)
 - [ ] 3.4.1 Implement session persistence and resume (Z.3.4)
 - **Exit Criteria**
+
+## 3.5 BitNet Backend Runner (cheap worker backend)
+- [ ] 3.5.1 Add BitNet backend runner integration (bitnet.cpp) as a selectable local model backend
+  - No auto-downloads; explicit local path configuration only
+  - Subprocess invocation must be deterministic (args ordering, env capture)
+- [ ] 3.5.2 Add router support: allow BitNet for “mechanical” task types (scans, lint, manifests, receipts)
+- [ ] 3.5.3 Add verification harness
+  - Golden prompt fixture → deterministic output parsing
+  - Receipts include binary hash, args, stdout/stderr digests, exit status
+- **Exit Criteria**
+  - [ ] BitNet can be used as a cheap producer without weakening governance guarantees
   - [ ] One end-to-end CAT Chat run can: route → use tools → persist → resume with identical behavior
 
 # Phase 4: Catalytic Architecture (restore guarantees)
@@ -143,6 +221,15 @@ notes:
   - [ ] Skill discovery returns stable results for fixed corpus
 
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate)
+
+## 6.0 Canonical Cassette Substrate (cartridge-first)
+- [ ] 6.0.1 Bind cassette storage to the Phase 5.2 `MemoryRecord` contract
+- [ ] 6.0.2 Ensure each cassette DB is a portable cartridge artifact (single-file default)
+- [ ] 6.0.3 Provide rebuild hooks for any derived ANN engine (optional)
+  - Derived indexes/snapshots are disposable and must be reproducible from cartridges
+- **Exit Criteria**
+  - [ ] Cassette network is portable as a set of cartridges + receipts
+
 ## 6.1 Cassette Partitioning (M.1)
 - [ ] 6.1.1 Create cassette directory structure (`NAVIGATION/CORTEX/cassettes/`) (M.1.1)
 - [ ] 6.1.2 Build migration script (split by file_path, preserve hashes/vectors) (M.1.2)
@@ -190,7 +277,14 @@ notes:
 - [ ] 6.4.8 Emit **auditable proof bundle** for math correctness (M.4.8)
   - A machine-readable JSON data file containing raw counts + formulas + inputs/outputs
   - A human-readable report summarizing baselines, per-benchmark results, and reproduction commands
-- **Exit Criteria**
+
+- [ ] 6.4.9 Implement `proof_compression_run` (machine + human artifacts)
+  - Emit `NAVIGATION/PROOFS/COMPRESSION/` JSON data + MD report + receipts
+  - Include tokenizer/version, baseline corpus anchors, retrieved hashes, formulas
+- [ ] 6.4.10 Implement `proof_catalytic_run` (restore + purity)
+  - Emit `NAVIGATION/PROOFS/CATALYTIC/` RESTORE_PROOF + purity scan outputs + receipts
+- [ ] 6.4.11 Bind proofs into pack generation (fresh per pack run; seal in public packs per Phase 2.4)
+
   - [ ] Benchmarks reproducible from fixtures
   - [ ] Compression claimed only when nutritious (success parity)
   - [ ] Token counts are reproducible via the declared tokenizer/encoding (no proxy counts)
@@ -320,4 +414,3 @@ notes:
 - [ ] 10.3.2 Smart slice prediction (Ω.3.2)
 - [ ] 10.3.3 Provenance graph visualization (Ω.3.3)
 - [ ] 10.3.4 Zero-knowledge proofs research (Ω.3.4)
-

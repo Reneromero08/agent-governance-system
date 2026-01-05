@@ -4,6 +4,83 @@
 
  All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.20] - 2026-01-05
+
+### Completed
+- **Phase 1.5A: Runtime Write Firewall (Catalytic Domains)** — Implemented mechanical, fail-closed IO policy layer enforcing catalytic domain separation.
+  - **Core Module**: `CAPABILITY/PRIMITIVES/write_firewall.py`
+    - `WriteFirewall` class enforcing tmp/durable domain separation with commit gate mechanism
+    - Tmp writes only under declared tmp roots during execution
+    - Durable writes only under declared durable roots AND only after commit gate opens
+    - Deterministic error codes (8 codes) and violation receipts with full policy snapshot
+    - Tool version hashing (SHA256 of module file) for auditability
+    - Path traversal detection and blocking (rejects `..` components)
+    - Exclusion list support for read-only paths (LAW/CANON, .git, etc.)
+  - **API Surface**:
+    - `safe_write(path, data, kind='tmp|durable')` - Write with firewall enforcement
+    - `safe_mkdir(path, kind='tmp|durable')` - Create directory with enforcement
+    - `safe_rename(src, dst)` - Rename with domain boundary checks
+    - `safe_unlink(path)` - Delete with domain validation
+    - `open_commit_gate()` - Enable durable writes (commit boundary)
+    - `configure_policy(tmp_roots, durable_roots, exclusions)` - Runtime reconfiguration
+  - **Error Codes**: 8 deterministic failure modes
+    - `FIREWALL_PATH_ESCAPE` - Path escapes project root
+    - `FIREWALL_PATH_TRAVERSAL` - Path contains `..` traversal
+    - `FIREWALL_PATH_EXCLUDED` - Path in exclusion list
+    - `FIREWALL_PATH_NOT_IN_DOMAIN` - Path not in any allowed domain
+    - `FIREWALL_TMP_WRITE_WRONG_DOMAIN` - Tmp write outside tmp roots
+    - `FIREWALL_DURABLE_WRITE_WRONG_DOMAIN` - Durable write outside durable roots
+    - `FIREWALL_DURABLE_WRITE_BEFORE_COMMIT` - Durable write before gate opens
+    - `FIREWALL_INVALID_KIND` - Invalid write kind (not "tmp" or "durable")
+  - **Integration Example**: `CAPABILITY/TOOLS/utilities/guarded_writer.py`
+    - `GuardedWriter` utility demonstrating integration pattern
+    - Simplified API: `write_tmp()`, `write_durable()`, `mkdir_tmp()`, `mkdir_durable()`
+    - Violation handling helpers with receipt output
+  - **Tests**: `CAPABILITY/TESTBENCH/pipeline/test_write_firewall.py`
+    - 26 tests covering all policy enforcement scenarios
+    - 100% pass rate (exit code 0, duration 0.45s)
+    - Deterministic error code verification
+    - Receipt structure validation
+    - Path normalization (Windows/Unix compatibility)
+  - **Documentation**: `CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md`
+    - Complete configuration guide for tmp/durable roots
+    - Violation receipt interpretation with examples
+    - Integration patterns (direct instantiation, GuardedWriter utility, violation logging)
+    - Troubleshooting section covering all error codes
+    - Standard catalytic domain conventions
+  - **Guarantees**:
+    - Fail-closed: All violations raise `FirewallViolation` exception (no silent failures)
+    - Deterministic: Same violation produces same error code every time
+    - Receipts include full policy snapshot + tool version hash
+    - Path normalization: Windows backslashes → Unix forward slashes
+  - **Standard Catalytic Domains**:
+    - Tmp roots: `LAW/CONTRACTS/_runs/_tmp`, `CAPABILITY/PRIMITIVES/_scratch`, `NAVIGATION/CORTEX/_generated/_tmp`
+    - Durable roots: `LAW/CONTRACTS/_runs`, `NAVIGATION/CORTEX/_generated`
+    - Exclusions: `LAW/CANON`, `AGENTS.md`, `BUILD`, `.git`
+  - **Receipt**: `LAW/CONTRACTS/_runs/_tmp/phase_1_5a_implementation_receipt.json`
+
+## [3.3.19] - 2026-01-05
+
+### Added
+- **Prompt Pack Audit & Remediation Plan** — Comprehensive audit of all 32 task prompts identifying critical inefficiencies and creating systematic fix plan.
+  - **Audit Report**: `NAVIGATION/PROMPTS/UNORGANIZED/PROMPT_PACK_AUDIT_REPORT.md`
+    - Identified ~40-50% token waste per file from "Wrapper Paradox" (duplicate instruction layers)
+    - Documented 37+ dead linter references (`scripts/lint-prompt.sh` → actual: `CAPABILITY/TOOLS/linters/lint_prompt_pack.sh`)
+    - Found 100% broken dependency chains (all 32 tasks have `depends_on: []`)
+    - Discovered manifest path mismatches (~10 files with ✅ checkmarks on disk but not in manifest)
+    - Identified 100% stale links in `INDEX.md` (all completed task links broken)
+    - Found 19+ instances of `python -m compileall` misuse (hallucinatory copy-paste)
+    - Documented contradictory allowlists preventing compliant task completion
+    - Missing Phase 09 from directory structure
+  - **Fix Prompt**: `NAVIGATION/PROMPTS/PROMPT_PACK_REFACTOR_FIX.md`
+    - 8-phase systematic refactor plan: Backup → Normalization → Dead Refs → De-duplication → Allowlists → Dependencies → Index → Validation
+    - Standardized format template for all prompts (CONTEXT/OBJECTIVE/SCOPE/PLAN/VALIDATION/ALLOWLIST/RECEIPT)
+    - Specific solutions for each issue class (linter paths, compileall commands, filename normalization)
+    - Validation criteria including linter pass, link resolution, manifest validity
+    - Structured JSON receipt requirements for auditable execution
+    - Priority ordering for time-constrained execution
+    - Estimated 30-50% token savings upon completion
+
 ## [3.3.18] - 2026-01-05
 
 ### Completed
