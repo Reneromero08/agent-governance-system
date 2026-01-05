@@ -38,9 +38,9 @@ notes:
   - [x] Pre-commit rejects invalid INBOX changes deterministically
 
 ## 1.2 Bucket Enforcement (X3)
-- [ ] 1.2.1 Add preflight check: every artifact must belong to exactly one bucket (X3)
+- [x] 1.2.1 Add preflight check: every artifact must belong to exactly one bucket (X3)
 - **Exit Criteria**
-  - [ ] Violations fail-closed before writes occur
+  - [x] Violations fail-closed before writes occur
 
 ## 1.3 Deprecate Lab MCP Server (Z.1.7)
 - [ ] 1.3.1 Mark `THOUGHT/LAB/MCP/server_CATDPT.py` archived/deprecated with clear pointer to canonical server (Z.1.7)

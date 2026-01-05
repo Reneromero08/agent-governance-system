@@ -1,8 +1,31 @@
-<!-- CONTENT_HASH: 8f83ea08f4dd3f1c879f25fef5215848277eebd670c7d1195687b6d15df5ff2f -->
+ <!-- CONTENT_HASH: 13ef0e367e2985664d35e074f95805b910060cb7e5dba4b32e8d23f51b4db165 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.14] - 2026-01-05
+
+### Added
+- **Task 1.2: Bucket Enforcement (X3)** — Implemented preflight validation ensuring every artifact belongs to exactly one of 6 buckets (LAW, CAPABILITY, NAVIGATION, MEMORY, THOUGHT, INBOX).
+  - **1.2.1 - Preflight Bucket Check**: Added `BUCKETS` constant and `_check_bucket_enforcement()` method to `CAPABILITY/PRIMITIVES/preflight.py`
+    - Validates all paths in `catalytic_domains` and `outputs.durable_paths` belong to exactly one bucket
+    - Detects `BUCKET_VIOLATION`: paths outside all 6 buckets
+    - Detects `BUCKET_OVERLAP`: paths in multiple buckets (edge case)
+    - Integrated as validation step #5 in preflight pipeline
+  - **Test Coverage**: 3 new tests in `CAPABILITY/TESTBENCH/integration/test_preflight.py`
+    - `test_bucket_violation_path_outside_buckets_fails()` - Validates rejection of paths outside buckets (e.g., `BUILD/`)
+    - `test_path_in_valid_bucket_passes()` - Validates acceptance of paths in valid buckets
+    - `test_all_buckets_are_valid()` - Confirms all 6 buckets are recognized as valid
+  - **Exit Criteria**: All satisfied
+    - ✅ Violations fail-closed before writes occur (preflight check blocks execution)
+    - ✅ All 13/13 preflight tests passing
+    - ✅ All 340/340 full test suite passing
+  - **Artifacts**:
+    - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.2_bucket-enforcement-x3/receipt.json`
+    - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.2_bucket-enforcement-x3/REPORT.md`
+  - **Roadmap**: Section 1.2 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Lines Changed**: 158 lines added (+78 preflight.py, +80 test_preflight.py)
 
 ## [3.3.13] - 2026-01-05
 

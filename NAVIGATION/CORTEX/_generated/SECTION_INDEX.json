@@ -1067,64 +1067,64 @@
     "end_line": 20,
     "hash": "13af0bae5503f0ce9d4b47c4a5691cfe4ff60a861120dad6342dcfaf268becf0",
     "heading": "ROLE + MODEL",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::role-model::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::role-model::01",
     "start_line": 14
   },
   {
     "end_line": 96,
     "hash": "3613eea7f34a4316798a904f74cd7e62c7fea70d9b870282f0cac51840119f21",
     "heading": "GOAL",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::goal::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::goal::01",
     "start_line": 21
   },
   {
     "end_line": 101,
     "hash": "6cb490583520e616eff159cbd8c825b95e36890d2503e5a78559e8a72e2137a5",
     "heading": "SCOPE (WRITE ALLOWLIST)",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::scope-write-allowlist::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::scope-write-allowlist::01",
     "start_line": 97
   },
   {
     "end_line": 114,
     "hash": "7ee0f5f50f33933092c14dd417ad977a82018537da990fce16597302c6de5e88",
     "heading": "REQUIRED FACTS (VERIFY, DO NOT GUESS)",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::required-facts-verify-do-not-guess::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::required-facts-verify-do-not-guess::01",
     "start_line": 102
   },
   {
     "end_line": 121,
     "hash": "a433814d0ea4215b7c136cea90848eb92d9a146859b00568e6b7ff1416f0c86f",
     "heading": "PLAN (EXPLICIT STEPS)",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::plan-explicit-steps::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::plan-explicit-steps::01",
     "start_line": 115
   },
   {
     "end_line": 128,
     "hash": "d04cf2ca44076d7c361096f95d68491152f5113b311957963c745b1dd5daf7f9",
     "heading": "VALIDATION (DONE = GREEN)",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::validation-done-green::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::validation-done-green::01",
     "start_line": 122
   },
   {
     "end_line": 139,
     "hash": "56015da05821325095cc8db5321f264ac45490131f04e9d8f29e8398f558dcbe",
     "heading": "ARTIFACTS (RECEIPT + REPORT)",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::artifacts-receipt-report::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::artifacts-receipt-report::01",
     "start_line": 129
   },
   {
     "end_line": 144,
     "hash": "338b9b907f32a433f9e77e476171f54f269a930794722b8b8ad8e362405ad7f3",
     "heading": "EXIT CRITERIA",
-    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md",
-    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2.md::exit-criteria::01",
+    "path": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md",
+    "section_id": "NAVIGATION/PROMPTS/PHASE_01/1.1_hardened-inbox-governance-s-2\u2705.md::exit-criteria::01",
     "start_line": 140
   },
   {
