@@ -1,0 +1,135 @@
+{
+  "phase": "1.5_polish",
+  "verdict": "COMPLETE",
+  "exit_code": 0,
+  "timestamp": "2026-01-05",
+  "files_changed": [
+    "CAPABILITY/PRIMITIVES/repo_digest.py",
+    "CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md",
+    "CAPABILITY/PRIMITIVES/REPO_DIGEST_GUIDE.md",
+    "CAPABILITY/PRIMITIVES/POLISH_VERIFICATION_REPORT.md",
+    "CAPABILITY/TESTBENCH/integration/test_phase_1_5_polish.py"
+  ],
+  "code_changes_summary": {
+    "total_lines_added": 366,
+    "total_lines_modified": 4,
+    "files_modified": 1,
+    "files_created": 2,
+    "semantic_changes": 0,
+    "security_fixes": 3
+  },
+  "tests_run": {
+    "test_suite": "CAPABILITY/TESTBENCH/integration",
+    "total": 18,
+    "passed": 18,
+    "failed": 0,
+    "exit_code": 0,
+    "new_tests_added": 7,
+    "existing_tests_still_passing": 11
+  },
+  "exit_criteria_satisfied": {
+    "1_path_normalization_documented": {
+      "status": "satisfied",
+      "evidence": "WRITE_FIREWALL_CONFIG.md and REPO_DIGEST_GUIDE.md sections added",
+      "files": [
+        "CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md",
+        "CAPABILITY/PRIMITIVES/REPO_DIGEST_GUIDE.md"
+      ]
+    },
+    "2_error_code_freeze": {
+      "status": "satisfied",
+      "evidence": "Error code tables added with append-only freeze rules",
+      "firewall_codes_frozen": 8,
+      "digest_codes_frozen": 4
+    },
+    "3_negative_integration_test": {
+      "status": "satisfied",
+      "evidence": "test_negative_integration_guarded_writer_blocked_by_firewall",
+      "violations_tested": 3
+    },
+    "4_symlink_bypass_closed": {
+      "status": "satisfied",
+      "evidence": "followlinks=False + is_symlink() check added",
+      "code_changes": [
+        "repo_digest.py:152 (digest enumeration: followlinks=False)",
+        "repo_digest.py:172 (file symlink skip: is_symlink() check)",
+        "repo_digest.py:238 (purity scan: followlinks=False)"
+      ],
+      "tests_added": [
+        "test_repo_digest_symlink_escape_blocked",
+        "test_repo_digest_symlink_within_repo_not_followed",
+        "test_repo_digest_file_symlink_escape_blocked",
+        "test_write_firewall_symlink_escape_blocked",
+        "test_write_firewall_symlink_domain_crossing_blocked"
+      ]
+    },
+    "5_durable_roots_per_run": {
+      "status": "satisfied",
+      "evidence": "Already configurable via __init__ and CLI args (verified, no changes needed)",
+      "verification": "Existing tests use varied configurations"
+    },
+    "6_bytes_only_semantics": {
+      "status": "satisfied",
+      "evidence": "Already correct (verified, documented explicitly)",
+      "documentation_added": "REPO_DIGEST_GUIDE.md change detection semantics section"
+    },
+    "7_cli_error_receipts": {
+      "status": "satisfied",
+      "evidence": "write_error_receipt() function + exception handlers",
+      "code_changes": [
+        "repo_digest.py:374-408 (write_error_receipt function)",
+        "repo_digest.py:509-531 (CLI exception handlers)"
+      ],
+      "test": "test_cli_error_receipt_emission"
+    },
+    "8_all_tests_pass": {
+      "status": "satisfied",
+      "evidence": "18/18 tests passed (100%)",
+      "exit_code": 0
+    }
+  },
+  "bypasses_closed": [
+    {
+      "bypass": "directory_symlink_escape_from_digest",
+      "description": "Directory symlink inside repo pointing outside repo",
+      "mitigation": "followlinks=False prevents traversal into symlinked directories",
+      "test": "test_repo_digest_symlink_escape_blocked"
+    },
+    {
+      "bypass": "file_symlink_escape_from_digest",
+      "description": "File symlink inside repo pointing outside repo",
+      "mitigation": "is_symlink() check skips all file symlinks",
+      "test": "test_repo_digest_file_symlink_escape_blocked"
+    },
+    {
+      "bypass": "symlink_escape_from_firewall",
+      "description": "Symlink inside tmp_roots pointing outside project_root",
+      "mitigation": "Path.resolve() + relative_to() check",
+      "test": "test_write_firewall_symlink_escape_blocked",
+      "error_code": "FIREWALL_PATH_ESCAPE"
+    },
+    {
+      "bypass": "symlink_domain_crossing",
+      "description": "Symlink inside tmp_roots pointing to durable_roots",
+      "mitigation": "Domain check on resolved path",
+      "test": "test_write_firewall_symlink_domain_crossing_blocked",
+      "error_code": "FIREWALL_TMP_WRITE_WRONG_DOMAIN"
+    }
+  ],
+  "determinism_guarantees": {
+    "digest_determinism": "unchanged",
+    "canonical_ordering": "unchanged",
+    "bytes_only_comparison": "unchanged",
+    "error_code_stability": "frozen (append-only)",
+    "receipt_determinism": "unchanged"
+  },
+  "hard_invariants_verified": {
+    "fail_closed": "no weakening",
+    "no_semantic_changes": "confirmed",
+    "deterministic_behavior": "confirmed",
+    "no_new_abstractions": "confirmed"
+  },
+  "skips": [],
+  "justifications": [],
+  "verification_report": "CAPABILITY/PRIMITIVES/POLISH_VERIFICATION_REPORT.md"
+}

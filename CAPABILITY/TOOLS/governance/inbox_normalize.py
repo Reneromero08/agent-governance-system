@@ -21,7 +21,6 @@ VERSION_HASH = hashlib.sha256(f"inbox_normalize_v{VERSION}".encode()).hexdigest(
 EXCLUDED_FILES = {
     "INBOX.md",
     "LEDGER.yaml",
-    "inbox_normalize.py",
     "DISPATCH_LEDGER.json",
     "LEDGER_ARCHIVE.json",
 }
@@ -91,6 +90,7 @@ def collect_files() -> Tuple[List[Dict], List[Dict]]:
             
             # Skip the normalize script itself
             if "inbox_normalize.py" in str(file_path):
+                # Script is no longer in INBOX, but keep this check just in case
                 excluded.append({
                     "path": str(rel_path),
                     "reason": "executable_script"

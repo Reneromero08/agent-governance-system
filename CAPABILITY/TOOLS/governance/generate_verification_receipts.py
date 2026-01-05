@@ -55,7 +55,7 @@ def generate_purity_scan() -> dict:
         if not any([
             path.startswith("2025-12/"),
             path.startswith("2026-01/"),
-            path in ["INBOX.md", "LEDGER.yaml", "inbox_normalize.py", "generate_verification_receipts.py"],
+            path in ["INBOX.md", "LEDGER.yaml"],
             path.startswith("agents/Local Models/")
         ]):
             # These should be in the new structure
