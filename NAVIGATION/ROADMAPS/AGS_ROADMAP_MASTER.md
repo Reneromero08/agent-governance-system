@@ -72,20 +72,25 @@ notes:
   - **Tests**: 26 tests, all passing (100% coverage)
   - **Integration**: `CAPABILITY/TOOLS/utilities/guarded_writer.py`
   - **Documentation**: `CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md`
-- [ ] 1.5.2 Add repo state digest primitive (tree hash with allowlisted exclusions)
+- [x] 1.5.2 Add repo state digest primitive (tree hash with allowlisted exclusions) ✅ (Phase 1.5B complete)
   - Canonical ordering
   - Exclusion spec must be declared in receipts
-- [ ] 1.5.3 Add catalytic purity scanner (post-run)
+  - **Completed**: `CAPABILITY/PRIMITIVES/repo_digest.py` with RepoDigest class
+  - **Receipts**: PRE_DIGEST.json, POST_DIGEST.json with file_manifest
+- [x] 1.5.3 Add catalytic purity scanner (post-run) ✅ (Phase 1.5B complete)
   - Detect any new/modified files outside durable roots (and outside declared exclusions)
   - Require tmp roots are empty (or explicitly allowlisted residuals) after restore
   - Fail-closed if any violation is detected
-- [ ] 1.5.4 Additional tests (fixture-backed)
+  - **Completed**: `CAPABILITY/PRIMITIVES/repo_digest.py` with PurityScan and RestoreProof classes
+  - **Receipts**: PURITY_SCAN.json, RESTORE_PROOF.json with deterministic diff summary
+- [x] 1.5.4 Additional tests (fixture-backed) ✅ (Phase 1.5B complete)
   - New file outside durable roots → FAIL
   - Tmp not cleaned → FAIL
   - Deterministic digest across reruns with fixed inputs
+  - **Completed**: `CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py` (11 tests, 100% pass rate)
 - **Exit Criteria**
   - [x] IO policy is enforced mechanically (not by prompt discipline) ✅
-  - [ ] Purity scanner produces deterministic receipts and failure signals
+  - [x] Purity scanner produces deterministic receipts and failure signals ✅
 
 # Phase 2: CAS + Packer Completion (context cost collapse)
 ## 2.1 CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)

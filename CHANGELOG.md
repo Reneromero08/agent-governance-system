@@ -4,6 +4,46 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.22] - 2026-01-05
+
+### Completed
+- **Phase 1.5B: Repo Digest + Restore Proof + Purity Scan (Deterministic)** — Implemented deterministic repo-state proofs that make catalysis measurable.
+  - **Core Module**: `CAPABILITY/PRIMITIVES/repo_digest.py` (460 LOC)
+    - `RepoDigest`: Deterministic tree hash with declared exclusions
+    - `PurityScan`: Detects tmp residue and files outside durable roots
+    - `RestoreProof`: Binds pre/post digests with PASS/FAIL verdict + diff summary
+    - Module version: 1.5b.0 with version hash tracking
+  - **Receipts Implemented**:
+    - `PRE_DIGEST.json`: Repo state before operation (digest, file_count, file_manifest)
+    - `POST_DIGEST.json`: Repo state after operation (digest, file_count, file_manifest)
+    - `PURITY_SCAN.json`: Violation detection (verdict, tmp_residue, violations)
+    - `RESTORE_PROOF.json`: PASS/FAIL verdict with deterministic diff summary (added, removed, changed)
+  - **Determinism Guarantees**:
+    - Canonical ordering: All paths, lists, and diffs sorted alphabetically
+    - Hashing rules: Tree digest (SHA-256 of canonical file records), exclusions spec hash, module version hash
+    - Repeated digest guarantee: Identical repo state produces identical digest
+  - **Hard Invariants Verified**:
+    - Never mutates original user content as part of scan
+    - Fail closed: Errors emit error receipts and exit nonzero
+    - Canonical ordering everywhere (paths, lists, diffs)
+    - No crypto sealing (reserved for CRYPTO_SAFE phase)
+  - **Tests**: `CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py` (400 LOC)
+    - 11 fixture-backed tests, 100% pass rate (11/11)
+    - Coverage: deterministic digest, purity violations, canonical ordering, exclusions, path normalization, empty repos
+  - **Documentation**: `CAPABILITY/PRIMITIVES/REPO_DIGEST_GUIDE.md` (450 lines)
+    - Complete guide on using CLI and programmatic interfaces
+    - Receipt format documentation with PASS/FAIL examples
+    - Interpreting verdicts and failure modes
+    - Integration examples with catalytic runtime
+  - **CLI Interface**: `python repo_digest.py --pre-digest | --post-digest | --purity-scan | --restore-proof`
+  - **Exit Criteria Met**:
+    - ✓ Deterministic digest (repeated → same digest)
+    - ✓ Purity scan detects violations (tmp residue, files outside durable roots)
+    - ✓ Restore proof shows FAIL with diff summary on mismatch
+    - ✓ Fixture-backed tests for all failure modes
+    - ✓ JSON outputs valid and deterministic
+    - ✓ Documentation complete
+
 ## [3.3.21] - 2026-01-05
 
 ### Completed
