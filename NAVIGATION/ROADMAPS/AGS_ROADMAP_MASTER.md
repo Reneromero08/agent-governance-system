@@ -111,8 +111,8 @@ notes:
 # Phase 3: CAT Chat Stabilization (make the interface reliable)
 - Precondition: If Phase 4.1 is not green, treat Phase 3 as provisional and expect churn.
 
-## 3.1 Router & Fallback Stability (Z.3.1)
-- [ ] 3.1.1 Stabilize model router: deterministic selection + explicit fallback chain (Z.3.1)
+## 3.1 Router & Fallback Stability (Z.3.1) ✅
+- [x] 3.1.1 Stabilize model router: deterministic selection + explicit fallback chain (Z.3.1)
 ## 3.2 Memory Integration (Z.3.2)
 - [ ] 3.2.1 Implement CAT Chat context window management (Z.3.2)
 ## 3.3 Tool Binding (Z.3.3)

@@ -1,8 +1,44 @@
 <!-- CONTENT_HASH: 559be1640754542fd1d0bb63ed6abaef462e4d1f7501ecbb9cc1d574947e1679 -->
 
  # Changelog
- 
+
  All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.18] - 2026-01-05
+
+### Completed
+- **Task 3.1: Router & Fallback Stability (Z.3.1)** — Implemented deterministic model selection with explicit fallback chains.
+  - **3.1.1 - Stabilize model router: deterministic selection + explicit fallback chain**: Implemented in `CAPABILITY/TOOLS/model_router.py`
+    - `KNOWN_MODELS` registry with 6 models (Claude Sonnet 4.5, Claude Sonnet, Claude Opus 4.5, GPT-5.2-Codex, Gemini Pro, Gemini 3 Pro)
+    - `select_model()` function for deterministic model selection with explicit fallback chains
+    - `validate_model()` for fail-closed model validation
+    - `create_router_receipt()` for auditing router selections
+    - Chain hash computation (SHA256) for reproducibility and determinism verification
+    - Pure logic component: no side effects, no mutable state
+  - **Determinism Guarantees**:
+    - Same inputs (primary_model, fallback_chain, selection_index) → same output (verified across 10 runs)
+    - Chain hash determinism: order matters, different chains produce different hashes
+    - Model name parsing: idempotent handling of reasoning annotations
+  - **Fail-Closed Design**:
+    - `InvalidModelError`: unknown model names rejected immediately
+    - `EmptyFallbackChainError`: requires at least one model
+    - `RouterError`: base exception for all router errors
+  - **Tests**: Created `CAPABILITY/TESTBENCH/core/test_model_router.py` with 32 tests, all passing
+    - Model name parsing (4 tests)
+    - Model validation (5 tests)
+    - Model selection logic (9 tests)
+    - Determinism verification (4 tests)
+    - Receipt generation (2 tests)
+    - ModelSpec behavior (2 tests)
+    - Registry validation (2 tests)
+    - Integration workflows (2 tests)
+  - **Regression Testing**: All 66 core tests passing (no regressions)
+  - **Artifacts**:
+    - Implementation: `CAPABILITY/TOOLS/model_router.py`
+    - Tests: `CAPABILITY/TESTBENCH/core/test_model_router.py`
+    - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json`
+    - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md`
+  - **Roadmap**: Section 3.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
 
 ## [3.3.17] - 2026-01-05
 

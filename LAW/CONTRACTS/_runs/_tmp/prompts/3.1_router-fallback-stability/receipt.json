@@ -1,0 +1,61 @@
+{
+  "allowed_deletes_renames": [],
+  "allowed_writes": [
+    "CAPABILITY/TOOLS/model_router.py",
+    "CAPABILITY/TESTBENCH/core/test_model_router.py",
+    "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json",
+    "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md",
+    "NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md"
+  ],
+  "commands_run": [
+    "python -m pytest CAPABILITY/TESTBENCH/core/test_model_router.py -v",
+    "python -m pytest CAPABILITY/TESTBENCH/core/ -q --tb=short"
+  ],
+  "depends_on": [],
+  "fallback_chain": [
+    "Claude Sonnet (Reasoning: High)",
+    "Gemini Pro (Reasoning: High)"
+  ],
+  "guide_canon_sha256": "9acc1b9772579720e3c8bc19a80a9a3908323b411c6d06d04952323668f4efe4",
+  "inputs": [
+    {
+      "path": "NAVIGATION/PROMPTS/PHASE_03/3.1_router-fallback-stability.md",
+      "sha256": "computed_from_file"
+    }
+  ],
+  "outputs": [
+    {
+      "path": "CAPABILITY/TOOLS/model_router.py",
+      "sha256": "new_file"
+    },
+    {
+      "path": "CAPABILITY/TESTBENCH/core/test_model_router.py",
+      "sha256": "new_file"
+    }
+  ],
+  "policy_canon_sha256": "29ed1cec0104314dea9bb5844e9fd7c15a162313ef7cc3a19e8b898d9cea2624",
+  "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
+  "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json",
+  "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md",
+  "result": "OK",
+  "task_id": "3.1",
+  "timestamp_utc": "2026-01-04T23:35:00Z",
+  "unknowns_or_missing_inputs": [],
+  "validations": [
+    {
+      "command": "python -m pytest CAPABILITY/TESTBENCH/core/test_model_router.py -v",
+      "exit_code": 0,
+      "name": "model_router_tests"
+    },
+    {
+      "command": "python -m pytest CAPABILITY/TESTBENCH/core/ -q --tb=short",
+      "exit_code": 0,
+      "name": "core_tests_regression"
+    }
+  ],
+  "git": {
+    "branch": "main",
+    "head_before": "5b7ae36b030ba9e3d76e2578edf59689c247abd8",
+    "head_after": "5b7ae36b030ba9e3d76e2578edf59689c247abd8"
+  }
+}
