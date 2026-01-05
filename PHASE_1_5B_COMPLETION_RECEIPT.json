@@ -1,0 +1,220 @@
+{
+  "phase": "1.5B",
+  "title": "Repo Digest + Restore Proof + Purity Scan (Deterministic)",
+  "status": "COMPLETED",
+  "completion_timestamp": "2026-01-05T00:00:00Z",
+  "files_changed": [
+    {
+      "path": "CAPABILITY/PRIMITIVES/repo_digest.py",
+      "status": "created",
+      "lines_of_code": 460,
+      "description": "Deterministic repo digest, purity scan, and restore proof implementation"
+    },
+    {
+      "path": "CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py",
+      "status": "created",
+      "lines_of_code": 400,
+      "description": "Fixture-backed tests for all failure modes"
+    },
+    {
+      "path": "CAPABILITY/PRIMITIVES/REPO_DIGEST_GUIDE.md",
+      "status": "created",
+      "lines": 450,
+      "description": "Comprehensive documentation on interpreting receipts"
+    }
+  ],
+  "tests_run": [
+    {
+      "test_file": "CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py",
+      "total_tests": 11,
+      "passed": 11,
+      "failed": 0,
+      "exit_code": 0,
+      "test_cases": [
+        "test_deterministic_digest_repeated",
+        "test_new_file_outside_durable_roots_fails",
+        "test_modified_file_outside_durable_roots_fails",
+        "test_tmp_residue_fails_purity",
+        "test_durable_only_writes_pass",
+        "test_canonical_ordering_paths",
+        "test_exclusions_are_respected",
+        "test_normalize_path",
+        "test_canonical_json_determinism",
+        "test_empty_repo_digest",
+        "test_module_version_hash_in_receipts"
+      ]
+    }
+  ],
+  "determinism_guarantees": {
+    "canonical_ordering": {
+      "file_paths": "Sorted alphabetically in all manifests and diffs",
+      "list_fields": "All list fields (added, removed, changed, tmp_residue, exclusions, etc.) are sorted",
+      "json_serialization": "Canonical JSON with sorted keys, no whitespace"
+    },
+    "hashing_rules": {
+      "tree_digest": "SHA-256 of canonical file records (path:hash\\n format)",
+      "exclusions_spec_hash": "SHA-256 of canonical JSON array of exclusions",
+      "module_version_hash": "SHA-256 of module version string",
+      "file_hashes": "SHA-256 of file bytes"
+    },
+    "repeated_digest_guarantee": "Running compute_digest() twice on identical repo state produces identical digest, file_count, exclusions_spec_hash, and module_version_hash"
+  },
+  "receipts_implemented": [
+    {
+      "name": "PRE_DIGEST.json",
+      "fields": [
+        "digest",
+        "file_count",
+        "file_manifest",
+        "exclusions_spec_hash",
+        "module_version_hash",
+        "module_version"
+      ],
+      "deterministic": true
+    },
+    {
+      "name": "POST_DIGEST.json",
+      "fields": [
+        "digest",
+        "file_count",
+        "file_manifest",
+        "exclusions_spec_hash",
+        "module_version_hash",
+        "module_version"
+      ],
+      "deterministic": true
+    },
+    {
+      "name": "PURITY_SCAN.json",
+      "fields": [
+        "verdict",
+        "violations",
+        "tmp_residue",
+        "scan_module_version_hash",
+        "module_version"
+      ],
+      "deterministic": true,
+      "verdict_logic": "PASS if tmp_roots empty AND digest unchanged; FAIL otherwise"
+    },
+    {
+      "name": "RESTORE_PROOF.json",
+      "fields": [
+        "verdict",
+        "pre_digest",
+        "post_digest",
+        "tmp_roots",
+        "durable_roots",
+        "exclusions",
+        "exclusions_spec_hash",
+        "proof_module_version_hash",
+        "module_version",
+        "diff_summary (on FAIL)"
+      ],
+      "deterministic": true,
+      "verdict_logic": "PASS if pre_digest == post_digest AND purity_scan.verdict == PASS; FAIL otherwise",
+      "diff_summary_fields": [
+        "added (sorted)",
+        "removed (sorted)",
+        "changed (sorted)"
+      ]
+    }
+  ],
+  "failure_modes_tested": [
+    {
+      "mode": "deterministic_digest_repeated",
+      "test": "test_deterministic_digest_repeated",
+      "result": "PASS",
+      "evidence": "Running digest twice on identical repo state produces identical digest"
+    },
+    {
+      "mode": "new_file_outside_durable_roots",
+      "test": "test_new_file_outside_durable_roots_fails",
+      "result": "PASS",
+      "evidence": "Adding file outside durable roots causes purity FAIL and restore FAIL with diff showing added=[path]"
+    },
+    {
+      "mode": "modified_file_outside_durable_roots",
+      "test": "test_modified_file_outside_durable_roots_fails",
+      "result": "PASS",
+      "evidence": "Modifying file outside durable roots causes purity FAIL and restore FAIL with diff showing changed=[path]"
+    },
+    {
+      "mode": "tmp_residue",
+      "test": "test_tmp_residue_fails_purity",
+      "result": "PASS",
+      "evidence": "Files remaining in tmp roots cause purity FAIL with tmp_residue list populated"
+    },
+    {
+      "mode": "durable_only_writes",
+      "test": "test_durable_only_writes_pass",
+      "result": "PASS",
+      "evidence": "Writing only to durable roots passes both purity and restore proofs"
+    },
+    {
+      "mode": "canonical_ordering_paths",
+      "test": "test_canonical_ordering_paths",
+      "result": "PASS",
+      "evidence": "All diff lists (added, removed, changed) are sorted deterministically"
+    },
+    {
+      "mode": "exclusions_respected",
+      "test": "test_exclusions_are_respected",
+      "result": "PASS",
+      "evidence": "Files under exclusion paths are not included in digest; modifying excluded files does not change digest"
+    },
+    {
+      "mode": "path_normalization",
+      "test": "test_normalize_path",
+      "result": "PASS",
+      "evidence": "Windows backslashes converted to forward slashes; relative paths normalized consistently"
+    },
+    {
+      "mode": "canonical_json_determinism",
+      "test": "test_canonical_json_determinism",
+      "result": "PASS",
+      "evidence": "Same dict produces same bytes regardless of key insertion order"
+    },
+    {
+      "mode": "empty_repo_digest",
+      "test": "test_empty_repo_digest",
+      "result": "PASS",
+      "evidence": "Empty repo produces valid deterministic digest with file_count=0"
+    },
+    {
+      "mode": "module_version_hash_in_receipts",
+      "test": "test_module_version_hash_in_receipts",
+      "result": "PASS",
+      "evidence": "All receipts include module_version_hash; hash is consistent across all receipts"
+    }
+  ],
+  "deliverables": {
+    "module": "CAPABILITY/PRIMITIVES/repo_digest.py",
+    "tests": "CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py",
+    "documentation": "CAPABILITY/PRIMITIVES/REPO_DIGEST_GUIDE.md",
+    "cli_interface": true,
+    "programmatic_interface": true
+  },
+  "hard_invariants_verified": {
+    "no_mutation_of_original_content": true,
+    "fail_closed_on_error": true,
+    "canonical_ordering_everywhere": true,
+    "no_crypto_sealing": true
+  },
+  "exit_criteria_met": {
+    "deterministic_digest": true,
+    "purity_scan_detects_violations": true,
+    "restore_proof_shows_fail_on_mismatch": true,
+    "fixture_backed_tests_all_failure_modes": true,
+    "json_outputs_valid_and_deterministic": true,
+    "documentation_complete": true
+  },
+  "blocks": [],
+  "notes": [
+    "Module version: 1.5b.0",
+    "All 11 tests pass with 100% success rate",
+    "Determinism guaranteed through canonical ordering and hashing",
+    "CLI and programmatic interfaces both implemented",
+    "Ready for integration with catalytic runtime",
+    "Future work: crypto sealing (CRYPTO_SAFE phase), cross-run proof chaining, incremental digest updates"
+  ]
+}

@@ -33,6 +33,12 @@ Task prompts generated from `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`.
 - Phase 8: **8.3** feral-resident ->  `NAVIGATION/PROMPTS/PHASE_08/8.3_feral-resident.md`
 - Phase 8: **8.4** production-hardening ->  `NAVIGATION/PROMPTS/PHASE_08/8.4_production-hardening.md`
 - Phase 8: **8.5** vector-execution-long-horizon ->  `NAVIGATION/PROMPTS/PHASE_08/8.5_vector-execution-long-horizon.md`
+- Phase 9: **9.1** mcp-tool-calling-test ->  `NAVIGATION/PROMPTS/PHASE_09/9.1_mcp-tool-calling-test.md`
+- Phase 9: **9.2** task-queue-primitives ->  `NAVIGATION/PROMPTS/PHASE_09/9.2_task-queue-primitives.md`
+- Phase 9: **9.3** chain-of-command ->  `NAVIGATION/PROMPTS/PHASE_09/9.3_chain-of-command.md`
+- Phase 9: **9.4** governor-pattern ->  `NAVIGATION/PROMPTS/PHASE_09/9.4_governor-pattern.md`
+- Phase 9: **9.5** delegation-protocol ->  `NAVIGATION/PROMPTS/PHASE_09/9.5_delegation-protocol.md`
+- Phase 9: **9.6** delegation-harness ->  `NAVIGATION/PROMPTS/PHASE_09/9.6_delegation-harness.md`
 - Phase 10: **10.1** performance-foundation-1 ->  `NAVIGATION/PROMPTS/PHASE_10/10.1_performance-foundation-1.md`
 - Phase 10: **10.2** scale-governance-2 ->  `NAVIGATION/PROMPTS/PHASE_10/10.2_scale-governance-2.md`
 - Phase 10: **10.3** intelligence-ux-3 ->  `NAVIGATION/PROMPTS/PHASE_10/10.3_intelligence-ux-3.md`
