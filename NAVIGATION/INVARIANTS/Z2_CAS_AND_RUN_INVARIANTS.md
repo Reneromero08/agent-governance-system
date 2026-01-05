@@ -183,4 +183,129 @@ What does NOT belong in git:
 - transient test caches
 - generated scratch artifacts unless explicitly declared as canonical build outputs
 
+
+---
+
+## Recovery: CAS and Run Invariant Violations
+
+### Where receipts live
+
+CAS and Run-related receipts and audit trails are stored in:
+
+- **CAPABILITY/CAS/storage/** - CAS object storage (content-addressed blobs)
+  - Objects stored at deterministic paths: `storage/{prefix}/{hash}`
+  - Each object is immutable and verified on write
+- **CAPABILITY/RUNS/RUN_ROOTS.json** - Active run roots for GC protection
+  - List of CAS hashes that are protected from garbage collection
+  - Must be valid JSON array of 64-char lowercase hex hashes
+- **LAW/CONTRACTS/_runs/** - Run execution records and receipts
+  - `_runs/{run_id}/TASK_SPEC.json` - Immutable task specification
+  - `_runs/{run_id}/STATUS.json` - Run status and outcome
+  - `_runs/{run_id}/OUTPUT_HASHES.json` - Deterministic output hash list
+  - `_runs/{run_id}/ERRORS.json` - Structured error records
+- **LAW/CONTRACTS/_runs/audit_logs/** - Root audit results
+  - `root_audit.jsonl` - Output from root_audit.py
+
+### How to re-run verification
+
+To verify CAS and Run invariant compliance:
+
+```bash
+# Verify CAS integrity (check all stored objects)
+python -c "
+from CAPABILITY.CAS import cas as cas_mod
+from pathlib import Path
+storage = cas_mod._CAS_ROOT / 'storage'
+for obj in storage.rglob('*'):
+    if obj.is_file():
+        try:
+            hash_hex = obj.name
+            data = cas_mod.cas_get(hash_hex)
+            print(f'✓ {hash_hex[:12]}...')
+        except Exception as e:
+            print(f'✗ {hash_hex[:12]}... CORRUPT: {e}')
+"
+
+# Verify run bundle integrity
+python -c "
+from CAPABILITY.RUNS.bundles import run_bundle_verify
+bundle_ref = 'sha256:YOUR_BUNDLE_HASH_HERE'
+receipt = run_bundle_verify(bundle_ref)
+print(f'Status: {receipt.verification_status}')
+print(f'Errors: {receipt.errors}')
+"
+
+# Run root audit (verifies reachability from roots)
+python CAPABILITY/AUDIT/root_audit.py --verbose
+
+# Verify RUN_ROOTS.json format
+python -c "
+import json
+from pathlib import Path
+roots = json.loads(Path('CAPABILITY/RUNS/RUN_ROOTS.json').read_text())
+assert isinstance(roots, list), 'RUN_ROOTS must be a list'
+for i, h in enumerate(roots):
+    assert len(h) == 64 and h.islower() and h.isalnum(), f'Invalid hash at index {i}: {h}'
+print(f'✓ RUN_ROOTS.json valid ({len(roots)} roots)')
+"
+```
+
+### What to delete vs never delete
+
+**Safe to delete (with caution):**
+- **Unrooted CAS objects** - Only via GC with `allow_empty_roots=False` protection
+  - Never manually delete from `CAPABILITY/CAS/storage/`
+  - Use `python CAPABILITY/GC/gc.py --dry-run` to preview deletions
+- **Temporary run artifacts** - Under `LAW/CONTRACTS/_runs/_tmp/`
+  - These are catalytic domains and disposable by design
+
+**Never delete (protected by invariants):**
+- **Rooted CAS objects** - Any hash in `RUN_ROOTS.json` or `GC_PINS.json`
+  - Deletion breaks referential integrity
+  - Only GC can safely delete after root removal
+- **RUN_ROOTS.json** and **GC_PINS.json** - Root tracking files
+  - Modify only via explicit ceremony
+  - Deletion causes catastrophic GC failure (fail-closed protection)
+- **Run bundle manifests** - Immutable proof-carrying records
+  - Referenced by bundle_ref in downstream systems
+  - Deletion breaks audit trail
+- **TASK_SPEC, STATUS, OUTPUT_HASHES** - Immutable run artifacts
+  - These are the source of truth for run verification
+  - Re-running may not produce identical hashes if inputs changed
+
+**Recovery procedures:**
+- **CAS object corrupted**: Delete corrupted object, re-store from source material
+  ```bash
+  # Identify corruption
+  python -c "from CAPABILITY.CAS import cas as cas_mod; cas_mod.cas_get('HASH_HERE')"
+  # If corrupt, delete and re-store
+  rm CAPABILITY/CAS/storage/prefix/HASH_HERE
+  python -c "from CAPABILITY.CAS import cas as cas_mod; print(cas_mod.cas_put(SOURCE_BYTES))"
+  ```
+- **RUN_ROOTS.json malformed**: Restore from git history or rebuild from known good roots
+  ```bash
+  git checkout HEAD~ -- CAPABILITY/RUNS/RUN_ROOTS.json
+  ```
+- **Run bundle verification failed**: Check if referenced blobs exist, restore missing blobs from backup
+  ```bash
+  python -c "
+  from CAPABILITY.RUNS.bundles import run_bundle_verify
+  receipt = run_bundle_verify('sha256:BUNDLE_HASH')
+  print('Missing artifacts:', [k for k, v in receipt.artifact_status.items() if not v])
+  "
+  ```
+- **Root audit failed**: Identify unreachable outputs, add missing roots to RUN_ROOTS.json
+  ```bash
+  python CAPABILITY/AUDIT/root_audit.py --verbose
+  # Add missing root hash to RUN_ROOTS.json
+  python -c "
+  import json
+  from pathlib import Path
+  roots = json.loads(Path('CAPABILITY/RUNS/RUN_ROOTS.json').read_text())
+  roots.append('MISSING_HASH_HERE')
+  roots = sorted(list(set(roots)))
+  Path('CAPABILITY/RUNS/RUN_ROOTS.json').write_text(json.dumps(roots, indent=2, sort_keys=True) + '\n')
+  "
+  ```
+
 ---

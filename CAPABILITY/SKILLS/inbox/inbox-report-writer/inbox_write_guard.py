@@ -123,8 +123,18 @@ def inbox_write_guard(func: Callable) -> Callable:
             filepath = args[0]
             content = args[1]
             
+            # Handle bytes content (decode for validation)
+            if isinstance(content, bytes):
+                try:
+                    content_str = content.decode('utf-8')
+                except UnicodeDecodeError:
+                    # If it's not valid UTF-8, it's not a markdown file we care about
+                    return func(*args, **kwargs)
+            else:
+                content_str = content
+            
             # Validate before write
-            validate_inbox_write(filepath, content)
+            validate_inbox_write(filepath, content_str)
         
         # Proceed with original function
         return func(*args, **kwargs)

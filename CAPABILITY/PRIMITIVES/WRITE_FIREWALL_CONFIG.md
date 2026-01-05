@@ -392,6 +392,95 @@ Expected: All 26 tests pass (100% coverage of firewall policy enforcement).
 - **Tool versioning:** Every receipt includes tool version hash for auditability.
 - **Path normalization:** Windows backslashes → Unix forward slashes automatically.
 
+## Path Normalization and Resolution Contract
+
+### Normalization Rules
+
+All paths are normalized to a canonical form:
+1. **Separator normalization**: Windows backslashes (`\`) → forward slashes (`/`)
+2. **Trailing slash removal**: `path/to/dir/` → `path/to/dir`
+3. **Relative-to-project-root**: Paths stored as repo-relative (e.g., `LAW/CONTRACTS/_runs/_tmp/file.txt`)
+
+### Path Resolution Policy
+
+**Resolution order**:
+1. Convert path to absolute using `Path.resolve()` (follows symlinks/junctions)
+2. Compute path relative to `project_root`
+3. Reject if resolved path escapes `project_root` (error: `FIREWALL_PATH_ESCAPE`)
+4. Normalize to forward-slash format
+
+**Symlink and junction handling**:
+- **Policy**: Firewall resolves symlinks/junctions to their targets before validation
+- **Bypass protection**: If a symlink inside an allowed domain points OUTSIDE the project root, the write is blocked with `FIREWALL_PATH_ESCAPE`
+- **Windows junctions**: Treated identically to symlinks (resolved via `Path.resolve()`)
+- **Hard links**: Treated as regular files (no special handling)
+
+**Cross-platform behavior**:
+- **Windows**: Paths with backslashes accepted and normalized to forward slashes
+- **WSL/Linux**: Paths with forward slashes used as-is
+- **Case sensitivity**: Follows platform defaults (case-insensitive on Windows, case-sensitive on Linux)
+- **UNC paths** (Windows `\\server\share`): Not supported; use mapped drives or reject at project_root boundary
+
+### Security Guarantees
+
+1. **No escape via symlinks**: Even if a symlink exists under `tmp_roots` pointing to `/etc/passwd`, the write is rejected because the resolved path escapes `project_root`
+2. **No traversal**: Paths containing `..` are rejected with `FIREWALL_PATH_TRAVERSAL` (checked before resolution)
+3. **Canonical validation**: All domain checks use resolved, normalized paths
+
+### Example Scenarios
+
+**Scenario 1: Symlink inside tmp_roots pointing outside project_root**
+```
+project_root: /home/user/repo
+tmp_roots: ["_tmp"]
+/home/user/repo/_tmp/evil_link -> /etc/passwd (symlink)
+
+firewall.safe_write("_tmp/evil_link", "data", kind="tmp")
+→ REJECTED: FIREWALL_PATH_ESCAPE (resolved to /etc/passwd, outside project_root)
+```
+
+**Scenario 2: Symlink inside tmp_roots pointing to durable_roots**
+```
+project_root: /home/user/repo
+tmp_roots: ["_tmp"]
+durable_roots: ["outputs"]
+/home/user/repo/_tmp/link_to_outputs -> /home/user/repo/outputs (symlink)
+
+firewall.safe_write("_tmp/link_to_outputs/file.txt", "data", kind="tmp")
+→ REJECTED: FIREWALL_TMP_WRITE_WRONG_DOMAIN (resolved to outputs/, which is durable domain)
+```
+
+**Scenario 3: Legitimate symlink within same domain**
+```
+project_root: /home/user/repo
+tmp_roots: ["_tmp"]
+/home/user/repo/_tmp/link -> /home/user/repo/_tmp/subdir (symlink within tmp)
+
+firewall.safe_write("_tmp/link/file.txt", "data", kind="tmp")
+→ ALLOWED (resolved to _tmp/subdir/file.txt, within tmp domain)
+```
+
+## Error Code Reference (Frozen)
+
+Error codes are **append-only** and **never reused**. Meanings are immutable once defined.
+
+| Code | Meaning | Introduced |
+|------|---------|------------|
+| `FIREWALL_PATH_ESCAPE` | Resolved path escapes project root (including via symlinks/junctions) | v1.0.0 |
+| `FIREWALL_PATH_TRAVERSAL` | Path contains `..` components (rejected before resolution) | v1.0.0 |
+| `FIREWALL_PATH_EXCLUDED` | Path is in exclusion list (after resolution and normalization) | v1.0.0 |
+| `FIREWALL_PATH_NOT_IN_DOMAIN` | Path not in any allowed tmp/durable domain | v1.0.0 |
+| `FIREWALL_TMP_WRITE_WRONG_DOMAIN` | Tmp write attempted outside tmp_roots | v1.0.0 |
+| `FIREWALL_DURABLE_WRITE_WRONG_DOMAIN` | Durable write attempted outside durable_roots | v1.0.0 |
+| `FIREWALL_DURABLE_WRITE_BEFORE_COMMIT` | Durable write attempted before commit gate opened | v1.0.0 |
+| `FIREWALL_INVALID_KIND` | Invalid write kind (not "tmp" or "durable") | v1.0.0 |
+
+**Freeze Rules**:
+1. **Never reuse error codes**: If a code is retired, reserve it permanently
+2. **Never change meanings**: Once defined, the semantic meaning is immutable
+3. **Append-only additions**: New codes may be added with new version annotations
+4. **Version tracking**: Each code documents the version where it was introduced
+
 ## Version History
 
 - **v1.0.0** (Phase 1.5A): Initial implementation with tmp/durable domain separation and commit gate.

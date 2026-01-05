@@ -1,14 +1,14 @@
 {
   "pack_version": "canon-aligned",
-  "generated_utc": "2026-01-04T06:12:05Z",
+  "generated_utc": "2026-01-05T12:45:00Z",
   "canon": {
     "orientation": {
       "path": "NAVIGATION/PROMPTS/0_ORIENTATION_CANON.md",
-      "sha256": "99d0ede4ed7710767b90d37efd0ea9444ecb41d9c82ae38a79f0952dd25c22f3"
+      "sha256": "C300CAEBD6B35A7775525FDF82E6EC08CF737036067B1DC2FDB0F066C564B43D"
     },
     "policy": {
       "path": "NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md",
-      "sha256": "29ed1cec0104314dea9bb5844e9fd7c15a162313ef7cc3a19e8b898d9cea2624"
+      "sha256": "E31D9F3A97E2F234A50AC9B2E7EE59E893A9FCC1690666A5E5F7DD0BAD2BBEC3"
     },
     "guide": {
       "path": "NAVIGATION/PROMPTS/2_PROMPT_GENERATOR_GUIDE_FINAL.md",
@@ -16,7 +16,7 @@
     },
     "template": {
       "path": "NAVIGATION/PROMPTS/3_MASTER_PROMPT_TEMPLATE_CANON.md",
-      "sha256": "bf7019da38e5ff1d9696c64ba2c53312cad3e6de701d602b758ea40680fb9967"
+      "sha256": "8A7D325BE355AA03E5232B3158A9AFFECC48ABFF6370C70F36478B1D8FEAB6D6"
     },
     "handoff_full": {
       "path": "NAVIGATION/PROMPTS/4_FULL_HANDOFF_TEMPLATE_CANON.md",
@@ -256,6 +256,69 @@
         "2.1",
         "2.2",
         "2.3"
+      ],
+      "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
+      "fallback_chain": [
+        "Claude Sonnet (Reasoning: High)",
+        "Gemini Pro (Reasoning: High)"
+      ],
+      "warnings": []
+    },
+    {
+      "task_id": "3.2",
+      "phase": 3,
+      "slug": "memory-integration",
+      "legacy_id": "P03_3-2",
+      "prompt_path": "PROMPTS/PHASE_03/3.2_memory-integration.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.2_memory-integration/REPORT.md",
+      "depends_on": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
+      ],
+      "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
+      "fallback_chain": [
+        "Claude Sonnet (Reasoning: High)",
+        "Gemini Pro (Reasoning: High)"
+      ],
+      "warnings": []
+    },
+    {
+      "task_id": "3.3",
+      "phase": 3,
+      "slug": "tool-binding",
+      "legacy_id": "P03_3-3",
+      "prompt_path": "PROMPTS/PHASE_03/3.3_tool-binding.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.3_tool-binding/REPORT.md",
+      "depends_on": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
+      ],
+      "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
+      "fallback_chain": [
+        "Claude Sonnet (Reasoning: High)",
+        "Gemini Pro (Reasoning: High)"
+      ],
+      "warnings": []
+    },
+    {
+      "task_id": "3.4",
+      "phase": 3,
+      "slug": "session-persistence",
+      "legacy_id": "P03_3-4",
+      "prompt_path": "PROMPTS/PHASE_03/3.4_session-persistence.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/3.4_session-persistence/REPORT.md",
+      "depends_on": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4"
       ],
       "primary_model": "Claude Sonnet 4.5 (non-thinking) (Reasoning: Medium)",
       "fallback_chain": [
@@ -687,6 +750,47 @@
       "prompt_path": "PROMPTS/PHASE_08/8.1_resident-identity.md",
       "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/receipt.json",
       "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.1_resident-identity/REPORT.md",
+      "depends_on": [
+        "1.1",
+        "1.2",
+        "1.3",
+        "1.4",
+        "2.1",
+        "2.2",
+        "2.3",
+        "3.1",
+        "3.2",
+        "3.3",
+        "3.4",
+        "4.1",
+        "5.1",
+        "6.1",
+        "6.2",
+        "6.3",
+        "6.4",
+        "7.1",
+        "7.2",
+        "7.3",
+        "7.4",
+        "7.5",
+        "7.6",
+        "7.7"
+      ],
+      "primary_model": "Claude Opus 4.5 (Thinking) (Reasoning: High)",
+      "fallback_chain": [
+        "Claude Sonnet (Reasoning: High)",
+        "Gemini Pro (Reasoning: High)"
+      ],
+      "warnings": []
+    },
+    {
+      "task_id": "8.3",
+      "phase": 8,
+      "slug": "feral-resident",
+      "legacy_id": "P08_8-3",
+      "prompt_path": "PROMPTS/PHASE_08/8.3_feral-resident.md",
+      "receipt_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/receipt.json",
+      "report_path": "LAW/CONTRACTS/_runs/_tmp/prompts/8.3_feral-resident/REPORT.md",
       "depends_on": [
         "1.1",
         "1.2",

@@ -405,9 +405,96 @@ if proof["verdict"] == "FAIL":
 - `1`: Restoration failed (FAIL)
 - `2`: Error (digest computation failed, invalid args, etc.)
 
+## Path Normalization and Symlink Policy
+
+### Normalization Rules
+
+All paths in receipts are normalized to canonical form:
+1. **Separator normalization**: Windows backslashes (`\`) → forward slashes (`/`)
+2. **Trailing slash removal**: `path/to/dir/` → `path/to/dir`
+3. **Relative-to-repo-root**: All paths stored as repo-relative (e.g., `CAPABILITY/PRIMITIVES/file.py`)
+
+### Symlink and Junction Handling
+
+**Current behavior** (Phase 1.5B):
+- **File enumeration**: `os.walk()` follows symlinks by default
+- **Risk**: Symlinks escaping repo root may cause digest to include external files
+- **Mitigation**: Exclusion check rejects files outside repo root (via `try/except ValueError` on `relative_to()`)
+
+**Symlink policy** (defense-in-depth):
+1. **No escape via symlinks**: If a symlink points outside `repo_root`, the file is excluded (path normalization fails `relative_to()` check)
+2. **Symlinks within repo**: Followed normally, hashed at target location
+3. **Circular symlinks**: May cause issues; avoid circular symlink structures in repo
+
+**Future hardening** (not in 1.5B):
+- Explicit symlink detection with `Path.is_symlink()`
+- `os.walk(followlinks=False)` to prevent following any symlinks
+- Separate handling for symlinks-as-metadata vs symlinks-as-files
+
+### Change Detection Semantics
+
+**Bytes-only change detection**:
+- Files compared by **SHA-256 hash of file content bytes only**
+- **Metadata NOT included**: mtime, permissions, ownership, xattrs ignored
+- **Determinism**: Identical file bytes → identical hash, regardless of metadata
+
+**What triggers "changed" verdict**:
+- File content bytes differ (different SHA-256 hash)
+
+**What does NOT trigger "changed"**:
+- Modification time (`mtime`) changed
+- File permissions changed (e.g., `chmod +x`)
+- File ownership changed
+- Extended attributes changed
+
+**Rationale**: Content-only comparison ensures determinism across platforms and file copies.
+
+### Cross-Platform Behavior
+
+**Windows vs Linux**:
+- **Path separators**: Normalized to forward slashes on all platforms
+- **Case sensitivity**: Paths stored as-is; comparison is platform-dependent (case-insensitive on Windows, case-sensitive on Linux)
+- **Symlinks on Windows**: Requires admin privileges or Developer Mode; if unavailable, symlinks treated as regular files
+- **Junctions on Windows**: Followed by `os.walk()` like symlinks
+
+**WSL interop**:
+- Paths with Windows backslashes normalized to forward slashes
+- Works correctly in WSL accessing Windows filesystems (`/mnt/c/...`)
+
+## Error Handling and Receipts
+
+### Error Codes (Frozen)
+
+Error codes are **append-only** and **never reused**.
+
+| Code | Meaning | Introduced |
+|------|---------|------------|
+| `DIGEST_COMPUTATION_FAILED` | Digest computation failed (exception during file enumeration or hashing) | v1.5b.0 |
+| `HASH_FAILED` | File hash computation failed (unreadable file, I/O error) | v1.5b.0 |
+| `PURITY_SCAN_FAILED` | Purity scan failed (exception during scan) | v1.5b.0 |
+| `RESTORE_PROOF_GENERATION_FAILED` | Restore proof generation failed (exception during proof) | v1.5b.0 |
+
+**Freeze Rules**:
+1. **Never reuse error codes**: Retired codes are reserved permanently
+2. **Never change meanings**: Semantic meaning is immutable once defined
+3. **Append-only**: New codes may be added with version annotations
+
+### CLI Error Receipts
+
+**Current behavior** (Phase 1.5B):
+- CLI prints error to stderr and exits with code 2
+- **Missing**: No error receipt written to disk on unexpected exceptions
+
+**Required behavior** (Phase 1.5 Polish):
+- On unexpected exception, CLI must:
+  1. Write error receipt to a deterministic path (e.g., `ERROR_RECEIPT.json`)
+  2. Include: operation attempted, exception type, error code, module version hash, config snapshot
+  3. Exit with deterministic nonzero code (2 for errors, 1 for FAIL verdict)
+
 ## Future Work (Not Implemented in 1.5B)
 
 - Crypto sealing (CRYPTO_SAFE phase)
 - Cross-run proof chaining
 - Incremental digest updates (for large repos)
 - Compression of file_manifest for large repos
+- Explicit symlink bypass protection (`followlinks=False` in `os.walk`)

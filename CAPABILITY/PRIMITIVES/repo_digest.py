@@ -22,6 +22,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
@@ -142,12 +143,14 @@ class RepoDigest:
         """
         Enumerate all files in repo with hashes, excluding specified paths.
 
+        Security: followlinks=False prevents symlink escape attacks.
+
         Returns:
             List of {path: normalized_relpath, hash: sha256} in canonical order
         """
         file_records = []
 
-        for root, dirs, files in os.walk(self.spec.repo_root):
+        for root, dirs, files in os.walk(self.spec.repo_root, followlinks=False):
             root_path = Path(root)
 
             # Filter out excluded directories (modify dirs in-place to prune walk)
@@ -232,8 +235,8 @@ class PurityScan:
             for tmp_root in self.spec.tmp_roots:
                 tmp_path = self.spec.repo_root / tmp_root
                 if tmp_path.exists():
-                    # Enumerate files in tmp root
-                    for root, dirs, files in os.walk(tmp_path):
+                    # Enumerate files in tmp root (don't follow symlinks)
+                    for root, dirs, files in os.walk(tmp_path, followlinks=False):
                         root_path = Path(root)
                         for f in files:
                             file_path = root_path / f
@@ -369,6 +372,43 @@ def write_receipt(path: Path, receipt: Dict[str, Any]) -> None:
     tmp_path.replace(path)
 
 
+def write_error_receipt(
+    operation: str,
+    exception: Exception,
+    error_code: str,
+    config_snapshot: Dict[str, Any],
+    output_path: Path | None = None,
+) -> None:
+    """
+    Write error receipt on unexpected exception.
+
+    Args:
+        operation: Operation attempted (e.g., "pre_digest", "purity_scan")
+        exception: Exception that occurred
+        error_code: Deterministic error code
+        config_snapshot: Configuration snapshot (spec details)
+        output_path: Optional path to write error receipt (defaults to ERROR_RECEIPT.json)
+    """
+    if output_path is None:
+        output_path = Path("ERROR_RECEIPT.json")
+
+    module_version_hash = hashlib.sha256(MODULE_VERSION.encode("utf-8")).hexdigest()
+
+    error_receipt = {
+        "verdict": "ERROR",
+        "error_code": error_code,
+        "operation": operation,
+        "exception_type": type(exception).__name__,
+        "exception_message": str(exception),
+        "module_version": MODULE_VERSION,
+        "module_version_hash": module_version_hash,
+        "config_snapshot": config_snapshot,
+    }
+
+    write_receipt(output_path, error_receipt)
+    print(f"ERROR: Wrote error receipt to {output_path}", file=sys.stderr)
+
+
 def main() -> int:
     """
     CLI entry point for digest/scan/proof generation.
@@ -390,6 +430,7 @@ def main() -> int:
     parser.add_argument("--exclusions", default="", help="Comma-separated exclusion paths")
     parser.add_argument("--durable-roots", default="", help="Comma-separated durable root paths")
     parser.add_argument("--tmp-roots", default="", help="Comma-separated tmp root paths")
+    parser.add_argument("--error-receipt", metavar="PATH", help="Path to write error receipt on failure (default: ERROR_RECEIPT.json)")
 
     args = parser.parse_args()
 
@@ -409,6 +450,15 @@ def main() -> int:
         durable_roots=durable_roots,
         tmp_roots=tmp_roots,
     )
+
+    config_snapshot = {
+        "repo_root": str(repo_root),
+        "exclusions": sorted(exclusions),
+        "durable_roots": sorted(durable_roots),
+        "tmp_roots": sorted(tmp_roots),
+    }
+
+    error_receipt_path = Path(args.error_receipt) if args.error_receipt else None
 
     try:
         if args.pre_digest:
@@ -457,11 +507,30 @@ def main() -> int:
         parser.print_help()
         return 2
 
-    except Exception as e:
+    except ValueError as e:
+        # Known error codes (DIGEST_COMPUTATION_FAILED, etc.)
+        error_code = str(e).split(":")[0] if ":" in str(e) else "UNKNOWN_ERROR"
+        write_error_receipt(
+            operation="digest_operation",
+            exception=e,
+            error_code=error_code,
+            config_snapshot=config_snapshot,
+            output_path=error_receipt_path,
+        )
         print(f"ERROR: {e}", file=sys.stderr)
+        return 2
+    except Exception as e:
+        # Unexpected exceptions
+        write_error_receipt(
+            operation="digest_operation",
+            exception=e,
+            error_code="UNEXPECTED_ERROR",
+            config_snapshot=config_snapshot,
+            output_path=error_receipt_path,
+        )
+        print(f"ERROR: Unexpected exception: {e}", file=sys.stderr)
         return 2
 
 
 if __name__ == "__main__":
-    import sys
     sys.exit(main())

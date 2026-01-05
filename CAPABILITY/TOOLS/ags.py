@@ -43,7 +43,52 @@ except ImportError:
 from CAPABILITY.TOOLS.utilities.intent import generate_intent
 
 
+# S.2.3: Runtime interceptor for INBOX writes (inlined to avoid import issues)
+def _validate_inbox_write_inline(filepath: Path, content: str) -> None:
+    """Validate that a write to INBOX has a valid hash (S.2.3)."""
+    try:
+        parts = filepath.parts
+        if 'INBOX' in parts and filepath.suffix == '.md':
+            # Extract stored hash
+            import re
+            hash_pattern = r'<!--\s*CONTENT_HASH:\s*([a-f0-9]+)\s*-->'
+            match = re.search(hash_pattern, content, re.IGNORECASE)
+            
+            if not match:
+                # Compute what the hash should be
+                cleaned = re.sub(r'<!--\s*CONTENT_HASH:\s*[a-f0-9]+\s*-->\n*', '', content, flags=re.IGNORECASE)
+                computed_hash = hashlib.sha256(cleaned.encode('utf-8')).hexdigest()
+                raise RuntimeError(
+                    f"S.2.3 INBOX_WRITE_BLOCKED: {filepath}\n"
+                    f"All INBOX/*.md files must have a valid CONTENT_HASH comment.\n"
+                    f"Add after frontmatter: <!-- CONTENT_HASH: {computed_hash} -->"
+                )
+            
+            # Verify hash matches
+            stored_hash = match.group(1)
+            cleaned = re.sub(r'<!--\s*CONTENT_HASH:\s*[a-f0-9]+\s*-->\n*', '', content, flags=re.IGNORECASE)
+            computed_hash = hashlib.sha256(cleaned.encode('utf-8')).hexdigest()
+            
+            if stored_hash != computed_hash:
+                raise RuntimeError(
+                    f"S.2.3 INBOX_HASH_MISMATCH: {filepath}\n"
+                    f"Stored: {stored_hash}\n"
+                    f"Computed: {computed_hash}"
+                )
+    except ValueError:
+        pass  # Path not relative, allow
+
+
 def _atomic_write_bytes(path: Path, data: bytes) -> None:
+    """Atomic write with INBOX hash validation (S.2.3)."""
+    # Validate INBOX writes before proceeding
+    if isinstance(data, bytes):
+        try:
+            content_str = data.decode('utf-8')
+            _validate_inbox_write_inline(path, content_str)
+        except UnicodeDecodeError:
+            pass  # Not a text file, skip validation
+    
     path.parent.mkdir(parents=True, exist_ok=True)
     tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
     tmp.write_bytes(data)
