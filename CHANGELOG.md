@@ -4,6 +4,13 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.12] - 2026-01-05
+
+### Changed
+- **Roadmap 6.4 “Real Proof” requirements** — Expanded `6.4 Compression Validation` to require declared tokenizer/encoding, explicit baseline corpus, explicit compressed-context retrieval params + hashes, and an auditable proof bundle (`DATA.json` + report).
+- **6.4 executor prompt** — Added hard required-facts checks for `tiktoken` availability and `section_vectors` readiness, and required emitting `DATA.json` for math auditability.
+- **STATUS_REPORT clarity** — Updated `NAVIGATION/PROMPTS/PHASE_06/STATUS_REPORT.md` with non-WSL Codex/MCP guidance and a one-shot 6.4 execution checklist.
+
 ## [3.3.11] - 2026-01-04
 
 ### Changed
