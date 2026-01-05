@@ -15,8 +15,10 @@
     "SPLIT/AGS-01_LAW.md",
     "SPLIT/AGS-02_CAPABILITY.md",
     "SPLIT/AGS-03_NAVIGATION.md",
-    "SPLIT/AGS-06_MEMORY.md",
-    "SPLIT/AGS-07_ROOT_FILES.md",
-    "LITE/AGS-00_INDEX.md"
+    "SPLIT/AGS-04_PROOFS.md",
+    "SPLIT/AGS-07_MEMORY.md",
+    "SPLIT/AGS-08_ROOT_FILES.md",
+    "LITE/AGS-00_INDEX.md",
+    "LITE/PROOFS.json"
   ]
 }

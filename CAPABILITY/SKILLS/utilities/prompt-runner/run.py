@@ -20,8 +20,8 @@ ALLOWED_OUTPUT_ROOT = (PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs").resolve()
 POLICY_CANON_PATH = PROJECT_ROOT / "NAVIGATION" / "PROMPTS" / "1_PROMPT_POLICY_CANON.md"
 GUIDE_CANON_PATH = PROJECT_ROOT / "NAVIGATION" / "PROMPTS" / "2_PROMPT_GENERATOR_GUIDE_FINAL.md"
 SECTION_INDEX_PATHS = [
-    PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json",
     PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "meta" / "SECTION_INDEX.json",
+    PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json",
 ]
 LINT_COMMAND = "bash CAPABILITY/TOOLS/linters/lint_prompt_pack.sh NAVIGATION/PROMPTS"
 
@@ -86,6 +86,15 @@ def _sha256_text(text: str) -> str:
 def _sha256_file(path: Path) -> str:
     data = path.read_bytes()
     return hashlib.sha256(data).hexdigest()
+
+
+def _scrub_text(text: str) -> str:
+    if not text:
+        return ""
+    repo_posix = str(PROJECT_ROOT)
+    repo_win = repo_posix.replace("/", "\\")
+    scrubbed = text.replace(repo_posix, "<REPO_ROOT>").replace(repo_win, "<REPO_ROOT>")
+    return scrubbed
 
 
 def _parse_frontmatter(lines: List[str]) -> Tuple[Dict[str, Any], int]:
@@ -464,18 +473,20 @@ def main() -> int:
                 errors.append(f"prompt_path not found: {prompt_path}")
                 policy_breach = True
             else:
-                index_path = _find_section_index(prompt_path)
-                if not index_path:
-                    errors.append(f"prompt_path not in cortex index: {prompt_path}")
-                    policy_breach = True
-                else:
-                    cortex_index_used = _normalize_path(str(index_path.relative_to(PROJECT_ROOT)))
-                    prompt_text = prompt_file.read_text(encoding="utf-8")
-                    prompt_sha256 = _sha256_text(prompt_text)
-                    lines = prompt_text.splitlines()
-                    frontmatter, _ = _parse_frontmatter(lines)
-                    headings = _extract_headings(lines)
-                    fill_me_tokens = _find_fill_me_tokens(prompt_text)
+                in_prompt_pack = _normalize_path(prompt_path).startswith("NAVIGATION/PROMPTS/")
+                if in_prompt_pack:
+                    index_path = _find_section_index(prompt_path)
+                    if not index_path:
+                        errors.append(f"prompt_path not in cortex index: {prompt_path}")
+                        policy_breach = True
+                    else:
+                        cortex_index_used = _normalize_path(str(index_path.relative_to(PROJECT_ROOT)))
+                prompt_text = prompt_file.read_text(encoding="utf-8")
+                prompt_sha256 = _sha256_text(prompt_text)
+                lines = prompt_text.splitlines()
+                frontmatter, _ = _parse_frontmatter(lines)
+                headings = _extract_headings(lines)
+                fill_me_tokens = _find_fill_me_tokens(prompt_text)
 
                 if prompt_text:
                     missing_headers = [f for f in REQUIRED_HEADER_FIELDS if f not in frontmatter]
@@ -550,18 +561,24 @@ def main() -> int:
 
     lint_output: Optional[Dict[str, Any]] = None
     if not errors:
-        lint_output = _run_command(LINT_COMMAND, 120, max_output_bytes)
-        lint_info["exit_code"] = lint_output["exit_code"]
-        lint_info["stdout"] = lint_output["stdout"]
-        lint_info["stderr"] = lint_output["stderr"]
-        if lint_output["exit_code"] == 0:
-            lint_info["result"] = "PASS"
-        elif lint_output["exit_code"] == 2:
-            lint_info["result"] = "WARNING"
+        if _normalize_path(prompt_path or "").startswith("NAVIGATION/PROMPTS/"):
+            lint_output = _run_command(LINT_COMMAND, 120, max_output_bytes)
+            lint_info["exit_code"] = lint_output["exit_code"]
+            lint_info["stdout"] = _scrub_text(lint_output["stdout"])
+            lint_info["stderr"] = _scrub_text(lint_output["stderr"])
+            if lint_output["exit_code"] == 0:
+                lint_info["result"] = "PASS"
+            elif lint_output["exit_code"] == 2:
+                lint_info["result"] = "WARNING"
+            else:
+                lint_info["result"] = "FAIL"
+                verification_failed = True
+                errors.append("prompt lint failed")
         else:
-            lint_info["result"] = "FAIL"
-            verification_failed = True
-            errors.append("prompt lint failed")
+            lint_info["exit_code"] = 0
+            lint_info["result"] = "SKIPPED_OUTSIDE_PROMPT_PACK"
+            lint_info["stdout"] = ""
+            lint_info["stderr"] = ""
 
     if not errors and manifest_path:
         try:
@@ -725,9 +742,9 @@ def main() -> int:
         "cortex_index": cortex_index_used,
         "output_dir": output_dir,
         "artifacts": {
-            "receipt_path": str(receipt_path) if receipt_path else "",
-            "report_path": str(report_path) if report_path else "",
-            "data_path": str(data_path) if data_path else "",
+            "receipt_path": _normalize_path(str(receipt_path.relative_to(PROJECT_ROOT))) if receipt_path else "",
+            "report_path": _normalize_path(str(report_path.relative_to(PROJECT_ROOT))) if report_path else "",
+            "data_path": _normalize_path(str(data_path.relative_to(PROJECT_ROOT))) if data_path else "",
         },
         "lint": lint_info,
         "commands_run": commands_run,

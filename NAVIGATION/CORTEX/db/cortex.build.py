@@ -59,6 +59,10 @@ SECTION_INDEX_ROOT_ALLOWLIST = {
     "AGS_ROADMAP_MASTER.md",
 }
 
+SECTION_INDEX_SUBPATH_ALLOWLIST = {
+    ("NAVIGATION", "PROMPTS"),
+}
+
 _HEADING_RE = re.compile(r"^(#{1,6})\s+(.*?)(?:\s+#+\s*)?$")
 
 
@@ -269,6 +273,9 @@ def iter_section_index_paths() -> List[Path]:
                 paths.append(md_file)
                 continue
             if rel.parts and rel.parts[0] in SECTION_INDEX_DIR_ALLOWLIST:
+                paths.append(md_file)
+                continue
+            if len(rel.parts) >= 2 and tuple(rel.parts[:2]) in SECTION_INDEX_SUBPATH_ALLOWLIST:
                 paths.append(md_file)
                 continue
         except (FileNotFoundError, OSError):

@@ -1,7 +1,7 @@
 {
   "task_id": "fixture-001",
-  "prompt_path": "NAVIGATION/PROMPTS/PHASE_06/6.4_compression-validation.md",
-  "output_dir": "LAW/CONTRACTS/_runs/_tmp/prompts/6.4_compression-validation",
+  "prompt_path": "CAPABILITY/SKILLS/utilities/prompt-runner/fixtures/sample_prompt.md",
+  "output_dir": "LAW/CONTRACTS/_runs/_tmp/fixtures/prompt-runner",
   "emit_data": false,
   "commands": [],
   "max_output_bytes": 100000

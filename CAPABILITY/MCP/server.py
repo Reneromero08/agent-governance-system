@@ -1187,7 +1187,7 @@ def governed_tool(func):
         # Run critic
         
         res = subprocess.run(
-            [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
+            [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "governance" / "critic.py")],
             capture_output=True, text=True, encoding="utf-8", errors="ignore", cwd=str(PROJECT_ROOT), env=env
         )
         
@@ -2317,12 +2317,12 @@ class AGSMCPServer:
         }
 
     def _tool_critic_run(self, args: Dict) -> Dict:
-        """Run TOOLS/critic.py to check governance compliance."""
+        """Run TOOLS/governance/critic.py to check governance compliance."""
         import subprocess
         
         try:
             result = subprocess.run(
-                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
+                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "governance" / "critic.py")],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT)
@@ -2441,7 +2441,7 @@ class AGSMCPServer:
         try:
             # Run critic
             critic_result = subprocess.run(
-                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "critic.py")],
+                [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "governance" / "critic.py")],
                 capture_output=True,
                 text=True,
                 cwd=str(PROJECT_ROOT)
@@ -2478,7 +2478,7 @@ class AGSMCPServer:
                 "checklist": {
                     "1_failsafe_critic": {
                         "passed": critic_passed,
-                        "tool": "TOOLS/critic.py",
+                        "tool": "TOOLS/governance/critic.py",
                         "output": critic_result.stdout.strip()[-500:] if critic_result.stdout else critic_result.stderr.strip()[-500:]
                     },
                     "2_failsafe_runner": {

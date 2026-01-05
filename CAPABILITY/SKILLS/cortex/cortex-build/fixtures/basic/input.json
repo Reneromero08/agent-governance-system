@@ -1,0 +1,6 @@
+{
+  "expected_paths": [
+    "NAVIGATION/PROMPTS/PHASE_06/6.4_compression-validation.md"
+  ],
+  "timeout_sec": 600
+}

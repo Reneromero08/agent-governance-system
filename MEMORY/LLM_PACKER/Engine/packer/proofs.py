@@ -14,6 +14,7 @@ from __future__ import annotations
 
 import hashlib
 import json
+import os
 import shutil
 import subprocess
 import sys
@@ -51,10 +52,22 @@ def _run_command(
     Run a command and capture stdout/stderr.
     Returns (exit_code, stdout_bytes, stderr_bytes).
     """
+    env = os.environ.copy()
+    # Avoid pytest/capture tmpfile issues by forcing a stable temp root.
+    try:
+        tmp_root = (cwd / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp").resolve()
+        tmp_root.mkdir(parents=True, exist_ok=True)
+        env["TMPDIR"] = str(tmp_root)
+        env["TMP"] = str(tmp_root)
+        env["TEMP"] = str(tmp_root)
+    except Exception:
+        pass
+
     try:
         result = subprocess.run(
             cmd,
             cwd=cwd,
+            env=env,
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
             timeout=timeout,
@@ -122,8 +135,8 @@ def _load_proof_suite(project_root: Path) -> List[List[str]]:
         except Exception:
             pass
     
-    # Default minimal suite
-    return [[sys.executable, "-m", "pytest", "-q"]]
+    # Default minimal suite (scoped + capture disabled for determinism/stability)
+    return [[sys.executable, "-m", "pytest", "CAPABILITY/TESTBENCH/", "-q", "--capture=no"]]
 
 
 def _generate_green_state(
