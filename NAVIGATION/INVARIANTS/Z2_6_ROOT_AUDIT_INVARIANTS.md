@@ -383,9 +383,48 @@ If repo adopts receipt convention:
 
 ## Revision History
 
-- **Z.2.6.0** (2026-01-02): Initial implementation
-  - Mode A: General root safety audit
-  - Mode B: Run completeness check
-  - Deterministic receipts
   - Fail-closed validation
   - Test coverage: A-01 through B-05
+
+---
+
+## Recovery: Root Audit Invariant Violations
+
+### Where receipts live
+
+Audit receipts are generated on-demand but may be captured in:
+- **LAW/CONTRACTS/_runs/audit_logs/** - If run as part of a pipeline or CI gate
+- **Runtime Standard Output** - Direct CLI usage logs
+- **Packer integration logs** - When running `pack_create`
+
+### How to re-run verification
+
+To verify root integrity manually:
+
+```bash
+# Mode A: General Root Safety Check (Default)
+python CAPABILITY/AUDIT/root_audit.py --verbose
+
+# Mode B: Run Completeness Check (Specific Run)
+# Requires a known OUTPUT_HASHES CAS reference
+python CAPABILITY/AUDIT/root_audit.py --output-hashes-record SHA256_HASH_HERE
+```
+
+### What to delete vs never delete
+
+**Safe to delete:**
+- **Audit logs/receipts**: These are informational snapshots.
+- **Corrupted RUN_ROOTS.json**: If absolutely necessary, but *prefer git restore*.
+
+**Never delete (protected by invariants):**
+- **Existing roots in RUN_ROOTS.json**: Unless you are certain the referenced data is garbage.
+- **Artifacts referenced by roots**: Deleting these causes audit FAILURE.
+
+**Recovery procedures:**
+- **Audit Fails (Missing Object)**:
+  - If the object is truly lost, remove the reference from `RUN_ROOTS.json` (making it clean but data lost) OR restore the object from backup.
+- **Audit Fails (Invalid JSON)**:
+  - Run `git checkout HEAD -- CAPABILITY/RUNS/RUN_ROOTS.json` to restore the last known good state.
+- **Audit Fails (Unreachable Artifact)**:
+  - Check if the artifact was manually deleted or if the hash in `OUTPUT_HASHES` is incorrect.
+  - Re-run the producing task to regenerate valid artifacts.

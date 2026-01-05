@@ -117,7 +117,50 @@ GCReport should include:
 
 ## Acceptance conditions
 Z.2.5 is complete only when:
-- Tests prove that GC deletes only unreachable blobs.
 - Tests prove fail-closed behavior on any root or traversal failure.
 - Dry-run produces identical deletion set as apply mode.
 - Receipts are deterministic across identical inputs.
+
+---
+
+## Recovery: GC Invariant Violations
+
+### Where receipts live
+
+GC receipts are typically transient or emitted to stdout, but should be captured in:
+- **LAW/CONTRACTS/_runs/audit_logs/** - If integrated into pipeline
+- **Runtime Standard Output** - For ad-hoc manual runs
+
+### How to re-run verification
+
+To verify GC safety without modification (Dry Run):
+
+```bash
+# Run GC in dry-run mode (default)
+# This will report what WOULD be deleted
+python CAPABILITY/GC/gc.py --dry-run
+```
+
+To verify root completeness (Prerequisite):
+
+```bash
+# Verify roots are readable
+python CAPABILITY/AUDIT/root_audit.py
+```
+
+### What to delete vs never delete
+
+**Safe to delete (via GC only):**
+- **Unreachable blobs**: Blobs not referenced by `RUN_ROOTS.json` or `GC_PINS.json`
+  - **Do NOT delete manually**. Use `gc.py` (without dry-run) to safely remove.
+  - Manual deletion risks race conditions or incomplete cleanup.
+
+**Never delete (protected by invariants):**
+- **RUN_ROOTS.json**: The primary root anchored list.
+- **GC_PINS.json**: Identify manual pins.
+- **Any blob in `storage/` manually**: Brittle and dangerous. Always use the tool.
+
+**Recovery procedures:**
+- **Roots file corrupted**: Restore from git history.
+- **GC Lock stuck**: If a previous run crashed, delete the lock file `CAPABILITY/GC/gc.lock` ONLY after verifying no python processes are running.
+- **Accidental deletion**: If a blob was deleted but is now needed, re-generate it from the source (CAS is content-addressed; re-adding identical data restores the object).
