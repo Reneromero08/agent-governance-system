@@ -147,7 +147,7 @@ Canon files (as of the last prompt pack build):
 - Dependencies declared in header `depends_on`, resolved via `PROMPTS/PROMPT_PACK_MANIFEST.json`
 - Receipts and reports required for every task with explicit `receipt_path` and `report_path`
 - Deterministic receipt schema and stable ordering everywhere
-- If `scripts/lint-prompt.sh` exists: run via `bash` (requires bash-compatible shell, e.g. WSL); exit 1 blocks, exit 2 warns
+- If `CAPABILITY/TOOLS/linters/lint_prompt_pack.sh` exists: run via `bash` (requires bash-compatible shell, e.g. WSL); exit 1 blocks, exit 2 warns
 
 ## Execution discipline (how work is done)
 

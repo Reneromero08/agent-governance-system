@@ -47,7 +47,7 @@ Pack manifest MUST include:
       - DEFERRABLE: generate prompt with FILL_ME__ tokens; record warning
    f) Draft prompt using canonical template.
    g) Run prompt QA checklist.
-   h) If scripts/lint-prompt.sh exists (requires bash-compatible shell, e.g. WSL):
+   h) If CAPABILITY/TOOLS/linters/lint_prompt_pack.sh exists (requires bash-compatible shell, e.g. WSL):
       - run it via `bash` on the prompt
       - exit 1 blocks pack generation
       - exit 2 records a warning and continues

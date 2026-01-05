@@ -193,7 +193,7 @@ Minimal schema sketch:
 - Executor MUST verify dependency receipts exist and have result OK before running the dependent task.
 
 ## 7) Prompt linting and blocking behavior
-If scripts/lint-prompt.sh exists (requires bash-compatible shell, e.g. WSL):
+If CAPABILITY/TOOLS/linters/lint_prompt_pack.sh exists (requires bash-compatible shell, e.g. WSL):
 - Governor MUST run it on each generated prompt.
 - Exit code 1 MUST block pack generation.
 - Exit code 2 MUST be recorded as a warning and pack generation may continue.
