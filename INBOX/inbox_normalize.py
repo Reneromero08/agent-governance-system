@@ -310,8 +310,15 @@ def generate_execution_receipt(files: List[Dict], pre_digest: Dict, post_digest:
 
 def main():
     """Main execution."""
+    import sys
+    
+    execute_mode = len(sys.argv) > 1 and sys.argv[1] == "--execute"
+    
     print("=" * 60)
-    print("INBOX Normalization - Dry Run Phase")
+    if execute_mode:
+        print("INBOX Normalization - EXECUTION PHASE")
+    else:
+        print("INBOX Normalization - Dry Run Phase")
     print("=" * 60)
     
     # Collect files
@@ -354,6 +361,59 @@ def main():
     print("\n[@] Proposed structure:")
     for folder, count in sorted(by_month_week.items()):
         print(f"   {folder}/ : {count} files")
+    
+    if execute_mode:
+        # EXECUTION PHASE
+        print("\n" + "=" * 60)
+        print("EXECUTING FILE MOVES")
+        print("=" * 60)
+        
+        # Compute pre-digest
+        print("\n[*] Computing pre-execution digest...")
+        pre_digest = compute_digest()
+        pre_digest_path = RECEIPTS_DIR / "PRE_DIGEST.json"
+        with open(pre_digest_path, 'w') as f:
+            json.dump(pre_digest, f, indent=2)
+        print(f"[+] Pre-digest written to: {pre_digest_path}")
+        
+        # Execute moves
+        print(f"\n[*] Executing {len(files)} file moves...")
+        success, move_results = execute_moves(files)
+        
+        if not success:
+            print("\n[!] Some moves failed - see execution receipt for details")
+        else:
+            print(f"[+] All {len(files)} moves completed successfully")
+        
+        # Compute post-digest
+        print("\n[*] Computing post-execution digest...")
+        post_digest = compute_digest()
+        post_digest_path = RECEIPTS_DIR / "POST_DIGEST.json"
+        with open(post_digest_path, 'w') as f:
+            json.dump(post_digest, f, indent=2)
+        print(f"[+] Post-digest written to: {post_digest_path}")
+        
+        # Generate execution receipt
+        execution_receipt = generate_execution_receipt(files, pre_digest, post_digest, move_results)
+        execution_path = RECEIPTS_DIR / "INBOX_EXECUTION.json"
+        with open(execution_path, 'w') as f:
+            json.dump(execution_receipt, f, indent=2)
+        print(f"[+] Execution receipt written to: {execution_path}")
+        
+        # Show final structure
+        print("\n[@] Final INBOX structure:")
+        for root, dirs, filenames in sorted(os.walk(INBOX_ROOT)):
+            level = root.replace(str(INBOX_ROOT), '').count(os.sep)
+            indent = ' ' * 2 * level
+            if filenames:
+                print(f"{indent}{Path(root).name}/")
+                subindent = ' ' * 2 * (level + 1)
+                for f in sorted(filenames)[:5]:
+                    print(f"{subindent}{f}")
+                if len(filenames) > 5:
+                    print(f"{subindent}... and {len(filenames) - 5} more")
+        
+        return 0 if success else 1
     
     return 0
 

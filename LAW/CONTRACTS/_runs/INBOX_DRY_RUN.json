@@ -1,0 +1,514 @@
+{
+  "operation": "INBOX_DRY_RUN",
+  "version": "1.0.0",
+  "version_hash": "53658e57694ff5dc",
+  "timestamp": "2026-01-05T20:27:28.102749Z",
+  "config": {
+    "schema": "YYYY-MM/Week-XX",
+    "timestamp_rule": "prefer_filename_over_mtime",
+    "version": "1.0.0",
+    "version_hash": "53658e57694ff5dc",
+    "excluded_files": [
+      "INBOX.md",
+      "inbox_normalize.py",
+      "LEDGER.yaml",
+      "agents\\Local Models\\DISPATCH_LEDGER.json",
+      "agents\\Local Models\\LEDGER_ARCHIVE.json"
+    ]
+  },
+  "files_classified": 70,
+  "files_excluded": 5,
+  "moves": [
+    {
+      "source": "reports\\12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
+      "timestamp": "2025-12-29T02:45:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "roadmaps\\12-29-2025-03-47_CORTEX_ROADMAP.md",
+      "target": "2025-12/Week-01/12-29-2025-03-47_CORTEX_ROADMAP.md",
+      "timestamp": "2025-12-29T03:47:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
+      "target": "2025-12/Week-01/12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
+      "timestamp": "2025-12-29T04:49:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_BUILD_COMPLETE.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_INDEX.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_FINAL_REPORT.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_QUICK_START.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SEMANTIC_CORE_WORKFLOW_COMPLETE.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+      "timestamp": "2025-12-29T05:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_F3_STRATEGY.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_F3_STRATEGY.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-29-2025-07-01_SWARM_BUG_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+      "timestamp": "2025-12-29T07:01:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\PENDING_TASKS\\TASK-2025-12-30-002.json",
+      "target": "2025-12/Week-01/PENDING_TASKS/TASK-2025-12-30-002.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "preserved_subfolder"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-001.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-001.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-002.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-002.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\FAILED_TASKS\\TASK-2025-12-30-003.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-003.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\FAILED_TASKS\\TASK-2025-12-30-004.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-004.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-005.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-005.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-006.json",
+      "target": "2025-12/Week-01/TASK-2025-12-30-006.json",
+      "timestamp": "2025-12-30T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-31-001.json",
+      "target": "2025-12/Week-01/TASK-2025-12-31-001.json",
+      "timestamp": "2025-12-31T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-31-002.json",
+      "target": "2025-12/Week-01/TASK-2025-12-31-002.json",
+      "timestamp": "2025-12-31T00:00:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
+      "target": "2025-12/Week-52/12-23-2025-12-00_SYSTEM1_SYSTEM2_DUAL_DB.md",
+      "timestamp": "2025-12-23T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_AGS_CLAUDE_SONNET_45_SUGGESTIONS.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_CATALYTIC_STACK_COMPRESSED_MERGED_GPT_52.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_FUNCTIONAL_SENTIENCE.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_GPT_52_LEXIC_OS.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_GPT_52_LEXIC_OS.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_CHAT_MERGE_1_2.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_DEEP_RESEARCH_MERGE_1_2.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
+      "target": "2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md",
+      "timestamp": "2025-12-26T06:39:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-27-2025-22-18_TEST_FAILURES_REPORT.md",
+      "target": "2025-12/Week-52/12-27-2025-22-18_TEST_FAILURES_REPORT.md",
+      "timestamp": "2025-12-27T22:18:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_AGENTS_CORTEX_CONNECTION_GAP_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_AGENT_BOOTSTRAP_TEST_DESIGN.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_AGENT_PIPELINE_COMPLETE.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_AGENT_SAFETY_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_AGENT_SAFETY_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "roadmaps\\12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_CASSETTE_NETWORK_ROADMAP_FINAL_CHECKLIST.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_CORTEX_QUICK_REFERENCE.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_DISPATCHER_TEST_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_DISPATCHER_TEST_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_DISPATCHER_WATCHER_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-12-00_GPT_ROADMAP_VARIANT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_GPT_ROADMAP_VARIANT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_INTEGRATION_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_INTEGRATION_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_MCP_FIRST_DEMONSTRATION.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_ORIGINAL_8_WEEK_ROADMAP.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_ORIGINAL_TRIPLE_WRITE_RESEARCH.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_PHASE1_TRIPLE_WRITE_IMPLEMENTATION.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_PIPELINE_SENTINEL_REPORT.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "roadmaps\\12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "roadmaps\\12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-12-00_SCRATCH_WORKFLOW.md",
+      "target": "2025-12/Week-52/12-28-2025-12-00_SCRATCH_WORKFLOW.md",
+      "timestamp": "2025-12-28T12:00:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_CASSETTE_NETWORK_IMPLEMENTATION_REPORT.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_CATALYTIC_CHAT_RESEARCH.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_MECHANICAL_INDEXING_REPORT.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_SEMANTIC_DATABASE_NETWORK_REPORT.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\12-28-2025-23-12_TEST_RESULTS_2025_12_28.md",
+      "target": "2025-12/Week-52/12-28-2025-23-12_TEST_RESULTS_2025_12_28.md",
+      "timestamp": "2025-12-28T23:12:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "research\\12-28-2025-23-52_SWARM_ARCHITECTURE.md",
+      "target": "2025-12/Week-52/12-28-2025-23-52_SWARM_ARCHITECTURE.md",
+      "timestamp": "2025-12-28T23:52:00",
+      "week": 52,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
+      "target": "2026-01/Week-01/01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
+      "timestamp": "2026-01-01T11:37:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md",
+      "target": "2026-01/Week-01/01-01-2026-13-36_DOCUMENT_MERGE_TOOLING_STRATEGY.md",
+      "timestamp": "2026-01-01T13:36:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    },
+    {
+      "source": "reports\\01-02-2026-18-48_LANE_Z_RISKS_REPORT.md",
+      "target": "2026-01/Week-01/01-02-2026-18-48_LANE_Z_RISKS_REPORT.md",
+      "timestamp": "2026-01-02T18:48:00",
+      "week": 1,
+      "conflict_resolution": "direct"
+    }
+  ],
+  "errors": []
+}
