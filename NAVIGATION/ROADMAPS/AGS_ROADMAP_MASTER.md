@@ -28,7 +28,6 @@ notes:
   - Emit receipts (inputs/outputs/hashes)
   - Run relevant tests before “DONE”
 
-
 # Phase 1: Integrity Gates & Repo Safety (highest leverage)
 ## 1.1 Hardened Inbox Governance (S.2)
 - [x] 1.1.1 Create `SKILLS/inbox-report-writer` to auto-hash and format reports (S.2.1)
@@ -60,16 +59,15 @@ notes:
   - [ ] A new contributor can identify and recover from common failures without tribal knowledge
   - [ ] Recovery steps are deterministic and reference exact commands and artifacts
 
-
 # Phase 2: CAS + Packer Completion (context cost collapse)
 ## 2.1 CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)
-- [ ] 2.1.1 Make LITE packs use CAS hashes instead of full file bodies (Z.2.6)
-- [ ] 2.1.2 Implement CAS garbage collection safety for packer outputs: define GC roots/pins via active packs (P.2.4)
-- [ ] 2.1.3 Benchmark deduplication savings and pack generation cost; emit reproducible report + fixtures (P.2.5)
+- [x] 2.1.1 Make LITE packs use CAS hashes instead of full file bodies (Z.2.6)
+- [x] 2.1.2 Implement CAS garbage collection safety for packer outputs: define GC roots/pins via active packs (P.2.4)
+- [x] 2.1.3 Benchmark deduplication savings and pack generation cost; emit reproducible report + fixtures (P.2.5)
 - **Exit Criteria**
-  - [ ] LITE packs are manifest-only and reference `sha256:` blobs
-  - [ ] GC never deletes a referenced blob (fixture-backed)
-  - [ ] Dedup benchmark reproducible and stored as an artifact
+  - [x] LITE packs are manifest-only and reference `sha256:` blobs
+  - [x] GC never deletes a referenced blob (fixture-backed)
+  - [x] Dedup benchmark reproducible and stored as an artifact
 
 ## 2.2 Pack Consumer (verification + rehydration)
 - [ ] 2.2.1 Define Pack Manifest v1 (schema + invariants)
