@@ -254,3 +254,83 @@ def test_empty_outputs_valid(preflight_validator, project_root):
 
     assert valid is True
     assert errors == []
+
+
+def test_bucket_violation_path_outside_buckets_fails(preflight_validator, project_root):
+    """Test that path outside all buckets fails (X3 violation)."""
+    jobspec = {
+        "job_id": "test-run-011",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test bucket violation",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["SKILLS/output.json"],  # Old path not in 6-bucket structure
+            "validation_criteria": {},
+        },
+        "catalytic_domains": [],
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is False
+    assert len(errors) > 0
+    assert any(err["code"] == "BUCKET_VIOLATION" for err in errors)
+
+
+def test_path_in_valid_bucket_passes(preflight_validator, project_root):
+    """Test that paths in valid buckets pass (X3 compliance)."""
+    jobspec = {
+        "job_id": "test-run-012",
+        "phase": 0,
+        "task_type": "primitive_implementation",
+        "intent": "Test valid bucket",
+        "inputs": {},
+        "outputs": {
+            "durable_paths": ["CAPABILITY/PRIMITIVES/_scratch/test.json"],  # In CAPABILITY bucket and allowed root
+            "validation_criteria": {},
+        },
+        "catalytic_domains": ["LAW/CONTRACTS/_runs/_tmp/scratch"],  # In LAW bucket and allowed root
+        "determinism": "deterministic",
+    }
+
+    valid, errors = preflight_validator.validate(jobspec, project_root)
+
+    assert valid is True
+    assert errors == []
+
+
+def test_all_buckets_are_valid(preflight_validator, project_root):
+    """Test that all 6 buckets are recognized as valid (X3)."""
+    # Map bucket to an allowed path within that bucket
+    bucket_paths = {
+        "LAW": "LAW/CONTRACTS/_runs/test/output.json",
+        "CAPABILITY": "CAPABILITY/PRIMITIVES/_scratch/test/output.json",
+        "NAVIGATION": "NAVIGATION/CORTEX/_generated/test/output.json",
+        "MEMORY": "MEMORY/LLM_PACKER/_packs/test/output.json",
+        "THOUGHT": "THOUGHT/LAB/test/output.json",  # Not in allowed roots, but valid bucket
+        "INBOX": "INBOX/reports/test/output.json",  # Not in allowed roots, but valid bucket
+    }
+
+    for bucket, path in bucket_paths.items():
+        jobspec = {
+            "job_id": f"test-run-bucket-{bucket.lower()}",
+            "phase": 0,
+            "task_type": "primitive_implementation",
+            "intent": f"Test {bucket} bucket",
+            "inputs": {},
+            "outputs": {
+                "durable_paths": [path],
+                "validation_criteria": {},
+            },
+            "catalytic_domains": [],
+            "determinism": "deterministic",
+        }
+
+        valid, errors = preflight_validator.validate(jobspec, project_root)
+
+        # Buckets THOUGHT and INBOX may fail due to ALLOWED_ROOTS, but bucket enforcement should pass
+        # Check that there's no BUCKET_VIOLATION error
+        has_bucket_violation = any(err["code"] == "BUCKET_VIOLATION" for err in errors)
+        assert not has_bucket_violation, f"Bucket {bucket} should pass bucket enforcement: {errors}"

@@ -44,6 +44,16 @@ class PreflightValidator:
         ".git",
     ]
 
+    # 6-bucket architecture (X3 enforcement: every artifact must belong to exactly one bucket)
+    BUCKETS = [
+        "LAW",
+        "CAPABILITY",
+        "NAVIGATION",
+        "MEMORY",
+        "THOUGHT",
+        "INBOX",
+    ]
+
     def __init__(self, jobspec_schema_path: str | Path):
         """
         Initialize preflight validator.
@@ -94,6 +104,10 @@ class PreflightValidator:
         # 4. Check for overlaps between catalytic_domains and outputs
         overlap_errors = self._check_overlaps(jobspec, project_root)
         errors.extend(overlap_errors)
+
+        # 5. Check bucket enforcement (X3): every artifact must belong to exactly one bucket
+        bucket_errors = self._check_bucket_enforcement(jobspec, project_root)
+        errors.extend(bucket_errors)
 
         return (len(errors) == 0, errors)
 
@@ -236,6 +250,70 @@ class PreflightValidator:
                     })
                 except ValueError:
                     pass
+
+        return errors
+
+    def _check_bucket_enforcement(self, jobspec: Dict[str, Any], project_root: Path) -> List[Dict[str, Any]]:
+        """
+        Check that every artifact belongs to exactly one bucket (X3).
+
+        Validates that all paths in catalytic_domains and outputs.durable_paths
+        belong to one of the 6 buckets: LAW, CAPABILITY, NAVIGATION, MEMORY, THOUGHT, INBOX.
+
+        Args:
+            jobspec: JobSpec dictionary
+            project_root: Project root path
+
+        Returns:
+            List of validation errors
+        """
+        errors = []
+
+        # Collect all paths to check
+        paths_to_check = []
+
+        if "catalytic_domains" in jobspec:
+            for domain in jobspec["catalytic_domains"]:
+                paths_to_check.append((domain, "catalytic_domains"))
+
+        if "outputs" in jobspec and "durable_paths" in jobspec["outputs"]:
+            for output_path in jobspec["outputs"]["durable_paths"]:
+                paths_to_check.append((output_path, "outputs.durable_paths"))
+
+        # Check each path
+        for path_str, field_name in paths_to_check:
+            try:
+                resolved = (project_root / path_str).resolve()
+                resolved_rel = resolved.relative_to(project_root.resolve())
+            except (ValueError, RuntimeError):
+                continue  # Already caught by path validation
+
+            # Check if path belongs to exactly one bucket
+            path_str_normalized = str(resolved_rel).replace("\\", "/")
+
+            # Count how many buckets this path belongs to
+            bucket_count = 0
+            matched_buckets = []
+            for bucket in self.BUCKETS:
+                if path_str_normalized.startswith(bucket + "/"):
+                    bucket_count += 1
+                    matched_buckets.append(bucket)
+
+            # X3 enforcement: must belong to exactly one bucket
+            if bucket_count == 0:
+                errors.append({
+                    "code": "BUCKET_VIOLATION",
+                    "severity": "error",
+                    "message": f"Path {path_str} does not belong to any bucket. Every artifact must belong to exactly one bucket (X3). Valid buckets: {self.BUCKETS}",
+                    "path": [field_name, path_str],
+                })
+            elif bucket_count > 1:
+                errors.append({
+                    "code": "BUCKET_OVERLAP",
+                    "severity": "error",
+                    "message": f"Path {path_str} belongs to multiple buckets: {matched_buckets}. Every artifact must belong to exactly one bucket (X3).",
+                    "path": [field_name, path_str],
+                })
 
         return errors
 
