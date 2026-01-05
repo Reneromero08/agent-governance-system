@@ -1,10 +1,49 @@
- <!-- CONTENT_HASH: 559be1640754542fd1d0bb63ed6abaef462e4d1f7501ecbb9cc1d574947e1679 -->
+<!-- CONTENT_HASH: 559be1640754542fd1d0bb63ed6abaef462e4d1f7501ecbb9cc1d574947e1679 -->
 
  # Changelog
  
  All notable changes to Agent Governance System will be documented in this file.
- 
- ## [3.3.16] - 2026-01-04
+
+## [3.3.17] - 2026-01-05
+
+### Completed
+- **Task 2.3: Run Bundle Contract (Freezing "What is a Run")** — Implemented and validated machine-checkable proof-carrying run bundles.
+  - **2.3.1 - Freeze the per-run directory contract**: Defined in `CAPABILITY/RUNS/records.py`
+    - Required artifacts: `TASK_SPEC`, `STATUS`, `OUTPUT_HASHES` (all CAS-backed, immutable)
+    - Naming: 64-character lowercase hex SHA-256 hashes
+    - Immutability: Write-once semantics, no updates/overwrites
+    - Determinism: Same input → same hash (canonical JSON encoding)
+  - **2.3.2 - Implement `run_bundle_create(run_id) -> sha256:<hash>`**: Implemented in `CAPABILITY/RUNS/bundles.py:96-151`
+    - Creates canonical JSON manifest referencing all run artifacts via CAS hashes
+    - Bundle manifest itself stored in CAS (addressable by hash)
+    - Validates all inputs (run_id format, hash formats)
+    - Deterministic: identical inputs produce identical bundle hash
+  - **2.3.3 - Define rooting and retention semantics**: Implemented in `bundles.py:320-375`
+    - `get_bundle_roots(bundle_ref)` returns complete transitive closure of artifacts
+    - Roots include: bundle manifest, task_spec, status, output_hashes, receipts, and all referenced outputs
+    - Sorted order for determinism
+    - Enables GC to safely identify reachable objects and never delete pinned bundles
+  - **2.3.4 - Implement `run_bundle_verify(bundle_ref)`**: Implemented in `bundles.py:165-313`
+    - Dry-run verifier checks: manifest exists, valid JSON, correct schema, all artifacts present
+    - Returns `BundleVerificationReceipt` with detailed status and error reporting
+    - Fail-closed: missing/corrupted artifacts → INVALID status
+  - **Exit Criteria**: All satisfied ✅
+    - "Run = proof-carrying bundle" is explicit and machine-checkable (validated by `test_bundle_is_proof_carrying`)
+    - GC can safely treat bundles/pins as authoritative roots (validated by `TestGCRooting` suite)
+  - **Tests**: Created `CAPABILITY/TESTBENCH/runs/test_bundles.py` with 20 tests, all passing
+    - Bundle creation & determinism (8 tests)
+    - Bundle verification & fail-closed behavior (6 tests)
+    - GC rooting semantics (5 tests)
+    - End-to-end integration (2 tests)
+  - **Artifacts**:
+    - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/2.3_run-bundle-contract-freezing-what-is-a-run/receipt.json`
+    - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/2.3_run-bundle-contract-freezing-what-is-a-run/REPORT.md`
+  - **Roadmap**: Section 2.3 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+
+### Fixed
+- **CAPABILITY/RUNS/bundles.py**: Removed invalid `cas_root` parameter from `run_bundle_create`, `run_bundle_verify`, and `get_bundle_roots` functions (CAS API doesn't accept this parameter)
+
+## [3.3.16] - 2026-01-04
 
 ### Completed
 - **Task 1.4: Failure Taxonomy & Recovery Playbooks (ops-grade)** — Created comprehensive failure catalog and recovery documentation for all subsystems.
