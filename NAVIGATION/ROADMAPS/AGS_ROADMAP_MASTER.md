@@ -48,16 +48,16 @@ notes:
   - [x] No tooling still imports/executes the deprecated server in normal flows
 
 ## 1.4 Failure Taxonomy & Recovery Playbooks (ops-grade)
-- [ ] 1.4.1 Create `NAVIGATION/OPS/FAILURE_CATALOG.md` listing expected fail-closed errors by subsystem (CAS, ARTIFACTS, RUNS, GC, AUDIT, SKILL_RUNTIME, PACKER)
-  - Include: failure code/name, trigger condition, detection signal (exception/exit code), and “safe recovery” steps
-- [ ] 1.4.2 Add a deterministic “Recovery” appendix to each major invariant doc:
+- [x] 1.4.1 Create `NAVIGATION/OPS/FAILURE_CATALOG.md` listing expected fail-closed errors by subsystem (CAS, ARTIFACTS, RUNS, GC, AUDIT, SKILL_RUNTIME, PACKER)
+  - Include: failure code/name, trigger condition, detection signal (exception/exit code), and "safe recovery" steps
+- [x] 1.4.2 Add a deterministic "Recovery" appendix to each major invariant doc:
   - Where receipts live
   - How to re-run verification
   - What to delete vs never delete
-- [ ] 1.4.3 Add `NAVIGATION/OPS/SMOKE_RECOVERY.md` with the top 10 recovery flows as copy/paste commands (Windows + WSL where relevant)
+- [x] 1.4.3 Add `NAVIGATION/OPS/SMOKE_RECOVERY.md` with the top 10 recovery flows as copy/paste commands (Windows + WSL where relevant)
 - **Exit Criteria**
-  - [ ] A new contributor can identify and recover from common failures without tribal knowledge
-  - [ ] Recovery steps are deterministic and reference exact commands and artifacts
+  - [x] A new contributor can identify and recover from common failures without tribal knowledge
+  - [x] Recovery steps are deterministic and reference exact commands and artifacts
 
 # Phase 2: CAS + Packer Completion (context cost collapse)
 ## 2.1 CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)

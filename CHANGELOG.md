@@ -1,13 +1,36 @@
- <!-- CONTENT_HASH: 13ef0e367e2985664d35e074f95805b910060cb7e5dba4b32e8d23f51b4db165 -->
+ <!-- CONTENT_HASH: 559be1640754542fd1d0bb63ed6abaef462e4d1f7501ecbb9cc1d574947e1679 -->
 
  # Changelog
  
  All notable changes to Agent Governance System will be documented in this file.
  
- ## [3.3.15] - 2026-01-05
-## [3.3.16] - 2026-01-04
+ ## [3.3.16] - 2026-01-04
 
 ### Completed
+- **Task 1.4: Failure Taxonomy & Recovery Playbooks (ops-grade)** — Created comprehensive failure catalog and recovery documentation for all subsystems.
+  - **1.4.1 - FAILURE_CATALOG.md**: Created `NAVIGATION/OPS/FAILURE_CATALOG.md` with 30+ failure modes across 7 subsystems (CAS, ARTIFACTS, RUNS, GC, AUDIT, SKILL_RUNTIME, PACKER)
+    - Each failure includes: code/name, trigger condition, detection signal (exception/exit code), safe recovery steps
+    - Deterministic recovery instructions for all documented failure modes
+  - **1.4.2 - Invariant Recovery Appendix**: Added "Recovery: Invariant Violation Detection and Remediation" section to `LAW/CANON/INVARIANTS.md`
+    - Three subsections: Where receipts live, How to re-run verification, What to delete vs never delete
+    - Clear guidance on disposable vs protected files, with recovery procedures
+    - Exact commands for verification (fixture runner, root audit, critic, canon line counts)
+  - **1.4.3 - SMOKE_RECOVERY.md**: Created `NAVIGATION/OPS/SMOKE_RECOVERY.md` with 10 copy/paste recovery flows
+    - Windows PowerShell and WSL/Git Bash commands for each flow
+    - Covers: CAS object not found, corrupted objects, invalid RUN_ROOTS.json/GC_PINS.json, skill fixture failures, pack consumption missing blobs, canon version incompatibility, GC lock stuck, artifact reference errors, unreachable outputs
+    - General verification commands section for post-recovery health checks
+  - **Exit Criteria**: All satisfied
+    - ✅ Failure catalog provides deterministic identification and recovery steps
+    - ✅ Smoke recovery playbooks provide copy/paste commands for Windows + WSL
+    - ✅ Invariant doc appendix provides recovery context for invariants
+    - ✅ New contributors can identify/recover from common failures without tribal knowledge
+  - **Artifacts**:
+    - Failure catalog: `NAVIGATION/OPS/FAILURE_CATALOG.md` (70 lines)
+    - Recovery playbooks: `NAVIGATION/OPS/SMOKE_RECOVERY.md` (457 lines)
+    - Invariant update: `LAW/CANON/INVARIANTS.md` (+58 lines)
+    - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.4_failure-taxonomy-recovery-playbooks-ops-grade/receipt.json`
+    - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.4_failure-taxonomy-recovery-playbooks-ops-grade/REPORT.md`
+  - **Roadmap**: Section 1.4 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
 - **Task 4.1: Catalytic Snapshot & Restore (Z.4.2–Z.4.4)** — Verified and documented complete implementation of catalytic space restoration guarantees.
   - **4.1.1 - Pre-run Snapshot**: Implemented in `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py:272-279`
     - `snapshot_domains()` captures SHA-256 hashes of all files in catalytic domains before execution
@@ -31,9 +54,10 @@
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/REPORT.md`
   - **Roadmap**: Section 4.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
 
+## [3.3.15] - 2026-01-05
  
- ### Changed
- - **Task 1.3: Deprecate Lab MCP Server (Z.1.7)** — Marked experimental MCP server as archived/deprecated with clear pointer to canonical implementation.
+### Changed
+- **Task 1.3: Deprecate Lab MCP Server (Z.1.7)** — Marked experimental MCP server as archived/deprecated with clear pointer to canonical implementation.
    - **1.3.1 - Deprecation Notice**: Added prominent `*** DEPRECATED / ARCHIVED ***` header to `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py`
      - Points to canonical server: `CAPABILITY/MCP/server.py`
      - Points to canonical entry point: `LAW/CONTRACTS/ags_mcp_entrypoint.py`
@@ -55,7 +79,7 @@
      - `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` (deprecation notice)
       - `THOUGHT/LAB/CAT_CHAT/archive/legacy/simple_symbolic_demo.py` (syntax fix)
  
- ### Added
+### Added
  - **Task 2.2: Pack Consumer (verification + rehydration)** — Implemented pack consumption to enable deterministic restoration from CAS-addressed manifests, completing catalytic pack cycle.
    - **2.2.1 - Pack Manifest v1 Schema**: Defined comprehensive schema with validation in `consumer.py`
      - Required fields: version, scope, entries (path, ref, bytes, kind)
@@ -85,7 +109,7 @@
    - **Roadmap**: Section 2.2 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
    - **Test Coverage**: 6/6 tests passing (roundtrip, tamper detection, determinism, fail-closed)
  
- ## [3.3.14] - 2026-01-05
+## [3.3.14] - 2026-01-05
 
 ### Added
 - **Task 1.2: Bucket Enforcement (X3)** — Implemented preflight validation ensuring every artifact belongs to exactly one of 6 buckets (LAW, CAPABILITY, NAVIGATION, MEMORY, THOUGHT, INBOX).

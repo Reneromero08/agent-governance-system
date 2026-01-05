@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 4db81512279856a3fcd372c64f7d0bff9670387b7e364c7c5027da5b807e4f00 -->
+<!-- CONTENT_HASH: 74dcf864da760c316aa031d5419d62d7a4ba9e7978ac77aced5bea9c9091fcfd -->
 
 # Invariants
 
@@ -36,3 +36,62 @@ To modify an invariant:
 2. Propose a migration strategy for affected files and skills.
 3. Update the version in `LAW/CANON/VERSIONING.md` (major version bump).
 4. Provide fixtures that demonstrate compatibility with both the old and new behavior during the migration period.
+
+## Recovery: Invariant Violation Detection and Remediation
+
+### Where receipts live
+
+Invariant violations are detected and reported in the following locations:
+
+- **LAW/CONTRACTS/_runs/audit_logs/** - Root audit and invariant check results
+  - `root_audit.jsonl` - Output from `CAPABILITY/AUDIT/root_audit.py`
+  - `canon_audit.jsonl` - Canon compliance and invariant validation
+- **LAW/CONTRACTS/_runs/_tmp/** - Temporary receipts for skill and task execution
+  - `prompts/*/receipt.json` - Prompt execution receipts (inputs, outputs, hashes)
+  - `skills/*/receipt.json` - Skill execution receipts
+- **LAW/CONTEXT/decisions/** - Architecture Decision Records for invariant changes
+  - ADRs document the rationale for invariant modifications or supersessions
+
+### How to re-run verification
+
+To verify invariant compliance and detect violations:
+
+```bash
+# Verify all fixtures pass (invariant INV-004)
+python LAW/CONTRACTS/runner.py
+
+# Run root audit (verifies INV-006 compliance)
+python CAPABILITY/AUDIT/root_audit.py --verbose
+
+# Run critic to check canon compliance (INV-009, INV-011)
+python CAPABILITY/TOOLS/governance/critic.py
+
+# Check canon file line counts and rule counts (INV-009)
+python -c "
+from pathlib import Path
+for f in Path('LAW/CANON').glob('*.md'):
+    lines = len(f.read_text().splitlines())
+    print(f'{f.name}: {lines} lines')
+"
+```
+
+### What to delete vs never delete
+
+**Safe to delete (temporary, not source of truth):**
+- `LAW/CONTRACTS/_runs/_tmp/` - All subdirectories are disposable scratch space
+- `_tmp/` directories anywhere in the repo - Never use as verification source
+- Build artifacts in `BUILD/` - User outputs, disposable at any time
+- Temporary CAS objects that are unrooted - GC will delete these safely
+
+**Never delete (protected, require ceremony):**
+- Files under `LAW/CANON/` - Superseded rules must be moved to `LAW/CANON/archive/`, not deleted
+- Rooted CAS objects - Only GC can delete these, and only if unrooted
+- `RUN_ROOTS.json` and `GC_PINS.json` - Modify only with explicit ceremony; never delete
+- Git history - Preserved for audit; use git bisect for recovery
+- ADR records - Append-first; existing records cannot be edited without ceremony
+
+**Recovery procedures:**
+- If canon file is accidentally deleted: Restore from git history (`git checkout HEAD~ -- LAW/CANON/file.md`)
+- If rooted CAS object is lost: Recover from backup or re-run operation that created it
+- If receipt is missing: Re-run skill/task to regenerate; deterministic output will match original receipt
+- If invariant violation detected: Check `LAW/CONTEXT/decisions/` for recent ADRs that may explain the change
