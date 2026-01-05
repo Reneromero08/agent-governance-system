@@ -4,6 +4,33 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.23] - 2026-01-05
+
+### Completed
+- **Phase 1: Integrity Gates & Repo Safety (Critical Fixes)** — Fixed broken pre-commit hooks and completed runtime INBOX guard integration.
+  - **1.1.2 Pre-commit Path Fix**: Corrected broken path references in `CAPABILITY/SKILLS/governance/canon-governance-check/scripts/pre-commit`
+    - Fixed `TOOLS/ags.py` → `CAPABILITY/TOOLS/ags.py`
+    - Fixed `TOOLS/check-canon-governance.js` → `CAPABILITY/TOOLS/check-canon-governance.js`
+    - Pre-commit hook now executes correctly with proper path resolution
+  - **1.4.2 Recovery Appendix (Z2 Invariants)**: Added comprehensive recovery section to `NAVIGATION/INVARIANTS/Z2_CAS_AND_RUN_INVARIANTS.md`
+    - Receipt locations (CAS storage, RUN_ROOTS.json, run artifacts, audit logs)
+    - Verification commands (CAS integrity checks, bundle verification, root audit, RUN_ROOTS validation)
+    - Deletion guidelines (safe vs. never delete with explicit examples)
+    - Recovery procedures (corrupted objects, malformed roots, failed verification, unreachable outputs)
+    - 125 lines of operational guidance for CAS/Run subsystem failures
+  - **1.1.3 Runtime INBOX Guard (S.2.3)**: Implemented active runtime enforcement of INBOX hash integrity
+    - Inlined validation logic directly into `CAPABILITY/TOOLS/ags.py` (avoids import issues with hyphenated directory)
+    - Added `_validate_inbox_write_inline()` function checking all writes to `INBOX/*.md` files
+    - Modified `_atomic_write_bytes()` to validate content before writing (bytes decoded and validated)
+    - Enhanced `inbox_write_guard.py` decorator to handle both text and bytes content
+    - Enforcement: Writes to INBOX without valid `<!-- CONTENT_HASH: ... -->` comments are **blocked** with clear error messages
+    - Error messages include computed hash for easy remediation
+  - **Exit Criteria**: All Phase 1 integrity gates now operational
+    - ✅ Pre-commit hook executes with correct paths
+    - ✅ Recovery procedures documented for all major invariant documents
+    - ✅ Runtime INBOX writes are validated and fail-closed
+    - ✅ No silent failures or bypasses in integrity enforcement
+
 ## [3.3.22] - 2026-01-05
 
 ### Completed

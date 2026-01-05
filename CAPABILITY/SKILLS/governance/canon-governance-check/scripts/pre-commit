@@ -6,7 +6,7 @@ echo "🔍 Running canon governance check..."
 
 # Run preflight freshness check (allow dirty tracked due to staging).
 echo "🔍 Running preflight..."
-python3 TOOLS/ags.py preflight --allow-dirty-tracked
+python3 CAPABILITY/TOOLS/ags.py preflight --allow-dirty-tracked
 PREFLIGHT_EXIT=$?
 if [ $PREFLIGHT_EXIT -ne 0 ]; then
     echo ""
@@ -16,7 +16,7 @@ if [ $PREFLIGHT_EXIT -ne 0 ]; then
 fi
 
 # Run the governance check
-node TOOLS/check-canon-governance.js
+node CAPABILITY/TOOLS/check-canon-governance.js
 
 # Capture exit code
 EXIT_CODE=$?
