@@ -4,6 +4,34 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.13] - 2026-01-05
+
+### Added
+- **Task 2.1: CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)** — Completed Phase 2 packer integration with CAS addressing, GC safety, and deduplication benchmarks.
+  - **2.1.1 - LITE Packs with CAS Hashes (Z.2.6)**: Verified existing implementation in `MEMORY/LLM_PACKER/Engine/packer/core.py`
+    - LITE manifests use `sha256:` references instead of file bodies
+    - Manifest entries contain only CAS refs, not actual content
+    - 5 existing tests passing in `test_p2_cas_packer_integration.py`
+  - **2.1.2 - GC Safety for Packer Outputs (P.2.4)**: Implemented comprehensive GC safety tests
+    - Created `CAPABILITY/TESTBENCH/integration/test_p2_gc_safety.py` (2 tests)
+    - Proves GC never deletes blobs referenced by active packs
+    - Verifies packer-written `RUN_ROOTS.json` files are respected by GC
+    - All tests passing with fixture-backed proofs
+  - **2.1.3 - Deduplication Benchmark (P.2.5)**: Created reproducible benchmark tool and artifacts
+    - New benchmark: `CAPABILITY/TESTBENCH/benchmarks/p2_dedup_benchmark.py`
+    - **Results**: 97.74% size savings (5.74 MB → 132.68 KB)
+    - Generated artifacts:
+      - `MEMORY/LLM_PACKER/_packs/_system/benchmarks/dedup_benchmark_fixture.json` (machine-readable)
+      - `MEMORY/LLM_PACKER/_packs/_system/benchmarks/DEDUP_BENCHMARK_REPORT.md` (human-readable)
+    - Reproducible via documented command
+    - Measures: full pack size, LITE manifest size, CAS efficiency, generation time, dedup count
+  - **Exit Criteria**: All satisfied
+    - ✅ LITE packs are manifest-only with `sha256:` blobs
+    - ✅ GC never deletes referenced blobs (fixture-backed proof)
+    - ✅ Dedup benchmark reproducible and stored as artifacts
+  - **Test Coverage**: 7/7 tests passing (5 P2 integration + 2 GC safety)
+  - **Roadmap**: Section 2.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+
 ## [3.3.12] - 2026-01-05
 
 ### Changed
