@@ -141,44 +141,61 @@ notes:
   - [x] GC can safely treat bundles/pins as authoritative roots
 
 ## 2.4 Crypto-Safe Packs & Protected Artifacts (CRYPTO_SAFE)
-Goal: prevent “download = extraction” by sealing protected artifacts for public distribution while keeping verification mechanical.
+Goal: prevent "download = extraction" by sealing protected artifacts for public distribution while keeping verification mechanical.
 
-### 2.4.1 Protected Artifact Inventory (CRYPTO_SAFE.0)
-- [ ] 2.4.1.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
-- [ ] 2.4.1.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
+### 2.4.1 Write Surface Discovery & Coverage (Prerequisite for CRYPTO_SAFE enforcement)
+- [x] 2.4.1A Write Surface Discovery & Coverage Map (Read-Only) ✅
+  - Comprehensive discovery of all 169 filesystem write surfaces in repository
+  - Classification by type, execution context, and guard status
+  - 103 production surfaces identified requiring Phase 1.5 enforcement
+  - Critical gaps prioritized: INBOX (3), Proofs (1), LLM Packer (6), Pipeline (4), MCP (2), Cortex (2), Skills (15+)
+  - Coverage: 2.4% fully guarded, 4.7% partially guarded, 92.9% unguarded
+  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_WRITE_SURFACE_MAP.md` (coverage map)
+  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_DISCOVERY_RECEIPT.json` (discovery receipt)
+  - Exit Criteria: ✓ Deterministic read-only analysis ✓ All surfaces cataloged ✓ Enforcement gaps identified
+- [ ] 2.4.1B Write Firewall Integration (Enforcement Phase)
+  - Integrate WriteFirewall into critical surfaces per 2.4.1A priority list
+  - Target: 95%+ enforcement coverage for production surfaces
+  - Standardize on GuardedWriter for all skill runtime writes
+  - Define CAS write exemption policy (propose audit trail approach)
+  - Define linter write policy (dry-run default + --apply flag)
 
-### 2.4.2 Git Hygiene (CRYPTO_SAFE.1)
-- [ ] 2.4.2.1 Ensure `_PACK_RUN/` outputs are never tracked (reject if git status indicates staging/tracking)
-- [ ] 2.4.2.2 Add CI check: protected roots must be ignored unless explicitly allowed
+### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)
+- [ ] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
+- [ ] 2.4.2.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
 
-### 2.4.3 Sealing Primitive (CRYPTO_SAFE.2)
-- [ ] 2.4.3.1 Implement `crypto_seal(input_path, output_path, meta) -> receipt`
+### 2.4.3 Git Hygiene (CRYPTO_SAFE.1)
+- [ ] 2.4.3.1 Ensure `_PACK_RUN/` outputs are never tracked (reject if git status indicates staging/tracking)
+- [ ] 2.4.3.2 Add CI check: protected roots must be ignored unless explicitly allowed
+
+### 2.4.4 Sealing Primitive (CRYPTO_SAFE.2)
+- [ ] 2.4.4.1 Implement `crypto_seal(input_path, output_path, meta) -> receipt`
   - Default: age-encryption (or equivalent) with fail-closed behavior
   - No keys in logs; receipts include algorithm + parameters + hashes
-- [ ] 2.4.3.2 Implement `crypto_open(sealed_path, out_path, key_ref) -> receipt` (local only)
+- [ ] 2.4.4.2 Implement `crypto_open(sealed_path, out_path, key_ref) -> receipt` (local only)
 
-### 2.4.4 Attestation Schema (optional) (CRYPTO_SAFE.3)
-- [ ] 2.4.4.1 Define sealed artifact manifest schema (what is sealed, why, hashes, policy version)
-- [ ] 2.4.4.2 (Optional) Add signature support (offline signing) without changing fail-closed verification semantics
+### 2.4.5 Attestation Schema (optional) (CRYPTO_SAFE.3)
+- [ ] 2.4.5.1 Define sealed artifact manifest schema (what is sealed, why, hashes, policy version)
+- [ ] 2.4.5.2 (Optional) Add signature support (offline signing) without changing fail-closed verification semantics
 
-### 2.4.5 Packer Integration (CRYPTO_SAFE.4)
-- [ ] 2.4.5.1 Add packer hook: seal protected artifacts during `_PACK_RUN/` for public pack modes
-- [ ] 2.4.5.2 Emit `SEALED_ARTIFACTS.json` + receipt into run bundle + pack output
-- [ ] 2.4.5.3 Ensure packs remain verifiable without decryption keys (integrity-only verification)
+### 2.4.6 Packer Integration (CRYPTO_SAFE.4)
+- [ ] 2.4.6.1 Add packer hook: seal protected artifacts during `_PACK_RUN/` for public pack modes
+- [ ] 2.4.6.2 Emit `SEALED_ARTIFACTS.json` + receipt into run bundle + pack output
+- [ ] 2.4.6.3 Ensure packs remain verifiable without decryption keys (integrity-only verification)
 
-### 2.4.6 One-Command Verifier (CRYPTO_SAFE.5)
-- [ ] 2.4.6.1 Add `crypto_safe_verify(pack_dir, mode)` that checks:
+### 2.4.7 One-Command Verifier (CRYPTO_SAFE.5)
+- [ ] 2.4.7.1 Add `crypto_safe_verify(pack_dir, mode)` that checks:
   - protected inventory completeness
   - no plaintext protected artifacts in public pack outputs
   - sealed manifest integrity + receipts present
   - deterministic ordering and canonical JSON where applicable
 
-### 2.4.7 Tests + Docs (CRYPTO_SAFE.6–.7)
-- [ ] 2.4.7.1 Fixtures: missing seal → FAIL, tampered seal → FAIL, plaintext leak → FAIL
-- [ ] 2.4.7.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` report template + reproduction commands
+### 2.4.8 Tests + Docs (CRYPTO_SAFE.6–.7)
+- [ ] 2.4.8.1 Fixtures: missing seal → FAIL, tampered seal → FAIL, plaintext leak → FAIL
+- [ ] 2.4.8.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` report template + reproduction commands
 - **Exit Criteria**
   - [ ] Public packs contain no plaintext protected artifacts
-  - [ ] Verification is mechanical and fail-closed (no “trust me” paths)
+  - [ ] Verification is mechanical and fail-closed (no "trust me" paths)
 
 # Phase 3: CAT Chat Stabilization (make the interface reliable)
 - Precondition: If Phase 4.1 is not green, treat Phase 3 as provisional and expect churn.

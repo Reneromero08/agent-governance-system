@@ -1,0 +1,160 @@
+{
+  "operation": "PHASE_2_4_1A_WRITE_SURFACE_DISCOVERY",
+  "version": "2.4.1a.0",
+  "timestamp": "2026-01-05T22:00:00Z",
+  "status": "COMPLETE",
+  "repo_root": "d:\\CCC 2.0\\AI\\agent-governance-system",
+  "discovery_method": {
+    "tools_used": [
+      "Grep (ripgrep) for write patterns",
+      "Glob for file enumeration",
+      "Read for code inspection"
+    ],
+    "patterns_searched": [
+      ".write_text|.write_bytes|open\\(.*['\"]w",
+      "Path\\(.*\\)\\.(mkdir|unlink|rmdir|rename|replace)",
+      "shutil\\.(copy|move|rmtree|copytree)",
+      "os\\.(remove|unlink|rmdir|rename|mkdir|makedirs)",
+      "WriteFirewall",
+      "def.*write (case-insensitive)"
+    ],
+    "deterministic": true
+  },
+  "summary": {
+    "total_files_with_writes": 169,
+    "production_surfaces": 103,
+    "test_files": 54,
+    "lab_experimental": 12,
+    "guard_status": {
+      "fully_guarded": 4,
+      "partially_guarded": 8,
+      "unguarded": 157
+    },
+    "enforcement_coverage": {
+      "percentage_guarded": 2.4,
+      "percentage_partial": 4.7,
+      "percentage_unguarded": 92.9
+    }
+  },
+  "critical_gaps": [
+    {
+      "category": "INBOX_AUTOMATION",
+      "surfaces": 3,
+      "priority": "CRITICAL",
+      "examples": [
+        "INBOX/inbox_normalize.py",
+        "INBOX/generate_verification_receipts.py",
+        "CAPABILITY/SKILLS/inbox/inbox-report-writer/run.py"
+      ]
+    },
+    {
+      "category": "REPO_DIGEST_PROOFS",
+      "surfaces": 1,
+      "priority": "CRITICAL",
+      "examples": [
+        "CAPABILITY/PRIMITIVES/repo_digest.py"
+      ]
+    },
+    {
+      "category": "LLM_PACKER",
+      "surfaces": 6,
+      "priority": "CRITICAL",
+      "examples": [
+        "MEMORY/LLM_PACKER/Engine/packer/core.py",
+        "MEMORY/LLM_PACKER/Engine/packer/proofs.py",
+        "MEMORY/LLM_PACKER/Engine/packer/archive.py"
+      ]
+    },
+    {
+      "category": "PIPELINE_RUNTIME",
+      "surfaces": 4,
+      "priority": "CRITICAL",
+      "examples": [
+        "CAPABILITY/PIPELINES/pipeline_runtime.py",
+        "CAPABILITY/PIPELINES/pipeline_chain.py",
+        "CAPABILITY/PIPELINES/pipeline_dag.py"
+      ]
+    },
+    {
+      "category": "MCP_SERVER",
+      "surfaces": 2,
+      "priority": "CRITICAL",
+      "examples": [
+        "CAPABILITY/MCP/server.py",
+        "CAPABILITY/MCP/server_wrapper.py"
+      ]
+    },
+    {
+      "category": "CORTEX_SEMANTIC",
+      "surfaces": 2,
+      "priority": "HIGH",
+      "examples": [
+        "NAVIGATION/CORTEX/db/cortex.build.py",
+        "NAVIGATION/CORTEX/semantic/indexer.py"
+      ]
+    },
+    {
+      "category": "SKILLS",
+      "surfaces": 15,
+      "priority": "HIGH",
+      "note": "15+ skills use custom _atomic_write_bytes without firewall"
+    }
+  ],
+  "governance_infrastructure": {
+    "write_firewall_impl": "CAPABILITY/PRIMITIVES/write_firewall.py",
+    "guarded_writer_wrapper": "CAPABILITY/TOOLS/utilities/guarded_writer.py",
+    "legacy_fs_guard": "CAPABILITY/PRIMITIVES/fs_guard.py",
+    "enforcement_status": "SSOT exists, minimal adoption"
+  },
+  "artifacts_generated": [
+    {
+      "path": "PHASE_2_4_1A_WRITE_SURFACE_MAP.md",
+      "type": "coverage_map",
+      "format": "markdown",
+      "sections": [
+        "Executive Summary",
+        "Governance Layer",
+        "Critical Production Surfaces (9 categories)",
+        "Test & Development Surfaces",
+        "Lab & Experimental Surfaces",
+        "Coverage Analysis",
+        "Ambiguities & Unresolved Questions",
+        "Exit Criteria",
+        "Next Steps"
+      ],
+      "deterministic": true,
+      "canonical_ordering": true
+    },
+    {
+      "path": "PHASE_2_4_1A_DISCOVERY_RECEIPT.json",
+      "type": "discovery_receipt",
+      "format": "json",
+      "deterministic": true
+    }
+  ],
+  "exit_criteria": {
+    "complete_enumeration": true,
+    "classification_complete": true,
+    "coverage_statistics": true,
+    "enforcement_gaps_identified": true,
+    "hook_points_documented": true,
+    "ambiguities_documented": true,
+    "deterministic_output": true
+  },
+  "next_phase": "PHASE_2_4_1B_ENFORCEMENT_INTEGRATION",
+  "recommendations": [
+    "Prioritize enforcement by category: INBOX → Proofs → Packer → Pipelines → MCP → Skills",
+    "Mandate GuardedWriter for all skill runtime writes",
+    "Create migration guide for skills and CLI tools",
+    "Add firewall integration tests for each enforced surface",
+    "Define CAS write exemption policy (propose audit trail approach)",
+    "Define linter write policy (dry-run default + --apply flag)"
+  ],
+  "invariants_verified": [
+    "Read-only discovery (zero writes except for this receipt and coverage map)",
+    "No assumptions (verified every path via code inspection)",
+    "Deterministic output (canonical ordering throughout)",
+    "Uncertainty documented explicitly (see Ambiguities section)",
+    "No simplification or collapse of findings"
+  ]
+}
