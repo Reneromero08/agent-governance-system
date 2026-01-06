@@ -16,6 +16,8 @@ from typing import Any, Dict, List, Optional
 from CAPABILITY.ARTIFACTS.store import load_bytes
 from CAPABILITY.CAS import cas as cas_mod
 
+from .firewall_writer import PackerWriter
+
 
 # Constants
 P2_MANIFEST_VERSION = "P2.0"
@@ -130,102 +132,114 @@ def pack_consume(
     *,
     dry_run: bool = False,
     cas_root: Optional[Path] = None,
+    writer: Optional[PackerWriter] = None,
 ) -> ConsumptionReceipt:
     """
     Consume a CAS-addressed pack manifest and materialize files.
-    
+
     Args:
         manifest_ref: sha256: reference to pack manifest
         out_dir: Directory to materialize files into
         dry_run: If True, verify only (don't write files)
         cas_root: Optional CAS root override (for testing)
-    
+        writer: Optional PackerWriter for firewall enforcement
+
     Returns:
         ConsumptionReceipt with verification results
-    
+
     Raises:
         ValueError: On any validation failure (fail-closed)
     """
     commands_run = []
     errors = []
-    
+
     if cas_root is None:
         cas_root = cas_mod._CAS_ROOT
-    
+
     try:
         # Step 1: Validate manifest ref format
         _validate_manifest_ref(manifest_ref)
         commands_run.append(f"validate_ref({manifest_ref})")
-        
+
         # Step 2: Load manifest from CAS
         try:
             manifest_bytes = load_bytes(manifest_ref)
             commands_run.append(f"load_bytes({manifest_ref})")
         except Exception as e:
             raise ValueError(f"PACK_CONSUME_MANIFEST_NOT_FOUND: {manifest_ref}: {e}")
-        
+
         # Step 3: Verify manifest integrity (canonical encoding)
         try:
             manifest = json.loads(manifest_bytes.decode("utf-8"))
         except Exception as e:
             raise ValueError(f"PACK_CONSUME_INVALID_JSON: {e}")
-        
+
         # Verify canonical encoding (re-encode and compare)
         canonical_bytes = (json.dumps(manifest, sort_keys=True, separators=(",", ":"), ensure_ascii=False) + "\n").encode("utf-8")
         if canonical_bytes != manifest_bytes:
             raise ValueError("PACK_CONSUME_NON_CANONICAL_ENCODING")
-        
+
         commands_run.append("verify_canonical_encoding")
-        
+
         # Step 4: Validate manifest schema
         _validate_manifest_schema(manifest)
         commands_run.append("validate_schema")
-        
+
         # Step 5: Verify all referenced blobs exist in CAS
         missing_blobs = _verify_cas_blobs_exist(manifest, cas_root)
         if missing_blobs:
             raise ValueError(f"PACK_CONSUME_MISSING_BLOBS: {len(missing_blobs)} blobs missing: {missing_blobs[:5]}")
-        
+
         commands_run.append(f"verify_blobs_exist(count={len(manifest['entries'])})")
-        
+
         # Step 6: Materialize files (if not dry-run)
         if not dry_run:
             # Atomic materialization: write to temp dir, then rename
             with tempfile.TemporaryDirectory(prefix="pack_consume_") as temp_str:
                 temp_dir = Path(temp_str)
-                
+
                 # Materialize all files
                 for entry in manifest["entries"]:
                     rel_path = entry["path"]
                     ref = entry["ref"]
-                    
+
                     # Load blob from CAS
                     blob_bytes = load_bytes(ref)
-                    
+
                     # Write to temp location
                     dest = temp_dir / rel_path
-                    dest.parent.mkdir(parents=True, exist_ok=True)
-                    dest.write_bytes(blob_bytes)
-                
+                    if writer is None:
+                        dest.parent.mkdir(parents=True, exist_ok=True)
+                        dest.write_bytes(blob_bytes)
+                    else:
+                        writer.mkdir(dest.parent, kind="tmp", parents=True, exist_ok=True)
+                        writer.write_bytes(dest, blob_bytes)
+
                 commands_run.append(f"materialize({len(manifest['entries'])} files)")
-                
+
                 # Atomic move: rename temp dir to final location
-                out_dir.parent.mkdir(parents=True, exist_ok=True)
-                
+                if writer is None:
+                    out_dir.parent.mkdir(parents=True, exist_ok=True)
+                else:
+                    writer.mkdir(out_dir.parent, kind="durable", parents=True, exist_ok=True)
+
                 # If out_dir exists, fail-closed (don't overwrite)
                 if out_dir.exists():
                     raise ValueError(f"PACK_CONSUME_OUT_DIR_EXISTS: {out_dir}")
-                
+
                 # Rename is atomic on most filesystems
-                temp_dir.rename(out_dir)
+                if writer is None:
+                    temp_dir.rename(out_dir)
+                else:
+                    writer.rename(temp_dir, out_dir)
                 commands_run.append(f"atomic_rename({temp_dir} -> {out_dir})")
-            
+
             # Compute tree hash
             tree_hash = _compute_tree_hash(out_dir)
         else:
             tree_hash = ""  # Not computed in dry-run
             commands_run.append("dry_run (no materialization)")
-        
+
         # Build verification summary
         verification_summary = {
             "manifest_version": manifest["version"],
@@ -236,11 +250,11 @@ def pack_consume(
             "encoding_canonical": True,
             "blobs_present": True,
         }
-        
+
         # Compute CAS snapshot hash (deterministic)
         blob_hashes = sorted([e["ref"].split(":", 1)[1] for e in manifest["entries"]])
         cas_snapshot_hash = hashlib.sha256("\n".join(blob_hashes).encode("utf-8")).hexdigest()
-        
+
         return ConsumptionReceipt(
             manifest_ref=manifest_ref,
             cas_snapshot_hash=cas_snapshot_hash,
@@ -251,7 +265,7 @@ def pack_consume(
             exit_status="SUCCESS",
             errors=[],
         )
-        
+
     except ValueError:
         # Re-raise validation errors (already formatted)
         raise

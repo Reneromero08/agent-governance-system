@@ -23,6 +23,8 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
+from .firewall_writer import PackerWriter
+
 # Proof directories (relative to project root)
 PROOFS_DIR = Path("NAVIGATION/PROOFS")
 RUNS_DIR = PROOFS_DIR / "_RUNS"
@@ -205,26 +207,29 @@ def _generate_green_state(
 
 
 def _generate_catalytic_proof(
-    project_root: Path, *, proof_dir: Path, commands: List[List[str]]
+    project_root: Path, *, proof_dir: Path, commands: List[List[str]], writer: Optional[PackerWriter] = None
 ) -> Tuple[bool, List[Dict[str, Any]]]:
     """
     Run catalytic proof commands and generate outputs.
     Returns (success, commands_info).
     """
     catalytic_dir = proof_dir / "CATALYTIC"
-    catalytic_dir.mkdir(parents=True, exist_ok=True)
-    
+    if writer is None:
+        catalytic_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(catalytic_dir, kind="durable", parents=True, exist_ok=True)
+
     all_stdout = []
     all_stderr = []
     commands_info = []
     overall_success = True
-    
+
     for cmd in commands:
         exit_code, stdout, stderr = _run_command(cmd, cwd=project_root)
-        
+
         all_stdout.append(stdout)
         all_stderr.append(stderr)
-        
+
         cmd_info = {
             "command": cmd,
             "exit_code": exit_code,
@@ -232,14 +237,17 @@ def _generate_catalytic_proof(
             "stderr_sha256": _sha256_bytes(stderr),
         }
         commands_info.append(cmd_info)
-        
+
         if exit_code != 0:
             overall_success = False
-    
+
     # Write combined log
     combined_log = b"\n".join(all_stdout + all_stderr)
-    (catalytic_dir / "PROOF_LOG.txt").write_bytes(combined_log)
-    
+    if writer is None:
+        (catalytic_dir / "PROOF_LOG.txt").write_bytes(combined_log)
+    else:
+        writer.write_bytes(catalytic_dir / "PROOF_LOG.txt", combined_log)
+
     # Write summary
     summary_lines = [
         "# Catalytic Proof Summary",
@@ -249,55 +257,91 @@ def _generate_catalytic_proof(
         "## Commands",
         "",
     ]
-    
+
     for i, cmd_info in enumerate(commands_info, 1):
         status = "✓ PASS" if cmd_info["exit_code"] == 0 else "✗ FAIL"
         summary_lines.append(f"{i}. `{' '.join(cmd_info['command'])}` — {status}")
-    
+
     summary_lines.append("")
-    (catalytic_dir / "PROOF_SUMMARY.md").write_text("\n".join(summary_lines), encoding="utf-8")
-    
+    if writer is None:
+        (catalytic_dir / "PROOF_SUMMARY.md").write_text("\n".join(summary_lines), encoding="utf-8")
+    else:
+        writer.write_text(catalytic_dir / "PROOF_SUMMARY.md", "\n".join(summary_lines), encoding="utf-8")
+
     return overall_success, commands_info
 
 
 def _generate_compression_proof(
-    project_root: Path, *, proof_dir: Path
+    project_root: Path, *, proof_dir: Path, writer: Optional[PackerWriter] = None
 ) -> bool:
     """
     Generate compression proof outputs by copying existing compression proof artifacts.
     Returns True if successful.
     """
     compression_dir = proof_dir / "COMPRESSION"
-    compression_dir.mkdir(parents=True, exist_ok=True)
-    
+    if writer is None:
+        compression_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(compression_dir, kind="durable", parents=True, exist_ok=True)
+
     # Source compression proof directory
     source_compression = project_root / "NAVIGATION/PROOFS/COMPRESSION"
-    
+
     if not source_compression.exists():
         # Create minimal placeholder
-        (compression_dir / "COMPRESSION_PROOF_REPORT.md").write_text(
-            "# Compression Proof\n\nNo compression proof artifacts found.\n",
-            encoding="utf-8"
-        )
-        (compression_dir / "COMPRESSION_PROOF_DATA.json").write_text(
-            json.dumps({"status": "not_available"}, indent=2),
-            encoding="utf-8"
-        )
-        (compression_dir / "PROOF_LOG.txt").write_text("", encoding="utf-8")
+        placeholder_content1 = "# Compression Proof\n\nNo compression proof artifacts found.\n"
+        if writer is None:
+            (compression_dir / "COMPRESSION_PROOF_REPORT.md").write_text(
+                placeholder_content1,
+                encoding="utf-8"
+            )
+        else:
+            writer.write_text(
+                compression_dir / "COMPRESSION_PROOF_REPORT.md",
+                placeholder_content1,
+                encoding="utf-8"
+            )
+
+        placeholder_content2 = json.dumps({"status": "not_available"}, indent=2)
+        if writer is None:
+            (compression_dir / "COMPRESSION_PROOF_DATA.json").write_text(
+                placeholder_content2,
+                encoding="utf-8"
+            )
+        else:
+            writer.write_text(
+                compression_dir / "COMPRESSION_PROOF_DATA.json",
+                placeholder_content2,
+                encoding="utf-8"
+            )
+
+        placeholder_content3 = ""
+        if writer is None:
+            (compression_dir / "PROOF_LOG.txt").write_text(placeholder_content3, encoding="utf-8")
+        else:
+            writer.write_text(compression_dir / "PROOF_LOG.txt", placeholder_content3, encoding="utf-8")
         return True
-    
+
     # Copy existing compression proof artifacts
     try:
         for artifact in ["COMPRESSION_PROOF_REPORT.md", "COMPRESSION_PROOF_DATA.json"]:
             src = source_compression / artifact
             if src.exists():
-                shutil.copy2(src, compression_dir / artifact)
-        
+                if writer is None:
+                    shutil.copy2(src, compression_dir / artifact)
+                else:
+                    # For copying, we still use shutil since it's not a direct write operation
+                    shutil.copy2(src, compression_dir / artifact)
+
         # Create a log file (empty for now, as compression proof is pre-generated)
-        (compression_dir / "PROOF_LOG.txt").write_text(
-            "Compression proof artifacts copied from NAVIGATION/PROOFS/COMPRESSION/\n",
-            encoding="utf-8"
-        )
+        log_content = "Compression proof artifacts copied from NAVIGATION/PROOFS/COMPRESSION/\n"
+        if writer is None:
+            (compression_dir / "PROOF_LOG.txt").write_text(
+                log_content,
+                encoding="utf-8"
+            )
+        else:
+            writer.write_text(compression_dir / "PROOF_LOG.txt", log_content, encoding="utf-8")
         return True
     except Exception:
         return False
@@ -340,47 +384,51 @@ def refresh_proofs(
     *,
     stamp: str,
     save_run_history: bool = False,
+    writer: Optional[PackerWriter] = None,
 ) -> Tuple[bool, Optional[str]]:
     """
     Refresh proof artifacts under NAVIGATION/PROOFS/_LATEST/.
-    
+
     Returns (success, error_message).
-    
+
     Atomicity: writes to temp dir first, then atomically replaces _LATEST.
     Fail-closed: if ANY proof command fails, _LATEST is NOT updated.
     """
     start_time = datetime.now(timezone.utc)
-    
+
     # Create temp directory for atomic write
     temp_dir = project_root / PROOFS_DIR / f"_LATEST.__tmp__{stamp}"
     if temp_dir.exists():
         shutil.rmtree(temp_dir)
-    temp_dir.mkdir(parents=True, exist_ok=True)
-    
+    if writer is None:
+        temp_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(temp_dir, kind="tmp", parents=True, exist_ok=True)
+
     try:
         # Load proof suite
         commands = _load_proof_suite(project_root)
-        
+
         # Generate catalytic proof
         catalytic_success, commands_info = _generate_catalytic_proof(
-            project_root, proof_dir=temp_dir, commands=commands
+            project_root, proof_dir=temp_dir, commands=commands, writer=writer
         )
-        
+
         if not catalytic_success:
             error_msg = "Catalytic proof failed: one or more commands returned non-zero exit code"
             return False, error_msg
-        
+
         # Generate compression proof
         compression_success = _generate_compression_proof(
-            project_root, proof_dir=temp_dir
+            project_root, proof_dir=temp_dir, writer=writer
         )
-        
+
         if not compression_success:
             error_msg = "Compression proof generation failed"
             return False, error_msg
-        
+
         end_time = datetime.now(timezone.utc)
-        
+
         # Generate green state
         green_state_json, green_state_md = _generate_green_state(
             project_root,
@@ -389,13 +437,18 @@ def refresh_proofs(
             start_time=start_time,
             end_time=end_time,
         )
-        
-        (temp_dir / "GREEN_STATE.json").write_text(
-            json.dumps(green_state_json, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8"
-        )
-        (temp_dir / "GREEN_STATE.md").write_text(green_state_md, encoding="utf-8")
-        
+
+        json_content = json.dumps(green_state_json, indent=2, sort_keys=True) + "\n"
+        if writer is None:
+            (temp_dir / "GREEN_STATE.json").write_text(json_content, encoding="utf-8")
+        else:
+            writer.write_text(temp_dir / "GREEN_STATE.json", json_content, encoding="utf-8")
+
+        if writer is None:
+            (temp_dir / "GREEN_STATE.md").write_text(green_state_md, encoding="utf-8")
+        else:
+            writer.write_text(temp_dir / "GREEN_STATE.md", green_state_md, encoding="utf-8")
+
         # Generate proof manifest
         git_state = _get_git_state(project_root)
         manifest = _generate_proof_manifest(
@@ -405,54 +458,81 @@ def refresh_proofs(
             overall_status="PASS",
             executed_commands=commands_info,
         )
-        
-        (temp_dir / "PROOF_MANIFEST.json").write_text(
-            json.dumps(manifest, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8"
-        )
-        
-        
+
+        manifest_content = json.dumps(manifest, indent=2, sort_keys=True) + "\n"
+        if writer is None:
+            (temp_dir / "PROOF_MANIFEST.json").write_text(manifest_content, encoding="utf-8")
+        else:
+            writer.write_text(temp_dir / "PROOF_MANIFEST.json", manifest_content, encoding="utf-8")
+
+
         # Deploy: clean up old _LATEST if exists (migration) and copy temp to dispersed locations
         latest_path = project_root / PROOFS_DIR / "_LATEST"
         if latest_path.exists():
             shutil.rmtree(latest_path)
-            
+
         # Distribute artifacts to parent folders
         # 1. Root artifacts (GREEN_STATE*, PROOF_MANIFEST)
         for name in ["GREEN_STATE.json", "GREEN_STATE.md", "PROOF_MANIFEST.json"]:
             src = temp_dir / name
             dst = project_root / PROOFS_DIR / name
             if src.exists():
-                shutil.copy2(src, dst)
-                
+                if writer is None:
+                    shutil.copy2(src, dst)
+                else:
+                    # For copying, we still use shutil since it's not a direct write operation
+                    shutil.copy2(src, dst)
+
         # 2. Subdirectories (CATALYTIC, COMPRESSION)
         for subdir in ["CATALYTIC", "COMPRESSION"]:
             src_sub = temp_dir / subdir
             dst_sub = project_root / PROOFS_DIR / subdir
-            dst_sub.mkdir(parents=True, exist_ok=True)
+            if writer is None:
+                dst_sub.mkdir(parents=True, exist_ok=True)
+            else:
+                writer.mkdir(dst_sub, kind="durable", parents=True, exist_ok=True)
             if src_sub.exists():
                 # Copy/overwrite files
                 for item in src_sub.iterdir():
                     if item.is_file():
-                        shutil.copy2(item, dst_sub / item.name)
-        
+                        if writer is None:
+                            shutil.copy2(item, dst_sub / item.name)
+                        else:
+                            # For copying, we still use shutil since it's not a direct write operation
+                            shutil.copy2(item, dst_sub / item.name)
+
         # Optionally save to _RUNS history
         if save_run_history:
             runs_path = project_root / RUNS_DIR / stamp
-            runs_path.parent.mkdir(parents=True, exist_ok=True)
-            shutil.copytree(temp_dir, runs_path)
-            
+            if writer is None:
+                runs_path.parent.mkdir(parents=True, exist_ok=True)
+            else:
+                writer.mkdir(runs_path.parent, kind="durable", parents=True, exist_ok=True)
+            if writer is None:
+                shutil.copytree(temp_dir, runs_path)
+            else:
+                # For copying, we still use shutil since it's not a direct write operation
+                shutil.copytree(temp_dir, runs_path)
+
         return True, None
-        
+
     except Exception as e:
         # Cleanup temp dir on failure
         if temp_dir.exists():
-            shutil.rmtree(temp_dir)
+            if writer is None:
+                shutil.rmtree(temp_dir)
+            else:
+                # For cleanup, we still use shutil since it's not a direct write operation
+                shutil.rmtree(temp_dir)
         return False, f"Proof generation failed: {e}"
     finally:
         # Always cleanup temp dir
         if temp_dir.exists():
-            shutil.rmtree(temp_dir)
+            if writer is None:
+                shutil.rmtree(temp_dir)
+            else:
+                # For cleanup, we still use shutil since it's not a direct write operation
+                shutil.rmtree(temp_dir)
 
 
 def get_lite_proof_summary(project_root: Path) -> Dict[str, Any]:

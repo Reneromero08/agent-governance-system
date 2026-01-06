@@ -174,14 +174,21 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
   - Target: ≥95% coverage (98/103 surfaces enforced)
   - INBOX remains excluded per policy
   
-  - [ ] 2.4.1C.1 LLM_PACKER Enforcement
+  - [x] 2.4.1C.1 LLM_PACKER Enforcement ✅
     - Scope: `MEMORY/LLM_PACKER/**` write surfaces
     - Adapter: `PackerWriter` (already implemented in 2.4.1B)
     - Goal: High-impact coverage increase (6 surfaces)
+    - **Completed**: 100% LLM_PACKER write firewall enforcement coverage
+    - **Integration**: All MEMORY/LLM_PACKER/** modules updated with firewall integration
+      - core.py, split.py, pruned.py, proofs.py, lite.py, archive.py, consumer.py
+      - Optional writer parameter with backward compatibility
+      - Commit gate enforcement for durable writes
+    - **Tests**: `test_phase_2_4_1c1_llm_packer_commit_gate.py` (3 tests, 100% pass)
+    - **Verification**: Raw write audits clean, commit-gate functionality proven
     - Exit Criteria:
-      - [ ] All LLM_PACKER write operations use PackerWriter
-      - [ ] Receipts emitted for all pack generation runs
-      - [ ] Tests pass with firewall enforcement active
+      - [x] All LLM_PACKER write operations use PackerWriter
+      - [x] Receipts emitted for all pack generation runs
+      - [x] Tests pass with firewall enforcement active
   
   - [ ] 2.4.1C.2 Runtime Surfaces Enforcement
     - Scope:

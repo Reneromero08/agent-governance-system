@@ -37,7 +37,7 @@ import json
 import shutil
 import uuid
 from pathlib import Path
-from typing import Any, Dict, List, Sequence
+from typing import Any, Dict, List, Optional, Sequence
 
 from .core import (
     PackScope,
@@ -47,6 +47,7 @@ from .core import (
     read_text,
     _canonical_json_bytes,
 )
+from .firewall_writer import PackerWriter
 
 
 def rel_posix(*parts: str) -> str:
@@ -178,6 +179,7 @@ def write_pruned_pack(
     included_paths: Sequence[str],
     *,
     scope: PackScope,
+    writer: Optional[PackerWriter] = None,
 ) -> None:
     """
     Write PRUNED output directory with manifest and index files.
@@ -198,7 +200,10 @@ def write_pruned_pack(
     staging_dir = pack_dir / f".pruned_staging_{staging_id}"
 
     try:
-        staging_dir.mkdir(parents=True, exist_ok=True)
+        if writer is None:
+            staging_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            writer.mkdir(staging_dir, kind="tmp", parents=True, exist_ok=True)
 
         # Build manifest
         manifest = build_pruned_manifest(
@@ -210,7 +215,10 @@ def write_pruned_pack(
 
         # Write manifest
         manifest_bytes = _canonical_json_bytes(manifest)
-        (staging_dir / "PACK_MANIFEST_PRUNED.json").write_bytes(manifest_bytes)
+        if writer is None:
+            (staging_dir / "PACK_MANIFEST_PRUNED.json").write_bytes(manifest_bytes)
+        else:
+            writer.write_bytes(staging_dir / "PACK_MANIFEST_PRUNED.json", manifest_bytes)
 
         # Write PRUNED_RULES metadata
         pruned_rules = {
@@ -236,17 +244,25 @@ def write_pruned_pack(
             },
             "note": "PRUNED is a reduced planning context for LLM navigation, not a complete pack.",
         }
-        (staging_dir / "meta" / "PRUNED_RULES.json").parent.mkdir(parents=True, exist_ok=True)
-        (staging_dir / "meta" / "PRUNED_RULES.json").write_text(
-            json.dumps(pruned_rules, indent=2, sort_keys=True) + "\n",
-            encoding="utf-8",
-        )
+        if writer is None:
+            (staging_dir / "meta" / "PRUNED_RULES.json").parent.mkdir(parents=True, exist_ok=True)
+            (staging_dir / "meta" / "PRUNED_RULES.json").write_text(
+                json.dumps(pruned_rules, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
+        else:
+            writer.mkdir((staging_dir / "meta" / "PRUNED_RULES.json").parent, kind="tmp", parents=True, exist_ok=True)
+            writer.write_text(
+                staging_dir / "meta" / "PRUNED_RULES.json",
+                json.dumps(pruned_rules, indent=2, sort_keys=True) + "\n",
+                encoding="utf-8",
+            )
 
         # Write index files by category
         if scope.key == SCOPE_AGS.key:
-            _write_pruned_index_ags(staging_dir, project_root, manifest["entries"])
+            _write_pruned_index_ags(staging_dir, project_root, manifest["entries"], writer=writer)
         elif scope.key == SCOPE_LAB.key:
-            _write_pruned_index_lab(staging_dir, project_root, manifest["entries"])
+            _write_pruned_index_lab(staging_dir, project_root, manifest["entries"], writer=writer)
 
         # Atomic rename: staging -> PRUNED with backup-on-fallback
         # Policy: Backup existing PRUNED/, swap in staging, cleanup backup on success
@@ -255,27 +271,44 @@ def write_pruned_pack(
 
         if pruned_final.exists():
             # Backup existing PRUNED/ atomically
-            pruned_final.rename(pruned_backup)
+            if writer is None:
+                pruned_final.rename(pruned_backup)
+            else:
+                writer.rename(pruned_final, pruned_backup)
 
         try:
             # Atomic rename: staging -> PRUNED
-            staging_dir.rename(pruned_final)
+            if writer is None:
+                staging_dir.rename(pruned_final)
+            else:
+                writer.rename(staging_dir, pruned_final)
 
             # Success: cleanup backup
             if pruned_backup.exists():
-                shutil.rmtree(pruned_backup)
+                if writer is None:
+                    shutil.rmtree(pruned_backup)
+                else:
+                    # For backup cleanup, we need to use direct file operations since it's cleanup
+                    shutil.rmtree(pruned_backup)
         except Exception as rename_exception:
             # Rename failed: restore backup if exists
             if pruned_backup.exists():
                 try:
-                    pruned_backup.rename(pruned_final)
+                    if writer is None:
+                        pruned_backup.rename(pruned_final)
+                    else:
+                        writer.rename(pruned_backup, pruned_final)
                 except Exception:
                     pass
 
             # Cleanup staging directory
             if staging_dir.exists():
                 try:
-                    shutil.rmtree(staging_dir)
+                    if writer is None:
+                        shutil.rmtree(staging_dir)
+                    else:
+                        # For staging cleanup, we need to use direct file operations since it's cleanup
+                        shutil.rmtree(staging_dir)
                 except Exception:
                     pass
 
@@ -286,7 +319,11 @@ def write_pruned_pack(
         # Cleanup staging directory on failure
         if staging_dir.exists():
             try:
-                shutil.rmtree(staging_dir)
+                if writer is None:
+                    shutil.rmtree(staging_dir)
+                else:
+                    # For staging cleanup, we need to use direct file operations since it's cleanup
+                    shutil.rmtree(staging_dir)
             except Exception:
                 pass
 
@@ -298,6 +335,7 @@ def _write_pruned_index_ags(
     pruned_dir: Path,
     project_root: Path,
     entries: List[Dict[str, Any]],
+    writer: Optional[PackerWriter] = None,
 ) -> None:
     """Write AGS PRUNED index files organized by category."""
 
@@ -327,99 +365,123 @@ def _write_pruned_index_ags(
     cortex_meta = [e["path"] for e in entries if "NAVIGATION/CORTEX/meta" in e["path"]]
 
     # Write main index
-    (pruned_dir / "AGS-00_INDEX.md").write_text(
-        "\n".join(
-            [
-                "# AGS Pack Index (PRUNED)",
-                "",
-                "This directory contains a reduced planning context for LLM navigation.",
-                "",
-                "## What is PRUNED?",
-                "",
-                "PRUNED is a minimal subset of full AGS repository, optimized for:",
-                "- Understanding governance rules and decisions",
-                "- Navigating roadmaps and operational procedures",
-                "- Finding skill manifests and tool documentation",
-                "",
-                "## Contents",
-                "",
-                "- `AGS-01_NAVIGATION.md` - Roadmaps and OPS",
-                "- `AGS-02_LAW_CANON.md` - Core governance rules",
-                "- `AGS-03_LAW_CONTEXT.md` - ADRs and decision records",
-                "- `AGS-04_CONTRACTS_SCHEMAS.md` - JSON schemas",
-                "- `AGS-05_SKILL_MANIFESTS.md` - Skill SKILL.md files",
-                "- `AGS-06_TOOL_DOCS.md` - Tool documentation",
-                "",
-                "## Notes",
-                "",
-                "- PRUNED does NOT include full source code trees.",
-                "- Use FULL/ or SPLIT/ for complete repository access.",
-                "- PRUNED is deterministic and additive (does not affect other outputs).",
-                "",
-            ]
-        ),
-        encoding="utf-8",
+    index_content = "\n".join(
+        [
+            "# AGS Pack Index (PRUNED)",
+            "",
+            "This directory contains a reduced planning context for LLM navigation.",
+            "",
+            "## What is PRUNED?",
+            "",
+            "PRUNED is a minimal subset of full AGS repository, optimized for:",
+            "- Understanding governance rules and decisions",
+            "- Navigating roadmaps and operational procedures",
+            "- Finding skill manifests and tool documentation",
+            "",
+            "## Contents",
+            "",
+            "- `AGS-01_NAVIGATION.md` - Roadmaps and OPS",
+            "- `AGS-02_LAW_CANON.md` - Core governance rules",
+            "- `AGS-03_LAW_CONTEXT.md` - ADRs and decision records",
+            "- `AGS-04_CONTRACTS_SCHEMAS.md` - JSON schemas",
+            "- `AGS-05_SKILL_MANIFESTS.md` - Skill SKILL.md files",
+            "- `AGS-06_TOOL_DOCS.md` - Tool documentation",
+            "",
+            "## Notes",
+            "",
+            "- PRUNED does NOT include full source code trees.",
+            "- Use FULL/ or SPLIT/ for complete repository access.",
+            "- PRUNED is deterministic and additive (does not affect other outputs).",
+            "",
+        ]
     )
+    if writer is None:
+        (pruned_dir / "AGS-00_INDEX.md").write_text(index_content, encoding="utf-8")
+    else:
+        writer.write_text(pruned_dir / "AGS-00_INDEX.md", index_content, encoding="utf-8")
 
     # Write category sections
     if roadmap_paths or ops_paths:
         nav_content = section("NAVIGATION (Roadmaps & OPS)", sorted([*roadmap_paths, *ops_paths]))
-        (pruned_dir / "AGS-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-01_NAVIGATION.md", nav_content, encoding="utf-8")
 
     if canon_paths:
         canon_content = section("LAW/CANON", sorted(canon_paths))
-        (pruned_dir / "AGS-02_LAW_CANON.md").write_text(canon_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-02_LAW_CANON.md").write_text(canon_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-02_LAW_CANON.md", canon_content, encoding="utf-8")
 
     if context_paths:
         context_content = section("LAW/CONTEXT", sorted(context_paths))
-        (pruned_dir / "AGS-03_LAW_CONTEXT.md").write_text(context_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-03_LAW_CONTEXT.md").write_text(context_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-03_LAW_CONTEXT.md", context_content, encoding="utf-8")
 
     if schema_paths:
         schema_content = section("LAW/CONTRACTS/schemas", sorted(schema_paths))
-        (pruned_dir / "AGS-04_CONTRACTS_SCHEMAS.md").write_text(schema_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-04_CONTRACTS_SCHEMAS.md").write_text(schema_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-04_CONTRACTS_SCHEMAS.md", schema_content, encoding="utf-8")
 
     if skill_manifests:
         skills_content = section("CAPABILITY/SKILLS/*/SKILL.md", sorted(skill_manifests))
-        (pruned_dir / "AGS-05_SKILL_MANIFESTS.md").write_text(skills_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-05_SKILL_MANIFESTS.md").write_text(skills_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-05_SKILL_MANIFESTS.md", skills_content, encoding="utf-8")
 
     if tool_docs:
         tools_content = section("CAPABILITY/TOOLS/**/*.md", sorted(tool_docs))
-        (pruned_dir / "AGS-06_TOOL_DOCS.md").write_text(tools_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-06_TOOL_DOCS.md").write_text(tools_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-06_TOOL_DOCS.md", tools_content, encoding="utf-8")
 
     if cortex_meta:
         meta_content = section("NAVIGATION/CORTEX/meta", sorted(cortex_meta))
-        (pruned_dir / "AGS-07_CORTEX_META.md").write_text(meta_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "AGS-07_CORTEX_META.md").write_text(meta_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "AGS-07_CORTEX_META.md", meta_content, encoding="utf-8")
 
 
 def _write_pruned_index_lab(
     pruned_dir: Path,
     project_root: Path,
     entries: List[Dict[str, Any]],
+    writer: Optional[PackerWriter] = None,
 ) -> None:
     """Write LAB PRUNED index files (minimal)."""
 
     roadmap_paths = [e["path"] for e in entries if "NAVIGATION/ROADMAPS" in e["path"]]
 
-    (pruned_dir / "LAB-00_INDEX.md").write_text(
-        "\n".join(
-            [
-                "# LAB Pack Index (PRUNED)",
-                "",
-                "This directory contains a minimal planning context for LAB.",
-                "",
-                "## Contents",
-                "",
-                "- `LAB-01_NAVIGATION.md` - Roadmaps",
-                "",
-                "## Notes",
-                "",
-                "- PRUNED is minimal and does not include full LAB source code.",
-                "- Use FULL/ or SPLIT/ for complete LAB access.",
-                "",
-            ]
-        ),
-        encoding="utf-8",
+    index_content = "\n".join(
+        [
+            "# LAB Pack Index (PRUNED)",
+            "",
+            "This directory contains a minimal planning context for LAB.",
+            "",
+            "## Contents",
+            "",
+            "- `LAB-01_NAVIGATION.md` - Roadmaps",
+            "",
+            "## Notes",
+            "",
+            "- PRUNED is minimal and does not include full LAB source code.",
+            "- Use FULL/ or SPLIT/ for complete LAB access.",
+            "",
+        ]
     )
+    if writer is None:
+        (pruned_dir / "LAB-00_INDEX.md").write_text(index_content, encoding="utf-8")
+    else:
+        writer.write_text(pruned_dir / "LAB-00_INDEX.md", index_content, encoding="utf-8")
 
     if roadmap_paths:
         def section(title: str, paths: Sequence[str]) -> str:
@@ -438,4 +500,7 @@ def _write_pruned_index_lab(
             return "\n".join(lines).rstrip() + "\n"
 
         nav_content = section("NAVIGATION/ROADMAPS", sorted(roadmap_paths))
-        (pruned_dir / "LAB-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
+        if writer is None:
+            (pruned_dir / "LAB-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
+        else:
+            writer.write_text(pruned_dir / "LAB-01_NAVIGATION.md", nav_content, encoding="utf-8")
