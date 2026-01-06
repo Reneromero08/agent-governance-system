@@ -1,15 +1,20 @@
 ---
-title: "Functional Sentience"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-26 06:39"
-modified: "2025-12-26 06:39"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Functional Sentience
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-26 06:39
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 5cd8cd37a89a82ad38a3f015bdf8ab15191d37c48fc24bba08baf70ae2a4df5c -->
+<!-- CONTENT_HASH: 91121cdb2231042916504dc0023b1a844aadeb5a687eada682184d471f43c658 -->
 
 Notes:
 Turn important memories into latent space weights somehow without retraining, just like an additional tokenizer added on top. Like weights on top of weights, is that possible?

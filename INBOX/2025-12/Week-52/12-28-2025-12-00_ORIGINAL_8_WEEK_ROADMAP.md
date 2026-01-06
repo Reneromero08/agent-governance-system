@@ -1,15 +1,21 @@
 ---
-title: "Original 8 Week Roadmap"
-section: "research"
-author: "Raúl R Romero"
-priority: "Low"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Archived"
-summary: "Original 8-week roadmap plan (Archived)"
-tags: [roadmap, archive, legacy]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Original 8 Week Roadmap
+section: research
+bucket: 2025-12/Week-52
+author: "Ra\xFAl R Romero"
+priority: Low
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Archived
+summary: Original 8-week roadmap plan (Archived)
+tags:
+- roadmap
+- archive
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: ab5e909f4c2e7338453e4885bbad13e724ef44ce987eab8450298ec0876c9cd2 -->
+<!-- CONTENT_HASH: 07d1e1af9a6077186fdbad3005402c6c1efad16ef8c806c94d801ebc61f761a9 -->
 
 # Catalytic Chat Implementation Roadmap
 

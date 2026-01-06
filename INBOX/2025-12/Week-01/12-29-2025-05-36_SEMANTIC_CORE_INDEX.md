@@ -1,15 +1,21 @@
 ---
-title: "Semantic Core Index"
-section: "report"
-author: "System"
-priority: "Low"
-created: "2025-12-29 05:36"
-modified: "2025-12-29 05:36"
-status: "Active"
-summary: "Index of semantic core components (Restored)"
-tags: [semantic_core, index, reference]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Semantic Core Index
+section: report
+bucket: 2025-12/Week-01
+author: System
+priority: Low
+created: 2025-12-29 05:36
+modified: 2026-01-06 13:09
+status: Active
+summary: Index of semantic core components (Restored)
+tags:
+- semantic_core
+- index
+- reference
+hashtags: []
 ---
-<!-- CONTENT_HASH: dd8fad948a61897ab3437e0cd9681cf476e12b21006af5ec24ba843b437c1d29 -->
+<!-- CONTENT_HASH: b3e458c2548da75816ee68ad60aa106a5bfe3a17e884a37f20d62c4a7cfd47f2 -->
 
 # Semantic Core - Complete Index
 

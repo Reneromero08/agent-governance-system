@@ -1,15 +1,21 @@
 ---
-title: "Agents Cortex Connection Gap Report"
-section: "report"
-author: "System"
-priority: "High"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Complete"
-summary: "Analysis of gaps in agent-cortex connection (Restored)"
-tags: [cortex, connection, gap]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Agents Cortex Connection Gap Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: High
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Complete
+summary: Analysis of gaps in agent-cortex connection (Restored)
+tags:
+- cortex
+- connection
+- gap
+hashtags: []
 ---
-<!-- CONTENT_HASH: 4df35bca158c22b27d527dc5ef16c0cd1ea2f6904a7e07aab041e208102dae42 -->
+<!-- CONTENT_HASH: 7168b604a9bafaf717a6bfe372754d3b27e8513a5e92d85324cadf530a388f59 -->
 
 # AGENTS.md Cortex Connection Gap Analysis Report
 

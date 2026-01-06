@@ -1,15 +1,22 @@
 ---
-title: "System1 System2 Dual DB"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-23 12:00"
-modified: "2025-12-23 12:00"
-status: "Active"
-summary: "Analysis of System 1 and System 2 dual database architecture"
-tags: ["system1", "system2", "database", "architecture"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: System1 System2 Dual DB
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-23 12:00
+modified: 2026-01-06 13:09
+status: Active
+summary: Analysis of System 1 and System 2 dual database architecture
+tags:
+- system1
+- system2
+- database
+- architecture
+hashtags: []
 ---
-<!-- CONTENT_HASH: 4b1efdee9a09412b28ffd48ae644796a6df6d51131059272a76468d8e9aa600f -->
+<!-- CONTENT_HASH: 8bd5ee8e6b38f930d37344f8d156334968f0ff8ec9441a29c2f3074629712b7a -->
 
 # Dual-DB Architecture (System 1 / System 2) for AGS
 

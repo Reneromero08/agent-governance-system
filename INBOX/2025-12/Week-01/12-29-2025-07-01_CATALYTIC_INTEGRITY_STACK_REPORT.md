@@ -1,15 +1,20 @@
 ---
-title: "CATALYTIC_INTEGRITY_STACK_REPORT"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 07:01"
-modified: "2025-12-29 07:01"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: CATALYTIC_INTEGRITY_STACK_REPORT
+section: research
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 07:01
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 9536c2fb1345119bc59dfbe53adb4d4a4ea6b887b61f02efffb607d065fe3cf3 -->
+<!-- CONTENT_HASH: 0242119bca0d585412c036a6c217aade0246e0053aca797bd2285b2484085e64 -->
 
 # Catalytic Integrity Stack — Work Report (CMP-01, CATLAB-01, SPECTRUM-01/02/03)
 

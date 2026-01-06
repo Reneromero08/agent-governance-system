@@ -1,15 +1,20 @@
 ---
-title: "CANON_COMPRESSION_ANALYSIS"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 07:01"
-modified: "2025-12-29 07:01"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: CANON_COMPRESSION_ANALYSIS
+section: research
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 07:01
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: d68578f118821b765364f96df8ee0657711744f829a00e8516729c70eccf0efb -->
+<!-- CONTENT_HASH: 6b748ec7c8eea1cb39b1666026e31be0d53bdd81d4ca4ef2ae7b510f92147329 -->
 
 # CANON Folder Compression Analysis
 

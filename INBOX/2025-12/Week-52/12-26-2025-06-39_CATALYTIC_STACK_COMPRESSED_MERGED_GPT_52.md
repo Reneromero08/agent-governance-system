@@ -1,15 +1,20 @@
 ---
-title: "CATALYTIC_STACK_COMPRESSED_MERGED_GPT_5.2"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-26 06:39"
-modified: "2025-12-26 06:39"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: CATALYTIC_STACK_COMPRESSED_MERGED_GPT_5.2
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-26 06:39
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: c1bf9b77b59c4bb51906019952c0df375690ec9e2c414b4ce4a99a6d704336f5 -->
+<!-- CONTENT_HASH: 2fdb7ff1ccb41b9625b4b40f897c2a782e1d86e3f5916a58f97a2ec91410ed0e -->
 
 # Catalytic Computing Stack (Compressed + Merged)
 

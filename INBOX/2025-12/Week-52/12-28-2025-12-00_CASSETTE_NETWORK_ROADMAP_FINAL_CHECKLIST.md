@@ -1,15 +1,21 @@
 ---
-title: "Cassette Network Roadmap Final Checklist"
-section: "roadmap"
-author: "System"
-priority: "High"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Active"
-summary: "Final checklist for Cassette Network roadmap (Restored)"
-tags: [cassette, network, roadmap]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Cassette Network Roadmap Final Checklist
+section: roadmap
+bucket: 2025-12/Week-52
+author: System
+priority: High
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Active
+summary: Final checklist for Cassette Network roadmap (Restored)
+tags:
+- cassette
+- network
+- roadmap
+hashtags: []
 ---
-<!-- CONTENT_HASH: de3c981833ad4c9b139072e68de5b62f9463e34d6cb47ad2ce8601e0771d4700 -->
+<!-- CONTENT_HASH: 0479da5b1f72db5dd044d1c6896b5089d40edc38257bb69bdea7d73737b2fd18 -->
 
 # Cassette Network Roadmap (Final Checklist)
 

@@ -1,15 +1,20 @@
 ---
-title: "♥ ♥ GPT 5.2 Thinking Deep Research Merge_1_2"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-26 06:39"
-modified: "2025-12-26 06:39"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: "\u2665 \u2665 GPT 5.2 Thinking Deep Research Merge_1_2"
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-26 06:39
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 5c293c9043c90c197ecf8a6e9e125868d606fac0511811bef0d5fa0794f4a4bb -->
+<!-- CONTENT_HASH: dd48900295d661972f2861f18471284f667c07017128c359c6f5145f2a5c1b2b -->
 
 # Semiotic OS Deep Research Master Merge v2
 

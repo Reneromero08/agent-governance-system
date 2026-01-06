@@ -1,15 +1,20 @@
 ---
-title: "SWARM_BUG_REPORT"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 07:01"
-modified: "2025-12-29 07:01"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: SWARM_BUG_REPORT
+section: research
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 07:01
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: ec59aecddd25a564d3bdfa25c1455b45fa5846e172b047d5e50797ddf8a3bac6 -->
+<!-- CONTENT_HASH: d7036872db38068b4b234994cfa567d6e24277e12b85b1671ee20fe0b1e968e5 -->
 
 # Swarm Orchestrator Bug Report & Debug Plan
 

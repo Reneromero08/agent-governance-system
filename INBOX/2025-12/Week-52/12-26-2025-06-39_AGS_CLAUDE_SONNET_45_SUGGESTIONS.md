@@ -1,15 +1,20 @@
 ---
-title: "AGS Claude Sonnet 4.5 Suggestions"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-26 06:39"
-modified: "2025-12-26 06:39"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: AGS Claude Sonnet 4.5 Suggestions
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-26 06:39
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: fa0757b3712951d898c22590a1bc08e7b8e7db100ae90a3f0c68f6c34fed7ede -->
+<!-- CONTENT_HASH: 97cfaccfc83abb5cd2108f893c34a2cbe3851f3b888a4409cf1bc02e06c31796 -->
 
 Claude:
 

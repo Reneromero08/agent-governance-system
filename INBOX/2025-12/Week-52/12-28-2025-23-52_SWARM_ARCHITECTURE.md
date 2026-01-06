@@ -1,15 +1,20 @@
 ---
-title: "SWARM_ARCHITECTURE"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-28 23:52"
-modified: "2025-12-28 23:52"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: SWARM_ARCHITECTURE
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-28 23:52
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 1db04d8c95c97ad40274ae40d88450ccca1d729df699f9f65b3cfe2b2bfdc8bf -->
+<!-- CONTENT_HASH: 2ae06c3d08d9de68d97a1b65fe5a77cc28019c2177856c986203ef4c5c7748b6 -->
 
 # Swarm Architecture
 

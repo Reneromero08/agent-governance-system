@@ -1,15 +1,21 @@
 ---
-title: "Agent Bootstrap Test Design"
-section: "report"
-author: "System"
-priority: "Medium"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Complete"
-summary: "Design for agent bootstrap testing (Restored)"
-tags: [bootstrap, test, design]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Agent Bootstrap Test Design
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Complete
+summary: Design for agent bootstrap testing (Restored)
+tags:
+- bootstrap
+- test
+- design
+hashtags: []
 ---
-<!-- CONTENT_HASH: 3c8bf64d2c0c8b1605757ca35635d1e97ba018869e52cedfd4d3ede74ba11cfb -->
+<!-- CONTENT_HASH: 052be09a95a5e2a09705f4fac51c6f7939e7480d19082f85f4f6ff2d4cd5dc12 -->
 
 # Simulated Agent Bootstrap Test Design
 
