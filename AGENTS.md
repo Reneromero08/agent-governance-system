@@ -162,6 +162,7 @@ Before taking any action, an agent MUST:
    - LAW/CANON/VERSIONING.md - Version policy (identify current canon_version)
    - LAW/CANON/AGREEMENT.md - Constitutional agreement between human and system
    - LAW/CANON/STEWARDSHIP.md - Engineering practices and escalation paths
+   - LAW/CANON/VERIFICATION_PROTOCOL_CANON.md - Mechanical verification requirements for task completion
    - LAW/CANON/DOCUMENT_POLICY.md - Canonical document format for all markdown documentation
    - LAW/CANON/IMPLEMENTATION_REPORTS.md - Report format for all implementations
    - LAW/CANON/CRISIS.md - Emergency procedures and quarantine detection
@@ -357,6 +358,77 @@ An agent should stop when:
 - any blocking uncertainty appears
 
 Agents must not continue "optimizing" beyond scope.
+
+## 9A. Verification Protocol (MANDATORY)
+
+**All tasks that modify production code, enforcement primitives, receipts, fixtures, tests, schemas, or governance gates MUST follow the Verification Protocol** (`LAW/CANON/VERIFICATION_PROTOCOL_CANON.md`).
+
+### Core Requirements (INV-016 to INV-020):
+
+1. **No Verification Without Execution** (INV-016)
+   - Agents cannot claim task completion without executing required verification commands
+   - "Tests pass" without recorded outputs is a governance violation
+
+2. **Proof Must Be Recorded Verbatim** (INV-017)
+   - Record verbatim: `git status`, test outputs, audit outputs
+   - Summaries are NOT proof
+   - Use log files for large outputs (with hash + head/tail excerpts)
+
+3. **Tests Are Hard Gates** (INV-018)
+   - Tests that detect violations while passing are invalid
+   - If forbidden condition exists, gate MUST fail
+   - No "warn but pass" scanners
+
+4. **Deterministic Stop Conditions** (INV-019)
+   - If verification fails: fix → re-run → record → repeat until pass
+   - If cannot fix within scope: report BLOCKED with precise reason
+   - No partial success claims
+
+5. **Clean-State Discipline** (INV-020)
+   - Verification must run from clean state for scoped paths
+   - Unrelated diffs: STOP and report, revert, or explicitly scope into task
+   - No verification on polluted trees
+
+### Mandatory Verification Loop:
+
+**STEP 0: CLEAN STATE**
+- Run `git status`
+- If changes exist outside allowed scope: STOP and report
+
+**STEP 1: RUN REQUIRED TESTS**
+- Run exact test commands listed in task
+- Record full outputs verbatim (inline or log + hash)
+- Record exit codes
+
+**STEP 2: IF ANY FAILURES**
+- Fix code (within scope only)
+- Re-run same commands
+- Record new outputs verbatim
+- Repeat until pass or BLOCKED
+
+**STEP 3: RUN REQUIRED AUDITS**
+- Standard commands available:
+  - `python CAPABILITY/AUDIT/root_audit.py --verbose` (INV-006)
+  - `python CAPABILITY/TOOLS/governance/critic.py` (INV-009, INV-011)
+  - `python LAW/CONTRACTS/runner.py` (INV-004)
+  - Custom `rg`/`grep` gates for forbidden patterns
+- Record outputs verbatim
+- Audits must be hard gates (no "warn but pass")
+
+**STEP 4: FINAL REPORT**
+- Must include:
+  - `git status` output (or log reference + hash)
+  - List of files changed
+  - Exact commands executed
+  - Full outputs for tests and audits (or log references + hashes)
+  - Final status: **VERIFIED COMPLETE | PARTIAL | BLOCKED**
+- Forbidden language: "complete/done/verified" unless status is VERIFIED COMPLETE
+
+### Exemptions:
+- Documentation-only changes (see `LAW/CANON/DOCUMENT_POLICY.md` for exempt paths)
+- Does NOT apply to: `LAW/CANON/*`, `LAW/CONTEXT/*`, `INBOX/*` (unless modifying enforcement logic)
+
+**Violation of the Verification Protocol is a governance failure. Agents claiming completion without mechanical proof violate INV-016.**
 
 ## 10. Commit ceremony (CRITICAL)
 

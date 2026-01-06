@@ -49,6 +49,7 @@ save tokens while maintaining precision.
 | `@R0` | Crisis procedures | `CANON/CRISIS.md` |
 | `@T0` | The Catalytic Integrity Stack (The Truth) | `CANON/INTEGRITY.md` |
 | `@V0` | Version control policy | `CANON/VERSIONING.md` |
+| `@VP0` | Mechanical verification requirements | `CANON/VERIFICATION_PROTOCOL_CANON.md` |
 
 ## Contract Rules (@C)
 
@@ -76,6 +77,11 @@ save tokens while maintaining precision.
 | `@I13` | Declared Truth: Every system-generated artifact MUST be declared in a hash m | `CANON/INVARIANTS.md` |
 | `@I14` | Disposable Space: Files under `_tmp/` directories (Catalytic domains) are stri | `CANON/INVARIANTS.md` |
 | `@I15` | Narrative Independence: Verification Success (`STATUS: success`) is bound only to ar | `CANON/INVARIANTS.md` |
+| `@I16` | No Verification Without Execution: An agent may not claim a task is complete unless it executed the required verification commands (from VERIFICATION_PROTOCOL_CANON.md) | `CANON/INVARIANTS.md` |
+| `@I17` | Proof Must Be Recorded Verbatim: A claim is not verified unless proof is recorded verbatim for git status, tests, and audits. Summaries are not proof | `CANON/INVARIANTS.md` |
+| `@I18` | Tests Are Hard Gates: A test that detects violations while passing is invalid. If forbidden condition exists, gate must fail | `CANON/INVARIANTS.md` |
+| `@I19` | Deterministic Stop Conditions: If verification fails, agent must fix, re-run, record, repeat until pass or report BLOCKED | `CANON/INVARIANTS.md` |
+| `@I20` | Clean-State Discipline: Verification must run from clean state. Unrelated diffs must be stopped, reverted, or scoped | `CANON/INVARIANTS.md` |
 | `@I2` | Token grammar: The set of tokens defined in `CANON/GLOSSARY.md` constitutes | `CANON/INVARIANTS.md` |
 | `@I3` | No raw path access: Skills may not navigate the filesystem directly. They must q | `CANON/INVARIANTS.md` |
 | `@I4` | Fixtures gate merges: No code or rule change may be accepted if any fixture fails. | `CANON/INVARIANTS.md` |

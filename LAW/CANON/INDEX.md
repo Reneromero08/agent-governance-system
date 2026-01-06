@@ -28,6 +28,7 @@ This directory contains the "Canon"—the laws, rules, and agreements that gover
 - [DEPRECATION.md](./DEPRECATION.md): End-of-life workflow for rules.
 - [MIGRATION.md](./MIGRATION.md): Managing breaking changes.
 - [STEWARDSHIP.md](./STEWARDSHIP.md): Human escalation paths.
+- [VERIFICATION_PROTOCOL_CANON.md](./VERIFICATION_PROTOCOL_CANON.md): Mechanical verification requirements for task completion.
 
 ## Meta
 - [GENESIS.md](./GENESIS.md): The bootstrap prompt.

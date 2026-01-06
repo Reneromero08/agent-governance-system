@@ -4,6 +4,45 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.32] - 2026-01-06
+
+### Added
+- **Verification Protocol Canon Integration** — Integrated VERIFICATION_PROTOCOL_CANON.md into governance system with mechanical verification requirements for task completion.
+  - **Canon File**: `LAW/CANON/VERIFICATION_PROTOCOL_CANON.md`
+    - Defines mechanical truth requirements: proof must be reproducible from commands, outputs, and receipts
+    - Establishes fail-closed verification loop (STEP 0-4): clean state → run tests → fix failures → run audits → final report
+    - Requires verbatim proof recording (git status, test outputs, audit outputs)
+    - Enforces hard gates: tests must fail if forbidden conditions exist (no "warn but pass" scanners)
+    - Mandates clean-state discipline: verification on polluted trees is forbidden
+  - **New Invariants** (INV-016 through INV-020):
+    - **INV-016**: No Verification Without Execution - Agents cannot claim completion without executing required verification commands
+    - **INV-017**: Proof Must Be Recorded Verbatim - Summaries are not proof; git status, tests, and audits must be recorded verbatim
+    - **INV-018**: Tests Are Hard Gates - Tests detecting violations while passing are invalid; gates must fail if forbidden conditions exist
+    - **INV-019**: Deterministic Stop Conditions - Failed verification requires fix → re-run → record → repeat until pass or BLOCKED
+    - **INV-020**: Clean-State Discipline - Verification requires clean state; unrelated diffs must be stopped, reverted, or scoped
+  - **Cross-References to Existing Invariants**:
+    - Reinforces **INV-007** (Change ceremony) - Ensures fixtures, changelog, and proof in same commit
+    - Reinforces **INV-013** (Declared Truth) - Verification outputs must be in hash manifests
+    - Reinforces **INV-015** (Narrative Independence) - Success bound to artifacts, not narratives
+  - **Standard Audit Commands**:
+    - `python CAPABILITY/AUDIT/root_audit.py --verbose` - Output roots compliance (INV-006)
+    - `python CAPABILITY/TOOLS/governance/critic.py` - Canon compliance (INV-009, INV-011)
+    - `python LAW/CONTRACTS/runner.py` - Fixture validation (INV-004)
+    - `rg`/`grep` enforcement gates - Pattern-based violation detection
+    - Schema validation - JSON schema checks for governance objects
+  - **Exemption Clarity**: Cross-references `CANON/DOCUMENT_POLICY.md` for exempt paths (LAW/CANON/*, LAW/CONTEXT/*, INBOX/*); documentation-only changes don't require full protocol unless modifying enforcement logic
+  - **Codebook Integration**:
+    - Added `@VP0` reference for VERIFICATION_PROTOCOL_CANON.md in Canon Files table
+    - Added `@I16` through `@I20` entries for new verification protocol invariants
+  - **Canon Index**: Added to Processes section with description "Mechanical verification requirements for task completion"
+  - **Agent Integration** (`AGENTS.md`):
+    - Added VERIFICATION_PROTOCOL_CANON.md to required startup sequence (Section 1, Step 2)
+    - Added new Section 9A: Verification Protocol (MANDATORY) with complete verification loop
+    - Agents must follow 4-step verification process for all production code changes
+    - Includes exemptions, standard audit commands, and forbidden language rules
+    - Violation of verification protocol is now a governance failure
+  - **Status**: ✅ INTEGRATED - Verification Protocol now part of canonical governance law and mandatory for all agents
+
 ## [3.3.31] - 2026-01-06
 
 ### Added
