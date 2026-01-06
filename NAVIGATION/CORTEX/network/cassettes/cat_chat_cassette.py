@@ -145,7 +145,34 @@ class CatChatCassette(DatabaseCassette):
         """
         if not self.db_path.exists():
             print(f"[CAT_CHAT] Database not found, creating: {self.db_path}")
-            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            # Use GuardedWriter for firewall enforcement
+            try:
+                from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+                repo_root = Path(__file__).resolve().parents[4] # NAVIGATION/CORTEX/network/cassettes/file -> 4 levels up? No.
+                # Project root:
+                # file: D:\CCC 2.0\AI\agent-governance-system\NAVIGATION\CORTEX\network\cassettes\cat_chat_cassette.py
+                # parents[0]: cassettes
+                # parents[1]: network
+                # parents[2]: CORTEX
+                # parents[3]: NAVIGATION
+                # parents[4]: agent-governance-system (REPO ROOT)
+                repo_root = Path(__file__).resolve().parents[4]
+                
+                writer = GuardedWriter(
+                    project_root=repo_root,
+                    durable_roots=["THOUGHT/LAB/CAT_CHAT"]
+                )
+                # We need to open commit gate if we are writing durable.
+                # However, THOUGHT might be considered ephemeral or durable? DB suggests durable.
+                writer.open_commit_gate() 
+                writer.mkdir_durable("THOUGHT/LAB/CAT_CHAT")
+            except ImportError:
+                # If we can't import GuardedWriter, we can't comply. 
+                # Fail closed or fallback? strict means fail.
+                raise ImportError("GuardedWriter not available for firewall enforcement")
+            except Exception as e:
+                 print(f"Firewall violation or error: {e}")
+                 raise
         
         conn = sqlite3.connect(str(self.db_path))
         

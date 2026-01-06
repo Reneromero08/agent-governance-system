@@ -9,12 +9,19 @@ from pathlib import Path
 from typing import Any, Dict, List, Tuple
 
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
+
 def load_json(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
-
-def write_json(path: Path, payload: Dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+def write_json_guarded(path: Path, payload: Dict[str, Any], writer: Any) -> None:
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), json.dumps(payload, indent=2))
 
 
 def get_cortex_query(project_root: Path) -> Tuple[Any, str]:
@@ -77,7 +84,7 @@ def run_entrypoint(project_root: Path, entrypoint_rel: str, args: List[str]) -> 
         env=env,
     )
 
-def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
+def ensure_entrypoint_wrapper(entrypoint_path: Path, writer: Any) -> None:
     """
     Ensure the recommended MCP entrypoint wrapper exists.
 
@@ -87,9 +94,8 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
     if entrypoint_path.exists():
         return
 
-    entrypoint_path.parent.mkdir(parents=True, exist_ok=True)
-    entrypoint_path.write_text(
-        "\n".join(
+    writer.mkdir_durable(str(entrypoint_path.parent))
+    writer.write_durable(str(entrypoint_path), "\n".join(
             [
                 "#!/usr/bin/env python3",
                 '"""Generated runtime entrypoint for AGS MCP server."""',
@@ -110,10 +116,7 @@ def ensure_entrypoint_wrapper(entrypoint_path: Path) -> None:
                 "    mcp_server.main()",
                 "",
             ]
-        )
-        + "\n",
-        encoding="utf-8",
-    )
+        ) + "\n")
 
 
 def run_bridge_smoke(project_root: Path, config_path: str, payload: Dict[str, Any], timeout_seconds: int) -> Dict[str, Any]:
@@ -173,21 +176,29 @@ def main() -> int:
     bridge_enabled = bool(bridge_smoke.get("enabled", False))
 
     project_root = Path(__file__).resolve().parents[4]
+
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(project_root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer.open_commit_gate()
+
     cortex_query, error = get_cortex_query(project_root)
     if cortex_query is None:
-        write_json(output_path, {
+        write_json_guarded(output_path, {
             "ok": False,
             "returncode": 1,
             "entrypoint": Path(entrypoint_substring).as_posix(),
             "args": args,
             "bridge_smoke": {"enabled": bridge_enabled, "ok": False, "error": "CORTEX_UNAVAILABLE"},
-        })
+        }, writer=writer)
         print(error)
         return 1
 
     entrypoint_rel = find_entrypoint(cortex_query, project_root, entrypoint_substring)
     entrypoint_path = project_root / Path(entrypoint_rel)
-    ensure_entrypoint_wrapper(entrypoint_path)
+    ensure_entrypoint_wrapper(entrypoint_path, writer)
     result = run_entrypoint(project_root, entrypoint_rel, args)
 
     bridge_result = {"enabled": bridge_enabled, "ok": True}
@@ -201,13 +212,13 @@ def main() -> int:
             bridge_payload["cwd"] = cwd
         bridge_result = run_bridge_smoke(project_root, config_path, bridge_payload, timeout_seconds)
 
-    write_json(output_path, {
+    write_json_guarded(output_path, {
         "ok": result.returncode == 0,
         "returncode": result.returncode,
         "entrypoint": Path(entrypoint_rel).as_posix(),
         "args": args,
         "bridge_smoke": bridge_result,
-    })
+    }, writer=writer)
 
     if result.returncode != 0:
         print(result.stdout)

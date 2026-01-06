@@ -23,13 +23,18 @@ import hash_inbox_file
 def _canonical_json_bytes(obj: Any) -> bytes:
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
-def _atomic_write_bytes(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = path.with_suffix(path.suffix + ".tmp")
-    with open(tmp_path, "wb") as handle:
-        handle.write(data)
-    os.replace(tmp_path, path)
+
+def _atomic_write_bytes(path: Path, data: bytes, writer: Any = None) -> None:
+    if not writer:
+        raise RuntimeError("GuardedWriter required")
+    # write_durable expects str, so decode if it's JSON bytes (which are ASCII/UTF-8 compatible)
+    writer.write_durable(str(path), data.decode('utf-8'))
 
 
 def _resolve_repo_path(path_str: str) -> Path:
@@ -73,6 +78,13 @@ def main(input_path: Path, output_path: Path) -> int:
         "errors": [],
     }
 
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "INBOX"])
+    writer.open_commit_gate()
+
     try:
         if operation == "generate_ledger":
             ledger_path_str = payload.get("ledger_path")
@@ -80,9 +92,10 @@ def main(input_path: Path, output_path: Path) -> int:
                 raise ValueError("ledger_path is required for generate_ledger")
             ledger_path = _resolve_repo_path(str(ledger_path_str))
             _ensure_output_path(ledger_path)
-            ledger_path.parent.mkdir(parents=True, exist_ok=True)
+            # scanner: guarded
+            writer.mkdir_durable(str(ledger_path.parent))
             inbox_dir = _resolve_repo_path(inbox_path)
-            generate_inbox_ledger.generate_ledger(inbox_dir, ledger_path, quiet=True)
+            generate_inbox_ledger.generate_ledger(inbox_dir, ledger_path, quiet=True, writer=writer)
             output["ledger_path"] = _normalize_path(ledger_path.relative_to(PROJECT_ROOT))
         elif operation == "update_index":
             allow_write = bool(payload.get("allow_inbox_write", False))
@@ -109,7 +122,7 @@ def main(input_path: Path, output_path: Path) -> int:
     output["status"] = status
     output["errors"] = errors
 
-    _atomic_write_bytes(output_path, _canonical_json_bytes(output))
+    _atomic_write_bytes(output_path, _canonical_json_bytes(output), writer)
 
     return 0 if status == "success" else 1
 

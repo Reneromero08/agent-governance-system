@@ -27,7 +27,10 @@ except ImportError:
     FirewallViolation = None
 
 
+# Ensure writer defaults if main called without it
 def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = None) -> int:
+    if writer is None and GuardedWriter:
+        writer = GuardedWriter(PROJECT_ROOT)
     if not ensure_canon_compat(Path(__file__).resolve().parent):
         return 1
     try:
@@ -43,16 +46,16 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     if writer:
         try:
             # Convert output_path to relative path for GuardedWriter
-            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
-            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
+            rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
+            writer.mkdir_tmp(str(Path(rel_output_path).parent)) # Get parent directory
             writer.write_tmp(rel_output_path, output_data)
         except ValueError:
-            # If path is not relative to PROJECT_ROOT, fallback to direct write
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(output_data)
+            print("Output path outside project root.")
+            return 1
     else:
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(output_data)
+        # Enforce usage
+        print("GuardedWriter required.")
+        return 1
         
     print("[skill] Template skill executed successfully")
     return 0

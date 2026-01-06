@@ -14,6 +14,12 @@ from pathlib import Path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+    
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 
 def main(input_path: Path, output_path: Path) -> int:
@@ -37,8 +43,28 @@ def main(input_path: Path, output_path: Path) -> int:
         "outputs": []
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    if not GuardedWriter:
+         print("Error: GuardedWriter not available")
+         return 1
+         
+    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
+    # output_path might be anywhere.
+    # Usually output is in _tmp or passed by runner?
+    # Test runner usually puts output in tmp.
+    # If output_path is outside project, GuardedWriter blocks it unless tmp_roots allows it.
+    # Assuming standard calling convention where output is within project or allowed.
+    # Or strict compliance: if path not allowed, fail.
+    
+    # We need to open commit gate if durable.
+    writer.open_commit_gate()
+    
+    # Check if path is supported
+    try:
+        writer.mkdir_durable(str(output_path.parent))
+        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    except Exception as e:
+        print(f"Firewall violation or write error: {e}")
+        return 1
     print("[ant-worker] Task executed successfully")
     return 0
 

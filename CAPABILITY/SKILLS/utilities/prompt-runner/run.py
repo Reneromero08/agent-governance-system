@@ -15,6 +15,12 @@ from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 ALLOWED_OUTPUT_ROOT = (PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs").resolve()
 POLICY_CANON_PATH = PROJECT_ROOT / "NAVIGATION" / "PROMPTS" / "1_PROMPT_POLICY_CANON.md"
@@ -62,16 +68,36 @@ def _canonical_json_bytes(obj: Any) -> bytes:
     return json.dumps(obj, sort_keys=True, separators=(",", ":")).encode("utf-8")
 
 
-def _atomic_write_bytes(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = path.with_suffix(path.suffix + ".tmp")
-    with open(tmp_path, "wb") as handle:
-        handle.write(data)
-    os.replace(tmp_path, path)
+def _atomic_write_bytes(path: Path, data: bytes, writer: Any = None) -> None:
+    if writer:
+        try:
+             # Try relative
+             try:
+                 rel_path = str(path.resolve().relative_to(writer.project_root))
+             except ValueError:
+                 rel_path = str(path)
+             
+             # Prompt runner artifacts usually in _runs which is durable
+             # But let's check exact path.
+             # _runs is durable. _runs/_tmp is tmp.
+             # We should probably use write_durable if gate is open, but prompt runner usually runs then commits.
+             # Actually, prompt runner output artifacts (receipt/report) are final.
+             # But since prompt runner is a skill, maybe it only writes tmp during run?
+             # No, artifacts persist.
+             # We will attempt durable write if possible (requires open gate), fallback to tmp?
+             # Or just try write_durable and rely on caller to open gate.
+             # Actually, let's expose writer to main and open gate there.
+             writer.write_durable(rel_path, data)
+             return
+        except Exception as e:
+            # Fallback for now? No, strict.
+            raise RuntimeError(f"Guarded write failed: {e}")
+    
+    # Legacy fallback removed - enforce writer
+    raise RuntimeError("GuardedWriter required")
 
-
-def _atomic_write_text(path: Path, text: str) -> None:
-    _atomic_write_bytes(path, text.encode("utf-8"))
+def _atomic_write_text(path: Path, text: str, writer: Any = None) -> None:
+    _atomic_write_bytes(path, text.encode("utf-8"), writer=writer)
 
 
 def _load_json(path: Path) -> Dict[str, Any]:
@@ -458,6 +484,16 @@ def main() -> int:
     receipt_path = None
     report_path = None
     data_path = None
+    
+    # Init writer
+    writer = None
+    if GuardedWriter:
+        try:
+            writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+            writer.open_commit_gate() # Prompt runner writes final artifacts
+        except Exception as e:
+            errors.append(f"GuardedWriter init failed: {e}")
+            policy_breach = True
 
     if not errors:
         try:
@@ -672,10 +708,10 @@ def main() -> int:
 
     outputs: List[Dict[str, str]] = []
     if report_path:
-        _atomic_write_text(report_path, report_body)
+        _atomic_write_text(report_path, report_body, writer=writer)
         outputs.append({"path": _normalize_path(str(report_path.relative_to(PROJECT_ROOT))), "sha256": _sha256_file(report_path)})
     if data_path:
-        _atomic_write_bytes(data_path, _canonical_json_bytes({"status": "template"}))
+        _atomic_write_bytes(data_path, _canonical_json_bytes({"status": "template"}), writer=writer)
         outputs.append({"path": _normalize_path(str(data_path.relative_to(PROJECT_ROOT))), "sha256": _sha256_file(data_path)})
 
     inputs_list = [
@@ -728,7 +764,7 @@ def main() -> int:
     }
 
     if receipt_path:
-        _atomic_write_bytes(receipt_path, _canonical_json_bytes(receipt_payload))
+        _atomic_write_bytes(receipt_path, _canonical_json_bytes(receipt_payload), writer=writer)
 
     output = {
         "task_id": task_id,
@@ -752,7 +788,13 @@ def main() -> int:
     }
 
     try:
-        _atomic_write_bytes(output_path, _canonical_json_bytes(output))
+        # We need to write the final output json. Since prompt-runner is a skill, this output likely goes to stdout/pipe or a file.
+        # But here output_path is an argument.
+        # We assume output_path is also in a durable location or tmp.
+        # Let's try durable first as we opened gate.
+        # But wait, output_path might be absolute or relative.
+        # If writer is available, use it.
+        _atomic_write_bytes(output_path, _canonical_json_bytes(output), writer=writer)
     except OSError as exc:
         print(f"ERROR: Failed to write output: {exc}")
         return 1

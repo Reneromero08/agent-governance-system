@@ -16,15 +16,37 @@ import time
 from pathlib import Path
 from typing import List, Dict, Optional, Any
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 # Configuration
 DB_PATH = Path(__file__).resolve().parent / "system2.db"
 
 class System2Ledger:
     """Immutable ledger for governance and provenance."""
     
-    def __init__(self, db_path: Path = DB_PATH):
+    def __init__(self, db_path: Path = DB_PATH, writer: Optional[GuardedWriter] = None):
         self.db_path = db_path
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        self.writer = writer
+        if self.writer is None:
+             # Lazy init default writer if we are running in an env that supports it
+            repo_root = Path(__file__).resolve().parents[3]
+            self.writer = GuardedWriter(
+                project_root=repo_root,
+                durable_roots=[
+                    "LAW/CONTRACTS/_runs",
+                    "NAVIGATION/CORTEX/_generated",
+                    "NAVIGATION/CORTEX/db"
+                ]
+            )
+            self.writer.open_commit_gate()
+            
+        self.writer.mkdir_durable("NAVIGATION/CORTEX/db")
         self.conn = sqlite3.connect(str(db_path))
         self.conn.row_factory = sqlite3.Row
         self._init_schema()
@@ -123,7 +145,17 @@ class System2Ledger:
 
 def main():
     """Demo: Ledger usage."""
-    ledger = System2Ledger()
+    repo_root = Path(__file__).resolve().parents[3]
+    writer = GuardedWriter(
+        project_root=repo_root,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "NAVIGATION/CORTEX/db"
+        ]
+    )
+    writer.open_commit_gate()
+    ledger = System2Ledger(writer=writer)
     
     run_id = f"run_{int(time.time())}"
     print(f"Logging Run: {run_id}")

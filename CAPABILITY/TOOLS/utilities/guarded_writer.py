@@ -138,6 +138,80 @@ class GuardedWriter:
         """
         self.firewall.open_commit_gate()
 
+    def unlink(self, path: str | Path) -> None:
+        """
+        Delete a file with firewall enforcement.
+
+        Args:
+            path: Path to delete
+
+        Raises:
+            FirewallViolation: If unlink violates firewall policy
+        """
+        self.firewall.safe_unlink(path)
+
+    def safe_rename(self, src: str | Path, dst: str | Path) -> None:
+        """
+        Rename/move a file or directory with firewall enforcement.
+
+        Args:
+            src: Source path
+            dst: Destination path
+
+        Raises:
+            FirewallViolation: If rename violates firewall policy
+        """
+        self.firewall.safe_rename(src, dst)
+
+    def copy(self, src: str | Path, dst: str | Path) -> None:
+        """
+        Copy a file with firewall enforcement.
+
+        Args:
+            src: Source path (must allow read)
+            dst: Destination path (must allow write)
+
+        Raises:
+            FirewallViolation: If copy violates firewall policy
+        """
+        # Determine strict enforcement by checking write validity primarily
+        # Read from valid source
+        src_path = Path(src).resolve()
+        dst_path = Path(dst)
+        
+        # Read content (not strictly enforced by firewall read policy, but simple read is safe)
+        if not src_path.exists():
+             raise FileNotFoundError(f"Source file not found: {src}")
+        
+        content = src_path.read_bytes()
+        
+        # Determine kind based on dest location 
+        # (This is tricky, we delegate to safe_write logic, or simpler: try tmp then durable?)
+        # But wait, firewall requires us to KNOW kind (tmp vs durable).
+        # We can detect it from firewall logic, or just assume durable if calling copy?
+        # Actually safe_write allows us to specify kind.
+        # Let's inspect destination to decide kind.
+        
+        # We can query firewall private helper _check_path_domain or just try both.
+        # But accessing private method is bad.
+        # Let's add public `get_domain(path)` to Firewall later or for now try-except.
+        # Or expose it.
+        # For now, let's look at roots.
+        
+        rel_dst = str(dst_path.resolve().relative_to(self.project_root)).replace("\\", "/")
+        
+        # Check if it looks like tmp
+        is_tmp = False
+        for r in self.firewall.tmp_roots:
+             if rel_dst.startswith(r + "/") or rel_dst == r:
+                 is_tmp = True
+                 break
+                 
+        kind = "tmp" if is_tmp else "durable"
+        
+        # If durable, gate must be open (safe_write checks this)
+        self.firewall.safe_write(dst, content, kind=kind)
+
     def handle_violation(self, violation: FirewallViolation, receipt_dir: Path | None = None) -> Dict[str, Any]:
         """
         Handle a firewall violation by writing receipt and returning error info.

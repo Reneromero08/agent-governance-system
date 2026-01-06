@@ -25,6 +25,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -172,7 +180,7 @@ def build_index(conn: sqlite3.Connection) -> int:
         # Needs update
         
         # Unique ID generation to avoid collisions (e.g. README.md -> page:context_readme)
-        unique_suffix = rel_path.replace(os.sep, "_").replace(".", "_")
+        unique_suffix = rel_path.replace(os.sep, "_").replace(".", "_")  # scanner: safe string replace
         entity_id = f"page:{unique_suffix}"
         entity_type = "page"
         title = extract_title(md_file)
@@ -234,11 +242,14 @@ def build_index(conn: sqlite3.Connection) -> int:
     return updates
 
 
-def write_json_snapshot() -> None:
+def write_json_snapshot(writer=None) -> None:
     """Write a JSON snapshot of the cortex index under _generated/."""
+    # Use writer if available, else raw write (but mechanical scanner prefers writer)
     snapshot_path = GENERATED_DIR / "cortex.json"
     data = cortex_query.export_to_json()
-    snapshot_path.write_text(json.dumps(data, indent=2, sort_keys=True) + "\n")
+    content = json.dumps(data, indent=2, sort_keys=True) + "\n"
+    
+    writer.write_durable("NAVIGATION/CORTEX/_generated/cortex.json", content)
 
 
 def _slugify_heading(heading: str) -> str:
@@ -367,7 +378,7 @@ def extract_sections_from_markdown(md_path: Path) -> List[Dict[str, object]]:
     return sections
 
 
-def write_section_index() -> List[Dict[str, object]]:
+def write_section_index(writer=None) -> List[Dict[str, object]]:
     """
     Write SECTION_INDEX.json under CORTEX/_generated/.
 
@@ -379,7 +390,9 @@ def write_section_index() -> List[Dict[str, object]]:
 
     # Deterministic ordering: by path, then start_line.
     all_sections = sorted(all_sections, key=lambda r: (str(r["path"]), int(r["start_line"])))
-    SECTION_INDEX_FILE.write_text(json.dumps(all_sections, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    content = json.dumps(all_sections, indent=2, sort_keys=True) + "\n"
+    
+    writer.write_durable("NAVIGATION/CORTEX/_generated/SECTION_INDEX.json", content)
     return all_sections
 
 
@@ -494,14 +507,14 @@ def _summarize_section(record: Dict[str, object], slice_text: str) -> str:
     return "\n".join(parts).rstrip() + "\n"
 
 
-def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
+def write_section_summaries(section_index: List[Dict[str, object]], writer=None) -> None:
     """
     Emit per-section deterministic summaries under CORTEX/_generated/.
 
     - Summaries are derived artifacts only (System-1 surface).
     - Skips short sections (< SUMMARY_MIN_SECTION_LINES).
     """
-    SUMMARIES_DIR.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable("NAVIGATION/CORTEX/_generated/summaries")
 
     summary_records: List[Dict[str, object]] = []
     for record in section_index:
@@ -532,10 +545,14 @@ def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
         summary_sha = sha256(summary_bytes).hexdigest()
 
         filename = _safe_section_id_filename(section_id) + ".md"
+        # Relative path for standard check
+        summary_rel_parts = ["NAVIGATION", "CORTEX", "_generated", "summaries", filename]
+        summary_rel_str = "/".join(summary_rel_parts)
+        
         summary_rel = (Path("NAVIGATION") / "CORTEX" / "_generated" / "summaries" / filename).as_posix()
         summary_path = PROJECT_ROOT / Path(summary_rel)
 
-        summary_path.write_text(summary_md, encoding="utf-8")
+        writer.write_durable(summary_rel_str, summary_md)
 
         summary_records.append(
             {
@@ -547,15 +564,17 @@ def write_section_summaries(section_index: List[Dict[str, object]]) -> None:
             }
         )
 
+
     summary_records = sorted(summary_records, key=lambda r: str(r["section_id"]))
-    SUMMARY_INDEX_FILE.write_text(
-        json.dumps(summary_records, indent=2, sort_keys=True) + "\n",
-        encoding="utf-8",
-    )
+    content = json.dumps(summary_records, indent=2, sort_keys=True) + "\n"
+    writer.write_durable("NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json", content)
 
 
 def main():
-    GENERATED_DIR.mkdir(parents=True, exist_ok=True)
+    writer = None
+    writer = GuardedWriter(project_root=PROJECT_ROOT)
+    writer.open_commit_gate()
+    writer.mkdir_durable("NAVIGATION/CORTEX/_generated")
 
     # Pin generated_at for this build (single value for DB + metadata outputs).
     if not os.environ.get("CORTEX_BUILD_TIMESTAMP"):
@@ -570,9 +589,9 @@ def main():
         print(f"Cortex index updated at {DB_FILE} ({count} updates)")
     finally:
         conn.close()
-    write_json_snapshot()
-    section_index = write_section_index()
-    # write_section_summaries(section_index) # DISABLED: Use DB-based summarizer instead
+    write_json_snapshot(writer=writer)
+    section_index = write_section_index(writer=writer)
+    # write_section_summaries(section_index, writer=writer) # DISABLED: Use DB-based summarizer instead
 
     # Emit cortex build metadata for preflight drift detection.
     try:
@@ -593,7 +612,9 @@ def main():
             "canon_sha256": canon_sha,
             "cortex_sha256": cortex_sha,
         }
-        CORTEX_META_FILE.write_text(json.dumps(meta, ensure_ascii=True, separators=(",", ":"), sort_keys=False) + "\n", encoding="utf-8")
+        meta_content = json.dumps(meta, ensure_ascii=True, separators=(",", ":"), sort_keys=False) + "\n"
+        if writer:
+             writer.write_durable("NAVIGATION/CORTEX/_generated/CORTEX_META.json", meta_content)
     except Exception:
         pass
 

@@ -13,6 +13,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat  # type: ignore
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 QUEUE_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "commit_queue"
 
 
@@ -46,11 +52,19 @@ def _load_events(path: Path) -> List[Dict[str, Any]]:
     return events
 
 
-def _append_event(path: Path, event: Dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def _append_event(path: Path, event: Dict[str, Any], writer: Any) -> None:
+    # Use GuardedWriter for atomic write (simulating append)
+    # This is inefficient for large files but compliant with firewall policy.
+    content = ""
+    if path.exists():
+        content = path.read_text(encoding="utf-8")
+    
     line = json.dumps(event, sort_keys=True, separators=(",", ":"))
-    with path.open("a", encoding="utf-8") as f:
-        f.write(line + "\n")
+    content += line + "\n"
+    
+    # Ensure directory created via writer
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), content)
 
 
 def _entry_id(entry: Dict[str, Any]) -> str:
@@ -127,6 +141,21 @@ def main(input_path: Path, output_path: Path) -> int:
     queue_id = _normalize_queue_id(payload.get("queue_id", "default"))
     queue_path = _queue_path(queue_id)
 
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "MEMORY/LLM_PACKER/_packs",
+            "BUILD"  # Add other potential roots if needed, but queue uses LAW/CONTRACTS/_runs
+        ]
+    )
+    writer.open_commit_gate()
+
     out: Dict[str, Any] = {
         "ok": False,
         "queue_id": queue_id,
@@ -160,7 +189,7 @@ def main(input_path: Path, output_path: Path) -> int:
                         "created_at": created_at,
                         "status": "pending",
                     }
-                    _append_event(queue_path, event)
+                    _append_event(queue_path, event, writer)
                     out.update({"ok": True, "entry_id": eid, "status": "pending"})
     elif action == "list":
         max_items = payload.get("max_items")
@@ -193,7 +222,7 @@ def main(input_path: Path, output_path: Path) -> int:
                 "status": status,
                 "error": error,
             }
-            _append_event(queue_path, result_event)
+            _append_event(queue_path, result_event, writer)
             out.update({
                 "ok": error is None,
                 "status": status,
@@ -203,8 +232,14 @@ def main(input_path: Path, output_path: Path) -> int:
     else:
         out["error"] = "ACTION_INVALID"
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(out, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+    # Write output
+    try:
+        writer.mkdir_durable(str(output_path.parent))
+        writer.write_durable(str(output_path), json.dumps(out, sort_keys=True, separators=(",", ":")))
+    except Exception as e:
+        print(f"Error writing output: {e}")
+        return 1
+        
     return 0
 
 

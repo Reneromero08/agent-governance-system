@@ -3,7 +3,11 @@ import json
 import sys
 from pathlib import Path
 from typing import Dict, List
-
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 DOC_SYSTEM = [
     "CANON/ (rules + invariants)",
@@ -39,8 +43,29 @@ def load_json(path: Path) -> Dict:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def write_json(path: Path, payload: Dict) -> None:
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+def write_json(path: Path, payload: Dict, writer: GuardedWriter) -> None:
+    # Use GuardedWriter for safe write
+    if writer:
+        try:
+            rel_path = str(path.resolve().relative_to(writer.project_root))
+        except ValueError:
+            # Fallback if path is outside project root (should not happen in standard flow)
+             # But for strict firewall, we fail or assume tmp if specific roots allow.
+             # We'll rely on writer to handle absolute paths if it supports it, 
+             # or just fail if we can't resolve relative.
+             # Actually GuardedWriter currently expects relative or absolute.
+            rel_path = str(path)
+        
+        # Decide if tmp or durable? 
+        # Skill outputs are usually tmp unless they are final artifacts.
+        # But this skill just outputs a plan (JSON).
+        # We will assume tmp for now or check if it matches durable roots.
+        # The safest is to try tmp, then durable if that fails? No, that's ambiguous.
+        # Given this is "doc-update", it produces a plan.
+        # Let's assume tmp write for skill output.
+        writer.write_tmp(rel_path, json.dumps(payload, indent=2))
+    else:
+        raise RuntimeError("GuardedWriter required for write_json")
 
 
 def merge_targets(base: List[str], extra: List[str]) -> List[str]:
@@ -75,7 +100,17 @@ def main() -> int:
         "notes": notes,
     }
 
-    write_json(output_path, result)
+    # Initialize GuardedWriter
+    # Heuristic for project root: 4 levels up
+    project_root = Path(__file__).resolve().parents[4]
+    try:
+        writer = GuardedWriter(project_root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+        # We are writing to output_path which is likely in _runs/_tmp or similar.
+    except Exception:
+        print("Failed to initialize GuardedWriter")
+        return 1
+
+    write_json(output_path, result, writer)
     return 0
 
 

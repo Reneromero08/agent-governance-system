@@ -2,10 +2,17 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any, Dict
 
 from .core import run_job
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 def run_cli(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(
@@ -83,11 +90,22 @@ def run_cli(argv: list[str] | None = None) -> int:
             raise SystemExit("compare/plan/apply/verify require --pairs pairs.json")
         payload["pairs_path"] = args.pairs
 
-    report = run_job(payload)
+    if not GuardedWriter:
+        print("Error: GuardedWriter unavailable. Cannot complete CLI job.", file=sys.stderr)
+        return 1
+
+    # Heuristic for project root: 5 levels up from CLI script
+    # This might be brittle if installed differently.
+    # But this tool is part of the repo structure.
+    PROJECT_ROOT = Path(__file__).resolve().parents[5]
+    writer = GuardedWriter(PROJECT_ROOT)
+    writer.open_commit_gate() # CLI is allowed to write results
+
+    report = run_job(payload, writer=writer)
     out_dir = Path(args.out)
-    out_dir.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(out_dir))
     report_path = Path(args.write_report) if args.write_report else (out_dir / "report.json")
-    report_path.write_text(json.dumps(report, indent=2), encoding="utf-8")
+    writer.write_durable(str(report_path), json.dumps(report, indent=2))
     print(report_path.as_posix())
     return 0
 

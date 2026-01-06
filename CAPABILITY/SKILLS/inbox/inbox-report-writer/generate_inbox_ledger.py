@@ -7,12 +7,18 @@ import json
 import sys
 from pathlib import Path
 from datetime import datetime
-from typing import List
+from typing import List, Any
 import yaml
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 from hash_inbox_file import verify_hash
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 SECTION_INDEX_PATHS = [
@@ -184,7 +190,7 @@ def scan_inbox_directory(inbox_path: Path) -> dict:
     return ledger
 
 
-def generate_ledger(inbox_path: Path = None, output_path: Path = None, quiet: bool = False) -> str:
+def generate_ledger(inbox_path: Path = None, output_path: Path = None, quiet: bool = False, writer: Any = None) -> str:
     """
     Generate INBOX ledger and write to file.
     
@@ -192,6 +198,7 @@ def generate_ledger(inbox_path: Path = None, output_path: Path = None, quiet: bo
         inbox_path: Path to INBOX directory (default: ./INBOX)
         output_path: Path to output YAML file (default: INBOX/LEDGER.yaml)
         quiet: Suppress output messages
+        writer: Optional GuardedWriter instance
     
     Returns:
         Path to generated ledger file
@@ -215,8 +222,12 @@ def generate_ledger(inbox_path: Path = None, output_path: Path = None, quiet: bo
             print(f"   🔥 Errors: {ledger['summary']['errors']}")
     
     # Write YAML
-    with output_path.open('w', encoding='utf-8') as f:
-        yaml.dump(ledger, f, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    if not writer:
+        raise RuntimeError("GuardedWriter required")
+    import io
+    stream = io.StringIO()
+    yaml.dump(ledger, stream, default_flow_style=False, sort_keys=False, allow_unicode=True)
+    writer.write_durable(str(output_path), stream.getvalue())
     
     if not quiet:
         print(f"✅ Ledger written to: {output_path}")
@@ -237,7 +248,14 @@ def main():
     args = parser.parse_args()
     
     try:
-        generate_ledger(args.inbox, args.output, args.quiet)
+        # Instantiate GuardedWriter for CLI usage
+        writer = None
+        if GuardedWriter:
+             repo_root = Path(__file__).resolve().parents[4]
+             writer = GuardedWriter(repo_root, durable_roots=["INBOX", "LAW/CONTRACTS/_runs"])
+             writer.open_commit_gate()
+
+        generate_ledger(args.inbox, args.output, args.quiet, writer)
         return 0
     except Exception as e:
         if not args.quiet:

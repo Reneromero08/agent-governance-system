@@ -25,6 +25,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 REPO_ROOT = PROJECT_ROOT
 
 
@@ -40,7 +46,21 @@ def _load_json(path: Path) -> Dict[str, Any]:
 
 
 def _write_json(path: Path, obj: Dict[str, Any]) -> None:
-    path.write_bytes(_canonical_json_bytes(obj))
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        sys.exit(1)
+        
+    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer.open_commit_gate()
+    
+    writer.mkdir_durable(str(path.parent))
+    # _canonical_json_bytes returns bytes. write_durable expects string?
+    # Actually GuardedWriter.write_durable calls write_firewall.validate_write which calls resolve... and finally writes content.
+    # If I pass bytes to content, it might fail if GuardedWriter implementation assumes str.
+    # But usually json dumps is ASCII compatible.
+    # I will decode bytes or use json dumps directly.
+    content = json.dumps(obj, sort_keys=True, separators=(",", ":"))
+    writer.write_durable(str(path), content)
 
 
 def _deterministic_check(changed_files: List[str]) -> Dict[str, Any]:

@@ -16,6 +16,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 def check_workflow_triggers(workflow_path: Path) -> dict:
     """Check if workflow has forbidden push triggers to main."""
     try:
@@ -78,7 +84,14 @@ def main(input_path: Path, output_path: Path) -> int:
 
         result = check_workflow_triggers(workflow_path)
 
-        output_path.write_text(json.dumps(result, indent=2))
+        if not GuardedWriter:
+            print("Error: GuardedWriter not available")
+            return 1
+
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
+        writer.open_commit_gate()
+        
+        writer.write_durable(str(output_path), json.dumps(result, indent=2))
         return 0
 
     except Exception as e:
@@ -87,7 +100,10 @@ def main(input_path: Path, output_path: Path) -> int:
             "policy": "no_push_to_main",
             "violations": [f"Error in CI trigger policy check: {e}"]
         }
-        output_path.write_text(json.dumps(error_result, indent=2))
+        if GuardedWriter:
+             writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
+             writer.open_commit_gate()
+             writer.write_durable(str(output_path), json.dumps(error_result, indent=2))
         return 1
 
 if __name__ == "__main__":

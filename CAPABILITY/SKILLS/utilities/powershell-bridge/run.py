@@ -3,14 +3,36 @@ import json
 import sys
 from pathlib import Path
 from typing import Any, Dict
-
+import sys # re-import to be safe
+try:
+    # Add repo root to path for imports
+    PROJECT_ROOT_GUESS = Path(__file__).resolve().parents[4]
+    if str(PROJECT_ROOT_GUESS) not in sys.path:
+        sys.path.insert(0, str(PROJECT_ROOT_GUESS))
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 def load_json(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def write_json(path: Path, payload: Dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+def write_json(path: Path, payload: Dict[str, Any], writer: Any = None) -> None:
+    if not writer:
+        raise RuntimeError("GuardedWriter required for write_json")
+    try:
+         # Assuming path is relative to project root or absolute within project
+         # If absolute, make relative
+         try:
+             rel_path = str(path.resolve().relative_to(writer.project_root))
+         except ValueError:
+             rel_path = str(path)
+         
+         writer.write_tmp(rel_path, json.dumps(payload, indent=2, sort_keys=True))
+    except Exception as e:
+         print(f"Write failed: {e}")
+         raise
 
 
 def repo_root() -> Path:
@@ -44,7 +66,15 @@ def main() -> int:
         ],
     }
 
-    write_json(output_path, output)
+    # Init writer
+    try:
+         from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    except ImportError:
+         print("GuardedWriter import failed")
+         return 1
+
+    writer = GuardedWriter(root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    write_json(output_path, output, writer)
     return 0
 
 

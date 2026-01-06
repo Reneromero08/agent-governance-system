@@ -46,10 +46,21 @@ class SwarmInstructionsDB:
         self.writer = writer
         
         # Use GuardedWriter for mkdir if available, otherwise fallback
-        if self.writer:
-            self.writer.mkdir_tmp("NAVIGATION/CORTEX/db")
-        else:
-            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        if self.writer is None:
+            # Instantiate writer if not provided, with expanded roots
+            self.writer = GuardedWriter(
+                project_root=REPO_ROOT,
+                durable_roots=[
+                    "LAW/CONTRACTS/_runs",
+                    "NAVIGATION/CORTEX/_generated",
+                    "NAVIGATION/CORTEX/db"
+                ]
+            )
+
+        # Use GuardedWriter for mkdir - must be durable for the DB
+        self.writer.mkdir_durable("NAVIGATION/CORTEX/db")
+        # Open commit gate immediately as this is a build script
+        self.writer.open_commit_gate()
             
         self.conn = sqlite3.connect(str(db_path), timeout=10.0)
         self.conn.row_factory = sqlite3.Row

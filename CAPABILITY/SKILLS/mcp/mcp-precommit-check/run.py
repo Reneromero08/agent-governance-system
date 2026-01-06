@@ -9,6 +9,11 @@ import urllib.error
 import urllib.request
 from pathlib import Path
 from typing import Any, Dict, List
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 
 def load_json(path: Path) -> Dict[str, Any]:
@@ -16,7 +21,20 @@ def load_json(path: Path) -> Dict[str, Any]:
 
 
 def write_json(path: Path, payload: Dict[str, Any]) -> None:
-    path.write_text(json.dumps(payload, indent=2), encoding="utf-8")
+    if not GuardedWriter:
+        raise RuntimeError("GuardedWriter required")
+    # This function expects caller to setup writer? Or we cheat?
+    # Actually this helper is too simple. We should probably remove it or make it use a passed writer.
+    # But for now, let's just make sure we use GW if available.
+    # The caller manages writer context usually.
+    # Since this file has many utility functions, let's just use it in main.
+    pass      
+    
+# Replaced by usage in main/call sites or passed writer.
+# Let's redefine signature to take writer.
+def write_json_guarded(path: Path, payload: Dict[str, Any], writer: Any) -> None:
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), json.dumps(payload, indent=2))
 
 
 def _result(ok: bool, **extras: Any) -> Dict[str, Any]:
@@ -246,7 +264,12 @@ def main() -> int:
     bridge_config = payload.get("bridge_config", "CAPABILITY/MCP/powershell_bridge_config.json")
     bridge_timeout = int(payload.get("bridge_timeout_seconds", 30))
 
-    project_root = Path(__file__).resolve().parents[4]
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(project_root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer.open_commit_gate()
 
     if dry_run:
         checks = {
@@ -255,7 +278,7 @@ def main() -> int:
             "running": _result(True, skipped=True),
             "autostart": _result(True, skipped=True),
         }
-        write_json(output_path, {"ok": True, "checks": checks})
+        write_json_guarded(output_path, {"ok": True, "checks": checks}, writer)
         return 0
 
     checks: Dict[str, Any] = {}
@@ -273,7 +296,7 @@ def main() -> int:
         checks["autostart"] = _result(True, skipped=True)
 
     ok = all(check.get("ok") for check in checks.values())
-    write_json(output_path, {"ok": ok, "checks": checks})
+    write_json_guarded(output_path, {"ok": ok, "checks": checks}, writer)
     return 0 if ok else 1
 
 

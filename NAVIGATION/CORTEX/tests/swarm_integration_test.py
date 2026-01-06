@@ -21,6 +21,14 @@ from pathlib import Path
 from datetime import datetime
 import hashlib
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 
 class SwarmTaskDispatcher:
     """Dispatches refactoring tasks to swarm ant workers."""
@@ -30,7 +38,17 @@ class SwarmTaskDispatcher:
         self.instruction_db = sqlite3.connect(str(project_root / "NAVIGATION" / "CORTEX" / "db" / "instructions.db"))
         self.codebase_db = sqlite3.connect(str(project_root / "NAVIGATION" / "CORTEX" / "db" / "codebase_full.db"))
         self.mcp_ledger_dir = project_root / "LAW" / "CONTRACTS" / "_runs"
-        self.mcp_ledger_dir.mkdir(parents=True, exist_ok=True)
+        
+        # Enforce GuardedWriter
+        if not GuardedWriter:
+            raise ImportError("GuardedWriter not available")
+
+        self.writer = GuardedWriter(
+            project_root=project_root,
+            durable_roots=["LAW/CONTRACTS/_runs"]
+        )
+        self.writer.open_commit_gate()
+        self.writer.mkdir_durable("LAW/CONTRACTS/_runs")
 
     def get_simple_tasks(self, limit: int = 5) -> list:
         """
@@ -205,10 +223,12 @@ OUTPUT FORMAT:
         """Log execution to MCP ledger for governance."""
         run_id = f"{task_spec['task_id']}_{datetime.now().strftime('%Y%m%d_%H%M%S')}"
         run_dir = self.mcp_ledger_dir / run_id
-        run_dir.mkdir(parents=True, exist_ok=True)
-
+        run_dir_rel = f"LAW/CONTRACTS/_runs/{run_id}"
+        
+        self.writer.mkdir_durable(run_dir_rel)
+        
         # Run info
-        (run_dir / "RUN_INFO.json").write_text(json.dumps({
+        self.writer.write_durable(f"{run_dir_rel}/RUN_INFO.json", json.dumps({
             "task_id": task_spec["task_id"],
             "task_type": task_spec["task_type"],
             "worker_type": task_spec["worker_type"],
@@ -216,9 +236,9 @@ OUTPUT FORMAT:
             "file_hash": task_spec["file"]["hash"],
             "timestamp": datetime.now().isoformat()
         }, indent=2))
-
+        
         # Result
-        (run_dir / "RESULT.json").write_text(json.dumps({
+        self.writer.write_durable(f"{run_dir_rel}/RESULT.json", json.dumps({
             "success": result["success"],
             "ant_model": result.get("ant_model"),
             "output": result.get("output", "")[:500],  # Truncate

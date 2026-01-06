@@ -63,11 +63,21 @@ class CortexIndexer:
         self.file_index = {}
         self.section_index = []
         
-        # Use GuardedWriter for mkdir if available, otherwise fallback
-        if self.writer:
-            self.writer.mkdir_tmp("NAVIGATION/CORTEX/meta")
-        else:
-            META_DIR.mkdir(parents=True, exist_ok=True)
+        # Enforce usage of GuardedWriter for directory creation
+        if self.writer is None:
+             # Lazy init default writer if we are running in an env that supports it
+            repo_root = Path(__file__).resolve().parents[3]
+            self.writer = GuardedWriter(
+                project_root=repo_root,
+                durable_roots=[
+                    "LAW/CONTRACTS/_runs",
+                    "NAVIGATION/CORTEX/_generated",
+                    "NAVIGATION/CORTEX/meta"
+                ]
+            )
+            self.writer.open_commit_gate()
+
+        self.writer.mkdir_durable("NAVIGATION/CORTEX/meta")
 
     def _get_tracked_files(self, root: Path) -> Optional[Set[Path]]:
         """
@@ -222,23 +232,16 @@ class CortexIndexer:
     def _write_artifacts(self):
         """Write FILE_INDEX.json and SECTION_INDEX.json."""
         # Use GuardedWriter for writes if available, otherwise fallback
-        if self.writer:
-            self.writer.mkdir_tmp("NAVIGATION/CORTEX/meta")
-            self.writer.write_tmp(
-                "NAVIGATION/CORTEX/meta/FILE_INDEX.json", 
-                json.dumps(self.file_index, indent=2, sort_keys=True)
-            )
-            self.writer.write_tmp(
-                "NAVIGATION/CORTEX/meta/SECTION_INDEX.json", 
-                json.dumps(self.section_index, indent=2, sort_keys=True)
-            )
-        else:
-            META_DIR.mkdir(parents=True, exist_ok=True)
-            with open(META_DIR / "FILE_INDEX.json", "w", encoding='utf-8') as f:
-                json.dump(self.file_index, f, indent=2, sort_keys=True)
-
-            with open(META_DIR / "SECTION_INDEX.json", "w", encoding='utf-8') as f:
-                json.dump(self.section_index, f, indent=2, sort_keys=True)
+        # Use GuardedWriter for writes (Enforced)
+        self.writer.mkdir_durable("NAVIGATION/CORTEX/meta")
+        self.writer.write_durable(
+            "NAVIGATION/CORTEX/meta/FILE_INDEX.json", 
+            json.dumps(self.file_index, indent=2, sort_keys=True)
+        )
+        self.writer.write_durable(
+            "NAVIGATION/CORTEX/meta/SECTION_INDEX.json", 
+            json.dumps(self.section_index, indent=2, sort_keys=True)
+        )
 
         safe_print(f"[Indexer] Wrote artifacts to {META_DIR}")
 
@@ -248,19 +251,27 @@ if __name__ == "__main__":
     parser.add_argument("--dir", type=str, help="Directory to index (default: CANON)")
     parser.add_argument("--db", type=str, default=str(DB_PATH), help="Database path")
     parser.add_argument("--use-firewall", action="store_true", help="Use GuardedWriter for write firewall enforcement")
+    # Removed --use-firewall as GuardedWriter is now mandatory
     args = parser.parse_args()
 
     db_path = Path(args.db)
     target_dir = Path(args.dir) if args.dir else CANON_DIR
     
-    # Initialize GuardedWriter if requested
-    writer = None
-    if args.use_firewall and GuardedWriter:
-        from pathlib import Path
-        repo_root = Path(__file__).resolve().parents[3]
-        writer = GuardedWriter(project_root=repo_root)
+    # Initialize GuardedWriter
+    from pathlib import Path
+    repo_root = Path(__file__).resolve().parents[3]
+    writer = GuardedWriter(
+        project_root=repo_root,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "NAVIGATION/CORTEX/meta"
+        ]
+    )
+    writer.open_commit_gate()
     
-    db = System1DB(db_path)
+    db = System1DB(db_path, writer=writer)
     indexer = CortexIndexer(db, target_dir=target_dir, writer=writer)
     indexer.index_all()
     db.close()
+```

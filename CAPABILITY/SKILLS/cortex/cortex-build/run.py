@@ -7,6 +7,11 @@ import subprocess
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 DEFAULT_BUILD_SCRIPT = "NAVIGATION/CORTEX/db/cortex.build.py"
@@ -17,12 +22,10 @@ def _load_json(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def _write_json(path: Path, payload: Dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def _write_json(path: Path, payload: Dict[str, Any], writer: Any) -> None:
     data = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=True)
-    tmp = path.with_name(path.name + ".tmp")
-    tmp.write_text(data + "\n", encoding="utf-8")
-    os.replace(tmp, path)
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), data + "\n")
 
 
 def _git_head_timestamp(project_root: Path) -> Optional[str]:
@@ -64,6 +67,21 @@ def main() -> int:
 
     errors: List[str] = []
     missing_paths: List[str] = []
+    
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "MEMORY/LLM_PACKER/_packs",
+            "BUILD"
+        ]
+    )
+    writer.open_commit_gate()
 
     build_path = PROJECT_ROOT / build_script
     if not build_path.exists():
@@ -119,7 +137,7 @@ def main() -> int:
         "missing_paths": missing_paths,
         "errors": errors,
     }
-    _write_json(output_path, output)
+    _write_json(output_path, output, writer)
     return 0 if ok else 1
 
 
