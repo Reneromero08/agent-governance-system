@@ -1,0 +1,278 @@
+{
+  "operation": "PHASE_2_4_1B_WRITE_FIREWALL_ENFORCEMENT",
+  "version": "2.4.1b.0",
+  "timestamp": "2026-01-05T23:00:00Z",
+  "status": "PARTIAL",
+  "repo_root": "d:\\CCC 2.0\\AI\\agent-governance-system",
+  "summary": {
+    "enforcement_infrastructure": "COMPLETE",
+    "surfaces_enforced": 1,
+    "surfaces_pending": 46,
+    "surfaces_forbidden": 56,
+    "total_discovered": 103,
+    "coverage_percentage": 1.0,
+    "target_coverage_percentage": 95.0,
+    "exit_criteria_met": false
+  },
+  "enforced_surfaces": [
+    {
+      "category": "REPO_DIGEST_PROOFS",
+      "file": "CAPABILITY/PRIMITIVES/repo_digest.py",
+      "priority": "CRITICAL",
+      "status": "ENFORCED",
+      "write_operations": [
+        "write_receipt()",
+        "write_error_receipt()"
+      ],
+      "firewall_integration": "WriteFirewall via optional firewall parameter",
+      "tests": {
+        "existing": 11,
+        "new": 8,
+        "passing": 19,
+        "coverage": "100%"
+      }
+    }
+  ],
+  "infrastructure_created": [
+    {
+      "component": "WriteFirewall",
+      "path": "CAPABILITY/PRIMITIVES/write_firewall.py",
+      "status": "PRE_EXISTING",
+      "version": "1.0.0",
+      "phase": "1.5A"
+    },
+    {
+      "component": "GuardedWriter",
+      "path": "CAPABILITY/TOOLS/utilities/guarded_writer.py",
+      "status": "PRE_EXISTING",
+      "purpose": "General-purpose firewall integration wrapper"
+    },
+    {
+      "component": "PackerWriter",
+      "path": "MEMORY/LLM_PACKER/Engine/packer/firewall_writer.py",
+      "status": "CREATED",
+      "purpose": "LLM Packer-specific firewall integration wrapper",
+      "phase": "2.4.1B"
+    },
+    {
+      "component": "Phase 2.4.1B Enforcement Tests",
+      "path": "CAPABILITY/TESTBENCH/integration/test_phase_2_4_1b_write_enforcement.py",
+      "status": "CREATED",
+      "tests": 8,
+      "passing": 8,
+      "phase": "2.4.1B"
+    }
+  ],
+  "pending_surfaces": [
+    {
+      "category": "LLM_PACKER",
+      "surfaces": 6,
+      "priority": "CRITICAL",
+      "files": [
+        "MEMORY/LLM_PACKER/Engine/packer/core.py",
+        "MEMORY/LLM_PACKER/Engine/packer/proofs.py",
+        "MEMORY/LLM_PACKER/Engine/packer/archive.py",
+        "MEMORY/LLM_PACKER/Engine/packer/lite.py",
+        "MEMORY/LLM_PACKER/Engine/packer/split.py",
+        "MEMORY/LLM_PACKER/Engine/packer/consumer.py"
+      ],
+      "integration_utility": "PackerWriter (ready)",
+      "recommended_phase": "2.4.1C"
+    },
+    {
+      "category": "PIPELINE_RUNTIME",
+      "surfaces": 4,
+      "priority": "CRITICAL",
+      "files": [
+        "CAPABILITY/PIPELINES/pipeline_runtime.py",
+        "CAPABILITY/PIPELINES/pipeline_chain.py",
+        "CAPABILITY/PIPELINES/pipeline_dag.py",
+        "CAPABILITY/PIPELINES/swarm_runtime.py"
+      ],
+      "integration_utility": "GuardedWriter",
+      "recommended_phase": "2.4.1C"
+    },
+    {
+      "category": "MCP_SERVER",
+      "surfaces": 2,
+      "priority": "CRITICAL",
+      "files": [
+        "CAPABILITY/MCP/server.py",
+        "CAPABILITY/MCP/server_wrapper.py"
+      ],
+      "integration_utility": "GuardedWriter",
+      "recommended_phase": "2.4.1C"
+    },
+    {
+      "category": "CORTEX_SEMANTIC",
+      "surfaces": 2,
+      "priority": "HIGH",
+      "files": [
+        "NAVIGATION/CORTEX/db/cortex.build.py",
+        "NAVIGATION/CORTEX/semantic/indexer.py"
+      ],
+      "integration_utility": "GuardedWriter",
+      "recommended_phase": "2.4.1C"
+    },
+    {
+      "category": "SKILLS",
+      "surfaces": 15,
+      "priority": "HIGH",
+      "note": "15+ skills use custom _atomic_write_bytes without firewall",
+      "integration_utility": "GuardedWriter",
+      "recommended_phase": "2.4.1C"
+    },
+    {
+      "category": "CLI_TOOLS",
+      "surfaces": 10,
+      "priority": "MEDIUM",
+      "note": "Various CLI tools need firewall integration",
+      "integration_utility": "GuardedWriter",
+      "recommended_phase": "2.4.1D"
+    },
+    {
+      "category": "CAS_ARTIFACT_STORE",
+      "surfaces": 3,
+      "priority": "MEDIUM",
+      "note": "CAS writes may need special exemption policy",
+      "recommended_phase": "2.4.1D"
+    },
+    {
+      "category": "LINTERS",
+      "surfaces": 4,
+      "priority": "LOW",
+      "note": "Linters mutate source code, need dedicated review + exemption policy",
+      "recommended_phase": "2.4.1E"
+    }
+  ],
+  "forbidden_surfaces": [
+    {
+      "category": "INBOX_AUTOMATION",
+      "surfaces": 3,
+      "reason": "INBOX/** path forbidden by operational constraints",
+      "files": [
+        "INBOX/inbox_normalize.py",
+        "INBOX/generate_verification_receipts.py",
+        "CAPABILITY/SKILLS/inbox/inbox-report-writer/run.py"
+      ]
+    },
+    {
+      "category": "TEST_FILES",
+      "surfaces": 54,
+      "reason": "Test files excluded from enforcement (operate in test fixtures)"
+    }
+  ],
+  "catalytic_domains": {
+    "tmp_roots": [
+      "LAW/CONTRACTS/_runs/_tmp",
+      "CORTEX/_generated/_tmp",
+      "MEMORY/LLM_PACKER/_packs/_tmp"
+    ],
+    "durable_roots": [
+      "LAW/CONTRACTS/_runs",
+      "CORTEX/_generated",
+      "MEMORY/LLM_PACKER/_packs"
+    ],
+    "exclusions": [
+      "LAW/CANON",
+      "AGENTS.md",
+      ".git"
+    ],
+    "source": "LAW/CANON/CATALYTIC_COMPUTING.md"
+  },
+  "test_results": {
+    "existing_tests": {
+      "file": "CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py",
+      "total": 11,
+      "passing": 11,
+      "failing": 0,
+      "coverage": "100%"
+    },
+    "new_enforcement_tests": {
+      "file": "CAPABILITY/TESTBENCH/integration/test_phase_2_4_1b_write_enforcement.py",
+      "total": 8,
+      "passing": 8,
+      "failing": 0,
+      "tests": [
+        "test_repo_digest_write_receipt_with_firewall_tmp",
+        "test_repo_digest_write_receipt_with_firewall_durable",
+        "test_repo_digest_write_receipt_forbidden_path",
+        "test_repo_digest_cli_with_firewall_enforcement",
+        "test_repo_digest_cli_forbidden_write_blocked",
+        "test_repo_digest_backwards_compat_without_firewall",
+        "test_firewall_violation_receipt_format",
+        "test_multiple_receipts_same_firewall"
+      ]
+    },
+    "total_tests": 19,
+    "total_passing": 19,
+    "total_failing": 0
+  },
+  "exit_criteria": {
+    "required_coverage": 95.0,
+    "achieved_coverage": 1.0,
+    "met": false,
+    "gap": 94.0,
+    "surfaces_needed": 44
+  },
+  "invariants_verified": [
+    "Fail-closed enforcement (all violations raise exceptions)",
+    "Deterministic errors (same violation → same error code)",
+    "Backwards compatibility (firewall=None preserves legacy behavior)",
+    "Commit gate enforcement (durable writes fail before gate opens)",
+    "Tmp write freedom (tmp writes succeed without commit gate)",
+    "Domain isolation (writes outside tmp/durable roots blocked)",
+    "Test coverage (all integrated surfaces have passing tests)"
+  ],
+  "recommendations": [
+    {
+      "priority": 1,
+      "action": "Proceed with Phase 2.4.1C to integrate remaining 46 allowed surfaces",
+      "rationale": "Infrastructure is complete and validated, systematic integration is now feasible"
+    },
+    {
+      "priority": 2,
+      "action": "Prioritize by risk: LLM_PACKER → PIPELINE → MCP → CORTEX → SKILLS → CLI_TOOLS",
+      "rationale": "Focus on highest-risk surfaces first to maximize security impact"
+    },
+    {
+      "priority": 3,
+      "action": "Use established patterns: PackerWriter for packer, GuardedWriter for others",
+      "rationale": "Reuse validated integration utilities to ensure consistency"
+    },
+    {
+      "priority": 4,
+      "action": "Require fixtures for each integrated surface with firewall tests",
+      "rationale": "Ensure enforcement is testable and regression-proof"
+    },
+    {
+      "priority": 5,
+      "action": "Target metric: 95% coverage of 47 allowed surfaces (≈45 surfaces enforced)",
+      "rationale": "Meet exit criteria while acknowledging INBOX exclusion"
+    }
+  ],
+  "artifacts_generated": [
+    {
+      "path": "NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_REPORT.md",
+      "type": "enforcement_report",
+      "format": "markdown"
+    },
+    {
+      "path": "NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_RECEIPT.json",
+      "type": "enforcement_receipt",
+      "format": "json"
+    },
+    {
+      "path": "MEMORY/LLM_PACKER/Engine/packer/firewall_writer.py",
+      "type": "integration_utility",
+      "format": "python"
+    },
+    {
+      "path": "CAPABILITY/TESTBENCH/integration/test_phase_2_4_1b_write_enforcement.py",
+      "type": "test_suite",
+      "format": "python"
+    }
+  ],
+  "deterministic": true,
+  "canonical_ordering": true
+}

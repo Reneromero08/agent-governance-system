@@ -4,6 +4,41 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.27] - 2026-01-05
+
+### Added
+- **Phase 2.4.1B: Write Firewall Enforcement Integration** — Establishes enforcement infrastructure and integrates write firewall into critical production surfaces.
+  - **repo_digest.py Integration**: All receipt writes (PRE_DIGEST, POST_DIGEST, PURITY_SCAN, RESTORE_PROOF) now route through WriteFirewall
+    - Added optional `firewall` parameter to `write_receipt()` and `write_error_receipt()`
+    - CLI `main()` initializes WriteFirewall with default catalytic domains
+    - Opens commit gate before durable writes (post-digest, purity scan, restore proof)
+    - Catches `FirewallViolation` exceptions with deterministic error receipts
+    - Backwards compatible: `firewall=None` preserves legacy direct-write behavior
+  - **PackerWriter Utility**: New LLM Packer-specific firewall integration wrapper
+    - Location: `MEMORY/LLM_PACKER/Engine/packer/firewall_writer.py`
+    - Methods: `write_json()`, `write_text()`, `write_bytes()`, `mkdir()`, `rename()`, `unlink()`, `commit()`
+    - Default domains: `MEMORY/LLM_PACKER/_packs/_tmp/` (tmp), `MEMORY/LLM_PACKER/_packs/` (durable)
+    - Ready for adoption in LLM_PACKER surfaces (pending Phase 2.4.1C)
+  - **Enforcement Tests**: 8 new tests in `test_phase_2_4_1b_write_enforcement.py`
+    - Validates tmp writes succeed without commit gate
+    - Validates durable writes fail before commit gate, succeed after
+    - Validates forbidden writes (outside domains) blocked with `FirewallViolation`
+    - Validates CLI respects firewall enforcement
+    - Validates violation receipts include deterministic error codes and policy snapshots
+    - All 19 tests pass (11 existing repo_digest tests + 8 new enforcement tests)
+  - **Documentation**:
+    - `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_REPORT.md` — Detailed enforcement report
+    - `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_RECEIPT.json` — Machine-readable receipt
+
+### Status
+- **Coverage**: 1.0% (1/103 surfaces enforced)
+- **Exit Criteria**: ❌ NOT MET (target: ≥95%)
+- **Reason**: Infrastructure complete, demonstrated in `repo_digest.py`. Full coverage requires systematic integration across 46 remaining allowed surfaces (pending Phase 2.4.1C).
+
+### Next Steps
+- **Phase 2.4.1C**: Integrate firewall into LLM_PACKER (6 surfaces), PIPELINE (4), MCP (2), CORTEX (2), SKILLS (15+), CLI_TOOLS (10+)
+- **Target**: 45/47 allowed surfaces enforced = 96% coverage
+
 ## [3.3.26] - 2026-01-05
 
 ### Added
