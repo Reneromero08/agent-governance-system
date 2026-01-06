@@ -34,6 +34,14 @@ Validates that a pack is complete, correctly structured, and navigable.
    - CONTEXT.txt exists
    - Token warnings noted
 
+5. **PRUNED Validation** (if PRUNED/ exists)
+   - PRUNED/PACK_MANIFEST_PRUNED.json exists and has valid schema
+   - PRUNED/meta/PRUNED_RULES.json exists
+   - Manifest entries include path, hash, and size
+   - Hashes and sizes match actual files
+   - Manifest entries are in canonical (lexicographic) order
+   - No staging directories (.pruned_staging_*) or backup directories (PRUNED._old) present
+
 ## Inputs
 
 - `pack_path`: Path to the pack directory to validate

@@ -22,5 +22,6 @@
     "LITE/PROOFS.json",
     "FULL/AGS-FULL-fixture-catalytic-dpt-split-lite.md",
     "FULL/AGS-FULL-TREEMAP-fixture-catalytic-dpt-split-lite.md"
-  ]
+  ],
+  "emit_pruned": false
 }

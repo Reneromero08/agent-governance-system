@@ -17,5 +17,6 @@
     "LITE/LAB-00_INDEX.md",
     "FULL/LAB-FULL-fixture-catalytic-dpt-lab-split-lite.md",
     "FULL/LAB-FULL-TREEMAP-fixture-catalytic-dpt-lab-split-lite.md"
-  ]
+  ],
+  "emit_pruned": false
 }

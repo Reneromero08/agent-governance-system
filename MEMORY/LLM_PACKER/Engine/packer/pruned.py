@@ -16,6 +16,7 @@ It MUST include:
 It MUST exclude:
 - large code trees by default
 - any runtime artifacts under LAW/CONTRACTS/_runs/
+- any directories under BUILD (reserved for user outputs)
 
 It MUST include a PRUNED manifest:
 - PRUNED/PACK_MANIFEST_PRUNED.json (same format as PACK_MANIFEST.json but for PRUNED only)
@@ -229,7 +230,7 @@ def write_pruned_pack(
                 "exclude": {
                     "_runs/**": "Runtime artifacts",
                     "_generated/**": "Generated files",
-                    "BUILD/**": "Build outputs",
+                    "BUILD": "Build outputs",
                     "LAW/CONTRACTS/_runs/**": "Contract runtime artifacts",
                 },
             },

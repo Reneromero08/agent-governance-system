@@ -74,6 +74,88 @@ def validate_navigation(pack_dir: Path) -> Tuple[List[str], List[str]]:
     return errors, warnings
 
 
+def validate_pruned(pack_dir: Path) -> Tuple[List[str], List[str]]:
+    """Validate PRUNED output if present."""
+    errors = []
+    warnings = []
+
+    pruned_dir = pack_dir / "PRUNED"
+
+    if not pruned_dir.exists():
+        return errors, warnings
+
+    manifest_path = pruned_dir / "PACK_MANIFEST_PRUNED.json"
+    rules_path = pruned_dir / "meta" / "PRUNED_RULES.json"
+
+    if not manifest_path.exists():
+        errors.append("Missing PRUNED/PACK_MANIFEST_PRUNED.json")
+        return errors, warnings
+
+    if not rules_path.exists():
+        errors.append("Missing PRUNED/meta/PRUNED_RULES.json")
+        return errors, warnings
+
+    try:
+        manifest = json.loads(manifest_path.read_text())
+        rules = json.loads(rules_path.read_text())
+    except Exception as e:
+        errors.append(f"Invalid PRUNED JSON: {e}")
+        return errors, warnings
+
+    version = manifest.get("version", "")
+    if version != "PRUNED.1.0":
+        errors.append(f"Invalid PRUNED manifest version: {version}")
+
+    entries = manifest.get("entries", [])
+
+    prev_path = None
+    for entry in entries:
+        path = entry.get("path")
+        file_hash = entry.get("hash")
+        size = entry.get("size")
+
+        if not path:
+            errors.append("PRUNED manifest entry missing 'path'")
+            continue
+        if not file_hash:
+            errors.append(f"PRUNED manifest entry missing 'hash': {path}")
+            continue
+        if size is None:
+            errors.append(f"PRUNED manifest entry missing 'size': {path}")
+            continue
+
+        file_path = pruned_dir / path
+        if not file_path.exists():
+            errors.append(f"PRUNED file missing: {path}")
+            continue
+
+        from MEMORY.LLM_PACKER.Engine.packer import hash_file
+        computed_hash = hash_file(file_path)
+        if computed_hash != file_hash:
+            errors.append(f"PRUNED hash mismatch for {path}: expected {file_hash}, got {computed_hash}")
+            continue
+
+        actual_size = file_path.stat().st_size
+        if actual_size != size:
+            errors.append(f"PRUNED size mismatch for {path}: expected {size}, got {actual_size}")
+
+        if prev_path is not None and path < prev_path:
+            errors.append(f"PRUNED manifest not in canonical order: {path} after {prev_path}")
+        prev_path = path
+
+    version_rules = rules.get("version", "")
+    if version_rules != "PRUNED.1.0":
+        errors.append(f"Invalid PRUNED rules version: {version_rules}")
+
+    for item in pruned_dir.iterdir():
+        if item.is_dir() and item.name.startswith(".pruned_staging_"):
+            errors.append(f"PRUNED staging directory not cleaned up: {item.name}")
+        if item.name == "PRUNED._old":
+            errors.append("PRUNED backup directory not cleaned up: PRUNED._old")
+
+    return errors, warnings
+
+
 def get_stats(pack_dir: Path) -> Dict[str, Any]:
     """Get pack statistics."""
     stats = {
@@ -135,7 +217,12 @@ def main(input_path: Path, output_path: Path) -> int:
         errors, warnings = validate_navigation(pack_path)
         all_errors.extend(errors)
         all_warnings.extend(warnings)
-        
+
+        # PRUNED validation (if present)
+        errors, warnings = validate_pruned(pack_path)
+        all_errors.extend(errors)
+        all_warnings.extend(warnings)
+
         # Get stats
         stats = get_stats(pack_path)
         
