@@ -20,5 +20,6 @@
     "SPLIT/AGS-06_ROOT_FILES.md",
     "FULL/AGS-FULL-fixture-catalytic-dpt.md",
     "FULL/AGS-FULL-TREEMAP-fixture-catalytic-dpt.md"
-  ]
+  ],
+  "emit_pruned": false
 }

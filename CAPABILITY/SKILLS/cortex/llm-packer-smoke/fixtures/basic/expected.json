@@ -20,5 +20,6 @@
     "SPLIT/AGS-06_ROOT_FILES.md",
     "FULL/AGS-FULL-fixture-smoke.md",
     "FULL/AGS-FULL-TREEMAP-fixture-smoke.md"
-  ]
+  ],
+  "emit_pruned": false
 }

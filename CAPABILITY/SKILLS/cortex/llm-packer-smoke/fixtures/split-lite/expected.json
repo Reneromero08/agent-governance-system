@@ -20,5 +20,6 @@
     "SPLIT/AGS-06_ROOT_FILES.md",
     "LITE/AGS-00_INDEX.md",
     "LITE/PROOFS.json"
-  ]
+  ],
+  "emit_pruned": false
 }

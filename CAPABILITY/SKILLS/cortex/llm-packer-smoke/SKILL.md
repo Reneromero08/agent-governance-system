@@ -26,6 +26,7 @@ Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a mini
   - `stamp` (string): stamp for timestamped `FULL/` outputs.
   - `split_lite` (bool): whether to generate `LITE/` outputs.
   - `zip` (bool): whether to generate a zip archive.
+  - `emit_pruned` (bool): whether to generate `PRUNED/` output (reduced planning context).
 
 ## Outputs
 
@@ -35,6 +36,8 @@ Use to verify that `MEMORY/LLM_PACKER/Engine/packer.py` runs and produces a mini
 
 - Must only write generated artifacts under `MEMORY/LLM_PACKER/_packs/` (and must not write system artifacts to `BUILD/`).
 - Deterministic and self-contained.
+- When `emit_pruned` is OFF: PRUNED/ must not exist in the pack.
+- When `emit_pruned` is ON: PRUNED/ must exist with valid manifest and rules files.
 
 ## Fixtures
 

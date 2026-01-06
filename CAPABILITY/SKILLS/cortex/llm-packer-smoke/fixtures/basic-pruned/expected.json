@@ -1,6 +1,6 @@
 {
-  "pack_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke-lite",
-  "stamp": "fixture-smoke-lite",
+  "pack_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke-pruned",
+  "stamp": "fixture-smoke-pruned",
   "verified": [
     "meta/START_HERE.md",
     "meta/ENTRYPOINTS.md",
@@ -17,7 +17,9 @@
     "SPLIT/AGS-03_NAVIGATION.md",
     "SPLIT/AGS-04_PROOFS.md",
     "SPLIT/AGS-05_MEMORY.md",
-    "SPLIT/AGS-06_ROOT_FILES.md"
+    "SPLIT/AGS-06_ROOT_FILES.md",
+    "FULL/AGS-FULL-fixture-smoke-pruned.md",
+    "FULL/AGS-FULL-TREEMAP-fixture-smoke-pruned.md"
   ],
-  "emit_pruned": false
+  "emit_pruned": true
 }

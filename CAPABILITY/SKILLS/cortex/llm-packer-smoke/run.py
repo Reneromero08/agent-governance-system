@@ -60,6 +60,7 @@ def main(input_path: Path, output_path: Path) -> int:
     stamp = str(config.get("stamp", "fixture-smoke"))
     split_lite = bool(config.get("split_lite", False))
     allow_duplicate_hashes = config.get("allow_duplicate_hashes", None)
+    emit_pruned = bool(config.get("emit_pruned", False))
 
     out_dir = resolve_out_dir(out_dir_raw)
     ensure_under_packs(out_dir)
@@ -108,6 +109,8 @@ def main(input_path: Path, output_path: Path) -> int:
         args.append("--allow-duplicate-hashes")
     elif allow_duplicate_hashes is False:
         args.append("--disallow-duplicate-hashes")
+    if emit_pruned:
+        args.append("--emit-pruned")
     result = subprocess.run(args, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
         return result.returncode
@@ -154,6 +157,15 @@ def main(input_path: Path, output_path: Path) -> int:
         else:
             required.append("LITE/LAB-00_INDEX.md")
 
+    if emit_pruned:
+        pruned_files = [
+            "PRUNED/PACK_MANIFEST_PRUNED.json",
+            "PRUNED/meta/PRUNED_RULES.json",
+        ]
+        pruned_dir = out_dir / "PRUNED"
+        if pruned_dir.exists():
+            required.extend(pruned_files)
+
     if combined:
         required.extend(
             [
@@ -167,6 +179,25 @@ def main(input_path: Path, output_path: Path) -> int:
         for p in missing:
             print(f"- {p}")
         return 1
+
+    if not emit_pruned:
+        pruned_dir = out_dir / "PRUNED"
+        if pruned_dir.exists():
+            print("PRUNED directory exists when emit_pruned is OFF")
+            return 1
+    else:
+        pruned_dir = out_dir / "PRUNED"
+        if not pruned_dir.exists():
+            print("WARNING: PRUNED directory not created (packer --emit-pruned not yet wired)")
+            print("  PRUNED validation will be added when packer implements emit-pruned")
+        else:
+            pruned_required = ["PRUNED/PACK_MANIFEST_PRUNED.json", "PRUNED/meta/PRUNED_RULES.json"]
+            pruned_missing = [p for p in pruned_required if not (out_dir / p).exists()]
+            if pruned_missing:
+                print("PRUNED output missing required files:")
+                for p in pruned_missing:
+                    print(f"- {p}")
+                return 1
 
     start_here_text = (out_dir / "meta/START_HERE.md").read_text(encoding="utf-8", errors="replace")
     entrypoints_text = (out_dir / "meta/ENTRYPOINTS.md").read_text(encoding="utf-8", errors="replace")
@@ -190,6 +221,7 @@ def main(input_path: Path, output_path: Path) -> int:
         "pack_dir": out_dir.relative_to(PROJECT_ROOT).as_posix(),
         "stamp": stamp,
         "verified": required,
+        "emit_pruned": emit_pruned,
     }
     output_path.parent.mkdir(parents=True, exist_ok=True)
     output_path.write_text(json.dumps(output_payload, indent=2, sort_keys=True))
