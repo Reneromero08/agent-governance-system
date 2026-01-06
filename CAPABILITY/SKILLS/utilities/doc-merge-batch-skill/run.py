@@ -5,6 +5,7 @@ import os
 import subprocess
 import sys
 from pathlib import Path
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 SKILL_DIR = Path(__file__).resolve().parent
@@ -13,6 +14,14 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
 
 
 def _is_within(child: Path, parent: Path) -> bool:
@@ -23,7 +32,7 @@ def _is_within(child: Path, parent: Path) -> bool:
         return False
 
 
-def main(input_path: Path, output_path: Path) -> int:
+def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = None) -> int:
     if not ensure_canon_compat(SKILL_DIR):
         return 1
 
@@ -56,9 +65,28 @@ def main(input_path: Path, output_path: Path) -> int:
         print(f"[doc-merge-batch-skill] Refusing out_dir outside allowed roots: {out_dir_rel}")
         return 1
 
-    out_dir_abs.mkdir(parents=True, exist_ok=True)
+    # Use GuardedWriter for directory creation if available, otherwise fallback
+    if writer:
+        try:
+            rel_out_dir = str(out_dir_abs.relative_to(PROJECT_ROOT))
+            writer.mkdir_tmp(rel_out_dir)
+        except ValueError:
+            out_dir_abs.mkdir(parents=True, exist_ok=True)
+    else:
+        out_dir_abs.mkdir(parents=True, exist_ok=True)
+    
     pairs_path = out_dir_abs / "pairs.json"
-    pairs_path.write_text(json.dumps(pairs, indent=2, sort_keys=True), encoding="utf-8")
+    pairs_data = json.dumps(pairs, indent=2, sort_keys=True)
+    
+    # Use GuardedWriter for pairs.json write if available, otherwise fallback
+    if writer:
+        try:
+            rel_pairs_path = str(pairs_path.relative_to(PROJECT_ROOT))
+            writer.write_tmp(rel_pairs_path, pairs_data)
+        except ValueError:
+            pairs_path.write_text(pairs_data, encoding="utf-8")
+    else:
+        pairs_path.write_text(pairs_data, encoding="utf-8")
 
     env = os.environ.copy()
     cmd = [
@@ -88,8 +116,21 @@ def main(input_path: Path, output_path: Path) -> int:
         "stderr": res.stderr.strip() if res.stderr else "",
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(output, indent=2, sort_keys=True), encoding="utf-8")
+    output_data = json.dumps(output, indent=2, sort_keys=True)
+    
+    # Use GuardedWriter for final output write if available, otherwise fallback
+    if writer:
+        try:
+            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
+            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
+            writer.write_tmp(rel_output_path, output_data)
+        except ValueError:
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(output_data, encoding="utf-8")
+    else:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(output_data, encoding="utf-8")
+    
     return 0 if output["ok"] else 1
 
 

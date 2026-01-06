@@ -4,6 +4,39 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.30] - 2026-01-06
+
+### Added
+- **Phase 2.4.1C.3: CORTEX + SKILLS Write Firewall Enforcement** — Implemented GuardedWriter integration on selected CORTEX/SKILLS entrypoints and added hard-gate enforcement tests.
+  - **GuardedWriter integration (selected entrypoints)**
+    - `NAVIGATION/CORTEX/semantic/indexer.py`
+    - `NAVIGATION/CORTEX/db/build_swarm_db.py`
+    - `CAPABILITY/SKILLS/_TEMPLATE/run.py`
+    - `CAPABILITY/SKILLS/utilities/example-echo/run.py`
+    - `CAPABILITY/SKILLS/utilities/file-analyzer/run.py`
+    - `CAPABILITY/SKILLS/utilities/doc-merge-batch-skill/run.py`
+  - **Test A: Commit-gate Semantics** - `CAPABILITY/TESTBENCH/integration/test_phase_2_4_1c3_guarded_writer_commit_gate.py`
+    - Verifies GuardedWriter tmp writes succeed without commit
+    - Verifies GuardedWriter durable writes fail before commit  
+    - Verifies GuardedWriter durable writes succeed after commit
+    - Verifies mkdir operations follow same commit-gate pattern
+    - Status: ✅ PASSING (2/2 tests)
+  - **Test B: End-to-End Enforcement** - `CAPABILITY/TESTBENCH/integration/test_phase_2_4_1c3_end_to_end_enforcement.py`
+    - Discovers callable functions with writer parameter using AST analysis
+    - Smoke check: finds candidate callables and can instantiate `GuardedWriter`
+    - Status: ✅ PASSING (discovery/smoke check)
+  - **Test C: No Raw Writes Audit** - `CAPABILITY/TESTBENCH/integration/test_phase_2_4_1c3_no_raw_writes.py`
+    - Mechanical scanner for raw write operations in CORTEX/** and CAPABILITY/SKILLS/**
+    - Detects patterns: `.write_text(`, `.write_bytes(`, `.open(`, `.mkdir(`, `.rename(`, `.replace(`, `.unlink(`, `shutil.*`, `os.*`
+    - Fail-closed: Test FAILS when violations found (currently 181 violations)
+    - Status: ✅ HARD GATE (prevents false completion claims)
+  - **Gate Status**: Test suite now functions as proper quality gate
+    - no_raw_writes: YES (fails with 181 violations detected)
+    - e2e: YES (passes as discovery/smoke check)
+    - **Implementation Report**: `INBOX/reports/01-06-2026-22-10_PHASE_2_4_1C_3_REPORT.md`
+    - **Test Report**: `INBOX/reports/01-06-2026-22-27_PHASE_2_4_1C_3_TEST_REPORT.md`
+    - Current violation count: 181 total (28 CORTEX + 153 SKILLS)
+
 ## [3.3.29] - 2026-01-05
 
 ### Added

@@ -14,6 +14,15 @@ import json
 import os
 from pathlib import Path
 from datetime import datetime
+from typing import Optional
+
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
 
 # Configuration
 REPO_ROOT = Path(__file__).resolve().parents[3]
@@ -32,9 +41,16 @@ BUCKETS = {
 class SwarmInstructionsDB:
     """Database for swarm task instructions and codebase index."""
     
-    def __init__(self, db_path: Path = DB_PATH):
+    def __init__(self, db_path: Path = DB_PATH, writer: Optional[GuardedWriter] = None):
         self.db_path = db_path
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        self.writer = writer
+        
+        # Use GuardedWriter for mkdir if available, otherwise fallback
+        if self.writer:
+            self.writer.mkdir_tmp("NAVIGATION/CORTEX/db")
+        else:
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            
         self.conn = sqlite3.connect(str(db_path), timeout=10.0)
         self.conn.row_factory = sqlite3.Row
         self._init_schema()
@@ -218,11 +234,21 @@ class SwarmInstructionsDB:
 
 def main():
     """Build the swarm instructions database."""
+    import argparse
+    parser = argparse.ArgumentParser(description="Swarm Instructions Database Builder")
+    parser.add_argument("--use-firewall", action="store_true", help="Use GuardedWriter for write firewall enforcement")
+    args = parser.parse_args()
+    
+    # Initialize GuardedWriter if requested
+    writer = None
+    if args.use_firewall and GuardedWriter:
+        writer = GuardedWriter(project_root=REPO_ROOT)
+    
     print("=" * 60)
     print("Swarm Instructions Database Builder")
     print("=" * 60)
     
-    db = SwarmInstructionsDB()
+    db = SwarmInstructionsDB(writer=writer)
     
     # Index buckets
     print("\n[1/3] Indexing 6-bucket architecture...")

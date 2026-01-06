@@ -9,6 +9,16 @@ This script implements the file analyzer skill that handles file analysis tasks.
 import json
 import sys
 from pathlib import Path
+from typing import Optional
+
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
@@ -17,7 +27,7 @@ if str(PROJECT_ROOT) not in sys.path:
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 
-def main(input_path: Path, output_path: Path) -> int:
+def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = None) -> int:
     if not ensure_canon_compat(Path(__file__).resolve().parent):
         return 1
     try:
@@ -37,8 +47,20 @@ def main(input_path: Path, output_path: Path) -> int:
         "task_id": task_id
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
+    # Use GuardedWriter for writes if available, otherwise fallback
+    if writer:
+        try:
+            # Convert output_path to relative path for GuardedWriter
+            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
+            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
+            writer.write_tmp(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
+        except ValueError:
+            # If path is not relative to PROJECT_ROOT, fallback to direct write
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
+    else:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
     print("[skill] File analyzer skill executed successfully")
     return 0
 
