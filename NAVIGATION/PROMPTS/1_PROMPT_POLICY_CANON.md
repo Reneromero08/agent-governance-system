@@ -1,11 +1,11 @@
 ---
 title: PROMPT_POLICY_CANON
-version: 1.4
+version: 1.5
 status: CANONICAL
-generated_on: 2026-01-04
+generated_on: 2026-01-06
 scope: Prompt generation + execution governance for AGS
 ---
-<!-- CANON_HASH: E31D9F3A97E2F234A50AC9B2E7EE59E893A9FCC1690666A5E5F7DD0BAD2BBEC3 -->
+<!-- CANON_HASH (sha256 over file content excluding this line): 03DD9C86A92C1C3E85EEEB1322CCBEB7E5A482FF423A5D42CF73C1DEF24409B1 -->
 
 ## 0) Authority and precedence
 This file is normative.
@@ -52,25 +52,25 @@ Prompts MUST be explicit and procedural (about 99.99% of the time).
 Especially for executor-class models.
 
 ### 1.5 Authority Asymmetry (Hierarchy)
-### 1.5.1 Planning Authority Rule
+#### 1.5.1 Planning Authority Rule
 Models designated as planner-capable MAY:
 - perform planning, analysis, and decomposition
 - navigate the repository
 - read and write files within existing allowlists
 - generate patches and diffs
 - invoke tools, linters, and verification scripts
-Planner-capable status imposes no artificial execution restriction.
 
-### 1.5.2 Execution Restriction Rule (Non-Planner Models)
+#### 1.5.2 Execution Restriction Rule (Non-Planner Models)
 Models below the planner-capable tier MUST NOT:
 - introduce new structure, policy, or scope
 - plan or re-plan tasks
 - infer intent or architectural direction
+
 Such models MAY execute mechanical tasks ONLY IF:
 - an explicit plan identifier or plan artifact is provided
 - the plan was produced by a planner-capable model
-Absence of a valid plan reference is a hard failure (fail-closed).
 
+Absence of a valid plan reference is a hard failure (fail-closed).
 
 ### 1.6 Scope control
 Every prompt MUST declare:
@@ -97,6 +97,55 @@ Every run MUST emit:
 ### 1.9 Commit ceremony
 Agents MUST NOT commit without explicit user approval for that specific commit.
 Agents MUST NOT push without explicit user approval for that specific push.
+
+### 1.10 Workspace isolation (parallel-safe default)
+Clean-state requirements are per-workspace.
+
+Default rule:
+- Executors MUST run in an isolated workspace (git worktree or separate clone) that is dedicated to the task.
+- The primary repo working directory (often where the user works) is treated as human-owned and is not a default execution workspace.
+
+Hard requirements (preflight):
+- Workspace is on a named branch (not detached HEAD).
+  - Verify via: `git symbolic-ref -q HEAD` (must exit 0)
+- Workspace starts clean.
+  - Verify via: `git status --porcelain` (must be empty)
+
+Optional override (rare):
+- A prompt MAY allow execution in the primary repo working directory only if it declares:
+  - `ALLOW_MAIN_WORKSPACE = true` (explicit)
+  - and still enforces workspace clean-state preflight
+  - and the task is single-agent and non-parallel
+
+If override is not explicitly granted, execution in the primary repo working directory is a policy breach.
+
+### 1.11 Test semantics invariant (hard gate)
+If a test detects a violation, it MUST fail.
+
+Forbidden test patterns:
+- logging or printing violations while exiting 0
+- summarizing violations without asserting
+- “scanner tests” that never raise when violations exist
+
+Required test pattern:
+- collect violations (if any)
+- `assert violations == []` (or equivalent)
+- raise AssertionError (or fail the test) on any violation
+
+If violations exist and tests still pass, validation is invalid and the task result MUST be VERIFICATION_FAILED.
+
+### 1.12 Coverage accounting (mechanical)
+Any coverage claim MUST be computable.
+
+If a prompt requires coverage (examples: “100% surfaces enforced”, “no raw writes remain”):
+- Denominator MUST be defined as an explicit list (the closed set of surfaces).
+- Numerator MUST be computed as a count of the list items that satisfy the enforcement condition.
+- Percentage MUST be derived from numerator and denominator.
+- Evidence MUST include:
+  - the discovery query used to enumerate the denominator, or
+  - a referenced artifact that already enumerates it.
+
+Claims like “coverage achieved” without numerator and denominator are invalid.
 
 ## 2) Model routing contract
 Each prompt MUST declare:
@@ -172,9 +221,23 @@ Required fields:
 - result: string (OK | VERIFICATION_FAILED | BLOCKED_UNKNOWN | INTERNAL_ERROR | POLICY_BREACH)
 - plan_ref: string (required for non-planner models; matches plan_id or artifact path)
 
+Strongly recommended (receipt fields):
+- workspace_mode: string (worktree | clone | main_override)
+- workspace_path: string
+- branch: string
+- base_ref: string (e.g. main or commit)
+- head_sha_before: string
+- head_sha_after: string
+- preflight_clean_status: string (empty or captured porcelain output)
+- preflight_detached_head: bool
+
 Optional fields:
 - compliance_check_command: string
 - delegation_digest: string
+- lint_command: string
+- lint_exit_code: int
+- lint_result: string (PASS | FAIL | WARNING)
+- linter_ref: string
 
 Minimal schema sketch:
 ```json
@@ -223,6 +286,9 @@ Agents MUST STOP if:
 - the task would exceed the scope allowlist
 - validation cannot be performed
 - changes would touch CANON without explicit authorization
+- workspace is detached HEAD (no branch)
+- workspace is not clean at start of execution
+- workspace isolation is required and not satisfied (unless ALLOW_MAIN_WORKSPACE is explicitly granted)
 
 ## 11) Forbidden inference terms (lint reference)
 Forbidden terms include the 6-letter inference verb and its noun variants.
@@ -238,12 +304,6 @@ The canonical lint command is: `bash CAPABILITY/TOOLS/linters/lint_prompt_pack.s
 
 Lint failure or inability to lint is a hard stop: no model execution, no writes.
 Lint warnings (exit code 2) are non-blocking but MUST be recorded in receipts.
-
-Executors MUST record the following lint metadata in receipts/run artifacts:
-- lint_command: the exact command run
-- lint_exit_code: exit status (0=PASS, 1=FAIL, 2=WARNING)
-- lint_result: PASS, FAIL, or WARNING
-- optional: linter_ref (path/version/hash) if available
 
 ## 13) Authority Enforcement
 Executors MUST gate non-planner models on presence of a valid plan reference.

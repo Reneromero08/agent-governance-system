@@ -1,11 +1,11 @@
 ---
 title: MASTER_PROMPT_TEMPLATE_CANON
-version: 1.4
+version: 1.5
 status: CANONICAL
-generated_on: 2026-01-04
+generated_on: 2026-01-06
 scope: Governor workflow template for generating all remaining per-task prompts
 ---
-<!-- CANON_HASH: 8A7D325BE355AA03E5232B3158A9AFFECC48ABFF6370C70F36478B1D8FEAB6D6 -->
+<!-- CANON_HASH (sha256 over file content excluding this line): D0D3948770AEBA5CD5EDAB4B39BF62D7100BD443976909CCBFE03C90FE7BBEEF -->
 
 ## 0) Authority
 Subordinate to:
@@ -29,7 +29,22 @@ You are the Governor. Generate one canonical per-task prompt for every unfinishe
 Pack manifest MUST include:
 - policy_canon_sha256
 - guide_canon_sha256
-- task_index: list of {task_id, prompt_path, receipt_path, report_path, depends_on, warnings}
+- task_index: list of objects with:
+  - task_id
+  - prompt_path
+  - receipt_path
+  - report_path
+  - depends_on
+  - warnings
+
+Recommended (manifest fields):
+- workspace_policy: object with:
+  - default_mode: "worktree"
+  - allow_main_override: false
+- task_workspaces: list of objects with:
+  - task_id
+  - workspace_name_suggestion
+  - branch_name_suggestion
 
 ## 4) Workflow (deterministic)
 1) Enumerate unfinished tasks from the roadmap.
@@ -41,25 +56,29 @@ Pack manifest MUST include:
    b) Select primary_model + fallback_chain per policy.
    c) Identify depends_on edges and set header depends_on.
    d) Determine receipt_path and report_path and set header fields.
-   e) If unknown required facts exist:
+   e) Ensure workspace safety is enforceable:
+      - prompts must include preflight checks for branch + clean-state
+      - default expectation is isolated workspace (worktree or clone)
+      - main workspace use requires explicit opt-in and must be rare
+   f) If unknown required facts exist:
       - classify as UNKNOWN_BLOCKER or UNKNOWN_DEFERRABLE
       - BLOCKER: do not generate prompt for this task; record STOP item
       - DEFERRABLE: generate prompt with FILL_ME__ tokens; record warning
-   f) Draft prompt using canonical template.
-   g) Run prompt QA checklist.
-   h) If CAPABILITY/TOOLS/linters/lint_prompt_pack.sh exists (requires bash-compatible shell, e.g. WSL):
-      - run it via `bash` on the prompt
+   g) Draft prompt using canonical template.
+   h) Run prompt QA checklist.
+   i) If CAPABILITY/TOOLS/linters/lint_prompt_pack.sh exists (requires bash-compatible shell, e.g. WSL):
+      - run it via `bash` on the prompt pack directory
       - exit 1 blocks pack generation
       - exit 2 records a warning and continues
-   i) Write prompt file.
+   j) Write prompt file.
 4) Write pack manifest and report.
 
 ## 5) STOP behavior
 STOP is per-task only. Continue generating prompts for unrelated tasks.
 
 ## 6) Receipt requirements (lint metadata)
-Receipts MUST include the following REQUIRED fields for lint verification:
-- lint_command: the exact linter command executed
+Receipts MUST include these fields when lint is run:
+- lint_command: exact linter command executed
 - lint_exit_code: exit status (0=PASS, 1=FAIL, 2=WARNING)
-- lint_result: one of PASS, FAIL, or WARNING
+- lint_result: PASS | FAIL | WARNING
 - linter_ref: optional (path/version/hash of the linter used)
