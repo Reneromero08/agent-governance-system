@@ -1,8 +1,39 @@
-<!-- CONTENT_HASH: a4a587a685bc8ce70671de65e608a492d2d594a4a88eacebd0f4b9e2d843daf6 -->
+<!-- CONTENT_HASH: 75d216013b0821f663847dbc513d2a3ced47ad2abb61c03092c3287447635d25 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.3.31] - 2026-01-06
+
+### Added
+- **Canonical Document Enforcement (Repo-Wide)** — Implemented comprehensive governance for ALL markdown documentation across the repository.
+  - **Canonical Document Enforcer Skill** (`CAPABILITY/SKILLS/governance/canonical-doc-enforcer/`)
+    - `run.py` - Implementation with validate, fix, and report modes
+    - `SKILL.md` - Complete skill documentation
+    - **Validate Mode**: Scans repository for non-canonical documents and reports violations
+    - **Fix Mode**: Automatically renames files and adds required metadata (YAML frontmatter + content hash)
+    - **Report Mode**: Generates compliance reports with statistics
+  - **Updated Canon Policy**: `LAW/CANON/DOCUMENT_POLICY.md` (renamed from INBOX_POLICY.md)
+    - Expanded scope from INBOX-only to **INBOX + Reports + Archive**
+    - Applies to: INBOX/, MEMORY/ARCHIVE/, **LAW/CONTRACTS/_runs/REPORTS/**
+    - Exempts: LAW/CANON/, LAW/CONTEXT/, CAPABILITY/, NAVIGATION/ (Maps/Prompts/Invariants), **INBOX/prompts/** (Native Prompt Schema), test artifacts, MEMORY/LLM_PACKER/
+  - **Canonical Format Requirements**:
+    - Filename: `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md` (timestamp + ALL_CAPS title)
+    - YAML frontmatter with 12 required fields (uuid, title, section, bucket, author, priority, created, modified, status, summary, tags, hashtags)
+    - Content hash (SHA256) placed immediately after YAML frontmatter
+    - Timestamp consistency between filename and YAML `created` field
+  - **Validation Rules**:
+    - Filename pattern: `^\d{2}-\d{2}-\d{4}-\d{2}-\d{2}_.+\.md$`
+    - Title format: ALL_CAPS_WITH_UNDERSCORES
+    - UUID format: RFC 4122 UUID v4
+    - Hash validity: SHA256 matches content (excluding YAML and hash line)
+  - **Exit Codes**: 0 (success), 1 (violations found), 2 (fix failed), 3 (invalid args)
+  - **Integration**: Ready for pre-commit hook and CI/CD pipeline integration
+  - **Receipts**: All operations emit receipts to `LAW/CONTRACTS/_runs/canonical-doc-enforcer/`
+  - **Demonstration**: Fixed `MEMORY/ARCHIVE/roadmaps/AGS_ROADMAP_3.3.18.md` → `01-05-2026-12-45_AGS_ROADMAP_3_3_18.md` with full metadata
+  - **UUID Clarification**: Updated DOCUMENT_POLICY.md to clarify that `uuid` field is the **agent session UUID** (which agent created the document), not a document ID. For legacy documents where the agent session is unknown, the skill uses sentinel value `"00000000-0000-0000-0000-000000000000"`.
+  - **Status**: ✅ COMPLETE - Repo-wide canonical format enforcement active
 
 ## [3.3.30] - 2026-01-06
 

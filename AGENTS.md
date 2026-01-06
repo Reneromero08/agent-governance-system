@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: e0ba44e39e5812099582e5a276476b89ccb8a3d9cbb3dc9d2ede0b1f87440674 -->
+<!-- CONTENT_HASH: be917b99962d73a8f5e1f7adae1dd8b258edbda71c6d414ca3c5410ae7ff0e9e -->
 
 # AGENTS.md
 
@@ -162,7 +162,7 @@ Before taking any action, an agent MUST:
    - LAW/CANON/VERSIONING.md - Version policy (identify current canon_version)
    - LAW/CANON/AGREEMENT.md - Constitutional agreement between human and system
    - LAW/CANON/STEWARDSHIP.md - Engineering practices and escalation paths
-   - LAW/CANON/INBOX_POLICY.md - Document storage and content hash requirements
+   - LAW/CANON/DOCUMENT_POLICY.md - Canonical document format for all markdown documentation
    - LAW/CANON/IMPLEMENTATION_REPORTS.md - Report format for all implementations
    - LAW/CANON/CRISIS.md - Emergency procedures and quarantine detection
 3. **Read this file (AGENTS.md) in full**

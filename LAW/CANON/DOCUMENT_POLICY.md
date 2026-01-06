@@ -1,14 +1,23 @@
-<!-- CONTENT_HASH: 007a53ac9558cefec29b758d74d77fc428cdf08a7aa97e15fc37cfaf05d2527b -->
+<!-- CONTENT_HASH: 7dec0bca6c9db64c071a996bd5a21bcfd0a40ec37cf984d0d0879c4c8caabf21 -->
 
-# INBOX Policy
+# Document Policy (Canonical Format)
 
-**Purpose:** All documentation, research, reports, and roadmaps intended for human review ("god mode") must be stored in a centralized INBOX folder for consistent discoverability.
+**Purpose:** ALL markdown documentation across the repository must follow canonical filename and metadata standards for consistency, discoverability, and integrity.
 
 ---
 
 ## Policy Statement
 
-All non-system-generated documents that require human review or attention must be placed in the repository root `INBOX/` directory.
+**ALL `.md` files** in the repository (except exempted paths) MUST follow canonical format:
+- Filename: `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md`
+- YAML frontmatter with required fields
+- Content hash for integrity verification
+
+This policy applies to:
+- `INBOX/` - Human-reviewable documents
+- `MEMORY/ARCHIVE/` - Archived documentation
+- `LAW/CONTRACTS/_runs/REPORTS/` - Implementation reports
+- Document artifacts in `_runs/`
 
 ## Required Content Types
 
@@ -102,7 +111,7 @@ hashtags: ["#category", "#topic", "#status"]
 - Timestamps use `YYYY-MM-DD HH:MM` format
 
 **Field Specifications:**
-- **uuid**: RFC 4122 compliant UUID v4 (generated once, never changes)
+- **uuid**: Agent session UUID (from MCP session or agent initialization). This identifies **which agent session** created the document, not the document itself. For legacy documents where the agent session is unknown, use the sentinel value `"00000000-0000-0000-0000-000000000000"`.
 - **bucket**: Hierarchical category path (e.g., "implementation/phase1", "research/architecture")
 - **tags**: Machine-readable tags (lowercase, underscores)
 - **hashtags**: Human-readable hashtags with # prefix (for cross-referencing and discovery)
@@ -211,6 +220,7 @@ The following are EXEMPT from INBOX policy:
 6. **Context records** (`LAW/CONTEXT/decisions/*`, `LAW/CONTEXT/preferences/`) - Append-first storage
 7. **Build outputs** (BUILD/*) - User workspace outputs
 8. **INBOX.md** - The index file itself
+9. **Prompts** (`INBOX/prompts/*`, `NAVIGATION/PROMPTS/*`) - These follow the Prompt Pack schema (`id`, `model`, `priority`, etc.) and are governed by the prompt policy.
 
 ## Enforcement
 
@@ -276,8 +286,10 @@ now = datetime.now()
 timestamp = now.strftime("%m-%d-%Y-%H-%M")
 yaml_timestamp = now.strftime("%Y-%m-%d %H:%M")
 
-# 2. Generate UUID (once per document, never changes)
-doc_uuid = str(uuid.uuid4())
+# 2. Get agent session UUID (from MCP session or agent initialization)
+# For MCP: use session_id from server context
+# For legacy/unknown: use "00000000-0000-0000-0000-000000000000"
+doc_uuid = get_session_id()  # or "00000000-0000-0000-0000-000000000000" if unknown
 
 # 3. Create filename
 title = "CASSETTE_NETWORK_IMPLEMENTATION"
