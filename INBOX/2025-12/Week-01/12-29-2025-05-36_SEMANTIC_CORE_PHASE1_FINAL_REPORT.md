@@ -1,15 +1,21 @@
 ---
-title: "Semantic Core Phase 1 Final Report"
-section: "report"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 05:36"
-modified: "2025-12-29 05:36"
-status: "Complete"
-summary: "Final report for Semantic Core Phase 1"
-tags: [semantic_core, phase1, report]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Semantic Core Phase 1 Final Report
+section: report
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 05:36
+modified: 2026-01-06 13:09
+status: Complete
+summary: Final report for Semantic Core Phase 1
+tags:
+- semantic_core
+- phase1
+- report
+hashtags: []
 ---
-<!-- CONTENT_HASH: 70108195fc069c57ec02da78cccbf52a23939c5abbcc3a6e57a031bcf7d4a4a9 -->
+<!-- CONTENT_HASH: 374262c305f3e9b5657ff5430577ba0dcf7952dd32f80cff887f72dc66883bed -->
 
 # Semantic Core Phase 1 - Final Engineering Report
 

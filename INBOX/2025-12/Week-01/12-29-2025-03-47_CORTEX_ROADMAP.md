@@ -1,15 +1,21 @@
 ---
-title: "Cortex Roadmap"
-section: "roadmap"
-author: "System"
-priority: "High"
-created: "2025-12-29 03:47"
-modified: "2025-12-29 05:25"
-status: "Active"
-summary: "Detailed roadmap for CORTEX semantic core and capabilities"
-tags: [cortex, roadmap, planning]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Cortex Roadmap
+section: roadmap
+bucket: 2025-12/Week-01
+author: System
+priority: High
+created: 2025-12-29 03:47
+modified: 2026-01-06 13:09
+status: Active
+summary: Detailed roadmap for CORTEX semantic core and capabilities
+tags:
+- cortex
+- roadmap
+- planning
+hashtags: []
 ---
-<!-- CONTENT_HASH: 426cb168184c332bff853093fe8af33dbf3bcb25d63dc35f3d88165d31b80b07 -->
+<!-- CONTENT_HASH: e69fd0bfd0e23f812cb448c928a61b13b046298a15da20008cbaa9c5035ade3d -->
 
 # ROADMAP: Semantic Core Phase 2–3
 

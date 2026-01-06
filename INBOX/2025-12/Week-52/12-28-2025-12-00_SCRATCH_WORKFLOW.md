@@ -1,15 +1,20 @@
 ---
-title: "Scratch Workflow"
-section: "report"
-author: "System"
-priority: "Low"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Archived"
-summary: "Scratchpad workflow notes (Restored)"
-tags: [workflow, scratch]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Scratch Workflow
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Low
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Archived
+summary: Scratchpad workflow notes (Restored)
+tags:
+- workflow
+- scratch
+hashtags: []
 ---
-<!-- CONTENT_HASH: df2f0f45af2eae9e519725770dbf9c5cd21008e24bb8f09b90e358ceca815cde -->
+<!-- CONTENT_HASH: 7c3b56836c763da991565589d722462585d52a8e6dd0264df7523dfd8ac35b49 -->
 
 # Scratch Layer Workflow (F2)
 

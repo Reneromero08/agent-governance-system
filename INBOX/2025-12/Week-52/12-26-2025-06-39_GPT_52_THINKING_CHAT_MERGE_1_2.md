@@ -1,15 +1,20 @@
 ---
-title: "♥ ♥ GPT 5.2 Thinking Chat Merge_1_2"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-26 06:39"
-modified: "2025-12-26 06:39"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: "\u2665 \u2665 GPT 5.2 Thinking Chat Merge_1_2"
+section: research
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-26 06:39
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 2b3c3ea0033a4caa11b39e9c7251b6eb543ebc3800fa3c747d64c9725883ee8f -->
+<!-- CONTENT_HASH: 69a7031be7d2306d0f359b2090ddbcab89741064bbe43842d19a471a586c9c3f -->
 
 # AI Chats Master Merge
 

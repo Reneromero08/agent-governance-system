@@ -1,15 +1,21 @@
 ---
-title: "Mechanical Indexing Report"
-section: "report"
-author: "System"
-priority: "Low"
-created: "2025-12-28 23:12"
-modified: "2025-12-28 23:12"
-status: "Complete"
-summary: "Mechanical (Regex) indexing system report (Restored)"
-tags: [indexing, regex, legacy]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Mechanical Indexing Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Low
+created: 2025-12-28 23:12
+modified: 2026-01-06 13:09
+status: Complete
+summary: Mechanical (Regex) indexing system report (Restored)
+tags:
+- indexing
+- regex
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 63808348bcec0ca3ed5b43a9f346ec0242c2eabbd9fd17174758250530b99d2a -->
+<!-- CONTENT_HASH: 87568e347d1658358cda79662a61dcb12ead7b61cda413b48865239618298972 -->
 
 # Mechanical Indexing + Instruction DB Report
 

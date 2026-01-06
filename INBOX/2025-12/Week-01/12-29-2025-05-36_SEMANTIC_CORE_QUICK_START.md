@@ -1,15 +1,21 @@
 ---
-title: "Semantic Core Quick Start"
-section: "report"
-author: "System"
-priority: "Low"
-created: "2025-12-29 05:36"
-modified: "2025-12-29 05:36"
-status: "Active"
-summary: "Quick start guide for Semantic Core (Restored)"
-tags: [semantic_core, guide, quickstart]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Semantic Core Quick Start
+section: report
+bucket: 2025-12/Week-01
+author: System
+priority: Low
+created: 2025-12-29 05:36
+modified: 2026-01-06 13:09
+status: Active
+summary: Quick start guide for Semantic Core (Restored)
+tags:
+- semantic_core
+- guide
+- quickstart
+hashtags: []
 ---
-<!-- CONTENT_HASH: 4ac5abba38f5f7bcf63430e60005050631428ecf7ee0cccf8dd846b985a2e568 -->
+<!-- CONTENT_HASH: f8b4e9409a90bb1227d52f3ee256a3001868c063225e66a542266f52c1d25db8 -->
 
 # Semantic Core - Quick Start Guide
 

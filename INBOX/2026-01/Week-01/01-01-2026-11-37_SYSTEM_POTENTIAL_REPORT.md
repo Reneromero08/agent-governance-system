@@ -1,15 +1,21 @@
 ---
-title: "System Potential Report"
-section: "report"
-author: "System"
-priority: "High"
-created: "2026-01-01 11:37"
-modified: "2026-01-01 11:37"
-status: "Draft"
-summary: "Executive summary of AGS potential and strategic value"
-tags: [strategy, potential, overview]
+uuid: 00000000-0000-0000-0000-000000000000
+title: System Potential Report
+section: report
+bucket: 2026-01/Week-01
+author: System
+priority: High
+created: 2026-01-01 11:37
+modified: 2026-01-06 13:09
+status: Draft
+summary: Executive summary of AGS potential and strategic value
+tags:
+- strategy
+- potential
+- overview
+hashtags: []
 ---
-<!-- CONTENT_HASH: 65f3a2daa834a3ce43fca2f7c1ac2d61d385d5e361049ceb0d84959860da1f48 -->
+<!-- CONTENT_HASH: ff8feec81a061814bf04148937a24b0c0f98b217be992a84d0e23b9f18235f1d -->
 
 \r\n# AGS System Potential Report
 **Date:** 2026-01-01

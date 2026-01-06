@@ -1,15 +1,21 @@
 ---
-title: "Catalytic Chat Research"
-section: "research"
-author: "Raúl R Romero"
-priority: "Medium"
-created: "2025-12-28 23:12"
-modified: "2025-12-29 02:26"
-status: "Complete"
-summary: "Complete research on Claude Code architecture, token management"
-tags: [catalytic_chat, research, architecture]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Catalytic Chat Research
+section: research
+bucket: 2025-12/Week-52
+author: "Ra\xFAl R Romero"
+priority: Medium
+created: 2025-12-28 23:12
+modified: 2026-01-06 13:09
+status: Complete
+summary: Complete research on Claude Code architecture, token management
+tags:
+- catalytic_chat
+- research
+- architecture
+hashtags: []
 ---
-<!-- CONTENT_HASH: 07b54791afdaf128944fbd6ca2b15b555272888c86129775777db64a92d4cfe3 -->
+<!-- CONTENT_HASH: 258d1148d46201987ebfdfc8d126a80181a0a92bdc3d92d9a8d7f2219c18a8e5 -->
 
 # Catalytic Chat Research Report
 

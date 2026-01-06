@@ -1,15 +1,22 @@
 ---
-title: "Lane Z Risks Report"
-section: "report"
-author: "Antigravity"
-priority: "High"
-created: "2026-01-02 18:48"
-modified: "2026-01-02 18:48"
-status: "Draft"
-summary: "Risk analysis for Lane Z CAS integration and Z.3 roadmap"
-tags: [lane-z, risks, cas, integration]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Lane Z Risks Report
+section: report
+bucket: 2026-01/Week-01
+author: Antigravity
+priority: High
+created: 2026-01-02 18:48
+modified: 2026-01-06 13:09
+status: Draft
+summary: Risk analysis for Lane Z CAS integration and Z.3 roadmap
+tags:
+- lane-z
+- risks
+- cas
+- integration
+hashtags: []
 ---
-<!-- CONTENT_HASH: 9ae9babf0eb7f64d9e15dc8dd4dd134b88f7da95065f82cce823b1cbb89645e7 -->
+<!-- CONTENT_HASH: 553a3b26348941ba325facafcf1c26a7803f3e7f850cd1c34624109d2f183a7b -->
 
 # Lane Z Risks Report
 

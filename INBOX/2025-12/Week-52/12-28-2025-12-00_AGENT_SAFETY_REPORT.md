@@ -1,15 +1,20 @@
 ---
-title: "Agent Safety Report"
-section: "report"
-author: "System"
-priority: "High"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Complete"
-summary: "Report on agent safety protocols (Restored)"
-tags: [safety, agent]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Agent Safety Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: High
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Complete
+summary: Report on agent safety protocols (Restored)
+tags:
+- safety
+- agent
+hashtags: []
 ---
-<!-- CONTENT_HASH: ecda6dca37c3e8b62382cc1ea506c1711dda005f0a4260130fd71aa02f6c63e5 -->
+<!-- CONTENT_HASH: 3026612f89931c02a9a702013ba43ecc240e0adbfa04d1464a36868a2eec7685 -->
 
 # Agent Safety & Failure Handling Report
 

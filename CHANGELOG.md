@@ -33,6 +33,12 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Receipts**: All operations emit receipts to `LAW/CONTRACTS/_runs/canonical-doc-enforcer/`
   - **Demonstration**: Fixed `MEMORY/ARCHIVE/roadmaps/AGS_ROADMAP_3.3.18.md` → `01-05-2026-12-45_AGS_ROADMAP_3_3_18.md` with full metadata
   - **UUID Clarification**: Updated DOCUMENT_POLICY.md to clarify that `uuid` field is the **agent session UUID** (which agent created the document), not a document ID. For legacy documents where the agent session is unknown, the skill uses sentinel value `"00000000-0000-0000-0000-000000000000"`.
+  - **Batch Canonicalization**: Applied canonical format to ~140 legacy documents across INBOX/, MEMORY/ARCHIVE/, and LAW/CONTRACTS/_runs/REPORTS/
+    - Added sentinel UUID `"00000000-0000-0000-0000-000000000000"` to documents with unknown agent sessions
+    - Added missing YAML fields: `bucket`, `hashtags`, `uuid`, `summary`
+    - Computed and inserted SHA256 content hashes
+    - Strictly scoped to reports and archives (Verified: No System/Canon/Navigation files touched)
+    - Receipt: `LAW/CONTRACTS/_runs/canonical-doc-enforcer/fix_receipt.json`
   - **Status**: ✅ COMPLETE - Repo-wide canonical format enforcement active
 
 ## [3.3.30] - 2026-01-06

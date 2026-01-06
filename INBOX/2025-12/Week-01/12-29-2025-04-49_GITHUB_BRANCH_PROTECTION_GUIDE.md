@@ -1,15 +1,21 @@
 ---
-title: "GitHub Branch Protection Guide"
-section: "guide"
-author: "Antigravity"
-priority: "High"
-created: "2025-12-29 04:49"
-modified: "2025-12-29 05:33"
-status: "Active"
-summary: "Step-by-step setup for GitHub branch protection rules"
-tags: [github, security, guide]
+uuid: 00000000-0000-0000-0000-000000000000
+title: GitHub Branch Protection Guide
+section: guide
+bucket: 2025-12/Week-01
+author: Antigravity
+priority: High
+created: 2025-12-29 04:49
+modified: 2026-01-06 13:09
+status: Active
+summary: Step-by-step setup for GitHub branch protection rules
+tags:
+- github
+- security
+- guide
+hashtags: []
 ---
-<!-- CONTENT_HASH: 07e8f211f8cd87e4a2701c8c56c236a56dafd79e9d890951e39d809059940877 -->
+<!-- CONTENT_HASH: 8a9d2bed1c3991348cbca9e27f4b3359ef777ef1dca4db8d329af72e33f7196b -->
 
 # GitHub Branch Protection Setup
 

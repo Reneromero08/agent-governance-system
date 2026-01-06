@@ -1,15 +1,21 @@
 ---
-title: "Test Failures Report"
-section: "report"
-author: "System"
-priority: "High"
-created: "2025-12-27 22:18"
-modified: "2025-12-28 23:12"
-status: "Active"
-summary: "Test failures report (Restored)"
-tags: [tests, failures, report]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Test Failures Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: High
+created: 2025-12-27 22:18
+modified: 2026-01-06 13:09
+status: Active
+summary: Test failures report (Restored)
+tags:
+- tests
+- failures
+- report
+hashtags: []
 ---
-<!-- CONTENT_HASH: be36bfbe0ce37ca71872880235c9417f220310238e38e90f24cfc70783e93cd0 -->
+<!-- CONTENT_HASH: df0d219b0ad395093b73efefebf53ba763bf597f21cbca673e76c5a08c3977b3 -->
 
 # Test Failures Report
 

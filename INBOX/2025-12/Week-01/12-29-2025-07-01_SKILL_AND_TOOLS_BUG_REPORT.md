@@ -1,15 +1,20 @@
 ---
-title: "SKILL and TOOLS BUG_REPORT"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 07:01"
-modified: "2025-12-29 07:01"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: SKILL and TOOLS BUG_REPORT
+section: research
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 07:01
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 6354d774c99a9a57a3f842a5789033f1937b81c471ba21e0167af1bc6421aea8 -->
+<!-- CONTENT_HASH: 202ea257d31310e9f5514ff310fb42fde4f4e1b186486ca00e1399ad147f8a9f -->
 
 # Bug Report: SKILLS and TOOLS Folders
 

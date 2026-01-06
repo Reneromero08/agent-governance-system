@@ -1,15 +1,20 @@
 ---
-title: "Integration Report"
-section: "report"
-author: "System"
-priority: "Medium"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Complete"
-summary: "System integration status report (Restored)"
-tags: [integration, status]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Integration Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Complete
+summary: System integration status report (Restored)
+tags:
+- integration
+- status
+hashtags: []
 ---
-<!-- CONTENT_HASH: 525e2f291f462254a7b4852daf2756c7c8eafd60c5ea4111e2baa44558b1a2b1 -->
+<!-- CONTENT_HASH: 831b73addae2e64401f4c37fd6bd6579f9d72b360f15afabe1943541fa5fcc26 -->
 
 # Agent Pipeline Integration Report
 

@@ -1,15 +1,20 @@
 ---
-title: "Dispatcher Test Report"
-section: "report"
-author: "System"
-priority: "Medium"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Complete"
-summary: "Dispatcher subsystem test results (Restored)"
-tags: [dispatcher, test]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Dispatcher Test Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Complete
+summary: Dispatcher subsystem test results (Restored)
+tags:
+- dispatcher
+- test
+hashtags: []
 ---
-<!-- CONTENT_HASH: bdeaa94939827cc3ca716e53ef9410c7531938dc388cc77d223c0f88c88a88cc -->
+<!-- CONTENT_HASH: 492ae8a3199f4364fbffe0989a0940298d12fb54a3973b541c7719b2eb1065c5 -->
 
 # Dispatcher Workflow Test Report
 

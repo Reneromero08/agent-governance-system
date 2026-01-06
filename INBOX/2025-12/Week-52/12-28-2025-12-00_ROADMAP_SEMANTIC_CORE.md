@@ -1,15 +1,20 @@
 ---
-title: "Roadmap Semantic Core"
-section: "roadmap"
-author: "System"
-priority: "High"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Active"
-summary: "Roadmap for semantic core development (Restored)"
-tags: [semantic_core, roadmap]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Roadmap Semantic Core
+section: roadmap
+bucket: 2025-12/Week-52
+author: System
+priority: High
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Active
+summary: Roadmap for semantic core development (Restored)
+tags:
+- semantic_core
+- roadmap
+hashtags: []
 ---
-<!-- CONTENT_HASH: 5d3fb4a418d586bfad9d6b36e30c2fe2e25fac37d0ffb41be98630be057e91b6 -->
+<!-- CONTENT_HASH: 197c02b5bf4b02c39a490bba00e180ee071d26f92568dcdf43dbad3701ac3e49 -->
 
 # Semantic Core Implementation Roadmap
 

@@ -1,15 +1,21 @@
 ---
-title: "Cortex Quick Reference"
-section: "guide"
-author: "System"
-priority: "Medium"
-created: "2025-12-28 12:00"
-modified: "2025-12-28 12:00"
-status: "Active"
-summary: "Quick reference for Cortex tools (Restored)"
-tags: [cortex, reference, guide]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Cortex Quick Reference
+section: guide
+bucket: 2025-12/Week-52
+author: System
+priority: Medium
+created: 2025-12-28 12:00
+modified: 2026-01-06 13:09
+status: Active
+summary: Quick reference for Cortex tools (Restored)
+tags:
+- cortex
+- reference
+- guide
+hashtags: []
 ---
-<!-- CONTENT_HASH: aea7e2df1f61aa08ef940fb028a212a2927c26edc1af38c06dd06ac04540acb7 -->
+<!-- CONTENT_HASH: 76bb3c06ba4683fb7236cb3cda25c5fa735e744d3b60d5eb659c137070e0c3ad -->
 
 # Cortex Quick Reference for Agents
 

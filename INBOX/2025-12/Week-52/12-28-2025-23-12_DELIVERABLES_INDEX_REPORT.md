@@ -1,15 +1,21 @@
 ---
-title: "Deliverables Index Report"
-section: "report"
-author: "System"
-priority: "Low"
-created: "2025-12-28 23:12"
-modified: "2025-12-28 23:12"
-status: "Archived"
-summary: "Index of deliverables (Restored)"
-tags: [deliverables, index, archive]
+uuid: 00000000-0000-0000-0000-000000000000
+title: Deliverables Index Report
+section: report
+bucket: 2025-12/Week-52
+author: System
+priority: Low
+created: 2025-12-28 23:12
+modified: 2026-01-06 13:09
+status: Archived
+summary: Index of deliverables (Restored)
+tags:
+- deliverables
+- index
+- archive
+hashtags: []
 ---
-<!-- CONTENT_HASH: 983053c647131350bbcebffe85d08ba0cf36e47b89a08fbae02e922f969afb9a -->
+<!-- CONTENT_HASH: 446905ed2dc5c702daae1476a50c536a1aeac10dfdacd794898b05018b671b29 -->
 
 # CORTEX Semantic Core - Phase 1 Technical Index
 

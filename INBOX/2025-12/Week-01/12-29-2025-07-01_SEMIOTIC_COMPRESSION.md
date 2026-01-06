@@ -1,15 +1,20 @@
 ---
-title: "SEMIOTIC_COMPRESSION"
-section: "research"
-author: "System"
-priority: "Medium"
-created: "2025-12-29 07:01"
-modified: "2025-12-29 07:01"
-status: "Active"
-summary: "Legacy research document migrated to canon format"
-tags: ["research", "legacy"]
+uuid: 00000000-0000-0000-0000-000000000000
+title: SEMIOTIC_COMPRESSION
+section: research
+bucket: 2025-12/Week-01
+author: System
+priority: Medium
+created: 2025-12-29 07:01
+modified: 2026-01-06 13:09
+status: Active
+summary: Legacy research document migrated to canon format
+tags:
+- research
+- legacy
+hashtags: []
 ---
-<!-- CONTENT_HASH: 07346cf1f6f9ea82f4ed2a0b6cc775eec23f1a1bac432f53e583c806c670199b -->
+<!-- CONTENT_HASH: 89b7612e226e986446d1acce66d7c56d6489ebd0da999561c59556bfb9a6b888 -->
 
 # Semiotic Compression Layer (SCL)
 
