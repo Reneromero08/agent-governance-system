@@ -27,6 +27,11 @@ This file lists decisions that are considered invariant.  Changing an invariant 
 - **[INV-013] Declared Truth** - Every system-generated artifact MUST be declared in a hash manifest (`OUTPUT_HASHES.json`). If it is not hashed, it is not truth.
 - **[INV-014] Disposable Space** - Files under `_tmp/` directories (Catalytic domains) are strictly for scratch-work. They must never be used as a source of truth for verification.
 - **[INV-015] Narrative Independence** - Verification Success (`STATUS: success`) is bound only to artifact integrity, not to execution logs, reasoning traces, or chat history.
+- **[INV-016] No Verification Without Execution** - An agent may not claim a task is complete unless it executed the required verification commands for that task (from `LAW/CANON/VERIFICATION_PROTOCOL_CANON.md`).
+- **[INV-017] Proof Must Be Recorded Verbatim** - A claim is not verified unless proof is recorded verbatim for: `git status`, every required test command, and every required audit command. Summaries are not proof.
+- **[INV-018] Tests Are Hard Gates** - A "test" that detects violations while still passing is invalid as a completion gate. If a forbidden condition exists, the gate must fail. Scanner-only "pass with findings" gates are forbidden.
+- **[INV-019] Deterministic Stop Conditions** - If any mandatory verification step fails, the agent must: (1) fix within scope, (2) re-run the same commands, (3) record new outputs, (4) repeat until pass. If the agent cannot fix within scope, it must stop and report BLOCKED with a precise reason.
+- **[INV-020] Clean-State Discipline** - Verification must be run from a clean state for the scoped paths. If unrelated diffs exist, the agent must stop and report the diffs, revert them, or explicitly scope them into the task.
 
 ## Changing invariants
 
