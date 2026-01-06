@@ -19,10 +19,32 @@ META_DIR = Path("meta")
 SYMBOL_REGISTRY_PATH = META_DIR / "SYMBOL_REGISTRY.json"
 FILE_INDEX_PATH = META_DIR / "FILE_INDEX.json"
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 class SemioticLayer:
-    def __init__(self):
+    def __init__(self, writer: Optional[GuardedWriter] = None):
         self.registry = {}
-        META_DIR.mkdir(exist_ok=True)
+        self.writer = writer
+        if self.writer is None:
+             # Lazy init default writer if we are running in an env that supports it
+            repo_root = Path(__file__).resolve().parents[3]
+            self.writer = GuardedWriter(
+                project_root=repo_root,
+                durable_roots=[
+                    "LAW/CONTRACTS/_runs",
+                    "NAVIGATION/CORTEX/_generated",
+                    "NAVIGATION/CORTEX/meta"
+                ]
+            )
+            self.writer.open_commit_gate()
+
+        self.writer.mkdir_durable("NAVIGATION/CORTEX/meta")
         self._load_registry()
 
     def _load_registry(self):
@@ -117,11 +139,24 @@ class SemioticLayer:
         return expanded
 
     def _save_registry(self):
-        with open(SYMBOL_REGISTRY_PATH, 'w', encoding='utf-8') as f:
-            json.dump(self.registry, f, indent=2, sort_keys=True)
+        self.writer.write_durable(
+            "NAVIGATION/CORTEX/meta/SYMBOL_REGISTRY.json",
+            json.dumps(self.registry, indent=2, sort_keys=True)
+        )
 
 def main():
-    scl = SemioticLayer()
+    repo_root = Path(__file__).resolve().parents[3]
+    writer = GuardedWriter(
+        project_root=repo_root,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "NAVIGATION/CORTEX/meta"
+        ]
+    )
+    writer.open_commit_gate()
+
+    scl = SemioticLayer(writer=writer)
     
     import argparse
     parser = argparse.ArgumentParser(description="Semiotic Compression Layer CLI")

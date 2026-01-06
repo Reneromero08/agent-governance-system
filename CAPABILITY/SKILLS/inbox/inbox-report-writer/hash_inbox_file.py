@@ -7,7 +7,13 @@ import hashlib
 import re
 import sys
 from pathlib import Path
-from typing import Optional, Tuple
+from typing import Optional, Tuple, Any
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 
 def compute_content_hash(content: str) -> str:
@@ -33,7 +39,7 @@ def compute_content_hash(content: str) -> str:
     return hashlib.sha256(cleaned_content.encode('utf-8')).hexdigest()
 
 
-def insert_or_update_hash(filepath: Path) -> Tuple[bool, Optional[str], str]:
+def insert_or_update_hash(filepath: Path, writer: Any = None) -> Tuple[bool, Optional[str], str]:
     """
     Insert or update the CONTENT_HASH comment in an INBOX file.
     
@@ -93,7 +99,10 @@ def insert_or_update_hash(filepath: Path) -> Tuple[bool, Optional[str], str]:
         new_content = f'<!-- CONTENT_HASH: {new_hash} -->\n\n{clean_content}'
     
     # Write updated content
-    filepath.write_text(new_content, encoding='utf-8')
+    # Write updated content
+    if not writer:
+        raise RuntimeError("GuardedWriter required")
+    writer.write_durable(str(filepath), new_content)
     
     return True, old_hash, new_hash
 
@@ -129,6 +138,16 @@ def verify_hash(filepath: Path) -> Tuple[bool, Optional[str], str]:
 
 def main():
     """CLI entry point."""
+    # Instantiate GuardedWriter for CLI usage
+    writer = None
+    if GuardedWriter:
+        # Assume PROJECT_ROOT is resolvable or passed?
+        # This script might be run standalone.
+        # Let's try to resolve project root.
+        repo_root = Path(__file__).resolve().parents[4]
+        writer = GuardedWriter(repo_root, durable_roots=["INBOX", "LAW/CONTRACTS/_runs"])
+        writer.open_commit_gate()
+
     if len(sys.argv) < 2:
         print("Usage: python hash_inbox_file.py <command> <file>")
         print("Commands:")
@@ -144,7 +163,7 @@ def main():
             sys.exit(1)
         
         filepath = Path(sys.argv[2])
-        changed, old_hash, new_hash = insert_or_update_hash(filepath)
+        changed, old_hash, new_hash = insert_or_update_hash(filepath, writer)
         
         if changed:
             if old_hash:

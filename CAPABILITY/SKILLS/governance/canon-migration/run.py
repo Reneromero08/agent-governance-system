@@ -20,6 +20,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 # Version migration functions
 MIGRATIONS: Dict[str, callable] = {}
 
@@ -62,7 +68,7 @@ def find_migration_path(from_ver: str, to_ver: str) -> List[str]:
     return []
 
 
-def apply_migrations(pack_dir: Path, target_version: str) -> Tuple[bool, List[str], List[str]]:
+def apply_migrations(pack_dir: Path, target_version: str, writer: Any) -> Tuple[bool, List[str], List[str]]:
     """
     Apply migrations to bring a pack to the target version.
     
@@ -91,7 +97,7 @@ def apply_migrations(pack_dir: Path, target_version: str) -> Tuple[bool, List[st
     pack_info = json.loads(pack_info_path.read_text())
     pack_info["canon_version"] = target_version
     pack_info["migrated_from"] = source_version
-    pack_info_path.write_text(json.dumps(pack_info, indent=2, sort_keys=True) + "\n")
+    writer.write_durable(str(pack_info_path), json.dumps(pack_info, indent=2, sort_keys=True) + "\n")
     
     log.append(f"Updated pack version from {source_version} to {target_version}")
     return True, log, warnings
@@ -117,7 +123,13 @@ def main(input_path: Path, output_path: Path) -> int:
             "error": f"Pack not found: {pack_path}",
         }
     else:
-        success, log, warnings = apply_migrations(pack_path, target_version)
+        if not GuardedWriter:
+            print("Error: GuardedWriter not available")
+            return 1
+            
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
+        writer.open_commit_gate()
+        success, log, warnings = apply_migrations(pack_path, target_version, writer)
         result = {
             **payload,
             "success": success,
@@ -125,8 +137,18 @@ def main(input_path: Path, output_path: Path) -> int:
             "warnings": warnings,
         }
     
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    # Needs writer for output too
+    if not GuardedWriter:
+        # Fallback if no writer (should have failed earlier)
+        print("Error: GuardedWriter not available for output")
+        return 1
+        
+    if 'writer' not in locals():
+         writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
+         writer.open_commit_gate()
+
+    writer.mkdir_durable(str(output_path.parent))
+    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     
     # Always return 0 if we produced valid output - fixtures validate correctness
     print("Migration skill completed")

@@ -48,19 +48,18 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     }
 
     # Use GuardedWriter for writes if available, otherwise fallback
-    if writer:
-        try:
-            # Convert output_path to relative path for GuardedWriter
-            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
-            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
-            writer.write_tmp(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
-        except ValueError:
-            # If path is not relative to PROJECT_ROOT, fallback to direct write
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
-    else:
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
+    # Always use GuardedWriter for writes to enforce firewall
+    writer = writer or GuardedWriter(project_root=PROJECT_ROOT)
+
+    try:
+        # Convert output_path to relative path for GuardedWriter
+        rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
+        writer.mkdir_tmp(str(Path(rel_output_path).parent))
+        writer.write_tmp(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
+    except ValueError:
+        # If path is not relative to PROJECT_ROOT, this is a violation of the firewall contract
+        print(f"Error: Output path {output_path} is outside project root")
+        return 1
     print("[skill] File analyzer skill executed successfully")
     return 0
 

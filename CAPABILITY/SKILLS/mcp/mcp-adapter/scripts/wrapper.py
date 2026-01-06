@@ -12,6 +12,11 @@ import time
 import os
 from pathlib import Path
 from typing import Dict, Any, Tuple
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 # Adding REPO_ROOT to path to import primitives if needed
 REPO_ROOT = Path(__file__).resolve().parents[4]
@@ -104,8 +109,22 @@ def run_mcp(config_path: str, output_path: str):
 
     # Write output
     out_file = Path(output_path)
-    out_file.parent.mkdir(parents=True, exist_ok=True)
-    out_file.write_bytes(canonical_json_bytes(result_artifact))
+    # Use GuardedWriter if available (it should be in this environment)
+    if GuardedWriter:
+        try:
+            writer = GuardedWriter(REPO_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+            writer.open_commit_gate()
+            writer.mkdir_durable(str(out_file.parent))
+            # write_durable expects string, so we might need to decode if we were writing raw bytes.
+            # But the artifact is JSON, so we can pass it as string.
+            writer.write_durable(str(out_file), json.dumps(result_artifact, sort_keys=True, separators=(",", ":"), ensure_ascii=False))
+        except Exception as e:
+            fail("WRITE_ERROR", f"Guarded write failed: {e}")
+    else:
+        # Fallback only if absolutely necessary, but policy demands GuardedWriter.
+        # However, wrapper might be run in isolation? 
+        # Refactor goal says eliminate raw writes. So we strictly prefer GuardedWriter.
+        fail("GUARD_MISSING", "GuardedWriter not available")
 
 if __name__ == "__main__":
     if len(sys.argv) != 3:

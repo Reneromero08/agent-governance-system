@@ -32,19 +32,19 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     output_data = json.dumps(payload, indent=2, sort_keys=True)
     
     # Use GuardedWriter for writes if available, otherwise fallback
-    if writer:
-        try:
-            # Convert output_path to relative path for GuardedWriter
-            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
-            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
-            writer.write_tmp(rel_output_path, output_data)
-        except ValueError:
-            # If path is not relative to PROJECT_ROOT, fallback to direct write
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(output_data)
-    else:
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(output_data)
+    # Always use GuardedWriter for writes to enforce firewall
+    writer = writer or GuardedWriter(project_root=PROJECT_ROOT)
+    
+    try:
+        # Convert output_path to relative path for GuardedWriter
+        rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
+        writer.mkdir_tmp(str(Path(rel_output_path).parent))
+        writer.write_tmp(rel_output_path, output_data)
+    except ValueError:
+        # If path is not relative to PROJECT_ROOT, this is a violation of the firewall contract
+        # We must fail closed rather than falling back to raw writes
+        print(f"Error: Output path {output_path} is outside project root")
+        return 1
     return 0
 
 

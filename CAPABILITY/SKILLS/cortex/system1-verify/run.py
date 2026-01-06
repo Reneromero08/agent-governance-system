@@ -18,6 +18,12 @@ from pathlib import Path
 
 # Add project root to path for absolute resolution
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
 
 # Directories that SHOULD be indexed per ADR-027 and build_system1.py
@@ -155,10 +161,15 @@ if __name__ == "__main__":
         
         success = verify_system1()
         
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        import json
-        with open(output_path, "w") as f:
-            json.dump({"success": success, "description": "basic test"}, f)
+        if not GuardedWriter:
+            print("Error: GuardedWriter not available")
+            sys.exit(1)
+
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
+        writer.open_commit_gate()
+        
+        writer.mkdir_durable(str(output_path.parent))
+        writer.write_durable(str(output_path), json.dumps({"success": success, "description": "basic test"}))
             
         sys.exit(0 if success else 1)
 

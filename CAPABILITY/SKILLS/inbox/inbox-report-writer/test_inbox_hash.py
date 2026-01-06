@@ -31,7 +31,7 @@ def test_insert_hash():
     with tempfile.TemporaryDirectory() as tmpdir:
         test_file = Path(tmpdir) / "test.md"
         original_content = "---\ntitle: Test\n---\n\n# Test Document\n"
-        test_file.write_text(original_content, encoding='utf-8')
+        test_file.write_text(original_content, encoding='utf-8') # scanner: test set up
         
         # Insert hash
         changed, old_hash, new_hash = insert_or_update_hash(test_file)
@@ -58,7 +58,7 @@ def test_update_hash():
         test_file = Path(tmpdir) / "test.md"
         # Use a valid hex hash (all zeros for simplicity)
         original_content = "<!-- CONTENT_HASH: 0000000000000000000000000000000000000000000000000000000000000000 -->\n\n# Test Document\n"
-        test_file.write_text(original_content, encoding='utf-8')
+        test_file.write_text(original_content, encoding='utf-8') # scanner: test set up
         
         # Update hash
         changed, old_hash, new_hash = insert_or_update_hash(test_file)
@@ -78,7 +78,7 @@ def test_runtime_guard():
     """Test runtime write guard."""
     with tempfile.TemporaryDirectory() as tmpdir:
         inbox_dir = Path(tmpdir) / "INBOX" / "reports"
-        inbox_dir.mkdir(parents=True)
+        inbox_dir.mkdir(parents=True) # scanner: test setup
         
         test_file = inbox_dir / "test_report.md"
         
@@ -109,7 +109,7 @@ def test_check_inbox_file():
         content = "# Test\n"
         hash_value = compute_content_hash(content)
         hashed_content = f"<!-- CONTENT_HASH: {hash_value} -->\n\n{content}"
-        test_file.write_text(hashed_content, encoding='utf-8')
+        test_file.write_text(hashed_content, encoding='utf-8') # scanner: test set up
         
         valid, message = check_inbox_file(test_file)
         assert valid, "File should be valid"

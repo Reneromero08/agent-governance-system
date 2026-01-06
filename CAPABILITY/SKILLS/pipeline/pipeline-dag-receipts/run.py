@@ -10,6 +10,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat  # type: ignore
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 
 def main(input_path: Path, output_path: Path) -> int:
     if not ensure_canon_compat(Path(__file__).resolve().parent):
@@ -25,8 +31,15 @@ def main(input_path: Path, output_path: Path) -> int:
         "code": "NOT_IMPLEMENTED",
         "details": {"message": "Use repo implementation + tests; skill runner is a governance placeholder."},
     }
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(out, sort_keys=True, separators=(",", ":")), encoding="utf-8")
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer.open_commit_gate()
+
+    writer.mkdir_durable(str(output_path.parent))
+    writer.write_durable(str(output_path), json.dumps(out, sort_keys=True, separators=(",", ":")))
     return 0
 
 

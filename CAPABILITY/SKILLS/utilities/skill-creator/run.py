@@ -37,8 +37,19 @@ def main(input_path: Path, output_path: Path) -> int:
         "task_id": task_id
     }
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(output_data, indent=2, sort_keys=True))
+    try:
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+        
+        rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
+        writer.mkdir_tmp(str(Path(rel_output_path).parent))
+        writer.write_tmp(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
+    except ImportError:
+        print("GuardedWriter not found")
+        return 1
+    except Exception as e:
+        print(f"Write failed: {e}")
+        return 1
     print("[skill] Skill creator skill executed successfully")
     return 0
 

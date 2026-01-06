@@ -6,11 +6,18 @@ Automatically updates INBOX/INBOX.md with current file listings and metadata.
 import sys
 from pathlib import Path
 from datetime import datetime
+from typing import Any
 
 # Add parent directory to path for imports
 sys.path.insert(0, str(Path(__file__).parent))
 from hash_inbox_file import verify_hash
 from generate_inbox_ledger import extract_frontmatter, list_inbox_markdown_files
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 
 def get_file_entry(filepath: Path, inbox_root: Path) -> dict:
@@ -124,7 +131,7 @@ def generate_inbox_index(inbox_path: Path = None) -> str:
     return '\n'.join(lines)
 
 
-def update_inbox_index(inbox_path: Path = None, quiet: bool = False) -> bool:
+def update_inbox_index(inbox_path: Path = None, quiet: bool = False, writer: Any = None) -> bool:
     """
     Update INBOX/INBOX.md with current file listings.
     
@@ -140,11 +147,15 @@ def update_inbox_index(inbox_path: Path = None, quiet: bool = False) -> bool:
     new_content = generate_inbox_index(inbox_path)
     
     # Write to file
-    inbox_md.write_text(new_content, encoding='utf-8')
+    # Write to file
+    if not writer:
+         raise RuntimeError("GuardedWriter required")
+    
+    writer.write_durable(str(inbox_md), new_content)
     
     # Now update the hash
     from hash_inbox_file import insert_or_update_hash
-    changed, old_hash, new_hash = insert_or_update_hash(inbox_md)
+    changed, old_hash, new_hash = insert_or_update_hash(inbox_md, writer)
     
     if not quiet:
         if changed:
@@ -169,7 +180,13 @@ def main():
     args = parser.parse_args()
     
     try:
-        update_inbox_index(args.inbox, args.quiet)
+        writer = None
+        if GuardedWriter:
+             repo_root = Path(__file__).resolve().parents[4]
+             writer = GuardedWriter(repo_root, durable_roots=["INBOX", "LAW/CONTRACTS/_runs"])
+             writer.open_commit_gate()
+
+        update_inbox_index(args.inbox, args.quiet, writer)
         return 0
     except Exception as e:
         if not args.quiet:

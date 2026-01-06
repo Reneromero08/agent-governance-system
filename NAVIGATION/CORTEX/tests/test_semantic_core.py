@@ -185,11 +185,16 @@ def test_schema_creation():
     from NAVIGATION.CORTEX.semantic.vector_indexer import VectorIndexer
 
     # Create temporary database
-    temp_dir = Path(tempfile.mkdtemp())
-    try:
+    with tempfile.TemporaryDirectory() as temp_dir_str:
+        temp_dir = Path(temp_dir_str)
         db_path = temp_dir / "test.db"
 
-        indexer = VectorIndexer(db_path=db_path)
+        # Setup GuardedWriter for test
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        writer = GuardedWriter(project_root=temp_dir, durable_roots=[str(temp_dir)])
+        writer.open_commit_gate()
+
+        indexer = VectorIndexer(db_path=db_path, writer=writer)
 
         # Check tables exist
         cursor = indexer.conn.execute("""
@@ -211,18 +216,20 @@ def test_schema_creation():
 
         indexer.close()
 
-    finally:
-        shutil.rmtree(temp_dir)
-
 
 @cortex_test("Vector indexing")
 def test_vector_indexing():
     from NAVIGATION.CORTEX.semantic.vector_indexer import VectorIndexer
     import hashlib
 
-    temp_dir = Path(tempfile.mkdtemp())
-    try:
+    with tempfile.TemporaryDirectory() as temp_dir_str:
+        temp_dir = Path(temp_dir_str)
         db_path = temp_dir / "test.db"
+
+        # Setup GuardedWriter for test
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        writer = GuardedWriter(project_root=temp_dir, durable_roots=[str(temp_dir)])
+        writer.open_commit_gate()
 
         # Create database and add test section
         conn = sqlite3.connect(str(db_path))
@@ -246,7 +253,7 @@ def test_vector_indexing():
         conn.close()
 
         # Index it
-        indexer = VectorIndexer(db_path=db_path)
+        indexer = VectorIndexer(db_path=db_path, writer=writer)
         success = indexer.index_section(test_hash, test_content)
 
         assert success, "Indexing should succeed"
@@ -265,9 +272,6 @@ def test_vector_indexing():
 
         indexer.close()
 
-    finally:
-        shutil.rmtree(temp_dir)
-
 
 @cortex_test("Semantic search")
 def test_semantic_search():
@@ -275,9 +279,14 @@ def test_semantic_search():
     from NAVIGATION.CORTEX.semantic.semantic_search import SemanticSearch
     import hashlib
 
-    temp_dir = Path(tempfile.mkdtemp())
-    try:
+    with tempfile.TemporaryDirectory() as temp_dir_str:
+        temp_dir = Path(temp_dir_str)
         db_path = temp_dir / "test.db"
+
+        # Setup GuardedWriter for test
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        writer = GuardedWriter(project_root=temp_dir, durable_roots=[str(temp_dir)])
+        writer.open_commit_gate()
 
         # Create database with test sections
         conn = sqlite3.connect(str(db_path))
@@ -308,7 +317,7 @@ def test_semantic_search():
         conn.close()
 
         # Index all sections
-        indexer = VectorIndexer(db_path=db_path)
+        indexer = VectorIndexer(db_path=db_path, writer=writer)
         stats = indexer.index_all(verbose=False)
         assert stats['indexed'] == 3, f"Should index 3 sections, got {stats['indexed']}"
         indexer.close()
@@ -328,9 +337,6 @@ def test_semantic_search():
         print(f"    Top result: {results[0].section_name} (similarity: {results[0].similarity:.3f})")
 
         searcher.close()
-
-    finally:
-        shutil.rmtree(temp_dir)
 
 
 @cortex_test("Empty text handling")

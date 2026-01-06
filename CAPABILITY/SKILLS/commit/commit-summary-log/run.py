@@ -12,6 +12,11 @@ if str(PROJECT_ROOT) not in sys.path:
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 DEFAULT_LOG_PATH = "LAW/CONTRACTS/_runs/commit_logs/commit_summaries.jsonl"
 ALLOWED_TYPES = {"feat", "fix", "docs", "chore", "refactor", "test"}
 
@@ -20,9 +25,9 @@ def load_json(path: Path) -> Dict[str, Any]:
     return json.loads(path.read_text(encoding="utf-8"))
 
 
-def write_json(path: Path, payload: Dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True), encoding="utf-8")
+def write_json(path: Path, payload: Dict[str, Any], writer: Any) -> None:
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), json.dumps(payload, indent=2, sort_keys=True))
 
 
 def run_git(args: List[str]) -> str:
@@ -64,10 +69,17 @@ def assert_allowed_log_path(log_path: Path) -> None:
         raise ValueError("log_path must be under LAW/CONTRACTS/_runs/")
 
 
-def append_jsonl(path: Path, entry: Dict[str, Any]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    with path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(entry, ensure_ascii=True) + "\n")
+def append_jsonl(path: Path, entry: Dict[str, Any], writer: Any) -> None:
+    # Use GuardedWriter for atomic write (simulating append)
+    content = ""
+    if path.exists():
+        content = path.read_text(encoding="utf-8")
+        
+    line = json.dumps(entry, ensure_ascii=True)
+    content += line + "\n"
+    
+    writer.mkdir_durable(str(path.parent))
+    writer.write_durable(str(path), content)
 
 
 def normalize_commit_line_part(value: str) -> str:
@@ -142,6 +154,21 @@ def main() -> int:
 
     action = str(payload.get("action", "log")).strip().lower()
 
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "MEMORY/LLM_PACKER/_packs",
+            "BUILD"
+        ]
+    )
+    writer.open_commit_gate()
+
     if action == "log":
         mode = str(payload.get("mode", "git")).strip().lower()
         append = bool(payload.get("append", True))
@@ -164,7 +191,7 @@ def main() -> int:
             raise ValueError("mode must be 'git' or 'manual'")
 
         if append:
-            append_jsonl(log_path, entry)
+            append_jsonl(log_path, entry, writer)
 
         result = {
             "ok": True,
@@ -172,7 +199,7 @@ def main() -> int:
             "log_path": str(Path(log_path_str).as_posix()),
             "entry": entry,
         }
-        write_json(output_path, result)
+        write_json(output_path, result, writer)
         return 0
 
     if action == "template":
@@ -192,7 +219,7 @@ def main() -> int:
                 warnings.append("staged changes detected but CANON/CHANGELOG.md is not staged")
 
         message = build_commit_message(type_=str(type_), scope=str(scope), subject=str(subject), normalize=normalize)
-        write_json(output_path, {"ok": True, "message": message, "warnings": warnings})
+        write_json(output_path, {"ok": True, "message": message, "warnings": warnings}, writer)
         return 0
 
     raise ValueError("action must be 'log' or 'template'")

@@ -10,6 +10,15 @@ import json
 import sys
 from pathlib import Path
 from typing import Any, Dict, List, Tuple
+# Add repo root to path for imports
+PROJECT_ROOT_GUESS = Path(__file__).resolve().parents[4]
+if str(PROJECT_ROOT_GUESS) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT_GUESS))
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 # Add parent for imports
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
@@ -234,8 +243,19 @@ def main(input_path: Path, output_path: Path) -> int:
             "stats": stats,
         }
     
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    try:
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        PROJECT_ROOT = Path(__file__).resolve().parents[4]
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+        
+        rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
+        # Ensure parent exists
+        writer.mkdir_tmp(str(Path(rel_output_path).parent))
+        writer.write_tmp(rel_output_path, json.dumps(result, indent=2, sort_keys=True))
+    except Exception as e:
+        print(f"Failed to use GuardedWriter: {e}")
+        # Fail closed
+        return 1
     
     print("Pack validation completed")
     return 0

@@ -24,6 +24,12 @@ PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
 PACKS_DIR = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
@@ -182,8 +188,23 @@ def main(input_path: Path, output_path: Path) -> int:
         "escape_check_passed": len(escaped) == 0,
     }
     
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2, sort_keys=True))
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "MEMORY/LLM_PACKER/_packs",
+            "BUILD"
+        ]
+    )
+    writer.open_commit_gate()
+    
+    writer.mkdir_durable(str(output_path.parent))
+    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     
     if escaped:
         print(f"Found {len(escaped)} escaped artifact(s):")

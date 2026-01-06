@@ -20,6 +20,12 @@ from anthropic import Anthropic
 
 from connections import create_connection
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 EVALUATION_PROMPT = """You are an AI assistant with access to tools.
 
 When given a task, you MUST:
@@ -365,11 +371,24 @@ Examples:
         report = await run_evaluation(args.eval_file, connection, args.model)
 
         if args.output:
-            args.output.write_text(report)
-            print(f"\n✅ Report saved to {args.output}")
+            if GuardedWriter:
+                 # Resolve PROJECT_ROOT guess
+                 repo_root = Path(__file__).resolve().parents[4]
+                 try:
+                     writer = GuardedWriter(repo_root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+                     writer.open_commit_gate()
+                     writer.mkdir_durable(str(args.output.parent))
+                     writer.write_durable(str(args.output), report)
+                     print(f"\n✅ Report saved to {args.output}")
+                 except Exception as e:
+                     print(f"\n❌ Error saving report: {e}")
+            else:
+                 print("\n❌ Error: GuardedWriter unavailable. Report save refused.")
+                 sys.exit(1)
         else:
             print("\n" + report)
 
 
 if __name__ == "__main__":
     asyncio.run(main())
+```

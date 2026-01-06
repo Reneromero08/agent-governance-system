@@ -201,10 +201,10 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
       - [ ] MCP server writes enforce declared allowlists
       - [ ] Integration tests pass with firewall active
   
-  - [x] 2.4.1C.3 CORTEX + SKILLS Enforcement
+  - [x] 2.4.1C.3 CORTEX + SKILLS Enforcement ✅ **COMPLETE**
     - Scope:
-      - `CAPABILITY/CORTEX/**` (2 surfaces)
-      - `CAPABILITY/SKILLS/**` (15+ surfaces)
+      - `NAVIGATION/CORTEX/**` (6 surfaces)
+      - `CAPABILITY/SKILLS/**` (20+ surfaces)
     - Adapter: `GuardedWriter`
     - Mechanical replication phase
     - Exit Criteria:
@@ -212,10 +212,11 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
       - [x] All SKILLS write surfaces enforce allowlists
       - [x] Existing functionality preserved (backwards compatibility)
     - **Tests Implemented**:
-      - Test A: Commit-gate semantics (PASSING)
-      - Test B: End-to-end enforcement (PASSING) 
-      - Test C: No raw writes audit (HARD GATE - fails with 181 violations)
-    - **Status**: Test suite complete and functioning as quality gate
+      - Test A: Commit-gate semantics ✅ PASSING (2/2)
+      - Test B: End-to-end enforcement ✅ PASSING (discovery/smoke)
+      - Test C: No raw writes audit ✅ **PASSING (0 violations)**
+    - **Final Status**: ✅ **0 VIOLATIONS** (down from 181 initial violations)
+    - **Verification**: Mechanical scanner confirms zero raw write operations in target directories
   
   - [ ] 2.4.1C.4 CLI Tools Enforcement (Optional)
     - Scope: CLI write surfaces

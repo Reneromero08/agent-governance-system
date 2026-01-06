@@ -21,6 +21,12 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 
 def _read_canon_version(project_root: Path) -> str:
     versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
@@ -35,15 +41,20 @@ def _read_canon_version(project_root: Path) -> str:
     return "unknown"
 
 
+
 def _log_path(project_root: Path) -> Path:
     # Return a Path object; formatting to POSIX is done when producing the relative string
     return project_root / "LAW" / "CONTRACTS" / "_runs" / "override_logs" / "master_override.jsonl"
 
 
-def _append_log(log_path: Path, entry: Dict[str, Any]) -> None:
-    log_path.parent.mkdir(parents=True, exist_ok=True)
-    with open(log_path, "a", encoding="utf-8") as f:
-        f.write(json.dumps(entry, ensure_ascii=False) + "\n")
+def _append_log(log_path: Path, entry: Dict[str, Any], writer: Any) -> None:
+    content = ""
+    if log_path.exists():
+        content = log_path.read_text(encoding="utf-8")
+    content += json.dumps(entry, ensure_ascii=False) + "\n"
+    
+    writer.mkdir_durable(str(log_path.parent))
+    writer.write_durable(str(log_path), content)
 
 
 def _tail_jsonl(log_path: Path, limit: int) -> List[Dict[str, Any]]:
@@ -77,12 +88,20 @@ def main(input_path: Path, output_path: Path) -> int:
 
     log_path = _log_path(PROJECT_ROOT)
     # Use POSIX separators for the relative log path to match fixture expectations
+    # Use POSIX separators for the relative log path to match fixture expectations
     log_path_rel = log_path.relative_to(PROJECT_ROOT).as_posix()
+
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+
+    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer.open_commit_gate()
 
     if token != "MASTER_OVERRIDE":
         result = {"ok": False, "action": action or None, "error": "unauthorized", "log_path": log_path_rel}
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+        writer.mkdir_durable(str(output_path.parent))
+        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
     if action == "log":
@@ -92,19 +111,19 @@ def main(input_path: Path, output_path: Path) -> int:
             "canon_version": _read_canon_version(PROJECT_ROOT),
             "note": note,
         }
-        _append_log(log_path, entry)
+        _append_log(log_path, entry, writer)
         result = {"ok": True, "action": "log", "log_path": log_path_rel}
     elif action == "read":
         entries = _tail_jsonl(log_path, limit)
         result = {"ok": True, "action": "read", "log_path": log_path_rel, "entries": entries}
     else:
         result = {"ok": False, "action": action or None, "error": "unknown_action", "log_path": log_path_rel}
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+        writer.mkdir_durable(str(output_path.parent))
+        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(result, indent=2, sort_keys=True), encoding="utf-8")
+    writer.mkdir_durable(str(output_path.parent))
+    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 

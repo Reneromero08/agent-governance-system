@@ -7,6 +7,11 @@ import sys
 import re
 from pathlib import Path
 
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 
@@ -103,7 +108,23 @@ def main(input_path: Path, output_path: Path) -> int:
         "summary_md": summary_md,
         "summary_sha256": summary_sha256,
     }
-    output_path.write_text(json.dumps(output, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    if not GuardedWriter:
+        print("Error: GuardedWriter not available")
+        return 1
+        
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "MEMORY/LLM_PACKER/_packs",
+            "BUILD"
+        ]
+    )
+    writer.open_commit_gate()
+    
+    writer.mkdir_durable(str(output_path.parent))
+    writer.write_durable(str(output_path), json.dumps(output, indent=2, sort_keys=True) + "\n")
     return 0
 
 

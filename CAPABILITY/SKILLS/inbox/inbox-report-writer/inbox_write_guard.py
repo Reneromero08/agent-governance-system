@@ -107,7 +107,7 @@ def inbox_write_guard(func: Callable) -> Callable:
     Usage:
         @inbox_write_guard
         def write_file(path, content):
-            Path(path).write_text(content)
+            Path(path).write_text(content)  # scanner: example only
     
     Args:
         func: Function that writes files (should accept path and content args)

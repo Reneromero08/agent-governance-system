@@ -45,7 +45,14 @@ from dataclasses import asdict
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Tuple
 
-from .utils import Normalization, ensure_outdir, read_bytes, sha256_bytes, normalize_text, sha256_text, relpath_safe, find_git_root, iso_utc_now, git_stage_and_commit, parse_iso_z, git_file_committed_in_head, find_git_root, iso_utc_now
+from .utils import Normalization, read_bytes, sha256_bytes, normalize_text, sha256_text, relpath_safe, find_git_root, iso_utc_now, git_stage_and_commit, parse_iso_z, git_file_committed_in_head, find_git_root, iso_utc_now, append_durable
+
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+
 
 def _is_git_tracked(path: Path) -> bool:
     gr = find_git_root(path)
@@ -62,16 +69,15 @@ def _is_git_tracked(path: Path) -> bool:
     except Exception:
         return False
 
-def _post_action(on_success: str, ttl_days: int, require_committed: bool, a_path: Path, b_path: Path, out_dir: Path, merged_path: Path | None = None) -> dict:
+def _post_action(on_success: str, ttl_days: int, require_committed: bool, a_path: Path, b_path: Path, out_dir: Path, writer: Any, merged_path: Path | None = None) -> dict:
     res = {"on_success": on_success, "ttl_days": ttl_days, "actions": []}
     if on_success == "none":
         return res
 
-    quarantine_root = out_dir / "quarantine"
-    quarantine_root.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(quarantine_root))
     stamp = __import__("datetime").datetime.utcnow().strftime("%Y%m%dT%H%M%SZ")
     q_dir = quarantine_root / stamp
-    q_dir.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(q_dir))
 
     def quarantine_one(p: Path) -> str:
         dest = q_dir / p.name
@@ -83,7 +89,7 @@ def _post_action(on_success: str, ttl_days: int, require_committed: bool, a_path
                     dest = cand
                     break
                 i += 1
-        shutil.move(p.as_posix(), dest.as_posix())
+        writer.safe_rename(str(p), str(dest))
         return dest.as_posix()
 
     idx_path = quarantine_root / "quarantine_index.jsonl"
@@ -100,23 +106,22 @@ def _post_action(on_success: str, ttl_days: int, require_committed: bool, a_path
                     if not st.get("ok"):
                         res["actions"].append({"path": p.as_posix(), "action": "refused", "git_tracked": True, "reason": st.get("reason")})
                     else:
-                        os.remove(p)
+                        writer.unlink(str(p)) # guarded
                         res["actions"].append({"path": p.as_posix(), "action": "deleted", "git_tracked": True})
                 else:
-                    os.remove(p)
+                    writer.unlink(str(p)) # guarded
                     res["actions"].append({"path": p.as_posix(), "action": "deleted", "git_tracked": True, "note": "require_committed=false"})
             else:
                 res["actions"].append({"path": p.as_posix(), "action": "skipped", "git_tracked": False})
         elif on_success == "quarantine":
             moved_to = quarantine_one(p)
             entry = {"ts": iso_utc_now(), "src": p.as_posix(), "dst": moved_to, "expire_at": expire_at, "git_tracked": tracked}
-            with idx_path.open("a", encoding="utf-8") as f:
-                f.write(json.dumps(entry) + "\n")
+            append_durable(writer, idx_path, json.dumps(entry))
             res["actions"].append({"path": p.as_posix(), "action": "quarantined", "moved_to": moved_to, "git_tracked": tracked, "expire_at": expire_at})
 
     # Copy merged file back to original location (use a_path as target) AFTER originals are moved/deleted
     if merged_path and merged_path.exists():
-        shutil.copy2(merged_path.as_posix(), a_path.as_posix())
+        writer.copy(str(merged_path), str(a_path))
         res["actions"].append({"path": a_path.as_posix(), "action": "restored_from_merged", "source": merged_path.as_posix()})
 
     return res
@@ -143,7 +148,7 @@ def _scan_root(root: Path, max_file_mb: float) -> List[Path]:
     return paths
 
 
-def prune_quarantine(out_dir: Path) -> dict:
+def prune_quarantine(out_dir: Path, writer: Any) -> dict:
     qroot = out_dir / "quarantine"
     idx = qroot / "quarantine_index.jsonl"
     if not idx.exists():
@@ -165,7 +170,7 @@ def prune_quarantine(out_dir: Path) -> dict:
         if exp and exp <= now:
             if dst.exists():
                 try:
-                    dst.unlink()
+                    writer.unlink(str(dst)) # guarded
                     pruned += 1
                 except Exception:
                     # if can't delete, keep record
@@ -177,7 +182,9 @@ def prune_quarantine(out_dir: Path) -> dict:
         else:
             kept += 1
             kept_lines.append(line)
-    idx.write_text("\n".join(kept_lines) + ("\n" if kept_lines else ""), encoding="utf-8")
+    
+    # Overwrite index
+    writer.write_durable(str(idx), "\n".join(kept_lines) + ("\n" if kept_lines else ""))
     return {"pruned": pruned, "kept": kept, "missing": missing, "index": idx.as_posix()}
 
 def scan(root: Path, norm: Normalization, max_file_mb: float, max_pairs: int) -> Dict[str, Any]:
@@ -285,7 +292,7 @@ def plan_pair(a_path: Path, b_path: Path, norm: Normalization, max_file_mb: floa
     plan = plan_append_unique_blocks(na, nb, base=base_side)
     return {"a": a_path.as_posix(), "b": b_path.as_posix(), "plan": asdict(plan)}
 
-def apply_pair(a_path: Path, b_path: Path, plan: MergePlan, norm: Normalization, max_file_mb: float, out_dir: Path, post_actions: dict | None = None) -> Dict[str, Any]:
+def apply_pair(a_path: Path, b_path: Path, plan: MergePlan, norm: Normalization, max_file_mb: float, out_dir: Path, writer: Any, post_actions: dict | None = None) -> Dict[str, Any]:
     a_bytes = read_bytes(a_path, max_file_mb)
     b_bytes = read_bytes(b_path, max_file_mb)
     a_text = a_bytes.decode("utf-8", errors="replace")
@@ -297,15 +304,15 @@ def apply_pair(a_path: Path, b_path: Path, plan: MergePlan, norm: Normalization,
 
     merged_dir = out_dir / "merged"
     receipts_dir = out_dir / "receipts"
-    ensure_outdir(merged_dir)
-    ensure_outdir(receipts_dir)
+    writer.mkdir_durable(str(merged_dir))
+    writer.mkdir_durable(str(receipts_dir))
 
     # deterministic output filename based on source hashes
     a_h = sha256_bytes(a_bytes)[:12]
     b_h = sha256_bytes(b_bytes)[:12]
     merged_name = f"merged_{a_h}_{b_h}.md"
     merged_path = merged_dir / merged_name
-    merged_path.write_text(merged, encoding="utf-8")
+    writer.write_durable(str(merged_path), merged)
 
     receipt = {
         "timestamp": __import__("datetime").datetime.utcnow().isoformat() + "Z",
@@ -320,12 +327,11 @@ def apply_pair(a_path: Path, b_path: Path, plan: MergePlan, norm: Normalization,
 
     # Append to cumulative receipt file instead of creating individual files
     receipt_path = receipts_dir / "merge_receipt.jsonl"
-    with receipt_path.open("a", encoding="utf-8") as f:
-        f.write(json.dumps(receipt) + "\n")
+    append_durable(writer, receipt_path, json.dumps(receipt))
 
     post = None
     if post_actions:
-        post = _post_action(post_actions.get("on_success","none"), int(post_actions.get("ttl_days",14)), bool(post_actions.get("require_committed", True)), a_path, b_path, out_dir, merged_path)
+        post = _post_action(post_actions.get("on_success","none"), int(post_actions.get("ttl_days",14)), bool(post_actions.get("require_committed", True)), a_path, b_path, out_dir, writer, merged_path)
 
     return {"merged_path": merged_path.as_posix(), "receipt_path": receipt_path.as_posix(), "receipt": receipt, "post_actions": post}
 
@@ -350,10 +356,12 @@ def verify_pair(a_path: Path, b_path: Path, merged_text: str, norm: Normalizatio
         "missing_count": len(missing_from_merged),
     }
 
-def run_job(payload: Dict[str, Any]) -> Dict[str, Any]:
+def run_job(payload: Dict[str, Any], writer: Any = None) -> Dict[str, Any]:
+    if not writer:
+        raise RuntimeError("GuardedWriter required for run_job")
     mode = payload["mode"]
     out_dir = Path(payload.get("out_dir", "./MERGE_OUT"))
-    ensure_outdir(out_dir)
+    writer.mkdir_durable(str(out_dir))
 
     norm_cfg = payload.get("normalization", {}) or {}
     norm = Normalization(
@@ -394,7 +402,7 @@ def run_job(payload: Dict[str, Any]) -> Dict[str, Any]:
             "artifacts": [],
             "receipts": [],
             "errors": [],
-            "prune_report": prune_quarantine(out_dir),
+            "prune_report": prune_quarantine(out_dir, writer),
         }
         return rep
 
@@ -444,7 +452,7 @@ def run_job(payload: Dict[str, Any]) -> Dict[str, Any]:
                 plan = MergePlan(**plan_obj["plan"])
 
             if mode in ("apply","verify"):
-                applied = apply_pair(a, b, plan=plan, norm=norm, max_file_mb=max_file_mb, out_dir=out_dir, post_actions=(post_actions if mode=="apply" else None))
+                applied = apply_pair(a, b, plan=plan, norm=norm, max_file_mb=max_file_mb, out_dir=out_dir, writer=writer, post_actions=(post_actions if mode=="apply" else None))
                 art = {"merged_path": applied["merged_path"], "receipt_path": applied["receipt_path"]}
                 if applied.get("post_actions") is not None:
                     art["post_actions"] = applied["post_actions"]
@@ -463,7 +471,7 @@ def run_job(payload: Dict[str, Any]) -> Dict[str, Any]:
                 v = verify_pair(a, b, merged_text=merged_text, norm=norm, max_file_mb=max_file_mb)
                 artifacts[-1]["verification"] = v
                 if v.get("pass") and post_actions.get("on_success","none") != "none":
-                    post = _post_action(post_actions.get("on_success","none"), int(post_actions.get("ttl_days",14)), bool(post_actions.get("require_committed", True)), a, b, out_dir, merged_path)
+                    post = _post_action(post_actions.get("on_success","none"), int(post_actions.get("ttl_days",14)), bool(post_actions.get("require_committed", True)), a, b, out_dir, writer, merged_path)
                     artifacts[-1]["post_actions"] = post
                     if git_commit.get("enabled") and post_actions.get("on_success") == "delete_tracked":
                         paths_to_commit = []

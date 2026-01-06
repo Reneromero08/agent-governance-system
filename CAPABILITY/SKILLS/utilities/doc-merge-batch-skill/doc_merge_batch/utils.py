@@ -45,8 +45,23 @@ def normalize_text(text: str, norm: Normalization) -> str:
 def sha256_text(text: str) -> str:
     return hashlib.sha256(text.encode("utf-8")).hexdigest()
 
-def ensure_outdir(out_dir: Path) -> None:
-    out_dir.mkdir(parents=True, exist_ok=True)
+
+def append_durable(writer: Any, path: Path, content: str) -> None:
+    # Read-modify-write pattern for GuardedWriter
+    # We must assume the file might not exist yet.
+    # We can only use writer primitives.
+    # But wait, writer doesn't have read? We can use standard read if it exists.
+    # The firewall is for WRITES. Reads are usually allowed unless strictly sandboxed.
+    # In this context, we can read.
+    current = ""
+    if path.exists():
+        current = path.read_text(encoding="utf-8")
+        if current and not current.endswith("\n"):
+            current += "\n"
+    
+    new_content = current + content + "\n"
+    writer.write_durable(str(path), new_content)
+
 
 def relpath_safe(path: Path, base: Path | None) -> str:
     try:

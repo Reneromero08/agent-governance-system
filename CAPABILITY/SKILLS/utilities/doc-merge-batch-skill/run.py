@@ -66,27 +66,27 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
         return 1
 
     # Use GuardedWriter for directory creation if available, otherwise fallback
-    if writer:
-        try:
-            rel_out_dir = str(out_dir_abs.relative_to(PROJECT_ROOT))
-            writer.mkdir_tmp(rel_out_dir)
-        except ValueError:
-            out_dir_abs.mkdir(parents=True, exist_ok=True)
-    else:
-        out_dir_abs.mkdir(parents=True, exist_ok=True)
+    # Always use GuardedWriter for writes to enforce firewall
+    writer = writer or GuardedWriter(project_root=PROJECT_ROOT)
+
+    try:
+        rel_out_dir = str(out_dir_abs.relative_to(PROJECT_ROOT))
+        writer.mkdir_tmp(rel_out_dir)
+    except ValueError:
+        print(f"[doc-merge-batch-skill] Output dir {out_dir_abs} outside project root")
+        return 1
     
     pairs_path = out_dir_abs / "pairs.json"
     pairs_data = json.dumps(pairs, indent=2, sort_keys=True)
     
     # Use GuardedWriter for pairs.json write if available, otherwise fallback
-    if writer:
-        try:
-            rel_pairs_path = str(pairs_path.relative_to(PROJECT_ROOT))
-            writer.write_tmp(rel_pairs_path, pairs_data)
-        except ValueError:
-            pairs_path.write_text(pairs_data, encoding="utf-8")
-    else:
-        pairs_path.write_text(pairs_data, encoding="utf-8")
+    # Use GuardedWriter for pairs.json
+    try:
+        rel_pairs_path = str(pairs_path.relative_to(PROJECT_ROOT))
+        writer.write_tmp(rel_pairs_path, pairs_data)
+    except ValueError:
+        print(f"[doc-merge-batch-skill] pairs.json path {pairs_path} outside project root")
+        return 1
 
     env = os.environ.copy()
     cmd = [
@@ -105,7 +105,7 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     report_path = out_dir_abs / "report.json"
     report_rel = None
     if report_path.exists():
-        report_rel = str(report_path.relative_to(PROJECT_ROOT)).replace("\\", "/")
+        report_rel = str(report_path.relative_to(PROJECT_ROOT)).replace("\\", "/") # guarded: string op, not filesystem write
 
     output = {
         "ok": res.returncode == 0,
@@ -119,17 +119,14 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     output_data = json.dumps(output, indent=2, sort_keys=True)
     
     # Use GuardedWriter for final output write if available, otherwise fallback
-    if writer:
-        try:
-            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
-            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
-            writer.write_tmp(rel_output_path, output_data)
-        except ValueError:
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            output_path.write_text(output_data, encoding="utf-8")
-    else:
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-        output_path.write_text(output_data, encoding="utf-8")
+    # Use GuardedWriter for final output
+    try:
+        rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
+        writer.mkdir_tmp(str(Path(rel_output_path).parent))
+        writer.write_tmp(rel_output_path, output_data)
+    except ValueError:
+        print(f"[doc-merge-batch-skill] Output path {output_path} outside project root")
+        return 1
     
     return 0 if output["ok"] else 1
 

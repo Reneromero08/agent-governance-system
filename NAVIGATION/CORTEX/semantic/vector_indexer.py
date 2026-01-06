@@ -20,6 +20,14 @@ from datetime import datetime
 
 from .embeddings import EmbeddingEngine
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 
 class VectorIndexer:
     """Index CORTEX sections with vector embeddings."""
@@ -27,7 +35,8 @@ class VectorIndexer:
     def __init__(
         self,
         db_path: Path = Path("NAVIGATION/CORTEX/db/system1.db"),
-        embedding_engine: Optional[EmbeddingEngine] = None
+        embedding_engine: Optional[EmbeddingEngine] = None,
+        writer: Optional[GuardedWriter] = None
     ):
         """Initialize vector indexer.
 
@@ -37,6 +46,22 @@ class VectorIndexer:
         """
         self.db_path = db_path
         self.embedding_engine = embedding_engine or EmbeddingEngine()
+        self.writer = writer
+        
+        # Enforce usage of GuardedWriter for directory creation
+        if self.writer is None:
+             # Lazy init default writer if we are running in an env that supports it
+            repo_root = Path(__file__).resolve().parents[3]
+            self.writer = GuardedWriter(
+                project_root=repo_root,
+                durable_roots=[
+                    "LAW/CONTRACTS/_runs",
+                    "NAVIGATION/CORTEX/_generated",
+                    "NAVIGATION/CORTEX/db"
+                ]
+            )
+            self.writer.open_commit_gate()
+
         self.conn = None
         self._connect()
         self._init_schema()
@@ -45,7 +70,7 @@ class VectorIndexer:
         """Connect to database."""
         if not self.db_path.exists():
             # Create parent directory if needed
-            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            self.writer.mkdir_durable(str(self.db_path.parent))
 
         self.conn = sqlite3.connect(str(self.db_path))
         self.conn.row_factory = sqlite3.Row
@@ -351,7 +376,19 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
 
-    with VectorIndexer() as indexer:
+    # Initialize writer
+    repo_root = Path(__file__).resolve().parents[3]
+    writer = GuardedWriter(
+        project_root=repo_root,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "NAVIGATION/CORTEX/db"
+        ]
+    )
+    writer.open_commit_gate()
+
+    with VectorIndexer(writer=writer) as indexer:
         if args.stats:
             stats = indexer.get_stats()
             print("\nIndexing Statistics:")
