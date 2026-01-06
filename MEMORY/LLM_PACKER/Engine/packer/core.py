@@ -16,6 +16,7 @@ from contextlib import contextmanager
 from datetime import datetime, timezone
 from pathlib import Path
 from .proofs import refresh_proofs
+from .firewall_writer import PackerWriter
 from typing import (
     Any,
     Dict,

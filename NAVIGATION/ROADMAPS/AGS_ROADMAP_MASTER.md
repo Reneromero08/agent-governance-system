@@ -166,6 +166,59 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
   - Artifacts: `MEMORY/LLM_PACKER/Engine/packer/firewall_writer.py` (PackerWriter utility)
   - Next: Phase 2.4.1C for systematic surface-by-surface integration to reach 96% coverage (45/47 allowed surfaces)
 
+- [ ] 2.4.1C Systematic Write Surface Integration (Enforcement Rollout)
+  - Coordinator phase: aggregates coverage math and receipts from sub-phases
+  - No new primitives, no new policy
+  - Depends on: Phase 2.4.1B (infrastructure complete)
+  - Coverage denominator: 103 production write surfaces (defined in 2.4.1A)
+  - Target: ≥95% coverage (98/103 surfaces enforced)
+  - INBOX remains excluded per policy
+  
+  - [ ] 2.4.1C.1 LLM_PACKER Enforcement
+    - Scope: `MEMORY/LLM_PACKER/**` write surfaces
+    - Adapter: `PackerWriter` (already implemented in 2.4.1B)
+    - Goal: High-impact coverage increase (6 surfaces)
+    - Exit Criteria:
+      - [ ] All LLM_PACKER write operations use PackerWriter
+      - [ ] Receipts emitted for all pack generation runs
+      - [ ] Tests pass with firewall enforcement active
+  
+  - [ ] 2.4.1C.2 Runtime Surfaces Enforcement
+    - Scope:
+      - `CAPABILITY/PIPELINES/**` (4 surfaces)
+      - `CAPABILITY/MCP/**` (2 surfaces)
+    - Adapter: `GuardedWriter`
+    - Focus: Commit-gate correctness for runtime operations
+    - Exit Criteria:
+      - [ ] Pipeline write operations enforce declared allowlists
+      - [ ] MCP server writes enforce declared allowlists
+      - [ ] Integration tests pass with firewall active
+  
+  - [ ] 2.4.1C.3 CORTEX + SKILLS Enforcement
+    - Scope:
+      - `CAPABILITY/CORTEX/**` (2 surfaces)
+      - `CAPABILITY/SKILLS/**` (15+ surfaces)
+    - Adapter: `GuardedWriter`
+    - Mechanical replication phase
+    - Exit Criteria:
+      - [ ] All CORTEX write surfaces enforce allowlists
+      - [ ] All SKILLS write surfaces enforce allowlists
+      - [ ] Existing functionality preserved (backwards compatibility)
+  
+  - [ ] 2.4.1C.4 CLI Tools Enforcement (Optional)
+    - Scope: CLI write surfaces
+    - Adapter: `GuardedWriter`
+    - Optional but explicit if present
+    - Exit Criteria:
+      - [ ] CLI tools declare write allowlists explicitly
+      - [ ] Firewall enforcement active for CLI operations
+  
+  - Exit Criteria (Phase 2.4.1C):
+    - [ ] Coverage ≥95% (98/103 surfaces enforced)
+    - [ ] All sub-phase receipts collected and aggregated
+    - [ ] No policy changes or write domain widening
+    - [ ] Coverage math explicit and auditable
+
 ### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)
 - [ ] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
 - [ ] 2.4.2.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
@@ -209,7 +262,7 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
 ## 3.1 Router & Fallback Stability (Z.3.1) ✅
 - [x] 3.1.1 Stabilize model router: deterministic selection + explicit fallback chain (Z.3.1)
 ## 3.2 Memory Integration (Z.3.2)
-- [ ] 3.2.1 Implement CAT Chat context window management (Z.3.2)
+- [x] 3.2.1 Implement CAT Chat context window management (Z.3.2)
 ## 3.3 Tool Binding (Z.3.3)
 - [ ] 3.3.1 Ensure MCP tool access from chat is functional and constrained (Z.3.3)
 ## 3.4 Session Persistence (Z.3.4)
