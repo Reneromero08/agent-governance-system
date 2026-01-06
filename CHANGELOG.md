@@ -4,6 +4,43 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.3.28] - 2026-01-05
+
+### Added
+- **Phase 3.2.1: CAT_CHAT Context Window Management** — Implemented deterministic context-assembly pipeline for bounded, fail-closed prompt construction.
+  - **Core Module**: `THOUGHT/LAB/CAT_CHAT/catalytic_chat/context_assembler.py` (280 lines)
+    - `ContextAssembler` class with `assemble()` method for deterministic context selection
+    - Priority-based selection: Mandatory (System + Latest User) → Recent Dialog → Explicit Expansions → Optional Extras
+    - HEAD truncation only (preserves start, discards end) via character-based binary search
+    - Fail-closed: Returns `success=False` if mandatory items exceed budget
+    - Deterministic ordering with stable tie-breakers (created_at, id)
+  - **Design Decisions**:
+    - Truncation: HEAD-only (10-iteration binary search), character-based approximation, no token-exact guarantees
+    - Expansion role: All expansions assigned `role="SYSTEM"` by design
+    - Metadata: `start_trimmed` always False, `end_trimmed` indicates truncation occurred
+  - **Data Structures**:
+    - `ContextBudget`: Hard limits (max_total_tokens, reserve_response_tokens, max_messages, max_expansions, per-item caps)
+    - `ContextMessage`: Input messages with source (SYSTEM/USER/ASSISTANT/TOOL), content, timestamps
+    - `ContextExpansion`: Symbol expansions with explicit reference tracking and priority
+    - `AssembledItem`: Output items with truncation metadata and token estimates
+    - `AssemblyReceipt`: Machine-verifiable receipt with budget usage, inclusion/exclusion decisions, final hash
+  - **Tests**: `THOUGHT/LAB/CAT_CHAT/tests/test_context_assembler.py` (195 lines, 5/5 passing)
+    - Determinism: Identical inputs produce byte-identical receipt hashes
+    - Fail-closed: Mandatory items exceeding budget trigger hard failure
+    - Priority enforcement: Dialog starves expansions when budget tight
+    - Budget enforcement: Message/expansion count caps enforced strictly
+    - Ordering: Correct final sequence (System → Expansions → History → Latest User)
+  - **Documentation**: `THOUGHT/LAB/CAT_CHAT/docs/verification_context_management.md`
+    - Clarified Phase 3.2.1 truncation behavior (HEAD-only, character-based, approximate)
+    - Documented expansion role assignment rationale
+    - Defined priority tier semantics
+  - **Guarantees**:
+    - Deterministic: Same inputs + token_estimator → same output and receipt hash
+    - Bounded: No unbounded expansions, all items respect per-item and total budgets
+    - Fail-closed: Missing mandatory items or budget violations → hard error with receipt
+    - Pure logic: In-memory only, no side effects, no persistence
+  - **Scope**: Logic only (no integration, no runtime wiring, no policy invention beyond specified rules)
+
 ## [3.3.27] - 2026-01-05
 
 ### Added
