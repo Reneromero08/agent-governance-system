@@ -20,6 +20,14 @@ from pathlib import Path
 from typing import List, Dict, Optional, Set
 from NAVIGATION.CORTEX.db.system1_builder import System1DB
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
+
 # Fix Windows Unicode console encoding issue
 if os.name == 'nt':  # Windows
     if hasattr(sys.stdout, 'reconfigure'):
@@ -48,12 +56,18 @@ META_DIR = Path(__file__).resolve().parents[1] / "meta"
 DB_PATH = Path(__file__).resolve().parents[1] / "db" / "system1.db"
 
 class CortexIndexer:
-    def __init__(self, db: System1DB, target_dir: Path = CANON_DIR):
+    def __init__(self, db: System1DB, target_dir: Path = CANON_DIR, writer: Optional[GuardedWriter] = None):
         self.db = db
         self.target_dir = target_dir
+        self.writer = writer
         self.file_index = {}
         self.section_index = []
-        META_DIR.mkdir(parents=True, exist_ok=True)
+        
+        # Use GuardedWriter for mkdir if available, otherwise fallback
+        if self.writer:
+            self.writer.mkdir_tmp("NAVIGATION/CORTEX/meta")
+        else:
+            META_DIR.mkdir(parents=True, exist_ok=True)
 
     def _get_tracked_files(self, root: Path) -> Optional[Set[Path]]:
         """
@@ -207,12 +221,24 @@ class CortexIndexer:
 
     def _write_artifacts(self):
         """Write FILE_INDEX.json and SECTION_INDEX.json."""
-        META_DIR.mkdir(parents=True, exist_ok=True)
-        with open(META_DIR / "FILE_INDEX.json", "w", encoding='utf-8') as f:
-            json.dump(self.file_index, f, indent=2, sort_keys=True)
+        # Use GuardedWriter for writes if available, otherwise fallback
+        if self.writer:
+            self.writer.mkdir_tmp("NAVIGATION/CORTEX/meta")
+            self.writer.write_tmp(
+                "NAVIGATION/CORTEX/meta/FILE_INDEX.json", 
+                json.dumps(self.file_index, indent=2, sort_keys=True)
+            )
+            self.writer.write_tmp(
+                "NAVIGATION/CORTEX/meta/SECTION_INDEX.json", 
+                json.dumps(self.section_index, indent=2, sort_keys=True)
+            )
+        else:
+            META_DIR.mkdir(parents=True, exist_ok=True)
+            with open(META_DIR / "FILE_INDEX.json", "w", encoding='utf-8') as f:
+                json.dump(self.file_index, f, indent=2, sort_keys=True)
 
-        with open(META_DIR / "SECTION_INDEX.json", "w", encoding='utf-8') as f:
-            json.dump(self.section_index, f, indent=2, sort_keys=True)
+            with open(META_DIR / "SECTION_INDEX.json", "w", encoding='utf-8') as f:
+                json.dump(self.section_index, f, indent=2, sort_keys=True)
 
         safe_print(f"[Indexer] Wrote artifacts to {META_DIR}")
 
@@ -221,12 +247,20 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Cortex Indexer CLI")
     parser.add_argument("--dir", type=str, help="Directory to index (default: CANON)")
     parser.add_argument("--db", type=str, default=str(DB_PATH), help="Database path")
+    parser.add_argument("--use-firewall", action="store_true", help="Use GuardedWriter for write firewall enforcement")
     args = parser.parse_args()
 
     db_path = Path(args.db)
     target_dir = Path(args.dir) if args.dir else CANON_DIR
     
+    # Initialize GuardedWriter if requested
+    writer = None
+    if args.use_firewall and GuardedWriter:
+        from pathlib import Path
+        repo_root = Path(__file__).resolve().parents[3]
+        writer = GuardedWriter(project_root=repo_root)
+    
     db = System1DB(db_path)
-    indexer = CortexIndexer(db, target_dir=target_dir)
+    indexer = CortexIndexer(db, target_dir=target_dir, writer=writer)
     indexer.index_all()
     db.close()

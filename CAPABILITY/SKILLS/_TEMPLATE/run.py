@@ -10,6 +10,7 @@ code that performs the skill's action.
 import json
 import sys
 from pathlib import Path
+from typing import Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
@@ -17,8 +18,16 @@ if str(PROJECT_ROOT) not in sys.path:
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
+# Add GuardedWriter for write firewall enforcement
+try:
+    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+except ImportError:
+    GuardedWriter = None
+    FirewallViolation = None
 
-def main(input_path: Path, output_path: Path) -> int:
+
+def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = None) -> int:
     if not ensure_canon_compat(Path(__file__).resolve().parent):
         return 1
     try:
@@ -28,8 +37,23 @@ def main(input_path: Path, output_path: Path) -> int:
         return 1
 
     # Template: echo the input as output (replace with actual logic)
-    output_path.parent.mkdir(parents=True, exist_ok=True)
-    output_path.write_text(json.dumps(payload, indent=2, sort_keys=True))
+    output_data = json.dumps(payload, indent=2, sort_keys=True)
+    
+    # Use GuardedWriter for writes if available, otherwise fallback
+    if writer:
+        try:
+            # Convert output_path to relative path for GuardedWriter
+            rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
+            writer.mkdir_tmp(rel_output_path.rsplit('/', 1)[0])  # Get parent directory
+            writer.write_tmp(rel_output_path, output_data)
+        except ValueError:
+            # If path is not relative to PROJECT_ROOT, fallback to direct write
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            output_path.write_text(output_data)
+    else:
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+        output_path.write_text(output_data)
+        
     print("[skill] Template skill executed successfully")
     return 0
 
