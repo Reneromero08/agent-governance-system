@@ -264,7 +264,7 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
 ## 3.2 Memory Integration (Z.3.2)
 - [x] 3.2.1 Implement CAT Chat context window management (Z.3.2)
 ## 3.3 Tool Binding (Z.3.3)
-- [ ] 3.3.1 Ensure MCP tool access from chat is functional and constrained (Z.3.3)
+- [x] 3.3.1 Ensure MCP tool access from chat is functional and constrained (Z.3.3)
 ## 3.4 Session Persistence (Z.3.4)
 - [ ] 3.4.1 Implement session persistence and resume (Z.3.4)
 - **Exit Criteria**

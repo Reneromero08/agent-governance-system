@@ -4,7 +4,26 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
-## [3.3.28] - 2026-01-05
+## [3.3.29] - 2026-01-05
+
+### Added
+- **Phase 3.3.1: MCP Chat Tool Integration** — Implemented constrained, secure integration allowing Chat to invoke MCP tools.
+  - **Core Module**: `THOUGHT/LAB/CAT_CHAT/catalytic_chat/mcp_integration.py`
+    - `ChatToolExecutor`: Bridges Chat runtime to AGS MCP Server
+    - **Constraint Layer**:
+      - Explicit Allowlist: Only approved tools (`cortex_query`, `context_search`, etc.) are accessible
+      - Validation: Tool existence checked against allowlist before server dispatch
+      - Fail-Closed: Forbidden tools raise `McpAccessError` without touching server
+      - Lazy Loading: Server initialized only on first tool use
+    - **Allowed Tools**: `cortex_query`, `context_search`, `context_review`, `canon_read`, `codebook_lookup`, `semantic_search`, `semantic_stats`, `cassette_network_query`, `research_cache`, `agent_inbox_list`, `message_board_list`
+  - **Tests**: `THOUGHT/LAB/CAT_CHAT/tests/test_mcp_integration.py` (verified with mocking)
+    - Validates allowlist filtering
+    - Validates query structure
+    - Validates error propagation
+    - Validates security (forbidden tools blocked)
+  - **Status**: Functional and Constrained (Ready for wiring into AntWorker in future phases)
+
+
 
 ### Added
 - **Phase 3.2.1: CAT_CHAT Context Window Management** — Implemented deterministic context-assembly pipeline for bounded, fail-closed prompt construction.
