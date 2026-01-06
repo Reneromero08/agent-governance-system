@@ -16,6 +16,10 @@ HARD INVARIANTS:
 ALLOWED WRITES:
 - Only to implement digest/scan/proofs + tests + docs
 - Receipts output path must follow existing repo conventions
+
+PHASE 2.4.1B INTEGRATION:
+- All receipt writes routed through WriteFirewall
+- Enforcement: receipts must land in LAW/CONTRACTS/_runs/ (durable) or _tmp/ (tmp)
 """
 from __future__ import annotations
 
@@ -26,6 +30,12 @@ import sys
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Dict, List, Optional, Set
+
+# Import write firewall for enforcement
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
+from CAPABILITY.PRIMITIVES.write_firewall import WriteFirewall, FirewallViolation
 
 # Module version for deterministic tracking
 MODULE_VERSION = "1.5b.0"
@@ -358,18 +368,43 @@ class RestoreProof:
         }
 
 
-def write_receipt(path: Path, receipt: Dict[str, Any]) -> None:
+def write_receipt(path: Path, receipt: Dict[str, Any], firewall: Optional[WriteFirewall] = None) -> None:
     """
-    Write receipt to path as canonical JSON.
+    Write receipt to path as canonical JSON with firewall enforcement.
 
     Args:
         path: Output path for receipt
         receipt: Receipt dictionary
+        firewall: Optional WriteFirewall instance for enforcement (if None, uses direct write for backwards compat)
     """
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp_path = path.with_suffix(".tmp")
-    tmp_path.write_bytes(canonical_json_bytes(receipt))
-    tmp_path.replace(path)
+    receipt_bytes = canonical_json_bytes(receipt)
+
+    if firewall is None:
+        # Legacy behavior (no firewall enforcement)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        tmp_path = path.with_suffix(".tmp")
+        tmp_path.write_bytes(receipt_bytes)
+        tmp_path.replace(path)
+    else:
+        # Phase 2.4.1B: Firewall-enforced writes
+        # Determine write kind based on path
+        norm_path = str(path).replace("\\", "/")
+
+        # Check if this is a tmp write
+        if "/_tmp/" in norm_path or norm_path.endswith("_tmp"):
+            write_kind = "tmp"
+        else:
+            write_kind = "durable"
+
+        # Ensure parent directory exists (use firewall for mkdir)
+        parent_path = path.parent
+        if not parent_path.exists():
+            firewall.safe_mkdir(str(parent_path), kind=write_kind, parents=True, exist_ok=True)
+
+        # Write via firewall (atomic write pattern)
+        tmp_path = path.with_suffix(".tmp")
+        firewall.safe_write(str(tmp_path), receipt_bytes, kind=write_kind)
+        firewall.safe_rename(str(tmp_path), str(path))
 
 
 def write_error_receipt(
@@ -378,6 +413,7 @@ def write_error_receipt(
     error_code: str,
     config_snapshot: Dict[str, Any],
     output_path: Path | None = None,
+    firewall: Optional[WriteFirewall] = None,
 ) -> None:
     """
     Write error receipt on unexpected exception.
@@ -388,6 +424,7 @@ def write_error_receipt(
         error_code: Deterministic error code
         config_snapshot: Configuration snapshot (spec details)
         output_path: Optional path to write error receipt (defaults to ERROR_RECEIPT.json)
+        firewall: Optional WriteFirewall instance for enforcement
     """
     if output_path is None:
         output_path = Path("ERROR_RECEIPT.json")
@@ -405,7 +442,7 @@ def write_error_receipt(
         "config_snapshot": config_snapshot,
     }
 
-    write_receipt(output_path, error_receipt)
+    write_receipt(output_path, error_receipt, firewall=firewall)
     print(f"ERROR: Wrote error receipt to {output_path}", file=sys.stderr)
 
 
@@ -460,18 +497,50 @@ def main() -> int:
 
     error_receipt_path = Path(args.error_receipt) if args.error_receipt else None
 
+    # Phase 2.4.1B: Initialize write firewall for receipt writes
+    # Default catalytic domains from LAW/CANON/CATALYTIC_COMPUTING.md
+    default_tmp_roots = [
+        "LAW/CONTRACTS/_runs/_tmp",
+        "CORTEX/_generated/_tmp",
+        "MEMORY/LLM_PACKER/_packs/_tmp",
+    ]
+    default_durable_roots = [
+        "LAW/CONTRACTS/_runs",
+        "CORTEX/_generated",
+        "MEMORY/LLM_PACKER/_packs",
+    ]
+    default_exclusions = [
+        "LAW/CANON",
+        "AGENTS.md",
+        ".git",
+    ]
+
+    # Use user-specified roots if provided, otherwise use defaults
+    firewall_tmp_roots = tmp_roots if tmp_roots else default_tmp_roots
+    firewall_durable_roots = durable_roots if durable_roots else default_durable_roots
+    firewall_exclusions = exclusions if exclusions else default_exclusions
+
+    firewall = WriteFirewall(
+        tmp_roots=firewall_tmp_roots,
+        durable_roots=firewall_durable_roots,
+        project_root=repo_root,
+        exclusions=firewall_exclusions,
+    )
+
     try:
         if args.pre_digest:
             digest = RepoDigest(spec)
             receipt = digest.compute_digest()
-            write_receipt(Path(args.pre_digest), receipt)
+            write_receipt(Path(args.pre_digest), receipt, firewall=firewall)
             print(f"OK: wrote PRE_DIGEST to {args.pre_digest}")
             return 0
 
         if args.post_digest:
             digest = RepoDigest(spec)
             receipt = digest.compute_digest()
-            write_receipt(Path(args.post_digest), receipt)
+            # Post-digest is typically durable, so open commit gate
+            firewall.open_commit_gate()
+            write_receipt(Path(args.post_digest), receipt, firewall=firewall)
             print(f"OK: wrote POST_DIGEST to {args.post_digest}")
             return 0
 
@@ -482,7 +551,9 @@ def main() -> int:
 
             scanner = PurityScan(spec)
             receipt = scanner.scan(pre_receipt, post_receipt)
-            write_receipt(Path(out_path), receipt)
+            # Purity scan is typically durable, so open commit gate
+            firewall.open_commit_gate()
+            write_receipt(Path(out_path), receipt, firewall=firewall)
             print(f"OK: wrote PURITY_SCAN to {out_path}")
             return 0
 
@@ -494,7 +565,9 @@ def main() -> int:
 
             prover = RestoreProof(spec)
             receipt = prover.generate_proof(pre_receipt, post_receipt, purity_receipt)
-            write_receipt(Path(out_path), receipt)
+            # Restore proof is typically durable, so open commit gate
+            firewall.open_commit_gate()
+            write_receipt(Path(out_path), receipt, firewall=firewall)
             print(f"OK: wrote RESTORE_PROOF to {out_path}")
 
             # Exit nonzero if proof failed
@@ -507,6 +580,20 @@ def main() -> int:
         parser.print_help()
         return 2
 
+    except FirewallViolation as e:
+        # Firewall violation - write error receipt without firewall to avoid recursion
+        print(f"ERROR: Firewall violation: {e.error_code}", file=sys.stderr)
+        print(f"  Message: {e.message}", file=sys.stderr)
+        print(f"  Path: {e.violation_receipt.get('path', 'unknown')}", file=sys.stderr)
+        write_error_receipt(
+            operation="digest_operation",
+            exception=e,
+            error_code=f"FIREWALL_{e.error_code}",
+            config_snapshot=config_snapshot,
+            output_path=error_receipt_path,
+            firewall=None,  # Don't use firewall for error receipt write
+        )
+        return 2
     except ValueError as e:
         # Known error codes (DIGEST_COMPUTATION_FAILED, etc.)
         error_code = str(e).split(":")[0] if ":" in str(e) else "UNKNOWN_ERROR"
@@ -516,6 +603,7 @@ def main() -> int:
             error_code=error_code,
             config_snapshot=config_snapshot,
             output_path=error_receipt_path,
+            firewall=None,  # Don't use firewall for error receipt write
         )
         print(f"ERROR: {e}", file=sys.stderr)
         return 2
@@ -527,6 +615,7 @@ def main() -> int:
             error_code="UNEXPECTED_ERROR",
             config_snapshot=config_snapshot,
             output_path=error_receipt_path,
+            firewall=None,  # Don't use firewall for error receipt write
         )
         print(f"ERROR: Unexpected exception: {e}", file=sys.stderr)
         return 2
