@@ -7,16 +7,17 @@ FORBIDDEN: Any reference to COMBINED/ or SPLIT_LITE/ in output paths or document
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Any, Dict, Sequence
+from typing import Any, Dict, Optional, Sequence
 
 import json
 from .core import PackScope, SCOPE_AGS, SCOPE_LAB, read_text, PROJECT_ROOT
 from .proofs import get_lite_proof_summary
+from .firewall_writer import PackerWriter
 
 def rel_posix(*parts: str) -> str:
     return Path(*parts).as_posix()
 
-def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Path) -> None:
+def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Path, writer: Optional[PackerWriter] = None) -> None:
     """
     Write a discussion-first LITE index.
 
@@ -25,10 +26,16 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Pat
     in `core.py`.
     """
     lite_dir = pack_dir / "LITE"
-    lite_dir.mkdir(parents=True, exist_ok=True)
+    if writer is None:
+        lite_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(lite_dir, kind="durable", parents=True, exist_ok=True)
 
     def write(path: Path, text: str) -> None:
-        path.write_text(text.rstrip() + "\n", encoding="utf-8")
+        if writer is None:
+            path.write_text(text.rstrip() + "\n", encoding="utf-8")
+        else:
+            writer.write_text(path, text.rstrip() + "\n", encoding="utf-8")
 
     if scope.key == SCOPE_AGS.key:
         canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
@@ -65,7 +72,11 @@ def write_split_pack_lite(pack_dir: Path, *, scope: PackScope, project_root: Pat
 
         # LITE PROOFS Summary (AGS Only)
         lite_proofs = get_lite_proof_summary(project_root)
-        (lite_dir / "PROOFS.json").write_text(json.dumps(lite_proofs, indent=2) + "\n", encoding="utf-8")
+        proofs_content = json.dumps(lite_proofs, indent=2) + "\n"
+        if writer is None:
+            (lite_dir / "PROOFS.json").write_text(proofs_content, encoding="utf-8")
+        else:
+            writer.write_text(lite_dir / "PROOFS.json", proofs_content, encoding="utf-8")
 
     elif scope.key == SCOPE_LAB.key:
         write(
@@ -92,8 +103,9 @@ def write_lite_indexes(
     include_paths: Sequence[str],
     omitted_paths: Sequence[str],
     files_by_path: Dict[str, Dict[str, Any]],
+    writer: Optional[PackerWriter] = None,
 ) -> None:
     """Write lightweight indexes to LITE/."""
     # (Simplified from legacy packer, focused on LITE/ output)
-    pass # Implementation deferred for rigorous ELO logic later; 
+    pass # Implementation deferred for rigorous ELO logic later;
          # split_pack_lite handles the critical path for Phase 1.

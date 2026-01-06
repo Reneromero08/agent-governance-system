@@ -124,14 +124,23 @@ def _strip_sha256_prefix(ref: str) -> str:
     _validate_artifact_ref(ref)
     return ref.split(":", 1)[1]
 
-def _write_run_roots(runs_dir: Path, *, roots: Sequence[str]) -> None:
-    runs_dir.mkdir(parents=True, exist_ok=True)
-    roots_sorted = sorted(set(roots))
-    # Strict format: 64 lowercase hex
-    for h in roots_sorted:
-        if not re.fullmatch(r"[0-9a-f]{64}", h):
-            raise ValueError(f"PACK_P2_INVALID_ROOT_HASH:{h}")
-    (runs_dir / "RUN_ROOTS.json").write_text(json.dumps(roots_sorted, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+def _write_run_roots(runs_dir: Path, *, roots: Sequence[str], writer: Optional[PackerWriter] = None) -> None:
+    if writer is None:
+        runs_dir.mkdir(parents=True, exist_ok=True)
+        roots_sorted = sorted(set(roots))
+        # Strict format: 64 lowercase hex
+        for h in roots_sorted:
+            if not re.fullmatch(r"[0-9a-f]{64}", h):
+                raise ValueError(f"PACK_P2_INVALID_ROOT_HASH:{h}")
+        (runs_dir / "RUN_ROOTS.json").write_text(json.dumps(roots_sorted, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    else:
+        writer.mkdir(runs_dir, kind="durable", parents=True, exist_ok=True)
+        roots_sorted = sorted(set(roots))
+        # Strict format: 64 lowercase hex
+        for h in roots_sorted:
+            if not re.fullmatch(r"[0-9a-f]{64}", h):
+                raise ValueError(f"PACK_P2_INVALID_ROOT_HASH:{h}")
+        writer.write_text(runs_dir / "RUN_ROOTS.json", json.dumps(roots_sorted, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 def _emit_p2_lite_artifacts(
     pack_dir: Path,
@@ -140,6 +149,7 @@ def _emit_p2_lite_artifacts(
     include_paths: Sequence[str],
     scope: PackScope,
     runs_dir: Path,
+    writer: Optional[PackerWriter] = None,
 ) -> Dict[str, str]:
     """
     P.2: CAS-addressed LITE manifest + run records + root-audit gating.
@@ -156,7 +166,10 @@ def _emit_p2_lite_artifacts(
     from CAPABILITY.CAS import cas as cas_mod
 
     lite_dir = pack_dir / "LITE"
-    lite_dir.mkdir(parents=True, exist_ok=True)
+    if writer is None:
+        lite_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(lite_dir, kind="durable", parents=True, exist_ok=True)
 
     # Store each included payload into CAS and build deterministic entries.
     entries: List[Dict[str, Any]] = []
@@ -195,7 +208,10 @@ def _emit_p2_lite_artifacts(
         "entries": entries,
     }
     manifest_bytes = _canonical_json_bytes(manifest)
-    (lite_dir / "PACK_MANIFEST.json").write_bytes(manifest_bytes)
+    if writer is None:
+        (lite_dir / "PACK_MANIFEST.json").write_bytes(manifest_bytes)
+    else:
+        writer.write_bytes(lite_dir / "PACK_MANIFEST.json", manifest_bytes)
 
     manifest_ref = _validate_artifact_ref(store_bytes(manifest_bytes))
     manifest_hash = _strip_sha256_prefix(manifest_ref)
@@ -216,7 +232,7 @@ def _emit_p2_lite_artifacts(
 
     # First roots pass (no status_ref yet)
     roots_phase1 = sorted(set([task_spec_ref, output_hashes_ref, manifest_hash, *payload_hashes]))
-    _write_run_roots(runs_dir, roots=roots_phase1)
+    _write_run_roots(runs_dir, roots=roots_phase1, writer=writer)
 
     audit1 = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
     if audit1.get("verdict") != "PASS":
@@ -230,7 +246,7 @@ def _emit_p2_lite_artifacts(
             "cas_snapshot_hash": _sha256_hex("\n".join(sorted(set(roots_phase1))).encode("utf-8")),
         }
         status_ref = put_status(status_payload)
-        _write_run_roots(runs_dir, roots=sorted(set([*roots_phase1, status_ref])))
+        _write_run_roots(runs_dir, roots=sorted(set([*roots_phase1, status_ref])), writer=writer)
         audit2 = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
         raise ValueError(f"PACK_P2_ROOT_AUDIT_FAIL:{audit1.get('errors', [])}:{audit2.get('errors', [])}")
 
@@ -244,7 +260,7 @@ def _emit_p2_lite_artifacts(
     }
     status_ref = put_status(status_payload)
     roots_final = sorted(set([*roots_phase1, status_ref]))
-    _write_run_roots(runs_dir, roots=roots_final)
+    _write_run_roots(runs_dir, roots=roots_final, writer=writer)
     audit_final = root_audit(output_hashes_record=output_hashes_ref, dry_run=True, runs_dir=runs_dir, cas_root=cas_mod._CAS_ROOT)
     if audit_final.get("verdict") != "PASS":
         raise ValueError(f"PACK_P2_ROOT_AUDIT_FAIL_FINAL:{audit_final.get('errors', [])}")
@@ -255,7 +271,10 @@ def _emit_p2_lite_artifacts(
         "output_hashes_ref": output_hashes_ref,
         "status_ref": status_ref,
     }
-    (lite_dir / "RUN_REFS.json").write_bytes(_canonical_json_bytes(run_refs))
+    if writer is None:
+        (lite_dir / "RUN_REFS.json").write_bytes(_canonical_json_bytes(run_refs))
+    else:
+        writer.write_bytes(lite_dir / "RUN_REFS.json", _canonical_json_bytes(run_refs))
     return run_refs
 
 
@@ -462,9 +481,13 @@ def load_baseline(path: Path) -> Optional[Dict[str, Any]]:
         return None
 
 
-def write_json(path: Path, payload: Any) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+def write_json(path: Path, payload: Any, writer: Optional[PackerWriter] = None) -> None:
+    if writer is None:
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
+    else:
+        writer.mkdir(path.parent, kind="durable", parents=True, exist_ok=True)
+        writer.write_text(path, json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def ensure_under_packs_root(out_dir: Path) -> Path:
@@ -645,7 +668,7 @@ def pack_dir_total_bytes(pack_dir: Path) -> int:
     return sum(f.stat().st_size for f in pack_dir.rglob("*") if f.is_file())
 
 
-def copy_repo_files(pack_dir: Path, project_root: Path, included_paths: Sequence[str], scope: PackScope) -> None:
+def copy_repo_files(pack_dir: Path, project_root: Path, included_paths: Sequence[str], scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
     source_root = project_root / scope.source_root_rel
     for rel in included_paths:
         # rel is already relative to source_root as per build_state_manifest
@@ -657,13 +680,17 @@ def copy_repo_files(pack_dir: Path, project_root: Path, included_paths: Sequence
                 continue
 
         dst = pack_dir / "repo" / rel
-        dst.parent.mkdir(parents=True, exist_ok=True)
-        dst.write_bytes(src.read_bytes())
+        if writer is None:
+            dst.parent.mkdir(parents=True, exist_ok=True)
+            dst.write_bytes(src.read_bytes())
+        else:
+            writer.mkdir(dst.parent, kind="durable", parents=True, exist_ok=True)
+            writer.write_bytes(dst, src.read_bytes())
 
 
 # --- Document Generators (Sanitized) ---
 
-def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
+def write_start_here(pack_dir: Path, *, scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
     if scope.key == SCOPE_AGS.key:
         canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
         maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
@@ -706,10 +733,13 @@ def write_start_here(pack_dir: Path, *, scope: PackScope) -> None:
     else:
         raise ValueError(f"Unsupported scope: {scope.key}")
 
-    (pack_dir / "meta" / "START_HERE.md").write_text(text, encoding="utf-8")
+    if writer is None:
+        (pack_dir / "meta" / "START_HERE.md").write_text(text, encoding="utf-8")
+    else:
+        writer.write_text(pack_dir / "meta" / "START_HERE.md", text, encoding="utf-8")
 
 
-def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
+def write_entrypoints(pack_dir: Path, *, scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
     if scope.key == SCOPE_AGS.key:
         canon_contract = rel_posix("LAW", "CANON", "CONTRACT.md")
         maps_entrypoints = rel_posix("NAVIGATION", "MAPS", "ENTRYPOINTS.md")
@@ -752,24 +782,30 @@ def write_entrypoints(pack_dir: Path, *, scope: PackScope) -> None:
     else:
         raise ValueError(f"Unsupported scope for ENTRYPOINTS: {scope.key}")
 
-    (pack_dir / "meta" / "ENTRYPOINTS.md").write_text(text, encoding="utf-8")
+    if writer is None:
+        (pack_dir / "meta" / "ENTRYPOINTS.md").write_text(text, encoding="utf-8")
+    else:
+        writer.write_text(pack_dir / "meta" / "ENTRYPOINTS.md", text, encoding="utf-8")
 
 
-def write_build_tree(pack_dir: Path, project_root: Path) -> None:
+def write_build_tree(pack_dir: Path, project_root: Path, writer: Optional[PackerWriter] = None) -> None:
     tree_path = pack_dir / "meta" / "BUILD_TREE.txt"
-    tree_path.write_text("BUILD is excluded from packs by contract.\n", encoding="utf-8")
+    if writer is None:
+        tree_path.write_text("BUILD is excluded from packs by contract.\n", encoding="utf-8")
+    else:
+        writer.write_text(tree_path, "BUILD is excluded from packs by contract.\n", encoding="utf-8")
 
 
-def write_pack_info(pack_dir: Path, scope: PackScope, stamp: str) -> None:
+def write_pack_info(pack_dir: Path, scope: PackScope, stamp: str, writer: Optional[PackerWriter] = None) -> None:
     info = {
         "scope": scope.key,
         "title": scope.title,
         "stamp": stamp,
         "version": read_canon_version(),
     }
-    write_json(pack_dir / "meta" / "PACK_INFO.json", info)
+    write_json(pack_dir / "meta" / "PACK_INFO.json", info, writer=writer)
 
-def write_provenance(pack_dir: Path, scope: PackScope) -> None:
+def write_provenance(pack_dir: Path, scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
     import os
 
     prov = {
@@ -777,11 +813,11 @@ def write_provenance(pack_dir: Path, scope: PackScope) -> None:
         # P.2: deterministic by default (no timestamps / machine identity)
         "scope": scope.key,
     }
-    write_json(pack_dir / "meta" / "PROVENANCE.json", prov)
+    write_json(pack_dir / "meta" / "PROVENANCE.json", prov, writer=writer)
 
-def write_omitted(pack_dir: Path, omitted: List[Dict[str, Any]]) -> None:
+def write_omitted(pack_dir: Path, omitted: List[Dict[str, Any]], writer: Optional[PackerWriter] = None) -> None:
     # Always emit for determinism and fixture stability (empty list is meaningful).
-    write_json(pack_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted)
+    write_json(pack_dir / "meta" / "REPO_OMITTED_BINARIES.json", omitted, writer=writer)
 
 def render_tree(paths: Sequence[str]) -> str:
     """Render a visual tree from a list of relative paths."""
@@ -813,7 +849,7 @@ def render_tree(paths: Sequence[str]) -> str:
     return "\n".join(lines)
 
 
-def write_pack_file_tree_and_index(pack_dir: Path, *, scope: PackScope, stamp: str, combined: bool) -> None:
+def write_pack_file_tree_and_index(pack_dir: Path, *, scope: PackScope, stamp: str, combined: bool, writer: Optional[PackerWriter] = None) -> None:
     all_files = [p for p in pack_dir.rglob("*") if p.is_file()]
     rel_paths = sorted(p.relative_to(pack_dir).as_posix() for p in all_files)
 
@@ -821,23 +857,32 @@ def write_pack_file_tree_and_index(pack_dir: Path, *, scope: PackScope, stamp: s
     final_paths = list(rel_paths)
     tm_md = f"FULL/{scope.file_prefix}-FULL-TREEMAP-{stamp}.md"
     tm_txt = f"FULL/{scope.file_prefix}-FULL-TREEMAP-{stamp}.txt"
-    
+
     if combined:
         if tm_md not in final_paths: final_paths.append(tm_md)
         if tm_txt not in final_paths: final_paths.append(tm_txt)
 
     tree_text = render_tree(final_paths)
 
-    (pack_dir / "meta" / "FILE_TREE.txt").write_text(tree_text + "\n", encoding="utf-8")
+    if writer is None:
+        (pack_dir / "meta" / "FILE_TREE.txt").write_text(tree_text + "\n", encoding="utf-8")
+    else:
+        writer.write_text(pack_dir / "meta" / "FILE_TREE.txt", tree_text + "\n", encoding="utf-8")
 
     if combined:
         full_dir = pack_dir / "FULL"
-        full_dir.mkdir(parents=True, exist_ok=True)
-        
+        if writer is None:
+            full_dir.mkdir(parents=True, exist_ok=True)
+        else:
+            writer.mkdir(full_dir, kind="durable", parents=True, exist_ok=True)
+
         md_content = f"# {scope.file_prefix} TREEMAP\n\n```text\n{tree_text}\n```\n"
         txt_content = f"{scope.file_prefix} TREEMAP\n\n{tree_text}\n"
-        
-        (full_dir / tm_md.replace("FULL/", "")).write_text(md_content, encoding="utf-8")
+
+        if writer is None:
+            (full_dir / tm_md.replace("FULL/", "")).write_text(md_content, encoding="utf-8")
+        else:
+            writer.write_text(full_dir / tm_md.replace("FULL/", ""), md_content, encoding="utf-8")
         # .txt treemap not allowed in FULL/ per req 5. Archive will generate sibling or use FILE_TREE.txt line 538 removal.
 
     file_index: List[Dict[str, Any]] = []
@@ -847,7 +892,7 @@ def write_pack_file_tree_and_index(pack_dir: Path, *, scope: PackScope, stamp: s
         size = p.stat().st_size
         file_index.append({"path": rel, "bytes": size, "sha256": hash_file(p)})
     file_index.sort(key=lambda e: (e["path"], e["sha256"]))
-    write_json(pack_dir / "meta" / "FILE_INDEX.json", file_index)
+    write_json(pack_dir / "meta" / "FILE_INDEX.json", file_index, writer=writer)
 
 
 # --- Full Output Generation ---
@@ -860,22 +905,25 @@ def build_combined_txt_block(rel_path: str, text: str, byte_count: int) -> str:
     limit = "-" * 80
     return "\n".join([limit, f"FILE: {rel_path} ({byte_count:,} bytes)", limit, text.rstrip(), ""])
 
-def write_full_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> None:
+def write_full_outputs(pack_dir: Path, *, stamp: str, scope: PackScope, writer: Optional[PackerWriter] = None) -> None:
     full_dir = pack_dir / "FULL"
-    full_dir.mkdir(parents=True, exist_ok=True)
+    if writer is None:
+        full_dir.mkdir(parents=True, exist_ok=True)
+    else:
+        writer.mkdir(full_dir, kind="durable", parents=True, exist_ok=True)
 
     combined_md_rel = f"{scope.file_prefix}-FULL-{stamp}.md"
     combined_txt_rel = f"{scope.file_prefix}-FULL-{stamp}.txt"
-    
+
     # We will compute the tree later and append it if needed, or write it separate
-    # Roadmap says: FULL/ ...md, ...txt. 
+    # Roadmap says: FULL/ ...md, ...txt.
     # Logic adapted from legacy but pointing to FULL_DIR
-    
+
     combined_md_lines = [f"# {scope.file_prefix} FULL", ""]
     combined_txt_lines = [f"{scope.file_prefix} FULL", ""]
 
     base_paths = sorted(p.relative_to(pack_dir).as_posix() for p in pack_dir.rglob("*") if p.is_file())
-    
+
     for rel in base_paths:
         # Exclude generated output dirs to avoid recursion/duplication
         if rel.startswith("FULL/") or rel.startswith("SPLIT/") or rel.startswith("LITE/"):
@@ -890,7 +938,10 @@ def write_full_outputs(pack_dir: Path, *, stamp: str, scope: PackScope) -> None:
     md_content = "\n".join(combined_md_lines).rstrip() + "\n"
     txt_content = "\n".join(combined_txt_lines).rstrip() + "\n"
 
-    (full_dir / combined_md_rel).write_text(md_content, encoding="utf-8")
+    if writer is None:
+        (full_dir / combined_md_rel).write_text(md_content, encoding="utf-8")
+    else:
+        writer.write_text(full_dir / combined_md_rel, md_content, encoding="utf-8")
     # NO TXT output in FULL/ as per requirements
     # (full_dir / combined_txt_rel).write_text(txt_content, encoding="utf-8")
 
@@ -945,6 +996,7 @@ def make_pack(
     p2_runs_dir: Optional[Path] = None,
     p2_cas_root: Optional[Path] = None,
     skip_proofs: bool = False,
+    writer: Optional[PackerWriter] = None,
 ) -> Path:
     from .split import write_split_pack
     from .lite import write_split_pack_lite
@@ -1027,16 +1079,16 @@ def make_pack(
         (out_dir / "repo").mkdir(parents=True, exist_ok=True)
 
         # 1. Copy Repo
-        copy_repo_files(out_dir, source_project_root, include_paths, scope=scope)
-        write_json(out_dir / "meta" / "REPO_STATE.json", manifest)
-        write_build_tree(out_dir, source_project_root)
+        copy_repo_files(out_dir, source_project_root, include_paths, scope=scope, writer=writer)
+        write_json(out_dir / "meta" / "REPO_STATE.json", manifest, writer=writer)
+        write_build_tree(out_dir, source_project_root, writer=writer)
 
         # 2. Meta Docs
-        write_start_here(out_dir, scope=scope)
-        write_entrypoints(out_dir, scope=scope)
-        write_pack_info(out_dir, scope=scope, stamp=stamp or digest[:12])
-        write_provenance(out_dir, scope)
-        write_omitted(out_dir, omitted)
+        write_start_here(out_dir, scope=scope, writer=writer)
+        write_entrypoints(out_dir, scope=scope, writer=writer)
+        write_pack_info(out_dir, scope=scope, stamp=stamp or digest[:12], writer=writer)
+        write_provenance(out_dir, scope, writer=writer)
+        write_omitted(out_dir, omitted, writer=writer)
 
         # 3. SPLIT Output (Strictly SPLIT/)
         repo_pack_paths = [f"repo/{p}" for p in include_paths]
@@ -1046,7 +1098,7 @@ def make_pack(
         # We respect the legacy flag '--combined' but map it to producing FULL/ output
         if combined:
             effective_stamp = stamp or digest[:12]
-            write_full_outputs(out_dir, stamp=effective_stamp, scope=scope)
+            write_full_outputs(out_dir, stamp=effective_stamp, scope=scope, writer=writer)
 
         # 5. LITE Output (Strictly LITE/) + P.2 CAS artifacts
         if split_lite or profile == "lite":
@@ -1058,12 +1110,13 @@ def make_pack(
                 include_paths=include_paths,
                 scope=scope,
                 runs_dir=effective_runs_dir,
+                writer=writer,
             )
 
         # 6. File Inventory
         # effective_stamp used here if combined, otherwise stamp or digest
         eff_stamp_for_tree = stamp or digest[:12]
-        write_pack_file_tree_and_index(out_dir, scope=scope, stamp=eff_stamp_for_tree, combined=combined)
+        write_pack_file_tree_and_index(out_dir, scope=scope, stamp=eff_stamp_for_tree, combined=combined, writer=writer)
 
         # 7. Archives
         if zip_enabled:
@@ -1084,6 +1137,6 @@ def make_pack(
 
         # Update baseline
         if use_shared_baseline:
-            write_json(baseline_path, manifest)
+            write_json(baseline_path, manifest, writer=writer)
 
         return out_dir

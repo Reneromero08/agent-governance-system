@@ -227,7 +227,7 @@ def test_p2_root_completeness_gate(monkeypatch: pytest.MonkeyPatch, tmp_path: Pa
 
     original_write_roots = packer_core._write_run_roots
 
-    def drop_one_required_root(path: Path, *, roots: list[str]) -> None:
+    def drop_one_required_root(path: Path, *, roots: list[str], writer=None) -> None:
         # Find OUTPUT_HASHES record ref among roots, then drop one required hash.
         required: list[str] = []
         for candidate in roots:
