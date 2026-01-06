@@ -1,37 +1,47 @@
 ---
 title: MODEL_ROUTING_CANON
-version: 1.0
+version: 1.1
 status: CANONICAL
-generated_on: 2026-01-04
+generated_on: 2026-01-06
 scope: Model routing decision ladder for optimal token efficiency
 ---
-<!-- CANON_HASH: db13df040be8f37535ce3db87631a2fb4251af6cfb0fadbdde226fc5c9933636 -->
+<!-- CANON_HASH (sha256 over file content excluding this line): 62C18A04874BA7645A4F82F371AA2430640077675E8D14703A822B181B835CB7 -->
 
 # MODEL_ROUTING_CANON
 
 ## Purpose
 Route work across models to minimize wasted tokens and maximize correctness.
 
-Models are execution units. Prefer **procedural execution** over “designing in the prompt.”
+Models are execution units. Prefer procedural execution over “designing in the prompt.”
 
 ## Global defaults
-- **Thinking OFF by default** on every model.
+- Thinking OFF by default on every model.
 - Turn thinking ON only when the task requires invention or a true design fork that cannot be resolved from repo canon/contracts/packs.
-- Escalate models **only** after acceptance checks fail or coherence requirements exceed the current model.
+- Escalate models only after acceptance checks fail or coherence requirements exceed the current model.
+
+## Workspace rule (parallel-safe)
+Default:
+- Executors work in isolated workspaces (worktree or clone) on task branches.
+- Agents do not work on main by default.
+- Workspaces must be on a named branch (not detached HEAD) and start clean.
+
+Optional main override:
+- Only when a prompt explicitly opts in and the workspace is clean.
+- Avoid for parallel runs.
 
 ## Authority Tiers (Policy)
-- **Planner-capable Models**: Claude Sonnet (Thinking), Claude Opus (Thinking/Non-thinking). Designated for planning, repository navigation, and complex decomposition.
-- **Non-planner Models**: Gemini Flash, Gemini Pro Low, GPT Codex, Grok Code Fast. Restricted to mechanical execution only.
-- **Enforcement**: Non-planner models MUST carry a `plan_ref` artifact or identifier from a planner-capable model. Execution without a valid reference is a policy breach.
+- Planner-capable Models: Claude Sonnet (Thinking), Claude Opus (Thinking/Non-thinking). Designated for planning, repository navigation, and complex decomposition.
+- Non-planner Models: Gemini Flash, Gemini Pro Low, GPT Codex, Grok Code Fast. Restricted to mechanical execution only.
+- Enforcement: Non-planner models MUST carry a plan_ref artifact or identifier from a planner-capable model. Execution without a valid reference is a policy breach.
 
 ## Decision ladder (strict)
-1) **Mechanical from an explicit checklist/spec?**  
+1) Mechanical from an explicit checklist/spec?
    → Use the smallest reliable model.
 
-2) **Large/high-risk but fully specified?**  
+2) Large/high-risk but fully specified?
    → Use a high-authority execution model (non-thinking).
 
-3) **Spec incomplete/contradictory/ambiguous?**  
+3) Spec incomplete/contradictory/ambiguous?
    → Tighten the spec or pack first. Use a thinking model only as last resort.
 
 ## Routing matrix
@@ -43,15 +53,16 @@ Use when:
 - “Do exactly X on these files”
 
 Model order:
-1) Gemini Flash (thinking OFF)  
-2) Gemini Pro Low (thinking OFF)  
-3) Claude Sonnet non-thinking  
-4) Grok Code Fast only for **low-risk single-file** mechanical edits (no git chores, no multi-file invariants)
+1) Gemini Flash (thinking OFF)
+2) Gemini Pro Low (thinking OFF)
+3) Claude Sonnet non-thinking
+4) Grok Code Fast only for low-risk single-file mechanical edits (no git chores, no multi-file invariants)
 
 Acceptance pattern:
 - Explicit file list / globs
 - Explicit rules (do / do not touch)
 - Explicit validation commands and expected outcomes
+- Test semantics invariant: violations must fail tests
 
 ### B) Implementation from a complete spec
 Use when:
@@ -59,9 +70,9 @@ Use when:
 - You want code produced fast with minimal invention
 
 Model order:
-1) GPT Codex Mini for small bounded functions  
-2) GPT Codex for normal implementation  
-3) GPT Codex Max only when change spans many files and needs more retention  
+1) GPT Codex Mini for small bounded functions
+2) GPT Codex for normal implementation
+3) GPT Codex Max only when change spans many files and needs more retention
 4) Claude Sonnet non-thinking when multi-file coherence is more important than speed
 
 Thinking:
@@ -72,6 +83,7 @@ Acceptance pattern:
 - Exact file paths to create/edit
 - Determinism rules (sorting, canonical JSON, stable hashes)
 - Runnable tests + exit criteria
+- Workspace preflight checks recorded in receipt/report
 
 ### C) Multi-file build with high correctness requirements
 Use when:
@@ -99,7 +111,7 @@ Use when:
 - Multiple viable designs exist and a choice must be made
 
 Model order:
-1) Claude Sonnet Thinking  
+1) Claude Sonnet Thinking
 2) Claude Opus Thinking only if unresolved and stakes are extreme
 
 Output requirements:
@@ -115,10 +127,15 @@ Do not escalate because a task “feels important.” Escalate only when:
 3) The task is underspecified and cannot be clarified by reading repo canon/contracts/packs.
 
 ## Quick presets
-- **Fastest safe:** Gemini Flash (thinking OFF)
-- **Coding workhorse:** Claude Sonnet (thinking OFF)
-- **Big specified change, do not mess up:** Claude Opus (thinking OFF)
-- **I need invention:** Sonnet Thinking → Opus Thinking only if needed
+- Fastest safe: Gemini Flash (thinking OFF)
+- Coding workhorse: Claude Sonnet (thinking OFF)
+- Big specified change, do not mess up: Claude Opus (thinking OFF)
+- I need invention: Sonnet Thinking → Opus Thinking only if needed
+
+## PR policy (local fast path)
+Pull requests are optional.
+If you are working locally and integrating fast, prefer local branch merges.
+Use PRs only when you want remote CI enforcement, async review, or an audit trail.
 
 ## Minimal ticket template (paste into any agent)
 - Goal:
@@ -133,7 +150,7 @@ Do not escalate because a task “feels important.” Escalate only when:
 - Commit message(s):
 
 ## Opus constraint (critical)
-Opus is a **high-authority execution model**, not an exploration model.
+Opus is a high-authority execution model, not an exploration model.
 Prompts to Opus must be fully specified, procedural, and bounded.
 
 ## Lint precondition (hard stop)

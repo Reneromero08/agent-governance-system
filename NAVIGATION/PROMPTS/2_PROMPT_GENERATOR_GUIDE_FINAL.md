@@ -1,11 +1,11 @@
 ---
 title: 2_PROMPT_GENERATOR_GUIDE_FINAL
-version: 1.4
+version: 1.5
 status: CANONICAL
-generated_on: 2026-01-04
+generated_on: 2026-01-06
 scope: Procedures + templates for generating per-task prompts (subordinate to PROMPT_POLICY_CANON)
 ---
-<!-- CANON_HASH: 5124e8a9882381092199f3a13669927e5be64bfb9c9ad7b4aa76ea8a22a816e0 -->
+<!-- CANON_HASH (sha256 over file content excluding this line): 62676E87CF498A4FB885AEEF67773DA3A6E444C84C1CA9EDD5BF74D08117F457 -->
 
 ## 0) Authority
 Subordinate to NAVIGATION/PROMPTS/1_PROMPT_POLICY_CANON.md.
@@ -29,18 +29,48 @@ Patchset is favored when:
 
 ## 3) Prompt QA checklist (generator self-check)
 A prompt is invalid unless it passes:
+
+Header and routing
 - Header contains policy_canon_sha256 and guide_canon_sha256
 - Numeric phase and task_id only
-- Explicit write allowlist, no placeholders
+- primary_model and fallback_chain are explicit
 - receipt_path and report_path are explicit and in header
+
+Scope
+- Explicit write allowlist, no placeholders
+- Allowed deletes/renames is explicit (or N/A)
+- Forbidden writes is explicit (“everything else”)
+
+Required facts and STOP behavior
 - REQUIRED FACTS are verifiable or unknowns are classified (BLOCKER vs DEFERRABLE)
-- DEFERRABLE facts have FILL_ME__ tokens and are recorded as warnings in the manifest
-- PLAN is explicit and procedural
+- DEFERRABLE facts use FILL_ME__ tokens and are recorded as warnings in the manifest
+- STOP conditions are explicit for scope, unknowns, validation failures
+
+Workspace preflight (must exist in REQUIRED FACTS or PLAN step 0)
+- Verify workspace is on a named branch (not detached HEAD):
+  - `git symbolic-ref -q HEAD` must exit 0
+- Verify workspace starts clean:
+  - `git status --porcelain` must be empty
+- If prompt does not explicitly allow main workspace, it must require an isolated workspace (worktree or clone)
+
+Validation semantics
 - VALIDATION is defined (or valid N/A case)
+- Test semantics invariant is respected:
+  - if violations are detected, tests MUST fail
+  - scanner tests are forbidden
+
+Coverage accounting (only when relevant)
+- If prompt requires “100%” or “no remaining”, it defines:
+  - denominator (explicit list)
+  - numerator (computed)
+  - percentage (derived)
+  - evidence (query or referenced artifact)
+
+Artifacts
 - ARTIFACTS includes receipt and report paths and matches header paths
 - No forbidden inference terms (use hex-escaped regex as in policy)
 
-If scripts/lint-prompt.sh exists, the Governor MUST run it via `bash` on each generated prompt (requires bash-compatible shell, e.g. WSL).
+If CAPABILITY/TOOLS/linters/lint_prompt_pack.sh exists, the Governor MUST run it via `bash` on each generated prompt (requires bash-compatible shell, e.g. WSL).
 
 ## 4) Canonical per-task prompt template
 ```text
@@ -73,6 +103,14 @@ SCOPE (WRITE ALLOWLIST)
   - Everything else.
 
 REQUIRED FACTS (VERIFY, DO NOT GUESS)
+- Fact: Workspace is safe to execute in (branch + clean-state)
+  - Verify via:
+    - `git symbolic-ref -q HEAD` (must exit 0)
+    - `git status --porcelain` (must be empty)
+  - If not satisfied:
+    - If prompt explicitly allows main workspace: STOP and require user to resolve dirty state
+    - Otherwise: STOP and require creating an isolated workspace (worktree or clone)
+
 - Fact: <needed>
   - Verify via: <command> and <expected signal>
   - If unknown:
@@ -80,6 +118,7 @@ REQUIRED FACTS (VERIFY, DO NOT GUESS)
     - UNKNOWN_DEFERRABLE -> use FILL_ME__<KEY> and record warning in manifest
 
 PLAN (EXPLICIT STEPS)
+0) Preflight workspace checks (branch + clean-state). STOP if failing.
 1) ...
 2) ...
 3) ...
@@ -89,6 +128,8 @@ VALIDATION (DONE = GREEN)
   - <command>
 - Pass criteria:
   - <specific>
+- Test semantics:
+  - any detected violation MUST fail the test
 - If failing:
   - Iterate if salvageable, else revert; do not claim success.
 
@@ -109,7 +150,6 @@ BEGIN_PLANNER_ONLY
 END_PLANNER_ONLY
 
 Executor MUST ignore content inside that block.
-No other transform is required.
 
 ## 6) Dependency tracking
 - Use depends_on in the header when a task requires outputs from another task.
