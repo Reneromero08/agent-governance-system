@@ -79,7 +79,6 @@ REQUIRED_FIELDS = [
     "status",
     "summary",
     "tags",
-    "hashtags",
 ]
 
 
@@ -290,7 +289,6 @@ def generate_yaml_frontmatter(file_path: Path, existing_metadata: Optional[Dict]
         "status": existing_metadata.get("status", "Active") if existing_metadata else "Active",
         "summary": existing_metadata.get("summary", "Document summary") if existing_metadata else "Document summary",
         "tags": existing_metadata.get("tags", []) if existing_metadata else [],
-        "hashtags": existing_metadata.get("hashtags", []) if existing_metadata else [],
     }
     
     return yaml.dump(metadata, default_flow_style=False, sort_keys=False)
