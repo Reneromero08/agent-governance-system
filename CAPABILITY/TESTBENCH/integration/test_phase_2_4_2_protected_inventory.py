@@ -86,7 +86,12 @@ class TestProtectedInventory:
 
         matches = inventory.find_matching_patterns(db_path)
         assert len(matches) > 0
-        assert matches[0].artifact_class == ArtifactClass.VECTOR_DATABASE
+        # With AIRTIGHT coverage, system1.db matches both VECTOR_DATABASE and SEMANTIC_INDEX
+        # The key invariant is that it IS protected and requires sealing
+        match_classes = [m.artifact_class for m in matches]
+        assert ArtifactClass.VECTOR_DATABASE in match_classes or ArtifactClass.SEMANTIC_INDEX in match_classes
+        # Must require sealing in public context
+        assert inventory.requires_sealing(db_path, context="public")
 
         # Test non-protected path
         code_path = Path("CAPABILITY/PRIMITIVES/cas_store.py")
@@ -271,6 +276,112 @@ class TestInventoryCompleteness:
 
         for path in test_paths:
             assert inventory.is_protected(Path(path)), f"Missing coverage for {path}"
+
+    def test_pack_outputs_covered(self):
+        """Verify pack output patterns are in inventory (AIRTIGHT)."""
+        inventory = get_default_inventory()
+
+        test_paths = [
+            # Pack manifests (contain CAS hashes for every file)
+            "MEMORY/LLM_PACKER/_packs/ags-pack-2026-01-01/LITE/PACK_MANIFEST.json",
+            "MEMORY/LLM_PACKER/_packs/ags-pack-2026-01-01/LITE/PROOFS.json",
+            "MEMORY/LLM_PACKER/_packs/ags-pack-2026-01-01/LITE/RUN_REFS.json",
+            # Pack metadata
+            "MEMORY/LLM_PACKER/_packs/_system/benchmark_tmp/ags/pack/meta/FILE_INDEX.json",
+            "MEMORY/LLM_PACKER/_packs/_system/benchmark_tmp/ags/pack/meta/PROVENANCE.json",
+            # Pack content (generated markdown)
+            "MEMORY/LLM_PACKER/_packs/ags-pack-2026-01-01/SPLIT/AGS-01_LAW.md",
+            # Temporary pack runs
+            "_PACK_RUN/LATEST/manifest.json",
+        ]
+
+        for path in test_paths:
+            assert inventory.is_protected(Path(path)), f"Missing coverage for {path}"
+            # Pack outputs must be PLAINTEXT_NEVER
+            assert inventory.requires_sealing(Path(path), context="public"), \
+                f"Pack output not requiring seal: {path}"
+
+    def test_semantic_indexes_covered(self):
+        """Verify semantic index patterns are in inventory (AIRTIGHT)."""
+        inventory = get_default_inventory()
+
+        test_paths = [
+            # Generated indexes (reveal codebase structure)
+            "NAVIGATION/CORTEX/_generated/SECTION_INDEX.json",
+            "NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json",
+            "NAVIGATION/CORTEX/_generated/CORTEX_META.json",
+            "NAVIGATION/CORTEX/meta/FILE_INDEX.json",
+            # Cassette configuration
+            "NAVIGATION/CORTEX/network/cassettes.json",
+            # Any location for these indexes
+            "some/path/SECTION_INDEX.json",
+            "another/path/FILE_INDEX.json",
+        ]
+
+        for path in test_paths:
+            assert inventory.is_protected(Path(path)), f"Missing coverage for {path}"
+            # Semantic indexes must be PLAINTEXT_NEVER
+            assert inventory.requires_sealing(Path(path), context="public"), \
+                f"Semantic index not requiring seal: {path}"
+
+    def test_airtight_coverage(self):
+        """Verify no high-value artifacts can leak (AIRTIGHT verification)."""
+        inventory = get_default_inventory()
+
+        # These patterns MUST be protected - no exceptions
+        critical_patterns = [
+            # Embeddings
+            "NAVIGATION/CORTEX/db/system1.db",
+            # Generated indexes
+            "NAVIGATION/CORTEX/_generated/SECTION_INDEX.json",
+            "NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json",
+            # Pack manifests (contain file hashes)
+            "MEMORY/LLM_PACKER/_packs/test/LITE/PACK_MANIFEST.json",
+            # Compression proofs
+            "NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_DATA.json",
+        ]
+
+        for path in critical_patterns:
+            assert inventory.is_protected(Path(path)), \
+                f"AIRTIGHT VIOLATION: {path} not protected!"
+            assert inventory.requires_sealing(Path(path), context="public"), \
+                f"AIRTIGHT VIOLATION: {path} not sealed for public!"
+
+    def test_pipeline_manifests_covered(self):
+        """Verify LAW/CONTRACTS/_runs manifests are protected (AIRTIGHT)."""
+        inventory = get_default_inventory()
+
+        test_paths = [
+            # Pipeline manifests (contain file hashes - major leak vector)
+            "LAW/CONTRACTS/_runs/pipeline-p1-s1-a1/PRE_MANIFEST.json",
+            "LAW/CONTRACTS/_runs/pipeline-p1-s1-a1/POST_MANIFEST.json",
+            "LAW/CONTRACTS/_runs/pipeline-elision-p1-s1-a1/POST_MANIFEST.json",
+            # Nested pack manifests in pytest temp dirs
+            "LAW/CONTRACTS/_runs/pytest_tmp/test/repo/MEMORY/LLM_PACKER/_packs/out/LITE/PACK_MANIFEST.json",
+        ]
+
+        for path in test_paths:
+            assert inventory.is_protected(Path(path)), f"Missing coverage for {path}"
+            assert inventory.requires_sealing(Path(path), context="public"), \
+                f"Pipeline manifest not requiring seal: {path}"
+
+    def test_catchall_db_protection(self):
+        """Verify .db files in arbitrary locations are caught (AIRTIGHT)."""
+        inventory = get_default_inventory()
+
+        # These .db files should be caught even in unexpected locations
+        test_paths = [
+            "random/path/system1.db",
+            "some/nested/dir/cortex.db",
+            "anywhere/codebase_full.db",
+            "deep/structure/instructions.db",
+        ]
+
+        for path in test_paths:
+            assert inventory.is_protected(Path(path)), \
+                f"AIRTIGHT VIOLATION: {path} not caught by catch-all!"
+            assert inventory.requires_sealing(Path(path), context="public"), \
+                f"Catch-all .db not sealed: {path}"
 
 
 class TestFailureScenarios:
