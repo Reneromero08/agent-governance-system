@@ -153,17 +153,29 @@ def _is_lexically_under(root: Path, candidate: Path) -> bool:
 def _symlink_escapes_root(root: Path, target: Path) -> bool:
     """
     Detect if any existing symlink in the path prefix would cause escape outside root.
+
+    Uses lstat() for atomic symlink detection (single syscall instead of
+    exists() + is_symlink() which creates a TOCTOU window).
     """
+    import stat
+
     root_real = root.resolve()
 
     current = root_real
     rel_parts = target.relative_to(root).parts
     for part in rel_parts:
         current = current / part
-        if current.exists() and current.is_symlink():
-            resolved = current.resolve()
-            if not _is_lexically_under(root_real, resolved):
-                return True
+        try:
+            # Single syscall instead of exists() + is_symlink()
+            st = current.lstat()
+            if stat.S_ISLNK(st.st_mode):
+                resolved = current.resolve()
+                if not _is_lexically_under(root_real, resolved):
+                    return True
+        except (OSError, FileNotFoundError):
+            # Path doesn't exist yet - safe to continue
+            # Actual file operations will fail if truly inaccessible
+            pass
     return False
 
 
@@ -468,18 +480,30 @@ def _restore_bundle_impl(
 
     # EXECUTE
     phase = PHASE_EXECUTE
-    for entry in plan:
-        if entry.target_path.exists():
-            return _result(RESTORE_CODES["RESTORE_TARGET_PATH_EXISTS"], phase, ok=False, details={"path": entry.relative_path})
 
     staging_dir = restore_root / f".spectrum06_staging_{uuid.uuid4().hex}"
     try:
         staging_dir.mkdir(parents=True, exist_ok=False)
+    except FileExistsError:
+        # Defensive check for UUID collision (astronomically unlikely)
+        return _result(RESTORE_CODES["RESTORE_INTERNAL_ERROR"], phase, ok=False, details={"reason": "staging_collision"})
     except Exception:
         return _result(RESTORE_CODES["RESTORE_INTERNAL_ERROR"], phase, ok=False)
 
     try:
         for entry in plan:
+            # Check target IMMEDIATELY before staging copy
+            # Minimizes TOCTOU window (moved from separate loop above)
+            if entry.target_path.exists():
+                # Don't call _rollback_bundle here - we haven't staged anything yet
+                # and _rollback_bundle would delete the pre-existing target file
+                # Just clean up the empty staging dir and return error
+                try:
+                    shutil.rmtree(staging_dir, ignore_errors=True)
+                except Exception:
+                    pass
+                return _result(RESTORE_CODES["RESTORE_TARGET_PATH_EXISTS"], phase, ok=False, details={"path": entry.relative_path})
+
             staged_path = staging_dir / entry.relative_path
             _copy_file(entry.source_path, staged_path)
             staged_hash = "sha256:" + _sha256_file_hex(staged_path)
@@ -701,6 +725,16 @@ def restore_chain(
         )
 
     chain_manifest = restore_root / f".spectrum06_chain_{uuid.uuid4().hex}.json"
+
+    # Defensive check for UUID collision (astronomically unlikely)
+    if chain_manifest.exists():
+        return _result(
+            RESTORE_CODES["RESTORE_INTERNAL_ERROR"],
+            phase,
+            ok=False,
+            details={"reason": "chain_manifest_collision"}
+        )
+
     try:
         chain_manifest.write_bytes(_canonical_json_bytes({"run_ids": run_ids}))
     except Exception:
