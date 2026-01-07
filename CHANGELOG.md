@@ -13,13 +13,36 @@ All notable changes to Agent Governance System will be documented in this file.
   - **4.6.3 TOCTOU Mitigation (P2):** Reduced race windows, `lstat()` for symlink detection
   - **4.6.4 Error Sanitization (P3):** Remove exception text from API responses
   - **4.6.5 Tests:** 4 new tests planned for hardening verification
+- **INBOX Report Writer Skill Consolidation** — Complete INBOX management solution with all utilities consolidated
+  - **New write_report Operation:** Generates canonical reports with YAML frontmatter per DOCUMENT_POLICY.md
+    - Auto-generates filename: `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md`
+    - Computes and embeds SHA256 content hash automatically
+    - Required fields: `title`, `body`
+    - Optional fields: `uuid`, `section`, `bucket`, `author`, `priority`, `status`, `summary`, `tags`, `output_subdir`
+  - **Files Consolidated (4 utilities):**
+    - `cleanup_report_formatting.py` — Removes deprecated fields (e.g., `hashtags`), recomputes hashes
+    - `inbox_normalize.py` — Organizes files into `YYYY-MM/Week-XX` structure
+    - `check_inbox_policy.py` — Pre-commit policy enforcement for DOCUMENT_POLICY.md compliance
+    - `weekly_normalize.py` — Automated weekly normalization with safety checks
+  - **Complete Feature Set (7 categories):**
+    1. Hash Management — Content integrity verification via SHA256
+    2. INBOX Ledger — Metadata cataloging and summary statistics
+    3. Report Writer — Canonical report generation with frontmatter
+    4. Report Cleanup — Format standardization and deprecated field removal
+    5. INBOX Normalization — Directory organization by ISO 8601 weeks
+    6. Policy Enforcement — Pre-commit compliance validation
+    7. Weekly Automation — Scheduled maintenance with idempotent execution
+  - **Skill Structure:** All 15 files now in `CAPABILITY/SKILLS/inbox/inbox-report-writer/`
+  - **Documentation:** Complete README with usage examples for all 7 features
+
+### Changed
+- **Report Formatting Cleanup:** Removed deprecated `hashtags` field from 13 existing reports
+  - All reports in `INBOX/reports/` now comply with updated DOCUMENT_POLICY.md
+  - Content hashes recomputed automatically after cleanup
 
 ### Reports
 - `INBOX/reports/01-07-2026_PHASE_4_SECURITY_HARDENING_ANALYSIS.md` — 8 findings (0 Critical, 0 High, 4 Medium, 3 Low, 1 Very Low)
 - `INBOX/reports/01-07-2026_PHASE_4_5_ATOMIC_RESTORE_COMPLETE.md` — Phase 4.5 implementation summary
-
-### Changed
-- **Roadmap Version:** 3.7.13
 
 ## [3.7.12] - 2026-01-07
 
@@ -33,7 +56,6 @@ All notable changes to Agent Governance System will be documented in this file.
 ### Changed
 - **restore_runner.py:** Added `dry_run` parameter to `restore_bundle()` and `restore_chain()`
 - **catalytic_restore.py:** Added `--dry-run` CLI flag for both bundle and chain commands
-- **Roadmap Version:** 3.7.12
 
 ### Status
 - **Phase 4 COMPLETE (100%):** All 5 sections implemented (4.1-4.5) with 64 total tests

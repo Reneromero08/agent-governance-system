@@ -15,13 +15,8 @@ tags:
 - template
 - framework
 - instance-data
-hashtags:
-- '#governance'
-- '#releases'
-- '#template'
 ---
-<!-- CONTENT_HASH: 08806872c22ef9e678f5cb2ff04c179e271bfa031f617bfdb7c87735d21d8333 -->
-
+<!-- CONTENT_HASH: c8cc7127577f46be0b090c56708a11bad763166fa6014c9ebf0a6ab1d0b6a2c0 -->
 # AGS Release Strategy: Framework vs Instance Data
 
 **Goal**: Release AGS as a reusable template/framework that others can use, while keeping YOUR personal data separate.

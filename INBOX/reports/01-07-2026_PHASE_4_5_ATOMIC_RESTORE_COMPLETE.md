@@ -15,13 +15,8 @@ tags:
 - spectrum-06
 - dry-run
 - transactional
-hashtags:
-- '#phase4'
-- '#restore'
-- '#complete'
 ---
 <!-- CONTENT_HASH: 351a9f10a193ba6b24c67b2b2c947171c6ebaae90e8062eb9e8aa4053bc62776 -->
-
 # Phase 4.5: Atomic Restore Implementation Report
 
 **Date:** 2026-01-07

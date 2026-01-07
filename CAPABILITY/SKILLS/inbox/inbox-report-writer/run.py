@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
 """Inbox report writer skill runner."""
 
+import hashlib
 import json
 import os
+import re
 import sys
+from datetime import datetime
 from pathlib import Path
-from typing import Any, Dict, List
+from typing import Any, Dict, List, Optional
 
 PROJECT_ROOT = Path(__file__).resolve().parents[4]
 ALLOWED_OUTPUT_ROOT = (PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs").resolve()
+INBOX_ROOT = (PROJECT_ROOT / "INBOX").resolve()
 
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
@@ -49,8 +53,95 @@ def _ensure_output_path(path: Path) -> None:
         raise ValueError(f"Output path must be under LAW/CONTRACTS/_runs: {path}")
 
 
+def _ensure_inbox_path(path: Path) -> None:
+    """Verify path is under INBOX root."""
+    if not str(path.resolve()).startswith(str(INBOX_ROOT)):
+        raise ValueError(f"Report path must be under INBOX: {path}")
+
+
 def _normalize_path(path: Path) -> str:
     return str(path).replace("\\", "/")
+
+
+def _compute_content_hash(content: str) -> str:
+    """Compute SHA256 hash of content."""
+    return hashlib.sha256(content.encode("utf-8")).hexdigest()
+
+
+def _format_tags_yaml(tags: List[str]) -> str:
+    """Format tags list as YAML array."""
+    if not tags:
+        return "[]"
+    return "\n" + "\n".join(f"- {tag}" for tag in tags)
+
+
+def _generate_canonical_filename(title: str, timestamp: Optional[datetime] = None) -> str:
+    """Generate canonical filename per DOCUMENT_POLICY.md: MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md"""
+    if timestamp is None:
+        timestamp = datetime.now()
+    
+    # Normalize title: uppercase, underscores, alphanumeric only
+    normalized_title = re.sub(r'[^A-Z0-9_]', '', title.upper().replace(' ', '_').replace('-', '_'))
+    # Collapse multiple underscores
+    normalized_title = re.sub(r'_+', '_', normalized_title).strip('_')
+    
+    return f"{timestamp.strftime('%m-%d-%Y-%H-%M')}_{normalized_title}.md"
+
+
+def _build_report_content(
+    title: str,
+    body: str,
+    uuid: str,
+    section: str = "report",
+    bucket: str = "reports",
+    author: str = "System",
+    priority: str = "Medium",
+    status: str = "Complete",
+    summary: str = "",
+    tags: Optional[List[str]] = None,
+    timestamp: Optional[datetime] = None,
+) -> str:
+    """
+    Build a canonical report with YAML frontmatter and content hash.
+    
+    Per DOCUMENT_POLICY.md:
+    - YAML frontmatter with required fields
+    - Content hash immediately after YAML (computed on body content only)
+    - Markdown body
+    """
+    if timestamp is None:
+        timestamp = datetime.now()
+    if tags is None:
+        tags = []
+    if not summary:
+        # Use first 100 chars of body as summary
+        summary = body[:100].replace('\n', ' ').strip()
+        if len(body) > 100:
+            summary += "..."
+    
+    yaml_timestamp = timestamp.strftime("%Y-%m-%d %H:%M")
+    
+    # Compute content hash on body only (per DOCUMENT_POLICY.md)
+    content_hash = _compute_content_hash(body)
+    
+    # Build YAML frontmatter
+    tags_yaml = _format_tags_yaml(tags)
+    yaml_header = f"""---
+uuid: {uuid}
+title: "{title}"
+section: {section}
+bucket: {bucket}
+author: {author}
+priority: {priority}
+created: {yaml_timestamp}
+modified: {yaml_timestamp}
+status: {status}
+summary: "{summary.replace('"', "'")}"
+tags: {tags_yaml}
+---"""
+    
+    # Assemble full document
+    return f"{yaml_header}\n<!-- CONTENT_HASH: {content_hash} -->\n\n{body}"
 
 
 def main(input_path: Path, output_path: Path) -> int:
@@ -113,6 +204,59 @@ def main(input_path: Path, output_path: Path) -> int:
             output["hash_valid"] = bool(valid)
             output["hash_stored"] = stored_hash
             output["hash_computed"] = computed_hash
+        elif operation == "write_report":
+            # Required fields
+            title = payload.get("title")
+            body = payload.get("body")
+            if not title:
+                raise ValueError("title is required for write_report")
+            if not body:
+                raise ValueError("body is required for write_report")
+            
+            # Optional fields with defaults
+            uuid_val = payload.get("uuid", "00000000-0000-0000-0000-000000000000")
+            section = payload.get("section", "report")
+            bucket = payload.get("bucket", "reports")
+            author = payload.get("author", "System")
+            priority = payload.get("priority", "Medium")
+            report_status = payload.get("status", "Complete")
+            summary = payload.get("summary", "")
+            tags = payload.get("tags", [])
+            
+            # Output subdirectory (default: reports)
+            output_subdir = payload.get("output_subdir", "reports")
+            
+            # Generate filename and path
+            timestamp = datetime.now()
+            filename = _generate_canonical_filename(title, timestamp)
+            report_path = INBOX_ROOT / output_subdir / filename
+            
+            # Ensure output is within INBOX
+            _ensure_inbox_path(report_path)
+            
+            # Build report content
+            content = _build_report_content(
+                title=title,
+                body=body,
+                uuid=uuid_val,
+                section=section,
+                bucket=bucket,
+                author=author,
+                priority=priority,
+                status=report_status,
+                summary=summary,
+                tags=tags,
+                timestamp=timestamp,
+            )
+            
+            # Write via guarded writer
+            writer.mkdir_durable(str(report_path.parent))
+            writer.write_durable(str(report_path), content)
+            
+            # Output info
+            output["report_path"] = _normalize_path(report_path.relative_to(PROJECT_ROOT))
+            output["filename"] = filename
+            output["report_written"] = True
         else:
             raise ValueError(f"Unknown operation: {operation}")
     except Exception as exc:
