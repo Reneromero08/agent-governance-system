@@ -23,12 +23,21 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 SECTION_INDEX_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SECTION_INDEX.json"
 SUMMARY_INDEX_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "SUMMARY_INDEX.json"
 RUNS_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 SECTION_INDEX_REL = Path("NAVIGATION") / "CORTEX" / "_generated" / "SECTION_INDEX.json"
+
+writer = GuardedWriter(
+    project_root=PROJECT_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs", "NAVIGATION/CORTEX/_generated"]
+)
 
 if hasattr(signal, "SIGPIPE"):
     signal.signal(signal.SIGPIPE, signal.SIG_DFL)
@@ -109,7 +118,7 @@ class ProvenanceLogger:
         if meta_path.exists():
             return
 
-        run_dir.mkdir(parents=True, exist_ok=True)
+        writer.mkdir_durable(str(self._run_dir().relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
 
         section_index_sha = None
         section_index_rel = None
@@ -130,9 +139,9 @@ class ProvenanceLogger:
             "section_index_path": section_index_rel,
             "section_index_sha256": section_index_sha,
         }
-        meta_path.write_text(
-            json.dumps(_normalize_newlines(payload), indent=2, sort_keys=True, ensure_ascii=False) + "\n",
-            encoding="utf-8",
+        writer.write_durable(
+            str(meta_path.relative_to(PROJECT_ROOT)),
+            json.dumps(_normalize_newlines(payload), indent=2, sort_keys=True, ensure_ascii=False) + "\n"
         )
 
     def log_event(
@@ -163,9 +172,12 @@ class ProvenanceLogger:
                 "timestamp_utc": _timestamp_utc(),
             }
             line = json.dumps(_normalize_newlines(event), sort_keys=True, ensure_ascii=False) + "\n"
-            with open(self._events_path(), "a", encoding="utf-8", newline="\n") as f:
-                f.write(line)
-                f.flush()
+            events_path = self._events_path()
+            events_path_rel = str(events_path.relative_to(PROJECT_ROOT)).replace("\\", "/")
+            existing_content = ""
+            if events_path.exists():
+                existing_content = events_path.read_text(encoding="utf-8")
+            writer.write_durable(events_path_rel, existing_content + line)
         except Exception:
             return
 
@@ -433,6 +445,7 @@ def cmd_summary(args: argparse.Namespace) -> int:
 
 
 def main() -> int:
+    writer.open_commit_gate()
     parser = argparse.ArgumentParser(prog="cortex", description="Cortex utilities")
     sub = parser.add_subparsers(dest="cmd", required=True)
 

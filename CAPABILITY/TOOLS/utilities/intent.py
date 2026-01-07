@@ -3,13 +3,23 @@ from __future__ import annotations
 
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Dict, List, Optional, Set, Tuple
 
-from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
-
 REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
+
+from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 DEFAULT_RUNS_ROOT = "LAW/CONTRACTS/_runs"
+
+writer = GuardedWriter(
+    project_root=REPO_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs"]
+)
 
 
 def _repo_rel(path: Path) -> str:
@@ -20,12 +30,13 @@ def _sorted_paths(paths: Set[str]) -> List[str]:
     return sorted(paths)
 
 
-def _write_json(path: Path, data: Dict[str, object]) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
+def _write_json(path: Path, data: Dict[str, object], writer_obj: Optional[GuardedWriter] = None) -> None:
+    writer_instance = writer_obj or writer
+    writer_instance.mkdir_durable(str(path.parent.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
     serialized = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
-    tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
-    tmp.write_bytes(serialized)
-    os.replace(tmp, path)
+    if writer_obj is None:
+        writer_instance.open_commit_gate()
+    writer_instance.write_durable(str(path.relative_to(REPO_ROOT)), serialized)
 
 
 def _load_pipeline_spec(pipeline_dir: Path) -> Tuple[List[str], List[str]]:

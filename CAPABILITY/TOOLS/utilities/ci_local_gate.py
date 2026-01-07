@@ -20,9 +20,18 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import List, Sequence, Set
 
-
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 TOKEN_FILE = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "ALLOW_PUSH.token"
+
+writer = GuardedWriter(
+    project_root=PROJECT_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs"]
+)
 
 
 def _run(args: Sequence[str], *, env: dict | None = None) -> int:
@@ -98,7 +107,7 @@ def main(argv: List[str]) -> int:
     args = parser.parse_args(argv[1:])
 
     tmp_root = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp"
-    tmp_root.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(tmp_root.relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
     tmp_env = {
         "TMPDIR": str(tmp_root),
         "TMP": str(tmp_root),
@@ -172,8 +181,9 @@ def main(argv: List[str]) -> int:
 
     ts = datetime.now(timezone.utc).isoformat(timespec="seconds")
     token_line = f"CI_OK head={head} suite=critic,runner,pytest ts={ts}\n"
-    TOKEN_FILE.parent.mkdir(parents=True, exist_ok=True)
-    TOKEN_FILE.write_text(token_line, encoding="utf-8")
+    writer.mkdir_durable(str(TOKEN_FILE.parent.relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
+    writer.open_commit_gate()
+    writer.write_durable(str(TOKEN_FILE.relative_to(PROJECT_ROOT)), token_line.encode("utf-8"))
     print(f"[ci-local-gate] FULL OK: wrote push token {TOKEN_FILE.relative_to(PROJECT_ROOT)}")
     print("[ci-local-gate] You can now git push (token will be consumed).")
     return 0
