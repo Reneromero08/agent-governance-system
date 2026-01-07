@@ -14,6 +14,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
+import uuid
 
 import pytest
 
@@ -70,7 +71,7 @@ def test_pack_consume_basic_roundtrip(tmp_path: Path, monkeypatch: pytest.Monkey
         split_lite=True,
         out_dir=packer_core.PACKS_ROOT / "_system" / "fixtures" / "test_consumer_1",
         combined=False,
-        stamp="test",
+        stamp=f"test_c1_{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -126,7 +127,7 @@ def test_pack_consume_dry_run(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -
         split_lite=True,
         out_dir=packer_core.PACKS_ROOT / "_system" / "fixtures" / "test_consumer_2",
         combined=False,
-        stamp="test",
+        stamp=f"test_c2_{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -174,7 +175,7 @@ def test_pack_consume_tamper_detection_manifest(tmp_path: Path, monkeypatch: pyt
         split_lite=True,
         out_dir=packer_core.PACKS_ROOT / "_system" / "fixtures" / "test_consumer_3",
         combined=False,
-        stamp="test",
+        stamp=f"test_c3_{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -227,7 +228,7 @@ def test_pack_consume_missing_blob(tmp_path: Path, monkeypatch: pytest.MonkeyPat
         split_lite=True,
         out_dir=packer_core.PACKS_ROOT / "_system" / "fixtures" / "test_consumer_4",
         combined=False,
-        stamp="test",
+        stamp=f"test_c4_{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -283,7 +284,7 @@ def test_pack_consume_determinism(tmp_path: Path, monkeypatch: pytest.MonkeyPatc
         split_lite=True,
         out_dir=packer_core.PACKS_ROOT / "_system" / "fixtures" / "test_consumer_5",
         combined=False,
-        stamp="test",
+        stamp=f"test_c5_{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,

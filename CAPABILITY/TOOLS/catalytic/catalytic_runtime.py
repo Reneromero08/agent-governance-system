@@ -274,7 +274,7 @@ class CatalyticRuntime:
         for domain in self.catalytic_domains:
             snapshot = CatalyticSnapshot(domain)
             snapshot.capture(cas=self.cas)
-            domain_key = str(domain.relative_to(PROJECT_ROOT))
+            domain_key = str(domain.relative_to(PROJECT_ROOT)).replace(os.sep, '/')
             self.pre_snapshots[domain_key] = snapshot
             print(f"[catalytic] Snapshots pre: {domain_key} ({len(snapshot.files)} files)")
 
@@ -293,7 +293,7 @@ class CatalyticRuntime:
         for domain in self.catalytic_domains:
             snapshot = CatalyticSnapshot(domain)
             snapshot.capture(cas=self.cas)
-            domain_key = str(domain.relative_to(PROJECT_ROOT))
+            domain_key = str(domain.relative_to(PROJECT_ROOT)).replace(os.sep, '/')
             self.post_snapshots[domain_key] = snapshot
             print(f"[catalytic] Snapshots post: {domain_key} ({len(snapshot.files)} files)")
 
@@ -455,7 +455,7 @@ class CatalyticRuntime:
             ledger_hash = hashlib.sha256((self.ledger_dir / "LEDGER.jsonl").read_bytes()).hexdigest()
             proof = validator.generate_proof(
                 run_id=self.run_id,
-                catalytic_domains=[str(d.relative_to(PROJECT_ROOT)) for d in self.catalytic_domains],
+                catalytic_domains=[str(d.relative_to(PROJECT_ROOT)).replace(os.sep, '/') for d in self.catalytic_domains],
                 pre_state=pre_manifest,
                 post_state=post_manifest,
                 timestamp=self.timestamp,

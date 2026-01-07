@@ -98,6 +98,13 @@ def insert_or_update_hash(filepath: Path, writer: Any = None) -> Tuple[bool, Opt
         # No frontmatter, insert at beginning
         new_content = f'<!-- CONTENT_HASH: {new_hash} -->\n\n{clean_content}'
     
+    # Recalculate hash to account for any whitespace normalization/changes
+    # that happened during insertion (strip vs preserve newlines)
+    final_hash = compute_content_hash(new_content)
+    if final_hash != new_hash:
+        new_content = new_content.replace(new_hash, final_hash, 1)
+        new_hash = final_hash
+    
     # Write updated content
     # Write updated content
     if not writer:

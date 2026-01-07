@@ -256,6 +256,7 @@ class CatalyticStore:
         # objects_dir should point to the 'cas' subdirectory if using build() structure,
         # or the root of the CAS storage.
         self.objects_dir = Path(objects_dir)
+        self.objects_dir.mkdir(parents=True, exist_ok=True)
 
     def object_path(self, hash_hex: str) -> Path:
         """Returns the deterministic path for a hash."""
@@ -280,7 +281,7 @@ class CatalyticStore:
         h = hashlib.sha256()
         # Use a temporary file to store the stream until we have the full hash
         import tempfile
-        fd, tmp_path = tempfile.mkstemp(dir=str(self.objects_dir) if self.objects_dir.exists() else None)
+        fd, tmp_path = tempfile.mkstemp(dir=str(self.objects_dir))
         try:
             with os.fdopen(fd, 'wb') as f:
                 while True:

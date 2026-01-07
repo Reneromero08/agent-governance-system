@@ -39,9 +39,26 @@ class GrokExecutorTestHarness:
         self.test_dir = Path(self.test_dir_ctx.name)
         
         # Setup GuardedWriter for test
-        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
-        self.writer = GuardedWriter(project_root=self.test_dir, durable_roots=[str(self.test_dir)])
-        self.writer.open_commit_gate()
+        class MockWriter:
+            def __init__(self, project_root, durable_roots):
+                self.project_root = project_root
+            def open_commit_gate(self): pass
+            def write_durable(self, path, content):
+                Path(path).parent.mkdir(parents=True, exist_ok=True)
+                if isinstance(content, bytes):
+                    Path(path).write_bytes(content)
+                else:
+                    Path(path).write_text(content, encoding='utf-8')
+            def mkdir_durable(self, path):
+                Path(path).mkdir(parents=True, exist_ok=True)
+            def unlink(self, path):
+                if Path(path).exists():
+                    Path(path).unlink()
+            def safe_rename(self, src, dst):
+                shutil.move(src, dst)
+
+        self.writer = MockWriter(project_root=self.test_dir, durable_roots=[str(self.test_dir)])
+        # self.writer.open_commit_gate() # No-op in mock
 
         self.results = {
             "timestamp": datetime.now().isoformat(),
@@ -122,7 +139,7 @@ class GrokExecutorTestHarness:
         results = executor.execute()
 
         # Verify
-        assert results["status"] == "success", f"Status was {results['status']}"
+        assert results["status"] == "success", f"Status was {results['status']}. Errors: {results.get('errors')}"
         assert dest.exists(), "Destination file not created"
         assert dest.read_text() == "Hello, World!", "File content mismatch"
         assert len(results["operations"]) > 0, "No operations recorded"
@@ -196,7 +213,7 @@ def run_with_cline():
         executor = GrokExecutor(task_spec, writer=self.writer)
         results = executor.execute()
 
-        assert results["status"] == "success", f"Status was {results['status']}"
+        assert results["status"] == "success", f"Status was {results['status']}. Errors: {results.get('errors')}"
         assert len(results["operations"]) > 0, "No operations recorded"
 
         # Verify file was modified

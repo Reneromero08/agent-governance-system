@@ -1,6 +1,15 @@
+import sys
 from pathlib import Path
+sys.path.append(str(Path(__file__).resolve().parents[1]))
 import json
 from doc_merge_batch.core import run_job
+
+class MockWriter:
+    def write_durable(self, path, content):
+        Path(path).parent.mkdir(parents=True, exist_ok=True)
+        Path(path).write_text(content, encoding='utf-8')
+    def mkdir_durable(self, path):
+        Path(path).mkdir(parents=True, exist_ok=True)
 
 def test_compare_and_apply_and_verify(tmp_path: Path):
     a = tmp_path / "a.md"
@@ -21,7 +30,8 @@ def test_compare_and_apply_and_verify(tmp_path: Path):
         "max_pairs": 10,
     }
 
-    report = run_job(payload)
+    writer = MockWriter()
+    report = run_job(payload, writer)
     assert report["errors"] == []
     assert len(report["artifacts"]) == 1
     v = report["artifacts"][0]["verification"]

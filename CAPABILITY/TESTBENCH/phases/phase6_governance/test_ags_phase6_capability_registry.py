@@ -39,7 +39,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     pipeline_id = "ags-capability-registry"
     step_id = "s1"
 
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "phase65_registry"
     task_path = reg_root / "task.json"
     result_path = reg_root / "result.json"
     in_path = reg_root / "in.txt"
@@ -128,7 +128,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         assert not r_route.stderr
 
         r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict", "--skip-preflight"], env=env)
-        assert r_run.returncode == 0
+        assert r_run.returncode == 0, f"ags run failed. stdout: {r_run.stdout}, stderr: {r_run.stderr}"
 
         r_verify_ok = _run(
             [sys.executable, str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "catalytic.py"), "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"],
