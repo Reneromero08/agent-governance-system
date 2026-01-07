@@ -35,7 +35,6 @@ graph TD
 ## 3. NAVIGATION (The Map & Plan)
 *Purpose: Orientation & Strategy*
 - `CORTEX/`: Semantic database & Index
-- `ROADMAPS/`: Strategy and Master Plans
 - `maps/`: Data flow and ownership maps
 
 ## 4. THOUGHT (The Lab)

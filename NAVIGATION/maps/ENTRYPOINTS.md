@@ -24,7 +24,6 @@ This document lists the primary entrypoints where agents and humans are expected
 ## 3. NAVIGATION (Maps)
 
 - `NAVIGATION/CORTEX/`: Semantic Index configuration.
-- `NAVIGATION/ROADMAPS/`: Strategy documents and planning.
 - `NAVIGATION/MAPS/`: Architecture maps.
 
 ## 4. THOUGHT (Experiments)

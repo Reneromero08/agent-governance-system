@@ -166,6 +166,7 @@ Before taking any action, an agent MUST:
    - LAW/CANON/DOCUMENT_POLICY.md - Canonical document format for all markdown documentation
    - LAW/CANON/IMPLEMENTATION_REPORTS.md - Report format for all implementations
    - LAW/CANON/CRISIS.md - Emergency procedures and quarantine detection
+   - **AGS_ROADMAP_MASTER.md** - Master roadmap (⚠️ LIVES AT REPOSITORY ROOT, NOT in NAVIGATION/)
 3. **Read this file (AGENTS.md) in full**
 4. **Identify the current canon_version** (found in LAW/CANON/VERSIONING.md)
 5. **Identify whether the task is**:
