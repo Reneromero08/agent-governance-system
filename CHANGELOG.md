@@ -4,6 +4,22 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.7] - 2026-01-07
+
+### Added
+- **Phase 2.4.1C.6 LINTERS Write Surface Enforcement** — Integrated GuardedWriter into 4 linter files with dry-run default + `--apply` flag pattern.
+  - **Files Enforced**:
+    - `CAPABILITY/TOOLS/linters/update_hashes.py` — Updates canon hashes in prompt files
+    - `CAPABILITY/TOOLS/linters/update_canon_hashes.py` — Updates frontmatter hashes in canon files
+    - `CAPABILITY/TOOLS/linters/fix_canon_hashes.py` — Moves hashes to HTML comments
+    - `CAPABILITY/TOOLS/linters/update_manifest.py` — Updates manifest with canon hashes
+  - **Pattern Implemented**: Dry-run mode by default, `--apply` flag required for actual writes
+  - **LAW/CANON Exemption**: Linters are explicitly allowed to mutate LAW/CANON and NAVIGATION/PROMPTS with full audit trail
+  - **CRYPTO_SAFE Compliance**: All CANON mutations logged for protected artifact detection
+  - **Raw Write Elimination**: 4 raw write operations eliminated (4 before → 0 after)
+  - **Coverage Impact**: 40/47 → 44/47 = 93.6% critical production surfaces enforced
+  - **Receipt**: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_6_LINTERS_RECEIPT.json`
+
 ## [3.4.6] - 2026-01-06
 
 ### Added
