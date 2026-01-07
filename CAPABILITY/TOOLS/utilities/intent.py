@@ -32,10 +32,10 @@ def _sorted_paths(paths: Set[str]) -> List[str]:
 
 def _write_json(path: Path, data: Dict[str, object], writer_obj: Optional[GuardedWriter] = None) -> None:
     writer_instance = writer_obj or writer
-    writer_instance.mkdir_durable(str(path.parent.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
-    serialized = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
     if writer_obj is None:
         writer_instance.open_commit_gate()
+    writer_instance.mkdir_durable(str(path.parent.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
+    serialized = json.dumps(data, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
     writer_instance.write_durable(str(path.relative_to(REPO_ROOT)), serialized)
 
 

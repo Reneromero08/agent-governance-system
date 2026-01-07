@@ -4,6 +4,11 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.5] - 2026-01-06
+
+### Fixed
+- **Intent Writer Commit Gate** — Fixed `_write_json()` in `intent.py` to open commit gate before `mkdir_durable()`, resolving `FIREWALL_DURABLE_WRITE_BEFORE_COMMIT` error in Phase 6 capability registry tests.
+
 ## [3.4.4] - 2026-01-06
 
 ### Added
