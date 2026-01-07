@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.12
+version: 3.7.13
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -375,6 +375,43 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
   - [x] Failure never leaves partial state
   - [x] Rollback is automatic and clean
   - [x] Dry-run mode validates without side effects
+
+## 4.6 Security Hardening (Defense-in-Depth)
+**Purpose:** Harden Phase 4 cryptographic implementation against timing attacks, memory leaks, and race conditions.
+**Analysis:** `INBOX/reports/01-07-2026_PHASE_4_SECURITY_HARDENING_ANALYSIS.md`
+
+### 4.6.1 Key Zeroization (P1)
+- [ ] 4.6.1.1 Create `CAPABILITY/PRIMITIVES/secure_memory.py` with `SecureBytes` wrapper
+- [ ] 4.6.1.2 Add explicit zeroization after signing in `signature.py:192-217`
+- [ ] 4.6.1.3 Zeroize hex string key material in `load_keypair()` (signature.py:341-363)
+- [ ] 4.6.1.4 Document CPython zeroization limitations
+
+### 4.6.2 Constant-Time Comparisons (P2)
+- [ ] 4.6.2.1 Create `CAPABILITY/PRIMITIVES/timing_safe.py` with `compare_hash()`
+- [ ] 4.6.2.2 Replace `==` with `hmac.compare_digest()` in `verify_bundle.py:420,489`
+- [ ] 4.6.2.3 Add timing test to verify no early-exit behavior
+
+### 4.6.3 TOCTOU Mitigation (P2)
+- [ ] 4.6.3.1 Move target exists check closer to file operations in `restore_runner.py:471-505`
+- [ ] 4.6.3.2 Use `lstat()` instead of `is_symlink()` in `_symlink_escapes_root()`
+- [ ] 4.6.3.3 Add chain manifest UUID collision check in `restore_runner.py:703-707`
+
+### 4.6.4 Error Sanitization (P3)
+- [ ] 4.6.4.1 Remove `str(e)` from error details in `verify_bundle.py:187`
+- [ ] 4.6.4.2 Remove actual key length from error details in `verify_bundle.py:233`
+- [ ] 4.6.4.3 Log full exceptions server-side only
+
+### 4.6.5 Tests
+- [ ] 4.6.5.1 Test: Key bytes overwritten after signing
+- [ ] 4.6.5.2 Test: Constant-time hash comparison (timing analysis)
+- [ ] 4.6.5.3 Test: Concurrent symlink creation during restore
+- [ ] 4.6.5.4 Test: Error responses contain no exception text
+
+- **Exit Criteria**
+  - [ ] Private keys zeroized after use (best-effort in CPython)
+  - [ ] Hash comparisons are constant-time via `hmac.compare_digest()`
+  - [ ] TOCTOU windows minimized
+  - [ ] Error messages sanitized (no internal details exposed)
 
 # Phase 5: Vector/Symbol Integration (addressability)
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
