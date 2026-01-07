@@ -4,6 +4,23 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.13] - 2026-01-07
+
+### Added
+- **Phase 4.6 Security Hardening Roadmap** — Defense-in-depth for cryptographic implementation
+  - **4.6.1 Key Zeroization (P1):** SecureBytes wrapper, explicit zeroization after signing
+  - **4.6.2 Constant-Time Comparisons (P2):** `hmac.compare_digest()` for hash comparisons
+  - **4.6.3 TOCTOU Mitigation (P2):** Reduced race windows, `lstat()` for symlink detection
+  - **4.6.4 Error Sanitization (P3):** Remove exception text from API responses
+  - **4.6.5 Tests:** 4 new tests planned for hardening verification
+
+### Reports
+- `INBOX/reports/01-07-2026_PHASE_4_SECURITY_HARDENING_ANALYSIS.md` — 8 findings (0 Critical, 0 High, 4 Medium, 3 Low, 1 Very Low)
+- `INBOX/reports/01-07-2026_PHASE_4_5_ATOMIC_RESTORE_COMPLETE.md` — Phase 4.5 implementation summary
+
+### Changed
+- **Roadmap Version:** 3.7.13
+
 ## [3.7.12] - 2026-01-07
 
 ### Added
