@@ -1,8 +1,34 @@
-<!-- CONTENT_HASH: 2a7a42ff95b18df699739be20e113693999a886654e83cd8d057b847426b23b7 -->
+<!-- CONTENT_HASH: f1e3812c62f2a61ec5fe9602892996059e9a6f4d5b4bcfa401e2f077dcdf57d1 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.6.5] - 2026-01-07
+
+### Changed
+- **Roadmap Token Optimization** — Archived completed phases to reduce AI scanning overhead.
+  - **Archived**: Phases 1.1-1.5, 2.1-2.3, 2.4.1-2.4.3 (41 completed tasks)
+  - **Archive Location**: `MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md`
+  - **Impact**: 650 lines → 338 lines (48% reduction), ~1,300 tokens saved per roadmap read
+  - **Roadmap Version**: 3.6.4 → 3.6.5
+
+- **CRYPTO_SAFE Clarification** — Updated roadmap phases 2.4.4-2.4.8 to reflect correct purpose.
+  - **Phase 2.4 Goal**: Release AGS as template while (1) excluding instance data, (2) sealing template for provenance
+  - **Phase 2.4.2 Purpose**: Instance Data Inventory (what to EXCLUDE from releases)
+  - **Phase 2.4.4-2.4.8 Purpose**: Template sealing for license enforcement ("You broke my seal")
+  - **Key Insight**: CRYPTO_SAFE is NOT about hiding your data (simply excluded) — it's about tamper-evident provenance for the framework
+
+### Added
+- **Phase 2.4.3 Git Hygiene** — Marked complete with release strategy documentation.
+  - **Status**: COMPLETE (enforced by `.gitignore`)
+  - **Report**: `INBOX/reports/V4/01-07-2026-00-09_PHASE_2_4_3_GIT_HYGIENE_RELEASE_STRATEGY.md`
+  - **Framework vs Instance Data**: Clear separation documented (framework = public, instance data = excluded)
+  - **Release Strategy**: Three implementation options (`.gitattributes`, release branch, export script)
+
+- **Phase 2.4.6 Prerequisites** — Added manual decision requirement before export script implementation.
+  - **Decision Required**: Define template boundary (which files/features are framework vs instance-specific)
+  - **Tasks**: Review directories, document first-run initialization, test standalone template
 
 ## [3.4.13] - 2026-01-07
 
