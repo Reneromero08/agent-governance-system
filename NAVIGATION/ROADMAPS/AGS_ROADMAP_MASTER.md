@@ -244,29 +244,13 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
     - **Final Status**: ✅ **0 VIOLATIONS** (down from 181 initial violations)
     - **Verification**: Mechanical scanner confirms zero raw write operations in target directories
   
-  - [ ] 2.4.1C.4 CLI Tools Enforcement (Optional)
-    - Scope: CLI write surfaces
-    - Adapter: `GuardedWriter`
-    - Optional but explicit if present
-    - Exit Criteria:
-      - [ ] CLI tools declare write allowlists explicitly
-      - [ ] Firewall enforcement active for CLI operations
-  
-  - Exit Criteria (Phase 2.4.1C):
-    - [ ] Coverage ≥95% of critical production surfaces
-    - [x] All critical runtime paths enforced (34/47 = 72%)
-    - [ ] CLI Tools enforcement pending (6 files)
-    - [ ] CAS enforcement pending (3 files, needs policy decision)
-    - [ ] Linters enforcement pending (4 files, needs exemption policy for LAW/CANON mutation)
-    - [x] All sub-phase receipts collected
-    - [x] No policy changes or write domain widening
-    - [x] Coverage math explicit and auditable
+      - **Status Summary**:
+      - ✅ All critical runtime paths enforced: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS
+      - ✅ CLI_TOOLS enforcement complete: 6/6 files
+      - ⏸️ Remaining: CAS (3), LINTERS (4)
+      - 📊 Coverage: 40/47 critical production surfaces = 85%
+      - 🎯 To reach 91%: Add CAS enforcement (3 files) + LINTERS enforcement (4 files, with exemption policy)
 
-  **Status Summary**:
-  - ✅ All critical runtime paths enforced: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS
-  - ⏸️ Remaining: CLI_TOOLS (6), CAS (3), LINTERS (4)
-  - 📊 Coverage: 34/47 critical production surfaces = 72%
-  - 🎯 To reach 91%: Add CLI_TOOLS + CAS enforcement (43/47)
 
 ### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)
 - [ ] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)

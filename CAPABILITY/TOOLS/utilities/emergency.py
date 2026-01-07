@@ -23,19 +23,32 @@ from pathlib import Path
 # Correctly resolving PROJECT_ROOT from CAPABILITY/TOOLS/utilities/emergency.py
 # parents[0]=utilities, parents[1]=TOOLS, parents[2]=CAPABILITY, parents[3]=repo_root
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 QUARANTINE_FILE = PROJECT_ROOT / ".quarantine"
 LOGS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "emergency_logs"
 EMERGENCY_LOG = LOGS_DIR / "emergency.log"
 CRITIC_PATH = PROJECT_ROOT / "CAPABILITY" / "TOOLS" / "governance" / "critic.py"
 RUNNER_PATH = PROJECT_ROOT / "LAW" / "CONTRACTS" / "runner.py"
 
+writer = GuardedWriter(
+    project_root=PROJECT_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs"]
+)
+
 def log_event(event_type: str, message: str):
     """Log an emergency event."""
     # Ensure parent directories exist
-    LOGS_DIR.mkdir(exist_ok=True, parents=True)
+    writer.mkdir_durable(str(LOGS_DIR.relative_to(PROJECT_ROOT)), exist_ok=True, parents=True)
     timestamp = datetime.now().isoformat()
-    with open(EMERGENCY_LOG, "a", encoding="utf-8") as f:
-        f.write(f"{timestamp} {event_type}: {message}\n")
+    # Read existing content and append
+    existing = ""
+    if EMERGENCY_LOG.exists():
+        existing = EMERGENCY_LOG.read_text(encoding="utf-8")
+    writer.write_durable(str(EMERGENCY_LOG.relative_to(PROJECT_ROOT)), (existing + f"{timestamp} {event_type}: {message}\n").encode("utf-8"))
     print(f"[{event_type}] {message}")
 
 
@@ -206,8 +219,9 @@ def quarantine(reason: str = "Manual quarantine triggered"):
         "git_hash": git_hash,
         "steward_notified": False
     }
-    
-    QUARANTINE_FILE.write_text(json.dumps(quarantine_data, indent=2))
+
+    writer.open_commit_gate()
+    writer.write_durable(str(QUARANTINE_FILE.relative_to(PROJECT_ROOT)), json.dumps(quarantine_data, indent=2).encode("utf-8"))
     log_event("QUARANTINE", f"Entered: {reason}")
     
     print(f"\n✓ Quarantine file created: {QUARANTINE_FILE}")

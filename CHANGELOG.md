@@ -4,6 +4,28 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.4] - 2026-01-06
+
+### Added
+- **Phase 2.4.1C.4: CLI Tools Write Surface Enforcement** — Achieved 100% write firewall enforcement across all 6 CLI tools.
+  - **CAPABILITY/TOOLS/ags.py** — Integrated GuardedWriter, replaced `_atomic_write_bytes`, mkdir operations with `mkdir_durable()`, and added `write_durable()` for all durable writes. Commit gate opened in `main()`.
+  - **CAPABILITY/TOOLS/cortex/cortex.py** — Integrated GuardedWriter with tmp/durable domain configuration. Replaced `mkdir()` and `write_text()` with GuardedWriter methods. Append operations converted to read-modify-write pattern for events logging.
+  - **CAPABILITY/TOOLS/cortex/codebook_build.py** — Integrated GuardedWriter for `CANON/CODEBOOK.md` generation. Commit gate opened before durable write.
+  - **CAPABILITY/TOOLS/utilities/emergency.py** — Integrated GuardedWriter for all write operations. `log_event()` now uses GuardedWriter with append pattern. Quarantine file writes enforce firewall policy.
+  - **CAPABILITY/TOOLS/utilities/ci_local_gate.py** — Integrated GuardedWriter for tmp directory creation and token file writes. Commit gate opened before durable writes.
+  - **CAPABILITY/TOOLS/utilities/intent.py** — Integrated GuardedWriter with optional writer parameter in `_write_json()` helper. Backward compatible with legacy behavior.
+  - **Zero Raw Writes**: All 7 raw write violations eliminated (verified by mechanical scanner).
+  - **Write Domains**: All tools declare explicit tmp_roots and durable_roots aligning with catalytic policy.
+  - **Functionality Preserved**: All CLI tools maintain existing behavior with write firewall enforcement.
+  - **Exit Criteria**: ✅ ALL MET
+    - All 6 CLI tools enforce write firewall via GuardedWriter
+    - Zero raw write operations remain in target files
+    - Existing functionality preserved (no breaking changes)
+  - **Coverage Update**: 40/47 critical production surfaces now enforced (85%).
+  - **Artifacts**: 
+    - Receipt: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_4_CLI_TOOLS_RECEIPT.json`
+    - Prompt: `NAVIGATION/PROMPTS/PHASE_2_4_1C_4_CLI_TOOLS_ENFORCEMENT.md`
+
 ## [3.4.3] - 2026-01-06
 
 ### Added

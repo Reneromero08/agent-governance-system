@@ -15,13 +15,19 @@ from typing import Any, Dict, List, Tuple, Optional
 # Suppress jsonschema/RefResolver deprecation warnings
 warnings.filterwarnings("ignore", category=DeprecationWarning)
 
-
 REPO_ROOT = Path(__file__).resolve().parents[2]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 # sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 from CAPABILITY.PIPELINES.pipeline_runtime import _slug  # type: ignore
+
+writer = GuardedWriter(
+    project_root=REPO_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs", "INBOX", "NAVIGATION/PROOFS"]
+)
 from CAPABILITY.PRIMITIVES.cas_store import normalize_relpath  # type: ignore
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes  # type: ignore
 from CAPABILITY.PRIMITIVES.preflight import PreflightValidator  # type: ignore
@@ -88,11 +94,10 @@ def _atomic_write_bytes(path: Path, data: bytes) -> None:
             _validate_inbox_write_inline(path, content_str)
         except UnicodeDecodeError:
             pass  # Not a text file, skip validation
-    
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
-    tmp.write_bytes(data)
-    os.replace(tmp, path)
+
+    rel_path = str(path.relative_to(REPO_ROOT)).replace("\\", "/")
+    writer.mkdir_durable(str(path.parent.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
+    writer.write_durable(rel_path, data)
 
 def _atomic_write_canon_json(path: Path, obj: Any) -> None:
     _atomic_write_bytes(path, canonical_json_bytes(obj))
@@ -119,7 +124,7 @@ def _pipeline_dir(pipeline_id: str) -> Path:
 
 def _write_policy(pipeline_id: str, policy: Dict[str, Any]) -> None:
     pdir = _pipeline_dir(pipeline_id)
-    pdir.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(pdir.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
     policy_path = pdir / "POLICY.json"
     _atomic_write_bytes(policy_path, canonical_json_bytes(policy))
 
@@ -518,7 +523,7 @@ def ags_route(*, plan_path: Path, pipeline_id: str, runs_root: str) -> int:
 
     seen: set[str] = set()
     pipeline_dir = REPO_ROOT / runs_root / "_pipelines" / _slug(pipeline_id)
-    pipeline_dir.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(pipeline_dir.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
 
     pipeline_steps: List[Dict[str, Any]] = []
     for idx, raw in enumerate(steps):
@@ -689,11 +694,11 @@ def ags_plan(
         
         # Persist router artifacts to pipeline directory
         pdir = _pipeline_dir(pipeline_id)
-        pdir.mkdir(parents=True, exist_ok=True)
+        writer.mkdir_durable(str(pdir.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
         _atomic_write_canon_json(pdir / "ROUTER.json", router_receipt)
         _atomic_write_canon_json(pdir / "ROUTER_OUTPUT.json", plan_obj)
         # Store raw bytes for the transcript hash
-        (pdir / "ROUTER_TRANSCRIPT_HASH").write_text(router_transcript_hash, encoding="utf-8")
+        writer.write_durable(str((pdir / "ROUTER_TRANSCRIPT_HASH").relative_to(REPO_ROOT)), router_transcript_hash.encode("utf-8"))
 
     out_bytes = canonical_json_bytes(plan_obj)
     if len(out_bytes) > MAX_PLAN_BYTES_DEFAULT:
@@ -701,7 +706,7 @@ def ags_plan(
 
     # Phase 8: Write router receipt artifacts
     receipt_dir = out_path.parent / f".router_receipts"
-    receipt_dir.mkdir(parents=True, exist_ok=True)
+    writer.mkdir_durable(str(receipt_dir.relative_to(REPO_ROOT)), parents=True, exist_ok=True)
     
     # ROUTER.json - what router ran
     router_receipt = {
@@ -831,6 +836,7 @@ def ags_run(*, pipeline_id: str, runs_root: str, strict: bool, repo_write: bool,
 
 
 def main(argv: List[str] | None = None) -> int:
+    writer.open_commit_gate()
     parser = argparse.ArgumentParser(prog="ags", description="AGS CLI (model-free bridge)")
     sub = parser.add_subparsers(dest="cmd", required=True)
 

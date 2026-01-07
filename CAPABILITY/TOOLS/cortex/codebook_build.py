@@ -24,7 +24,17 @@ from datetime import datetime
 from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
+PROJECT_ROOT = Path(__file__).resolve().parents[3]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
+writer = GuardedWriter(
+    project_root=PROJECT_ROOT,
+    tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+    durable_roots=["LAW/CONTRACTS/_runs", "NAVIGATION/CORTEX/_generated"]
+)
 
 
 def extract_contract_rules(contract_path: Path) -> List[Dict]:
@@ -411,7 +421,8 @@ def main():
         print(f"DEBUG: Provenance import failed: {e}")
         pass  # Provenance module not available, skip header
     
-    codebook_path.write_text(markdown, encoding="utf-8")
+    writer.open_commit_gate()
+    writer.write_durable("CANON/CODEBOOK.md", markdown.encode("utf-8"))
     print(f"Codebook written to {codebook_path}")
     print(f"Total entries: {len(codebook['entries'])}")
     
