@@ -1,0 +1,5 @@
+{
+  "operation": "recover",
+  "check_type": "artifact-escape-hatch",
+  "description": "Basic escape hatch check"
+}

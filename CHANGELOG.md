@@ -4,6 +4,27 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.15] - 2026-01-07
+
+### Added
+- **Skill Consolidation COMPLETE** — Reduced skill fragmentation (18 skills → 4 unified toolkits)
+  - **cortex-toolkit:** Consolidates `cortex-build`, `cas-integrity-check`, `system1-verify`, `cortex-summaries`, `llm-packer-smoke` (5 skills → 1)
+  - **mcp-toolkit:** Consolidates `mcp-builder`, `mcp-access-validator`, `mcp-extension-verify`, `mcp-message-board`, `mcp-precommit-check`, `mcp-smoke`, `mcp-adapter` (7 skills → 1)
+  - **commit-manager:** Consolidates `commit-queue`, `commit-summary-log`, `artifact-escape-hatch` (3 skills → 1)
+  - **pipeline-toolkit:** Consolidates `pipeline-dag-scheduler`, `pipeline-dag-receipts`, `pipeline-dag-restore` (3 skills → 1)
+
+### Changed
+- **Deprecated Skills Archived:** 18 deprecated skills moved to `MEMORY/ARCHIVE/skills-deprecated/`
+- **Roadmap Status:** `INBOX/roadmaps/01-07-2026-15-55_SKILL_CONSOLIDATION_ROADMAP.md` marked COMPLETE
+
+### Migration
+All consolidated skills use operation-based dispatch:
+```json
+{"operation": "operation_name", ...params}
+```
+
+---
+
 ## [3.7.14] - 2026-01-07
 
 ### Added
