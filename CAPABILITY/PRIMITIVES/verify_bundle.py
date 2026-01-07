@@ -180,11 +180,15 @@ class BundleVerifier:
                         parsed[artifact_name + "_bytes"] = raw_bytes
                     parsed[artifact_name] = json.loads(raw_bytes.decode('utf-8'))
             except (json.JSONDecodeError, UnicodeDecodeError) as e:
+                # Log full error for debugging (server-side only)
+                import logging
+                logging.debug(f"JSON parse error in {artifact_name}: {e}")
+
                 return {
                     "ok": False,
                     "code": ERROR_CODES["ARTIFACT_MALFORMED"],
                     "message": f"{artifact_name} is not valid JSON",
-                    "details": {"artifact": artifact_name, "error": str(e)}
+                    "details": {"artifact": artifact_name}  # No error text - security
                 }
 
         # =====================================================================
@@ -230,7 +234,7 @@ class BundleVerifier:
                     "ok": False,
                     "code": ERROR_CODES["KEY_INVALID"],
                     "message": "public_key must be exactly 64 lowercase hex characters",
-                    "details": {"actual_length": len(public_key) if isinstance(public_key, str) else 0}
+                    "details": {}  # Don't expose actual length - security
                 }
 
             # Step 3.5-3.6: Verify validator_id derivation
@@ -417,7 +421,9 @@ class BundleVerifier:
                 computed = hashlib.sha256(
                     json.dumps(proof_without_hash, sort_keys=True, separators=(",", ":")).encode("utf-8")
                 ).hexdigest()
-                if computed != proof_hash:
+                # Use constant-time comparison to prevent timing attacks
+                import hmac
+                if not hmac.compare_digest(computed, proof_hash):
                     return {
                         "ok": False,
                         "code": ERROR_CODES["ARTIFACT_MALFORMED"],
@@ -486,7 +492,9 @@ class BundleVerifier:
 
             # Step 9.1.3-9.1.4: Compute and verify hash
             actual_hash = f"sha256:{self._compute_sha256(abs_path)}"
-            if actual_hash != expected_hash:
+            # Use constant-time comparison to prevent timing attacks
+            import hmac
+            if not hmac.compare_digest(actual_hash, expected_hash):
                 return {
                     "ok": False,
                     "code": ERROR_CODES["HASH_MISMATCH"],

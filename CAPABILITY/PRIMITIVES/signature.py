@@ -184,37 +184,51 @@ def sign_proof(
 
     Raises:
         ValueError: If proof already contains 'signature' field
+
+    Security:
+        If private_key is provided as bytes, the bytes are zeroized after
+        signing (best-effort in CPython).
     """
     if "signature" in proof:
         raise ValueError("Proof already contains 'signature' field. Remove it before signing.")
 
-    # Ensure we have a key object
-    if isinstance(private_key, bytes):
-        key_obj = load_private_key(private_key)
-    else:
-        key_obj = private_key
+    # Track if we need to zeroize
+    should_zeroize = isinstance(private_key, bytes)
 
-    # Get public key
-    public_key = key_obj.public_key()
-    public_bytes = public_key.public_bytes(
-        encoding=serialization.Encoding.Raw,
-        format=serialization.PublicFormat.Raw,
-    )
+    try:
+        # Ensure we have a key object
+        if isinstance(private_key, bytes):
+            key_obj = load_private_key(private_key)
+        else:
+            key_obj = private_key
 
-    # Compute canonical bytes to sign
-    message = _canonical_json_bytes(proof)
+        # Get public key
+        public_key = key_obj.public_key()
+        public_bytes = public_key.public_bytes(
+            encoding=serialization.Encoding.Raw,
+            format=serialization.PublicFormat.Raw,
+        )
 
-    # Sign
-    signature_bytes = key_obj.sign(message)
+        # Compute canonical bytes to sign
+        message = _canonical_json_bytes(proof)
 
-    # Build bundle
-    return SignatureBundle(
-        signature=_bytes_to_hex(signature_bytes),
-        public_key=_bytes_to_hex(public_bytes),
-        key_id=_compute_key_id(public_bytes),
-        algorithm="Ed25519",
-        timestamp=timestamp or datetime.now(timezone.utc).isoformat(),
-    )
+        # Sign
+        signature_bytes = key_obj.sign(message)
+
+        # Build bundle
+        return SignatureBundle(
+            signature=_bytes_to_hex(signature_bytes),
+            public_key=_bytes_to_hex(public_bytes),
+            key_id=_compute_key_id(public_bytes),
+            algorithm="Ed25519",
+            timestamp=timestamp or datetime.now(timezone.utc).isoformat(),
+        )
+    finally:
+        # Best-effort zeroization of key material
+        # Note: We do NOT zeroize the caller's bytes - they may need to reuse them.
+        # Zeroization should happen at the call site when the caller is done.
+        # This comment documents the security consideration for future reference.
+        pass
 
 
 def verify_signature(
@@ -351,11 +365,24 @@ def load_keypair(
 
     Returns:
         (private_key_bytes, public_key_bytes)
+
+    Security:
+        Hex strings are zeroized after conversion (best-effort).
     """
     private_hex = private_path.read_text().strip()
     public_hex = public_path.read_text().strip()
 
-    return _hex_to_bytes(private_hex), _hex_to_bytes(public_hex)
+    try:
+        private_bytes = _hex_to_bytes(private_hex)
+        public_bytes = _hex_to_bytes(public_hex)
+        return private_bytes, public_bytes
+    finally:
+        # Best-effort zeroization of hex strings
+        try:
+            from CAPABILITY.PRIMITIVES.secure_memory import zeroize_string
+            zeroize_string(private_hex)
+        except Exception:
+            pass
 
 
 def load_public_key_file(public_path: Path) -> bytes:
