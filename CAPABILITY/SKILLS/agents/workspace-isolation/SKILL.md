@@ -1,8 +1,10 @@
-# Skill: workspace-isolation
+---
+version: "1.0.0"
+status: "Active"
+required_canon_version: ">=3.0.0"
+---
 
-**Version:** 1.0.0
-**Status:** Active
-**required_canon_version:** >=3.0.0
+# Skill: workspace-isolation
 
 ## Purpose
 
