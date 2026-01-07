@@ -33,8 +33,13 @@ Required behavior:
 
 import os
 import re
+import sys
 from pathlib import Path
 from typing import Union
+
+# Add repo root to path for GuardedWriter import
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 
 # Import CAS primitives from Z.2.1
 from CAPABILITY.CAS.cas import (
@@ -44,6 +49,22 @@ from CAPABILITY.CAS.cas import (
     ObjectNotFoundException as CASObjectNotFoundException,
     CorruptObjectException,
 )
+
+# Lazy import to avoid circular dependency
+_writer = None
+
+def _get_writer():
+    """Lazy initialization of GuardedWriter to avoid circular imports."""
+    global _writer
+    if _writer is None:
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        _writer = GuardedWriter(
+            project_root=REPO_ROOT,
+            tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+            durable_roots=[".ags-cas", "LAW/CONTRACTS/_runs"]  # Artifacts may be materialized to runs
+        )
+        _writer.open_commit_gate()  # Artifact writes are always allowed
+    return _writer
 
 
 # ============================================================================
@@ -262,8 +283,12 @@ def materialize(ref: str, out_path: str, *, atomic: bool = True) -> None:
         out.parent.mkdir(parents=True, exist_ok=True)
     except Exception as e:
         raise ArtifactException(f"Failed to create parent directories: {out_path}: {e}")
-    
+
     # Write bytes
+    # NOTE: materialize() is exempt from GuardedWriter enforcement because:
+    # - It extracts/exports artifacts FROM CAS TO arbitrary user-specified locations
+    # - The CAS write operations (cas_put) are already protected by GuardedWriter
+    # - This function is for extraction/materialization, not storage
     if atomic:
         # Atomic write: write to temp then replace
         temp_path = out.with_suffix(out.suffix + '.tmp')

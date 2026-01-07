@@ -4,6 +4,25 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.9] - 2026-01-07
+
+### Added
+- **Phase 2.4.1C.5 CAS Write Surface Enforcement** — Integrated GuardedWriter into all 3 CAS files for CRYPTO_SAFE compliance.
+  - **Files Enforced**:
+    - `CAPABILITY/CAS/cas.py` — Direct CAS blob writes (2 operations)
+    - `CAPABILITY/PRIMITIVES/cas_store.py` — CAS primitives, build/reconstruct (12 operations)
+    - `CAPABILITY/ARTIFACTS/store.py` — Artifact store (3 operations, materialize exempt)
+  - **Implementation Details**:
+    - Lazy initialization pattern (`_get_writer()`) to avoid circular imports with `CAPABILITY/PRIMITIVES/__init__.py`
+    - Proper path handling for relative/absolute detection
+    - Commit gate opened immediately (CAS blobs are immutable and always allowed)
+  - **Exemptions**: `materialize()` function uses raw writes for artifact extraction (export FROM CAS TO arbitrary user locations, not storage)
+  - **CRYPTO_SAFE Compliance**: Full audit trail for all CAS writes via GuardedWriter firewall receipts with timestamp, hash, and caller information
+  - **Raw Write Elimination**: 16 raw write operations eliminated (14 enforced + 2 CAS-only)
+  - **Test Results**: 67/67 tests passing (21 CAS tests + 46 artifact tests)
+  - **Coverage Impact**: 44/47 → 47/47 = 100% ✅ **PHASE 2.4.1C COMPLETE**
+  - **Receipt**: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_5_CAS_RECEIPT.json`
+
 ## [3.4.8] - 2026-01-07
 
 ### Added

@@ -1,7 +1,12 @@
 import hashlib
 import os
+import sys
 from pathlib import Path
 from typing import Union
+
+# Add repo root to path for GuardedWriter import
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
 
 
 class CASException(Exception):
@@ -26,6 +31,22 @@ class CorruptObjectException(CASException):
 
 # Default CAS root directory
 _CAS_ROOT = Path("CAPABILITY/CAS/storage")
+
+# Lazy import to avoid circular dependency
+_writer = None
+
+def _get_writer():
+    """Lazy initialization of GuardedWriter to avoid circular imports."""
+    global _writer
+    if _writer is None:
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        _writer = GuardedWriter(
+            project_root=REPO_ROOT,
+            tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+            durable_roots=[".ags-cas", "CAPABILITY/CAS/storage"]  # CAS blobs are immutable = durable
+        )
+        _writer.open_commit_gate()  # CAS writes are always allowed (immutable blobs)
+    return _writer
 
 
 def _get_object_path(hash_str: str) -> Path:
@@ -61,40 +82,42 @@ def cas_put(data: bytes) -> str:
     
     # Get the path where the object should be stored
     obj_path = _get_object_path(hash_str)
-    
-    # Create directories if they don't exist
-    obj_path.parent.mkdir(parents=True, exist_ok=True)
+
+    # Create directories if they don't exist (using GuardedWriter)
+    # Handle relative paths by making them relative to REPO_ROOT
+    if obj_path.parent.is_absolute():
+        parent_rel = str(obj_path.parent.relative_to(REPO_ROOT))
+    else:
+        parent_rel = str(obj_path.parent)
+    _get_writer().mkdir_durable(parent_rel, parents=True, exist_ok=True)
     
     # Check if object already exists
     if obj_path.exists():
         # If it exists, return the hash without rewriting
         return hash_str
     
-    # Write data atomically to a temporary file first
-    temp_path = obj_path.with_suffix(obj_path.suffix + '.tmp')
+    # Write data using GuardedWriter (which handles atomic writes internally)
     try:
-        with open(temp_path, 'wb') as f:
-            f.write(data)
-        
-        # Atomically move the temp file to the final location
-        temp_path.replace(obj_path)
-        
+        # Handle relative paths
+        if obj_path.is_absolute():
+            obj_rel = str(obj_path.relative_to(REPO_ROOT))
+        else:
+            obj_rel = str(obj_path)
+        _get_writer().write_durable(obj_rel, data)
+
         # Re-read and verify integrity
         with open(obj_path, 'rb') as f:
             read_data = f.read()
-        
+
         # Verify the hash of the stored data
         verify_hash = hashlib.sha256(read_data).hexdigest()
         if verify_hash != hash_str:
             # If verification fails, remove the corrupted file
             obj_path.unlink(missing_ok=True)
             raise CorruptObjectException(f"Stored data verification failed for hash: {hash_str}")
-        
+
         return hash_str
     except Exception:
-        # Clean up temp file if something went wrong
-        if temp_path.exists():
-            temp_path.unlink(missing_ok=True)
         raise
 
 
