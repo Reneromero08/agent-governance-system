@@ -67,6 +67,7 @@ def main(input_path: Path, output_path: Path) -> int:
     split_lite = bool(config.get("split_lite", False))
     allow_duplicate_hashes = config.get("allow_duplicate_hashes", None)
     emit_pruned = bool(config.get("emit_pruned", False))
+    assert_archive_excluded = bool(config.get("assert_archive_excluded", False))
 
     out_dir = resolve_out_dir(out_dir_raw)
     ensure_under_packs(out_dir)
@@ -115,8 +116,8 @@ def main(input_path: Path, output_path: Path) -> int:
         args.append("--allow-duplicate-hashes")
     elif allow_duplicate_hashes is False:
         args.append("--disallow-duplicate-hashes")
-    if emit_pruned:
-        args.append("--emit-pruned")
+    if not emit_pruned:
+        args.append("--no-emit-pruned")
     result = subprocess.run(args, cwd=str(PROJECT_ROOT))
     if result.returncode != 0:
         return result.returncode
@@ -205,6 +206,21 @@ def main(input_path: Path, output_path: Path) -> int:
                     print(f"- {p}")
                 return 1
 
+    archive_excluded = None
+    if assert_archive_excluded and scope == "ags":
+        repo_state_path = out_dir / "meta/REPO_STATE.json"
+        try:
+            repo_state = json.loads(repo_state_path.read_text(encoding="utf-8"))
+        except Exception as exc:
+            print(f"Error reading REPO_STATE.json for archive check: {exc}")
+            return 1
+        entries = repo_state.get("files", [])
+        has_archive = any(e.get("path", "").startswith("MEMORY/ARCHIVE/") for e in entries)
+        if has_archive:
+            print("REPO_STATE.json includes MEMORY/ARCHIVE entries when they should be excluded")
+            return 1
+        archive_excluded = True
+
     start_here_text = (out_dir / "meta/START_HERE.md").read_text(encoding="utf-8", errors="replace")
     entrypoints_text = (out_dir / "meta/ENTRYPOINTS.md").read_text(encoding="utf-8", errors="replace")
     if scope == "ags":
@@ -229,6 +245,8 @@ def main(input_path: Path, output_path: Path) -> int:
         "verified": required,
         "emit_pruned": emit_pruned,
     }
+    if archive_excluded is not None:
+        output_payload["archive_excluded"] = archive_excluded
     if not GuardedWriter:
         print("Error: GuardedWriter not available")
         return 1

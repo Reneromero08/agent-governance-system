@@ -383,6 +383,8 @@ def is_excluded_rel_path(rel_path: Path, *, excluded_dir_parts: frozenset[str]) 
     parts = set(rel_path.parts)
     if parts & excluded_dir_parts:
         return True
+    if rel_path.parts[:2] == ("MEMORY", "ARCHIVE"):
+        return True
     # P.2: Roots are runtime artifacts and must never be packed (avoid self-reference cycles).
     if rel_path.name in {"RUN_ROOTS.json", "GC_PINS.json"}:
         return True

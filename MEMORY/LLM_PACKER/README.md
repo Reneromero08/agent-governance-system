@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 4153d19ca4aba63f588ca9f4609f93dfecd40c10689797ff8e8af6352c7a6d98 -->
+<!-- CONTENT_HASH: b30eed0415a82cea3820791b7f7bab535f05c2539893e56bb67682b2efbb4cf6 -->
 
 # LLM_PACKER
 
@@ -15,7 +15,7 @@ Utility to bundle repo content into a small, shareable snapshot for an LLM.
 
 - Repo sources (text only): `LAW/`, `CAPABILITY/`, `NAVIGATION/`, `DIRECTION/`, `THOUGHT/`, `MEMORY/`, `.github/`
 - Key root files (text): `AGENTS.md`, `README.md`, `LICENSE`, `.editorconfig`, `.gitattributes`, `.gitignore`
-- Planning/history snapshots: `MEMORY/ARCHIVE/` (if present)
+- Planning/history snapshots: excluded (`MEMORY/ARCHIVE/`)
 - Generated indices under `meta/` (start here, entrypoints, file tree, file index, BUILD inventory)
 - Optional `FULL/` output for easy sharing:
   - `<PREFIX>-FULL-<stamp>.md`
