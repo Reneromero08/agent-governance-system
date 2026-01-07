@@ -112,7 +112,7 @@ def check_inbox_policy() -> dict:
             continue
 
         # Exempt root-level canon files
-        root_exempt = ["CHANGELOG.md", "AGENTS.md", "README.md", "pyproject.toml"]
+        root_exempt = ["CHANGELOG.md", "AGENTS.md", "README.md", "AGS_ROADMAP_MASTER.md", "pyproject.toml"]
         if str(rel_path) in root_exempt:
             continue
 

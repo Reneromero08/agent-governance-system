@@ -307,9 +307,18 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
   - 🎯 CRYPTO_SAFE compliance: Full audit trail ready for protected artifact verification
 
 
-### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)
-- [ ] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
-- [ ] 2.4.2.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
+### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0) ✅
+- [x] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
+- [x] 2.4.2.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
+- **Status**: COMPLETE
+- **Primitives**:
+  - `CAPABILITY/PRIMITIVES/protected_inventory.py` (6 artifact classes, deterministic hashing)
+  - `CAPABILITY/PRIMITIVES/protected_scanner.py` (fail-closed scanner, CLI interface)
+  - `CAPABILITY/PRIMITIVES/PROTECTED_INVENTORY.json` (inventory hash: `41bfca9e...`)
+- **Tests**: 16/16 passing (100%) - `CAPABILITY/TESTBENCH/integration/test_phase_2_4_2_protected_inventory.py`
+- **Scan Results**: 12 protected artifacts detected in 66,234 files
+- **Fail-Closed Verified**: Exit code 1 in public context with violations (12 violations)
+- **Proofs**: `NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_*.{json,md}`
 
 ### 2.4.3 Git Hygiene (CRYPTO_SAFE.1)
 - [ ] 2.4.3.1 Ensure `_PACK_RUN/` outputs are never tracked (reject if git status indicates staging/tracking)

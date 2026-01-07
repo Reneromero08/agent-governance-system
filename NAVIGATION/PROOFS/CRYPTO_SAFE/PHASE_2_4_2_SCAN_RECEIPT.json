@@ -1,0 +1,107 @@
+{
+  "context":"working",
+  "inventory_hash":"41bfca9e34b95e588187b18a3864ecae58016385c36cc01775dd20c68119e66b",
+  "matches":[
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/_generated/cortex.db",
+      "sha256":null,
+      "size_bytes":196608
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/db/codebase_full.db",
+      "sha256":null,
+      "size_bytes":28487680
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/db/instructions.db",
+      "sha256":null,
+      "size_bytes":57344
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/db/swarm_instructions.db",
+      "sha256":null,
+      "size_bytes":1925120
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/db/system1.db",
+      "sha256":null,
+      "size_bytes":4317184
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/CORTEX/db/system2.db",
+      "sha256":null,
+      "size_bytes":28672
+    },
+    {
+      "artifact_class":"compression_advantage",
+      "description":"Compression proofs revealing semantic evaluation databases and benchmark data",
+      "distribution_policy":"plaintext_never",
+      "path":"NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_DATA.json",
+      "sha256":null,
+      "size_bytes":9767
+    },
+    {
+      "artifact_class":"proof_output",
+      "description":"Proof outputs and manifests (internal verification only)",
+      "distribution_policy":"plaintext_internal",
+      "path":"NAVIGATION/PROOFS/GREEN_STATE.json",
+      "sha256":null,
+      "size_bytes":724
+    },
+    {
+      "artifact_class":"proof_output",
+      "description":"Proof outputs and manifests (internal verification only)",
+      "distribution_policy":"plaintext_internal",
+      "path":"NAVIGATION/PROOFS/PROOF_MANIFEST.json",
+      "sha256":null,
+      "size_bytes":1787
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/_generated/system1.db",
+      "sha256":null,
+      "size_bytes":36864
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/_generated/system3.db",
+      "sha256":null,
+      "size_bytes":98304
+    },
+    {
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "path":"THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/db/system1.db",
+      "sha256":null,
+      "size_bytes":28672
+    }
+  ],
+  "protected_count":12,
+  "scan_timestamp":"2026-01-07T06:11:16.804532+00:00",
+  "total_files_scanned":66237,
+  "verdict":"WARN",
+  "violations":[]
+}
