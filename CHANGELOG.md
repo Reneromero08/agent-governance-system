@@ -4,6 +4,26 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.5] - 2026-01-07
+
+### Added
+- **Phase 1.7.2: Formal Invariants Documentation** — Mathematical foundations for catalytic computing
+  - **Formal Invariants (6):** Added to `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md`
+    - INV-CATALYTIC-01: Restoration (∀ run R, domain D: H(pre) = H(post) ⟺ proof.verified)
+    - INV-CATALYTIC-02: Verification Complexity (O(n) time, O(1) space per domain)
+    - INV-CATALYTIC-03: Reversibility (restore(snapshot(S)) = S)
+    - INV-CATALYTIC-04: Clean Space Bound (|context| ≤ O(log |corpus|))
+    - INV-CATALYTIC-05: Fail-Closed (¬verified → exit ≠ 0)
+    - INV-CATALYTIC-06: Determinism (same inputs → same proof hash)
+  - **Buhrman Mapping:** Formal table linking AGS to Buhrman et al. (2014)
+  - **Complexity Analysis:** Space O(log n)/O(n)/O(1), Time O(n) snapshot/restore/verify
+  - **Test Coverage Table:** Links each invariant to specific test files
+  - **Expanded Threat Model in CMP-01:**
+    - 9 adversaries defended with enforcement layers
+    - 5 categories of what CMP-01 defends
+    - 5 out-of-scope items with mitigations
+    - Cryptographic threat coverage (SPECTRUM-05 reference)
+
 ## [3.7.4] - 2026-01-07
 
 ### Fixed

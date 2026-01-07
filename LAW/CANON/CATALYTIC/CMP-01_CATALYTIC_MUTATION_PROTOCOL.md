@@ -257,17 +257,49 @@ Any skill that mutates the filesystem MUST declare one of:
 
 Implementation: `CAPABILITY/TOOLS/agents/skill_runtime.py` (Z.1.6)
 
-## Threat Model Coverage
+## Threat Model
 
-CMP-01 protects against:
-- Accidental repo pollution
-- Incremental drift from repeated agent runs
-- "Helpful" agents writing caches in random folders
-- Partial runs leaving intermediate files behind
+### Adversaries Defended Against
 
-CMP-01 does NOT protect against:
-- Malicious code that bypasses guards at the OS level
-- External side effects (network calls, remote writes) unless separately sandboxed
+| Threat | Defense | Enforcement Layer |
+|--------|---------|-------------------|
+| **Accidental pollution** | Domain restrictions | Preflight + Runtime Guard |
+| **Incremental drift** | Byte-identical restoration | Restoration Proof |
+| **"Helpful" caching** | Forbidden roots | Preflight validation |
+| **Partial run residue** | Atomic commit gate | Phase 3 gating |
+| **Proof tampering** | Cryptographic binding | SPECTRUM-04/05 |
+| **Bundle forgery** | Ed25519 signatures | SPECTRUM-04 |
+| **Replay attacks** | Temporal chain verification | SPECTRUM-03 |
+| **Path traversal** | Normalized path validation | `normalize_relpath()` |
+| **Symlink escape** | Resolved path checks | `resolve()` before write |
+
+### What CMP-01 Defends
+
+1. **Agent Drift** — Repeated runs cannot accumulate state outside durable roots
+2. **Silent Writes** — Any write outside declared domains is a hard failure
+3. **Restoration Forgery** — Proof is cryptographically bound to actual state
+4. **Tampering Detection** — Single-byte changes detected via SHA-256 hashes
+5. **Adversarial Agents** — Untrusted agents cannot pollute trusted state
+
+### What CMP-01 Does NOT Defend
+
+| Out of Scope | Why | Mitigation |
+|--------------|-----|------------|
+| OS-level bypass | Kernel can write anywhere | Container isolation |
+| Network side effects | HTTP calls leave no local trace | Network sandbox |
+| Memory-only leaks | No disk footprint | Process isolation |
+| Time-of-check/time-of-use | Race between check and write | Atomic operations |
+| Malicious validator | Validator signs false proofs | Validator pinning (SPECTRUM-04) |
+
+### Cryptographic Threat Coverage
+
+See [SPECTRUM-05_VERIFICATION_LAW.md](SPECTRUM-05_VERIFICATION_LAW.md) for full cryptographic threat model:
+
+- **THREAT-01**: Unsigned bundle → Rejected at Phase 2
+- **THREAT-02**: Wrong validator key → Rejected at Phase 3
+- **THREAT-03**: Tampered outputs → Hash mismatch at Phase 6
+- **THREAT-04**: Forged proof → Signature verification fails
+- **THREAT-05**: Replayed bundle → Chain verification fails (SPECTRUM-03)
 
 ## Implementation Files
 
