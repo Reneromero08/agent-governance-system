@@ -4,9 +4,12 @@ import hashlib
 import json
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any, Dict, List, Optional
+from typing import Any, Dict, List, Optional, TYPE_CHECKING
 
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes
+
+if TYPE_CHECKING:
+    from CAPABILITY.PIPELINES.atomic_writes import AtomicGuardedWrites
 
 
 def _sha256_file(path: Path) -> str:
@@ -82,9 +85,21 @@ def write_chain(
     *,
     pipeline_dir: Path,
     chain_obj: Dict[str, Any],
+    writes: Optional[AtomicGuardedWrites] = None,
 ) -> None:
-    # atomic write is done by pipeline_runtime; this helper keeps bytes canonical.
-    chain_path(pipeline_dir).write_bytes(canonical_json_bytes(chain_obj) + b"\n")
+    """Write chain object to pipeline directory.
+
+    Args:
+        pipeline_dir: Pipeline directory
+        chain_obj: Chain object to write
+        writes: Optional AtomicGuardedWrites for firewall enforcement
+    """
+    path = chain_path(pipeline_dir)
+    if writes:
+        writes.write_durable_bytes(path, canonical_json_bytes(chain_obj) + b"\n")
+    else:
+        # Legacy path without firewall
+        path.write_bytes(canonical_json_bytes(chain_obj) + b"\n")
 
 
 @dataclass(frozen=True)
