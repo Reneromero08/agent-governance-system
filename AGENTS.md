@@ -198,11 +198,83 @@ If any of the above steps are skipped, the agent must stop.
 
 When multiple agents are active in the same repo, each agent MUST use a separate Git worktree (or branch + worktree) to avoid shared working-tree conflicts that break governance checks.
 
-Minimum practice:
-- One agent = one worktree directory.
+### Workspace Isolation Skill (MANDATORY for parallel work)
+
+Use the `workspace-isolation` skill for all parallel agent work:
+
+```bash
+# Location: CAPABILITY/SKILLS/agents/workspace-isolation/
+
+# STEP 1: Check status (run from main repo root)
+cd "D:/CCC 2.0/AI/agent-governance-system"
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py status
+
+# STEP 2: Create isolated worktree (run from main repo root)
+cd "D:/CCC 2.0/AI/agent-governance-system"
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py create <task_id>
+# Example: python run.py create 2.4.1C.5
+# Output shows: "Worktree created. Next steps: cd <path>"
+
+# STEP 3: Switch to isolated worktree (cd to the path from output)
+cd "../wt-<task_id>"
+# Example: cd "../wt-2.4.1C.5"
+# Verify you're in the worktree: git branch --show-current
+# Should show: task/<task_id>
+
+# STEP 4: Do work in isolated worktree
+# ... make changes, commits, run tests ...
+# Stay in this directory for all task work!
+
+# STEP 5: Validate (run from isolated worktree)
+python -m pytest CAPABILITY/TESTBENCH -x
+python CAPABILITY/PRIMITIVES/preflight.py
+# DO NOT MERGE IF TESTS FAIL!
+
+# STEP 6: Return to main repo and merge (ONLY after validation passes)
+cd "D:/CCC 2.0/AI/agent-governance-system"
+# Verify you're on main: git branch --show-current (should show: main)
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py merge <task_id>
+
+# STEP 7: Cleanup (run from main repo root, REQUIRED after merge)
+cd "D:/CCC 2.0/AI/agent-governance-system"
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup <task_id>
+```
+
+**CRITICAL**: Always verify your current directory and branch before running commands.
+Use `pwd` (or `cd` on Windows) and `git branch --show-current` to confirm location.
+
+### Hard Invariants (workspace isolation)
+1. **Never work in detached HEAD** - Always be on a branch
+2. **Never merge until validation passes** - Tests must be green
+3. **Never auto-delete on failure** - Preserve evidence for debugging
+4. **Always cleanup after merge** - Remove worktree + branch when done
+5. **One task = one worktree** - Don't share worktrees between tasks
+6. **Always verify current directory** - Use `pwd` and `git branch --show-current`
+7. **Run create/merge/cleanup from main repo** - Not from worktree
+8. **Work only in the isolated worktree** - Never commit to main directly
+
+### Standard Naming
+| Item | Pattern | Example |
+|------|---------|---------|
+| Branch | `task/<task_id>` | `task/2.4.1C.5` |
+| Worktree | `../wt-<task_id>` | `../wt-2.4.1C.5` |
+
+### Stale Worktree Cleanup
+Periodically clean up stale worktrees (already merged to main):
+```bash
+# Dry-run (show what would be cleaned)
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup-stale
+
+# Actually clean up
+python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup-stale --apply
+```
+
+### Additional Practices
 - Each agent updates `CHANGELOG.md` by adding a topmost entry, then rebases before push.
 - Do not run tests or commit from a shared dirty worktree.
 - Use `commit-queue` to enqueue and stage per-agent commit slices before the commit ceremony.
+
+See `CAPABILITY/SKILLS/agents/workspace-isolation/SKILL.md` for full documentation and `LAW/CONTEXT/decisions/ADR-037-workspace-isolation.md` for the architectural decision record.
 
 ## 1A. Question-first gate (no-write)
 

@@ -4,6 +4,31 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.8] - 2026-01-07
+
+### Added
+- **Workspace Isolation Skill** — Full-featured git worktree/branch management for parallel agent work.
+  - **Purpose**: Enable multiple agents to work simultaneously without conflicts
+  - **Commands**:
+    - `create <task_id>` — Create isolated worktree + branch for a task
+    - `status [task_id]` — Show worktree status (current branch, dirty state, task worktrees)
+    - `merge <task_id>` — Merge task branch into main (only after validation passes)
+    - `cleanup <task_id>` — Remove worktree and delete branch
+    - `cleanup-stale` — Find and remove stale worktrees (already merged to main)
+  - **Standard Naming**: Branch `task/<task_id>`, Worktree `../wt-<task_id>`
+  - **Hard Invariants**: Never detached HEAD, never merge until validation passes, always cleanup after merge
+  - **Files**:
+    - `CAPABILITY/SKILLS/agents/workspace-isolation/SKILL.md` — Full documentation
+    - `CAPABILITY/SKILLS/agents/workspace-isolation/run.py` — Entry point
+    - `CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py` — Main module
+    - `CAPABILITY/SKILLS/agents/workspace-isolation/scripts/test_workspace_isolation.py` — Tests (10 passing)
+    - `CAPABILITY/SKILLS/agents/workspace-isolation/validate.py` — Skill validation
+  - **Cross-platform**: Python-based (replaces PowerShell scripts)
+  - **ADR**: `LAW/CONTEXT/decisions/ADR-037-workspace-isolation.md`
+  - **Governance**: Updated `AGENTS.md` Section 1C with mandatory skill usage
+  - **Safety**: Directory verification on create/merge/cleanup (prevents wrong-directory errors)
+  - **Instructions**: Step-by-step workflow with explicit `cd` commands and verification steps
+
 ## [3.4.7] - 2026-01-07
 
 ### Added
@@ -726,7 +751,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - Tests: `CAPABILITY/TESTBENCH/core/test_model_router.py`
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/3.1_router-fallback-stability/REPORT.md`
-  - **Roadmap**: Section 3.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 3.1 marked complete in `AGS_ROADMAP_MASTER.md`
 
 ## [3.3.17] - 2026-01-05
 
@@ -762,7 +787,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Artifacts**:
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/2.3_run-bundle-contract-freezing-what-is-a-run/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/2.3_run-bundle-contract-freezing-what-is-a-run/REPORT.md`
-  - **Roadmap**: Section 2.3 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 2.3 marked complete in `AGS_ROADMAP_MASTER.md`
 
 ### Fixed
 - **CAPABILITY/RUNS/bundles.py**: Removed invalid `cas_root` parameter from `run_bundle_create`, `run_bundle_verify`, and `get_bundle_roots` functions (CAS API doesn't accept this parameter)
@@ -793,7 +818,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - Invariant update: `LAW/CANON/INVARIANTS.md` (+58 lines)
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.4_failure-taxonomy-recovery-playbooks-ops-grade/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.4_failure-taxonomy-recovery-playbooks-ops-grade/REPORT.md`
-  - **Roadmap**: Section 1.4 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 1.4 marked complete in `AGS_ROADMAP_MASTER.md`
 - **Task 4.1: Catalytic Snapshot & Restore (Z.4.2–Z.4.4)** — Verified and documented complete implementation of catalytic space restoration guarantees.
   - **4.1.1 - Pre-run Snapshot**: Implemented in `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py:272-279`
     - `snapshot_domains()` captures SHA-256 hashes of all files in catalytic domains before execution
@@ -815,7 +840,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Artifacts**:
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/4.1_catalytic-snapshot-restore/REPORT.md`
-  - **Roadmap**: Section 4.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 4.1 marked complete in `AGS_ROADMAP_MASTER.md`
 
 ## [3.3.15] - 2026-01-05
  
@@ -837,7 +862,7 @@ All notable changes to Agent Governance System will be documented in this file.
    - **Artifacts**:
      - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/receipt.json`
      - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.3_deprecate-lab-mcp-server/REPORT.md`
-   - **Roadmap**: Section 1.3 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+   - **Roadmap**: Section 1.3 marked complete in `AGS_ROADMAP_MASTER.md`
    - **Files Modified**: 2 tracked files
      - `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` (deprecation notice)
       - `THOUGHT/LAB/CAT_CHAT/archive/legacy/simple_symbolic_demo.py` (syntax fix)
@@ -869,7 +894,7 @@ All notable changes to Agent Governance System will be documented in this file.
    - **Artifacts**:
      - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/2.2_pack-consumer-verification-rehydration/receipt.json`
      - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/2.2_pack-consumer-verification-rehydration/REPORT.md`
-   - **Roadmap**: Section 2.2 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+   - **Roadmap**: Section 2.2 marked complete in `AGS_ROADMAP_MASTER.md`
    - **Test Coverage**: 6/6 tests passing (roundtrip, tamper detection, determinism, fail-closed)
  
 ## [3.3.14] - 2026-01-05
@@ -892,7 +917,7 @@ All notable changes to Agent Governance System will be documented in this file.
   - **Artifacts**:
     - Receipt: `LAW/CONTRACTS/_runs/_tmp/prompts/1.2_bucket-enforcement-x3/receipt.json`
     - Report: `LAW/CONTRACTS/_runs/_tmp/prompts/1.2_bucket-enforcement-x3/REPORT.md`
-  - **Roadmap**: Section 1.2 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 1.2 marked complete in `AGS_ROADMAP_MASTER.md`
   - **Lines Changed**: 158 lines added (+78 preflight.py, +80 test_preflight.py)
 
 ## [3.3.13] - 2026-01-05
@@ -921,7 +946,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - ✅ GC never deletes referenced blobs (fixture-backed proof)
     - ✅ Dedup benchmark reproducible and stored as artifacts
   - **Test Coverage**: 7/7 tests passing (5 P2 integration + 2 GC safety)
-  - **Roadmap**: Section 2.1 marked complete in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`
+  - **Roadmap**: Section 2.1 marked complete in `AGS_ROADMAP_MASTER.md`
 
 ## [3.3.12] - 2026-01-05
 
@@ -1041,7 +1066,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - Every reference (header, body, allowed-writes, receipt/report paths) now matches the file's canonical filename (e.g., `1.1_slug` instead of `1-1-slug`).
   - **Python Portability (Heredoc Elimination)**: Replaced 14 bash-only Python heredocs (`python - <<'PY'`) with portable `python -c` one-liners.
     - Ensures "REQUIRED FACTS" extraction works in WSL/bash, Windows CMD, and PowerShell.
-  - **Roadmap Path Correction**: Repaired 29 files referencing the non-existent `AGS_ROADMAP_MASTER_REPHASED_TODO_UPDATED.md`, pointing them to the canonical `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`.
+  - **Roadmap Path Correction**: Repaired 29 files referencing the non-existent `AGS_ROADMAP_MASTER_REPHASED_TODO_UPDATED.md`, pointing them to the canonical `AGS_ROADMAP_MASTER.md`.
   - **PROMPT_PACK_MANIFEST.json**: Updated with 32 new SHA256 hashes for the standardized pack.
   - **Shell Portability (Standardized Invocations)**: Resolved silent shell assumptions across 36 files. 
     - Explicitly prefixed `*.sh` calls with `bash` and added hardware/lane requirements: "Requires bash-compatible shell (e.g. WSL)".
