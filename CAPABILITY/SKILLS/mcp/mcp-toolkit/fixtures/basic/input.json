@@ -1,0 +1,5 @@
+{
+  "operation": "validate_access",
+  "agent_action": "I need to check what's in the database",
+  "agent_code_snippet": ""
+}
