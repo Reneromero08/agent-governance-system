@@ -6,7 +6,7 @@ from pathlib import Path
 EXCLUDE_FILES = {
     "NAVIGATION/CORTEX/db/cortex.build.py",
     "CAPABILITY/MCP/server.py",
-    "CAPABILITY/TOOLS/governance/check_inbox_policy.py",
+    "CAPABILITY/SKILLS/inbox/inbox-report-writer/check_inbox_policy.py",
     "LAW/CONTRACTS/runner.py",
     "CAPABILITY/TOOLS/governance/critic.py",
     # "CAPABILITY/TOOLS/ags.py", # Fixed? Yes Step 7586.

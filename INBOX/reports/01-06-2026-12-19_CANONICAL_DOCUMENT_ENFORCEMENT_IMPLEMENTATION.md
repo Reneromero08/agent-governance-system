@@ -10,7 +10,6 @@ modified: 2026-01-06 13:09
 status: Active
 summary: Document summary
 tags: []
-hashtags: []
 ---
 <!-- CONTENT_HASH: b98ceda55d8081da668039f8afe6476e946c90346572d9b348dd7ac037cb3b35 -->
 # Canonical Document Enforcement - Implementation Summary

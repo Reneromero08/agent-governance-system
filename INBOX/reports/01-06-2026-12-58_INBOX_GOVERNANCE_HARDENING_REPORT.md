@@ -10,7 +10,6 @@ modified: 2026-01-06 13:09
 status: Active
 summary: Document summary
 tags: []
-hashtags: []
 ---
 <!-- CONTENT_HASH: 35d99d0f3fdd3932dc1fd2ec959c1788b830158afd38a83b1c1e5bf585e82117 -->
 # INBOX Governance Hardening Report

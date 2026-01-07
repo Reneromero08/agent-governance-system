@@ -17,13 +17,8 @@ tags:
 - write-firewall
 - tests
 - completion
-hashtags:
-- '#firewall'
-- '#governance'
-- '#verified'
 ---
-<!-- CONTENT_HASH: b947ebcab195fd71d63aa0e84b3735eb7fc6b7dc1564a2f8b5a6b8ce7de95575 -->
-
+<!-- CONTENT_HASH: e91ff0add319d7c988aec03685ebfd50ee4ddb0b229b23d5094a097569fcb3c0 -->
 <!-- CONTENT_HASH: pending -->
 
 ## Completion Report: Phase 2.4.1C.3

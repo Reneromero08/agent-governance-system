@@ -16,13 +16,8 @@ tags:
 - timing-attacks
 - key-management
 - toctou
-hashtags:
-- '#security'
-- '#hardening'
-- '#phase4'
 ---
 <!-- CONTENT_HASH: 0ac0d183e6635db0577bae72529e9b72c1ede580467881a8ddf6d129e4d73d12 -->
-
 # Phase 4 Security Hardening Analysis
 
 **Date:** 2026-01-07
