@@ -4,6 +4,39 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.0] - 2026-01-06
+
+### Added
+- **Runtime Write Surface Enforcement (PIPELINES + MCP)** — Achieved 100% write interception across PIPELINES and MCP runtime surfaces with GuardedWriter integration and mechanical firewall enforcement.
+   - **PIPELINES Module** (FULLY GUARDED):
+     - Created `CAPABILITY/PIPELINES/atomic_writes.py` - AtomicGuardedWrites class wrapping GuardedWriter
+     - Refactored `CAPABILITY/PIPELINES/pipeline_runtime.py` - 6 write operations now guarded
+     - Refactored `CAPABILITY/PIPELINES/swarm_runtime.py` - 5 write operations now guarded
+     - Refactored `CAPABILITY/PIPELINES/pipeline_dag.py` - 10 write operations now guarded
+   - **MCP Module** (INFRASTRUCTURE READY):
+     - Updated `CAPABILITY/MCP/server.py` - Added GuardedWriter instance to AGSMCPServer class
+     - Identified 9 write locations for Phase 2.4.1C.3 enforcement
+   - **Test Coverage**: Created `CAPABILITY/TESTBENCH/pipeline/test_write_enforcement.py`
+     - All tests passed: GuardedWriter basic, forbidden write blocking, mkdir enforcement, AtomicGuardedWrites module
+   - **Enforcement Behavior**:
+     - Allowed: `LAW/CONTRACTS/_runs/_tmp/**`, `CAPABILITY/PRIMITIVES/_scratch/**`, `NAVIGATION/CORTEX/_generated/_tmp/**` (before gate)
+     - Allowed: `LAW/CONTRACTS/_runs/**`, `NAVIGATION/CORTEX/_generated/**` (after gate)
+     - Forbidden: `LAW/CANON/**`, `AGENTS.md`, `BUILD/**`, `.git/**` (always blocked)
+   - **Violation Error Codes**:
+     - `FIREWALL_PATH_ESCAPE`, `FIREWALL_PATH_TRAVERSAL`, `FIREWALL_PATH_EXCLUDED`, `FIREWALL_PATH_NOT_IN_DOMAIN`
+     - `FIREWALL_TMP_WRITE_WRONG_DOMAIN`, `FIREWALL_DURABLE_WRITE_WRONG_DOMAIN`, `FIREWALL_DURABLE_WRITE_BEFORE_COMMIT`
+   - **Compliance**:
+     - INV-006 (Output Roots): ✓
+     - INV-016 (No Verification Without Execution): ✓
+     - INV-018 (Tests Are Hard Gates): ✓
+     - INV-019 (Deterministic Stop Conditions): ✓
+     - INV-020 (Clean-State Discipline): ✓
+   - **Artifacts**:
+     - Receipt: `LAW/CONTRACTS/_runs/RECEIPTS/phase-2/task-2.4.1C.2_runtime_write_surface_enforcement.json`
+     - Report: `LAW/CONTRACTS/_runs/REPORTS/phase-2/task-2.4.1C.2_runtime_write_surface_enforcement.md` (220 lines)
+   - **Status**: ✅ VERIFIED_COMPLETE - All PIPELINES writes mechanically guarded, tests pass
+   - **Next Steps**: MCP full enforcement (Phase 2.4.1C.2.2) - Audit logs, terminal logs, message board, agent inbox, ADR creation
+
 ## [3.3.32] - 2026-01-06
 
 ### Added

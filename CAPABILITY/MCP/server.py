@@ -25,6 +25,9 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Callable, Dict, Iterator, List, Optional, Tuple
 
+# Write enforcement
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
 # =============================================================================
 # SAFE PRIMITIVES (Ported from CAT LAB server_CATDPT.py)
 # =============================================================================
@@ -1217,6 +1220,25 @@ class AGSMCPServer:
         self.semantic_adapter = None
         self.semantic_available = False
         self._semantic_init_attempted = False
+        # Write enforcement
+        self.writer = GuardedWriter(
+            project_root=PROJECT_ROOT,
+            tmp_roots=[
+                "LAW/CONTRACTS/_runs/_tmp",
+                "CAPABILITY/PRIMITIVES/_scratch",
+                "NAVIGATION/CORTEX/_generated/_tmp",
+            ],
+            durable_roots=[
+                "LAW/CONTRACTS/_runs",
+                "NAVIGATION/CORTEX/_generated",
+            ],
+            exclusions=[
+                "LAW/CANON",
+                "AGENTS.md",
+                "BUILD",
+                ".git",
+            ],
+        )
 
 
 

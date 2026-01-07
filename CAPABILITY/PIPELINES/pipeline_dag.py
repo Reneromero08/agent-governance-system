@@ -10,6 +10,7 @@ from typing import Any, Dict, List, Optional, Set, Tuple
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime, _slug
 from CAPABILITY.PIPELINES.pipeline_verify import verify_pipeline
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes
+from CAPABILITY.PIPELINES.atomic_writes import AtomicGuardedWrites
 
 
 _HEX64 = "0123456789abcdef"
@@ -17,7 +18,6 @@ _HEX64 = "0123456789abcdef"
 
 def _is_hex64(s: str) -> bool:
     return len(s) == 64 and all(ch in _HEX64 for ch in s)
-
 
 def _sha256_file(path: Path) -> str:
     h = hashlib.sha256()
@@ -29,23 +29,24 @@ def _sha256_file(path: Path) -> str:
             h.update(chunk)
     return h.hexdigest()
 
-
 def _load_json_obj(path: Path) -> Dict[str, Any]:
     obj = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(obj, dict):
         raise ValueError(f"expected JSON object: {path}")
     return obj
 
+# Guarded write instance (created when needed)
+_writes_instance: Optional[AtomicGuardedWrites] = None
 
-def _atomic_write(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
-    tmp.write_bytes(data)
-    os.replace(tmp, path)
+def _get_writes(project_root: Path) -> AtomicGuardedWrites:
+    """Get or create guarded writes instance."""
+    global _writes_instance
+    if _writes_instance is None:
+        _writes_instance = AtomicGuardedWrites(project_root=project_root)
+    return _writes_instance
 
-
-def _atomic_write_canon_json(path: Path, obj: Any) -> None:
-    _atomic_write(path, canonical_json_bytes(obj))
+def _atomic_write_canon_json(path: Path, obj: Any, *, project_root: Path) -> None:
+    _get_writes(project_root).atomic_write_canonical_json(path, obj)
 
 
 def _load_policy_proof(pipeline_dir: Path) -> Dict[str, Any]:
@@ -243,6 +244,7 @@ def _load_receipt(path: Path) -> Dict[str, Any]:
 
 def _emit_receipt(
     *,
+    project_root: Path,
     pipeline_dir: Path,
     node_id: str,
     pipeline_id: str,
@@ -266,7 +268,7 @@ def _emit_receipt(
     if policy:
         receipt["policy"] = policy
     receipt["receipt_hash"] = _compute_receipt_hash(receipt)
-    _atomic_write_canon_json(pipeline_dir / "RECEIPT.json", receipt)
+    _atomic_write_canon_json(pipeline_dir / "RECEIPT.json", receipt, project_root=project_root)
     return receipt
 
 
@@ -516,7 +518,7 @@ def restore_dag(
             spec = rt._parse_spec(pipeline_id=node, obj=spec_obj)
         except Exception:
             return {"ok": False, "code": "PIPELINE_SPEC_INVALID", "details": {"node": node}}
-        _atomic_write_canon_json(pipeline_dir / "STATE.json", rt._initial_state(spec))
+        _atomic_write_canon_json(pipeline_dir / "STATE.json", rt._initial_state(spec), project_root=project_root)
 
         rt.run(pipeline_id=node)
         res = verify_pipeline(project_root=project_root, pipeline_id=node, runs_root=runs_root, strict=strict)
@@ -525,6 +527,7 @@ def restore_dag(
 
         output_hashes = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
         _emit_receipt(
+            project_root=project_root,
             pipeline_dir=pipeline_dir,
             node_id=node,
             pipeline_id=node,
@@ -544,7 +547,7 @@ def restore_dag(
         "completed": [n for n in order if n in completed],
         "receipts": dict(sorted(receipts.items(), key=lambda kv: kv[0])),
     }
-    _atomic_write_canon_json(dag_state_path, state)
+    _atomic_write_canon_json(dag_state_path, state, project_root=project_root)
 
     receipt_hashes: Dict[str, str] = {}
     for node in completed:
@@ -560,7 +563,7 @@ def restore_dag(
         "rerun": [n for n in order if n in rerun],
         "receipt_hashes": dict(sorted(receipt_hashes.items(), key=lambda kv: kv[0])),
     }
-    _atomic_write_canon_json(restore_path, restore_obj)
+    _atomic_write_canon_json(restore_path, restore_obj, project_root=project_root)
 
     return {
         "ok": True,
@@ -579,14 +582,14 @@ def run_dag(
     strict: bool = True,
 ) -> Dict[str, Any]:
     dag_dir = _dag_dir(project_root=project_root, runs_root=runs_root, dag_id=dag_id)
-    dag_dir.mkdir(parents=True, exist_ok=True)
+    _get_writes(project_root).mkdir_tmp(dag_dir)
     dag_spec_path = dag_dir / "PIPELINE_DAG.json"
     dag_state_path = dag_dir / "DAG_STATE.json"
 
     if spec_path is not None:
         obj = _load_json_obj(spec_path)
         spec = _parse_dag_spec(obj)
-        _atomic_write_canon_json(dag_spec_path, obj)
+        _atomic_write_canon_json(dag_spec_path, obj, project_root=project_root)
     else:
         if not dag_spec_path.exists():
             return {"ok": False, "code": "DAG_NOT_FOUND", "details": {"dag_dir": str(dag_dir)}}
@@ -655,6 +658,7 @@ def run_dag(
 
         output_hashes = _pipeline_artifact_hashes(pipeline_dir=pipeline_dir)
         _emit_receipt(
+            project_root=project_root,
             pipeline_dir=pipeline_dir,
             node_id=node,
             pipeline_id=node,
@@ -669,7 +673,7 @@ def run_dag(
         completed.add(node)
         state["completed"] = [n for n in order if n in completed]
         state["receipts"] = dict(sorted(receipts.items(), key=lambda kv: kv[0]))
-        _atomic_write_canon_json(dag_state_path, state)
+        _atomic_write_canon_json(dag_state_path, state, project_root=project_root)
         executed += 1
 
     return {"ok": True, "code": "OK", "details": {"dag_id": dag_id, "completed": len(completed), "nodes": len(order), "executed": executed}}

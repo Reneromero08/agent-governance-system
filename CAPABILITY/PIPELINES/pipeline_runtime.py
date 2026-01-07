@@ -13,25 +13,7 @@ import time
 from CAPABILITY.PRIMITIVES.restore_proof import canonical_json_bytes
 from CAPABILITY.PRIMITIVES.preflight import PreflightValidator
 from CAPABILITY.PIPELINES.pipeline_chain import build_chain_obj, compute_step_entry, verify_chain
-
-
-def _atomic_write_bytes(path: Path, data: bytes) -> None:
-    path.parent.mkdir(parents=True, exist_ok=True)
-    tmp = path.with_name(path.name + f".tmp.{os.getpid()}")
-    tmp.write_bytes(data)
-    tmp.write_bytes(data)
-    for i in range(5):
-        try:
-            os.replace(tmp, path)
-            return
-        except PermissionError:
-            if i == 4:
-                raise
-            time.sleep(0.1)
-
-
-def _atomic_write_canonical_json(path: Path, obj: Any) -> None:
-    _atomic_write_bytes(path, canonical_json_bytes(obj))
+from CAPABILITY.PIPELINES.atomic_writes import AtomicGuardedWrites
 
 
 _RUN_ID_SAFE = re.compile(r"[^a-z0-9-]+")
@@ -85,6 +67,7 @@ class PipelineRuntime:
         self.project_root = Path(project_root)
         self.schemas_dir = self.project_root / "LAW" / "SCHEMAS"
         self.jobspec_schema_path = self.schemas_dir / "jobspec.schema.json"
+        self.writes = AtomicGuardedWrites(project_root=self.project_root)
 
     def _load_revoked_capabilities_snapshot(self) -> List[str]:
         rel = os.environ.get("CATALYTIC_REVOKES_PATH", "LAW/CANON/CAPABILITY_REVOKES.json")
@@ -106,7 +89,7 @@ class PipelineRuntime:
         if policy_path.exists():
             return
         revoked = sorted(set(self._load_revoked_capabilities_snapshot()))
-        _atomic_write_canonical_json(policy_path, {"policy_version": "1.0.0", "revoked_capabilities": revoked})
+        self.writes.atomic_write_canonical_json(policy_path, {"policy_version": "1.0.0", "revoked_capabilities": revoked})
 
     def pipeline_dir(self, pipeline_id: str) -> Path:
         return self.project_root / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / _slug(pipeline_id)
@@ -118,7 +101,7 @@ class PipelineRuntime:
             return
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
         spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
-        _atomic_write_canonical_json(state_path, self._initial_state(spec))
+        self.writes.atomic_write_canonical_json(state_path, self._initial_state(spec))
 
     def init_from_spec_path(self, *, pipeline_id: str, spec_path: Path) -> PipelineSpec:
         spec_obj = json.loads(spec_path.read_text(encoding="utf-8"))
@@ -127,13 +110,13 @@ class PipelineRuntime:
     def init_from_spec_obj(self, *, pipeline_id: str, spec_obj: Dict[str, Any]) -> PipelineSpec:
         spec = self._parse_spec(pipeline_id=pipeline_id, obj=spec_obj)
         pdir = self.pipeline_dir(pipeline_id)
-        pdir.mkdir(parents=True, exist_ok=True)
-        _atomic_write_canonical_json(pdir / "PIPELINE.json", self._spec_to_json(spec))
+        self.writes.mkdir_tmp(pdir)
+        self.writes.atomic_write_canonical_json(pdir / "PIPELINE.json", self._spec_to_json(spec))
         
         state_path = pdir / "STATE.json"
         if not state_path.exists():
             state = self._initial_state(spec)
-            _atomic_write_canonical_json(state_path, state)
+            self.writes.atomic_write_canonical_json(state_path, state)
         return spec
 
     def load(self, *, pipeline_id: str) -> Tuple[PipelineSpec, Dict[str, Any]]:
@@ -208,7 +191,7 @@ class PipelineRuntime:
             run_id = self._make_run_id(spec.pipeline_id, step.step_id, attempt)
 
             run_dir = self.project_root / "LAW" / "CONTRACTS" / "_runs" / run_id
-            run_dir.mkdir(parents=True, exist_ok=True)
+            self.writes.mkdir_tmp(run_dir)
 
             self._execute_step(spec=spec, step=step, run_id=run_id)
             self._assert_step_outputs(run_dir)
@@ -236,15 +219,15 @@ class PipelineRuntime:
                 chain_entries.append(entry)
 
             chain_obj = build_chain_obj(project_root=self.project_root, pipeline_id=spec.pipeline_id, ordered_steps=chain_entries)
-            _atomic_write_canonical_json(pdir / "CHAIN.json", chain_obj)
+            self.writes.atomic_write_canonical_json(pdir / "CHAIN.json", chain_obj)
             v = verify_chain(project_root=self.project_root, pipeline_dir=pdir)
             if not v.get("ok", False):
                 raise RuntimeError(f"pipeline chain invalid after step {step.step_id}: {v.get('code')}")
 
             # Persist step run ref
             step_dir = pdir / "steps" / step.step_id
-            step_dir.mkdir(parents=True, exist_ok=True)
-            _atomic_write_canonical_json(step_dir / "RUN_REF.json", {"run_id": run_id})
+            self.writes.mkdir_tmp(step_dir)
+            self.writes.atomic_write_canonical_json(step_dir / "RUN_REF.json", {"run_id": run_id})
 
             # Update state (atomic, deterministic)
             completed_steps.add(step.step_id)
@@ -252,7 +235,7 @@ class PipelineRuntime:
             state["current_step_index"] = max(step_index + 1, state.get("current_step_index", 0))
             state["step_run_ids"][step.step_id] = run_id
             state["attempts"] = dict(sorted(attempts.items(), key=lambda kv: kv[0]))
-            _atomic_write_canonical_json(pdir / "STATE.json", state)
+            self.writes.atomic_write_canonical_json(pdir / "STATE.json", state)
 
             steps_executed += 1
 
