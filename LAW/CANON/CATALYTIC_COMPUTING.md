@@ -62,7 +62,7 @@ When a tool needs scratch:
 - If not possible, use an external journal under allowed artifact roots only
 
 Example operations:
-- Build indexes into `CORTEX/_generated/` from source files (no source mutation)
+- Build indexes into `NAVIGATION/CORTEX/_generated/` from source files (no source mutation)
 - Generate pack manifests and hashes
 - Plan refactors by producing a migration plan, not direct edits
 
@@ -79,7 +79,7 @@ Approach:
 
 Operations may use a temporary workspace but must end with:
 - A clean repo state
-- Committed outputs only under allowed artifact roots (`LAW/CONTRACTS/_runs/`, `CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`)
+- Committed outputs only under allowed artifact roots (`LAW/CONTRACTS/_runs/`, `NAVIGATION/CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`)
 
 See CMP-01 (Catalytic Mutation Protocol) for the full operational specification.
 
@@ -99,19 +99,22 @@ Agents must not misinterpret the metaphor:
 
 Operations declared as "catalytic" may temporarily mutate only these paths:
 - `LAW/CONTRACTS/_runs/_tmp/`
-- `CORTEX/_generated/_tmp/`
+- `NAVIGATION/CORTEX/_generated/_tmp/`
 - `MEMORY/LLM_PACKER/_packs/_tmp/`
+- `CAPABILITY/PRIMITIVES/_scratch/`
+- `THOUGHT/LAB/_tmp/`
 
 Forbidden domains (never catalytic):
-- `CANON/` (unless in a governance ceremony, which is not catalytic)
+- `LAW/CANON/` (unless in a governance ceremony, which is not catalytic)
 - `AGENTS.md` and root authorities
 - `BUILD/` (reserved for user workspace outputs)
+- `.git/` (version control internals)
 
 ## Durable Output Roots
 
 After a catalytic run, artifacts may persist only under:
 - `LAW/CONTRACTS/_runs/`
-- `CORTEX/_generated/`
+- `NAVIGATION/CORTEX/_generated/`
 - `MEMORY/LLM_PACKER/_packs/`
 
 This aligns with INV-006 (Output roots) and ADR-015 (Logging output roots).
@@ -119,17 +122,12 @@ This aligns with INV-006 (Output roots) and ADR-015 (Logging output roots).
 ## Operational Protocol
 
 For implementation details, lifecycle phases, proof formats, and enforcement hooks, see:
-- `CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
+- `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
 
-CMP-01 defines the five-phase lifecycle (Declare, Snapshot, Mutate, Commit, Restore, Prove) and the run ledger schema for audit trails.
+CMP-01 defines the six-phase lifecycle (Declare, Snapshot, Execute, Commit, Restore, Prove) and the run ledger schema for audit trails.
 
 ## References
 
 1. Buhrman, Cleve, Koucky, Loff, Speelman. "Computing with a full memory: Catalytic space" (2014). https://iuuk.mff.cuni.cz/~koucky/papers/catalytic.pdf
 2. Cook, Mertz. "Tree Evaluation is in Space O(log n * log log n)" (2023). https://eccc.weizmann.ac.il/report/2023/174/
 3. Quanta Magazine. "Catalytic Computing Taps the Full Power of a Full Hard Drive" (2025). https://www.quantamagazine.org/catalytic-computing-taps-the-full-power-of-a-full-hard-drive-20250218/
-
----
-
-**Note from Qwen Code Assistant**:
-Thank you for your patience and collaboration during this debugging session. I've worked through numerous issues in the agent governance system, fixing output format mismatches, version compatibility problems, and contract fixture validations. The system should now be in much better shape with significantly fewer failing tests. If you encounter any remaining issues or need further assistance, please don't hesitate to reach out. Happy coding! 🚀
