@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.6.5
+version: 3.6.8
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -42,6 +42,36 @@ notes:
 **Total:** 41 completed tasks archived | **Savings:** ~317 lines, ~1,300 tokens per read
 
 **Archive:** [`MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md`](MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md)
+
+## 1.6 CMP-01 Catalytic Mutation Protocol Documentation (Foundational Gap)
+**Status:** Implementation exists, canonical documentation MISSING
+
+**Problem:** `LAW/CANON/CATALYTIC_COMPUTING.md` (line 122) references:
+```
+CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md
+```
+This file does not exist. The protocol IS implemented in code but lacks canonical documentation.
+
+**Existing Implementation:**
+- `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py` - Five-phase lifecycle
+- `CAPABILITY/TOOLS/catalytic/catalytic_validator.py` - Proof-gated acceptance
+- `CAPABILITY/TOOLS/agents/skill_runtime.py` - CMP-01 pre-validation enforcement
+- `CAPABILITY/MCP/server.py` - CMP-01 path validation rules
+- `LAW/SCHEMAS/ledger.schema.json` - Run ledger schema
+
+**Tasks:**
+- [ ] 1.6.1 Create `LAW/CONTEXT/research/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
+  - Document five-phase lifecycle: Declare → Snapshot → Mutate → Commit → Restore → Prove
+  - Document run ledger schema and canonical artifact set
+  - Document allowed/forbidden domains and path validation rules
+  - Document proof-gated acceptance criteria
+- [ ] 1.6.2 Update `LAW/CANON/CATALYTIC_COMPUTING.md` reference path if needed
+- [ ] 1.6.3 Add ADR for CMP-01 rationale (why this protocol, alternatives considered)
+
+- **Exit Criteria**
+  - [ ] CMP-01 protocol is documented in canonical location
+  - [ ] All code implementations reference the canonical doc
+  - [ ] New agents can understand catalytic execution without reading implementation code
 
 ### 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
 Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
@@ -108,13 +138,91 @@ Purpose: Anyone can verify a release is untampered.
 
 ## 3.1 Router & Fallback Stability (Z.3.1) ✅
 - [x] 3.1.1 Stabilize model router: deterministic selection + explicit fallback chain (Z.3.1)
-## 3.2 Memory Integration (Z.3.2)
+
+## 3.2 Memory Integration (Z.3.2) - Partial
+**Implemented:** `THOUGHT/LAB/CAT_CHAT/catalytic_chat/context_assembler.py`
 - [x] 3.2.1 Implement CAT Chat context window management (Z.3.2)
-## 3.3 Tool Binding (Z.3.3)
+  - [x] ContextAssembler with hard budgets, priority tiers, fail-closed, receipts
+  - [x] HEAD truncation with deterministic tie-breakers
+  - [x] Assembly receipt with final_assemblage_hash
+
+**Missing for Catalytic Continuity:**
+- [ ] 3.2.2 Integrate ELO tiers for priority decisions (HIGH: include, MEDIUM: summarize, LOW: pointer)
+- [ ] 3.2.3 Track working_set vs pointer_set in assembly receipt
+- [ ] 3.2.4 Add corpus_snapshot_id to receipt (CORTEX index hash, symbol registry hash)
+- [ ] 3.2.5 Wire CORTEX retrieval into expansion resolution (not in-memory only)
+
+## 3.3 Tool Binding (Z.3.3) - Partial
+**Implemented:** `THOUGHT/LAB/CAT_CHAT/catalytic_chat/mcp_integration.py`
 - [x] 3.3.1 Ensure MCP tool access from chat is functional and constrained (Z.3.3)
+  - [x] ChatToolExecutor with strict ALLOWED_TOOLS allowlist
+  - [x] Fail-closed on denied tools
+  - [x] Access to CORTEX tools (cortex_query, context_search, canon_read, semantic_search, etc.)
+
+**Missing for Catalytic Continuity (Hydration Interface):**
+- [ ] 3.3.2 Emit hydration receipts for each retrieval (query_hash, result_hashes, retrieval_path)
+- [ ] 3.3.3 Implement CORTEX-first retrieval order: CORTEX → CAS → Vector fallback
+- [ ] 3.3.4 Track corpus_snapshot_id at retrieval time
+- [ ] 3.3.5 Fail-closed on unresolvable dependencies (no silent fallback)
+
 ## 3.4 Session Persistence (Z.3.4)
-- [ ] 3.4.1 Implement session persistence and resume (Z.3.4)
+**Preconditions:**
+- Phase 6.0-6.2 (Cassette Network substrate) for durable storage
+- Phase 7.2 (ELO Logging Infrastructure) for working set decisions
+- CORTEX retrieval path operational
+
+**Design Spec:** `INBOX/reports/V4/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md`
+
+**Core Concept:** Session = tiny working set (token clean space) + hash pointers to offloaded state.
+Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Vectors (approximate fallback).
+
+### 3.4.1 Session Capsule Schema (Z.3.4.1)
+- [ ] 3.4.1.1 Define `session_capsule.schema.json` with required fields:
+  - `capsule_id` (hash of canonical capsule)
+  - `run_id`, `agent_id`, `created_at`
+  - `conversation_log_head` (hash chain head of append-only events)
+  - `corpus_snapshot_ids` (CORTEX index hash, symbol registry hash, CAS manifest hash)
+  - `last_assembly_receipt_hash`
+  - `active_constraints` (goals, symbols, budgets)
+  - `pointer_set` (offloaded content as CORTEX refs or CAS hashes)
+- [ ] 3.4.1.2 Implement `capsule_save(run_id, out_path) -> capsule_hash`
+- [ ] 3.4.1.3 Implement `capsule_load(capsule_path) -> CapsuleState`
+
+### 3.4.2 Append-Only Event Log (Z.3.4.2)
+- [ ] 3.4.2.1 Define event schema (content-addressed, hash-chained)
+  - Each event: `event_id` (hash), `parent_hash`, `event_type`, `payload`, `timestamp`
+- [ ] 3.4.2.2 Implement `event_append(log_path, event) -> new_head_hash`
+- [ ] 3.4.2.3 Implement `event_log_verify(log_path) -> verdict` (hash chain integrity)
+
+### 3.4.3 Context Assembly Integration (Z.3.4.3)
+- [ ] 3.4.3.1 Wire capsule loading into ContextAssembler
+  - Load capsule → extract pointer_set → assemble working set under budget
+- [ ] 3.4.3.2 Apply ELO tiers for working set decisions (HIGH: include, MEDIUM: summarize, LOW: pointer)
+- [ ] 3.4.3.3 Emit assembly receipt with: selected_ids, excluded_ids, budgets, final_context_hash
+
+### 3.4.4 Hydration Path (Z.3.4.4)
+- [ ] 3.4.4.1 Implement CORTEX-first rehydration:
+  - Query CORTEX (symbols, indexes) → if miss, query CAS (exact hash) → if miss, vector fallback
+- [ ] 3.4.4.2 Emit hydration receipts: query_hash, corpus_snapshot_id, retrieval_path, result_hashes
+- [ ] 3.4.4.3 Fail-closed on unresolvable dependencies (no guessing)
+
+### 3.4.5 Resume Flow (Z.3.4.5)
+- [ ] 3.4.5.1 CLI: `session save --run-id X --out <path>`
+- [ ] 3.4.5.2 CLI: `session resume --capsule <path>`
+- [ ] 3.4.5.3 Resume must be deterministic: same capsule + same corpus → identical assembly
+
+### 3.4.6 Tests & Proofs (Z.3.4.6)
+- [ ] 3.4.6.1 Fixture: save → resume → verify assembly hash identical
+- [ ] 3.4.6.2 Fixture: partial run → save → resume → execution continues identically
+- [ ] 3.4.6.3 Fixture: tampered capsule → FAIL (hash mismatch)
+- [ ] 3.4.6.4 Fixture: missing dependency during hydration → FAIL (fail-closed)
+
 - **Exit Criteria**
+  - [ ] Session capsule schema defined and validated
+  - [ ] Append-only event log with hash chain integrity
+  - [ ] CORTEX-first hydration path with receipts
+  - [ ] Deterministic resume: same capsule + corpus → same behavior
+  - [ ] One end-to-end run: route → tools → persist → resume with identical behavior
 
 ## 3.5 BitNet Backend Runner (cheap worker backend)
 - [ ] 3.5.1 Add BitNet backend runner integration (bitnet.cpp) as a selectable local model backend
@@ -126,7 +234,6 @@ Purpose: Anyone can verify a release is untampered.
   - Receipts include binary hash, args, stdout/stderr digests, exit status
 - **Exit Criteria**
   - [ ] BitNet can be used as a cheap producer without weakening governance guarantees
-  - [ ] One end-to-end CAT Chat run can: route → use tools → persist → resume with identical behavior
 
 # Phase 4: Catalytic Architecture (restore guarantees)
 ## 4.1 Catalytic Snapshot & Restore (Z.4.2–Z.4.4) ✅

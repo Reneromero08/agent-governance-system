@@ -4,6 +4,40 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.6.8] - 2026-01-07
+
+### Added
+- **Phase 1.6 CMP-01 Documentation Gap** — Identified missing canonical protocol document.
+  - **Status**: Implementation exists, documentation MISSING
+  - **Problem**: `LAW/CANON/CATALYTIC_COMPUTING.md` references `CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` (doesn't exist)
+  - **Existing Implementation**:
+    - `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py` (five-phase lifecycle)
+    - `CAPABILITY/TOOLS/catalytic/catalytic_validator.py` (proof-gated acceptance)
+    - `CAPABILITY/TOOLS/agents/skill_runtime.py` (CMP-01 pre-validation)
+    - `CAPABILITY/MCP/server.py` (CMP-01 path validation)
+    - `LAW/SCHEMAS/ledger.schema.json` (run ledger schema)
+  - **Tasks**: Create canonical protocol doc, update CANON reference, add ADR
+  - **Impact**: Agents currently must reverse-engineer protocol from code
+
+### Changed
+- **Phase 3.2 Memory Integration** — Marked as Partial, added catalytic continuity requirements.
+  - **Implemented**: ContextAssembler with budgets, tiers, fail-closed, receipts
+  - **Missing**: ELO tiers integration, working_set vs pointer_set tracking, corpus_snapshot_id, CORTEX retrieval wiring
+
+- **Phase 3.3 Tool Binding** — Marked as Partial, added hydration interface requirements.
+  - **Implemented**: ChatToolExecutor with allowlist, fail-closed on denied tools, CORTEX tool access
+  - **Missing**: Hydration receipts, CORTEX-first retrieval order, corpus_snapshot_id tracking, fail-closed on unresolvable deps
+
+- **Phase 3.4 Session Persistence** — Complete breakdown with dependencies and design spec.
+  - **Preconditions**: Phase 6.0-6.2 (Cassette Network), Phase 7.2 (ELO Logging), CORTEX operational
+  - **Design Spec**: `INBOX/reports/V4/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md`
+  - **Core Concept**: Session = tiny working set + hash pointers to offloaded state
+  - **Retrieval Order**: CORTEX first → CAS → Vectors (fallback)
+  - **Sub-sections**: 6 sections (capsule schema, event log, assembly integration, hydration, resume flow, tests)
+  - **Exit Criteria**: 5 checkboxes including end-to-end proof
+
+- **Roadmap Version**: 3.6.5 → 3.6.8
+
 ## [3.6.5] - 2026-01-07
 
 ### Changed
