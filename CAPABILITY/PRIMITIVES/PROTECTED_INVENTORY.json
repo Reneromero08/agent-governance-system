@@ -1,0 +1,91 @@
+{
+  "patterns":[
+    {
+      "allowed_locations":[
+        ".ags-cas/**"
+      ],
+      "artifact_class":"cas_blob",
+      "description":"Content-addressed storage blobs (immutable, hash-indexed)",
+      "distribution_policy":"plaintext_internal",
+      "patterns":[
+        ".ags-cas/**",
+        "CAPABILITY/PRIMITIVES/.ags-cas/**"
+      ]
+    },
+    {
+      "allowed_locations":[
+        "LAW/CONTRACTS/_runs/_tmp/compression_proof/**",
+        "NAVIGATION/PROOFS/COMPRESSION/**"
+      ],
+      "artifact_class":"compression_advantage",
+      "description":"Compression proofs revealing semantic evaluation databases and benchmark data",
+      "distribution_policy":"plaintext_never",
+      "patterns":[
+        "LAW/CONTRACTS/_runs/_tmp/compression_proof/*.db",
+        "LAW/CONTRACTS/_runs/_tmp/compression_proof/*.json",
+        "NAVIGATION/PROOFS/COMPRESSION/*.json"
+      ]
+    },
+    {
+      "allowed_locations":[
+        "MEMORY/LLM_PACKER/_packs/**",
+        "_PACK_RUN/**"
+      ],
+      "artifact_class":"pack_output",
+      "description":"Pack generation outputs and archived pack runs (may contain derived indexes)",
+      "distribution_policy":"plaintext_internal",
+      "patterns":[
+        "MEMORY/LLM_PACKER/_packs/**/*.db",
+        "MEMORY/LLM_PACKER/_packs/**/*semantic*.json",
+        "_PACK_RUN/**"
+      ]
+    },
+    {
+      "allowed_locations":[
+        "LAW/CONTRACTS/_runs/**",
+        "NAVIGATION/PROOFS/**"
+      ],
+      "artifact_class":"proof_output",
+      "description":"Proof outputs and manifests (internal verification only)",
+      "distribution_policy":"plaintext_internal",
+      "patterns":[
+        "**/PROTECTED_MANIFEST.json",
+        "**/SEALED_ARTIFACTS.json",
+        "NAVIGATION/PROOFS/GREEN_STATE.json",
+        "NAVIGATION/PROOFS/PROOF_MANIFEST.json"
+      ]
+    },
+    {
+      "allowed_locations":[
+        "LAW/CONTRACTS/_runs/_tmp/**",
+        "NAVIGATION/CORTEX/**",
+        "THOUGHT/LAB/**"
+      ],
+      "artifact_class":"semantic_index",
+      "description":"Semantic evaluation and cassette databases (high-value embeddings)",
+      "distribution_policy":"plaintext_never",
+      "patterns":[
+        "**/*_cassette.db",
+        "**/semantic_eval.db",
+        "**/vector_store.db"
+      ]
+    },
+    {
+      "allowed_locations":[
+        "NAVIGATION/CORTEX/**",
+        "THOUGHT/LAB/**"
+      ],
+      "artifact_class":"vector_database",
+      "description":"Vector databases containing semantic embeddings (384-dim vectors)",
+      "distribution_policy":"plaintext_never",
+      "patterns":[
+        "NAVIGATION/CORTEX/_generated/*.db",
+        "NAVIGATION/CORTEX/db/*.db",
+        "THOUGHT/LAB/CAT_CHAT/**/*.db",
+        "THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/_generated/*.db",
+        "THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/db/*.db"
+      ]
+    }
+  ],
+  "version":"1.0.0"
+}

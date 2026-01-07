@@ -1,0 +1,101 @@
+{
+  "phase": "2.4.2",
+  "phase_name": "Protected Artifact Inventory (CRYPTO_SAFE.0)",
+  "status": "COMPLETE",
+  "timestamp": "2026-01-07T06:12:00Z",
+  "tasks": {
+    "2.4.2.1": {
+      "description": "Define protected roots/patterns",
+      "status": "COMPLETE",
+      "deliverables": [
+        "CAPABILITY/PRIMITIVES/protected_inventory.py",
+        "CAPABILITY/PRIMITIVES/PROTECTED_INVENTORY.json"
+      ]
+    },
+    "2.4.2.2": {
+      "description": "Add scanner: detect protected artifacts in working tree",
+      "status": "COMPLETE",
+      "deliverables": [
+        "CAPABILITY/PRIMITIVES/protected_scanner.py",
+        "NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_SCAN_RECEIPT.json"
+      ]
+    }
+  },
+  "exit_criteria": {
+    "protected_patterns_defined": true,
+    "machine_readable_inventory": true,
+    "scanner_detects_deterministically": true,
+    "scanner_fails_closed_public_context": true,
+    "inventory_completeness_verified": true
+  },
+  "test_results": {
+    "test_file": "CAPABILITY/TESTBENCH/integration/test_phase_2_4_2_protected_inventory.py",
+    "total_tests": 16,
+    "passed": 16,
+    "failed": 0,
+    "pass_rate": 1.0
+  },
+  "inventory": {
+    "version": "1.0.0",
+    "hash": "41bfca9e34b95e588187b18a3864ecae58016385c36cc01775dd20c68119e66b",
+    "artifact_classes": [
+      "vector_database",
+      "cas_blob",
+      "compression_advantage",
+      "pack_output",
+      "proof_output",
+      "semantic_index"
+    ],
+    "total_patterns": 6
+  },
+  "scan_summary": {
+    "context": "working",
+    "verdict": "WARN",
+    "total_files_scanned": 66234,
+    "protected_artifacts_found": 12,
+    "violations": 0,
+    "breakdown": {
+      "vector_database": 6,
+      "compression_advantage": 1,
+      "proof_output": 2,
+      "pack_output": 3,
+      "cas_blob": 0,
+      "semantic_index": 0
+    }
+  },
+  "artifacts": [
+    "CAPABILITY/PRIMITIVES/protected_inventory.py",
+    "CAPABILITY/PRIMITIVES/protected_scanner.py",
+    "CAPABILITY/PRIMITIVES/PROTECTED_INVENTORY.json",
+    "CAPABILITY/TESTBENCH/integration/test_phase_2_4_2_protected_inventory.py",
+    "NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_SCAN_RECEIPT.json",
+    "NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_COMPLETION_REPORT.md",
+    "NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_COMPLETION_RECEIPT.json"
+  ],
+  "determinism_guarantees": [
+    "Inventory hash is deterministic (repeated calls produce same hash)",
+    "Path ordering is deterministic (alphabetically sorted)",
+    "Violations are deterministic (sorted)",
+    "JSON serialization is canonical (separators, sort_keys)",
+    "Pattern matching is deterministic (fnmatch with sorted patterns)"
+  ],
+  "fail_closed_verification": {
+    "public_context_with_violations": {
+      "verdict": "FAIL",
+      "exit_code": 1,
+      "violations_count": 12
+    },
+    "working_context": {
+      "verdict": "WARN",
+      "exit_code": 0,
+      "violations_count": 0
+    }
+  },
+  "next_phase": "2.4.3 Git Hygiene (CRYPTO_SAFE.1)",
+  "dependencies_enabled": [
+    "2.4.3 - Git Hygiene (scanner verifies gitignore compliance)",
+    "2.4.4 - Sealing Primitive (uses inventory to identify seal targets)",
+    "2.4.6 - Packer Integration (scanner enforces no plaintext in public packs)",
+    "2.4.7 - One-Command Verifier (uses scanner + inventory)"
+  ]
+}

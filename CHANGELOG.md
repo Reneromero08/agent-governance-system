@@ -4,6 +4,43 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.12] - 2026-01-07
+
+### Added
+- **Phase 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)** — Implemented canonical protected artifacts inventory and fail-closed scanner.
+  - **Primitives**:
+    - `CAPABILITY/PRIMITIVES/protected_inventory.py` — Canonical inventory with 6 artifact classes (VECTOR_DATABASE, CAS_BLOB, PROOF_OUTPUT, COMPRESSION_ADVANTAGE, PACK_OUTPUT, SEMANTIC_INDEX)
+    - `CAPABILITY/PRIMITIVES/protected_scanner.py` — Fail-closed scanner with CLI interface and deterministic receipts
+    - `CAPABILITY/PRIMITIVES/PROTECTED_INVENTORY.json` — Machine-readable inventory (hash: `41bfca9e...`)
+  - **Artifact Classes Defined**:
+    - VECTOR_DATABASE: `NAVIGATION/CORTEX/**/*.db`, `THOUGHT/LAB/**/*.db` (PLAINTEXT_NEVER) — 6 found
+    - COMPRESSION_ADVANTAGE: `NAVIGATION/PROOFS/COMPRESSION/*.json` (PLAINTEXT_NEVER) — 1 found
+    - PROOF_OUTPUT: `NAVIGATION/PROOFS/*.json` (PLAINTEXT_INTERNAL) — 2 found
+    - CAS_BLOB: `.ags-cas/**` (PLAINTEXT_INTERNAL) — 0 found
+    - PACK_OUTPUT: `_PACK_RUN/**`, `MEMORY/LLM_PACKER/_packs/**/*.db` (PLAINTEXT_INTERNAL) — 3 found
+    - SEMANTIC_INDEX: `**/semantic_eval.db`, `**/*_cassette.db` (PLAINTEXT_NEVER) — 0 found
+  - **Scanner Features**:
+    - Deterministic path matching with glob patterns
+    - Context-aware enforcement (working/public/internal)
+    - Fail-closed behavior: FAIL verdict + exit 1 in public context with violations
+    - Canonical JSON receipts with sorted matches/violations
+    - CLI: `--context`, `--compute-hashes`, `--fail-on-violations`, `--output`
+  - **Test Results**: 16/16 tests passing (100%)
+    - Inventory determinism and serialization round-trip
+    - Scanner detection and fail-closed behavior
+    - Receipt format validation
+    - Inventory completeness verification
+    - Failure scenario handling
+  - **Scan Results**: 12 protected artifacts detected in 66,234 files
+  - **Determinism Guarantees**: Canonical ordering (paths, violations, JSON keys), deterministic hashing, idempotent scans
+  - **Fail-Closed Verification**: Exit code 1 when violations detected in public context (12 violations found)
+  - **Exit Criteria**: ✓ All exit criteria met (2.4.2.1, 2.4.2.2)
+  - **Proofs**:
+    - `NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_SCAN_RECEIPT.json` — Working tree scan receipt
+    - `NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_COMPLETION_RECEIPT.json` — Phase completion receipt
+    - `NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_COMPLETION_REPORT.md` — Detailed completion report
+  - **Next Phase Enabled**: 2.4.3 Git Hygiene, 2.4.4 Sealing Primitive, 2.4.6 Packer Integration, 2.4.7 One-Command Verifier
+
 ## [3.4.11] - 2026-01-07
 
 ### Fixed
