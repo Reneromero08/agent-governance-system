@@ -160,6 +160,7 @@ def main():
         max_entry_bytes=int(args.max_entry_bytes),
         max_entries=int(args.max_entries),
         allow_duplicate_hashes=allow_dup,
+        emit_pruned=not args.no_emit_pruned,
         project_root=project_root,
         p2_runs_dir=p2_runs_dir,
         p2_cas_root=p2_cas_root,
