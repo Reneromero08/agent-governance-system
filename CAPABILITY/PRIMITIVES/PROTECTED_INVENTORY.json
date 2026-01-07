@@ -28,15 +28,22 @@
     },
     {
       "allowed_locations":[
+        "LAW/CONTRACTS/_runs/**",
         "MEMORY/LLM_PACKER/_packs/**",
         "_PACK_RUN/**"
       ],
       "artifact_class":"pack_output",
-      "description":"Pack generation outputs and archived pack runs (may contain derived indexes)",
-      "distribution_policy":"plaintext_internal",
+      "description":"Pack outputs: manifests with CAS hashes, proofs, metadata (reveals structure)",
+      "distribution_policy":"plaintext_never",
       "patterns":[
+        "LAW/CONTRACTS/_runs/**/*.db",
+        "LAW/CONTRACTS/_runs/**/*MANIFEST*.json",
+        "LAW/CONTRACTS/_runs/**/PACK_MANIFEST.json",
+        "LAW/CONTRACTS/_runs/**/meta/**",
         "MEMORY/LLM_PACKER/_packs/**/*.db",
-        "MEMORY/LLM_PACKER/_packs/**/*semantic*.json",
+        "MEMORY/LLM_PACKER/_packs/**/*.json",
+        "MEMORY/LLM_PACKER/_packs/**/*.md",
+        "MEMORY/LLM_PACKER/_packs/**/meta/**",
         "_PACK_RUN/**"
       ]
     },
@@ -62,12 +69,26 @@
         "THOUGHT/LAB/**"
       ],
       "artifact_class":"semantic_index",
-      "description":"Semantic evaluation and cassette databases (high-value embeddings)",
+      "description":"Semantic indexes and generated metadata revealing codebase structure",
       "distribution_policy":"plaintext_never",
       "patterns":[
         "**/*_cassette.db",
+        "**/CORTEX_META.json",
+        "**/FILE_INDEX.json",
+        "**/SECTION_INDEX.json",
+        "**/SUMMARY_INDEX.json",
+        "**/codebase_full.db",
+        "**/cortex.db",
+        "**/instructions.db",
         "**/semantic_eval.db",
-        "**/vector_store.db"
+        "**/swarm_instructions.db",
+        "**/system1.db",
+        "**/system2.db",
+        "**/system3.db",
+        "**/vector_store.db",
+        "NAVIGATION/CORTEX/_generated/*.json",
+        "NAVIGATION/CORTEX/meta/*.json",
+        "NAVIGATION/CORTEX/network/cassettes.json"
       ]
     },
     {
@@ -79,6 +100,7 @@
       "description":"Vector databases containing semantic embeddings (384-dim vectors)",
       "distribution_policy":"plaintext_never",
       "patterns":[
+        "**/cat_chat_index.db",
         "NAVIGATION/CORTEX/_generated/*.db",
         "NAVIGATION/CORTEX/db/*.db",
         "THOUGHT/LAB/CAT_CHAT/**/*.db",
@@ -87,5 +109,5 @@
       ]
     }
   ],
-  "version":"1.0.0"
+  "version":"1.2.0"
 }

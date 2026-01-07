@@ -214,13 +214,17 @@ def get_default_inventory() -> ProtectedInventory:
     """Get the default protected artifacts inventory.
 
     This is the canonical definition of what must be protected.
+    AIRTIGHT: If this inventory is incomplete, crypto-safe becomes theater.
 
     Returns:
         ProtectedInventory with default patterns
     """
-    inventory = ProtectedInventory(version="1.0.0")
+    inventory = ProtectedInventory(version="1.2.0")
 
-    # Vector databases (embeddings)
+    # ==========================================================================
+    # VECTOR DATABASES (embeddings) - PLAINTEXT_NEVER
+    # These contain semantic embeddings that encode meaning.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.VECTOR_DATABASE,
         patterns=[
@@ -228,7 +232,8 @@ def get_default_inventory() -> ProtectedInventory:
             "NAVIGATION/CORTEX/_generated/*.db",
             "THOUGHT/LAB/CAT_CHAT/**/*.db",
             "THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/db/*.db",
-            "THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/_generated/*.db"
+            "THOUGHT/LAB/CAT_CHAT/CAT_CORTEX/_generated/*.db",
+            "**/cat_chat_index.db"
         ],
         allowed_locations=[
             "NAVIGATION/CORTEX/**",
@@ -238,7 +243,10 @@ def get_default_inventory() -> ProtectedInventory:
         description="Vector databases containing semantic embeddings (384-dim vectors)"
     ))
 
-    # CAS blobs (content-addressed storage)
+    # ==========================================================================
+    # CAS BLOBS (content-addressed storage) - PLAINTEXT_INTERNAL
+    # Immutable blobs indexed by hash. Contains deduplicated content.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.CAS_BLOB,
         patterns=[
@@ -252,7 +260,10 @@ def get_default_inventory() -> ProtectedInventory:
         description="Content-addressed storage blobs (immutable, hash-indexed)"
     ))
 
-    # Compression proof artifacts
+    # ==========================================================================
+    # COMPRESSION ADVANTAGE ARTIFACTS - PLAINTEXT_NEVER
+    # Proofs and benchmarks that reveal compression strategies.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.COMPRESSION_ADVANTAGE,
         patterns=[
@@ -268,23 +279,38 @@ def get_default_inventory() -> ProtectedInventory:
         description="Compression proofs revealing semantic evaluation databases and benchmark data"
     ))
 
-    # Pack outputs (temporary and archived)
+    # ==========================================================================
+    # PACK OUTPUTS - PLAINTEXT_NEVER (upgraded from INTERNAL)
+    # Pack manifests contain CAS hashes for EVERY file - reveals structure.
+    # Pack metadata reveals compression ratios, file organization.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.PACK_OUTPUT,
         patterns=[
             "_PACK_RUN/**",
+            "MEMORY/LLM_PACKER/_packs/**/*.json",  # ALL JSON (manifests, proofs, refs)
             "MEMORY/LLM_PACKER/_packs/**/*.db",
-            "MEMORY/LLM_PACKER/_packs/**/*semantic*.json"
+            "MEMORY/LLM_PACKER/_packs/**/meta/**",  # Pack metadata directories
+            "MEMORY/LLM_PACKER/_packs/**/*.md",  # Generated pack content
+            # Pipeline/test run manifests (contain file hashes)
+            "LAW/CONTRACTS/_runs/**/*MANIFEST*.json",  # PRE_MANIFEST, POST_MANIFEST
+            "LAW/CONTRACTS/_runs/**/PACK_MANIFEST.json",  # Nested pack manifests
+            "LAW/CONTRACTS/_runs/**/*.db",  # Any database in test runs
+            "LAW/CONTRACTS/_runs/**/meta/**"  # Metadata directories in test runs
         ],
         allowed_locations=[
             "MEMORY/LLM_PACKER/_packs/**",
-            "_PACK_RUN/**"
+            "_PACK_RUN/**",
+            "LAW/CONTRACTS/_runs/**"
         ],
-        distribution_policy=DistributionPolicy.PLAINTEXT_INTERNAL,
-        description="Pack generation outputs and archived pack runs (may contain derived indexes)"
+        distribution_policy=DistributionPolicy.PLAINTEXT_NEVER,
+        description="Pack outputs: manifests with CAS hashes, proofs, metadata (reveals structure)"
     ))
 
-    # Proof manifests (metadata that could reveal structure)
+    # ==========================================================================
+    # PROOF OUTPUTS - PLAINTEXT_INTERNAL
+    # Proof receipts and verification outputs.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.PROOF_OUTPUT,
         patterns=[
@@ -301,13 +327,35 @@ def get_default_inventory() -> ProtectedInventory:
         description="Proof outputs and manifests (internal verification only)"
     ))
 
-    # Semantic indexes (evaluation databases)
+    # ==========================================================================
+    # SEMANTIC INDEXES - PLAINTEXT_NEVER
+    # Generated indexes that reveal codebase structure and organization.
+    # ==========================================================================
     inventory.add_pattern(ProtectedPattern(
         artifact_class=ArtifactClass.SEMANTIC_INDEX,
         patterns=[
+            # Databases
             "**/semantic_eval.db",
             "**/vector_store.db",
-            "**/*_cassette.db"
+            "**/*_cassette.db",
+            # Generated indexes (reveal structure)
+            "NAVIGATION/CORTEX/_generated/*.json",
+            "NAVIGATION/CORTEX/meta/*.json",
+            "**/SECTION_INDEX.json",
+            "**/SUMMARY_INDEX.json",
+            "**/FILE_INDEX.json",
+            "**/CORTEX_META.json",
+            # Cassette configuration
+            "NAVIGATION/CORTEX/network/cassettes.json",
+            # AIRTIGHT: Catch-all for any .db file containing embeddings
+            # This prevents leaks if vector databases appear in unexpected locations
+            "**/system1.db",
+            "**/system2.db",
+            "**/system3.db",
+            "**/cortex.db",
+            "**/codebase_full.db",
+            "**/instructions.db",
+            "**/swarm_instructions.db"
         ],
         allowed_locations=[
             "LAW/CONTRACTS/_runs/_tmp/**",
@@ -315,7 +363,7 @@ def get_default_inventory() -> ProtectedInventory:
             "THOUGHT/LAB/**"
         ],
         distribution_policy=DistributionPolicy.PLAINTEXT_NEVER,
-        description="Semantic evaluation and cassette databases (high-value embeddings)"
+        description="Semantic indexes and generated metadata revealing codebase structure"
     ))
 
     return inventory

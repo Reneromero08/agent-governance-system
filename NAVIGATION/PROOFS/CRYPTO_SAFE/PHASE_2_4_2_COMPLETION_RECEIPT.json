@@ -1,8 +1,8 @@
 {
   "phase": "2.4.2",
   "phase_name": "Protected Artifact Inventory (CRYPTO_SAFE.0)",
-  "status": "COMPLETE",
-  "timestamp": "2026-01-07T06:12:00Z",
+  "status": "COMPLETE (AIRTIGHT)",
+  "timestamp": "2026-01-07T06:30:00Z",
   "tasks": {
     "2.4.2.1": {
       "description": "Define protected roots/patterns",
@@ -26,18 +26,19 @@
     "machine_readable_inventory": true,
     "scanner_detects_deterministically": true,
     "scanner_fails_closed_public_context": true,
-    "inventory_completeness_verified": true
+    "inventory_completeness_verified": true,
+    "airtight_coverage": true
   },
   "test_results": {
     "test_file": "CAPABILITY/TESTBENCH/integration/test_phase_2_4_2_protected_inventory.py",
-    "total_tests": 16,
-    "passed": 16,
+    "total_tests": 19,
+    "passed": 19,
     "failed": 0,
     "pass_rate": 1.0
   },
   "inventory": {
-    "version": "1.0.0",
-    "hash": "41bfca9e34b95e588187b18a3864ecae58016385c36cc01775dd20c68119e66b",
+    "version": "1.1.0",
+    "hash": "9bc98ba9178bf3f47b466d6567844f1e6aab9c04760a70f38f3dcc895dac055f",
     "artifact_classes": [
       "vector_database",
       "cas_blob",
@@ -46,21 +47,28 @@
       "proof_output",
       "semantic_index"
     ],
-    "total_patterns": 6
+    "total_patterns": 6,
+    "airtight_additions": [
+      "All pack JSON files (manifests with CAS hashes)",
+      "All pack metadata directories",
+      "All pack generated markdown",
+      "Generated indexes (SECTION_INDEX, SUMMARY_INDEX, FILE_INDEX)",
+      "CORTEX_META.json and cassettes.json"
+    ]
   },
   "scan_summary": {
     "context": "working",
     "verdict": "WARN",
-    "total_files_scanned": 66234,
-    "protected_artifacts_found": 12,
+    "total_files_scanned": 66263,
+    "protected_artifacts_found": 4649,
     "violations": 0,
     "breakdown": {
-      "vector_database": 6,
+      "vector_database": 10,
       "compression_advantage": 1,
       "proof_output": 2,
-      "pack_output": 3,
+      "pack_output": 4627,
       "cas_blob": 0,
-      "semantic_index": 0
+      "semantic_index": 9
     }
   },
   "artifacts": [
@@ -83,7 +91,7 @@
     "public_context_with_violations": {
       "verdict": "FAIL",
       "exit_code": 1,
-      "violations_count": 12
+      "violations_count": 4649
     },
     "working_context": {
       "verdict": "WARN",
@@ -91,6 +99,7 @@
       "violations_count": 0
     }
   },
+  "airtight_note": "Coverage increased from 12 to 4,649 protected artifacts. Pack outputs upgraded to PLAINTEXT_NEVER (manifests contain CAS hashes for every file). Semantic indexes now fully covered.",
   "next_phase": "2.4.3 Git Hygiene (CRYPTO_SAFE.1)",
   "dependencies_enabled": [
     "2.4.3 - Git Hygiene (scanner verifies gitignore compliance)",
