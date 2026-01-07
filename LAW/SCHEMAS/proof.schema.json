@@ -59,6 +59,10 @@
     "referenced_artifacts": {
       "$ref": "#/definitions/referenced_artifacts",
       "description": "Optional explicit list of artifacts required for offline verification."
+    },
+    "membership_proofs": {
+      "$ref": "#/definitions/membership_proofs",
+      "description": "Optional Merkle membership proofs for selective file verification. Allows proving 'file X was in domain at snapshot time' without revealing full manifest."
     }
   },
   "definitions": {
@@ -227,6 +231,68 @@
             }
           },
           "description": "Identity of validator that generated this proof."
+        }
+      }
+    },
+    "membership_proofs": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional Merkle membership proofs for partial verification.",
+      "properties": {
+        "domain": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Domain root this proof set applies to."
+        },
+        "root_hash": {
+          "$ref": "#/definitions/sha256",
+          "description": "The Merkle root these proofs verify against."
+        },
+        "proofs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/merkle_proof"
+          },
+          "description": "Map: relative_path -> MerkleProof for that file."
+        }
+      },
+      "required": ["domain", "root_hash", "proofs"]
+    },
+    "merkle_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "bytes_hash", "steps"],
+      "properties": {
+        "path": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Relative path of the file."
+        },
+        "bytes_hash": {
+          "$ref": "#/definitions/sha256",
+          "description": "SHA-256 hash of the file contents."
+        },
+        "steps": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/merkle_step"
+          },
+          "description": "Sibling hashes from leaf to root."
+        }
+      }
+    },
+    "merkle_step": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["sibling", "sibling_is_left"],
+      "properties": {
+        "sibling": {
+          "$ref": "#/definitions/sha256",
+          "description": "Hash of the sibling node."
+        },
+        "sibling_is_left": {
+          "type": "boolean",
+          "description": "True if sibling is on the left side of the current node."
         }
       }
     }

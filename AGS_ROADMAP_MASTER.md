@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.5
+version: 3.7.7
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -112,22 +112,30 @@ notes:
 - [x] Formal invariants are machine-verifiable (27 tests assert them)
 - [x] An academic reader can trace AGS implementation to Buhrman et al. theory
 
-### 1.7.3 Merkle Membership Proofs
+### 1.7.3 Merkle Membership Proofs ✅ COMPLETE
+**Status:** DONE (2026-01-07)
 **Purpose:** Enable partial verification without full manifest disclosure.
 
-- [ ] 1.7.3.1 Extend `CAPABILITY/PRIMITIVES/merkle.py` with:
+**Deliverables:**
+- [x] 1.7.3.1 Extended `CAPABILITY/PRIMITIVES/merkle.py` with:
+  - `MerkleProof` class with serialization/deserialization
   - `build_manifest_with_proofs(manifest) -> (root, proofs)` where proofs[path] = sibling hashes
   - `verify_membership(path, hash, proof, root) -> bool`
-- [ ] 1.7.3.2 Add membership proof to PROOF.json schema (optional field)
+- [x] 1.7.3.2 Added membership proof to `LAW/SCHEMAS/proof.schema.json` (optional field)
+  - `membership_proofs` with `merkle_proof` and `merkle_step` definitions
   - Allows proving "file X was in domain at snapshot time" without revealing other files
-- [ ] 1.7.3.3 Add `CAPABILITY/TESTBENCH/core/test_merkle_proofs.py`:
-  - Valid proof verification
-  - Tampered proof rejection
-  - Missing sibling rejection
-  - Deterministic proof generation
-- **Exit Criteria**
-  - [ ] Partial verification possible (prove single file membership)
-  - [ ] Proofs are deterministic and tamper-evident
+- [x] 1.7.3.3 Added `CAPABILITY/TESTBENCH/core/test_merkle_proofs.py` (16 tests):
+  - Valid proof verification (small, odd, large manifests)
+  - Tampered proof rejection (hash, sibling, root, path)
+  - Missing/extra sibling rejection
+  - Deterministic proof generation (same manifest, different insertion order)
+  - Serialization round-trip
+  - Edge cases (single file, two files, empty manifest)
+
+**Exit Criteria:**
+- [x] Partial verification possible (prove single file membership)
+- [x] Proofs are deterministic and tamper-evident
+- [x] 16/16 tests passing
 
 ### 1.7.4 Spectral Codec Research (Future)
 **Purpose:** Domain → spectrum encoding for compression (from archived semiotic research).
