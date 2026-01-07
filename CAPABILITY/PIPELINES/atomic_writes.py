@@ -109,6 +109,23 @@ class AtomicGuardedWrites:
 
         self.writer.write_durable(path, canonical_json_bytes(obj))
 
+    def write_durable_bytes(self, path: Path, data: bytes) -> None:
+        """
+        Write durable bytes (requires commit gate to be open).
+
+        Args:
+            path: Path to write (relative or absolute)
+            data: Bytes to write
+
+        Raises:
+            FirewallViolation: If write violates firewall policy or commit gate is closed
+        """
+        path = Path(path)
+        if path.is_absolute():
+            path = path.relative_to(self.project_root)
+
+        self.writer.write_durable(path, data)
+
     def mkdir_durable(self, path: Path, parents: bool = True, exist_ok: bool = True) -> None:
         """
         Create directory in durable domain (requires commit gate to be open).

@@ -172,18 +172,29 @@ FORBIDDEN_ROOTS = [
 ]
 
 
-def _atomic_write_jsonl(file_path: Path, line: str) -> bool:
+def _atomic_write_jsonl(file_path: Path, line: str, writer: Optional[GuardedWriter] = None) -> bool:
     """Atomically append a single line to a JSONL file.
 
     Uses write-to-temp-then-append pattern with file locking to prevent:
     1. Partial writes from crashes
     2. Interleaved writes from concurrent processes
 
+    Args:
+        file_path: Path to JSONL file
+        line: JSON line to append
+        writer: Optional GuardedWriter for firewall enforcement
+
     Returns True on success, False on failure.
     """
     try:
-        # Ensure parent directory exists
-        file_path.parent.mkdir(parents=True, exist_ok=True)
+        line_bytes = (line.rstrip('\n') + '\n').encode('utf-8')
+
+        if writer:
+            # Use firewall-protected mkdir
+            writer.mkdir_tmp(file_path.parent, parents=True, exist_ok=True)
+        else:
+            # Legacy path
+            file_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Write to temp file first (atomic on most filesystems)
         fd, temp_path = tempfile.mkstemp(
@@ -192,7 +203,7 @@ def _atomic_write_jsonl(file_path: Path, line: str) -> bool:
             dir=file_path.parent
         )
         try:
-            os.write(fd, (line.rstrip('\n') + '\n').encode('utf-8'))
+            os.write(fd, line_bytes)
             os.fsync(fd)  # Force flush to disk
         finally:
             os.close(fd)
@@ -224,7 +235,8 @@ def _atomic_write_jsonl(file_path: Path, line: str) -> bool:
 
 def _atomic_rewrite_jsonl(
     file_path: Path,
-    transform: Callable[[List[Dict]], List[Dict]]
+    transform: Callable[[List[Dict]], List[Dict]],
+    writer: Optional[GuardedWriter] = None
 ) -> bool:
     """Atomically rewrite a JSONL file with a transformation function.
 
@@ -234,10 +246,18 @@ def _atomic_rewrite_jsonl(
     3. Write to temp file
     4. Atomic rename over original
 
+    Args:
+        file_path: Path to JSONL file
+        transform: Function to transform list of entries
+        writer: Optional GuardedWriter for firewall enforcement
+
     Returns True on success, False on failure.
     """
     try:
-        file_path.parent.mkdir(parents=True, exist_ok=True)
+        if writer:
+            writer.mkdir_tmp(file_path.parent, parents=True, exist_ok=True)
+        else:
+            file_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Create/touch file if it doesn't exist
         if not file_path.exists():
@@ -1022,7 +1042,7 @@ TERMINALS_DIR = LAW_ROOT / "CONTRACTS" / "_runs" / "terminals"
 
 def _ensure_terminals_dir():
     """Ensure terminals directory exists."""
-    TERMINALS_DIR.mkdir(parents=True, exist_ok=True)
+    self.writer.mkdir_tmp(TERMINALS_DIR, parents=True, exist_ok=True)
 
 
 def _terminal_path(terminal_id: str) -> Path:
@@ -1082,7 +1102,7 @@ def terminal_log_command(
         "exit_code": exit_code
     }
     
-    success = _atomic_write_jsonl(session_path, json.dumps(entry))
+    success = _atomic_write_jsonl(session_path, json.dumps(entry), writer=self.writer)
     if not success:
         return {"status": "error", "message": "Failed to write command"}
     
@@ -1325,7 +1345,7 @@ class AGSMCPServer:
         """Append a JSON record to the audit log."""
         from datetime import datetime
         try:
-            LOGS_DIR.mkdir(parents=True, exist_ok=True)
+            self.writer.mkdir_tmp(LOGS_DIR, parents=True, exist_ok=True)
             log_file = LOGS_DIR / "audit.jsonl"
             
             # Truncate large args for logging (e.g. file content)
@@ -1716,7 +1736,7 @@ class AGSMCPServer:
         return BOARD_ROOT / f"{board}.jsonl"
 
     def _append_board_event(self, board: str, event: Dict[str, Any]) -> None:
-        BOARD_ROOT.mkdir(parents=True, exist_ok=True)
+        self.writer.mkdir_tmp(BOARD_ROOT, parents=True, exist_ok=True)
         path = self._board_path(board)
         line = json.dumps(event, sort_keys=True, separators=(",", ":"))
         with path.open("a", encoding="utf-8") as f:
@@ -1911,8 +1931,8 @@ class AGSMCPServer:
         pending_dir = INBOX_ROOT / "PENDING_TASKS"
         active_dir = INBOX_ROOT / "ACTIVE_TASKS"
         
-        pending_dir.mkdir(parents=True, exist_ok=True)
-        active_dir.mkdir(parents=True, exist_ok=True)
+        self.writer.mkdir_durable(pending_dir, parents=True, exist_ok=True)
+        self.writer.mkdir_durable(active_dir, parents=True, exist_ok=True)
         
         # Find the task file
         task_file = None
@@ -1934,9 +1954,9 @@ class AGSMCPServer:
             data["status"] = "ACTIVE"
             data["assigned_to"] = agent_id
             data["claimed_at"] = datetime.now().isoformat()
-            
+
             new_path = active_dir / task_file.name
-            new_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            self.writer.write_durable(new_path, json.dumps(data, indent=2))
             task_file.unlink()
             
             return {"content": [{"type": "text", "text": json.dumps({"status": "success", "task_id": task_id, "path": str(new_path)})}]}
@@ -1955,7 +1975,7 @@ class AGSMCPServer:
 
         active_dir = INBOX_ROOT / "ACTIVE_TASKS"
         target_dir = INBOX_ROOT / f"{status}_TASKS"
-        target_dir.mkdir(parents=True, exist_ok=True)
+        self.writer.mkdir_durable(target_dir, parents=True, exist_ok=True)
         
         task_file = None
         for p in active_dir.glob("*.json"):
@@ -1975,9 +1995,9 @@ class AGSMCPServer:
             data["status"] = status
             data["result"] = result_text
             data["finished_at"] = datetime.now().isoformat()
-            
+
             new_path = target_dir / task_file.name
-            new_path.write_text(json.dumps(data, indent=2), encoding="utf-8")
+            self.writer.write_durable(new_path, json.dumps(data, indent=2))
             task_file.unlink()
             
             return {"content": [{"type": "text", "text": json.dumps({"status": "success", "task_id": task_id})}]}
@@ -2434,7 +2454,7 @@ class AGSMCPServer:
 """
         
         try:
-            filepath.write_text(content, encoding="utf-8")
+            self.writer.write_durable(filepath, content)
             return {
                 "content": [{
                     "type": "text",

@@ -4,6 +4,17 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.3] - 2026-01-06
+
+### Added
+- **Phase 2.4.1C.2 PIPELINES + MCP Runtime Enforcement** — Completed write firewall enforcement for critical runtime surfaces.
+  - **PIPELINES**: Fixed 1 raw write violation in `pipeline_chain.py:87` by adding `write_durable_bytes()` method to `AtomicGuardedWrites` and updating `write_chain()` with optional writer parameter.
+  - **MCP**: Fixed 15 raw write violations across `server.py` (13) and `server_wrapper.py` (2) by integrating GuardedWriter for all mkdir and write operations.
+  - **Coverage Update**: 34/47 critical production surfaces now enforced (72%).
+  - **Roadmap Audit**: Corrected Phase 2.4 coverage statistics and identified remaining work (CLI_TOOLS, CAS, LINTERS).
+  - **Documentation**: Created `NAVIGATION/PROMPTS/PHASE_2_4_1C_4_CLI_TOOLS_ENFORCEMENT.md` prompt for mechanical CLI tools enforcement.
+  - **Verification**: All 15 Phase 2.4 tests passing.
+
 ## [3.4.2] - 2026-01-06
 
 ### Fixed

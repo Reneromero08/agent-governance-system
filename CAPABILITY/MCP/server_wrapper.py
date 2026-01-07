@@ -18,6 +18,8 @@ import time
 import json
 from pathlib import Path
 
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
 REPO_ROOT = Path(__file__).resolve().parents[2]
 SERVER_SCRIPT = REPO_ROOT / "CAPABILITY" / "MCP" / "server.py"
 PID_FILE = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "mcp_logs" / "server.pid"
@@ -47,7 +49,13 @@ def is_server_running():
 
 def start_server():
     """Start the MCP server in the background."""
-    LOG_DIR.mkdir(parents=True, exist_ok=True)
+    writer = GuardedWriter(
+        project_root=REPO_ROOT,
+        tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+        durable_roots=["LAW/CONTRACTS/_runs"]
+    )
+    writer.open_commit_gate()
+    writer.mkdir_durable(LOG_DIR, parents=True, exist_ok=True)
 
     # Start server as subprocess
     if sys.platform == "win32":
@@ -72,7 +80,7 @@ def start_server():
         )
 
     # Save PID
-    PID_FILE.write_text(str(process.pid))
+    writer.write_durable(PID_FILE, str(process.pid))
 
     # Give it a moment to initialize
     time.sleep(1)
