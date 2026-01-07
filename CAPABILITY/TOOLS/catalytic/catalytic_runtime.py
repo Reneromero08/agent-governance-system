@@ -130,6 +130,7 @@ class CatalyticRuntime:
         memoize: bool = True,
         validator_semver: str = "0.1.0",
         validator_build_id: str = "phase0-canonical",
+        include_membership_proofs: bool = False,
     ):
         self.run_id = run_id
         self.job_id = job_id or run_id
@@ -141,6 +142,7 @@ class CatalyticRuntime:
         self.memoize = memoize
         self.validator_semver = validator_semver
         self.validator_build_id = validator_build_id
+        self.include_membership_proofs = include_membership_proofs
         # Determinism: runtime does not generate timestamps. Caller supplies deterministic timestamp.
         self.timestamp = timestamp or DETERMINISTIC_TIMESTAMP_SENTINEL
 
@@ -467,6 +469,7 @@ class CatalyticRuntime:
                         "validator_build_id": validator_id["validator_build_id"],
                     },
                 },
+                include_membership_proofs=self.include_membership_proofs,
             )
             # Retry logic for Windows file locking/permission issues
             import time
@@ -731,6 +734,7 @@ def main():
     parser.add_argument("--non-strict", action="store_true", help="Set strictness mode off (affects cache key)")
     parser.add_argument("--validator-semver", default="0.1.0", help="Validator semver (cache key component)")
     parser.add_argument("--validator-build-id", default="phase0-canonical", help="Validator build id (cache key component)")
+    parser.add_argument("--full-proofs", action="store_true", help="Include Merkle membership proofs in PROOF.json for selective file verification")
     parser.add_argument("cmd", nargs=argparse.REMAINDER, help="Command to execute")
 
     args = parser.parse_args()
@@ -751,6 +755,7 @@ def main():
         memoize=not args.no_memoize,
         validator_semver=args.validator_semver,
         validator_build_id=args.validator_build_id,
+        include_membership_proofs=args.full_proofs,
     )
 
     return runtime.run(args.cmd[1:])

@@ -63,6 +63,14 @@
     "membership_proofs": {
       "$ref": "#/definitions/membership_proofs",
       "description": "Optional Merkle membership proofs for selective file verification. Allows proving 'file X was in domain at snapshot time' without revealing full manifest."
+    },
+    "signature": {
+      "$ref": "#/definitions/signature_bundle",
+      "description": "Optional Ed25519 signature over the proof. When present, enables cryptographic verification of proof authenticity per SPECTRUM-04."
+    },
+    "previous_proof_hash": {
+      "$ref": "#/definitions/sha256",
+      "description": "Optional hash of the previous proof in a chain (SPECTRUM-03). Forms a cryptographic chain linking proofs in temporal order. Null or absent for the first proof in a chain."
     }
   },
   "definitions": {
@@ -89,6 +97,13 @@
             "$ref": "#/definitions/sha256"
           },
           "description": "Map: relative_path -> sha256 hash of file contents."
+        },
+        "membership_proofs": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/merkle_proof"
+          },
+          "description": "Optional Merkle membership proofs for selective file verification. Map: relative_path -> MerkleProof."
         }
       }
     },
@@ -293,6 +308,39 @@
         "sibling_is_left": {
           "type": "boolean",
           "description": "True if sibling is on the left side of the current node."
+        }
+      }
+    },
+    "signature_bundle": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["signature", "public_key", "key_id", "algorithm", "timestamp"],
+      "description": "Ed25519 signature bundle per SPECTRUM-04.",
+      "properties": {
+        "signature": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{128}$",
+          "description": "Ed25519 signature as 64 bytes hex-encoded (128 chars)."
+        },
+        "public_key": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "Ed25519 public key as 32 bytes hex-encoded (64 chars)."
+        },
+        "key_id": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{8}$",
+          "description": "First 8 hex chars of sha256(public_key). Used for quick key lookup."
+        },
+        "algorithm": {
+          "type": "string",
+          "const": "Ed25519",
+          "description": "Signature algorithm. Must be 'Ed25519'."
+        },
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "ISO 8601 timestamp of when the signature was created."
         }
       }
     }
