@@ -86,8 +86,8 @@ Run everything in containers that are discarded after.
 
 ## Implementation
 
-- **Canon**: `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
-- **Theory**: `LAW/CANON/CATALYTIC_COMPUTING.md`
+- **Canon**: `LAW/CANON/CATALYTIC/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
+- **Theory**: `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md`
 - **Runtime**: `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py`
 - **Validator**: `CAPABILITY/TOOLS/catalytic/catalytic_validator.py`
 - **Schemas**: `LAW/SCHEMAS/jobspec.schema.json`, `ledger.schema.json`, `proof.schema.json`

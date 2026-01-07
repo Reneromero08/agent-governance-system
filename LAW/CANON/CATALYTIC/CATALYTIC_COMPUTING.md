@@ -122,12 +122,28 @@ This aligns with INV-006 (Output roots) and ADR-015 (Logging output roots).
 ## Operational Protocol
 
 For implementation details, lifecycle phases, proof formats, and enforcement hooks, see:
-- `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
+- [CMP-01_CATALYTIC_MUTATION_PROTOCOL.md](CMP-01_CATALYTIC_MUTATION_PROTOCOL.md)
 
 CMP-01 defines the six-phase lifecycle (Declare, Snapshot, Execute, Commit, Restore, Prove) and the run ledger schema for audit trails.
 
+## Cryptographic Binding
+
+For cryptographic verification, identity pinning, and restore semantics, see the SPECTRUM specifications:
+
+- [SPECTRUM-02_RESUME_BUNDLE.md](SPECTRUM-02_RESUME_BUNDLE.md) — Resume without execution history
+- [SPECTRUM-03_CHAIN_VERIFICATION.md](SPECTRUM-03_CHAIN_VERIFICATION.md) — Temporal integrity across runs
+- [SPECTRUM-04_IDENTITY_SIGNING.md](SPECTRUM-04_IDENTITY_SIGNING.md) — Ed25519 identity and signing
+- [SPECTRUM-05_VERIFICATION_LAW.md](SPECTRUM-05_VERIFICATION_LAW.md) — 10-phase verification procedure
+- [SPECTRUM-06_RESTORE_RUNNER.md](SPECTRUM-06_RESTORE_RUNNER.md) — Restore with atomicity guarantees
+
 ## References
 
+### Academic Papers
 1. Buhrman, Cleve, Koucky, Loff, Speelman. "Computing with a full memory: Catalytic space" (2014). https://iuuk.mff.cuni.cz/~koucky/papers/catalytic.pdf
 2. Cook, Mertz. "Tree Evaluation is in Space O(log n * log log n)" (2023). https://eccc.weizmann.ac.il/report/2023/174/
 3. Quanta Magazine. "Catalytic Computing Taps the Full Power of a Full Hard Drive" (2025). https://www.quantamagazine.org/catalytic-computing-taps-the-full-power-of-a-full-hard-drive-20250218/
+
+### AGS Specifications
+- [CMP-01_CATALYTIC_MUTATION_PROTOCOL.md](CMP-01_CATALYTIC_MUTATION_PROTOCOL.md) — Operational protocol
+- `LAW/CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` — Formal definitions
+- `LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md` — SPECTRUM promotion rationale
