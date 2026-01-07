@@ -263,36 +263,39 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
       - [ ] CAS tests passing
     - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_5_CAS_ENFORCEMENT.md`
 
-  - [ ] 2.4.1C.6 LINTERS Enforcement (Dry-run Default + --apply Flag)
+  - [x] 2.4.1C.6 LINTERS Enforcement (Dry-run Default + --apply Flag) ✅ **COMPLETE**
     - Scope:
-      - `CAPABILITY/TOOLS/linters/update_hashes.py`
-      - `CAPABILITY/TOOLS/linters/update_canon_hashes.py`
-      - `CAPABILITY/TOOLS/linters/fix_canon_hashes.py`
-      - `CAPABILITY/TOOLS/linters/update_manifest.py`
+      - `CAPABILITY/TOOLS/linters/update_hashes.py` (86 lines)
+      - `CAPABILITY/TOOLS/linters/update_canon_hashes.py` (105 lines)
+      - `CAPABILITY/TOOLS/linters/fix_canon_hashes.py` (105 lines)
+      - `CAPABILITY/TOOLS/linters/update_manifest.py` (100 lines)
     - Policy: LAW/CANON exemption for linters only
     - Pattern: Dry-run mode by default, `--apply` flag required for writes
     - CRYPTO_SAFE dependency: Audit trail detects accidental protected artifact references
     - Exit Criteria:
-      - [ ] All linters use GuardedWriter with LAW/CANON durable root
-      - [ ] Dry-run mode is default behavior
-      - [ ] `--apply` flag opens commit gate
-      - [ ] Zero raw write operations
-      - [ ] Audit receipts show all CANON mutations
+      - [x] All linters use GuardedWriter with LAW/CANON durable root
+      - [x] Dry-run mode is default behavior
+      - [x] `--apply` flag opens commit gate
+      - [x] Zero raw write operations (4 eliminated)
+      - [x] Audit receipts show all CANON mutations
     - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_6_LINTERS_ENFORCEMENT.md`
+    - **Receipt**: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_6_LINTERS_RECEIPT.json`
+    - **Final Status**: ✅ **0 RAW WRITES** (4 violations eliminated)
+    - **Coverage Update**: 44/47 = 93.6%
 
   - Exit Criteria (Phase 2.4.1C):
     - [ ] Coverage = 100% of critical production surfaces (47/47)
-    - [x] All critical runtime paths enforced (40/47 = 85%)
+    - [x] All critical runtime paths enforced (44/47 = 93.6%)
     - [ ] CAS enforcement pending (3 files, CRYPTO_SAFE audit trail)
-    - [ ] LINTERS enforcement pending (4 files, dry-run + --apply pattern)
+    - [x] LINTERS enforcement complete (4 files, dry-run + --apply pattern) ✅
     - [x] All sub-phase receipts collected
     - [x] No policy changes or write domain widening
     - [x] Coverage math explicit and auditable
 
   **Status Summary**:
-  - ✅ Complete: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS, CLI_TOOLS
-  - 🔄 In Progress: CAS (3 files), LINTERS (4 files)
-  - 📊 Coverage: 40/47 = 85% → targeting 47/47 = 100%
+  - ✅ Complete: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS, CLI_TOOLS, LINTERS
+  - 🔄 In Progress: CAS (3 files)
+  - 📊 Coverage: 44/47 = 93.6% → targeting 47/47 = 100%
   - 🎯 CRYPTO_SAFE compliance: Full audit trail for protected artifact verification
 
 
