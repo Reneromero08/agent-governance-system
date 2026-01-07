@@ -1,0 +1,832 @@
+[
+  {
+    "bytes": 1233888,
+    "path": "FULL/CATALYTIC-DPT-FULL-2025-12-27_13-21-43.md",
+    "sha256": "25c8297ecc233cd74952db45af1735b9761a2d532b6191b1f4b4c2c545cc62a0"
+  },
+  {
+    "bytes": 127,
+    "path": "LITE/CATALYTIC-DPT-00_INDEX.md",
+    "sha256": "5e540123fcfcefd49d3159e62eb08d991a46d4cfd51486b48fa41ac52e7426d8"
+  },
+  {
+    "bytes": 491,
+    "path": "SPLIT/CATALYTIC-DPT-00_INDEX.md",
+    "sha256": "2db078c6302d6edeb513cfa6a031902ec2e41e47de393ab0316acd337968a20a"
+  },
+  {
+    "bytes": 73798,
+    "path": "SPLIT/CATALYTIC-DPT-01_DOCS.md",
+    "sha256": "18a9d429edf03ab3b80db5ae5feaadb1b0d852e3ed7cc27aa252587a43e83b78"
+  },
+  {
+    "bytes": 1635,
+    "path": "SPLIT/CATALYTIC-DPT-02_CONFIG.md",
+    "sha256": "bde4326734e7bc7a7bc5d2cae673d3ff601866ee76df188c6a898935cc6f04f5"
+  },
+  {
+    "bytes": 17,
+    "path": "SPLIT/CATALYTIC-DPT-03_TESTBENCH.md",
+    "sha256": "8f69f437b49515a8c8b6c05fc1ecfa90e3aa71959075478df2eae8156a8d461f"
+  },
+  {
+    "bytes": 27173,
+    "path": "SPLIT/CATALYTIC-DPT-04_SYSTEM.md",
+    "sha256": "40c3e5c583e3c825df34a07b219925fececb06a3791cc2578cf0cdca88c80b12"
+  },
+  {
+    "bytes": 43,
+    "path": "meta/BUILD_TREE.txt",
+    "sha256": "a029e02836008090bf9e0b6042680b583f26f5b7315ec4cd21d30f2ed4933a13"
+  },
+  {
+    "bytes": 356,
+    "path": "meta/ENTRYPOINTS.md",
+    "sha256": "8d229878e735cdec0aa5056ee5b442e77164da140a664d8a7add8a7ce68be28e"
+  },
+  {
+    "bytes": 137,
+    "path": "meta/PACK_INFO.json",
+    "sha256": "42b3c9ca80519c5ea41408651f009ae0aba4eb364237fd7fa34dac6aa4cf2338"
+  },
+  {
+    "bytes": 165,
+    "path": "meta/PROVENANCE.json",
+    "sha256": "5d435a47fdfb2e1a36224f469a2dac095c9e6b920ea407d92de2ade13de7776e"
+  },
+  {
+    "bytes": 215,
+    "path": "meta/REPO_OMITTED_BINARIES.json",
+    "sha256": "fbde18b74db6e3b4661125e3d14ece8e48b312aa9758cfff0419df72a4205e94"
+  },
+  {
+    "bytes": 25516,
+    "path": "meta/REPO_STATE.json",
+    "sha256": "66e9713e0e1f6a0074c801cad46f3c8ed812c5390d8b213e63f00e01a9f3d9a5"
+  },
+  {
+    "bytes": 438,
+    "path": "meta/START_HERE.md",
+    "sha256": "05319f2c214eec8f16704f2b1891c021f22d938d28915b159d89a8ad8efa1d09"
+  },
+  {
+    "bytes": 7203,
+    "path": "repo/AGENTS.md",
+    "sha256": "b365665b9f8f9c7587e41c264a01a7899ad772cafb1fbad610ba2e12825d090f"
+  },
+  {
+    "bytes": 1471,
+    "path": "repo/CAPABILITIES.json",
+    "sha256": "ffa041ae457bab0762b625a3aa487600439a5dd0cad8b942b45ce559518ce036"
+  },
+  {
+    "bytes": 117,
+    "path": "repo/CAPABILITY_PINS.json",
+    "sha256": "7945415064026bfe342f6b9fb20111f7b140bdf1d3e10e212e4715cc281c8ce9"
+  },
+  {
+    "bytes": 54,
+    "path": "repo/CAPABILITY_REVOKES.json",
+    "sha256": "c5cc24eda795844be002255984cab9bfc71897f76bffcd6c8b5897b1006c02f2"
+  },
+  {
+    "bytes": 7203,
+    "path": "repo/CATALYTIC-DPT/AGENTS.md",
+    "sha256": "b365665b9f8f9c7587e41c264a01a7899ad772cafb1fbad610ba2e12825d090f"
+  },
+  {
+    "bytes": 59483,
+    "path": "repo/CATALYTIC-DPT/CHANGELOG.md",
+    "sha256": "15dcb3f5c77999c405fb82b13b1c528bb52e6fcdfa959a7750efab37d60092fe"
+  },
+  {
+    "bytes": 5410,
+    "path": "repo/CATALYTIC-DPT/README.md",
+    "sha256": "8b7d2ba3e5c92e88bb04cc7da4efda6ee2eaf0d7380e5af39a9532c035a45da5"
+  },
+  {
+    "bytes": 1518,
+    "path": "repo/CATALYTIC-DPT/swarm_config.json",
+    "sha256": "41c50a0841a71a75cd58d63a990d65ba448e623826a2d0d2227aee895b2e52a3"
+  },
+  {
+    "bytes": 59483,
+    "path": "repo/CHANGELOG.md",
+    "sha256": "15dcb3f5c77999c405fb82b13b1c528bb52e6fcdfa959a7750efab37d60092fe"
+  },
+  {
+    "bytes": 1530,
+    "path": "repo/DEMOS/memoization_hash_reuse/README.md",
+    "sha256": "e8b263ce4a53746ef1ab7b93810fbbe46f91ed1b4985429b46db57e05654e5c4"
+  },
+  {
+    "bytes": 18043,
+    "path": "repo/DEMOS/memoization_hash_reuse/run_demo.py",
+    "sha256": "4aad56412a6c727563a35d87713d7c7e08aa7399e182a70372d945846b1a9fc3"
+  },
+  {
+    "bytes": 316,
+    "path": "repo/FIXTURES/phase0/invalid/jobspec_missing_phase.json",
+    "sha256": "e83148cd0dddcd22bd3d03099c489766ea163cf1ed5497c3c1d6e4c8667ffbf4"
+  },
+  {
+    "bytes": 658,
+    "path": "repo/FIXTURES/phase0/invalid/ledger_missing_restore_diff_and_bad_sha.json",
+    "sha256": "b21050f057754170138982c15e2d88ad03fffe6d7d3bb6bce7a7832b6b7f5471"
+  },
+  {
+    "bytes": 269,
+    "path": "repo/FIXTURES/phase0/invalid/validation_error_bad_code.json",
+    "sha256": "4f7de844a39363d5a0c94250606833d841e33e05827e8475c2447f825002770e"
+  },
+  {
+    "bytes": 877,
+    "path": "repo/FIXTURES/phase0/valid/jobspec_ok.json",
+    "sha256": "2c659231316b8a35d1ecdb39b92ade801818c0506a40d73d8eadd0ffb6a66183"
+  },
+  {
+    "bytes": 1471,
+    "path": "repo/FIXTURES/phase0/valid/ledger_minimal_ok.json",
+    "sha256": "6f56156cee22af73317554fee2c52812c88dd22effb24362c12f809695351065"
+  },
+  {
+    "bytes": 665,
+    "path": "repo/FIXTURES/phase0/valid/proof_ok.json",
+    "sha256": "116b4ff0b7f9f6995c648106185697309fd380851197419d9d62275bb4906d87"
+  },
+  {
+    "bytes": 552,
+    "path": "repo/FIXTURES/phase0/valid/validation_error_ok.json",
+    "sha256": "8e88f2c17e5391f3624fdaefe3a51f71f3f8ef080de24a5d9e1fff5ecb80b37a"
+  },
+  {
+    "bytes": 7477,
+    "path": "repo/PIPELINES/pipeline_chain.py",
+    "sha256": "dd40d21420adb164d9ac2efd142b9763dd06cd11416f2e373f021137ae981f6c"
+  },
+  {
+    "bytes": 25515,
+    "path": "repo/PIPELINES/pipeline_dag.py",
+    "sha256": "1f101a5f952f3d12fe8bdacfc7942ed5d14d96d5b72e4b18309dbae5de4d2cef"
+  },
+  {
+    "bytes": 19918,
+    "path": "repo/PIPELINES/pipeline_runtime.py",
+    "sha256": "948e0729b22959d9a9d1c3a10a652a83dbcdfc35ed725a021d373ed9f9310fc7"
+  },
+  {
+    "bytes": 19029,
+    "path": "repo/PIPELINES/pipeline_verify.py",
+    "sha256": "1b612292a41c0bae7440ef0af21347c708b115f7dc1c548ffea823078d7cb1e0"
+  },
+  {
+    "bytes": 5243,
+    "path": "repo/PRIMITIVES/VERIFYING.md",
+    "sha256": "419286860c79363cd7a56f3121c5e761f71d5034646e4e5789f3a13d488854ef"
+  },
+  {
+    "bytes": 2073,
+    "path": "repo/PRIMITIVES/__init__.py",
+    "sha256": "25001bf8cb38d5a522bdaee6bc508b965afd49b5a6bd2d31abf925a994f06c86"
+  },
+  {
+    "bytes": 6798,
+    "path": "repo/PRIMITIVES/cas_store.py",
+    "sha256": "c084ffd3bcdbcf7f524ad038b2168280be5672be8b993890a838f4896b6fff65"
+  },
+  {
+    "bytes": 6690,
+    "path": "repo/PRIMITIVES/fs_guard.py",
+    "sha256": "a2c83293ef60df9b4d3eb0601017c149b17c41533e0cb8ede45e85195b91c446"
+  },
+  {
+    "bytes": 11182,
+    "path": "repo/PRIMITIVES/hash_toolbelt.py",
+    "sha256": "34ea0199589d7ec86d703c5e8ef23b35848729c07359dd2b3d4af343df382b90"
+  },
+  {
+    "bytes": 5751,
+    "path": "repo/PRIMITIVES/ledger.py",
+    "sha256": "a6001436d315fc46fddc3cd24870dea8e1ae9de3a153bd7a421df02cabd3b59c"
+  },
+  {
+    "bytes": 7044,
+    "path": "repo/PRIMITIVES/memo_cache.py",
+    "sha256": "d9c6609e4d298e9a8ae29610b7767d062169efefd243f39b12fb83b785b9ab10"
+  },
+  {
+    "bytes": 2642,
+    "path": "repo/PRIMITIVES/merkle.py",
+    "sha256": "26f2a816d430b877a9a2522af07286f9a0f1781c39cb42c890c31a8b8dea86e2"
+  },
+  {
+    "bytes": 8213,
+    "path": "repo/PRIMITIVES/preflight.py",
+    "sha256": "eb2d5183b539af753bc07ec3fb188091bc442304e8c78b53d7fe1c56fe69017e"
+  },
+  {
+    "bytes": 9225,
+    "path": "repo/PRIMITIVES/registry_validators.py",
+    "sha256": "f07ceb5ea7241111c637b0d1db6f22701539bae5408b6a380eb905589baebd23"
+  },
+  {
+    "bytes": 9557,
+    "path": "repo/PRIMITIVES/restore_proof.py",
+    "sha256": "2021194e824471acf9711b0c9b29c2d8e050d930a3ff8cb08e5c3ef183335a3d"
+  },
+  {
+    "bytes": 25569,
+    "path": "repo/PRIMITIVES/restore_runner.py",
+    "sha256": "691bd87ebd94cbcb04e1f52c2c1cc18f8a1ad734de7db330ec51ac386d7abbeb"
+  },
+  {
+    "bytes": 34121,
+    "path": "repo/PRIMITIVES/verify_bundle.py",
+    "sha256": "90fd1ca2c9f78fd9433236e9871d178298edcaa03970a5217a0320f0a3dcb24a"
+  },
+  {
+    "bytes": 20309,
+    "path": "repo/PRIMITIVES/verify_bundle_alt.py",
+    "sha256": "f01f8544a09807750b2862a9cbe5e0293f9019305f78b87e5695999aca90b577"
+  },
+  {
+    "bytes": 5410,
+    "path": "repo/README.md",
+    "sha256": "8b7d2ba3e5c92e88bb04cc7da4efda6ee2eaf0d7380e5af39a9532c035a45da5"
+  },
+  {
+    "bytes": 13646,
+    "path": "repo/ROADMAP_V2.3.md",
+    "sha256": "cf2021eab0e3c368d1f143df690f6621ebe1445370d6d0074058810b0a4e481b"
+  },
+  {
+    "bytes": 8922,
+    "path": "repo/SCHEMAS/README.md",
+    "sha256": "8afbe11b1a8b7a74a3bbce52211d445d9fe817e1a49a8bfc2525fd6801d504b6"
+  },
+  {
+    "bytes": 2346,
+    "path": "repo/SCHEMAS/adapter.schema.json",
+    "sha256": "6c2daf56c28345682647fe14f53199babc4a462438434a2fe6975a9148ee39d5"
+  },
+  {
+    "bytes": 1591,
+    "path": "repo/SCHEMAS/ags_plan.schema.json",
+    "sha256": "f8fa1cba2f1e530e5cc89ede9d76b45aa29d681b44e3a82a7206ab9be474e293"
+  },
+  {
+    "bytes": 490,
+    "path": "repo/SCHEMAS/examples/jobspec.example.json",
+    "sha256": "aad22c3b08e6a82ddea3286b8ba9c59d2ada65c1bd66c3568fb49be4a63c730a"
+  },
+  {
+    "bytes": 1109,
+    "path": "repo/SCHEMAS/examples/ledger.example.json",
+    "sha256": "1399c9dc754899501f24a5e56adeb1e0c4f1c2cd3a6ce2acf22ce4fb42f32fc1"
+  },
+  {
+    "bytes": 289,
+    "path": "repo/SCHEMAS/examples/validation_error.example.json",
+    "sha256": "c8b77f39d9f08b976c5ae3bd13afadf8a71ad88ae4bb16b2e7847d465bb35dc6"
+  },
+  {
+    "bytes": 2833,
+    "path": "repo/SCHEMAS/jobspec.schema.json",
+    "sha256": "ba54cf4a076e8de989a714764454c9f6bcf5f5e1566af07610a79297eb80384d"
+  },
+  {
+    "bytes": 4801,
+    "path": "repo/SCHEMAS/ledger.schema.json",
+    "sha256": "cdcdd938e696bbde2ac6b1e9f771d21f396b0b15bfbd66fdfb29ccea38b5e350"
+  },
+  {
+    "bytes": 6682,
+    "path": "repo/SCHEMAS/proof.schema.json",
+    "sha256": "1ccbd3f79b0b21b0d9ec35e8bb858ecf0001defd63f9a1b5e974dbfcf1db07de"
+  },
+  {
+    "bytes": 2056,
+    "path": "repo/SCHEMAS/validation_error.schema.json",
+    "sha256": "912f999ed4c0d529d7aedf78f014de9a5383cf09a4870c008f1823d5d1013ba4"
+  },
+  {
+    "bytes": 1067,
+    "path": "repo/SKILLS/ant-worker/SKILL.md",
+    "sha256": "b711fc5c08340e9cbeac245f9e45ddefd4b245bee3817450e4a75b045ee3f2fd"
+  },
+  {
+    "bytes": 570,
+    "path": "repo/SKILLS/ant-worker/assets/code_adapt_task.json",
+    "sha256": "2da9d6671c86c67da21c1b2f34723df4ef5103e4e0980ad0f6a8c0117d853604"
+  },
+  {
+    "bytes": 738,
+    "path": "repo/SKILLS/ant-worker/assets/file_copy_task.json",
+    "sha256": "19bcf23c34d920dc6004ec897406dbc30381b3bdfc1b7847998c08de2fc8ad44"
+  },
+  {
+    "bytes": 172,
+    "path": "repo/SKILLS/ant-worker/assets/research_task.json",
+    "sha256": "8b98f8cd2e3e3e6bb626b8b9498edb87bbffae49a374374bdd4bb2d366784add"
+  },
+  {
+    "bytes": 3366,
+    "path": "repo/SKILLS/ant-worker/assets/schema.json",
+    "sha256": "24b5de07685d99eb8b6fe31c36902fec10dff6158359bc9b3184d2bd2b1dbfdb"
+  },
+  {
+    "bytes": 368,
+    "path": "repo/SKILLS/ant-worker/assets/validate_task.json",
+    "sha256": "177d392055dd0fd63dd799f4b559d9ddc09389dc17f282a444f2ec3d2def0d2c"
+  },
+  {
+    "bytes": 3613,
+    "path": "repo/SKILLS/ant-worker/scripts/ant_agent.py",
+    "sha256": "a145ad0bf077ef208227e8fa00f8db966057aa609f85bb1750dd4107bba112e9"
+  },
+  {
+    "bytes": 1237,
+    "path": "repo/SKILLS/ant-worker/scripts/lfm2_runner.py",
+    "sha256": "f2207033cc0bf409677a24dc4e6b46348f35c31dc69d2341fa3b120dd0b7ba44"
+  },
+  {
+    "bytes": 14649,
+    "path": "repo/SKILLS/ant-worker/scripts/run.py",
+    "sha256": "4e1ea6de9a62880b382d98960047a2896c9a21ad6ccdc4d72fe80a6991ee5f18"
+  },
+  {
+    "bytes": 9196,
+    "path": "repo/SKILLS/ant-worker/scripts/test_ant_worker.py",
+    "sha256": "71165335b7bc7bcccec3319c95b2d4b1db6cd080210aa996ebd8541ebc5188ab"
+  },
+  {
+    "bytes": 782,
+    "path": "repo/SKILLS/file-analyzer/SKILL.md",
+    "sha256": "d1748ad0b37bbc1ed5b1123d40cf07e07a468dcd6c51e413b7ed18028f8c7760"
+  },
+  {
+    "bytes": 6144,
+    "path": "repo/SKILLS/file-analyzer/scripts/run.py",
+    "sha256": "b793c9e68714c1cfc642ec9c09de88aee58e0f061ab1ed3dab396521dabe1747"
+  },
+  {
+    "bytes": 1064,
+    "path": "repo/SKILLS/governor/SKILL.md",
+    "sha256": "438290dc5af6d8c88ddb9b0f0ce9aa516b289345bffa41c4c66b68d7d5aad5c2"
+  },
+  {
+    "bytes": 13870,
+    "path": "repo/SKILLS/governor/assets/GOVERNOR_SOP.json",
+    "sha256": "849a08f97519a8f16b246340850996b1174b424d62c0ac6aab52aff2bd929065"
+  },
+  {
+    "bytes": 2419,
+    "path": "repo/SKILLS/governor/assets/fixtures/phase0_directive.json",
+    "sha256": "727a6b389deb1826c54eeb6937e010a802e00383e3fce36c08fa34d5b71fc93f"
+  },
+  {
+    "bytes": 766,
+    "path": "repo/SKILLS/governor/references/GEMINI.md",
+    "sha256": "236dc477fc61c5fb59589a6b64068a4ba239f1ad98ebf3f04b2930722c14f404"
+  },
+  {
+    "bytes": 1302,
+    "path": "repo/SKILLS/governor/references/GOVERNOR_CONTEXT.md",
+    "sha256": "653ef3a7c0cad8d7cc3db86b6ab38b3ace9dbcbd7f6a33eeb82a389016b054af"
+  },
+  {
+    "bytes": 8170,
+    "path": "repo/SKILLS/governor/references/HANDOFF_TO_GOVERNOR.md",
+    "sha256": "6ac63839b64112971df15cbb5cd5961124cd69431bac69a94ede07d0eef5e666"
+  },
+  {
+    "bytes": 5996,
+    "path": "repo/SKILLS/governor/scripts/run.py",
+    "sha256": "871e8d768a7beb8d4ccc9402a8faebfd4812ddd2d89b2b75867334b0143740f6"
+  },
+  {
+    "bytes": 696,
+    "path": "repo/SKILLS/launch-terminal/SKILL.md",
+    "sha256": "91f1dbb99a923a38cad3cfb6987728865bc2d0e3d842e0cf01ad9e7ef82b0aa1"
+  },
+  {
+    "bytes": 80,
+    "path": "repo/SKILLS/launch-terminal/assets/fixtures/basic/expected.json",
+    "sha256": "6b578aa92dc95324f9b9435198313ee53ee4d54804c90fd57135e9a0662ba80c"
+  },
+  {
+    "bytes": 107,
+    "path": "repo/SKILLS/launch-terminal/assets/fixtures/basic/input.json",
+    "sha256": "62b19a25b333c501925a9936be946c92447247c640b3f80d7cba3645a43475e1"
+  },
+  {
+    "bytes": 1585,
+    "path": "repo/SKILLS/launch-terminal/references/ANTIGRAVITY_BRIDGE.md",
+    "sha256": "13c18eead1c9727dcc04947e30f2fc04eceb60ac6fc89c069b0c203bbbaf1aa4"
+  },
+  {
+    "bytes": 1722,
+    "path": "repo/SKILLS/launch-terminal/scripts/run.py",
+    "sha256": "48ca96402c66d54025a6e325b185b180eb9dc86fbbf67fc62d6ebee9f9558a6a"
+  },
+  {
+    "bytes": 9070,
+    "path": "repo/SKILLS/mcp-builder/SKILL.md",
+    "sha256": "96124576877c4da54e2a0b47d161ec2410a99587a9c60c81a22935a675da06c3"
+  },
+  {
+    "bytes": 21663,
+    "path": "repo/SKILLS/mcp-builder/reference/evaluation.md",
+    "sha256": "8c99479f8a2d22a636c38e274537aac3610879e26f34e0709825077c4576f427"
+  },
+  {
+    "bytes": 7330,
+    "path": "repo/SKILLS/mcp-builder/reference/mcp_best_practices.md",
+    "sha256": "80fb4369a349447cf18ecdd7494fe7938b6065377e9f08c077cec411093a3007"
+  },
+  {
+    "bytes": 28550,
+    "path": "repo/SKILLS/mcp-builder/reference/node_mcp_server.md",
+    "sha256": "c3ba35a4f599dd53be9c6555ae72c19a7bf412cd5426576c2c08d42755482c66"
+  },
+  {
+    "bytes": 25099,
+    "path": "repo/SKILLS/mcp-builder/reference/python_mcp_server.md",
+    "sha256": "2da52f77e675191014ca2e146a4b95aa04d0ca7dd7e2b100322df15ade685e80"
+  },
+  {
+    "bytes": 4875,
+    "path": "repo/SKILLS/mcp-builder/scripts/connections.py",
+    "sha256": "9403668a2041568772082a8b334122c1f88daf0541fb393af4522d0094a47a6e"
+  },
+  {
+    "bytes": 12579,
+    "path": "repo/SKILLS/mcp-builder/scripts/evaluation.py",
+    "sha256": "49ed1d17cdce5da101b210197740713f49b935c29d4f339542a14b132658e6f7"
+  },
+  {
+    "bytes": 29,
+    "path": "repo/SKILLS/mcp-builder/scripts/requirements.txt",
+    "sha256": "d5d7558b2368ecea9dfeed7d1fbc71ee9e0750bebd1282faa527d528a344c3c7"
+  },
+  {
+    "bytes": 6493,
+    "path": "repo/SKILLS/mcp-startup/CHECKLIST.md",
+    "sha256": "3be62654c21ac8515ab25721c7562f9aff788c72ab441c09595013933fb3dda9"
+  },
+  {
+    "bytes": 7116,
+    "path": "repo/SKILLS/mcp-startup/INDEX.md",
+    "sha256": "a9166b5773b3da397ffe28a7601404e318011146fd087ec2cc2b1dee1abc2f53"
+  },
+  {
+    "bytes": 5855,
+    "path": "repo/SKILLS/mcp-startup/INSTALLATION.md",
+    "sha256": "b8da7ae1928e97ec0309e0901c61d337ba81e6ba7c908c1eec7512a89c0f5d80"
+  },
+  {
+    "bytes": 4205,
+    "path": "repo/SKILLS/mcp-startup/MODEL-SETUP.md",
+    "sha256": "130163e678d23e5f6c0663067d5f782225f4d1a04c199926af10c2267bc5c534"
+  },
+  {
+    "bytes": 4827,
+    "path": "repo/SKILLS/mcp-startup/QUICKREF.txt",
+    "sha256": "0ab1505968d1123b63d4316b660a510b6108939fcbc4e883b085bd31bd69f3a8"
+  },
+  {
+    "bytes": 3683,
+    "path": "repo/SKILLS/mcp-startup/README.md",
+    "sha256": "dd3e8ea45227a144a26762d377321b728b4e3f52a6703e3e68be75efe856bd72"
+  },
+  {
+    "bytes": 3661,
+    "path": "repo/SKILLS/mcp-startup/SKILL.md",
+    "sha256": "40d4374047fc133bcf095460240fc6d4dc920d88988c4f97559bcc146791b014"
+  },
+  {
+    "bytes": 5919,
+    "path": "repo/SKILLS/mcp-startup/USAGE.md",
+    "sha256": "3a4aa48d4c13bf1f23655f68be6240a58b4cac8bee60c86d6bd17663dbe0464a"
+  },
+  {
+    "bytes": 5524,
+    "path": "repo/SKILLS/mcp-startup/scripts/startup.ps1",
+    "sha256": "ac7be710c269b3b701c7380b86e811f3b6011a93cf60733b21186833c6962dd2"
+  },
+  {
+    "bytes": 8629,
+    "path": "repo/SKILLS/mcp-startup/scripts/startup.py",
+    "sha256": "e10fa6058404e8cc29a1638b54befe043ae5f893072a7c47e7098971140afbfe"
+  },
+  {
+    "bytes": 17815,
+    "path": "repo/SKILLS/skill-creator/SKILL.md",
+    "sha256": "7e53a0e62275e09d801d7c687b2f1a41abda36aeacf611f5c8b7b4baa95beb6a"
+  },
+  {
+    "bytes": 1813,
+    "path": "repo/SKILLS/skill-creator/references/output-patterns.md",
+    "sha256": "d6027800b9d8c26589edba85b42901a41ac36d753b4e9cebc7f4cbb03cdcf0a4"
+  },
+  {
+    "bytes": 818,
+    "path": "repo/SKILLS/skill-creator/references/workflows.md",
+    "sha256": "ef4846877d5dab47511a01a6cf31476ad64f5bc5945635459295794575338980"
+  },
+  {
+    "bytes": 10863,
+    "path": "repo/SKILLS/skill-creator/scripts/init_skill.py",
+    "sha256": "0bba250b94caa4cb2b28b15dad26fdcf371aeda4c9797b8120e55c2e33e0c73c"
+  },
+  {
+    "bytes": 3288,
+    "path": "repo/SKILLS/skill-creator/scripts/package_skill.py",
+    "sha256": "b31fbcb3e362d5c5308e99255ff8e83cde3a513e0636953964a648494ca10931"
+  },
+  {
+    "bytes": 3523,
+    "path": "repo/SKILLS/skill-creator/scripts/quick_validate.py",
+    "sha256": "381ab2d3d1fd5ec32371016413063eff99d0d48c415747085c61517e967dbb87"
+  },
+  {
+    "bytes": 853,
+    "path": "repo/SKILLS/swarm-orchestrator/SKILL.md",
+    "sha256": "7db1797b67f6918ec5e20f4fcbde10d35b7ac8f15c1253a617b0a90d5cf899c6"
+  },
+  {
+    "bytes": 4892,
+    "path": "repo/SKILLS/swarm-orchestrator/scripts/agent_loop.py",
+    "sha256": "d58c51255a9ed6b1cf45650ade7ea9654523dfb0da3906b886a5fdf2fee50c4a"
+  },
+  {
+    "bytes": 4939,
+    "path": "repo/SKILLS/swarm-orchestrator/scripts/launch_swarm.ps1",
+    "sha256": "97850d4e8df38900806c4a3ef44af0fe8708da74fa57e1212d0062288e5e4b73"
+  },
+  {
+    "bytes": 6912,
+    "path": "repo/SKILLS/swarm-orchestrator/scripts/poll_and_execute.py",
+    "sha256": "472e89f21586df0053a80d2e4611e28f8ee0621b626600a98c3f2a30750091be"
+  },
+  {
+    "bytes": 4066,
+    "path": "repo/SKILLS/swarm-orchestrator/scripts/poll_tasks.py",
+    "sha256": "8fdb1ea1508f42e5764fe7b9ecd7c1ff665cc6b204a19c411de000538f79a6d6"
+  },
+  {
+    "bytes": 5254,
+    "path": "repo/SPECTRUM/SPECTRUM-01.md",
+    "sha256": "464ee27cf725d6c99dfdc088289a20d238a2fe758c4a919c30218042e5c250f3"
+  },
+  {
+    "bytes": 5125,
+    "path": "repo/SPECTRUM/SPECTRUM-02.md",
+    "sha256": "4d5095645629dfd33a8a2649a1e919dd6bf1807cdf75665d727aa69b91bd72bc"
+  },
+  {
+    "bytes": 5824,
+    "path": "repo/SPECTRUM/SPECTRUM-03.md",
+    "sha256": "17b1fcf75f0df7e3b0131f87761f91ec56e02c4970c2f918340fccb3fad6b097"
+  },
+  {
+    "bytes": 23790,
+    "path": "repo/SPECTRUM/SPECTRUM-04.md",
+    "sha256": "3a0c0a02f55b0a2f274726684d5cac7a45951e25d61c2023fb72599ae4f1f576"
+  },
+  {
+    "bytes": 18795,
+    "path": "repo/SPECTRUM/SPECTRUM-05.md",
+    "sha256": "4e6ef1cc8f11b16eff50ff9b4cf5c36481af40b70fcbbf1ae3f3ee3fbb157c62"
+  },
+  {
+    "bytes": 26817,
+    "path": "repo/SPECTRUM/SPECTRUM-06.md",
+    "sha256": "0ec3b0e5c047a7ec8882ba7d6a971bef70244a77bf4e3b47ca1dbdd374894d37"
+  },
+  {
+    "bytes": 10928,
+    "path": "repo/TESTBENCH/TESTBENCH.md",
+    "sha256": "418679aa743619d45e0a7f545da2126078be4b0aa1713a5c17ec81f6330bf8e1"
+  },
+  {
+    "bytes": 14590,
+    "path": "repo/TESTBENCH/spectrum/test_spectrum02_emission.py",
+    "sha256": "2dfe21ee9a12f44d6001c45ac1d07a04b7453f9294043cbb9c14a97390970760"
+  },
+  {
+    "bytes": 18518,
+    "path": "repo/TESTBENCH/spectrum/test_spectrum02_resume.py",
+    "sha256": "07d1fd5dab2dc6fd02a850334562b01582319b021f373e4fd8d5091de495d2dd"
+  },
+  {
+    "bytes": 15900,
+    "path": "repo/TESTBENCH/spectrum/test_spectrum03_chain.py",
+    "sha256": "14473ef11b5d744117741fa283d8bf26627bf6e60c42106d0f573076607925a2"
+  },
+  {
+    "bytes": 13486,
+    "path": "repo/TESTBENCH/spectrum/test_validator_version_integrity.py",
+    "sha256": "cb0125635be986b1b79b62ccfb0714fdbf424b87a014c7fb6454354ed8953816"
+  },
+  {
+    "bytes": 2811,
+    "path": "repo/TESTBENCH/test_adversarial_cas.py",
+    "sha256": "839c447f411f7209327a95d4512da00232991bbe19310cc301df5a6093bd9048"
+  },
+  {
+    "bytes": 2654,
+    "path": "repo/TESTBENCH/test_adversarial_ledger.py",
+    "sha256": "9160d066d10dfedd9f4bc0054c6cc04b46d3dda5474fa9812ce67c09edb5018a"
+  },
+  {
+    "bytes": 1212,
+    "path": "repo/TESTBENCH/test_adversarial_paths.py",
+    "sha256": "17295ad915f93a7a6407272256c63ceccb90283c55b4d722bf278dd6c5eab5e3"
+  },
+  {
+    "bytes": 6139,
+    "path": "repo/TESTBENCH/test_adversarial_pipeline_resume.py",
+    "sha256": "5aca2afd88786df5f0983d99150d6d4bb79944278e9247fe7c358059371ab3f5"
+  },
+  {
+    "bytes": 9718,
+    "path": "repo/TESTBENCH/test_adversarial_proof_tamper.py",
+    "sha256": "1c8cf10b4c74cb95dc9b86367b6e097993fb6332c61ba4c42cc49b35bc08e287"
+  },
+  {
+    "bytes": 5900,
+    "path": "repo/TESTBENCH/test_ags_phase6_adapter_contract.py",
+    "sha256": "13d8f7dff6c89322a29d6f9c2c8bd79eb4e226cf860f7ae5176cf72dd87200ca"
+  },
+  {
+    "bytes": 8393,
+    "path": "repo/TESTBENCH/test_ags_phase6_bridge.py",
+    "sha256": "6a77b4d9d2788856904bb3ca21232197d0ee866e8765d69dcb01f3a609630d6f"
+  },
+  {
+    "bytes": 7158,
+    "path": "repo/TESTBENCH/test_ags_phase6_capability_pins.py",
+    "sha256": "75a9be21aa419ad286bb3f7ba6e90300a2e415723e1506229d55300fd5820157"
+  },
+  {
+    "bytes": 5655,
+    "path": "repo/TESTBENCH/test_ags_phase6_capability_registry.py",
+    "sha256": "fe2bd00762a6ce1f546b4ead596037ed2cb2aa5756e0e82aaa2064da575c0926"
+  },
+  {
+    "bytes": 6379,
+    "path": "repo/TESTBENCH/test_ags_phase6_capability_revokes.py",
+    "sha256": "dc782fb68ec7c3efd030ede189d2ad4ce41a0f5dc4f86a865bf83c5424b1cec4"
+  },
+  {
+    "bytes": 2475,
+    "path": "repo/TESTBENCH/test_ags_phase6_capability_versioning_semantics.py",
+    "sha256": "029a781f0fcef95078f59a54ffa3b56a8753c1058f78a64754bfbda1821a750a"
+  },
+  {
+    "bytes": 4601,
+    "path": "repo/TESTBENCH/test_ags_phase6_mcp_adapter_e2e.py",
+    "sha256": "56e331db2687fdd3d9e9fc1bce8255391889d846a37a01176a99000a8af6f164"
+  },
+  {
+    "bytes": 3844,
+    "path": "repo/TESTBENCH/test_ags_phase6_registry_immutability.py",
+    "sha256": "f4d8cf4fa8a798553f7ff2de11e5a1aec4d26a08821ecef9291b59b5429e30e1"
+  },
+  {
+    "bytes": 6016,
+    "path": "repo/TESTBENCH/test_ags_phase6_router_slot.py",
+    "sha256": "43befb9d427234c3c1d6f6cdc89c191da981d790703c0317794abe56681d6f94"
+  },
+  {
+    "bytes": 6060,
+    "path": "repo/TESTBENCH/test_canonical_artifacts.py",
+    "sha256": "68c3c3f96060d0bb0c5dae94497cfca4eaa5ac31713354ce81b9692ecb623c8f"
+  },
+  {
+    "bytes": 4158,
+    "path": "repo/TESTBENCH/test_cas_store.py",
+    "sha256": "b48c79eb42ae114aab162da3a89c6f219eb38cf10a72b61a6b8ada1e9ec521dd"
+  },
+  {
+    "bytes": 1221,
+    "path": "repo/TESTBENCH/test_demo_memoization_hash_reuse.py",
+    "sha256": "7760a209acbfd0af314093443c981ca32e8362d4e916dd22a2ba6d0586a0d039"
+  },
+  {
+    "bytes": 5638,
+    "path": "repo/TESTBENCH/test_deref_logging.py",
+    "sha256": "eb4e3968dae0631ec198ecb8432bb8f0bc8cf17dd167c636a1647c19d6e105e8"
+  },
+  {
+    "bytes": 2755,
+    "path": "repo/TESTBENCH/test_hash_toolbelt.py",
+    "sha256": "2ec021b57a21e098b0270f08fd4bf89c105e0ecc2b8cd54253258fc2e90f839b"
+  },
+  {
+    "bytes": 3652,
+    "path": "repo/TESTBENCH/test_ledger.py",
+    "sha256": "339590c3b4d694219923b43a08d6159f18ac2e12b8251f52ddc9f886cdbdb9ac"
+  },
+  {
+    "bytes": 5406,
+    "path": "repo/TESTBENCH/test_memoization.py",
+    "sha256": "548a60bd93f7842db9ae8f8d32f9b4e54101bb625f8fbb5bc2375bedda94db69"
+  },
+  {
+    "bytes": 3132,
+    "path": "repo/TESTBENCH/test_merkle.py",
+    "sha256": "21a3d499eebb7e192550a9b93a50307749bde6a3d11d3392a4357fd2d81c6a32"
+  },
+  {
+    "bytes": 5690,
+    "path": "repo/TESTBENCH/test_packing_hygiene.py",
+    "sha256": "515fea19ab2abcb8e3921fffa5582741730141b1ae108ac5ea0d3a7980cc9ed5"
+  },
+  {
+    "bytes": 7313,
+    "path": "repo/TESTBENCH/test_pipeline_chain.py",
+    "sha256": "8f0d9ae302761160c23adb46e5e0e3f6dc4fd158fd3a889a0b7696eb3d9a46be"
+  },
+  {
+    "bytes": 25474,
+    "path": "repo/TESTBENCH/test_pipeline_dag.py",
+    "sha256": "53aaf0ecc0d386fe0ce38c4a8bd24d188d236cb8c90ededbb79230708cbc6b14"
+  },
+  {
+    "bytes": 8181,
+    "path": "repo/TESTBENCH/test_pipeline_verify_cli.py",
+    "sha256": "29016bea0a80187e8978f456550c8b6765db5b2a970b3aa9a53ae66981654899"
+  },
+  {
+    "bytes": 5861,
+    "path": "repo/TESTBENCH/test_pipelines.py",
+    "sha256": "d1f8dc029b7a85efabc8dd6de1aaf51eee5ef0d54ba7012c393ce868c3d7cb39"
+  },
+  {
+    "bytes": 8417,
+    "path": "repo/TESTBENCH/test_preflight.py",
+    "sha256": "d4346671f0a34746a11855cfe65146d60b526ee6c103e8a0088493c96db74655"
+  },
+  {
+    "bytes": 11635,
+    "path": "repo/TESTBENCH/test_proof_gating.py",
+    "sha256": "314c35dcebfc72a1f3e8648bed1c7eb6a55ad0dea06fbd36deec3d33747b3a1a"
+  },
+  {
+    "bytes": 5972,
+    "path": "repo/TESTBENCH/test_proof_wiring.py",
+    "sha256": "ed24a42705dda5094e26aa32f5ea3b39c329ec3278195ebdbf86abc02676296d"
+  },
+  {
+    "bytes": 7329,
+    "path": "repo/TESTBENCH/test_restore_proof.py",
+    "sha256": "36ebe5d3003c420745eafd3b67d97db0f029eac4d5212f15b15662cc3a06b527"
+  },
+  {
+    "bytes": 11405,
+    "path": "repo/TESTBENCH/test_restore_runner.py",
+    "sha256": "4c156f526559e1aca563eb4e1d9e2caf7761e91d75faebebb559e5d4a9edb75f"
+  },
+  {
+    "bytes": 7228,
+    "path": "repo/TESTBENCH/test_runtime_guard.py",
+    "sha256": "2ce3862873957171d856234c4ff3a0eed8b61bc59a8f93c171be6d6bdce6227b"
+  },
+  {
+    "bytes": 4861,
+    "path": "repo/TESTBENCH/test_schemas.py",
+    "sha256": "250daf1a1a25101c06ada8faf86d1ca6165754ae6260b5a9c065a513e3a3592a"
+  },
+  {
+    "bytes": 14417,
+    "path": "repo/TESTBENCH/test_spectrum_04_05_enforcement.py",
+    "sha256": "0315588589349f023ed520b5bd4343cdd7fa1eb07e706759b3ca3f5f4392b6d5"
+  },
+  {
+    "bytes": 3457,
+    "path": "repo/TESTBENCH/test_verifier_freeze.py",
+    "sha256": "a353ae5b59bccbb65c888bdc07112a0d0bd483e806173ecffe04e0fdef21e91a"
+  },
+  {
+    "bytes": 6401,
+    "path": "repo/TESTBENCH/test_verifier_interop.py",
+    "sha256": "6505bcc70f9619d873822be0254bdd2928df7e9e0e54db60db1ee4fa26e64f6d"
+  },
+  {
+    "bytes": 16117,
+    "path": "repo/TESTBENCH/test_verify_bundle.py",
+    "sha256": "59483946e3fc87f31e7588428a615798096e63481b4b9914f56f4e9af2f9bbe1"
+  },
+  {
+    "bytes": 523,
+    "path": "repo/conftest.py",
+    "sha256": "4e8619545f4560f7300f261f1be814b39e83db98493ae7984eeb02f5f1607fe1"
+  },
+  {
+    "bytes": 1518,
+    "path": "repo/swarm_config.json",
+    "sha256": "41c50a0841a71a75cd58d63a990d65ba448e623826a2d0d2227aee895b2e52a3"
+  }
+]

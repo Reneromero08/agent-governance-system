@@ -8,10 +8,10 @@ from pathlib import Path
 import pytest
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
 
-from PIPELINES.pipeline_runtime import PipelineRuntime
+from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
 
 
 def _rm(path: Path) -> None:
@@ -47,7 +47,7 @@ def test_pipeline_fails_closed_on_partial_state_json() -> None:
     pdir.mkdir(parents=True, exist_ok=True)
 
     # Minimal initialized pipeline files.
-    (pdir / "PIPELINE.json").write_text(json.dumps({"pipeline_id": pipeline_id, "steps": [{"step_id": "s1", "jobspec_path": "x.json", "cmd": ["true"]}]}), encoding="utf-8")
+    rt.writes.write_durable_canonical_json(pdir / "PIPELINE.json", {"pipeline_id": pipeline_id, "steps": [{"step_id": "s1", "jobspec_path": "x.json", "cmd": ["true"]}]})
     (pdir / "STATE.json").write_text("{", encoding="utf-8")  # partial JSON (crash mid-write)
 
     with pytest.raises(json.JSONDecodeError):
@@ -72,7 +72,7 @@ def test_pipeline_fails_closed_on_inconsistent_completed_step_state() -> None:
             {"step_id": "s2", "jobspec_path": "y.json", "cmd": ["true"], "strict": True, "memoize": False},
         ],
     }
-    (pdir / "PIPELINE.json").write_text(json.dumps(pipeline_obj), encoding="utf-8")
+    rt.writes.write_durable_canonical_json(pdir / "PIPELINE.json", pipeline_obj)
 
     # Corrupt state: claims s1 is completed but has no step_run_ids entry.
     state_obj = {"pipeline_id": pipeline_id, "current_step_index": 1, "completed_steps": ["s1"], "step_run_ids": {}, "attempts": {}}
@@ -88,17 +88,17 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
     pdir = rt.pipeline_dir(pipeline_id)
     _rm(pdir)
 
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "pipeline_resume" / pipeline_id
+    base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "pipeline_resume" / pipeline_id
     _rm(base)
     base.mkdir(parents=True, exist_ok=True)
 
-    domain_rel = "CONTRACTS/_runs/_tmp/adversarial/pipeline_resume/domain"
+    domain_rel = "LAW/CONTRACTS/_runs/_tmp/adversarial/pipeline_resume/domain"
     (REPO_ROOT / domain_rel).mkdir(parents=True, exist_ok=True)
 
     jobspec1 = base / "jobspec_s1.json"
     jobspec2 = base / "jobspec_s2.json"
-    out1 = "CORTEX/_generated/_tmp/adversarial_pipeline_step1.txt"
-    out2 = "CORTEX/_generated/_tmp/adversarial_pipeline_step2.txt"
+    out1 = "NAVIGATION/CORTEX/_generated/_tmp/adversarial_pipeline_step1.txt"
+    out2 = "NAVIGATION/CORTEX/_generated/_tmp/adversarial_pipeline_step2.txt"
 
     _write_jobspec(jobspec1, job_id="adv-pipe-s1", catalytic_domains=[domain_rel], durable_paths=[out1])
     _write_jobspec(jobspec2, job_id="adv-pipe-s2", catalytic_domains=[domain_rel], durable_paths=[out2])
@@ -134,7 +134,7 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
         ],
     }
     spec_path = base / "PIPELINE_SPEC.json"
-    spec_path.write_text(json.dumps(spec, indent=2), encoding="utf-8")
+    rt.writes.write_durable_canonical_json(spec_path, spec)
 
     # Simulate crash between step completion and STATE update:
     # - run step1 using the internal executor
@@ -143,9 +143,9 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
     parsed_spec, state = rt.load(pipeline_id=pipeline_id)
     step1 = parsed_spec.steps[0]
     run_id = rt._make_run_id(parsed_spec.pipeline_id, step1.step_id, 1)
-    (REPO_ROOT / "CONTRACTS" / "_runs" / run_id).mkdir(parents=True, exist_ok=True)
+    (REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id).mkdir(parents=True, exist_ok=True)
     rt._execute_step(spec=parsed_spec, step=step1, run_id=run_id)
-    rt._assert_step_outputs(REPO_ROOT / "CONTRACTS" / "_runs" / run_id)
+    rt._assert_step_outputs(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id)
 
     # Resume must not "skip ahead" based on partial artifacts; it must complete s1 and then s2.
     rt2 = PipelineRuntime(project_root=REPO_ROOT)

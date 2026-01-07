@@ -1,0 +1,12 @@
+[
+  {
+    "bytes": 238,
+    "repoRelPath": "pytest.ini",
+    "scope": "repo"
+  },
+  {
+    "bytes": 1194,
+    "repoRelPath": "SKILLS/mcp-builder/scripts/example_evaluation.xml",
+    "scope": "repo"
+  }
+]

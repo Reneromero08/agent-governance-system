@@ -1,0 +1,84 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "validation_error.schema.json",
+  "title": "CAT-DPT Validation Error Vector",
+  "type": "object",
+  "additionalProperties": false,
+  "$comment": "CAT-DPT Phase 0 contract schema. Errors must be stable and machine-readable.",
+  "required": [
+    "valid",
+    "errors",
+    "warnings",
+    "timestamp",
+    "validator_version"
+  ],
+  "properties": {
+    "valid": {
+      "type": "boolean"
+    },
+    "errors": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/issue"
+      }
+    },
+    "warnings": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/issue"
+      }
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "ISO 8601 datetime string.",
+      "minLength": 1
+    },
+    "validator_version": {
+      "type": "string",
+      "description": "Human-readable validator version (semver or commit-hash).",
+      "minLength": 1
+    }
+  },
+  "definitions": {
+    "issue": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string",
+          "enum": [
+            "SCHEMA_INVALID",
+            "MISSING_REQUIRED_FIELD",
+            "INVALID_FIELD_TYPE",
+            "INVALID_ENUM_VALUE",
+            "INVALID_FORMAT",
+            "INVALID_PATH",
+            "VALIDATION_LOGIC_ERROR",
+            "OUTPUT_DOES_NOT_EXIST",
+            "RESTORATION_FAILED",
+            "TIMEOUT_UNUSUALLY_HIGH"
+          ]
+        },
+        "message": {
+          "type": "string",
+          "minLength": 1
+        },
+        "path": {
+          "type": "string",
+          "description": "JSONPath-like pointer to failing field, when applicable.",
+          "default": ""
+        },
+        "details": {
+          "type": "object",
+          "description": "Optional structured details for debugging and automation.",
+          "additionalProperties": true,
+          "default": {}
+        }
+      }
+    }
+  }
+}
