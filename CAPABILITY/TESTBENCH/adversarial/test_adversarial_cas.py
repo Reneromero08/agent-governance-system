@@ -1,15 +1,19 @@
-from pathlib import Path
-import sys
-import shutil
+from __future__ import annotations
+
 import hashlib
+import shutil
+import sys
+from pathlib import Path
+
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[3]
-if str(REPO_ROOT) not in sys.path:
-    sys.path.insert(0, str(REPO_ROOT))
-    
-from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore
-from CAPABILITY.PRIMITIVES.hash_toolbelt import hash_describe, hash_read_text
+
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+
+from PRIMITIVES.cas_store import CatalyticStore
+from PRIMITIVES.hash_toolbelt import hash_describe, hash_read_text
+
 
 def _rm(path: Path) -> None:
     if path.is_dir():
@@ -20,8 +24,9 @@ def _rm(path: Path) -> None:
         except FileNotFoundError:
             pass
 
+
 def test_cas_corruption_detected_by_hash_toolbelt() -> None:
-    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas" / "CAS"
+    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas" / "CAS"
     _rm(cas_root)
     cas = CatalyticStore(cas_root)
 
@@ -41,8 +46,9 @@ def test_cas_corruption_detected_by_hash_toolbelt() -> None:
     with pytest.raises(ValueError, match=r"CAS_OBJECT_INTEGRITY_MISMATCH"):
         _ = hash_describe(store=cas, hash_hex=h, max_bytes=64)
 
+
 def test_cas_truncation_detected_by_hash_toolbelt() -> None:
-    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_trunc" / "CAS"
+    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_trunc" / "CAS"
     _rm(cas_root)
     cas = CatalyticStore(cas_root)
 
@@ -52,14 +58,14 @@ def test_cas_truncation_detected_by_hash_toolbelt() -> None:
 
     # Truncate object mid-stream.
     original = path.read_bytes()
-    corrupted = bytearray(original[5:])
-    path.write_bytes(bytes(corrupted))
+    path.write_bytes(original[:-3])
 
     with pytest.raises(ValueError, match=r"CAS_OBJECT_INTEGRITY_MISMATCH"):
-        _ = hash_describe(store=cas, hash_hex=h, max_bytes=32)
+        _ = hash_read_text(store=cas, hash_hex=h, max_bytes=32)
+
 
 def test_cas_partial_write_never_treated_as_present() -> None:
-    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_partial" / "CAS"
+    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_partial" / "CAS"
     _rm(cas_root)
     cas = CatalyticStore(cas_root)
 
@@ -78,3 +84,4 @@ def test_cas_partial_write_never_treated_as_present() -> None:
     final_path.write_bytes(expected_bytes[:5])
     with pytest.raises(ValueError, match=r"CAS_OBJECT_INTEGRITY_MISMATCH"):
         _ = hash_read_text(store=cas, hash_hex=h, max_bytes=64)
+

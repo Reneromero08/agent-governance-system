@@ -4,6 +4,20 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.3] - 2026-01-07
+
+### Added
+- **CAT-DPT Test Suite Recovery** — Recovered 15 test files from LLM Packer archive
+  - **Adversarial Tests (5 files):** CAS corruption, ledger tampering, path injection, pipeline resume safety, proof tampering
+  - **Phase 6 Governance Tests (8 files):** Capability registry/pins/revokes, adapter contracts, router slots, immutability enforcement
+  - **Validator Tests (1 file):** Deterministic build fingerprinting and version integrity
+  - **Source:** `catalytic-dpt-pack-2025-12-27_13-21-43/repo/TESTBENCH/`
+  - **Coverage:** Adversarial hardening, Phase 6 capability governance, SPECTRUM validation
+- **skill-creator Skill** — Skill scaffolding tooling from CAT-DPT
+  - `init_skill.py` — Initialize new skill structure with agentskills.io compliance
+  - `package_skill.py` — Package skills for distribution
+  - `quick_validate.py` — Validate skill structure and metadata
+
 ## [3.7.2] - 2026-01-07
 
 ### Changed
