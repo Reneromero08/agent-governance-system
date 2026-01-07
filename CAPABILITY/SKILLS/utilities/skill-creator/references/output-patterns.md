@@ -1,5 +1,3 @@
-<!-- CONTENT_HASH: 056bb0f063c55666f014dd03275175d28980d2d0fc082e8007680cf515c83808 -->
-
 # Output Patterns
 
 Use these patterns when skills need to produce consistent, high-quality output.

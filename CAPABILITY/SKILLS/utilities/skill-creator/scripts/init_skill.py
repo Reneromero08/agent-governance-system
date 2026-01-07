@@ -14,12 +14,6 @@ Examples:
 import sys
 from pathlib import Path
 
-try:
-    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
-    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
-except ImportError:
-    GuardedWriter = None
-
 
 SKILL_TEMPLATE = """---
 name: {skill_name}
@@ -217,67 +211,53 @@ def init_skill(skill_name, path):
         return None
 
     # Create skill directory
-    # Create skill directory
     try:
-        # Heuristic for repo root: 5 levels up
-        repo_root = Path(__file__).resolve().parents[5]
-        if not GuardedWriter:
-            print("GuardedWriter not found.")
-            return None
-        
-        writer = GuardedWriter(repo_root, durable_roots=["CAPABILITY/SKILLS", "LAW/CONTRACTS/_runs"])
-        writer.open_commit_gate() # init_skill creates new skills which is a durable action, usually manual. 
-        # But this script is likely run by human.
-        
-        rel_skill_dir = str(skill_dir.resolve().relative_to(repo_root))
-        
-        writer.mkdir_durable(rel_skill_dir)
+        skill_dir.mkdir(parents=True, exist_ok=False)
         print(f"✅ Created skill directory: {skill_dir}")
+    except Exception as e:
+        print(f"❌ Error creating directory: {e}")
+        return None
 
-        # Create SKILL.md from template
-        skill_title = title_case_skill_name(skill_name)
-        skill_content = SKILL_TEMPLATE.format(
-            skill_name=skill_name,
-            skill_title=skill_title
-        )
+    # Create SKILL.md from template
+    skill_title = title_case_skill_name(skill_name)
+    skill_content = SKILL_TEMPLATE.format(
+        skill_name=skill_name,
+        skill_title=skill_title
+    )
 
-        rel_skill_md_path = str((skill_dir / 'SKILL.md').relative_to(repo_root))
-        writer.write_durable(rel_skill_md_path, skill_content)
+    skill_md_path = skill_dir / 'SKILL.md'
+    try:
+        skill_md_path.write_text(skill_content)
         print("✅ Created SKILL.md")
+    except Exception as e:
+        print(f"❌ Error creating SKILL.md: {e}")
+        return None
 
-        # Create resource directories with example files
+    # Create resource directories with example files
+    try:
         # Create scripts/ directory with example script
-        rel_scripts_dir = str((skill_dir / 'scripts').relative_to(repo_root))
-        writer.mkdir_durable(rel_scripts_dir)
-        
-        rel_example_script = str((skill_dir / 'scripts' / 'example.py').relative_to(repo_root))
-        writer.write_durable(rel_example_script, EXAMPLE_SCRIPT.format(skill_name=skill_name))
-        # writer doesn't support chmod, but it sets sane defaults. 
-        # For now we skip chmod or do it raw if absolutely needed?
-        # Firewall might block chmod if we don't have a tool for it.
-        # But chmod is not a write op checked by identifying patterns?
-        # Actually scanner checks write_*, mkdir, replace, but maybe not chmod.
-        # We'll skip chmod for now.
+        scripts_dir = skill_dir / 'scripts'
+        scripts_dir.mkdir(exist_ok=True)
+        example_script = scripts_dir / 'example.py'
+        example_script.write_text(EXAMPLE_SCRIPT.format(skill_name=skill_name))
+        example_script.chmod(0o755)
         print("✅ Created scripts/example.py")
 
         # Create references/ directory with example reference doc
-        rel_references_dir = str((skill_dir / 'references').relative_to(repo_root))
-        writer.mkdir_durable(rel_references_dir)
-        
-        rel_example_reference = str((skill_dir / 'references' / 'api_reference.md').relative_to(repo_root))
-        writer.write_durable(rel_example_reference, EXAMPLE_REFERENCE.format(skill_title=skill_title))
+        references_dir = skill_dir / 'references'
+        references_dir.mkdir(exist_ok=True)
+        example_reference = references_dir / 'api_reference.md'
+        example_reference.write_text(EXAMPLE_REFERENCE.format(skill_title=skill_title))
         print("✅ Created references/api_reference.md")
 
         # Create assets/ directory with example asset placeholder
-        rel_assets_dir = str((skill_dir / 'assets').relative_to(repo_root))
-        writer.mkdir_durable(rel_assets_dir)
-        
-        rel_example_asset = str((skill_dir / 'assets' / 'example_asset.txt').relative_to(repo_root))
-        writer.write_durable(rel_example_asset, EXAMPLE_ASSET)
+        assets_dir = skill_dir / 'assets'
+        assets_dir.mkdir(exist_ok=True)
+        example_asset = assets_dir / 'example_asset.txt'
+        example_asset.write_text(EXAMPLE_ASSET)
         print("✅ Created assets/example_asset.txt")
-
     except Exception as e:
-        print(f"❌ Error creating skill files: {e}")
+        print(f"❌ Error creating resource directories: {e}")
         return None
 
     # Print next steps

@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
-
 """
 Validator Version Integrity Tests
 
 Tests that OUTPUT_HASHES.json contains both validator_semver and validator_build_id,
 and that verification enforces their presence and correctness.
 
-Run: python CAPABILITY/TESTBENCH/spectrum/test_validator_version_integrity.py
+Run: python CATALYTIC-DPT/TESTBENCH/spectrum/test_validator_version_integrity.py
 """
 
 import json
@@ -17,7 +16,7 @@ from pathlib import Path
 
 # Direct file import for MCP/server.py
 REPO_ROOT = Path(__file__).resolve().parents[3]
-SERVER_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "MCP_EXPERIMENTAL" / "server_CATDPT.py"
+SERVER_PATH = REPO_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 
 import importlib.util
 spec = importlib.util.spec_from_file_location("mcp_server", SERVER_PATH)
@@ -87,7 +86,7 @@ class RunnerValidatorVersionIntegrity:
         run_dir.mkdir(parents=True, exist_ok=True)
 
         # Create output file
-        output_rel = f"LAW/CONTRACTS/_runs/{run_id}/output.txt"
+        output_rel = f"CONTRACTS/_runs/{run_id}/output.txt"
         output_path = run_dir / "output.txt"
         output_path.write_bytes(output_content)
 
@@ -155,9 +154,9 @@ class RunnerValidatorVersionIntegrity:
                     f"Missing validator_semver: {output_hashes.keys()}"
                 )
                 self._assert(
-                    output_hashes["validator_semver"] == VALIDATOR_SEMVER,
-                    "test_output_hashes_includes_validator_fields (valid semver)",
-                    f"Invalid validator_semver in OUTPUT_HASHES.json"
+                    output_hashes.get("validator_semver") == VALIDATOR_SEMVER,
+                    "test_output_hashes_includes_validator_fields (semver correct)",
+                    f"Expected {VALIDATOR_SEMVER}, got {output_hashes.get('validator_semver')}"
                 )
 
                 # Check validator_build_id
@@ -166,24 +165,53 @@ class RunnerValidatorVersionIntegrity:
                     "test_output_hashes_includes_validator_fields (has validator_build_id)",
                     f"Missing validator_build_id: {output_hashes.keys()}"
                 )
+                build_id = output_hashes.get("validator_build_id")
                 self._assert(
-                    output_hashes["validator_build_id"] == get_validator_build_id(),
-                    "test_output_hashes_includes_validator_fields (valid build id)",
-                    f"Invalid validator_build_id in OUTPUT_HASHES.json"
+                    build_id and len(build_id) > 0,
+                    "test_output_hashes_includes_validator_fields (build_id non-empty)",
+                    f"validator_build_id is empty: '{build_id}'"
+                )
+
+                # Verify it matches current build ID
+                current_build_id = get_validator_build_id()
+                self._assert(
+                    build_id == current_build_id,
+                    "test_output_hashes_includes_validator_fields (build_id matches)",
+                    f"Expected {current_build_id}, got {build_id}"
                 )
 
         finally:
             self._cleanup_run(run_id)
 
     def test_validator_build_id_deterministic(self):
-        """Ensure the validator_build_id is deterministic."""
-        # This test requires a specific setup and cannot be automated without additional context.
-        pass
+        """get_validator_build_id() must return same value across calls."""
+        # Call twice
+        build_id_1 = get_validator_build_id()
+        build_id_2 = get_validator_build_id()
+
+        self._assert(
+            build_id_1 == build_id_2,
+            "test_validator_build_id_deterministic (equality)",
+            f"First: {build_id_1}, Second: {build_id_2}"
+        )
+
+        self._assert(
+            len(build_id_1) > 0,
+            "test_validator_build_id_deterministic (non-empty)",
+            f"Build ID is empty: '{build_id_1}'"
+        )
+
+        # Verify it starts with a known prefix
+        self._assert(
+            build_id_1.startswith("git:") or build_id_1.startswith("file:") or build_id_1 == "unknown",
+            "test_validator_build_id_deterministic (valid prefix)",
+            f"Build ID has invalid prefix: '{build_id_1}'"
+        )
 
     def test_strict_build_id_mismatch_rejected(self):
-        """Verify that verify_spectrum02_bundle rejects if there's a mismatch between semver and build id."""
-        run_id = "missing-build-id"
-        output_content = b"Test output for missing build id\n"
+        """verify_spectrum02_bundle(strict_build_id=True) must reject mismatched build_id."""
+        run_id = "strict-build-mismatch"
+        output_content = b"Test output for strict mode\n"
 
         try:
             run_dir = self._create_test_run(run_id, output_content)
@@ -192,37 +220,50 @@ class RunnerValidatorVersionIntegrity:
             result = self.server.skill_complete(run_id, "success", {})
             self._assert(
                 result["status"] == "success",
-                f"{run_id} skill complete failed: {result}"
+                "test_strict_build_id_mismatch_rejected (skill_complete)",
+                f"skill_complete failed: {result}"
             )
 
-            # Remove validator_build_id from OUTPUT_HASHES.json
+            # Modify validator_build_id to a different value
             hashes_path = run_dir / "OUTPUT_HASHES.json"
             with open(hashes_path) as f:
                 output_hashes = json.load(f)
 
-            del output_hashes["validator_build_id"]
+            original_build_id = output_hashes["validator_build_id"]
+            output_hashes["validator_build_id"] = "fake:tampered123"
 
             with open(hashes_path, "w") as f:
                 json.dump(output_hashes, f, indent=2)
 
-            # Verify - should reject
-            verify_result = self.server.verify_spectrum02_bundle(run_dir)
+            # Verify with strict_build_id=True - should reject
+            verify_result = self.server.verify_spectrum02_bundle(run_dir, strict_build_id=True)
+
             self._assert(
                 not verify_result["valid"],
-                f"{run_id} verify_spectrum02_bundle failed: {verify_result}"
+                "test_strict_build_id_mismatch_rejected (rejected)",
+                f"Expected invalid, got valid"
             )
 
             error_codes = [e["code"] for e in verify_result["errors"]]
             self._assert(
-                "VALIDATOR_BUILD_ID_MISSING" in error_codes,
-                f"{run_id} ERROR_CODE validation failed"
+                "VALIDATOR_BUILD_MISMATCH" in error_codes,
+                "test_strict_build_id_mismatch_rejected (error code)",
+                f"Expected VALIDATOR_BUILD_MISMATCH, got: {error_codes}"
+            )
+
+            # Verify without strict mode - should accept (build_id is non-empty)
+            verify_result_lenient = self.server.verify_spectrum02_bundle(run_dir, strict_build_id=False)
+            self._assert(
+                verify_result_lenient["valid"],
+                "test_strict_build_id_mismatch_rejected (lenient accepts)",
+                f"Expected valid in lenient mode, got errors: {verify_result_lenient['errors']}"
             )
 
         finally:
             self._cleanup_run(run_id)
 
     def test_missing_build_id_rejected(self):
-        """Verify that verify_spectrum02_bundle rejects if validator_build_id is missing."""
+        """verify_spectrum02_bundle must reject if validator_build_id is missing."""
         run_id = "missing-build-id"
         output_content = b"Test output for missing build id\n"
 
@@ -233,7 +274,8 @@ class RunnerValidatorVersionIntegrity:
             result = self.server.skill_complete(run_id, "success", {})
             self._assert(
                 result["status"] == "success",
-                f"{run_id} skill complete failed: {result}"
+                "test_missing_build_id_rejected (skill_complete)",
+                f"skill_complete failed: {result}"
             )
 
             # Remove validator_build_id from OUTPUT_HASHES.json
@@ -248,22 +290,25 @@ class RunnerValidatorVersionIntegrity:
 
             # Verify - should reject
             verify_result = self.server.verify_spectrum02_bundle(run_dir)
+
             self._assert(
                 not verify_result["valid"],
-                f"{run_id} verify_spectrum02_bundle failed: {verify_result}"
+                "test_missing_build_id_rejected (rejected)",
+                f"Expected invalid, got valid"
             )
 
             error_codes = [e["code"] for e in verify_result["errors"]]
             self._assert(
                 "VALIDATOR_BUILD_ID_MISSING" in error_codes,
-                f"{run_id} ERROR_CODE validation failed"
+                "test_missing_build_id_rejected (error code)",
+                f"Expected VALIDATOR_BUILD_ID_MISSING, got: {error_codes}"
             )
 
         finally:
             self._cleanup_run(run_id)
 
     def test_empty_build_id_rejected(self):
-        """Verify that verify_spectrum02_bundle rejects if validator_build_id is empty string."""
+        """verify_spectrum02_bundle must reject if validator_build_id is empty string."""
         run_id = "empty-build-id"
         output_content = b"Test output for empty build id\n"
 
@@ -274,7 +319,8 @@ class RunnerValidatorVersionIntegrity:
             result = self.server.skill_complete(run_id, "success", {})
             self._assert(
                 result["status"] == "success",
-                f"{run_id} skill complete failed: {result}"
+                "test_empty_build_id_rejected (skill_complete)",
+                f"skill_complete failed: {result}"
             )
 
             # Set validator_build_id to empty string
@@ -289,19 +335,23 @@ class RunnerValidatorVersionIntegrity:
 
             # Verify - should reject
             verify_result = self.server.verify_spectrum02_bundle(run_dir)
+
             self._assert(
                 not verify_result["valid"],
-                f"{run_id} verify_spectrum02_bundle failed: {verify_result}"
+                "test_empty_build_id_rejected (rejected)",
+                f"Expected invalid, got valid"
             )
 
             error_codes = [e["code"] for e in verify_result["errors"]]
             self._assert(
                 "VALIDATOR_BUILD_ID_MISSING" in error_codes,
-                f"{run_id} ERROR_CODE validation failed"
+                "test_empty_build_id_rejected (error code)",
+                f"Expected VALIDATOR_BUILD_ID_MISSING, got: {error_codes}"
             )
 
         finally:
             self._cleanup_run(run_id)
+
 
 def test_validator_version_integrity():
     """Pytest entry point."""
