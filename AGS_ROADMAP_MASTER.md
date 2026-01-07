@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.0
+version: 3.7.2
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -47,8 +47,8 @@ notes:
 **Status:** DONE (2026-01-07)
 
 **Deliverables:**
-- [x] `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` — Canonical protocol specification (11KB)
-- [x] `LAW/CANON/CATALYTIC_COMPUTING.md` — Updated reference path, fixed all path prefixes
+- [x] `LAW/CANON/CATALYTIC/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` — Canonical protocol specification (11KB)
+- [x] `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md` — Updated reference path, fixed all path prefixes
 - [x] `LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md` — Design rationale
 
 **Documentation Covers:**
@@ -65,33 +65,33 @@ notes:
   - [x] New agents can understand catalytic execution without reading implementation code
 
 ## 1.7 Catalytic Hardening (Mathematical Foundations)
-**Status:** TODO
+**Status:** IN PROGRESS
 **Priority:** Medium (improves defensibility, not blocking)
 **Purpose:** Promote SPECTRUM cryptographic specs to canon, formalize invariants, add Merkle membership proofs.
 
-### 1.7.1 SPECTRUM Canon Promotion
-**Purpose:** The SPECTRUM specs (02-06) define cryptographic binding, Ed25519 signing, chain verification, and restore runner semantics. Currently archived in `MEMORY/ARCHIVE/catalytic-department-merged/`. These are the cryptographic spine of catalytic computing.
+### 1.7.1 SPECTRUM Canon Promotion ✅ COMPLETE
+**Status:** DONE (2026-01-07)
 
-- [ ] 1.7.1.1 Promote SPECTRUM-02 (Resume Bundle) to `LAW/CANON/SPECTRUM-02_RESUME_BUNDLE.md`
-  - Bundle artifact set, forbidden artifacts, resume rule, agent obligations
-- [ ] 1.7.1.2 Promote SPECTRUM-03 (Chain Verification) to `LAW/CANON/SPECTRUM-03_CHAIN_VERIFICATION.md`
-  - Temporal integrity, chain memory model, reference validation
-- [ ] 1.7.1.3 Promote SPECTRUM-04 (Identity & Signing) to `LAW/CANON/SPECTRUM-04_IDENTITY_SIGNING.md`
-  - Ed25519 identity, validator_id derivation, canonical JSON, bundle/chain root computation
-- [ ] 1.7.1.4 Promote SPECTRUM-05 (Verification Law) to `LAW/CANON/SPECTRUM-05_VERIFICATION_LAW.md`
-  - 10-phase verification procedure, 25 error codes, threat model
-- [ ] 1.7.1.5 Promote SPECTRUM-06 (Restore Runner) to `LAW/CANON/SPECTRUM-06_RESTORE_RUNNER.md`
-  - Restore eligibility, path safety, atomicity, error codes
-- [ ] 1.7.1.6 Add ADR-039 documenting SPECTRUM promotion rationale
+**Deliverables:**
+- [x] `LAW/CANON/CATALYTIC/SPECTRUM-02_RESUME_BUNDLE.md` — Adversarial resume without execution history
+- [x] `LAW/CANON/CATALYTIC/SPECTRUM-03_CHAIN_VERIFICATION.md` — Chained temporal integrity
+- [x] `LAW/CANON/CATALYTIC/SPECTRUM-04_IDENTITY_SIGNING.md` — Validator identity and Ed25519 signing (v1.1.0)
+- [x] `LAW/CANON/CATALYTIC/SPECTRUM-05_VERIFICATION_LAW.md` — 10-phase verification procedure, 25 error codes
+- [x] `LAW/CANON/CATALYTIC/SPECTRUM-06_RESTORE_RUNNER.md` — Restore semantics with atomicity (v1.0.2)
+- [x] `LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md` — Promotion rationale
+- [x] Updated CMP-01 and CATALYTIC_COMPUTING.md to reference SPECTRUM specs
+
+**Source:** Recovered from LLM Packer archive `MEMORY/LLM_PACKER/_packs/_archive/catalytic-dpt-pack-2025-12-27_13-21-43/repo/SPECTRUM/`
+
 - **Exit Criteria**
-  - [ ] All 5 SPECTRUM specs in LAW/CANON/
-  - [ ] CMP-01 references SPECTRUM specs for cryptographic details
-  - [ ] CATALYTIC_COMPUTING.md references SPECTRUM for signing/identity
+  - [x] All 5 SPECTRUM specs in LAW/CANON/
+  - [x] CMP-01 references SPECTRUM specs for cryptographic details
+  - [x] CATALYTIC_COMPUTING.md references SPECTRUM for signing/identity
 
 ### 1.7.2 Formal Invariants Documentation
 **Purpose:** Make catalytic correctness academically defensible by formalizing the mathematical guarantees.
 
-- [ ] 1.7.2.1 Add "Formal Invariants" section to `LAW/CANON/CATALYTIC_COMPUTING.md`:
+- [ ] 1.7.2.1 Add "Formal Invariants" section to `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md`:
   ```
   INV-CATALYTIC-01: ∀ run R, domain D: pre_snapshot(D) = post_snapshot(D) ↔ proof.verified = true
   INV-CATALYTIC-02: Proof verification is O(log n) where n = |files in D| (Merkle height)

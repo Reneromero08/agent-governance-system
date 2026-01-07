@@ -301,10 +301,18 @@ CMP-01 does NOT protect against:
 
 ## References
 
-- `LAW/CANON/CATALYTIC_COMPUTING.md` — Catalytic computing theory
+### Theory and Protocol
+- [CATALYTIC_COMPUTING.md](CATALYTIC_COMPUTING.md) — Catalytic computing theory
 - `LAW/CANON/INTEGRITY.md` — Integrity invariants
 - `LAW/CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md` — Formal definitions
 - `NAVIGATION/maps/CATALYTIC_DOMAINS.md` — Domain inventory
+
+### SPECTRUM Cryptographic Specifications
+- [SPECTRUM-02_RESUME_BUNDLE.md](SPECTRUM-02_RESUME_BUNDLE.md) — Adversarial resume without execution history
+- [SPECTRUM-03_CHAIN_VERIFICATION.md](SPECTRUM-03_CHAIN_VERIFICATION.md) — Chained temporal integrity
+- [SPECTRUM-04_IDENTITY_SIGNING.md](SPECTRUM-04_IDENTITY_SIGNING.md) — Validator identity and Ed25519 signing
+- [SPECTRUM-05_VERIFICATION_LAW.md](SPECTRUM-05_VERIFICATION_LAW.md) — 10-phase verification procedure
+- [SPECTRUM-06_RESTORE_RUNNER.md](SPECTRUM-06_RESTORE_RUNNER.md) — Restore semantics with atomicity
 
 ---
 

@@ -4,6 +4,39 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.2] - 2026-01-07
+
+### Changed
+- **Catalytic Canon Organization** — Created `LAW/CANON/CATALYTIC/` directory
+  - **Moved Files:**
+    - `CATALYTIC_COMPUTING.md` → `LAW/CANON/CATALYTIC/`
+    - `CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` → `LAW/CANON/CATALYTIC/`
+    - All SPECTRUM specs (02-06) → `LAW/CANON/CATALYTIC/`
+  - **Updated References:** All internal cross-references now use relative markdown links
+  - **Path Updates:** Updated AGS_ROADMAP_MASTER.md, ADR-038, and all SPECTRUM references
+  - **Rationale:** Catalytic computing has grown from 2 files to 7 canon documents; dedicated folder improves discoverability
+
+### Changed
+- **Roadmap Version**: 3.7.1 → 3.7.2
+
+## [3.7.1] - 2026-01-07
+
+### Added
+- **Phase 1.7.1 SPECTRUM Canon Promotion COMPLETE** — Cryptographic spine now in canon.
+  - **Source:** Recovered from LLM Packer archive `catalytic-dpt-pack-2025-12-27_13-21-43`
+  - **Canon Files Created:**
+    - `LAW/CANON/CATALYTIC/SPECTRUM-02_RESUME_BUNDLE.md` — Adversarial resume (v1.0.0)
+    - `LAW/CANON/CATALYTIC/SPECTRUM-03_CHAIN_VERIFICATION.md` — Temporal integrity (v1.0.0)
+    - `LAW/CANON/CATALYTIC/SPECTRUM-04_IDENTITY_SIGNING.md` — Ed25519 identity (v1.1.0)
+    - `LAW/CANON/CATALYTIC/SPECTRUM-05_VERIFICATION_LAW.md` — 10-phase verification (v1.0.0)
+    - `LAW/CANON/CATALYTIC/SPECTRUM-06_RESTORE_RUNNER.md` — Restore semantics (v1.0.2)
+  - **ADR:** `LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md`
+  - **Updated:** CMP-01 and CATALYTIC_COMPUTING.md now reference SPECTRUM specs
+  - **LLM Packer Vindicated:** Archive preserved specs through CAT-DPT merge
+
+### Changed
+- **Roadmap Version**: 3.7.0 → 3.7.1
+
 ## [3.7.0] - 2026-01-07
 
 ### Added
