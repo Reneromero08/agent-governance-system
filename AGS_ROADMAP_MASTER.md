@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.2
+version: 3.7.5
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -88,27 +88,29 @@ notes:
   - [x] CMP-01 references SPECTRUM specs for cryptographic details
   - [x] CATALYTIC_COMPUTING.md references SPECTRUM for signing/identity
 
-### 1.7.2 Formal Invariants Documentation
+### 1.7.2 Formal Invariants Documentation ✅ COMPLETE
+**Status:** DONE (2026-01-07)
 **Purpose:** Make catalytic correctness academically defensible by formalizing the mathematical guarantees.
 
-- [ ] 1.7.2.1 Add "Formal Invariants" section to `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md`:
-  ```
-  INV-CATALYTIC-01: ∀ run R, domain D: pre_snapshot(D) = post_snapshot(D) ↔ proof.verified = true
-  INV-CATALYTIC-02: Proof verification is O(log n) where n = |files in D| (Merkle height)
-  INV-CATALYTIC-03: Restoration is reversible: ∀ state S. restore(snapshot(S)) = S
-  INV-CATALYTIC-04: Clean space bounded: |context_tokens| ≤ O(log |corpus|)
-  ```
-- [ ] 1.7.2.2 Add complexity analysis section linking to Buhrman et al. paper
-  - Map AGS clean space → formal clean space
-  - Map AGS catalytic store → formal catalytic space
-  - Document how restoration constraint is enforced
-- [ ] 1.7.2.3 Add "Threat Model" section to CMP-01 (expand existing minimal section)
-  - What CMP-01 defends against (adversarial agents, drift, pollution)
-  - What CMP-01 does NOT defend against (OS-level bypass, network side effects)
-  - Reference SPECTRUM-05 threat model for cryptographic threats
-- **Exit Criteria**
-  - [ ] Formal invariants are machine-verifiable (tests assert them)
-  - [ ] An academic reader can trace AGS implementation to Buhrman et al. theory
+**Deliverables:**
+- [x] 1.7.2.1 Added "Formal Invariants" section to `LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md`:
+  - INV-CATALYTIC-01 through INV-CATALYTIC-06 (Restoration, Complexity, Reversibility, Clean Space Bound, Fail-Closed, Determinism)
+  - Formal notation with universal quantifiers and logical equivalences
+- [x] 1.7.2.2 Added complexity analysis section linking to Buhrman et al. paper
+  - Formal mapping table: Buhrman concepts → AGS implementation
+  - Space complexity: O(log n) clean, O(n) catalytic, O(1) proof overhead
+  - Time complexity: O(n) snapshot/restore, O(n) verify
+  - Key insight documented: borrowed memory enables O(n) work with O(log n) context
+- [x] 1.7.2.3 Expanded "Threat Model" section in CMP-01
+  - Adversaries defended table (9 threats with defenses and enforcement layers)
+  - What CMP-01 defends (5 categories)
+  - What CMP-01 does NOT defend (5 out-of-scope items with mitigations)
+  - Cryptographic threat coverage referencing SPECTRUM-05
+- [x] Test coverage table linking invariants to specific test files
+
+**Exit Criteria:**
+- [x] Formal invariants are machine-verifiable (27 tests assert them)
+- [x] An academic reader can trace AGS implementation to Buhrman et al. theory
 
 ### 1.7.3 Merkle Membership Proofs
 **Purpose:** Enable partial verification without full manifest disclosure.
