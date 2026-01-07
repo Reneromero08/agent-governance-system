@@ -98,7 +98,6 @@ modified: "YYYY-MM-DD HH:MM"
 status: "Draft|Ready for Review|Archived|Complete"
 summary: "One-line summary of document purpose and content"
 tags: [tag1, tag2, tag3]
-hashtags: ["#category", "#topic", "#status"]
 ---
 <!-- CONTENT_HASH: <sha256_of_content_after_yaml> -->
 ```
@@ -113,8 +112,7 @@ hashtags: ["#category", "#topic", "#status"]
 **Field Specifications:**
 - **uuid**: Agent session UUID (from MCP session or agent initialization). This identifies **which agent session** created the document, not the document itself. For legacy documents where the agent session is unknown, use the sentinel value `"00000000-0000-0000-0000-000000000000"`.
 - **bucket**: Hierarchical category path (e.g., "implementation/phase1", "research/architecture")
-- **tags**: Machine-readable tags (lowercase, underscores)
-- **hashtags**: Human-readable hashtags with # prefix (for cross-referencing and discovery)
+- **tags**: Descriptive tags for categorization and discovery (lowercase, underscores)
 
 ### 3. Cortex References
 - When applicable, use @Symbol references instead of full content
@@ -140,7 +138,6 @@ modified: "2025-12-28 14:30"
 status: "Complete"
 summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
 tags: [cassette, network, implementation]
-hashtags: ["#cassette", "#phase1", "#complete"]
 ---
 <!-- CONTENT_HASH: a7b3c5d9e8f2a1b4c8e5d6a7b3e9f8a4c5d -->
 
@@ -167,7 +164,6 @@ modified: "2025-12-28 09:15"
 status: "Draft"
 summary: "Research findings on distributed cassette architecture and semantic indexing strategies"
 tags: [cassette, architecture, research]
-hashtags: ["#research", "#cassette", "#architecture"]
 ---
 <!-- CONTENT_HASH: 8f2d3b4e1a9c5d6e7f8a2b1c9d4e5f6a8b7c3d2e -->
 
@@ -298,7 +294,6 @@ report_path = f"INBOX/reports/{filename}"
 
 # 4. Define metadata
 bucket = "implementation/cassette_network"
-hashtags = ["#cassette", "#phase1", "#complete"]
 tags = ["cassette", "network", "implementation"]
 
 # 5. Build YAML frontmatter
@@ -314,7 +309,6 @@ modified: "{yaml_timestamp}"
 status: "Complete"
 summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
 tags: [{', '.join(tags)}]
-hashtags: [{', '.join(f'"{h}"' for h in hashtags)}]
 ---"""
 
 # 6. Build content body (use @Symbol references for canon content)

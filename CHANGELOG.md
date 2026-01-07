@@ -4,6 +4,45 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.6] - 2026-01-06
+
+### Added
+- **V4 Roadmap Reports Canonicalization** — Converted all 9 V4 roadmap reports to canonical document format with proper metadata and timestamps.
+  - **Reports Canonicalized**: All reports in `INBOX/reports/V4/` now follow canonical format
+    - `01-06-2026-21-13_1_5_CATALYTIC_IO_GUARDRAILS.md`
+    - `01-06-2026-21-13_2_4_CRYPTO_SAFE.md`
+    - `01-06-2026-21-13_2_5_GC_AUDIT_UNIFICATION_LOCKING.md`
+    - `01-06-2026-21-13_3_5_BITNET_BACKEND.md`
+    - `01-06-2026-21-13_4_2_4_3_CATALYTIC_RESTORE_PURITY.md`
+    - `01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+    - `01-06-2026-21-13_6_0_CANONICAL_CASSETTE_SUBSTRATE.md`
+    - `01-06-2026-21-13_6_4_PROOFS_COMPRESSION_CATALYTIC.md`
+    - `01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md`
+  - **Canonical Format Applied**:
+    - Filename format: `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md` (timestamp-prefixed)
+    - YAML frontmatter with all required fields (uuid, title, section, bucket, author, priority, created, modified, status, summary, tags)
+    - Content hash (SHA256) immediately after YAML frontmatter
+    - Bucket organization by V4 section number (e.g., `reports/v4/section_1_5`)
+    - Tags extracted from content keywords (catalytic, crypto, vector, cassette, audit, etc.)
+  - **Metadata Timestamps**: All reports updated with accurate creation and modification timestamps (`2026-01-06 21:13`)
+  - **Tools Created**:
+    - `CAPABILITY/TOOLS/make_v4_canonical.py` - Script for V4 report canonicalization
+    - `CAPABILITY/TOOLS/update_v4_timestamps.py` - Script for timestamp updates
+
+### Changed
+- **Document Policy Simplification** — Removed redundant `hashtags` field from canonical document format.
+  - **Rationale**: `hashtags` field duplicated functionality of `tags` field with no meaningful semantic difference
+  - **Policy Updated**: `LAW/CANON/DOCUMENT_POLICY.md`
+    - Removed `hashtags` from YAML example template
+    - Removed `hashtags` from field specifications
+    - Updated `tags` description to "Descriptive tags for categorization and discovery"
+    - Removed `hashtags` from all example documents and Python code examples
+  - **Enforcement Updated**: `CAPABILITY/SKILLS/governance/canonical-doc-enforcer/run.py`
+    - Removed `hashtags` from `REQUIRED_FIELDS` list
+    - Removed `hashtags` from metadata generation function
+  - **Impact**: Simplified canonical format with single `tags` field serving both machine-readable and human-readable purposes
+  - **Migration**: All V4 reports updated to remove `hashtags` field and clean hashtag-style tags from `tags` list
+
 ## [3.4.5] - 2026-01-06
 
 ### Fixed
