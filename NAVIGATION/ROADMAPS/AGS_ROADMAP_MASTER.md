@@ -243,13 +243,57 @@ Goal: prevent "download = extraction" by sealing protected artifacts for public 
       - Test C: No raw writes audit ✅ **PASSING (0 violations)**
     - **Final Status**: ✅ **0 VIOLATIONS** (down from 181 initial violations)
     - **Verification**: Mechanical scanner confirms zero raw write operations in target directories
-  
-      - **Status Summary**:
-      - ✅ All critical runtime paths enforced: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS
-      - ✅ CLI_TOOLS enforcement complete: 6/6 files
-      - ⏸️ Remaining: CAS (3), LINTERS (4)
-      - 📊 Coverage: 40/47 critical production surfaces = 85%
-      - 🎯 To reach 91%: Add CAS enforcement (3 files) + LINTERS enforcement (4 files, with exemption policy)
+
+  - [x] 2.4.1C.4 CLI Tools Enforcement ✅ **COMPLETE**
+    - Scope: 6 CLI tools (`ags.py`, `cortex.py`, `codebook_build.py`, `emergency.py`, `ci_local_gate.py`, `intent.py`)
+    - **Final Status**: ✅ **0 RAW WRITES** (7 violations eliminated)
+    - **Coverage Update**: 40/47 = 85%
+
+  - [ ] 2.4.1C.5 CAS Enforcement (CRYPTO_SAFE Required)
+    - Scope:
+      - `CAPABILITY/PRIMITIVES/cas_store.py`
+      - `CAPABILITY/ARTIFACTS/store.py`
+      - `CAPABILITY/CAS/cas.py`
+    - Policy: `.ags-cas/` is durable root (immutable blobs)
+    - CRYPTO_SAFE dependency: Full audit trail required for protected artifact scanning
+    - Exit Criteria:
+      - [ ] All CAS writes route through GuardedWriter
+      - [ ] Zero raw write operations
+      - [ ] Audit receipts show provenance (hash, timestamp, caller)
+      - [ ] CAS tests passing
+    - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_5_CAS_ENFORCEMENT.md`
+
+  - [ ] 2.4.1C.6 LINTERS Enforcement (Dry-run Default + --apply Flag)
+    - Scope:
+      - `CAPABILITY/TOOLS/linters/update_hashes.py`
+      - `CAPABILITY/TOOLS/linters/update_canon_hashes.py`
+      - `CAPABILITY/TOOLS/linters/fix_canon_hashes.py`
+      - `CAPABILITY/TOOLS/linters/update_manifest.py`
+    - Policy: LAW/CANON exemption for linters only
+    - Pattern: Dry-run mode by default, `--apply` flag required for writes
+    - CRYPTO_SAFE dependency: Audit trail detects accidental protected artifact references
+    - Exit Criteria:
+      - [ ] All linters use GuardedWriter with LAW/CANON durable root
+      - [ ] Dry-run mode is default behavior
+      - [ ] `--apply` flag opens commit gate
+      - [ ] Zero raw write operations
+      - [ ] Audit receipts show all CANON mutations
+    - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_6_LINTERS_ENFORCEMENT.md`
+
+  - Exit Criteria (Phase 2.4.1C):
+    - [ ] Coverage = 100% of critical production surfaces (47/47)
+    - [x] All critical runtime paths enforced (40/47 = 85%)
+    - [ ] CAS enforcement pending (3 files, CRYPTO_SAFE audit trail)
+    - [ ] LINTERS enforcement pending (4 files, dry-run + --apply pattern)
+    - [x] All sub-phase receipts collected
+    - [x] No policy changes or write domain widening
+    - [x] Coverage math explicit and auditable
+
+  **Status Summary**:
+  - ✅ Complete: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS, CLI_TOOLS
+  - 🔄 In Progress: CAS (3 files), LINTERS (4 files)
+  - 📊 Coverage: 40/47 = 85% → targeting 47/47 = 100%
+  - 🎯 CRYPTO_SAFE compliance: Full audit trail for protected artifact verification
 
 
 ### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0)
