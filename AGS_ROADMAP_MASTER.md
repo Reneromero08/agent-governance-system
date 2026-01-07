@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.13
+version: 3.7.14
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -209,38 +209,118 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 
 # Phase 5: Vector/Symbol Integration (addressability)
+
+**Goal:** Make governance artifacts addressable by meaning, not just by path or hash.
+**Detailed Roadmap:** `INBOX/roadmaps/01-07-2026_PHASE_5_VECTOR_SYMBOL_INTEGRATION.md`
+**Research Findings:** `INBOX/reports/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md`
+
+## 5.0 MemoryRecord Contract (Foundation)
+**Purpose:** Define the canonical data structure for all vector-indexed content.
+**Research:** `INBOX/reports/V4/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+
+**Contract Fields:**
+- `id`: Content hash (SHA-256)
+- `text`: Canonical text (source of truth)
+- `embeddings`: Model name → vector array (derived, rebuildable)
+- `payload`: Metadata (tags, timestamps, roles, doc_ids)
+- `scores`: ELO, recency, trust, decay (connects to Phase 7)
+- `lineage`: Derivation chain, summarization history
+- `receipts`: Provenance hashes, tool versions
+
+**Contract Rules:**
+- Text is canonical (source of truth)
+- Vectors are derived (rebuildable from text)
+- All exports are receipted and hashed
+
+- [ ] 5.0.1 Define `memory_record.schema.json` with `additionalProperties: false`
+- [ ] 5.0.2 Implement `CAPABILITY/PRIMITIVES/memory_record.py` (create, validate, hash)
+- [ ] 5.0.3 Tests: schema validation, deterministic hashing
+- **Exit Criteria**
+  - [ ] MemoryRecord schema finalized and frozen (Phase 6.0 depends on this)
+  - [ ] Create/validate/hash functions working
+
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
-- [ ] 5.1.1 Embed all canon files: `LAW/CANON/*` → vectors (Z.5.1)
-- [ ] 5.1.2 Embed all ADRs: decisions/* → vectors (Z.5.2)
-- [ ] 5.1.3 Store model weights in vector-indexed CAS (Z.5.3)
-- [ ] 5.1.4 Semantic skill discovery: find skills by description similarity (Z.5.4)
-- [ ] 5.1.5 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
+
+### 5.1.1 Vector Indexing Infrastructure
+- [ ] 5.1.1.1 Select embedding model (ADR required: determinism constraint)
+- [ ] 5.1.1.2 Implement `CAPABILITY/PRIMITIVES/vector_index.py`
+- [ ] 5.1.1.3 Create vector index storage (SQLite + vectors or FAISS)
+
+### 5.1.2 Canon & ADR Embedding
+- [ ] 5.1.2.1 Embed all canon files: `LAW/CANON/*` → vectors (Z.5.1)
+- [ ] 5.1.2.2 Embed all ADRs: `LAW/CONTEXT/decisions/*` → vectors (Z.5.2)
+- [ ] 5.1.2.3 Verify deterministic rebuild (same files → same index)
+
+### 5.1.3 Semantic Discovery
+- [ ] 5.1.3.1 Store model weights in vector-indexed CAS (Z.5.3)
+- [ ] 5.1.3.2 Semantic skill discovery: `CAPABILITY/SKILLS/*/SKILL.md` (Z.5.4)
+- [ ] 5.1.3.3 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
+
+### 5.1.4 VectorPack Export Format
+**Research:** `INBOX/reports/V4/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+- [ ] 5.1.4.1 Implement VectorPack directory structure (manifest.yaml, tables/, blobs/, receipts/)
+- [ ] 5.1.4.2 Deterministic export/import with receipts
+- [ ] 5.1.4.3 Micro-pack export (JSONL, int8 quantized, task-scoped top-K)
+
 - **Exit Criteria**
   - [ ] Vector index includes canon + ADRs with deterministic rebuild
   - [ ] Skill discovery returns stable results for fixed corpus
+  - [ ] VectorPack export is portable and receipted
 
 ## 5.2 Semiotic Compression Layer (SCL) (Lane I)
 **Purpose:** Reduce LLM token usage via semantic macros that expand deterministically.
 **Research:** `INBOX/2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
+**Original Research:** `INBOX/2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md`
 
 **Concept:** Big models emit short symbolic programs; deterministic tools expand into full JobSpecs/tool-calls.
 - **Hashes:** Identity pointers to bytes (already have via CAS)
 - **Symbols:** Semantic macros for meaning (reduces governance boilerplate)
 
-- [ ] 5.2.1 Define MVP macro set (30-80 macros covering 80% of governance repetition)
-  - Immutability constraints, allowed domains/roots, schema validate, ledger append
-  - CAS put/get, root scan/diff, expand-by-hash read requests
-- [ ] 5.2.2 Implement `SCL/CODEBOOK.json` symbol dictionary (symbol → meaning → expansion)
-- [ ] 5.2.3 Implement `SCL/decode.py` symbolic IR → expanded JSON + audit
-- [ ] 5.2.4 Implement `SCL/validate.py` symbolic/schema validation
-- [ ] 5.2.5 Implement `scl` CLI: decode, validate, run
-- [ ] 5.2.6 Tests: determinism (same program → same hash), schema validation, token benchmark
+**Design Goals:**
+1. 90%+ token reduction for governance/procedure repetition
+2. Deterministic expansion (same symbols → same output)
+3. Verifiable (schema-valid outputs; hashes for artifacts)
+4. Human-auditable (expand-to-text for review)
+5. Composable (small primitives combine into complex intents)
+
+### 5.2.1 Macro Definition
+- [ ] 5.2.1.1 Define MVP macro set (30-80 macros covering 80% of governance repetition)
+  - Constraint macros: immutability, allowed domains, forbidden writes
+  - Schema macros: validate JobSpec, validate receipt, validate bundle
+  - CAS macros: put, get, verify, list
+  - Scan macros: root scan, diff, purity check
+  - Ledger macros: append, verify chain, query
+  - Expand macros: hash-to-content, symbol-to-definition
+- [ ] 5.2.1.2 Create `LAW/CANON/SEMANTIC/SCL_MACRO_CATALOG.md`
+
+### 5.2.2 Codebook Implementation
+- [ ] 5.2.2.1 Define `scl_codebook.schema.json`
+- [ ] 5.2.2.2 Implement `SCL/CODEBOOK.json` symbol dictionary (symbol → meaning → expansion)
+- [ ] 5.2.2.3 Implement `CAPABILITY/PRIMITIVES/scl_codebook.py` (loader, validator)
+
+### 5.2.3 Decoder & Validator
+- [ ] 5.2.3.1 Implement `CAPABILITY/PRIMITIVES/scl_decoder.py` (symbolic IR → expanded JSON + audit)
+- [ ] 5.2.3.2 Implement `CAPABILITY/PRIMITIVES/scl_validator.py` (symbolic/schema validation)
+- [ ] 5.2.3.3 Symbolic IR syntax (ASCII-first for tokenizer safety):
+  ```
+  @LAW>=0.1.0 & !WRITE(authored_md)
+  JOB{scan:DOMAIN_WORKTREE, validate:JOBSPEC}
+  CALL.cas.put(file=PATH)
+  ```
+
+### 5.2.4 CLI & Tests
+- [ ] 5.2.4.1 Implement `scl` CLI: decode, validate, run, audit
+- [ ] 5.2.4.2 Tests: determinism (same program → same hash), schema validation
+- [ ] 5.2.4.3 Token benchmark: measure reduction vs baseline (target 90%+)
+
 - **Exit Criteria**
+  - [ ] CODEBOOK.json contains 30+ governance macros
   - [ ] `scl decode <program>` → emits JobSpec JSON
-  - [ ] Meaningful token reduction demonstrated vs baseline
+  - [ ] `scl validate` passes valid programs, rejects invalid
+  - [ ] Meaningful token reduction demonstrated vs baseline (90%+ for governance)
   - [ ] Reproducible expansions (same symbols → same output hash)
 
-# Phase 6: Cassette Network (Semantic Manifold) (P0 substrate)
+# Phase 6: Cassette Network (Semantic Manifold) (P0 substrate) V3.8
 
 ## 6.0 Canonical Cassette Substrate (cartridge-first)
 - [ ] 6.0.1 Bind cassette storage to the Phase 5.2 `MemoryRecord` contract
@@ -357,7 +437,7 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 7.7.2 Export to Prometheus/Grafana (E.6.2)
 - [ ] 7.7.3 Add alerts (entity drops, pruning limits) (E.6.3)
 
-# Phase 8: Resident AI (depends on Phase 6)
+# Phase 8: Resident AI (depends on Phase 6) V3.9
 ## 8.1 Resident Identity (R.1)
 - [ ] 8.1.1 Add `agents` table to `resident.db` (R.1.1)
 - [ ] 8.1.2 Implement `session_resume(agent_id)` (R.1.2)
@@ -418,7 +498,7 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
     - missing receipt fields → FAIL
     - non-deterministic ordering → FAIL
 
-# Phase 10: System Evolution (Ω) (post-substrate)
+# Phase 10: System Evolution (Ω) (post-substrate) V4
 ## 10.1 Performance Foundation (Ω.1)
 - [ ] 10.1.1 Incremental indexing (Ω.1.1)
 - [ ] 10.1.2 Query result caching (Ω.1.2)
