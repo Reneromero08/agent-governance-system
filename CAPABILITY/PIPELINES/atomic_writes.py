@@ -108,3 +108,19 @@ class AtomicGuardedWrites:
             path = path.relative_to(self.project_root)
 
         self.writer.write_durable(path, canonical_json_bytes(obj))
+
+    def mkdir_durable(self, path: Path, parents: bool = True, exist_ok: bool = True) -> None:
+        """
+        Create directory in durable domain (requires commit gate to be open).
+
+        Args:
+            path: Directory path (relative or absolute)
+            parents: Create parent directories if needed
+            exist_ok: Don't raise if directory exists
+        """
+        path = Path(path)
+        if path.is_absolute():
+            path = path.relative_to(self.project_root)
+
+        self.writer.mkdir_durable(path, parents=parents, exist_ok=exist_ok)
+

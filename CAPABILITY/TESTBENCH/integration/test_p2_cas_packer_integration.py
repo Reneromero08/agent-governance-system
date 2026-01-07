@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 from pathlib import Path
 import sys
+import uuid
 
 import pytest
 
@@ -56,6 +57,7 @@ def test_p2_determinism_manifest_and_refs(tmp_path: Path, monkeypatch: pytest.Mo
 
     out1 = packer_core.PACKS_ROOT / "_system" / "fixtures" / "pytest-p2-1"
     out2 = packer_core.PACKS_ROOT / "_system" / "fixtures" / "pytest-p2-2"
+    det_stamp = f"pytest-p2-{uuid.uuid4().hex[:6]}"
 
     pack1 = packer_core.make_pack(
         scope_key="ags",
@@ -64,7 +66,7 @@ def test_p2_determinism_manifest_and_refs(tmp_path: Path, monkeypatch: pytest.Mo
         split_lite=True,
         out_dir=out1,
         combined=False,
-        stamp="pytest-p2",
+        stamp=det_stamp,
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -80,7 +82,7 @@ def test_p2_determinism_manifest_and_refs(tmp_path: Path, monkeypatch: pytest.Mo
         split_lite=True,
         out_dir=out2,
         combined=False,
-        stamp="pytest-p2",
+        stamp=det_stamp,
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -121,7 +123,7 @@ def test_p2_lite_manifest_only(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) 
         split_lite=True,
         out_dir=out_dir,
         combined=False,
-        stamp="pytest-p2",
+        stamp=f"pytest-p2-{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -164,7 +166,7 @@ def test_p2_manifest_ordering(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -
         split_lite=True,
         out_dir=out_dir,
         combined=False,
-        stamp="pytest-p2",
+        stamp=f"pytest-p2-{uuid.uuid4().hex[:6]}",
         zip_enabled=False,
         max_total_bytes=5 * 1024 * 1024,
         max_entry_bytes=2 * 1024 * 1024,
@@ -205,7 +207,7 @@ def test_p2_invalid_ref_fails_closed(monkeypatch: pytest.MonkeyPatch, tmp_path: 
             split_lite=True,
             out_dir=out_dir,
             combined=False,
-            stamp="pytest-p2",
+            stamp=f"pytest-p2-{uuid.uuid4().hex[:6]}",
             zip_enabled=False,
             max_total_bytes=5 * 1024 * 1024,
             max_entry_bytes=2 * 1024 * 1024,
@@ -251,7 +253,7 @@ def test_p2_root_completeness_gate(monkeypatch: pytest.MonkeyPatch, tmp_path: Pa
             split_lite=True,
             out_dir=out_dir,
             combined=False,
-            stamp="pytest-p2",
+            stamp=f"pytest-p2-{uuid.uuid4().hex[:6]}",
             zip_enabled=False,
             max_total_bytes=5 * 1024 * 1024,
             max_entry_bytes=2 * 1024 * 1024,

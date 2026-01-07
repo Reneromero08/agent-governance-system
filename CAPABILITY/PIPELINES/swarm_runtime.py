@@ -25,7 +25,8 @@ class SwarmRuntime:
         self.rt = PipelineRuntime(project_root=self.project_root)
         self.receipts_store = self.runs_root / "_pipelines" / "_swarms" / "_receipts"
         self.writes = AtomicGuardedWrites(project_root=self.project_root)
-        self.writes.mkdir_tmp(self.receipts_store)
+        self.writes.open_commit_gate()
+        self.writes.mkdir_durable(self.receipts_store)
 
     def _swarm_dir(self, swarm_id: str) -> Path:
         return self.runs_root / "_pipelines" / "_swarms" / _slug(swarm_id)
@@ -100,7 +101,7 @@ class SwarmRuntime:
             "swarm_chain_links": chain.get("links", []) 
         }
         path = self.receipts_store / f"{swarm_hash}.json"
-        self.writes.atomic_write_canonical_json(path, receipt)
+        self.writes.write_durable_canonical_json(path, receipt)
 
     def _try_execution_elision(self, swarm_hash: str, swarm_id: str) -> Optional[Dict[str, Any]]:
         """
@@ -154,7 +155,7 @@ class SwarmRuntime:
         """
         spec_path = Path(spec_path)
         swarm_dir = self._swarm_dir(swarm_id)
-        self.writes.mkdir_tmp(swarm_dir)
+        self.writes.mkdir_durable(swarm_dir)
 
         spec = json.loads(spec_path.read_text(encoding="utf-8"))
         if spec.get("swarm_version") != "1.0.0":
@@ -179,11 +180,11 @@ class SwarmRuntime:
                 "head_hash": cached["swarm_chain_head"]
             }
             
-            self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_STATE.json", dag_state)
-            self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_CHAIN.json", swarm_chain)
+            self.writes.write_durable_canonical_json(swarm_dir / "SWARM_STATE.json", dag_state)
+            self.writes.write_durable_canonical_json(swarm_dir / "SWARM_CHAIN.json", swarm_chain)
             
             # Emit a "local" receipt for this run pointing to the hash
-            self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_RECEIPT.json", {
+            self.writes.write_durable_canonical_json(swarm_dir / "SWARM_RECEIPT.json", {
                 "swarm_id": swarm_id,
                 "elided": True,
                 "swarm_hash": swarm_hash,
@@ -230,7 +231,8 @@ class SwarmRuntime:
         
         # Write DAG spec
         dag_dir = self.runs_root / "_pipelines" / "_dags" / _slug(swarm_id)
-        self.writes.atomic_write_canonical_json(dag_dir / "PIPELINE_DAG.json", dag_spec)
+        self.writes.mkdir_durable(dag_dir)
+        self.writes.write_durable_canonical_json(dag_dir / "PIPELINE_DAG.json", dag_spec)
         
         # Run DAG
         dag_res = run_dag(
@@ -244,11 +246,11 @@ class SwarmRuntime:
 
         # Emit SWARM_STATE.json
         dag_state = json.loads((dag_dir / "DAG_STATE.json").read_text(encoding="utf-8"))
-        self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_STATE.json", dag_state)
+        self.writes.write_durable_canonical_json(swarm_dir / "SWARM_STATE.json", dag_state)
 
         # Emit SWARM_CHAIN.json (top-level chain across pipelines)
         swarm_chain = self._build_swarm_chain(swarm_id=swarm_id, dag_state=dag_state)
-        self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_CHAIN.json", swarm_chain)
+        self.writes.write_durable_canonical_json(swarm_dir / "SWARM_CHAIN.json", swarm_chain)
 
         details = dag_res.get("details", {})
         executed = details.get("executed", 0)
@@ -261,7 +263,7 @@ class SwarmRuntime:
             "state_hash": hashlib.sha256(canonical_json_bytes(dag_state)).hexdigest(),
             "chain_hash": hashlib.sha256(canonical_json_bytes(swarm_chain)).hexdigest()
         }
-        self.writes.atomic_write_canonical_json(swarm_dir / "SWARM_RECEIPT.json", receipt)
+        self.writes.write_durable_canonical_json(swarm_dir / "SWARM_RECEIPT.json", receipt)
         
         return {
             "ok": True, 

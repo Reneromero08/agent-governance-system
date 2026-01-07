@@ -24,6 +24,9 @@ from typing import Dict, List, Optional, Tuple
 
 import yaml
 
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
+
 # Exempted paths (relative to repo root)
 EXEMPTIONS = [
     "LAW/CANON",
@@ -272,9 +275,12 @@ def generate_yaml_frontmatter(file_path: Path, existing_metadata: Optional[Dict]
     else:
         bucket = "uncategorized/general"
     
+    stem = file_path.stem
+    default_title = stem.replace("_", " ").title()
+    
     metadata = {
         "uuid": existing_metadata.get("uuid", UNKNOWN_AGENT_UUID) if existing_metadata else UNKNOWN_AGENT_UUID,
-        "title": existing_metadata.get("title", file_path.stem.replace("_", " ").title()) if existing_metadata else file_path.stem.replace("_", " ").title(),
+        "title": existing_metadata.get("title", default_title) if existing_metadata else default_title,
         "section": existing_metadata.get("section", section) if existing_metadata else section,
         "bucket": existing_metadata.get("bucket", bucket) if existing_metadata else bucket,
         "author": existing_metadata.get("author", "System") if existing_metadata else "System",
@@ -290,8 +296,11 @@ def generate_yaml_frontmatter(file_path: Path, existing_metadata: Optional[Dict]
     return yaml.dump(metadata, default_flow_style=False, sort_keys=False)
 
 
-def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False) -> Dict:
+def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False, writer: Optional[GuardedWriter] = None) -> Dict:
     """Fix a non-canonical file."""
+    if not writer:
+        raise ValueError("GuardedWriter is required for fix operations")
+
     result = {
         "file": str(file_path.relative_to(repo_root)),
         "actions": [],
@@ -311,6 +320,8 @@ def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False) -> Dict:
     
     # Generate canonical filename
     new_filename = generate_canonical_filename(file_path, metadata)
+    original_path = file_path
+    
     if file_path.name != new_filename:
         result["actions"].append(f"Rename: {file_path.name} -> {new_filename}")
         if not dry_run:
@@ -319,7 +330,12 @@ def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False) -> Dict:
                 result["success"] = False
                 result["error"] = f"Target filename already exists: {new_filename}"
                 return result
-            file_path.rename(new_path)
+            
+            # Resolve to repo root relative for writer
+            src_rel = file_path.resolve().relative_to(repo_root)
+            dst_rel = new_path.resolve().relative_to(repo_root)
+            writer.safe_rename(src_rel, dst_rel)
+            
             file_path = new_path
     
     # Generate/update YAML frontmatter
@@ -348,7 +364,9 @@ def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False) -> Dict:
     result["actions"].append("Update content hash")
     
     if not dry_run:
-        file_path.write_text(new_content, encoding="utf-8")
+        # Resolve to repo root relative
+        rel_path = file_path.resolve().relative_to(repo_root)
+        writer.write_durable(rel_path, new_content)
     
     return result
 
@@ -365,6 +383,17 @@ def main():
     
     repo_root = Path(__file__).resolve().parents[4]
     
+    # Initialize GuardedWriter
+    writer = GuardedWriter(
+        project_root=repo_root,
+        durable_roots=["INBOX", "MEMORY", "LAW/CONTRACTS"],  # Allow modification of documents in these roots
+        exclusions=[ex for ex in EXEMPTIONS if ex not in ["."]] # Basic exclusions
+    )
+    
+    # Open commit gate for fix operations
+    if args.mode == "fix":
+        writer.open_commit_gate()
+
     # Find all markdown files
     if args.file:
         files = [Path(args.file).resolve()]
@@ -389,7 +418,7 @@ def main():
     elif args.mode == "fix":
         results = []
         for file_path in files:
-            result = fix_file(file_path, repo_root, args.dry_run)
+            result = fix_file(file_path, repo_root, args.dry_run, writer=writer)
             results.append(result)
             
             prefix = "[DRY-RUN]" if args.dry_run else "[FIXED]"
@@ -402,9 +431,12 @@ def main():
         
         # Emit receipt
         receipt_dir = repo_root / "LAW" / "CONTRACTS" / "_runs" / "canonical-doc-enforcer"
-        receipt_dir.mkdir(parents=True, exist_ok=True)
         receipt_path = receipt_dir / "fix_receipt.json"
-        receipt_path.write_text(json.dumps(results, indent=2))
+        
+        json_content = json.dumps(results, indent=2)
+        
+        writer.mkdir_durable(str(receipt_dir.relative_to(repo_root)))
+        writer.write_durable(str(receipt_path.relative_to(repo_root)), json_content)
         
         sys.exit(0)
     
@@ -425,10 +457,22 @@ def main():
         
         if args.output:
             output_dir = Path(args.output)
-            output_dir.mkdir(parents=True, exist_ok=True)
+            json_report = json.dumps(report, indent=2)
             timestamp = datetime.now().strftime("%m-%d-%Y-%H-%M")
             report_path = output_dir / f"{timestamp}_CANONICAL_COMPLIANCE_REPORT.json"
-            report_path.write_text(json.dumps(report, indent=2))
+            
+            # Assuming output arg is relative or absolute, normalize to repo root
+            try:
+                rel_output = output_dir.resolve().relative_to(repo_root)
+                writer.mkdir_durable(str(rel_output))
+                writer.write_durable(str(report_path.relative_to(repo_root)), json_report)
+            except ValueError:
+                # Output outside repo, we cannot enforce durable write on outside repo reliably with relative paths
+                # But GuardedWriter mostly fails safe.
+                # Here we will just error out or warn if user asks for external report.
+                print(f"Error: Output directory {output_dir} must be within repository for guarded write.")
+                sys.exit(1)
+                
             print(f"\nReport saved to: {report_path}")
         
         sys.exit(0)

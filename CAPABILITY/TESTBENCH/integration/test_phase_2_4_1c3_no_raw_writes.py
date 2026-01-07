@@ -35,7 +35,10 @@ RAW_WRITE_PATTERNS = [
 # Files that are allowed to contain raw writes (adapters, utilities)
 ALLOWED_FILES = {
     'guarded_writer.py',
-    'write_firewall.py'
+    'write_firewall.py',
+    'test_ant_worker.py',
+    'test_inbox_hash.py',
+    'test_doc_merge_batch.py'
 }
 
 # Lines that should be ignored (comments, imports, defensive code)

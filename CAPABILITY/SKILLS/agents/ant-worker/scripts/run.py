@@ -21,7 +21,7 @@ import hashlib
 from pathlib import Path
 from typing import Dict, Optional, List, Any
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[5]
 MCP_SERVER = PROJECT_ROOT / "CATALYTIC-DPT" / "LAB" / "MCP" / "server.py"
 CONTRACTS_DIR = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
 
@@ -188,8 +188,12 @@ class GrokExecutor:
                 self.writer.mkdir_durable(str(dest_path.parent))
                 
                 # Copy file
-                content = source_path.read_text(encoding='utf-8', errors='replace')
+                # Copy file
+                content = source_path.read_bytes()
                 self.writer.write_durable(str(dest_path), content)
+
+                # Compute source hash
+                source_hash = compute_hash(source_path)
 
                 # Compute destination hash
                 dest_hash = compute_hash(dest_path)
@@ -565,6 +569,9 @@ def main():
     print(f"[grok-executor] Status: {results['status']}")
     print(f"[grok-executor] Operations: {len(results['operations'])}")
     print(f"[grok-executor] Errors: {len(results['errors'])}")
+    if results['errors']:
+        for i, err in enumerate(results['errors']):
+            print(f"[grok-executor] Error {i+1}: {err}")
     print(f"[grok-executor] Ledger: {results['ledger_dir']}")
 
     # Exit with appropriate code

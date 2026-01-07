@@ -21,6 +21,21 @@ sys.path.insert(0, str(PROJECT_ROOT))
 
 from NAVIGATION.CORTEX.db.system1_builder import System1DB
 from NAVIGATION.CORTEX.semantic.indexer import CortexIndexer
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
+def create_open_writer():
+    """Create a GuardedWriter with open commit gate for testing."""
+    writer = GuardedWriter(
+        project_root=PROJECT_ROOT,
+        durable_roots=[
+            "LAW/CONTRACTS/_runs",
+            "NAVIGATION/CORTEX/_generated",
+            "NAVIGATION/CORTEX/meta",
+            "NAVIGATION/CORTEX/db"
+        ]
+    )
+    writer.open_commit_gate()
+    return writer
 
 def test_system1_db():
     """Test System1DB basic functionality."""
@@ -30,7 +45,7 @@ def test_system1_db():
     if db_path.exists():
         db_path.unlink()
     
-    db = System1DB(db_path)
+    db = System1DB(db_path, writer=create_open_writer())
     
     # Add a test file
     test_content = "# Test Document\n\nThis is a test of the resonance and entropy in the system."
@@ -60,8 +75,9 @@ def test_cortex_indexer():
         db_path.unlink()
     
     # Run indexer
-    db = System1DB(db_path)
-    indexer = CortexIndexer(db, target_dir=PROJECT_ROOT / "LAW" / "CANON")
+    writer = create_open_writer()
+    db = System1DB(db_path, writer=writer)
+    indexer = CortexIndexer(db, target_dir=PROJECT_ROOT / "LAW" / "CANON", writer=writer)
     indexer.index_all()
     db.close()
     
@@ -83,7 +99,7 @@ def test_cortex_indexer():
     print(f"✓ SECTION_INDEX has {len(section_index)} sections")
     
     # Verify database has content
-    db = System1DB(db_path)
+    db = System1DB(db_path, writer=create_open_writer())
     cursor = db.conn.execute("SELECT COUNT(*) FROM files")
     file_count = cursor.fetchone()[0]
     assert file_count > 0, "Database should have files"
@@ -109,7 +125,7 @@ def test_search_functionality():
             time.sleep(0.5)
             db_path.unlink()
     
-    db = System1DB(db_path)
+    db = System1DB(db_path, writer=create_open_writer())
     
     db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "test_system1.db"
     

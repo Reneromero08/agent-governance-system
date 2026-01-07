@@ -9,8 +9,14 @@ from pathlib import Path
 # Add parent directory to path
 sys.path.insert(0, str(Path(__file__).parent))
 
+from typing import Any
 from hash_inbox_file import compute_content_hash, insert_or_update_hash, verify_hash
 from inbox_write_guard import validate_inbox_write, InboxWriteError, check_inbox_file
+
+class MockWriter:
+    def write_durable(self, path, content):
+        Path(path).write_text(content, encoding='utf-8')
+
 
 
 def test_hash_computation():
@@ -34,7 +40,8 @@ def test_insert_hash():
         test_file.write_text(original_content, encoding='utf-8') # scanner: test set up
         
         # Insert hash
-        changed, old_hash, new_hash = insert_or_update_hash(test_file)
+        writer = MockWriter()
+        changed, old_hash, new_hash = insert_or_update_hash(test_file, writer)
         
         assert changed, "File should be changed"
         assert old_hash is None, "Old hash should be None for new insertion"
@@ -61,7 +68,8 @@ def test_update_hash():
         test_file.write_text(original_content, encoding='utf-8') # scanner: test set up
         
         # Update hash
-        changed, old_hash, new_hash = insert_or_update_hash(test_file)
+        writer = MockWriter()
+        changed, old_hash, new_hash = insert_or_update_hash(test_file, writer)
         
         assert changed, "File should be changed"
         assert old_hash == "0000000000000000000000000000000000000000000000000000000000000000", "Old hash should be extracted"

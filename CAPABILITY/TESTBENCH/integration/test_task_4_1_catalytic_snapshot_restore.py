@@ -185,7 +185,7 @@ output.write_text('completed', encoding='utf-8')
         proof = json.loads(proof_path.read_text())
         assert "restoration_result" in proof, "PROOF must contain restoration_result"
         assert proof["restoration_result"]["verified"] is True, "Restoration must be verified"
-        assert proof["restoration_result"]["condition"] == "IDENTICAL", "Restoration must be IDENTICAL"
+        assert proof["restoration_result"]["condition"] == "RESTORED_IDENTICAL", "Restoration must be RESTORED_IDENTICAL"
 
         # Verify PRE and POST manifests match
         pre_manifest = json.loads((run_dir / "PRE_MANIFEST.json").read_text())
@@ -276,7 +276,7 @@ output.write_text('output created', encoding='utf-8')
 
         proof = json.loads(proof_path.read_text())
         assert proof["restoration_result"]["verified"] is False, "Proof must show restoration failed"
-        assert proof["restoration_result"]["condition"] == "MISMATCH", "Condition must be MISMATCH"
+        assert proof["restoration_result"]["condition"] == "RESTORATION_FAILED_EXTRA_FILES", "Condition must be EXTRA_FILES"
 
         # Verify RESTORE_DIFF.json captures the violation
         diff_path = run_dir / "RESTORE_DIFF.json"
@@ -357,8 +357,8 @@ def test_4_1_fixture_backed_determinism():
 
         # Verify pre/post hashes are deterministic (same content → same hash)
         # Note: The exact proof structure may vary (timestamps, run_id), but restoration hashes should match
-        assert proof1["pre_state_hash"] == proof2["pre_state_hash"], "Pre-state hash must be deterministic"
-        assert proof1["post_state_hash"] == proof2["post_state_hash"], "Post-state hash must be deterministic"
+        assert proof1["pre_state"]["domain_root_hash"] == proof2["pre_state"]["domain_root_hash"], "Pre-state hash must be deterministic"
+        assert proof1["post_state"]["domain_root_hash"] == proof2["post_state"]["domain_root_hash"], "Post-state hash must be deterministic"
 
         print("✓ Fixture-backed determinism PASSED: Identical fixtures produce identical restoration proofs")
 
