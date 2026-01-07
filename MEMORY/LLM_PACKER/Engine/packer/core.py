@@ -992,6 +992,7 @@ def make_pack(
     max_entry_bytes: int,
     max_entries: int,
     allow_duplicate_hashes: Optional[bool],
+    emit_pruned: bool = True,
     project_root: Optional[Path] = None,
     p2_runs_dir: Optional[Path] = None,
     p2_cas_root: Optional[Path] = None,
@@ -1000,6 +1001,7 @@ def make_pack(
 ) -> Path:
     from .split import write_split_pack
     from .lite import write_split_pack_lite
+    from .pruned import write_pruned_pack
     from .archive import write_pack_internal_archives, write_pack_external_archive
     from CAPABILITY.CAS import cas as cas_mod
 
@@ -1110,6 +1112,16 @@ def make_pack(
                 include_paths=include_paths,
                 scope=scope,
                 runs_dir=effective_runs_dir,
+                writer=writer,
+            )
+
+        # 5b. PRUNED Output (enabled by default)
+        if emit_pruned:
+            write_pruned_pack(
+                out_dir,
+                source_project_root,
+                include_paths,
+                scope=scope,
                 writer=writer,
             )
 
