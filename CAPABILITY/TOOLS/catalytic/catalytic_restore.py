@@ -43,17 +43,21 @@ def main(argv: List[str]) -> int:
     p_bundle = sub.add_parser("bundle", help="Restore a single run directory")
     p_bundle.add_argument("--run-dir", required=True, type=Path)
     p_bundle.add_argument("--restore-root", required=True, type=Path)
+    p_bundle.add_argument("--dry-run", action="store_true", help="Validate without writing files")
 
     p_chain = sub.add_parser("chain", help="Restore an ordered list of run directories")
     p_chain.add_argument("--run-dirs", required=True, nargs="+", type=Path)
     p_chain.add_argument("--restore-root", required=True, type=Path)
+    p_chain.add_argument("--dry-run", action="store_true", help="Validate without writing files")
 
     args = parser.parse_args(argv)
 
+    dry_run = getattr(args, "dry_run", False)
+
     if args.cmd == "bundle":
-        result = restore_bundle(args.run_dir, args.restore_root, strict=True)
+        result = restore_bundle(args.run_dir, args.restore_root, strict=True, dry_run=dry_run)
     else:
-        result = restore_chain(args.run_dirs, args.restore_root, strict=True)
+        result = restore_chain(args.run_dirs, args.restore_root, strict=True, dry_run=dry_run)
 
     if args.json:
         _print_json(result)

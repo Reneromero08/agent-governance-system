@@ -4,6 +4,28 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.12] - 2026-01-07
+
+### Added
+- **Phase 4.5 Atomic Restore COMPLETE** — All-or-nothing restoration with rollback
+  - **Transactional Restore:** Staging directory `.spectrum06_staging_<uuid>/`, hash verification, atomic swap via `os.replace()`
+  - **Rollback Support:** `_rollback_bundle()` cleans staging and targets on failure, 26 distinct error codes per SPECTRUM-06
+  - **Dry-Run Mode:** `--dry-run` flag validates without writing files
+  - **Tests:** `test_phase_4_5_atomic_restore.py` (9 tests)
+
+### Changed
+- **restore_runner.py:** Added `dry_run` parameter to `restore_bundle()` and `restore_chain()`
+- **catalytic_restore.py:** Added `--dry-run` CLI flag for both bundle and chain commands
+- **Roadmap Version:** 3.7.12
+
+### Status
+- **Phase 4 COMPLETE (100%):** All 5 sections implemented (4.1-4.5) with 64 total tests
+  - 4.1: Catalytic Snapshot & Restore (4 tests)
+  - 4.2: Merkle Membership Proofs (15 tests)
+  - 4.3: Ed25519 Signatures (20 tests)
+  - 4.4: Chain Verification (17 tests)
+  - 4.5: Atomic Restore (12 tests: 3 existing + 9 new)
+
 ## [3.7.11] - 2026-01-07
 
 ### Added
@@ -22,12 +44,7 @@ All notable changes to Agent Governance System will be documented in this file.
     - Schema: Added `previous_proof_hash` field
     - 6 verification result codes: CHAIN_VALID, CHAIN_EMPTY, CHAIN_ROOT_HAS_PREVIOUS, CHAIN_LINK_MISSING, CHAIN_LINK_MISMATCH, PROOF_HASH_MISMATCH
 
-### Changed
-- **Roadmap Phase 4.2-4.4:** Updated from TODO to COMPLETE with 52 new tests total
-- **Roadmap Version:** 3.7.11
-
 ### Status
-- **Phase 4.5 Atomic Restore:** TODO (next implementation target)
 - **Report:** `INBOX/reports/01-07-2026_PHASE_4_CATALYTIC_ARCHITECTURE_REPORT.md`
 
 ## [3.7.10] - 2026-01-07
