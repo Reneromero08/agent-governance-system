@@ -4,6 +4,14 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.11] - 2026-01-07
+
+### Fixed
+- **CI Local Gate**: Fixed firewall violation in `ci_local_gate.py` where commit gate was not opened before attempting durable writes.
+  - **Issue**: Script attempted to create `pytest_tmp` directory before opening commit gate, causing `[FIREWALL_DURABLE_WRITE_BEFORE_COMMIT]` violation.
+  - **Fix**: Added `writer.open_commit_gate()` call before any durable filesystem operations.
+  - **Impact**: Pre-push hook now runs without firewall violations.
+
 ## [3.4.10] - 2026-01-07
 
 ### Changed
