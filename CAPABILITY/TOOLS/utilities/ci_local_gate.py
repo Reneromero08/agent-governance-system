@@ -106,6 +106,9 @@ def main(argv: List[str]) -> int:
     )
     args = parser.parse_args(argv[1:])
 
+    # Open commit gate before any durable writes
+    writer.open_commit_gate()
+
     tmp_root = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp"
     writer.mkdir_durable(str(tmp_root.relative_to(PROJECT_ROOT)), parents=True, exist_ok=True)
     tmp_env = {
