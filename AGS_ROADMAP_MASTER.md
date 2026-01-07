@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.7.8
+version: 3.7.9
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -64,8 +64,8 @@ notes:
   - [x] All code implementations reference the canonical doc
   - [x] New agents can understand catalytic execution without reading implementation code
 
-## 1.7 Catalytic Hardening (Mathematical Foundations)
-**Status:** IN PROGRESS
+## 1.7 Catalytic Hardening (Mathematical Foundations) ✅ COMPLETE
+**Status:** DONE (2026-01-07)
 **Priority:** Medium (improves defensibility, not blocking)
 **Purpose:** Promote SPECTRUM cryptographic specs to canon, formalize invariants, add Merkle membership proofs.
 
@@ -137,14 +137,26 @@ notes:
 - [x] Proofs are deterministic and tamper-evident
 - [x] 16/16 tests passing
 
-### 1.7.4 Spectral Codec Research (Future)
+### 1.7.4 Spectral Codec Research ✅ COMPLETE (NOT NEEDED)
+**Status:** DONE (2026-01-07) — Decision: NOT NEEDED for catalytic integrity stack
 **Purpose:** Domain → spectrum encoding for compression (from archived semiotic research).
 
-- [ ] 1.7.4.1 Review `MEMORY/ARCHIVE/catalytic-department-merged/` for semiotic compression research
-- [ ] 1.7.4.2 Assess if spectral codec adds value beyond current CAS + Merkle approach
-- [ ] 1.7.4.3 If valuable: design `spectral_codec.py` with deterministic encoding
-- **Exit Criteria**
-  - [ ] Decision: implement spectral codec or document why not needed
+**Research Findings:**
+- [x] 1.7.4.1 Reviewed `MEMORY/ARCHIVE/catalytic-department-merged/` — SpectralCodec was never implemented (only stub class in CAT-DPT)
+- [x] 1.7.4.2 Assessed spectral codec vs CAS + Merkle — They solve **different problems**:
+  - **CAS + Merkle:** Identity pointers to bytes (file integrity, tamper detection)
+  - **Spectral/Semiotic:** Semantic macros for meaning (LLM token reduction)
+- [x] 1.7.4.3 Decision: **NOT implementing** — orthogonal concern to cryptographic spine
+
+**Rationale:**
+1. SpectralCodec was a vague concept, never defined or implemented in CAT-DPT snapshot
+2. The actual research (Semiotic Compression Layer) is about LLM efficiency, not integrity
+3. Current stack (CAS, Merkle, Ledger, Proofs) is **complete** for catalytic guarantees
+4. Token compression moved to **Phase 5.2 Semiotic Compression Layer** (proper home)
+
+**Exit Criteria:**
+- [x] Decision documented: spectral codec NOT NEEDED for catalytic integrity
+- [x] Semiotic compression research relocated to Phase 5.2 (Lane I)
 
 ### 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
 Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
@@ -327,6 +339,27 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - **Exit Criteria**
   - [ ] Vector index includes canon + ADRs with deterministic rebuild
   - [ ] Skill discovery returns stable results for fixed corpus
+
+## 5.2 Semiotic Compression Layer (SCL) (Lane I)
+**Purpose:** Reduce LLM token usage via semantic macros that expand deterministically.
+**Research:** `INBOX/2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
+
+**Concept:** Big models emit short symbolic programs; deterministic tools expand into full JobSpecs/tool-calls.
+- **Hashes:** Identity pointers to bytes (already have via CAS)
+- **Symbols:** Semantic macros for meaning (reduces governance boilerplate)
+
+- [ ] 5.2.1 Define MVP macro set (30-80 macros covering 80% of governance repetition)
+  - Immutability constraints, allowed domains/roots, schema validate, ledger append
+  - CAS put/get, root scan/diff, expand-by-hash read requests
+- [ ] 5.2.2 Implement `SCL/CODEBOOK.json` symbol dictionary (symbol → meaning → expansion)
+- [ ] 5.2.3 Implement `SCL/decode.py` symbolic IR → expanded JSON + audit
+- [ ] 5.2.4 Implement `SCL/validate.py` symbolic/schema validation
+- [ ] 5.2.5 Implement `scl` CLI: decode, validate, run
+- [ ] 5.2.6 Tests: determinism (same program → same hash), schema validation, token benchmark
+- **Exit Criteria**
+  - [ ] `scl decode <program>` → emits JobSpec JSON
+  - [ ] Meaningful token reduction demonstrated vs baseline
+  - [ ] Reproducible expansions (same symbols → same output hash)
 
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate)
 

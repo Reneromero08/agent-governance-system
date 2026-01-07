@@ -4,6 +4,23 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.9] - 2026-01-07
+
+### Changed
+- **Phase 1.7.4: Spectral Codec Research — NOT NEEDED** (Decision documented)
+  - Reviewed CAT-DPT snapshot: SpectralCodec was never implemented (only stub class)
+  - Assessed spectral codec vs CAS + Merkle: different problem domains
+    - CAS + Merkle: file integrity (bytes identity, tamper detection)
+    - Spectral/Semiotic: LLM token efficiency (semantic macros)
+  - Decision: NOT implementing in Phase 1 — orthogonal to cryptographic spine
+- **Phase 1.7 COMPLETE** — All 4 sub-phases done (SPECTRUM canon, formal invariants, Merkle proofs, spectral research)
+
+### Added
+- **Phase 5.2: Semiotic Compression Layer (SCL)** — New roadmap section (Lane I)
+  - Relocated token compression research from 1.7.4 to proper home in Phase 5
+  - MVP macro set (30-80 macros), CODEBOOK.json, decode.py, validate.py, scl CLI
+  - Research: `INBOX/2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
+
 ## [3.7.8] - 2026-01-07
 
 ### Fixed
