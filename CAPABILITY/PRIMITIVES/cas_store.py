@@ -13,6 +13,10 @@ import os
 import sys
 from pathlib import Path
 
+# Add repo root to path for GuardedWriter import
+REPO_ROOT = Path(__file__).resolve().parents[2]
+sys.path.insert(0, str(REPO_ROOT))
+
 # Exit codes
 EXIT_SUCCESS = 0
 EXIT_ERROR = 1
@@ -25,6 +29,22 @@ MAX_FILES = 5000
 MAX_TOTAL_BYTES = 512 * 1024 * 1024  # 512MB
 MAX_FILE_BYTES = 64 * 1024 * 1024    # 64MB
 MAX_PATH_LENGTH = 260
+
+# Lazy import to avoid circular dependency
+_writer = None
+
+def _get_writer():
+    """Lazy initialization of GuardedWriter to avoid circular imports."""
+    global _writer
+    if _writer is None:
+        from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+        _writer = GuardedWriter(
+            project_root=REPO_ROOT,
+            tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+            durable_roots=[".ags-cas"]  # CAS blobs are immutable = durable
+        )
+        _writer.open_commit_gate()  # CAS writes are always allowed
+    return _writer
 
 
 def sha256_file(path: Path) -> str:
@@ -96,7 +116,9 @@ def build(src: Path, out: Path, ignores: list):
         sys.exit(EXIT_ERROR)
 
     cas_dir = out / 'cas'
-    cas_dir.mkdir(parents=True, exist_ok=True)
+    # Use GuardedWriter for directory creation
+    cas_dir_rel = str(cas_dir.relative_to(REPO_ROOT)) if cas_dir.is_relative_to(REPO_ROOT) else str(cas_dir)
+    _get_writer().mkdir_durable(cas_dir_rel, parents=True, exist_ok=True)
 
     manifest = {}
     file_count = 0
@@ -135,20 +157,26 @@ def build(src: Path, out: Path, ignores: list):
 
             # Store in CAS (sharded by first 2 chars)
             shard = cas_dir / h[:2]
-            shard.mkdir(exist_ok=True)
+            shard_rel = str(shard.relative_to(REPO_ROOT)) if shard.is_relative_to(REPO_ROOT) else str(shard)
+            _get_writer().mkdir_durable(shard_rel, exist_ok=True)
             blob = shard / h
             if not blob.exists():
-                blob.write_bytes(content)
+                blob_rel = str(blob.relative_to(REPO_ROOT)) if blob.is_relative_to(REPO_ROOT) else str(blob)
+                _get_writer().write_durable(blob_rel, content)
 
             manifest[rel] = {'sha256': h, 'size': fsize}
 
     # Write manifest
     manifest_bytes = canonical_json(manifest)
-    (out / 'manifest.json').write_bytes(manifest_bytes)
+    manifest_path = out / 'manifest.json'
+    manifest_rel = str(manifest_path.relative_to(REPO_ROOT)) if manifest_path.is_relative_to(REPO_ROOT) else str(manifest_path)
+    _get_writer().write_durable(manifest_rel, manifest_bytes)
 
     # Write root hash
     root_hash = sha256_bytes(manifest_bytes)
-    (out / 'root.sha256').write_text(root_hash)
+    root_path = out / 'root.sha256'
+    root_rel = str(root_path.relative_to(REPO_ROOT)) if root_path.is_relative_to(REPO_ROOT) else str(root_path)
+    _get_writer().write_durable(root_rel, root_hash)
 
     print(f"Build complete: {file_count} files, {total_bytes} bytes")
     print(f"Root hash: {root_hash}")
@@ -165,7 +193,8 @@ def reconstruct(pack: Path, dst: Path):
 
     manifest = json.loads(manifest_path.read_bytes())
 
-    dst.mkdir(parents=True, exist_ok=True)
+    dst_rel = str(dst.relative_to(REPO_ROOT)) if dst.is_relative_to(REPO_ROOT) else str(dst)
+    _get_writer().mkdir_durable(dst_rel, parents=True, exist_ok=True)
 
     for rel, meta in manifest.items():
         h = meta['sha256']
@@ -182,8 +211,10 @@ def reconstruct(pack: Path, dst: Path):
             sys.exit(EXIT_VERIFY_MISMATCH)
 
         out_path = dst / rel
-        out_path.parent.mkdir(parents=True, exist_ok=True)
-        out_path.write_bytes(content)
+        out_parent_rel = str(out_path.parent.relative_to(REPO_ROOT)) if out_path.parent.is_relative_to(REPO_ROOT) else str(out_path.parent)
+        _get_writer().mkdir_durable(out_parent_rel, parents=True, exist_ok=True)
+        out_rel = str(out_path.relative_to(REPO_ROOT)) if out_path.is_relative_to(REPO_ROOT) else str(out_path)
+        _get_writer().write_durable(out_rel, content)
 
     print(f"Reconstruct complete: {len(manifest)} files to {dst}")
     sys.exit(EXIT_SUCCESS)
@@ -252,11 +283,13 @@ def main():
 class CatalyticStore:
     """Wrapper class for CAS operations."""
 
-    def __init__(self, objects_dir: Path):
+    def __init__(self, objects_dir: Path, writer = None):
         # objects_dir should point to the 'cas' subdirectory if using build() structure,
         # or the root of the CAS storage.
         self.objects_dir = Path(objects_dir)
-        self.objects_dir.mkdir(parents=True, exist_ok=True)
+        self.writer = writer or _get_writer()
+        objects_rel = str(self.objects_dir.relative_to(REPO_ROOT)) if self.objects_dir.is_relative_to(REPO_ROOT) else str(self.objects_dir)
+        self.writer.mkdir_durable(objects_rel, parents=True, exist_ok=True)
 
     def object_path(self, hash_hex: str) -> Path:
         """Returns the deterministic path for a hash."""
@@ -268,41 +301,37 @@ class CatalyticStore:
         """Writes bytes to CAS and returns the hash."""
         h = sha256_bytes(data)
         path = self.object_path(h)
-        path.parent.mkdir(parents=True, exist_ok=True)
+        parent_rel = str(path.parent.relative_to(REPO_ROOT)) if path.parent.is_relative_to(REPO_ROOT) else str(path.parent)
+        self.writer.mkdir_durable(parent_rel, parents=True, exist_ok=True)
         if not path.exists():
-            # Use atomic write to avoid partial files
-            tmp = path.with_name(path.name + ".tmp")
-            tmp.write_bytes(data)
-            os.replace(tmp, path)
+            # GuardedWriter handles atomic writes internally
+            path_rel = str(path.relative_to(REPO_ROOT)) if path.is_relative_to(REPO_ROOT) else str(path)
+            self.writer.write_durable(path_rel, data)
         return h
 
     def put_stream(self, stream) -> str:
         """Writes content of a stream to CAS and returns the hash."""
         h = hashlib.sha256()
-        # Use a temporary file to store the stream until we have the full hash
-        import tempfile
-        fd, tmp_path = tempfile.mkstemp(dir=str(self.objects_dir))
-        try:
-            with os.fdopen(fd, 'wb') as f:
-                while True:
-                    chunk = stream.read(65536)
-                    if not chunk:
-                        break
-                    f.write(chunk)
-                    h.update(chunk)
-            
-            digest = h.hexdigest()
-            target = self.object_path(digest)
-            if target.exists():
-                os.remove(tmp_path)
-            else:
-                target.parent.mkdir(parents=True, exist_ok=True)
-                os.replace(tmp_path, str(target))
+        # Read stream into memory to compute hash
+        chunks = []
+        while True:
+            chunk = stream.read(65536)
+            if not chunk:
+                break
+            chunks.append(chunk)
+            h.update(chunk)
+
+        digest = h.hexdigest()
+        target = self.object_path(digest)
+
+        if target.exists():
             return digest
-        except Exception:
-            if os.path.exists(tmp_path):
-                os.remove(tmp_path)
-            raise
+        else:
+            parent_rel = str(target.parent.relative_to(REPO_ROOT)) if target.parent.is_relative_to(REPO_ROOT) else str(target.parent)
+            self.writer.mkdir_durable(parent_rel, parents=True, exist_ok=True)
+            target_rel = str(target.relative_to(REPO_ROOT)) if target.is_relative_to(REPO_ROOT) else str(target)
+            self.writer.write_durable(target_rel, b''.join(chunks))
+            return digest
 
     def get_bytes(self, hash_hex: str) -> bytes:
         """Reads bytes from CAS."""
