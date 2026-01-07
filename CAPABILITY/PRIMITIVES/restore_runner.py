@@ -355,14 +355,42 @@ def _copy_file(src: Path, dst: Path) -> None:
     shutil.copy2(src, dst)
 
 
-def restore_bundle(run_dir: Path, restore_root: Path, *, strict: bool = True) -> Dict[str, Any]:
+def restore_bundle(
+    run_dir: Path,
+    restore_root: Path,
+    *,
+    strict: bool = True,
+    dry_run: bool = False,
+) -> Dict[str, Any]:
     """
     Restore outputs for a single run bundle into restore_root (single mode).
+
+    Args:
+        run_dir: Path to the run directory containing bundle artifacts
+        restore_root: Absolute path to restore outputs into
+        strict: If True, require strict SPECTRUM-05 verification (default: True)
+        dry_run: If True, validate everything but don't write files (default: False)
+
+    Returns:
+        Result dict with ok, code, details
     """
-    return _restore_bundle_impl(run_dir=run_dir, restore_root=restore_root, strict=strict, chain_root=None)
+    return _restore_bundle_impl(
+        run_dir=run_dir,
+        restore_root=restore_root,
+        strict=strict,
+        chain_root=None,
+        dry_run=dry_run,
+    )
 
 
-def _restore_bundle_impl(*, run_dir: Path, restore_root: Path, strict: bool, chain_root: Optional[str]) -> Dict[str, Any]:
+def _restore_bundle_impl(
+    *,
+    run_dir: Path,
+    restore_root: Path,
+    strict: bool,
+    chain_root: Optional[str],
+    dry_run: bool = False,
+) -> Dict[str, Any]:
     project_root = Path(__file__).resolve().parents[2]
     verifier = BundleVerifier(project_root=project_root)
 
@@ -420,6 +448,23 @@ def _restore_bundle_impl(*, run_dir: Path, restore_root: Path, strict: bool, cha
     if plan_err is not None:
         return _result(plan_err, phase, ok=False)
     assert plan is not None
+
+    # DRY_RUN: Return early with plan details if dry_run=True
+    if dry_run:
+        bundle_root = verify_result.get("bundle_root", "")
+        return _result(
+            RESTORE_CODES["OK"],
+            phase,
+            ok=True,
+            details={
+                "dry_run": True,
+                "would_restore_files_count": len(plan),
+                "would_restore_bytes": sum(e.source_path.stat().st_size for e in plan),
+                "would_restore_paths": [e.relative_path for e in plan],
+                "bundle_root": bundle_root,
+                "restore_root": str(restore_root),
+            },
+        )
 
     # EXECUTE
     phase = PHASE_EXECUTE
@@ -562,9 +607,24 @@ def _restore_bundle_impl(*, run_dir: Path, restore_root: Path, strict: bool, cha
     )
 
 
-def restore_chain(run_dirs: List[Path], restore_root: Path, *, strict: bool = True) -> Dict[str, Any]:
+def restore_chain(
+    run_dirs: List[Path],
+    restore_root: Path,
+    *,
+    strict: bool = True,
+    dry_run: bool = False,
+) -> Dict[str, Any]:
     """
     Restore outputs for a chain of run bundles into restore_root/<run_id>/ (chain mode).
+
+    Args:
+        run_dirs: List of run directories in chain order
+        restore_root: Absolute path to restore outputs into
+        strict: If True, require strict SPECTRUM-05 verification (default: True)
+        dry_run: If True, validate everything but don't write files (default: False)
+
+    Returns:
+        Result dict with ok, code, details
     """
     project_root = Path(__file__).resolve().parents[2]
     verifier = BundleVerifier(project_root=project_root)
@@ -608,6 +668,38 @@ def restore_chain(run_dirs: List[Path], restore_root: Path, *, strict: bool = Tr
     if not isinstance(chain_root, str) or len(chain_root) != 64:
         return _result(RESTORE_CODES["RESTORE_INTERNAL_ERROR"], phase, ok=False)
 
+    # DRY_RUN: Skip chain manifest and directory creation, just validate
+    if dry_run:
+        dry_run_results = []
+        for run_dir in run_dirs:
+            rid = run_dir.name
+            bundle_root_dir = restore_root / rid
+            bundle_result = _restore_bundle_impl(
+                run_dir=run_dir,
+                restore_root=bundle_root_dir,
+                strict=strict,
+                chain_root=chain_root,
+                dry_run=True,
+            )
+            if not bundle_result["ok"]:
+                return bundle_result
+            dry_run_results.append({
+                "run_id": rid,
+                "details": bundle_result.get("details", {}),
+            })
+
+        return _result(
+            RESTORE_CODES["OK"],
+            PHASE_PLAN,
+            ok=True,
+            details={
+                "dry_run": True,
+                "chain_root": chain_root,
+                "run_ids": run_ids,
+                "bundle_results": dry_run_results,
+            },
+        )
+
     chain_manifest = restore_root / f".spectrum06_chain_{uuid.uuid4().hex}.json"
     try:
         chain_manifest.write_bytes(_canonical_json_bytes({"run_ids": run_ids}))
@@ -625,7 +717,13 @@ def restore_chain(run_dirs: List[Path], restore_root: Path, *, strict: bool = Tr
             created_dirs.append(bundle_root_dir)
 
             # Run bundle restore into per-run result_root.
-            bundle_result = _restore_bundle_impl(run_dir=run_dir, restore_root=bundle_root_dir, strict=strict, chain_root=chain_root)
+            bundle_result = _restore_bundle_impl(
+                run_dir=run_dir,
+                restore_root=bundle_root_dir,
+                strict=strict,
+                chain_root=chain_root,
+                dry_run=False,
+            )
             if not bundle_result["ok"]:
                 cause = bundle_result.get("code", RESTORE_CODES["RESTORE_INTERNAL_ERROR"])
                 rollback_ok = True
