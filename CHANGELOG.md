@@ -4,6 +4,31 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.10] - 2026-01-07
+
+### Added
+- **Phase 4 Catalytic Hardening Roadmap** — Full cryptographic spine for catalytic architecture
+  - **4.2 Merkle Membership Integration:** Wire Phase 1.7.3 proofs into restore runtime
+    - Selective file verification without full manifest
+    - `verify_file` subcommand, `--full-proofs` flag
+    - INV-CATALYTIC-01 through 06 enforced at runtime
+  - **4.3 SPECTRUM Signature Integration (Ed25519):** Validator identity for proofs
+    - `sign_proof()`, `verify_signature()`, key management utilities
+    - Proves WHO validated, not just WHAT
+    - `--sign` flag, `verify-signature` and `keygen` subcommands
+  - **4.4 Chain Verification (SPECTRUM-03):** Temporal integrity via proof linking
+    - `previous_proof_hash` field creates tamper-evident chain
+    - Prevents replay, gap, and fork attacks
+    - `verify-chain`, `chain-history` subcommands
+  - **4.5 Atomic Restore (SPECTRUM-06):** All-or-nothing restoration
+    - Staged restore to temp dir, verify, atomic swap
+    - Failure never leaves partial state
+    - Automatic rollback with receipt
+
+### Changed
+- **Phase 4 Structure:** Expanded from single completed section (4.1) to full hardening roadmap (4.1-4.5)
+- **Roadmap Version:** 3.7.10
+
 ## [3.7.9] - 2026-01-07
 
 ### Changed
