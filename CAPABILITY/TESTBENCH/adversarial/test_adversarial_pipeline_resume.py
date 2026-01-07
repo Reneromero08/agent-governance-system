@@ -9,7 +9,7 @@ import pytest
 
 
 REPO_ROOT = Path(__file__).resolve().parents[3]
-sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+sys.path.insert(0, str(REPO_ROOT))
 
 from CAPABILITY.PIPELINES.pipeline_runtime import PipelineRuntime
 
@@ -113,7 +113,7 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
                 "step_id": "s1",
                 "jobspec_path": str(jobspec1.relative_to(REPO_ROOT)).replace("\\", "/"),
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     f"from pathlib import Path; Path('{out1}').parent.mkdir(parents=True, exist_ok=True); Path('{out1}').write_text('ONE', encoding='utf-8')",
                 ],
@@ -124,7 +124,7 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
                 "step_id": "s2",
                 "jobspec_path": str(jobspec2.relative_to(REPO_ROOT)).replace("\\", "/"),
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     f"from pathlib import Path; Path('{out2}').parent.mkdir(parents=True, exist_ok=True); Path('{out2}').write_text('TWO', encoding='utf-8')",
                 ],
@@ -134,7 +134,8 @@ def test_pipeline_resume_never_skips_a_missing_step_record() -> None:
         ],
     }
     spec_path = base / "PIPELINE_SPEC.json"
-    rt.writes.write_durable_canonical_json(spec_path, spec)
+    # Write spec file directly (test setup, bypassing firewall)
+    spec_path.write_text(json.dumps(spec, sort_keys=True, separators=(",", ":")), encoding="utf-8")
 
     # Simulate crash between step completion and STATE update:
     # - run step1 using the internal executor

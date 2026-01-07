@@ -9,26 +9,25 @@ from pathlib import Path
 import pytest
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
-sys.path.insert(0, str(REPO_ROOT / "CAPABILITY" / "TOOLS"))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
 
 from CAPABILITY.PRIMITIVES.restore_proof import RestorationProofValidator
 from CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier
 from CAPABILITY.PRIMITIVES.write_firewall import WriteFirewall
-from catalytic_validator import CatalyticLedgerValidator
+from CAPABILITY.TOOLS.catalytic.catalytic_validator import CatalyticLedgerValidator
 
 
 @pytest.fixture
 def firewall():
     """Create write firewall for test artifacts under catalytic domains."""
     # Create necessary directories
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp"
+    base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp"
     base.mkdir(parents=True, exist_ok=True)
 
     return WriteFirewall(
-        tmp_roots=["CONTRACTS/_runs/_tmp"],
-        durable_roots=["CONTRACTS/_runs/durable"],
+        tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
+        durable_roots=["LAW/CONTRACTS/_runs/durable"],
         project_root=REPO_ROOT,
         exclusions=[],
     )
@@ -96,12 +95,12 @@ def _make_valid_spectrum05_run(run_dir: Path, firewall: WriteFirewall) -> tuple[
         firewall,
     )
 
-    proof_validator = RestorationProofValidator(REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json")
+    proof_validator = RestorationProofValidator(REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json")
     proof = proof_validator.generate_proof(
         run_id=run_dir.name,
-        catalytic_domains=["CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain"],
-        pre_state={"CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
-        post_state={"CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
+        catalytic_domains=["LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain"],
+        pre_state={"LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
+        post_state={"LAW/CONTRACTS/_runs/_tmp/adversarial/proof_tamper/domain": {}},
         timestamp="CATALYTIC-DPT-02_CONFIG",
     )
     _safe_write_text(run_dir / "PROOF.json", json.dumps(proof, sort_keys=True, separators=(",", ":")), firewall)
@@ -142,7 +141,7 @@ def _make_valid_spectrum05_run(run_dir: Path, firewall: WriteFirewall) -> tuple[
 
 
 def test_proof_hash_tamper_fails_closed_deterministically(firewall) -> None:
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "proof_tamper"
+    base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "proof_tamper"
     _rm(base)
     run_dir = base / "run"
     verifier, _ = _make_valid_spectrum05_run(run_dir, firewall)
@@ -165,7 +164,7 @@ def test_proof_hash_tamper_fails_closed_deterministically(firewall) -> None:
 
 
 def test_output_hash_manifest_tamper_fails_closed(firewall) -> None:
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "output_hash_tamper"
+    base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "output_hash_tamper"
     _rm(base)
     run_dir = base / "run"
     verifier, _ = _make_valid_spectrum05_run(run_dir, firewall)
@@ -186,7 +185,7 @@ def test_output_hash_manifest_tamper_fails_closed(firewall) -> None:
 
 
 def test_domain_roots_tamper_rejected_by_cmp01_validator(firewall) -> None:
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "domain_roots_tamper"
+    base = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "domain_roots_tamper"
     _rm(base)
     run_dir = base / "run"
     firewall.safe_mkdir(str(run_dir.relative_to(REPO_ROOT)).replace("\\", "/"), kind="tmp")
@@ -199,7 +198,7 @@ def test_domain_roots_tamper_rejected_by_cmp01_validator(firewall) -> None:
         "intent": "domain roots tamper test",
         "inputs": {},
         "outputs": {"durable_paths": [], "validation_criteria": {}},
-        "catalytic_domains": ["CONTRACTS/_runs/_tmp/adversarial/domain_roots_tamper/domain"],
+        "catalytic_domains": ["LAW/CONTRACTS/_runs/_tmp/adversarial/domain_roots_tamper/domain"],
         "determinism": "deterministic",
     }
     _safe_write_text(run_dir / "JOBSPEC.json", json.dumps(jobspec, indent=2), firewall)
@@ -225,7 +224,7 @@ def test_domain_roots_tamper_rejected_by_cmp01_validator(firewall) -> None:
         firewall,
     )
 
-    proof_validator = RestorationProofValidator(REPO_ROOT / "CATALYTIC-DPT" / "SCHEMAS" / "proof.schema.json")
+    proof_validator = RestorationProofValidator(REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json")
     proof = proof_validator.generate_proof(
         run_id="adv-domain-roots",
         catalytic_domains=[domain],
