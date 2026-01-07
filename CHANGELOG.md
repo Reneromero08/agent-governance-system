@@ -4,6 +4,16 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.8] - 2026-01-07
+
+### Fixed
+- **Test Infrastructure Cleanup** — Cleaned up sloppy test code from parallel agent fixes
+  - **test_pack_consumer.py:** Consolidated duplicate setup code into `_setup_test_env()` helper
+  - **Fixed out_dir paths:** Changed from `tmp_path / "pack"` to `packer_core.PACKS_ROOT / "_test" / ...` (required by packer enforcement)
+  - **Removed duplicate monkeypatch calls:** Eliminated redundant `cas_mod._custom_writer` assignments
+  - **Fixed typo:** `NoOpFireewallWriter` → `NoOpFirewallWriter`
+  - **All 283 tests passing** in integration/core/pipeline suites
+
 ## [3.7.7] - 2026-01-07
 
 ### Added

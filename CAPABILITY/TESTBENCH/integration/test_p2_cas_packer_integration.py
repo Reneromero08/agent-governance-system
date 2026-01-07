@@ -15,10 +15,24 @@ if str(REPO_ROOT) not in sys.path:
 from MEMORY.LLM_PACKER.Engine.packer import core as packer_core
 from CAPABILITY.RUNS.records import load_output_hashes
 from CAPABILITY.CAS import cas as cas_mod
+from CAPABILITY.ARTIFACTS import store as store_mod
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
 
 FIXTURE_ROOT_REL = Path("CAPABILITY") / "TESTBENCH" / "fixtures" / "packer_p2_repo"
 FIXTURE_BODY_MARKER = "P2_BODY_MARKER_XYZ"
+
+
+def _make_test_writer(project_root: Path) -> GuardedWriter:
+    """Create a GuardedWriter configured for test temp directories."""
+    writer = GuardedWriter(
+        project_root=project_root,
+        tmp_roots=["_tmp"],
+        durable_roots=["cas", "runs", "CAS", "pack", "packs"],  # Dirs used by tests
+        exclusions=[],  # No exclusions in test mode
+    )
+    writer.open_commit_gate()  # Tests need durable writes enabled
+    return writer
 
 
 def _make_fixture_scope() -> packer_core.PackScope:
@@ -51,6 +65,10 @@ def test_p2_determinism_manifest_and_refs(tmp_path: Path, monkeypatch: pytest.Mo
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_custom_writer", test_writer)
+    monkeypatch.setattr(store_mod, "_custom_writer", test_writer)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     scope = _make_fixture_scope()
     monkeypatch.setitem(packer_core.SCOPES, "ags", scope)
@@ -112,6 +130,10 @@ def test_p2_lite_manifest_only(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) 
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_custom_writer", test_writer)
+    monkeypatch.setattr(store_mod, "_custom_writer", test_writer)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 
@@ -155,6 +177,10 @@ def test_p2_manifest_ordering(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_custom_writer", test_writer)
+    monkeypatch.setattr(store_mod, "_custom_writer", test_writer)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 
@@ -183,13 +209,15 @@ def test_p2_manifest_ordering(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -
 
 
 def test_p2_invalid_ref_fails_closed(monkeypatch: pytest.MonkeyPatch, tmp_path: Path) -> None:
-    from CAPABILITY.ARTIFACTS import store as store_mod
-
     cas_root = tmp_path / "cas"
     runs_dir = tmp_path / "runs"
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_custom_writer", test_writer)
+    monkeypatch.setattr(store_mod, "_custom_writer", test_writer)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 
@@ -224,6 +252,10 @@ def test_p2_root_completeness_gate(monkeypatch: pytest.MonkeyPatch, tmp_path: Pa
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_custom_writer", test_writer)
+    monkeypatch.setattr(store_mod, "_custom_writer", test_writer)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 

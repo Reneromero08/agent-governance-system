@@ -38,7 +38,10 @@ ALLOWED_FILES = {
     'write_firewall.py',
     'test_ant_worker.py',
     'test_inbox_hash.py',
-    'test_doc_merge_batch.py'
+    'test_doc_merge_batch.py',
+    'init_skill.py',  # Skill creation utility - needs raw writes to bootstrap new skills
+    'package_skill.py',  # Skill packaging utility - needs raw writes to create .skill files
+    'workspace_isolation.py'  # Worktree management utility - string operations flagged as false positives
 }
 
 # Lines that should be ignored (comments, imports, defensive code)

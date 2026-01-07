@@ -31,6 +31,19 @@ from CAPABILITY.PRIMITIVES.cas_store import (
     EXIT_UNSAFE_PATH,
     EXIT_BOUNDS_EXCEEDED
 )
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
+
+def _make_test_writer(project_root: Path) -> GuardedWriter:
+    """Create a GuardedWriter configured for test temp directories."""
+    writer = GuardedWriter(
+        project_root=project_root,
+        tmp_roots=["_tmp"],
+        durable_roots=["pack", "pack1", "pack2", "source", "restored", "empty"],  # Allow test dirs
+        exclusions=[],  # No exclusions in test mode
+    )
+    writer.open_commit_gate()  # Tests need durable writes enabled
+    return writer
 
 
 # The run_cli function and SCRIPT variable are removed as tests will directly call
@@ -42,6 +55,9 @@ class TestBuildReconstructVerify:
     """Test full roundtrip: build -> reconstruct -> verify."""
 
     def test_roundtrip_success(self, tmp_path):
+        # Create test writer for temp directory
+        test_writer = _make_test_writer(tmp_path)
+
         # Create source directory with diverse files
         src = tmp_path / "source"
         src.mkdir()
@@ -55,7 +71,7 @@ class TestBuildReconstructVerify:
         out = tmp_path / "pack"
         out.mkdir()
         with pytest.raises(SystemExit) as exc:
-            build(src, out, [])
+            build(src, out, [], writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
         assert (out / "manifest.json").exists()
         assert (out / "root.sha256").exists()
@@ -64,7 +80,7 @@ class TestBuildReconstructVerify:
         # Reconstruct
         dst = tmp_path / "restored"
         with pytest.raises(SystemExit) as exc:
-            reconstruct(out, dst)
+            reconstruct(out, dst, writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
 
         # Verify
@@ -77,6 +93,9 @@ class TestDeterminism:
     """Test that consecutive builds produce identical manifests."""
 
     def test_manifest_stable(self, tmp_path):
+        # Create test writer for temp directory
+        test_writer = _make_test_writer(tmp_path)
+
         src = tmp_path / "source"
         src.mkdir()
         (src / "file1.txt").write_text("content1")
@@ -88,11 +107,11 @@ class TestDeterminism:
         out2.mkdir()
 
         with pytest.raises(SystemExit) as exc:
-            build(src, out1, [])
+            build(src, out1, [], writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
 
         with pytest.raises(SystemExit) as exc:
-            build(src, out2, [])
+            build(src, out2, [], writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
 
         manifest1 = (out1 / "manifest.json").read_bytes()
@@ -108,6 +127,9 @@ class TestSafety:
     """Test safety caps and path validation."""
 
     def test_path_traversal_rejected(self, tmp_path):
+        # Create test writer for temp directory
+        test_writer = _make_test_writer(tmp_path)
+
         # We can't easily create a file with '..' in the name on most OSes,
         # but we can verify the validator rejects it at the logic level.
         # For now, just verify the script doesn't crash on normal input.
@@ -118,17 +140,20 @@ class TestSafety:
         out = tmp_path / "pack"
         out.mkdir()
         with pytest.raises(SystemExit) as exc:
-            build(src, out, [])
+            build(src, out, [], writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
 
     def test_empty_source(self, tmp_path):
+        # Create test writer for temp directory
+        test_writer = _make_test_writer(tmp_path)
+
         src = tmp_path / "empty"
         src.mkdir()
 
         out = tmp_path / "pack"
         out.mkdir()
         with pytest.raises(SystemExit) as exc:
-            build(src, out, [])
+            build(src, out, [], writer=test_writer)
         assert exc.value.code == EXIT_SUCCESS
 
 

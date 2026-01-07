@@ -53,9 +53,17 @@ from CAPABILITY.CAS.cas import (
 # Lazy import to avoid circular dependency
 _writer = None
 
+# Custom writer for tests (can be set via monkeypatch)
+_custom_writer = None
+
 def _get_writer():
     """Lazy initialization of GuardedWriter to avoid circular imports."""
-    global _writer
+    global _writer, _custom_writer
+
+    # If a custom writer is set (e.g., by tests), use it
+    if _custom_writer is not None:
+        return _custom_writer
+
     if _writer is None:
         from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
         _writer = GuardedWriter(

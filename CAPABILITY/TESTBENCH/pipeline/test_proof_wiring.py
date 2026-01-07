@@ -15,6 +15,19 @@ from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore, normalize_relpath
 from CAPABILITY.PRIMITIVES.ledger import Ledger
 from CAPABILITY.PRIMITIVES.merkle import build_manifest_root
 from CAPABILITY.PRIMITIVES.restore_proof import RestorationProofValidator, canonical_json_bytes, compute_domain_manifest
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
+
+def _make_test_writer(project_root: Path) -> GuardedWriter:
+    """Create a GuardedWriter configured for test temp directories."""
+    writer = GuardedWriter(
+        project_root=project_root,
+        tmp_roots=["_tmp"],
+        durable_roots=["CAS", "domain", "out1", "out2", "LEDGER.jsonl"],  # Allow CAS and test dirs
+        exclusions=[],  # No exclusions in test mode
+    )
+    writer.open_commit_gate()  # Tests need durable writes enabled
+    return writer
 
 
 def _sha256_hex(data: bytes) -> str:
@@ -70,6 +83,9 @@ def test_rerun_determinism_proof_and_domain_roots_bytes_identical(tmp_path: Path
     run_id = "run-determinism"
     timestamp = "CATALYTIC-DPT-02_CONFIG"
 
+    # Create a test writer for the temp directory
+    test_writer = _make_test_writer(tmp_path)
+
     # Create deterministic domain content.
     domain = tmp_path / "domain"
     domain.mkdir(parents=True)
@@ -78,7 +94,7 @@ def test_rerun_determinism_proof_and_domain_roots_bytes_identical(tmp_path: Path
     (domain / "b" / "c.txt").write_bytes(b"charlie")
 
     def generate_once(out_dir: Path) -> tuple[bytes, bytes]:
-        cas = CatalyticStore(out_dir / "CAS")
+        cas = CatalyticStore(out_dir / "CAS", writer=test_writer)
         pre_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
         post_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
 
@@ -121,12 +137,14 @@ def test_rerun_determinism_proof_and_domain_roots_bytes_identical(tmp_path: Path
 def test_tamper_detection_hash_mismatch() -> None:
     with TemporaryDirectory() as tmpdir:
         tmp = Path(tmpdir)
+        test_writer = _make_test_writer(tmp)
+
         domain = tmp / "domain"
         domain.mkdir(parents=True)
         target = domain / "file.txt"
         target.write_bytes(b"hello")
 
-        cas = CatalyticStore(tmp / "CAS")
+        cas = CatalyticStore(tmp / "CAS", writer=test_writer)
         pre_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
         # Tamper 1 byte
         target.write_bytes(b"jello")
