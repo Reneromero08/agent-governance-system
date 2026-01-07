@@ -4,6 +4,30 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.0] - 2026-01-07
+
+### Added
+- **Phase 1.7 Catalytic Hardening** — New roadmap phase for mathematical foundations and cryptographic canonization.
+  - **1.7.1 SPECTRUM Canon Promotion** — Promote SPECTRUM-02 through SPECTRUM-06 from archives to LAW/CANON/
+    - SPECTRUM-02: Resume Bundle (artifact set, forbidden artifacts, resume rule)
+    - SPECTRUM-03: Chain Verification (temporal integrity, reference validation)
+    - SPECTRUM-04: Identity & Signing (Ed25519, validator_id derivation, canonical JSON)
+    - SPECTRUM-05: Verification Law (10-phase procedure, 25 error codes, threat model)
+    - SPECTRUM-06: Restore Runner (eligibility, atomicity, error codes)
+  - **1.7.2 Formal Invariants Documentation** — Academic-grade formalization
+    - INV-CATALYTIC-01: Restoration correctness (pre = post ↔ verified)
+    - INV-CATALYTIC-02: O(log n) proof verification via Merkle height
+    - INV-CATALYTIC-03: Reversibility guarantee
+    - INV-CATALYTIC-04: Clean space bounded by O(log |corpus|)
+    - Link to Buhrman et al. complexity theory paper
+  - **1.7.3 Merkle Membership Proofs** — Partial verification without full manifest
+    - `build_manifest_with_proofs()` and `verify_membership()`
+    - Prove single file membership without revealing other files
+  - **1.7.4 Spectral Codec Research** — Future research on domain → spectrum encoding
+
+### Changed
+- **Roadmap Version**: 3.6.9 → 3.7.0
+
 ## [3.6.9] - 2026-01-07
 
 ### Added
