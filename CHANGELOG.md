@@ -1,8 +1,34 @@
-<!-- CONTENT_HASH: f1e3812c62f2a61ec5fe9602892996059e9a6f4d5b4bcfa401e2f077dcdf57d1 -->
+<!-- CONTENT_HASH: UPDATE_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.7.11] - 2026-01-07
+
+### Added
+- **Phase 4 Implementation (4.2-4.4)** — Cryptographic spine for catalytic architecture now IMPLEMENTED
+  - **4.2 Merkle Membership Proofs:** 15 tests passing
+    - `restore_proof.py`: Added `include_membership_proofs` param, `compute_manifest_root_with_proofs()`
+    - `catalytic_runtime.py`: Added `--full-proofs` CLI flag
+    - `verify_file.py`: NEW CLI for selective file verification
+    - Schema: Added `membership_proofs` to `domain_state` definition
+  - **4.3 Ed25519 Signatures:** 20 tests passing
+    - `signature.py`: NEW Ed25519 primitives (`generate_keypair`, `sign_proof`, `verify_signature`, `SignatureBundle`)
+    - `sign_proof.py`: NEW CLI with keygen/sign/verify/keyinfo subcommands
+    - Schema: Added `signature_bundle` definition with pattern constraints
+  - **4.4 Chain Verification:** 17 tests passing
+    - `restore_proof.py`: Added `previous_proof_hash` param, `verify_chain()`, `get_chain_history()`, `compute_proof_hash()`
+    - Schema: Added `previous_proof_hash` field
+    - 6 verification result codes: CHAIN_VALID, CHAIN_EMPTY, CHAIN_ROOT_HAS_PREVIOUS, CHAIN_LINK_MISSING, CHAIN_LINK_MISMATCH, PROOF_HASH_MISMATCH
+
+### Changed
+- **Roadmap Phase 4.2-4.4:** Updated from TODO to COMPLETE with 52 new tests total
+- **Roadmap Version:** 3.7.11
+
+### Status
+- **Phase 4.5 Atomic Restore:** TODO (next implementation target)
+- **Report:** `INBOX/reports/01-07-2026_PHASE_4_CATALYTIC_ARCHITECTURE_REPORT.md`
 
 ## [3.7.10] - 2026-01-07
 
