@@ -4,6 +4,17 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.7] - 2026-01-07
+
+### Added
+- **Phase 1.7.3: Merkle Membership Proofs** — Partial verification without full manifest disclosure
+  - **MerkleProof class:** Serializable proof with sibling hashes from leaf to root
+  - **build_manifest_with_proofs():** Build root AND membership proofs for each file
+  - **verify_membership():** Verify single file membership using only the proof
+  - **Schema extension:** Added `membership_proofs` to `LAW/SCHEMAS/proof.schema.json`
+  - **16 tests:** Valid verification, tamper rejection, determinism, edge cases
+  - Files: `CAPABILITY/PRIMITIVES/merkle.py`, `CAPABILITY/TESTBENCH/core/test_merkle_proofs.py`
+
 ## [3.7.6] - 2026-01-07
 
 ### Added
