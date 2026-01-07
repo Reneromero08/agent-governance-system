@@ -51,7 +51,6 @@ This document defines the classification buckets of the Agent Governance System 
 
 **Key Directories:**
 - `NAVIGATION/MAPS/` - Ownership and data flow maps.
-- `NAVIGATION/ROADMAPS/` - Master strategy and lane tracking.
 - `NAVIGATION/CORTEX/` - Semantic index and metadata.
 
 **Operations:**
@@ -115,7 +114,6 @@ This document defines the classification buckets of the Agent Governance System 
 | `CAPABILITY/MCP/` | **CAPABILITY** | INSTRUMENT |
 | `CAPABILITY/TESTBENCH/` | **CAPABILITY** | INSTRUMENT |
 | `NAVIGATION/MAPS/` | **NAVIGATION** | DIRECTION |
-| `NAVIGATION/ROADMAPS/` | **NAVIGATION** | DIRECTION |
 | `NAVIGATION/CORTEX/` | **NAVIGATION** | DIRECTION |
 | `MEMORY/LLM_PACKER/` | **MEMORY** | HISTORY |
 | `MEMORY/_packs/` | **MEMORY** | HISTORY |

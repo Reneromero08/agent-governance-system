@@ -4,6 +4,16 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.4.10] - 2026-01-07
+
+### Changed
+- **Roadmap Relocation**: Moved `AGS_ROADMAP_MASTER.md` from `NAVIGATION/ROADMAPS/` to repository root for visibility and semantic consistency.
+  - **Deleted**: `NAVIGATION/ROADMAPS/` directory.
+  - **Updated**: All internal references in `pruned.py`, `AGENTS.md`, `SYSTEM_BUCKETS.md`, `ENTRYPOINTS.md`, `FILE_OWNERSHIP.md`, `SYSTEM_MAP.md`, and `0_ORIENTATION_CANON.md`.
+  - **Documentation**: Added explicit "LIVES AT REPOSITORY ROOT" warning in `AGENTS.md`.
+  - **Governance**: Updated `LAW/CANON/SYSTEM_BUCKETS.md` to reflect the new structure.
+- **Reference Cleanup**: Verified removal of all `NAVIGATION/ROADMAPS` references in tracked files (excluding historical changelog entries).
+
 ## [3.4.9] - 2026-01-07
 
 ### Added

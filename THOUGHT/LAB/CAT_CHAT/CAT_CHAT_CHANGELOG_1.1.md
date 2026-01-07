@@ -61,7 +61,7 @@ All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file
 
 **System-wide enhancements moved to master roadmap:**
 - Lane Ω (God-Tier) removed from CAT_CHAT roadmap
-- Now lives in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md` Lane Ω:
+- Now lives in `AGS_ROADMAP_MASTER.md` Lane Ω:
   - Ω.1: Performance Foundation (Incremental Indexing, Query Caching, Metrics)
   - Ω.2: Scale & Governance (Federation, Temporal Queries, Receipt Compression)
   - Ω.3: Intelligence & UX (Auto-Symbols, Smart Slicing, Provenance Graphs, ZK Proofs)

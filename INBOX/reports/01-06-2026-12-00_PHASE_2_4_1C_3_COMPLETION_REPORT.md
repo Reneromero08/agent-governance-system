@@ -88,7 +88,7 @@ The mechanical verification suite confirms the system state:
 
 ### ARTIFACTS
 *   `CHANGELOG.md`: Updated with completion entry.
-*   `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md`: Phase 2.4.1C.3 marked COMPLETE.
+*   `AGS_ROADMAP_MASTER.md`: Phase 2.4.1C.3 marked COMPLETE.
 *   `INBOX/reports/01-06-2026-12-00_PHASE_2_4_1C_3_COMPLETION_REPORT.md`: This report.
 
 ### NEXT STEPS

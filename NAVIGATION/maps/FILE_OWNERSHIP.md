@@ -30,7 +30,6 @@ To minimise conflicts and maintain clarity, this document assigns responsibility
 | Path | Owner | Notes |
 |---|---|---|
 | `NAVIGATION/CORTEX/*` | Index team | Semantic database schema and build scripts |
-| `NAVIGATION/ROADMAPS/*` | Strategic leads | Master plans and future direction |
 | `NAVIGATION/maps/*` | Architecture team | Usage maps and flow diagrams |
 | `INDEX.md` | Automated/Stewards | Directory indices |
 

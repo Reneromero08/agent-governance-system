@@ -89,7 +89,7 @@ Build a chat substrate where models write compact, structured messages that refe
 
 ## System-Wide Enhancements
 
-**Note:** Advanced features like incremental indexing, query caching, metrics dashboards, federation, temporal queries, and provenance visualization are defined in `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md` (Lane Ω: God-Tier System Evolution).
+**Note:** Advanced features like incremental indexing, query caching, metrics dashboards, federation, temporal queries, and provenance visualization are defined in `AGS_ROADMAP_MASTER.md` (Lane Ω: God-Tier System Evolution).
 
 These features apply to the entire AGS system, not just CAT_CHAT. See the master roadmap for:
 - **Ω.1**: Performance Foundation (Incremental Indexing, Query Caching, Metrics Dashboard)
@@ -116,4 +116,4 @@ These features apply to the entire AGS system, not just CAT_CHAT. See the master
 4. **Phase 7 (Production)** - MCP integration + swarm coordination
 5. **Phase 8 (Measurement)** - Metrics & Baselines
 
-**For system-wide enhancements** (incremental indexing, caching, federation, etc.), see `NAVIGATION/ROADMAPS/AGS_ROADMAP_MASTER.md` Lane Ω.
+**For system-wide enhancements** (incremental indexing, caching, federation, etc.), see `AGS_ROADMAP_MASTER.md` Lane Ω.

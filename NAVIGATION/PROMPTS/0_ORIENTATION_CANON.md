@@ -135,7 +135,7 @@ Fail-closed rules:
 2) LAW/CANON/CONTRACT.md
 3) LAW/CANON/INTEGRITY.md
 4) LAW/CANON/INVARIANTS.md
-5) NAVIGATION/ROADMAPS/ (choose the active roadmap file)
+5) AGS_ROADMAP_MASTER.md (master roadmap at repository root)
 6) NAVIGATION/PROMPTS/* canon files (policy, guide, templates)
 
 ## Glossary anchors

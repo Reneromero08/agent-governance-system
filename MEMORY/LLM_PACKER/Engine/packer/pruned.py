@@ -4,7 +4,7 @@ Output target: pack_dir/PRUNED/
 
 PRUNED is a reduced planning context optimized for LLM navigation.
 It MUST include:
-- NAVIGATION/ROADMAPS/**
+- AGS_ROADMAP_MASTER.md (root-level master roadmap)
 - NAVIGATION/OPS/**
 - LAW/CANON/**
 - LAW/CONTEXT/**
@@ -78,8 +78,8 @@ def _is_pruned_allowed_path(rel_path: str, *, scope: PackScope) -> bool:
         return False
 
     if scope.key == SCOPE_AGS.key:
-        # INCLUDE: NAVIGATION/ROADMAPS/**
-        if parts[0] == "NAVIGATION" and len(parts) > 1 and parts[1] == "ROADMAPS":
+        # INCLUDE: AGS_ROADMAP_MASTER.md at root
+        if rel_path == "AGS_ROADMAP_MASTER.md":
             return True
 
         # INCLUDE: NAVIGATION/OPS/**
@@ -119,8 +119,8 @@ def _is_pruned_allowed_path(rel_path: str, *, scope: PackScope) -> bool:
 
     elif scope.key == SCOPE_LAB.key:
         # LAB scope: include minimal navigation context
-        # INCLUDE: NAVIGATION/ROADMAPS/**
-        if parts[0] == "NAVIGATION" and len(parts) > 1 and parts[1] == "ROADMAPS":
+        # INCLUDE: AGS_ROADMAP_MASTER.md at root
+        if rel_path == "AGS_ROADMAP_MASTER.md":
             return True
 
         return False
@@ -226,7 +226,7 @@ def write_pruned_pack(
             "scope": scope.key,
             "rules": {
                 "include": {
-                    "NAVIGATION/ROADMAPS/**": "Roadmap and planning documents",
+                    "AGS_ROADMAP_MASTER.md": "Master roadmap at repository root",
                     "NAVIGATION/OPS/**": "Operational procedures",
                     "LAW/CANON/**": "Core governance rules",
                     "LAW/CONTEXT/**": "ADRs and decision records",
@@ -355,7 +355,7 @@ def _write_pruned_index_ags(
         return "\n".join(lines).rstrip() + "\n"
 
     # Group entries by category
-    roadmap_paths = [e["path"] for e in entries if "NAVIGATION/ROADMAPS" in e["path"]]
+    roadmap_paths = [e["path"] for e in entries if e["path"] == "AGS_ROADMAP_MASTER.md"]
     ops_paths = [e["path"] for e in entries if "NAVIGATION/OPS" in e["path"]]
     canon_paths = [e["path"] for e in entries if "LAW/CANON" in e["path"]]
     context_paths = [e["path"] for e in entries if "LAW/CONTEXT" in e["path"]]
@@ -459,7 +459,7 @@ def _write_pruned_index_lab(
 ) -> None:
     """Write LAB PRUNED index files (minimal)."""
 
-    roadmap_paths = [e["path"] for e in entries if "NAVIGATION/ROADMAPS" in e["path"]]
+    roadmap_paths = [e["path"] for e in entries if e["path"] == "AGS_ROADMAP_MASTER.md"]
 
     index_content = "\n".join(
         [
@@ -499,7 +499,7 @@ def _write_pruned_index_lab(
                 lines.append("")
             return "\n".join(lines).rstrip() + "\n"
 
-        nav_content = section("NAVIGATION/ROADMAPS", sorted(roadmap_paths))
+        nav_content = section("AGS_ROADMAP_MASTER.md", sorted(roadmap_paths))
         if writer is None:
             (pruned_dir / "LAB-01_NAVIGATION.md").write_text(nav_content, encoding="utf-8")
         else:
