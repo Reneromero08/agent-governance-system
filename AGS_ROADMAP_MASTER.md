@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.6.9
+version: 3.7.0
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -63,6 +63,78 @@ notes:
   - [x] CMP-01 protocol is documented in canonical location
   - [x] All code implementations reference the canonical doc
   - [x] New agents can understand catalytic execution without reading implementation code
+
+## 1.7 Catalytic Hardening (Mathematical Foundations)
+**Status:** TODO
+**Priority:** Medium (improves defensibility, not blocking)
+**Purpose:** Promote SPECTRUM cryptographic specs to canon, formalize invariants, add Merkle membership proofs.
+
+### 1.7.1 SPECTRUM Canon Promotion
+**Purpose:** The SPECTRUM specs (02-06) define cryptographic binding, Ed25519 signing, chain verification, and restore runner semantics. Currently archived in `MEMORY/ARCHIVE/catalytic-department-merged/`. These are the cryptographic spine of catalytic computing.
+
+- [ ] 1.7.1.1 Promote SPECTRUM-02 (Resume Bundle) to `LAW/CANON/SPECTRUM-02_RESUME_BUNDLE.md`
+  - Bundle artifact set, forbidden artifacts, resume rule, agent obligations
+- [ ] 1.7.1.2 Promote SPECTRUM-03 (Chain Verification) to `LAW/CANON/SPECTRUM-03_CHAIN_VERIFICATION.md`
+  - Temporal integrity, chain memory model, reference validation
+- [ ] 1.7.1.3 Promote SPECTRUM-04 (Identity & Signing) to `LAW/CANON/SPECTRUM-04_IDENTITY_SIGNING.md`
+  - Ed25519 identity, validator_id derivation, canonical JSON, bundle/chain root computation
+- [ ] 1.7.1.4 Promote SPECTRUM-05 (Verification Law) to `LAW/CANON/SPECTRUM-05_VERIFICATION_LAW.md`
+  - 10-phase verification procedure, 25 error codes, threat model
+- [ ] 1.7.1.5 Promote SPECTRUM-06 (Restore Runner) to `LAW/CANON/SPECTRUM-06_RESTORE_RUNNER.md`
+  - Restore eligibility, path safety, atomicity, error codes
+- [ ] 1.7.1.6 Add ADR-039 documenting SPECTRUM promotion rationale
+- **Exit Criteria**
+  - [ ] All 5 SPECTRUM specs in LAW/CANON/
+  - [ ] CMP-01 references SPECTRUM specs for cryptographic details
+  - [ ] CATALYTIC_COMPUTING.md references SPECTRUM for signing/identity
+
+### 1.7.2 Formal Invariants Documentation
+**Purpose:** Make catalytic correctness academically defensible by formalizing the mathematical guarantees.
+
+- [ ] 1.7.2.1 Add "Formal Invariants" section to `LAW/CANON/CATALYTIC_COMPUTING.md`:
+  ```
+  INV-CATALYTIC-01: ∀ run R, domain D: pre_snapshot(D) = post_snapshot(D) ↔ proof.verified = true
+  INV-CATALYTIC-02: Proof verification is O(log n) where n = |files in D| (Merkle height)
+  INV-CATALYTIC-03: Restoration is reversible: ∀ state S. restore(snapshot(S)) = S
+  INV-CATALYTIC-04: Clean space bounded: |context_tokens| ≤ O(log |corpus|)
+  ```
+- [ ] 1.7.2.2 Add complexity analysis section linking to Buhrman et al. paper
+  - Map AGS clean space → formal clean space
+  - Map AGS catalytic store → formal catalytic space
+  - Document how restoration constraint is enforced
+- [ ] 1.7.2.3 Add "Threat Model" section to CMP-01 (expand existing minimal section)
+  - What CMP-01 defends against (adversarial agents, drift, pollution)
+  - What CMP-01 does NOT defend against (OS-level bypass, network side effects)
+  - Reference SPECTRUM-05 threat model for cryptographic threats
+- **Exit Criteria**
+  - [ ] Formal invariants are machine-verifiable (tests assert them)
+  - [ ] An academic reader can trace AGS implementation to Buhrman et al. theory
+
+### 1.7.3 Merkle Membership Proofs
+**Purpose:** Enable partial verification without full manifest disclosure.
+
+- [ ] 1.7.3.1 Extend `CAPABILITY/PRIMITIVES/merkle.py` with:
+  - `build_manifest_with_proofs(manifest) -> (root, proofs)` where proofs[path] = sibling hashes
+  - `verify_membership(path, hash, proof, root) -> bool`
+- [ ] 1.7.3.2 Add membership proof to PROOF.json schema (optional field)
+  - Allows proving "file X was in domain at snapshot time" without revealing other files
+- [ ] 1.7.3.3 Add `CAPABILITY/TESTBENCH/core/test_merkle_proofs.py`:
+  - Valid proof verification
+  - Tampered proof rejection
+  - Missing sibling rejection
+  - Deterministic proof generation
+- **Exit Criteria**
+  - [ ] Partial verification possible (prove single file membership)
+  - [ ] Proofs are deterministic and tamper-evident
+
+### 1.7.4 Spectral Codec Research (Future)
+**Purpose:** Domain → spectrum encoding for compression (from archived semiotic research).
+
+- [ ] 1.7.4.1 Review `MEMORY/ARCHIVE/catalytic-department-merged/` for semiotic compression research
+- [ ] 1.7.4.2 Assess if spectral codec adds value beyond current CAS + Merkle approach
+- [ ] 1.7.4.3 If valuable: design `spectral_codec.py` with deterministic encoding
+- **Exit Criteria**
+  - [ ] Decision: implement spectral codec or document why not needed
 
 ### 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
 Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
