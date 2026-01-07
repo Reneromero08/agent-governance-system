@@ -4,6 +4,25 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.6.9] - 2026-01-07
+
+### Added
+- **Phase 1.6 CMP-01 Documentation COMPLETE** — Canonical protocol documentation now exists.
+  - **Canon**: `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` (11KB)
+    - Six-phase lifecycle: Declare → Snapshot → Execute → Commit → Restore → Prove
+    - Canonical artifact set (8 files)
+    - Path constants: DURABLE_ROOTS, CATALYTIC_ROOTS, FORBIDDEN_ROOTS
+    - Three enforcement layers: Preflight, Runtime Guard, CI Gate
+    - Proof-gated acceptance criteria
+    - Implementation file references, schema references, test references
+  - **ADR**: `LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md`
+    - Design rationale, alternatives considered (git-based, overlay FS, containers)
+    - Consequences analysis
+  - **Fixed**: `LAW/CANON/CATALYTIC_COMPUTING.md` reference path and all path prefixes
+
+### Changed
+- **Roadmap Version**: 3.6.8 → 3.6.9
+
 ## [3.6.8] - 2026-01-07
 
 ### Added

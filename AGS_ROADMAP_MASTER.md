@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.6.8
+version: 3.6.9
 last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -43,35 +43,26 @@ notes:
 
 **Archive:** [`MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md`](MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md)
 
-## 1.6 CMP-01 Catalytic Mutation Protocol Documentation (Foundational Gap)
-**Status:** Implementation exists, canonical documentation MISSING
+## 1.6 CMP-01 Catalytic Mutation Protocol Documentation ✅ COMPLETE
+**Status:** DONE (2026-01-07)
 
-**Problem:** `LAW/CANON/CATALYTIC_COMPUTING.md` (line 122) references:
-```
-CONTEXT/research/Catalytic Computing/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md
-```
-This file does not exist. The protocol IS implemented in code but lacks canonical documentation.
+**Deliverables:**
+- [x] `LAW/CANON/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md` — Canonical protocol specification (11KB)
+- [x] `LAW/CANON/CATALYTIC_COMPUTING.md` — Updated reference path, fixed all path prefixes
+- [x] `LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md` — Design rationale
 
-**Existing Implementation:**
-- `CAPABILITY/TOOLS/catalytic/catalytic_runtime.py` - Five-phase lifecycle
-- `CAPABILITY/TOOLS/catalytic/catalytic_validator.py` - Proof-gated acceptance
-- `CAPABILITY/TOOLS/agents/skill_runtime.py` - CMP-01 pre-validation enforcement
-- `CAPABILITY/MCP/server.py` - CMP-01 path validation rules
-- `LAW/SCHEMAS/ledger.schema.json` - Run ledger schema
-
-**Tasks:**
-- [ ] 1.6.1 Create `LAW/CONTEXT/research/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md`
-  - Document five-phase lifecycle: Declare → Snapshot → Mutate → Commit → Restore → Prove
-  - Document run ledger schema and canonical artifact set
-  - Document allowed/forbidden domains and path validation rules
-  - Document proof-gated acceptance criteria
-- [ ] 1.6.2 Update `LAW/CANON/CATALYTIC_COMPUTING.md` reference path if needed
-- [ ] 1.6.3 Add ADR for CMP-01 rationale (why this protocol, alternatives considered)
+**Documentation Covers:**
+- Six-phase lifecycle: Declare → Snapshot → Execute → Commit → Restore → Prove
+- Canonical artifact set (8 files)
+- Path constants: DURABLE_ROOTS, CATALYTIC_ROOTS, FORBIDDEN_ROOTS
+- Three enforcement layers: Preflight, Runtime Guard, CI Gate
+- Proof-gated acceptance criteria
+- Integration points (CORTEX, Packer, Skills)
 
 - **Exit Criteria**
-  - [ ] CMP-01 protocol is documented in canonical location
-  - [ ] All code implementations reference the canonical doc
-  - [ ] New agents can understand catalytic execution without reading implementation code
+  - [x] CMP-01 protocol is documented in canonical location
+  - [x] All code implementations reference the canonical doc
+  - [x] New agents can understand catalytic execution without reading implementation code
 
 ### 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
 Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
