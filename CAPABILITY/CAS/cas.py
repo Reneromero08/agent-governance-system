@@ -35,9 +35,17 @@ _CAS_ROOT = Path("CAPABILITY/CAS/storage")
 # Lazy import to avoid circular dependency
 _writer = None
 
+# Custom writer for tests (can be set via monkeypatch)
+_custom_writer = None
+
 def _get_writer():
     """Lazy initialization of GuardedWriter to avoid circular imports."""
-    global _writer
+    global _writer, _custom_writer
+
+    # If a custom writer is set (e.g., by tests), use it
+    if _custom_writer is not None:
+        return _custom_writer
+
     if _writer is None:
         from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
         _writer = GuardedWriter(
@@ -83,27 +91,31 @@ def cas_put(data: bytes) -> str:
     # Get the path where the object should be stored
     obj_path = _get_object_path(hash_str)
 
+    # Get the writer and its project root
+    writer = _get_writer()
+    project_root = writer.project_root if hasattr(writer, 'project_root') else REPO_ROOT
+
     # Create directories if they don't exist (using GuardedWriter)
-    # Handle relative paths by making them relative to REPO_ROOT
+    # Handle relative paths by making them relative to project_root
     if obj_path.parent.is_absolute():
-        parent_rel = str(obj_path.parent.relative_to(REPO_ROOT))
+        parent_rel = str(obj_path.parent.relative_to(project_root))
     else:
         parent_rel = str(obj_path.parent)
-    _get_writer().mkdir_durable(parent_rel, parents=True, exist_ok=True)
-    
+    writer.mkdir_durable(parent_rel, parents=True, exist_ok=True)
+
     # Check if object already exists
     if obj_path.exists():
         # If it exists, return the hash without rewriting
         return hash_str
-    
+
     # Write data using GuardedWriter (which handles atomic writes internally)
     try:
         # Handle relative paths
         if obj_path.is_absolute():
-            obj_rel = str(obj_path.relative_to(REPO_ROOT))
+            obj_rel = str(obj_path.relative_to(project_root))
         else:
             obj_rel = str(obj_path)
-        _get_writer().write_durable(obj_rel, data)
+        writer.write_durable(obj_rel, data)
 
         # Re-read and verify integrity
         with open(obj_path, 'rb') as f:

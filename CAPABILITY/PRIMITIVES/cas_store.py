@@ -113,15 +113,19 @@ def validate_path(rel: str, src_root: Path) -> bool:
     return True
 
 
-def build(src: Path, out: Path, ignores: list):
+def build(src: Path, out: Path, ignores: list, writer=None):
     if not src.is_dir():
         print(f"Error: Source is not a directory: {src}")
         sys.exit(EXIT_ERROR)
 
+    # Use provided writer or default
+    w = writer or _get_writer()
+    project_root = w.project_root if hasattr(w, 'project_root') else REPO_ROOT
+
     cas_dir = out / 'cas'
     # Use GuardedWriter for directory creation
-    cas_dir_rel = str(cas_dir.relative_to(REPO_ROOT)) if cas_dir.is_relative_to(REPO_ROOT) else str(cas_dir)
-    _get_writer().mkdir_durable(cas_dir_rel, parents=True, exist_ok=True)
+    cas_dir_rel = str(cas_dir.relative_to(project_root)) if cas_dir.is_relative_to(project_root) else str(cas_dir)
+    w.mkdir_durable(cas_dir_rel, parents=True, exist_ok=True)
 
     manifest = {}
     file_count = 0
@@ -160,33 +164,33 @@ def build(src: Path, out: Path, ignores: list):
 
             # Store in CAS (sharded by first 2 chars)
             shard = cas_dir / h[:2]
-            shard_rel = str(shard.relative_to(REPO_ROOT)) if shard.is_relative_to(REPO_ROOT) else str(shard)
-            _get_writer().mkdir_durable(shard_rel, exist_ok=True)
+            shard_rel = str(shard.relative_to(project_root)) if shard.is_relative_to(project_root) else str(shard)
+            w.mkdir_durable(shard_rel, exist_ok=True)
             blob = shard / h
             if not blob.exists():
-                blob_rel = str(blob.relative_to(REPO_ROOT)) if blob.is_relative_to(REPO_ROOT) else str(blob)
-                _get_writer().write_durable(blob_rel, content)
+                blob_rel = str(blob.relative_to(project_root)) if blob.is_relative_to(project_root) else str(blob)
+                w.write_durable(blob_rel, content)
 
             manifest[rel] = {'sha256': h, 'size': fsize}
 
     # Write manifest
     manifest_bytes = canonical_json(manifest)
     manifest_path = out / 'manifest.json'
-    manifest_rel = str(manifest_path.relative_to(REPO_ROOT)) if manifest_path.is_relative_to(REPO_ROOT) else str(manifest_path)
-    _get_writer().write_durable(manifest_rel, manifest_bytes)
+    manifest_rel = str(manifest_path.relative_to(project_root)) if manifest_path.is_relative_to(project_root) else str(manifest_path)
+    w.write_durable(manifest_rel, manifest_bytes)
 
     # Write root hash
     root_hash = sha256_bytes(manifest_bytes)
     root_path = out / 'root.sha256'
-    root_rel = str(root_path.relative_to(REPO_ROOT)) if root_path.is_relative_to(REPO_ROOT) else str(root_path)
-    _get_writer().write_durable(root_rel, root_hash)
+    root_rel = str(root_path.relative_to(project_root)) if root_path.is_relative_to(project_root) else str(root_path)
+    w.write_durable(root_rel, root_hash)
 
     print(f"Build complete: {file_count} files, {total_bytes} bytes")
     print(f"Root hash: {root_hash}")
     sys.exit(EXIT_SUCCESS)
 
 
-def reconstruct(pack: Path, dst: Path):
+def reconstruct(pack: Path, dst: Path, writer=None):
     manifest_path = pack / 'manifest.json'
     cas_dir = pack / 'cas'
 
@@ -194,10 +198,14 @@ def reconstruct(pack: Path, dst: Path):
         print(f"Error: manifest.json not found in {pack}")
         sys.exit(EXIT_ERROR)
 
+    # Use provided writer or default
+    w = writer or _get_writer()
+    project_root = w.project_root if hasattr(w, 'project_root') else REPO_ROOT
+
     manifest = json.loads(manifest_path.read_bytes())
 
-    dst_rel = str(dst.relative_to(REPO_ROOT)) if dst.is_relative_to(REPO_ROOT) else str(dst)
-    _get_writer().mkdir_durable(dst_rel, parents=True, exist_ok=True)
+    dst_rel = str(dst.relative_to(project_root)) if dst.is_relative_to(project_root) else str(dst)
+    w.mkdir_durable(dst_rel, parents=True, exist_ok=True)
 
     for rel, meta in manifest.items():
         h = meta['sha256']
@@ -214,10 +222,10 @@ def reconstruct(pack: Path, dst: Path):
             sys.exit(EXIT_VERIFY_MISMATCH)
 
         out_path = dst / rel
-        out_parent_rel = str(out_path.parent.relative_to(REPO_ROOT)) if out_path.parent.is_relative_to(REPO_ROOT) else str(out_path.parent)
-        _get_writer().mkdir_durable(out_parent_rel, parents=True, exist_ok=True)
-        out_rel = str(out_path.relative_to(REPO_ROOT)) if out_path.is_relative_to(REPO_ROOT) else str(out_path)
-        _get_writer().write_durable(out_rel, content)
+        out_parent_rel = str(out_path.parent.relative_to(project_root)) if out_path.parent.is_relative_to(project_root) else str(out_path.parent)
+        w.mkdir_durable(out_parent_rel, parents=True, exist_ok=True)
+        out_rel = str(out_path.relative_to(project_root)) if out_path.is_relative_to(project_root) else str(out_path)
+        w.write_durable(out_rel, content)
 
     print(f"Reconstruct complete: {len(manifest)} files to {dst}")
     sys.exit(EXIT_SUCCESS)

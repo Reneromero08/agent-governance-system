@@ -13,10 +13,25 @@ from CAPABILITY.PRIMITIVES.hash_toolbelt import (
     hash_describe,
     hash_read_text,
 )
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+
+
+def _make_test_writer(project_root: Path) -> GuardedWriter:
+    """Create a GuardedWriter configured for test temp directories."""
+    writer = GuardedWriter(
+        project_root=project_root,
+        tmp_roots=["_tmp"],
+        durable_roots=["cas"],  # Allow CAS dir
+        exclusions=[],  # No exclusions in test mode
+    )
+    writer.open_commit_gate()  # Tests need durable writes enabled
+    return writer
+
 
 @pytest.fixture
 def store(tmp_path):
-    s = CatalyticStore(tmp_path / "cas")
+    test_writer = _make_test_writer(tmp_path)
+    s = CatalyticStore(tmp_path / "cas", writer=test_writer)
     return s
 
 def test_hash_ast_identity(store):

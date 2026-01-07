@@ -18,9 +18,22 @@ if str(REPO_ROOT) not in sys.path:
 from MEMORY.LLM_PACKER.Engine.packer import core as packer_core
 from CAPABILITY.CAS import cas as cas_mod
 from CAPABILITY.GC import gc
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
 
 FIXTURE_ROOT_REL = Path("CAPABILITY") / "TESTBENCH" / "fixtures" / "packer_p2_repo"
+
+
+def _make_test_writer(project_root: Path) -> GuardedWriter:
+    """Create a GuardedWriter configured for test temp directories."""
+    writer = GuardedWriter(
+        project_root=project_root,
+        tmp_roots=["_tmp"],
+        durable_roots=["cas", "runs", "CAS", "pack", "packs"],  # Dirs used by tests
+        exclusions=[],  # No exclusions in test mode
+    )
+    writer.open_commit_gate()  # Tests need durable writes enabled
+    return writer
 
 
 def _make_fixture_scope() -> packer_core.PackScope:
@@ -46,7 +59,7 @@ def _make_fixture_scope() -> packer_core.PackScope:
 def test_gc_never_deletes_pack_referenced_blobs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """
     GC must never delete blobs referenced by active packs.
-    
+
     Setup:
     1. Create a pack with CAS-addressed manifest
     2. Store some unreferenced blobs in CAS
@@ -60,6 +73,10 @@ def test_gc_never_deletes_pack_referenced_blobs(tmp_path: Path, monkeypatch: pyt
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_writer", test_writer)
+    monkeypatch.setattr(cas_mod, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 
@@ -142,7 +159,7 @@ def test_gc_never_deletes_pack_referenced_blobs(tmp_path: Path, monkeypatch: pyt
 def test_gc_respects_run_roots_from_packer(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """
     Verify that packer writes RUN_ROOTS.json and GC respects it.
-    
+
     This is the integration test for P.2.4: GC roots are defined via active packs.
     """
     cas_root = tmp_path / "cas"
@@ -150,6 +167,10 @@ def test_gc_respects_run_roots_from_packer(tmp_path: Path, monkeypatch: pytest.M
     cas_root.mkdir(parents=True, exist_ok=True)
     runs_dir.mkdir(parents=True, exist_ok=True)
 
+    # Create test writer that allows tmp_path
+    test_writer = _make_test_writer(tmp_path)
+    monkeypatch.setattr(cas_mod, "_writer", test_writer)
+    monkeypatch.setattr(cas_mod, "REPO_ROOT", tmp_path)
     monkeypatch.setattr(cas_mod, "_CAS_ROOT", cas_root)
     monkeypatch.setitem(packer_core.SCOPES, "ags", _make_fixture_scope())
 
