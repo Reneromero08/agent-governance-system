@@ -1,8 +1,15 @@
-<!-- CONTENT_HASH: 75d216013b0821f663847dbc513d2a3ced47ad2abb61c03092c3287447635d25 -->
+<!-- CONTENT_HASH: 2a7a42ff95b18df699739be20e113693999a886654e83cd8d057b847426b23b7 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+## [3.4.1] - 2026-01-06
+
+### Changed
+- **LLM Packer Archive Exclusion** - `MEMORY/ARCHIVE/` is excluded from AGS packs.
+- **LLM Packer PRUNED Output** - PRUNED output is now wired into pack generation and can be disabled with `--no-emit-pruned`.
+- **LLM Packer Smoke Fixture** - Added archive exclusion assertion for pack validation.
 
 ## [3.4.0] - 2026-01-06
 

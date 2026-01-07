@@ -274,4 +274,3 @@ if __name__ == "__main__":
     indexer = CortexIndexer(db, target_dir=target_dir, writer=writer)
     indexer.index_all()
     db.close()
-```

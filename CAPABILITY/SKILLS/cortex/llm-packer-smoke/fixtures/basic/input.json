@@ -6,5 +6,6 @@
   "scope": "ags",
   "stamp": "fixture-smoke",
   "zip": false,
-  "emit_pruned": false
+  "emit_pruned": false,
+  "assert_archive_excluded": true
 }

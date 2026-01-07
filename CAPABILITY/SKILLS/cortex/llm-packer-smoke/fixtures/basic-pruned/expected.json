@@ -18,8 +18,11 @@
     "SPLIT/AGS-04_PROOFS.md",
     "SPLIT/AGS-05_MEMORY.md",
     "SPLIT/AGS-06_ROOT_FILES.md",
+    "PRUNED/PACK_MANIFEST_PRUNED.json",
+    "PRUNED/meta/PRUNED_RULES.json",
     "FULL/AGS-FULL-fixture-smoke-pruned.md",
     "FULL/AGS-FULL-TREEMAP-fixture-smoke-pruned.md"
   ],
-  "emit_pruned": true
+  "emit_pruned": true,
+  "archive_excluded": true
 }

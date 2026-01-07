@@ -21,5 +21,6 @@
     "FULL/AGS-FULL-fixture-smoke.md",
     "FULL/AGS-FULL-TREEMAP-fixture-smoke.md"
   ],
-  "emit_pruned": false
+  "emit_pruned": false,
+  "archive_excluded": true
 }

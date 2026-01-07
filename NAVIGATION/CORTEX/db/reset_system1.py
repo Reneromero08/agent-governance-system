@@ -20,7 +20,8 @@ def reset_db():
         durable_roots=[
             "LAW/CONTRACTS/_runs",
             "NAVIGATION/CORTEX/_generated",
-            "NAVIGATION/CORTEX/db"
+            "NAVIGATION/CORTEX/db",
+            "NAVIGATION/CORTEX/meta"
         ]
     )
     writer.open_commit_gate()
