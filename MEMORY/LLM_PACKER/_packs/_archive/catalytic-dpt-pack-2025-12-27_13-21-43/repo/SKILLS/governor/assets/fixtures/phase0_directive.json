@@ -1,0 +1,77 @@
+{
+    "directive_id": "phase0-contracts-20251224",
+    "from": "President",
+    "to": "Governor",
+    "priority": 10,
+    "phase": 0,
+    "goal": "Create the three canonical JSON schemas for catalytic computing",
+    "context": {
+        "department": "CATALYTIC-DPT",
+        "sop": "GOVERNOR_SOP.json",
+        "schema_spec": "SCHEMAS/README.md"
+    },
+    "deliverables": [
+        {
+            "id": "jobspec-schema",
+            "path": "CATALYTIC-DPT/SCHEMAS/jobspec.schema.json",
+            "description": "JSON Schema Draft 7 defining valid JobSpec format",
+            "validation": {
+                "must_be_valid_json": true,
+                "must_be_valid_json_schema": true,
+                "must_self_validate": true
+            }
+        },
+        {
+            "id": "validation-error-schema",
+            "path": "CATALYTIC-DPT/SCHEMAS/validation_error.schema.json",
+            "description": "JSON Schema Draft 7 for deterministic error reporting",
+            "validation": {
+                "must_be_valid_json": true,
+                "must_be_valid_json_schema": true
+            }
+        },
+        {
+            "id": "ledger-schema",
+            "path": "CATALYTIC-DPT/SCHEMAS/ledger.schema.json",
+            "description": "JSON Schema Draft 7 for run audit trails",
+            "validation": {
+                "must_be_valid_json": true,
+                "must_be_valid_json_schema": true,
+                "must_reference_jobspec": true
+            }
+        }
+    ],
+    "execution_rules": {
+        "follow_sop": true,
+        "run_critic_before": true,
+        "run_critic_after": true,
+        "log_all_decisions": true,
+        "catalytic_domains": [
+            "CATALYTIC-DPT/TESTBENCH/_runs/phase0/_tmp"
+        ]
+    },
+    "success_criteria": [
+        "All 3 schemas created at specified paths",
+        "All schemas are valid JSON Schema Draft 7",
+        "All schemas validate themselves",
+        "Documentation in SCHEMAS/README.md updated",
+        "Ledger created in CONTRACTS/_runs/"
+    ],
+    "on_completion": {
+        "report_to": "President",
+        "include": [
+            "status",
+            "ledger_path",
+            "files_created",
+            "validation_results"
+        ]
+    },
+    "on_error": {
+        "escalate_to": "President",
+        "include": [
+            "error_details",
+            "partial_progress",
+            "logs"
+        ]
+    }
+}

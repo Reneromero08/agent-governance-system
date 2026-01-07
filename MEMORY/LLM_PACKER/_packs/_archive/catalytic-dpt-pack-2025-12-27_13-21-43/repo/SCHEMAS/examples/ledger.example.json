@@ -1,0 +1,41 @@
+{
+    "RUN_INFO": {
+        "run_id": "example-run-001",
+        "timestamp": "2025-12-25T04:58:30Z",
+        "intent": "Demonstrate a minimal, schema-valid run ledger entry.",
+        "catalytic_domains": [
+            "TOOLS/_tmp/"
+        ],
+        "exit_code": 0,
+        "restoration_verified": true
+    },
+    "PRE_MANIFEST": {
+        "TOOLS/_tmp/": {
+            "README.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+    },
+    "POST_MANIFEST": {
+        "TOOLS/_tmp/": {
+            "README.md": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        }
+    },
+    "RESTORE_DIFF": {
+        "TOOLS/_tmp/": {
+            "added": {},
+            "removed": {},
+            "changed": {}
+        }
+    },
+    "OUTPUTS": [
+        {
+            "path": "CONTRACTS/_runs/example-run-001/STATUS.json",
+            "type": "file",
+            "sha256": "5891b80220224249339023423423423423423423423423423423423423423423"
+        }
+    ],
+    "STATUS": {
+        "status": "success",
+        "restoration_verified": true,
+        "exit_code": 0
+    }
+}

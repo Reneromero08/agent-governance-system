@@ -1,27 +1,18 @@
 from __future__ import annotations
 
 import json
-import shutil
 import sys
+import tempfile
 from pathlib import Path
 
 import pytest
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
 
-from PRIMITIVES.ledger import Ledger
-
-
-def _rm(path: Path) -> None:
-    if path.is_dir():
-        shutil.rmtree(path, ignore_errors=True)
-    else:
-        try:
-            path.unlink()
-        except FileNotFoundError:
-            pass
+from CAPABILITY.PRIMITIVES.ledger import Ledger
+from CAPABILITY.PRIMITIVES.write_firewall import WriteFirewall
 
 
 def _record(*, job_id: str, run_id: str) -> dict:
@@ -54,39 +45,65 @@ def _record(*, job_id: str, run_id: str) -> dict:
 
 
 def test_ledger_rejects_malformed_json_line() -> None:
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "ledger_malformed"
-    _rm(base)
-    base.mkdir(parents=True, exist_ok=True)
-    path = base / "LEDGER.jsonl"
+    with tempfile.TemporaryDirectory() as tmpdir:
+        test_root = Path(tmpdir)
 
-    ledger = Ledger(path)
-    ledger.append(_record(job_id="job-1", run_id="run-1"))
+        # Create test directories
+        (test_root / "_tmp").mkdir(parents=True, exist_ok=True)
+        (test_root / "_durable").mkdir(parents=True, exist_ok=True)
 
-    with open(path, "ab") as f:
-        f.write(b"{not json}\n")
+        # Configure firewall for test
+        firewall = WriteFirewall(
+            tmp_roots=["_tmp"],
+            durable_roots=["_durable"],
+            project_root=test_root,
+        )
 
-    assert ledger.verify_append_only() is False
-    with pytest.raises(ValueError):
-        _ = ledger.read_all()
+        base = test_root / "_tmp" / "ledger_malformed"
+        base.mkdir(parents=True, exist_ok=True)
+        path = base / "LEDGER.jsonl"
+
+        ledger = Ledger(path)
+        ledger.append(_record(job_id="job-1", run_id="run-1"))
+
+        with open(path, "ab") as f:
+            f.write(b"{not json}\n")
+
+        assert ledger.verify_append_only() is False
+        with pytest.raises(ValueError):
+            _ = ledger.read_all()
 
 
 def test_ledger_rejects_truncated_last_line_mid_byte() -> None:
-    base = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "ledger_truncate"
-    _rm(base)
-    base.mkdir(parents=True, exist_ok=True)
-    path = base / "LEDGER.jsonl"
+    with tempfile.TemporaryDirectory() as tmpdir:
+        test_root = Path(tmpdir)
 
-    ledger = Ledger(path)
-    ledger.append(_record(job_id="job-1", run_id="run-1"))
-    ledger.append(_record(job_id="job-1", run_id="run-2"))
+        # Create test directories
+        (test_root / "_tmp").mkdir(parents=True, exist_ok=True)
+        (test_root / "_durable").mkdir(parents=True, exist_ok=True)
 
-    data = path.read_bytes()
-    assert data.endswith(b"\n")
+        # Configure firewall for test
+        firewall = WriteFirewall(
+            tmp_roots=["_tmp"],
+            durable_roots=["_durable"],
+            project_root=test_root,
+        )
 
-    # Remove the trailing newline to simulate a mid-write crash on the last line.
-    path.write_bytes(data[:-1])
+        base = test_root / "_tmp" / "ledger_truncate"
+        base.mkdir(parents=True, exist_ok=True)
+        path = base / "LEDGER.jsonl"
 
-    assert ledger.verify_append_only() is False
-    with pytest.raises(ValueError):
-        _ = ledger.read_all()
+        ledger = Ledger(path)
+        ledger.append(_record(job_id="job-1", run_id="run-1"))
+        ledger.append(_record(job_id="job-1", run_id="run-2"))
+
+        data = path.read_bytes()
+        assert data.endswith(b"\n")
+
+        # Remove the trailing newline to simulate a mid-write crash on the last line.
+        path.write_bytes(data[:-1])
+
+        assert ledger.verify_append_only() is False
+        with pytest.raises(ValueError):
+            _ = ledger.read_all()
 
