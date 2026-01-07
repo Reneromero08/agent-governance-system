@@ -8,22 +8,22 @@ from pathlib import Path
 import pytest
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
 
 from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore
 from CAPABILITY.PRIMITIVES.hash_toolbelt import hash_describe, hash_read_text
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
-# CAS_REPO_ROOT must match cas_store.py's REPO_ROOT calculation
-CAS_REPO_ROOT = Path(__file__).resolve().parents[3]
-
 
 def _create_test_writer():
     """Create a GuardedWriter configured for test writes."""
     writer = GuardedWriter(
-        project_root=CAS_REPO_ROOT,
-        durable_roots=["CAPABILITY/CONTRACTS/_runs/_tmp"]
+        project_root=REPO_ROOT,
+        tmp_roots=[],
+        durable_roots=[
+            "LAW/CONTRACTS/_runs/_tmp/adversarial"
+        ]
     )
     writer.open_commit_gate()
     return writer
@@ -40,7 +40,7 @@ def _rm(path: Path) -> None:
 
 
 def test_cas_corruption_detected_by_hash_toolbelt() -> None:
-    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas" / "CAS"
+    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas" / "CAS"
     _rm(cas_root)
     writer = _create_test_writer()
     cas = CatalyticStore(cas_root, writer=writer)
@@ -63,7 +63,7 @@ def test_cas_corruption_detected_by_hash_toolbelt() -> None:
 
 
 def test_cas_truncation_detected_by_hash_toolbelt() -> None:
-    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_trunc" / "CAS"
+    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_trunc" / "CAS"
     _rm(cas_root)
     writer = _create_test_writer()
     cas = CatalyticStore(cas_root, writer=writer)
@@ -81,7 +81,7 @@ def test_cas_truncation_detected_by_hash_toolbelt() -> None:
 
 
 def test_cas_partial_write_never_treated_as_present() -> None:
-    cas_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_partial" / "CAS"
+    cas_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "adversarial" / "cas_partial" / "CAS"
     _rm(cas_root)
     writer = _create_test_writer()
     cas = CatalyticStore(cas_root, writer=writer)

@@ -4,6 +4,21 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.4] - 2026-01-07
+
+### Fixed
+- **Adversarial Tests 100% Passing** — All 16/16 recovered adversarial tests now pass
+  - **Fixed Path Calculation:** Changed `parents[2]` → `parents[3]` for correct repo root
+  - **Fixed Path References:** Updated `CONTRACTS/` → `LAW/CONTRACTS/` paths
+  - **Fixed Schema Paths:** Updated `CATALYTIC-DPT/SCHEMAS/` → `LAW/SCHEMAS/`
+  - **Fixed Cross-Platform:** Changed `python3` → `sys.executable` for Windows compatibility
+  - **All Tests Passing (16):**
+    - ✅ test_adversarial_cas.py (3/3) - CAS corruption/truncation detection
+    - ✅ test_adversarial_ledger.py (2/2) - Ledger corruption detection
+    - ✅ test_adversarial_paths.py (5/5) - Path traversal rejection
+    - ✅ test_adversarial_pipeline_resume.py (3/3) - Pipeline resume safety
+    - ✅ test_adversarial_proof_tamper.py (3/3) - Proof tampering detection
+
 ## [3.7.3] - 2026-01-07
 
 ### Added

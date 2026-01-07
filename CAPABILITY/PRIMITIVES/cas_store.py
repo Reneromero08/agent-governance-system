@@ -41,7 +41,10 @@ def _get_writer():
         _writer = GuardedWriter(
             project_root=REPO_ROOT,
             tmp_roots=["LAW/CONTRACTS/_runs/_tmp"],
-            durable_roots=[".ags-cas"]  # CAS blobs are immutable = durable
+            durable_roots=[
+                ".ags-cas",  # CAS blobs are immutable = durable
+                "LAW/CONTRACTS/_runs"  # Run ledgers with CAS
+            ]
         )
         _writer.open_commit_gate()  # CAS writes are always allowed
     return _writer
