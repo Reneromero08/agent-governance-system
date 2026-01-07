@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.6.4
-last_updated: 2026-01-06
+version: 3.6.5
+last_updated: 2026-01-07
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
 notes:
@@ -32,332 +32,76 @@ notes:
   - Emit receipts (inputs/outputs/hashes)
   - Run relevant tests before “DONE”
 
-# Phase 1: Integrity Gates & Repo Safety (highest leverage)
-## 1.1 Hardened Inbox Governance (S.2)
-- [x] 1.1.1 Create `SKILLS/inbox-report-writer` to auto-hash and format reports (S.2.1)
-- [x] 1.1.2 Add strict pre-commit protocol: reject commits touching `INBOX/*.md` without valid header hash (S.2.2)
-- [x] 1.1.3 Add runtime interceptor: block unhashed writes to `INBOX/` at tool level (S.2.3)
-- **Exit Criteria**
-  - [x] Attempts to write unhashed INBOX artifacts fail-closed with clear error
-  - [x] Pre-commit rejects invalid INBOX changes deterministically
+## Completed Phases (Archived for Token Optimization)
 
-## 1.2 Bucket Enforcement (X3)
-- [x] 1.2.1 Add preflight check: every artifact must belong to exactly one bucket (X3)
-- **Exit Criteria**
-  - [x] Violations fail-closed before writes occur
+**What was moved:**
+- **Phase 1 (1.1-1.5):** Integrity Gates & Repo Safety - INBOX governance, bucket enforcement, write firewall, purity scanner, repo digest
+- **Phase 2.1-2.3:** CAS & Packer Foundation - CAS-aware packer, pack consumer, run bundle contracts
+- **Phase 2.4.1-2.4.3:** Write Enforcement & Git Hygiene - 100% write surface coverage (LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS, CLI_TOOLS, LINTERS, CAS), instance data inventory (4,658 artifacts), release strategy
 
-## 1.3 Deprecate Lab MCP Server (Z.1.7) ✅
-- [x] 1.3.1 Mark `THOUGHT/LAB/MCP_EXPERIMENTAL/server_CATDPT.py` archived/deprecated with clear pointer to canonical server (Z.1.7)
-- **Exit Criteria**
-  - [x] No tooling still imports/executes the deprecated server in normal flows
+**Total:** 41 completed tasks archived | **Savings:** ~317 lines, ~1,300 tokens per read
 
-## 1.4 Failure Taxonomy & Recovery Playbooks (ops-grade)
-- [x] 1.4.1 Create `NAVIGATION/OPS/FAILURE_CATALOG.md` listing expected fail-closed errors by subsystem (CAS, ARTIFACTS, RUNS, GC, AUDIT, SKILL_RUNTIME, PACKER)
-  - Include: failure code/name, trigger condition, detection signal (exception/exit code), and "safe recovery" steps
-- [x] 1.4.2 Add a deterministic "Recovery" appendix to each major invariant doc:
-  - Where receipts live
-  - How to re-run verification
-  - What to delete vs never delete
-- [x] 1.4.3 Add `NAVIGATION/OPS/SMOKE_RECOVERY.md` with the top 10 recovery flows as copy/paste commands (Windows + WSL where relevant)
-- **Exit Criteria**
-  - [x] A new contributor can identify and recover from common failures without tribal knowledge
-  - [x] Recovery steps are deterministic and reference exact commands and artifacts
+**Archive:** [`MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md`](MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md)
 
-## 1.5 Catalytic IO Guardrails (write firewall + purity scan)
-- [x] 1.5.1 Implement runtime write firewall for catalytic domains ✅ (Phase 1.5A complete)
-  - Only allow writes under declared tmp roots during execution
-  - Only allow durable writes under declared durable roots at commit time
-  - Reject all other writes fail-closed with clear error
-  - **Completed**: `CAPABILITY/PRIMITIVES/write_firewall.py` with commit gate mechanism
-  - **Tests**: 26 tests, all passing (100% coverage)
-  - **Integration**: `CAPABILITY/TOOLS/utilities/guarded_writer.py`
-  - **Documentation**: `CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md`
-- [x] 1.5.2 Add repo state digest primitive (tree hash with allowlisted exclusions) ✅ (Phase 1.5B complete)
-  - Canonical ordering
-  - Exclusion spec must be declared in receipts
-  - **Completed**: `CAPABILITY/PRIMITIVES/repo_digest.py` with RepoDigest class
-  - **Receipts**: PRE_DIGEST.json, POST_DIGEST.json with file_manifest
-- [x] 1.5.3 Add catalytic purity scanner (post-run) ✅ (Phase 1.5B complete)
-  - Detect any new/modified files outside durable roots (and outside declared exclusions)
-  - Require tmp roots are empty (or explicitly allowlisted residuals) after restore
-  - Fail-closed if any violation is detected
-  - **Completed**: `CAPABILITY/PRIMITIVES/repo_digest.py` with PurityScan and RestoreProof classes
-  - **Receipts**: PURITY_SCAN.json, RESTORE_PROOF.json with deterministic diff summary
-- [x] 1.5.4 Additional tests (fixture-backed) ✅ (Phase 1.5B complete)
-  - New file outside durable roots → FAIL
-  - Tmp not cleaned → FAIL
-  - Deterministic digest across reruns with fixed inputs
-  - **Completed**: `CAPABILITY/TESTBENCH/integration/test_phase_1_5b_repo_digest.py` (11 tests, 100% pass rate)
-- **Exit Criteria**
-  - [x] IO policy is enforced mechanically (not by prompt discipline) ✅
-  - [x] Purity scanner produces deterministic receipts and failure signals ✅
+### 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
+Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
 
-# Phase 2: CAS + Packer Completion (context cost collapse)
-## 2.1 CAS-aware LLM Packer Integration (Z.2.6 + P.2 remainder)
-- [x] 2.1.1 Make LITE packs use CAS hashes instead of full file bodies (Z.2.6)
-- [x] 2.1.2 Implement CAS garbage collection safety for packer outputs: define GC roots/pins via active packs (P.2.4)
-- [x] 2.1.3 Benchmark deduplication savings and pack generation cost; emit reproducible report + fixtures (P.2.5)
-- **Exit Criteria**
-  - [x] LITE packs are manifest-only and reference `sha256:` blobs
-  - [x] GC never deletes a referenced blob (fixture-backed)
-  - [x] Dedup benchmark reproducible and stored as an artifact
+- [ ] 2.4.4.1 Implement `template_seal(template_dir, output_path, meta) -> receipt`
+  - Hash all template files (code, governance rules, architecture)
+  - Sign manifest with your key (proves YOU released this)
+  - Emit tamper-evident seal file
+- [ ] 2.4.4.2 Implement `template_verify(sealed_dir, signature) -> verdict`
+  - Verify hashes match original
+  - Verify signature is valid
+  - Detect ANY tampering
 
-## 2.2 Pack Consumer (verification + rehydration)
-- [x] 2.2.1 Define Pack Manifest v1 (schema + invariants)
-  - Must include: pack_id, scope (AGS/CAT/LAB), bucket list, path→ref mapping (`sha256:`), build metadata, and declared roots/pins
-  - Must be canonical-JSON encoded and stored in CAS (manifest itself is addressable)
-- [x] 2.2.2 Implement `pack_consume(manifest_ref, out_dir, *, dry_run=False)` (tool/CLI)
-  - Verify manifest integrity (hash, canonical encoding, schema)
-  - Verify every referenced blob exists in CAS (or fail-closed)
-  - Materialize tree to `out_dir` atomically (write to temp + rename)
-  - Enforce strict path safety (no absolute paths, no `..`, no writing outside `out_dir`)
-- [x] 2.2.3 Emit a consumption receipt
-  - Inputs: manifest_ref, cas_snapshot_hash
-  - Outputs: out_dir tree hash (or deterministic listing hash), verification summary
-  - Commands run, exit status
-- [x] 2.2.4 Tests (fixture-backed)
-  - Tamper detection: modify manifest bytes or blob bytes → FAIL
-  - Determinism: consume twice → identical tree hash/listing
-  - Partial CAS: missing blob → FAIL (no partial materialization)
-- **Exit Criteria**
-  - [x] Packs are not write-only: they can be consumed and verified deterministically
-  - [x] Any corruption or missing data fails-closed before producing an output tree
+### 2.4.5 Release Manifest Schema (CRYPTO_SAFE.3)
+Purpose: Define what "the template" contains and how to verify it.
 
-## 2.3 Run Bundle Contract (freezing “what is a run”)
-- [x] 2.3.1 Freeze the per-run directory contract
-  - Required artifacts: TASK_SPEC, STATUS timeline, OUTPUT_HASHES, receipts
-  - Naming conventions, immutability rules, and deterministic ordering requirements
-- [x] 2.3.2 Implement `run_bundle_create(run_id) -> sha256:<hash>`
-  - Bundle is a manifest that references run artifacts in CAS (no raw file paths)
-  - Bundle manifest is canonical-JSON encoded and stored in CAS
-- [x] 2.3.3 Define rooting and retention semantics (ties into GC)
-  - What becomes a root by default (active runs, explicit pins, pack manifests)
-  - Minimum retention policy for safety (e.g., never GC pinned runs)
-- [x] 2.3.4 Implement `run_bundle_verify(bundle_ref)` (dry-run verifier)
-  - Ensures: all referenced artifacts exist, hashes match, required outputs are reachable
-  - Emits deterministic verification receipt
-- **Exit Criteria**
-  - [x] “Run = proof-carrying bundle” is explicit and machine-checkable
-  - [x] GC can safely treat bundles/pins as authoritative roots
+- [ ] 2.4.5.1 Define release manifest schema
+  - List of all template files with hashes
+  - Version, timestamp, license reference
+  - Your signature
+- [ ] 2.4.5.2 Add signature support (offline signing)
+  - GPG or age-based signing
+  - Public key published for verification
+  - "This is what I released" - irrefutable
 
-## 2.4 Crypto-Safe Packs & Protected Artifacts (CRYPTO_SAFE)
-Goal: prevent "download = extraction" by sealing protected artifacts for public distribution while keeping verification mechanical.
+### ⭐2.4.6 Release Export Integration (CRYPTO_SAFE.4)
+Purpose: Automate clean template export with sealing.
 
-### 2.4.1 Write Surface Discovery & Coverage (Prerequisite for CRYPTO_SAFE enforcement)
-- [x] 2.4.1A Write Surface Discovery & Coverage Map (Read-Only) ✅
-  - Comprehensive discovery of all 169 filesystem write surfaces in repository
-  - Classification by type, execution context, and guard status
-  - 103 production surfaces identified requiring Phase 1.5 enforcement
-  - Critical gaps prioritized: INBOX (3), Proofs (1), LLM Packer (6), Pipeline (4), MCP (2), Cortex (2), Skills (15+)
-  - Coverage: 2.4% fully guarded, 4.7% partially guarded, 92.9% unguarded
-  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_WRITE_SURFACE_MAP.md` (coverage map)
-  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1A_DISCOVERY_RECEIPT.json` (discovery receipt)
-  - Exit Criteria: ✓ Deterministic read-only analysis ✓ All surfaces cataloged ✓ Enforcement gaps identified
-- [x] 2.4.1B Write Firewall Integration (Enforcement Phase — PARTIAL)
-  - Status: Infrastructure complete, 1.0% coverage (1/103 surfaces enforced)
-  - ✓ Integrated WriteFirewall into `repo_digest.py` (PRE_DIGEST, POST_DIGEST, PURITY_SCAN, RESTORE_PROOF)
-  - ✓ Created `PackerWriter` utility for LLM_PACKER integration (ready, not yet adopted)
-  - ✓ 19 tests passing (11 existing + 8 new enforcement tests)
-  - ✓ Backwards compatible: `firewall=None` preserves legacy behavior
-  - ⏸️ Pending: Integration into 46 remaining allowed surfaces (LLM_PACKER, PIPELINE, MCP, CORTEX, SKILLS, CLI_TOOLS)
-  - ❌ Exit Criteria NOT MET: 1.0% coverage vs. 95% target
-  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_REPORT.md` (enforcement report)
-  - Artifacts: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_RECEIPT.json` (enforcement receipt)
-  - Artifacts: `MEMORY/LLM_PACKER/Engine/packer/firewall_writer.py` (PackerWriter utility)
-  - Next: Phase 2.4.1C for systematic surface-by-surface integration to reach 96% coverage (45/47 allowed surfaces)
+**Prerequisites:**
+- [ ] **DECISION: Define template boundary** - Which files/features are framework vs instance-specific?
+  - Review each directory and decide what's public-facing
+  - Document first-run initialization process for new users
+  - Test that template works standalone (without your data)
+  - This is a MANUAL decision, not automated
 
-- [x] 2.4.1C Systematic Write Surface Integration (Enforcement Rollout) ✅ **COMPLETE**
-  - Coordinator phase: aggregates coverage math and receipts from sub-phases
-  - No new primitives, no new policy
-  - Depends on: Phase 2.4.1B (infrastructure complete)
-  - Coverage denominator: 103 production write surfaces (defined in 2.4.1A)
-  - Target: ≥95% coverage (98/103 surfaces enforced) ✅ **EXCEEDED: 100%**
-  - INBOX remains excluded per policy
-  
-  - [x] 2.4.1C.1 LLM_PACKER Enforcement ✅
-    - Scope: `MEMORY/LLM_PACKER/**` write surfaces
-    - Adapter: `PackerWriter` (already implemented in 2.4.1B)
-    - Goal: High-impact coverage increase (6 surfaces)
-    - **Completed**: 100% LLM_PACKER write firewall enforcement coverage
-    - **Integration**: All MEMORY/LLM_PACKER/** modules updated with firewall integration
-      - core.py, split.py, pruned.py, proofs.py, lite.py, archive.py, consumer.py
-      - Optional writer parameter with backward compatibility
-      - Commit gate enforcement for durable writes
-     - **Tests**: `test_phase_2_4_1c1_llm_packer_commit_gate.py` (3 tests, 100% pass)
-     - **Verification**: Raw write audits clean, commit-gate functionality proven
+- [ ] 2.4.6.1 Implement `export_template.py` script
+  - Exclude all instance data (per 2.4.2 inventory + manual decisions)
+  - Include all framework code
+  - Add `.gitkeep` files for empty directories
+  - Seal the result
+- [ ] 2.4.6.2 Emit `RELEASE_MANIFEST.json` + signature into export
+- [ ] 2.4.6.3 Add `.gitattributes` export-ignore patterns for `git archive`
+- [ ] 2.4.6.4 Write first-run documentation (how new users initialize their AGS instance)
 
-    - [x] 2.4.1C.2 PIPELINES Runtime Write Surface Enforcement ✅ COMPLETE
-      - Scope:
-        - `CAPABILITY/PIPELINES/**` (22 write operations)
-      - Adapter: `GuardedWriter` via `AtomicGuardedWrites`
-      - Focus: Commit-gate correctness for runtime operations
-      - Exit Criteria:
-        - [x] Pipeline write operations enforce declared allowlists
-        - [x] Integration tests pass with firewall active
-      - **Completed**: 100% PIPELINES write interception via GuardedWriter
-      - **Integration**: Added `write_durable_bytes()` to AtomicGuardedWrites, updated `write_chain()` with optional writer parameter
-      - **Tests Implemented**:
-        - Test A: Commit-gate semantics ✅ PASSING (2/2)
-        - Test B: End-to-end enforcement ✅ PASSING (discovery/smoke)
-        - Test C: No raw writes audit — NOT APPLICABLE (scanner only covers CORTEX + SKILLS)
-      - **Legacy Fallback**: `pipeline_chain.py:102` preserves backward compatibility when writer=None
-      - **Artifacts**:
-        - Receipt: `LAW/CONTRACTS/_runs/RECEIPTS/phase-2/task-2.4.1C.2_runtime_write_surface_enforcement.json`
-        - Report: `LAW/CONTRACTS/_runs/REPORTS/phase-2/task-2.4.1C.2_runtime_write_surface_enforcement.md`
+### 2.4.7 Seal Verification Tool (CRYPTO_SAFE.5)
+Purpose: Anyone can verify a release is untampered.
 
-    - [x] 2.4.1C.2.2 MCP Runtime Write Surface Enforcement ✅ COMPLETE
-      - Scope:
-        - `CAPABILITY/MCP/**` (15 raw write operations)
-        - `CAPABILITY/MCP/server_wrapper.py` (2 operations)
-      - Adapter: `GuardedWriter` (initialized in AGSMCPServer)
-      - Focus: Full write interception across all MCP components
-      - Exit Criteria:
-        - [x] Audit log writes enforce allowlists
-        - [x] Terminal log writes enforce allowlists
-        - [x] Message board writes enforce allowlists
-        - [x] Agent inbox writes enforce allowlists
-        - [x] ADR creation enforces allowlists (after gate)
-        - [x] Integration tests pass with firewall active
-      - **Completed**: 100% MCP write interception via GuardedWriter
-      - **Integration**:
-        - Updated `_atomic_write_jsonl()` with optional writer parameter
-        - Updated `_atomic_rewrite_jsonl()` with optional writer parameter
-        - All 8 `mkdir()` calls route through `self.writer.mkdir_tmp()` or `mkdir_durable()`
-        - All 3 `write_text()` calls route through `self.writer.write_durable()`
-        - `server_wrapper.py` uses GuardedWriter for PID and log directory writes
-      - **Legacy Fallback**: All functions preserve backward compatibility when writer=None
-  
-  - [x] 2.4.1C.3 CORTEX + SKILLS Enforcement ✅ **COMPLETE**
-    - Scope:
-      - `NAVIGATION/CORTEX/**` (6 surfaces)
-      - `CAPABILITY/SKILLS/**` (20+ surfaces)
-    - Adapter: `GuardedWriter`
-    - Mechanical replication phase
-    - Exit Criteria:
-      - [x] All CORTEX write surfaces enforce allowlists
-      - [x] All SKILLS write surfaces enforce allowlists
-      - [x] Existing functionality preserved (backwards compatibility)
-    - **Tests Implemented**:
-      - Test A: Commit-gate semantics ✅ PASSING (2/2)
-      - Test B: End-to-end enforcement ✅ PASSING (discovery/smoke)
-      - Test C: No raw writes audit ✅ **PASSING (0 violations)**
-    - **Final Status**: ✅ **0 VIOLATIONS** (down from 181 initial violations)
-    - **Verification**: Mechanical scanner confirms zero raw write operations in target directories
-
-  - [x] 2.4.1C.4 CLI Tools Enforcement ✅ **COMPLETE**
-    - Scope: 6 CLI tools (`ags.py`, `cortex.py`, `codebook_build.py`, `emergency.py`, `ci_local_gate.py`, `intent.py`)
-    - **Final Status**: ✅ **0 RAW WRITES** (7 violations eliminated)
-    - **Coverage Update**: 40/47 = 85%
-
-  - [x] 2.4.1C.5 CAS Enforcement (CRYPTO_SAFE Required) ✅ **COMPLETE**
-    - Scope:
-      - `CAPABILITY/PRIMITIVES/cas_store.py` (12 write operations)
-      - `CAPABILITY/ARTIFACTS/store.py` (3 write operations, materialize exempt)
-      - `CAPABILITY/CAS/cas.py` (2 write operations)
-    - Policy: `.ags-cas/` is durable root (immutable blobs)
-    - CRYPTO_SAFE dependency: Full audit trail required for protected artifact scanning
-    - Exit Criteria:
-      - [x] All CAS writes route through GuardedWriter
-      - [x] Zero raw write operations (except documented exemption)
-      - [x] Audit receipts show provenance (hash, timestamp, caller)
-      - [x] CAS tests passing (67/67 tests)
-    - **Implementation**:
-      - Lazy initialization pattern (`_get_writer()`) to avoid circular imports
-      - Path handling for relative/absolute detection
-      - Commit gate opened immediately (CAS blobs immutable)
-      - Exemption: `materialize()` uses raw writes for artifact extraction
-    - **Tests**: 67/67 passing (21 CAS tests + 46 artifact tests)
-    - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_5_CAS_ENFORCEMENT.md`
-    - **Receipt**: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_5_CAS_RECEIPT.json`
-    - **Final Status**: ✅ **0 RAW WRITES** (16 violations eliminated, 1 exemption documented)
-    - **Coverage Update**: 47/47 = 100%
-
-  - [x] 2.4.1C.6 LINTERS Enforcement (Dry-run Default + --apply Flag) ✅ **COMPLETE**
-    - Scope:
-      - `CAPABILITY/TOOLS/linters/update_hashes.py` (86 lines)
-      - `CAPABILITY/TOOLS/linters/update_canon_hashes.py` (105 lines)
-      - `CAPABILITY/TOOLS/linters/fix_canon_hashes.py` (105 lines)
-      - `CAPABILITY/TOOLS/linters/update_manifest.py` (100 lines)
-    - Policy: LAW/CANON exemption for linters only
-    - Pattern: Dry-run mode by default, `--apply` flag required for writes
-    - CRYPTO_SAFE dependency: Audit trail detects accidental protected artifact references
-    - Exit Criteria:
-      - [x] All linters use GuardedWriter with LAW/CANON durable root
-      - [x] Dry-run mode is default behavior
-      - [x] `--apply` flag opens commit gate
-      - [x] Zero raw write operations (4 eliminated)
-      - [x] Audit receipts show all CANON mutations
-    - **Prompt**: `NAVIGATION/PROMPTS/PHASE_2_4_1C_6_LINTERS_ENFORCEMENT.md`
-    - **Receipt**: `NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1C_6_LINTERS_RECEIPT.json`
-    - **Final Status**: ✅ **0 RAW WRITES** (4 violations eliminated)
-    - **Coverage Update**: 44/47 = 93.6%
-
-  - Exit Criteria (Phase 2.4.1C):
-    - [x] Coverage = 100% of critical production surfaces (47/47) ✅
-    - [x] All critical runtime paths enforced (47/47 = 100%) ✅
-    - [x] CAS enforcement complete (3 files, CRYPTO_SAFE audit trail) ✅
-    - [x] LINTERS enforcement complete (4 files, dry-run + --apply pattern) ✅
-    - [x] All sub-phase receipts collected ✅
-    - [x] No policy changes or write domain widening ✅
-    - [x] Coverage math explicit and auditable ✅
-
-  **Status Summary**:
-  - ✅ Complete: REPO_DIGEST, LLM_PACKER, PIPELINES, MCP, CORTEX, SKILLS, CLI_TOOLS, LINTERS, CAS
-  - 📊 Coverage: 47/47 = 100% ✅ **PHASE 2.4.1C COMPLETE**
-  - 🎯 CRYPTO_SAFE compliance: Full audit trail ready for protected artifact verification
-
-
-### 2.4.2 Protected Artifact Inventory (CRYPTO_SAFE.0) ✅ AIRTIGHT
-- [x] 2.4.2.1 Define protected roots/patterns (vectors, indexes, proof outputs, compression advantage artifacts)
-- [x] 2.4.2.2 Add scanner: detect protected artifacts in working tree (fail-closed in public pack modes)
-- [x] 2.4.2.3 Double-scan verification + leak patching (110% guarantee)
-- **Status**: COMPLETE (AIRTIGHT v2)
-- **Primitives**:
-  - `CAPABILITY/PRIMITIVES/protected_inventory.py` (v1.2.0, 6 artifact classes, deterministic hashing)
-  - `CAPABILITY/PRIMITIVES/protected_scanner.py` (fail-closed scanner, CLI interface)
-  - `CAPABILITY/PRIMITIVES/PROTECTED_INVENTORY.json` (inventory hash: `6c6ece6a871ca9b2078b8331bdb9ec1f940f4be0b2699e0bae53c33c5625c1f3`)
-- **Tests**: 21/21 passing (100%) - `CAPABILITY/TESTBENCH/integration/test_phase_2_4_2_protected_inventory.py`
-  - Added: `test_pipeline_manifests_covered`, `test_catchall_db_protection`
-- **Coverage**: 4,658 protected artifacts in 66,277 files (FINAL)
-  - pack_output: 4,603 | semantic_index: 42 | vector_database: 10 | proof_output: 2 | compression_advantage: 1
-- **Leak Fixes**: 4 leaks patched (LAW/CONTRACTS/_runs manifests + catch-all .db patterns)
-- **Final Audit**: AIRTIGHT — All 22 leak vectors sealed, 0 leaks detected
-- **Fail-Closed Verified**: Exit code 1 in public context (4,658 violations)
-- **Guarantee**: Public distribution impossible without sealing all 4,658 artifacts
-- **Proofs**: `NAVIGATION/PROOFS/CRYPTO_SAFE/PHASE_2_4_2_*.{json,md}`
-
-### 2.4.3 Git Hygiene (CRYPTO_SAFE.1)
-- [ ] 2.4.3.1 Ensure `_PACK_RUN/` outputs are never tracked (reject if git status indicates staging/tracking)
-- [ ] 2.4.3.2 Add CI check: protected roots must be ignored unless explicitly allowed
-
-### 2.4.4 Sealing Primitive (CRYPTO_SAFE.2)
-- [ ] 2.4.4.1 Implement `crypto_seal(input_path, output_path, meta) -> receipt`
-  - Default: age-encryption (or equivalent) with fail-closed behavior
-  - No keys in logs; receipts include algorithm + parameters + hashes
-- [ ] 2.4.4.2 Implement `crypto_open(sealed_path, out_path, key_ref) -> receipt` (local only)
-
-### 2.4.5 Attestation Schema (optional) (CRYPTO_SAFE.3)
-- [ ] 2.4.5.1 Define sealed artifact manifest schema (what is sealed, why, hashes, policy version)
-- [ ] 2.4.5.2 (Optional) Add signature support (offline signing) without changing fail-closed verification semantics
-
-### 2.4.6 Packer Integration (CRYPTO_SAFE.4)
-- [ ] 2.4.6.1 Add packer hook: seal protected artifacts during `_PACK_RUN/` for public pack modes
-- [ ] 2.4.6.2 Emit `SEALED_ARTIFACTS.json` + receipt into run bundle + pack output
-- [ ] 2.4.6.3 Ensure packs remain verifiable without decryption keys (integrity-only verification)
-
-### 2.4.7 One-Command Verifier (CRYPTO_SAFE.5)
-- [ ] 2.4.7.1 Add `crypto_safe_verify(pack_dir, mode)` that checks:
-  - protected inventory completeness
-  - no plaintext protected artifacts in public pack outputs
-  - sealed manifest integrity + receipts present
-  - deterministic ordering and canonical JSON where applicable
+- [ ] 2.4.7.1 Add `verify_release(release_dir)` that checks:
+  - All template files match manifest hashes
+  - Signature is valid
+  - No instance data leaked into release
+  - Deterministic verification (same input → same result)
 
 ### 2.4.8 Tests + Docs (CRYPTO_SAFE.6–.7)
-- [ ] 2.4.8.1 Fixtures: missing seal → FAIL, tampered seal → FAIL, plaintext leak → FAIL
-- [ ] 2.4.8.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` report template + reproduction commands
+- [ ] 2.4.8.1 Fixtures: tampered file → FAIL, invalid signature → FAIL, instance data leak → FAIL
+- [ ] 2.4.8.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` verification guide
 - **Exit Criteria**
-  - [ ] Public packs contain no plaintext protected artifacts
-  - [ ] Verification is mechanical and fail-closed (no "trust me" paths)
+  - [ ] Template releases contain no instance data
+  - [ ] Seals are tamper-evident (any modification detectable)
+  - [ ] "You broke my seal" is cryptographically provable
 
 # Phase 3: CAT Chat Stabilization (make the interface reliable)
 - Precondition: If Phase 4.1 is not green, treat Phase 3 as provisional and expect churn.
