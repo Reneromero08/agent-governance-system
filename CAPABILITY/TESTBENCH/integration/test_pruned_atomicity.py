@@ -203,7 +203,7 @@ def test_pruned_manifest_includes_hashes():
         mock_project.mkdir()
 
         # Create a file that would be included in PRUNED
-        canon_dir = mock_project / "LAW" / "CANON"
+        canon_dir = mock_project / "LAW" / "CANON" / "CONSTITUTION"
         canon_dir.mkdir(parents=True)
         contract_file = canon_dir / "CONTRACT.md"
         contract_file.write_text("# CONTRACT\n\nTest content.", encoding="utf-8")
@@ -215,7 +215,7 @@ def test_pruned_manifest_includes_hashes():
         runs_file.write_text("runtime log", encoding="utf-8")
 
         # Build PRUNED manifest
-        included_paths = ["LAW/CANON/CONTRACT.md", "LAW/CONTRACTS/_runs/test.log"]
+        included_paths = ["LAW/CANON/CONSTITUTION/CONTRACT.md", "LAW/CONTRACTS/_runs/test.log"]
         manifest = build_pruned_manifest(
             tmpdir,
             mock_project,
@@ -282,12 +282,12 @@ def test_pruned_manifest_determinism():
         mock_project = tmpdir / "mock_project"
         mock_project.mkdir()
 
-        canon_dir = mock_project / "LAW" / "CANON"
+        canon_dir = mock_project / "LAW" / "CANON" / "CONSTITUTION"
         canon_dir.mkdir(parents=True)
         contract_file = canon_dir / "CONTRACT.md"
         contract_file.write_text("# CONTRACT\n\nTest content.", encoding="utf-8")
 
-        included_paths = ["LAW/CANON/CONTRACT.md"]
+        included_paths = ["LAW/CANON/CONSTITUTION/CONTRACT.md"]
 
         # Build manifest twice
         manifest1 = build_pruned_manifest(

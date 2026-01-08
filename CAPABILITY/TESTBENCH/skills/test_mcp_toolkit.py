@@ -369,7 +369,7 @@ class TestMcpToolkitValidateAccess:
 
         input_data = {
             "operation": "validate_access",
-            "agent_action": "read_file LAW/CANON/CONTRACT.md",
+            "agent_action": "read_file LAW/CANON/CONSTITUTION/CONTRACT.md",
             "agent_code_snippet": "",
             "files_accessed": [],
             "databases_queried": []
