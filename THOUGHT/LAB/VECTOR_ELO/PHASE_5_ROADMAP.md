@@ -19,7 +19,7 @@ tags:
 
 # Phase 5: Vector/Symbol Integration - Detailed Roadmap
 
-**Version:** 1.5.0
+**Version:** 1.6.0
 **Created:** 2026-01-07
 **Prerequisite:** Phase 4 (Catalytic Architecture) - COMPLETE
 **Downstream:** Phase 6.0 (Cassette Network) depends on 5.2 MemoryRecord contract
@@ -700,6 +700,250 @@ SCL/
 
 ---
 
+# Phase 5.3: SPC Formalization & Research Publication
+
+**Status:** PENDING (execute after 5.1 and 5.2 complete)
+**Purpose:** Formalize Semantic Pointer Compression (SPC) as a defensible research contribution
+**Source:** GPT execution pack (`OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md`)
+
+> **Design principle:** The better the brief, the better the design. This phase creates formal specs and reproducible benchmarks for publication, building on the working implementation from 5.1/5.2.
+
+---
+
+## 5.3.0 Definition
+
+**SPC (Semantic Pointer Compression):** Conditional compression with shared side-information.
+- Sender transmits a pointer (symbol or hash) plus required sync metadata
+- Receiver expands deterministically into a canonical IR subtree
+- Expansion is accepted only if hashes and versions verify. Otherwise fail closed.
+
+**Key insight:** This is CAS at the semantic layer. Symbol = semantic hash. Codebook = semantic CAS index.
+
+---
+
+## 5.3.1 SPC_SPEC.md (Normative)
+
+**Purpose:** Formal specification for Semantic Pointer Compression protocol.
+
+### Deliverables
+- [ ] Create `LAW/CANON/SEMANTIC/SPC_SPEC.md`
+
+### Contents Required
+- [ ] **Pointer Types:**
+  - `SYMBOL_PTR`: Single-token glyph pointers (法, 真, 道)
+  - `HASH_PTR`: Content-addressed pointers (SHA-256)
+  - `COMPOSITE_PTR`: Pointer plus typed qualifiers (法.query("verification"))
+- [ ] **Decoder Contract:**
+  - Inputs: pointer, context keys, codebook_id, codebook_sha256, kernel_version, tokenizer_id
+  - Output: canonical IR subtree OR FAIL_CLOSED with explicit error code
+- [ ] **Ambiguity Rules:**
+  - Multiple expansions possible → reject unless disambiguation is explicit and deterministic
+- [ ] **Canonical Normalization:**
+  - `encode(decode(x))` stabilizes to declared normal form
+- [ ] **Security & Drift Behavior:**
+  - Codebook mismatch → reject
+  - Hash mismatch → reject
+  - Unknown symbol → reject
+  - Unknown kernel version → reject
+- [ ] **Measured Metrics:**
+  - `concept_unit` definition (ties to GOV_IR_SPEC)
+  - `CDR = concept_units / tokens`
+  - `ECR = exact IR match rate`
+  - `M_required = multiplex factor for target nines`
+
+**Exit Criteria:**
+- [ ] SPC_SPEC.md is normative and complete
+- [ ] All pointer types defined with examples
+- [ ] Fail-closed behavior specified for all error cases
+
+---
+
+## 5.3.2 GOV_IR_SPEC.md (Normative)
+
+**Purpose:** Define minimal typed governance IR so "meaning" is countable.
+
+### Deliverables
+- [ ] Create `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md`
+
+### Contents Required
+- [ ] **IR Primitives:**
+  - Boolean ops, comparisons
+  - Typed references (paths, canon versions, tool ids)
+  - Gates (tests, restore-proof, allowlist roots)
+  - Side-effects flags
+- [ ] **Canonical JSON Schema:**
+  - Stable ordering
+  - Explicit types
+  - Canonical string forms
+- [ ] **Equality Definition:**
+  - Equality = byte-identical canonical JSON
+- [ ] **concept_unit Definition:**
+  - Atomic unit of governance meaning
+  - Used for CDR calculation
+
+**Exit Criteria:**
+- [ ] GOV_IR_SPEC.md defines complete typed IR
+- [ ] JSON schema provided and validated
+- [ ] concept_unit is measurable
+
+---
+
+## 5.3.3 CODEBOOK_SYNC_PROTOCOL.md (Normative)
+
+**Purpose:** Define how sender and receiver establish shared side-information.
+
+> **Note:** This protocol is the formalization of Phase 6 Cassette Network's sync mechanism. The cassette network IS the implementation of this protocol.
+
+### Deliverables
+- [ ] Create `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md`
+
+### Contents Required
+- [ ] **Sync Handshake:**
+  - `codebook_id` + `sha256` + `semver`
+  - `semantic_kernel_version`
+  - `tokenizer_id`
+- [ ] **Compatibility Policy:**
+  - Default: exact match required
+  - Optional: explicit compatibility ranges with migration step (never silent)
+- [ ] **Handshake Message Shape:**
+  - Request format
+  - Response format
+  - Failure codes
+- [ ] **Integration with Cassette Network:**
+  - How cassettes carry codebook state
+  - Verification before symbol expansion
+
+**Exit Criteria:**
+- [ ] Sync protocol fully specified
+- [ ] Handshake message shapes defined
+- [ ] Failure codes enumerated
+
+---
+
+## 5.3.4 TOKENIZER_ATLAS.json (Artifact)
+
+**Purpose:** Formal artifact tracking glyph/operator token counts across tokenizers.
+
+### Deliverables
+- [ ] Create `CAPABILITY/TOOLS/generate_tokenizer_atlas.py`
+- [ ] Create `LAW/CANON/SEMANTIC/TOKENIZER_ATLAS.json`
+
+### Contents Required
+- [ ] **Atlas Generator Script:**
+  - Token counts for all semantic symbols under declared tokenizers
+  - Deterministic ranking: prefer single-token glyphs, stable fallback
+- [ ] **Atlas Artifact:**
+  - Symbol → token_count mapping for cl100k_base
+  - Symbol → token_count mapping for o200k_base
+  - Preferred glyph list with fallbacks
+- [ ] **CI Gate:**
+  - Test that fails if preferred glyph becomes multi-token after tokenizer change
+
+**Exit Criteria:**
+- [ ] TOKENIZER_ATLAS.json generated and receipted
+- [ ] All 7 current symbols verified single-token
+- [ ] CI gate added to prevent silent tokenizer drift
+
+---
+
+## 5.3.5 Proof Harness: proof_spc_semantic_density_run/
+
+**Purpose:** Reproducible benchmark suite with receipted measurements.
+
+### Deliverables
+- [ ] Create `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/`
+  - [ ] `benchmark_cases.json` - 10-30 fixed test cases
+  - [ ] `run_benchmark.py` - Deterministic proof runner
+  - [ ] `metrics.json` - Machine-readable output
+  - [ ] `report.md` - Human-readable output
+  - [ ] `receipts/` - SHA-256 of all inputs/outputs
+
+### Benchmark Case Structure
+```json
+{
+  "id": "case_001",
+  "nl_statement": "All writes to canon require verification receipt",
+  "gold_ir": { "type": "constraint", "op": "requires", ... },
+  "pointer_encoding": "法.驗",
+  "expected_tokens_nl": 12,
+  "expected_tokens_pointer": 3
+}
+```
+
+### Measurements Required
+- [ ] `tokens(NL)` under declared tokenizer
+- [ ] `tokens(pointer_payload)`
+- [ ] `concept_units(IR)`
+- [ ] `ECR` (exact match rate)
+- [ ] Reject rate and reasons
+- [ ] Computed `M_required` for declared targets
+
+### Hard Acceptance Criteria
+- [ ] **A1 Determinism:** Two consecutive runs produce byte-identical outputs
+- [ ] **A2 Fail-closed:** Any mismatch emits explicit failure artifacts
+- [ ] **A3 Measured density:** CDR and ECR computed and output
+- [ ] **A4 No hallucinated paths:** All file paths exist in repo
+
+**Exit Criteria:**
+- [ ] Benchmark suite runs end-to-end
+- [ ] All 4 acceptance criteria pass
+- [ ] Receipts generated for reproducibility
+
+---
+
+## 5.3.6 PAPER_SPC.md (Research Skeleton)
+
+**Purpose:** Publishable research claim skeleton with measured results only.
+
+### Deliverables
+- [ ] Create `THOUGHT/LAB/VECTOR_ELO/research/PAPER_SPC.md`
+
+### Required Sections
+- [ ] **Title & Abstract**
+- [ ] **Contributions:**
+  - Deterministic semantic pointers
+  - Receipted verification
+  - Measured semantic density metric and benchmark
+- [ ] **What Is New:**
+  - Not "beating Shannon" - conditional compression with shared side-information
+  - Formal protocol for LLM context optimization
+  - Measured H(X|S) vs H(X)
+- [ ] **Threat Model:**
+  - Codebook drift
+  - Tokenizer changes
+  - Semantic ambiguity
+- [ ] **Limitations:**
+  - Requires shared context establishment
+  - Single-token symbols depend on tokenizer stability
+  - Compression ratio depends on corpus size
+- [ ] **Reproducibility:**
+  - Exact commands to run benchmark
+  - Hashes of all artifacts
+  - Environment requirements
+
+**Exit Criteria:**
+- [ ] Paper skeleton complete with all sections
+- [ ] No claims without metrics
+- [ ] Reproducibility section includes exact commands
+
+---
+
+## Phase 5.3 Complete When:
+
+- [ ] SPC_SPEC.md normative and complete
+- [ ] GOV_IR_SPEC.md with typed IR and JSON schema
+- [ ] CODEBOOK_SYNC_PROTOCOL.md with handshake defined
+- [ ] TOKENIZER_ATLAS.json generated with CI gate
+- [ ] Proof harness passes all 4 acceptance criteria
+- [ ] PAPER_SPC.md ready for external review
+
+**Publication Milestone:** After 5.3, SPC is a defensible research contribution with:
+- Formal specs others can implement
+- Reproducible benchmarks with receipts
+- Clear claims grounded in measurements
+
+---
+
 *Roadmap v1.0.0 - Generated 2026-01-07*
 
 ---
@@ -801,10 +1045,12 @@ Phase 5 is the foundation for:
 |------------|------------|------------|
 | Phase 3 (CAT CHAT) | 5.0 MemoryRecord | Session capsules |
 | Phase 6 (Cassette) | 5.0 MemoryRecord | Cassette storage binding |
+| Phase 6 (Cassette) | 5.3 CODEBOOK_SYNC_PROTOCOL | Agent-to-agent sync |
 | Phase 6.1 | 5.1 Vectors | 9 cassettes including RESIDENT |
 | Phase 7 (ELO) | 5.0 scores field | ELO in MemoryRecord |
 | Phase 9 (Swarm) | 5.1.4 Skill Discovery | Governor task routing |
 | Phase 10 (Ω) | 5.2 SCL | Automatic symbol extraction |
+| **Publication** | 5.3 PAPER_SPC | Defensible research claim |
 
 ## Execution Order
 
@@ -814,6 +1060,8 @@ Phase 5.0 - MemoryRecord (do first, Phase 6.0 depends on it)
 Phase 5.1 - Vector Indexing (proven via CORTEX)
      ↓
 Phase 5.2 - SCL (targets grounded in measured data)
+     ↓
+Phase 5.3 - SPC Formalization (specs, benchmarks, paper)
 ```
 
 ## Key Principle
@@ -830,6 +1078,7 @@ Phase 5.2 - SCL (targets grounded in measured data)
 
 ### Research
 - `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md` - **ONTOLOGY** Truth as attractor
+- `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md` - **Phase 5.3 brief** (GPT formalization proposal)
 - `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` - Execution plan
 - `THOUGHT/LAB/VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` - VSA/LCM literature
 - `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression research
@@ -841,4 +1090,4 @@ Phase 5.2 - SCL (targets grounded in measured data)
 
 ---
 
-*Roadmap v1.5.0 - Updated 2026-01-08 with Semantic Symbol Breakthrough (56,370x proven)*
+*Roadmap v1.6.0 - Updated 2026-01-08 with Phase 5.3 SPC Formalization (GPT proposal integrated)*
