@@ -253,14 +253,18 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 ### 5.1.2 Canon Embedding ✅ COMPLETE (2026-01-08)
 - [x] 5.1.2.1 Embed all canon files: `LAW/CANON/*` → vectors (32 files embedded)
-- [ ] 5.1.2.2 Embed all ADRs: `LAW/CONTEXT/decisions/*` → vectors (Z.5.2)
+- [x] 5.1.2.2 Embed all ADRs: `LAW/CONTEXT/decisions/*` → vectors (37 ADRs embedded with metadata)
+  - Implementation: `CAPABILITY/PRIMITIVES/adr_index.py`
+  - Tests: `test_phase_5_1_2_adr_embedding.py` (28 tests passing)
+  - Features: YAML frontmatter parsing, status filtering, canon cross-references (184 refs)
 - [x] 5.1.2.3 Verify version-pinned rebuild (same files + same model version → same index)
   - Tested: rebuild produces identical manifest hash
 
 ### 5.1.3 Semantic Discovery
 - [ ] 5.1.3.1 Store model weights in vector-indexed CAS (Z.5.3)
 - [ ] 5.1.3.2 Semantic skill discovery: `CAPABILITY/SKILLS/*/SKILL.md` (Z.5.4)
-- [ ] 5.1.3.3 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
+- [x] 5.1.3.3 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
+  - Implemented in adr_index.py: 184 ADR-canon cross-references created
 
 ### 5.1.4 VectorPack Export Format
 **Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
