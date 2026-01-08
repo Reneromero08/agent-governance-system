@@ -72,7 +72,7 @@ class PipelineRuntime:
         self.writes.open_commit_gate()
 
     def _load_revoked_capabilities_snapshot(self) -> List[str]:
-        rel = os.environ.get("CATALYTIC_REVOKES_PATH", "LAW/CANON/CAPABILITY_REVOKES.json")
+        rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CAPABILITY/CONFIG/CAPABILITY_REVOKES.json")
         path = Path(rel)
         if not path.is_absolute():
             path = self.project_root / path
