@@ -4,6 +4,32 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.26] - 2026-01-08
+
+### Added
+- **Phase 5.1.2.2 COMPLETE** — ADR embedding with metadata and cross-references ✅
+  - `CAPABILITY/PRIMITIVES/adr_index.py` — ADR indexing primitive
+    - `inventory_adrs()` — Enumerate ADRs with YAML frontmatter parsing
+    - `embed_adrs()` — Batch embed with MemoryRecord + metadata
+    - `search_adrs()` — Semantic search with status filtering
+    - `get_related_canon()` — Cross-reference lookup to canon files
+    - `rebuild_adr_index()` — Deterministic rebuild
+    - `verify_adr_index()` — Integrity verification
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_1_2_adr_embedding.py` — 28 tests passing
+  - `NAVIGATION/CORTEX/db/adr_index.db` — 37 ADRs embedded with 184 canon cross-references
+
+### Changed
+- **AGS_ROADMAP_MASTER.md** — Phase 5.1.2.2 and 5.1.3.3 marked complete
+- **PHASE_5_ROADMAP.md** — Phase 5.1.2 tasks marked complete with implementation details
+
+### Technical Details
+- ADR metadata extracted: id, title, status, date, confidence, impact, tags
+- Status breakdown: 31 Accepted, 4 Proposed, 2 Unknown
+- Cross-references: 184 ADR-canon links above 0.5 similarity threshold
+- Storage: SQLite with MemoryRecord-compatible schema + adr_canon_refs table
+
+---
+
 ## [3.7.25] - 2026-01-08
 
 ### Added

@@ -155,29 +155,34 @@ Every task must produce:
 
 ---
 
-## 5.1.2 Embed ADRs
+## 5.1.2 Embed ADRs ✅ COMPLETE (2026-01-08)
 
 **Purpose:** Make architecture decisions semantically searchable.
 
 ### 5.1.2.1 ADR Inventory
-- [ ] Enumerate all files in `LAW/CONTEXT/decisions/*`
-- [ ] Parse ADR metadata (title, status, date)
-- [ ] Create manifest with hashes
+- [x] Enumerate all files in `LAW/CONTEXT/decisions/*` (**DONE** - 37 ADRs)
+- [x] Parse ADR metadata (title, status, date) (**DONE** - YAML frontmatter)
+- [x] Create manifest with hashes (**DONE**)
 
 ### 5.1.2.2 ADR Embedding
-- [ ] Batch embed all ADR files
-- [ ] Include metadata in MemoryRecord payload
-- [ ] Store with cross-references to canon
+- [x] Batch embed all ADR files (**DONE** - 37 files embedded)
+- [x] Include metadata in MemoryRecord payload (**DONE** - id, title, status, date, etc.)
+- [x] Store with cross-references to canon (**DONE** - 184 cross-references)
 
 ### 5.1.2.3 Tests
-- [ ] `test_phase_5_1_2_adr_embedding.py`
-- [ ] Verify all ADRs embedded
-- [ ] Verify metadata preserved
-- [ ] Verify semantic search returns relevant ADRs
+- [x] `test_phase_5_1_2_adr_embedding.py` (**DONE** - 28 tests passing)
+- [x] Verify all ADRs embedded (**DONE**)
+- [x] Verify metadata preserved (**DONE**)
+- [x] Verify semantic search returns relevant ADRs (**DONE**)
 
 **Exit Criteria:**
-- [ ] All ADRs embedded with metadata
-- [ ] Searchable by semantic query
+- [x] All ADRs embedded with metadata (37 ADRs, 31 Accepted, 4 Proposed, 2 Unknown)
+- [x] Searchable by semantic query
+
+**Implementation:**
+- `CAPABILITY/PRIMITIVES/adr_index.py` - ADR indexing primitive
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_1_2_adr_embedding.py` - 28 tests
+- `NAVIGATION/CORTEX/db/adr_index.db` - Embedded index with cross-references
 
 ---
 
