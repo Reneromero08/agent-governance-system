@@ -19,7 +19,7 @@ tags:
 
 # Phase 5: Vector/Symbol Integration - Detailed Roadmap
 
-**Version:** 1.7.0
+**Version:** 1.8.0
 **Created:** 2026-01-07
 **Last Updated:** 2026-01-08
 **Prerequisite:** Phase 4 (Catalytic Architecture) - COMPLETE
@@ -289,26 +289,51 @@ ModelRecord = {
 
 ---
 
-## 5.1.5 Cross-Reference Indexing
+## 5.1.5 Cross-Reference Indexing ✅ COMPLETE (2026-01-08)
 
 **Purpose:** Link artifacts by embedding distance.
 
 ### 5.1.5.1 Cross-Reference Graph
-- [ ] Compute pairwise distances for related artifacts
-- [ ] Store as graph edges with distance weights
-- [ ] Enable "related artifacts" queries
+- [x] Compute pairwise distances for related artifacts (**DONE**)
+- [x] Store as graph edges with distance weights (**DONE** - SQLite with similarity scores)
+- [x] Enable "related artifacts" queries (**DONE**)
 
 ### 5.1.5.2 Implementation
-- [ ] `find_related(artifact_id, threshold, top_k) -> [related_ids]`
-- [ ] Stable ordering by distance then ID
+- [x] `find_related(artifact_id, threshold, top_k) -> [related_ids]` (**DONE**)
+- [x] Stable ordering by distance then ID (**DONE** - similarity desc, artifact_id asc)
 
 ### 5.1.5.3 Tests
-- [ ] Related artifacts for known items
-- [ ] Graph traversal correctness
+- [x] Related artifacts for known items (**DONE** - 20 tests passing)
+- [x] Graph traversal correctness (**DONE** - deterministic ordering verified)
 
 **Exit Criteria:**
-- [ ] Cross-reference queries functional
-- [ ] Results deterministic
+- [x] Cross-reference queries functional
+- [x] Results deterministic
+
+**Implementation:**
+- `CAPABILITY/PRIMITIVES/cross_ref_index.py` - Core primitive (build, query, stats)
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_1_5_1_cross_refs.py` - 20 tests
+- `NAVIGATION/CORTEX/db/cross_ref_index.db` - SQLite graph database
+- `CAPABILITY/MCP/server.py` - MCP tool handler
+- `CAPABILITY/MCP/schemas/tools.json` - Tool schema
+
+**Features:**
+- Unified graph across canon, ADR, and skill artifacts
+- Configurable similarity threshold and top_k per artifact
+- Cross-type relationships (e.g., canon files linked to related ADRs)
+- Batch similarity computation using numpy
+- Build history tracking with receipts
+
+**Example Usage:**
+```python
+# Build cross-reference graph
+result = build_cross_refs(threshold=0.3, top_k_per_artifact=10)
+# Returns: {artifacts_count: N, refs_count: M, duration_seconds: X}
+
+# Find related artifacts
+related = find_related("canon:LAW/CANON/GOVERNANCE/IMMUTABILITY.md", top_k=5)
+# Returns: {artifact_id, related: [{artifact_id, artifact_type, artifact_path, similarity, metadata}], total_candidates}
+```
 
 ---
 

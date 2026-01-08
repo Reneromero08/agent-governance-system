@@ -1473,6 +1473,7 @@ class AGSMCPServer:
             # Semantic search tools
             "semantic_search": self._tool_semantic_search,
             "skill_discovery": self._tool_skill_discovery,
+            "find_related": self._tool_find_related,
             "cassette_network_query": self._tool_cassette_network_query,
             "semantic_stats": self._tool_semantic_stats,
             # Write tools
@@ -2774,6 +2775,98 @@ class AGSMCPServer:
                 "content": [{
                     "type": "text",
                     "text": f"Skill discovery error: {str(e)}"
+                }],
+                "isError": True
+            }
+
+    def _tool_find_related(self, args: Dict) -> Dict:
+        """Find related artifacts by embedding similarity."""
+        try:
+            from CAPABILITY.PRIMITIVES.cross_ref_index import find_related
+
+            artifact_id = args.get("artifact_id", "")
+            top_k = args.get("top_k", 5)
+            threshold = args.get("threshold")
+
+            if not artifact_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: 'artifact_id' parameter is required"}],
+                    "isError": True
+                }
+
+            # Perform cross-reference query
+            result = find_related(
+                artifact_id=artifact_id,
+                top_k=top_k,
+                threshold=threshold,
+            )
+
+            # Format results
+            if not result.get("related"):
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"No related artifacts found for: '{artifact_id}'"
+                    }]
+                }
+
+            # Build response text
+            lines = [f"Found {len(result['related'])} related artifacts for `{artifact_id}`:\n"]
+
+            for i, related_item in enumerate(result["related"], 1):
+                rel_id = related_item["artifact_id"]
+                rel_type = related_item["artifact_type"]
+                rel_path = related_item["artifact_path"]
+                similarity = related_item["similarity"]
+                metadata = related_item.get("metadata", {})
+
+                lines.append(f"{i}. **{rel_type}**: `{rel_path}` (similarity: {similarity:.3f})")
+
+                # Add type-specific metadata
+                if rel_type == "canon":
+                    tags = metadata.get("tags")
+                    if tags:
+                        lines.append(f"   Tags: {tags}")
+                elif rel_type == "adr":
+                    title = metadata.get("title")
+                    status = metadata.get("status")
+                    if title:
+                        lines.append(f"   Title: {title}")
+                    if status:
+                        lines.append(f"   Status: {status}")
+                elif rel_type == "skill":
+                    # Metadata for skills is in JSON, parse if present
+                    if isinstance(metadata, dict) and metadata:
+                        name = metadata.get("name")
+                        if name:
+                            lines.append(f"   Name: {name}")
+
+                lines.append("")
+
+            # Add stats
+            total_candidates = result.get("total_candidates", 0)
+            lines.append(f"\n_Total candidates: {total_candidates}_")
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "\n".join(lines)
+                }]
+            }
+
+        except FileNotFoundError as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Cross-reference index not found. Run `build_cross_refs()` first: {str(e)}"
+                }],
+                "isError": True
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Cross-reference query error: {str(e)}"
                 }],
                 "isError": True
             }

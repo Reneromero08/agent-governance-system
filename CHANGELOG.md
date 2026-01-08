@@ -6,6 +6,31 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.27] - 2026-01-08
+
+### Added
+- **Phase 5.1.5.1: Cross-Reference Graph** — Unified semantic relationship index across all artifact types
+  - `CAPABILITY/PRIMITIVES/cross_ref_index.py` — Core cross-reference primitive
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_1_5_1_cross_refs.py` — Comprehensive test suite (20 tests passing)
+  - **MCP Integration:** Added `find_related` MCP tool for cross-artifact discovery
+  - **Key features:**
+    - Links canon files, ADRs, and skills by embedding similarity
+    - Pairwise similarity computation across all indexed artifacts
+    - Configurable threshold and top_k filtering
+    - Deterministic ordering (similarity desc, artifact_id asc)
+    - Cross-type relationship discovery (e.g., find ADRs related to a canon file)
+  - **Database:** `NAVIGATION/CORTEX/db/cross_ref_index.db`
+  - **API:** `find_related(artifact_id, top_k, threshold)`, `build_cross_refs()`, `get_cross_ref_stats()`
+
+### Changed
+- **CAPABILITY/MCP/server.py** — Added `_tool_find_related` handler
+- **CAPABILITY/MCP/schemas/tools.json** — Added find_related tool schema definition
+
+### Summary
+Cross-reference indexing creates a semantic graph connecting all vector-indexed artifacts. Enables discovery of related content across different artifact types (canon ↔ ADR ↔ skill). Completes Phase 5.1.5.1 exit criteria: cross-reference queries functional, results deterministic.
+
+---
+
 ## [3.7.26] - 2026-01-08
 
 ### Added
