@@ -14,6 +14,14 @@ This folder contains implementation reports, research findings, and historical r
 
 ---
 
+## Strategic Context
+
+| File | Date | Description |
+|------|------|-------------|
+| [SYSTEM_POTENTIAL_REPORT](01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md) | 2026-01-01 | Strategic value of AGS + Cassette Network ("AI Memory Marketplace") |
+
+---
+
 ## Roadmaps
 
 | File | Date | Description |
@@ -51,16 +59,26 @@ This folder contains implementation reports, research findings, and historical r
 ## Implementation Code
 
 **Core Protocol:**
-- [cassette_protocol.py](../../NAVIGATION/CORTEX/network/cassette_protocol.py) - Base class
-- [network_hub.py](../../NAVIGATION/CORTEX/network/network_hub.py) - Hub coordinator
+- [cassette_protocol.py](../../../NAVIGATION/CORTEX/network/cassette_protocol.py) - Base class (`DatabaseCassette`)
+- [network_hub.py](../../../NAVIGATION/CORTEX/network/network_hub.py) - Hub coordinator (`SemanticNetworkHub`)
+- [generic_cassette.py](../../../NAVIGATION/CORTEX/network/generic_cassette.py) - JSON-configured cassettes
 
 **Cassettes:**
-- [governance_cassette.py](../../NAVIGATION/CORTEX/network/cassettes/governance_cassette.py)
-- [agi_research_cassette.py](../../NAVIGATION/CORTEX/network/cassettes/agi_research_cassette.py)
-- [cat_chat_cassette.py](../../NAVIGATION/CORTEX/network/cassettes/cat_chat_cassette.py)
+- [governance_cassette.py](../../../NAVIGATION/CORTEX/network/cassettes/governance_cassette.py)
+- [agi_research_cassette.py](../../../NAVIGATION/CORTEX/network/cassettes/agi_research_cassette.py)
+- [cat_chat_cassette.py](../../../NAVIGATION/CORTEX/network/cassettes/cat_chat_cassette.py)
+
+**Configuration:**
+- [cassettes.json](../../../NAVIGATION/CORTEX/network/cassettes.json) - Registered cassettes config
+
+**MCP Integration:**
+- [semantic_adapter.py](../../../CAPABILITY/MCP/semantic_adapter.py) - MCP adapter for cassette network
+
+**Legacy/Prototype:**
+- [semantic_network.py](../../../CAPABILITY/TOOLS/cortex/semantic_network.py) - Original SNP prototype
 
 **Demo:**
-- [demo_cassette_network.py](../../NAVIGATION/CORTEX/network/demo_cassette_network.py)
+- [demo_cassette_network.py](../../../NAVIGATION/CORTEX/network/demo_cassette_network.py)
 
 ---
 
