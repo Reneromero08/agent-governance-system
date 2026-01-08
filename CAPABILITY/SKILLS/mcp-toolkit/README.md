@@ -40,7 +40,7 @@ All operations require an `operation` field:
 {
   "operation": "validate_access",
   "agent_action": "I need to read the CONTRACT.md file",
-  "agent_code_snippet": "open('LAW/CANON/CONTRACT.md').read()"
+  "agent_code_snippet": "open('LAW/CANON/CONSTITUTION/CONTRACT.md').read()"
 }
 ```
 

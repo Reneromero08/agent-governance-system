@@ -35,8 +35,8 @@ from CAPABILITY.TOOLS.agents.skill_runtime import (
 @pytest.fixture
 def temp_project_root(tmp_path):
     """Create a temporary project root with minimal structure."""
-    # Create LAW/CANON/VERSIONING.md
-    canon_dir = tmp_path / "LAW" / "CANON"
+    # Create LAW/CANON/GOVERNANCE/VERSIONING.md
+    canon_dir = tmp_path / "LAW" / "CANON" / "GOVERNANCE"
     canon_dir.mkdir(parents=True)
     (canon_dir / "VERSIONING.md").write_text("canon_version: 3.2.2")
 
