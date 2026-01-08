@@ -394,19 +394,19 @@ The crystal grows through the channels.
 - [x] Time is scaffolding
 - [x] Axiom 1 (gates) validated
 - [x] Axiom 5 (resonance) implemented
-- [x] 4 domains validated
+- [x] Axiom 6 (context) validated via quantum test
+- [x] 7 domains validated (navigation, ELO, gradient, early-stop, ablation, quantum-single, quantum-joint)
 
-### Open Questions (Research Frontier)
+### Open Questions
 
-1. **Why grad_S specifically?** What is the deeper principle behind local dispersion as truth indicator?
+> **See [OPEN_QUESTIONS.md](OPEN_QUESTIONS.md)** for full research frontier (30 questions, R-score ranked)
 
-2. **Topology classification:** Which manifolds allow local curvature to reveal global truth?
-
-3. **Multi-scale composition:** How do gates compose across scales? Is there a fixed point?
-
-4. **sqrt(3) geometry:** Why this constant? What is the connection to packing/distinguishability?
-
-5. **Valley blindness:** Can we extend the horizon without changing epistemology?
+**Top 5 Priorities:**
+1. Why grad_S? (R: 1800)
+2. Falsification criteria (R: 1750)
+3. Why does it generalize? (R: 1720)
+4. Novel predictions (R: 1700)
+5. Agreement vs. truth (R: 1680)
 
 ---
 
