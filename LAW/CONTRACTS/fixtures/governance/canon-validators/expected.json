@@ -1,0 +1,4 @@
+{
+  "status": "passed",
+  "checks": ["duplicate_numbers", "line_count", "authority_gradient"]
+}

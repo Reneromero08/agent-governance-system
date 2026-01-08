@@ -4,6 +4,29 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.16] - 2026-01-07
+
+### Changed
+- **LAW Refactoring (Phases 1-4, 6 COMPLETE)** — Comprehensive governance structure improvements
+  - **Phase 1:** Fixed CONTRACT.md duplicate rule numbering (rules 1-13 properly sequenced)
+  - **Phase 2:** Created `LAW/CANON/canon.json` machine-readable index, added `LAW/CONTEXT/archive/` directory
+  - **Phase 3:** Modernized `LAW/CONTRACTS/runner.py` with `FixtureResult` dataclass, `--json` flag, `--filter` option
+  - **Phase 4:** Created `canon-validators` fixture (duplicate rules, line count, authority gradient checks)
+  - **Phase 6:** Compressed DOCUMENT_POLICY.md (402→203 lines) and STEWARDSHIP.md (374→160 lines) to meet INV-009 300-line limit
+  - Roadmap: `INBOX/roadmaps/01-07-2026_LAW_REFACTORING_ROADMAP.md` (Phase 5 manual pending)
+
+### Fixed
+- **LAW/CANON/CONTRACT.md:** Eliminated duplicate rule numbers (had three "4."s, two "8."s) — renumbered to 1-13
+- **LAW/CANON/DOCUMENT_POLICY.md:** Reduced from 402 to 203 lines (merged examples, condensed migration guide)
+- **LAW/CANON/STEWARDSHIP.md:** Reduced from 374 to 160 lines (compressed engineering culture, kept implicit)
+
+### Added
+- **LAW/CANON/canon.json:** Machine-readable canon index with 29 files categorized (foundations, constitution, governance, processes, meta, protocols, catalytic)
+- **LAW/CONTEXT/archive/:** Directory for superseded ADRs (preserves audit history per INV-010)
+- **LAW/CONTRACTS/fixtures/governance/canon-validators/:** Fixture for canon integrity checks
+
+---
+
 ## [3.7.15] - 2026-01-07
 
 ### Added
