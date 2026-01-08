@@ -4,6 +4,20 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.18] - 2026-01-07
+
+### Changed
+- **Moved capabilities config out of CANON** — Runtime config files are operational, not governance law
+  - Moved `LAW/CANON/capabilities/` → `CAPABILITY/CONFIG/`
+  - Updated `ags.py`, `pipeline_runtime.py` default paths
+  - Updated `canon.json` to remove capabilities bucket (now 25 files, down from 29)
+  - Added `runtime_config_location` pointer in canon.json
+
+### Rationale
+CANON should contain only governance rules. Capability config (CAPABILITIES.json, CAPABILITY_PINS.json, etc.) is runtime state that changes frequently and belongs with the CAPABILITY system.
+
+---
+
 ## [3.7.17] - 2026-01-07
 
 ### Changed
@@ -12,13 +26,12 @@ All notable changes to Agent Governance System will be documented in this file.
   - **GOVERNANCE/** (7 files): VERSIONING.md, DEPRECATION.md, MIGRATION.md, ARBITRATION.md, CRISIS.md, STEWARDSHIP.md, VERIFICATION_PROTOCOL_CANON.md
   - **POLICY/** (4 files): DOCUMENT_POLICY.md, IMPLEMENTATION_REPORTS.md, SECURITY.md, AGENT_SEARCH_PROTOCOL.md
   - **META/** (6 files): GENESIS.md, GENESIS_COMPACT.md, SYSTEM_BUCKETS.md, GLOSSARY.md, CODEBOOK.md, INDEX.md
-  - **capabilities/** (4 files): JSON config files moved to lowercase directory
   - **CATALYTIC/** and **SEMANTIC/** unchanged
 - **canon.json v2.0.0:** Updated with bucket structure and authority ranks
 - **Cross-references updated:** AGENTS.md, README.md, CONTRACT.md, AGREEMENT.md, canon-sync fixtures
 
 ### Added
-- **LAW/CANON/CONSTITUTION/**, **LAW/CANON/GOVERNANCE/**, **LAW/CANON/POLICY/**, **LAW/CANON/META/**, **LAW/CANON/capabilities/** bucket directories
+- **LAW/CANON/CONSTITUTION/**, **LAW/CANON/GOVERNANCE/**, **LAW/CANON/POLICY/**, **LAW/CANON/META/** bucket directories
 
 ---
 

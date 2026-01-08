@@ -67,16 +67,6 @@
       "files": [
         "SEMANTIC/TOKEN_RECEIPT_SPEC.md"
       ]
-    },
-    "capabilities": {
-      "description": "Runtime configuration (JSON data files)",
-      "authority_rank": 7,
-      "files": [
-        "capabilities/CAPABILITIES.json",
-        "capabilities/CAPABILITY_PINS.json",
-        "capabilities/CAPABILITY_REVOKES.json",
-        "capabilities/swarm_config.json"
-      ]
     }
   },
   "authority_gradient": [
@@ -85,5 +75,6 @@
     "CONSTITUTION/INVARIANTS.md",
     "GOVERNANCE/VERSIONING.md"
   ],
-  "total_files": 29
+  "runtime_config_location": "CAPABILITY/CONFIG/",
+  "total_files": 25
 }
