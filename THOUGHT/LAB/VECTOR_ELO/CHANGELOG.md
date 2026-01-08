@@ -4,6 +4,32 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [F.0] - 2026-01-08
+
+### Formula Falsification Sidequest - INITIATED
+
+**Goal:** Empirically test and attempt to falsify the Living Formula: `R = (E / ∇S) × σ(f)^Df`
+
+**Files Created:**
+- `research/formula/FORMULA_FALSIFICATION_ROADMAP.md` — 6-phase test plan
+
+**Test Categories:**
+- F.0: Operationalization (define measurable proxies)
+- F.1: Linearity Tests (E and ∇S)
+- F.2: Exponential Tests (σ^Df)
+- F.3: Cross-Domain Validation
+- F.4: Adversarial Tests
+- F.5: Alternative Model Comparison
+- F.6: Calibration Constants
+
+**Key Falsification Criteria:**
+- Linear where exponential predicted → FALSIFIED
+- Simpler model fits equally well → FALSIFIED
+- Domain-specific only → REFINED
+- All tests pass → VALIDATED
+
+---
+
 ## [E.X] - 2026-01-08
 
 ### Eigenvalue Alignment Protocol - VALIDATED
