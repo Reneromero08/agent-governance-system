@@ -317,12 +317,27 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 5.2.4.2 Tests: determinism (same program → same hash), schema validation
 - [ ] 5.2.4.3 Token benchmark: measure reduction vs baseline (target 90%+)
 
+### 5.2.5 Token Accountability Layer
+**Purpose:** Make token savings mandatory and visible in every operation.
+**Specification:** `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md`
+
+- [ ] 5.2.5.1 Define `token_receipt.schema.json` (operation, tokens_out, tokenizer, savings)
+- [ ] 5.2.5.2 Implement `CAPABILITY/PRIMITIVES/token_receipt.py` (TokenReceipt dataclass)
+- [ ] 5.2.5.3 Patch `semantic_search.py` to emit TokenReceipt on every query
+- [ ] 5.2.5.4 Require TokenReceipt in JobSpec responses
+- [ ] 5.2.5.5 Implement session aggregator (`token_session.py`) for cumulative savings
+- [ ] 5.2.5.6 Firewall enforcement: REJECT outputs > 1000 tokens without TokenReceipt
+- [ ] 5.2.5.7 Display formats: compact CLI, verbose reports, JSON export
+
 - **Exit Criteria**
   - [ ] CODEBOOK.json contains 30+ governance macros
   - [ ] `scl decode <program>` → emits JobSpec JSON
   - [ ] `scl validate` passes valid programs, rejects invalid
   - [ ] Meaningful token reduction demonstrated vs baseline (90%+ for governance)
   - [ ] Reproducible expansions (same symbols → same output hash)
+  - [ ] TokenReceipt emitted by all semantic operations
+  - [ ] Session summaries aggregate token savings
+  - [ ] Firewall enforces receipt requirement
 
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate) V3.8
 
@@ -369,9 +384,10 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 6.4.2 Run benchmark tasks (baseline vs compressed context) (M.4.2)
 - [ ] 6.4.3 Measure success rates (code compiles, tests pass, bugs found) (M.4.3)
 - [ ] 6.4.4 Validate compressed success rate ≥ baseline (M.4.4)
-- [ ] 6.4.5 Define **token measurement** for all claims (M.4.5)
+- [x] 6.4.5 Define **token measurement** for all claims (M.4.5) ✅ DONE
   - Must specify tokenizer + encoding (e.g. `tiktoken` + `o200k_base` or `cl100k_base`)
   - Must record tokenizer version + encoding name in receipts
+  - **Implemented:** `run_compression_proof.py` uses `tiktoken` v0.12.0 + `o200k_base`
 - [ ] 6.4.6 Define **baseline corpus** precisely (M.4.6)
   - Must be an explicit file allowlist (paths) + integrity anchors (hashes or git rev)
   - Must define aggregation rule (sum per-file counts vs tokenize concatenated corpus)

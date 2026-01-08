@@ -15,7 +15,8 @@ research/
 ├── vector-substrate/       # VectorPack format, MemoryRecord contract
 ├── cassette-network/       # Cassette protocol, semantic network hub
 ├── semantic-core/          # Semantic core architecture, indexing
-└── phase-5/                # Phase 5 Vector/Symbol Integration roadmaps
+├── phase-5/                # Phase 5 Vector/Symbol Integration roadmaps
+└── symbols/                # Semiotic compression theory + Semantic Density Horizon
 ```
 
 ---
@@ -91,6 +92,33 @@ Phase 5 Vector/Symbol Integration planning and research.
 | `12-26-2025-06-39_SYMBOLIC_COMPRESSION.md` | Original symbolic compression research |
 | `12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` | Token-optimized language proposal (30-50% reduction) |
 | `01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md` | Catalytic continuity design |
+
+---
+
+## symbols/
+
+Semiotic compression theory and the Semantic Density Horizon breakthrough.
+
+| File | Description |
+|------|-------------|
+| `12-26-2025_SYMBOLIC_COMPRESSION_BRAINSTORM.md` | **FOUNDATIONAL** - Original insight: Kanji/Cuneiform compress concepts into tokens |
+| `12-26-2025_SYMBOLIC_COMPRESSION_BRIEF.md` | Token-optimized language proposal (codebook approach) |
+| `12-28-2025_KIMI_K2_SYMBOLIC_AI.md` | Logographic vs alphabetic tokenization research (Kimi K2 collaboration) |
+| `01-08-2026_COMPRESSION_PARADIGM_SHIFT_FULL_REPORT.md` | **KEY** - Semantic Density Horizon: 9+ nines via meaning-per-token |
+| `OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` | **EXECUTION** - Attack plan + ELO-ranked sources (Shannon 3000 → ScaNN 2500) |
+| `SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` | **LITERATURE** - VSA, NeuroVSA, LCM, ASG, library learning for logographs |
+| `PLATONIC_COMPRESSION_THESIS.md` | **ONTOLOGY** - Truth as attractor, entropy as pull, meaning as territory |
+
+### Semantic Density Horizon
+
+The key breakthrough in `symbols/`: token count is not the compression limit. Semantic density is.
+
+```
+Token-count limit:    ~6 nines (cannot send < 1 token)
+Semantic density:     9+ nines (1 token can carry N concepts)
+```
+
+**Proof**: Chinese logograph 道 (dào) = path + principle + speech + method (4+ concepts in 1 token)
 
 ---
 
