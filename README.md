@@ -10,7 +10,7 @@ This repository provides a language-driven operating system for AI-native projec
 
 Every new agent session **must** begin with the Genesis Prompt to bootstrap the governance system correctly.
 
-1. Read the full prompt from `LAW/CANON/GENESIS.md`.
+1. Read the full prompt from `LAW/CANON/META/GENESIS.md`.
 2. Prepend it as the system message, pack header, or first instruction.
 3. Agents are instructed to remind you if it is missing.
 
@@ -76,7 +76,7 @@ roots (`LAW/CONTRACTS/_runs/mcp_logs/`). Verify with the `mcp-smoke` or
 
 This repository is a template: most files are placeholders that illustrate the intended structure. To adapt the system for your own project, fill in the canon, add decisions and ADRs, implement skills and write fixtures.
 
-Agents interacting with the system should follow the protocol described in `LAW/CANON/CONTRACT.md`. In brief:
+Agents interacting with the system should follow the protocol described in `LAW/CANON/CONSTITUTION/CONTRACT.md`. In brief:
 
 1. Load the canon first and respect its authority.
 2. Consult context records before making changes.

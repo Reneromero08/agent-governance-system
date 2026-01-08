@@ -1,66 +1,89 @@
 {
-  "version": "1.0.0",
-  "foundations": [
-    "FORMULA.md",
-    "INTEGRITY.md"
+  "version": "2.0.0",
+  "description": "Machine-readable index of LAW/CANON files organized by bucket",
+  "buckets": {
+    "CONSTITUTION": {
+      "description": "Foundational law - highest authority, rarely changes",
+      "authority_rank": 1,
+      "files": [
+        "CONSTITUTION/AGREEMENT.md",
+        "CONSTITUTION/CONTRACT.md",
+        "CONSTITUTION/FORMULA.md",
+        "CONSTITUTION/INVARIANTS.md",
+        "CONSTITUTION/INTEGRITY.md"
+      ]
+    },
+    "GOVERNANCE": {
+      "description": "How decisions are made and executed",
+      "authority_rank": 2,
+      "files": [
+        "GOVERNANCE/VERSIONING.md",
+        "GOVERNANCE/DEPRECATION.md",
+        "GOVERNANCE/MIGRATION.md",
+        "GOVERNANCE/ARBITRATION.md",
+        "GOVERNANCE/CRISIS.md",
+        "GOVERNANCE/STEWARDSHIP.md",
+        "GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      ]
+    },
+    "POLICY": {
+      "description": "Operational standards and requirements",
+      "authority_rank": 3,
+      "files": [
+        "POLICY/DOCUMENT_POLICY.md",
+        "POLICY/IMPLEMENTATION_REPORTS.md",
+        "POLICY/SECURITY.md",
+        "POLICY/AGENT_SEARCH_PROTOCOL.md"
+      ]
+    },
+    "META": {
+      "description": "Documentation about the system itself",
+      "authority_rank": 4,
+      "files": [
+        "META/GENESIS.md",
+        "META/GENESIS_COMPACT.md",
+        "META/SYSTEM_BUCKETS.md",
+        "META/GLOSSARY.md",
+        "META/CODEBOOK.md",
+        "META/INDEX.md"
+      ]
+    },
+    "CATALYTIC": {
+      "description": "Cryptographic computing protocols",
+      "authority_rank": 5,
+      "files": [
+        "CATALYTIC/CATALYTIC_COMPUTING.md",
+        "CATALYTIC/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md",
+        "CATALYTIC/SPECTRUM-02_RESUME_BUNDLE.md",
+        "CATALYTIC/SPECTRUM-03_CHAIN_VERIFICATION.md",
+        "CATALYTIC/SPECTRUM-04_IDENTITY_SIGNING.md",
+        "CATALYTIC/SPECTRUM-05_VERIFICATION_LAW.md",
+        "CATALYTIC/SPECTRUM-06_RESTORE_RUNNER.md"
+      ]
+    },
+    "SEMANTIC": {
+      "description": "Token and symbol definitions",
+      "authority_rank": 6,
+      "files": [
+        "SEMANTIC/TOKEN_RECEIPT_SPEC.md"
+      ]
+    },
+    "capabilities": {
+      "description": "Runtime configuration (JSON data files)",
+      "authority_rank": 7,
+      "files": [
+        "capabilities/CAPABILITIES.json",
+        "capabilities/CAPABILITY_PINS.json",
+        "capabilities/CAPABILITY_REVOKES.json",
+        "capabilities/swarm_config.json"
+      ]
+    }
+  },
+  "authority_gradient": [
+    "CONSTITUTION/AGREEMENT.md",
+    "CONSTITUTION/CONTRACT.md",
+    "CONSTITUTION/INVARIANTS.md",
+    "GOVERNANCE/VERSIONING.md"
   ],
-  "constitution": [
-    "AGREEMENT.md",
-    "CONTRACT.md",
-    "INVARIANTS.md",
-    "SYSTEM_BUCKETS.md"
-  ],
-  "governance": [
-    "VERSIONING.md",
-    "GLOSSARY.md"
-  ],
-  "processes": [
-    "ARBITRATION.md",
-    "CATALYTIC/CATALYTIC_COMPUTING.md",
-    "CRISIS.md",
-    "DEPRECATION.md",
-    "MIGRATION.md",
-    "STEWARDSHIP.md",
-    "VERIFICATION_PROTOCOL_CANON.md"
-  ],
-  "meta": [
-    "GENESIS.md",
-    "GENESIS_COMPACT.md",
-    "SECURITY.md",
-    "CODEBOOK.md",
-    "DOCUMENT_POLICY.md",
-    "IMPLEMENTATION_REPORTS.md",
-    "INDEX.md"
-  ],
-  "protocols": [
-    "AGENT_SEARCH_PROTOCOL.md"
-  ],
-  "catalytic": [
-    "CATALYTIC/CATALYTIC_COMPUTING.md",
-    "CATALYTIC/CMP-01_CATALYTIC_MUTATION_PROTOCOL.md",
-    "CATALYTIC/SPECTRUM-02_RESUME_BUNDLE.md",
-    "CATALYTIC/SPECTRUM-03_CHAIN_VERIFICATION.md",
-    "CATALYTIC/SPECTRUM-04_IDENTITY_SIGNING.md",
-    "CATALYTIC/SPECTRUM-05_VERIFICATION_LAW.md",
-    "CATALYTIC/SPECTRUM-06_RESTORE_RUNNER.md"
-  ],
-  "authority_order": [
-    "AGREEMENT.md",
-    "CONTRACT.md",
-    "INVARIANTS.md",
-    "VERSIONING.md"
-  ],
-  "notes": {
-    "missing_from_template": [
-      "CHANGELOG.md - not found in LAW/CANON/",
-      "INBOX_POLICY.md - not found in LAW/CANON/"
-    ],
-    "additional_files_found": [
-      "GENESIS_COMPACT.md - compact version of genesis",
-      "DOCUMENT_POLICY.md - document management policy",
-      "INDEX.md - human-readable index",
-      "AGENT_SEARCH_PROTOCOL.md - agent search protocol",
-      "CATALYTIC/ subdirectory - contains catalytic computing protocols"
-    ]
-  }
+  "total_files": 29
 }

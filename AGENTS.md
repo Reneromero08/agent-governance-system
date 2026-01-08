@@ -114,7 +114,7 @@ cortex_query({"query": "symbols", "limit": 10})
 
 **❌ WRONG (Token Waste):**
 ```python
-open('LAW/CANON/CONTRACT.md').read()
+open('LAW/CANON/CONSTITUTION/CONTRACT.md').read()
 ```
 
 **✅ CORRECT (MCP-First):**
@@ -157,18 +157,18 @@ Before taking any action, an agent MUST:
 
 1. **Connect to Cortex** using Section 0 guidelines
 2. **Read essential governance documents** (via cortex tools):
-   - LAW/CANON/CONTRACT.md - Core rules and authority gradient
-   - LAW/CANON/INVARIANTS.md - Locked decisions that cannot change
-   - LAW/CANON/VERSIONING.md - Version policy (identify current canon_version)
-   - LAW/CANON/AGREEMENT.md - Constitutional agreement between human and system
-   - LAW/CANON/STEWARDSHIP.md - Engineering practices and escalation paths
-   - LAW/CANON/VERIFICATION_PROTOCOL_CANON.md - Mechanical verification requirements for task completion
-   - LAW/CANON/DOCUMENT_POLICY.md - Canonical document format for all markdown documentation
-   - LAW/CANON/IMPLEMENTATION_REPORTS.md - Report format for all implementations
-   - LAW/CANON/CRISIS.md - Emergency procedures and quarantine detection
+   - LAW/CANON/CONSTITUTION/CONTRACT.md - Core rules and authority gradient
+   - LAW/CANON/CONSTITUTION/INVARIANTS.md - Locked decisions that cannot change
+   - LAW/CANON/GOVERNANCE/VERSIONING.md - Version policy (identify current canon_version)
+   - LAW/CANON/CONSTITUTION/AGREEMENT.md - Constitutional agreement between human and system
+   - LAW/CANON/GOVERNANCE/STEWARDSHIP.md - Engineering practices and escalation paths
+   - LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md - Mechanical verification requirements for task completion
+   - LAW/CANON/POLICY/DOCUMENT_POLICY.md - Canonical document format for all markdown documentation
+   - LAW/CANON/POLICY/IMPLEMENTATION_REPORTS.md - Report format for all implementations
+   - LAW/CANON/GOVERNANCE/CRISIS.md - Emergency procedures and quarantine detection
    - **AGS_ROADMAP_MASTER.md** - Master roadmap (⚠️ LIVES AT REPOSITORY ROOT, NOT in NAVIGATION/)
 3. **Read this file (AGENTS.md) in full**
-4. **Identify the current canon_version** (found in LAW/CANON/VERSIONING.md)
+4. **Identify the current canon_version** (found in LAW/CANON/GOVERNANCE/VERSIONING.md)
 5. **Identify whether the task is**:
    - governance change (requires ADR and ceremony)
    - skill implementation (requires SKILL.md, run.py, validate.py, fixtures)
@@ -294,10 +294,10 @@ Only change CANON or edit existing CONTEXT records when the task is explicitly a
 
 If instructions conflict, obey in this order:
 
-1. LAW/CANON/AGREEMENT.md
-2. LAW/CANON/CONTRACT.md
-3. LAW/CANON/INVARIANTS.md
-4. LAW/CANON/VERSIONING.md
+1. LAW/CANON/CONSTITUTION/AGREEMENT.md
+2. LAW/CANON/CONSTITUTION/CONTRACT.md
+3. LAW/CANON/CONSTITUTION/INVARIANTS.md
+4. LAW/CANON/GOVERNANCE/VERSIONING.md
 5. AGENTS.md
 6. CONTEXT records (ADRs, rejections, preferences)
 7. NAVIGATION/maps/*

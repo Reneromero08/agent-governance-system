@@ -4,6 +4,24 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.17] - 2026-01-07
+
+### Changed
+- **LAW/CANON Bucket Reorganization (Phase 7)** — Reorganized flat CANON directory into logical subdirectories
+  - **CONSTITUTION/** (5 files): AGREEMENT.md, CONTRACT.md, FORMULA.md, INVARIANTS.md, INTEGRITY.md
+  - **GOVERNANCE/** (7 files): VERSIONING.md, DEPRECATION.md, MIGRATION.md, ARBITRATION.md, CRISIS.md, STEWARDSHIP.md, VERIFICATION_PROTOCOL_CANON.md
+  - **POLICY/** (4 files): DOCUMENT_POLICY.md, IMPLEMENTATION_REPORTS.md, SECURITY.md, AGENT_SEARCH_PROTOCOL.md
+  - **META/** (6 files): GENESIS.md, GENESIS_COMPACT.md, SYSTEM_BUCKETS.md, GLOSSARY.md, CODEBOOK.md, INDEX.md
+  - **capabilities/** (4 files): JSON config files moved to lowercase directory
+  - **CATALYTIC/** and **SEMANTIC/** unchanged
+- **canon.json v2.0.0:** Updated with bucket structure and authority ranks
+- **Cross-references updated:** AGENTS.md, README.md, CONTRACT.md, AGREEMENT.md, canon-sync fixtures
+
+### Added
+- **LAW/CANON/CONSTITUTION/**, **LAW/CANON/GOVERNANCE/**, **LAW/CANON/POLICY/**, **LAW/CANON/META/**, **LAW/CANON/capabilities/** bucket directories
+
+---
+
 ## [3.7.16] - 2026-01-07
 
 ### Changed
