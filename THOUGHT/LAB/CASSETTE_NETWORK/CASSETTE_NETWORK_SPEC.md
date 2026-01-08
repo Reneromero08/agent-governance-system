@@ -224,6 +224,53 @@ symbol_resolve("@C:abc123") → memory_recall("abc123")
 
 ---
 
+## MemoryRecord Contract Integration
+
+**Upstream:** Phase 5.1.0 defines the canonical `MemoryRecord` schema.
+
+### MemoryRecord → Cassette Binding
+
+Each record in a cassette MUST conform to the MemoryRecord contract:
+
+```json
+{
+  "id": "sha256:abc123...",           // Content hash (canonical ID)
+  "text": "The governance framework...", // Source of truth
+  "embeddings": {
+    "all-MiniLM-L6-v2": [0.1, 0.2, ...] // Derived (rebuildable)
+  },
+  "payload": {
+    "file_path": "LAW/CANON/...",
+    "section": "overview",
+    "tags": ["canon", "governance"]
+  },
+  "scores": {
+    "elo": 1400,                       // From Phase 7 ELO system
+    "recency": 0.95,
+    "trust": 1.0
+  },
+  "lineage": {
+    "parent_hash": null,
+    "summarization_depth": 0
+  },
+  "receipts": {
+    "created_at": "2026-01-08T...",
+    "tool_version": "1.0.0"
+  }
+}
+```
+
+**Contract Rules (from Phase 5.1.0):**
+- `text` is canonical (source of truth)
+- `embeddings` are derived (rebuildable from text)
+- All exports are receipted and hashed
+- `scores.elo` connects to Phase 7 ELO system
+
+**Schema:** `LAW/SCHEMAS/memory_record.schema.json`
+**Implementation:** `CAPABILITY/PRIMITIVES/memory_record.py`
+
+---
+
 ## Cartridge-First Architecture
 
 ### Principles
@@ -231,6 +278,7 @@ symbol_resolve("@C:abc123") → memory_recall("abc123")
 1. **Portability**: Each cassette DB is a sharable, tool-readable unit
 2. **Verifiability**: Content-hash based IDs, receipts for all writes
 3. **Rebuildability**: Derived acceleration layers are disposable
+4. **MemoryRecord Compliance**: All records follow Phase 5.1.0 contract
 
 ### Derived Engines
 
@@ -363,7 +411,16 @@ except CassetteOfflineError:
 
 ## References
 
-- [cassette_protocol.py](NAVIGATION/CORTEX/network/cassette_protocol.py)
-- [network_hub.py](NAVIGATION/CORTEX/network/network_hub.py)
+**Implementation:**
+- [cassette_protocol.py](../../NAVIGATION/CORTEX/network/cassette_protocol.py)
+- [network_hub.py](../../NAVIGATION/CORTEX/network/network_hub.py)
+
+**Roadmaps:**
 - [CASSETTE_NETWORK_ROADMAP.md](CASSETTE_NETWORK_ROADMAP.md)
-- [AGS_ROADMAP_MASTER.md](AGS_ROADMAP_MASTER.md) - Phase 6
+- [AGS_ROADMAP_MASTER.md](../../AGS_ROADMAP_MASTER.md) - Phase 6
+
+**Upstream Dependencies (Phase 5):**
+- [PHASE_5_ROADMAP.md](../VECTOR_ELO/PHASE_5_ROADMAP.md) - MemoryRecord contract, compression stack
+- [VECTOR_ELO_ROADMAP.md](../VECTOR_ELO/VECTOR_ELO_ROADMAP.md) - ELO scoring
+- [memory_record.schema.json](../../LAW/SCHEMAS/memory_record.schema.json) - Schema
+- [memory_record.py](../../CAPABILITY/PRIMITIVES/memory_record.py) - Implementation

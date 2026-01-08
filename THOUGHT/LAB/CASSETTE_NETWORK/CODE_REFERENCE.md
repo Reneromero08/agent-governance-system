@@ -78,7 +78,24 @@ JSON configuration for registered cassettes.
 ### generic_cassette.py
 **Path:** [NAVIGATION/CORTEX/network/generic_cassette.py](../../NAVIGATION/CORTEX/network/generic_cassette.py)
 
-Generic cassette template for creating new cassettes.
+Creates cassettes from JSON configuration without writing separate Python files:
+- `GenericCassette` class - Auto-detects query strategy (FTS5, text search)
+- `load_cassettes_from_json()` - Loads all cassettes from config file
+- `create_cassette_from_config()` - Creates individual cassettes
+
+---
+
+## Original SNP Prototype
+
+### semantic_network.py
+**Path:** [CAPABILITY/TOOLS/cortex/semantic_network.py](../../CAPABILITY/TOOLS/cortex/semantic_network.py)
+
+The original Semantic Network Protocol (SNP) prototype - predecessor to the cassette network:
+- `CortexPeer` - Original peer class (replaced by `DatabaseCassette`)
+- `CortexNetwork` - Original network class (replaced by `SemanticNetworkHub`)
+- Message types: HANDSHAKE, QUERY, RESPONSE, HEARTBEAT
+
+**Note:** This is the legacy implementation. Use `cassette_protocol.py` and `network_hub.py` instead.
 
 ---
 
@@ -95,7 +112,12 @@ MCP server with cassette network integration:
 ### semantic_adapter.py
 **Path:** [CAPABILITY/MCP/semantic_adapter.py](../../CAPABILITY/MCP/semantic_adapter.py)
 
-Adapter for semantic search via MCP.
+Adapter that connects cassette network to MCP server:
+- `SemanticMCPAdapter` class - Main adapter
+- `semantic_search_tool()` - Vector-based search via MCP
+- `cassette_network_query()` - Cross-cassette queries via MCP
+- `_load_cassettes_from_config()` - Loads cassettes from JSON config
+- `get_network_status()` - Returns network health status
 
 ---
 
@@ -103,17 +125,24 @@ Adapter for semantic search via MCP.
 
 ```
 NAVIGATION/CORTEX/network/
-├── cassette_protocol.py     # Base class
-├── network_hub.py           # Hub coordinator
+├── cassette_protocol.py     # Base class (DatabaseCassette)
+├── network_hub.py           # Hub coordinator (SemanticNetworkHub)
 ├── demo_cassette_network.py # Demo script
 ├── test_cassettes.py        # Tests
-├── cassettes.json           # Config
-├── generic_cassette.py      # Template
+├── cassettes.json           # Config (defines registered cassettes)
+├── generic_cassette.py      # JSON-configured cassettes
 └── cassettes/
     ├── __init__.py
     ├── governance_cassette.py
     ├── agi_research_cassette.py
     └── cat_chat_cassette.py
+
+CAPABILITY/MCP/
+├── server.py                # MCP server
+└── semantic_adapter.py      # Cassette network MCP adapter
+
+CAPABILITY/TOOLS/cortex/
+└── semantic_network.py      # Original SNP prototype (legacy)
 ```
 
 ---
