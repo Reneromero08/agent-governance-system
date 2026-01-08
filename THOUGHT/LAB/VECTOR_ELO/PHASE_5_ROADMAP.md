@@ -788,12 +788,20 @@ Phase 5.2 - SCL (targets grounded in measured data)
 
 ## References
 
+### Proven
 - `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_REPORT.md` - Hardened vector proof (tiktoken)
 - `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md` - Full stack compression analysis
+
+### Research
+- `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md` - **ONTOLOGY** Truth as attractor
+- `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` - Execution plan
+- `THOUGHT/LAB/VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` - VSA/LCM literature
 - `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression research
 - `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` - SCL research
+
+### Implementation
 - `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md` - Token accountability law
 
 ---
 
-*Roadmap v1.3.0 - Updated 2026-01-08 with stacked receipt architecture*
+*Roadmap v1.4.0 - Updated 2026-01-08 with Platonic Compression Thesis*

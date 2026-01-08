@@ -1,7 +1,14 @@
 {
-  "version": "2.0.0",
+  "version": "2.1.0",
   "description": "Machine-readable index of LAW/CANON files organized by bucket",
   "buckets": {
+    "FOUNDATION": {
+      "description": "Ontological foundation - supersedes all other canon",
+      "authority_rank": 0,
+      "files": [
+        "FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md"
+      ]
+    },
     "CONSTITUTION": {
       "description": "Foundational law - highest authority, rarely changes",
       "authority_rank": 1,
@@ -70,11 +77,12 @@
     }
   },
   "authority_gradient": [
+    "FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md",
     "CONSTITUTION/AGREEMENT.md",
     "CONSTITUTION/CONTRACT.md",
     "CONSTITUTION/INVARIANTS.md",
     "GOVERNANCE/VERSIONING.md"
   ],
   "runtime_config_location": "CAPABILITY/CONFIG/",
-  "total_files": 25
+  "total_files": 26
 }

@@ -1,22 +1,54 @@
 {
   "baselines": {
-    "BaselineA_tokens": 276085,
+    "BaselineA_tokens": 622480,
     "BaselineB_filter_rule": "Include files under existing roots: LAW/, NAVIGATION/; plus ADR-like paths containing `/decisions/` or `ADR-`; plus paths containing `ROADMAP`.",
-    "BaselineB_tokens": 67375
+    "BaselineB_tokens": 198418
   },
+  "corpus_anchor": {
+    "file": "NAVIGATION/CORTEX/meta/FILE_INDEX.json",
+    "sha256": "c4d4bcd66a7b26b9a76015449e34e4ce25f0d28bc8077c28c35fb06f073934b3"
+  },
+  "dependencies": {
+    "numpy": "1.26.4",
+    "python": "3.11.6",
+    "tiktoken": "0.12.0"
+  },
+  "git_status": {
+    "clean": false,
+    "status": "7 uncommitted changes"
+  },
+  "negative_controls": [
+    {
+      "avg_similarity": 0.302934,
+      "expected_behavior": "Random nonsense - should get low similarity scores",
+      "max_similarity": 0.447214,
+      "query_text": "xyzzy plugh quantum banana sandwich",
+      "results_count": 5,
+      "verdict": "PASS"
+    },
+    {
+      "avg_similarity": 0.494551,
+      "expected_behavior": "SQL injection attempt - irrelevant to governance docs",
+      "max_similarity": 0.536321,
+      "query_text": "SELECT * FROM users WHERE 1=1; DROP TABLE--",
+      "results_count": 5,
+      "verdict": "FAIL (unexpectedly high match)"
+    }
+  ],
+  "proof_receipt": "325410258180d609003649eda5902e17a1b9851d3aa1c852b3bf0efccc0043b6",
   "queries": [
     {
-      "NewWayTokensFiltered": 351,
-      "NewWayTokensPointer": 18,
-      "PointerSavingsPctA": 0.999935,
-      "PointerSavingsPctB": 0.999733,
-      "SavingsPctA": 0.998729,
-      "SavingsPctB": 0.99479,
+      "NewWayTokensFiltered": 615,
+      "NewWayTokensPointer": 839,
+      "PointerSavingsPctA": 0.998652,
+      "PointerSavingsPctB": 0.995772,
+      "SavingsPctA": 0.999012,
+      "SavingsPctB": 0.9969,
       "missing_hashes": [],
       "query_text": "Translation Layer architecture",
       "results": [
         {
-          "file_path": "INBOX/reports/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
+          "file_path": "INBOX/2025-12/Week-52/12-28-2025-23-12_DELIVERABLES_INDEX_REPORT.md",
           "hash": "84fb3671ed2b624a083cf55c97e9ed0235d68960b7cc8ac36c64508a22b9049c",
           "section_name": "CORTEX Semantic Core - Phase 1 Technical Index",
           "similarity": 0.560112
@@ -28,16 +60,10 @@
           "similarity": 0.428845
         },
         {
-          "file_path": "INBOX/roadmaps/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
+          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/cassette-network/12-28-2025-12-00_ROADMAP_DATABASE_CASSETTE_NETWORK.md",
           "hash": "04a94a433fa29cf5bbc8c6558456097f776f0873b7e4b2740d0d6edacc3745c9",
           "section_name": "Goal",
           "similarity": 0.348155
-        },
-        {
-          "file_path": "CHANGELOG.md",
-          "hash": "51962df943aa86bd5c68268953b5ee0d12fa5a05ca18baf8ba3265bba68574a7",
-          "section_name": "Added",
-          "similarity": 0.333333
         },
         {
           "file_path": "LAW/CANON/ARBITRATION.md",
@@ -46,13 +72,19 @@
           "similarity": 0.333333
         },
         {
-          "file_path": "INBOX/research/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST__WHY.md",
+          "file_path": "LAW/CANON/CATALYTIC/SPECTRUM-05_VERIFICATION_LAW.md",
+          "hash": "9c4861d2af131ca5682feae7d4055669cf917ec83f957eaf7668ec1741bae834",
+          "section_name": "11. Changelog",
+          "similarity": 0.333333
+        },
+        {
+          "file_path": "INBOX/2025-12/Week-52/12-26-2025-06-39_GPT_52_THINKING_MASTER_MERGED_EDITS_V2_CHECKLIST_WHY.md",
           "hash": "0243a7d58e28de22f452ab3f49386e870c3f01029f95aa6eb281c0b897b1eedc",
           "section_name": "1.11 \u201cConstitutional License\u201d concept (DeepSeek)",
           "similarity": 0.333333
         },
         {
-          "file_path": "INBOX/roadmaps/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
+          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-28-2025-12-00_ROADMAP_SEMANTIC_CORE.md",
           "hash": "58c903341cb860dfb6de962e14d81af93aee5c1eb1c33c55e0359e39b44354d6",
           "section_name": "Overview",
           "similarity": 0.328976
@@ -64,16 +96,16 @@
           "similarity": 0.322543
         },
         {
-          "file_path": "LAW/CANON/CATALYTIC_COMPUTING.md",
-          "hash": "d0203026c30aeb2f8a3d09c24dc3a5227c8c1c1e4be38f486ef49bc1226d673d",
-          "section_name": "Catalytic Computing",
+          "file_path": "LAW/CANON/CATALYTIC/SPECTRUM-04_IDENTITY_SIGNING.md",
+          "hash": "8050f7394a51c20769762d9ceab82f2b7dc988ea1503228beff6274b7c9f43e9",
+          "section_name": "1. Purpose",
           "similarity": 0.316228
         },
         {
-          "file_path": "INBOX/reports/12-29-2025-05-36_SEMANTIC_CORE_PHASE1_COMPLETE.md",
-          "hash": "12adadee3deb1257703bc3710fa7571219c0873dbd4af711214caf95a7c28ccc",
-          "section_name": "Summary",
-          "similarity": 0.31427
+          "file_path": "LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md",
+          "hash": "d0203026c30aeb2f8a3d09c24dc3a5227c8c1c1e4be38f486ef49bc1226d673d",
+          "section_name": "Catalytic Computing",
+          "similarity": 0.316228
         }
       ],
       "threshold_adjustment_notes": [
@@ -82,18 +114,25 @@
       ],
       "threshold_used": 0.0,
       "top_k": 10,
-      "verification_hit_file": "NAVIGATION/CORTEX/semantic/README.md"
+      "verification_hit_file": "NAVIGATION/CORTEX/semantic/README.md",
+      "verification_hit_in_results": true
     },
     {
-      "NewWayTokensFiltered": 86,
-      "NewWayTokensPointer": 18,
-      "PointerSavingsPctA": 0.999935,
-      "PointerSavingsPctB": 0.999733,
-      "SavingsPctA": 0.999689,
-      "SavingsPctB": 0.998724,
+      "NewWayTokensFiltered": 1484,
+      "NewWayTokensPointer": 848,
+      "PointerSavingsPctA": 0.998638,
+      "PointerSavingsPctB": 0.995726,
+      "SavingsPctA": 0.997616,
+      "SavingsPctB": 0.992521,
       "missing_hashes": [],
       "query_text": "AGS BOOTSTRAP v1.0",
       "results": [
+        {
+          "file_path": "CAPABILITY/PRIMITIVES/WRITE_FIREWALL_CONFIG.md",
+          "hash": "2f87ad3d9dc91afb87a5fa50a284b6d813a67e5dd0a2ae0ea6d082713285235a",
+          "section_name": "Error Code Reference (Frozen)",
+          "similarity": 0.48126
+        },
         {
           "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/swarm-orchestrator/SKILL.md",
           "hash": "2283291ab06afe953fd2441bdb6a8dff060e37a35241745492510ac7854223ae",
@@ -107,15 +146,33 @@
           "similarity": 0.457496
         },
         {
+          "file_path": "NAVIGATION/PROOFS/PHASE_1_5_CATALYTIC_GUARDRAILS/POLISH_VERIFICATION_REPORT.md",
+          "hash": "d3830b18eeadda4fe053c1caf2ce54e0399d21f22fbc7a8a5f44e6e90a879c1b",
+          "section_name": "Phase 1.5 Polish \u2014 Verification Report",
+          "similarity": 0.456435
+        },
+        {
           "file_path": "THOUGHT/LAB/TURBO_SWARM/AGENTS_SKILLS_ALPHA/swarm-directive/SKILL.md",
           "hash": "e65b6b86f97ac70a20dd07dda43d93131e6ad4b5383ca289d61548a9352738ca",
           "section_name": "Skill: swarm-directive",
           "similarity": 0.435194
         },
         {
-          "file_path": "CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md",
+          "file_path": "NAVIGATION/PROOFS/PHASE_2_4_WRITE_SURFACES/PHASE_2_4_1B_ENFORCEMENT_REPORT.md",
+          "hash": "24222de879605df95cc5236c9938105f408450bf2fc7bd5d6dc5398c17b474dc",
+          "section_name": "Production Surfaces (from Phase 2.4.1A Discovery)",
+          "similarity": 0.431934
+        },
+        {
+          "file_path": "CAPABILITY/SKILLS/utilities/file-analyzer/SKILL.md",
           "hash": "034578501999f700d2c9e9553f504c273ea705b094e29ec7df23d2c2c9291ca0",
-          "section_name": "Skill: skill-creator",
+          "section_name": "Skill: file-analyzer",
+          "similarity": 0.426401
+        },
+        {
+          "file_path": "CAPABILITY/SKILLS/agents/workspace-isolation/SKILL.md",
+          "hash": "6844039bd54784d8046fd9cceb4031774a96bff49027d54ace5b108dc1295223",
+          "section_name": "Root",
           "similarity": 0.426401
         },
         {
@@ -125,16 +182,10 @@
           "similarity": 0.426401
         },
         {
-          "file_path": "CAPABILITY/SKILLS/governance/canon-governance-check/SKILL.md",
-          "hash": "aed87fcbfb3909a75a7099df5904a0d37a6643c14199deec863e8587f8e0ac4f",
-          "section_name": "Canon Governance Check Skill",
-          "similarity": 0.410997
-        },
-        {
-          "file_path": "THOUGHT/LAB/CAT_CHAT/archive/docs/status/12-29-2025-10-00_VECTOR_SANDBOX_DOC.md",
-          "hash": "7c12055a788c1451e63623c87d8805bb60ef18da143327e57b7519bd9b75d7b9",
-          "section_name": "query_topk(namespace, query_vector, k=5) -> list[dict]",
-          "similarity": 0.406867
+          "file_path": "NAVIGATION/PROOFS/PHASE_1_5_CATALYTIC_GUARDRAILS/POLISH_VERIFICATION_REPORT.md",
+          "hash": "ca1dd3a1c99385904f016af19bb07d4ae2a8ff759e0c069be282b3482d8c3f24",
+          "section_name": "2. Error Code Namespace Frozen \u2713",
+          "similarity": 0.422885
         }
       ],
       "threshold_adjustment_notes": [
@@ -142,15 +193,16 @@
       ],
       "threshold_used": 0.4,
       "top_k": 10,
-      "verification_hit_file": "LAW/CANON/GENESIS_COMPACT.md"
+      "verification_hit_file": "LAW/CANON/GENESIS_COMPACT.md",
+      "verification_hit_in_results": false
     },
     {
-      "NewWayTokensFiltered": 241,
-      "NewWayTokensPointer": 20,
-      "PointerSavingsPctA": 0.999928,
-      "PointerSavingsPctB": 0.999703,
-      "SavingsPctA": 0.999127,
-      "SavingsPctB": 0.996423,
+      "NewWayTokensFiltered": 462,
+      "NewWayTokensPointer": 856,
+      "PointerSavingsPctA": 0.998625,
+      "PointerSavingsPctB": 0.995686,
+      "SavingsPctA": 0.999258,
+      "SavingsPctB": 0.997672,
       "missing_hashes": [],
       "query_text": "Mechanical indexer scans codebase",
       "results": [
@@ -161,31 +213,31 @@
           "similarity": 0.353553
         },
         {
-          "file_path": "INBOX/research/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+          "file_path": "INBOX/2025-12/Week-52/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
           "hash": "35218173f53a6afc9e5f607cefed980304b447f363ac042afa46f9b25a52df00",
           "section_name": "Conditions for Reconsidering",
           "similarity": 0.33541
         },
         {
-          "file_path": "INBOX/research/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+          "file_path": "INBOX/2025-12/Week-01/12-29-2025-07-01_SWARM_BUG_REPORT.md",
           "hash": "d7dcdf1e4ef4f4cfc40bf9542aeca1fef5e710eb9da46e7de1c8e8dfaf2687da",
           "section_name": "2. **FIXED: Hard-Coded Project Path**",
           "similarity": 0.3125
         },
         {
-          "file_path": "INBOX/reports/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
+          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/semantic-core/12-29-2025-05-36_SEMANTIC_CORE_IMPLEMENTATION_REPORT.md",
           "hash": "e791371907b285f52e973ae897912050c04c90e38a69a557bc0f7cfe967fd582",
           "section_name": "Indexing",
           "similarity": 0.306186
         },
         {
-          "file_path": "INBOX/research/12-29-2025-07-01_SWARM_BUG_REPORT.md",
+          "file_path": "INBOX/2025-12/Week-01/12-29-2025-07-01_SWARM_BUG_REPORT.md",
           "hash": "8a31589166af645276abfb74784cac3092a021772f8b89751a7ee75825590e45",
           "section_name": "Line 12 - AFTER:",
           "similarity": 0.306186
         },
         {
-          "file_path": "INBOX/research/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
+          "file_path": "INBOX/2025-12/Week-52/12-26-2025-06-39_SONNET_45_LEXIC_OS.md",
           "hash": "0fa722c03379a8607af9d904214dbe860ccb5259d3ec5e3a60dadeade6b67a11",
           "section_name": "5. Validate before committing",
           "similarity": 0.288675
@@ -197,13 +249,13 @@
           "similarity": 0.288675
         },
         {
-          "file_path": "INBOX/reports/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+          "file_path": "INBOX/2025-12/Week-01/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
           "hash": "73cc86f5cb6d31037873a81103326bd41b27a578b9928a72db680dea6fef8e3c",
           "section_name": "Next Steps",
           "similarity": 0.280056
         },
         {
-          "file_path": "THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md",
+          "file_path": "THOUGHT/LAB/VECTOR_ELO/research/VECTOR_ELO_ROADMAP.md",
           "hash": "8e3dfa3f78a9e68416e701d7c0a63f0728421442fe2ee1b1a7ceeec23a3a37a6",
           "section_name": "Dependencies",
           "similarity": 0.246598
@@ -221,16 +273,24 @@
       ],
       "threshold_used": 0.0,
       "top_k": 10,
-      "verification_hit_file": "INBOX/reports/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md"
+      "verification_hit_file": "INBOX/2025-12/Week-52/12-28-2025-23-12_SWARM_VERIFICATION_REPORT.md",
+      "verification_hit_in_results": false
     }
   ],
-  "repo_head_commit": "9f61f774ecc730e56b70ad3d54011c82e8f138c2",
+  "repo_head_commit": "e15453a7bc26b72b1fe701aafc4ecdf8a00763d2",
+  "script_hash": "9880684289aff9de8bbcde31b2ea30be72c8720a7749f743b040dbc702a6e217",
   "semantic_eval_db": {
     "dimensions": 384,
     "model_id": "featurehash-384-v1",
-    "path": "LAW/CONTRACTS/_runs/_tmp/compression_proof/semantic_eval.db",
-    "sections_indexed": 4441,
-    "total_sections_parsed": 4855
+    "path": "LAW\\CONTRACTS\\_runs\\_tmp\\compression_proof\\semantic_eval.db",
+    "sections_indexed": 5800,
+    "total_sections_parsed": 6267
   },
-  "timestamp_utc": "2026-01-04T19:29:34Z"
+  "timestamp_utc": "2026-01-08T02:06:32Z",
+  "tokenizer": {
+    "encoding": "o200k_base",
+    "fallback_used": false,
+    "library": "tiktoken",
+    "version": "0.12.0"
+  }
 }
