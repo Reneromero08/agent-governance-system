@@ -17,6 +17,20 @@ All notable changes to Agent Governance System will be documented in this file.
 - **Deprecated Skills Archived:** 18 deprecated skills moved to `MEMORY/ARCHIVE/skills-deprecated/`
 - **Roadmap Status:** `INBOX/roadmaps/01-07-2026-15-55_SKILL_CONSOLIDATION_ROADMAP.md` marked COMPLETE
 
+### Fixed
+- **check_inbox_policy.py:** Fixed PROJECT_ROOT path calculation (`parents[3]` → `parents[4]`)
+- **pre-commit hook:** Updated `mcp-precommit-check` → `mcp-toolkit` reference
+- **contracts.yml:** Updated `artifact-escape-hatch` → `commit-manager` reference
+- **run_tests.cmd:** Updated `llm-packer-smoke` → `cortex-toolkit` reference
+- **AGENTS.md:** Updated deprecated skill references to new consolidated toolkits
+
+### Tests
+- **80 new pytest tests** for consolidated toolkits:
+  - `test_cortex_toolkit.py` (27 tests)
+  - `test_mcp_toolkit.py` (20 tests)
+  - `test_commit_manager.py` (20 tests)
+  - `test_pipeline_toolkit.py` (13 tests)
+
 ### Migration
 All consolidated skills use operation-based dispatch:
 ```json

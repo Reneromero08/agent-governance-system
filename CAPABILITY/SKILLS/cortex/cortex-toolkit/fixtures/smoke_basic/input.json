@@ -1,0 +1,12 @@
+{
+  "operation": "smoke_test",
+  "combined": true,
+  "project_root": "CAPABILITY/TESTBENCH/fixtures/packer_p2_repo",
+  "p2_runs_dir": "LAW/CONTRACTS/_runs/_tmp/llm_packer_smoke_runs",
+  "out_dir": "MEMORY/LLM_PACKER/_packs/_system/fixtures/fixture-smoke",
+  "scope": "ags",
+  "stamp": "fixture-smoke",
+  "zip": false,
+  "emit_pruned": false,
+  "assert_archive_excluded": true
+}
