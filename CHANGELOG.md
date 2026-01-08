@@ -4,6 +4,31 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.25] - 2026-01-08
+
+### Added
+- **Phase 5.1.1 COMPLETE** — Canon embedding with MemoryRecord integration ✅
+  - `CAPABILITY/PRIMITIVES/canon_index.py` — Canon indexing primitive
+    - `inventory_canon()` — Enumerate files with content hashes and receipts
+    - `embed_canon()` — Batch embed all files with MemoryRecord integration
+    - `search_canon()` — Semantic similarity search
+    - `rebuild_index()` — Deterministic rebuild from source
+    - `verify_index()` — Integrity verification
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_1_1_canon_embedding.py` — 23 tests passing
+  - `NAVIGATION/CORTEX/db/canon_index.db` — 32 canon files embedded
+
+### Changed
+- **AGS_ROADMAP_MASTER.md** — Phase 5.1.1 and 5.1.2 marked complete
+- **PHASE_5_ROADMAP.md** — Phase 5.1.1 tasks marked complete with implementation details
+
+### Technical Details
+- Embedding model: `all-MiniLM-L6-v2` (ADR-030, sentence-transformers)
+- Vector dimensions: 384 (float32)
+- Storage: SQLite-based with MemoryRecord-compatible schema
+- Determinism: Manifest hash reproducible across rebuilds
+
+---
+
 ## [3.7.24] - 2026-01-08
 
 ### Added
