@@ -1,0 +1,18 @@
+{
+  "status": "failed",
+  "checks": [
+    "duplicate_numbers",
+    "line_count",
+    "authority_gradient"
+  ],
+  "failures": {
+    "line_count": [
+      "  \u2717 CATALYTIC\\CMP-01_CATALYTIC_MUTATION_PROTOCOL.md: 351 lines (EXCEEDS 300 line limit)",
+      "  \u2717 CATALYTIC\\SPECTRUM-04_IDENTITY_SIGNING.md: 738 lines (EXCEEDS 300 line limit)",
+      "  \u2717 CATALYTIC\\SPECTRUM-05_VERIFICATION_LAW.md: 507 lines (EXCEEDS 300 line limit)",
+      "  \u2717 CATALYTIC\\SPECTRUM-06_RESTORE_RUNNER.md: 606 lines (EXCEEDS 300 line limit)",
+      "  \u2717 DOCUMENT_POLICY.md: 402 lines (EXCEEDS 300 line limit)",
+      "  \u2717 STEWARDSHIP.md: 374 lines (EXCEEDS 300 line limit)"
+    ]
+  }
+}

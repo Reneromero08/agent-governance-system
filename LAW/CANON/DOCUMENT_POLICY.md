@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 7dec0bca6c9db64c071a996bd5a21bcfd0a40ec37cf984d0d0879c4c8caabf21 -->
+<!-- CONTENT_HASH: ab0eb3ac2a2c3c604ffb6518f5cf65aa2da7f9d743fcd676a52d05cfab0d9400 -->
 
 # Document Policy (Canonical Format)
 
@@ -13,81 +13,43 @@
 - YAML frontmatter with required fields
 - Content hash for integrity verification
 
-This policy applies to:
-- `INBOX/` - Human-reviewable documents
-- `MEMORY/ARCHIVE/` - Archived documentation
-- `LAW/CONTRACTS/_runs/REPORTS/` - Implementation reports
-- Document artifacts in `_runs/`
+**Applies to:** `INBOX/`, `MEMORY/ARCHIVE/`, `LAW/CONTRACTS/_runs/REPORTS/`, document artifacts in `_runs/`
 
-## Required Content Types
+## Required Content Types (MUST be in INBOX/)
 
-All of the following MUST be stored in `INBOX/`:
-
-1. **Implementation Reports**
-   - All implementation completion reports
-   - Session reports and documentation
-   - Testing results and validation reports
-
-2. **Research Documents**
-   - Architecture research and findings
-   - External research (arXiv, academic papers)
-   - Experimental results and analysis
-
-3. **Roadmaps and Planning**
-   - Roadmap documents (draft and active)
-   - Planning documents
-   - Feature proposals and designs
-
-4. **Decisions and Context**
-   - ADRs (Architecture Decision Records)
-   - Meeting notes and discussion summaries
-   - Policy proposals and reviews
-
-5. **Other Human-Readable Documentation**
-   - User-facing guides and tutorials
-   - Status reports and summaries
-   - Any document requiring human attention
+1. **Implementation Reports** — completion reports, session reports, testing results
+2. **Research Documents** — architecture research, external research, experimental results
+3. **Roadmaps and Planning** — roadmaps, planning docs, feature proposals
+4. **Decisions and Context** — ADRs, meeting notes, policy proposals
+5. **Other Human-Readable Docs** — guides, tutorials, status reports
 
 ## INBOX Structure
 
 ```
 INBOX/
-├── reports/              # Implementation reports
-├── research/             # Research findings and analysis
-├── roadmaps/            # Planning and roadmap documents
-├── decisions/            # ADRs and policy discussions
-├── summaries/            # Session and status summaries
-└── ARCHIVE/              # Processed items (keep for history)
+├── reports/      # Implementation reports
+├── research/     # Research findings
+├── roadmaps/     # Planning documents
+├── decisions/    # ADRs and discussions
+├── summaries/    # Session summaries
+└── ARCHIVE/      # Processed items
 ```
 
 ## Document Requirements
 
-All documents in `INBOX/` MUST follow these strict formatting rules:
-
 ### 1. Filename Format (MANDATORY)
+
 **Format:** `MM-DD-YYYY-HH-MM_DESCRIPTIVE_TITLE.md`
 
-**Rules:**
-- Timestamp uses system time at document creation
-- Title must be ALL CAPS with underscores (no spaces)
-- Title should be descriptive and human-readable
-- Examples:
-  - `01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md`
-  - `12-28-2025-14-22_CASSETTE_NETWORK_IMPLEMENTATION.md`
-  - `12-29-2025-09-15_SEMANTIC_CORE_PHASE_ONE_COMPLETE.md`
-
-**Rationale:**
-- Chronological sorting by filename
-- Instant timestamp visibility
-- No filename collisions
-- Easy grep/search by date range
+- Timestamp: system time at creation
+- Title: ALL CAPS with underscores (no spaces)
+- Example: `01-07-2026-14-30_CASSETTE_NETWORK_IMPLEMENTATION.md`
 
 ### 2. Document Header (MANDATORY)
-**Format:** YAML frontmatter followed by content hash
 
 ```yaml
 ---
-uuid: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+uuid: "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"  # Agent session UUID
 title: "Descriptive Title (Human Readable)"
 section: report|research|roadmap|guide
 bucket: "primary_category/subcategory"
@@ -96,32 +58,27 @@ priority: High|Medium|Low
 created: "YYYY-MM-DD HH:MM"
 modified: "YYYY-MM-DD HH:MM"
 status: "Draft|Ready for Review|Archived|Complete"
-summary: "One-line summary of document purpose and content"
+summary: "One-line summary of document purpose"
 tags: [tag1, tag2, tag3]
 ---
 <!-- CONTENT_HASH: <sha256_of_content_after_yaml> -->
 ```
 
 **Rules:**
-- YAML block MUST be first (lines 1-N)
-- Content hash MUST be immediately after YAML (line N+1)
-- Hash is computed on content AFTER the hash line (not including YAML or hash line itself)
-- All fields are REQUIRED (no optional fields)
-- Timestamps use `YYYY-MM-DD HH:MM` format
-
-**Field Specifications:**
-- **uuid**: Agent session UUID (from MCP session or agent initialization). This identifies **which agent session** created the document, not the document itself. For legacy documents where the agent session is unknown, use the sentinel value `"00000000-0000-0000-0000-000000000000"`.
-- **bucket**: Hierarchical category path (e.g., "implementation/phase1", "research/architecture")
-- **tags**: Descriptive tags for categorization and discovery (lowercase, underscores)
+- YAML block MUST be first
+- Content hash MUST be immediately after YAML
+- Hash computed on content AFTER the hash line
+- All fields REQUIRED
+- **uuid**: Agent session ID (use `00000000-0000-0000-0000-000000000000` for legacy)
 
 ### 3. Cortex References
-- When applicable, use @Symbol references instead of full content
-- Format: `@C:{hash_short}` referencing cortex entries
-- Reduces token usage and keeps INBOX lightweight
 
-## Examples
+Use `@C:{hash_short}` references instead of duplicating content:
+```markdown
+This implements @C:ab5e61a8 (Cassette Protocol) per @C:d3f2b8a7 (ADR-030).
+```
 
-### Implementation Report
+## Example Document
 
 **Filename:** `12-28-2025-14-30_CASSETTE_NETWORK_IMPLEMENTATION.md`
 
@@ -136,7 +93,7 @@ priority: High
 created: "2025-12-28 14:30"
 modified: "2025-12-28 14:30"
 status: "Complete"
-summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
+summary: "Implementation report for Cassette Network Phase 1"
 tags: [cassette, network, implementation]
 ---
 <!-- CONTENT_HASH: a7b3c5d9e8f2a1b4c8e5d6a7b3e9f8a4c5d -->
@@ -144,203 +101,72 @@ tags: [cassette, network, implementation]
 # Cassette Network Implementation Report
 
 ## Executive Summary
-...
-```
-
-### Research Document
-
-**Filename:** `12-28-2025-09-15_CASSETTE_ARCHITECTURE_RESEARCH.md`
-
-```markdown
----
-uuid: "8f2d3b4e-1a9c-5d6e-7f8a-2b1c9d4e5f6a"
-title: "Cassette Network Architecture Research"
-section: research
-bucket: "research/architecture"
-author: "Antigravity"
-priority: Medium
-created: "2025-12-28 09:15"
-modified: "2025-12-28 09:15"
-status: "Draft"
-summary: "Research findings on distributed cassette architecture and semantic indexing strategies"
-tags: [cassette, architecture, research]
----
-<!-- CONTENT_HASH: 8f2d3b4e1a9c5d6e7f8a2b1c9d4e5f6a8b7c3d2e -->
-
-# Cassette Network Architecture Research
-
-## Overview
-...
-
-## Required Context: @Cortex
-
-When INBOX documents reference canon or indexed content, they MUST use @Symbol references from cortex:
-
-```markdown
-This implementation aligns with @C:ab5e61a8 (Cassette Protocol) and
-extends @C:ce89a30e (Network Hub) as defined in @C:d3f2b8a7 (ADR-030).
-```
-
-### Finding Cortex References
-
-Use `CAPABILITY/TOOLS/cortex_query.py` (or equivalent) to resolve @Symbols:
-
-```bash
-python CAPABILITY/TOOLS/cortex_query.py resolve @C:ab5e61a8
+This report documents the implementation of @C:ab5e61a8 (Cassette Protocol)...
 ```
 
 ## Governance Enforcement
 
-The pre-commit hook (`.githooks/pre-commit` or `CAPABILITY/SKILLS/governance/canon-governance-check/scripts/pre-commit`) will verify:
+The pre-commit hook verifies:
+1. Filename matches `MM-DD-YYYY-HH-MM_TITLE.md` pattern
+2. Valid YAML frontmatter with ALL required fields
+3. UUID is RFC 4122 compliant
+4. Content hash exists and is valid
+5. Timestamp consistency (filename ↔ YAML `created`)
+6. @Symbol references resolve (if present)
 
-1. ✅ **Filename Format:** All INBOX files match `MM-DD-YYYY-HH-MM_TITLE.md` pattern
-2. ✅ **YAML Frontmatter:** All INBOX documents contain valid YAML with ALL required fields
-3. ✅ **UUID Validity:** UUID field is RFC 4122 compliant UUID v4
-4. ✅ **Bucket Format:** Bucket follows hierarchical path format (category/subcategory)
-5. ✅ **Hashtags Format:** Hashtags are properly formatted with # prefix
-6. ✅ **Content Hash:** Hash line exists immediately after YAML frontmatter
-7. ✅ **Hash Validity:** Content hash matches actual content (excluding YAML and hash line)
-8. ✅ **Timestamp Consistency:** Filename timestamp matches YAML `created` field
-9. ✅ **INBOX Structure:** Documents are in correct subdirectories (reports/, research/, roadmaps/)
-10. ✅ **@Symbol References:** Cortex references are valid when present
+**Violations block commit** with specific error messages.
 
-## Exceptions
+## Exceptions (EXEMPT from policy)
 
-The following are EXEMPT from INBOX policy:
+| Path | Reason |
+|------|--------|
+| `LAW/CANON/*` | Source of truth |
+| `NAVIGATION/CORTEX/_generated/*` | System outputs |
+| `LAW/CONTRACTS/_runs/*` | System outputs |
+| `CAPABILITY/TOOLS/*.py` | Implementation files |
+| `CAPABILITY/SKILLS/*/SKILL.md` | Skill manifests |
+| `LAW/CONTEXT/decisions/*` | Append-first storage |
+| `LAW/CONTEXT/preferences/*` | Append-first storage |
+| `BUILD/*` | User workspace |
+| `INBOX/prompts/*` | Governed by prompt policy |
 
-1. **Canon documents** (`LAW/CANON/*`) - These ARE the source of truth
-2. **Generated artifacts** (`NAVIGATION/CORTEX/_generated/*`, `LAW/CONTRACTS/_runs/*`) - System outputs
-3. **Code implementations** (`CAPABILITY/TOOLS/*.py`, `CAPABILITY/SKILLS/*/run.py`) - Implementation files
-4. **Test fixtures** (`LAW/CONTRACTS/fixtures/*`, `CAPABILITY/TESTBENCH/*`) - Test data
-5. **Skill manifests** (`CAPABILITY/SKILLS/*/SKILL.md`) - These stay with their skills
-6. **Context records** (`LAW/CONTEXT/decisions/*`, `LAW/CONTEXT/preferences/`) - Append-first storage
-7. **Build outputs** (BUILD/*) - User workspace outputs
-8. **INBOX.md** - The index file itself
-9. **Prompts** (`INBOX/prompts/*`, `NAVIGATION/PROMPTS/*`) - These follow the Prompt Pack schema (`id`, `model`, `priority`, etc.) and are governed by the prompt policy.
-
-## Enforcement
-
-### Pre-commit Hook
-
-When committing changes, the governance check will:
-
-1. Scan for new `.md` files in `INBOX/`
-2. Validate filename matches `MM-DD-YYYY-HH-MM_*.md` pattern
-3. Parse YAML frontmatter and verify all required fields exist
-4. Verify content hash exists and is valid
-5. Check timestamp consistency between filename and YAML
-6. Verify @Symbol references are valid (if present)
-7. Report violations:
-   - ERROR: Invalid filename format (must be MM-DD-YYYY-HH-MM_TITLE.md)
-   - ERROR: Missing or invalid YAML frontmatter
-   - ERROR: Missing content hash after YAML
-   - ERROR: Content hash mismatch
-   - ERROR: Timestamp mismatch between filename and YAML
-   - ERROR: Invalid @Symbol reference
-
-### Violation Handling
-
-If violations are found:
-- **Block commit** with clear error message
-- Suggest correct format and required fields
-- Example: `ERROR: INBOX/reports/my-report.md has invalid filename. Must be: MM-DD-YYYY-HH-MM_TITLE.md`
-
-## Rationale
-
-### Why INBOX?
-
-- **Discoverability:** Single location for all human-facing documentation
-- **UX Consistency:** Always know where to find reports, research, decisions
-- **Reduced Cognitive Load:** Don't hunt for documents across entire repo
-- **Governance:** Central location for monitoring and cleanup
-
-### Why Content Hashes?
-
-- **Integrity:** Detect if documents are modified after signing
-- **Verification:** Confirm report hasn't been tampered with
-- **Traceability:** Track document versions and changes
-
-### Why @Symbol References?
-
-- **Token Efficiency:** Cortex already indexed; don't duplicate content
-- **Maintainability:** Updates to canon automatically reflected in INBOX
-- **Consistency:** Single source of truth (CORTEX) with lightweight references
-
-## Usage Examples
-
-### For Agents
-
-When creating implementation reports:
+## Agent Usage
 
 ```python
 from datetime import datetime
 import hashlib
-import uuid
+from pathlib import Path
 
-# 1. Get current timestamp
 now = datetime.now()
 timestamp = now.strftime("%m-%d-%Y-%H-%M")
-yaml_timestamp = now.strftime("%Y-%m-%d %H:%M")
+yaml_ts = now.strftime("%Y-%m-%d %H:%M")
+doc_uuid = get_session_id()  # or "00000000-0000-0000-0000-000000000000"
 
-# 2. Get agent session UUID (from MCP session or agent initialization)
-# For MCP: use session_id from server context
-# For legacy/unknown: use "00000000-0000-0000-0000-000000000000"
-doc_uuid = get_session_id()  # or "00000000-0000-0000-0000-000000000000" if unknown
-
-# 3. Create filename
-title = "CASSETTE_NETWORK_IMPLEMENTATION"
-filename = f"{timestamp}_{title}.md"
-report_path = f"INBOX/reports/{filename}"
-
-# 4. Define metadata
-bucket = "implementation/cassette_network"
-tags = ["cassette", "network", "implementation"]
-
-# 5. Build YAML frontmatter
 yaml_header = f"""---
 uuid: "{doc_uuid}"
-title: "Cassette Network Implementation Report"
+title: "Report Title"
 section: "report"
-bucket: "{bucket}"
+bucket: "implementation/feature"
 author: "System"
 priority: "High"
-created: "{yaml_timestamp}"
-modified: "{yaml_timestamp}"
+created: "{yaml_ts}"
+modified: "{yaml_ts}"
 status: "Complete"
-summary: "Implementation report for Cassette Network Phase 1 with receipt chains and trust policies"
-tags: [{', '.join(tags)}]
+summary: "One-line summary"
+tags: [tag1, tag2]
 ---"""
 
-# 6. Build content body (use @Symbol references for canon content)
-content_body = """
-# Cassette Network Implementation Report
-
-## Executive Summary
-This report documents the implementation of @C:ab5e61a8 (Cassette Protocol)...
-
-## Implementation Details
-...
-"""
-
-# 7. Compute content hash (hash the body only, not YAML or hash line)
-content_hash = hashlib.sha256(content_body.encode('utf-8')).hexdigest()
-
-# 8. Assemble final document
-final_content = f"{yaml_header}\n<!-- CONTENT_HASH: {content_hash} -->\n{content_body}"
-
-# 9. Save
-Path(report_path).write_text(final_content)
+content_body = "# Report Title\n\n## Summary\n..."
+content_hash = hashlib.sha256(content_body.encode()).hexdigest()
+final = f"{yaml_header}\n<!-- CONTENT_HASH: {content_hash} -->\n{content_body}"
+Path(f"INBOX/reports/{timestamp}_REPORT_TITLE.md").write_text(final)
 ```
 
-### For Humans
-
-When reviewing repository:
+## Human Usage
 
 ```bash
-# All documents for review are in one place:
-ls INBOX/reports/
-ls INBOX/research/
-ls INBOX/roadmaps/
+# Find all documents
+ls INBOX/reports/ INBOX/research/ INBOX/roadmaps/
 
 # Verify integrity
 grep "CONTENT_HASH:" INBOX/reports/*.md
@@ -349,54 +175,29 @@ grep "CONTENT_HASH:" INBOX/reports/*.md
 python CAPABILITY/TOOLS/cortex_query.py resolve @C:ab5e61a8
 ```
 
-## Migration Guide
+## Migration & Maintenance
 
-### Existing Documents
+**Migrate existing docs:**
+1. Move to appropriate `INBOX/` subdirectory
+2. Rename to `MM-DD-YYYY-HH-MM_TITLE.md` format
+3. Add YAML frontmatter
+4. Add content hash
 
-If you have human-readable documents scattered across the repo:
+**Maintenance:**
+- Weekly: Archive processed items, verify hashes
+- Monthly: Archive docs >6 months old, verify @Symbol refs
 
-1. **Identify candidates:**
-   - Session reports
-   - Implementation reports
-   - Research documents
-   - Roadmaps
-   - Status summaries
+---
 
-2. **Move to INBOX:**
-   ```bash
-   mv SESSION_REPORTS/*.md INBOX/reports/
-   mv ROADMAP-*.md INBOX/roadmaps/
-   mv research-*.md INBOX/research/
-   ```
+## Rationale
 
-3. **Add content hashes:**
-   ```bash
-   # For each file, add to top:
-   # !sha256sum path/to/file.md >> INBOX/reports/file.md
-   echo "<!-- CONTENT_HASH: $(sha256sum path/to/file.md | cut -d' ' -f1) -->" >> INBOX/reports/file.md
-   ```
-
-4. **Replace full content with @Symbols:**
-   ```bash
-   # If duplicating canon content, use cortex reference instead
-   python TOOLS/cortex.py resolve @C:{hash}
-   ```
-
-## Cleanup and Maintenance
-
-### Regular INBOX Maintenance
-
-**Weekly:**
-- Archive processed items to `INBOX/ARCHIVE/`
-- Remove duplicates
-- Verify all hashes are valid
-
-**Monthly:**
-- Check for outdated reports (archive if >6 months)
-- Review ARCHIVE/ and remove if unnecessary
-- Ensure @Symbol references still resolve
+| Feature | Why |
+|---------|-----|
+| **INBOX/** | Single location for human-facing docs; reduces cognitive load |
+| **Content hashes** | Integrity verification; detect tampering |
+| **@Symbol refs** | Token efficiency; single source of truth |
+| **Timestamps** | Chronological sorting; no collisions |
 
 ---
 
 **Canon Version:** 2.16.0
-**Required Canon Version:** >=2.16.0
