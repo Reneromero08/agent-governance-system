@@ -1,6 +1,6 @@
 # Question 9: Free Energy Principle (R: 1580)
 
-**STATUS: ANSWERED**
+**STATUS: PARTIALLY ANSWERED**
 
 ## Question
 Friston's FEP minimizes surprise. Does R track prediction error or model confidence? Are they measuring the same thing differently?
@@ -15,9 +15,10 @@ Friston's FEP minimizes surprise. Does R track prediction error or model confide
 
 ## FINDINGS
 
-### 1. R is inverse Free Energy:
-   - R vs F correlation: -0.23 (negative as expected)
-   - R-gating reduces free energy by **97.7%**
+### 1. R is Free Energy (via log), not 1/F:
+   - Empirically: R vs F correlation: -0.23 (negative as expected)
+   - Empirically: R-gating reduces free energy by **97.7%**
+   - Analytically (Gaussian family): `log(R) = -F + const` and `R ∝ exp(-F)`
 
 ### 2. Least Action confirmed:
    - R-gating is **99.7%** more efficient
@@ -32,10 +33,11 @@ Friston's FEP minimizes surprise. Does R track prediction error or model confide
 
 ## ANSWER
 
-**YES - R implements the Free Energy Principle.**
+**PARTIALLY:** in a specified likelihood family (Gaussian), `R` is directly equivalent to `exp(-F)` up to a constant; the universal mapping for the full formula across families is not finished.
 
 ```
-R = E / grad_S ~ 1 / F
+log(R) = -F + const      (Gaussian family)
+R ∝ exp(-F)
 ```
 
 - High R = low free energy = confident prediction = ACT

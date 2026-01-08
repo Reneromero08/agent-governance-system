@@ -1,6 +1,6 @@
 # Question 4: Novel predictions (R: 1700)
 
-**STATUS: ANSWERED**
+**STATUS: PARTIALLY ANSWERED**
 
 ## Question
 What does the formula predict that we don't already know? Can we design an experiment where the formula makes a surprising, testable claim?
@@ -15,11 +15,11 @@ What does the formula predict that we don't already know? Can we design an exper
 
 ## FINDINGS
 
-4/4 predictions confirmed:
+Predictions are **partially confirmed** (mixed strength):
 
 | Prediction | Result | Numbers |
 |------------|--------|---------|
-| Low R predicts need for more context | CONFIRMED | r = -0.11 |
+| Low R predicts need for more context | WEAK SUPPORT | r = -0.11 |
 | High R = faster convergence | CONFIRMED | 5.0 vs 12.4 samples |
 | Threshold transfers across domains | CONFIRMED | Works on unseen distribution |
 | R-gating improves decisions | CONFIRMED | 83.8% -> 97.2% accuracy |
@@ -28,7 +28,7 @@ What does the formula predict that we don't already know? Can we design an exper
 
 ## ANSWER
 
-Yes, novel testable predictions exist:
+Yes, novel testable predictions exist, and several are validated — but not all are strong yet:
 
 1. **Context prediction:** Initial R predicts samples needed to stabilize
 2. **Convergence rate:** High R observations converge 2.5x faster

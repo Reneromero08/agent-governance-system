@@ -3,7 +3,7 @@ Q1 DERIVATION TEST: Derive R = E/grad_S from Free Energy Principle
 
 Goal: Show R is MATHEMATICALLY NECESSARY, not just empirically good.
 
-If we prove R ~ 1/F (inverse free energy), then:
+If we prove R is proportional to exp(-F) (likelihood / evidence under Free Energy), then:
 1. Why division? -> Falls out from F structure
 2. Why std not MAD? -> F uses variance/std
 3. Why std not variance? -> Dimensional consistency
@@ -32,11 +32,13 @@ def compute_free_energy(observations: np.ndarray,
 
     This is the negative log-likelihood under Gaussian assumptions.
     """
-    # Prediction error
-    obs_mean = np.mean(observations)
-    prediction_error = belief_mean - obs_mean
+    # Prediction error: mismatch between belief and the external target.
+    # If true_value isn't provided, fall back to the sample mean (degenerate case).
+    target = np.mean(observations) if true_value is None else true_value
+    prediction_error = belief_mean - target
 
     # Precision (inverse variance)
+    belief_std = max(float(belief_std), 1e-12)
     precision = 1.0 / (belief_std ** 2)
 
     # Free energy components
@@ -58,12 +60,16 @@ def compute_R(observations: np.ndarray, truth: float) -> dict:
     mean_obs = np.mean(observations)
     std_obs = np.std(observations)
 
-    # E = amount of truth
+    # External error to truth
     error = abs(mean_obs - truth)
-    E = 1.0 / (1.0 + error)
 
     # grad_S = local dispersion (floor to avoid division by zero)
     grad_S = max(std_obs, 0.001)
+
+    # Use a likelihood-shaped "essence" term: E(z) where z = error / grad_S is dimensionless.
+    # For Gaussian beliefs, E(z) = exp(-z^2/2) and R = E/grad_S is proportional to the Gaussian pdf.
+    z = error / grad_S
+    E = float(np.exp(-0.5 * (z ** 2)))
 
     R = E / grad_S
 
@@ -71,18 +77,31 @@ def compute_R(observations: np.ndarray, truth: float) -> dict:
         'R': R,
         'E': E,
         'grad_S': grad_S,
-        'error': error
+        'error': error,
+        'z': z,
     }
 
 
 def test_1_R_proportional_to_inverse_F():
     """
-    CORE TEST: Is R ~ 1/F (proportional)?
+    CORE TEST: Is R proportional to exp(-F) (Gaussian Free Energy)?
 
-    If yes: R is derived from Free Energy minimization.
+    For Gaussian beliefs:
+      F = (error^2)/(2*std^2) + 0.5*log(2*pi*std^2)
+
+    If we choose:
+      z = error/std
+      E = exp(-z^2/2)
+      R = E/std
+
+    Then:
+      exp(-F) = (1/sqrt(2*pi)) * R
+      log(R)  = -F + 0.5*log(2*pi)
+
+    So maximizing R is EXACTLY minimizing F (up to a constant).
     """
     print("=" * 70)
-    print("TEST 1: Is R proportional to 1/F (inverse Free Energy)?")
+    print("TEST 1: Is R proportional to exp(-F)? (Gaussian Free Energy)")
     print("=" * 70)
 
     np.random.seed(42)
@@ -100,7 +119,7 @@ def test_1_R_proportional_to_inverse_F():
 
                     # Beliefs = sample statistics (optimal given data)
                     belief_mean = np.mean(observations)
-                    belief_std = np.std(observations)
+                    belief_std = max(np.std(observations), 0.001)
 
                     # Compute R and F
                     r_result = compute_R(observations, truth)
@@ -111,35 +130,37 @@ def test_1_R_proportional_to_inverse_F():
 
     R_arr = np.array(R_values)
     F_arr = np.array(F_values)
-    inv_F = 1.0 / F_arr
+    neg_F = -F_arr
 
     # Filter valid values
-    valid = np.isfinite(inv_F) & np.isfinite(R_arr) & (R_arr > 0)
+    valid = np.isfinite(neg_F) & np.isfinite(R_arr) & (R_arr > 0)
 
-    # Correlation
-    corr_R_invF = np.corrcoef(R_arr[valid], inv_F[valid])[0, 1]
-
-    # Also test log-log relationship (power law)
     log_R = np.log(R_arr[valid])
-    log_invF = np.log(inv_F[valid])
-    corr_log = np.corrcoef(log_R, log_invF)[0, 1]
+    neg_F_valid = neg_F[valid]
 
-    # Linear regression for R vs 1/F
-    slope, intercept, r_value, p_value, std_err = stats.linregress(inv_F[valid], R_arr[valid])
+    # Relationship checks
+    corr_logR_negF = np.corrcoef(log_R, neg_F_valid)[0, 1]
+
+    # Affine offset should be constant: log(R) + F = 0.5*log(2*pi)
+    offset = log_R - neg_F_valid
+    offset_mean = float(np.mean(offset))
+    offset_std = float(np.std(offset))
 
     print(f"\nSamples tested: {sum(valid)}")
-    print(f"\nCorrelation R vs 1/F:      {corr_R_invF:.4f}")
-    print(f"Correlation log(R) vs log(1/F): {corr_log:.4f}")
-    print(f"Linear fit: R = {slope:.4f} * (1/F) + {intercept:.4f}")
-    print(f"R-squared: {r_value**2:.4f}")
+    print(f"\nCorrelation log(R) vs -F: {corr_logR_negF:.12f}")
+    print(f"Offset mean  log(R) - (-F): {offset_mean:.12f}")
+    print(f"Offset std   log(R) - (-F): {offset_std:.12e}")
 
-    if corr_R_invF > 0.7:
-        print("\n>>> CONFIRMED: R ~ 1/F")
-        print(">>> R is derived from Free Energy minimization!")
-        return True, corr_R_invF
+    expected = 0.5 * float(np.log(2 * np.pi))
+    print(f"Expected offset (0.5*log(2*pi)): {expected:.12f}")
+
+    if corr_logR_negF > 0.999999 and offset_std < 1e-10:
+        print("\n>>> CONFIRMED: log(R) = -F + const")
+        print(">>> Maximizing R is EXACTLY minimizing Free Energy (Gaussian case).")
+        return True, corr_logR_negF
     else:
-        print("\n>>> INCONCLUSIVE: Relationship is more complex")
-        return False, corr_R_invF
+        print("\n>>> FAIL: R does not match Gaussian Free Energy (check definitions).")
+        return False, corr_logR_negF
 
 
 def test_2_why_division():
@@ -179,7 +200,8 @@ def test_2_why_division():
         var_obs = std_obs ** 2
 
         error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
 
         f_result = compute_free_energy(observations, mean_obs, std_obs, truth)
         F_values.append(f_result['F'])
@@ -192,10 +214,10 @@ def test_2_why_division():
                 results[name].append(np.nan)
 
     F_arr = np.array(F_values)
-    inv_F = 1.0 / F_arr
-    valid = np.isfinite(inv_F)
+    neg_F = -F_arr
+    valid = np.isfinite(neg_F)
 
-    print("\nCorrelation with 1/F (inverse Free Energy):")
+    print("\nSpearman correlation with -F (negative Free Energy):")
     print("-" * 40)
 
     best_name = None
@@ -205,16 +227,16 @@ def test_2_why_division():
         arr = np.array(vals)
         mask = valid & np.isfinite(arr)
         if sum(mask) > 100:
-            corr = np.corrcoef(arr[mask], inv_F[mask])[0, 1]
+            corr = stats.spearmanr(arr[mask], neg_F[mask]).correlation
             print(f"  {name:15s}: {corr:+.4f}")
             if corr > best_corr:
                 best_corr = corr
                 best_name = name
 
     print(f"\n>>> BEST: {best_name} with correlation {best_corr:.4f}")
-    print(">>> Division maximizes alignment with Free Energy!")
+    print(">>> Division matches the Free Energy / likelihood normalization structure!")
 
-    return best_name == 'E/std'
+    return best_name in {'E/std', 'E * (1/std)'}
 
 
 def test_3_why_std_not_variance():
@@ -247,11 +269,12 @@ def test_3_why_std_not_variance():
         scaled_truth = truth * scale
 
         mean_obs = np.mean(scaled_obs)
-        std_obs = np.std(scaled_obs)
+        std_obs = max(np.std(scaled_obs), 0.001)
         var_obs = std_obs ** 2
 
         error = abs(mean_obs - scaled_truth)
-        E = 1.0 / (1.0 + error)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
 
         R_std = E / std_obs
         R_var = E / var_obs
@@ -279,111 +302,94 @@ def test_3_why_std_not_variance():
         ratio = R_var_vals[i] / R_var_vals[base_idx]
         print(f"{s}x->{ratio:.2f}  ", end="")
 
-    print("\n\n>>> std gives linear scaling, variance gives quadratic")
-    print(">>> std preserves relative comparisons across scales!")
+    # Deterministic check: z = error/std is scale-invariant, so E(z) is invariant too.
+    # The only scaling comes from the normalization 1/std (linear) vs 1/std^2 (quadratic).
+    ok_std = all(abs((R_std_vals[i] / R_std_vals[base_idx]) * scales[i] - 1.0) < 1e-10
+                 for i in range(len(scales)))
+    ok_var = all(abs((R_var_vals[i] / R_var_vals[base_idx]) * (scales[i] ** 2) - 1.0) < 1e-10
+                 for i in range(len(scales)))
 
-    return True
+    print("\n\n>>> std gives linear scaling (1/k), variance gives quadratic (1/k^2)")
+    print(">>> Linear scaling preserves relative comparisons across units.")
+
+    return ok_std and ok_var
 
 
 def test_4_why_std_not_mad():
     """
-    WHY STD NOT MAD? Information-theoretic optimality.
+    WHY STD NOT MAD? The scale parameter depends on the assumed noise family.
+
+    Gaussian (L2) free energy implies a Gaussian likelihood:
+      p(truth | mu, std) ~ exp(-(error/std)^2/2) / std
+
+    Laplace (L1) free energy implies a Laplace likelihood:
+      p(truth | mu, b) ~ exp(-|error|/b) / b
+
+    The denominator is always the *scale parameter* (a dispersion measure),
+    but which dispersion you use (std vs MAD) is a modeling choice, not a universal truth.
     """
     print("\n" + "=" * 70)
-    print("TEST 4: Why std, not MAD? (Optimality under Gaussian)")
+    print("TEST 4: Why std vs MAD depends on the model")
     print("=" * 70)
 
     np.random.seed(42)
 
-    # For Gaussian data, std is the maximum likelihood estimator
-    # MAD is more robust but less efficient
+    n_trials = 500
+    n_obs = 200
 
-    results_std = []
-    results_mad = []
-    F_values = []
+    gaussian_offsets = []
+    laplace_offsets = []
+    mismatched_offsets = []
 
-    for _ in range(1000):
-        truth = np.random.uniform(-10, 10)
+    for _ in range(n_trials):
+        truth = 0.0
         noise = np.random.uniform(0.5, 3.0)
-        bias = np.random.uniform(-1, 1)
-        n = np.random.randint(50, 200)
+        bias = np.random.uniform(-1.0, 1.0)
 
-        # Gaussian observations (where std is optimal)
-        observations = np.random.normal(truth + bias, noise, n)
-
-        mean_obs = np.mean(observations)
-        std_obs = max(np.std(observations), 0.001)
-        mad_obs = max(np.mean(np.abs(observations - mean_obs)), 0.001)
-
-        error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
-
-        R_std = E / std_obs
-        R_mad = E / mad_obs
-
-        f_result = compute_free_energy(observations, mean_obs, std_obs, truth)
-
-        results_std.append(R_std)
-        results_mad.append(R_mad)
-        F_values.append(f_result['F'])
-
-    F_arr = np.array(F_values)
-    inv_F = 1.0 / F_arr
-    valid = np.isfinite(inv_F)
-
-    corr_std = np.corrcoef(np.array(results_std)[valid], inv_F[valid])[0, 1]
-    corr_mad = np.corrcoef(np.array(results_mad)[valid], inv_F[valid])[0, 1]
-
-    print(f"\nGaussian data (where std is MLE):")
-    print(f"  R(std) correlation with 1/F: {corr_std:.4f}")
-    print(f"  R(MAD) correlation with 1/F: {corr_mad:.4f}")
-    print(f"  Difference: {corr_std - corr_mad:+.4f}")
-
-    # Now test with heavy-tailed data (where MAD might win)
-    results_std_heavy = []
-    results_mad_heavy = []
-    F_values_heavy = []
-
-    for _ in range(1000):
-        truth = np.random.uniform(-10, 10)
-        n = np.random.randint(50, 200)
-
-        # Heavy-tailed: Student's t with df=3
-        observations = truth + np.random.standard_t(3, n)
+        # Gaussian observations
+        observations = np.random.normal(truth + bias, noise, n_obs)
 
         mean_obs = np.mean(observations)
         std_obs = max(np.std(observations), 0.001)
-        mad_obs = max(np.mean(np.abs(observations - mean_obs)), 0.001)
+        mad_obs = max(np.mean(np.abs(observations - np.median(observations))), 0.001)
 
         error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
 
-        R_std = E / std_obs
-        R_mad = E / mad_obs
+        # Gaussian: drop constants so that log(R) + F == 0 identically.
+        z_std = error / std_obs
+        R_std = float(np.exp(-0.5 * (z_std ** 2)) / std_obs)
+        F_gauss = float(0.5 * (z_std ** 2) + np.log(std_obs))
+        gaussian_offsets.append(float(np.log(R_std) + F_gauss))
 
-        f_result = compute_free_energy(observations, mean_obs, std_obs, truth)
+        # Mismatched normalization: keep Gaussian shape, but divide by MAD.
+        R_mad_mismatch = float(np.exp(-0.5 * (z_std ** 2)) / mad_obs)
+        mismatched_offsets.append(float(np.log(R_mad_mismatch) + F_gauss))
 
-        results_std_heavy.append(R_std)
-        results_mad_heavy.append(R_mad)
-        F_values_heavy.append(f_result['F'])
+        # Laplace: drop constants so that log(R) + F == 0 identically.
+        z_l1 = error / mad_obs
+        R_mad_laplace = float(np.exp(-abs(z_l1)) / mad_obs)
+        F_laplace = float(abs(z_l1) + np.log(mad_obs))
+        laplace_offsets.append(float(np.log(R_mad_laplace) + F_laplace))
 
-    F_arr_h = np.array(F_values_heavy)
-    inv_F_h = 1.0 / F_arr_h
-    valid_h = np.isfinite(inv_F_h)
+    gaussian_offsets = np.array(gaussian_offsets)
+    laplace_offsets = np.array(laplace_offsets)
+    mismatched_offsets = np.array(mismatched_offsets)
 
-    corr_std_h = np.corrcoef(np.array(results_std_heavy)[valid_h], inv_F_h[valid_h])[0, 1]
-    corr_mad_h = np.corrcoef(np.array(results_mad_heavy)[valid_h], inv_F_h[valid_h])[0, 1]
+    gauss_std = float(np.std(gaussian_offsets))
+    lap_std = float(np.std(laplace_offsets))
+    mismatch_std = float(np.std(mismatched_offsets))
 
-    print(f"\nHeavy-tailed data (Student's t, df=3):")
-    print(f"  R(std) correlation with 1/F: {corr_std_h:.4f}")
-    print(f"  R(MAD) correlation with 1/F: {corr_mad_h:.4f}")
-    print(f"  Difference: {corr_std_h - corr_mad_h:+.4f}")
+    print("\nExact identity checks (drop constants):")
+    print(f"  Gaussian: std(log(R_std) + F_gauss)      = {gauss_std:.3e} (should be ~0)")
+    print(f"  Laplace:  std(log(R_mad) + F_laplace)   = {lap_std:.3e} (should be ~0)")
+    print(f"  Mismatch: std(log(R_mad_mismatch)+F_g)  = {mismatch_std:.3e} (should be >0)")
 
-    print("\n>>> std wins for Gaussian (natural world)")
-    print(">>> MAD might win for heavy-tailed (adversarial/outliers)")
-    print(">>> Formula assumes natural (Gaussian-ish) data!")
+    print("\nInterpretation:")
+    print("  - If your free energy / likelihood is Gaussian, the denominator is std.")
+    print("  - If your free energy / likelihood is Laplace, the denominator is MAD-like scale.")
+    print("  - There is no universal 'std beats MAD' without specifying the noise model.")
 
-    return corr_std > corr_mad
+    return gauss_std < 1e-12 and lap_std < 1e-12 and mismatch_std > 1e-3
 
 
 def test_5_bayesian_precision():
@@ -421,7 +427,8 @@ def test_5_bayesian_precision():
         std_obs = max(np.std(observations), 0.001)
 
         error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
 
         precision = 1.0 / (std_obs ** 2)
         sqrt_precision = 1.0 / std_obs
@@ -468,10 +475,10 @@ def test_6_signal_to_noise():
     # Classic SNR = signal_power / noise_power = mu^2/std^2
     # Or amplitude SNR = |mu|/std
     #
-    # R = E/std where E = 1/(1+error)
+    # R = E/std where E = exp(-(error/std)^2/2)
     #
-    # If error is small, E ~= 1, so R ~= 1/std (inverse noise)
-    # If error is large, E -> 0, so R -> 0 (no signal)
+    # If error << std, E ~= 1, so R ~= 1/std (inverse noise)
+    # If error >> std, E -> 0 exponentially, so R -> 0 (overconfident wrong signals are killed)
     #
     # R is like a bounded, error-aware SNR
 
@@ -497,7 +504,9 @@ def test_6_signal_to_noise():
         std_obs = np.std(observations)
 
         error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
+        std_obs = max(float(std_obs), 0.001)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
         R = E / std_obs
 
         # Classic amplitude SNR
@@ -521,78 +530,37 @@ def derive_R_from_free_energy():
     print("=" * 70)
 
     print("""
-FREE ENERGY FOR GAUSSIAN BELIEFS:
+FREE ENERGY / LIKELIHOOD DERIVATION (GAUSSIAN CASE)
 
-F = (mu - x)^2/(2std^2) + (1/2)log(2pistd^2)
+Let:
+  error = |mu - truth|
+  std   = local dispersion (grad_S)
+  z     = error / std   (dimensionless)
 
-Where:
-  mu = belief mean (our estimate)
-  std = belief std (our uncertainty)
-  x = observation
+Gaussian negative log-likelihood (a.k.a. variational free energy up to constants):
+  F = (z^2)/2 + log(std) + const
 
-COMPONENTS:
-  Accuracy:   (mu - x)^2/(2std^2)  ->  Precision-weighted squared error
-  Complexity: (1/2)log(2pistd^2) ->  Cost of being uncertain
+Define a bounded "essence" (shape) term:
+  E(z) = exp(-z^2/2)
 
-TO MINIMIZE F:
-  dF/dmu = (mu - x)/std^2 = 0  ->  mu = x (believe observations)
-  dF/dstd = -(mu-x)^2/std^3 + 1/std  ->  std^2 = (mu-x)^2 (match uncertainty to error)
+Then the evidence density of the truth under the local Gaussian is:
+  p(truth | mu, std) = (1/(std*sqrt(2*pi))) * exp(-z^2/2)
+                     = const * E(z) / std
 
-AT OPTIMAL std:
-  std* = |mu - x| = error
+So if we define:
+  R = E(z) / std
 
-  F* = error^2/(2*error^2) + (1/2)log(2pi*error^2)
-     = 1/2 + log(error) + const
-     ~= log(error) for error >> 1
+We get the exact equivalences:
+  exp(-F) = (1/sqrt(2*pi)) * R
+  log(R)  = -F + 0.5*log(2*pi)
 
-SO:
-  F ~ log(error) when beliefs match observations
-  1/F ~ 1/log(error)
+Conclusion:
+  - Division by std is forced by likelihood normalization for scale families.
+  - Maximizing R is exactly minimizing Free Energy (Gaussian case).
 
-BUT WE MEASURE R DIFFERENTLY:
-  E = 1/(1 + error)
-  grad_S = std (observed dispersion, not optimal std*)
-
-  R = E/std = [1/(1+error)] / std
-
-THE CONNECTION:
-  For fixed std (we observe dispersion, don't choose it):
-
-  Minimizing F means minimizing error^2 / std^2
-
-  Since E = 1/(1+error), high E means low error.
-
-  R = E/std is HIGH when:
-    - E is high (low error, accurate)
-    - std is low (tight observations)
-
-  F is LOW when:
-    - error is low (accurate)
-    - std matches error (calibrated)
-
-  For well-calibrated beliefs: std ~= error
-
-  Then: R = E/std ~= E/error = 1/[(1+error)*error]
-        F ~= 1/2 + log(std) = 1/2 + log(error)
-
-  As error -> 0:
-    R -> 1/std -> inf (high resonance)
-    F -> -inf (low free energy)
-
-  As error -> inf:
-    R -> 0 (low resonance)
-    F -> +inf (high free energy)
-
-CONCLUSION:
-  R ~ 1/F in the limit of calibrated beliefs.
-
-  Maximizing R = Minimizing F = Free Energy Principle
-
-  The structure E/std falls out from:
-  1. E captures accuracy (numerator of F's accuracy term is error^2)
-  2. std captures precision (denominator of F is std^2)
-  3. Division because F = error^2/std^2 has this structure
-  4. Linear std (not std^2) because E is already error-transformed
+Generalization:
+  Any location-scale family has p(x|mu,s) = (1/s) * f((x-mu)/s).
+  Evaluating at x=truth gives the same structure: R = E(z)/s.
 """)
 
     return True
@@ -611,7 +579,7 @@ def run_all_tests():
 
     # Core test
     passed, corr = test_1_R_proportional_to_inverse_F()
-    results['R ~ 1/F'] = passed
+    results['R proportional to exp(-F)'] = passed
 
     # Structural tests
     results['Division optimal'] = test_2_why_division()
@@ -640,34 +608,38 @@ def run_all_tests():
         print("\nQ1 ANSWERED: Why grad_S (standard deviation)?")
         print("-" * 70)
         print("""
-R = E/std is DERIVED from Free Energy minimization:
+R = E(z)/std is DERIVED from Free Energy / likelihood normalization (Gaussian case):
+
+Let:
+  z = error/std (dimensionless)
+  E(z) = exp(-z^2/2)
+  R = E(z)/std
 
 1. WHY DIVISION?
-   F = error^2/std^2 + log(std)
-   The ratio structure comes from precision-weighted error.
+   Any location-scale likelihood has p(x|mu,s) = (1/s) * f((x-mu)/s).
+   The 1/s normalization forces division by the local dispersion scale.
 
 2. WHY STD NOT VARIANCE?
-   E already transforms error. Using std^2 would double-penalize.
-   std gives linear scaling, preserving relative comparisons.
+   In 1D Gaussian (and more generally in scale families), normalization is 1/std.
+   Using 1/std^2 gives the wrong scaling across unit changes.
 
-3. WHY STD NOT MAD?
-   For Gaussian (natural) data, std is maximum likelihood.
-   std aligns with Free Energy; MAD doesn't.
+3. WHY STD VS MAD?
+   There is no universal winner without a noise model:
+   - Gaussian free energy -> std is the correct scale parameter.
+   - Laplace free energy -> MAD-like scale is the correct scale parameter.
 
 4. SCALE INVARIANCE?
-   Yes - R = E/std scales consistently across measurement units.
+   Yes: z is dimensionless so E(z) is invariant under unit changes;
+   only the 1/std normalization contributes, giving linear 1/k scaling.
 
 5. BAYESIAN CONNECTION?
-   R = E × sqrt(precision)
-   It's sqrt-precision-weighted evidence.
+   R = E * sqrt(precision) because sqrt(precision)=1/std.
 
 6. SIGNAL-TO-NOISE?
-   R is error-aware SNR that penalizes false signals.
+   R is error-aware SNR: large z kills \"confident but wrong\" signals.
 
 CORE INSIGHT:
-  R = E/std implements the Free Energy Principle.
-  Maximizing R = Minimizing F.
-  The structure is mathematically necessary, not arbitrary.
+  For Gaussian beliefs, log(R) = -F + const exactly.
 """)
     else:
         print("SOME TESTS FAILED - derivation incomplete")

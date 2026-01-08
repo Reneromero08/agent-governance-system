@@ -1,6 +1,6 @@
 # Question 3: Why does it generalize? (R: 1720)
 
-**STATUS: ANSWERED**
+**STATUS: PARTIALLY ANSWERED**
 
 ## Question
 The formula wasn't designed for quantum mechanics, yet it works. Is this a deep isomorphism between meaning and physics, or a coincidence of mathematical form?
@@ -34,6 +34,11 @@ Signal / Uncertainty works because ALL these domains share:
 
 ## ANSWER
 
-**Deep isomorphism.** 
+**Partially supported:** the *same quantitative pattern* appears across multiple tested domains, but the claim “deep isomorphism” is not yet proven as a necessity theorem.
 
-The formula works across domains because it captures the universal structure of **information extraction from noisy distributed sources**. This IS the same problem at every scale.
+What we have so far:
+- Cross-domain transfer tests support that `R` is capturing something stable about “signal vs uncertainty” under distributed noisy observation.
+- The quantum-style test suggests the same *shape* of effect (context changes can unlock joint agreement).
+
+What’s still missing for an “ANSWERED” stamp:
+- A principled derivation that explains *why these very different domains must share the same structure*, rather than just showing they often do under the test harness.

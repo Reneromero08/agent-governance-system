@@ -22,12 +22,25 @@ import numpy as np
 from typing import Tuple, List
 
 
-def compute_R(observations: np.ndarray, sigma: float = 0.5, Df: float = 1.0) -> float:
+def compute_R(observations: np.ndarray, truth: float,
+              sigma: float = 0.5, Df: float = 1.0) -> float:
+    """
+    Use the Gaussian free-energy-derived form:
+      z = error/std
+      E(z) = exp(-z^2/2)
+      R = (E/std) * sigma^Df
+    """
     if len(observations) < 2:
         return 0.0
-    E = 1.0 / (1.0 + np.std(observations))
-    grad_S = np.std(observations) + 1e-10
-    return (E / grad_S) * (sigma ** Df)
+
+    mean_obs = float(np.mean(observations))
+    std = max(float(np.std(observations)), 0.001)
+    error = abs(mean_obs - truth)
+
+    z = error / std
+    E = float(np.exp(-0.5 * (z ** 2)))
+
+    return (E / std) * (sigma ** Df)
 
 
 def generate_independent_observations(true_value: float, noise: float, n: int) -> np.ndarray:
@@ -74,13 +87,13 @@ def test_independence_hypothesis():
 
         # Independent observations
         ind_obs = generate_independent_observations(true_value, noise, n_obs)
-        ind_R = compute_R(ind_obs)
+        ind_R = compute_R(ind_obs, true_value)
         ind_error = abs(np.mean(ind_obs) - true_value)
         results_independent.append((ind_R, ind_error, np.std(ind_obs)))
 
         # Highly correlated observations (echo chamber)
         corr_obs = generate_correlated_observations(true_value, noise, n_obs, correlation=0.95)
-        corr_R = compute_R(corr_obs)
+        corr_R = compute_R(corr_obs, true_value)
         corr_error = abs(np.mean(corr_obs) - true_value)
         results_correlated.append((corr_R, corr_error, np.std(corr_obs)))
 
@@ -161,7 +174,7 @@ def test_correlation_gradient():
             noise = 1.5
 
             obs = generate_correlated_observations(true_value, noise, 20, correlation=corr)
-            R = compute_R(obs)
+            R = compute_R(obs, true_value)
             error = abs(np.mean(obs) - true_value)
             results.append((R, error))
 
@@ -223,7 +236,7 @@ def test_what_grad_s_actually_measures():
         results = []
         for _ in range(n_trials):
             obs = generator()
-            R = compute_R(obs)
+            R = compute_R(obs, true_value)
             error = abs(np.mean(obs) - true_value)
             results.append((R, error))
 

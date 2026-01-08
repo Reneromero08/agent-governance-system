@@ -1,0 +1,48 @@
+======================================================================
+RIGOROUS TEST: R vs Phi (Continuous Synergistic Systems)
+======================================================================
+
+Running 10 trials per scenario...
+System: 4 sensors, 5000 samples, noise=1.0
+
+SCENARIO                  | Phi (mean▒std)     | R (mean▒std)      
+----------------------------------------------------------------------
+Independent               |  0.179 ▒ 0.014     |  0.492 ▒ 0.004
+                          | Error: 0.797       | Std: 1.597
+Redundant                 |  6.552 ▒ 0.083     | 6145370590.484 ▒ 33496211.777
+                          | Error: 0.799       | Std: 0.000
+Synergistic (XOR)         |  1.518 ▒ 0.026     |  0.364 ▒ 0.003
+                          | Error: 0.000       | Std: 3.299
+
+======================================================================
+STATISTICAL ANALYSIS
+======================================================================
+
+1. Synergistic XOR System:
+Traceback (most recent call last):
+   Phi:   1.518 ▒ 0.026
+   R:     0.364 ▒ 0.003
+   Error: 0.0000 (should be ~0)
+   Std:   3.299 (high dispersion)
+
+2. Redundant System:
+   Phi:   6.552 ▒ 0.083
+   R:     6145370590.484 ▒ 33496211.777
+   Std:   0.000 (low dispersion)
+
+3. Independent System:
+   Phi:   0.179 ▒ 0.014
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\FORMULA\experiments\open_questions\q6\q6_iit_rigorous_test.py", line 287, in <module>
+   R:     0.492 ▒ 0.004
+
+======================================================================
+ DECISION CRITERIA
+======================================================================
+    success = test_continuous_systems()
+              ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\FORMULA\experiments\open_questions\q6\q6_iit_rigorous_test.py", line 252, in test_continuous_systems
+    print(f"\n\u2713 XOR has perfect accuracy:        {xor_perfect_accuracy}")
+  File "C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\encodings\cp1252.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2713' in position 2: character maps to <undefined>

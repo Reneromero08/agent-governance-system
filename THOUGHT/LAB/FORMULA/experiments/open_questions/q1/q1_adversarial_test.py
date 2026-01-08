@@ -22,7 +22,7 @@ from typing import Tuple, List, Callable
 
 def compute_grad_S(observations: np.ndarray) -> float:
     """Local dispersion - standard deviation of observations"""
-    return np.std(observations) + 1e-10
+    return max(float(np.std(observations)), 0.001)
 
 
 def compute_essence_v1(observations: np.ndarray) -> float:
@@ -37,13 +37,18 @@ def compute_essence_v2(observations: np.ndarray, target: float = None) -> float:
     If we don't know target, E = concentration (kurtosis? negative entropy?)
     """
     if target is not None:
-        # We have ground truth - E is how close mean is to it
-        return 1.0 / (1.0 + abs(np.mean(observations) - target))
+        # We have ground truth - use a likelihood-shaped compatibility term.
+        # z = error/std is dimensionless and kills "confident but wrong" clusters.
+        mean = float(np.mean(observations))
+        error = abs(mean - target)
+        std = compute_grad_S(observations)
+        z = error / std
+        return float(np.exp(-0.5 * (z ** 2)))
     else:
         # No ground truth - E is concentration of distribution
         # High kurtosis = peaked = high essence
         mean = np.mean(observations)
-        std = np.std(observations) + 1e-10
+        std = compute_grad_S(observations)
         kurtosis = np.mean(((observations - mean) / std) ** 4)
         return kurtosis / 3.0  # Normalize (normal dist has kurtosis=3)
 
