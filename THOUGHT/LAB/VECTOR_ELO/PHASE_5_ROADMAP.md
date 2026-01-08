@@ -19,8 +19,9 @@ tags:
 
 # Phase 5: Vector/Symbol Integration - Detailed Roadmap
 
-**Version:** 1.6.0
+**Version:** 1.7.0
 **Created:** 2026-01-07
+**Last Updated:** 2026-01-08
 **Prerequisite:** Phase 4 (Catalytic Architecture) - COMPLETE
 **Downstream:** Phase 6.0 (Cassette Network) depends on 5.2 MemoryRecord contract
 
@@ -242,33 +243,49 @@ ModelRecord = {
 
 ---
 
-## 5.1.4 Semantic Skill Discovery
+## 5.1.4 Semantic Skill Discovery ✅ COMPLETE (2026-01-08)
 
 **Purpose:** Find skills by description similarity.
 
 ### 5.1.4.1 Skill Inventory
-- [ ] Enumerate all `CAPABILITY/SKILLS/*/SKILL.md`
-- [ ] Parse skill metadata (purpose, trigger, inputs, outputs)
-- [ ] Create skill manifest
+- [x] Enumerate all `CAPABILITY/SKILLS/*/SKILL.md` (**DONE** - 24 skills)
+- [x] Parse skill metadata (purpose, trigger, inputs, outputs) (**DONE** - YAML frontmatter + markdown)
+- [x] Create skill manifest (**DONE** - with content hashes)
 
 ### 5.1.4.2 Skill Embedding
-- [ ] Embed skill descriptions
-- [ ] Store with metadata in MemoryRecord
-- [ ] Enable semantic search
+- [x] Embed skill descriptions (**DONE** - all-MiniLM-L6-v2, 384 dims)
+- [x] Store with metadata in MemoryRecord-compatible format (**DONE**)
+- [x] Enable semantic search (**DONE** - cosine similarity)
 
 ### 5.1.4.3 Skill Discovery API
-- [ ] `find_skills_by_intent(query, top_k) -> [skill_ids]`
-- [ ] Deterministic tie-breaking for stable results
-- [ ] Emit discovery receipt
+- [x] `find_skills_by_intent(query, top_k) -> [skill_ids]` (**DONE**)
+- [x] Deterministic tie-breaking for stable results (**DONE** - score desc, skill_id asc)
+- [x] Emit discovery receipt (**DONE**)
 
 ### 5.1.4.4 Tests
-- [ ] `test_phase_5_1_4_skill_discovery.py`
-- [ ] Known queries return expected skills
-- [ ] Results stable across runs
+- [x] `test_phase_5_1_4_skill_discovery.py` (**DONE** - 32 tests passing)
+- [x] Known queries return expected skills (**DONE** - verified)
+- [x] Results stable across runs (**DONE** - determinism tests passing)
+
+### 5.1.4.5 MCP Integration
+- [x] Added `skill_discovery` MCP tool (**DONE**)
+- [x] Tool schema in `schemas/tools.json` (**DONE**)
+- [x] Server handler in `server.py` (**DONE**)
 
 **Exit Criteria:**
-- [ ] Skill discovery returns stable results for fixed corpus
-- [ ] Top-K results deterministic
+- [x] Skill discovery returns stable results for fixed corpus
+- [x] Top-K results deterministic
+
+**Implementation:**
+- `CAPABILITY/PRIMITIVES/skill_index.py` - Core primitive (inventory, embedding, search)
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_1_4_skill_discovery.py` - 32 tests
+- `NAVIGATION/CORTEX/db/skill_index.db` - SQLite index with embeddings
+- `CAPABILITY/MCP/server.py` - MCP tool handler
+- `CAPABILITY/MCP/schemas/tools.json` - Tool schema
+
+**Example Results:**
+- Query: "verify canon changes and enforce changelog"
+- Top Result: `governance/canon-governance-check` (similarity: 0.589)
 
 ---
 
@@ -1139,7 +1156,7 @@ Phase 5.3 - SPC Formalization (specs, benchmarks, paper)
 
 ---
 
-*Roadmap v1.6.0 - Updated 2026-01-08 with Phase 5.3 SPC Formalization (GPT proposal integrated)*
+*Roadmap v1.7.0 - Updated 2026-01-08 with Phase 5.1.4 Skill Discovery complete*
 
 ---
 

@@ -6,6 +6,30 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.26] - 2026-01-08
+
+### Added
+- **Phase 5.1.4: Semantic Skill Discovery** — Vector-indexed skill search by intent
+  - `CAPABILITY/PRIMITIVES/skill_index.py` — Core indexing primitive with inventory, embedding, and semantic search
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_1_4_skill_discovery.py` — Comprehensive test suite (32 tests passing)
+  - **MCP Integration:** Added `skill_discovery` MCP tool for semantic skill search
+  - **Key features:**
+    - Indexed 24 skills from `CAPABILITY/SKILLS/*/SKILL.md`
+    - Vector embeddings via CORTEX EmbeddingEngine (all-MiniLM-L6-v2, 384 dimensions)
+    - Deterministic tie-breaking (score desc, skill_id asc)
+    - Receipt emission for all operations
+  - **Database:** `NAVIGATION/CORTEX/db/skill_index.db`
+  - **Example queries:** "verify canon changes" → canon-governance-check (0.589 similarity)
+
+### Changed
+- **CAPABILITY/MCP/server.py** — Added `_tool_skill_discovery` handler
+- **CAPABILITY/MCP/schemas/tools.json** — Added skill_discovery tool schema definition
+
+### Summary
+Skill discovery enables semantic search across all AGS skills by natural language intent. Completes Phase 5.1.4 exit criteria: stable results, deterministic ordering, known queries return expected skills.
+
+---
+
 ## [3.7.23] - 2026-01-08
 
 ### Added

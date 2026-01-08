@@ -1472,6 +1472,7 @@ class AGSMCPServer:
             "codebook_lookup": self._tool_codebook_lookup,
             # Semantic search tools
             "semantic_search": self._tool_semantic_search,
+            "skill_discovery": self._tool_skill_discovery,
             "cassette_network_query": self._tool_cassette_network_query,
             "semantic_stats": self._tool_semantic_stats,
             # Write tools
@@ -2696,7 +2697,87 @@ class AGSMCPServer:
                 "content": [{"type": "text", "text": f"Semantic search error: {str(e)}"}],
                 "isError": True
             }
-    
+
+    def _tool_skill_discovery(self, args: Dict) -> Dict:
+        """Find skills by semantic intent query."""
+        try:
+            from CAPABILITY.PRIMITIVES.skill_index import find_skills_by_intent
+
+            query = args.get("query", "")
+            top_k = args.get("top_k", 5)
+            threshold = args.get("threshold")
+
+            if not query:
+                return {
+                    "content": [{"type": "text", "text": "Error: 'query' parameter is required"}],
+                    "isError": True
+                }
+
+            # Perform skill discovery
+            result = find_skills_by_intent(
+                query=query,
+                top_k=top_k,
+                threshold=threshold,
+                emit_receipt=True
+            )
+
+            # Format results
+            if not result.get("results"):
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": f"No skills found matching query: '{query}'"
+                    }]
+                }
+
+            # Build response text
+            lines = [f"Found {len(result['results'])} skills matching '{query}':\n"]
+
+            for i, skill_result in enumerate(result["results"], 1):
+                skill_id = skill_result["skill_id"]
+                score = skill_result["score"]
+                metadata = skill_result.get("metadata", {})
+
+                name = metadata.get("name", skill_id)
+                description = metadata.get("description", "No description")
+                purpose = metadata.get("purpose", "")
+
+                lines.append(f"{i}. **{name}** (ID: `{skill_id}`, similarity: {score:.3f})")
+                lines.append(f"   {description}")
+                if purpose and purpose != description:
+                    lines.append(f"   Purpose: {purpose[:150]}{'...' if len(purpose) > 150 else ''}")
+                lines.append("")
+
+            # Add receipt info
+            if "receipt" in result:
+                receipt = result["receipt"]
+                lines.append(f"\n_Total candidates: {result['total_candidates']}, "
+                           f"Model: {receipt.get('model_name', 'unknown')}_")
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": "\n".join(lines)
+                }]
+            }
+
+        except FileNotFoundError as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Skill index not found. Run skill embedding first: {str(e)}"
+                }],
+                "isError": True
+            }
+        except Exception as e:
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": f"Skill discovery error: {str(e)}"
+                }],
+                "isError": True
+            }
+
     def _tool_cassette_network_query(self, args: Dict) -> Dict:
         """Query the cassette network."""
         self._ensure_semantic_adapter()
