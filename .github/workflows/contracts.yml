@@ -144,5 +144,5 @@ jobs:
       
       - name: Run artifact escape hatch
         run: |
-          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/run.py CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/input.json LAW/CONTRACTS/_runs/escape-check.json
-          python CAPABILITY/SKILLS/commit/artifact-escape-hatch/validate.py LAW/CONTRACTS/_runs/escape-check.json CAPABILITY/SKILLS/commit/artifact-escape-hatch/fixtures/basic/expected.json
+          python CAPABILITY/SKILLS/commit/commit-manager/run.py CAPABILITY/SKILLS/commit/commit-manager/fixtures/basic/input.json LAW/CONTRACTS/_runs/escape-check.json
+          python CAPABILITY/SKILLS/commit/commit-manager/validate.py LAW/CONTRACTS/_runs/escape-check.json CAPABILITY/SKILLS/commit/commit-manager/fixtures/basic/expected.json

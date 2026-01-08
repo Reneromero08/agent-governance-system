@@ -137,7 +137,7 @@ context_search({"type": "decisions", "query": "catalytic"})
 ```
 
 #### Enforcement
-- The `mcp-access-validator` skill detects token waste and recommends MCP tools
+- The `mcp-toolkit` skill (operation: `validate_access`) detects token waste and recommends MCP tools
 - All agent actions are audited for token efficiency
 - Violations are logged in `LAW/CONTRACTS/_runs/mcp_logs/token_waste.jsonl`
 
@@ -273,7 +273,7 @@ python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup-stale --apply
 ### Additional Practices
 - Each agent updates `CHANGELOG.md` by adding a topmost entry, then rebases before push.
 - Do not run tests or commit from a shared dirty worktree.
-- Use `commit-queue` to enqueue and stage per-agent commit slices before the commit ceremony.
+- Use `commit-manager` (operation: `queue`) to enqueue and stage per-agent commit slices before the commit ceremony.
 
 See `CAPABILITY/SKILLS/agents/workspace-isolation/SKILL.md` for full documentation and `LAW/CONTEXT/decisions/ADR-037-workspace-isolation.md` for the architectural decision record.
 

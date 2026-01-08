@@ -44,6 +44,8 @@ notes:
 
 **Archive:** [`MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md`](MEMORY/ARCHIVE/roadmaps/01-07-2026-00-42_ROADMAP_3.4.13_COMPLETED_PHASES.md)
 
+<!-- 2.4.4 Needs a stable release version -->
+<!-- 3 Needs Phases 5-7 done -->
 ## 2.4.4 Template Sealing Primitive (CRYPTO_SAFE.2)
 Purpose: Cryptographically seal the TEMPLATE for license enforcement and provenance.
 
@@ -514,3 +516,63 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 10.3.2 Smart slice prediction (Ω.3.2)
 - [ ] 10.3.3 Provenance graph visualization (Ω.3.3)
 - [ ] 10.3.4 Zero-knowledge proofs research (Ω.3.4)
+
+---
+
+# Appendix: Phase 5 Reality Check
+
+> Added 2026-01-07 after critical review of Phase 5 roadmap.
+
+## What's Solid
+
+| Component | Assessment | Notes |
+|-----------|------------|-------|
+| 5.0 MemoryRecord | ✅ Feasible | JSON schema + Python dataclass. Do first. |
+| 5.1.4 VectorPack | ✅ Feasible | Well-specified directory structure |
+| SCL concept | ✅ Sound | Real problem, real value |
+
+## What Needs Revision
+
+### 1. Embedding Determinism is Aspirational
+**Problem:** OpenAI embeddings are NOT deterministic across API versions. Local models drift between library versions.
+
+**Fix:** Define "version-pinned reproducibility" instead of strict determinism. Accept that vector indexes are derived artifacts.
+
+### 2. The 90% Token Reduction is Unmeasured
+**Problem:** No baseline governance token counts exist.
+
+**Fix:** Add **5.2.0 Baseline Measurement** task:
+- Analyze 10 governance-heavy prompts
+- Count tokens, identify top 20 repeated patterns
+- Set data-driven reduction target
+
+### 3. "30-80 Macros" is Arbitrary
+**Problem:** 2.5x range means we don't know the real number.
+
+**Fix:** Macro count should emerge from repetition analysis, not be a target.
+
+### 4. Custom DSL is Overkill for v1
+**Problem:** Building a lexer/parser is real work for uncertain payoff.
+
+**Fix (simpler v1):** Use JSON templates:
+```json
+{"macro": "@LAW_CONSTRAINT", "version": ">=0.1.0", "forbid": ["WRITE:authored_md"]}
+```
+Graduate to DSL only if JSON becomes unwieldy.
+
+## Recommended Phasing
+
+```
+Phase 5.0 - MemoryRecord (do first, Phase 6.0 depends on it)
+     ↓
+Phase 5.1 - Vector Indexing (relax determinism, focus on "works + receipted")
+     ↓
+Phase 5.2.0 - Baseline Measurement (NEW - measure before building)
+     ↓
+Phase 5.2.1 - MVP Macros (5-10 JSON-based, prove concept)
+     ↓
+Phase 5.2.2+ - Expand based on results
+```
+
+## Key Principle
+**Measure first, build second.** The SCL design is sound, but the numbers (90%, 30-80 macros) should emerge from data, not be targets.
