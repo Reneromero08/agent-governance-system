@@ -29,7 +29,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 # Skill paths
-SKILL_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "cortex" / "cortex-toolkit"
+SKILL_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "cortex-toolkit"
 FIXTURES_DIR = SKILL_DIR / "fixtures"
 RUN_SCRIPT = SKILL_DIR / "run.py"
 

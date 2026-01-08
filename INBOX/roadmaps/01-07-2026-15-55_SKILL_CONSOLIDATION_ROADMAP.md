@@ -83,7 +83,7 @@ Before starting consolidation:
 
 ### 3.2 Implementation
 
-**Location:** `CAPABILITY/SKILLS/cortex/cortex-toolkit/`
+**Location:** `CAPABILITY/SKILLS/cortex-toolkit/`
 
 ```json
 {
@@ -123,7 +123,7 @@ Before starting consolidation:
 
 ### 4.2 Implementation
 
-**Location:** `CAPABILITY/SKILLS/mcp/mcp-toolkit/`
+**Location:** `CAPABILITY/SKILLS/mcp-toolkit/`
 
 ```json
 {
@@ -158,7 +158,7 @@ Before starting consolidation:
 
 ### 5.2 Implementation
 
-**Location:** `CAPABILITY/SKILLS/commit/commit-manager/`
+**Location:** `CAPABILITY/SKILLS/commit-manager/`
 
 ```json
 {
@@ -192,7 +192,7 @@ Before starting consolidation:
 
 ### 6.2 Implementation
 
-**Location:** `CAPABILITY/SKILLS/pipeline/pipeline-toolkit/`
+**Location:** `CAPABILITY/SKILLS/pipeline-toolkit/`
 
 ```json
 {

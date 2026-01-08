@@ -25,7 +25,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
 # Skill paths
-MCP_TOOLKIT_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "mcp" / "mcp-toolkit"
+MCP_TOOLKIT_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "mcp-toolkit"
 FIXTURES_DIR = MCP_TOOLKIT_DIR / "fixtures"
 
 
@@ -70,7 +70,7 @@ class TestMcpToolkitOperations:
     def test_build_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test build operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"operation": "build", "task": {"id": "test-build-123"}}
         input_path = tmp_path / "input.json"
@@ -90,7 +90,7 @@ class TestMcpToolkitOperations:
     def test_validate_access_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test validate_access operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "validate_access",
@@ -113,7 +113,7 @@ class TestMcpToolkitOperations:
     def test_verify_extension_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test verify_extension operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "verify_extension",
@@ -138,7 +138,7 @@ class TestMcpToolkitOperations:
     def test_message_board_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test message_board operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"operation": "message_board"}
         output_path = tmp_path / "output.json"
@@ -155,7 +155,7 @@ class TestMcpToolkitOperations:
     def test_precommit_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test precommit operation can be invoked (dry_run mode)."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "precommit",
@@ -180,7 +180,7 @@ class TestMcpToolkitOperations:
     def test_smoke_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test smoke operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "smoke",
@@ -205,7 +205,7 @@ class TestMcpToolkitOperations:
     def test_adapt_operation_invokable(self, tmp_path: Path, mock_writer: MagicMock):
         """Test adapt operation can be invoked."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"operation": "adapt", "task": {"id": "adapt-task-456"}}
         output_path = tmp_path / "output.json"
@@ -226,7 +226,7 @@ class TestMcpToolkitErrors:
     def test_invalid_operation_raises_error(self, tmp_path: Path, capsys):
         """Test that invalid operation returns error code and prints message."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"operation": "invalid_operation"}
         input_path = tmp_path / "input.json"
@@ -243,7 +243,7 @@ class TestMcpToolkitErrors:
     def test_missing_operation_field_raises_error(self, tmp_path: Path, capsys):
         """Test that missing operation field returns error code."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"task": {"id": "test"}}  # No operation field
         input_path = tmp_path / "input.json"
@@ -259,7 +259,7 @@ class TestMcpToolkitErrors:
     def test_empty_operation_field_raises_error(self, tmp_path: Path, capsys):
         """Test that empty operation field returns error code."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {"operation": ""}  # Empty operation
         input_path = tmp_path / "input.json"
@@ -275,7 +275,7 @@ class TestMcpToolkitErrors:
     def test_invalid_json_input_raises_error(self, tmp_path: Path, capsys):
         """Test that invalid JSON input returns error code."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_path = tmp_path / "input.json"
         output_path = tmp_path / "output.json"
@@ -290,7 +290,7 @@ class TestMcpToolkitErrors:
     def test_nonexistent_input_file_raises_error(self, tmp_path: Path, capsys):
         """Test that nonexistent input file returns error code."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_path = tmp_path / "nonexistent.json"
         output_path = tmp_path / "output.json"
@@ -323,7 +323,7 @@ class TestMcpToolkitFixtures:
     def test_basic_fixture_operation(self, tmp_path: Path, mock_writer: MagicMock, basic_input_fixture: Dict[str, Any]):
         """Test that basic fixture can be executed."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         output_path = tmp_path / "output.json"
         operation = basic_input_fixture.get("operation")
@@ -345,7 +345,7 @@ class TestMcpToolkitValidateAccess:
     def test_detects_database_query_pattern(self, tmp_path: Path, mock_writer: MagicMock):
         """Test that database query patterns are detected."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "validate_access",
@@ -365,7 +365,7 @@ class TestMcpToolkitValidateAccess:
     def test_detects_file_read_pattern(self, tmp_path: Path, mock_writer: MagicMock):
         """Test that file read patterns are detected."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         input_data = {
             "operation": "validate_access",
@@ -385,7 +385,7 @@ class TestMcpToolkitValidateAccess:
     def test_calculates_token_waste_metrics(self, tmp_path: Path, mock_writer: MagicMock):
         """Test that token waste metrics are calculated."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         # Large code snippet should trigger token waste detection
         large_code = "x = 1\n" * 100
@@ -414,7 +414,7 @@ class TestMcpToolkitOperationsMapping:
     def test_all_operations_in_mapping(self):
         """Test that all documented operations are in OPERATIONS mapping."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         expected_operations = [
             "build",
@@ -432,7 +432,7 @@ class TestMcpToolkitOperationsMapping:
     def test_operations_are_callable(self):
         """Test that all operations in mapping are callable."""
         import importlib
-        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp.mcp-toolkit.run")
+        mcp_toolkit = importlib.import_module("CAPABILITY.SKILLS.mcp-toolkit.run")
 
         for op_name, op_func in mcp_toolkit.OPERATIONS.items():
             assert callable(op_func), f"Operation '{op_name}' is not callable"

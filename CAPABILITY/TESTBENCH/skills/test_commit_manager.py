@@ -27,7 +27,7 @@ import pytest
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
-SKILL_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "commit" / "commit-manager"
+SKILL_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "commit-manager"
 FIXTURES_DIR = SKILL_DIR / "fixtures"
 
 # Use durable paths inside the project for input/output

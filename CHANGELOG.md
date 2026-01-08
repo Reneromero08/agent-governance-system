@@ -16,6 +16,11 @@ All notable changes to Agent Governance System will be documented in this file.
 ### Changed
 - **Deprecated Skills Archived:** 18 deprecated skills moved to `MEMORY/ARCHIVE/skills-deprecated/`
 - **Roadmap Status:** `INBOX/roadmaps/01-07-2026-15-55_SKILL_CONSOLIDATION_ROADMAP.md` marked COMPLETE
+- **Flattened Skill Structure:** Removed redundant category subfolders
+  - `SKILLS/cortex/cortex-toolkit/` → `SKILLS/cortex-toolkit/`
+  - `SKILLS/mcp/mcp-toolkit/` → `SKILLS/mcp-toolkit/`
+  - `SKILLS/commit/commit-manager/` → `SKILLS/commit-manager/`
+  - `SKILLS/pipeline/pipeline-toolkit/` → `SKILLS/pipeline-toolkit/`
 
 ### Fixed
 - **check_inbox_policy.py:** Fixed PROJECT_ROOT path calculation (`parents[3]` → `parents[4]`)
