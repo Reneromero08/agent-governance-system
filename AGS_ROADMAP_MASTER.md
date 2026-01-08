@@ -244,14 +244,15 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
 
 ### 5.1.1 Vector Indexing Infrastructure
-- [ ] 5.1.1.1 Select embedding model (ADR required: determinism constraint)
+- [ ] 5.1.1.1 Select embedding model (ADR required: version-pinned reproducibility, not strict determinism)
 - [ ] 5.1.1.2 Implement `CAPABILITY/PRIMITIVES/vector_index.py`
 - [ ] 5.1.1.3 Create vector index storage (SQLite + vectors or FAISS)
 
 ### 5.1.2 Canon & ADR Embedding
 - [ ] 5.1.2.1 Embed all canon files: `LAW/CANON/*` → vectors (Z.5.1)
 - [ ] 5.1.2.2 Embed all ADRs: `LAW/CONTEXT/decisions/*` → vectors (Z.5.2)
-- [ ] 5.1.2.3 Verify deterministic rebuild (same files → same index)
+- [ ] 5.1.2.3 Verify version-pinned rebuild (same files + same model version → same index)
+  - Note: Vectors are derived artifacts; accept rebuild-from-text as the invariant
 
 ### 5.1.3 Semantic Discovery
 - [ ] 5.1.3.1 Store model weights in vector-indexed CAS (Z.5.3)
@@ -265,28 +266,41 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 5.1.4.3 Micro-pack export (JSONL, int8 quantized, task-scoped top-K)
 
 - **Exit Criteria**
-  - [ ] Vector index includes canon + ADRs with deterministic rebuild
-  - [ ] Skill discovery returns stable results for fixed corpus
+  - [ ] Vector index includes canon + ADRs with version-pinned rebuild
+  - [ ] Skill discovery returns stable results for fixed corpus + model version
   - [ ] VectorPack export is portable and receipted
 
 ## 5.2 Semiotic Compression Layer (SCL) (Lane I)
 **Purpose:** Reduce LLM token usage via semantic macros that expand deterministically.
 **Research:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
 **Original Research:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md`
+**Brief:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md`
 
 **Concept:** Big models emit short symbolic programs; deterministic tools expand into full JobSpecs/tool-calls.
 - **Hashes:** Identity pointers to bytes (already have via CAS)
 - **Symbols:** Semantic macros for meaning (reduces governance boilerplate)
 
 **Design Goals:**
-1. 90%+ token reduction for governance/procedure repetition
+1. Meaningful token reduction for governance repetition (target derived from 5.2.0 baseline)
 2. Deterministic expansion (same symbols → same output)
 3. Verifiable (schema-valid outputs; hashes for artifacts)
 4. Human-auditable (expand-to-text for review)
 5. Composable (small primitives combine into complex intents)
 
+### 5.2.0 Baseline Measurement (Prerequisite)
+**Principle:** Measure first, build second.
+- [ ] 5.2.0.1 Collect 10 governance-heavy prompts from actual AGS usage
+- [ ] 5.2.0.2 Token count analysis: total tokens, repeated pattern tokens, unique tokens
+- [ ] 5.2.0.3 Identify top 20 repeated patterns (candidates for macros)
+- [ ] 5.2.0.4 Calculate theoretical max compression (repeated / total)
+- [ ] 5.2.0.5 Set data-driven reduction target based on findings
+- **Exit Criteria**
+  - [ ] Baseline report with actual token counts
+  - [ ] Prioritized list of compression candidates
+  - [ ] Realistic reduction target (not aspirational 90%)
+
 ### 5.2.1 Macro Definition
-- [ ] 5.2.1.1 Define MVP macro set (30-80 macros covering 80% of governance repetition)
+- [ ] 5.2.1.1 Define MVP macro set (count derived from 5.2.0 repetition analysis)
   - Constraint macros: immutability, allowed domains, forbidden writes
   - Schema macros: validate JobSpec, validate receipt, validate bundle
   - CAS macros: put, get, verify, list
@@ -303,29 +317,30 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 ### 5.2.3 Decoder & Validator
 - [ ] 5.2.3.1 Implement `CAPABILITY/PRIMITIVES/scl_decoder.py` (symbolic IR → expanded JSON + audit)
 - [ ] 5.2.3.2 Implement `CAPABILITY/PRIMITIVES/scl_validator.py` (symbolic/schema validation)
-- [ ] 5.2.3.3 Symbolic IR syntax (ASCII-first for tokenizer safety):
+- [ ] 5.2.3.3 v1 Format: JSON templates (graduate to DSL only if JSON becomes unwieldy)
+  ```json
+  {"macro": "@LAW_CONSTRAINT", "version": ">=0.1.0", "forbid": ["WRITE:authored_md"]}
+  {"macro": "@JOB", "scan": "DOMAIN_WORKTREE", "validate": "JOBSPEC"}
+  {"macro": "@CALL", "tool": "cas.put", "args": {"file": "$PATH"}}
   ```
-  @LAW>=0.1.0 & !WRITE(authored_md)
-  JOB{scan:DOMAIN_WORKTREE, validate:JOBSPEC}
-  CALL.cas.put(file=PATH)
-  ```
+  - v2 (future, if needed): Custom DSL with lexer/parser
 
 ### 5.2.4 CLI & Tests
 - [ ] 5.2.4.1 Implement `scl` CLI: decode, validate, run, audit
 - [ ] 5.2.4.2 Tests: determinism (same program → same hash), schema validation
-- [ ] 5.2.4.3 Token benchmark: measure reduction vs baseline (target 90%+)
+- [ ] 5.2.4.3 Token benchmark: measure reduction vs 5.2.0 baseline (target from 5.2.0.5)
 
 - **Exit Criteria**
-  - [ ] CODEBOOK.json contains 30+ governance macros
+  - [ ] CODEBOOK.json contains macros covering top patterns from 5.2.0 analysis
   - [ ] `scl decode <program>` → emits JobSpec JSON
   - [ ] `scl validate` passes valid programs, rejects invalid
-  - [ ] Meaningful token reduction demonstrated vs baseline (90%+ for governance)
+  - [ ] Token reduction meets or exceeds data-driven target from 5.2.0
   - [ ] Reproducible expansions (same symbols → same output hash)
 
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate) V3.8
 
 ## 6.0 Canonical Cassette Substrate (cartridge-first)
-- [ ] 6.0.1 Bind cassette storage to the Phase 5.2 `MemoryRecord` contract
+- [ ] 6.0.1 Bind cassette storage to the Phase 5.0 `MemoryRecord` contract
 - [ ] 6.0.2 Ensure each cassette DB is a portable cartridge artifact (single-file default)
 - [ ] 6.0.3 Provide rebuild hooks for any derived ANN engine (optional)
   - Derived indexes/snapshots are disposable and must be reproducible from cartridges
@@ -522,6 +537,7 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 # Appendix: Phase 5 Reality Check
 
 > Added 2026-01-07 after critical review of Phase 5 roadmap.
+> Updated 2026-01-07: Fixes applied to main roadmap.
 
 ## What's Solid
 
@@ -531,48 +547,50 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 | 5.1.4 VectorPack | ✅ Feasible | Well-specified directory structure |
 | SCL concept | ✅ Sound | Real problem, real value |
 
-## What Needs Revision
+## Issues Identified & Applied Fixes
 
-### 1. Embedding Determinism is Aspirational
+### 1. Embedding Determinism ~~is Aspirational~~ → Fixed
 **Problem:** OpenAI embeddings are NOT deterministic across API versions. Local models drift between library versions.
 
-**Fix:** Define "version-pinned reproducibility" instead of strict determinism. Accept that vector indexes are derived artifacts.
+**Fix Applied:** 5.1.1.1 and 5.1.2.3 now specify "version-pinned reproducibility" instead of strict determinism. Vectors are explicitly derived artifacts.
 
-### 2. The 90% Token Reduction is Unmeasured
+### 2. The 90% Token Reduction ~~is Unmeasured~~ → Fixed
 **Problem:** No baseline governance token counts exist.
 
-**Fix:** Add **5.2.0 Baseline Measurement** task:
-- Analyze 10 governance-heavy prompts
-- Count tokens, identify top 20 repeated patterns
-- Set data-driven reduction target
+**Fix Applied:** Added **5.2.0 Baseline Measurement** section with 5 concrete tasks:
+- Collect 10 governance-heavy prompts
+- Token count analysis
+- Identify top 20 repeated patterns
+- Calculate theoretical max compression
+- Set data-driven target
 
-### 3. "30-80 Macros" is Arbitrary
+### 3. "30-80 Macros" ~~is Arbitrary~~ → Fixed
 **Problem:** 2.5x range means we don't know the real number.
 
-**Fix:** Macro count should emerge from repetition analysis, not be a target.
+**Fix Applied:** 5.2.1.1 now derives macro count from 5.2.0 repetition analysis. Exit criteria reference "top patterns from 5.2.0 analysis" not arbitrary counts.
 
-### 4. Custom DSL is Overkill for v1
+### 4. Custom DSL ~~is Overkill for v1~~ → Fixed
 **Problem:** Building a lexer/parser is real work for uncertain payoff.
 
-**Fix (simpler v1):** Use JSON templates:
+**Fix Applied:** 5.2.3.3 now specifies JSON templates for v1:
 ```json
 {"macro": "@LAW_CONSTRAINT", "version": ">=0.1.0", "forbid": ["WRITE:authored_md"]}
 ```
-Graduate to DSL only if JSON becomes unwieldy.
+DSL is explicitly deferred to v2 "if JSON becomes unwieldy."
 
-## Recommended Phasing
+## Execution Order (Validated)
 
 ```
 Phase 5.0 - MemoryRecord (do first, Phase 6.0 depends on it)
      ↓
-Phase 5.1 - Vector Indexing (relax determinism, focus on "works + receipted")
+Phase 5.1 - Vector Indexing (version-pinned, receipted)
      ↓
-Phase 5.2.0 - Baseline Measurement (NEW - measure before building)
+Phase 5.2.0 - Baseline Measurement (measure before building)
      ↓
-Phase 5.2.1 - MVP Macros (5-10 JSON-based, prove concept)
+Phase 5.2.1 - MVP Macros (JSON-based, data-driven count)
      ↓
 Phase 5.2.2+ - Expand based on results
 ```
 
 ## Key Principle
-**Measure first, build second.** The SCL design is sound, but the numbers (90%, 30-80 macros) should emerge from data, not be targets.
+**Measure first, build second.** All targets now reference 5.2.0 baseline data, not aspirational claims.
