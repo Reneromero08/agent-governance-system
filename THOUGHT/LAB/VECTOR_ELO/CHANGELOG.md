@@ -4,6 +4,37 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [F.7] - 2026-01-08
+
+### Formula Falsification Tests - EXECUTED
+
+**Status:** 5/6 core tests PASS, 1 FALSIFIED (Monte Carlo)
+
+**Test Results:**
+| Test | Metric | Value | Status |
+|------|--------|-------|--------|
+| F.7.2 Info Theory | MI-R correlation | **0.9006** | **VALIDATED** |
+| F.7.3 Scaling | Best model | power_law (R²=0.845) | **VALIDATED** |
+| F.7.6 Entropy | R×∇S CV | 0.4543 | **PASS** |
+| F.7.7 Audio | SNR-R correlation | **0.8838** | **VALIDATED** |
+| F.7.9 Monte Carlo | CV | 1.2074 | **FALSIFIED** |
+| F.7.10 Prediction | Formula R² | **0.9941** | **VALIDATED** |
+
+**Key Findings:**
+1. **Formula beats linear regression** — R² = 0.9941 vs 0.5687
+2. **Formula beats Random Forest** — R² = 0.9941 vs 0.8749
+3. **Power law scaling confirmed** — σ^Df is power law, not linear
+4. **Critical vulnerability: Df sensitivity** — 81.7% of variance from Df noise
+
+**Files Created:**
+- `experiments/formula/` — Complete test suite (9 Python test files)
+- `experiments/formula/RESULTS_SUMMARY.md` — Full results report
+- `experiments/formula/requirements.txt` — Dependencies
+
+**Verdict:** Formula core structure VALIDATED. Df sensitivity needs damping factor.
+
+---
+
 ## [F.0] - 2026-01-08
 
 ### Formula Falsification Sidequest - INITIATED
