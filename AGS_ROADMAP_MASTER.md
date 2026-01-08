@@ -281,13 +281,16 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [x] MCP Integration: `skill_discovery` tool in server + schema
 - **Example:** "verify canon changes" → canon-governance-check (0.589 similarity)
 
-### 5.1.5 Cross-Reference Indexing
+### 5.1.5 Cross-Reference Indexing ✅
 **Purpose:** Link artifacts by embedding distance.
-- [ ] Compute pairwise distances for related artifacts
-- [ ] Store as graph edges with distance weights
-- [ ] Enable "related artifacts" queries
-- [ ] Implement `find_related(artifact_id, threshold, top_k) -> [related_ids]`
-- **Note:** 184 ADR-canon cross-references already created in adr_index.py
+- [x] Compute pairwise distances for related artifacts
+- [x] Store as graph edges with distance weights
+- [x] Enable "related artifacts" queries
+- [x] Implement `find_related(artifact_id, threshold, top_k) -> [related_ids]`
+- **Implementation:** `CAPABILITY/PRIMITIVES/cross_ref_index.py` - Unified graph across canon, ADR, and skill artifacts with 20 passing tests
+- **Database:** `NAVIGATION/CORTEX/db/cross_ref_index.db`
+- **MCP Tool:** `find_related` for cross-artifact discovery
+- **Note:** Also includes specialized ADR-canon cross-references in adr_index.py
 
 ### 5.1.6 VectorPack Export Format
 **Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`

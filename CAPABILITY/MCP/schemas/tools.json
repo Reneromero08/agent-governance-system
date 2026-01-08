@@ -501,6 +501,31 @@
                 ]
             }
         },
+        "find_related": {
+            "name": "find_related",
+            "description": "Find related artifacts by embedding similarity across all indexed types (canon, ADRs, skills). Searches the cross-reference graph to discover semantically related content.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "artifact_id": {
+                        "type": "string",
+                        "description": "Artifact identifier in format 'type:path' (e.g., 'canon:LAW/CANON/GOVERNANCE/IMMUTABILITY.md', 'adr:THOUGHT/LEDGER/ADR/2024/001.md', 'skill:CAPABILITY/SKILLS/governance/canon-governance-check/SKILL.md')"
+                    },
+                    "top_k": {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "Maximum number of related artifacts to return"
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "description": "Minimum similarity score (0.0-1.0). Optional - omit to return all results."
+                    }
+                },
+                "required": [
+                    "artifact_id"
+                ]
+            }
+        },
         "cassette_network_query": {
             "name": "cassette_network_query",
             "description": "Query the cassette network for distributed semantic search",
@@ -645,6 +670,9 @@
         },
         {
             "$ref": "#/definitions/skill_discovery"
+        },
+        {
+            "$ref": "#/definitions/find_related"
         },
         {
             "$ref": "#/definitions/cassette_network_query"
