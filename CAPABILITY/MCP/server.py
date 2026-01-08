@@ -2634,7 +2634,7 @@ class AGSMCPServer:
         list_all = args.get("list", False)
         
         cmd = [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "codebook_lookup.py")]
-        
+
         if list_all:
             cmd.append("--list")
             cmd.append("--json")
@@ -2646,12 +2646,13 @@ class AGSMCPServer:
                 cmd.append("--json")
         else:
             cmd.extend(["--list", "--json"])
-        
+
         try:
             result = subprocess.run(
                 cmd,
                 capture_output=True,
                 text=True,
+                encoding='utf-8',
                 cwd=str(PROJECT_ROOT)
             )
             
