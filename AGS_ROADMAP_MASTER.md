@@ -216,7 +216,7 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 **Detailed Roadmap:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_VECTOR_SYMBOL_INTEGRATION.md`
 **Research Findings:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md`
 
-## 5.0 MemoryRecord Contract (Foundation)
+## 5.0 MemoryRecord Contract (Foundation) ✅ COMPLETE (2026-01-08)
 **Purpose:** Define the canonical data structure for all vector-indexed content.
 **Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
 
@@ -234,12 +234,14 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - Vectors are derived (rebuildable from text)
 - All exports are receipted and hashed
 
-- [ ] 5.0.1 Define `memory_record.schema.json` with `additionalProperties: false`
-- [ ] 5.0.2 Implement `CAPABILITY/PRIMITIVES/memory_record.py` (create, validate, hash)
-- [ ] 5.0.3 Tests: schema validation, deterministic hashing
-- **Exit Criteria**
-  - [ ] MemoryRecord schema finalized and frozen (Phase 6.0 depends on this)
-  - [ ] Create/validate/hash functions working
+- [x] 5.0.1 Define `memory_record.schema.json` with `additionalProperties: false` → `LAW/SCHEMAS/memory_record.schema.json`
+- [x] 5.0.2 Implement `CAPABILITY/PRIMITIVES/memory_record.py` (create, validate, hash, add_embedding, serialization)
+- [x] 5.0.3 Tests: `CAPABILITY/TESTBENCH/core/test_memory_record.py` (23 tests passing)
+- **Exit Criteria** ✅
+  - [x] MemoryRecord schema finalized and frozen (Phase 6.0 depends on this)
+  - [x] Create/validate/hash functions working
+  - [x] Deterministic hashing verified
+  - [x] Round-trip serialization verified
 
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
 

@@ -4,6 +4,32 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.24] - 2026-01-08
+
+### Added
+- **Phase 5.1.0 COMPLETE** — MemoryRecord contract foundation ✅
+  - `LAW/SCHEMAS/memory_record.schema.json` — Canonical schema for all vector-indexed content
+  - `CAPABILITY/PRIMITIVES/memory_record.py` — Primitive with create/validate/hash/embed functions
+  - `CAPABILITY/TESTBENCH/core/test_memory_record.py` — 23 tests passing (determinism, validation, serialization)
+
+### Changed
+- **AGS_ROADMAP_MASTER.md** — Phase 5.0 marked complete with deliverables
+- **PHASE_5_ROADMAP.md v1.6.0** — Phase 5.1.0 tasks marked complete (2026-01-08)
+
+### Contract Rules (Phase 6.0 dependency)
+- Text is canonical (source of truth)
+- Vectors are derived (rebuildable from text)
+- All exports are receipted and hashed
+- `id` = SHA-256(text) = deterministic semantic pointer
+
+### Theoretical Connection
+- **MemoryRecord is the atom of H(X|S)**: The `id` field IS the HASH_PTR from SPC spec
+- Shared context S = the set of MemoryRecords both parties have indexed
+- When sender transmits `法`, receiver expands via MemoryRecord lookup
+- 56,370x compression requires identical `id` = identical `text` = identical meaning
+
+---
+
 ## [3.7.23] - 2026-01-08
 
 ### Added
