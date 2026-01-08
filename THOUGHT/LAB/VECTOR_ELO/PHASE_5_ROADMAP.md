@@ -115,38 +115,43 @@ Every task must produce:
 
 ---
 
-## 5.1.1 Embed Canon Files
+## 5.1.1 Embed Canon Files ✅ COMPLETE (2026-01-08)
 
 **Purpose:** Make all governance canon semantically searchable.
 
 ### 5.1.1.1 Canon File Inventory
-- [ ] Enumerate all files in `LAW/CANON/*`
-- [ ] Create manifest with file paths and content hashes
-- [ ] Emit inventory receipt
+- [x] Enumerate all files in `LAW/CANON/*` (**DONE** - 32 files)
+- [x] Create manifest with file paths and content hashes (**DONE**)
+- [x] Emit inventory receipt (**DONE**)
 
 ### 5.1.1.2 Embedding Generation
-- [ ] Select embedding model (ADR required)
-  - Options: OpenAI text-embedding-3-small, sentence-transformers, local model
-  - Constraint: Deterministic (same input → same embedding)
-- [ ] Implement `embed_text(text, model) -> vector`
-- [ ] Batch embed all canon files
-- [ ] Store as MemoryRecord instances
+- [x] Select embedding model: `all-MiniLM-L6-v2` (ADR-030)
+  - Uses sentence-transformers (local, deterministic)
+  - 384 dimensions, float32
+- [x] Implement `embed_text(text, model) -> vector` (**DONE** via EmbeddingEngine)
+- [x] Batch embed all canon files (**DONE** - 32 files embedded)
+- [x] Store as MemoryRecord instances (**DONE**)
 
 ### 5.1.1.3 Vector Index Storage
-- [ ] Create vector index structure (SQLite + vector extension or FAISS)
-- [ ] Store embeddings with content hashes as IDs
-- [ ] Enable rebuild from source files (deterministic)
+- [x] Create vector index structure: SQLite-based `canon_index.db` (**DONE**)
+- [x] Store embeddings with content hashes as IDs (**DONE**)
+- [x] Enable rebuild from source files (deterministic) (**DONE**)
 
 ### 5.1.1.4 Tests
-- [ ] `test_phase_5_1_1_canon_embedding.py`
-- [ ] Verify all canon files embedded
-- [ ] Verify rebuild produces identical index
-- [ ] Verify similarity search returns expected results
+- [x] `test_phase_5_1_1_canon_embedding.py` (**DONE** - 23 tests)
+- [x] Verify all canon files embedded (**DONE**)
+- [x] Verify rebuild produces identical index (**DONE**)
+- [x] Verify similarity search returns expected results (**DONE**)
 
 **Exit Criteria:**
-- [ ] All `LAW/CANON/*` files embedded
-- [ ] Index rebuildable deterministically
-- [ ] Similarity search functional
+- [x] All `LAW/CANON/*` files embedded (32 files)
+- [x] Index rebuildable deterministically
+- [x] Similarity search functional
+
+**Implementation:**
+- `CAPABILITY/PRIMITIVES/canon_index.py` - Core indexing primitive
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_1_1_canon_embedding.py` - 23 tests
+- `NAVIGATION/CORTEX/db/canon_index.db` - Embedded index
 
 ---
 

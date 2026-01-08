@@ -245,16 +245,17 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 ## 5.1 Embed Canon, ADRs, and Skill Discovery (Z.5)
 
-### 5.1.1 Vector Indexing Infrastructure
-- [ ] 5.1.1.1 Select embedding model (ADR required: version-pinned reproducibility, not strict determinism)
-- [ ] 5.1.1.2 Implement `CAPABILITY/PRIMITIVES/vector_index.py`
-- [ ] 5.1.1.3 Create vector index storage (SQLite + vectors or FAISS)
+### 5.1.1 Vector Indexing Infrastructure ✅ COMPLETE (2026-01-08)
+- [x] 5.1.1.1 Select embedding model: `all-MiniLM-L6-v2` (ADR-030, sentence-transformers)
+- [x] 5.1.1.2 Implement `CAPABILITY/PRIMITIVES/canon_index.py` (inventory, embed, search, rebuild, verify)
+- [x] 5.1.1.3 Create vector index storage: SQLite-based `canon_index.db`
+- [x] 5.1.1.4 Tests: `test_phase_5_1_1_canon_embedding.py` (23 tests passing)
 
-### 5.1.2 Canon & ADR Embedding
-- [ ] 5.1.2.1 Embed all canon files: `LAW/CANON/*` → vectors (Z.5.1)
+### 5.1.2 Canon Embedding ✅ COMPLETE (2026-01-08)
+- [x] 5.1.2.1 Embed all canon files: `LAW/CANON/*` → vectors (32 files embedded)
 - [ ] 5.1.2.2 Embed all ADRs: `LAW/CONTEXT/decisions/*` → vectors (Z.5.2)
-- [ ] 5.1.2.3 Verify version-pinned rebuild (same files + same model version → same index)
-  - Note: Vectors are derived artifacts; accept rebuild-from-text as the invariant
+- [x] 5.1.2.3 Verify version-pinned rebuild (same files + same model version → same index)
+  - Tested: rebuild produces identical manifest hash
 
 ### 5.1.3 Semantic Discovery
 - [ ] 5.1.3.1 Store model weights in vector-indexed CAS (Z.5.3)
