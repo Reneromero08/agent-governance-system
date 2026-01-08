@@ -68,7 +68,7 @@ cat > "$CHECK_IN" <<'EOF'
 }
 EOF
 
-python3 CAPABILITY/SKILLS/mcp/mcp-toolkit/run.py "$CHECK_IN" "$CHECK_OUT"
+python3 CAPABILITY/SKILLS/mcp-toolkit/run.py "$CHECK_IN" "$CHECK_OUT"
 CHECK_EXIT=$?
 if [ $CHECK_EXIT -ne 0 ]; then
     echo ""

@@ -26,7 +26,7 @@ REPO_ROOT = Path(__file__).resolve().parents[3]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-TOOLKIT_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "pipeline" / "pipeline-toolkit"
+TOOLKIT_DIR = REPO_ROOT / "CAPABILITY" / "SKILLS" / "pipeline-toolkit"
 FIXTURES_DIR = TOOLKIT_DIR / "fixtures"
 RUN_SCRIPT = TOOLKIT_DIR / "run.py"
 
