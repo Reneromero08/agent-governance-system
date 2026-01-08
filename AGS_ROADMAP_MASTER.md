@@ -213,12 +213,12 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 # Phase 5: Vector/Symbol Integration (addressability)
 
 **Goal:** Make governance artifacts addressable by meaning, not just by path or hash.
-**Detailed Roadmap:** `INBOX/roadmaps/01-07-2026_PHASE_5_VECTOR_SYMBOL_INTEGRATION.md`
-**Research Findings:** `INBOX/reports/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md`
+**Detailed Roadmap:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_VECTOR_SYMBOL_INTEGRATION.md`
+**Research Findings:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md`
 
 ## 5.0 MemoryRecord Contract (Foundation)
 **Purpose:** Define the canonical data structure for all vector-indexed content.
-**Research:** `INBOX/reports/V4/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+**Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
 
 **Contract Fields:**
 - `id`: Content hash (SHA-256)
@@ -259,7 +259,7 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 5.1.3.3 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
 
 ### 5.1.4 VectorPack Export Format
-**Research:** `INBOX/reports/V4/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+**Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
 - [ ] 5.1.4.1 Implement VectorPack directory structure (manifest.yaml, tables/, blobs/, receipts/)
 - [ ] 5.1.4.2 Deterministic export/import with receipts
 - [ ] 5.1.4.3 Micro-pack export (JSONL, int8 quantized, task-scoped top-K)
@@ -271,8 +271,8 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 ## 5.2 Semiotic Compression Layer (SCL) (Lane I)
 **Purpose:** Reduce LLM token usage via semantic macros that expand deterministically.
-**Research:** `INBOX/2025-12/Week-01/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
-**Original Research:** `INBOX/2025-12/Week-52/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md`
+**Research:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
+**Original Research:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION.md`
 
 **Concept:** Big models emit short symbolic programs; deterministic tools expand into full JobSpecs/tool-calls.
 - **Hashes:** Identity pointers to bytes (already have via CAS)
