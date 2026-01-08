@@ -1,0 +1,271 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "memory_record.schema.json",
+  "title": "MemoryRecord - Canonical Vector Memory Contract",
+  "description": "Phase 5.0 Foundation: The canonical data structure for all vector-indexed content. Text is canonical, vectors are derived, all exports are receipted.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "text",
+    "embeddings",
+    "payload",
+    "scores",
+    "lineage",
+    "receipts"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Content hash (SHA-256) - stable, deterministic identifier derived from text",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "text": {
+      "type": "string",
+      "description": "Canonical text content - source of truth, vectors are derived from this",
+      "minLength": 1
+    },
+    "embeddings": {
+      "type": "object",
+      "description": "Named vectors: model_name -> vector array. Derived from text, rebuildable.",
+      "additionalProperties": {
+        "$ref": "#/definitions/embedding_entry"
+      }
+    },
+    "payload": {
+      "$ref": "#/definitions/payload"
+    },
+    "scores": {
+      "$ref": "#/definitions/scores"
+    },
+    "lineage": {
+      "$ref": "#/definitions/lineage"
+    },
+    "receipts": {
+      "$ref": "#/definitions/receipts"
+    }
+  },
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$"
+    },
+    "semver": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "iso_timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}"
+    },
+    "embedding_entry": {
+      "type": "object",
+      "description": "Single embedding with metadata",
+      "additionalProperties": false,
+      "required": ["vector", "model", "dimensions"],
+      "properties": {
+        "vector": {
+          "type": "array",
+          "items": {"type": "number"},
+          "minItems": 1,
+          "description": "The embedding vector as array of floats"
+        },
+        "model": {
+          "type": "string",
+          "minLength": 1,
+          "description": "Model identifier (e.g., 'text-embedding-3-small')"
+        },
+        "dimensions": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Vector dimension count"
+        },
+        "quantization": {
+          "type": "string",
+          "enum": ["float32", "float16", "int8"],
+          "default": "float32",
+          "description": "Vector quantization format"
+        },
+        "generated_at": {
+          "$ref": "#/definitions/iso_timestamp"
+        }
+      }
+    },
+    "payload": {
+      "type": "object",
+      "description": "Metadata: tags, timestamps, roles, doc_ids",
+      "additionalProperties": false,
+      "properties": {
+        "tags": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Classification tags"
+        },
+        "created_at": {
+          "$ref": "#/definitions/iso_timestamp"
+        },
+        "updated_at": {
+          "$ref": "#/definitions/iso_timestamp"
+        },
+        "roles": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Access control roles"
+        },
+        "doc_id": {
+          "type": "string",
+          "description": "Parent document identifier"
+        },
+        "doc_path": {
+          "type": "string",
+          "description": "Source file path (repo-relative)"
+        },
+        "chunk_index": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Chunk position within parent document"
+        },
+        "chunk_count": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Total chunks in parent document"
+        },
+        "content_type": {
+          "type": "string",
+          "description": "MIME type or content classification"
+        },
+        "language": {
+          "type": "string",
+          "description": "ISO 639-1 language code"
+        },
+        "extra": {
+          "type": "object",
+          "description": "Extension point for domain-specific metadata"
+        }
+      }
+    },
+    "scores": {
+      "type": "object",
+      "description": "Ranking scores: ELO, recency, trust, decay",
+      "additionalProperties": false,
+      "properties": {
+        "elo": {
+          "type": "number",
+          "description": "ELO ranking score (Phase 7)"
+        },
+        "recency": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Recency decay factor (0-1)"
+        },
+        "trust": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Trust score (0-1)"
+        },
+        "decay": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Time-based decay factor (0-1)"
+        },
+        "relevance": {
+          "type": "number",
+          "description": "Pre-computed relevance score"
+        },
+        "citation_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of times this record was cited/used"
+        }
+      }
+    },
+    "lineage": {
+      "type": "object",
+      "description": "Derivation chain and summarization history",
+      "additionalProperties": false,
+      "properties": {
+        "derived_from": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/sha256"},
+          "description": "Parent record hashes this was derived from"
+        },
+        "summarized_from": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/sha256"},
+          "description": "Records this summarizes"
+        },
+        "version": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Record version number"
+        },
+        "supersedes": {
+          "$ref": "#/definitions/sha256",
+          "description": "Previous version this replaces"
+        },
+        "superseded_by": {
+          "$ref": "#/definitions/sha256",
+          "description": "Newer version that replaces this"
+        },
+        "merge_sources": {
+          "type": "array",
+          "items": {"$ref": "#/definitions/sha256"},
+          "description": "Records merged to create this one"
+        }
+      }
+    },
+    "receipts": {
+      "type": "object",
+      "description": "Provenance hashes and tool version refs",
+      "additionalProperties": false,
+      "required": ["content_hash", "created_at"],
+      "properties": {
+        "content_hash": {
+          "$ref": "#/definitions/sha256",
+          "description": "SHA-256 of text field (must match id)"
+        },
+        "created_at": {
+          "$ref": "#/definitions/iso_timestamp"
+        },
+        "created_by": {
+          "type": "string",
+          "description": "Tool or agent that created this record"
+        },
+        "tool_version": {
+          "$ref": "#/definitions/semver",
+          "description": "Version of creation tool"
+        },
+        "embedding_receipts": {
+          "type": "object",
+          "description": "Per-model embedding generation receipts",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "model_version": {"type": "string"},
+              "generated_at": {"$ref": "#/definitions/iso_timestamp"},
+              "input_hash": {"$ref": "#/definitions/sha256"},
+              "output_hash": {"$ref": "#/definitions/sha256"}
+            }
+          }
+        },
+        "validation_receipts": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "validator": {"type": "string"},
+              "version": {"$ref": "#/definitions/semver"},
+              "validated_at": {"$ref": "#/definitions/iso_timestamp"},
+              "verdict": {"type": "string", "enum": ["pass", "fail", "warn"]}
+            }
+          }
+        }
+      }
+    }
+  }
+}

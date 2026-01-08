@@ -76,8 +76,8 @@ Every task must produce:
 **Purpose:** Define the canonical data structure for all vector-indexed content.
 
 ### 5.1.0.1 Define MemoryRecord JSON Schema
-- [ ] Create `CAPABILITY/PRIMITIVES/schemas/memory_record.schema.json`
-- [ ] Required fields:
+- [x] Create `LAW/SCHEMAS/memory_record.schema.json` (**DONE** 2026-01-08)
+- [x] Required fields:
   - `id` (string): Content hash (SHA-256)
   - `text` (string): Canonical text content
   - `embeddings` (object): Model name → vector array
@@ -85,28 +85,33 @@ Every task must produce:
   - `scores` (object): ELO, recency, trust, decay
   - `lineage` (object): Derivation chain, summarization history
   - `receipts` (object): Provenance hashes, tool versions
-- [ ] Implement `additionalProperties: false` at all levels
+- [x] Implement `additionalProperties: false` at all levels
 
 ### 5.1.0.2 Implement MemoryRecord Primitive
-- [ ] Create `CAPABILITY/PRIMITIVES/memory_record.py`
-- [ ] Functions:
+- [x] Create `CAPABILITY/PRIMITIVES/memory_record.py` (**DONE** 2026-01-08)
+- [x] Functions:
   - `create_record(text, metadata) -> MemoryRecord`
   - `validate_record(record) -> verdict`
   - `hash_record(record) -> content_hash`
-- [ ] Contract rules:
+  - `add_embedding(record, name, vector, model) -> record`
+  - `to_json(record) -> str` / `from_json(str) -> record`
+  - `canonical_bytes(record) -> bytes`
+  - `full_hash(record) -> str`
+- [x] Contract rules:
   - Text is canonical (source of truth)
   - Vectors are derived (rebuildable from text)
   - All exports are receipted and hashed
 
 ### 5.1.0.3 Tests
-- [ ] `test_memory_record_schema_validation.py`
-- [ ] Fixtures: valid records, invalid records, edge cases
-- [ ] Determinism: same input → same hash
+- [x] `CAPABILITY/TESTBENCH/core/test_memory_record.py` (**DONE** 2026-01-08)
+- [x] Fixtures: valid records, invalid records, edge cases
+- [x] Determinism: same input → same hash
+- [x] **23 tests passing**
 
 **Exit Criteria:**
-- [ ] MemoryRecord schema validated and documented
-- [ ] Create/validate/hash functions working
-- [ ] 10+ tests passing
+- [x] MemoryRecord schema validated and documented
+- [x] Create/validate/hash functions working
+- [x] 23 tests passing (exceeds 10+ requirement)
 
 ---
 
