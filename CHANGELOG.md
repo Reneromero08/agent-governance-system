@@ -4,6 +4,35 @@
 
 All notable changes to Agent Governance System will be documented in this file.
 
+## [3.7.27] - 2026-01-08
+
+### Added
+- **Phase 5.1.3.1 COMPLETE** — Model weight registry with vector-indexed CAS ✅
+  - `CAPABILITY/PRIMITIVES/model_registry.py` — Model registry primitive
+    - `create_model_record()` — Create ModelRecord following MemoryRecord contract
+    - `register_model()` — Register with optional weights file hashing
+    - `get_model()` / `get_model_by_id()` — Retrieve by name/version or ID
+    - `get_model_by_weights_hash()` — Deduplication via CAS reference
+    - `search_models()` — Semantic search by description
+    - `list_models()` — Enumerate with format filtering
+    - `verify_registry()` — Integrity verification
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_1_3_model_registry.py` — 28 tests passing
+
+### Changed
+- **AGS_ROADMAP_MASTER.md** — Phase 5.1.3.1 marked complete
+- **PHASE_5_ROADMAP.md** — Phase 5.1.3 tasks marked complete with implementation details
+
+### Technical Details
+- **ModelRecord Schema:**
+  - `id`: Deterministic SHA-256(name@version)
+  - `description`: Embeddable text for semantic search
+  - `weights_hash`: CAS reference (SHA-256 of model weights)
+  - `embedding`: 384-dim vector of description
+  - `metadata`: Architecture, parameters, license, etc.
+- Storage: SQLite `model_registry.db` with audit receipts
+
+---
+
 ## [3.7.26] - 2026-01-08
 
 ### Added

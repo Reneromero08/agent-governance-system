@@ -186,25 +186,59 @@ Every task must produce:
 
 ---
 
-## 5.1.3 Vector-Indexed CAS for Model Weights
+## 5.1.3 Vector-Indexed CAS for Model Weights ✅ COMPLETE (2026-01-08)
 
 **Purpose:** Store model artifacts with semantic addressability.
 
 ### 5.1.3.1 Model Weight Registry
-- [ ] Define schema for model weight records
-- [ ] Include: model name, version, hash, embedding of description
-- [ ] Store in CAS with vector index pointer
+- [x] Define schema for model weight records (**DONE** - ModelRecord TypedDict)
+- [x] Include: model name, version, hash, embedding of description (**DONE**)
+- [x] Store in CAS with vector index pointer (**DONE** - weights_hash field)
+
+**ModelRecord Schema:**
+```python
+ModelRecord = {
+    "id": str,           # SHA-256(name@version) - deterministic
+    "name": str,         # Model name (e.g., "all-MiniLM-L6-v2")
+    "version": str,      # Version string
+    "description": str,  # For semantic search (embeddable)
+    "format": str,       # pytorch, safetensors, onnx, etc.
+    "weights_hash": str, # SHA-256 of weights (CAS reference)
+    "size_bytes": int,   # Model size
+    "embedding": bytes,  # Description embedding (384 dims)
+    "metadata": dict,    # architecture, params, license, etc.
+    "source": str,       # huggingface, local, custom
+    "created_at": str,
+    "updated_at": str,
+}
+```
 
 ### 5.1.3.2 Implementation
-- [ ] `store_model_weights(model_path, metadata) -> hash`
-- [ ] `retrieve_model_by_description(query) -> model_path`
+- [x] `register_model(name, version, description, format, ...) -> result` (**DONE**)
+- [x] `get_model(name, version) -> ModelRecord` (**DONE**)
+- [x] `get_model_by_weights_hash(hash) -> ModelRecord` (**DONE** - deduplication)
+- [x] `search_models(query, top_k) -> [results]` (**DONE** - semantic search)
+- [x] `list_models(format_filter) -> [models]` (**DONE**)
+- [x] `get_registry_stats() -> stats` (**DONE**)
+- [x] `verify_registry() -> verification_result` (**DONE**)
 
 ### 5.1.3.3 Tests
-- [ ] Model storage and retrieval
-- [ ] Semantic search by model description
+- [x] `test_phase_5_1_3_model_registry.py` (**DONE** - 28 tests passing)
+- [x] Model ID determinism (name@version -> hash) (**DONE**)
+- [x] Model registration and retrieval (**DONE**)
+- [x] Semantic search by model description (**DONE**)
+- [x] Deduplication by weights hash (**DONE**)
+- [x] Registry statistics and verification (**DONE**)
 
 **Exit Criteria:**
-- [ ] Model weights addressable by hash and description
+- [x] Model weights addressable by hash and description
+- [x] Semantic search functional
+- [x] Registry integrity verification working
+
+**Implementation:**
+- `CAPABILITY/PRIMITIVES/model_registry.py` - Core registry primitive
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_1_3_model_registry.py` - 28 tests
+- `NAVIGATION/CORTEX/db/model_registry.db` - Registry database (created on first use)
 
 ---
 

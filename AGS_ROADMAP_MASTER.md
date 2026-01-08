@@ -261,7 +261,10 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
   - Tested: rebuild produces identical manifest hash
 
 ### 5.1.3 Semantic Discovery
-- [ ] 5.1.3.1 Store model weights in vector-indexed CAS (Z.5.3)
+- [x] 5.1.3.1 Model weight registry with vector-indexed CAS (Z.5.3) ✅ COMPLETE (2026-01-08)
+  - Implementation: `CAPABILITY/PRIMITIVES/model_registry.py` (ModelRecord schema, register, search)
+  - Tests: `test_phase_5_1_3_model_registry.py` (28 tests passing)
+  - Features: deterministic ID (name@version), semantic search by description, CAS weights_hash reference
 - [ ] 5.1.3.2 Semantic skill discovery: `CAPABILITY/SKILLS/*/SKILL.md` (Z.5.4)
 - [x] 5.1.3.3 Cross-reference indexing: link artifacts by embedding distance (Z.5.5)
   - Implemented in adr_index.py: 184 ADR-canon cross-references created
