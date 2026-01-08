@@ -6,6 +6,26 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.23] - 2026-01-08
+
+### Added
+- **Quantum Darwinism Validation** — Extended Semiotic Mechanics validation to quantum physics
+  - `THOUGHT/LAB/VECTOR_ELO/experiments/formula/quantum_darwinism_test.py` (v1)
+  - `THOUGHT/LAB/VECTOR_ELO/experiments/formula/quantum_darwinism_test_v2.py` (proper multi-fragment analysis)
+  - **Key result:** R_single vs R_joint shows 36x context improvement at full decoherence
+  - **Axiom 6 validated:** "Force depends on the system that legitimizes it"
+
+### Changed
+- **SEMIOTIC_MECHANICS_VALIDATION_REPORT.md** — Added Part 6: Quantum Validation
+  - Documents quantum Darwinism test methodology and results
+  - Updates key numbers table with quantum metrics
+  - Confirms formula as "agreement detector" at quantum scale
+
+### Summary
+The Living Formula `R = (E / grad_S) * sigma^Df` now validated across 7 domains including quantum mechanics. At full decoherence: R_single = 0.5 (gate CLOSED), R_joint = 18.1 (gate OPEN). Context restores resolvability — same principle as grad_S measures neighbor agreement.
+
+---
+
 ## [3.7.19] - 2026-01-07
 
 ### Changed
