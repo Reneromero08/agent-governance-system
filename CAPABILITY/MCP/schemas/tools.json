@@ -476,6 +476,31 @@
                 ]
             }
         },
+        "skill_discovery": {
+            "name": "skill_discovery",
+            "description": "Find skills by semantic intent query. Searches 24 indexed skills and returns the most relevant based on description, purpose, and triggers.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "query": {
+                        "type": "string",
+                        "description": "Natural language intent query (e.g., 'verify canon changes', 'manage git commits')"
+                    },
+                    "top_k": {
+                        "type": "integer",
+                        "default": 5,
+                        "description": "Maximum number of skills to return"
+                    },
+                    "threshold": {
+                        "type": "number",
+                        "description": "Minimum similarity score (0.0-1.0). Optional - omit to return all results."
+                    }
+                },
+                "required": [
+                    "query"
+                ]
+            }
+        },
         "cassette_network_query": {
             "name": "cassette_network_query",
             "description": "Query the cassette network for distributed semantic search",
@@ -617,6 +642,9 @@
         },
         {
             "$ref": "#/definitions/semantic_search"
+        },
+        {
+            "$ref": "#/definitions/skill_discovery"
         },
         {
             "$ref": "#/definitions/cassette_network_query"
