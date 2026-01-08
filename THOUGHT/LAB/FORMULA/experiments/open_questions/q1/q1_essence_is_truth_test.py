@@ -29,20 +29,23 @@ from typing import Tuple
 def compute_essence(observations: np.ndarray, truth: float) -> float:
     """
     E = amount of truth in the observations.
-    Measured as: how close is the signal to actual truth?
+    Measured as compatibility between the estimate and reality, relative to local dispersion:
+      z = error/std
+      E(z) = exp(-z^2/2)
 
     This REQUIRES knowing truth - you can't compute E from observations alone.
     """
     estimate = np.mean(observations)
     error = abs(estimate - truth)
-    # E is inverse of error, normalized
-    # E = 1 when perfect, E → 0 as error → ∞
-    return 1.0 / (1.0 + error)
+    # Likelihood-shaped compatibility: z = error/std, E(z) = exp(-z^2/2)
+    std = max(float(np.std(observations)), 0.001)
+    z = error / std
+    return float(np.exp(-0.5 * (z ** 2)))
 
 
 def compute_grad_S(observations: np.ndarray) -> float:
     """Local dispersion - how much do observations disagree?"""
-    return np.std(observations) + 1e-10
+    return max(float(np.std(observations)), 0.001)
 
 
 def compute_R(observations: np.ndarray, truth: float,
@@ -316,7 +319,8 @@ if __name__ == "__main__":
     print("Q1 FINAL: E = Amount of Truth")
     print("=" * 70)
 
-    if test1 and test2:
+    success = bool(test1 and test2)
+    if success:
         print("""
 ANSWER TO Q1: Why grad_S?
 
@@ -338,12 +342,14 @@ For truth:
   - Result: HIGH R, act with confidence
 
 WHY grad_S works: It measures the RELIABILITY of the truth signal.
-  - High E + Low grad_S = reliable truth → HIGH R
-  - High E + High grad_S = unreliable truth → MEDIUM R
-  - Low E + anything = no truth → LOW R
+  - High E + Low grad_S = reliable truth -> HIGH R
+  - High E + High grad_S = unreliable truth -> MEDIUM R
+  - Low E + anything = no truth -> LOW R
 
 The formula prevents entropy by refusing to act on low R.
 Echo chambers have low R because E is low (wrong).
 """)
     else:
         print("\nTests did not fully confirm. Need more investigation.")
+
+    exit(0 if success else 1)

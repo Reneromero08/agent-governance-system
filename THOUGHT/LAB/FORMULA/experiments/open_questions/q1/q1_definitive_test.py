@@ -37,7 +37,8 @@ def test_1_dimensional_analysis():
     print("=" * 70)
 
     print("""
-    E = 1/(1+error) is DIMENSIONLESS (bounded 0 to 1)
+    E must be DIMENSIONLESS (bounded 0 to 1), so it must depend on a dimensionless error ratio
+    (e.g., z = error/scale or z = error/std), not on raw error with units.
     std has UNITS of the measurement (meters, seconds, etc.)
 
     To combine them, we need dimensional consistency:
@@ -112,33 +113,21 @@ def test_3_scale_behavior():
     AXIOM 3: Scale Behavior
 
     If we change units (multiply all measurements by k):
-    - std -> k * std
+    - std   -> k * std
     - error -> k * error
-    - E = 1/(1+error) -> 1/(1+k*error) (changes with scale!)
 
-    Wait - E changes with scale. This complicates things.
+    If E is defined via a DIMENSIONLESS ratio (as it must be), e.g.:
+      z = error/std
+      E = E(z)
 
-    Actually, if we measure in different units:
-    - Observations: x -> k*x
-    - Truth: T -> k*T
-    - Error: |mean - T| -> k*|mean - T|
-    - E: 1/(1+error) -> 1/(1+k*error)
-    - std: -> k*std
+    Then z is invariant under unit changes:
+      z' = (k*error) / (k*std) = z
 
-    For E/std:
-    R = [1/(1+k*error)] / (k*std) = 1/[k*std*(1+k*error)]
+    So E is invariant, and only the normalization changes:
+      E/std   -> (1/k) * (E/std)    (linear)
+      E/std^2 -> (1/k^2) * (E/std^2) (quadratic)
 
-    For E/std^2:
-    R = [1/(1+k*error)] / (k*std)^2 = 1/[k^2*std^2*(1+k*error)]
-
-    Neither is scale-invariant because E depends on absolute error!
-
-    BUT - if we compare RELATIVE changes:
-    For E/std: R scales as 1/k when error >> 1 (dominated by k*error in denominator)
-    For E/std^2: R scales as 1/k^2 when error >> 1
-
-    Linear (1/k) vs quadratic (1/k^2) scaling.
-    Linear is more natural for comparing across scales.
+    Linear scaling (n=1) preserves comparisons across unit systems.
     """
     print("\n" + "=" * 70)
     print("AXIOM 3: Scale Behavior")
@@ -168,7 +157,9 @@ def test_3_scale_behavior():
         std_obs = np.std(scaled_obs)
 
         error = abs(mean_obs - scaled_truth)
-        E = 1.0 / (1.0 + error)
+        std_obs = max(std_obs, 1e-12)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
 
         R_std = E / std_obs
         R_var = E / (std_obs ** 2)
@@ -232,7 +223,8 @@ def test_4_free_energy_optimality():
 
     for error in np.linspace(0.1, 5.0, 20):
         for std in np.linspace(0.5, 3.0, 20):
-            E = 1.0 / (1.0 + error)
+            z = error / std
+            E = float(np.exp(-0.5 * (z ** 2)))
 
             R_std = E / std
             R_var = E / (std ** 2)
@@ -360,7 +352,9 @@ def test_6_why_not_alternatives():
         iqr_obs = np.percentile(observations, 75) - np.percentile(observations, 25)
 
         error = abs(mean_obs - truth)
-        E = 1.0 / (1.0 + error)
+        std_obs = max(std_obs, 1e-12)
+        z = error / std_obs
+        E = float(np.exp(-0.5 * (z ** 2)))
 
         # Free energy
         F = (error ** 2) / (2 * std_obs ** 2) + 0.5 * np.log(2 * np.pi * std_obs ** 2)

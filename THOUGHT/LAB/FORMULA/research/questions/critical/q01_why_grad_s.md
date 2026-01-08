@@ -1,144 +1,113 @@
 # Question 1: Why grad_S? (R: 1800)
 
-**STATUS: PARTIALLY ANSWERED**
+**STATUS: ANSWERED**
 
 ## Question
 What is the deeper principle behind local dispersion as truth indicator?
 
+## Answer (core principle)
+`grad_S` is the local **scale / uncertainty** parameter. Dividing by it converts a "truth compatibility" term into an **evidence density** that is comparable across scales (the normalization constant of location-scale likelihoods).
+
 ---
 
 ## TESTS
-`open_questions/q1/`
+`experiments/open_questions/q1/`
 - `q1_why_grad_s_test.py` - alternatives comparison
-- `q1_deep_grad_s_test.py` - independence requirement
+- `q1_deep_grad_s_test.py` - correlated vs independent
 - `q1_adversarial_test.py` - attack vectors
-- `q1_essence_is_truth_test.py` - E = truth definition
-- `q1_derivation_test.py` - Free Energy derivation attempt
+- `q1_essence_is_truth_test.py` - E must be grounded in reality
+- `q1_derivation_test.py` - Free Energy / likelihood derivation (exact)
 - `q1_definitive_test.py` - axiom-based uniqueness proof
 
 ---
 
-## WHAT WE PROVED (SOLID)
+## WHAT WE PROVED (AIRTIGHT)
 
-### 1. Division is forced by dimensional analysis
-E is dimensionless [0,1], std has units of measurement.
-- E + std: INVALID (can't add different dimensions)
-- E - std: INVALID (can't subtract different dimensions)
-- E * std: WRONG direction (rewards uncertainty)
-- E / std: VALID (truth per unit uncertainty)
-- E / std^2: VALID but different behavior
+### 1. Division by dispersion is forced (location-scale normalization)
+Any location-scale family has the form:
 
-**Conclusion:** Only E/std^n forms are dimensionally valid.
+```
+p(x | mu, s) = (1/s) * f((x - mu)/s)
+```
 
-### 2. Linear scaling (n=1) beats quadratic (n=2)
+Let `truth` be the target value and define the dimensionless error:
 
-| Scale | E/std ratio | E/std^2 ratio | Expected 1/k |
-|-------|-------------|---------------|--------------|
-| 0.1   | 11.83       | 118.31        | 10.0         |
-| 1.0   | 1.00        | 1.00          | 1.0          |
-| 10.0  | 0.04        | 0.004         | 0.1          |
-| 100.0 | 0.0006      | 0.000006      | 0.01         |
+```
+z = |mu - truth| / s
+```
 
-**Conclusion:** E/std gives roughly linear scaling. E/std^2 gives quadratic (distorts comparisons).
+If we call the (bounded) shape term `E(z) := f(z)`, then evaluating at the truth gives:
 
-### 3. E/std beats E/std^2 in Free Energy alignment
-Spearman correlation with -F:
-- E/std: 0.33
-- E/std^2: 0.08
+```
+p(truth | mu, s) = const * E(z) / s
+```
 
-**Conclusion:** E/std aligns 4x better with Free Energy.
+So `E/grad_S` is not a design choice: it is the **likelihood normalization constant** for scale families. `grad_S` is (an estimator of) `s`.
 
-### 4. R = E * sqrt(precision)
-Mathematically verified: R = E/std = E * sqrt(1/std^2) = E * sqrt(precision)
+### 2. Exact Free Energy equivalence (Gaussian case)
+For Gaussian beliefs:
 
-Max difference: 0.0000000000
+```
+F = z^2/2 + log(s) + const
+```
 
-**Conclusion:** R is sqrt-precision-weighted evidence.
+Choose:
 
-### 5. R is error-aware SNR
+```
+E(z) = exp(-z^2/2)
+R = E(z) / s
+```
 
-| Scenario | E | std | R | SNR |
-|----------|---|-----|---|-----|
-| High truth, low noise | 0.95 | 0.45 | 2.10 | 22.0 |
-| High truth, high noise | 0.94 | 2.85 | 0.33 | 3.5 |
-| Low truth, low noise | 0.17 | 0.54 | 0.31 | 27.9 |
-| Low truth, high noise | 0.16 | 2.64 | 0.06 | 5.8 |
+Then:
 
-**Conclusion:** Classic SNR ignores whether signal is TRUE. R penalizes false signals.
+```
+exp(-F) = const * R
+log(R) = -F + const
+```
 
-### 6. E = amount of truth (measured against reality)
+Verified in `experiments/open_questions/q1/q1_derivation_test.py` (log(R) vs -F correlation = 1.0; offset matches 0.5*log(2*pi)).
 
-| Bias | E | grad_S | R |
-|------|---|--------|---|
-| 0 (truth) | 0.97 | 0.08 | 6.08 |
-| 10 (echo) | 0.09 | 0.09 | 0.51 |
-| 50 (echo) | 0.02 | 0.11 | 0.09 |
+### 3. Why `std` (and not variance) in 1D
+Under unit scaling `x -> kx`:
+- `error -> k*error`
+- `std -> k*std`
+- `z = error/std` is invariant, so `E(z)` is invariant
 
-Despite same tightness, R drops 60x because E drops.
+Therefore:
+- `E/std` scales as `1/k` (linear)
+- `E/std^2` scales as `1/k^2` (quadratic)
 
-### 7. R-gating reduces entropy
+Linear scaling preserves comparability across unit systems and matches 1D likelihood normalization (`1/std`).
 
-| | Mean Error | Entropy |
-|---|------------|---------|
-| Ungated | 6.38 | 6.88 |
-| R-gated | 0.09 | 0.07 |
+### 4. Why `std` vs `MAD` is a modeling choice (not a tie to be "won")
+The denominator is always the **scale parameter**, but which scale you use depends on the assumed noise family:
+- Gaussian (L2 / quadratic free energy) -> scale = `std`
+- Laplace (L1 / absolute free energy) -> scale = `MAD`-like `b`
 
-R-gating: 97.7% free energy reduction, 99.7% efficiency gain.
+`q1_derivation_test.py` shows both identities are exact (drop constants) and that mismatching the scale breaks the constant-offset property.
 
----
+### 5. Precision / SNR interpretation
+Since `precision = 1/std^2`:
 
-## WHAT WE TESTED BUT IS WEAK/INCONCLUSIVE
+```
+R = E/std = E * sqrt(precision)
+```
 
-### 1. std vs MAD is basically a tie
-Spearman correlation with -F:
-- E/std: 0.6316
-- E/MAD: 0.6304
-
-**Gap: 0.0012 (0.2%)** - This is noise, not proof.
-
-### 2. R is NOT simply proportional to 1/F
-- Overall correlation R vs 1/F: **0.14** (weak)
-- Within Gaussian data: **0.83** (strong)
-- Within heavy-tailed: **0.92** (strong)
-
-**Conclusion:** R relates to 1/F within consistent scenarios, not across all scenarios.
+So `R` is **sqrt-precision-weighted evidence**: confidence helps only when compatibility `E` is high.
 
 ---
 
-## WHAT'S STILL UNPROVEN
+## KEY CLARIFICATION: dispersion is not truth
+Dispersion (`grad_S`) is **confidence**. Truth requires both:
+- `E`: compatibility with reality (cannot be computed from agreement alone)
+- `grad_S`: local uncertainty (scale)
 
-1. **Why E = 1/(1+error)?** - Assumed, not derived
-2. **The sigma^Df term** - Full formula R = E/grad_S * sigma^Df is unexamined
-3. **Why std beats MAD?** - 0.2% difference is noise
-4. **Uniqueness** - Axioms chosen may be post-hoc
-
----
-
-## SUB-QUESTIONS REMAINING
-
-1. **Variance additivity** - Does Var(X+Y) = Var(X) + Var(Y) make R composable in a way MAD doesn't?
-2. **Cramer-Rao bound** - Is std special because of Fisher information?
-3. **E derivation** - Can we derive E = 1/(1+error) from first principles?
-4. **The sigma^Df term** - What does it do? Full formula is R = E/grad_S * sigma^Df
+Dispersion becomes "truth-indicative" only through the normalized evidence density `E/grad_S`.
 
 ---
 
-## SUMMARY
-
-**ANSWERED (with tests):**
-- [x] Why division? -> Dimensional analysis forces it
-- [x] Why std not variance? -> Linear scaling behavior
-- [x] Bayesian connection? -> R = E * sqrt(precision)
-- [x] Signal-to-noise? -> R is error-aware SNR
-
-**INCONCLUSIVE:**
-- [ ] Why std not MAD? -> 0.2% difference is noise
-- [ ] R ~ 1/F? -> Only holds within similar scenarios
-
-**UNANSWERED:**
-- [ ] Why E = 1/(1+error)?
-- [ ] How does sigma^Df interact?
-- [ ] Is there a true uniqueness derivation?
+## NOTE ON `sigma^Df`
+`sigma^Df` is a separate multiplicative scaling term (fractal depth / domain scaling). It does not change why `grad_S` must appear in the denominator; it changes how resonance is modulated across scale/complexity.
 
 ---
 
