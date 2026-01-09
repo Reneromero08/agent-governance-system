@@ -130,6 +130,47 @@ class GuardedWriter:
         """
         self.firewall.safe_mkdir(path, kind="durable", parents=parents, exist_ok=exist_ok)
 
+    def _is_tmp_path(self, path: str | Path) -> bool:
+        """Check if path is in tmp domain based on configured tmp_roots."""
+        norm_path = str(path).replace("\\", "/")
+        for tmp_root in self.firewall.tmp_roots:
+            if norm_path.startswith(tmp_root + "/") or norm_path == tmp_root:
+                return True
+        return False
+
+    def write_auto(self, path: str | Path, data: str | bytes) -> None:
+        """
+        Write to automatic domain (tmp or durable based on path).
+
+        Args:
+            path: Path to write (relative to project_root)
+            data: Data to write (str or bytes)
+
+        Raises:
+            FirewallViolation: If write violates firewall policy
+        """
+        if self._is_tmp_path(path):
+            self.write_tmp(path, data)
+        else:
+            self.write_durable(path, data)
+
+    def mkdir_auto(self, path: str | Path, parents: bool = True, exist_ok: bool = True) -> None:
+        """
+        Create directory in automatic domain (tmp or durable based on path).
+
+        Args:
+            path: Directory path (relative to project_root)
+            parents: Create parent directories if needed
+            exist_ok: Don't raise if directory exists
+
+        Raises:
+            FirewallViolation: If mkdir violates firewall policy
+        """
+        if self._is_tmp_path(path):
+            self.mkdir_tmp(path, parents=parents, exist_ok=exist_ok)
+        else:
+            self.mkdir_durable(path, parents=parents, exist_ok=exist_ok)
+
     def open_commit_gate(self) -> None:
         """
         Open the commit gate to allow durable writes.

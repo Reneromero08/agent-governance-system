@@ -21,6 +21,10 @@ All notable changes to Agent Governance System will be documented in this file.
 - **LAW/CONTRACTS/runner.py** — Fix fixture output directory to tmp domain
   - Changed output from `RUNS_DIR / "fixtures"` to `RUNS_DIR / "_tmp" / "fixtures"`
   - Resolves FIREWALL_TMP_WRITE_WRONG_DOMAIN errors
+- **CAPABILITY/TOOLS/utilities/guarded_writer.py** — Add write_auto/mkdir_auto methods
+  - New `write_auto()` method automatically detects tmp vs durable domain based on path
+  - New `mkdir_auto()` method automatically detects tmp vs durable domain
+  - Helper `_is_tmp_path()` checks if path matches configured tmp_roots
 - **All skill run.py files** — Replace write_tmp/write_durable/mkdir_tmp/mkdir_durable with write_auto/mkdir_auto
   - Enables automatic tmp vs durable domain detection based on path
   - Fixes FIREWALL_TMP_WRITE_WRONG_DOMAIN and FIREWALL_DURABLE_WRITE_WRONG_DOMAIN errors
