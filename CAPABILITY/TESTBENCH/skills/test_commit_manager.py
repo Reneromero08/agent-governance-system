@@ -293,6 +293,7 @@ class TestMissingOperationField:
 # ============================================================================
 
 
+@pytest.mark.xdist_group("serial_commit_manager")
 class TestQueueOperationValidation:
     """Test validation specific to the queue operation."""
 
@@ -363,6 +364,7 @@ class TestQueueOperationValidation:
         assert returncode != 0, "Expected non-zero returncode for invalid queue_id"
 
 
+@pytest.mark.xdist_group("serial_commit_manager")
 class TestSummarizeOperationValidation:
     """Test validation specific to the summarize operation."""
 

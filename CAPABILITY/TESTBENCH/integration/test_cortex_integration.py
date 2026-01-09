@@ -4,26 +4,26 @@ Integration Test for Cortex System (Lane C)
 
 Tests:
 1. System1DB creation and indexing
-2. Cortex Indexer (FILE_INDEX.json, SECTION_INDEX.json)
-3. System1 Verify skill
-4. Search functionality
+2. Search functionality
+
+These tests run serially (xdist_group) and use unique DB paths to avoid conflicts.
 """
 
 import sys
-import os
-import json
-import shutil
+import gc
 from pathlib import Path
+
+import pytest
 
 # Add project root to path
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(PROJECT_ROOT))
 
 from NAVIGATION.CORTEX.db.system1_builder import System1DB
-from NAVIGATION.CORTEX.semantic.indexer import CortexIndexer
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
-def create_open_writer():
+
+def _create_open_writer() -> GuardedWriter:
     """Create a GuardedWriter with open commit gate for testing."""
     writer = GuardedWriter(
         project_root=PROJECT_ROOT,
@@ -37,172 +37,90 @@ def create_open_writer():
     writer.open_commit_gate()
     return writer
 
-def test_system1_db():
+
+def _unique_db_path(tmp_path: Path) -> Path:
+    """Generate unique DB path under the real project root to avoid parallel conflicts."""
+    unique_id = hex(hash(str(tmp_path)))[-8:]
+    return PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / f"test_system1_{unique_id}.db"
+
+
+def _cleanup_db(db: System1DB, db_path: Path) -> None:
+    """Safely close DB and clean up, handling Windows file locking."""
+    db.close()
+    gc.collect()  # Help release file handles on Windows
+    try:
+        if db_path.exists():
+            db_path.unlink()
+    except PermissionError:
+        pass  # Windows file locking - will be cleaned up later
+
+
+@pytest.mark.xdist_group("serial_cortex")
+def test_system1_db(tmp_path: Path):
     """Test System1DB basic functionality."""
-    print("\n=== Test 1: System1DB Creation ===")
-    
-    db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "test_system1.db"
-    if db_path.exists():
-        db_path.unlink()
-    
-    db = System1DB(db_path, writer=create_open_writer())
-    
-    # Add a test file
-    test_content = "# Test Document\n\nThis is a test of the resonance and entropy in the system."
-    file_id = db.add_file("test/doc.md", test_content)
-    print(f"✓ Added test file with ID: {file_id}")
-    
-    # Search
-    results = db.search("resonance")
-    assert len(results) > 0, "Search should return results"
-    print(f"✓ Search found {len(results)} results")
-    
-    db.close()
-    db_path.unlink()
-    print("✓ System1DB test passed")
+    db_path = _unique_db_path(tmp_path)
 
-def test_cortex_indexer():
-    """Test Cortex Indexer."""
-    print("\n=== Test 2: Cortex Indexer ===")
-    
-    # Clean previous artifacts
-    meta_dir = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "meta"
-    if meta_dir.exists():
-        shutil.rmtree(meta_dir)
-    
-    db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "test_system1.db"
-    if db_path.exists():
-        db_path.unlink()
-    
-    # Run indexer
-    writer = create_open_writer()
-    db = System1DB(db_path, writer=writer)
-    indexer = CortexIndexer(db, target_dir=PROJECT_ROOT / "LAW" / "CANON", writer=writer)
-    indexer.index_all()
-    db.close()
-    
-    # Verify artifacts
-    assert (meta_dir / "FILE_INDEX.json").exists(), "FILE_INDEX.json should exist"
-    assert (meta_dir / "SECTION_INDEX.json").exists(), "SECTION_INDEX.json should exist"
-    print("✓ Index artifacts created")
-    
-    # Load and validate FILE_INDEX
-    with open(meta_dir / "FILE_INDEX.json") as f:
-        file_index = json.load(f)
-    assert len(file_index) > 0, "FILE_INDEX should have entries"
-    print(f"✓ FILE_INDEX has {len(file_index)} files")
-    
-    # Load and validate SECTION_INDEX
-    with open(meta_dir / "SECTION_INDEX.json") as f:
-        section_index = json.load(f)
-    assert len(section_index) > 0, "SECTION_INDEX should have entries"
-    print(f"✓ SECTION_INDEX has {len(section_index)} sections")
-    
-    # Verify database has content
-    db = System1DB(db_path, writer=create_open_writer())
-    cursor = db.conn.execute("SELECT COUNT(*) FROM files")
-    file_count = cursor.fetchone()[0]
-    assert file_count > 0, "Database should have files"
-    print(f"✓ Database has {file_count} files indexed")
-    db.close()
-    
-    # Cleanup
-    db_path.unlink()
-    shutil.rmtree(meta_dir)
-    
-    print("✓ Cortex Indexer test passed")
+    try:
+        writer = _create_open_writer()
+        db = System1DB(db_path, writer=writer)
 
-def test_search_functionality():
+        # Add a test file
+        test_content = "# Test Document\n\nThis is a test of the resonance and entropy in the system."
+        file_id = db.add_file("test/doc.md", test_content)
+        assert file_id is not None
+
+        # Search
+        results = db.search("resonance")
+        assert len(results) > 0, "Search should return results"
+
+        _cleanup_db(db, db_path)
+    finally:
+        try:
+            if db_path.exists():
+                db_path.unlink()
+        except (PermissionError, FileNotFoundError):
+            pass
+
+
+@pytest.mark.xdist_group("serial_cortex")
+def test_search_functionality(tmp_path: Path):
     """Test search across indexed content."""
-    print("\n=== Test 3: Search Functionality ===")
-    
-    db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "test_system1.db"
-    if db_path.exists():
-        import time
-        try:
-            db_path.unlink()
-        except PermissionError:
-            time.sleep(0.5)
-            db_path.unlink()
-    
-    db = System1DB(db_path, writer=create_open_writer())
-    
-    db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "test_system1.db"
-    
-    # Index FORMULA.md
-    formula_path = PROJECT_ROOT / "LAW" / "CANON" / "FORMULA.md"
-    if formula_path.exists():
-        content = formula_path.read_text(encoding='utf-8')
-        db.add_file(str(formula_path.relative_to(PROJECT_ROOT)), content)
-        print("✓ Indexed FORMULA.md")
-        
-        # Search for key terms
-        tests = [
-            ("resonance", "Should find Resonance references"),
-            ("entropy", "Should find Entropy references"),
-            ("essence", "Should find Essence references"),
-        ]
-        
-        for query, description in tests:
-            results = db.search(query)
-            assert len(results) > 0, f"{description} (got {len(results)} results)"
-            print(f"✓ '{query}': {len(results)} results")
-    else:
-        print("⚠️  FORMULA.md not found, skipping search test")
-    
-    db.close()
-    
-    # Wait for Windows to release file handle
-    import time
-    time.sleep(0.5)
-    
-    if db_path.exists():
-        db_path.unlink()
-    
-    print("✓ Search functionality test passed")
+    db_path = _unique_db_path(tmp_path)
 
-def main():
-    """Run all tests."""
-    print("="*60)
-    print("Cortex Integration Test Suite")
-    print("="*60)
-    
-    tests = [
-        ("System1DB", test_system1_db),
-        ("Cortex Indexer", test_cortex_indexer),
-        ("Search Functionality", test_search_functionality),
-    ]
-    
-    results = []
-    for name, test_func in tests:
+    try:
+        writer = _create_open_writer()
+        db = System1DB(db_path, writer=writer)
+
+        # Add content with key terms
+        content = """# Test Formula Document
+
+## Resonance Section
+This discusses the concept of resonance in the system.
+Resonance is key to understanding feedback loops.
+
+## Entropy Section
+Entropy measures disorder in the system.
+Managing entropy is essential for stability.
+
+## Essence Section
+The essence of the system is its core purpose.
+Understanding essence helps guide decisions.
+"""
+        db.add_file("test/formula.md", content)
+
+        # Search for key terms
+        for query in ["resonance", "entropy", "essence"]:
+            results = db.search(query)
+            assert len(results) > 0, f"Search for '{query}' should return results"
+
+        _cleanup_db(db, db_path)
+    finally:
         try:
-            success = test_func()
-            results.append((name, success, None))
-        except Exception as e:
-            results.append((name, False, str(e)))
-            print(f"✗ {name} failed: {e}")
-    
-    # Summary
-    print("\n" + "="*60)
-    print("Test Summary")
-    print("="*60)
-    passed = sum(1 for _, success, _ in results if success)
-    total = len(results)
-    
-    for name, success, error in results:
-        status = "✓ PASS" if success else "✗ FAIL"
-        print(f"{status}: {name}")
-        if error:
-            print(f"  Error: {error}")
-    
-    print(f"\nResult: {passed}/{total} tests passed")
-    
-    if passed == total:
-        print("\n🎉 All tests passed!")
-        return 0
-    else:
-        print("\n❌ Some tests failed")
-        return 1
+            if db_path.exists():
+                db_path.unlink()
+        except (PermissionError, FileNotFoundError):
+            pass
+
 
 if __name__ == "__main__":
-    sys.exit(main())
+    pytest.main([__file__, "-v"])

@@ -98,6 +98,7 @@ def work_area():
     shutil.rmtree(base, ignore_errors=True)
 
 
+@pytest.mark.xdist_group("serial_restore_runner")
 def test_restore_rejects_when_verifier_strict_fails(work_area):
     run_dir = work_area / "bad-bundle"
     run_dir.mkdir()
@@ -114,6 +115,7 @@ def test_restore_rejects_when_verifier_strict_fails(work_area):
     assert not any(p.exists() for p in (work_area / "dest").iterdir())
 
 
+@pytest.mark.xdist_group("serial_restore_runner")
 def test_restore_success_emits_artifacts_and_matches_hashes(work_area):
     run_id = "success"
     run_dir = work_area / run_id
@@ -154,6 +156,7 @@ def test_restore_success_emits_artifacts_and_matches_hashes(work_area):
     assert report_bytes == _canonical_json_bytes(expected_report)
 
 
+@pytest.mark.xdist_group("serial_restore_runner")
 def test_restore_rollback_failure_returns_restore_rollback_failed(work_area, monkeypatch):
     import CAPABILITY.PRIMITIVES.restore_runner as rr
 
