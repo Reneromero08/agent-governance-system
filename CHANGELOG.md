@@ -12,6 +12,7 @@ All notable changes to Agent Governance System will be documented in this file.
 - **GitHub Actions CI** — Fix failing workflows
   - Add pyyaml and numpy to requirements.txt
   - Fix cortex.build.py sys.path order (GuardedWriter import)
+  - Fix catalytic_verifier.py REPO_ROOT calculation for CI environment
   - Stop tracking generated Cortex files (cortex.db, SECTION_INDEX.json)
   - Restrict pytest to CAPABILITY/TESTBENCH to avoid legacy tests
   - Skip phase6 tests on CI (require complex env setup, pass locally)

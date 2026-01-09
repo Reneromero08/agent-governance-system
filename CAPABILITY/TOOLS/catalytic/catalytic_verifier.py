@@ -46,9 +46,10 @@ import sys
 from pathlib import Path
 from typing import List
 
-# Add CATALYTIC-DPT to path
-REPO_ROOT = Path(__file__).parent.parent
-sys.path.insert(0, str(REPO_ROOT / "CATALYTIC-DPT"))
+# Ensure project root is in path for imports
+REPO_ROOT = Path(__file__).resolve().parents[3]
+if str(REPO_ROOT) not in sys.path:
+    sys.path.insert(0, str(REPO_ROOT))
 
 from CAPABILITY.PRIMITIVES.verify_bundle import BundleVerifier
 
