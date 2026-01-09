@@ -4,6 +4,32 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.34] - 2026-01-09
+
+### Phase 5.2.4 COMPLETE — SCL Validator
+
+**Added:**
+- `CAPABILITY/PRIMITIVES/scl_validator.py` — 4-layer validation system
+  - L1: Syntax validation (grammar: RADICAL[OPERATOR][NUMBER][:CONTEXT])
+  - L2: Symbol validation (known radicals, operators, contexts, rules)
+  - L3: Semantic validation (operator semantics, param constraints)
+  - L4: Expansion validation (JobSpec schema, allowed roots, forbidden ops)
+- `validate_scl()` — Main API for program validation
+- `validate_expansion()` — JobSpec schema validation
+- `validate_program_list()` — Batch validation
+- CLI with `--level`, `--jobspec`, `--batch` options
+- `test_phase_5_2_4_scl_validator.py` — 38 tests passing
+
+**Validation Features:**
+- CJK semantic symbols (法, 真, 契, etc.)
+- Compact macro notation (C3, I5, C*, C&I)
+- Context tags (C3:build, G:audit)
+- Compound expressions (C&I, L.C.3)
+- JobSpec schema enforcement from LAW/SCHEMAS/jobspec.schema.json
+- Output root enforcement (C8/I6: _runs/, _generated/, _packs/, etc.)
+
+---
+
 ## [3.7.33] - 2026-01-08
 
 ### Phase 5.2.3.1 COMPLETE — Stacked Symbol Resolution

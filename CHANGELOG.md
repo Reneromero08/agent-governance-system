@@ -1,8 +1,22 @@
-<!-- CONTENT_HASH: 3.7.33_PENDING -->
+<!-- CONTENT_HASH: 3.7.34_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.34] - 2026-01-09
+
+### Added
+- **Phase 5.2.4: SCL Validator** — 4-layer symbolic program validation
+  - L1: Syntax validation (RADICAL[OPERATOR][NUMBER][:CONTEXT])
+  - L2: Symbol validation (known radicals, operators, rules)
+  - L3: Semantic validation (operator semantics, param constraints)
+  - L4: Expansion validation (JobSpec schema, output roots)
+  - API: `validate_scl()`, `validate_expansion()`, `validate_program_list()`
+  - CLI: `--level`, `--jobspec`, `--batch` options
+  - Tests: 38 passing
 
 ---
 
