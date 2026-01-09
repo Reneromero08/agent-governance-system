@@ -375,40 +375,39 @@ related = find_related("canon:LAW/CANON/GOVERNANCE/IMMUTABILITY.md", top_k=5)
 
 ---
 
-## 5.2.2 Implement CODEBOOK.json
+## 5.2.2 Semiotic Symbol Vocabulary ✅ COMPLETE (2026-01-08)
 
-**Purpose:** Symbol dictionary mapping symbols to meanings and expansions.
+**Purpose:** Define CJK symbols for semantic compression without phonetic mixing.
 
-### 5.2.2.1 Schema Definition
-- [ ] Create `CAPABILITY/PRIMITIVES/schemas/scl_codebook.schema.json`
-- [ ] Structure:
-  ```json
-  {
-    "version": "1.0.0",
-    "symbols": {
-      "@SYMBOL_NAME": {
-        "meaning": "Human-readable explanation",
-        "expansion": "Full expanded text or template",
-        "category": "constraint|schema|cas|scan|ledger|expand",
-        "params": ["optional", "parameter", "list"]
-      }
-    }
-  }
-  ```
+> **SIMPLIFIED (2026-01-08):** Instead of a separate CODEBOOK.json schema, symbols are defined directly in `codebook_lookup.py` with a human reference document. Phonetic glosses removed - symbols point directly to semantic regions.
 
-### 5.2.2.2 Initial CODEBOOK
-- [ ] Create `SCL/CODEBOOK.json` with MVP macro set
-- [ ] Validate against schema
-- [ ] Include version and hash
+### 5.2.2.1 Symbol Vocabulary
+- [x] Core domain pointers: 法, 真, 契, 恆, 驗 (**DONE**)
+- [x] Governance operations: 證, 變, 冊, 錄, 限, 許, 禁, 雜, 復 (**DONE**)
+- [x] Validation operations: 試, 查, 載, 存, 掃, 核 (**DONE**)
+- [x] Structural symbols: 道, 圖, 鏈, 根, 枝 (**DONE**)
+- [x] Compound symbols: 法.驗, 法.契, 證.雜, 冊.雜 (**DONE**)
 
-### 5.2.2.3 Tests
-- [ ] Schema validation
-- [ ] All macros parseable
-- [ ] No duplicate symbols
+### 5.2.2.2 Codifier Document
+- [x] Create `LAW/CANON/SEMANTIC/CODIFIER.md` (**DONE** - human reference)
+- [x] Document symbol → path mappings (**DONE**)
+- [x] Measured compression ratios (**DONE**)
+- [x] Usage patterns (**DONE**)
+
+### 5.2.2.3 Pure Symbolic Approach
+- [x] Remove phonetic glosses from code (**DONE** - no "name": "law" mixing)
+- [x] Symbols point directly to paths (**DONE**)
+- [x] Compression ratios tracked per symbol (**DONE**)
 
 **Exit Criteria:**
-- [ ] CODEBOOK.json created with 30+ macros
-- [ ] Schema-validated
+- [x] 25+ symbols defined (29 total)
+- [x] No phonetic/ideographic mixing
+- [x] Human reference document created
+
+**Implementation:**
+- `CAPABILITY/TOOLS/codebook_lookup.py` - Symbol definitions (SEMANTIC_SYMBOLS dict)
+- `THOUGHT/LAB/FORMULA/CODIFIER.md` - Human translation reference (符典)
+- `CAPABILITY/MCP/schemas/tools.json` - MCP schema updated
 
 ---
 

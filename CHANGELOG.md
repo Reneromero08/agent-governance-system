@@ -6,6 +6,31 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.28] - 2026-01-08
+
+### Added
+- **Phase 5.2.2: Semiotic Symbol Vocabulary** — Pure symbolic compression without phonetic mixing
+  - **29 CJK symbols** covering governance domains, operations, validation, and structure
+  - `THOUGHT/LAB/FORMULA/CODIFIER.md` — Human reference document (the 符典)
+  - **Symbol categories:**
+    - Core domains: 法, 真, 契, 恆, 驗 (up to 56,370× compression)
+    - Operations: 證, 變, 冊, 錄, 限, 許, 禁, 雜, 復
+    - Validation: 試, 查, 載, 存, 掃, 核
+    - Structural: 道, 圖, 鏈, 根, 枝
+    - Compounds: 法.驗, 法.契, 證.雜, 冊.雜
+
+### Changed
+- **CAPABILITY/TOOLS/codebook_lookup.py** — Removed phonetic glosses (oxymoronic mixing)
+  - Symbols now point directly to semantic regions without `"name": "law"` fields
+  - Pure symbolic output: 符 (symbol), 類 (type), 路 (path), 壓 (compression)
+- **CAPABILITY/MCP/schemas/tools.json** — Updated codebook_lookup schema for pure symbolic approach
+
+### Principle
+> Mixing ideographic symbols with phonetic glosses defeats compression purpose.
+> The symbol 法 IS the compressed meaning — it doesn't need "(law)" to explain it.
+
+---
+
 ## [3.7.27] - 2026-01-08
 
 ### Added
