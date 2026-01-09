@@ -87,7 +87,7 @@ def _atomic_write_bytes(path: Path, data: bytes, writer: Any = None) -> None:
              # We will attempt durable write if possible (requires open gate), fallback to tmp?
              # Or just try write_durable and rely on caller to open gate.
              # Actually, let's expose writer to main and open gate there.
-             writer.write_durable(rel_path, data)
+             writer.write_auto(rel_path, data)
              return
         except Exception as e:
             # Fallback for now? No, strict.

@@ -91,7 +91,7 @@ def main(input_path: Path, output_path: Path) -> int:
         writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
         writer.open_commit_gate()
         
-        writer.write_durable(str(output_path), json.dumps(result, indent=2))
+        writer.write_auto(str(output_path), json.dumps(result, indent=2))
         return 0
 
     except Exception as e:
@@ -103,7 +103,7 @@ def main(input_path: Path, output_path: Path) -> int:
         if GuardedWriter:
              writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"]) 
              writer.open_commit_gate()
-             writer.write_durable(str(output_path), json.dumps(error_result, indent=2))
+             writer.write_auto(str(output_path), json.dumps(error_result, indent=2))
         return 1
 
 if __name__ == "__main__":

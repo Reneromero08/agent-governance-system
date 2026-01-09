@@ -42,8 +42,8 @@ def main(input_path: Path, output_path: Path) -> int:
         writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
         
         rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
-        writer.mkdir_tmp(str(Path(rel_output_path).parent))
-        writer.write_tmp(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(Path(rel_output_path).parent))
+        writer.write_auto(rel_output_path, json.dumps(output_data, indent=2, sort_keys=True))
     except ImportError:
         print("GuardedWriter not found")
         return 1

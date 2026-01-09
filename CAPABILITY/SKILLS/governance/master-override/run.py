@@ -53,8 +53,8 @@ def _append_log(log_path: Path, entry: Dict[str, Any], writer: Any) -> None:
         content = log_path.read_text(encoding="utf-8")
     content += json.dumps(entry, ensure_ascii=False) + "\n"
     
-    writer.mkdir_durable(str(log_path.parent))
-    writer.write_durable(str(log_path), content)
+    writer.mkdir_auto(str(log_path.parent))
+    writer.write_auto(str(log_path), content)
 
 
 def _tail_jsonl(log_path: Path, limit: int) -> List[Dict[str, Any]]:
@@ -100,8 +100,8 @@ def main(input_path: Path, output_path: Path) -> int:
 
     if token != "MASTER_OVERRIDE":
         result = {"ok": False, "action": action or None, "error": "unauthorized", "log_path": log_path_rel}
-        writer.mkdir_durable(str(output_path.parent))
-        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(output_path.parent))
+        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
     if action == "log":
@@ -118,12 +118,12 @@ def main(input_path: Path, output_path: Path) -> int:
         result = {"ok": True, "action": "read", "log_path": log_path_rel, "entries": entries}
     else:
         result = {"ok": False, "action": action or None, "error": "unknown_action", "log_path": log_path_rel}
-        writer.mkdir_durable(str(output_path.parent))
-        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(output_path.parent))
+        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
-    writer.mkdir_durable(str(output_path.parent))
-    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    writer.mkdir_auto(str(output_path.parent))
+    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 

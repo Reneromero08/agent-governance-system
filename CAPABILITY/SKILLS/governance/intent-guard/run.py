@@ -35,14 +35,14 @@ def _setup_pipeline(pipeline_id: str, runs_root: str, writer: Any) -> Path:
         shutil.rmtree(pipeline_dir) # scanner: rmtree (policy allows for pipeline reset)
     
     step_dir = pipeline_dir / "steps" / "step1"
-    writer.mkdir_durable(str(step_dir))
+    writer.mkdir_auto(str(step_dir))
     
     jobspec_path = step_dir / "JOBSPEC.json"
     jobspec_bytes = canonical_json_bytes({"step": "step1"})
     # Convert bytes to latin1 string for transparent write if writer only supports str?
     # Or just use write_bytes if writer supported it. GuardedWriter takes str.
     # use decode('utf-8') if json.
-    writer.write_durable(str(jobspec_path), jobspec_bytes.decode('utf-8'))
+    writer.write_auto(str(jobspec_path), jobspec_bytes.decode('utf-8'))
     
     pipeline_spec = {
         "pipeline_id": pipeline_id,
@@ -56,9 +56,9 @@ def _setup_pipeline(pipeline_id: str, runs_root: str, writer: Any) -> Path:
             }
         ],
     }
-    writer.mkdir_durable(str(pipeline_dir))
+    writer.mkdir_auto(str(pipeline_dir))
     # PIPELINE.json write
-    writer.write_durable(str(pipeline_dir / "PIPELINE.json"), canonical_json_bytes(pipeline_spec).decode('utf-8'))
+    writer.write_auto(str(pipeline_dir / "PIPELINE.json"), canonical_json_bytes(pipeline_spec).decode('utf-8'))
     return pipeline_dir
 
 
@@ -106,7 +106,7 @@ def main(input_path: Path, actual_path: Path) -> int:
         "repeat_same": intent_data == intent_data_2,
         "admission_rc": admit_res.returncode,
     }
-    writer.write_durable(
+    writer.write_auto(
         str(actual_path),
         json.dumps(actual, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     )

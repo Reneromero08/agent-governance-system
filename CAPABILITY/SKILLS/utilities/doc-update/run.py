@@ -63,7 +63,7 @@ def write_json(path: Path, payload: Dict, writer: GuardedWriter) -> None:
         # The safest is to try tmp, then durable if that fails? No, that's ambiguous.
         # Given this is "doc-update", it produces a plan.
         # Let's assume tmp write for skill output.
-        writer.write_tmp(rel_path, json.dumps(payload, indent=2))
+        writer.write_auto(rel_path, json.dumps(payload, indent=2))
     else:
         raise RuntimeError("GuardedWriter required for write_json")
 

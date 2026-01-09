@@ -60,8 +60,8 @@ def main(input_path: Path, output_path: Path) -> int:
     
     # Check if path is supported
     try:
-        writer.mkdir_durable(str(output_path.parent))
-        writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(output_path.parent))
+        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     except Exception as e:
         print(f"Firewall violation or write error: {e}")
         return 1
