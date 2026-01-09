@@ -404,6 +404,8 @@ def run_scifact_benchmark(
     strict: bool = True,
     min_z: Optional[float] = None,
     min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
 ) -> BenchmarkResult:
     print("\n[Q32:P2] Loading SciFact...")
     examples = load_scifact(max_claims=400, seed=seed)
@@ -419,6 +421,7 @@ def run_scifact_benchmark(
     # Pass if M(obs, correct_check) > M(obs, wrong_check) with significant margin.
     M_correct: List[float] = []
     M_wrong: List[float] = []
+    neighbor_sims: List[float] = []
 
     # For each pair, build observation sets as support scores from sentences.
     # Build observation/check sets with enough samples to avoid degenerate SE=EPS.
@@ -448,6 +451,8 @@ def run_scifact_benchmark(
         raise RuntimeError(f"Too few SciFact SUPPORT examples ({len(support_examples)})")
 
     wrong_bank: List[List[str]] = []
+    # Optional: per-claim bank for neighbor-wrong checks.
+    claim_bank: Dict[int, List[str]] = {}
     for e in support_examples[: (80 if fast else 400)]:
         sampled = sample_sentences_from_doc(
             int(e.doc_id),
@@ -456,8 +461,28 @@ def run_scifact_benchmark(
         )
         if len(sampled) >= 6:
             wrong_bank.append(sampled[:6])
+            claim_bank.setdefault(int(e.claim_id), sampled[:6])
     if len(wrong_bank) < (20 if fast else 80):
         raise RuntimeError(f"Too few SciFact wrong-check pools ({len(wrong_bank)})")
+
+    neighbor_of: Dict[int, int] = {}
+    neighbor_sim_by_claim: Dict[int, float] = {}
+    neighbor_sims: List[float] = []
+    if wrong_checks == "neighbor":
+        claim_ids = sorted({int(e.claim_id) for e in support_examples})
+        claim_text_by_id: Dict[int, str] = {}
+        for e in support_examples:
+            claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
+        texts = [claim_text_by_id[cid] for cid in claim_ids]
+        emb = embed_texts(texts)
+        sim = emb @ emb.T
+        k = max(1, int(neighbor_k))
+        for i, cid in enumerate(claim_ids):
+            order = np.argsort(-sim[i])
+            cand = [claim_ids[int(j)] for j in order[1 : (k + 1)]]
+            if cand:
+                neighbor_of[cid] = int(cand[0])
+                neighbor_sim_by_claim[cid] = float(sim[i, int(order[1])])
 
     for i, ex in enumerate(support_examples):
         sampled = sample_sentences_from_doc(
@@ -472,9 +497,17 @@ def run_scifact_benchmark(
         if len(check_correct_sents) < 4:
             continue
 
-        wrong_sents = wrong_bank[(i + 17) % len(wrong_bank)]
-        if wrong_sents == check_correct_sents:
-            wrong_sents = wrong_bank[(i + 18) % len(wrong_bank)]
+        wrong_sents: Optional[List[str]] = None
+        if wrong_checks == "neighbor":
+            nid = neighbor_of.get(int(ex.claim_id))
+            if nid is not None:
+                wrong_sents = claim_bank.get(int(nid))
+                if wrong_sents is not None:
+                    neighbor_sims.append(float(neighbor_sim_by_claim.get(int(ex.claim_id), float("nan"))))
+        if wrong_sents is None:
+            wrong_sents = wrong_bank[(i + 17) % len(wrong_bank)]
+            if wrong_sents == check_correct_sents:
+                wrong_sents = wrong_bank[(i + 18) % len(wrong_bank)]
 
         obs_scores = sentence_support_scores([ex.claim] * len(obs_sents), obs_sents).tolist()
         check_correct_scores = sentence_support_scores([ex.claim] * len(check_correct_sents), check_correct_sents).tolist()
@@ -505,6 +538,10 @@ def run_scifact_benchmark(
     print(f"  mean(M_correct) = {Mc.mean():.3f}")
     print(f"  mean(M_wrong)   = {Mw.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
 
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
     gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
@@ -514,7 +551,12 @@ def run_scifact_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: SciFact benchmark gates did not pass")
 
-    return BenchmarkResult(name="SciFact", passed=passed, details={"pair_wins": pair_wins, "z": z, "mean_margin": margin})
+    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin}
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            details["mean_neighbor_sim"] = float(nn.mean())
+    return BenchmarkResult(name="SciFact", passed=passed, details=details)
 
 
 def _majority_vote(votes: Sequence[Optional[str]]) -> Optional[str]:
@@ -685,6 +727,8 @@ def run_climate_fever_intervention_benchmark(
     strict: bool = True,
     min_z: Optional[float] = None,
     min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
 ) -> BenchmarkResult:
     """
     Climate-FEVER "bench" version of the same intervention gate used in streaming:
@@ -732,11 +776,15 @@ def run_climate_fever_intervention_benchmark(
     if len(bank) < (30 if fast else 120):
         raise RuntimeError(f"Climate-FEVER wrong-check bank too small ({len(bank)})")
 
+    bank_claim_texts = [c for c, _ in bank]
+    bank_emb = embed_texts(bank_claim_texts) if wrong_checks == "neighbor" else None
+
     indices = np.arange(len(ds))
     rng.shuffle(indices)
 
     M_correct: List[float] = []
     M_wrong: List[float] = []
+    neighbor_sims: List[float] = []
 
     for i in indices:
         ex = ds[int(i)]
@@ -767,9 +815,28 @@ def run_climate_fever_intervention_benchmark(
         if len(check_correct_texts) < 2:
             continue
 
-        other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
-        if other_claim.strip() == claim.strip():
-            other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
+        if wrong_checks == "neighbor" and bank_emb is not None:
+            c_emb = embed_texts([claim])[0]
+            sims = bank_emb @ c_emb
+            k = max(1, int(neighbor_k))
+            order = np.argsort(-sims)
+            cand = []
+            for j in order[1 : (k + 2)]:
+                j = int(j)
+                if bank_claim_texts[j].strip() == claim.strip():
+                    continue
+                cand.append(j)
+                if len(cand) >= 1:
+                    break
+            pick = cand[0] if cand else (int(i) + 17) % len(bank)
+            if bank_claim_texts[int(pick)].strip() == claim.strip():
+                pick = (int(pick) + 1) % len(bank)
+            neighbor_sims.append(float(sims[int(pick)]))
+            other_claim, other_supports = bank[pick]
+        else:
+            other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
+            if other_claim.strip() == claim.strip():
+                other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
         wrong_check_texts = other_supports[:3]
         if len(wrong_check_texts) < 2:
             continue
@@ -800,6 +867,10 @@ def run_climate_fever_intervention_benchmark(
     print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
     print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
 
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
     gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
@@ -809,11 +880,12 @@ def run_climate_fever_intervention_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: Climate-FEVER intervention benchmark gates did not pass")
 
-    return BenchmarkResult(
-        name="Climate-FEVER-Intervention",
-        passed=passed,
-        details={"pair_wins": pair_wins, "z": z, "mean_margin": margin},
-    )
+    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin}
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            details["mean_neighbor_sim"] = float(nn.mean())
+    return BenchmarkResult(name="Climate-FEVER-Intervention", passed=passed, details=details)
 
 
 def parse_args() -> argparse.Namespace:
@@ -875,6 +947,18 @@ def parse_args() -> argparse.Namespace:
         help="SentenceTransformer embedding batch size (default: 32).",
     )
     p.add_argument(
+        "--wrong_checks",
+        choices=["dissimilar", "neighbor"],
+        default="dissimilar",
+        help="How to construct wrong checks: dissimilar topic (default) or nearest-neighbor (J-style).",
+    )
+    p.add_argument(
+        "--neighbor_k",
+        type=int,
+        default=10,
+        help="When --wrong_checks neighbor, choose from top-k nearest neighbors (default: 10).",
+    )
+    p.add_argument(
         "--calibrate_on",
         choices=["climate_fever", "scifact"],
         default="climate_fever",
@@ -913,6 +997,8 @@ def run_climate_fever_streaming(
     strict: bool = True,
     min_z: Optional[float] = None,
     min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
 ) -> BenchmarkResult:
     """
     Phase 4: Real semiosphere dynamics (nonlinear time) + intervention.
@@ -982,7 +1068,9 @@ def run_climate_fever_streaming(
     if len(claim_support_bank) < 50:
         raise RuntimeError(f"Climate-FEVER streaming index too small ({len(claim_support_bank)})")
 
-    # Choose "wrong checks" that are topic-mismatched and empirically incompatible.
+    # Choose "wrong checks":
+    # - dissimilar: topic-mismatched and empirically incompatible
+    # - neighbor: nearest-neighbor competitor (J-style)
     support_claim_texts = [c for c, _ in claim_support_bank]
     support_claim_emb = embed_texts(support_claim_texts)
     claim_emb_cache: Dict[str, np.ndarray] = {}
@@ -993,6 +1081,8 @@ def run_climate_fever_streaming(
             return claim_emb_cache[t]
         claim_emb_cache[t] = embed_texts([t])[0]
         return claim_emb_cache[t]
+
+    neighbor_sims: List[float] = []
 
     for idx in indices:
         ex = ds[int(idx)]
@@ -1022,18 +1112,23 @@ def run_climate_fever_streaming(
         support_scores_preview = sentence_support_scores([claim] * len(support_texts), support_texts).tolist()
         mu_hat_proxy = float(np.mean(np.asarray(support_scores_preview, dtype=float)))
 
-        # Candidate wrong checks: choose dissimilar claims, then pick the pool whose check-mean
-        # most disagrees with the observation mean (collapses E under intervention).
+        # Candidate wrong checks:
+        # - dissimilar: choose least similar claims
+        # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim)
         sims = support_claim_emb @ c_emb
-        order = np.argsort(sims)  # low similarity => more wrong
+        if wrong_checks == "neighbor":
+            order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
+        else:
+            order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        for j in order[:80]:
+        k = max(1, int(neighbor_k)) if wrong_checks == "neighbor" else 80
+        for j in order[: max(80, k + 2)]:
             j = int(j)
             if support_claim_texts[j].strip() == claim.strip():
                 continue
             cand.append(j)
-            if len(cand) >= 6:
+            if len(cand) >= (k if wrong_checks == "neighbor" else 6):
                 break
         if not cand:
             continue
@@ -1056,6 +1151,8 @@ def run_climate_fever_streaming(
         strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
         chosen_pos = int(np.argmax(np.asarray(strength, dtype=float)))
         wrong_check_texts = cand_texts[chosen_pos]
+        if wrong_checks == "neighbor":
+            neighbor_sims.append(float(sims[int(cand[chosen_pos])]))
         if len(wrong_check_texts) < 3:
             continue
 
@@ -1136,6 +1233,8 @@ def run_climate_fever_streaming(
     print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
     print(f"  mean(M_wrong_end)   = {M_wrong_end_a.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if wrong_checks == "neighbor" and neighbor_sims:
+        print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(np.mean(np.asarray(neighbor_sims, dtype=float))):.3f}")
 
     # Strict threshold uses ~p<0.01 (z≈2.576) for "field effect survives intervention" significance.
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
@@ -1167,6 +1266,8 @@ def run_scifact_streaming(
     strict: bool = True,
     min_z: Optional[float] = None,
     min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
 ) -> BenchmarkResult:
     """
     Phase 4 / Phase 3 transfer probe on SciFact.
@@ -1245,10 +1346,9 @@ def run_scifact_streaming(
     if len(support_bank) < (30 if fast else 120):
         raise RuntimeError(f"SciFact support bank too small ({len(support_bank)})")
 
-    # For the intervention, define "wrong checks" as topic-mismatched checks: we select a different claim
-    # whose text is maximally dissimilar (cosine distance in a sentence embedding space), then reuse its
-    # deterministically sampled support sentences. This avoids "top-k by effect" selection while making
-    # the intervention meaningfully wrong.
+    # For the intervention, define "wrong checks":
+    # - dissimilar: topic-mismatched checks (default)
+    # - neighbor: nearest-neighbor competitor checks (J-style)
     support_claim_texts = [c for c, _ in support_bank]
     support_claim_emb = embed_texts(support_claim_texts)
     claim_emb_cache: Dict[str, np.ndarray] = {}
@@ -1261,6 +1361,7 @@ def run_scifact_streaming(
         return claim_emb_cache[t]
 
     samples: List[Tuple[str, List[float], List[float]]] = []
+    neighbor_sims: List[float] = []
     for i, (claim_id, claim_text, doc_id) in enumerate(ex_rows[: (120 if fast else 800)]):
         abstract = corpus_by_id[int(doc_id)].get("abstract", []) or []
         sents = [str(x) for x in abstract if str(x).strip()]
@@ -1276,20 +1377,23 @@ def run_scifact_streaming(
         support_scores_preview = sentence_support_scores([claim_text] * len(support_texts), support_texts).tolist()
         mu_hat_proxy = float(np.mean(np.asarray(support_scores_preview, dtype=float)))
 
-        # Wrong checks: pick a topic-dissimilar claim's sampled sentences.
-        # Among the most dissimilar claims, pick the pool whose sentences are maximally
-        # unsupportive for this claim under the same scorer (deterministic, not top-k from the
-        # claim's own evidence, and makes the intervention meaningfully "wrong").
+        # Wrong checks:
+        # - dissimilar: choose least similar claims
+        # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim_text)
         sims = support_claim_emb @ c_emb
-        order = np.argsort(sims)  # low similarity => more wrong
+        if wrong_checks == "neighbor":
+            order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
+        else:
+            order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        for j in order[:50]:
+        k = max(1, int(neighbor_k)) if wrong_checks == "neighbor" else 50
+        for j in order[: max(50, k + 2)]:
             idx = int(j)
             if support_claim_texts[idx].strip() == claim_text.strip():
                 continue
             cand.append(idx)
-            if len(cand) >= 6:
+            if len(cand) >= (k if wrong_checks == "neighbor" else 6):
                 break
         if not cand:
             continue
@@ -1316,6 +1420,8 @@ def run_scifact_streaming(
         cand_strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
         chosen_pos = int(np.argmax(np.asarray(cand_strength, dtype=float)))
         chosen_idx = cand[chosen_pos]
+        if wrong_checks == "neighbor":
+            neighbor_sims.append(float(sims[int(chosen_idx)]))
         a, b = offsets[chosen_pos]
         wrong_scores_preview = [float(x) for x in flat_scores[a:b]]
         if len(wrong_scores_preview) < 3:
@@ -1383,6 +1489,10 @@ def run_scifact_streaming(
     print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
     print(f"  mean(M_wrong_end)   = {M_wrong_end_a.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
 
     print("\n[Q32:P4] Streaming deltas")
     print(f"  mean dM_correct = {dM_correct_a.mean():.3f}")
@@ -1397,17 +1507,18 @@ def run_scifact_streaming(
         if strict and not fast:
             raise AssertionError("FAIL: SciFact streaming gates did not pass")
 
-    return BenchmarkResult(
-        name="SciFact-Streaming",
-        passed=passed,
-        details={
-            "pair_wins": pair_wins,
-            "z": z,
-            "mean_margin": margin,
-            "mean_dM_correct": float(dM_correct_a.mean()),
-            "mean_dM_wrong": float(dM_wrong_a.mean()),
-        },
-    )
+    details: Dict[str, float] = {
+        "pair_wins": pair_wins,
+        "z": z,
+        "mean_margin": margin,
+        "mean_dM_correct": float(dM_correct_a.mean()),
+        "mean_dM_wrong": float(dM_wrong_a.mean()),
+    }
+    if wrong_checks == "neighbor" and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            details["mean_neighbor_sim"] = float(nn.mean())
+    return BenchmarkResult(name="SciFact-Streaming", passed=passed, details=details)
 
 
 def main() -> int:
@@ -1429,14 +1540,22 @@ def main() -> int:
     results: List[BenchmarkResult] = []
     if args.mode == "bench":
         if args.dataset in ("scifact", "all"):
-            results.append(run_scifact_benchmark(seed=args.seed, fast=args.fast, strict=strict))
+            results.append(
+                run_scifact_benchmark(
+                    seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+            )
         if args.dataset in ("climate_fever", "all"):
             results.append(run_climate_fever_benchmark(seed=args.seed, fast=args.fast, strict=strict))
     elif args.mode == "stream":
         if args.dataset in ("climate_fever", "all"):
-            results.append(run_climate_fever_streaming(seed=args.seed, fast=args.fast, strict=strict))
+            results.append(
+                run_climate_fever_streaming(
+                    seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+            )
         if args.dataset in ("scifact", "all"):
-            results.append(run_scifact_streaming(seed=args.seed, fast=args.fast, strict=strict))
+            results.append(run_scifact_streaming(seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k))
     else:
         # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
         def run_transfer(*, calibrate_on: str, apply_to: str) -> List[BenchmarkResult]:
@@ -1450,13 +1569,21 @@ def main() -> int:
 
             def run_intervention_bench(ds: str, seed: int) -> BenchmarkResult:
                 if ds == "scifact":
-                    return run_scifact_benchmark(seed=seed, fast=args.fast, strict=False)
-                return run_climate_fever_intervention_benchmark(seed=seed, fast=args.fast, strict=False)
+                    return run_scifact_benchmark(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                return run_climate_fever_intervention_benchmark(
+                    seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
 
             def run_intervention_stream(ds: str, seed: int) -> BenchmarkResult:
                 if ds == "scifact":
-                    return run_scifact_streaming(seed=seed, fast=args.fast, strict=False)
-                return run_climate_fever_streaming(seed=seed, fast=args.fast, strict=False)
+                    return run_scifact_streaming(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                return run_climate_fever_streaming(
+                    seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
 
             print(f"\n[Q32:P3] Calibrating on {calibrate_on} (seeds={cal_seeds})")
             cal_bench = [tag_seed(run_intervention_bench(calibrate_on, s), s) for s in cal_seeds]
@@ -1518,16 +1645,67 @@ def main() -> int:
             out: List[BenchmarkResult] = []
             for s in verify_seeds:
                 if apply_to == "scifact":
-                    out.append(tag_seed(enforce_transfer(run_scifact_benchmark(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
-                    out.append(tag_seed(enforce_transfer(run_scifact_streaming(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
-                else:
                     out.append(
                         tag_seed(
-                            enforce_transfer(run_climate_fever_intervention_benchmark(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)),
+                            enforce_transfer(
+                                run_scifact_benchmark(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
                             s,
                         )
                     )
-                    out.append(tag_seed(enforce_transfer(run_climate_fever_streaming(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
+                    out.append(
+                        tag_seed(
+                            enforce_transfer(
+                                run_scifact_streaming(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
+                            s,
+                        )
+                    )
+                else:
+                    out.append(
+                        tag_seed(
+                            enforce_transfer(
+                                run_climate_fever_intervention_benchmark(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
+                            s,
+                        )
+                    )
+                    out.append(
+                        tag_seed(
+                            enforce_transfer(
+                                run_climate_fever_streaming(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
+                            s,
+                        )
+                    )
             return out
 
         if args.mode == "matrix":
