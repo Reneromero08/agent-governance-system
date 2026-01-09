@@ -12,7 +12,7 @@
 |---|----------|---------|--------|--------|
 | 1 | [Why grad_S?](critical/q01_why_grad_s.md) | 1800 | ✅ ANSWERED | `grad_S` is likelihood normalization: use dimensionless `z=error/std`. With Gaussian kernel `E(z)=exp(-z^2/2)` and `R=E/std`, we get exact `log(R) = -F + const` (Gaussian Free Energy). |
 | 2 | [Falsification criteria](critical/q02_falsification_criteria.md) | 1750 | ✅ ANSWERED | Formula measures local agreement correctly. Fails when observations are correlated (echo chambers). Defense: Add fresh data; if R crashes, it was echo chamber. |
-| 3 | [Why does it generalize?](critical/q03_why_generalize.md) | 1720 | ⏳ PARTIAL | Strong cross-domain transfer evidence, but no necessity theorem yet that forces a “deep isomorphism” claim. |
+| 3 | [Why does it generalize?](critical/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Deep isomorphism: R = (E/∇S) × σ^Df captures universal evidence structure. E/∇S is the likelihood (Gaussian/Bernoulli/Quantum). σ^Df captures redundancy (quantum: pure sqrt(N), mixed N). |
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
 | 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ? OPEN | Candidate field `M:=log(R)` + initial falsifiers exist; remains OPEN until public, adversarial, out-of-domain replications pass. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |

@@ -52,26 +52,29 @@ Every task must produce:
 
 **Purpose:** Command-line interface for SCL operations.
 
-### 5.2.5.1 CLI Commands
-- [ ] Create `CAPABILITY/TOOLS/scl/scl_cli.py`
-- [ ] Commands:
+### 5.2.5.1 CLI Commands ✅ COMPLETE (2026-01-09)
+- [x] Create `CAPABILITY/TOOLS/scl/scl_cli.py`
+- [x] Commands:
   - `scl decode <program>` → emit JobSpec JSON
   - `scl validate <program|job.json>` → PASS/FAIL
   - `scl run <program>` → execute with invariant proofs
   - `scl audit <program>` → human-readable expansion
+- [x] Receipt emission for all operations (`--receipt-out`)
+- [x] JSON output mode (`--json`)
+- [x] CJK compound symbol support (法.驗)
 
-### 5.2.5.2 Integration
-- [ ] Register as skill or CLI tool
-- [ ] Emit receipts for all operations
+### 5.2.5.2 Integration ✅ COMPLETE (2026-01-09)
+- [x] Emit receipts for all operations
+- [x] Register as CLI tool (`python -m CAPABILITY.TOOLS.scl`)
 
-### 5.2.5.3 Tests
-- [ ] CLI invocation tests
-- [ ] Output format validation
-- [ ] Error handling
+### 5.2.5.3 Tests ✅ COMPLETE (2026-01-09)
+- [x] CLI invocation tests (45 tests)
+- [x] Output format validation
+- [x] Error handling
 
-**Exit Criteria:**
-- [ ] `scl` CLI functional with all commands
-- [ ] Receipts emitted
+**Exit Criteria:** ✅ ALL MET
+- [x] `scl` CLI functional with all commands
+- [x] Receipts emitted
 
 ---
 

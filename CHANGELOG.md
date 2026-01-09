@@ -1,8 +1,27 @@
-<!-- CONTENT_HASH: 3.7.36_PENDING -->
+<!-- CONTENT_HASH: 3.7.37_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.37] - 2026-01-09
+
+### Added
+- **Phase 5.2.5: SCL CLI** — Complete command-line interface for SCL operations
+  - `scl decode <program>` — Decode SCL program to JobSpec JSON
+  - `scl validate <program|job.json>` — Validate program or JobSpec (PASS/FAIL)
+  - `scl run <program>` — Execute with invariant proofs (I5, I6, C7, C8)
+  - `scl audit <program>` — Human-readable expansion with content preview
+  - Receipt emission for all operations (`--receipt-out`)
+  - JSON output mode (`--json`) for machine-readable output
+  - CJK compound symbol support (法.驗, 證.雜)
+  - Module entry point: `python -m CAPABILITY.TOOLS.scl`
+  - 45 integration tests covering invocation, output format, error handling
+
+### Changed
+- **scl_validator.py** — Added CJK compound pattern support (法.驗 syntax)
 
 ---
 
