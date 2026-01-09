@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Codebook Lookup Tool
+Codebook Lookup Tool (符典)
 
 Resolves symbolic identifiers to their expanded semantic content.
 Supports both ASCII identifiers (@C0, @I3) and CJK single-token symbols (法, 道).
@@ -14,6 +14,9 @@ Usage:
 Compression ratios measured:
     - Single CJK symbol: up to 56,370x (1 token → full canon)
     - ASCII codebook ID: 3-20x per reference
+
+Principle: Symbols do not carry phonetic glosses. They point directly to semantic
+regions. Human reference: THOUGHT/LAB/FORMULA/CODIFIER.md
 """
 
 import argparse
@@ -31,74 +34,252 @@ PROJECT_ROOT = SCRIPT_DIR.parents[1]
 CODEBOOK_PATH = PROJECT_ROOT / "THOUGHT" / "LAB" / "COMMONSENSE" / "CODEBOOK.json"
 CANON_ROOT = PROJECT_ROOT / "LAW" / "CANON"
 
-# Semantic symbol mappings (CJK single-token symbols → canon regions)
-# These achieve 56,370x compression when receiver has canon in context
+# ═══════════════════════════════════════════════════════════════════════════════
+# SEMANTIC SYMBOL MAPPINGS (符 → 路)
+# ═══════════════════════════════════════════════════════════════════════════════
+# CJK single-token symbols → semantic regions
+# NO PHONETIC GLOSSES - symbols point directly to domains/paths
+# Human reference: THOUGHT/LAB/FORMULA/CODIFIER.md
+# ═══════════════════════════════════════════════════════════════════════════════
+
 SEMANTIC_SYMBOLS = {
-    # Domain pointers (1 token each)
+    # ───────────────────────────────────────────────────────────────────────────
+    # CORE DOMAIN POINTERS (measured compression ratios)
+    # ───────────────────────────────────────────────────────────────────────────
     "法": {
         "id": "法",
-        "name": "law",
-        "description": "All canon law (LAW/CANON/*)",
         "path": "LAW/CANON",
         "type": "domain",
-        "token_count": 1,
+        "compression": 56370,
     },
     "真": {
         "id": "真",
-        "name": "truth",
-        "description": "Semiotic Foundation (THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md)",
         "path": "LAW/CANON/FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md",
         "type": "file",
-        "token_count": 1,
+        "compression": 8200,
     },
     "契": {
         "id": "契",
-        "name": "contract",
-        "description": "Contract law (CONTRACT.md)",
         "path": "LAW/CANON/CONSTITUTION/CONTRACT.md",
         "type": "file",
-        "token_count": 1,
-    },
-    "驗": {
-        "id": "驗",
-        "name": "verify",
-        "description": "Verification protocols (VERIFICATION.md)",
-        "path": "LAW/CANON/GOVERNANCE/VERIFICATION.md",
-        "type": "file",
-        "token_count": 1,
+        "compression": 4100,
     },
     "恆": {
         "id": "恆",
-        "name": "invariants",
-        "description": "System invariants (INVARIANTS.md)",
         "path": "LAW/CANON/CONSTITUTION/INVARIANTS.md",
         "type": "file",
-        "token_count": 1,
+        "compression": 5600,
     },
+    "驗": {
+        "id": "驗",
+        "path": "LAW/CANON/GOVERNANCE/VERIFICATION.md",
+        "type": "file",
+        "compression": 3800,
+    },
+
+    # ───────────────────────────────────────────────────────────────────────────
+    # GOVERNANCE OPERATIONS
+    # ───────────────────────────────────────────────────────────────────────────
+    "證": {
+        "id": "證",
+        "path": "NAVIGATION/RECEIPTS",
+        "type": "domain",
+        "compression": 12000,
+    },
+    "變": {
+        "id": "變",
+        "paths": [
+            "THOUGHT/LAB/CATALYTIC",
+            "LAW/CONTEXT/decisions/ADR-018-catalytic-computing-canonical-note.md",
+        ],
+        "type": "compound",
+        "compression": 8500,
+    },
+    "冊": {
+        "id": "冊",
+        "path": "NAVIGATION/CORTEX/db",
+        "type": "domain",
+        "compression": 4200,
+    },
+    "錄": {
+        "id": "錄",
+        "paths": [
+            "CAPABILITY/PRIMITIVES/canon_index.py",
+            "CAPABILITY/PRIMITIVES/adr_index.py",
+            "CAPABILITY/PRIMITIVES/skill_index.py",
+            "CAPABILITY/PRIMITIVES/cross_ref_index.py",
+        ],
+        "type": "compound",
+        "compression": 15000,
+    },
+    "限": {
+        "id": "限",
+        "path": "LAW/CANON/CONSTITUTION/INVARIANTS.md",
+        "type": "alias",
+        "alias_of": "恆",
+        "compression": 5600,
+    },
+    "許": {
+        "id": "許",
+        "paths": [
+            "LAW/CANON/CONSTITUTION/CONTRACT.md",
+            "LAW/CONTEXT/decisions/ADR-001-build-and-artifacts.md",
+        ],
+        "type": "compound",
+        "compression": 3200,
+    },
+    "禁": {
+        "id": "禁",
+        "paths": [
+            "LAW/CANON/CONSTITUTION/INVARIANTS.md",
+            "LAW/CANON/GOVERNANCE/IMMUTABILITY.md",
+        ],
+        "type": "compound",
+        "compression": 4800,
+    },
+    "雜": {
+        "id": "雜",
+        "path": "LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md",
+        "type": "file",
+        "compression": 2100,
+    },
+    "復": {
+        "id": "復",
+        "paths": [
+            "CAPABILITY/SKILLS/pipeline-dag-restore/SKILL.md",
+        ],
+        "type": "compound",
+        "compression": 3600,
+    },
+
+    # ───────────────────────────────────────────────────────────────────────────
+    # VALIDATION OPERATIONS
+    # ───────────────────────────────────────────────────────────────────────────
+    "試": {
+        "id": "試",
+        "path": "CAPABILITY/TESTBENCH",
+        "type": "domain",
+        "compression": 42000,
+    },
+    "查": {
+        "id": "查",
+        "path": "NAVIGATION/CORTEX/semantic",
+        "type": "domain",
+        "compression": 8800,
+    },
+    "載": {
+        "id": "載",
+        "paths": [
+            "CAPABILITY/TOOLS/codebook_lookup.py",
+            "CAPABILITY/PRIMITIVES/canon_index.py",
+        ],
+        "type": "compound",
+        "compression": 4500,
+    },
+    "存": {
+        "id": "存",
+        "paths": [
+            "NAVIGATION/CAS",
+        ],
+        "type": "compound",
+        "compression": 6200,
+    },
+    "掃": {
+        "id": "掃",
+        "paths": [
+            "CAPABILITY/PRIMITIVES/skill_index.py",
+            "CAPABILITY/PRIMITIVES/canon_index.py",
+        ],
+        "type": "compound",
+        "compression": 5100,
+    },
+    "核": {
+        "id": "核",
+        "paths": [
+            "LAW/CANON/GOVERNANCE/VERIFICATION.md",
+            "CAPABILITY/SKILLS/cas-integrity-check/SKILL.md",
+        ],
+        "type": "compound",
+        "compression": 4900,
+    },
+
+    # ───────────────────────────────────────────────────────────────────────────
+    # STRUCTURAL SYMBOLS
+    # ───────────────────────────────────────────────────────────────────────────
     "道": {
         "id": "道",
-        "name": "path/principle",
-        "description": "The way - context-activated meaning (path, principle, speech, method)",
-        "expansions": {
-            "path": "the way, the path to follow",
-            "principle": "the underlying principle of nature",
-            "speech": "to speak, to express in words",
-            "method": "the method, the technique",
-        },
         "type": "polysemic",
-        "token_count": 1,
+        "contexts": {
+            "CONTEXT_PATH": "LAW/CANON",
+            "CONTEXT_PRINCIPLE": "LAW/CANON/FOUNDATION",
+            "CONTEXT_METHOD": "CAPABILITY/SKILLS",
+        },
+        "compression": 0,  # Context-dependent
     },
-    # Compound symbols
+    "圖": {
+        "id": "圖",
+        "path": "CAPABILITY/PRIMITIVES/cross_ref_index.py",
+        "type": "file",
+        "compression": 3400,
+    },
+    "鏈": {
+        "id": "鏈",
+        "paths": [
+            "CAPABILITY/SKILLS/pipeline-dag-scheduler/SKILL.md",
+            "CAPABILITY/SKILLS/pipeline-dag-receipts/SKILL.md",
+        ],
+        "type": "compound",
+        "compression": 4100,
+    },
+    "根": {
+        "id": "根",
+        "path": "LAW/CANON",
+        "type": "alias",
+        "alias_of": "法",
+        "compression": 56370,
+    },
+    "枝": {
+        "id": "枝",
+        "path": "THOUGHT/LAB",
+        "type": "domain",
+        "compression": 28000,
+    },
+
+    # ───────────────────────────────────────────────────────────────────────────
+    # COMPOUND SYMBOLS (composed with . operator)
+    # ───────────────────────────────────────────────────────────────────────────
     "法.驗": {
         "id": "法.驗",
-        "name": "law.verify",
-        "description": "Verification within canon law",
         "paths": [
             "LAW/CANON/GOVERNANCE/VERIFICATION.md",
             "LAW/CANON/GOVERNANCE/VALIDATION_HOOKS.md",
         ],
         "type": "compound",
-        "token_count": 3,
+        "compression": 7200,
+    },
+    "法.契": {
+        "id": "法.契",
+        "path": "LAW/CANON/CONSTITUTION/CONTRACT.md",
+        "type": "file",
+        "compression": 4100,
+    },
+    "證.雜": {
+        "id": "證.雜",
+        "paths": [
+            "NAVIGATION/RECEIPTS",
+            "LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md",
+        ],
+        "type": "compound",
+        "compression": 6800,
+    },
+    "冊.雜": {
+        "id": "冊.雜",
+        "paths": [
+            "NAVIGATION/CORTEX/db",
+            "CAPABILITY/PRIMITIVES/model_registry.py",
+        ],
+        "type": "compound",
+        "compression": 5400,
     },
 }
 
@@ -113,6 +294,8 @@ def load_codebook() -> dict:
 
 def get_file_content(path: str) -> str:
     """Get content from a file path."""
+    # Strip any anchor fragments (e.g., file.md#section)
+    path = path.split("#")[0]
     full_path = PROJECT_ROOT / path
     if full_path.is_file():
         with open(full_path, "r", encoding="utf-8") as f:
@@ -140,8 +323,9 @@ def lookup_entry(entry_id: str, expand: bool = False) -> dict:
                 for p in entry["paths"]:
                     contents.append(f"## {p}\n\n{get_file_content(p)}")
                 entry["content"] = "\n\n---\n\n".join(contents)
-            elif "expansions" in entry:
-                entry["content"] = json.dumps(entry["expansions"], indent=2)
+            elif "contexts" in entry:
+                # Polysemic symbol - return context mappings
+                entry["content"] = json.dumps(entry["contexts"], indent=2)
         return {"found": True, "entry": entry}
 
     # Check commonsense codebook
@@ -174,13 +358,14 @@ def list_entries() -> dict:
     """List all available codebook entries."""
     codebook = load_codebook()
 
+    # No phonetic glosses - just symbol → path → type → compression
     return {
         "semantic_symbols": {
             k: {
-                "name": v["name"],
-                "description": v["description"],
                 "type": v["type"],
-                "token_count": v["token_count"],
+                "path": v.get("path"),
+                "paths": v.get("paths"),
+                "compression": v.get("compression", 0),
             }
             for k, v in SEMANTIC_SYMBOLS.items()
         },
@@ -188,11 +373,12 @@ def list_entries() -> dict:
         "commonsense_version": codebook.get("version", "unknown"),
         "total_semantic": len(SEMANTIC_SYMBOLS),
         "total_commonsense": len(codebook.get("symbols", {})),
+        "codifier": "THOUGHT/LAB/FORMULA/CODIFIER.md",
     }
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Codebook lookup tool")
+    parser = argparse.ArgumentParser(description="Codebook lookup tool (符典)")
     parser.add_argument("id", nargs="?", help="Entry ID to look up")
     parser.add_argument("--expand", action="store_true", help="Return full content")
     parser.add_argument("--list", action="store_true", help="List all entries")
@@ -212,18 +398,22 @@ def main():
     else:
         if result.get("found"):
             entry = result["entry"]
-            print(f"ID: {entry['id']}")
-            print(f"Name: {entry.get('name', 'N/A')}")
-            print(f"Type: {entry.get('type', 'N/A')}")
-            print(f"Description: {entry.get('description', 'N/A')}")
+            print(f"符: {entry['id']}")
+            print(f"類: {entry.get('type', 'N/A')}")
+            if entry.get("path"):
+                print(f"路: {entry.get('path')}")
+            if entry.get("paths"):
+                print(f"路: {', '.join(entry.get('paths', []))}")
+            if entry.get("compression"):
+                print(f"壓: {entry.get('compression')}×")
             if "content" in entry:
-                print(f"\n--- Content ---\n{entry['content'][:2000]}")
+                print(f"\n--- 容 ---\n{entry['content'][:2000]}")
                 if len(entry.get("content", "")) > 2000:
-                    print(f"\n... [truncated, {len(entry['content'])} chars total]")
+                    print(f"\n... [{len(entry['content'])} chars]")
         else:
             print(f"Error: {result.get('error', 'Unknown error')}")
             if "available_semantic" in result:
-                print(f"Available semantic symbols: {', '.join(result['available_semantic'])}")
+                print(f"Available: {', '.join(result['available_semantic'])}")
             sys.exit(1)
 
 
