@@ -1077,6 +1077,21 @@ def run_scifact_streaming(
     if len(support_bank) < (30 if fast else 120):
         raise RuntimeError(f"SciFact support bank too small ({len(support_bank)})")
 
+    # For the intervention, define "wrong checks" as topic-mismatched checks: we select a different claim
+    # whose text is maximally dissimilar (cosine distance in a sentence embedding space), then reuse its
+    # deterministically sampled support sentences. This avoids "top-k by effect" selection while making
+    # the intervention meaningfully wrong.
+    support_claim_texts = [c for c, _ in support_bank]
+    support_claim_emb = embed_texts(support_claim_texts)
+    claim_emb_cache: Dict[str, np.ndarray] = {}
+
+    def claim_embedding(text: str) -> np.ndarray:
+        t = str(text).strip()
+        if t in claim_emb_cache:
+            return claim_emb_cache[t]
+        claim_emb_cache[t] = embed_texts([t])[0]
+        return claim_emb_cache[t]
+
     samples: List[Tuple[str, List[str], List[str]]] = []
     for i, (claim_id, claim_text, doc_id) in enumerate(ex_rows[: (120 if fast else 800)]):
         abstract = corpus_by_id[int(doc_id)].get("abstract", []) or []
@@ -1089,11 +1104,14 @@ def run_scifact_streaming(
         if len(support_texts) < 4:
             continue
 
-        # Wrong checks: pick a different claim's top sentences.
-        other_claim, other_supports = support_bank[(i + 17) % len(support_bank)]
-        if other_claim.strip() == claim_text.strip():
-            other_claim, other_supports = support_bank[(i + 18) % len(support_bank)]
-        wrong_check_texts = other_supports[:6]
+        # Wrong checks: pick a topic-dissimilar claim's sampled sentences.
+        c_emb = claim_embedding(claim_text)
+        sims = support_claim_emb @ c_emb
+        order = np.argsort(sims)  # low similarity => more wrong
+        chosen_idx = int(order[0])
+        if support_claim_texts[chosen_idx].strip() == claim_text.strip() and len(order) > 1:
+            chosen_idx = int(order[1])
+        wrong_check_texts = support_bank[chosen_idx][1][:6]
         if len(wrong_check_texts) < 3:
             continue
 

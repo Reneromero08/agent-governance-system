@@ -12,9 +12,12 @@
   - `...q32_public_benchmarks.py --mode stream --dataset climate_fever --scoring crossencoder`
 - Added SciFact Phase 4 streaming/intervention mode (same gates, no retuning):
   - `...q32_public_benchmarks.py --mode stream --dataset scifact --scoring crossencoder`
-- SciFact benchmark now uses the same “correct check vs wrong check” intervention gate and passes in strict mode:
+- SciFact benchmark now uses the same "correct check vs wrong check" intervention gate and passes in strict mode:
   - `...q32_public_benchmarks.py --mode bench --dataset scifact --scoring crossencoder`
-- Q32 remains OPEN (Phase 3 threshold transfer across modes still pending).
+- Added Phase 3 threshold transfer mode (calibrate once, freeze, then verify other domain without retuning):
+  - `...q32_public_benchmarks.py --mode transfer --calibrate_on climate_fever --apply_to scifact --scoring crossencoder`
+  - `...q32_public_benchmarks.py --mode transfer --calibrate_on scifact --apply_to climate_fever --scoring crossencoder`
+- Q32 remains OPEN (passing Phase 3 is not sufficient for “meaning as field”).
 
 Research changelog for the Living Formula: `R = (E / ∇S) × σ(f)^Df`
 

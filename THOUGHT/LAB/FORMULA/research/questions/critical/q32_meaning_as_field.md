@@ -19,7 +19,7 @@ See `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST
 `experiments/open_questions/q32/`
 - `q32_meaning_field_tests.py` - echo-chamber falsifier, phase-transition gate, propagation/gluing
 - `q32_adversarial_gauntlet.py` - parameter sweeps, noise-family shifts, negative controls, independence intervention
-- `q32_public_benchmarks.py` - public truth-anchors (Climate-FEVER + SciFact), fast-mode CLI, Phase-2 bench + Phase-4 streaming (`--mode bench|stream`)
+- `q32_public_benchmarks.py` - public truth-anchors (Climate-FEVER + SciFact), fast-mode CLI, Phase-2 bench + Phase-4 streaming + Phase-3 threshold transfer (`--mode bench|stream|transfer`)
 
 ---
 
@@ -104,10 +104,12 @@ Run the same falsifiers on public benchmarks with external truth anchors:
 
 **Gate:** echo-chamber falsifier must hold under independence stress; negative controls must fail hard.
 
-### Phase 3 — Cross-domain replication + threshold transfer
+### Phase 3 - Cross-domain replication + threshold transfer
 - Calibrate once (Dataset A), freeze thresholds and mapping, then run Dataset B without re-tuning.
 
-**Gate:** no “works if retuned” passes; that’s not a field invariant.
+**Gate:** no "works if retuned" passes; that's not a field invariant.
+
+**Status (short version):** implemented as `q32_public_benchmarks.py --mode transfer` and currently passes both directions with fixed seed defaults (calibrate `climate_fever`  apply `scifact`, and calibrate `scifact`  apply `climate_fever`).
 
 ### Phase 4 — Real semiosphere dynamics (nonlinear time)
 - Evidence arrives over time; measure `M(t)` and gate transitions.
