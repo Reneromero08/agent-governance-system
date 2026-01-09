@@ -2,8 +2,8 @@
 phase: 0
 task_id: "0.0"
 slug: "sample-prompt"
-policy_canon_sha256: "29ed1cec0104314dea9bb5844e9fd7c15a162313ef7cc3a19e8b898d9cea2624"
-guide_canon_sha256: "9acc1b9772579720e3c8bc19a80a9a3908323b411c6d06d04952323668f4efe4"
+policy_canon_sha256: "308308137b591f9528d9d352d2c2ebf36c37dd7fd2c9a4b7fc6c0fa9060f2906"
+guide_canon_sha256: "c8b6bd0fc275d29d45c0034f6be7c83d1d9324f98c7ec6559072e3691f8271bb"
 depends_on: []
 primary_model: "Claude Sonnet (Thinking)"
 fallback_chain: ["Claude Opus (Thinking)"]

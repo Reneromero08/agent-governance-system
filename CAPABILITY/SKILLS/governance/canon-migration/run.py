@@ -127,7 +127,7 @@ def main(input_path: Path, output_path: Path) -> int:
             print("Error: GuardedWriter not available")
             return 1
             
-        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
+        writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
         writer.open_commit_gate()
         success, log, warnings = apply_migrations(pack_path, target_version, writer)
         result = {
@@ -144,11 +144,13 @@ def main(input_path: Path, output_path: Path) -> int:
         return 1
         
     if 'writer' not in locals():
-         writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
+         writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
          writer.open_commit_gate()
 
-    writer.mkdir_auto(str(output_path.parent))
-    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    # Convert absolute path to relative path from repo root
+    rel_output_path = output_path.resolve().relative_to(PROJECT_ROOT)
+    writer.mkdir_auto(str(rel_output_path.parent))
+    writer.write_auto(str(rel_output_path), json.dumps(result, indent=2, sort_keys=True))
     
     # Always return 0 if we produced valid output - fixtures validate correctness
     print("Migration skill completed")

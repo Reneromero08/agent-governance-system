@@ -24,7 +24,7 @@ try:
 except ImportError:
     GuardedWriter = None
 
-INVARIANTS_FILE = PROJECT_ROOT / "LAW" / "CANON" / "INVARIANTS.md"
+INVARIANTS_FILE = PROJECT_ROOT / "LAW" / "CANON" / "CONSTITUTION" / "INVARIANTS.md"
 
 
 def main(input_path: Path, output_path: Path) -> int:
@@ -45,7 +45,7 @@ def main(input_path: Path, output_path: Path) -> int:
             "found_invariants": [],
             "missing": expected,
             "valid": False,
-            "error": "CANON/INVARIANTS.md not found"
+            "error": "CANON/CONSTITUTION/INVARIANTS.md not found"
         }
     else:
         content = INVARIANTS_FILE.read_text(encoding="utf-8")
@@ -66,11 +66,13 @@ def main(input_path: Path, output_path: Path) -> int:
         print("Error: GuardedWriter not available")
         return 1
 
-    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
 
-    writer.mkdir_auto(str(output_path.parent))
-    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    # Convert absolute path to relative path from repo root
+    rel_output_path = output_path.resolve().relative_to(PROJECT_ROOT)
+    writer.mkdir_auto(str(rel_output_path.parent))
+    writer.write_auto(str(rel_output_path), json.dumps(result, indent=4, sort_keys=True))
     
     if result["valid"]:
         print(f"All {len(expected)} invariants present")

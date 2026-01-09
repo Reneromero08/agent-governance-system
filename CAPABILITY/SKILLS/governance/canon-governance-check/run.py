@@ -50,17 +50,19 @@ def _write_json(path: Path, obj: Dict[str, Any]) -> None:
         print("Error: GuardedWriter not available")
         sys.exit(1)
         
-    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
-    
-    writer.mkdir_auto(str(path.parent))
+
+    # Convert absolute path to relative path from repo root
+    rel_path = path.resolve().relative_to(PROJECT_ROOT)
+    writer.mkdir_auto(str(rel_path.parent))
     # _canonical_json_bytes returns bytes. write_durable expects string?
     # Actually GuardedWriter.write_durable calls write_firewall.validate_write which calls resolve... and finally writes content.
     # If I pass bytes to content, it might fail if GuardedWriter implementation assumes str.
     # But usually json dumps is ASCII compatible.
     # I will decode bytes or use json dumps directly.
     content = json.dumps(obj, sort_keys=True, separators=(",", ":"))
-    writer.write_auto(str(path), content)
+    writer.write_auto(str(rel_path), content)
 
 
 def _deterministic_check(changed_files: List[str]) -> Dict[str, Any]:

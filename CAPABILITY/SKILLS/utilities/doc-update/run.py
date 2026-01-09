@@ -3,6 +3,11 @@ import json
 import sys
 from pathlib import Path
 from typing import Dict, List
+
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 try:
     from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
     from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
@@ -101,10 +106,11 @@ def main() -> int:
     }
 
     # Initialize GuardedWriter
-    # Heuristic for project root: 4 levels up
-    project_root = Path(__file__).resolve().parents[4]
+    if GuardedWriter is None:
+        print("Failed to initialize GuardedWriter: import failed")
+        return 1
     try:
-        writer = GuardedWriter(project_root, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+        writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
         # We are writing to output_path which is likely in _runs/_tmp or similar.
     except Exception:
         print("Failed to initialize GuardedWriter")

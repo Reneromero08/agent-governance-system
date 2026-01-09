@@ -6,6 +6,30 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.30] - 2026-01-08
+
+### Fixed
+- **guarded_writer._is_tmp_path()** — Handle absolute paths correctly
+  - Convert absolute paths to relative paths before comparing against tmp_roots
+  - Fixes FIREWALL_DURABLE_WRITE_WRONG_DOMAIN errors in fixture execution
+- **master-override run.py** — Fix VERSIONING.md path lookup
+  - Check LAW/CANON/GOVERNANCE/VERSIONING.md first (new location)
+- **intent.py** — Use mkdir_auto/write_auto instead of durable variants
+  - Fixes firewall violations in intent-guard fixtures
+- **doc-merge-batch-skill** — Fix subprocess import path and relative output handling
+  - Add project root to sys.path for subprocess invocation
+  - Handle both absolute and relative output paths correctly
+- **prompt-runner fixtures** — Update SHA256 hashes to match current canon files
+  - Updated policy_canon_sha256 and guide_canon_sha256 values
+- **invariant-freeze fixtures** — Update expected.json with INV-016 through INV-020
+- **reset_system1.py** — Handle Windows file lock gracefully with try/except
+- **Various skill run.py files** — Add tmp_roots parameter for test fixture paths
+
+### Changed
+- All 21+ contract fixture failures resolved — full CI gate now passes
+
+---
+
 ## [3.7.29] - 2026-01-08
 
 ### Fixed

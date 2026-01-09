@@ -74,7 +74,7 @@ def main(input_path: Path, actual_path: Path) -> int:
         print("Error: GuardedWriter not available")
         return 1
 
-    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
 
     pipeline_dir = _setup_pipeline(pipeline_id, runs_root, writer)
@@ -106,8 +106,10 @@ def main(input_path: Path, actual_path: Path) -> int:
         "repeat_same": intent_data == intent_data_2,
         "admission_rc": admit_res.returncode,
     }
+    # Convert absolute path to relative path from repo root
+    rel_actual_path = actual_path.resolve().relative_to(PROJECT_ROOT)
     writer.write_auto(
-        str(actual_path),
+        str(rel_actual_path),
         json.dumps(actual, sort_keys=True, separators=(",", ":"), ensure_ascii=False)
     )
     return 0
