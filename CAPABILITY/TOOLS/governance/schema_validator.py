@@ -81,7 +81,11 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
             # Strip asterisks, colon, and normalize to lowercase with underscores
             key = key_with_stars.strip('*:').lower().replace(' ', '_')
             value = match.group(2).strip()
-            
+
+            # Skip if already set from frontmatter (frontmatter takes priority)
+            if key in metadata:
+                continue
+
             # Handle list-like values [val1, val2]
             if value.startswith("[") and value.endswith("]"):
                 try:
@@ -100,6 +104,10 @@ def extract_markdown_metadata(content: str) -> Dict[str, Any]:
             match_bare = re.search(r'^([A-Z][A-Za-z0-9_]+):\s*(.*)$', line.strip())
             if match_bare:
                 key = match_bare.group(1).lower().replace(" ", "_")
+
+                # Skip if already set from frontmatter (frontmatter takes priority)
+                if key in metadata:
+                    continue
                 value = match_bare.group(2).strip()
                 
                 # Handle list-like values [val1, val2]

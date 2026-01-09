@@ -1,6 +1,8 @@
 ---
 name: skill-creator
 version: "0.1.0"
+status: "Active"
+required_canon_version: ">=3.0.0"
 description: Guide for creating effective skills. This skill should be used when users want to create a new skill (or update an existing skill) that extends Claude's capabilities with specialized knowledge, workflows, or tool integrations.
 ---
 

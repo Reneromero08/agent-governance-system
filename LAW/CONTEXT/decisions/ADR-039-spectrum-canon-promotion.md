@@ -1,3 +1,14 @@
+---
+id: "ADR-039"
+title: "SPECTRUM Canon Promotion"
+status: "Accepted"
+date: "2026-01-07"
+confidence: "High"
+impact: "High"
+deciders: ["System architects"]
+tags: ["spectrum", "canon", "promotion", "cryptographic"]
+---
+
 # ADR-039: SPECTRUM Canon Promotion
 
 **Status**: Accepted
