@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-CAP = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+CAP = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
 
 
 def _rm(path: Path) -> None:
@@ -42,7 +42,7 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
     # The v1 capability is pinned to a concrete ant-worker command that expects these files.
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -62,8 +62,8 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
         encoding="utf-8",
     )
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "pipeline-ags-capability-pins-ok-s1-a1"
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-pins-ok-s1-a1"
 
     try:
         _rm(pipeline_dir)
@@ -84,13 +84,13 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
             ),
             encoding="utf-8",
         )
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
 
-        r_verify = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_verify = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify.returncode == 0, r_verify.stdout + r_verify.stderr
     finally:
         _rm(pipeline_dir)
@@ -109,10 +109,10 @@ def test_known_but_unpinned_rejects_at_route(tmp_path: Path) -> None:
     env = dict(os.environ)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     try:
         _rm(pipeline_dir)
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
         assert r_route.returncode != 0
         assert "CAPABILITY_NOT_PINNED" in (r_route.stdout + r_route.stderr)
     finally:
@@ -121,9 +121,9 @@ def test_known_but_unpinned_rejects_at_route(tmp_path: Path) -> None:
 
 def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
     pipeline_id = "ags-capability-pins-verify-bypass"
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     run_id = "pipeline-ags-capability-pins-verify-bypass-s1-a1"
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / run_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
 
     pins_path = tmp_path / "PINS.json"
     pins_path.write_bytes(_canon({"pins_version": "1.0.0", "allowed_capabilities": []}))
@@ -131,7 +131,7 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
     env = dict(os.environ)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -160,14 +160,14 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
         plan_ok = tmp_path / "plan_ok.json"
         plan_ok.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
         r_route_ok = subprocess.run(
-            [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id],
+            [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok), "--pipeline-id", pipeline_id],
             cwd=str(REPO_ROOT),
             capture_output=True,
             text=True,
         )
         assert r_route_ok.returncode == 0, r_route_ok.stdout + r_route_ok.stderr
         r_run_ok = subprocess.run(
-            [sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"],
+            [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"],
             cwd=str(REPO_ROOT),
             capture_output=True,
             text=True,
@@ -175,7 +175,7 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
         assert r_run_ok.returncode == 0, r_run_ok.stdout + r_run_ok.stderr
 
         # Now enforce an empty pin set at verify time.
-        r_verify = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_verify = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify.returncode != 0
         assert "CAPABILITY_NOT_PINNED" in r_verify.stdout
     finally:

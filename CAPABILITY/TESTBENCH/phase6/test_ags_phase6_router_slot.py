@@ -8,7 +8,7 @@ from pathlib import Path
 
 import pytest
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _rm(path: Path) -> None:
@@ -22,7 +22,7 @@ def _rm(path: Path) -> None:
 
 
 def _run_ags(args: list[str]) -> subprocess.CompletedProcess[str]:
-    cmd = [sys.executable, "-m", "TOOLS.ags", *args]
+    cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", *args]
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True)
 
 
@@ -33,8 +33,8 @@ def _valid_jobspec(*, tmp_root: str) -> dict:
         "task_type": "pipeline_execution",
         "intent": "router produced step",
         "inputs": {},
-        "outputs": {"durable_paths": [f"CORTEX/_generated/_tmp/{tmp_root}_noop.txt"], "validation_criteria": {}},
-        "catalytic_domains": [f"CONTRACTS/_runs/_tmp/{tmp_root}/domain"],
+        "outputs": {"durable_paths": [f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt"], "validation_criteria": {}},
+        "catalytic_domains": [f"LAW/CONTRACTS/_runs/_tmp/{tmp_root}/domain"],
         "determinism": "deterministic",
     }
 
@@ -85,20 +85,20 @@ def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
     assert b1 == b2
 
     # Route + run should succeed using the validated plan output.
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     try:
         _rm(pipeline_dir)
-        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
-        _rm(REPO_ROOT / f"CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
+        _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+        _rm(REPO_ROOT / f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
 
-        rr = _run_ags(["route", "--plan", str(plan_out), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
+        rr = _run_ags(["route", "--plan", str(plan_out), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
         assert rr.returncode == 0, rr.stdout + rr.stderr
-        run = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs", "--strict"])
+        run = _run_ags(["run", "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs", "--strict"])
         assert run.returncode == 0, run.stdout + run.stderr
     finally:
         _rm(pipeline_dir)
-        _rm(REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
-        _rm(REPO_ROOT / f"CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
+        _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
+        _rm(REPO_ROOT / f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
 
 
 def test_ags_plan_fails_on_stderr(tmp_path: Path) -> None:
@@ -155,7 +155,7 @@ def test_ags_route_rejects_invalid_plan_schema(tmp_path: Path) -> None:
             }
         )
     )
-    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
+    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
     assert r.returncode != 0
 
 
@@ -186,6 +186,6 @@ def test_ags_route_rejects_missing_step_command(tmp_path: Path) -> None:
         json.dumps({"steps": [{"step_id": "s1", "jobspec": _valid_jobspec(tmp_root="ags_router_missing_cmd")}]}),
         encoding="utf-8",
     )
-    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "CONTRACTS/_runs"])
+    r = _run_ags(["route", "--plan", str(plan_path), "--pipeline-id", pipeline_id, "--runs-root", "LAW/CONTRACTS/_runs"])
     assert r.returncode != 0
     assert "MISSING_STEP_COMMAND" in r.stderr

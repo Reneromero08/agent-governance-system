@@ -8,7 +8,7 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _rm(path: Path) -> None:
@@ -35,7 +35,7 @@ def test_mcp_adapter_ant_worker_e2e_and_tamper_detected(tmp_path: Path) -> None:
     tmp_root = "ags_mcp_adapter_ant_worker"
 
     # Workspace for this test's artifacts (all under allowed roots).
-    work_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
+    work_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / tmp_root
     src_path = work_root / "in.txt"
     dst_path = work_root / "out.txt"
     task_path = tmp_path / "task.json"
@@ -70,7 +70,7 @@ def test_mcp_adapter_ant_worker_e2e_and_tamper_detected(tmp_path: Path) -> None:
         "name": "ant-worker-copy",
         "command": [
             sys.executable,
-            "CATALYTIC-DPT/SKILLS/ant-worker/scripts/run.py",
+            "CAPABILITY/SKILLS/agents/ant-worker/scripts/run.py",
             str(task_path),
             str(result_path),
         ],
@@ -86,8 +86,8 @@ def test_mcp_adapter_ant_worker_e2e_and_tamper_detected(tmp_path: Path) -> None:
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps(plan), encoding="utf-8")
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-{step_id}-a1"
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-{step_id}-a1"
 
     try:
         _rm(pipeline_dir)
@@ -96,14 +96,14 @@ def test_mcp_adapter_ant_worker_e2e_and_tamper_detected(tmp_path: Path) -> None:
         (work_root / "domain").mkdir(parents=True, exist_ok=True)
         src_path.write_bytes(src_bytes)
 
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id])
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id])
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"])
+        r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"])
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
 
         r_verify_ok = _run(
-            [sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"]
+            [sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"]
         )
         assert r_verify_ok.returncode == 0, r_verify_ok.stdout + r_verify_ok.stderr
 
@@ -113,7 +113,7 @@ def test_mcp_adapter_ant_worker_e2e_and_tamper_detected(tmp_path: Path) -> None:
         dst_path.write_bytes(out_bytes[:-1] + bytes([out_bytes[-1] ^ 0x01]))
 
         r_verify_bad = _run(
-            [sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"]
+            [sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"]
         )
         assert r_verify_bad.returncode != 0
         assert "FAIL" in r_verify_bad.stdout
