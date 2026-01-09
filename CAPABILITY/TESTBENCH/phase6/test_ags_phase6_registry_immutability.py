@@ -7,11 +7,11 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _run_ags(args: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[str]:
-    cmd = [sys.executable, "-m", "TOOLS.ags", *args]
+    cmd = [sys.executable, "-m", "CAPABILITY.TOOLS.ags", *args]
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
 
@@ -20,7 +20,7 @@ def _canon(obj: object) -> bytes:
 
 
 def test_registry_duplicate_capability_hash_rejects(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
     # Duplicate keys inside capabilities object (must be detected via object_pairs_hook).
     raw = (
         '{"registry_version":"1.0.0","capabilities":{'
@@ -48,7 +48,7 @@ def test_registry_duplicate_capability_hash_rejects(tmp_path: Path) -> None:
 
 
 def test_registry_noncanonical_json_rejects(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
     obj = {"registry_version": "1.0.0", "capabilities": {cap: {"adapter_spec_hash": cap, "adapter": {}}}}
     reg_path = tmp_path / "CAPABILITIES.json"
     reg_path.write_text(json.dumps(obj, indent=2, sort_keys=True) + "\n", encoding="utf-8")
@@ -70,7 +70,7 @@ def test_registry_noncanonical_json_rejects(tmp_path: Path) -> None:
 
 
 def test_registry_tamper_detected_fail_closed(tmp_path: Path) -> None:
-    cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
     reg_path = tmp_path / "CAPABILITIES.json"
     # Canonical bytes but internally inconsistent (hash mismatch) -> tampered.
     obj = {

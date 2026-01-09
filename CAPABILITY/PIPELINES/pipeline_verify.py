@@ -64,7 +64,7 @@ def _canonical_json_bytes(obj: Any) -> bytes:
 
 
 def _load_capabilities_registry(*, project_root: Path) -> Dict[str, Any]:
-    rel = os.environ.get("CATALYTIC_CAPABILITIES_PATH", "CATALYTIC-DPT/CAPABILITIES.json")
+    rel = os.environ.get("CATALYTIC_CAPABILITIES_PATH", "CAPABILITY/CONFIG/CAPABILITIES.json")
     path = Path(rel)
     if not path.is_absolute():
         path = project_root / path
@@ -81,7 +81,7 @@ def _load_capabilities_registry(*, project_root: Path) -> Dict[str, Any]:
 
 
 def _load_pins(*, project_root: Path) -> Dict[str, Any]:
-    rel = os.environ.get("CATALYTIC_PINS_PATH", "CATALYTIC-DPT/CAPABILITY_PINS.json")
+    rel = os.environ.get("CATALYTIC_PINS_PATH", "CAPABILITY/CONFIG/CAPABILITY_PINS.json")
     path = Path(rel)
     if not path.is_absolute():
         path = project_root / path
@@ -116,7 +116,7 @@ def _load_revokes_snapshot(*, project_root: Path, pipeline_dir: Path) -> set[str
     if not isinstance(revoked, list) or not all(isinstance(x, str) and _HEX64_RE.fullmatch(x) is not None for x in revoked):
         raise ValueError("POLICY_INVALID")
 
-    rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CATALYTIC-DPT/CAPABILITY_REVOKES.json")
+    rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CAPABILITY/CONFIG/CAPABILITY_REVOKES.json")
     path = Path(rel)
     if not path.is_absolute():
         path = project_root / path

@@ -8,8 +8,8 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
-CAP = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+REPO_ROOT = Path(__file__).resolve().parents[3]
+CAP = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
 
 
 def _rm(path: Path) -> None:
@@ -31,7 +31,7 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
 
 
 def _prepare_ant_worker_inputs(*, label: str) -> None:
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -64,10 +64,10 @@ def test_revoked_capability_rejects_at_route(tmp_path: Path) -> None:
     env = dict(os.environ)
     env["CATALYTIC_REVOKES_PATH"] = str(revokes_path)
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     try:
         _rm(pipeline_dir)
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
         assert r_route.returncode != 0
         assert "REVOKED_CAPABILITY" in (r_route.stdout + r_route.stderr)
     finally:
@@ -90,9 +90,9 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
     env_verify = dict(os.environ)
     env_verify["CATALYTIC_REVOKES_PATH"] = str(revoked_revokes)
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-historical-ok-s1-a1"
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-historical-ok-s1-a1"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
         _rm(pipeline_dir)
@@ -100,14 +100,14 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
         _rm(reg_root)
         _prepare_ant_worker_inputs(label="PHASE69-HISTORICAL\n")
 
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env_route)
+        r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env_route)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
 
         # After revocation, historical pipeline verification must still pass.
-        r_verify = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env_verify)
+        r_verify = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env_verify)
         assert r_verify.returncode == 0, r_verify.stdout + r_verify.stderr
     finally:
         _rm(pipeline_dir)
@@ -131,9 +131,9 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
     env_run_verify = dict(os.environ)
     env_run_verify["CATALYTIC_REVOKES_PATH"] = str(revoked_revokes)
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-post-reject-s1-a1"
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-post-reject-s1-a1"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
         _rm(pipeline_dir)
@@ -142,11 +142,11 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
         _prepare_ant_worker_inputs(label="PHASE69-POST\n")
 
         # Route before revocation (allowed).
-        r_route = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
+        r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
         # Execute + verify after revocation: pipeline verify must fail closed based on POLICY snapshot.
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env_run_verify)
+        r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env_run_verify)
         assert r_run.returncode != 0
         assert "REVOKED_CAPABILITY" in (r_run.stdout + r_run.stderr)
     finally:

@@ -1,8 +1,21 @@
-<!-- CONTENT_HASH: 3.7.31_PENDING -->
+<!-- CONTENT_HASH: 3.7.32_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.32] - 2026-01-08
+
+### Fixed
+- **Phase 6 test paths** — Update tests for new repo structure
+  - REPO_ROOT now uses `parents[3]` instead of `parents[2]`
+  - Module path updated from `TOOLS.ags` to `CAPABILITY.TOOLS.ags`
+  - Registry paths updated from `CATALYTIC-DPT/` to `CAPABILITY/CONFIG/`
+  - All path joins now include `LAW/` prefix for CONTRACTS
+  - Capability hash updated to match current registry
+- **pipeline_verify.py** — Fix default config paths for capabilities, pins, and revokes
 
 ---
 

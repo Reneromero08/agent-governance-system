@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _rm(path: Path) -> None:
@@ -37,7 +37,7 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
 def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None:
     pipeline_id = "ags-capability-versioning"
     step_id = "s1"
-    base_cap = "46d06ff771e5857d84895ad4af4ac94196dfa5bf3f60a47140af039985f79e34"
+    base_cap = "4f81ae57f3d1c61488c71a9042b041776dd463e6334568333321d15b6b7d78fc"
 
     # Canonical registry derived from repo CAPABILITIES, but tamper adapter bytes under same key.
     reg_path = tmp_path / "CAPABILITIES.json"
@@ -60,10 +60,10 @@ def test_capability_versioning_in_place_upgrade_rejected(tmp_path: Path) -> None
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps(plan), encoding="utf-8")
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     try:
         _rm(pipeline_dir)
-        r = _run([sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
+        r = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env)
         assert r.returncode != 0
         assert "CAPABILITY_HASH_MISMATCH" in (r.stderr + r.stdout)
     finally:

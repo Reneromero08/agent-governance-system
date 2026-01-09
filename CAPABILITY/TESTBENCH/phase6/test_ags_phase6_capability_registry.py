@@ -9,7 +9,7 @@ import sys
 from pathlib import Path
 
 
-REPO_ROOT = Path(__file__).resolve().parents[2]
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 def _rm(path: Path) -> None:
@@ -38,7 +38,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     pipeline_id = "ags-capability-registry"
     step_id = "s1"
 
-    reg_root = REPO_ROOT / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
     task_path = reg_root / "task.json"
     result_path = reg_root / "result.json"
     in_path = reg_root / "in.txt"
@@ -50,7 +50,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         "name": "ant-worker-copy-v1",
         "command": [
             "python3",
-            "CATALYTIC-DPT/SKILLS/ant-worker/scripts/run.py",
+            "CAPABILITY/SKILLS/agents/ant-worker/scripts/run.py",
             str(task_path.relative_to(REPO_ROOT)).replace("\\", "/"),
             str(result_path.relative_to(REPO_ROOT)).replace("\\", "/"),
         ],
@@ -86,8 +86,8 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     plan_bad_path = tmp_path / "plan_bad.json"
     plan_bad_path.write_text(json.dumps(plan_bad), encoding="utf-8")
 
-    pipeline_dir = REPO_ROOT / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-{step_id}-a1"
+    pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-{step_id}-a1"
 
     try:
         _rm(pipeline_dir)
@@ -107,7 +107,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
 
         # Unknown capability rejects at route time.
         r_bad = _run(
-            [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_bad_path), "--pipeline-id", pipeline_id],
+            [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_bad_path), "--pipeline-id", pipeline_id],
             env=env,
         )
         assert r_bad.returncode != 0
@@ -115,15 +115,15 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
 
         # Happy path routes, runs, verifies.
         r_route = _run(
-            [sys.executable, "-m", "TOOLS.ags", "route", "--plan", str(plan_ok_path), "--pipeline-id", pipeline_id],
+            [sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_ok_path), "--pipeline-id", pipeline_id],
             env=env,
         )
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
 
-        r_run = _run([sys.executable, "-m", "TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_run = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "run", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_run.returncode == 0, r_run.stdout + r_run.stderr
 
-        r_verify_ok = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_verify_ok = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify_ok.returncode == 0, r_verify_ok.stdout + r_verify_ok.stderr
 
         # Registry tamper: change adapter but keep capability key; verify must fail closed.
@@ -131,7 +131,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         tampered["capabilities"][cap]["adapter"]["name"] = "tampered"
         reg_path.write_bytes(_canon(tampered))
 
-        r_verify_bad = _run([sys.executable, "TOOLS/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
+        r_verify_bad = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env)
         assert r_verify_bad.returncode != 0
         assert "CAPABILITY_HASH_MISMATCH" in r_verify_bad.stdout
     finally:
