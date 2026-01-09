@@ -150,6 +150,9 @@ COMPOUND_PATTERN = re.compile(
 # CJK single character
 CJK_PATTERN = re.compile(r'^[\u4e00-\u9fff]$')
 
+# CJK compound pattern (e.g., 法.驗, 證.雜)
+CJK_COMPOUND_PATTERN = re.compile(r'^[\u4e00-\u9fff]\.[\u4e00-\u9fff]$')
+
 
 def validate_syntax(program: str) -> ValidationResult:
     """
@@ -182,6 +185,16 @@ def validate_syntax(program: str) -> ValidationResult:
             layer="L1",
             program=program,
             parsed={"type": "cjk_symbol", "symbol": program},
+        )
+
+    # Check CJK compound patterns (e.g., 法.驗)
+    if CJK_COMPOUND_PATTERN.match(program):
+        parts = program.split('.')
+        return ValidationResult(
+            valid=True,
+            layer="L1",
+            program=program,
+            parsed={"type": "cjk_compound", "symbol": program, "parts": parts},
         )
 
     # Check compound patterns first
@@ -237,8 +250,8 @@ def validate_symbols(program: str) -> ValidationResult:
     warnings = []
     parsed = l1_result.parsed
 
-    # CJK symbols
-    if parsed.get("type") == "cjk_symbol":
+    # CJK symbols (single or compound)
+    if parsed.get("type") in ("cjk_symbol", "cjk_compound"):
         known_cjk = get_semantic_symbols()
         if parsed["symbol"] not in known_cjk:
             errors.append(f"Unknown CJK symbol: '{parsed['symbol']}'. Known: {sorted(known_cjk)[:10]}...")
