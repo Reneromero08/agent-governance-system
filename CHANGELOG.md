@@ -14,12 +14,19 @@ All notable changes to Agent Governance System will be documented in this file.
   - Added inbox-report-writer to allowed filesystem access skills
 - **CAPABILITY/TOOLS/governance/schema_validator.py** — Prioritize YAML frontmatter over inline markdown
   - Added frontmatter priority checks to prevent `**Status**: Accepted` from overwriting YAML `status: "Accepted"`
+- **CAPABILITY/TOOLS/agents/skill_runtime.py** — Fix repository root detection and YAML frontmatter parsing
+  - `_find_repo_root()` now checks LAW/CANON/GOVERNANCE/VERSIONING.md first (current location)
+  - `_read_canon_version()` now checks LAW/CANON/GOVERNANCE/VERSIONING.md first
+  - `_read_required_range()` now parses both YAML frontmatter (`required_canon_version: ">=3.0.0"`) and markdown format (`**required_canon_version:** >=3.0.0`)
+- **LAW/CONTRACTS/runner.py** — Fix fixture output directory to tmp domain
+  - Changed output from `RUNS_DIR / "fixtures"` to `RUNS_DIR / "_tmp" / "fixtures"`
+  - Resolves FIREWALL_TMP_WRITE_WRONG_DOMAIN errors
 - **LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md** — Added YAML frontmatter with required schema fields (id, title, status, date, confidence, impact, deciders, tags)
 - **LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md** — Added YAML frontmatter with required schema fields
 - **CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md** — Added status and required_canon_version fields to frontmatter
 
 ### Changed
-- All CI gate violations resolved — critic now passes all governance checks
+- All CI gate violations resolved — critic and fixture tests now pass
 
 ---
 
