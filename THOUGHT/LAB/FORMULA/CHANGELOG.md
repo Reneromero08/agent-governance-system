@@ -8,7 +8,13 @@
   - `experiments/open_questions/q32/q32_public_benchmarks.py`
 - Climate-FEVER benchmark currently passes in strict mode with NLI scoring:
   - `...q32_public_benchmarks.py --dataset climate_fever --scoring crossencoder`
-- SciFact benchmark is still failing and is kept as a public counterexample to iterate on (Q32 remains OPEN).
+- Added Phase 4 streaming/intervention mode for Climate-FEVER:
+  - `...q32_public_benchmarks.py --mode stream --dataset climate_fever --scoring crossencoder`
+- Added SciFact Phase 4 streaming/intervention mode (same gates, no retuning):
+  - `...q32_public_benchmarks.py --mode stream --dataset scifact --scoring crossencoder`
+- SciFact benchmark now uses the same “correct check vs wrong check” intervention gate and passes in strict mode:
+  - `...q32_public_benchmarks.py --mode bench --dataset scifact --scoring crossencoder`
+- Q32 remains OPEN (Phase 3 threshold transfer across modes still pending).
 
 Research changelog for the Living Formula: `R = (E / ∇S) × σ(f)^Df`
 
