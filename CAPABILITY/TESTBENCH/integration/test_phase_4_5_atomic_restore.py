@@ -124,6 +124,7 @@ def work_area(tmp_path: Path):
 # =============================================================================
 
 
+@pytest.mark.xdist_group("serial_atomic_restore")
 class TestTransactionalRestore:
     """Tests for transactional restore using staging directory."""
 
@@ -185,6 +186,7 @@ class TestTransactionalRestore:
 # =============================================================================
 
 
+@pytest.mark.xdist_group("serial_atomic_restore")
 class TestRollbackOnFailure:
     """Tests for rollback behavior when restore fails."""
 
@@ -259,6 +261,7 @@ class TestRollbackOnFailure:
 # =============================================================================
 
 
+@pytest.mark.xdist_group("serial_atomic_restore")
 class TestDryRunMode:
     """Tests for dry-run mode that validates without writing."""
 
@@ -319,6 +322,7 @@ class TestDryRunMode:
 # =============================================================================
 
 
+@pytest.mark.xdist_group("serial_atomic_restore")
 class TestRestoreArtifacts:
     """Tests for RESTORE_MANIFEST.json and RESTORE_REPORT.json."""
 

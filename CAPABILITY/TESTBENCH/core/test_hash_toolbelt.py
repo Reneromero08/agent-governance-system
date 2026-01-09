@@ -17,11 +17,15 @@ from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
 
 def _make_test_writer(project_root: Path) -> GuardedWriter:
-    """Create a GuardedWriter configured for test temp directories."""
+    """Create a GuardedWriter configured for test temp directories.
+
+    Uses durable_roots=["cas"] to allow CAS directory under project_root.
+    This is safe because project_root is an isolated pytest tmp_path.
+    """
     writer = GuardedWriter(
         project_root=project_root,
-        tmp_roots=["_tmp"],
-        durable_roots=["cas"],  # Allow CAS dir
+        tmp_roots=[],  # Not needed - we use durable_roots
+        durable_roots=["cas"],  # Allow CAS dir under project_root
         exclusions=[],  # No exclusions in test mode
     )
     writer.open_commit_gate()  # Tests need durable writes enabled
@@ -29,7 +33,16 @@ def _make_test_writer(project_root: Path) -> GuardedWriter:
 
 
 @pytest.fixture
-def store(tmp_path):
+def store(tmp_path, monkeypatch):
+    """Create a CatalyticStore with isolated tmp_path as project root.
+
+    Monkeypatches cas_store.REPO_ROOT so paths are computed relative to tmp_path,
+    not the global REPO_ROOT. This is required when CI overrides TMPDIR to a path
+    under the project.
+    """
+    import CAPABILITY.PRIMITIVES.cas_store as cas_store_module
+    monkeypatch.setattr(cas_store_module, "REPO_ROOT", tmp_path)
+
     test_writer = _make_test_writer(tmp_path)
     s = CatalyticStore(tmp_path / "cas", writer=test_writer)
     return s

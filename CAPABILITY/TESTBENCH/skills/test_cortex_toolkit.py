@@ -207,26 +207,36 @@ class TestVerifyCasOperation:
 # ============================================================================
 
 class TestVerifySystem1Operation:
-    """Test the verify_system1 operation."""
+    """Test the verify_system1 operation.
 
-    def test_verify_system1_can_be_invoked(self, temp_run_dir: Path, mock_writer):
-        """Test that verify_system1 operation can be invoked."""
+    Tests verify the operation is registered and callable.
+    The actual cortex verification test runs serially to avoid DB locking.
+    """
+
+    def test_verify_system1_in_operations_registry(self):
+        """Test that verify_system1 is registered as a valid operation."""
+        assert "verify_system1" in cortex_toolkit.OPERATIONS
+        assert callable(cortex_toolkit.OPERATIONS["verify_system1"])
+
+    def test_verify_system1_handles_missing_db(self, temp_run_dir: Path, mock_writer, monkeypatch):
+        """Test that verify_system1 handles missing DB gracefully."""
+        # Point to a non-existent DB to avoid race conditions with CI DB rebuild
+        fake_db = temp_run_dir / "nonexistent.db"
+        monkeypatch.setattr(cortex_toolkit, "DB_PATH", fake_db)
+
         payload = {"operation": "verify_system1"}
         output_path = temp_run_dir / "output.json"
-
-        # Ensure output directory exists
         output_path.parent.mkdir(parents=True, exist_ok=True)
 
-        # May return non-zero if db doesn't exist, but should be invokable
         result = cortex_toolkit.op_verify_system1(payload, output_path, mock_writer)
 
+        # Should return non-zero for missing DB
+        assert result == 1
         assert mock_writer.write_durable.called
         call_args = mock_writer.write_durable.call_args[0]
         output_data = json.loads(call_args[1])
-
-        # Output should have expected structure
-        assert "success" in output_data
-        assert "description" in output_data
+        assert output_data["success"] is False
+        assert "does not exist" in output_data["description"]
 
 
 # ============================================================================

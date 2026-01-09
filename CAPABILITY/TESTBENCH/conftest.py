@@ -21,6 +21,9 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "slow: marks tests as slow (skipped unless --run-slow is passed)"
     )
+    config.addinivalue_line(
+        "markers", "serial: marks tests to run serially on main worker (not distributed)"
+    )
 
 
 def pytest_collection_modifyitems(config, items):

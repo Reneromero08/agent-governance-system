@@ -56,6 +56,7 @@ def _make_fixture_scope() -> packer_core.PackScope:
     )
 
 
+@pytest.mark.xdist_group("serial_gc_safety")
 def test_gc_never_deletes_pack_referenced_blobs(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """
     GC must never delete blobs referenced by active packs.
@@ -156,6 +157,7 @@ def test_gc_never_deletes_pack_referenced_blobs(tmp_path: Path, monkeypatch: pyt
     assert unreferenced_hash in gc_result_apply["deleted_hashes"]
 
 
+@pytest.mark.xdist_group("serial_gc_safety")
 def test_gc_respects_run_roots_from_packer(tmp_path: Path, monkeypatch: pytest.MonkeyPatch) -> None:
     """
     Verify that packer writes RUN_ROOTS.json and GC respects it.
