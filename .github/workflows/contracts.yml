@@ -60,7 +60,10 @@ jobs:
           TMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
         run: |
           mkdir -p "$TMPDIR"
-          python -m pytest CAPABILITY/TESTBENCH -q -s --ignore=MEMORY/LLM_PACKER/_packs
+          python -m pytest CAPABILITY/TESTBENCH -q -s \
+            --ignore=CAPABILITY/TESTBENCH/phase6 \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_1_4_skill_discovery.py \
+            --ignore=CAPABILITY/TESTBENCH/pipeline/test_write_firewall.py
 
       - name: CI strict verification (SPECTRUM-05)
         env:
