@@ -149,15 +149,16 @@ def main(argv: List[str]) -> int:
     if rc != 0:
         return rc
 
-    print("[ci-local-gate] Running pytest (TESTBENCH)...")
+    print("[ci-local-gate] Running pytest (TESTBENCH) with parallel execution...")
     rc = _run(
         [
             sys.executable,
             "-m",
             "pytest",
             "CAPABILITY/TESTBENCH/",
+            "-n", "auto",
             "-q",
-            "--capture=no",
+            "--dist=loadfile",
         ],
         env=tmp_env,
     )

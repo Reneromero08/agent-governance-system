@@ -1,8 +1,28 @@
-<!-- CONTENT_HASH: 3.7.34_PENDING -->
+<!-- CONTENT_HASH: 3.7.35_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.35] - 2026-01-09
+
+### Fixed
+- **CI parallel execution** — Enable pytest-xdist for ~40% faster test runs
+  - ci_local_gate.py now uses `-n auto --dist=loadfile`
+  - Tests complete in ~10min vs ~16min sequential
+- **Phase 6 test fixes** — Windows compatibility and firewall compliance
+  - Fixed `python3` → `sys.executable` for Windows
+  - Fixed proof_wiring tests to use project-relative paths
+  - Fixed router_slot test path issues
+  - Fixed capability_registry test to include pins file
+  - Fixed capability_revokes test cleanup for stale artifacts
+- **ADR-023 historical verification** — Remove current revokes from verify
+  - pipeline_verify.py now uses ONLY POLICY.json snapshot
+  - Historical pipelines verify correctly after revocation
+- **root_audit tests** — Use isolated CAS instead of global put_output_hashes
+- **inbox tests** — Updated paths and relaxed documentation checks
 
 ---
 

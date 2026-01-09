@@ -91,13 +91,23 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
     env_verify["CATALYTIC_REVOKES_PATH"] = str(revoked_revokes)
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-historical-ok-s1-a1"
+    runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
     reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
+        # Clean up pipeline directory first
         _rm(pipeline_dir)
-        _rm(run_dir)
+
+        # Clean up ALL run directories matching this pipeline (any attempt number)
+        if runs_root.exists():
+            for item in runs_root.iterdir():
+                if item.is_dir() and item.name.startswith(f"pipeline-{pipeline_id}-"):
+                    _rm(item)
+
+        # Clean up registry root BEFORE preparing new inputs
         _rm(reg_root)
+
+        # Now prepare fresh ant worker inputs
         _prepare_ant_worker_inputs(label="PHASE69-HISTORICAL\n")
 
         r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
@@ -110,8 +120,16 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
         r_verify = _run([sys.executable, "CAPABILITY/TOOLS/catalytic/catalytic.py", "pipeline", "verify", "--pipeline-id", pipeline_id, "--strict"], env=env_verify)
         assert r_verify.returncode == 0, r_verify.stdout + r_verify.stderr
     finally:
+        # Clean up pipeline directory
         _rm(pipeline_dir)
-        _rm(run_dir)
+
+        # Clean up ALL run directories matching this pipeline
+        if runs_root.exists():
+            for item in runs_root.iterdir():
+                if item.is_dir() and item.name.startswith(f"pipeline-{pipeline_id}-"):
+                    _rm(item)
+
+        # Clean up registry root
         _rm(reg_root)
 
 
@@ -132,13 +150,23 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
     env_run_verify["CATALYTIC_REVOKES_PATH"] = str(revoked_revokes)
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-revokes-post-reject-s1-a1"
+    runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
     reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
 
     try:
+        # Clean up pipeline directory first
         _rm(pipeline_dir)
-        _rm(run_dir)
+
+        # Clean up ALL run directories matching this pipeline (any attempt number)
+        if runs_root.exists():
+            for item in runs_root.iterdir():
+                if item.is_dir() and item.name.startswith(f"pipeline-{pipeline_id}-"):
+                    _rm(item)
+
+        # Clean up registry root BEFORE preparing new inputs
         _rm(reg_root)
+
+        # Now prepare fresh ant worker inputs
         _prepare_ant_worker_inputs(label="PHASE69-POST\n")
 
         # Route before revocation (allowed).
@@ -150,7 +178,15 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
         assert r_run.returncode != 0
         assert "REVOKED_CAPABILITY" in (r_run.stdout + r_run.stderr)
     finally:
+        # Clean up pipeline directory
         _rm(pipeline_dir)
-        _rm(run_dir)
+
+        # Clean up ALL run directories matching this pipeline
+        if runs_root.exists():
+            for item in runs_root.iterdir():
+                if item.is_dir() and item.name.startswith(f"pipeline-{pipeline_id}-"):
+                    _rm(item)
+
+        # Clean up registry root
         _rm(reg_root)
 

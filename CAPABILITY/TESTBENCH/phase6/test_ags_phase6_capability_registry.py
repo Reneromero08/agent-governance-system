@@ -75,8 +75,14 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
     reg_path = tmp_path / "CAPABILITIES.json"
     reg_path.write_bytes(_canon(registry))
 
+    # Create pins file that allows this capability
+    pins = {"pins_version": "1.0.0", "allowed_capabilities": [cap]}
+    pins_path = tmp_path / "CAPABILITY_PINS.json"
+    pins_path.write_bytes(_canon(pins))
+
     env = dict(os.environ)
     env["CATALYTIC_CAPABILITIES_PATH"] = str(reg_path)
+    env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
     plan_ok = {"plan_version": "1.0", "steps": [{"step_id": step_id, "capability_hash": cap}]}
     plan_ok_path = tmp_path / "plan_ok.json"
