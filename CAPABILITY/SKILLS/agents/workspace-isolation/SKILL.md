@@ -54,13 +54,31 @@ Agents do NOT decide when work is ready. The human does. Present your work, then
 
 ### Phase 3: Merge (SEPARATE APPROVAL REQUIRED)
 
+**CRITICAL: NEVER use `git merge` or `git merge --no-ff`. Always use selective file checkout.**
+
 1. **STOP AND ASK** - Present merge plan to user
 2. **Request explicit merge approval** - "Ready to merge to [branch]?" then WAIT
-3. **Fast-forward when possible** - Prefer clean history
-4. **Rebase if needed** - Keep history linear when appropriate
-5. **Delete feature branch after merge** - Clean up merged branches immediately:
-   - `git branch -d feature-branch` (safe delete, only works if fully merged)
-   - Never leave stale branches cluttering the repo
+3. **Selective file merge ONLY** - Merge ONLY files you created or modified:
+   ```bash
+   # Switch to target branch (e.g., main)
+   git checkout main
+
+   # Cherry-pick ONLY your changed files from feature branch
+   git checkout feature-branch -- file1.py file2.py file3.md
+
+   # Commit the changes
+   git commit -m "feat: descriptive message"
+   ```
+4. **NEVER merge the entire branch** - Do NOT use:
+   - ❌ `git merge feature-branch`
+   - ❌ `git merge --no-ff feature-branch`
+   - ❌ Any command that merges all commits/files from the branch
+5. **Delete feature branch after merge** - Clean up merged branches:
+   ```bash
+   # From main repo root (not worktree)
+   python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup <task_id>
+   ```
+   - Or manually: `git worktree remove <path> && git branch -D feature-branch`
 
 ### Phase 4: Post-Merge Cleanup (CONDITIONAL)
 
@@ -83,11 +101,12 @@ Agents do NOT decide when work is ready. The human does. Present your work, then
 Agents MUST NOT:
 - `git commit` before all work is complete
 - `git commit` without user approval
-- `git merge` without user approval
+- `git merge` or `git merge --no-ff` (use selective file checkout instead)
 - `git push` without user approval
 - `git commit --amend` on pushed commits without explicit user consent
 - Create multiple commits for a single logical change
 - Commit, merge, then commit again (the Gemini anti-pattern)
+- Merge entire branches (always cherry-pick only files you changed)
 
 ## Approval Checkpoints
 
@@ -131,8 +150,14 @@ Agents MUST NOT:
     >>> AGENT STOPS HERE AND WAITS <<<
 
 11. User: "Yes, merge"
-12. Agent: git checkout main && git merge feature-branch && git branch -d feature-branch
-13. Agent: "Merged and deleted feature-branch."
+12. Agent:
+    ```bash
+    git checkout main
+    git checkout feature-branch -- src/feature.ts CHANGELOG.md
+    git commit -m "feat: add user preferences endpoint"
+    python CAPABILITY/SKILLS/agents/workspace-isolation/run.py cleanup feature-branch
+    ```
+13. Agent: "Merged only changed files and cleaned up feature-branch."
 14. If post-merge cleanup needed:
     Agent: "Need to update version number. Safe to amend? (not pushed yet)"
 
