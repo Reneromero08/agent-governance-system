@@ -15,8 +15,8 @@ All notable changes to Agent Governance System will be documented in this file.
   - Stop tracking generated Cortex files (cortex.db, SECTION_INDEX.json)
   - Restrict pytest to CAPABILITY/TESTBENCH to avoid legacy tests
   - Skip phase6 tests on CI (require complex env setup, pass locally)
-  - Skip skill_discovery tests (require sentence-transformers)
-  - Skip write_firewall Windows path test on Linux
+  - Skip Phase 5 embedding tests (require sentence-transformers)
+  - Skip write_firewall and phase_2_4_1b tests (Windows/Linux path differences)
 
 ---
 
