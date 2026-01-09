@@ -11,6 +11,10 @@ LAW/CONTRACTS/_runs/_tmp/
 # CAS runtime storage (never commit)
 CAPABILITY/CAS/storage/
 
+# Runtime-generated files (modified by tests, rebuilt on demand)
+CAPABILITY/RUNS/RUN_ROOTS.json
+ERROR_RECEIPT.json
+
 # Generated Cortex index
 NAVIGATION/CORTEX/_generated/cortex.json
 NAVIGATION/CORTEX/_generated/cortex.db
@@ -19,6 +23,10 @@ NAVIGATION/CORTEX/_generated/SECTION_INDEX.json
 NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json
 NAVIGATION/CORTEX/_generated/summaries/
 !NAVIGATION/CORTEX/_generated/.gitkeep
+
+# Generated Cortex meta indexes (rebuilt on demand)
+NAVIGATION/CORTEX/meta/FILE_INDEX.json
+NAVIGATION/CORTEX/meta/SECTION_INDEX.json
 
 # Generated System1 DB (rebuilt in CI and by runner.py)
 NAVIGATION/CORTEX/db/system1.db
