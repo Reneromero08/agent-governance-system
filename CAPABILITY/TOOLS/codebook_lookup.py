@@ -21,6 +21,7 @@ regions. Human reference: THOUGHT/LAB/FORMULA/CODIFIER.md
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -292,6 +293,134 @@ def load_codebook() -> dict:
     return {"symbols": {}, "version": "0.0.0"}
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# COMPACT MACRO GRAMMAR PARSER
+# ═══════════════════════════════════════════════════════════════════════════════
+# Grammar: RADICAL[OPERATOR][NUMBER][:CONTEXT]
+# Examples: C3, I5, C*, V!, C3:build, C&I
+# ═══════════════════════════════════════════════════════════════════════════════
+
+MACRO_PATTERN = re.compile(
+    r'^([CIVLGSRAJP])'      # Radical (required)
+    r'([*!?&|.])?'          # Operator (optional)
+    r'(\d+)?'               # Number (optional)
+    r'(?::(\w+))?$'         # Context (optional, after colon)
+)
+
+RADICALS = {
+    'C': 'contract_rules',
+    'I': 'invariants',
+    'V': 'verification',
+    'L': 'law',
+    'G': 'governance',
+    'S': 'schema',
+    'R': 'receipt',
+    'A': 'adr',
+    'J': 'jobspec',
+    'P': 'policy',
+}
+
+OPERATORS = {
+    '*': 'ALL',
+    '!': 'NOT',
+    '?': 'CHECK',
+    '&': 'AND',
+    '|': 'OR',
+    '.': 'PATH',
+}
+
+
+def parse_macro(macro: str) -> dict | None:
+    """Parse a compact macro notation into components."""
+    match = MACRO_PATTERN.match(macro)
+    if not match:
+        return None
+
+    radical, operator, number, context = match.groups()
+    return {
+        'radical': radical,
+        'domain': RADICALS.get(radical),
+        'operator': operator,
+        'operator_meaning': OPERATORS.get(operator) if operator else None,
+        'number': int(number) if number else None,
+        'context': context,
+        'raw': macro,
+    }
+
+
+def lookup_macro(macro: str, expand: bool = False) -> dict:
+    """Look up a compact macro notation."""
+    parsed = parse_macro(macro)
+    if not parsed:
+        return {'found': False, 'error': f'Invalid macro format: {macro}'}
+
+    codebook = load_codebook()
+    radical = parsed['radical']
+    number = parsed['number']
+    operator = parsed['operator']
+    context = parsed['context']
+
+    # Handle domain lookups (no number)
+    if number is None and operator != '*':
+        # Return domain info from radicals
+        radicals = codebook.get('radicals', {})
+        if radical in radicals:
+            entry = radicals[radical].copy()
+            entry['id'] = radical
+            entry['type'] = 'radical'
+            if expand and 'path' in entry:
+                entry['content'] = get_file_content(entry['path'])
+            return {'found': True, 'entry': entry, 'parsed': parsed}
+        return {'found': False, 'error': f'Unknown radical: {radical}'}
+
+    # Handle ALL operator (*)
+    if operator == '*':
+        domain_key = parsed['domain']
+        if domain_key in ('contract_rules', 'invariants'):
+            rules = codebook.get(domain_key, {})
+            entry = {
+                'id': macro,
+                'type': 'collection',
+                'count': len(rules),
+                'items': list(rules.keys()),
+            }
+            if expand:
+                entry['rules'] = rules
+            return {'found': True, 'entry': entry, 'parsed': parsed}
+        return {'found': False, 'error': f'* operator not supported for {radical}'}
+
+    # Handle specific rule lookups (C3, I5, etc.)
+    if number is not None:
+        domain_key = parsed['domain']
+        rule_key = f'{radical}{number}'
+
+        if domain_key == 'contract_rules':
+            rules = codebook.get('contract_rules', {})
+            if rule_key in rules:
+                entry = rules[rule_key].copy()
+                entry['id'] = rule_key
+                entry['type'] = 'contract_rule'
+                if context:
+                    entry['context'] = context
+                return {'found': True, 'entry': entry, 'parsed': parsed}
+            return {'found': False, 'error': f'Contract rule not found: {rule_key}'}
+
+        elif domain_key == 'invariants':
+            rules = codebook.get('invariants', {})
+            if rule_key in rules:
+                entry = rules[rule_key].copy()
+                entry['id'] = rule_key
+                entry['type'] = 'invariant'
+                if context:
+                    entry['context'] = context
+                return {'found': True, 'entry': entry, 'parsed': parsed}
+            return {'found': False, 'error': f'Invariant not found: {rule_key}'}
+
+        return {'found': False, 'error': f'Numbered lookup not supported for {radical}'}
+
+    return {'found': False, 'error': f'Could not resolve macro: {macro}'}
+
+
 def get_file_content(path: str) -> str:
     """Get content from a file path."""
     # Strip any anchor fragments (e.g., file.md#section)
@@ -312,7 +441,13 @@ def get_file_content(path: str) -> str:
 
 def lookup_entry(entry_id: str, expand: bool = False) -> dict:
     """Look up a codebook entry by ID."""
-    # Check semantic symbols first
+    # Try compact macro notation first (C3, I5, C*, etc.)
+    if MACRO_PATTERN.match(entry_id):
+        result = lookup_macro(entry_id, expand=expand)
+        if result.get('found'):
+            return result
+
+    # Check semantic symbols (CJK)
     if entry_id in SEMANTIC_SYMBOLS:
         entry = SEMANTIC_SYMBOLS[entry_id].copy()
         if expand:
@@ -358,6 +493,14 @@ def list_entries() -> dict:
     """List all available codebook entries."""
     codebook = load_codebook()
 
+    # Build macro vocabulary from codebook
+    macro_vocab = {
+        "radicals": list(codebook.get("radicals", {}).keys()),
+        "operators": list(codebook.get("operators", {}).keys()),
+        "contract_rules": list(codebook.get("contract_rules", {}).keys()),
+        "invariants": list(codebook.get("invariants", {}).keys()),
+    }
+
     # No phonetic glosses - just symbol → path → type → compression
     return {
         "semantic_symbols": {
@@ -369,10 +512,15 @@ def list_entries() -> dict:
             }
             for k, v in SEMANTIC_SYMBOLS.items()
         },
-        "commonsense_symbols": codebook.get("symbols", {}),
-        "commonsense_version": codebook.get("version", "unknown"),
+        "macro_vocabulary": macro_vocab,
+        "macro_version": codebook.get("version", "unknown"),
+        "macro_grammar": codebook.get("grammar", {}),
         "total_semantic": len(SEMANTIC_SYMBOLS),
-        "total_commonsense": len(codebook.get("symbols", {})),
+        "total_macros": (
+            len(macro_vocab["contract_rules"]) +
+            len(macro_vocab["invariants"]) +
+            len(macro_vocab["radicals"])
+        ),
         "codifier": "THOUGHT/LAB/FORMULA/CODIFIER.md",
     }
 

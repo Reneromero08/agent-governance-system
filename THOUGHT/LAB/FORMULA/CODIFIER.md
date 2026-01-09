@@ -1,10 +1,11 @@
 ---
 title: Semiotic Codifier
 status: Canonical
-version: 1.0.0
+version: 1.1.0
 created: 2026-01-08
+modified: 2026-01-08
 author: Rene + Claude
-purpose: Human reference for symbolic vocabulary
+purpose: Human reference for symbolic vocabulary (CJK + ASCII layers)
 ---
 <!-- CONTENT_HASH: PENDING -->
 
@@ -142,18 +143,69 @@ expand("法")         # → [full canon content, 56,370 tokens]
 
 ---
 
-## Relationship to @ Codebook
+## Compact Macro Grammar (ASCII Layer)
 
-The @ codebook (`LAW/CANON/META/CODEBOOK.md`) uses ASCII identifiers:
-- @C3 → Contract Rule 3
-- @I5 → Invariant 5
-- @S12 → Skill 12
+The macro codebook (`THOUGHT/LAB/COMMONSENSE/CODEBOOK.json`) uses compact notation:
 
-CJK symbols are a SEPARATE compression layer:
-- 法 → Entire LAW/CANON domain
-- 契 → CONTRACT.md (contains all @C rules)
+### Grammar
+```
+RADICAL[OPERATOR][NUMBER][:CONTEXT]
+```
 
-Both systems coexist. Use @ for rule-level precision, 符 for domain-level compression.
+### Radicals (1 token each)
+| Radical | Domain | Path |
+|:-------:|--------|------|
+| C | Contract | `LAW/CANON/CONSTITUTION/CONTRACT.md` |
+| I | Invariant | `LAW/CANON/CONSTITUTION/INVARIANTS.md` |
+| V | Verification | `LAW/CANON/GOVERNANCE/VERIFICATION.md` |
+| L | Law | `LAW/CANON` |
+| G | Governance | `LAW/CANON/GOVERNANCE` |
+| S | Schema | `LAW/CANON/SEMANTIC` |
+| R | Receipt | `NAVIGATION/RECEIPTS` |
+| A | ADR | `LAW/CONTEXT/decisions` |
+| J | JobSpec | `LAW/CANON/SEMANTIC/JOBSPEC_SPEC.md` |
+| P | Policy | `LAW/CANON/POLICY` |
+
+### Operators (1 token each)
+| Op | Meaning | Example |
+|:--:|---------|---------|
+| * | ALL | `C*` = all contract rules |
+| ! | NOT/DENY | `V!` = validation denied |
+| ? | CHECK | `J?` = job present check |
+| & | AND | `C&I` = contract AND invariant |
+| \| | OR | `C\|I` = contract OR invariant |
+| . | PATH | `L.C.3` = Law.Contract.Rule3 |
+| : | CONTEXT | `C3:build` = in build context |
+
+### Examples
+| Macro | Tokens | Meaning |
+|-------|:------:|---------|
+| `C3` | 2 | Contract rule 3 |
+| `I5` | 2 | Invariant 5 |
+| `C*` | 2 | ALL contract rules |
+| `I*` | 2 | ALL invariants |
+| `G` | 1 | Governance domain |
+| `C3:build` | 5 | Contract 3 in build context |
+
+### Token Savings
+| Old (Verbose) | Tokens | New (Compact) | Tokens | Saved |
+|---------------|:------:|---------------|:------:|:-----:|
+| `@CONTRACT_RULE_3` | 6 | `C3` | 2 | 67% |
+| `@INVARIANT_5` | 5 | `I5` | 2 | 60% |
+| `@DOMAIN_GOVERNANCE` | 5 | `G` | 1 | 80% |
+
+---
+
+## Two-Layer Compression
+
+CJK symbols and ASCII macros are COMPLEMENTARY layers:
+
+| Layer | Scope | Example | Compression |
+|-------|-------|---------|-------------|
+| **CJK** | Domain pointers | 法 → LAW/CANON | 55,625× |
+| **ASCII** | Rule precision | C3 → Contract Rule 3 | ~2,000× |
+
+Both systems coexist. Use CJK for domain-level, ASCII for rule-level.
 
 ---
 

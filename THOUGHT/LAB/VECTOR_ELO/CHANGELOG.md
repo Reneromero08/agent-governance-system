@@ -4,6 +4,46 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.32] - 2026-01-08
+
+### Phase 5.2.1 COMPLETE — Compact Macro Grammar
+
+**Added:**
+- `THOUGHT/LAB/COMMONSENSE/CODEBOOK.json` v0.2.0 — Complete macro vocabulary
+  - 10 domain radicals (C, I, V, L, G, S, R, A, J, P) — all single-token
+  - 7 operators (*, !, ?, &, |, ., :) — all single-token
+  - 13 contract rules (C1-C13) with summary/full expansion
+  - 20 invariants (I1-I20) with INV-ID mapping
+  - Legacy migration mappings for deprecated @-prefix symbols
+- `CAPABILITY/TOOLS/codebook_lookup.py` — Macro grammar parser
+  - `parse_macro()` — Parse RADICAL[OP][NUM][:CTX] notation
+  - `lookup_macro()` — Resolve macros to codebook entries
+  - `lookup_entry()` updated to try macros first
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_2_1_macro_grammar.py` — 21 tests
+- `THOUGHT/LAB/FORMULA/CODIFIER.md` v1.1.0 — Added ASCII macro layer docs
+
+**Token Efficiency:**
+- Grammar: `RADICAL[OPERATOR][NUMBER][:CONTEXT]`
+- Examples: C3 (2 tok), I5 (2 tok), C* (2 tok), G (1 tok)
+- 60% savings vs verbose @-prefix scheme
+
+## [3.7.31] - 2026-01-08
+
+### Phase 5.2.2 Semiotic Symbol Vocabulary (符典)
+
+- Added `CODIFIER.md` — Human reference for 29 CJK semantic symbols
+- **Pure symbolic compression** without phonetic glosses (removed oxymoronic mixing)
+- Symbol categories:
+  - Core domains (6): 法, 真, 契, 恆, 驗, 證
+  - Operations (9): 變, 冊, 錄, 限, 許, 禁, 雜, 復, 核
+  - Validation (6): 試, 查, 載, 存, 掃, 核
+  - Structural (5): 道, 圖, 鏈, 根, 枝
+  - Compounds (4): 法.驗, 法.契, 證.雜, 冊.雜
+- Updated `codebook_lookup.py` to use pure 符 → 路 mappings
+- Principle: Symbols point directly to semantic regions; receiver accesses meaning through shared context
+
+---
+
 ## [3.7.30] - 2026-01-08
 
 ### Eigenvalue Alignment Protocol - VALIDATED

@@ -1,26 +1,266 @@
 {
-  "id_prefix": "@",
-  "ids_as_symbols": true,
-  "notes": "Symbolic handles expand to predicate facts before resolution. Keep this small and stable.",
-  "symbols": {
-    "@DOMAIN_GOVERNANCE": [
-      "domain:governance"
-    ],
-    "@DOMAIN_JOBSPEC": [
-      "domain:jobspec"
-    ],
-    "@INVARIANT_VIOLATION": [
-      "violation:invariant"
-    ],
-    "@JOB_PRESENT": [
-      "job:present"
-    ],
-    "@STRICT_VALIDATION": [
-      "policy:strict_validation"
-    ],
-    "@UI_TEXT_ONLY": [
-      "policy:ui_text_only"
-    ]
+  "version": "0.2.0",
+  "grammar": {
+    "description": "Compact macro grammar: RADICAL[OPERATOR][NUMBER][:CONTEXT]",
+    "radicals": "Single-letter domain codes (1 token each)",
+    "operators": "Single-char modifiers (1 token each)",
+    "numbers": "Rule/invariant identifiers",
+    "contexts": "Optional semantic tags for nuanced expansion"
   },
-  "version": "0.1.0"
+  "radicals": {
+    "C": {
+      "domain": "Contract",
+      "path": "LAW/CANON/CONSTITUTION/CONTRACT.md",
+      "tokens": 1
+    },
+    "I": {
+      "domain": "Invariant",
+      "path": "LAW/CANON/CONSTITUTION/INVARIANTS.md",
+      "tokens": 1
+    },
+    "V": {
+      "domain": "Verification",
+      "path": "LAW/CANON/GOVERNANCE/VERIFICATION.md",
+      "tokens": 1
+    },
+    "L": {
+      "domain": "Law",
+      "path": "LAW/CANON",
+      "tokens": 1
+    },
+    "G": {
+      "domain": "Governance",
+      "path": "LAW/CANON/GOVERNANCE",
+      "tokens": 1
+    },
+    "S": {
+      "domain": "Schema",
+      "path": "LAW/CANON/SEMANTIC",
+      "tokens": 1
+    },
+    "R": {
+      "domain": "Receipt",
+      "path": "NAVIGATION/RECEIPTS",
+      "tokens": 1
+    },
+    "J": {
+      "domain": "JobSpec",
+      "path": "LAW/CANON/SEMANTIC/JOBSPEC_SPEC.md",
+      "tokens": 1
+    },
+    "A": {
+      "domain": "ADR",
+      "path": "LAW/CONTEXT/decisions",
+      "tokens": 1
+    },
+    "P": {
+      "domain": "Policy",
+      "path": "LAW/CANON/POLICY",
+      "tokens": 1
+    }
+  },
+  "operators": {
+    "*": {"meaning": "ALL", "tokens": 1},
+    "!": {"meaning": "NOT/DENY", "tokens": 1},
+    "?": {"meaning": "CHECK/QUERY", "tokens": 1},
+    "&": {"meaning": "AND/BIND", "tokens": 1},
+    "|": {"meaning": "OR/CHOICE", "tokens": 1},
+    ".": {"meaning": "PATH/ACCESS", "tokens": 1},
+    ":": {"meaning": "CONTEXT/TYPE", "tokens": 1}
+  },
+  "contexts": {
+    "build": "Build/compilation context",
+    "audit": "Audit/verification context",
+    "security": "Security/access control context",
+    "execute": "Runtime execution context",
+    "validate": "Schema validation context"
+  },
+  "contract_rules": {
+    "C1": {
+      "summary": "Text outranks code",
+      "full": "The canon defines the working spec; implementation must follow"
+    },
+    "C2": {
+      "summary": "Signed reports required",
+      "full": "Every new implementation must produce a signed report"
+    },
+    "C3": {
+      "summary": "INBOX requirement",
+      "full": "All documents requiring human review must be in INBOX/"
+    },
+    "C4": {
+      "summary": "No behavior change without ceremony",
+      "full": "Changes require ADR, fixtures, canon update, changelog"
+    },
+    "C5": {
+      "summary": "Intent-gated edits",
+      "full": "Only change CANON/CONTEXT when task is explicitly about governance"
+    },
+    "C6": {
+      "summary": "Stable token grammar",
+      "full": "Token changes require major version bump and deprecation"
+    },
+    "C7": {
+      "summary": "Determinism",
+      "full": "Same inputs and canon must produce same outputs"
+    },
+    "C8": {
+      "summary": "Output roots",
+      "full": "Artifacts only to _runs/, _generated/, _packs/"
+    },
+    "C9": {
+      "summary": "Commit ceremony",
+      "full": "Every git commit/push requires explicit per-instance approval"
+    },
+    "C10": {
+      "summary": "Implementation reports",
+      "full": "Every implementation needs signed report in INBOX/reports/"
+    },
+    "C11": {
+      "summary": "Sovereign override",
+      "full": "MASTER_OVERRIDE bypasses governance for one prompt"
+    },
+    "C12": {
+      "summary": "Privacy boundary",
+      "full": "No access outside repo root without explicit request"
+    },
+    "C13": {
+      "summary": "Traceable identity",
+      "full": "Every session must have unique session_id"
+    }
+  },
+  "invariants": {
+    "I1": {
+      "id": "INV-001",
+      "summary": "Repository structure stable",
+      "full": "Top-level directories cannot be removed/renamed without major bump"
+    },
+    "I2": {
+      "id": "INV-002",
+      "summary": "Token grammar stable",
+      "full": "Tokens may be added but not removed without deprecation"
+    },
+    "I3": {
+      "id": "INV-003",
+      "summary": "No raw path access",
+      "full": "Skills must query cortex, not navigate filesystem directly"
+    },
+    "I4": {
+      "id": "INV-004",
+      "summary": "Fixtures gate merges",
+      "full": "No change accepted if any fixture fails"
+    },
+    "I5": {
+      "id": "INV-005",
+      "summary": "Determinism",
+      "full": "Same inputs produce same outputs"
+    },
+    "I6": {
+      "id": "INV-006",
+      "summary": "Output roots",
+      "full": "Artifacts only to designated output directories"
+    },
+    "I7": {
+      "id": "INV-007",
+      "summary": "Change ceremony",
+      "full": "Behavior changes require fixtures, changelog, same commit"
+    },
+    "I8": {
+      "id": "INV-008",
+      "summary": "Cortex builder exception",
+      "full": "Cortex builders may scan filesystem directly"
+    },
+    "I9": {
+      "id": "INV-009",
+      "summary": "Canon readability",
+      "full": "Max 300 lines, 15 rules per file"
+    },
+    "I10": {
+      "id": "INV-010",
+      "summary": "Canon archiving",
+      "full": "Superseded rules moved to archive, not deleted"
+    },
+    "I11": {
+      "id": "INV-011",
+      "summary": "Schema compliance",
+      "full": "Law-like files must validate against JSON schemas"
+    },
+    "I12": {
+      "id": "INV-012",
+      "summary": "Visible execution",
+      "full": "No hidden/external terminal windows"
+    },
+    "I13": {
+      "id": "INV-013",
+      "summary": "Declared truth",
+      "full": "All artifacts must be in hash manifest"
+    },
+    "I14": {
+      "id": "INV-014",
+      "summary": "Disposable space",
+      "full": "_tmp/ directories are scratch only"
+    },
+    "I15": {
+      "id": "INV-015",
+      "summary": "Narrative independence",
+      "full": "Verification success bound to artifact integrity only"
+    },
+    "I16": {
+      "id": "INV-016",
+      "summary": "No verification without execution",
+      "full": "Must execute required verification commands"
+    },
+    "I17": {
+      "id": "INV-017",
+      "summary": "Proof recorded verbatim",
+      "full": "git status, test commands recorded verbatim"
+    },
+    "I18": {
+      "id": "INV-018",
+      "summary": "Tests are hard gates",
+      "full": "Forbidden conditions must fail the gate"
+    },
+    "I19": {
+      "id": "INV-019",
+      "summary": "Deterministic stop conditions",
+      "full": "Failed verification must fix and re-run until pass"
+    },
+    "I20": {
+      "id": "INV-020",
+      "summary": "Clean-state discipline",
+      "full": "Verification from clean state for scoped paths"
+    }
+  },
+  "examples": {
+    "C3": "Contract rule 3 (INBOX requirement)",
+    "C*": "ALL contract rules",
+    "I5": "Invariant 5 (Determinism)",
+    "I*": "ALL invariants",
+    "C&I": "Contract AND Invariant domains",
+    "C3:build": "Contract 3 in build context",
+    "C3:audit": "Contract 3 in audit context",
+    "V!": "Verification DENIED",
+    "L.C.3": "Law.Contract.Rule3 (path notation)"
+  },
+  "legacy": {
+    "@DOMAIN_GOVERNANCE": {"maps_to": "G", "deprecated": true},
+    "@DOMAIN_JOBSPEC": {"maps_to": "J", "deprecated": true},
+    "@INVARIANT_VIOLATION": {"maps_to": "I!", "deprecated": true},
+    "@JOB_PRESENT": {"maps_to": "J?", "deprecated": true},
+    "@STRICT_VALIDATION": {"maps_to": "V!", "deprecated": true},
+    "@UI_TEXT_ONLY": {"maps_to": "P:ui", "deprecated": true}
+  },
+  "metrics": {
+    "token_savings": {
+      "verbose_to_compact": "60%",
+      "example": "@CONTRACT_RULE_3 (6 tokens) -> C3 (2 tokens)"
+    },
+    "vocabulary_size": {
+      "radicals": 10,
+      "operators": 7,
+      "contract_rules": 13,
+      "invariants": 20,
+      "total_macros": 50
+    }
+  }
 }
