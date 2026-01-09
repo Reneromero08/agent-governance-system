@@ -6,6 +6,23 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.31] - 2026-01-08
+
+### Added
+- **Phase 5.2.1: Compact Macro Grammar** — Token-efficient governance rule notation
+  - 10 domain radicals (C, I, V, L, G, S, R, A, J, P) - all single-token
+  - 7 operators (*, !, ?, &, |, ., :) - all single-token
+  - 13 contract rules (C1-C13) with summary/full expansion
+  - 20 invariants (I1-I20) with INV-ID mapping
+  - Grammar: `RADICAL[OPERATOR][NUMBER][:CONTEXT]` (e.g., C3, I5, C*, V!, C3:build)
+  - 60% token savings vs verbose @-prefix scheme
+  - Legacy migration mappings (@DOMAIN_GOVERNANCE → G)
+- **CODEBOOK.json v0.2.0** — Complete macro vocabulary specification
+- **codebook_lookup.py** — Macro grammar parser with `parse_macro()` and `lookup_macro()`
+- **Test suite** — 21 tests for macro grammar validation (`test_phase_5_2_1_macro_grammar.py`)
+
+---
+
 ## [3.7.30] - 2026-01-08
 
 ### Fixed
