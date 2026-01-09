@@ -4,6 +4,46 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.35] - 2026-01-09
+
+### Phase 5.2.6 COMPLETE — SCL Tests & Benchmarks
+
+**Added:**
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_2_semiotic_compression.py` — 28 tests
+  - 6 determinism tests (100-run hash stability)
+  - 7 schema validation tests (JobSpec compliance)
+  - 3 token benchmark tests (compression measurement)
+  - 8 negative tests (error handling)
+  - 4 additional coverage tests
+- `CAPABILITY/TOOLS/scl/run_scl_proof.py` — L2 compression proof script
+  - Chains to L1 proof (receipt hash: `325410258180d609...`)
+  - 5 benchmark cases with natural language → SCL compression
+  - 3 negative controls (garbage input verification)
+  - Deterministic receipt hashing (excludes timestamps)
+  - Tiktoken integration (o200k_base / cl100k_base fallback)
+- `NAVIGATION/PROOFS/COMPRESSION/SCL_PROOF_RECEIPT.json` — Machine-readable L2 receipt
+- `NAVIGATION/PROOFS/COMPRESSION/SCL_PROOF_REPORT.md` — Human-readable proof report
+
+**Benchmark Results:**
+- **96.4% token compression** achieved (exceeds 80% target)
+- Natural language: 334 tokens → SCL: 12 tokens
+- All 5 benchmark cases passed
+- Case examples:
+  - C3 (67 tokens → 2 tokens): 97.0% compression
+  - I5 (71 tokens → 2 tokens): 97.2% compression
+  - 法 (78 tokens → 1 token): 98.7% compression
+  - 法.驗 (63 tokens → 3 tokens): 95.2% compression
+  - C3:build (55 tokens → 4 tokens): 92.7% compression
+
+**Test Coverage:**
+- Determinism: 100-run hash stability verified
+- Schema validation: JobSpec required fields, types, enums
+- Token benchmarks: Symbolic vs expanded text measurement
+- Negative tests: Invalid syntax, unknown symbols, circular expansion
+- Error handling: All error classes produce clear messages with layer info
+
+---
+
 ## [3.7.34] - 2026-01-09
 
 ### Phase 5.2.4 COMPLETE — SCL Validator
