@@ -250,8 +250,8 @@ def main(input_path: Path, output_path: Path) -> int:
         
         rel_output_path = str(output_path.resolve().relative_to(PROJECT_ROOT))
         # Ensure parent exists
-        writer.mkdir_tmp(str(Path(rel_output_path).parent))
-        writer.write_tmp(rel_output_path, json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(Path(rel_output_path).parent))
+        writer.write_auto(rel_output_path, json.dumps(result, indent=2, sort_keys=True))
     except Exception as e:
         print(f"Failed to use GuardedWriter: {e}")
         # Fail closed

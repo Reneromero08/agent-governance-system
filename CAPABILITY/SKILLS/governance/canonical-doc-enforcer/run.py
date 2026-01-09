@@ -364,7 +364,7 @@ def fix_file(file_path: Path, repo_root: Path, dry_run: bool = False, writer: Op
     if not dry_run:
         # Resolve to repo root relative
         rel_path = file_path.resolve().relative_to(repo_root)
-        writer.write_durable(rel_path, new_content)
+        writer.write_auto(rel_path, new_content)
     
     return result
 
@@ -433,8 +433,8 @@ def main():
         
         json_content = json.dumps(results, indent=2)
         
-        writer.mkdir_durable(str(receipt_dir.relative_to(repo_root)))
-        writer.write_durable(str(receipt_path.relative_to(repo_root)), json_content)
+        writer.mkdir_auto(str(receipt_dir.relative_to(repo_root)))
+        writer.write_auto(str(receipt_path.relative_to(repo_root)), json_content)
         
         sys.exit(0)
     
@@ -462,8 +462,8 @@ def main():
             # Assuming output arg is relative or absolute, normalize to repo root
             try:
                 rel_output = output_dir.resolve().relative_to(repo_root)
-                writer.mkdir_durable(str(rel_output))
-                writer.write_durable(str(report_path.relative_to(repo_root)), json_report)
+                writer.mkdir_auto(str(rel_output))
+                writer.write_auto(str(report_path.relative_to(repo_root)), json_report)
             except ValueError:
                 # Output outside repo, we cannot enforce durable write on outside repo reliably with relative paths
                 # But GuardedWriter mostly fails safe.

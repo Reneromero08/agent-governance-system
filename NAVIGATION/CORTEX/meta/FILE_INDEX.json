@@ -7054,7 +7054,7 @@
     "size": 2473
   },
   "CHANGELOG.md": {
-    "hash": "3ab4d28c55e94549e2693b7e56f798b249d23b0899c9724d03a5bfcf5e9befca",
+    "hash": "87aeb500a5d80922c1b9f9d30b4e14b35aca55d15402277e2072b5a53d73abd3",
     "path": "CHANGELOG.md",
     "sections": [
       {
@@ -7073,14 +7073,14 @@
       },
       {
         "anchor": "CHANGELOG.md#fixed",
-        "hash": "1175d1fcba569c8c2593cef58df8fef240922308f80dd726b871b023ee4950e9",
+        "hash": "be81b97fd6d638654062751db881ab3f6911572d3be2da53c8336841a243fbdf",
         "level": 3,
         "title": "Fixed",
-        "tokens": 121
+        "tokens": 209
       },
       {
         "anchor": "CHANGELOG.md#changed",
-        "hash": "1ed277b0fd8e7ee9db18e28121329b63be0760b5216ac7c30d26fb5dc7d95102",
+        "hash": "65aae4e96299efa4c4dc0364a029b7d637101b954a79fb5b7fcdce0074613e23",
         "level": 3,
         "title": "Changed",
         "tokens": 18
@@ -8073,7 +8073,7 @@
         "tokens": 98
       }
     ],
-    "size": 146795
+    "size": 147443
   },
   "INBOX/2025-12/Week-01/12-29-2025-02-45_CI_STABILIZATION_REPORT.md": {
     "hash": "7f6f7ae8d6ef4071a31352fbb22644bd482a3fedbb89fa30ae79a7ade5965937",

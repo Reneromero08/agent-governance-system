@@ -21,12 +21,16 @@ All notable changes to Agent Governance System will be documented in this file.
 - **LAW/CONTRACTS/runner.py** — Fix fixture output directory to tmp domain
   - Changed output from `RUNS_DIR / "fixtures"` to `RUNS_DIR / "_tmp" / "fixtures"`
   - Resolves FIREWALL_TMP_WRITE_WRONG_DOMAIN errors
+- **All skill run.py files** — Replace write_tmp/write_durable/mkdir_tmp/mkdir_durable with write_auto/mkdir_auto
+  - Enables automatic tmp vs durable domain detection based on path
+  - Fixes FIREWALL_TMP_WRITE_WRONG_DOMAIN and FIREWALL_DURABLE_WRITE_WRONG_DOMAIN errors
+  - Affected skills: ant-worker, workspace-isolation, admission-control, canon-governance-check, canon-migration, canonical-doc-enforcer, ci-trigger-policy, intent-guard, invariant-freeze, master-override, repo-contract-alignment, inbox-report-writer, doc-merge-batch-skill, doc-update, example-echo, file-analyzer, pack-validate, powershell-bridge, prompt-runner, skill-creator
 - **LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md** — Added YAML frontmatter with required schema fields (id, title, status, date, confidence, impact, deciders, tags)
 - **LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md** — Added YAML frontmatter with required schema fields
 - **CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md** — Added status and required_canon_version fields to frontmatter
 
 ### Changed
-- All CI gate violations resolved — critic and fixture tests now pass
+- All CI gate violations resolved — critic passes, fixture execution errors fixed
 
 ---
 

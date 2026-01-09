@@ -69,8 +69,8 @@ def main(input_path: Path, output_path: Path) -> int:
     writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
 
-    writer.mkdir_durable(str(output_path.parent))
-    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    writer.mkdir_auto(str(output_path.parent))
+    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     
     if result["valid"]:
         print(f"All {len(expected)} invariants present")

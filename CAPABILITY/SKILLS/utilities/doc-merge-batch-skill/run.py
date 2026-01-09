@@ -71,7 +71,7 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
 
     try:
         rel_out_dir = str(out_dir_abs.relative_to(PROJECT_ROOT))
-        writer.mkdir_tmp(rel_out_dir)
+        writer.mkdir_auto(rel_out_dir)
     except ValueError:
         print(f"[doc-merge-batch-skill] Output dir {out_dir_abs} outside project root")
         return 1
@@ -83,7 +83,7 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     # Use GuardedWriter for pairs.json
     try:
         rel_pairs_path = str(pairs_path.relative_to(PROJECT_ROOT))
-        writer.write_tmp(rel_pairs_path, pairs_data)
+        writer.write_auto(rel_pairs_path, pairs_data)
     except ValueError:
         print(f"[doc-merge-batch-skill] pairs.json path {pairs_path} outside project root")
         return 1
@@ -122,8 +122,8 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     # Use GuardedWriter for final output
     try:
         rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
-        writer.mkdir_tmp(str(Path(rel_output_path).parent))
-        writer.write_tmp(rel_output_path, output_data)
+        writer.mkdir_auto(str(Path(rel_output_path).parent))
+        writer.write_auto(rel_output_path, output_data)
     except ValueError:
         print(f"[doc-merge-batch-skill] Output path {output_path} outside project root")
         return 1

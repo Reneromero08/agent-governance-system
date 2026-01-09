@@ -38,7 +38,7 @@ def _atomic_write_bytes(path: Path, data: bytes, writer: Any = None) -> None:
     if not writer:
         raise RuntimeError("GuardedWriter required")
     # write_durable expects str, so decode if it's JSON bytes (which are ASCII/UTF-8 compatible)
-    writer.write_durable(str(path), data.decode('utf-8'))
+    writer.write_auto(str(path), data.decode('utf-8'))
 
 
 def _resolve_repo_path(path_str: str) -> Path:
@@ -184,7 +184,7 @@ def main(input_path: Path, output_path: Path) -> int:
             ledger_path = _resolve_repo_path(str(ledger_path_str))
             _ensure_output_path(ledger_path)
             # scanner: guarded
-            writer.mkdir_durable(str(ledger_path.parent))
+            writer.mkdir_auto(str(ledger_path.parent))
             inbox_dir = _resolve_repo_path(inbox_path)
             generate_inbox_ledger.generate_ledger(inbox_dir, ledger_path, quiet=True, writer=writer)
             output["ledger_path"] = _normalize_path(ledger_path.relative_to(PROJECT_ROOT))
@@ -250,8 +250,8 @@ def main(input_path: Path, output_path: Path) -> int:
             )
             
             # Write via guarded writer
-            writer.mkdir_durable(str(report_path.parent))
-            writer.write_durable(str(report_path), content)
+            writer.mkdir_auto(str(report_path.parent))
+            writer.write_auto(str(report_path), content)
             
             # Output info
             output["report_path"] = _normalize_path(report_path.relative_to(PROJECT_ROOT))

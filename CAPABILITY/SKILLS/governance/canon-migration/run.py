@@ -97,7 +97,7 @@ def apply_migrations(pack_dir: Path, target_version: str, writer: Any) -> Tuple[
     pack_info = json.loads(pack_info_path.read_text())
     pack_info["canon_version"] = target_version
     pack_info["migrated_from"] = source_version
-    writer.write_durable(str(pack_info_path), json.dumps(pack_info, indent=2, sort_keys=True) + "\n")
+    writer.write_auto(str(pack_info_path), json.dumps(pack_info, indent=2, sort_keys=True) + "\n")
     
     log.append(f"Updated pack version from {source_version} to {target_version}")
     return True, log, warnings
@@ -147,8 +147,8 @@ def main(input_path: Path, output_path: Path) -> int:
          writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS", "MEMORY/LLM_PACKER/_packs"])
          writer.open_commit_gate()
 
-    writer.mkdir_durable(str(output_path.parent))
-    writer.write_durable(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    writer.mkdir_auto(str(output_path.parent))
+    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
     
     # Always return 0 if we produced valid output - fixtures validate correctness
     print("Migration skill completed")

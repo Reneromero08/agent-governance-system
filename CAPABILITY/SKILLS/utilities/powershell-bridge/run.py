@@ -29,7 +29,7 @@ def write_json(path: Path, payload: Dict[str, Any], writer: Any = None) -> None:
          except ValueError:
              rel_path = str(path)
          
-         writer.write_tmp(rel_path, json.dumps(payload, indent=2, sort_keys=True))
+         writer.write_auto(rel_path, json.dumps(payload, indent=2, sort_keys=True))
     except Exception as e:
          print(f"Write failed: {e}")
          raise

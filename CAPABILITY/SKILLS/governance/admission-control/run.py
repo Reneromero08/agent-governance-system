@@ -43,8 +43,8 @@ def main(input_path: Path, output_path: Path) -> int:
     writer = GuardedWriter(REPO_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
 
-    writer.mkdir_durable(str(output_path.parent))
-    writer.write_durable(str(output_path), json.dumps(out, ensure_ascii=True, indent=2, sort_keys=True) + "\n")
+    writer.mkdir_auto(str(output_path.parent))
+    writer.write_auto(str(output_path), json.dumps(out, ensure_ascii=True, indent=2, sort_keys=True) + "\n")
     return 0
 
 
