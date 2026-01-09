@@ -1,8 +1,19 @@
-<!-- CONTENT_HASH: 3.7.37_PENDING -->
+<!-- CONTENT_HASH: 3.7.38_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.38] - 2026-01-09
+
+### Added
+- **Claude Code skill integration** — AGS skills now discoverable by Claude Code
+  - Added YAML frontmatter (name, description) to 18 SKILL.md files
+  - Created junctions from `.claude/skills/` to `CAPABILITY/SKILLS/`
+  - Skills can now be invoked via `/skill-name` in Claude Code
+  - Added `fix_skill_frontmatter.py` utility for future skill updates
 
 ---
 

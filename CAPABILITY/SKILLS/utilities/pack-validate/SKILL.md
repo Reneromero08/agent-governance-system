@@ -1,3 +1,7 @@
+---
+name: pack-validate
+description: "Validates that a pack is complete, correctly structured, and navigable."
+---
 <!-- CONTENT_HASH: 88b9e58c965d51414dc6f300f7cf84ef02b0f91c341acb159dea97c4da4f05af -->
 
 **required_canon_version:** >=3.0.0

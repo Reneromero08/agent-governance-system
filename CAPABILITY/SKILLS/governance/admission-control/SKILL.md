@@ -1,3 +1,7 @@
+---
+name: admission-control
+description: "Validate the ags admit admission control gate using deterministic fixtures."
+---
 <!-- CONTENT_HASH: 163bb0800b06a8adabb867a11a091bef3d9c250e22335393f5a4ae6411c65e5f -->
 
 **required_canon_version:** >=3.0.0

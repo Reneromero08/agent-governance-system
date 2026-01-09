@@ -1,3 +1,7 @@
+---
+name: example-echo
+description: "Use when a minimal, deterministic example skill is needed to verify the contract runner."
+---
 <!-- CONTENT_HASH: bd4db62bbe253d888eafe3dddb4f5851b18a79f00cf3b90c0f5db7af6a850164 -->
 
 **required_canon_version:** >=3.0.0

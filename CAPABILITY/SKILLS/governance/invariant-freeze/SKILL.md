@@ -1,3 +1,7 @@
+---
+name: invariant freeze
+description: "Verifies that all core invariants (INV-001 through INV-008) exist in CANON/INVARIANTS.md. This ensures that invariants are not removed without a major version bump, maintaining the v1.0 stability g..."
+---
 <!-- CONTENT_HASH: e37d6aefb24a29bd64525f913dd0fef7d8d5b235612ac395a6ae8a0a8d625207 -->
 
 **required_canon_version:** >=3.0.0

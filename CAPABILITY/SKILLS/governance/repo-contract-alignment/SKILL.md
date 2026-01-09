@@ -1,3 +1,7 @@
+---
+name: repo-contract-alignment
+description: "Align the repository with its stated governance by scanning contract docs, extracting explicit rules, running checks, and implementing the smallest compliant fixes with enforcement."
+---
 <!-- CONTENT_HASH: dc5da4881546efe848cbadf457ccc141e4512024375fae7f5649fa98839fc310 -->
 
 **required_canon_version:** >=3.0.0

@@ -1,3 +1,7 @@
+---
+name: master-override
+description: "Audit logging and gated access for MASTER_OVERRIDE usage."
+---
 <!-- CONTENT_HASH: 53873221b9c1bef59f0127203848959b23baebe62b5639efe005e3867bdf9c8b -->
 
 **required_canon_version:** >=3.0.0

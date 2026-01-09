@@ -1,3 +1,7 @@
+---
+name: inbox-report-writer
+description: "Use when generating INBOX ledgers, updating INBOX.md indexes, validating INBOX content hashes, or writing canonical reports to INBOX."
+---
 **required_canon_version:** >=3.0.0
 
 # Skill: inbox-report-writer

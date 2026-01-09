@@ -1,3 +1,7 @@
+---
+name: workspace-isolation
+description: "Enforces disciplined git workflow for agents to prevent commit bloat and ensure human approval before permanent repository changes."
+---
 <!-- CONTENT_HASH: placeholder -->
 
 **required_canon_version:** >=3.0.0

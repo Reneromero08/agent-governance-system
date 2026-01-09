@@ -1,3 +1,7 @@
+---
+name: powershell-bridge
+description: "Use when asked to set up a local PowerShell bridge for controlled command execution on Windows."
+---
 <!-- CONTENT_HASH: fae1d6a08e7c5deaa0171dd9199751aa4c806741dda235d1172b845a784faa00 -->
 
 **required_canon_version:** >=3.0.0

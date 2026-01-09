@@ -1,3 +1,7 @@
+---
+name: cortex-toolkit
+description: "Unified toolkit for CORTEX operations including index building, CAS integrity verification, System1 database verification, summary generation, and LLM packer smoke testing."
+---
 **required_canon_version:** >=3.0.0
 
 # Skill: cortex-toolkit
