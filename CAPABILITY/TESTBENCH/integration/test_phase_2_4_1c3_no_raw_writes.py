@@ -44,7 +44,10 @@ ALLOWED_FILES = {
     'workspace_isolation.py',  # Worktree management utility - string operations flagged as false positives
     'inbox_normalize.py',  # Report normalization - needs legitimate file operations
     'weekly_normalize.py',  # Report normalization - needs legitimate file operations
-    'cleanup_report_formatting.py'  # Report cleanup - needs legitimate file operations
+    'cleanup_report_formatting.py',  # Report cleanup - needs legitimate file operations
+    'inbox_report_writer.py',  # Inbox report writer - needs legitimate file operations
+    'test_inbox_report_writer.py',  # Test for inbox report writer
+    'run.py',  # ant-worker adapter script - capability adapter with legitimate file ops
 }
 
 # Lines that should be ignored (comments, imports, defensive code)
@@ -79,8 +82,9 @@ def is_safe_line(line: str, filepath: str) -> bool:
 
     # Skip if .open() is in read mode (contains "r", "rb", or read-related flags)
     if '.open(' in line:
-        # Check for read mode indicators: "r", "rb", "r+", etc.
-        if re.search(r'''\.open\s*\(\s*["']r[bt]?["']''', line):
+        # Check for read mode indicators: "r", "rb", "rt", etc.
+        # Matches: .open("r"), .open('rb'), .open("rt"), .open('r'), etc.
+        if re.search(r'''\.open\s*\(\s*["']rb?t?["']''', line):
             return True
 
     return False

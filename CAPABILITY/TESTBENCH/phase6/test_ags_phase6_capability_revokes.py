@@ -30,8 +30,7 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
     return subprocess.run(cmd, cwd=str(REPO_ROOT), capture_output=True, text=True, env=env)
 
 
-def _prepare_ant_worker_inputs(*, label: str) -> None:
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+def _prepare_ant_worker_inputs(*, label: str, reg_root: Path) -> None:
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -54,7 +53,8 @@ def _prepare_ant_worker_inputs(*, label: str) -> None:
 
 
 def test_revoked_capability_rejects_at_route(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-revokes-route-reject"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-revokes-route-reject-{unique_suffix}"
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
 
@@ -75,7 +75,8 @@ def test_revoked_capability_rejects_at_route(tmp_path: Path) -> None:
 
 
 def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-revokes-historical-ok"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-revokes-historical-ok-{unique_suffix}"
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
 
@@ -92,7 +93,7 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
 
     try:
         # Clean up pipeline directory first
@@ -108,7 +109,7 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
         _rm(reg_root)
 
         # Now prepare fresh ant worker inputs
-        _prepare_ant_worker_inputs(label="PHASE69-HISTORICAL\n")
+        _prepare_ant_worker_inputs(label="PHASE69-HISTORICAL\n", reg_root=reg_root)
 
         r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
         assert r_route.returncode == 0, r_route.stdout + r_route.stderr
@@ -134,7 +135,8 @@ def test_historical_pipeline_verifies_after_revocation(tmp_path: Path) -> None:
 
 
 def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-revokes-post-reject"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-revokes-post-reject-{unique_suffix}"
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
 
@@ -151,7 +153,7 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
     runs_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs"
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
 
     try:
         # Clean up pipeline directory first
@@ -167,7 +169,7 @@ def test_post_revocation_pipeline_verify_fails_closed(tmp_path: Path) -> None:
         _rm(reg_root)
 
         # Now prepare fresh ant worker inputs
-        _prepare_ant_worker_inputs(label="PHASE69-POST\n")
+        _prepare_ant_worker_inputs(label="PHASE69-POST\n", reg_root=reg_root)
 
         # Route before revocation (allowed).
         r_route = _run([sys.executable, "-m", "CAPABILITY.TOOLS.ags", "route", "--plan", str(plan_path), "--pipeline-id", pipeline_id], env=env_route)
