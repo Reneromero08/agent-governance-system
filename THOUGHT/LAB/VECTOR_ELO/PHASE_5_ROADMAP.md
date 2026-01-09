@@ -1,10 +1,7 @@
 ---
-uuid: 00000000-0000-0000-0000-000000000000
 title: Phase 5 Vector/Symbol Integration Detailed Roadmap
 section: roadmap
-bucket: roadmaps
-author: System
-priority: High
+version: 1.8.0
 created: 2026-01-07
 modified: 2026-01-08
 status: Active
@@ -18,14 +15,6 @@ tags:
 <!-- CONTENT_HASH: 7e61cd536fd30b163f4c43ad44a0ed1ac922b06cf7d8dae7a68f69c7bab4cdb9 -->
 
 # Phase 5: Vector/Symbol Integration - Detailed Roadmap
-
-**Version:** 1.8.0
-**Created:** 2026-01-07
-**Last Updated:** 2026-01-08
-**Prerequisite:** Phase 4 (Catalytic Architecture) - COMPLETE
-**Downstream:** Phase 6.0 (Cassette Network) depends on 5.2 MemoryRecord contract
-
----
 
 ## BREAKTHROUGH: Semantic Symbol Compression (2026-01-08)
 
@@ -70,9 +59,9 @@ Every task must produce:
 
 ---
 
-# Phase 5.1: Vector Indexing & Semantic Discovery
+# Phase 5.1: Vector Indexing & Semantic Discovery ✅
 
-## 5.1.0 Foundation: MemoryRecord Contract
+## 5.1.0 Foundation: MemoryRecord Contract ✅
 
 **Purpose:** Define the canonical data structure for all vector-indexed content.
 
@@ -630,55 +619,12 @@ The original plan for AST parsing and template expansion is deferred. If the sim
 
 ---
 
-# Integration & Dependencies
 
-## Compression Stack → Phase Mapping
 
-Each compression layer is implemented by a specific phase:
+# Phase Dependencies
 
-| Layer | Phase | Deliverable | Compression Target | Receipt Status |
-|-------|-------|-------------|-------------------|----------------|
-| Vector Retrieval | **5.1** | CORTEX semantic search | ~99.9% | **RECEIPTED** |
-| SCL Symbolic | **5.2** | CODEBOOK.json + decoder | 80-90% additional | Pending |
-| CAS External | **6.0** | Cassette Network | 90% additional | Pending |
-| Session Cache | **6.x** | Session state management | 90% on warm queries | Pending |
-
-**Critical Path:** 5.1 → 5.2 → 6.0 → 6.x (each layer compounds on previous)
-
-### Stacked Receipt Architecture
-
-**Goal:** Transform theoretical calculations into stacked receipts. Each layer gets tiktoken-measured proof that chains to previous layers.
-
-| Layer | Proof Script | Receipt Content | Chains To |
-|-------|--------------|-----------------|-----------|
-| L1: Vector | `run_compression_proof.py` | corpus → pointers | (baseline) |
-| L2: SCL | `run_scl_proof.py` | natural → symbolic IR | L1 receipt |
-| L3: CAS | `run_cas_proof.py` | content → hash refs | L2 receipt |
-| L4: Session | `run_session_proof.py` | cold → warm cache | L3 receipt |
-
-**Stacked Receipt Format:**
-```json
-{
-  "layer": "SCL",
-  "parent_receipt": "325410258180d609...",  // L1 receipt hash
-  "input_tokens": 622,                       // from L1 result
-  "output_tokens": 124,                      // measured via tiktoken
-  "compression_pct": 80.06,
-  "tokenizer": {"library": "tiktoken", "encoding": "o200k_base"},
-  "receipt_hash": "..."
-}
-```
-
-**Stacked Proof = Chain of Receipts:**
-```
-L1 Receipt (PROVEN) → L2 Receipt → L3 Receipt → L4 Receipt
-     ↓                    ↓            ↓            ↓
-  99.9%              80% add      90% add      90% warm
-     ↓                    ↓            ↓            ↓
-  ~3 nines          ~4 nines     ~5 nines     ~6 nines (STACKED PROOF)
-```
-
-**Exit Criteria:** Each layer's receipt is cryptographically chained. Final compression is product of measured layers, not arithmetic.
+## Critical Path
+5.1 → 5.2 → 6.0 → 6.x (each layer compounds on previous)
 
 ## Phase 5.2 → Phase 6.0 Handoff (CAS Layer)
 
@@ -749,7 +695,6 @@ SCL/
 ├── GRAMMAR.md                     # Syntax reference
 └── tests/fixtures/                # Test programs
 ```
-
 ---
 
 # Test Count Targets
@@ -769,30 +714,6 @@ SCL/
 | 5.2.6 | Benchmarks | 5+ |
 | 5.2.7 | Token Accountability | 10+ |
 | **Total** | | **~75 tests** |
-
----
-
-# Exit Criteria Summary
-
-## Phase 5.1 Complete When:
-- [ ] MemoryRecord contract defined and validated
-- [ ] Vector index includes canon + ADRs with deterministic rebuild
-- [ ] Skill discovery returns stable results for fixed corpus
-- [ ] Cross-reference indexing operational
-
-**Compression Milestone:** Vector layer delivers ~3 nines (~99.9%) - ALREADY PROVEN via CORTEX
-
-## Phase 5.2 Complete When:
-- [ ] CODEBOOK.json contains 30+ governance macros
-- [ ] `scl decode <program>` → emits JobSpec JSON
-- [ ] `scl validate` passes valid programs, rejects invalid
-- [ ] **SCL compression layer delivers 80%+ additional reduction** (stacks with 5.1 vector layer)
-- [ ] Reproducible expansions (same symbols → same output hash)
-- [ ] TokenReceipt emitted by all semantic operations
-- [ ] Session summaries aggregate token savings
-- [ ] Firewall enforces receipt requirement
-
-**Compression Milestone:** After 5.2, stack achieves ~4-5 nines per cold query (vector + SCL combined)
 
 ---
 
@@ -1040,34 +961,21 @@ SCL/
 
 ---
 
-*Roadmap v1.0.0 - Generated 2026-01-07*
 
----
 
 # Appendix: Phase 5 Validation & Measured Results
 
-> Updated 2026-01-08 with hardened compression data (tiktoken + o200k_base).
+> **Note:** Detailed compression proofs, measurements, and theoretical analysis are externalized. This section provides only summary status and references.
 
-## Measured Compression Results (Hardened)
+## Compression Proof Status
 
-**Source:** `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_REPORT.md`
-**Tokenizer:** `tiktoken` v0.12.0 with `o200k_base` encoding (Phase 6.4.5 compliant)
+| Layer | Status | Proof Document | Key Finding |
+|-------|--------|----------------|-------------|
+| L1: Vector Retrieval | **PROVEN** | `COMPRESSION_PROOF_REPORT.md` | 99.76-99.93% measured (tiktoken o200k_base) |
+| L2: Semantic Symbols | **PROVEN** | `SEMANTIC_SYMBOL_PROOF_REPORT.md` | 56,370x compression (法 → LAW/CANON) |
+| L3-L4: Full Stack | **THEORETICAL** | `COMPRESSION_STACK_ANALYSIS.md` | ~6 nines achievable (token-count limit) |
 
-### Pointer-Only Mode (Hash References)
-| Query | Baseline (A) | Compressed | Savings |
-|-------|--------------|------------|---------|
-| Translation Layer architecture | 365,891 | 834 | **99.772%** |
-| AGS BOOTSTRAP v1.0 | 365,891 | 848 | **99.768%** |
-| Mechanical indexer scans | 365,891 | 856 | **99.766%** |
-
-### Filtered-Content Mode (Semantic Retrieval)
-| Query | Baseline (B) | Compressed | Savings |
-|-------|--------------|------------|---------|
-| Translation Layer architecture | 123,677 | 320 | **99.741%** |
-| AGS BOOTSTRAP v1.0 | 123,677 | 855 | **99.309%** |
-| Mechanical indexer scans | 123,677 | 241 | **99.805%** |
-
-**Conclusion:** The 90%+ token reduction target is **conservative**. Hardened measurements with `tiktoken` show **99.3-99.8% compression**.
+**See:** `NAVIGATION/PROOFS/COMPRESSION/` for complete measured data, methodologies, receipts, and theoretical analysis.
 
 ## Component Validation
 
@@ -1080,73 +988,14 @@ SCL/
 
 ## Research-Grounded Targets
 
-### Token Reduction (Single Layer - Vector Retrieval)
-- **Measured (Hardened):** 99.77% (pointer-only), 99.3-99.8% (filtered-content)
-- **Target:** 99.9% (3 nines) - **PROVEN**
-- **Source:** COMPRESSION_PROOF_REPORT.md
-- **Tokenizer:** `tiktoken` v0.12.0 + `o200k_base` (Phase 6.4.5 compliant)
+- **L1 Vector:** ~99.9% (3 nines) - **PROVEN** via tiktoken measurement
+- **L2 SCL:** 80-90% additional - **Theoretical** (Phase 5.2 deliverable)
+- **L3 CAS:** 90% additional - **Theoretical** (Phase 6.0 deliverable)
+- **L4 Session Cache:** 90% on warm queries - **Theoretical** (Phase 6.x deliverable)
+- **Full Stack:** ~6 nines (token-count limit) - **Theoretical**
+- **Semantic Density:** Beyond 6 nines (meaning-per-token multiplier) - **Theoretical**
 
-### Stacked Compression (Full Stack - Theoretical Maximum)
-- **Source:** `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md`
-- **Proven today:** 3 nines (99.9%) with vector retrieval alone
-- **Achievable with full stack:** 6 nines (99.9998%)
-- **Physical limit:** 6 nines (cannot send less than 1 token per query)
-
-| Layer | Compression | Status | Source |
-|-------|-------------|--------|--------|
-| Vector Retrieval | 99.9% | **PROVEN** | tiktoken measured |
-| SCL Symbolic | 80-90% | Theoretical | TINY_COMPRESS research |
-| CAS External | 90% | Theoretical | Architecture design |
-| Session Cache | 90% | Theoretical | Warm cache model |
-
-**Per-Query (Cold):**
-```
-Baseline:              622,480 tokens
-After Vector (99.9%):  622 tokens
-After SCL (80%):       124 tokens
-After CAS (90%):       12.4 tokens
-Final:                 99.998% (5 nines)
-```
-
-**Per-Session (1000 queries, 90% warm):**
-```
-Query 1 (cold):        50 tokens
-Query 2-1000 (warm):   1 token each
-Total:                 1,049 tokens
-Baseline:              622,480,000 tokens
-Final:                 99.9998% (6 nines)
-```
-
-### Macro Count (30-80)
-- **Source:** Governance pattern analysis in SYMBOLIC_COMPRESSION.md
-- **Method:** "covering 80% of repeated governance"
-- **Categories:** Constraint, Schema, CAS, Scan, Ledger, Expand macros
-
-### DSL Syntax
-- **Designed:** ASCII-first for tokenizer safety
-- **Tested:** Examples in SEMIOTIC_COMPRESSION.md
-- **Format:** `@LAW>=0.1.0 & !WRITE(authored_md)`
-
-### TINY_COMPRESS (RL Compression Research)
-- **Source:** `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md`
-- **Goal:** Train tiny model (10M-50M params) to learn symbolic compression via RL
-- **Target:** 80%+ compression vs baseline (raw text)
-- **Status:** Experimental (Phase T.0 - Research)
-
-## Downstream Dependencies
-
-Phase 5 is the foundation for:
-
-| Downstream | Depends On | Connection |
-|------------|------------|------------|
-| Phase 3 (CAT CHAT) | 5.0 MemoryRecord | Session capsules |
-| Phase 6 (Cassette) | 5.0 MemoryRecord | Cassette storage binding |
-| Phase 6 (Cassette) | 5.3 CODEBOOK_SYNC_PROTOCOL | Agent-to-agent sync |
-| Phase 6.1 | 5.1 Vectors | 9 cassettes including RESIDENT |
-| Phase 7 (ELO) | 5.0 scores field | ELO in MemoryRecord |
-| Phase 9 (Swarm) | 5.1.4 Skill Discovery | Governor task routing |
-| Phase 10 (Ω) | 5.2 SCL | Automatic symbol extraction |
-| **Publication** | 5.3 PAPER_SPC | Defensible research claim |
+**See:** `COMPRESSION_STACK_ANALYSIS.md` for stacked receipt architecture, per-query calculations, and semantic density analysis.
 
 ## Execution Order
 
@@ -1167,82 +1016,6 @@ Phase 5.3 - SPC Formalization (specs, benchmarks, paper)
 
 ## References
 
-### Proven
-- `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_REPORT.md` - L1 Hardened vector proof (tiktoken)
-- `NAVIGATION/PROOFS/COMPRESSION/SEMANTIC_SYMBOL_PROOF_REPORT.md` - **L2 Semantic symbol proof (56,370x)**
-- `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_STACK_ANALYSIS.md` - Full stack compression analysis
-
-### Research
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/PLATONIC_COMPRESSION_THESIS.md` - **ONTOLOGY** Truth as attractor
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md` - **Phase 5.3 brief** (GPT formalization proposal)
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_9NINES_COMPRESSION_RESEARCH_ELO_REPORT.md` - Execution plan
-- `THOUGHT/LAB/VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md` - VSA/LCM literature
-- `THOUGHT/LAB/TINY_COMPRESS/TINY_COMPRESS_ROADMAP.md` - RL compression research
-- `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-26-2025-06-39_SYMBOLIC_COMPRESSION_BRIEF_1.md` - SCL research
-
-### Implementation
-- `CAPABILITY/TOOLS/codebook_lookup.py` - **Semantic symbol resolution tool**
-- `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md` - Token accountability law
-
----
-
-*Roadmap v1.7.0 - Updated 2026-01-08 with Phase 5.1.4 Skill Discovery complete*
-
----
-
-
-## Phase E.X: Eigenvalue Alignment Protocol (Research Complete)
-
-**Status:** PROOF OF CONCEPT VALIDATED (2026-01-08)
-**Goal:** Cross-model semantic alignment via eigenvalue spectrum invariance.
-
-### Discovery
-
-The **eigenvalue spectrum** of an anchor word distance matrix is invariant across embedding models (r = 0.99+), even when raw distance matrices are uncorrelated or inverted.
-
-### Key Finding
-
-| Model Pair | Raw Distance Correlation | Eigenvalue Correlation |
-|------------|--------------------------|------------------------|
-| MiniLM ↔ E5-large | **-0.05** (inverted!) | **0.9869** |
-| MiniLM ↔ MPNET | 0.914 | 0.9954 |
-| MiniLM ↔ BGE | 0.277 | 0.9895 |
-| MiniLM ↔ GTE | 0.198 | 0.9865 |
-
-### Proven Method
-
-1. Compute squared distance matrix D² for anchor words
-2. Apply classical MDS: B = -½ J D² J (double-centered Gram)
-3. Eigendecompose: B = VΛV^T
-4. Get MDS coordinates: X = V√Λ
-5. Procrustes rotation: R = argmin ||X₁R - X₂||
-6. Align new points via Gower's out-of-sample formula
-
-**Result:** Raw similarity -0.0053 → Aligned similarity **0.8377** (+0.8430 improvement)
-
-### Existing Artifacts
-
-| File | Description |
-|------|-------------|
-| `experiments/semantic_anchor_test.py` | Cross-model distance matrix testing |
-| `experiments/invariant_search.py` | Invariant discovery (eigenvalues, cross-ratios, etc.) |
-| `experiments/eigen_alignment_proof.py` | MDS + Procrustes proof of concept |
-| `research/cassette-network/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md` | Full hypothesis document |
-| `research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md` | Proof report |
-| `research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md` | Full protocol spec (GPT) |
-
-### Future Work (Phase E.X.1)
-
-- [ ] **E.X.1.1**: Implement full protocol per OPUS pack spec
-  - Protocol message types (ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP)
-  - CLI: `anchors build`, `signature compute`, `map fit`, `map apply`
-- [ ] **E.X.1.2**: Benchmark with 8/16/32/64 anchor sets
-- [ ] **E.X.1.3**: Test neighborhood overlap@k on held-out set
-- [ ] **E.X.1.4**: Compare with vec2vec (arXiv:2505.12540) neural approach
-- [ ] **E.X.1.5**: Integrate as cassette handshake artifact
-
-### Related Papers
-
-- arXiv:2405.07987 - Platonic Representation Hypothesis
-- arXiv:2505.12540 - vec2vec (neural approach to same problem)
-- arXiv:2511.21038 - Semantic Anchors in In-Context Learning
+**For comprehensive research documentation and references, see:**
+- `research/INDEX.md` - Complete catalog of all Phase 5 research documents organized by category (symbols, phase-5, cassette-network, semantic-core, vector-substrate)
+- `NAVIGATION/PROOFS/COMPRESSION/` - All compression proofs and measured results (L1, L2, stack analysis)
