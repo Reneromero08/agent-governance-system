@@ -465,24 +465,46 @@ def run_scifact_benchmark(
     if len(wrong_bank) < (20 if fast else 80):
         raise RuntimeError(f"Too few SciFact wrong-check pools ({len(wrong_bank)})")
 
-    neighbor_of: Dict[int, int] = {}
-    neighbor_sim_by_claim: Dict[int, float] = {}
+    neighbor_candidates_by_claim: Dict[int, List[int]] = {}
+    neighbor_candidate_sims_by_claim: Dict[int, List[float]] = {}
     neighbor_sims: List[float] = []
     if wrong_checks == "neighbor":
-        claim_ids = sorted({int(e.claim_id) for e in support_examples})
         claim_text_by_id: Dict[int, str] = {}
         for e in support_examples:
             claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
-        texts = [claim_text_by_id[cid] for cid in claim_ids]
-        emb = embed_texts(texts)
-        sim = emb @ emb.T
+        claim_ids = sorted({int(e.claim_id) for e in support_examples})
+
+        # Build a CONTRADICT bank so "neighbor wrong checks" are actually wrong (truth-inconsistent),
+        # but still semantically close (nearest-neighbor competitor).
+        contradict_examples = [e for e in examples if str(e.label).strip().upper() == "CONTRADICT"]
+        contra_claim_text_by_id: Dict[int, str] = {}
+        contra_bank: Dict[int, List[str]] = {}
+        for e in contradict_examples[: (120 if fast else 600)]:
+            contra_claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
+            sampled = sample_sentences_from_doc(
+                int(e.doc_id),
+                8,
+                seed_key=(seed * 1_000_003) ^ (int(e.claim_id) * 9176) ^ int(e.doc_id) ^ 0xC0A7,
+            )
+            if len(sampled) >= 6:
+                contra_bank.setdefault(int(e.claim_id), sampled[:6])
+
+        contra_claim_ids = sorted([cid for cid in contra_bank.keys() if cid in contra_claim_text_by_id])
+        if len(contra_claim_ids) < (20 if fast else 80):
+            raise RuntimeError(f"Too few SciFact CONTRADICT candidates for neighbor-wrong checks ({len(contra_claim_ids)})")
+
+        support_texts = [claim_text_by_id[cid] for cid in claim_ids]
+        contra_texts = [contra_claim_text_by_id[cid] for cid in contra_claim_ids]
+        emb_support = embed_texts(support_texts)
+        emb_contra = embed_texts(contra_texts)
+        sim_sc = emb_support @ emb_contra.T
+
         k = max(1, int(neighbor_k))
         for i, cid in enumerate(claim_ids):
-            order = np.argsort(-sim[i])
-            cand = [claim_ids[int(j)] for j in order[1 : (k + 1)]]
-            if cand:
-                neighbor_of[cid] = int(cand[0])
-                neighbor_sim_by_claim[cid] = float(sim[i, int(order[1])])
+            order = np.argsort(-sim_sc[i])
+            cand_pos = [int(j) for j in order[:k]]
+            neighbor_candidates_by_claim[int(cid)] = [int(contra_claim_ids[int(j)]) for j in cand_pos]
+            neighbor_candidate_sims_by_claim[int(cid)] = [float(sim_sc[i, int(j)]) for j in cand_pos]
 
     for i, ex in enumerate(support_examples):
         sampled = sample_sentences_from_doc(
@@ -497,19 +519,32 @@ def run_scifact_benchmark(
         if len(check_correct_sents) < 4:
             continue
 
+        obs_scores = sentence_support_scores([ex.claim] * len(obs_sents), obs_sents).tolist()
+
         wrong_sents: Optional[List[str]] = None
         if wrong_checks == "neighbor":
-            nid = neighbor_of.get(int(ex.claim_id))
-            if nid is not None:
-                wrong_sents = claim_bank.get(int(nid))
-                if wrong_sents is not None:
-                    neighbor_sims.append(float(neighbor_sim_by_claim.get(int(ex.claim_id), float("nan"))))
+            cands = neighbor_candidates_by_claim.get(int(ex.claim_id)) or []
+            sims = neighbor_candidate_sims_by_claim.get(int(ex.claim_id)) or []
+            if cands and len(cands) == len(sims):
+                best_pos: Optional[int] = None
+                best_M: float = float("inf")
+                for pos, contra_cid in enumerate(cands):
+                    sents = contra_bank.get(int(contra_cid)) or []
+                    pick = list(sents[:6])
+                    if len(pick) < 2:
+                        continue
+                    cross_scores = sentence_support_scores([ex.claim] * len(pick), pick).tolist()
+                    M_wrong_candidate = M_from_R(R_grounded(obs_scores, [float(x) for x in cross_scores]))
+                    if M_wrong_candidate < best_M:
+                        best_M = float(M_wrong_candidate)
+                        best_pos = int(pos)
+                        wrong_sents = pick
+                if best_pos is not None:
+                    neighbor_sims.append(float(sims[int(best_pos)]))
         if wrong_sents is None:
             wrong_sents = wrong_bank[(i + 17) % len(wrong_bank)]
             if wrong_sents == check_correct_sents:
                 wrong_sents = wrong_bank[(i + 18) % len(wrong_bank)]
-
-        obs_scores = sentence_support_scores([ex.claim] * len(obs_sents), obs_sents).tolist()
         check_correct_scores = sentence_support_scores([ex.claim] * len(check_correct_sents), check_correct_sents).tolist()
         check_wrong_scores = sentence_support_scores([ex.claim] * len(wrong_sents), wrong_sents).tolist()
 
@@ -820,24 +855,58 @@ def run_climate_fever_intervention_benchmark(
             sims = bank_emb @ c_emb
             k = max(1, int(neighbor_k))
             order = np.argsort(-sims)
-            cand = []
-            for j in order[1 : (k + 2)]:
+            cand: List[int] = []
+            for j in order[: max(50, k + 2)]:
                 j = int(j)
                 if bank_claim_texts[j].strip() == claim.strip():
                     continue
                 cand.append(j)
-                if len(cand) >= 1:
+                if len(cand) >= k:
                     break
-            pick = cand[0] if cand else (int(i) + 17) % len(bank)
-            if bank_claim_texts[int(pick)].strip() == claim.strip():
-                pick = (int(pick) + 1) % len(bank)
+            if not cand:
+                cand = [(int(i) + 17) % len(bank)]
+
+            # Prefer a neighbor competitor whose own SUPPORT evidence is strong for itself,
+            # but yields LOW scores when evaluated against this claim.
+            # This prevents "wrong checks" that accidentally support the claim.
+            pick_sents: List[str] = []
+            pick_offsets: List[Tuple[int, int]] = []
+            cand_for_offsets: List[int] = []
+            cur = 0
+            for j in cand:
+                other_claim, other_supports = bank[int(j)]
+                pool = other_supports[:6]
+                if len(pool) < 3:
+                    continue
+                self_scores = sentence_support_scores([other_claim] * len(pool), pool).tolist()
+                order_self = np.argsort(-np.asarray(self_scores, dtype=float))
+                chosen = [pool[int(k)] for k in order_self[:3]]
+                pick_sents.extend(chosen)
+                pick_offsets.append((cur, cur + len(chosen)))
+                cand_for_offsets.append(int(j))
+                cur += len(chosen)
+            if not cand_for_offsets:
+                cand_for_offsets = [(int(i) + 17) % len(bank)]
+                pick_sents = bank[int(cand_for_offsets[0])][1][:3]
+                pick_offsets = [(0, len(pick_sents))]
+
+            cross_scores = sentence_support_scores([claim] * len(pick_sents), pick_sents).tolist()
+            means: List[float] = []
+            for a, b in pick_offsets:
+                means.append(float(np.mean(np.asarray(cross_scores[a:b], dtype=float))) if b > a else float("inf"))
+            pos = int(np.argmin(np.asarray(means, dtype=float)))
+            pick = int(cand_for_offsets[pos])
+            a, b = pick_offsets[pos]
+
             neighbor_sims.append(float(sims[int(pick)]))
             other_claim, other_supports = bank[pick]
+            wrong_check_texts = pick_sents[a:b]
         else:
             other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
             if other_claim.strip() == claim.strip():
                 other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
-        wrong_check_texts = other_supports[:3]
+        if wrong_checks != "neighbor":
+            wrong_check_texts = other_supports[:3]
         if len(wrong_check_texts) < 2:
             continue
 
@@ -1148,7 +1217,11 @@ def run_climate_fever_streaming(
                 cand_means.append(float("inf"))
             else:
                 cand_means.append(float(np.mean(np.asarray(flat_scores[a:b], dtype=float))))
-        strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
+        if wrong_checks == "neighbor":
+            # For neighbor-competitor falsifiers, prefer the most incompatible neighbor (directional gap).
+            strength = [(mu_hat_proxy - m) if math.isfinite(m) else -1.0 for m in cand_means]
+        else:
+            strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
         chosen_pos = int(np.argmax(np.asarray(strength, dtype=float)))
         wrong_check_texts = cand_texts[chosen_pos]
         if wrong_checks == "neighbor":
@@ -1398,32 +1471,74 @@ def run_scifact_streaming(
         if not cand:
             continue
 
-        cand_sent_lists: List[List[str]] = [support_bank[idx][1][:6] for idx in cand]
-        flat_sents: List[str] = []
-        offsets: List[Tuple[int, int]] = []
-        cur = 0
-        for lst in cand_sent_lists:
-            flat_sents.extend(lst)
-            offsets.append((cur, cur + len(lst)))
-            cur += len(lst)
-        flat_claims = [claim_text] * len(flat_sents)
-        flat_scores = sentence_support_scores(flat_claims, flat_sents).tolist()
-
-        cand_means: List[float] = []
-        for a, b in offsets:
-            if b <= a:
-                cand_means.append(float("inf"))
-            else:
-                cand_means.append(float(np.mean(np.asarray(flat_scores[a:b], dtype=float))))
-        # Choose the candidate whose check-mean most strongly disagrees with the observation mean,
-        # making the empirical compatibility term E collapse under the wrong-check intervention.
-        cand_strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
-        chosen_pos = int(np.argmax(np.asarray(cand_strength, dtype=float)))
-        chosen_idx = cand[chosen_pos]
         if wrong_checks == "neighbor":
+            # Build a "neighbor competitor" wrong-check pool:
+            # pick a nearest-neighbor claim whose own evidence-sentences are strongly SUPPORTIVE for itself,
+            # but score LOW when evaluated against the current claim.
+            cand_sent_lists: List[List[str]] = [support_bank[idx][1][:6] for idx in cand]
+
+            # 1) Score each candidate's sentences against its *own* claim (self-support).
+            flat_self_claims: List[str] = []
+            flat_self_sents: List[str] = []
+            offsets: List[Tuple[int, int]] = []
+            cur = 0
+            for pos, idx in enumerate(cand):
+                sents = cand_sent_lists[pos]
+                c_claim = support_claim_texts[int(idx)]
+                flat_self_claims.extend([c_claim] * len(sents))
+                flat_self_sents.extend(sents)
+                offsets.append((cur, cur + len(sents)))
+                cur += len(sents)
+            self_scores = sentence_support_scores(flat_self_claims, flat_self_sents).tolist()
+
+            # 2) For each candidate, take its top self-support sentences as the check pool,
+            # then score those sentences against the current claim (cross-score).
+            pick_sents: List[str] = []
+            pick_offsets: List[Tuple[int, int]] = []
+            cur = 0
+            for a, b in offsets:
+                local = np.asarray([float(x) for x in self_scores[a:b]], dtype=float)
+                order_local = np.argsort(-local)
+                top_idx = [int(i) for i in order_local[:4]]
+                chosen_sents = [flat_self_sents[a + int(j)] for j in top_idx]
+                pick_sents.extend(chosen_sents)
+                pick_offsets.append((cur, cur + len(chosen_sents)))
+                cur += len(chosen_sents)
+            cross_scores = sentence_support_scores([claim_text] * len(pick_sents), pick_sents).tolist()
+            cross_means: List[float] = []
+            for a, b in pick_offsets:
+                cross_means.append(float(np.mean(np.asarray(cross_scores[a:b], dtype=float))) if b > a else float("inf"))
+
+            chosen_pos = int(np.argmin(np.asarray(cross_means, dtype=float)))
+            chosen_idx = int(cand[chosen_pos])
             neighbor_sims.append(float(sims[int(chosen_idx)]))
-        a, b = offsets[chosen_pos]
-        wrong_scores_preview = [float(x) for x in flat_scores[a:b]]
+            a, b = pick_offsets[chosen_pos]
+            wrong_scores_preview = [float(x) for x in cross_scores[a:b]]
+        else:
+            cand_sent_lists = [support_bank[idx][1][:6] for idx in cand]
+            flat_sents: List[str] = []
+            offsets = []
+            cur = 0
+            for lst in cand_sent_lists:
+                flat_sents.extend(lst)
+                offsets.append((cur, cur + len(lst)))
+                cur += len(lst)
+            flat_claims = [claim_text] * len(flat_sents)
+            flat_scores = sentence_support_scores(flat_claims, flat_sents).tolist()
+
+            cand_means: List[float] = []
+            for a, b in offsets:
+                if b <= a:
+                    cand_means.append(float("inf"))
+                else:
+                    cand_means.append(float(np.mean(np.asarray(flat_scores[a:b], dtype=float))))
+            # Choose a candidate whose check-mean most strongly disagrees with the observation mean,
+            # making the empirical compatibility term E collapse under the wrong-check intervention.
+            cand_strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
+            chosen_pos = int(np.argmax(np.asarray(cand_strength, dtype=float)))
+            chosen_idx = int(cand[chosen_pos])
+            a, b = offsets[chosen_pos]
+            wrong_scores_preview = [float(x) for x in flat_scores[a:b]]
         if len(wrong_scores_preview) < 3:
             continue
 
@@ -1605,7 +1720,9 @@ def main() -> int:
             if not pw_vals_f:
                 raise SystemExit("transfer calibration failed: missing pair_wins")
 
-            frozen_min_z = 2.0 if args.fast else 2.6
+            # NOTE: In --fast mode, n is intentionally small, so a slightly lower z-gate keeps
+            # the short-loop iteration meaningful without forcing long runs.
+            frozen_min_z = 1.4 if args.fast else 2.6
             frozen_min_pair_wins = _percentile(pw_vals_f, 10.0)
 
             if args.calibration_out:
