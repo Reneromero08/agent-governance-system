@@ -19,6 +19,7 @@ See `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST
 `experiments/open_questions/q32/`
 - `q32_meaning_field_tests.py` - echo-chamber falsifier, phase-transition gate, propagation/gluing
 - `q32_adversarial_gauntlet.py` - parameter sweeps, noise-family shifts, negative controls, independence intervention
+- `q32_public_benchmarks.py` - public truth-anchors (Climate-FEVER), fast-mode CLI, strict/full gates
 
 ---
 

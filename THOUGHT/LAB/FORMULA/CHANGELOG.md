@@ -1,5 +1,15 @@
 # FORMULA Lab Changelog
 
+## [1.5.4] - 2026-01-09
+
+### Q32 Phase 2 Harness: Public Truth-Anchored Benchmarks (Fast + Full)
+
+- Added public benchmark runner with a fast iteration loop and strict/full gates:
+  - `experiments/open_questions/q32/q32_public_benchmarks.py`
+- Climate-FEVER benchmark currently passes in strict mode with NLI scoring:
+  - `...q32_public_benchmarks.py --dataset climate_fever --scoring crossencoder`
+- SciFact benchmark is still failing and is kept as a public counterexample to iterate on (Q32 remains OPEN).
+
 Research changelog for the Living Formula: `R = (E / ∇S) × σ(f)^Df`
 
 ## [1.5.3] - 2026-01-08

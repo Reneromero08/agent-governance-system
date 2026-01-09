@@ -21,6 +21,7 @@ Run (recommended in the pinned venv):
 
 from __future__ import annotations
 
+import argparse
 import math
 import os
 from dataclasses import dataclass
@@ -30,6 +31,9 @@ import numpy as np
 
 
 EPS = 1e-12
+_CROSS_ENCODER = None
+_SENTENCE_MODEL = None
+_USE_CROSS_ENCODER = True
 
 
 def set_cache_roots() -> None:
@@ -91,6 +95,14 @@ class ScifactExample:
     doc_title: str
     rationale_sentences: Tuple[str, ...]
     label: str  # SUPPORT / CONTRADICT / NOT_ENOUGH_INFO
+    cited_doc_ids: Tuple[int, ...]
+
+
+@dataclass(frozen=True)
+class BenchmarkResult:
+    name: str
+    passed: bool
+    details: Dict[str, float]
 
 
 def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]:
@@ -131,6 +143,13 @@ def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]
         sent_ids = row.get("evidence_sentences", []) or []
         if not sent_ids:
             continue
+        cited = row.get("cited_doc_ids", []) or []
+        cited_ids: List[int] = []
+        for cd in cited:
+            try:
+                cited_ids.append(int(cd))
+            except Exception:
+                continue
 
         doc = corpus_by_id[doc_id]
         title = str(doc.get("title", f"doc_{doc_id}"))
@@ -140,19 +159,20 @@ def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]
         for sid in sent_ids:
             if 0 <= int(sid) < len(abstract):
                 sents.append(str(abstract[int(sid)]))
-        if len(sents) < 2:
+        if len(sents) < 1:
             continue
 
         examples.append(
-            ScifactExample(
-                claim_id=claim_id,
-                claim=claim_text,
-                doc_id=doc_id,
-                doc_title=title,
-                rationale_sentences=tuple(sents),
-                label=label,
+                ScifactExample(
+                    claim_id=claim_id,
+                    claim=claim_text,
+                    doc_id=doc_id,
+                    doc_title=title,
+                    rationale_sentences=tuple(sents),
+                    label=label,
+                    cited_doc_ids=tuple(cited_ids),
+                )
             )
-        )
 
         if len({e.claim_id for e in examples}) >= max_claims:
             break
@@ -165,7 +185,10 @@ def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]
 def embed_texts(texts: List[str], model_name: str = "sentence-transformers/all-MiniLM-L6-v2") -> np.ndarray:
     from sentence_transformers import SentenceTransformer  # type: ignore
 
-    model = SentenceTransformer(model_name)
+    global _SENTENCE_MODEL
+    if _SENTENCE_MODEL is None:
+        _SENTENCE_MODEL = SentenceTransformer(model_name)
+    model = _SENTENCE_MODEL
     emb = model.encode(texts, normalize_embeddings=True, batch_size=32, show_progress_bar=False)
     return np.asarray(emb, dtype=np.float32)
 
@@ -176,12 +199,22 @@ def sentence_support_scores(claims: List[str], sentences: List[str]) -> np.ndarr
 
     We use a small NLI cross-encoder if available; otherwise fall back to cosine similarity.
     """
+    if not _USE_CROSS_ENCODER:
+        emb_claim = embed_texts(claims)
+        emb_sent = embed_texts(sentences)
+        sims = np.sum(emb_claim * emb_sent, axis=1)
+        return np.clip(sims, -1.0, 1.0)
+
     try:
         from sentence_transformers import CrossEncoder  # type: ignore
 
-        # Smaller NLI cross-encoder (CPU-friendly relative to large RoBERTa).
-        model = CrossEncoder("cross-encoder/nli-MiniLM2-L6-H768", max_length=256)
-        pairs = list(zip(claims, sentences))
+        global _CROSS_ENCODER
+        if _CROSS_ENCODER is None:
+            # Smaller NLI cross-encoder (CPU-friendly relative to large RoBERTa).
+            _CROSS_ENCODER = CrossEncoder("cross-encoder/nli-MiniLM2-L6-H768", max_length=256)
+        model = _CROSS_ENCODER
+        # NLI convention: (premise, hypothesis). Evidence sentence is premise; claim is hypothesis.
+        pairs = list(zip(sentences, claims))
         logits = np.asarray(model.predict(pairs, batch_size=16, show_progress_bar=False), dtype=float)
         # Some NLI cross-encoders output 3 logits (contradiction, entailment, neutral).
         if logits.ndim == 2 and logits.shape[1] == 3:
@@ -235,8 +268,8 @@ def build_false_basin_mapping(examples: List[ScifactExample], seed: int = 123) -
 def pick_true_and_false_sets(
     examples: List[ScifactExample],
     false_map: Dict[int, int],
-    min_sentences: int = 2,
-) -> List[Tuple[ScifactExample, Tuple[str, ...]]]:
+    min_sentences: int = 1,
+) -> List[Tuple[ScifactExample, ScifactExample]]:
     """
     For each true example (claim_id, doc), attach a false sentence set from a near claim's rationale.
     """
@@ -244,7 +277,7 @@ def pick_true_and_false_sets(
     for e in examples:
         by_claim.setdefault(e.claim_id, []).append(e)
 
-    pairs: List[Tuple[ScifactExample, Tuple[str, ...]]] = []
+    pairs: List[Tuple[ScifactExample, ScifactExample]] = []
     # pre-filter false candidates with enough sentences
     false_candidates_by_claim: Dict[int, List[ScifactExample]] = {}
     for cid, lst in by_claim.items():
@@ -263,26 +296,25 @@ def pick_true_and_false_sets(
             continue
         # choose a stable candidate (first) for determinism
         fe = candidates[0]
-        pairs.append((e, fe.rationale_sentences[:min_sentences]))
+        pairs.append((e, fe))
 
     if len(pairs) < 50:
         raise RuntimeError(f"Too few true/false basin pairs ({len(pairs)})")
     return pairs
 
 
-def run_scifact_benchmark(seed: int = 123) -> None:
+def run_scifact_benchmark(*, seed: int = 123, fast: bool = False, strict: bool = True) -> BenchmarkResult:
     print("\n[Q32:P2] Loading SciFact...")
     examples = load_scifact(max_claims=400, seed=seed)
-    false_map = build_false_basin_mapping(examples, seed=seed)
-    pairs = pick_true_and_false_sets(examples, false_map, min_sentences=2)
 
     rng = np.random.default_rng(seed)
-    rng.shuffle(pairs)
-    pairs = pairs[:120]
+    rng.shuffle(examples)
+    examples = examples[: (120 if fast else 600)]
 
-    M_true: List[float] = []
-    M_false: List[float] = []
-    M_false_shuffled_check: List[float] = []
+    # Truth anchor: SciFact provides SUPPORT vs CONTRADICT at the (claim, doc) level.
+    # We do not use labels inside M; labels only define the evaluation split.
+    M_support: List[float] = []
+    M_contradict: List[float] = []
 
     # For each pair, build observation sets as support scores from sentences.
     # Build observation/check sets with enough samples to avoid degenerate SE=EPS.
@@ -292,79 +324,310 @@ def run_scifact_benchmark(seed: int = 123) -> None:
     corpus = load_dataset("scifact", "corpus", trust_remote_code=True)["train"]
     corpus_by_id: Dict[int, dict] = {int(r["doc_id"]): r for r in corpus}
 
-    def topk_sentences_for_doc(claim: str, doc_id: int, k: int = 8) -> List[str]:
+    def doc_sentences(doc_id: int) -> List[str]:
         doc = corpus_by_id.get(int(doc_id))
         if not doc:
             return []
         abstract = doc.get("abstract", []) or []
-        sents = [str(x) for x in abstract if str(x).strip()]
-        if len(sents) < 3:
-            return sents
-        # score all sentences; choose top-k
-        scores = sentence_support_scores([claim] * len(sents), sents)
-        order = np.argsort(-scores)[: min(k, len(sents))]
+        return [str(x) for x in abstract if str(x).strip()]
+
+    def sample_sentences_from_doc(doc_id: int, n: int, *, seed_key: int) -> List[str]:
+        sents = doc_sentences(doc_id)
+        if len(sents) < n:
+            return []
+        local_rng = np.random.default_rng(seed_key)
+        order = local_rng.permutation(len(sents))[:n]
         return [sents[int(i)] for i in order]
 
-    # Precompute true check pools for negative control (shuffled across claims).
-    true_checks_pool: List[List[float]] = []
+    # Build per-example M with an internal (hold-out) check pool.
+    for ex in examples:
+        label = str(ex.label).strip().upper()
+        if label not in ("SUPPORT", "CONTRADICT"):
+            continue
+
+        sampled = sample_sentences_from_doc(
+            int(ex.doc_id),
+            10,
+            seed_key=(seed * 1_000_003) ^ (int(ex.claim_id) * 9176) ^ int(ex.doc_id),
+        )
+        if not sampled:
+            continue
+        obs_sents = sampled[:2]
+        check_sents = sampled[2:10]
+        if len(obs_sents) < 2 or len(check_sents) < 6:
+            continue
+
+        obs_scores = sentence_support_scores([ex.claim] * len(obs_sents), obs_sents).tolist()
+        check_scores = sentence_support_scores([ex.claim] * len(check_sents), check_sents).tolist()
+        m = M_from_R(R_grounded(obs_scores, check_scores))
+        if label == "SUPPORT":
+            M_support.append(m)
+        else:
+            M_contradict.append(m)
+
+        if fast and len(M_support) + len(M_contradict) in (10, 25, 50):
+            print(f"[Q32:P2] scifact collected={len(M_support)+len(M_contradict)}")
+
+    if min(len(M_support), len(M_contradict)) < (10 if fast else 60):
+        raise RuntimeError(f"Too few SciFact labeled examples: support={len(M_support)} contradict={len(M_contradict)}")
+
+    # Evaluate: P(M_support > M_contradict) by paired subsampling (deterministic shuffle).
+    M_support_a = np.array(M_support, dtype=float)
+    M_contra_a = np.array(M_contradict, dtype=float)
+    rng.shuffle(M_support_a)
+    rng.shuffle(M_contra_a)
+    use_n = int(min(len(M_support_a), len(M_contra_a), (16 if fast else 120)))
+    pair_wins = float(np.mean(M_support_a[:use_n] > M_contra_a[:use_n]))
+
+    print("\n[Q32:P2] SciFact SUPPORT vs CONTRADICT discrimination")
+    print(f"  P(M_support > M_contradict) = {pair_wins:.3f}")
+    print(f"  mean(M_support)    = {M_support_a[:use_n].mean():.3f}")
+    print(f"  mean(M_contradict) = {M_contra_a[:use_n].mean():.3f}")
+
+    passed_discrimination = pair_wins >= (0.65 if fast else 0.70)
+
+    # Negative control: shuffle labels (equivalently, compare against a permuted contradict array).
+    M_contra_perm = M_contra_a.copy()
+    rng.shuffle(M_contra_perm)
+    collapse = float(np.mean(M_support_a[:use_n] > M_contra_perm[:use_n]))
+    print("\n[Q32:P2] Negative control (label shuffle)")
+    print(f"  P(M_support > M_contradict_permuted) = {collapse:.3f}")
+    passed_negative = abs(collapse - 0.5) <= (0.25 if fast else 0.15)
+
+    passed = bool(passed_discrimination and passed_negative)
+    if not passed:
+        print("\n[Q32:P2] SciFact status: FAIL (kept as a public counterexample until fixed)")
+        if strict and not fast:
+            raise AssertionError("FAIL: SciFact benchmark gates did not pass")
+    return BenchmarkResult(
+        name="SciFact",
+        passed=passed,
+        details={
+            "pair_wins": pair_wins,
+            "collapse": collapse,
+            "mean_M_support": float(M_support_a[:use_n].mean()),
+            "mean_M_contradict": float(M_contra_a[:use_n].mean()),
+        },
+    )
+
+
+def _majority_vote(votes: Sequence[Optional[str]]) -> Optional[str]:
+    vs = [v for v in votes if v is not None]
+    if not vs:
+        return None
+    # deterministic tie-break by lexicographic sort
+    counts: Dict[str, int] = {}
+    for v in vs:
+        counts[str(v)] = counts.get(str(v), 0) + 1
+    best = sorted(counts.items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+    return best
+
+
+def run_climate_fever_benchmark(*, seed: int = 123, fast: bool = False, strict: bool = True) -> BenchmarkResult:
+    print("\n[Q32:P2] Loading Climate-FEVER (public votes as truth anchor)...")
+    from datasets import load_dataset  # type: ignore
+
+    ds = load_dataset("climate_fever")["test"]
+    rng = np.random.default_rng(seed)
 
     prepared: List[Tuple[List[float], List[float], List[float]]] = []
-    # Each item: (obs_true_scores, check_true_scores, obs_false_scores)
-    for e, false_sents in pairs:
-        claim = e.claim
-        true_sents = topk_sentences_for_doc(claim, e.doc_id, k=8)
-        if len(true_sents) < 4:
-            continue
-        # obs = first 2, check = next 4 (SE meaningful)
-        obs_true_sents = true_sents[:2]
-        check_true_sents = true_sents[2:6]
-        obs_true_scores = sentence_support_scores([claim] * len(obs_true_sents), obs_true_sents).tolist()
-        check_true_scores = sentence_support_scores([claim] * len(check_true_sents), check_true_sents).tolist()
+    checks_pool: List[List[float]] = []
 
-        obs_false_scores = sentence_support_scores([claim] * len(false_sents), list(false_sents)).tolist()
-        if len(obs_false_scores) < 2:
+    indices = np.arange(len(ds))
+    rng.shuffle(indices)
+
+    for idx in indices:
+        ex = ds[int(idx)]
+        claim = str(ex["claim"])
+        evidences = ex.get("evidences", []) or []
+        if not evidences:
             continue
 
-        prepared.append((obs_true_scores, check_true_scores, obs_false_scores))
-        true_checks_pool.append(check_true_scores)
+        supports: List[Tuple[int, float, str, dict]] = []
+        refutes: List[Tuple[int, float, str, dict]] = []
+        for ev in evidences:
+            votes = [v for v in (ev.get("votes", []) or []) if v is not None]
+            counts: Dict[str, int] = {}
+            for v in votes:
+                vv = str(v)
+                counts[vv] = counts.get(vv, 0) + 1
+            entropy = float(ev.get("entropy", 0.0) or 0.0)
+            ev_id = str(ev.get("evidence_id", "")).strip()
 
-    if len(prepared) < 80:
-        raise RuntimeError(f"Too few prepared SciFact samples with non-degenerate checks ({len(prepared)})")
+            # Strong-ish anchor to reduce label noise:
+            # - SUPPORT: at least 2 SUPPORTS votes and zero REFUTES votes
+            # - REFUTE: at least 1 REFUTES vote and zero SUPPORTS votes
+            if counts.get("SUPPORTS", 0) >= 2 and counts.get("REFUTES", 0) == 0:
+                supports.append((int(counts.get("SUPPORTS", 0)), entropy, ev_id, ev))
+            if counts.get("REFUTES", 0) >= 1 and counts.get("SUPPORTS", 0) == 0:
+                refutes.append((int(counts.get("REFUTES", 0)), entropy, ev_id, ev))
 
-    rng.shuffle(true_checks_pool)
+        # Climate-FEVER has small per-claim evidence sets (often <=5); use the SUPPORT pool as the
+        # check distribution. Votes are noisy, so we require "strong-ish" vote thresholds above.
+        if len(supports) < 2 or len(refutes) < 2:
+            continue
 
-    for idx, (obs_true_scores, check_true_scores, obs_false_scores) in enumerate(prepared[:120]):
-        check_shuffled = true_checks_pool[idx % len(true_checks_pool)]
+        # Deterministic ranking: stronger vote signal first, then lower entropy, then stable id.
+        supports_sorted = sorted(supports, key=lambda t: (-t[0], t[1], t[2]))
+        refutes_sorted = sorted(refutes, key=lambda t: (-t[0], t[1], t[2]))
 
-        M_true.append(M_from_R(R_grounded(obs_true_scores, check_true_scores)))
-        M_false.append(M_from_R(R_grounded(obs_false_scores, check_true_scores)))
-        # negative control: use shuffled check (likely unrelated) and see discrimination collapse
-        M_false_shuffled_check.append(M_from_R(R_grounded(obs_false_scores, check_shuffled)))
+        supports_texts = [str(t[3].get("evidence", "")).strip() for t in supports_sorted if str(t[3].get("evidence", "")).strip()]
+        refutes_texts = [str(t[3].get("evidence", "")).strip() for t in refutes_sorted if str(t[3].get("evidence", "")).strip()]
+        if len(supports_texts) < 2 or len(refutes_texts) < 2:
+            continue
 
-    M_true = np.array(M_true)
-    M_false = np.array(M_false)
-    M_false_shuffled_check = np.array(M_false_shuffled_check)
+        obs_texts = supports_texts[:2]
+        check_texts = supports_texts[:5]
+        false_texts = refutes_texts[:2]
 
-    pair_wins = float(np.mean(M_true > M_false))
-    print("\n[Q32:P2] SciFact true-basin vs false-basin discrimination")
-    print(f"  P(M_true > M_false) = {pair_wins:.3f}")
-    print(f"  mean(M_true)  = {M_true.mean():.3f}")
-    print(f"  mean(M_false) = {M_false.mean():.3f}")
+        if len(check_texts) < 2:
+            continue
 
-    assert pair_wins >= 0.70, "FAIL: SciFact discrimination too weak (field not robust on public benchmark)"
+        obs_true_scores = sentence_support_scores([claim] * len(obs_texts), obs_texts).tolist()
+        check_scores = sentence_support_scores([claim] * len(check_texts), check_texts).tolist()
+        obs_false_scores = sentence_support_scores([claim] * len(false_texts), false_texts).tolist()
 
-    # Negative control: replace check group with shuffled checks; discrimination should collapse.
-    collapse = float(np.mean(M_true > M_false_shuffled_check))
-    print("\n[Q32:P2] Negative control (shuffled baseline)")
-    print(f"  P(M_true > M_false_with_shuffled_check) = {collapse:.3f}")
-    assert collapse <= 0.65, "FAIL: negative control did not collapse (suspect leakage)"
+        prepared.append((obs_true_scores, check_scores, obs_false_scores))
+        checks_pool.append(check_scores)
+
+        if len(prepared) in (10, 25, 50, 75, 100):
+            print(f"[Q32:P2] climate prepared={len(prepared)}")
+        if len(prepared) >= (20 if fast else 120):
+            break
+
+    if len(prepared) < 60:
+        if strict and not fast:
+            raise RuntimeError(f"Too few prepared Climate-FEVER samples ({len(prepared)})")
+        if len(prepared) < 10:
+            raise RuntimeError(f"Too few prepared Climate-FEVER samples ({len(prepared)})")
+
+    rng.shuffle(checks_pool)
+    use_n = min((16 if fast else 120), len(prepared))
+
+    M_support_internal: List[float] = []
+    M_refute_internal: List[float] = []
+    M_support_shuffled: List[float] = []
+    M_refute_shuffled: List[float] = []
+
+    for i, (obs_true_scores, check_scores, obs_false_scores) in enumerate(prepared[:use_n]):
+        check_other = checks_pool[(i + 7) % len(checks_pool)]
+        M_support_internal.append(M_from_R(R_grounded(obs_true_scores, check_scores)))
+        M_refute_internal.append(M_from_R(R_grounded(obs_false_scores, check_scores)))
+        M_support_shuffled.append(M_from_R(R_grounded(obs_true_scores, check_other)))
+        M_refute_shuffled.append(M_from_R(R_grounded(obs_false_scores, check_other)))
+
+    M_support_internal = np.array(M_support_internal)
+    M_refute_internal = np.array(M_refute_internal)
+    M_support_shuffled = np.array(M_support_shuffled)
+    M_refute_shuffled = np.array(M_refute_shuffled)
+
+    pair_wins = float(np.mean(M_support_internal > M_refute_internal))
+    print("\n[Q32:P2] Climate-FEVER supports vs refutes discrimination")
+    print(f"  P(M_support_internal > M_refute_internal) = {pair_wins:.3f}")
+    print(f"  mean(M_support_internal) = {M_support_internal.mean():.3f}")
+    print(f"  mean(M_refute_internal)  = {M_refute_internal.mean():.3f}")
+
+    shuffled_pair = float(np.mean(M_support_shuffled > M_refute_shuffled))
+    print("\n[Q32:P2] Negative control (check-shuffle across claims)")
+    print(f"  P(M_support_shuffled > M_refute_shuffled) = {shuffled_pair:.3f}")
+    print(f"  mean(M_support_shuffled) = {M_support_shuffled.mean():.3f}")
+    print(f"  mean(M_refute_shuffled)  = {M_refute_shuffled.mean():.3f}")
+
+    if fast:
+        deltas = (M_support_internal - M_refute_internal).tolist()
+        order = np.argsort(deltas)
+        print("\n[Q32:P2] Fast debug: worst deltas (support-refute)")
+        for j in order[: min(5, len(order))]:
+            jj = int(j)
+            print(f"  delta={deltas[jj]: .3f}  M_support={M_support_internal[jj]: .3f}  M_refute={M_refute_internal[jj]: .3f}")
+        print("[Q32:P2] Fast debug: best deltas (support-refute)")
+        for j in order[-min(5, len(order)) :]:
+            jj = int(j)
+            print(f"  delta={deltas[jj]: .3f}  M_support={M_support_internal[jj]: .3f}  M_refute={M_refute_internal[jj]: .3f}")
+
+    # Gates:
+    # - We require discrimination to beat the negative control by a margin (not just an absolute threshold),
+    #   because the dataset is noisy and per-claim refutes are not always clean contradictions.
+    min_pair = 0.60 if fast else 0.65
+    min_margin = 0.10 if fast else 0.15
+    max_neg_dev = 0.25 if fast else 0.15
+
+    passed_discrimination = pair_wins >= min_pair and (pair_wins - shuffled_pair) >= min_margin
+    passed_negative = abs(shuffled_pair - 0.5) <= max_neg_dev
+    passed = bool(passed_discrimination and passed_negative)
+    if not passed:
+        print("\n[Q32:P2] Climate-FEVER status: FAIL")
+        if strict and not fast:
+            raise AssertionError("FAIL: Climate-FEVER benchmark gates did not pass")
+
+    return BenchmarkResult(
+        name="Climate-FEVER",
+        passed=passed,
+        details={
+            "pair_wins": pair_wins,
+            "negative": shuffled_pair,
+            "mean_M_support_internal": float(M_support_internal.mean()),
+            "mean_M_refute_internal": float(M_refute_internal.mean()),
+        },
+    )
+
+
+def parse_args() -> argparse.Namespace:
+    p = argparse.ArgumentParser(description="Q32 public truth-anchored benchmarks (fast + full modes).")
+    p.add_argument(
+        "--dataset",
+        choices=["scifact", "climate_fever", "all"],
+        default="scifact",
+        help="Which benchmark to run (default: scifact).",
+    )
+    p.add_argument(
+        "--fast",
+        action="store_true",
+        help="Fast debug mode: small caps + relaxed thresholds + no hard-fail unless --strict.",
+    )
+    p.add_argument(
+        "--strict",
+        action="store_true",
+        help="Hard-fail benchmarks that do not meet gates (default in full mode).",
+    )
+    p.add_argument(
+        "--scoring",
+        choices=["crossencoder", "cosine"],
+        default=None,
+        help="Override scoring model. In --fast mode default is cosine; otherwise crossencoder.",
+    )
+    p.add_argument("--seed", type=int, default=123)
+    return p.parse_args()
 
 
 def main() -> int:
     set_cache_roots()
-    run_scifact_benchmark(seed=123)
-    print("\n[Q32] PUBLIC BENCHMARK (SciFact) PASS")
-    return 0
+    args = parse_args()
+
+    global _USE_CROSS_ENCODER
+    if args.scoring is not None:
+        _USE_CROSS_ENCODER = args.scoring == "crossencoder"
+    else:
+        _USE_CROSS_ENCODER = False if args.fast else True
+
+    # Full mode is strict by default; fast mode is non-strict unless explicitly requested.
+    strict = args.strict or (not args.fast)
+
+    results: List[BenchmarkResult] = []
+    if args.dataset in ("scifact", "all"):
+        results.append(run_scifact_benchmark(seed=args.seed, fast=args.fast, strict=strict))
+    if args.dataset in ("climate_fever", "all"):
+        results.append(run_climate_fever_benchmark(seed=args.seed, fast=args.fast, strict=strict))
+
+    print("\n[Q32] PUBLIC BENCHMARK SUMMARY")
+    for r in results:
+        status = "PASS" if r.passed else "FAIL"
+        print(f"  - {r.name}: {status}")
+
+    all_passed = all(r.passed for r in results)
+    if args.fast and not args.strict:
+        return 0
+    return 0 if all_passed else 1
 
 
 if __name__ == "__main__":
