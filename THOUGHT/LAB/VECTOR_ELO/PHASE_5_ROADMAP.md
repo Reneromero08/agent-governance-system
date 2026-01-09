@@ -419,13 +419,13 @@ related = find_related("canon:LAW/CANON/GOVERNANCE/IMMUTABILITY.md", top_k=5)
 
 > **SIMPLIFIED (2026-01-08):** Instead of building a complex AST decoder, stack the working `codebook_lookup.py` with existing CORTEX FTS. Same outcome, less complexity.
 
-### 5.2.3.1 Stacked Resolution (SIMPLIFIED PATH)
+### 5.2.3.1 Stacked Resolution (SIMPLIFIED PATH) ✅ COMPLETE
 - [x] Create `CAPABILITY/TOOLS/codebook_lookup.py` - **DONE**
 - [x] CJK single-token symbols (法, 真, 契, 驗, 恆, 道) - **DONE**
 - [x] MCP integration (codebook_lookup tool) - **DONE**
-- [ ] Add `query` parameter for FTS within domain
-- [ ] Add `semantic` parameter for vector search within domain
-- [ ] Stack: symbol → domain narrowing → CORTEX search → relevant chunks
+- [x] Add `query` parameter for FTS within domain - **DONE**
+- [x] Add `semantic` parameter for vector search within domain - **DONE**
+- [x] Stack: symbol → domain narrowing → CORTEX search → relevant chunks - **DONE**
 
 ### 5.2.3.2 Stacked Query Syntax
 ```python
@@ -439,17 +439,17 @@ codebook_lookup(id="法", query="verification")  # → ~4,200 tokens
 codebook_lookup(id="法", semantic="verification protocols")  # → ~2,000 tokens
 ```
 
-### 5.2.3.3 Tests
-- [ ] `test_phase_5_2_3_stacked_resolution.py`
-- [ ] Symbol only → full domain content
-- [ ] Symbol + query → FTS filtered content
-- [ ] Symbol + semantic → vector filtered content
-- [ ] Compression ratios measured and receipted
+### 5.2.3.3 Tests ✅ COMPLETE
+- [x] `test_phase_5_2_3_stacked_resolution.py` - **5 tests passing**
+- [x] Symbol only → full domain content - **DONE**
+- [x] Symbol + query → FTS filtered content - **DONE**
+- [x] Symbol + semantic → vector filtered content - **DONE**
+- [x] Compression ratios measured and receipted - **DONE**
 
 **Exit Criteria:**
 - [x] Symbol resolution working (56,370x proven)
-- [ ] Stacked resolution with CORTEX integration
-- [ ] Precision retrieval (high alignment) verified
+- [x] Stacked resolution with CORTEX integration - **DONE**
+- [x] Precision retrieval (high alignment) verified - **DONE**
 
 ### Original Complex Path (DEFERRED)
 The original plan for AST parsing and template expansion is deferred. If the simplified stacked approach proves insufficient, revisit:

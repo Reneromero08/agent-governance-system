@@ -439,6 +439,166 @@ def get_file_content(path: str) -> str:
     return f"[Path not found: {path}]"
 
 
+# ═══════════════════════════════════════════════════════════════════════════════
+# STACKED RESOLUTION (Phase 5.2.3.1)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+SYSTEM1_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
+CANON_INDEX_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "canon_index.db"
+ADR_INDEX_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "adr_index.db"
+SKILL_INDEX_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "skill_index.db"
+
+
+def _get_domain_paths(entry):
+    """Extract all paths from a symbol entry."""
+    paths = []
+    if "path" in entry:
+        paths.append(entry["path"])
+    if "paths" in entry:
+        paths.extend(entry["paths"])
+    if "contexts" in entry:
+        paths.extend(entry["contexts"].values())
+    return paths
+
+
+def _fts_search_within_paths(query, paths, limit=20):
+    """Full-text search within specific paths using CORTEX FTS5."""
+    if not SYSTEM1_DB.exists():
+        return []
+    import sqlite3
+    results = []
+    try:
+        with sqlite3.connect(str(SYSTEM1_DB)) as conn:
+            conn.row_factory = sqlite3.Row
+            path_conditions = " OR ".join([f"f.path LIKE ?" for _ in paths])
+            path_params = [f"{p}%" for p in paths]
+            cursor = conn.execute(f"""
+                SELECT f.path, c.chunk_index, fts.content,
+                       snippet(chunks_fts, 0, '<<', '>>', '...', 64) as snippet, rank
+                FROM chunks_fts fts
+                JOIN chunks c ON fts.chunk_id = c.chunk_id
+                JOIN files f ON c.file_id = f.file_id
+                WHERE chunks_fts MATCH ? AND ({path_conditions})
+                ORDER BY rank LIMIT ?
+            """, (query, *path_params, limit))
+            for row in cursor.fetchall():
+                results.append({
+                    'path': row['path'], 'chunk_index': row['chunk_index'],
+                    'content': row['content'], 'snippet': row['snippet'], 'rank': row['rank'],
+                })
+    except Exception:
+        pass
+    return results
+
+
+def _get_index_db_for_paths(paths):
+    """Determine the best index database for given paths."""
+    for path in paths:
+        if path.startswith("LAW/CANON"):
+            if CANON_INDEX_DB.exists():
+                return CANON_INDEX_DB
+        elif path.startswith("LAW/CONTEXT/decisions"):
+            if ADR_INDEX_DB.exists():
+                return ADR_INDEX_DB
+        elif path.startswith("CAPABILITY/SKILLS"):
+            if SKILL_INDEX_DB.exists():
+                return SKILL_INDEX_DB
+    if SYSTEM1_DB.exists():
+        return SYSTEM1_DB
+    return None
+
+
+def _semantic_search_within_paths(query, paths, limit=10):
+    """Vector similarity search within specific paths using CORTEX embeddings."""
+    db_path = _get_index_db_for_paths(paths)
+    if not db_path:
+        return []
+    results = []
+    import sqlite3
+    try:
+        with sqlite3.connect(str(db_path)) as conn:
+            conn.row_factory = sqlite3.Row
+            cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='canon_records'")
+            has_canon_records = cursor.fetchone() is not None
+            if has_canon_records:
+                if str(PROJECT_ROOT) not in sys.path:
+                    sys.path.insert(0, str(PROJECT_ROOT))
+                primitives_path = PROJECT_ROOT / "CAPABILITY" / "PRIMITIVES"
+                if str(primitives_path) not in sys.path:
+                    sys.path.insert(0, str(primitives_path))
+                try:
+                    import importlib
+                    canon_module = importlib.import_module('canon_index')
+                    search_canon = canon_module.search_canon
+                    search_results = search_canon(query, top_k=limit * 2)
+                    for r in search_results:
+                        file_path = r.get('file_path', '')
+                        if not file_path.startswith("LAW/CANON"):
+                            file_path = f"LAW/CANON/{file_path}"
+                        for domain_path in paths:
+                            if file_path.startswith(domain_path):
+                                results.append({
+                                    'path': file_path, 'content': r.get('text', ''),
+                                    'similarity': r.get('similarity', 0.5), 'hash': r.get('content_hash', ''),
+                                })
+                                break
+                        if len(results) >= limit:
+                            break
+                except Exception:
+                    pass
+    except Exception:
+        pass
+    return results
+
+
+def stacked_lookup(entry_id, query=None, semantic=None, expand=False, limit=10):
+    """Stacked symbol resolution with optional FTS or semantic filtering."""
+    base_result = lookup_entry(entry_id, expand=False)
+    if not base_result.get('found'):
+        return base_result
+    entry = base_result['entry']
+    domain_paths = _get_domain_paths(entry)
+
+    if not query and not semantic:
+        if expand:
+            if "path" in entry:
+                entry["content"] = get_file_content(entry["path"])
+            elif "paths" in entry:
+                contents = [f"## {p}\n\n{get_file_content(p)}" for p in entry["paths"]]
+                entry["content"] = "\n\n---\n\n".join(contents)
+            elif "contexts" in entry:
+                entry["content"] = json.dumps(entry["contexts"], indent=2)
+        return {"found": True, "entry": entry, "resolution": "L1"}
+
+    if query:
+        chunks = _fts_search_within_paths(query, domain_paths, limit=limit)
+        if chunks:
+            filtered_content = [f"## {c['path']} (chunk {c['chunk_index']})\n\n{c['content']}" for c in chunks]
+            entry["filtered_content"] = "\n\n---\n\n".join(filtered_content)
+            entry["chunks"] = chunks
+            entry["chunk_count"] = len(chunks)
+        else:
+            entry["filtered_content"] = f"[No FTS matches for '{query}' in {domain_paths}]"
+            entry["chunks"] = []
+            entry["chunk_count"] = 0
+        return {"found": True, "entry": entry, "resolution": "L1+L2", "query": query, "domain_paths": domain_paths}
+
+    if semantic:
+        chunks = _semantic_search_within_paths(semantic, domain_paths, limit=limit)
+        if chunks:
+            filtered_content = [f"## {c['path']} (similarity: {c['similarity']:.3f})\n\n{c['content']}" for c in chunks]
+            entry["filtered_content"] = "\n\n---\n\n".join(filtered_content)
+            entry["chunks"] = chunks
+            entry["chunk_count"] = len(chunks)
+        else:
+            entry["filtered_content"] = f"[No semantic matches for '{semantic}' in {domain_paths}]"
+            entry["chunks"] = []
+            entry["chunk_count"] = 0
+        return {"found": True, "entry": entry, "resolution": "L1+L3", "semantic": semantic, "domain_paths": domain_paths}
+
+    return base_result
+
+
 def lookup_entry(entry_id: str, expand: bool = False) -> dict:
     """Look up a codebook entry by ID."""
     # Try compact macro notation first (C3, I5, C*, etc.)
@@ -528,7 +688,10 @@ def list_entries() -> dict:
 def main():
     parser = argparse.ArgumentParser(description="Codebook lookup tool (符典)")
     parser.add_argument("id", nargs="?", help="Entry ID to look up")
-    parser.add_argument("--expand", action="store_true", help="Return full content")
+    parser.add_argument("--expand", action="store_true", help="Return full content (L1)")
+    parser.add_argument("--query", type=str, help="FTS query within domain (L1+L2)")
+    parser.add_argument("--semantic", type=str, help="Semantic query within domain (L1+L3)")
+    parser.add_argument("--limit", type=int, default=10, help="Max results for filtered queries")
     parser.add_argument("--list", action="store_true", help="List all entries")
     parser.add_argument("--json", action="store_true", help="Output as JSON")
 
@@ -537,7 +700,11 @@ def main():
     if args.list:
         result = list_entries()
     elif args.id:
-        result = lookup_entry(args.id, expand=args.expand)
+        if args.query or args.semantic:
+            result = stacked_lookup(args.id, query=args.query, semantic=args.semantic,
+                                    expand=args.expand, limit=args.limit)
+        else:
+            result = lookup_entry(args.id, expand=args.expand)
     else:
         result = list_entries()
 
@@ -554,7 +721,15 @@ def main():
                 print(f"路: {', '.join(entry.get('paths', []))}")
             if entry.get("compression"):
                 print(f"壓: {entry.get('compression')}×")
-            if "content" in entry:
+            resolution = result.get("resolution")
+            if resolution:
+                print(f"層: {resolution}")
+            if "filtered_content" in entry:
+                print(f"濾: {entry.get('chunk_count', 0)} chunks")
+                print(f"\n--- 濾容 ---\n{entry['filtered_content'][:3000]}")
+                if len(entry.get("filtered_content", "")) > 3000:
+                    print(f"\n... [{len(entry['filtered_content'])} chars]")
+            elif "content" in entry:
                 print(f"\n--- 容 ---\n{entry['content'][:2000]}")
                 if len(entry.get("content", "")) > 2000:
                     print(f"\n... [{len(entry['content'])} chars]")

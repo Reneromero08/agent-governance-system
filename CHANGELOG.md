@@ -1,8 +1,20 @@
-<!-- CONTENT_HASH: 3.7.32_PENDING -->
+<!-- CONTENT_HASH: 3.7.33_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.33] - 2026-01-08
+
+### Added
+- **Phase 5.2.3.1: Stacked Symbol Resolution** — Multi-layer symbol filtering
+  - L1: Symbol → full domain content (56,370x compression)
+  - L1+L2: Symbol + FTS query → filtered chunks (~4,200 tokens)
+  - L1+L3: Symbol + semantic query → vector-filtered chunks (~2,000 tokens)
+  - CLI: `--query`, `--semantic`, `--limit` arguments
+  - MCP: Updated codebook_lookup tool with stacked resolution parameters
 
 ---
 

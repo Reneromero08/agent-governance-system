@@ -2628,13 +2628,16 @@ class AGSMCPServer:
             }
 
     def _tool_codebook_lookup(self, args: Dict) -> Dict:
-        """Look up a codebook entry by ID."""
+        """Look up a codebook entry by ID with optional stacked filtering."""
         import subprocess
-        
+
         entry_id = args.get("id", "")
         expand = args.get("expand", False)
+        query = args.get("query", "")
+        semantic = args.get("semantic", "")
+        limit = args.get("limit", 10)
         list_all = args.get("list", False)
-        
+
         cmd = [sys.executable, str(CAPABILITY_ROOT / "TOOLS" / "codebook_lookup.py")]
 
         if list_all:
@@ -2642,7 +2645,11 @@ class AGSMCPServer:
             cmd.append("--json")
         elif entry_id:
             cmd.append(entry_id)
-            if expand:
+            if query:
+                cmd.extend(["--query", query, "--limit", str(limit), "--json"])
+            elif semantic:
+                cmd.extend(["--semantic", semantic, "--limit", str(limit), "--json"])
+            elif expand:
                 cmd.append("--expand")
             else:
                 cmd.append("--json")

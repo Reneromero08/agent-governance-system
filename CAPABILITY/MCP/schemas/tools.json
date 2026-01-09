@@ -232,23 +232,36 @@
         },
         "codebook_lookup": {
             "name": "codebook_lookup",
-            "description": "Resolve symbolic identifiers to semantic regions. Supports ASCII (@C0, @I3) and CJK single-token symbols (法, 真, 契, 驗, 證, 變, etc.). Symbols point directly to paths - no phonetic glosses. Human reference: THOUGHT/LAB/FORMULA/CODIFIER.md",
+            "description": "Resolve symbolic identifiers with optional stacked filtering. L1 (symbol), L1+L2 (FTS), L1+L3 (semantic). Reference: THOUGHT/LAB/FORMULA/CODIFIER.md",
             "inputSchema": {
                 "type": "object",
                 "properties": {
                     "id": {
                         "type": "string",
-                        "description": "Symbol to resolve. Core domains: 法, 真, 契, 恆, 驗. Operations: 證, 變, 冊, 錄, 試, 查, 核. Structural: 道, 圖, 鏈, 根, 枝. ASCII: @C0, @I3, @S7. Compounds: 法.驗, 法.契. See CODIFIER.md for human reference."
+                        "description": "Symbol to resolve. Domains: 法, 真, 契, 恆, 驗. Operations: 證, 變, 冊, 錄. ASCII: C3, I5, C*. Compounds: 法.驗"
                     },
                     "expand": {
                         "type": "boolean",
                         "default": false,
-                        "description": "Return full content from resolved path. Achieves up to 56,370× compression"
+                        "description": "L1: Return full content (56,370x compression)"
+                    },
+                    "query": {
+                        "type": "string",
+                        "description": "L1+L2: FTS query within symbol domain (~4,200 tokens)"
+                    },
+                    "semantic": {
+                        "type": "string",
+                        "description": "L1+L3: Semantic query within symbol domain (~2,000 tokens)"
+                    },
+                    "limit": {
+                        "type": "integer",
+                        "default": 10,
+                        "description": "Max results for filtered queries"
                     },
                     "list": {
                         "type": "boolean",
                         "default": false,
-                        "description": "List all symbols with paths and compression ratios"
+                        "description": "List all symbols"
                     }
                 }
             }

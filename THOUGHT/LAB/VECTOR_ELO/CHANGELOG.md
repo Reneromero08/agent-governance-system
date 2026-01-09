@@ -4,6 +4,28 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.33] - 2026-01-08
+
+### Phase 5.2.3.1 COMPLETE — Stacked Symbol Resolution
+
+**Added:**
+- Stacked resolution in `CAPABILITY/TOOLS/codebook_lookup.py`
+  - `_get_domain_paths()` — Extract paths from symbol entries
+  - `_fts_search_within_paths()` — FTS5 search within symbol domains
+  - `_get_index_db_for_paths()` — Intelligent database selection
+  - `_semantic_search_within_paths()` — Vector search within symbol domains
+  - `stacked_lookup()` — Main stacked resolution API
+- CLI arguments: `--query`, `--semantic`, `--limit`
+- MCP schema updated with query/semantic/limit parameters
+- `test_phase_5_2_3_stacked_resolution.py` — 5 tests passing
+
+**Stacked Resolution Modes:**
+- L1 only: `codebook_lookup(id="法", expand=True)` → 56,370 tokens
+- L1+L2 FTS: `codebook_lookup(id="法", query="verification")` → ~4,200 tokens
+- L1+L3 Vec: `codebook_lookup(id="法", semantic="verification protocols")` → ~2,000 tokens
+
+---
+
 ## [3.7.32] - 2026-01-08
 
 ### Phase 5.2.1 COMPLETE — Compact Macro Grammar
