@@ -779,6 +779,18 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="(transfer) Optional JSON path to write calibration output.",
     )
+    p.add_argument(
+        "--calibration_n",
+        type=int,
+        default=3,
+        help="(transfer) Number of calibration seeds starting at --seed (default: 3).",
+    )
+    p.add_argument(
+        "--verify_n",
+        type=int,
+        default=1,
+        help="(transfer) Number of verification seeds starting at --seed (default: 1).",
+    )
     return p.parse_args()
 
 
@@ -1268,26 +1280,39 @@ def main() -> int:
             results.append(run_scifact_streaming(seed=args.seed, fast=args.fast, strict=strict))
     else:
         # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
-        cal_seeds = [args.seed, args.seed + 1, args.seed + 2]
+        cal_n = max(1, int(args.calibration_n))
+        verify_n = max(1, int(args.verify_n))
+        cal_seeds = [args.seed + i for i in range(cal_n)]
+        verify_seeds = [args.seed + i for i in range(verify_n)]
         cal_ds = args.calibrate_on
         tgt_ds = args.apply_to
 
+        def tag_seed(r: BenchmarkResult, seed: int) -> BenchmarkResult:
+            return BenchmarkResult(name=f"{r.name}@seed={seed}", passed=r.passed, details=r.details)
+
         def run_intervention_bench(ds: str, seed: int) -> BenchmarkResult:
             if ds == "scifact":
-                return run_scifact_benchmark(seed=seed, fast=False, strict=False)
-            return run_climate_fever_intervention_benchmark(seed=seed, fast=False, strict=False)
+                return run_scifact_benchmark(seed=seed, fast=args.fast, strict=False)
+            return run_climate_fever_intervention_benchmark(seed=seed, fast=args.fast, strict=False)
 
         def run_intervention_stream(ds: str, seed: int) -> BenchmarkResult:
             if ds == "scifact":
-                return run_scifact_streaming(seed=seed, fast=False, strict=False)
-            return run_climate_fever_streaming(seed=seed, fast=False, strict=False)
+                return run_scifact_streaming(seed=seed, fast=args.fast, strict=False)
+            return run_climate_fever_streaming(seed=seed, fast=args.fast, strict=False)
 
         print(f"\n[Q32:P3] Calibrating on {cal_ds} (seeds={cal_seeds})")
-        cal_bench = [run_intervention_bench(cal_ds, s) for s in cal_seeds]
-        cal_stream = [run_intervention_stream(cal_ds, s) for s in cal_seeds]
+        cal_bench = [tag_seed(run_intervention_bench(cal_ds, s), s) for s in cal_seeds]
+        cal_stream = [tag_seed(run_intervention_stream(cal_ds, s), s) for s in cal_seeds]
+        cal_all = cal_bench + cal_stream
+        cal_failed = [r.name for r in cal_all if not r.passed]
+        if cal_failed:
+            print("\n[Q32:P3] Calibration failures")
+            for n in cal_failed:
+                print(f"  - {n}")
+            raise SystemExit("transfer calibration failed: calibration dataset did not meet its own gates")
 
-        z_vals = [r.details.get("z") for r in cal_bench + cal_stream]
-        pw_vals = [r.details.get("pair_wins") for r in cal_bench + cal_stream]
+        z_vals = [r.details.get("z") for r in cal_all]
+        pw_vals = [r.details.get("pair_wins") for r in cal_all]
         z_vals_f = [float(x) for x in z_vals if x is not None]
         pw_vals_f = [float(x) for x in pw_vals if x is not None]
         if not z_vals_f or not pw_vals_f:
@@ -1315,7 +1340,7 @@ def main() -> int:
             print(f"[Q32:P3] Wrote calibration to {out_path}")
 
         print(f"\n[Q32:P3] Frozen thresholds: min_z={frozen_min_z:.3f}  min_pair_wins={frozen_min_pair_wins:.3f}")
-        print(f"[Q32:P3] Verifying on {tgt_ds} (seed={args.seed})")
+        print(f"[Q32:P3] Verifying on {tgt_ds} (seeds={verify_seeds})")
 
         def enforce_pair_wins(r: BenchmarkResult) -> BenchmarkResult:
             pw = r.details.get("pair_wins")
@@ -1329,12 +1354,18 @@ def main() -> int:
                 print(f"[Q32:P3] {r.name} transfer gate: pair_wins={float(pw):.3f} z={float(r.details.get('z', float('nan'))):.3f}")
             return BenchmarkResult(name=r.name, passed=passed, details=details)
 
-        if tgt_ds == "scifact":
-            results.append(enforce_pair_wins(run_scifact_benchmark(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
-            results.append(enforce_pair_wins(run_scifact_streaming(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
-        else:
-            results.append(enforce_pair_wins(run_climate_fever_intervention_benchmark(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
-            results.append(enforce_pair_wins(run_climate_fever_streaming(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
+        for s in verify_seeds:
+            if tgt_ds == "scifact":
+                results.append(tag_seed(enforce_pair_wins(run_scifact_benchmark(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
+                results.append(tag_seed(enforce_pair_wins(run_scifact_streaming(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
+            else:
+                results.append(
+                    tag_seed(
+                        enforce_pair_wins(run_climate_fever_intervention_benchmark(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)),
+                        s,
+                    )
+                )
+                results.append(tag_seed(enforce_pair_wins(run_climate_fever_streaming(seed=s, fast=args.fast, strict=False, min_z=frozen_min_z)), s))
 
     print("\n[Q32] PUBLIC BENCHMARK SUMMARY")
     for r in results:
