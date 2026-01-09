@@ -1,302 +1,153 @@
----
-version: "1.0.0"
-status: "Active"
-required_canon_version: ">=3.0.0"
----
+<!-- CONTENT_HASH: placeholder -->
+
+**required_canon_version:** >=3.0.0
+
 
 # Skill: workspace-isolation
 
+**Version:** 1.0.0
+
+**Status:** Active
+
+
 ## Purpose
 
-Enable parallel agent work without conflicts using git worktrees and branches.
-Each agent works in an isolated workspace on its own branch, preventing:
-- File conflicts between agents
-- Dirty workspace interference
-- Accidental commits to main
+Enforces disciplined git workflow for agents to prevent commit bloat and ensure human approval before permanent repository changes.
 
-## When to Use
+## Trigger
 
-**ALWAYS** use workspace isolation when:
-1. Multiple agents may work simultaneously
-2. The main workspace has uncommitted changes
-3. The task may fail tests (keeps failures isolated)
-4. Running long-running or experimental work
+This skill applies to ALL agent sessions that involve repository modifications. Agents MUST follow these rules whenever performing git operations.
 
-**SKIP** workspace isolation only when:
-- Quick single-file edits with clean workspace
-- Read-only operations (research, analysis)
-- User explicitly requests working in main
+## CRITICAL: Human Review Gate
 
-## Hard Invariants
+**The user MUST review and approve ALL work BEFORE any commit or merge.**
 
-1. **Never work in detached HEAD** - Always be on a branch
-2. **Never merge until validation passes** - Tests must be green
-3. **Never auto-delete on failure** - Preserve evidence for debugging
-4. **Always cleanup after merge** - Remove worktree + branch when done
-5. **One task = one worktree** - Don't share worktrees between tasks
+Agents do NOT decide when work is ready. The human does. Present your work, then STOP and WAIT.
 
-## Standard Naming
+---
 
-| Item | Pattern | Example |
-|------|---------|---------|
-| Branch | `task/<task_id>` | `task/2.4.1C.5` |
-| Worktree | `../wt-<task_id>` | `../wt-2.4.1C.5` |
+## Git Workflow Rules
 
-## Agent Workflow
+### Phase 1: Work Completion (NO GIT OPERATIONS)
 
-### Step 1: Check Current State
+1. **Complete ALL work first** - Do not commit anything until the entire task is finished
+2. **Stage changes for review** - Use `git add` to stage, but DO NOT commit
+3. **STOP AND PRESENT WORK** - Show the user:
+   - Full `git diff --staged` output
+   - Summary of what was changed and why
+   - Proposed commit message
+4. **WAIT for explicit approval** - Do NOT proceed until user says "commit" or equivalent
+   - "Looks good" is NOT approval to commit
+   - "Yes" to a question about the code is NOT approval to commit
+   - Only explicit commit approval (e.g., "commit it", "yes commit", "go ahead and commit") authorizes the commit
 
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py status
+### Phase 2: Single Commit (AFTER APPROVAL, BEFORE MERGE)
+
+1. **One commit only** - After explicit approval, create exactly ONE commit with all changes
+2. **Descriptive message** - Use a clear, comprehensive commit message covering all changes
+3. **No intermediate commits** - Never create multiple commits for incremental work
+4. **STOP AGAIN** - After committing, STOP and ask about merge. Do NOT auto-merge.
+
+### Phase 3: Merge (SEPARATE APPROVAL REQUIRED)
+
+1. **STOP AND ASK** - Present merge plan to user
+2. **Request explicit merge approval** - "Ready to merge to [branch]?" then WAIT
+3. **Fast-forward when possible** - Prefer clean history
+4. **Rebase if needed** - Keep history linear when appropriate
+5. **Delete feature branch after merge** - Clean up merged branches immediately:
+   - `git branch -d feature-branch` (safe delete, only works if fully merged)
+   - Never leave stale branches cluttering the repo
+
+### Phase 4: Post-Merge Cleanup (CONDITIONAL)
+
+1. **Amend is SAFE only when:**
+   - The commit has NOT been pushed to remote
+   - OR the branch is a personal feature branch with no collaborators
+   - AND the user explicitly approves the amend
+
+2. **Amend is UNSAFE when:**
+   - Commit has been pushed to shared remote
+   - Others may have pulled the branch
+   - Working on main/master/develop branches
+
+3. **For post-merge cleanup** (changelog updates, version bumps):
+   - If amend is safe: `git commit --amend` to add to previous commit
+   - If amend is unsafe: Create a new "chore:" commit
+
+## Prohibited Actions
+
+Agents MUST NOT:
+- `git commit` before all work is complete
+- `git commit` without user approval
+- `git merge` without user approval
+- `git push` without user approval
+- `git commit --amend` on pushed commits without explicit user consent
+- Create multiple commits for a single logical change
+- Commit, merge, then commit again (the Gemini anti-pattern)
+
+## Approval Checkpoints
+
+| Action | Requires Approval |
+|--------|-------------------|
+| `git add` | No |
+| `git commit` | **YES** |
+| `git merge` | **YES** |
+| `git push` | **YES** |
+| `git commit --amend` | **YES** (with safety check) |
+| `git rebase` | **YES** |
+| `git branch -d` | No (auto after merge) |
+
+## Example Workflow
+
+```
+1. Agent receives task: "Add feature X and update changelog"
+2. Agent implements feature X (no commits)
+3. Agent updates changelog (no commits)
+4. Agent stages all changes: git add -A
+5. Agent: "All work complete. Here's what I've done:
+
+   [git diff --staged output]
+
+   Summary:
+   - Added feature X in src/feature.ts (new endpoint for user preferences)
+   - Updated CHANGELOG.md (added entry for v1.2.0)
+
+   Proposed commit message: 'feat: add user preferences endpoint'
+
+   Please review the changes above. Let me know when you'd like me to commit."
+
+   >>> AGENT STOPS HERE AND WAITS <<<
+
+6. User reviews the diff, maybe asks questions, requests changes
+7. Agent makes any requested changes, re-stages, presents again
+8. User: "Commit it" (explicit approval)
+9. Agent: git commit -m "feat: add user preferences endpoint"
+10. Agent: "Committed. Ready to merge to main?"
+
+    >>> AGENT STOPS HERE AND WAITS <<<
+
+11. User: "Yes, merge"
+12. Agent: git checkout main && git merge feature-branch && git branch -d feature-branch
+13. Agent: "Merged and deleted feature-branch."
+14. If post-merge cleanup needed:
+    Agent: "Need to update version number. Safe to amend? (not pushed yet)"
+
+    >>> AGENT STOPS HERE AND WAITS <<<
 ```
 
-This shows:
-- Current branch
-- Whether workspace is dirty
-- Existing worktrees
+## Constraints
 
-### Step 2: Create Isolated Worktree
+- Must present `git diff --staged` or `git status` before requesting commit approval
+- Must verify push status before offering amend option
+- Must track approval state throughout session
+- Must escalate to user on any git operation uncertainty
 
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py create <task_id>
-```
+## Outputs
 
-Example:
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py create 2.4.1C.5
-```
+Agent should output at each checkpoint:
+- Summary of staged changes
+- Proposed commit message
+- Safety status for amend operations
+- Clear approval request
 
-Output:
-```json
-{
-  "task_id": "2.4.1C.5",
-  "branch": "task/2.4.1C.5",
-  "path": "D:/CCC 2.0/AI/wt-2.4.1C.5",
-  "created_at": "2026-01-07T05:00:00Z",
-  "base_branch": "main"
-}
-```
-
-### Step 3: Work in Isolated Worktree
-
-```bash
-cd "../wt-<task_id>"
-# Do your work
-# Make commits
-# Run tests
-```
-
-### Step 4: Validate Before Merge
-
-Run all required validation:
-```bash
-python -m pytest CAPABILITY/TESTBENCH -x
-python CAPABILITY/PRIMITIVES/preflight.py
-```
-
-**DO NOT PROCEED TO MERGE IF VALIDATION FAILS!**
-
-### Step 5: Merge to Main (Only After Validation Passes)
-
-Return to main workspace first:
-```bash
-cd "D:/CCC 2.0/AI/agent-governance-system"
-```
-
-Then merge:
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py merge <task_id>
-```
-
-Example:
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py merge 2.4.1C.5
-```
-
-### Step 6: Cleanup (Required!)
-
-After successful merge, clean up the worktree and branch:
-
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py cleanup <task_id>
-```
-
-Example:
-```bash
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py cleanup 2.4.1C.5
-```
-
-## Commands Reference
-
-### create
-
-Create isolated worktree for a task.
-
-```bash
-python workspace_isolation.py create <task_id> [--base <branch>]
-```
-
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `task_id` | Unique task identifier | Required |
-| `--base` | Base branch for new branch | `main` |
-
-### status
-
-Show worktree status.
-
-```bash
-python workspace_isolation.py status [task_id]
-```
-
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `task_id` | Optional filter by task | All worktrees |
-
-### merge
-
-Merge task branch into main.
-
-```bash
-python workspace_isolation.py merge <task_id> [--delete-branch]
-```
-
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `task_id` | Task to merge | Required |
-| `--delete-branch` | Delete branch after merge | `false` |
-
-**Prerequisites:**
-- Must be on `main` branch
-- Main workspace must be clean
-- Task branch must exist
-
-### cleanup
-
-Remove worktree and delete branch.
-
-```bash
-python workspace_isolation.py cleanup <task_id> [--force] [--keep-branch]
-```
-
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `task_id` | Task to clean up | Required |
-| `--force` | Force removal with uncommitted changes | `false` |
-| `--keep-branch` | Keep branch after removing worktree | `false` |
-
-### cleanup-stale
-
-Find and remove stale worktrees (already merged to main).
-
-```bash
-python workspace_isolation.py cleanup-stale [--apply]
-```
-
-| Argument | Description | Default |
-|----------|-------------|---------|
-| `--apply` | Actually remove stale worktrees | `false` (dry-run) |
-
-## Failure Handling
-
-### If Tests Fail
-
-1. **DO NOT MERGE** - Keep the worktree for inspection
-2. Fix issues in the worktree
-3. Commit fixes
-4. Re-run validation
-5. Only merge when validation passes
-
-### If Merge Conflicts
-
-1. Resolve conflicts manually in the worktree
-2. Commit the resolution
-3. Re-run validation
-4. Retry merge
-
-### If Something Goes Wrong
-
-Force cleanup (preserves nothing):
-```bash
-python workspace_isolation.py cleanup <task_id> --force
-```
-
-## Automation for Orchestrators
-
-### Full Automated Pipeline
-
-```python
-import subprocess
-import sys
-
-def run_isolated_task(task_id: str, task_commands: list[str]) -> bool:
-    """Run a task in an isolated worktree with full lifecycle."""
-    wt_script = "CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py"
-
-    # 1. Create worktree
-    result = subprocess.run([sys.executable, wt_script, "create", task_id], capture_output=True)
-    if result.returncode != 0:
-        print(f"Failed to create worktree: {result.stderr}")
-        return False
-
-    # Parse worktree path from output
-    import json
-    wt_info = json.loads(result.stdout)
-    wt_path = wt_info["path"]
-
-    # 2. Run task commands in worktree
-    success = True
-    for cmd in task_commands:
-        proc = subprocess.run(cmd, shell=True, cwd=wt_path)
-        if proc.returncode != 0:
-            success = False
-            break
-
-    if not success:
-        print(f"Task failed. Worktree preserved at {wt_path}")
-        return False
-
-    # 3. Merge to main (from main workspace)
-    result = subprocess.run([sys.executable, wt_script, "merge", task_id])
-    if result.returncode != 0:
-        print(f"Merge failed. Manual intervention required.")
-        return False
-
-    # 4. Cleanup
-    subprocess.run([sys.executable, wt_script, "cleanup", task_id])
-
-    return True
-```
-
-### Periodic Cleanup (Cron/Scheduled Task)
-
-```bash
-# Find and remove all stale worktrees
-python CAPABILITY/SKILLS/agents/workspace-isolation/scripts/workspace_isolation.py cleanup-stale --apply
-```
-
-## Integration with AGS Pipeline
-
-When using `ags run`, the pipeline can automatically:
-1. Create worktree before execution
-2. Run all steps in the isolated worktree
-3. Merge on success, preserve on failure
-4. Cleanup after successful merge
-
-To enable, set in your plan:
-```json
-{
-  "workspace_isolation": {
-    "enabled": true,
-    "task_id": "pipeline-001",
-    "cleanup_on_success": true
-  }
-}
-```
-
-## Governance
-
-- All worktree operations logged to stdout
-- JSON output for machine parsing
-- Exit codes: 0 = success, 1 = expected error, 2 = unexpected error
-- Branch naming enforced: `task/<task_id>` pattern only
+**required_canon_version:** >=3.0.0

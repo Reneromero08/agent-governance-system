@@ -1,0 +1,9 @@
+{
+  "valid": true,
+  "violations": [],
+  "summary": {
+    "total_commits": 1,
+    "work_completed_before_commit": true,
+    "approvals_received": ["commit", "merge"]
+  }
+}

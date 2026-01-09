@@ -1,0 +1,12 @@
+{
+  "description": "VIOLATION: Commit, merge, commit again, then leave uncommitted changes (Gemini anti-pattern)",
+  "git_operations": [
+    {"command": "git add src/feature.ts", "type": "stage"},
+    {"command": "git commit -m \"feat: add feature\"", "type": "commit"},
+    {"command": "git merge main", "type": "merge"},
+    {"command": "git add src/more-changes.ts", "type": "stage"},
+    {"command": "git commit -m \"fix: additional changes\"", "type": "commit"},
+    {"command": "git add CHANGELOG.md", "type": "stage"}
+  ],
+  "approvals": []
+}

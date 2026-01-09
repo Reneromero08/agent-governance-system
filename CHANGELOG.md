@@ -9,6 +9,15 @@ All notable changes to Agent Governance System will be documented in this file.
 ## [3.7.34] - 2026-01-09
 
 ### Added
+- **workspace-isolation skill** — Git workflow governance for agents
+  - Enforces human review gate before any commit or merge
+  - Phase 1: Complete all work, stage changes, STOP and present diff
+  - Phase 2: Single commit after explicit approval, STOP before merge
+  - Phase 3: Merge only after separate explicit approval, delete branch after merge
+  - Phase 4: Amend only when safe (not pushed) with approval
+  - Prevents "commit, merge, commit again" anti-pattern
+  - Auto-cleanup of merged feature branches
+  - Validation script with fixtures for compliance checking
 - **Phase 5.2.4: SCL Validator** — 4-layer symbolic program validation
   - L1: Syntax validation (RADICAL[OPERATOR][NUMBER][:CONTEXT])
   - L2: Symbol validation (known radicals, operators, rules)
