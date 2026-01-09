@@ -72,6 +72,11 @@ def _read_required_range(skill_dir: Path) -> Optional[str]:
         return None
     lines = skill_md.read_text(errors="ignore").splitlines()[:50]
     for line in lines:
+        # Check YAML frontmatter format: required_canon_version: "value"
+        match = re.search(r"^required_canon_version:\s*[\"']?([^\"']+)[\"']?\s*$", line)
+        if match:
+            return match.group(1).strip()
+        # Check markdown format: **required_canon_version:** value
         match = re.search(r"^\*\*required_canon_version:\*\*\s*(.+)$", line)
         if match:
             return match.group(1).strip()
@@ -80,6 +85,8 @@ def _read_required_range(skill_dir: Path) -> Optional[str]:
 
 def _find_repo_root(start: Path) -> Optional[Path]:
     for candidate in [start] + list(start.parents):
+        if (candidate / "LAW" / "CANON" / "GOVERNANCE" / "VERSIONING.md").exists():
+            return candidate
         if (candidate / "LAW" / "CANON" / "VERSIONING.md").exists():
             return candidate
         if (candidate / "CANON" / "VERSIONING.md").exists():
@@ -88,7 +95,9 @@ def _find_repo_root(start: Path) -> Optional[Path]:
 
 
 def _read_canon_version(project_root: Path) -> Optional[str]:
-    versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
+    versioning = project_root / "LAW" / "CANON" / "GOVERNANCE" / "VERSIONING.md"
+    if not versioning.exists():
+        versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
     if not versioning.exists():
         versioning = project_root / "CANON" / "VERSIONING.md"
     if not versioning.exists():

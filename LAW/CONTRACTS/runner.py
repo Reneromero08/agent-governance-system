@@ -187,7 +187,7 @@ def run_skill_fixture(skill_dir: Path, input_path: Path, quiet: bool = False) ->
     if not validate_script.exists():
         validate_script = DEFAULT_VALIDATE
 
-    output_dir = RUNS_DIR / "fixtures" / skill_dir.name / relative_fixture
+    output_dir = RUNS_DIR / "_tmp" / "fixtures" / skill_dir.name / relative_fixture
     output_dir.mkdir(parents=True, exist_ok=True)
     actual_path = output_dir / "actual.json"
 

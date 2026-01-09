@@ -882,6 +882,20 @@
     "tokens": 18
   },
   {
+    "anchor": "CHANGELOG.md#fixed",
+    "hash": "1175d1fcba569c8c2593cef58df8fef240922308f80dd726b871b023ee4950e9",
+    "level": 3,
+    "title": "Fixed",
+    "tokens": 121
+  },
+  {
+    "anchor": "CHANGELOG.md#changed",
+    "hash": "1ed277b0fd8e7ee9db18e28121329b63be0760b5216ac7c30d26fb5dc7d95102",
+    "level": 3,
+    "title": "Changed",
+    "tokens": 18
+  },
+  {
     "anchor": "CHANGELOG.md#added",
     "hash": "a022639039ddd8ae24080a030165b2d5fac664ddc7ca809b276d23c254feb910",
     "level": 3,
@@ -39256,6 +39270,146 @@
     "tokens": 76
   },
   {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#q15-bayesian-inference-corrected-test-results",
+    "hash": "c89cda1e28ec9f3b430914aed393cb4e5bad1a20f057f9606d92f1bd6fc586c6",
+    "level": 1,
+    "title": "Q15: Bayesian Inference - CORRECTED TEST RESULTS",
+    "tokens": 38
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#test-summary",
+    "hash": "dc23ef302a7cf69a58d7e6f73acbfde7282b3c14151f6cffdcf78209b3a57ace",
+    "level": 2,
+    "title": "Test Summary",
+    "tokens": 32
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#1-posterior-approximation",
+    "hash": "ad3105c2669f2c794d27c6b9b89deec315df52344fb3ad06ab4672cad6f16406",
+    "level": 3,
+    "title": "1. Posterior Approximation",
+    "tokens": 54
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#2-information-gain-measurement",
+    "hash": "b80936f8bcb23d542f7b1040498a507640dc17dbb15979f7fd1a15e0acfa7082",
+    "level": 3,
+    "title": "2. Information Gain Measurement",
+    "tokens": 40
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#3-posterior-concentration",
+    "hash": "cc6176c05423f86377a643a819102d71472b23dc9a1f913914c7b7a8a54005bc",
+    "level": 3,
+    "title": "3. Posterior Concentration",
+    "tokens": 30
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#4-fisher-information",
+    "hash": "a1a84f3a8f51d80e360e68bb8115b709189f1a195ba7436ed207f16b84fd8ed2",
+    "level": 3,
+    "title": "4. Fisher Information",
+    "tokens": 22
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#individual-trial-results",
+    "hash": "3facc1ea46e7c59d261b4a82353c404262b79aae7acef04ed42be411cb8a6440",
+    "level": 3,
+    "title": "Individual Trial Results",
+    "tokens": 121
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#aggregate-statistics-mean-sd",
+    "hash": "11713cbcc9cbd986e5559229e6561dd2c97dbbf91fb4fa85ce24eb53023b5b78",
+    "level": 3,
+    "title": "Aggregate Statistics (Mean \u00b1 SD)",
+    "tokens": 68
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#statistical-significance-tests",
+    "hash": "1c0ee052e56a6b14bde39b0df0cde6826e020c35b9d6b9e0034fc99918f872fa",
+    "level": 3,
+    "title": "Statistical Significance Tests",
+    "tokens": 8
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#prediction-1-r-tracks-posterior-concentration-hessian",
+    "hash": "410b5814f8367cdf0576d9f8db62c2c133c7a81bed524ec40f3b99de579da4d8",
+    "level": 4,
+    "title": "Prediction 1: R tracks posterior concentration (Hessian)",
+    "tokens": 45
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#prediction-2-r-predicts-information-gain-kl-divergence",
+    "hash": "03664286bed9dd4f3997a9ccb945613c5587db9f27f70a2655ae1f195fa2fcd1",
+    "level": 4,
+    "title": "Prediction 2: R predicts information gain (KL divergence)",
+    "tokens": 46
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#prediction-2b-r-vs-fisher-information",
+    "hash": "1dae46465304b2078db941a4c821db3b164b47aaa0927675218dccb34d777115",
+    "level": 4,
+    "title": "Prediction 2b: R vs Fisher information",
+    "tokens": 44
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#why-trial-1-was-an-outlier",
+    "hash": "351903c3b440edc25e35be8f98d2fe65fb631cc837dd091361250a531be6a2d0",
+    "level": 3,
+    "title": "Why Trial 1 Was an Outlier",
+    "tokens": 65
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#what-this-proves",
+    "hash": "2daa8d1082ef216d4448f6ae606d4f5a6a3fdb7e34da29e8219a0ebe4ac598a3",
+    "level": 3,
+    "title": "What This Proves",
+    "tokens": 85
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#what-r-actually-measures",
+    "hash": "e3925aed1239acb7b6a216f8bb9e0ef4d22c4c44db1a2a492e119b8f84a4135c",
+    "level": 3,
+    "title": "What R Actually Measures",
+    "tokens": 73
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#answer-to-q15",
+    "hash": "9ef257e9e4fa8235e696daa1106c0c32f2db08db3b01d739e3da5dcb1301f9e5",
+    "level": 3,
+    "title": "Answer to Q15",
+    "tokens": 26
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#what-was-wrong-in-original-analysis",
+    "hash": "7a900391be3d7a2e8d8738ebfc63d481ae6d5755d758eacffffcb1ffe1f68afe",
+    "level": 3,
+    "title": "What Was Wrong in Original Analysis",
+    "tokens": 60
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#validated-properties-from-other-tests",
+    "hash": "fa9490c2a465d0de25997c33111b0d66d85958edc60480cb151278082c1bb7c2",
+    "level": 3,
+    "title": "Validated Properties (from other tests)",
+    "tokens": 124
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#verdict",
+    "hash": "ab667f13399d2567cb9bbf23aff312cade5bf397006d6c43247ceba743d6b131",
+    "level": 2,
+    "title": "Verdict",
+    "tokens": 124
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/experiments/open_questions/q15/Q15_CORRECTED_RESULTS.md#acknowledgments",
+    "hash": "c73da8d94582976eb2443b6ce5644b10cf8ff98f7a3159e73c5ec7a1f4b65d60",
+    "level": 2,
+    "title": "Acknowledgments",
+    "tokens": 93
+  },
+  {
     "anchor": "THOUGHT/LAB/FORMULA/research/CANON_PROPOSAL_ACTION_CONDITIONED_NAVIGATION.md#status",
     "hash": "63dd6fae551b0f62a8bd27e40de545dc9d3ba664f9cdc5f8d1c791df6319b012",
     "level": 2,
@@ -41776,6 +41930,132 @@
     "tokens": 60
   },
   {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#question-32-meaning-as-a-physical-field-r-1670",
+    "hash": "c0e782bd010bea2337c5920591c91fc35950c3bc1e1df8018c77b48b8323120e",
+    "level": 1,
+    "title": "Question 32: Meaning as a physical field (R: 1670)",
+    "tokens": 2
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#question",
+    "hash": "302546a2cda2ad006fcf43a793389a4eef45ebd0c78c190cf2ac0589f13cc183",
+    "level": 2,
+    "title": "Question",
+    "tokens": 108
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#solved-criteria-test-plan",
+    "hash": "d0408fae9f3ad4dea864572613de25cbab4675a8755555459f7f12fd3aed18cb",
+    "level": 2,
+    "title": "Solved Criteria + Test Plan",
+    "tokens": 2
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#tests",
+    "hash": "4e66b18bac7c38b2f077654b0115677cdb3a8486ee38baf9aaa61554a3136ac1",
+    "level": 2,
+    "title": "TESTS",
+    "tokens": 28
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#current-state",
+    "hash": "9ea76ba40e86e2f8141b68e8d63181a736ffeef600b26af81552617f8b9e2740",
+    "level": 2,
+    "title": "Current state",
+    "tokens": 57
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#canonical-field-variable",
+    "hash": "cf6fb449b8522c18295177e344388bd1a6b7776b87d1f7c5e4c4fe2cf13a4423",
+    "level": 3,
+    "title": "Canonical field variable",
+    "tokens": 90
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#why-this-is-legitimately-field-like",
+    "hash": "1b6ccb7280023ac3f807909b8f0a5267c0e31ac3ff8c178c8c72a2fb5e8f94ef",
+    "level": 3,
+    "title": "Why this is legitimately \u201cfield-like\u201d",
+    "tokens": 66
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#sources-sinks-coupling-in-your-terms",
+    "hash": "64300b3172e65c0e71303a6cf91f122d6eefbe8dec3354e114eb455b243ebaee",
+    "level": 3,
+    "title": "Sources, sinks, coupling (in your terms)",
+    "tokens": 72
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#dynamics-free-energy-bridge-family-scoped",
+    "hash": "bc36962a114cd2f28eb04f365ff6a329964915a260e389396ae6a15bf84e52e7",
+    "level": 3,
+    "title": "Dynamics (Free Energy bridge, family-scoped)",
+    "tokens": 56
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#nontrivial-predictions-and-falsifiers",
+    "hash": "7049d4fe8ab3b91272d6db96f666944d315262bcae8056abffcb6d6f927f5a04",
+    "level": 3,
+    "title": "Nontrivial predictions (and falsifiers)",
+    "tokens": 124
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#canonical-report-stitching-the-context",
+    "hash": "8442b0dd0faa0261868d7ee0f48a62d54ef0eeb2e69142f9640b9c42134b3743",
+    "level": 2,
+    "title": "Canonical report stitching the context",
+    "tokens": 24
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#roadmap-hardcore-falsification-no-shortcuts",
+    "hash": "ba58375eca1cd32422c6849fb21d9d16789b8cfcc0045095772181fc6c91d547",
+    "level": 2,
+    "title": "Roadmap (hardcore falsification, no shortcuts)",
+    "tokens": 28
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#phase-0-spec-freeze-no-post-hoc-relabeling",
+    "hash": "a0319a5777bda343c5af70c823eef6f585bcbb62a92c6f0894f8af94ff095352",
+    "level": 3,
+    "title": "Phase 0 \u2014 Spec freeze (no post-hoc relabeling)",
+    "tokens": 70
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#phase-1-adversarial-synthetic-gauntlet",
+    "hash": "30eb7fbe9de157f3847ca09dff332c059361305e98fb1b48c8b4a82504a5de71",
+    "level": 3,
+    "title": "Phase 1 \u2014 Adversarial synthetic gauntlet",
+    "tokens": 65
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#phase-2-public-truth-anchored-semiosphere",
+    "hash": "4f79b421d09af1701ea5f830b60cafdd05c70c38c2895ffebf26e458c03bb56d",
+    "level": 3,
+    "title": "Phase 2 \u2014 Public truth-anchored semiosphere",
+    "tokens": 78
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#phase-3-cross-domain-replication-threshold-transfer",
+    "hash": "40d640817c02d505efd368a759b4e72663b978f7d84a484b1c5f49f65a4232e7",
+    "level": 3,
+    "title": "Phase 3 \u2014 Cross-domain replication + threshold transfer",
+    "tokens": 34
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#phase-4-real-semiosphere-dynamics-nonlinear-time",
+    "hash": "7d4899cfb6046057e13749f73b34fda35357d8c125a2379b8c15d0e6c1adbaee",
+    "level": 3,
+    "title": "Phase 4 \u2014 Real semiosphere dynamics (nonlinear time)",
+    "tokens": 45
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md#promotion-criteria",
+    "hash": "2e5bff2c37b7cfcbb2d547ce9fc94c0bffd880edb27594e62d44f7be334b3850",
+    "level": 3,
+    "title": "Promotion criteria",
+    "tokens": 54
+  },
+  {
     "anchor": "THOUGHT/LAB/FORMULA/research/questions/engineering/q29_numerical_stability.md#question-29-numerical-stability-r-1180",
     "hash": "c0e782bd010bea2337c5920591c91fc35950c3bc1e1df8018c77b48b8323120e",
     "level": 1,
@@ -42392,6 +42672,69 @@
     "tokens": 109
   },
   {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#report-meaning-as-field-canonical-definition-pulled-from-existing-formula-context",
+    "hash": "ef8acb96f8461733e0e52aeb20a1a5d522157e4df4af9c34fffb875a9fc69420",
+    "level": 1,
+    "title": "Report: \u201cMeaning as Field\u201d \u2014 Canonical Definition (Pulled From Existing FORMULA Context)",
+    "tokens": 85
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#canonical-definition-one-paragraph",
+    "hash": "2126837276bbe2769d28a9b7fa0f356359ffc1624221582bc80ef447e4b7f1f0",
+    "level": 2,
+    "title": "Canonical definition (one paragraph)",
+    "tokens": 172
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#canonical-what-it-is-two-sentences",
+    "hash": "6db83008254a1cabc0220d9567f5de61e16d5d89306ab2f8b45f225f616ce5b6",
+    "level": 2,
+    "title": "Canonical \u201cwhat it is\u201d (two sentences)",
+    "tokens": 70
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#how-q1-locks-the-denominator-why-field-isnt-arbitrary",
+    "hash": "6a0d25382ec269f0eb883cd3358e18836ee395a4fddc787006894a402816695c",
+    "level": 2,
+    "title": "How Q1 locks the denominator (why \u201cfield\u201d isn\u2019t arbitrary)",
+    "tokens": 133
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#consensus-truth-your-non-negotiable-empirical-anchor",
+    "hash": "32beecfbcdb832c96c25c381731cb9133e185a55f6ba303eb055162c3bdbc0f1",
+    "level": 2,
+    "title": "Consensus truth (your non-negotiable empirical anchor)",
+    "tokens": 93
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#entropic-compression-why-symbols-have-gravity",
+    "hash": "7655a313b2fa9c653b37e82d96c06079279bdbc11a60094d52be55ccc36b8f75",
+    "level": 2,
+    "title": "Entropic compression (why symbols have \u201cgravity\u201d)",
+    "tokens": 113
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#what-would-falsify-meaning-as-field-in-your-own-terms",
+    "hash": "a5418cb3fa70aca745445583f7758221783b6ec859e92d4e48a4289dd767679b",
+    "level": 2,
+    "title": "What would falsify \u201cmeaning as field\u201d (in your own terms)",
+    "tokens": 166
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#minimal-predictions-field-like-behavior-stated-without-math",
+    "hash": "5a98dbf4a8cd282cfec47e52dec95ef5ea44e868bbbf6edb220d2b428669ca86",
+    "level": 2,
+    "title": "Minimal predictions (field-like behavior, stated without math)",
+    "tokens": 106
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md#bottom-line",
+    "hash": "b849cb59640f359181799971db52adb9778d178bf3f93c778b63b823adbc0132",
+    "level": 2,
+    "title": "Bottom line",
+    "tokens": 72
+  },
+  {
     "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/q14_category_theory_plain_english.md#q14-category-theory-plain-english-report",
     "hash": "59eb37da70ccc4a390baaf677525564ae0fda4bbac6a3012be6056425b686385",
     "level": 1,
@@ -42642,6 +42985,83 @@
     "level": 2,
     "title": "Where the proof lives",
     "tokens": 21
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#report-q32-meaning-as-field-solved-criteria-test-plan-using-existing-canon",
+    "hash": "13819de7e187e1cd6386aea73c0b6076b1e501196e0aaa1d0de6246511167fa7",
+    "level": 1,
+    "title": "Report: Q32 \u201cMeaning as Field\u201d \u2014 Solved Criteria + Test Plan (Using Existing Canon)",
+    "tokens": 48
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#what-solved-must-mean-hard-gate",
+    "hash": "adaf3e38f255ad88b7f2bd3bea69a16988a97a701e9d4e93ae38617bb25db767",
+    "level": 2,
+    "title": "What \u201cSOLVED\u201d must mean (hard gate)",
+    "tokens": 97
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#canonical-definitions-from-your-existing-context",
+    "hash": "72900b4e32d6c42de6180a6e949c718aacab0ae8a53e7af842ec9f58206c023d",
+    "level": 2,
+    "title": "Canonical definitions (from your existing context)",
+    "tokens": 133
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#a-measurement-field-variable",
+    "hash": "be118f286cb10ce0a0ebe6fc81889dfb20c0890370e60e810258c5367e957e9d",
+    "level": 3,
+    "title": "A) Measurement (field variable)",
+    "tokens": 90
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#b-independence-gate-anti-echo-chamber",
+    "hash": "caa9da2de1e25c11418bdc261245ef66932755cfa5a35c88c8bd723ce27ea1f4",
+    "level": 3,
+    "title": "B) Independence gate (anti-echo-chamber)",
+    "tokens": 58
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#c-nontrivial-prediction-target-no-tautology",
+    "hash": "d4b74c9d73fac5b6f37b149a78b231f68bdb481f7aa18dca2f2c22d7785d6fbe",
+    "level": 3,
+    "title": "C) Nontrivial prediction target (no tautology)",
+    "tokens": 94
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#d-ablations-prove-which-term-matters",
+    "hash": "80545b2733e769eb671d0e399ead06b03b16929dfdc09df1438ea27a56fbb9a0",
+    "level": 3,
+    "title": "D) Ablations (prove which term matters)",
+    "tokens": 69
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#test-1-echo-chamber-collapse-truth-vs-consensus",
+    "hash": "1186774973d2381703c8420d67c2da6b158e26daaeb61b02b5e7bae6d0ab3248",
+    "level": 3,
+    "title": "Test 1 \u2014 Echo-Chamber Collapse (Truth vs Consensus)",
+    "tokens": 138
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#test-2-propagation-gluing-semiosphere-locality",
+    "hash": "8bde30da57b0e30201521d50029c7d170251f7c0e7099735621c6d6cc85c0712",
+    "level": 3,
+    "title": "Test 2 \u2014 Propagation / Gluing (Semiosphere locality)",
+    "tokens": 112
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#test-3-nonlinear-time-phase-transitions-in-compression-time",
+    "hash": "f260c42aab281bef43b9240b562f146bf4fdd322c13665f0e446aefce3e4aad3",
+    "level": 3,
+    "title": "Test 3 \u2014 Nonlinear Time (Phase transitions in compression-time)",
+    "tokens": 117
+  },
+  {
+    "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST_PLAN.md#deliverables-required-to-mark-q32-solved",
+    "hash": "3f8c4f5b3d33ce2bcdf5cf8c426af92223049ad97782e1643412fb2a65871598",
+    "level": 2,
+    "title": "Deliverables required to mark Q32 \u201cSOLVED\u201d",
+    "tokens": 76
   },
   {
     "anchor": "THOUGHT/LAB/FORMULA/research/questions/reports/Q6_CONSENSUS_FILTER_DISCOVERY.md#q6-resolution-report-the-consensus-filter-discovery",
