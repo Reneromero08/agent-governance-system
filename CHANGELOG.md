@@ -9,11 +9,18 @@ All notable changes to Agent Governance System will be documented in this file.
 ## [3.7.38] - 2026-01-09
 
 ### Added
-- **Claude Code skill integration** — AGS skills now discoverable by Claude Code
-  - Added YAML frontmatter (name, description) to 18 SKILL.md files
-  - Created junctions from `.claude/skills/` to `CAPABILITY/SKILLS/`
-  - Skills can now be invoked via `/skill-name` in Claude Code
-  - Added `fix_skill_frontmatter.py` utility for future skill updates
+- **Phase 5.2.6: SCL Tests & Benchmarks** — Comprehensive test suite and L2 compression proof
+  - `test_phase_5_2_semiotic_compression.py` — 28 tests for determinism, schema validation, token benchmarks, negative tests
+  - `run_scl_proof.py` — L2 compression proof script that chains to L1 receipt
+  - `SCL_PROOF_RECEIPT.json` — Machine-readable L2 receipt (96.4% compression achieved)
+  - `SCL_PROOF_REPORT.md` — Human-readable proof report with benchmark results
+  - Determinism tests: 100-run hash stability verification for C3, I5, 法, 法.驗
+  - Schema validation: JobSpec required fields, types, enums against LAW/SCHEMAS/jobspec.schema.json
+  - Token benchmarks: Natural language (334 tokens) → SCL (12 tokens) with tiktoken o200k_base
+  - Negative tests: Invalid syntax, unknown symbols, circular expansion error handling
+  - L2 receipt chains to L1 proof (parent_receipt: `325410258180d609...`)
+  - 5 benchmark cases: C3 (97.0%), I5 (97.2%), 法 (98.7%), 法.驗 (95.2%), C3:build (92.7%)
+  - 3 negative controls for garbage input verification
 
 ---
 

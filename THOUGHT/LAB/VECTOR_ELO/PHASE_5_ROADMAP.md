@@ -78,51 +78,51 @@ Every task must produce:
 
 ---
 
-## 5.2.6 SCL Tests & Benchmarks
+## 5.2.6 SCL Tests & Benchmarks ✅ COMPLETE (2026-01-09)
 
 **Purpose:** Prove determinism and measure token reduction.
 
-### 5.2.6.1 Determinism Tests
-- [ ] Create `CAPABILITY/TESTBENCH/integration/test_phase_5_2_semiotic_compression.py`
-- [ ] Same program → same JSON hash (100 runs)
-- [ ] Same program + same codebook version → same output
+### 5.2.6.1 Determinism Tests ✅
+- [x] Create `CAPABILITY/TESTBENCH/integration/test_phase_5_2_semiotic_compression.py`
+- [x] Same program → same JSON hash (100 runs)
+- [x] Same program + same codebook version → same output
 
-### 5.2.6.2 Schema Validation Tests
-- [ ] Expanded JobSpecs validate against schema
-- [ ] Invalid inputs produce schema errors
+### 5.2.6.2 Schema Validation Tests ✅
+- [x] Expanded JobSpecs validate against schema
+- [x] Invalid inputs produce schema errors
 
-### 5.2.6.3 Token Benchmark
-- [ ] Measure: tokens for symbolic program vs expanded text
-- [ ] Target: 80%+ reduction for governance boilerplate
-- [ ] Create benchmark fixture with representative programs
+### 5.2.6.3 Token Benchmark ✅
+- [x] Measure: tokens for symbolic program vs expanded text
+- [x] Target: 80%+ reduction for governance boilerplate (achieved 96.4%)
+- [x] Create benchmark fixture with representative programs
 
-### 5.2.6.4 Negative Tests
-- [ ] Invalid syntax → clear error
-- [ ] Unknown symbol → clear error
-- [ ] Circular expansion → error (if possible)
+### 5.2.6.4 Negative Tests ✅
+- [x] Invalid syntax → clear error
+- [x] Unknown symbol → clear error
+- [x] Circular expansion → error (if possible)
 
-### 5.2.6.5 L2 Compression Proof Script (Stacked Receipt)
-- [ ] Create `run_scl_proof.py` following L1 pattern
-- [ ] Inputs: L1 receipt hash, governance text samples
-- [ ] Measure with tiktoken: natural language → symbolic IR tokens
-- [ ] Emit receipt that chains to L1:
+### 5.2.6.5 L2 Compression Proof Script (Stacked Receipt) ✅
+- [x] Create `run_scl_proof.py` following L1 pattern
+- [x] Inputs: L1 receipt hash, governance text samples
+- [x] Measure with tiktoken: natural language → symbolic IR tokens
+- [x] Emit receipt that chains to L1:
   ```json
   {
     "layer": "SCL",
-    "parent_receipt": "<L1_hash>",
-    "input_tokens": <from L1 result>,
-    "output_tokens": <measured>,
-    "compression_pct": <calculated>
+    "parent_receipt": "325410258180d609...",
+    "input_tokens": 334,
+    "output_tokens": 12,
+    "compression_pct": 96.4
   }
   ```
-- [ ] Include negative controls (garbage input → low compression)
-- [ ] Deterministic: same input → same receipt hash
+- [x] Include negative controls (garbage input → low compression)
+- [x] Deterministic: same input → same receipt hash
 
-**Exit Criteria:**
-- [ ] 20+ tests passing
-- [ ] Token reduction benchmark documented
-- [ ] **L2 receipt chains to L1 receipt** (stacked proof)
-- [ ] All error classes covered
+**Exit Criteria:** ✅ ALL MET
+- [x] 20+ tests passing (28 tests)
+- [x] Token reduction benchmark documented (SCL_PROOF_REPORT.md)
+- [x] **L2 receipt chains to L1 receipt** (stacked proof)
+- [x] All error classes covered
 
 ---
 

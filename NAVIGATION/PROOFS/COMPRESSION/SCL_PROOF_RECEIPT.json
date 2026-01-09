@@ -1,0 +1,95 @@
+{
+  "layer": "SCL",
+  "parent_receipt": "325410258180d609003649eda5902e17a1b9851d3aa1c852b3bf0efccc0043b6",
+  "timestamp_utc": "2026-01-09T22:12:22.727210+00:00",
+  "input_tokens": 334,
+  "output_tokens": 12,
+  "compression_pct": 96.40718562874252,
+  "cases_total": 5,
+  "cases_passed": 5,
+  "target_met": true,
+  "tokenizer": {
+    "library": "tiktoken",
+    "encoding": "o200k_base",
+    "version": "0.12.0"
+  },
+  "script_hash": "d78dcd7b859052ba2e20720f7f226bad6a383e8ec3c248c5159c6683e5b8066a",
+  "git_head": "f2f125b0f1eb8bb6f9825c36559202a0562f869e",
+  "git_clean": false,
+  "benchmark_results": [
+    {
+      "case_id": "case_001",
+      "description": "Contract rule C3 - verification receipt",
+      "nl_tokens": 67,
+      "scl_tokens": 2,
+      "compression_pct": 97.01492537313433,
+      "scl_program": "C3",
+      "passed": true,
+      "notes": ""
+    },
+    {
+      "case_id": "case_002",
+      "description": "Invariant I5 - determinism",
+      "nl_tokens": 71,
+      "scl_tokens": 2,
+      "compression_pct": 97.1830985915493,
+      "scl_program": "I5",
+      "passed": true,
+      "notes": ""
+    },
+    {
+      "case_id": "case_003",
+      "description": "LAW/CANON domain pointer",
+      "nl_tokens": 78,
+      "scl_tokens": 1,
+      "compression_pct": 98.71794871794873,
+      "scl_program": "法",
+      "passed": true,
+      "notes": ""
+    },
+    {
+      "case_id": "case_004",
+      "description": "Verification compound pointer",
+      "nl_tokens": 63,
+      "scl_tokens": 3,
+      "compression_pct": 95.23809523809523,
+      "scl_program": "法.驗",
+      "passed": true,
+      "notes": ""
+    },
+    {
+      "case_id": "case_005",
+      "description": "Contract rule with context",
+      "nl_tokens": 55,
+      "scl_tokens": 4,
+      "compression_pct": 92.72727272727272,
+      "scl_program": "C3:build",
+      "passed": true,
+      "notes": ""
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "neg_001",
+      "description": "Random nonsense",
+      "input_tokens": 9,
+      "expected_behavior": "Should not produce meaningful compression",
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg_002",
+      "description": "Unrelated technical jargon",
+      "input_tokens": 10,
+      "expected_behavior": "Should not match governance concepts",
+      "verdict": "PASS"
+    },
+    {
+      "id": "neg_003",
+      "description": "Empty-like input",
+      "input_tokens": 1,
+      "expected_behavior": "Minimal or zero compression benefit",
+      "verdict": "PASS"
+    }
+  ],
+  "receipt_hash": "7cfd0418e385f34a9b81febb3b38293fdff491be19e0a02014adfe212f321b68"
+}
