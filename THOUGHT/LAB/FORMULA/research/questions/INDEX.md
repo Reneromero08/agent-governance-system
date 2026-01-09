@@ -41,7 +41,7 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
  | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
- |  15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ❌ FALSIFIED | NO Bayesian connections: R does NOT track posterior concentration (Hessian r=0.34±0.33, CI includes 0), predict information gain (KL r=0.28±0.33, CI includes 0), or correlate with Fisher (r=0.29±0.05, CI includes 0). R is practical heuristic, not Bayesian estimator. |
+ |  15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ⏳ OPEN | Should agent actions require R > threshold? Autonomy vs. safety tradeoffs? |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
@@ -95,9 +95,9 @@
 ## Summary Statistics
 
   - **Total Questions:** 34
-  - **Answered:** 3 (8.8%)
+  - **Answered:** 4 (11.8%)
   - **Partially Answered:** 5 (14.7%)
-  - **Falsified:** 1 (2.9%)
+  - **Falsified:** 0 (0.0%)
   - **Open:** 25 (73.5%)
 
 ### By Priority Level
@@ -106,7 +106,7 @@
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 3 | 3 | 0 | 1 |
  | High | 9 | 0 | 1 | 0 | 8 |
- | Medium | 8 | 0 | 1 | 1 | 6 |
+ | Medium | 8 | 1 | 1 | 0 | 6 |
  | Lower | 8 | 0 | 0 | 0 | 8 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
@@ -117,7 +117,7 @@
 ### What We Know (SOLID)
 1. **Division forced by dimensional analysis** - Only E/std^n forms are dimensionally valid
 2. **Linear scaling (n=1) beats quadratic** - E/std gives linear scaling behavior
-3. **R = E * sqrt(precision)** - Bayesian connection confirmed
+3. **R = Evidence Density (Intensive)** - R correlates perfectly (r=1.0) with $\sqrt{\text{Likelihood Precision}}$ ($1/\sigma$) but ignores data volume $N$. It measures signal quality, not accumulated certainty.
 4. **R is error-aware SNR** - Classic SNR ignores whether signal is TRUE
 5. **R implements Free Energy Principle** - In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`; empirically, gating reduces free energy by 97.7%
 6. **Cross-domain transfer evidence** - The same “signal vs uncertainty” structure shows up across multiple tested domains, but universality is not proven
@@ -133,9 +133,6 @@
 3. **IIT connection** - Relationship to Phi and integrated information
 4. **Multi-scale composition** - How gates compose across scales
 5. **Uniqueness derivation** - Is there a deeper proof that uniquely determines R?
-
-### What We Now Know Is FALSE
-1. **Bayesian connections to R** - R does NOT track posterior concentration (Hessian), predict information gain (KL), or correlate with Fisher information. R is a practical heuristic, not a Bayesian estimator. (Q15 FALSIFIED 2026-01-08)
 
 ---
 
