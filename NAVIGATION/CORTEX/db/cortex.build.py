@@ -25,17 +25,14 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, List, Tuple
 
-# Add GuardedWriter for write firewall enforcement
-try:
-    from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
-    from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
-except ImportError:
-    GuardedWriter = None
-    FirewallViolation = None
-
+# Ensure project root is in path BEFORE imports
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
+
+# Add GuardedWriter for write firewall enforcement
+from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
+from CAPABILITY.PRIMITIVES.write_firewall import FirewallViolation
 
 import NAVIGATION.CORTEX.semantic.query as cortex_query
 
