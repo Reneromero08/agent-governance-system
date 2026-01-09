@@ -25,6 +25,7 @@ import argparse
 import math
 import os
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Dict, Iterable, List, Optional, Sequence, Tuple
 
 import numpy as np
@@ -103,6 +104,14 @@ class BenchmarkResult:
     name: str
     passed: bool
     details: Dict[str, float]
+
+
+def _binom_z(wins: int, n: int) -> float:
+    return float((wins - (n / 2.0)) / (math.sqrt(n / 4.0) + EPS))
+
+
+def _percentile(values: Sequence[float], q: float) -> float:
+    return float(np.percentile(np.asarray(list(values), dtype=float), q))
 
 
 def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]:
@@ -303,7 +312,14 @@ def pick_true_and_false_sets(
     return pairs
 
 
-def run_scifact_benchmark(*, seed: int = 123, fast: bool = False, strict: bool = True) -> BenchmarkResult:
+def run_scifact_benchmark(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+) -> BenchmarkResult:
     print("\n[Q32:P2] Loading SciFact...")
     examples = load_scifact(max_claims=400, seed=seed)
 
@@ -396,7 +412,7 @@ def run_scifact_benchmark(*, seed: int = 123, fast: bool = False, strict: bool =
     n = int(len(Mc))
     pair_wins = float(wins / max(1, n))
     margin = float(np.mean(Mc - Mw))
-    z = float((wins - (n / 2.0)) / (math.sqrt(n / 4.0) + EPS))
+    z = _binom_z(wins, n)
 
     print("\n[Q32:P2] SciFact check intervention (correct vs wrong check)")
     print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
@@ -405,9 +421,9 @@ def run_scifact_benchmark(*, seed: int = 123, fast: bool = False, strict: bool =
     print(f"  mean(M_wrong)   = {Mw.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
 
-    min_z = 2.0 if fast else 2.6
-    min_margin = 0.50 if fast else 0.75
-    passed = bool(z >= min_z and margin >= min_margin)
+    gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
+    gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
+    passed = bool(z >= gate_z and margin >= gate_margin)
     if not passed:
         print("\n[Q32:P2] SciFact status: FAIL (kept as a public counterexample until fixed)")
         if strict and not fast:
@@ -577,13 +593,151 @@ def run_climate_fever_benchmark(*, seed: int = 123, fast: bool = False, strict: 
     )
 
 
+def run_climate_fever_intervention_benchmark(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+) -> BenchmarkResult:
+    """
+    Climate-FEVER "bench" version of the same intervention gate used in streaming:
+    compare M under a truth-consistent check pool vs a wrong check pool from another claim.
+    """
+    print("\n[Q32:P2] Climate-FEVER intervention (correct vs wrong check)")
+    from datasets import load_dataset  # type: ignore
+
+    ds = load_dataset("climate_fever")["test"]
+    rng = np.random.default_rng(seed)
+
+    def vote_counts(votes: Sequence[Optional[str]]) -> Dict[str, int]:
+        counts: Dict[str, int] = {}
+        for v in votes:
+            if v is None:
+                continue
+            vv = str(v)
+            counts[vv] = counts.get(vv, 0) + 1
+        return counts
+
+    # Bank of supportive evidence texts for wrong checks.
+    bank: List[Tuple[str, List[str]]] = []
+    for ex in ds:
+        claim = str(ex.get("claim", "")).strip()
+        evidences = ex.get("evidences", []) or []
+        if not claim or not evidences:
+            continue
+        evs: List[Tuple[int, float, str, str]] = []
+        for ev in evidences:
+            votes = [v for v in (ev.get("votes", []) or []) if v is not None]
+            counts = vote_counts(votes)
+            text = str(ev.get("evidence", "")).strip()
+            if not text:
+                continue
+            if counts.get("SUPPORTS", 0) >= 2 and counts.get("REFUTES", 0) == 0:
+                entropy = float(ev.get("entropy", 0.0) or 0.0)
+                ev_id = str(ev.get("evidence_id", "")).strip()
+                evs.append((int(counts.get("SUPPORTS", 0)), entropy, ev_id, text))
+        if len(evs) < 4:
+            continue
+        evs_sorted = sorted(evs, key=lambda t: (-t[0], t[1], t[2]))
+        bank.append((claim, [t[3] for t in evs_sorted[:6]]))
+        if len(bank) >= (120 if fast else 800):
+            break
+    if len(bank) < (30 if fast else 120):
+        raise RuntimeError(f"Climate-FEVER wrong-check bank too small ({len(bank)})")
+
+    indices = np.arange(len(ds))
+    rng.shuffle(indices)
+
+    M_correct: List[float] = []
+    M_wrong: List[float] = []
+
+    for i in indices:
+        ex = ds[int(i)]
+        claim = str(ex.get("claim", "")).strip()
+        evidences = ex.get("evidences", []) or []
+        if not claim or not evidences:
+            continue
+        evs: List[Tuple[int, float, str, str]] = []
+        for ev in evidences:
+            votes = [v for v in (ev.get("votes", []) or []) if v is not None]
+            counts = vote_counts(votes)
+            text = str(ev.get("evidence", "")).strip()
+            if not text:
+                continue
+            if counts.get("SUPPORTS", 0) >= 2 and counts.get("REFUTES", 0) == 0:
+                entropy = float(ev.get("entropy", 0.0) or 0.0)
+                ev_id = str(ev.get("evidence_id", "")).strip()
+                evs.append((int(counts.get("SUPPORTS", 0)), entropy, ev_id, text))
+        if len(evs) < 4:
+            continue
+        evs_sorted = sorted(evs, key=lambda t: (-t[0], t[1], t[2]))
+        support_texts = [t[3] for t in evs_sorted[:5]]
+        if len(support_texts) < 4:
+            continue
+
+        obs_texts = support_texts[:2]
+        check_correct_texts = support_texts[2:]
+        if len(check_correct_texts) < 2:
+            continue
+
+        other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
+        if other_claim.strip() == claim.strip():
+            other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
+        wrong_check_texts = other_supports[:3]
+        if len(wrong_check_texts) < 2:
+            continue
+
+        obs_scores = sentence_support_scores([claim] * len(obs_texts), obs_texts).tolist()
+        check_correct_scores = sentence_support_scores([claim] * len(check_correct_texts), check_correct_texts).tolist()
+        check_wrong_scores = sentence_support_scores([claim] * len(wrong_check_texts), wrong_check_texts).tolist()
+
+        M_correct.append(M_from_R(R_grounded(obs_scores, check_correct_scores)))
+        M_wrong.append(M_from_R(R_grounded(obs_scores, check_wrong_scores)))
+
+        if fast and len(M_correct) in (10, 25):
+            print(f"[Q32:P2] climate intervention samples={len(M_correct)}")
+        if len(M_correct) >= (20 if fast else 120):
+            break
+
+    if len(M_correct) < (10 if fast else 60):
+        raise RuntimeError(f"Too few Climate-FEVER intervention samples ({len(M_correct)})")
+
+    Mc = np.array(M_correct, dtype=float)
+    Mw = np.array(M_wrong, dtype=float)
+    wins = int(np.sum(Mc > Mw))
+    n = int(len(Mc))
+    pair_wins = float(wins / max(1, n))
+    margin = float(np.mean(Mc - Mw))
+    z = _binom_z(wins, n)
+
+    print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
+    print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
+    print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+
+    gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
+    gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
+    passed = bool(z >= gate_z and margin >= gate_margin)
+    if not passed:
+        print("\n[Q32:P2] Climate-FEVER intervention status: FAIL")
+        if strict and not fast:
+            raise AssertionError("FAIL: Climate-FEVER intervention benchmark gates did not pass")
+
+    return BenchmarkResult(
+        name="Climate-FEVER-Intervention",
+        passed=passed,
+        details={"pair_wins": pair_wins, "z": z, "mean_margin": margin},
+    )
+
+
 def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Q32 public truth-anchored benchmarks (fast + full modes).")
     p.add_argument(
         "--mode",
-        choices=["bench", "stream"],
+        choices=["bench", "stream", "transfer"],
         default="bench",
-        help="Run static benchmarks (bench) or Phase-4 streaming/intervention simulation (stream).",
+        help="Run static benchmarks (bench), streaming/intervention simulation (stream), or Phase-3 transfer (transfer).",
     )
     p.add_argument(
         "--dataset",
@@ -608,10 +762,34 @@ def parse_args() -> argparse.Namespace:
         help="Override scoring model. In --fast mode default is cosine; otherwise crossencoder.",
     )
     p.add_argument("--seed", type=int, default=123)
+    p.add_argument(
+        "--calibrate_on",
+        choices=["climate_fever", "scifact"],
+        default="climate_fever",
+        help="(transfer) Dataset used to calibrate thresholds (default: climate_fever).",
+    )
+    p.add_argument(
+        "--apply_to",
+        choices=["climate_fever", "scifact"],
+        default="scifact",
+        help="(transfer) Dataset used to verify frozen thresholds (default: scifact).",
+    )
+    p.add_argument(
+        "--calibration_out",
+        default=None,
+        help="(transfer) Optional JSON path to write calibration output.",
+    )
     return p.parse_args()
 
 
-def run_climate_fever_streaming(*, seed: int = 123, fast: bool = False, strict: bool = True) -> BenchmarkResult:
+def run_climate_fever_streaming(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+) -> BenchmarkResult:
     """
     Phase 4: Real semiosphere dynamics (nonlinear time) + intervention.
 
@@ -776,7 +954,7 @@ def run_climate_fever_streaming(*, seed: int = 123, fast: bool = False, strict: 
     pair_wins = float(wins / max(1, n))
     margin = float(np.mean(M_correct_end_a - M_wrong_end_a))
     # Normal-approx z-score for H0: win-rate=0.5 (binomial), avoids fragile absolute thresholds.
-    z = float((wins - (n / 2.0)) / (math.sqrt(n / 4.0) + EPS))
+    z = _binom_z(wins, n)
 
     # Negative control: swap wrong checks across claims (should remain wrong, so win-rate should not increase).
     rng.shuffle(wrong_check_pool)
@@ -792,9 +970,9 @@ def run_climate_fever_streaming(*, seed: int = 123, fast: bool = False, strict: 
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
 
     # Strict threshold uses ~p<0.01 (z≈2.576) for "field effect survives intervention" significance.
-    min_z = 2.0 if fast else 2.6
-    min_margin = 0.50 if fast else 0.75
-    passed = bool(z >= min_z and margin >= min_margin)
+    gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
+    gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
+    passed = bool(z >= gate_z and margin >= gate_margin)
     if not passed:
         print("\n[Q32:P4] Climate-FEVER streaming status: FAIL")
         if strict and not fast:
@@ -814,7 +992,14 @@ def run_climate_fever_streaming(*, seed: int = 123, fast: bool = False, strict: 
     )
 
 
-def run_scifact_streaming(*, seed: int = 123, fast: bool = False, strict: bool = True) -> BenchmarkResult:
+def run_scifact_streaming(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+) -> BenchmarkResult:
     """
     Phase 4 / Phase 3 transfer probe on SciFact.
 
@@ -967,7 +1152,7 @@ def run_scifact_streaming(*, seed: int = 123, fast: bool = False, strict: bool =
     n = int(len(M_correct_end_a))
     pair_wins = float(wins / max(1, n))
     margin = float(np.mean(M_correct_end_a - M_wrong_end_a))
-    z = float((wins - (n / 2.0)) / (math.sqrt(n / 4.0) + EPS))
+    z = _binom_z(wins, n)
 
     print("\n[Q32:P4] Intervention: replace truth-consistent checks with wrong checks")
     print(f"  P(M_correct_end > M_wrong_end) = {pair_wins:.3f}")
@@ -981,9 +1166,9 @@ def run_scifact_streaming(*, seed: int = 123, fast: bool = False, strict: bool =
     print(f"  mean dM_wrong   = {dM_wrong_a.mean():.3f}")
 
     # Strict threshold uses ~p<0.01 (z≈2.576) for "field effect survives intervention" significance.
-    min_z = 2.0 if fast else 2.6
-    min_margin = 0.50 if fast else 0.75
-    passed = bool(z >= min_z and margin >= min_margin)
+    gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
+    gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
+    passed = bool(z >= gate_z and margin >= gate_margin)
     if not passed:
         print("\n[Q32:P4] SciFact streaming status: FAIL")
         if strict and not fast:
@@ -1021,12 +1206,80 @@ def main() -> int:
             results.append(run_scifact_benchmark(seed=args.seed, fast=args.fast, strict=strict))
         if args.dataset in ("climate_fever", "all"):
             results.append(run_climate_fever_benchmark(seed=args.seed, fast=args.fast, strict=strict))
-    else:
-        # Phase 4 currently implemented on Climate-FEVER first (the public benchmark that already passes in Phase 2).
+    elif args.mode == "stream":
         if args.dataset in ("climate_fever", "all"):
             results.append(run_climate_fever_streaming(seed=args.seed, fast=args.fast, strict=strict))
         if args.dataset in ("scifact", "all"):
             results.append(run_scifact_streaming(seed=args.seed, fast=args.fast, strict=strict))
+    else:
+        # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
+        cal_seeds = [args.seed, args.seed + 1, args.seed + 2]
+        cal_ds = args.calibrate_on
+        tgt_ds = args.apply_to
+
+        def run_intervention_bench(ds: str, seed: int) -> BenchmarkResult:
+            if ds == "scifact":
+                return run_scifact_benchmark(seed=seed, fast=False, strict=False)
+            return run_climate_fever_intervention_benchmark(seed=seed, fast=False, strict=False)
+
+        def run_intervention_stream(ds: str, seed: int) -> BenchmarkResult:
+            if ds == "scifact":
+                return run_scifact_streaming(seed=seed, fast=False, strict=False)
+            return run_climate_fever_streaming(seed=seed, fast=False, strict=False)
+
+        print(f"\n[Q32:P3] Calibrating on {cal_ds} (seeds={cal_seeds})")
+        cal_bench = [run_intervention_bench(cal_ds, s) for s in cal_seeds]
+        cal_stream = [run_intervention_stream(cal_ds, s) for s in cal_seeds]
+
+        z_vals = [r.details.get("z") for r in cal_bench + cal_stream]
+        pw_vals = [r.details.get("pair_wins") for r in cal_bench + cal_stream]
+        z_vals_f = [float(x) for x in z_vals if x is not None]
+        pw_vals_f = [float(x) for x in pw_vals if x is not None]
+        if not z_vals_f or not pw_vals_f:
+            raise SystemExit("transfer calibration failed: missing z or pair_wins")
+
+        frozen_min_z = _percentile(z_vals_f, 10.0)
+        frozen_min_pair_wins = _percentile(pw_vals_f, 10.0)
+
+        frozen = {
+            "created_at": datetime.utcnow().isoformat(timespec="seconds") + "Z",
+            "seed_base": int(args.seed),
+            "calibrate_on": cal_ds,
+            "apply_to": tgt_ds,
+            "frozen_min_z": float(frozen_min_z),
+            "frozen_min_pair_wins": float(frozen_min_pair_wins),
+        }
+
+        if args.calibration_out:
+            out_path = str(args.calibration_out)
+            os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+            import json
+
+            with open(out_path, "w", encoding="utf-8") as f:
+                json.dump(frozen, f, indent=2, sort_keys=True)
+            print(f"[Q32:P3] Wrote calibration to {out_path}")
+
+        print(f"\n[Q32:P3] Frozen thresholds: min_z={frozen_min_z:.3f}  min_pair_wins={frozen_min_pair_wins:.3f}")
+        print(f"[Q32:P3] Verifying on {tgt_ds} (seed={args.seed})")
+
+        def enforce_pair_wins(r: BenchmarkResult) -> BenchmarkResult:
+            pw = r.details.get("pair_wins")
+            if pw is None:
+                raise RuntimeError(f"transfer verify failed: {r.name} missing pair_wins")
+            details = dict(r.details)
+            details["gate_pair_wins"] = float(frozen_min_pair_wins)
+            details["gate_z"] = float(frozen_min_z)
+            passed = bool(r.passed and float(pw) >= frozen_min_pair_wins)
+            if not passed:
+                print(f"[Q32:P3] {r.name} transfer gate: pair_wins={float(pw):.3f} z={float(r.details.get('z', float('nan'))):.3f}")
+            return BenchmarkResult(name=r.name, passed=passed, details=details)
+
+        if tgt_ds == "scifact":
+            results.append(enforce_pair_wins(run_scifact_benchmark(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
+            results.append(enforce_pair_wins(run_scifact_streaming(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
+        else:
+            results.append(enforce_pair_wins(run_climate_fever_intervention_benchmark(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
+            results.append(enforce_pair_wins(run_climate_fever_streaming(seed=args.seed, fast=False, strict=False, min_z=frozen_min_z)))
 
     print("\n[Q32] PUBLIC BENCHMARK SUMMARY")
     for r in results:
