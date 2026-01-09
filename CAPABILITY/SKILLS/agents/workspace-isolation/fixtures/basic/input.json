@@ -1,0 +1,11 @@
+{
+  "description": "Valid workflow: complete work, get approval, single commit, merge with approval",
+  "git_operations": [
+    {"command": "git add src/feature.ts", "type": "stage"},
+    {"command": "git add CHANGELOG.md", "type": "stage"},
+    {"type": "work_complete"},
+    {"command": "git commit -m \"feat: add new feature\"", "type": "commit"},
+    {"command": "git merge feature-branch", "type": "merge"}
+  ],
+  "approvals": ["commit", "merge"]
+}
