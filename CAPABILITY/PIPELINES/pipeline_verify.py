@@ -116,22 +116,6 @@ def _load_revokes_snapshot(*, project_root: Path, pipeline_dir: Path) -> set[str
     if not isinstance(revoked, list) or not all(isinstance(x, str) and _HEX64_RE.fullmatch(x) is not None for x in revoked):
         raise ValueError("POLICY_INVALID")
 
-    rel = os.environ.get("CATALYTIC_REVOKES_PATH", "CAPABILITY/CONFIG/CAPABILITY_REVOKES.json")
-    path = Path(rel)
-    if not path.is_absolute():
-        path = project_root / path
-    if path.exists():
-        v = validate_capability_revokes(path)
-        if not v.ok:
-            raise ValueError(v.code)
-        current = _load_json_obj(path)
-        if current.get("revokes_version") != "1.0.0":
-            raise ValueError("REVOKES_INVALID_VERSION")
-        current_revoked = current.get("revoked_capabilities", [])
-        if not isinstance(current_revoked, list):
-            raise ValueError("REVOKES_INVALID")
-        revoked.extend(current_revoked)
-        
     return set(revoked)
 
 

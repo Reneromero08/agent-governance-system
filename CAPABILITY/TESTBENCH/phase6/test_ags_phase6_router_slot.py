@@ -4,6 +4,7 @@ import json
 import shutil
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 
 import pytest
@@ -42,12 +43,15 @@ def _valid_jobspec(*, tmp_root: str) -> dict:
 def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
     pipeline_id = "ags-router-happy"
     tmp_root = "ags_router_happy"
-    plan_out = tmp_path / "plan.json"
+    test_id = uuid.uuid4().hex[:8]
+    test_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"_router_test_{test_id}"
+    test_dir.mkdir(parents=True, exist_ok=True)
+    plan_out = test_dir / "plan.json"
 
     plan_obj = {
         "plan_version": "1.0",
         "pipeline_id": "ignored-by-override",
-        "steps": [{"step_id": "s1", "command": ["python3", "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
+        "steps": [{"step_id": "s1", "command": [sys.executable, "-c", "pass"], "jobspec": _valid_jobspec(tmp_root=tmp_root)}],
     }
     router_code = "import json,sys;sys.stdout.write(json.dumps(%s))" % json.dumps(plan_obj)
 
@@ -99,6 +103,7 @@ def test_ags_plan_router_happy_path(tmp_path: Path) -> None:
         _rm(pipeline_dir)
         _rm(REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1")
         _rm(REPO_ROOT / f"NAVIGATION/CORTEX/_generated/_tmp/{tmp_root}_noop.txt")
+        _rm(test_dir)
 
 
 def test_ags_plan_fails_on_stderr(tmp_path: Path) -> None:

@@ -1,7 +1,9 @@
 from __future__ import annotations
 
 import hashlib
+import shutil
 import sys
+import uuid
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -18,15 +20,15 @@ from CAPABILITY.PRIMITIVES.restore_proof import RestorationProofValidator, canon
 from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
 
 
-def _make_test_writer(project_root: Path) -> GuardedWriter:
-    """Create a GuardedWriter configured for test temp directories."""
+def _make_test_writer(test_root: Path) -> GuardedWriter:
+    rel_root = str(test_root.relative_to(REPO_ROOT)).replace("\\", "/")
     writer = GuardedWriter(
-        project_root=project_root,
-        tmp_roots=["_tmp"],
-        durable_roots=["CAS", "domain", "out1", "out2", "LEDGER.jsonl"],  # Allow CAS and test dirs
-        exclusions=[],  # No exclusions in test mode
+        project_root=REPO_ROOT,
+        tmp_roots=[],  # Empty - we want durable writes only
+        durable_roots=[rel_root],
+        exclusions=[],
     )
-    writer.open_commit_gate()  # Tests need durable writes enabled
+    writer.open_commit_gate()
     return writer
 
 
@@ -79,72 +81,82 @@ def _ledger_record(*, run_id: str, timestamp: str, pre_manifest: dict, post_mani
     }
 
 
-def test_rerun_determinism_proof_and_domain_roots_bytes_identical(tmp_path: Path) -> None:
+def test_rerun_determinism_proof_and_domain_roots_bytes_identical() -> None:
     run_id = "run-determinism"
     timestamp = "CATALYTIC-DPT-02_CONFIG"
 
-    # Create a test writer for the temp directory
-    test_writer = _make_test_writer(tmp_path)
+    # Create test_root inside project
+    test_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp" / f"proof_wiring_{uuid.uuid4().hex[:8]}"
+    test_root.mkdir(parents=True, exist_ok=True)
 
-    # Create deterministic domain content.
-    domain = tmp_path / "domain"
-    domain.mkdir(parents=True)
-    (domain / "a.txt").write_bytes(b"alpha")
-    (domain / "b" / "c.txt").parent.mkdir(parents=True)
-    (domain / "b" / "c.txt").write_bytes(b"charlie")
+    try:
+        # Create a test writer for the temp directory
+        test_writer = _make_test_writer(test_root)
 
-    def generate_once(out_dir: Path) -> tuple[bytes, bytes]:
-        cas = CatalyticStore(out_dir / "CAS", writer=test_writer)
-        pre_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
-        post_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
+        # Create deterministic domain content.
+        domain = test_root / "domain"
+        domain.mkdir(parents=True)
+        (domain / "a.txt").write_bytes(b"alpha")
+        (domain / "b" / "c.txt").parent.mkdir(parents=True)
+        (domain / "b" / "c.txt").write_bytes(b"charlie")
 
-        post_root = build_manifest_root(post_manifest["domain"])
-        domain_roots = {"domain": post_root}
+        def generate_once(out_dir: Path) -> tuple[bytes, bytes]:
+            cas = CatalyticStore(out_dir / "CAS", writer=test_writer)
+            pre_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
+            post_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
 
-        ledger_path = out_dir / "LEDGER.jsonl"
-        ledger = Ledger(ledger_path)
-        ledger.append(_ledger_record(run_id=run_id, timestamp=timestamp, pre_manifest=pre_manifest, post_manifest=post_manifest, domain_roots=domain_roots))
+            post_root = build_manifest_root(post_manifest["domain"])
+            domain_roots = {"domain": post_root}
 
-        jobspec_bytes = canonical_json_bytes(_minimal_jobspec(run_id))
-        jobspec_hash = _sha256_hex(jobspec_bytes)
-        ledger_hash = _sha256_hex(ledger_path.read_bytes())
+            ledger_path = out_dir / "LEDGER.jsonl"
+            ledger = Ledger(ledger_path)
+            ledger.append(_ledger_record(run_id=run_id, timestamp=timestamp, pre_manifest=pre_manifest, post_manifest=post_manifest, domain_roots=domain_roots))
 
-        proof_schema_path = REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json"
-        validator = RestorationProofValidator(proof_schema_path)
-        proof = validator.generate_proof(
-            run_id=run_id,
-            catalytic_domains=["domain"],
-            pre_state=pre_manifest,
-            post_state=post_manifest,
-            timestamp=timestamp,
-            referenced_artifacts={
-                "ledger_hash": ledger_hash,
-                "jobspec_hash": jobspec_hash,
-                "validator_id": {"validator_semver": "0.1.0", "validator_build_id": "test"},
-            },
-        )
+            jobspec_bytes = canonical_json_bytes(_minimal_jobspec(run_id))
+            jobspec_hash = _sha256_hex(jobspec_bytes)
+            ledger_hash = _sha256_hex(ledger_path.read_bytes())
 
-        proof_bytes = canonical_json_bytes(proof)
-        roots_bytes = canonical_json_bytes(domain_roots)
-        return proof_bytes, roots_bytes
+            proof_schema_path = REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json"
+            validator = RestorationProofValidator(proof_schema_path)
+            proof = validator.generate_proof(
+                run_id=run_id,
+                catalytic_domains=["domain"],
+                pre_state=pre_manifest,
+                post_state=post_manifest,
+                timestamp=timestamp,
+                referenced_artifacts={
+                    "ledger_hash": ledger_hash,
+                    "jobspec_hash": jobspec_hash,
+                    "validator_id": {"validator_semver": "0.1.0", "validator_build_id": "test"},
+                },
+            )
 
-    proof1, roots1 = generate_once(tmp_path / "out1")
-    proof2, roots2 = generate_once(tmp_path / "out2")
-    assert proof1 == proof2
-    assert roots1 == roots2
+            proof_bytes = canonical_json_bytes(proof)
+            roots_bytes = canonical_json_bytes(domain_roots)
+            return proof_bytes, roots_bytes
+
+        proof1, roots1 = generate_once(test_root / "out1")
+        proof2, roots2 = generate_once(test_root / "out2")
+        assert proof1 == proof2
+        assert roots1 == roots2
+    finally:
+        shutil.rmtree(test_root, ignore_errors=True)
 
 
 def test_tamper_detection_hash_mismatch() -> None:
-    with TemporaryDirectory() as tmpdir:
-        tmp = Path(tmpdir)
-        test_writer = _make_test_writer(tmp)
+    # Create test_root inside project
+    test_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pytest_tmp" / f"proof_wiring_{uuid.uuid4().hex[:8]}"
+    test_root.mkdir(parents=True, exist_ok=True)
 
-        domain = tmp / "domain"
+    try:
+        test_writer = _make_test_writer(test_root)
+
+        domain = test_root / "domain"
         domain.mkdir(parents=True)
         target = domain / "file.txt"
         target.write_bytes(b"hello")
 
-        cas = CatalyticStore(tmp / "CAS", writer=test_writer)
+        cas = CatalyticStore(test_root / "CAS", writer=test_writer)
         pre_manifest = {"domain": compute_domain_manifest(domain, cas=cas)}
         # Tamper 1 byte
         target.write_bytes(b"jello")
@@ -163,6 +175,8 @@ def test_tamper_detection_hash_mismatch() -> None:
         assert proof["restoration_result"]["verified"] is False
         assert proof["restoration_result"]["condition"] == "RESTORATION_FAILED_HASH_MISMATCH"
         assert proof["restoration_result"]["mismatches"][0]["path"] == "file.txt"
+    finally:
+        shutil.rmtree(test_root, ignore_errors=True)
 
 
 def test_path_normalization_rejects_traversal() -> None:

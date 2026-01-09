@@ -63,7 +63,7 @@ def _make_plan(*, pipeline_id: str, tmp_root: str) -> dict:
                 "jobspec": jobspec,
                 "memoize": False,
                 "cmd": [
-                    "python3",
+                    sys.executable,
                     "-c",
                     (
                         "from pathlib import Path;"
@@ -197,7 +197,7 @@ def test_pipeline_run_creates_state_when_missing(tmp_path: Path) -> None:
 
         run_cmd = [
             sys.executable,
-            str(REPO_ROOT / "TOOLS" / "catalytic.py"),
+            str(REPO_ROOT / "CAPABILITY" / "TOOLS" / "catalytic" / "catalytic.py"),
             "pipeline",
             "run",
             "--pipeline-id",

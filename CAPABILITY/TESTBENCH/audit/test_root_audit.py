@@ -21,7 +21,6 @@ from pathlib import Path
 import pytest
 
 from CAPABILITY.AUDIT.root_audit import root_audit
-from CAPABILITY.RUNS.records import put_output_hashes
 
 
 # ============================================================================
@@ -319,8 +318,9 @@ def test_b01_valid_output_hashes_all_rooted_pass(isolated_env, monkeypatch):
     out2 = _put_blob_isolated(b"output2", cas_root)
     out3 = _put_blob_isolated(b"output3", cas_root)
 
-    # Create OUTPUT_HASHES record
-    output_hashes_record = put_output_hashes([out1, out2, out3])
+    # Create OUTPUT_HASHES record using isolated helper
+    output_hashes_json = json.dumps([out1, out2, out3], sort_keys=True, separators=(',', ':')).encode('utf-8')
+    output_hashes_record = _put_blob_isolated(output_hashes_json, cas_root)
 
     # Root all outputs
     _write_run_roots(runs_dir, [out1, out2, out3])
@@ -348,8 +348,9 @@ def test_b01_output_hashes_record_also_rooted(isolated_env, monkeypatch):
     out1 = _put_blob_isolated(b"output1", cas_root)
     out2 = _put_blob_isolated(b"output2", cas_root)
 
-    # Create OUTPUT_HASHES record
-    output_hashes_record = put_output_hashes([out1, out2])
+    # Create OUTPUT_HASHES record using isolated helper
+    output_hashes_json = json.dumps([out1, out2], sort_keys=True, separators=(',', ':')).encode('utf-8')
+    output_hashes_record = _put_blob_isolated(output_hashes_json, cas_root)
 
     # Root outputs AND the record itself
     _write_run_roots(runs_dir, [output_hashes_record, out1, out2])
@@ -376,8 +377,9 @@ def test_b02_unrooted_ref_fail_unreachable(isolated_env, monkeypatch):
     out2 = _put_blob_isolated(b"output2", cas_root)
     out3 = _put_blob_isolated(b"output3", cas_root)
 
-    # Create OUTPUT_HASHES record with all three
-    output_hashes_record = put_output_hashes([out1, out2, out3])
+    # Create OUTPUT_HASHES record with all three using isolated helper
+    output_hashes_json = json.dumps([out1, out2, out3], sort_keys=True, separators=(',', ':')).encode('utf-8')
+    output_hashes_record = _put_blob_isolated(output_hashes_json, cas_root)
 
     # Only root out1 and out2 (out3 is unreachable)
     _write_run_roots(runs_dir, [out1, out2])
@@ -400,8 +402,9 @@ def test_b02_unreachable_sorted(isolated_env, monkeypatch):
     # Create many outputs
     outs = [_put_blob_isolated(f"output{i}".encode(), cas_root) for i in range(10)]
 
-    # Create OUTPUT_HASHES record
-    output_hashes_record = put_output_hashes(outs)
+    # Create OUTPUT_HASHES record using isolated helper
+    output_hashes_json = json.dumps(outs, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    output_hashes_record = _put_blob_isolated(output_hashes_json, cas_root)
 
     # Only root half of them (alternating)
     _write_run_roots(runs_dir, [outs[i] for i in range(0, 10, 2)])
@@ -543,9 +546,10 @@ def test_b05_required_missing_sorted(isolated_env, monkeypatch):
 
     all_hashes = real_outs + fake_hashes
 
-    # Store OUTPUT_HASHES record using put_output_hashes (which validates format)
-    # Since fake_hashes are valid format but don't exist, this will work
-    output_hashes_record = put_output_hashes(all_hashes)
+    # Store OUTPUT_HASHES record using isolated helper
+    # Since fake_hashes are valid format but don't exist in CAS, this will work
+    output_hashes_json = json.dumps(all_hashes, sort_keys=True, separators=(',', ':')).encode('utf-8')
+    output_hashes_record = _put_blob_isolated(output_hashes_json, cas_root)
 
     # Root all hashes (so they're reachable, but fakes don't exist in CAS)
     _write_run_roots(runs_dir, all_hashes)

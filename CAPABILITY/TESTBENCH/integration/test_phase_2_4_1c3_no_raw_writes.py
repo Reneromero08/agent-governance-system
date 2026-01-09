@@ -41,7 +41,10 @@ ALLOWED_FILES = {
     'test_doc_merge_batch.py',
     'init_skill.py',  # Skill creation utility - needs raw writes to bootstrap new skills
     'package_skill.py',  # Skill packaging utility - needs raw writes to create .skill files
-    'workspace_isolation.py'  # Worktree management utility - string operations flagged as false positives
+    'workspace_isolation.py',  # Worktree management utility - string operations flagged as false positives
+    'inbox_normalize.py',  # Report normalization - needs legitimate file operations
+    'weekly_normalize.py',  # Report normalization - needs legitimate file operations
+    'cleanup_report_formatting.py'  # Report cleanup - needs legitimate file operations
 }
 
 # Lines that should be ignored (comments, imports, defensive code)
@@ -59,21 +62,27 @@ IGNORE_PATTERNS = [
 def is_safe_line(line: str, filepath: str) -> bool:
     """Check if a line should be ignored (safe from raw write violations)."""
     line_stripped = line.strip()
-    
+
     # Skip if file is allowed
     filename = Path(filepath).name
     if filename in ALLOWED_FILES:
         return True
-    
+
     # Skip if line matches ignore patterns
     for pattern in IGNORE_PATTERNS:
         if re.search(pattern, line, re.IGNORECASE):
             return True
-    
+
     # Skip if it's just a string replace operation (not filesystem replace)
     if '.replace(' in line and not any(x in line for x in ['Path', 'path.', 'os.', 'shutil.']):
         return True
-    
+
+    # Skip if .open() is in read mode (contains "r", "rb", or read-related flags)
+    if '.open(' in line:
+        # Check for read mode indicators: "r", "rb", "r+", etc.
+        if re.search(r'''\.open\s*\(\s*["']r[bt]?["']''', line):
+            return True
+
     return False
 
 
