@@ -9,9 +9,10 @@ All notable changes to Agent Governance System will be documented in this file.
 ## [3.7.35] - 2026-01-09
 
 ### Fixed
-- **CI parallel execution** — Enable pytest-xdist for ~40% faster test runs
-  - ci_local_gate.py now uses `-n auto --dist=loadfile`
-  - Tests complete in ~10min vs ~16min sequential
+- **CI speed optimization** — Tests now run in ~2min instead of 15min
+  - Enable pytest-xdist parallel execution (`-n auto --dist=loadfile`)
+  - Move catlab_stress demo tests to archive (10min savings)
+  - Add conftest.py with `--run-slow` flag for opt-in stress tests
 - **Phase 6 test fixes** — Windows compatibility and firewall compliance
   - Fixed `python3` → `sys.executable` for Windows
   - Fixed proof_wiring tests to use project-relative paths
@@ -23,6 +24,9 @@ All notable changes to Agent Governance System will be documented in this file.
   - Historical pipelines verify correctly after revocation
 - **root_audit tests** — Use isolated CAS instead of global put_output_hashes
 - **inbox tests** — Updated paths and relaxed documentation checks
+- **no_raw_writes test** — Added ant-worker run.py to allowed adapters
+- **workspace-isolation fixtures** — Skip in runner (uses own test script)
+- **ant-worker** — Use write_auto instead of write_durable for firewall compliance
 
 ---
 

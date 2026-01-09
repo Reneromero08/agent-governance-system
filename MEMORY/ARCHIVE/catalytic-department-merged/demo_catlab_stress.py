@@ -1,6 +1,12 @@
-# CATLAB-STRESS: Push catalytic restoration to breaking point
+# DEMO: CATLAB-STRESS - Push catalytic restoration to breaking point
+# =====================================================================
+# STATUS: DEMO/ARCHIVED - Not part of CI test suite
+# PURPOSE: Validates catalytic restoration at extreme scale (10K files, 50MB)
+# RUNTIME: ~10 minutes - too slow for regular CI
+# TO RUN: pytest MEMORY/ARCHIVE/catalytic-department-merged/demo_catlab_stress.py
+# =====================================================================
 """
-This test exists to BREAK EXPECTATIONS.
+This DEMO exists to BREAK EXPECTATIONS.
 
 We're not just proving "it works" - we're proving:
 1. It scales beyond what seems reasonable
@@ -187,6 +193,7 @@ class TestScaling:
 class TestMassiveRestoration:
     """Push file counts beyond "reasonable" limits."""
 
+    @pytest.mark.slow
     def test_5000_files_byte_identical(self) -> None:
         """
         5,000 files. Mutate hard. Restore perfectly.
@@ -251,6 +258,7 @@ class TestMassiveRestoration:
 class TestSingleBitDetection:
     """Prove we detect the smallest possible corruption."""
 
+    @pytest.mark.slow
     def test_single_bit_flip_in_10000_files(self) -> None:
         """
         10,000 files. Flip ONE BIT in ONE file.
@@ -291,6 +299,7 @@ class TestSingleBitDetection:
 class TestDataVolume:
     """Push total data volume."""
 
+    @pytest.mark.slow
     def test_50mb_restoration(self) -> None:
         """
         ~50MB of data. Mutate. Restore byte-identical.
@@ -330,6 +339,7 @@ class TestDataVolume:
 class TestDeterminism:
     """Prove repeated runs produce identical results."""
 
+    @pytest.mark.slow
     def test_hash_determinism_across_runs(self) -> None:
         """
         Run the same operation 3 times.

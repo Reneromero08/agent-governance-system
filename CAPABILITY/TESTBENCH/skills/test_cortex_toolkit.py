@@ -214,6 +214,9 @@ class TestVerifySystem1Operation:
         payload = {"operation": "verify_system1"}
         output_path = temp_run_dir / "output.json"
 
+        # Ensure output directory exists
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
         # May return non-zero if db doesn't exist, but should be invokable
         result = cortex_toolkit.op_verify_system1(payload, output_path, mock_writer)
 

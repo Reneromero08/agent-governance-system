@@ -35,10 +35,11 @@ def _run(cmd: list[str], *, env: dict[str, str] | None = None) -> subprocess.Com
 
 
 def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-registry"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-registry-{unique_suffix}"
     step_id = "s1"
 
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
     task_path = reg_root / "task.json"
     result_path = reg_root / "result.json"
     in_path = reg_root / "in.txt"
@@ -49,7 +50,7 @@ def test_capability_registry_happy_unknown_and_tamper(tmp_path: Path) -> None:
         "adapter_version": "1.0.0",
         "name": "ant-worker-copy-v1",
         "command": [
-            "python3",
+            sys.executable,
             "CAPABILITY/SKILLS/agents/ant-worker/scripts/run.py",
             str(task_path.relative_to(REPO_ROOT)).replace("\\", "/"),
             str(result_path.relative_to(REPO_ROOT)).replace("\\", "/"),

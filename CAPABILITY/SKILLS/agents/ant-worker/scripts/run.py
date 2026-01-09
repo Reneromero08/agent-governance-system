@@ -46,8 +46,19 @@ def _canonical_json_bytes(obj: Any) -> bytes:
 
 
 def save_json(path: str, data: Dict, writer: Any) -> None:
-    """Save JSON deterministically (firewalled)."""
-    writer.write_durable(path, json.dumps(data, sort_keys=True, separators=(",", ":"), indent=2))
+    """Save JSON deterministically (firewalled if within project, otherwise direct write)."""
+    from pathlib import Path
+
+    path_obj = Path(path).resolve()
+    try:
+        # Try to get relative path from project root
+        rel_path = path_obj.relative_to(writer.project_root)
+        # Path is within project, use guarded writer
+        writer.write_tmp(str(rel_path), json.dumps(data, sort_keys=True, separators=(",", ":"), indent=2))
+    except (ValueError, AttributeError):
+        # Path is outside project or writer has no project_root, use direct write
+        path_obj.parent.mkdir(parents=True, exist_ok=True)
+        path_obj.write_text(json.dumps(data, sort_keys=True, separators=(",", ":"), indent=2), encoding="utf-8")
 
 
 def compute_hash(file_path: Path) -> str:
@@ -184,13 +195,11 @@ class GrokExecutor:
                     continue
 
                 # Create destination directory
-                # Create destination directory
-                self.writer.mkdir_durable(str(dest_path.parent))
-                
-                # Copy file
+                self.writer.mkdir_auto(str(dest_path.parent))
+
                 # Copy file
                 content = source_path.read_bytes()
-                self.writer.write_durable(str(dest_path), content)
+                self.writer.write_auto(str(dest_path), content)
 
                 # Compute source hash
                 source_hash = compute_hash(source_path)

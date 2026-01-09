@@ -31,7 +31,9 @@ def _run(cmd: list[str], *, env: dict[str, str]) -> subprocess.CompletedProcess[
 
 
 def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-pins-ok"
+    # Use unique pipeline_id based on tmp_path to avoid parallel test conflicts
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-pins-ok-{unique_suffix}"
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
 
@@ -42,7 +44,8 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
     # The v1 capability is pinned to a concrete ant-worker command that expects these files.
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    # Use unique registry root to avoid parallel test conflicts
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
@@ -63,7 +66,7 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
     )
 
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "pipeline-ags-capability-pins-ok-s1-a1"
+    run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / f"pipeline-{pipeline_id}-s1-a1"
 
     try:
         _rm(pipeline_dir)
@@ -99,7 +102,8 @@ def test_capability_pinned_routes_and_verifies(tmp_path: Path) -> None:
 
 
 def test_known_but_unpinned_rejects_at_route(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-pins-unpinned"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-pins-unpinned-{unique_suffix}"
     plan_path = tmp_path / "plan.json"
     plan_path.write_text(json.dumps({"plan_version": "1.0", "steps": [{"step_id": "s1", "capability_hash": CAP}]}), encoding="utf-8")
 
@@ -120,9 +124,10 @@ def test_known_but_unpinned_rejects_at_route(tmp_path: Path) -> None:
 
 
 def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path) -> None:
-    pipeline_id = "ags-capability-pins-verify-bypass"
+    unique_suffix = hex(hash(str(tmp_path)))[-8:]
+    pipeline_id = f"ags-capability-pins-verify-bypass-{unique_suffix}"
     pipeline_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_pipelines" / pipeline_id
-    run_id = "pipeline-ags-capability-pins-verify-bypass-s1-a1"
+    run_id = f"pipeline-{pipeline_id}-s1-a1"
     run_dir = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / run_id
 
     pins_path = tmp_path / "PINS.json"
@@ -131,7 +136,7 @@ def test_verify_rejects_unpinned_even_if_pipeline_artifact_exists(tmp_path: Path
     env = dict(os.environ)
     env["CATALYTIC_PINS_PATH"] = str(pins_path)
 
-    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / "phase65_registry"
+    reg_root = REPO_ROOT / "LAW" / "CONTRACTS" / "_runs" / "_tmp" / f"phase65_registry_{unique_suffix}"
     task_path = reg_root / "task.json"
     in_path = reg_root / "in.txt"
     out_path = reg_root / "out.txt"
