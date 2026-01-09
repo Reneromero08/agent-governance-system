@@ -60,7 +60,7 @@ jobs:
           TMP: ${{ github.workspace }}/LAW/CONTRACTS/_runs/_tmp/pytest
         run: |
           mkdir -p "$TMPDIR"
-          python -m pytest -q -s --ignore=MEMORY/LLM_PACKER/_packs --ignore=CATALYTIC-DPT/LAB
+          python -m pytest CAPABILITY/TESTBENCH -q -s --ignore=MEMORY/LLM_PACKER/_packs
 
       - name: CI strict verification (SPECTRUM-05)
         env:

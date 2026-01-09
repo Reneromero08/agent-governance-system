@@ -1,8 +1,19 @@
-<!-- CONTENT_HASH: 3.7.35_PENDING -->
+<!-- CONTENT_HASH: 3.7.36_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.36] - 2026-01-09
+
+### Fixed
+- **GitHub Actions CI** — Fix failing workflows
+  - Add pyyaml and numpy to requirements.txt
+  - Fix cortex.build.py sys.path order (GuardedWriter import)
+  - Stop tracking generated Cortex files (cortex.db, SECTION_INDEX.json)
+  - Restrict pytest to CAPABILITY/TESTBENCH to avoid legacy tests
 
 ---
 
