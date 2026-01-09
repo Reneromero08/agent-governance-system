@@ -21,6 +21,7 @@ NAVIGATION/CORTEX/_generated/cortex.db
 NAVIGATION/CORTEX/_generated/*.sqlite
 NAVIGATION/CORTEX/_generated/SECTION_INDEX.json
 NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json
+NAVIGATION/CORTEX/_generated/CORTEX_META.json
 NAVIGATION/CORTEX/_generated/summaries/
 !NAVIGATION/CORTEX/_generated/.gitkeep
 
