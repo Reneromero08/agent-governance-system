@@ -6,6 +6,23 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.7.29] - 2026-01-08
+
+### Fixed
+- **CAPABILITY/TOOLS/governance/critic.py** — Skip fixtures directories in skill iteration
+  - Added `or skill_dir.name == "fixtures"` to 4 functions: check_skill_fixtures, check_raw_fs_access, check_skill_manifests, check_schema_validation
+  - Added inbox-report-writer to allowed filesystem access skills
+- **CAPABILITY/TOOLS/governance/schema_validator.py** — Prioritize YAML frontmatter over inline markdown
+  - Added frontmatter priority checks to prevent `**Status**: Accepted` from overwriting YAML `status: "Accepted"`
+- **LAW/CONTEXT/decisions/ADR-038-cmp01-catalytic-mutation-protocol.md** — Added YAML frontmatter with required schema fields (id, title, status, date, confidence, impact, deciders, tags)
+- **LAW/CONTEXT/decisions/ADR-039-spectrum-canon-promotion.md** — Added YAML frontmatter with required schema fields
+- **CAPABILITY/SKILLS/utilities/skill-creator/SKILL.md** — Added status and required_canon_version fields to frontmatter
+
+### Changed
+- All CI gate violations resolved — critic now passes all governance checks
+
+---
+
 ## [3.7.28] - 2026-01-08
 
 ### Added

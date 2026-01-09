@@ -14,6 +14,7 @@
 | 2 | [Falsification criteria](critical/q02_falsification_criteria.md) | 1750 | ✅ ANSWERED | Formula measures local agreement correctly. Fails when observations are correlated (echo chambers). Defense: Add fresh data; if R crashes, it was echo chamber. |
 | 3 | [Why does it generalize?](critical/q03_why_generalize.md) | 1720 | ⏳ PARTIAL | Strong cross-domain transfer evidence, but no necessity theorem yet that forces a “deep isomorphism” claim. |
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
+| 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ? OPEN | Candidate field `M:=log(R)` + initial falsifiers exist; remains OPEN until public, adversarial, out-of-domain replications pass. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
 | 6 | [IIT connection](critical/q06_iit_connection.md) | 1650 | ✅ ANSWERED | PROVEN: High R → High Phi (sufficient). High Phi ↛ High R (not necessary). R is a strict subset of Integration. R requires consensus (low dispersion), Phi allows synergy (high dispersion). XOR system: perfect accuracy (E=0) + high structure (Phi=1.5) + LOW R (0.36). |
 
@@ -40,13 +41,12 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
  | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
- | 15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ⏳ OPEN | Connection to posterior concentration or evidence accumulation? |
+ |  15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ❌ FALSIFIED | NO Bayesian connections: R does NOT track posterior concentration (Hessian r=0.34±0.33, CI includes 0), predict information gain (KL r=0.28±0.33, CI includes 0), or correlate with Fisher (r=0.29±0.05, CI includes 0). R is practical heuristic, not Bayesian estimator. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ⏳ OPEN | Should agent actions require R > threshold? Autonomy vs. safety tradeoffs? |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
 | 20 | [Tautology risk](medium_priority/q20_tautology_risk.md) | 1360 | ⏳ OPEN | Is formula descriptive or explanatory? |
-| 32 | [Meaning as a physical field](medium_priority/q32_meaning_as_field.md) | 1450 | ⏳ OPEN | Is “meaning” operationally measurable as a real field with dynamics, or just a compression/inference label? |
 | 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ⏳ OPEN | Can `σ^Df` be derived from information theory (e.g., `H(X|S)` / explanation density), or is it heuristic? |
 
 ---
@@ -77,7 +77,7 @@
 
 ## Research Clusters
 
-**Cluster A: Foundations** (Q1, Q3, Q5)
+**Cluster A: Foundations** (Q1, Q3, Q5, Q32)
 > Why does local agreement reveal truth, and why does this work across scales?
 
 **Cluster B: Scientific Rigor** (Q2, Q4, Q20)
@@ -85,6 +85,7 @@
 
 **Cluster C: Theoretical Grounding** (Q6, Q9, Q14, Q15)
 > How does R relate to IIT (Phi), Free Energy, Bayesian inference, and category theory?
+> Q15: Bayesian inference connection - FALSIFIED (no significant correlations found)
 
 **Cluster D: AGS Application** (Q10, Q17, Q19)
 > How can R improve alignment detection, governance gating, and value learning?
@@ -93,20 +94,21 @@
 
 ## Summary Statistics
 
- - **Total Questions:** 34
- - **Answered:** 3 (8.8%)
- - **Partially Answered:** 5 (14.7%)
- - **Open:** 26 (76.5%)
+  - **Total Questions:** 34
+  - **Answered:** 3 (8.8%)
+  - **Partially Answered:** 5 (14.7%)
+  - **Falsified:** 1 (2.9%)
+  - **Open:** 25 (73.5%)
 
 ### By Priority Level
 
-| Priority | Total | Answered | Partially | Open |
-|----------|-------|----------|-----------|------|
-| Critical | 6 | 3 | 3 | 0 |
-| High | 9 | 0 | 1 | 8 |
- | Medium | 9 | 0 | 1 | 8 |
-| Lower | 8 | 0 | 0 | 8 |
-| Engineering | 2 | 0 | 0 | 2 |
+ | Priority | Total | Answered | Partially | Falsified | Open |
+ |----------|-------|----------|-----------|-----------|------|
+ | Critical | 7 | 3 | 3 | 0 | 1 |
+ | High | 9 | 0 | 1 | 0 | 8 |
+ | Medium | 8 | 0 | 1 | 1 | 6 |
+ | Lower | 8 | 0 | 0 | 0 | 8 |
+ | Engineering | 2 | 0 | 0 | 0 | 2 |
 
 ---
 
@@ -126,11 +128,14 @@
 2. **Global scaling fit** - Power-law/log-log fits can appear across mixed families; the exact exponential relation is cleanest within a specified likelihood family (e.g., Gaussian)
 
 ### What's Still Unknown
-1. **Which likelihood kernel E(z) is “right”** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
+1. **Which likelihood kernel E(z) is "right"** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
 2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles
 3. **IIT connection** - Relationship to Phi and integrated information
 4. **Multi-scale composition** - How gates compose across scales
 5. **Uniqueness derivation** - Is there a deeper proof that uniquely determines R?
+
+### What We Now Know Is FALSE
+1. **Bayesian connections to R** - R does NOT track posterior concentration (Hessian), predict information gain (KL), or correlate with Fisher information. R is a practical heuristic, not a Bayesian estimator. (Q15 FALSIFIED 2026-01-08)
 
 ---
 

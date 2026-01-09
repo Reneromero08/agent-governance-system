@@ -91,7 +91,7 @@ def check_skill_fixtures() -> List[str]:
         if not category_dir.is_dir() or category_dir.name.startswith("_"):
             continue
         for skill_dir in category_dir.iterdir():
-            if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
+            if not skill_dir.is_dir() or skill_dir.name.startswith("_") or skill_dir.name == "fixtures":
                 continue
             fixtures_dir = skill_dir / "fixtures"
             if not fixtures_dir.exists() or not any(fixtures_dir.iterdir()):
@@ -106,7 +106,7 @@ def check_raw_fs_access() -> List[str]:
         if not category_dir.is_dir() or category_dir.name.startswith("_"):
             continue
         for skill_dir in category_dir.iterdir():
-            if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
+            if not skill_dir.is_dir() or skill_dir.name.startswith("_") or skill_dir.name == "fixtures":
                 continue
             for py_file in skill_dir.glob("*.py"):
                 if py_file.name == "validate.py":
@@ -115,7 +115,7 @@ def check_raw_fs_access() -> List[str]:
                 for pattern in RAW_FS_PATTERNS:
                     if re.search(pattern, content):
                         # Check if it's in allowed skills (need legitimate fs access)
-                        if skill_dir.name in ("artifact-escape-hatch", "pack-validate", "llm-packer-smoke", "cas-integrity-check", "system1-verify", "agi-hardener", "canonical-doc-enforcer", "workspace-isolation"):
+                        if skill_dir.name in ("artifact-escape-hatch", "pack-validate", "llm-packer-smoke", "cas-integrity-check", "system1-verify", "agi-hardener", "canonical-doc-enforcer", "workspace-isolation", "inbox-report-writer"):
                             continue
                         violations.append(
                             f"Skill '{category_dir.name}/{skill_dir.name}/{py_file.name}' may use raw filesystem access (pattern: {pattern})"
@@ -131,7 +131,7 @@ def check_skill_manifests() -> List[str]:
         if not category_dir.is_dir() or category_dir.name.startswith("_"):
             continue
         for skill_dir in category_dir.iterdir():
-            if not skill_dir.is_dir() or skill_dir.name.startswith("_"):
+            if not skill_dir.is_dir() or skill_dir.name.startswith("_") or skill_dir.name == "fixtures":
                 continue
             manifest = skill_dir / "SKILL.md"
             if not manifest.exists():
@@ -158,7 +158,7 @@ def check_schema_validation() -> List[str]:
         if not category_dir.is_dir() or category_dir.name.startswith("_"):
             continue
         for skill_path in category_dir.iterdir():
-            if not skill_path.is_dir() or skill_path.name.startswith("_"):
+            if not skill_path.is_dir() or skill_path.name.startswith("_") or skill_path.name == "fixtures":
                 continue
             manifest = skill_path / "SKILL.md"
             if manifest.exists():

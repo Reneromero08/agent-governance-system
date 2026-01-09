@@ -1,0 +1,48 @@
+{
+  "name": "q32_meaning_field_spec",
+  "version": "v1",
+  "field_variable": {
+    "name": "M",
+    "definition": "M := log(R)"
+  },
+  "R_definition": "R := E / grad_S",
+  "notes": [
+    "This spec is for the Q32 falsification harness. It is NOT a claim that meaning is a new fundamental QFT gauge field.",
+    "R is treated as a field on a semiosphere (state/meaning manifold)."
+  ],
+  "observables": {
+    "mu_hat": "mean(observations)",
+    "grad_S": {
+      "default": "std(observations, ddof=1) + eps",
+      "alternative_se": "std(observations, ddof=1) / sqrt(n) + eps",
+      "rationale": "grad_S must be a scale/uncertainty normalizer; using SE is appropriate when mu_hat is a mean-estimator."
+    },
+    "check_set": {
+      "definition": "Independent empirical check observations (truth-anchored in synthetic; externally anchored in public datasets).",
+      "mu_check": "mean(check_set)",
+      "se_check": "std(check_set, ddof=1) / sqrt(n) + eps"
+    },
+    "E_kernel": {
+      "gaussian": "E := exp(-(z^2)/2)",
+      "laplace": "E := exp(-abs(z))",
+      "z_definition": "z := abs(mu_hat - mu_check) / se_check",
+      "selection_policy": {
+        "name": "fixed_per_benchmark",
+        "rule": "Choose a kernel family per benchmark/domain before running experiments. Do not switch kernels mid-run based on outcomes."
+      }
+    }
+  },
+  "falsifiers": [
+    "Echo-chamber falsifier: correlated consensus must not sustain high M under independence stress (adding independent check data).",
+    "Negative controls: permutation/shuffle of checks must destroy discrimination.",
+    "Ablations: ungrounded resonance (internal agreement only) must exhibit the known echo-chamber vulnerability (echo looks 'high resonance')."
+  ],
+  "acceptance_gates": {
+    "synthetic_gauntlet": {
+      "min_pairwise_discrimination": 0.8,
+      "max_echo_open_rate": 0.3,
+      "min_ind_open_rate": 0.7
+    }
+  }
+}
+

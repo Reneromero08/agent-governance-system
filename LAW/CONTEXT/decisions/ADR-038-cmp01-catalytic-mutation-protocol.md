@@ -1,3 +1,14 @@
+---
+id: "ADR-038"
+title: "CMP-01 Catalytic Mutation Protocol"
+status: "Accepted"
+date: "2026-01-07"
+confidence: "High"
+impact: "High"
+deciders: ["System architects"]
+tags: ["catalytic", "mutation", "protocol", "agents", "governance"]
+---
+
 # ADR-038: CMP-01 Catalytic Mutation Protocol
 
 **Status**: Accepted
