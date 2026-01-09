@@ -6,6 +6,12 @@ import sys
 from pathlib import Path
 from typing import Any, Dict
 
+# Add project root to sys.path for CAPABILITY imports
+# Project root is 5 levels up from this file (doc_merge_batch/cli.py -> skill -> utilities -> SKILLS -> CAPABILITY -> PROJECT_ROOT)
+_PROJECT_ROOT = Path(__file__).resolve().parents[5]
+if str(_PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(_PROJECT_ROOT))
+
 from .core import run_job
 
 try:

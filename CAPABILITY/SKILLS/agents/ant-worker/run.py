@@ -11,7 +11,7 @@ import json
 import sys
 from pathlib import Path
 
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
     
@@ -61,7 +61,13 @@ def main(input_path: Path, output_path: Path) -> int:
     # Check if path is supported
     try:
         writer.mkdir_auto(str(output_path.parent))
-        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        # Use write_tmp for paths in _tmp directories, write_auto for others
+        output_str = str(output_path)
+        output_content = json.dumps(result, indent=2, sort_keys=True)
+        if "_tmp" in output_str or "\\tmp\\" in output_str or "/tmp/" in output_str:
+            writer.write_tmp(output_str, output_content)
+        else:
+            writer.write_auto(output_str, output_content)
     except Exception as e:
         print(f"Firewall violation or write error: {e}")
         return 1

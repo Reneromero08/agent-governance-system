@@ -38,7 +38,12 @@ def _atomic_write_bytes(path: Path, data: bytes, writer: Any = None) -> None:
     if not writer:
         raise RuntimeError("GuardedWriter required")
     # write_durable expects str, so decode if it's JSON bytes (which are ASCII/UTF-8 compatible)
-    writer.write_auto(str(path), data.decode('utf-8'))
+    # Use write_tmp for paths in _tmp directories, write_durable for others
+    path_str = str(path)
+    if "_tmp" in path_str or "\\tmp\\" in path_str or "/tmp/" in path_str:
+        writer.write_tmp(path_str, data.decode('utf-8'))
+    else:
+        writer.write_auto(path_str, data.decode('utf-8'))
 
 
 def _resolve_repo_path(path_str: str) -> Path:

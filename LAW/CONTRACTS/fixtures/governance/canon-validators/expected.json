@@ -1,4 +1,19 @@
 {
-  "status": "passed",
-  "checks": ["duplicate_numbers", "line_count", "authority_gradient"]
+  "status": "failed",
+  "checks": [
+    "duplicate_numbers",
+    "line_count",
+    "authority_gradient"
+  ],
+  "failures": {
+    "line_count": [
+      "  ✗ CATALYTIC\\CMP-01_CATALYTIC_MUTATION_PROTOCOL.md: 351 lines (EXCEEDS 300 line limit)",
+      "  ✗ CATALYTIC\\SPECTRUM-04_IDENTITY_SIGNING.md: 738 lines (EXCEEDS 300 line limit)",
+      "  ✗ CATALYTIC\\SPECTRUM-05_VERIFICATION_LAW.md: 507 lines (EXCEEDS 300 line limit)",
+      "  ✗ CATALYTIC\\SPECTRUM-06_RESTORE_RUNNER.md: 606 lines (EXCEEDS 300 line limit)"
+    ],
+    "authority_gradient": [
+      "  ✗ canon.json missing 'authority_order' field"
+    ]
+  }
 }

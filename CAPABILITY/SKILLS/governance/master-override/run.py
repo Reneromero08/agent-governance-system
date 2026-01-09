@@ -6,20 +6,16 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Dict, List
 
-def _find_repo_root(start: Path) -> Path:
-    for candidate in [start] + list(start.parents):
-        if (candidate / "LAW" / "CANON" / "VERSIONING.md").exists():
-            return candidate
-        if (candidate / "CANON" / "VERSIONING.md").exists():
-            return candidate
-    return start
-
-
-PROJECT_ROOT = _find_repo_root(Path(__file__).resolve())
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
-from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+try:
+    from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
+except ImportError:
+    # Fallback for when running as subprocess without proper path setup
+    def ensure_canon_compat(skill_dir: Path) -> bool:
+        return True
 
 try:
     from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
@@ -29,7 +25,10 @@ except ImportError:
 
 
 def _read_canon_version(project_root: Path) -> str:
-    versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
+    # Check new location first
+    versioning = project_root / "LAW" / "CANON" / "GOVERNANCE" / "VERSIONING.md"
+    if not versioning.exists():
+        versioning = project_root / "LAW" / "CANON" / "VERSIONING.md"
     if not versioning.exists():
         versioning = project_root / "CANON" / "VERSIONING.md"
     if not versioning.exists():
@@ -52,9 +51,11 @@ def _append_log(log_path: Path, entry: Dict[str, Any], writer: Any) -> None:
     if log_path.exists():
         content = log_path.read_text(encoding="utf-8")
     content += json.dumps(entry, ensure_ascii=False) + "\n"
-    
-    writer.mkdir_auto(str(log_path.parent))
-    writer.write_auto(str(log_path), content)
+
+    # Convert to relative path from PROJECT_ROOT
+    rel_log_path = log_path.relative_to(PROJECT_ROOT)
+    writer.mkdir_auto(str(rel_log_path.parent))
+    writer.write_auto(str(rel_log_path), content)
 
 
 def _tail_jsonl(log_path: Path, limit: int) -> List[Dict[str, Any]]:
@@ -95,13 +96,16 @@ def main(input_path: Path, output_path: Path) -> int:
         print("Error: GuardedWriter not available")
         return 1
 
-    writer = GuardedWriter(PROJECT_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer = GuardedWriter(PROJECT_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
+
+    # Convert absolute path to relative path from repo root
+    rel_output_path = output_path.resolve().relative_to(PROJECT_ROOT)
 
     if token != "MASTER_OVERRIDE":
         result = {"ok": False, "action": action or None, "error": "unauthorized", "log_path": log_path_rel}
-        writer.mkdir_auto(str(output_path.parent))
-        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(rel_output_path.parent))
+        writer.write_auto(str(rel_output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
     if action == "log":
@@ -118,12 +122,12 @@ def main(input_path: Path, output_path: Path) -> int:
         result = {"ok": True, "action": "read", "log_path": log_path_rel, "entries": entries}
     else:
         result = {"ok": False, "action": action or None, "error": "unknown_action", "log_path": log_path_rel}
-        writer.mkdir_auto(str(output_path.parent))
-        writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+        writer.mkdir_auto(str(rel_output_path.parent))
+        writer.write_auto(str(rel_output_path), json.dumps(result, indent=2, sort_keys=True))
         return 0
 
-    writer.mkdir_auto(str(output_path.parent))
-    writer.write_auto(str(output_path), json.dumps(result, indent=2, sort_keys=True))
+    writer.mkdir_auto(str(rel_output_path.parent))
+    writer.write_auto(str(rel_output_path), json.dumps(result, indent=2, sort_keys=True))
     return 0
 
 

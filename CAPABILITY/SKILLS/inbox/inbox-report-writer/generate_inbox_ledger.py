@@ -227,7 +227,13 @@ def generate_ledger(inbox_path: Path = None, output_path: Path = None, quiet: bo
     import io
     stream = io.StringIO()
     yaml.dump(ledger, stream, default_flow_style=False, sort_keys=False, allow_unicode=True)
-    writer.write_durable(str(output_path), stream.getvalue())
+
+    # Use write_tmp for paths in _tmp directories, write_durable for others
+    output_str = str(output_path)
+    if "_tmp" in output_str or "\\tmp\\" in output_str or "/tmp/" in output_str:
+        writer.write_tmp(output_str, stream.getvalue())
+    else:
+        writer.write_durable(output_str, stream.getvalue())
     
     if not quiet:
         print(f"✅ Ledger written to: {output_path}")

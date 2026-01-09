@@ -40,11 +40,13 @@ def main(input_path: Path, output_path: Path) -> int:
         print("Error: GuardedWriter not available")
         return 1
 
-    writer = GuardedWriter(REPO_ROOT, durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
+    writer = GuardedWriter(REPO_ROOT, tmp_roots=["LAW/CONTRACTS/_runs/_tmp"], durable_roots=["LAW/CONTRACTS/_runs", "CAPABILITY/SKILLS"])
     writer.open_commit_gate()
 
-    writer.mkdir_auto(str(output_path.parent))
-    writer.write_auto(str(output_path), json.dumps(out, ensure_ascii=True, indent=2, sort_keys=True) + "\n")
+    # Convert absolute path to relative path from repo root
+    rel_output_path = output_path.resolve().relative_to(REPO_ROOT)
+    writer.mkdir_auto(str(rel_output_path.parent))
+    writer.write_auto(str(rel_output_path), json.dumps(out, ensure_ascii=True, indent=2, sort_keys=True) + "\n")
     return 0
 
 

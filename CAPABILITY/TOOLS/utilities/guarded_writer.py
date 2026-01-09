@@ -132,7 +132,16 @@ class GuardedWriter:
 
     def _is_tmp_path(self, path: str | Path) -> bool:
         """Check if path is in tmp domain based on configured tmp_roots."""
-        norm_path = str(path).replace("\\", "/")
+        # Convert to Path and try to get relative path for absolute paths
+        path_obj = Path(path)
+        if path_obj.is_absolute():
+            try:
+                path_obj = path_obj.relative_to(self.project_root)
+            except ValueError:
+                # Path is outside project_root, not a tmp path
+                return False
+
+        norm_path = str(path_obj).replace("\\", "/")
         for tmp_root in self.firewall.tmp_roots:
             if norm_path.startswith(tmp_root + "/") or norm_path == tmp_root:
                 return True

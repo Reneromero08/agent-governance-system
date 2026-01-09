@@ -29,8 +29,13 @@ def reset_db():
     db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
     if db_path.exists():
         print(f"Removing old DB at {db_path}")
-        # Use firewall-safe unlink
-        writer.unlink("NAVIGATION/CORTEX/db/system1.db")  # guarded
+        # Use firewall-safe unlink - handle Windows lock errors
+        try:
+            writer.unlink("NAVIGATION/CORTEX/db/system1.db")  # guarded
+        except (PermissionError, OSError) as e:
+            # On Windows, file may be locked - try to continue anyway
+            print(f"Warning: Could not remove DB (may be locked): {e}")
+            print("Attempting to overwrite existing DB...")
     
     db = System1DB(db_path, writer=writer)
     # Index the repo root; the CortexIndexer prunes large dirs and (when available) filters to git-tracked markdown files.

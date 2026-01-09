@@ -68,6 +68,7 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     # Use GuardedWriter for directory creation if available, otherwise fallback
     # Always use GuardedWriter for writes to enforce firewall
     writer = writer or GuardedWriter(project_root=PROJECT_ROOT)
+    writer.open_commit_gate()  # Open gate for skill outputs
 
     try:
         rel_out_dir = str(out_dir_abs.relative_to(PROJECT_ROOT))
@@ -121,7 +122,9 @@ def main(input_path: Path, output_path: Path, writer: Optional[GuardedWriter] = 
     # Use GuardedWriter for final output write if available, otherwise fallback
     # Use GuardedWriter for final output
     try:
-        rel_output_path = str(output_path.relative_to(PROJECT_ROOT))
+        # Handle both absolute and relative output paths
+        output_path_abs = output_path if output_path.is_absolute() else PROJECT_ROOT / output_path
+        rel_output_path = str(output_path_abs.relative_to(PROJECT_ROOT))
         writer.mkdir_auto(str(Path(rel_output_path).parent))
         writer.write_auto(rel_output_path, output_data)
     except ValueError:

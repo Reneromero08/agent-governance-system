@@ -11,6 +11,10 @@ import sys
 from pathlib import Path
 from typing import Optional
 
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(0, str(PROJECT_ROOT))
+
 # Add GuardedWriter for write firewall enforcement
 try:
     from CAPABILITY.TOOLS.utilities.guarded_writer import GuardedWriter
@@ -18,11 +22,6 @@ try:
 except ImportError:
     GuardedWriter = None
     FirewallViolation = None
-
-
-PROJECT_ROOT = Path(__file__).resolve().parents[4]
-if str(PROJECT_ROOT) not in sys.path:
-    sys.path.insert(0, str(PROJECT_ROOT))
 
 from CAPABILITY.TOOLS.agents.skill_runtime import ensure_canon_compat
 
