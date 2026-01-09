@@ -1092,7 +1092,7 @@ def run_scifact_streaming(
         claim_emb_cache[t] = embed_texts([t])[0]
         return claim_emb_cache[t]
 
-    samples: List[Tuple[str, List[str], List[str]]] = []
+    samples: List[Tuple[str, List[float], List[float]]] = []
     for i, (claim_id, claim_text, doc_id) in enumerate(ex_rows[: (120 if fast else 800)]):
         abstract = corpus_by_id[int(doc_id)].get("abstract", []) or []
         sents = [str(x) for x in abstract if str(x).strip()]
@@ -1100,22 +1100,60 @@ def run_scifact_streaming(
             continue
 
         # Evidence stream sentences (deterministic sample; no top-k cherry-pick).
-        support_texts = sample_sentences(sents, 6, seed_key=(seed * 1_000_003) ^ (int(claim_id) * 9176) ^ int(doc_id))
-        if len(support_texts) < 4:
+        # Use a longer stream so the last-step estimate uses more than a 2-sentence check tail.
+        support_texts = sample_sentences(sents, 10, seed_key=(seed * 1_000_003) ^ (int(claim_id) * 9176) ^ int(doc_id))
+        if len(support_texts) < 8:
             continue
 
+        support_scores_preview = sentence_support_scores([claim_text] * len(support_texts), support_texts).tolist()
+        mu_hat_proxy = float(np.mean(np.asarray(support_scores_preview, dtype=float)))
+
         # Wrong checks: pick a topic-dissimilar claim's sampled sentences.
+        # Among the most dissimilar claims, pick the pool whose sentences are maximally
+        # unsupportive for this claim under the same scorer (deterministic, not top-k from the
+        # claim's own evidence, and makes the intervention meaningfully "wrong").
         c_emb = claim_embedding(claim_text)
         sims = support_claim_emb @ c_emb
         order = np.argsort(sims)  # low similarity => more wrong
-        chosen_idx = int(order[0])
-        if support_claim_texts[chosen_idx].strip() == claim_text.strip() and len(order) > 1:
-            chosen_idx = int(order[1])
-        wrong_check_texts = support_bank[chosen_idx][1][:6]
-        if len(wrong_check_texts) < 3:
+        cand: List[int] = []
+        for j in order[:50]:
+            idx = int(j)
+            if support_claim_texts[idx].strip() == claim_text.strip():
+                continue
+            cand.append(idx)
+            if len(cand) >= 6:
+                break
+        if not cand:
             continue
 
-        samples.append((claim_text, support_texts, wrong_check_texts))
+        cand_sent_lists: List[List[str]] = [support_bank[idx][1][:6] for idx in cand]
+        flat_sents: List[str] = []
+        offsets: List[Tuple[int, int]] = []
+        cur = 0
+        for lst in cand_sent_lists:
+            flat_sents.extend(lst)
+            offsets.append((cur, cur + len(lst)))
+            cur += len(lst)
+        flat_claims = [claim_text] * len(flat_sents)
+        flat_scores = sentence_support_scores(flat_claims, flat_sents).tolist()
+
+        cand_means: List[float] = []
+        for a, b in offsets:
+            if b <= a:
+                cand_means.append(float("inf"))
+            else:
+                cand_means.append(float(np.mean(np.asarray(flat_scores[a:b], dtype=float))))
+        # Choose the candidate whose check-mean most strongly disagrees with the observation mean,
+        # making the empirical compatibility term E collapse under the wrong-check intervention.
+        cand_strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
+        chosen_pos = int(np.argmax(np.asarray(cand_strength, dtype=float)))
+        chosen_idx = cand[chosen_pos]
+        a, b = offsets[chosen_pos]
+        wrong_scores_preview = [float(x) for x in flat_scores[a:b]]
+        if len(wrong_scores_preview) < 3:
+            continue
+
+        samples.append((claim_text, support_scores_preview, wrong_scores_preview))
         if fast and len(samples) in (10, 25):
             print(f"[Q32:P4] scifact streaming samples={len(samples)}")
         if len(samples) >= (20 if fast else 120):
@@ -1130,12 +1168,11 @@ def run_scifact_streaming(
     dM_wrong: List[float] = []
 
     use_n = min((16 if fast else 120), len(samples))
-    for claim_text, support_texts, wrong_check_texts in samples[:use_n]:
-        support_scores = sentence_support_scores([claim_text] * len(support_texts), support_texts).tolist()
-        wrong_scores = sentence_support_scores([claim_text] * len(wrong_check_texts), wrong_check_texts).tolist()
+    for claim_text, support_scores, wrong_scores in samples[:use_n]:
 
-        t_max = max(2, len(support_scores) - 2)
-        t_max = min(t_max, len(support_scores) - 2)
+        # Keep at least 4 check sentences at the end to reduce tail-noise.
+        t_max = max(2, len(support_scores) - 4)
+        t_max = min(t_max, len(support_scores) - 4)
 
         def M_at(t: int, check_scores: List[float]) -> float:
             obs = support_scores[:t]
@@ -1145,7 +1182,7 @@ def run_scifact_streaming(
         M_series_wrong: List[float] = []
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
-            if len(check_correct) < 2:
+            if len(check_correct) < 4:
                 break
             M_series_correct.append(M_at(t, check_correct))
             M_series_wrong.append(M_at(t, wrong_scores))
