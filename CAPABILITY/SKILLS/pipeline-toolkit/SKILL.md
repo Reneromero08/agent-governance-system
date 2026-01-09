@@ -1,3 +1,7 @@
+---
+name: pipeline-toolkit
+description: "Unified toolkit for pipeline DAG operations including scheduling, receipt generation, and restoration."
+---
 **required_canon_version:** >=3.0.0
 
 # Skill: pipeline-toolkit

@@ -1,3 +1,7 @@
+---
+name: ant-worker
+description: "Distributed task executor for CATALYTIC-DPT swarm."
+---
 <!-- CONTENT_HASH: e9b3918a7aa216870420a0d5852f11f7e78c5647138300d6ae772490d6e79ffc -->
 
 **required_canon_version:** >=3.0.0

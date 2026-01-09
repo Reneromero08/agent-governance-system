@@ -1,3 +1,7 @@
+---
+name: canon-migration
+description: "This skill handles migrations when breaking changes occur to the canon or system structure."
+---
 <!-- CONTENT_HASH: a78620c93498aa25b0b5ed02b3264e51d565f2ea82f334f57bac9415b4bdaca9 -->
 
 **required_canon_version:** >=3.0.0

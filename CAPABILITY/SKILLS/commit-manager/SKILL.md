@@ -1,3 +1,7 @@
+---
+name: commit-manager
+description: "Unified manager for commit-related operations including commit queue management, commit summary logging, and artifact escape hatch validation."
+---
 **required_canon_version:** >=3.0.0
 
 # Skill: commit-manager

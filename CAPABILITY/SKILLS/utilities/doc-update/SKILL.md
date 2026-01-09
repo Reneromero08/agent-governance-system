@@ -1,3 +1,7 @@
+---
+name: doc-update
+description: "Use when asked to update repository documentation, ADRs, or onboarding guidance."
+---
 <!-- CONTENT_HASH: e55e25737af57b512b8918844cdd78f9ea09269c268c7be7975a15f31ba09547 -->
 
 **required_canon_version:** >=3.0.0

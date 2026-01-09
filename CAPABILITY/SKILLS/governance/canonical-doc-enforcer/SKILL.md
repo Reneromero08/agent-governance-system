@@ -1,4 +1,6 @@
 ---
+name: canonical-doc-enforcer
+description: "Enforce canonical filename and metadata standards for ALL markdown documentation across the repository."
 version: "0.1.0"
 status: "Active"
 required_canon_version: ">=0.1.0"

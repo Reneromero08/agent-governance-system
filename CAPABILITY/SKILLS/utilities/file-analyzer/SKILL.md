@@ -1,3 +1,7 @@
+---
+name: file-analyzer
+description: "Analyzes repo structure and identifies critical files."
+---
 <!-- CONTENT_HASH: 373d9bb6438898b8652edb9871c3572fc594135267e9af172fcbd5796ac4af67 -->
 
 **required_canon_version:** >=3.0.0

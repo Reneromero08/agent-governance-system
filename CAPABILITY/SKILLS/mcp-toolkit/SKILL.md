@@ -1,3 +1,7 @@
+---
+name: mcp-toolkit
+description: "Unified toolkit for MCP (Model Context Protocol) operations including server building, access validation, extension verification, message board management, pre-commit checks, and smoke testing."
+---
 **required_canon_version:** >=3.0.0
 
 # Skill: mcp-toolkit
