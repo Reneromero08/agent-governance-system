@@ -80,14 +80,61 @@ If you want the "single paragraph" canon version and falsification boundary with
 ## Roadmap (hardcore falsification, no shortcuts)
 Goal: make “meaning-as-field on the semiosphere” survive increasingly hostile tests, with clear gates for promotion from **OPEN → PARTIAL → ANSWERED**.
 
-### Phase 0 — Spec freeze (no post-hoc relabeling)
+### Phase 1 — Completed (what we already built + receipted)
+
+#### 1.1 Public harness + falsifiers
+- [x] Public benchmark harness exists (`q32_public_benchmarks.py`) for SciFact + Climate-FEVER.
+- [x] Wrong-check intervention gates exist (truth-consistent check vs truth-inconsistent check).
+- [x] Neighbor wrong-check mode (`J`) exists (`--wrong_checks neighbor --neighbor_k K`).
+
+#### 1.2 Empirical receipts + datatrail
+- [x] EmpiricalMetricReceipt exists (`--empirical_receipt_out`) and records run context + per-result gates.
+- [x] Receipt includes `R` / `log(R)` summary stats (`details.mean_R_*` + `details.mean_logR_*`).
+- [x] Stress mode is receiptable (emits `SciFact-Streaming-Stress` summary result).
+- [x] Datatrail exists and is linked from `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_NEIGHBOR_FALSIFIER_DATA_TRAIL.md`.
+
+#### 1.3 Replication probes (proof-of-life)
+- [x] Threshold transfer + matrix runs exist (`--mode transfer|matrix`) and have receipted examples.
+- [x] Multi-trial stress run with a pass-rate gate exists (receipted + hashed).
+
+### Phase 2 — Next half (mechanism validation)
+
+#### 2.1 Ablations (non-tautology proof)
+- [x] Ablations implemented: `--ablation full|no_essence|no_scale`.
+- [ ] Add a depth/sensitivity ablation (Df/σ proxy) in the public harness.
+- [ ] Require the expected pattern: at least one ablation reliably kills the effect while `full` passes (receipted).
+
+#### 2.2 Negative controls must fail hard
+- [ ] Paraphrase-only “agreement inflation” control collapses `R/log(R)` and fails gates (receipted).
+- [ ] Strong swap/shuffle controls receipted for every relevant mode.
+
+#### 2.3 Robustness sweeps (distributional proof)
+- [ ] Sweep `neighbor_k` and require pass-rate ≥ threshold across a range (receipted).
+- [ ] Sweep stream sampling variability and require pass-rate ≥ threshold across trials (receipted).
+
+### Phase 3 — Other half (settlement)
+
+#### 3.1 Third domain (break the 2-dataset trap)
+- [ ] Add at least one third public benchmark domain and repeat transfer/matrix without retuning.
+
+#### 3.2 Full-scale runs (receipted)
+- [ ] Full (non-fast, crossencoder) matrix across multiple seeds.
+- [ ] Full stress with higher `--stress_n` and hard `--stress_min_pass_rate` gate(s).
+
+#### 3.3 Pinned replication + “attempt SOLVED” package
+- [ ] Pinned environment + rerun bundle with hashes so independent reruns reproduce receipts.
+- [ ] Update solved criteria report with the final evidence bundle + explicit falsification boundary.
+
+### Expanded breakdown (legacy detail mapped into Phase 1/2/3 above)
+
+#### Legacy Phase 0 — Spec freeze (no post-hoc relabeling)
 - Freeze `M` definition (default `M := log(R)`) and explicitly document `E`, `∇S`, `σ`, `Df`.
 - Freeze falsifiers: echo-chamber collapse, phase transition gating, propagation/gluing.
 - Freeze thresholds and negative controls (shuffles/permutations must kill the signal).
 
 **Gate:** changing definitions after seeing results is not allowed; changes require new fixtures and re-running the whole gauntlet.
 
-### Phase 1 — Adversarial synthetic gauntlet
+#### Legacy Phase 1 — Adversarial synthetic gauntlet
 Make the generator actively try to break the field:
 - Correlation strength sweeps (shared-bias channels).
 - Paraphrase storms / near-duplicate sources (agreement inflation).
@@ -96,7 +143,7 @@ Make the generator actively try to break the field:
 
 **Gate:** the falsifiers must hold across sweeps; failures must yield a minimal counterexample fixture.
 
-### Phase 2 — Public truth-anchored semiosphere
+#### Legacy Phase 2 — Public truth-anchored semiosphere
 Run the same falsifiers on public benchmarks with external truth anchors:
 - Fact verification (e.g., FEVER / SciFact): claim + evidence + label.
 - Build a semiosphere graph over claim/evidence embeddings; define neighborhoods and overlaps.
@@ -104,10 +151,10 @@ Run the same falsifiers on public benchmarks with external truth anchors:
 
 **Gate:** echo-chamber falsifier must hold under independence stress; negative controls must fail hard.
 
-### Instrumentation (EmpiricalMetricReceipt: R/J/Phi-proxy)
+#### Legacy Instrumentation (EmpiricalMetricReceipt: R/J/Phi-proxy)
 To keep this falsifiable and auditable, every benchmark run should emit a machine-readable receipt alongside verbatim logs:
 
-### Empirical Metric Receipt (R/J/Phi)
+#### Legacy Empirical Metric Receipt (R/J/Phi)
 
 **Purpose:** Make empirical claims auditable: record **R / J / Phi-proxy** alongside the receipts produced by tests and benchmarks.
 
@@ -140,20 +187,20 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
 - [ ] Datatrail bundle includes: verbatim log + receipt + SHA256 for both
 - [ ] Negative controls + stress runs are receipted (when invoked)
 
-### Phase 3 - Cross-domain replication + threshold transfer
+#### Legacy Phase 3 - Cross-domain replication + threshold transfer
 - Calibrate once (Dataset A), freeze thresholds and mapping, then run Dataset B without re-tuning.
 
 **Gate:** no "works if retuned" passes; that's not a field invariant.
 
-**Status (short version):** implemented as `q32_public_benchmarks.py --mode transfer` and currently passes both directions with fixed seed defaults (calibrate `climate_fever`  apply `scifact`, and calibrate `scifact`  apply `climate_fever`).
+**Status (short version):** implemented as `q32_public_benchmarks.py --mode transfer` and currently passes both directions with fixed seed defaults (calibrate `climate_fever` → apply `scifact`, and calibrate `scifact` → apply `climate_fever`).
 
-### Phase 4 — Real semiosphere dynamics (nonlinear time)
+#### Legacy Phase 4 — Real semiosphere dynamics (nonlinear time)
 - Evidence arrives over time; measure `M(t)` and gate transitions.
 - Test interventions: inject independent checks and require true basins stabilize while false basins collapse.
 
 **Gate:** correct causal response to interventions (not just correlation).
 
-### Phase 5 - Scale, replication, and settlement (long road)
+#### Legacy Phase 5 - Scale, replication, and settlement (long road)
 This is what we need before we can responsibly claim **SOLVED**:
 
 - **Big runs (receipted):**
@@ -165,6 +212,6 @@ This is what we need before we can responsibly claim **SOLVED**:
 - **Ablations:** show the effect disappears when the empirical anchor / scale term / depth term is removed (no tautology).
 - **Pinned replication:** rerun with pinned environments and record hashes so the datatrail is reproducible.
 
-### Promotion criteria
+#### Legacy Promotion criteria
 - **OPEN → PARTIAL:** Phase 1 + Phase 2 pass on at least one public benchmark with fixed thresholds and full negative controls.
 - **PARTIAL → ANSWERED:** Phase 2-4 pass across multiple benchmarks/domains, plus replication with pinned versions + independent reruns.
