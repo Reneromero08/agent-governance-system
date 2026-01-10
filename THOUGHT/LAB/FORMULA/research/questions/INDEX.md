@@ -30,6 +30,7 @@
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ⏳ OPEN | Can R distinguish aligned vs. misaligned agent behavior? |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ⏳ PARTIAL | **J coupling + effective dimensionality**: J alone insufficient (untrained has high J but no semantic structure). Breakthrough: Training concentrates 768D→22D effective dimensions. Compass = J × principal_axis_alignment. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
+| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ⏳ OPEN | Can semiosphere be formulated as QGT manifold? Does this explain 22D, √3, compass mode? Fubini-Study metric + Berry curvature. |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ OPEN | Is there a critical threshold for agreement? Does truth "crystallize"? |
 | 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ⏳ OPEN | What symmetries does M field have? What's conserved (meaning conservation law)? Can we derive field equations from Lagrangian? |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ⏳ OPEN | Do independent compressions converge to the same symbols/latents (up to isomorphism), or are there many inequivalent “good” bases? |
@@ -102,18 +103,18 @@
 
 ## Summary Statistics
 
-  - **Total Questions:** 42
-  - **Answered:** 5 (11.9%)
-  - **Partially Answered:** 7 (16.7%)
+  - **Total Questions:** 43
+  - **Answered:** 5 (11.6%)
+  - **Partially Answered:** 7 (16.3%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 30 (71.4%)
+  - **Open:** 31 (72.1%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 4 | 2 | 0 | 1 |
- | High | 15 | 0 | 3 | 0 | 12 |
+ | High | 16 | 0 | 3 | 0 | 13 |
  | Medium | 11 | 1 | 1 | 0 | 9 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |

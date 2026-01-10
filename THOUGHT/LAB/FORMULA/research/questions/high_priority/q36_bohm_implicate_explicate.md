@@ -99,3 +99,11 @@ Explicate Order ← R (interface)
 - Holographic Principle (physics)
 - Holonomic Brain Theory (Pribram)
 - Quantum measurement problem
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 FORMALIZES Bohm's framework:
+- Berry curvature = Implicate Order (hidden topological structure)
+- Fubini-Study metric = Explicate Order (observable geometry)
+- Unfoldment = parallel transport on manifold
+- Test: Measure both, check if high Phi regions have high Berry curvature

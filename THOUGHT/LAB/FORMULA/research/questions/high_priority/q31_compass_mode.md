@@ -131,3 +131,11 @@ Where:
 
 **Last Updated:** 2026-01-10 (E.X.3.3 breakthrough: Effective dimensionality reveals compass = J + principal axes)
 
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 (Quantum Geometric Tensor) FORMALIZES compass mode:
+- Natural gradient on Fubini-Study manifold = geodesic flow (optimal paths)
+- QGT eigenvectors should match your principal axes (22D)
+- J coupling = Berry curvature magnitude (topological structure)
+- Compass = following geodesics on curved semantic manifold
