@@ -24,6 +24,11 @@ Scope:
 - `--threads` for BLAS/torch threads
 - `--ce_batch`, `--st_batch`
 
+4) A **Phi-style coupling proxy** integrated into the public harness outputs:
+- We report `phi_proxy_bits` which is `I(mu_hat; mu_check)` (mutual information) estimated via histogram binning.
+- This is explicitly **not** canonical IIT Phi; it is a cheap, reproducible “veil-piercing” coupling/structure signal that
+  pairs with `J` in the Interface Theory framing.
+
 ## Key commits (worktree)
 
 - `5a1df48` — `Q32: add neighbor-fitness (J) diagnostics`
