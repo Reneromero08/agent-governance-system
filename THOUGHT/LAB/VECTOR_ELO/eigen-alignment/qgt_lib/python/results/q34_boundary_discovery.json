@@ -1,0 +1,112 @@
+{
+  "timestamp": "2026-01-10T05:30:56.657283",
+  "models": [
+    "all-MiniLM-L6-v2",
+    "all-mpnet-base-v2",
+    "paraphrase-MiniLM-L6-v2"
+  ],
+  "tests": {
+    "adversarial": {
+      "standard": {
+        "n_anchors": 64,
+        "mean_correlation": 0.9977309869382172,
+        "std_correlation": 0.0015991513599435247,
+        "min_correlation": 0.9965552323287854,
+        "max_correlation": 0.999991923844924,
+        "converges": true
+      },
+      "rare": {
+        "n_anchors": 65,
+        "mean_correlation": 0.9989216221478774,
+        "std_correlation": 0.0007481448066840449,
+        "min_correlation": 0.9983691986171148,
+        "max_correlation": 0.9999793082632198,
+        "converges": true
+      },
+      "nonsense": {
+        "n_anchors": 60,
+        "mean_correlation": 0.9985326230894156,
+        "std_correlation": 0.00099343200870206,
+        "min_correlation": 0.9973785819542811,
+        "max_correlation": 0.9998035474887087,
+        "converges": true
+      },
+      "technical": {
+        "n_anchors": 64,
+        "mean_correlation": 0.9996420773622633,
+        "std_correlation": 0.0001883112891684273,
+        "min_correlation": 0.9993859108269908,
+        "max_correlation": 0.9998332141159038,
+        "converges": true
+      },
+      "mixed": {
+        "n_anchors": 64,
+        "mean_correlation": 0.9988803463326921,
+        "std_correlation": 0.0007391194393733041,
+        "min_correlation": 0.9982931446879704,
+        "max_correlation": 0.99992284099921,
+        "converges": true
+      }
+    },
+    "finetuned": {
+      "models_tested": [
+        "base",
+        "paraphrase",
+        "qa",
+        "nli",
+        "semantic_search"
+      ],
+      "pairwise_correlations": {
+        "base_vs_paraphrase": 0.9965552323287854,
+        "base_vs_qa": 0.9995544694915829,
+        "base_vs_nli": 1.0,
+        "base_vs_semantic_search": 0.9961409594200105,
+        "paraphrase_vs_qa": 0.9982220276568203,
+        "paraphrase_vs_nli": 0.9965552323287855,
+        "paraphrase_vs_semantic_search": 0.9997804271485071,
+        "qa_vs_nli": 0.9995544694915831,
+        "qa_vs_semantic_search": 0.9981564543907172,
+        "nli_vs_semantic_search": 0.9961409594200105
+      },
+      "mean_correlation": 0.9980660231676802,
+      "converges": true
+    },
+    "minimal": {
+      "by_size": {
+        "4": {
+          "mean_correlation": 0.9997807855047873,
+          "converges": true
+        },
+        "8": {
+          "mean_correlation": 0.9985014738385809,
+          "converges": true
+        },
+        "12": {
+          "mean_correlation": 0.9992084288906223,
+          "converges": true
+        },
+        "16": {
+          "mean_correlation": 0.9988933538959158,
+          "converges": true
+        },
+        "24": {
+          "mean_correlation": 0.9994619510405518,
+          "converges": true
+        },
+        "32": {
+          "mean_correlation": 0.9981977091520919,
+          "converges": true
+        },
+        "48": {
+          "mean_correlation": 0.996793779536056,
+          "converges": true
+        },
+        "64": {
+          "mean_correlation": 0.9977309869382172,
+          "converges": true
+        }
+      },
+      "minimum_working": 4
+    }
+  }
+}
