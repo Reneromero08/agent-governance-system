@@ -358,3 +358,17 @@ The bundle includes:
 - `pip_version.txt`, `pip_freeze.txt`
 - `git_branch.txt`, `git_head.txt`, `git_status_porcelain.txt`
 - `README.txt` (exact rerun commands)
+
+---
+
+## 2026-01-10 Phase 4 geometry-break “tipping test” (proxy; full / crossencoder)
+
+Purpose:
+- Add an independent, receipted geometry signal alongside `M=log(R)` on the same public SciFact streaming intervention.
+- Gate: geometry separates truth-consistent checks vs wrong checks (neighbor falsifier) at end-step.
+
+Artifacts:
+- `p4_geom_tipping_scifact_neighbor_full_20260110_033745.txt` = `C20164849494D258A568F2C65D94A7695C05934DD16103B66F701359160505AC`
+- `p4_geom_tipping_scifact_neighbor_full_20260110_033745.txt.rc.txt` = `A9F58776A09B5DAC438049683F24BF85764E0FF8E7455952456165C68C158627`
+- `empirical_receipt_p4_geom_tipping_scifact_neighbor_full_20260110_033745.json` = `994065D2E7EF175EEE074E738EA0D6F4752011C0D9786906F58038D04DD5CD36`
+- `geometry_p4_geom_tipping_scifact_neighbor_full_20260110_033745.json` = `3C6CC92D27641D78DDC5E4E1F16D2543B82F7F582123BF6508C8CC4E6CC8CEA2`
