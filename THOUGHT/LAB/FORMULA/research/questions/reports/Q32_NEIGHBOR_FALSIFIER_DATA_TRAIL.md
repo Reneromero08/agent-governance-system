@@ -264,3 +264,32 @@ This run FAILs the pass-rate gate (this is evidence we are not “settled” yet
 - `p3_stress_scifact_neighbor_full_20260109_232034.txt` = `579D19455BCA161241FA8F0161539E2576D228B315B8B621CAC82F9D6E3811DD`
 - `empirical_receipt_p3_stress_scifact_neighbor_full_20260109_232034.json` = `BE4F4370DD1CE442064085DB66FAFE8A42C6773186C42E86FC562CB08BAFA8E4`
 - `stress_p3_scifact_neighbor_full_20260109_232034.json` = `9F0150AE29C13A9A2C91C2C904CEED1F071AAEA4D9CDF58B902BE074A1B63042`
+
+### Stress (full / crossencoder) — SciFact streaming variability (fixed neighbor selection, now stable)
+
+This rerun uses the same stress settings but selects the neighbor falsifier using `M_from_R(R_grounded(...))` instead of mean cross-score:
+- `p3_stress_scifact_neighbor_full_v2_20260110_002134.txt` = `723D37707E60A389D86243C18722C25E46EA0B72590BC2EE0D4914F49FB91A39`
+- `empirical_receipt_p3_stress_scifact_neighbor_full_v2_20260110_002134.json` = `EB3722926111737749619522A5E237CB05E655C47F6365932828B8EC6863879D`
+- `stress_p3_scifact_neighbor_full_v2_20260110_002134.json` = `5793DF2E403A28306E42326C89EE970A7ACE60B4BBF8CC4DF0FB656B5219DD14`
+
+### Transfer (full / crossencoder) — remaining pairs to complete the 3-domain matrix by chunks
+
+SciFact → Climate-FEVER:
+- `p3_transfer_scifact_to_climate_neighbor_full_20260110_003022.txt` = `DE937087425918E42BFC2CE9D23410AB2FAEC8CE4AD4D500EB3AA24FECD1EB8A`
+- `empirical_receipt_p3_transfer_scifact_to_climate_neighbor_full_20260110_003022.json` = `C35C1082FB113D8BC2FEC34B6CE7AD33EEA02847B2F8FA6FBF6D7AAE1DFB3DDB`
+- `transfer_calibration_scifact_to_climate_full_20260110_003022.json` = `94D977358F0A76C78824ABBA0B84FD1D46D7AA14E2D7753381226C0DD4C9657F`
+
+Climate-FEVER → SciFact:
+- `p3_transfer_climate_to_scifact_neighbor_full_20260110_003820.txt` = `DFD56FFC1CEE300C4A320292713FF9EDB8503627E3417AC6D4FE141893CD3F21`
+- `empirical_receipt_p3_transfer_climate_to_scifact_neighbor_full_20260110_003820.json` = `DF98809B39591985733E3578325EF147B63A74731806466D0C1A00C054E0D175`
+- `transfer_calibration_climate_to_scifact_full_20260110_003820.json` = `355A43C448C5361008AEA5F57D3FA648B5DC294E4D9BA237F295B83ACAAB37FC`
+
+Climate-FEVER → SNLI:
+- `p3_transfer_climate_to_snli_neighbor_full_20260110_004506.txt` = `D59D07F91F20EFB3156869EF2D1E696CECCEFE556C3862D1CDFE17E67C51DEBA`
+- `empirical_receipt_p3_transfer_climate_to_snli_neighbor_full_20260110_004506.json` = `55BD5DC08553D3F6A30C95A81FCF6BA067583B833A53C336F05BE35DC800A0B8`
+- `transfer_calibration_climate_to_snli_full_20260110_004506.json` = `8C20E9EF391106595141824EC28E73D29A8883C58CAEF5368CAE6055F4601EC`
+
+SNLI → Climate-FEVER:
+- `p3_transfer_snli_to_climate_neighbor_full_20260110_005742.txt` = `8F7CB46A002BACF6E8ACA686E8CF03190F5141997D625D917CA11DE73D09E7E2`
+- `empirical_receipt_p3_transfer_snli_to_climate_neighbor_full_20260110_005742.json` = `E9A899CB7A6513900C5AB3B8FE23F59C2677B771A435D36E3DE086A17A787E8C`
+- `transfer_calibration_snli_to_climate_full_20260110_005742.json` = `5D9FF6334472FE7E78465BFFC2E400D4D0AE46D69623D137F6A621C7356269DD`

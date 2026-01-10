@@ -2454,14 +2454,21 @@ def run_scifact_streaming(
                 pick_offsets.append((cur, cur + len(chosen_sents)))
                 cur += len(chosen_sents)
             cross_scores = sentence_support_scores([claim_text] * len(pick_sents), pick_sents).tolist()
-            cross_means: List[float] = []
+            # Select the candidate by minimizing/maximizing the *actual* wrong-check score under the grounded R,
+            # not by a proxy (mean cross score). This reduces full-mode brittleness in stress runs.
+            obs_for_select = [float(x) for x in support_scores_preview[:2]]
+            cand_M: List[float] = []
             for a, b in pick_offsets:
-                cross_means.append(float(np.mean(np.asarray(cross_scores[a:b], dtype=float))) if b > a else float("inf"))
+                if b <= a:
+                    cand_M.append(float("inf") if wrong_checks != "inflation" else -float("inf"))
+                    continue
+                check = [float(x) for x in cross_scores[a:b]]
+                cand_M.append(float(M_from_R(R_grounded(obs_for_select, check))))
 
             if wrong_checks == "inflation":
-                chosen_pos = int(np.argmax(np.asarray(cross_means, dtype=float)))
+                chosen_pos = int(np.argmax(np.asarray(cand_M, dtype=float)))
             else:
-                chosen_pos = int(np.argmin(np.asarray(cross_means, dtype=float)))
+                chosen_pos = int(np.argmin(np.asarray(cand_M, dtype=float)))
             chosen_idx = int(cand[chosen_pos])
             neighbor_sims.append(float(sims[int(chosen_idx)]))
             a, b = pick_offsets[chosen_pos]

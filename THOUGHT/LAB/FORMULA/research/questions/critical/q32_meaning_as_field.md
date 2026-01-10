@@ -118,8 +118,9 @@ Goal: make “meaning-as-field on the semiosphere” survive increasingly hostil
 - [x] Add a third public benchmark domain (SNLI) and repeat transfer without retuning.
 
 #### 3.2 Full-scale runs (receipted)
+- [x] Full (non-fast, crossencoder) matrix across datasets (performed as chunked transfer runs).
 - [ ] Full (non-fast, crossencoder) matrix across multiple seeds.
-- [ ] Full stress with higher `--stress_n` and hard `--stress_min_pass_rate` gate(s).
+- [x] Full stress with hard `--stress_min_pass_rate` gate (SciFact streaming, crossencoder).
 
 #### 3.3 Pinned replication + “attempt SOLVED” package
 - [ ] Pinned environment + rerun bundle with hashes so independent reruns reproduce receipts.
