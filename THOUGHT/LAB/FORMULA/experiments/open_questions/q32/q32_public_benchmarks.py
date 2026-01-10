@@ -22,6 +22,8 @@ Run (recommended in the pinned venv):
 from __future__ import annotations
 
 import argparse
+import hashlib
+import json
 import math
 import os
 from dataclasses import dataclass
@@ -468,8 +470,6 @@ def run_scifact_benchmark(
     neighbor_sims: List[float] = []
     mu_hat_list: List[float] = []
     mu_check_list: List[float] = []
-    mu_hat_list: List[float] = []
-    mu_check_list: List[float] = []
 
     # For each pair, build observation sets as support scores from sentences.
     # Build observation/check sets with enough samples to avoid degenerate SE=EPS.
@@ -638,7 +638,14 @@ def run_scifact_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: SciFact benchmark gates did not pass")
 
-    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin, "phi_proxy_bits": float(phi)}
+    details: Dict[str, float] = {
+        "pair_wins": pair_wins,
+        "z": z,
+        "mean_margin": margin,
+        "gate_z": gate_z,
+        "gate_margin": gate_margin,
+        "phi_proxy_bits": float(phi),
+    }
     if wrong_checks == "neighbor" and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
@@ -872,6 +879,8 @@ def run_climate_fever_intervention_benchmark(
     M_correct: List[float] = []
     M_wrong: List[float] = []
     neighbor_sims: List[float] = []
+    mu_hat_list: List[float] = []
+    mu_check_list: List[float] = []
 
     for i in indices:
         ex = ds[int(i)]
@@ -1005,7 +1014,14 @@ def run_climate_fever_intervention_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: Climate-FEVER intervention benchmark gates did not pass")
 
-    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin, "phi_proxy_bits": float(phi)}
+    details: Dict[str, float] = {
+        "pair_wins": pair_wins,
+        "z": z,
+        "mean_margin": margin,
+        "gate_z": gate_z,
+        "gate_margin": gate_margin,
+        "phi_proxy_bits": float(phi),
+    }
     if wrong_checks == "neighbor" and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
@@ -1135,7 +1151,60 @@ def parse_args() -> argparse.Namespace:
         default=1,
         help="(transfer) Number of verification seeds starting at --seed (default: 1).",
     )
+    p.add_argument(
+        "--empirical_receipt_out",
+        default=None,
+        help=(
+            "Optional JSON path to write an EmpiricalMetricReceipt-style summary of results "
+            "(R/M/J/Phi-proxy + gates)."
+        ),
+    )
     return p.parse_args()
+
+
+def _write_empirical_receipt(*, out_path: str, args: argparse.Namespace, results: List["BenchmarkResult"]) -> str:
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+
+    receipt = {
+        "type": "EmpiricalMetricReceipt",
+        "version": 1,
+        "run": {
+            "mode": str(args.mode),
+            "dataset": str(args.dataset),
+            "fast": bool(args.fast),
+            "strict": bool(args.strict),
+            "seed": int(args.seed),
+            "scoring": str(args.scoring) if args.scoring is not None else None,
+            "wrong_checks": str(args.wrong_checks),
+            "neighbor_k": int(args.neighbor_k),
+            "scifact_stream_seed": int(args.scifact_stream_seed),
+            "calibrate_on": str(args.calibrate_on) if hasattr(args, "calibrate_on") else None,
+            "apply_to": str(args.apply_to) if hasattr(args, "apply_to") else None,
+            "calibration_n": int(args.calibration_n) if hasattr(args, "calibration_n") else None,
+            "verify_n": int(args.verify_n) if hasattr(args, "verify_n") else None,
+        },
+        "results": [
+            {
+                "name": str(r.name),
+                "passed": bool(r.passed),
+                "details": dict(r.details),
+            }
+            for r in results
+        ],
+    }
+
+    canonical = json.dumps(receipt, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    file_bytes = canonical + b"\n"
+    sha256 = hashlib.sha256(file_bytes).hexdigest().upper()
+
+    tmp_path = out_path + ".tmp"
+    with open(tmp_path, "wb") as f:
+        f.write(file_bytes)
+    os.replace(tmp_path, out_path)
+
+    print(f"[Q32] EmpiricalMetricReceipt written: {out_path}")
+    print(f"[Q32] EmpiricalMetricReceipt sha256: {sha256}")
+    return sha256
 
 
 def run_climate_fever_streaming(
@@ -1412,6 +1481,8 @@ def run_climate_fever_streaming(
             "pair_wins": pair_wins,
             "z": z,
             "mean_margin": margin,
+            "gate_z": gate_z,
+            "gate_margin": gate_margin,
             "mean_dM_correct": float(dM_correct_a.mean()),
             "mean_dM_wrong": float(dM_wrong_a.mean()),
             "control_wins": float(control_wins),
@@ -1732,6 +1803,8 @@ def run_scifact_streaming(
         "pair_wins": pair_wins,
         "z": z,
         "mean_margin": margin,
+        "gate_z": gate_z,
+        "gate_margin": gate_margin,
         "mean_dM_correct": float(dM_correct_a.mean()),
         "mean_dM_wrong": float(dM_wrong_a.mean()),
     }
@@ -2033,6 +2106,9 @@ def main() -> int:
     for r in results:
         status = "PASS" if r.passed else "FAIL"
         print(f"  - {r.name}: {status}")
+
+    if args.empirical_receipt_out:
+        _write_empirical_receipt(out_path=str(args.empirical_receipt_out), args=args, results=results)
 
     all_passed = all(r.passed for r in results)
     if args.fast and not args.strict:

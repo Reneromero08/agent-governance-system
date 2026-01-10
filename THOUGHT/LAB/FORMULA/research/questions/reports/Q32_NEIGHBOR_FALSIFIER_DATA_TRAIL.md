@@ -87,6 +87,26 @@ Matrix outcome (from the captured summary):
   - `climate_fever->scifact:*@seed=123/124/125: PASS`
   - `scifact->climate_fever:*@seed=123/124/125: PASS`
 
+### 2026-01-09 Phi-proxy matrix (neighbor mode)
+
+Purpose:
+- Record `J` (neighbor fitness) and `phi_proxy_bits` alongside the usual pass/fail matrix.
+
+Failure artifact (pre-fix, kept for traceability):
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/matrix_neighbor_phi_20260109_192150.txt`
+- SHA256 = `13549572B700471F12AC6727756C57A2140FAB5C5C9FDE736868E713FB97DE21`
+- Failure: `NameError: mu_hat_list is not defined` in Climate-FEVER intervention.
+
+Passing artifact (fast matrix, cosine scoring, neighbor wrong-checks):
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/matrix_neighbor_phi_fast_20260109_192754.txt`
+- SHA256 = `0A654EEB10FC7CD8FDE7892E9F5471D23A0609970350D3BF2740AA4807D8B6F5`
+
+EmpiricalMetricReceipt artifact (same fast matrix run class, includes gates + J + Phi-proxy):
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_fast_20260109_193751.json`
+- SHA256 = `B60591D8AED74D7166B9330C79323CAEE4025A8F20505FB0C63DCEF45D9D57AA`
+- Verbatim log: `LAW/CONTRACTS/_runs/q32_public/datatrail/matrix_neighbor_phi_receipt_fast_20260109_193751.txt`
+- SHA256 = `3A5CFC598F4ECC5113CC5E9A8370233964EAD8471B1175AF67DDCA1106B95249`
+
 ### 2026-01-09 variability stress (SciFact streaming)
 
 Purpose:

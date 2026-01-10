@@ -611,30 +611,6 @@ The original plan for AST parsing and template expansion is deferred. If the sim
 - [ ] Session aggregation correct
 - [ ] Firewall rules enforced
 
-### 5.2.7.9 Empirical Metric Receipt (R/J/Phi)
-
-**Purpose:** Make empirical claims auditable: record **R / J / Phi-proxy** alongside the receipts produced by tests and benchmarks.
-
-- [ ] Define `EmpiricalMetricReceipt` schema (separate from TokenReceipt)
-- [ ] Required fields:
-  - `benchmark_id`, `seed`, `dataset`, `mode`
-  - `R` / `M=log(R)` summary stats
-  - `J` (neighbor-fitness): neighbor similarity, competitor construction mode
-  - `phi_proxy_bits` (lightweight proxy; not exact IIT Phi)
-  - `gates`: pass/fail + thresholds used
-- [ ] Efficiency constraints:
-  - Use lightweight proxies first (MI / multi-information via binning)
-  - Add a “stress mode” pass-rate gate for variability when `scifact_stream_seed=-1`
-- [ ] Datatrail:
-  - Emit verbatim logs + SHA256 under `LAW/CONTRACTS/_runs/...`
-  - Link to the report in `THOUGHT/LAB/FORMULA/research/questions/reports/`
-
-**Exit Criteria:**
-- [ ] Every semantic_query emits TokenReceipt
-- [ ] Session summaries show cumulative savings
-- [ ] Firewall rejects unreceipted large outputs
-- [ ] 10+ tests passing
-
 ---
 
 
