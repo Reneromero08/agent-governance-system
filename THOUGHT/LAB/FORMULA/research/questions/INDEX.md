@@ -12,7 +12,7 @@
 |---|----------|---------|--------|--------|
 | 1 | [Why grad_S?](critical/q01_why_grad_s.md) | 1800 | ✅ ANSWERED | `grad_S` is likelihood normalization: use dimensionless `z=error/std`. With Gaussian kernel `E(z)=exp(-z^2/2)` and `R=E/std`, we get exact `log(R) = -F + const` (Gaussian Free Energy). |
 | 2 | [Falsification criteria](critical/q02_falsification_criteria.md) | 1750 | ✅ ANSWERED | Formula measures local agreement correctly. Fails when observations are correlated (echo chambers). Defense: Add fresh data; if R crashes, it was echo chamber. |
-| 3 | [Why does it generalize?](critical/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Deep isomorphism: R = (E/∇S) × σ^Df captures universal evidence structure. E/∇S is the likelihood (Gaussian/Bernoulli/Quantum). σ^Df captures redundancy (quantum: pure sqrt(N), mixed N). |
+| 3 | [Why does it generalize?](critical/q3_why_generalize/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Axiomatic necessity: R = E(z)/σ is the UNIQUE form satisfying 4 universal axioms (locality, normalization, monotonicity, intensive). Proven via Phase 1 uniqueness theorem + Phase 3 adversarial robustness (5/5 domains). Domains share structure because they share axioms. |
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
 | 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ? OPEN | Candidate field `M:=log(R)` + initial falsifiers exist; remains OPEN until public, adversarial, out-of-domain replications pass. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
@@ -24,7 +24,7 @@
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ OPEN | How do gates compose across scales? Is there a fixed point? |
+| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ PARTIAL | Axioms A1-A4 are scale-invariant (Q3) → R is scale-invariant. Hypothesis: R is RG fixed point. Still open: gate composition, agreement propagation, formal RG proof. |
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ⏳ PARTIAL | In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`. General mapping for the full formula across families is still open. |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ⏳ OPEN | Can R distinguish aligned vs. misaligned agent behavior? |
@@ -57,7 +57,7 @@
 |---|----------|---------|--------|--------|
 | 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ⏳ OPEN | Does dR/dt carry information? Can we predict gate transitions? |
 | 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ OPEN | Universal threshold or domain-specific? |
-| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ OPEN | Connection to packing/distinguishability? Maximum information density? |
+| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | Hypothesis: √3 from optimal hexagonal packing in evidence space. Connects to fractal dimension Df (Q3), Mandelbrot geometry, distinguishability threshold. Needs experimental verification. |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
 | 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
@@ -95,19 +95,19 @@
 ## Summary Statistics
 
   - **Total Questions:** 34
-  - **Answered:** 4 (11.8%)
-  - **Partially Answered:** 5 (14.7%)
+  - **Answered:** 5 (14.7%)
+  - **Partially Answered:** 6 (17.6%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 25 (73.5%)
+  - **Open:** 23 (67.6%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
- | Critical | 7 | 3 | 3 | 0 | 1 |
- | High | 9 | 0 | 1 | 0 | 8 |
+ | Critical | 7 | 4 | 2 | 0 | 1 |
+ | High | 9 | 0 | 2 | 0 | 7 |
  | Medium | 8 | 1 | 1 | 0 | 6 |
- | Lower | 8 | 0 | 0 | 0 | 8 |
+ | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
 ---
@@ -120,7 +120,7 @@
 3. **R = Evidence Density (Intensive)** - R correlates perfectly (r=1.0) with $\sqrt{\text{Likelihood Precision}}$ ($1/\sigma$) but ignores data volume $N$. It measures signal quality, not accumulated certainty.
 4. **R is error-aware SNR** - Classic SNR ignores whether signal is TRUE
 5. **R implements Free Energy Principle** - In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`; empirically, gating reduces free energy by 97.7%
-6. **Cross-domain transfer evidence** - The same “signal vs uncertainty” structure shows up across multiple tested domains, but universality is not proven
+6. **Axiomatic universality (Q3)** - R = E(z)/σ is NECESSARY (not contingent). Proven: any measure satisfying axioms A1-A4 must have this form. Universality proven via axioms + adversarial testing (5/5 domains)
 7. **Novel predictions (partial)** - Several testable predictions validate strongly; at least one is currently weak (context-need correlation)
 
 ### What's Inconclusive
@@ -129,10 +129,9 @@
 
 ### What's Still Unknown
 1. **Which likelihood kernel E(z) is "right"** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
-2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles
-3. **IIT connection** - Relationship to Phi and integrated information
-4. **Multi-scale composition** - How gates compose across scales
-5. **Uniqueness derivation** - Is there a deeper proof that uniquely determines R?
+2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles (see Q33)
+3. **Multi-scale composition** - Formal renormalization group proof, gate composition mechanics (Q7 partial)
+4. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
 
 ---
 
