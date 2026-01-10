@@ -158,3 +158,11 @@ In signal detection:
 ---
 
 **Last Updated:** 2026-01-09 (Q3 fractal connections integrated)
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 (Quantum Geometric Tensor) may EXPLAIN √3:
+- Berry phase from hexagonal loops: γ = 2π/3
+- √3 = 2·sin(π/3) (hexagonal geometry)
+- Geometric phase accumulation on closed meaning loops
+- Test: Integrate Berry curvature around semantic hexagons

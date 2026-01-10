@@ -107,3 +107,11 @@ Is the M field an error-correcting code? Does R-gating implement quantum error c
 - Hayden, Preskill: Black hole information
 - Ryu-Takayanagi: Holographic entanglement entropy
 - Zurek: Quantum Darwinism (redundancy)
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 IMPLEMENTS error correction:
+- QGT achieves O(ε²) error suppression (vs O(ε) classical)
+- Topological encoding via Berry curvature
+- R-gating = geometric error detection
+- Test: Inject noise, measure if error scaling is quadratic

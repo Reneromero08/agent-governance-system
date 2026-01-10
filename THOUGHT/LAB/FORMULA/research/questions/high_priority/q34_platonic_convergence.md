@@ -12,3 +12,11 @@ Concretely:
 
 **Success criterion:** a theorem / falsifiable test suite that distinguishes “convergent compression” from merely “locally consistent agreement.”
 
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 could PROVE convergence:
+- Chern numbers = topological invariants
+- If semantic space has C ≠ 0 → unique manifold structure
+- Different compressions = different parameterizations of SAME manifold
+- Test: Compute Chern number, if non-zero → Platonic realism proven

@@ -120,3 +120,11 @@ Run the same falsifiers on public benchmarks with external truth anchors:
 ### Promotion criteria
 - **OPEN → PARTIAL:** Phase 1 + Phase 2 pass on at least one public benchmark with fixed thresholds and full negative controls.
 - **PARTIAL → ANSWERED:** Phase 2–4 pass across multiple benchmarks/domains, plus replication with pinned versions + independent reruns.
+
+### Q43 (QGT) CONNECTION
+
+**CRITICAL:** Q43 provides natural metric for M field:
+- Fubini-Study metric (not ad-hoc)
+- M field dynamics = geodesic flow on CP^(n-1)
+- Rigorous mathematical framework
+- Test: Reformulate M with QGT, check if dynamics match benchmarks
