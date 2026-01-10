@@ -111,13 +111,16 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
 
 **Purpose:** Make empirical claims auditable: record **R / J / Phi-proxy** alongside the receipts produced by tests and benchmarks.
 
-- [ ] Define `EmpiricalMetricReceipt` schema (separate from TokenReceipt)
-- [ ] Required fields:
-  - `benchmark_id`, `seed`, `dataset`, `mode`
-  - `R` / `M=log(R)` summary stats
-  - `J` (neighbor-fitness): neighbor similarity, competitor construction mode
-  - `phi_proxy_bits` (lightweight proxy; not exact IIT Phi)
-  - `gates`: pass/fail + thresholds used
+- [x] Emit `EmpiricalMetricReceipt` JSON (separate from TokenReceipt)
+  - Implemented in `q32_public_benchmarks.py` via `--empirical_receipt_out <path.json>`
+  - Format: a single JSON object with `{type: "EmpiricalMetricReceipt", version: 1, run: {...}, results: [...]}`.
+- [ ] Schema formalization (optional but recommended):
+  - If we want an explicit JSON Schema file, decide the canonical location for it (Q32 docs currently define the shape in prose; the runner emits concrete JSON).
+- [x] Required fields (implemented now):
+  - Run context: `mode`, `dataset`, `fast`, `strict`, `seed`, `scoring`, `wrong_checks`, `neighbor_k`, `scifact_stream_seed`, `calibrate_on`, `apply_to`, `calibration_n`, `verify_n`
+  - Per-result: `name`, `passed`, and `details` (includes `pair_wins`, `z`, `mean_margin`, plus `gate_z`/`gate_margin` and `phi_proxy_bits`; neighbor mode adds `mean_neighbor_sim`)
+- [ ] `R` / `M=log(R)` summary stats (TODO):
+  - Current receipts focus on falsifier gates (`pair_wins`, `z`, margins, J, Phi-proxy). If we want explicit `R`/`M` summary stats in the receipt, we need to define *which* `R/M` (per-sample? per-series? end-of-stream?) and add it deliberately.
 - [ ] Efficiency constraints:
   - Use lightweight proxies first (MI / multi-information via binning)
   - Add a "stress mode" pass-rate gate for variability when `scifact_stream_seed=-1`
@@ -125,11 +128,15 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
   - Emit verbatim logs + SHA256 under `LAW/CONTRACTS/_runs/...`
   - Link to the report in `THOUGHT/LAB/FORMULA/research/questions/reports/`
 
-**Exit Criteria:**
-- [ ] Every semantic_query emits TokenReceipt
-- [ ] Session summaries show cumulative savings
-- [ ] Firewall rejects unreceipted large outputs
-- [ ] 10+ tests passing
+**Datatrail examples (already emitted):**
+- See `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_NEIGHBOR_FALSIFIER_DATA_TRAIL.md`
+  - Fast receipt example: `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_fast_20260109_193751.json`
+  - Full receipt example: `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_full_20260109_194549.json`
+
+**Exit Criteria (Q32-scoped):**
+- [ ] Every public benchmark run (`bench|stream|transfer|matrix`) can emit an EmpiricalMetricReceipt deterministically
+- [ ] Datatrail bundle includes: verbatim log + receipt + SHA256 for both
+- [ ] Negative controls + stress runs are receipted (when invoked)
 
 ### Phase 3 - Cross-domain replication + threshold transfer
 - Calibrate once (Dataset A), freeze thresholds and mapping, then run Dataset B without re-tuning.
