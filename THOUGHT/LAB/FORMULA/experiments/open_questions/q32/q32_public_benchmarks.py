@@ -961,11 +961,11 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Q32 public truth-anchored benchmarks (fast + full modes).")
     p.add_argument(
         "--mode",
-        choices=["bench", "stream", "transfer", "matrix"],
+        choices=["bench", "stream", "transfer", "matrix", "stress"],
         default="bench",
         help=(
             "Run static benchmarks (bench), streaming/intervention simulation (stream), Phase-3 transfer (transfer), "
-            "or a Phase-3 matrix (matrix: run both transfer directions)."
+            "a Phase-3 matrix (matrix: run both transfer directions), or variability stress tests (stress)."
         ),
     )
     p.add_argument(
@@ -1032,6 +1032,17 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=123,
         help="SciFact streaming internal sampling seed (default: 123). Use -1 to tie to --seed (stress variability).",
+    )
+    p.add_argument(
+        "--stress_n",
+        type=int,
+        default=10,
+        help="(stress) Number of trials (default: 10).",
+    )
+    p.add_argument(
+        "--stress_out",
+        default=None,
+        help="(stress) Optional JSON path to write stress summary.",
     )
     p.add_argument(
         "--calibrate_on",
@@ -1669,7 +1680,77 @@ def main() -> int:
     strict = args.strict or (not args.fast)
 
     results: List[BenchmarkResult] = []
-    if args.mode == "bench":
+    if args.mode == "stress":
+        # Variability stress is intentionally non-strict: we want a distribution, not an abort.
+        trials = max(1, int(args.stress_n))
+        base = int(args.seed)
+
+        if args.dataset not in ("scifact", "all"):
+            raise SystemExit("stress mode currently supports only --dataset scifact (or all)")
+
+        print(f"\n[Q32:STRESS] SciFact streaming variability (trials={trials})")
+        per: List[Dict[str, float]] = []
+        pass_n = 0
+        for i in range(trials):
+            s = base + i
+            try:
+                r = run_scifact_streaming(
+                    seed=s,
+                    fast=args.fast,
+                    strict=False,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    scifact_stream_seed=-1,
+                )
+            except Exception:
+                r = BenchmarkResult(name=f"SciFact-Streaming@seed={s}", passed=False, details={})
+            results.append(r)
+            if r.passed:
+                pass_n += 1
+            d = dict(r.details)
+            d["seed"] = float(s)
+            per.append(d)
+
+        pass_rate = float(pass_n / max(1, trials))
+        pw = [float(d.get("pair_wins", float("nan"))) for d in per]
+        zz = [float(d.get("z", float("nan"))) for d in per]
+        mm = [float(d.get("mean_margin", float("nan"))) for d in per]
+
+        def finite_min(xs: List[float]) -> float:
+            vals = [x for x in xs if math.isfinite(x)]
+            return float(min(vals)) if vals else float("nan")
+
+        summary = {
+            "mode": "stress",
+            "dataset": "scifact",
+            "trials": int(trials),
+            "seed_base": int(base),
+            "wrong_checks": str(args.wrong_checks),
+            "neighbor_k": int(args.neighbor_k),
+            "pass_n": int(pass_n),
+            "pass_rate": float(pass_rate),
+            "min_pair_wins": finite_min(pw),
+            "min_z": finite_min(zz),
+            "min_mean_margin": finite_min(mm),
+        }
+
+        print("\n[Q32:STRESS] Summary")
+        print(f"  pass_rate = {summary['pass_rate']:.3f}  (pass_n={summary['pass_n']}/{summary['trials']})")
+        print(f"  min_pair_wins = {summary['min_pair_wins']:.3f}")
+        print(f"  min_z = {summary['min_z']:.3f}")
+        print(f"  min_mean_margin = {summary['min_mean_margin']:.3f}")
+
+        if args.stress_out:
+            out_path = str(args.stress_out)
+            os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+            import json
+
+            payload = {"summary": summary, "per_trial": per}
+            with open(out_path, "w", encoding="utf-8") as f:
+                json.dump(payload, f, indent=2, sort_keys=True)
+            print(f"[Q32:STRESS] Wrote {out_path}")
+
+    elif args.mode == "bench":
         if args.dataset in ("scifact", "all"):
             results.append(
                 run_scifact_benchmark(
