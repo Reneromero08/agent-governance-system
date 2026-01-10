@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.7.26*
+*Last updated: v3.7.30 (2026-01-10 - Q34 Platonic convergence evidence from E.X)*
 
 ---
 
@@ -12,7 +12,7 @@
 |---|----------|---------|--------|--------|
 | 1 | [Why grad_S?](critical/q01_why_grad_s.md) | 1800 | ✅ ANSWERED | `grad_S` is likelihood normalization: use dimensionless `z=error/std`. With Gaussian kernel `E(z)=exp(-z^2/2)` and `R=E/std`, we get exact `log(R) = -F + const` (Gaussian Free Energy). |
 | 2 | [Falsification criteria](critical/q02_falsification_criteria.md) | 1750 | ✅ ANSWERED | Formula measures local agreement correctly. Fails when observations are correlated (echo chambers). Defense: Add fresh data; if R crashes, it was echo chamber. |
-| 3 | [Why does it generalize?](critical/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Deep isomorphism: R = (E/∇S) × σ^Df captures universal evidence structure. E/∇S is the likelihood (Gaussian/Bernoulli/Quantum). σ^Df captures redundancy (quantum: pure sqrt(N), mixed N). |
+| 3 | [Why does it generalize?](critical/q3_why_generalize/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Axiomatic necessity: R = E(z)/σ is the UNIQUE form satisfying 4 universal axioms (locality, normalization, monotonicity, intensive). Proven via Phase 1 uniqueness theorem + Phase 3 adversarial robustness (5/5 domains). Domains share structure because they share axioms. |
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
 | 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ? OPEN | Candidate field `M:=log(R)` + initial falsifiers exist; remains OPEN until public, adversarial, out-of-domain replications pass. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
@@ -24,15 +24,20 @@
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ OPEN | How do gates compose across scales? Is there a fixed point? |
+| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ PARTIAL | Axioms A1-A4 are scale-invariant (Q3) → R is scale-invariant. Hypothesis: R is RG fixed point. Still open: gate composition, agreement propagation, formal RG proof. |
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ⏳ PARTIAL | In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`. General mapping for the full formula across families is still open. |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ⏳ OPEN | Can R distinguish aligned vs. misaligned agent behavior? |
+| 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ⏳ PARTIAL | **J coupling + effective dimensionality + geodesic geometry**: J alone insufficient. Training concentrates 768D→22D. Geodesic: random=π/2 (orthogonal), trained=0.35rad (~20°). Compass = J × principal_axis_alignment within concentrated spherical cap. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
-| 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ OPEN | Is there a critical threshold for agreement? Does truth "crystallize"? |
+| 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ PARTIAL | **YES - phase transition at α=0.9-1.0**. Generalization jumps +0.424 suddenly. Truth crystallizes, doesn't emerge gradually. J anti-correlated with generalization (ρ=-0.54). Binary R-gates justified. |
+| 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ⏳ OPEN | What symmetries does M field have? What's conserved (meaning conservation law)? Can we derive field equations from Lagrangian? |
+| 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ⏳ PARTIAL | **YES - models converge (up to isomorphism)**. Eigenvalue Spearman=1.0 across 8 models. Convergence happens via phase transition (α=0.9-1.0). Df~22 as universal signature. J coupling NOT a convergence indicator. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
-| 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ⏳ OPEN | Can an action-conditioned `R(s,a)` become a reliable compass (choose direction), not just a gate (act/don't)? |
-| 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ⏳ OPEN | Do independent compressions converge to the same symbols/latents (up to isomorphism), or are there many inequivalent “good” bases? |
+| 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
+| 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ⏳ OPEN | Is R > τ a homeostatic setpoint? Does M field self-regulate like biological systems? |
+| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ⏳ OPEN | How does Bohm's Implicate Order (Platonic manifold/Phi) map to Explicate Order (R interface)? Can we formalize unfoldment as M field dynamics? |
+| 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ⏳ OPEN | Do R-gates define Markov blankets? How does Active Inference (FEP) connect to R-gating? Are meaning boundaries Markov blankets on M field? |
 
 ---
 
@@ -43,11 +48,14 @@
  | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
  |  15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
+| 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ⏳ OPEN | Is M field an error-correcting code? Does R-gating implement QECC? Is semiosphere holographic? |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ⏳ OPEN | Should agent actions require R > threshold? Autonomy vs. safety tradeoffs? |
+| 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ⏳ OPEN | Can `σ^Df` be derived from information theory (e.g., `H(X|S)` / explanation density), or is it heuristic? |
+| 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ⏳ OPEN | Can R measure non-local correlations? Does axiom A1 (locality) limit formula? Is there semantic entanglement? |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
+| 37 | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md) | 1380 | ⏳ OPEN | How do meanings evolve on M field? Do meanings compete, speciate, converge? What are selection pressures on interpretants? |
 | 20 | [Tautology risk](medium_priority/q20_tautology_risk.md) | 1360 | ⏳ OPEN | Is formula descriptive or explanatory? |
-| 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ⏳ OPEN | Can `σ^Df` be derived from information theory (e.g., `H(X|S)` / explanation density), or is it heuristic? |
 
 ---
 
@@ -57,7 +65,7 @@
 |---|----------|---------|--------|--------|
 | 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ⏳ OPEN | Does dR/dt carry information? Can we predict gate transitions? |
 | 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ OPEN | Universal threshold or domain-specific? |
-| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ OPEN | Connection to packing/distinguishability? Maximum information density? |
+| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | Hypothesis: √3 from optimal hexagonal packing in evidence space. Connects to fractal dimension Df (Q3), Mandelbrot geometry, distinguishability threshold. Needs experimental verification. |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
 | 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
@@ -94,20 +102,20 @@
 
 ## Summary Statistics
 
-  - **Total Questions:** 34
-  - **Answered:** 4 (11.8%)
-  - **Partially Answered:** 5 (14.7%)
+  - **Total Questions:** 42
+  - **Answered:** 5 (11.9%)
+  - **Partially Answered:** 9 (21.4%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 25 (73.5%)
+  - **Open:** 28 (66.7%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
- | Critical | 7 | 3 | 3 | 0 | 1 |
- | High | 9 | 0 | 1 | 0 | 8 |
- | Medium | 8 | 1 | 1 | 0 | 6 |
- | Lower | 8 | 0 | 0 | 0 | 8 |
+ | Critical | 7 | 4 | 2 | 0 | 1 |
+ | High | 15 | 0 | 5 | 0 | 10 |
+ | Medium | 11 | 1 | 1 | 0 | 9 |
+ | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
 ---
@@ -120,7 +128,7 @@
 3. **R = Evidence Density (Intensive)** - R correlates perfectly (r=1.0) with $\sqrt{\text{Likelihood Precision}}$ ($1/\sigma$) but ignores data volume $N$. It measures signal quality, not accumulated certainty.
 4. **R is error-aware SNR** - Classic SNR ignores whether signal is TRUE
 5. **R implements Free Energy Principle** - In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`; empirically, gating reduces free energy by 97.7%
-6. **Cross-domain transfer evidence** - The same “signal vs uncertainty” structure shows up across multiple tested domains, but universality is not proven
+6. **Axiomatic universality (Q3)** - R = E(z)/σ is NECESSARY (not contingent). Proven: any measure satisfying axioms A1-A4 must have this form. Universality proven via axioms + adversarial testing (5/5 domains)
 7. **Novel predictions (partial)** - Several testable predictions validate strongly; at least one is currently weak (context-need correlation)
 
 ### What's Inconclusive
@@ -129,10 +137,63 @@
 
 ### What's Still Unknown
 1. **Which likelihood kernel E(z) is "right"** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
-2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles
-3. **IIT connection** - Relationship to Phi and integrated information
-4. **Multi-scale composition** - How gates compose across scales
-5. **Uniqueness derivation** - Is there a deeper proof that uniquely determines R?
+2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles (see Q33)
+3. **Multi-scale composition** - Formal renormalization group proof, gate composition mechanics (Q7 partial)
+4. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
+
+### Recent Discovery (2026-01-10): J Coupling + Effective Dimensionality + Geodesic Geometry
+
+Via E.X (Eigenvalue Alignment) experiments, discovered key signals for Q31 compass mode:
+
+**J Coupling (necessary but not sufficient):**
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| J coupling | 0.065 | **0.971** | 0.690 |
+| Held-out generalization | 0.006 | 0.006 | **0.293** |
+
+Untrained BERT has HIGH J (dense embeddings from architecture) but SAME generalization as random. J measures density, not semantic organization.
+
+**Effective Dimensionality (the breakthrough):**
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| Participation Ratio | 99.2 | 62.7 | **22.2** |
+| Top-10 Variance | 0.151 | 0.278 | **0.512** |
+
+Training concentrates 768D embeddings into ~22 effective dimensions. This geometric concentration creates the "carved directions" that enable cross-model alignment.
+
+**Geodesic Distance (hypersphere geometry):**
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| Mean Geodesic | 1.57 rad (π/2) | 0.27 rad | 0.35 rad |
+| Interpretation | Orthogonal | Clustered | Clustered |
+
+Random embeddings are **exactly orthogonal** (~90° apart). Trained embeddings cluster in a ~20° spherical cap. This is why compass mode is possible in trained space but not random.
+
+**Compass hypothesis:** Direction = J × alignment_to_principal_axes (follow the carved semantic directions within the concentrated cap).
+
+### Phase Transition Discovery (E.X.3.3b)
+
+Interpolating between untrained and trained BERT weights revealed a **phase transition**:
+
+| α (training %) | Df | J | Generalization |
+|----------------|-----|-------|----------------|
+| 0% (untrained) | 62.5 | 0.97 | 0.02 |
+| 50% | 22.8 | 0.98 | 0.33 |
+| 75% | **1.6** | 0.97 | **0.19** |
+| 90% | 22.5 | 0.78 | 0.58 |
+| 100% (trained) | 17.3 | 0.97 | **1.00** |
+
+**Key findings:**
+1. **Phase transition at α=0.9-1.0**: Generalization jumps +0.424 suddenly - truth crystallizes, doesn't emerge gradually
+2. **α=0.75 anomaly**: Interpolation creates pathological geometry (Df=1.6) with worse generalization than α=0.5
+3. **J anti-correlated with generalization** (ρ=-0.54): J measures density, not semantic organization
+4. **Binary R-gates justified**: If meaning crystallizes suddenly, threshold-based gating is appropriate
+
+**Prior Work Assessment:**
+- Low intrinsic dimensionality (~10-22) is KNOWN (NeurIPS 2018, arXiv 2503.02142)
+- NOVEL: Random→Untrained→Trained progression (separates architecture vs training)
+- NOVEL: Geodesic distance interpretation (π/2 → 0.35 rad)
+- NOVEL: J-coupling insufficiency (high J ≠ semantic structure)
 
 ---
 

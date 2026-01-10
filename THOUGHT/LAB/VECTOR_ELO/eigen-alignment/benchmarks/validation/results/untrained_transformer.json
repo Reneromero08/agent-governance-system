@@ -1,0 +1,51 @@
+{
+  "test_id": "untrained-transformer-E.X.3.3",
+  "timestamp": "2026-01-10T06:07:17.604498+00:00",
+  "random": {
+    "mean_j": 0.06618263851232456,
+    "mean_phi_iit": 23.092732494917726,
+    "mean_held_out": 0.011108402518346779,
+    "effective_dimensionality": {
+      "participation_ratio": 99.2,
+      "top_10_variance": 0.151,
+      "eigenvalue_entropy": 0.702
+    }
+  },
+  "untrained": {
+    "mean_j": 0.9717418962717056,
+    "mean_phi_iit": 1.3032754461578948,
+    "mean_held_out": 0.0016202121840679247,
+    "effective_dimensionality": {
+      "participation_ratio": 62.7,
+      "top_10_variance": 0.278,
+      "eigenvalue_entropy": 0.659
+    }
+  },
+  "trained": {
+    "j": 0.6904302760958672,
+    "phi_iit": 13.891403328671498,
+    "held_out": 0.29309610855718493,
+    "effective_dimensionality": {
+      "participation_ratio": 22.2,
+      "top_10_variance": 0.512,
+      "eigenvalue_entropy": 0.576
+    }
+  },
+  "gaps": {
+    "untrained_to_random_j": 0.9055592577593811,
+    "untrained_to_trained_j": 0.28131162017583844,
+    "untrained_to_random_held_out": 0.009488190334278853,
+    "untrained_to_trained_held_out": 0.291475896373117
+  },
+  "interpretation": {
+    "j_verdict": "TRAINED",
+    "held_out_verdict": "RANDOM",
+    "final_verdict": "MIXED",
+    "explanation": "J verdict=TRAINED, held-out verdict=RANDOM. Partial structure from architecture, enhanced by training."
+  },
+  "effective_dimensionality_analysis": {
+    "insight": "Training concentrates 768D to ~22 effective dimensions (participation ratio). Random=99.2, Untrained=62.7, Trained=22.2",
+    "compass_hypothesis": "Direction = J × principal_axis_alignment. J alone insufficient (untrained has high J but no semantic structure). Geometry concentration creates navigable directions.",
+    "connection_to_riemann": "Random = uniform on hypersphere, Trained = structured manifold with principal axes"
+  }
+}

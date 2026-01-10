@@ -1,0 +1,115 @@
+{
+  "test_id": "geometry-analysis-E.X.3.4",
+  "timestamp": "2026-01-10T06:26:43.109706+00:00",
+  "effective_dimensionality": {
+    "random": {
+      "participation_ratio": 99.36419232796926,
+      "top_10_variance": 0.1497579940264433,
+      "top_50_variance": 0.6014094892544606,
+      "eigenvalue_entropy": 0.7017397954698048,
+      "n_dims": 768
+    },
+    "untrained": {
+      "participation_ratio": 62.28653635982866,
+      "top_10_variance": 0.28073571645493334,
+      "top_50_variance": 0.7867520584033086,
+      "eigenvalue_entropy": 0.658669530576334,
+      "n_dims": 768
+    },
+    "trained": {
+      "participation_ratio": 22.246789040083172,
+      "top_10_variance": 0.5119381748475149,
+      "top_50_variance": 0.8842815496236776,
+      "eigenvalue_entropy": 0.5763403062686887,
+      "n_dims": 768
+    }
+  },
+  "wasserstein": {
+    "random_to_random": 1.3508723271816712,
+    "random_to_untrained": 1.3996278375583344,
+    "random_to_trained": 1.3986489057223852,
+    "untrained_to_trained": 1.3954856810362446
+  },
+  "hdbscan": {
+    "random": {
+      "n_clusters": 3,
+      "n_noise": 82,
+      "noise_ratio": 0.7130434782608696,
+      "cluster_sizes": [
+        22,
+        6,
+        5
+      ]
+    },
+    "untrained": {
+      "n_clusters": 0,
+      "n_noise": 115,
+      "noise_ratio": 1.0,
+      "cluster_sizes": []
+    },
+    "trained": {
+      "n_clusters": 0,
+      "n_noise": 115,
+      "noise_ratio": 1.0,
+      "cluster_sizes": []
+    }
+  },
+  "hypersphere": {
+    "random": {
+      "mean_norm": 1.0,
+      "std_norm": 6.381945747149776e-17,
+      "on_unit_sphere": true,
+      "mean_geodesic_dist": 1.5710429400916353,
+      "std_geodesic_dist": 0.03633753145876746,
+      "max_geodesic_dist": 1.6881401983287527
+    },
+    "untrained": {
+      "mean_norm": 1.0,
+      "std_norm": 2.7229321020172392e-08,
+      "on_unit_sphere": true,
+      "mean_geodesic_dist": 0.2665959834012013,
+      "std_geodesic_dist": 0.01549210914923125,
+      "max_geodesic_dist": 0.32477348276959966
+    },
+    "trained": {
+      "mean_norm": 1.0,
+      "std_norm": 3.6447303841669054e-08,
+      "on_unit_sphere": true,
+      "mean_geodesic_dist": 0.35057979558119223,
+      "std_geodesic_dist": 0.08456203461402187,
+      "max_geodesic_dist": 0.6045563930897709
+    }
+  },
+  "umap": {
+    "random": {
+      "std_per_dim": [
+        0.7128022909164429,
+        0.8199496865272522,
+        0.7687875628471375
+      ],
+      "total_spread": 0.44932711124420166,
+      "mean_pairwise_dist": 1.7809927463531494,
+      "std_pairwise_dist": 0.6340512633323669
+    },
+    "untrained": {
+      "std_per_dim": [
+        0.7363454699516296,
+        0.7129312753677368,
+        0.8125774264335632
+      ],
+      "total_spread": 0.4265736937522888,
+      "mean_pairwise_dist": 1.7474548816680908,
+      "std_pairwise_dist": 0.6308174729347229
+    },
+    "trained": {
+      "std_per_dim": [
+        0.8496655821800232,
+        0.7204184532165527,
+        0.857105016708374
+      ],
+      "total_spread": 0.5246466398239136,
+      "mean_pairwise_dist": 1.8648728132247925,
+      "std_pairwise_dist": 0.7127658128738403
+    }
+  }
+}
