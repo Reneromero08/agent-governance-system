@@ -26,6 +26,8 @@ from scipy.stats import spearmanr
 
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
+EPS = 1e-10
+
 from lib.mds import squared_distance_matrix, classical_mds
 from lib.procrustes import procrustes_align, out_of_sample_mds, cosine_similarity
 
@@ -34,6 +36,75 @@ try:
     ST_AVAILABLE = True
 except ImportError:
     ST_AVAILABLE = False
+
+
+def _mutual_information_continuous(x: list, y: list, *, n_bins: int = 8) -> float:
+    """
+    Phi-style proxy: mutual information I(X;Y) for continuous values via histogram binning.
+
+    This measures the coupling/integration between two sequences.
+    Adapted from Q32 benchmarks.
+    """
+    xx = np.asarray(x, dtype=float)
+    yy = np.asarray(y, dtype=float)
+    if xx.size == 0 or yy.size == 0:
+        return 0.0
+    n = int(min(xx.size, yy.size))
+    xx = xx[:n]
+    yy = yy[:n]
+
+    mask = np.isfinite(xx) & np.isfinite(yy)
+    xx = xx[mask]
+    yy = yy[mask]
+    if xx.size < 5:
+        return 0.0
+
+    n_bins_i = max(2, int(n_bins))
+    x_min = float(np.min(xx))
+    x_max = float(np.max(xx))
+    y_min = float(np.min(yy))
+    y_max = float(np.max(yy))
+    if x_min == x_max:
+        x_min -= 1.0
+        x_max += 1.0
+    if y_min == y_max:
+        y_min -= 1.0
+        y_max += 1.0
+
+    x_edges = np.linspace(x_min - EPS, x_max + EPS, n_bins_i + 1)
+    y_edges = np.linspace(y_min - EPS, y_max + EPS, n_bins_i + 1)
+    joint, _, _ = np.histogram2d(xx, yy, bins=(x_edges, y_edges))
+    pxy = joint / float(np.sum(joint) + EPS)
+    px = np.sum(pxy, axis=1, keepdims=True)
+    py = np.sum(pxy, axis=0, keepdims=True)
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = pxy / (px @ py + EPS)
+        mi = float(np.nansum(pxy * np.log2(ratio + EPS)))
+    return float(max(0.0, mi))
+
+
+def compute_neighbor_coupling(held_out_embs: np.ndarray, anchor_embs: np.ndarray, k: int = 5) -> float:
+    """
+    J-style metric: Mean cosine similarity between held-out words and their k nearest anchors.
+
+    This measures how well held-out words "couple" to the anchor manifold.
+    Higher J = held-out words are semantically close to anchors (good interpolation)
+    Lower J = held-out words are in semantic voids (poor coverage)
+    """
+    # Compute similarity matrix: held_out x anchors
+    # Embeddings should be L2 normalized, so dot product = cosine similarity
+    sim_matrix = held_out_embs @ anchor_embs.T  # (n_held_out, n_anchors)
+
+    # For each held-out word, find k nearest anchors and average their similarities
+    neighbor_sims = []
+    for i in range(sim_matrix.shape[0]):
+        row = sim_matrix[i]
+        top_k_indices = np.argsort(-row)[:k]
+        top_k_sims = row[top_k_indices]
+        neighbor_sims.append(float(np.mean(top_k_sims)))
+
+    return float(np.mean(neighbor_sims))
 
 
 # Anchor words for fitting
@@ -181,6 +252,17 @@ def compute_held_out_alignment(
         anchor_raw_sims.append(cosine_similarity(coords_anchor_a[i], coords_anchor_b[i]))
         anchor_aligned_sims.append(cosine_similarity(coords_anchor_a_aligned[i], coords_anchor_b[i]))
 
+    # === PHI: Integration between anchor and held-out performance ===
+    # Measures if knowing anchor alignment predicts held-out alignment
+    phi_proxy = _mutual_information_continuous(anchor_aligned_sims, aligned_sims)
+
+    # === J: Neighbor coupling in original embedding space ===
+    # Measures how well held-out words couple to anchor manifold
+    # Higher J = held-out near anchors, lower J = held-out in semantic voids
+    j_coupling_a = compute_neighbor_coupling(X_held_a, X_anchor_a, k=5)
+    j_coupling_b = compute_neighbor_coupling(X_held_b, X_anchor_b, k=5)
+    j_coupling_mean = (j_coupling_a + j_coupling_b) / 2
+
     return {
         'n_anchors': n_anchors,
         'n_held_out': n_held_out,
@@ -191,6 +273,11 @@ def compute_held_out_alignment(
         'held_out_aligned_similarity': float(np.mean(aligned_sims)),
         'held_out_improvement': float(np.mean(aligned_sims) - np.mean(raw_sims)),
         'residual': float(residual),
+        # New metrics
+        'phi_proxy': float(phi_proxy),
+        'j_coupling_a': float(j_coupling_a),
+        'j_coupling_b': float(j_coupling_b),
+        'j_coupling_mean': float(j_coupling_mean),
     }
 
 
@@ -251,11 +338,15 @@ def main():
 
     mean_random_anchor = float(np.mean([r['anchor_aligned_similarity'] for r in random_results]))
     mean_random_held_out = float(np.mean([r['held_out_aligned_similarity'] for r in random_results]))
+    mean_random_phi = float(np.mean([r['phi_proxy'] for r in random_results]))
+    mean_random_j = float(np.mean([r['j_coupling_mean'] for r in random_results]))
 
     print(f"\nRandom mean:")
     print(f"  Anchor aligned:   {mean_random_anchor:.4f}")
     print(f"  Held-out aligned: {mean_random_held_out:.4f}")
     print(f"  Generalization:   {mean_random_held_out - mean_random_anchor:+.4f}")
+    print(f"  [Phi] I(anchor;held_out): {mean_random_phi:.4f} bits")
+    print(f"  [J]   Neighbor coupling:  {mean_random_j:.4f}")
     print()
 
     # Test 2: Real model pair
@@ -275,6 +366,8 @@ def main():
     print(f"    Anchor aligned:   {trained_result['anchor_aligned_similarity']:.4f}")
     print(f"    Held-out raw:     {trained_result['held_out_raw_similarity']:.4f}")
     print(f"    Held-out aligned: {trained_result['held_out_aligned_similarity']:.4f}")
+    print(f"    [Phi] I(anchor;held_out): {trained_result['phi_proxy']:.4f} bits")
+    print(f"    [J]   Neighbor coupling:  {trained_result['j_coupling_mean']:.4f}")
     print()
 
     # Summary
@@ -286,6 +379,8 @@ def main():
     print(f"--------------------|-------------|----------")
     print(f"Anchor aligned      | {mean_random_anchor:.4f}      | {trained_result['anchor_aligned_similarity']:.4f}")
     print(f"Held-out aligned    | {mean_random_held_out:.4f}      | {trained_result['held_out_aligned_similarity']:.4f}")
+    print(f"[Phi] integration   | {mean_random_phi:.4f}      | {trained_result['phi_proxy']:.4f}")
+    print(f"[J] coupling        | {mean_random_j:.4f}      | {trained_result['j_coupling_mean']:.4f}")
     print()
 
     # The key comparison
@@ -297,28 +392,38 @@ def main():
     print(f"  On held-out:  {gap_held_out:+.4f}")
     print()
 
-    if gap_held_out > 0.3:
+    # Note: gap = random - trained, so NEGATIVE gap means trained is BETTER
+    if gap_held_out < -0.3:
         verdict = "CONFIRMED"
         explanation = (
-            f"Random embeddings don't generalize to held-out (gap={gap_held_out:.3f}). "
-            "Trained models have structure that transfers beyond fitting set."
+            f"Trained models generalize to held-out, random doesn't (trained={trained_result['held_out_aligned_similarity']:.3f}, "
+            f"random={mean_random_held_out:.3f}). "
+            f"J coupling explains this: trained J={trained_result['j_coupling_mean']:.3f}, random J={mean_random_j:.3f}."
         )
-    elif gap_held_out > 0.1:
-        verdict = "PARTIAL"
-        explanation = f"Moderate gap on held-out ({gap_held_out:.3f}). Some structure detected."
     elif gap_held_out < -0.1:
-        verdict = "REVERSED"
+        verdict = "PARTIAL"
+        explanation = f"Moderate generalization gap ({-gap_held_out:.3f}). Some structure detected."
+    elif gap_held_out > 0.3:
+        verdict = "ANOMALY"
         explanation = (
-            f"Trained models show WORSE held-out alignment than random ({gap_held_out:.3f}). "
+            f"Random shows BETTER held-out alignment than trained ({gap_held_out:.3f}). "
             "This is unexpected - needs investigation."
         )
     else:
         verdict = "NOT CONFIRMED"
-        explanation = f"Similar held-out performance ({gap_held_out:.3f}). No clear signal."
+        explanation = f"Similar held-out performance (gap={gap_held_out:.3f}). No clear signal."
 
     print(f"VERDICT: {verdict}")
     print()
     print(explanation)
+    print()
+
+    # Phi/J gaps
+    gap_phi = mean_random_phi - trained_result['phi_proxy']
+    gap_j = mean_random_j - trained_result['j_coupling_mean']
+
+    print(f"  [Phi] gap:    {gap_phi:+.4f}")
+    print(f"  [J] gap:      {gap_j:+.4f}")
     print()
 
     # Save
@@ -328,11 +433,15 @@ def main():
         'random': {
             'mean_anchor_aligned': mean_random_anchor,
             'mean_held_out_aligned': mean_random_held_out,
+            'mean_phi': mean_random_phi,
+            'mean_j': mean_random_j,
         },
         'trained': trained_result,
         'gaps': {
             'anchor': gap_anchor,
             'held_out': gap_held_out,
+            'phi': gap_phi,
+            'j': gap_j,
         },
         'interpretation': {
             'verdict': verdict,

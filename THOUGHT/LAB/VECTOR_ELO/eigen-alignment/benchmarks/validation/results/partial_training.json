@@ -1,0 +1,116 @@
+{
+  "test_id": "partial-training-E.X.3.3b",
+  "timestamp": "2026-01-10T07:15:03.448159+00:00",
+  "checkpoints": [
+    {
+      "alpha": 0.0,
+      "effective_dimensionality": {
+        "participation_ratio": 62.53537171484611,
+        "top_10_variance": 0.2770959539727349,
+        "eigenvalue_entropy": 0.658691014906962
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.016877796733774538,
+        "j_coupling": 0.9698700499534607,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 0.1,
+      "effective_dimensionality": {
+        "participation_ratio": 69.17495641406217,
+        "top_10_variance": 0.25257252160282784,
+        "eigenvalue_entropy": 0.668964415012343
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.017224199429994595,
+        "j_coupling": 0.9778477823734284,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 0.25,
+      "effective_dimensionality": {
+        "participation_ratio": 59.780968660067565,
+        "top_10_variance": 0.2917855433744138,
+        "eigenvalue_entropy": 0.6612866028911971
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.09832464498949431,
+        "j_coupling": 0.9923898804187775,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 0.5,
+      "effective_dimensionality": {
+        "participation_ratio": 22.762998219346475,
+        "top_10_variance": 0.5503139024550566,
+        "eigenvalue_entropy": 0.5636953119241163
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.3280361896587636,
+        "j_coupling": 0.9813225984573364,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 0.75,
+      "effective_dimensionality": {
+        "participation_ratio": 1.5590216853563368,
+        "top_10_variance": 0.9354642424007085,
+        "eigenvalue_entropy": 0.17013611767458098
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.18697887501910673,
+        "j_coupling": 0.967091953754425,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 0.9,
+      "effective_dimensionality": {
+        "participation_ratio": 22.461633746259874,
+        "top_10_variance": 0.5234891498329026,
+        "eigenvalue_entropy": 0.5760154447220157
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 0.5763145151858717,
+        "j_coupling": 0.7768136155605316,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    },
+    {
+      "alpha": 1.0,
+      "effective_dimensionality": {
+        "participation_ratio": 17.255849633029808,
+        "top_10_variance": 0.5511086147544896,
+        "eigenvalue_entropy": 0.5550151426998394
+      },
+      "alignment": {
+        "held_out_aligned_similarity": 1.0,
+        "j_coupling": 0.9660865437984466,
+        "n_anchors": 65,
+        "n_held_out": 50
+      }
+    }
+  ],
+  "analysis": {
+    "phase_transition": {
+      "max_jump": 0.42368548481412827,
+      "jump_between": [
+        0.9,
+        1.0
+      ],
+      "detected": true
+    },
+    "df_linearity": 0.7748598574823726,
+    "j_gen_correlation": -0.5357142857142858
+  }
+}
