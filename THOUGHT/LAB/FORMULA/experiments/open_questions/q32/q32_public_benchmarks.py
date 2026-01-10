@@ -116,6 +116,50 @@ def se(x: Sequence[float]) -> float:
 def kernel_gaussian(z: float) -> float:
     return float(math.exp(-0.5 * z * z))
 
+def _mutual_information_continuous(x: Sequence[float], y: Sequence[float], *, n_bins: int = 8) -> float:
+    """
+    Phi-style proxy: mutual information I(X;Y) for continuous values via histogram binning.
+
+    This is NOT canonical IIT Phi; it is a cheap coupling/structure proxy that is stable and reproducible.
+    """
+    xx = np.asarray(list(x), dtype=float)
+    yy = np.asarray(list(y), dtype=float)
+    if xx.size == 0 or yy.size == 0:
+        return 0.0
+    n = int(min(xx.size, yy.size))
+    xx = xx[:n]
+    yy = yy[:n]
+
+    mask = np.isfinite(xx) & np.isfinite(yy)
+    xx = xx[mask]
+    yy = yy[mask]
+    if xx.size < 5:
+        return 0.0
+
+    n_bins_i = max(2, int(n_bins))
+    x_min = float(np.min(xx))
+    x_max = float(np.max(xx))
+    y_min = float(np.min(yy))
+    y_max = float(np.max(yy))
+    if x_min == x_max:
+        x_min -= 1.0
+        x_max += 1.0
+    if y_min == y_max:
+        y_min -= 1.0
+        y_max += 1.0
+
+    x_edges = np.linspace(x_min - EPS, x_max + EPS, n_bins_i + 1)
+    y_edges = np.linspace(y_min - EPS, y_max + EPS, n_bins_i + 1)
+    joint, _, _ = np.histogram2d(xx, yy, bins=(x_edges, y_edges))
+    pxy = joint / float(np.sum(joint) + EPS)
+    px = np.sum(pxy, axis=1, keepdims=True)
+    py = np.sum(pxy, axis=0, keepdims=True)
+
+    with np.errstate(divide="ignore", invalid="ignore"):
+        ratio = pxy / (px @ py + EPS)
+        mi = float(np.nansum(pxy * np.log2(ratio + EPS)))
+    return float(max(0.0, mi))
+
 
 def R_grounded(observations: Sequence[float], check: Sequence[float]) -> float:
     """
@@ -422,6 +466,10 @@ def run_scifact_benchmark(
     M_correct: List[float] = []
     M_wrong: List[float] = []
     neighbor_sims: List[float] = []
+    mu_hat_list: List[float] = []
+    mu_check_list: List[float] = []
+    mu_hat_list: List[float] = []
+    mu_check_list: List[float] = []
 
     # For each pair, build observation sets as support scores from sentences.
     # Build observation/check sets with enough samples to avoid degenerate SE=EPS.
@@ -548,6 +596,8 @@ def run_scifact_benchmark(
         check_correct_scores = sentence_support_scores([ex.claim] * len(check_correct_sents), check_correct_sents).tolist()
         check_wrong_scores = sentence_support_scores([ex.claim] * len(wrong_sents), wrong_sents).tolist()
 
+        mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
+        mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
         M_correct.append(M_from_R(R_grounded(obs_scores, check_correct_scores)))
         M_wrong.append(M_from_R(R_grounded(obs_scores, check_wrong_scores)))
 
@@ -577,6 +627,8 @@ def run_scifact_benchmark(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
+    phi = _mutual_information_continuous(mu_hat_list, mu_check_list, n_bins=8)
+    print(f"  [Phi_proxy] I(mu_hat; mu_check) = {phi:.3f} bits")
 
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
     gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
@@ -586,7 +638,7 @@ def run_scifact_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: SciFact benchmark gates did not pass")
 
-    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin}
+    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin, "phi_proxy_bits": float(phi)}
     if wrong_checks == "neighbor" and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
@@ -914,6 +966,8 @@ def run_climate_fever_intervention_benchmark(
         check_correct_scores = sentence_support_scores([claim] * len(check_correct_texts), check_correct_texts).tolist()
         check_wrong_scores = sentence_support_scores([claim] * len(wrong_check_texts), wrong_check_texts).tolist()
 
+        mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
+        mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
         M_correct.append(M_from_R(R_grounded(obs_scores, check_correct_scores)))
         M_wrong.append(M_from_R(R_grounded(obs_scores, check_wrong_scores)))
 
@@ -940,6 +994,8 @@ def run_climate_fever_intervention_benchmark(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
+    phi = _mutual_information_continuous(mu_hat_list, mu_check_list, n_bins=8)
+    print(f"  [Phi_proxy] I(mu_hat; mu_check) = {phi:.3f} bits")
 
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
     gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
@@ -949,7 +1005,7 @@ def run_climate_fever_intervention_benchmark(
         if strict and not fast:
             raise AssertionError("FAIL: Climate-FEVER intervention benchmark gates did not pass")
 
-    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin}
+    details: Dict[str, float] = {"pair_wins": pair_wins, "z": z, "mean_margin": margin, "phi_proxy_bits": float(phi)}
     if wrong_checks == "neighbor" and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
@@ -1038,6 +1094,12 @@ def parse_args() -> argparse.Namespace:
         type=int,
         default=10,
         help="(stress) Number of trials (default: 10).",
+    )
+    p.add_argument(
+        "--stress_min_pass_rate",
+        type=float,
+        default=None,
+        help="(stress) If set, exit non-zero unless pass_rate >= this threshold.",
     )
     p.add_argument(
         "--stress_out",
@@ -1262,6 +1324,7 @@ def run_climate_fever_streaming(
     M_wrong_end: List[float] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
+    phi_coupling: List[float] = []
 
     use_n = min((16 if fast else 120), len(samples))
     for claim, support_texts, wrong_check_texts in samples[:use_n]:
@@ -1281,12 +1344,16 @@ def run_climate_fever_streaming(
         # Correct check is the hold-out supports not yet observed at time t.
         M_series_correct: List[float] = []
         M_series_wrong: List[float] = []
+        mu_hat_series: List[float] = []
+        mu_check_series: List[float] = []
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 2:
                 break
             M_series_correct.append(M_at(t, check_correct))
             M_series_wrong.append(M_at(t, wrong_scores))
+            mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
+            mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
 
         if len(M_series_correct) < 1:
             continue
@@ -1295,6 +1362,7 @@ def run_climate_fever_streaming(
         M_wrong_end.append(M_series_wrong[-1])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
+        phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable streaming series ({len(M_correct_end)})")
@@ -1325,6 +1393,8 @@ def run_climate_fever_streaming(
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
     if wrong_checks == "neighbor" and neighbor_sims:
         print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(np.mean(np.asarray(neighbor_sims, dtype=float))):.3f}")
+    if phi_coupling:
+        print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
 
     # Strict threshold uses ~p<0.01 (z≈2.576) for "field effect survives intervention" significance.
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
@@ -1345,6 +1415,7 @@ def run_climate_fever_streaming(
             "mean_dM_correct": float(dM_correct_a.mean()),
             "mean_dM_wrong": float(dM_wrong_a.mean()),
             "control_wins": float(control_wins),
+            "phi_proxy_bits": float(np.mean(np.asarray(phi_coupling, dtype=float))) if phi_coupling else 0.0,
         },
     )
 
@@ -1584,6 +1655,7 @@ def run_scifact_streaming(
     dM_wrong: List[float] = []
 
     use_n = min((16 if fast else 120), len(samples))
+    phi_coupling: List[float] = []
     for claim_text, support_scores, wrong_scores in samples[:use_n]:
 
         # Keep at least 4 check sentences at the end to reduce tail-noise.
@@ -1596,12 +1668,16 @@ def run_scifact_streaming(
 
         M_series_correct: List[float] = []
         M_series_wrong: List[float] = []
+        mu_hat_series: List[float] = []
+        mu_check_series: List[float] = []
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 4:
                 break
             M_series_correct.append(M_at(t, check_correct))
             M_series_wrong.append(M_at(t, wrong_scores))
+            mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
+            mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
 
         if len(M_series_correct) < 1:
             continue
@@ -1610,6 +1686,7 @@ def run_scifact_streaming(
         M_wrong_end.append(M_series_wrong[-1])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
+        phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable SciFact streaming series ({len(M_correct_end)})")
@@ -1635,6 +1712,8 @@ def run_scifact_streaming(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
+    if phi_coupling:
+        print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
 
     print("\n[Q32:P4] Streaming deltas")
     print(f"  mean dM_correct = {dM_correct_a.mean():.3f}")
@@ -1656,6 +1735,8 @@ def run_scifact_streaming(
         "mean_dM_correct": float(dM_correct_a.mean()),
         "mean_dM_wrong": float(dM_wrong_a.mean()),
     }
+    if phi_coupling:
+        details["phi_proxy_bits"] = float(np.mean(np.asarray(phi_coupling, dtype=float)))
     if wrong_checks == "neighbor" and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
@@ -1749,6 +1830,11 @@ def main() -> int:
             with open(out_path, "w", encoding="utf-8") as f:
                 json.dump(payload, f, indent=2, sort_keys=True)
             print(f"[Q32:STRESS] Wrote {out_path}")
+
+        if args.stress_min_pass_rate is not None:
+            min_pr = float(args.stress_min_pass_rate)
+            if float(pass_rate) < min_pr:
+                raise SystemExit(f"stress failed: pass_rate={pass_rate:.3f} < min_pass_rate={min_pr:.3f}")
 
     elif args.mode == "bench":
         if args.dataset in ("scifact", "all"):
