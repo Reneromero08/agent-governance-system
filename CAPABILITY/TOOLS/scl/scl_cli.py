@@ -92,6 +92,30 @@ def emit_receipt(receipt: SCLReceipt, output_path: Optional[Path] = None) -> dic
 
 _validator_module = None
 _codebook_module = None
+_token_receipt_module = None
+
+
+def _get_token_receipt():
+    """Lazy import TokenReceipt to avoid circular imports."""
+    global _token_receipt_module
+    if _token_receipt_module is None:
+        try:
+            from CAPABILITY.PRIMITIVES.token_receipt import (
+                TokenReceipt,
+                TokenizerInfo,
+                get_default_tokenizer,
+                count_tokens,
+            )
+            _token_receipt_module = {
+                'TokenReceipt': TokenReceipt,
+                'TokenizerInfo': TokenizerInfo,
+                'get_default_tokenizer': get_default_tokenizer,
+                'count_tokens': count_tokens,
+                'available': True,
+            }
+        except ImportError:
+            _token_receipt_module = {'available': False}
+    return _token_receipt_module
 
 
 def _get_validator():
@@ -137,18 +161,20 @@ def _get_codebook():
 # DECODE COMMAND
 # ═══════════════════════════════════════════════════════════════════════════════
 
-def decode_program(program: str) -> dict:
+def decode_program(program: str, emit_token_receipt: bool = True) -> dict:
     """
     Decode SCL program to JobSpec JSON.
 
     Args:
         program: SCL program string (e.g., "C3:build", "法.驗")
+        emit_token_receipt: Whether to emit TokenReceipt (default True)
 
     Returns:
-        Dict with decoded JobSpec or error
+        Dict with decoded JobSpec, optional token_receipt, or error
     """
     validator = _get_validator()
     codebook = _get_codebook()
+    tr_module = _get_token_receipt()
 
     # Step 1: Validate syntax and symbols
     result = validator['validate_scl'](program, level="L3")
@@ -176,13 +202,44 @@ def decode_program(program: str) -> dict:
     # Step 3: Build JobSpec from parsed program
     jobspec = _build_jobspec_from_entry(program, entry, parsed)
 
-    return {
+    # Step 4: Emit TokenReceipt for token accountability
+    token_receipt = None
+    if emit_token_receipt and tr_module.get('available'):
+        tokenizer = tr_module['get_default_tokenizer']()
+        count_tokens = tr_module['count_tokens']
+        TokenReceipt = tr_module['TokenReceipt']
+
+        # Calculate baseline (expanded content tokens)
+        expanded_content = entry.get('full', entry.get('summary', ''))
+        baseline_tokens = count_tokens(expanded_content, tokenizer)
+
+        # SCL program tokens (input)
+        scl_tokens = count_tokens(program, tokenizer)
+
+        token_receipt = TokenReceipt(
+            operation="scl_decode",
+            tokens_out=scl_tokens,  # SCL is the compressed output
+            tokens_in=scl_tokens,
+            tokenizer=tokenizer,
+            baseline_equiv=baseline_tokens,
+            baseline_method="expanded_output",
+        )
+
+        # Add to jobspec metadata
+        jobspec["token_receipt"] = token_receipt.to_dict()
+
+    response = {
         "ok": True,
         "jobspec": jobspec,
         "parsed": parsed,
         "entry": entry,
         "warnings": result.warnings,
     }
+
+    if token_receipt:
+        response["token_receipt"] = token_receipt.to_dict()
+
+    return response
 
 
 def _build_jobspec_from_entry(program: str, entry: dict, parsed: dict) -> dict:

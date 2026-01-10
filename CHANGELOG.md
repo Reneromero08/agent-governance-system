@@ -1,8 +1,38 @@
-<!-- CONTENT_HASH: 3.7.38_PENDING -->
+<!-- CONTENT_HASH: 3.7.39_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.39] - 2026-01-10
+
+### Added
+- **Phase 5.2.7: Token Accountability** — Complete token tracking and enforcement system
+  - **5.2.7.1 Schema**: `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
+    - Required: `schema_version`, `operation`, `tokens_out`, `tokenizer`
+    - Hardening: `receipt_hash`, `parent_receipt_hash`, `session_id`, `determinism_proof`, `query_metadata`
+  - **5.2.7.2 Primitive**: `CAPABILITY/PRIMITIVES/token_receipt.py`
+    - `TokenReceipt` dataclass with auto-computed `tokens_saved`, `savings_pct`, `receipt_hash`
+    - Display formats: `compact()`, `verbose()`, `to_json()`
+    - Helper functions: `get_default_tokenizer()`, `count_tokens()`, `hash_query()`
+  - **5.2.7.3 Semantic Search**: `NAVIGATION/CORTEX/semantic/semantic_search.py`
+    - `SearchResponse` wraps results + TokenReceipt
+    - Automatic receipt emission on `search()` and `search_batch()`
+    - Corpus baseline calculation via `_get_corpus_tokens()`
+  - **5.2.7.4 JobSpec**: `LAW/SCHEMAS/jobspec.schema.json`
+    - Added optional `token_receipt` field
+    - SCL decoder (`scl_cli.py`) emits TokenReceipt on decode
+  - **5.2.7.5 Session Aggregator**: `CAPABILITY/PRIMITIVES/token_session.py`
+    - `TokenSession` tracks receipts per session
+    - `SessionTokenSummary` with cumulative statistics
+    - Global session management: `get_current_session()`, `log_receipt()`
+  - **5.2.7.6 Firewall**: `CAPABILITY/PRIMITIVES/token_firewall.py`
+    - REJECT-001: Outputs >1000 tokens without receipt
+    - WARN-001: semantic_query with <50% savings
+    - Automatic receipt logging to session ledger
+  - **5.2.7.8 Tests**: `test_phase_5_2_7_token_accountability.py` — 21 tests passing
 
 ---
 

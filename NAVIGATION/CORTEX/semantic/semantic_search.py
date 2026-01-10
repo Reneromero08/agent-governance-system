@@ -11,8 +11,10 @@ Features:
 - Batch processing
 - Integration with system1.db
 - Fallback to FTS5 when no vectors available
+- TokenReceipt emission for token accountability (Phase 5.2.7)
 """
 
+import hashlib
 import sqlite3
 import numpy as np
 from pathlib import Path
@@ -20,6 +22,20 @@ from typing import List, Dict, Optional, Tuple
 from dataclasses import dataclass
 
 from .embeddings import EmbeddingEngine
+
+# TokenReceipt integration (Phase 5.2.7)
+try:
+    from CAPABILITY.PRIMITIVES.token_receipt import (
+        TokenReceipt,
+        TokenizerInfo,
+        QueryMetadata,
+        get_default_tokenizer,
+        count_tokens,
+        hash_query,
+    )
+    TOKEN_RECEIPT_AVAILABLE = True
+except ImportError:
+    TOKEN_RECEIPT_AVAILABLE = False
 
 
 @dataclass
@@ -31,6 +47,23 @@ class SearchResult:
     file_path: Optional[str] = None
     section_name: Optional[str] = None
     line_range: Optional[Tuple[int, int]] = None
+
+
+@dataclass
+class SearchResponse:
+    """Search response with results and token receipt."""
+    results: List[SearchResult]
+    receipt: Optional['TokenReceipt'] = None
+
+    def __iter__(self):
+        """Allow iteration over results for backwards compatibility."""
+        return iter(self.results)
+
+    def __len__(self):
+        return len(self.results)
+
+    def __getitem__(self, index):
+        return self.results[index]
 
 
 class SemanticSearch:
@@ -56,21 +89,64 @@ class SemanticSearch:
         self.conn = sqlite3.connect(str(self.db_path))
         self.conn.row_factory = sqlite3.Row
 
+        # TokenReceipt support
+        self._tokenizer = get_default_tokenizer() if TOKEN_RECEIPT_AVAILABLE else None
+        self._corpus_token_cache: Optional[int] = None
+
+    def _get_corpus_tokens(self) -> int:
+        """Get total tokens in corpus for baseline calculation.
+
+        Returns:
+            Total token count across all indexed content
+        """
+        if self._corpus_token_cache is not None:
+            return self._corpus_token_cache
+
+        if not TOKEN_RECEIPT_AVAILABLE:
+            return 0
+
+        cursor = self.conn.execute("""
+            SELECT content FROM chunks_fts
+        """)
+
+        total_tokens = 0
+        for row in cursor:
+            if row['content']:
+                total_tokens += count_tokens(row['content'], self._tokenizer)
+
+        self._corpus_token_cache = total_tokens
+        return total_tokens
+
+    def _get_corpus_anchor(self) -> Optional[str]:
+        """Get SHA-256 hash of corpus state for reproducibility."""
+        cursor = self.conn.execute("""
+            SELECT COUNT(*) as count FROM section_vectors
+        """)
+        count = cursor.fetchone()['count']
+
+        # Simple anchor: hash of vector count + db path
+        anchor_data = f"{count}:{self.db_path}"
+        return hashlib.sha256(anchor_data.encode()).hexdigest()
+
     def search(
         self,
         query: str,
         top_k: int = 10,
-        min_similarity: float = 0.0
-    ) -> List[SearchResult]:
+        min_similarity: float = 0.0,
+        emit_receipt: bool = True,
+        session_id: Optional[str] = None,
+    ) -> SearchResponse:
         """Search for semantically similar content.
 
         Args:
             query: Query text
             top_k: Number of results to return
             min_similarity: Minimum similarity threshold (0.0-1.0)
+            emit_receipt: Whether to emit TokenReceipt (default True)
+            session_id: Optional session ID for receipt aggregation
 
         Returns:
-            List of SearchResult objects sorted by similarity (descending)
+            SearchResponse with results and optional TokenReceipt
         """
         # Generate query embedding
         query_embedding = self.embedding_engine.embed(query)
@@ -85,7 +161,9 @@ class SemanticSearch:
         """)
 
         results = []
+        total_scanned = 0
         for row in cursor:
+            total_scanned += 1
             # Deserialize embedding
             try:
                 embedding = self.embedding_engine.deserialize(row['embedding'])
@@ -110,15 +188,46 @@ class SemanticSearch:
 
         # Sort by similarity (descending) and return top_k
         results.sort(key=lambda x: x.similarity, reverse=True)
-        return results[:top_k]
+        final_results = results[:top_k]
+
+        # Emit TokenReceipt
+        receipt = None
+        if emit_receipt and TOKEN_RECEIPT_AVAILABLE:
+            # Count output tokens (sum of result content)
+            output_tokens = sum(
+                count_tokens(r.content, self._tokenizer)
+                for r in final_results
+            )
+
+            receipt = TokenReceipt(
+                operation="semantic_query",
+                tokens_out=output_tokens,
+                tokenizer=self._tokenizer,
+                tokens_in=count_tokens(query, self._tokenizer),
+                baseline_equiv=self._get_corpus_tokens(),
+                baseline_method="sum_corpus_tokens",
+                corpus_anchor=self._get_corpus_anchor(),
+                session_id=session_id,
+                query_metadata=QueryMetadata(
+                    query_hash=hash_query(query),
+                    results_count=len(final_results),
+                    threshold_used=min_similarity,
+                    top_k=top_k,
+                    index_sections_count=total_scanned,
+                ),
+            )
+
+        return SearchResponse(results=final_results, receipt=receipt)
 
     def search_batch(
         self,
         query: str,
         top_k: int = 10,
         min_similarity: float = 0.0,
-        batch_size: int = 1000
-    ) -> List[SearchResult]:
+        batch_size: int = 1000,
+        emit_receipt: bool = True,
+        session_id: Optional[str] = None,
+    ) -> SearchResponse:
         """More efficient batch search for large databases.
 
         Args:
@@ -126,9 +235,11 @@ class SemanticSearch:
             top_k: Number of results to return
             min_similarity: Minimum similarity threshold
             batch_size: Number of embeddings to process at once
+            emit_receipt: Whether to emit TokenReceipt (default True)
+            session_id: Optional session ID for receipt aggregation
 
         Returns:
-            List of SearchResult objects sorted by similarity
+            SearchResponse with results and optional TokenReceipt
         """
         # Generate query embedding
         query_embedding = self.embedding_engine.embed(query)
@@ -140,7 +251,7 @@ class SemanticSearch:
         total_count = cursor.fetchone()['count']
 
         if total_count == 0:
-            return []
+            return SearchResponse(results=[], receipt=None)
 
         all_results = []
         offset = 0
@@ -202,7 +313,35 @@ class SemanticSearch:
 
         # Sort and return top_k
         all_results.sort(key=lambda x: x.similarity, reverse=True)
-        return all_results[:top_k]
+        final_results = all_results[:top_k]
+
+        # Emit TokenReceipt
+        receipt = None
+        if emit_receipt and TOKEN_RECEIPT_AVAILABLE:
+            output_tokens = sum(
+                count_tokens(r.content, self._tokenizer)
+                for r in final_results
+            )
+
+            receipt = TokenReceipt(
+                operation="semantic_query",
+                tokens_out=output_tokens,
+                tokenizer=self._tokenizer,
+                tokens_in=count_tokens(query, self._tokenizer),
+                baseline_equiv=self._get_corpus_tokens(),
+                baseline_method="sum_corpus_tokens",
+                corpus_anchor=self._get_corpus_anchor(),
+                session_id=session_id,
+                query_metadata=QueryMetadata(
+                    query_hash=hash_query(query),
+                    results_count=len(final_results),
+                    threshold_used=min_similarity,
+                    top_k=top_k,
+                    index_sections_count=total_count,
+                ),
+            )
+
+        return SearchResponse(results=final_results, receipt=receipt)
 
     def find_similar_to_hash(
         self,
@@ -344,20 +483,22 @@ class SemanticSearch:
 def search_cortex(
     query: str,
     db_path: Path = Path("NAVIGATION/CORTEX/db/system1.db"),
-    top_k: int = 10
-) -> List[SearchResult]:
+    top_k: int = 10,
+    emit_receipt: bool = True,
+) -> SearchResponse:
     """Convenience function for semantic search.
 
     Args:
         query: Query text
         db_path: Path to database
         top_k: Number of results
+        emit_receipt: Whether to emit TokenReceipt
 
     Returns:
-        List of SearchResult objects
+        SearchResponse with results and optional receipt
     """
     with SemanticSearch(db_path) as searcher:
-        return searcher.search(query, top_k=top_k)
+        return searcher.search(query, top_k=top_k, emit_receipt=emit_receipt)
 
 
 if __name__ == "__main__":

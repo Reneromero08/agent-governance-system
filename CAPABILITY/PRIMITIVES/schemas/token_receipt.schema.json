@@ -1,0 +1,169 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/token_receipt.schema.json",
+  "title": "TokenReceipt",
+  "description": "Mandatory receipt for token-consuming operations. Every operation that consumes or saves tokens MUST emit a TokenReceipt.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "operation", "tokens_out", "tokenizer"],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "TokenReceipt schema version for evolution tracking"
+    },
+    "operation": {
+      "type": "string",
+      "enum": [
+        "semantic_query",
+        "scl_decode",
+        "scl_encode",
+        "cas_get",
+        "cas_put",
+        "skill_invoke",
+        "session_load",
+        "expand_hash"
+      ],
+      "description": "Operation type that generated this receipt"
+    },
+    "tokens_in": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Input tokens (query, command, etc.)"
+    },
+    "tokens_out": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Output tokens (result, expansion, etc.)"
+    },
+    "baseline_equiv": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Tokens that would be consumed by paste-scan baseline"
+    },
+    "tokens_saved": {
+      "type": "integer",
+      "description": "baseline_equiv - tokens_out (can be negative if expansion > baseline)"
+    },
+    "savings_pct": {
+      "type": "number",
+      "minimum": -100,
+      "maximum": 100,
+      "description": "Percentage savings: (tokens_saved / baseline_equiv) * 100"
+    },
+    "tokenizer": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["library", "encoding"],
+      "properties": {
+        "library": {
+          "type": "string",
+          "enum": ["tiktoken", "word-count-proxy"],
+          "description": "Tokenizer library used"
+        },
+        "encoding": {
+          "type": "string",
+          "enum": ["o200k_base", "cl100k_base"],
+          "description": "Encoding used (o200k_base for GPT-4o/o1, cl100k_base for GPT-4)"
+        },
+        "version": {
+          "type": ["string", "null"],
+          "description": "Library version (e.g., '0.12.0')"
+        },
+        "fallback_used": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether fallback encoding was used"
+        }
+      }
+    },
+    "timestamp_utc": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp in UTC"
+    },
+    "corpus_anchor": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of corpus/index state for reproducibility"
+    },
+    "operation_id": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{16,64}$",
+      "description": "Unique identifier for this operation (truncated SHA-256)"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Session ID for firewall aggregation and ledger tracking"
+    },
+    "parent_receipt_hash": {
+      "type": ["string", "null"],
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of parent receipt for chaining (null for first receipt)"
+    },
+    "receipt_hash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 of this receipt (excluding receipt_hash and timestamp_utc for determinism)"
+    },
+    "baseline_method": {
+      "type": "string",
+      "enum": ["sum_corpus_tokens", "paste_scan", "full_context", "expanded_output", "manual"],
+      "description": "Method used to calculate baseline_equiv"
+    },
+    "determinism_proof": {
+      "type": "object",
+      "additionalProperties": false,
+      "description": "Optional reproducibility proof for auditing",
+      "properties": {
+        "methodology_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of the script/method used"
+        },
+        "git_head": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{40}$",
+          "description": "Git commit hash at measurement time"
+        },
+        "git_clean": {
+          "type": "boolean",
+          "description": "Whether working tree was clean"
+        }
+      }
+    },
+    "query_metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Operation-specific metadata",
+      "properties": {
+        "query_hash": {
+          "type": "string",
+          "pattern": "^[a-f0-9]{64}$",
+          "description": "SHA-256 of query text (for privacy)"
+        },
+        "results_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Number of results returned"
+        },
+        "threshold_used": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Similarity threshold used"
+        },
+        "top_k": {
+          "type": "integer",
+          "minimum": 1,
+          "description": "Top-K parameter used"
+        },
+        "index_sections_count": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Total sections in index at query time"
+        }
+      }
+    }
+  }
+}
