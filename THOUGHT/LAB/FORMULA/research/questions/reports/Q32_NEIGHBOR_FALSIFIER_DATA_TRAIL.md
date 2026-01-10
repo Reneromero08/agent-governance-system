@@ -212,3 +212,55 @@ Inflation negative control:
 - `p2_scifact_sweep_k_neighbor_fast_20260109_220958.txt` = `7494E8B4AA632C482F65ADC28E73D5D1C1C6D8055449112145D478EA5344CC23`
 - `empirical_receipt_p2_scifact_sweep_k_neighbor_fast_20260109_220958.json` = `81AE12B27EF614C8BA93D9A9C3030744C5BA5E269E5884AAE3E555F3702D150C`
 - `sweep_k_p2_scifact_neighbor_fast_20260109_220958.json` = `9B4CA279CC9989678818735C87AD6768BA02EAEEBD171F4F88F11B7983B28EC0`
+
+---
+
+## 2026-01-09 Phase 3 third domain (SNLI) + transfer (no retuning)
+
+Purpose:
+- Break the 2-dataset trap by adding a third public domain and repeating transfer without retuning.
+
+### SNLI bench — neighbor PASS
+
+- `p3_snli_bench_neighbor_full_fast_20260109_224219.txt` = `477CC5BC9F97801811E0DF342CE710F2E816EE2073754D6B65121DA9D7A087E4`
+- `empirical_receipt_p3_snli_bench_neighbor_full_fast_20260109_224219.json` = `DB0118056C96DF8E63DC6C746BA19FCC6ACA1AD88B84260BCB874EF7BB13BFBC`
+
+### SNLI bench — inflation FAIL (agreement inflation negative control)
+
+- `p3_snli_bench_inflation_fast_20260109_224311.txt` = `BA7D917ECC0C8DA11B7D21737827BD4AFB75890B66DF9B99E60F350B4B7B35A3`
+- `empirical_receipt_p3_snli_bench_inflation_fast_20260109_224311.json` = `326FFAD33BB9A8CD03E566CEF45573B2825C3867BA356DA3B7C189E6B6BEEE29`
+
+### SNLI streaming — neighbor PASS
+
+- `p3_snli_stream_neighbor_full_fast_20260109_224403.txt` = `5215D45B035A94E9C2DA0B3E4D0C2D658610B197853B3CDA985B2F20EEC00AEA`
+- `empirical_receipt_p3_snli_stream_neighbor_full_fast_20260109_224403.json` = `F9CDF94287E3F1BA603FB94815A829998D9C493F453A2AA66C24CFBF1203BEFD`
+
+### SNLI streaming — inflation FAIL (agreement inflation negative control)
+
+- `p3_snli_stream_inflation_fast_20260109_224456.txt` = `F65C0A97898D72ED79F77B66DBEF4424BC73DB4E69C355EAD1C8E41F089DF4B5`
+- `empirical_receipt_p3_snli_stream_inflation_fast_20260109_224456.json` = `BF157F3D55F10783F0028D84F0245ED6D5258957D917F3B9E654F3C696AAF992`
+
+### Transfer (calibrate once on SciFact → verify on SNLI, no retuning)
+
+- `p3_transfer_scifact_to_snli_neighbor_fast_20260109_224542.txt` = `F70C92CC0D9982B60AB5B1B41000C3D9947D19F9FCFA817DE2F779273758C1D1`
+- `empirical_receipt_p3_transfer_scifact_to_snli_neighbor_fast_20260109_224542.json` = `E741434742521553096342F2CE3B8C6C4FB38585A23B9C432E22C37E9B9AAACE`
+- `transfer_calibration_scifact_to_snli_20260109_224542.json` = `2305E8BC7C354C739FEE7BA481E30D08F04116DB84B1E9DC234B0C18740AB4D2`
+
+### Transfer (full / crossencoder) — SciFact ↔ SNLI (no retuning)
+
+SciFact → SNLI:
+- `p3_transfer_scifact_to_snli_neighbor_full_20260109_225243.txt` = `3C5F4744805B8D0AD6178707C1480A6671C110431EDE4F7A89C31575FA83C0D9`
+- `empirical_receipt_p3_transfer_scifact_to_snli_neighbor_full_20260109_225243.json` = `AC35C0AED467FA0C40F4C5D9FF2355FC98EE7C583741D2F5082CBEEBC74E9B59`
+- `transfer_calibration_scifact_to_snli_full_20260109_225243.json` = `4AF9734B3296478CD41E8B6E44B44DE150F478FD2A133103D12BE06BCAAB8446`
+
+SNLI → SciFact:
+- `p3_transfer_snli_to_scifact_neighbor_full_20260109_230132.txt` = `6B644879DA4536795AB60103DC2352A60FDCAC29895292FBD13327B828CB92AA`
+- `empirical_receipt_p3_transfer_snli_to_scifact_neighbor_full_20260109_230132.json` = `F8FE62793A21D617854059F12DA915B9BC62E0C506FAD9B25A94918F5BC6BB36`
+- `transfer_calibration_snli_to_scifact_full_20260109_230132.json` = `7C6B3DF3A832A5535985678151A0C7995C86810BBBBD54062C621770C65BB195`
+
+### Stress (full / crossencoder) — SciFact streaming variability (expectedly harsh)
+
+This run FAILs the pass-rate gate (this is evidence we are not “settled” yet in full mode):
+- `p3_stress_scifact_neighbor_full_20260109_232034.txt` = `579D19455BCA161241FA8F0161539E2576D228B315B8B621CAC82F9D6E3811DD`
+- `empirical_receipt_p3_stress_scifact_neighbor_full_20260109_232034.json` = `BE4F4370DD1CE442064085DB66FAFE8A42C6773186C42E86FC562CB08BAFA8E4`
+- `stress_p3_scifact_neighbor_full_20260109_232034.json` = `9F0150AE29C13A9A2C91C2C904CEED1F071AAEA4D9CDF58B902BE074A1B63042`

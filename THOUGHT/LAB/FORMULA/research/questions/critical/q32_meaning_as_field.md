@@ -115,7 +115,7 @@ Goal: make “meaning-as-field on the semiosphere” survive increasingly hostil
 ### Phase 3 — Other half (settlement)
 
 #### 3.1 Third domain (break the 2-dataset trap)
-- [ ] Add at least one third public benchmark domain and repeat transfer/matrix without retuning.
+- [x] Add a third public benchmark domain (SNLI) and repeat transfer without retuning.
 
 #### 3.2 Full-scale runs (receipted)
 - [ ] Full (non-fast, crossencoder) matrix across multiple seeds.

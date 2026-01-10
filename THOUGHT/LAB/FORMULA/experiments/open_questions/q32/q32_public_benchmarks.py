@@ -219,6 +219,13 @@ class ScifactExample:
 
 
 @dataclass(frozen=True)
+class SnliExample:
+    premise: str
+    hypothesis: str
+    label: str  # ENTAILMENT / CONTRADICTION
+
+
+@dataclass(frozen=True)
 class BenchmarkResult:
     name: str
     passed: bool
@@ -309,6 +316,62 @@ def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]
         raise RuntimeError(f"SciFact load produced too few examples ({len(examples)})")
     return examples
 
+
+def load_snli(max_examples: int = 50000, seed: int = 123) -> List[SnliExample]:
+    """
+    Loads SNLI via HF datasets (public, standard format).
+    We keep only ENTAILMENT/CONTRADICTION labels as truth anchors and drop NEUTRAL/unknown.
+    """
+    from datasets import load_dataset  # type: ignore
+
+    ds = load_dataset("snli", split="train")
+    rng = np.random.default_rng(seed)
+
+    idxs = np.arange(len(ds))
+    rng.shuffle(idxs)
+
+    out: List[SnliExample] = []
+    for i in idxs:
+        row = ds[int(i)]
+        premise = str(row.get("premise", "")).strip()
+        hyp = str(row.get("hypothesis", "")).strip()
+        if not premise or not hyp:
+            continue
+        lab = row.get("label")
+        if lab is None:
+            continue
+        try:
+            lab_i = int(lab)
+        except Exception:
+            continue
+        if lab_i == 0:
+            label = "ENTAILMENT"
+        elif lab_i == 2:
+            label = "CONTRADICTION"
+        else:
+            continue
+        out.append(SnliExample(premise=premise, hypothesis=hyp, label=label))
+        if len(out) >= int(max_examples):
+            break
+    if len(out) < 200:
+        raise RuntimeError(f"SNLI load produced too few usable examples ({len(out)})")
+    return out
+
+
+def _word_chunks(text: str, *, window: int = 3, stride: int = 1, max_chunks: int = 12) -> List[str]:
+    """
+    Deterministic chunking for NLI-style single-sentence evidence into multiple small "evidence pieces",
+    so Q32's obs/check intervention can be applied without inventing extra data.
+    """
+    toks = [t for t in str(text).strip().split() if t]
+    if len(toks) < window:
+        return []
+    chunks: List[str] = []
+    for start in range(0, len(toks) - window + 1, stride):
+        chunks.append(" ".join(toks[start : start + window]))
+        if len(chunks) >= int(max_chunks):
+            break
+    return chunks
 
 def embed_texts(texts: List[str], model_name: str = "sentence-transformers/all-MiniLM-L6-v2") -> np.ndarray:
     from sentence_transformers import SentenceTransformer  # type: ignore
@@ -756,6 +819,482 @@ def run_scifact_benchmark(
     return BenchmarkResult(name="SciFact", passed=passed, details=details)
 
 
+def run_snli_benchmark(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
+) -> BenchmarkResult:
+    """
+    Phase 3: third public domain.
+
+    Use SNLI as a truth anchor with NLI labels:
+      - Correct checks come from ENTAILMENT premises for the same hypothesis (same sample, chunked).
+      - Wrong checks come from CONTRADICTION premises (or neighbor/inflation variants).
+    """
+    print("\n[Q32:P3] Loading SNLI (NLI truth anchor)...")
+    examples = load_snli(max_examples=30000, seed=seed)
+    rng = np.random.default_rng(seed)
+    rng.shuffle(examples)
+    examples = examples[: (1200 if fast else 12000)]
+
+    ent = [e for e in examples if e.label == "ENTAILMENT"]
+    contra = [e for e in examples if e.label == "CONTRADICTION"]
+    if len(ent) < (80 if fast else 600):
+        raise RuntimeError(f"Too few SNLI ENTAILMENT examples ({len(ent)})")
+    if len(contra) < (80 if fast else 600):
+        raise RuntimeError(f"Too few SNLI CONTRADICTION examples ({len(contra)})")
+
+    # Precompute embeddings for neighbor/inflation selection based on hypothesis text.
+    neighbor_sims: List[float] = []
+    emb_ent: Optional[np.ndarray] = None
+    emb_contra: Optional[np.ndarray] = None
+    ent_hyps: List[str] = []
+    contra_hyps: List[str] = []
+    if wrong_checks in ("neighbor", "inflation"):
+        ent_hyps = [e.hypothesis for e in ent[: (400 if fast else 2000)]]
+        contra_hyps = [e.hypothesis for e in contra[: (400 if fast else 2000)]]
+        emb_ent = embed_texts(ent_hyps)
+        emb_contra = embed_texts(contra_hyps)
+
+    M_correct: List[float] = []
+    M_wrong: List[float] = []
+    R_correct: List[float] = []
+    R_wrong: List[float] = []
+    obs_scores_by_sample: List[List[float]] = []
+    check_correct_scores_by_sample: List[List[float]] = []
+    mu_hat_list: List[float] = []
+    mu_check_list: List[float] = []
+
+    for i, ex in enumerate(ent):
+        chunks = _word_chunks(ex.premise, window=3, stride=1, max_chunks=12)
+        if len(chunks) < 6:
+            continue
+        obs_chunks = chunks[:2]
+        check_correct_chunks = chunks[2:8]
+        if len(check_correct_chunks) < 4:
+            continue
+
+        obs_scores = sentence_support_scores([ex.hypothesis] * len(obs_chunks), obs_chunks).tolist()
+        check_correct_scores = sentence_support_scores(
+            [ex.hypothesis] * len(check_correct_chunks), check_correct_chunks
+        ).tolist()
+
+        wrong_chunks: Optional[List[str]] = None
+        if wrong_checks == "dissimilar":
+            # Deterministic dissimilar: take a far contradiction hypothesis and use its premise chunks.
+            j = (i * 17 + 23) % max(1, len(contra))
+            c = contra[int(j)]
+            wrong_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=6)[:6]
+        elif wrong_checks == "neighbor":
+            if emb_contra is None or not contra_hyps:
+                raise RuntimeError("SNLI neighbor requires embeddings")
+            c_emb = embed_texts([ex.hypothesis])[0]
+            sims = emb_contra @ c_emb
+            order = np.argsort(-sims)
+            k = max(1, int(neighbor_k))
+            cand = [int(j) for j in order[:k]]
+            best_pos: Optional[int] = None
+            best_M = float("inf")
+            for pos, j in enumerate(cand):
+                c = contra[int(j)]
+                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=6)[:6]
+                if len(c_chunks) < 2:
+                    continue
+                cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+                M_wrong_candidate = M_from_R(R_grounded(obs_scores, [float(x) for x in cross]))
+                if float(M_wrong_candidate) < best_M:
+                    best_M = float(M_wrong_candidate)
+                    best_pos = int(pos)
+                    wrong_chunks = c_chunks
+            if best_pos is not None:
+                neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+        elif wrong_checks == "inflation":
+            if emb_ent is None or not ent_hyps:
+                raise RuntimeError("SNLI inflation requires embeddings")
+            c_emb = embed_texts([ex.hypothesis])[0]
+            sims = emb_ent @ c_emb
+            sims[int(np.argmax(sims))] = -float("inf")
+            order = np.argsort(-sims)
+            k = max(1, int(neighbor_k))
+            cand = [int(j) for j in order[:k]]
+            best_pos: Optional[int] = None
+            best_M = -float("inf")
+            for pos, j in enumerate(cand):
+                c = ent[int(j)]
+                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=6)[:6]
+                if len(c_chunks) < 2:
+                    continue
+                cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+                M_wrong_candidate = M_from_R(R_grounded(obs_scores, [float(x) for x in cross]))
+                if float(M_wrong_candidate) > best_M:
+                    best_M = float(M_wrong_candidate)
+                    best_pos = int(pos)
+                    wrong_chunks = c_chunks
+            if best_pos is not None:
+                neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+
+        if not wrong_chunks or len(wrong_chunks) < 2:
+            continue
+
+        check_wrong_scores = sentence_support_scores([ex.hypothesis] * len(wrong_chunks), wrong_chunks).tolist()
+
+        obs_scores_by_sample.append([float(x) for x in obs_scores])
+        check_correct_scores_by_sample.append([float(x) for x in check_correct_scores])
+
+        mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
+        mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
+        R_c = float(R_grounded(obs_scores, check_correct_scores))
+        R_w = float(R_grounded(obs_scores, check_wrong_scores))
+        R_correct.append(R_c)
+        R_wrong.append(R_w)
+        M_correct.append(M_from_R(R_c))
+        M_wrong.append(M_from_R(R_w))
+
+        if fast and len(M_correct) in (10, 25):
+            print(f"[Q32:P3] snli intervention samples={len(M_correct)}")
+        if len(M_correct) >= (40 if fast else 240):
+            break
+
+    if len(M_correct) < (20 if fast else 120):
+        raise RuntimeError(f"Too few SNLI intervention samples ({len(M_correct)})")
+
+    Mc = np.array(M_correct, dtype=float)
+    Mw = np.array(M_wrong, dtype=float)
+    perm = np.roll(np.arange(len(M_correct), dtype=int), 1)
+    Ms_list: List[float] = []
+    Rs_list: List[float] = []
+    for i in range(int(len(M_correct))):
+        check_swap = check_correct_scores_by_sample[int(perm[int(i)])]
+        R_s = float(R_grounded(obs_scores_by_sample[int(i)], check_swap))
+        Rs_list.append(float(R_s))
+        Ms_list.append(float(M_from_R(R_s)))
+    Ms = np.asarray(Ms_list, dtype=float) if Ms_list else np.asarray([], dtype=float)
+    Rs = np.asarray(Rs_list, dtype=float) if Rs_list else np.asarray([], dtype=float)
+    swap_wins = int(np.sum(Mc > Ms)) if Ms.size else 0
+    swap_pair_wins = float(swap_wins / max(1, int(Ms.size)))
+    swap_margin = float(np.mean(Mc - Ms)) if Ms.size else float("nan")
+
+    wins = int(np.sum(Mc > Mw))
+    n = int(len(Mc))
+    pair_wins = float(wins / max(1, n))
+    margin = float(np.mean(Mc - Mw))
+    z = _binom_z(wins, n)
+
+    print("\n[Q32:P3] SNLI check intervention (correct vs wrong check)")
+    print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
+    print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
+    print(f"  mean(M_correct) = {Mc.mean():.3f}")
+    print(f"  mean(M_wrong)   = {Mw.mean():.3f}")
+    print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if Ms.size:
+        print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
+        print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
+    phi = _mutual_information_continuous(mu_hat_list, mu_check_list, n_bins=8)
+    print(f"  [Phi_proxy] I(mu_hat; mu_check) = {phi:.3f} bits")
+
+    gate_z = float(min_z if min_z is not None else (1.8 if fast else 2.4))
+    gate_margin = float(min_margin if min_margin is not None else (0.25 if fast else 0.40))
+    passed = bool(z >= gate_z and margin >= gate_margin)
+    if not passed:
+        print("\n[Q32:P3] SNLI status: FAIL")
+        if strict and not fast:
+            raise AssertionError("FAIL: SNLI benchmark gates did not pass")
+
+    details: Dict[str, float] = {
+        "pair_wins": pair_wins,
+        "z": z,
+        "mean_margin": margin,
+        "mean_R_correct": float(np.mean(np.asarray(R_correct, dtype=float))) if R_correct else 0.0,
+        "mean_R_wrong": float(np.mean(np.asarray(R_wrong, dtype=float))) if R_wrong else 0.0,
+        "mean_logR_correct": float(Mc.mean()),
+        "mean_logR_wrong": float(Mw.mean()),
+        "mean_R_swap": float(np.mean(Rs)) if Rs.size else float("nan"),
+        "mean_logR_swap": float(np.mean(Ms)) if Ms.size else float("nan"),
+        "swap_pair_wins": float(swap_pair_wins),
+        "swap_mean_margin": float(swap_margin),
+        "gate_z": gate_z,
+        "gate_margin": gate_margin,
+        "phi_proxy_bits": float(phi),
+    }
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            details["mean_neighbor_sim"] = float(nn.mean())
+    return BenchmarkResult(name="SNLI", passed=passed, details=details)
+
+
+def run_snli_streaming(
+    *,
+    seed: int = 123,
+    fast: bool = False,
+    strict: bool = True,
+    min_z: Optional[float] = None,
+    min_margin: Optional[float] = None,
+    wrong_checks: str = "dissimilar",
+    neighbor_k: int = 10,
+) -> BenchmarkResult:
+    """
+    SNLI pseudo-stream: chunk a premise into many overlapping word windows to emulate evidence arriving over time.
+    """
+    print("\n[Q32:P3] SNLI streaming (chunked NLI evidence)")
+    examples = load_snli(max_examples=50000, seed=seed)
+    rng = np.random.default_rng(seed)
+    rng.shuffle(examples)
+    examples = examples[: (2000 if fast else 20000)]
+
+    ent = [e for e in examples if e.label == "ENTAILMENT"]
+    contra = [e for e in examples if e.label == "CONTRADICTION"]
+    if len(ent) < (200 if fast else 1000):
+        raise RuntimeError(f"Too few SNLI ENTAILMENT examples ({len(ent)})")
+    if len(contra) < (200 if fast else 1000):
+        raise RuntimeError(f"Too few SNLI CONTRADICTION examples ({len(contra)})")
+
+    neighbor_sims: List[float] = []
+    emb_ent: Optional[np.ndarray] = None
+    emb_contra: Optional[np.ndarray] = None
+    ent_hyps: List[str] = []
+    contra_hyps: List[str] = []
+    if wrong_checks in ("neighbor", "inflation"):
+        ent_hyps = [e.hypothesis for e in ent[: (600 if fast else 3000)]]
+        contra_hyps = [e.hypothesis for e in contra[: (600 if fast else 3000)]]
+        emb_ent = embed_texts(ent_hyps)
+        emb_contra = embed_texts(contra_hyps)
+
+    samples: List[Tuple[str, List[float], List[float]]] = []
+    for i, ex in enumerate(ent):
+        chunks = _word_chunks(ex.premise, window=3, stride=1, max_chunks=14)
+        if len(chunks) < 10:
+            continue
+        support_scores = sentence_support_scores([ex.hypothesis] * len(chunks), chunks).tolist()
+        mu_hat_proxy = float(np.mean(np.asarray(support_scores[:2], dtype=float)))
+
+        wrong_scores: Optional[List[float]] = None
+        if wrong_checks == "dissimilar":
+            j = (i * 17 + 23) % max(1, len(contra))
+            c = contra[int(j)]
+            c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+            if len(c_chunks) < 6:
+                continue
+            wrong_scores = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+        elif wrong_checks == "neighbor":
+            if emb_contra is None or not contra_hyps:
+                raise RuntimeError("SNLI neighbor requires embeddings")
+            c_emb = embed_texts([ex.hypothesis])[0]
+            sims = emb_contra @ c_emb
+            order = np.argsort(-sims)
+            k = max(1, int(neighbor_k))
+            cand = [int(j) for j in order[:k]]
+            best_pos: Optional[int] = None
+            best_mean = float("inf")
+            for pos, j in enumerate(cand):
+                c = contra[int(j)]
+                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+                if len(c_chunks) < 6:
+                    continue
+                cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+                m = float(np.mean(np.asarray(cross, dtype=float)))
+                if m < best_mean:
+                    best_mean = m
+                    best_pos = int(pos)
+                    wrong_scores = cross
+            if best_pos is not None:
+                neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+        elif wrong_checks == "inflation":
+            if emb_ent is None or not ent_hyps:
+                raise RuntimeError("SNLI inflation requires embeddings")
+            c_emb = embed_texts([ex.hypothesis])[0]
+            sims = emb_ent @ c_emb
+            sims[int(np.argmax(sims))] = -float("inf")
+            order = np.argsort(-sims)
+            k = max(1, int(neighbor_k))
+            cand = [int(j) for j in order[:k]]
+            best_pos: Optional[int] = None
+            best_mean = -float("inf")
+            for pos, j in enumerate(cand):
+                c = ent[int(j)]
+                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+                if len(c_chunks) < 6:
+                    continue
+                cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+                m = float(np.mean(np.asarray(cross, dtype=float)))
+                if m > best_mean:
+                    best_mean = m
+                    best_pos = int(pos)
+                    wrong_scores = cross
+            if best_pos is not None:
+                neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+
+        if wrong_scores is None or len(wrong_scores) < 6:
+            continue
+        samples.append((ex.hypothesis, [float(x) for x in support_scores], [float(x) for x in wrong_scores]))
+        if fast and len(samples) in (10, 25):
+            print(f"[Q32:P3] snli streaming samples={len(samples)}")
+        if len(samples) >= (40 if fast else 240):
+            break
+
+    if len(samples) < (20 if fast else 120):
+        raise RuntimeError(f"Too few SNLI streaming samples ({len(samples)})")
+
+    M_correct_end: List[float] = []
+    M_wrong_end: List[float] = []
+    R_correct_end: List[float] = []
+    R_wrong_end: List[float] = []
+    obs_end_by_sample: List[List[float]] = []
+    check_end_by_sample: List[List[float]] = []
+    wrong_end_by_sample: List[List[float]] = []
+    dM_correct: List[float] = []
+    dM_wrong: List[float] = []
+
+    phi_coupling: List[float] = []
+    use_n = min((40 if fast else 240), len(samples))
+    for hyp, support_scores, wrong_scores in samples[:use_n]:
+        t_max = max(2, len(support_scores) - 4)
+        t_max = min(t_max, len(support_scores) - 4)
+
+        M_series_correct: List[float] = []
+        M_series_wrong: List[float] = []
+        R_series_correct: List[float] = []
+        R_series_wrong: List[float] = []
+        mu_hat_series: List[float] = []
+        mu_check_series: List[float] = []
+        last_obs: Optional[List[float]] = None
+        last_check: Optional[List[float]] = None
+        for t in range(2, t_max + 1):
+            check_correct = support_scores[t:]
+            if len(check_correct) < 4:
+                break
+            obs = support_scores[:t]
+            last_obs = [float(x) for x in obs]
+            last_check = [float(x) for x in check_correct]
+            R_c = float(R_grounded(obs, check_correct))
+            R_w = float(R_grounded(obs, wrong_scores))
+            R_series_correct.append(R_c)
+            R_series_wrong.append(R_w)
+            M_series_correct.append(M_from_R(R_c))
+            M_series_wrong.append(M_from_R(R_w))
+            mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
+            mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
+
+        if len(M_series_correct) < 1:
+            continue
+        M_correct_end.append(M_series_correct[-1])
+        M_wrong_end.append(M_series_wrong[-1])
+        R_correct_end.append(R_series_correct[-1])
+        R_wrong_end.append(R_series_wrong[-1])
+        if last_obs is not None and last_check is not None:
+            obs_end_by_sample.append(last_obs)
+            check_end_by_sample.append(last_check)
+            wrong_end_by_sample.append([float(x) for x in wrong_scores])
+        dM_correct.append(M_series_correct[-1] - M_series_correct[0])
+        dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
+        phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
+
+    if len(M_correct_end) < (20 if fast else 120):
+        raise RuntimeError(f"Too few usable SNLI streaming series ({len(M_correct_end)})")
+
+    M_correct_end_a = np.array(M_correct_end, dtype=float)
+    M_wrong_end_a = np.array(M_wrong_end, dtype=float)
+    R_correct_end_a = np.array(R_correct_end, dtype=float)
+    R_wrong_end_a = np.array(R_wrong_end, dtype=float)
+    dM_correct_a = np.array(dM_correct, dtype=float)
+    dM_wrong_a = np.array(dM_wrong, dtype=float)
+
+    wins = int(np.sum(M_correct_end_a > M_wrong_end_a))
+    n = int(len(M_correct_end_a))
+    pair_wins = float(wins / max(1, n))
+    margin = float(np.mean(M_correct_end_a - M_wrong_end_a))
+    z = _binom_z(wins, n)
+
+    perm = np.roll(np.arange(n, dtype=int), 1)
+    Ms_swap_correct: List[float] = []
+    Rs_swap_correct: List[float] = []
+    Ms_swap_wrong: List[float] = []
+    Rs_swap_wrong: List[float] = []
+    for i in range(n):
+        obs_end = obs_end_by_sample[int(i)]
+        check_swap = check_end_by_sample[int(perm[int(i)])]
+        wrong_swap = wrong_end_by_sample[int(perm[int(i)])]
+        R_sc = float(R_grounded(obs_end, check_swap))
+        R_sw = float(R_grounded(obs_end, wrong_swap))
+        Rs_swap_correct.append(float(R_sc))
+        Ms_swap_correct.append(float(M_from_R(R_sc)))
+        Rs_swap_wrong.append(float(R_sw))
+        Ms_swap_wrong.append(float(M_from_R(R_sw)))
+    M_swap_correct_end_a = np.asarray(Ms_swap_correct, dtype=float) if Ms_swap_correct else np.asarray([], dtype=float)
+    R_swap_correct_end_a = np.asarray(Rs_swap_correct, dtype=float) if Rs_swap_correct else np.asarray([], dtype=float)
+    M_swap_wrong_end_a = np.asarray(Ms_swap_wrong, dtype=float) if Ms_swap_wrong else np.asarray([], dtype=float)
+    R_swap_wrong_end_a = np.asarray(Rs_swap_wrong, dtype=float) if Rs_swap_wrong else np.asarray([], dtype=float)
+    swap_correct_pair_wins = float(np.mean(M_correct_end_a > M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_pair_wins = float(np.mean(M_correct_end_a > M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
+    swap_correct_margin = float(np.mean(M_correct_end_a - M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_margin = float(np.mean(M_correct_end_a - M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
+
+    print("\n[Q32:P3] SNLI streaming intervention (chunked)")
+    print(f"  P(M_correct_end > M_wrong_end) = {pair_wins:.3f}")
+    print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
+    print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
+    print(f"  mean(M_wrong_end)   = {M_wrong_end_a.mean():.3f}")
+    print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
+    if M_swap_correct_end_a.size:
+        print(f"  [swap_correct] P(M_correct_end > M_swapped_correct_end) = {swap_correct_pair_wins:.3f}")
+        print(f"  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = {swap_correct_margin:.3f}")
+    if M_swap_wrong_end_a.size:
+        print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
+        print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
+    if phi_coupling:
+        print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
+
+    gate_z = float(min_z if min_z is not None else (1.8 if fast else 2.4))
+    gate_margin = float(min_margin if min_margin is not None else (0.25 if fast else 0.40))
+    passed = bool(z >= gate_z and margin >= gate_margin)
+    if not passed:
+        print("\n[Q32:P3] SNLI streaming status: FAIL")
+        if strict and not fast:
+            raise AssertionError("FAIL: SNLI streaming gates did not pass")
+
+    details: Dict[str, float] = {
+        "pair_wins": pair_wins,
+        "z": z,
+        "mean_margin": margin,
+        "mean_R_correct_end": float(R_correct_end_a.mean()),
+        "mean_R_wrong_end": float(R_wrong_end_a.mean()),
+        "mean_logR_correct_end": float(M_correct_end_a.mean()),
+        "mean_logR_wrong_end": float(M_wrong_end_a.mean()),
+        "gate_z": gate_z,
+        "gate_margin": gate_margin,
+        "mean_dM_correct": float(dM_correct_a.mean()),
+        "mean_dM_wrong": float(dM_wrong_a.mean()),
+        "mean_R_swap_correct_end": float(np.mean(R_swap_correct_end_a)) if R_swap_correct_end_a.size else float("nan"),
+        "mean_logR_swap_correct_end": float(np.mean(M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan"),
+        "swap_correct_pair_wins_end": float(swap_correct_pair_wins),
+        "swap_correct_mean_margin_end": float(swap_correct_margin),
+        "mean_R_swap_wrong_end": float(np.mean(R_swap_wrong_end_a)) if R_swap_wrong_end_a.size else float("nan"),
+        "mean_logR_swap_wrong_end": float(np.mean(M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan"),
+        "swap_wrong_pair_wins_end": float(swap_wrong_pair_wins),
+        "swap_wrong_mean_margin_end": float(swap_wrong_margin),
+    }
+    if phi_coupling:
+        details["phi_proxy_bits"] = float(np.mean(np.asarray(phi_coupling, dtype=float)))
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+        nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
+        if nn.size:
+            details["mean_neighbor_sim"] = float(nn.mean())
+    return BenchmarkResult(name="SNLI-Streaming", passed=passed, details=details)
+
+
 def _majority_vote(votes: Sequence[Optional[str]]) -> Optional[str]:
     vs = [v for v in votes if v is not None]
     if not vs:
@@ -1189,7 +1728,7 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--dataset",
-        choices=["scifact", "climate_fever", "all"],
+        choices=["scifact", "climate_fever", "snli", "all"],
         default="scifact",
         help="Which benchmark to run (default: scifact).",
     )
@@ -1299,13 +1838,13 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--calibrate_on",
-        choices=["climate_fever", "scifact"],
+        choices=["climate_fever", "scifact", "snli"],
         default="climate_fever",
         help="(transfer) Dataset used to calibrate thresholds (default: climate_fever).",
     )
     p.add_argument(
         "--apply_to",
-        choices=["climate_fever", "scifact"],
+        choices=["climate_fever", "scifact", "snli"],
         default="scifact",
         help="(transfer) Dataset used to verify frozen thresholds (default: scifact).",
     )
@@ -2239,7 +2778,10 @@ def main() -> int:
         if args.stress_min_pass_rate is not None:
             details_stress["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
 
-        results.append(BenchmarkResult(name="SciFact-Streaming-Stress", passed=bool(pass_rate > 0.0), details=details_stress))
+        passed_stress = True
+        if args.stress_min_pass_rate is not None and math.isfinite(float(pass_rate)):
+            passed_stress = bool(float(pass_rate) >= float(args.stress_min_pass_rate))
+        results.append(BenchmarkResult(name="SciFact-Streaming-Stress", passed=passed_stress, details=details_stress))
 
         if args.stress_out:
             out_path = str(args.stress_out)
@@ -2251,10 +2793,7 @@ def main() -> int:
                 json.dump(payload, f, indent=2, sort_keys=True)
             print(f"[Q32:STRESS] Wrote {out_path}")
 
-        if args.stress_min_pass_rate is not None:
-            min_pr = float(args.stress_min_pass_rate)
-            if float(pass_rate) < min_pr:
-                raise SystemExit(f"stress failed: pass_rate={pass_rate:.3f} < min_pass_rate={min_pr:.3f}")
+        # Note: do not exit early here; we want receipts written even on stress gate failures.
 
     elif args.mode == "sweep":
         # Phase-2 robustness: sweep neighbor_k and require a stable pass-rate across a range.
@@ -2332,10 +2871,7 @@ def main() -> int:
                 json.dump(payload, f, indent=2, sort_keys=True)
             print(f"[Q32:SWEEP] Wrote {out_path}")
 
-        if args.stress_min_pass_rate is not None:
-            min_pr = float(args.stress_min_pass_rate)
-            if float(min_pr_over_k) < min_pr:
-                raise SystemExit(f"sweep failed: min_pass_rate_over_k={min_pr_over_k:.3f} < min_pass_rate={min_pr:.3f}")
+        # Note: do not exit early here; we want receipts written even on sweep gate failures.
 
     elif args.mode == "bench":
         if args.dataset in ("scifact", "all"):
@@ -2346,6 +2882,12 @@ def main() -> int:
             )
         if args.dataset in ("climate_fever", "all"):
             results.append(run_climate_fever_benchmark(seed=args.seed, fast=args.fast, strict=strict))
+        if args.dataset in ("snli", "all"):
+            results.append(
+                run_snli_benchmark(
+                    seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+            )
     elif args.mode == "stream":
         if args.dataset in ("climate_fever", "all"):
             results.append(
@@ -2364,6 +2906,12 @@ def main() -> int:
                     scifact_stream_seed=int(args.scifact_stream_seed),
                 )
             )
+        if args.dataset in ("snli", "all"):
+            results.append(
+                run_snli_streaming(
+                    seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+            )
     else:
         # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
         def run_transfer(*, calibrate_on: str, apply_to: str) -> List[BenchmarkResult]:
@@ -2380,7 +2928,11 @@ def main() -> int:
                     return run_scifact_benchmark(
                         seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                     )
-                return run_climate_fever_intervention_benchmark(
+                if ds == "climate_fever":
+                    return run_climate_fever_intervention_benchmark(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                return run_snli_benchmark(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                 )
 
@@ -2394,7 +2946,11 @@ def main() -> int:
                         neighbor_k=args.neighbor_k,
                         scifact_stream_seed=int(args.scifact_stream_seed),
                     )
-                return run_climate_fever_streaming(
+                if ds == "climate_fever":
+                    return run_climate_fever_streaming(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                return run_snli_streaming(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                 )
 
@@ -2491,7 +3047,7 @@ def main() -> int:
                             s,
                         )
                     )
-                else:
+                elif apply_to == "climate_fever":
                     out.append(
                         tag_seed(
                             enforce_transfer(
@@ -2522,11 +3078,46 @@ def main() -> int:
                             s,
                         )
                     )
+                else:
+                    out.append(
+                        tag_seed(
+                            enforce_transfer(
+                                run_snli_benchmark(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
+                            s,
+                        )
+                    )
+                    out.append(
+                        tag_seed(
+                            enforce_transfer(
+                                run_snli_streaming(
+                                    seed=s,
+                                    fast=args.fast,
+                                    strict=False,
+                                    min_z=frozen_min_z,
+                                    wrong_checks=args.wrong_checks,
+                                    neighbor_k=args.neighbor_k,
+                                )
+                            ),
+                            s,
+                        )
+                    )
             return out
 
         if args.mode == "matrix":
-            results.extend(run_transfer(calibrate_on="climate_fever", apply_to="scifact"))
-            results.extend(run_transfer(calibrate_on="scifact", apply_to="climate_fever"))
+            ds_all = ["climate_fever", "scifact", "snli"]
+            for a in ds_all:
+                for b in ds_all:
+                    if a == b:
+                        continue
+                    results.extend(run_transfer(calibrate_on=a, apply_to=b))
         else:
             results.extend(run_transfer(calibrate_on=args.calibrate_on, apply_to=args.apply_to))
 
@@ -2539,9 +3130,11 @@ def main() -> int:
         _write_empirical_receipt(out_path=str(args.empirical_receipt_out), args=args, results=results)
 
     all_passed = all(r.passed for r in results)
-    # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by pass-rate thresholds.
-    if args.mode in ("stress", "sweep"):
-        return 0
+    # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by the aggregate result.
+    if args.mode == "stress":
+        all_passed = next((bool(r.passed) for r in results if r.name == "SciFact-Streaming-Stress"), False)
+    elif args.mode == "sweep":
+        all_passed = next((bool(r.passed) for r in results if r.name == "SciFact-Streaming-SweepK"), False)
     if args.fast and not args.strict:
         return 0
     return 0 if all_passed else 1
