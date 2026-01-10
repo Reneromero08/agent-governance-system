@@ -1,0 +1,215 @@
+#ifndef DISTRIBUTED_TRAINING_MANAGER_H
+#define DISTRIBUTED_TRAINING_MANAGER_H
+
+#include <stddef.h>
+#include <stdint.h>
+#include <stdbool.h>
+
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+// Forward declarations for opaque types
+typedef struct distributed_manager_t distributed_manager_t;
+typedef struct workload_manager_t workload_manager_t;
+typedef struct communication_optimizer_t communication_optimizer_t;
+typedef struct quantum_pipeline_t quantum_pipeline_t;
+
+#if defined(QGT_HAS_MPI) || defined(HAS_MPI) || defined(USE_MPI)
+#include <mpi.h>
+
+// Internal state structure with MPI communicators
+typedef struct distributed_internal_state_t {
+    MPI_Comm world_comm;         // World communicator
+    MPI_Comm local_comm;         // Local (node) communicator
+    MPI_Comm model_comm;         // Model parallel communicator
+    MPI_Comm data_comm;          // Data parallel communicator
+    MPI_Comm pipeline_comm;      // Pipeline parallel communicator
+    int world_rank;              // Rank in world communicator
+    int local_rank;              // Rank in local communicator
+    int model_rank;              // Rank in model parallel group
+    int data_rank;               // Rank in data parallel group
+    int pipeline_rank;           // Rank in pipeline parallel group
+    int world_size;              // Size of world communicator
+    int local_size;              // Size of local communicator
+    int model_size;              // Size of model parallel group
+    int data_size;               // Size of data parallel group
+    int pipeline_size;           // Size of pipeline parallel group
+    bool is_initialized;         // Whether MPI is initialized
+} distributed_internal_state_t;
+#else
+// Dummy structure when MPI is not available
+typedef struct distributed_internal_state_t {
+    int world_rank;
+    int world_size;
+    bool is_initialized;
+} distributed_internal_state_t;
+#endif
+
+// Include gradient optimizer header for consistent type definition
+#include "quantum_geometric/distributed/gradient_optimizer.h"
+
+// Configuration for distributed training
+typedef struct distributed_config_t {
+    int world_size;              // Total number of processes
+    int local_rank;              // This process's rank
+    int num_gpus_per_node;       // GPUs available per node
+    size_t batch_size;           // Global batch size
+    size_t micro_batch_size;     // Micro-batch size for gradient accumulation
+    float learning_rate;         // Initial learning rate
+    size_t warmup_steps;         // Steps for learning rate warmup
+    size_t max_steps;            // Maximum training steps
+    size_t save_interval;        // Checkpoint save frequency
+    bool use_model_parallel;     // Enable model parallelism
+    bool use_data_parallel;      // Enable data parallelism
+    bool use_pipeline_parallel;  // Enable pipeline parallelism
+    bool use_mixed_precision;    // Enable FP16/BF16 training
+    bool use_gradient_checkpointing;  // Memory optimization
+    char* checkpoint_dir;        // Directory for checkpoints
+} distributed_config_t;
+
+// Training metrics structure
+typedef struct training_metrics_t {
+    float loss;                  // Current loss value
+    float accuracy;              // Current accuracy
+    float learning_rate;         // Current learning rate
+    double throughput;           // Samples per second
+    size_t step;                 // Current step number
+    size_t epoch;                // Current epoch number
+    double memory_used;          // GPU memory used (bytes)
+    double communication_time;   // Time spent in communication (seconds)
+    double compute_time;         // Time spent in compute (seconds)
+} training_metrics_t;
+
+// Gradient estimation methods for variational quantum circuits
+typedef enum {
+    GRADIENT_METHOD_PARAMETER_SHIFT,  // Standard parameter shift rule (exact for Pauli rotations)
+    GRADIENT_METHOD_SPSA,             // Simultaneous Perturbation Stochastic Approximation
+    GRADIENT_METHOD_FINITE_DIFFERENCE,// Classical finite difference (fallback)
+    GRADIENT_METHOD_NATURAL_GRADIENT  // Quantum natural gradient (uses QFIM)
+} gradient_method_t;
+
+// Configuration for gradient estimation
+typedef struct gradient_config_t {
+    gradient_method_t method;         // Gradient estimation method to use
+    double shift_amount;              // For parameter shift (default: π/2)
+    double finite_diff_epsilon;       // For finite difference
+    double spsa_perturbation;         // For SPSA
+    bool use_gradient_clipping;       // Whether to clip gradients
+    double clip_value;                // Maximum gradient norm
+    size_t spsa_averaging_samples;    // Number of SPSA samples to average
+} gradient_config_t;
+
+// Workload configuration
+typedef struct workload_config_t {
+    int world_size;
+    int local_rank;
+    size_t batch_size;
+    size_t micro_batch_size;
+    bool use_data_parallel;
+    bool use_model_parallel;
+} workload_config_t;
+
+// Distributed manager structure
+struct distributed_manager_t {
+    distributed_config_t config;
+    distributed_internal_state_t* internal_state;  // Internal state with MPI communicators
+    workload_manager_t* workload_manager;          // Workload distribution
+    gradient_optimizer_t* gradient_optimizer;      // Gradient optimization
+    communication_optimizer_t* comm_optimizer;     // Communication optimization
+};
+
+// Create and destroy
+distributed_manager_t* distributed_manager_create(const distributed_config_t* config);
+void distributed_manager_destroy(distributed_manager_t* manager);
+
+// Environment initialization
+int distributed_manager_init_environment(distributed_manager_t* manager);
+
+// Training preparation
+int distributed_manager_prepare_training(distributed_manager_t* manager,
+                                        quantum_pipeline_t* pipeline,
+                                        size_t total_samples);
+
+// Training step execution
+int distributed_manager_train_step(distributed_manager_t* manager,
+                                  quantum_pipeline_t* pipeline,
+                                  const void* batch_data,
+                                  size_t batch_size,
+                                  size_t step,
+                                  training_metrics_t* metrics);
+
+// Gradient synchronization
+int distributed_manager_sync_gradients(distributed_manager_t* manager,
+                                      quantum_pipeline_t* pipeline);
+
+// Checkpoint management
+int distributed_manager_save_checkpoint(distributed_manager_t* manager,
+                                       quantum_pipeline_t* pipeline,
+                                       size_t step);
+int distributed_manager_load_checkpoint(distributed_manager_t* manager,
+                                       quantum_pipeline_t* pipeline,
+                                       size_t step);
+
+// Batch partitioning
+int distributed_manager_get_local_batch(distributed_manager_t* manager,
+                                       size_t total_samples,
+                                       size_t* start_idx,
+                                       size_t* end_idx);
+
+// Utility functions
+bool distributed_manager_is_primary(const distributed_manager_t* manager);
+float distributed_manager_update_learning_rate(distributed_manager_t* manager, size_t step);
+
+// Failure handling and elastic scaling
+int distributed_manager_handle_failure(distributed_manager_t* manager, size_t failed_rank);
+
+// Workload manager functions
+workload_manager_t* workload_manager_create(void);
+void workload_manager_destroy(workload_manager_t* manager);
+int workload_manager_configure(workload_manager_t* manager, const workload_config_t* config);
+
+// Gradient optimizer functions
+gradient_optimizer_t* gradient_optimizer_create(void);
+void gradient_optimizer_destroy(gradient_optimizer_t* optimizer);
+
+// Communication optimizer functions
+communication_optimizer_t* communication_optimizer_create(void);
+void communication_optimizer_destroy(communication_optimizer_t* optimizer);
+
+// Distributed pipeline functions (separate from public quantum_pipeline.h API)
+size_t dist_pipeline_get_parameter_count(quantum_pipeline_t* pipeline);
+int dist_pipeline_forward(quantum_pipeline_t* pipeline, const void* data, size_t batch_size);
+int dist_pipeline_backward(quantum_pipeline_t* pipeline);
+int dist_pipeline_update_parameters(quantum_pipeline_t* pipeline);
+int dist_pipeline_get_gradients(quantum_pipeline_t* pipeline, void* buffer, size_t size);
+int dist_pipeline_set_gradients(quantum_pipeline_t* pipeline, void* buffer, size_t size);
+void dist_pipeline_get_metrics(quantum_pipeline_t* pipeline, training_metrics_t* metrics);
+void dist_pipeline_set_learning_rate(quantum_pipeline_t* pipeline, float lr);
+int dist_pipeline_save_state(quantum_pipeline_t* pipeline, const char* path);
+int dist_pipeline_load_state(quantum_pipeline_t* pipeline, const char* path);
+int dist_pipeline_serialize(quantum_pipeline_t* pipeline, void** buffer, size_t* size);
+int dist_pipeline_deserialize(quantum_pipeline_t* pipeline, void* buffer, size_t size);
+
+// Additional gradient and training functions
+int dist_pipeline_set_labels(quantum_pipeline_t* pipeline, const void* labels, size_t batch_size);
+int dist_pipeline_set_gradient_config(quantum_pipeline_t* pipeline,
+                                       gradient_method_t method,
+                                       double shift_amount,
+                                       double finite_diff_epsilon,
+                                       double spsa_perturbation,
+                                       bool use_gradient_clipping,
+                                       double clip_value,
+                                       size_t spsa_averaging_samples);
+float dist_pipeline_get_loss(quantum_pipeline_t* pipeline);
+int dist_pipeline_get_loss_history(quantum_pipeline_t* pipeline,
+                                    float** history,
+                                    size_t* num_entries);
+void dist_pipeline_cleanup(quantum_pipeline_t* pipeline);
+int dist_pipeline_init(quantum_pipeline_t* pipeline);
+
+#ifdef __cplusplus
+}
+#endif
+
+#endif // DISTRIBUTED_TRAINING_MANAGER_H
