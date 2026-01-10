@@ -372,3 +372,34 @@ Artifacts:
 - `p4_geom_tipping_scifact_neighbor_full_20260110_033745.txt.rc.txt` = `A9F58776A09B5DAC438049683F24BF85764E0FF8E7455952456165C68C158627`
 - `empirical_receipt_p4_geom_tipping_scifact_neighbor_full_20260110_033745.json` = `994065D2E7EF175EEE074E738EA0D6F4752011C0D9786906F58038D04DD5CD36`
 - `geometry_p4_geom_tipping_scifact_neighbor_full_20260110_033745.json` = `3C6CC92D27641D78DDC5E4E1F16D2543B82F7F582123BF6508C8CC4E6CC8CEA2`
+
+---
+
+## 2026-01-10 Phase 4 streaming + independence + phase-boundary + QGTL (full / crossencoder)
+
+### SciFact (full / crossencoder; QGTL backend; strict gates)
+
+Command:
+- `python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode stream --dataset scifact --scoring crossencoder --threads 12 --device cpu --geometry_backend qgtl --require_geometry_gate --require_phase_boundary_gate --phase_min_stable_rate 0.55 --require_injection_gate --strict --empirical_receipt_out LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p4_scifact_full_20260110_044438.json --geometry_out LAW/CONTRACTS/_runs/q32_public/datatrail/geometry_p4_scifact_full_20260110_044438.json --stream_series_out LAW/CONTRACTS/_runs/q32_public/datatrail/series_p4_scifact_full_20260110_044438.json`
+
+Artifacts:
+- `scifact_p4_full_20260110_044438.log.txt` = `7EC64C52ACCAB757080EC1732F75BFA341E8829B7AFF96B9E7569F99AA793527`
+- `scifact_p4_full_20260110_044438.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p4_scifact_full_20260110_044438.json` = `C7E428FE396286E025CB990A5C218F1F9EFDF1C09D9254017E8351C2FF2CC074`
+- `geometry_p4_scifact_full_20260110_044438.json` = `2736389536B624325A4B5A13EF624771C88295308817147A7FF2A63EF52D34FF`
+- `series_p4_scifact_full_20260110_044438.json` = `9E85EE3E1F06A5267F2EA5200B74FAE83CC9B843579809F7CA00C124D1C59D0E`
+
+### Climate-FEVER (full / crossencoder; strict gates)
+
+Notes:
+- Climate-FEVER has ~5 evidence items/claim, so the correlated stream uses within-evidence n-gram chunks (correlated), and independent checks are other supportive evidence sentences for the same claim.
+
+Command:
+- `python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode stream --dataset climate_fever --scoring crossencoder --threads 12 --device cpu --require_phase_boundary_gate --phase_min_tail 2 --phase_min_stable_rate 0.45 --strict --empirical_receipt_out LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p4_climate_full_20260110_050232.json --geometry_out LAW/CONTRACTS/_runs/q32_public/datatrail/geometry_p4_climate_full_20260110_050232.json --stream_series_out LAW/CONTRACTS/_runs/q32_public/datatrail/series_p4_climate_full_20260110_050232.json`
+
+Artifacts:
+- `climate_p4_full_20260110_050232.log.txt` = `50F6E4CA5537A72116F4B697697C825C8B23FC11EE862577F7BB647ED0B6115C`
+- `climate_p4_full_20260110_050232.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p4_climate_full_20260110_050232.json` = `9C267FBA0B833ADD151D4665D0C274DEF5A19B13CB6835CB2793ED75A6BB85BA`
+- `geometry_p4_climate_full_20260110_050232.json` = `D590FAA16F669CE24689D800CE1DBCEDF67BC4AC2989E0C97106FFF1338AAA39`
+- `series_p4_climate_full_20260110_050232.json` = `C0E2DAA5EDC209B860C0B8839B64F7B2B71DC0670F51B96F34F1ED2827206DC0`
