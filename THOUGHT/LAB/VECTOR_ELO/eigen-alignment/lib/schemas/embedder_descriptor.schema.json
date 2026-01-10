@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ags.local/esap/embedder_descriptor.schema.json",
+  "title": "EMBEDDER_DESCRIPTOR",
+  "description": "Describes the embedding model used",
+  "type": "object",
+  "required": ["type", "version", "embedder_id", "dimension"],
+  "properties": {
+    "type": {
+      "const": "EMBEDDER_DESCRIPTOR"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "embedder_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Model identifier (HuggingFace path or unique ID)"
+    },
+    "weights_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]+$",
+      "description": "SHA-256 of model weights (for drift detection)"
+    },
+    "dimension": {
+      "type": "integer",
+      "minimum": 1,
+      "description": "Embedding dimension"
+    },
+    "normalize": {
+      "type": "boolean",
+      "default": true,
+      "description": "Whether embeddings are L2-normalized"
+    },
+    "prefix": {
+      "type": ["string", "null"],
+      "description": "Query prefix if required (e.g., 'query: ' for E5)"
+    }
+  }
+}
