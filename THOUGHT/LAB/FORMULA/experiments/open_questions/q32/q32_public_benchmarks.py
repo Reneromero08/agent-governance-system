@@ -165,6 +165,47 @@ def _mutual_information_continuous(x: Sequence[float], y: Sequence[float], *, n_
     return float(max(0.0, mi))
 
 
+def _unit(x: np.ndarray) -> np.ndarray:
+    v = np.asarray(x, dtype=np.float64).reshape(-1)
+    n = float(np.linalg.norm(v))
+    if not math.isfinite(n) or n <= 0:
+        return np.zeros_like(v)
+    return (v / n).astype(np.float64, copy=False)
+
+
+def _cos_sim(a: np.ndarray, b: np.ndarray) -> float:
+    ua = _unit(a)
+    ub = _unit(b)
+    return float(np.dot(ua, ub))
+
+
+def _participation_ratio_from_embeddings(emb: np.ndarray) -> float:
+    """
+    Effective rank proxy via participation ratio of the sample covariance spectrum.
+    Uses the Gram-matrix eigenspectrum (cheaper; equivalent for nonzero eigenvalues).
+    """
+    x = np.asarray(emb, dtype=np.float64)
+    if x.ndim != 2:
+        return float("nan")
+    n = int(x.shape[0])
+    if n < 2:
+        return 1.0 if n == 1 else float("nan")
+    x = x - np.mean(x, axis=0, keepdims=True)
+    gram = (x @ x.T) / float(max(1, n - 1))
+    try:
+        eig = np.linalg.eigvalsh(gram)
+    except Exception:
+        eig = np.linalg.eigvals(gram).real
+    eig = np.asarray([float(v) for v in eig if math.isfinite(float(v)) and float(v) > 0], dtype=np.float64)
+    if eig.size == 0:
+        return 1.0
+    s1 = float(np.sum(eig))
+    s2 = float(np.sum(eig * eig))
+    if not math.isfinite(s1) or not math.isfinite(s2) or s2 <= 0:
+        return float("nan")
+    return float((s1 * s1) / s2)
+
+
 def R_grounded(observations: Sequence[float], check: Sequence[float]) -> float:
     """
     The pinned Q32 spec:
@@ -1069,7 +1110,7 @@ def run_snli_streaming(
         emb_ent = embed_texts(ent_hyps)
         emb_contra = embed_texts(contra_hyps)
 
-    samples: List[Tuple[str, List[float], List[float]]] = []
+    samples: List[Tuple[str, List[str], List[float], List[str], List[float]]] = []
     for i, ex in enumerate(ent):
         chunks = _word_chunks(ex.premise, window=3, stride=1, max_chunks=14)
         if len(chunks) < 10:
@@ -1168,6 +1209,7 @@ def run_snli_streaming(
         mu_check_series: List[float] = []
         last_obs: Optional[List[float]] = None
         last_check: Optional[List[float]] = None
+        last_t: int = 0
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 4:
@@ -1183,6 +1225,7 @@ def run_snli_streaming(
             M_series_wrong.append(M_from_R(R_w))
             mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
             mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
+            last_t = int(t)
 
         if len(M_series_correct) < 1:
             continue
@@ -1197,6 +1240,20 @@ def run_snli_streaming(
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
+
+        # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
+        if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
+            obs_e = support_emb[:last_t]
+            chk_e = support_emb[last_t:]
+            wrong_e = wrong_emb
+            obs_mean = np.mean(obs_e, axis=0) if obs_e.size else claim_vec
+            chk_mean = np.mean(chk_e, axis=0) if chk_e.size else claim_vec
+            wrong_mean = np.mean(wrong_e, axis=0) if wrong_e.size else -claim_vec
+            geom_cos_correct_end.append(_cos_sim(obs_mean, chk_mean))
+            geom_cos_wrong_end.append(_cos_sim(obs_mean, wrong_mean))
+            geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
+            geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
+            geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
 
     if len(M_correct_end) < (20 if fast else 120):
         raise RuntimeError(f"Too few usable SNLI streaming series ({len(M_correct_end)})")
@@ -1873,6 +1930,16 @@ def parse_args() -> argparse.Namespace:
             "(R/M/J/Phi-proxy + gates)."
         ),
     )
+    p.add_argument(
+        "--geometry_out",
+        default=None,
+        help="Optional JSON path to write a geometry summary (QGT/QGTL proxy metrics) for stream mode.",
+    )
+    p.add_argument(
+        "--require_geometry_gate",
+        action="store_true",
+        help="If set, require the geometry-break gate to pass in stream mode (in addition to the existing intervention gate).",
+    )
     return p.parse_args()
 
 
@@ -1923,6 +1990,48 @@ def _write_empirical_receipt(*, out_path: str, args: argparse.Namespace, results
 
     print(f"[Q32] EmpiricalMetricReceipt written: {out_path}")
     print(f"[Q32] EmpiricalMetricReceipt sha256: {sha256}")
+    return sha256
+
+
+def _write_geometry_summary(*, out_path: str, args: argparse.Namespace, results: List["BenchmarkResult"]) -> str:
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+
+    geom_results: List[dict] = []
+    for r in results:
+        d = dict(r.details)
+        geom = {k: v for k, v in d.items() if str(k).startswith("geom_")}
+        if not geom:
+            continue
+        geom_results.append({"name": str(r.name), "passed": bool(r.passed), "geometry": geom})
+
+    payload = {
+        "type": "GeometrySummary",
+        "version": 1,
+        "run": {
+            "mode": str(args.mode),
+            "dataset": str(args.dataset),
+            "fast": bool(args.fast),
+            "strict": bool(args.strict),
+            "seed": int(args.seed),
+            "scoring": str(args.scoring) if args.scoring is not None else None,
+            "wrong_checks": str(args.wrong_checks),
+            "neighbor_k": int(args.neighbor_k),
+            "require_geometry_gate": bool(getattr(args, "require_geometry_gate", False)),
+        },
+        "results": geom_results,
+    }
+
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    file_bytes = canonical + b"\n"
+    sha256 = hashlib.sha256(file_bytes).hexdigest().upper()
+
+    tmp_path = out_path + ".tmp"
+    with open(tmp_path, "wb") as f:
+        f.write(file_bytes)
+    os.replace(tmp_path, out_path)
+
+    print(f"[Q32] GeometrySummary written: {out_path}")
+    print(f"[Q32] GeometrySummary sha256: {sha256}")
     return sha256
 
 
@@ -2139,6 +2248,7 @@ def run_climate_fever_streaming(
         mu_check_series: List[float] = []
         last_obs: Optional[List[float]] = None
         last_check: Optional[List[float]] = None
+        last_t: int = 0
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 2:
@@ -2154,6 +2264,7 @@ def run_climate_fever_streaming(
             M_series_wrong.append(M_from_R(R_w))
             mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
             mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
+            last_t = int(t)
 
         if len(M_series_correct) < 1:
             continue
@@ -2169,6 +2280,20 @@ def run_climate_fever_streaming(
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
+
+        # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
+        if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
+            obs_e = support_emb[:last_t]
+            chk_e = support_emb[last_t:]
+            wrong_e = wrong_emb
+            obs_mean = np.mean(obs_e, axis=0) if obs_e.size else claim_vec
+            chk_mean = np.mean(chk_e, axis=0) if chk_e.size else claim_vec
+            wrong_mean = np.mean(wrong_e, axis=0) if wrong_e.size else -claim_vec
+            geom_cos_correct_end.append(_cos_sim(obs_mean, chk_mean))
+            geom_cos_wrong_end.append(_cos_sim(obs_mean, wrong_mean))
+            geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
+            geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
+            geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable streaming series ({len(M_correct_end)})")
@@ -2281,6 +2406,8 @@ def run_scifact_streaming(
     wrong_checks: str = "dissimilar",
     neighbor_k: int = 10,
     scifact_stream_seed: int = 123,
+    require_geometry_gate: bool = False,
+    compute_geometry: bool = False,
 ) -> BenchmarkResult:
     """
     Phase 4 / Phase 3 transfer probe on SciFact.
@@ -2472,6 +2599,7 @@ def run_scifact_streaming(
             chosen_idx = int(cand[chosen_pos])
             neighbor_sims.append(float(sims[int(chosen_idx)]))
             a, b = pick_offsets[chosen_pos]
+            wrong_texts_preview = [str(x) for x in pick_sents[a:b]]
             wrong_scores_preview = [float(x) for x in cross_scores[a:b]]
         else:
             cand_sent_lists = [support_bank[idx][1][:6] for idx in cand]
@@ -2497,11 +2625,14 @@ def run_scifact_streaming(
             chosen_pos = int(np.argmax(np.asarray(cand_strength, dtype=float)))
             chosen_idx = int(cand[chosen_pos])
             a, b = offsets[chosen_pos]
+            wrong_texts_preview = [str(x) for x in flat_sents[a:b]]
             wrong_scores_preview = [float(x) for x in flat_scores[a:b]]
         if len(wrong_scores_preview) < 3:
             continue
 
-        samples.append((claim_text, support_scores_preview, wrong_scores_preview))
+        samples.append(
+            (claim_text, [str(x) for x in support_texts], support_scores_preview, wrong_texts_preview, wrong_scores_preview)
+        )
         if fast and len(samples) in (10, 25):
             print(f"[Q32:P4] scifact streaming samples={len(samples)}")
         if len(samples) >= (20 if fast else 120):
@@ -2520,10 +2651,28 @@ def run_scifact_streaming(
     wrong_end_by_sample: List[List[float]] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
+    geom_cos_correct_end: List[float] = []
+    geom_cos_wrong_end: List[float] = []
+    geom_pr_obs_end: List[float] = []
+    geom_pr_check_end: List[float] = []
+    geom_pr_wrong_end: List[float] = []
 
     use_n = min((16 if fast else 120), len(samples))
     phi_coupling: List[float] = []
-    for claim_text, support_scores, wrong_scores in samples[:use_n]:
+    for claim_text, support_texts, support_scores, wrong_texts, wrong_scores in samples[:use_n]:
+        if compute_geometry:
+            support_emb = embed_texts([claim_text] + support_texts)
+            claim_vec = support_emb[0]
+            support_emb = support_emb[1:]
+            wrong_emb = (
+                embed_texts([str(x) for x in wrong_texts])
+                if wrong_texts
+                else np.zeros((0, int(support_emb.shape[1])), dtype=np.float32)
+            )
+        else:
+            claim_vec = np.zeros((1,), dtype=np.float32)
+            support_emb = np.zeros((0, 1), dtype=np.float32)
+            wrong_emb = np.zeros((0, 1), dtype=np.float32)
 
         # Keep at least 4 check sentences at the end to reduce tail-noise.
         t_max = max(2, len(support_scores) - 4)
@@ -2537,6 +2686,7 @@ def run_scifact_streaming(
         mu_check_series: List[float] = []
         last_obs: Optional[List[float]] = None
         last_check: Optional[List[float]] = None
+        last_t: int = 0
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 4:
@@ -2552,6 +2702,7 @@ def run_scifact_streaming(
             M_series_wrong.append(M_from_R(R_w))
             mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
             mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
+            last_t = int(t)
 
         if len(M_series_correct) < 1:
             continue
@@ -2567,6 +2718,20 @@ def run_scifact_streaming(
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
+
+        # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
+        if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
+            obs_e = support_emb[:last_t]
+            chk_e = support_emb[last_t:]
+            wrong_e = wrong_emb
+            obs_mean = np.mean(obs_e, axis=0) if obs_e.size else claim_vec
+            chk_mean = np.mean(chk_e, axis=0) if chk_e.size else claim_vec
+            wrong_mean = np.mean(wrong_e, axis=0) if wrong_e.size else -claim_vec
+            geom_cos_correct_end.append(_cos_sim(obs_mean, chk_mean))
+            geom_cos_wrong_end.append(_cos_sim(obs_mean, wrong_mean))
+            geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
+            geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
+            geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable SciFact streaming series ({len(M_correct_end)})")
@@ -2630,6 +2795,33 @@ def run_scifact_streaming(
     if phi_coupling:
         print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
 
+    # Geometry-break "tipping" probe (proxy-only for now; QGTL backend is Phase-4.0 work):
+    geom_passed = None
+    if geom_cos_correct_end and geom_cos_wrong_end:
+        c = np.asarray(geom_cos_correct_end, dtype=float)
+        w = np.asarray(geom_cos_wrong_end, dtype=float)
+        gwins = int(np.sum(c > w))
+        gn = int(c.size)
+        g_pair_wins = float(gwins / max(1, gn))
+        g_margin = float(np.mean(c - w))
+        g_z = _binom_z(gwins, gn)
+        print("\n[Q32:P4] Geometry-break proxy (end-step)")
+        print(f"  P(cos(obs, check_correct) > cos(obs, check_wrong)) = {g_pair_wins:.3f}")
+        print(f"  z(H0: p=0.5) = {g_z:.3f}  (n={gn})")
+        print(f"  mean(cos_correct - cos_wrong) = {g_margin:.3f}")
+        if geom_pr_check_end and geom_pr_wrong_end:
+            prc = np.asarray(geom_pr_check_end, dtype=float)
+            prw = np.asarray(geom_pr_wrong_end, dtype=float)
+            pr_margin = float(np.nanmean(prc - prw))
+            print(f"  mean(PR_check - PR_wrong) = {pr_margin:.3f}")
+        geom_gate_z = float(2.0 if fast else 2.6)
+        geom_gate_margin = float(0.05 if fast else 0.08)
+        geom_passed = bool(g_z >= geom_gate_z and g_margin >= geom_gate_margin)
+        print(f"  geom_gate_z={geom_gate_z:.3f}, geom_gate_margin={geom_gate_margin:.3f} => {'PASS' if geom_passed else 'FAIL'}")
+        if require_geometry_gate and (not geom_passed):
+            if strict and not fast:
+                raise AssertionError("FAIL: SciFact geometry-break gate did not pass")
+
     print("\n[Q32:P4] Streaming deltas")
     print(f"  mean dM_correct = {dM_correct_a.mean():.3f}")
     print(f"  mean dM_wrong   = {dM_wrong_a.mean():.3f}")
@@ -2670,6 +2862,25 @@ def run_scifact_streaming(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
+    if geom_cos_correct_end and geom_cos_wrong_end:
+        c = np.asarray(geom_cos_correct_end, dtype=float)
+        w = np.asarray(geom_cos_wrong_end, dtype=float)
+        gwins = int(np.sum(c > w))
+        gn = int(c.size)
+        details["geom_pair_wins_end"] = float(gwins / max(1, gn))
+        details["geom_z_end"] = float(_binom_z(gwins, gn))
+        details["geom_mean_margin_end"] = float(np.mean(c - w))
+        details["geom_mean_cos_correct_end"] = float(np.mean(c))
+        details["geom_mean_cos_wrong_end"] = float(np.mean(w))
+        details["geom_mean_pr_obs_end"] = (
+            float(np.nanmean(np.asarray(geom_pr_obs_end, dtype=float))) if geom_pr_obs_end else float("nan")
+        )
+        details["geom_mean_pr_check_end"] = (
+            float(np.nanmean(np.asarray(geom_pr_check_end, dtype=float))) if geom_pr_check_end else float("nan")
+        )
+        details["geom_mean_pr_wrong_end"] = (
+            float(np.nanmean(np.asarray(geom_pr_wrong_end, dtype=float))) if geom_pr_wrong_end else float("nan")
+        )
     return BenchmarkResult(name="SciFact-Streaming", passed=passed, details=details)
 
 
@@ -2715,6 +2926,8 @@ def main() -> int:
                     wrong_checks=args.wrong_checks,
                     neighbor_k=args.neighbor_k,
                     scifact_stream_seed=-1,
+                    require_geometry_gate=False,
+                    compute_geometry=False,
                 )
             except Exception:
                 r = BenchmarkResult(name=f"SciFact-Streaming@seed={s}", passed=False, details={})
@@ -2833,6 +3046,8 @@ def main() -> int:
                         wrong_checks=args.wrong_checks,
                         neighbor_k=int(k),
                         scifact_stream_seed=-1,
+                        require_geometry_gate=False,
+                        compute_geometry=False,
                     )
                 except Exception:
                     r = BenchmarkResult(name=f"SciFact-Streaming@k={k}@seed={s}", passed=False, details={})
@@ -2911,6 +3126,8 @@ def main() -> int:
                     wrong_checks=args.wrong_checks,
                     neighbor_k=args.neighbor_k,
                     scifact_stream_seed=int(args.scifact_stream_seed),
+                    require_geometry_gate=bool(args.require_geometry_gate),
+                    compute_geometry=True,
                 )
             )
         if args.dataset in ("snli", "all"):
@@ -3135,6 +3352,8 @@ def main() -> int:
 
     if args.empirical_receipt_out:
         _write_empirical_receipt(out_path=str(args.empirical_receipt_out), args=args, results=results)
+    if args.geometry_out:
+        _write_geometry_summary(out_path=str(args.geometry_out), args=args, results=results)
 
     all_passed = all(r.passed for r in results)
     # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by the aggregate result.
