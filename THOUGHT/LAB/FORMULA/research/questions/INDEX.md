@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.7.31 (2026-01-10 - Q31 CONFIRMED, Q43 rigorous validation)*
+*Last updated: v3.8.0 (2026-01-10 - Q34 ANSWERED: Spectral Convergence Theorem)*
 
 ---
 
@@ -32,12 +32,12 @@
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ PARTIAL | **YES - phase transition at α=0.9-1.0**. Generalization jumps +0.424 suddenly. Truth crystallizes, doesn't emerge gradually. J anti-correlated with generalization (ρ=-0.54). Binary R-gates justified. |
 | 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ⏳ OPEN | What symmetries does M field have? What's conserved (meaning conservation law)? Can we derive field equations from Lagrangian? |
-| 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ⏳ PARTIAL | **YES - models converge (up to isomorphism)**. Eigenvalue Spearman=1.0 across 8 models. Convergence happens via phase transition (α=0.9-1.0). Df~22 as universal signature. J coupling NOT a convergence indicator. |
+| 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ⏳ OPEN | Is R > τ a homeostatic setpoint? Does M field self-regulate like biological systems? |
 | 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ⏳ OPEN | How does Bohm's Implicate Order (Platonic manifold/Phi) map to Explicate Order (R interface)? Can we formalize unfoldment as M field dynamics? |
-| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ⏳ PARTIAL | **3/5 rigorous**: Df=22.25 confirmed, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Berry phase INVALID (real vectors=0). Chern numbers INVALID (need complex bundles). Holonomy proves curved geometry. |
+| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | 🔄 PARTIAL | **3/5 rigorous**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Topological claims invalid for real embeddings (Berry phase=0, Chern number undefined). |
 | 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ⏳ OPEN | Do R-gates define Markov blankets? How does Active Inference (FEP) connect to R-gating? Are meaning boundaries Markov blankets on M field? |
 
 ---
@@ -104,17 +104,17 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 6 (14.0%)
+  - **Answered:** 7 (16.3%)
   - **Partially Answered:** 9 (20.9%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 28 (65.1%)
+  - **Open:** 27 (62.8%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 4 | 2 | 0 | 1 |
- | High | 16 | 1 | 5 | 0 | 10 |
+ | High | 16 | 2 | 5 | 0 | 9 |
  | Medium | 11 | 1 | 1 | 0 | 9 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |

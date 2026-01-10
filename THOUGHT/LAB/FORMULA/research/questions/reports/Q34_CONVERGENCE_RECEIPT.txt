@@ -1,0 +1,60 @@
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+Some weights of RobertaModel were not initialized from the model checkpoint at roberta-base and are newly initialized: ['pooler.dense.bias', 'pooler.dense.weight']
+You should probably TRAIN this model on a down-stream task to be able to use it for predictions and inference.
+======================================================================
+Q34: PLATONIC CONVERGENCE TEST
+Do different models converge to the same covariance spectrum?
+======================================================================
+
+Timestamp: 2026-01-10T10:05:12.670071Z
+
+Words: 115
+
+----------------------------------------------------------------------
+Loading models and computing eigenspectra...
+----------------------------------------------------------------------
+  Loading bert-base-uncased...
+    bert-base-uncased: dim=768, Df=22.25
+  Loading distilbert-base-uncased...
+    distilbert-base-uncased: dim=768, Df=30.20
+  Loading roberta-base...
+    roberta-base: dim=768, Df=17.14
+  Loading albert-base-v2...
+    albert-base-v2: dim=768, Df=1.14
+
+----------------------------------------------------------------------
+Cross-Model Eigenvalue Correlations
+----------------------------------------------------------------------
+
+                      bert-base-un  distilbert-b  roberta-base  albert-base-
+bert-base-uncased           1.0000        0.9470        0.9752        0.8129
+distilbert-base-unca        0.9470        1.0000        0.8597        0.5980
+roberta-base                0.9752        0.8597        1.0000        0.9191
+albert-base-v2              0.8129        0.5980        0.9191        1.0000
+
+----------------------------------------------------------------------
+Summary
+----------------------------------------------------------------------
+
+Mean cross-model correlation: 0.8520
+Min cross-model correlation:  0.5980
+Std cross-model correlation:  0.1257
+
+Participation Ratios (Df):
+  bert-base-uncased         Df = 22.25
+  distilbert-base-uncased   Df = 30.20
+  roberta-base              Df = 17.14
+  albert-base-v2            Df = 1.14
+
+Df mean: 17.68 +/- 10.63
+
+======================================================================
+VERDICT
+======================================================================
+
+[PARTIAL] Mean correlation = 0.8520 (0.7-0.9)
+          Strong but not perfect spectral convergence.
+
+Receipt hash: 88ecacc6516f1335...
+
