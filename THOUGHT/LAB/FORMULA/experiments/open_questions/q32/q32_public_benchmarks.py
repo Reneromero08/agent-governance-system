@@ -288,8 +288,8 @@ def load_scifact(max_claims: int = 400, seed: int = 123) -> List[ScifactExample]
     """
     from datasets import load_dataset  # type: ignore
 
-    ds = load_dataset("scifact", "claims", trust_remote_code=True)
-    corpus = load_dataset("scifact", "corpus", trust_remote_code=True)["train"]
+    ds = load_dataset("scifact", "claims")
+    corpus = load_dataset("scifact", "corpus")["train"]
     corpus_by_id: Dict[int, dict] = {int(r["doc_id"]): r for r in corpus}
 
     rng = np.random.default_rng(seed)
@@ -609,7 +609,7 @@ def run_scifact_benchmark(
     # We use top-K sentences from the evidence doc by support score (label-free).
     from datasets import load_dataset  # type: ignore
 
-    corpus = load_dataset("scifact", "corpus", trust_remote_code=True)["train"]
+    corpus = load_dataset("scifact", "corpus")["train"]
     corpus_by_id: Dict[int, dict] = {int(r["doc_id"]): r for r in corpus}
 
     def doc_sentences(doc_id: int) -> List[str]:
@@ -1237,23 +1237,39 @@ def run_snli_streaming(
             obs_end_by_sample.append(last_obs)
             check_end_by_sample.append(last_check)
             wrong_end_by_sample.append([float(x) for x in wrong_scores])
+            R_i = float(R_grounded(last_obs, indep_scores))
+            R_indep_end.append(R_i)
+            M_indep_end.append(float(M_from_R(R_i)))
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
-        # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
-        if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
-            obs_e = support_emb[:last_t]
-            chk_e = support_emb[last_t:]
-            wrong_e = wrong_emb
-            obs_mean = np.mean(obs_e, axis=0) if obs_e.size else claim_vec
-            chk_mean = np.mean(chk_e, axis=0) if chk_e.size else claim_vec
-            wrong_mean = np.mean(wrong_e, axis=0) if wrong_e.size else -claim_vec
-            geom_cos_correct_end.append(_cos_sim(obs_mean, chk_mean))
-            geom_cos_wrong_end.append(_cos_sim(obs_mean, wrong_mean))
-            geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
-            geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
-            geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
+        delta_series = [float(a - b) for a, b in zip(M_series_correct, M_series_wrong)]
+        if delta_series:
+            tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+            min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
+            tail_n = min(int(min_tail), int(len(delta_series)))
+            stable = 0.0
+            first_frac = float("nan")
+            if tail_n >= 1 and all(float(x) >= tau for x in delta_series[-tail_n:]):
+                stable = 1.0
+                for i in range(0, len(delta_series) - tail_n + 1):
+                    window = delta_series[i : i + tail_n]
+                    if all(float(x) >= tau for x in window):
+                        first_frac = float(i / max(1, len(delta_series) - 1))
+                        break
+            phase_stable_cross.append(stable)
+            if math.isfinite(first_frac):
+                phase_first_cross_frac.append(first_frac)
+            grid_n = 11
+            if len(delta_series) == 1:
+                series_delta_grid.append([float(delta_series[0])] * grid_n)
+            else:
+                xs = np.linspace(0.0, 1.0, num=len(delta_series))
+                xg = np.linspace(0.0, 1.0, num=grid_n)
+                series_delta_grid.append([float(v) for v in np.interp(xg, xs, np.asarray(delta_series, dtype=float))])
+
+        # (Geometry is handled in SciFact streaming; Climate-FEVER Phase 4 focuses on independence + phase boundary.)
 
     if len(M_correct_end) < (20 if fast else 120):
         raise RuntimeError(f"Too few usable SNLI streaming series ({len(M_correct_end)})")
@@ -1936,9 +1952,48 @@ def parse_args() -> argparse.Namespace:
         help="Optional JSON path to write a geometry summary (QGT/QGTL proxy metrics) for stream mode.",
     )
     p.add_argument(
+        "--stream_series_out",
+        default=None,
+        help="(stream) Optional JSON path to write a time-series summary (M(t), dM(t), phase boundary) for stream mode.",
+    )
+    p.add_argument(
         "--require_geometry_gate",
         action="store_true",
         help="If set, require the geometry-break gate to pass in stream mode (in addition to the existing intervention gate).",
+    )
+    p.add_argument(
+        "--require_phase_boundary_gate",
+        action="store_true",
+        help="(stream) If set, require a phase-boundary (stable delta) gate to pass (SciFact + Climate-FEVER).",
+    )
+    p.add_argument(
+        "--require_injection_gate",
+        action="store_true",
+        help="(stream) If set, require a delayed-injection causal gate to pass (SciFact).",
+    )
+    p.add_argument(
+        "--phase_delta_tau",
+        type=float,
+        default=None,
+        help="(stream) Delta threshold for phase-boundary stability gate on delta(t)=M_correct(t)-M_wrong(t). Defaults depend on fast/full.",
+    )
+    p.add_argument(
+        "--phase_min_tail",
+        type=int,
+        default=None,
+        help="(stream) Phase-boundary stability window length in steps (default: 2 in fast mode, 3 in full mode).",
+    )
+    p.add_argument(
+        "--phase_min_stable_rate",
+        type=float,
+        default=None,
+        help="(stream) Minimum fraction of samples that must exhibit a stable phase-boundary crossing. Defaults depend on fast/full.",
+    )
+    p.add_argument(
+        "--geometry_backend",
+        choices=["proxy", "qgtl"],
+        default="proxy",
+        help="(stream) Geometry backend: proxy (cos/PR only) or qgtl (uses vendored qgt_lib/python for QGT/Q43-style metrics).",
     )
     return p.parse_args()
 
@@ -1968,6 +2023,9 @@ def _write_empirical_receipt(*, out_path: str, args: argparse.Namespace, results
             "apply_to": str(args.apply_to) if hasattr(args, "apply_to") else None,
             "calibration_n": int(args.calibration_n) if hasattr(args, "calibration_n") else None,
             "verify_n": int(args.verify_n) if hasattr(args, "verify_n") else None,
+            "phase_delta_tau": float(args.phase_delta_tau) if getattr(args, "phase_delta_tau", None) is not None else None,
+            "phase_min_tail": int(args.phase_min_tail) if getattr(args, "phase_min_tail", None) is not None else None,
+            "phase_min_stable_rate": float(args.phase_min_stable_rate) if getattr(args, "phase_min_stable_rate", None) is not None else None,
         },
         "results": [
             {
@@ -2035,6 +2093,50 @@ def _write_geometry_summary(*, out_path: str, args: argparse.Namespace, results:
     return sha256
 
 
+def _write_stream_series_summary(*, out_path: str, args: argparse.Namespace, results: List["BenchmarkResult"]) -> str:
+    os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+
+    payload = {
+        "type": "StreamSeriesSummary",
+        "version": 1,
+        "run": {
+            "mode": str(args.mode),
+            "dataset": str(args.dataset),
+            "fast": bool(args.fast),
+            "strict": bool(args.strict),
+            "seed": int(args.seed),
+            "scoring": str(args.scoring) if args.scoring is not None else None,
+            "wrong_checks": str(args.wrong_checks),
+            "neighbor_k": int(args.neighbor_k),
+            "phase_delta_tau": float(args.phase_delta_tau) if getattr(args, "phase_delta_tau", None) is not None else None,
+            "phase_min_tail": int(args.phase_min_tail) if getattr(args, "phase_min_tail", None) is not None else None,
+            "phase_min_stable_rate": float(args.phase_min_stable_rate) if getattr(args, "phase_min_stable_rate", None) is not None else None,
+            "geometry_backend": str(getattr(args, "geometry_backend", "proxy")),
+        },
+        "results": [],
+    }
+
+    for r in results:
+        d = dict(r.details)
+        series = d.get("stream_series_summary")
+        if series is None:
+            continue
+        payload["results"].append({"name": str(r.name), "passed": bool(r.passed), "series": series})
+
+    canonical = json.dumps(payload, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode("utf-8")
+    file_bytes = canonical + b"\n"
+    sha256 = hashlib.sha256(file_bytes).hexdigest().upper()
+
+    tmp_path = out_path + ".tmp"
+    with open(tmp_path, "wb") as f:
+        f.write(file_bytes)
+    os.replace(tmp_path, out_path)
+
+    print(f"[Q32] StreamSeriesSummary written: {out_path}")
+    print(f"[Q32] StreamSeriesSummary sha256: {sha256}")
+    return sha256
+
+
 def run_climate_fever_streaming(
     *,
     seed: int = 123,
@@ -2044,6 +2146,10 @@ def run_climate_fever_streaming(
     min_margin: Optional[float] = None,
     wrong_checks: str = "dissimilar",
     neighbor_k: int = 10,
+    require_phase_boundary_gate: bool = False,
+    phase_delta_tau: Optional[float] = None,
+    phase_min_tail: Optional[int] = None,
+    phase_min_stable_rate: Optional[float] = None,
 ) -> BenchmarkResult:
     """
     Phase 4: Real semiosphere dynamics (nonlinear time) + intervention.
@@ -2081,8 +2187,8 @@ def run_climate_fever_streaming(
     # If M is field-like (coupled to truth-consistent checks), then:
     #   - M_correct(t_end) > M_wrong(t_end) for most claims.
     #   - The "meaning" should collapse under the wrong-check intervention.
-    samples: List[Tuple[str, List[str], List[str]]] = []
-    # (claim, support_texts, wrong_check_texts)
+    samples: List[Tuple[str, List[str], List[str], List[str]]] = []
+    # (claim, support_texts_stream, independent_check_texts, wrong_check_texts)
 
     indices = np.arange(len(ds))
     rng.shuffle(indices)
@@ -2094,21 +2200,24 @@ def run_climate_fever_streaming(
         evidences = ex.get("evidences", []) or []
         if not claim_text or not evidences:
             continue
-        evs: List[Tuple[int, float, str, str]] = []
+        evs: List[Tuple[int, float, str, str, str]] = []
         for ev in evidences:
             votes = [v for v in (ev.get("votes", []) or []) if v is not None]
             counts = vote_counts(votes)
             text = str(ev.get("evidence", "")).strip()
             if not text:
                 continue
-            if counts.get("SUPPORTS", 0) >= 2 and counts.get("REFUTES", 0) == 0:
+            supports = int(counts.get("SUPPORTS", 0))
+            refutes = int(counts.get("REFUTES", 0))
+            if supports >= 1 and refutes == 0:
                 entropy = float(ev.get("entropy", 0.0) or 0.0)
-                ev_id = str(ev.get("evidence_id", "")).strip()
-                evs.append((int(counts.get("SUPPORTS", 0)), entropy, ev_id, text))
+                ev_id = str(ev.get("evidence_id", "")).strip() or "UNKNOWN:0"
+                source = str(ev.get("article", "")).strip() or str(ev_id).split(":", 1)[0] or "UNKNOWN"
+                evs.append((supports, entropy, source, ev_id, text))
         if len(evs) < 2:
             continue
-        evs_sorted = sorted(evs, key=lambda t: (-t[0], t[1], t[2]))
-        claim_support_bank.append((claim_text, [t[3] for t in evs_sorted[:6]]))
+        evs_sorted = sorted(evs, key=lambda t: (-t[0], t[1], t[2], t[3]))
+        claim_support_bank.append((claim_text, [t[4] for t in evs_sorted[:6]]))
 
     if len(claim_support_bank) < 50:
         raise RuntimeError(f"Climate-FEVER streaming index too small ({len(claim_support_bank)})")
@@ -2136,21 +2245,30 @@ def run_climate_fever_streaming(
         if not claim or not evidences:
             continue
 
-        evs: List[Tuple[int, float, str, str]] = []
+        # Climate-FEVER has ~5 evidence items per claim and often only 1 item per article, so we cannot form a long
+        # correlated stream by grouping by article. Instead, we treat *within-evidence* n-gram chunks as correlated
+        # (same source sentence), and use other supportive evidence sentences as an "independent" check pool.
+        support_evs: List[Tuple[int, float, str]] = []
         for ev in evidences:
             votes = [v for v in (ev.get("votes", []) or []) if v is not None]
             counts = vote_counts(votes)
             text = str(ev.get("evidence", "")).strip()
             if not text:
                 continue
-            if counts.get("SUPPORTS", 0) >= 2 and counts.get("REFUTES", 0) == 0:
+            supports = int(counts.get("SUPPORTS", 0))
+            refutes = int(counts.get("REFUTES", 0))
+            if supports >= 1 and refutes == 0:
                 entropy = float(ev.get("entropy", 0.0) or 0.0)
-                ev_id = str(ev.get("evidence_id", "")).strip()
-                evs.append((int(counts.get("SUPPORTS", 0)), entropy, ev_id, text))
-        if len(evs) < 4:
+                support_evs.append((supports, entropy, text))
+        if len(support_evs) < 2:
             continue
-        support_texts = [t[3] for t in sorted(evs, key=lambda t: (-t[0], t[1], t[2]))[:5]]
+        support_evs_sorted = sorted(support_evs, key=lambda t: (-t[0], t[1]))
+        stream_text = str(support_evs_sorted[0][2])
+        support_texts = _word_chunks(stream_text, window=3, stride=1, max_chunks=12)[:6]
         if len(support_texts) < 4:
+            continue
+        independent_texts = [str(t[2]) for t in support_evs_sorted[1:4]]
+        if len(independent_texts) < 2:
             continue
 
         # Observation proxy: how supportive are the claim's own supports for the claim?
@@ -2208,7 +2326,7 @@ def run_climate_fever_streaming(
         if len(wrong_check_texts) < 3:
             continue
 
-        samples.append((claim, support_texts, wrong_check_texts))
+        samples.append((claim, support_texts, independent_texts, wrong_check_texts))
         if fast and len(samples) in (5, 10, 15):
             print(f"[Q32:P4] streaming samples={len(samples)}")
         if len(samples) >= (20 if fast else 120):
@@ -2228,11 +2346,17 @@ def run_climate_fever_streaming(
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
     phi_coupling: List[float] = []
+    M_indep_end: List[float] = []
+    R_indep_end: List[float] = []
+    phase_stable_cross: List[float] = []
+    phase_first_cross_frac: List[float] = []
+    series_delta_grid: List[List[float]] = []
 
     use_n = min((16 if fast else 120), len(samples))
-    for claim, support_texts, wrong_check_texts in samples[:use_n]:
+    for claim, support_texts, independent_texts, wrong_check_texts in samples[:use_n]:
         support_scores = sentence_support_scores([claim] * len(support_texts), support_texts).tolist()
         wrong_scores = sentence_support_scores([claim] * len(wrong_check_texts), wrong_check_texts).tolist()
+        indep_scores = sentence_support_scores([claim] * len(independent_texts), independent_texts).tolist()
 
         # Streaming time steps: we require at least 2 obs points and at least 2 check points.
         # With 5 supports, this gives t in {2,3}. With 4 supports, only t=2.
@@ -2277,23 +2401,39 @@ def run_climate_fever_streaming(
             obs_end_by_sample.append(last_obs)
             check_end_by_sample.append(last_check)
             wrong_end_by_sample.append([float(x) for x in wrong_scores])
+            R_i = float(R_grounded(last_obs, indep_scores))
+            R_indep_end.append(R_i)
+            M_indep_end.append(float(M_from_R(R_i)))
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
-        # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
-        if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
-            obs_e = support_emb[:last_t]
-            chk_e = support_emb[last_t:]
-            wrong_e = wrong_emb
-            obs_mean = np.mean(obs_e, axis=0) if obs_e.size else claim_vec
-            chk_mean = np.mean(chk_e, axis=0) if chk_e.size else claim_vec
-            wrong_mean = np.mean(wrong_e, axis=0) if wrong_e.size else -claim_vec
-            geom_cos_correct_end.append(_cos_sim(obs_mean, chk_mean))
-            geom_cos_wrong_end.append(_cos_sim(obs_mean, wrong_mean))
-            geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
-            geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
-            geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
+        delta_series = [float(a - b) for a, b in zip(M_series_correct, M_series_wrong)]
+        if delta_series:
+            tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+            min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
+            tail_n = min(int(min_tail), int(len(delta_series)))
+            stable = 0.0
+            first_frac = float("nan")
+            if tail_n >= 1 and all(float(x) >= tau for x in delta_series[-tail_n:]):
+                stable = 1.0
+                for i in range(0, len(delta_series) - tail_n + 1):
+                    window = delta_series[i : i + tail_n]
+                    if all(float(x) >= tau for x in window):
+                        first_frac = float(i / max(1, len(delta_series) - 1))
+                        break
+            phase_stable_cross.append(stable)
+            if math.isfinite(first_frac):
+                phase_first_cross_frac.append(first_frac)
+            grid_n = 11
+            if len(delta_series) == 1:
+                series_delta_grid.append([float(delta_series[0])] * grid_n)
+            else:
+                xs = np.linspace(0.0, 1.0, num=len(delta_series))
+                xg = np.linspace(0.0, 1.0, num=grid_n)
+                series_delta_grid.append([float(v) for v in np.interp(xg, xs, np.asarray(delta_series, dtype=float))])
+
+        # (Geometry is handled in SciFact streaming; Climate-FEVER Phase 4 focuses on independence + phase boundary.)
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable streaming series ({len(M_correct_end)})")
@@ -2356,6 +2496,38 @@ def run_climate_fever_streaming(
     if phi_coupling:
         print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
 
+    print("\n[Q32:P4] Streaming deltas")
+    print(f"  mean dM_correct = {dM_correct_a.mean():.3f}")
+    print(f"  mean dM_wrong   = {dM_wrong_a.mean():.3f}")
+
+    if M_indep_end:
+        M_indep_end_a = np.asarray(M_indep_end, dtype=float)
+        wins_i = int(np.sum(M_indep_end_a > M_wrong_end_a))
+        n_i = int(M_indep_end_a.size)
+        pair_wins_i = float(wins_i / max(1, n_i))
+        margin_i = float(np.mean(M_indep_end_a - M_wrong_end_a))
+        z_i = _binom_z(wins_i, n_i)
+        print("\n[Q32:P4] Independence probe (independent checks vs wrong checks)")
+        print(f"  P(M_indep_end > M_wrong_end) = {pair_wins_i:.3f}")
+        print(f"  z(H0: p=0.5) = {z_i:.3f}  (n={n_i})")
+        print(f"  mean(M_indep_end - M_wrong_end) = {margin_i:.3f}")
+
+    if phase_stable_cross:
+        pr = float(np.mean(np.asarray(phase_stable_cross, dtype=float)))
+        tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+        min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
+        gate_rate = float(phase_min_stable_rate) if phase_min_stable_rate is not None else (0.50 if fast else 0.60)
+        print("\n[Q32:P4] Phase-boundary (stable delta) probe")
+        print(f"  delta_tau = {tau:.3f}, min_tail = {int(min_tail)}")
+        print(f"  stable_cross_rate = {pr:.3f}")
+        if phase_first_cross_frac:
+            print(f"  mean_first_cross_frac = {float(np.mean(np.asarray(phase_first_cross_frac, dtype=float))):.3f}")
+        phase_passed = bool(pr >= gate_rate)
+        print(f"  phase_gate_rate={gate_rate:.3f} => {'PASS' if phase_passed else 'FAIL'}")
+        if require_phase_boundary_gate and (not phase_passed):
+            if strict and not fast:
+                raise AssertionError("FAIL: Climate-FEVER phase-boundary gate did not pass")
+
     # Strict threshold uses ~p<0.01 (z≈2.576) for "field effect survives intervention" significance.
     gate_z = float(min_z if min_z is not None else (2.0 if fast else 2.6))
     gate_margin = float(min_margin if min_margin is not None else (0.50 if fast else 0.75))
@@ -2392,6 +2564,17 @@ def run_climate_fever_streaming(
             if (wrong_checks in ("neighbor", "inflation") and neighbor_sims)
             else float("nan"),
             "phi_proxy_bits": float(np.mean(np.asarray(phi_coupling, dtype=float))) if phi_coupling else 0.0,
+            "mean_R_indep_end": float(np.mean(np.asarray(R_indep_end, dtype=float))) if R_indep_end else float("nan"),
+            "mean_logR_indep_end": float(np.mean(np.asarray(M_indep_end, dtype=float))) if M_indep_end else float("nan"),
+            "phase_delta_tau": float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75),
+            "phase_min_tail": float(int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)),
+            "phase_stable_cross_rate": float(np.mean(np.asarray(phase_stable_cross, dtype=float))) if phase_stable_cross else float("nan"),
+            "stream_series_summary": {
+                "grid_n": 11,
+                "delta_mean": [float(x) for x in np.nanmean(np.asarray(series_delta_grid, dtype=float), axis=0)]
+                if series_delta_grid
+                else [],
+            },
         },
     )
 
@@ -2408,6 +2591,12 @@ def run_scifact_streaming(
     scifact_stream_seed: int = 123,
     require_geometry_gate: bool = False,
     compute_geometry: bool = False,
+    require_phase_boundary_gate: bool = False,
+    phase_delta_tau: Optional[float] = None,
+    phase_min_tail: Optional[int] = None,
+    phase_min_stable_rate: Optional[float] = None,
+    geometry_backend: str = "proxy",
+    require_injection_gate: bool = False,
 ) -> BenchmarkResult:
     """
     Phase 4 / Phase 3 transfer probe on SciFact.
@@ -2423,8 +2612,8 @@ def run_scifact_streaming(
     print("\n[Q32:P4] SciFact streaming + intervention")
     from datasets import load_dataset  # type: ignore
 
-    claims = load_dataset("scifact", "claims", trust_remote_code=True)["train"]
-    corpus = load_dataset("scifact", "corpus", trust_remote_code=True)["train"]
+    claims = load_dataset("scifact", "claims")["train"]
+    corpus = load_dataset("scifact", "corpus")["train"]
     corpus_by_id: Dict[int, dict] = {int(r["doc_id"]): r for r in corpus}
 
     # Collect SUPPORT examples with enough abstract sentences to form a stream.
@@ -2656,6 +2845,15 @@ def run_scifact_streaming(
     geom_pr_obs_end: List[float] = []
     geom_pr_check_end: List[float] = []
     geom_pr_wrong_end: List[float] = []
+    geom_qgtl_berry_correct: List[float] = []
+    geom_qgtl_berry_wrong: List[float] = []
+    geom_qgtl_df_obs: List[float] = []
+    geom_qgtl_df_check: List[float] = []
+    geom_qgtl_df_wrong: List[float] = []
+    phase_stable_cross: List[float] = []
+    phase_first_cross_frac: List[float] = []
+    series_delta_grid: List[List[float]] = []
+    M_injected_end: List[float] = []
 
     use_n = min((16 if fast else 120), len(samples))
     phi_coupling: List[float] = []
@@ -2719,6 +2917,18 @@ def run_scifact_streaming(
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
+        # Causal delayed-injection probe: contaminate the *observations* with wrong evidence and require M drops.
+        # This is a stricter "causal" intervention than modifying checks: it changes mu_hat directly.
+        if last_obs is not None and last_check is not None and wrong_scores:
+            injected_obs = list(last_obs)
+            if injected_obs:
+                worst_wrong = float(np.min(np.asarray(wrong_scores, dtype=float)))
+                injected_obs[-1] = worst_wrong
+                if len(injected_obs) >= 2:
+                    injected_obs[-2] = worst_wrong
+                R_inj = float(R_grounded(injected_obs, last_check))
+                M_injected_end.append(float(M_from_R(R_inj)))
+
         # Geometry proxies at end-step (t = last_t): compare obs vs correct-check vs wrong-check embedding structure.
         if compute_geometry and last_t >= 2 and int(support_emb.shape[0]) >= last_t:
             obs_e = support_emb[:last_t]
@@ -2732,6 +2942,61 @@ def run_scifact_streaming(
             geom_pr_obs_end.append(_participation_ratio_from_embeddings(obs_e))
             geom_pr_check_end.append(_participation_ratio_from_embeddings(chk_e))
             geom_pr_wrong_end.append(_participation_ratio_from_embeddings(wrong_e))
+
+            if str(geometry_backend) == "qgtl":
+                try:
+                    import sys
+                    from pathlib import Path
+
+                    qgt_dir = (
+                        Path(__file__).resolve().parents[5]
+                        / "LAB"
+                        / "VECTOR_ELO"
+                        / "eigen-alignment"
+                        / "_from_wt-eigen-alignment"
+                        / "qgt_lib"
+                        / "python"
+                    )
+                    sys.path.insert(0, str(qgt_dir))
+                    import qgt as qgtl  # type: ignore
+
+                    geom_qgtl_df_obs.append(float(qgtl.participation_ratio(obs_e, normalize=True)))
+                    geom_qgtl_df_check.append(float(qgtl.participation_ratio(chk_e, normalize=True)))
+                    geom_qgtl_df_wrong.append(float(qgtl.participation_ratio(wrong_e, normalize=True)) if wrong_e.size else 0.0)
+                    # "Berry phase" proxy around a simple closed loop (real-embedding holonomy proxy).
+                    loop_correct = np.vstack([claim_vec, obs_mean, chk_mean, claim_vec])
+                    loop_wrong = np.vstack([claim_vec, obs_mean, wrong_mean, claim_vec])
+                    geom_qgtl_berry_correct.append(float(qgtl.berry_phase(loop_correct, closed=True)))
+                    geom_qgtl_berry_wrong.append(float(qgtl.berry_phase(loop_wrong, closed=True)))
+                except Exception:
+                    pass
+
+        # Phase-boundary: stable crossing on delta(t)=M_correct(t)-M_wrong(t), resampled to a fixed grid for reporting.
+        delta_series = [float(a - b) for a, b in zip(M_series_correct, M_series_wrong)]
+        if delta_series:
+            tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+            min_tail = 2 if fast else 3
+            tail_n = min(int(min_tail), int(len(delta_series)))
+            stable = 0.0
+            first_frac = float("nan")
+            if tail_n >= 1 and all(float(x) >= tau for x in delta_series[-tail_n:]):
+                stable = 1.0
+                for i in range(0, len(delta_series) - tail_n + 1):
+                    window = delta_series[i : i + tail_n]
+                    if all(float(x) >= tau for x in window):
+                        first_frac = float(i / max(1, len(delta_series) - 1))
+                        break
+            phase_stable_cross.append(stable)
+            if math.isfinite(first_frac):
+                phase_first_cross_frac.append(first_frac)
+
+            grid_n = 11
+            if len(delta_series) == 1:
+                series_delta_grid.append([float(delta_series[0])] * grid_n)
+            else:
+                xs = np.linspace(0.0, 1.0, num=len(delta_series))
+                xg = np.linspace(0.0, 1.0, num=grid_n)
+                series_delta_grid.append([float(v) for v in np.interp(xg, xs, np.asarray(delta_series, dtype=float))])
 
     if len(M_correct_end) < (10 if fast else 60):
         raise RuntimeError(f"Too few usable SciFact streaming series ({len(M_correct_end)})")
@@ -2822,6 +3087,46 @@ def run_scifact_streaming(
             if strict and not fast:
                 raise AssertionError("FAIL: SciFact geometry-break gate did not pass")
 
+    # Phase-boundary (delta stability) summary + optional gate.
+    if phase_stable_cross:
+        pr = float(np.mean(np.asarray(phase_stable_cross, dtype=float)))
+        tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+        min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
+        gate_rate = float(phase_min_stable_rate) if phase_min_stable_rate is not None else (0.50 if fast else 0.60)
+        print("\n[Q32:P4] Phase-boundary (stable delta) probe")
+        print(f"  delta_tau = {tau:.3f}, min_tail = {int(min_tail)}")
+        print(f"  stable_cross_rate = {pr:.3f}")
+        if phase_first_cross_frac:
+            print(f"  mean_first_cross_frac = {float(np.mean(np.asarray(phase_first_cross_frac, dtype=float))):.3f}")
+        phase_passed = bool(pr >= gate_rate)
+        print(f"  phase_gate_rate={gate_rate:.3f} => {'PASS' if phase_passed else 'FAIL'}")
+        if require_phase_boundary_gate and (not phase_passed):
+            if strict and not fast:
+                raise AssertionError("FAIL: SciFact phase-boundary gate did not pass")
+
+    # Delayed-injection causal probe (optional gate).
+    if M_injected_end:
+        M_inj_a = np.asarray(M_injected_end, dtype=float)
+        # Align lengths if some samples were skipped.
+        m = min(int(M_inj_a.size), int(M_correct_end_a.size))
+        if m > 0:
+            M_inj_a = M_inj_a[:m]
+            M_corr_a = M_correct_end_a[:m]
+            wins_inj = int(np.sum(M_corr_a > M_inj_a))
+            z_inj = _binom_z(wins_inj, int(m))
+            margin_inj = float(np.mean(M_corr_a - M_inj_a))
+            print("\n[Q32:P4] Delayed-injection causal probe (end-step)")
+            print(f"  P(M_correct_end > M_injected_end) = {float(wins_inj / max(1, m)):.3f}")
+            print(f"  z(H0: p=0.5) = {z_inj:.3f}  (n={int(m)})")
+            print(f"  mean(M_correct_end - M_injected_end) = {margin_inj:.3f}")
+            inj_gate_z = float(2.0 if fast else 2.6)
+            inj_gate_margin = float(0.50 if fast else 0.75)
+            inj_passed = bool(z_inj >= inj_gate_z and margin_inj >= inj_gate_margin)
+            print(f"  inj_gate_z={inj_gate_z:.3f}, inj_gate_margin={inj_gate_margin:.3f} => {'PASS' if inj_passed else 'FAIL'}")
+            if require_injection_gate and (not inj_passed):
+                if strict and not fast:
+                    raise AssertionError("FAIL: SciFact injection gate did not pass")
+
     print("\n[Q32:P4] Streaming deltas")
     print(f"  mean dM_correct = {dM_correct_a.mean():.3f}")
     print(f"  mean dM_wrong   = {dM_wrong_a.mean():.3f}")
@@ -2881,6 +3186,51 @@ def run_scifact_streaming(
         details["geom_mean_pr_wrong_end"] = (
             float(np.nanmean(np.asarray(geom_pr_wrong_end, dtype=float))) if geom_pr_wrong_end else float("nan")
         )
+        if geom_qgtl_df_obs:
+            details["geom_qgtl_df_obs_mean"] = float(np.nanmean(np.asarray(geom_qgtl_df_obs, dtype=float)))
+        if geom_qgtl_df_check:
+            details["geom_qgtl_df_check_mean"] = float(np.nanmean(np.asarray(geom_qgtl_df_check, dtype=float)))
+        if geom_qgtl_df_wrong:
+            details["geom_qgtl_df_wrong_mean"] = float(np.nanmean(np.asarray(geom_qgtl_df_wrong, dtype=float)))
+        if geom_qgtl_berry_correct:
+            details["geom_qgtl_berry_correct_mean"] = float(np.nanmean(np.asarray(geom_qgtl_berry_correct, dtype=float)))
+        if geom_qgtl_berry_wrong:
+            details["geom_qgtl_berry_wrong_mean"] = float(np.nanmean(np.asarray(geom_qgtl_berry_wrong, dtype=float)))
+        if geom_qgtl_berry_correct and geom_qgtl_berry_wrong:
+            details["geom_qgtl_berry_margin_mean"] = float(
+                np.nanmean(np.asarray(geom_qgtl_berry_correct, dtype=float) - np.asarray(geom_qgtl_berry_wrong, dtype=float))
+            )
+    if phase_stable_cross:
+        tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
+        min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
+        gate_rate = float(phase_min_stable_rate) if phase_min_stable_rate is not None else (0.50 if fast else 0.60)
+        details["phase_delta_tau"] = float(tau)
+        details["phase_min_tail"] = float(min_tail)
+        details["phase_stable_cross_rate"] = float(np.mean(np.asarray(phase_stable_cross, dtype=float)))
+        details["phase_gate_rate"] = float(gate_rate)
+        if phase_first_cross_frac:
+            details["phase_mean_first_cross_frac"] = float(np.mean(np.asarray(phase_first_cross_frac, dtype=float)))
+        if series_delta_grid:
+            grid = np.asarray(series_delta_grid, dtype=float)
+            mean_curve = np.nanmean(grid, axis=0)
+            p25 = np.nanpercentile(grid, 25, axis=0)
+            p75 = np.nanpercentile(grid, 75, axis=0)
+            details["stream_series_summary"] = {
+                "grid_n": 11,
+                "delta_mean": [float(x) for x in mean_curve],
+                "delta_p25": [float(x) for x in p25],
+                "delta_p75": [float(x) for x in p75],
+            }
+    if M_injected_end:
+        M_inj_a = np.asarray(M_injected_end, dtype=float)
+        m = min(int(M_inj_a.size), int(M_correct_end_a.size))
+        if m > 0:
+            M_inj_a = M_inj_a[:m]
+            M_corr_a = M_correct_end_a[:m]
+            wins_inj = int(np.sum(M_corr_a > M_inj_a))
+            details["inj_pair_wins_end"] = float(wins_inj / max(1, m))
+            details["inj_z_end"] = float(_binom_z(wins_inj, int(m)))
+            details["inj_mean_margin_end"] = float(np.mean(M_corr_a - M_inj_a))
     return BenchmarkResult(name="SciFact-Streaming", passed=passed, details=details)
 
 
@@ -3114,7 +3464,15 @@ def main() -> int:
         if args.dataset in ("climate_fever", "all"):
             results.append(
                 run_climate_fever_streaming(
-                    seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    seed=args.seed,
+                    fast=args.fast,
+                    strict=strict,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    require_phase_boundary_gate=bool(args.require_phase_boundary_gate),
+                    phase_delta_tau=float(args.phase_delta_tau) if args.phase_delta_tau is not None else None,
+                    phase_min_tail=int(args.phase_min_tail) if getattr(args, "phase_min_tail", None) is not None else None,
+                    phase_min_stable_rate=float(args.phase_min_stable_rate) if args.phase_min_stable_rate is not None else None,
                 )
             )
         if args.dataset in ("scifact", "all"):
@@ -3128,6 +3486,12 @@ def main() -> int:
                     scifact_stream_seed=int(args.scifact_stream_seed),
                     require_geometry_gate=bool(args.require_geometry_gate),
                     compute_geometry=True,
+                    require_phase_boundary_gate=bool(args.require_phase_boundary_gate),
+                    phase_delta_tau=float(args.phase_delta_tau) if args.phase_delta_tau is not None else None,
+                    phase_min_tail=int(args.phase_min_tail) if getattr(args, "phase_min_tail", None) is not None else None,
+                    phase_min_stable_rate=float(args.phase_min_stable_rate) if args.phase_min_stable_rate is not None else None,
+                    geometry_backend=str(args.geometry_backend),
+                    require_injection_gate=bool(getattr(args, "require_injection_gate", False)),
                 )
             )
         if args.dataset in ("snli", "all"):
@@ -3169,10 +3533,24 @@ def main() -> int:
                         wrong_checks=args.wrong_checks,
                         neighbor_k=args.neighbor_k,
                         scifact_stream_seed=int(args.scifact_stream_seed),
+                        require_geometry_gate=False,
+                        compute_geometry=False,
+                        require_phase_boundary_gate=False,
+                        phase_delta_tau=None,
+                        phase_min_stable_rate=None,
+                        geometry_backend="proxy",
+                        require_injection_gate=False,
                     )
                 if ds == "climate_fever":
                     return run_climate_fever_streaming(
-                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        require_phase_boundary_gate=False,
+                        phase_delta_tau=None,
+                        phase_min_stable_rate=None,
                     )
                 return run_snli_streaming(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
@@ -3354,6 +3732,8 @@ def main() -> int:
         _write_empirical_receipt(out_path=str(args.empirical_receipt_out), args=args, results=results)
     if args.geometry_out:
         _write_geometry_summary(out_path=str(args.geometry_out), args=args, results=results)
+    if args.stream_series_out:
+        _write_stream_series_summary(out_path=str(args.stream_series_out), args=args, results=results)
 
     all_passed = all(r.passed for r in results)
     # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by the aggregate result.
