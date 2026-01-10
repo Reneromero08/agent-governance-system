@@ -1,0 +1,244 @@
+#ifndef HIERARCHICAL_MATRIX_H
+#define HIERARCHICAL_MATRIX_H
+
+#include <stddef.h>
+#include <stdbool.h>
+
+// C/C++/Objective-C++ complex type compatibility
+#ifdef __cplusplus
+    #include <complex>
+    typedef std::complex<double> qgt_complex_t;
+    #define QGT_COMPLEX_REAL(z) ((z).real())
+    #define QGT_COMPLEX_IMAG(z) ((z).imag())
+#else
+    #include <complex.h>
+    typedef double _Complex qgt_complex_t;
+    #define QGT_COMPLEX_REAL(z) (creal(z))
+    #define QGT_COMPLEX_IMAG(z) (cimag(z))
+#endif
+
+// Matrix types
+typedef enum {
+    MATRIX_DENSE,           // Dense matrix
+    MATRIX_SPARSE,          // Sparse matrix
+    MATRIX_HIERARCHICAL,    // Hierarchical matrix
+    MATRIX_QUANTUM,         // Quantum matrix
+    MATRIX_HYBRID          // Hybrid matrix
+} matrix_type_t;
+
+// Compression modes
+typedef enum {
+    COMPRESS_SVD,          // SVD compression
+    COMPRESS_QR,           // QR compression
+    COMPRESS_ACA,          // Adaptive cross approximation
+    COMPRESS_QUANTUM,      // Quantum compression
+    COMPRESS_ADAPTIVE     // Adaptive compression
+} compression_mode_t;
+
+// Storage formats
+typedef enum {
+    STORAGE_FULL,          // Full storage
+    STORAGE_PACKED,        // Packed storage
+    STORAGE_DISTRIBUTED,   // Distributed storage
+    STORAGE_QUANTUM,       // Quantum storage
+    STORAGE_HYBRID        // Hybrid storage
+} storage_format_t;
+
+// Matrix properties
+typedef struct {
+    size_t dimension;              // Matrix dimension
+    size_t num_blocks;             // Number of blocks
+    double tolerance;              // Error tolerance
+    bool symmetric;                // Symmetry flag
+    bool positive_definite;        // Positive definiteness
+    double condition_number;       // Condition number
+    void* properties_data;        // Additional properties
+} matrix_properties_t;
+
+// Block configuration
+typedef struct {
+    size_t* block_sizes;           // Block sizes
+    size_t num_blocks;             // Number of blocks
+    size_t min_block_size;         // Minimum block size
+    size_t max_block_size;         // Maximum block size
+    bool adaptive_blocking;        // Adaptive blocking flag
+    void* block_data;            // Additional block data
+} block_config_t;
+
+// Compression parameters
+typedef struct {
+    compression_mode_t mode;       // Compression mode
+    double tolerance;              // Compression tolerance
+    size_t max_rank;              // Maximum rank
+    bool recompression;           // Enable recompression
+    double threshold;             // Compression threshold
+    void* compression_data;      // Additional parameters
+} compression_params_t;
+
+// Basic hierarchical matrix structure
+typedef struct HierarchicalMatrix {
+    matrix_type_t type;            // Matrix type
+    storage_format_t format;       // Storage format
+    qgt_complex_t* data;          // Raw data for leaf nodes
+    qgt_complex_t* grad;          // Gradient data for backpropagation
+    qgt_complex_t* U;             // Left singular vectors
+    qgt_complex_t* V;             // Right singular vectors
+    size_t n;                     // Matrix dimension
+    size_t rows;                  // Number of rows
+    size_t cols;                  // Number of columns
+    size_t rank;                  // Matrix rank
+    bool is_leaf;                 // Leaf node flag
+    double tolerance;             // SVD tolerance
+    struct HierarchicalMatrix* children[4];  // Child matrices
+    void* matrix_data;           // Additional data
+} HierarchicalMatrix;
+
+// Core functions
+HierarchicalMatrix* create_hierarchical_matrix(size_t n, double tolerance);
+void destroy_hierarchical_matrix(HierarchicalMatrix* matrix);
+
+// Initialization functions
+bool init_matrix_properties(HierarchicalMatrix* matrix,
+                          const matrix_properties_t* props);
+bool init_block_structure(HierarchicalMatrix* matrix,
+                         const block_config_t* config);
+bool validate_hierarchical_matrix(const HierarchicalMatrix* matrix);
+
+// Block operations
+bool set_block_sizes(HierarchicalMatrix* matrix,
+                    const size_t* sizes,
+                    size_t num_blocks);
+qgt_complex_t* get_block(HierarchicalMatrix* matrix,
+                          size_t block_idx);
+size_t get_block_size(const HierarchicalMatrix* matrix,
+                      size_t block_idx);
+bool set_block_data(HierarchicalMatrix* matrix,
+                    size_t block_idx,
+                    const qgt_complex_t* data);
+
+// Matrix operations
+bool multiply_matrices(HierarchicalMatrix* result,
+                      const HierarchicalMatrix* a,
+                      const HierarchicalMatrix* b);
+bool add_matrices(HierarchicalMatrix* result,
+                  const HierarchicalMatrix* a,
+                  const HierarchicalMatrix* b);
+bool subtract_matrices(HierarchicalMatrix* result,
+                      const HierarchicalMatrix* a,
+                      const HierarchicalMatrix* b);
+bool scale_matrix(HierarchicalMatrix* matrix,
+                  qgt_complex_t scalar);
+
+// Compression operations
+bool compress_matrix(HierarchicalMatrix* matrix,
+                    const compression_params_t* params);
+bool recompress_matrix(HierarchicalMatrix* matrix,
+                      double tolerance);
+bool truncate_singular_values(HierarchicalMatrix* matrix,
+                            double threshold);
+
+// Decomposition operations
+void compute_svd(qgt_complex_t* data, size_t rows, size_t cols,
+                qgt_complex_t* U, qgt_complex_t* S, qgt_complex_t* V);
+bool compute_qr(HierarchicalMatrix* matrix,
+               qgt_complex_t** Q,
+               qgt_complex_t** R);
+bool compute_lu(HierarchicalMatrix* matrix,
+               qgt_complex_t** L,
+               qgt_complex_t** U);
+
+// Analysis functions
+bool compute_norm(const HierarchicalMatrix* matrix,
+                 double* norm);
+bool estimate_rank(const HierarchicalMatrix* matrix,
+                  size_t* rank);
+bool compute_condition_number(const HierarchicalMatrix* matrix,
+                            double* condition);
+
+// Matrix operations
+void hmatrix_transpose(HierarchicalMatrix* dst, const HierarchicalMatrix* src);
+
+// Quantum operations
+bool quantum_compress(HierarchicalMatrix* matrix,
+                     const compression_params_t* params);
+bool quantum_multiply(HierarchicalMatrix* result,
+                     const HierarchicalMatrix* a,
+                     const HierarchicalMatrix* b);
+bool quantum_decompose(HierarchicalMatrix* matrix,
+                      qgt_complex_t** factors);
+
+// Utility functions
+bool export_matrix(const HierarchicalMatrix* matrix,
+                  const char* filename);
+bool import_matrix(HierarchicalMatrix* matrix,
+                  const char* filename);
+void print_matrix(const HierarchicalMatrix* matrix);
+
+// Element access
+bool hierarchical_matrix_set_element(HierarchicalMatrix* matrix,
+                                     size_t index,
+                                     qgt_complex_t value);
+qgt_complex_t hierarchical_matrix_get_element(const HierarchicalMatrix* matrix,
+                                               size_t index);
+
+// ============================================================================
+// Legacy API (hmatrix_* naming convention) - Declarations
+// ============================================================================
+
+/**
+ * @brief Create hierarchical matrix (implemented in hierarchical_matrix.c)
+ */
+HierarchicalMatrix* hmatrix_create(size_t rows, size_t cols, double tolerance);
+
+/**
+ * @brief Destroy hierarchical matrix (implemented in hierarchical_matrix.c)
+ */
+void hmatrix_destroy(HierarchicalMatrix* matrix);
+
+/**
+ * @brief Matrix multiplication (implemented in hierarchical_matrix.c)
+ */
+void hmatrix_multiply(HierarchicalMatrix* dst,
+                     const HierarchicalMatrix* a,
+                     const HierarchicalMatrix* b);
+
+/**
+ * @brief Matrix-vector multiplication for tensor networks
+ */
+void hmatrix_multiply_vector(const HierarchicalMatrix* matrix,
+                            const qgt_complex_t* input,
+                            qgt_complex_t* output,
+                            size_t batch_size);
+
+/**
+ * @brief Matrix conjugate transpose multiplication
+ */
+void hmatrix_multiply_conjugate_transpose(const HierarchicalMatrix* matrix,
+                                         const qgt_complex_t* input,
+                                         qgt_complex_t* output,
+                                         size_t batch_size);
+
+/**
+ * @brief Apply gradient update to matrix
+ */
+void hmatrix_apply_gradient(HierarchicalMatrix* matrix,
+                           const qgt_complex_t* gradient,
+                           double learning_rate);
+
+// ============================================================================
+// Tree Tensor Network Configuration
+// ============================================================================
+
+/**
+ * @brief Configuration for tree tensor networks
+ */
+typedef struct TTNConfig {
+    size_t max_bond_dimension;     // Maximum bond dimension
+    double compression_tolerance;   // SVD truncation tolerance
+    bool use_gpu;                  // Use GPU acceleration
+    bool use_metal;                // Use Metal acceleration (macOS)
+    size_t num_threads;            // Number of threads for parallel operations
+    size_t cache_size;             // Size of tensor cache in bytes
+} TTNConfig;
+
+#endif // HIERARCHICAL_MATRIX_H

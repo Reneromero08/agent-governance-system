@@ -129,6 +129,78 @@ Goal: make “meaning-as-field on the semiosphere” survive increasingly hostil
 Evidence index:
 - `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_PHASE3_EVIDENCE_PACKAGE.md`
 
+### Phase 4 - Next (semiosphere dynamics + independence)
+
+Goal: make the field claim survive **time**, **interventions**, and **independence stress** (not just static comparisons).
+
+#### 4.0 QGT/QGTL integration (geometry instrumentation)
+- [ ] Integrate QGTL as an optional geometry backend:
+  - Source + built libs are vendored into this worktree under:
+    - `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/_from_wt-eigen-alignment/qgt_lib/`
+    - `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/_from_wt-eigen-alignment/qgt_lib_built/lib/`
+- [ ] Define the embedding → state map used for geometry:
+  - baseline: normalized embeddings as projective points (gauge-fixed)
+  - if Berry/holonomy is used: explicitly define the complex/gauge structure (avoid “0 by construction”)
+- [ ] Emit receipted geometry artifacts per run:
+  - metric / effective-rank proxy (eigenspectrum participation ratio)
+  - optional holonomy/Berry-phase around specified loops (if complex structure is defined)
+- [ ] Geometry-break intervention gate (the “tipping test”):
+  - Run the same streaming experiment under:
+    1) truth-consistent checks (baseline)
+    2) neighbor wrong checks (`--wrong_checks neighbor`) (falsifier)
+  - Compute a geometry signal alongside `M(t)=log(R)`:
+    - start with a cheap proxy (local participation ratio / subspace drift)
+    - upgrade to QGTL metrics/holonomy once the state map is defined
+  - **Gate:** condition (2) must show a clear structural break / decorrelation in the geometry signal aligned with the `M` collapse, while condition (1) remains stable.
+  - Must emit: verbatim logs + receipt JSON + geometry summary JSON + SHA256 in the datatrail.
+
+#### 4.1 Nonlinear-time / stream dynamics (M(t))
+- [ ] Add a streaming report artifact (`M(t)`, `dM(t)`) and gate on expected dynamics:
+  - ambiguity plateau → crystallization jump → stabilization
+- [ ] Add a "phase-boundary" gate: detect stable crossings `M > τ` that persist under new evidence.
+
+#### 4.2 Independence stress (echo-chamber collapse)
+- [ ] Define a public "independence" proxy per dataset (e.g., distinct document IDs / sources / pages).
+- [ ] Add an independence-intervention mode:
+  - correlated evidence injection should NOT inflate `M` like independent evidence does
+  - require a measurable collapse of false basins under independent checks
+
+#### 4.3 Causal intervention falsifiers
+- [ ] Expand the existing wrong-check intervention into a causal suite:
+  - swap-only controls, shuffled-check controls, delayed-injection controls
+  - hard requirement: correct basins stabilize, wrong basins collapse
+
+**Exit criteria (Phase 4):**
+- Receipted runs show the expected nonlinear-time signatures and the independence stress falsifier holds with hard gates.
+
+### Phase 5 - Settlement (scale, replication, promotion)
+
+Goal: qualify for "attempt ANSWERED" without hand-waving.
+
+#### 5.1 One more public domain (4th domain)
+- [ ] Add a fourth public benchmark domain and repeat Phase-3 transfer matrix (no retuning).
+
+#### 5.2 Big runs (distributional proof, not point estimates)
+- [ ] Large multi-seed transfer across all ordered pairs (4 domains) with pinned settings.
+- [ ] Stress runs with higher `--stress_n` and hard `--stress_min_pass_rate` on multiple datasets (not just SciFact).
+- [ ] Sweeps (distributional invariance):
+  - `neighbor_k` sweep in full mode
+  - stream seed sweep (`scifact_stream_seed=-1`) in full mode
+
+#### 5.3 Strong negative controls across domains (must FAIL hard)
+- [ ] Across all domains: agreement inflation / paraphrase-only / shuffle controls fail gates reliably (receipted).
+- [ ] No "works if retuned" passes: all transfer gates run with frozen thresholds.
+
+#### 5.4 Attempt ANSWERED package (auditable)
+- [ ] Publish a single "attempt answered" evidence index:
+  - exact rerun commands
+  - pinned environment bundle + hashes
+  - explicit falsification boundary (what would retract the claim)
+  - summary of gates + where each is proven in the datatrail
+
+**Exit criteria (Phase 5):**
+- Results remain above gates under scale (seeds, stress_n, sweeps, domains) and negative controls fail hard, with a pinned replication package.
+
 ### Expanded breakdown (legacy detail mapped into Phase 1/2/3 above)
 
 #### Legacy Phase 0 — Spec freeze (no post-hoc relabeling)
