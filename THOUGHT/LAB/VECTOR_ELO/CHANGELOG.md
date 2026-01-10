@@ -6,7 +6,7 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ## [3.7.36] - 2026-01-10
 
-### E.X.4.1 PARTIAL — ESAP Handshake Protocol (Format Done)
+### E.X.4.1 COMPLETE — ESAP Handshake Protocol + Cassette Integration
 
 **Added:**
 - `eigen-alignment/lib/handshake.py` — ESAP handshake protocol implementation
@@ -20,14 +20,15 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
   - `ESAP_ACK` — Convergence confirmation with optional Procrustes alignment
   - `ESAP_REJECT` — Rejection with reason codes (SPECTRUM_DIVERGENCE, ANCHOR_MISMATCH, etc.)
 - `eigen-alignment/tests/test_handshake.py` — 16 tests all passing
-  - Cumulative variance monotonicity and normalization
-  - Effective rank for uniform/single/trained spectra
-  - Convergence check threshold behavior
-  - Full handshake flow (HELLO → ACK → success)
-  - Anchor mismatch rejection
-  - Divergent spectrum rejection
-  - Replay protection via nonce
-  - Capabilities exchange
+- `NAVIGATION/CORTEX/network/esap_cassette.py` — ESAP cassette mixin
+  - `ESAPCassetteMixin` — Adds ESAP capability to any DatabaseCassette
+  - `CassetteSpectrum` — Spectrum signature with eigenvalues, Df, cumulative variance
+  - `VectorCassetteBase` — Base class for cassettes with vector storage
+- `NAVIGATION/CORTEX/network/esap_hub.py` — ESAP-enabled network hub
+  - `ESAPNetworkHub` — Verifies spectral alignment on registration
+  - Alignment groups for cross-query optimization
+  - Convergence matrix tracking pairwise alignments
+- `NAVIGATION/CORTEX/network/test_esap_integration.py` — 13 integration tests passing
 
 **Protocol Flow:**
 ```
@@ -42,10 +43,6 @@ Agent A                     Agent B
 ```
 
 **Key Insight:** Handshake VERIFIES alignment (checks cumulative variance correlation > 0.9), it doesn't DO alignment (that's Procrustes, separate step). Two models can verify they share the same semantic space without exchanging full embeddings.
-
-**Remaining:**
-- Integrate with cassette network sync protocol
-- Add spectrum signature to cassette metadata
 
 ---
 
