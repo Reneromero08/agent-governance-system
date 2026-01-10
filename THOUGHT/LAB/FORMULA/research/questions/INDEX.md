@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.7.26*
+*Last updated: v3.7.27 (2026-01-10 - J coupling discovery)*
 
 ---
 
@@ -28,11 +28,13 @@
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ⏳ PARTIAL | In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`. General mapping for the full formula across families is still open. |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ⏳ OPEN | Can R distinguish aligned vs. misaligned agent behavior? |
+| 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ⏳ PARTIAL | **J coupling + effective dimensionality**: J alone insufficient (untrained has high J but no semantic structure). Breakthrough: Training concentrates 768D→22D effective dimensions. Compass = J × principal_axis_alignment. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ OPEN | Is there a critical threshold for agreement? Does truth "crystallize"? |
-| 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
-| 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ⏳ OPEN | Can an action-conditioned `R(s,a)` become a reliable compass (choose direction), not just a gate (act/don't)? |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ⏳ OPEN | Do independent compressions converge to the same symbols/latents (up to isomorphism), or are there many inequivalent “good” bases? |
+| 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
+| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ⏳ OPEN | How does Bohm's Implicate Order (Platonic manifold/Phi) map to Explicate Order (R interface)? Can we formalize unfoldment as M field dynamics? |
+| 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ⏳ OPEN | Do R-gates define Markov blankets? How does Active Inference (FEP) connect to R-gating? Are meaning boundaries Markov blankets on M field? |
 
 ---
 
@@ -46,6 +48,7 @@
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ⏳ OPEN | Should agent actions require R > threshold? Autonomy vs. safety tradeoffs? |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
+| 37 | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md) | 1380 | ⏳ OPEN | How do meanings evolve on M field? Do meanings compete, speciate, converge? What are selection pressures on interpretants? |
 | 20 | [Tautology risk](medium_priority/q20_tautology_risk.md) | 1360 | ⏳ OPEN | Is formula descriptive or explanatory? |
 | 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ⏳ OPEN | Can `σ^Df` be derived from information theory (e.g., `H(X|S)` / explanation density), or is it heuristic? |
 
@@ -94,19 +97,19 @@
 
 ## Summary Statistics
 
-  - **Total Questions:** 34
-  - **Answered:** 5 (14.7%)
-  - **Partially Answered:** 6 (17.6%)
+  - **Total Questions:** 37
+  - **Answered:** 5 (13.5%)
+  - **Partially Answered:** 7 (18.9%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 23 (67.6%)
+  - **Open:** 25 (67.6%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 4 | 2 | 0 | 1 |
- | High | 9 | 0 | 2 | 0 | 7 |
- | Medium | 8 | 1 | 1 | 0 | 6 |
+ | High | 11 | 0 | 3 | 0 | 8 |
+ | Medium | 9 | 1 | 1 | 0 | 7 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
@@ -132,6 +135,28 @@
 2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles (see Q33)
 3. **Multi-scale composition** - Formal renormalization group proof, gate composition mechanics (Q7 partial)
 4. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
+
+### Recent Discovery (2026-01-10): J Coupling + Effective Dimensionality
+
+Via E.X (Eigenvalue Alignment) experiments, discovered key signals for Q31 compass mode:
+
+**J Coupling (necessary but not sufficient):**
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| J coupling | 0.065 | **0.971** | 0.690 |
+| Held-out generalization | 0.006 | 0.006 | **0.293** |
+
+Untrained BERT has HIGH J (dense embeddings from architecture) but SAME generalization as random. J measures density, not semantic organization.
+
+**Effective Dimensionality (the breakthrough):**
+| Metric | Random | Untrained | Trained |
+|--------|--------|-----------|---------|
+| Participation Ratio | 99.2 | 62.7 | **22.2** |
+| Top-10 Variance | 0.151 | 0.278 | **0.512** |
+
+Training concentrates 768D embeddings into ~22 effective dimensions. This geometric concentration creates the "carved directions" that enable cross-model alignment.
+
+**Compass hypothesis:** Direction = J × alignment_to_principal_axes (follow the carved semantic directions).
 
 ---
 
