@@ -403,3 +403,28 @@ Artifacts:
 - `empirical_receipt_p4_climate_full_20260110_050232.json` = `9C267FBA0B833ADD151D4665D0C274DEF5A19B13CB6835CB2793ED75A6BB85BA`
 - `geometry_p4_climate_full_20260110_050232.json` = `D590FAA16F669CE24689D800CE1DBCEDF67BC4AC2989E0C97106FFF1338AAA39`
 - `series_p4_climate_full_20260110_050232.json` = `C0E2DAA5EDC209B860C0B8839B64F7B2B71DC0670F51B96F34F1ED2827206DC0`
+
+---
+
+## 2026-01-10 Phase 5 (start) — 4th domain scaffold (MNLI) + initial transfer smoke (fast / cosine)
+
+### MNLI benchmark (fast / cosine)
+
+Command:
+- `python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode bench --dataset mnli --fast --scoring cosine --threads 12 --device cpu --empirical_receipt_out LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p5_mnli_bench_fast_20260110_051326.json`
+
+Artifacts:
+- `p5_mnli_bench_fast_20260110_051326.log.txt` = `9C937C4E60CB09DB7802D9A6D637AD4F4E20D1A2E8970864C78427281B5A2BD4`
+- `p5_mnli_bench_fast_20260110_051326.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p5_mnli_bench_fast_20260110_051326.json` = `80D8BBCEDAD0C655F0EF198317AE23880C1D68597622B43F0104DCFE02DAD6EA`
+
+### Transfer smoke: SciFact -> MNLI (fast / cosine; calibration_n=1, verify_n=1)
+
+Command:
+- `python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode transfer --calibrate_on scifact --apply_to mnli --calibration_n 1 --verify_n 1 --fast --scoring cosine --threads 12 --device cpu --empirical_receipt_out LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p5_transfer_scifact_to_mnli_fast_20260110_051920.json --calibration_out LAW/CONTRACTS/_runs/q32_public/datatrail/transfer_calibration_scifact_to_mnli_fast_20260110_051920.json`
+
+Artifacts:
+- `p5_transfer_scifact_to_mnli_fast_20260110_051920.log.txt` = `A640DE75C4060BAAF16548B3646D9DBED741B53BDCA797D55EF82361B432DACC`
+- `p5_transfer_scifact_to_mnli_fast_20260110_051920.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p5_transfer_scifact_to_mnli_fast_20260110_051920.json` = `52CEAA5DAD4F44D2EFCB6C69C25BE84FAB08526D6EB33FCA4674926235C197EE`
+- `transfer_calibration_scifact_to_mnli_fast_20260110_051920.json` = `4091FB173192E6033881BA0175FF8F07D63FB041C5E6B2FC8BC2C3124F9C321A`
