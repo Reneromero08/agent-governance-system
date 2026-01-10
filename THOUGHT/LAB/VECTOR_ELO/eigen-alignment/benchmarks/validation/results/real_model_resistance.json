@@ -1,0 +1,53 @@
+{
+  "test_id": "real-model-resistance-E.X.3.2b",
+  "timestamp": "2026-01-10T04:56:06.492745+00:00",
+  "parameters": {
+    "n_random": 5,
+    "n_words": 64,
+    "seed": 42,
+    "models": [
+      "all-MiniLM-L6-v2",
+      "all-mpnet-base-v2",
+      "paraphrase-MiniLM-L6-v2"
+    ]
+  },
+  "results": {
+    "random_vs_random": {
+      "improvements": [
+        0.9714499024934855,
+        0.9566208082667119,
+        0.9706902076454245,
+        0.9640283357988355,
+        0.9293202704935146
+      ],
+      "mean": 0.9584219049395944
+    },
+    "trained_vs_trained": {
+      "improvements": [
+        0.9742371314705095,
+        0.9150787565638481,
+        0.9867021982981781
+      ],
+      "mean": 0.9586726954441785
+    },
+    "random_vs_trained": {
+      "improvements": [
+        0.9431786679956566,
+        0.9421613139774745,
+        0.9250938294814967,
+        0.9145514153261801,
+        0.9596383023111901,
+        0.9403930138844177,
+        0.8999047134359903,
+        0.884593722988181,
+        0.9309220714481361
+      ],
+      "mean": 0.9267152278720805
+    },
+    "gap": -0.00025079050458409746
+  },
+  "interpretation": {
+    "verdict": "NOT CONFIRMED",
+    "explanation": "Minimal gap (-0.00). Real models behave like random for alignment."
+  }
+}
