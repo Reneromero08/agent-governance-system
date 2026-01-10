@@ -148,7 +148,7 @@ def run_model_pair_benchmark(
     mean_aligned = float(np.mean(aligned_sims))
     improvement = mean_aligned - mean_raw
 
-    print(f"    Mean similarity: raw={mean_raw:.4f}, aligned={mean_aligned:.4f}, Δ={improvement:+.4f}")
+    print(f"    Mean similarity: raw={mean_raw:.4f}, aligned={mean_aligned:.4f}, delta={improvement:+.4f}")
 
     # Neighborhood overlap
     overlap_10 = compute_neighborhood_overlap(Y_a_aligned, Y_b[:, :k_min], k=10)

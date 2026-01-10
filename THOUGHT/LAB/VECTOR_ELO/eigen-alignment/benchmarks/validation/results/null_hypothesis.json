@@ -1,0 +1,60 @@
+{
+  "test_id": "null-hypothesis-E.X.3.1",
+  "timestamp": "2026-01-10T04:24:03.580609+00:00",
+  "parameters": {
+    "n_models": 5,
+    "n_anchors": 64,
+    "dim": 384,
+    "base_seed": 42
+  },
+  "random_baseline": {
+    "n_models": 5,
+    "n_anchors": 64,
+    "dim": 384,
+    "base_seed": 42,
+    "n_pairs": 10,
+    "spearman_values": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "mean_spearman": 1.0,
+    "std_spearman": 0.0,
+    "min_spearman": 1.0,
+    "max_spearman": 1.0
+  },
+  "permutation_test": {
+    "n_permutations": 10,
+    "n_anchors": 64,
+    "dim": 384,
+    "seed": 42,
+    "spearman_values": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+    ],
+    "mean_spearman": 1.0,
+    "std_spearman": 0.0
+  },
+  "interpretation": {
+    "verdict": "FAIL",
+    "explanation": "Random embeddings show high correlation (mean=1.0000). The eigenvalue invariance is likely a mathematical artifact, not a property of learned semantic structure.",
+    "effect_size": 0.0,
+    "random_mean": 1.0,
+    "trained_baseline": 1.0
+  }
+}
