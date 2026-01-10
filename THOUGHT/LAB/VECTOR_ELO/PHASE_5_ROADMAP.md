@@ -132,61 +132,83 @@ Every task must produce:
 
 **Reference:** `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md`
 
-### 5.2.7.1 TokenReceipt Schema
-- [ ] Create `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
-- [ ] Required fields:
-  - `operation` (string): Operation type
+### 5.2.7.1 TokenReceipt Schema ✅ COMPLETE (2026-01-10)
+- [x] Create `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
+- [x] Required fields:
+  - `schema_version` (string): Schema version for evolution (const: "1.0.0")
+  - `operation` (string): Operation type enum
   - `tokens_out` (integer): Output tokens
-  - `tokenizer` (object): library, encoding, version
-- [ ] Optional fields:
+  - `tokenizer` (object): library, encoding, version, fallback_used
+- [x] Optional fields (core):
   - `tokens_in`, `baseline_equiv`, `tokens_saved`, `savings_pct`
   - `corpus_anchor`, `operation_id`, `timestamp_utc`
+- [x] Optional fields (hardening):
+  - `session_id` (string): Session ID for firewall aggregation
+  - `receipt_hash` (string): SHA-256 of receipt for integrity/chain linking
+  - `parent_receipt_hash` (string|null): SHA-256 for receipt chaining
+  - `baseline_method` (enum): How baseline was calculated
+  - `determinism_proof` (object): git_head, git_clean, methodology_hash
+  - `query_metadata` (object): Operation-specific data (query_hash, results_count, etc.)
 
-### 5.2.7.2 TokenReceipt Primitive
-- [ ] Create `CAPABILITY/PRIMITIVES/token_receipt.py`
-- [ ] Implement `TokenReceipt` dataclass
-- [ ] Auto-compute `tokens_saved` and `savings_pct` from baseline
-- [ ] Generate unique `operation_id` hash
+### 5.2.7.2 TokenReceipt Primitive ✅ COMPLETE (2026-01-10)
+- [x] Create `CAPABILITY/PRIMITIVES/token_receipt.py`
+- [x] Implement `TokenReceipt` dataclass
+- [x] Auto-compute `tokens_saved` and `savings_pct` from baseline
+- [x] Generate unique `operation_id` hash
+- [x] Compute `receipt_hash` for integrity/chaining
+- [x] Helper functions: `get_default_tokenizer()`, `count_tokens()`, `hash_query()`
+- [x] Schema validation: `validate_receipt()`
 
-### 5.2.7.3 Patch Semantic Search
-- [ ] Update `NAVIGATION/CORTEX/semantic/semantic_search.py`
-- [ ] Emit TokenReceipt on every `search()` call
-- [ ] Include baseline_equiv (sum of corpus tokens)
-- [ ] Return receipt alongside results
+### 5.2.7.3 Patch Semantic Search ✅ COMPLETE (2026-01-10)
+- [x] Update `NAVIGATION/CORTEX/semantic/semantic_search.py`
+- [x] Emit TokenReceipt on every `search()` call
+- [x] Include baseline_equiv (sum of corpus tokens)
+- [x] Return receipt alongside results via `SearchResponse` dataclass
+- [x] Added `_get_corpus_tokens()` for baseline calculation
+- [x] Added `_get_corpus_anchor()` for reproducibility
+- [x] Backwards-compatible: `SearchResponse` is iterable like `List[SearchResult]`
 
-### 5.2.7.4 Require TokenReceipt in JOBSPEC
-- [ ] Update JobSpec schema to include optional `token_receipt` field
-- [ ] SCL decoder emits TokenReceipt on decode
-- [ ] Skill executor aggregates receipts
+### 5.2.7.4 Require TokenReceipt in JOBSPEC ✅ COMPLETE (2026-01-10)
+- [x] Update JobSpec schema to include optional `token_receipt` field
+- [x] SCL decoder emits TokenReceipt on decode (`scl_cli.py`)
+- [x] Skill executor aggregation deferred to 5.2.7.5 Session Aggregator
 
-### 5.2.7.5 Session Aggregator
-- [ ] Create `CAPABILITY/PRIMITIVES/token_session.py`
-- [ ] Aggregate all receipts per session
-- [ ] Compute cumulative savings
-- [ ] Emit `SessionTokenSummary` at session end
+### 5.2.7.5 Session Aggregator ✅ COMPLETE (2026-01-10)
+- [x] Create `CAPABILITY/PRIMITIVES/token_session.py`
+- [x] Aggregate all receipts per session
+- [x] Compute cumulative savings
+- [x] Emit `SessionTokenSummary` at session end
+- [x] Global session manager: `get_current_session()`, `start_new_session()`, `end_current_session()`, `log_receipt()`
+- [x] Ledger export: `to_ledger()` for firewall logging
+- [x] Display formats: `compact()`, `verbose()`, `to_json()`
 
-### 5.2.7.6 Firewall Enforcement
-- [ ] Add firewall rule: REJECT outputs > 1000 tokens without TokenReceipt
-- [ ] Add firewall rule: WARN if savings_pct < 50% for semantic_query
-- [ ] Log all receipts to session ledger
+### 5.2.7.6 Firewall Enforcement ✅ COMPLETE (2026-01-10)
+- [x] Add firewall rule: REJECT outputs > 1000 tokens without TokenReceipt (REJECT-001)
+- [x] Add firewall rule: WARN if savings_pct < 50% for semantic_query (WARN-001)
+- [x] Log all receipts to session ledger (LOG-001, auto_log_receipts)
+- [x] Create `CAPABILITY/PRIMITIVES/token_firewall.py`
+- [x] Convenience functions: `validate_token_output()`, `require_token_receipt()`
+- [x] Violation logging and audit trail
 
-### 5.2.7.7 Display Formats
-- [ ] Compact format for CLI: `[TOKEN] op: N tokens (saved M / P%)`
-- [ ] Verbose format for reports (multi-line)
-- [ ] JSON export for machine processing
+### 5.2.7.7 Display Formats ✅ COMPLETE (2026-01-10)
+- [x] Compact format for CLI: `[TOKEN] op: N tokens (saved M / P%)`
+- [x] Verbose format for reports (multi-line)
+- [x] JSON export for machine processing
+- [x] Implemented as methods in `TokenReceipt`: `compact()`, `verbose()`, `to_json()`
 
-### 5.2.7.8 Tests
-- [ ] `test_phase_5_2_7_token_accountability.py`
-- [ ] TokenReceipt schema validation
-- [ ] Semantic search emits receipt
-- [ ] Session aggregation correct
-- [ ] Firewall rules enforced
+### 5.2.7.8 Tests ✅ COMPLETE (2026-01-10)
+- [x] `test_phase_5_2_7_token_accountability.py` — 21 tests
+- [x] TokenReceipt schema validation (7 tests)
+- [x] Session aggregation (4 tests)
+- [x] Firewall rules enforced (6 tests)
+- [x] Semantic search receipt structure (2 tests)
+- [x] JobSpec integration (2 tests)
 
-**Exit Criteria:**
-- [ ] Every semantic_query emits TokenReceipt
-- [ ] Session summaries show cumulative savings
-- [ ] Firewall rejects unreceipted large outputs
-- [ ] 10+ tests passing
+**Exit Criteria:** ✅ ALL MET
+- [x] Every semantic_query emits TokenReceipt (SearchResponse.receipt)
+- [x] Session summaries show cumulative savings (SessionTokenSummary)
+- [x] Firewall rejects unreceipted large outputs (REJECT-001)
+- [x] 21 tests passing (exceeds 10+ requirement)
 
 ---
 

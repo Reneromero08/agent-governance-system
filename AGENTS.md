@@ -151,6 +151,30 @@ Using MCP tools provides:
 #### The Rule
 **If an MCP tool exists for a task, you MUST use it. Writing custom code for MCP-covered tasks is a governance violation.**
 
+### 0.8 Token Accountability (Phase 5.2.7)
+
+All token-consuming operations MUST emit `TokenReceipt` for accountability tracking.
+
+#### TokenReceipt Emission
+- `semantic_query` operations automatically emit receipts via `SearchResponse.receipt`
+- `scl_decode` operations include receipts in JobSpec `token_receipt` field
+- Large outputs (>1000 tokens) without receipts are rejected by `TokenFirewall`
+
+#### Firewall Rules
+| Rule | Condition | Action |
+|------|-----------|--------|
+| REJECT-001 | Output >1000 tokens without TokenReceipt | Blocked |
+| WARN-001 | semantic_query with <50% savings | Warning logged |
+| LOG-001 | Any receipt present | Auto-logged to session |
+
+#### Session Tracking
+Receipts are aggregated per session for cumulative savings reports via `TokenSession`.
+
+#### Reference
+- Schema: `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
+- Primitives: `CAPABILITY/PRIMITIVES/token_receipt.py`, `token_session.py`, `token_firewall.py`
+- Tests: `CAPABILITY/TESTBENCH/integration/test_phase_5_2_7_token_accountability.py`
+
 ## 1. Required startup sequence (non-negotiable)
 
 Before taking any action, an agent MUST:

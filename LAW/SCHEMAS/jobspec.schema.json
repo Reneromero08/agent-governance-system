@@ -97,6 +97,11 @@
       "type": "object",
       "description": "Optional governance metadata: scheduling, priority, provenance, etc. If omitted, consumers must assume empty object.",
       "additionalProperties": true
+    },
+    "token_receipt": {
+      "type": "object",
+      "description": "Optional TokenReceipt for token accountability (Phase 5.2.7). When present, tracks token consumption/savings for this job.",
+      "$ref": "https://ags.example.com/schemas/token_receipt.schema.json"
     }
   }
 }
