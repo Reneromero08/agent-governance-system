@@ -428,3 +428,17 @@ Artifacts:
 - `p5_transfer_scifact_to_mnli_fast_20260110_051920.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
 - `empirical_receipt_p5_transfer_scifact_to_mnli_fast_20260110_051920.json` = `52CEAA5DAD4F44D2EFCB6C69C25BE84FAB08526D6EB33FCA4674926235C197EE`
 - `transfer_calibration_scifact_to_mnli_fast_20260110_051920.json` = `4091FB173192E6033881BA0175FF8F07D63FB041C5E6B2FC8BC2C3124F9C321A`
+
+---
+
+## 2026-01-10 Phase 5.1 (fast) — 4-domain transfer matrix (12 ordered pairs; cosine; calibration_n=1, verify_n=1)
+
+This is a fast, low-compute matrix run to expose brittle directions before running the full-mode matrix.
+
+Summary index (contains per-pair commands + per-pair log/receipt/calibration SHA256):
+- `p5_matrix4_fast_20260110_052808.summary.txt` = `5D2D238E7E28240D90F17B76A8FD2726F181D1C97A65F5E550DD1BF445FF9D36`
+
+Observed failures in this fast matrix (by receipt `passed=false`):
+- `empirical_receipt_p5_transfer_scifact_to_climate_fever_fast_20260110_052808.json`: `scifact->climate_fever:Climate-FEVER-Streaming@seed=123`
+- `empirical_receipt_p5_transfer_snli_to_climate_fever_fast_20260110_052808.json`: `snli->climate_fever:Climate-FEVER-Streaming@seed=123`
+- `empirical_receipt_p5_transfer_mnli_to_climate_fever_fast_20260110_052808.json`: `mnli->climate_fever:Climate-FEVER-Streaming@seed=123`
