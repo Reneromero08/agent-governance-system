@@ -1028,6 +1028,12 @@ def parse_args() -> argparse.Namespace:
         help="When --wrong_checks neighbor, choose from top-k nearest neighbors (default: 10).",
     )
     p.add_argument(
+        "--scifact_stream_seed",
+        type=int,
+        default=123,
+        help="SciFact streaming internal sampling seed (default: 123). Use -1 to tie to --seed (stress variability).",
+    )
+    p.add_argument(
         "--calibrate_on",
         choices=["climate_fever", "scifact"],
         default="climate_fever",
@@ -1341,6 +1347,7 @@ def run_scifact_streaming(
     min_margin: Optional[float] = None,
     wrong_checks: str = "dissimilar",
     neighbor_k: int = 10,
+    scifact_stream_seed: int = 123,
 ) -> BenchmarkResult:
     """
     Phase 4 / Phase 3 transfer probe on SciFact.
@@ -1393,7 +1400,9 @@ def run_scifact_streaming(
 
     # NOTE: SciFact is sensitive to which abstract sentences are sampled as the stream.
     # For the public harness we keep this deterministic across seeds to avoid flakiness in transfer/matrix runs.
-    base_seed = 123
+    # Default keeps this deterministic across seeds (scifact_stream_seed=123) to avoid flakiness in transfer/matrix runs.
+    # For variability stress, pass scifact_stream_seed=-1 to tie it to `seed`, or set an explicit integer.
+    base_seed = int(seed) if int(scifact_stream_seed) == -1 else int(scifact_stream_seed)
     rng = np.random.default_rng(base_seed)
     rng.shuffle(ex_rows)
 
@@ -1677,7 +1686,16 @@ def main() -> int:
                 )
             )
         if args.dataset in ("scifact", "all"):
-            results.append(run_scifact_streaming(seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k))
+            results.append(
+                run_scifact_streaming(
+                    seed=args.seed,
+                    fast=args.fast,
+                    strict=strict,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    scifact_stream_seed=int(args.scifact_stream_seed),
+                )
+            )
     else:
         # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
         def run_transfer(*, calibrate_on: str, apply_to: str) -> List[BenchmarkResult]:
@@ -1701,7 +1719,12 @@ def main() -> int:
             def run_intervention_stream(ds: str, seed: int) -> BenchmarkResult:
                 if ds == "scifact":
                     return run_scifact_streaming(
-                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        scifact_stream_seed=int(args.scifact_stream_seed),
                     )
                 return run_climate_fever_streaming(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
@@ -1794,6 +1817,7 @@ def main() -> int:
                                     min_z=frozen_min_z,
                                     wrong_checks=args.wrong_checks,
                                     neighbor_k=args.neighbor_k,
+                                    scifact_stream_seed=int(args.scifact_stream_seed),
                                 )
                             ),
                             s,
