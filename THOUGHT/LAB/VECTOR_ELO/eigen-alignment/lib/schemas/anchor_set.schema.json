@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ags.local/esap/anchor_set.schema.json",
+  "title": "ANCHOR_SET",
+  "description": "Defines the reference anchor words for alignment",
+  "type": "object",
+  "required": ["type", "version", "anchors", "anchor_hash"],
+  "properties": {
+    "type": {
+      "const": "ANCHOR_SET"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Protocol version (semver)"
+    },
+    "anchors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "text"],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^a\\d{3}$",
+            "description": "Anchor ID (e.g., a001)"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Anchor word or phrase"
+          }
+        }
+      },
+      "description": "List of anchor words with IDs"
+    },
+    "anchor_hash": {
+      "type": "string",
+      "pattern": "^sha256:[a-f0-9]{64}$",
+      "description": "SHA-256 hash of canonical anchor list"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp"
+    }
+  }
+}

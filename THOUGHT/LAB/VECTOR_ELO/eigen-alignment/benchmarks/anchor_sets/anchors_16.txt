@@ -1,0 +1,16 @@
+dog
+cat
+love
+hate
+up
+down
+true
+false
+king
+queen
+water
+fire
+run
+walk
+happy
+sad
