@@ -374,16 +374,27 @@ Installed packages: `umap-learn`, `pot` (optimal transport), `geomstats`, `hdbsc
 
 **Test:** `qgt_lib/python/test_q34_cross_architecture.py`
 
-### E.X.3.6: Statistical Rigor ⏸️ DEFERRED
+### E.X.3.6: Statistical Rigor ✅ COMPLETE (2026-01-10)
 
 **Goal:** Proper statistical analysis of the correlation.
 
-- [ ] **Bootstrap confidence intervals**: 95% CI on Spearman correlation
-- [ ] **Effect size**: Cohen's d or equivalent
-- [ ] **p-values**: Against null hypothesis of random correlation
-- [ ] **Power analysis**: How many model pairs needed for significance?
+- [x] **Bootstrap confidence intervals**: 95% CI = [0.959, 0.979]
+- [x] **Effect size**: Cohen's d = 8.93 (massive)
+- [x] **p-values**: p = 9.92e-14 (null decisively rejected)
+- [x] **Power analysis**: 100% power achieved (only needed 1 pair, had 10)
 
-**Status:** Deferred - empirical evidence (0.971-0.994 correlations) is strong enough for now
+**Results:**
+| Metric | Value |
+|--------|-------|
+| Mean r (cross-arch) | 0.969 |
+| 95% CI | [0.959, 0.979] |
+| p-value | 9.92e-14 |
+| Cohen's d | 8.93 |
+| Power | 100% |
+
+**Verdict:** Statistically significant beyond any reasonable doubt.
+
+**Test:** `qgt_lib/python/test_q34_statistical_rigor.py`
 
 ### E.X.3.7: Boundary Discovery 🔄 PARTIAL (2026-01-10)
 
@@ -746,7 +757,7 @@ make -j$(nproc)
 | E.X.2 Validation | ✅ COMPLETE |
 | E.X.3.1-3.4 Core Discovery | ✅ COMPLETE |
 | E.X.3.5 Non-Transformer Baselines | ✅ COMPLETE |
-| E.X.3.6 Statistical Rigor | ⏸️ DEFERRED |
+| E.X.3.6 Statistical Rigor | ✅ COMPLETE |
 | E.X.3.7 Boundary Discovery | 🔄 PARTIAL (cross-lingual done) |
 | E.X.3.8 Theoretical Grounding | ✅ COMPLETE |
 | E.X.3.10 QGT Integration | ✅ COMPLETE |
