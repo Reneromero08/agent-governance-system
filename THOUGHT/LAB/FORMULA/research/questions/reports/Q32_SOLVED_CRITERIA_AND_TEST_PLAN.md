@@ -117,9 +117,13 @@ Falsifier:
 
 ---
 
-## Deliverables required to mark Q32 “SOLVED”
+## Deliverables required to mark Q32 "SOLVED"
 - A frozen definition of `M` and its measurement procedure (documented before running tests).
 - A reproducible test harness for the 3 tests above with full outputs recorded.
 - Ablation table showing `M_full` beats baselines and fails when key terms are removed.
 - A single-paragraph falsification summary: the exact condition that would make you downgrade the claim.
-
+- An empirical datatrail bundle for at least one public benchmark run:
+  - Verbatim log(s) + SHA256
+  - An `EmpiricalMetricReceipt` JSON + SHA256 (R/J/Phi-proxy + gates)
+  - Artifact root: `LAW/CONTRACTS/_runs/q32_public/datatrail/`
+  - Cross-link: `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_NEIGHBOR_FALSIFIER_DATA_TRAIL.md`
