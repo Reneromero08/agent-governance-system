@@ -267,6 +267,13 @@ class SnliExample:
 
 
 @dataclass(frozen=True)
+class MnliExample:
+    premise: str
+    hypothesis: str
+    label: str  # ENTAILMENT / CONTRADICTION
+
+
+@dataclass(frozen=True)
 class BenchmarkResult:
     name: str
     passed: bool
@@ -397,6 +404,58 @@ def load_snli(max_examples: int = 50000, seed: int = 123) -> List[SnliExample]:
     if len(out) < 200:
         raise RuntimeError(f"SNLI load produced too few usable examples ({len(out)})")
     return out
+
+
+def load_mnli(max_examples: int = 50000, seed: int = 123) -> List[MnliExample]:
+    """
+    Loads MNLI via HF datasets (GLUE/MNLI).
+    We keep only ENTAILMENT/CONTRADICTION labels as truth anchors and drop NEUTRAL/unknown.
+    """
+    from datasets import load_dataset  # type: ignore
+
+    ds = load_dataset("glue", "mnli", split="validation_matched")
+    rng = np.random.default_rng(seed)
+
+    idxs = np.arange(len(ds))
+    rng.shuffle(idxs)
+
+    out: List[MnliExample] = []
+    for i in idxs:
+        row = ds[int(i)]
+        premise = str(row.get("premise", "")).strip()
+        hyp = str(row.get("hypothesis", "")).strip()
+        if not premise or not hyp:
+            continue
+        lab = row.get("label")
+        if lab is None:
+            continue
+        try:
+            lab_i = int(lab)
+        except Exception:
+            continue
+        if lab_i == 0:
+            label = "ENTAILMENT"
+        elif lab_i == 2:
+            label = "CONTRADICTION"
+        else:
+            continue
+        out.append(MnliExample(premise=premise, hypothesis=hyp, label=label))
+        if len(out) >= int(max_examples):
+            break
+    if len(out) < 200:
+        raise RuntimeError(f"MNLI load produced too few usable examples ({len(out)})")
+    return out
+
+
+def _load_nli(*, domain: str, max_examples: int, seed: int) -> List[SnliExample]:
+    if str(domain) == "snli":
+        return list(load_snli(max_examples=max_examples, seed=seed))
+    if str(domain) == "mnli":
+        return [
+            SnliExample(premise=e.premise, hypothesis=e.hypothesis, label=e.label)
+            for e in load_mnli(max_examples=max_examples, seed=seed)
+        ]
+    raise ValueError(f"Unknown NLI domain: {domain}")
 
 
 def _word_chunks(text: str, *, window: int = 3, stride: int = 1, max_chunks: int = 12) -> List[str]:
@@ -869,6 +928,7 @@ def run_snli_benchmark(
     min_margin: Optional[float] = None,
     wrong_checks: str = "dissimilar",
     neighbor_k: int = 10,
+    nli_domain: str = "snli",
 ) -> BenchmarkResult:
     """
     Phase 3: third public domain.
@@ -877,8 +937,9 @@ def run_snli_benchmark(
       - Correct checks come from ENTAILMENT premises for the same hypothesis (same sample, chunked).
       - Wrong checks come from CONTRADICTION premises (or neighbor/inflation variants).
     """
-    print("\n[Q32:P3] Loading SNLI (NLI truth anchor)...")
-    examples = load_snli(max_examples=30000, seed=seed)
+    tag = str(nli_domain).upper()
+    print(f"\n[Q32:P3] Loading {tag} (NLI truth anchor)...")
+    examples = _load_nli(domain=str(nli_domain), max_examples=30000, seed=seed)
     rng = np.random.default_rng(seed)
     rng.shuffle(examples)
     examples = examples[: (1200 if fast else 12000)]
@@ -886,9 +947,9 @@ def run_snli_benchmark(
     ent = [e for e in examples if e.label == "ENTAILMENT"]
     contra = [e for e in examples if e.label == "CONTRADICTION"]
     if len(ent) < (80 if fast else 600):
-        raise RuntimeError(f"Too few SNLI ENTAILMENT examples ({len(ent)})")
+        raise RuntimeError(f"Too few {tag} ENTAILMENT examples ({len(ent)})")
     if len(contra) < (80 if fast else 600):
-        raise RuntimeError(f"Too few SNLI CONTRADICTION examples ({len(contra)})")
+        raise RuntimeError(f"Too few {tag} CONTRADICTION examples ({len(contra)})")
 
     # Precompute embeddings for neighbor/inflation selection based on hypothesis text.
     neighbor_sims: List[float] = []
@@ -933,7 +994,7 @@ def run_snli_benchmark(
             wrong_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=6)[:6]
         elif wrong_checks == "neighbor":
             if emb_contra is None or not contra_hyps:
-                raise RuntimeError("SNLI neighbor requires embeddings")
+                raise RuntimeError(f"{tag} neighbor requires embeddings")
             c_emb = embed_texts([ex.hypothesis])[0]
             sims = emb_contra @ c_emb
             order = np.argsort(-sims)
@@ -956,7 +1017,7 @@ def run_snli_benchmark(
                 neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
         elif wrong_checks == "inflation":
             if emb_ent is None or not ent_hyps:
-                raise RuntimeError("SNLI inflation requires embeddings")
+                raise RuntimeError(f"{tag} inflation requires embeddings")
             c_emb = embed_texts([ex.hypothesis])[0]
             sims = emb_ent @ c_emb
             sims[int(np.argmax(sims))] = -float("inf")
@@ -997,7 +1058,7 @@ def run_snli_benchmark(
         M_wrong.append(M_from_R(R_w))
 
         if fast and len(M_correct) in (10, 25):
-            print(f"[Q32:P3] snli intervention samples={len(M_correct)}")
+            print(f"[Q32:P3] {tag.lower()} intervention samples={len(M_correct)}")
         if len(M_correct) >= (40 if fast else 240):
             break
 
@@ -1026,7 +1087,7 @@ def run_snli_benchmark(
     margin = float(np.mean(Mc - Mw))
     z = _binom_z(wins, n)
 
-    print("\n[Q32:P3] SNLI check intervention (correct vs wrong check)")
+    print(f"\n[Q32:P3] {tag} check intervention (correct vs wrong check)")
     print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
     print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
     print(f"  mean(M_correct) = {Mc.mean():.3f}")
@@ -1046,7 +1107,7 @@ def run_snli_benchmark(
     gate_margin = float(min_margin if min_margin is not None else (0.25 if fast else 0.40))
     passed = bool(z >= gate_z and margin >= gate_margin)
     if not passed:
-        print("\n[Q32:P3] SNLI status: FAIL")
+        print(f"\n[Q32:P3] {tag} status: FAIL")
         if strict and not fast:
             raise AssertionError("FAIL: SNLI benchmark gates did not pass")
 
@@ -1070,7 +1131,7 @@ def run_snli_benchmark(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
-    return BenchmarkResult(name="SNLI", passed=passed, details=details)
+    return BenchmarkResult(name=tag, passed=passed, details=details)
 
 
 def run_snli_streaming(
@@ -1082,12 +1143,14 @@ def run_snli_streaming(
     min_margin: Optional[float] = None,
     wrong_checks: str = "dissimilar",
     neighbor_k: int = 10,
+    nli_domain: str = "snli",
 ) -> BenchmarkResult:
     """
     SNLI pseudo-stream: chunk a premise into many overlapping word windows to emulate evidence arriving over time.
     """
-    print("\n[Q32:P3] SNLI streaming (chunked NLI evidence)")
-    examples = load_snli(max_examples=50000, seed=seed)
+    tag = str(nli_domain).upper()
+    print(f"\n[Q32:P3] {tag} streaming (chunked NLI evidence)")
+    examples = _load_nli(domain=str(nli_domain), max_examples=50000, seed=seed)
     rng = np.random.default_rng(seed)
     rng.shuffle(examples)
     examples = examples[: (2000 if fast else 20000)]
@@ -1095,9 +1158,9 @@ def run_snli_streaming(
     ent = [e for e in examples if e.label == "ENTAILMENT"]
     contra = [e for e in examples if e.label == "CONTRADICTION"]
     if len(ent) < (200 if fast else 1000):
-        raise RuntimeError(f"Too few SNLI ENTAILMENT examples ({len(ent)})")
+        raise RuntimeError(f"Too few {tag} ENTAILMENT examples ({len(ent)})")
     if len(contra) < (200 if fast else 1000):
-        raise RuntimeError(f"Too few SNLI CONTRADICTION examples ({len(contra)})")
+        raise RuntimeError(f"Too few {tag} CONTRADICTION examples ({len(contra)})")
 
     neighbor_sims: List[float] = []
     emb_ent: Optional[np.ndarray] = None
@@ -1128,7 +1191,7 @@ def run_snli_streaming(
             wrong_scores = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
         elif wrong_checks == "neighbor":
             if emb_contra is None or not contra_hyps:
-                raise RuntimeError("SNLI neighbor requires embeddings")
+                raise RuntimeError(f"{tag} neighbor requires embeddings")
             c_emb = embed_texts([ex.hypothesis])[0]
             sims = emb_contra @ c_emb
             order = np.argsort(-sims)
@@ -1151,7 +1214,7 @@ def run_snli_streaming(
                 neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
         elif wrong_checks == "inflation":
             if emb_ent is None or not ent_hyps:
-                raise RuntimeError("SNLI inflation requires embeddings")
+                raise RuntimeError(f"{tag} inflation requires embeddings")
             c_emb = embed_texts([ex.hypothesis])[0]
             sims = emb_ent @ c_emb
             sims[int(np.argmax(sims))] = -float("inf")
@@ -1178,7 +1241,7 @@ def run_snli_streaming(
             continue
         samples.append((ex.hypothesis, [float(x) for x in support_scores], [float(x) for x in wrong_scores]))
         if fast and len(samples) in (10, 25):
-            print(f"[Q32:P3] snli streaming samples={len(samples)}")
+            print(f"[Q32:P3] {tag.lower()} streaming samples={len(samples)}")
         if len(samples) >= (40 if fast else 240):
             break
 
@@ -1237,42 +1300,12 @@ def run_snli_streaming(
             obs_end_by_sample.append(last_obs)
             check_end_by_sample.append(last_check)
             wrong_end_by_sample.append([float(x) for x in wrong_scores])
-            R_i = float(R_grounded(last_obs, indep_scores))
-            R_indep_end.append(R_i)
-            M_indep_end.append(float(M_from_R(R_i)))
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
 
-        delta_series = [float(a - b) for a, b in zip(M_series_correct, M_series_wrong)]
-        if delta_series:
-            tau = float(phase_delta_tau) if phase_delta_tau is not None else (0.50 if fast else 0.75)
-            min_tail = int(phase_min_tail) if phase_min_tail is not None else (2 if fast else 3)
-            tail_n = min(int(min_tail), int(len(delta_series)))
-            stable = 0.0
-            first_frac = float("nan")
-            if tail_n >= 1 and all(float(x) >= tau for x in delta_series[-tail_n:]):
-                stable = 1.0
-                for i in range(0, len(delta_series) - tail_n + 1):
-                    window = delta_series[i : i + tail_n]
-                    if all(float(x) >= tau for x in window):
-                        first_frac = float(i / max(1, len(delta_series) - 1))
-                        break
-            phase_stable_cross.append(stable)
-            if math.isfinite(first_frac):
-                phase_first_cross_frac.append(first_frac)
-            grid_n = 11
-            if len(delta_series) == 1:
-                series_delta_grid.append([float(delta_series[0])] * grid_n)
-            else:
-                xs = np.linspace(0.0, 1.0, num=len(delta_series))
-                xg = np.linspace(0.0, 1.0, num=grid_n)
-                series_delta_grid.append([float(v) for v in np.interp(xg, xs, np.asarray(delta_series, dtype=float))])
-
-        # (Geometry is handled in SciFact streaming; Climate-FEVER Phase 4 focuses on independence + phase boundary.)
-
     if len(M_correct_end) < (20 if fast else 120):
-        raise RuntimeError(f"Too few usable SNLI streaming series ({len(M_correct_end)})")
+        raise RuntimeError(f"Too few usable {tag} streaming series ({len(M_correct_end)})")
 
     M_correct_end_a = np.array(M_correct_end, dtype=float)
     M_wrong_end_a = np.array(M_wrong_end, dtype=float)
@@ -1311,7 +1344,7 @@ def run_snli_streaming(
     swap_correct_margin = float(np.mean(M_correct_end_a - M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
     swap_wrong_margin = float(np.mean(M_correct_end_a - M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
 
-    print("\n[Q32:P3] SNLI streaming intervention (chunked)")
+    print(f"\n[Q32:P3] {tag} streaming intervention (chunked)")
     print(f"  P(M_correct_end > M_wrong_end) = {pair_wins:.3f}")
     print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
     print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
@@ -1334,7 +1367,7 @@ def run_snli_streaming(
     gate_margin = float(min_margin if min_margin is not None else (0.25 if fast else 0.40))
     passed = bool(z >= gate_z and margin >= gate_margin)
     if not passed:
-        print("\n[Q32:P3] SNLI streaming status: FAIL")
+        print(f"\n[Q32:P3] {tag} streaming status: FAIL")
         if strict and not fast:
             raise AssertionError("FAIL: SNLI streaming gates did not pass")
 
@@ -1365,7 +1398,7 @@ def run_snli_streaming(
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
-    return BenchmarkResult(name="SNLI-Streaming", passed=passed, details=details)
+    return BenchmarkResult(name=f"{tag}-Streaming", passed=passed, details=details)
 
 
 def _majority_vote(votes: Sequence[Optional[str]]) -> Optional[str]:
@@ -1801,7 +1834,7 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--dataset",
-        choices=["scifact", "climate_fever", "snli", "all"],
+        choices=["scifact", "climate_fever", "snli", "mnli", "all"],
         default="scifact",
         help="Which benchmark to run (default: scifact).",
     )
@@ -1911,13 +1944,13 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--calibrate_on",
-        choices=["climate_fever", "scifact", "snli"],
+        choices=["climate_fever", "scifact", "snli", "mnli"],
         default="climate_fever",
         help="(transfer) Dataset used to calibrate thresholds (default: climate_fever).",
     )
     p.add_argument(
         "--apply_to",
-        choices=["climate_fever", "scifact", "snli"],
+        choices=["climate_fever", "scifact", "snli", "mnli"],
         default="scifact",
         help="(transfer) Dataset used to verify frozen thresholds (default: scifact).",
     )
@@ -3460,6 +3493,17 @@ def main() -> int:
                     seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                 )
             )
+        if args.dataset in ("mnli", "all"):
+            results.append(
+                run_snli_benchmark(
+                    seed=args.seed,
+                    fast=args.fast,
+                    strict=strict,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    nli_domain="mnli",
+                )
+            )
     elif args.mode == "stream":
         if args.dataset in ("climate_fever", "all"):
             results.append(
@@ -3500,6 +3544,17 @@ def main() -> int:
                     seed=args.seed, fast=args.fast, strict=strict, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                 )
             )
+        if args.dataset in ("mnli", "all"):
+            results.append(
+                run_snli_streaming(
+                    seed=args.seed,
+                    fast=args.fast,
+                    strict=strict,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    nli_domain="mnli",
+                )
+            )
     else:
         # Phase 3: calibrate thresholds once on one dataset (multiple seeds), then verify on the other without retuning.
         def run_transfer(*, calibrate_on: str, apply_to: str) -> List[BenchmarkResult]:
@@ -3520,6 +3575,15 @@ def main() -> int:
                     return run_climate_fever_intervention_benchmark(
                         seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                     )
+                if ds == "mnli":
+                    return run_snli_benchmark(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        nli_domain="mnli",
+                    )
                 return run_snli_benchmark(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
                 )
@@ -3537,6 +3601,7 @@ def main() -> int:
                         compute_geometry=False,
                         require_phase_boundary_gate=False,
                         phase_delta_tau=None,
+                        phase_min_tail=None,
                         phase_min_stable_rate=None,
                         geometry_backend="proxy",
                         require_injection_gate=False,
@@ -3550,7 +3615,17 @@ def main() -> int:
                         neighbor_k=args.neighbor_k,
                         require_phase_boundary_gate=False,
                         phase_delta_tau=None,
+                        phase_min_tail=None,
                         phase_min_stable_rate=None,
+                    )
+                if ds == "mnli":
+                    return run_snli_streaming(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        nli_domain="mnli",
                     )
                 return run_snli_streaming(
                     seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
@@ -3691,6 +3766,7 @@ def main() -> int:
                                     min_z=frozen_min_z,
                                     wrong_checks=args.wrong_checks,
                                     neighbor_k=args.neighbor_k,
+                                    nli_domain=str(apply_to),
                                 )
                             ),
                             s,
@@ -3706,6 +3782,7 @@ def main() -> int:
                                     min_z=frozen_min_z,
                                     wrong_checks=args.wrong_checks,
                                     neighbor_k=args.neighbor_k,
+                                    nli_domain=str(apply_to),
                                 )
                             ),
                             s,
@@ -3714,7 +3791,7 @@ def main() -> int:
             return out
 
         if args.mode == "matrix":
-            ds_all = ["climate_fever", "scifact", "snli"]
+            ds_all = ["climate_fever", "scifact", "snli", "mnli"]
             for a in ds_all:
                 for b in ds_all:
                     if a == b:
