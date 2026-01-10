@@ -1,0 +1,142 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://ags.local/esap/handshake.schema.json",
+  "title": "ESAP Handshake Protocol",
+  "description": "Eigen Spectrum Alignment Protocol handshake messages for cross-model semantic alignment",
+
+  "definitions": {
+    "cumulative_variance_curve": {
+      "type": "array",
+      "description": "C(k) = cumsum(eigenvalues[:k]) / sum(eigenvalues) - THE Platonic invariant",
+      "items": {"type": "number", "minimum": 0, "maximum": 1},
+      "minItems": 4
+    },
+
+    "spectrum_compact": {
+      "type": "object",
+      "description": "Compact spectrum representation for handshake",
+      "required": ["eigenvalues_top_k", "cumulative_variance", "effective_rank", "anchor_set_hash"],
+      "properties": {
+        "eigenvalues_top_k": {
+          "type": "array",
+          "description": "Top k eigenvalues (normalized, descending)",
+          "items": {"type": "number", "minimum": 0},
+          "minItems": 4,
+          "maxItems": 64
+        },
+        "cumulative_variance": {"$ref": "#/definitions/cumulative_variance_curve"},
+        "effective_rank": {
+          "type": "number",
+          "minimum": 1,
+          "description": "Df = participation ratio, typically ~22 for trained models"
+        },
+        "anchor_set_hash": {
+          "type": "string",
+          "pattern": "^sha256:[a-f0-9]{64}$"
+        },
+        "embedder_id": {"type": "string"},
+        "computed_at": {"type": "string", "format": "date-time"}
+      }
+    },
+
+    "convergence_check": {
+      "type": "object",
+      "description": "Result of Spectral Convergence Theorem check",
+      "required": ["correlation", "converges"],
+      "properties": {
+        "correlation": {
+          "type": "number",
+          "minimum": -1,
+          "maximum": 1,
+          "description": "Pearson correlation of cumulative variance curves"
+        },
+        "converges": {
+          "type": "boolean",
+          "description": "True if correlation >= 0.9 (Spectral Convergence Theorem threshold)"
+        },
+        "effective_rank_ratio": {
+          "type": "number",
+          "description": "Ratio of effective ranks (should be ~1.0)"
+        }
+      }
+    }
+  },
+
+  "oneOf": [
+    {
+      "title": "ESAP_HELLO",
+      "description": "Initial handshake - sender advertises its spectrum",
+      "type": "object",
+      "required": ["type", "version", "sender_id", "spectrum", "timestamp"],
+      "properties": {
+        "type": {"const": "ESAP_HELLO"},
+        "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+        "sender_id": {"type": "string", "minLength": 1},
+        "spectrum": {"$ref": "#/definitions/spectrum_compact"},
+        "capabilities": {
+          "type": "array",
+          "items": {"type": "string"},
+          "description": "Semantic capabilities: symbol_resolution, cross_lingual, etc."
+        },
+        "timestamp": {"type": "string", "format": "date-time"},
+        "nonce": {"type": "string", "description": "Random nonce for replay protection"}
+      }
+    },
+    {
+      "title": "ESAP_ACK",
+      "description": "Response - confirms convergence and provides alignment",
+      "type": "object",
+      "required": ["type", "version", "sender_id", "in_reply_to", "spectrum", "convergence", "timestamp"],
+      "properties": {
+        "type": {"const": "ESAP_ACK"},
+        "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+        "sender_id": {"type": "string", "minLength": 1},
+        "in_reply_to": {"type": "string", "description": "Nonce from ESAP_HELLO"},
+        "spectrum": {"$ref": "#/definitions/spectrum_compact"},
+        "convergence": {"$ref": "#/definitions/convergence_check"},
+        "alignment": {
+          "type": "object",
+          "description": "Procrustes alignment if convergence confirmed",
+          "properties": {
+            "rotation_k": {"type": "integer", "minimum": 4, "description": "Dimension of rotation matrix"},
+            "rotation_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+            "residual": {"type": "number", "minimum": 0, "description": "Procrustes residual"}
+          }
+        },
+        "capabilities": {"type": "array", "items": {"type": "string"}},
+        "timestamp": {"type": "string", "format": "date-time"}
+      }
+    },
+    {
+      "title": "ESAP_REJECT",
+      "description": "Handshake rejection - spectra don't converge",
+      "type": "object",
+      "required": ["type", "version", "sender_id", "in_reply_to", "reason", "timestamp"],
+      "properties": {
+        "type": {"const": "ESAP_REJECT"},
+        "version": {"type": "string", "pattern": "^\\d+\\.\\d+\\.\\d+$"},
+        "sender_id": {"type": "string"},
+        "in_reply_to": {"type": "string"},
+        "reason": {
+          "type": "string",
+          "enum": [
+            "SPECTRUM_DIVERGENCE",
+            "ANCHOR_MISMATCH",
+            "VERSION_INCOMPATIBLE",
+            "EFFECTIVE_RANK_MISMATCH",
+            "ALIGNMENT_FAILED"
+          ]
+        },
+        "details": {
+          "type": "object",
+          "properties": {
+            "correlation": {"type": "number"},
+            "threshold": {"type": "number"},
+            "message": {"type": "string"}
+          }
+        },
+        "timestamp": {"type": "string", "format": "date-time"}
+      }
+    }
+  ]
+}

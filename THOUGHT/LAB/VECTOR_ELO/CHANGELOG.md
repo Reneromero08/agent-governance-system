@@ -4,6 +4,51 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.36] - 2026-01-10
+
+### E.X.4.1 PARTIAL — ESAP Handshake Protocol (Format Done)
+
+**Added:**
+- `eigen-alignment/lib/handshake.py` — ESAP handshake protocol implementation
+  - `compute_cumulative_variance()` — THE Platonic invariant: C(k) = Σᵢ₌₁ᵏ λᵢ / Σλ
+  - `compute_effective_rank()` — Participation ratio: Df = (Σλ)² / Σλ² (~22 for trained models)
+  - `check_convergence()` — Spectral Convergence Theorem verification (r > 0.9)
+  - `ESAPHandshake` class — Full handshake protocol handler
+  - `create_handshake_from_embeddings()` — Convenience factory from raw embeddings
+- `eigen-alignment/lib/schemas/esap_handshake.schema.json` — JSON Schema for protocol
+  - `ESAP_HELLO` — Initial handshake with spectrum advertisement
+  - `ESAP_ACK` — Convergence confirmation with optional Procrustes alignment
+  - `ESAP_REJECT` — Rejection with reason codes (SPECTRUM_DIVERGENCE, ANCHOR_MISMATCH, etc.)
+- `eigen-alignment/tests/test_handshake.py` — 16 tests all passing
+  - Cumulative variance monotonicity and normalization
+  - Effective rank for uniform/single/trained spectra
+  - Convergence check threshold behavior
+  - Full handshake flow (HELLO → ACK → success)
+  - Anchor mismatch rejection
+  - Divergent spectrum rejection
+  - Replay protection via nonce
+  - Capabilities exchange
+
+**Protocol Flow:**
+```
+Agent A                     Agent B
+   |                           |
+   |------ ESAP_HELLO -------->|  (spectrum, capabilities, nonce)
+   |                           |  [Check anchor hash, compute convergence]
+   |<----- ESAP_ACK -----------|  (spectrum, convergence, alignment?)
+   |  [Verify nonce, confirm]  |
+   |                           |
+   === Semantic Space Aligned ===
+```
+
+**Key Insight:** Handshake VERIFIES alignment (checks cumulative variance correlation > 0.9), it doesn't DO alignment (that's Procrustes, separate step). Two models can verify they share the same semantic space without exchanging full embeddings.
+
+**Remaining:**
+- Integrate with cassette network sync protocol
+- Add spectrum signature to cassette metadata
+
+---
+
 ## [3.7.35] - 2026-01-09
 
 ### Phase 5.2.6 COMPLETE — SCL Tests & Benchmarks

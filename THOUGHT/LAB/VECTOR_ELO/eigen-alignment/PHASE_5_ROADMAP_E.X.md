@@ -1,10 +1,10 @@
 ---
 title: Phase E.X Eigenvalue Alignment Protocol Roadmap
 section: roadmap
-version: 1.6.0
+version: 1.7.0
 created: 2026-01-07
 modified: 2026-01-10
-status: ✅ Q34 ANSWERED, Q43 PARTIAL
+status: ✅ E.X.4.1 ESAP Handshake IN PROGRESS
 summary: Eigenvalue alignment protocol for cross-model semantic alignment
 tags:
 - phase-5
@@ -608,12 +608,37 @@ The participation ratio we computed IS the effective rank of the Fubini-Study me
 
 ---
 
-## Phase E.X.4: Integration (PENDING)
+## Phase E.X.4: Integration (IN PROGRESS)
 
-### E.X.4.1: Cassette Handshake
-- [ ] Define ESAP handshake message format
+### E.X.4.1: Cassette Handshake 🔄 IN PROGRESS (2026-01-10)
+
+**Goal:** Enable cassettes/agents to verify semantic alignment via spectrum.
+
+- [x] **Define ESAP handshake message format**: ✅ COMPLETE
+  - `ESAP_HELLO`: Initial handshake with spectrum signature
+  - `ESAP_ACK`: Confirms convergence + provides alignment
+  - `ESAP_REJECT`: Rejection with reason code
+  - Schema: `lib/schemas/esap_handshake.schema.json`
+  - Implementation: `lib/handshake.py`
+  - Tests: 16/16 passing
 - [ ] Integrate with cassette network sync protocol
 - [ ] Add spectrum signature to cassette metadata
+
+**Handshake Flow:**
+```
+Agent A                              Agent B
+   │                                    │
+   │  ESAP_HELLO (spectrum)             │
+   │───────────────────────────────────>│
+   │                                    │
+   │         Verify Spectral Convergence│
+   │           (correlation > 0.9)      │
+   │                                    │
+   │  ESAP_ACK (spectrum + alignment)   │
+   │<───────────────────────────────────│
+   │                                    │
+   │  Mutual semantic space confirmed   │
+```
 
 ### E.X.4.2: Cross-Model Symbol Resolution
 - [ ] Test symbol resolution across aligned models
@@ -631,8 +656,10 @@ The participation ratio we computed IS the effective rank of the Fubini-Study me
 | `lib/mds.py` | Classical MDS implementation |
 | `lib/procrustes.py` | Procrustes alignment + out-of-sample |
 | `lib/protocol.py` | Protocol message types |
+| `lib/handshake.py` | ESAP handshake protocol (E.X.4.1) |
 | `lib/adapters/` | Model adapters |
 | `lib/schemas/` | JSON schemas |
+| `lib/schemas/esap_handshake.schema.json` | Handshake message schema |
 | `cli/main.py` | CLI tool |
 | `benchmarks/` | Benchmark harness |
 | `benchmarks/validation/untrained_transformer.py` | Untrained BERT baseline test |
@@ -769,6 +796,7 @@ make -j$(nproc)
 | E.X.3.7 Boundary Discovery | ✅ COMPLETE (unbreakable) |
 | E.X.3.8 Theoretical Grounding | ✅ COMPLETE |
 | E.X.3.10 QGT Integration | ✅ COMPLETE |
+| E.X.4.1 Cassette Handshake | 🔄 IN PROGRESS (format done) |
 
 ### Key Deliverables
 
@@ -802,4 +830,4 @@ make -j$(nproc)
 
 ---
 
-**Last Updated:** 2026-01-10 - Q34 ANSWERED, Q43 PARTIAL, Roadmap v1.6.0
+**Last Updated:** 2026-01-10 - E.X.4.1 handshake format DONE, Roadmap v1.7.0
