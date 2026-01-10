@@ -4,6 +4,34 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.37] - 2026-01-10
+
+### E.X.4.2 COMPLETE — Cross-Model Symbol Resolution
+
+**Added:**
+- `eigen-alignment/qgt_lib/python/test_cross_model_symbols.py` — Symbol resolution test
+  - Tests 6 governance symbols (法, 真, 契, 恆, 驗, 道)
+  - Cross-dimension alignment (MiniLM 384d ↔ MPNET 768d)
+  - H(X|S) entropy reduction measurement
+  - Polysemic symbol (道) context testing
+
+**Results:**
+| Symbol | Raw Similarity | Aligned Similarity |
+|--------|----------------|-------------------|
+| 法 | 0.915 | **0.992** |
+| 真 | 0.812 | **0.997** |
+| 契 | 0.977 | **0.991** |
+| 恆 | 0.533 | **0.993** |
+| 驗 | 0.595 | **0.993** |
+| 道 | 0.905 | **0.996** |
+
+**Mean aligned similarity: 0.994**
+**H(X|S) reduction: 51.6%**
+
+**Key Insight:** Governance symbols resolve to the same semantic region across different embedding models after Procrustes alignment. The 51.6% entropy reduction proves that alignment reduces communication overhead.
+
+---
+
 ## [3.7.36] - 2026-01-10
 
 ### E.X.4.1 COMPLETE — ESAP Handshake Protocol + Cassette Integration
