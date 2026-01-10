@@ -1,6 +1,6 @@
 {
   "test_id": "null-hypothesis-E.X.3.1",
-  "timestamp": "2026-01-10T04:24:03.580609+00:00",
+  "timestamp": "2026-01-10T04:40:13.375915+00:00",
   "parameters": {
     "n_models": 5,
     "n_anchors": 64,
@@ -50,11 +50,41 @@
     "mean_spearman": 1.0,
     "std_spearman": 0.0
   },
-  "interpretation": {
+  "alignment_improvement": {
+    "n_pairs": 10,
+    "n_anchors": 64,
+    "dim": 384,
+    "base_seed": 42,
+    "improvements": [
+      0.9714499024934851,
+      0.9566208082667123,
+      0.9706902076454248,
+      0.9640283357988355,
+      0.9293202704935153,
+      0.981728043563647,
+      0.9820927707589733,
+      0.9501394375501937,
+      0.9623559384099372,
+      0.9648280981674704
+    ],
+    "mean_improvement": 0.9633253813148194,
+    "std_improvement": 0.014798586056909771,
+    "mean_raw_similarity": -0.004124159249111623,
+    "mean_aligned_similarity": 0.9592012220657079,
+    "mean_residual": 2.2685358820178125
+  },
+  "eigenvalue_interpretation": {
     "verdict": "FAIL",
     "explanation": "Random embeddings show high correlation (mean=1.0000). The eigenvalue invariance is likely a mathematical artifact, not a property of learned semantic structure.",
     "effect_size": 0.0,
     "random_mean": 1.0,
     "trained_baseline": 1.0
+  },
+  "alignment_interpretation": {
+    "verdict": "FAIL",
+    "explanation": "Random embeddings show high alignment improvement (+0.9633). Even the alignment improvement is a geometric artifact.",
+    "random_improvement": 0.9633253813148194,
+    "trained_baseline": 0.43,
+    "effect_size": -0.5333253813148193
   }
 }

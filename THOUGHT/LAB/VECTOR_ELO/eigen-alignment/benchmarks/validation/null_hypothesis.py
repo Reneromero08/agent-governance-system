@@ -26,6 +26,7 @@ from scipy.stats import spearmanr
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
 from lib.mds import squared_distance_matrix, classical_mds
+from lib.procrustes import procrustes_align, cosine_similarity
 
 
 def generate_random_embeddings(n_words: int, dim: int, seed: int) -> np.ndarray:
@@ -171,6 +172,92 @@ def run_permutation_test(
     }
 
 
+def run_alignment_improvement_test(
+    n_pairs: int = 10,
+    n_anchors: int = 64,
+    dim: int = 384,
+    base_seed: int = 42
+) -> dict:
+    """Test if Procrustes alignment improves similarity for random embeddings.
+
+    This is the critical test: if random embeddings also show alignment improvement,
+    then even that metric is trivial (geometric artifact).
+
+    Args:
+        n_pairs: Number of random model pairs to test
+        n_anchors: Number of anchor words
+        dim: Embedding dimension
+        base_seed: Base random seed
+
+    Returns:
+        Test results dict with improvement metrics
+    """
+    print(f"\nAlignment improvement test ({n_pairs} random pairs)")
+
+    improvements = []
+    raw_sims = []
+    aligned_sims = []
+    residuals = []
+
+    for pair_idx in range(n_pairs):
+        # Generate two different random "models"
+        seed_a = base_seed + pair_idx * 2
+        seed_b = base_seed + pair_idx * 2 + 1
+
+        emb_a = generate_random_embeddings(n_anchors, dim, seed_a)
+        emb_b = generate_random_embeddings(n_anchors, dim, seed_b)
+
+        # Compute MDS coordinates for each
+        D2_a = squared_distance_matrix(emb_a)
+        D2_b = squared_distance_matrix(emb_b)
+
+        X_a, eigenvalues_a, _ = classical_mds(D2_a)
+        X_b, eigenvalues_b, _ = classical_mds(D2_b)
+
+        # Use minimum dimensionality
+        k_min = min(X_a.shape[1], X_b.shape[1])
+        X_a = X_a[:, :k_min]
+        X_b = X_b[:, :k_min]
+
+        # Procrustes alignment: rotate X_a to match X_b
+        R, residual = procrustes_align(X_a, X_b)
+        X_a_aligned = X_a @ R
+
+        # Measure raw and aligned similarities
+        pair_raw_sims = []
+        pair_aligned_sims = []
+        for i in range(n_anchors):
+            raw_sim = cosine_similarity(X_a[i], X_b[i])
+            aligned_sim = cosine_similarity(X_a_aligned[i], X_b[i])
+            pair_raw_sims.append(raw_sim)
+            pair_aligned_sims.append(aligned_sim)
+
+        mean_raw = float(np.mean(pair_raw_sims))
+        mean_aligned = float(np.mean(pair_aligned_sims))
+        improvement = mean_aligned - mean_raw
+
+        improvements.append(improvement)
+        raw_sims.append(mean_raw)
+        aligned_sims.append(mean_aligned)
+        residuals.append(float(residual))
+
+        print(f"  Pair {pair_idx+1}: raw={mean_raw:.4f}, aligned={mean_aligned:.4f}, "
+              f"improvement={improvement:+.4f}, residual={residual:.4f}")
+
+    return {
+        'n_pairs': n_pairs,
+        'n_anchors': n_anchors,
+        'dim': dim,
+        'base_seed': base_seed,
+        'improvements': improvements,
+        'mean_improvement': float(np.mean(improvements)),
+        'std_improvement': float(np.std(improvements)),
+        'mean_raw_similarity': float(np.mean(raw_sims)),
+        'mean_aligned_similarity': float(np.mean(aligned_sims)),
+        'mean_residual': float(np.mean(residuals)),
+    }
+
+
 def interpret_results(random_result: dict, trained_baseline: float = 1.0) -> dict:
     """Interpret test results.
 
@@ -256,8 +343,48 @@ def main():
         seed=args.seed
     )
 
+    # Run alignment improvement test
+    alignment_result = run_alignment_improvement_test(
+        n_pairs=10,
+        n_anchors=args.n_anchors,
+        dim=args.dim,
+        base_seed=args.seed
+    )
+
     # Interpret results
     interpretation = interpret_results(random_result)
+
+    # Interpret alignment results
+    trained_improvement = 0.43  # From trained model benchmarks
+    random_improvement = alignment_result['mean_improvement']
+    if random_improvement > 0.3:
+        alignment_verdict = "FAIL"
+        alignment_explanation = (
+            f"Random embeddings show high alignment improvement ({random_improvement:+.4f}). "
+            "Even the alignment improvement is a geometric artifact."
+        )
+    elif random_improvement > 0.1:
+        alignment_verdict = "INCONCLUSIVE"
+        alignment_explanation = (
+            f"Random embeddings show moderate alignment improvement ({random_improvement:+.4f}). "
+            "Partial improvement may be geometric. Trained improvement ({trained_improvement:+.4f}) "
+            "may still be meaningful if significantly higher."
+        )
+    else:
+        alignment_verdict = "PASS"
+        alignment_explanation = (
+            f"Random embeddings show low alignment improvement ({random_improvement:+.4f}). "
+            f"Trained models show {trained_improvement:+.4f}. "
+            "The alignment improvement reflects learned semantic structure."
+        )
+
+    alignment_interpretation = {
+        'verdict': alignment_verdict,
+        'explanation': alignment_explanation,
+        'random_improvement': random_improvement,
+        'trained_baseline': trained_improvement,
+        'effect_size': trained_improvement - random_improvement,
+    }
 
     # Assemble full result
     result = {
@@ -271,7 +398,9 @@ def main():
         },
         'random_baseline': random_result,
         'permutation_test': perm_result,
-        'interpretation': interpretation,
+        'alignment_improvement': alignment_result,
+        'eigenvalue_interpretation': interpretation,
+        'alignment_interpretation': alignment_interpretation,
     }
 
     # Print summary
@@ -280,16 +409,21 @@ def main():
     print("RESULTS")
     print("=" * 60)
     print()
+    print("--- Eigenvalue Spearman (already known to be trivial) ---")
     print(f"Random baseline mean Spearman: {random_result['mean_spearman']:.4f}")
-    print(f"Random baseline std Spearman:  {random_result['std_spearman']:.4f}")
-    print(f"Permutation test mean Spearman: {perm_result['mean_spearman']:.4f}")
-    print()
     print(f"Trained model baseline:        1.0000")
-    print(f"Effect size:                   {interpretation['effect_size']:.4f}")
-    print()
     print(f"VERDICT: {interpretation['verdict']}")
     print()
-    print(interpretation['explanation'])
+    print("--- Alignment Improvement (the real test) ---")
+    print(f"Random mean improvement:  {alignment_result['mean_improvement']:+.4f}")
+    print(f"Random raw similarity:    {alignment_result['mean_raw_similarity']:.4f}")
+    print(f"Random aligned similarity: {alignment_result['mean_aligned_similarity']:.4f}")
+    print(f"Trained improvement:      +0.4300 (from benchmarks)")
+    print(f"Effect size:              {alignment_interpretation['effect_size']:+.4f}")
+    print()
+    print(f"ALIGNMENT VERDICT: {alignment_interpretation['verdict']}")
+    print()
+    print(alignment_interpretation['explanation'])
     print()
 
     # Save results

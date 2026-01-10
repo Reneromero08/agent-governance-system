@@ -201,6 +201,26 @@ All models show **perfect rank preservation** of eigenvalue spectrum despite:
 unit vectors on a high-dimensional sphere follows a predictable distribution due to
 concentration of measure. This is a property of geometry, not learned representations.
 
+#### Alignment Improvement Test (Extended E.X.3.1)
+
+- [x] **Random alignment improvement**: Align random embeddings via Procrustes
+  - **ACTUAL RESULT: +0.9633** (random achieves HIGHER improvement than trained!)
+  - Trained models: +0.43
+  - ❌ **CONCLUSION: Alignment improvement is ALSO a geometric artifact**
+
+| Metric | Random | Trained |
+|--------|--------|---------|
+| Raw similarity | -0.004 | -0.05 to +0.04 |
+| Aligned similarity | **0.959** | 0.38-0.43 |
+| Improvement | **+0.963** | +0.43 |
+
+**Why random > trained:** Random vectors are infinitely malleable - no structure resists
+rotation. Trained models have structure (possibly semantic) that prevents perfect alignment.
+Ironically, lower improvement might indicate MORE structure, not less.
+
+**Final verdict:** The MDS+Procrustes protocol measures geometric flexibility, not semantic
+alignment. The original claim is completely invalidated.
+
 ### E.X.3.2: Critical Falsification Test ★★★★★
 
 **Goal:** Test if untrained models show the same invariance.
@@ -323,7 +343,7 @@ Outcomes:
 | Eigenvalue correlation | > 0.95 | ~~✅~~ ❌ 1.0 but TRIVIAL (random also = 1.0) |
 | Cross-architecture invariance | Spearman = 1.0 | ~~✅~~ ❌ INVALIDATED (random also = 1.0) |
 | Null hypothesis test | Random << Trained | ❌ **FAILED** (Random = 1.0 = Trained) |
-| Alignment improvement | > 0.5 | ⚠️ +0.43 mean - may also be trivial? |
+| Alignment improvement | > 0.5 | ❌ +0.43 BUT random = +0.96 (trivial!) |
 | Neighborhood overlap@10 | > 0.6 | ⚠️ 0.32 (64 anchors) - below target |
 | Neighborhood overlap@50 | > 0.6 | ⚠️ 0.49 (64 anchors) - below target |
 | Unit tests passing | 100% | ✅ 46/46 |
