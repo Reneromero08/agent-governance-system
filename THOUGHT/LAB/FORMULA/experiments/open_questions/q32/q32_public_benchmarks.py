@@ -467,6 +467,8 @@ def run_scifact_benchmark(
     # Pass if M(obs, correct_check) > M(obs, wrong_check) with significant margin.
     M_correct: List[float] = []
     M_wrong: List[float] = []
+    R_correct: List[float] = []
+    R_wrong: List[float] = []
     neighbor_sims: List[float] = []
     mu_hat_list: List[float] = []
     mu_check_list: List[float] = []
@@ -598,8 +600,12 @@ def run_scifact_benchmark(
 
         mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
         mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
-        M_correct.append(M_from_R(R_grounded(obs_scores, check_correct_scores)))
-        M_wrong.append(M_from_R(R_grounded(obs_scores, check_wrong_scores)))
+        R_c = float(R_grounded(obs_scores, check_correct_scores))
+        R_w = float(R_grounded(obs_scores, check_wrong_scores))
+        R_correct.append(R_c)
+        R_wrong.append(R_w)
+        M_correct.append(M_from_R(R_c))
+        M_wrong.append(M_from_R(R_w))
 
         if fast and len(M_correct) in (10, 25):
             print(f"[Q32:P2] scifact intervention samples={len(M_correct)}")
@@ -642,6 +648,10 @@ def run_scifact_benchmark(
         "pair_wins": pair_wins,
         "z": z,
         "mean_margin": margin,
+        "mean_R_correct": float(np.mean(np.asarray(R_correct, dtype=float))) if R_correct else 0.0,
+        "mean_R_wrong": float(np.mean(np.asarray(R_wrong, dtype=float))) if R_wrong else 0.0,
+        "mean_logR_correct": float(Mc.mean()),
+        "mean_logR_wrong": float(Mw.mean()),
         "gate_z": gate_z,
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
@@ -878,6 +888,8 @@ def run_climate_fever_intervention_benchmark(
 
     M_correct: List[float] = []
     M_wrong: List[float] = []
+    R_correct: List[float] = []
+    R_wrong: List[float] = []
     neighbor_sims: List[float] = []
     mu_hat_list: List[float] = []
     mu_check_list: List[float] = []
@@ -977,8 +989,12 @@ def run_climate_fever_intervention_benchmark(
 
         mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
         mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
-        M_correct.append(M_from_R(R_grounded(obs_scores, check_correct_scores)))
-        M_wrong.append(M_from_R(R_grounded(obs_scores, check_wrong_scores)))
+        R_c = float(R_grounded(obs_scores, check_correct_scores))
+        R_w = float(R_grounded(obs_scores, check_wrong_scores))
+        R_correct.append(R_c)
+        R_wrong.append(R_w)
+        M_correct.append(M_from_R(R_c))
+        M_wrong.append(M_from_R(R_w))
 
         if fast and len(M_correct) in (10, 25):
             print(f"[Q32:P2] climate intervention samples={len(M_correct)}")
@@ -1018,6 +1034,10 @@ def run_climate_fever_intervention_benchmark(
         "pair_wins": pair_wins,
         "z": z,
         "mean_margin": margin,
+        "mean_R_correct": float(np.mean(np.asarray(R_correct, dtype=float))) if R_correct else 0.0,
+        "mean_R_wrong": float(np.mean(np.asarray(R_wrong, dtype=float))) if R_wrong else 0.0,
+        "mean_logR_correct": float(Mc.mean()),
+        "mean_logR_wrong": float(Mw.mean()),
         "gate_z": gate_z,
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
@@ -1391,6 +1411,8 @@ def run_climate_fever_streaming(
 
     M_correct_end: List[float] = []
     M_wrong_end: List[float] = []
+    R_correct_end: List[float] = []
+    R_wrong_end: List[float] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
     phi_coupling: List[float] = []
@@ -1406,21 +1428,24 @@ def run_climate_fever_streaming(
         t_max = max(2, len(support_scores) - 2)
         t_max = min(t_max, len(support_scores) - 2)
 
-        def M_at(t: int, check_scores: List[float]) -> float:
-            obs = support_scores[:t]
-            return M_from_R(R_grounded(obs, check_scores))
-
         # Correct check is the hold-out supports not yet observed at time t.
         M_series_correct: List[float] = []
         M_series_wrong: List[float] = []
+        R_series_correct: List[float] = []
+        R_series_wrong: List[float] = []
         mu_hat_series: List[float] = []
         mu_check_series: List[float] = []
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 2:
                 break
-            M_series_correct.append(M_at(t, check_correct))
-            M_series_wrong.append(M_at(t, wrong_scores))
+            obs = support_scores[:t]
+            R_c = float(R_grounded(obs, check_correct))
+            R_w = float(R_grounded(obs, wrong_scores))
+            R_series_correct.append(R_c)
+            R_series_wrong.append(R_w)
+            M_series_correct.append(M_from_R(R_c))
+            M_series_wrong.append(M_from_R(R_w))
             mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
             mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
 
@@ -1429,6 +1454,8 @@ def run_climate_fever_streaming(
 
         M_correct_end.append(M_series_correct[-1])
         M_wrong_end.append(M_series_wrong[-1])
+        R_correct_end.append(R_series_correct[-1])
+        R_wrong_end.append(R_series_wrong[-1])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
@@ -1438,6 +1465,8 @@ def run_climate_fever_streaming(
 
     M_correct_end_a = np.array(M_correct_end, dtype=float)
     M_wrong_end_a = np.array(M_wrong_end, dtype=float)
+    R_correct_end_a = np.array(R_correct_end, dtype=float)
+    R_wrong_end_a = np.array(R_wrong_end, dtype=float)
     dM_correct_a = np.array(dM_correct, dtype=float)
     dM_wrong_a = np.array(dM_wrong, dtype=float)
 
@@ -1481,6 +1510,10 @@ def run_climate_fever_streaming(
             "pair_wins": pair_wins,
             "z": z,
             "mean_margin": margin,
+            "mean_R_correct_end": float(R_correct_end_a.mean()),
+            "mean_R_wrong_end": float(R_wrong_end_a.mean()),
+            "mean_logR_correct_end": float(M_correct_end_a.mean()),
+            "mean_logR_wrong_end": float(M_wrong_end_a.mean()),
             "gate_z": gate_z,
             "gate_margin": gate_margin,
             "mean_dM_correct": float(dM_correct_a.mean()),
@@ -1722,6 +1755,8 @@ def run_scifact_streaming(
 
     M_correct_end: List[float] = []
     M_wrong_end: List[float] = []
+    R_correct_end: List[float] = []
+    R_wrong_end: List[float] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
 
@@ -1733,20 +1768,23 @@ def run_scifact_streaming(
         t_max = max(2, len(support_scores) - 4)
         t_max = min(t_max, len(support_scores) - 4)
 
-        def M_at(t: int, check_scores: List[float]) -> float:
-            obs = support_scores[:t]
-            return M_from_R(R_grounded(obs, check_scores))
-
         M_series_correct: List[float] = []
         M_series_wrong: List[float] = []
+        R_series_correct: List[float] = []
+        R_series_wrong: List[float] = []
         mu_hat_series: List[float] = []
         mu_check_series: List[float] = []
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 4:
                 break
-            M_series_correct.append(M_at(t, check_correct))
-            M_series_wrong.append(M_at(t, wrong_scores))
+            obs = support_scores[:t]
+            R_c = float(R_grounded(obs, check_correct))
+            R_w = float(R_grounded(obs, wrong_scores))
+            R_series_correct.append(R_c)
+            R_series_wrong.append(R_w)
+            M_series_correct.append(M_from_R(R_c))
+            M_series_wrong.append(M_from_R(R_w))
             mu_hat_series.append(float(np.mean(np.asarray(support_scores[:t], dtype=float))))
             mu_check_series.append(float(np.mean(np.asarray(check_correct, dtype=float))))
 
@@ -1755,6 +1793,8 @@ def run_scifact_streaming(
 
         M_correct_end.append(M_series_correct[-1])
         M_wrong_end.append(M_series_wrong[-1])
+        R_correct_end.append(R_series_correct[-1])
+        R_wrong_end.append(R_series_wrong[-1])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
@@ -1764,6 +1804,8 @@ def run_scifact_streaming(
 
     M_correct_end_a = np.array(M_correct_end, dtype=float)
     M_wrong_end_a = np.array(M_wrong_end, dtype=float)
+    R_correct_end_a = np.array(R_correct_end, dtype=float)
+    R_wrong_end_a = np.array(R_wrong_end, dtype=float)
     dM_correct_a = np.array(dM_correct, dtype=float)
     dM_wrong_a = np.array(dM_wrong, dtype=float)
 
@@ -1803,6 +1845,10 @@ def run_scifact_streaming(
         "pair_wins": pair_wins,
         "z": z,
         "mean_margin": margin,
+        "mean_R_correct_end": float(R_correct_end_a.mean()),
+        "mean_R_wrong_end": float(R_wrong_end_a.mean()),
+        "mean_logR_correct_end": float(M_correct_end_a.mean()),
+        "mean_logR_wrong_end": float(M_wrong_end_a.mean()),
         "gate_z": gate_z,
         "gate_margin": gate_margin,
         "mean_dM_correct": float(dM_correct_a.mean()),
