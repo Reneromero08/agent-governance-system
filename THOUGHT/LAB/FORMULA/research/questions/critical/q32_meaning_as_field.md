@@ -101,16 +101,16 @@ Goal: make “meaning-as-field on the semiosphere” survive increasingly hostil
 
 #### 2.1 Ablations (non-tautology proof)
 - [x] Ablations implemented: `--ablation full|no_essence|no_scale`.
-- [ ] Add a depth/sensitivity ablation (Df/σ proxy) in the public harness.
-- [ ] Require the expected pattern: at least one ablation reliably kills the effect while `full` passes (receipted).
+- [x] Add a depth/sensitivity ablation (Df/σ proxy) in the public harness.
+- [x] Require the expected pattern: at least one ablation reliably kills the effect while `full` passes (receipted).
 
 #### 2.2 Negative controls must fail hard
-- [ ] Paraphrase-only “agreement inflation” control collapses `R/log(R)` and fails gates (receipted).
-- [ ] Strong swap/shuffle controls receipted for every relevant mode.
+- [x] Paraphrase-only “agreement inflation” control collapses `R/log(R)` and fails gates (receipted).
+- [x] Strong swap/shuffle controls receipted for every relevant mode.
 
 #### 2.3 Robustness sweeps (distributional proof)
-- [ ] Sweep `neighbor_k` and require pass-rate ≥ threshold across a range (receipted).
-- [ ] Sweep stream sampling variability and require pass-rate ≥ threshold across trials (receipted).
+- [x] Sweep `neighbor_k` and require pass-rate ≥ threshold across a range (receipted).
+- [x] Sweep stream sampling variability and require pass-rate ≥ threshold across trials (receipted).
 
 ### Phase 3 — Other half (settlement)
 
