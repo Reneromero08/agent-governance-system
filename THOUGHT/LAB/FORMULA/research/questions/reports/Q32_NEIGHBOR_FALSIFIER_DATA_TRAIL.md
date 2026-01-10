@@ -151,3 +151,64 @@ Artifacts:
 1) Commit the SciFact streaming stabilization (if you accept the “stability over seed-variance” trade-off).
 2) Add a separate stress mode that *intentionally varies* the stream sampling and requires passing in aggregate
    (so we get both reproducibility and robustness, without conflating them).
+
+---
+
+## 2026-01-09 Phase 2 mechanism validation (ablations + inflation + swaps + sweeps)
+
+Purpose:
+- Close Phase 2 checklist items in `THOUGHT/LAB/FORMULA/research/questions/critical/q32_meaning_as_field.md` with receipted evidence.
+- Add “must fail hard” negative controls and distributional robustness sweeps.
+
+All artifacts below live under:
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/`
+
+### SciFact bench (P2 intervention) — baseline PASS
+
+- `p2_scifact_bench_neighbor_full_fast_20260109_215409.txt` = `B5B8A52FE1AB363191B4E197D3F7A3BE04AEFBF1755B60AC4807ACEA9DF24ACA`
+- `empirical_receipt_p2_scifact_bench_neighbor_full_fast_20260109_215409.json` = `C7DF1A752666960711BDE4E056882F77F91F65E89174398A35AF2A9D8BE703C0`
+
+### SciFact bench (P2 intervention) — ablation must kill
+
+Hard-kill ablation (R=1 constant):
+- `p2_scifact_bench_neighbor_no_grounding_fast_20260109_215638.txt` = `1B7A97157DACEF787675A148C237B8E182434D1BAC2BC85B86FE63763F8C5FF0`
+- `empirical_receipt_p2_scifact_bench_neighbor_no_grounding_fast_20260109_215638.json` = `2384DF755799D46C59156A93A620F6500008304954AA5CDB8C4B52FA52E0ED2D`
+
+Note (traceability):
+- `no_scale` did not hard-kill the effect in fast mode:
+  - `p2_scifact_bench_neighbor_no_scale_fast_20260109_215448.txt` = `3537B4C403EA712BEC0FB3E849356D69145DAC61D222683919A9E0BED5BA2073`
+  - `empirical_receipt_p2_scifact_bench_neighbor_no_scale_fast_20260109_215448.json` = `18E63CC1F5CBFB755054092ECB174D32C49DF0BCF82D02AAC06CE95B06583287`
+
+### SciFact bench (P2 intervention) — agreement inflation negative control must FAIL
+
+- `p2_scifact_bench_inflation_fast_20260109_215724.txt` = `4BF56795C281253ACCB215A579D3BC98EB768D3B660B1B303E028C6C06B3BF20`
+- `empirical_receipt_p2_scifact_bench_inflation_fast_20260109_215724.json` = `D95115A42B5BFC20C3FCF0D6DEA34AEF7D435DD886348832FDC75A4A5EAF2CDE`
+
+### SciFact bench — depth proxy knob + no-depth ablation (Df/σ proxy)
+
+- `p2_scifact_bench_neighbor_depth_power1_full_fast_20260109_215810.txt` = `EA5D0C18BC0AB6F626A46D6124ECC8E738198B51FB48B6812E9B80ABFF15C331`
+- `empirical_receipt_p2_scifact_bench_neighbor_depth_power1_full_fast_20260109_215810.json` = `0AFDEE319C5F71A38FCD7587DDF9A18D21E7F54C3EABB4625CC02060FF83FA10`
+- `p2_scifact_bench_neighbor_depth_power1_no_depth_fast_20260109_215853.txt` = `BE9FCCA7C342C4AFBDDFD3FD5F66D13BC052551B527DB5246B102FD4F70171F9`
+- `empirical_receipt_p2_scifact_bench_neighbor_depth_power1_no_depth_fast_20260109_215853.json` = `94F1E5747B1CB1CC9F08474FF88B6BD963ACBE29ED51DB2274553C86BA038B05`
+
+### Climate-FEVER streaming (P4 intervention) — baseline PASS vs inflation FAIL
+
+Neighbor baseline:
+- `p2_climate_stream_neighbor_full_fast_20260109_215932.txt` = `567DFF814D532EFCBFADDEF4CAF7E459F4C53557795FACFF0F568DC330BB67B7`
+- `empirical_receipt_p2_climate_stream_neighbor_full_fast_20260109_215932.json` = `FBEA5596D6B0CBDA978B87148F855467656EDF93939968691139F4A4B5C3F424`
+
+Inflation negative control:
+- `p2_climate_stream_inflation_fast_20260109_220007.txt` = `6DBD3929E8ECC2FF288CCCBFA4EA6CD87CA6C6A98116ECA3020F6A8516342584`
+- `empirical_receipt_p2_climate_stream_inflation_fast_20260109_220007.json` = `4203C18B59A652FD0598E6DC1603467C699A6ED27B84A20CD218D96477DBABAE`
+
+### SciFact streaming — variability stress (pass-rate gate)
+
+- `p2_scifact_stress_neighbor_fast_20260109_220056.txt` = `8C5FA723D612FC900615FECEC1577F28378EE32215BBEC8B33FB1C08C1181113`
+- `empirical_receipt_p2_scifact_stress_neighbor_fast_20260109_220056.json` = `5F6036D167DFC7C787AA844568E79BB4BB82AFDA5A798509F45938F8181E515E`
+- `stress_p2_scifact_neighbor_fast_20260109_220056.json` = `FA03242A1A2DDBBB64CDA1E83C1A1CDCD951FD116E48717266243244D9AB6C46`
+
+### SciFact streaming — neighbor_k sweep (pass-rate across k)
+
+- `p2_scifact_sweep_k_neighbor_fast_20260109_220958.txt` = `7494E8B4AA632C482F65ADC28E73D5D1C1C6D8055449112145D478EA5344CC23`
+- `empirical_receipt_p2_scifact_sweep_k_neighbor_fast_20260109_220958.json` = `81AE12B27EF614C8BA93D9A9C3030744C5BA5E269E5884AAE3E555F3702D150C`
+- `sweep_k_p2_scifact_neighbor_fast_20260109_220958.json` = `9B4CA279CC9989678818735C87AD6768BA02EAEEBD171F4F88F11B7983B28EC0`

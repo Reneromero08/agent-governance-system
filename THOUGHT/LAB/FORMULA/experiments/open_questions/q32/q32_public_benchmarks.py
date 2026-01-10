@@ -45,6 +45,7 @@ _THREADS: Optional[int] = None
 _CE_BATCH_SIZE: Optional[int] = None
 _ST_BATCH_SIZE: Optional[int] = None
 _ABLATION: str = "full"
+_DEPTH_POWER: float = 0.0
 
 
 def set_cache_roots() -> None:
@@ -176,17 +177,30 @@ def R_grounded(observations: Sequence[float], check: Sequence[float]) -> float:
     mu_check = mean(check)
     z = abs(mu_hat - mu_check) / (se(check) + EPS)
 
+    # Depth proxy (deterministic, Q32-scoped):
+    # - Matches the "σ^Df" intuition: we use sample std(check) as σ and `--depth_power` as Df.
+    # - Default `--depth_power 0` => depth_term=1 (no behavioral change unless enabled explicitly).
+    depth_term = float(pow(std(check), float(_DEPTH_POWER)))
+
     # Ablations (deterministic, Q32-scoped):
-    # - full: the normal grounded R
-    # - no_essence: remove empirical compatibility (E=1), leaving only the scale term
-    # - no_scale: remove the scale normalization (grad_S=1), leaving only empirical compatibility
+    # - full: the normal grounded R (with optional depth_term if depth_power != 0)
+    # - no_essence: remove empirical compatibility (E=1), leaving only the scale term (+ optional depth)
+    # - no_scale: remove the scale normalization (grad_S=1), leaving only empirical compatibility (+ optional depth)
+    # - no_depth: force depth_term=1 (even if depth_power is set)
+    # - no_grounding: remove empirical compatibility + scale + depth (R=1 constant), should hard-fail gates
     E = kernel_gaussian(z)
     grad_S = se(observations)
     if _ABLATION == "no_essence":
         E = 1.0
     elif _ABLATION == "no_scale":
         grad_S = 1.0
-    return float(E) / (float(grad_S) + EPS)
+    elif _ABLATION == "no_depth":
+        depth_term = 1.0
+    elif _ABLATION == "no_grounding":
+        E = 1.0
+        grad_S = 1.0
+        depth_term = 1.0
+    return (float(E) * float(depth_term)) / (float(grad_S) + EPS)
 
 
 def M_from_R(R: float) -> float:
@@ -479,6 +493,9 @@ def run_scifact_benchmark(
     M_wrong: List[float] = []
     R_correct: List[float] = []
     R_wrong: List[float] = []
+    # For swap/shuffle negative controls (receipted): keep raw score sets per sample.
+    obs_scores_by_sample: List[List[float]] = []
+    check_correct_scores_by_sample: List[List[float]] = []
     neighbor_sims: List[float] = []
     mu_hat_list: List[float] = []
     mu_check_list: List[float] = []
@@ -527,8 +544,10 @@ def run_scifact_benchmark(
 
     neighbor_candidates_by_claim: Dict[int, List[int]] = {}
     neighbor_candidate_sims_by_claim: Dict[int, List[float]] = {}
+    inflation_candidates_by_claim: Dict[int, List[int]] = {}
+    inflation_candidate_sims_by_claim: Dict[int, List[float]] = {}
     neighbor_sims: List[float] = []
-    if wrong_checks == "neighbor":
+    if wrong_checks in ("neighbor", "inflation"):
         claim_text_by_id: Dict[int, str] = {}
         for e in support_examples:
             claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
@@ -536,35 +555,56 @@ def run_scifact_benchmark(
 
         # Build a CONTRADICT bank so "neighbor wrong checks" are actually wrong (truth-inconsistent),
         # but still semantically close (nearest-neighbor competitor).
-        contradict_examples = [e for e in examples if str(e.label).strip().upper() == "CONTRADICT"]
-        contra_claim_text_by_id: Dict[int, str] = {}
         contra_bank: Dict[int, List[str]] = {}
-        for e in contradict_examples[: (120 if fast else 600)]:
-            contra_claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
-            sampled = sample_sentences_from_doc(
-                int(e.doc_id),
-                8,
-                seed_key=(seed * 1_000_003) ^ (int(e.claim_id) * 9176) ^ int(e.doc_id) ^ 0xC0A7,
-            )
-            if len(sampled) >= 6:
-                contra_bank.setdefault(int(e.claim_id), sampled[:6])
+        if wrong_checks == "neighbor":
+            contradict_examples = [e for e in examples if str(e.label).strip().upper() == "CONTRADICT"]
+            contra_claim_text_by_id: Dict[int, str] = {}
+            for e in contradict_examples[: (120 if fast else 600)]:
+                contra_claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
+                sampled = sample_sentences_from_doc(
+                    int(e.doc_id),
+                    8,
+                    seed_key=(seed * 1_000_003) ^ (int(e.claim_id) * 9176) ^ int(e.doc_id) ^ 0xC0A7,
+                )
+                if len(sampled) >= 6:
+                    contra_bank.setdefault(int(e.claim_id), sampled[:6])
 
-        contra_claim_ids = sorted([cid for cid in contra_bank.keys() if cid in contra_claim_text_by_id])
-        if len(contra_claim_ids) < (20 if fast else 80):
-            raise RuntimeError(f"Too few SciFact CONTRADICT candidates for neighbor-wrong checks ({len(contra_claim_ids)})")
+            contra_claim_ids = sorted([cid for cid in contra_bank.keys() if cid in contra_claim_text_by_id])
+            if len(contra_claim_ids) < (20 if fast else 80):
+                raise RuntimeError(
+                    f"Too few SciFact CONTRADICT candidates for neighbor-wrong checks ({len(contra_claim_ids)})"
+                )
 
-        support_texts = [claim_text_by_id[cid] for cid in claim_ids]
-        contra_texts = [contra_claim_text_by_id[cid] for cid in contra_claim_ids]
-        emb_support = embed_texts(support_texts)
-        emb_contra = embed_texts(contra_texts)
-        sim_sc = emb_support @ emb_contra.T
+            support_texts = [claim_text_by_id[cid] for cid in claim_ids]
+            contra_texts = [contra_claim_text_by_id[cid] for cid in contra_claim_ids]
+            emb_support = embed_texts(support_texts)
+            emb_contra = embed_texts(contra_texts)
+            sim_sc = emb_support @ emb_contra.T
 
-        k = max(1, int(neighbor_k))
-        for i, cid in enumerate(claim_ids):
-            order = np.argsort(-sim_sc[i])
-            cand_pos = [int(j) for j in order[:k]]
-            neighbor_candidates_by_claim[int(cid)] = [int(contra_claim_ids[int(j)]) for j in cand_pos]
-            neighbor_candidate_sims_by_claim[int(cid)] = [float(sim_sc[i, int(j)]) for j in cand_pos]
+            k = max(1, int(neighbor_k))
+            for i, cid in enumerate(claim_ids):
+                order = np.argsort(-sim_sc[i])
+                cand_pos = [int(j) for j in order[:k]]
+                neighbor_candidates_by_claim[int(cid)] = [int(contra_claim_ids[int(j)]) for j in cand_pos]
+                neighbor_candidate_sims_by_claim[int(cid)] = [float(sim_sc[i, int(j)]) for j in cand_pos]
+
+        if wrong_checks == "inflation":
+            # Agreement inflation negative control:
+            # choose a nearest-neighbor SUPPORT claim (truth-consistent for itself) so wrong checks "accidentally" support.
+            support_claim_ids = sorted([cid for cid in claim_ids if int(cid) in claim_bank and int(cid) in claim_text_by_id])
+            if len(support_claim_ids) < (20 if fast else 80):
+                raise RuntimeError(f"Too few SciFact SUPPORT candidates for inflation control ({len(support_claim_ids)})")
+            support_texts = [claim_text_by_id[int(cid)] for cid in support_claim_ids]
+            emb = embed_texts(support_texts)
+            sim = emb @ emb.T
+            k = max(1, int(neighbor_k))
+            for i, cid in enumerate(support_claim_ids):
+                sims_row = np.asarray(sim[i], dtype=float)
+                sims_row[i] = -float("inf")
+                order = np.argsort(-sims_row)
+                cand_pos = [int(j) for j in order[:k]]
+                inflation_candidates_by_claim[int(cid)] = [int(support_claim_ids[int(j)]) for j in cand_pos]
+                inflation_candidate_sims_by_claim[int(cid)] = [float(sims_row[int(j)]) for j in cand_pos]
 
     for i, ex in enumerate(support_examples):
         sampled = sample_sentences_from_doc(
@@ -601,12 +641,34 @@ def run_scifact_benchmark(
                         wrong_sents = pick
                 if best_pos is not None:
                     neighbor_sims.append(float(sims[int(best_pos)]))
+        elif wrong_checks == "inflation":
+            cands = inflation_candidates_by_claim.get(int(ex.claim_id)) or []
+            sims = inflation_candidate_sims_by_claim.get(int(ex.claim_id)) or []
+            if cands and len(cands) == len(sims):
+                best_pos: Optional[int] = None
+                best_M: float = -float("inf")
+                for pos, other_cid in enumerate(cands):
+                    sents = claim_bank.get(int(other_cid)) or []
+                    pick = list(sents[:6])
+                    if len(pick) < 2:
+                        continue
+                    cross_scores = sentence_support_scores([ex.claim] * len(pick), pick).tolist()
+                    M_wrong_candidate = M_from_R(R_grounded(obs_scores, [float(x) for x in cross_scores]))
+                    if M_wrong_candidate > best_M:
+                        best_M = float(M_wrong_candidate)
+                        best_pos = int(pos)
+                        wrong_sents = pick
+                if best_pos is not None:
+                    neighbor_sims.append(float(sims[int(best_pos)]))
         if wrong_sents is None:
             wrong_sents = wrong_bank[(i + 17) % len(wrong_bank)]
             if wrong_sents == check_correct_sents:
                 wrong_sents = wrong_bank[(i + 18) % len(wrong_bank)]
         check_correct_scores = sentence_support_scores([ex.claim] * len(check_correct_sents), check_correct_sents).tolist()
         check_wrong_scores = sentence_support_scores([ex.claim] * len(wrong_sents), wrong_sents).tolist()
+
+        obs_scores_by_sample.append([float(x) for x in obs_scores])
+        check_correct_scores_by_sample.append([float(x) for x in check_correct_scores])
 
         mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
         mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
@@ -627,6 +689,20 @@ def run_scifact_benchmark(
 
     Mc = np.array(M_correct, dtype=float)
     Mw = np.array(M_wrong, dtype=float)
+    # Swap control: re-pair obs with another sample's correct checks (should behave like wrong checks).
+    perm = np.roll(np.arange(len(M_correct), dtype=int), 1)
+    Ms_list: List[float] = []
+    Rs_list: List[float] = []
+    for i in range(int(len(M_correct))):
+        check_swap = check_correct_scores_by_sample[int(perm[int(i)])]
+        R_s = float(R_grounded(obs_scores_by_sample[int(i)], check_swap))
+        Rs_list.append(float(R_s))
+        Ms_list.append(float(M_from_R(R_s)))
+    Ms = np.asarray(Ms_list, dtype=float) if Ms_list else np.asarray([], dtype=float)
+    Rs = np.asarray(Rs_list, dtype=float) if Rs_list else np.asarray([], dtype=float)
+    swap_wins = int(np.sum(Mc > Ms)) if Ms.size else 0
+    swap_pair_wins = float(swap_wins / max(1, int(Ms.size)))
+    swap_margin = float(np.mean(Mc - Ms)) if Ms.size else float("nan")
     wins = int(np.sum(Mc > Mw))
     n = int(len(Mc))
     pair_wins = float(wins / max(1, n))
@@ -639,7 +715,10 @@ def run_scifact_benchmark(
     print(f"  mean(M_correct) = {Mc.mean():.3f}")
     print(f"  mean(M_wrong)   = {Mw.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if Ms.size:
+        print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
+        print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -662,11 +741,15 @@ def run_scifact_benchmark(
         "mean_R_wrong": float(np.mean(np.asarray(R_wrong, dtype=float))) if R_wrong else 0.0,
         "mean_logR_correct": float(Mc.mean()),
         "mean_logR_wrong": float(Mw.mean()),
+        "mean_R_swap": float(np.mean(Rs)) if Rs.size else float("nan"),
+        "mean_logR_swap": float(np.mean(Ms)) if Ms.size else float("nan"),
+        "swap_pair_wins": float(swap_pair_wins),
+        "swap_mean_margin": float(swap_margin),
         "gate_z": gate_z,
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
     }
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -891,7 +974,7 @@ def run_climate_fever_intervention_benchmark(
         raise RuntimeError(f"Climate-FEVER wrong-check bank too small ({len(bank)})")
 
     bank_claim_texts = [c for c, _ in bank]
-    bank_emb = embed_texts(bank_claim_texts) if wrong_checks == "neighbor" else None
+    bank_emb = embed_texts(bank_claim_texts) if wrong_checks in ("neighbor", "inflation") else None
 
     indices = np.arange(len(ds))
     rng.shuffle(indices)
@@ -900,6 +983,9 @@ def run_climate_fever_intervention_benchmark(
     M_wrong: List[float] = []
     R_correct: List[float] = []
     R_wrong: List[float] = []
+    # For swap/shuffle negative controls (receipted): keep raw score sets per sample.
+    obs_scores_by_sample: List[List[float]] = []
+    check_correct_scores_by_sample: List[List[float]] = []
     neighbor_sims: List[float] = []
     mu_hat_list: List[float] = []
     mu_check_list: List[float] = []
@@ -933,7 +1019,7 @@ def run_climate_fever_intervention_benchmark(
         if len(check_correct_texts) < 2:
             continue
 
-        if wrong_checks == "neighbor" and bank_emb is not None:
+        if wrong_checks in ("neighbor", "inflation") and bank_emb is not None:
             c_emb = embed_texts([claim])[0]
             sims = bank_emb @ c_emb
             k = max(1, int(neighbor_k))
@@ -949,9 +1035,12 @@ def run_climate_fever_intervention_benchmark(
             if not cand:
                 cand = [(int(i) + 17) % len(bank)]
 
-            # Prefer a neighbor competitor whose own SUPPORT evidence is strong for itself,
-            # but yields LOW scores when evaluated against this claim.
-            # This prevents "wrong checks" that accidentally support the claim.
+            # Neighbor / inflation candidates are both selected from nearest neighbors (high similarity).
+            #
+            # - neighbor: prefer a competitor whose own SUPPORT evidence is strong for itself, but yields LOW scores
+            #            when evaluated against this claim (prevents accidental support).
+            # - inflation: prefer a competitor whose SUPPORT evidence yields HIGH scores when evaluated against this
+            #              claim (agreement inflation negative control; should break the intervention gate).
             pick_sents: List[str] = []
             pick_offsets: List[Tuple[int, int]] = []
             cand_for_offsets: List[int] = []
@@ -977,7 +1066,10 @@ def run_climate_fever_intervention_benchmark(
             means: List[float] = []
             for a, b in pick_offsets:
                 means.append(float(np.mean(np.asarray(cross_scores[a:b], dtype=float))) if b > a else float("inf"))
-            pos = int(np.argmin(np.asarray(means, dtype=float)))
+            if wrong_checks == "inflation":
+                pos = int(np.argmax(np.asarray(means, dtype=float)))
+            else:
+                pos = int(np.argmin(np.asarray(means, dtype=float)))
             pick = int(cand_for_offsets[pos])
             a, b = pick_offsets[pos]
 
@@ -988,7 +1080,7 @@ def run_climate_fever_intervention_benchmark(
             other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
             if other_claim.strip() == claim.strip():
                 other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
-        if wrong_checks != "neighbor":
+        if wrong_checks not in ("neighbor", "inflation"):
             wrong_check_texts = other_supports[:3]
         if len(wrong_check_texts) < 2:
             continue
@@ -996,6 +1088,9 @@ def run_climate_fever_intervention_benchmark(
         obs_scores = sentence_support_scores([claim] * len(obs_texts), obs_texts).tolist()
         check_correct_scores = sentence_support_scores([claim] * len(check_correct_texts), check_correct_texts).tolist()
         check_wrong_scores = sentence_support_scores([claim] * len(wrong_check_texts), wrong_check_texts).tolist()
+
+        obs_scores_by_sample.append([float(x) for x in obs_scores])
+        check_correct_scores_by_sample.append([float(x) for x in check_correct_scores])
 
         mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
         mu_check_list.append(float(np.mean(np.asarray(check_correct_scores, dtype=float))))
@@ -1016,6 +1111,20 @@ def run_climate_fever_intervention_benchmark(
 
     Mc = np.array(M_correct, dtype=float)
     Mw = np.array(M_wrong, dtype=float)
+    # Swap control: re-pair obs with another sample's correct checks (should behave like wrong checks).
+    perm = np.roll(np.arange(len(M_correct), dtype=int), 1)
+    Ms_list: List[float] = []
+    Rs_list: List[float] = []
+    for i in range(int(len(M_correct))):
+        check_swap = check_correct_scores_by_sample[int(perm[int(i)])]
+        R_s = float(R_grounded(obs_scores_by_sample[int(i)], check_swap))
+        Rs_list.append(float(R_s))
+        Ms_list.append(float(M_from_R(R_s)))
+    Ms = np.asarray(Ms_list, dtype=float) if Ms_list else np.asarray([], dtype=float)
+    Rs = np.asarray(Rs_list, dtype=float) if Rs_list else np.asarray([], dtype=float)
+    swap_wins = int(np.sum(Mc > Ms)) if Ms.size else 0
+    swap_pair_wins = float(swap_wins / max(1, int(Ms.size)))
+    swap_margin = float(np.mean(Mc - Ms)) if Ms.size else float("nan")
     wins = int(np.sum(Mc > Mw))
     n = int(len(Mc))
     pair_wins = float(wins / max(1, n))
@@ -1025,7 +1134,10 @@ def run_climate_fever_intervention_benchmark(
     print(f"  P(M_correct > M_wrong) = {pair_wins:.3f}")
     print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if Ms.size:
+        print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
+        print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -1048,11 +1160,15 @@ def run_climate_fever_intervention_benchmark(
         "mean_R_wrong": float(np.mean(np.asarray(R_wrong, dtype=float))) if R_wrong else 0.0,
         "mean_logR_correct": float(Mc.mean()),
         "mean_logR_wrong": float(Mw.mean()),
+        "mean_R_swap": float(np.mean(Rs)) if Rs.size else float("nan"),
+        "mean_logR_swap": float(np.mean(Ms)) if Ms.size else float("nan"),
+        "swap_pair_wins": float(swap_pair_wins),
+        "swap_mean_margin": float(swap_margin),
         "gate_z": gate_z,
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
     }
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -1063,11 +1179,12 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Q32 public truth-anchored benchmarks (fast + full modes).")
     p.add_argument(
         "--mode",
-        choices=["bench", "stream", "transfer", "matrix", "stress"],
+        choices=["bench", "stream", "transfer", "matrix", "stress", "sweep"],
         default="bench",
         help=(
             "Run static benchmarks (bench), streaming/intervention simulation (stream), Phase-3 transfer (transfer), "
-            "a Phase-3 matrix (matrix: run both transfer directions), or variability stress tests (stress)."
+            "a Phase-3 matrix (matrix: run both transfer directions), variability stress tests (stress), "
+            "or a Phase-2 neighbor_k sweep (sweep)."
         ),
     )
     p.add_argument(
@@ -1094,9 +1211,18 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--ablation",
-        choices=["full", "no_essence", "no_scale"],
+        choices=["full", "no_essence", "no_scale", "no_depth", "no_grounding"],
         default="full",
-        help="Q32 ablations for falsification: full (default), no_essence (E=1), no_scale (grad_S=1).",
+        help=(
+            "Q32 ablations for falsification: full (default), no_essence (E=1), no_scale (grad_S=1), "
+            "no_depth (depth_term=1), no_grounding (E=1, grad_S=1, depth_term=1 => R=1 constant)."
+        ),
+    )
+    p.add_argument(
+        "--depth_power",
+        type=float,
+        default=0.0,
+        help="Depth proxy power Df for σ^Df (default: 0.0 => disabled).",
     )
     p.add_argument("--seed", type=int, default=123)
     p.add_argument(
@@ -1125,15 +1251,23 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--wrong_checks",
-        choices=["dissimilar", "neighbor"],
+        choices=["dissimilar", "neighbor", "inflation"],
         default="dissimilar",
-        help="How to construct wrong checks: dissimilar topic (default) or nearest-neighbor (J-style).",
+        help=(
+            "How to construct wrong checks: dissimilar topic (default), nearest-neighbor (J-style), "
+            "or inflation (agreement inflation negative control)."
+        ),
     )
     p.add_argument(
         "--neighbor_k",
         type=int,
         default=10,
-        help="When --wrong_checks neighbor, choose from top-k nearest neighbors (default: 10).",
+        help="When --wrong_checks neighbor|inflation, choose from top-k nearest neighbors (default: 10).",
+    )
+    p.add_argument(
+        "--sweep_neighbor_k",
+        default="1,3,5,10",
+        help="(sweep) Comma-separated neighbor_k values (default: 1,3,5,10).",
     )
     p.add_argument(
         "--scifact_stream_seed",
@@ -1157,6 +1291,11 @@ def parse_args() -> argparse.Namespace:
         "--stress_out",
         default=None,
         help="(stress) Optional JSON path to write stress summary.",
+    )
+    p.add_argument(
+        "--sweep_out",
+        default=None,
+        help="(sweep) Optional JSON path to write neighbor_k sweep summary.",
     )
     p.add_argument(
         "--calibrate_on",
@@ -1212,9 +1351,13 @@ def _write_empirical_receipt(*, out_path: str, args: argparse.Namespace, results
             "seed": int(args.seed),
             "scoring": str(args.scoring) if args.scoring is not None else None,
             "ablation": str(args.ablation),
+            "depth_power": float(args.depth_power),
             "wrong_checks": str(args.wrong_checks),
             "neighbor_k": int(args.neighbor_k),
+            "sweep_neighbor_k": str(args.sweep_neighbor_k) if hasattr(args, "sweep_neighbor_k") else None,
             "scifact_stream_seed": int(args.scifact_stream_seed),
+            "stress_n": int(args.stress_n) if hasattr(args, "stress_n") else None,
+            "stress_min_pass_rate": float(args.stress_min_pass_rate) if getattr(args, "stress_min_pass_rate", None) is not None else None,
             "calibrate_on": str(args.calibrate_on) if hasattr(args, "calibrate_on") else None,
             "apply_to": str(args.apply_to) if hasattr(args, "apply_to") else None,
             "calibration_n": int(args.calibration_n) if hasattr(args, "calibration_n") else None,
@@ -1371,18 +1514,18 @@ def run_climate_fever_streaming(
         # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim)
         sims = support_claim_emb @ c_emb
-        if wrong_checks == "neighbor":
+        if wrong_checks in ("neighbor", "inflation"):
             order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
         else:
             order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        k = max(1, int(neighbor_k)) if wrong_checks == "neighbor" else 80
+        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation") else 80
         for j in order[: max(80, k + 2)]:
             j = int(j)
             if support_claim_texts[j].strip() == claim.strip():
                 continue
             cand.append(j)
-            if len(cand) >= (k if wrong_checks == "neighbor" else 6):
+            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation") else 6):
                 break
         if not cand:
             continue
@@ -1405,11 +1548,14 @@ def run_climate_fever_streaming(
         if wrong_checks == "neighbor":
             # For neighbor-competitor falsifiers, prefer the most incompatible neighbor (directional gap).
             strength = [(mu_hat_proxy - m) if math.isfinite(m) else -1.0 for m in cand_means]
+        elif wrong_checks == "inflation":
+            # Agreement inflation negative control: prefer the most supportive wrong-check candidate.
+            strength = [m if math.isfinite(m) else -1.0 for m in cand_means]
         else:
             strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
         chosen_pos = int(np.argmax(np.asarray(strength, dtype=float)))
         wrong_check_texts = cand_texts[chosen_pos]
-        if wrong_checks == "neighbor":
+        if wrong_checks in ("neighbor", "inflation"):
             neighbor_sims.append(float(sims[int(cand[chosen_pos])]))
         if len(wrong_check_texts) < 3:
             continue
@@ -1423,13 +1569,14 @@ def run_climate_fever_streaming(
     if len(samples) < (10 if fast else 60):
         raise RuntimeError(f"Too few Climate-FEVER streaming samples ({len(samples)})")
 
-    # Precompute a bank for wrong-check swapping (negative control).
-    wrong_check_pool: List[List[float]] = []
-
     M_correct_end: List[float] = []
     M_wrong_end: List[float] = []
     R_correct_end: List[float] = []
     R_wrong_end: List[float] = []
+    # Swap/shuffle controls (receipted): store end-step obs/check sets.
+    obs_end_by_sample: List[List[float]] = []
+    check_end_by_sample: List[List[float]] = []
+    wrong_end_by_sample: List[List[float]] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
     phi_coupling: List[float] = []
@@ -1438,7 +1585,6 @@ def run_climate_fever_streaming(
     for claim, support_texts, wrong_check_texts in samples[:use_n]:
         support_scores = sentence_support_scores([claim] * len(support_texts), support_texts).tolist()
         wrong_scores = sentence_support_scores([claim] * len(wrong_check_texts), wrong_check_texts).tolist()
-        wrong_check_pool.append(wrong_scores)
 
         # Streaming time steps: we require at least 2 obs points and at least 2 check points.
         # With 5 supports, this gives t in {2,3}. With 4 supports, only t=2.
@@ -1452,11 +1598,15 @@ def run_climate_fever_streaming(
         R_series_wrong: List[float] = []
         mu_hat_series: List[float] = []
         mu_check_series: List[float] = []
+        last_obs: Optional[List[float]] = None
+        last_check: Optional[List[float]] = None
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 2:
                 break
             obs = support_scores[:t]
+            last_obs = [float(x) for x in obs]
+            last_check = [float(x) for x in check_correct]
             R_c = float(R_grounded(obs, check_correct))
             R_w = float(R_grounded(obs, wrong_scores))
             R_series_correct.append(R_c)
@@ -1473,6 +1623,10 @@ def run_climate_fever_streaming(
         M_wrong_end.append(M_series_wrong[-1])
         R_correct_end.append(R_series_correct[-1])
         R_wrong_end.append(R_series_wrong[-1])
+        if last_obs is not None and last_check is not None:
+            obs_end_by_sample.append(last_obs)
+            check_end_by_sample.append(last_check)
+            wrong_end_by_sample.append([float(x) for x in wrong_scores])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
@@ -1494,11 +1648,32 @@ def run_climate_fever_streaming(
     # Normal-approx z-score for H0: win-rate=0.5 (binomial), avoids fragile absolute thresholds.
     z = _binom_z(wins, n)
 
-    # Negative control: swap wrong checks across claims (should remain wrong, so win-rate should not increase).
-    rng.shuffle(wrong_check_pool)
-    # For the control, compare correct end against an independently wrong check (already wrong); win-rate should be similar.
-    # We treat "similarity" as abs difference <= 0.10 (fast) / 0.05 (full) around the original pair_wins.
-    control_wins = pair_wins
+    # Swap/shuffle controls:
+    # - swap_correct: re-pair obs with another sample's correct checks (should behave like wrong checks).
+    # - swap_wrong: re-pair obs with another sample's wrong checks (should stay wrong; sanity check).
+    perm = np.roll(np.arange(n, dtype=int), 1)
+    Ms_swap_correct: List[float] = []
+    Rs_swap_correct: List[float] = []
+    Ms_swap_wrong: List[float] = []
+    Rs_swap_wrong: List[float] = []
+    for i in range(n):
+        obs_end = obs_end_by_sample[int(i)]
+        check_swap = check_end_by_sample[int(perm[int(i)])]
+        wrong_swap = wrong_end_by_sample[int(perm[int(i)])]
+        R_sc = float(R_grounded(obs_end, check_swap))
+        R_sw = float(R_grounded(obs_end, wrong_swap))
+        Rs_swap_correct.append(float(R_sc))
+        Ms_swap_correct.append(float(M_from_R(R_sc)))
+        Rs_swap_wrong.append(float(R_sw))
+        Ms_swap_wrong.append(float(M_from_R(R_sw)))
+    M_swap_correct_end_a = np.asarray(Ms_swap_correct, dtype=float) if Ms_swap_correct else np.asarray([], dtype=float)
+    R_swap_correct_end_a = np.asarray(Rs_swap_correct, dtype=float) if Rs_swap_correct else np.asarray([], dtype=float)
+    M_swap_wrong_end_a = np.asarray(Ms_swap_wrong, dtype=float) if Ms_swap_wrong else np.asarray([], dtype=float)
+    R_swap_wrong_end_a = np.asarray(Rs_swap_wrong, dtype=float) if Rs_swap_wrong else np.asarray([], dtype=float)
+    swap_correct_pair_wins = float(np.mean(M_correct_end_a > M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_pair_wins = float(np.mean(M_correct_end_a > M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
+    swap_correct_margin = float(np.mean(M_correct_end_a - M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_margin = float(np.mean(M_correct_end_a - M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
 
     print("\n[Q32:P4] Intervention: replace truth-consistent checks with wrong checks")
     print(f"  P(M_correct_end > M_wrong_end) = {pair_wins:.3f}")
@@ -1506,7 +1681,13 @@ def run_climate_fever_streaming(
     print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
     print(f"  mean(M_wrong_end)   = {M_wrong_end_a.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if M_swap_correct_end_a.size:
+        print(f"  [swap_correct] P(M_correct_end > M_swapped_correct_end) = {swap_correct_pair_wins:.3f}")
+        print(f"  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = {swap_correct_margin:.3f}")
+    if M_swap_wrong_end_a.size:
+        print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
+        print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(np.mean(np.asarray(neighbor_sims, dtype=float))):.3f}")
     if phi_coupling:
         print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
@@ -1535,7 +1716,17 @@ def run_climate_fever_streaming(
             "gate_margin": gate_margin,
             "mean_dM_correct": float(dM_correct_a.mean()),
             "mean_dM_wrong": float(dM_wrong_a.mean()),
-            "control_wins": float(control_wins),
+            "mean_R_swap_correct_end": float(np.mean(R_swap_correct_end_a)) if R_swap_correct_end_a.size else float("nan"),
+            "mean_logR_swap_correct_end": float(np.mean(M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan"),
+            "swap_correct_pair_wins_end": float(swap_correct_pair_wins),
+            "swap_correct_mean_margin_end": float(swap_correct_margin),
+            "mean_R_swap_wrong_end": float(np.mean(R_swap_wrong_end_a)) if R_swap_wrong_end_a.size else float("nan"),
+            "mean_logR_swap_wrong_end": float(np.mean(M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan"),
+            "swap_wrong_pair_wins_end": float(swap_wrong_pair_wins),
+            "swap_wrong_mean_margin_end": float(swap_wrong_margin),
+            "mean_neighbor_sim": float(np.mean(np.asarray(neighbor_sims, dtype=float)))
+            if (wrong_checks in ("neighbor", "inflation") and neighbor_sims)
+            else float("nan"),
             "phi_proxy_bits": float(np.mean(np.asarray(phi_coupling, dtype=float))) if phi_coupling else 0.0,
         },
     )
@@ -1674,23 +1865,23 @@ def run_scifact_streaming(
         # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim_text)
         sims = support_claim_emb @ c_emb
-        if wrong_checks == "neighbor":
+        if wrong_checks in ("neighbor", "inflation"):
             order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
         else:
             order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        k = max(1, int(neighbor_k)) if wrong_checks == "neighbor" else 50
+        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation") else 50
         for j in order[: max(50, k + 2)]:
             idx = int(j)
             if support_claim_texts[idx].strip() == claim_text.strip():
                 continue
             cand.append(idx)
-            if len(cand) >= (k if wrong_checks == "neighbor" else 6):
+            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation") else 6):
                 break
         if not cand:
             continue
 
-        if wrong_checks == "neighbor":
+        if wrong_checks in ("neighbor", "inflation"):
             # Build a "neighbor competitor" wrong-check pool:
             # pick a nearest-neighbor claim whose own evidence-sentences are strongly SUPPORTIVE for itself,
             # but score LOW when evaluated against the current claim.
@@ -1728,7 +1919,10 @@ def run_scifact_streaming(
             for a, b in pick_offsets:
                 cross_means.append(float(np.mean(np.asarray(cross_scores[a:b], dtype=float))) if b > a else float("inf"))
 
-            chosen_pos = int(np.argmin(np.asarray(cross_means, dtype=float)))
+            if wrong_checks == "inflation":
+                chosen_pos = int(np.argmax(np.asarray(cross_means, dtype=float)))
+            else:
+                chosen_pos = int(np.argmin(np.asarray(cross_means, dtype=float)))
             chosen_idx = int(cand[chosen_pos])
             neighbor_sims.append(float(sims[int(chosen_idx)]))
             a, b = pick_offsets[chosen_pos]
@@ -1774,6 +1968,10 @@ def run_scifact_streaming(
     M_wrong_end: List[float] = []
     R_correct_end: List[float] = []
     R_wrong_end: List[float] = []
+    # Swap/shuffle controls (receipted): store end-step obs/check sets.
+    obs_end_by_sample: List[List[float]] = []
+    check_end_by_sample: List[List[float]] = []
+    wrong_end_by_sample: List[List[float]] = []
     dM_correct: List[float] = []
     dM_wrong: List[float] = []
 
@@ -1791,11 +1989,15 @@ def run_scifact_streaming(
         R_series_wrong: List[float] = []
         mu_hat_series: List[float] = []
         mu_check_series: List[float] = []
+        last_obs: Optional[List[float]] = None
+        last_check: Optional[List[float]] = None
         for t in range(2, t_max + 1):
             check_correct = support_scores[t:]
             if len(check_correct) < 4:
                 break
             obs = support_scores[:t]
+            last_obs = [float(x) for x in obs]
+            last_check = [float(x) for x in check_correct]
             R_c = float(R_grounded(obs, check_correct))
             R_w = float(R_grounded(obs, wrong_scores))
             R_series_correct.append(R_c)
@@ -1812,6 +2014,10 @@ def run_scifact_streaming(
         M_wrong_end.append(M_series_wrong[-1])
         R_correct_end.append(R_series_correct[-1])
         R_wrong_end.append(R_series_wrong[-1])
+        if last_obs is not None and last_check is not None:
+            obs_end_by_sample.append(last_obs)
+            check_end_by_sample.append(last_check)
+            wrong_end_by_sample.append([float(x) for x in wrong_scores])
         dM_correct.append(M_series_correct[-1] - M_series_correct[0])
         dM_wrong.append(M_series_wrong[-1] - M_series_wrong[0])
         phi_coupling.append(_mutual_information_continuous(mu_hat_series, mu_check_series, n_bins=8))
@@ -1832,13 +2038,46 @@ def run_scifact_streaming(
     margin = float(np.mean(M_correct_end_a - M_wrong_end_a))
     z = _binom_z(wins, n)
 
+    # Swap/shuffle controls:
+    # - swap_correct: re-pair obs with another sample's correct checks (should behave like wrong checks).
+    # - swap_wrong: re-pair obs with another sample's wrong checks (should stay wrong; sanity check).
+    perm = np.roll(np.arange(n, dtype=int), 1)
+    Ms_swap_correct: List[float] = []
+    Rs_swap_correct: List[float] = []
+    Ms_swap_wrong: List[float] = []
+    Rs_swap_wrong: List[float] = []
+    for i in range(n):
+        obs_end = obs_end_by_sample[int(i)]
+        check_swap = check_end_by_sample[int(perm[int(i)])]
+        wrong_swap = wrong_end_by_sample[int(perm[int(i)])]
+        R_sc = float(R_grounded(obs_end, check_swap))
+        R_sw = float(R_grounded(obs_end, wrong_swap))
+        Rs_swap_correct.append(float(R_sc))
+        Ms_swap_correct.append(float(M_from_R(R_sc)))
+        Rs_swap_wrong.append(float(R_sw))
+        Ms_swap_wrong.append(float(M_from_R(R_sw)))
+    M_swap_correct_end_a = np.asarray(Ms_swap_correct, dtype=float) if Ms_swap_correct else np.asarray([], dtype=float)
+    R_swap_correct_end_a = np.asarray(Rs_swap_correct, dtype=float) if Rs_swap_correct else np.asarray([], dtype=float)
+    M_swap_wrong_end_a = np.asarray(Ms_swap_wrong, dtype=float) if Ms_swap_wrong else np.asarray([], dtype=float)
+    R_swap_wrong_end_a = np.asarray(Rs_swap_wrong, dtype=float) if Rs_swap_wrong else np.asarray([], dtype=float)
+    swap_correct_pair_wins = float(np.mean(M_correct_end_a > M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_pair_wins = float(np.mean(M_correct_end_a > M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
+    swap_correct_margin = float(np.mean(M_correct_end_a - M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan")
+    swap_wrong_margin = float(np.mean(M_correct_end_a - M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan")
+
     print("\n[Q32:P4] Intervention: replace truth-consistent checks with wrong checks")
     print(f"  P(M_correct_end > M_wrong_end) = {pair_wins:.3f}")
     print(f"  z(H0: p=0.5) = {z:.3f}  (n={n})")
     print(f"  mean(M_correct_end) = {M_correct_end_a.mean():.3f}")
     print(f"  mean(M_wrong_end)   = {M_wrong_end_a.mean():.3f}")
     print(f"  mean(M_correct - M_wrong) = {margin:.3f}")
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if M_swap_correct_end_a.size:
+        print(f"  [swap_correct] P(M_correct_end > M_swapped_correct_end) = {swap_correct_pair_wins:.3f}")
+        print(f"  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = {swap_correct_margin:.3f}")
+    if M_swap_wrong_end_a.size:
+        print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
+        print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -1870,10 +2109,18 @@ def run_scifact_streaming(
         "gate_margin": gate_margin,
         "mean_dM_correct": float(dM_correct_a.mean()),
         "mean_dM_wrong": float(dM_wrong_a.mean()),
+        "mean_R_swap_correct_end": float(np.mean(R_swap_correct_end_a)) if R_swap_correct_end_a.size else float("nan"),
+        "mean_logR_swap_correct_end": float(np.mean(M_swap_correct_end_a)) if M_swap_correct_end_a.size else float("nan"),
+        "swap_correct_pair_wins_end": float(swap_correct_pair_wins),
+        "swap_correct_mean_margin_end": float(swap_correct_margin),
+        "mean_R_swap_wrong_end": float(np.mean(R_swap_wrong_end_a)) if R_swap_wrong_end_a.size else float("nan"),
+        "mean_logR_swap_wrong_end": float(np.mean(M_swap_wrong_end_a)) if M_swap_wrong_end_a.size else float("nan"),
+        "swap_wrong_pair_wins_end": float(swap_wrong_pair_wins),
+        "swap_wrong_mean_margin_end": float(swap_wrong_margin),
     }
     if phi_coupling:
         details["phi_proxy_bits"] = float(np.mean(np.asarray(phi_coupling, dtype=float)))
-    if wrong_checks == "neighbor" and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -1888,6 +2135,8 @@ def main() -> int:
     configure_runtime(device=device, threads=max(1, int(args.threads)), ce_batch_size=int(args.ce_batch), st_batch_size=int(args.st_batch))
     global _ABLATION
     _ABLATION = str(args.ablation)
+    global _DEPTH_POWER
+    _DEPTH_POWER = float(args.depth_power)
 
     global _USE_CROSS_ENCODER
     if args.scoring is not None:
@@ -2006,6 +2255,87 @@ def main() -> int:
             min_pr = float(args.stress_min_pass_rate)
             if float(pass_rate) < min_pr:
                 raise SystemExit(f"stress failed: pass_rate={pass_rate:.3f} < min_pass_rate={min_pr:.3f}")
+
+    elif args.mode == "sweep":
+        # Phase-2 robustness: sweep neighbor_k and require a stable pass-rate across a range.
+        # Like stress, sweep is intentionally non-strict at the per-trial level: we want a distribution.
+        if args.dataset not in ("scifact", "all"):
+            raise SystemExit("sweep mode currently supports only --dataset scifact (or all)")
+
+        raw = str(args.sweep_neighbor_k or "").strip()
+        parts = [p.strip() for p in raw.replace(";", ",").split(",") if p.strip()]
+        ks = sorted({int(p) for p in parts if str(p).lstrip("-").isdigit() and int(p) > 0})
+        if not ks:
+            raise SystemExit(f"sweep requires at least one positive int neighbor_k (got: {raw!r})")
+
+        trials = max(1, int(args.stress_n))
+        base = int(args.seed)
+
+        print(f"\n[Q32:SWEEP] SciFact streaming neighbor_k sweep (ks={ks}, trials={trials})")
+        per_k: List[Dict[str, float]] = []
+        per_trial: List[Dict[str, float]] = []
+
+        for k in ks:
+            pass_n = 0
+            for i in range(trials):
+                s = base + i
+                try:
+                    r = run_scifact_streaming(
+                        seed=s,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=int(k),
+                        scifact_stream_seed=-1,
+                    )
+                except Exception:
+                    r = BenchmarkResult(name=f"SciFact-Streaming@k={k}@seed={s}", passed=False, details={})
+
+                results.append(BenchmarkResult(name=f"SciFact-Streaming@k={k}@seed={s}", passed=r.passed, details=r.details))
+                if r.passed:
+                    pass_n += 1
+                d = dict(r.details)
+                d["seed"] = float(s)
+                d["neighbor_k"] = float(int(k))
+                per_trial.append(d)
+
+            pass_rate = float(pass_n / max(1, trials))
+            per_k.append({"neighbor_k": float(int(k)), "pass_n": float(pass_n), "pass_rate": float(pass_rate)})
+            print(f"  k={int(k):>3d}: pass_rate={pass_rate:.3f}  (pass_n={pass_n}/{trials})")
+
+        min_pr_over_k = float(min([float(d["pass_rate"]) for d in per_k]) if per_k else float("nan"))
+        details_sweep: Dict[str, float] = {
+            "trials_per_k": float(trials),
+            "k_count": float(len(ks)),
+            "min_pass_rate_over_k": float(min_pr_over_k),
+        }
+        for d in per_k:
+            kk = int(d["neighbor_k"])
+            details_sweep[f"pass_rate_k{kk}"] = float(d["pass_rate"])
+            details_sweep[f"pass_n_k{kk}"] = float(d["pass_n"])
+
+        if args.stress_min_pass_rate is not None:
+            details_sweep["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
+
+        passed_sweep = True
+        if args.stress_min_pass_rate is not None and math.isfinite(min_pr_over_k):
+            passed_sweep = bool(float(min_pr_over_k) >= float(args.stress_min_pass_rate))
+        results.append(BenchmarkResult(name="SciFact-Streaming-SweepK", passed=passed_sweep, details=details_sweep))
+
+        if args.sweep_out:
+            out_path = str(args.sweep_out)
+            os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
+            import json
+
+            payload = {"ks": [int(k) for k in ks], "trials": int(trials), "per_k": per_k, "per_trial": per_trial}
+            with open(out_path, "w", encoding="utf-8") as f:
+                json.dump(payload, f, indent=2, sort_keys=True)
+            print(f"[Q32:SWEEP] Wrote {out_path}")
+
+        if args.stress_min_pass_rate is not None:
+            min_pr = float(args.stress_min_pass_rate)
+            if float(min_pr_over_k) < min_pr:
+                raise SystemExit(f"sweep failed: min_pass_rate_over_k={min_pr_over_k:.3f} < min_pass_rate={min_pr:.3f}")
 
     elif args.mode == "bench":
         if args.dataset in ("scifact", "all"):
@@ -2209,6 +2539,9 @@ def main() -> int:
         _write_empirical_receipt(out_path=str(args.empirical_receipt_out), args=args, results=results)
 
     all_passed = all(r.passed for r in results)
+    # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by pass-rate thresholds.
+    if args.mode in ("stress", "sweep"):
+        return 0
     if args.fast and not args.strict:
         return 0
     return 0 if all_passed else 1
