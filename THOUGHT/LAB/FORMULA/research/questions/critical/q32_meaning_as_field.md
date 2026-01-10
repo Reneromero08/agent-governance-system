@@ -119,8 +119,9 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
 - [x] Required fields (implemented now):
   - Run context: `mode`, `dataset`, `fast`, `strict`, `seed`, `scoring`, `wrong_checks`, `neighbor_k`, `scifact_stream_seed`, `calibrate_on`, `apply_to`, `calibration_n`, `verify_n`
   - Per-result: `name`, `passed`, and `details` (includes `pair_wins`, `z`, `mean_margin`, plus `gate_z`/`gate_margin` and `phi_proxy_bits`; neighbor mode adds `mean_neighbor_sim`)
-- [ ] `R` / `M=log(R)` summary stats (TODO):
-  - Current receipts focus on falsifier gates (`pair_wins`, `z`, margins, J, Phi-proxy). If we want explicit `R`/`M` summary stats in the receipt, we need to define *which* `R/M` (per-sample? per-series? end-of-stream?) and add it deliberately.
+- [x] `R` / `M=log(R)` summary stats (implemented now):
+  - Intervention benches (`SciFact`, `Climate-FEVER-Intervention`): `details.mean_R_correct/mean_R_wrong` and `details.mean_logR_correct/mean_logR_wrong`
+  - Streaming benches (`SciFact-Streaming`, `Climate-FEVER-Streaming`): `details.mean_R_correct_end/mean_R_wrong_end` and `details.mean_logR_correct_end/mean_logR_wrong_end`
 - [ ] Efficiency constraints:
   - Use lightweight proxies first (MI / multi-information via binning)
   - Add a "stress mode" pass-rate gate for variability when `scifact_stream_seed=-1`
