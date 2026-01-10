@@ -1,10 +1,10 @@
 ---
 title: Phase E.X Eigenvalue Alignment Protocol Roadmap
 section: roadmap
-version: 1.7.0
+version: 1.8.0
 created: 2026-01-07
 modified: 2026-01-10
-status: ✅ E.X.4.1 ESAP Handshake IN PROGRESS
+status: ✅ E.X.4.1 ESAP Handshake COMPLETE
 summary: Eigenvalue alignment protocol for cross-model semantic alignment
 tags:
 - phase-5
@@ -610,7 +610,7 @@ The participation ratio we computed IS the effective rank of the Fubini-Study me
 
 ## Phase E.X.4: Integration (IN PROGRESS)
 
-### E.X.4.1: Cassette Handshake 🔄 IN PROGRESS (2026-01-10)
+### E.X.4.1: Cassette Handshake ✅ COMPLETE (2026-01-10)
 
 **Goal:** Enable cassettes/agents to verify semantic alignment via spectrum.
 
@@ -621,8 +621,15 @@ The participation ratio we computed IS the effective rank of the Fubini-Study me
   - Schema: `lib/schemas/esap_handshake.schema.json`
   - Implementation: `lib/handshake.py`
   - Tests: 16/16 passing
-- [ ] Integrate with cassette network sync protocol
-- [ ] Add spectrum signature to cassette metadata
+- [x] **Integrate with cassette network sync protocol**: ✅ COMPLETE
+  - `NAVIGATION/CORTEX/network/esap_cassette.py` — ESAPCassetteMixin for any cassette
+  - `NAVIGATION/CORTEX/network/esap_hub.py` — ESAPNetworkHub with alignment verification
+  - Alignment groups for cross-query optimization
+  - Convergence matrix tracking
+- [x] **Add spectrum signature to cassette metadata**: ✅ COMPLETE
+  - `CassetteSpectrum` dataclass with eigenvalues, Df, cumulative variance
+  - `esap_handshake()` method extends base handshake with spectrum
+  - Tests: 13/13 passing (`test_esap_integration.py`)
 
 **Handshake Flow:**
 ```
@@ -796,7 +803,7 @@ make -j$(nproc)
 | E.X.3.7 Boundary Discovery | ✅ COMPLETE (unbreakable) |
 | E.X.3.8 Theoretical Grounding | ✅ COMPLETE |
 | E.X.3.10 QGT Integration | ✅ COMPLETE |
-| E.X.4.1 Cassette Handshake | 🔄 IN PROGRESS (format done) |
+| E.X.4.1 Cassette Handshake | ✅ COMPLETE |
 
 ### Key Deliverables
 
@@ -830,4 +837,4 @@ make -j$(nproc)
 
 ---
 
-**Last Updated:** 2026-01-10 - E.X.4.1 handshake format DONE, Roadmap v1.7.0
+**Last Updated:** 2026-01-10 - E.X.4.1 COMPLETE (cassette network integration), Roadmap v1.8.0
