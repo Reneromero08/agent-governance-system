@@ -1,0 +1,75 @@
+{
+  "test_id": "alignment-resistance-E.X.3.2",
+  "timestamp": "2026-01-10T04:54:47.874473+00:00",
+  "parameters": {
+    "n_trials": 5,
+    "n_pairs": 10,
+    "dim": 100,
+    "base_seed": 42
+  },
+  "sweep_results": [
+    {
+      "semantic_strength": 0.0,
+      "mean_resistance": 0.07082663090974994,
+      "mean_simlex_correlation": -0.05069575386719109,
+      "mean_improvement": 0.8920064343266401,
+      "std_resistance": 0.025727562822246874,
+      "std_simlex": 0.22059522621467284
+    },
+    {
+      "semantic_strength": 0.25,
+      "mean_resistance": 0.037333156251362506,
+      "mean_simlex_correlation": 0.6840165959469375,
+      "mean_improvement": 0.9241601699986919,
+      "std_resistance": 0.03562577103701616,
+      "std_simlex": 0.06607455559557389
+    },
+    {
+      "semantic_strength": 0.5,
+      "mean_resistance": 0.06837230056031278,
+      "mean_simlex_correlation": 0.8077473305337763,
+      "mean_improvement": 0.8943625914620996,
+      "std_resistance": 0.03193371697519461,
+      "std_simlex": 0.04554615787232568
+    },
+    {
+      "semantic_strength": 0.75,
+      "mean_resistance": 0.0156876777708566,
+      "mean_simlex_correlation": 0.8657390608477293,
+      "mean_improvement": 0.9449398293399776,
+      "std_resistance": 0.028074883105846785,
+      "std_simlex": 0.029228071608486898
+    },
+    {
+      "semantic_strength": 1.0,
+      "mean_resistance": 0.04406078839549725,
+      "mean_simlex_correlation": 0.9042497818863078,
+      "mean_improvement": 0.9177016431403228,
+      "std_resistance": 0.03520324385416696,
+      "std_simlex": 0.022367952641284154
+    }
+  ],
+  "comparison": {
+    "random": {
+      "mean_improvement": 0.9136786445224878,
+      "std_improvement": 0.0394159193924577,
+      "mean_simlex": -0.05445656646861478
+    },
+    "semantic": {
+      "mean_improvement": 0.9144216748527775,
+      "std_improvement": 0.03294617708856059,
+      "mean_simlex": 0.8930049522080511
+    },
+    "gap": -0.0007430303302896624
+  },
+  "interpretation": {
+    "verdict": "INCONCLUSIVE",
+    "explanation": "Weak signal: gap=-0.001, resistance-SimLex r=-0.500. Synthetic semantic injection may not capture real model behavior.",
+    "correlations": {
+      "resistance_vs_strength": -0.49999999999999994,
+      "simlex_vs_strength": 0.9999999999999999,
+      "resistance_vs_simlex": -0.49999999999999994
+    },
+    "gap": -0.0007430303302896624
+  }
+}

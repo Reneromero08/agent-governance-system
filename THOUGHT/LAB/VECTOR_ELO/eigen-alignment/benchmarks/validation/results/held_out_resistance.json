@@ -1,0 +1,27 @@
+{
+  "test_id": "held-out-resistance-E.X.3.2c",
+  "timestamp": "2026-01-10T04:58:57.180415+00:00",
+  "random": {
+    "mean_anchor_aligned": 0.958697485313623,
+    "mean_held_out_aligned": -0.0015861821886867314
+  },
+  "trained": {
+    "n_anchors": 65,
+    "n_held_out": 50,
+    "anchor_raw_similarity": -0.0642292343290714,
+    "anchor_aligned_similarity": 0.9660266800037024,
+    "anchor_improvement": 1.0302559143327739,
+    "held_out_raw_similarity": -0.022471019849462537,
+    "held_out_aligned_similarity": 0.5184807846175788,
+    "held_out_improvement": 0.5409518044670414,
+    "residual": 1.793975675624121
+  },
+  "gaps": {
+    "anchor": -0.007329194690079421,
+    "held_out": -0.5200669668062656
+  },
+  "interpretation": {
+    "verdict": "REVERSED",
+    "explanation": "Trained models show WORSE held-out alignment than random (-0.520). This is unexpected - needs investigation."
+  }
+}
