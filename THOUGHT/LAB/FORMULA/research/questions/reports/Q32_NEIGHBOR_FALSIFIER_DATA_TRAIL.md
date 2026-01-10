@@ -82,6 +82,27 @@ Matrix outcome (from the captured summary):
   - `climate_fever->scifact:*@seed=123/124/125: PASS`
   - `scifact->climate_fever:*@seed=123/124/125: PASS`
 
+### 2026-01-09 variability stress (SciFact streaming)
+
+Purpose:
+- Quantify brittleness when we *intentionally* vary SciFact streaming sampling (`scifact_stream_seed=-1`).
+
+Artifacts:
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_scifact_neighbor_fast_n10_20260109_180741.txt`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_scifact_neighbor_fast_n10_20260109_180741.json`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_scifact_neighbor_full_n3_20260109_181239.txt`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_scifact_neighbor_full_n3_20260109_181239.json`
+
+SHA256:
+- `stress_scifact_neighbor_fast_n10_20260109_180741.txt` = `04CA83E44F1436140FC6077A5C505696232C72D55E887065B07225E180CAC677`
+- `stress_scifact_neighbor_fast_n10_20260109_180741.json` = `B1F70A2A8D809C53EEEF214BEAF57B93D2B1E0D6EA8FD431EEE7E430FF83C2A4`
+- `stress_scifact_neighbor_full_n3_20260109_181239.txt` = `EC89AF26BFF8FE99A71B892735398520B8CDB37E34A8A9FE819350169BBC96A3`
+- `stress_scifact_neighbor_full_n3_20260109_181239.json` = `527B58A4E189934623DE54D075F39C4A0BB9AFA711413B8E01A99C83D86AF2B4`
+
+Notes:
+- The **fast** stress run is expected to be noisy because `--fast` reduces `n` heavily.
+- The stress mode is intentionally **non-strict** (it records PASS/FAIL distribution instead of aborting).
+
 ## Current working state
 
 - There are **uncommitted edits** after `34ec923` (the stabilization change to SciFact streaming sampling).
