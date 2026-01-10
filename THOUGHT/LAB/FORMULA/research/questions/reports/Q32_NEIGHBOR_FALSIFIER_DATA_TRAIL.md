@@ -128,6 +128,19 @@ Notes:
 - The **fast** stress run is expected to be noisy because `--fast` reduces `n` heavily.
 - The stress mode is intentionally **non-strict** (it records PASS/FAIL distribution instead of aborting).
 
+### 2026-01-09 stress receipt smoke (SciFact streaming)
+
+Purpose:
+- Prove stress mode can be captured in an `EmpiricalMetricReceipt` (including `R/M` end-of-stream summary stats).
+
+Artifacts:
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_receipt_smoke_20260109_202945.txt`
+- SHA256 = `DC1C6DC673DD72E5514069EF1CB4CAA48BA5EC8BCC6D5E76913FB54451A1CBAE`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_smoke_20260109_202945.json`
+- SHA256 = `04A53121276F9677140DE8D66CCB8197439052A682F99743C488B5CB1C937C3E`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/stress_summary_smoke_20260109_202945.json`
+- SHA256 = `8887FC37FB5F1D9BBDDFBAD74413BEB063A0E3914078D9B94E1AEDADA86E121C`
+
 ## Current working state
 
 - There are **uncommitted edits** after `34ec923` (the stabilization change to SciFact streaming sampling).

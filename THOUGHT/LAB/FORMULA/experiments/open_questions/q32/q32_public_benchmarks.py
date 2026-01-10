@@ -1915,6 +1915,10 @@ def main() -> int:
         pw = [float(d.get("pair_wins", float("nan"))) for d in per]
         zz = [float(d.get("z", float("nan"))) for d in per]
         mm = [float(d.get("mean_margin", float("nan"))) for d in per]
+        rc_end = [float(d.get("mean_R_correct_end", float("nan"))) for d in per]
+        rw_end = [float(d.get("mean_R_wrong_end", float("nan"))) for d in per]
+        mc_end = [float(d.get("mean_logR_correct_end", float("nan"))) for d in per]
+        mw_end = [float(d.get("mean_logR_wrong_end", float("nan"))) for d in per]
 
         def finite_min(xs: List[float]) -> float:
             vals = [x for x in xs if math.isfinite(x)]
@@ -1932,6 +1936,10 @@ def main() -> int:
             "min_pair_wins": finite_min(pw),
             "min_z": finite_min(zz),
             "min_mean_margin": finite_min(mm),
+            "min_mean_R_correct_end": finite_min(rc_end),
+            "min_mean_R_wrong_end": finite_min(rw_end),
+            "min_mean_logR_correct_end": finite_min(mc_end),
+            "min_mean_logR_wrong_end": finite_min(mw_end),
         }
 
         print("\n[Q32:STRESS] Summary")
@@ -1939,6 +1947,31 @@ def main() -> int:
         print(f"  min_pair_wins = {summary['min_pair_wins']:.3f}")
         print(f"  min_z = {summary['min_z']:.3f}")
         print(f"  min_mean_margin = {summary['min_mean_margin']:.3f}")
+        if math.isfinite(float(summary["min_mean_R_correct_end"])):
+            print(f"  min_mean_R_correct_end = {summary['min_mean_R_correct_end']:.3f}")
+            print(f"  min_mean_R_wrong_end   = {summary['min_mean_R_wrong_end']:.3f}")
+            print(f"  min_mean_logR_correct_end = {summary['min_mean_logR_correct_end']:.3f}")
+            print(f"  min_mean_logR_wrong_end   = {summary['min_mean_logR_wrong_end']:.3f}")
+
+        # Add a synthetic result so EmpiricalMetricReceipt can capture stress summaries.
+        details_stress: Dict[str, float] = {
+            "trials": float(trials),
+            "seed_base": float(base),
+            "neighbor_k": float(int(args.neighbor_k)),
+            "pass_n": float(pass_n),
+            "pass_rate": float(pass_rate),
+            "min_pair_wins": float(summary["min_pair_wins"]),
+            "min_z": float(summary["min_z"]),
+            "min_mean_margin": float(summary["min_mean_margin"]),
+            "min_mean_R_correct_end": float(summary["min_mean_R_correct_end"]),
+            "min_mean_R_wrong_end": float(summary["min_mean_R_wrong_end"]),
+            "min_mean_logR_correct_end": float(summary["min_mean_logR_correct_end"]),
+            "min_mean_logR_wrong_end": float(summary["min_mean_logR_wrong_end"]),
+        }
+        if args.stress_min_pass_rate is not None:
+            details_stress["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
+
+        results.append(BenchmarkResult(name="SciFact-Streaming-Stress", passed=bool(pass_rate > 0.0), details=details_stress))
 
         if args.stress_out:
             out_path = str(args.stress_out)

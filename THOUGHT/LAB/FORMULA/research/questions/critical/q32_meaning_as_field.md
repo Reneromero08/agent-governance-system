@@ -133,6 +133,7 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
 - See `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_NEIGHBOR_FALSIFIER_DATA_TRAIL.md`
   - Fast receipt example: `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_fast_20260109_193751.json`
   - Full receipt example: `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_full_20260109_194549.json`
+  - Stress receipt example: `LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_smoke_20260109_202945.json`
 
 **Exit Criteria (Q32-scoped):**
 - [ ] Every public benchmark run (`bench|stream|transfer|matrix`) can emit an EmpiricalMetricReceipt deterministically
@@ -152,6 +153,18 @@ To keep this falsifiable and auditable, every benchmark run should emit a machin
 
 **Gate:** correct causal response to interventions (not just correlation).
 
+### Phase 5 - Scale, replication, and settlement (long road)
+This is what we need before we can responsibly claim **SOLVED**:
+
+- **Big runs (receipted):**
+  - Full `matrix` (non-fast, crossencoder) with `--wrong_checks neighbor` across multiple seeds.
+  - Full `stress` with higher `--stress_n` and a hard `--stress_min_pass_rate` gate; receipt + stress_out + verbatim logs + hashes.
+- **Not a dataset artifact:** add at least one *third* public benchmark domain and repeat transfer/matrix.
+- **Negative controls must fail hard:** shuffles, wrong-check swaps, paraphrase-only “agreement inflation” should collapse the signal (receipted).
+- **Stability under perturbations:** sweep `neighbor_k`, stream sampling, and other knobs; require pass-rate stays above threshold (distribution is part of the proof).
+- **Ablations:** show the effect disappears when the empirical anchor / scale term / depth term is removed (no tautology).
+- **Pinned replication:** rerun with pinned environments and record hashes so the datatrail is reproducible.
+
 ### Promotion criteria
 - **OPEN → PARTIAL:** Phase 1 + Phase 2 pass on at least one public benchmark with fixed thresholds and full negative controls.
-- **PARTIAL → ANSWERED:** Phase 2–4 pass across multiple benchmarks/domains, plus replication with pinned versions + independent reruns.
+- **PARTIAL → ANSWERED:** Phase 2-4 pass across multiple benchmarks/domains, plus replication with pinned versions + independent reruns.
