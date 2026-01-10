@@ -119,12 +119,15 @@ Goal: make “meaning-as-field on the semiosphere” survive increasingly hostil
 
 #### 3.2 Full-scale runs (receipted)
 - [x] Full (non-fast, crossencoder) matrix across datasets (performed as chunked transfer runs).
-- [ ] Full (non-fast, crossencoder) matrix across multiple seeds.
+- [x] Full (non-fast, crossencoder) matrix across multiple seeds.
 - [x] Full stress with hard `--stress_min_pass_rate` gate (SciFact streaming, crossencoder).
 
-#### 3.3 Pinned replication + “attempt SOLVED” package
-- [ ] Pinned environment + rerun bundle with hashes so independent reruns reproduce receipts.
-- [ ] Update solved criteria report with the final evidence bundle + explicit falsification boundary.
+#### 3.3 Pinned replication + "attempt SOLVED" package
+- [x] Pinned environment + rerun bundle with hashes so independent reruns reproduce receipts.
+- [x] Update Phase 3 evidence package index with the final evidence bundle + explicit falsification boundary.
+
+Evidence index:
+- `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_PHASE3_EVIDENCE_PACKAGE.md`
 
 ### Expanded breakdown (legacy detail mapped into Phase 1/2/3 above)
 
