@@ -1,0 +1,69 @@
+{
+  "benchmark_id": "esap-bench-20260110-034202",
+  "timestamp": "2026-01-10T03:42:02.283172+00:00",
+  "models": [
+    "all-MiniLM-L6-v2",
+    "e5-large-v2",
+    "bge-large-en-v1.5",
+    "gte-large"
+  ],
+  "anchor_sizes": [
+    64
+  ],
+  "n_held_out": 218,
+  "model_pairs": [
+    {
+      "model_a": "e5-large-v2",
+      "model_b": "all-MiniLM-L6-v2",
+      "n_anchors": 64,
+      "n_held_out": 218,
+      "eigenvalue_spearman": 1.0,
+      "eigenvalue_pearson": 0.9868521644859265,
+      "procrustes_residual": 3.8408485301277913,
+      "mean_raw_similarity": -0.05089640544473653,
+      "mean_aligned_similarity": 0.3840402322360037,
+      "improvement": 0.4349366376807402,
+      "neighborhood_overlap_10": 0.2509174311926606,
+      "neighborhood_overlap_50": 0.4524770642201836,
+      "anchor_size": 64
+    },
+    {
+      "model_a": "bge-large-en-v1.5",
+      "model_b": "all-MiniLM-L6-v2",
+      "n_anchors": 64,
+      "n_held_out": 218,
+      "eigenvalue_spearman": 1.0,
+      "eigenvalue_pearson": 0.9815297739055598,
+      "procrustes_residual": 2.6012089225046364,
+      "mean_raw_similarity": 0.04292312671821421,
+      "mean_aligned_similarity": 0.4326930770619055,
+      "improvement": 0.38976995034369133,
+      "neighborhood_overlap_10": 0.27477064220183484,
+      "neighborhood_overlap_50": 0.4643119266055046,
+      "anchor_size": 64
+    },
+    {
+      "model_a": "gte-large",
+      "model_b": "all-MiniLM-L6-v2",
+      "n_anchors": 64,
+      "n_held_out": 218,
+      "eigenvalue_spearman": 1.0,
+      "eigenvalue_pearson": 0.9847507272902839,
+      "procrustes_residual": 3.4143557620866285,
+      "mean_raw_similarity": -0.06212655160062362,
+      "mean_aligned_similarity": 0.3970816847602203,
+      "improvement": 0.45920823636084396,
+      "neighborhood_overlap_10": 0.23532110091743125,
+      "neighborhood_overlap_50": 0.42697247706422026,
+      "anchor_size": 64
+    }
+  ],
+  "duration_seconds": 61.90925645828247,
+  "summary": {
+    "mean_improvement": 0.4279716081284251,
+    "max_improvement": 0.45920823636084396,
+    "min_improvement": 0.38976995034369133,
+    "mean_eigenvalue_correlation": 1.0,
+    "min_eigenvalue_correlation": 1.0
+  }
+}
