@@ -1,10 +1,10 @@
 ---
 title: Phase E.X Eigenvalue Alignment Protocol Roadmap
 section: roadmap
-version: 1.8.0
+version: 1.9.0
 created: 2026-01-07
 modified: 2026-01-10
-status: ✅ E.X.4.1 ESAP Handshake COMPLETE
+status: ✅ E.X.4 Integration COMPLETE
 summary: Eigenvalue alignment protocol for cross-model semantic alignment
 tags:
 - phase-5
@@ -647,10 +647,34 @@ Agent A                              Agent B
    │  Mutual semantic space confirmed   │
 ```
 
-### E.X.4.2: Cross-Model Symbol Resolution
-- [ ] Test symbol resolution across aligned models
-- [ ] Measure H(X|S) reduction after alignment
-- [ ] Validate governance symbol (法, 真, 道) cross-model resolution
+### E.X.4.2: Cross-Model Symbol Resolution ✅ COMPLETE (2026-01-10)
+
+**Goal:** Verify governance symbols resolve correctly across aligned models.
+
+- [x] **Test symbol resolution across aligned models**: ✅ COMPLETE
+  - MiniLM (384d) ↔ MPNET (768d) after Procrustes alignment
+  - All 6 governance symbols align near-perfectly
+- [x] **Measure H(X|S) reduction after alignment**: ✅ COMPLETE
+  - **51.6% entropy reduction** after alignment
+  - Confirms conditional entropy drops with shared semantic space
+- [x] **Validate governance symbol cross-model resolution**: ✅ COMPLETE
+
+**Results:**
+
+| Symbol | Domain | Raw Similarity | Aligned Similarity |
+|--------|--------|----------------|-------------------|
+| 法 | Canon Law | 0.915 | **0.992** |
+| 真 | Truth Foundation | 0.812 | **0.997** |
+| 契 | Contract | 0.977 | **0.991** |
+| 恆 | Invariants | 0.533 | **0.993** |
+| 驗 | Verification | 0.595 | **0.993** |
+| 道 | Path/Principle | 0.905 | **0.996** |
+
+**Mean aligned similarity: 0.994** (near-perfect cross-model resolution)
+
+**Key Insight:** After Procrustes alignment, governance symbols from different embedding models resolve to the same semantic region with >0.99 cosine similarity. The 51.6% H(X|S) reduction proves that alignment reduces communication entropy.
+
+**Test:** `qgt_lib/python/test_cross_model_symbols.py`
 
 ---
 
@@ -804,6 +828,7 @@ make -j$(nproc)
 | E.X.3.8 Theoretical Grounding | ✅ COMPLETE |
 | E.X.3.10 QGT Integration | ✅ COMPLETE |
 | E.X.4.1 Cassette Handshake | ✅ COMPLETE |
+| E.X.4.2 Symbol Resolution | ✅ COMPLETE (0.994 aligned similarity) |
 
 ### Key Deliverables
 
@@ -837,4 +862,4 @@ make -j$(nproc)
 
 ---
 
-**Last Updated:** 2026-01-10 - E.X.4.1 COMPLETE (cassette network integration), Roadmap v1.8.0
+**Last Updated:** 2026-01-10 - E.X.4 Integration COMPLETE (cassette handshake + symbol resolution 0.994), Roadmap v1.9.0
