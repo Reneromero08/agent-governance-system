@@ -44,6 +44,7 @@ _DEVICE: Optional[str] = None
 _THREADS: Optional[int] = None
 _CE_BATCH_SIZE: Optional[int] = None
 _ST_BATCH_SIZE: Optional[int] = None
+_ABLATION: str = "full"
 
 
 def set_cache_roots() -> None:
@@ -174,9 +175,18 @@ def R_grounded(observations: Sequence[float], check: Sequence[float]) -> float:
     mu_hat = mean(observations)
     mu_check = mean(check)
     z = abs(mu_hat - mu_check) / (se(check) + EPS)
+
+    # Ablations (deterministic, Q32-scoped):
+    # - full: the normal grounded R
+    # - no_essence: remove empirical compatibility (E=1), leaving only the scale term
+    # - no_scale: remove the scale normalization (grad_S=1), leaving only empirical compatibility
     E = kernel_gaussian(z)
     grad_S = se(observations)
-    return E / (grad_S + EPS)
+    if _ABLATION == "no_essence":
+        E = 1.0
+    elif _ABLATION == "no_scale":
+        grad_S = 1.0
+    return float(E) / (float(grad_S) + EPS)
 
 
 def M_from_R(R: float) -> float:
@@ -1082,6 +1092,12 @@ def parse_args() -> argparse.Namespace:
         default=None,
         help="Override scoring model. In --fast mode default is cosine; otherwise crossencoder.",
     )
+    p.add_argument(
+        "--ablation",
+        choices=["full", "no_essence", "no_scale"],
+        default="full",
+        help="Q32 ablations for falsification: full (default), no_essence (E=1), no_scale (grad_S=1).",
+    )
     p.add_argument("--seed", type=int, default=123)
     p.add_argument(
         "--device",
@@ -1195,6 +1211,7 @@ def _write_empirical_receipt(*, out_path: str, args: argparse.Namespace, results
             "strict": bool(args.strict),
             "seed": int(args.seed),
             "scoring": str(args.scoring) if args.scoring is not None else None,
+            "ablation": str(args.ablation),
             "wrong_checks": str(args.wrong_checks),
             "neighbor_k": int(args.neighbor_k),
             "scifact_stream_seed": int(args.scifact_stream_seed),
@@ -1869,6 +1886,8 @@ def main() -> int:
 
     device = _auto_device() if args.device == "auto" else str(args.device)
     configure_runtime(device=device, threads=max(1, int(args.threads)), ce_batch_size=int(args.ce_batch), st_batch_size=int(args.st_batch))
+    global _ABLATION
+    _ABLATION = str(args.ablation)
 
     global _USE_CROSS_ENCODER
     if args.scoring is not None:
