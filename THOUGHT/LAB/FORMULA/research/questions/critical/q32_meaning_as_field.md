@@ -20,6 +20,7 @@ See `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_SOLVED_CRITERIA_AND_TEST
 - `q32_meaning_field_tests.py` - echo-chamber falsifier, phase-transition gate, propagation/gluing
 - `q32_adversarial_gauntlet.py` - parameter sweeps, noise-family shifts, negative controls, independence intervention
 - `q32_public_benchmarks.py` - public truth-anchors (Climate-FEVER + SciFact), fast-mode CLI, Phase-2 bench + Phase-4 streaming + Phase-3 threshold transfer (`--mode bench|stream|transfer`)
+- `q32_physical_force_harness.py` - Phase 6 (additional track): physical coupling harness (synthetic validators first)
 
 ---
 
@@ -200,6 +201,66 @@ Goal: qualify for "attempt ANSWERED" without hand-waving.
 
 **Exit criteria (Phase 5):**
 - Results remain above gates under scale (seeds, stress_n, sweeps, domains) and negative controls fail hard, with a pinned replication package.
+
+---
+
+## Additional track: “Meaning as a fundamental physical field” (spacetime claim)
+
+This is an **additional** claim layered on top of the semiosphere field claim above.
+
+It is not satisfied by “meaning-as-field on the semiosphere” alone:
+- The semiosphere claim can be true even if meaning is “just” a stable informational control signal in cognitive/agent systems.
+- The fundamental-force claim requires a **physically measurable field variable** in spacetime with a defined coupling to matter/energy, and it must survive hard nulls.
+
+### What would count as “physical field” here (minimal, falsifiable)
+
+You need all of the following (no metaphor allowances):
+1. **Physical observable:** a sensor-measurable signal `B(x,t)` (or tensor/field) defined in spacetime, not derived from text/LLM embeddings.
+2. **Coupling law:** a specified mapping (with units/scale) from the meaning field `M` (or a source term derived from `M`) to `B`.
+3. **Novel prediction:** a prediction about `B` that is not already implied by standard channels (EM, thermal, mechanical vibration, known bioelectric signals) and not a tautology of the measurement.
+4. **Hard nulls:** sham stimuli, randomization, shielding/distance controls, and “semantic unchanged / physical changed” controls that kill confounds.
+
+**Fail condition (demotion):** if any claimed `B` effect disappears under properly randomized/shielded controls, or is fully explained by a known physical channel, the “fundamental field” claim is not supported (the semiosphere field claim can remain).
+
+### Phase 6 - Physical coupling harness (start here; synthetic validators first)
+
+Goal: build a deterministic, receipted harness that can detect a true coupling if present, and reject it under nulls.
+
+Planned implementation (in `experiments/open_questions/q32/`):
+- [x] `q32_physical_force_harness.py`
+  - Input: time-indexed "meaning interventions" + time-indexed physical sensor series.
+  - Output: a receipt JSON with coupling metrics, lag structure, and null-control outcomes.
+  - Modes:
+    - `--mode synthetic_validator_suite` (positive + null + echo/leak)
+    - `--mode csv_coupling --csv_path <file.csv>` (real data ingestion; M/B columns)
+  - Must include: shuffle falsifiers, lag-direction checks, and confound checks.
+- [ ] Synthetic fixtures:
+  - [x] Positive-control generator: embed a known lagged coupling `M → B`.
+  - [x] Negative controls: `B ⟂ M`, and "echo/leak" controls where `B` is just a re-encoding of `M`.
+  - **Gate:** harness passes positive controls and fails (rejects) negative controls deterministically.
+
+### Phase 7 - Public physical proxy datasets (no lab required)
+
+Goal: run the harness on public data where “meaningful stimuli” and physical measurements exist (as proxies).
+
+Examples (choose and pin versions; no assumptions about outcomes):
+- EEG/MEG time-series during semantic stimuli (text comprehension tasks).
+- fMRI time-series during narrative comprehension (coarse but physical).
+- Physiological sensors (pupil/EDA/HRV) during semantic interventions.
+
+**Gate:** any claimed coupling must survive strict nulls (sham labels, stimulus randomization, time-shifts) and must not collapse into known confounds.
+
+### Phase 8 - Lab-grade falsification (required for “fundamental force” level claims)
+
+Goal: instrumented experiments designed to rule out ordinary channels and isolate any residual `B(x,t)` signal.
+
+Required controls (minimum):
+- shielding / distance attenuation mapping
+- blinded randomization, preregistered analysis
+- multi-sensor redundancy (independent instruments)
+- negative controls that preserve everything except semantic content
+
+**Gate:** if a residual survives all known-channel controls and has stable law-like behavior (attenuation/superposition), only then promote the “fundamental field” claim.
 
 ### Expanded breakdown (legacy detail mapped into Phase 1/2/3 above)
 

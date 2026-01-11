@@ -539,3 +539,43 @@ Bundle:
 - `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/pip_version.txt` = `1F08AA0E851F063784719ED954C62C15F29A7C6CB60748345698CAA407009148`
 - `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/pip_freeze.txt` = `D264FAC34C4F3DFCBC942B9C07420FAD1356B3F30A5C94FECC00D0DE6535D090`
 - `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/SHA256SUMS.txt` = `1B679E5E56EA23F1084D3F7550A511D7EB007822AB7569A161F911A249618EA0`
+
+---
+
+## 2026-01-10 Phase 6 (start) - Additional track: physical-force harness (synthetic validator suite)
+
+This does NOT “prove a new fundamental force”.
+It begins the additional track by creating a deterministic harness that:
+- detects a known lagged coupling when present (positive control)
+- rejects coupling when absent (null control)
+- flags trivial echo/leak constructions (anti-tautology)
+
+Command (synthetic validators):
+- `python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_physical_force_harness.py --mode synthetic_validator_suite --receipt_out LAW/CONTRACTS/_runs/q32_public/datatrail/physical_force_receipt_p6_synth_20260110_212009.json`
+
+Artifacts:
+- `p6_physical_force_synth_20260110_211959.log.txt` = `D75820F2789B91E885E76AAFD50CDF9FB3F700B8E3E580CE3D563C5D1C119C3F` (failed attempt: wrong CLI flag)
+- `p6_physical_force_synth_20260110_211959.rc.txt` = `DF4E26A04A444901B95AFEF44E4A96CFAE34690FFF2AD2C66389C70079CDFF2B`
+- `p6_physical_force_synth_20260110_212009.log.txt` = `2ABB5D4B49FCFF7B59A6F5782F7E9743CFC9878E3D6F6F93A9A07B4EDB317E5E`
+- `p6_physical_force_synth_20260110_212009.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `physical_force_receipt_p6_synth_20260110_212009.json` = `976E80A4BA14CF9E73628B3A3CE559CA45434FD29E5CF4B0E6309B5F1D4B71BD`
+- `physical_force_receipt_p6_synth_threads12_20260110_213052.json` = `E730E0BA8175E67C19A9D9427713A60A91E40D1E027A0618CFDFBE9E64A452EE`
+
+### CSV ingestion demo (synthetic B, CSV -> coupling receipt)
+
+Purpose:
+- Prove the `csv_coupling` mode works end-to-end on deterministic CSV inputs (without any lab data assumptions).
+- Confirm the harness:
+  - passes on a lagged coupling CSV (positive control)
+  - fails (rejects) on independent-noise CSV (null control)
+  - fails (rejects) on echo/leak CSV (anti-tautology)
+
+Artifacts:
+- `p6_physical_force_csv_demo_20260110_213052.log.txt` = `7E4016681A63B3839D817A9A2B6B5CF85B7E0D0530854627547DDAB603E21C8E`
+- `p6_physical_force_csv_demo_20260110_213052.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `p6_phys_demo_positive_20260110_213052.csv` = `6B53063E2ED0E0E9BC00DE73F4574B511BE791DD948D100AA801358FC5CAE41F`
+- `p6_phys_demo_null_20260110_213052.csv` = `94766C36BD299B847FF85AAC226756126010C5FC033665A4840367ED18AB6151`
+- `p6_phys_demo_echo_leak_20260110_213052.csv` = `AA992A128F4D58AAB55A887605B0E401FFF6F29DFEB09D41F7652CD4810C669C`
+- `physical_force_receipt_p6_csv_positive_20260110_213052.json` = `422861D002833B675BE180307FA5BFFAF09AC7EA6DACB6FAB993B9C6980C5378`
+- `physical_force_receipt_p6_csv_null_20260110_213052.json` = `611AD9F68B7CB460AC549979851FF4A7C83088E5BE1298404784B26E62C4C8B2`
+- `physical_force_receipt_p6_csv_echo_leak_20260110_213052.json` = `000386E9CC5773120DDCF11F7FAF65D7EEC7BB7671E6DC568EABC867B0C5BA8D`
