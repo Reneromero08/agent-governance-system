@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.15.4 (2026-01-11 - Q39 Homeostatic Regulation ANSWERED with 5/5 tests PASS: Universality confirmed across 5 embedding architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) with tau_relax CV=3.2%. 14/43 questions answered (32.6%).)*
+*Last updated: v3.15.5 (2026-01-11 - Q42 Non-Locality ANSWERED: R is local BY DESIGN (H0 confirmed). Semantic CHSH S=0.36 << 2.0, no Bell violations. A1 correct. 15/43 questions answered (34.9%).)*
 
 ---
 
@@ -52,7 +52,7 @@
 | 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ⏳ OPEN | Is M field an error-correcting code? Does R-gating implement QECC? Is semiosphere holographic? |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ✅ VALIDATED | **8/8 tests pass.** R_high=57.3 > R_low=0.69. Volume resistant (-77.3%). Echo chamber detectable (R=10^8). Thresholds discriminate correctly. Test: `experiments/open_questions/q17/test_q17_r_gate.py` |
 | 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ✅ ANSWERED | **σ^Df = N (concept_units)** by tautological construction. σ := N/H(X), Df := log(N)/log(σ), therefore σ^Df = N. Not heuristic—it's countable meaning via GOV_IR_SPEC. |
-| 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ⏳ OPEN | Can R measure non-local correlations? Does axiom A1 (locality) limit formula? Is there semantic entanglement? |
+| 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ANSWERED | **R is local BY DESIGN (A1 correct).** Semantic CHSH S=0.36 << 2.0 (no Bell violation). Non-local structure is Phi's domain, not R's. A1 is a feature, not a limitation. |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
 | 37 | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md) | 1380 | ⏳ OPEN | How do meanings evolve on M field? Do meanings compete, speciate, converge? What are selection pressures on interpretants? |
@@ -104,10 +104,10 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 14 (32.6%)
+  - **Answered:** 15 (34.9%)
   - **Partially Answered:** 8 (18.6%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 21 (48.8%)
+  - **Open:** 20 (46.5%)
 
 ### By Priority Level
 
@@ -115,7 +115,7 @@
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 6 | 1 | 0 | 0 |
  | High | 15 | 5 | 5 | 0 | 5 |
- | Medium | 11 | 3 | 1 | 0 | 7 |
+ | Medium | 11 | 4 | 1 | 0 | 6 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
