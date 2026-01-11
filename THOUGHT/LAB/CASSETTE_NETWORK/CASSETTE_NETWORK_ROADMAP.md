@@ -249,6 +249,48 @@ session_resume(agent_id: str) -> dict:
 
 **Goal:** Implement verifiable semantic pointers per Phase 5.3 SPC formalization
 
+### 4.0 ESAP Integration (Cross-Model Alignment) ✅ IMPLEMENTED
+
+**What exists:**
+ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment via eigenvalue spectrum invariance (r=0.99+). This allows cassettes using different embedding models to verify alignment before cross-querying.
+
+**Upstream Research (VALIDATED):**
+- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - r=0.99+ correlation proven
+- [PROTOCOL_SPEC.md](../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) - Full ESAP specification
+
+**Implementation:**
+- [x] `ESAPCassetteMixin` - Computes spectrum signatures from cassette vectors
+- [x] `ESAPNetworkHub` - Verifies spectral convergence during registration
+- [x] Alignment groups - Cassettes grouped by spectral similarity
+- [x] `query_aligned()` - Query only cassettes with verified alignment
+- [x] Fail-closed on spectrum divergence (configurable)
+
+**Files:**
+- [esap_cassette.py](../../../NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin
+- [esap_hub.py](../../../NAVIGATION/CORTEX/network/esap_hub.py) - ESAP-enabled hub
+- [test_esap_integration.py](../../../NAVIGATION/CORTEX/network/test_esap_integration.py) - Tests
+
+**How it works:**
+```python
+# Extended handshake includes spectrum signature
+def esap_handshake(self) -> dict:
+    return {
+        "cassette_id": self.cassette_id,
+        "esap": {
+            "enabled": True,
+            "spectrum": {
+                "eigenvalues_top_k": [...],
+                "cumulative_variance": [...],
+                "effective_rank": 4.2,
+                "anchor_hash": "sha256:..."
+            }
+        }
+    }
+```
+
+**Why this matters:**
+ESAP solves the cross-model alignment problem: when cassettes use different embedding models, ESAP verifies they share the same "semantic shape" (eigenvalue spectrum) before allowing cross-queries. This ensures H(X|S) ≈ 0 holds across model boundaries.
+
 ### 4.1 Pointer Types (from SPC_SPEC)
 
 **Three pointer types:**
@@ -398,6 +440,39 @@ Define what the Resident does when idle:
 - [ ] Byte-identical restore from corruption
 - [ ] Cassette network is portable as cartridges + receipts
 
+### 6.4 Compression Validation (M.4)
+**From AGS_ROADMAP_MASTER Phase 6.4:**
+
+- [ ] 6.4.1 Add `task_performance` field to compression claims (M.4.1)
+- [ ] 6.4.2 Run benchmark tasks (baseline vs compressed context) (M.4.2)
+- [ ] 6.4.3 Measure success rates (code compiles, tests pass, bugs found) (M.4.3)
+- [ ] 6.4.4 Validate compressed success rate ≥ baseline (M.4.4)
+- [x] 6.4.5 Define **token measurement** for all claims (M.4.5) ✅ DONE
+  - Must specify tokenizer + encoding (e.g. `tiktoken` + `o200k_base` or `cl100k_base`)
+  - Must record tokenizer version + encoding name in receipts
+  - **Implemented:** `run_compression_proof.py` uses `tiktoken` v0.12.0 + `o200k_base`
+- [ ] 6.4.6 Define **baseline corpus** precisely (M.4.6)
+  - Must be an explicit file allowlist (paths) + integrity anchors (hashes or git rev)
+  - Must define aggregation rule (sum per-file counts vs tokenize concatenated corpus)
+- [ ] 6.4.7 Define **compressed context** precisely (M.4.7)
+  - Must specify retrieval method (semantic / FTS fallback) and parameters (`top_k`, thresholds)
+  - Must record retrieved identifiers (hashes) and provide deterministic tie-breaking
+- [ ] 6.4.8 Emit **auditable proof bundle** for math correctness (M.4.8)
+  - A machine-readable JSON data file containing raw counts + formulas + inputs/outputs
+  - A human-readable report summarizing baselines, per-benchmark results, and reproduction commands
+- [ ] 6.4.9 Implement `proof_compression_run` (machine + human artifacts)
+  - Emit `NAVIGATION/PROOFS/COMPRESSION/` JSON data + MD report + receipts
+  - Include tokenizer/version, baseline corpus anchors, retrieved hashes, formulas
+- [ ] 6.4.10 Implement `proof_catalytic_run` (restore + purity)
+  - Emit `NAVIGATION/PROOFS/CATALYTIC/` RESTORE_PROOF + purity scan outputs + receipts
+- [ ] 6.4.11 Bind proofs into pack generation (fresh per pack run; seal in public packs per Phase 2.4)
+
+**Acceptance:**
+- [ ] Benchmarks reproducible from fixtures
+- [ ] Compression claimed only when nutritious (success parity)
+- [ ] Token counts are reproducible via the declared tokenizer/encoding (no proxy counts)
+- [ ] Proof bundle contains raw counts, formulas, and retrieved hashes (independent audit possible)
+
 ---
 
 ## Implementation Files
@@ -405,11 +480,22 @@ Define what the Resident does when idle:
 **Core Protocol:**
 - [cassette_protocol.py](NAVIGATION/CORTEX/network/cassette_protocol.py) - Base cassette class
 - [network_hub.py](NAVIGATION/CORTEX/network/network_hub.py) - Central coordinator
+- [generic_cassette.py](NAVIGATION/CORTEX/network/generic_cassette.py) - JSON-configured cassettes
+
+**ESAP Integration (Cross-Model Alignment):**
+- [esap_cassette.py](NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin for cassettes
+- [esap_hub.py](NAVIGATION/CORTEX/network/esap_hub.py) - ESAP-enabled network hub
+- [test_esap_integration.py](NAVIGATION/CORTEX/network/test_esap_integration.py) - Integration tests
+- [eigen-alignment/](../VECTOR_ELO/eigen-alignment/) - Full ESAP library (MDS, Procrustes, schemas)
 
 **Cassette Implementations:**
 - [governance_cassette.py](NAVIGATION/CORTEX/network/cassettes/governance_cassette.py)
 - [agi_research_cassette.py](NAVIGATION/CORTEX/network/cassettes/agi_research_cassette.py)
 - [cat_chat_cassette.py](NAVIGATION/CORTEX/network/cassettes/cat_chat_cassette.py)
+
+**MCP Integration:**
+- [semantic_adapter.py](CAPABILITY/MCP/semantic_adapter.py) - Cassette network MCP adapter
+- [cassettes.json](NAVIGATION/CORTEX/network/cassettes.json) - Cassette configuration
 
 **Demo:**
 - [demo_cassette_network.py](NAVIGATION/CORTEX/network/demo_cassette_network.py)
@@ -549,6 +635,13 @@ When all parties share complete semantic context, communication approaches telep
 - [OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md](../VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md) - SPC formalization
 - [SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md](../VECTOR_ELO/research/symbols/SYMBOLIC_COMPUTATION_EARLY_FOUNDATIONS.md) - VSA, LCM, ASG literature
 
+**ESAP (Cross-Model Alignment) Research:**
+- [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - **VALIDATED** (r=0.99+)
+- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md) - Empirical proof
+- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../VECTOR_ELO/research/vector-substrate/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md) - Execution pack
+- [eigen-alignment/PROTOCOL_SPEC.md](../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) - Full protocol specification
+- [eigen-alignment/README.md](../VECTOR_ELO/eigen-alignment/README.md) - Implementation guide
+
 ---
 
-*Roadmap v2.0.0 - Updated 2026-01-08 with information-theoretic foundation (conditional entropy), SPC integration, and Platonic thesis alignment*
+*Roadmap v2.1.0 - Updated 2026-01-11 with ESAP integration (cross-model alignment), expanded implementation file references, and ESAP research links*
