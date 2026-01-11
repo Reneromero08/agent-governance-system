@@ -4,6 +4,62 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.45] - 2026-01-11
+
+### Phase 5.3.6 COMPLETE — PAPER_SPC.md Research Skeleton
+
+**Added:**
+- `THOUGHT/LAB/VECTOR_ELO/research/PAPER_SPC.md` — Research paper skeleton for SPC publication
+  - **Title:** "Semantic Pointer Compression: Conditional Compression with Shared Side-Information for LLM Context Optimization"
+  - **Content-Hash:** `ec80c23015d57f00378ebde9c24309f9bbe694c062e5bda4b574b2065475e01e`
+
+**Paper Sections:**
+1. **Abstract** — 92.2% compression, 100% ECR, information-theoretic framing
+2. **Introduction** — H(X|S) foundation, CAS at semantic layer
+3. **Contributions:**
+   - Deterministic semantic pointers (3 types: SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR)
+   - Receipted verification (TokenReceipt chain)
+   - Measured semantic density metric (CDR = 0.89 concept_units/token)
+   - Theoretical: σ^Df = concept_units (Q33 derivation)
+4. **What Is New:**
+   - Not "beating Shannon" — conditional compression with shared side-information
+   - Formal protocol for LLM context optimization
+   - Measured H(X|S) vs H(X) (451 → 35 tokens)
+5. **Threat Model:**
+   - Codebook drift (E_CODEBOOK_MISMATCH → FAIL_CLOSED)
+   - Tokenizer changes (TOKENIZER_ATLAS CI gate)
+   - Semantic ambiguity (E_AMBIGUOUS, context_keys required)
+6. **Limitations:**
+   - Requires shared context establishment (cold start cost)
+   - Single-token symbols depend on tokenizer stability
+   - Compression ratio depends on corpus size
+   - Domain-specific (governance semantics)
+7. **Reproducibility:**
+   - Exact commands to run benchmark
+   - Artifact hashes (metrics.json, TOKENIZER_ATLAS.json)
+   - Environment requirements (Python 3.10+, tiktoken)
+   - 4 acceptance criteria documented
+8. **Related Work** — LLMLingua, semantic hashing, CAS
+9. **Appendices** — 18 benchmark cases + 5 negative controls
+
+**Research Integration:**
+- Q33 (σ^Df = concept_units) integrated in Section 2.4
+- Q35 (Markov Blankets) referenced in threat model
+- All claims backed by 5.3.5 benchmark measurements
+
+**Updated:**
+- `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` → v1.11.0
+  - Phase 5.3.6 marked COMPLETE
+  - **Phase 5.3 fully complete** (all 6 tasks done)
+  - Added full changelog table (v1.0.0 → v1.11.0)
+
+**Exit Criteria Met:** ✅
+- [x] Paper skeleton complete with all sections
+- [x] No claims without metrics (all backed by 5.3.5 measurements)
+- [x] Reproducibility section includes exact commands
+
+---
+
 ## [3.7.44] - 2026-01-11
 
 ### Phase 5.3.5: Proof Harness — SPC Semantic Density Benchmark
