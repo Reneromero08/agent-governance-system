@@ -1,8 +1,45 @@
-<!-- CONTENT_HASH: 3.7.40_PENDING -->
+<!-- CONTENT_HASH: 3.7.41_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.41] - 2026-01-11
+
+### Added
+- **Phase 5.3.3: CODEBOOK_SYNC_PROTOCOL.md** — Normative specification for codebook synchronization protocol
+  - `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md` — Defines how sender and receiver establish shared side-information S (~800 lines)
+  - **12 sections covering:**
+    1. Protocol Overview (normative vs descriptive, MUST/SHOULD/MAY)
+    2. SyncTuple Structure (5 fields: codebook_id, sha256, semver, kernel_version, tokenizer_id)
+    3. Handshake Message Shapes (SYNC_REQUEST, SYNC_RESPONSE, SYNC_ERROR, HEARTBEAT)
+    4. Blanket Status (ALIGNED/DISSOLVED/PENDING/EXPIRED via R-gating)
+    5. Compatibility Policy (MAJOR→REJECT, fail-closed principle)
+    6. Migration Protocol (explicit steps, never silent)
+    7. Failure Codes (17 enumerated across 3 categories)
+    8. Active Inference Interpretation (handshake as prediction verification)
+    9. Cassette Network Integration (extended handshake() with sync_tuple)
+    10. Information-Theoretic Semantics (H(X|S), CDR measurement, Q33 integration)
+    11. Security Considerations (collision resistance, replay protection)
+    12. References (internal + external)
+  - **Markov Blanket Semantics (Q35 integration):**
+    - R > τ = stable blanket (ALIGNED state)
+    - R < τ = blanket dissolving (DISSOLVED state)
+    - Active Inference: agents act to keep R high (maintain alignment)
+  - **Information-Theoretic Semantics (Q33 integration):**
+    - Conditional entropy: H(X|S) = H(X) - I(X;S)
+    - CDR = concept_units / tokens = σ^Df (empirical semantic density)
+    - Sync enables CDR measurement (without aligned blankets, CDR undefined)
+    - Measurement procedure for empirical compression ratio
+  - **17 Failure Codes:**
+    - Sync-specific (5): E_SYNC_REQUIRED, E_SYNC_EXPIRED, E_SYNC_TIMEOUT, E_PROTOCOL_VERSION, E_BLANKET_DISSOLVED
+    - Codebook (4): E_CODEBOOK_MISMATCH, E_KERNEL_VERSION, E_TOKENIZER_MISMATCH, E_CODEBOOK_NOT_FOUND
+    - Migration (3): E_MIGRATION_NOT_FOUND, E_MIGRATION_FAILED, E_MIGRATION_HASH_MISMATCH
+    - Permissions (3): E_CAPABILITY_DENIED, E_MIGRATION_NOT_ALLOWED, E_SYNC_DENIED
+    - Other (2): E_MALFORMED_REQUEST, E_AMBIGUOUS
+  - Integrates with cassette_protocol.py handshake for network-wide sync verification
 
 ---
 

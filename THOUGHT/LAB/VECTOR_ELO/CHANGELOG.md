@@ -4,6 +4,97 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.41] - 2026-01-11
+
+### Phase 5.3.3 COMPLETE — CODEBOOK_SYNC_PROTOCOL.md (Normative)
+
+**Added:**
+- `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md` — Normative sync protocol specification (~800 lines)
+
+**Specification Contents:**
+- **Section 1: Protocol Overview**
+  - Purpose: Establish shared side-information S for H(X|S) compression
+  - Normative vs descriptive sections
+  - Must/Should/May requirements
+- **Section 2: SyncTuple Structure**
+  - 5-field tuple: codebook_id, codebook_sha256, codebook_semver, kernel_version, tokenizer_id
+  - SHA-256 hashing with canonical JSON normalization (per GOV_IR_SPEC)
+  - Semver compatibility rules
+- **Section 3: Handshake Message Shapes**
+  - `SYNC_REQUEST` — Sender advertises capabilities
+  - `SYNC_RESPONSE` — Receiver confirms alignment (ALIGNED/NEEDS_MIGRATION/REJECT)
+  - `SYNC_ERROR` — Failure with error codes
+  - `HEARTBEAT` — Periodic alignment verification
+- **Section 4: Blanket Status (R-gating)**
+  - ALIGNED: R > τ (stable Markov blanket)
+  - DISSOLVED: R < τ (resync required)
+  - PENDING: Handshake in progress
+  - EXPIRED: TTL exceeded
+- **Section 5: Compatibility Policy**
+  - MAJOR mismatch → REJECT
+  - MINOR mismatch → receiver decides
+  - PATCH mismatch → MAY accept (warn)
+  - Fail-closed principle: no silent degradation
+- **Section 6: Migration Protocol**
+  - Never silent — explicit migration steps
+  - Migration artifact fetching with hash verification
+  - Deterministic migration sequence
+- **Section 7: Failure Codes (17 total)**
+  - Sync-specific (5): E_SYNC_REQUIRED, E_SYNC_EXPIRED, E_SYNC_TIMEOUT, E_PROTOCOL_VERSION, E_BLANKET_DISSOLVED
+  - Codebook (4): E_CODEBOOK_MISMATCH, E_KERNEL_VERSION, E_TOKENIZER_MISMATCH, E_CODEBOOK_NOT_FOUND
+  - Migration (3): E_MIGRATION_NOT_FOUND, E_MIGRATION_FAILED, E_MIGRATION_HASH_MISMATCH
+  - Permissions (3): E_CAPABILITY_DENIED, E_MIGRATION_NOT_ALLOWED, E_SYNC_DENIED
+  - Other (2): E_MALFORMED_REQUEST, E_AMBIGUOUS
+- **Section 8: Active Inference Interpretation**
+  - Handshake as prediction verification
+  - Mismatch = prediction error (signal to update beliefs or reject)
+  - R-gating = acting to keep blanket stable
+- **Section 9: Integration with Cassette Network**
+  - Extended cassette_protocol.py handshake() with sync_tuple
+  - Registration verification before accepting cassette
+  - Network-wide sync status tracking
+- **Section 10: Information-Theoretic Semantics (Q33 Integration)**
+  - Conditional entropy formula: H(X|S) = H(X) - I(X;S)
+  - Measured example: C3 pointer (2 tokens) vs full expansion (12 tokens) = 6x compression
+  - **Semantic Density Connection (σ^Df):**
+    - CDR = concept_units / tokens = σ^Df (empirical)
+    - Sync enables CDR measurement (without aligned blankets, CDR undefined)
+  - **When Density Helps vs Hurts:**
+    - Helps: Aligned blankets + unambiguous symbol + context
+    - Hurts: Multiple valid expansions, missing context, codebook drift
+  - **Measurement Procedure:**
+    ```python
+    def measure_compression(pointer, expansion, tokenizer):
+        h_x = len(encode(expansion))        # H(X)
+        h_x_given_s = len(encode(pointer))  # H(X|S)
+        i_x_s = h_x - h_x_given_s           # I(X;S)
+        return compression_ratio = h_x / h_x_given_s
+    ```
+- **Section 11: Security Considerations**
+  - Hash collision resistance (SHA-256)
+  - Replay protection (timestamp + request_id + session_token)
+  - Man-in-the-middle (signing + trusted sources)
+- **Section 12: References**
+  - Internal: SPC_SPEC, GOV_IR_SPEC, TOKEN_RECEIPT_SPEC, cassette_protocol.py, CODEBOOK.json, Q35, Q33
+  - External: Friston (Free Energy), Pearl (Markov blankets), Shannon (Information Theory)
+
+**Markov Blanket Foundation (Q35 Integration):**
+- Sync protocol formalizes Markov blanket boundaries in semiotic space
+- R > τ = stable blanket (ALIGNED)
+- R < τ = blanket dissolving (DISSOLVED)
+- Active Inference connection: agents act to keep R high (maintain alignment)
+
+**Exit Criteria Met:**
+- [x] CODEBOOK_SYNC_PROTOCOL.md defines complete handshake protocol
+- [x] Message shapes specified (SYNC_REQUEST, SYNC_RESPONSE, SYNC_ERROR, HEARTBEAT)
+- [x] Failure codes enumerated (17 explicit codes)
+- [x] Q35 (Markov Blankets) integrated as R-gating + Active Inference
+- [x] Q33 (Conditional Entropy) integrated as measurement procedure + semantic density connection
+
+**Next:** Phase 5.3.4 (TOKENIZER_ATLAS.json) — Map tokenizer behaviors for token accountability
+
+---
+
 ## [3.7.40] - 2026-01-11
 
 ### Phase 5.3.2 COMPLETE — GOV_IR_SPEC.md (Normative)
