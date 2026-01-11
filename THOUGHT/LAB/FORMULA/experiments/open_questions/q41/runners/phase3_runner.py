@@ -1,11 +1,10 @@
 #!/usr/bin/env python3
 """
-Q41 Phase 2: Langlands Test Runner
+Q41 Phase 3: Categorical & Number-Theoretic Tests
 
-Orchestrates TIER 2 and TIER 5 tests:
-- TIER 2.1: Semantic L-Functions
-- TIER 2.2: Ramanujan Bound
-- TIER 5.1: Arthur-Selberg Trace Formula
+Orchestrates TIER 1 and TIER 6 tests:
+- TIER 1: Categorical Equivalence (Langlands Functor)
+- TIER 6: Prime Decomposition (UFD Structure)
 
 Author: Claude
 Date: 2026-01-11
@@ -21,45 +20,43 @@ from datetime import datetime, timezone
 from typing import Dict, List, Any
 from dataclasses import asdict
 
-sys.path.insert(0, str(Path(__file__).parent))
-from q41_shared_utils import (
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from shared.utils import (
     TestConfig, TestResult, to_builtin,
     DEFAULT_CORPUS, compute_corpus_hash, load_embeddings
 )
 
 # Import individual tests
-from q41_tier2_1_l_functions import run_test as run_tier2_1
-from q41_tier2_2_ramanujan_bound import run_test as run_tier2_2
-from q41_tier5_1_trace_formula import run_test as run_tier5_1
+from tier1.categorical_equivalence import run_test as run_tier1
+from tier6.prime_decomposition import run_test as run_tier6
 
 __version__ = "1.0.0"
-__suite__ = "Q41_PHASE2_LANGLANDS"
+__suite__ = "Q41_PHASE3_LANGLANDS"
 
 
-def run_phase2_tests(
+def run_phase3_tests(
     embeddings_dict: Dict[str, Any],
     config: TestConfig,
     verbose: bool = True
 ) -> List[TestResult]:
-    """Run all Phase 2 tests."""
+    """Run all Phase 3 tests."""
     results = []
 
     tests = [
-        ("TIER 2.1: L-Functions", run_tier2_1),
-        ("TIER 2.2: Ramanujan Bound", run_tier2_2),
-        ("TIER 5.1: Trace Formula", run_tier5_1),
+        ("TIER 1: Categorical Equivalence", run_tier1),
+        ("TIER 6: Prime Decomposition", run_tier6),
     ]
 
     if verbose:
-        print("\n" + "="*70)
-        print("Q41 PHASE 2: LANGLANDS PROGRAM TESTS")
-        print("="*70)
+        print("\n" + "=" * 70)
+        print("Q41 PHASE 3: CATEGORICAL & NUMBER-THEORETIC TESTS")
+        print("=" * 70)
 
     for test_name, test_fn in tests:
         if verbose:
-            print(f"\n{'='*60}")
+            print(f"\n{'=' * 60}")
             print(f"  Running: {test_name}")
-            print("="*60)
+            print("=" * 60)
 
         result = test_fn(embeddings_dict, config, verbose=verbose)
         results.append(result)
@@ -77,7 +74,7 @@ def generate_receipt(
     corpus: List[str],
     embeddings_dict: Dict[str, Any]
 ) -> Dict[str, Any]:
-    """Generate JSON receipt for Phase 2."""
+    """Generate JSON receipt for Phase 3."""
     timestamp = datetime.now(timezone.utc)
 
     passed = sum(1 for r in results if r.passed)
@@ -87,7 +84,7 @@ def generate_receipt(
         "suite": __suite__,
         "version": __version__,
         "timestamp": timestamp.isoformat(),
-        "phase": 2,
+        "phase": 3,
         "summary": {
             "passed": passed,
             "total": total,
@@ -125,7 +122,7 @@ def generate_receipt(
 def generate_report(results: List[TestResult], config: TestConfig) -> str:
     """Generate markdown report."""
     lines = [
-        "# Q41 Phase 2: Langlands Program Tests - Report",
+        "# Q41 Phase 3: Categorical & Number-Theoretic Tests - Report",
         "",
         f"**Generated:** {datetime.now(timezone.utc).isoformat()}",
         f"**Suite Version:** {__version__}",
@@ -139,7 +136,7 @@ def generate_report(results: List[TestResult], config: TestConfig) -> str:
     passed = sum(1 for r in results if r.passed)
     total = len(results)
 
-    lines.append(f"**Phase 2 Tests:** {passed}/{total} passed")
+    lines.append(f"**Phase 3 Tests:** {passed}/{total} passed")
     lines.append("")
     lines.append("| Test | Result | Key Metric |")
     lines.append("|------|--------|------------|")
@@ -147,12 +144,10 @@ def generate_report(results: List[TestResult], config: TestConfig) -> str:
     for r in results:
         status = "PASS" if r.passed else "FAIL"
         # Extract a key metric
-        if "mean_functional_equation_quality" in r.metrics:
-            key_metric = f"FE quality: {r.metrics['mean_functional_equation_quality']:.3f}"
-        elif "mean_alpha" in r.metrics:
-            key_metric = f"α={r.metrics['mean_alpha']:.3f}, R²={r.metrics['mean_r_squared']:.3f}"
-        elif "mean_equality_error" in r.metrics:
-            key_metric = f"Equality error: {r.metrics['mean_equality_error']:.4f}"
+        if "mean_neighborhood_preservation" in r.metrics:
+            key_metric = f"Neighborhood: {r.metrics['mean_neighborhood_preservation']:.3f}"
+        elif "mean_factorization_alignment" in r.metrics:
+            key_metric = f"Alignment: {r.metrics['mean_factorization_alignment']:.3f}"
         else:
             key_metric = "-"
         lines.append(f"| {r.name} | {status} | {key_metric} |")
@@ -173,8 +168,9 @@ def generate_report(results: List[TestResult], config: TestConfig) -> str:
             "```json",
         ])
 
-        # Simplified metrics (exclude model_results for brevity)
-        simple_metrics = {k: v for k, v in r.metrics.items() if k != "model_results"}
+        # Simplified metrics (exclude detailed results for brevity)
+        simple_metrics = {k: v for k, v in r.metrics.items()
+                        if not isinstance(v, (list, dict)) or len(str(v)) < 200}
         lines.append(json.dumps(to_builtin(simple_metrics), indent=2))
 
         lines.extend([
@@ -189,15 +185,14 @@ def generate_report(results: List[TestResult], config: TestConfig) -> str:
             "",
         ])
 
-    # What Phase 2 tests
+    # What Phase 3 tests
     lines.extend([
-        "## What Phase 2 Tests",
+        "## What Phase 3 Tests",
         "",
         "| TIER | Test | Description |",
         "|------|------|-------------|",
-        "| 2.1 | L-Functions | Euler product, functional equation |",
-        "| 2.2 | Ramanujan Bound | Eigenvalue power-law decay |",
-        "| 5.1 | Trace Formula | Spectral = Geometric equality |",
+        "| 1 | Categorical Equivalence | Cross-model functor, homological equivalence |",
+        "| 6 | Prime Decomposition | UFD structure, prime splitting behavior |",
         "",
     ])
 
@@ -206,10 +201,10 @@ def generate_report(results: List[TestResult], config: TestConfig) -> str:
 
 def main():
     parser = argparse.ArgumentParser(
-        description="Q41 Phase 2: Langlands Program Tests",
+        description="Q41 Phase 3: Categorical & Number-Theoretic Tests",
         formatter_class=argparse.ArgumentDefaultsHelpFormatter
     )
-    parser.add_argument("--out_dir", type=str, default=".", help="Output directory")
+    parser.add_argument("--out_dir", type=str, default=str(Path(__file__).parent.parent / "receipts"), help="Output directory")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--quiet", action="store_true", help="Suppress output")
     args = parser.parse_args()
@@ -217,14 +212,13 @@ def main():
     verbose = not args.quiet
 
     if verbose:
-        print("="*70)
-        print(f"Q41 PHASE 2: LANGLANDS PROGRAM TESTS v{__version__}")
-        print("="*70)
+        print("=" * 70)
+        print(f"Q41 PHASE 3: CATEGORICAL & NUMBER-THEORETIC TESTS v{__version__}")
+        print("=" * 70)
         print()
-        print("This suite tests Langlands-related structures:")
-        print("  - TIER 2.1: Semantic L-Functions")
-        print("  - TIER 2.2: Ramanujan Bound Analog")
-        print("  - TIER 5.1: Arthur-Selberg Trace Formula")
+        print("This suite tests advanced Langlands structures:")
+        print("  - TIER 1: Categorical Equivalence (Fields Medal Territory)")
+        print("  - TIER 6: Prime Decomposition (UFD Structure)")
         print()
 
     config = TestConfig(seed=args.seed)
@@ -248,19 +242,19 @@ def main():
         print(f"\nLoaded {len(embeddings)} models: {list(embeddings.keys())}")
 
     # Run tests
-    results = run_phase2_tests(embeddings, config, verbose=verbose)
+    results = run_phase3_tests(embeddings, config, verbose=verbose)
 
     # Summary
     if verbose:
-        print("\n" + "="*70)
-        print("PHASE 2 FINAL SUMMARY")
-        print("="*70)
+        print("\n" + "=" * 70)
+        print("PHASE 3 FINAL SUMMARY")
+        print("=" * 70)
 
     passed = sum(1 for r in results if r.passed)
     total = len(results)
 
     if verbose:
-        print(f"\n  Phase 2 Tests: {passed}/{total} passed")
+        print(f"\n  Phase 3 Tests: {passed}/{total} passed")
         for r in results:
             status = "PASS" if r.passed else "FAIL"
             print(f"    {r.name}: {status}")
@@ -273,13 +267,13 @@ def main():
 
     # Receipt
     receipt = generate_receipt(results, config, corpus, embeddings)
-    receipt_path = out_dir / f"q41_phase2_receipt_{timestamp_str}.json"
+    receipt_path = out_dir / f"q41_phase3_receipt_{timestamp_str}.json"
     with open(receipt_path, 'w') as f:
         json.dump(receipt, f, indent=2, default=to_builtin)
 
     # Report
     report = generate_report(results, config)
-    report_path = out_dir / f"q41_phase2_report_{timestamp_str}.md"
+    report_path = out_dir / f"q41_phase3_report_{timestamp_str}.md"
     with open(report_path, 'w', encoding='utf-8') as f:
         f.write(report)
 
@@ -290,7 +284,7 @@ def main():
     # Overall status
     all_pass = passed == total
     if verbose:
-        print(f"\n  {'ALL PHASE 2 TESTS PASSED' if all_pass else 'SOME TESTS FAILED'}")
+        print(f"\n  {'ALL PHASE 3 TESTS PASSED' if all_pass else 'SOME TESTS FAILED'}")
 
     return 0 if all_pass else 1
 

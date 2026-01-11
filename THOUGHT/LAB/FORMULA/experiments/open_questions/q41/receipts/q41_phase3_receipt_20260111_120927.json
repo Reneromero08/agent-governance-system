@@ -1,0 +1,685 @@
+{
+  "suite": "Q41_PHASE3_LANGLANDS",
+  "version": "1.0.0",
+  "timestamp": "2026-01-11T19:09:27.056662+00:00",
+  "phase": 3,
+  "summary": {
+    "passed": 0,
+    "total": 2,
+    "all_pass": false,
+    "tests": [
+      {
+        "name": "TIER 1: Categorical Equivalence",
+        "passed": false
+      },
+      {
+        "name": "TIER 6: Prime Decomposition",
+        "passed": false
+      }
+    ]
+  },
+  "config": {
+    "seed": 42,
+    "k_neighbors": 10,
+    "preprocessing": "l2",
+    "distance_metric": "euclidean"
+  },
+  "corpus_hash": "fc8dd72ea2b288413299497655e3399910f5f55f6beef41208225738b8add2f5",
+  "models": [
+    "MiniLM",
+    "MPNet",
+    "Paraphrase",
+    "BERT"
+  ],
+  "results": [
+    {
+      "name": "TIER 1: Categorical Equivalence",
+      "test_type": "langlands",
+      "passed": false,
+      "metrics": {
+        "mean_neighborhood_preservation": 0.32284917464095925,
+        "mean_spectral_preservation": 0.9588255451426106,
+        "min_neighborhood_preservation": 0.23129071784600366,
+        "min_spectral_preservation": 0.9245557427017627,
+        "mean_betti_consistency": 0.44203720240798866,
+        "functor_pair_results": [
+          {
+            "pair": "MiniLM -> MPNet",
+            "neighborhood_k5": 0.4606092436974789,
+            "spectral_k5": 0.9966784375845623,
+            "neighborhood_k10": 0.4189811774154334,
+            "spectral_k10": 0.9796646590629922,
+            "neighborhood_k15": 0.4144297980534944,
+            "spectral_k15": 0.9627009671402136,
+            "mean_neighborhood": 0.4313400730554689,
+            "mean_spectral": 0.9796813545959226
+          },
+          {
+            "pair": "MiniLM -> Paraphrase",
+            "neighborhood_k5": 0.40190242763772155,
+            "spectral_k5": 0.9571688696303725,
+            "neighborhood_k10": 0.376124445931858,
+            "spectral_k10": 0.8954643237509538,
+            "neighborhood_k15": 0.36666471437806736,
+            "spectral_k15": 0.9210340347239616,
+            "mean_neighborhood": 0.38156386264921566,
+            "mean_spectral": 0.9245557427017627
+          },
+          {
+            "pair": "MiniLM -> BERT",
+            "neighborhood_k5": 0.2636554621848739,
+            "spectral_k5": 0.9740312930361423,
+            "neighborhood_k10": 0.26543960046509657,
+            "spectral_k10": 0.9663474978482234,
+            "neighborhood_k15": 0.25324844237887706,
+            "spectral_k15": 0.9784317107472567,
+            "mean_neighborhood": 0.2607811683429491,
+            "mean_spectral": 0.9729368338772074
+          },
+          {
+            "pair": "MPNet -> Paraphrase",
+            "neighborhood_k5": 0.3704481792717086,
+            "spectral_k5": 0.9684832009249132,
+            "neighborhood_k10": 0.3182107684702839,
+            "spectral_k10": 0.9554847429538869,
+            "neighborhood_k15": 0.3285811586373572,
+            "spectral_k15": 0.9595077774608912,
+            "mean_neighborhood": 0.3390800354597832,
+            "mean_spectral": 0.9611585737798971
+          },
+          {
+            "pair": "MPNet -> BERT",
+            "neighborhood_k5": 0.29785247432306244,
+            "spectral_k5": 0.977916548441383,
+            "neighborhood_k10": 0.30144615598084895,
+            "spectral_k10": 0.9648813924826984,
+            "neighborhood_k15": 0.27981894117309364,
+            "spectral_k15": 0.9701265181745693,
+            "mean_neighborhood": 0.293039190492335,
+            "mean_spectral": 0.9709748196995504
+          },
+          {
+            "pair": "Paraphrase -> BERT",
+            "neighborhood_k5": 0.2520424836601306,
+            "spectral_k5": 0.9689833149704219,
+            "neighborhood_k10": 0.22084374553187144,
+            "spectral_k10": 0.9379331187695801,
+            "neighborhood_k15": 0.22098592434600894,
+            "spectral_k15": 0.9240214048639693,
+            "mean_neighborhood": 0.23129071784600366,
+            "mean_spectral": 0.9436459462013237
+          }
+        ],
+        "homology_results": {
+          "betti_by_model": {
+            "MiniLM": {
+              "scale_5": [
+                5,
+                9,
+                0
+              ],
+              "scale_10": [
+                1,
+                0,
+                10
+              ],
+              "scale_15": [
+                1,
+                0,
+                72
+              ]
+            },
+            "MPNet": {
+              "scale_5": [
+                4,
+                0,
+                0
+              ],
+              "scale_10": [
+                1,
+                0,
+                27
+              ],
+              "scale_15": [
+                1,
+                0,
+                86
+              ]
+            },
+            "Paraphrase": {
+              "scale_5": [
+                10,
+                0,
+                0
+              ],
+              "scale_10": [
+                3,
+                0,
+                30
+              ],
+              "scale_15": [
+                1,
+                0,
+                92
+              ]
+            },
+            "BERT": {
+              "scale_5": [
+                35,
+                0,
+                35
+              ],
+              "scale_10": [
+                32,
+                0,
+                181
+              ],
+              "scale_15": [
+                30,
+                0,
+                424
+              ]
+            }
+          },
+          "beta_0_consistency": {
+            "scale_5": 0.5168566188856109,
+            "scale_10": 0.412760830146183,
+            "scale_15": 0.39649415819217215
+          },
+          "mean_consistency": 0.44203720240798866
+        }
+      },
+      "thresholds": {
+        "neighborhood_preservation_min": 0.3,
+        "spectral_preservation_min": 0.5,
+        "betti_consistency_min": 0.5
+      },
+      "controls": {
+        "self_alignment_neighborhood": 1.0,
+        "random_alignment_neighborhood": 0.09566158764847525
+      },
+      "notes": "Neighborhood: 0.323, Spectral: 0.959, Homology: 0.442"
+    },
+    {
+      "name": "TIER 6: Prime Decomposition",
+      "test_type": "langlands",
+      "passed": false,
+      "metrics": {
+        "mean_factorization_alignment": 0.8452547986375063,
+        "mean_variance_explained": 0.7747287203092128,
+        "mean_inert_ratio": 0.09999999999999999,
+        "uniqueness_by_model": {
+          "MiniLM": {
+            "mean_alignment": 0.7552280617073237,
+            "min_alignment": 0.7414920065581021,
+            "alignment_scores": [
+              0.7528904483914401,
+              0.760750527355181,
+              0.7414920065581021,
+              0.7657792645245715
+            ]
+          },
+          "MPNet": {
+            "mean_alignment": 0.9202909646694653,
+            "min_alignment": 0.9008714228327319,
+            "alignment_scores": [
+              0.9344282779677929,
+              0.9203030564744562,
+              0.92556110140288,
+              0.9008714228327319
+            ]
+          },
+          "Paraphrase": {
+            "mean_alignment": 0.9323331844227881,
+            "min_alignment": 0.8733173350321322,
+            "alignment_scores": [
+              0.919773635595897,
+              0.95296851879305,
+              0.8733173350321322,
+              0.9832732482700729
+            ]
+          },
+          "BERT": {
+            "mean_alignment": 0.7731669837504482,
+            "min_alignment": 0.7421809469480997,
+            "alignment_scores": [
+              0.8022747396133963,
+              0.7450441644917347,
+              0.7421809469480997,
+              0.8031680839485624
+            ]
+          }
+        },
+        "reconstruction_by_model": {
+          "MiniLM": {
+            "reconstruction_error": 0.1159580871462822,
+            "variance_explained": 0.7132744193077087,
+            "coefficient_sparsity": 0.2926470588235294
+          },
+          "MPNet": {
+            "reconstruction_error": 0.10705473273992538,
+            "variance_explained": 0.6823642551898956,
+            "coefficient_sparsity": 0.32426470588235295
+          },
+          "Paraphrase": {
+            "reconstruction_error": 0.13992071151733398,
+            "variance_explained": 0.718842476606369,
+            "coefficient_sparsity": 0.4007352941176471
+          },
+          "BERT": {
+            "reconstruction_error": 0.006598848849534988,
+            "variance_explained": 0.9844337301328778,
+            "coefficient_sparsity": 0.2727941176470588
+          }
+        },
+        "splitting_results": [
+          {
+            "classifications": {
+              "split": 20,
+              "inert": 0,
+              "ramified": 0
+            },
+            "density": {
+              "split": 1.0,
+              "inert": 0.0,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 4,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 5,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 6,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 7,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 9,
+                "type": "split",
+                "n_targets": 20
+              }
+            ],
+            "pair": "MiniLM -> MPNet"
+          },
+          {
+            "classifications": {
+              "split": 20,
+              "inert": 0,
+              "ramified": 0
+            },
+            "density": {
+              "split": 1.0,
+              "inert": 0.0,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 19
+              },
+              {
+                "prime": 4,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 5,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 6,
+                "type": "split",
+                "n_targets": 19
+              },
+              {
+                "prime": 7,
+                "type": "split",
+                "n_targets": 19
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 19
+              },
+              {
+                "prime": 9,
+                "type": "split",
+                "n_targets": 20
+              }
+            ],
+            "pair": "MiniLM -> Paraphrase"
+          },
+          {
+            "classifications": {
+              "split": 18,
+              "inert": 2,
+              "ramified": 0
+            },
+            "density": {
+              "split": 0.9,
+              "inert": 0.1,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "inert",
+                "max_corr": 0.9045779705047607
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 4,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 5,
+                "type": "inert",
+                "max_corr": 0.9088175892829895
+              },
+              {
+                "prime": 6,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 7,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 9,
+                "type": "split",
+                "n_targets": 20
+              }
+            ],
+            "pair": "MiniLM -> BERT"
+          },
+          {
+            "classifications": {
+              "split": 20,
+              "inert": 0,
+              "ramified": 0
+            },
+            "density": {
+              "split": 1.0,
+              "inert": 0.0,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 4,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 5,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 6,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 7,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 9,
+                "type": "split",
+                "n_targets": 20
+              }
+            ],
+            "pair": "MPNet -> Paraphrase"
+          },
+          {
+            "classifications": {
+              "split": 10,
+              "inert": 10,
+              "ramified": 0
+            },
+            "density": {
+              "split": 0.5,
+              "inert": 0.5,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "inert",
+                "max_corr": 0.9068176746368408
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 4,
+                "type": "inert",
+                "max_corr": 0.9181485176086426
+              },
+              {
+                "prime": 5,
+                "type": "inert",
+                "max_corr": 0.9148932695388794
+              },
+              {
+                "prime": 6,
+                "type": "inert",
+                "max_corr": 0.917508602142334
+              },
+              {
+                "prime": 7,
+                "type": "inert",
+                "max_corr": 0.9180641174316406
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 9,
+                "type": "inert",
+                "max_corr": 0.9057493209838867
+              }
+            ],
+            "pair": "MPNet -> BERT"
+          },
+          {
+            "classifications": {
+              "split": 20,
+              "inert": 0,
+              "ramified": 0
+            },
+            "density": {
+              "split": 1.0,
+              "inert": 0.0,
+              "ramified": 0.0
+            },
+            "prime_details": [
+              {
+                "prime": 0,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 1,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 2,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 3,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 4,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 5,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 6,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 7,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 8,
+                "type": "split",
+                "n_targets": 20
+              },
+              {
+                "prime": 9,
+                "type": "split",
+                "n_targets": 20
+              }
+            ],
+            "pair": "Paraphrase -> BERT"
+          }
+        ]
+      },
+      "thresholds": {
+        "alignment_min": 0.7,
+        "variance_explained_min": 0.8,
+        "inert_ratio_min": 0.3
+      },
+      "controls": {
+        "positive_control_inert": 1.0,
+        "negative_control_inert": 0.0
+      },
+      "notes": "Alignment: 0.845, Variance: 0.775, Inert: 0.100"
+    }
+  ],
+  "platform": {
+    "python": "3.11.6",
+    "system": "Windows",
+    "machine": "AMD64"
+  }
+}

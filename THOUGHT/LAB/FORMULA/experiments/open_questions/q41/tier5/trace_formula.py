@@ -27,8 +27,8 @@ from datetime import datetime, timezone
 from typing import Dict, List, Any
 from scipy.stats import pearsonr
 
-sys.path.insert(0, str(Path(__file__).parent))
-from q41_shared_utils import (
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from shared.utils import (
     TestConfig, TestResult, to_builtin, preprocess_embeddings,
     build_knn_graph, build_graph_laplacian, DEFAULT_CORPUS, load_embeddings
 )

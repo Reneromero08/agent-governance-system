@@ -23,8 +23,8 @@ from pathlib import Path
 from datetime import datetime, timezone
 from typing import Dict, Any
 
-sys.path.insert(0, str(Path(__file__).parent))
-from q41_shared_utils import (
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from shared.utils import (
     TestConfig, TestResult, to_builtin, preprocess_embeddings,
     build_knn_graph, DEFAULT_CORPUS, load_embeddings
 )

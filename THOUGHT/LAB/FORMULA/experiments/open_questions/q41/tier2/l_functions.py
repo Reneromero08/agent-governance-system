@@ -23,8 +23,8 @@ from scipy.stats import pearsonr
 from sklearn.cluster import KMeans
 
 # Import shared utilities
-sys.path.insert(0, str(Path(__file__).parent))
-from q41_shared_utils import (
+sys.path.insert(0, str(Path(__file__).parent.parent))
+from shared.utils import (
     TestConfig, TestResult, to_builtin, preprocess_embeddings,
     DEFAULT_CORPUS, compute_corpus_hash, load_embeddings
 )
