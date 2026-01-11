@@ -1,6 +1,6 @@
 # Cassette Network Roadmap
 
-**Status**: Phase 0-1.5 Complete, Phase 2-6 In Progress
+**Status**: Phase 0-2 Complete, Phase 3-6 In Progress
 **Vision**: Layer 3 (CAS External) of the compression stack - shared semantic context infrastructure enabling near-zero communication entropy
 **Owner**: Antigravity / Resident
 **Upstream Dependency**: Phase 5 (VECTOR_ELO) - MemoryRecord contract, SPC protocol
@@ -266,54 +266,63 @@ ALTER TABLE chunks ADD COLUMN parent_chunk_id INTEGER; -- hierarchy link
 
 ---
 
-## Phase 2: Write Path (Memory Persistence)
+## Phase 2: Write Path (Memory Persistence) ✅ COMPLETE (2026-01-11)
 
 **Goal:** Let residents save thoughts to the manifold
 
 **Previous:** [Phase 1.5](#15-structure-aware-chunking) - Structure-aware chunking
 **Next:** [Phase 3](#phase-3-resident-identity) - Resident identity
 
-### 2.1 Core Functions
+### 2.1 Core Functions ✅
 ```python
-memory_save(text: str, cassette: str = 'resident', metadata: dict = None) -> str:
-    """Embeds text, stores vector. Returns: hash."""
+memory_save(text: str, metadata: dict = None, agent_id: str = 'default') -> str:
+    """Embeds text, stores vector. Returns: content-addressed hash."""
 
-memory_query(query: str, cassettes: list[str] = ['resident'], limit: int = 10) -> list:
-    """Semantic search scoped to cassettes. Returns: [{hash, similarity, text_preview, cassette}]"""
+memory_query(query: str, limit: int = 10, agent_id: str = None) -> list:
+    """Semantic search over memories. Returns: [{hash, similarity, text_preview, agent_id}]"""
 
 memory_recall(hash: str) -> dict:
-    """Retrieve full memory. Returns: {hash, text, vector, metadata, created_at, cassette}"""
+    """Retrieve full memory. Returns: {hash, text, vector, metadata, created_at, agent_id}"""
+
+semantic_neighbors(hash: str, limit: int = 10) -> list:
+    """Find semantically similar memories to an anchor memory."""
 ```
 
-### 2.2 Schema Extension
+### 2.2 Schema Extension ✅
 ```sql
 CREATE TABLE memories (
     hash TEXT PRIMARY KEY,
     text TEXT NOT NULL,
-    vector BLOB NOT NULL,  -- 384 dims, float32
+    vector BLOB NOT NULL,  -- 384 dims, float32 (all-MiniLM-L6-v2)
     metadata JSON,
     created_at TEXT NOT NULL,  -- ISO8601
-    agent_id TEXT,  -- 'opus', 'sonnet', 'gemini', etc.
-    indexed_at TEXT NOT NULL  -- for staleness checks
+    agent_id TEXT,  -- 'opus', 'sonnet', 'default', etc.
+    indexed_at TEXT NOT NULL
 );
 
 CREATE INDEX idx_memories_agent ON memories(agent_id);
 CREATE INDEX idx_memories_created ON memories(created_at);
 CREATE INDEX idx_memories_indexed ON memories(indexed_at);
+
+CREATE VIRTUAL TABLE memories_fts USING fts5(text, hash UNINDEXED);
 ```
 
-### 2.3 MCP Tools
-- [ ] `memory_save`
-- [ ] `memory_query`
-- [ ] `memory_recall`
-- [ ] `semantic_neighbors(hash, limit=10, cassettes=None)`
-- [ ] `symbol_resolve(symbol)` - alias for memory_recall
-- [ ] `cas_retrieve(hash)` - alias for memory_recall
+### 2.3 MCP Tools ✅
+- [x] `memory_save_tool` - Save memory with vector embedding
+- [x] `memory_query_tool` - Semantic query over memories
+- [x] `memory_recall_tool` - Recall full memory by hash
+- [x] `semantic_neighbors_tool` - Find similar memories
+- [x] `memory_stats_tool` - Get memory statistics
+- [x] `symbol_resolve` / `cas_retrieve` - Aliases for memory_recall
 
-**Acceptance:**
-- [ ] `memory_save("The Formula is beautiful")` returns hash
-- [ ] `memory_query("formula beauty")` finds the memory
-- [ ] Memories persist across sessions
+**Implementation Files:**
+- [memory_cassette.py](../../../NAVIGATION/CORTEX/network/memory_cassette.py) - MemoryCassette class
+- [semantic_adapter.py](../../../CAPABILITY/MCP/semantic_adapter.py) - MCP tools
+
+**Acceptance:** ✅ ALL MET
+- [x] `memory_save("The Formula is beautiful")` returns hash
+- [x] `memory_query("formula beauty")` finds the memory
+- [x] Memories persist across sessions (SQLite + FTS5 + vectors)
 
 ---
 
@@ -602,6 +611,9 @@ Define what the Resident does when idle:
 - [markdown_chunker.py](NAVIGATION/CORTEX/db/markdown_chunker.py) - Structure-aware markdown chunker
 - [structure_aware_migration.py](NAVIGATION/CORTEX/network/structure_aware_migration.py) - Migration script
 
+**Phase 2 Memory Persistence:**
+- [memory_cassette.py](NAVIGATION/CORTEX/network/memory_cassette.py) - Write-capable cassette for AI memories
+
 **ESAP Integration (Cross-Model Alignment):**
 - [esap_cassette.py](NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin for cassettes
 - [esap_hub.py](NAVIGATION/CORTEX/network/esap_hub.py) - ESAP-enabled network hub
@@ -764,4 +776,4 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v2.2.0 - Updated 2026-01-11 with Phase 1.5 Structure-Aware Chunking complete (12,478 hierarchical chunks with navigation queries)*
+*Roadmap v2.3.0 - Updated 2026-01-11 with Phase 2 Write Path complete (memory persistence with vector embeddings)*

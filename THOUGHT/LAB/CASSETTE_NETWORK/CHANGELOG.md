@@ -4,11 +4,64 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
-## [3.9.0] - 2026-01-11
+## [3.8.1] - 2026-01-11
 
-### Phase 1.5: Structure-Aware Chunking - COMPLETE
+### Phase 2: Write Path (Memory Persistence) - COMPLETE
 
-(See below for details)
+**Goal:** Let residents save thoughts to the manifold
+
+#### Deliverables
+
+**Phase 2.1: Core Functions**
+- `memory_save(text, metadata, agent_id)` - Saves memory with vector embedding, returns hash
+- `memory_query(query, limit, agent_id)` - Semantic search over memories
+- `memory_recall(hash)` - Retrieve full memory by content-addressed hash
+- `semantic_neighbors(hash, limit)` - Find semantically similar memories
+
+**Phase 2.2: Schema Extension**
+```sql
+CREATE TABLE memories (
+    hash TEXT PRIMARY KEY,
+    text TEXT NOT NULL,
+    vector BLOB NOT NULL,      -- 384 dims, float32
+    metadata JSON,
+    created_at TEXT NOT NULL,  -- ISO8601
+    agent_id TEXT,             -- 'opus', 'sonnet', etc.
+    indexed_at TEXT NOT NULL
+);
+
+CREATE INDEX idx_memories_agent ON memories(agent_id);
+CREATE INDEX idx_memories_created ON memories(created_at);
+
+CREATE VIRTUAL TABLE memories_fts USING fts5(text, hash UNINDEXED);
+```
+
+**Phase 2.3: MCP Tools**
+- [x] `memory_save_tool` - Save memory to resident cassette
+- [x] `memory_query_tool` - Semantic query over memories
+- [x] `memory_recall_tool` - Recall full memory by hash
+- [x] `semantic_neighbors_tool` - Find similar memories
+- [x] `memory_stats_tool` - Get memory statistics
+
+#### Implementation Files
+- `memory_cassette.py` - MemoryCassette class with write capabilities
+- `semantic_adapter.py` - MCP tools for memory operations
+
+#### Validation
+```
+Created memory cassette
+Saved memory: 64a88dca1605acd9...
+Query returned 1 results
+Recalled: Test memory for Phase 2 validation...
+Stats: 1 memories
+
+Phase 2 basic validation PASSED
+```
+
+#### Acceptance Criteria Met
+- [x] `memory_save("The Formula is beautiful")` returns hash
+- [x] `memory_query("formula beauty")` finds the memory
+- [x] Memories persist across sessions (SQLite + FTS5 + vectors)
 
 ---
 

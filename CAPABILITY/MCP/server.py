@@ -1028,7 +1028,7 @@ def load_schema(name: str) -> Dict:
     """Load a schema file."""
     schema_path = SCHEMAS_DIR / f"{name}.json"
     if schema_path.exists():
-        return json.loads(schema_path.read_text())
+        return json.loads(schema_path.read_text(encoding="utf-8"))
     return {}
 
 
@@ -1476,6 +1476,11 @@ class AGSMCPServer:
             "find_related": self._tool_find_related,
             "cassette_network_query": self._tool_cassette_network_query,
             "semantic_stats": self._tool_semantic_stats,
+            "memory_save": self._tool_memory_save,
+            "memory_query": self._tool_memory_query,
+            "memory_recall": self._tool_memory_recall,
+            "semantic_neighbors": self._tool_semantic_neighbors,
+            "memory_stats": self._tool_memory_stats,
             # Write tools
             "skill_run": self._tool_skill_run,
             "pack_validate": self._tool_pack_validate,
@@ -2927,6 +2932,91 @@ class AGSMCPServer:
                 "isError": True
             }
     
+    def _tool_memory_save(self, args: Dict) -> Dict:
+        """Save a memory to the resident cassette."""
+        self._ensure_semantic_adapter()
+        if not self.semantic_available or not self.semantic_adapter:
+            return {
+                "content": [{"type": "text", "text": "Semantic tools not available"}],
+                "isError": True
+            }
+
+        try:
+            return self.semantic_adapter.memory_save_tool(args)
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory save error: {str(e)}"}],
+                "isError": True
+            }
+
+    def _tool_memory_query(self, args: Dict) -> Dict:
+        """Query memories using semantic search."""
+        self._ensure_semantic_adapter()
+        if not self.semantic_available or not self.semantic_adapter:
+            return {
+                "content": [{"type": "text", "text": "Semantic tools not available"}],
+                "isError": True
+            }
+
+        try:
+            return self.semantic_adapter.memory_query_tool(args)
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory query error: {str(e)}"}],
+                "isError": True
+            }
+
+    def _tool_memory_recall(self, args: Dict) -> Dict:
+        """Retrieve a full memory by its hash."""
+        self._ensure_semantic_adapter()
+        if not self.semantic_available or not self.semantic_adapter:
+            return {
+                "content": [{"type": "text", "text": "Semantic tools not available"}],
+                "isError": True
+            }
+
+        try:
+            return self.semantic_adapter.memory_recall_tool(args)
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory recall error: {str(e)}"}],
+                "isError": True
+            }
+
+    def _tool_semantic_neighbors(self, args: Dict) -> Dict:
+        """Find memories semantically similar to a given memory."""
+        self._ensure_semantic_adapter()
+        if not self.semantic_available or not self.semantic_adapter:
+            return {
+                "content": [{"type": "text", "text": "Semantic tools not available"}],
+                "isError": True
+            }
+
+        try:
+            return self.semantic_adapter.semantic_neighbors_tool(args)
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Semantic neighbors error: {str(e)}"}],
+                "isError": True
+            }
+
+    def _tool_memory_stats(self, args: Dict) -> Dict:
+        """Get statistics about stored memories."""
+        self._ensure_semantic_adapter()
+        if not self.semantic_available or not self.semantic_adapter:
+            return {
+                "content": [{"type": "text", "text": "Semantic tools not available"}],
+                "isError": True
+            }
+
+        try:
+            return self.semantic_adapter.memory_stats_tool(args)
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory stats error: {str(e)}"}],
+                "isError": True
+            }
+
     def _tool_session_info(self, args: Dict) -> Dict:
         """Get information about the current MCP session including session_id for ADR-021 compliance."""
         from datetime import datetime

@@ -34,15 +34,30 @@ except ImportError as e:
     print(f"[WARNING] Network tools not available: {e}", file=sys.stderr)
     NETWORK_AVAILABLE = False
 
+# Phase 2: Memory Cassette
+try:
+    from network.memory_cassette import (
+        MemoryCassette,
+        memory_save,
+        memory_query,
+        memory_recall,
+        semantic_neighbors
+    )
+    MEMORY_AVAILABLE = True
+except ImportError as e:
+    print(f"[WARNING] Memory cassette not available: {e}", file=sys.stderr)
+    MEMORY_AVAILABLE = False
+
 
 class SemanticMCPAdapter:
     """Adapter that provides semantic search tools via MCP."""
-    
+
     def __init__(self):
         self.db_path = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
         self.network_hub = None
         self.semantic_search = None
         self.cortex_query = None
+        self.memory_cassette = None  # Phase 2: Memory persistence
         
     def initialize(self):
         """Initialize semantic tools."""
@@ -59,12 +74,17 @@ class SemanticMCPAdapter:
             if NETWORK_AVAILABLE:
                 self.network_hub = SemanticNetworkHub()
                 self._load_cassettes_from_config()
-            
+
+            # Initialize memory cassette (Phase 2)
+            if MEMORY_AVAILABLE:
+                self.memory_cassette = MemoryCassette()
+
             return {
                 "status": "initialized",
                 "db_exists": self.db_path.exists(),
                 "embeddings_count": self.get_embedding_stats().get("total_embeddings", 0) if self.semantic_search else 0,
-                "cassettes_registered": len(self.network_hub.cassettes) if self.network_hub else 0
+                "cassettes_registered": len(self.network_hub.cassettes) if self.network_hub else 0,
+                "memory_available": MEMORY_AVAILABLE
             }
         except Exception as e:
             return {"error": f"Initialization failed: {str(e)}"}
@@ -242,11 +262,227 @@ class SemanticMCPAdapter:
         """Get statistics about vector embeddings."""
         if not SEMANTIC_AVAILABLE or not self.semantic_search:
             return {"error": "Semantic search not initialized"}
-        
+
         try:
             return self.semantic_search.get_stats()
         except Exception as e:
             return {"error": str(e)}
+
+    # =========================================================================
+    # Phase 2: Memory Persistence MCP Tools
+    # =========================================================================
+
+    def memory_save_tool(self, args: Dict) -> Dict:
+        """MCP tool: Save a memory to the resident cassette.
+
+        Args (via args dict):
+            text: The memory content to save (required)
+            metadata: Optional metadata dictionary
+            agent_id: Optional agent identifier (default: 'default')
+
+        Returns:
+            Content-addressed hash of the saved memory
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            text = args.get("text", "")
+            if not text or not text.strip():
+                return {
+                    "content": [{"type": "text", "text": "Error: text is required"}],
+                    "isError": True
+                }
+
+            metadata = args.get("metadata")
+            agent_id = args.get("agent_id", "default")
+
+            memory_hash = memory_save(text, metadata, agent_id)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "status": "saved",
+                        "hash": memory_hash,
+                        "agent_id": agent_id
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory save error: {str(e)}"}],
+                "isError": True
+            }
+
+    def memory_query_tool(self, args: Dict) -> Dict:
+        """MCP tool: Query memories using semantic search.
+
+        Args (via args dict):
+            query: Search query string (required)
+            limit: Max results (default 10)
+            agent_id: Filter to specific agent (optional)
+
+        Returns:
+            List of matching memories with similarity scores
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            query = args.get("query", "")
+            if not query:
+                return {
+                    "content": [{"type": "text", "text": "Error: query is required"}],
+                    "isError": True
+                }
+
+            limit = int(args.get("limit", 10))
+            agent_id = args.get("agent_id")
+
+            results = memory_query(query, limit, agent_id)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "query": query,
+                        "results": results,
+                        "count": len(results)
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory query error: {str(e)}"}],
+                "isError": True
+            }
+
+    def memory_recall_tool(self, args: Dict) -> Dict:
+        """MCP tool: Retrieve a full memory by its hash.
+
+        Args (via args dict):
+            hash: Content-addressed hash of the memory (required)
+
+        Returns:
+            Full memory including text, metadata, timestamps
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            memory_hash = args.get("hash", "")
+            if not memory_hash:
+                return {
+                    "content": [{"type": "text", "text": "Error: hash is required"}],
+                    "isError": True
+                }
+
+            memory = memory_recall(memory_hash)
+
+            if not memory:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": json.dumps({"error": "Memory not found", "hash": memory_hash})
+                    }]
+                }
+
+            # Don't include raw vector bytes in response
+            result = {k: v for k, v in memory.items() if k != "vector"}
+            result["has_vector"] = memory.get("vector") is not None
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory recall error: {str(e)}"}],
+                "isError": True
+            }
+
+    def semantic_neighbors_tool(self, args: Dict) -> Dict:
+        """MCP tool: Find memories semantically similar to a given memory.
+
+        Args (via args dict):
+            hash: Hash of the anchor memory (required)
+            limit: Maximum neighbors to return (default 10)
+
+        Returns:
+            List of similar memories (excluding the anchor)
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            memory_hash = args.get("hash", "")
+            if not memory_hash:
+                return {
+                    "content": [{"type": "text", "text": "Error: hash is required"}],
+                    "isError": True
+                }
+
+            limit = int(args.get("limit", 10))
+
+            neighbors = semantic_neighbors(memory_hash, limit)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "anchor_hash": memory_hash,
+                        "neighbors": neighbors,
+                        "count": len(neighbors)
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Semantic neighbors error: {str(e)}"}],
+                "isError": True
+            }
+
+    def memory_stats_tool(self, args: Dict = None) -> Dict:
+        """MCP tool: Get statistics about stored memories.
+
+        Returns:
+            Memory counts, agents, date ranges
+        """
+        if not MEMORY_AVAILABLE or not self.memory_cassette:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            stats = self.memory_cassette.get_stats()
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(stats, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory stats error: {str(e)}"}],
+                "isError": True
+            }
     
     def get_network_status(self) -> Dict:
         """Get cassette network status."""
