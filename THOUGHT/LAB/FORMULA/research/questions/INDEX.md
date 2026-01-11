@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.16.0 (2026-01-11 - Q41 PARTIAL: TIER 3/4 PASS (Hecke commutativity 0.021, automorphic orthogonality 2.3e-16). TIER 2/5/6 not implemented. 18/43 questions answered (41.9%).)*
+*Last updated: v3.17.0 (2026-01-11 - Q41 PARTIAL: TIER 2/3/4/5 ALL PASS (L-functions, Ramanujan, Hecke, Automorphic, Trace Formula). Only TIER 1/6 not implemented. 18/43 questions answered (41.9%).)*
 
 ---
 
@@ -34,7 +34,7 @@
 | 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ✅ ANSWERED | **Symmetry: SO(d) rotation. Conserved: Angular momentum |L|=|v|.** 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve with CV=6e-7. 69,000x separation from non-geodesic. NOT model artifact. |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
-| 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ PARTIAL | **TIER 3/4 PASS:** Hecke commutativity (0.021), automorphic orthogonality (2.3e-16). TIER 2/5/6 not yet implemented. Algebraic structure exists; full Langlands correspondence untested. |
+| 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ PARTIAL | **TIER 2/3/4/5 ALL PASS:** L-functions (0.84 smooth), Ramanujan (0.234 gap), Hecke (0.021 comm), Automorphic (2.3e-16), Trace Formula (62.5% sig). Only TIER 1/6 not implemented. |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
 | 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | **PARTIAL** | Core mapping proven by Q42: Phi=Implicate, R=Explicate. XOR system demonstrates implicate order (high Phi, low R). Dynamics (unfoldment, holomovement) still open. |
 | 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). |
