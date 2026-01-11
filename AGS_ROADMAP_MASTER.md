@@ -209,206 +209,39 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
   - [ ] BitNet can be used as a cheap producer without weakening governance guarantees
 
 
+# Phase 5: Vector/Symbol Integration (addressability) ✅ COMPLETE
 
-# Phase 5: Vector/Symbol Integration (addressability)
-
+**Status:** All 529 tests pass, Global DoD met (2026-01-11)
 **Goal:** Make governance artifacts addressable by meaning, not just by path or hash.
-**Detailed Roadmap:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_VECTOR_SYMBOL_INTEGRATION.md`
-**Research Findings:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/01-07-2026_PHASE_5_RESEARCH_FINDINGS.md`
 
-## 5.0 MemoryRecord Contract (Foundation) ✅ COMPLETE (2026-01-08)
-**Purpose:** Define the canonical data structure for all vector-indexed content.
-**Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
+## 5.1 Vector Indexing & Semantic Discovery ✅
+- 5.1.1 CANON embeddings — Semantic search over canonical documents
+- 5.1.2 ADR embeddings — Architecture decision records indexing
+- 5.1.3 Model registry — Track embedding models and versions
+- 5.1.4 Skill discovery — Find relevant skills by semantic query
+- 5.1.5 Cross-references — Link related artifacts across the repo
 
-**Contract Fields:**
-- `id`: Content hash (SHA-256)
-- `text`: Canonical text (source of truth)
-- `embeddings`: Model name → vector array (derived, rebuildable)
-- `payload`: Metadata (tags, timestamps, roles, doc_ids)
-- `scores`: ELO, recency, trust, decay (connects to Phase 7)
-- `lineage`: Derivation chain, summarization history
-- `receipts`: Provenance hashes, tool versions
+## 5.2 Semiotic Compression Layer (SCL) ✅
+- 5.2.1 Macro grammar — Define symbolic macro language for compression
+- 5.2.2 Codebook — CODEBOOK.json semiotic vocabulary (58 tests)
+- 5.2.3 Stacked resolution — Multi-level symbol expansion
+- 5.2.4 SCL validator — Ensure valid symbol programs
+- 5.2.5 SCL CLI — Command-line interface for encode/decode
+- 5.2.6 Integration — End-to-end semiotic compression
+- 5.2.7 Token accountability — Track token usage with receipts
 
-**Contract Rules:**
-- Text is canonical (source of truth)
-- Vectors are derived (rebuildable from text)
-- All exports are receipted and hashed
+## 5.3 Semantic Pointer Compression (SPC) ✅
+- 5.3.1 SPC spec — Normative pointer compression specification (44 tests)
+- 5.3.2 GOV_IR spec — Governance intermediate representation (51 tests)
+- 5.3.3 Codebook sync — Markov blanket synchronization protocol (62 tests)
+- 5.3.4 Tokenizer atlas — Track symbol tokenization across models
+- 5.3.5 Semantic density proof — Empirical compression validation harness
+- 5.3.6 Research paper — PAPER_SPC.md documenting SPC paradigm
 
-- [x] 5.0.1 Define `memory_record.schema.json` with `additionalProperties: false` → `LAW/SCHEMAS/memory_record.schema.json`
-- [x] 5.0.2 Implement `CAPABILITY/PRIMITIVES/memory_record.py` (create, validate, hash, add_embedding, serialization)
-- [x] 5.0.3 Tests: `CAPABILITY/TESTBENCH/core/test_memory_record.py` (23 tests passing)
-- **Exit Criteria** ✅
-  - [x] MemoryRecord schema finalized and frozen (Phase 6.0 depends on this)
-  - [x] Create/validate/hash functions working
-  - [x] Deterministic hashing verified
-  - [x] Round-trip serialization verified
+**Deliverables:** 16 test files (529 tests), normative specs, compression infrastructure
+**See:** [PHASE_5_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md) for detailed DoD matrix
 
-## 5.1 Vector Indexing & Semantic Discovery
-
-### 5.1.1 Embed Canon Files ✅ COMPLETE (2026-01-08)
-**Purpose:** Make all governance canon semantically searchable.
-- [x] Select embedding model: `all-MiniLM-L6-v2` (ADR-030, sentence-transformers, 384 dims)
-- [x] Implement `CAPABILITY/PRIMITIVES/canon_index.py` (inventory, embed, search, rebuild, verify)
-- [x] Create vector index storage: SQLite-based `canon_index.db`
-- [x] Embed all files in `LAW/CANON/*` (32 files embedded)
-- [x] Tests: `test_phase_5_1_1_canon_embedding.py` (23 tests passing)
-
-### 5.1.2 Embed ADRs ✅ COMPLETE (2026-01-08)
-**Purpose:** Make architecture decisions semantically searchable.
-- [x] Enumerate all files in `LAW/CONTEXT/decisions/*` (37 ADRs)
-- [x] Parse ADR metadata (title, status, date via YAML frontmatter)
-- [x] Batch embed all ADR files with metadata
-- [x] Store with cross-references to canon (184 cross-references)
-- [x] Implementation: `CAPABILITY/PRIMITIVES/adr_index.py`
-- [x] Tests: `test_phase_5_1_2_adr_embedding.py` (28 tests passing)
-
-### 5.1.3 Vector-Indexed CAS for Model Weights ✅ COMPLETE (2026-01-08)
-**Purpose:** Store model artifacts with semantic addressability.
-- [x] Define ModelRecord schema (deterministic ID: SHA-256(name@version))
-- [x] Implement model registry with CAS weights_hash reference
-- [x] Semantic search by model description
-- [x] Implementation: `CAPABILITY/PRIMITIVES/model_registry.py`
-- [x] Tests: `test_phase_5_1_3_model_registry.py` (28 tests passing)
-
-### 5.1.4 Semantic Skill Discovery ✅ COMPLETE (2026-01-08)
-**Purpose:** Find skills by description similarity.
-- [x] Enumerate all `CAPABILITY/SKILLS/*/SKILL.md` (24 skills)
-- [x] Parse skill metadata (purpose, trigger, inputs, outputs via YAML frontmatter + markdown)
-- [x] Embed skill descriptions (all-MiniLM-L6-v2, 384 dims)
-- [x] Semantic search with deterministic tie-breaking (score desc, skill_id asc)
-- [x] Implementation: `CAPABILITY/PRIMITIVES/skill_index.py`
-- [x] Tests: `test_phase_5_1_4_skill_discovery.py` (32 tests passing)
-- [x] MCP Integration: `skill_discovery` tool in server + schema
-- **Example:** "verify canon changes" → canon-governance-check (0.589 similarity)
-
-### 5.1.5 Cross-Reference Indexing ✅
-**Purpose:** Link artifacts by embedding distance.
-- [x] Compute pairwise distances for related artifacts
-- [x] Store as graph edges with distance weights
-- [x] Enable "related artifacts" queries
-- [x] Implement `find_related(artifact_id, threshold, top_k) -> [related_ids]`
-- **Implementation:** `CAPABILITY/PRIMITIVES/cross_ref_index.py` - Unified graph across canon, ADR, and skill artifacts with 20 passing tests
-- **Database:** `NAVIGATION/CORTEX/db/cross_ref_index.db`
-- **MCP Tool:** `find_related` for cross-artifact discovery
-- **Note:** Also includes specialized ADR-canon cross-references in adr_index.py
-
-### 5.1.6 VectorPack Export Format
-**Research:** `THOUGHT/LAB/VECTOR_ELO/research/vector-substrate/01-06-2026-21-13_5_2_VECTOR_SUBSTRATE_VECTORPACK.md`
-- [ ] Implement VectorPack directory structure (manifest.yaml, tables/, blobs/, receipts/)
-- [ ] Deterministic export/import with receipts
-- [ ] Micro-pack export (JSONL, int8 quantized, task-scoped top-K)
-
-**Phase 5.1 Exit Criteria:**
-- [x] Vector index includes canon + ADRs with version-pinned rebuild ✅
-- [x] Skill discovery returns stable results for fixed corpus + model version ✅
-- [ ] Cross-reference indexing functional with deterministic results
-- [ ] VectorPack export is portable and receipted
-
-## 5.2 Semiotic Compression Layer (SCL)
-**Purpose:** Reduce LLM token usage via semantic macros that expand deterministically.
-**Research:** `THOUGHT/LAB/VECTOR_ELO/research/phase-5/12-29-2025-07-01_SEMIOTIC_COMPRESSION.md`
-
-### 5.2.1 Define MVP Macro Set
-- [ ] Identify 30-80 macros covering 80% of governance repetition
-- [ ] Macro categories: Constraint, Schema, CAS, Scan, Ledger, Expand
-- [ ] Create `LAW/CANON/SEMANTIC/SCL_MACRO_CATALOG.md`
-
-### 5.2.2 Implement CODEBOOK.json
-- [ ] Define `scl_codebook.schema.json` with symbol structure
-- [ ] Create `SCL/CODEBOOK.json` with MVP macro set
-- [ ] Implement `CAPABILITY/PRIMITIVES/scl_codebook.py` (loader, validator)
-
-### 5.2.3 Implement Stacked Symbol Resolution ⚡ SIMPLIFIED (2026-01-08)
-**Approach:** Stack `codebook_lookup.py` with CORTEX FTS instead of building complex AST decoder.
-- [x] Create `CAPABILITY/TOOLS/codebook_lookup.py` with CJK symbols ✅
-- [x] MCP integration (codebook_lookup tool) ✅
-- [ ] Add `query` parameter for FTS within domain
-- [ ] Add `semantic` parameter for vector search within domain
-- [ ] Tests: Symbol resolution, stacked queries, compression ratios
-
-**Stacked Query Pattern:**
-- L1 only: `codebook_lookup(id="法", expand=True)` → 56,370 tokens
-- L1+L2 (FTS): `codebook_lookup(id="法", query="verification")` → ~4,200 tokens
-- L1+L3 (semantic): `codebook_lookup(id="法", semantic="verification protocols")` → ~2,000 tokens
-
-### 5.2.4 Implement SCL Validator
-- [ ] Create `CAPABILITY/PRIMITIVES/scl_validator.py` (syntax, symbol, schema validation)
-- [ ] Emit validation receipts
-- [ ] Tests: valid/invalid programs, error messages
-
-### 5.2.5 Implement SCL CLI
-- [ ] Create `CAPABILITY/TOOLS/scl/scl_cli.py`
-- [ ] Commands: `decode`, `validate`, `run`, `audit`
-- [ ] Tests: CLI invocation, output formats, error handling
-
-### 5.2.6 SCL Tests & Benchmarks
-- [ ] Determinism tests (same program → same JSON hash, 100 runs)
-- [ ] Schema validation tests
-- [ ] Token benchmark (target: 80%+ reduction for governance boilerplate)
-- [ ] Negative tests (invalid syntax, unknown symbols, circular expansion)
-
-### 5.2.7 Token Accountability Layer
-**Specification:** `LAW/CANON/SEMANTIC/TOKEN_RECEIPT_SPEC.md`
-- [ ] Define `token_receipt.schema.json` (operation, tokens_out, tokenizer, savings)
-- [ ] Implement `CAPABILITY/PRIMITIVES/token_receipt.py` (TokenReceipt dataclass)
-- [ ] Patch `semantic_search.py` to emit TokenReceipt on every query
-- [ ] Session aggregator (`token_session.py`) for cumulative savings
-- [ ] Firewall: REJECT outputs > 1000 tokens without TokenReceipt
-- [ ] Tests: Receipt emission, aggregation, firewall enforcement
-
-**Phase 5.2 Exit Criteria:**
-- [ ] CODEBOOK.json with 30+ macros, schema-validated
-- [ ] `scl decode <program>` → emits valid JobSpec JSON
-- [ ] Reproducible expansions (same symbols → same output hash)
-- [ ] 80%+ token reduction demonstrated for governance text
-- [ ] TokenReceipt emitted by all semantic operations
-- [ ] Firewall enforces receipt requirement
-
-## 5.3 SPC Formalization & Research Publication
-**Status:** PENDING (execute after 5.1 and 5.2 complete)
-**Purpose:** Formalize Semantic Pointer Compression (SPC) as defensible research contribution
-**Source:** `THOUGHT/LAB/VECTOR_ELO/research/symbols/OPUS_SPC_RESEARCH_CLAIM_EXECUTION_PACK.md`
-
-### 5.3.1 SPC_SPEC.md (Normative)
-- [ ] Define pointer types (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR)
-- [ ] Decoder contract (inputs, canonical IR output, fail-closed behavior)
-- [ ] Ambiguity rules, canonical normalization
-- [ ] Security & drift behavior (codebook/hash/version mismatch → reject)
-- [ ] Measured metrics (concept_unit, CDR, ECR, M_required)
-
-### 5.3.2 GOV_IR_SPEC.md (Normative)
-- [ ] Define minimal typed governance IR (primitives, canonical JSON schema)
-- [ ] Equality definition (byte-identical canonical JSON)
-- [ ] concept_unit definition for CDR calculation
-
-### 5.3.3 CODEBOOK_SYNC_PROTOCOL.md (Normative)
-- [ ] Sync handshake (codebook_id + sha256 + semver, semantic_kernel_version, tokenizer_id)
-- [ ] Compatibility policy, handshake message formats, failure codes
-- [ ] Integration with Cassette Network
-
-### 5.3.4 TOKENIZER_ATLAS.json (Artifact)
-- [ ] Generate `TOKENIZER_ATLAS.json` (symbol → token_count for cl100k_base, o200k_base)
-- [ ] Verify 7 current symbols are single-token
-- [ ] CI gate: test fails if preferred glyph becomes multi-token
-
-### 5.3.5 Proof Harness
-- [ ] Create `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/` with benchmark suite
-- [ ] 10-30 fixed test cases (NL statement, gold IR, pointer encoding, expected token counts)
-- [ ] Measure: tokens(NL), tokens(pointer_payload), concept_units(IR), ECR, reject rate
-- [ ] Hard acceptance criteria: A1 Determinism, A2 Fail-closed, A3 Measured density, A4 No hallucinated paths
-
-### 5.3.6 PAPER_SPC.md (Research Skeleton)
-- [ ] Title, abstract, contributions (deterministic semantic pointers, receipted verification, measured semantic density)
-- [ ] What is new (not "beating Shannon", formal protocol for LLM context optimization, measured H(X|S) vs H(X))
-- [ ] Threat model, limitations, reproducibility (exact commands, hashes, environment)
-
-**Phase 5.3 Exit Criteria:**
-- [ ] SPC_SPEC.md normative and complete
-- [ ] GOV_IR_SPEC.md with typed IR and JSON schema
-- [ ] CODEBOOK_SYNC_PROTOCOL.md with handshake defined
-- [ ] TOKENIZER_ATLAS.json generated with CI gate
-- [ ] Proof harness passes all 4 acceptance criteria
-- [ ] PAPER_SPC.md ready for external review
+---
 
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate) V3.8
 

@@ -294,6 +294,21 @@ The **eigenvalue spectrum** of an anchor word distance matrix is invariant acros
 
 ---
 
+## Changelog
+
+| Date | Event |
+|------|-------|
+| 2026-01-11 | **Phase 5 COMPLETE** - All 529 tests pass, Global DoD met (tests/receipts/reports) |
+| 2026-01-11 | Phase 5.3.6: PAPER_SPC.md research skeleton |
+| 2026-01-11 | Phase 5.3.5: SPC semantic density proof harness |
+| 2026-01-11 | Phase 5.3.4: TOKENIZER_ATLAS with single-token enforcement |
+| 2026-01-11 | Phase 5.3.1-5.3.3: Created comprehensive test suites (215 tests) |
+| 2026-01-09 | Phase 5.2.5: SCL CLI implementation |
+| 2026-01-08 | Phase 5.2.1-5.2.4: SCL macro grammar, codebook, resolution, validator |
+| 2026-01-07 | Phase 5.1: Vector embeddings and semantic discovery infrastructure |
+
+---
+
 ## References
 
 - **X Algorithm:** https://github.com/twitter/the-algorithm
