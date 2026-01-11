@@ -4,6 +4,61 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.40] - 2026-01-11
+
+### Phase 5.3.2 COMPLETE — GOV_IR_SPEC.md (Normative)
+
+**Added:**
+- `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md` — Governance Intermediate Representation specification (~730 lines)
+- `LAW/SCHEMAS/gov_ir.schema.json` — JSON Schema for GOV_IR validation
+
+**Specification Contents:**
+- **IR Primitives (9 node types):**
+  - Semantic nodes: `constraint`, `permission`, `prohibition`, `reference`, `gate`
+  - Operations: `operation` (25 operators: AND, OR, NOT, EQ, IN, MATCH, EXISTS, etc.)
+  - Structural: `literal`, `sequence`, `record`
+  - Side-effects tracking: writes, deletes, creates, modifies_canon, requires_ceremony, emits_receipt
+- **Reference Types (6):**
+  - `path` — Relative paths from repo root
+  - `canon_version` — Semver strings
+  - `tool_id` — Tool identifiers
+  - `artifact_hash` — SHA-256 hashes
+  - `rule_id` / `invariant_id` — Contract/Invariant references
+- **Canonical JSON:**
+  - Stable key ordering (alphabetical Unicode code point)
+  - Explicit types (no coercion)
+  - UTF-8, NFC normalized, LF line endings
+  - Compact representation (no whitespace)
+- **Equality Definition:**
+  - `ir_equal(a, b) ≡ canonical_json(a) == canonical_json(b)` (byte-identical)
+  - `canonical_hash(obj)` = SHA-256 of canonical JSON
+- **concept_unit Definition:**
+  - Atomic governance meaning unit
+  - Types: constraint (1), permission (1), prohibition (1), reference (1), gate (1)
+  - Operations: AND (sum), OR (max), NOT (operand), others (1 + sum)
+  - Literals: 0 (structural only)
+  - `count_concept_units()` — Recursive counting function
+  - **CDR = concept_units / tokens** (Concept Density Ratio)
+
+**Governance Mappings:**
+- Contract rules (C1-C13) → IR
+- Invariants (INV-001 to INV-020) → IR
+- Verification gates → IR
+
+**Integration with SPC:**
+- SPC decode produces GOV_IR nodes
+- GOV_IR wrapped in JobSpec for execution
+- Enables measured metrics: CDR, ECR
+
+**Exit Criteria Met:**
+- [x] GOV_IR_SPEC.md defines complete typed IR (9 node types)
+- [x] JSON schema provided and validated (`gov_ir.schema.json`)
+- [x] concept_unit is measurable (counting function defined)
+
+**Next:** Phase 5.3.3 (CODEBOOK_SYNC_PROTOCOL.md) — Define sync handshake
+
+---
+
 ## [3.7.39] - 2026-01-11
 
 ### Phase 5.3.1 COMPLETE — SPC_SPEC.md (Normative)
@@ -19,7 +74,7 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 - **Canonical Normalization:** encode(decode(x)) stabilizes to declared normal form
 - **Security & Drift:** All mismatches → REJECT (no silent degradation, no best-effort)
 - **Metrics Defined:**
-  - `concept_unit` — atomic governance meaning
+  - `concept_unit` — atomic governance meaning (defined in GOV_IR_SPEC.md)
   - `CDR` = concept_units / tokens (Concept Density Ratio)
   - `ECR` = exact IR match rate (Exact Match Correctness)
   - `M_required` = multiplex factor for target nines
@@ -35,8 +90,6 @@ SPC = conditional compression with shared side-information
 - [x] SPC_SPEC.md is normative and complete
 - [x] All pointer types defined with examples
 - [x] Fail-closed behavior specified for all error cases
-
-**Next:** Phase 5.3.2 (GOV_IR_SPEC.md) — Define typed governance IR
 
 ---
 

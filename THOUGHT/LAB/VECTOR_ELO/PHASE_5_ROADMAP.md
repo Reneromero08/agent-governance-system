@@ -270,33 +270,38 @@ Every task must produce:
 
 ---
 
-## 5.3.2 GOV_IR_SPEC.md (Normative)
+## 5.3.2 GOV_IR_SPEC.md (Normative) ✅ COMPLETE (2026-01-11)
 
 **Purpose:** Define minimal typed governance IR so "meaning" is countable.
 
 ### Deliverables
-- [ ] Create `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md`
+- [x] Create `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md`
+- [x] Create `LAW/SCHEMAS/gov_ir.schema.json`
 
 ### Contents Required
-- [ ] **IR Primitives:**
-  - Boolean ops, comparisons
-  - Typed references (paths, canon versions, tool ids)
-  - Gates (tests, restore-proof, allowlist roots)
-  - Side-effects flags
-- [ ] **Canonical JSON Schema:**
-  - Stable ordering
-  - Explicit types
-  - Canonical string forms
-- [ ] **Equality Definition:**
+- [x] **IR Primitives:**
+  - Boolean ops (AND, OR, NOT, XOR, IMPLIES)
+  - Comparisons (EQ, NE, LT, LE, GT, GE)
+  - Typed references (paths, canon versions, tool ids, artifact hashes, rule/invariant ids)
+  - Gates (test, restore_proof, allowlist_check, hash_verify, schema_validate)
+  - Side-effects flags (writes, deletes, creates, modifies_canon, requires_ceremony, emits_receipt)
+- [x] **Canonical JSON Schema:**
+  - Stable ordering (alphabetical Unicode code point)
+  - Explicit types (no coercion)
+  - Canonical string forms (UTF-8, NFC, LF, no trailing whitespace)
+- [x] **Equality Definition:**
   - Equality = byte-identical canonical JSON
-- [ ] **concept_unit Definition:**
+  - `ir_equal(a, b) ≡ canonical_json(a) == canonical_json(b)`
+- [x] **concept_unit Definition:**
   - Atomic unit of governance meaning
-  - Used for CDR calculation
+  - Types: constraint (1), permission (1), prohibition (1), reference (1), gate (1)
+  - Counting rules for operations, sequences, records
+  - CDR = concept_units / tokens
 
-**Exit Criteria:**
-- [ ] GOV_IR_SPEC.md defines complete typed IR
-- [ ] JSON schema provided and validated
-- [ ] concept_unit is measurable
+**Exit Criteria:** ✅ ALL MET
+- [x] GOV_IR_SPEC.md defines complete typed IR (9 node types)
+- [x] JSON schema provided and validated (`gov_ir.schema.json`)
+- [x] concept_unit is measurable (counting function defined)
 
 ---
 
@@ -442,8 +447,8 @@ Every task must produce:
 
 ## Phase 5.3 Complete When:
 
-- [ ] SPC_SPEC.md normative and complete
-- [ ] GOV_IR_SPEC.md with typed IR and JSON schema
+- [x] SPC_SPEC.md normative and complete (5.3.1)
+- [x] GOV_IR_SPEC.md with typed IR and JSON schema (5.3.2)
 - [ ] CODEBOOK_SYNC_PROTOCOL.md with handshake defined
 - [ ] TOKENIZER_ATLAS.json generated with CI gate
 - [ ] Proof harness passes all 4 acceptance criteria

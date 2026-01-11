@@ -1,8 +1,31 @@
-<!-- CONTENT_HASH: 3.7.39_PENDING -->
+<!-- CONTENT_HASH: 3.7.40_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.40] - 2026-01-11
+
+### Added
+- **Phase 5.3.2: GOV_IR_SPEC.md** — Normative specification for Governance Intermediate Representation
+  - `LAW/CANON/SEMANTIC/GOV_IR_SPEC.md` — Typed governance IR for SPC integration (~730 lines)
+  - `LAW/SCHEMAS/gov_ir.schema.json` — JSON Schema for GOV_IR validation
+  - **IR Primitives (9 node types):**
+    - Semantic: `constraint`, `permission`, `prohibition`, `reference`, `gate`
+    - Operations: `operation` (25 operators: AND, OR, NOT, EQ, IN, MATCH, EXISTS, etc.)
+    - Structural: `literal`, `sequence`, `record`
+  - **Reference Types (6):** `path`, `canon_version`, `tool_id`, `artifact_hash`, `rule_id`, `invariant_id`
+  - **Canonical JSON normalization:** Stable alphabetical key ordering, explicit types, UTF-8/NFC/LF
+  - **Equality definition:** `ir_equal(a, b) ≡ canonical_json(a) == canonical_json(b)` (byte-identical)
+  - **concept_unit definition:** Atomic governance meaning unit with counting function
+    - Semantic nodes = 1 unit each
+    - Operations: AND (sum), OR (max), NOT (operand), others (1 + sum)
+    - Literals = 0 (structural only)
+  - **CDR formula:** `concept_units / tokens` (Concept Density Ratio)
+  - Governance mappings: Contract rules (C1-C13), Invariants (INV-001 to INV-020), Gates → IR
+  - Enables SPC pointer expansion to typed governance IR with measurable concept density
 
 ---
 

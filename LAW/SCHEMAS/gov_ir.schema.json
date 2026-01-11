@@ -1,0 +1,346 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://ags.example.com/schemas/gov_ir.schema.json",
+  "title": "GOV_IR Node",
+  "description": "Governance Intermediate Representation node schema. Defines typed governance meaning for SPC compression.",
+  "type": "object",
+  "required": ["type"],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "constraint",
+        "permission",
+        "prohibition",
+        "reference",
+        "gate",
+        "operation",
+        "literal",
+        "sequence",
+        "record"
+      ],
+      "description": "IR node type"
+    },
+    "id": {
+      "type": "string",
+      "description": "Optional unique identifier for this node"
+    },
+    "source": {
+      "type": "string",
+      "description": "Optional source location (path:line)"
+    },
+    "metadata": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Optional metadata"
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "type": { "const": "constraint" } }
+      },
+      "then": {
+        "$ref": "#/$defs/constraint"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "permission" } }
+      },
+      "then": {
+        "$ref": "#/$defs/permission"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "prohibition" } }
+      },
+      "then": {
+        "$ref": "#/$defs/prohibition"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "reference" } }
+      },
+      "then": {
+        "$ref": "#/$defs/reference"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "gate" } }
+      },
+      "then": {
+        "$ref": "#/$defs/gate"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "operation" } }
+      },
+      "then": {
+        "$ref": "#/$defs/operation"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "literal" } }
+      },
+      "then": {
+        "$ref": "#/$defs/literal"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "sequence" } }
+      },
+      "then": {
+        "$ref": "#/$defs/sequence"
+      }
+    },
+    {
+      "if": {
+        "properties": { "type": { "const": "record" } }
+      },
+      "then": {
+        "$ref": "#/$defs/record"
+      }
+    }
+  ],
+  "$defs": {
+    "ir_node": {
+      "type": "object",
+      "required": ["type"],
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "constraint",
+            "permission",
+            "prohibition",
+            "reference",
+            "gate",
+            "operation",
+            "literal",
+            "sequence",
+            "record"
+          ]
+        }
+      }
+    },
+    "constraint": {
+      "type": "object",
+      "required": ["op", "subject", "predicate", "severity"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": ["requires", "ensures", "maintains"],
+          "description": "Constraint operation type"
+        },
+        "subject": {
+          "$ref": "#/$defs/ir_node",
+          "description": "What the constraint applies to"
+        },
+        "predicate": {
+          "$ref": "#/$defs/ir_node",
+          "description": "What must be true"
+        },
+        "severity": {
+          "type": "string",
+          "enum": ["must", "should", "may"],
+          "description": "Constraint severity level"
+        },
+        "side_effects": {
+          "$ref": "#/$defs/side_effects"
+        }
+      }
+    },
+    "permission": {
+      "type": "object",
+      "required": ["op", "subject", "scope"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": ["allows", "grants", "enables"],
+          "description": "Permission operation type"
+        },
+        "subject": {
+          "$ref": "#/$defs/ir_node",
+          "description": "What is being permitted"
+        },
+        "scope": {
+          "$ref": "#/$defs/ir_node",
+          "description": "Scope of the permission"
+        },
+        "conditions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ir_node" },
+          "description": "Conditions for the permission"
+        }
+      }
+    },
+    "prohibition": {
+      "type": "object",
+      "required": ["op", "subject", "target"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": ["forbids", "denies", "blocks"],
+          "description": "Prohibition operation type"
+        },
+        "subject": {
+          "$ref": "#/$defs/ir_node",
+          "description": "What is prohibited"
+        },
+        "target": {
+          "$ref": "#/$defs/ir_node",
+          "description": "Target of the prohibition"
+        },
+        "exceptions": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ir_node" },
+          "description": "Exceptions to the prohibition"
+        }
+      }
+    },
+    "reference": {
+      "type": "object",
+      "required": ["ref_type", "value"],
+      "properties": {
+        "ref_type": {
+          "type": "string",
+          "enum": ["path", "canon_version", "tool_id", "artifact_hash", "rule_id", "invariant_id"],
+          "description": "Type of reference"
+        },
+        "value": {
+          "type": "string",
+          "description": "Reference value"
+        },
+        "anchor": {
+          "type": "string",
+          "description": "Optional hash or version anchor"
+        }
+      }
+    },
+    "gate": {
+      "type": "object",
+      "required": ["gate_type", "target", "pass_criteria", "fail_action"],
+      "properties": {
+        "gate_type": {
+          "type": "string",
+          "enum": ["test", "restore_proof", "allowlist_check", "hash_verify", "schema_validate"],
+          "description": "Type of verification gate"
+        },
+        "target": {
+          "$ref": "#/$defs/ir_node",
+          "description": "What is being verified"
+        },
+        "pass_criteria": {
+          "$ref": "#/$defs/ir_node",
+          "description": "Criteria for passing"
+        },
+        "fail_action": {
+          "type": "string",
+          "enum": ["reject", "warn", "log"],
+          "description": "Action on failure"
+        }
+      }
+    },
+    "operation": {
+      "type": "object",
+      "required": ["op", "operands"],
+      "properties": {
+        "op": {
+          "type": "string",
+          "enum": [
+            "AND", "OR", "NOT", "XOR", "IMPLIES",
+            "EQ", "NE", "LT", "LE", "GT", "GE",
+            "IN", "NOT_IN", "SUBSET", "SUPERSET", "INTERSECTS",
+            "MATCH", "STARTS_WITH", "ENDS_WITH", "CONTAINS",
+            "EXISTS", "NOT_EXISTS", "IS_NULL", "IS_NOT_NULL"
+          ],
+          "description": "Operation type"
+        },
+        "operands": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ir_node" },
+          "description": "Operation operands"
+        }
+      }
+    },
+    "literal": {
+      "type": "object",
+      "required": ["value_type", "value"],
+      "properties": {
+        "value_type": {
+          "type": "string",
+          "enum": ["string", "integer", "number", "boolean", "null"],
+          "description": "Literal value type"
+        },
+        "value": {
+          "description": "Literal value (type must match value_type)"
+        }
+      }
+    },
+    "sequence": {
+      "type": "object",
+      "required": ["elements"],
+      "properties": {
+        "elements": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/ir_node" },
+          "description": "Sequence elements"
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "required": ["fields"],
+      "properties": {
+        "fields": {
+          "type": "object",
+          "additionalProperties": { "$ref": "#/$defs/ir_node" },
+          "description": "Record fields"
+        }
+      }
+    },
+    "side_effects": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "writes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Paths that may be written"
+        },
+        "deletes": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Paths that may be deleted"
+        },
+        "creates": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Paths that may be created"
+        },
+        "modifies_canon": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether this modifies LAW/CANON"
+        },
+        "requires_ceremony": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether ADR/version bump is required"
+        },
+        "emits_receipt": {
+          "type": "boolean",
+          "default": false,
+          "description": "Whether a TokenReceipt is emitted"
+        }
+      }
+    }
+  }
+}
