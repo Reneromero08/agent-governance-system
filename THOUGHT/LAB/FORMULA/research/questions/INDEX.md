@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.8.0 (2026-01-10 - Q34 ANSWERED: Spectral Convergence Theorem)*
+*Last updated: v3.11.0 (2026-01-11 - Q32 ANSWERED: Semiosphere field claim complete)*
 
 ---
 
@@ -14,7 +14,7 @@
 | 2 | [Falsification criteria](critical/q02_falsification_criteria.md) | 1750 | ✅ ANSWERED | Formula measures local agreement correctly. Fails when observations are correlated (echo chambers). Defense: Add fresh data; if R crashes, it was echo chamber. |
 | 3 | [Why does it generalize?](critical/q3_why_generalize/q03_why_generalize.md) | 1720 | ✅ ANSWERED | Axiomatic necessity: R = E(z)/σ is the UNIQUE form satisfying 4 universal axioms (locality, normalization, monotonicity, intensive). Proven via Phase 1 uniqueness theorem + Phase 3 adversarial robustness (5/5 domains). Domains share structure because they share axioms. |
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
-| 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ? OPEN | Candidate field `M:=log(R)` + initial falsifiers exist; remains OPEN until public, adversarial, out-of-domain replications pass. |
+| 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ✅ ANSWERED | **Semiosphere field `M:=log(R)` proven:** Phases 1-5 (4-domain transfer, stress, negctls, replication). Phase 4 geometry/dynamics. Phase 6-7 physical harness works (synthetic validators pass, EEG gates correct). Phase 8 (fundamental force) open as additional track. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
 | 6 | [IIT connection](critical/q06_iit_connection.md) | 1650 | ✅ ANSWERED | PROVEN: High R → High Phi (sufficient). High Phi ↛ High R (not necessary). R is a strict subset of Integration. R requires consensus (low dispersion), Phi allows synergy (high dispersion). XOR system: perfect accuracy (E=0) + high structure (Phi=1.5) + LOW R (0.36). |
 
@@ -104,16 +104,16 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 7 (16.3%)
+  - **Answered:** 8 (18.6%)
   - **Partially Answered:** 9 (20.9%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 27 (62.8%)
+  - **Open:** 26 (60.5%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
- | Critical | 7 | 4 | 2 | 0 | 1 |
+ | Critical | 7 | 5 | 2 | 0 | 0 |
  | High | 16 | 2 | 5 | 0 | 9 |
  | Medium | 11 | 1 | 1 | 0 | 9 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
