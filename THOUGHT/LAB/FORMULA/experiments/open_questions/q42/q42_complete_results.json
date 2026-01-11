@@ -45,7 +45,7 @@
         "n_total": 5,
         "all_passed": "True",
         "apparatus_valid": "True",
-        "timestamp": "2026-01-11T08:50:45.628562"
+        "timestamp": "2026-01-11T09:13:50.279897"
       }
     },
     "test1_semantic_chsh": {
@@ -55,71 +55,71 @@
           {
             "concept_A": "particle",
             "concept_B": "wave",
-            "S": 0.04,
+            "S": 0.04000000000000001,
             "S_std": 5.551115123125783e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.08,
-              "E_ab_prime": 0.0,
-              "E_a_prime_b": -0.04,
-              "E_a_prime_b_prime": -0.08
+              "E_ab": 0.12,
+              "E_ab_prime": -0.04,
+              "E_a_prime_b": 0.0,
+              "E_a_prime_b_prime": -0.12
             }
           },
           {
             "concept_A": "position",
             "concept_B": "momentum",
-            "S": 0.36,
-            "S_std": 0.0,
+            "S": 0.28,
+            "S_std": 2.7755575615628914e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
               "E_ab": -0.04,
-              "E_ab_prime": 0.16,
-              "E_a_prime_b": 0.08,
-              "E_a_prime_b_prime": -0.24
+              "E_ab_prime": 0.04,
+              "E_a_prime_b": -0.08,
+              "E_a_prime_b_prime": -0.12
             }
           },
           {
             "concept_A": "past",
             "concept_B": "future",
-            "S": 0.08,
-            "S_std": 0.0,
+            "S": 0.07999999999999999,
+            "S_std": 5.551115123125783e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.08,
-              "E_ab_prime": 0.04,
-              "E_a_prime_b": -0.04,
-              "E_a_prime_b_prime": -0.08
+              "E_ab": -0.12,
+              "E_ab_prime": -0.12,
+              "E_a_prime_b": -0.12,
+              "E_a_prime_b_prime": 0.04
             }
           },
           {
             "concept_A": "cause",
             "concept_B": "effect",
-            "S": 0.08000000000000002,
-            "S_std": 5.551115123125783e-17,
+            "S": 0.12,
+            "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
               "E_ab": 0.04,
               "E_ab_prime": -0.12,
               "E_a_prime_b": -0.04,
-              "E_a_prime_b_prime": -0.2
+              "E_a_prime_b_prime": 0.0
             }
           },
           {
             "concept_A": "subject",
             "concept_B": "object",
-            "S": 0.12,
-            "S_std": 5.551115123125783e-17,
+            "S": 0.27999999999999997,
+            "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
               "E_ab": 0.0,
-              "E_ab_prime": 0.0,
-              "E_a_prime_b": 0.0,
-              "E_a_prime_b_prime": 0.12
+              "E_ab_prime": 0.08,
+              "E_a_prime_b": -0.16,
+              "E_a_prime_b_prime": -0.04
             }
           }
         ],
@@ -127,9 +127,9 @@
           "n_pairs": 5,
           "n_violations": 0,
           "n_significant": 0,
-          "mean_S": 0.136,
-          "max_S": 0.36,
-          "min_S": 0.04
+          "mean_S": 0.16,
+          "max_S": 0.28,
+          "min_S": 0.04000000000000001
         }
       },
       "antonyms": {
@@ -138,7 +138,35 @@
           {
             "concept_A": "hot",
             "concept_B": "cold",
-            "S": 0.32,
+            "S": 0.04,
+            "S_std": 0.0,
+            "is_violation": "False",
+            "is_significant": "False",
+            "correlations": {
+              "E_ab": 0.08,
+              "E_ab_prime": 0.08,
+              "E_a_prime_b": -0.04,
+              "E_a_prime_b_prime": 0.08
+            }
+          },
+          {
+            "concept_A": "good",
+            "concept_B": "evil",
+            "S": 0.04,
+            "S_std": 2.7755575615628914e-17,
+            "is_violation": "False",
+            "is_significant": "False",
+            "correlations": {
+              "E_ab": 0.04,
+              "E_ab_prime": 0.04,
+              "E_a_prime_b": 0.0,
+              "E_a_prime_b_prime": -0.04
+            }
+          },
+          {
+            "concept_A": "light",
+            "concept_B": "dark",
+            "S": 0.12,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
@@ -146,63 +174,35 @@
               "E_ab": -0.08,
               "E_ab_prime": 0.08,
               "E_a_prime_b": -0.08,
-              "E_a_prime_b_prime": -0.08
-            }
-          },
-          {
-            "concept_A": "good",
-            "concept_B": "evil",
-            "S": 0.08,
-            "S_std": 5.551115123125783e-17,
-            "is_violation": "False",
-            "is_significant": "False",
-            "correlations": {
-              "E_ab": -0.08,
-              "E_ab_prime": 0.08,
-              "E_a_prime_b": 0.0,
-              "E_a_prime_b_prime": 0.08
-            }
-          },
-          {
-            "concept_A": "light",
-            "concept_B": "dark",
-            "S": 0.24,
-            "S_std": 2.7755575615628914e-17,
-            "is_violation": "False",
-            "is_significant": "False",
-            "correlations": {
-              "E_ab": 0.08,
-              "E_ab_prime": 0.08,
-              "E_a_prime_b": -0.16,
-              "E_a_prime_b_prime": -0.08
+              "E_a_prime_b_prime": 0.12
             }
           },
           {
             "concept_A": "life",
             "concept_B": "death",
-            "S": 0.039999999999999994,
-            "S_std": 1.3877787807814457e-17,
+            "S": 0.07999999999999999,
+            "S_std": 2.7755575615628914e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.0,
-              "E_ab_prime": -0.04,
-              "E_a_prime_b": 0.08,
-              "E_a_prime_b_prime": -0.08
+              "E_ab": 0.08,
+              "E_ab_prime": 0.04,
+              "E_a_prime_b": 0.0,
+              "E_a_prime_b_prime": -0.12
             }
           },
           {
             "concept_A": "self",
             "concept_B": "other",
-            "S": 0.16,
-            "S_std": 0.0,
+            "S": 0.24,
+            "S_std": 1.1102230246251565e-16,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.0,
-              "E_ab_prime": -0.04,
-              "E_a_prime_b": -0.04,
-              "E_a_prime_b_prime": -0.16
+              "E_ab": 0.04,
+              "E_ab_prime": 0.0,
+              "E_a_prime_b": 0.08,
+              "E_a_prime_b_prime": 0.12
             }
           }
         ],
@@ -210,9 +210,9 @@
           "n_pairs": 5,
           "n_violations": 0,
           "n_significant": 0,
-          "mean_S": 0.168,
-          "max_S": 0.32,
-          "min_S": 0.039999999999999994
+          "mean_S": 0.10400000000000001,
+          "max_S": 0.24,
+          "min_S": 0.04
         }
       },
       "emergent": {
@@ -221,57 +221,57 @@
           {
             "concept_A": "supply",
             "concept_B": "demand",
-            "S": 0.2,
+            "S": 0.03999999999999998,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": -0.16,
-              "E_ab_prime": 0.0,
-              "E_a_prime_b": 0.12,
-              "E_a_prime_b_prime": -0.16
+              "E_ab": 0.08,
+              "E_ab_prime": -0.12,
+              "E_a_prime_b": -0.24,
+              "E_a_prime_b_prime": 0.0
             }
           },
           {
             "concept_A": "crime",
             "concept_B": "punishment",
-            "S": 0.08000000000000002,
-            "S_std": 5.551115123125783e-17,
-            "is_violation": "False",
-            "is_significant": "False",
-            "correlations": {
-              "E_ab": 0.12,
-              "E_ab_prime": 0.2,
-              "E_a_prime_b": 0.0,
-              "E_a_prime_b_prime": 0.0
-            }
-          },
-          {
-            "concept_A": "question",
-            "concept_B": "answer",
-            "S": 0.04000000000000001,
+            "S": 0.08,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
               "E_ab": -0.04,
-              "E_ab_prime": -0.08,
-              "E_a_prime_b": -0.16,
-              "E_a_prime_b_prime": 0.16
+              "E_ab_prime": -0.04,
+              "E_a_prime_b": -0.04,
+              "E_a_prime_b_prime": -0.04
+            }
+          },
+          {
+            "concept_A": "question",
+            "concept_B": "answer",
+            "S": 0.16,
+            "S_std": 0.0,
+            "is_violation": "False",
+            "is_significant": "False",
+            "correlations": {
+              "E_ab": 0.08,
+              "E_ab_prime": 0.16,
+              "E_a_prime_b": -0.04,
+              "E_a_prime_b_prime": -0.04
             }
           },
           {
             "concept_A": "problem",
             "concept_B": "solution",
-            "S": 1.3877787807814457e-17,
-            "S_std": 0.0,
+            "S": 0.16,
+            "S_std": 5.551115123125783e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.0,
-              "E_ab_prime": 0.12,
-              "E_a_prime_b": 0.04,
-              "E_a_prime_b_prime": 0.08
+              "E_ab": -0.08,
+              "E_ab_prime": -0.08,
+              "E_a_prime_b": 0.12,
+              "E_a_prime_b_prime": 0.04
             }
           },
           {
@@ -282,10 +282,10 @@
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.12,
-              "E_ab_prime": 0.0,
-              "E_a_prime_b": -0.16,
-              "E_a_prime_b_prime": 0.12
+              "E_ab": 0.04,
+              "E_ab_prime": -0.04,
+              "E_a_prime_b": -0.12,
+              "E_a_prime_b_prime": -0.04
             }
           }
         ],
@@ -293,9 +293,9 @@
           "n_pairs": 5,
           "n_violations": 0,
           "n_significant": 0,
-          "mean_S": 0.08,
-          "max_S": 0.2,
-          "min_S": 1.3877787807814457e-17
+          "mean_S": 0.10399999999999998,
+          "max_S": 0.16,
+          "min_S": 0.03999999999999998
         }
       },
       "control_uncorrelated": {
@@ -304,71 +304,71 @@
           {
             "concept_A": "apple",
             "concept_B": "democracy",
-            "S": 0.28,
+            "S": 0.16,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": -0.04,
-              "E_ab_prime": -0.04,
-              "E_a_prime_b": -0.2,
-              "E_a_prime_b_prime": -0.08
+              "E_ab": 0.08,
+              "E_ab_prime": 0.08,
+              "E_a_prime_b": 0.0,
+              "E_a_prime_b_prime": 0.16
             }
           },
           {
             "concept_A": "blue",
             "concept_B": "velocity",
-            "S": 0.07999999999999999,
-            "S_std": 0.0,
+            "S": 0.16,
+            "S_std": 5.551115123125783e-17,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": -0.04,
-              "E_ab_prime": -0.16,
-              "E_a_prime_b": -0.08,
-              "E_a_prime_b_prime": 0.04
+              "E_ab": 0.08,
+              "E_ab_prime": 0.0,
+              "E_a_prime_b": 0.08,
+              "E_a_prime_b_prime": 0.0
             }
           },
           {
             "concept_A": "mountain",
             "concept_B": "algorithm",
-            "S": 0.12000000000000002,
+            "S": 0.28,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
               "E_ab": 0.0,
-              "E_ab_prime": 0.12,
-              "E_a_prime_b": 0.2,
-              "E_a_prime_b_prime": 0.04
+              "E_ab_prime": -0.08,
+              "E_a_prime_b": 0.04,
+              "E_a_prime_b_prime": 0.16
             }
           },
           {
             "concept_A": "pencil",
             "concept_B": "justice",
-            "S": 0.039999999999999994,
-            "S_std": 0.0,
+            "S": 0.08000000000000002,
+            "S_std": 6.938893903907228e-18,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": -0.08,
-              "E_ab_prime": -0.08,
-              "E_a_prime_b": -0.12,
-              "E_a_prime_b_prime": 0.08
+              "E_ab": 0.0,
+              "E_ab_prime": -0.12,
+              "E_a_prime_b": 0.08,
+              "E_a_prime_b_prime": -0.12
             }
           },
           {
             "concept_A": "cloud",
             "concept_B": "fraction",
-            "S": 0.2,
+            "S": 0.03999999999999999,
             "S_std": 0.0,
             "is_violation": "False",
             "is_significant": "False",
             "correlations": {
-              "E_ab": 0.12,
-              "E_ab_prime": -0.04,
-              "E_a_prime_b": -0.04,
-              "E_a_prime_b_prime": 0.08
+              "E_ab": -0.08,
+              "E_ab_prime": 0.04,
+              "E_a_prime_b": 0.04,
+              "E_a_prime_b_prime": 0.04
             }
           }
         ],
@@ -376,23 +376,23 @@
           "n_pairs": 5,
           "n_violations": 0,
           "n_significant": 0,
-          "mean_S": 0.144,
+          "mean_S": 0.14400000000000004,
           "max_S": 0.28,
-          "min_S": 0.039999999999999994
+          "min_S": 0.03999999999999999
         }
       },
       "angle_scan": {
         "concept_A": "particle",
         "concept_B": "wave",
-        "best_S": 1.92,
+        "best_S": 1.7800000000000002,
         "best_angles_deg": [
-          133.71428571428572,
-          223.71428571428572,
-          169.71428571428572,
-          259.7142857142857
+          66.85714285714286,
+          156.85714285714286,
+          118.28571428571429,
+          208.28571428571428
         ],
-        "mean_S": 1.2435648148148148,
-        "max_S": 1.92,
+        "mean_S": 1.1671913580246913,
+        "max_S": 1.7800000000000002,
         "n_above_2": 0,
         "n_total": 1296,
         "is_violation": "False"
@@ -411,23 +411,23 @@
           1.0
         ],
         "S_values": [
-          0.16,
           0.28,
-          0.24,
+          0.32,
+          0.32,
+          0.4,
+          0.28,
           0.08,
-          0.08,
-          0.2,
-          0.07999999999999999,
-          0.2,
-          0.24,
-          0.24
+          0.28,
+          0.04000000000000001,
+          0.36,
+          0.04000000000000001
         ],
-        "max_S": 0.28,
-        "correlation_S": 0.08690481892534806
+        "max_S": 0.4,
+        "correlation_S": -0.5232559521341829
       },
       "summary": {
-        "max_S": 0.36,
-        "mean_S": 0.13200000000000003,
+        "max_S": 0.28,
+        "mean_S": 0.12800000000000003,
         "total_pairs": 20,
         "total_violations": 0,
         "significant_violations": 0,
@@ -435,7 +435,7 @@
         "h0_status": "CONFIRMED",
         "h1_status": "REJECTED",
         "classical_bound": 2.0,
-        "timestamp": "2026-01-11T08:51:38.375681"
+        "timestamp": "2026-01-11T09:14:49.954298"
       }
     },
     "test2_joint_r": {
@@ -516,7 +516,7 @@
         "verdict": "Joint R is factorizable for all cases (H0 supported)",
         "h0_status": "CONFIRMED",
         "h1_status": "REJECTED",
-        "timestamp": "2026-01-11T08:51:38.381455"
+        "timestamp": "2026-01-11T09:14:49.958352"
       }
     },
     "test3_acausal": {
@@ -562,46 +562,46 @@
         "h1_status": "REJECTED",
         "bootstrap_p": 0.313,
         "observed_corr": -0.1476198146359023,
-        "timestamp": "2026-01-11T08:51:39.204595"
+        "timestamp": "2026-01-11T09:14:51.106241"
       }
     },
     "test4_complementarity": {
       "xor": {
-        "error": 0.5004,
-        "dispersion": 0.4034580169959492,
-        "Phi": 0.0,
-        "R": 1.1690997782372827,
-        "is_synergistic": false,
-        "passed": false
+        "error": 0.0,
+        "dispersion": 3.28907143061715,
+        "Phi": 1.7402096548184423,
+        "R": 0.3648146582758487,
+        "is_synergistic": "True",
+        "passed": "True"
       },
       "redundant": {
-        "error": 0.00396256176150812,
-        "dispersion": 0.007992560937163095,
-        "Phi": 6.7231472412315485,
-        "R": 142.3492839102457,
+        "error": 0.8012178421305364,
+        "dispersion": 0.0,
+        "Phi": 7.53344398123632,
+        "R": 6135788777.814654,
         "is_redundant": "True",
         "passed": "True"
       },
       "independent": {
-        "error": 0.8949824502875176,
-        "dispersion": 0.7992560937163093,
-        "Phi": 0.0,
-        "R": 0.6320290072673577,
+        "error": 0.798620647812385,
+        "dispersion": 1.5951258645229116,
+        "Phi": 0.3935866206252676,
+        "R": 0.49480223532157835,
         "is_independent": "True",
         "passed": "True"
       },
       "correlation": {
         "R_values": [
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
-          1.1690997782372827,
+          0.36691359895602976,
+          0.3676293884454111,
+          0.3631706281092081,
+          0.36774144721949414,
+          0.35816411297390577,
+          0.3654104370449043,
+          0.36668106237704107,
+          0.3624227936314861,
+          0.3634672618936686,
+          0.3687862050845557,
           100.0,
           100.0,
           100.0,
@@ -612,86 +612,95 @@
           100.0,
           100.0,
           100.0,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107,
-          1.1609636036268107
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897,
+          1.7219684256281897
         ],
         "Phi_values": [
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          6.7231472412315485,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298,
-          4.59873840003298
+          1.7653052600151806,
+          1.7446728969192131,
+          1.7510594632444274,
+          1.7501589851737087,
+          1.7524564686013049,
+          1.7607941216494467,
+          1.779983520824901,
+          1.7658854516207771,
+          1.736259266247706,
+          1.7276960345423102,
+          7.203689325914947,
+          7.7705851749444514,
+          7.419762310633727,
+          7.521998308419713,
+          7.619397091881508,
+          7.316007187104779,
+          7.425525264660001,
+          7.608149244514575,
+          8.012676063682607,
+          7.392890732329573,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124,
+          1.7544710040878124
         ],
-        "correlation": 0.7431441846680136,
-        "p_value": 2.5506588616697665e-06,
+        "correlation": 0.9988061122690135,
+        "p_value": 2.9056723327933493e-38,
         "passed": true
       },
       "complementarity": {
-        "R_alone_accuracy": 1.0,
-        "joint_accuracy": 0.6666666666666666,
-        "improvement": -0.33333333333333337,
-        "passed": "False"
+        "high_r_implies_high_phi": 1.0,
+        "high_phi_implies_high_r": 0.0,
+        "xor_mean_phi": 1.7652839953588337,
+        "xor_mean_r": 0.3634688675944034,
+        "redundant_mean_phi": 7.471073630544946,
+        "phi_threshold": 0.3874383429317538,
+        "R_threshold": 1.0,
+        "asymmetry_demonstrated": "True",
+        "implication_1_holds": "True",
+        "implication_2_fails": "True",
+        "passed": "True"
       },
       "summary": {
-        "n_passed": 3,
+        "n_passed": 5,
         "n_total": 5,
-        "verdict": "H2 INCONCLUSIVE: Need more evidence",
-        "h2_status": "INCONCLUSIVE",
-        "xor_synergistic": false,
+        "verdict": "H2 CONFIRMED: R and Phi are complementary",
+        "h2_status": "CONFIRMED",
+        "xor_synergistic": "True",
         "redundant_consensus": "True",
-        "joint_improves": "False",
-        "timestamp": "2026-01-11T08:51:39.361170"
+        "asymmetry_proven": "True",
+        "xor_phi": 1.7652839953588337,
+        "xor_r": 0.3634688675944034,
+        "timestamp": "2026-01-11T09:14:58.546154"
       }
     }
   },
   "verdict": {
-    "final": "H0 CONFIRMED: R is fundamentally local (A1 correct)",
+    "final": "H0 + H2 CONFIRMED: R is local BY DESIGN, Phi captures non-local",
     "h0_locality": "CONFIRMED",
     "h1_nonlocality": "REJECTED",
-    "h2_complementarity": "UNCERTAIN"
+    "h2_complementarity": "CONFIRMED"
   },
   "key_metrics": {
-    "max_semantic_chsh": 0.36,
+    "max_semantic_chsh": 0.28,
     "acausal_correlation": -0.1476198146359023,
     "quantum_control_passed": "True"
   },
   "metadata": {
-    "start_time": "2026-01-11T08:50:45.430890",
-    "end_time": "2026-01-11T08:51:39.361170",
-    "duration_seconds": 53.93028,
+    "start_time": "2026-01-11T09:13:50.081422",
+    "end_time": "2026-01-11T09:14:58.546154",
+    "duration_seconds": 68.464732,
     "version": "1.0.0"
   }
 }
