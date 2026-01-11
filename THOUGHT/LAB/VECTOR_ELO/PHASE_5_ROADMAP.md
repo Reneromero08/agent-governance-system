@@ -233,40 +233,40 @@ Every task must produce:
 
 ---
 
-## 5.3.1 SPC_SPEC.md (Normative)
+## 5.3.1 SPC_SPEC.md (Normative) ✅ COMPLETE (2026-01-11)
 
 **Purpose:** Formal specification for Semantic Pointer Compression protocol.
 
 ### Deliverables
-- [ ] Create `LAW/CANON/SEMANTIC/SPC_SPEC.md`
+- [x] Create `LAW/CANON/SEMANTIC/SPC_SPEC.md`
 
 ### Contents Required
-- [ ] **Pointer Types:**
+- [x] **Pointer Types:**
   - `SYMBOL_PTR`: Single-token glyph pointers (法, 真, 道)
   - `HASH_PTR`: Content-addressed pointers (SHA-256)
-  - `COMPOSITE_PTR`: Pointer plus typed qualifiers (法.query("verification"))
-- [ ] **Decoder Contract:**
+  - `COMPOSITE_PTR`: Pointer plus typed qualifiers (法.驗, C3:build)
+- [x] **Decoder Contract:**
   - Inputs: pointer, context keys, codebook_id, codebook_sha256, kernel_version, tokenizer_id
   - Output: canonical IR subtree OR FAIL_CLOSED with explicit error code
-- [ ] **Ambiguity Rules:**
+- [x] **Ambiguity Rules:**
   - Multiple expansions possible → reject unless disambiguation is explicit and deterministic
-- [ ] **Canonical Normalization:**
+- [x] **Canonical Normalization:**
   - `encode(decode(x))` stabilizes to declared normal form
-- [ ] **Security & Drift Behavior:**
+- [x] **Security & Drift Behavior:**
   - Codebook mismatch → reject
   - Hash mismatch → reject
   - Unknown symbol → reject
   - Unknown kernel version → reject
-- [ ] **Measured Metrics:**
+- [x] **Measured Metrics:**
   - `concept_unit` definition (ties to GOV_IR_SPEC)
   - `CDR = concept_units / tokens`
   - `ECR = exact IR match rate`
   - `M_required = multiplex factor for target nines`
 
-**Exit Criteria:**
-- [ ] SPC_SPEC.md is normative and complete
-- [ ] All pointer types defined with examples
-- [ ] Fail-closed behavior specified for all error cases
+**Exit Criteria:** ✅ ALL MET
+- [x] SPC_SPEC.md is normative and complete
+- [x] All pointer types defined with examples
+- [x] Fail-closed behavior specified for all error cases
 
 ---
 

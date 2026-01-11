@@ -4,6 +4,42 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.39] - 2026-01-11
+
+### Phase 5.3.1 COMPLETE — SPC_SPEC.md (Normative)
+
+**Added:**
+- `LAW/CANON/SEMANTIC/SPC_SPEC.md` — Formal specification for Semantic Pointer Compression protocol
+
+**Specification Contents:**
+- **Pointer Types:** SYMBOL_PTR (CJK glyphs), HASH_PTR (SHA-256), COMPOSITE_PTR (qualified)
+- **Decoder Contract:** Inputs (pointer, context_keys, codebook_id, codebook_sha256, kernel_version, tokenizer_id) → IR or FAIL_CLOSED
+- **Error Codes:** 12 explicit FAIL_CLOSED codes (E_CODEBOOK_MISMATCH, E_UNKNOWN_SYMBOL, E_AMBIGUOUS, etc.)
+- **Ambiguity Rules:** Reject unless disambiguation explicit and deterministic
+- **Canonical Normalization:** encode(decode(x)) stabilizes to declared normal form
+- **Security & Drift:** All mismatches → REJECT (no silent degradation, no best-effort)
+- **Metrics Defined:**
+  - `concept_unit` — atomic governance meaning
+  - `CDR` = concept_units / tokens (Concept Density Ratio)
+  - `ECR` = exact IR match rate (Exact Match Correctness)
+  - `M_required` = multiplex factor for target nines
+
+**Theoretical Foundation:**
+```
+H(X|S) = H(X) - I(X;S)
+When S contains X: H(X|S) ≈ log₂(N) bits
+SPC = conditional compression with shared side-information
+```
+
+**Exit Criteria Met:**
+- [x] SPC_SPEC.md is normative and complete
+- [x] All pointer types defined with examples
+- [x] Fail-closed behavior specified for all error cases
+
+**Next:** Phase 5.3.2 (GOV_IR_SPEC.md) — Define typed governance IR
+
+---
+
 ## [3.7.38] - 2026-01-10
 
 ### E.X.4.3 COMPLETE — LLM Activation Compression (85x)

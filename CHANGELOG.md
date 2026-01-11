@@ -6,9 +6,19 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [3.7.39] - 2026-01-10
+## [3.7.39] - 2026-01-11
 
 ### Added
+- **Phase 5.3.1: SPC_SPEC.md** — Normative specification for Semantic Pointer Compression
+  - `LAW/CANON/SEMANTIC/SPC_SPEC.md` — Formal decoder contract and protocol specification
+  - Pointer types: SYMBOL_PTR (CJK glyphs), HASH_PTR (SHA-256), COMPOSITE_PTR (qualified)
+  - Decoder contract: 6 mandatory inputs → IR or FAIL_CLOSED
+  - 12 fail-closed error codes (E_CODEBOOK_MISMATCH, E_UNKNOWN_SYMBOL, E_AMBIGUOUS, etc.)
+  - Ambiguity rejection rules and canonical IR normalization
+  - Security and drift prevention (no silent degradation)
+  - Measured metrics: CDR (Concept Density Ratio), ECR (Exact Match Correctness), M_required
+  - Information-theoretic foundation: H(X|S) = H(X) - I(X;S)
+
 - **Phase 5.2.7: Token Accountability** — Complete token tracking and enforcement system
   - **5.2.7.1 Schema**: `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
     - Required: `schema_version`, `operation`, `tokens_out`, `tokenizer`
