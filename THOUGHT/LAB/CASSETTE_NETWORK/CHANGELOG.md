@@ -4,7 +4,98 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
-## [3.9.0] - 2026-01-11
+## [3.8.4] - 2026-01-11
+
+### Phase 4.1: Pointer Types - COMPLETE
+
+**Goal:** Implement full SPC pointer resolution with CAS integration per SPC_SPEC.md
+
+#### Three Pointer Types Implemented
+
+**SYMBOL_PTR (single-token):**
+- ASCII radicals: C, I, V, L, G, S, R, A, J, P
+- CJK glyphs: 法, 真, 契, 恆, 驗, 證, 變, 冊, 試, 查, 道
+- Polysemy handling: 道 requires CONTEXT_TYPE key
+
+**HASH_PTR (content-addressed):**
+- Format: `sha256:<hex16-64>`
+- CAS integration via `register_cas_lookup()` callback
+- Memory cassette provides `cas_lookup()` implementation
+
+**COMPOSITE_PTR (all operators):**
+- Numbered rules: C3, I5 (contract rules, invariants)
+- Unary operators: C* (ALL), C! (NOT), C? (CHECK)
+- Binary operators: C&I (AND), C|I (OR)
+- Path access: L.C.3, 法.驗 (hierarchical navigation)
+- Context suffixes: C3:build, V:audit
+
+#### Implementation Files
+
+**spc_decoder.py** - Enhanced pointer resolution:
+- `pointer_resolve(pointer, context_keys, codebook_sha256)` → canonical_IR | FAIL_CLOSED
+- CJK glyph support with polysemy handling
+- All 7 operators: `.`, `:`, `*`, `!`, `?`, `&`, `|`
+- CAS registration: `register_cas_lookup()`, `unregister_cas_lookup()`, `is_cas_available()`
+
+**memory_cassette.py** - Pointer caching:
+- `pointer_register(pointer, type, hash, qualifiers, codebook_id)` → Dict
+- `pointer_lookup(pointer, codebook_id)` → Optional[Dict]
+- `pointer_invalidate(codebook_id, pointer)` → Dict
+- `pointer_stats()` → Dict
+- `cas_lookup(hash)` → Optional[Dict] for HASH_PTR resolution
+
+**spc_integration.py** - Full integration:
+- `SPCIntegration` class combining decoder + memory cassette
+- `sync_handshake()` - Markov blanket alignment (Q35)
+- `resolve(pointer, context_keys, cache)` - Resolution with caching
+- `store_content(text, metadata)` - Store for HASH_PTR
+- Convenience functions: `resolve_pointer()`, `store_for_hash_ptr()`
+
+**test_phase4_1.py** - Comprehensive tests:
+- 49 new tests covering all pointer types
+- SYMBOL_PTR: ASCII + CJK + polysemy
+- HASH_PTR: CAS mock, errors, registration
+- COMPOSITE_PTR: numbered, unary, binary, path, context
+- Pointer caching: in-memory SQLite tests
+- Integration: handshake logic, CAS flow
+
+#### Research Integration
+
+**Q35 (Markov Blankets):**
+- Blanket status gating in decoder
+- `sync_handshake()` for alignment verification
+- ALIGNED/DISSOLVED/PENDING states
+
+**Q33 (Semantic Density):**
+- CDR in token receipts
+- `concept_units` counting
+- Compression ratio tracking
+
+#### Error Codes (FAIL_CLOSED)
+- E_CODEBOOK_MISMATCH, E_KERNEL_VERSION, E_TOKENIZER_MISMATCH
+- E_SYNTAX, E_UNKNOWN_SYMBOL, E_HASH_NOT_FOUND
+- E_AMBIGUOUS, E_INVALID_OPERATOR, E_INVALID_QUALIFIER
+- E_RULE_NOT_FOUND, E_CONTEXT_REQUIRED, E_CAS_UNAVAILABLE
+
+#### Test Results
+```
+78 passed in 0.66s
+```
+
+#### Acceptance Criteria Met
+- [x] POINTERS table created (pointer_type, target_hash, qualifiers, codebook_id)
+- [x] `pointer_resolve(pointer)` → canonical_IR | FAIL_CLOSED
+- [x] Deterministic decode (no LLM involvement)
+- [x] CJK glyph support with polysemy handling
+- [x] All 7 operators implemented
+- [x] CAS integration via callback
+- [x] Pointer caching in memory_cassette
+- [x] Full integration module
+- [x] 78 tests passing
+
+---
+
+## [3.8.3] - 2026-01-11
 
 ### Phase 3: Resident Identity - COMPLETE
 

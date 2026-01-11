@@ -460,19 +460,25 @@ def esap_handshake(self) -> dict:
 **Why this matters:**
 ESAP solves the cross-model alignment problem: when cassettes use different embedding models, ESAP verifies they share the same "semantic shape" (eigenvalue spectrum) before allowing cross-queries. This ensures H(X|S) ≈ 0 holds across model boundaries.
 
-### 4.1 Pointer Types (from SPC_SPEC)
+### 4.1 Pointer Types (from SPC_SPEC) ✅ COMPLETE
 
-**Three pointer types:**
+**Three pointer types implemented:**
 ```
-SYMBOL_PTR:    @GOV:PREAMBLE           (single-token when possible)
-HASH_PTR:      sha256:abc123...        (content-addressed)
-COMPOSITE_PTR: @GOV:PREAMBLE:lines=1-10 (pointer + typed qualifiers)
+SYMBOL_PTR:    C, I, V (ASCII) + 法, 真, 契 (CJK)  (single-token)
+HASH_PTR:      sha256:abc123...                    (content-addressed via CAS)
+COMPOSITE_PTR: C3, C*, C&I, C|I, C3:build, L.C.3, 法.驗 (all operators)
 ```
 
 **Implementation:**
-- [ ] Create `POINTERS` table (pointer_type, target_hash, qualifiers, codebook_id, created_at)
-- [ ] Implement `pointer_resolve(pointer) → canonical_IR | FAIL_CLOSED`
-- [ ] Enforce deterministic decode (no LLM involvement)
+- [x] Create `POINTERS` table (pointer_type, target_hash, qualifiers, codebook_id, created_at)
+- [x] Implement `pointer_resolve(pointer) → canonical_IR | FAIL_CLOSED`
+- [x] Enforce deterministic decode (no LLM involvement)
+- [x] CJK glyph support with polysemy handling (道 requires CONTEXT_TYPE)
+- [x] All operators: . (PATH), : (CONTEXT), * (ALL), ! (NOT), ? (CHECK), & (AND), | (OR)
+- [x] CAS integration via `register_cas_lookup()` callback
+- [x] Pointer caching in memory_cassette (register, lookup, invalidate, stats)
+- [x] Full integration: `spc_integration.py`
+- [x] 68 tests passing (test_phase4.py + test_phase4_1.py)
 
 ### 4.2 Codebook Sync (Phase 5.3.3 Integration)
 

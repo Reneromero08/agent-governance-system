@@ -1031,6 +1031,224 @@ class MemoryCassette(DatabaseCassette):
             conn.close()
 
     # =========================================================================
+    # Phase 4.1: Pointer Caching (SPC Integration)
+    # =========================================================================
+
+    def pointer_register(
+        self,
+        pointer: str,
+        pointer_type: str,
+        target_hash: Optional[str] = None,
+        qualifiers: Optional[Dict] = None,
+        codebook_id: str = "ags-codebook"
+    ) -> Dict:
+        """Register a resolved pointer in the cache.
+
+        Per SPC_SPEC Section 2 - Pointer Types:
+        - SYMBOL_PTR: @GOV:PREAMBLE (single-token)
+        - HASH_PTR: sha256:abc123... (content-addressed)
+        - COMPOSITE_PTR: @GOV:PREAMBLE:lines=1-10 (pointer + qualifiers)
+
+        Args:
+            pointer: The SPC pointer string (e.g., "C3", "sha256:abc...")
+            pointer_type: One of "symbol", "hash", "composite"
+            target_hash: SHA-256 hash of resolved content (optional)
+            qualifiers: Dict of typed qualifiers for composite pointers
+            codebook_id: Codebook ID for versioning
+
+        Returns:
+            Dict with {pointer_id, created_at, pointer_type}
+        """
+        import hashlib
+
+        now = datetime.now(timezone.utc).isoformat()
+        pointer_id = hashlib.sha256(f"{pointer}:{codebook_id}".encode()).hexdigest()[:16]
+        qualifiers_json = json.dumps(qualifiers) if qualifiers else None
+
+        conn = sqlite3.connect(str(self.db_path))
+        try:
+            conn.execute("""
+                INSERT OR REPLACE INTO pointers
+                (pointer_id, pointer_type, base_ptr, target_hash, qualifiers, codebook_id, created_at, resolved_count, last_resolved)
+                VALUES (?, ?, ?, ?, ?, ?, ?, 1, ?)
+            """, (pointer_id, pointer_type, pointer, target_hash, qualifiers_json, codebook_id, now, now))
+            conn.commit()
+
+            return {
+                "pointer_id": pointer_id,
+                "pointer": pointer,
+                "pointer_type": pointer_type,
+                "created_at": now
+            }
+        finally:
+            conn.close()
+
+    def pointer_lookup(
+        self,
+        pointer: str,
+        codebook_id: str = "ags-codebook"
+    ) -> Optional[Dict]:
+        """Look up a cached pointer.
+
+        Args:
+            pointer: The SPC pointer to look up
+            codebook_id: Codebook ID for versioning
+
+        Returns:
+            Dict with cached pointer info or None if not found
+        """
+        import hashlib
+
+        pointer_id = hashlib.sha256(f"{pointer}:{codebook_id}".encode()).hexdigest()[:16]
+
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            cursor = conn.execute(
+                "SELECT * FROM pointers WHERE pointer_id = ? AND codebook_id = ?",
+                (pointer_id, codebook_id)
+            )
+            row = cursor.fetchone()
+
+            if not row:
+                return None
+
+            # Update access stats
+            now = datetime.now(timezone.utc).isoformat()
+            conn.execute("""
+                UPDATE pointers SET resolved_count = resolved_count + 1, last_resolved = ?
+                WHERE pointer_id = ?
+            """, (now, pointer_id))
+            conn.commit()
+
+            return {
+                "pointer_id": row["pointer_id"],
+                "pointer": row["base_ptr"],
+                "pointer_type": row["pointer_type"],
+                "target_hash": row["target_hash"],
+                "qualifiers": json.loads(row["qualifiers"]) if row["qualifiers"] else None,
+                "codebook_id": row["codebook_id"],
+                "created_at": row["created_at"],
+                "resolved_count": row["resolved_count"],
+                "last_resolved": row["last_resolved"]
+            }
+        finally:
+            conn.close()
+
+    def pointer_invalidate(
+        self,
+        codebook_id: Optional[str] = None,
+        pointer: Optional[str] = None
+    ) -> Dict:
+        """Invalidate cached pointers.
+
+        Per CODEBOOK_SYNC_PROTOCOL: Codebook change → invalidate cache.
+
+        Args:
+            codebook_id: Invalidate all pointers for this codebook (None = all)
+            pointer: Invalidate specific pointer (None = all matching codebook)
+
+        Returns:
+            Dict with {invalidated_count}
+        """
+        conn = sqlite3.connect(str(self.db_path))
+
+        try:
+            if pointer and codebook_id:
+                import hashlib
+                pointer_id = hashlib.sha256(f"{pointer}:{codebook_id}".encode()).hexdigest()[:16]
+                cursor = conn.execute(
+                    "DELETE FROM pointers WHERE pointer_id = ?",
+                    (pointer_id,)
+                )
+            elif codebook_id:
+                cursor = conn.execute(
+                    "DELETE FROM pointers WHERE codebook_id = ?",
+                    (codebook_id,)
+                )
+            else:
+                cursor = conn.execute("DELETE FROM pointers")
+
+            count = cursor.rowcount
+            conn.commit()
+
+            return {"invalidated_count": count}
+        finally:
+            conn.close()
+
+    def pointer_stats(self) -> Dict:
+        """Get pointer cache statistics.
+
+        Returns:
+            Dict with cache statistics
+        """
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            # Total pointers
+            cursor = conn.execute("SELECT COUNT(*) as count FROM pointers")
+            total = cursor.fetchone()["count"]
+
+            # By type
+            cursor = conn.execute("""
+                SELECT pointer_type, COUNT(*) as count
+                FROM pointers GROUP BY pointer_type
+            """)
+            by_type = {row["pointer_type"]: row["count"] for row in cursor.fetchall()}
+
+            # By codebook
+            cursor = conn.execute("""
+                SELECT codebook_id, COUNT(*) as count
+                FROM pointers GROUP BY codebook_id
+            """)
+            by_codebook = {row["codebook_id"]: row["count"] for row in cursor.fetchall()}
+
+            # Most resolved
+            cursor = conn.execute("""
+                SELECT base_ptr, pointer_type, resolved_count
+                FROM pointers ORDER BY resolved_count DESC LIMIT 10
+            """)
+            top_resolved = [
+                {"pointer": row["base_ptr"], "type": row["pointer_type"], "count": row["resolved_count"]}
+                for row in cursor.fetchall()
+            ]
+
+            return {
+                "total_pointers": total,
+                "by_type": by_type,
+                "by_codebook": by_codebook,
+                "top_resolved": top_resolved
+            }
+        finally:
+            conn.close()
+
+    def cas_lookup(self, hash_value: str) -> Optional[Dict]:
+        """Look up content by hash (CAS interface for SPC decoder).
+
+        This is the callback function for spc_decoder.register_cas_lookup().
+
+        Args:
+            hash_value: SHA-256 hash (without 'sha256:' prefix)
+
+        Returns:
+            Dict with {text, metadata, type, source} or None if not found
+        """
+        # First check memories table
+        memory = self.memory_recall(hash_value, update_access=True)
+        if memory:
+            return {
+                "text": memory["text"],
+                "metadata": memory.get("metadata"),
+                "type": "memory",
+                "source": "memory_cassette"
+            }
+
+        # Could extend to check other content sources here
+        return None
+
+    # =========================================================================
     # Phase 3.3: Cross-Session Memory
     # =========================================================================
 
