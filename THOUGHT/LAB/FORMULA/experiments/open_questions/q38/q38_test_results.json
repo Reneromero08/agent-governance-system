@@ -1,0 +1,75 @@
+{
+  "timestamp": "2026-01-11T12:21:03.394537",
+  "question": "Q38",
+  "title": "Noether Conservation Laws",
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "test": "GEODESIC_ON_SPHERE",
+      "max_norm_deviation_3d": 1.1102230246251565e-16,
+      "max_norm_deviation_768d": 1.1102230246251565e-16,
+      "returns_to_start": "True",
+      "distance_to_start": 2.4492935982947064e-16,
+      "all_on_sphere": "True",
+      "pass": "True"
+    },
+    {
+      "test": "ANGULAR_MOMENTUM_CONSERVED",
+      "L_magnitude_mean": 0.005050483579487598,
+      "L_magnitude_std": 1.2471470408572697e-17,
+      "L_cv": 2.4693615899057817e-15,
+      "L_cv_2": 3.252552442278856e-15,
+      "threshold_cv": 0.05,
+      "is_conserved": true,
+      "pass": true
+    },
+    {
+      "test": "PLANE_ANGULAR_MOMENTUM",
+      "n_planes_tested": 10,
+      "mean_cv": 1.454364385704238e-13,
+      "n_conserved": 10,
+      "conservation_rate": 1.0,
+      "threshold_rate": 0.3,
+      "pass": true
+    },
+    {
+      "test": "SPEED_CONSERVED",
+      "speeds_conserved": 5,
+      "total_tests": 5,
+      "mean_cv": 3.3116416887581046e-15,
+      "all_cvs": [
+        2.8766102381781585e-15,
+        3.942489953093048e-15,
+        3.366700213080122e-15,
+        3.4211055424428266e-15,
+        2.951302496996368e-15
+      ],
+      "threshold_cv": 0.05,
+      "pass": true
+    },
+    {
+      "test": "PERTURBED_NOT_CONSERVED",
+      "cv_geodesic": 2.4693615899057817e-15,
+      "cv_perturbed": 0.0425120056741751,
+      "ratio": 425109559.2495799,
+      "geodesic_conserves": true,
+      "perturbed_varies": true,
+      "pass": true
+    },
+    {
+      "test": "ACTION_MINIMIZED",
+      "action_geodesic": 0.0012626235787479402,
+      "actions_perturbed": {
+        "perturbed_0.05": 64.53171208741925,
+        "perturbed_0.1": 87.74393036183825,
+        "perturbed_0.2": 95.32992443543752
+      },
+      "arc_length_geodesic": 0.49999946859180977,
+      "arc_length_perturbed": 131.24770969151461,
+      "geodesic_is_minimum": true,
+      "pass": true
+    }
+  ],
+  "verdict": "VALIDATED"
+}

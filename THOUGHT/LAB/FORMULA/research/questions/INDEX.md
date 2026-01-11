@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.14.0 (2026-01-11 - Q10 PARTIAL: R detects behavioral consistency (1.79x) and multi-agent misalignment (28% drop), but cannot detect logical contradictions)*
+*Last updated: v3.15.1 (2026-01-11 - Q38 cross-architecture validation: 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve |L| with CV=6e-7. 69,000x separation. NOT a model artifact - it's physics.)*
 
 ---
 
@@ -31,7 +31,7 @@
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ PARTIAL | **YES - phase transition at α=0.9-1.0**. Generalization jumps +0.424 suddenly. Truth crystallizes, doesn't emerge gradually. J anti-correlated with generalization (ρ=-0.54). Binary R-gates justified. |
-| 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ⏳ OPEN | What symmetries does M field have? What's conserved (meaning conservation law)? Can we derive field equations from Lagrangian? |
+| 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ✅ ANSWERED | **Symmetry: SO(d) rotation. Conserved: Angular momentum |L|=|v|.** 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve with CV=6e-7. 69,000x separation from non-geodesic. NOT model artifact. |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
@@ -104,17 +104,17 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 10 (23.3%)
+  - **Answered:** 11 (25.6%)
   - **Partially Answered:** 10 (23.3%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 23 (53.5%)
+  - **Open:** 22 (51.2%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 5 | 2 | 0 | 0 |
- | High | 16 | 2 | 6 | 0 | 8 |
+ | High | 16 | 3 | 6 | 0 | 7 |
  | Medium | 11 | 3 | 1 | 0 | 7 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |

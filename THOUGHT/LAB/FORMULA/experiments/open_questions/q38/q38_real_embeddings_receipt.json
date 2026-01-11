@@ -1,0 +1,720 @@
+{
+  "test": "Q38_CROSS_ARCHITECTURE",
+  "timestamp": "2026-01-11T13:14:24.361538Z",
+  "models": {
+    "GloVe": {
+      "dim": 300,
+      "n_words": 115,
+      "slerp": {
+        "pairs_tested": 10,
+        "pairs_conserved": 10,
+        "mean_cv": 5.241450344097604e-07,
+        "max_cv": 6.499695099097026e-07,
+        "all_pass": true,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 6.103237152005013e-07,
+            "mean_L": 0.012809923825014611,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 6.499695099097026e-07,
+            "mean_L": 0.012236273472248123,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "friend",
+              "enemy"
+            ],
+            "cv": 4.5643929368320307e-07,
+            "mean_L": 0.013604691248083368,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "power",
+              "wisdom"
+            ],
+            "cv": 5.195512253729116e-07,
+            "mean_L": 0.013550419143694656,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "time",
+              "space"
+            ],
+            "cv": 4.5664115307933855e-07,
+            "mean_L": 0.011931132748491393,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "energy",
+              "matter"
+            ],
+            "cv": 4.3809669370946723e-07,
+            "mean_L": 0.012919098838792574,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "sun",
+              "moon"
+            ],
+            "cv": 5.41985828965268e-07,
+            "mean_L": 0.010801555142189022,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "forest",
+              "desert"
+            ],
+            "cv": 5.164182099131382e-07,
+            "mean_L": 0.012118313353776514,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "child",
+              "adult"
+            ],
+            "cv": 5.133112150521282e-07,
+            "mean_L": 0.010330721038548098,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "human",
+              "animal"
+            ],
+            "cv": 5.387134992119453e-07,
+            "mean_L": 0.009519164386119786,
+            "conserved": true
+          }
+        ]
+      },
+      "perturbed": {
+        "pairs_tested": 2,
+        "pairs_conserved": 2,
+        "mean_cv": 0.045004779895768274,
+        "max_cv": 0.04747241031834922,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 0.04253714947318732,
+            "mean_L": 0.6109451664072386,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 0.04747241031834922,
+            "mean_L": 0.6113140640100182,
+            "conserved": true
+          }
+        ]
+      },
+      "loop": {
+        "words": [
+          "truth",
+          "beauty",
+          "love",
+          "wisdom"
+        ],
+        "n_points": 96,
+        "cv": 0.08991090253315374,
+        "mean_L": 0.04879117988399943,
+        "conserved": false
+      }
+    },
+    "Word2Vec": {
+      "dim": 300,
+      "n_words": 115,
+      "slerp": {
+        "pairs_tested": 10,
+        "pairs_conserved": 10,
+        "mean_cv": 4.881380411087391e-07,
+        "max_cv": 6.338611774428102e-07,
+        "all_pass": true,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 4.5476656576614016e-07,
+            "mean_L": 0.01340781542959457,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 6.338611774428102e-07,
+            "mean_L": 0.012997989231885103,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "friend",
+              "enemy"
+            ],
+            "cv": 4.472621986630077e-07,
+            "mean_L": 0.013029707100773906,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "power",
+              "wisdom"
+            ],
+            "cv": 4.3042226114160454e-07,
+            "mean_L": 0.013688123004421992,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "time",
+              "space"
+            ],
+            "cv": 4.889773678039831e-07,
+            "mean_L": 0.013303589176198836,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "energy",
+              "matter"
+            ],
+            "cv": 4.917192907286785e-07,
+            "mean_L": 0.014909387679419803,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "sun",
+              "moon"
+            ],
+            "cv": 4.695711191422595e-07,
+            "mean_L": 0.011418096807873156,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "forest",
+              "desert"
+            ],
+            "cv": 4.582004258741571e-07,
+            "mean_L": 0.013363172549561899,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "child",
+              "adult"
+            ],
+            "cv": 4.959784922712111e-07,
+            "mean_L": 0.010952150394691112,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "human",
+              "animal"
+            ],
+            "cv": 5.106215122535389e-07,
+            "mean_L": 0.010591806183016124,
+            "conserved": true
+          }
+        ]
+      },
+      "perturbed": {
+        "pairs_tested": 2,
+        "pairs_conserved": 2,
+        "mean_cv": 0.04454939295715216,
+        "max_cv": 0.0488215012397036,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 0.0488215012397036,
+            "mean_L": 0.6109213048399332,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 0.040277284674600726,
+            "mean_L": 0.6114183138097401,
+            "conserved": true
+          }
+        ]
+      },
+      "loop": {
+        "words": [
+          "truth",
+          "beauty",
+          "love",
+          "wisdom"
+        ],
+        "n_points": 96,
+        "cv": 0.07635307851636922,
+        "mean_L": 0.051977580973562615,
+        "conserved": false
+      }
+    },
+    "FastText": {
+      "dim": 300,
+      "n_words": 115,
+      "slerp": {
+        "pairs_tested": 10,
+        "pairs_conserved": 10,
+        "mean_cv": 5.460838917530811e-07,
+        "max_cv": 6.701867111283379e-07,
+        "all_pass": true,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 5.470595753934327e-07,
+            "mean_L": 0.00981253889515239,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 4.595095189497733e-07,
+            "mean_L": 0.009491526025742048,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "friend",
+              "enemy"
+            ],
+            "cv": 5.220616996406648e-07,
+            "mean_L": 0.009930377579360695,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "power",
+              "wisdom"
+            ],
+            "cv": 5.688563776532773e-07,
+            "mean_L": 0.010056349200884643,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "time",
+              "space"
+            ],
+            "cv": 6.430098837720224e-07,
+            "mean_L": 0.010331293192768381,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "energy",
+              "matter"
+            ],
+            "cv": 4.922825712980414e-07,
+            "mean_L": 0.010811958976162658,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "sun",
+              "moon"
+            ],
+            "cv": 4.977511428690256e-07,
+            "mean_L": 0.00855665827832188,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "forest",
+              "desert"
+            ],
+            "cv": 6.701867111283379e-07,
+            "mean_L": 0.010762324113724537,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "child",
+              "adult"
+            ],
+            "cv": 5.697980297208531e-07,
+            "mean_L": 0.008267786735358657,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "human",
+              "animal"
+            ],
+            "cv": 4.903234071053823e-07,
+            "mean_L": 0.007433525000419057,
+            "conserved": true
+          }
+        ]
+      },
+      "perturbed": {
+        "pairs_tested": 2,
+        "pairs_conserved": 2,
+        "mean_cv": 0.04661082737884633,
+        "max_cv": 0.04954661438166459,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 0.04954661438166459,
+            "mean_L": 0.6110173286930075,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 0.04367504037602807,
+            "mean_L": 0.6141658832068208,
+            "conserved": true
+          }
+        ]
+      },
+      "loop": {
+        "words": [
+          "truth",
+          "beauty",
+          "love",
+          "wisdom"
+        ],
+        "n_points": 96,
+        "cv": 0.07979847769368913,
+        "mean_L": 0.03959340192659065,
+        "conserved": false
+      }
+    },
+    "BERT": {
+      "dim": 768,
+      "n_words": 115,
+      "slerp": {
+        "pairs_tested": 10,
+        "pairs_conserved": 10,
+        "mean_cv": 8.915014782755131e-07,
+        "max_cv": 1.393031455301907e-06,
+        "all_pass": true,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 7.3735055984358e-07,
+            "mean_L": 0.002134825567653894,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 5.86020785167778e-07,
+            "mean_L": 0.0033585295217485583,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "friend",
+              "enemy"
+            ],
+            "cv": 8.999168265308846e-07,
+            "mean_L": 0.0038273964286270625,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "power",
+              "wisdom"
+            ],
+            "cv": 9.036096545507218e-07,
+            "mean_L": 0.0013816605834230692,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "time",
+              "space"
+            ],
+            "cv": 1.0175606156544013e-06,
+            "mean_L": 0.0028270769438149394,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "energy",
+              "matter"
+            ],
+            "cv": 1.393031455301907e-06,
+            "mean_L": 0.0029002310379317884,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "sun",
+              "moon"
+            ],
+            "cv": 8.42138564891099e-07,
+            "mean_L": 0.0018685454192364248,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "forest",
+              "desert"
+            ],
+            "cv": 7.888823189921883e-07,
+            "mean_L": 0.0026908990247903864,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "child",
+              "adult"
+            ],
+            "cv": 1.0995623321989578e-06,
+            "mean_L": 0.004152487291224118,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "human",
+              "animal"
+            ],
+            "cv": 6.46941669623612e-07,
+            "mean_L": 0.003688430131358083,
+            "conserved": true
+          }
+        ]
+      },
+      "perturbed": {
+        "pairs_tested": 2,
+        "pairs_conserved": 2,
+        "mean_cv": 0.031222163322866054,
+        "max_cv": 0.031985055083971224,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 0.030459271561760884,
+            "mean_L": 0.6639220218038049,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 0.031985055083971224,
+            "mean_L": 0.6623963222303662,
+            "conserved": true
+          }
+        ]
+      },
+      "loop": {
+        "words": [
+          "truth",
+          "beauty",
+          "love",
+          "wisdom"
+        ],
+        "n_points": 96,
+        "cv": 0.2852071996756793,
+        "mean_L": 0.010833879142463065,
+        "conserved": false
+      }
+    },
+    "SentenceT": {
+      "dim": 384,
+      "n_words": 115,
+      "slerp": {
+        "pairs_tested": 10,
+        "pairs_conserved": 10,
+        "mean_cv": 5.453543729903455e-07,
+        "max_cv": 6.198424119924135e-07,
+        "all_pass": true,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 5.963339168524991e-07,
+            "mean_L": 0.011177895090850182,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 4.776279569166965e-07,
+            "mean_L": 0.011686075314017384,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "friend",
+              "enemy"
+            ],
+            "cv": 6.110467607004778e-07,
+            "mean_L": 0.012660997411653701,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "power",
+              "wisdom"
+            ],
+            "cv": 4.846509241253185e-07,
+            "mean_L": 0.012386879940166372,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "time",
+              "space"
+            ],
+            "cv": 5.621930545273594e-07,
+            "mean_L": 0.012125717060567035,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "energy",
+              "matter"
+            ],
+            "cv": 6.061572174002076e-07,
+            "mean_L": 0.011192176703680496,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "sun",
+              "moon"
+            ],
+            "cv": 4.432363012143339e-07,
+            "mean_L": 0.010617893536680727,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "forest",
+              "desert"
+            ],
+            "cv": 5.098769839358563e-07,
+            "mean_L": 0.011730559820815728,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "child",
+              "adult"
+            ],
+            "cv": 5.425782022382926e-07,
+            "mean_L": 0.010283124761113016,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "human",
+              "animal"
+            ],
+            "cv": 6.198424119924135e-07,
+            "mean_L": 0.009648579583914869,
+            "conserved": true
+          }
+        ]
+      },
+      "perturbed": {
+        "pairs_tested": 2,
+        "pairs_conserved": 2,
+        "mean_cv": 0.039803255258899266,
+        "max_cv": 0.041198272008366496,
+        "results": [
+          {
+            "pair": [
+              "truth",
+              "beauty"
+            ],
+            "cv": 0.038408238509432036,
+            "mean_L": 0.627969095653566,
+            "conserved": true
+          },
+          {
+            "pair": [
+              "love",
+              "fear"
+            ],
+            "cv": 0.041198272008366496,
+            "mean_L": 0.6272773110443445,
+            "conserved": true
+          }
+        ]
+      },
+      "loop": {
+        "words": [
+          "truth",
+          "beauty",
+          "love",
+          "wisdom"
+        ],
+        "n_points": 96,
+        "cv": 0.11427372892681395,
+        "mean_L": 0.0444819895243999,
+        "conserved": false
+      }
+    }
+  },
+  "summary": {
+    "models_tested": 5,
+    "models_passed": 5,
+    "mean_slerp_cv": 5.990445637074878e-07,
+    "std_slerp_cv": 1.4773537997089425e-07,
+    "mean_perturbed_cv": 0.041438083762706426,
+    "separation_ratio": 69173.62459020638
+  },
+  "verdict": "CONFIRMED"
+}
