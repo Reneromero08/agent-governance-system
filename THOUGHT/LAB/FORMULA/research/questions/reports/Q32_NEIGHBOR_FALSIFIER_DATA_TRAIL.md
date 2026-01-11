@@ -579,3 +579,20 @@ Artifacts:
 - `physical_force_receipt_p6_csv_positive_20260110_213052.json` = `422861D002833B675BE180307FA5BFFAF09AC7EA6DACB6FAB993B9C6980C5378`
 - `physical_force_receipt_p6_csv_null_20260110_213052.json` = `611AD9F68B7CB460AC549979851FF4A7C83088E5BE1298404784B26E62C4C8B2`
 - `physical_force_receipt_p6_csv_echo_leak_20260110_213052.json` = `000386E9CC5773120DDCF11F7FAF65D7EEC7BB7671E6DC568EABC867B0C5BA8D`
+
+### CSV ingestion demo (v2: null distribution gate + directionality check)
+
+Purpose:
+- Strengthen the CSV coupling gate so it is not “just correlation”:
+  - compares against a deterministic null distribution (`--null_kind permute`, `--null_n`, `--null_quantile`)
+  - requires directionality (`|r(M→B)| > |r(B→M)|`) as a basic anti-leak check
+
+Artifacts:
+- `p6_physical_force_csv_demo_20260110_214310.log.txt` = `2BCA6336DFAEDCF9DD979081D7CE0BEE1D49ECD00D09C3EC58BEF3635B794652`
+- `p6_physical_force_csv_demo_20260110_214310.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `p6_phys_demo_positive_20260110_214310.csv` = `6B53063E2ED0E0E9BC00DE73F4574B511BE791DD948D100AA801358FC5CAE41F`
+- `p6_phys_demo_null_20260110_214310.csv` = `94766C36BD299B847FF85AAC226756126010C5FC033665A4840367ED18AB6151`
+- `p6_phys_demo_echo_leak_20260110_214310.csv` = `AA992A128F4D58AAB55A887605B0E401FFF6F29DFEB09D41F7652CD4810C669C`
+- `physical_force_receipt_p6_csv_positive_20260110_214310.json` = `EF98E87823A319494C2C4EE87365F01C015DC8BF8EF0470FEC56FA17E69CF8CB`
+- `physical_force_receipt_p6_csv_null_20260110_214310.json` = `38AC50F9D536E7CD022993C6D2693DE6896295FC7C4B05F71A0B3FA1461A95FF`
+- `physical_force_receipt_p6_csv_echo_leak_20260110_214310.json` = `668A78DD186DB44723A7330F5F93E02B52F716677793B8CDF6E608BF2D1F759C`

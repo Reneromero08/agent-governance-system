@@ -340,6 +340,9 @@ def run_csv_coupling(
     echo_threshold: float,
     null_rotations: List[int],
     seed_for_rotations: int,
+    null_n: int,
+    null_kind: str,
+    null_quantile: float,
 ) -> Dict[str, Any]:
     m, b = _read_csv_mb(csv_path)
 
@@ -349,14 +352,24 @@ def run_csv_coupling(
 
     lag_scan: List[Dict[str, Any]] = []
     best = {"lag": 0, "r": float("nan")}
+    best_rev = {"lag": 0, "r": float("nan")}
     for lag in range(max_lag + 1):
         m_l, b_l = _align_for_lag(m, b, lag)
         r = _pearson_r(m_l, b_l) if m_l else float("nan")
-        lag_scan.append({"lag": lag, "r_m_to_b": r})
+        b_l2, m_l2 = _align_for_lag(b, m, lag)
+        r_rev = _pearson_r(b_l2, m_l2) if b_l2 else float("nan")
+        lag_scan.append({"lag": lag, "r_m_to_b": r, "r_b_to_m": r_rev})
         if math.isnan(best["r"]) or (not math.isnan(r) and abs(r) > abs(best["r"])):
             best = {"lag": lag, "r": r}
+        if math.isnan(best_rev["r"]) or (not math.isnan(r_rev) and abs(r_rev) > abs(best_rev["r"])):
+            best_rev = {"lag": lag, "r": r_rev}
 
-    # Null: rotate M by fixed amounts (deterministic)
+    if null_n < 3:
+        raise ValueError("null_n must be >= 3")
+    if not (0.5 < null_quantile < 1.0):
+        raise ValueError("null_quantile must be in (0.5, 1.0)")
+
+    # Null distribution: rotation or permutation of M (deterministic).
     rng = random.Random(seed_for_rotations)
     rotations = null_rotations[:]
     if not rotations:
@@ -365,23 +378,44 @@ def run_csv_coupling(
     rotations = [k % len(m) for k in rotations if (k % len(m)) != 0]
     if not rotations:
         rotations = [1]
-    # Shuffle rotations order deterministically (so list order doesn't accidentally encode intent)
-    rng.shuffle(rotations)
 
     null_rs: List[float] = []
-    for k in rotations:
-        m_rot = _rotate(m, k)
-        m_l, b_l = _align_for_lag(m_rot, b, int(best["lag"]))
-        null_rs.append(_pearson_r(m_l, b_l) if m_l else float("nan"))
-    best_null = max((abs(r) for r in null_rs if not math.isnan(r)), default=float("nan"))
+    if null_kind == "rotate":
+        # Sample k from the provided rotation set (with replacement)
+        for _ in range(null_n):
+            k = rotations[rng.randrange(0, len(rotations))]
+            m_rot = _rotate(m, k)
+            m_l, b_l = _align_for_lag(m_rot, b, int(best["lag"]))
+            null_rs.append(_pearson_r(m_l, b_l) if m_l else float("nan"))
+    elif null_kind == "permute":
+        idx = list(range(len(m)))
+        for _ in range(null_n):
+            rng.shuffle(idx)
+            m_perm = [m[i] for i in idx]
+            m_l, b_l = _align_for_lag(m_perm, b, int(best["lag"]))
+            null_rs.append(_pearson_r(m_l, b_l) if m_l else float("nan"))
+    else:
+        raise ValueError("null_kind must be one of: rotate, permute")
+
+    null_abs = sorted(abs(r) for r in null_rs if not math.isnan(r))
+    if not null_abs:
+        raise ValueError("null distribution produced no finite correlations")
+    q_idx = int(math.floor(null_quantile * (len(null_abs) - 1)))
+    null_threshold = null_abs[q_idx]
+    p_value = (sum(1 for r in null_abs if r >= abs(best["r"])) + 1) / (len(null_abs) + 1)
 
     r0 = _pearson_r(m, b)
     flags_echo_leak = bool((not math.isnan(r0)) and abs(r0) >= echo_threshold and int(best["lag"]) == 0)
 
+    directionality_ok = True
+    if int(best["lag"]) > 0 and (not math.isnan(best_rev["r"])):
+        directionality_ok = abs(best["r"]) > abs(best_rev["r"])
+
     detects_coupling = bool(
         (not math.isnan(best["r"]))
         and abs(best["r"]) >= r_detect_threshold
-        and (math.isnan(best_null) or abs(best["r"]) > best_null)
+        and abs(best["r"]) > null_threshold
+        and directionality_ok
         and (not flags_echo_leak)
     )
 
@@ -396,6 +430,9 @@ def run_csv_coupling(
             "best_lag": int(best["lag"]),
             "r_detect_threshold": r_detect_threshold,
             "echo_threshold": echo_threshold,
+            "null_kind": null_kind,
+            "null_n": null_n,
+            "null_quantile": null_quantile,
             "null_rotations": rotations,
             "seed_for_rotations": seed_for_rotations,
             "python": sys.version.split()[0],
@@ -404,8 +441,11 @@ def run_csv_coupling(
         "results": {
             "r_m_to_b_zero": r0,
             "best_r_m_to_b_lag": best["r"],
-            "best_null_abs_r_m_to_b_lag": best_null,
+            "best_r_b_to_m_lag": best_rev["r"],
+            "null_threshold_abs_r": null_threshold,
+            "p_value": p_value,
             "flags_echo_leak": flags_echo_leak,
+            "directionality_ok": directionality_ok,
             "detects_coupling": detects_coupling,
             "lag_scan": lag_scan,
         },
@@ -431,6 +471,9 @@ def parse_args(argv: Optional[List[str]] = None) -> argparse.Namespace:
     p.add_argument("--max_lag", type=int, default=12)
     p.add_argument("--null_rotations", type=str, default="")
     p.add_argument("--seed_for_rotations", type=int, default=2026)
+    p.add_argument("--null_kind", choices=["rotate", "permute"], default="rotate")
+    p.add_argument("--null_n", type=int, default=250)
+    p.add_argument("--null_quantile", type=float, default=0.99)
     p.add_argument("--csv_out", type=str, default=None)
     p.add_argument("--scenario", choices=["positive", "null", "echo_leak"], default="positive")
     p.add_argument("--receipt_out", type=str, default=None)
@@ -468,6 +511,9 @@ def main(argv: Optional[List[str]] = None) -> int:
             echo_threshold=args.echo_threshold,
             null_rotations=rotations,
             seed_for_rotations=args.seed_for_rotations,
+            null_n=args.null_n,
+            null_kind=args.null_kind,
+            null_quantile=args.null_quantile,
         )
     elif args.mode == "emit_synth_csv":
         if not args.csv_out:
