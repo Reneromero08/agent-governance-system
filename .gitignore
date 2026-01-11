@@ -18,6 +18,10 @@ ERROR_RECEIPT.json
 # Generated Cortex index
 NAVIGATION/CORTEX/_generated/cortex.json
 NAVIGATION/CORTEX/_generated/cortex.db
+
+# TINY_COMPRESS models and outputs (too large for git)
+THOUGHT/LAB/TINY_COMPRESS/models/
+THOUGHT/LAB/TINY_COMPRESS/outputs/
 NAVIGATION/CORTEX/_generated/*.sqlite
 NAVIGATION/CORTEX/_generated/SECTION_INDEX.json
 NAVIGATION/CORTEX/_generated/SUMMARY_INDEX.json

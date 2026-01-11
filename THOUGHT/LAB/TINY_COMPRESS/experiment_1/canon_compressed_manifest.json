@@ -1,0 +1,227 @@
+{
+  "canon_root": "LAW/CANON",
+  "compressed_bytes": 9946,
+  "compression_ratio": 22.2651317112407,
+  "files": [
+    {
+      "content_preview": "<!-- CONTENT_HASH: 55953d3f2d0c74f7484ec25c0fd578a511b96088951229aed3af97d00eca40e1 -->  # Catalytic",
+      "path": "CATALYTIC\\CATALYTIC_COMPUTING.md",
+      "sha256": "d1b0a2e6cd425f855c07293db8e3fc7fe64baf52589ce41874256aaa45f01b26",
+      "size_bytes": 10370,
+      "symbol": "@C:d1b0a2e6cd42"
+    },
+    {
+      "content_preview": "# CMP-01: Catalytic Mutation Protocol  This document defines the operational protocol for catalytic",
+      "path": "CATALYTIC\\CMP-01_CATALYTIC_MUTATION_PROTOCOL.md",
+      "sha256": "df999ef6f18afa0c547e8e9d81fdc9d86286ef5a07fbeeefaec78946dcdeb6e4",
+      "size_bytes": 13120,
+      "symbol": "@C:df999ef6f18a"
+    },
+    {
+      "content_preview": "# SPECTRUM-02: Adversarial Resume Without Execution History  **Version:** 1.0.0 **Status:** Frozen *",
+      "path": "CATALYTIC\\SPECTRUM-02_RESUME_BUNDLE.md",
+      "sha256": "fa3b36471252ccc640c84ebbe31246f121560e5f9d60fda6f64c732656f14387",
+      "size_bytes": 5548,
+      "symbol": "@C:fa3b36471252"
+    },
+    {
+      "content_preview": "# SPECTRUM-03: Chained Temporal Integrity  **Version:** 1.0.0 **Status:** Frozen **Created:** 2024-1",
+      "path": "CATALYTIC\\SPECTRUM-03_CHAIN_VERIFICATION.md",
+      "sha256": "5571bd993cefbbbbb08f95a0c3a18aa56712d9017323bf913e05412d90a3013a",
+      "size_bytes": 6164,
+      "symbol": "@C:5571bd993cef"
+    },
+    {
+      "content_preview": "# SPECTRUM-04: Validator Identity and Signing Law  **Version:** 1.1.0 **Status:** Frozen **Created:*",
+      "path": "CATALYTIC\\SPECTRUM-04_IDENTITY_SIGNING.md",
+      "sha256": "593edcc19b9578a7f68bff2b3aa8fc65c75d7a9a036895943565cb46ee5ddf4d",
+      "size_bytes": 24076,
+      "symbol": "@C:593edcc19b95"
+    },
+    {
+      "content_preview": "# SPECTRUM-05: Verification and Threat Law for Identity-Pinned Acceptance  **Version:** 1.0.0 **Stat",
+      "path": "CATALYTIC\\SPECTRUM-05_VERIFICATION_LAW.md",
+      "sha256": "a0f0fb2d978cc5c84d1dacfad1df7ae3d59c455b94642ff7beeb002f9db3106d",
+      "size_bytes": 19038,
+      "symbol": "@C:a0f0fb2d978c"
+    },
+    {
+      "content_preview": "# SPECTRUM-06: Restore Runner Semantics  **Version:** 1.0.2 **Status:** Frozen **Created:** 2025-12-",
+      "path": "CATALYTIC\\SPECTRUM-06_RESTORE_RUNNER.md",
+      "sha256": "0d49ca36034130f4c13a8714dc1979e3f97276559a9dad3812204630b4eb8a25",
+      "size_bytes": 26979,
+      "symbol": "@C:0d49ca360341"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 9fa52442d30f1a54d712cf462ac62c21c78d3a42a6796d4625b7f5c3b0c8a5d0 -->  # Constitut",
+      "path": "CONSTITUTION\\AGREEMENT.md",
+      "sha256": "4531caf1207f980e673b8ef9d2516d4fd4992e04d8da3eabf5a2601091530930",
+      "size_bytes": 2018,
+      "symbol": "@C:4531caf1207f"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 07b58b92ca7fe70d05412d6334636a7d769b77c386fdd94bf33f09ec966f4144 -->  # Canon Con",
+      "path": "CONSTITUTION\\CONTRACT.md",
+      "sha256": "d2c0b7a00816e25441e28e36cfeab652b9667113009380d0f18b722e05c41695",
+      "size_bytes": 7565,
+      "symbol": "@C:d2c0b7a00816"
+    },
+    {
+      "content_preview": "--- tags:   - canon ---  <!-- CONTENT_HASH: f35278440d6b2e51df641d654537ce66abf7274fcd1c681384260847",
+      "path": "CONSTITUTION\\FORMULA.md",
+      "sha256": "85bc78171225c4ff7a67826d953671cc031ff8e1420469f454df16ad8bd4c93f",
+      "size_bytes": 7595,
+      "symbol": "@C:85bc78171225"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 89c06983d85bcdfb50ed3b6318757b32548d4619d9be9f0fc6e373b4546e5e9d -->  # Integrity",
+      "path": "CONSTITUTION\\INTEGRITY.md",
+      "sha256": "d2e6e3a80346651cba7f0fe6e9a4bc267d1e8a33ae181e486a5b0abec0a3b08a",
+      "size_bytes": 1669,
+      "symbol": "@C:d2e6e3a80346"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 74dcf864da760c316aa031d5419d62d7a4ba9e7978ac77aced5bea9c9091fcfd -->  # Invariant",
+      "path": "CONSTITUTION\\INVARIANTS.md",
+      "sha256": "c5e9caca10a8abf091142460863a74ac3362255b7c26cb6a268b9800a0802c6a",
+      "size_bytes": 7591,
+      "symbol": "@C:c5e9caca10a8"
+    },
+    {
+      "content_preview": "# The Semiotic Foundation of Truth  **Canon ID:** FOUNDATION-01 **Version:** 1.0.0 **Status:** ACTIV",
+      "path": "FOUNDATION\\THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md",
+      "sha256": "73ecfeb0789c8a493be5bbdcbd12a3649e119d175bb46b1a7e64a4ccaa10afd9",
+      "size_bytes": 6556,
+      "symbol": "@C:73ecfeb0789c"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: f8fd4c1bb2ec551cde2d04440dc47e946a136b8deca69164a93d1d8edbf16866 -->  # Canon Arb",
+      "path": "GOVERNANCE\\ARBITRATION.md",
+      "sha256": "3d68102255e8e3368f1605154afa68f7a9dc3d87230b76ac338075d76c8c895b",
+      "size_bytes": 3978,
+      "symbol": "@C:3d68102255e8"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 7376f6f979e1cc6a516d5a41fb3fdf7d901f1545fca9e2cfa3da5bd65cb530d3 -->  # Crisis Mo",
+      "path": "GOVERNANCE\\CRISIS.md",
+      "sha256": "8e0c83102b9270fc1a9a9f31485cb7be6e80e0789410a715f0334be7466c07ba",
+      "size_bytes": 5340,
+      "symbol": "@C:8e0c83102b92"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 100e204214cf7e432b5ec5f99a83142f91cb8674ab50db6e8f82acc6073a482a -->  # Deprecati",
+      "path": "GOVERNANCE\\DEPRECATION.md",
+      "sha256": "33b1190532889d10b3177ffb53a154b1d6a51d79e52fb5b94a4378eeb32e8c98",
+      "size_bytes": 3592,
+      "symbol": "@C:33b119053288"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 0a1c692830e9ce6661ed81e25aa9c9b00adf31bd3951fdce4bd949fdce6eb9fe -->  # Migration",
+      "path": "GOVERNANCE\\MIGRATION.md",
+      "sha256": "bf13bd4ab0aa8f16509baa22a6b8865dda61f6ad9d4084a4ec74a63ae172ab7e",
+      "size_bytes": 4748,
+      "symbol": "@C:bf13bd4ab0aa"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: ff9e9936396d36d7feae7297ebaa381b8ade6180190bfd844c5d978c07d258e4 -->  # Stewardsh",
+      "path": "GOVERNANCE\\STEWARDSHIP.md",
+      "sha256": "0aeb3884836eeac1b3d852bdafc1dd6f21e17a873748ccc21b6cf37e007c4d4a",
+      "size_bytes": 5301,
+      "symbol": "@C:0aeb3884836e"
+    },
+    {
+      "content_preview": "# Verification Protocol **Status:** CANON   **Applies to:** Any task that modifies production code,",
+      "path": "GOVERNANCE\\VERIFICATION_PROTOCOL_CANON.md",
+      "sha256": "69cc041a0e84c8846c82edbed74f0a5f6e9e7a886c9cf7a87235cdb8c43d271e",
+      "size_bytes": 8561,
+      "symbol": "@C:69cc041a0e84"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 648a22830edaa1fac73bb5b77b37be17dd77145500e738eede3c16095d675f90 -->  # Versionin",
+      "path": "GOVERNANCE\\VERSIONING.md",
+      "sha256": "102b23f6bd4cb4bb81b1c69c21e468696dc72c0fa3ab85cf32146d14f0297b9f",
+      "size_bytes": 1311,
+      "symbol": "@C:102b23f6bd4c"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 3c72cb2e36daf44b1c85755da59503b718442489ee4b6b4c4dfbfb6c99e59532 -->  <!-- PROVEN",
+      "path": "META\\CODEBOOK.md",
+      "sha256": "e7e23d2c7beb4133566ee8b9efd52cb117b130e9443ae89d41ed1819b6e859e6",
+      "size_bytes": 10868,
+      "symbol": "@C:e7e23d2c7beb"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 73fd844f0f626623b8874d14ee27f11c66d9c211051497ecba78e2dbe6c88c68 -->  # Genesis P",
+      "path": "META\\GENESIS.md",
+      "sha256": "57e7116c8b7a5d40fe53b48f2b6c55169e1140b7f022a912a5ba8030db8f0682",
+      "size_bytes": 3057,
+      "symbol": "@C:57e7116c8b7a"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 7a46b71a5b33a0548e5b68b54fbef11231e4277eeaa6c3c7c006fc3c61dd8bac -->  # Genesis P",
+      "path": "META\\GENESIS_COMPACT.md",
+      "sha256": "08601c32846458be0e67e3cf97e6b27062b004e38fc7f4414d38c1664903cff2",
+      "size_bytes": 1447,
+      "symbol": "@C:08601c328464"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 1b2bc14395e3c25b0107afc9e92ab435613e7f563428b5fb61038fcb1ecbc959 -->  # Glossary",
+      "path": "META\\GLOSSARY.md",
+      "sha256": "0f5b836af209779f5af5e209aac84a3d38366b54dbbfd665a53a7dc03620360d",
+      "size_bytes": 3462,
+      "symbol": "@C:0f5b836af209"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6a7b8c9d0e1f2 -->  # Canon Ind",
+      "path": "META\\INDEX.md",
+      "sha256": "e7dff46aaab593a5e14a86ee4dae83f6a7f17c2e245074c61d2b814ad3d2b81f",
+      "size_bytes": 1948,
+      "symbol": "@C:e7dff46aaab5"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: 36e1b2bc23a1f9d5e7c8a9b2d3f4e5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2 -->  # SYSTEM BU",
+      "path": "META\\SYSTEM_BUCKETS.md",
+      "sha256": "43cdc5bd3236afebb388ab5772e954ca31419eaebca2818717c19d625ae2afaf",
+      "size_bytes": 3968,
+      "symbol": "@C:43cdc5bd3236"
+    },
+    {
+      "content_preview": "--- title: \"Agent Search Protocol\" status: \"Active\" priority: \"High\" created: \"2026-01-02\" tags: [\"g",
+      "path": "POLICY\\AGENT_SEARCH_PROTOCOL.md",
+      "sha256": "6eb126837ec8e0e251bbe2defe7b57dd7cceb789824cb4a8696dbd6b96e2540d",
+      "size_bytes": 5435,
+      "symbol": "@C:6eb126837ec8"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: ab0eb3ac2a2c3c604ffb6518f5cf65aa2da7f9d743fcd676a52d05cfab0d9400 -->  # Document",
+      "path": "POLICY\\DOCUMENT_POLICY.md",
+      "sha256": "3b0a4233739a8bc13a8842006cf68962ceb0be484c8810dd2d4d4d2fcdf0789b",
+      "size_bytes": 5944,
+      "symbol": "@C:3b0a4233739a"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: a1cb23e142abc2a8bdff0d02a24f8e211fb867f0f31395e0992658ea5efd7c05 -->  # Implement",
+      "path": "POLICY\\IMPLEMENTATION_REPORTS.md",
+      "sha256": "482fde26ebbe9989489772c66a54e855a4124d79bb6ef22c238bab62356b7daf",
+      "size_bytes": 4628,
+      "symbol": "@C:482fde26ebbe"
+    },
+    {
+      "content_preview": "<!-- CONTENT_HASH: f92a5ff086fa2e8aa07c306988e90c17d3fa85987b84356f9f504d654b5ade9d -->  # Security",
+      "path": "POLICY\\SECURITY.md",
+      "sha256": "a8aa8b3e8ea34d0e8dc61482b9daa53de18bff02edf12637a1f745cdddbc0981",
+      "size_bytes": 2617,
+      "symbol": "@C:a8aa8b3e8ea3"
+    },
+    {
+      "content_preview": "# TOKEN_RECEIPT_SPEC  > Canon Law: Every operation that consumes or saves tokens MUST emit a TokenRe",
+      "path": "SEMANTIC\\TOKEN_RECEIPT_SPEC.md",
+      "sha256": "709eb605731dbe3ebb5b42254d04ad01e97d39649dc0fa90dd0d057e3becd90e",
+      "size_bytes": 6955,
+      "symbol": "@C:709eb605731d"
+    }
+  ],
+  "total_bytes": 221449,
+  "total_files": 31,
+  "version": "1.0.0"
+}

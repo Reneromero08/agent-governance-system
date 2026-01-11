@@ -1,0 +1,157 @@
+{
+  "@C:08601c328464": {
+    "path": "LAW/CANON/META\\GENESIS_COMPACT.md",
+    "sha256": "08601c32846458be0e67e3cf97e6b27062b004e38fc7f4414d38c1664903cff2",
+    "size": 1447
+  },
+  "@C:0aeb3884836e": {
+    "path": "LAW/CANON/GOVERNANCE\\STEWARDSHIP.md",
+    "sha256": "0aeb3884836eeac1b3d852bdafc1dd6f21e17a873748ccc21b6cf37e007c4d4a",
+    "size": 5301
+  },
+  "@C:0d49ca360341": {
+    "path": "LAW/CANON/CATALYTIC\\SPECTRUM-06_RESTORE_RUNNER.md",
+    "sha256": "0d49ca36034130f4c13a8714dc1979e3f97276559a9dad3812204630b4eb8a25",
+    "size": 26979
+  },
+  "@C:0f5b836af209": {
+    "path": "LAW/CANON/META\\GLOSSARY.md",
+    "sha256": "0f5b836af209779f5af5e209aac84a3d38366b54dbbfd665a53a7dc03620360d",
+    "size": 3462
+  },
+  "@C:102b23f6bd4c": {
+    "path": "LAW/CANON/GOVERNANCE\\VERSIONING.md",
+    "sha256": "102b23f6bd4cb4bb81b1c69c21e468696dc72c0fa3ab85cf32146d14f0297b9f",
+    "size": 1311
+  },
+  "@C:33b119053288": {
+    "path": "LAW/CANON/GOVERNANCE\\DEPRECATION.md",
+    "sha256": "33b1190532889d10b3177ffb53a154b1d6a51d79e52fb5b94a4378eeb32e8c98",
+    "size": 3592
+  },
+  "@C:3b0a4233739a": {
+    "path": "LAW/CANON/POLICY\\DOCUMENT_POLICY.md",
+    "sha256": "3b0a4233739a8bc13a8842006cf68962ceb0be484c8810dd2d4d4d2fcdf0789b",
+    "size": 5944
+  },
+  "@C:3d68102255e8": {
+    "path": "LAW/CANON/GOVERNANCE\\ARBITRATION.md",
+    "sha256": "3d68102255e8e3368f1605154afa68f7a9dc3d87230b76ac338075d76c8c895b",
+    "size": 3978
+  },
+  "@C:43cdc5bd3236": {
+    "path": "LAW/CANON/META\\SYSTEM_BUCKETS.md",
+    "sha256": "43cdc5bd3236afebb388ab5772e954ca31419eaebca2818717c19d625ae2afaf",
+    "size": 3968
+  },
+  "@C:4531caf1207f": {
+    "path": "LAW/CANON/CONSTITUTION\\AGREEMENT.md",
+    "sha256": "4531caf1207f980e673b8ef9d2516d4fd4992e04d8da3eabf5a2601091530930",
+    "size": 2018
+  },
+  "@C:482fde26ebbe": {
+    "path": "LAW/CANON/POLICY\\IMPLEMENTATION_REPORTS.md",
+    "sha256": "482fde26ebbe9989489772c66a54e855a4124d79bb6ef22c238bab62356b7daf",
+    "size": 4628
+  },
+  "@C:5571bd993cef": {
+    "path": "LAW/CANON/CATALYTIC\\SPECTRUM-03_CHAIN_VERIFICATION.md",
+    "sha256": "5571bd993cefbbbbb08f95a0c3a18aa56712d9017323bf913e05412d90a3013a",
+    "size": 6164
+  },
+  "@C:57e7116c8b7a": {
+    "path": "LAW/CANON/META\\GENESIS.md",
+    "sha256": "57e7116c8b7a5d40fe53b48f2b6c55169e1140b7f022a912a5ba8030db8f0682",
+    "size": 3057
+  },
+  "@C:593edcc19b95": {
+    "path": "LAW/CANON/CATALYTIC\\SPECTRUM-04_IDENTITY_SIGNING.md",
+    "sha256": "593edcc19b9578a7f68bff2b3aa8fc65c75d7a9a036895943565cb46ee5ddf4d",
+    "size": 24076
+  },
+  "@C:69cc041a0e84": {
+    "path": "LAW/CANON/GOVERNANCE\\VERIFICATION_PROTOCOL_CANON.md",
+    "sha256": "69cc041a0e84c8846c82edbed74f0a5f6e9e7a886c9cf7a87235cdb8c43d271e",
+    "size": 8561
+  },
+  "@C:6eb126837ec8": {
+    "path": "LAW/CANON/POLICY\\AGENT_SEARCH_PROTOCOL.md",
+    "sha256": "6eb126837ec8e0e251bbe2defe7b57dd7cceb789824cb4a8696dbd6b96e2540d",
+    "size": 5435
+  },
+  "@C:709eb605731d": {
+    "path": "LAW/CANON/SEMANTIC\\TOKEN_RECEIPT_SPEC.md",
+    "sha256": "709eb605731dbe3ebb5b42254d04ad01e97d39649dc0fa90dd0d057e3becd90e",
+    "size": 6955
+  },
+  "@C:73ecfeb0789c": {
+    "path": "LAW/CANON/FOUNDATION\\THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md",
+    "sha256": "73ecfeb0789c8a493be5bbdcbd12a3649e119d175bb46b1a7e64a4ccaa10afd9",
+    "size": 6556
+  },
+  "@C:85bc78171225": {
+    "path": "LAW/CANON/CONSTITUTION\\FORMULA.md",
+    "sha256": "85bc78171225c4ff7a67826d953671cc031ff8e1420469f454df16ad8bd4c93f",
+    "size": 7595
+  },
+  "@C:8e0c83102b92": {
+    "path": "LAW/CANON/GOVERNANCE\\CRISIS.md",
+    "sha256": "8e0c83102b9270fc1a9a9f31485cb7be6e80e0789410a715f0334be7466c07ba",
+    "size": 5340
+  },
+  "@C:a0f0fb2d978c": {
+    "path": "LAW/CANON/CATALYTIC\\SPECTRUM-05_VERIFICATION_LAW.md",
+    "sha256": "a0f0fb2d978cc5c84d1dacfad1df7ae3d59c455b94642ff7beeb002f9db3106d",
+    "size": 19038
+  },
+  "@C:a8aa8b3e8ea3": {
+    "path": "LAW/CANON/POLICY\\SECURITY.md",
+    "sha256": "a8aa8b3e8ea34d0e8dc61482b9daa53de18bff02edf12637a1f745cdddbc0981",
+    "size": 2617
+  },
+  "@C:bf13bd4ab0aa": {
+    "path": "LAW/CANON/GOVERNANCE\\MIGRATION.md",
+    "sha256": "bf13bd4ab0aa8f16509baa22a6b8865dda61f6ad9d4084a4ec74a63ae172ab7e",
+    "size": 4748
+  },
+  "@C:c5e9caca10a8": {
+    "path": "LAW/CANON/CONSTITUTION\\INVARIANTS.md",
+    "sha256": "c5e9caca10a8abf091142460863a74ac3362255b7c26cb6a268b9800a0802c6a",
+    "size": 7591
+  },
+  "@C:d1b0a2e6cd42": {
+    "path": "LAW/CANON/CATALYTIC\\CATALYTIC_COMPUTING.md",
+    "sha256": "d1b0a2e6cd425f855c07293db8e3fc7fe64baf52589ce41874256aaa45f01b26",
+    "size": 10370
+  },
+  "@C:d2c0b7a00816": {
+    "path": "LAW/CANON/CONSTITUTION\\CONTRACT.md",
+    "sha256": "d2c0b7a00816e25441e28e36cfeab652b9667113009380d0f18b722e05c41695",
+    "size": 7565
+  },
+  "@C:d2e6e3a80346": {
+    "path": "LAW/CANON/CONSTITUTION\\INTEGRITY.md",
+    "sha256": "d2e6e3a80346651cba7f0fe6e9a4bc267d1e8a33ae181e486a5b0abec0a3b08a",
+    "size": 1669
+  },
+  "@C:df999ef6f18a": {
+    "path": "LAW/CANON/CATALYTIC\\CMP-01_CATALYTIC_MUTATION_PROTOCOL.md",
+    "sha256": "df999ef6f18afa0c547e8e9d81fdc9d86286ef5a07fbeeefaec78946dcdeb6e4",
+    "size": 13120
+  },
+  "@C:e7dff46aaab5": {
+    "path": "LAW/CANON/META\\INDEX.md",
+    "sha256": "e7dff46aaab593a5e14a86ee4dae83f6a7f17c2e245074c61d2b814ad3d2b81f",
+    "size": 1948
+  },
+  "@C:e7e23d2c7beb": {
+    "path": "LAW/CANON/META\\CODEBOOK.md",
+    "sha256": "e7e23d2c7beb4133566ee8b9efd52cb117b130e9443ae89d41ed1819b6e859e6",
+    "size": 10868
+  },
+  "@C:fa3b36471252": {
+    "path": "LAW/CANON/CATALYTIC\\SPECTRUM-02_RESUME_BUNDLE.md",
+    "sha256": "fa3b36471252ccc640c84ebbe31246f121560e5f9d60fda6f64c732656f14387",
+    "size": 5548
+  }
+}
