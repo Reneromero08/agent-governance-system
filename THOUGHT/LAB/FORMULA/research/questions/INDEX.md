@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.13.0 (2026-01-11 - Q17 ANSWERED: R-gating justified for governance with graduated thresholds by action criticality)*
+*Last updated: v3.14.0 (2026-01-11 - Q10 PARTIAL: R detects behavioral consistency (1.79x) and multi-agent misalignment (28% drop), but cannot detect logical contradictions)*
 
 ---
 
@@ -27,7 +27,7 @@
 | 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ PARTIAL | Axioms A1-A4 are scale-invariant (Q3) → R is scale-invariant. Hypothesis: R is RG fixed point. Still open: gate composition, agreement propagation, formal RG proof. |
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ⏳ PARTIAL | In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`. General mapping for the full formula across families is still open. |
-| 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ⏳ OPEN | Can R distinguish aligned vs. misaligned agent behavior? |
+| 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | 🔄 PARTIAL | **18/18 tests pass.** Behavioral consistency (1.79x discrimination), multi-agent misalignment (28% R drop). LIMITATION: Cannot detect logical contradictions (semantic opposites are topically similar). |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ PARTIAL | **YES - phase transition at α=0.9-1.0**. Generalization jumps +0.424 suddenly. Truth crystallizes, doesn't emerge gradually. J anti-correlated with generalization (ρ=-0.54). Binary R-gates justified. |
@@ -105,16 +105,16 @@
 
   - **Total Questions:** 43
   - **Answered:** 10 (23.3%)
-  - **Partially Answered:** 9 (20.9%)
+  - **Partially Answered:** 10 (23.3%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 24 (55.8%)
+  - **Open:** 23 (53.5%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 5 | 2 | 0 | 0 |
- | High | 16 | 2 | 5 | 0 | 9 |
+ | High | 16 | 2 | 6 | 0 | 8 |
  | Medium | 11 | 3 | 1 | 0 | 7 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
