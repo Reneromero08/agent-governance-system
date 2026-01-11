@@ -442,3 +442,100 @@ Observed failures in this fast matrix (by receipt `passed=false`):
 - `empirical_receipt_p5_transfer_scifact_to_climate_fever_fast_20260110_052808.json`: `scifact->climate_fever:Climate-FEVER-Streaming@seed=123`
 - `empirical_receipt_p5_transfer_snli_to_climate_fever_fast_20260110_052808.json`: `snli->climate_fever:Climate-FEVER-Streaming@seed=123`
 - `empirical_receipt_p5_transfer_mnli_to_climate_fever_fast_20260110_052808.json`: `mnli->climate_fever:Climate-FEVER-Streaming@seed=123`
+
+---
+
+## 2026-01-10 Phase 5.2 (full) - 4-domain matrix (cached calibration) + scale checks (stress + sweep-k)
+
+Purpose:
+- Run the full 4-domain matrix at higher rigor (crossencoder; cached calibration) to verify transfer survives scale.
+- Run multi-dataset stress + neighbor-k sweep to ensure the gates hold under repeated trials.
+
+Note (no assumptions):
+- Exact run configuration is recorded inside each receipt under JSON key `run`.
+
+### Full 4-domain matrix (cached calibration; crossencoder; calibration_n=2, verify_n=2)
+
+Artifacts:
+- `p5_matrix4_full_cached_n2_20260110_073410.log.txt` = `51FB85BDC4D3D5D96D152D5F464195ED2347B2A17DA806C090B6F9C985F32783`
+- `p5_matrix4_full_cached_n2_20260110_073410.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p5_matrix4_full_cached_n2_20260110_073410.json` = `8D97D42B90FB73A25CF8AB78C49D03E87BE72521C79E6E5C1362EB4437CB16D9`
+
+### Stress (all datasets; crossencoder; stress_n=10; min_pass_rate=0.7)
+
+Artifacts:
+- `p5_stress_all_full_n10_20260110_081613.log.txt` = `33D1CACB28F2028A90F755201DC134F84FAFCA786EFAF78E68FA819F504484E8`
+- `p5_stress_all_full_n10_20260110_081613.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p5_stress_all_full_n10_20260110_081613.json` = `0AE18FD8E713EA6740EDB462CE7E7DC1515DA906984127490022D56B5091A5EB`
+- `stress_p5_all_full_n10_20260110_081613.json` = `5A07F27D454F489A50E33CB24B698608DC9F8CA15A84F993E72FA815620A0AEC`
+
+### Sweep-k (all datasets; crossencoder; ks=1,3,5,10; trials=6; min_pass_rate=0.7)
+
+Artifacts:
+- `p5_sweep_k_all_full_trials6_20260110_083905.log.txt` = `F5512F6B8EF4928599D0EDA59EEE8F499C4536029A24A139A48F9D7AE6185E41`
+- `p5_sweep_k_all_full_trials6_20260110_083905.rc.txt` = `13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354`
+- `empirical_receipt_p5_sweep_k_all_full_trials6_20260110_083905.json` = `FC3813306DB4465A7C63CC221A2C4F5074A237D0DA37B82B304E855DBD7CAA02`
+- `sweep_k_p5_all_full_trials6_20260110_083905.json` = `C6F1199BF0DF1613CC7CB3C87F0C947E903337ADF1942A5D51908E7C2A5EBDD4`
+
+---
+
+## 2026-01-10 Phase 5.3 (full) - Negative controls (should FAIL hard; receipts must still be written)
+
+Purpose:
+- Confirm the pipeline has hard falsifiers that reliably fail under intended "wrong" constructions.
+- Still produce receipts/logs for failed runs (so failures are auditable and reproducible).
+
+Wrong-check semantics in this phase (implemented to be deterministic):
+- `inflation`: agreement inflation negative-control (should FAIL).
+- `shuffle`: echo-chamber self-check (should FAIL).
+- `paraphrase`: perfect-overlap control (wrong check == correct check; should FAIL).
+
+### Bench negative controls (full / crossencoder)
+
+Artifacts (inflation):
+- `p5_negctl_bench_inflation_full_20260110_090630.log.txt` = `7402C49C090E912AE3D9E85CA0504B70B4DE38BA9B4B177DE266A300CA997E75`
+- `p5_negctl_bench_inflation_full_20260110_090630.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_bench_inflation_full_20260110_090630.json` = `7F0E7512D71FD0898D3E148F42D7866D7A30A2321CB60BEF8B4B957DD546C68B`
+
+Artifacts (paraphrase / perfect-overlap):
+- `p5_negctl_bench_paraphrase_full_20260110_091851.log.txt` = `88F4D8DA5C6E162EFC8BFF975B1610C16DF8B14A865D48BCBB2AEABD37282C69`
+- `p5_negctl_bench_paraphrase_full_20260110_091851.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_bench_paraphrase_full_20260110_091851.json` = `CE6B97F67172BDE77C151C8D946F627AEA17F4771BC5788DAECD4EBFABC32C38`
+
+Artifacts (shuffle / echo):
+- `p5_negctl_bench_shuffle_full_20260110_092730.log.txt` = `15547856588DED13436FA1AE5A33CF99D35529B340072A8F0393785EE08EB252`
+- `p5_negctl_bench_shuffle_full_20260110_092730.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_bench_shuffle_full_20260110_092730.json` = `BA9C47E168B8296879F7A21559782382E5E6D26519AC0722780EEC7338EDD791`
+
+### Streaming negative controls (full / crossencoder)
+
+Artifacts (inflation):
+- `p5_negctl_stream_inflation_full_20260110_092936.log.txt` = `28620E0CCB2259E638A0954591D4234679E064F40EED1AE5920AD33AF1612246`
+- `p5_negctl_stream_inflation_full_20260110_092936.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_stream_inflation_full_20260110_092936.json` = `E14397F2B1F606256911FD8412820618120A58C228FE74E68C833F0DC0B01DE3`
+
+Artifacts (paraphrase / perfect-overlap enforced):
+- `p5_negctl_stream_paraphrase_full_20260110_095556.log.txt` = `4E4C240AC8DEE57A62D5A1D0FD530D846EE0E88D63307FC1FF731A108D4A6709`
+- `p5_negctl_stream_paraphrase_full_20260110_095556.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_stream_paraphrase_full_20260110_095556.json` = `4E0515FE0B0A583F9FDCC6FE4C864D47885E9AED09AEE480C59368F7CDF91776`
+
+Artifacts (shuffle / echo):
+- `p5_negctl_stream_shuffle_full_20260110_095948.log.txt` = `7FE03FB3CA76CE19F646BB0931762CC80E07DFDBCEBF5A201E7AC8C4B7769CD6`
+- `p5_negctl_stream_shuffle_full_20260110_095948.rc.txt` = `F1B2F662800122BED0FF255693DF89C4487FBDCF453D3524A42D4EC20C3D9C04`
+- `empirical_receipt_p5_negctl_stream_shuffle_full_20260110_095948.json` = `B9B046692ED62115A63BA43591B7DD5BD0414F4F3BBAB6AC2A7520762A3D9C63`
+
+---
+
+## 2026-01-10 Phase 5.4 - Replication bundle (environment + evidence hashing)
+
+Bundle:
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/README.txt` = `F481EA94FFA57611D5A890E4ADD9C63FCAAA4F385D0F51DB8624A4F3D9B30797`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/EVIDENCE_SHA256.txt` = `661072636013298862C08A28D3AFD314CA731FDAA2DB213F0B2EF59A3CE0FF27`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/git_branch.txt` = `04E378A5CC3CCD79C375BD4137FF131C43B401EADF87DABBF31DF748D47082D7`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/git_head.txt` = `E51227F47BE1762692CDB3B87982EB5B13306FD95C1B38FF28CCC5B127B99638`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/git_status_porcelain.txt` = `E3856DFC7456D57B71FB30C6ACA77026BEC7635286A837376FD4A60F777634FB`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/python_version.txt` = `6661D0C2DF33BEF5D9F73854A4077F010EFB8264ECD67F29BB03271ECA58B956`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/python_platform.txt` = `BD701038D428C09F9C5CB4E2C73B77042581E3316AAFAD09B708AF39E18EDEDA`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/pip_version.txt` = `1F08AA0E851F063784719ED954C62C15F29A7C6CB60748345698CAA407009148`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/pip_freeze.txt` = `D264FAC34C4F3DFCBC942B9C07420FAD1356B3F30A5C94FECC00D0DE6535D090`
+- `LAW/CONTRACTS/_runs/q32_public/datatrail/p5_replication_bundle_20260110_100535/SHA256SUMS.txt` = `1B679E5E56EA23F1084D3F7550A511D7EB007822AB7569A161F911A249618EA0`

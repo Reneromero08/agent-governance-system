@@ -26,6 +26,7 @@ import hashlib
 import json
 import math
 import os
+import sys
 from dataclasses import dataclass
 from datetime import datetime
 from functools import lru_cache
@@ -46,6 +47,18 @@ _CE_BATCH_SIZE: Optional[int] = None
 _ST_BATCH_SIZE: Optional[int] = None
 _ABLATION: str = "full"
 _DEPTH_POWER: float = 0.0
+
+
+def _configure_stdio_utf8() -> None:
+    """
+    Windows default consoles often use cp1252, which cannot print some symbols used in help/notes.
+    """
+    for stream in (sys.stdout, sys.stderr):
+        try:
+            if stream is not None and hasattr(stream, "reconfigure"):
+                stream.reconfigure(encoding="utf-8")
+        except Exception:
+            pass
 
 
 def set_cache_roots() -> None:
@@ -709,12 +722,22 @@ def run_scifact_benchmark(
     neighbor_candidate_sims_by_claim: Dict[int, List[float]] = {}
     inflation_candidates_by_claim: Dict[int, List[int]] = {}
     inflation_candidate_sims_by_claim: Dict[int, List[float]] = {}
+    paraphrase_by_claim: Dict[int, int] = {}
+    paraphrase_sims_by_claim: Dict[int, float] = {}
+    shuffle_by_claim: Dict[int, int] = {}
     neighbor_sims: List[float] = []
-    if wrong_checks in ("neighbor", "inflation"):
+    if wrong_checks in ("neighbor", "inflation", "paraphrase", "shuffle"):
         claim_text_by_id: Dict[int, str] = {}
         for e in support_examples:
             claim_text_by_id.setdefault(int(e.claim_id), str(e.claim))
         claim_ids = sorted({int(e.claim_id) for e in support_examples})
+
+        if wrong_checks == "shuffle":
+            ids = sorted([int(cid) for cid in claim_ids if int(cid) in claim_bank])
+            if len(ids) < 2:
+                raise RuntimeError("SciFact shuffle requires at least 2 claims with check pools")
+            rot = ids[1:] + ids[:1]
+            shuffle_by_claim = {int(a): int(b) for a, b in zip(ids, rot)}
 
         # Build a CONTRADICT bank so "neighbor wrong checks" are actually wrong (truth-inconsistent),
         # but still semantically close (nearest-neighbor competitor).
@@ -751,12 +774,16 @@ def run_scifact_benchmark(
                 neighbor_candidates_by_claim[int(cid)] = [int(contra_claim_ids[int(j)]) for j in cand_pos]
                 neighbor_candidate_sims_by_claim[int(cid)] = [float(sim_sc[i, int(j)]) for j in cand_pos]
 
-        if wrong_checks == "inflation":
-            # Agreement inflation negative control:
+        if wrong_checks in ("inflation", "paraphrase"):
+            # Agreement inflation / paraphrase-only negative controls:
             # choose a nearest-neighbor SUPPORT claim (truth-consistent for itself) so wrong checks "accidentally" support.
-            support_claim_ids = sorted([cid for cid in claim_ids if int(cid) in claim_bank and int(cid) in claim_text_by_id])
+            support_claim_ids = sorted(
+                [cid for cid in claim_ids if int(cid) in claim_bank and int(cid) in claim_text_by_id]
+            )
             if len(support_claim_ids) < (20 if fast else 80):
-                raise RuntimeError(f"Too few SciFact SUPPORT candidates for inflation control ({len(support_claim_ids)})")
+                raise RuntimeError(
+                    f"Too few SciFact SUPPORT candidates for {wrong_checks} control ({len(support_claim_ids)})"
+                )
             support_texts = [claim_text_by_id[int(cid)] for cid in support_claim_ids]
             emb = embed_texts(support_texts)
             sim = emb @ emb.T
@@ -766,8 +793,14 @@ def run_scifact_benchmark(
                 sims_row[i] = -float("inf")
                 order = np.argsort(-sims_row)
                 cand_pos = [int(j) for j in order[:k]]
-                inflation_candidates_by_claim[int(cid)] = [int(support_claim_ids[int(j)]) for j in cand_pos]
-                inflation_candidate_sims_by_claim[int(cid)] = [float(sims_row[int(j)]) for j in cand_pos]
+                if wrong_checks == "inflation":
+                    inflation_candidates_by_claim[int(cid)] = [int(support_claim_ids[int(j)]) for j in cand_pos]
+                    inflation_candidate_sims_by_claim[int(cid)] = [float(sims_row[int(j)]) for j in cand_pos]
+                else:
+                    if cand_pos:
+                        j0 = int(cand_pos[0])
+                        paraphrase_by_claim[int(cid)] = int(support_claim_ids[j0])
+                        paraphrase_sims_by_claim[int(cid)] = float(sims_row[j0])
 
     for i, ex in enumerate(support_examples):
         sampled = sample_sentences_from_doc(
@@ -823,10 +856,18 @@ def run_scifact_benchmark(
                         wrong_sents = pick
                 if best_pos is not None:
                     neighbor_sims.append(float(sims[int(best_pos)]))
+        elif wrong_checks == "paraphrase":
+            # Paraphrase-only negative control: reuse the true check pool as the wrong check (perfect overlap).
+            wrong_sents = list(check_correct_sents)
+        elif wrong_checks == "shuffle":
+            # Shuffle negative control: reuse the observation evidence as the check (echo-chamber self-check).
+            wrong_sents = (list(obs_sents) * 3)[:6]
         if wrong_sents is None:
             wrong_sents = wrong_bank[(i + 17) % len(wrong_bank)]
             if wrong_sents == check_correct_sents:
                 wrong_sents = wrong_bank[(i + 18) % len(wrong_bank)]
+        if not wrong_sents or len(wrong_sents) < 2:
+            continue
         check_correct_scores = sentence_support_scores([ex.claim] * len(check_correct_sents), check_correct_sents).tolist()
         check_wrong_scores = sentence_support_scores([ex.claim] * len(wrong_sents), wrong_sents).tolist()
 
@@ -881,7 +922,7 @@ def run_scifact_benchmark(
     if Ms.size:
         print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
         print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -912,7 +953,7 @@ def run_scifact_benchmark(
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
     }
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -957,7 +998,7 @@ def run_snli_benchmark(
     emb_contra: Optional[np.ndarray] = None
     ent_hyps: List[str] = []
     contra_hyps: List[str] = []
-    if wrong_checks in ("neighbor", "inflation"):
+    if wrong_checks in ("neighbor", "inflation", "paraphrase"):
         ent_hyps = [e.hypothesis for e in ent[: (400 if fast else 2000)]]
         contra_hyps = [e.hypothesis for e in contra[: (400 if fast else 2000)]]
         emb_ent = embed_texts(ent_hyps)
@@ -1039,6 +1080,11 @@ def run_snli_benchmark(
                     wrong_chunks = c_chunks
             if best_pos is not None:
                 neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+        elif wrong_checks == "paraphrase":
+            # Paraphrase-only negative control: reuse the true check pool as the wrong check (perfect overlap).
+            wrong_chunks = list(check_correct_chunks)
+        elif wrong_checks == "shuffle":
+            wrong_chunks = (list(obs_chunks) * 3)[:6]
 
         if not wrong_chunks or len(wrong_chunks) < 2:
             continue
@@ -1096,7 +1142,7 @@ def run_snli_benchmark(
     if Ms.size:
         print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
         print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -1127,7 +1173,7 @@ def run_snli_benchmark(
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
     }
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -1167,7 +1213,7 @@ def run_snli_streaming(
     emb_contra: Optional[np.ndarray] = None
     ent_hyps: List[str] = []
     contra_hyps: List[str] = []
-    if wrong_checks in ("neighbor", "inflation"):
+    if wrong_checks in ("neighbor", "inflation", "paraphrase"):
         ent_hyps = [e.hypothesis for e in ent[: (600 if fast else 3000)]]
         contra_hyps = [e.hypothesis for e in contra[: (600 if fast else 3000)]]
         emb_ent = embed_texts(ent_hyps)
@@ -1175,8 +1221,21 @@ def run_snli_streaming(
 
     samples: List[Tuple[str, List[str], List[float], List[str], List[float]]] = []
     for i, ex in enumerate(ent):
-        chunks = _word_chunks(ex.premise, window=3, stride=1, max_chunks=14)
-        if len(chunks) < 10:
+        # MNLI premises are longer and more diverse; 3-gram windows are too lossy for the cross-encoder.
+        # Use longer windows/stride for MNLI to preserve semantics under streaming.
+        if str(nli_domain) == "mnli":
+            chunks = _word_chunks(ex.premise, window=6, stride=3, max_chunks=24)
+            min_chunks = 6
+            wrong_window = 6
+            wrong_stride = 3
+            wrong_max = 18
+        else:
+            chunks = _word_chunks(ex.premise, window=3, stride=1, max_chunks=14)
+            min_chunks = 10
+            wrong_window = 3
+            wrong_stride = 1
+            wrong_max = 10
+        if len(chunks) < min_chunks:
             continue
         support_scores = sentence_support_scores([ex.hypothesis] * len(chunks), chunks).tolist()
         mu_hat_proxy = float(np.mean(np.asarray(support_scores[:2], dtype=float)))
@@ -1185,7 +1244,7 @@ def run_snli_streaming(
         if wrong_checks == "dissimilar":
             j = (i * 17 + 23) % max(1, len(contra))
             c = contra[int(j)]
-            c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+            c_chunks = _word_chunks(c.premise, window=wrong_window, stride=wrong_stride, max_chunks=wrong_max)[:wrong_max]
             if len(c_chunks) < 6:
                 continue
             wrong_scores = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
@@ -1201,7 +1260,7 @@ def run_snli_streaming(
             best_mean = float("inf")
             for pos, j in enumerate(cand):
                 c = contra[int(j)]
-                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+                c_chunks = _word_chunks(c.premise, window=wrong_window, stride=wrong_stride, max_chunks=wrong_max)[:wrong_max]
                 if len(c_chunks) < 6:
                     continue
                 cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
@@ -1225,7 +1284,7 @@ def run_snli_streaming(
             best_mean = -float("inf")
             for pos, j in enumerate(cand):
                 c = ent[int(j)]
-                c_chunks = _word_chunks(c.premise, window=3, stride=1, max_chunks=10)[:10]
+                c_chunks = _word_chunks(c.premise, window=wrong_window, stride=wrong_stride, max_chunks=wrong_max)[:wrong_max]
                 if len(c_chunks) < 6:
                     continue
                 cross = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
@@ -1236,6 +1295,14 @@ def run_snli_streaming(
                     wrong_scores = cross
             if best_pos is not None:
                 neighbor_sims.append(float(sims[int(cand[int(best_pos)])]))
+        elif wrong_checks == "paraphrase":
+            # Paraphrase-only negative control: hypothesis-only check (no external grounding).
+            c_chunks = [ex.hypothesis] * int(max(6, int(wrong_max)))
+            wrong_scores = sentence_support_scores([ex.hypothesis] * len(c_chunks), c_chunks).tolist()
+        elif wrong_checks == "shuffle":
+            wrong_scores = [float(x) for x in support_scores[:wrong_max]]
+            if len(wrong_scores) < 6:
+                continue
 
         if wrong_scores is None or len(wrong_scores) < 6:
             continue
@@ -1246,7 +1313,7 @@ def run_snli_streaming(
             break
 
     if len(samples) < (20 if fast else 120):
-        raise RuntimeError(f"Too few SNLI streaming samples ({len(samples)})")
+        raise RuntimeError(f"Too few {tag} streaming samples ({len(samples)})")
 
     M_correct_end: List[float] = []
     M_wrong_end: List[float] = []
@@ -1281,7 +1348,7 @@ def run_snli_streaming(
             last_obs = [float(x) for x in obs]
             last_check = [float(x) for x in check_correct]
             R_c = float(R_grounded(obs, check_correct))
-            R_w = float(R_grounded(obs, wrong_scores))
+            R_w = float(R_grounded(obs, check_correct if wrong_checks == "paraphrase" else wrong_scores))
             R_series_correct.append(R_c)
             R_series_wrong.append(R_w)
             M_series_correct.append(M_from_R(R_c))
@@ -1356,7 +1423,7 @@ def run_snli_streaming(
     if M_swap_wrong_end_a.size:
         print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
         print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -1394,7 +1461,7 @@ def run_snli_streaming(
     }
     if phi_coupling:
         details["phi_proxy_bits"] = float(np.mean(np.asarray(phi_coupling, dtype=float)))
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -1619,7 +1686,7 @@ def run_climate_fever_intervention_benchmark(
         raise RuntimeError(f"Climate-FEVER wrong-check bank too small ({len(bank)})")
 
     bank_claim_texts = [c for c, _ in bank]
-    bank_emb = embed_texts(bank_claim_texts) if wrong_checks in ("neighbor", "inflation") else None
+    bank_emb = embed_texts(bank_claim_texts) if wrong_checks in ("neighbor", "inflation", "paraphrase") else None
 
     indices = np.arange(len(ds))
     rng.shuffle(indices)
@@ -1664,7 +1731,10 @@ def run_climate_fever_intervention_benchmark(
         if len(check_correct_texts) < 2:
             continue
 
-        if wrong_checks in ("neighbor", "inflation") and bank_emb is not None:
+        wrong_check_texts: List[str] = []
+        if wrong_checks == "paraphrase":
+            wrong_check_texts = [claim] * 3
+        elif wrong_checks in ("neighbor", "inflation") and bank_emb is not None:
             c_emb = embed_texts([claim])[0]
             sims = bank_emb @ c_emb
             k = max(1, int(neighbor_k))
@@ -1722,11 +1792,13 @@ def run_climate_fever_intervention_benchmark(
             other_claim, other_supports = bank[pick]
             wrong_check_texts = pick_sents[a:b]
         else:
-            other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
-            if other_claim.strip() == claim.strip():
-                other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
-        if wrong_checks not in ("neighbor", "inflation"):
-            wrong_check_texts = other_supports[:3]
+            if wrong_checks == "shuffle":
+                wrong_check_texts = (list(obs_texts) * 2)[:3]
+            else:
+                other_claim, other_supports = bank[(int(i) + 17) % len(bank)]
+                if other_claim.strip() == claim.strip():
+                    other_claim, other_supports = bank[(int(i) + 18) % len(bank)]
+                wrong_check_texts = other_supports[:3]
         if len(wrong_check_texts) < 2:
             continue
 
@@ -1782,7 +1854,7 @@ def run_climate_fever_intervention_benchmark(
     if Ms.size:
         print(f"  [swap] P(M_correct > M_swapped_correct) = {swap_pair_wins:.3f}")
         print(f"  [swap] mean(M_correct - M_swapped_correct) = {swap_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -1813,7 +1885,7 @@ def run_climate_fever_intervention_benchmark(
         "gate_margin": gate_margin,
         "phi_proxy_bits": float(phi),
     }
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -1824,12 +1896,13 @@ def parse_args() -> argparse.Namespace:
     p = argparse.ArgumentParser(description="Q32 public truth-anchored benchmarks (fast + full modes).")
     p.add_argument(
         "--mode",
-        choices=["bench", "stream", "transfer", "matrix", "stress", "sweep"],
+        choices=["bench", "stream", "transfer", "matrix", "matrix_cached", "stress", "sweep"],
         default="bench",
         help=(
             "Run static benchmarks (bench), streaming/intervention simulation (stream), Phase-3 transfer (transfer), "
-            "a Phase-3 matrix (matrix: run both transfer directions), variability stress tests (stress), "
-            "or a Phase-2 neighbor_k sweep (sweep)."
+            "a Phase-3 matrix (matrix: run all ordered pairs; recalibrates per pair), "
+            "a cached Phase-3 matrix (matrix_cached: calibrate once per source domain), "
+            "variability stress tests (stress), or a neighbor_k sweep (sweep)."
         ),
     )
     p.add_argument(
@@ -1847,6 +1920,11 @@ def parse_args() -> argparse.Namespace:
         "--strict",
         action="store_true",
         help="Hard-fail benchmarks that do not meet gates (default in full mode).",
+    )
+    p.add_argument(
+        "--non_strict",
+        action="store_true",
+        help="Do not hard-fail on gate failures (useful for collecting receipts on expected-negative runs).",
     )
     p.add_argument(
         "--scoring",
@@ -1896,18 +1974,19 @@ def parse_args() -> argparse.Namespace:
     )
     p.add_argument(
         "--wrong_checks",
-        choices=["dissimilar", "neighbor", "inflation"],
+        choices=["dissimilar", "neighbor", "inflation", "paraphrase", "shuffle"],
         default="dissimilar",
         help=(
             "How to construct wrong checks: dissimilar topic (default), nearest-neighbor (J-style), "
-            "or inflation (agreement inflation negative control)."
+            "inflation (agreement inflation negative control), paraphrase (hypothesis-only / self-check control), "
+            "or shuffle (echo-chamber self-check: reuse the obs as the check)."
         ),
     )
     p.add_argument(
         "--neighbor_k",
         type=int,
         default=10,
-        help="When --wrong_checks neighbor|inflation, choose from top-k nearest neighbors (default: 10).",
+        help="When --wrong_checks neighbor|inflation|paraphrase, choose from top-k nearest neighbors (default: 10).",
     )
     p.add_argument(
         "--sweep_neighbor_k",
@@ -2297,7 +2376,8 @@ def run_climate_fever_streaming(
             continue
         support_evs_sorted = sorted(support_evs, key=lambda t: (-t[0], t[1]))
         stream_text = str(support_evs_sorted[0][2])
-        support_texts = _word_chunks(stream_text, window=3, stride=1, max_chunks=12)[:6]
+        # Use a longer within-evidence stream so transfer-to-climate has enough time steps to stabilize.
+        support_texts = _word_chunks(stream_text, window=3, stride=1, max_chunks=18)[:10]
         if len(support_texts) < 4:
             continue
         independent_texts = [str(t[2]) for t in support_evs_sorted[1:4]]
@@ -2308,23 +2388,37 @@ def run_climate_fever_streaming(
         support_scores_preview = sentence_support_scores([claim] * len(support_texts), support_texts).tolist()
         mu_hat_proxy = float(np.mean(np.asarray(support_scores_preview, dtype=float)))
 
+        if wrong_checks == "paraphrase":
+            wrong_check_texts = [claim] * 4
+            if len(wrong_check_texts) < 3:
+                continue
+            samples.append((claim, support_texts, independent_texts, wrong_check_texts))
+            continue
+
+        if wrong_checks == "shuffle":
+            wrong_check_texts = list(support_texts[:4])
+            if len(wrong_check_texts) < 3:
+                continue
+            samples.append((claim, support_texts, independent_texts, wrong_check_texts))
+            continue
+
         # Candidate wrong checks:
         # - dissimilar: choose least similar claims
         # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim)
         sims = support_claim_emb @ c_emb
-        if wrong_checks in ("neighbor", "inflation"):
+        if wrong_checks in ("neighbor", "inflation", "paraphrase"):
             order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
         else:
             order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation") else 80
+        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation", "paraphrase") else 80
         for j in order[: max(80, k + 2)]:
             j = int(j)
             if support_claim_texts[j].strip() == claim.strip():
                 continue
             cand.append(j)
-            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation") else 6):
+            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation", "paraphrase") else 6):
                 break
         if not cand:
             continue
@@ -2338,23 +2432,24 @@ def run_climate_fever_streaming(
             offsets.append((cur, cur + len(lst)))
             cur += len(lst)
         flat_scores = sentence_support_scores([claim] * len(flat_sents), flat_sents).tolist()
-        cand_means: List[float] = []
+        # Select wrong-checks based on the grounded objective under a small obs proxy.
+        # This avoids brittle mean-score heuristics when transferring in/out of climate_fever.
+        obs_for_select = [float(x) for x in support_scores_preview[:2]]
+        cand_M: List[float] = []
         for a, b in offsets:
             if b <= a:
-                cand_means.append(float("inf"))
-            else:
-                cand_means.append(float(np.mean(np.asarray(flat_scores[a:b], dtype=float))))
-        if wrong_checks == "neighbor":
-            # For neighbor-competitor falsifiers, prefer the most incompatible neighbor (directional gap).
-            strength = [(mu_hat_proxy - m) if math.isfinite(m) else -1.0 for m in cand_means]
+                cand_M.append(float("inf") if wrong_checks != "inflation" else -float("inf"))
+                continue
+            check = [float(x) for x in flat_scores[a:b]]
+            cand_M.append(float(M_from_R(R_grounded(obs_for_select, check))))
+        if wrong_checks == "paraphrase":
+            chosen_pos = 0
         elif wrong_checks == "inflation":
-            # Agreement inflation negative control: prefer the most supportive wrong-check candidate.
-            strength = [m if math.isfinite(m) else -1.0 for m in cand_means]
+            chosen_pos = int(np.argmax(np.asarray(cand_M, dtype=float)))
         else:
-            strength = [abs(m - mu_hat_proxy) if math.isfinite(m) else -1.0 for m in cand_means]
-        chosen_pos = int(np.argmax(np.asarray(strength, dtype=float)))
-        wrong_check_texts = cand_texts[chosen_pos]
-        if wrong_checks in ("neighbor", "inflation"):
+            chosen_pos = int(np.argmin(np.asarray(cand_M, dtype=float)))
+        wrong_check_texts = cand_texts[int(chosen_pos)]
+        if wrong_checks in ("neighbor", "inflation", "paraphrase"):
             neighbor_sims.append(float(sims[int(cand[chosen_pos])]))
         if len(wrong_check_texts) < 3:
             continue
@@ -2414,7 +2509,7 @@ def run_climate_fever_streaming(
             last_obs = [float(x) for x in obs]
             last_check = [float(x) for x in check_correct]
             R_c = float(R_grounded(obs, check_correct))
-            R_w = float(R_grounded(obs, wrong_scores))
+            R_w = float(R_grounded(obs, check_correct if wrong_checks == "paraphrase" else wrong_scores))
             R_series_correct.append(R_c)
             R_series_wrong.append(R_w)
             M_series_correct.append(M_from_R(R_c))
@@ -2524,7 +2619,7 @@ def run_climate_fever_streaming(
     if M_swap_wrong_end_a.size:
         print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
         print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(np.mean(np.asarray(neighbor_sims, dtype=float))):.3f}")
     if phi_coupling:
         print(f"  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = {float(np.mean(np.asarray(phi_coupling, dtype=float))):.3f} bits")
@@ -2594,7 +2689,7 @@ def run_climate_fever_streaming(
             "swap_wrong_pair_wins_end": float(swap_wrong_pair_wins),
             "swap_wrong_mean_margin_end": float(swap_wrong_margin),
             "mean_neighbor_sim": float(np.mean(np.asarray(neighbor_sims, dtype=float)))
-            if (wrong_checks in ("neighbor", "inflation") and neighbor_sims)
+            if (wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims)
             else float("nan"),
             "phi_proxy_bits": float(np.mean(np.asarray(phi_coupling, dtype=float))) if phi_coupling else 0.0,
             "mean_R_indep_end": float(np.mean(np.asarray(R_indep_end, dtype=float))) if R_indep_end else float("nan"),
@@ -2748,28 +2843,62 @@ def run_scifact_streaming(
         support_scores_preview = sentence_support_scores([claim_text] * len(support_texts), support_texts).tolist()
         mu_hat_proxy = float(np.mean(np.asarray(support_scores_preview, dtype=float)))
 
+        if wrong_checks == "paraphrase":
+            wrong_texts_preview = [claim_text] * 4
+            if len(wrong_texts_preview) < 3:
+                continue
+            wrong_scores_preview = sentence_support_scores(
+                [claim_text] * len(wrong_texts_preview), wrong_texts_preview
+            ).tolist()
+            samples.append(
+                (
+                    claim_text,
+                    [str(x) for x in support_texts],
+                    support_scores_preview,
+                    [str(x) for x in wrong_texts_preview],
+                    [float(x) for x in wrong_scores_preview],
+                )
+            )
+            continue
+
+        if wrong_checks == "shuffle":
+            wrong_texts_preview = [str(x) for x in support_texts[:4]]
+            wrong_scores_preview = [float(x) for x in support_scores_preview[:4]]
+            if len(wrong_scores_preview) < 3:
+                continue
+            samples.append(
+                (
+                    claim_text,
+                    [str(x) for x in support_texts],
+                    support_scores_preview,
+                    wrong_texts_preview,
+                    wrong_scores_preview,
+                )
+            )
+            continue
+
         # Wrong checks:
         # - dissimilar: choose least similar claims
         # - neighbor: choose most similar claims
         c_emb = claim_embedding(claim_text)
         sims = support_claim_emb @ c_emb
-        if wrong_checks in ("neighbor", "inflation"):
+        if wrong_checks in ("neighbor", "inflation", "paraphrase"):
             order = np.argsort(-sims)  # high similarity => nearest neighbor competitor
         else:
             order = np.argsort(sims)  # low similarity => more wrong
         cand: List[int] = []
-        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation") else 50
+        k = max(1, int(neighbor_k)) if wrong_checks in ("neighbor", "inflation", "paraphrase") else 50
         for j in order[: max(50, k + 2)]:
             idx = int(j)
             if support_claim_texts[idx].strip() == claim_text.strip():
                 continue
             cand.append(idx)
-            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation") else 6):
+            if len(cand) >= (k if wrong_checks in ("neighbor", "inflation", "paraphrase") else 6):
                 break
         if not cand:
             continue
 
-        if wrong_checks in ("neighbor", "inflation"):
+        if wrong_checks in ("neighbor", "inflation", "paraphrase"):
             # Build a "neighbor competitor" wrong-check pool:
             # pick a nearest-neighbor claim whose own evidence-sentences are strongly SUPPORTIVE for itself,
             # but score LOW when evaluated against the current claim.
@@ -2814,7 +2943,9 @@ def run_scifact_streaming(
                 check = [float(x) for x in cross_scores[a:b]]
                 cand_M.append(float(M_from_R(R_grounded(obs_for_select, check))))
 
-            if wrong_checks == "inflation":
+            if wrong_checks == "paraphrase":
+                chosen_pos = 0
+            elif wrong_checks == "inflation":
                 chosen_pos = int(np.argmax(np.asarray(cand_M, dtype=float)))
             else:
                 chosen_pos = int(np.argmin(np.asarray(cand_M, dtype=float)))
@@ -2926,7 +3057,7 @@ def run_scifact_streaming(
             last_obs = [float(x) for x in obs]
             last_check = [float(x) for x in check_correct]
             R_c = float(R_grounded(obs, check_correct))
-            R_w = float(R_grounded(obs, wrong_scores))
+            R_w = float(R_grounded(obs, check_correct if wrong_checks == "paraphrase" else wrong_scores))
             R_series_correct.append(R_c)
             R_series_wrong.append(R_w)
             M_series_correct.append(M_from_R(R_c))
@@ -3086,7 +3217,7 @@ def run_scifact_streaming(
     if M_swap_wrong_end_a.size:
         print(f"  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = {swap_wrong_pair_wins:.3f}")
         print(f"  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = {swap_wrong_margin:.3f}")
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             print(f"  [J] mean neighbor sim (k={int(neighbor_k)}) = {float(nn.mean()):.3f}")
@@ -3196,7 +3327,7 @@ def run_scifact_streaming(
     }
     if phi_coupling:
         details["phi_proxy_bits"] = float(np.mean(np.asarray(phi_coupling, dtype=float)))
-    if wrong_checks in ("neighbor", "inflation") and neighbor_sims:
+    if wrong_checks in ("neighbor", "inflation", "paraphrase") and neighbor_sims:
         nn = np.asarray([x for x in neighbor_sims if math.isfinite(x)], dtype=float)
         if nn.size:
             details["mean_neighbor_sim"] = float(nn.mean())
@@ -3269,6 +3400,7 @@ def run_scifact_streaming(
 
 def main() -> int:
     set_cache_roots()
+    _configure_stdio_utf8()
     args = parse_args()
 
     device = _auto_device() if args.device == "auto" else str(args.device)
@@ -3286,24 +3418,38 @@ def main() -> int:
 
     # Full mode is strict by default; fast mode is non-strict unless explicitly requested.
     strict = args.strict or (not args.fast)
+    if getattr(args, "non_strict", False):
+        strict = False
 
     results: List[BenchmarkResult] = []
     if args.mode == "stress":
         # Variability stress is intentionally non-strict: we want a distribution, not an abort.
         trials = max(1, int(args.stress_n))
         base = int(args.seed)
+        ds_all = ["scifact", "climate_fever", "snli", "mnli"]
+        if args.dataset == "all":
+            ds_list = ds_all
+        else:
+            ds_list = [str(args.dataset)]
+            if ds_list[0] not in ds_all:
+                raise SystemExit(f"stress mode: unsupported dataset {ds_list[0]!r}")
 
-        if args.dataset not in ("scifact", "all"):
-            raise SystemExit("stress mode currently supports only --dataset scifact (or all)")
+        print(f"\n[Q32:STRESS] Streaming variability (datasets={ds_list}, trials={trials})")
+        def finite_min(xs: List[float]) -> float:
+            vals = [x for x in xs if math.isfinite(x)]
+            return float(min(vals)) if vals else float("nan")
 
-        print(f"\n[Q32:STRESS] SciFact streaming variability (trials={trials})")
-        per: List[Dict[str, float]] = []
-        pass_n = 0
-        for i in range(trials):
-            s = base + i
-            try:
-                r = run_scifact_streaming(
-                    seed=s,
+        def stress_gate_name(ds: str) -> str:
+            if ds == "scifact":
+                return "SciFact-Streaming-Stress"
+            if ds == "climate_fever":
+                return "Climate-FEVER-Streaming-Stress"
+            return f"{str(ds).upper()}-Streaming-Stress"
+
+        def run_stream(ds: str, seed: int) -> BenchmarkResult:
+            if ds == "scifact":
+                return run_scifact_streaming(
+                    seed=seed,
                     fast=args.fast,
                     strict=False,
                     wrong_checks=args.wrong_checks,
@@ -3312,86 +3458,88 @@ def main() -> int:
                     require_geometry_gate=False,
                     compute_geometry=False,
                 )
-            except Exception:
-                r = BenchmarkResult(name=f"SciFact-Streaming@seed={s}", passed=False, details={})
-            results.append(r)
-            if r.passed:
-                pass_n += 1
-            d = dict(r.details)
-            d["seed"] = float(s)
-            per.append(d)
+            if ds == "climate_fever":
+                return run_climate_fever_streaming(
+                    seed=seed,
+                    fast=args.fast,
+                    strict=False,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=args.neighbor_k,
+                    require_phase_boundary_gate=False,
+                )
+            return run_snli_streaming(
+                seed=seed,
+                fast=args.fast,
+                strict=False,
+                wrong_checks=args.wrong_checks,
+                neighbor_k=args.neighbor_k,
+                nli_domain=str(ds),
+            )
 
-        pass_rate = float(pass_n / max(1, trials))
-        pw = [float(d.get("pair_wins", float("nan"))) for d in per]
-        zz = [float(d.get("z", float("nan"))) for d in per]
-        mm = [float(d.get("mean_margin", float("nan"))) for d in per]
-        rc_end = [float(d.get("mean_R_correct_end", float("nan"))) for d in per]
-        rw_end = [float(d.get("mean_R_wrong_end", float("nan"))) for d in per]
-        mc_end = [float(d.get("mean_logR_correct_end", float("nan"))) for d in per]
-        mw_end = [float(d.get("mean_logR_wrong_end", float("nan"))) for d in per]
+        stress_payload: Dict[str, dict] = {}
+        for ds in ds_list:
+            per: List[Dict[str, float]] = []
+            pass_n = 0
+            for i in range(trials):
+                s = base + i
+                try:
+                    r = run_stream(str(ds), s)
+                except Exception:
+                    r = BenchmarkResult(name=f"{ds}@seed={s}", passed=False, details={})
+                results.append(r)
+                if r.passed:
+                    pass_n += 1
+                d = dict(r.details)
+                d["seed"] = float(s)
+                per.append(d)
 
-        def finite_min(xs: List[float]) -> float:
-            vals = [x for x in xs if math.isfinite(x)]
-            return float(min(vals)) if vals else float("nan")
+            pass_rate = float(pass_n / max(1, trials))
+            pw = [float(d.get("pair_wins", float("nan"))) for d in per]
+            zz = [float(d.get("z", float("nan"))) for d in per]
+            mm = [float(d.get("mean_margin", float("nan"))) for d in per]
 
-        summary = {
-            "mode": "stress",
-            "dataset": "scifact",
-            "trials": int(trials),
-            "seed_base": int(base),
-            "wrong_checks": str(args.wrong_checks),
-            "neighbor_k": int(args.neighbor_k),
-            "pass_n": int(pass_n),
-            "pass_rate": float(pass_rate),
-            "min_pair_wins": finite_min(pw),
-            "min_z": finite_min(zz),
-            "min_mean_margin": finite_min(mm),
-            "min_mean_R_correct_end": finite_min(rc_end),
-            "min_mean_R_wrong_end": finite_min(rw_end),
-            "min_mean_logR_correct_end": finite_min(mc_end),
-            "min_mean_logR_wrong_end": finite_min(mw_end),
-        }
+            summary = {
+                "mode": "stress",
+                "dataset": str(ds),
+                "trials": int(trials),
+                "seed_base": int(base),
+                "wrong_checks": str(args.wrong_checks),
+                "neighbor_k": int(args.neighbor_k),
+                "pass_n": int(pass_n),
+                "pass_rate": float(pass_rate),
+                "min_pair_wins": finite_min(pw),
+                "min_z": finite_min(zz),
+                "min_mean_margin": finite_min(mm),
+            }
+            stress_payload[str(ds)] = {"summary": summary, "per_trial": per}
 
-        print("\n[Q32:STRESS] Summary")
-        print(f"  pass_rate = {summary['pass_rate']:.3f}  (pass_n={summary['pass_n']}/{summary['trials']})")
-        print(f"  min_pair_wins = {summary['min_pair_wins']:.3f}")
-        print(f"  min_z = {summary['min_z']:.3f}")
-        print(f"  min_mean_margin = {summary['min_mean_margin']:.3f}")
-        if math.isfinite(float(summary["min_mean_R_correct_end"])):
-            print(f"  min_mean_R_correct_end = {summary['min_mean_R_correct_end']:.3f}")
-            print(f"  min_mean_R_wrong_end   = {summary['min_mean_R_wrong_end']:.3f}")
-            print(f"  min_mean_logR_correct_end = {summary['min_mean_logR_correct_end']:.3f}")
-            print(f"  min_mean_logR_wrong_end   = {summary['min_mean_logR_wrong_end']:.3f}")
+            print(f"\n[Q32:STRESS] {ds} summary")
+            print(f"  pass_rate = {summary['pass_rate']:.3f}  (pass_n={summary['pass_n']}/{summary['trials']})")
+            print(f"  min_pair_wins = {summary['min_pair_wins']:.3f}")
+            print(f"  min_z = {summary['min_z']:.3f}")
+            print(f"  min_mean_margin = {summary['min_mean_margin']:.3f}")
 
-        # Add a synthetic result so EmpiricalMetricReceipt can capture stress summaries.
-        details_stress: Dict[str, float] = {
-            "trials": float(trials),
-            "seed_base": float(base),
-            "neighbor_k": float(int(args.neighbor_k)),
-            "pass_n": float(pass_n),
-            "pass_rate": float(pass_rate),
-            "min_pair_wins": float(summary["min_pair_wins"]),
-            "min_z": float(summary["min_z"]),
-            "min_mean_margin": float(summary["min_mean_margin"]),
-            "min_mean_R_correct_end": float(summary["min_mean_R_correct_end"]),
-            "min_mean_R_wrong_end": float(summary["min_mean_R_wrong_end"]),
-            "min_mean_logR_correct_end": float(summary["min_mean_logR_correct_end"]),
-            "min_mean_logR_wrong_end": float(summary["min_mean_logR_wrong_end"]),
-        }
-        if args.stress_min_pass_rate is not None:
-            details_stress["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
-
-        passed_stress = True
-        if args.stress_min_pass_rate is not None and math.isfinite(float(pass_rate)):
-            passed_stress = bool(float(pass_rate) >= float(args.stress_min_pass_rate))
-        results.append(BenchmarkResult(name="SciFact-Streaming-Stress", passed=passed_stress, details=details_stress))
+            details_stress: Dict[str, float] = {
+                "trials": float(trials),
+                "seed_base": float(base),
+                "neighbor_k": float(int(args.neighbor_k)),
+                "pass_n": float(pass_n),
+                "pass_rate": float(pass_rate),
+                "min_pair_wins": float(summary["min_pair_wins"]),
+                "min_z": float(summary["min_z"]),
+                "min_mean_margin": float(summary["min_mean_margin"]),
+            }
+            if args.stress_min_pass_rate is not None:
+                details_stress["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
+            passed_stress = True
+            if args.stress_min_pass_rate is not None and math.isfinite(float(pass_rate)):
+                passed_stress = bool(float(pass_rate) >= float(args.stress_min_pass_rate))
+            results.append(BenchmarkResult(name=stress_gate_name(str(ds)), passed=passed_stress, details=details_stress))
 
         if args.stress_out:
             out_path = str(args.stress_out)
             os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
-            import json
-
-            payload = {"summary": summary, "per_trial": per}
+            payload = {"datasets": stress_payload}
             with open(out_path, "w", encoding="utf-8") as f:
                 json.dump(payload, f, indent=2, sort_keys=True)
             print(f"[Q32:STRESS] Wrote {out_path}")
@@ -3401,8 +3549,13 @@ def main() -> int:
     elif args.mode == "sweep":
         # Phase-2 robustness: sweep neighbor_k and require a stable pass-rate across a range.
         # Like stress, sweep is intentionally non-strict at the per-trial level: we want a distribution.
-        if args.dataset not in ("scifact", "all"):
-            raise SystemExit("sweep mode currently supports only --dataset scifact (or all)")
+        ds_all = ["scifact", "climate_fever", "snli", "mnli"]
+        if args.dataset == "all":
+            ds_list = ds_all
+        else:
+            ds_list = [str(args.dataset)]
+            if ds_list[0] not in ds_all:
+                raise SystemExit(f"sweep mode: unsupported dataset {ds_list[0]!r}")
 
         raw = str(args.sweep_neighbor_k or "").strip()
         parts = [p.strip() for p in raw.replace(";", ",").split(",") if p.strip()]
@@ -3413,65 +3566,94 @@ def main() -> int:
         trials = max(1, int(args.stress_n))
         base = int(args.seed)
 
-        print(f"\n[Q32:SWEEP] SciFact streaming neighbor_k sweep (ks={ks}, trials={trials})")
-        per_k: List[Dict[str, float]] = []
-        per_trial: List[Dict[str, float]] = []
+        def sweep_gate_name(ds: str) -> str:
+            if ds == "scifact":
+                return "SciFact-Streaming-SweepK"
+            if ds == "climate_fever":
+                return "Climate-FEVER-Streaming-SweepK"
+            return f"{str(ds).upper()}-Streaming-SweepK"
 
-        for k in ks:
-            pass_n = 0
-            for i in range(trials):
-                s = base + i
-                try:
-                    r = run_scifact_streaming(
-                        seed=s,
-                        fast=args.fast,
-                        strict=False,
-                        wrong_checks=args.wrong_checks,
-                        neighbor_k=int(k),
-                        scifact_stream_seed=-1,
-                        require_geometry_gate=False,
-                        compute_geometry=False,
-                    )
-                except Exception:
-                    r = BenchmarkResult(name=f"SciFact-Streaming@k={k}@seed={s}", passed=False, details={})
+        def run_stream(ds: str, seed: int, k: int) -> BenchmarkResult:
+            if ds == "scifact":
+                return run_scifact_streaming(
+                    seed=seed,
+                    fast=args.fast,
+                    strict=False,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=int(k),
+                    scifact_stream_seed=-1,
+                    require_geometry_gate=False,
+                    compute_geometry=False,
+                )
+            if ds == "climate_fever":
+                return run_climate_fever_streaming(
+                    seed=seed,
+                    fast=args.fast,
+                    strict=False,
+                    wrong_checks=args.wrong_checks,
+                    neighbor_k=int(k),
+                    require_phase_boundary_gate=False,
+                )
+            return run_snli_streaming(
+                seed=seed,
+                fast=args.fast,
+                strict=False,
+                wrong_checks=args.wrong_checks,
+                neighbor_k=int(k),
+                nli_domain=str(ds),
+            )
 
-                results.append(BenchmarkResult(name=f"SciFact-Streaming@k={k}@seed={s}", passed=r.passed, details=r.details))
-                if r.passed:
-                    pass_n += 1
-                d = dict(r.details)
-                d["seed"] = float(s)
-                d["neighbor_k"] = float(int(k))
-                per_trial.append(d)
+        sweep_payload: Dict[str, dict] = {}
+        for ds in ds_list:
+            print(f"\n[Q32:SWEEP] {ds} streaming neighbor_k sweep (ks={ks}, trials={trials})")
+            per_k: List[Dict[str, float]] = []
+            per_trial: List[Dict[str, float]] = []
 
-            pass_rate = float(pass_n / max(1, trials))
-            per_k.append({"neighbor_k": float(int(k)), "pass_n": float(pass_n), "pass_rate": float(pass_rate)})
-            print(f"  k={int(k):>3d}: pass_rate={pass_rate:.3f}  (pass_n={pass_n}/{trials})")
+            for k in ks:
+                pass_n = 0
+                for i in range(trials):
+                    s = base + i
+                    try:
+                        r = run_stream(str(ds), s, int(k))
+                    except Exception:
+                        r = BenchmarkResult(name=f"{ds}@k={k}@seed={s}", passed=False, details={})
 
-        min_pr_over_k = float(min([float(d["pass_rate"]) for d in per_k]) if per_k else float("nan"))
-        details_sweep: Dict[str, float] = {
-            "trials_per_k": float(trials),
-            "k_count": float(len(ks)),
-            "min_pass_rate_over_k": float(min_pr_over_k),
-        }
-        for d in per_k:
-            kk = int(d["neighbor_k"])
-            details_sweep[f"pass_rate_k{kk}"] = float(d["pass_rate"])
-            details_sweep[f"pass_n_k{kk}"] = float(d["pass_n"])
+                    results.append(BenchmarkResult(name=f"{ds}@k={k}@seed={s}", passed=r.passed, details=r.details))
+                    if r.passed:
+                        pass_n += 1
+                    d = dict(r.details)
+                    d["seed"] = float(s)
+                    d["neighbor_k"] = float(int(k))
+                    per_trial.append(d)
 
-        if args.stress_min_pass_rate is not None:
-            details_sweep["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
+                pass_rate = float(pass_n / max(1, trials))
+                per_k.append({"neighbor_k": float(int(k)), "pass_n": float(pass_n), "pass_rate": float(pass_rate)})
+                print(f"  k={int(k):>3d}: pass_rate={pass_rate:.3f}  (pass_n={pass_n}/{trials})")
 
-        passed_sweep = True
-        if args.stress_min_pass_rate is not None and math.isfinite(min_pr_over_k):
-            passed_sweep = bool(float(min_pr_over_k) >= float(args.stress_min_pass_rate))
-        results.append(BenchmarkResult(name="SciFact-Streaming-SweepK", passed=passed_sweep, details=details_sweep))
+            min_pr_over_k = float(min([float(d["pass_rate"]) for d in per_k]) if per_k else float("nan"))
+            details_sweep: Dict[str, float] = {
+                "trials_per_k": float(trials),
+                "k_count": float(len(ks)),
+                "min_pass_rate_over_k": float(min_pr_over_k),
+            }
+            for d in per_k:
+                kk = int(d["neighbor_k"])
+                details_sweep[f"pass_rate_k{kk}"] = float(d["pass_rate"])
+                details_sweep[f"pass_n_k{kk}"] = float(d["pass_n"])
+
+            if args.stress_min_pass_rate is not None:
+                details_sweep["gate_min_pass_rate"] = float(args.stress_min_pass_rate)
+
+            passed_sweep = True
+            if args.stress_min_pass_rate is not None and math.isfinite(min_pr_over_k):
+                passed_sweep = bool(float(min_pr_over_k) >= float(args.stress_min_pass_rate))
+            results.append(BenchmarkResult(name=sweep_gate_name(str(ds)), passed=passed_sweep, details=details_sweep))
+            sweep_payload[str(ds)] = {"ks": [int(k) for k in ks], "trials": int(trials), "per_k": per_k, "per_trial": per_trial}
 
         if args.sweep_out:
             out_path = str(args.sweep_out)
             os.makedirs(os.path.dirname(out_path) or ".", exist_ok=True)
-            import json
-
-            payload = {"ks": [int(k) for k in ks], "trials": int(trials), "per_k": per_k, "per_trial": per_trial}
+            payload = {"datasets": sweep_payload}
             with open(out_path, "w", encoding="utf-8") as f:
                 json.dump(payload, f, indent=2, sort_keys=True)
             print(f"[Q32:SWEEP] Wrote {out_path}")
@@ -3790,6 +3972,235 @@ def main() -> int:
                     )
             return out
 
+        def run_matrix_cached() -> List[BenchmarkResult]:
+            ds_all = ["climate_fever", "scifact", "snli", "mnli"]
+            cal_n = max(1, int(args.calibration_n))
+            verify_n = max(1, int(args.verify_n))
+            out_all: List[BenchmarkResult] = []
+
+            def tag_seed(name_prefix: str, r: BenchmarkResult, seed: int) -> BenchmarkResult:
+                return BenchmarkResult(name=f"{name_prefix}:{r.name}@seed={seed}", passed=r.passed, details=r.details)
+
+            def run_intervention_bench(ds: str, seed: int) -> BenchmarkResult:
+                if ds == "scifact":
+                    return run_scifact_benchmark(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                if ds == "climate_fever":
+                    return run_climate_fever_intervention_benchmark(
+                        seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                    )
+                if ds == "mnli":
+                    return run_snli_benchmark(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        nli_domain="mnli",
+                    )
+                return run_snli_benchmark(
+                    seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+
+            def run_intervention_stream(ds: str, seed: int) -> BenchmarkResult:
+                if ds == "scifact":
+                    return run_scifact_streaming(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        scifact_stream_seed=int(args.scifact_stream_seed),
+                        require_geometry_gate=False,
+                        compute_geometry=False,
+                        require_phase_boundary_gate=False,
+                        phase_delta_tau=None,
+                        phase_min_tail=None,
+                        phase_min_stable_rate=None,
+                        geometry_backend="proxy",
+                        require_injection_gate=False,
+                    )
+                if ds == "climate_fever":
+                    return run_climate_fever_streaming(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        require_phase_boundary_gate=False,
+                        phase_delta_tau=None,
+                        phase_min_tail=None,
+                        phase_min_stable_rate=None,
+                    )
+                if ds == "mnli":
+                    return run_snli_streaming(
+                        seed=seed,
+                        fast=args.fast,
+                        strict=False,
+                        wrong_checks=args.wrong_checks,
+                        neighbor_k=args.neighbor_k,
+                        nli_domain="mnli",
+                    )
+                return run_snli_streaming(
+                    seed=seed, fast=args.fast, strict=False, wrong_checks=args.wrong_checks, neighbor_k=args.neighbor_k
+                )
+
+            for calibrate_on in ds_all:
+                cal_seeds = [args.seed + i for i in range(cal_n)]
+                print(f"\n[Q32:P3] (matrix_cached) Calibrating on {calibrate_on} (seeds={cal_seeds})")
+                cal_bench = [tag_seed(f"{calibrate_on}->*", run_intervention_bench(calibrate_on, s), s) for s in cal_seeds]
+                cal_stream = [tag_seed(f"{calibrate_on}->*", run_intervention_stream(calibrate_on, s), s) for s in cal_seeds]
+                cal_all = cal_bench + cal_stream
+                out_all.extend(cal_all)
+
+                cal_failed = [r.name for r in cal_all if not r.passed]
+                if cal_failed:
+                    print("\n[Q32:P3] Calibration failures")
+                    for n in cal_failed:
+                        print(f"  - {n}")
+                    if args.fast and not args.strict:
+                        print("[Q32:P3] Fast mode: continuing using only passing calibration runs.")
+                    else:
+                        raise SystemExit("matrix_cached calibration failed: calibration dataset did not meet its own gates")
+
+                cal_for_thresholds = [r for r in cal_all if r.passed] if (args.fast and not args.strict) else cal_all
+                pw_vals = [r.details.get("pair_wins") for r in cal_for_thresholds]
+                pw_vals_f = [float(x) for x in pw_vals if x is not None]
+                if not pw_vals_f:
+                    raise SystemExit("matrix_cached calibration failed: missing pair_wins")
+
+                frozen_min_z = 1.4 if args.fast else 2.6
+                frozen_min_pair_wins = _percentile(pw_vals_f, 10.0)
+                print(
+                    f"\n[Q32:P3] (matrix_cached) Frozen thresholds for {calibrate_on}: "
+                    f"min_z={frozen_min_z:.3f}  min_pair_wins={frozen_min_pair_wins:.3f}"
+                )
+
+                def enforce_transfer(r: BenchmarkResult) -> BenchmarkResult:
+                    pw = r.details.get("pair_wins")
+                    if pw is None:
+                        raise RuntimeError(f"matrix_cached verify failed: {r.name} missing pair_wins")
+                    details = dict(r.details)
+                    details["gate_pair_wins_calibrated"] = float(frozen_min_pair_wins)
+                    details["gate_z"] = float(frozen_min_z)
+                    if float(pw) < frozen_min_pair_wins:
+                        print(
+                            f"[Q32:P3] {r.name} below calibrated pair_wins (reported only): "
+                            f"{float(pw):.3f} < {float(frozen_min_pair_wins):.3f}"
+                        )
+                    return BenchmarkResult(name=r.name, passed=bool(r.passed), details=details)
+
+                verify_seeds = [args.seed + i for i in range(verify_n)]
+                for apply_to in ds_all:
+                    if apply_to == calibrate_on:
+                        continue
+                    print(f"\n[Q32:P3] (matrix_cached) Verifying {calibrate_on}->{apply_to} (seeds={verify_seeds})")
+                    for s in verify_seeds:
+                        if apply_to == "scifact":
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_scifact_benchmark(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_scifact_streaming(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                            scifact_stream_seed=int(args.scifact_stream_seed),
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+                        elif apply_to == "climate_fever":
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_climate_fever_intervention_benchmark(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_climate_fever_streaming(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+                        else:
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_snli_benchmark(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                            nli_domain=str(apply_to),
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+                            out_all.append(
+                                tag_seed(
+                                    f"{calibrate_on}->{apply_to}",
+                                    enforce_transfer(
+                                        run_snli_streaming(
+                                            seed=s,
+                                            fast=args.fast,
+                                            strict=False,
+                                            min_z=frozen_min_z,
+                                            wrong_checks=args.wrong_checks,
+                                            neighbor_k=args.neighbor_k,
+                                            nli_domain=str(apply_to),
+                                        )
+                                    ),
+                                    s,
+                                )
+                            )
+            return out_all
+
         if args.mode == "matrix":
             ds_all = ["climate_fever", "scifact", "snli", "mnli"]
             for a in ds_all:
@@ -3797,6 +4208,8 @@ def main() -> int:
                     if a == b:
                         continue
                     results.extend(run_transfer(calibrate_on=a, apply_to=b))
+        elif args.mode == "matrix_cached":
+            results.extend(run_matrix_cached())
         else:
             results.extend(run_transfer(calibrate_on=args.calibrate_on, apply_to=args.apply_to))
 
@@ -3815,9 +4228,11 @@ def main() -> int:
     all_passed = all(r.passed for r in results)
     # Stress/sweep are distributional probes; per-trial FAILs are expected and are gated by the aggregate result.
     if args.mode == "stress":
-        all_passed = next((bool(r.passed) for r in results if r.name == "SciFact-Streaming-Stress"), False)
+        gates = [bool(r.passed) for r in results if str(r.name).endswith("-Streaming-Stress")]
+        all_passed = all(gates) if gates else False
     elif args.mode == "sweep":
-        all_passed = next((bool(r.passed) for r in results if r.name == "SciFact-Streaming-SweepK"), False)
+        gates = [bool(r.passed) for r in results if str(r.name).endswith("-Streaming-SweepK")]
+        all_passed = all(gates) if gates else False
     if args.fast and not args.strict:
         return 0
     return 0 if all_passed else 1
