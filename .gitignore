@@ -102,3 +102,7 @@ THOUGHT/LAB/CAT_CHAT/nul
 Thumbs.db
 Desktop.ini
 THOUGHT/LAB/FORMULA/experiments/open_questions/q4/things_eeg_data/
+
+# Q32 artifacts (receipts, logs, EEG data)
+THOUGHT/LAB/FORMULA/experiments/open_questions/q32/datatrail/
+THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/

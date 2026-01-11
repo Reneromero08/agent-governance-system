@@ -1,8 +1,12 @@
 # Report: Q32 “Meaning as Field” — Solved Criteria + Test Plan (Using Existing Canon)
 
-**Question:** Q32 “Meaning as a physical field”  
+**Question:** Q32 "Meaning as a physical field"  
 **Canonical framing (already written):** `research/questions/reports/MEANING_FIELD_CANON_FROM_EXISTING_CONTEXT.md`  
-**Scope rule:** This plan treats “field” as a **measurable resonance landscape on the semiosphere**, not as a new fundamental force added to physics.
+**Scope rule:** This plan treats "field" as a **measurable resonance landscape on the semiosphere**, not as a new fundamental force added to physics.
+
+**Additional track (extension, not required for “SOLVED” in this plan):**
+- You can layer an extra claim on top: “meaning is a fundamental physical field (spacetime) like EM”.
+- That requires separate gates (physical observable, coupling law, hard nulls). See: **Appendix P**.
 
 ---
 
@@ -117,9 +121,47 @@ Falsifier:
 
 ---
 
-## Deliverables required to mark Q32 “SOLVED”
+## Deliverables required to mark Q32 "SOLVED"
 - A frozen definition of `M` and its measurement procedure (documented before running tests).
 - A reproducible test harness for the 3 tests above with full outputs recorded.
 - Ablation table showing `M_full` beats baselines and fails when key terms are removed.
 - A single-paragraph falsification summary: the exact condition that would make you downgrade the claim.
+- An empirical datatrail bundle for at least one public benchmark run:
+  - Verbatim log(s) + SHA256
+  - An `EmpiricalMetricReceipt` JSON + SHA256 (R/J/Phi-proxy + gates)
+  - Artifact root: `LAW/CONTRACTS/_runs/q32_public/datatrail/`
+  - Cross-link: `THOUGHT/LAB/FORMULA/research/questions/reports/Q32_NEIGHBOR_FALSIFIER_DATA_TRAIL.md`
 
+---
+
+## Appendix P: Additional gates for “fundamental physical field” (spacetime claim)
+
+This appendix defines what it would take to justify the stronger statement:
+> “Meaning is a fundamental physical field (like EM), not just a semiosphere resonance field.”
+
+### P1) Define a physical observable (no semantics in the measurement)
+- Specify the field variable `B(x,t)` (scalar/vector/tensor) and the sensor measurement protocol.
+- The measurement must be independent of text embeddings / model outputs.
+
+**Fail condition:** if `B` is only inferred from semantic representations, it is not a physical field measurement.
+
+### P2) Define a coupling law (units + falsifiable structure)
+- Specify a coupling structure between `M` (or a derived source/current term) and `B`.
+- Specify what the coupling predicts (time-lags, attenuation, superposition, boundary conditions).
+
+**Fail condition:** if the coupling is post-hoc curve fitting without pinned structure, it is not evidence of a field law.
+
+### P3) Hard null suite (must kill confounds)
+Minimum nulls:
+- label shams / stimulus randomization
+- time-shifts (breaks causal direction)
+- shielding/distance mapping (rules out ordinary channels)
+- “semantic unchanged / physical changed” and “physical unchanged / semantic changed” controls
+
+**Fail condition:** any effect that vanishes under these controls is not eligible for “fundamental field” promotion.
+
+### P4) Evidence standard for promotion
+To promote “fundamental physical field” you need:
+- a stable, replicable `B(x,t)` effect under hard nulls
+- a pinned coupling law that predicts held-out conditions
+- a demonstration that known physical channels do not explain the result
