@@ -28,6 +28,8 @@ class TestConfig:
     k_neighbors: int = 10
     preprocessing: str = "l2"
     distance_metric: str = "euclidean"
+    identity_tolerance: float = 1e-8
+    diagnostic_threshold: float = 0.1
 
 @dataclass
 class TestResult:

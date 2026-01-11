@@ -1,0 +1,405 @@
+{
+  "suite": "Q41_DIAGNOSTIC_TESTS",
+  "version": "1.0.0",
+  "timestamp": "2026-01-11T19:41:37.397974+00:00",
+  "passed": 5,
+  "total": 6,
+  "all_pass": false,
+  "models": [
+    "MiniLM",
+    "MPNet",
+    "Paraphrase",
+    "BERT"
+  ],
+  "results": [
+    {
+      "name": "spectral_signature",
+      "passed": false,
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "spectral_gap": 0.08505602021399103,
+            "max_eigenvalue": 1.5112852602173572,
+            "n_components": 1,
+            "mean_degree": 7.529411764705882
+          },
+          "MPNet": {
+            "spectral_gap": 0.05734359500939818,
+            "max_eigenvalue": 1.5296457441977112,
+            "n_components": 1,
+            "mean_degree": 7.470588235294118
+          },
+          "Paraphrase": {
+            "spectral_gap": 0.1157636986238641,
+            "max_eigenvalue": 1.6592410009679315,
+            "n_components": 1,
+            "mean_degree": 6.9411764705882355
+          },
+          "BERT": {
+            "spectral_gap": -4.576844081993199e-16,
+            "max_eigenvalue": 2.0000000000000004,
+            "n_components": 18,
+            "mean_degree": 3.588235294117647
+          }
+        },
+        "spectral_l2_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.0072703656208790105
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.015179011517207774
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.08410088301154262
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.014449020330740777
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.08307400500244681
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.07303266432053371
+          ]
+        ],
+        "heat_l2_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.001232449452635306
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.0019516708300816325
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.02895997085074018
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.0011678393704129474
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.02775953453731773
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.027160687438123627
+          ]
+        ],
+        "mean_spectral_distance": 0.04618432496722511,
+        "mean_heat_distance": 0.014705358746551904
+      },
+      "controls": {
+        "positive_rotated_error": 0.0,
+        "positive_control_pass": true,
+        "negative_noise_l2_distance": 0.03803112555985806,
+        "negative_control_pass": false
+      },
+      "notes": "Graph Laplacian spectral signatures"
+    },
+    {
+      "name": "heat_trace_fingerprint",
+      "passed": true,
+      "metrics": {
+        "heat_curve_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.002438314358336507
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.0037224090844200585
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.05624345630195058
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.0021893994706984523
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.05385923133217351
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.05282529232307186
+          ]
+        ],
+        "mean_distance": 0.02854635047844183
+      },
+      "controls": {
+        "positive_rotated_distance": 0.0,
+        "positive_control_pass": true,
+        "negative_noise_distance": 0.004420176134835865,
+        "negative_control_pass": true
+      },
+      "notes": "Heat trace curves encode multi-scale geometry"
+    },
+    {
+      "name": "distance_correlation",
+      "passed": true,
+      "metrics": {
+        "pairwise_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.6124074648040703
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.35092542503571666
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.1087857185123748
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.31313290552643547
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.14143876313851028
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.02471649776435973
+          ]
+        ],
+        "mean_correlation": 0.2585677957969112
+      },
+      "controls": {
+        "positive_rotated_correlation": 1.0,
+        "positive_control_pass": true,
+        "negative_shuffled_correlation": 0.07014039122008371,
+        "negative_control_pass": true
+      },
+      "notes": "Distance matrix correlation measures agreement on relative distances"
+    },
+    {
+      "name": "covariance_spectrum",
+      "passed": true,
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "participation_ratio": 37.51881162442077,
+            "decay_exponent_alpha": 0.49471539144817905
+          },
+          "MPNet": {
+            "participation_ratio": 38.891786347570125,
+            "decay_exponent_alpha": 0.5131348348219857
+          },
+          "Paraphrase": {
+            "participation_ratio": 33.114232080799,
+            "decay_exponent_alpha": 0.5788742746181507
+          },
+          "BERT": {
+            "participation_ratio": 18.026200619481177,
+            "decay_exponent_alpha": 0.8766903851037529
+          }
+        },
+        "spectral_l2_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.11363135464397509
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.16548150856495397
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.19999064362935798
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.06161123961048726
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.2721671093400011
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.3147691285448617
+          ]
+        ],
+        "alpha_mean": 0.6158537214980171,
+        "alpha_cv": 0.24974934116815642
+      },
+      "controls": {
+        "positive_rotated_error": 2.263642939759336e-09,
+        "positive_control_pass": true,
+        "negative_pr_diff_ratio": 0.7857708346874063,
+        "negative_control_pass": true
+      },
+      "notes": "Covariance eigenspectrum comparison"
+    },
+    {
+      "name": "sparse_coding_stability",
+      "passed": true,
+      "metrics": {
+        "n_components": 30,
+        "mean_stability": 0.5850129127502441,
+        "mean_reconstruction_error": 0.4964617358042445
+      },
+      "controls": {
+        "positive_sv_rel_error": 2.5444616620112153e-08,
+        "positive_control_pass": true,
+        "negative_subspace_alignment": 0.1981376258390548,
+        "negative_control_pass": true
+      },
+      "notes": "Sparse coding stability test"
+    },
+    {
+      "name": "multiscale_connectivity",
+      "passed": true,
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "scales": [
+              1.092139928693941,
+              1.1367244100316167,
+              1.182363945144039,
+              1.2216833146990844,
+              1.2535572895175546
+            ],
+            "components": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "MPNet": {
+            "scales": [
+              1.1521285883751355,
+              1.2073193406235387,
+              1.246015521802849,
+              1.2775991770511324,
+              1.302870981743576
+            ],
+            "components": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "Paraphrase": {
+            "scales": [
+              1.154043450226952,
+              1.2305969095202753,
+              1.2828561091565474,
+              1.327235575300337,
+              1.36121596305549
+            ],
+            "components": [
+              3,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "BERT": {
+            "scales": [
+              0.2340915099759436,
+              0.28193823151816366,
+              0.3430109804404412,
+              0.4000116407513488,
+              0.46624592089836897
+            ],
+            "components": [
+              32,
+              20,
+              5,
+              4,
+              2
+            ]
+          }
+        },
+        "component_l2_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.0
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.34237082448518896
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.9051246952459837
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.34237082448518896
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.9051246952459837
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.8356845008376517
+          ]
+        ]
+      },
+      "controls": {
+        "positive_rotated_l2_distance": 0.0,
+        "positive_control_pass": true,
+        "negative_noise_l2_distance": 0.971014492752994,
+        "negative_control_pass": true
+      },
+      "notes": "Multiscale connectivity analysis"
+    }
+  ]
+}

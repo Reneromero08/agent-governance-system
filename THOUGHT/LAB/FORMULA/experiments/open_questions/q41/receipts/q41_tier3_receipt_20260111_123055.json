@@ -1,0 +1,116 @@
+{
+  "suite": "Q41_TIER3_HECKE_OPERATORS",
+  "version": "1.0.0",
+  "timestamp": "2026-01-11T19:30:55.909554+00:00",
+  "passed": true,
+  "metrics": {
+    "commutativity_errors": [
+      [
+        3,
+        5,
+        0.02734573662933499
+      ],
+      [
+        3,
+        7,
+        0.02695851058108103
+      ],
+      [
+        3,
+        10,
+        0.0246174108421005
+      ],
+      [
+        5,
+        7,
+        0.014771761202706808
+      ],
+      [
+        5,
+        10,
+        0.01641798321992039
+      ],
+      [
+        7,
+        10,
+        0.010736917932068778
+      ]
+    ],
+    "mean_commutativity_error": 0.02014138673453542,
+    "symmetry_errors": [
+      [
+        3,
+        0.36380343754685807
+      ],
+      [
+        5,
+        0.35973846708249585
+      ],
+      [
+        7,
+        0.3638034375428269
+      ],
+      [
+        10,
+        0.3514675116639255
+      ]
+    ],
+    "mean_symmetry_error": 0.35970321345902656,
+    "eigenvalue_stats": {
+      "3": {
+        "spectral_gap": 0.03621378704403089,
+        "max_eigenvalue": 1.096499971901287,
+        "min_eigenvalue": -0.8579205241026727,
+        "eigenvalue_range": 1.9544204960039595
+      },
+      "5": {
+        "spectral_gap": 0.06659900376207428,
+        "max_eigenvalue": 1.0765369291129585,
+        "min_eigenvalue": -0.6526924967589225,
+        "eigenvalue_range": 1.729229425871881
+      },
+      "7": {
+        "spectral_gap": 0.12432956375303028,
+        "max_eigenvalue": 1.068422720052826,
+        "min_eigenvalue": -0.5061684062292949,
+        "eigenvalue_range": 1.574591126282121
+      },
+      "10": {
+        "spectral_gap": 0.16249293363288486,
+        "max_eigenvalue": 1.0564775073156425,
+        "min_eigenvalue": -0.4070759319736601,
+        "eigenvalue_range": 1.4635534392893026
+      }
+    },
+    "cross_model_spectral_distances": [
+      [
+        "MiniLM",
+        "MPNet",
+        0.03568494839931849
+      ],
+      [
+        "MiniLM",
+        "Paraphrase",
+        0.029484158421081885
+      ],
+      [
+        "MiniLM",
+        "BERT",
+        0.10818015368827111
+      ]
+    ],
+    "mean_cross_model_distance": 0.05778308683622383
+  },
+  "thresholds": {
+    "commutativity_threshold": 0.3,
+    "positive_control_threshold": 1e-06,
+    "negative_control_threshold": 0.05
+  },
+  "controls": {
+    "positive_rotated_error": 0.0,
+    "positive_control_pass": true,
+    "negative_random_distance": 0.15215624776556416,
+    "negative_control_pass": true
+  },
+  "notes": "Commutativity: 0.020, Symmetry: 0.360"
+}

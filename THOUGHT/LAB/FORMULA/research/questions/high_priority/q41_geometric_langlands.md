@@ -223,25 +223,49 @@ All Q41 test files are in: `THOUGHT/LAB/FORMULA/experiments/open_questions/q41/`
 ```
 q41/
 ├── shared/
-│   └── utils.py                    # Common utilities
+│   └── utils.py                    # Common utilities (TestConfig, TestResult, etc.)
+├── identity/
+│   └── core_tests.py               # 4 identity tests (mathematical truths)
+├── diagnostics/
+│   └── cross_model_tests.py        # 6 diagnostic tests (cross-model comparisons)
 ├── tier1/
-│   └── categorical_equivalence.py  # TIER 1 test
+│   └── categorical_equivalence.py  # TIER 1: Categorical Equivalence
 ├── tier2/
-│   ├── l_functions.py              # TIER 2.1 test
-│   └── ramanujan_bound.py          # TIER 2.2 test
+│   ├── l_functions.py              # TIER 2.1: L-Functions
+│   └── ramanujan_bound.py          # TIER 2.2: Ramanujan Bound
+├── tier3/
+│   └── hecke_operators.py          # TIER 3: Hecke Operators
+├── tier4/
+│   └── automorphic_forms.py        # TIER 4: Automorphic Forms
 ├── tier5/
-│   └── trace_formula.py            # TIER 5.1 test
+│   └── trace_formula.py            # TIER 5: Trace Formula
 ├── tier6/
-│   └── prime_decomposition.py      # TIER 6 test
+│   └── prime_decomposition.py      # TIER 6: Prime Decomposition
 ├── runners/
-│   ├── phase2_runner.py            # Phase 2 orchestrator
-│   └── phase3_runner.py            # Phase 3 orchestrator
+│   ├── phase2_runner.py            # Phase 2 orchestrator (TIER 2 + TIER 5)
+│   └── phase3_runner.py            # Phase 3 orchestrator (TIER 1 + TIER 6)
 ├── receipts/                       # All JSON receipts and MD reports
 └── legacy/
-    └── q41_langlands_tests_v3.py   # Phase 1 monolithic suite (TIER 3/4)
+    └── q41_langlands_tests_v3.py   # Original monolithic suite (deprecated)
 ```
 
-**Phase 1 (Geometry + TIER 3/4):**
+**Running Individual Tests:**
+```bash
+# Foundation tests
+python identity/core_tests.py           # 4 identity tests
+python diagnostics/cross_model_tests.py # 6 diagnostic tests
+
+# TIER tests (Langlands structure)
+python tier1/categorical_equivalence.py # TIER 1: Categorical Equivalence
+python tier2/l_functions.py             # TIER 2.1: L-Functions
+python tier2/ramanujan_bound.py         # TIER 2.2: Ramanujan Bound
+python tier3/hecke_operators.py         # TIER 3: Hecke Operators
+python tier4/automorphic_forms.py       # TIER 4: Automorphic Forms
+python tier5/trace_formula.py           # TIER 5: Trace Formula
+python tier6/prime_decomposition.py     # TIER 6: Prime Decomposition
+```
+
+**Phase 1 (Full Legacy Suite):**
 - Suite: `legacy/q41_langlands_tests_v3.py`
 - Receipt: `receipts/q41_receipt_v3_20260111_182855.json`
 
