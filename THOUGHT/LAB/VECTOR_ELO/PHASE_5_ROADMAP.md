@@ -48,7 +48,7 @@ Every task must produce:
 
 ## 5.2.4 Implement SCL Validator ✅
 
-## 5.2.5 Implement SCL CLI
+## 5.2.5 Implement SCL CLI ✅
 
 **Purpose:** Command-line interface for SCL operations.
 
@@ -126,7 +126,7 @@ Every task must produce:
 
 ---
 
-## 5.2.7 Token Accountability Layer
+## 5.2.7 Token Accountability Layer ✅
 
 **Purpose:** Make token savings mandatory and visible in every operation.
 

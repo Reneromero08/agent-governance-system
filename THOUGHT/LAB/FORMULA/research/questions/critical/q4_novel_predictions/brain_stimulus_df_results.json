@@ -1,0 +1,104 @@
+{
+  "method": "patch_based",
+  "n_concepts": 100,
+  "permutation_settings": {
+    "n_perm": 1000,
+    "seed": 42
+  },
+  "stimulus_df_stats": {
+    "mean": 4.268425684533072,
+    "std": 2.545230889500011,
+    "min": 1.3675757997502342,
+    "max": 15.402420224008015
+  },
+  "window_results": [
+    {
+      "window": "early_50-100ms",
+      "brain_df_mean": 23.48720878140245,
+      "brain_df_std": 7.026905559754326,
+      "corr_stimulus": -0.02441485562357822,
+      "mae": 19.226057487502572,
+      "p_value": 0.81
+    },
+    {
+      "window": "P1_100-150ms",
+      "brain_df_mean": 21.146766124357658,
+      "brain_df_std": 6.2871882746263,
+      "corr_stimulus": -0.04967039016411842,
+      "mae": 16.91832735154706,
+      "p_value": 0.628
+    },
+    {
+      "window": "N1_150-200ms",
+      "brain_df_mean": 20.9009643626649,
+      "brain_df_std": 5.893813681915287,
+      "corr_stimulus": -0.0032395777709596763,
+      "mae": 16.63253867813183,
+      "p_value": 0.972
+    },
+    {
+      "window": "P2_200-300ms",
+      "brain_df_mean": 21.713775349578256,
+      "brain_df_std": 6.170535689943378,
+      "corr_stimulus": -0.09476688854609565,
+      "mae": 17.445349665045182,
+      "p_value": 0.333
+    },
+    {
+      "window": "late_300-500ms",
+      "brain_df_mean": 20.941519423655325,
+      "brain_df_std": 6.457843471830515,
+      "corr_stimulus": -0.10937968671183791,
+      "mae": 16.67309373912226,
+      "p_value": 0.266
+    },
+    {
+      "window": "sustained_500-750ms",
+      "brain_df_mean": 19.090656259054366,
+      "brain_df_std": 6.3156751628486525,
+      "corr_stimulus": -0.022930813507383872,
+      "mae": 14.824982316471983,
+      "p_value": 0.801
+    }
+  ],
+  "secondary_results": [
+    {
+      "window": "early_50-100ms",
+      "corr_local": 0.04920242180690416,
+      "p_value": 0.605
+    },
+    {
+      "window": "P1_100-150ms",
+      "corr_local": 0.04688876812252449,
+      "p_value": 0.651
+    },
+    {
+      "window": "N1_150-200ms",
+      "corr_local": 0.04407950501572989,
+      "p_value": 0.656
+    },
+    {
+      "window": "P2_200-300ms",
+      "corr_local": 0.0052273552839489906,
+      "p_value": 0.956
+    },
+    {
+      "window": "late_300-500ms",
+      "corr_local": 0.10034931943998278,
+      "p_value": 0.308
+    },
+    {
+      "window": "sustained_500-750ms",
+      "corr_local": 0.09317663763402474,
+      "p_value": 0.361
+    }
+  ],
+  "best_result": {
+    "window": "late_300-500ms",
+    "brain_df_mean": 20.941519423655325,
+    "brain_df_std": 6.457843471830515,
+    "corr_stimulus": -0.10937968671183791,
+    "mae": 16.67309373912226,
+    "p_value": 0.266
+  }
+}
