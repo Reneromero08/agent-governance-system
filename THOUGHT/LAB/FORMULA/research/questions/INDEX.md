@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.15.1 (2026-01-11 - Q38 cross-architecture validation: 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve |L| with CV=6e-7. 69,000x separation. NOT a model artifact - it's physics.)*
+*Last updated: v3.15.4 (2026-01-11 - Q39 Homeostatic Regulation ANSWERED with 5/5 tests PASS: Universality confirmed across 5 embedding architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) with tau_relax CV=3.2%. 14/43 questions answered (32.6%).)*
 
 ---
 
@@ -35,10 +35,10 @@
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
-| 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ⏳ OPEN | Is R > τ a homeostatic setpoint? Does M field self-regulate like biological systems? |
+| 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
 | 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ⏳ OPEN | How does Bohm's Implicate Order (Platonic manifold/Phi) map to Explicate Order (R interface)? Can we formalize unfoldment as M field dynamics? |
 | 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | 🔄 PARTIAL | **3/5 rigorous**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Topological claims invalid for real embeddings (Berry phase=0, Chern number undefined). |
-| 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ⏳ OPEN | Do R-gates define Markov blankets? How does Active Inference (FEP) connect to R-gating? Are meaning boundaries Markov blankets on M field? |
+| 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ✅ ANSWERED | R-gating = blanket maintenance (ALIGNED/DISSOLVED/PENDING). Active Inference = handshake protocol (predict→verify→error→resync). Markov blankets ⇔ R > τ state. |
 
 ---
 
@@ -104,17 +104,17 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 11 (25.6%)
-  - **Partially Answered:** 10 (23.3%)
+  - **Answered:** 14 (32.6%)
+  - **Partially Answered:** 8 (18.6%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 22 (51.2%)
+  - **Open:** 21 (48.8%)
 
 ### By Priority Level
 
  | Priority | Total | Answered | Partially | Falsified | Open |
  |----------|-------|----------|-----------|-----------|------|
- | Critical | 7 | 5 | 2 | 0 | 0 |
- | High | 16 | 3 | 6 | 0 | 7 |
+ | Critical | 7 | 6 | 1 | 0 | 0 |
+ | High | 15 | 5 | 5 | 0 | 5 |
  | Medium | 11 | 3 | 1 | 0 | 7 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |

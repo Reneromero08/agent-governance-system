@@ -1,0 +1,63 @@
+{
+  "question": "Q39",
+  "title": "Homeostatic Regulation",
+  "timestamp": "2026-01-11T07:48:54.064807",
+  "seed": 42,
+  "tests": {
+    "perturbation_recovery": {
+      "n_successful_fits": 5,
+      "mean_tau_relax": 5.979740265615227,
+      "cv_tau_relax": 0.055973907234146136,
+      "mean_R_squared": 0.9914617000930102,
+      "min_R_squared": 0.9757227130527786,
+      "PASS": "True"
+    },
+    "basin_mapping": {
+      "single_attractor_accuracy": 0.0021905446331477174,
+      "basin_width": 5.0,
+      "n_attractors": 3,
+      "PASS": true
+    },
+    "negative_feedback": {
+      "mean_correlation": -0.6173190409987442,
+      "std_correlation": 0.12048169288267668,
+      "n_negative_feedback": 10,
+      "n_total": 10,
+      "proportionality_R_squared": 0.9926987374071925,
+      "proportionality_slope": -0.4930934946414735,
+      "PASS": "True"
+    },
+    "catastrophic_boundary": {
+      "boundary": 1.9999999946583984,
+      "sharpness": 0.9266666666610479,
+      "sigmoid_k": 19.999999998466624,
+      "sigmoid_r_squared": 0.9768515146654344,
+      "n_recovered": 5,
+      "n_collapsed": 3,
+      "expected_boundary": 2.0,
+      "PASS": true
+    },
+    "cross_domain": {
+      "n_domains": 5,
+      "n_successful": 5,
+      "tau_relax_mean": 0.5931394195708799,
+      "tau_relax_cv": 0.03207553198207541,
+      "R_squared_mean": 0.9856580676611744,
+      "is_universal": true,
+      "PASS": true
+    }
+  },
+  "summary": {
+    "tests_passed": "5",
+    "tests_total": 5,
+    "pass_rate": 1.0,
+    "overall_PASS": "True",
+    "key_findings": {
+      "exponential_recovery": true,
+      "stable_attractor": "True",
+      "negative_feedback": true,
+      "sharp_boundary": "True",
+      "universal_constants": true
+    }
+  }
+}
