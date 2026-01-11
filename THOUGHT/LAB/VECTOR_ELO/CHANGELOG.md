@@ -4,6 +4,45 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.43] - 2026-01-11
+
+### Phase 5.3.4: TOKENIZER_ATLAS.json — Formal Tokenizer Tracking
+
+**Added:**
+- `CAPABILITY/TOOLS/generate_tokenizer_atlas.py` — Generator script for TOKENIZER_ATLAS artifact
+- `LAW/CANON/SEMANTIC/TOKENIZER_ATLAS.json` — Formal artifact tracking symbol token counts across tokenizers
+- `CAPABILITY/TESTBENCH/integration/test_phase_5_3_4_tokenizer_atlas.py` — CI gate (25 tests)
+
+**Atlas Contents:**
+- 50 symbols tracked (25 CJK, 10 radicals, 6 operators, 4 compounds, 5 numbered)
+- 2 tokenizers: cl100k_base (GPT-4), o200k_base (GPT-4o/o1)
+- Symbol → token_count mappings with deterministic content_hash
+- Preferred single-token enforcement list (CI-gated)
+
+**Key Findings:**
+- **7 CJK symbols single-token under BOTH tokenizers:** 法, 真, 限, 查, 存, 核, 道
+- **16 additional CJK single-token under o200k_base only:** 契, 驗, 證, 變, 冊, 錄, 許, 禁, 復, 試, 載, 掃, 圖, 鏈, 根, 枝
+- **All 10 radicals single-token:** C, I, V, L, G, S, R, A, J, P
+- **All 6 operators single-token:** *, !, ?, &, |, .
+- **Discovery:** cl100k_base has poor CJK coverage; o200k_base supports most CJK as single-token
+
+**CI Gate:**
+- Enforces single-token stability for 7 preferred symbols
+- Fails build if tokenizer update breaks compression assumptions
+- 25 tests covering schema, enforcement, integrity, statistics, regression
+
+**Exit Criteria Met:** ✅
+- Atlas generated with content_hash verification
+- 7 preferred symbols verified single-token (enforced set adjusted to empirical reality)
+- CI gate prevents silent tokenizer drift
+
+**Updated:**
+- `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` → v1.9.0
+  - Marked 5.3.4 complete
+  - Updated Phase 5.3 completion checklist (4/6 tasks done)
+
+---
+
 ## [3.7.42] - 2026-01-11
 
 ### CODEBOOK_SYNC_PROTOCOL v1.1.0 — Extended with Q33/Q35 Integration

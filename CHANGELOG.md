@@ -1,8 +1,36 @@
-<!-- CONTENT_HASH: 3.7.42_PENDING -->
+<!-- CONTENT_HASH: 3.7.43_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.43] - 2026-01-11
+
+### Added
+- **Phase 5.3.4: TOKENIZER_ATLAS.json** — Formal artifact tracking symbol token counts across tokenizers
+  - `CAPABILITY/TOOLS/generate_tokenizer_atlas.py` — Generator script (50 symbols, 2 tokenizers)
+  - `LAW/CANON/SEMANTIC/TOKENIZER_ATLAS.json` — Atlas artifact with content_hash verification
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_3_4_tokenizer_atlas.py` — CI gate (25 tests)
+  - **Key findings:** 7 CJK symbols single-token under BOTH cl100k_base & o200k_base (法,真,限,查,存,核,道); 16 additional single-token under o200k_base only
+  - **CI enforcement:** Build fails if preferred symbols become multi-token after tokenizer update
+  - **Discovery:** cl100k_base has poor CJK coverage; o200k_base supports most CJK as single-token
+
+### Fixed
+- **SCL CLI determinism** — `token_receipt` no longer embedded in jobspec
+  - `CAPABILITY/TOOLS/scl/scl_cli.py` — token_receipt moved to response sibling field
+  - **Root cause:** jobspec contained timestamps and operation_ids that broke determinism
+  - **Solution:** token_receipt emitted as sibling field in response, not in jobspec
+  - All 6 TestDeterminism tests now pass (100 runs each)
+- **Windows Unicode encoding** — Fixed cp1252 encoding error on Windows
+  - `NAVIGATION/CORTEX/tests/test_query.py` — Added UTF-8 stdout reconfiguration
+  - Checkmark characters (✓/✗) now render correctly on Windows
+
+### Changed
+- **TestJobSpecIntegration** — Updated test to verify token_receipt is in response but NOT in jobspec
+  - `CAPABILITY/TESTBENCH/integration/test_phase_5_2_7_token_accountability.py`
+- **PHASE_5_ROADMAP.md** → v1.9.0 — Marked 5.3.4 complete (4/6 tasks in Phase 5.3 done)
 
 ---
 

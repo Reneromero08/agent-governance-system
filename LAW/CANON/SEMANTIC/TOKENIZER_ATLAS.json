@@ -1,0 +1,362 @@
+{
+  "version": "1.0.0",
+  "schema": "TOKENIZER_ATLAS_V1",
+  "generated_utc": "2026-01-11T09:57:37.180075+00:00",
+  "generator": "CAPABILITY/TOOLS/generate_tokenizer_atlas.py",
+  "phase": "5.3.4",
+  "tokenizers": [
+    "cl100k_base",
+    "o200k_base"
+  ],
+  "tokenizer_models": {
+    "cl100k_base": "GPT-4, GPT-3.5-turbo",
+    "o200k_base": "GPT-4o, o1, Claude (proxy)"
+  },
+  "symbols": {
+    "法": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "真": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "契": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "恆": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "驗": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "證": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "變": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "冊": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "錄": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "限": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "許": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "禁": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "雜": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "復": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "試": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "查": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "載": {
+      "cl100k_base": 3,
+      "o200k_base": 1
+    },
+    "存": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "掃": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "核": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "道": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "圖": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "鏈": {
+      "cl100k_base": 3,
+      "o200k_base": 1
+    },
+    "根": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "枝": {
+      "cl100k_base": 2,
+      "o200k_base": 1
+    },
+    "法.驗": {
+      "cl100k_base": 4,
+      "o200k_base": 3
+    },
+    "法.契": {
+      "cl100k_base": 4,
+      "o200k_base": 3
+    },
+    "證.雜": {
+      "cl100k_base": 5,
+      "o200k_base": 4
+    },
+    "冊.雜": {
+      "cl100k_base": 5,
+      "o200k_base": 4
+    },
+    "C": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "I": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "V": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "L": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "G": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "S": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "R": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "A": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "J": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "P": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "*": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "!": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "?": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "&": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "|": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    ".": {
+      "cl100k_base": 1,
+      "o200k_base": 1
+    },
+    "C3": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "C7": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "C8": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "I5": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    },
+    "I6": {
+      "cl100k_base": 2,
+      "o200k_base": 2
+    }
+  },
+  "symbol_categories": {
+    "cjk_symbols": [
+      "法",
+      "真",
+      "契",
+      "恆",
+      "驗",
+      "證",
+      "變",
+      "冊",
+      "錄",
+      "限",
+      "許",
+      "禁",
+      "雜",
+      "復",
+      "試",
+      "查",
+      "載",
+      "存",
+      "掃",
+      "核",
+      "道",
+      "圖",
+      "鏈",
+      "根",
+      "枝"
+    ],
+    "compound_symbols": [
+      "法.驗",
+      "法.契",
+      "證.雜",
+      "冊.雜"
+    ],
+    "radicals": [
+      "C",
+      "I",
+      "V",
+      "L",
+      "G",
+      "S",
+      "R",
+      "A",
+      "J",
+      "P"
+    ],
+    "operators": [
+      "*",
+      "!",
+      "?",
+      "&",
+      "|",
+      "."
+    ],
+    "numbered_radicals": [
+      "C3",
+      "C7",
+      "C8",
+      "I5",
+      "I6"
+    ]
+  },
+  "preferred_glyphs": [
+    "法",
+    "真",
+    "限",
+    "查",
+    "存",
+    "核",
+    "道"
+  ],
+  "preferred_single_token_enforced": [
+    "法",
+    "真",
+    "限",
+    "查",
+    "存",
+    "核",
+    "道"
+  ],
+  "o200k_single_token_only": [
+    "契",
+    "驗",
+    "證",
+    "變",
+    "冊",
+    "錄",
+    "許",
+    "禁",
+    "復",
+    "試",
+    "載",
+    "掃",
+    "圖",
+    "鏈",
+    "根",
+    "枝"
+  ],
+  "statistics": {
+    "total_symbols": 50,
+    "single_token_cjk": 7,
+    "multi_token_cjk": 18,
+    "preferred_glyph_count": 7
+  },
+  "warnings": [
+    "'契' is 2 tokens under cl100k_base (IDs: [28194, 239])",
+    "'恆' is 2 tokens under cl100k_base (IDs: [21555, 228])",
+    "'恆' is 2 tokens under o200k_base (IDs: [8990, 228])",
+    "'驗' is 2 tokens under cl100k_base (IDs: [77180, 245])",
+    "'證' is 2 tokens under cl100k_base (IDs: [92148, 231])",
+    "'變' is 2 tokens under cl100k_base (IDs: [10414, 232])",
+    "'冊' is 2 tokens under cl100k_base (IDs: [13828, 232])",
+    "'錄' is 2 tokens under cl100k_base (IDs: [91779, 226])",
+    "'許' is 2 tokens under cl100k_base (IDs: [29245, 109])",
+    "'禁' is 2 tokens under cl100k_base (IDs: [54656, 223])",
+    "'雜' is 2 tokens under cl100k_base (IDs: [25132, 250])",
+    "'雜' is 2 tokens under o200k_base (IDs: [5546, 250])",
+    "'復' is 2 tokens under cl100k_base (IDs: [17599, 102])",
+    "'試' is 2 tokens under cl100k_base (IDs: [50520, 99])",
+    "'載' is 3 tokens under cl100k_base (IDs: [164, 120, 231])",
+    "'掃' is 2 tokens under cl100k_base (IDs: [19012, 225])",
+    "'圖' is 2 tokens under cl100k_base (IDs: [12554, 244])",
+    "'鏈' is 3 tokens under cl100k_base (IDs: [165, 237, 230])",
+    "'根' is 2 tokens under cl100k_base (IDs: [15308, 117])",
+    "'枝' is 2 tokens under cl100k_base (IDs: [20119, 251])",
+    "'法.驗' is 4 tokens under cl100k_base (IDs: [25333, 13, 77180, 245])",
+    "'法.驗' is 3 tokens under o200k_base (IDs: [5625, 13, 158307])",
+    "'法.契' is 4 tokens under cl100k_base (IDs: [25333, 13, 28194, 239])",
+    "'法.契' is 3 tokens under o200k_base (IDs: [5625, 13, 167729])",
+    "'證.雜' is 5 tokens under cl100k_base (IDs: [92148, 231, 13, 25132, 250])",
+    "'證.雜' is 4 tokens under o200k_base (IDs: [159864, 13, 5546, 250])",
+    "'冊.雜' is 5 tokens under cl100k_base (IDs: [13828, 232, 13, 25132, 250])",
+    "'冊.雜' is 4 tokens under o200k_base (IDs: [134778, 13, 5546, 250])",
+    "'C3' is 2 tokens under cl100k_base (IDs: [34, 18])",
+    "'C3' is 2 tokens under o200k_base (IDs: [34, 18])",
+    "'C7' is 2 tokens under cl100k_base (IDs: [34, 22])",
+    "'C7' is 2 tokens under o200k_base (IDs: [34, 22])",
+    "'C8' is 2 tokens under cl100k_base (IDs: [34, 23])",
+    "'C8' is 2 tokens under o200k_base (IDs: [34, 23])",
+    "'I5' is 2 tokens under cl100k_base (IDs: [40, 20])",
+    "'I5' is 2 tokens under o200k_base (IDs: [40, 20])",
+    "'I6' is 2 tokens under cl100k_base (IDs: [40, 21])",
+    "'I6' is 2 tokens under o200k_base (IDs: [40, 21])"
+  ],
+  "content_hash": "cf5afda8d3f3e316a9b61b354da9a84c1dac1c8c0b45d5df2b58618aa32967f1"
+}
