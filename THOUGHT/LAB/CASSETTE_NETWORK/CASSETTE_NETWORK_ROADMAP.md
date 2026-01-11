@@ -410,12 +410,16 @@ CREATE TABLE sessions (
 
 ### 4.0 ESAP Integration (Cross-Model Alignment) ✅ IMPLEMENTED
 
-**What exists:**
+**What it does:**
 ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment via eigenvalue spectrum invariance (r=0.99+). This allows cassettes using different embedding models to verify alignment before cross-querying.
 
 **Upstream Research (VALIDATED):**
 - [01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md](../VECTOR_ELO/research/vector-substrate/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md) - r=0.99+ correlation proven
 - [PROTOCOL_SPEC.md](../VECTOR_ELO/eigen-alignment/PROTOCOL_SPEC.md) - Full ESAP specification
+
+**Theoretical Foundation:**
+- [Q35: Markov Blankets](../FORMULA/research/questions/high_priority/q35_markov_blankets.md) - R-gating = blanket maintenance
+- [Q33: Conditional Entropy](../FORMULA/research/questions/medium_priority/q33_conditional_entropy_semantic_density.md) - σ^Df = N derivation
 
 **Implementation:**
 - [x] `ESAPCassetteMixin` - Computes spectrum signatures from cassette vectors
@@ -423,11 +427,17 @@ ESAP (Eigen-Spectrum Alignment Protocol) enables cross-model semantic alignment 
 - [x] Alignment groups - Cassettes grouped by spectral similarity
 - [x] `query_aligned()` - Query only cassettes with verified alignment
 - [x] Fail-closed on spectrum divergence (configurable)
+- [x] `cassette_protocol.py` - Extended with sync_tuple and blanket_status (Q35)
+- [x] `spc_decoder.py` - Pointer resolution with fail-closed semantics
+- [x] `spc_metrics.py` - CDR/ECR tracking per Q33 derivation
+- [x] `memory_cassette.py` - POINTERS table for SPC integration
 
 **Files:**
 - [esap_cassette.py](../../../NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin
 - [esap_hub.py](../../../NAVIGATION/CORTEX/network/esap_hub.py) - ESAP-enabled hub
-- [test_esap_integration.py](../../../NAVIGATION/CORTEX/network/test_esap_integration.py) - Tests
+- [spc_decoder.py](../../../NAVIGATION/CORTEX/network/spc_decoder.py) - SPC pointer resolution
+- [spc_metrics.py](../../../NAVIGATION/CORTEX/network/spc_metrics.py) - Semantic density metrics
+- [test_phase4.py](../../../NAVIGATION/CORTEX/network/test_phase4.py) - 29 passing tests
 
 **How it works:**
 ```python

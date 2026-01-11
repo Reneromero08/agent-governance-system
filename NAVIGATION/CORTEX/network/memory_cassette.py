@@ -82,8 +82,8 @@ class MemoryCassette(DatabaseCassette):
         super().__init__(db_path, "resident")
 
         self.agent_id = agent_id
-        self.capabilities = ["fts", "semantic_search", "agent_memory", "write", "sessions"]
-        self.schema_version = "3.0"
+        self.capabilities = ["fts", "semantic_search", "agent_memory", "write", "sessions", "spc"]
+        self.schema_version = "4.0"
 
         # Active session tracking
         self._current_session_id: Optional[str] = None
@@ -190,9 +190,29 @@ class MemoryCassette(DatabaseCassette):
             CREATE INDEX IF NOT EXISTS idx_sessions_agent ON sessions(agent_id);
             CREATE INDEX IF NOT EXISTS idx_sessions_active ON sessions(agent_id, ended_at);
 
+            -- =====================================================================
+            -- Phase 4.1: Pointers table (SPC Integration)
+            -- =====================================================================
+
+            -- Pointers table: caches resolved SPC pointers
+            CREATE TABLE IF NOT EXISTS pointers (
+                pointer_id TEXT PRIMARY KEY,
+                pointer_type TEXT NOT NULL,  -- SYMBOL_PTR | HASH_PTR | COMPOSITE_PTR
+                base_ptr TEXT NOT NULL,
+                target_hash TEXT,
+                qualifiers JSON,
+                codebook_id TEXT DEFAULT 'ags-codebook',
+                created_at TEXT NOT NULL,
+                resolved_count INTEGER DEFAULT 0,
+                last_resolved TEXT
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_pointers_type ON pointers(pointer_type);
+            CREATE INDEX IF NOT EXISTS idx_pointers_base ON pointers(base_ptr);
+
             -- Insert/update schema version
             INSERT OR REPLACE INTO cassette_metadata (key, value)
-            VALUES ('schema_version', '3.0');
+            VALUES ('schema_version', '4.0');
         """)
 
         # Phase 3.3: Extend memories table with session tracking columns

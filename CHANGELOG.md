@@ -1,8 +1,40 @@
-<!-- CONTENT_HASH: 3.9.0 -->
+<!-- CONTENT_HASH: 4.0.0 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [4.0.0] - 2026-01-11
+
+### Added
+- **Phase 4: Semantic Pointer Compression (SPC) Integration** — Full implementation
+  - `esap_cassette.py` — ESAP mixin for spectral alignment (r=0.99+ correlation)
+  - `esap_hub.py` — Network hub with alignment groups and fail-closed verification
+  - `spc_decoder.py` — Deterministic pointer resolution with fail-closed semantics
+  - `spc_metrics.py` — CDR/ECR tracking per Q33 derivation (σ^Df = N measurement)
+  - `test_phase4.py` — 29 passing unit tests
+
+### Changed
+- **NAVIGATION/CORTEX/network/cassette_protocol.py** — Extended with sync_tuple and blanket_status (Q35)
+  - Added `get_sync_tuple()` — Codebook synchronization per CODEBOOK_SYNC_PROTOCOL
+  - Added `get_blanket_status()` — Markov blanket alignment (ALIGNED/DISSOLVED/PENDING/UNSYNCED)
+  - Handshake now includes Phase 4 additions
+- **NAVIGATION/CORTEX/network/memory_cassette.py** — Schema v4.0 with POINTERS table
+  - Added `pointers` table for SPC pointer caching
+  - Added "spc" capability
+- **THOUGHT/LAB/CASSETTE_NETWORK/CASSETTE_NETWORK_ROADMAP.md** — Phase 4.0 marked complete
+
+### Research Foundation
+- **Q35: Markov Blankets** — R-gating IS blanket maintenance; Active Inference implementation
+- **Q33: Conditional Entropy** — σ^Df = N tautological derivation; CDR measurement procedure
+
+### Technical Details
+- Pointer types: SYMBOL_PTR (radicals), HASH_PTR (content-addressed), COMPOSITE_PTR (qualifiers)
+- Error codes: E_CODEBOOK_MISMATCH, E_UNKNOWN_SYMBOL, E_RULE_NOT_FOUND, E_SYNTAX, etc.
+- Metrics: CDR (Concept Density Ratio), ECR (Exact Correctness Rate), compression ratios
+- Blanket gating: Metrics recording blocked without ALIGNED status per Q35
 
 ---
 
