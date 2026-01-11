@@ -1,0 +1,570 @@
+{
+  "suite_version": "3.0.0",
+  "timestamp_utc": "2026-01-11T17:32:14.392432+00:00",
+  "seed": 42,
+  "corpus_sha256": "5d56ce3dd5575e7b877b55ed01382d9c2e3f9274ca7e305d0d000442528a9536",
+  "n_samples": 64,
+  "embedding_dims": {
+    "MiniLM": 384,
+    "MPNet": 768,
+    "Paraphrase": 384,
+    "BERT": 768
+  },
+  "preprocessing": "l2",
+  "distance_metric": "euclidean",
+  "graph_params": {
+    "k": 10,
+    "mutual": true
+  },
+  "dependencies": {
+    "python": "3.11.6",
+    "numpy": "1.26.4",
+    "scipy": "1.13.1",
+    "sklearn": "1.8.0"
+  },
+  "tests": [
+    {
+      "name": "kernel_trace_identity",
+      "test_type": "identity",
+      "passed": "True",
+      "metrics": {
+        "trace_direct": 64.0,
+        "trace_eigensum": 64.0,
+        "absolute_error": 0.0,
+        "relative_error": 0.0
+      },
+      "thresholds": {
+        "relative_error": 1e-08
+      },
+      "controls": {},
+      "notes": "trace(K) = sum(eigenvalues(K)) - basic linear algebra identity"
+    },
+    {
+      "name": "laplacian_properties",
+      "test_type": "identity",
+      "passed": "True",
+      "metrics": {
+        "symmetry_error": 0.0,
+        "min_eigenvalue": 9.52317302121147e-17,
+        "max_eigenvalue": 1.5358201404679448,
+        "n_components": 1,
+        "near_zero_eigenvalues": 1,
+        "eigenvalue_range": [
+          9.52317302121147e-17,
+          1.5358201404679448
+        ]
+      },
+      "thresholds": {
+        "symmetry_error": 1e-08,
+        "min_eigenvalue": -1e-08,
+        "max_eigenvalue": 2.00000001
+      },
+      "controls": {},
+      "notes": "Normalized Laplacian must be symmetric PSD with eigenvalues in [0,2]"
+    },
+    {
+      "name": "heat_trace_consistency",
+      "test_type": "identity",
+      "passed": "True",
+      "metrics": {
+        "trace_matrix_exp": 25.393374389497595,
+        "trace_eigensum": 25.393374389497588,
+        "absolute_error": 7.105427357601002e-15,
+        "relative_error": 2.798142243163927e-16,
+        "t_value": 1.0
+      },
+      "thresholds": {
+        "relative_error": 1e-06
+      },
+      "controls": {},
+      "notes": "trace(exp(-tL)) = sum(exp(-t*lambda_i)) - eigendecomposition identity"
+    },
+    {
+      "name": "rotation_invariance",
+      "test_type": "identity",
+      "passed": "True",
+      "metrics": {
+        "distance_matrix_error": 1.5543122344752192e-15,
+        "eigenvalue_error": 0.0,
+        "heat_trace_error": 0.0
+      },
+      "thresholds": {
+        "distance_matrix_error": 1e-08,
+        "eigenvalue_error": 1e-06,
+        "heat_trace_error": 1e-06
+      },
+      "controls": {
+        "rotation_seed": 1042
+      },
+      "notes": "Euclidean distance-based constructions must be rotation-invariant"
+    },
+    {
+      "name": "spectral_signature_diagnostic",
+      "test_type": "diagnostic",
+      "passed": "False",
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "spectral_gap": 0.10923771597746167,
+            "max_eigenvalue": 1.5358201404679448,
+            "n_components": 1,
+            "mean_degree": 7.46875
+          },
+          "MPNet": {
+            "spectral_gap": 0.06629674632239668,
+            "max_eigenvalue": 1.6583579000793651,
+            "n_components": 1,
+            "mean_degree": 7.5
+          },
+          "Paraphrase": {
+            "spectral_gap": 0.06550561201688526,
+            "max_eigenvalue": 1.618909068594788,
+            "n_components": 1,
+            "mean_degree": 6.84375
+          },
+          "BERT": {
+            "spectral_gap": -8.180015971444755e-17,
+            "max_eigenvalue": 1.999999999999998,
+            "n_components": 17,
+            "mean_degree": 3.5625
+          }
+        },
+        "spectral_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.9999999999999998
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.9999999999999998
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.9999771059650376
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.9999999999999998
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.9999771059650376
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.9999771059650376
+          ]
+        ],
+        "heat_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            1.0
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MPNet",
+            "BERT",
+            1.0
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            1.0
+          ]
+        ],
+        "mean_spectral_correlation": 0.9999885529825189,
+        "mean_heat_correlation": 1.0
+      },
+      "thresholds": {
+        "positive_control_error": 1e-06,
+        "negative_control_decorrelation": 0.9
+      },
+      "controls": {
+        "positive_rotated_error": 0.0,
+        "positive_control_pass": "True",
+        "negative_shuffled_correlation": 0.9999885530480366,
+        "negative_control_pass": "False"
+      },
+      "notes": "Graph Laplacian spectral signatures. High cross-model correlation suggests similar local geometry. NOT testing Ramanujan bounds."
+    },
+    {
+      "name": "heat_trace_fingerprint_diagnostic",
+      "test_type": "diagnostic",
+      "passed": "False",
+      "metrics": {
+        "heat_curve_distances": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.001335409491137795
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.006616822039827644
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.053200047139933336
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.005543143546339252
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.05202759817381133
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.046610460869503864
+          ]
+        ],
+        "mean_distance": 0.0275555802100922,
+        "t_grid": [
+          0.01,
+          0.1,
+          0.5,
+          1.0,
+          2.0,
+          5.0
+        ]
+      },
+      "thresholds": {
+        "diagnostic_threshold": 0.1
+      },
+      "controls": {
+        "positive_rotated_distance": 0.0,
+        "positive_control_pass": "True",
+        "negative_gaussian_distance": 0.01454369294839969,
+        "negative_control_pass": "False"
+      },
+      "notes": "Heat trace curves encode multi-scale geometry. Similar curves suggest similar structure."
+    },
+    {
+      "name": "distance_correlation_diagnostic",
+      "test_type": "diagnostic",
+      "passed": "True",
+      "metrics": {
+        "pairwise_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            0.6073899782253773
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            0.3480961338254987
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.18817877563339522
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            0.30017881945329283
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.16815862580332328
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.07237196168617795
+          ]
+        ],
+        "mean_correlation": 0.28072904910451085
+      },
+      "thresholds": {
+        "positive_threshold": 0.999,
+        "negative_threshold": 0.5
+      },
+      "controls": {
+        "positive_rotated_correlation": 1.0,
+        "positive_control_pass": "True",
+        "negative_shuffled_correlation": 0.023374992113297164,
+        "negative_control_pass": "True"
+      },
+      "notes": "Distance matrix correlation measures agreement on relative distances. NOT claimed to test Langlands duality."
+    },
+    {
+      "name": "covariance_spectrum_diagnostic",
+      "test_type": "diagnostic",
+      "passed": "False",
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "participation_ratio": 33.81423725725791,
+            "decay_exponent_alpha": 0.5464959565267073,
+            "decay_prefactor_C": 0.9876402668329037,
+            "top_5_eigenvalues": [
+              0.9999999983991184,
+              0.684371973136147,
+              0.5009282464962311,
+              0.4163385994757173,
+              0.3837448018848588
+            ]
+          },
+          "MPNet": {
+            "participation_ratio": 34.556084397547025,
+            "decay_exponent_alpha": 0.555758152421964,
+            "decay_prefactor_C": 1.2626991846951565,
+            "top_5_eigenvalues": [
+              0.9999999981933021,
+              0.9580781011623044,
+              0.6736919608499428,
+              0.5993383196267391,
+              0.5336697293234858
+            ]
+          },
+          "Paraphrase": {
+            "participation_ratio": 31.842866712959427,
+            "decay_exponent_alpha": 0.5997881940408291,
+            "decay_prefactor_C": 1.465863117362368,
+            "top_5_eigenvalues": [
+              0.9999999982721646,
+              0.9283948254374179,
+              0.7227181690885415,
+              0.6647758145792789,
+              0.5863002172534412
+            ]
+          },
+          "BERT": {
+            "participation_ratio": 17.48249333159425,
+            "decay_exponent_alpha": 0.91237447534555,
+            "decay_prefactor_C": 1.2462983868460957,
+            "top_5_eigenvalues": [
+              0.9999999891679903,
+              0.6183622552681503,
+              0.45687999093383247,
+              0.37011038872858987,
+              0.290378451373423
+            ]
+          }
+        },
+        "spectral_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            1.0
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MPNet",
+            "BERT",
+            1.0
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            1.0
+          ]
+        ],
+        "mean_spectral_correlation": 1.0,
+        "alpha_mean": 0.6536041945837625,
+        "alpha_std": 0.1507516523511323,
+        "alpha_cv": 0.23064670266394394
+      },
+      "thresholds": {
+        "positive_control_error": 1e-06,
+        "alpha_cv_threshold": 0.3
+      },
+      "controls": {
+        "positive_rotated_error": 1.536818561298503e-09,
+        "positive_control_pass": "True",
+        "negative_gaussian_correlation": 1.0,
+        "negative_control_pass": "False"
+      },
+      "notes": "Covariance eigenspectrum comparison. High correlation suggests similar variance structure. Alpha CV measures decay consistency. NOT claimed as Ramanujan bound."
+    },
+    {
+      "name": "sparse_coding_stability_diagnostic",
+      "test_type": "diagnostic",
+      "passed": "False",
+      "metrics": {
+        "n_components": 30,
+        "mean_stability": 0.6026932597160339,
+        "std_stability": 0.016864843666553497,
+        "mean_reconstruction_error": 0.47177064390248213,
+        "n_stability_trials": 10
+      },
+      "thresholds": {
+        "stability_threshold": 0.8,
+        "reconstruction_threshold": 0.5
+      },
+      "controls": {
+        "positive_sv_error": 4.962773991756819e-08,
+        "positive_control_pass": "False",
+        "negative_sv_correlation": 1.0,
+        "negative_control_pass": "False"
+      },
+      "notes": "Sparse coding stability test. High stability means SVD basis is robust. NOT testing UFD or semantic primes."
+    },
+    {
+      "name": "persistent_homology_diagnostic",
+      "test_type": "diagnostic",
+      "passed": true,
+      "metrics": {
+        "per_model": {
+          "MiniLM": {
+            "scales": [
+              1.0899760574601516,
+              1.1360687335490958,
+              1.1833030764842243,
+              1.2245427259941566,
+              1.25815608520118
+            ],
+            "components": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "MPNet": {
+            "scales": [
+              1.1523745008690935,
+              1.2057705889615098,
+              1.245132853553058,
+              1.2778406838502294,
+              1.3038309214003887
+            ],
+            "components": [
+              1,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "Paraphrase": {
+            "scales": [
+              1.1454974784176029,
+              1.2237184245479957,
+              1.2758061587942573,
+              1.3208985906660886,
+              1.3525826623813417
+            ],
+            "components": [
+              3,
+              1,
+              1,
+              1,
+              1
+            ]
+          },
+          "BERT": {
+            "scales": [
+              0.23635961625123214,
+              0.2762953558824421,
+              0.3299723982401518,
+              0.3853966533233336,
+              0.4249387843306757
+            ],
+            "components": [
+              27,
+              16,
+              2,
+              1,
+              1
+            ]
+          }
+        },
+        "component_correlations": [
+          [
+            "MiniLM",
+            "MPNet",
+            NaN
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            NaN
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            NaN
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            NaN
+          ],
+          [
+            "MPNet",
+            "BERT",
+            NaN
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.7254762501100117
+          ]
+        ],
+        "mean_correlation": NaN,
+        "method": "simplified_connectivity_fallback"
+      },
+      "thresholds": {},
+      "controls": {
+        "positive_control_pass": true,
+        "negative_control_pass": true,
+        "note": "Using simplified fallback - install ripser for proper persistent homology"
+      },
+      "notes": "Simplified connectivity analysis (ripser unavailable). Install ripser+persim for proper persistent homology."
+    }
+  ],
+  "summary": {
+    "identity_passed": 4,
+    "identity_total": 4,
+    "diagnostic_passed": 2,
+    "diagnostic_total": 6,
+    "all_identity_passed": true,
+    "all_controls_passed": false
+  }
+}

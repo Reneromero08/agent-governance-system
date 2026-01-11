@@ -1,0 +1,65 @@
+{
+  "test": "Q41_GEOMETRIC_LANGLANDS",
+  "timestamp": "2026-01-11T17:06:18.971245Z",
+  "results": [
+    {
+      "test_id": "2.2_ramanujan_bound",
+      "tier": "TIER 2",
+      "passed": "False",
+      "score": 0.0,
+      "details": {
+        "alpha_mean": 0.9322793202784566,
+        "alpha_std": 0.1926987212400269,
+        "alpha_cv": 0.20669633770467127,
+        "violation_rate": 0.0003698224852071006,
+        "fitted_alphas": {
+          "MiniLM": 0.7269853346010073,
+          "MPNet": 0.7478203978542064,
+          "Paraphrase": 0.8521064949877556,
+          "BERT": 1.1099310144354457,
+          "GloVe-100": 1.259973775754031,
+          "Word2Vec": 0.8968589040382938
+        },
+        "fitted_Cs": {
+          "MiniLM": 1.4397727086621461,
+          "MPNet": 1.7924497377471587,
+          "Paraphrase": 2.358973632843809,
+          "BERT": 1.8680720267635522,
+          "GloVe-100": 2.7554103174289093,
+          "Word2Vec": 1.8447175646704201
+        }
+      },
+      "falsifier_triggered": true
+    },
+    {
+      "test_id": "6.1_semantic_primes_MiniLM",
+      "tier": "TIER 6",
+      "passed": "True",
+      "score": 1.0,
+      "details": {
+        "n_words": 60,
+        "mean_reconstruction_error": 0.0,
+        "n_primes": 55,
+        "prime_count_mean": 46.2,
+        "prime_count_std": 0.7483314773547882
+      },
+      "falsifier_triggered": false
+    },
+    {
+      "test_id": "7.1_tqft_cobordism_MiniLM",
+      "tier": "TIER 7",
+      "passed": "True",
+      "score": 0.8982952914485831,
+      "details": {
+        "n_trials": 50,
+        "mean_error": 0.10170470855141683,
+        "std_error": 0.01605620414837649,
+        "max_error": 0.14194186571277373
+      },
+      "falsifier_triggered": false
+    }
+  ],
+  "n_passed": 2,
+  "n_total": 3,
+  "verdict": "Q41 ANSWERED: NO (Tier 1-2 falsifier triggered)"
+}

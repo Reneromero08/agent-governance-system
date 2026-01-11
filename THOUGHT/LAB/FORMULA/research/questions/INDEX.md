@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.15.6 (2026-01-11 - Q9 FEP ANSWERED: Family-scoped `log(R)=-F+const` proven. Q43 QGT ANSWERED: Rigorous proofs, clarified Berry phase=0 for real vectors. 17/43 questions answered (39.5%).)*
+*Last updated: v3.16.0 (2026-01-11 - Q41 PARTIAL: TIER 3/4 PASS (Hecke commutativity 0.021, automorphic orthogonality 2.3e-16). TIER 2/5/6 not implemented. 18/43 questions answered (41.9%).)*
 
 ---
 
@@ -34,7 +34,7 @@
 | 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ✅ ANSWERED | **Symmetry: SO(d) rotation. Conserved: Angular momentum |L|=|v|.** 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve with CV=6e-7. 69,000x separation from non-geodesic. NOT model artifact. |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
-| 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
+| 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ PARTIAL | **TIER 3/4 PASS:** Hecke commutativity (0.021), automorphic orthogonality (2.3e-16). TIER 2/5/6 not yet implemented. Algebraic structure exists; full Langlands correspondence untested. |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
 | 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | **PARTIAL** | Core mapping proven by Q42: Phi=Implicate, R=Explicate. XOR system demonstrates implicate order (high Phi, low R). Dynamics (unfoldment, holomovement) still open. |
 | 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). |
@@ -104,20 +104,19 @@
 ## Summary Statistics
 
 - **Total Questions:** 43
-- **Answered:** 17 (39.5%)
-- **Partially Answered:** 6 (14.0%)
-- **Falsified:** 0 (0.0%)
-- **Open:** 20 (46.5%)
+- **Answered:** 18 (41.9%)
+- **Partially Answered:** 7 (16.3%) - includes Q41 (TIER 3/4 pass)
+- **Open:** 18 (41.9%)
 
 ### By Priority Level
 
-| Priority | Total | Answered | Partially | Falsified | Open |
-|----------|-------|----------|-----------|-----------|------|
-| Critical | 7 | 6 | 1 | 0 | 0 |
-| High | 15 | 7 | 3 | 0 | 5 |
-| Medium | 11 | 4 | 1 | 0 | 6 |
-| Lower | 8 | 0 | 1 | 0 | 7 |
-| Engineering | 2 | 0 | 0 | 0 | 2 |
+| Priority | Total | Answered | Partially | Open |
+|----------|-------|----------|-----------|------|
+| Critical | 7 | 6 | 1 | 0 |
+| High | 15 | 8 | 4 | 3 |
+| Medium | 11 | 4 | 1 | 6 |
+| Lower | 8 | 0 | 1 | 7 |
+| Engineering | 2 | 0 | 0 | 2 |
 
 ---
 

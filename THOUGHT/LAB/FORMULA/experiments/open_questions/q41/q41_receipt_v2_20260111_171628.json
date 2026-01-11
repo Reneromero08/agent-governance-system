@@ -1,0 +1,209 @@
+{
+  "test": "Q41_GEOMETRIC_LANGLANDS_v2",
+  "timestamp": "2026-01-11T17:16:28.843980Z",
+  "version": "v2_corrected",
+  "corrections": [
+    "Hecke operator eigenvalues for Ramanujan bound",
+    "Arthur-Selberg trace formula test added",
+    "Uniqueness verification for semantic primes",
+    "Proper TQFT composition law",
+    "QGT curvature using QGTL library"
+  ],
+  "results": [
+    {
+      "test_id": "1.1_cohomology_isomorphism",
+      "tier": "TIER 1",
+      "passed": "True",
+      "score": 0.8333333333333334,
+      "details": {
+        "betti_numbers": {
+          "MiniLM": [
+            60,
+            0,
+            0
+          ],
+          "MPNet": [
+            60,
+            0,
+            0
+          ],
+          "Paraphrase": [
+            60,
+            0,
+            0
+          ],
+          "BERT": [
+            9,
+            0,
+            0
+          ]
+        },
+        "pairwise_matches": [
+          [
+            "MiniLM",
+            "MPNet",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MiniLM",
+            "BERT",
+            0.6666666666666666
+          ],
+          [
+            "MPNet",
+            "Paraphrase",
+            1.0
+          ],
+          [
+            "MPNet",
+            "BERT",
+            0.6666666666666666
+          ],
+          [
+            "Paraphrase",
+            "BERT",
+            0.6666666666666666
+          ]
+        ],
+        "mean_match": 0.8333333333333334
+      },
+      "falsifier_triggered": false
+    },
+    {
+      "test_id": "2.2_ramanujan_bound",
+      "tier": "TIER 2",
+      "passed": "False",
+      "score": 0.0,
+      "details": {
+        "fitted_params": {
+          "MiniLM": {
+            "C": 1.0294688244457617,
+            "alpha": 0.5652983148703252
+          },
+          "MPNet": {
+            "C": 1.2220812461342976,
+            "alpha": 0.5627358328830335
+          },
+          "Paraphrase": {
+            "C": 1.236508609804047,
+            "alpha": 0.5555848657409987
+          },
+          "BERT": {
+            "C": 1.1454583268698708,
+            "alpha": 0.8828395740240695
+          }
+        },
+        "alpha_mean": 0.6416146468796068,
+        "alpha_std": 0.1393167600716664,
+        "alpha_cv": 0.21713463171001218,
+        "spectral_correlation": 0.9709222125702955,
+        "k_values_tested": [
+          1,
+          2,
+          5,
+          10,
+          20,
+          30
+        ]
+      },
+      "falsifier_triggered": true
+    },
+    {
+      "test_id": "5.1_trace_formula",
+      "tier": "TIER 5",
+      "passed": "False",
+      "score": 0.0,
+      "details": {
+        "model_results": {
+          "MiniLM": {
+            "spectral": 0.6909975029262441,
+            "geometric": 51.298844947020065,
+            "relative_error": 73.23882824822847
+          },
+          "MPNet": {
+            "spectral": 0.7584795955034382,
+            "geometric": 49.31730162728315,
+            "relative_error": 64.02126347663557
+          },
+          "Paraphrase": {
+            "spectral": 0.7934604009925431,
+            "geometric": 56.51219914071283,
+            "relative_error": 70.22245680187596
+          },
+          "BERT": {
+            "spectral": 12.312786786474724,
+            "geometric": 12.312786789863225,
+            "relative_error": 2.752017236937493e-10
+          }
+        },
+        "mean_error": 51.8706371317538,
+        "max_error": 73.23882824822847
+      },
+      "falsifier_triggered": true
+    },
+    {
+      "test_id": "6.1_semantic_primes_uniqueness",
+      "tier": "TIER 6",
+      "passed": "False",
+      "score": 0.0,
+      "details": {
+        "n_primes": 30,
+        "mean_uniqueness": 0.7923512345073135,
+        "mean_reconstruction_error": 0.7943138079834831,
+        "mean_stability": 0.4474186897277832,
+        "n_trials": 50
+      },
+      "falsifier_triggered": true
+    },
+    {
+      "test_id": "7.1_tqft_functoriality",
+      "tier": "TIER 7",
+      "passed": "False",
+      "score": 0.0,
+      "details": {
+        "mean_error": 0.7411673227230853,
+        "std_error": 0.05797368465177638,
+        "max_error": 0.856989483860496,
+        "n_trials": 30
+      },
+      "falsifier_triggered": true
+    },
+    {
+      "test_id": "7.2_qgt_curvature",
+      "tier": "TIER 7",
+      "passed": "True",
+      "score": "1.98575",
+      "details": {
+        "MiniLM": {
+          "participation_ratio": 32.06716980186472,
+          "mean_berry_phase": "1.2533966",
+          "std_berry_phase": "0.19910796"
+        },
+        "MPNet": {
+          "participation_ratio": 32.22667736999708,
+          "mean_berry_phase": "0.9516116",
+          "std_berry_phase": "0.20078228"
+        },
+        "Paraphrase": {
+          "participation_ratio": 30.13102997914526,
+          "mean_berry_phase": "0.8441457",
+          "std_berry_phase": "0.2277507"
+        },
+        "BERT": {
+          "participation_ratio": 17.17703351363987,
+          "mean_berry_phase": "4.8938456",
+          "std_berry_phase": "0.22195902"
+        }
+      },
+      "falsifier_triggered": false
+    }
+  ],
+  "n_passed": 2,
+  "n_total": 6,
+  "verdict": "Q41 ANSWERED: NO (Tier 2 Ramanujan bound FAILED)"
+}
