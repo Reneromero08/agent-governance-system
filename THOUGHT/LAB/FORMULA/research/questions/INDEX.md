@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.11.0 (2026-01-11 - Q32 ANSWERED: Semiosphere field claim complete)*
+*Last updated: v3.12.0 (2026-01-11 - Q33 ANSWERED: σ^Df = concept_units, information-theoretic derivation)*
 
 ---
 
@@ -51,7 +51,7 @@
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
 | 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ⏳ OPEN | Is M field an error-correcting code? Does R-gating implement QECC? Is semiosphere holographic? |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ⏳ OPEN | Should agent actions require R > threshold? Autonomy vs. safety tradeoffs? |
-| 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ⏳ OPEN | Can `σ^Df` be derived from information theory (e.g., `H(X|S)` / explanation density), or is it heuristic? |
+| 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ✅ ANSWERED | **σ^Df = N (concept_units)** by tautological construction. σ := N/H(X), Df := log(N)/log(σ), therefore σ^Df = N. Not heuristic—it's countable meaning via GOV_IR_SPEC. |
 | 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ⏳ OPEN | Can R measure non-local correlations? Does axiom A1 (locality) limit formula? Is there semantic entanglement? |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
@@ -104,10 +104,10 @@
 ## Summary Statistics
 
   - **Total Questions:** 43
-  - **Answered:** 8 (18.6%)
+  - **Answered:** 9 (20.9%)
   - **Partially Answered:** 9 (20.9%)
   - **Falsified:** 0 (0.0%)
-  - **Open:** 26 (60.5%)
+  - **Open:** 25 (58.1%)
 
 ### By Priority Level
 
@@ -115,7 +115,7 @@
  |----------|-------|----------|-----------|-----------|------|
  | Critical | 7 | 5 | 2 | 0 | 0 |
  | High | 16 | 2 | 5 | 0 | 9 |
- | Medium | 11 | 1 | 1 | 0 | 9 |
+ | Medium | 11 | 2 | 1 | 0 | 8 |
  | Lower | 8 | 0 | 1 | 0 | 7 |
  | Engineering | 2 | 0 | 0 | 0 | 2 |
 
