@@ -35,8 +35,9 @@ SKILLS_DIR = PROJECT_ROOT / "CAPABILITY" / "SKILLS"
 RUNS_DIR = Path(__file__).parent / "_runs"
 DEFAULT_VALIDATE = SKILLS_DIR / "_TEMPLATE" / "validate.py"
 
-SYSTEM1_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
-CORTEX_DB = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "_generated" / "cortex.db"
+# Cassette network handles semantic search
+# See: NAVIGATION/CORTEX/cassettes/*.db
+CASSETTES_DIR = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "cassettes"
 
 
 def run_process(args: List[str]) -> subprocess.CompletedProcess:
@@ -88,34 +89,19 @@ def ensure_navigation_dbs() -> int:
     """
     Ensure required navigation DBs exist before running fixtures.
 
-    CI builds these DBs earlier, but local runs of the contract runner should be
-    self-sufficient and deterministic.
+    Navigation is now handled by the cassette network (NAVIGATION/CORTEX/cassettes/).
+    This function verifies at least some cassettes exist.
     """
-    steps: List[Tuple[Path, List[str]]] = []
+    if not CASSETTES_DIR.exists():
+        print(f"[contracts/runner] Cassettes directory not found: {CASSETTES_DIR}")
+        return 1
 
-    cortex_build = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "cortex.build.py"
-    system1_reset = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "reset_system1.py"
+    cassette_dbs = list(CASSETTES_DIR.glob("*.db"))
+    if not cassette_dbs:
+        print(f"[contracts/runner] No cassette databases found in {CASSETTES_DIR}")
+        return 1
 
-    if not CORTEX_DB.exists():
-        steps.append((cortex_build, [sys.executable, str(cortex_build)]))
-
-    # system1-verify fixtures assert the DB matches current repo content. Rebuild it
-    # deterministically before running fixtures (mirrors CI behavior).
-    steps.append((system1_reset, [sys.executable, str(system1_reset)]))
-
-    for script_path, cmd in steps:
-        if not script_path.exists():
-            print(f"[contracts/runner] Missing required build script: {script_path}")
-            return 1
-        print(f"[contracts/runner] Building navigation DB via {script_path.relative_to(PROJECT_ROOT)}", flush=True)
-        start = time.perf_counter()
-        rc = run_process_stream(cmd, cwd=PROJECT_ROOT)
-        if rc != 0:
-            print(f"[contracts/runner] Build failed (rc={rc})", flush=True)
-            return 1
-        elapsed = time.perf_counter() - start
-        print(f"[contracts/runner] Build OK ({elapsed:.2f}s)", flush=True)
-
+    print(f"[contracts/runner] Found {len(cassette_dbs)} cassette databases", flush=True)
     return 0
 
 

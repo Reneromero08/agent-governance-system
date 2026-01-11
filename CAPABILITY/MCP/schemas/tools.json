@@ -3,37 +3,6 @@
     "title": "AGS MCP Tools Schema",
     "description": "JSON Schema definitions for AGS MCP server tools",
     "definitions": {
-        "cortex_query": {
-            "name": "cortex_query",
-            "description": "Query the AGS Cortex index to find files by content, path, or entity type",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Search query (matches path, content, or entity names)"
-                    },
-                    "type": {
-                        "type": "string",
-                        "enum": [
-                            "file",
-                            "entity",
-                            "all"
-                        ],
-                        "default": "all",
-                        "description": "Filter by entry type"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "default": 20,
-                        "description": "Maximum results to return"
-                    }
-                },
-                "required": [
-                    "query"
-                ]
-            }
-        },
         "context_search": {
             "name": "context_search",
             "description": "Search AGS context records (ADRs, preferences, rejected, open)",
@@ -463,32 +432,6 @@
                 }
             }
         },
-        "semantic_search": {
-            "name": "semantic_search",
-            "description": "Semantic search using vector embeddings (96% token savings)",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "query": {
-                        "type": "string",
-                        "description": "Search query for semantic similarity"
-                    },
-                    "limit": {
-                        "type": "integer",
-                        "default": 10,
-                        "description": "Maximum results to return"
-                    },
-                    "min_similarity": {
-                        "type": "number",
-                        "default": 0.0,
-                        "description": "Minimum similarity threshold (0.0-1.0)"
-                    }
-                },
-                "required": [
-                    "query"
-                ]
-            }
-        },
         "skill_discovery": {
             "name": "skill_discovery",
             "description": "Find skills by semantic intent query. Searches 24 indexed skills and returns the most relevant based on description, purpose, and triggers.",
@@ -764,16 +707,10 @@
     },
     "tools": [
         {
-            "$ref": "#/definitions/cortex_query"
-        },
-        {
             "$ref": "#/definitions/context_search"
         },
         {
             "$ref": "#/definitions/context_review"
-        },
-        {
-            "$ref": "#/definitions/semantic_search"
         },
         {
             "$ref": "#/definitions/skill_discovery"

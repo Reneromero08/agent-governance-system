@@ -2,16 +2,14 @@
 """
 CORTEX Semantic Search
 
-Vector-based semantic similarity search for CORTEX sections.
-Part of the Semantic Core architecture (ADR-030).
+DEPRECATED: system1.db is deprecated. Use the cassette network for search:
+    from NAVIGATION.CORTEX.semantic.query import CortexQuery
+    cq = CortexQuery()
+    results = cq.search("your query")
 
-Features:
-- Cosine similarity search
-- Top-K retrieval
-- Batch processing
-- Integration with system1.db
-- Fallback to FTS5 when no vectors available
-- TokenReceipt emission for token accountability (Phase 5.2.7)
+Or use MCP tool: cassette_network_query
+
+This file is kept for backward compatibility with tests.
 """
 
 import hashlib
@@ -482,59 +480,42 @@ class SemanticSearch:
 
 def search_cortex(
     query: str,
-    db_path: Path = Path("NAVIGATION/CORTEX/db/system1.db"),
+    db_path: Path = None,
     top_k: int = 10,
     emit_receipt: bool = True,
 ) -> SearchResponse:
     """Convenience function for semantic search.
 
+    DEPRECATED: Use cassette network instead:
+        from NAVIGATION.CORTEX.semantic.query import CortexQuery
+        cq = CortexQuery()
+        results = cq.search(query)
+
     Args:
         query: Query text
-        db_path: Path to database
+        db_path: Path to database (deprecated, ignored)
         top_k: Number of results
         emit_receipt: Whether to emit TokenReceipt
 
     Returns:
-        SearchResponse with results and optional receipt
+        SearchResponse with empty results (system1.db deprecated)
     """
-    with SemanticSearch(db_path) as searcher:
-        return searcher.search(query, top_k=top_k, emit_receipt=emit_receipt)
+    import warnings
+    warnings.warn(
+        "search_cortex is deprecated. Use CortexQuery from "
+        "NAVIGATION.CORTEX.semantic.query instead.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+    # Return empty response - system1.db no longer exists
+    return SearchResponse(results=[], receipt=None)
 
 
 if __name__ == "__main__":
-    # Self-test
-    import sys
-    from pathlib import Path
-
-    print("Testing SemanticSearch...")
-
-    db_path = Path("NAVIGATION/CORTEX/db/system1.db")
-    if not db_path.exists():
-        print(f"Database not found: {db_path}")
-        print("Skipping tests (database needs to be initialized first)")
-        sys.exit(0)
-
-    try:
-        with SemanticSearch(db_path) as searcher:
-            # Get stats
-            stats = searcher.get_stats()
-            print(f"Database stats: {stats}")
-
-            if stats['total_embeddings'] == 0:
-                print("No embeddings found in database - run indexer first")
-            else:
-                # Test search
-                results = searcher.search("task scheduling", top_k=5)
-                print(f"\nSearch results for 'task scheduling':")
-                for i, result in enumerate(results, 1):
-                    print(f"{i}. {result.section_name or result.hash[:8]} "
-                          f"(similarity: {result.similarity:.3f})")
-                    if result.file_path:
-                        print(f"   File: {result.file_path}")
-
-        print("\nTests completed!")
-
-    except Exception as e:
-        print(f"Error during testing: {e}")
-        import traceback
-        traceback.print_exc()
+    print("SemanticSearch is deprecated.")
+    print("Use the cassette network for search:")
+    print("  from NAVIGATION.CORTEX.semantic.query import CortexQuery")
+    print("  cq = CortexQuery()")
+    print("  results = cq.search('your query')")
+    print()
+    print("Or use MCP tool: cassette_network_query")

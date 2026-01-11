@@ -1,8 +1,25 @@
-<!-- CONTENT_HASH: 3.7.44 -->
+<!-- CONTENT_HASH: 3.7.45 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.8.2] - 2026-01-11
+
+### Removed
+- **CAPABILITY/TOOLS/cortex/** — Deprecated cortex tools (replaced by MCP cassette network)
+- **CAPABILITY/TESTBENCH/integration/test_cortex_integration.py** — Obsolete test
+
+### Changed
+- **CAPABILITY/MCP/semantic_adapter.py** — Uses cassette network exclusively
+- **CAPABILITY/MCP/server.py** — Removed deprecated tool references
+- **AGENTS.md** — Updated CORTEX paths
+- **LAW/CONTRACTS/runner.py** — Updated cortex-toolkit skill imports
+
+### Note
+See `THOUGHT/LAB/CASSETTE_NETWORK/CHANGELOG.md` for full cassette network cleanup details.
 
 ---
 

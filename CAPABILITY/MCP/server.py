@@ -1465,16 +1465,14 @@ class AGSMCPServer:
         # Dispatch to tool handlers
         tool_handlers = {
             # Read tools
-            "cortex_query": self._tool_cortex_query,
             "context_search": self._tool_context_search,
             "context_review": self._tool_context_review,
             "canon_read": self._tool_canon_read,
             "codebook_lookup": self._tool_codebook_lookup,
-            # Semantic search tools
-            "semantic_search": self._tool_semantic_search,
+            # Cassette network (unified query interface)
+            "cassette_network_query": self._tool_cassette_network_query,
             "skill_discovery": self._tool_skill_discovery,
             "find_related": self._tool_find_related,
-            "cassette_network_query": self._tool_cassette_network_query,
             "semantic_stats": self._tool_semantic_stats,
             "memory_save": self._tool_memory_save,
             "memory_query": self._tool_memory_query,
@@ -2012,27 +2010,6 @@ class AGSMCPServer:
             return {"content": [{"type": "text", "text": f"Finalize failed: {str(e)}"}], "isError": True}
 
     # Tool implementations
-    def _tool_cortex_query(self, args: Dict) -> Dict:
-        """Query the cortex using the cached cortex index."""
-        try:
-            query = args.get("query", "")
-            limit = int(args.get("limit", 20))
-            results = self._search_cortex_index(query, limit=limit)
-            return {
-                "content": [{
-                    "type": "text",
-                    "text": json.dumps(results, indent=2)
-                }]
-            }
-        except Exception as e:
-            return {
-                "content": [{
-                    "type": "text",
-                    "text": f"Cortex query error: {str(e)}"
-                }],
-                "isError": True
-            }
-
     def _tool_context_search(self, args: Dict) -> Dict:
         """Search context records in LAW/CONTEXT."""
         try:
@@ -2691,23 +2668,6 @@ class AGSMCPServer:
                     "type": "text",
                     "text": f"Codebook lookup error: {str(e)}"
                 }],
-                "isError": True
-            }
-
-    def _tool_semantic_search(self, args: Dict) -> Dict:
-        """Semantic search using vector embeddings."""
-        self._ensure_semantic_adapter()
-        if not self.semantic_available or not self.semantic_adapter:
-            return {
-                "content": [{"type": "text", "text": "Semantic search not available"}],
-                "isError": True
-            }
-        
-        try:
-            return self.semantic_adapter.semantic_search_tool(args)
-        except Exception as e:
-            return {
-                "content": [{"type": "text", "text": f"Semantic search error: {str(e)}"}],
                 "isError": True
             }
 

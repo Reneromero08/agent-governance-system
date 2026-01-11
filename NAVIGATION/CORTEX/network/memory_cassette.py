@@ -36,6 +36,16 @@ except ImportError:
 
 from cassette_protocol import DatabaseCassette
 
+# Import GuardedWriter for write firewall compliance
+try:
+    PROJECT_ROOT = Path(__file__).resolve().parents[3]
+    sys.path.insert(0, str(PROJECT_ROOT / "CAPABILITY" / "TOOLS" / "utilities"))
+    from guarded_writer import GuardedWriter
+    GUARDED_WRITER_AVAILABLE = True
+except ImportError:
+    GUARDED_WRITER_AVAILABLE = False
+    GuardedWriter = None
+
 
 # Configuration
 CASSETTES_DIR = Path(__file__).parent.parent / "cassettes"
@@ -66,8 +76,19 @@ class MemoryCassette(DatabaseCassette):
         # Lazy-load embedding engine
         self._embedding_engine = None
 
-        # Ensure directory exists
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
+        # Ensure directory exists (use GuardedWriter if available for write firewall compliance)
+        if GUARDED_WRITER_AVAILABLE:
+            # Get relative path from project root
+            rel_path = str(self.db_path.parent.relative_to(PROJECT_ROOT))
+            writer = GuardedWriter(
+                project_root=PROJECT_ROOT,
+                durable_roots=["NAVIGATION/CORTEX/cassettes"]
+            )
+            writer.open_commit_gate()  # Required before any durable writes
+            writer.mkdir_durable(rel_path)
+        else:
+            # Fallback for contexts without GuardedWriter
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
 
         # Initialize schema
         self._init_schema()

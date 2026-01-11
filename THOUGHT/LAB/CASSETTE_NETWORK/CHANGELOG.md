@@ -4,6 +4,69 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
+## [3.8.2] - 2026-01-11
+
+### Phase 2.4: Cleanup and Deprecation - COMPLETE
+
+**Goal:** Remove deprecated system1.db infrastructure now that cassette network is operational
+
+#### Removed
+- **CAPABILITY/TOOLS/cortex/** - Dead code referencing deprecated `_generated/` folder
+  - `cortex.py`, `cortex_refresh.py`, `export_semantic.py`
+  - `codebook_build.py`, `codebook_lookup.py`
+  - `semantic_bridge.py`, `semantic_network.py`
+- **NAVIGATION/CORTEX/_generated/** - Deprecated compressed database artifacts
+  - `cortex.json`, `SUMMARY_INDEX.json`, `canon_compressed.db`, `compression_config.json`
+- **NAVIGATION/CORTEX/cortex.json** + **cortex.schema.json** - Legacy metadata files
+- **NAVIGATION/CORTEX/db/** - Deprecated database files
+  - `system1_builder.py`, `cortex.build.py`, `build_swarm_db.py`
+  - `adr_index.db`, `canon_index.db`, `skill_index.db`, `codebase_full.db`
+  - `instructions.db`, `swarm_instructions.db`, `system2.db`
+  - `schema.sql`, `schema/002_vectors.sql`
+  - `reset_system1.py`, `system2_ledger.py`
+- **NAVIGATION/CORTEX/fixtures/** - Test fixtures (`test_fences.md`)
+- **Migration scripts** - One-time use completed
+  - `migrate_to_cassettes.py`, `structure_aware_migration.py`
+- **Research/demo code**
+  - `demo_cassette_network.py`, `esap_cassette.py`, `esap_hub.py`, `test_esap_integration.py`
+- **NAVIGATION/CORTEX/network/cassettes/** - Specialized cassette implementations superseded by generic protocol
+  - `agi_research_cassette.py`, `cat_chat_cassette.py`, `governance_cassette.py`
+- **NAVIGATION/CORTEX/semantic/summarizer.py** - Referenced deprecated System1DB
+- **NAVIGATION/CORTEX/tests/verify_db.py** - Debug script no longer needed
+- **CAPABILITY/TESTBENCH/integration/test_cortex_integration.py** - Broken test importing deleted modules
+
+#### Updated
+- **NAVIGATION/CORTEX/README.md** - Documented cassette network as primary architecture
+- **CAPABILITY/MCP/semantic_adapter.py** - Removed all system1.db references, uses cassette network exclusively
+- **NAVIGATION/CORTEX/semantic/query.py** - Rewritten to search across all 9 cassettes (FTS5)
+- **NAVIGATION/CORTEX/semantic/semantic_search.py** - Deprecated with warning, returns empty results
+- **NAVIGATION/CORTEX/network/memory_cassette.py** - Added GuardedWriter for write firewall compliance
+- **CAPABILITY/TESTBENCH/integration/test_phase_2_4_1c3_no_raw_writes.py** - Allowed memory_cassette.py mkdir operations
+- **AGENTS.md** - Updated CORTEX paths, removed `_generated/` references
+- **LAW/CONTRACTS/runner.py** - Updated cortex-toolkit skill imports
+- **CAPABILITY/SKILLS/cortex-toolkit/** - Updated for cassette network APIs
+- **CAPABILITY/MCP/server.py** - Removed deprecated cortex tool references
+- **CAPABILITY/MCP/schemas/tools.json** - Cleaned up tool schemas
+
+#### Verification
+- **1,242/1,242 AGS tests pass** - No regressions from cleanup
+- **Write firewall compliance** - memory_cassette.py uses GuardedWriter
+- **Cassette network functional** - 9 cassettes registered and operational
+
+#### Statistics
+- **59 files changed:** 473 insertions(+), 17,688 deletions(-)
+- **Deleted:** ~30MB of deprecated databases and 12 stale Python modules
+- **Cassette network now primary:** system1.db fully deprecated
+
+#### Acceptance Criteria Met
+- [x] All deprecated system1.db code removed
+- [x] All tests pass after cleanup
+- [x] Write firewall compliance maintained
+- [x] Cassette network remains fully functional
+- [x] Documentation updated to reflect current architecture
+
+---
+
 ## [3.8.1] - 2026-01-11
 
 ### Phase 2: Write Path (Memory Persistence) - COMPLETE

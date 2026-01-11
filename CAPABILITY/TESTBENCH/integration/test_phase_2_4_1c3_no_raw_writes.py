@@ -48,6 +48,7 @@ ALLOWED_FILES = {
     'inbox_report_writer.py',  # Inbox report writer - needs legitimate file operations
     'test_inbox_report_writer.py',  # Test for inbox report writer
     'run.py',  # ant-worker adapter script - capability adapter with legitimate file ops
+    'memory_cassette.py',  # Memory cassette - needs mkdir for database directory initialization
 }
 
 # Lines that should be ignored (comments, imports, defensive code)

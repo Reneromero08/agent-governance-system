@@ -2,15 +2,15 @@
 """
 Cortex Toolkit - Unified CORTEX operations skill.
 
-Consolidates: cortex-build, cas-integrity-check, system1-verify,
-              cortex-summaries, llm-packer-smoke
+Consolidates: cas-integrity-check, cortex-summaries, llm-packer-smoke
 
 Operations:
-  - build: Rebuild CORTEX index and SECTION_INDEX
   - verify_cas: Check CAS directory integrity
-  - verify_system1: Ensure system1.db is in sync
   - summarize: Generate deterministic section summaries
   - smoke_test: Run LLM Packer smoke tests
+
+Note: build and verify_system1 operations removed - cassette network
+      now handles semantic search via NAVIGATION/CORTEX/cassettes/
 """
 
 from __future__ import annotations
@@ -40,12 +40,10 @@ except ImportError:
     FirewallViolation = None
 
 # Constants
-DEFAULT_BUILD_SCRIPT = "NAVIGATION/CORTEX/db/cortex.build.py"
-DEFAULT_SECTION_INDEX = "NAVIGATION/CORTEX/_generated/SECTION_INDEX.json"
-DB_PATH = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "system1.db"
 PACKER_MODULE = "MEMORY.LLM_PACKER.Engine.packer"
 PACKS_ROOT = PROJECT_ROOT / "MEMORY" / "LLM_PACKER" / "_packs"
 RUNS_ROOT = PROJECT_ROOT / "LAW" / "CONTRACTS" / "_runs"
+CASSETTES_DIR = PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "cassettes"
 
 # Directories to exclude from system1 verification
 EXCLUDE_DIRS = [
@@ -55,7 +53,6 @@ EXCLUDE_DIRS = [
 
 DURABLE_ROOTS = [
     "LAW/CONTRACTS/_runs",
-    "NAVIGATION/CORTEX/_generated",
     "MEMORY/LLM_PACKER/_packs",
     "BUILD",
     "CAPABILITY/SKILLS",
@@ -570,9 +567,7 @@ def op_smoke_test(payload: Dict[str, Any], output_path: Path, writer: GuardedWri
 # ============================================================================
 
 OPERATIONS = {
-    "build": op_build,
     "verify_cas": op_verify_cas,
-    "verify_system1": op_verify_system1,
     "summarize": op_summarize,
     "smoke_test": op_smoke_test,
 }

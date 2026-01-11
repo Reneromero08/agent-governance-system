@@ -14,6 +14,10 @@ import json
 from cassette_protocol import DatabaseCassette
 
 
+# Current schema version for all cassettes
+CASSETTE_SCHEMA_VERSION = "1.5.0"  # Phase 1.5: structure-aware chunking
+
+
 class GenericCassette(DatabaseCassette):
     """Generic cassette created from JSON configuration.
     
@@ -52,6 +56,7 @@ class GenericCassette(DatabaseCassette):
         self.description = config.get("description", "")
         self.capabilities = config.get("capabilities", [])
         self.query_template = config.get("query_template", "")
+        self.expected_schema = config.get("schema_version", CASSETTE_SCHEMA_VERSION)
         self.config = config
         self.project_root = project_root
         
@@ -261,11 +266,129 @@ class GenericCassette(DatabaseCassette):
             # Check for vectors
             vector_tables = [t for t in tables if 'vector' in t.lower()]
             stats["has_vectors"] = len(vector_tables) > 0
-            
+
+            # Get schema version
+            stats["schema_version"] = self._get_schema_version(conn)
+            stats["expected_schema"] = self.expected_schema
+
         finally:
             conn.close()
-        
+
         return stats
+
+    # =========================================================================
+    # Schema Versioning
+    # =========================================================================
+
+    def _get_schema_version(self, conn: sqlite3.Connection = None) -> Optional[str]:
+        """Get the schema version from the cassette database."""
+        close_conn = False
+        if conn is None:
+            if not self.db_path.exists():
+                return None
+            conn = sqlite3.connect(str(self.db_path))
+            close_conn = True
+
+        try:
+            # Check if cassette_metadata table exists
+            cursor = conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='cassette_metadata'"
+            )
+            if not cursor.fetchone():
+                return None
+
+            cursor = conn.execute(
+                "SELECT value FROM cassette_metadata WHERE key='schema_version'"
+            )
+            row = cursor.fetchone()
+            return row[0] if row else None
+        except Exception:
+            return None
+        finally:
+            if close_conn:
+                conn.close()
+
+    def _ensure_schema_version(self) -> str:
+        """Ensure schema_version is set in the database. Returns current version."""
+        if not self.db_path.exists():
+            return None
+
+        conn = sqlite3.connect(str(self.db_path))
+        try:
+            # Create cassette_metadata if not exists
+            conn.execute("""
+                CREATE TABLE IF NOT EXISTS cassette_metadata (
+                    key TEXT PRIMARY KEY,
+                    value TEXT NOT NULL,
+                    updated_at TEXT DEFAULT CURRENT_TIMESTAMP
+                )
+            """)
+
+            # Check current version
+            cursor = conn.execute(
+                "SELECT value FROM cassette_metadata WHERE key='schema_version'"
+            )
+            row = cursor.fetchone()
+
+            if not row:
+                # Initialize with expected version for this cassette
+                conn.execute(
+                    "INSERT INTO cassette_metadata (key, value) VALUES (?, ?)",
+                    ("schema_version", self.expected_schema)
+                )
+                conn.commit()
+                return self.expected_schema
+
+            return row[0]
+        finally:
+            conn.close()
+
+    def validate_schema(self) -> Dict:
+        """Validate that cassette schema matches expected version.
+
+        Returns:
+            Dict with: valid (bool), current_version, expected_version, message
+        """
+        current = self._get_schema_version()
+        expected = self.expected_schema
+
+        if current is None:
+            # Initialize schema version
+            self._ensure_schema_version()
+            return {
+                "valid": True,
+                "current_version": self.expected_schema,
+                "expected_version": expected,
+                "message": "Schema version initialized"
+            }
+
+        if current == expected:
+            return {
+                "valid": True,
+                "current_version": current,
+                "expected_version": expected,
+                "message": "Schema up to date"
+            }
+
+        # Version mismatch - compare major.minor
+        current_parts = current.split(".")
+        expected_parts = expected.split(".")
+
+        if current_parts[:2] == expected_parts[:2]:
+            # Same major.minor, patch difference is OK
+            return {
+                "valid": True,
+                "current_version": current,
+                "expected_version": expected,
+                "message": "Patch version difference (compatible)"
+            }
+
+        return {
+            "valid": False,
+            "current_version": current,
+            "expected_version": expected,
+            "message": f"Schema mismatch: {current} vs {expected} - migration may be needed"
+        }
 
     # =========================================================================
     # Phase 1.5: Hierarchical Navigation Methods

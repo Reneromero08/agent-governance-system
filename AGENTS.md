@@ -103,8 +103,8 @@ Token waste occurs when an agent:
 **❌ WRONG (Token Waste):**
 ```python
 import sqlite3
-conn = sqlite3.connect('NAVIGATION/CORTEX/db/system1.db')
-cursor = conn.execute('SELECT * FROM symbols')
+conn = sqlite3.connect('NAVIGATION/CORTEX/cassettes/canon.db')
+cursor = conn.execute('SELECT * FROM chunks')
 ```
 
 **✅ CORRECT (MCP-First):**
@@ -351,7 +351,7 @@ Agents MAY:
 - create or modify files under:
   - CAPABILITY/SKILLS/
   - LAW/CONTRACTS/
-  - NAVIGATION/CORTEX/ (implementation), and `NAVIGATION/CORTEX/_generated/` (generated)
+  - NAVIGATION/CORTEX/ (implementation and cassettes)
   - MEMORY/ (implementation), and `MEMORY/LLM_PACKER/_packs/` (generated)
   - BUILD/ (user build outputs only)
 - append new records under LAW/CONTEXT/ (append-first; editing existing records requires explicit instruction)
@@ -363,7 +363,6 @@ Agents MAY NOT:
 - rewrite history in LAW/CONTEXT/* without explicit instruction
 - touch generated artifacts outside:
   - LAW/CONTRACTS/_runs/
-  - NAVIGATION/CORTEX/_generated/
   - MEMORY/LLM_PACKER/_packs/
 
 Generated files must be clearly marked as generated.
@@ -376,7 +375,6 @@ requested. It must not be treated as canon.
 System-generated artifacts MUST be written only to:
 
 - LAW/CONTRACTS/_runs/
-- NAVIGATION/CORTEX/_generated/
 - MEMORY/LLM_PACKER/_packs/
 
 `BUILD/` is reserved for user build outputs. It must not be used for system artifacts.

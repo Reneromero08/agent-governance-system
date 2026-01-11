@@ -11,6 +11,9 @@ LAW/CONTRACTS/_runs/_tmp/
 # CAS runtime storage (never commit)
 CAPABILITY/CAS/storage/
 
+# Swarm provenance database (runtime artifact)
+THOUGHT/LAB/TURBO_SWARM/provenance.db
+
 # Runtime-generated files (modified by tests, rebuilt on demand)
 CAPABILITY/RUNS/RUN_ROOTS.json
 ERROR_RECEIPT.json
@@ -36,9 +39,15 @@ NAVIGATION/CORTEX/meta/SECTION_INDEX.json
 # Generated System1 DB (rebuilt in CI and by runner.py)
 NAVIGATION/CORTEX/db/system1.db
 
+# Dead code chunker (Phase 1.5 design, never integrated)
+NAVIGATION/CORTEX/db/markdown_chunker.py
+
 # Cassette databases (derived from source files, rebuilt by migration scripts)
 NAVIGATION/CORTEX/cassettes/
 NAVIGATION/CORTEX/db/_migration_backup/
+
+# CAT_CHAT databases (runtime artifacts)
+THOUGHT/LAB/CAT_CHAT/**/*.db
 
 # Generated Proof Artifacts (dispersed)
 NAVIGATION/PROOFS/GREEN_STATE.json
