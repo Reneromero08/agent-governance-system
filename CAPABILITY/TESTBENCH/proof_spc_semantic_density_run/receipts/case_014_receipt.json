@@ -1,0 +1,8 @@
+{
+  "case_id": "case_014",
+  "pointer": "C3:build",
+  "pointer_hash": "84cf1b0a3b9e1c8ca8286ea40aa8052b086b2b184c13568b7c96ecd1986060de",
+  "concept_units": 1,
+  "cdr": 0.25,
+  "passed": true
+}

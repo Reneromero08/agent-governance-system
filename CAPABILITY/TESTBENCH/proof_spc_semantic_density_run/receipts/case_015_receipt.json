@@ -1,0 +1,8 @@
+{
+  "case_id": "case_015",
+  "pointer": "I5:audit",
+  "pointer_hash": "e30534d501f8b13af812557938c19b8aaaf1a511501875eaeada97d7be74decf",
+  "concept_units": 1,
+  "cdr": 0.25,
+  "passed": true
+}

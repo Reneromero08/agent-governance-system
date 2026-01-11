@@ -4,6 +4,58 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.44] - 2026-01-11
+
+### Phase 5.3.5: Proof Harness — SPC Semantic Density Benchmark
+
+**Added:**
+- `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/` — Complete proof harness directory
+  - `benchmark_cases.json` — 18 fixed test cases + 5 negative controls
+  - `run_benchmark.py` — Deterministic proof runner with receipted outputs
+  - `metrics.json` — Machine-readable metrics output
+  - `report.md` — Human-readable proof report
+  - `receipts/` — 22 SHA-256 receipt files (per-case + main + input)
+
+**Benchmark Results:**
+```
+Cases:           18/18 passed
+Compression:     92.2%
+Tokens Saved:    416 (451 NL → 35 pointer)
+Aggregate CDR:   0.89 concept_units/token
+Aggregate ECR:   100%
+M_required:      1.0 (single channel sufficient at ECR=1.0)
+Receipt Hash:    5a4dada2c320480e...
+```
+
+**Case Categories:**
+- Contract rules (C3, C7, C8) — 3 cases, CDR=0.50
+- Invariants (I5, I6) — 2 cases, CDR=0.50
+- CJK symbols (法, 真, 驗) — 3 cases, CDR=1.00
+- Compound pointers (法.驗, 法.契) — 2 cases, CDR=0.33
+- Radicals (C, I, V) — 3 cases, CDR=1.00
+- Context qualifiers (C3:build, I5:audit) — 2 cases, CDR=0.25
+- Gate (V) — 1 case, CDR=1.00
+- Operators (C*, C&I) — 2 cases, CDR=6.50/1.00
+
+**Acceptance Criteria Met:** ✅
+- **A1 Determinism:** Two consecutive runs → identical hash (verified)
+- **A2 Fail-closed:** All errors produce explicit failure artifacts
+- **A3 Metrics computed:** CDR=0.89, ECR=100%, compression=92.2%
+- **A4 Paths verified:** All 18 cases reference existing repo paths
+
+**Key Implementation Details:**
+- Tokenizer: tiktoken/o200k_base
+- concept_units counted via GOV_IR_SPEC Section 7 rules
+- `output_root` ref_type skipped in path verification (patterns, not files)
+- Negative controls: E_UNKNOWN_SYMBOL, E_SYNTAX, E_RULE_NOT_FOUND
+
+**Updated:**
+- `THOUGHT/LAB/VECTOR_ELO/PHASE_5_ROADMAP.md` → v1.10.0
+  - Marked 5.3.5 complete (5/6 tasks in Phase 5.3 done)
+  - Only 5.3.6 (PAPER_SPC.md) remaining
+
+---
+
 ## [3.7.43] - 2026-01-11
 
 ### Phase 5.3.4: TOKENIZER_ATLAS.json — Formal Tokenizer Tracking

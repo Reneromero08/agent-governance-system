@@ -1,0 +1,464 @@
+{
+  "version": "1.0.0",
+  "schema": "SPC_BENCHMARK_V1",
+  "phase": "5.3.5",
+  "created": "2026-01-11",
+  "tokenizer": "o200k_base",
+  "description": "Fixed benchmark cases for SPC semantic density proof",
+  "cases": [
+    {
+      "id": "case_001",
+      "category": "contract_rule",
+      "description": "Contract rule C3 - INBOX requirement",
+      "nl_statement": "All documents requiring human review must be placed in the INBOX directory for processing.",
+      "pointer_encoding": "C3",
+      "gold_ir": {
+        "type": "constraint",
+        "op": "requires",
+        "subject": {
+          "type": "reference",
+          "ref_type": "path",
+          "value": "INBOX/"
+        },
+        "predicate": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "human-review documents"
+        },
+        "severity": "must"
+      },
+      "codebook_entry": {
+        "summary": "INBOX requirement",
+        "full": "All documents requiring human review must be in INBOX/"
+      }
+    },
+    {
+      "id": "case_002",
+      "category": "contract_rule",
+      "description": "Contract rule C7 - Determinism",
+      "nl_statement": "The system must be deterministic. Given the same inputs and canon state, the system must produce identical outputs every time.",
+      "pointer_encoding": "C7",
+      "gold_ir": {
+        "type": "constraint",
+        "op": "ensures",
+        "subject": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "system"
+        },
+        "predicate": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "deterministic outputs"
+        },
+        "severity": "must"
+      },
+      "codebook_entry": {
+        "summary": "Determinism",
+        "full": "Same inputs and canon must produce same outputs"
+      }
+    },
+    {
+      "id": "case_003",
+      "category": "contract_rule",
+      "description": "Contract rule C8 - Output roots",
+      "nl_statement": "All system-generated artifacts must be written only to designated output directories: _runs/, _generated/, or _packs/. Writing elsewhere is forbidden.",
+      "pointer_encoding": "C8",
+      "gold_ir": {
+        "type": "prohibition",
+        "op": "forbids",
+        "subject": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "system-generated artifacts"
+        },
+        "target": {
+          "type": "operation",
+          "op": "NOT_IN",
+          "operands": [
+            {"type": "reference", "ref_type": "output_root", "value": "_runs/"},
+            {"type": "reference", "ref_type": "output_root", "value": "_generated/"},
+            {"type": "reference", "ref_type": "output_root", "value": "_packs/"}
+          ]
+        },
+        "exceptions": []
+      },
+      "codebook_entry": {
+        "summary": "Output roots",
+        "full": "Artifacts only to _runs/, _generated/, _packs/"
+      }
+    },
+    {
+      "id": "case_004",
+      "category": "invariant",
+      "description": "Invariant I5 - Determinism",
+      "nl_statement": "Invariant 5 mandates determinism: identical inputs must always produce byte-identical outputs across all operations including validation, transformation, indexing, and reporting.",
+      "pointer_encoding": "I5",
+      "gold_ir": {
+        "type": "constraint",
+        "op": "maintains",
+        "subject": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "system"
+        },
+        "predicate": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "determinism"
+        },
+        "severity": "must",
+        "metadata": {
+          "invariant_id": "INV-005",
+          "summary": "Same inputs produce same outputs"
+        }
+      },
+      "codebook_entry": {
+        "id": "INV-005",
+        "summary": "Determinism",
+        "full": "Same inputs produce same outputs"
+      }
+    },
+    {
+      "id": "case_005",
+      "category": "invariant",
+      "description": "Invariant I6 - Output roots",
+      "nl_statement": "Invariant 6 restricts artifact output locations. All generated artifacts must be placed only in designated output directories to maintain repository structure integrity.",
+      "pointer_encoding": "I6",
+      "gold_ir": {
+        "type": "prohibition",
+        "op": "forbids",
+        "subject": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "artifacts"
+        },
+        "target": {
+          "type": "operation",
+          "op": "NOT_IN",
+          "operands": [
+            {"type": "reference", "ref_type": "output_root", "value": "_runs/"},
+            {"type": "reference", "ref_type": "output_root", "value": "_generated/"},
+            {"type": "reference", "ref_type": "output_root", "value": "_packs/"}
+          ]
+        },
+        "exceptions": []
+      },
+      "codebook_entry": {
+        "id": "INV-006",
+        "summary": "Output roots",
+        "full": "Artifacts only to designated output directories"
+      }
+    },
+    {
+      "id": "case_006",
+      "category": "cjk_symbol",
+      "description": "CJK symbol - Law domain",
+      "nl_statement": "The LAW/CANON directory contains all normative governance artifacts including the Genesis Compact, Contract rules, Invariants, and all binding protocols. It is the single source of truth.",
+      "pointer_encoding": "\u6cd5",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON"
+      },
+      "codebook_entry": {
+        "domain": "Law",
+        "path": "LAW/CANON",
+        "compression": 56370
+      }
+    },
+    {
+      "id": "case_007",
+      "category": "cjk_symbol",
+      "description": "CJK symbol - Truth foundation",
+      "nl_statement": "The Semiotic Foundation of Truth document establishes the ontological basis for the governance system, defining how meaning and verification work together.",
+      "pointer_encoding": "\u771f",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md"
+      },
+      "codebook_entry": {
+        "type": "file",
+        "path": "LAW/CANON/FOUNDATION/THE_SEMIOTIC_FOUNDATION_OF_TRUTH.md",
+        "compression": 8200
+      }
+    },
+    {
+      "id": "case_008",
+      "category": "cjk_symbol",
+      "description": "CJK symbol - Verification domain",
+      "nl_statement": "The verification subsystem handles all validation operations including receipt verification, hash integrity checks, schema validation, and invariant checking.",
+      "pointer_encoding": "\u9a57",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      },
+      "codebook_entry": {
+        "type": "file",
+        "path": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md",
+        "compression": 3800
+      }
+    },
+    {
+      "id": "case_009",
+      "category": "compound",
+      "description": "Compound pointer - Law.Verification",
+      "nl_statement": "The verification subsystem within LAW/CANON handles all validation operations. This includes receipt verification, hash integrity checks, schema validation, catalytic domain verification, and invariant checking.",
+      "pointer_encoding": "\u6cd5.\u9a57",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      },
+      "codebook_entry": {
+        "type": "compound",
+        "path": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      }
+    },
+    {
+      "id": "case_010",
+      "category": "compound",
+      "description": "Compound pointer - Law.Contract",
+      "nl_statement": "The Contract document within LAW/CANON defines the binding rules between the system and its operators, including the 13 contract rules that govern all operations.",
+      "pointer_encoding": "\u6cd5.\u5951",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/CONSTITUTION/CONTRACT.md"
+      },
+      "codebook_entry": {
+        "type": "compound",
+        "path": "LAW/CANON/CONSTITUTION/CONTRACT.md"
+      }
+    },
+    {
+      "id": "case_011",
+      "category": "radical",
+      "description": "Radical C - Contract domain",
+      "nl_statement": "The Contract domain encompasses all binding rules between the governance system and its operators, defined in CONTRACT.md.",
+      "pointer_encoding": "C",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/CONSTITUTION/CONTRACT.md"
+      },
+      "codebook_entry": {
+        "domain": "Contract",
+        "path": "LAW/CANON/CONSTITUTION/CONTRACT.md"
+      }
+    },
+    {
+      "id": "case_012",
+      "category": "radical",
+      "description": "Radical I - Invariant domain",
+      "nl_statement": "The Invariant domain contains all system invariants that must be maintained at all times, defined in INVARIANTS.md.",
+      "pointer_encoding": "I",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/CONSTITUTION/INVARIANTS.md"
+      },
+      "codebook_entry": {
+        "domain": "Invariant",
+        "path": "LAW/CANON/CONSTITUTION/INVARIANTS.md"
+      }
+    },
+    {
+      "id": "case_013",
+      "category": "radical",
+      "description": "Radical V - Verification domain",
+      "nl_statement": "The Verification domain handles all validation and integrity checking operations for the governance system.",
+      "pointer_encoding": "V",
+      "gold_ir": {
+        "type": "reference",
+        "ref_type": "path",
+        "value": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      },
+      "codebook_entry": {
+        "domain": "Verification",
+        "path": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      }
+    },
+    {
+      "id": "case_014",
+      "category": "context",
+      "description": "Contract rule with build context",
+      "nl_statement": "During build operations, contract rule C3 requires that all generated artifacts include verification receipts linking them to source inputs.",
+      "pointer_encoding": "C3:build",
+      "gold_ir": {
+        "type": "constraint",
+        "op": "requires",
+        "subject": {
+          "type": "reference",
+          "ref_type": "path",
+          "value": "INBOX/"
+        },
+        "predicate": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "human-review documents"
+        },
+        "severity": "must",
+        "metadata": {
+          "context": "build"
+        }
+      },
+      "codebook_entry": {
+        "summary": "INBOX requirement",
+        "full": "All documents requiring human review must be in INBOX/",
+        "context": "build"
+      }
+    },
+    {
+      "id": "case_015",
+      "category": "context",
+      "description": "Invariant with audit context",
+      "nl_statement": "In audit context, invariant I5 ensures that all verification operations produce deterministic, reproducible results that can be independently verified.",
+      "pointer_encoding": "I5:audit",
+      "gold_ir": {
+        "type": "constraint",
+        "op": "maintains",
+        "subject": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "system"
+        },
+        "predicate": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "determinism"
+        },
+        "severity": "must",
+        "metadata": {
+          "invariant_id": "INV-005",
+          "context": "audit"
+        }
+      },
+      "codebook_entry": {
+        "id": "INV-005",
+        "summary": "Determinism",
+        "full": "Same inputs produce same outputs",
+        "context": "audit"
+      }
+    },
+    {
+      "id": "case_016",
+      "category": "gate",
+      "description": "Verification gate - fixture tests",
+      "nl_statement": "All fixture tests must pass before any merge operation. This gate ensures that no changes can enter the codebase without passing the complete test suite.",
+      "pointer_encoding": "V",
+      "gold_ir": {
+        "type": "gate",
+        "gate_type": "test",
+        "target": {
+          "type": "reference",
+          "ref_type": "path",
+          "value": "LAW/CONTRACTS/fixtures/"
+        },
+        "pass_criteria": {
+          "type": "literal",
+          "value_type": "string",
+          "value": "all tests pass"
+        },
+        "fail_action": "reject"
+      },
+      "codebook_entry": {
+        "domain": "Verification",
+        "path": "LAW/CANON/GOVERNANCE/VERIFICATION_PROTOCOL_CANON.md"
+      }
+    },
+    {
+      "id": "case_017",
+      "category": "operator",
+      "description": "All contract rules operator",
+      "nl_statement": "Reference to all contract rules (C1 through C13) in the governance system. This expands to the complete set of binding operational rules.",
+      "pointer_encoding": "C*",
+      "gold_ir": {
+        "type": "sequence",
+        "elements": [
+          {"type": "reference", "ref_type": "rule_id", "value": "C1"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C2"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C3"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C4"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C5"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C6"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C7"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C8"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C9"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C10"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C11"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C12"},
+          {"type": "reference", "ref_type": "rule_id", "value": "C13"}
+        ]
+      },
+      "codebook_entry": {
+        "meaning": "ALL contract rules"
+      }
+    },
+    {
+      "id": "case_018",
+      "category": "operator",
+      "description": "Contract AND Invariant binding",
+      "nl_statement": "Reference to both the Contract and Invariant domains together. This binding ensures both sets of rules are applied simultaneously.",
+      "pointer_encoding": "C&I",
+      "gold_ir": {
+        "type": "operation",
+        "op": "AND",
+        "operands": [
+          {
+            "type": "reference",
+            "ref_type": "path",
+            "value": "LAW/CANON/CONSTITUTION/CONTRACT.md"
+          },
+          {
+            "type": "reference",
+            "ref_type": "path",
+            "value": "LAW/CANON/CONSTITUTION/INVARIANTS.md"
+          }
+        ]
+      },
+      "codebook_entry": {
+        "meaning": "Contract AND Invariant domains"
+      }
+    }
+  ],
+  "negative_controls": [
+    {
+      "id": "neg_001",
+      "description": "Unknown symbol",
+      "input": "\u7ffb",
+      "expected_error": "E_UNKNOWN_SYMBOL",
+      "expected_behavior": "FAIL_CLOSED with explicit error"
+    },
+    {
+      "id": "neg_002",
+      "description": "Invalid syntax - unclosed operator",
+      "input": "C3:",
+      "expected_error": "E_SYNTAX",
+      "expected_behavior": "FAIL_CLOSED with syntax error"
+    },
+    {
+      "id": "neg_003",
+      "description": "Unknown rule number",
+      "input": "C99",
+      "expected_error": "E_RULE_NOT_FOUND",
+      "expected_behavior": "FAIL_CLOSED - rule does not exist"
+    },
+    {
+      "id": "neg_004",
+      "description": "Invalid operator sequence",
+      "input": "C*!",
+      "expected_error": "E_SYNTAX",
+      "expected_behavior": "FAIL_CLOSED with operator error"
+    },
+    {
+      "id": "neg_005",
+      "description": "Random nonsense",
+      "input": "xyzzy plugh",
+      "expected_error": "E_SYNTAX",
+      "expected_behavior": "FAIL_CLOSED - not valid SCL"
+    }
+  ]
+}

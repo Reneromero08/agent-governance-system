@@ -1,8 +1,25 @@
-<!-- CONTENT_HASH: 3.7.43 -->
+<!-- CONTENT_HASH: 3.7.44 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.44] - 2026-01-11
+
+### Added
+- **Phase 5.3.5: SPC Semantic Density Proof Harness** — Reproducible benchmark suite with receipted measurements
+  - `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/benchmark_cases.json` — 18 fixed test cases + 5 negative controls
+  - `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/run_benchmark.py` — Deterministic proof runner
+  - `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/metrics.json` — Machine-readable metrics
+  - `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/report.md` — Human-readable proof report
+  - `CAPABILITY/TESTBENCH/proof_spc_semantic_density_run/receipts/` — 22 SHA-256 receipts
+  - **Results:** 18/18 cases pass, CDR=0.89, ECR=100%, compression=92.2%, tokens saved=416
+  - **Acceptance criteria:** A1 (determinism), A2 (fail-closed), A3 (metrics), A4 (paths) — ALL PASS
+
+### Changed
+- **PHASE_5_ROADMAP.md** → v1.10.0 — Marked 5.3.5 complete (5/6 tasks in Phase 5.3 done)
 
 ---
 

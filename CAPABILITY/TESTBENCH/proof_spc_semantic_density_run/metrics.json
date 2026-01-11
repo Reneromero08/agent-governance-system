@@ -1,0 +1,30 @@
+{
+  "version": "1.0.0",
+  "phase": "5.3.5",
+  "timestamp_utc": "2026-01-11T10:27:25.231027+00:00",
+  "metrics": {
+    "total_cases": 18,
+    "passed_cases": 18,
+    "failed_cases": 0,
+    "total_tokens_nl": 451,
+    "total_tokens_pointer": 35,
+    "total_concept_units": 31,
+    "aggregate_cdr": 0.8857142857142857,
+    "aggregate_ecr": 1.0,
+    "aggregate_compression_pct": 92.23946784922394,
+    "m_required_3_nines": 1.0,
+    "m_required_6_nines": 1.0,
+    "a1_determinism": true,
+    "a2_fail_closed": true,
+    "a3_metrics_computed": true,
+    "a4_paths_verified": true,
+    "negative_controls_passed": 5,
+    "negative_controls_total": 5
+  },
+  "tokenizer": {
+    "library": "tiktoken",
+    "encoding": "o200k_base",
+    "version": "0.12.0"
+  },
+  "receipt_hash": "5a4dada2c320480e43d585208fe9b830706b4173ee67c4bc83e2791cb036bf5c"
+}

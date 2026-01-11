@@ -1,0 +1,8 @@
+{
+  "case_id": "case_003",
+  "pointer": "C8",
+  "pointer_hash": "f09d8479566a0c7cdb156fa8635e44990b471b4a641167201c79fed549ecd5f0",
+  "concept_units": 1,
+  "cdr": 0.5,
+  "passed": true
+}
