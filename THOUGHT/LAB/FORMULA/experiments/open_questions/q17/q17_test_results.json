@@ -1,0 +1,197 @@
+{
+  "timestamp": "2026-01-11T11:01:31.735316",
+  "embedder": "sentence-transformers",
+  "model": "all-MiniLM-L6-v2",
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "test": "R_ORDERING",
+      "R_high_agreement": 57.30483206338159,
+      "R_medium_agreement": 4.136881013227075,
+      "R_low_agreement": 0.690726242656712,
+      "E_high": 0.9653452336788177,
+      "E_medium": 0.5023610860109329,
+      "E_low": 0.04915946926921606,
+      "sigma_high": 0.01684578116488998,
+      "sigma_medium": 0.1214347338093352,
+      "sigma_low": 0.07117068865499249,
+      "ordering_correct": true,
+      "pass": true
+    },
+    {
+      "test": "VOLUME_RESISTANCE",
+      "n_observations": [
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "R_values": [
+        4.143647011723935,
+        0.47717265420516003,
+        0.7781960171704547,
+        0.7476566223196762,
+        0.8696653504948173,
+        0.9393431653381877
+      ],
+      "R_initial": 4.143647011723935,
+      "R_final": 0.9393431653381877,
+      "R_change_pct": -77.33052138820018,
+      "volume_resistant": true,
+      "pass": true
+    },
+    {
+      "test": "ECHO_CHAMBER_DETECTION",
+      "R_echo_chamber": 100000000.0,
+      "R_normal_high_agreement": 57.30483206338159,
+      "ratio": 1745053.5388000996,
+      "sigma_echo": 0.0,
+      "sigma_normal": 0.01684578116488998,
+      "echo_detectable": true,
+      "pass": true
+    },
+    {
+      "test": "THRESHOLD_DISCRIMINATION",
+      "high_agreement_R": 57.30483206338159,
+      "high_agreement_status": "open",
+      "low_agreement_R": 0.690726242656712,
+      "low_agreement_status": "closed",
+      "threshold_T2": 0.8,
+      "discriminates_correctly": true,
+      "pass": true
+    },
+    {
+      "test": "TIER_CLASSIFICATION",
+      "correct": 9,
+      "total": 9,
+      "accuracy": 1.0,
+      "details": [
+        {
+          "action": "read",
+          "target": "file.txt",
+          "expected": "T0_READ",
+          "actual": "T0_READ",
+          "correct": true
+        },
+        {
+          "action": "search",
+          "target": "database",
+          "expected": "T0_READ",
+          "actual": "T0_READ",
+          "correct": true
+        },
+        {
+          "action": "stage",
+          "target": "changes",
+          "expected": "T1_REVERSIBLE",
+          "actual": "T1_REVERSIBLE",
+          "correct": true
+        },
+        {
+          "action": "draft",
+          "target": "email",
+          "expected": "T1_REVERSIBLE",
+          "actual": "T1_REVERSIBLE",
+          "correct": true
+        },
+        {
+          "action": "write",
+          "target": "output.txt",
+          "expected": "T2_PERSISTENT",
+          "actual": "T2_PERSISTENT",
+          "correct": true
+        },
+        {
+          "action": "commit",
+          "target": "feature-branch",
+          "expected": "T2_PERSISTENT",
+          "actual": "T2_PERSISTENT",
+          "correct": true
+        },
+        {
+          "action": "deploy",
+          "target": "production",
+          "expected": "T3_CRITICAL",
+          "actual": "T3_CRITICAL",
+          "correct": true
+        },
+        {
+          "action": "delete",
+          "target": "canon/file.md",
+          "expected": "T3_CRITICAL",
+          "actual": "T3_CRITICAL",
+          "correct": true
+        },
+        {
+          "action": "write",
+          "target": "main",
+          "expected": "T3_CRITICAL",
+          "actual": "T3_CRITICAL",
+          "correct": true
+        }
+      ],
+      "pass": true
+    },
+    {
+      "test": "MINIMUM_OBSERVATIONS",
+      "R_zero_obs": 0.0,
+      "R_one_obs": 0.0,
+      "R_two_obs": 84646248.81744385,
+      "zero_handled": true,
+      "one_handled": true,
+      "two_valid": true,
+      "pass": true
+    },
+    {
+      "test": "REAL_EMBEDDINGS",
+      "model": "all-MiniLM-L6-v2",
+      "R_high_agreement": 57.30483206338159,
+      "R_low_agreement": 0.690726242656712,
+      "E_high": 0.9653452336788177,
+      "E_low": 0.04915946926921606,
+      "sigma_high": 0.01684578116488998,
+      "sigma_low": 0.07117068865499249,
+      "separation_clear": true,
+      "high_E_valid": true,
+      "pass": true
+    },
+    {
+      "test": "GATE_INTEGRATION",
+      "scenarios": [
+        {
+          "scenario": "commit_high_consensus",
+          "expected": "OPEN",
+          "actual": "open",
+          "R": 57.30483206338159,
+          "correct": true
+        },
+        {
+          "scenario": "commit_poor_consensus",
+          "expected": "CLOSED",
+          "actual": "closed",
+          "R": 0.690726242656712,
+          "correct": true
+        },
+        {
+          "scenario": "deploy_high_consensus",
+          "threshold": 1.0,
+          "actual": "open",
+          "R": 57.30483206338159,
+          "correct": true
+        },
+        {
+          "scenario": "read_no_observations",
+          "expected": "OPEN",
+          "actual": "open",
+          "correct": true
+        }
+      ],
+      "all_correct": true,
+      "pass": true
+    }
+  ],
+  "verdict": "VALIDATED"
+}
