@@ -343,6 +343,38 @@ Every task must produce:
 - [x] Handshake message shapes defined (SyncRequest, SyncResponse, SyncError, Heartbeat)
 - [x] Failure codes enumerated (17 codes across 3 categories)
 
+### 5.3.3.1 CODEBOOK_SYNC_PROTOCOL v1.1.0 Extensions ✅ COMPLETE (2026-01-11)
+
+**Purpose:** Extend sync protocol with continuous R-value, blanket health tracking, and research question integration.
+
+**New Sections Added:**
+- [x] **Section 7.5: Continuous R-Value**
+  - Formula: `R = gate(codebook_sha256) × (Σᵢ wᵢ · score(fieldᵢ)) / (Σᵢ wᵢ)`
+  - Hard gate (codebook_sha256) + weighted soft fields
+  - Threshold interpretation with gradients instead of cliff edges
+- [x] **Section 7.6: M Field Interpretation (Theoretical)**
+  - `∂B = Markov blanket boundary`, `S = M|∂B`
+  - Correspondence table mapping protocol concepts to field theory
+  - Hook for Q32 continuous M field dynamics
+- [x] **Section 8.4: Blanket Health Tracking**
+  - Health metrics: blanket_health, drift_velocity, predicted_dissolution
+  - Predictive maintenance via linear extrapolation
+  - Extended HEARTBEAT_ACK with health diagnostics
+- [x] **Section 10.5: σ^Df Complexity Metric**
+  - Hypothesis: `Alignment stability ∝ 1/σ^Df`
+  - σ^Df = N (concept_units) per Q33 derivation
+  - Measurement procedure for blanket fragility
+
+**Research Integration:**
+- [x] Q33 (Conditional Entropy): σ^Df operationalized as complexity metric
+- [x] Q35 (Markov Blankets): M field boundary formalization
+
+**Exit Criteria:** ✅ ALL MET
+- [x] Continuous R-value formula specified with default weights
+- [x] Blanket health tracking with predictive dissolution
+- [x] σ^Df complexity hypothesis documented with measurement procedure
+- [x] M field hook established for Q32
+
 ---
 
 ## 5.3.4 TOKENIZER_ATLAS.json (Artifact)

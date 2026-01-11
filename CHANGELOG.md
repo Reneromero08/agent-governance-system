@@ -1,8 +1,44 @@
-<!-- CONTENT_HASH: 3.7.41_PENDING -->
+<!-- CONTENT_HASH: 3.7.42_PENDING -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.7.42] - 2026-01-11
+
+### Changed
+- **CODEBOOK_SYNC_PROTOCOL v1.1.0** — Extended with continuous R-value, blanket health tracking, and research integration
+  - `LAW/CANON/SEMANTIC/CODEBOOK_SYNC_PROTOCOL.md` → v1.1.0 (~1070 lines, +270 from v1.0.0)
+  - **New Section 7.5: Continuous R-Value (Extended)**
+    - Formula: `R = gate(codebook_sha256) × (Σᵢ wᵢ · score(fieldᵢ)) / (Σᵢ wᵢ)`
+    - Hard gate on codebook_sha256 (binary match required)
+    - Weighted soft fields: kernel_version (1.0), codebook_semver (0.7), tokenizer_id (0.5)
+    - Compatibility scoring functions for semver and tokenizer families
+    - Threshold interpretation: R=1.0 (ALIGNED), 0.8-1.0 (warn), 0.5-0.8 (PENDING), <0.5 (DISSOLVED)
+    - Enables gradient-based diagnostics instead of binary cliff edges
+  - **New Section 7.6: M Field Interpretation (Theoretical)**
+    - `∂B = Markov blanket boundary (where ∇M is discontinuous)`
+    - `S = M|∂B` (shared side-information as M field restricted to boundary)
+    - Correspondence table: sync_tuple ↔ M|∂B, ALIGNED ↔ ∇M continuous, etc.
+    - Hook for Q32 (Meaning Field) continuous dynamics formalization
+  - **New Section 8.4: Blanket Health Tracking**
+    - Health metrics: `blanket_health`, `drift_velocity`, `predicted_dissolution`
+    - Health factors: r_value (0.4), ttl_fraction (0.3), heartbeat_streak (0.15), resync_factor (0.15)
+    - Composite health via weighted geometric mean
+    - Predictive dissolution via linear extrapolation
+    - Extended HEARTBEAT_ACK message with health diagnostics
+    - Health warnings: HEALTH_DEGRADED (<0.8), DRIFT_DETECTED (>0.01/s), DISSOLUTION_IMMINENT (<1h)
+  - **New Section 10.5: σ^Df as Complexity Metric**
+    - Hypothesis: `Alignment stability ∝ 1/σ^Df`
+    - Per Q33: σ^Df = N (concept_units) by tautological construction
+    - Higher σ^Df → more expansion points → larger mismatch surface → higher fragility
+    - Measurement procedure: `measure_blanket_fragility(session_log)`
+    - Implications: high-σ^Df symbols need more frequent heartbeats, priority in migration
+  - **Research Integration:**
+    - Q33 (Conditional Entropy): σ^Df operationalized as complexity metric affecting blanket stability
+    - Q35 (Markov Blankets): M field boundary formalization provides theoretical foundation
 
 ---
 

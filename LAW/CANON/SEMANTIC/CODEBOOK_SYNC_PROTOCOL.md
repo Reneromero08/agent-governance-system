@@ -1,7 +1,7 @@
 # CODEBOOK_SYNC_PROTOCOL: Semantic Side-Information Synchronization
 
 **Canon ID:** SEMANTIC-SYNC-001
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** NORMATIVE
 **Created:** 2026-01-11
 **Phase:** 5.3.3
@@ -496,6 +496,102 @@ This is R-gating (per Q35): R > τ permits semantic transfer; R < τ requires re
 | `DISSOLVED` | R < τ | Blanket broken, resync required |
 | `PENDING` | R ≈ τ | Boundary forming, awaiting confirmation |
 
+### 7.5 Continuous R-Value (Extended)
+
+The binary ALIGNED/DISSOLVED status provides a hard gate, but a continuous R-value enables gradient-based diagnostics and predictive health tracking.
+
+**Formula:**
+```
+R = gate(codebook_sha256) × (Σᵢ wᵢ · score(fieldᵢ)) / (Σᵢ wᵢ)
+
+Where:
+  gate(codebook_sha256) = 1 if exact match, 0 otherwise (hard requirement)
+  score(field) = compatibility_score(sender.field, receiver.field) ∈ [0, 1]
+```
+
+**Default Weights:**
+
+| Field | Weight | Rationale |
+|-------|--------|-----------|
+| `kernel_version` | 1.0 | Processing compatibility (major must match) |
+| `codebook_semver` | 0.7 | Version compatibility (migration path) |
+| `tokenizer_id` | 0.5 | H(X\|S) measurement (not semantic content) |
+
+**Compatibility Scoring:**
+```python
+def score_kernel_version(sender: str, receiver: str) -> float:
+    """Score kernel version compatibility (semver)."""
+    s_major, s_minor, s_patch = parse_semver(sender)
+    r_major, r_minor, r_patch = parse_semver(receiver)
+
+    if s_major != r_major:
+        return 0.0  # Major mismatch = incompatible
+    if s_minor != r_minor:
+        return 0.7  # Minor mismatch = compatible but warn
+    if s_patch != r_patch:
+        return 0.9  # Patch mismatch = essentially compatible
+    return 1.0  # Exact match
+
+def score_tokenizer_id(sender: str, receiver: str) -> float:
+    """Score tokenizer compatibility."""
+    if sender == receiver:
+        return 1.0
+    # Known compatible families
+    if same_tokenizer_family(sender, receiver):
+        return 0.8
+    return 0.0  # Unknown compatibility = fail-closed
+
+def compute_continuous_r(sender_tuple: dict, receiver_tuple: dict) -> float:
+    """Compute continuous R-value with weighted fields."""
+    # Hard gate: codebook hash must match
+    if sender_tuple['codebook_sha256'] != receiver_tuple['codebook_sha256']:
+        return 0.0
+
+    weights = {'kernel_version': 1.0, 'codebook_semver': 0.7, 'tokenizer_id': 0.5}
+    score_funcs = {
+        'kernel_version': score_kernel_version,
+        'codebook_semver': score_semver_compatibility,
+        'tokenizer_id': score_tokenizer_id
+    }
+
+    weighted_sum = sum(
+        weights[f] * score_funcs[f](sender_tuple[f], receiver_tuple[f])
+        for f in weights
+    )
+    return weighted_sum / sum(weights.values())
+```
+
+**Threshold Interpretation:**
+
+| R Range | Status | Interpretation |
+|---------|--------|----------------|
+| R = 1.0 | ALIGNED | Perfect match, full semantic transfer |
+| 0.8 ≤ R < 1.0 | ALIGNED (warn) | Compatible but minor differences |
+| 0.5 ≤ R < 0.8 | PENDING | Marginal alignment, consider resync |
+| R < 0.5 | DISSOLVED | Insufficient alignment, resync required |
+
+### 7.6 M Field Interpretation (Theoretical)
+
+The sync protocol has a natural interpretation in terms of the M field (per Q32):
+
+```
+∂B = Markov blanket boundary (where ∇M is discontinuous)
+S = M|∂B (shared side-information is M restricted to boundary)
+```
+
+The sync_tuple is a discrete approximation to M|∂B — it captures the meaning field at the boundary between sender and receiver semantic spaces.
+
+**Correspondence:**
+| Protocol Concept | Field-Theoretic Analog |
+|------------------|------------------------|
+| sync_tuple | M\|∂B (field at boundary) |
+| codebook_sha256 | Hash of M configuration |
+| ALIGNED | ∇M continuous across ∂B |
+| DISSOLVED | ∇M discontinuous (barrier) |
+| Handshake | Probing M at boundary |
+
+**Future Direction (Q32):** Continuous M field dynamics would allow gradient flow across blankets, smooth alignment transitions, and field-theoretic formalization of semantic drift.
+
 ---
 
 ## 8. Session Management
@@ -550,6 +646,109 @@ Response:
   "ttl_remaining_seconds": 1800
 }
 ```
+
+### 8.4 Blanket Health Tracking
+
+Beyond binary status, continuous blanket health enables predictive maintenance and early warning of alignment drift.
+
+**Health Metrics:**
+```json
+{
+  "blanket_health": 0.95,
+  "drift_velocity": 0.001,
+  "predicted_dissolution": "2026-01-12T00:00:00Z",
+  "health_factors": {
+    "r_value": 1.0,
+    "ttl_fraction": 0.85,
+    "heartbeat_streak": 47,
+    "last_resync_distance": 3600
+  }
+}
+```
+
+| Metric | Type | Description |
+|--------|------|-------------|
+| `blanket_health` | float [0,1] | Composite health score |
+| `drift_velocity` | float | Rate of health decline per second |
+| `predicted_dissolution` | ISO timestamp | Extrapolated time when health < threshold |
+| `health_factors` | object | Component scores |
+
+**Health Computation:**
+```python
+def compute_blanket_health(session: SyncSession) -> dict:
+    """Compute blanket health with predictive dissolution."""
+    now = utc_now()
+
+    # Factor 1: R-value from continuous formula (Section 7.5)
+    r_value = session.continuous_r
+
+    # Factor 2: TTL fraction remaining
+    ttl_elapsed = (now - session.last_sync).total_seconds()
+    ttl_fraction = max(0, 1 - ttl_elapsed / session.ttl_seconds)
+
+    # Factor 3: Heartbeat reliability (streak of successful heartbeats)
+    heartbeat_factor = min(1.0, session.heartbeat_streak / 10)
+
+    # Factor 4: Time since last resync (recency)
+    resync_age = (now - session.last_resync).total_seconds()
+    resync_factor = 1 / (1 + resync_age / 86400)  # Decay over 24h
+
+    # Composite health (weighted geometric mean)
+    weights = [0.4, 0.3, 0.15, 0.15]
+    factors = [r_value, ttl_fraction, heartbeat_factor, resync_factor]
+    health = prod(f ** w for f, w in zip(factors, weights))
+
+    # Drift velocity (health change rate)
+    if session.prev_health is not None:
+        dt = (now - session.prev_health_time).total_seconds()
+        drift_velocity = (session.prev_health - health) / dt if dt > 0 else 0
+    else:
+        drift_velocity = 0
+
+    # Predict dissolution (linear extrapolation)
+    dissolution_threshold = 0.5
+    if drift_velocity > 0 and health > dissolution_threshold:
+        time_to_dissolution = (health - dissolution_threshold) / drift_velocity
+        predicted_dissolution = now + timedelta(seconds=time_to_dissolution)
+    else:
+        predicted_dissolution = None
+
+    return {
+        "blanket_health": health,
+        "drift_velocity": drift_velocity,
+        "predicted_dissolution": predicted_dissolution.isoformat() if predicted_dissolution else None,
+        "health_factors": {
+            "r_value": r_value,
+            "ttl_fraction": ttl_fraction,
+            "heartbeat_streak": session.heartbeat_streak,
+            "resync_factor": resync_factor
+        }
+    }
+```
+
+**Extended Heartbeat Response:**
+```json
+{
+  "message_type": "HEARTBEAT_ACK",
+  "session_token": "sess-abc123",
+  "blanket_status": "ALIGNED",
+  "ttl_remaining_seconds": 1800,
+  "health": {
+    "blanket_health": 0.95,
+    "drift_velocity": 0.0001,
+    "predicted_dissolution": null,
+    "warning": null
+  }
+}
+```
+
+**Health Warnings:**
+
+| Condition | Warning | Recommended Action |
+|-----------|---------|-------------------|
+| health < 0.8 | `HEALTH_DEGRADED` | Increase heartbeat frequency |
+| drift_velocity > 0.01 | `DRIFT_DETECTED` | Investigate cause |
+| predicted_dissolution within 1h | `DISSOLUTION_IMMINENT` | Proactive resync |
 
 ---
 
@@ -706,6 +905,56 @@ def measure_compression(pointer: str, expansion: str, tokenizer: str) -> dict:
     }
 ```
 
+### 10.5 σ^Df as Complexity Metric
+
+Per Q33: σ^Df = N (concept_units) by tautological construction. This creates a testable hypothesis about blanket stability.
+
+**Hypothesis:** Higher σ^Df (more semantic content per symbol) correlates with alignment fragility.
+
+**Rationale:**
+- More concept_units → more potential expansion points → larger mismatch surface
+- Higher Df (deeper semantic nesting) → more ways for drift to manifest
+- Dense symbols are "high stakes" — small codebook changes have large effects
+
+**Testable Prediction:**
+```
+Alignment stability ∝ 1/σ^Df
+
+Where:
+  Alignment stability = mean time between DISSOLVED events
+  σ^Df = concept_units of transferred content (from GOV_IR)
+```
+
+**Measurement:**
+```python
+def measure_blanket_fragility(session_log: List[SyncEvent]) -> dict:
+    """Correlate σ^Df with alignment stability."""
+    # Group by content complexity
+    low_complexity = []   # σ^Df < 5
+    high_complexity = []  # σ^Df ≥ 5
+
+    for event in session_log:
+        if event.sigma_df < 5:
+            low_complexity.append(event.time_to_dissolution)
+        else:
+            high_complexity.append(event.time_to_dissolution)
+
+    return {
+        "low_complexity_stability": mean(low_complexity),
+        "high_complexity_stability": mean(high_complexity),
+        "fragility_ratio": mean(low_complexity) / mean(high_complexity),
+        "hypothesis_confirmed": mean(low_complexity) > mean(high_complexity)
+    }
+```
+
+**Implications for Protocol Design:**
+1. High-σ^Df symbols may need more frequent heartbeats
+2. Migration paths should prioritize high-σ^Df content
+3. Blanket health decay rate may scale with σ^Df
+
+**Connection to Q33:**
+This metric operationalizes Q33's theoretical result — σ^Df as concept_units becomes a measurable predictor of protocol behavior.
+
 ---
 
 ## 11. Security Considerations
@@ -816,6 +1065,7 @@ sha256(canonical_json(sync_tuple)) = "7a8b9c..."
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 1.1.0 | 2026-01-11 | Added: 7.5 Continuous R-Value, 7.6 M Field Interpretation, 8.4 Blanket Health Tracking, 10.5 σ^Df Complexity Metric |
 | 1.0.0 | 2026-01-11 | Initial normative specification |
 
 ---
