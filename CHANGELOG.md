@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 3.7.43_PENDING -->
+<!-- CONTENT_HASH: 3.7.43 -->
 
 # Changelog
 

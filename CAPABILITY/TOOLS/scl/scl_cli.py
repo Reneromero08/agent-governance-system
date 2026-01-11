@@ -225,8 +225,9 @@ def decode_program(program: str, emit_token_receipt: bool = True) -> dict:
             baseline_method="expanded_output",
         )
 
-        # Add to jobspec metadata
-        jobspec["token_receipt"] = token_receipt.to_dict()
+        # NOTE: Do NOT embed token_receipt in jobspec - it contains timestamps
+        # and random operation_ids that break determinism. Keep it as a sibling
+        # field in the response only.
 
     response = {
         "ok": True,

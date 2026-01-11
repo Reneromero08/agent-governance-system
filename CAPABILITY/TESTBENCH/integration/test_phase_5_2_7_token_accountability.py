@@ -423,7 +423,13 @@ class TestJobSpecIntegration(unittest.TestCase):
         self.assertIn("token_receipt", schema["properties"])
 
     def test_scl_decode_emits_receipt(self):
-        """Test that SCL decode includes token_receipt."""
+        """Test that SCL decode includes token_receipt in response (not jobspec).
+
+        Note: token_receipt is intentionally NOT embedded in jobspec because it
+        contains timestamps and operation_ids that break determinism. The receipt
+        is emitted as a sibling field in the response for accountability while
+        keeping the jobspec itself deterministic.
+        """
         try:
             from CAPABILITY.TOOLS.scl.scl_cli import decode_program
 
@@ -431,9 +437,10 @@ class TestJobSpecIntegration(unittest.TestCase):
             result = decode_program("C3", emit_token_receipt=True)
 
             if result.get("ok"):
-                # Should have token_receipt in response
+                # Should have token_receipt in response (as sibling, not embedded)
                 self.assertIn("token_receipt", result)
-                self.assertIn("token_receipt", result["jobspec"])
+                # token_receipt should NOT be in jobspec (breaks determinism)
+                self.assertNotIn("token_receipt", result["jobspec"])
         except ImportError:
             self.skipTest("SCL CLI not available")
 

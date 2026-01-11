@@ -10,6 +10,11 @@ was missing but called by cortex.build.py.
 import sys
 from pathlib import Path
 
+# Fix Windows encoding for Unicode output (checkmarks, etc.)
+if sys.platform == "win32":
+    sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+    sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+
 # Add Root to path for imports
 TESTS_DIR = Path(__file__).resolve().parent
 PROJECT_ROOT = TESTS_DIR.parents[2]
