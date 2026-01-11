@@ -596,3 +596,79 @@ Artifacts:
 - `physical_force_receipt_p6_csv_positive_20260110_214310.json` = `EF98E87823A319494C2C4EE87365F01C015DC8BF8EF0470FEC56FA17E69CF8CB`
 - `physical_force_receipt_p6_csv_null_20260110_214310.json` = `38AC50F9D536E7CD022993C6D2693DE6896295FC7C4B05F71A0B3FA1461A95FF`
 - `physical_force_receipt_p6_csv_echo_leak_20260110_214310.json` = `668A78DD186DB44723A7330F5F93E02B52F716677793B8CDF6E608BF2D1F759C`
+
+---
+
+## 2026-01-11 Phase 7: Real EEG data (OpenNeuro ds005383 TMNRED)
+
+Purpose:
+- Apply the physical-force harness to real neuroscience data (Chinese semantic recognition EEG)
+- Demonstrate harness works on messy real-world time series
+- Establish baseline for what ordinary semantic-neural correlation looks like
+- **This does NOT prove a new fundamental force** — it shows the harness correctly applies gates
+
+### Dataset selection (GPT prior work)
+
+Dataset: OpenNeuro ds005383 (TMNRED - Chinese Natural Reading EEG for Fuzzy Semantic Target Identification)
+- Version: 1.0.0
+- 30 subjects, ~400 trials each, 200 Hz EEG, 32 channels
+- Task: fuzzy semantic target recognition in natural Chinese reading
+- License: CC-BY 4.0
+
+OpenNeuro API scan artifact:
+- `openneuro_datasets_eeg_scan_20260111_045148.json` = (169KB, EEG dataset metadata)
+- `openneuro_ds005383_1.0.0_downloadFiles_20260111_045253.json` = S3 download manifest
+
+Downloaded to `physdata/openneuro/ds005383/`:
+- `README` (dataset description)
+- `sub-01/ses-1/eeg/sub-01_ses-1_task-fuzzysemanticrecognition_events.tsv`
+- `derivatives/preproc/sub-01/sub-01.mat` (227MB, MATLAB v7.3 HDF5)
+- `derivatives/preproc/sub-01/ses-1/sub-01-ses-1.mat` (25MB, MATLAB v7.3 HDF5)
+
+### EEG ingestion script
+
+Created `q32_eeg_ingest.py`:
+- Loads MATLAB v7.3 .mat files via h5py
+- Extracts epochs from events.tsv (target vs nontarget trials)
+- Computes mean EEG amplitude in semantic processing window (200-500ms post-stimulus)
+- Outputs M/B CSV compatible with physical force harness
+
+M variable: trial_type (target=1 semantic match, nontarget=0 mismatch)
+B variable: mean EEG amplitude across all 32 channels in N400 window
+
+### Ingestion run (sub-01, ses-1)
+
+Command:
+- `python q32_eeg_ingest.py`
+
+Artifacts:
+- `p7_eeg_sub-01_ses-1_20260111_073047.csv` = `0F19B1BA3BB971C24B2FBB0470F4A99BB66E17A0FC52006F7E116B2048529256`
+- `p7_eeg_ingest_receipt_sub-01_ses-1_20260111_073047.json` = `58CEFB5A40BE94470E957CE0519C983FDA6208CB94F87BD12A71AA529F8F6DF9`
+
+Session stats: 50 epochs (15 targets, 35 nontargets)
+
+### Coupling test (sub-01, ses-1)
+
+Command:
+- `python q32_physical_force_harness.py --mode csv_coupling --csv_path p7_eeg_sub-01_ses-1_20260111_073047.csv --max_lag 5 --null_kind permute --null_n 500`
+
+Result: **FAIL** (expected — single 50-trial session with shuffled trial order)
+
+Artifacts:
+- `p7_eeg_coupling_receipt_sub-01_ses-1_20260111_073047.json` = `10DECB0D031123E9F1AB5343B64296FF03E35CBE1469C50445355EAC5A92CE1B`
+
+Key metrics from receipt:
+- `best_r_m_to_b_lag`: 0.21 at lag=2 trials (below threshold 0.35)
+- `null_threshold_abs_r`: 0.36 (99th percentile of 500 permutations)
+- `p_value`: 0.11 (not significant)
+- `directionality_ok`: false (B→M stronger than M→B, suggesting spurious correlation)
+- `detects_coupling`: false
+- `flags_echo_leak`: false
+
+Interpretation:
+- The harness correctly rejects weak/spurious correlations
+- With only 50 trials and shuffled ordering, no meaningful M→B lag structure expected
+- Directionality gate caught that reverse correlation (B→M) was stronger, indicating noise
+- To find real semantic-neural coupling, would need: (1) more trials, (2) epoch-locked ERPs rather than trial-level correlation, or (3) different experimental design
+
+This demonstrates the harness applies its gates correctly on real messy data.
