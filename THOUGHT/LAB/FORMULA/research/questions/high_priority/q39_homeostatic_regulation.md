@@ -194,7 +194,7 @@ python run_all_q39_tests.py
 ## Dependencies
 - Q32 (Meaning Field) - ANSWERED
 - Q35 (Markov Blankets) - ANSWERED
-- Q9 (FEP) - PARTIAL
+- Q9 (FEP) - ANSWERED
 - Q27 (Hysteresis) - OPEN
 
 ## Related Work

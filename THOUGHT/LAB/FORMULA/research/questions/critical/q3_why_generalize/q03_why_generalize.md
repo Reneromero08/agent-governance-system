@@ -19,7 +19,7 @@ The formula R = E(z)/σ generalizes because **it must have this form** - it's ma
 
 ### Phase 1: Axiomatic Derivation ✅
 
-**Theorem:** R = E(z)/σ is the UNIQUE form satisfying four minimal axioms.
+**Theorem:** R = E(z)/σ is the unique form satisfying four minimal axioms (within this framework).
 
 **The Axioms:**
 
@@ -46,7 +46,7 @@ A2 → Must use z = (obs - truth)/σ (dimensionless)
 A3 → E(z) is monotonically decreasing
 A4 → Must divide by σ to get intensive property
 
-∴ R = E(z) / σ is the ONLY possible form
+∴ R = E(z) / σ is the only possible form (given A1-A4)
 ```
 
 **Tests:**

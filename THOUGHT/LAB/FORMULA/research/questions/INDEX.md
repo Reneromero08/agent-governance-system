@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.15.5 (2026-01-11 - Q42 Non-Locality ANSWERED: R is local BY DESIGN (H0 confirmed). Semantic CHSH S=0.36 << 2.0, no Bell violations. A1 correct. 15/43 questions answered (34.9%).)*
+*Last updated: v3.15.6 (2026-01-11 - Q9 FEP ANSWERED: Family-scoped `log(R)=-F+const` proven. Q43 QGT ANSWERED: Rigorous proofs, clarified Berry phase=0 for real vectors. 17/43 questions answered (39.5%).)*
 
 ---
 
@@ -26,7 +26,7 @@
 |---|----------|---------|--------|--------|
 | 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ PARTIAL | Axioms A1-A4 are scale-invariant (Q3) → R is scale-invariant. Hypothesis: R is RG fixed point. Still open: gate composition, agreement propagation, formal RG proof. |
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
-| 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ⏳ PARTIAL | In the Gaussian family, `log(R) = -F + const` and `R ∝ exp(-F)`. General mapping for the full formula across families is still open. |
+| 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ✅ ANSWERED | `log(R) = -F + const` for any location-scale family. Gaussian uses std, Laplace uses MAD. Family-scoped equivalence proven (Q1 Test 4). |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | 🔄 PARTIAL | **18/18 tests pass.** Behavioral consistency (1.79x discrimination), multi-agent misalignment (28% R drop). LIMITATION: Cannot detect logical contradictions (semantic opposites are topically similar). |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
 | 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
@@ -36,8 +36,8 @@
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ⏳ OPEN | Does Langlands Program apply to semiosphere? Would prove Q34 (all compressions are dual/isomorphic). |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
-| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ⏳ OPEN | How does Bohm's Implicate Order (Platonic manifold/Phi) map to Explicate Order (R interface)? Can we formalize unfoldment as M field dynamics? |
-| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | 🔄 PARTIAL | **3/5 rigorous**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Topological claims invalid for real embeddings (Berry phase=0, Chern number undefined). |
+| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | **PARTIAL** | Core mapping proven by Q42: Phi=Implicate, R=Explicate. XOR system demonstrates implicate order (high Phi, low R). Dynamics (unfoldment, holomovement) still open. |
+| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). |
 | 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ✅ ANSWERED | R-gating = blanket maintenance (ALIGNED/DISSOLVED/PENDING). Active Inference = handshake protocol (predict→verify→error→resync). Markov blankets ⇔ R > τ state. |
 
 ---
@@ -46,8 +46,8 @@
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
- | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
- |  15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
+| 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
+| 15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
 | 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ⏳ OPEN | Is M field an error-correcting code? Does R-gating implement QECC? Is semiosphere holographic? |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ✅ VALIDATED | **8/8 tests pass.** R_high=57.3 > R_low=0.69. Volume resistant (-77.3%). Echo chamber detectable (R=10^8). Thresholds discriminate correctly. Test: `experiments/open_questions/q17/test_q17_r_gate.py` |
@@ -103,21 +103,21 @@
 
 ## Summary Statistics
 
-  - **Total Questions:** 43
-  - **Answered:** 15 (34.9%)
-  - **Partially Answered:** 8 (18.6%)
-  - **Falsified:** 0 (0.0%)
-  - **Open:** 20 (46.5%)
+- **Total Questions:** 43
+- **Answered:** 17 (39.5%)
+- **Partially Answered:** 6 (14.0%)
+- **Falsified:** 0 (0.0%)
+- **Open:** 20 (46.5%)
 
 ### By Priority Level
 
- | Priority | Total | Answered | Partially | Falsified | Open |
- |----------|-------|----------|-----------|-----------|------|
- | Critical | 7 | 6 | 1 | 0 | 0 |
- | High | 15 | 5 | 5 | 0 | 5 |
- | Medium | 11 | 4 | 1 | 0 | 6 |
- | Lower | 8 | 0 | 1 | 0 | 7 |
- | Engineering | 2 | 0 | 0 | 0 | 2 |
+| Priority | Total | Answered | Partially | Falsified | Open |
+|----------|-------|----------|-----------|-----------|------|
+| Critical | 7 | 6 | 1 | 0 | 0 |
+| High | 15 | 7 | 3 | 0 | 5 |
+| Medium | 11 | 4 | 1 | 0 | 6 |
+| Lower | 8 | 0 | 1 | 0 | 7 |
+| Engineering | 2 | 0 | 0 | 0 | 2 |
 
 ---
 

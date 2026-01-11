@@ -54,7 +54,7 @@ Both measure "how much the whole exceeds parts." Is R related to Phi? Does high 
 
 ## ANSWER
 
-**DEFINITIVELY PROVEN: R is a strict subset of Integrated Information (Phi).**
+**DEFINITIVELY PROVEN: R captures a strict subset of the integrated systems that Phi captures.**
 
 ### The Relationship:
 1. **High R → High Phi** (Sufficient)
