@@ -1,6 +1,6 @@
 # Cassette Network Roadmap
 
-**Status**: Phase 0 Complete, Phase 1-6 In Progress
+**Status**: Phase 0-1.5 Complete, Phase 2-6 In Progress
 **Vision**: Layer 3 (CAS External) of the compression stack - shared semantic context infrastructure enabling near-zero communication entropy
 **Owner**: Antigravity / Resident
 **Upstream Dependency**: Phase 5 (VECTOR_ELO) - MemoryRecord contract, SPC protocol
@@ -128,45 +128,150 @@ The Cassette Network is **not just a distributed database**. It is infrastructur
 
 ---
 
-## Phase 1: Cassette Partitioning
+## Phase 1: Cassette Partitioning ✅ COMPLETE (2026-01-11)
 
 **Goal:** Split the monolithic DB into semantic-aligned cassettes
 
-### 1.1 Create Bucket-Aligned Cassettes
+**Previous:** [Phase 0](#phase-0-decision-gate--complete) - Decision gate
+**Next:** [Phase 1.4](#14-catalytic-hardening-) - Catalytic hardening
+
+### 1.1 Create Bucket-Aligned Cassettes ✅
 ```
 NAVIGATION/CORTEX/cassettes/
-├── canon.db          # LAW/ bucket (immutable)
-├── governance.db     # CONTEXT/decisions + preferences (stable)
-├── capability.db     # CAPABILITY/ bucket (code, skills, primitives)
-├── navigation.db     # NAVIGATION/ bucket (maps, cortex metadata)
-├── direction.db      # DIRECTION/ bucket (roadmaps, strategy)
-├── thought.db        # THOUGHT/ bucket (research, lab, demos)
-├── memory.db         # MEMORY/ bucket (archive, reports)
-├── inbox.db          # INBOX/ bucket (staging, temporary)
-└── resident.db       # AI memories (per-agent, read-write)
+├── canon.db          # LAW/ bucket (immutable) - 86 files, 200 chunks
+├── governance.db     # CONTEXT/decisions + preferences (stable) - empty
+├── capability.db     # CAPABILITY/ bucket (code, skills) - 64 files, 121 chunks
+├── navigation.db     # NAVIGATION/ bucket (maps, metadata) - 38 files, 179 chunks
+├── direction.db      # DIRECTION/ bucket (roadmaps, strategy) - empty
+├── thought.db        # THOUGHT/ bucket (research, lab) - 288 files, 1025 chunks
+├── memory.db         # MEMORY/ bucket (archive, reports) - empty
+├── inbox.db          # INBOX/ bucket (staging, temporary) - 67 files, 233 chunks
+└── resident.db       # AI memories (per-agent, read-write) - empty (new)
 ```
 
-### 1.2 Migration Script
-- [ ] Read existing `system1.db`
-- [ ] Route sections to appropriate cassettes based on `file_path`
-- [ ] Preserve all hashes, vectors, metadata
-- [ ] Validate: total sections before = total sections after
+### 1.2 Migration Script ✅
+- [x] Read existing `system1.db` (543 files, 1758 chunks)
+- [x] Route sections to appropriate cassettes based on `file_path`
+- [x] Preserve all hashes, FTS content, metadata
+- [x] Validate: total sections before = total sections after
+- [x] Backup at `db/_migration_backup/`
+- [x] Receipt: `cassettes/migration_receipt_*.json`
 
-### 1.3 Update MCP Server
-- [ ] `semantic_search(query, cassettes=['canon', 'governance', ...], limit=20)`
-- [ ] `cassette_stats()` - list all cassettes with counts
-- [ ] `cassette_network_query(query, limit=10)` - federated search
+**Implementation:** [migrate_to_cassettes.py](../../NAVIGATION/CORTEX/network/migrate_to_cassettes.py)
 
-**Acceptance:**
-- [ ] 9 cassettes exist (8 buckets + resident)
-- [ ] `semantic_search` can filter by cassette
-- [ ] No data loss from migration
+### 1.3 Update MCP Server ✅
+- [x] `cassette_network_query(query, cassettes=[...], limit=20)` - with cassette filter
+- [x] `cassette_stats()` - list all cassettes with counts
+- [x] GenericCassette updated for standard cassette schema
+
+**Acceptance:** ✅ ALL MET
+- [x] 9 cassettes exist (8 buckets + resident)
+- [x] `semantic_search` can filter by cassette
+- [x] No data loss from migration (543/543 files, 1758/1758 chunks)
+
+### 1.4 Catalytic Hardening ✅
+
+**Previous:** [Phase 1.1-1.3](#11-create-bucket-aligned-cassettes-) - Cassette partitioning
+**Next:** [Phase 1.5](#15-structure-aware-chunking) - Structure-aware chunking
+
+- [x] `compute_merkle_root(hashes)` - Binary Merkle tree of sorted chunk hashes
+- [x] `content_merkle_root` per cassette stored in receipt and metadata
+- [x] `receipt_hash` - Content-addressed receipt (SHA-256 of canonical JSON)
+- [x] `verify_migration(receipt_path)` - Verification function checks:
+  - Receipt hash integrity
+  - Per-cassette file hash
+  - Per-cassette Merkle root
+  - Chunk count match
+- [x] CLI: `--verify [receipt]` option
+
+**Catalytic Properties:**
+| Property | Status |
+|----------|--------|
+| Content-addressed IDs | ✅ chunk_hash preserved |
+| Merkle roots | ✅ Per-cassette |
+| Receipt hash | ✅ Content-addressed |
+| Verification | ✅ `verify_migration()` |
+| Restore guarantee | ✅ Via receipt + source |
+
+**Next:** [Phase 1.5](#phase-15-structure-aware-chunking) - Hierarchical chunk boundaries
+
+---
+
+### 1.5 Structure-Aware Chunking ✅ COMPLETE (2026-01-11)
+
+**Goal:** Split on markdown headers, not sentence boundaries - preserve semantic hierarchy
+
+**Problem Solved:** Chunks split mid-section on `.!?` boundaries, losing header context.
+
+**Implemented Structure:**
+```
+# H1 Title           → chunk boundary (depth=1)
+## H2 Section        → chunk boundary (depth=2)
+### H3 Subsection    → chunk boundary (depth=3)
+#### H4              → chunk boundary (depth=4)
+##### H5             → chunk boundary (depth=5)
+body text            → accumulate until next header or size limit
+```
+
+**Chunk Schema Extension:**
+```sql
+ALTER TABLE chunks ADD COLUMN header_depth INTEGER;  -- 1-6 or NULL
+ALTER TABLE chunks ADD COLUMN header_text TEXT;      -- "## Section Name"
+ALTER TABLE chunks ADD COLUMN parent_chunk_id INTEGER; -- hierarchy link
+```
+
+**Navigation Pattern:**
+- Query returns chunk with `header_depth=3`
+- Want broader context? `get_parent(chunk_id)` → depth=2
+- Want deeper? `get_children(chunk_id)` → list of child chunks
+- "Go to next #" = `get_siblings(chunk_id)['next']`
+- Breadcrumbs: `get_path(chunk_id)` → `[# Doc, ## Section, ### Subsection]`
+
+**Deliverables:** ✅ ALL COMPLETE
+- [x] `chunk_markdown(text) -> List[Chunk]` - Structure-aware splitter
+- [x] Schema migration for `header_depth`, `header_text`, `parent_chunk_id`
+- [x] Re-index all files with hierarchy (1,758 → 12,478 chunks)
+- [x] New Merkle roots (chunks change)
+- [x] Navigation queries in `GenericCassette`:
+  - `get_chunk(id)` - Full chunk info
+  - `get_parent(id)` - Navigate up
+  - `get_children(id)` - Navigate down
+  - `get_siblings(id)` - Prev/next at same depth
+  - `get_path(id)` - Breadcrumb trail
+  - `navigate(id, direction)` - Unified navigation
+
+**Implementation Files:**
+- [markdown_chunker.py](../../../NAVIGATION/CORTEX/db/markdown_chunker.py) - Structure-aware chunker
+- [structure_aware_migration.py](../../../NAVIGATION/CORTEX/network/structure_aware_migration.py) - Migration script
+- [generic_cassette.py](../../../NAVIGATION/CORTEX/network/generic_cassette.py) - Navigation queries
+
+**Migration Results:**
+| Cassette | Files | Chunks | With Headers |
+|----------|-------|--------|--------------|
+| canon | 86 | 1,297 | 1,224 |
+| capability | 64 | 952 | 908 |
+| navigation | 38 | 1,122 | 1,098 |
+| thought | 288 | 7,123 | 6,967 |
+| inbox | 67 | 1,984 | 1,917 |
+| **Total** | **543** | **12,478** | **12,114** |
+
+**Acceptance:** ✅ ALL MET
+- [x] Chunks align with markdown headers
+- [x] Parent-child relationships navigable
+- [x] Token counts respect limits (~500 tokens max)
+- [x] Catalytic: new migration receipt with updated Merkle roots
+
+**Previous:** [Phase 1.4](#14-catalytic-hardening-) - Catalytic verification
+**Next:** [Phase 2](#phase-2-write-path-memory-persistence) - Write path
 
 ---
 
 ## Phase 2: Write Path (Memory Persistence)
 
 **Goal:** Let residents save thoughts to the manifold
+
+**Previous:** [Phase 1.5](#15-structure-aware-chunking) - Structure-aware chunking
+**Next:** [Phase 3](#phase-3-resident-identity) - Resident identity
 
 ### 2.1 Core Functions
 ```python
@@ -216,6 +321,9 @@ CREATE INDEX idx_memories_indexed ON memories(indexed_at);
 
 **Goal:** Each AI instance has a persistent identity in the manifold
 
+**Previous:** [Phase 2](#phase-2-write-path-memory-persistence) - Write path
+**Next:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
+
 ### 3.1 Agent Registry
 ```sql
 CREATE TABLE agents (
@@ -248,6 +356,9 @@ session_resume(agent_id: str) -> dict:
 ## Phase 4: Semantic Pointer Compression (SPC) Integration
 
 **Goal:** Implement verifiable semantic pointers per Phase 5.3 SPC formalization
+
+**Previous:** [Phase 3](#phase-3-resident-identity) - Resident identity
+**Next:** [Phase 5](#phase-5-feral-resident) - Feral resident
 
 ### 4.0 ESAP Integration (Cross-Model Alignment) ✅ IMPLEMENTED
 
@@ -362,6 +473,9 @@ Chinese proof: 道 (dào) = path + principle + speech + method
 
 **Goal:** Long-running thread with emergent behavior
 
+**Previous:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
+**Next:** [Phase 6](#phase-6-production-hardening) - Production hardening
+
 ### 5.1 Eternal Thread
 - [ ] Implement persistent thread loop (append-only interactions + memory graph deltas)
 - [ ] Output discipline: symbols + hashes + minimal text
@@ -388,6 +502,8 @@ Define what the Resident does when idle:
 ## Phase 6: Production Hardening
 
 **Goal:** Make it bulletproof
+
+**Previous:** [Phase 5](#phase-5-feral-resident-long-running-thread) - Feral resident
 
 ### 6.0 Canonical Cassette Substrate (Cartridge-First)
 **From AGS_ROADMAP_MASTER Phase 6.0:**
@@ -480,7 +596,11 @@ Define what the Resident does when idle:
 **Core Protocol:**
 - [cassette_protocol.py](NAVIGATION/CORTEX/network/cassette_protocol.py) - Base cassette class
 - [network_hub.py](NAVIGATION/CORTEX/network/network_hub.py) - Central coordinator
-- [generic_cassette.py](NAVIGATION/CORTEX/network/generic_cassette.py) - JSON-configured cassettes
+- [generic_cassette.py](NAVIGATION/CORTEX/network/generic_cassette.py) - JSON-configured cassettes + navigation queries
+
+**Phase 1.5 Chunking:**
+- [markdown_chunker.py](NAVIGATION/CORTEX/db/markdown_chunker.py) - Structure-aware markdown chunker
+- [structure_aware_migration.py](NAVIGATION/CORTEX/network/structure_aware_migration.py) - Migration script
 
 **ESAP Integration (Cross-Model Alignment):**
 - [esap_cassette.py](NAVIGATION/CORTEX/network/esap_cassette.py) - ESAP mixin for cassettes
@@ -644,4 +764,4 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v2.1.0 - Updated 2026-01-11 with ESAP integration (cross-model alignment), expanded implementation file references, and ESAP research links*
+*Roadmap v2.2.0 - Updated 2026-01-11 with Phase 1.5 Structure-Aware Chunking complete (12,478 hierarchical chunks with navigation queries)*

@@ -7,7 +7,7 @@ Cassettes are defined in the cassettes.json configuration file.
 """
 
 from pathlib import Path
-from typing import List, Dict
+from typing import List, Dict, Optional
 import sqlite3
 import json
 
@@ -123,35 +123,56 @@ class GenericCassette(DatabaseCassette):
         """Query FTS5 virtual table."""
         # Determine base table name (remove _fts suffix)
         base_table = fts_table[:-4] if fts_table.endswith('_fts') else fts_table
-        
-        # Try to get schema to determine columns
-        cursor = conn.execute(f"PRAGMA table_info({base_table})")
-        columns = [row[1] for row in cursor.fetchall()]
-        
-        # Build query
-        if 'content' in columns:
-            content_col = 'content'
-        elif 'normal_indexes_content' in columns:
-            content_col = 'normal_indexes_content'
+
+        # Check if this is the standard cassette schema (chunks + chunks_fts + files)
+        cursor = conn.execute("SELECT name FROM sqlite_master WHERE type='table'")
+        tables = [row[0] for row in cursor.fetchall()]
+
+        # Standard cassette schema: chunks_fts with chunk_id, joined to chunks and files
+        if fts_table == "chunks_fts" and "chunks" in tables and "files" in tables:
+            query = """
+                SELECT
+                    c.chunk_id,
+                    f.path,
+                    c.chunk_hash as hash,
+                    snippet(chunks_fts, 0, '<mark>', '</mark>', '...', 32) as content,
+                    ? as source,
+                    1.0 as score
+                FROM chunks_fts
+                JOIN chunks c ON chunks_fts.chunk_id = c.chunk_id
+                JOIN files f ON c.file_id = f.file_id
+                WHERE chunks_fts MATCH ?
+                ORDER BY rank
+                LIMIT ?
+            """
+            cursor = conn.execute(query, (self.cassette_id, query_text, top_k))
         else:
-            content_col = columns[1] if len(columns) > 1 else columns[0]
-        
-        query = f"""
-            SELECT 
-                *,
-                snippet({fts_table}, 0, '<mark>', '</mark>', '...', 32) as snippet,
-                '{self.cassette_id}' as source,
-                1.0 as score
-            FROM {base_table}
-            JOIN {fts_table} ON rowid = {base_table}.rowid
-            WHERE {fts_table} MATCH ?
-            ORDER BY rank
-            LIMIT ?
-        """
-        
-        cursor = conn.execute(query, (query_text, top_k))
+            # Fallback: generic FTS query for non-standard schemas
+            cursor_info = conn.execute(f"PRAGMA table_info({base_table})")
+            columns = [row[1] for row in cursor_info.fetchall()]
+
+            # Build query
+            if 'content' in columns:
+                content_col = 'content'
+            elif 'normal_indexes_content' in columns:
+                content_col = 'normal_indexes_content'
+            else:
+                content_col = columns[1] if len(columns) > 1 else columns[0]
+
+            query = f"""
+                SELECT
+                    *,
+                    snippet({fts_table}, 0, '<mark>', '</mark>', '...', 32) as snippet,
+                    '{self.cassette_id}' as source,
+                    1.0 as score
+                FROM {fts_table}
+                WHERE {fts_table} MATCH ?
+                ORDER BY rank
+                LIMIT ?
+            """
+            cursor = conn.execute(query, (query_text, top_k))
+
         results = []
-        
         for row in cursor.fetchall():
             result = dict(row)
             # Clean up the result
@@ -159,7 +180,7 @@ class GenericCassette(DatabaseCassette):
                 result['content'] = result['snippet']
                 del result['snippet']
             results.append(result)
-        
+
         return results
     
     def _query_text(self, conn: sqlite3.Connection, table: str, query_text: str, top_k: int) -> List[dict]:
@@ -245,6 +266,199 @@ class GenericCassette(DatabaseCassette):
             conn.close()
         
         return stats
+
+    # =========================================================================
+    # Phase 1.5: Hierarchical Navigation Methods
+    # =========================================================================
+
+    def get_chunk(self, chunk_id: int) -> Optional[Dict]:
+        """Get full chunk information by ID.
+
+        Returns:
+            Dict with: chunk_id, file_path, content, token_count,
+                      header_depth, header_text, parent_chunk_id, child_count
+        """
+        if not self.db_path.exists():
+            return None
+
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            cursor = conn.execute("""
+                SELECT
+                    c.chunk_id,
+                    f.path as file_path,
+                    c.chunk_hash,
+                    c.token_count,
+                    c.start_offset as start_line,
+                    c.end_offset as end_line,
+                    c.header_depth,
+                    c.header_text,
+                    c.parent_chunk_id,
+                    (SELECT COUNT(*) FROM chunks ch
+                     WHERE ch.parent_chunk_id = c.chunk_id) as child_count
+                FROM chunks c
+                JOIN files f ON c.file_id = f.file_id
+                WHERE c.chunk_id = ?
+            """, (chunk_id,))
+            row = cursor.fetchone()
+            return dict(row) if row else None
+        finally:
+            conn.close()
+
+    def get_parent(self, chunk_id: int) -> Optional[Dict]:
+        """Get parent chunk (one level up in hierarchy).
+
+        Returns:
+            Parent chunk dict or None if no parent
+        """
+        chunk = self.get_chunk(chunk_id)
+        if not chunk or not chunk.get('parent_chunk_id'):
+            return None
+        return self.get_chunk(chunk['parent_chunk_id'])
+
+    def get_children(self, chunk_id: int) -> List[Dict]:
+        """Get direct children of a chunk.
+
+        Returns:
+            List of child chunk dicts
+        """
+        if not self.db_path.exists():
+            return []
+
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            cursor = conn.execute("""
+                SELECT
+                    c.chunk_id,
+                    f.path as file_path,
+                    c.chunk_hash,
+                    c.token_count,
+                    c.header_depth,
+                    c.header_text,
+                    c.parent_chunk_id
+                FROM chunks c
+                JOIN files f ON c.file_id = f.file_id
+                WHERE c.parent_chunk_id = ?
+                ORDER BY c.chunk_index
+            """, (chunk_id,))
+            return [dict(row) for row in cursor.fetchall()]
+        finally:
+            conn.close()
+
+    def get_siblings(self, chunk_id: int) -> Dict:
+        """Get previous and next siblings at same header depth.
+
+        Returns:
+            {prev: chunk_dict or None, next: chunk_dict or None}
+        """
+        chunk = self.get_chunk(chunk_id)
+        if not chunk:
+            return {"prev": None, "next": None}
+
+        if not self.db_path.exists():
+            return {"prev": None, "next": None}
+
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            # Get file_id for this chunk
+            cursor = conn.execute(
+                "SELECT file_id FROM chunks WHERE chunk_id = ?",
+                (chunk_id,)
+            )
+            row = cursor.fetchone()
+            if not row:
+                return {"prev": None, "next": None}
+            file_id = row[0]
+
+            header_depth = chunk.get('header_depth')
+            parent_id = chunk.get('parent_chunk_id')
+
+            # Find previous sibling (same depth, same parent, lower chunk_index)
+            cursor = conn.execute("""
+                SELECT c.chunk_id, f.path as file_path, c.header_text, c.header_depth
+                FROM chunks c
+                JOIN files f ON c.file_id = f.file_id
+                WHERE c.file_id = ?
+                  AND c.header_depth IS NOT NULL
+                  AND (c.header_depth = ? OR (? IS NULL AND c.header_depth IS NULL))
+                  AND (c.parent_chunk_id = ? OR (? IS NULL AND c.parent_chunk_id IS NULL))
+                  AND c.chunk_id < ?
+                ORDER BY c.chunk_id DESC
+                LIMIT 1
+            """, (file_id, header_depth, header_depth, parent_id, parent_id, chunk_id))
+            prev_row = cursor.fetchone()
+
+            # Find next sibling
+            cursor = conn.execute("""
+                SELECT c.chunk_id, f.path as file_path, c.header_text, c.header_depth
+                FROM chunks c
+                JOIN files f ON c.file_id = f.file_id
+                WHERE c.file_id = ?
+                  AND c.header_depth IS NOT NULL
+                  AND (c.header_depth = ? OR (? IS NULL AND c.header_depth IS NULL))
+                  AND (c.parent_chunk_id = ? OR (? IS NULL AND c.parent_chunk_id IS NULL))
+                  AND c.chunk_id > ?
+                ORDER BY c.chunk_id ASC
+                LIMIT 1
+            """, (file_id, header_depth, header_depth, parent_id, parent_id, chunk_id))
+            next_row = cursor.fetchone()
+
+            return {
+                "prev": dict(prev_row) if prev_row else None,
+                "next": dict(next_row) if next_row else None
+            }
+        finally:
+            conn.close()
+
+    def get_path(self, chunk_id: int) -> List[Dict]:
+        """Get hierarchical path from root to this chunk (breadcrumbs).
+
+        Returns:
+            List of ancestor chunks from root to this chunk
+            Example: [{"header_text": "# Doc"}, {"header_text": "## Section"}, ...]
+        """
+        path = []
+        current_id = chunk_id
+
+        while current_id is not None:
+            chunk = self.get_chunk(current_id)
+            if not chunk:
+                break
+            path.insert(0, {
+                "chunk_id": chunk['chunk_id'],
+                "header_text": chunk.get('header_text'),
+                "header_depth": chunk.get('header_depth')
+            })
+            current_id = chunk.get('parent_chunk_id')
+
+        return path
+
+    def navigate(self, chunk_id: int, direction: str) -> Optional[Dict]:
+        """Navigate from a chunk in a given direction.
+
+        Args:
+            chunk_id: Starting chunk ID
+            direction: One of 'parent', 'first_child', 'prev', 'next'
+
+        Returns:
+            Target chunk or None if navigation not possible
+        """
+        if direction == 'parent':
+            return self.get_parent(chunk_id)
+        elif direction == 'first_child':
+            children = self.get_children(chunk_id)
+            return children[0] if children else None
+        elif direction == 'prev':
+            return self.get_siblings(chunk_id)['prev']
+        elif direction == 'next':
+            return self.get_siblings(chunk_id)['next']
+        return None
 
 
 def create_cassette_from_config(config: Dict, project_root: Path = None) -> GenericCassette:

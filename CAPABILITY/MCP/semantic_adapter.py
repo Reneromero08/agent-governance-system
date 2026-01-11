@@ -133,39 +133,52 @@ class SemanticMCPAdapter:
             }
     
     def cassette_network_query(self, args: Dict) -> Dict:
-        """MCP tool: Query the cassette network."""
+        """MCP tool: Query the cassette network.
+
+        Args (via args dict):
+            query: Search query string
+            limit: Max results (default 10)
+            cassettes: List of cassette IDs to query (default: all)
+            capability: Filter by capability (optional)
+        """
         if not NETWORK_AVAILABLE or not self.network_hub:
             return {
                 "content": [{"type": "text", "text": "Cassette network not available"}],
                 "isError": True
             }
-        
+
         try:
             query = args.get("query", "")
             top_k = int(args.get("limit", 10))
             capability = args.get("capability")
-            
+            cassette_filter = args.get("cassettes", [])
+
             if capability:
                 results = self.network_hub.query_by_capability(query, capability, top_k)
             else:
                 results = self.network_hub.query_all(query, top_k)
-            
+
+            # Filter to requested cassettes if specified
+            if cassette_filter:
+                results = {k: v for k, v in results.items() if k in cassette_filter}
+
             # Flatten results
             all_results = []
             for cassette_id, cassette_results in results.items():
                 for result in cassette_results:
                     result["cassette_id"] = cassette_id
                     all_results.append(result)
-            
+
             # Sort by score if available
             all_results.sort(key=lambda x: x.get("score", 0), reverse=True)
-            
+
             return {
                 "content": [{
                     "type": "text",
                     "text": json.dumps({
                         "query": query,
                         "capability": capability,
+                        "cassettes_filter": cassette_filter if cassette_filter else "all",
                         "results": all_results[:top_k],
                         "cassettes_queried": len(results)
                     }, indent=2)
@@ -174,6 +187,54 @@ class SemanticMCPAdapter:
         except Exception as e:
             return {
                 "content": [{"type": "text", "text": f"Cassette network error: {str(e)}"}],
+                "isError": True
+            }
+
+    def cassette_stats(self, args: Dict = None) -> Dict:
+        """MCP tool: Get statistics for all cassettes.
+
+        Returns list of cassettes with their chunk counts and capabilities.
+        """
+        if not NETWORK_AVAILABLE or not self.network_hub:
+            return {
+                "content": [{"type": "text", "text": "Cassette network not available"}],
+                "isError": True
+            }
+
+        try:
+            status = self.network_hub.get_network_status()
+
+            # Format cassette stats
+            cassette_stats = []
+            for cassette_id, info in status.get("cassettes", {}).items():
+                stats = info.get("stats", {})
+                cassette_stats.append({
+                    "id": cassette_id,
+                    "name": stats.get("name", cassette_id),
+                    "description": stats.get("description", ""),
+                    "files": stats.get("files_count", 0),
+                    "chunks": stats.get("chunks_count", 0),
+                    "capabilities": stats.get("capabilities", []),
+                    "db_exists": stats.get("db_exists", False)
+                })
+
+            # Sort by chunk count descending
+            cassette_stats.sort(key=lambda x: x.get("chunks", 0), reverse=True)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "total_cassettes": len(cassette_stats),
+                        "total_chunks": sum(c.get("chunks", 0) for c in cassette_stats),
+                        "total_files": sum(c.get("files", 0) for c in cassette_stats),
+                        "cassettes": cassette_stats
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Cassette stats error: {str(e)}"}],
                 "isError": True
             }
     

@@ -1,39 +1,138 @@
 {
+  "config_version": "3.0",
+  "description": "Phase 1: Bucket-aligned cassette partitions",
   "cassettes": [
     {
-      "id": "governance",
-      "name": "Governance Documents",
-      "db_path": "NAVIGATION/CORTEX/db/system1.db",
+      "id": "canon",
+      "name": "Canon (LAW)",
+      "db_path": "NAVIGATION/CORTEX/cassettes/canon.db",
       "enabled": true,
-      "description": "Governance documents (CANON, ADRs, SKILLS, MAPS)",
-      "capabilities": ["vectors", "fts", "semantic_search"],
-      "type": "generic"
-    },
-    {
-      "id": "cat_chat",
-      "name": "CAT_CHAT Documentation Index",
-      "db_path": "THOUGHT/LAB/CAT_CHAT/cat_chat_index.db",
-      "enabled": true,
-      "description": "CAT_CHAT documentation and indexing information",
-      "capabilities": ["fts", "indexing_info", "merge_analysis"],
+      "description": "Constitutional documents - immutable (LAW/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
       "type": "generic",
-      "query_template": "SELECT * FROM indexing_info_fts WHERE indexing_info_fts MATCH '{query}' ORDER BY rank LIMIT {limit}"
+      "mutability": "immutable"
     },
     {
-      "id": "agi_research",
-      "name": "AGI Research Database",
-      "db_path": "THOUGHT/LAB/CAT_CHAT/CORTEX/_generated/system3.db",
+      "id": "governance",
+      "name": "Governance (CONTEXT)",
+      "db_path": "NAVIGATION/CORTEX/cassettes/governance.db",
       "enabled": true,
-      "description": "AGI research database",
-      "capabilities": ["vectors", "research"],
+      "description": "Decisions and preferences (CONTEXT/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
+      "type": "generic",
+      "mutability": "stable"
+    },
+    {
+      "id": "capability",
+      "name": "Capability",
+      "db_path": "NAVIGATION/CORTEX/cassettes/capability.db",
+      "enabled": true,
+      "description": "Code, skills, primitives (CAPABILITY/)",
+      "capabilities": [
+        "fts",
+        "semantic_search",
+        "ast"
+      ],
+      "type": "generic",
+      "mutability": "mutable"
+    },
+    {
+      "id": "navigation",
+      "name": "Navigation",
+      "db_path": "NAVIGATION/CORTEX/cassettes/navigation.db",
+      "enabled": true,
+      "description": "Maps, cortex metadata (NAVIGATION/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
+      "type": "generic",
+      "mutability": "mutable"
+    },
+    {
+      "id": "direction",
+      "name": "Direction",
+      "db_path": "NAVIGATION/CORTEX/cassettes/direction.db",
+      "enabled": true,
+      "description": "Roadmaps, strategy (DIRECTION/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
+      "type": "generic",
+      "mutability": "mutable"
+    },
+    {
+      "id": "thought",
+      "name": "Thought",
+      "db_path": "NAVIGATION/CORTEX/cassettes/thought.db",
+      "enabled": true,
+      "description": "Research, lab, demos (THOUGHT/)",
+      "capabilities": [
+        "fts",
+        "semantic_search",
+        "research"
+      ],
+      "type": "generic",
+      "mutability": "mutable"
+    },
+    {
+      "id": "memory",
+      "name": "Memory",
+      "db_path": "NAVIGATION/CORTEX/cassettes/memory.db",
+      "enabled": true,
+      "description": "Archive, reports (MEMORY/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
+      "type": "generic",
+      "mutability": "append_only"
+    },
+    {
+      "id": "inbox",
+      "name": "Inbox",
+      "db_path": "NAVIGATION/CORTEX/cassettes/inbox.db",
+      "enabled": true,
+      "description": "Staging, temporary (INBOX/)",
+      "capabilities": [
+        "fts",
+        "semantic_search"
+      ],
+      "type": "generic",
+      "mutability": "ephemeral"
+    },
+    {
+      "id": "resident",
+      "name": "Resident (AI Memories)",
+      "db_path": "NAVIGATION/CORTEX/cassettes/resident.db",
+      "enabled": true,
+      "description": "Per-agent AI memories",
+      "capabilities": [
+        "fts",
+        "semantic_search",
+        "agent_memory"
+      ],
+      "type": "generic",
+      "mutability": "read_write"
+    }
+  ],
+  "legacy_cassettes": [
+    {
+      "id": "system1",
+      "name": "Legacy System1 (deprecated)",
+      "db_path": "NAVIGATION/CORTEX/db/system1.db",
+      "enabled": false,
+      "description": "Original monolithic database - kept for reference",
       "type": "generic"
     }
   ],
-  "auto_discover": true,
-  "discovery_paths": [
-    "NAVIGATION/CORTEX/network/cassettes/",
-    "THOUGHT/LAB/CAT_CHAT/"
-  ],
-  "config_version": "2.0",
+  "auto_discover": false,
   "default_type": "generic"
 }

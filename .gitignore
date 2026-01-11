@@ -36,6 +36,10 @@ NAVIGATION/CORTEX/meta/SECTION_INDEX.json
 # Generated System1 DB (rebuilt in CI and by runner.py)
 NAVIGATION/CORTEX/db/system1.db
 
+# Cassette databases (derived from source files, rebuilt by migration scripts)
+NAVIGATION/CORTEX/cassettes/
+NAVIGATION/CORTEX/db/_migration_backup/
+
 # Generated Proof Artifacts (dispersed)
 NAVIGATION/PROOFS/GREEN_STATE.json
 NAVIGATION/PROOFS/GREEN_STATE.md
