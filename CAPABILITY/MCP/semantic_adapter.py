@@ -29,14 +29,25 @@ except ImportError as e:
     print(f"[WARNING] Network tools not available: {e}", file=sys.stderr)
     NETWORK_AVAILABLE = False
 
-# Phase 2: Memory Cassette
+# Phase 2 + Phase 3: Memory Cassette with Resident Identity
 try:
     from network.memory_cassette import (
         MemoryCassette,
         memory_save,
         memory_query,
         memory_recall,
-        semantic_neighbors
+        semantic_neighbors,
+        # Phase 3: Resident Identity
+        agent_register,
+        agent_get,
+        agent_list,
+        session_start,
+        session_resume,
+        session_update,
+        session_end,
+        session_history,
+        memory_promote,
+        get_promotion_candidates
     )
     MEMORY_AVAILABLE = True
 except ImportError as e:
@@ -430,7 +441,288 @@ class SemanticMCPAdapter:
                 "content": [{"type": "text", "text": f"Memory stats error: {str(e)}"}],
                 "isError": True
             }
-    
+
+    # =========================================================================
+    # Phase 3: Resident Identity MCP Tools
+    # =========================================================================
+
+    def session_start_tool(self, args: Dict) -> Dict:
+        """MCP tool: Start a new session for an agent.
+
+        Args (via args dict):
+            agent_id: Agent identifier (required)
+            working_set: Optional initial working set
+
+        Returns:
+            Session info with session_id, started_at
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            agent_id = args.get("agent_id", "")
+            if not agent_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: agent_id is required"}],
+                    "isError": True
+                }
+
+            working_set = args.get("working_set")
+            result = session_start(agent_id, working_set)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Session start error: {str(e)}"}],
+                "isError": True
+            }
+
+    def session_resume_tool(self, args: Dict) -> Dict:
+        """MCP tool: Resume session and get recent context.
+
+        Args (via args dict):
+            agent_id: Agent identifier (required)
+            limit: Max recent thoughts to return (default: 10)
+
+        Returns:
+            Session info with recent_thoughts, working_set, memory_count
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            agent_id = args.get("agent_id", "")
+            if not agent_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: agent_id is required"}],
+                    "isError": True
+                }
+
+            limit = int(args.get("limit", 10))
+            result = session_resume(agent_id, limit)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Session resume error: {str(e)}"}],
+                "isError": True
+            }
+
+    def session_update_tool(self, args: Dict) -> Dict:
+        """MCP tool: Update session working set or summary.
+
+        Args (via args dict):
+            session_id: Session identifier (required)
+            working_set: New working set state
+            summary: Optional session summary
+
+        Returns:
+            Update confirmation with timestamp
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            session_id = args.get("session_id", "")
+            if not session_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: session_id is required"}],
+                    "isError": True
+                }
+
+            working_set = args.get("working_set")
+            summary = args.get("summary")
+            result = session_update(session_id, working_set, summary)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Session update error: {str(e)}"}],
+                "isError": True
+            }
+
+    def session_end_tool(self, args: Dict) -> Dict:
+        """MCP tool: End a session.
+
+        Args (via args dict):
+            session_id: Session identifier (required)
+            summary: Optional summary of what was accomplished
+
+        Returns:
+            Session end info with duration_minutes, memory_count
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            session_id = args.get("session_id", "")
+            if not session_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: session_id is required"}],
+                    "isError": True
+                }
+
+            summary = args.get("summary")
+            result = session_end(session_id, summary)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Session end error: {str(e)}"}],
+                "isError": True
+            }
+
+    def agent_info_tool(self, args: Dict) -> Dict:
+        """MCP tool: Get agent info and stats.
+
+        Args (via args dict):
+            agent_id: Agent identifier (required)
+
+        Returns:
+            Agent info with memory_count, session_count, last_active
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            agent_id = args.get("agent_id", "")
+            if not agent_id:
+                return {
+                    "content": [{"type": "text", "text": "Error: agent_id is required"}],
+                    "isError": True
+                }
+
+            result = agent_get(agent_id)
+
+            if not result:
+                return {
+                    "content": [{
+                        "type": "text",
+                        "text": json.dumps({"error": "Agent not found", "agent_id": agent_id})
+                    }]
+                }
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Agent info error: {str(e)}"}],
+                "isError": True
+            }
+
+    def agent_list_tool(self, args: Dict = None) -> Dict:
+        """MCP tool: List all registered agents.
+
+        Args (via args dict):
+            model_filter: Optional filter by model name
+
+        Returns:
+            List of agents with their stats
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            args = args or {}
+            model_filter = args.get("model_filter")
+            agents = agent_list(model_filter)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps({
+                        "agents": agents,
+                        "count": len(agents)
+                    }, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Agent list error: {str(e)}"}],
+                "isError": True
+            }
+
+    def memory_promote_tool(self, args: Dict) -> Dict:
+        """MCP tool: Promote memory from INBOX to RESIDENT.
+
+        Args (via args dict):
+            hash: Memory hash to promote (required)
+            from_cassette: Source cassette (default: inbox)
+
+        Returns:
+            Promotion confirmation with timestamp
+        """
+        if not MEMORY_AVAILABLE:
+            return {
+                "content": [{"type": "text", "text": "Memory cassette not available"}],
+                "isError": True
+            }
+
+        try:
+            memory_hash = args.get("hash", "")
+            if not memory_hash:
+                return {
+                    "content": [{"type": "text", "text": "Error: hash is required"}],
+                    "isError": True
+                }
+
+            from_cassette = args.get("from_cassette", "inbox")
+            result = memory_promote(memory_hash, from_cassette)
+
+            return {
+                "content": [{
+                    "type": "text",
+                    "text": json.dumps(result, indent=2)
+                }]
+            }
+        except Exception as e:
+            return {
+                "content": [{"type": "text", "text": f"Memory promote error: {str(e)}"}],
+                "isError": True
+            }
+
     def get_network_status(self) -> Dict:
         """Get cassette network status."""
         if not NETWORK_AVAILABLE or not self.network_hub:

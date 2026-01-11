@@ -4,6 +4,89 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
+## [3.9.0] - 2026-01-11
+
+### Phase 3: Resident Identity - COMPLETE
+
+**Goal:** Each AI instance has a persistent identity in the manifold
+
+#### Phase 3.1: Agent Registry
+```sql
+CREATE TABLE agents (
+    agent_id TEXT PRIMARY KEY,
+    model_name TEXT,
+    display_name TEXT,
+    created_at TEXT NOT NULL,
+    last_active TEXT NOT NULL,
+    memory_count INTEGER DEFAULT 0,
+    session_count INTEGER DEFAULT 0,
+    config JSON
+);
+```
+
+**Functions:**
+- `agent_register(agent_id, model_name, display_name, config)` → Dict
+- `agent_get(agent_id)` → Optional[Dict]
+- `agent_list(model_filter)` → List[Dict]
+
+#### Phase 3.2: Session Continuity
+```sql
+CREATE TABLE sessions (
+    session_id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    started_at TEXT NOT NULL,
+    ended_at TEXT,
+    last_active TEXT NOT NULL,
+    memory_count INTEGER DEFAULT 0,
+    working_set JSON,
+    summary TEXT,
+    FOREIGN KEY (agent_id) REFERENCES agents(agent_id)
+);
+```
+
+**Functions:**
+- `session_start(agent_id, session_id, working_set)` → Dict
+- `session_resume(agent_id, session_id, limit)` → Dict with recent_thoughts
+- `session_update(session_id, working_set, summary)` → Dict
+- `session_end(session_id, summary)` → Dict
+- `session_history(agent_id, limit)` → List[Dict]
+
+#### Phase 3.3: Cross-Session Memory
+- `memory_promote(hash, from_cassette)` → Dict
+- `memory_demote(hash, to_cassette)` → Dict
+- `get_promotion_candidates(agent_id, min_access, min_age_hours)` → List[Dict]
+
+**Memories table extended:**
+- `session_id` - Links memory to session
+- `access_count` - Tracks recall frequency
+- `last_accessed` - Timestamp of last access
+- `promoted_at` - When memory was promoted
+- `source_cassette` - Origin cassette
+
+**Promotion policy:** age >1hr AND access_count >=2, or explicit promotion
+
+#### MCP Tools Added
+- `session_start_tool` - Start new session
+- `session_resume_tool` - Resume with recent thoughts
+- `session_update_tool` - Update working set
+- `session_end_tool` - End session
+- `agent_info_tool` - Get agent stats
+- `agent_list_tool` - List agents
+- `memory_promote_tool` - Promote INBOX→RESIDENT
+
+#### Implementation Files
+- `memory_cassette.py` - Schema v3.0, all Phase 3 functions
+- `semantic_adapter.py` - 7 new MCP tools
+- `cassettes.json` - Resident cassette updated with "sessions" capability
+- `test_resident_identity.py` - 20+ unit tests
+
+#### Acceptance Criteria Met
+- [x] Agent identity persists across sessions
+- [x] Memories accumulate over time
+- [x] Can query "what did I think last time?" via `session_resume()`
+
+---
+
 ## [3.8.2] - 2026-01-11
 
 ### Phase 2.4: Cleanup and Deprecation - COMPLETE

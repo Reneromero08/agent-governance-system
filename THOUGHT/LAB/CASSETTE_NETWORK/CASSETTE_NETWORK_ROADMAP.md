@@ -1,6 +1,6 @@
 # Cassette Network Roadmap
 
-**Status**: Phase 0-2 Complete, Phase 3-6 In Progress
+**Status**: Phase 0-3 Complete, Phase 4-6 In Progress
 **Vision**: Layer 3 (CAS External) of the compression stack - shared semantic context infrastructure enabling near-zero communication entropy
 **Owner**: Antigravity / Resident
 **Upstream Dependency**: Phase 5 (VECTOR_ELO) - MemoryRecord contract, SPC protocol
@@ -326,39 +326,78 @@ CREATE VIRTUAL TABLE memories_fts USING fts5(text, hash UNINDEXED);
 
 ---
 
-## Phase 3: Resident Identity
+## Phase 3: Resident Identity ✅ COMPLETE (2026-01-11)
 
 **Goal:** Each AI instance has a persistent identity in the manifold
 
 **Previous:** [Phase 2](#phase-2-write-path-memory-persistence) - Write path
 **Next:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
 
-### 3.1 Agent Registry
+### 3.1 Agent Registry ✅
 ```sql
 CREATE TABLE agents (
     agent_id TEXT PRIMARY KEY,  -- 'opus-20260101', 'sonnet-main'
     model_name TEXT,
-    created_at TEXT,
-    last_active TEXT,
-    memory_count INTEGER DEFAULT 0
+    display_name TEXT,
+    created_at TEXT NOT NULL,
+    last_active TEXT NOT NULL,
+    memory_count INTEGER DEFAULT 0,
+    session_count INTEGER DEFAULT 0,
+    config JSON
 );
 ```
 
-### 3.2 Session Continuity
-```python
-session_resume(agent_id: str) -> dict:
-    """Load recent memories for this agent.
-    Returns: {agent_id, memory_count, recent_thoughts: [...]}"""
+**Functions:**
+- `agent_register(agent_id, model_name, display_name, config)` → Dict
+- `agent_get(agent_id)` → Optional[Dict]
+- `agent_list(model_filter)` → List[Dict]
+
+### 3.2 Session Continuity ✅
+```sql
+CREATE TABLE sessions (
+    session_id TEXT PRIMARY KEY,
+    agent_id TEXT NOT NULL,
+    started_at TEXT NOT NULL,
+    ended_at TEXT,
+    last_active TEXT NOT NULL,
+    memory_count INTEGER DEFAULT 0,
+    working_set JSON,
+    summary TEXT,
+    FOREIGN KEY (agent_id) REFERENCES agents(agent_id)
+);
 ```
 
-### 3.3 Cross-Session Memory
-- [ ] Persist working set (active symbols, cassette scope, last thread hash)
-- [ ] Define promotion policy for INBOX → RESIDENT
+**Functions:**
+- `session_start(agent_id, session_id, working_set)` → Dict
+- `session_resume(agent_id, session_id, limit)` → Dict with recent_thoughts
+- `session_update(session_id, working_set, summary)` → Dict
+- `session_end(session_id, summary)` → Dict
+- `session_history(agent_id, limit)` → List[Dict]
 
-**Acceptance:**
-- [ ] Agent identity persists across sessions
-- [ ] Memories accumulate over time
-- [ ] Can query "what did I think last time?"
+### 3.3 Cross-Session Memory ✅
+- [x] Persist working set (active symbols, cassette scope, last thread hash) - JSON blob in sessions table
+- [x] Define promotion policy for INBOX → RESIDENT (age >1hr, access >2x, or explicit flag)
+- [x] Memories table extended: session_id, access_count, last_accessed, promoted_at
+- [x] `memory_promote()` and `get_promotion_candidates()` implemented
+
+**MCP Tools Added:**
+- `session_start_tool` - Start new session
+- `session_resume_tool` - Resume with recent thoughts
+- `session_update_tool` - Update working set
+- `session_end_tool` - End session
+- `agent_info_tool` - Get agent stats
+- `agent_list_tool` - List agents
+- `memory_promote_tool` - Promote INBOX→RESIDENT
+
+**Implementation Files:**
+- [memory_cassette.py](../../../NAVIGATION/CORTEX/network/memory_cassette.py) - Schema v3.0, all functions
+- [semantic_adapter.py](../../../CAPABILITY/MCP/semantic_adapter.py) - 7 new MCP tools
+- [test_resident_identity.py](../../../CAPABILITY/TESTBENCH/phase3/test_resident_identity.py) - Unit tests
+
+**Acceptance:** ✅ ALL MET
+- [x] Agent identity persists across sessions
+- [x] Memories accumulate over time
+- [x] Can query "what did I think last time?"
 
 ---
 
@@ -776,4 +815,4 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v2.3.0 - Updated 2026-01-11 with Phase 2 Write Path complete (memory persistence with vector embeddings)*
+*Roadmap v3.0.0 - Updated 2026-01-11 with Phase 3 Resident Identity complete (agent registry, session continuity, cross-session memory)*

@@ -1,8 +1,28 @@
-<!-- CONTENT_HASH: 3.7.45 -->
+<!-- CONTENT_HASH: 3.9.0 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.9.0] - 2026-01-11
+
+### Added
+- **Phase 3: Resident Identity** — Persistent AI agent identity in cassette network
+  - `agents` table — Agent registry with memory_count, session_count tracking
+  - `sessions` table — Session continuity with working_set JSON persistence
+  - 7 new MCP tools: session_start, session_resume, session_update, session_end, agent_info, agent_list, memory_promote
+  - `test_resident_identity.py` — 20+ unit tests for Phase 3
+
+### Changed
+- **NAVIGATION/CORTEX/network/memory_cassette.py** — Schema v3.0 with Phase 3 functions
+- **CAPABILITY/MCP/semantic_adapter.py** — Added Phase 3 MCP tools
+- **NAVIGATION/CORTEX/network/cassettes.json** — Resident cassette updated with "sessions" capability
+- **CASSETTE_NETWORK_ROADMAP.md** → v3.0.0 — Phase 3 marked complete
+
+### Note
+See `THOUGHT/LAB/CASSETTE_NETWORK/CHANGELOG.md` for full Phase 3 implementation details.
 
 ---
 
