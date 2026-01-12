@@ -1,0 +1,583 @@
+{
+  "suite": "Q41_TIER8_MODULARITY",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T04:43:15.776570+00:00",
+  "passed": true,
+  "metrics": {
+    "curve_structure": {
+      "per_model": {
+        "MiniLM": {
+          "n_curves": 12,
+          "curves": [
+            {
+              "words": [
+                "king",
+                "queen",
+                "man",
+                "woman"
+              ],
+              "closure_error": 0.6250176951096525,
+              "area": 0.005478803534060717
+            },
+            {
+              "words": [
+                "father",
+                "mother",
+                "son",
+                "daughter"
+              ],
+              "closure_error": 0.6501278873166841,
+              "area": 0.007991142570972443
+            },
+            {
+              "words": [
+                "brother",
+                "sister",
+                "prince",
+                "princess"
+              ],
+              "closure_error": 0.6621075890565387,
+              "area": 0.001523209735751152
+            },
+            {
+              "words": [
+                "hot",
+                "cold",
+                "light",
+                "dark"
+              ],
+              "closure_error": 0.6797681353469757,
+              "area": 0.0021945794578641653
+            },
+            {
+              "words": [
+                "big",
+                "small",
+                "fast",
+                "slow"
+              ],
+              "closure_error": 0.7332329834506908,
+              "area": 0.004518156871199608
+            },
+            {
+              "words": [
+                "good",
+                "bad",
+                "true",
+                "false"
+              ],
+              "closure_error": 0.6749249637928318,
+              "area": 0.0005717753665521741
+            },
+            {
+              "words": [
+                "past",
+                "future",
+                "history",
+                "present"
+              ],
+              "closure_error": 0.6112250786906688,
+              "area": 0.003492579096928239
+            },
+            {
+              "words": [
+                "science",
+                "art",
+                "math",
+                "music"
+              ],
+              "closure_error": 0.6345461596146694,
+              "area": 0.0036862832494080067
+            },
+            {
+              "words": [
+                "love",
+                "hate",
+                "hope",
+                "fear"
+              ],
+              "closure_error": 0.7007397495421848,
+              "area": 0.0009345340076833963
+            },
+            {
+              "words": [
+                "water",
+                "fire",
+                "air",
+                "earth"
+              ],
+              "closure_error": 0.7226193962675643,
+              "area": 0.003716955427080393
+            },
+            {
+              "words": [
+                "tree",
+                "flower",
+                "sky",
+                "earth"
+              ],
+              "closure_error": 0.7147530996050364,
+              "area": 0.00338688213378191
+            },
+            {
+              "words": [
+                "cat",
+                "dog",
+                "bird",
+                "fish"
+              ],
+              "closure_error": 0.7423827980873225,
+              "area": 0.0015250829746946692
+            }
+          ],
+          "mean_closure_error": 0.6792871279900683,
+          "mean_area": 0.003251665368831406
+        },
+        "MPNet": {
+          "n_curves": 12,
+          "curves": [
+            {
+              "words": [
+                "king",
+                "queen",
+                "man",
+                "woman"
+              ],
+              "closure_error": 0.6459981545486262,
+              "area": 0.0006383584113791585
+            },
+            {
+              "words": [
+                "father",
+                "mother",
+                "son",
+                "daughter"
+              ],
+              "closure_error": 0.6812182523338833,
+              "area": 0.0018118887674063444
+            },
+            {
+              "words": [
+                "brother",
+                "sister",
+                "prince",
+                "princess"
+              ],
+              "closure_error": 0.5804385684719695,
+              "area": 0.0011196142295375466
+            },
+            {
+              "words": [
+                "hot",
+                "cold",
+                "light",
+                "dark"
+              ],
+              "closure_error": 0.6964739712891426,
+              "area": 0.0030292414594441652
+            },
+            {
+              "words": [
+                "big",
+                "small",
+                "fast",
+                "slow"
+              ],
+              "closure_error": 0.6373857414529468,
+              "area": 0.0024549784138798714
+            },
+            {
+              "words": [
+                "good",
+                "bad",
+                "true",
+                "false"
+              ],
+              "closure_error": 0.7047272237643848,
+              "area": 0.00474522402510047
+            },
+            {
+              "words": [
+                "past",
+                "future",
+                "history",
+                "present"
+              ],
+              "closure_error": 0.6600372347521501,
+              "area": 0.004804220516234636
+            },
+            {
+              "words": [
+                "science",
+                "art",
+                "math",
+                "music"
+              ],
+              "closure_error": 0.6258475088054616,
+              "area": 0.0004456932656466961
+            },
+            {
+              "words": [
+                "love",
+                "hate",
+                "hope",
+                "fear"
+              ],
+              "closure_error": 0.670243811361426,
+              "area": 0.0007538493373431265
+            },
+            {
+              "words": [
+                "water",
+                "fire",
+                "air",
+                "earth"
+              ],
+              "closure_error": 0.7145285498486176,
+              "area": 0.0010696938261389732
+            },
+            {
+              "words": [
+                "tree",
+                "flower",
+                "sky",
+                "earth"
+              ],
+              "closure_error": 0.7208127500936734,
+              "area": 0.0016429189126938581
+            },
+            {
+              "words": [
+                "cat",
+                "dog",
+                "bird",
+                "fish"
+              ],
+              "closure_error": 0.745692951368647,
+              "area": 0.001204314874485135
+            }
+          ],
+          "mean_closure_error": 0.6736170598409107,
+          "mean_area": 0.0019766663366074986
+        },
+        "Paraphrase": {
+          "n_curves": 12,
+          "curves": [
+            {
+              "words": [
+                "king",
+                "queen",
+                "man",
+                "woman"
+              ],
+              "closure_error": 0.5133204200384955,
+              "area": 0.0016489147674292326
+            },
+            {
+              "words": [
+                "father",
+                "mother",
+                "son",
+                "daughter"
+              ],
+              "closure_error": 0.46325789845002435,
+              "area": 0.00771844107657671
+            },
+            {
+              "words": [
+                "brother",
+                "sister",
+                "prince",
+                "princess"
+              ],
+              "closure_error": 0.4561292420945118,
+              "area": 0.007870246656239033
+            },
+            {
+              "words": [
+                "hot",
+                "cold",
+                "light",
+                "dark"
+              ],
+              "closure_error": 0.6716772478791889,
+              "area": 0.002975090639665723
+            },
+            {
+              "words": [
+                "big",
+                "small",
+                "fast",
+                "slow"
+              ],
+              "closure_error": 0.5830480664855237,
+              "area": 0.007997598499059677
+            },
+            {
+              "words": [
+                "good",
+                "bad",
+                "true",
+                "false"
+              ],
+              "closure_error": 0.5633295665816056,
+              "area": 0.001886324374936521
+            },
+            {
+              "words": [
+                "past",
+                "future",
+                "history",
+                "present"
+              ],
+              "closure_error": 0.5384554214993215,
+              "area": 0.005121334921568632
+            },
+            {
+              "words": [
+                "science",
+                "art",
+                "math",
+                "music"
+              ],
+              "closure_error": 0.664359690248624,
+              "area": 0.007910295389592648
+            },
+            {
+              "words": [
+                "love",
+                "hate",
+                "hope",
+                "fear"
+              ],
+              "closure_error": 0.5381218055295856,
+              "area": 0.005490448791533709
+            },
+            {
+              "words": [
+                "water",
+                "fire",
+                "air",
+                "earth"
+              ],
+              "closure_error": 0.7623985743172756,
+              "area": 0.011266253888607025
+            },
+            {
+              "words": [
+                "tree",
+                "flower",
+                "sky",
+                "earth"
+              ],
+              "closure_error": 0.6735693160427472,
+              "area": 0.00039731402648612857
+            },
+            {
+              "words": [
+                "cat",
+                "dog",
+                "bird",
+                "fish"
+              ],
+              "closure_error": 0.6956872226391212,
+              "area": 0.002179111586883664
+            }
+          ],
+          "mean_closure_error": 0.593612872650502,
+          "mean_area": 0.005205114551548225
+        },
+        "BERT": {
+          "n_curves": 12,
+          "curves": [
+            {
+              "words": [
+                "king",
+                "queen",
+                "man",
+                "woman"
+              ],
+              "closure_error": 0.7372743297942154,
+              "area": 0.00016127731942106038
+            },
+            {
+              "words": [
+                "father",
+                "mother",
+                "son",
+                "daughter"
+              ],
+              "closure_error": 0.5318609442616582,
+              "area": 0.0001038633199641481
+            },
+            {
+              "words": [
+                "brother",
+                "sister",
+                "prince",
+                "princess"
+              ],
+              "closure_error": 0.6301004814311248,
+              "area": 6.650801515206695e-05
+            },
+            {
+              "words": [
+                "hot",
+                "cold",
+                "light",
+                "dark"
+              ],
+              "closure_error": 0.726688246803856,
+              "area": 6.217064219526947e-05
+            },
+            {
+              "words": [
+                "big",
+                "small",
+                "fast",
+                "slow"
+              ],
+              "closure_error": 0.6817386526000266,
+              "area": 0.0004057926416862756
+            },
+            {
+              "words": [
+                "good",
+                "bad",
+                "true",
+                "false"
+              ],
+              "closure_error": 0.650212387844506,
+              "area": 7.497215847251937e-05
+            },
+            {
+              "words": [
+                "past",
+                "future",
+                "history",
+                "present"
+              ],
+              "closure_error": 0.779115046710251,
+              "area": 0.0012271148152649403
+            },
+            {
+              "words": [
+                "science",
+                "art",
+                "math",
+                "music"
+              ],
+              "closure_error": 0.6797101358395298,
+              "area": 0.0005822028615511954
+            },
+            {
+              "words": [
+                "love",
+                "hate",
+                "hope",
+                "fear"
+              ],
+              "closure_error": 0.6938485347172987,
+              "area": 0.0005056204972788692
+            },
+            {
+              "words": [
+                "water",
+                "fire",
+                "air",
+                "earth"
+              ],
+              "closure_error": 0.6842308473252265,
+              "area": 0.00015472587256226689
+            },
+            {
+              "words": [
+                "tree",
+                "flower",
+                "sky",
+                "earth"
+              ],
+              "closure_error": 0.7193300302594096,
+              "area": 1.676654392213095e-05
+            },
+            {
+              "words": [
+                "cat",
+                "dog",
+                "bird",
+                "fish"
+              ],
+              "closure_error": 0.6658378064874683,
+              "area": 0.000517120526637882
+            }
+          ],
+          "mean_closure_error": 0.6816622870062141,
+          "mean_area": 0.000323177934509052
+        }
+      },
+      "closure_errors": [
+        0.6792871279900683,
+        0.6736170598409107,
+        0.593612872650502,
+        0.6816622870062141
+      ],
+      "overall": {
+        "mean_closure_error": 0.6570448368719237,
+        "passes": true
+      }
+    },
+    "l_function_modularity": {
+      "per_model": {
+        "MiniLM": {
+          "n_curves_analyzed": 8,
+          "mean_fe_quality": 0.0,
+          "mean_correlation": 0.9999907099542966,
+          "mean_smoothness": 0.9871545375712549,
+          "modularity_score": 0.6623817491751839
+        },
+        "MPNet": {
+          "n_curves_analyzed": 8,
+          "mean_fe_quality": 0.0,
+          "mean_correlation": 0.9999889870180667,
+          "mean_smoothness": 0.9870364939241423,
+          "modularity_score": 0.6623418269807363
+        },
+        "Paraphrase": {
+          "n_curves_analyzed": 8,
+          "mean_fe_quality": 0.0,
+          "mean_correlation": 0.9999944099740851,
+          "mean_smoothness": 0.9881608560131115,
+          "modularity_score": 0.6627184219957322
+        },
+        "BERT": {
+          "n_curves_analyzed": 8,
+          "mean_fe_quality": 0.0,
+          "mean_correlation": 0.9999999719263781,
+          "mean_smoothness": 0.9880550428744146,
+          "modularity_score": 0.6626850049335976
+        }
+      },
+      "modularity_scores": [
+        0.6623817491751839,
+        0.6623418269807363,
+        0.6627184219957322,
+        0.6626850049335976
+      ],
+      "overall": {
+        "mean_modularity_score": 0.6625317507713125,
+        "passes": true
+      }
+    },
+    "curve_pass": true,
+    "modularity_pass": true
+  },
+  "thresholds": {
+    "closure_error_max": 0.75,
+    "modularity_score_min": 0.3
+  },
+  "controls": {
+    "closure_error": 0.6570448368719237,
+    "modularity_score": 0.6625317507713125
+  },
+  "notes": "Closure: 0.6570, Modularity: 0.663"
+}

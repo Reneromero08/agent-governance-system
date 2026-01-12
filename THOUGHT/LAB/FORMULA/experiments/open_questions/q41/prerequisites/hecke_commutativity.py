@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """
-Q41 TIER 3: Hecke Operators
+Q41 PREREQUISITE: Hecke Commutativity
 
-Tests whether embedding spaces admit Hecke-like averaging operators
-with the algebraic properties expected from the Langlands program.
+Tests whether embedding spaces admit commutative averaging operators -
+a NECESSARY but NOT SUFFICIENT condition for Langlands structure.
 
-The Langlands connection: Hecke operators are central to the theory
-of automorphic forms and their connection to Galois representations.
+NOTE: This is a PREREQUISITE test, not the actual TIER 3 test.
+The real TIER 3 (Functoriality Tower) tests multi-scale lifting and base change.
+This test only verifies basic algebraic prerequisites.
 
-Semantic analogs:
+What this tests:
 - Averaging operators T_k over k-neighborhoods
 - Commutativity: T_k T_l = T_l T_k
 - Self-adjointness and eigenvalue structure
+
+What this does NOT test (see tier3/functoriality.py):
+- Multi-scale lifting word → sentence → paragraph → document
+- L-function preservation under lifting
+- Base change across languages
 
 Author: Claude
 Date: 2026-01-11
@@ -33,7 +39,7 @@ from shared.utils import (
 )
 
 __version__ = "1.0.0"
-__suite__ = "Q41_TIER3_HECKE_OPERATORS"
+__suite__ = "Q41_PREREQ_HECKE_COMMUTATIVITY"
 
 
 def pairwise_distances(X: np.ndarray, metric: str = "euclidean") -> np.ndarray:
@@ -116,12 +122,12 @@ def build_hecke_operator(D: np.ndarray, k: int) -> np.ndarray:
 
 def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose: bool = True) -> TestResult:
     """
-    TIER 3: Hecke Operators
+    PREREQUISITE: Hecke Commutativity
 
     TESTS:
-    - 3.1: Commutativity - T_k T_l ≈ T_l T_k
-    - 3.2: Self-adjointness - T close to symmetric after symmetrization
-    - 3.3: Eigenvalue structure - bounded eigenvalues
+    - Commutativity - T_k T_l ≈ T_l T_k
+    - Self-adjointness - T close to symmetric after symmetrization
+    - Eigenvalue structure - bounded eigenvalues
 
     PASS CRITERIA:
     - Mean commutativity error < 0.3
@@ -261,8 +267,8 @@ def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose
         print(f"\n  Controls: positive={positive_control_pass}, negative={negative_control_pass}")
 
     return TestResult(
-        name="TIER 3: Hecke Operators",
-        test_type="langlands",
+        name="PREREQ: Hecke Commutativity",
+        test_type="prerequisite",
         passed=passed,
         metrics={
             "commutativity_errors": commutativity_errors,
@@ -289,8 +295,8 @@ def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Q41 TIER 3: Hecke Operators")
-    parser.add_argument("--out_dir", type=str, default=str(Path(__file__).parent.parent / "receipts"), help="Output directory")
+    parser = argparse.ArgumentParser(description="Q41 PREREQUISITE: Hecke Commutativity")
+    parser.add_argument("--out_dir", type=str, default=str(Path(__file__).parent.parent / "receipts" / "prerequisites"), help="Output directory")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--quiet", action="store_true", help="Suppress output")
     args = parser.parse_args()
@@ -299,8 +305,10 @@ def main():
 
     if verbose:
         print("=" * 60)
-        print(f"Q41 TIER 3: HECKE OPERATORS v{__version__}")
+        print(f"Q41 PREREQUISITE: HECKE COMMUTATIVITY v{__version__}")
         print("=" * 60)
+        print("NOTE: This is a prerequisite test, not the actual TIER 3.")
+        print("See tier3/functoriality.py for the real Langlands test.")
 
     config = TestConfig(seed=args.seed)
     corpus = DEFAULT_CORPUS
@@ -325,18 +333,18 @@ def main():
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-    receipt_path = out_dir / f"q41_tier3_receipt_{timestamp_str}.json"
+    receipt_path = out_dir / f"q41_prereq_hecke_receipt_{timestamp_str}.json"
 
-    receipt = {
+    receipt = to_builtin({
         "suite": __suite__,
         "version": __version__,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "passed": result.passed,
-        "metrics": to_builtin(result.metrics),
-        "thresholds": to_builtin(result.thresholds),
-        "controls": to_builtin(result.controls),
+        "metrics": result.metrics,
+        "thresholds": result.thresholds,
+        "controls": result.controls,
         "notes": result.notes
-    }
+    })
 
     with open(receipt_path, 'w') as f:
         json.dump(receipt, f, indent=2)

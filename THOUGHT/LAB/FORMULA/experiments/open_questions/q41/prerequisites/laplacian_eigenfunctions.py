@@ -1,19 +1,25 @@
 #!/usr/bin/env python3
 """
-Q41 TIER 4: Automorphic Forms
+Q41 PREREQUISITE: Laplacian Eigenfunctions
 
-Tests whether embedding spaces admit automorphic-like functions -
-eigenfunctions of the Laplacian with transformation properties.
+Tests whether embedding spaces have well-behaved eigenfunctions -
+a NECESSARY but NOT SUFFICIENT condition for automorphic forms.
 
-The Langlands connection: Automorphic forms are functions on quotient
-spaces that transform predictably under group actions. The Langlands
-correspondence relates these to Galois representations.
+NOTE: This is a PREREQUISITE test, not the actual TIER 4 test.
+The real TIER 4 (Geometric Satake) tests the Satake correspondence
+between perverse sheaves and Langlands dual representations.
+This test only verifies basic spectral prerequisites.
 
-Semantic analogs:
-- Laplacian eigenfunctions as "harmonic" functions on semantic space
-- Orthogonality relations
-- Completeness (spanning the space)
-- Transformation under symmetry
+What this tests:
+- Laplacian eigenfunctions form orthonormal basis
+- Completeness (reconstruction)
+- Eigenvalue gap structure
+
+What this does NOT test (see tier4/satake.py):
+- Semantic affine Grassmannian structure
+- Perverse sheaf enumeration
+- Langlands dual group representations
+- Transformation law f(γz) = j(γ,z)f(z)
 
 Author: Claude
 Date: 2026-01-11
@@ -36,7 +42,7 @@ from shared.utils import (
 )
 
 __version__ = "1.0.0"
-__suite__ = "Q41_TIER4_AUTOMORPHIC_FORMS"
+__suite__ = "Q41_PREREQ_LAPLACIAN_EIGENFUNCTIONS"
 
 
 def pairwise_distances(X: np.ndarray, metric: str = "euclidean") -> np.ndarray:
@@ -133,12 +139,12 @@ def normalized_laplacian(A: np.ndarray) -> np.ndarray:
 
 def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose: bool = True) -> TestResult:
     """
-    TIER 4: Automorphic Forms
+    PREREQUISITE: Laplacian Eigenfunctions
 
     TESTS:
-    - 4.1: Orthogonality - eigenfunctions form orthonormal basis
-    - 4.2: Completeness - eigenfunctions span the space (reconstruction)
-    - 4.3: Eigenvalue structure - gaps indicate automorphic form clusters
+    - Orthogonality - eigenfunctions form orthonormal basis
+    - Completeness - eigenfunctions span the space (reconstruction)
+    - Eigenvalue structure - gaps indicate automorphic form clusters
 
     PASS CRITERIA:
     - Orthogonality error < 0.01
@@ -156,7 +162,7 @@ def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose
     L = normalized_laplacian(A)
 
     if verbose:
-        print("\n  Computing eigenfunctions (automorphic forms)...")
+        print("\n  Computing eigenfunctions...")
 
     # Compute eigenfunctions of Laplacian
     eigenvalues, eigenvectors = np.linalg.eigh(L)
@@ -279,8 +285,8 @@ def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose
     )
 
     return TestResult(
-        name="TIER 4: Automorphic Forms",
-        test_type="langlands",
+        name="PREREQ: Laplacian Eigenfunctions",
+        test_type="prerequisite",
         passed=passed,
         metrics={
             "orthogonality_error": orthogonality_error,
@@ -316,8 +322,8 @@ def run_test(embeddings_dict: Dict[str, np.ndarray], config: TestConfig, verbose
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Q41 TIER 4: Automorphic Forms")
-    parser.add_argument("--out_dir", type=str, default=str(Path(__file__).parent.parent / "receipts"), help="Output directory")
+    parser = argparse.ArgumentParser(description="Q41 PREREQUISITE: Laplacian Eigenfunctions")
+    parser.add_argument("--out_dir", type=str, default=str(Path(__file__).parent.parent / "receipts" / "prerequisites"), help="Output directory")
     parser.add_argument("--seed", type=int, default=42, help="Random seed")
     parser.add_argument("--quiet", action="store_true", help="Suppress output")
     args = parser.parse_args()
@@ -326,8 +332,10 @@ def main():
 
     if verbose:
         print("=" * 60)
-        print(f"Q41 TIER 4: AUTOMORPHIC FORMS v{__version__}")
+        print(f"Q41 PREREQUISITE: LAPLACIAN EIGENFUNCTIONS v{__version__}")
         print("=" * 60)
+        print("NOTE: This is a prerequisite test, not the actual TIER 4.")
+        print("See tier4/satake.py for the real Langlands test.")
 
     config = TestConfig(seed=args.seed)
     corpus = DEFAULT_CORPUS
@@ -352,18 +360,18 @@ def main():
     out_dir = Path(args.out_dir)
     out_dir.mkdir(parents=True, exist_ok=True)
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
-    receipt_path = out_dir / f"q41_tier4_receipt_{timestamp_str}.json"
+    receipt_path = out_dir / f"q41_prereq_laplacian_receipt_{timestamp_str}.json"
 
-    receipt = {
+    receipt = to_builtin({
         "suite": __suite__,
         "version": __version__,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "passed": result.passed,
-        "metrics": to_builtin(result.metrics),
-        "thresholds": to_builtin(result.thresholds),
-        "controls": to_builtin(result.controls),
+        "metrics": result.metrics,
+        "thresholds": result.thresholds,
+        "controls": result.controls,
         "notes": result.notes
-    }
+    })
 
     with open(receipt_path, 'w') as f:
         json.dump(receipt, f, indent=2)

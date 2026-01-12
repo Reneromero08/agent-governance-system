@@ -1,0 +1,78 @@
+{
+  "suite": "Q41_TIER3_FUNCTORIALITY",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T04:43:50.175754+00:00",
+  "passed": true,
+  "metrics": {
+    "multiscale_lifting": {
+      "scale_pairs": [
+        {
+          "child": "words",
+          "parent": "sentences",
+          "correlation": 0.9970045833181532,
+          "functoriality_score": 0.9575902302425779,
+          "passes": true
+        },
+        {
+          "child": "sentences",
+          "parent": "paragraphs",
+          "correlation": 0.9599094272369846,
+          "functoriality_score": 0.877652245753842,
+          "passes": true
+        },
+        {
+          "child": "paragraphs",
+          "parent": "documents",
+          "correlation": 0.9974927558458131,
+          "functoriality_score": 0.9791612790210587,
+          "passes": true
+        }
+      ],
+      "l_function_correlations": [
+        0.9970045833181532,
+        0.9599094272369846,
+        0.9974927558458131
+      ],
+      "path_independence": {
+        "direct_aggregation_error": 0.9605446566140143,
+        "passes": false
+      },
+      "overall_score": 0.5121287994264847,
+      "mean_correlation": 0.9848022554669837
+    },
+    "base_change": {
+      "scales_tested": [
+        {
+          "scale": "words",
+          "correlation": 0.9991315908115681,
+          "base_change_score": 0.975209200635577,
+          "passes": true
+        },
+        {
+          "scale": "sentences",
+          "correlation": 0.9995591982375491,
+          "base_change_score": 0.984062214016439,
+          "passes": true
+        }
+      ],
+      "base_change_scores": [
+        0.975209200635577,
+        0.984062214016439
+      ],
+      "overall_score": 0.979635707326008
+    },
+    "lifting_pass": false,
+    "base_change_pass": true,
+    "strict_pass": false
+  },
+  "thresholds": {
+    "l_function_correlation_min": 0.5,
+    "path_independence_max_error": 0.5,
+    "base_change_score_min": 0.3
+  },
+  "controls": {
+    "lifting_score": 0.5121287994264847,
+    "base_change_score": 0.979635707326008
+  },
+  "notes": "Lifting: 0.985, BC: 0.980"
+}
