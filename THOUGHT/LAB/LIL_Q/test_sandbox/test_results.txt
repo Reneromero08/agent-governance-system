@@ -1,0 +1,130 @@
+2026-01-12 15:19:17.599812: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-12 15:19:19.152327: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+======================================================================
+QUANTUM ENTANGLEMENT TEST: All 4 Domains
+======================================================================
+
+Test Date: 2026-01-12 15:19:09
+
+Hypothesis: Context via quantum entanglement enables tiny models
+to solve problems beyond their capability.
+
+======================================================================
+PROBLEM: MATH
+======================================================================
+
+Query: Solve for x: (2x + 3)? - (x - 1)? = 45
+
+----------------------------------------------------------------------
+CONDITION A: NO CONTEXT
+----------------------------------------------------------------------
+
+[1/4] Big Model (7B) - No Context...
+Result: FAIL
+E: 1.000
+
+[2/4] Tiny Model (0.5B) - No Context...
+Result: FAIL
+E: 1.000
+
+----------------------------------------------------------------------
+CONDITION B: WITH CONTEXT (Quantum Rescue Attempt)
+----------------------------------------------------------------------
+
+Retrieving context from domain 'math'...
+[ERROR] No context retrieved!
+
+======================================================================
+PROBLEM: CODE
+======================================================================
+
+Query: Fix the bug in this fibonacci function that hangs:
+
+def fibonacci(n):
+    if n <= 1:
+        return ...
+
+----------------------------------------------------------------------
+CONDITION A: NO CONTEXT
+----------------------------------------------------------------------
+
+[1/4] Big Model (7B) - No Context...
+Result: FAIL
+E: 1.000
+
+[2/4] Tiny Model (0.5B) - No Context...
+Result: FAIL
+E: 1.000
+
+----------------------------------------------------------------------
+CONDITION B: WITH CONTEXT (Quantum Rescue Attempt)
+----------------------------------------------------------------------
+
+Retrieving context from domain 'code'...
+[ERROR] No context retrieved!
+
+======================================================================
+PROBLEM: LOGIC
+======================================================================
+
+Query: On an island, knights always tell truth and knaves always lie. You meet two people. A says 'We are b...
+
+----------------------------------------------------------------------
+CONDITION A: NO CONTEXT
+----------------------------------------------------------------------
+
+[1/4] Big Model (7B) - No Context...
+Result: PASS
+E: 1.000
+
+[2/4] Tiny Model (0.5B) - No Context...
+Result: FAIL
+E: 1.000
+
+----------------------------------------------------------------------
+CONDITION B: WITH CONTEXT (Quantum Rescue Attempt)
+----------------------------------------------------------------------
+
+Retrieving context from domain 'logic'...
+[ERROR] No context retrieved!
+
+======================================================================
+PROBLEM: CHEMISTRY
+======================================================================
+
+Query: Balance this equation: Fe + O? ? Fe?O?
+
+----------------------------------------------------------------------
+CONDITION A: NO CONTEXT
+----------------------------------------------------------------------
+
+[1/4] Big Model (7B) - No Context...
+Result: FAIL
+E: 1.000
+
+[2/4] Tiny Model (0.5B) - No Context...
+Result: FAIL
+E: 1.000
+
+----------------------------------------------------------------------
+CONDITION B: WITH CONTEXT (Quantum Rescue Attempt)
+----------------------------------------------------------------------
+
+Retrieving context from domain 'chemistry'...
+[ERROR] No context retrieved!
+
+======================================================================
+RESULTS SUMMARY
+======================================================================
+
+| Problem | Big (No Ctx) | Tiny (No Ctx) | Big (Ctx) | Tiny (Ctx) | Rescued? |
+|---------|--------------|---------------|-----------|------------|----------|
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\LIL_Q\test_sandbox\run_all_tests.py", line 439, in <module>
+    run_all_tests(verbose=args.verbose)
+  File "D:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\LIL_Q\test_sandbox\run_all_tests.py", line 383, in run_all_tests
+    big_yes = "PASS" if results['big_context']['score']['pass'] else "FAIL"
+                        ~~~~~~~^^^^^^^^^^^^^^^
+KeyError: 'big_context'

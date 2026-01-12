@@ -52,6 +52,9 @@ THOUGHT/LAB/CAT_CHAT/**/*.db
 # LIL_Q chat logs (personal conversations)
 THOUGHT/LAB/LIL_Q/chat_logs/*.txt
 
+# LIL_Q test sandbox (generated artifacts)
+THOUGHT/LAB/LIL_Q/test_sandbox/*.db
+
 # Generated Proof Artifacts (dispersed)
 NAVIGATION/PROOFS/GREEN_STATE.json
 NAVIGATION/PROOFS/GREEN_STATE.md

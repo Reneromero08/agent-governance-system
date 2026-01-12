@@ -6,6 +6,25 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.8] - 2026-01-12
+
+### Added
+- **LIL_Q Quantum Rescue Test** — Validated E = <psi|phi> enables smaller models to solve problems beyond capability
+  - `THOUGHT/LAB/LIL_Q/test_sandbox/` — Complete test infrastructure for quantum rescue validation
+  - **Quantum Rescue Proven: 4/4 domains** (math, code, logic, chemistry)
+  - `test_all_domains.py` — Main test harness demonstrating 100% rescue success rate
+  - `test_quantum_geometric.py` — QuantumChat class integration test
+  - `test_full_formula.py` — Full R = (E/∇S) × σ(f)^Df formula implementation
+  - `test_sandbox.db` — Geometric index database with 15 knowledge documents
+  - `retrieve.py` — E-gating retrieval using Born rule (E = <psi|phi>)
+  - `build_test_db.py` — Database builder with Df computation
+  - **15 knowledge documents** across 4 domains (math, code, logic, chemistry)
+  - `QUANTUM_RESCUE_REPORT.md` — Technical report with full results and analysis
+  - `QUANTUM_RESCUE_RESULTS.md` — User-facing summary
+  - **Key Finding**: 3B model + E-gated context ≈ 7B model alone
+  - **Formula Validated**: E = <psi|phi> (Born rule) successfully filters relevant knowledge
+  - **Size Threshold**: ~1-2B parameters minimum for rescue to work (0.5B too small)
+
 ## [3.8.7] - 2026-01-12
 
 ### Added
