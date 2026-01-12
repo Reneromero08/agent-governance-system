@@ -100,6 +100,10 @@ class FeralDaemon:
         # Paper exploration state
         self._explored_chunks: set = set()
 
+        # NEW: Dynamic constellation tracking
+        self._exploration_trail: deque = deque(maxlen=50)  # Last 50 visited nodes for trails
+        self._discovered_chunks: set = set()  # Chunks that have been discovered (for spawn animation)
+
     @property
     def resident(self) -> VectorResident:
         """Lazy initialization of resident"""
@@ -278,6 +282,15 @@ class FeralDaemon:
         chunk_id = chunk['chunk_id']
         chunk_text = chunk.get('content', '')[:500]  # Limit length
         paper_name = chunk.get('paper_id', 'unknown')
+        heading = chunk.get('heading', '')
+
+        # Track if this is a NEW discovery (for spawn animation)
+        is_new_node = chunk_id not in self._discovered_chunks
+        self._discovered_chunks.add(chunk_id)
+
+        # Track trail (where we came from, for activity trails)
+        source_node_id = self._exploration_trail[-1] if self._exploration_trail else None
+        self._exploration_trail.append(chunk_id)
 
         # Think about it
         Df_before = self.resident.mind_evolution.get('current_Df', 0)
@@ -294,9 +307,12 @@ class FeralDaemon:
                           f"Explored {paper_name} chunk (E={result.E_resonance:.2f})",
                           paper=paper_name,
                           chunk_id=chunk_id,
+                          heading=heading,
                           E=result.E_resonance,
                           Df_delta=Df_delta,
-                          gate_open=result.gate_open)
+                          gate_open=result.gate_open,
+                          is_new_node=is_new_node,
+                          source_node_id=source_node_id)
 
     # =========================================================================
     # BEHAVIOR: Memory Consolidation

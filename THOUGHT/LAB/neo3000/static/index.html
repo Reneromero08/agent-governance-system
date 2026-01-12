@@ -5,9 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FERAL DASHBOARD // Autonomous Resident</title>
-    <script type="text/javascript" src="https://unpkg.com/vis-network/dist/vis-network.min.js"></script>
+    <!-- Three.js + 3D Force Graph for dynamic constellation -->
+    <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
     <style>
-        @import url('https://unpkg.com/vis-network/dist/vis-network.min.css');
         :root {
             --bg: #000000;
             --surface: rgba(0, 20, 0, 0.85);
@@ -653,6 +654,14 @@
                 addActivity(msg.data);
             } else if (msg.type === 'thought') {
                 addChatMessage('feral', msg.data.response, msg.data.E, msg.data.gate_open);
+            } else if (msg.type === 'node_discovered') {
+                // NEW: Spawn new node in 3D constellation
+                spawnNode(msg.data);
+                addToTrail(msg.data.node_id, msg.data.activity_type);
+            } else if (msg.type === 'node_activated') {
+                // NEW: Highlight existing node and add to trail
+                activateNode(msg.data.node_id, msg.data.activity_type);
+                addToTrail(msg.data.node_id, msg.data.activity_type);
             }
         }
 
@@ -864,10 +873,23 @@
             }
         }
 
-        // ===== CONSTELLATION BACKGROUND =====
-        let network = null;
-        let allNodes = [];
-        let allEdges = [];
+        // ===== 3D CONSTELLATION BACKGROUND =====
+        let Graph = null;
+        let nodeRegistry = { byId: new Map() };
+        let nodePulseState = new Map();
+        let explorationTrail = [];
+        let trailLine = null;
+        const MAX_TRAIL_LENGTH = 50;
+
+        // Activity type colors
+        const ACTIVITY_COLORS = {
+            paper: { main: 0x0096ff, glow: '#0096ff' },
+            consolidate: { main: 0xffc800, glow: '#ffc800' },
+            reflect: { main: 0xc800ff, glow: '#c800ff' },
+            cassette: { main: 0x00ff96, glow: '#00ff96' },
+            daemon: { main: 0x00ff41, glow: '#00ff41' },
+            default: { main: 0x00ff41, glow: '#00ff41' }
+        };
 
         async function initConstellation() {
             const container = document.getElementById('constellation-background');
@@ -882,89 +904,121 @@
                     return;
                 }
 
-                // Style nodes
-                allNodes = data.nodes.map(n => ({
-                    ...n,
-                    color: {
-                        background: n.group === 'folder' ? '#003300' : '#001a00',
-                        border: n.group === 'folder' ? '#00ff41' : '#008f11',
-                        highlight: { background: '#004400', border: '#00ff41' },
-                        hover: { background: '#003300', border: '#00ff41' }
-                    },
-                    font: {
-                        color: '#00ff41',
-                        size: n.group === 'folder' ? 14 : 10,
-                        face: 'Lucida Console'
-                    },
-                    shape: n.group === 'folder' ? 'diamond' : 'dot',
-                    size: n.group === 'folder' ? 20 : 8,
-                    borderWidth: 1,
-                    borderWidthSelected: 3,
-                    shadow: {
-                        enabled: true,
-                        color: 'rgba(0, 255, 65, 0.3)',
-                        size: 10,
-                        x: 0,
-                        y: 0
-                    }
+                // Transform nodes for 3d-force-graph
+                const nodes = data.nodes.map(n => ({
+                    id: n.id,
+                    label: n.label,
+                    group: n.group,
+                    path: n.path || '',
+                    val: n.group === 'folder' ? 3 : 1  // Node size
                 }));
 
-                allEdges = data.edges.map(e => ({
-                    ...e,
-                    color: { color: '#004400', highlight: '#00ff41', hover: '#008f11' },
-                    width: 0.5,
-                    smooth: { type: 'continuous' }
+                // Transform edges to links
+                const links = data.edges.map(e => ({
+                    source: e.from,
+                    target: e.to
                 }));
 
-                const graphData = {
-                    nodes: new vis.DataSet(allNodes),
-                    edges: new vis.DataSet(allEdges)
-                };
+                // Build node registry for quick lookup
+                nodes.forEach(n => nodeRegistry.byId.set(n.id, n));
 
-                const options = {
-                    nodes: { fixed: false },
-                    edges: { arrows: { to: { enabled: true, scaleFactor: 0.3 } } },
-                    physics: {
-                        enabled: true,
-                        stabilization: { enabled: true, iterations: 200, updateInterval: 25 },
-                        barnesHut: {
-                            gravitationalConstant: -3000,
-                            centralGravity: 0.1,
-                            springLength: 150,
-                            springConstant: 0.02,
-                            damping: 0.3
+                // Initialize pulse state for all nodes
+                nodes.forEach(n => {
+                    nodePulseState.set(n.id, {
+                        intensity: 0.1,  // Base ambient pulse
+                        phase: Math.random() * Math.PI * 2,
+                        frequency: 0.3 + Math.random() * 0.3,
+                        lastActivity: 0
+                    });
+                });
+
+                // Create 3D Force Graph
+                Graph = ForceGraph3D()(container)
+                    .graphData({ nodes, links })
+                    .backgroundColor('#000000')
+                    .showNavInfo(false)
+                    .nodeLabel(node => `${node.label}\n${node.path || node.id}`)
+                    .nodeColor(node => node.group === 'folder' ? '#00ff41' : '#008f11')
+                    .nodeOpacity(0.9)
+                    .nodeResolution(16)
+                    .nodeVal(node => node.val)
+                    .linkColor(() => 'rgba(0, 143, 17, 0.4)')
+                    .linkWidth(0.5)
+                    .linkOpacity(0.6)
+                    .linkDirectionalParticles(0)
+                    .d3AlphaDecay(0.02)
+                    .d3VelocityDecay(0.3)
+                    .warmupTicks(100)
+                    .cooldownTicks(200)
+                    .onNodeHover(node => {
+                        if (node) {
+                            tooltip.innerHTML = `<b>${node.label}</b><br><span style="opacity:0.7">${node.path || node.id}</span>`;
+                            tooltip.style.display = 'block';
+                        } else {
+                            tooltip.style.display = 'none';
                         }
-                    },
-                    interaction: {
-                        hover: true,
-                        tooltipDelay: 100,
-                        zoomView: true,
-                        dragView: true,
-                        dragNodes: true,
-                        keyboard: { enabled: true, speed: { x: 10, y: 10, zoom: 0.02 } }
-                    },
-                    layout: { improvedLayout: true }
-                };
+                    })
+                    .onNodeClick(node => {
+                        // Focus camera on clicked node
+                        if (node) focusCameraOnNode(node, 1500);
+                    });
 
-                network = new vis.Network(container, graphData, options);
+                // Custom node rendering with glow and pulse support
+                Graph.nodeThreeObject(node => {
+                    const group = new THREE.Group();
+
+                    // Main sphere
+                    const geometry = new THREE.SphereGeometry(
+                        node.group === 'folder' ? 4 : 2,
+                        16, 16
+                    );
+                    const material = new THREE.MeshPhongMaterial({
+                        color: node.group === 'folder' ? 0x00ff41 : 0x008f11,
+                        emissive: node.group === 'folder' ? 0x003300 : 0x001a00,
+                        emissiveIntensity: 0.3,
+                        transparent: true,
+                        opacity: 0.9
+                    });
+                    const sphere = new THREE.Mesh(geometry, material);
+                    group.add(sphere);
+
+                    // Glow sphere (slightly larger, more transparent)
+                    const glowGeometry = new THREE.SphereGeometry(
+                        (node.group === 'folder' ? 4 : 2) * 1.3,
+                        16, 16
+                    );
+                    const glowMaterial = new THREE.MeshBasicMaterial({
+                        color: 0x00ff41,
+                        transparent: true,
+                        opacity: 0.1
+                    });
+                    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                    group.add(glow);
+
+                    // Store references for animation
+                    node.__mainSphere = sphere;
+                    node.__glowSphere = glow;
+                    node.__baseScale = 1;
+
+                    return group;
+                });
+
+                // Add ambient lighting
+                const scene = Graph.scene();
+                const ambientLight = new THREE.AmbientLight(0x00ff41, 0.3);
+                scene.add(ambientLight);
+                const pointLight = new THREE.PointLight(0x00ff41, 1, 500);
+                pointLight.position.set(0, 100, 100);
+                scene.add(pointLight);
+
+                // Add fog for depth
+                scene.fog = new THREE.FogExp2(0x000000, 0.002);
 
                 // Update status bar
                 const statsEl = document.getElementById('constellation-stats');
-                if (statsEl) statsEl.innerText = `${allNodes.length} NODES`;
+                if (statsEl) statsEl.innerText = `${nodes.length} NODES`;
 
-                // Hover tooltip
-                network.on("hoverNode", function(params) {
-                    const node = allNodes.find(n => n.id === params.node);
-                    if (node) {
-                        tooltip.innerHTML = `<b>${node.label}</b><br><span style="opacity:0.7">${node.path || node.id}</span>`;
-                        tooltip.style.display = 'block';
-                    }
-                });
-
-                network.on("blurNode", function() {
-                    tooltip.style.display = 'none';
-                });
-
+                // Tooltip tracking
                 document.addEventListener('mousemove', (e) => {
                     if (tooltip.style.display === 'block') {
                         tooltip.style.left = (e.clientX + 15) + 'px';
@@ -972,15 +1026,241 @@
                     }
                 });
 
-                // Disable physics after stabilization
-                network.on("stabilizationIterationsDone", function() {
-                    network.setOptions({ physics: { enabled: false } });
-                    console.log('Constellation stabilized');
-                });
+                // Start animation loop for pulsing
+                startPulseAnimation();
+
+                console.log(`Constellation initialized with ${nodes.length} nodes`);
 
             } catch (e) {
                 console.error('Constellation init error:', e);
             }
+        }
+
+        // ===== PULSE ANIMATION SYSTEM =====
+        function startPulseAnimation() {
+            function animate() {
+                if (!Graph) return;
+
+                const time = Date.now();
+                const graphData = Graph.graphData();
+
+                graphData.nodes.forEach(node => {
+                    const state = nodePulseState.get(node.id);
+                    if (!state || !node.__mainSphere) return;
+
+                    // Decay intensity over time
+                    const timeSinceActivity = time - state.lastActivity;
+                    const decayedIntensity = Math.max(0.1, state.intensity * Math.exp(-timeSinceActivity / 5000));
+
+                    // Calculate pulse
+                    const pulse = Math.sin(time * 0.001 * state.frequency + state.phase);
+                    const scale = 1 + pulse * 0.15 * decayedIntensity;
+                    const emissive = 0.2 + pulse * 0.3 * decayedIntensity;
+                    const glowOpacity = 0.05 + pulse * 0.1 * decayedIntensity;
+
+                    // Apply to node
+                    if (node.__mainSphere) {
+                        node.__mainSphere.scale.setScalar(scale);
+                        node.__mainSphere.material.emissiveIntensity = emissive;
+                    }
+                    if (node.__glowSphere) {
+                        node.__glowSphere.scale.setScalar(scale * 1.3);
+                        node.__glowSphere.material.opacity = glowOpacity;
+                    }
+                });
+
+                requestAnimationFrame(animate);
+            }
+            animate();
+        }
+
+        // ===== CAMERA FOCUS =====
+        function focusCameraOnNode(node, duration = 1500) {
+            if (!Graph || !node) return;
+
+            const distance = 150;
+            const distRatio = 1 + distance / Math.hypot(node.x || 0, node.y || 0, node.z || 0);
+
+            Graph.cameraPosition(
+                { x: (node.x || 0) * distRatio, y: (node.y || 0) * distRatio, z: (node.z || 0) * distRatio },
+                { x: node.x || 0, y: node.y || 0, z: node.z || 0 },
+                duration
+            );
+        }
+
+        // ===== ACTIVITY TRAIL SYSTEM =====
+        function addToTrail(nodeId, activityType) {
+            explorationTrail.push({
+                nodeId,
+                timestamp: Date.now(),
+                type: activityType
+            });
+
+            // Trim to max length
+            while (explorationTrail.length > MAX_TRAIL_LENGTH) {
+                explorationTrail.shift();
+            }
+
+            updateTrailVisualization();
+        }
+
+        function updateTrailVisualization() {
+            if (!Graph) return;
+            const scene = Graph.scene();
+
+            // Remove old trail line
+            if (trailLine) {
+                scene.remove(trailLine);
+                trailLine.geometry.dispose();
+                trailLine.material.dispose();
+                trailLine = null;
+            }
+
+            if (explorationTrail.length < 2) return;
+
+            // Build trail geometry
+            const points = [];
+            const colors = [];
+
+            explorationTrail.forEach((entry, i) => {
+                const node = nodeRegistry.byId.get(entry.nodeId);
+                if (!node || node.x === undefined) return;
+
+                points.push(new THREE.Vector3(node.x, node.y, node.z));
+
+                // Color based on activity type, fade based on age
+                const age = (Date.now() - entry.timestamp) / 30000;  // 30s fade
+                const alpha = Math.max(0.1, 1 - age);
+                const colorInfo = ACTIVITY_COLORS[entry.type] || ACTIVITY_COLORS.default;
+                const color = new THREE.Color(colorInfo.main);
+                colors.push(color.r * alpha, color.g * alpha, color.b * alpha);
+            });
+
+            if (points.length < 2) return;
+
+            const geometry = new THREE.BufferGeometry().setFromPoints(points);
+            geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+
+            const material = new THREE.LineBasicMaterial({
+                vertexColors: true,
+                transparent: true,
+                opacity: 0.7,
+                linewidth: 2
+            });
+
+            trailLine = new THREE.Line(geometry, material);
+            scene.add(trailLine);
+        }
+
+        // ===== LIVE NODE SPAWNING =====
+        function spawnNode(nodeData) {
+            if (!Graph) return;
+
+            const graphData = Graph.graphData();
+
+            // Check if node already exists
+            if (nodeRegistry.byId.has(nodeData.node_id)) {
+                console.log('Node already exists:', nodeData.node_id);
+                return;
+            }
+
+            // Find parent position for initial placement
+            let parentPos = { x: 0, y: 0, z: 0 };
+            if (nodeData.source_id) {
+                const parent = nodeRegistry.byId.get(nodeData.source_id);
+                if (parent && parent.x !== undefined) {
+                    parentPos = { x: parent.x, y: parent.y, z: parent.z };
+                }
+            }
+
+            // Create new node near parent
+            const newNode = {
+                id: nodeData.node_id,
+                label: nodeData.label || 'new chunk',
+                group: 'page',
+                path: nodeData.paper || '',
+                val: 1,
+                x: parentPos.x + (Math.random() - 0.5) * 50,
+                y: parentPos.y + (Math.random() - 0.5) * 50,
+                z: parentPos.z + (Math.random() - 0.5) * 50,
+                __spawning: true,
+                __spawnStart: Date.now()
+            };
+
+            // Add to registry
+            nodeRegistry.byId.set(newNode.id, newNode);
+
+            // Add to graph
+            graphData.nodes.push(newNode);
+
+            // Connect to source node if provided
+            if (nodeData.source_id && nodeRegistry.byId.has(nodeData.source_id)) {
+                graphData.links.push({
+                    source: nodeData.source_id,
+                    target: nodeData.node_id
+                });
+            }
+
+            // Trigger graph update
+            Graph.graphData(graphData);
+
+            // Initialize pulse state (start bright)
+            nodePulseState.set(newNode.id, {
+                intensity: 1.0,
+                phase: 0,
+                frequency: 1.0,
+                lastActivity: Date.now()
+            });
+
+            // Camera focus after short delay
+            setTimeout(() => {
+                const node = nodeRegistry.byId.get(nodeData.node_id);
+                if (node) focusCameraOnNode(node, 1500);
+            }, 300);
+
+            console.log('Spawned new node:', nodeData.node_id);
+        }
+
+        // ===== NODE ACTIVATION (existing nodes) =====
+        function activateNode(nodeId, activityType) {
+            const node = nodeRegistry.byId.get(nodeId);
+            if (!node) {
+                console.log('Node not found for activation:', nodeId);
+                return;
+            }
+
+            // Boost pulse intensity
+            const state = nodePulseState.get(nodeId);
+            if (state) {
+                state.intensity = 1.0;
+                state.lastActivity = Date.now();
+            }
+
+            // Change color temporarily based on activity type
+            const colorInfo = ACTIVITY_COLORS[activityType] || ACTIVITY_COLORS.default;
+            if (node.__mainSphere) {
+                node.__mainSphere.material.color.setHex(colorInfo.main);
+                node.__mainSphere.material.emissive.setHex(colorInfo.main);
+                node.__mainSphere.material.emissiveIntensity = 0.8;
+
+                // Fade back to default after 3 seconds
+                setTimeout(() => {
+                    if (node.__mainSphere) {
+                        node.__mainSphere.material.color.setHex(node.group === 'folder' ? 0x00ff41 : 0x008f11);
+                        node.__mainSphere.material.emissive.setHex(node.group === 'folder' ? 0x003300 : 0x001a00);
+                    }
+                }, 3000);
+            }
+
+            if (node.__glowSphere) {
+                node.__glowSphere.material.color.setHex(colorInfo.main);
+                node.__glowSphere.material.opacity = 0.4;
+            }
+
+            // Focus camera on activated node
+            focusCameraOnNode(node, 1000);
+
+            console.log('Activated node:', nodeId, 'type:', activityType);
         }
 
         // ===== INIT =====

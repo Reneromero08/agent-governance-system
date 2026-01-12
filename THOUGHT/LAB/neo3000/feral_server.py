@@ -142,6 +142,7 @@ def get_daemon() -> FeralDaemon:
 
         # Add WebSocket callback
         def on_activity(event: ActivityEvent):
+            # Broadcast activity to activity log
             asyncio.create_task(manager.broadcast({
                 'type': 'activity',
                 'data': {
@@ -151,6 +152,41 @@ def get_daemon() -> FeralDaemon:
                     'details': event.details
                 }
             }))
+
+            # NEW: Broadcast constellation events for dynamic 3D visualization
+            if event.details.get('chunk_id'):
+                chunk_id = event.details['chunk_id']
+                paper = event.details.get('paper', 'papers')
+                heading = event.details.get('heading', '')[:25] if event.details.get('heading') else ''
+                source_node_id = event.details.get('source_node_id')
+                is_new = event.details.get('is_new_node', False)
+
+                # Build full node ID matching constellation format
+                node_id = f"chunk:{paper}:{chunk_id}"
+                source_id = f"chunk:{paper}:{source_node_id}" if source_node_id else None
+
+                if is_new:
+                    # New node discovered - spawn animation
+                    asyncio.create_task(manager.broadcast({
+                        'type': 'node_discovered',
+                        'data': {
+                            'node_id': node_id,
+                            'label': heading or f"chunk-{chunk_id}",
+                            'source_id': source_id,
+                            'activity_type': event.action,
+                            'paper': paper
+                        }
+                    }))
+                else:
+                    # Existing node activated - highlight
+                    asyncio.create_task(manager.broadcast({
+                        'type': 'node_activated',
+                        'data': {
+                            'node_id': node_id,
+                            'source_id': source_id,
+                            'activity_type': event.action
+                        }
+                    }))
 
         daemon.add_callback(on_activity)
 
