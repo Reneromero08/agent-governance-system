@@ -148,6 +148,16 @@ def compute_containment_matrix(parent_texts: List[str], child_texts: List[str]) 
     """
     Compute binary containment matrix.
     M[i,j] = 1 if child_texts[j] appears in parent_texts[i].
+
+    NOTE ON LANGLANDS INTERPRETATION:
+    This tests LINGUISTIC containment (word ⊂ sentence), not representation-theoretic
+    functoriality in the strict Langlands sense. The Langlands functor is an
+    equivalence of categories preserving L-functions.
+
+    What we test is "embedding hierarchy preservation" - whether L-functions
+    correlate across scales. This is an ANALOG of functoriality, demonstrating
+    that semantic structure is preserved under hierarchical aggregation.
+    The L-function correlation IS meaningful as a test of structural coherence.
     """
     n_parent = len(parent_texts)
     n_child = len(child_texts)

@@ -1,0 +1,478 @@
+{
+  "suite": "Q41_TIER6_PRIME_DECOMPOSITION",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T05:13:04.351442+00:00",
+  "passed": true,
+  "metrics": {
+    "mean_factorization_alignment": 0.8452547986375063,
+    "mean_variance_explained": 0.7747287203092128,
+    "mean_inert_ratio": 0.9500000000000001,
+    "mean_ramified_ratio": 0.0,
+    "uniqueness_by_model": {
+      "MiniLM": {
+        "mean_alignment": 0.7552280617073237,
+        "min_alignment": 0.7414920065581021,
+        "alignment_scores": [
+          0.7528904483914401,
+          0.760750527355181,
+          0.7414920065581021,
+          0.7657792645245715
+        ]
+      },
+      "MPNet": {
+        "mean_alignment": 0.9202909646694653,
+        "min_alignment": 0.9008714228327319,
+        "alignment_scores": [
+          0.9344282779677929,
+          0.9203030564744562,
+          0.92556110140288,
+          0.9008714228327319
+        ]
+      },
+      "Paraphrase": {
+        "mean_alignment": 0.9323331844227881,
+        "min_alignment": 0.8733173350321322,
+        "alignment_scores": [
+          0.919773635595897,
+          0.95296851879305,
+          0.8733173350321322,
+          0.9832732482700729
+        ]
+      },
+      "BERT": {
+        "mean_alignment": 0.7731669837504482,
+        "min_alignment": 0.7421809469480997,
+        "alignment_scores": [
+          0.8022747396133963,
+          0.7450441644917347,
+          0.7421809469480997,
+          0.8031680839485624
+        ]
+      }
+    },
+    "reconstruction_by_model": {
+      "MiniLM": {
+        "reconstruction_error": 0.1159580871462822,
+        "variance_explained": 0.7132744193077087,
+        "coefficient_sparsity": 0.2926470588235294
+      },
+      "MPNet": {
+        "reconstruction_error": 0.10705473273992538,
+        "variance_explained": 0.6823642551898956,
+        "coefficient_sparsity": 0.32426470588235295
+      },
+      "Paraphrase": {
+        "reconstruction_error": 0.13992071151733398,
+        "variance_explained": 0.718842476606369,
+        "coefficient_sparsity": 0.4007352941176471
+      },
+      "BERT": {
+        "reconstruction_error": 0.006598848849534988,
+        "variance_explained": 0.9844337301328778,
+        "coefficient_sparsity": 0.2727941176470588
+      }
+    },
+    "splitting_results": [
+      {
+        "classifications": {
+          "split": 0,
+          "inert": 20,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.0,
+          "inert": 1.0,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.830261766910553
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.8323609828948975
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.8460791707038879
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.8048954606056213
+          },
+          {
+            "prime": 4,
+            "type": "inert",
+            "max_corr": 0.8389379978179932
+          },
+          {
+            "prime": 5,
+            "type": "inert",
+            "max_corr": 0.8500573635101318
+          },
+          {
+            "prime": 6,
+            "type": "inert",
+            "max_corr": 0.8254363536834717
+          },
+          {
+            "prime": 7,
+            "type": "inert",
+            "max_corr": 0.8427613973617554
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.8108804225921631
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.8275465965270996
+          }
+        ],
+        "pair": "MiniLM -> MPNet"
+      },
+      {
+        "classifications": {
+          "split": 0,
+          "inert": 20,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.0,
+          "inert": 1.0,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.805210530757904
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.8140950202941895
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.8442490100860596
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.8138368129730225
+          },
+          {
+            "prime": 4,
+            "type": "inert",
+            "max_corr": 0.8679802417755127
+          },
+          {
+            "prime": 5,
+            "type": "inert",
+            "max_corr": 0.8403493762016296
+          },
+          {
+            "prime": 6,
+            "type": "inert",
+            "max_corr": 0.8045705556869507
+          },
+          {
+            "prime": 7,
+            "type": "inert",
+            "max_corr": 0.8063198328018188
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.8092519044876099
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.8108553886413574
+          }
+        ],
+        "pair": "MiniLM -> Paraphrase"
+      },
+      {
+        "classifications": {
+          "split": 0,
+          "inert": 20,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.0,
+          "inert": 1.0,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.8915437459945679
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.8938851952552795
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.9045779705047607
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.8685356378555298
+          },
+          {
+            "prime": 4,
+            "type": "inert",
+            "max_corr": 0.8953224420547485
+          },
+          {
+            "prime": 5,
+            "type": "inert",
+            "max_corr": 0.9088175892829895
+          },
+          {
+            "prime": 6,
+            "type": "inert",
+            "max_corr": 0.8877554535865784
+          },
+          {
+            "prime": 7,
+            "type": "inert",
+            "max_corr": 0.8794348239898682
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.8650921583175659
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.8822519779205322
+          }
+        ],
+        "pair": "MiniLM -> BERT"
+      },
+      {
+        "classifications": {
+          "split": 0,
+          "inert": 20,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.0,
+          "inert": 1.0,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.8021082282066345
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.7877848148345947
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.7865366339683533
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.7897951006889343
+          },
+          {
+            "prime": 4,
+            "type": "inert",
+            "max_corr": 0.7911086082458496
+          },
+          {
+            "prime": 5,
+            "type": "inert",
+            "max_corr": 0.7979885935783386
+          },
+          {
+            "prime": 6,
+            "type": "inert",
+            "max_corr": 0.799949586391449
+          },
+          {
+            "prime": 7,
+            "type": "inert",
+            "max_corr": 0.813553512096405
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.7771434783935547
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.8136613368988037
+          }
+        ],
+        "pair": "MPNet -> Paraphrase"
+      },
+      {
+        "classifications": {
+          "split": 6,
+          "inert": 14,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.3,
+          "inert": 0.7,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.9068176746368408
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.8980509042739868
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.8967731595039368
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.890613317489624
+          },
+          {
+            "prime": 4,
+            "type": "split",
+            "n_targets": 2
+          },
+          {
+            "prime": 5,
+            "type": "split",
+            "n_targets": 2
+          },
+          {
+            "prime": 6,
+            "type": "split",
+            "n_targets": 3
+          },
+          {
+            "prime": 7,
+            "type": "split",
+            "n_targets": 2
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.8906900882720947
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.9057493209838867
+          }
+        ],
+        "pair": "MPNet -> BERT"
+      },
+      {
+        "classifications": {
+          "split": 0,
+          "inert": 20,
+          "ramified": 0
+        },
+        "density": {
+          "split": 0.0,
+          "inert": 1.0,
+          "ramified": 0.0
+        },
+        "prime_details": [
+          {
+            "prime": 0,
+            "type": "inert",
+            "max_corr": 0.8327348232269287
+          },
+          {
+            "prime": 1,
+            "type": "inert",
+            "max_corr": 0.855151891708374
+          },
+          {
+            "prime": 2,
+            "type": "inert",
+            "max_corr": 0.849272608757019
+          },
+          {
+            "prime": 3,
+            "type": "inert",
+            "max_corr": 0.8635632991790771
+          },
+          {
+            "prime": 4,
+            "type": "inert",
+            "max_corr": 0.827971339225769
+          },
+          {
+            "prime": 5,
+            "type": "inert",
+            "max_corr": 0.8588625192642212
+          },
+          {
+            "prime": 6,
+            "type": "inert",
+            "max_corr": 0.8485820293426514
+          },
+          {
+            "prime": 7,
+            "type": "inert",
+            "max_corr": 0.8394964933395386
+          },
+          {
+            "prime": 8,
+            "type": "inert",
+            "max_corr": 0.8565682172775269
+          },
+          {
+            "prime": 9,
+            "type": "inert",
+            "max_corr": 0.8603481650352478
+          }
+        ],
+        "pair": "Paraphrase -> BERT"
+      }
+    ]
+  },
+  "thresholds": {
+    "alignment_min": 0.7,
+    "variance_explained_min": 0.65,
+    "ramified_max": 0.5
+  },
+  "controls": {
+    "positive_control_inert": 0.9,
+    "negative_control_inert": 0.0
+  },
+  "notes": "Alignment: 0.845, Variance: 0.775, Ramified: 0.000"
+}

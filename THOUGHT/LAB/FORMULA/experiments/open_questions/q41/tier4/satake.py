@@ -142,35 +142,75 @@ def identify_semantic_group(X: np.ndarray, verbose: bool = True) -> Dict[str, An
     return group_info
 
 
+def _count_partitions(max_sum: int, max_parts: int) -> int:
+    """
+    Count partitions of integers <= max_sum into at most max_parts parts.
+
+    Uses dynamic programming: P(n, k) = number of partitions of n into at most k parts.
+    Total = sum_{n=0}^{max_sum} P(n, max_parts)
+    """
+    if max_parts <= 0 or max_sum < 0:
+        return 1  # Empty partition
+
+    # DP table: dp[n][k] = partitions of n into at most k parts
+    dp = [[0] * (max_parts + 1) for _ in range(max_sum + 1)]
+
+    # Base: partitions of 0 into any number of parts = 1 (empty partition)
+    for k in range(max_parts + 1):
+        dp[0][k] = 1
+
+    # Fill table
+    for n in range(1, max_sum + 1):
+        for k in range(1, max_parts + 1):
+            # Partitions of n into at most k parts =
+            # partitions without using k (at most k-1 parts) +
+            # partitions using at least one k (subtract 1 from largest part)
+            dp[n][k] = dp[n][k - 1]
+            if n >= k:
+                dp[n][k] += dp[n - k][k]
+
+    # Sum partitions of all n from 0 to max_sum
+    return sum(dp[n][max_parts] for n in range(max_sum + 1))
+
+
 def count_irreps(group_type: str, max_weight: int = 10) -> int:
     """
     Count irreducible representations of the group up to max_weight.
 
-    For SO(n): Irreps are indexed by highest weights.
-    For GL(n): More complex indexing.
+    For SO(n): Irreps indexed by dominant weights (partitions into rank parts).
+    - SO(2) = U(1): max_weight + 1 irreps (characters e^{ik theta}, k=0,...,max_weight)
+    - SO(3) ~ SU(2): max_weight + 1 irreps (spin j=0,1,...,max_weight)
+    - SO(2r+1): Dominant weights lambda with |lambda| <= max_weight
+    - SO(2r): Similar, with spinor representations
 
-    This is a simplified count - in practice, would need representation theory.
+    For GL(n): Irreps indexed by partitions.
     """
     if group_type.startswith("SO("):
         n = int(group_type[3:-1])
-        # For SO(n), number of irreps up to weight k grows polynomially
-        # Simplified: count partitions of weight <= max_weight with <= floor(n/2) parts
-        if n >= 2:
-            # Rough estimate: C(max_weight + floor(n/2), floor(n/2))
-            r = n // 2
-            from math import comb
-            count = comb(max_weight + r, r)
+        r = n // 2  # Rank of SO(n)
+
+        if n <= 2:
+            # SO(1) = trivial, SO(2) = U(1)
+            return max_weight + 1
+        elif n == 3:
+            # SO(3) ~ SU(2): irreps indexed by spin j = 0, 1, 2, ...
+            return max_weight + 1
         else:
-            count = max_weight + 1
+            # General SO(n): dominant weights are partitions into at most r parts
+            # For SO(2r), we also count spinor representations
+            count = _count_partitions(max_weight, r)
+            if n % 2 == 0:  # SO(2r) has chiral spinors
+                # Simplified: just count standard weights
+                pass
+            return count
+
     elif group_type.startswith("GL("):
         n = int(group_type[3:-1])
-        # For GL(n), irreps indexed by partitions
-        from math import comb
-        count = comb(max_weight + n - 1, n - 1)
-    else:
-        count = max_weight + 1
+        # GL(n) irreps: partitions into at most n parts
+        return _count_partitions(max_weight, n)
 
-    return count
+    else:
+        return max_weight + 1
 
 
 def compute_filtration(X: np.ndarray, n_levels: int = 10) -> Dict[str, Any]:
@@ -205,14 +245,23 @@ def compute_filtration(X: np.ndarray, n_levels: int = 10) -> Dict[str, Any]:
         n_components = np.sum(np.abs(eigs) < 0.01)
         components_per_level.append(n_components)
 
-    # Perverse sheaf count = number of distinct strata transitions
+    # Count strata transitions as a PROXY for perverse sheaf complexity
     # (where number of components changes)
+    #
+    # NOTE ON SATAKE INTERPRETATION:
+    # True IC complexes on the affine Grassmannian require sophisticated
+    # algebraic geometry (intersection cohomology, perverse t-structures).
+    # What we compute is "stratification complexity" - the number of
+    # topologically distinct levels in the filtration. This is an ANALOG
+    # that captures how embedding structure varies with scale.
+    # The correlation with irrep counts tests the spirit of Satake: that
+    # representation-theoretic and geometric structure are related.
     transitions = []
     for i in range(len(components_per_level) - 1):
         if components_per_level[i] != components_per_level[i + 1]:
             transitions.append(i)
 
-    # IC complexes arise at each stratum
+    # Stratification complexity (proxy for IC complex count)
     n_perverse = len(transitions) + 1  # Plus the open stratum
 
     return {
@@ -329,6 +378,20 @@ def test_grassmannian(
     return results
 
 
+def _compute_transformation_factor(f_orig: np.ndarray, f_trans: np.ndarray, threshold: float = 0.1) -> float:
+    """Compute transformation factor j such that f_trans ≈ j * f_orig."""
+    # Align signs (eigenfunctions defined up to sign)
+    if np.dot(f_orig, f_trans) < 0:
+        f_trans = -f_trans
+
+    # Compute point-wise ratios where f_orig is not ~0
+    mask = np.abs(f_orig) > threshold
+    if mask.sum() > 0:
+        ratios = f_trans[mask] / f_orig[mask]
+        return float(np.mean(ratios))
+    return 1.0
+
+
 def test_transformation_law(
     embeddings_dict: Dict[str, np.ndarray],
     config: TestConfig,
@@ -337,7 +400,11 @@ def test_transformation_law(
     """
     Test 4.2: Automorphic Transformation Law
 
-    For automorphic forms f, verify f(gz) = j(g,z)f(z) for group elements g.
+    For automorphic forms f, verify:
+    1. f(gz) = j(g,z)f(z) for group elements g
+    2. Cocycle condition: j(g1*g2, z) = j(g1, g2*z) * j(g2, z)
+
+    The cocycle condition requires testing THREE transforms (g1, g2, g1*g2).
     """
     if verbose:
         print("\n  Test 4.2: Automorphic Transformation Law")
@@ -357,101 +424,105 @@ def test_transformation_law(
         if verbose:
             print(f"\n    Model: {name}")
 
-        # Build graph Laplacian
+        # Build graph Laplacian and get eigenfunctions (automorphic forms)
         D = squareform(pdist(X_proc, 'euclidean'))
         A = build_mutual_knn_graph(D, config.k_neighbors)
         L = normalized_laplacian(A)
-
-        # Get eigenfunctions (automorphic forms)
         eigenvalues, eigenvectors = np.linalg.eigh(L)
         idx = np.argsort(eigenvalues)
-        eigenvalues = eigenvalues[idx]
         eigenvectors = eigenvectors[:, idx]
 
         # Take first few non-trivial eigenfunctions
-        n_test = min(10, n - 1)
-        test_funcs = eigenvectors[:, 1:n_test+1]  # Skip constant eigenfunction
+        n_funcs = min(5, n - 1)
+        test_funcs = eigenvectors[:, 1:n_funcs+1]  # Skip constant eigenfunction
 
         # Generate random orthogonal transformations (group elements)
         np.random.seed(config.seed)
-        n_transforms = 5
+        n_transforms = 4
 
-        transformation_results = []
+        # Store transforms
+        transforms = []
         for t in range(n_transforms):
-            # Random orthogonal matrix in SO(d)
             H = np.random.randn(d, d)
             Q, R = np.linalg.qr(H)
             Q = Q @ np.diag(np.sign(np.diag(R)))
             if np.linalg.det(Q) < 0:
                 Q[:, 0] *= -1
+            transforms.append(Q)
 
-            # Apply transformation to embeddings
-            X_transformed = X_proc @ Q
+        # Test cocycle condition: j(g1*g2, z) = j(g1, g2*z) * j(g2, z)
+        cocycle_tests = []
+        for t1 in range(n_transforms):
+            for t2 in range(t1 + 1, n_transforms):
+                g1 = transforms[t1]
+                g2 = transforms[t2]
+                g12 = g1 @ g2  # Composition
 
-            # Rebuild Laplacian and eigenfunctions
-            D_t = squareform(pdist(X_transformed, 'euclidean'))
-            A_t = build_mutual_knn_graph(D_t, config.k_neighbors)
-            L_t = normalized_laplacian(A_t)
-            eigs_t, vecs_t = np.linalg.eigh(L_t)
-            idx_t = np.argsort(eigs_t)
-            vecs_t = vecs_t[:, idx_t]
+                # Compute eigenfunctions at X, g2*X, and g1*g2*X
+                X_g2 = X_proc @ g2
+                X_g12 = X_proc @ g12
 
-            test_funcs_t = vecs_t[:, 1:n_test+1]
+                # Recompute eigenfunctions for transformed spaces
+                def get_eigenfuncs(X_t):
+                    D_t = squareform(pdist(X_t, 'euclidean'))
+                    A_t = build_mutual_knn_graph(D_t, config.k_neighbors)
+                    L_t = normalized_laplacian(A_t)
+                    _, vecs = np.linalg.eigh(L_t)
+                    return vecs[:, np.argsort(np.linalg.eigvalsh(L_t))][:, 1:n_funcs+1]
 
-            # Extract transformation factor j(g,z) by comparing eigenfunctions
-            # For automorphic forms: f(gz) = j(g,z) * f(z)
-            # So j(g,z) ≈ f(gz) / f(z)
+                funcs_g2 = get_eigenfuncs(X_g2)
+                funcs_g12 = get_eigenfuncs(X_g12)
 
-            # Check if eigenfunctions are related by consistent factor
-            factors = []
-            for i in range(n_test):
-                f_orig = test_funcs[:, i]
-                f_trans = test_funcs_t[:, i]
+                # For each eigenfunction, test cocycle
+                func_cocycle_errors = []
+                for i in range(n_funcs):
+                    f_z = test_funcs[:, i]
+                    f_g2z = funcs_g2[:, i]
+                    f_g12z = funcs_g12[:, i]
 
-                # Align signs (eigenfunctions defined up to sign)
-                if np.dot(f_orig, f_trans) < 0:
-                    f_trans = -f_trans
+                    # j(g2, z) = f(g2*z) / f(z)
+                    j_g2_z = _compute_transformation_factor(f_z, f_g2z)
 
-                # Compute point-wise ratios where f_orig is not ~0
-                mask = np.abs(f_orig) > 0.1
-                if mask.sum() > 0:
-                    ratios = f_trans[mask] / f_orig[mask]
-                    factor_mean = np.mean(ratios)
-                    factor_std = np.std(ratios)
-                    factors.append({
-                        "eigenfunction": i,
-                        "factor_mean": safe_float(factor_mean),
-                        "factor_std": safe_float(factor_std),
-                        "cv": safe_float(factor_std / (np.abs(factor_mean) + 1e-10))
-                    })
+                    # j(g1, g2*z) = f(g1*g2*z) / f(g2*z)
+                    j_g1_g2z = _compute_transformation_factor(f_g2z, f_g12z)
 
-            # Cocycle condition: j should be consistent
-            if factors:
-                mean_cv = np.mean([f["cv"] for f in factors])
-            else:
-                mean_cv = 1.0
+                    # j(g1*g2, z) = f(g1*g2*z) / f(z)
+                    j_g12_z = _compute_transformation_factor(f_z, f_g12z)
 
-            transformation_results.append({
-                "transform_id": t,
-                "n_factors": len(factors),
-                "mean_cv": safe_float(mean_cv),
-                "cocycle_consistent": mean_cv < 0.5
-            })
+                    # Cocycle: j(g1*g2, z) should equal j(g1, g2*z) * j(g2, z)
+                    predicted = j_g1_g2z * j_g2_z
+                    actual = j_g12_z
+
+                    if abs(predicted) > 1e-10:
+                        cocycle_error = abs(actual - predicted) / (abs(predicted) + 1e-10)
+                    else:
+                        cocycle_error = abs(actual - predicted)
+
+                    func_cocycle_errors.append(cocycle_error)
+
+                mean_error = np.mean(func_cocycle_errors) if func_cocycle_errors else 1.0
+                cocycle_tests.append({
+                    "g1_id": t1,
+                    "g2_id": t2,
+                    "mean_cocycle_error": safe_float(mean_error)
+                })
 
         # Overall cocycle error for this model
-        model_cocycle_error = np.mean([r["mean_cv"] for r in transformation_results])
+        model_cocycle_error = np.mean([t["mean_cocycle_error"] for t in cocycle_tests]) if cocycle_tests else 1.0
         cocycle_errors.append(model_cocycle_error)
 
         results["per_model"][name] = {
-            "n_eigenfunctions": n_test,
+            "n_eigenfunctions": n_funcs,
             "n_transforms": n_transforms,
-            "transformations": transformation_results,
+            "n_cocycle_tests": len(cocycle_tests),
+            "cocycle_tests": cocycle_tests[:3],  # Keep first 3 for brevity
             "mean_cocycle_error": safe_float(model_cocycle_error)
         }
 
         if verbose:
-            print(f"    Eigenfunctions tested: {n_test}")
-            print(f"    Mean cocycle CV: {model_cocycle_error:.4f}")
+            print(f"    Eigenfunctions tested: {n_funcs}")
+            print(f"    Cocycle tests: {len(cocycle_tests)}")
+            print(f"    Mean cocycle error: {model_cocycle_error:.4f}")
 
     # Overall result
     mean_cocycle_error = np.mean(cocycle_errors)

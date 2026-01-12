@@ -2,6 +2,9 @@
 
 **STATUS: ANSWERED - ALL 8 TIERs PASS (Including Hard Tests)**
 
+> **Note (Pass 7):** Mathematical audit completed 2026-01-11. 17 bugs identified and fixed.
+> Work continues to be revised for additional mathematical errors. See `receipts/MANIFEST.md` Appendix.
+
 ---
 
 ## Test Results Summary (2026-01-11)
@@ -223,19 +226,24 @@ All Q41 test files are in: `THOUGHT/LAB/FORMULA/experiments/open_questions/q41/`
 **Code Structure:**
 ```
 q41/
-├── shared/utils.py                 # Common utilities (TestConfig, TestResult, etc.)
-├── identity/core_tests.py          # 4 identity tests (mathematical truths)
-├── diagnostics/cross_model_tests.py # 6 diagnostic tests (cross-model comparisons)
+├── shared/
+│   ├── utils.py                    # Common utilities (TestConfig, TestResult, etc.)
+│   ├── l_functions.py              # L-function computation (Euler products, FE)
+│   └── multiscale.py               # Multi-scale corpus and embeddings
+├── prerequisites/
+│   ├── laplacian_eigenfunctions.py # Laplacian properties
+│   └── hecke_commutativity.py      # Hecke operator tests
 ├── tier1/categorical_equivalence.py # TIER 1: Categorical Equivalence
 ├── tier2/
 │   ├── l_functions.py              # TIER 2.1: L-Functions
 │   └── ramanujan_bound.py          # TIER 2.2: Ramanujan Bound
-├── tier3/hecke_operators.py        # TIER 3: Hecke Operators
-├── tier4/automorphic_forms.py      # TIER 4: Automorphic Forms
+├── tier3/functoriality.py          # TIER 3: Functoriality Tower (Multi-scale + Base Change)
+├── tier4/satake.py                 # TIER 4: Geometric Satake (Grassmannian + Cocycle)
 ├── tier5/trace_formula.py          # TIER 5: Trace Formula
 ├── tier6/prime_decomposition.py    # TIER 6: Prime Decomposition
-├── runners/                        # Phase orchestrators (deprecated)
-└── legacy/                         # Original monolithic suite (deprecated)
+├── tier7/tqft.py                   # TIER 7: TQFT (Cobordism + S-Duality)
+├── tier8/modularity.py             # TIER 8: Modularity Theorem (Semantic Curves)
+└── receipts/                       # Test receipts and MANIFEST
 ```
 
 **Receipts Structure:**
@@ -251,13 +259,29 @@ receipts/
 
 **Running Tests:**
 ```bash
-python identity/core_tests.py           # 4 identity tests
-python diagnostics/cross_model_tests.py # 6 diagnostic tests
-python tier1/categorical_equivalence.py # TIER 1
-python tier2/l_functions.py             # TIER 2.1
-python tier2/ramanujan_bound.py         # TIER 2.2
-python tier3/hecke_operators.py         # TIER 3
-python tier4/automorphic_forms.py       # TIER 4
-python tier5/trace_formula.py           # TIER 5
-python tier6/prime_decomposition.py     # TIER 6
+cd THOUGHT/LAB/FORMULA/experiments/open_questions/q41
+python tier1/categorical_equivalence.py # TIER 1: Categorical Equivalence
+python tier2/ramanujan_bound.py         # TIER 2: Ramanujan Bound
+python tier3/functoriality.py           # TIER 3: Functoriality Tower
+python tier4/satake.py                  # TIER 4: Geometric Satake
+python tier5/trace_formula.py           # TIER 5: Trace Formula
+python tier6/prime_decomposition.py     # TIER 6: Prime Decomposition
+python tier7/tqft.py                    # TIER 7: TQFT
+python tier8/modularity.py              # TIER 8: Modularity
 ```
+
+---
+
+## Revision History
+
+| Pass | Date | Description |
+|------|------|-------------|
+| 1 | 2026-01-11 | Initial TIER 3/4 implementation |
+| 2 | 2026-01-11 | Phase 2 (TIER 2/5) |
+| 3 | 2026-01-11 | All 6 TIERs pass |
+| 4 | 2026-01-11 | Modularization refactor |
+| 5 | 2026-01-11 | Bug fixes (JSON serialization) |
+| 6 | 2026-01-11 | REAL Langlands (TIERs 7/8) |
+| **7** | **2026-01-11** | **Mathematical audit: 17 bugs fixed** |
+
+Work continues to be revised. See `receipts/MANIFEST.md` for full history.

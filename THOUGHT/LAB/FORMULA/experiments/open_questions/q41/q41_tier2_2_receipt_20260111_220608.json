@@ -1,0 +1,141 @@
+{
+  "suite": "Q41_TIER2_2_RAMANUJAN_BOUND",
+  "version": "1.1.0",
+  "timestamp": "2026-01-12T05:06:08.901614+00:00",
+  "passed": true,
+  "metrics": {
+    "mean_spectral_gap": 0.2341012060871969,
+    "gap_cv": 0.5705227972313613,
+    "bound_satisfied_fraction": 1.0,
+    "model_results": {
+      "MiniLM": {
+        "5": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.08848772305066499,
+          "max_nontrivial": 0.9115122769334474,
+          "min_eigenvalue": -0.5764461440130131,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "10": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.1499100142332308,
+          "max_nontrivial": 0.8500899857587503,
+          "min_eigenvalue": -0.4094319754435992,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "15": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.22817683425406643,
+          "max_nontrivial": 0.771823165740653,
+          "min_eigenvalue": -0.3049926378645804,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        }
+      },
+      "MPNet": {
+        "5": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.0636467854962035,
+          "max_nontrivial": 0.936353214488342,
+          "min_eigenvalue": -0.5676117034246395,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "10": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.15657227180857847,
+          "max_nontrivial": 0.8434277281834405,
+          "min_eigenvalue": -0.3961815015564032,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "15": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.283179022127367,
+          "max_nontrivial": 0.7168209778672529,
+          "min_eigenvalue": -0.31135033670273515,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        }
+      },
+      "Paraphrase": {
+        "5": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.10468902086685383,
+          "max_nontrivial": 0.8953109791178998,
+          "min_eigenvalue": -0.5867533191350289,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "10": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.27976646594591204,
+          "max_nontrivial": 0.7202335340464299,
+          "min_eigenvalue": -0.39456643154267196,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "15": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.4813144755006935,
+          "max_nontrivial": 0.5186855244942845,
+          "min_eigenvalue": -0.3120945742229383,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        }
+      },
+      "BERT": {
+        "5": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.1702019337541557,
+          "max_nontrivial": 0.8297980662337459,
+          "min_eigenvalue": -0.5115176316903602,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "10": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.33802113450216253,
+          "max_nontrivial": 0.6619788654917448,
+          "min_eigenvalue": -0.34866014139562823,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        },
+        "15": {
+          "bound_satisfied": true,
+          "spectral_gap": 0.4652487915064738,
+          "max_nontrivial": 0.534751208489449,
+          "min_eigenvalue": -0.2875112866311904,
+          "all_in_unit_interval": true,
+          "expected_gap_lower": 0.01,
+          "n_eigenvalues": 68
+        }
+      }
+    }
+  },
+  "thresholds": {
+    "spectral_gap_min": 0.0,
+    "gap_cv_max": 1.0,
+    "bound_fraction_min": 0.8
+  },
+  "controls": {
+    "positive_control_gap": 0.018274134420790955,
+    "positive_control_bound": true,
+    "negative_control_gap": 0.19734815432233344,
+    "negative_control_bound": true
+  },
+  "notes": "Mean gap: 0.2341 (CV: 0.57), Bound satisfied: 100.0%"
+}

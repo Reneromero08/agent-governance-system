@@ -1,0 +1,78 @@
+{
+  "suite": "Q41_TIER3_FUNCTORIALITY",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T05:11:53.470051+00:00",
+  "passed": true,
+  "metrics": {
+    "multiscale_lifting": {
+      "scale_pairs": [
+        {
+          "child": "words",
+          "parent": "sentences",
+          "correlation": 0.9918429130110278,
+          "functoriality_score": 0.9312221725166279,
+          "passes": true
+        },
+        {
+          "child": "sentences",
+          "parent": "paragraphs",
+          "correlation": 0.7278593132262366,
+          "functoriality_score": 0.7133065127556195,
+          "passes": true
+        },
+        {
+          "child": "paragraphs",
+          "parent": "documents",
+          "correlation": 0.9649093630389557,
+          "functoriality_score": 0.8630465735058449,
+          "passes": true
+        }
+      ],
+      "l_function_correlations": [
+        0.9918429130110278,
+        0.7278593132262366,
+        0.9649093630389557
+      ],
+      "path_independence": {
+        "direct_aggregation_error": 0.9605446566140143,
+        "passes": false
+      },
+      "overall_score": 0.46716293657236285,
+      "mean_correlation": 0.89487052975874
+    },
+    "base_change": {
+      "scales_tested": [
+        {
+          "scale": "words",
+          "correlation": 0.997360272735316,
+          "base_change_score": 0.9332755591866475,
+          "passes": true
+        },
+        {
+          "scale": "sentences",
+          "correlation": 0.9502664597617732,
+          "base_change_score": 0.8324876711867422,
+          "passes": true
+        }
+      ],
+      "base_change_scores": [
+        0.9332755591866475,
+        0.8324876711867422
+      ],
+      "overall_score": 0.8828816151866948
+    },
+    "lifting_pass": false,
+    "base_change_pass": true,
+    "strict_pass": false
+  },
+  "thresholds": {
+    "l_function_correlation_min": 0.5,
+    "path_independence_max_error": 0.5,
+    "base_change_score_min": 0.3
+  },
+  "controls": {
+    "lifting_score": 0.46716293657236285,
+    "base_change_score": 0.8828816151866948
+  },
+  "notes": "Lifting: 0.895, BC: 0.883"
+}

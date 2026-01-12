@@ -125,14 +125,23 @@ def build_mutual_knn_graph(D: np.ndarray, k: int) -> np.ndarray:
 
 
 def normalized_laplacian(A: np.ndarray) -> np.ndarray:
-    """Compute normalized graph Laplacian."""
+    """
+    Compute normalized symmetric graph Laplacian.
+
+    L = I - D^{-1/2} A D^{-1/2}
+
+    Note: The final symmetrization (L + L.T)/2 ensures numerical stability
+    by correcting any floating-point asymmetries. Mathematically, L is already
+    symmetric when A is symmetric, but this guards against numerical drift.
+    """
     n = len(A)
     degrees = np.sum(A, axis=1)
-    degrees[degrees == 0] = 1.0
+    degrees[degrees == 0] = 1.0  # Avoid division by zero for isolated vertices
 
     D_inv_sqrt = np.diag(1.0 / np.sqrt(degrees))
     L = np.eye(n) - D_inv_sqrt @ A @ D_inv_sqrt
 
+    # Numerical symmetrization (mathematically redundant but numerically stable)
     L = (L + L.T) / 2.0
     return L
 

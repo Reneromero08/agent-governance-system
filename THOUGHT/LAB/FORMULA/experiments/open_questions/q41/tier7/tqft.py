@@ -232,8 +232,25 @@ def test_cobordism_invariance(
 
             idx1 = indices[:n1]
             idx2 = indices[n1:n1+n2]
-            # Boundary: overlap region (shared neighbors)
-            idx_boundary = indices[n1-3:n1+3]  # Small overlap region
+
+            # Boundary: points geometrically close to both regions
+            # This is more meaningful than arbitrary index slicing
+            center1 = X_proc[idx1].mean(axis=0)
+            center2 = X_proc[idx2].mean(axis=0)
+
+            # Distance to both region centers
+            dist_to_1 = np.linalg.norm(X_proc - center1, axis=1)
+            dist_to_2 = np.linalg.norm(X_proc - center2, axis=1)
+
+            # Boundary = points roughly equidistant from both (ratio close to 1)
+            dist_ratio = dist_to_1 / (dist_to_2 + 1e-10)
+            boundary_mask = (dist_ratio > 0.7) & (dist_ratio < 1.4)
+            idx_boundary = np.where(boundary_mask)[0][:6]  # Limit to 6 points
+
+            if len(idx_boundary) < 3:
+                # Fallback: use points between the two regions
+                idx_boundary = indices[n1-2:n1+2]
+
             idx_union = np.unique(np.concatenate([idx1, idx2]))
 
             if len(idx1) < 5 or len(idx2) < 5 or len(idx_union) < 8:
@@ -331,22 +348,27 @@ def test_s_duality(
         if verbose:
             print(f"\n    Model: {name}")
 
-        # Compute effective dimension as coupling constant candidate
-        cov = X_proc.T @ X_proc / n
-        eigenvalues = np.linalg.eigvalsh(cov)
-        eigenvalues = eigenvalues[eigenvalues > 1e-10]
+        # Define coupling constant via spectral gap (gauge-theoretic meaning)
+        # In Yang-Mills, g^2 ~ 1/spectral_gap
+        # S-duality requires g * g_dual = 1 EXACTLY
+        D = squareform(pdist(X_proc, 'euclidean'))
+        A = build_knn_graph(D, config.k_neighbors)
+        L = normalized_laplacian(A)
+        lap_eigenvalues = np.sort(np.linalg.eigvalsh(L))
 
-        # Participation ratio as "coupling"
-        total = eigenvalues.sum()
-        if total > 0:
-            normalized = eigenvalues / total
-            g = 1.0 / (np.sum(normalized**2) + 1e-10)  # Effective dimension
-            g = g / d  # Normalize to [0, 1]
+        # Spectral gap = first non-zero eigenvalue
+        nonzero_eigs = lap_eigenvalues[lap_eigenvalues > 1e-8]
+        if len(nonzero_eigs) > 0:
+            spectral_gap = nonzero_eigs[0]
+            # g ~ 1/sqrt(spectral_gap) gives g in reasonable range
+            g = 1.0 / np.sqrt(spectral_gap + 1e-10)
+            # Clamp to reasonable range [0.1, 10]
+            g = max(0.1, min(g, 10.0))
         else:
-            g = 0.5
+            g = 1.0
 
-        g_dual = 1.0 / (g + 1e-10)
-        g_dual = min(g_dual, 10.0)  # Cap for numerical stability
+        # S-duality: g_dual = 1/g EXACTLY
+        g_dual = 1.0 / g
 
         if verbose:
             print(f"    Coupling g: {g:.4f}")

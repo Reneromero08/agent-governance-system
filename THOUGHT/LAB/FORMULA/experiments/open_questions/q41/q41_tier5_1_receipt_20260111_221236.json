@@ -1,0 +1,226 @@
+{
+  "suite": "Q41_TIER5_1_TRACE_FORMULA",
+  "version": "1.1.0",
+  "timestamp": "2026-01-12T05:12:36.679451+00:00",
+  "passed": true,
+  "metrics": {
+    "mean_abs_correlation": 0.31548318186927615,
+    "mean_significant_fraction": 0.625,
+    "model_results": {
+      "MiniLM": {
+        "correlations": {
+          "heat_t0.1_vs_clustering": {
+            "correlation": -0.0759185585811172,
+            "pvalue": 0.5383415573283364,
+            "significant": false
+          },
+          "heat_t0.5_vs_clustering": {
+            "correlation": 0.006346107994282678,
+            "pvalue": 0.9590373578522808,
+            "significant": false
+          },
+          "heat_t1.0_vs_clustering": {
+            "correlation": 0.08835298175295038,
+            "pvalue": 0.47369957518808803,
+            "significant": false
+          },
+          "heat_t2.0_vs_clustering": {
+            "correlation": 0.18246125314934244,
+            "pvalue": 0.13642109012407364,
+            "significant": false
+          },
+          "heat_t0.1_vs_degree": {
+            "correlation": 0.18284864199664302,
+            "pvalue": 0.13557649986211948,
+            "significant": false
+          },
+          "heat_t0.5_vs_degree": {
+            "correlation": 0.23337730538864285,
+            "pvalue": 0.055449343564906675,
+            "significant": false
+          },
+          "heat_t1.0_vs_degree": {
+            "correlation": 0.29089562570434896,
+            "pvalue": 0.016101449570615094,
+            "significant": true
+          },
+          "heat_t2.0_vs_degree": {
+            "correlation": 0.38645616820797746,
+            "pvalue": 0.0011332071884839622,
+            "significant": true
+          }
+        },
+        "mean_abs_correlation": 0.18083208034691312,
+        "significant_count": 2,
+        "total_tests": 8,
+        "spectral_gap": 0.14991001423288852,
+        "spectral_variance": 0.07997092970779927,
+        "mean_clustering": 0.39754731357868506,
+        "degree_variance": 0.015393718762014605
+      },
+      "MPNet": {
+        "correlations": {
+          "heat_t0.1_vs_clustering": {
+            "correlation": -0.0019969812657501113,
+            "pvalue": 0.9871049641384636,
+            "significant": false
+          },
+          "heat_t0.5_vs_clustering": {
+            "correlation": 0.14082226796505964,
+            "pvalue": 0.25202709931365685,
+            "significant": false
+          },
+          "heat_t1.0_vs_clustering": {
+            "correlation": 0.25897274980461293,
+            "pvalue": 0.03296763510917716,
+            "significant": true
+          },
+          "heat_t2.0_vs_clustering": {
+            "correlation": 0.36750797517634737,
+            "pvalue": 0.002049077073240461,
+            "significant": true
+          },
+          "heat_t0.1_vs_degree": {
+            "correlation": 0.47134244927393526,
+            "pvalue": 4.9706415485542226e-05,
+            "significant": true
+          },
+          "heat_t0.5_vs_degree": {
+            "correlation": 0.5056040168591868,
+            "pvalue": 1.0931128520402709e-05,
+            "significant": true
+          },
+          "heat_t1.0_vs_degree": {
+            "correlation": 0.5237228753330356,
+            "pvalue": 4.582990711777443e-06,
+            "significant": true
+          },
+          "heat_t2.0_vs_degree": {
+            "correlation": 0.5369569101692533,
+            "pvalue": 2.3515468121556273e-06,
+            "significant": true
+          }
+        },
+        "mean_abs_correlation": 0.3508657782308976,
+        "significant_count": 6,
+        "total_tests": 8,
+        "spectral_gap": 0.1565722718083096,
+        "spectral_variance": 0.07938550922199446,
+        "mean_clustering": 0.4344040884612711,
+        "degree_variance": 0.016149815869859568
+      },
+      "Paraphrase": {
+        "correlations": {
+          "heat_t0.1_vs_clustering": {
+            "correlation": -0.4326021129692101,
+            "pvalue": 0.00022935038941811913,
+            "significant": true
+          },
+          "heat_t0.5_vs_clustering": {
+            "correlation": -0.3901278736323759,
+            "pvalue": 0.001006173776342989,
+            "significant": true
+          },
+          "heat_t1.0_vs_clustering": {
+            "correlation": -0.34324693214802665,
+            "pvalue": 0.004161874738966231,
+            "significant": true
+          },
+          "heat_t2.0_vs_clustering": {
+            "correlation": -0.2815502650114672,
+            "pvalue": 0.02002143902134601,
+            "significant": true
+          },
+          "heat_t0.1_vs_degree": {
+            "correlation": 0.14692557190839822,
+            "pvalue": 0.23184557140209466,
+            "significant": false
+          },
+          "heat_t0.5_vs_degree": {
+            "correlation": 0.2121797071827741,
+            "pvalue": 0.08237331840923408,
+            "significant": false
+          },
+          "heat_t1.0_vs_degree": {
+            "correlation": 0.2954049489261338,
+            "pvalue": 0.014458827843380402,
+            "significant": true
+          },
+          "heat_t2.0_vs_degree": {
+            "correlation": 0.4573503904878353,
+            "pvalue": 8.820649863651789e-05,
+            "significant": true
+          }
+        },
+        "mean_abs_correlation": 0.3199234752832777,
+        "significant_count": 6,
+        "total_tests": 8,
+        "spectral_gap": 0.2797664659445324,
+        "spectral_variance": 0.07610433331201827,
+        "mean_clustering": 0.43711755594616286,
+        "degree_variance": 0.015408804578253868
+      },
+      "BERT": {
+        "correlations": {
+          "heat_t0.1_vs_clustering": {
+            "correlation": -0.4840427599326768,
+            "pvalue": 2.889064865575813e-05,
+            "significant": true
+          },
+          "heat_t0.5_vs_clustering": {
+            "correlation": -0.4933249014454284,
+            "pvalue": 1.9166001330291623e-05,
+            "significant": true
+          },
+          "heat_t1.0_vs_clustering": {
+            "correlation": -0.5033413831968453,
+            "pvalue": 1.2142569758408764e-05,
+            "significant": true
+          },
+          "heat_t2.0_vs_clustering": {
+            "correlation": -0.5163845773938157,
+            "pvalue": 6.556273727075083e-06,
+            "significant": true
+          },
+          "heat_t0.1_vs_degree": {
+            "correlation": 0.12766239916022168,
+            "pvalue": 0.29951872398847246,
+            "significant": false
+          },
+          "heat_t0.5_vs_degree": {
+            "correlation": 0.22516114311051322,
+            "pvalue": 0.06487969785419542,
+            "significant": false
+          },
+          "heat_t1.0_vs_degree": {
+            "correlation": 0.35032583226417563,
+            "pvalue": 0.003403555592844594,
+            "significant": true
+          },
+          "heat_t2.0_vs_degree": {
+            "correlation": 0.5822481524244534,
+            "pvalue": 1.905881353451093e-07,
+            "significant": true
+          }
+        },
+        "mean_abs_correlation": 0.41031139361601626,
+        "significant_count": 6,
+        "total_tests": 8,
+        "spectral_gap": 0.3380211345017083,
+        "spectral_variance": 0.0606500921917035,
+        "mean_clustering": 0.5074570182777276,
+        "degree_variance": 0.020600688282129884
+      }
+    }
+  },
+  "thresholds": {
+    "correlation_min": 0.2,
+    "significant_fraction_min": 0.3
+  },
+  "controls": {
+    "positive_control_correlation": 0.5628957096410605,
+    "negative_control_correlation": 0.24645238601526115,
+    "note": "Tests spectral/geometric correspondence (not just trace equality)"
+  },
+  "notes": "Mean |corr|: 0.315, Significant: 62.5%"
+}

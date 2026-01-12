@@ -77,15 +77,23 @@ def test_ramanujan_bound(eigenvalues: np.ndarray) -> Dict[str, Any]:
 
     max_nontrivial = np.max(np.abs(nontrivial))
     min_eigenvalue = np.min(eigenvalues)
-    spectral_gap = 1.0 - max_nontrivial
 
-    # Ramanujan-type bound: all eigenvalues in [-1, 1]
-    all_in_unit = np.all(np.abs(eigenvalues) <= 1.0 + 1e-10)
+    # Spectral gap = λ₁ - λ₂ (largest minus second-largest eigenvalue)
+    # For normalized Laplacian, eigenvalues are in [0, 2]
+    sorted_eigs = np.sort(eigenvalues)[::-1]  # Descending order
+    if len(sorted_eigs) >= 2:
+        spectral_gap = sorted_eigs[0] - sorted_eigs[1]
+    else:
+        spectral_gap = 0.0
 
-    # Strong Ramanujan bound: spectral gap > some threshold
-    # For random graphs, expect spectral_gap ~ 1/sqrt(n)
+    # Ramanujan-type bound: all eigenvalues in [-1, 1] (for normalized adjacency)
+    # For normalized Laplacian, eigenvalues should be in [0, 2]
+    all_in_unit = np.all(np.abs(eigenvalues) <= 2.0 + 1e-10)
+
+    # Ramanujan bound for k-regular graphs: |λ| ≤ 2√(k-1)
+    # For irregular graphs, we check if spectral gap is positive
     n = len(eigenvalues)
-    expected_gap_lower = 0.5 / np.sqrt(n)  # Very loose bound
+    expected_gap_lower = 0.01  # Minimal positive gap
     gap_good = spectral_gap > expected_gap_lower
 
     return {

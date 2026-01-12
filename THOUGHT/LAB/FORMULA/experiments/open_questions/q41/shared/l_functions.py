@@ -157,7 +157,8 @@ def compute_euler_product(
         p = p_idx + 2  # Start from 2 like actual primes
 
         for i, s in enumerate(s_values):
-            if np.real(s) > 1:
+            # Allow computation for Re(s) > 0 (finite product converges)
+            if np.real(s) > 0:
                 # Classical form: (1 - a_p / p^s)^{-1}
                 a_p = d_p / (np.linalg.norm(primes, axis=1).mean() + 1e-10)  # Normalized coefficient
                 local_factor = 1.0 / (1.0 - a_p * (p ** (-s)) + 1e-10)
@@ -396,9 +397,14 @@ def compare_l_functions_cross_lingual(
     s_values: np.ndarray
 ) -> Dict[str, Any]:
     """
-    Compare L-functions across languages for base change.
+    Compare L-functions across languages for base change analog.
 
-    Base change identity: L(s, BC(π_EN)) = L(s, π_ZH) * ε(s)
+    In classical Langlands, base change for GL(n) gives:
+    L(s, BC_{K/F}(π)) = prod_{σ ∈ Gal(K/F)} L(s, π^σ)
+
+    For our semantic analog, we test if L_EN and L_ZH are related by
+    a consistent scaling factor (epsilon), indicating structural preservation
+    across the cross-lingual embedding.
     """
     # Similar to cross-scale comparison
     mag_en = np.abs(L_en)

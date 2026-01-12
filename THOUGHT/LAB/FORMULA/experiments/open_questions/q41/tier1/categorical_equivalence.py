@@ -93,11 +93,18 @@ def compute_spectral_preservation(X1: np.ndarray, X2_aligned: np.ndarray, k: int
     A1 = build_knn_graph(X1, k)
     A2 = build_knn_graph(X2_aligned, k)
 
-    # Build Laplacians
-    D1 = np.diag(A1.sum(axis=1))
-    D2 = np.diag(A2.sum(axis=1))
-    L1 = D1 - A1
-    L2 = D2 - A2
+    # Build normalized symmetric Laplacians: L = I - D^{-1/2} A D^{-1/2}
+    # This ensures eigenvalues are in [0, 2], enabling proper spectral comparison
+    def normalized_laplacian(A):
+        n = len(A)
+        degrees = A.sum(axis=1)
+        degrees[degrees == 0] = 1.0  # Avoid division by zero
+        D_inv_sqrt = np.diag(1.0 / np.sqrt(degrees))
+        L = np.eye(n) - D_inv_sqrt @ A @ D_inv_sqrt
+        return (L + L.T) / 2.0  # Ensure symmetry for numerical stability
+
+    L1 = normalized_laplacian(A1)
+    L2 = normalized_laplacian(A2)
 
     # Get eigenvalues
     eigs1 = np.linalg.eigvalsh(L1)
@@ -170,10 +177,18 @@ def test_cross_model_functor(
 
 def compute_betti_numbers(X: np.ndarray, max_dim: int = 2, epsilon_percentile: int = 10) -> List[int]:
     """
-    Compute approximate Betti numbers via Rips complex filtration.
+    Compute APPROXIMATE Betti numbers via Rips complex filtration.
 
-    Uses a simplified approach: count connected components (β₀),
-    cycles (β₁), and voids (β₂) at a fixed scale.
+    WARNING: This uses heuristic approximations, NOT rigorous persistent homology.
+    For rigorous Betti numbers, use a library like ripser or gudhi.
+
+    Approximations used:
+    - β₀: Connected components (exact via BFS)
+    - β₁: E - V + β₀ - triangles (heuristic, undercounts cycles filled by triangles)
+    - β₂: triangles/4 - edges/6 (rough heuristic for voids)
+
+    These heuristics capture topological trends but are not mathematically rigorous.
+    The primary test uses β₀ consistency, which IS exact.
     """
     n = X.shape[0]
     dists = squareform(pdist(X, 'euclidean'))

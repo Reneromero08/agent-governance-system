@@ -82,6 +82,12 @@ def test_factorization_uniqueness(X: np.ndarray, n_primes: int, n_trials: int = 
     for i in range(1, n_trials):
         # Align via optimal permutation + rotation
         # Use Hungarian algorithm approximation via correlation matrix
+        # NOTE: np.corrcoef stacks rows and computes (2*n_primes, 2*n_primes) correlation.
+        # We extract cross-correlation block [:n_primes, n_primes:] of shape (n_primes, n_primes).
+        # This requires n_primes > 1 and works for typical embedding dimensions (d > n_primes).
+        if reference.shape[0] < 2 or prime_bases[i].shape[0] < 2:
+            alignment_scores.append(0.0)
+            continue
         corr_matrix = np.abs(np.corrcoef(reference, prime_bases[i])[:n_primes, n_primes:])
 
         # Greedy matching
