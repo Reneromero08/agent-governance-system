@@ -115,6 +115,110 @@ class DatabaseCassette(ABC):
             return "ALIGNED"
         return "UNSYNCED"
 
+    def verify_sync(self, remote_sync_tuple: Dict) -> Dict:
+        """Verify sync against a remote sync tuple.
+
+        Per CODEBOOK_SYNC_PROTOCOL Section 5.1: Exact match policy.
+
+        Args:
+            remote_sync_tuple: Sync tuple from remote party
+
+        Returns:
+            Dict with match status, mismatches, and R-value
+        """
+        local_tuple = self.get_sync_tuple()
+        mismatches = []
+
+        # Critical fields for exact match
+        critical_fields = ['codebook_sha256', 'kernel_version', 'tokenizer_id']
+
+        for field in critical_fields:
+            local_val = local_tuple.get(field, '')
+            remote_val = remote_sync_tuple.get(field, '')
+            if local_val != remote_val:
+                mismatches.append(field)
+
+        is_match = len(mismatches) == 0
+
+        # Compute R-value (simplified)
+        if not is_match:
+            r_value = 0.0
+        else:
+            r_value = 1.0
+
+        return {
+            'matched': is_match,
+            'blanket_status': 'ALIGNED' if is_match else 'DISSOLVED',
+            'mismatches': mismatches,
+            'r_value': r_value,
+            'local_tuple': local_tuple,
+            'remote_tuple': remote_sync_tuple
+        }
+
+    def on_codebook_change(self) -> Dict:
+        """Handle codebook change event.
+
+        Invalidates cached state and returns new blanket status.
+        Called when codebook is known to have changed.
+
+        Returns:
+            Dict with invalidation result
+        """
+        # Invalidate caches
+        old_hash = self._codebook_hash_cache
+        self._codebook_cache = None
+        self._codebook_hash_cache = None
+
+        # Recompute
+        new_hash = self._compute_codebook_hash()
+
+        return {
+            'old_hash': old_hash[:16] if old_hash else None,
+            'new_hash': new_hash[:16] if new_hash else None,
+            'hash_changed': old_hash != new_hash,
+            'blanket_status': self.get_blanket_status()
+        }
+
+    def get_blanket_health(self, session_ttl: int = 3600, elapsed_seconds: float = 0) -> Dict:
+        """Get blanket health metrics per CODEBOOK_SYNC_PROTOCOL Section 8.4.
+
+        Args:
+            session_ttl: Session TTL in seconds
+            elapsed_seconds: Time since last sync
+
+        Returns:
+            Dict with health metrics
+        """
+        # Base health from blanket status
+        status = self.get_blanket_status()
+        if status == "ALIGNED":
+            r_value = 1.0
+        elif status == "PENDING":
+            r_value = 0.6
+        else:
+            r_value = 0.0
+
+        # TTL factor
+        ttl_fraction = max(0, 1 - elapsed_seconds / session_ttl) if session_ttl > 0 else 0
+
+        # Simple health computation
+        health = r_value * 0.6 + ttl_fraction * 0.4
+
+        # Determine warning
+        warning = None
+        if health < 0.5:
+            warning = "HEALTH_CRITICAL"
+        elif health < 0.8:
+            warning = "HEALTH_DEGRADED"
+
+        return {
+            'blanket_health': round(health, 4),
+            'r_value': r_value,
+            'ttl_fraction': round(ttl_fraction, 4),
+            'blanket_status': status,
+            'warning': warning
+        }
+
     def handshake(self) -> Dict:
         """Return cassette metadata for network registration.
 

@@ -480,7 +480,7 @@ COMPOSITE_PTR: C3, C*, C&I, C|I, C3:build, L.C.3, 法.驗 (all operators)
 - [x] Full integration: `spc_integration.py`
 - [x] 68 tests passing (test_phase4.py + test_phase4_1.py)
 
-### 4.2 Codebook Sync (Phase 5.3.3 Integration)
+### 4.2 Codebook Sync (Phase 5.3.3 Integration) ✅
 
 **The handshake IS context synchronization:**
 ```python
@@ -495,12 +495,18 @@ def handshake(self) -> Dict:
 ```
 
 **Fail-closed rules:**
-- [ ] Codebook mismatch → reject
-- [ ] Hash mismatch → reject
-- [ ] Unknown symbol → reject
-- [ ] No "best effort" decoding
+- [x] Codebook mismatch → reject (`codebook_sync.py`, `network_hub.py`)
+- [x] Hash mismatch → reject (`CodebookSync.sync_tuples_match()`)
+- [x] Unknown symbol → reject (`spc_decoder.py` E_UNKNOWN_SYMBOL)
+- [x] No "best effort" decoding (R=0 on hash mismatch)
 
-### 4.3 Semantic Density Metrics
+**Implementation:**
+- [x] `codebook_sync.py` - Full sync protocol implementation
+- [x] `network_hub.py` - Sync enforcement in query routing
+- [x] `cassette_protocol.py` - `verify_sync()`, `get_blanket_health()`
+- [x] `test_phase4_2.py` - 30+ sync-specific tests
+
+### 4.3 Semantic Density Metrics ✅
 
 **Beyond token counting:**
 ```
@@ -510,11 +516,11 @@ M_required = multiplex_factor      (for N-nines equivalent)
 ```
 
 **Implementation:**
-- [ ] Track CDR per symbol (concepts activated / tokens used)
-- [ ] Track ECR (correct expansions / total expansions)
-- [ ] Goal: CDR > 10 (10+ concepts per token via semantic multiplexing)
+- [x] Track CDR per symbol (concepts activated / tokens used) - `spc_metrics.py`
+- [x] Track ECR (correct expansions / total expansions) - `SPCMetricsTracker`
+- [x] Goal: CDR > 10 (10+ concepts per token via semantic multiplexing) - `benchmark_cdr.py` (CDR 10.16)
 
-### 4.4 The Semantic Density Horizon
+### 4.4 The Semantic Density Horizon ✅
 
 **Token compression limit:** ~6 nines (can't send < 1 token)
 **Semantic density:** 9+ nines (1 token carries N concepts)
@@ -526,10 +532,10 @@ Chinese proof: 道 (dào) = path + principle + speech + method
 ```
 
 **Acceptance:**
-- [ ] SPC pointers resolve deterministically
-- [ ] Codebook sync fail-closed on mismatch
-- [ ] CDR measured and reported
-- [ ] ECR > 95% on benchmark set
+- [x] SPC pointers resolve deterministically (Phase 4.1)
+- [x] Codebook sync fail-closed on mismatch (Phase 4.2)
+- [x] CDR measured and reported (`spc_integration.py`)
+- [x] ECR > 95% on benchmark set - `benchmark_cdr.py` (ECR 100%)
 
 ---
 
