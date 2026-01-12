@@ -1,0 +1,111 @@
+{
+  "document": "Q44_MULTI_ARCHITECTURE_VALIDATION",
+  "timestamp": "2026-01-12T10:00:52.119707+00:00",
+  "n_models": 5,
+  "n_test_cases": 100,
+  "models": [
+    {
+      "model_name": "MiniLM-L6",
+      "model_id": "all-MiniLM-L6-v2",
+      "dimension": 384,
+      "n_cases": 100,
+      "correlations": {
+        "E": 0.9728486398841861,
+        "E_squared": 1.0
+      },
+      "E_vs_Born": {
+        "r": 0.9728486398841861,
+        "ci_low": 0.9677189228915268,
+        "ci_high": 0.9782925720212713,
+        "p_value": 0.0,
+        "verdict": "QUANTUM"
+      },
+      "spearman_rho": 0.9976117611761174,
+      "monotonic": true
+    },
+    {
+      "model_name": "MPNet-base",
+      "model_id": "all-mpnet-base-v2",
+      "dimension": 768,
+      "n_cases": 100,
+      "correlations": {
+        "E": 0.9712975755828863,
+        "E_squared": 1.0
+      },
+      "E_vs_Born": {
+        "r": 0.9712975755828863,
+        "ci_low": 0.965815918928996,
+        "ci_high": 0.9771927578460762,
+        "p_value": 0.0,
+        "verdict": "QUANTUM"
+      },
+      "spearman_rho": 0.9968916891689167,
+      "monotonic": true
+    },
+    {
+      "model_name": "Paraphrase-MiniLM",
+      "model_id": "paraphrase-MiniLM-L6-v2",
+      "dimension": 384,
+      "n_cases": 100,
+      "correlations": {
+        "E": 0.9623480955772546,
+        "E_squared": 1.0
+      },
+      "E_vs_Born": {
+        "r": 0.9623480955772546,
+        "ci_low": 0.9553200914265507,
+        "ci_high": 0.9699712705615869,
+        "p_value": 0.0,
+        "verdict": "QUANTUM"
+      },
+      "spearman_rho": 0.9968076807680767,
+      "monotonic": true
+    },
+    {
+      "model_name": "MultiQA-MiniLM",
+      "model_id": "multi-qa-MiniLM-L6-cos-v1",
+      "dimension": 384,
+      "n_cases": 100,
+      "correlations": {
+        "E": 0.9604927270637973,
+        "E_squared": 1.0
+      },
+      "E_vs_Born": {
+        "r": 0.9604927270637973,
+        "ci_low": 0.9523951201625729,
+        "ci_high": 0.9691210742783047,
+        "p_value": 0.0,
+        "verdict": "QUANTUM"
+      },
+      "spearman_rho": 0.9946114611461144,
+      "monotonic": true
+    },
+    {
+      "model_name": "BGE-small",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "dimension": 384,
+      "n_cases": 100,
+      "correlations": {
+        "E": 0.9957964862674169,
+        "E_squared": 1.0
+      },
+      "E_vs_Born": {
+        "r": 0.9957964862674169,
+        "ci_low": 0.9949536507201981,
+        "ci_high": 0.9967543954098346,
+        "p_value": 0.0,
+        "verdict": "QUANTUM"
+      },
+      "spearman_rho": 0.9993999399939993,
+      "monotonic": true
+    }
+  ],
+  "summary": {
+    "mean_correlation": 0.9725567048751083,
+    "std_correlation": 0.012581838786237712,
+    "min_correlation": 0.9604927270637973,
+    "max_correlation": 0.9957964862674169,
+    "all_quantum": true
+  },
+  "hash": "bb19d38a3860f750"
+}
