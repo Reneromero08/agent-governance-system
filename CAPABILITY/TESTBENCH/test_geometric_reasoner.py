@@ -167,9 +167,11 @@ class TestGeometricOperations:
 
         projected = GeometricOperations.project(query, [context])
 
-        # Should have high similarity with context
+        # Projection onto a single normalized basis vector gives perfect alignment
+        # (either parallel or anti-parallel depending on sign of initial inner product)
+        # So |E| should be very close to 1.0
         similarity = projected.E_with(context)
-        assert similarity > 0.5
+        assert abs(similarity) > 0.99, f"Projection should align with context: |E|={abs(similarity)}"
 
     def test_operations_have_receipts(self):
         """All operations should record receipts"""
