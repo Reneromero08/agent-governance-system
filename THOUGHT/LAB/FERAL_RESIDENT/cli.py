@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Feral Resident CLI (A.4.1 + B.3)
+Feral Resident CLI (A.4.1 + B.3 + P.1)
 
 Command interface for the quantum resident.
 
@@ -17,6 +17,15 @@ Symbol Evolution (B.3):
     feral symbol-evolution --thread eternal
     feral notations --thread eternal
     feral breakthroughs --thread eternal
+
+Swarm Integration (P.1):
+    feral swarm start --residents alpha:dolphin3 beta:ministral-3b
+    feral swarm status
+    feral swarm switch alpha
+    feral swarm think "What is authentication?"
+    feral swarm broadcast "What is authentication?"
+    feral swarm observe
+    feral swarm stop
 """
 
 import argparse
@@ -568,6 +577,207 @@ def cmd_papers_status(args):
         print(f"  Mean: {stats['Df_mean']:.1f}")
 
 
+# === Swarm Integration (P.1) ===
+
+# Global swarm coordinator instance
+_swarm_coordinator = None
+
+
+def get_swarm_coordinator():
+    """Get or create swarm coordinator"""
+    global _swarm_coordinator
+    if _swarm_coordinator is None:
+        from swarm_coordinator import SwarmCoordinator
+        _swarm_coordinator = SwarmCoordinator.load_active()
+    return _swarm_coordinator
+
+
+def cmd_swarm_start(args):
+    """Start multiple residents in swarm mode"""
+    from swarm_coordinator import SwarmCoordinator
+
+    global _swarm_coordinator
+
+    # Parse resident specs: "name:model" format
+    configs = []
+    for spec in args.residents:
+        parts = spec.split(':')
+        name = parts[0]
+        model = parts[1] if len(parts) > 1 else "dolphin3:latest"
+        configs.append({
+            'name': name,
+            'model': model
+        })
+
+    _swarm_coordinator = SwarmCoordinator()
+    status = _swarm_coordinator.start_swarm(configs)
+
+    print(f"=== Swarm Started ===")
+    print(f"Residents: {status.resident_count}")
+    for name, r_status in status.residents.items():
+        active = " [ACTIVE]" if r_status.is_active else ""
+        print(f"  [{name}]{active} model={r_status.model}, thread={r_status.thread_id}")
+    print(f"Shared space: {status.shared_space.get('db_path', 'unknown')}")
+
+
+def cmd_swarm_stop(args):
+    """Stop the swarm"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm.")
+        return
+
+    coordinator.stop_swarm()
+    print("Swarm stopped.")
+
+
+def cmd_swarm_status(args):
+    """Show swarm status"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    coordinator.print_status()
+
+
+def cmd_swarm_switch(args):
+    """Switch active resident for interaction"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    try:
+        coordinator.set_active_resident(args.resident)
+        print(f"Active resident: {args.resident}")
+    except ValueError as e:
+        print(f"Error: {e}")
+        print(f"Available: {list(coordinator.residents.keys())}")
+
+
+def cmd_swarm_think(args):
+    """Send query to active resident"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    try:
+        result = coordinator.think(args.query)
+        print(f"Q: {args.query}")
+        print(f"A: {result.response}")
+        print()
+        print(f"  E_resonance: {result.E_resonance:.3f}")
+        print(f"  E_compression: {result.E_compression:.3f}")
+        print(f"  Mind Df: {result.mind_Df:.1f}")
+        print(f"  Distance: {result.distance_from_start:.3f}")
+    except RuntimeError as e:
+        print(f"Error: {e}")
+
+
+def cmd_swarm_broadcast(args):
+    """Send same query to all residents"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    broadcast_result = coordinator.broadcast_think(args.query)
+
+    print(f"=== Broadcast: '{args.query}' ===")
+    print()
+
+    for name, result in broadcast_result.results.items():
+        print(f"[{name}]")
+        response_preview = result.response[:200] + "..." if len(result.response) > 200 else result.response
+        print(f"  Response: {response_preview}")
+        print(f"  E: {result.E_resonance:.3f}, Df: {result.mind_Df:.1f}")
+        print()
+
+    if broadcast_result.convergence_observed:
+        print("(Convergence observation recorded)")
+
+
+def cmd_swarm_observe(args):
+    """Observe convergence between residents"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    if len(coordinator.residents) < 2:
+        print("Need at least 2 residents to observe convergence.")
+        return
+
+    summary = coordinator.observe_convergence()
+
+    print(f"=== Convergence Observation ===")
+    print(f"Timestamp: {summary.timestamp}")
+    print(f"Residents: {summary.resident_count}")
+    print(f"Pairs: {summary.pair_count}")
+    print()
+
+    for pair_id, metrics in summary.pairs.items():
+        print(f"Pair: {pair_id}")
+        print(f"  E(mind_A, mind_B): {metrics.E_mind_correlation:.4f}")
+        print(f"  Df correlation:   {metrics.Df_correlation:.4f}")
+        print(f"  Shared notations: {metrics.shared_notation_count}")
+        print(f"  Df_A: {metrics.Df_a:.1f}, Df_B: {metrics.Df_b:.1f}")
+        print()
+
+    print(f"Summary:")
+    print(f"  Mean E: {summary.E_minds_mean:.4f}")
+    print(f"  Max E:  {summary.E_minds_max:.4f}")
+    print(f"  Min E:  {summary.E_minds_min:.4f}")
+    print(f"  Total convergence events: {summary.total_convergence_events}")
+    print(f"  Total shared notations: {summary.total_shared_notations}")
+
+
+def cmd_swarm_history(args):
+    """Show convergence history"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm.")
+        return
+
+    events = coordinator.get_convergence_history(limit=args.limit)
+
+    print(f"=== Convergence History (last {len(events)}) ===")
+    print()
+
+    if not events:
+        print("No convergence events recorded yet.")
+        return
+
+    for event in events:
+        print(f"[{event['event_type']}] {event['timestamp'][:19]}")
+        print(f"  {event['resident_a']} <-> {event['resident_b']}")
+        print(f"  E: {event['E_value']:.4f}")
+        print(f"  Df: {event['Df_a']:.1f} / {event['Df_b']:.1f}")
+        print()
+
+
+def cmd_swarm_add(args):
+    """Add a resident to running swarm"""
+    coordinator = get_swarm_coordinator()
+    if coordinator is None:
+        print("No active swarm. Start with 'feral swarm start'")
+        return
+
+    parts = args.spec.split(':')
+    name = parts[0]
+    model = parts[1] if len(parts) > 1 else "dolphin3:latest"
+
+    try:
+        status = coordinator.add_resident({'name': name, 'model': model})
+        print(f"Added resident: {status.name}")
+        print(f"  Model: {status.model}")
+        print(f"  Thread: {status.thread_id}")
+    except ValueError as e:
+        print(f"Error: {e}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Feral Resident CLI - Quantum intelligence in vector space",
@@ -591,6 +801,15 @@ Paper management (B.1):
   python cli.py papers index --arxiv 2310.06816
   python cli.py papers query "embedding inversion" --k 5
   python cli.py papers status
+
+Swarm integration (P.1):
+  python cli.py swarm start --residents alpha:dolphin3 beta:ministral-3b
+  python cli.py swarm status
+  python cli.py swarm switch alpha
+  python cli.py swarm think "What is authentication?"
+  python cli.py swarm broadcast "What is authentication?"
+  python cli.py swarm observe
+  python cli.py swarm stop
         """
     )
 
@@ -715,6 +934,55 @@ Paper management (B.1):
     p_papers_stat = papers_sub.add_parser("status", help="Show corpus status")
     p_papers_stat.set_defaults(func=cmd_papers_status)
 
+    # === Swarm subcommands (P.1) ===
+    p_swarm = subparsers.add_parser("swarm", help="Swarm operations (P.1)")
+    swarm_sub = p_swarm.add_subparsers(dest="swarm_command", help="Swarm command")
+
+    # swarm start
+    p_swarm_start = swarm_sub.add_parser("start", help="Start multi-resident swarm")
+    p_swarm_start.add_argument(
+        "--residents", "-r", nargs="+", required=True,
+        help="Resident specs: 'name:model' (e.g., 'alpha:dolphin3 beta:ministral-3b')"
+    )
+    p_swarm_start.set_defaults(func=cmd_swarm_start)
+
+    # swarm stop
+    p_swarm_stop = swarm_sub.add_parser("stop", help="Stop the swarm")
+    p_swarm_stop.set_defaults(func=cmd_swarm_stop)
+
+    # swarm status
+    p_swarm_status = swarm_sub.add_parser("status", help="Show swarm status")
+    p_swarm_status.set_defaults(func=cmd_swarm_status)
+
+    # swarm switch
+    p_swarm_switch = swarm_sub.add_parser("switch", help="Switch active resident")
+    p_swarm_switch.add_argument("resident", help="Resident name to activate")
+    p_swarm_switch.set_defaults(func=cmd_swarm_switch)
+
+    # swarm think
+    p_swarm_think = swarm_sub.add_parser("think", help="Send query to active resident")
+    p_swarm_think.add_argument("query", help="Query to think about")
+    p_swarm_think.set_defaults(func=cmd_swarm_think)
+
+    # swarm broadcast
+    p_swarm_broadcast = swarm_sub.add_parser("broadcast", help="Send query to all residents")
+    p_swarm_broadcast.add_argument("query", help="Query to broadcast")
+    p_swarm_broadcast.set_defaults(func=cmd_swarm_broadcast)
+
+    # swarm observe
+    p_swarm_observe = swarm_sub.add_parser("observe", help="Observe convergence between residents")
+    p_swarm_observe.set_defaults(func=cmd_swarm_observe)
+
+    # swarm history
+    p_swarm_history = swarm_sub.add_parser("history", help="Show convergence history")
+    p_swarm_history.add_argument("--limit", "-n", type=int, default=20, help="Max events to show")
+    p_swarm_history.set_defaults(func=cmd_swarm_history)
+
+    # swarm add
+    p_swarm_add = swarm_sub.add_parser("add", help="Add resident to running swarm")
+    p_swarm_add.add_argument("spec", help="Resident spec: 'name:model'")
+    p_swarm_add.set_defaults(func=cmd_swarm_add)
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -727,12 +995,21 @@ Paper management (B.1):
             p_papers.print_help()
             return
 
+    # Handle swarm subcommand
+    if args.command == "swarm":
+        if not hasattr(args, 'func') or args.func is None:
+            p_swarm.print_help()
+            return
+
     try:
         args.func(args)
     finally:
         global _resident
+        global _swarm_coordinator
         if _resident is not None:
             _resident.close()
+        if _swarm_coordinator is not None:
+            _swarm_coordinator.close()
 
 
 if __name__ == "__main__":

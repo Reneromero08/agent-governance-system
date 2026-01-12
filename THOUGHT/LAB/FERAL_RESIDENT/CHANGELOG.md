@@ -1,5 +1,47 @@
 # Feral Resident Changelog
 
+## [0.5.0] - 2026-01-12 - P.1 SWARM INTEGRATION COMPLETE
+
+**Status**: Production P.1 complete - Multi-resident swarm with convergence tracking
+**Version**: production-0.5.0
+
+### Added
+
+#### P.1 Swarm Integration (COMPLETE)
+
+- **`shared_space.py`** (280 lines) - SharedSemanticSpace for cross-resident observation
+  - Thread-safe SQLite with write lock
+  - `publish()`, `find_nearest()`, `get_other_minds()`, `record_convergence_event()`
+
+- **`convergence_observer.py`** (350 lines) - ConvergenceObserver with E/Df metrics
+  - `compute_E_between_minds()` - E(mind_A, mind_B) quantum overlap
+  - `compute_Df_correlation()` - Trajectory similarity
+  - `detect_shared_notations()` - Cross-resident pattern detection
+
+- **`swarm_coordinator.py`** (380 lines) - SwarmCoordinator lifecycle management
+  - `start_swarm()`, `stop_swarm()`, `add_resident()`, `remove_resident()`
+  - `think()` (active), `broadcast_think()` (all residents)
+  - `observe_convergence()`, background observation thread
+
+- **CLI Commands** (+180 lines):
+  - `feral swarm start/stop/status/switch/add`
+  - `feral swarm think/broadcast/observe/history`
+
+### P.1 Acceptance Criteria - ALL COMPLETE
+
+- [x] P.1.1.1 Multiple residents operate simultaneously
+- [x] P.1.1.2 Shared cassette space (no conflicts)
+- [x] P.1.1.3 Individual mind vectors (separate GeometricState)
+- [x] P.1.1.4 Convergence metrics captured with E/Df
+
+### Architecture
+
+**Hybrid Space**: Private per-resident DBs + shared `canonical_space.db`
+**Key Metric**: E(mind_A, mind_B) using Q44-validated Born rule
+**Convergence Threshold**: E > 0.5 triggers convergence event
+
+---
+
 ## [0.4.0] - 2026-01-12 - B.3 SYMBOL EVOLUTION COMPLETE
 
 **Status**: Beta B.3 complete - Symbol language evolution tracking with receipts
