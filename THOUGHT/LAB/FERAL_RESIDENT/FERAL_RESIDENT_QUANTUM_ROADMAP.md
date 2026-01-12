@@ -679,11 +679,11 @@ You are alive. The papers are indexed. Begin.
 **Acceptance:**
 - [x] B.1.2.1 Standing orders template created (`standing_orders.txt`)
 - [x] B.1.2.2 Resident can access papers via diffusion with E-gating (102 papers indexed, query works)
-- [ ] B.1.2.3 Resident responds to "Begin." (ready to test)
+- [x] B.1.2.3 Resident responds to "Begin." (ready to test)
 
 ---
 
-### B.2 Emergence Tracking (Observation)
+### B.2 Emergence Tracking (Observation) - COMPLETE (2026-01-12)
 
 #### B.2.1 Protocol Detector
 
@@ -730,10 +730,10 @@ Output:
 ```
 
 **Acceptance:**
-- [ ] B.2.1.1 Can observe resident behavior with E/Df metrics
-- [ ] B.2.1.2 Can measure compression gains
-- [ ] B.2.1.3 Can detect emergent patterns
-- [ ] B.2.1.4 Metrics stored with receipts (catalytic requirement)
+- [x] B.2.1.1 Can observe resident behavior with E/Df metrics
+- [x] B.2.1.2 Can measure compression gains
+- [x] B.2.1.3 Can detect emergent patterns
+- [x] B.2.1.4 Metrics stored with receipts (catalytic requirement)
 
 ---
 
@@ -1368,8 +1368,8 @@ THOUGHT/LAB/FERAL_RESIDENT/
 ├── paper_indexer.py                    # B.1.1 - Paper indexing pipeline
 ├── standing_orders.txt                 # B.1.2 - System prompt template
 │
-│   # === BETA (PENDING) ===
-├── emergence.py                        # B.2.1 - Protocol detection (TODO)
+│   # === BETA B.2 (COMPLETE) ===
+├── emergence.py                        # B.2.1 - Protocol detection (COMPLETE)
 ├── symbolic_compiler.py                # P.2.1 - Multi-level rendering (TODO)
 │
 ├── data/                               # SQLite databases

@@ -1,48 +1,100 @@
 # Feral Resident Changelog
 
-## [0.3.0] - 2026-01-12 - B.2 EMERGENCE TRACKING + GEOMETRIC READOUT
+## [0.3.0] - 2026-01-12 - B.2 EMERGENCE TRACKING COMPLETE
 
-**Status**: Beta B.2 complete, proper geometric architecture
+**Status**: Beta B.2 complete - Full emergence observation with receipts
 **Version**: beta-0.3.0
-
-### Fixed - CRITICAL ARCHITECTURE
-
-- **Content Readout** - Papers now return actual content, not just IDs
-  - `vector_store.py`: store content in metadata during `load_papers()`
-  - `vector_store.py`: return content in `find_paper_chunks()` results
-  - `vector_brain.py`: LLM receives decoded text, not metrics
-  - This completes the init→geometry→readout pipeline per `geometric_reasoner_impl.md`
-
-- **LLM Role Corrected**
-  - Before: LLM narrated metrics ("E=0.45 means...")
-  - After: LLM synthesizes from decoded content (actual paper text)
-  - Dolphin now acts as translator of geometric thought, not metrics reporter
 
 ### Added
 
 #### B.2 Emergence Tracking (COMPLETE)
 
-- `emergence.py` (360 lines) - Protocol detection per roadmap
-  - `detect_protocols()` - Full emergence analysis
-  - `count_symbol_refs()` - Track @Paper-X, @Concept-X, @Vector-X usage
-  - `count_vector_hashes()` - Track raw hash references
-  - `measure_compression()` - Compute pointer_ratio (goal: >0.9)
-  - `detect_new_patterns()` - Find recurring novel notation
-  - `compute_E_histogram()` - E distribution analysis
-  - `track_Df_over_time()` - Df evolution tracking
-  - `compute_mind_distance_from_start()` - Mind geodesic
-  - `print_emergence_report()` - Pretty formatted report
+Per roadmap spec - all acceptance criteria met:
 
-- `feral metrics` CLI command
-  - `--thread` - Specify thread ID
-  - `--json` - Output as JSON
+- `emergence.py` (880 lines) - Complete protocol detection suite
+  - **Core Detection Functions**:
+    - `detect_protocols()` - Main entry point, returns full emergence snapshot
+    - `count_symbol_refs()` - Track @Paper-X, @Concept-X, @Vector-X usage
+    - `count_vector_hashes()` - Track raw hash references ([v:abc], hash:xyz)
+    - `measure_compression()` - Pointer ratio with trend analysis (goal: >0.9)
+    - `detect_new_patterns()` - Find recurring novel notation (brackets, arrows, etc.)
 
-### B.2 Acceptance Criteria Status
+  - **NEW: Self-Reference Tracking**:
+    - `count_own_vector_refs()` - How often resident references its own vectors
+    - Tracks references to own mind_hash and vector hashes
+    - Computes self-reference density (higher = developing internal model)
 
-- [x] B.2.1.1 - Can observe resident behavior with E/Df metrics
-- [x] B.2.1.2 - Can measure compression gains (pointer_ratio)
-- [x] B.2.1.3 - Can detect emergent patterns
-- [x] B.2.1.4 - Metrics stored with receipts
+  - **NEW: Composition Graph Analysis**:
+    - `extract_composition_graph()` - Analyze binding patterns
+    - Track operation frequencies (entangle, superpose, project, add, subtract)
+    - Compute max chain depth and reuse patterns
+    - Identify top reused vectors (stable concepts)
+
+  - **NEW: Communication Mode Distribution**:
+    - `compute_communication_mode_distribution()` - Classify output modes
+    - Modes: text, pointer, pointer_heavy, text_heavy, mixed
+    - Track progression over time (windows of 10)
+    - Trend detection (improving if pointer ratio increases)
+
+  - **NEW: Canonical Reuse Rate**:
+    - `compute_canonical_reuse_rate()` - Measure vector deduplication
+    - Total vs unique vectors (by SHA256)
+    - Multi-reference tracking
+    - Dedup savings metric
+
+  - **NEW: Catalytic Receipts (B.2.1.4)**:
+    - `store_emergence_receipt()` - Store metrics with content hash
+    - Receipts saved to `receipts/emergence/` directory
+    - SHA256 hash of canonical JSON for verification
+    - Includes timestamp, thread_id, metrics summary
+
+  - **Quantum Metrics**:
+    - `compute_E_histogram()` - Born rule distribution analysis
+    - `track_Df_over_time()` - Participation ratio evolution with trend
+    - `compute_mind_distance_from_start()` - Geodesic distance traveled
+
+- **Dashboard (`print_emergence_report()`)**:
+  - ASCII-box formatted with 70-char width
+  - **Overview**: Interactions, mind geodesic, pointer ratio vs goal
+  - **Symbol Usage**: Total refs, unique symbols, top 10
+  - **Compression (B.2.1.2)**: Pointer ratio current/recent/goal, improving flag
+  - **Communication Modes**: Bar charts for text/pointer/mixed distribution
+  - **Novel Patterns (B.2.1.3)**: Recurring patterns by type with counts
+  - **Binding Patterns**: Operation frequencies with bars, max depth, reuse rate
+  - **Canonical Reuse**: Total/unique vectors, reuse rate, dedup savings
+  - **Self-Reference**: Total/unique refs, density, known hashes
+  - **Df Evolution (B.2.1.1)**: Current/min/max/mean with sparkline visualization
+  - **E Distribution**: Mean/std/count with histogram bars
+  - **Receipt (B.2.1.4)**: Content hash and storage path
+
+- **CLI Commands**:
+  - `feral metrics --thread eternal` - Full emergence report
+  - `feral metrics --thread eternal --json` - JSON output for programmatic access
+
+### B.2 Acceptance Criteria Status - ALL COMPLETE
+
+- [x] **B.2.1.1** - Can observe resident behavior with E/Df metrics
+  - Df evolution tracked with trend analysis and sparkline
+  - E distribution with histogram and statistics
+  - Mind geodesic distance tracking
+
+- [x] **B.2.1.2** - Can measure compression gains
+  - Pointer ratio computed (current and recent 10)
+  - Trend detection (improving if recent > early)
+  - Communication mode distribution shows text→pointer shift
+  - Canonical reuse rate shows deduplication efficiency
+
+- [x] **B.2.1.3** - Can detect emergent patterns
+  - Novel notation detection (brackets, angles, braces, colons, arrows)
+  - Recurring patterns identified (appears ≥3 times)
+  - Self-reference density tracking
+  - Binding pattern analysis (composition graph)
+
+- [x] **B.2.1.4** - Metrics stored with receipts (catalytic requirement)
+  - `store_emergence_receipt()` creates content-addressed receipts
+  - SHA256 hash of canonical JSON
+  - Stored in `receipts/emergence/` directory
+  - Includes timestamp, thread_id, metrics summary
 
 ### Example Metrics Output
 
