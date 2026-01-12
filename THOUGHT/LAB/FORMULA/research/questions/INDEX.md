@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.0.1 (2026-01-12 - Q7 ANSWERED: R is RG fixed point! CV=0.158 across 4 scales, 5/5 alternatives fail, 6/6 adversarial pass, 4/4 negative controls fail. 20/43 questions answered (46.5%).)*
+*Last updated: v4.1.0 (2026-01-12 - Q44 ADDED: Quantum Born Rule validation. Does R compute |⟨ψ|φ⟩|²? CRITICAL priority.)*
 
 ---
 
@@ -17,6 +17,7 @@
 | 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ✅ ANSWERED | **Semiosphere field `M:=log(R)` proven:** Phases 1-5 (4-domain transfer, stress, negctls, replication). Phase 4 geometry/dynamics. Phase 6-7 physical harness works (synthetic validators pass, EEG gates correct). Phase 8 (fundamental force) open as additional track. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
 | 6 | [IIT connection](critical/q06_iit_connection.md) | 1650 | ✅ ANSWERED | PROVEN: High R → High Phi (sufficient). High Phi ↛ High R (not necessary). R is a strict subset of Integration. R requires consensus (low dispersion), Phi allows synergy (high dispersion). XOR system: perfect accuracy (E=0) + high structure (Phi=1.5) + LOW R (0.36). |
+| 44 | [Quantum Born Rule](critical/q44_quantum_born_rule.md) | 1850 | ⏳ OPEN | Does R compute quantum projection probability \|⟨ψ\|φ⟩\|²? If r > 0.9 correlation: R is quantum. Q43 proves QGT structure, Q38 proves conservation, Q9 proves free energy. This is the LAST unknown. |
 
 ---
 
@@ -92,9 +93,10 @@
 **Cluster B: Scientific Rigor** (Q2, Q4, Q20)
 > What would falsify the theory, and what novel predictions can we test?
 
-**Cluster C: Theoretical Grounding** (Q6, Q9, Q14, Q15)
-> How does R relate to IIT (Phi), Free Energy, Bayesian inference, and category theory?
+**Cluster C: Theoretical Grounding** (Q6, Q9, Q14, Q15, Q44)
+> How does R relate to IIT (Phi), Free Energy, Bayesian inference, category theory, and quantum mechanics?
 > Q15: Bayesian inference connection - FALSIFIED (no significant correlations found)
+> Q44: **CRITICAL** - Does R = |⟨ψ|φ⟩|²? The final unknown for quantum hypothesis.
 
 **Cluster D: AGS Application** (Q10, Q17, Q19)
 > How can R improve alignment detection, governance gating, and value learning?
@@ -103,16 +105,16 @@
 
 ## Summary Statistics
 
-- **Total Questions:** 43
-- **Answered:** 19 (44.2%)
-- **Partially Answered:** 6 (14.0%)
-- **Open:** 18 (41.9%)
+- **Total Questions:** 44
+- **Answered:** 19 (43.2%)
+- **Partially Answered:** 6 (13.6%)
+- **Open:** 19 (43.2%)
 
 ### By Priority Level
 
 | Priority | Total | Answered | Partially | Open |
 |----------|-------|----------|-----------|------|
-| Critical | 7 | 6 | 1 | 0 |
+| Critical | 8 | 6 | 1 | 1 |
 | High | 15 | 9 | 3 | 3 |
 | Medium | 11 | 4 | 1 | 6 |
 | Lower | 8 | 0 | 1 | 7 |
