@@ -1,5 +1,57 @@
 # Feral Resident Changelog
 
+## [0.6.3] - 2026-01-12 - AUTO-ROUTING INTEGRATION
+
+**Status**: Cassette network auto-routing complete
+**Version**: production-0.6.3
+
+### Added
+
+#### Cassette Network Auto-Routing
+
+- **`GeometricCassetteNetwork.from_config()`** - Auto-discover cassettes from cassettes.json
+  - Loads all cassettes with `enable_geometric=True`
+  - Auto-discovers project root and config path
+  - Registers 9 cassettes: canon, governance, capability, navigation, direction, thought, memory, inbox, resident
+
+- **`GeometricCassetteNetwork.auto_discover()`** - Convenience method for auto-discovery
+
+- **`GeometricChat.with_auto_routing()`** - Factory method for quick setup
+  - Example: `chat = GeometricChat.with_auto_routing()`
+  - Auto-loads cassette network from config
+  - Enables `respond_with_retrieval()` for automatic context
+
+- **`GeometricChat` auto-routing support**:
+  - `auto_routing` parameter to `__init__()`
+  - `has_routing` property to check network availability
+  - `cassette_network` property for direct access
+
+- **CLI auto-routing commands**:
+  - `cat-chat geometric chat --auto-routing` - Enable cassette retrieval
+  - `cat-chat geometric status --auto-routing` - Show network stats
+  - `cat-chat geometric retrieve "query" --k 5` - Direct cassette queries
+
+### Fixed
+
+- **FTS schema compatibility** in `GeometricCassette._build_index_from_chunks()`
+  - Now reads from `chunks_fts_content.c0` (FTS content table)
+  - Fallback to direct `content` column for simpler schemas
+  - Successfully indexes 10,000+ chunks from canon, thought, inbox cassettes
+
+- **Result traceability** in `GeometricCassetteNetwork.query_merged()`
+  - Added `cassette_id` to each result for source tracking
+  - Results now show: `[E=0.644] [canon] ...`
+
+### Tested
+
+- All 21 geometric chat tests pass
+- Canon cassette: 1268 docs indexed from 1293 chunks
+- Thought cassette: 6595 docs indexed from 7123 chunks
+- Inbox cassette: 1903 docs indexed from 1984 chunks
+- Auto-routing retrieves results with E >= threshold across cassettes
+
+---
+
 ## [0.6.2] - 2026-01-12 - I.2 CAT CHAT INTEGRATION
 
 **Status**: I.2 COMPLETE - Geometric reasoning integrated into CAT Chat

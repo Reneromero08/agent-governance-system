@@ -1335,7 +1335,13 @@ def cmd_geometric_chat(args) -> int:
         return f"[ECHO] Query: {query}{ctx_info}"
 
     try:
-        chat = GeometricChat(E_threshold=args.threshold)
+        # Use auto-routing if requested
+        auto_routing = getattr(args, 'auto_routing', False)
+        chat = GeometricChat(E_threshold=args.threshold, auto_routing=auto_routing)
+
+        if auto_routing and chat.has_routing:
+            print(f"[INFO] Auto-routing enabled with {len(chat.cassette_network.cassettes)} cassettes")
+
         result = chat.respond(args.query, context_docs, echo_llm)
 
         print(f"Response: {result.response}")
@@ -1369,7 +1375,8 @@ def cmd_geometric_status(args) -> int:
         return 1
 
     try:
-        chat = GeometricChat()
+        auto_routing = getattr(args, 'auto_routing', False)
+        chat = GeometricChat(auto_routing=auto_routing)
         metrics = chat.get_metrics()
 
         print("=== Geometric Chat Status ===")
@@ -1383,9 +1390,75 @@ def cmd_geometric_status(args) -> int:
             for k, v in metrics['stats'].items():
                 print(f"  {k}: {v}")
 
+        # Show network status if auto-routing enabled
+        if auto_routing and chat.has_routing:
+            print("\n=== Cassette Network ===")
+            network = chat.cassette_network
+            network_stats = network.get_network_stats()
+            print(f"Cassettes: {network_stats['cassette_count']}")
+            print(f"Total documents: {network_stats['total_documents']}")
+            print(f"Geometric ops: {network_stats['total_geometric_ops']}")
+            print(f"Embedding reduction: {network_stats['embedding_reduction']:.1%}")
+            print("\nRegistered cassettes:")
+            for cid in network.cassettes:
+                print(f"  - {cid}")
+
         return 0
     except Exception as e:
         print(f"[FAIL] Status error: {e}")
+        return 1
+
+
+def cmd_geometric_retrieve(args) -> int:
+    """Query cassette network with auto-routing.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+
+    try:
+        from geometric_chat import GeometricChat
+    except ImportError as e:
+        print(f"[FAIL] Could not import GeometricChat: {e}")
+        return 1
+
+    try:
+        chat = GeometricChat.with_auto_routing(E_threshold=args.threshold)
+
+        if not chat.has_routing:
+            print("[FAIL] No cassette network available for routing")
+            return 1
+
+        print(f"Query: {args.query}")
+        print(f"Threshold: {args.threshold}")
+        print(f"Cassettes: {list(chat.cassette_network.cassettes.keys())}")
+        print()
+
+        # Initialize query and retrieve
+        query_state = chat.reasoner.initialize(args.query)
+        results = chat.retrieve_context_geometric(query_state, k=args.k, threshold=args.threshold)
+
+        if not results:
+            print("[INFO] No results above threshold")
+            return 0
+
+        print(f"Found {len(results)} results (E >= {args.threshold}):\n")
+        for i, r in enumerate(results, 1):
+            e_val = r.get('E', 0)
+            cassette = r.get('cassette_id', 'unknown')
+            content = r.get('content', '')[:100]
+            print(f"{i}. [E={e_val:.3f}] [{cassette}]")
+            print(f"   {content}...")
+            print()
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Retrieve error: {e}")
         return 1
 
 
@@ -1729,13 +1802,20 @@ def main():
     geometric_chat_parser.add_argument("query", help="Query to process")
     geometric_chat_parser.add_argument("--context", type=Path, help="Path to context file (paragraphs separated by blank lines)")
     geometric_chat_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold for gating (default: 0.5)")
+    geometric_chat_parser.add_argument("--auto-routing", action="store_true", help="Auto-discover cassette network for retrieval")
 
     geometric_status_parser = geometric_subparsers.add_parser("status", help="Show geometric chat metrics")
+    geometric_status_parser.add_argument("--auto-routing", action="store_true", help="Show network status with auto-routing")
 
     geometric_gate_parser = geometric_subparsers.add_parser("gate-test", help="Test E-gating with query and context")
     geometric_gate_parser.add_argument("--query", type=str, required=True, help="Query text")
     geometric_gate_parser.add_argument("--context", type=Path, required=True, help="Path to context file")
     geometric_gate_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold (default: 0.5)")
+
+    geometric_retrieve_parser = geometric_subparsers.add_parser("retrieve", help="Query with auto-routing from cassette network")
+    geometric_retrieve_parser.add_argument("query", help="Query to process")
+    geometric_retrieve_parser.add_argument("--k", type=int, default=5, help="Number of results (default: 5)")
+    geometric_retrieve_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold for gating (default: 0.5)")
 
     args = parser.parse_args()
 
@@ -1856,7 +1936,8 @@ def main():
         geometric_commands = {
             "chat": cmd_geometric_chat,
             "status": cmd_geometric_status,
-            "gate-test": cmd_geometric_gate_test
+            "gate-test": cmd_geometric_gate_test,
+            "retrieve": cmd_geometric_retrieve
         }
 
         if args.geometric_command not in geometric_commands:

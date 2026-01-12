@@ -98,7 +98,8 @@ class GeometricChat:
         self,
         model_name: str = 'all-MiniLM-L6-v2',
         E_threshold: float = 0.5,
-        cassette_network: Optional['GeometricCassetteNetwork'] = None
+        cassette_network: Optional['GeometricCassetteNetwork'] = None,
+        auto_routing: bool = False
     ):
         """
         Initialize geometric chat.
@@ -107,6 +108,7 @@ class GeometricChat:
             model_name: Sentence transformer model for embeddings
             E_threshold: Threshold for E-gating (default 0.5 from Q44)
             cassette_network: Optional GeometricCassetteNetwork for context retrieval
+            auto_routing: If True, auto-discover cassette network from config
         """
         if GeometricReasoner is None:
             raise ImportError(
@@ -124,8 +126,12 @@ class GeometricChat:
         self.turn_history: List[Dict] = []
         self.E_threshold = E_threshold
 
-        # Optional cassette network integration (I.1)
+        # Cassette network integration (I.1)
+        # Auto-routing loads from cassettes.json if enabled
         self._cassette_network = cassette_network
+        self._auto_routing = auto_routing
+        if auto_routing and cassette_network is None:
+            self._cassette_network = self._auto_load_network()
 
         # Stats (pattern from geometric_cassette.py:119-126)
         self._stats = {
@@ -142,6 +148,69 @@ class GeometricChat:
         if self._reasoner is None:
             self._reasoner = GeometricReasoner(self._model_name)
         return self._reasoner
+
+    @property
+    def cassette_network(self) -> Optional['GeometricCassetteNetwork']:
+        """Access the cassette network (may be None if not configured)."""
+        return self._cassette_network
+
+    @property
+    def has_routing(self) -> bool:
+        """Check if cassette network is available for routing."""
+        return self._cassette_network is not None and len(self._cassette_network.cassettes) > 0
+
+    def _auto_load_network(self) -> Optional['GeometricCassetteNetwork']:
+        """
+        Auto-load cassette network from cassettes.json.
+
+        Returns:
+            GeometricCassetteNetwork or None if loading fails
+        """
+        if GeometricCassetteNetwork is None:
+            return None
+
+        try:
+            return GeometricCassetteNetwork.from_config()
+        except Exception as e:
+            # Log but don't fail - auto-routing is optional
+            import sys
+            print(f"[WARN] Auto-routing unavailable: {e}", file=sys.stderr)
+            return None
+
+    @classmethod
+    def with_auto_routing(
+        cls,
+        E_threshold: float = 0.5,
+        model_name: str = 'all-MiniLM-L6-v2'
+    ) -> 'GeometricChat':
+        """
+        Create GeometricChat with automatic cassette network routing.
+
+        Convenience factory method that auto-discovers cassettes from
+        NAVIGATION/CORTEX/network/cassettes.json.
+
+        Args:
+            E_threshold: Threshold for E-gating (default 0.5)
+            model_name: Sentence transformer model
+
+        Returns:
+            GeometricChat with cassette network configured
+
+        Example:
+            # Quick setup with auto-routing
+            chat = GeometricChat.with_auto_routing()
+
+            # Use respond_with_retrieval for automatic context
+            result = chat.respond_with_retrieval(
+                "What is authentication?",
+                llm_generate
+            )
+        """
+        return cls(
+            model_name=model_name,
+            E_threshold=E_threshold,
+            auto_routing=True
+        )
 
     # ========================================================================
     # Main Interface

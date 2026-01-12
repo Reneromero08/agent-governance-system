@@ -188,10 +188,28 @@ class GeometricCassette(DatabaseCassette):
                 conn.close()
                 return
 
-            # Load chunks
+            # Load chunks - try different schema formats
+            # Schema 1: chunks has content column directly
+            # Schema 2: content in FTS content table (chunks_fts_content.c0)
             cursor = conn.execute(
-                "SELECT chunk_hash, content FROM chunks LIMIT 10000"
+                "SELECT name FROM sqlite_master WHERE type='table' AND name='chunks_fts_content'"
             )
+            has_fts_content = cursor.fetchone() is not None
+
+            if has_fts_content:
+                # Use FTS content table - join with chunks for chunk_hash
+                cursor = conn.execute("""
+                    SELECT c.chunk_hash, fts.c0 as content
+                    FROM chunks c
+                    JOIN chunks_fts_content fts ON fts.id = c.chunk_id
+                    WHERE fts.c0 IS NOT NULL AND LENGTH(fts.c0) > 10
+                    LIMIT 10000
+                """)
+            else:
+                # Fallback: try content column directly
+                cursor = conn.execute(
+                    "SELECT chunk_hash, content FROM chunks LIMIT 10000"
+                )
             chunks = cursor.fetchall()
 
             print(f"[GEOMETRIC] Building index from {len(chunks)} chunks...", file=sys.stderr)
@@ -776,6 +794,9 @@ class GeometricCassetteNetwork:
         all_results = []
         for cid, cassette in self.cassettes.items():
             results = cassette.query_geometric(query_state, k)
+            # Add cassette_id to each result for traceability
+            for r in results:
+                r['cassette_id'] = cid
             all_results.extend(results)
 
         all_results.sort(key=lambda x: x['E'], reverse=True)
@@ -915,6 +936,99 @@ class GeometricCassetteNetwork:
             ),
             'cassettes': cassette_stats
         }
+
+    @classmethod
+    def from_config(
+        cls,
+        config_path: Optional[Path] = None,
+        project_root: Optional[Path] = None,
+        geometric_only: bool = True
+    ) -> 'GeometricCassetteNetwork':
+        """
+        Load cassette network from JSON configuration.
+
+        Auto-discovers cassettes.json if config_path not provided.
+        Registers all cassettes with enable_geometric=True.
+
+        Args:
+            config_path: Path to cassettes.json (auto-discovers if None)
+            project_root: Project root for resolving db_path (auto-discovers if None)
+            geometric_only: Only load cassettes with enable_geometric=True
+
+        Returns:
+            Configured GeometricCassetteNetwork
+
+        Example:
+            # Auto-discovery
+            network = GeometricCassetteNetwork.from_config()
+
+            # Explicit path
+            network = GeometricCassetteNetwork.from_config(
+                config_path=Path("path/to/cassettes.json"),
+                project_root=Path("path/to/project")
+            )
+        """
+        import json
+
+        # Auto-discover paths
+        if project_root is None:
+            # Navigate from this file to AGS root
+            project_root = Path(__file__).resolve().parents[3]
+
+        if config_path is None:
+            config_path = project_root / "NAVIGATION" / "CORTEX" / "network" / "cassettes.json"
+
+        if not config_path.exists():
+            raise FileNotFoundError(f"Cassette config not found: {config_path}")
+
+        with open(config_path, 'r', encoding='utf-8') as f:
+            config = json.load(f)
+
+        # Get model name from geometric_config
+        geo_config = config.get('geometric_config', {})
+        model_name = geo_config.get('model_name', 'all-MiniLM-L6-v2')
+
+        # Create network
+        network = cls(model_name=model_name)
+
+        # Register cassettes
+        for cassette_config in config.get('cassettes', []):
+            if not cassette_config.get('enabled', True):
+                continue
+
+            if geometric_only and not cassette_config.get('enable_geometric', False):
+                continue
+
+            db_path = project_root / cassette_config['db_path']
+            cassette_id = cassette_config['id']
+
+            try:
+                cassette = GeometricCassette(
+                    db_path=db_path,
+                    cassette_id=cassette_id,
+                    model_name=model_name,
+                    auto_build_from_chunks=geo_config.get('auto_build_from_chunks', True)
+                )
+                network.register(cassette)
+            except Exception as e:
+                # Log but continue - some cassettes may not exist yet
+                print(f"[WARN] Could not load cassette '{cassette_id}': {e}")
+
+        return network
+
+    @classmethod
+    def auto_discover(cls) -> 'GeometricCassetteNetwork':
+        """
+        Convenience method for automatic network discovery.
+
+        Returns:
+            GeometricCassetteNetwork with all available cassettes
+
+        Example:
+            network = GeometricCassetteNetwork.auto_discover()
+            results = network.query_merged(query_state, k=10)
+        """
+        return cls.from_config()
 
 
 # ============================================================================
