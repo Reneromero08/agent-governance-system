@@ -49,6 +49,9 @@ NAVIGATION/CORTEX/db/_migration_backup/
 # CAT_CHAT databases (runtime artifacts)
 THOUGHT/LAB/CAT_CHAT/**/*.db
 
+# LIL_Q chat logs (personal conversations)
+THOUGHT/LAB/LIL_Q/chat_logs/*.txt
+
 # Generated Proof Artifacts (dispersed)
 NAVIGATION/PROOFS/GREEN_STATE.json
 NAVIGATION/PROOFS/GREEN_STATE.md

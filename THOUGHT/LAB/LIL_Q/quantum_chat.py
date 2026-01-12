@@ -21,10 +21,10 @@ from NAVIGATION.CORTEX.semantic.embeddings import EmbeddingEngine
 class QuantumChat:
     """Navigate the quantum semantic manifold."""
 
-    def __init__(self, llm_fn: Callable[[str, float], str]):
+    def __init__(self, llm_fn: Callable[[str, float, List[str]], str]):
         """
         Args:
-            llm_fn: Function(query, E) -> response
+            llm_fn: Function(query, E, context) -> response
         """
         self.engine = EmbeddingEngine()  # Uses existing CORTEX engine
         self.llm = llm_fn
@@ -104,8 +104,8 @@ class QuantumChat:
         # Remember query state
         self.remember(state)
 
-        # Generate response (LLM knows E)
-        response = self.llm(query, E_val)
+        # Generate response (LLM knows E and context)
+        response = self.llm(query, E_val, context)
 
         # Remember response
         r = self.enter(response)

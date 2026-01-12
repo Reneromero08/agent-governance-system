@@ -1,5 +1,69 @@
 # Feral Resident Changelog
 
+## [0.6.4] - 2026-01-12 - LIL_Q CONTEXT FIX + LOGGING
+
+**Status**: LIL_Q context retrieval fixed, logging added
+**Version**: production-0.6.4
+
+### Added
+
+#### LIL_Q Chat Logging
+- **Automatic session logging** to `THOUGHT/LAB/LIL_Q/chat_logs/`
+  - Timestamped logs: `chat_2026-01-12_14-22-29.txt`
+  - Logs gitignored for privacy
+  - Logs include: timestamp, query, context count, E value, response
+  - Session end marker with timestamp
+
+- **`--show-context` flag** for debugging context retrieval
+  - Shows first 150 chars of each retrieved doc
+  - Helps verify cassette content is being retrieved
+
+#### Cassette Index Maintenance
+- **`index_missing.py`** utility script
+  - Index specific files: `python index_missing.py --file "path/to/file.md"`
+  - Index glob patterns: `python index_missing.py --glob "THOUGHT/**/*.md"`
+  - Auto-detects target cassette from file path
+  - Default mode indexes Q44/Q45 files
+
+- **Indexed Q44/Q45 research**:
+  - `♥Q44_QUANTUM_BORN_RULE_REPORT.md` (Df=146.0)
+  - `♥Q45_PURE_GEOMETRY_REPORT.md` (Df=109.8)
+  - `q44_quantum_born_rule.md` (Df=154.6)
+  - `q45_semantic_entanglement.md` (Df=122.5)
+
+### Fixed
+
+#### LIL_Q Context Bug
+- **Context text now flows to LLM** (was only used for geometric blending)
+  - `quantum_chat.py`: Updated `llm_fn` signature to accept context
+  - `run.py`: Pass context to `generate()` function
+  - LLM now sees retrieved docs in `--- CONTEXT ---` block
+
+- **Double-E display removed**
+  - Removed `[E = {E:.3f}]` from prompt (was echoed by LLM)
+  - E now shown only once in output wrapper
+
+- **Context embedding quality**:
+  - E("Meaning Follows Quantum Mechanics", Q44 doc) = 0.594
+  - E("Does R Compute the Quantum Born Rule", Q44 doc) = 0.486
+  - E("Q44 Born rule", Q44 doc) = 0.386
+  - All above threshold (0.3) and retrievable
+
+### Changed
+
+- **LIL_Q now grounds responses in cassette content**
+  - Before: Hallucinated based on training data
+  - After: References actual retrieved documents
+  - Honest when missing: "I don't have specific information on that topic"
+
+### Notes
+
+- Cassette databases are stale (newer files not indexed)
+- Migration scripts mentioned in roadmap don't exist in repo
+- `index_missing.py` provides manual fix until proper re-indexing
+
+---
+
 ## [0.6.3] - 2026-01-12 - AUTO-ROUTING INTEGRATION
 
 **Status**: Cassette network auto-routing complete

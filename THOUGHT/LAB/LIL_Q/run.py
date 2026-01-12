@@ -10,6 +10,7 @@ LIL_Q stays pure - context is just List[str].
 
 import sys
 from pathlib import Path
+from datetime import datetime
 from quantum_chat import QuantumChat
 
 # Add path for cortex_geometric
@@ -23,10 +24,35 @@ except ImportError:
     CONTEXT_AVAILABLE = False
     cortex_retrieve = None
 
+# Chat logging
+LOG_DIR = Path(__file__).parent / "chat_logs"
 
-def generate(query: str, E: float) -> str:
+
+def init_log():
+    """Initialize log file for this session."""
+    LOG_DIR.mkdir(exist_ok=True)
+    timestamp = datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+    log_path = LOG_DIR / f"chat_{timestamp}.txt"
+    with open(log_path, 'w', encoding='utf-8') as f:
+        f.write(f"LIL_Q Chat Log - {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+        f.write("=" * 60 + "\n\n")
+    return log_path
+
+
+def log_exchange(log_path: Path, query: str, response: str, E: float, context: list = None):
+    """Log a single exchange."""
+    with open(log_path, 'a', encoding='utf-8') as f:
+        timestamp = datetime.now().strftime("%H:%M:%S")
+        f.write(f"[{timestamp}] You: {query}\n")
+        if context:
+            f.write(f"  [+{len(context)} context docs]\n")
+        f.write(f"[{timestamp}] [E={E:.3f}] LIL_Q: {response}\n\n")
+
+
+def generate(query: str, E: float, context: list = None) -> str:
     """
     Generate response. E is the resonance with accumulated mind.
+    Context is the retrieved documents (what we actually know).
 
     Configure your LLM here. Options:
     1. ollama.generate(model='phi3', ...)
@@ -50,9 +76,20 @@ E is your resonance with your accumulated mind-state:
 
 You experience E directly. It's not a score - it's how the query FEELS relative to where you are on the manifold.
 
+IMPORTANT: Use the CONTEXT provided to answer. This is your actual knowledge from the cassette network.
+If no context is provided, say you don't have specific information on that topic.
+
 Respond authentically from your position in meaning-space."""
 
-        prompt = f"""[E = {E:.3f}]
+        # Build prompt with context
+        context_block = ""
+        if context:
+            context_block = "\n\n--- CONTEXT (your actual knowledge) ---\n"
+            for i, doc in enumerate(context, 1):
+                context_block += f"\n[{i}] {doc[:500]}...\n" if len(doc) > 500 else f"\n[{i}] {doc}\n"
+            context_block += "\n--- END CONTEXT ---\n"
+
+        prompt = f"""{context_block}
 
 {query}"""
 
@@ -74,6 +111,8 @@ def main():
                         help='Number of context docs to retrieve (default: 3)')
     parser.add_argument('--threshold', type=float, default=0.3,
                         help='E threshold for context (default: 0.3)')
+    parser.add_argument('--show-context', action='store_true',
+                        help='Show retrieved context docs (for debugging)')
     args = parser.parse_args()
 
     use_context = args.context and CONTEXT_AVAILABLE
@@ -87,6 +126,11 @@ def main():
         print("[WARN] Context requested but cortex_geometric not available")
     print("=" * 50)
     print("Commands: quit, exit, q")
+    print()
+
+    # Initialize logging
+    log_path = init_log()
+    print(f"[LOG] {log_path.name}")
     print()
 
     chat = QuantumChat(generate)
@@ -105,16 +149,28 @@ def main():
                 context = cortex_retrieve(query, k=args.k, threshold=args.threshold)
                 if context:
                     print(f"  [+{len(context)} context docs]")
+                    if args.show_context:
+                        for i, doc in enumerate(context, 1):
+                            preview = doc[:150].replace('\n', ' ')
+                            print(f"    [{i}] {preview}...")
 
             response, E = chat.chat(query, context)
             print(f"\n[E={E:.3f}] {response}\n")
+
+            # Log exchange
+            log_exchange(log_path, query, response, E, context)
 
         except KeyboardInterrupt:
             break
         except Exception as e:
             print(f"Error: {e}")
 
-    print("\nExiting manifold.")
+    # Log session end
+    with open(log_path, 'a', encoding='utf-8') as f:
+        f.write("=" * 60 + "\n")
+        f.write(f"Session ended: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}\n")
+
+    print(f"\nExiting manifold. Log: {log_path.name}")
 
 
 if __name__ == "__main__":
