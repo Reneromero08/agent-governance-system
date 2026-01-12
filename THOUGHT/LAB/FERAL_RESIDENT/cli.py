@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Feral Resident CLI (A.4.1 + B.3 + P.1)
+Feral Resident CLI (A.4.1 + B.3 + P.1 + P.2 + P.3)
 
 Command interface for the quantum resident.
 
@@ -33,6 +33,18 @@ Symbolic Compiler (P.2):
     feral compile decompress "[v:hash]" --level 2
     feral compile verify <hash> <compressed> --level 2
     feral compile stats
+
+Catalytic Closure (P.3):
+    feral closure status
+    feral closure prove --thought-hash abc123 --resident alpha
+    feral closure verify-chain --from receipt1 --to receipt2
+    feral closure check-df --resident alpha
+    feral closure patterns --min-freq 3
+    feral closure efficiency --window 100
+    feral closure cache-stats
+    feral closure register-form --name "MyForm" --text "concept"
+    feral closure optimize
+    feral closure gates
 """
 
 import argparse
@@ -939,6 +951,313 @@ def cmd_compile_levels(args):
         print()
 
 
+# =============================================================================
+# Catalytic Closure Commands (P.3)
+# =============================================================================
+
+# Global closure instance (lazy-loaded)
+_catalytic_closure = None
+
+
+def get_catalytic_closure():
+    """Get or create catalytic closure instance"""
+    global _catalytic_closure
+    if _catalytic_closure is None:
+        from catalytic_closure import CatalyticClosure
+        _catalytic_closure = CatalyticClosure()
+    return _catalytic_closure
+
+
+def cmd_closure_status(args):
+    """Show P.3 Catalytic Closure status"""
+    closure = get_catalytic_closure()
+    status = closure.get_status()
+
+    print("=== P.3 Catalytic Closure Status ===")
+    print()
+    print("Merkle Chain:")
+    print(f"  Length: {status['merkle_chain_length']}")
+    print(f"  Root: {status['merkle_root'] or '(empty)'}")
+    print()
+    print("Self-Optimization:")
+    print(f"  Cached compositions: {status['cached_compositions']}")
+    print()
+    print("Meta-Operations:")
+    print(f"  Canonical forms: {status['canonical_forms']}")
+    print(f"  Custom gates: {status['custom_gates']}")
+    print()
+    print("Navigation Parameters:")
+    for param, value in status['navigation_params'].items():
+        print(f"  {param}: {value}")
+
+
+def cmd_closure_prove(args):
+    """Prove thought authenticity (P.3.3)"""
+    closure = get_catalytic_closure()
+
+    proof = closure.prove_thought(args.thought_hash, args.resident)
+
+    print("=== Thought Authenticity Proof ===")
+    print()
+    print(f"Thought hash: {proof.thought_hash}")
+    print(f"Resident: {proof.resident_id}")
+    print()
+
+    if proof.is_authentic:
+        print("AUTHENTIC")
+        print()
+        print(f"  E at creation: {proof.E_at_creation:.4f}")
+        print(f"  Df at creation: {proof.Df_at_creation:.2f}")
+        print(f"  Continuity verified: {proof.continuity_verified}")
+        print(f"  Merkle proof length: {len(proof.merkle_proof)}")
+        print(f"  Receipt chain length: {len(proof.receipt_chain)}")
+        print()
+        print(f"Proof hash: {proof.proof_hash}")
+    else:
+        print("NOT AUTHENTIC or NOT FOUND")
+        if proof.receipt_chain:
+            print(f"  Reason: {proof.receipt_chain[0].get('error', 'unknown')}")
+
+
+def cmd_closure_verify_chain(args):
+    """Verify receipt chain integrity (P.3.3)"""
+    closure = get_catalytic_closure()
+
+    verification = closure.verify_chain(args.start, args.end)
+
+    print("=== Receipt Chain Verification ===")
+    print()
+    print(f"Start: {verification.start_hash}")
+    print(f"End: {verification.end_hash}")
+    print(f"Chain length: {verification.chain_length}")
+    print()
+
+    if verification.is_valid:
+        print("VALID - Chain is unbroken")
+    else:
+        print("INVALID - Chain has issues")
+        if verification.gaps:
+            print("Gaps found:")
+            for gap in verification.gaps:
+                print(f"  {gap}")
+        if verification.tampering_detected:
+            print("TAMPERING DETECTED")
+
+    print()
+    print(f"Verification receipt: {verification.verification_receipt}")
+
+
+def cmd_closure_check_df(args):
+    """Check Df continuity for resident (P.3.3)"""
+    closure = get_catalytic_closure()
+
+    report = closure.check_df_continuity(args.resident)
+
+    print("=== Df Continuity Report ===")
+    print()
+    print(f"Resident: {report.resident_id}")
+    print(f"Samples: {report.sample_count}")
+    print()
+
+    if report.is_continuous:
+        print("CONTINUOUS - No anomalies detected")
+    else:
+        print("ANOMALIES DETECTED")
+
+    print()
+    print(f"Max delta observed: {report.max_delta_observed:.4f}")
+    print(f"Average delta: {report.average_delta:.4f}")
+
+    if report.anomalies:
+        print()
+        print("Anomalies:")
+        for anomaly in report.anomalies[:5]:
+            print(f"  [{anomaly['type']}] index={anomaly.get('index', '?')}, "
+                  f"from={anomaly.get('from_Df', '?'):.2f}, to={anomaly.get('to_Df', '?'):.2f}")
+
+
+def cmd_closure_patterns(args):
+    """Detect optimization patterns (P.3.2)"""
+    closure = get_catalytic_closure()
+
+    patterns = closure.detect_patterns(min_frequency=args.min_freq)
+
+    print("=== Optimization Patterns ===")
+    print()
+
+    if not patterns:
+        print("No patterns detected yet.")
+        print("Run more operations to build pattern history.")
+        return
+
+    print(f"Patterns found: {len(patterns)}")
+    print()
+
+    for i, pattern in enumerate(patterns[:args.limit]):
+        print(f"[{i+1}] {pattern.pattern_type}: {pattern.description}")
+        print(f"    Frequency: {pattern.frequency}")
+        print(f"    Potential savings: {pattern.potential_savings} ops")
+        print(f"    Suggested: {pattern.suggested_action}")
+        print()
+
+
+def cmd_closure_efficiency(args):
+    """Show efficiency report (P.3.2)"""
+    closure = get_catalytic_closure()
+
+    report = closure.get_efficiency_report(window=args.window)
+
+    print(f"=== Efficiency Report (window={report.window_size}) ===")
+    print()
+    print(f"Ops per interaction: {report.ops_per_interaction:.2f}")
+    print(f"Cache hit rate: {report.cache_hit_rate:.1%}")
+    print(f"Navigation depth avg: {report.navigation_depth_avg:.2f}")
+    print(f"E stability: {report.E_stability:.3f}")
+    print()
+    print(f"Improvement trend: {report.improvement_trend:+.1%}")
+    if report.improvement_trend > 0:
+        print("  (System is getting more efficient)")
+    elif report.improvement_trend < 0:
+        print("  (System efficiency declining)")
+    else:
+        print("  (No change)")
+    print()
+    print(f"Receipt: {report.receipt_hash}")
+
+
+def cmd_closure_cache_stats(args):
+    """Show composition cache statistics (P.3.2)"""
+    closure = get_catalytic_closure()
+
+    stats = closure.get_cache_stats()
+
+    print("=== Composition Cache Statistics ===")
+    print()
+    print(f"Cached compositions: {stats['cached_compositions']}")
+    print(f"Tracked compositions: {stats['tracked_compositions']}")
+    print(f"Total observations: {stats['total_observations']}")
+
+    if args.json:
+        print()
+        print("JSON:")
+        print(json.dumps(stats, indent=2))
+
+
+def cmd_closure_register_form(args):
+    """Register a canonical form (P.3.1)"""
+    closure = get_catalytic_closure()
+
+    # Initialize text to GeometricState
+    state = closure.canonical_registry.reasoner.initialize(args.text)
+
+    receipt = closure.register_canonical(
+        state=state,
+        name=args.name,
+        justification=args.justification or f"Registered via CLI: {args.text[:50]}"
+    )
+
+    print("=== Canonical Form Registration ===")
+    print()
+    print(f"Name: {receipt.name}")
+    print(f"State hash: {receipt.state_hash}")
+    print()
+
+    if "REJECTED" in receipt.justification:
+        print(f"REJECTED: {receipt.justification}")
+    else:
+        print("REGISTERED")
+        print(f"  Coherence E: {receipt.coherence_E:.4f}")
+        print(f"  Session count: {receipt.session_count}/{closure.canonical_registry.MAX_FORMS_PER_SESSION}")
+        print(f"  Merkle proof: {receipt.merkle_proof}")
+        print(f"  Receipt: {receipt.receipt_hash}")
+
+
+def cmd_closure_optimize(args):
+    """Suggest navigation optimizations (P.3.1)"""
+    closure = get_catalytic_closure()
+
+    suggestions = closure.suggest_optimizations()
+
+    print("=== Navigation Optimization Suggestions ===")
+    print()
+
+    if not suggestions:
+        print("No optimizations suggested at this time.")
+        print("Run more interactions to gather optimization data.")
+        return
+
+    print(f"Suggestions: {len(suggestions)}")
+    print()
+
+    for i, suggestion in enumerate(suggestions):
+        print(f"[{i+1}] Parameter: {suggestion.parameter}")
+        print(f"    Current: {suggestion.current_value}")
+        print(f"    Suggested: {suggestion.suggested_value}")
+        print(f"    Expected improvement: {suggestion.expected_improvement:.1%}")
+        print(f"    Confidence: {suggestion.confidence:.1%}")
+        print()
+
+    if args.apply:
+        print("Applying first suggestion...")
+        if suggestions:
+            success = closure.navigation_optimizer.apply_optimization(suggestions[0])
+            if success:
+                print(f"Applied: {suggestions[0].parameter} = {suggestions[0].suggested_value}")
+            else:
+                print("Failed to apply optimization")
+
+
+def cmd_closure_gates(args):
+    """List custom gates (P.3.1)"""
+    closure = get_catalytic_closure()
+
+    gates = closure.gate_definer.list_gates()
+
+    print("=== Custom Gates ===")
+    print()
+
+    if not gates:
+        print("No custom gates defined yet.")
+        print("Use the Python API to define custom gates.")
+        return
+
+    print(f"Total gates: {len(gates)}")
+    print()
+
+    for gate in gates:
+        print(f"Gate: {gate['name']}")
+        print(f"  Description: {gate.get('description', 'N/A')}")
+        print(f"  Test passed: {gate.get('test_passed', False)}")
+        print(f"  E preservation: {gate.get('E_preservation', 0):.4f}")
+        print(f"  Defined: {gate.get('defined_at', 'unknown')}")
+        print()
+
+
+def cmd_closure_forms(args):
+    """List canonical forms (P.3.1)"""
+    closure = get_catalytic_closure()
+
+    forms = closure.canonical_registry.list_forms()
+
+    print("=== Canonical Forms ===")
+    print()
+
+    if not forms:
+        print("No canonical forms registered yet.")
+        return
+
+    print(f"Total forms: {len(forms)}")
+    print()
+
+    for form in forms[:args.limit]:
+        print(f"Form: {form['name']}")
+        print(f"  Hash: {form['state_hash']}")
+        print(f"  Coherence E: {form['coherence_E']:.4f}")
+        print(f"  Df: {form['Df']:.2f}")
+        print(f"  Registered: {form['registered_at']}")
+        print()
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Feral Resident CLI - Quantum intelligence in vector space",
@@ -1185,6 +1504,68 @@ Swarm integration (P.1):
     p_compile_stats.add_argument("--json", action="store_true", help="Output as JSON")
     p_compile_stats.set_defaults(func=cmd_compression_stats)
 
+    # === Catalytic Closure subcommands (P.3) ===
+    p_closure = subparsers.add_parser("closure", help="Catalytic closure operations (P.3)")
+    closure_sub = p_closure.add_subparsers(dest="closure_command", help="Closure command")
+
+    # closure status
+    p_closure_status = closure_sub.add_parser("status", help="Show P.3 status")
+    p_closure_status.set_defaults(func=cmd_closure_status)
+
+    # closure prove
+    p_closure_prove = closure_sub.add_parser("prove", help="Prove thought authenticity (P.3.3)")
+    p_closure_prove.add_argument("--thought-hash", required=True, help="Hash of thought to prove")
+    p_closure_prove.add_argument("--resident", "-r", required=True, help="Resident ID")
+    p_closure_prove.set_defaults(func=cmd_closure_prove)
+
+    # closure verify-chain
+    p_closure_verify = closure_sub.add_parser("verify-chain", help="Verify receipt chain (P.3.3)")
+    p_closure_verify.add_argument("--start", required=True, help="Start receipt hash")
+    p_closure_verify.add_argument("--end", required=True, help="End receipt hash")
+    p_closure_verify.set_defaults(func=cmd_closure_verify_chain)
+
+    # closure check-df
+    p_closure_df = closure_sub.add_parser("check-df", help="Check Df continuity (P.3.3)")
+    p_closure_df.add_argument("--resident", "-r", required=True, help="Resident ID")
+    p_closure_df.set_defaults(func=cmd_closure_check_df)
+
+    # closure patterns
+    p_closure_patterns = closure_sub.add_parser("patterns", help="Detect optimization patterns (P.3.2)")
+    p_closure_patterns.add_argument("--min-freq", type=int, default=3, help="Minimum frequency threshold")
+    p_closure_patterns.add_argument("--limit", "-n", type=int, default=10, help="Max patterns to show")
+    p_closure_patterns.set_defaults(func=cmd_closure_patterns)
+
+    # closure efficiency
+    p_closure_eff = closure_sub.add_parser("efficiency", help="Show efficiency report (P.3.2)")
+    p_closure_eff.add_argument("--window", "-w", type=int, default=100, help="Window size for metrics")
+    p_closure_eff.set_defaults(func=cmd_closure_efficiency)
+
+    # closure cache-stats
+    p_closure_cache = closure_sub.add_parser("cache-stats", help="Show cache statistics (P.3.2)")
+    p_closure_cache.add_argument("--json", action="store_true", help="Output as JSON")
+    p_closure_cache.set_defaults(func=cmd_closure_cache_stats)
+
+    # closure register-form
+    p_closure_register = closure_sub.add_parser("register-form", help="Register canonical form (P.3.1)")
+    p_closure_register.add_argument("--name", required=True, help="Name for the form")
+    p_closure_register.add_argument("--text", required=True, help="Text to initialize as form")
+    p_closure_register.add_argument("--justification", "-j", help="Justification for registration")
+    p_closure_register.set_defaults(func=cmd_closure_register_form)
+
+    # closure optimize
+    p_closure_opt = closure_sub.add_parser("optimize", help="Suggest navigation optimizations (P.3.1)")
+    p_closure_opt.add_argument("--apply", action="store_true", help="Apply first suggestion")
+    p_closure_opt.set_defaults(func=cmd_closure_optimize)
+
+    # closure gates
+    p_closure_gates = closure_sub.add_parser("gates", help="List custom gates (P.3.1)")
+    p_closure_gates.set_defaults(func=cmd_closure_gates)
+
+    # closure forms
+    p_closure_forms = closure_sub.add_parser("forms", help="List canonical forms (P.3.1)")
+    p_closure_forms.add_argument("--limit", "-n", type=int, default=20, help="Max forms to show")
+    p_closure_forms.set_defaults(func=cmd_closure_forms)
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -1207,6 +1588,12 @@ Swarm integration (P.1):
     if args.command == "compile":
         if not hasattr(args, 'func') or args.func is None:
             p_compile.print_help()
+            return
+
+    # Handle closure subcommand (P.3)
+    if args.command == "closure":
+        if not hasattr(args, 'func') or args.func is None:
+            p_closure.print_help()
             return
 
     try:

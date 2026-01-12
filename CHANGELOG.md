@@ -6,6 +6,37 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.7] - 2026-01-12
+
+### Added
+- **P.3 Catalytic Closure (Self-Bootstrap with Provenance)** — Enable residents to modify their own substrate
+  - `catalytic_closure.py` — Unified CatalyticClosure manager (~900 lines)
+  - **P.3.3 Authenticity Query** (Foundation - provenance before mutation)
+    - `MerkleChainVerifier` — Build Merkle tree, generate/verify membership proofs, detect tampering
+    - `DfContinuityChecker` — Detect anomalous Df jumps, reversals, flatlines
+    - `ThoughtProver` — Answer "Did I really think that?" with cryptographic proof
+  - **P.3.2 Self-Optimization** (Pattern detection & caching)
+    - `PatternDetector` — Identify repeated compositions, navigation shortcuts, gate sequences
+    - `EfficiencyMetrics` — Track ops/interaction, cache hit rate, navigation depth, E stability
+    - `CompositionCache` — Auto-cache repeated compositions (>= 3 times, E > 0.95 consistency)
+  - **P.3.1 Meta-Operations** (Governed self-modification)
+    - `CanonicalFormRegistry` — Register forms with E > 0.8 coherence, session limits (100/session)
+    - `CustomGateDefiner` — Define gates with validation (unit sphere, determinism, E-preservation < 5%)
+    - `NavigationOptimizer` — Learn optimal parameters from experience, suggest/apply with rollback
+  - CLI commands: `status`, `prove`, `verify-chain`, `check-df`, `patterns`, `efficiency`, `cache-stats`, `register-form`, `optimize`, `gates`, `forms`
+  - All changes remain catalytic: receipted, reversible, verifiable, bounded
+
+### Changed
+- **PRODUCTION Phase (P.1-P.3) COMPLETE** — All production milestones achieved
+  - P.1 Swarm integration ✅ (multi-resident coordination)
+  - P.2 Symbolic compiler ✅ (multi-level compression)
+  - P.3 Catalytic closure ✅ (self-bootstrap with provenance)
+  - Updated `FERAL_RESIDENT_QUANTUM_ROADMAP.md` with P.3 completion status
+  - Updated `cli.py` with full P.3 command suite
+  - Next milestone: CatChat 2.0 merge
+
+---
+
 ## [3.8.6] - 2026-01-12
 
 ### Added
