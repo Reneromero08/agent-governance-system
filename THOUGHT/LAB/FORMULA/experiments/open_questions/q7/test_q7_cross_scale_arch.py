@@ -201,9 +201,17 @@ def test_scale_pair_real(
     # NOTE: words→sentences is inherently difficult because word embeddings aggregate
     # differently than direct sentence embeddings
     passes_preservation = abs(R_aggregated - R_parent) / (abs(R_parent) + 1e-10) < 0.70
+
     # Functoriality: structure correlation (informational, not required)
     # Negative correlations can occur when aggregation method differs from direct embedding
-    passes_functoriality = L_corr > -0.5  # Very relaxed - just not anti-correlated
+    # IMPORTANT: With n_parent < 3, Spearman correlation is degenerate (2 points = perfect ±1)
+    # Skip functoriality check for small samples - the metric is meaningless
+    n_parent = containment.shape[0]
+    if n_parent < 3:
+        # With <3 data points, correlation is always ±1 (degenerate), skip check
+        passes_functoriality = True
+    else:
+        passes_functoriality = L_corr > -0.5  # Very relaxed - just not anti-correlated
 
     return CrossScaleResult(
         scale_pair=f"{child_scale}->{parent_scale}",

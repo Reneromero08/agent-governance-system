@@ -181,8 +181,9 @@ def generate_reasoning(receipt: dict) -> str:
     # Cross-scale
     cross = receipt.get("cross_scale_validation", {})
     if cross.get("cross_scale", {}).get("summary", {}).get("verdict") == "CONFIRMED":
-        n = cross["cross_scale"]["summary"].get("n_combinations", 0)
-        parts.append(f"All {n} cross-scale combinations pass")
+        n_pass = cross["cross_scale"]["summary"].get("n_pass", 0)
+        n_total = cross["cross_scale"]["summary"].get("n_combinations", 0)
+        parts.append(f"{n_pass}/{n_total} cross-scale pairs pass")
 
     # Negative controls
     neg = receipt.get("negative_controls", {})

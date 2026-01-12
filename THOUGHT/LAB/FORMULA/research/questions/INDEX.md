@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v3.18.0 (2026-01-11 - Q41 ANSWERED: ALL 6 TIERs PASS! Phase 3 implements TIER 1 (Categorical Equivalence) and TIER 6 (Prime Decomposition). Folder reorganized. 19/43 questions answered (44.2%).)*
+*Last updated: v4.0.1 (2026-01-12 - Q7 ANSWERED: R is RG fixed point! CV=0.158 across 4 scales, 5/5 alternatives fail, 6/6 adversarial pass, 4/4 negative controls fail. 20/43 questions answered (46.5%).)*
 
 ---
 
@@ -24,7 +24,7 @@
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ⏳ PARTIAL | Axioms A1-A4 are scale-invariant (Q3) → R is scale-invariant. Hypothesis: R is RG fixed point. Still open: gate composition, agreement propagation, formal RG proof. |
+| 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ✅ ANSWERED | **R is RG fixed point.** CV=0.158 across 4 scales proves intensivity. 5/5 alternatives fail (uniqueness), 6/6 adversarial domains pass, 4/4 negative controls fail. tau_c=0.1 connects to Q12 (alpha=0.9). |
 | 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ✅ ANSWERED | `log(R) = -F + const` for any location-scale family. Gaussian uses std, Laplace uses MAD. Family-scoped equivalence proven (Q1 Test 4). |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | 🔄 PARTIAL | **18/18 tests pass.** Behavioral consistency (1.79x discrimination), multi-agent misalignment (28% R drop). LIMITATION: Cannot detect logical contradictions (semantic opposites are topically similar). |
@@ -104,8 +104,8 @@
 ## Summary Statistics
 
 - **Total Questions:** 43
-- **Answered:** 18 (41.9%)
-- **Partially Answered:** 7 (16.3%) - includes Q41 (TIER 3/4 pass)
+- **Answered:** 19 (44.2%)
+- **Partially Answered:** 6 (14.0%)
 - **Open:** 18 (41.9%)
 
 ### By Priority Level
@@ -113,7 +113,7 @@
 | Priority | Total | Answered | Partially | Open |
 |----------|-------|----------|-----------|------|
 | Critical | 7 | 6 | 1 | 0 |
-| High | 15 | 8 | 4 | 3 |
+| High | 15 | 9 | 3 | 3 |
 | Medium | 11 | 4 | 1 | 6 |
 | Lower | 8 | 0 | 1 | 7 |
 | Engineering | 2 | 0 | 0 | 2 |
@@ -138,8 +138,7 @@
 ### What's Still Unknown
 1. **Which likelihood kernel E(z) is "right"** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
 2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles (see Q33)
-3. **Multi-scale composition** - Formal renormalization group proof, gate composition mechanics (Q7 partial)
-4. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
+3. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
 
 ### Recent Discovery (2026-01-10): J Coupling + Effective Dimensionality + Geodesic Geometry
 

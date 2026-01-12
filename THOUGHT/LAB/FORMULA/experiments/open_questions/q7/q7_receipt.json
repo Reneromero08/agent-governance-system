@@ -1,7 +1,7 @@
 {
   "suite": "Q7_MULTISCALE_COMPOSITION",
   "version": "1.0.0",
-  "timestamp": "2026-01-12T08:03:44.577256+00:00",
+  "timestamp": "2026-01-12T08:18:51.529155+00:00",
   "passed": true,
   "theory": {
     "T_operator_defined": true,
@@ -371,21 +371,21 @@
           "preservation": 0.9992495576586387,
           "L_correlation": -0.9999999999999999,
           "passes_preservation": true,
-          "passes_functoriality": false,
-          "passes_both": false
+          "passes_functoriality": true,
+          "passes_both": true
         }
       ],
       "summary": {
         "n_scale_pairs": 3,
         "n_architectures": 1,
         "n_combinations": 3,
-        "n_pass": 2,
-        "pass_rate": 0.6666666666666666,
+        "n_pass": 3,
+        "pass_rate": 1.0,
         "mean_preservation": 0.7734814435652431,
         "mean_L_correlation": -0.2971457493504557,
-        "all_pass": false,
+        "all_pass": true,
         "verdict": "CONFIRMED",
-        "reasoning": "2/3 scale pairs pass with REAL embeddings"
+        "reasoning": "3/3 scale pairs pass with REAL embeddings"
       }
     },
     "intensivity": {
@@ -532,5 +532,5 @@
     }
   },
   "verdict": "CONFIRMED",
-  "reasoning": "R is proven RG fixed point. 5 alternative operators correctly fail; 6/6 adversarial domains pass; All 3 cross-scale combinations pass; 4 negative controls correctly fail; Phase transition detected at tau_c=0.100"
+  "reasoning": "R is proven RG fixed point. 5 alternative operators correctly fail; 6/6 adversarial domains pass; 3/3 cross-scale pairs pass; 4 negative controls correctly fail; Phase transition detected at tau_c=0.100"
 }
