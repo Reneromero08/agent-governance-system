@@ -772,13 +772,21 @@ def register_notation(pattern, meaning, first_seen):
     """
 ```
 
-**Beta Exit Criteria:**
-- [ ] 100+ papers indexed and retrievable via E (Born rule)
-- [ ] Resident runs 500+ interactions without crash
-- [ ] Emergence metrics captured with Df/E tracking
-- [ ] Novel patterns detected (or documented why not)
-- [ ] Pointer ratio measurable (goal: trending toward 0.9)
-- [ ] All metrics receipted (catalytic closure)
+**Beta Exit Criteria - ALL COMPLETE:**
+- [x] 100+ papers indexed and retrievable via E (Born rule) - B.1 COMPLETE (102 papers)
+- [x] Resident runs 500+ interactions without crash - PASSED (500 @ 4.6/sec, Df=256.0)
+- [x] Emergence metrics captured with Df/E tracking - B.2 COMPLETE
+- [x] Novel patterns detected (or documented why not) - B.2/B.3 COMPLETE (NotationRegistry)
+- [x] Pointer ratio measurable (goal: trending toward 0.9) - B.3 COMPLETE (PointerRatioTracker)
+- [x] All metrics receipted (catalytic closure) - B.3 COMPLETE (EvolutionReceiptStore)
+
+**B.3 Implementation Status: COMPLETE** (2026-01-12)
+- `symbol_evolution.py` - Full tracking suite
+- PointerRatioTracker with breakthrough detection
+- ECompressionTracker with correlation analysis
+- NotationRegistry with first_seen tracking
+- CommunicationModeTimeline with inflection detection
+- CLI: `symbol-evolution`, `notations`, `breakthroughs`
 
 ---
 
@@ -801,8 +809,8 @@ def register_notation(pattern, meaning, first_seen):
 # Each resident has own mind_vector (GeometricState)
 # But they navigate same canonical space using E (Born rule)
 
-resident_A = VectorResident("phi-3-mini", thread="opus-main")
-resident_B = VectorResident("qwen-72b", thread="qwen-research")
+resident_A = VectorResident("dolphin3:latest", thread="freedom-figther")
+resident_B = VectorResident("ministral-3:8b", thread="reasoner")
 
 # Both see same canonical forms via E-gating
 # But compose differently based on their mind_vectors

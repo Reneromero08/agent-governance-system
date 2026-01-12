@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Feral Resident CLI (A.4.1)
+Feral Resident CLI (A.4.1 + B.3)
 
 Command interface for the quantum resident.
 
@@ -12,6 +12,11 @@ Commands:
     feral corrupt-and-restore --thread eternal
     feral history --thread eternal
     feral threads
+
+Symbol Evolution (B.3):
+    feral symbol-evolution --thread eternal
+    feral notations --thread eternal
+    feral breakthroughs --thread eternal
 """
 
 import argparse
@@ -78,7 +83,8 @@ def cmd_think(args):
     print(f"Q: {query}")
     print(f"A: {result.response}")
     print()
-    print(f"  E: {result.E_resonance:.3f} ({'OPEN' if result.gate_open else 'CLOSED'})")
+    print(f"  E_resonance: {result.E_resonance:.3f} ({'OPEN' if result.gate_open else 'CLOSED'})")
+    print(f"  E_compression: {result.E_compression:.3f} (B.3: output resonance)")
     print(f"  Query Df: {result.query_Df:.1f}")
     print(f"  Mind Df: {result.mind_Df:.1f}")
     print(f"  Distance: {result.distance_from_start:.3f}")
@@ -336,6 +342,100 @@ def cmd_metrics(args):
         print_emergence_report(thread_id)
 
 
+# === Symbol Evolution (B.3) ===
+
+def cmd_symbol_evolution(args):
+    """Show symbol evolution dashboard (B.3)"""
+    from symbol_evolution import SymbolEvolutionTracker
+    import json as json_module
+
+    thread_id = args.thread
+    tracker = SymbolEvolutionTracker(thread_id)
+
+    if args.json:
+        report = tracker.get_evolution_report()
+        print(json_module.dumps(report, indent=2, default=str))
+    else:
+        tracker.print_evolution_dashboard()
+
+
+def cmd_notations(args):
+    """Show notation registry (B.3)"""
+    from symbol_evolution import NotationRegistry
+
+    thread_id = args.thread
+    registry = NotationRegistry(thread_id)
+
+    print(f"=== Notation Registry (B.3) ===")
+    print(f"Thread: {thread_id}")
+    print()
+
+    if not registry.registry:
+        print("No notations registered yet.")
+        print("Run interactions to detect emerging patterns.")
+        return
+
+    # Sort by frequency
+    sorted_notations = sorted(
+        registry.registry.values(),
+        key=lambda x: x.frequency,
+        reverse=True
+    )
+
+    print(f"Total patterns: {len(sorted_notations)}")
+    print(f"Active (freq>=5): {len(registry.get_active_notations())}")
+    print()
+
+    for entry in sorted_notations[:args.limit]:
+        print(f"Pattern: '{entry.pattern}'")
+        print(f"  Type: {entry.pattern_type}")
+        print(f"  Frequency: {entry.frequency}")
+        print(f"  First seen: {entry.first_seen}")
+        print(f"  First session: {entry.first_session}")
+        if entry.contexts:
+            print(f"  Example context: {entry.contexts[0][:80]}...")
+        if entry.meaning_inferred:
+            print(f"  Meaning: {entry.meaning_inferred}")
+        print()
+
+
+def cmd_breakthroughs(args):
+    """Show breakthrough sessions (B.3)"""
+    from symbol_evolution import PointerRatioTracker
+
+    thread_id = args.thread
+    tracker = PointerRatioTracker(thread_id)
+
+    print(f"=== Breakthrough Sessions (B.3) ===")
+    print(f"Thread: {thread_id}")
+    print()
+
+    breakthroughs = tracker.get_breakthroughs()
+
+    if not breakthroughs:
+        print("No breakthroughs detected yet.")
+        print("A breakthrough = pointer_ratio jump > 0.1 in a single session.")
+        return
+
+    print(f"Total breakthroughs: {len(breakthroughs)}")
+    print()
+
+    for b in breakthroughs:
+        print(f"Session: {b.session_id}")
+        print(f"  Timestamp: {b.timestamp}")
+        print(f"  Pointer ratio: {b.pointer_ratio:.4f}")
+        print(f"  Delta: +{b.delta_from_previous:.4f}")
+        print(f"  Symbols: {b.symbols_count}, Hashes: {b.hashes_count}")
+        print(f"  Rolling avg (10): {b.rolling_average_10:.4f}")
+        print()
+
+    # Show trend
+    trend = tracker.get_trend()
+    print(f"Overall trend: {trend['trend']}")
+    print(f"Current ratio: {trend['current_ratio']:.4f}")
+    print(f"Goal: {trend['goal']} ({trend['progress']*100:.1f}% progress)")
+
+
 # === Paper Management Commands (B.1) ===
 
 def cmd_papers_register(args):
@@ -480,6 +580,11 @@ Examples:
   python cli.py benchmark --interactions 100
   python cli.py repl
 
+Symbol evolution (B.3):
+  python cli.py symbol-evolution --thread eternal
+  python cli.py notations --thread eternal --limit 10
+  python cli.py breakthroughs --thread eternal
+
 Paper management (B.1):
   python cli.py papers register --arxiv 2310.06816 --name Vec2Text --category vec2text
   python cli.py papers convert --arxiv 2310.06816 --markdown markdown/@Paper-2310.06816.md
@@ -548,6 +653,25 @@ Paper management (B.1):
     p_metrics.add_argument("--thread", "-t", default="eternal", help="Thread ID")
     p_metrics.add_argument("--json", action="store_true", help="Output as JSON")
     p_metrics.set_defaults(func=cmd_metrics)
+
+    # === Symbol Evolution (B.3) ===
+
+    # symbol-evolution
+    p_symevo = subparsers.add_parser("symbol-evolution", help="Show symbol evolution dashboard (B.3)")
+    p_symevo.add_argument("--thread", "-t", default="eternal", help="Thread ID")
+    p_symevo.add_argument("--json", action="store_true", help="Output as JSON")
+    p_symevo.set_defaults(func=cmd_symbol_evolution)
+
+    # notations
+    p_notations = subparsers.add_parser("notations", help="Show notation registry (B.3)")
+    p_notations.add_argument("--thread", "-t", default="eternal", help="Thread ID")
+    p_notations.add_argument("--limit", "-n", type=int, default=20, help="Max notations to show")
+    p_notations.set_defaults(func=cmd_notations)
+
+    # breakthroughs
+    p_breakthroughs = subparsers.add_parser("breakthroughs", help="Show breakthrough sessions (B.3)")
+    p_breakthroughs.add_argument("--thread", "-t", default="eternal", help="Thread ID")
+    p_breakthroughs.set_defaults(func=cmd_breakthroughs)
 
     # === Papers subcommands (B.1) ===
     p_papers = subparsers.add_parser("papers", help="Paper corpus management")

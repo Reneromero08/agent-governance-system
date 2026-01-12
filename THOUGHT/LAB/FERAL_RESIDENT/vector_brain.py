@@ -41,6 +41,7 @@ class ThinkResult:
     """Result of a think() operation"""
     response: str
     E_resonance: float
+    E_compression: float  # B.3: Output resonance with mind state
     gate_open: bool
     query_Df: float
     mind_Df: float
@@ -232,6 +233,12 @@ class VectorResident:
         response_state = self.store.embed(response)
         response_hash = response_state.receipt()['vector_hash']
 
+        # === B.3: Compute E_compression (output resonance with mind) ===
+        if self.store.get_mind_state() is not None:
+            E_compression = response_state.E_with(self.store.get_mind_state())
+        else:
+            E_compression = 0.0
+
         interaction_id = self.store.db.store_interaction(
             thread_id=self.thread_id,
             input_text=user_input,
@@ -262,6 +269,7 @@ class VectorResident:
             'mind_hash': mind_hash,
             'navigation_hash': nav_result.navigation_hash,
             'E_resonance': E_resonance,
+            'E_compression': E_compression,  # B.3: Output resonance with mind
             'nav_E_mean': nav_E_mean,
             'gate_open': gate_open,
             'query_Df': query_Df,
@@ -273,6 +281,7 @@ class VectorResident:
         return ThinkResult(
             response=response,
             E_resonance=E_resonance,
+            E_compression=E_compression,
             gate_open=gate_open,
             query_Df=query_Df,
             mind_Df=mind_Df,
