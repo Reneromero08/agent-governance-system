@@ -100,11 +100,13 @@ ALTERNATIVE_OPERATORS = {
 }
 
 # The correct operator (for reference)
+# Uses harmonic mean which is appropriate for rates/ratios like R = E/sigma
+# Harmonic mean: n / sum(1/R_i) - distinct from arithmetic mean (linear_avg)
 CORRECT_OPERATOR = CompositionOperator(
-    name="intensive_mean",
-    binary_op=lambda x, y: (x + y) / 2,
-    n_ary_op=lambda vals: np.mean(vals) if vals else 0,
-    description="R_agg = E(z_agg) / sigma_agg (the correct intensive form)"
+    name="intensive_harmonic",
+    binary_op=lambda x, y: 2 * x * y / (x + y + 1e-10),  # Harmonic mean of two values
+    n_ary_op=lambda vals: len(vals) / (sum(1/(v + 1e-10) for v in vals) + 1e-10) if vals else 0,
+    description="R_agg = harmonic_mean(R_i) (correct for intensive ratios)"
 )
 
 

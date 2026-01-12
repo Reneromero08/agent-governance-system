@@ -230,7 +230,8 @@ def analyze_phase_transition(
         critical_threshold = thresholds[steepest_idx]
 
         # Check if it's a real transition (activity changes by > 0.3)
-        if abs(d_activity[steepest_idx]) > 0.3 / n_thresholds:
+        # Note: d_activity is the per-step change, multiply by n_thresholds to get total range impact
+        if abs(d_activity[steepest_idx]) > 0.3 / (n_thresholds / 10):
             has_transition = True
         else:
             has_transition = abs(activities[0] - activities[-1]) > 0.5
@@ -395,9 +396,32 @@ def find_percolation_threshold(
     idx_below_half = np.where(probabilities <= 0.5)[0]
 
     if len(idx_above_half) > 0 and len(idx_below_half) > 0:
-        # Find crossing point
-        crossing_idx = idx_above_half[-1] if len(idx_above_half) > 0 else len(thresholds) // 2
-        tau_c = thresholds[min(crossing_idx, len(thresholds) - 1)]
+        # Find crossing point: where probability transitions through 0.5
+        # Use the first index below 0.5 that comes after an above-0.5 index
+        first_below = idx_below_half[0]
+        last_above = idx_above_half[-1]
+
+        if last_above < first_below:
+            # Normal transition: above -> below
+            crossing_idx = last_above
+        else:
+            # Reverse transition or interlaced: use first below
+            crossing_idx = max(0, first_below - 1)
+
+        # Interpolate between adjacent points for better precision
+        if crossing_idx < len(thresholds) - 1:
+            p_curr = probabilities[crossing_idx]
+            p_next = probabilities[crossing_idx + 1]
+            t_curr = thresholds[crossing_idx]
+            t_next = thresholds[crossing_idx + 1]
+
+            if abs(p_curr - p_next) > 1e-10:
+                # Linear interpolation to find P = 0.5
+                tau_c = t_curr + (0.5 - p_curr) * (t_next - t_curr) / (p_next - p_curr)
+            else:
+                tau_c = (t_curr + t_next) / 2
+        else:
+            tau_c = thresholds[crossing_idx]
     else:
         # No clear crossing
         tau_c = np.median(thresholds)

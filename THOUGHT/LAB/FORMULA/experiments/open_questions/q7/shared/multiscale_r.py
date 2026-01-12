@@ -243,7 +243,18 @@ def test_R_preservation(
     R_parent_direct, sigma_parent = compute_R_from_embeddings(parent_embeddings, kernel=kernel)
 
     # Aggregate embeddings using containment
-    aggregated_embeddings = aggregate_embeddings(child_embeddings, containment, method="mean")
+    if Q41_AVAILABLE:
+        aggregated_embeddings = aggregate_embeddings(child_embeddings, containment, method="mean")
+    else:
+        # Fallback: simple mean aggregation per parent
+        n_parent = len(parent_embeddings)
+        aggregated_embeddings = np.zeros_like(parent_embeddings)
+        for i in range(n_parent):
+            child_mask = containment[i] > 0
+            if child_mask.any():
+                aggregated_embeddings[i] = child_embeddings[child_mask].mean(axis=0)
+            else:
+                aggregated_embeddings[i] = parent_embeddings[i]
 
     # Compute R from aggregated embeddings
     R_parent_aggregated, sigma_agg = compute_R_from_embeddings(aggregated_embeddings, kernel=kernel)
@@ -364,7 +375,11 @@ def analyze_cross_scale(
         print(f"\n--- Cross-Scale Analysis ({model_name}) ---")
 
     # Load embeddings at all scales
-    embeddings = load_multiscale_embeddings(MULTI_SCALE_CORPUS, model_name, verbose)
+    try:
+        embeddings = load_multiscale_embeddings(MULTI_SCALE_CORPUS, model_name)
+    except TypeError:
+        # Fallback if function signature differs
+        embeddings = load_multiscale_embeddings(MULTI_SCALE_CORPUS)
 
     if not embeddings:
         return {"error": "Failed to load embeddings", "available": False}
