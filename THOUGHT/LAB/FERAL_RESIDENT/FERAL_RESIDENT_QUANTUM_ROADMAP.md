@@ -1,9 +1,17 @@
 # Feral Resident Quantum Roadmap
 
-**Status**: Alpha Phase Ready (MAIN QUEST)
+**Status**: ALPHA COMPLETE - Ready for Beta
 **Vision**: Intelligence navigating a quantum-semantic manifold, composing meaning through validated geometric operations, evolving its own protocols
 **Owner**: Resident (self-directed after initialization)
 **Supersedes**: [FERAL_RESIDENT_ROADMAP.md](FERAL_RESIDENT_ROADMAP.md) (kept for historical comparison)
+
+**Origin**: This is the evolution of **CatChat** (Catalytic Chat). Feral Resident IS CatChat with quantum-geometric foundations. They will merge when Production is reached.
+
+**Catalytic Principles**:
+- All transformations are **receipted** (provable, auditable)
+- All state is **restorable** (corrupt-and-restore from receipts)
+- Inputs are **not consumed** - operations produce outputs + receipts
+- Everything is **content-addressed** (SHA256 hashes)
 
 **Upstream Dependencies**:
 - Cassette Network Phase 4 (SPC Integration) - COMPLETE
@@ -19,14 +27,26 @@
 
 ## The Evolution
 
-**Original Vision (v1.0):**
+**CatChat (2025):**
+> "Catalytic chat with semantic diffusion and receipts."
+
+**Feral Resident v1.0:**
 > "Drop intelligence in substrate. Watch what emerges."
 
-**Quantum Vision (v2.0):**
-> "Drop intelligence in a quantum-semantic manifold. Think in pure geometry. Speak at boundaries."
+**Feral Resident v2.0 (Quantum):**
+> "Drop intelligence in a quantum-semantic manifold. Think in pure geometry. Speak at boundaries. Prove everything."
 
 **Key Insight:**
 Embeddings touch the system ONLY at boundaries (text-in, text-out). All reasoning is pure vector operations validated by Q44/Q45.
+
+**Merge Path:**
+```
+CatChat ──► Feral Resident Alpha ──► Feral Resident Beta ──► CatChat 2.0 (Production)
+                    ▲                        │
+                    │                        │
+            Geometric Foundation      Paper Flood + Emergence
+            (Q43/Q44/Q45)            Protocol Evolution
+```
 
 ---
 
@@ -363,10 +383,10 @@ class VectorStore:
 ```
 
 **Acceptance:**
-- [ ] A.1.1.1 VectorStore wraps GeometricMemory
-- [ ] A.1.1.2 Uses entangle() instead of HDC bind()
-- [ ] A.1.1.3 Uses GeometricState for all vectors
-- [ ] A.1.1.4 Track Df evolution across interactions
+- [x] A.1.1.1 VectorStore wraps GeometricMemory
+- [x] A.1.1.2 Uses entangle() instead of HDC bind()
+- [x] A.1.1.3 Uses GeometricState for all vectors
+- [x] A.1.1.4 Track Df evolution across interactions
 
 #### A.1.2 Resident Database Schema (Unchanged)
 
@@ -388,9 +408,9 @@ CREATE TABLE vectors (
 ```
 
 **Acceptance:**
-- [ ] A.1.2.1 Schema includes Df column for tracking
-- [ ] A.1.2.2 composition_op uses new operation names
-- [ ] A.1.2.3 All inserts validate GeometricState properties
+- [x] A.1.2.1 Schema includes Df column for tracking
+- [x] A.1.2.2 composition_op uses new operation names
+- [x] A.1.2.3 All inserts validate GeometricState properties
 
 #### A.1.3 CAS Integration (Unchanged)
 
@@ -451,10 +471,10 @@ class SemanticDiffusion:
 ```
 
 **Acceptance:**
-- [ ] A.2.1.1 Navigate uses E (Born rule) for neighbor ranking
-- [ ] A.2.1.2 Uses project() for context conditioning
-- [ ] A.2.1.3 Tracks Df evolution through path
-- [ ] A.2.1.4 Path is receipted with navigation_hash
+- [x] A.2.1.1 Navigate uses E (Born rule) for neighbor ranking
+- [x] A.2.1.2 Uses project() for context conditioning
+- [x] A.2.1.3 Tracks Df evolution through path
+- [x] A.2.1.4 Path is receipted with navigation_hash
 
 ---
 
@@ -520,10 +540,10 @@ class VectorResident:
 ```
 
 **Acceptance:**
-- [ ] A.3.1.1 Uses GeometricMemory for all state
-- [ ] A.3.1.2 E-gating for response relevance
-- [ ] A.3.1.3 Tracks mind_evolution metrics
-- [ ] A.3.1.4 Each interaction receipted with Df
+- [x] A.3.1.1 Uses GeometricMemory for all state
+- [x] A.3.1.2 E-gating for response relevance
+- [x] A.3.1.3 Tracks mind_evolution metrics
+- [x] A.3.1.4 Each interaction receipted with Df
 
 ---
 
@@ -556,13 +576,13 @@ feral benchmark --interactions 100
 #   embedding_reduction: 87%
 ```
 
-**Alpha Exit Criteria:**
-- [ ] All A.0 tests pass (geometric foundation)
-- [ ] Resident can run 100+ interactions without crash
-- [ ] Df evolves measurably
-- [ ] mind_distance_from_start() increases
-- [ ] Corrupt-and-restore works
-- [ ] Embedding calls < 3 per interaction (vs ~10+ in naive approach)
+**Alpha Exit Criteria:** ALL PASSED (2026-01-12)
+- [x] All A.0 tests pass (geometric foundation)
+- [x] Resident can run 100+ interactions without crash
+- [x] Df evolves measurably (130 -> 256)
+- [x] mind_distance_from_start() increases (0 -> 1.614 radians)
+- [x] Corrupt-and-restore works (Df delta = 0.0078)
+- [x] Embedding calls < 3 per interaction (vs ~10+ in naive approach)
 
 ---
 
