@@ -1004,70 +1004,75 @@ def verify_thought(thought_hash: str, resident_id: str) -> Dict:
 
 ## AGS INTEGRATION
 
-### I.1 Cassette Network Integration
+### I.1 Cassette Network Integration - COMPLETE (2026-01-12)
 
 **File**: `NAVIGATION/CORTEX/network/geometric_cassette.py`
 
 **Integration Point**: Replace `NAVIGATION/CORTEX/network/cassette_protocol.py` queries with geometric operations
 
 ```python
-class GeometricCassette:
+class GeometricCassette(DatabaseCassette):
     """
-    Cassette that uses pure geometry for queries.
+    Cassette using pure geometry for queries (Q45 validated).
+
+    Inherits text query interface from DatabaseCassette.
+    Adds geometric query capabilities with E (Born rule) scoring.
 
     Embeddings used ONLY:
     - At indexing time (text → manifold coordinates)
     - Never during queries (pure E computation)
     """
 
-    def __init__(self, cassette_id: str):
-        self.cassette_id = cassette_id
-        self.reasoner = GeometricReasoner()
-        self.index: Dict[str, GeometricState] = {}
-
-    def index_document(self, doc_id: str, text: str):
-        """Index document (initialize to manifold) - 1 embedding call"""
-        self.index[doc_id] = self.reasoner.initialize(text)
-
     def query_geometric(self, query_state: GeometricState, k: int = 10):
-        """
-        Query using geometric state (NO re-embedding).
-        Pure E (Born rule) computation.
-        """
-        results = [
-            (doc_id, query_state.E_with(doc_state))
-            for doc_id, doc_state in self.index.items()
-        ]
-        results.sort(key=lambda x: x[1], reverse=True)
-        return results[:k]
+        """Query using geometric state (pure E computation)."""
 
     def query_text(self, query_text: str, k: int = 10):
-        """Query using text (initialize once, then pure geometry)"""
-        query_state = self.reasoner.initialize(query_text)
-        return self.query_geometric(query_state, k)
+        """Query with text - initialize once, then pure geometry."""
 
     def analogy_query(self, a: str, b: str, c: str, k: int = 10):
-        """
-        Analogy query: a is to b as c is to ?
-        Pure geometry (Q45 validated).
-        Formula: state = (b - a + c)
-        """
-        state_a = self.reasoner.initialize(a)
-        state_b = self.reasoner.initialize(b)
-        state_c = self.reasoner.initialize(c)
+        """a:b :: c:? using formula d = b - a + c"""
 
-        query_state = self.reasoner.add(
-            self.reasoner.subtract(state_b, state_a),
-            state_c
-        )
-        return self.query_geometric(query_state, k)
+    def query_with_gate(self, query_state, k: int = 10, threshold: float = 0.5):
+        """Query with E-gate filtering (Q44 validated)."""
+
+    def blend_query(self, concept1: str, concept2: str, k: int = 10):
+        """Blend query: cat + dog = pet (superposition)."""
+
+    def navigate_query(self, start: str, end: str, steps: int = 3, k: int = 5):
+        """Navigate via geodesic interpolation."""
+
+class GeometricCassetteNetwork:
+    """Coordinate geometric queries across multiple cassettes."""
+
+    def query_all(self, query_state, k: int = 10):
+        """Query all cassettes with geometric state."""
+
+    def query_merged(self, query_state, k: int = 10):
+        """Query all and merge results by E."""
+
+    def cross_cassette_analogy(self, a, b, c, source, target, k: int = 10):
+        """Analogy where a,b from source and result from target."""
+
+    def compose_across(self, cassette_ids, query_state, operation='superpose'):
+        """Compose results from multiple cassettes geometrically."""
 ```
 
 **Acceptance:**
-- [ ] I.1.1 Geometric queries return same results as embedding queries
-- [ ] I.1.2 Analogy queries work across cassettes
-- [ ] I.1.3 Cross-cassette composition (combine results geometrically)
-- [ ] I.1.4 E-gating discriminates relevance
+- [x] I.1.1 Geometric queries return same results as embedding queries
+- [x] I.1.2 Analogy queries work across cassettes
+- [x] I.1.3 Cross-cassette composition (combine results geometrically)
+- [x] I.1.4 E-gating discriminates relevance
+
+**Implementation Details (2026-01-12):**
+- `geometric_cassette.py` (~650 lines) - GeometricCassette, GeometricCassetteNetwork
+- Subclasses DatabaseCassette, inherits sync protocol
+- Lazy index build from chunks table on first geometric query
+- Persistence via `geometric_index` SQLite table
+- Modified `cassette_protocol.py` - Added geometric interface methods
+- Modified `network_hub.py` - Added `query_all_geometric()`, `analogy_query_all()`
+- Updated `cassettes.json` - All 9 cassettes have `geometric` capability
+- CLI: `--query`, `--analogy`, `--stats` for testing
+- Design: E (Born rule) scoring, Q45 validated operations
 
 ---
 
@@ -1400,6 +1405,16 @@ Cassette Phase 4 (SPC) ✅ COMPLETE
 │  P.3 Catalytic closure ✅ COMPLETE         │
 │  CatChat 2.0 merge ⏳ (next milestone)      │
 └────────────────────────────────────────────┘
+         │
+         ▼
+┌────────────────────────────────────────────┐
+│  AGS INTEGRATION                           │
+│  I.1 Cassette Network ✅ COMPLETE          │
+│  I.2 CAT Chat Integration ⏳ PENDING        │
+│                                            │
+│  Output: NAVIGATION/CORTEX/network/        │
+│          geometric_cassette.py             │
+└────────────────────────────────────────────┘
 ```
 
 ---
@@ -1457,9 +1472,12 @@ THOUGHT/LAB/FERAL_RESIDENT/
 # Upstream Primitive:
 CAPABILITY/PRIMITIVES/geometric_reasoner.py  # A.0.1-A.0.3 (COMPLETE)
 
-# AGS Integration (BLOCKED):
-NAVIGATION/CORTEX/network/geometric_cassette.py   # I.1
-THOUGHT/LAB/CAT_CHAT/geometric_chat.py            # I.2
+# AGS Integration:
+NAVIGATION/CORTEX/network/geometric_cassette.py   # I.1 (COMPLETE)
+NAVIGATION/CORTEX/network/cassette_protocol.py    # I.1 - Modified for geometric interface
+NAVIGATION/CORTEX/network/network_hub.py          # I.1 - Modified for geometric routing
+NAVIGATION/CORTEX/network/cassettes.json          # I.1 - All 9 cassettes have geometric capability
+THOUGHT/LAB/CAT_CHAT/geometric_chat.py            # I.2 (PENDING)
 ```
 
 ---

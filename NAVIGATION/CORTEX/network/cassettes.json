@@ -1,6 +1,6 @@
 {
-  "config_version": "3.0",
-  "description": "Phase 1: Bucket-aligned cassette partitions",
+  "config_version": "3.1",
+  "description": "Phase 1: Bucket-aligned cassette partitions with I.1 Geometric Integration",
   "cassettes": [
     {
       "id": "canon",
@@ -10,10 +10,12 @@
       "description": "Constitutional documents - immutable (LAW/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "immutable"
+      "mutability": "immutable",
+      "enable_geometric": true
     },
     {
       "id": "governance",
@@ -23,10 +25,12 @@
       "description": "Decisions and preferences (CONTEXT/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "stable"
+      "mutability": "stable",
+      "enable_geometric": true
     },
     {
       "id": "capability",
@@ -37,10 +41,12 @@
       "capabilities": [
         "fts",
         "semantic_search",
-        "ast"
+        "ast",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "mutable"
+      "mutability": "mutable",
+      "enable_geometric": true
     },
     {
       "id": "navigation",
@@ -50,10 +56,12 @@
       "description": "Maps, cortex metadata (NAVIGATION/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "mutable"
+      "mutability": "mutable",
+      "enable_geometric": true
     },
     {
       "id": "direction",
@@ -63,10 +71,12 @@
       "description": "Roadmaps, strategy (DIRECTION/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "mutable"
+      "mutability": "mutable",
+      "enable_geometric": true
     },
     {
       "id": "thought",
@@ -77,10 +87,12 @@
       "capabilities": [
         "fts",
         "semantic_search",
-        "research"
+        "research",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "mutable"
+      "mutability": "mutable",
+      "enable_geometric": true
     },
     {
       "id": "memory",
@@ -90,10 +102,12 @@
       "description": "Archive, reports (MEMORY/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "append_only"
+      "mutability": "append_only",
+      "enable_geometric": true
     },
     {
       "id": "inbox",
@@ -103,10 +117,12 @@
       "description": "Staging, temporary (INBOX/)",
       "capabilities": [
         "fts",
-        "semantic_search"
+        "semantic_search",
+        "geometric"
       ],
       "type": "generic",
-      "mutability": "ephemeral"
+      "mutability": "ephemeral",
+      "enable_geometric": true
     },
     {
       "id": "resident",
@@ -119,11 +135,13 @@
         "semantic_search",
         "agent_memory",
         "write",
-        "sessions"
+        "sessions",
+        "geometric"
       ],
       "type": "memory",
       "schema_version": "3.0",
-      "mutability": "read_write"
+      "mutability": "read_write",
+      "enable_geometric": true
     }
   ],
   "legacy_cassettes": [
@@ -137,5 +155,11 @@
     }
   ],
   "auto_discover": false,
-  "default_type": "generic"
+  "default_type": "generic",
+  "geometric_config": {
+    "model_name": "all-MiniLM-L6-v2",
+    "auto_build_from_chunks": true,
+    "lazy_index": true,
+    "note": "I.1 Cassette Network Integration - Q45 validated geometric queries"
+  }
 }

@@ -257,6 +257,60 @@ class DatabaseCassette(ABC):
         """
         pass
 
+    # ========================================================================
+    # Geometric Query Interface (I.1 Integration)
+    # ========================================================================
+
+    def query_geometric(self, query_state: 'GeometricState', top_k: int = 10) -> List[dict]:
+        """Query using geometric state (pure geometry, no embedding).
+
+        Override in subclasses that support geometric queries.
+        Uses E (Born rule) for relevance scoring per Q44.
+
+        Args:
+            query_state: GeometricState vector on unit sphere
+            top_k: Maximum number of results
+
+        Returns:
+            List of result dicts with E scores
+
+        Raises:
+            NotImplementedError: If cassette doesn't support geometric queries
+        """
+        raise NotImplementedError(
+            f"Cassette '{self.cassette_id}' does not support geometric queries. "
+            "Use GeometricCassette for geometric query support."
+        )
+
+    def supports_geometric(self) -> bool:
+        """Check if cassette supports geometric queries.
+
+        Returns:
+            True if cassette can handle query_geometric() calls
+        """
+        return False
+
+    def analogy_query(self, a: str, b: str, c: str, top_k: int = 10) -> List[dict]:
+        """Analogy query: a is to b as c is to ?
+
+        Q45 validated formula: d = b - a + c
+        Example: king - man + woman = queen
+
+        Args:
+            a, b, c: Analogy terms
+            top_k: Maximum results
+
+        Returns:
+            List of candidates with E scores
+
+        Raises:
+            NotImplementedError: If cassette doesn't support geometric queries
+        """
+        raise NotImplementedError(
+            f"Cassette '{self.cassette_id}' does not support analogy queries. "
+            "Use GeometricCassette for analogy query support."
+        )
+
     @abstractmethod
     def get_stats(self) -> Dict:
         """Return cassette statistics.

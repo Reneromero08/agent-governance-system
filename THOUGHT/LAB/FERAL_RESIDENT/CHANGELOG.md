@@ -1,5 +1,79 @@
 # Feral Resident Changelog
 
+## [0.6.1] - 2026-01-12 - I.1 CASSETTE NETWORK INTEGRATION + SEMIOSPHERE MAPPING
+
+**Status**: I.1 COMPLETE - Geometric cassette infrastructure deployed + semiosphere mapping report
+**Version**: production-0.6.1
+
+### Added
+
+#### I.1 Cassette Network Integration (Geometric Queries)
+
+- **`NAVIGATION/CORTEX/network/geometric_cassette.py`** (~650 lines) - GeometricCassette subclass with pure geometry queries
+  - `query_geometric(state, k)` — Pure E computation, no re-embedding
+  - `query_text(text, k)` — Initialize once, then pure geometry
+  - `analogy_query(a, b, c, k)` — Q45 validated: d = b - a + c
+  - `query_with_gate(state, k, threshold)` — E-gating for relevance (Q44)
+  - `blend_query(c1, c2, k)` — Superposition for hypernyms
+  - `navigate_query(start, end, steps, k)` — Geodesic interpolation
+
+- **`GeometricCassetteNetwork`** — Cross-cassette composition
+  - `query_all(state, k)` — Query all cassettes with geometric state
+  - `query_merged(state, k)` — Merge results by E across cassettes
+  - `cross_cassette_analogy(a, b, c, source, target, k)` — Cross-domain analogies
+  - `compose_across(cassette_ids, state, operation)` — Geometric composition (superpose/entangle)
+
+- **Modified `cassette_protocol.py`** — Added geometric interface methods to DatabaseCassette
+  - `query_geometric()` interface method
+  - `supports_geometric()` capability check
+  - `analogy_query()` interface method
+
+- **Modified `network_hub.py`** — Added geometric routing
+  - `query_all_geometric()` — Route to all geometric-capable cassettes
+  - `query_merged_geometric()` — Merge results by E
+  - `analogy_query_all()` — Cross-cassette analogy queries
+  - `get_geometric_cassettes()` — List geometric-capable cassettes
+
+- **Updated `cassettes.json` v3.1** — All 9 cassettes now have `geometric` capability
+  - canon, governance, capability, navigation, direction, thought, memory, inbox, resident
+  - All cassettes: `"enable_geometric": true`
+  - Added `geometric_config` section with model settings
+
+- **Infrastructure**:
+  - Lazy index build from chunks table on first geometric query
+  - Persistence via `geometric_index` SQLite table (Df tracking)
+  - CLI: `--query`, `--analogy`, `--stats` for testing
+
+#### I.1 Semiosphere Mapping Report
+
+- **`research/I1_SEMIOSPHERE_MAPPING_REPORT.md`** - Comprehensive analysis of I.1 Cassette Network Integration
+  - Key insight: **The quantum dictionary emerges from navigation, not indexing**
+  - Mapping semantic structure through pure vector operations (E correlations, geodesics, analogies)
+  - Connection to Feral Resident Standing Orders (B.1.2): Discover efficient meaning expression
+  - Territory vs Map: Discovering geometry rather than building static representations
+  - Validation: Q43 (Df participation ratio), Q44 (E Born rule r=0.977), Q45 (pure geometry operations)
+  - Technical summary of GeometricCassette and GeometricCassetteNetwork
+  - Explains how quantum dictionary entries emerge from stable operation patterns
+  - Documents semiosphere cartography through geometric queries
+
+### Research
+
+- **I.1 Acceptance Criteria VALIDATED** — All four criteria tested and verified
+  - I.1.1 ✅ Geometric queries return same results as embedding queries (E=0.679 top match)
+  - I.1.2 ✅ Analogy queries work across cassettes (king:queen :: man:? validated)
+  - I.1.3 ✅ Cross-cassette composition works (merged by E, Df=137.1 composed)
+  - I.1.4 ✅ E-gating discriminates relevance (mean_E=0.473, gate_open=True)
+
+### Changed
+
+- **AGS Integration Phase I.1 COMPLETE** — Cassette Network now supports pure geometric queries
+  - Updated `FERAL_RESIDENT_QUANTUM_ROADMAP.md` with I.1 completion status
+  - Updated dependency graph: I.1 complete, I.2 pending
+  - Updated implementation files section
+  - Next milestone: I.2 CAT Chat Integration
+
+---
+
 ## [0.6.0] - 2026-01-12 - P.2 SYMBOLIC COMPILER COMPLETE
 
 **Status**: Production P.2 complete - Multi-level semantic rendering with lossless verification

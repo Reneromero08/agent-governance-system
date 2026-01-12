@@ -243,6 +243,131 @@ class SemanticNetworkHub:
 
         return results
 
+    # ========================================================================
+    # Geometric Query Routing (I.1 Integration)
+    # ========================================================================
+
+    def query_all_geometric(
+        self,
+        query_state: 'GeometricState',
+        top_k: int = 10
+    ) -> Dict[str, List[dict]]:
+        """Query all geometric-capable cassettes with geometric state.
+
+        Per I.1 acceptance criteria: Cross-cassette composition support.
+
+        Args:
+            query_state: GeometricState to query with
+            top_k: Results per cassette
+
+        Returns:
+            Dict mapping cassette_id to results (or error dicts)
+        """
+        if self.verbose:
+            print(f"[NETWORK] Routing geometric query to capable cassettes", file=sys.stderr)
+
+        results = {}
+        for cassette_id, cassette in self.cassettes.items():
+            # Check if cassette supports geometric queries
+            if not hasattr(cassette, 'supports_geometric') or not cassette.supports_geometric():
+                if self.verbose:
+                    print(f"  {cassette_id}: SKIPPED (no geometric support)", file=sys.stderr)
+                continue
+
+            # Check sync status if enforcement is enabled
+            if self.enforce_sync and not self._is_cassette_synced(cassette_id):
+                status = self._cassette_sync_status.get(cassette_id, BlanketStatus.UNSYNCED)
+                if self.verbose:
+                    print(f"  {cassette_id}: SKIPPED (blanket {status.value})", file=sys.stderr)
+                results[cassette_id] = [{
+                    'error': 'E_BLANKET_NOT_ALIGNED',
+                    'blanket_status': status.value
+                }]
+                continue
+
+            try:
+                cassette_results = cassette.query_geometric(query_state, top_k)
+                results[cassette_id] = cassette_results
+                if self.verbose:
+                    print(f"  {cassette_id}: {len(cassette_results)} results", file=sys.stderr)
+            except Exception as e:
+                print(f"  {cassette_id}: ERROR - {e}", file=sys.stderr)
+                results[cassette_id] = []
+
+        return results
+
+    def query_merged_geometric(
+        self,
+        query_state: 'GeometricState',
+        top_k: int = 10
+    ) -> List[dict]:
+        """Query all geometric cassettes and merge results by E.
+
+        Args:
+            query_state: GeometricState to query
+            top_k: Total results to return
+
+        Returns:
+            Merged results sorted by E (highest first)
+        """
+        all_results = []
+        per_cassette = self.query_all_geometric(query_state, top_k)
+
+        for cassette_id, results in per_cassette.items():
+            if isinstance(results, list):
+                all_results.extend(results)
+
+        # Sort by E value
+        all_results.sort(key=lambda x: x.get('E', x.get('score', 0)), reverse=True)
+        return all_results[:top_k]
+
+    def analogy_query_all(
+        self,
+        a: str,
+        b: str,
+        c: str,
+        top_k: int = 10
+    ) -> Dict[str, List[dict]]:
+        """Execute analogy query across all geometric-capable cassettes.
+
+        Q45 validated: a is to b as c is to ?
+
+        Args:
+            a, b, c: Analogy terms
+            top_k: Results per cassette
+
+        Returns:
+            Dict mapping cassette_id to analogy results
+        """
+        if self.verbose:
+            print(f"[NETWORK] Analogy query: {a} : {b} :: {c} : ?", file=sys.stderr)
+
+        results = {}
+        for cassette_id, cassette in self.cassettes.items():
+            if not hasattr(cassette, 'supports_geometric') or not cassette.supports_geometric():
+                continue
+
+            if self.enforce_sync and not self._is_cassette_synced(cassette_id):
+                continue
+
+            try:
+                cassette_results = cassette.analogy_query(a, b, c, top_k)
+                results[cassette_id] = cassette_results
+                if self.verbose:
+                    print(f"  {cassette_id}: {len(cassette_results)} results", file=sys.stderr)
+            except Exception as e:
+                print(f"  {cassette_id}: ERROR - {e}", file=sys.stderr)
+                results[cassette_id] = []
+
+        return results
+
+    def get_geometric_cassettes(self) -> List[str]:
+        """Get list of cassette IDs that support geometric queries."""
+        return [
+            cid for cid, cassette in self.cassettes.items()
+            if hasattr(cassette, 'supports_geometric') and cassette.supports_geometric()
+        ]
+
     def get_network_status(self) -> Dict:
         """Get status of all registered cassettes including sync state."""
         # Count synced cassettes
