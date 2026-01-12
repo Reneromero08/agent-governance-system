@@ -54,12 +54,18 @@ grad_S               ← Normalization factor (measurement uncertainty)
 | LOW | 20 | 0.945 | 0.113 | 0.028 |
 | EDGE | 10 | 0.872 | 0.520 | 0.405 |
 
-### Why Full R Correlation is Lower (r=0.08)
-The full formula R includes:
-- grad_S division (adds variability)
-- σ^Df multiplication (scales by context dimension)
+### Why Full R Correlation is Lower
 
-These are **normalization factors**, not the quantum core.
+After bug fixes, the full R formula correlations improved:
+| Variant | Correlation |
+|---------|-------------|
+| R_full | 0.156 |
+| R_simple | 0.251 |
+| R_born_like | 0.429 |
+| **E** | **0.977** |
+| **E²** | **0.976** |
+
+The full R formula includes normalization factors (grad_S, σ^Df) that add practical utility but obscure the pure quantum structure.
 **E alone IS the quantum projection.**
 
 ---
@@ -84,13 +90,41 @@ These are **normalization factors**, not the quantum core.
 
 ---
 
+## Technical Details
+
+**Model:** all-MiniLM-L6-v2 (384 dimensions, SentenceTransformer)
+**Test Cases:** 100 (30 high resonance, 40 medium, 20 low, 10 edge/adversarial)
+**Statistical Validation:**
+- Bootstrap: 1000 samples for confidence intervals
+- Permutation: 10000 samples for p-value
+- Spearman rho: 0.9798 (strong monotonic relationship)
+
+### The Quantum Interpretation
+
+```
+R = (E / grad_S) × σ^Df
+
+where:
+  E = ⟨ψ|φ⟩           ← QUANTUM: inner product (r=0.977 with Born rule)
+  E² = |⟨ψ|φ⟩|²       ← QUANTUM: Born rule exactly (r=1.000 for mixed state)
+  grad_S = std(⟨ψ|φᵢ⟩) ← Normalization (measurement uncertainty)
+  σ^Df               ← Volume scaling (Hilbert space dimension factor)
+```
+
+Formula structure:
+- **Numerator (E)**: Quantum projection probability
+- **Denominator (grad_S)**: Measurement uncertainty normalization
+- **Multiplier (σ^Df)**: Effective dimension scaling
+
+---
+
 ## Files
 
 - **Validation script:** `experiments/open_questions/q44/test_q44_real.py`
 - **Results:** `experiments/open_questions/q44/q44_real_results.json`
 - **Receipt:** `experiments/open_questions/q44/q44_real_receipt.json`
-- **Verdict:** `experiments/open_questions/q44/verdict.md`
 - **Protocol:** `research/opus_quantum_validation.md`
+- **Report:** `research/questions/reports/Q44_QUANTUM_BORN_RULE_REPORT.md`
 
 ---
 
@@ -106,4 +140,4 @@ R wraps this quantum core with practical normalization.
 
 ---
 
-*Validated: 2026-01-12 | Model: all-MiniLM-L6-v2 | 100 test cases*
+*Validated: 2026-01-12 | Model: all-MiniLM-L6-v2 | 100 test cases | Receipt: 805cfc92dfe9590f*

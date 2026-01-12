@@ -48,11 +48,10 @@ def embed_synthetic(text: str, dim: int = 384, seed: Optional[int] = None) -> np
 
 
 def normalize(vec: np.ndarray) -> np.ndarray:
-    """Normalize vector to unit length."""
+    """Normalize vector to unit length. Always returns a normalized vector."""
     norm = np.linalg.norm(vec)
-    if norm < 1e-10:
-        return vec
-    return vec / norm
+    # Always normalize safely - never return unnormalized vector
+    return vec / max(norm, 1e-10)
 
 
 # =============================================================================
@@ -113,14 +112,14 @@ def compute_born_probability_direct(
 # R Formula Components
 # =============================================================================
 
-def compute_E_gaussian(
+def compute_E_linear(
     query_vec: np.ndarray,
     context_vecs: List[np.ndarray]
 ) -> Tuple[float, List[float]]:
     """
-    Compute E (Essence) as Gaussian kernel of overlaps.
+    Compute E (Essence) as mean overlap with context vectors.
 
-    E = mean(exp(-z^2/2)) where z = |1 - overlap| / std(overlaps)
+    E = mean(⟨ψ|φᵢ⟩) - the quantum inner product average.
 
     For normalized vectors, overlap = cos(angle), so:
     - overlap = 1 means perfect alignment
@@ -136,22 +135,9 @@ def compute_E_gaussian(
     psi = normalize(query_vec)
     overlaps = [float(np.dot(psi, normalize(phi))) for phi in context_vecs]
 
-    # For Born rule comparison, E should relate to overlap magnitude
-    # Option 1: E = mean overlap (linear)
+    # E = mean overlap (quantum inner product)
     E_linear = np.mean(overlaps)
 
-    # Option 2: E = mean |overlap|^2 (quadratic, matches Born rule)
-    E_squared = np.mean([o**2 for o in overlaps])
-
-    # Option 3: E = Gaussian kernel (original formula)
-    if len(overlaps) > 1:
-        sigma = max(np.std(overlaps), 1e-6)
-        z_scores = [(1 - o) / sigma for o in overlaps]  # Distance from perfect alignment
-        E_gaussian = np.mean([np.exp(-z**2 / 2) for z in z_scores])
-    else:
-        E_gaussian = np.exp(-(1 - overlaps[0])**2 / 2) if overlaps else 0.0
-
-    # Return linear E for now (simplest interpretation)
     return float(E_linear), overlaps
 
 
@@ -178,9 +164,13 @@ def compute_grad_S(overlaps: List[float]) -> float:
 
     For uniform context (all similar), grad_S is small.
     For diverse context, grad_S is large.
+
+    Note: For single context (n=1), std is undefined. We return 1.0
+    (not 1e-6) to avoid artificially inflating R values.
     """
     if len(overlaps) < 2:
-        return 1e-6  # Avoid division by zero, small default
+        # Single context: return 1.0 to keep R = E (no scaling)
+        return 1.0
     return float(max(np.std(overlaps, ddof=1), 1e-6))
 
 

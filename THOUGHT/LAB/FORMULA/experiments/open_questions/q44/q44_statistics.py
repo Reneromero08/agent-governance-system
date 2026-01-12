@@ -272,30 +272,28 @@ def check_monotonicity(R_values: List[float], P_values: List[float]) -> Dict[str
     Check if R and P_born have monotonic relationship.
 
     High R should correspond to high P_born, low R to low P_born.
+    Uses scipy's spearmanr which handles ties correctly.
     """
+    from scipy.stats import spearmanr
+
     R_arr = np.array(R_values)
     P_arr = np.array(P_values)
+    n = len(R_arr)
 
-    # Sort by R
+    # Use scipy's Spearman which handles ties correctly
+    spearman_result = spearmanr(R_arr, P_arr)
+    spearman_rho = spearman_result.correlation
+
+    # Sort by R for quartile analysis
     sort_idx = np.argsort(R_arr)
-    R_sorted = R_arr[sort_idx]
     P_sorted = P_arr[sort_idx]
 
-    # Check if P is generally increasing with R
-    # Use Spearman rank correlation
-    n = len(R_arr)
-    R_ranks = np.argsort(np.argsort(R_arr))
-    P_ranks = np.argsort(np.argsort(P_arr))
+    # Check quartile alignment (ensure at least 1 element per quartile)
+    q1_idx = max(1, n // 4)
+    q3_idx = min(n - 1, 3 * n // 4)
 
-    rank_diff = R_ranks - P_ranks
-    spearman_rho = 1 - (6 * np.sum(rank_diff**2)) / (n * (n**2 - 1))
-
-    # Check quartile alignment
-    q1_idx = n // 4
-    q3_idx = 3 * n // 4
-
-    low_R_mean_P = float(np.mean(P_sorted[:q1_idx]))
-    high_R_mean_P = float(np.mean(P_sorted[q3_idx:]))
+    low_R_mean_P = float(np.mean(P_sorted[:q1_idx])) if q1_idx > 0 else 0.0
+    high_R_mean_P = float(np.mean(P_sorted[q3_idx:])) if q3_idx < n else 0.0
 
     return {
         'spearman_rho': float(spearman_rho),

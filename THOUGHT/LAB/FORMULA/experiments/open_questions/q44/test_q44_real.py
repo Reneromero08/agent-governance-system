@@ -107,7 +107,8 @@ def compute_R_variants(
     E_abs = np.mean([abs(o) for o in overlaps])            # Mean absolute overlap
 
     # grad_S = std of overlaps (local curvature)
-    grad_S = float(max(np.std(overlaps), 1e-6)) if len(overlaps) > 1 else 1e-6
+    # For single context, return 1.0 to keep R = E (avoid artificial inflation)
+    grad_S = float(max(np.std(overlaps), 1e-6)) if len(overlaps) > 1 else 1.0
 
     # sigma = sqrt(n) redundancy factor
     sigma = float(np.sqrt(len(context_vecs)))
@@ -246,9 +247,10 @@ def analyze_correlations(results: List[Dict[str, Any]]) -> Dict[str, Any]:
         'E_squared': corr(E_squared, P_born_mixed),
     }
 
-    # Find best R variant
-    best_super = max(correlations_super.items(), key=lambda x: abs(x[1]))
-    best_mixed = max(correlations_mixed.items(), key=lambda x: abs(x[1]))
+    # Find best R variant (highest positive correlation, not absolute value)
+    # For quantum validation, we want positive correlation with Born rule
+    best_super = max(correlations_super.items(), key=lambda x: x[1])
+    best_mixed = max(correlations_mixed.items(), key=lambda x: x[1])
 
     # Full statistical analysis on best variant
     best_R_values = [r[best_super[0]] for r in results]

@@ -1,19 +1,19 @@
 {
   "document": "Q44_QUANTUM_BORN_RULE_REAL_VALIDATION",
-  "timestamp": "2026-01-12T09:30:36.039511Z",
+  "timestamp": "2026-01-12T09:48:28.641907Z",
   "model": "all-MiniLM-L6-v2",
   "num_test_cases": 100,
   "best_variant": "E",
   "best_correlation": 0.9767867429458574,
   "verdict": "QUANTUM",
   "correlations": {
-    "R_full": 0.08227436536545417,
-    "R_simple": 0.08223838573990207,
-    "R_E2": 0.0822488137797268,
-    "R_abs_E": 0.08223831809264091,
-    "R_born_like": 0.08224912844295887,
+    "R_full": 0.15589277653633893,
+    "R_simple": 0.2511036242899903,
+    "R_E2": 0.4243553110866277,
+    "R_abs_E": 0.2506126958101803,
+    "R_born_like": 0.42856541387006175,
     "E": 0.9767867429458574,
     "E_squared": 0.9764707984364992
   },
-  "hash": "76aca04852c7bbe9"
+  "hash": "805cfc92dfe9590f"
 }
