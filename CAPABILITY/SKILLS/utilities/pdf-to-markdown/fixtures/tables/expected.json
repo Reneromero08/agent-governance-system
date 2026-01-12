@@ -1,0 +1,6 @@
+{
+  "status": "success",
+  "pages_extracted": 1,
+  "output_path": "BUILD/document_with_tables.md",
+  "message": "Successfully converted document_with_tables.pdf to BUILD/document_with_tables.md"
+}

@@ -6,9 +6,18 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [4.1.0] - 2026-01-12
+## [3.8.6] - 2026-01-12
 
 ### Added
+- **pdf-to-markdown Skill** — PDF to Markdown conversion utility
+  - `CAPABILITY/SKILLS/utilities/pdf-to-markdown/` — Complete skill implementation
+  - `run.py` — PDF text extraction using pdfplumber
+  - `validate.py` — Output validator
+  - `SKILL.md` — Skill manifest with metadata
+  - `README.md` — Usage documentation
+  - `fixtures/` — Test cases (basic, multi-page, tables)
+  - Supports header detection, formatting preservation, page break markers
+  - GuardedWriter compliant (firewall enforced)
 - **Geometric Reasoning Primitive (A.0)** — Pure-geometry reasoning with Q43/Q44/Q45 validation
   - `geometric_reasoner.py` — Core primitive with GeometricState, GeometricOperations, GeometricReasoner
   - `geometric_memory.py` — Feral Resident integration with compositional memory
@@ -34,7 +43,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [4.0.1] - 2026-01-12
+## [3.8.5] - 2026-01-12
 
 ### Fixed
 - **Q7: Multi-Scale Composition Bug Fixes** — Comprehensive fixes to validation suite
@@ -57,7 +66,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [4.0.0] - 2026-01-11
+## [3.8.4] - 2026-01-11
 
 ### Added
 - **Phase 4: Semantic Pointer Compression (SPC) Integration** — Full implementation
@@ -89,7 +98,7 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
-## [3.9.0] - 2026-01-11
+## [3.8.3] - 2026-01-11
 
 ### Added
 - **Phase 3: Resident Identity** — Persistent AI agent identity in cassette network

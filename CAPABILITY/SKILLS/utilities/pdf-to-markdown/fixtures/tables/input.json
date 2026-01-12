@@ -1,0 +1,9 @@
+{
+  "pdf_path": "document_with_tables.pdf",
+  "output_path": "BUILD/document_with_tables.md",
+  "options": {
+    "extract_images": false,
+    "preserve_formatting": true,
+    "page_breaks": "---"
+  }
+}

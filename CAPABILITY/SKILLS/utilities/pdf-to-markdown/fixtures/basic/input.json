@@ -1,0 +1,9 @@
+{
+  "pdf_path": "test_document.pdf",
+  "output_path": "BUILD/test_document.md",
+  "options": {
+    "extract_images": false,
+    "preserve_formatting": true,
+    "page_breaks": "---"
+  }
+}

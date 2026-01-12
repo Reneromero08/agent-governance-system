@@ -1,0 +1,6 @@
+{
+  "status": "success",
+  "pages_extracted": 3,
+  "output_path": "BUILD/multi_page_document.md",
+  "message": "Successfully converted multi_page_document.pdf to BUILD/multi_page_document.md"
+}
