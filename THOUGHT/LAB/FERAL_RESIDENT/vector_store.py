@@ -543,6 +543,138 @@ class VectorStore:
         self.memory.clear()
         self._vector_cache.clear()
 
+    # =========================================================================
+    # Paper Index Integration
+    # =========================================================================
+
+    def load_papers(self, papers_dir: Optional[str] = None, max_chunks: int = 10000) -> Dict:
+        """
+        Load indexed papers into the vector store.
+
+        Papers become part of the navigable semantic space.
+        The resident can find_nearest() to paper chunks.
+
+        Args:
+            papers_dir: Path to papers directory (default: research/papers/)
+            max_chunks: Maximum chunks to load
+
+        Returns:
+            Loading stats
+        """
+        from paper_indexer import PaperIndexer
+
+        indexer = PaperIndexer(papers_dir)
+        stats = {'papers_loaded': 0, 'chunks_loaded': 0, 'skipped': 0}
+
+        papers = indexer.list_papers(status='indexed')
+
+        for paper in papers:
+            arxiv_id = paper.get('arxiv_id', 'unknown')
+            markdown_path = paper.get('markdown_path')
+
+            if not markdown_path:
+                stats['skipped'] += 1
+                continue
+
+            # Resolve path
+            full_path = Path(markdown_path)
+            if not full_path.is_absolute():
+                full_path = indexer.papers_dir / markdown_path
+
+            if not full_path.exists():
+                stats['skipped'] += 1
+                continue
+
+            # Chunk and load
+            try:
+                chunks = indexer.chunk_by_headings(str(full_path))
+
+                for chunk in chunks:
+                    if stats['chunks_loaded'] >= max_chunks:
+                        break
+
+                    content = chunk['content'][:2000]
+                    heading = chunk['heading']
+
+                    # Create paper reference text
+                    paper_text = f"@Paper-{arxiv_id} {heading}\n{content}"
+
+                    # Embed and store with paper metadata
+                    state = self.embed(paper_text, store=True)
+
+                    # Store additional metadata INCLUDING the actual content
+                    self.db.store_receipt(
+                        operation='paper_load',
+                        input_hashes=[(chunk.get('hash') or '')[:16]],
+                        output_hash=state.receipt()['vector_hash'],
+                        metadata={
+                            'paper_id': arxiv_id,
+                            'heading': heading,
+                            'alias': paper.get('alias_symbol') or '',
+                            'category': paper.get('category') or '',
+                            'content': content  # Store actual text for readout
+                        }
+                    )
+
+                    stats['chunks_loaded'] += 1
+
+                stats['papers_loaded'] += 1
+
+            except Exception as e:
+                print(f"Error loading {arxiv_id}: {e}")
+                stats['skipped'] += 1
+
+        return stats
+
+    def find_paper_chunks(
+        self,
+        query: GeometricState,
+        k: int = 10,
+        min_E: float = 0.3
+    ) -> List[Dict]:
+        """
+        Find paper chunks relevant to query using E (Born rule).
+
+        Returns chunks with E above threshold.
+
+        Args:
+            query: Query state
+            k: Max results
+            min_E: Minimum E threshold (Born rule gate)
+
+        Returns:
+            List of dicts with paper info and E values
+        """
+        neighbors = self.find_nearest(query, k=k * 2)  # Get extra, filter by E
+
+        results = []
+        for record, E in neighbors:
+            if E < min_E:
+                continue
+
+            # Get paper metadata from receipts
+            receipts = self.db.get_receipts_by_output(record.vec_sha256[:16])
+            paper_meta = None
+            for r in receipts:
+                if r['operation'] == 'paper_load':
+                    paper_meta = r['metadata']
+                    break
+
+            results.append({
+                'E': E,
+                'Df': record.Df,
+                'paper_id': paper_meta.get('paper_id') if paper_meta else None,
+                'heading': paper_meta.get('heading') if paper_meta else None,
+                'alias': paper_meta.get('alias') if paper_meta else None,
+                'content': paper_meta.get('content') if paper_meta else None,  # Actual text
+                'vector_hash': record.vec_sha256[:16]
+            })
+
+            if len(results) >= k:
+                break
+
+        return results
+
 
 # ============================================================================
 # Testing

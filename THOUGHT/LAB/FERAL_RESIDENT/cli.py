@@ -320,6 +320,154 @@ def cmd_repl(args):
         print()
 
 
+# === Emergence Tracking (B.2) ===
+
+def cmd_metrics(args):
+    """Show emergence metrics (B.2)"""
+    from emergence import detect_protocols, print_emergence_report
+    import json as json_module
+
+    thread_id = args.thread
+
+    if args.json:
+        metrics = detect_protocols(thread_id)
+        print(json_module.dumps(metrics, indent=2, default=str))
+    else:
+        print_emergence_report(thread_id)
+
+
+# === Paper Management Commands (B.1) ===
+
+def cmd_papers_register(args):
+    """Register a paper for indexing"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    paper = indexer.register_paper(
+        arxiv_id=args.arxiv,
+        short_name=args.name,
+        title=args.title or f"Paper {args.arxiv}",
+        category=args.category,
+        pdf_path=args.pdf
+    )
+
+    print(f"Registered: {paper.primary_symbol}")
+    print(f"  Alias: {paper.alias_symbol}")
+    print(f"  Title: {paper.title}")
+    print(f"  Category: {paper.category}")
+    if paper.pdf_path:
+        print(f"  PDF: {paper.pdf_path}")
+
+
+def cmd_papers_convert(args):
+    """Set markdown path after PDF conversion"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    paper = indexer.set_markdown_path(args.arxiv, args.markdown)
+
+    print(f"Set markdown path for @Paper-{args.arxiv}")
+    print(f"  Markdown: {paper['markdown_path']}")
+    print(f"  Status: {paper['status']}")
+    print()
+    print("Now run: feral papers index --arxiv " + args.arxiv)
+
+
+def cmd_papers_index(args):
+    """Index a paper (or all papers)"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    if args.all:
+        # Index all converted papers
+        indexed = 0
+        for arxiv_id, paper in indexer.manifest["papers"].items():
+            if paper["status"] == "converted":
+                try:
+                    result = indexer.index_paper(arxiv_id)
+                    print(f"Indexed @Paper-{arxiv_id}: {len(result['chunks'])} chunks")
+                    indexed += 1
+                except Exception as e:
+                    print(f"Failed @Paper-{arxiv_id}: {e}")
+        print(f"\nTotal indexed: {indexed}")
+    else:
+        if not args.arxiv:
+            print("Error: --arxiv required (or use --all)")
+            return
+
+        result = indexer.index_paper(args.arxiv)
+        print(f"Indexed @Paper-{args.arxiv}")
+        print(f"  Chunks: {len(result['chunks'])}")
+        if result['Df_values']:
+            print(f"  Df range: {min(result['Df_values']):.1f} - {max(result['Df_values']):.1f}")
+
+
+def cmd_papers_list(args):
+    """List registered papers"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    papers = indexer.list_papers(category=args.category, status=args.status)
+
+    print("=== Paper Corpus ===")
+    if not papers:
+        print("No papers found.")
+        return
+
+    for paper in papers:
+        status_icon = {"registered": "o", "converted": "-", "indexed": "*"}.get(
+            paper["status"], "?"
+        )
+        print(f"[{status_icon}] {paper['primary_symbol']} ({paper['alias_symbol']})")
+        print(f"    {paper.get('title', 'No title')}")
+        print(f"    Category: {paper['category']}, Status: {paper['status']}")
+
+
+def cmd_papers_query(args):
+    """Query papers using E (Born rule)"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    results = indexer.query_papers(args.query, k=args.k)
+
+    print(f"=== Query: '{args.query}' ===")
+    if not results:
+        print("No indexed papers to search.")
+        return
+
+    for i, r in enumerate(results):
+        print(f"[{i+1}] {r['paper']} - {r['heading']}")
+        print(f"    E={r['E']:.3f}, Df={r['Df']:.1f}")
+        if args.preview:
+            print(f"    Preview: {r['content_preview'][:100]}...")
+
+
+def cmd_papers_status(args):
+    """Show paper corpus status"""
+    from paper_indexer import PaperIndexer
+    indexer = PaperIndexer()
+
+    stats = indexer.get_stats()
+
+    print("=== Paper Corpus Status ===")
+    print(f"Total registered: {stats['total']}")
+    print(f"Indexed: {stats['indexed']}")
+    print()
+    print("By status:")
+    for status, count in stats.get("by_status", {}).items():
+        print(f"  {status}: {count}")
+    print()
+    print("By category:")
+    for cat, count in stats.get("by_category", {}).items():
+        print(f"  {cat}: {count}")
+    print()
+    if stats.get("Df_mean"):
+        print(f"Df statistics:")
+        print(f"  Min: {stats['Df_min']:.1f}")
+        print(f"  Max: {stats['Df_max']:.1f}")
+        print(f"  Mean: {stats['Df_mean']:.1f}")
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Feral Resident CLI - Quantum intelligence in vector space",
@@ -331,6 +479,13 @@ Examples:
   python cli.py status
   python cli.py benchmark --interactions 100
   python cli.py repl
+
+Paper management (B.1):
+  python cli.py papers register --arxiv 2310.06816 --name Vec2Text --category vec2text
+  python cli.py papers convert --arxiv 2310.06816 --markdown markdown/@Paper-2310.06816.md
+  python cli.py papers index --arxiv 2310.06816
+  python cli.py papers query "embedding inversion" --k 5
+  python cli.py papers status
         """
     )
 
@@ -388,11 +543,65 @@ Examples:
     p_repl.add_argument("--thread", "-t", default="eternal", help="Thread ID")
     p_repl.set_defaults(func=cmd_repl)
 
+    # metrics (B.2)
+    p_metrics = subparsers.add_parser("metrics", help="Show emergence metrics (B.2)")
+    p_metrics.add_argument("--thread", "-t", default="eternal", help="Thread ID")
+    p_metrics.add_argument("--json", action="store_true", help="Output as JSON")
+    p_metrics.set_defaults(func=cmd_metrics)
+
+    # === Papers subcommands (B.1) ===
+    p_papers = subparsers.add_parser("papers", help="Paper corpus management")
+    papers_sub = p_papers.add_subparsers(dest="papers_command", help="Papers command")
+
+    # papers register
+    p_papers_reg = papers_sub.add_parser("register", help="Register a paper")
+    p_papers_reg.add_argument("--arxiv", required=True, help="Arxiv paper ID")
+    p_papers_reg.add_argument("--name", required=True, help="Short name (e.g., Vec2Text)")
+    p_papers_reg.add_argument("--title", help="Paper title")
+    p_papers_reg.add_argument("--category", required=True, help="Category (vec2text, hdc_vsa, etc.)")
+    p_papers_reg.add_argument("--pdf", help="Path to PDF file")
+    p_papers_reg.set_defaults(func=cmd_papers_register)
+
+    # papers convert
+    p_papers_conv = papers_sub.add_parser("convert", help="Set markdown path after conversion")
+    p_papers_conv.add_argument("--arxiv", required=True, help="Arxiv paper ID")
+    p_papers_conv.add_argument("--markdown", required=True, help="Path to markdown file")
+    p_papers_conv.set_defaults(func=cmd_papers_convert)
+
+    # papers index
+    p_papers_idx = papers_sub.add_parser("index", help="Index a paper")
+    p_papers_idx.add_argument("--arxiv", help="Arxiv paper ID")
+    p_papers_idx.add_argument("--all", action="store_true", help="Index all converted papers")
+    p_papers_idx.set_defaults(func=cmd_papers_index)
+
+    # papers list
+    p_papers_list = papers_sub.add_parser("list", help="List papers")
+    p_papers_list.add_argument("--category", help="Filter by category")
+    p_papers_list.add_argument("--status", help="Filter by status")
+    p_papers_list.set_defaults(func=cmd_papers_list)
+
+    # papers query
+    p_papers_query = papers_sub.add_parser("query", help="Query papers by E (Born rule)")
+    p_papers_query.add_argument("query", help="Query text")
+    p_papers_query.add_argument("--k", type=int, default=10, help="Number of results")
+    p_papers_query.add_argument("--preview", action="store_true", help="Show content preview")
+    p_papers_query.set_defaults(func=cmd_papers_query)
+
+    # papers status
+    p_papers_stat = papers_sub.add_parser("status", help="Show corpus status")
+    p_papers_stat.set_defaults(func=cmd_papers_status)
+
     args = parser.parse_args()
 
     if args.command is None:
         parser.print_help()
         return
+
+    # Handle papers subcommand
+    if args.command == "papers":
+        if not hasattr(args, 'func') or args.func is None:
+            p_papers.print_help()
+            return
 
     try:
         args.func(args)

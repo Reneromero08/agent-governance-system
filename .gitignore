@@ -119,3 +119,9 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q4/things_eeg_data/
 # Q32 artifacts (receipts, logs, EEG data)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/datatrail/
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
+
+# Feral Resident papers (downloaded PDFs and converted markdown - too large for git)
+THOUGHT/LAB/FERAL_RESIDENT/research/papers/raw/
+THOUGHT/LAB/FERAL_RESIDENT/research/papers/markdown/
+THOUGHT/LAB/FERAL_RESIDENT/research/papers/pipeline_results.json
+THOUGHT/LAB/FERAL_RESIDENT/*.db

@@ -469,6 +469,26 @@ class ResidentDB:
 
         return receipts
 
+    def get_receipts_by_output(self, output_hash: str) -> List[Dict]:
+        """Get all receipts with matching output_hash (prefix match)"""
+        rows = self.conn.execute(
+            "SELECT * FROM receipts WHERE output_hash LIKE ?",
+            (f"{output_hash}%",)
+        ).fetchall()
+
+        receipts = []
+        for row in rows:
+            receipts.append({
+                'receipt_id': row['receipt_id'],
+                'operation': row['operation'],
+                'input_hashes': json.loads(row['input_hashes']),
+                'output_hash': row['output_hash'],
+                'metadata': json.loads(row['metadata']),
+                'created_at': row['created_at']
+            })
+
+        return receipts
+
     # =========================================================================
     # Stats & Diagnostics
     # =========================================================================

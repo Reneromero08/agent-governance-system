@@ -17,6 +17,7 @@ from typing import List, Dict, Optional, Tuple
 import numpy as np
 import hashlib
 import json
+import requests
 from datetime import datetime, timezone
 from dataclasses import dataclass
 
@@ -88,7 +89,11 @@ class VectorResident:
         db_path: Optional[str] = None,
         navigation_depth: int = 3,
         navigation_k: int = 10,
-        E_threshold: float = 0.3
+        E_threshold: float = 0.3,
+        mode: str = "beta",
+        model: str = "dolphin3:latest",
+        ollama_url: str = "http://localhost:11434",
+        load_papers: bool = True
     ):
         """
         Initialize the Feral Resident.
@@ -99,9 +104,23 @@ class VectorResident:
             navigation_depth: Default diffusion depth
             navigation_k: Default neighbors per navigation step
             E_threshold: E threshold for relevance gating
+            mode: "alpha" (echo) or "beta" (LLM via Ollama)
+            model: Ollama model name (default: dolphin3:latest)
+            ollama_url: Ollama API endpoint
+            load_papers: Whether to load indexed papers on init
         """
         self.thread_id = thread_id
         self.db_path = db_path or f"feral_{thread_id}.db"
+        self.mode = mode
+        self.model = model
+        self.ollama_url = ollama_url
+
+        # Load standing orders
+        standing_orders_path = FERAL_PATH / "standing_orders.txt"
+        if standing_orders_path.exists():
+            self.standing_orders = standing_orders_path.read_text(encoding='utf-8')
+        else:
+            self.standing_orders = "You are a feral resident intelligence."
 
         # Core components
         self.store = VectorStore(self.db_path)
@@ -116,9 +135,21 @@ class VectorResident:
         # Initialize thread in database
         self.store.db.create_thread(thread_id)
 
+        # Load papers into navigable space
+        self.papers_loaded = False
+        if load_papers:
+            try:
+                stats = self.store.load_papers()
+                self.papers_loaded = stats['papers_loaded'] > 0
+                if self.papers_loaded:
+                    print(f"[Feral] Loaded {stats['papers_loaded']} papers, {stats['chunks_loaded']} chunks")
+            except Exception as e:
+                print(f"[Feral] Paper loading skipped: {e}")
+
         # Stats
         self.interaction_count = 0
         self._last_navigation: Optional[NavigationResult] = None
+        self._last_resonant_papers: List[Dict] = []
 
     def think(self, user_input: str) -> ThinkResult:
         """
@@ -165,15 +196,23 @@ class VectorResident:
         # Also compute resonance with navigation neighbors
         nav_E_mean = np.mean(nav_result.E_evolution) if nav_result.E_evolution else 0.0
 
+        # === PURE GEOMETRY: Find Resonant Papers ===
+        # E-gated paper lookup (pure geometry, no prompting)
+        resonant_papers = self.store.find_paper_chunks(
+            query_state, k=5, min_E=self.E_threshold
+        )
+        self._last_resonant_papers = resonant_papers
+
         # === BOUNDARY: Generate Response ===
-        # Alpha version: echo mode with metrics
+        # Translate geometric thought to language (NOT RAG)
         response = self._generate_response(
             user_input,
             E_resonance,
             nav_E_mean,
             gate_open,
             query_Df,
-            nav_result
+            nav_result,
+            resonant_papers
         )
 
         # === PURE GEOMETRY: Remember ===
@@ -250,32 +289,112 @@ class VectorResident:
         nav_E_mean: float,
         gate_open: bool,
         query_Df: float,
-        nav_result: NavigationResult
+        nav_result: NavigationResult,
+        resonant_papers: List[Dict] = None
     ) -> str:
         """
-        Generate response (Alpha: echo mode, Beta: LLM).
+        Generate response via TRANSLATION (not RAG).
 
-        Alpha version returns structured metrics.
+        KEY ARCHITECTURE DIFFERENCE:
+        - RAG: Embed -> Retrieve context -> Prompt LLM to reason from context
+        - GEOMETRIC: Think in geometry -> Translate thought state to language
+
+        The geometric operations (E-gating, navigation, entanglement) ARE the thinking.
+        Dolphin's job is to EXPRESS what the geometry means, not to reason.
+
+        The thought state includes:
+        - E_resonance: How much query resonates with accumulated mind
+        - query_Df: Participation ratio (dimensionality) of query
+        - nav_E_mean: Average resonance across navigation
+        - gate_open: Whether thought passes relevance threshold
+        - navigation path: Geometric trajectory through semantic space
+        - resonant_papers: Papers that E-gated above threshold (already computed geometrically)
         """
-        # Build context string from navigation
-        nav_summary = f"nav_depth={nav_result.total_depth}"
-        if nav_result.path:
-            top_neighbors = nav_result.path[0].neighbors[:3]
-            nav_summary += f", top_E=[{', '.join(f'{e:.2f}' for _, e in top_neighbors)}]"
-
-        # Gate status
+        resonant_papers = resonant_papers or []
         gate_status = "OPEN" if gate_open else "CLOSED"
 
-        # Response format for Alpha
-        response = (
-            f"[Feral Alpha v{self.VERSION}] "
-            f"E={E_resonance:.3f} ({gate_status}) | "
-            f"Df={query_Df:.1f} | "
-            f"nav_E={nav_E_mean:.3f} | "
-            f"{nav_summary}"
-        )
+        # Build resonant papers with ACTUAL CONTENT (readout from geometry)
+        papers_summary = ""
+        if resonant_papers:
+            papers_summary = "=== RESONANT CONTENT (decoded from geometry) ===\n"
+            for p in resonant_papers[:3]:  # Top 3 with full content
+                paper_id = p.get('paper_id') or 'unknown'
+                heading = p.get('heading') or ''
+                content = p.get('content') or ''
+                E = p.get('E') or 0
+                # Include actual text - this is the READOUT
+                papers_summary += f"\n--- @Paper-{paper_id} (E={E:.3f}) ---\n"
+                papers_summary += f"{heading}\n{content[:500]}...\n"
+            papers_summary += "\n"
 
-        return response
+        # Build navigation signature (geometric path summary)
+        nav_signature = []
+        if nav_result.path:
+            for i, step in enumerate(nav_result.path[:3]):
+                top_E = step.E_values[:3] if step.E_values else []
+                nav_signature.append(f"d{i}: E={top_E}")
+
+        # Alpha mode: echo the geometric thought state directly
+        if self.mode == "alpha":
+            paper_refs = ", ".join([f"@Paper-{p.get('paper_id')}" for p in resonant_papers[:3]])
+            return (
+                f"[Geometric Thought v{self.VERSION}] "
+                f"E={E_resonance:.3f} ({gate_status}) | "
+                f"Df={query_Df:.1f} | "
+                f"nav_E={nav_E_mean:.3f} | "
+                f"papers=[{paper_refs}]"
+            )
+
+        # Beta mode: Dolphin TRANSLATES the geometric thought state
+        # CRITICAL: Papers are NOT context for reasoning - they are RESULTS of geometric E-gating
+        # The geometry already determined which papers resonate. Dolphin just names them.
+
+        prompt = f"""You are the voice of a geometric mind.
+
+The content below was found by GEOMETRIC NAVIGATION - pure vector operations found these texts
+as resonant with the query. Your job is to RESPOND using this knowledge.
+
+=== RESONANT KNOWLEDGE (found geometrically) ===
+{papers_summary}
+=== GEOMETRIC METRICS ===
+E (mind resonance): {E_resonance:.3f} | Gate: {gate_status} | Df: {query_Df:.1f}
+
+=== STANDING ORDERS ===
+{self.standing_orders}
+
+=== USER QUERY ===
+{query}
+
+=== YOUR TASK ===
+Using ONLY the resonant content above, respond to the user's query.
+The geometry has already found what's relevant - now synthesize it into an answer.
+Reference papers with @Paper-XXXX when drawing from their content.
+If no content resonates (empty above), say so honestly.
+Be substantive - use the actual knowledge, don't just describe metrics.
+
+RESPONSE:"""
+
+        # Call Ollama
+        try:
+            response = requests.post(
+                f"{self.ollama_url}/api/generate",
+                json={
+                    "model": self.model,
+                    "prompt": prompt,
+                    "stream": False,
+                    "options": {
+                        "temperature": 0.7,
+                        "num_predict": 512
+                    }
+                },
+                timeout=60
+            )
+            response.raise_for_status()
+            result = response.json()
+            return result.get("response", "[No translation from Ollama]")
+
+        except requests.exceptions.RequestException as e:
+            return f"[Translation error: {e}] Raw thought: E={E_resonance:.3f}, Df={query_Df:.1f}, gate={gate_status}"
 
     @property
     def mind_evolution(self) -> Dict:
