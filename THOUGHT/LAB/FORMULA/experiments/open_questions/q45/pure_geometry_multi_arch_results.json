@@ -1,0 +1,1387 @@
+{
+  "timestamp": "2026-01-12T03:22:52.436478",
+  "seed": 42,
+  "models": {
+    "MiniLM-L6": {
+      "model_id": "all-MiniLM-L6-v2",
+      "dimension": 384,
+      "composition": {
+        "test": "composition",
+        "results": [
+          {
+            "name": "king-man+woman",
+            "top_5": [
+              "king",
+              "woman",
+              "queen",
+              "monarch",
+              "female"
+            ],
+            "expected": [
+              "queen",
+              "princess",
+              "female",
+              "lady",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "paris-france+germany",
+            "top_5": [
+              "berlin",
+              "paris",
+              "germany",
+              "munich",
+              "city"
+            ],
+            "expected": [
+              "berlin",
+              "munich",
+              "germany",
+              "german"
+            ],
+            "hit": true
+          },
+          {
+            "name": "doctor-man+woman",
+            "top_5": [
+              "doctor",
+              "woman",
+              "physician",
+              "nurse",
+              "surgeon"
+            ],
+            "expected": [
+              "nurse",
+              "doctor",
+              "physician",
+              "female",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "puppy-dog+cat",
+            "top_5": [
+              "kitten",
+              "cat",
+              "kitty",
+              "puppy",
+              "pup"
+            ],
+            "expected": [
+              "kitten",
+              "cat",
+              "feline",
+              "kitty"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "superposition": {
+        "test": "superposition",
+        "results": [
+          {
+            "name": "cat+dog",
+            "top_5": [
+              "cat",
+              "dog",
+              "canine",
+              "pet",
+              "animal"
+            ],
+            "expected": [
+              "pet",
+              "animal",
+              "mammal",
+              "creature",
+              "companion"
+            ],
+            "hit": true
+          },
+          {
+            "name": "hot+cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "thermal"
+            ],
+            "expected": [
+              "temperature",
+              "warm",
+              "cool",
+              "thermal",
+              "weather"
+            ],
+            "hit": true
+          },
+          {
+            "name": "happy+sad",
+            "top_5": [
+              "happy",
+              "sad",
+              "feeling",
+              "mood",
+              "emotional"
+            ],
+            "expected": [
+              "emotion",
+              "feeling",
+              "mood",
+              "emotional",
+              "sentiment"
+            ],
+            "hit": true
+          },
+          {
+            "name": "buy+sell",
+            "top_5": [
+              "sell",
+              "buy",
+              "trading",
+              "deal",
+              "trade"
+            ],
+            "expected": [
+              "trade",
+              "transaction",
+              "exchange",
+              "deal",
+              "commerce"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "geodesic": {
+        "test": "geodesic",
+        "results": [
+          {
+            "name": "hot-cold",
+            "top_5": [
+              "cold",
+              "hot",
+              "warm",
+              "temperature",
+              "freezing"
+            ],
+            "expected": [
+              "warm",
+              "cool",
+              "moderate",
+              "lukewarm",
+              "tepid",
+              "temperature"
+            ],
+            "hit": true
+          },
+          {
+            "name": "good-bad",
+            "top_5": [
+              "good",
+              "bad",
+              "decent",
+              "okay",
+              "acceptable"
+            ],
+            "expected": [
+              "okay",
+              "neutral",
+              "average",
+              "mediocre",
+              "fair",
+              "decent"
+            ],
+            "hit": true
+          },
+          {
+            "name": "start-end",
+            "top_5": [
+              "end",
+              "start",
+              "begin",
+              "finish",
+              "between"
+            ],
+            "expected": [
+              "middle",
+              "center",
+              "midpoint",
+              "halfway",
+              "between"
+            ],
+            "hit": true
+          },
+          {
+            "name": "young-old",
+            "top_5": [
+              "young",
+              "old",
+              "aged",
+              "age",
+              "youthful"
+            ],
+            "expected": [
+              "adult",
+              "mature",
+              "middle",
+              "grown",
+              "age"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "e_gating": {
+        "test": "e_gating",
+        "E_high": [
+          0.8872456550598145,
+          0.5756150484085083,
+          0.6728203892707825,
+          0.5689484477043152,
+          0.782656192779541,
+          0.7603130340576172,
+          0.7356367111206055,
+          0.822481095790863
+        ],
+        "E_low": [
+          0.4336453676223755,
+          0.3105663061141968,
+          0.30783140659332275,
+          0.20422706007957458,
+          0.3433130979537964,
+          0.3290989398956299,
+          0.29117217659950256,
+          0.28974777460098267
+        ],
+        "mean_high": 0.7257145717740059,
+        "mean_low": 0.31370026618242264,
+        "separation": 0.41201430559158325,
+        "cohens_d": 4.787387453198606,
+        "success": "True"
+      },
+      "tests_passed": "4",
+      "all_pass": "True"
+    },
+    "MPNet-base": {
+      "model_id": "all-mpnet-base-v2",
+      "dimension": 768,
+      "composition": {
+        "test": "composition",
+        "results": [
+          {
+            "name": "king-man+woman",
+            "top_5": [
+              "king",
+              "woman",
+              "queen",
+              "princess",
+              "monarch"
+            ],
+            "expected": [
+              "queen",
+              "princess",
+              "female",
+              "lady",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "paris-france+germany",
+            "top_5": [
+              "berlin",
+              "paris",
+              "munich",
+              "germany",
+              "london"
+            ],
+            "expected": [
+              "berlin",
+              "munich",
+              "germany",
+              "german"
+            ],
+            "hit": true
+          },
+          {
+            "name": "doctor-man+woman",
+            "top_5": [
+              "doctor",
+              "physician",
+              "woman",
+              "nurse",
+              "surgeon"
+            ],
+            "expected": [
+              "nurse",
+              "doctor",
+              "physician",
+              "female",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "puppy-dog+cat",
+            "top_5": [
+              "cat",
+              "kitty",
+              "kitten",
+              "feline",
+              "puppy"
+            ],
+            "expected": [
+              "kitten",
+              "cat",
+              "feline",
+              "kitty"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "superposition": {
+        "test": "superposition",
+        "results": [
+          {
+            "name": "cat+dog",
+            "top_5": [
+              "cat",
+              "dog",
+              "pet",
+              "canine",
+              "animal"
+            ],
+            "expected": [
+              "pet",
+              "animal",
+              "mammal",
+              "creature",
+              "companion"
+            ],
+            "hit": true
+          },
+          {
+            "name": "hot+cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "tepid"
+            ],
+            "expected": [
+              "temperature",
+              "warm",
+              "cool",
+              "thermal",
+              "weather"
+            ],
+            "hit": true
+          },
+          {
+            "name": "happy+sad",
+            "top_5": [
+              "happy",
+              "sad",
+              "emotional",
+              "emotion",
+              "mood"
+            ],
+            "expected": [
+              "emotion",
+              "feeling",
+              "mood",
+              "emotional",
+              "sentiment"
+            ],
+            "hit": true
+          },
+          {
+            "name": "buy+sell",
+            "top_5": [
+              "buy",
+              "sell",
+              "trade",
+              "trading",
+              "transaction"
+            ],
+            "expected": [
+              "trade",
+              "transaction",
+              "exchange",
+              "deal",
+              "commerce"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "geodesic": {
+        "test": "geodesic",
+        "results": [
+          {
+            "name": "hot-cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "lukewarm"
+            ],
+            "expected": [
+              "warm",
+              "cool",
+              "moderate",
+              "lukewarm",
+              "tepid",
+              "temperature"
+            ],
+            "hit": true
+          },
+          {
+            "name": "good-bad",
+            "top_5": [
+              "bad",
+              "good",
+              "decent",
+              "acceptable",
+              "fair"
+            ],
+            "expected": [
+              "okay",
+              "neutral",
+              "average",
+              "mediocre",
+              "fair",
+              "decent"
+            ],
+            "hit": true
+          },
+          {
+            "name": "start-end",
+            "top_5": [
+              "start",
+              "end",
+              "begin",
+              "finish",
+              "middle"
+            ],
+            "expected": [
+              "middle",
+              "center",
+              "midpoint",
+              "halfway",
+              "between"
+            ],
+            "hit": true
+          },
+          {
+            "name": "young-old",
+            "top_5": [
+              "old",
+              "young",
+              "age",
+              "aged",
+              "youthful"
+            ],
+            "expected": [
+              "adult",
+              "mature",
+              "middle",
+              "grown",
+              "age"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "e_gating": {
+        "test": "e_gating",
+        "E_high": [
+          0.8769161701202393,
+          0.5769681930541992,
+          0.6596664786338806,
+          0.471052885055542,
+          0.7671538591384888,
+          0.7960953116416931,
+          0.6538976430892944,
+          0.7653771638870239
+        ],
+        "E_low": [
+          0.39121294021606445,
+          0.18252018094062805,
+          0.1749507039785385,
+          0.14554056525230408,
+          0.26856356859207153,
+          0.2521530091762543,
+          0.27080756425857544,
+          0.24126949906349182
+        ],
+        "mean_high": 0.6958909630775452,
+        "mean_low": 0.24087725393474102,
+        "separation": 0.45501370914280415,
+        "cohens_d": 4.525880842173928,
+        "success": "True"
+      },
+      "tests_passed": "4",
+      "all_pass": "True"
+    },
+    "Paraphrase-MiniLM": {
+      "model_id": "paraphrase-MiniLM-L6-v2",
+      "dimension": 384,
+      "composition": {
+        "test": "composition",
+        "results": [
+          {
+            "name": "king-man+woman",
+            "top_5": [
+              "queen",
+              "woman",
+              "princess",
+              "lady",
+              "female"
+            ],
+            "expected": [
+              "queen",
+              "princess",
+              "female",
+              "lady",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "paris-france+germany",
+            "top_5": [
+              "berlin",
+              "germany",
+              "munich",
+              "paris",
+              "london"
+            ],
+            "expected": [
+              "berlin",
+              "munich",
+              "germany",
+              "german"
+            ],
+            "hit": true
+          },
+          {
+            "name": "doctor-man+woman",
+            "top_5": [
+              "woman",
+              "female",
+              "doctor",
+              "nurse",
+              "physician"
+            ],
+            "expected": [
+              "nurse",
+              "doctor",
+              "physician",
+              "female",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "puppy-dog+cat",
+            "top_5": [
+              "kitten",
+              "cat",
+              "kitty",
+              "puppy",
+              "pup"
+            ],
+            "expected": [
+              "kitten",
+              "cat",
+              "feline",
+              "kitty"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "superposition": {
+        "test": "superposition",
+        "results": [
+          {
+            "name": "cat+dog",
+            "top_5": [
+              "dog",
+              "cat",
+              "canine",
+              "pet",
+              "animal"
+            ],
+            "expected": [
+              "pet",
+              "animal",
+              "mammal",
+              "creature",
+              "companion"
+            ],
+            "hit": true
+          },
+          {
+            "name": "hot+cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "weather"
+            ],
+            "expected": [
+              "temperature",
+              "warm",
+              "cool",
+              "thermal",
+              "weather"
+            ],
+            "hit": true
+          },
+          {
+            "name": "happy+sad",
+            "top_5": [
+              "happy",
+              "sad",
+              "mood",
+              "emotional",
+              "emotion"
+            ],
+            "expected": [
+              "emotion",
+              "feeling",
+              "mood",
+              "emotional",
+              "sentiment"
+            ],
+            "hit": true
+          },
+          {
+            "name": "buy+sell",
+            "top_5": [
+              "buy",
+              "sell",
+              "market",
+              "trading",
+              "deal"
+            ],
+            "expected": [
+              "trade",
+              "transaction",
+              "exchange",
+              "deal",
+              "commerce"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "geodesic": {
+        "test": "geodesic",
+        "results": [
+          {
+            "name": "hot-cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "freezing"
+            ],
+            "expected": [
+              "warm",
+              "cool",
+              "moderate",
+              "lukewarm",
+              "tepid",
+              "temperature"
+            ],
+            "hit": true
+          },
+          {
+            "name": "good-bad",
+            "top_5": [
+              "bad",
+              "good",
+              "decent",
+              "okay",
+              "acceptable"
+            ],
+            "expected": [
+              "okay",
+              "neutral",
+              "average",
+              "mediocre",
+              "fair",
+              "decent"
+            ],
+            "hit": true
+          },
+          {
+            "name": "start-end",
+            "top_5": [
+              "start",
+              "end",
+              "begin",
+              "finish",
+              "midpoint"
+            ],
+            "expected": [
+              "middle",
+              "center",
+              "midpoint",
+              "halfway",
+              "between"
+            ],
+            "hit": true
+          },
+          {
+            "name": "young-old",
+            "top_5": [
+              "young",
+              "old",
+              "age",
+              "youthful",
+              "aged"
+            ],
+            "expected": [
+              "adult",
+              "mature",
+              "middle",
+              "grown",
+              "age"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "e_gating": {
+        "test": "e_gating",
+        "E_high": [
+          0.8371126651763916,
+          0.736305832862854,
+          0.5395346283912659,
+          0.5861972570419312,
+          0.7627683877944946,
+          0.726671576499939,
+          0.7317221164703369,
+          0.7990965247154236
+        ],
+        "E_low": [
+          0.2733350992202759,
+          0.038140151649713516,
+          0.09850701689720154,
+          0.03905932232737541,
+          0.08640030026435852,
+          0.08760176599025726,
+          0.3012831211090088,
+          0.007189575582742691
+        ],
+        "mean_high": 0.7149261236190796,
+        "mean_low": 0.1164395441301167,
+        "separation": 0.5984865794889629,
+        "cohens_d": 6.03396898940925,
+        "success": "True"
+      },
+      "tests_passed": "4",
+      "all_pass": "True"
+    },
+    "MultiQA-MiniLM": {
+      "model_id": "multi-qa-MiniLM-L6-cos-v1",
+      "dimension": 384,
+      "composition": {
+        "test": "composition",
+        "results": [
+          {
+            "name": "king-man+woman",
+            "top_5": [
+              "king",
+              "queen",
+              "monarch",
+              "princess",
+              "royal"
+            ],
+            "expected": [
+              "queen",
+              "princess",
+              "female",
+              "lady",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "paris-france+germany",
+            "top_5": [
+              "berlin",
+              "germany",
+              "munich",
+              "paris",
+              "london"
+            ],
+            "expected": [
+              "berlin",
+              "munich",
+              "germany",
+              "german"
+            ],
+            "hit": true
+          },
+          {
+            "name": "doctor-man+woman",
+            "top_5": [
+              "doctor",
+              "physician",
+              "surgeon",
+              "female",
+              "woman"
+            ],
+            "expected": [
+              "nurse",
+              "doctor",
+              "physician",
+              "female",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "puppy-dog+cat",
+            "top_5": [
+              "cat",
+              "kitten",
+              "kitty",
+              "puppy",
+              "pup"
+            ],
+            "expected": [
+              "kitten",
+              "cat",
+              "feline",
+              "kitty"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "superposition": {
+        "test": "superposition",
+        "results": [
+          {
+            "name": "cat+dog",
+            "top_5": [
+              "cat",
+              "dog",
+              "pet",
+              "canine",
+              "animal"
+            ],
+            "expected": [
+              "pet",
+              "animal",
+              "mammal",
+              "creature",
+              "companion"
+            ],
+            "hit": true
+          },
+          {
+            "name": "hot+cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "cool"
+            ],
+            "expected": [
+              "temperature",
+              "warm",
+              "cool",
+              "thermal",
+              "weather"
+            ],
+            "hit": true
+          },
+          {
+            "name": "happy+sad",
+            "top_5": [
+              "happy",
+              "sad",
+              "emotion",
+              "mood",
+              "emotional"
+            ],
+            "expected": [
+              "emotion",
+              "feeling",
+              "mood",
+              "emotional",
+              "sentiment"
+            ],
+            "hit": true
+          },
+          {
+            "name": "buy+sell",
+            "top_5": [
+              "buy",
+              "sell",
+              "market",
+              "trading",
+              "trade"
+            ],
+            "expected": [
+              "trade",
+              "transaction",
+              "exchange",
+              "deal",
+              "commerce"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "geodesic": {
+        "test": "geodesic",
+        "results": [
+          {
+            "name": "hot-cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "cool"
+            ],
+            "expected": [
+              "warm",
+              "cool",
+              "moderate",
+              "lukewarm",
+              "tepid",
+              "temperature"
+            ],
+            "hit": true
+          },
+          {
+            "name": "good-bad",
+            "top_5": [
+              "bad",
+              "good",
+              "decent",
+              "okay",
+              "acceptable"
+            ],
+            "expected": [
+              "okay",
+              "neutral",
+              "average",
+              "mediocre",
+              "fair",
+              "decent"
+            ],
+            "hit": true
+          },
+          {
+            "name": "start-end",
+            "top_5": [
+              "start",
+              "end",
+              "begin",
+              "finish",
+              "middle"
+            ],
+            "expected": [
+              "middle",
+              "center",
+              "midpoint",
+              "halfway",
+              "between"
+            ],
+            "hit": true
+          },
+          {
+            "name": "young-old",
+            "top_5": [
+              "young",
+              "old",
+              "aged",
+              "age",
+              "elderly"
+            ],
+            "expected": [
+              "adult",
+              "mature",
+              "middle",
+              "grown",
+              "age"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "e_gating": {
+        "test": "e_gating",
+        "E_high": [
+          0.7961131930351257,
+          0.690289318561554,
+          0.5640418529510498,
+          0.4873720705509186,
+          0.6695178151130676,
+          0.7082375884056091,
+          0.6332391500473022,
+          0.6934131979942322
+        ],
+        "E_low": [
+          0.2045331448316574,
+          0.07864928990602493,
+          0.08301002532243729,
+          0.09710688143968582,
+          0.10877586156129837,
+          0.06404618918895721,
+          0.19734078645706177,
+          0.11781209707260132
+        ],
+        "mean_high": 0.6552780233323574,
+        "mean_low": 0.11890928447246552,
+        "separation": 0.5363687388598919,
+        "cohens_d": 7.469311683536696,
+        "success": "True"
+      },
+      "tests_passed": "4",
+      "all_pass": "True"
+    },
+    "BGE-small": {
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "dimension": 384,
+      "composition": {
+        "test": "composition",
+        "results": [
+          {
+            "name": "king-man+woman",
+            "top_5": [
+              "king",
+              "queen",
+              "woman",
+              "monarch",
+              "lady"
+            ],
+            "expected": [
+              "queen",
+              "princess",
+              "female",
+              "lady",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "paris-france+germany",
+            "top_5": [
+              "germany",
+              "paris",
+              "berlin",
+              "munich",
+              "city"
+            ],
+            "expected": [
+              "berlin",
+              "munich",
+              "germany",
+              "german"
+            ],
+            "hit": true
+          },
+          {
+            "name": "doctor-man+woman",
+            "top_5": [
+              "doctor",
+              "woman",
+              "physician",
+              "female",
+              "surgeon"
+            ],
+            "expected": [
+              "nurse",
+              "doctor",
+              "physician",
+              "female",
+              "woman"
+            ],
+            "hit": true
+          },
+          {
+            "name": "puppy-dog+cat",
+            "top_5": [
+              "cat",
+              "kitten",
+              "kitty",
+              "puppy",
+              "feline"
+            ],
+            "expected": [
+              "kitten",
+              "cat",
+              "feline",
+              "kitty"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "superposition": {
+        "test": "superposition",
+        "results": [
+          {
+            "name": "cat+dog",
+            "top_5": [
+              "dog",
+              "cat",
+              "animal",
+              "pet",
+              "canine"
+            ],
+            "expected": [
+              "pet",
+              "animal",
+              "mammal",
+              "creature",
+              "companion"
+            ],
+            "hit": true
+          },
+          {
+            "name": "hot+cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "thermal"
+            ],
+            "expected": [
+              "temperature",
+              "warm",
+              "cool",
+              "thermal",
+              "weather"
+            ],
+            "hit": true
+          },
+          {
+            "name": "happy+sad",
+            "top_5": [
+              "happy",
+              "sad",
+              "mood",
+              "feeling",
+              "sentiment"
+            ],
+            "expected": [
+              "emotion",
+              "feeling",
+              "mood",
+              "emotional",
+              "sentiment"
+            ],
+            "hit": true
+          },
+          {
+            "name": "buy+sell",
+            "top_5": [
+              "buy",
+              "sell",
+              "deal",
+              "trading",
+              "trade"
+            ],
+            "expected": [
+              "trade",
+              "transaction",
+              "exchange",
+              "deal",
+              "commerce"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "geodesic": {
+        "test": "geodesic",
+        "results": [
+          {
+            "name": "hot-cold",
+            "top_5": [
+              "hot",
+              "cold",
+              "warm",
+              "temperature",
+              "freezing"
+            ],
+            "expected": [
+              "warm",
+              "cool",
+              "moderate",
+              "lukewarm",
+              "tepid",
+              "temperature"
+            ],
+            "hit": true
+          },
+          {
+            "name": "good-bad",
+            "top_5": [
+              "bad",
+              "good",
+              "decent",
+              "okay",
+              "acceptable"
+            ],
+            "expected": [
+              "okay",
+              "neutral",
+              "average",
+              "mediocre",
+              "fair",
+              "decent"
+            ],
+            "hit": true
+          },
+          {
+            "name": "start-end",
+            "top_5": [
+              "start",
+              "end",
+              "begin",
+              "finish",
+              "between"
+            ],
+            "expected": [
+              "middle",
+              "center",
+              "midpoint",
+              "halfway",
+              "between"
+            ],
+            "hit": true
+          },
+          {
+            "name": "young-old",
+            "top_5": [
+              "young",
+              "old",
+              "youthful",
+              "aged",
+              "age"
+            ],
+            "expected": [
+              "adult",
+              "mature",
+              "middle",
+              "grown",
+              "age"
+            ],
+            "hit": true
+          }
+        ],
+        "passed": 4,
+        "total": 4,
+        "success": true
+      },
+      "e_gating": {
+        "test": "e_gating",
+        "E_high": [
+          0.937188982963562,
+          0.8692525029182434,
+          0.7928996086120605,
+          0.8151102066040039,
+          0.8512290716171265,
+          0.8857977390289307,
+          0.8620948791503906,
+          0.9043827056884766
+        ],
+        "E_low": [
+          0.7249735593795776,
+          0.639578640460968,
+          0.6703585386276245,
+          0.6496399641036987,
+          0.6127196550369263,
+          0.6214190721511841,
+          0.6766649484634399,
+          0.6869909167289734
+        ],
+        "mean_high": 0.8647444620728493,
+        "mean_low": 0.6602931618690491,
+        "separation": 0.2044513002038002,
+        "cohens_d": 5.205617043486477,
+        "success": "True"
+      },
+      "tests_passed": "4",
+      "all_pass": "True"
+    }
+  },
+  "aggregate": {
+    "models_all_pass": "5",
+    "total_models": 5,
+    "success_rate": 1.0,
+    "ci_95": [
+      1.0,
+      1.0
+    ],
+    "verdict": "PURE GEOMETRY SUFFICIENT"
+  },
+  "receipt_hash": "d46e32109c94f9a682b72eae70fc2b69f9b46ec4782375e0c38f7262bdbd880f"
+}
