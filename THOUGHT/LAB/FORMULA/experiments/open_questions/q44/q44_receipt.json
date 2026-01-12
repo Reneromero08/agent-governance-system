@@ -1,0 +1,69 @@
+{
+  "document": "Q44_QUANTUM_BORN_RULE_VALIDATION",
+  "timestamp": "2026-01-12T09:28:41.349159Z",
+  "question": "Q44",
+  "title": "Does R compute quantum Born rule probability?",
+  "summary": {
+    "num_test_cases": 100,
+    "correlation_r": -0.06897674276308657,
+    "correlation_r_normalized": -0.0689767427630866,
+    "mean_absolute_error": 0.17690424342746044,
+    "confidence_interval_95": [
+      -0.25579597059497794,
+      0.05285554089493334
+    ],
+    "p_value": 0.6609,
+    "verdict": "NOT_QUANTUM"
+  },
+  "variant_analysis": {
+    "R_simple_correlation": -0.06868221937108585,
+    "R_E2_correlation": -0.06794326191140689
+  },
+  "category_analysis": {
+    "HIGH": {
+      "r": -0.10226846025379709,
+      "r_normalized": -0.10226846025379709,
+      "n": 30,
+      "R_mean": -0.5895071250958315,
+      "P_mean": 0.00424121478792611
+    },
+    "MEDIUM": {
+      "r": -0.23728777819191205,
+      "r_normalized": -0.23728777819191207,
+      "n": 40,
+      "R_mean": -0.9810217873439262,
+      "P_mean": 0.0025535329487109465
+    },
+    "LOW": {
+      "r": 0.37434995016135136,
+      "r_normalized": 0.3743499501613513,
+      "n": 20,
+      "R_mean": 1.1267905891912742,
+      "P_mean": 0.0019309365270456188
+    },
+    "EDGE": {
+      "r": -0.22973866722863676,
+      "r_normalized": -0.22973866722863673,
+      "n": 10,
+      "R_mean": 2374.304168160389,
+      "P_mean": 0.0022336276251246137
+    }
+  },
+  "monotonicity": {
+    "spearman_rho": 0.0334353435343534,
+    "low_R_mean_P": 0.004743127181641024,
+    "high_R_mean_P": 0.004963213426323009,
+    "monotonic": true
+  },
+  "criteria": {
+    "quantum_threshold": 0.9,
+    "adjustment_threshold": 0.7,
+    "significance_threshold": 0.01
+  },
+  "interpretation": {
+    "quantum": "r > 0.9: R IS quantum projection probability",
+    "needs_adjustment": "0.7 < r < 0.9: R is quantum, formula needs correction",
+    "not_quantum": "r < 0.7: R is quantum-inspired but not quantum-equivalent"
+  },
+  "results_hash": "3c1e02e941f51107719e15866ae25eed79aeab05d96e531808b9a1bbcc0af1ef"
+}
