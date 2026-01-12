@@ -6,6 +6,7 @@ Wraps geometric operations with SQLite backing.
 """
 
 import sys
+import json
 from pathlib import Path
 from typing import List, Dict, Optional, Tuple
 import numpy as np
@@ -625,6 +626,33 @@ class VectorStore:
                 stats['skipped'] += 1
 
         return stats
+
+    def get_paper_chunks(self, limit: int = 1000) -> List[Dict]:
+        """
+        Get all loaded paper chunks for exploration.
+
+        Returns:
+            List of dicts with chunk_id, paper_id, heading, content
+        """
+        # Query receipts with paper_load operation
+        cursor = self.db.conn.execute(
+            "SELECT output_hash, metadata FROM receipts WHERE operation = 'paper_load' LIMIT ?",
+            (limit,)
+        )
+
+        chunks = []
+        for row in cursor.fetchall():
+            output_hash = row[0]
+            metadata = json.loads(row[1]) if row[1] else {}
+            chunks.append({
+                'chunk_id': output_hash,
+                'paper_id': metadata.get('paper_id', 'unknown'),
+                'heading': metadata.get('heading', ''),
+                'content': metadata.get('content', ''),
+                'alias': metadata.get('alias', '')
+            })
+
+        return chunks
 
     def find_paper_chunks(
         self,
