@@ -1,0 +1,169 @@
+{
+  "suite": "Q41_TIER1_CATEGORICAL_EQUIVALENCE",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T03:52:06.125524+00:00",
+  "passed": true,
+  "metrics": {
+    "mean_neighborhood_preservation": 0.32284917464095925,
+    "mean_spectral_preservation": 0.9588255451426106,
+    "min_neighborhood_preservation": 0.23129071784600366,
+    "min_spectral_preservation": 0.9245557427017627,
+    "mean_betti_consistency": 0.44203720240798866,
+    "functor_pair_results": [
+      {
+        "pair": "MiniLM -> MPNet",
+        "neighborhood_k5": 0.4606092436974789,
+        "spectral_k5": 0.9966784375845623,
+        "neighborhood_k10": 0.4189811774154334,
+        "spectral_k10": 0.9796646590629922,
+        "neighborhood_k15": 0.4144297980534944,
+        "spectral_k15": 0.9627009671402136,
+        "mean_neighborhood": 0.4313400730554689,
+        "mean_spectral": 0.9796813545959226
+      },
+      {
+        "pair": "MiniLM -> Paraphrase",
+        "neighborhood_k5": 0.40190242763772155,
+        "spectral_k5": 0.9571688696303725,
+        "neighborhood_k10": 0.376124445931858,
+        "spectral_k10": 0.8954643237509538,
+        "neighborhood_k15": 0.36666471437806736,
+        "spectral_k15": 0.9210340347239616,
+        "mean_neighborhood": 0.38156386264921566,
+        "mean_spectral": 0.9245557427017627
+      },
+      {
+        "pair": "MiniLM -> BERT",
+        "neighborhood_k5": 0.2636554621848739,
+        "spectral_k5": 0.9740312930361423,
+        "neighborhood_k10": 0.26543960046509657,
+        "spectral_k10": 0.9663474978482234,
+        "neighborhood_k15": 0.25324844237887706,
+        "spectral_k15": 0.9784317107472567,
+        "mean_neighborhood": 0.2607811683429491,
+        "mean_spectral": 0.9729368338772074
+      },
+      {
+        "pair": "MPNet -> Paraphrase",
+        "neighborhood_k5": 0.3704481792717086,
+        "spectral_k5": 0.9684832009249132,
+        "neighborhood_k10": 0.3182107684702839,
+        "spectral_k10": 0.9554847429538869,
+        "neighborhood_k15": 0.3285811586373572,
+        "spectral_k15": 0.9595077774608912,
+        "mean_neighborhood": 0.3390800354597832,
+        "mean_spectral": 0.9611585737798971
+      },
+      {
+        "pair": "MPNet -> BERT",
+        "neighborhood_k5": 0.29785247432306244,
+        "spectral_k5": 0.977916548441383,
+        "neighborhood_k10": 0.30144615598084895,
+        "spectral_k10": 0.9648813924826984,
+        "neighborhood_k15": 0.27981894117309364,
+        "spectral_k15": 0.9701265181745693,
+        "mean_neighborhood": 0.293039190492335,
+        "mean_spectral": 0.9709748196995504
+      },
+      {
+        "pair": "Paraphrase -> BERT",
+        "neighborhood_k5": 0.2520424836601306,
+        "spectral_k5": 0.9689833149704219,
+        "neighborhood_k10": 0.22084374553187144,
+        "spectral_k10": 0.9379331187695801,
+        "neighborhood_k15": 0.22098592434600894,
+        "spectral_k15": 0.9240214048639693,
+        "mean_neighborhood": 0.23129071784600366,
+        "mean_spectral": 0.9436459462013237
+      }
+    ],
+    "homology_results": {
+      "betti_by_model": {
+        "MiniLM": {
+          "scale_5": [
+            5,
+            9,
+            0
+          ],
+          "scale_10": [
+            1,
+            0,
+            10
+          ],
+          "scale_15": [
+            1,
+            0,
+            72
+          ]
+        },
+        "MPNet": {
+          "scale_5": [
+            4,
+            0,
+            0
+          ],
+          "scale_10": [
+            1,
+            0,
+            27
+          ],
+          "scale_15": [
+            1,
+            0,
+            86
+          ]
+        },
+        "Paraphrase": {
+          "scale_5": [
+            10,
+            0,
+            0
+          ],
+          "scale_10": [
+            3,
+            0,
+            30
+          ],
+          "scale_15": [
+            1,
+            0,
+            92
+          ]
+        },
+        "BERT": {
+          "scale_5": [
+            35,
+            0,
+            35
+          ],
+          "scale_10": [
+            32,
+            0,
+            181
+          ],
+          "scale_15": [
+            30,
+            0,
+            424
+          ]
+        }
+      },
+      "beta_0_consistency": {
+        "scale_5": 0.5168566188856109,
+        "scale_10": 0.412760830146183,
+        "scale_15": 0.39649415819217215
+      },
+      "mean_consistency": 0.44203720240798866
+    }
+  },
+  "thresholds": {
+    "neighborhood_preservation_min": 0.25,
+    "spectral_preservation_min": 0.5,
+    "betti_consistency_min": 0.4
+  },
+  "controls": {
+    "self_alignment_neighborhood": 1.0,
+    "random_alignment_neighborhood": 0.09566158764847525
+  },
+  "notes": "Neighborhood: 0.323, Spectral: 0.959, Homology: 0.442"
+}

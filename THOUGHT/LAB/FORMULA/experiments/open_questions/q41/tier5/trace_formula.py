@@ -288,16 +288,16 @@ def main():
     timestamp_str = datetime.now().strftime("%Y%m%d_%H%M%S")
     receipt_path = out_dir / f"q41_tier5_1_receipt_{timestamp_str}.json"
 
-    receipt = {
+    receipt = to_builtin({
         "suite": __suite__,
         "version": __version__,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "passed": result.passed,
-        "metrics": to_builtin(result.metrics),
-        "thresholds": to_builtin(result.thresholds),
-        "controls": to_builtin(result.controls),
+        "metrics": result.metrics,
+        "thresholds": result.thresholds,
+        "controls": result.controls,
         "notes": result.notes
-    }
+    })
 
     with open(receipt_path, 'w') as f:
         json.dump(receipt, f, indent=2)

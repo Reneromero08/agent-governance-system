@@ -1,0 +1,63 @@
+{
+  "suite": "Q41_TIER4_AUTOMORPHIC_FORMS",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T03:53:43.359049+00:00",
+  "passed": true,
+  "metrics": {
+    "orthogonality_error": 2.835388142944555e-16,
+    "reconstruction_error": 0.2167217203760835,
+    "n_eigenfunctions_tested": 20,
+    "eigenvalue_gap_stats": {
+      "mean_gap": 0.04384596354338332,
+      "gap_variance": 0.0008910745047648351,
+      "gap_cv": 0.6808122939586275
+    },
+    "participation_ratio_stats": {
+      "mean": 25.1822994603046,
+      "std": 11.43891472608196,
+      "values": [
+        63.65808604449768,
+        45.45879361972672,
+        16.507134866738784,
+        13.514829074090699,
+        23.802816771186222,
+        14.993315228238641,
+        26.666270094236715,
+        30.752352732725715,
+        28.28978600869119,
+        26.834473664032167
+      ]
+    },
+    "cross_model_similarities": [
+      [
+        "MiniLM",
+        "MPNet",
+        0.017649462049147836
+      ],
+      [
+        "MiniLM",
+        "Paraphrase",
+        0.02883711352534686
+      ],
+      [
+        "MiniLM",
+        "BERT",
+        0.19413006330007024
+      ]
+    ],
+    "mean_cross_model_distance": 0.08020554629152164
+  },
+  "thresholds": {
+    "orthogonality_threshold": 0.01,
+    "reconstruction_threshold": 0.9,
+    "positive_control_threshold": 1e-06,
+    "negative_control_threshold": 0.05
+  },
+  "controls": {
+    "positive_rotated_error": 1.5543122344752192e-15,
+    "positive_control_pass": true,
+    "negative_noise_distance": 0.08482073485617506,
+    "negative_control_pass": true
+  },
+  "notes": "Orthogonality: 2.84e-16, Reconstruction: 0.217"
+}

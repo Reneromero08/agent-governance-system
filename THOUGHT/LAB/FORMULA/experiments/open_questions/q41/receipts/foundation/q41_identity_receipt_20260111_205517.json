@@ -1,0 +1,56 @@
+{
+  "suite": "Q41_IDENTITY_TESTS",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T03:55:17.559182+00:00",
+  "passed": 4,
+  "total": 4,
+  "all_pass": true,
+  "model_used": "MiniLM",
+  "results": [
+    {
+      "name": "kernel_trace_identity",
+      "passed": true,
+      "metrics": {
+        "trace_direct": 68.0,
+        "trace_eigensum": 67.99999999999999,
+        "absolute_error": 1.4210854715202004e-14,
+        "relative_error": 2.0898315757619272e-16
+      },
+      "notes": "trace(K) = sum(eigenvalues(K)) - basic linear algebra identity"
+    },
+    {
+      "name": "laplacian_properties",
+      "passed": true,
+      "metrics": {
+        "symmetry_error": 0.0,
+        "min_eigenvalue": -1.8532022094740024e-16,
+        "max_eigenvalue": 1.5112852602173572,
+        "n_components": 1,
+        "near_zero_eigenvalues": 1
+      },
+      "notes": "Normalized Laplacian must be symmetric PSD with eigenvalues in [0,2]"
+    },
+    {
+      "name": "heat_trace_consistency",
+      "passed": true,
+      "metrics": {
+        "trace_matrix_exp": 26.926120616752236,
+        "trace_eigensum": 26.92612061675223,
+        "absolute_error": 7.105427357601002e-15,
+        "relative_error": 2.6388604057407115e-16,
+        "t_value": 1.0
+      },
+      "notes": "trace(exp(-tL)) = sum(exp(-t*lambda_i)) - eigendecomposition identity"
+    },
+    {
+      "name": "rotation_invariance",
+      "passed": true,
+      "metrics": {
+        "distance_matrix_error": 1.5543122344752192e-15,
+        "eigenvalue_error": 0.0,
+        "heat_trace_error": 0.0
+      },
+      "notes": "Euclidean distance-based constructions must be rotation-invariant"
+    }
+  ]
+}
