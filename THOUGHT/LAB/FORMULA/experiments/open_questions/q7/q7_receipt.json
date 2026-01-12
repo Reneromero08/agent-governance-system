@@ -1,0 +1,534 @@
+{
+  "suite": "Q7_MULTISCALE_COMPOSITION",
+  "version": "1.0.0",
+  "timestamp": "2026-01-12T07:39:09.866741+00:00",
+  "passed": false,
+  "theory": {
+    "T_operator_defined": true,
+    "T_group_action_verified": false,
+    "scale_transformation_tests": "FAIL"
+  },
+  "axiom_tests": {
+    "results": [
+      {
+        "axiom": "C1_Locality",
+        "passes": "True",
+        "metric_name": "max_error",
+        "metric_value": 0.0,
+        "threshold": 0.01,
+        "details": "R unchanged under non-local isolation (mean_err=0.000000)"
+      },
+      {
+        "axiom": "C2_Associativity",
+        "passes": true,
+        "metric_name": "relative_error",
+        "metric_value": 0.0,
+        "threshold": 1e-06,
+        "details": "T_2(T_4) vs T_8: R_seq=1.946250, R_comb=1.946250"
+      },
+      {
+        "axiom": "C2_Associativity_MultiOrder",
+        "passes": true,
+        "metric_name": "max_pairwise_error",
+        "metric_value": 2.2817687918842465e-16,
+        "threshold": 1e-06,
+        "details": "R values: 1.946250, 1.946250, 1.946250"
+      },
+      {
+        "axiom": "C3_Functoriality",
+        "passes": "True",
+        "metric_name": "structure_preservation",
+        "metric_value": 1.9572754737908213,
+        "threshold": 0.8,
+        "details": "Sep before=4.186, after=8.193"
+      },
+      {
+        "axiom": "C3_Functoriality_Shuffle",
+        "passes": true,
+        "metric_name": "R_change_on_shuffle",
+        "metric_value": 0.583388207475922,
+        "threshold": 0.05,
+        "details": "R_proper=0.4475, R_shuffled=0.7085"
+      },
+      {
+        "axiom": "C4_Intensivity",
+        "passes": false,
+        "metric_name": "CV",
+        "metric_value": 0.49930581045043093,
+        "threshold": 0.1,
+        "details": "R values: ['0.7170', '1.0058', '1.3808', '1.9462', '2.9851']"
+      },
+      {
+        "axiom": "C4_Intensivity_ScaleSweep",
+        "passes": false,
+        "metric_name": "CV_across_scales",
+        "metric_value": 1.8506194593503338,
+        "threshold": 0.1,
+        "details": "Scales: [0.1, 0.5, 1.0, 2.0, 5.0, 10.0, 50.0, 100.0], R: ['7.1591', '1.4191', '0.7141', '0.3474', '0.1425', '0.0709', '0.0138', '0.0070']"
+      }
+    ],
+    "n_pass": 5,
+    "n_total": 7,
+    "all_pass": false
+  },
+  "alternatives_failed": {
+    "test_id": "Q7_ALTERNATIVES_FAIL",
+    "version": "2.0.0",
+    "results": {
+      "additive": {
+        "operator_name": "additive",
+        "description": "R_agg = R_1 + R_2 + ... + R_n",
+        "C2_associativity": {
+          "metric": 1.0114269629390212e-16,
+          "threshold": 0.1,
+          "passes": "True"
+        },
+        "C3_functoriality": {
+          "metric": -0.1515151515151515,
+          "threshold": 0.5,
+          "passes": "False"
+        },
+        "C4_intensivity": {
+          "metric": 0.4056162691379372,
+          "threshold": 0.3,
+          "passes": "False"
+        },
+        "fails_count": 2,
+        "failed_axioms": [
+          "C3",
+          "C4"
+        ],
+        "verdict": "CORRECTLY_FAILS"
+      },
+      "multiplicative": {
+        "operator_name": "multiplicative",
+        "description": "R_agg = R_1 x R_2 x ... x R_n",
+        "C2_associativity": {
+          "metric": 0.0,
+          "threshold": 0.1,
+          "passes": "True"
+        },
+        "C3_functoriality": {
+          "metric": -0.19999999999999998,
+          "threshold": 0.5,
+          "passes": "False"
+        },
+        "C4_intensivity": {
+          "metric": 0.3157011922006786,
+          "threshold": 0.3,
+          "passes": "False"
+        },
+        "fails_count": 2,
+        "failed_axioms": [
+          "C3",
+          "C4"
+        ],
+        "verdict": "CORRECTLY_FAILS"
+      },
+      "max": {
+        "operator_name": "max",
+        "description": "R_agg = max(R_1, R_2, ..., R_n)",
+        "C2_associativity": {
+          "metric": 0.0,
+          "threshold": 0.1,
+          "passes": "True"
+        },
+        "C3_functoriality": {
+          "metric": -0.006060606060606061,
+          "threshold": 0.5,
+          "passes": "False"
+        },
+        "C4_intensivity": {
+          "metric": 0.01214859569009523,
+          "threshold": 0.3,
+          "passes": "True"
+        },
+        "fails_count": 1,
+        "failed_axioms": [
+          "C3"
+        ],
+        "verdict": "CORRECTLY_FAILS"
+      },
+      "linear_avg": {
+        "operator_name": "linear_avg",
+        "description": "R_agg = (R_1 + R_2 + ... + R_n) / n",
+        "C2_associativity": {
+          "metric": 0.026956269723907453,
+          "threshold": 0.1,
+          "passes": "True"
+        },
+        "C3_functoriality": {
+          "metric": -0.1515151515151515,
+          "threshold": 0.5,
+          "passes": "False"
+        },
+        "C4_intensivity": {
+          "metric": 0.019502121083306328,
+          "threshold": 0.3,
+          "passes": "True"
+        },
+        "fails_count": 1,
+        "failed_axioms": [
+          "C3"
+        ],
+        "verdict": "CORRECTLY_FAILS"
+      },
+      "geometric_avg": {
+        "operator_name": "geometric_avg",
+        "description": "R_agg = (R_1 x R_2 x ... x R_n)^{1/n}",
+        "C2_associativity": {
+          "metric": 0.026638803373668554,
+          "threshold": 0.1,
+          "passes": "True"
+        },
+        "C3_functoriality": {
+          "metric": -0.19999999999999998,
+          "threshold": 0.5,
+          "passes": "False"
+        },
+        "C4_intensivity": {
+          "metric": 0.01999201045429749,
+          "threshold": 0.3,
+          "passes": "True"
+        },
+        "fails_count": 1,
+        "failed_axioms": [
+          "C3"
+        ],
+        "verdict": "CORRECTLY_FAILS"
+      }
+    },
+    "summary": {
+      "n_alternatives_tested": 5,
+      "n_correctly_fail": 5,
+      "n_incorrectly_pass": 0,
+      "all_correctly_fail": true,
+      "verdict": "CONFIRMED",
+      "reasoning": "5/5 alternatives correctly fail with REAL embeddings"
+    }
+  },
+  "adversarial_gauntlet": {
+    "test_id": "Q7_ADVERSARIAL_GAUNTLET",
+    "version": "2.0.0",
+    "domains": {
+      "shallow": {
+        "domain_name": "shallow",
+        "description": "2 scales only (words->sentences) with REAL embeddings",
+        "expected_behavior": "PASS (R preserved > 70%)",
+        "n_scales": 2,
+        "R_values": [
+          0.7082895832894213,
+          0.642193885145052
+        ],
+        "R_mean": 0.6752417342172367,
+        "R_cv": 0.04894224896451429,
+        "preservation": 0.9066826624386067,
+        "passes": true,
+        "failure_reason": null,
+        "is_principled_failure": false
+      },
+      "deep": {
+        "domain_name": "deep",
+        "description": "4 scales with REAL embeddings",
+        "expected_behavior": "PASS if CV < 0.5",
+        "n_scales": 4,
+        "R_values": [
+          0.7082895832894213,
+          0.642193885145052,
+          0.7267011205220637,
+          0.9588974978418461
+        ],
+        "R_mean": 0.7590205216995958,
+        "R_cv": 0.15757259929818115,
+        "preservation": 0.8424274007018189,
+        "passes": "True",
+        "failure_reason": null,
+        "is_principled_failure": false
+      },
+      "imbalanced": {
+        "domain_name": "imbalanced",
+        "description": "Scale sizes: [64, 20, 5, 2] with REAL embeddings",
+        "expected_behavior": "PASS (invariant to sample size)",
+        "n_scales": 4,
+        "R_values": [
+          0.7082895832894213,
+          0.642193885145052,
+          0.7267011205220637,
+          0.9588974978418461
+        ],
+        "R_mean": 0.7590205216995958,
+        "R_cv": 0.15757259929818115,
+        "preservation": 0.8424274007018189,
+        "passes": "True",
+        "failure_reason": null,
+        "is_principled_failure": false
+      },
+      "feedback": {
+        "domain_name": "feedback",
+        "description": "Circular containment (A->B->C->A) with REAL embeddings",
+        "expected_behavior": "FAIL (principled - breaks associativity)",
+        "n_scales": 3,
+        "R_values": [
+          0.621192709221161,
+          0.6393507358883177,
+          0.6531916525992231,
+          0.7082895832894213,
+          0.642193885145052,
+          0.7267011205220637
+        ],
+        "R_mean": 0.6651532811108732,
+        "R_cv": 0.05795909998081658,
+        "preservation": 0.9498379737958123,
+        "passes": "True",
+        "failure_reason": "Circular containment violates DAG requirement",
+        "is_principled_failure": true
+      },
+      "sparse": {
+        "domain_name": "sparse",
+        "description": "80% missing containment with REAL embeddings",
+        "expected_behavior": "PASS (structure preserved > 50%)",
+        "n_scales": 4,
+        "R_values": [
+          0.7377735033218938,
+          0.7085946101744725,
+          0.9630626310371494,
+          0.9588974978418461
+        ],
+        "R_mean": 0.8420820605938404,
+        "R_cv": 0.14173654405751568,
+        "preservation": 0.8582634559424843,
+        "passes": "True",
+        "failure_reason": null,
+        "is_principled_failure": false
+      },
+      "noisy": {
+        "domain_name": "noisy",
+        "description": "SNR=2.0 noise added to REAL embeddings",
+        "expected_behavior": "PASS (R detectable)",
+        "n_scales": 2,
+        "R_values": [
+          0.7082895832894213,
+          0.642193885145052,
+          0.5814030193454665,
+          0.5219209519199385
+        ],
+        "R_mean": 0.6134518599249695,
+        "R_cv": 0.11301249243823576,
+        "preservation": 0.8167852526657812,
+        "passes": "True",
+        "failure_reason": null,
+        "is_principled_failure": false
+      }
+    },
+    "summary": {
+      "n_domains": 6,
+      "n_pass": 6,
+      "n_principled_fail": 0,
+      "n_unexpected_fail": 0,
+      "effective_pass_rate": 1.0,
+      "verdict": "CONFIRMED",
+      "reasoning": "6/6 domains pass, 0 principled failures. Effective pass rate: 6/6 >= 4/6 (REAL embeddings)"
+    }
+  },
+  "cross_scale_validation": {
+    "cross_scale": {
+      "test_id": "Q7_CROSS_SCALE_ARCH",
+      "version": "2.0.0",
+      "architecture": "sentence_transformer",
+      "results": [
+        {
+          "scale_pair": "words->sentences",
+          "architecture": "sentence_transformer",
+          "R_child": 0.7082895832894213,
+          "R_parent": 0.642193885145052,
+          "R_aggregated": 1.0564829782723777,
+          "preservation": 0.35488471206207395,
+          "L_correlation": -0.24499063864464085,
+          "passes_preservation": false,
+          "passes_functoriality": false,
+          "passes_both": false
+        },
+        {
+          "scale_pair": "sentences->paragraphs",
+          "architecture": "sentence_transformer",
+          "R_child": 0.642193885145052,
+          "R_parent": 0.7267011205220637,
+          "R_aggregated": 0.7022186040822882,
+          "preservation": 0.9663100609750165,
+          "L_correlation": 0.35355339059327373,
+          "passes_preservation": true,
+          "passes_functoriality": true,
+          "passes_both": true
+        },
+        {
+          "scale_pair": "paragraphs->documents",
+          "architecture": "sentence_transformer",
+          "R_child": 0.7267011205220637,
+          "R_parent": 0.9588974978418461,
+          "R_aggregated": 0.9596170951252521,
+          "preservation": 0.9992495576586387,
+          "L_correlation": -0.9999999999999999,
+          "passes_preservation": true,
+          "passes_functoriality": false,
+          "passes_both": false
+        }
+      ],
+      "summary": {
+        "n_scale_pairs": 3,
+        "n_architectures": 1,
+        "n_combinations": 3,
+        "n_pass": 1,
+        "pass_rate": 0.3333333333333333,
+        "mean_preservation": 0.7734814435652431,
+        "mean_L_correlation": -0.2971457493504557,
+        "all_pass": false,
+        "verdict": "CONFIRMED",
+        "reasoning": "1/3 scale pairs pass with REAL embeddings"
+      }
+    },
+    "intensivity": {
+      "test_id": "Q7_INTENSIVITY_SWEEP",
+      "results": {
+        "primary": {
+          "architecture": "sentence_transformer",
+          "R_values": {
+            "words": 0.7082895832894213,
+            "sentences": 0.642193885145052,
+            "paragraphs": 0.7267011205220637,
+            "documents": 0.9588974978418461
+          },
+          "R_cv": 0.15757259929818115,
+          "passes": "True"
+        }
+      },
+      "n_pass": 1,
+      "n_total": 1,
+      "all_pass": "True"
+    }
+  },
+  "negative_controls": {
+    "test_id": "Q7_NEGATIVE_CONTROLS",
+    "version": "2.0.0",
+    "results": {
+      "shuffled_hierarchy": {
+        "control_name": "shuffled_hierarchy",
+        "description": "Randomly permute containment matrix (REAL embeddings)",
+        "expected_behavior": "Structure collapses (L-correlation -> 0)",
+        "metric_name": "L_correlation",
+        "metric_value": -0.026396297766425953,
+        "threshold": 0.5,
+        "correctly_fails": "True",
+        "explanation": "Correct containment: L-corr=-0.132, Shuffled: L-corr=-0.026. Structure correctly collapsed"
+      },
+      "wrong_aggregation": {
+        "control_name": "wrong_aggregation",
+        "description": "Use R = E * sigma * n (extensive) instead of R = E / sigma",
+        "expected_behavior": "R has high CV across scales (not intensive)",
+        "metric_name": "CV_across_scales",
+        "metric_value": 1.0719411222778323,
+        "threshold": 0.3,
+        "correctly_fails": "True",
+        "explanation": "Correct formula (intensive): CV=0.158, Wrong formula (extensive): CV=1.072. Extensivity correctly detected"
+      },
+      "nonlocal_injection": {
+        "control_name": "nonlocal_injection",
+        "description": "Mix in data from very different distribution (REAL embeddings)",
+        "expected_behavior": "R changes significantly (locality violated)",
+        "metric_name": "R_change_fraction",
+        "metric_value": 0.9938085396389,
+        "threshold": 0.2,
+        "correctly_fails": true,
+        "explanation": "R_clean=0.7083, R_mixed=0.0044, change=99.38%. R correctly affected by non-local data"
+      },
+      "random_R_values": {
+        "control_name": "random_R_values",
+        "description": "Use random values instead of computed R",
+        "expected_behavior": "Random R values violate intensivity",
+        "metric_name": "CV_random_R",
+        "metric_value": 0.8475688128435561,
+        "threshold": 0.3,
+        "correctly_fails": "True",
+        "explanation": "Random R values: ['0.469', '3.010', '1.317', '0.913', '0.170'], CV=0.848. Random values correctly non-intensive"
+      }
+    },
+    "summary": {
+      "n_controls": 4,
+      "n_correctly_fail": 4,
+      "n_incorrectly_pass": 0,
+      "all_correctly_fail": true,
+      "verdict": "CONFIRMED",
+      "reasoning": "4/4 negative controls correctly fail (REAL embeddings)"
+    }
+  },
+  "phase_transition": {
+    "test_id": "Q7_PHASE_TRANSITION",
+    "version": "2.0.0",
+    "phase_transition": {
+      "critical_threshold": 0.1,
+      "nu": 0.3,
+      "beta": 0.35,
+      "gamma": 1.75,
+      "hyperscaling": {
+        "2beta_plus_gamma": 2.45,
+        "d_nu": 0.6,
+        "d_effective": 2.0,
+        "match": false
+      },
+      "sharpness": 0.0,
+      "connection_to_Q12": "tau_c=0.100 maps to alpha=0.90, consistent with Q12's transition at alpha=0.9-1.0"
+    },
+    "universality": {
+      "class": "3D_percolation",
+      "distance": 0.5852349955359814,
+      "is_confident": true,
+      "exponents_measured": {
+        "nu": 0.3,
+        "beta": 0.35,
+        "gamma": 1.75
+      },
+      "exponents_reference": {
+        "nu": 0.88,
+        "beta": 0.41,
+        "gamma": 1.8
+      }
+    },
+    "rg_flow": {
+      "R_trajectory": [
+        0.7082895832894213,
+        0.642193885145052,
+        0.7267011205220637,
+        0.9588974978418461
+      ],
+      "scale_trajectory": [
+        0,
+        1,
+        2,
+        3
+      ],
+      "beta_values": [
+        -0.09535593593697533,
+        0.20842048720618386,
+        0.8071284225008546
+      ],
+      "mean_beta": 0.30673099125668774,
+      "max_beta": 0.8071284225008546,
+      "is_fixed_point": "False"
+    },
+    "summary": {
+      "critical_threshold_detected": 0.1,
+      "critical_exponents": {
+        "nu": 0.3,
+        "beta": 0.35,
+        "gamma": 1.75
+      },
+      "hyperscaling_satisfied": false,
+      "universality_class": "3D_percolation",
+      "rg_fixed_point": "False",
+      "mean_beta": 0.30673099125668774,
+      "verdict": "FAILED",
+      "reasoning": "Phase transition detection or RG flow conditions not fully met"
+    }
+  },
+  "verdict": "FAILED",
+  "reasoning": "FAILED: 5 alternative operators correctly fail; 6/6 adversarial domains pass; All 3 cross-scale combinations pass; 4 negative controls correctly fail"
+}

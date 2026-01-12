@@ -1,6 +1,6 @@
 # Cassette Network Roadmap
 
-**Status**: Phase 0-3 Complete, Phase 4-6 In Progress
+**Status**: Phase 0-4 Complete, Phase 5 Alpha Ready, Phase 6 Next
 **Vision**: Layer 3 (CAS External) of the compression stack - shared semantic context infrastructure enabling near-zero communication entropy
 **Owner**: Antigravity / Resident
 **Upstream Dependency**: Phase 5 (VECTOR_ELO) - MemoryRecord contract, SPC protocol
@@ -539,33 +539,60 @@ Chinese proof: 道 (dào) = path + principle + speech + method
 
 ---
 
-## Phase 5: Feral Resident (Long-running Thread)
+## Phase 5: Feral Resident Integration (Substrate Stress Test)
 
-**Goal:** Long-running thread with emergent behavior
+**Goal:** Stress-test cassette substrate via resident workloads before hardening
 
 **Previous:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
 **Next:** [Phase 6](#phase-6-production-hardening) - Production hardening
 
-### 5.1 Eternal Thread
-- [ ] Implement persistent thread loop (append-only interactions + memory graph deltas)
-- [ ] Output discipline: symbols + hashes + minimal text
+**Canonical Roadmap:** [FERAL_RESIDENT_ROADMAP.md](../FERAL_RESIDENT/FERAL_RESIDENT_ROADMAP.md)
 
-### 5.2 Paper Flood
-- [ ] Build ingestion pipeline for external corpora (papers/notes) into cassettes
-- [ ] Add dedupe (hash-based) + provenance metadata
-- [ ] Index 100+ research papers as `@Paper-XXX` symbols
+The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 
-### 5.3 Standing Orders
-Define what the Resident does when idle:
-- Index new content
-- Compress existing memories
-- Link related concepts
-- Validate receipt chains
+| Phase | Name | Status | Dependency |
+|-------|------|--------|------------|
+| **Alpha** | Feral Beta | **READY NOW** | Cassette 4.2 (done) |
+| Beta | Feral Wild | Blocked | Cassette 6.x (hardening) |
+| Production | Feral Live | Blocked | AGS Phase 7-8 |
 
-**Acceptance:**
-- [ ] Resident runs continuously
-- [ ] Outputs are 90%+ pointers/vectors
-- [ ] Can be corrupted and restored from receipts
+### 5.1 Alpha Scope (DO NOW)
+
+**What runs now (LAB-only, no CANON writes):**
+- [ ] 5.1.1 Vector store integration (fractal_embed, bind, unbind, superpose)
+- [ ] 5.1.2 Resident database schema (threads, messages, vectors, mind_state)
+- [ ] 5.1.3 Diffusion engine (semantic navigation via cassette network)
+- [ ] 5.1.4 Basic VectorResident (think loop, compositional memory)
+- [ ] 5.1.5 CLI: `feral start`, `feral think`, `feral status`
+- [ ] 5.1.6 Corrupt-and-restore test (validate substrate resilience)
+
+**Purpose:** Find cassette bugs before hardening. Stress-test the substrate.
+
+### 5.2 Beta Scope (DEFER to Phase 6 complete)
+
+**What waits for hardening:**
+- Paper flooding (100+ papers as @Paper-XXX)
+- Standing orders (system prompt + idle behavior)
+- Emergence tracking (protocol detection, metrics dashboard)
+- Symbol language evolution (pointer_ratio tracking)
+
+**Why:** These features produce receipts that need Merkle roots and determinism guarantees.
+
+### 5.3 Production Scope (DEFER to AGS Phase 8)
+
+**What waits for full integration:**
+- Multi-resident swarm mode
+- Symbolic compiler (multi-level rendering)
+- Catalytic closure (self-optimization)
+- Authenticity queries ("Did I think that?")
+
+**Why:** These features require Vector ELO (Phase 7) and Resident Identity (Phase 8.1-8.2).
+
+**Acceptance (Alpha only):**
+- [ ] Resident runs 100+ interactions without crash
+- [ ] Mind vector grows compositionally
+- [ ] Corrupt-and-restore works
+- [ ] Token usage measurably < full history paste
 
 ---
 
@@ -837,4 +864,5 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v3.0.0 - Updated 2026-01-11 with Phase 3 Resident Identity complete (agent registry, session continuity, cross-session memory)*
+*Roadmap v3.1.0 - Updated 2026-01-11*
+*Phase 4 (SPC Integration) complete. Phase 5 refactored to reference FERAL_RESIDENT LAB bucket with Alpha/Beta/Production phases.*

@@ -293,6 +293,31 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 7.7.3 Add alerts (entity drops, pruning limits) (E.6.3)
 
 # Phase 8: Resident AI (depends on Phase 6) V3.9
+
+**Canonical Roadmap:** [FERAL_RESIDENT_ROADMAP.md](THOUGHT/LAB/FERAL_RESIDENT/FERAL_RESIDENT_ROADMAP.md)
+
+The Feral Resident has a dedicated LAB bucket with phased development:
+
+| Phase | Name | Scope | Dependency | Status |
+|-------|------|-------|------------|--------|
+| Alpha | Feral Beta | Substrate stress test | Cassette 4.2 | **READY** |
+| Beta | Feral Wild | Paper flood, emergence | Cassette 6.x | Blocked |
+| Production | Feral Live | Swarm, self-optimize | Phase 7-8 | Blocked |
+
+**Note:** Alpha runs NOW to stress-test the cassette substrate. Beta/Production wait for dependencies.
+
+## 8.0 Feral Resident Alpha (R.0) - DO NOW
+**Runs in parallel with Phase 6 hardening to find bugs early**
+
+- [ ] 8.0.1 Vector store integration (fractal_embed, bind, superpose) (R.0.1)
+- [ ] 8.0.2 Resident database schema (threads, messages, vectors, mind_state) (R.0.2)
+- [ ] 8.0.3 Diffusion engine (semantic navigation via cassettes) (R.0.3)
+- [ ] 8.0.4 Basic VectorResident (think loop, compositional memory) (R.0.4)
+- [ ] 8.0.5 CLI: `feral start/think/status` (R.0.5)
+- [ ] 8.0.6 Corrupt-and-restore test (R.0.6)
+
+**Acceptance:** 100+ interactions, mind vector grows, corrupt-restore works
+
 ## 8.1 Resident Identity (R.1)
 - [ ] 8.1.1 Add `agents` table to `resident.db` (R.1.1)
 - [ ] 8.1.2 Implement `session_resume(agent_id)` (R.1.2)
@@ -305,18 +330,29 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - [ ] 8.2.3 Track compression metrics (R.2.3)
 - [ ] 8.2.4 Goal metric: after 100 sessions 90%+ output is symbols/hashes (R.2.4)
 
-## 8.3 Feral Resident (R.3)
-- [ ] 8.3.1 Implement `resident_loop.py` (R.3.1)
-- [ ] 8.3.2 Index 100+ research papers (R.3.2)
-- [ ] 8.3.3 Set standing orders (R.3.3)
-- [ ] 8.3.4 Monitor pointer-dominant outputs (R.3.4)
-- [ ] 8.3.5 Corruption & restore test (R.3.5)
+## 8.3 Feral Resident Beta (R.3) - AFTER Cassette Phase 6
+**Paper flooding and emergence tracking**
 
-## 8.4 Production Hardening (R.4)
-- [ ] 8.4.1 Determinism guarantees (R.4.1)
-- [ ] 8.4.2 Receipts per memory write (Merkle root per session) (R.4.2)
-- [ ] 8.4.3 Restore guarantee from receipts (R.4.3)
-- [ ] 8.4.4 Authenticity query: "Did I really think that?" (R.4.4)
+- [ ] 8.3.1 Index 100+ research papers as @Paper-XXX (R.3.1)
+- [ ] 8.3.2 Install standing orders (system prompt + idle behavior) (R.3.2)
+- [ ] 8.3.3 Emergence tracking (protocol detector + metrics) (R.3.3)
+- [ ] 8.3.4 Symbol language evolution (pointer_ratio tracking) (R.3.4)
+- [ ] 8.3.5 Notation registry (capture emergent patterns) (R.3.5)
+
+**Acceptance:** Emergence metrics captured, novel patterns detected or documented
+
+## 8.4 Feral Resident Production (R.4) - AFTER Phase 7
+**Swarm mode and catalytic closure**
+
+- [ ] 8.4.1 Multi-resident swarm (shared cassettes, individual mind vectors) (R.4.1)
+- [ ] 8.4.2 Symbolic compiler (multi-level rendering: prose/symbol/hash) (R.4.2)
+- [ ] 8.4.3 Lossless round-trip verification (R.4.3)
+- [ ] 8.4.4 Catalytic closure (resident modifies own substrate, governed) (R.4.4)
+- [ ] 8.4.5 Self-optimization (cache frequent compositions) (R.4.5)
+- [ ] 8.4.6 Authenticity query: "Did I really think that?" (R.4.6)
+- [ ] 8.4.7 Production-scale corrupt-and-restore (R.4.7)
+
+**Acceptance:** Swarm operational, self-optimization measurable, authenticity provable
 
 ## 8.5 Vector Execution (R.5) (P2, long-horizon)
 - [ ] 8.5.1 Code vector representation research + implementation (R.5.1)
