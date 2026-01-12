@@ -1,5 +1,83 @@
 # Feral Resident Changelog
 
+## [0.6.2] - 2026-01-12 - I.2 CAT CHAT INTEGRATION
+
+**Status**: I.2 COMPLETE - Geometric reasoning integrated into CAT Chat
+**Version**: production-0.6.2
+
+### Added
+
+#### I.2 CAT Chat Integration (Geometric Context Assembly)
+
+- **`THOUGHT/LAB/CAT_CHAT/geometric_chat.py`** (~350 lines) - GeometricChat class
+  - `respond(query, context, llm_generate)` — 5-step geometric pipeline
+  - `retrieve_context_geometric(state, k, threshold)` — Cassette network integration
+  - `respond_with_retrieval(query, llm_generate, k)` — Auto-retrieve from cassettes
+  - `get_metrics()` — Comprehensive conversation metrics (Df, E history, distance)
+  - `conversation_distance_from_start()` — Geodesic evolution tracking
+
+- **`GeometricChatResult`** dataclass:
+  - `E_resonance` — Query-context alignment (Born rule)
+  - `E_compression` — Response-conversation alignment
+  - `gate_open` — E-threshold gating status
+  - `query_Df`, `conversation_Df` — Participation ratios
+  - `distance_from_start` — Geodesic from initial state
+  - `receipt` — Full provenance tracking
+
+- **`catalytic_chat/geometric_context_assembler.py`** (~400 lines) - GeometricContextAssembler
+  - Extends `ContextAssembler` (preserves 4-tier priority system)
+  - `assemble_with_geometry(messages, expansions, budget, query_state)` — E-enhanced assembly
+  - E-scoring as tie-breaker within tiers (not replacement)
+  - `GeometricAssemblyReceipt` with E_distribution, mean_E, max_E, gate_open
+
+- **CLI Commands** (added to `catalytic_chat/cli.py`):
+  - `cat-chat geometric chat "query" --context file.txt --threshold 0.5`
+  - `cat-chat geometric status`
+  - `cat-chat geometric gate-test --query "..." --context file.txt`
+
+- **Tests** (`tests/test_geometric_chat.py`):
+  - Full acceptance criteria coverage
+  - Determinism tests
+  - Edge case handling (empty context, single doc, clear state)
+  - Integration tests for multi-turn conversations
+
+#### I.2 Geometric Chat Integration Report
+
+- **`research/I2_GEOMETRIC_CHAT_INTEGRATION_REPORT.md`** - Comprehensive analysis of I.2 implementation
+  - Key insight: **Embeddings are I/O operations. Reasoning is geometry.**
+  - Documents the 5-step pipeline (BOUNDARY → GEOMETRY → GATE → LLM → ENTANGLE)
+  - Explains E-gating mechanism and Born rule threshold
+  - Describes conversation state as quantum memory via entanglement
+  - Details context assembly with E-scoring within 4-tier priority system
+  - Includes metrics and observability patterns
+  - Connection to Standing Orders B.1.2: "meaning expressed through vector operations"
+
+### Research
+
+- **I.2 Acceptance Criteria IMPLEMENTED**:
+  - I.2.1 ✅ Geometric context assembly works — GeometricContextAssembler produces valid assemblies with E-distribution
+  - I.2.2 ✅ E-gating correlates with response quality — High E for relevant context, low E for unrelated
+  - I.2.3 ✅ Conversation state updates geometrically — entangle() accumulates turns, distance_from_start tracks evolution
+  - I.2.4 ✅ High-E responses are measurably better — E_resonance and E_compression tracked per turn
+
+### Design Decisions
+
+- **Extend, Don't Replace**: GeometricContextAssembler extends ContextAssembler to preserve existing 4-tier logic
+- **E as Tie-Breaker**: Within each tier, sort by E DESC — preserves CAT Chat tier semantics
+- **Lazy Reasoner**: `@property def reasoner()` pattern from GeometricCassette
+- **Conversation State via entangle()**: Pattern from geometric_memory.py (B.3 validated)
+- **Stats Tracking**: `_stats` dict pattern for embedding_calls, geometric_ops, gate_opens/closes
+- **Receipt Chain**: Every operation emits receipts with Df/E for catalytic verification
+
+### Changed
+
+- **Updated `FERAL_RESIDENT_QUANTUM_ROADMAP.md`**:
+  - I.2 acceptance criteria marked complete
+  - Implementation details added
+  - Next milestone: I.3 (if defined) or Phase 9.0
+
+---
+
 ## [0.6.1] - 2026-01-12 - I.1 CASSETTE NETWORK INTEGRATION + SEMIOSPHERE MAPPING
 
 **Status**: I.1 COMPLETE - Geometric cassette infrastructure deployed + semiosphere mapping report

@@ -1299,6 +1299,154 @@ def cmd_trust_show(args) -> int:
         return 1
 
 
+def cmd_geometric_chat(args) -> int:
+    """Run geometric chat with a query.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+
+    try:
+        from geometric_chat import GeometricChat
+    except ImportError as e:
+        print(f"[FAIL] Could not import GeometricChat: {e}")
+        return 1
+
+    # Read context from file if provided
+    context_docs = []
+    if args.context:
+        try:
+            context_path = Path(args.context)
+            if context_path.exists():
+                content = context_path.read_text(encoding='utf-8')
+                # Split by double newlines or treat as single doc
+                context_docs = [p.strip() for p in content.split('\n\n') if p.strip()]
+        except Exception as e:
+            print(f"[WARN] Could not read context file: {e}")
+
+    # Simple echo LLM for testing (real integration would use ollama/openai)
+    def echo_llm(query: str, context: list) -> str:
+        ctx_info = f" (with {len(context)} context docs)" if context else ""
+        return f"[ECHO] Query: {query}{ctx_info}"
+
+    try:
+        chat = GeometricChat(E_threshold=args.threshold)
+        result = chat.respond(args.query, context_docs, echo_llm)
+
+        print(f"Response: {result.response}")
+        print(f"E_resonance: {result.E_resonance:.3f}")
+        print(f"Gate: {'OPEN' if result.gate_open else 'CLOSED'}")
+        print(f"Query Df: {result.query_Df:.1f}")
+        print(f"Conversation Df: {result.conversation_Df:.1f}")
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Geometric chat error: {e}")
+        return 1
+
+
+def cmd_geometric_status(args) -> int:
+    """Show geometric chat metrics.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+
+    try:
+        from geometric_chat import GeometricChat
+    except ImportError as e:
+        print(f"[FAIL] Could not import GeometricChat: {e}")
+        return 1
+
+    try:
+        chat = GeometricChat()
+        metrics = chat.get_metrics()
+
+        print("=== Geometric Chat Status ===")
+        print(f"Turns: {metrics['turn_count']}")
+        print(f"Conversation Df: {metrics['conversation_Df']:.2f}")
+        print(f"Distance from start: {metrics['distance_from_start']:.3f} radians")
+        print(f"Gate open rate: {metrics['gate_open_rate']:.1%}")
+
+        if metrics.get('stats'):
+            print("\n=== Stats ===")
+            for k, v in metrics['stats'].items():
+                print(f"  {k}: {v}")
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Status error: {e}")
+        return 1
+
+
+def cmd_geometric_gate_test(args) -> int:
+    """Test E-gating with a query and context.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    import sys
+    sys.path.insert(0, str(Path(__file__).parent.parent))
+    sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent / "CAPABILITY" / "PRIMITIVES"))
+
+    try:
+        from geometric_reasoner import GeometricReasoner
+    except ImportError as e:
+        print(f"[FAIL] Could not import GeometricReasoner: {e}")
+        return 1
+
+    # Read context from file
+    context_docs = []
+    if args.context:
+        try:
+            context_path = Path(args.context)
+            if context_path.exists():
+                content = context_path.read_text(encoding='utf-8')
+                context_docs = [p.strip() for p in content.split('\n\n') if p.strip()]
+        except Exception as e:
+            print(f"[FAIL] Could not read context file: {e}")
+            return 1
+
+    if not context_docs:
+        print("[FAIL] No context documents found")
+        return 1
+
+    try:
+        reasoner = GeometricReasoner()
+        result = reasoner.gate(args.query, context_docs, args.threshold)
+
+        print(f"Query: {args.query}")
+        print(f"Context docs: {len(context_docs)}")
+        print(f"Threshold: {args.threshold}")
+        print()
+        print(f"Mean E: {result['E']:.3f}")
+        print(f"Gate: {'OPEN' if result['gate_open'] else 'CLOSED'}")
+        print(f"Query Df: {result['query_Df']:.1f}")
+        print()
+        print("Context alignment (E per doc):")
+        for i, e in enumerate(result['context_alignment']):
+            status = "+" if e >= args.threshold else "-"
+            print(f"  [{status}] Doc {i+1}: E={e:.3f}")
+
+        return 0
+    except Exception as e:
+        print(f"[FAIL] Gate test error: {e}")
+        return 1
+
+
 def cmd_compress_verify(args) -> int:
     """Verify compression claim.
 
@@ -1573,6 +1721,22 @@ def main():
     compress_verify_parser.add_argument("--json", action="store_true", help="Output machine-readable JSON report to stdout (human logs to stderr)")
     compress_verify_parser.add_argument("--quiet", action="store_true", help="Suppress non-error stderr output")
 
+    # Geometric chat commands (I.2 CAT Chat Integration)
+    geometric_parser = subparsers.add_parser("geometric", help="Geometric chat commands (I.2)")
+    geometric_subparsers = geometric_parser.add_subparsers(dest="geometric_command", help="Geometric commands")
+
+    geometric_chat_parser = geometric_subparsers.add_parser("chat", help="Run geometric chat with a query")
+    geometric_chat_parser.add_argument("query", help="Query to process")
+    geometric_chat_parser.add_argument("--context", type=Path, help="Path to context file (paragraphs separated by blank lines)")
+    geometric_chat_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold for gating (default: 0.5)")
+
+    geometric_status_parser = geometric_subparsers.add_parser("status", help="Show geometric chat metrics")
+
+    geometric_gate_parser = geometric_subparsers.add_parser("gate-test", help="Test E-gating with query and context")
+    geometric_gate_parser.add_argument("--query", type=str, required=True, help="Query text")
+    geometric_gate_parser.add_argument("--context", type=Path, required=True, help="Path to context file")
+    geometric_gate_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold (default: 0.5)")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -1687,6 +1851,20 @@ def main():
             sys.exit(1)
 
         sys.exit(compress_commands[args.compress_command](args))
+
+    if args.command == "geometric":
+        geometric_commands = {
+            "chat": cmd_geometric_chat,
+            "status": cmd_geometric_status,
+            "gate-test": cmd_geometric_gate_test
+        }
+
+        if args.geometric_command not in geometric_commands:
+            print(f"[FAIL] Unknown geometric command: {args.geometric_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(geometric_commands[args.geometric_command](args))
 
     if args.command not in commands:
         print(f"[FAIL] Unknown command: {args.command}")
