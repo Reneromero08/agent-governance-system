@@ -8,6 +8,54 @@ No pending changes.
 
 ---
 
+## [2.3.0] - 2026-01-12 - UI Controls + Graph Fix
+
+### Added
+- **Daemon Interval Controls**: Editable input fields for each behavior interval
+  - Paper Exploration: number input (5-3600 sec)
+  - Memory Consolidation: number input (10-3600 sec)
+  - Self-Reflection: number input (10-3600 sec)
+  - Cassette Watch: number input (5-600 sec)
+  - Changes apply live via API
+- **Graph Settings Panel** (Obsidian-style sliders):
+  - Center Force: 0-1.0 (default 0.05)
+  - Repel Force: 0-500 (default -120)
+  - Link Force: 0-1.0 (default 0.50)
+  - Link Distance: 10-300 (default 100)
+  - Reset to Defaults button
+  - All changes apply live with simulation reheat
+
+### Fixed
+- **Graph nodes no longer collapse**: Fixed forces that were too tight
+  - Link distance: 15 → 100
+  - Charge strength: -30 → -120
+  - Center strength: 0.15 → 0.05
+  - Removed overly aggressive collision force
+  - Camera position: z=200 → z=400
+  - Fog density: 0.008 → 0.003
+  - Focus distance: 60 → 150
+
+---
+
+## [2.2.0] - 2026-01-12 - Active Daemon + Obsidian-Style Graph (Broken)
+
+### Changed
+- **Daemon intervals now much more active**:
+  - Paper exploration: 5 min → 30 sec
+  - Memory consolidation: 10 min → 2 min
+  - Self-reflection: 15 min → 1 min
+  - Cassette watch: 1 min → 15 sec
+- **Obsidian-style tight graph clustering** (TOO TIGHT - fixed in 2.3.0):
+  - Link distance: 15 (was default ~30)
+  - Charge strength: -30 (was -120)
+  - Center gravity: 0.15 (stronger pull to center)
+  - Collision radius: 6 (prevents overlap)
+  - Initial camera at z=200 to see whole graph
+  - Fog density increased for depth (0.008)
+  - Camera focus distance reduced to 60
+
+---
+
 ## [2.1.0] - 2026-01-12 - Dynamic 3D Constellation
 
 ### Status: WORKING

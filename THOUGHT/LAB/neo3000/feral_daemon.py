@@ -79,12 +79,12 @@ class FeralDaemon:
         self.started_at: Optional[float] = None
         self._task: Optional[asyncio.Task] = None
 
-        # Behaviors with default intervals
+        # Behaviors with default intervals (more active!)
         self.behaviors = {
-            'paper_exploration': BehaviorConfig(enabled=True, interval=300),    # 5 min
-            'memory_consolidation': BehaviorConfig(enabled=True, interval=600), # 10 min
-            'self_reflection': BehaviorConfig(enabled=True, interval=900),      # 15 min
-            'cassette_watch': BehaviorConfig(enabled=True, interval=60),        # 1 min
+            'paper_exploration': BehaviorConfig(enabled=True, interval=30),     # 30 sec
+            'memory_consolidation': BehaviorConfig(enabled=True, interval=120), # 2 min
+            'self_reflection': BehaviorConfig(enabled=True, interval=60),       # 1 min
+            'cassette_watch': BehaviorConfig(enabled=True, interval=15),        # 15 sec
         }
 
         # Activity log (ring buffer)

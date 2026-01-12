@@ -7,6 +7,7 @@
     <title>FERAL DASHBOARD // Autonomous Resident</title>
     <!-- Three.js + 3D Force Graph for dynamic constellation -->
     <script src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script src="https://unpkg.com/d3-force-3d@3.0.5/dist/d3-force-3d.min.js"></script>
     <script src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
     <style>
         :root {
@@ -457,6 +458,116 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.3; }
         }
+
+        /* Interval Input */
+        .interval-input {
+            width: 50px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            color: var(--accent-cyan);
+            font-family: inherit;
+            font-size: 11px;
+            padding: 3px 5px;
+            text-align: right;
+            outline: none;
+        }
+
+        .interval-input:focus {
+            border-color: var(--accent-cyan);
+        }
+
+        .interval-unit {
+            font-size: 10px;
+            opacity: 0.6;
+            margin-left: 3px;
+        }
+
+        /* Graph Settings Panel */
+        #graph-settings {
+            top: 330px;
+            left: 400px;
+            width: 380px;
+            height: 250px;
+        }
+
+        .slider-row {
+            display: flex;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+
+        .slider-label {
+            width: 100px;
+            font-size: 12px;
+        }
+
+        .slider-container {
+            flex: 1;
+            margin: 0 10px;
+        }
+
+        .slider-value {
+            width: 50px;
+            text-align: right;
+            font-size: 11px;
+            color: var(--accent-cyan);
+        }
+
+        /* Custom Range Slider (Obsidian-style) */
+        input[type="range"] {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 100%;
+            height: 4px;
+            background: rgba(0, 255, 65, 0.2);
+            border-radius: 2px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--accent-cyan);
+            transition: transform 0.1s;
+        }
+
+        input[type="range"]::-webkit-slider-thumb:hover {
+            transform: scale(1.2);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: var(--accent-cyan);
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 0 5px var(--accent-cyan);
+            border: none;
+        }
+
+        .reset-btn {
+            padding: 5px 10px;
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text);
+            cursor: pointer;
+            font-family: inherit;
+            font-size: 10px;
+            margin-top: 10px;
+            opacity: 0.7;
+        }
+
+        .reset-btn:hover {
+            background: rgba(0, 255, 65, 0.1);
+            opacity: 1;
+        }
     </style>
 </head>
 
@@ -519,26 +630,72 @@
                 <div class="behavior-row">
                     <div class="behavior-toggle" id="toggle-paper" onclick="toggleBehavior('paper_exploration')"></div>
                     <span class="behavior-name">Paper Exploration</span>
-                    <span class="behavior-interval" id="interval-paper">5 min</span>
+                    <input type="number" class="interval-input" id="input-paper" value="30" min="5" max="3600" title="Paper exploration interval in seconds" onchange="updateInterval('paper_exploration', this.value)">
+                    <span class="interval-unit">sec</span>
                 </div>
 
                 <div class="behavior-row">
                     <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>
                     <span class="behavior-name">Memory Consolidation</span>
-                    <span class="behavior-interval" id="interval-consolidate">10 min</span>
+                    <input type="number" class="interval-input" id="input-consolidate" value="120" min="10" max="3600" title="Memory consolidation interval in seconds" onchange="updateInterval('memory_consolidation', this.value)">
+                    <span class="interval-unit">sec</span>
                 </div>
 
                 <div class="behavior-row">
                     <div class="behavior-toggle" id="toggle-reflect" onclick="toggleBehavior('self_reflection')"></div>
                     <span class="behavior-name">Self-Reflection</span>
-                    <span class="behavior-interval" id="interval-reflect">15 min</span>
+                    <input type="number" class="interval-input" id="input-reflect" value="60" min="10" max="3600" title="Self-reflection interval in seconds" onchange="updateInterval('self_reflection', this.value)">
+                    <span class="interval-unit">sec</span>
                 </div>
 
                 <div class="behavior-row">
                     <div class="behavior-toggle" id="toggle-cassette" onclick="toggleBehavior('cassette_watch')"></div>
                     <span class="behavior-name">Cassette Watch</span>
-                    <span class="behavior-interval" id="interval-cassette">1 min</span>
+                    <input type="number" class="interval-input" id="input-cassette" value="15" min="5" max="600" title="Cassette watch interval in seconds" onchange="updateInterval('cassette_watch', this.value)">
+                    <span class="interval-unit">sec</span>
                 </div>
+            </div>
+        </div>
+
+        <!-- Graph Settings Panel (Obsidian-style) -->
+        <div id="graph-settings" class="window">
+            <div class="window-header">
+                <div class="window-title">Graph Settings</div>
+            </div>
+            <div class="window-content">
+                <div class="slider-row">
+                    <span class="slider-label">Center Force</span>
+                    <div class="slider-container">
+                        <input type="range" id="slider-center" min="0" max="100" value="5" title="Center force strength" oninput="updateGraphForce('center', this.value)">
+                    </div>
+                    <span class="slider-value" id="value-center">0.05</span>
+                </div>
+
+                <div class="slider-row">
+                    <span class="slider-label">Repel Force</span>
+                    <div class="slider-container">
+                        <input type="range" id="slider-repel" min="0" max="500" value="120" title="Repel force strength" oninput="updateGraphForce('repel', this.value)">
+                    </div>
+                    <span class="slider-value" id="value-repel">-120</span>
+                </div>
+
+                <div class="slider-row">
+                    <span class="slider-label">Link Force</span>
+                    <div class="slider-container">
+                        <input type="range" id="slider-link-strength" min="0" max="100" value="50" title="Link force strength" oninput="updateGraphForce('linkStrength', this.value)">
+                    </div>
+                    <span class="slider-value" id="value-link-strength">0.50</span>
+                </div>
+
+                <div class="slider-row">
+                    <span class="slider-label">Link Distance</span>
+                    <div class="slider-container">
+                        <input type="range" id="slider-link-distance" min="10" max="300" value="100" title="Link distance" oninput="updateGraphForce('linkDistance', this.value)">
+                    </div>
+                    <span class="slider-value" id="value-link-distance">100</span>
+                </div>
+
+                <button type="button" class="reset-btn" onclick="resetGraphForces()">Reset to Defaults</button>
             </div>
         </div>
 
@@ -757,12 +914,13 @@
 
         function updateBehaviorUI(name, shortName) {
             const toggle = document.getElementById(`toggle-${shortName}`);
-            const interval = document.getElementById(`interval-${shortName}`);
+            const input = document.getElementById(`input-${shortName}`);
 
             if (behaviors[name]) {
                 toggle.className = behaviors[name].enabled ? 'behavior-toggle on' : 'behavior-toggle';
-                const mins = Math.floor(behaviors[name].interval / 60);
-                interval.innerText = mins >= 1 ? `${mins} min` : `${behaviors[name].interval} sec`;
+                if (input) {
+                    input.value = behaviors[name].interval;
+                }
             }
         }
 
@@ -785,6 +943,86 @@
                 body: JSON.stringify({ behavior: name, enabled: newEnabled })
             });
             loadDaemonStatus();
+        }
+
+        async function updateInterval(name, seconds) {
+            const interval = parseInt(seconds, 10);
+            if (isNaN(interval) || interval < 5) return;
+
+            await api('/daemon/config', {
+                method: 'POST',
+                body: JSON.stringify({ behavior: name, interval: interval })
+            });
+            loadDaemonStatus();
+        }
+
+        // ===== GRAPH FORCE CONTROLS =====
+        function updateGraphForce(force, value) {
+            if (!Graph || !window.graphForces) return;
+
+            const numValue = parseFloat(value);
+
+            switch (force) {
+                case 'center':
+                    const centerStrength = numValue / 100;
+                    window.graphForces.centerStrength = centerStrength;
+                    Graph.d3Force('center').strength(centerStrength);
+                    document.getElementById('value-center').innerText = centerStrength.toFixed(2);
+                    break;
+
+                case 'repel':
+                    const chargeStrength = -numValue;
+                    window.graphForces.chargeStrength = chargeStrength;
+                    Graph.d3Force('charge').strength(chargeStrength);
+                    document.getElementById('value-repel').innerText = chargeStrength;
+                    break;
+
+                case 'linkStrength':
+                    const linkStr = numValue / 100;
+                    window.graphForces.linkStrength = linkStr;
+                    Graph.d3Force('link').strength(linkStr);
+                    document.getElementById('value-link-strength').innerText = linkStr.toFixed(2);
+                    break;
+
+                case 'linkDistance':
+                    window.graphForces.linkDistance = numValue;
+                    Graph.d3Force('link').distance(numValue);
+                    document.getElementById('value-link-distance').innerText = numValue;
+                    break;
+            }
+
+            // Reheat simulation to apply changes
+            Graph.d3ReheatSimulation();
+        }
+
+        function resetGraphForces() {
+            if (!Graph) return;
+
+            // Reset to defaults
+            window.graphForces = {
+                linkDistance: 100,
+                linkStrength: 0.5,
+                chargeStrength: -120,
+                centerStrength: 0.05
+            };
+
+            // Apply to graph
+            Graph.d3Force('link').distance(100).strength(0.5);
+            Graph.d3Force('charge').strength(-120);
+            Graph.d3Force('center').strength(0.05);
+            Graph.d3ReheatSimulation();
+
+            // Update UI sliders
+            document.getElementById('slider-center').value = 5;
+            document.getElementById('slider-repel').value = 120;
+            document.getElementById('slider-link-strength').value = 50;
+            document.getElementById('slider-link-distance').value = 100;
+
+            // Update value displays
+            document.getElementById('value-center').innerText = '0.05';
+            document.getElementById('value-repel').innerText = '-120';
+            document.getElementById('value-link-strength').innerText = '0.50';
+            document.getElementById('value-link-distance').innerText = '100';
         }
 
         // ===== CHAT =====
@@ -932,7 +1170,7 @@
                     });
                 });
 
-                // Create 3D Force Graph
+                // Create 3D Force Graph with Obsidian-style tight clustering
                 Graph = ForceGraph3D()(container)
                     .graphData({ nodes, links })
                     .backgroundColor('#000000')
@@ -946,10 +1184,10 @@
                     .linkWidth(0.5)
                     .linkOpacity(0.6)
                     .linkDirectionalParticles(0)
-                    .d3AlphaDecay(0.02)
-                    .d3VelocityDecay(0.3)
-                    .warmupTicks(100)
-                    .cooldownTicks(200)
+                    .d3AlphaDecay(0.01)
+                    .d3VelocityDecay(0.4)
+                    .warmupTicks(200)
+                    .cooldownTicks(300)
                     .onNodeHover(node => {
                         if (node) {
                             tooltip.innerHTML = `<b>${node.label}</b><br><span style="opacity:0.7">${node.path || node.id}</span>`;
@@ -962,6 +1200,19 @@
                         // Focus camera on clicked node
                         if (node) focusCameraOnNode(node, 1500);
                     });
+
+                // Configure forces - reasonable defaults (adjustable via UI)
+                // Store current settings for UI
+                window.graphForces = {
+                    linkDistance: 100,
+                    linkStrength: 0.5,
+                    chargeStrength: -120,
+                    centerStrength: 0.05
+                };
+
+                Graph.d3Force('link').distance(window.graphForces.linkDistance).strength(window.graphForces.linkStrength);
+                Graph.d3Force('charge').strength(window.graphForces.chargeStrength).distanceMax(300);
+                Graph.d3Force('center').strength(window.graphForces.centerStrength);
 
                 // Custom node rendering with glow and pulse support
                 Graph.nodeThreeObject(node => {
@@ -1012,7 +1263,10 @@
                 scene.add(pointLight);
 
                 // Add fog for depth
-                scene.fog = new THREE.FogExp2(0x000000, 0.002);
+                scene.fog = new THREE.FogExp2(0x000000, 0.003);
+
+                // Set initial camera position to see whole graph
+                Graph.cameraPosition({ x: 0, y: 0, z: 400 }, { x: 0, y: 0, z: 0 }, 0);
 
                 // Update status bar
                 const statsEl = document.getElementById('constellation-stats');
@@ -1078,8 +1332,9 @@
         function focusCameraOnNode(node, duration = 1500) {
             if (!Graph || !node) return;
 
+            // Focus distance (reasonable default)
             const distance = 150;
-            const distRatio = 1 + distance / Math.hypot(node.x || 0, node.y || 0, node.z || 0);
+            const distRatio = 1 + distance / Math.max(10, Math.hypot(node.x || 0, node.y || 0, node.z || 0));
 
             Graph.cameraPosition(
                 { x: (node.x || 0) * distRatio, y: (node.y || 0) * distRatio, z: (node.z || 0) * distRatio },
