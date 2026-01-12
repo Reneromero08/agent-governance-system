@@ -294,22 +294,28 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 # Phase 8: Resident AI (depends on Phase 6) V3.9
 
-**Canonical Roadmap:** [FERAL_RESIDENT_ROADMAP.md](THOUGHT/LAB/FERAL_RESIDENT/FERAL_RESIDENT_ROADMAP.md)
+**Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](THOUGHT/LAB/FERAL_RESIDENT/FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.0 with Geometric Foundation)
 
 The Feral Resident has a dedicated LAB bucket with phased development:
 
 | Phase | Name | Scope | Dependency | Status |
 |-------|------|-------|------------|--------|
-| Alpha | Feral Beta | Substrate stress test | Cassette 4.2 | **READY** |
+| Alpha | Feral Beta | Substrate stress test | Cassette 4.2 | **MAIN QUEST** |
 | Beta | Feral Wild | Paper flood, emergence | Cassette 6.x | Blocked |
 | Production | Feral Live | Swarm, self-optimize | Phase 7-8 | Blocked |
 
-**Note:** Alpha runs NOW to stress-test the cassette substrate. Beta/Production wait for dependencies.
+**Note:** Alpha is the MAIN QUEST. Cassette Phase 6 hardening is BACKBURNER until Feral finds bugs.
+
+**Geometric Foundation:** Alpha includes A.0 (GeometricReasoner) which produces
+`CAPABILITY/PRIMITIVES/geometric_reasoner.py` - pure geometry reasoning validated
+by Q43/Q44/Q45 research. Embeddings ONLY at boundaries, all reasoning is pure vector ops.
 
 ## 8.0 Feral Resident Alpha (R.0) - DO NOW
 **Runs in parallel with Phase 6 hardening to find bugs early**
 
-- [ ] 8.0.1 Vector store integration (fractal_embed, bind, superpose) (R.0.1)
+- [x] 8.0.1 Vector store via GeometricReasoner (R.0.1) **DONE**
+  - `CAPABILITY/PRIMITIVES/geometric_reasoner.py` - Core primitive
+  - `THOUGHT/LAB/FERAL_RESIDENT/geometric_memory.py` - Feral integration
 - [ ] 8.0.2 Resident database schema (threads, messages, vectors, mind_state) (R.0.2)
 - [ ] 8.0.3 Diffusion engine (semantic navigation via cassettes) (R.0.3)
 - [ ] 8.0.4 Basic VectorResident (think loop, compositional memory) (R.0.4)

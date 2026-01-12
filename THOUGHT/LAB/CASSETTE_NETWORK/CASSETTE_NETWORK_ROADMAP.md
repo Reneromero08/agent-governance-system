@@ -544,9 +544,9 @@ Chinese proof: 道 (dào) = path + principle + speech + method
 **Goal:** Stress-test cassette substrate via resident workloads before hardening
 
 **Previous:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
-**Next:** [Phase 6](#phase-6-production-hardening) - Production hardening
+**Next:** [Phase 6](#phase-6-production-hardening) - Production hardening (BACKBURNER - after Feral stress test)
 
-**Canonical Roadmap:** [FERAL_RESIDENT_ROADMAP.md](../FERAL_RESIDENT/FERAL_RESIDENT_ROADMAP.md)
+**Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](../FERAL_RESIDENT/FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.0 with Geometric Foundation)
 
 The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 
@@ -559,7 +559,9 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 ### 5.1 Alpha Scope (DO NOW)
 
 **What runs now (LAB-only, no CANON writes):**
-- [ ] 5.1.1 Vector store integration (fractal_embed, bind, unbind, superpose)
+- [x] 5.1.1 Vector store via Feral A.0 GeometricReasoner (DONE)
+  - Output: `CAPABILITY/PRIMITIVES/geometric_reasoner.py`
+  - Integration: `THOUGHT/LAB/FERAL_RESIDENT/geometric_memory.py`
 - [ ] 5.1.2 Resident database schema (threads, messages, vectors, mind_state)
 - [ ] 5.1.3 Diffusion engine (semantic navigation via cassette network)
 - [ ] 5.1.4 Basic VectorResident (think loop, compositional memory)
@@ -596,11 +598,14 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 
 ---
 
-## Phase 6: Production Hardening
+## Phase 6: Production Hardening (BACKBURNER)
+
+**Status:** Deferred until Feral Alpha stress-test complete
+**Rationale:** Harden AFTER finding bugs, not before
 
 **Goal:** Make it bulletproof
 
-**Previous:** [Phase 5](#phase-5-feral-resident-long-running-thread) - Feral resident
+**Previous:** [Phase 5](#phase-5-feral-resident-integration-substrate-stress-test) - Feral resident integration
 
 ### 6.0 Canonical Cassette Substrate (Cartridge-First)
 **From AGS_ROADMAP_MASTER Phase 6.0:**

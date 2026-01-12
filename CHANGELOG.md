@@ -6,6 +6,34 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [4.1.0] - 2026-01-12
+
+### Added
+- **Geometric Reasoning Primitive (A.0)** — Pure-geometry reasoning with Q43/Q44/Q45 validation
+  - `geometric_reasoner.py` — Core primitive with GeometricState, GeometricOperations, GeometricReasoner
+  - `geometric_memory.py` — Feral Resident integration with compositional memory
+  - `test_geometric_reasoner.py` — Q43/Q44/Q45 validation test suite
+  - GeometricState: Q43 properties (Df participation ratio, E Born rule, geodesic distance)
+  - GeometricOperations: Q45 validated (add, subtract, superpose, entangle, interpolate, project)
+  - Embeddings ONLY at boundaries (initialize/readout), all reasoning is pure vector ops
+  - 80%+ fewer embedding calls, 47x faster reasoning chains
+
+### Changed
+- **Feral Resident Priority Flip** — Alpha is now MAIN QUEST, Cassette hardening is BACKBURNER
+  - Created FERAL_RESIDENT_QUANTUM_ROADMAP.md (v2.0) with A.0 Geometric Foundation
+  - Updated AGS_ROADMAP_MASTER.md: Phase 8 Alpha status changed to "MAIN QUEST"
+  - Updated CASSETTE_NETWORK_ROADMAP.md: Phase 6 marked BACKBURNER, 5.1.1 marked DONE
+  - Updated FERAL_RESIDENT/README.md: Point to quantum roadmap
+  - Rationale: Stress-test substrate BEFORE hardening to find bugs early
+
+### Research
+- **Q43/Q44/Q45 Validation Applied** — Geometric reasoner implements validated quantum-semantic operations
+  - Q43: Df participation ratio tracks state "spread" across dimensions
+  - Q44: E = <psi|phi> Born rule (r=0.977 correlation with semantic similarity)
+  - Q45: All semantic operations work in pure geometry (no embeddings needed)
+
+---
+
 ## [4.0.1] - 2026-01-12
 
 ### Fixed

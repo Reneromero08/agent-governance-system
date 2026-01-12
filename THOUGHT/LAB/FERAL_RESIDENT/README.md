@@ -24,7 +24,9 @@ The Feral Resident is an experimental AI agent that:
 | Beta | Feral Wild | Paper flood, emergence | Blocked on Cassette 6.x |
 | Production | Feral Live | Swarm, self-optimize | Blocked on AGS Phase 7-8 |
 
-**See:** [FERAL_RESIDENT_ROADMAP.md](FERAL_RESIDENT_ROADMAP.md) for full details.
+**Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.0 - Geometric Foundation)
+
+**Historical:** [FERAL_RESIDENT_ROADMAP.md](FERAL_RESIDENT_ROADMAP.md) (v1.0 - the cute original)
 
 ---
 
@@ -43,20 +45,26 @@ feral status
 
 ```
 THOUGHT/LAB/FERAL_RESIDENT/
-├── README.md                     # This file
-├── FERAL_RESIDENT_ROADMAP.md     # Full roadmap
-├── vector_store.py               # Vector operations (TODO)
-├── resident_db.py                # Database schema (TODO)
-├── diffusion_engine.py           # Semantic navigation (TODO)
-├── vector_brain.py               # Resident core (TODO)
-├── emergence.py                  # Protocol detection (TODO)
-├── symbolic_compiler.py          # Multi-level rendering (TODO)
-├── cli.py                        # CLI commands (TODO)
+├── README.md                           # This file
+├── FERAL_RESIDENT_QUANTUM_ROADMAP.md   # Canonical roadmap (v2.0)
+├── FERAL_RESIDENT_ROADMAP.md           # Historical roadmap (v1.0)
+├── geometric_memory.py                 # A.0.4 - GeometricMemory (DONE)
+├── vector_store.py                     # Vector operations (TODO)
+├── resident_db.py                      # Database schema (TODO)
+├── diffusion_engine.py                 # Semantic navigation (TODO)
+├── vector_brain.py                     # Resident core (TODO)
+├── emergence.py                        # Protocol detection (TODO)
+├── symbolic_compiler.py                # Multi-level rendering (TODO)
+├── cli.py                              # CLI commands (TODO)
 ├── research/
-│   └── papers/                   # Paper corpus for flooding
-├── receipts/                     # Operation receipts
+│   ├── papers/                         # Paper corpus for flooding
+│   └── geometric_reasoner_impl.md      # Implementation spec
+├── receipts/                           # Operation receipts
 └── tests/
-    └── ...                       # Test suite
+    └── ...                             # Test suite
+
+# Upstream Primitive:
+CAPABILITY/PRIMITIVES/geometric_reasoner.py  # A.0.1-A.0.3 (DONE)
 ```
 
 ---
