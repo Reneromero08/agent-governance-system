@@ -906,9 +906,15 @@ def verify_lossless(original: GeometricState, compressed, decompressed: Geometri
 ```
 
 **Acceptance:**
-- [ ] P.2.1.1 Can express same meaning at multiple levels
-- [ ] P.2.1.2 Round-trip is verifiably lossless (E > 0.99)
-- [ ] P.2.1.3 Compression ratios are measurable and receipted
+- [x] P.2.1.1 Can express same meaning at multiple levels
+- [x] P.2.1.2 Round-trip is verifiably lossless (E > 0.99)
+- [x] P.2.1.3 Compression ratios are measurable and receipted
+
+**Implementation Details (2026-01-12):**
+- `symbolic_compiler.py` - SymbolicCompiler with 4-level rendering
+- `HybridSymbolRegistry` - Two-tier symbol registry (global + per-resident)
+- CLI: `feral compile render`, `feral compile all`, `feral compile verify`, `feral compile stats`
+- Design: Hybrid registry, emergent grammar, E-preservation first
 
 ---
 

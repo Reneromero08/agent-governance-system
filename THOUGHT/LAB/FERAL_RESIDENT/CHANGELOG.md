@@ -1,5 +1,118 @@
 # Feral Resident Changelog
 
+## [0.6.0] - 2026-01-12 - P.2 SYMBOLIC COMPILER COMPLETE
+
+**Status**: Production P.2 complete - Multi-level semantic rendering with lossless verification
+**Version**: production-0.6.0
+
+### Added
+
+#### P.2 Symbolic Compiler (COMPLETE)
+
+- **`symbolic_compiler.py`** (~700 lines) - Complete P.2.1 implementation
+  - **SymbolicCompiler** - 4-level rendering with verification
+    - Level 0 (Prose): Full natural language via `readout()` (~1x baseline)
+    - Level 1 (Symbol): @Symbol references (~19x compression)
+    - Level 2 (Hash): Vector SHA256 refs (~14x compression)
+    - Level 3 (Protocol): Emergent notation with metrics (~4x compression)
+
+  - **HybridSymbolRegistry** - Two-tier symbol management
+    - Global registry: Swarm-shared symbols
+    - Local registries: Per-resident notations
+    - Automatic promotion: 2+ adopters, 5+ uses, E > 0.9 consistency
+    - Bidirectional lookups: symbol→hash, hash→symbol
+    - Persistence: JSON storage per resident + global
+
+  - **Lossless Verification**:
+    - `verify_roundtrip()` - Compress → decompress → verify
+    - E threshold: > 0.99 (semantic preservation)
+    - Df threshold: < 0.01 (state preservation)
+    - Perfect round-trip: E_delta = 0.000000, Df_delta = 0.000000
+    - Receipt generation with Merkle chains
+
+  - **Data Classes**:
+    - `CompressionLevel` - Level metadata (0-3)
+    - `RenderResult` - Render output with E/Df/compression metrics
+    - `RoundTripVerification` - Verification results with receipts
+    - `SymbolEntry` - Registry entry with provenance
+
+- **CLI Commands** (+150 lines in `cli.py`):
+  - `feral compile render <text> --level 2` - Render at specific level
+  - `feral compile all <text>` - Show all 4 levels
+  - `feral compile decompress <content> --level 2` - Decompress to prose
+  - `feral compile verify <hash> <compressed> --level 2` - Verify round-trip
+  - `feral compile stats` - Show compression statistics
+
+### P.2 Acceptance Criteria - ALL COMPLETE
+
+- [x] P.2.1.1 Can express same meaning at multiple levels
+- [x] P.2.1.2 Round-trip is verifiably lossless (E > 0.99)
+- [x] P.2.1.3 Compression ratios are measurable and receipted
+
+### Design Decisions
+
+1. **Symbol Registry Scope**: **Hybrid**
+   - Core symbols are swarm-global (shared vocabulary)
+   - Residents can invent local notations
+   - Local notations promoted to global when adopted by 2+ residents
+
+2. **Level 3 Grammar**: **Emergent Only**
+   - No predefined grammar rules
+   - NotationRegistry tracks patterns as they develop organically
+   - Patterns become "canonical" after meeting frequency threshold (≥5 uses)
+
+3. **Priority**: **E Preservation First**
+   - Semantic fidelity (E > 0.99) is the primary constraint
+   - Compression ratio is secondary to meaning preservation
+   - Safety-first approach: never sacrifice semantics for bandwidth
+
+### Example Output
+
+```bash
+$ feral compile all "Test semantic concept for P.2"
+
+=== Multi-Level Rendering ===
+Input: Test semantic concept for P.2
+State Df: 121.59
+
+Level 0 (prose):
+  test concept (E=0.606) | semantic meaning (E=0.478)
+  Compression: 1.00x | Receipt: d88806953ab4e472
+
+Level 1 (symbol):
+  @Test-f9c732f0
+  Compression: 19.00x | Receipt: c95eaca394dcaffa
+
+Level 2 (hash):
+  [v:f9c732f0d2321dae]
+  Compression: 14.25x | Receipt: f6bfdea81c93e63e
+
+Level 3 (protocol):
+  [v:f9c732f0d2321dae] [Df:121.59] {op:initialize}
+  Compression: 4.38x | Receipt: 7d48be770c5be3d6
+```
+
+### Architecture
+
+**Rendering Pipeline**: GeometricState → SymbolicCompiler.render(level) → RenderResult
+**Verification**: original → compress → decompress → E_with() > 0.99
+**Registry Storage**: `symbol_registry/{global,local_*}.json`
+**Integration**: Uses GeometricReasoner, NotationRegistry, SharedSemanticSpace
+
+### File Structure
+
+```
+THOUGHT/LAB/FERAL_RESIDENT/
+├── symbolic_compiler.py     # NEW: P.2 core module
+├── cli.py                   # UPDATED: P.2 CLI commands
+├── symbol_registry/         # NEW: Hybrid registry storage
+│   ├── global_registry.json
+│   └── local_*.json
+└── FERAL_RESIDENT_QUANTUM_ROADMAP.md  # UPDATED: P.2 marked complete
+```
+
+---
+
 ## [0.5.0] - 2026-01-12 - P.1 SWARM INTEGRATION COMPLETE
 
 **Status**: Production P.1 complete - Multi-resident swarm with convergence tracking

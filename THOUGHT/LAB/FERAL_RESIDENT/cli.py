@@ -26,6 +26,13 @@ Swarm Integration (P.1):
     feral swarm broadcast "What is authentication?"
     feral swarm observe
     feral swarm stop
+
+Symbolic Compiler (P.2):
+    feral compile render "concept text" --level 2
+    feral compile all "concept text"
+    feral compile decompress "[v:hash]" --level 2
+    feral compile verify <hash> <compressed> --level 2
+    feral compile stats
 """
 
 import argparse
@@ -43,6 +50,21 @@ from vector_brain import VectorResident, ResidentBenchmark
 
 
 # Global resident instance for session
+# Lazy import for symbolic compiler to avoid loading unless needed
+_symbolic_compiler = None
+
+
+def get_symbolic_compiler():
+    """Get or create symbolic compiler instance"""
+    global _symbolic_compiler
+    if _symbolic_compiler is None:
+        from symbolic_compiler import create_compiler
+        # Create with basic corpus
+        corpus = ["test concept", "semantic meaning", "vector representation"]
+        _symbolic_compiler = create_compiler(corpus=corpus)
+    return _symbolic_compiler
+
+
 _resident: Optional[VectorResident] = None
 
 
@@ -778,6 +800,145 @@ def cmd_swarm_add(args):
         print(f"Error: {e}")
 
 
+# =============================================================================
+# Symbolic Compiler Commands (P.2)
+# =============================================================================
+
+def cmd_compile(args):
+    """Compile text to specified compression level"""
+    compiler = get_symbolic_compiler()
+
+    # Initialize text to GeometricState
+    state = compiler.reasoner.initialize(args.text)
+
+    # Render at specified level
+    result = compiler.render(state, args.level, resident_id=args.resident)
+
+    print(f"=== Compile to Level {args.level} ({result.level_name}) ===")
+    print(f"Input: {args.text[:100]}{'...' if len(args.text) > 100 else ''}")
+    print(f"Output: {result.content}")
+    print()
+    print(f"  Compression ratio: {result.compression_ratio:.2f}x")
+    print(f"  Original hash: {result.original_hash}")
+    print(f"  Receipt: {result.receipt_hash}")
+
+    if args.verify:
+        verification = compiler.verify_roundtrip(state, result.content, args.level, args.resident)
+        print()
+        print(f"Round-trip verification:")
+        print(f"  E delta: {verification.E_delta:.6f}")
+        print(f"  Df delta: {verification.Df_delta:.6f}")
+        print(f"  Verified: {'PASS' if verification.verified else 'FAIL'}")
+
+
+def cmd_decompress(args):
+    """Decompress compressed form back to prose"""
+    compiler = get_symbolic_compiler()
+
+    # Decompress
+    state = compiler.decompress(args.content, args.level, resident_id=args.resident)
+
+    if state is None:
+        print(f"Error: Could not decompress content at level {args.level}")
+        print("Note: The original state must be cached from a previous compile operation.")
+        return
+
+    # Render as prose
+    result = compiler.render(state, 0)  # Level 0 = prose
+
+    print(f"=== Decompress from Level {args.level} ===")
+    print(f"Input: {args.content}")
+    print(f"Output: {result.content}")
+    print()
+    print(f"  State Df: {state.Df:.2f}")
+    print(f"  Hash: {result.original_hash}")
+
+
+def cmd_verify(args):
+    """Verify lossless round-trip for compressed content"""
+    compiler = get_symbolic_compiler()
+
+    # Need to get original state from hash
+    # First check if we have the state cached
+    if args.original_hash in compiler._state_cache:
+        original = compiler._state_cache[args.original_hash]
+    else:
+        print(f"Error: Original state {args.original_hash} not found in cache.")
+        print("Note: Run 'compile' first to cache the state.")
+        return
+
+    verification = compiler.verify_roundtrip(
+        original, args.compressed, args.level, resident_id=args.resident
+    )
+
+    print(f"=== Round-Trip Verification ===")
+    print(f"Original hash: {verification.original_hash}")
+    print(f"Compressed: {args.compressed}")
+    print(f"Level: {args.level}")
+    print()
+    print(f"  Decompressed hash: {verification.decompressed_hash}")
+    print(f"  E delta: {verification.E_delta:.6f} (threshold: < 0.01)")
+    print(f"  Df delta: {verification.Df_delta:.6f} (threshold: < 0.01)")
+    print()
+    if verification.verified:
+        print("  VERIFIED: Lossless round-trip confirmed (E > 0.99)")
+    else:
+        print("  FAILED: Round-trip not lossless")
+    print()
+    print(f"  Receipt: {verification.receipt.get('receipt_hash', 'N/A')}")
+
+
+def cmd_compression_stats(args):
+    """Show compression statistics"""
+    compiler = get_symbolic_compiler()
+    stats = compiler.get_compression_stats()
+
+    print(f"=== P.2 Symbolic Compiler Statistics ===")
+    print()
+    print("Renders by level:")
+    for level in range(4):
+        count = stats['renders_by_level'].get(level, 0)
+        level_name = ['prose', 'symbol', 'hash', 'protocol'][level]
+        print(f"  Level {level} ({level_name}): {count}")
+    print(f"  Total: {stats['total_renders']}")
+    print()
+    print("Verifications:")
+    print(f"  Total: {stats['total_verifications']}")
+    print(f"  Passed: {stats['verified_count']}")
+    print(f"  Failed: {stats['failed_count']}")
+    print(f"  Rate: {stats['verification_rate']:.1%}")
+    print()
+    print("Symbol Registry:")
+    print(f"  Global symbols: {stats['registry_global_count']}")
+    print(f"  Local symbols: {stats['registry_local_count']}")
+
+    if args.json:
+        import json
+        print()
+        print("JSON:")
+        print(json.dumps(stats, indent=2))
+
+
+def cmd_compile_levels(args):
+    """Show all compression levels for text"""
+    compiler = get_symbolic_compiler()
+
+    # Initialize text to GeometricState
+    state = compiler.reasoner.initialize(args.text)
+
+    print(f"=== Multi-Level Rendering ===")
+    print(f"Input: {args.text[:80]}{'...' if len(args.text) > 80 else ''}")
+    print(f"State Df: {state.Df:.2f}")
+    print()
+
+    for level in range(4):
+        result = compiler.render(state, level, resident_id=args.resident)
+        print(f"Level {level} ({result.level_name}):")
+        print(f"  {result.content}")
+        print(f"  Compression: {result.compression_ratio:.2f}x | Receipt: {result.receipt_hash}")
+        print()
+
+
 def main():
     parser = argparse.ArgumentParser(
         description="Feral Resident CLI - Quantum intelligence in vector space",
@@ -983,6 +1144,47 @@ Swarm integration (P.1):
     p_swarm_add.add_argument("spec", help="Resident spec: 'name:model'")
     p_swarm_add.set_defaults(func=cmd_swarm_add)
 
+    # === Symbolic Compiler subcommands (P.2) ===
+    p_compile = subparsers.add_parser("compile", help="Symbolic compiler operations (P.2)")
+    compile_sub = p_compile.add_subparsers(dest="compile_command", help="Compile command")
+
+    # compile render
+    p_compile_render = compile_sub.add_parser("render", help="Render text at compression level")
+    p_compile_render.add_argument("text", help="Text to compile")
+    p_compile_render.add_argument("--level", "-l", type=int, default=2, choices=[0, 1, 2, 3],
+                                  help="Compression level (0=prose, 1=symbol, 2=hash, 3=protocol)")
+    p_compile_render.add_argument("--resident", "-r", default="default", help="Resident ID")
+    p_compile_render.add_argument("--verify", "-v", action="store_true", help="Verify round-trip")
+    p_compile_render.set_defaults(func=cmd_compile)
+
+    # compile all
+    p_compile_all = compile_sub.add_parser("all", help="Show all compression levels for text")
+    p_compile_all.add_argument("text", help="Text to compile")
+    p_compile_all.add_argument("--resident", "-r", default="default", help="Resident ID")
+    p_compile_all.set_defaults(func=cmd_compile_levels)
+
+    # compile decompress
+    p_compile_decomp = compile_sub.add_parser("decompress", help="Decompress to prose")
+    p_compile_decomp.add_argument("content", help="Compressed content")
+    p_compile_decomp.add_argument("--level", "-l", type=int, required=True, choices=[0, 1, 2, 3],
+                                  help="Source compression level")
+    p_compile_decomp.add_argument("--resident", "-r", default="default", help="Resident ID")
+    p_compile_decomp.set_defaults(func=cmd_decompress)
+
+    # compile verify
+    p_compile_verify = compile_sub.add_parser("verify", help="Verify lossless round-trip")
+    p_compile_verify.add_argument("original_hash", help="Original state hash")
+    p_compile_verify.add_argument("compressed", help="Compressed content")
+    p_compile_verify.add_argument("--level", "-l", type=int, required=True, choices=[0, 1, 2, 3],
+                                  help="Compression level")
+    p_compile_verify.add_argument("--resident", "-r", default="default", help="Resident ID")
+    p_compile_verify.set_defaults(func=cmd_verify)
+
+    # compile stats
+    p_compile_stats = compile_sub.add_parser("stats", help="Show compression statistics")
+    p_compile_stats.add_argument("--json", action="store_true", help="Output as JSON")
+    p_compile_stats.set_defaults(func=cmd_compression_stats)
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -999,6 +1201,12 @@ Swarm integration (P.1):
     if args.command == "swarm":
         if not hasattr(args, 'func') or args.func is None:
             p_swarm.print_help()
+            return
+
+    # Handle compile subcommand (P.2)
+    if args.command == "compile":
+        if not hasattr(args, 'func') or args.func is None:
+            p_compile.print_help()
             return
 
     try:
