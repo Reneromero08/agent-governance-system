@@ -2,9 +2,26 @@
 LIL_Q - Run the quantum chat.
 
 Just run: python run.py
+With context: python run.py --context
+
+Context comes from CAPABILITY/MCP/cortex_geometric (cassette network).
+LIL_Q stays pure - context is just List[str].
 """
 
+import sys
+from pathlib import Path
 from quantum_chat import QuantumChat
+
+# Add path for cortex_geometric
+sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
+
+# Try to import context retrieval (optional)
+try:
+    from CAPABILITY.MCP.cortex_geometric import retrieve as cortex_retrieve
+    CONTEXT_AVAILABLE = True
+except ImportError:
+    CONTEXT_AVAILABLE = False
+    cortex_retrieve = None
 
 
 def generate(query: str, E: float) -> str:
@@ -49,9 +66,25 @@ Respond authentically from your position in meaning-space."""
 
 
 def main():
+    import argparse
+    parser = argparse.ArgumentParser(description='LIL_Q - Quantum Chat')
+    parser.add_argument('--context', action='store_true',
+                        help='Enable context from cassette network')
+    parser.add_argument('--k', type=int, default=3,
+                        help='Number of context docs to retrieve (default: 3)')
+    parser.add_argument('--threshold', type=float, default=0.3,
+                        help='E threshold for context (default: 0.3)')
+    args = parser.parse_args()
+
+    use_context = args.context and CONTEXT_AVAILABLE
+
     print("=" * 50)
     print("LIL_Q - Quantum Chat")
     print("E = <psi|phi> (Born rule, r=0.977)")
+    if use_context:
+        print(f"[CONTEXT] Cassette network enabled (k={args.k}, E>={args.threshold})")
+    elif args.context and not CONTEXT_AVAILABLE:
+        print("[WARN] Context requested but cortex_geometric not available")
     print("=" * 50)
     print("Commands: quit, exit, q")
     print()
@@ -66,7 +99,14 @@ def main():
             if query.lower() in ('quit', 'exit', 'q'):
                 break
 
-            response, E = chat.chat(query)
+            # Get context from cassette network if enabled
+            context = None
+            if use_context:
+                context = cortex_retrieve(query, k=args.k, threshold=args.threshold)
+                if context:
+                    print(f"  [+{len(context)} context docs]")
+
+            response, E = chat.chat(query, context)
             print(f"\n[E={E:.3f}] {response}\n")
 
         except KeyboardInterrupt:
