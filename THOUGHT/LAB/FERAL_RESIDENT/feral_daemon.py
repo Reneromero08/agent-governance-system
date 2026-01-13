@@ -428,19 +428,20 @@ class FeralDaemon:
         mind_state = self.resident.store.get_mind_state()
         E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
 
-        # Find MOST SIMILAR previously smashed chunk using E_with (Q45 validated)
+        # Find SEMANTICALLY SIMILAR previously known content to anchor to
+        # Use E-gating to find resonance using the current chunk as a query
+        # This "locks on" to relevant existing knowledge instead of random drifting
+        resonant_context = self.resident.store.find_paper_chunks(
+            chunk_state, k=1, min_E=0.1
+        )
+        
         similar_to = None
         similar_E = 0.0
-
-        if self._chunk_states:
-            best_E = -1
-            for cached_id, cached_state in self._chunk_states.items():
-                # Q45: E = quantum inner product, NOT raw cosine
-                E_similarity = chunk_state.E_with(cached_state)
-                if E_similarity > best_E:
-                    best_E = E_similarity
-                    similar_to = cached_id
-                    similar_E = E_similarity
+        
+        if resonant_context:
+            best_match = resonant_context[0]
+            similar_to = f"chunk:{best_match.get('paper_id')}:{best_match.get('vector_hash')}"
+            similar_E = best_match.get('E', 0.0)
 
         # Cache this chunk's GeometricState for future E_with lookups
         self._chunk_states[full_node_id] = chunk_state
@@ -566,8 +567,12 @@ class FeralDaemon:
             self._log_activity('paper', "No paper chunks available")
             return
 
+        # Build full node IDs for consistent tracking (match smasher format)
+        def get_full_id(c):
+            return f"chunk:{c.get('paper_id', 'unknown')}:{c['chunk_id']}"
+
         # Filter to unexplored
-        unexplored = [c for c in paper_chunks if c['chunk_id'] not in self._explored_chunks]
+        unexplored = [c for c in paper_chunks if get_full_id(c) not in self._explored_chunks]
 
         if not unexplored:
             self._explored_chunks.clear()
@@ -581,12 +586,15 @@ class FeralDaemon:
         paper_name = chunk.get('paper_id', 'unknown')
         heading = chunk.get('heading', '')
 
+        # Build full node_id for consistent tracking
+        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+
         # Track discovery state for constellation animation
-        is_new_node = chunk_id not in self._discovered_chunks
-        self._discovered_chunks.add(chunk_id)
+        is_new_node = full_node_id not in self._discovered_chunks
+        self._discovered_chunks.add(full_node_id)
 
         source_node_id = self._exploration_trail[-1] if self._exploration_trail else None
-        self._exploration_trail.append(chunk_id)
+        self._exploration_trail.append(full_node_id)
 
         # =================================================================
         # Q44 BORN RULE CHECK
@@ -611,12 +619,13 @@ class FeralDaemon:
             result = self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
             Df_after = self.resident.mind_evolution.get('current_Df', 0)
 
-            self._explored_chunks.add(chunk_id)
+            self._explored_chunks.add(full_node_id)
 
             self._log_activity('paper',
                               f"Absorbed {paper_name} (E={E:.2f}, gate=OPEN)",
                               paper=paper_name,
                               chunk_id=chunk_id,
+                              full_node_id=full_node_id,
                               heading=heading,
                               E=E,
                               E_resonance=result.E_resonance,
@@ -626,12 +635,13 @@ class FeralDaemon:
                               source_node_id=source_node_id)
         else:
             # LOW RESONANCE: Ignore (noise)
-            self._explored_chunks.add(chunk_id)
+            self._explored_chunks.add(full_node_id)
 
             self._log_activity('paper',
                               f"Ignored {paper_name} (E={E:.2f}, gate=CLOSED)",
                               paper=paper_name,
                               chunk_id=chunk_id,
+                              full_node_id=full_node_id,
                               heading=heading,
                               E=E,
                               gate_open=False,

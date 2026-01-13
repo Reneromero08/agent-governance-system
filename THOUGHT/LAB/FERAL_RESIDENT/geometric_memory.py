@@ -29,7 +29,7 @@ class GeometricMemory:
     """
     Memory composition via pure geometry (Q45 validated).
 
-    Replaces HDC bind() with quantum entangle().
+    Replaces HDC bind() with running average interpolation.
 
     Usage:
         memory = GeometricMemory()
@@ -58,7 +58,7 @@ class GeometricMemory:
         Add interaction to memory via geometric composition.
 
         Old approach: mind = hdc_bind(mind, embed(interaction))
-        New approach: mind = entangle(mind, initialize(interaction))
+        New approach: mind = interpolate(mind, new, t=1/N)
 
         Returns receipt of the operation.
         """
@@ -73,10 +73,15 @@ class GeometricMemory:
                 operation_history=[]
             )
         else:
-            # Compose via quantum entanglement (PURE GEOMETRY)
-            self.mind_state = self.reasoner.entangle(
+            # Use Running Average (1/N) to provide infinite stability
+            # As N grows, new interactions have less weight, preventing drift
+            n = len(self.memory_history) + 1  # Count includes this new memory
+            t = 1.0 / (n + 1)  # Weighted blend: (N*Mind + New) / (N+1)
+            
+            self.mind_state = self.reasoner.interpolate(
                 self.mind_state,
-                interaction
+                interaction,
+                t=t
             )
 
         # Build receipt

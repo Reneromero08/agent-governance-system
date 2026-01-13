@@ -1366,6 +1366,14 @@
             updateBehaviorUI('memory_consolidation', 'consolidate');
             updateBehaviorUI('self_reflection', 'reflect');
             updateBehaviorUI('cassette_watch', 'cassette');
+
+            // Sync E threshold slider with daemon's actual state
+            if (data.E_threshold !== undefined) {
+                const thresholdPercent = Math.round(data.E_threshold * 100);
+                document.getElementById('slider-e-threshold').value = thresholdPercent;
+                document.getElementById('value-e-threshold').innerText = data.E_threshold.toFixed(2);
+                smasherConfig.E_threshold = data.E_threshold;
+            }
         }
 
         function updateBehaviorUI(name, shortName) {
