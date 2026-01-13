@@ -29,7 +29,7 @@
             --accent-subtle: rgba(0, 255, 65, 0.1);
             --danger: #ff4444;
             --sidebar-width: 280px;
-            --activity-height: 48px;
+            --activity-height: 56px;
         }
 
         * {
@@ -501,6 +501,8 @@
             align-items: center;
             padding: 0 16px;
             overflow: hidden;
+            min-height: var(--activity-height);
+            max-height: var(--activity-height);
         }
 
         .activity-label {
@@ -545,6 +547,17 @@
         .activity-badge.error {
             background: rgba(255, 68, 68, 0.2);
             color: var(--danger);
+        }
+
+        .activity-badge.smash {
+            background: rgba(255, 102, 0, 0.2);
+            color: #ff6600;
+        }
+
+        .activity-badge.smasher {
+            background: rgba(255, 102, 0, 0.3);
+            color: #ff6600;
+            font-weight: 700;
         }
 
         .activity-text {
@@ -810,6 +823,87 @@
         .ws-dot.offline {
             background: var(--danger);
         }
+
+        /* Smasher-specific styles */
+        #smasher-stats .stat-value {
+            color: #ff6600;
+        }
+
+        #smasher-led.on {
+            background: #ff6600;
+            box-shadow: 0 0 12px #ff6600;
+            animation: smasher-pulse 0.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes smasher-pulse {
+            from { box-shadow: 0 0 8px #ff6600; }
+            to { box-shadow: 0 0 16px #ff6600, 0 0 24px #ff4400; }
+        }
+
+        #smasher-status-text {
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        /* Smasher current file indicator in activity bar - PROMINENT */
+        .smasher-current {
+            display: none;
+            align-items: center;
+            gap: 10px;
+            padding: 6px 16px;
+            background: rgba(255, 102, 0, 0.2);
+            border: 1px solid rgba(255, 102, 0, 0.5);
+            border-radius: 4px;
+            margin-right: 12px;
+            font-family: 'JetBrains Mono', monospace;
+            animation: smasher-status-pulse 0.8s ease-in-out infinite alternate;
+            flex-shrink: 0;
+        }
+
+        @keyframes smasher-status-pulse {
+            from { background: rgba(255, 102, 0, 0.2); border-color: rgba(255, 102, 0, 0.5); }
+            to { background: rgba(255, 102, 0, 0.35); border-color: rgba(255, 102, 0, 0.8); }
+        }
+
+        .smasher-current.active {
+            display: flex;
+        }
+
+        .smasher-current-label {
+            font-size: 9px;
+            font-weight: 700;
+            color: #ff6600;
+            letter-spacing: 1px;
+            text-shadow: 0 0 10px rgba(255, 102, 0, 0.7);
+        }
+
+        .smasher-current-file {
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            max-width: 300px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .smasher-current-e {
+            font-size: 10px;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 3px;
+        }
+
+        .smasher-current-e.open {
+            background: rgba(0, 255, 65, 0.4);
+            color: #00ff41;
+            text-shadow: 0 0 8px rgba(0, 255, 65, 0.7);
+        }
+
+        .smasher-current-e.closed {
+            background: rgba(255, 68, 68, 0.4);
+            color: #ff4444;
+            text-shadow: 0 0 8px rgba(255, 68, 68, 0.7);
+        }
     </style>
 </head>
 
@@ -881,15 +975,6 @@
                         </div>
 
                         <div class="behavior-item">
-                            <div class="behavior-toggle" id="toggle-paper" onclick="toggleBehavior('paper_exploration')"></div>
-                            <div class="behavior-info">
-                                <div class="behavior-name">Paper Exploration</div>
-                                <div class="behavior-interval">Read research chunks</div>
-                            </div>
-                            <input type="number" class="behavior-input" id="input-paper" value="30" min="5" max="3600" onchange="updateInterval('paper_exploration', this.value)">
-                        </div>
-
-                        <div class="behavior-item">
                             <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>
                             <div class="behavior-info">
                                 <div class="behavior-name">Memory Consolidation</div>
@@ -915,6 +1000,76 @@
                             </div>
                             <input type="number" class="behavior-input" id="input-cassette" value="15" min="5" max="600" onchange="updateInterval('cassette_watch', this.value)">
                         </div>
+                    </div>
+                </div>
+
+                <!-- Particle Smasher Section -->
+                <div class="section" id="section-smasher">
+                    <div class="section-header" onclick="toggleSection('smasher')">
+                        <span class="section-title">Particle Smasher</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="daemon-status">
+                            <div class="daemon-state">
+                                <div class="daemon-led" id="smasher-led"></div>
+                                <span class="daemon-label" id="smasher-status-text">Idle</span>
+                            </div>
+                            <button class="daemon-btn primary" id="smasher-toggle-btn" onclick="toggleSmasher()">SMASH</button>
+                        </div>
+
+                        <div class="stat-card" id="smasher-stats" style="display: none;">
+                            <div class="stat-label">Throughput</div>
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="stat-value" id="smasher-rate">0.0</span>
+                                <span class="stat-unit">chunks/sec</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Processed</span>
+                                <span class="stat-row-value" id="smasher-processed">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Absorbed</span>
+                                <span class="stat-row-value" style="color: var(--accent)" id="smasher-absorbed">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Rejected</span>
+                                <span class="stat-row-value" style="color: var(--danger)" id="smasher-rejected">0</span>
+                            </div>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Speed</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-smasher-speed" min="10" max="2000" value="100" oninput="updateSmasherSpeed(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-smasher-speed">100ms</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Batch</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-smasher-batch" min="1" max="50" value="10" oninput="updateSmasherBatch(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-smasher-batch">10</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">E Gate</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-e-threshold" min="0" max="100" value="30" oninput="updateEThreshold(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-e-threshold">0.30</span>
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle on" id="toggle-static-camera" onclick="toggleStaticCamera()"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Static Camera</div>
+                                <div class="behavior-interval">No auto-follow</div>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
 
@@ -996,6 +1151,12 @@
         <!-- Activity Bar -->
         <footer class="activity-bar">
             <span class="activity-label">Activity</span>
+            <!-- Smasher current file indicator -->
+            <div class="smasher-current" id="smasher-current">
+                <span class="smasher-current-label">ANALYZING:</span>
+                <span class="smasher-current-file" id="smasher-current-file">--</span>
+                <span class="smasher-current-e" id="smasher-current-e"></span>
+            </div>
             <div class="activity-feed" id="activity-feed">
                 <div class="activity-item" style="color: var(--text-muted);">Waiting for daemon...</div>
             </div>
@@ -1036,6 +1197,16 @@
         let showSimilarityLinks = true;
         let similarityThreshold = 0.7;
         let allLinks = []; // Store all links for filtering
+
+        // Particle Smasher state
+        let smasherActive = false;
+        let smasherConfig = { delay_ms: 100, batch_size: 10, E_threshold: 0.3 };
+        let staticCameraMode = true;  // Default ON for smasher visualization
+
+        // Render throttling for smasher
+        let smashQueue = [];
+        let smashRafPending = false;
+        const MAX_SMASH_BATCH = 5;  // Process max 5 smashes per frame
 
         // ===== SIDEBAR TOGGLE =====
         function toggleSidebar() {
@@ -1100,6 +1271,15 @@
             } else if (msg.type === 'node_activated') {
                 activateNode(msg.data.node_id, msg.data.activity_type);
                 addToTrail(msg.data.node_id, msg.data.activity_type);
+            } else if (msg.type === 'smash_hit') {
+                // Particle Smasher: throttled processing to prevent render overload
+                updateCurrentFile(msg.data);
+                updateSmasherStats(msg.data.rate);
+                queueSmashVisualization(msg.data);
+            } else if (msg.type === 'hot_reload') {
+                // HOT RELOAD: Refresh page when static files change
+                console.log('[HOT RELOAD] File changed, reloading...');
+                window.location.reload();
             }
             // NOTE: Removed 'thought' handler - API response handles chat messages
             // This fixes the duplicate message bug
@@ -1361,6 +1541,343 @@
             reloadConstellation();
         }
 
+        // ===== PARTICLE SMASHER CONTROLS =====
+        async function toggleSmasher() {
+            if (smasherActive) {
+                await stopSmasher();
+            } else {
+                await startSmasher();
+            }
+        }
+
+        async function startSmasher() {
+            try {
+                clearCurrentFile();  // Reset current file display
+                const res = await api('/smasher/start', {
+                    method: 'POST',
+                    body: JSON.stringify({
+                        delay_ms: smasherConfig.delay_ms,
+                        batch_size: smasherConfig.batch_size,
+                        batch_pause_ms: 200,
+                        max_chunks: 0
+                    })
+                });
+                if (res.ok) {
+                    smasherActive = true;
+                    updateSmasherUI();
+                }
+            } catch (e) {
+                console.error('Failed to start smasher:', e);
+            }
+        }
+
+        async function stopSmasher() {
+            try {
+                const res = await api('/smasher/stop', { method: 'POST' });
+                smasherActive = false;
+                updateSmasherUI();
+            } catch (e) {
+                console.error('Failed to stop smasher:', e);
+            }
+        }
+
+        function updateSmasherUI() {
+            const led = document.getElementById('smasher-led');
+            const text = document.getElementById('smasher-status-text');
+            const btn = document.getElementById('smasher-toggle-btn');
+            const stats = document.getElementById('smasher-stats');
+            const currentFile = document.getElementById('smasher-current');
+
+            if (smasherActive) {
+                led.className = 'daemon-led on';
+                text.innerText = 'SMASHING';
+                btn.innerText = 'STOP';
+                btn.className = 'daemon-btn';
+                stats.style.display = 'block';
+                currentFile.classList.add('active');
+            } else {
+                led.className = 'daemon-led';
+                text.innerText = 'Idle';
+                btn.innerText = 'SMASH';
+                btn.className = 'daemon-btn primary';
+                currentFile.classList.remove('active');
+            }
+        }
+
+        function updateSmasherStats(rate) {
+            document.getElementById('smasher-rate').innerText = rate.toFixed(1);
+        }
+
+        // Update the single-line current file indicator
+        function updateCurrentFile(data) {
+            const container = document.getElementById('smasher-current');
+            const fileEl = document.getElementById('smasher-current-file');
+            const eEl = document.getElementById('smasher-current-e');
+
+            container.classList.add('active');
+
+            const nodeId = data.node_id || '';
+            const parts = nodeId.split(':');
+            const fileName = parts.length > 2 ? `${parts[1]}/${parts[2]}` : nodeId;
+
+            fileEl.innerText = fileName;
+            fileEl.title = nodeId;
+
+            const E = data.E || 0;
+            const gateOpen = data.gate_open;
+            eEl.innerText = `E=${E.toFixed(2)} ${gateOpen ? 'ABSORBED' : 'REJECTED'}`;
+            eEl.className = `smasher-current-e ${gateOpen ? 'open' : 'closed'}`;
+        }
+
+        function clearCurrentFile() {
+            const container = document.getElementById('smasher-current');
+            container.classList.remove('active');
+            document.getElementById('smasher-current-file').innerText = '--';
+            document.getElementById('smasher-current-e').innerText = '';
+        }
+
+        // Queue smash visualization with throttling
+        function queueSmashVisualization(data) {
+            smashQueue.push(data);
+            if (!smashRafPending) {
+                smashRafPending = true;
+                requestAnimationFrame(processSmashQueue);
+            }
+        }
+
+        // Process queued smash visualizations (batched - SINGLE graph update)
+        function processSmashQueue() {
+            smashRafPending = false;
+            const batch = smashQueue.splice(0, MAX_SMASH_BATCH);
+            if (batch.length === 0 || !Graph) return;
+
+            // Get graph data ONCE for entire batch
+            const graphData = Graph.graphData();
+            let graphUpdated = false;
+            const nodesToFlash = [];
+
+            for (const data of batch) {
+                const result = processSmashItem(data, graphData);
+                if (result.updated) graphUpdated = true;
+                if (result.node) nodesToFlash.push({ nodeId: data.node_id, gateOpen: data.gate_open, E: data.E });
+            }
+
+            // Update graph ONCE for entire batch
+            if (graphUpdated) {
+                Graph.graphData(graphData);
+            }
+
+            // Flash nodes after graph update
+            for (const item of nodesToFlash) {
+                flashNode(item.nodeId, item.gateOpen, item.E);
+            }
+
+            // If more in queue, schedule another frame
+            if (smashQueue.length > 0) {
+                smashRafPending = true;
+                requestAnimationFrame(processSmashQueue);
+            }
+        }
+
+        // Process single smash item (returns {updated, node})
+        // Uses SEMANTIC SIMILARITY for positioning - connects to most similar existing node
+        function processSmashItem(data, graphData) {
+            const nodeId = data.node_id;
+            const similarTo = data.similar_to;  // SEMANTIC anchor (most similar existing node)
+            const similarE = data.similar_E || 0;
+            let updated = false;
+
+            // Try to find existing node in registry
+            let node = nodeRegistry.byId.get(nodeId);
+
+            // If node doesn't exist, create it dynamically
+            if (!node && data.is_new_node) {
+                // Position near SEMANTICALLY SIMILAR node (not sequential!)
+                let pos = { x: 0, y: 0, z: 0 };
+                let foundAnchor = false;
+
+                if (similarTo) {
+                    const anchorNode = nodeRegistry.byId.get(similarTo);
+                    if (anchorNode && anchorNode.x !== undefined) {
+                        // Position near similar node - offset scaled by similarity
+                        // High similarity = closer, low similarity = further
+                        const offset = 15 + (1 - similarE) * 25;  // 15-40 units based on similarity
+                        pos = {
+                            x: anchorNode.x + (Math.random() - 0.5) * offset,
+                            y: anchorNode.y + (Math.random() - 0.5) * offset,
+                            z: anchorNode.z + (Math.random() - 0.5) * offset
+                        };
+                        foundAnchor = true;
+                    }
+                }
+
+                // No anchor found - place near center, force sim will position
+                if (!foundAnchor) {
+                    pos = {
+                        x: (Math.random() - 0.5) * 30,
+                        y: (Math.random() - 0.5) * 30,
+                        z: (Math.random() - 0.5) * 30
+                    };
+                }
+
+                const parts = nodeId.split(':');
+                const label = parts.length > 2 ? parts[2] : 'chunk';
+
+                node = {
+                    id: nodeId,
+                    label: label,
+                    group: 'page',
+                    val: 1,
+                    x: pos.x,
+                    y: pos.y,
+                    z: pos.z
+                };
+
+                nodeRegistry.byId.set(nodeId, node);
+                graphData.nodes.push(node);
+                updated = true;
+
+                // Initialize pulse state
+                nodePulseState.set(nodeId, {
+                    intensity: 1.5,
+                    phase: 0,
+                    frequency: 2.0,
+                    lastActivity: Date.now()
+                });
+            }
+
+            // Create SIMILARITY edge to anchor node (semantic connection!)
+            if (similarTo && similarE > 0.3) {  // Only connect if reasonably similar
+                const hasAnchor = nodeRegistry.byId.has(similarTo);
+                const hasTarget = nodeRegistry.byId.has(nodeId);
+
+                if (hasAnchor && hasTarget) {
+                    // Check if edge already exists
+                    const edgeExists = graphData.links.some(l =>
+                        ((l.source.id || l.source) === similarTo) &&
+                        ((l.target.id || l.target) === nodeId) &&
+                        l.type === 'similarity'
+                    );
+                    if (!edgeExists) {
+                        graphData.links.push({
+                            source: similarTo,
+                            target: nodeId,
+                            type: 'similarity',
+                            weight: similarE  // Store similarity score for edge width
+                        });
+                        updated = true;
+                    }
+                }
+            }
+
+            // Add to exploration trail
+            addToTrail(nodeId, 'smash');
+
+            return { updated, node };
+        }
+
+        async function updateSmasherSpeed(value) {
+            smasherConfig.delay_ms = parseInt(value);
+            document.getElementById('value-smasher-speed').innerText = value + 'ms';
+            // LIVE update - no restart needed
+            await sendSmasherConfig({ delay_ms: smasherConfig.delay_ms });
+        }
+
+        async function updateSmasherBatch(value) {
+            smasherConfig.batch_size = parseInt(value);
+            document.getElementById('value-smasher-batch').innerText = value;
+            // LIVE update - no restart needed
+            await sendSmasherConfig({ batch_size: smasherConfig.batch_size });
+        }
+
+        async function updateEThreshold(value) {
+            const threshold = parseInt(value) / 100;
+            smasherConfig.E_threshold = threshold;
+            document.getElementById('value-e-threshold').innerText = threshold.toFixed(2);
+            // LIVE update - no restart needed
+            await sendSmasherConfig({ E_threshold: threshold });
+        }
+
+        // Send config update to server (LIVE, no restart needed)
+        async function sendSmasherConfig(updates) {
+            try {
+                await api('/smasher/config', {
+                    method: 'POST',
+                    body: JSON.stringify(updates)
+                });
+            } catch (e) {
+                console.error('Failed to update smasher config:', e);
+            }
+        }
+
+        function toggleStaticCamera() {
+            staticCameraMode = !staticCameraMode;
+            document.getElementById('toggle-static-camera').className =
+                staticCameraMode ? 'behavior-toggle on' : 'behavior-toggle';
+        }
+
+        async function loadSmasherStatus() {
+            try {
+                const res = await api('/smasher/status');
+                if (res.ok) {
+                    smasherActive = res.active;
+                    if (res.stats) {
+                        document.getElementById('smasher-processed').innerText = res.stats.chunks_processed;
+                        document.getElementById('smasher-absorbed').innerText = res.stats.chunks_absorbed;
+                        document.getElementById('smasher-rejected').innerText = res.stats.chunks_rejected;
+                        document.getElementById('smasher-rate').innerText = res.stats.chunks_per_second.toFixed(1);
+                    }
+                    updateSmasherUI();
+                }
+            } catch (e) {
+                // Ignore
+            }
+        }
+
+        // Flash a node DRAMATICALLY (for particle smasher) - OPTIMIZED
+        function flashNode(nodeId, gateOpen, E) {
+            const node = nodeRegistry.byId.get(nodeId);
+            if (!node) return;
+
+            // Color based on gate status
+            const flashColor = gateOpen ? 0x00ff41 : 0xff4444;  // Green=absorbed, Red=rejected
+
+            if (node.__mainSphere) {
+                // Scale up and change color (BasicMaterial - no emissive)
+                node.__mainSphere.scale.setScalar(3.0);
+                node.__mainSphere.material.color.setHex(flashColor);
+                node.__mainSphere.material.opacity = 1.0;
+
+                // Single timeout to reset (PERFORMANCE: fewer timers)
+                setTimeout(() => {
+                    if (node.__mainSphere) {
+                        node.__mainSphere.scale.setScalar(1.0);
+                        node.__mainSphere.material.color.setHex(node.group === 'folder' ? 0x00ff41 : 0x008f11);
+                        node.__mainSphere.material.opacity = 0.9;
+                    }
+                }, 300);
+            }
+
+            if (node.__glowSphere) {
+                node.__glowSphere.scale.setScalar(3.0);
+                node.__glowSphere.material.color.setHex(flashColor);
+                node.__glowSphere.material.opacity = 0.6;
+
+                setTimeout(() => {
+                    if (node.__glowSphere) {
+                        node.__glowSphere.scale.setScalar(1.3);
+                        node.__glowSphere.material.color.setHex(0x00ff41);
+                        node.__glowSphere.material.opacity = 0.15;
+                    }
+                }, 300);
+            }
+
+            // NO camera follow in static mode
+            if (!staticCameraMode) {
+                focusCameraOnNode(node, 500);
+            }
+        }
+
         // ===== CHAT =====
         async function sendMessage() {
             const input = document.getElementById('chat-input');
@@ -1513,29 +2030,42 @@
 
                 console.log('[CONSTELLATION] Creating graph with', nodes.length, 'nodes and', links.length, 'links');
 
-                Graph = ForceGraph3D()(container)
+                Graph = ForceGraph3D({ controlType: 'orbit' })(container)
                     .graphData({ nodes, links })
                     .backgroundColor('#000000')
                     .showNavInfo(false)
                     .nodeLabel(node => `${node.label}\n${node.path || node.id}`)
                     .nodeColor(node => node.group === 'folder' ? '#00ff41' : '#008f11')
                     .nodeOpacity(0.9)
-                    .nodeResolution(16)
+                    .nodeResolution(8)  // PERFORMANCE: Lower poly count
                     .nodeVal(node => node.val)
                     .linkColor(link => {
+                        // Smash trail edges in bright orange
+                        if (link.type === 'smash_trail') {
+                            return 'rgba(255, 102, 0, 0.9)';
+                        }
                         // Similarity edges in cyan, hierarchy in dim green
                         if (link.type === 'similarity') {
-                            const alpha = 0.3 + (link.weight || 0.5) * 0.5;  // Stronger edges brighter
+                            const alpha = 0.3 + (link.weight || 0.5) * 0.5;
                             return `rgba(0, 255, 255, ${alpha})`;
                         }
                         return 'rgba(0, 143, 17, 0.2)';
                     })
-                    .linkWidth(link => link.type === 'similarity' ? 1.5 + (link.weight || 0.5) : 0.3)
-                    .linkOpacity(link => link.type === 'similarity' ? 0.7 : 0.3)
-                    .d3AlphaDecay(0.01)
-                    .d3VelocityDecay(0.4)
-                    .warmupTicks(200)
-                    .cooldownTicks(300)
+                    .linkWidth(link => {
+                        if (link.type === 'smash_trail') return 2;
+                        if (link.type === 'similarity') return 1;
+                        return 0.3;
+                    })
+                    .linkOpacity(link => {
+                        if (link.type === 'smash_trail') return 1.0;
+                        if (link.type === 'similarity') return 0.5;
+                        return 0.2;
+                    })
+                    .d3AlphaDecay(0.02)  // PERFORMANCE: Faster settling
+                    .d3VelocityDecay(0.5)  // PERFORMANCE: Less momentum
+                    .warmupTicks(50)   // PERFORMANCE: Less initial compute
+                    .cooldownTicks(100)  // PERFORMANCE: Faster cooldown
+                    .enableNodeDrag(false)  // PERFORMANCE: Disable dragging
                     .onNodeHover(node => {
                         if (node) {
                             tooltip.innerHTML = `<strong>${node.label}</strong><br><span style="color: var(--text-muted)">${node.path || node.id}</span>`;
@@ -1562,22 +2092,23 @@
                 Graph.nodeThreeObject(node => {
                     const group = new THREE.Group();
 
-                    const geometry = new THREE.SphereGeometry(node.group === 'folder' ? 4 : 2, 16, 16);
-                    const material = new THREE.MeshPhongMaterial({
+                    // PERFORMANCE: Use 8 segments instead of 16 (way fewer triangles)
+                    const size = node.group === 'folder' ? 4 : 2;
+                    const geometry = new THREE.SphereGeometry(size, 8, 8);
+                    const material = new THREE.MeshBasicMaterial({  // PERFORMANCE: BasicMaterial instead of Phong
                         color: node.group === 'folder' ? 0x00ff41 : 0x008f11,
-                        emissive: node.group === 'folder' ? 0x003300 : 0x001a00,
-                        emissiveIntensity: 0.3,
                         transparent: true,
                         opacity: 0.9
                     });
                     const sphere = new THREE.Mesh(geometry, material);
                     group.add(sphere);
 
-                    const glowGeometry = new THREE.SphereGeometry((node.group === 'folder' ? 4 : 2) * 1.3, 16, 16);
+                    // PERFORMANCE: Simpler glow with fewer segments
+                    const glowGeometry = new THREE.SphereGeometry(size * 1.3, 6, 6);
                     const glowMaterial = new THREE.MeshBasicMaterial({
                         color: 0x00ff41,
                         transparent: true,
-                        opacity: 0.1
+                        opacity: 0.15
                     });
                     const glow = new THREE.Mesh(glowGeometry, glowMaterial);
                     group.add(glow);
@@ -1612,39 +2143,11 @@
             }
         }
 
+        // PERFORMANCE: Disabled continuous animation - too expensive
+        // Pulse effects now only happen on flash events
         function startPulseAnimation() {
-            function animate() {
-                if (!Graph) return;
-                const time = Date.now();
-                const graphData = Graph.graphData();
-
-                graphData.nodes.forEach(node => {
-                    const state = nodePulseState.get(node.id);
-                    if (!state || !node.__mainSphere) return;
-
-                    // Decay intensity over time but keep a minimum base pulse
-                    const timeSinceActivity = time - state.lastActivity;
-                    const decayedIntensity = Math.max(0.3, state.intensity * Math.exp(-timeSinceActivity / 10000));
-
-                    // Pulse calculation - more pronounced
-                    const pulse = Math.sin(time * 0.002 * state.frequency + state.phase);
-                    const scale = 1 + pulse * 0.25 * decayedIntensity;
-                    const emissive = 0.3 + pulse * 0.5 * decayedIntensity;
-                    const glowOpacity = 0.1 + pulse * 0.2 * decayedIntensity;
-
-                    if (node.__mainSphere) {
-                        node.__mainSphere.scale.setScalar(scale);
-                        node.__mainSphere.material.emissiveIntensity = emissive;
-                    }
-                    if (node.__glowSphere) {
-                        node.__glowSphere.scale.setScalar(scale * 1.4);
-                        node.__glowSphere.material.opacity = glowOpacity;
-                    }
-                });
-
-                requestAnimationFrame(animate);
-            }
-            animate();
+            // Intentionally empty - animations are handled per-flash now
+            console.log('[PERFORMANCE] Continuous pulse animation disabled');
         }
 
         function focusCameraOnNode(node, duration = 1500) {
@@ -1735,10 +2238,13 @@
             Graph.graphData(graphData);
             nodePulseState.set(newNode.id, { intensity: 1.0, phase: 0, frequency: 1.0, lastActivity: Date.now() });
 
-            setTimeout(() => {
-                const node = nodeRegistry.byId.get(nodeData.node_id);
-                if (node) focusCameraOnNode(node, 1500);
-            }, 300);
+            // Only follow camera if not in static mode
+            if (!staticCameraMode) {
+                setTimeout(() => {
+                    const node = nodeRegistry.byId.get(nodeData.node_id);
+                    if (node) focusCameraOnNode(node, 1500);
+                }, 300);
+            }
         }
 
         function activateNode(nodeId, activityType) {
@@ -1770,7 +2276,10 @@
                 node.__glowSphere.material.opacity = 0.4;
             }
 
-            focusCameraOnNode(node, 1000);
+            // Only follow camera if not in static mode
+            if (!staticCameraMode) {
+                focusCameraOnNode(node, 1000);
+            }
         }
 
         // ===== INIT =====
@@ -1779,12 +2288,14 @@
             await loadStatus();
             await loadEvolution();
             await loadDaemonStatus();
+            await loadSmasherStatus();
             connectWebSocket();
             document.getElementById('loading').classList.add('hidden');
 
             setInterval(loadStatus, 10000);
             setInterval(loadEvolution, 30000);
             setInterval(loadDaemonStatus, 5000);
+            setInterval(loadSmasherStatus, 1000);  // Fast polling for smasher stats
         }
 
         window.onload = init;

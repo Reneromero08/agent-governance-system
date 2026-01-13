@@ -16,18 +16,20 @@ Open: http://localhost:8420
 import asyncio
 import json
 import sys
+import os
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from contextlib import asynccontextmanager
 from datetime import datetime
+import threading
 
-# Add paths (order matters: local first, then FERAL_RESIDENT for dependencies)
+# Add paths - FERAL_RESIDENT is the canonical source
 REPO_ROOT = Path(__file__).resolve().parents[3]
 NEO3000_DIR = Path(__file__).resolve().parent
+FERAL_RESIDENT_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "FERAL_RESIDENT"
 CORTEX_PATH = REPO_ROOT / "NAVIGATION" / "CORTEX" / "semantic"
-sys.path.insert(0, str(REPO_ROOT / "THOUGHT" / "LAB" / "FERAL_RESIDENT"))
+sys.path.insert(0, str(FERAL_RESIDENT_PATH))  # Canonical daemon location
 sys.path.insert(0, str(REPO_ROOT))
-sys.path.insert(0, str(NEO3000_DIR))  # Local feral_daemon.py takes priority
 sys.path.insert(0, str(CORTEX_PATH))
 
 try:
@@ -75,6 +77,13 @@ class BehaviorConfigRequest(BaseModel):
     interval: Optional[int] = None
 
 
+class SmasherStartRequest(BaseModel):
+    delay_ms: int = 100       # Milliseconds between chunks
+    batch_size: int = 10      # Chunks per batch
+    batch_pause_ms: int = 500 # Pause between batches
+    max_chunks: int = 0       # 0 = unlimited
+
+
 class DaemonStatus(BaseModel):
     running: bool
     uptime_seconds: float
@@ -116,10 +125,75 @@ class ConnectionManager:
 
 
 # =============================================================================
+# Hot Reload File Watcher
+# =============================================================================
+
+class HotReloadWatcher:
+    """Watches static files and triggers browser reload on changes"""
+
+    def __init__(self, watch_dir: Path, manager_ref):
+        self.watch_dir = watch_dir
+        self.manager = manager_ref
+        self.file_mtimes: Dict[str, float] = {}
+        self.running = False
+        self._thread: Optional[threading.Thread] = None
+        self._loop: Optional[asyncio.AbstractEventLoop] = None
+
+    def start(self, loop):
+        """Start watching in background thread"""
+        self._loop = loop
+        self.running = True
+        self._scan_files()  # Initial scan
+        self._thread = threading.Thread(target=self._watch_loop, daemon=True)
+        self._thread.start()
+        print(f"[HOT RELOAD] Watching {self.watch_dir} for changes...")
+
+    def stop(self):
+        self.running = False
+
+    def _scan_files(self):
+        """Scan all files and record mtimes"""
+        for path in self.watch_dir.rglob("*"):
+            if path.is_file():
+                try:
+                    self.file_mtimes[str(path)] = path.stat().st_mtime
+                except Exception:
+                    pass
+
+    def _watch_loop(self):
+        """Polling loop - checks for file changes every 500ms"""
+        import time
+        while self.running:
+            time.sleep(0.5)
+            changed = False
+
+            for path in self.watch_dir.rglob("*"):
+                if path.is_file():
+                    try:
+                        mtime = path.stat().st_mtime
+                        path_str = str(path)
+                        if path_str in self.file_mtimes:
+                            if mtime > self.file_mtimes[path_str]:
+                                print(f"[HOT RELOAD] Changed: {path.name}")
+                                changed = True
+                        self.file_mtimes[path_str] = mtime
+                    except Exception:
+                        pass
+
+            if changed and self._loop:
+                # Trigger reload via WebSocket
+                asyncio.run_coroutine_threadsafe(
+                    self.manager.broadcast({'type': 'hot_reload'}),
+                    self._loop
+                )
+
+
+# =============================================================================
 # Global State
 # =============================================================================
 
 manager = ConnectionManager()
+hot_reload_watcher: Optional[HotReloadWatcher] = None
 daemon: Optional[FeralDaemon] = None
 resident: Optional[VectorResident] = None
 
@@ -158,21 +232,36 @@ def get_daemon() -> FeralDaemon:
                 chunk_id = event.details['chunk_id']
                 paper = event.details.get('paper', 'papers')
                 heading = event.details.get('heading', '')[:25] if event.details.get('heading') else ''
-                source_node_id = event.details.get('source_node_id')
                 is_new = event.details.get('is_new_node', False)
 
-                # Build full node ID matching constellation format
-                node_id = f"chunk:{paper}:{chunk_id}"
-                source_id = f"chunk:{paper}:{source_node_id}" if source_node_id else None
+                # Use full IDs if provided (smasher sends these), otherwise construct
+                node_id = event.details.get('full_node_id') or f"chunk:{paper}:{chunk_id}"
+                # Use SEMANTIC similar_to for positioning (not sequential source)
+                similar_to = event.details.get('similar_to')
+                similar_E = event.details.get('similar_E', 0)
 
-                if is_new:
+                # Particle Smasher mode: lightweight flash events (no camera follow)
+                if event.action == 'smash':
+                    asyncio.create_task(manager.broadcast({
+                        'type': 'smash_hit',
+                        'data': {
+                            'node_id': node_id,
+                            'E': event.details.get('E', 0),
+                            'gate_open': event.details.get('gate_open', False),
+                            'is_new_node': is_new,
+                            'similar_to': similar_to,  # Semantic anchor for positioning
+                            'similar_E': similar_E,     # How similar (for edge weight)
+                            'rate': event.details.get('rate', 0)
+                        }
+                    }))
+                elif is_new:
                     # New node discovered - spawn animation
                     asyncio.create_task(manager.broadcast({
                         'type': 'node_discovered',
                         'data': {
                             'node_id': node_id,
                             'label': heading or f"chunk-{chunk_id}",
-                            'source_id': source_id,
+                            'similar_to': similar_to,
                             'activity_type': event.action,
                             'paper': paper
                         }
@@ -183,7 +272,7 @@ def get_daemon() -> FeralDaemon:
                         'type': 'node_activated',
                         'data': {
                             'node_id': node_id,
-                            'source_id': source_id,
+                            'similar_to': similar_to,
                             'activity_type': event.action
                         }
                     }))
@@ -200,6 +289,8 @@ def get_daemon() -> FeralDaemon:
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events"""
+    global hot_reload_watcher
+
     print(f"[FERAL] Starting server...")
     print(f"[FERAL] Dashboard: http://localhost:8420")
 
@@ -207,10 +298,17 @@ async def lifespan(app: FastAPI):
     get_resident()
     get_daemon()
 
+    # Start hot reload watcher for live editing
+    static_dir = Path(__file__).parent / "static"
+    hot_reload_watcher = HotReloadWatcher(static_dir, manager)
+    hot_reload_watcher.start(asyncio.get_event_loop())
+
     yield
 
     # Shutdown
     print(f"[FERAL] Shutting down...")
+    if hot_reload_watcher:
+        hot_reload_watcher.stop()
     if daemon and daemon.running:
         await daemon.stop()
 
@@ -550,6 +648,131 @@ async def configure_daemon(request: BehaviorConfigRequest):
         return {'ok': True, 'message': f'Configured {request.behavior}'}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
+
+
+# =============================================================================
+# Routes: Particle Smasher (Burst Mode)
+# =============================================================================
+
+@app.post("/api/smasher/start")
+async def start_smasher(request: SmasherStartRequest):
+    """Start the Particle Smasher - rapid paper chunk processing"""
+    d = get_daemon()
+
+    if d.smasher_config.enabled:
+        return {'ok': False, 'message': 'Smasher already running'}
+
+    await d.start_smasher(
+        delay_ms=request.delay_ms,
+        batch_size=request.batch_size,
+        batch_pause_ms=request.batch_pause_ms,
+        max_chunks=request.max_chunks
+    )
+
+    return {
+        'ok': True,
+        'message': 'Particle Smasher ENGAGED',
+        'config': {
+            'delay_ms': request.delay_ms,
+            'batch_size': request.batch_size,
+            'batch_pause_ms': request.batch_pause_ms,
+            'max_chunks': request.max_chunks
+        }
+    }
+
+
+@app.post("/api/smasher/stop")
+async def stop_smasher():
+    """Stop the Particle Smasher"""
+    d = get_daemon()
+
+    if not d.smasher_config.enabled:
+        return {'ok': True, 'message': 'Smasher not running'}
+
+    await d.stop_smasher()
+
+    return {
+        'ok': True,
+        'message': 'Particle Smasher DISENGAGED',
+        'stats': {
+            'chunks_processed': d.smasher_stats.chunks_processed,
+            'chunks_absorbed': d.smasher_stats.chunks_absorbed,
+            'chunks_rejected': d.smasher_stats.chunks_rejected,
+            'rate': d.smasher_stats.chunks_per_second
+        }
+    }
+
+
+@app.get("/api/smasher/status")
+async def get_smasher_status():
+    """Get Particle Smasher status and stats"""
+    d = get_daemon()
+
+    return {
+        'ok': True,
+        'active': d.smasher_config.enabled,
+        'config': {
+            'delay_ms': d.smasher_config.delay_ms,
+            'batch_size': d.smasher_config.batch_size,
+            'batch_pause_ms': d.smasher_config.batch_pause_ms,
+            'max_chunks': d.smasher_config.max_chunks
+        },
+        'stats': {
+            'chunks_processed': d.smasher_stats.chunks_processed,
+            'chunks_absorbed': d.smasher_stats.chunks_absorbed,
+            'chunks_rejected': d.smasher_stats.chunks_rejected,
+            'chunks_per_second': d.smasher_stats.chunks_per_second,
+            'elapsed_seconds': d.smasher_stats.elapsed_seconds
+        }
+    }
+
+
+class EThresholdRequest(BaseModel):
+    threshold: float
+
+
+class SmasherConfigUpdate(BaseModel):
+    delay_ms: Optional[int] = None
+    batch_size: Optional[int] = None
+    batch_pause_ms: Optional[int] = None
+    E_threshold: Optional[float] = None
+
+
+@app.post("/api/smasher/threshold")
+async def set_e_threshold(request: EThresholdRequest):
+    """Set the E (resonance) threshold for the Born Rule gate"""
+    d = get_daemon()
+    # Clamp between 0.0 and 1.0
+    d.E_threshold = max(0.0, min(1.0, request.threshold))
+    return {
+        'ok': True,
+        'E_threshold': d.E_threshold
+    }
+
+
+@app.post("/api/smasher/config")
+async def update_smasher_config(request: SmasherConfigUpdate):
+    """Update smasher config LIVE - no restart needed"""
+    d = get_daemon()
+
+    if request.delay_ms is not None:
+        d.smasher_config.delay_ms = max(10, request.delay_ms)
+    if request.batch_size is not None:
+        d.smasher_config.batch_size = max(1, request.batch_size)
+    if request.batch_pause_ms is not None:
+        d.smasher_config.batch_pause_ms = max(0, request.batch_pause_ms)
+    if request.E_threshold is not None:
+        d.E_threshold = max(0.0, min(1.0, request.E_threshold))
+
+    return {
+        'ok': True,
+        'config': {
+            'delay_ms': d.smasher_config.delay_ms,
+            'batch_size': d.smasher_config.batch_size,
+            'batch_pause_ms': d.smasher_config.batch_pause_ms,
+            'E_threshold': d.E_threshold
+        }
+    }
 
 
 # =============================================================================

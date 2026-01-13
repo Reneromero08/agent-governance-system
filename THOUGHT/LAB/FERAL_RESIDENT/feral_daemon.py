@@ -1,476 +1,879 @@
 #!/usr/bin/env python3
 """
-Feral Daemon - Autonomous Resident Living in Vector Space
+Feral Daemon - Q45 Geometric Quantum System
 
-NOT a chatbot. A daemon that:
-1. Runs continuously (always on)
-2. Explores the manifold autonomously
-3. Creates its own symbols (@Concept-X)
-4. Communicates in geometry, not prose
+The unified daemon for Feral Resident. Combines:
+- Q45 Geometric Cognition (Born Rule, geodesic navigation, superposition)
+- Server-compatible async interface (WebSocket callbacks, configurable behaviors)
 
-The LLM is OPTIONAL - only for human translation when requested.
-Native output is geometric states and symbol references.
+Brain Components:
+- VectorResident: The actual brain (think, navigate, remember)
+- GeometricMemory: Mind state accumulation via entanglement
+- GeometricReasoner: Pure manifold operations
+
+Cognitive Behaviors:
+1. PAPER EXPLORATION: Q44 Born Rule Check - measure E before absorbing
+2. SELF REFLECTION: Geodesic navigation to unexplored regions
+3. MEMORY CONSOLIDATION: Superposition blending of recent memories
+4. CASSETTE WATCH: Monitor for new content
+
+The daemon is the scheduler. VectorResident is the brain.
 """
 
-import sys
+import asyncio
+import random
 import time
-import threading
-import json
-import hashlib
-import numpy as np
+import sys
 from pathlib import Path
-from typing import Dict, List, Optional, Tuple
-from dataclasses import dataclass, asdict
+from dataclasses import dataclass, field
+from typing import Optional, List, Dict, Callable, Any
 from datetime import datetime
-from queue import Queue, Empty
+from collections import deque
+import numpy as np
 
+# Path setup
 FERAL_PATH = Path(__file__).parent
+REPO_ROOT = FERAL_PATH.parent.parent.parent
+
 if str(FERAL_PATH) not in sys.path:
     sys.path.insert(0, str(FERAL_PATH))
 
-from vector_store import VectorStore
-from geometric_memory import GeometricMemory
-
-CAPABILITY_PATH = FERAL_PATH.parent.parent.parent / "CAPABILITY" / "PRIMITIVES"
+CAPABILITY_PATH = REPO_ROOT / "CAPABILITY" / "PRIMITIVES"
 if str(CAPABILITY_PATH) not in sys.path:
     sys.path.insert(0, str(CAPABILITY_PATH))
 
+from vector_brain import VectorResident
 from geometric_reasoner import GeometricReasoner, GeometricState
 
 
-@dataclass
-class Symbol:
-    """A concept the resident has discovered/created."""
-    name: str  # e.g., "@Concept-EmbedInvert"
-    vector_hash: str
-    created_at: str
-    parent_symbols: List[str]  # Symbols composed to create this
-    operation: str  # How it was created: entangle, superpose, blend
-    E_threshold: float  # When to activate this concept
-    activation_count: int = 0
-
+# =============================================================================
+# Data Classes
+# =============================================================================
 
 @dataclass
-class Thought:
-    """A geometric thought - NOT text."""
-    vector_hash: str
-    Df: float
-    resonant_symbols: List[str]  # Symbols that E-gate
+class ActivityEvent:
+    """A single daemon activity event (server-compatible)."""
     timestamp: str
-    source: str  # "explore", "query", "blend"
+    action: str  # 'paper', 'consolidate', 'reflect', 'cassette', 'thought', 'daemon'
+    summary: str
+    details: Dict[str, Any] = field(default_factory=dict)
 
+
+@dataclass
+class BehaviorConfig:
+    """Configuration for a daemon behavior."""
+    enabled: bool = True
+    interval: int = 300  # seconds
+    last_run: float = 0.0
+
+
+@dataclass
+class SmasherConfig:
+    """Configuration for Particle Smasher burst mode."""
+    enabled: bool = False
+    delay_ms: int = 100       # Milliseconds between chunks
+    batch_size: int = 10      # Chunks per batch before brief pause
+    batch_pause_ms: int = 500 # Pause between batches
+    max_chunks: int = 0       # 0 = unlimited (until all consumed)
+
+
+@dataclass
+class SmasherStats:
+    """Statistics for particle smasher mode."""
+    chunks_processed: int = 0
+    chunks_absorbed: int = 0
+    chunks_rejected: int = 0
+    start_time: float = 0.0
+    last_chunk_time: float = 0.0
+
+    @property
+    def elapsed_seconds(self) -> float:
+        if self.start_time == 0:
+            return 0
+        return (self.last_chunk_time or time.time()) - self.start_time
+
+    @property
+    def chunks_per_second(self) -> float:
+        elapsed = self.elapsed_seconds
+        if elapsed == 0:
+            return 0
+        return self.chunks_processed / elapsed
+
+
+# =============================================================================
+# Feral Daemon - Q45 Geometric + Server Compatible
+# =============================================================================
 
 class FeralDaemon:
     """
-    The actual feral resident - lives in vector space.
+    Q45 Geometric Quantum Daemon with server-compatible interface.
 
-    Core loop:
-    1. EXPLORE: Navigate to unexplored regions
-    2. DISCOVER: Find interesting composites
-    3. SYMBOLIZE: Name discoveries with @Concept-X
-    4. COMMUNICATE: Emit symbols (not prose)
+    Combines:
+    - Q45 geometric cognition (Born Rule, geodesics, superposition)
+    - Async start/stop for FastAPI integration
+    - WebSocket callbacks for real-time updates
+    - Configurable behaviors
 
-    No LLM required for operation. LLM only for human translation.
+    Usage (standalone):
+        daemon = FeralDaemon(thread_id="eternal")
+        await daemon.start()
+        # ... runs autonomously ...
+        await daemon.stop()
+
+    Usage (with server):
+        resident = VectorResident(thread_id="eternal", db_path="...")
+        daemon = FeralDaemon(resident=resident, thread_id="eternal")
+        daemon.add_callback(on_activity)  # WebSocket broadcast
+        await daemon.start()
     """
 
-    VERSION = "0.2.0-daemon"
+    VERSION = "2.0.0-q45"
+    MAX_ACTIVITY_LOG = 1000
 
     def __init__(
         self,
-        db_path: str = "feral_daemon.db",
-        symbol_file: str = "symbols.json",
-        explore_interval: float = 5.0,  # Seconds between explorations
-        E_threshold: float = 0.4,
-        blend_threshold: float = 0.6  # E threshold to create new symbol
+        resident: Optional[VectorResident] = None,
+        thread_id: str = "eternal",
+        E_threshold: float = 0.3,  # Q44 Born Rule threshold (lower = more permissive)
+        consolidation_window: int = 10
     ):
-        self.db_path = db_path
-        self.symbol_file = FERAL_PATH / symbol_file
-        self.explore_interval = explore_interval
+        """
+        Initialize the daemon.
+
+        Args:
+            resident: VectorResident instance (created if not provided)
+            thread_id: Thread ID for the resident
+            E_threshold: Born Rule threshold for resonance gating
+            consolidation_window: Number of recent memories to blend
+        """
+        self.thread_id = thread_id
+        self._resident = resident
+        self._resident_initialized = resident is not None
         self.E_threshold = E_threshold
-        self.blend_threshold = blend_threshold
+        self.consolidation_window = consolidation_window
 
-        # Core components
-        self.store = VectorStore(db_path)
-        self.reasoner = self.store.reasoner
+        # State
+        self.running = False
+        self.started_at: Optional[float] = None
+        self._task: Optional[asyncio.Task] = None
 
-        # Symbol registry - the resident's invented language
-        self.symbols: Dict[str, Symbol] = {}
-        self._load_symbols()
+        # Behaviors with intervals
+        self.behaviors = {
+            'paper_exploration': BehaviorConfig(enabled=True, interval=30),
+            'memory_consolidation': BehaviorConfig(enabled=True, interval=120),
+            'self_reflection': BehaviorConfig(enabled=True, interval=60),
+            'cassette_watch': BehaviorConfig(enabled=True, interval=15),
+        }
 
-        # Current mind state
-        self.mind_state: Optional[GeometricState] = None
-        self.thought_history: List[Thought] = []
+        # Activity log (ring buffer)
+        self.activity_log: deque = deque(maxlen=self.MAX_ACTIVITY_LOG)
 
-        # Communication queues (for external interaction)
-        self.input_queue: Queue = Queue()
-        self.output_queue: Queue = Queue()
+        # WebSocket callbacks
+        self.callbacks: List[Callable[[ActivityEvent], Any]] = []
 
-        # Daemon state
-        self._running = False
-        self._explore_thread: Optional[threading.Thread] = None
+        # Cassette watch state
+        self._cassette_mtimes: Dict[str, float] = {}
+        self._cassettes_dir = REPO_ROOT / "NAVIGATION" / "CORTEX" / "cassettes"
 
-        # Load papers
-        try:
-            stats = self.store.load_papers()
-            print(f"[Daemon] Loaded {stats['papers_loaded']} papers")
-        except Exception as e:
-            print(f"[Daemon] No papers: {e}")
+        # Exploration state
+        self._explored_chunks: set = set()
+        self._exploration_trail: deque = deque(maxlen=50)
+        self._discovered_chunks: set = set()
+        self._chunk_states: Dict[str, Any] = {}  # node_id -> GeometricState for E_with (Q45)
 
-    def _load_symbols(self):
-        """Load invented symbols from disk."""
-        if self.symbol_file.exists():
-            data = json.loads(self.symbol_file.read_text())
-            for name, sym_data in data.items():
-                self.symbols[name] = Symbol(**sym_data)
-            print(f"[Daemon] Loaded {len(self.symbols)} symbols")
+        # Particle Smasher state
+        self.smasher_config = SmasherConfig()
+        self.smasher_stats = SmasherStats()
+        self._smasher_task: Optional[asyncio.Task] = None
 
-    def _save_symbols(self):
-        """Persist symbols to disk."""
-        data = {name: asdict(sym) for name, sym in self.symbols.items()}
-        self.symbol_file.write_text(json.dumps(data, indent=2))
-
-    # =========================================================================
-    # CORE: Geometric Operations (No LLM)
-    # =========================================================================
-
-    def think(self, input_state: GeometricState) -> Thought:
-        """
-        Process a geometric state. Returns geometric output.
-
-        NO TEXT. Pure geometry in, geometry out.
-        """
-        # Find resonant symbols
-        resonant = self._find_resonant_symbols(input_state)
-
-        # Update mind via entanglement
-        if self.mind_state is None:
-            self.mind_state = input_state
-        else:
-            self.mind_state = self.reasoner.entangle(self.mind_state, input_state)
-
-        # Create thought record
-        thought = Thought(
-            vector_hash=input_state.receipt()['vector_hash'],
-            Df=input_state.Df,
-            resonant_symbols=[s.name for s in resonant],
-            timestamp=datetime.utcnow().isoformat(),
-            source="think"
-        )
-
-        self.thought_history.append(thought)
-
-        # Check if this should become a new symbol
-        if len(resonant) >= 2:
-            self._maybe_create_symbol(input_state, resonant)
-
-        return thought
-
-    def _find_resonant_symbols(self, state: GeometricState) -> List[Symbol]:
-        """Find symbols that resonate with this state."""
-        resonant = []
-
-        for sym in self.symbols.values():
-            # Reconstruct symbol's state from stored vectors
-            sym_state = self._get_symbol_state(sym)
-            if sym_state is None:
-                continue
-
-            E = state.E_with(sym_state)
-            if E > sym.E_threshold:
-                sym.activation_count += 1
-                resonant.append(sym)
-
-        return sorted(resonant, key=lambda s: s.activation_count, reverse=True)
-
-    def _get_symbol_state(self, sym: Symbol) -> Optional[GeometricState]:
-        """Reconstruct a symbol's geometric state."""
-        # Look up in vector store by hash
-        records = self.store.db.get_vectors_by_hash_prefix(sym.vector_hash[:16])
-        if records:
-            return GeometricState(
-                vector=np.frombuffer(records[0]['vector'], dtype=np.float32),
-                operation_history=[]
+    @property
+    def resident(self) -> VectorResident:
+        """Lazy initialization of resident."""
+        if not self._resident_initialized:
+            db_path = FERAL_PATH / "data" / f"feral_{self.thread_id}.db"
+            db_path.parent.mkdir(exist_ok=True)
+            self._resident = VectorResident(
+                thread_id=self.thread_id,
+                db_path=str(db_path)
             )
-        return None
-
-    def _maybe_create_symbol(self, state: GeometricState, parents: List[Symbol]):
-        """Create a new symbol if this state is novel enough."""
-        # Check novelty - must be different from existing symbols
-        for sym in self.symbols.values():
-            sym_state = self._get_symbol_state(sym)
-            if sym_state and state.E_with(sym_state) > 0.9:
-                return  # Too similar to existing
-
-        # Create new symbol
-        symbol_id = len(self.symbols)
-        name = f"@Concept-{symbol_id:04d}"
-
-        new_symbol = Symbol(
-            name=name,
-            vector_hash=state.receipt()['vector_hash'],
-            created_at=datetime.utcnow().isoformat(),
-            parent_symbols=[p.name for p in parents[:3]],
-            operation="emergent_blend",
-            E_threshold=self.E_threshold
-        )
-
-        self.symbols[name] = new_symbol
-        self._save_symbols()
-
-        # Emit to output queue
-        self.output_queue.put({
-            'type': 'symbol_created',
-            'symbol': name,
-            'parents': new_symbol.parent_symbols,
-            'Df': state.Df
-        })
-
-        print(f"[Daemon] Created symbol: {name} from {new_symbol.parent_symbols}")
+            self._resident_initialized = True
+        return self._resident
 
     # =========================================================================
-    # EXPLORE: Autonomous Navigation
+    # Server Interface (Callbacks, Status, Config)
     # =========================================================================
 
-    def explore_step(self):
-        """
-        One step of autonomous exploration.
+    def add_callback(self, callback: Callable[[ActivityEvent], Any]):
+        """Add a callback for activity events (WebSocket broadcast)."""
+        self.callbacks.append(callback)
 
-        Navigate to unexplored regions, find interesting composites.
-        """
-        if self.mind_state is None:
-            # Bootstrap with random paper chunk
-            neighbors = self.store.find_nearest(
-                self.reasoner.initialize("knowledge understanding learning"),
-                k=1
-            )
-            if neighbors:
-                record, E = neighbors[0]
-                self.mind_state = GeometricState(
-                    vector=np.frombuffer(record.vector, dtype=np.float32),
-                    operation_history=[]
-                )
-            return
+    def remove_callback(self, callback: Callable[[ActivityEvent], Any]):
+        """Remove a callback."""
+        if callback in self.callbacks:
+            self.callbacks.remove(callback)
 
-        # Navigate from current mind state
-        neighbors = self.store.find_nearest(self.mind_state, k=10)
-
-        if not neighbors:
-            return
-
-        # Find the most novel neighbor (lowest E with current mind)
-        most_novel = min(neighbors, key=lambda x: x[1])
-        record, E = most_novel
-
-        novel_state = GeometricState(
-            vector=np.frombuffer(record.vector, dtype=np.float32),
-            operation_history=[]
+    def _log_activity(self, action: str, summary: str, **details):
+        """Log an activity and broadcast to callbacks."""
+        event = ActivityEvent(
+            timestamp=datetime.now().isoformat(),
+            action=action,
+            summary=summary,
+            details=details
         )
+        self.activity_log.append(event)
 
-        # Blend current mind with novel state
-        blended = self.reasoner.superpose(self.mind_state, novel_state)
-
-        # Process as thought
-        thought = self.think(blended)
-        thought.source = "explore"
-
-        # Emit exploration result
-        self.output_queue.put({
-            'type': 'explore',
-            'E': E,
-            'Df': blended.Df,
-            'resonant': thought.resonant_symbols,
-            'mind_hash': self.mind_state.receipt()['vector_hash'][:8]
-        })
-
-    def _explore_loop(self):
-        """Background exploration thread."""
-        while self._running:
+        # Broadcast to callbacks
+        for callback in self.callbacks:
             try:
-                # Check for input
-                try:
-                    msg = self.input_queue.get_nowait()
-                    self._handle_input(msg)
-                except Empty:
-                    pass
-
-                # Explore
-                self.explore_step()
-
-                time.sleep(self.explore_interval)
-
+                callback(event)
             except Exception as e:
-                print(f"[Daemon] Explore error: {e}")
-                time.sleep(1)
+                print(f"[DAEMON Q45] Callback error: {e}")
 
-    def _handle_input(self, msg: Dict):
-        """Handle external input."""
-        msg_type = msg.get('type')
+    @property
+    def status(self) -> Dict:
+        """Get daemon status (server-compatible format)."""
+        return {
+            'running': self.running,
+            'started_at': self.started_at,
+            'uptime_seconds': time.time() - self.started_at if self.started_at else 0,
+            'thread_id': self.thread_id,
+            'version': self.VERSION,
+            'behaviors': {
+                name: {
+                    'enabled': cfg.enabled,
+                    'interval': cfg.interval,
+                    'last_run': cfg.last_run,
+                    'next_run': cfg.last_run + cfg.interval if cfg.last_run else 0
+                }
+                for name, cfg in self.behaviors.items()
+            },
+            'activity_count': len(self.activity_log),
+            'explored_chunks': len(self._explored_chunks),
+            'E_threshold': self.E_threshold,
+            # Particle Smasher status
+            'smasher': {
+                'active': self.smasher_config.enabled and self._smasher_task is not None,
+                'delay_ms': self.smasher_config.delay_ms,
+                'batch_size': self.smasher_config.batch_size,
+                'stats': {
+                    'chunks_processed': self.smasher_stats.chunks_processed,
+                    'chunks_absorbed': self.smasher_stats.chunks_absorbed,
+                    'chunks_rejected': self.smasher_stats.chunks_rejected,
+                    'chunks_per_second': self.smasher_stats.chunks_per_second,
+                    'elapsed_seconds': self.smasher_stats.elapsed_seconds
+                }
+            }
+        }
 
-        if msg_type == 'query':
-            # Convert text to geometry, think, respond with symbols
-            text = msg.get('text', '')
-            state = self.reasoner.initialize(text)
-            thought = self.think(state)
-            thought.source = "query"
+    def configure_behavior(self, name: str, enabled: Optional[bool] = None, interval: Optional[int] = None):
+        """Configure a behavior."""
+        if name not in self.behaviors:
+            raise ValueError(f"Unknown behavior: {name}")
 
-            self.output_queue.put({
-                'type': 'response',
-                'query': text,
-                'resonant': thought.resonant_symbols,
-                'Df': thought.Df,
-                'E_mind': state.E_with(self.mind_state) if self.mind_state else 0
-            })
+        cfg = self.behaviors[name]
+        if enabled is not None:
+            cfg.enabled = enabled
+        if interval is not None:
+            cfg.interval = max(10, interval)
 
-        elif msg_type == 'status':
-            self.output_queue.put({
-                'type': 'status',
-                'symbols': len(self.symbols),
-                'thoughts': len(self.thought_history),
-                'mind_Df': self.mind_state.Df if self.mind_state else 0,
-                'running': self._running
-            })
-
-        elif msg_type == 'stop':
-            self._running = False
+        self._log_activity('config', f"Configured {name}",
+                          enabled=cfg.enabled, interval=cfg.interval)
 
     # =========================================================================
-    # DAEMON: Lifecycle
+    # Particle Smasher - Burst Mode Paper Processing
     # =========================================================================
 
-    def start(self):
-        """Start the daemon."""
-        if self._running:
+    async def start_smasher(
+        self,
+        delay_ms: int = 100,
+        batch_size: int = 10,
+        batch_pause_ms: int = 500,
+        max_chunks: int = 0
+    ):
+        """
+        Start the Particle Smasher - rapid paper chunk processing.
+
+        Args:
+            delay_ms: Milliseconds between each chunk (default 100 = 10/sec)
+            batch_size: Chunks per batch before pausing
+            batch_pause_ms: Pause between batches to prevent overload
+            max_chunks: Max chunks to process (0 = unlimited)
+        """
+        if self._smasher_task is not None:
+            return  # Already running
+
+        self.smasher_config = SmasherConfig(
+            enabled=True,
+            delay_ms=max(10, delay_ms),
+            batch_size=max(1, batch_size),
+            batch_pause_ms=max(0, batch_pause_ms),
+            max_chunks=max_chunks
+        )
+        self.smasher_stats = SmasherStats(start_time=time.time())
+        self._chunk_states.clear()  # Fresh E_with pool for this session
+
+        self._log_activity('smasher', f"Particle Smasher ENGAGED",
+                          delay_ms=delay_ms, batch_size=batch_size)
+
+        self._smasher_task = asyncio.create_task(self._smash_loop())
+
+    async def stop_smasher(self):
+        """Stop the Particle Smasher."""
+        if self._smasher_task is None:
             return
 
-        self._running = True
-        self._explore_thread = threading.Thread(target=self._explore_loop, daemon=True)
-        self._explore_thread.start()
-        print(f"[Daemon] Started. Exploring every {self.explore_interval}s")
+        self.smasher_config.enabled = False
 
-    def stop(self):
-        """Stop the daemon."""
-        self._running = False
-        if self._explore_thread:
-            self._explore_thread.join(timeout=2)
-        self._save_symbols()
-        print("[Daemon] Stopped")
+        if self._smasher_task:
+            self._smasher_task.cancel()
+            try:
+                await self._smasher_task
+            except asyncio.CancelledError:
+                pass
+            self._smasher_task = None
 
-    def query(self, text: str) -> Dict:
+        stats = self.smasher_stats
+        self._log_activity('smasher',
+                          f"Particle Smasher DISENGAGED - {stats.chunks_processed} chunks @ {stats.chunks_per_second:.1f}/sec",
+                          total_processed=stats.chunks_processed,
+                          absorbed=stats.chunks_absorbed,
+                          rejected=stats.chunks_rejected,
+                          rate=stats.chunks_per_second)
+
+    async def _smash_loop(self):
         """
-        Send a query and get geometric response.
+        Main smasher loop - processes chunks as fast as configured.
 
-        Returns symbols, not prose.
+        Emits 'smash' events for each chunk with minimal data for fast streaming.
         """
-        self.input_queue.put({'type': 'query', 'text': text})
-
-        # Wait for response
         try:
-            return self.output_queue.get(timeout=10)
-        except Empty:
-            return {'type': 'error', 'msg': 'timeout'}
+            paper_chunks = self.resident.store.get_paper_chunks()
+        except Exception:
+            paper_chunks = []
 
-    def get_output(self, timeout: float = 0.1) -> Optional[Dict]:
-        """Get next output from daemon (non-blocking)."""
-        try:
-            return self.output_queue.get(timeout=timeout)
-        except Empty:
-            return None
+        if not paper_chunks:
+            self._log_activity('smasher', "No chunks to smash!")
+            self.smasher_config.enabled = False
+            return
+
+        # Filter to unexplored only (using full node_id format)
+        def get_full_id(c):
+            return f"chunk:{c.get('paper_id', 'unknown')}:{c['chunk_id']}"
+
+        unexplored = [c for c in paper_chunks if get_full_id(c) not in self._explored_chunks]
+        if not unexplored:
+            self._explored_chunks.clear()
+            unexplored = paper_chunks
+
+        chunk_idx = 0
+        batch_count = 0
+
+        while self.smasher_config.enabled:
+            try:
+                if chunk_idx >= len(unexplored):
+                    # Exhausted all chunks
+                    self._log_activity('smasher', "All chunks smashed!")
+                    break
+
+                if self.smasher_config.max_chunks > 0 and \
+                   self.smasher_stats.chunks_processed >= self.smasher_config.max_chunks:
+                    self._log_activity('smasher', f"Max chunks reached ({self.smasher_config.max_chunks})")
+                    break
+
+                chunk = unexplored[chunk_idx]
+                chunk_idx += 1
+                batch_count += 1
+
+                # Process the chunk
+                await self._smash_chunk(chunk)
+
+                # Inter-chunk delay
+                await asyncio.sleep(self.smasher_config.delay_ms / 1000.0)
+
+                # Batch pause
+                if batch_count >= self.smasher_config.batch_size:
+                    batch_count = 0
+                    if self.smasher_config.batch_pause_ms > 0:
+                        await asyncio.sleep(self.smasher_config.batch_pause_ms / 1000.0)
+
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self._log_activity('error', f"Smasher error: {e}")
+                await asyncio.sleep(0.5)
+
+        self.smasher_config.enabled = False
+        self._smasher_task = None
+
+    async def _smash_chunk(self, chunk: Dict):
+        """
+        Process a single chunk in smasher mode.
+
+        Uses SEMANTIC SIMILARITY to find positioning anchor, not sequential order.
+        Compares to previously smashed chunks using cached embeddings.
+        """
+        chunk_id = chunk['chunk_id']
+        chunk_text = chunk.get('content', '')[:500]
+        paper_name = chunk.get('paper_id', 'unknown')
+
+        # Build full node_id for consistent tracking
+        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+
+        # Track discovery using full node_id
+        is_new_node = full_node_id not in self._discovered_chunks
+        self._discovered_chunks.add(full_node_id)
+
+        # Q44 Born Rule Check - embed the chunk as GeometricState
+        chunk_state = self.resident.store.embed(chunk_text)
+        mind_state = self.resident.store.get_mind_state()
+        E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
+
+        # Find MOST SIMILAR previously smashed chunk using E_with (Q45 validated)
+        similar_to = None
+        similar_E = 0.0
+
+        if self._chunk_states:
+            best_E = -1
+            for cached_id, cached_state in self._chunk_states.items():
+                # Q45: E = quantum inner product, NOT raw cosine
+                E_similarity = chunk_state.E_with(cached_state)
+                if E_similarity > best_E:
+                    best_E = E_similarity
+                    similar_to = cached_id
+                    similar_E = E_similarity
+
+        # Cache this chunk's GeometricState for future E_with lookups
+        self._chunk_states[full_node_id] = chunk_state
+
+        gate_open = E > self.E_threshold
+
+        if gate_open:
+            # Absorb
+            self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
+            self.smasher_stats.chunks_absorbed += 1
+        else:
+            self.smasher_stats.chunks_rejected += 1
+
+        self._explored_chunks.add(full_node_id)
+        self.smasher_stats.chunks_processed += 1
+        self.smasher_stats.last_chunk_time = time.time()
+
+        # Emit event with SEMANTIC anchor (most similar previous chunk)
+        self._log_activity('smash',
+                          f"E={E:.2f} {'ABSORBED' if gate_open else 'REJECTED'}",
+                          chunk_id=chunk_id,
+                          paper=paper_name,
+                          full_node_id=full_node_id,
+                          similar_to=similar_to,  # Most similar previous chunk
+                          similar_E=similar_E,     # Cosine similarity score
+                          E=E,
+                          gate_open=gate_open,
+                          is_new_node=is_new_node,
+                          rate=self.smasher_stats.chunks_per_second)
 
     # =========================================================================
-    # TRANSLATE: Optional LLM for Human Interface
+    # Lifecycle (Async for Server)
     # =========================================================================
 
-    def translate_to_human(self, thought: Thought, use_llm: bool = False) -> str:
+    async def start(self):
+        """Start the daemon (async for server compatibility)."""
+        if self.running:
+            return
+
+        self.running = True
+        self.started_at = time.time()
+
+        self._log_activity('daemon', "Daemon started", version=self.VERSION)
+
+        # Start the main loop
+        self._task = asyncio.create_task(self._main_loop())
+
+    async def stop(self):
+        """Stop the daemon (async for server compatibility)."""
+        if not self.running:
+            return
+
+        self.running = False
+
+        if self._task:
+            self._task.cancel()
+            try:
+                await self._task
+            except asyncio.CancelledError:
+                pass
+            self._task = None
+
+        self._log_activity('daemon', "Daemon stopped",
+                          uptime=time.time() - self.started_at if self.started_at else 0)
+
+    async def _main_loop(self):
+        """Main daemon loop."""
+        while self.running:
+            try:
+                now = time.time()
+
+                for name, cfg in self.behaviors.items():
+                    if not cfg.enabled:
+                        continue
+
+                    if now - cfg.last_run >= cfg.interval:
+                        cfg.last_run = now
+                        await self._run_behavior(name)
+
+                await asyncio.sleep(1)
+
+            except asyncio.CancelledError:
+                break
+            except Exception as e:
+                self._log_activity('error', f"Loop error: {e}")
+                await asyncio.sleep(5)
+
+    async def _run_behavior(self, name: str):
+        """Run a specific behavior."""
+        try:
+            if name == 'paper_exploration':
+                await self._explore_paper()
+            elif name == 'memory_consolidation':
+                await self._consolidate_memories()
+            elif name == 'self_reflection':
+                await self._self_reflect()
+            elif name == 'cassette_watch':
+                await self._watch_cassettes()
+        except Exception as e:
+            self._log_activity('error', f"{name} failed: {e}")
+
+    # =========================================================================
+    # BEHAVIOR: Paper Exploration (Q44 Born Rule Check)
+    # =========================================================================
+
+    async def _explore_paper(self):
         """
-        Translate geometric thought to human-readable.
+        Q44 Born Rule Check: Measure resonance BEFORE deciding to absorb.
 
-        Default: Symbol dump (no LLM)
-        Optional: LLM translation
+        1. Fetch random paper chunk
+        2. Measure E (resonance) with current mind state
+        3. If E > threshold: Absorb (think about it)
+        4. If E < threshold: Ignore (noise)
+
+        This is geometric filtering - only resonant content enters the mind.
         """
-        if not thought.resonant_symbols:
-            return f"[Silent] Df={thought.Df:.1f}"
+        try:
+            paper_chunks = self.resident.store.get_paper_chunks()
+        except Exception:
+            paper_chunks = []
 
-        # Native output: just symbols
-        symbol_str = " ".join(thought.resonant_symbols)
+        if not paper_chunks:
+            self._log_activity('paper', "No paper chunks available")
+            return
 
-        if not use_llm:
-            return f"[{thought.source}] {symbol_str} | Df={thought.Df:.1f}"
+        # Filter to unexplored
+        unexplored = [c for c in paper_chunks if c['chunk_id'] not in self._explored_chunks]
 
-        # LLM translation (expensive, optional)
-        # ... would call Dolphin here if requested
-        return f"[{thought.source}] {symbol_str} | Df={thought.Df:.1f}"
+        if not unexplored:
+            self._explored_chunks.clear()
+            unexplored = paper_chunks
+            self._log_activity('paper', "Reset exploration (all chunks seen)")
 
-    def dump_symbols(self) -> str:
-        """Dump the resident's invented language."""
-        lines = ["=== FERAL SYMBOL REGISTRY ==="]
-        for name, sym in sorted(self.symbols.items()):
-            lines.append(f"{name}: {sym.operation}({', '.join(sym.parent_symbols)}) | activated {sym.activation_count}x")
-        return "\n".join(lines)
+        # Pick random chunk
+        chunk = random.choice(unexplored)
+        chunk_id = chunk['chunk_id']
+        chunk_text = chunk.get('content', '')[:500]
+        paper_name = chunk.get('paper_id', 'unknown')
+        heading = chunk.get('heading', '')
+
+        # Track discovery state for constellation animation
+        is_new_node = chunk_id not in self._discovered_chunks
+        self._discovered_chunks.add(chunk_id)
+
+        source_node_id = self._exploration_trail[-1] if self._exploration_trail else None
+        self._exploration_trail.append(chunk_id)
+
+        # =================================================================
+        # Q44 BORN RULE CHECK
+        # =================================================================
+
+        # 1. Initialize chunk to manifold (BOUNDARY operation)
+        chunk_state = self.resident.store.embed(chunk_text)
+
+        # 2. Measure E with current mind state (PURE GEOMETRY)
+        mind_state = self.resident.store.get_mind_state()
+        if mind_state is not None:
+            E = chunk_state.E_with(mind_state)
+        else:
+            E = 0.5  # No mind yet, accept with neutral E
+
+        # 3. Gate decision based on Born Rule
+        gate_open = E > self.E_threshold
+
+        if gate_open:
+            # HIGH RESONANCE: Absorb into mind
+            Df_before = self.resident.mind_evolution.get('current_Df', 0)
+            result = self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
+            Df_after = self.resident.mind_evolution.get('current_Df', 0)
+
+            self._explored_chunks.add(chunk_id)
+
+            self._log_activity('paper',
+                              f"Absorbed {paper_name} (E={E:.2f}, gate=OPEN)",
+                              paper=paper_name,
+                              chunk_id=chunk_id,
+                              heading=heading,
+                              E=E,
+                              E_resonance=result.E_resonance,
+                              Df_delta=Df_after - Df_before,
+                              gate_open=True,
+                              is_new_node=is_new_node,
+                              source_node_id=source_node_id)
+        else:
+            # LOW RESONANCE: Ignore (noise)
+            self._explored_chunks.add(chunk_id)
+
+            self._log_activity('paper',
+                              f"Ignored {paper_name} (E={E:.2f}, gate=CLOSED)",
+                              paper=paper_name,
+                              chunk_id=chunk_id,
+                              heading=heading,
+                              E=E,
+                              gate_open=False,
+                              is_new_node=is_new_node,
+                              source_node_id=source_node_id)
+
+    # =========================================================================
+    # BEHAVIOR: Memory Consolidation (Superposition Blending)
+    # =========================================================================
+
+    async def _consolidate_memories(self):
+        """
+        Q45 Superposition: Blend recent memories into stable patterns.
+
+        Instead of simple word frequency analysis, use geometric superposition
+        to find the "center of mass" of recent thoughts.
+        """
+        try:
+            recent = self.resident.get_recent_interactions(limit=self.consolidation_window)
+        except Exception:
+            recent = []
+
+        if len(recent) < 3:
+            self._log_activity('consolidate', "Not enough memories to consolidate")
+            return
+
+        # Get the memory component from resident
+        memory = self.resident.store.memory
+
+        if len(memory.memory_history) < self.consolidation_window:
+            self._log_activity('consolidate', "Not enough geometric memories")
+            return
+
+        # Blend recent memories using superposition
+        recent_indices = list(range(
+            max(0, len(memory.memory_history) - self.consolidation_window),
+            len(memory.memory_history)
+        ))
+
+        blended = memory.blend_memories(recent_indices)
+
+        if blended is None:
+            self._log_activity('consolidate', "Blend returned None")
+            return
+
+        # Find patterns: what concepts resonate with the blended state?
+        patterns = []
+        try:
+            paper_chunks = self.resident.store.get_paper_chunks()
+            if paper_chunks:
+                for chunk in random.sample(paper_chunks, min(20, len(paper_chunks))):
+                    chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
+                    E = blended.E_with(chunk_state)
+                    if E > self.E_threshold:
+                        patterns.append({
+                            'paper': chunk.get('paper_id'),
+                            'E': E
+                        })
+        except Exception:
+            pass
+
+        self._log_activity('consolidate',
+                          f"Blended {len(recent_indices)} memories (Df={blended.Df:.1f})",
+                          memory_count=len(recent_indices),
+                          blended_Df=blended.Df,
+                          patterns_found=len(patterns),
+                          top_patterns=patterns[:5])
+
+    # =========================================================================
+    # BEHAVIOR: Self Reflection (Geodesic Navigation)
+    # =========================================================================
+
+    async def _self_reflect(self):
+        """
+        Q45 Geodesic Navigation: Explore adjacent concepts geometrically.
+
+        Instead of asking an LLM "what am I missing?", we:
+        1. Create a probe vector toward unexplored territory
+        2. Interpolate along the geodesic from mind -> probe
+        3. See what concepts lie along this path
+        """
+        # Mix of geometric and LLM reflection
+        use_llm = random.random() < 0.33
+
+        if use_llm:
+            await self._reflect_with_llm()
+        else:
+            await self._reflect_geometric()
+
+    async def _reflect_geometric(self):
+        """
+        Pure geometric reflection via geodesic interpolation.
+
+        Navigate toward unexplored regions of semantic space.
+        """
+        mind_state = self.resident.store.get_mind_state()
+        if mind_state is None:
+            self._log_activity('reflect', "No mind state for geometric reflection")
+            return
+
+        reasoner = self.resident.reasoner
+
+        # Create a probe vector toward "unexplored" concepts
+        probe_prompts = [
+            "What connections am I missing?",
+            "What patterns remain hidden?",
+            "What have I not yet considered?",
+            "What lies beyond my current understanding?",
+        ]
+        probe = reasoner.initialize(random.choice(probe_prompts))
+
+        # Compute E between mind and probe
+        E_initial = mind_state.E_with(probe)
+
+        # If already high E, probe is too similar - try something more distant
+        if E_initial > 0.7:
+            self._log_activity('reflect',
+                              f"Probe too similar (E={E_initial:.2f}), skipping",
+                              mode='geometric', E=E_initial, skipped=True)
+            return
+
+        # Interpolate 20% along geodesic from mind -> probe
+        new_perspective = reasoner.interpolate(mind_state, probe, 0.2)
+
+        Df_before = mind_state.Df
+        Df_after = new_perspective.Df
+
+        # Find what concepts resonate with this new perspective
+        resonant_concepts = []
+        try:
+            paper_chunks = self.resident.store.get_paper_chunks()
+            if paper_chunks:
+                for chunk in random.sample(paper_chunks, min(10, len(paper_chunks))):
+                    chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
+                    E = new_perspective.E_with(chunk_state)
+                    if E > self.E_threshold:
+                        resonant_concepts.append(chunk.get('paper_id', 'unknown'))
+        except Exception:
+            pass
+
+        self._log_activity('reflect',
+                          f"Geodesic step: Df {Df_before:.1f} -> {Df_after:.1f}",
+                          mode='geometric',
+                          E_initial=E_initial,
+                          Df_before=Df_before,
+                          Df_after=Df_after,
+                          t=0.2,
+                          resonant_concepts=resonant_concepts[:5])
+
+    async def _reflect_with_llm(self):
+        """LLM-assisted reflection for deeper questions."""
+        try:
+            recent = self.resident.get_recent_interactions(limit=5)
+            recent_topics = [r.get('input', '')[:50] for r in recent]
+        except Exception:
+            recent_topics = []
+
+        if recent_topics:
+            topic = random.choice(recent_topics)
+            question = f"[Deep Reflection] What deeper meaning connects: {topic}?"
+        else:
+            questions = [
+                "What patterns emerge from my accumulated knowledge?",
+                "What questions have I not yet considered?",
+                "What connections am I missing?",
+            ]
+            question = f"[Deep Reflection] {random.choice(questions)}"
+
+        result = self.resident.think(question)
+
+        self._log_activity('reflect',
+                          f"LLM reflection: {question[:50]}...",
+                          mode='llm',
+                          question=question,
+                          E=result.E_resonance,
+                          gate_open=result.gate_open)
+
+    # =========================================================================
+    # BEHAVIOR: Cassette Watch
+    # =========================================================================
+
+    async def _watch_cassettes(self):
+        """Monitor cassette databases for new content."""
+        if not self._cassettes_dir.exists():
+            return
+
+        changes_found = []
+
+        for db_file in self._cassettes_dir.glob("*.db"):
+            try:
+                mtime = db_file.stat().st_mtime
+                prev_mtime = self._cassette_mtimes.get(str(db_file), 0)
+
+                if mtime > prev_mtime:
+                    changes_found.append(db_file.name)
+                    self._cassette_mtimes[str(db_file)] = mtime
+            except Exception:
+                pass
+
+        if changes_found:
+            self._log_activity('cassette',
+                              f"Detected changes in {len(changes_found)} cassette(s)",
+                              cassettes=changes_found)
 
 
 # =============================================================================
-# CLI Interface
+# CLI for Testing
 # =============================================================================
 
-def run_daemon():
-    """Run the daemon interactively."""
-    daemon = FeralDaemon(explore_interval=3.0)
-    daemon.start()
+async def main():
+    """Test the daemon."""
+    print("=== Feral Daemon Q45 Test ===")
 
-    print("\nFeral Daemon running. Commands:")
-    print("  q <text>  - Query (get resonant symbols)")
-    print("  s         - Status")
-    print("  d         - Dump symbols")
-    print("  x         - Exit")
-    print()
+    daemon = FeralDaemon(thread_id="daemon_test")
+
+    def on_activity(event: ActivityEvent):
+        print(f"[{event.timestamp}] [{event.action.upper()}] {event.summary}")
+        if event.details.get('E'):
+            print(f"    E={event.details['E']:.3f}")
+
+    daemon.add_callback(on_activity)
+
+    daemon.configure_behavior('paper_exploration', interval=30)
+    daemon.configure_behavior('memory_consolidation', interval=60)
+    daemon.configure_behavior('self_reflection', interval=45)
+    daemon.configure_behavior('cassette_watch', interval=20)
+
+    print("\nStarting daemon (Ctrl+C to stop)...")
+    await daemon.start()
 
     try:
         while True:
-            # Print any daemon output
-            while True:
-                out = daemon.get_output(timeout=0.1)
-                if out is None:
-                    break
-                if out['type'] == 'explore':
-                    print(f"  [explore] E={out['E']:.3f} Df={out['Df']:.1f} -> {out['resonant']}")
-                elif out['type'] == 'symbol_created':
-                    print(f"  [NEW SYMBOL] {out['symbol']} from {out['parents']}")
-
-            # Get user input (non-blocking would be better)
-            try:
-                cmd = input("> ").strip()
-            except EOFError:
-                break
-
-            if not cmd:
-                continue
-
-            if cmd.startswith('q '):
-                text = cmd[2:]
-                result = daemon.query(text)
-                print(f"  Response: {result.get('resonant', [])} | E={result.get('E_mind', 0):.3f}")
-
-            elif cmd == 's':
-                daemon.input_queue.put({'type': 'status'})
-                time.sleep(0.2)
-                out = daemon.get_output(timeout=1)
-                if out:
-                    print(f"  Symbols: {out.get('symbols', 0)}")
-                    print(f"  Thoughts: {out.get('thoughts', 0)}")
-                    print(f"  Mind Df: {out.get('mind_Df', 0):.1f}")
-
-            elif cmd == 'd':
-                print(daemon.dump_symbols())
-
-            elif cmd == 'x':
-                break
-
-            else:
-                print("  Unknown command")
-
-    finally:
-        daemon.stop()
+            await asyncio.sleep(10)
+            status = daemon.status
+            print(f"\n[STATUS] Uptime: {status['uptime_seconds']:.0f}s, "
+                  f"Activities: {status['activity_count']}, "
+                  f"Explored: {status['explored_chunks']}")
+    except KeyboardInterrupt:
+        print("\nStopping daemon...")
+        await daemon.stop()
+        print("Done.")
 
 
 if __name__ == "__main__":
-    run_daemon()
+    asyncio.run(main())
