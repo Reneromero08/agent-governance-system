@@ -440,7 +440,8 @@ class FeralDaemon:
         
         if resonant_context:
             best_match = resonant_context[0]
-            similar_to = f"chunk:{best_match.get('paper_id')}:{best_match.get('vector_hash')}"
+            # Use chunk_id to match the full_node_id format (chunk:paper:chunk_id)
+            similar_to = f"chunk:{best_match.get('paper_id')}:{best_match.get('chunk_id')}"
             similar_E = best_match.get('E', 0.0)
 
         # Cache this chunk's GeometricState for future E_with lookups

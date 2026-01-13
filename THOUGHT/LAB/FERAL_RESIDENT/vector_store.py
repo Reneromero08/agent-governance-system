@@ -695,7 +695,8 @@ class VectorStore:
                 'heading': paper_meta.get('heading') if paper_meta else None,
                 'alias': paper_meta.get('alias') if paper_meta else None,
                 'content': paper_meta.get('content') if paper_meta else None,  # Actual text
-                'vector_hash': record.vec_sha256[:16]
+                'chunk_id': record.vec_sha256[:16],  # Consistent with get_paper_chunks()
+                'vector_hash': record.vec_sha256[:16]  # Keep for backwards compat
             })
 
             if len(results) >= k:

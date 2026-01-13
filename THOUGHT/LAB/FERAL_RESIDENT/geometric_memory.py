@@ -203,7 +203,10 @@ class GeometricMemory:
 
     def blend_memories(self, indices: List[int]) -> Optional[GeometricState]:
         """
-        Blend specific memories into a superposition.
+        Blend specific memories into equal-weight superposition.
+
+        Creates: (v1 + v2 + ... + vN) / sqrt(N) then normalize.
+        Each memory has equal contribution weight ~1/N.
 
         Useful for creating composite concepts from history.
         """
@@ -220,12 +223,19 @@ class GeometricMemory:
         if not states:
             return None
 
-        # Superpose all
-        result = states[0]
-        for s in states[1:]:
-            result = self.reasoner.superpose(result, s)
+        # Equal-weight superposition: sum all vectors / sqrt(N)
+        # Then GeometricState.__post_init__ normalizes to unit sphere
+        import numpy as np
+        result_vector = sum(s.vector for s in states) / np.sqrt(len(states))
 
-        return result
+        return GeometricState(
+            vector=result_vector,
+            operation_history=[{
+                'op': 'blend',
+                'count': len(states),
+                'indices': indices
+            }]
+        )
 
     def clear(self):
         """Reset memory state (for testing or new sessions)"""
