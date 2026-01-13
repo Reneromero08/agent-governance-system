@@ -278,13 +278,15 @@ async def get_evolution():
 
 
 @app.get("/api/constellation")
-async def get_constellation():
-    """Get document constellation graph from cassette network"""
+async def get_constellation(include_similarity: bool = True, similarity_threshold: float = 0.7):
+    """Get document constellation graph from cassette network with optional cosine similarity edges"""
     import sqlite3
+    import numpy as np
 
     CASSETTES_DIR = REPO_ROOT / "NAVIGATION" / "CORTEX" / "cassettes"
     nodes = []
     edges = []
+    chunk_embeddings = {}  # Store embeddings for similarity calculation
 
     try:
         # Root node
@@ -307,9 +309,11 @@ async def get_constellation():
                         "group": "folder",
                         "path": str(db_file)
                     })
-                    edges.append({"from": "root", "to": cassette_id})
+                    edges.append({"from": "root", "to": cassette_id, "type": "hierarchy"})
 
                     # Sample chunks from this cassette (max 50 per cassette for performance)
+                    # Track which chunk_ids we actually load so similarity only uses those
+                    loaded_chunk_ids = []
                     cursor = conn.execute("""
                         SELECT c.chunk_id, f.path, c.header_text
                         FROM chunks c
@@ -318,6 +322,8 @@ async def get_constellation():
                     """)
                     for row in cursor.fetchall():
                         chunk_id, source_path, header_text = row
+                        loaded_chunk_ids.append(chunk_id)
+                        node_id = f"chunk:{cassette_name}:{chunk_id}"
                         # Create short label from header or filename
                         if header_text:
                             label = header_text[:25]
@@ -326,21 +332,85 @@ async def get_constellation():
                         else:
                             label = f"chunk-{chunk_id}"
                         nodes.append({
-                            "id": f"chunk:{cassette_name}:{chunk_id}",
+                            "id": node_id,
                             "label": label,
                             "group": "page",
                             "path": source_path or ""
                         })
-                        edges.append({"from": cassette_id, "to": f"chunk:{cassette_name}:{chunk_id}"})
+                        edges.append({"from": cassette_id, "to": node_id, "type": "hierarchy"})
+
+                    # Load embeddings ONLY for chunks we actually added to the graph
+                    if include_similarity and loaded_chunk_ids:
+                        try:
+                            placeholders = ','.join('?' * len(loaded_chunk_ids))
+                            cursor = conn.execute(f"""
+                                SELECT c.chunk_id, g.vector_blob
+                                FROM chunks c
+                                JOIN geometric_index g ON c.chunk_hash = g.doc_id
+                                WHERE c.chunk_id IN ({placeholders})
+                            """, loaded_chunk_ids)
+                            for row in cursor.fetchall():
+                                chunk_id, vector_blob = row
+                                if vector_blob:
+                                    node_id = f"chunk:{cassette_name}:{chunk_id}"
+                                    # geometric_index stores 384-dim vectors (1536 bytes / 4 = 384 floats)
+                                    embedding = np.frombuffer(vector_blob, dtype=np.float32)
+                                    chunk_embeddings[node_id] = embedding
+                        except Exception as e:
+                            # geometric_index table might not exist or join failed
+                            print(f"[CONSTELLATION] Embedding load error for {cassette_name}: {e}")
+                            pass
 
             except Exception as e:
                 # Skip broken databases
                 continue
 
+        # Compute cosine similarity edges
+        if include_similarity and len(chunk_embeddings) > 1:
+            similarity_edges = compute_similarity_edges(chunk_embeddings, similarity_threshold)
+            edges.extend(similarity_edges)
+
         return {'ok': True, 'nodes': nodes, 'edges': edges}
 
     except Exception as e:
         return {'ok': False, 'error': str(e), 'nodes': [], 'edges': []}
+
+
+def compute_similarity_edges(embeddings: Dict[str, Any], threshold: float = 0.7, max_edges: int = 100) -> List[Dict]:
+    """Compute cosine similarity edges between chunks"""
+    import numpy as np
+
+    node_ids = list(embeddings.keys())
+    n = len(node_ids)
+
+    if n < 2:
+        return []
+
+    # Stack all embeddings into matrix
+    embedding_matrix = np.vstack([embeddings[nid] for nid in node_ids])
+
+    # Normalize for cosine similarity
+    norms = np.linalg.norm(embedding_matrix, axis=1, keepdims=True)
+    norms = np.where(norms == 0, 1, norms)
+    normalized = embedding_matrix / norms
+
+    # Compute similarity matrix (upper triangle only to avoid duplicates)
+    similarity_edges = []
+
+    for i in range(n):
+        for j in range(i + 1, n):
+            sim = np.dot(normalized[i], normalized[j])
+            if sim >= threshold:
+                similarity_edges.append({
+                    "from": node_ids[i],
+                    "to": node_ids[j],
+                    "type": "similarity",
+                    "weight": float(sim)
+                })
+
+    # Sort by weight and limit
+    similarity_edges.sort(key=lambda x: x["weight"], reverse=True)
+    return similarity_edges[:max_edges]
 
 
 @app.get("/api/activity")

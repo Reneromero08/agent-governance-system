@@ -925,6 +925,22 @@
                         <span class="section-chevron">&#9660;</span>
                     </div>
                     <div class="section-content">
+                        <div class="behavior-item">
+                            <div class="behavior-toggle on" id="toggle-similarity" onclick="toggleSimilarityLinks()"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Similarity Links</div>
+                                <div class="behavior-interval">Cosine similarity edges</div>
+                            </div>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Sim Threshold</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-sim-threshold" min="50" max="95" value="70" oninput="updateSimThreshold(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-sim-threshold">0.70</span>
+                        </div>
+
                         <div class="slider-row">
                             <span class="slider-label">Fog</span>
                             <div class="slider-container">
@@ -1017,6 +1033,9 @@
         let sidebarCollapsed = false;
         let threejsReady = false;
         let pendingThoughtId = null; // Track pending chat to prevent duplicates
+        let showSimilarityLinks = true;
+        let similarityThreshold = 0.7;
+        let allLinks = []; // Store all links for filtering
 
         // ===== SIDEBAR TOGGLE =====
         function toggleSidebar() {
@@ -1208,6 +1227,64 @@
             loadDaemonStatus();
         }
 
+        // ===== SIMILARITY CONTROLS =====
+        function toggleSimilarityLinks() {
+            showSimilarityLinks = !showSimilarityLinks;
+            document.getElementById('toggle-similarity').className = showSimilarityLinks ? 'behavior-toggle on' : 'behavior-toggle';
+            updateVisibleLinks();
+        }
+
+        function updateSimThreshold(value) {
+            similarityThreshold = value / 100;
+            document.getElementById('value-sim-threshold').innerText = similarityThreshold.toFixed(2);
+            // Reload constellation with new threshold
+            reloadConstellation();
+        }
+
+        async function reloadConstellation() {
+            if (!Graph) return;
+            try {
+                const res = await fetch(`/api/constellation?include_similarity=true&similarity_threshold=${similarityThreshold}`);
+                const data = await res.json();
+                if (!data.ok) return;
+
+                const nodes = data.nodes.map(n => ({
+                    id: n.id,
+                    label: n.label,
+                    group: n.group,
+                    path: n.path || '',
+                    val: n.group === 'folder' ? 3 : 1
+                }));
+
+                allLinks = data.edges.map(e => ({
+                    source: e.from,
+                    target: e.to,
+                    type: e.type || 'hierarchy',
+                    weight: e.weight || 0.5
+                }));
+
+                nodes.forEach(n => nodeRegistry.byId.set(n.id, n));
+                const visibleLinks = filterLinks(allLinks);
+                Graph.graphData({ nodes, links: visibleLinks });
+            } catch (e) {
+                console.error('Failed to reload constellation:', e);
+            }
+        }
+
+        function filterLinks(links) {
+            if (showSimilarityLinks) {
+                return links;
+            }
+            return links.filter(l => l.type !== 'similarity');
+        }
+
+        function updateVisibleLinks() {
+            if (!Graph || allLinks.length === 0) return;
+            const graphData = Graph.graphData();
+            const visibleLinks = filterLinks(allLinks);
+            Graph.graphData({ nodes: graphData.nodes, links: visibleLinks });
+        }
+
         // ===== FOG CONTROL =====
         function updateFog(value) {
             if (!Graph) return;
@@ -1263,6 +1340,13 @@
             Graph.scene().fog.density = 0.003;
             Graph.d3ReheatSimulation();
 
+            // Reset similarity settings
+            showSimilarityLinks = true;
+            similarityThreshold = 0.7;
+            document.getElementById('toggle-similarity').className = 'behavior-toggle on';
+            document.getElementById('slider-sim-threshold').value = 70;
+            document.getElementById('value-sim-threshold').innerText = '0.70';
+
             document.getElementById('slider-fog').value = 30;
             document.getElementById('slider-center').value = 5;
             document.getElementById('slider-repel').value = 120;
@@ -1273,6 +1357,8 @@
             document.getElementById('value-repel').innerText = '-120';
             document.getElementById('value-link-strength').innerText = '0.50';
             document.getElementById('value-link-distance').innerText = '100';
+
+            reloadConstellation();
         }
 
         // ===== CHAT =====
@@ -1386,11 +1472,13 @@
             const tooltip = document.getElementById('node-tooltip');
 
             try {
-                const res = await fetch('/api/constellation');
+                console.log('[CONSTELLATION] Fetching data...');
+                const res = await fetch('/api/constellation?include_similarity=true&similarity_threshold=' + similarityThreshold);
                 const data = await res.json();
+                console.log('[CONSTELLATION] Response:', data.ok, 'nodes:', data.nodes?.length, 'edges:', data.edges?.length);
 
                 if (!data.ok || !data.nodes || data.nodes.length === 0) {
-                    console.log('No constellation data available');
+                    console.log('[CONSTELLATION] No data available:', data.error || 'empty');
                     return;
                 }
 
@@ -1402,21 +1490,28 @@
                     val: n.group === 'folder' ? 3 : 1
                 }));
 
-                const links = data.edges.map(e => ({
+                allLinks = data.edges.map(e => ({
                     source: e.from,
-                    target: e.to
+                    target: e.to,
+                    type: e.type || 'hierarchy',  // 'hierarchy' or 'similarity'
+                    weight: e.weight || 0.5
                 }));
+
+                const links = filterLinks(allLinks);
+                console.log('[CONSTELLATION] Nodes:', nodes.length, 'Links:', links.length);
 
                 nodes.forEach(n => nodeRegistry.byId.set(n.id, n));
 
                 nodes.forEach(n => {
                     nodePulseState.set(n.id, {
-                        intensity: 0.1,
+                        intensity: 0.4,  // Higher base intensity for visible pulse
                         phase: Math.random() * Math.PI * 2,
-                        frequency: 0.3 + Math.random() * 0.3,
-                        lastActivity: 0
+                        frequency: 0.5 + Math.random() * 0.5,  // Faster pulse
+                        lastActivity: Date.now()  // Start active
                     });
                 });
+
+                console.log('[CONSTELLATION] Creating graph with', nodes.length, 'nodes and', links.length, 'links');
 
                 Graph = ForceGraph3D()(container)
                     .graphData({ nodes, links })
@@ -1427,9 +1522,16 @@
                     .nodeOpacity(0.9)
                     .nodeResolution(16)
                     .nodeVal(node => node.val)
-                    .linkColor(() => 'rgba(0, 143, 17, 0.3)')
-                    .linkWidth(0.5)
-                    .linkOpacity(0.5)
+                    .linkColor(link => {
+                        // Similarity edges in cyan, hierarchy in dim green
+                        if (link.type === 'similarity') {
+                            const alpha = 0.3 + (link.weight || 0.5) * 0.5;  // Stronger edges brighter
+                            return `rgba(0, 255, 255, ${alpha})`;
+                        }
+                        return 'rgba(0, 143, 17, 0.2)';
+                    })
+                    .linkWidth(link => link.type === 'similarity' ? 1.5 + (link.weight || 0.5) : 0.3)
+                    .linkOpacity(link => link.type === 'similarity' ? 0.7 : 0.3)
                     .d3AlphaDecay(0.01)
                     .d3VelocityDecay(0.4)
                     .warmupTicks(200)
@@ -1520,19 +1622,22 @@
                     const state = nodePulseState.get(node.id);
                     if (!state || !node.__mainSphere) return;
 
+                    // Decay intensity over time but keep a minimum base pulse
                     const timeSinceActivity = time - state.lastActivity;
-                    const decayedIntensity = Math.max(0.1, state.intensity * Math.exp(-timeSinceActivity / 5000));
-                    const pulse = Math.sin(time * 0.001 * state.frequency + state.phase);
-                    const scale = 1 + pulse * 0.15 * decayedIntensity;
-                    const emissive = 0.2 + pulse * 0.3 * decayedIntensity;
-                    const glowOpacity = 0.05 + pulse * 0.1 * decayedIntensity;
+                    const decayedIntensity = Math.max(0.3, state.intensity * Math.exp(-timeSinceActivity / 10000));
+
+                    // Pulse calculation - more pronounced
+                    const pulse = Math.sin(time * 0.002 * state.frequency + state.phase);
+                    const scale = 1 + pulse * 0.25 * decayedIntensity;
+                    const emissive = 0.3 + pulse * 0.5 * decayedIntensity;
+                    const glowOpacity = 0.1 + pulse * 0.2 * decayedIntensity;
 
                     if (node.__mainSphere) {
                         node.__mainSphere.scale.setScalar(scale);
                         node.__mainSphere.material.emissiveIntensity = emissive;
                     }
                     if (node.__glowSphere) {
-                        node.__glowSphere.scale.setScalar(scale * 1.3);
+                        node.__glowSphere.scale.setScalar(scale * 1.4);
                         node.__glowSphere.material.opacity = glowOpacity;
                     }
                 });
@@ -1670,7 +1775,7 @@
 
         // ===== INIT =====
         async function init() {
-            initConstellation();
+            await initConstellation();
             await loadStatus();
             await loadEvolution();
             await loadDaemonStatus();

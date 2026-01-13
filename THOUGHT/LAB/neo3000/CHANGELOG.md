@@ -8,6 +8,149 @@ No pending changes.
 
 ---
 
+## [3.2.2] - 2026-01-12 - Node Reference Fix
+
+### Fixed
+- **Graph Node References**: Similarity edges now only reference nodes that exist in the graph
+  - Fixed "node not found" error when similarity edges referenced chunks outside loaded set
+  - Added `loaded_chunk_ids` tracking to ensure embeddings query matches graph nodes
+  - Changed from loading ALL embeddings to only those for chunks in the graph
+  - Used parameterized SQL query: `WHERE c.chunk_id IN (?)` with loaded IDs
+
+### Changed
+- **Development Workflow**: Disabled hot reload for cleaner development experience
+  - Frontend changes (index.html): Just refresh browser
+  - Backend changes (feral_server.py): Manual restart after batching edits
+
+---
+
+## [3.2.1] - 2026-01-12 - Similarity Links Fix
+
+### Fixed
+- **Cosine Similarity Now Works**: Fixed embedding table lookup
+  - Was looking for non-existent `embeddings` table
+  - Now correctly uses `geometric_index` table with `chunk_hash = doc_id` join
+  - 384-dim vectors from `vector_blob` column
+
+---
+
+## [3.2.0] - 2026-01-12 - Cosine Similarity + Enhanced Pulsing
+
+### Added
+- **Cosine Similarity Links**: Semantic edges between chunks based on embedding similarity
+  - Server computes cosine similarity from chunk embeddings in cassette databases
+  - Similarity edges shown in cyan color, strength based on similarity score
+  - Toggle to show/hide similarity links in Graph settings
+  - Adjustable similarity threshold slider (0.50 - 0.95)
+- **API Parameters**: `/api/constellation?include_similarity=true&similarity_threshold=0.7`
+
+### Changed
+- **Enhanced Pulsing Animation**: Nodes pulse more visibly
+  - Base intensity increased from 0.1 to 0.4
+  - Pulse frequency increased (0.5-1.0 vs 0.3-0.6)
+  - Scale variation increased to 0.25 (was 0.15)
+  - Emissive intensity variation increased to 0.5 (was 0.3)
+  - Glow opacity variation increased
+  - Decay time extended to 10s (was 5s)
+- **Link Styling**: Hierarchy edges dimmed (opacity 0.2), similarity edges prominent (0.3-0.8)
+
+### Technical
+- `feral_server.py`: Added `compute_similarity_edges()` function with numpy
+- `index.html`: Added `allLinks` state, `filterLinks()`, `toggleSimilarityLinks()`, `updateSimThreshold()`, `reloadConstellation()`
+- Edge types: `hierarchy` (green, thin) vs `similarity` (cyan, thick based on weight)
+
+---
+
+## [3.1.1] - 2026-01-12 - Sidebar Toggle Fix
+
+### Fixed
+- **Sidebar Re-expansion**: Toggle button now remains visible when sidebar is collapsed, allowing re-expansion
+  - Added CSS rules to hide title and center button in collapsed state
+  - Button stays at 40px width for click target
+
+---
+
+## [3.1.0] - 2026-01-12 - Minimal UI + Fixes
+
+### Status: COMPLETE
+
+Streamlined UI with black/white/green only, fog control, and chat bug fix.
+
+### Added
+- **Fog Density Slider**: Control 3D graph visibility (0 to 0.01 range)
+- **Collapsible Sidebar**: Toggle button collapses entire sidebar to 40px
+- **Async Script Loading**: Three.js libraries load in parallel with `async` attribute
+- **waitForThreeJS()**: Promise-based loading ensures graph init after scripts ready
+
+### Changed
+- **Removed Header Bar**: Layout now directly sidebar + canvas (no top bar)
+- **Color Scheme**: Pure black (#000000) background, white text, green (#00ff41) accent only
+- **Activity Badges**: All badges now use green instead of per-type colors
+- **3D Trail Colors**: All activity types now render as green (unified)
+- **Chat Panel**: Now full height from top to activity bar (was below header)
+- **WebSocket Status**: Moved into sidebar header area
+- **Removed 2D Transitions**: No CSS transitions on 2D UI elements
+
+### Fixed
+- **Chat Duplicate Messages**: Removed WebSocket `thought` handler since API already returns response
+- **Graph Fog Color**: Changed from `#0a0a0a` to `#000000` to match background
+
+### Technical
+- Grid layout: `1fr var(--activity-height)` rows (no header row)
+- Sidebar collapse: CSS class toggle `.sidebar-collapsed`
+- Fog slider: Maps 0-100 to 0-0.01 density
+- All `ACTIVITY_COLORS` now point to `0x00ff41`
+
+---
+
+## [3.0.0] - 2026-01-12 - Modern UI Redesign
+
+### Status: COMPLETE
+
+Complete UI overhaul from floating windows to a modern, professional dashboard layout.
+
+### Added
+- **Modern Grid Layout**: CSS Grid-based layout with fixed sidebar + canvas + activity bar
+- **Inter + JetBrains Mono Typography**: Professional font stack for clean readability
+- **Collapsible Sidebar Sections**: Accordion-style sections for Mind State, Daemon, and Graph settings
+- **Slide-out Chat Panel**: Floating action button opens chat from the right edge
+- **Activity Bar**: Bottom footer with real-time scrolling activity feed
+- **iOS-style Toggle Switches**: Modern behavior toggles with smooth animations
+- **Connection Status Header**: Clean header with logo, WebSocket status, and uptime
+
+### Changed
+- **Layout**: Replaced draggable floating windows with fixed sidebar layout
+- **Color Palette**: Refined dark theme with `#0a0a0a` primary background
+- **Typography**: From `Lucida Console` monospace to `Inter` + `JetBrains Mono`
+- **Loading Screen**: Modern spinner replacing blinking text
+- **Removed**: Scanline overlay effect and window dragging code
+- **Chat**: Moved from floating window to slide-out panel with FAB trigger
+
+### Technical
+- CSS Variables for consistent theming
+- Grid layout: `header | sidebar + canvas | activity`
+- Chat panel: `400px` width, slide-in animation
+- Activity bar: Horizontal scrolling feed with badges
+- Section collapse state managed via CSS class toggle
+
+### UI Components
+| Component | Location | Features |
+|-----------|----------|----------|
+| Header | Top | Logo, WS status, uptime |
+| Sidebar | Left (280px) | 3 collapsible sections |
+| Canvas | Center | 3D constellation |
+| Activity | Bottom (48px) | Scrolling feed |
+| Chat | Right slide-out | FAB trigger, messages |
+
+### Visual Improvements
+- Removed retro scanline effects
+- Cleaner stat cards with progress bars
+- Modern slider styling for graph controls
+- Subtle hover states and transitions
+- Badge colors for activity types preserved
+
+---
+
 ## [2.3.0] - 2026-01-12 - UI Controls + Graph Fix
 
 ### Added
