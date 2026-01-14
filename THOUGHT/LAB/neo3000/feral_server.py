@@ -433,102 +433,116 @@ async def get_evolution():
 
 
 @app.get("/api/constellation")
-async def get_constellation(include_similarity: bool = True, similarity_threshold: float = 0.7):
-    """Get document constellation graph from cassette network with optional cosine similarity edges"""
+async def get_constellation(max_nodes: int = 100):
+    """Get document constellation graph from feral_eternal.db with arxiv papers.
+
+    Always computes ALL similarity edges (threshold >= 0.3) with weights.
+    Client filters by threshold for instant slider response.
+    """
     import sqlite3
     import numpy as np
 
-    CASSETTES_DIR = REPO_ROOT / "NAVIGATION" / "CORTEX" / "cassettes"
+    db_path = REPO_ROOT / "THOUGHT" / "LAB" / "FERAL_RESIDENT" / "data" / "feral_eternal.db"
+
     nodes = []
     edges = []
-    chunk_embeddings = {}  # Store embeddings for similarity calculation
+    vector_embeddings = {}
 
     try:
         # Root node
-        nodes.append({"id": "root", "label": "CASSETTES", "group": "folder"})
+        nodes.append({"id": "root", "label": "FERAL", "group": "folder"})
 
-        # Scan cassette databases
-        for db_file in CASSETTES_DIR.glob("*.db"):
-            cassette_name = db_file.stem
-            cassette_id = f"cassette:{cassette_name}"
+        # Connect to feral_eternal.db
+        with sqlite3.connect(str(db_path)) as conn:
+            # Get mind state
+            cursor = conn.execute("SELECT mind_vector_id FROM threads WHERE thread_id = 'eternal'")
+            mind_row = cursor.fetchone()
+            mind_vector_id = None
 
-            # Cassette node
-            try:
-                with sqlite3.connect(str(db_file)) as conn:
-                    cursor = conn.execute("SELECT COUNT(*) FROM chunks")
-                    chunk_count = cursor.fetchone()[0]
+            if mind_row:
+                mind_vector_id = mind_row[0]
+                nodes.append({
+                    "id": f"mind:{mind_vector_id}",
+                    "label": f"Mind ({mind_vector_id[:8]})",
+                    "group": "folder"
+                })
+                edges.append({"from": "root", "to": f"mind:{mind_vector_id}", "type": "hierarchy"})
 
-                    nodes.append({
-                        "id": cassette_id,
-                        "label": f"{cassette_name} ({chunk_count})",
-                        "group": "folder",
-                        "path": str(db_file)
-                    })
-                    edges.append({"from": "root", "to": cassette_id, "type": "hierarchy"})
+            # Get recent interactions with their vectors
+            cursor = conn.execute("""
+                SELECT interaction_id, input_text, output_vector_id
+                FROM interactions
+                WHERE input_text IS NOT NULL
+                ORDER BY created_at DESC
+                LIMIT ?
+            """, (max_nodes,))
 
-                    # Sample chunks from this cassette (max 50 per cassette for performance)
-                    # Track which chunk_ids we actually load so similarity only uses those
-                    loaded_chunk_ids = []
-                    cursor = conn.execute("""
-                        SELECT c.chunk_id, f.path, c.header_text
-                        FROM chunks c
-                        JOIN files f ON c.file_id = f.file_id
-                        LIMIT 50
-                    """)
-                    for row in cursor.fetchall():
-                        chunk_id, source_path, header_text = row
-                        loaded_chunk_ids.append(chunk_id)
-                        node_id = f"chunk:{cassette_name}:{chunk_id}"
-                        # Create short label from header or filename
-                        if header_text:
-                            label = header_text[:25]
-                        elif source_path:
-                            label = source_path.split('/')[-1].split('\\')[-1][:25]
-                        else:
-                            label = f"chunk-{chunk_id}"
-                        nodes.append({
-                            "id": node_id,
-                            "label": label,
-                            "group": "page",
-                            "path": source_path or ""
-                        })
-                        edges.append({"from": cassette_id, "to": node_id, "type": "hierarchy"})
+            rows = cursor.fetchall()
 
-                    # Load embeddings ONLY for chunks we actually added to the graph
-                    if include_similarity and loaded_chunk_ids:
-                        try:
-                            placeholders = ','.join('?' * len(loaded_chunk_ids))
-                            cursor = conn.execute(f"""
-                                SELECT c.chunk_id, g.vector_blob
-                                FROM chunks c
-                                JOIN geometric_index g ON c.chunk_hash = g.doc_id
-                                WHERE c.chunk_id IN ({placeholders})
-                            """, loaded_chunk_ids)
-                            for row in cursor.fetchall():
-                                chunk_id, vector_blob = row
-                                if vector_blob:
-                                    node_id = f"chunk:{cassette_name}:{chunk_id}"
-                                    # geometric_index stores 384-dim vectors (1536 bytes / 4 = 384 floats)
-                                    embedding = np.frombuffer(vector_blob, dtype=np.float32)
-                                    chunk_embeddings[node_id] = embedding
-                        except Exception as e:
-                            # geometric_index table might not exist or join failed
-                            print(f"[CONSTELLATION] Embedding load error for {cassette_name}: {e}")
-                            pass
+            for interaction_id, input_text, output_vid in rows:
+                # Extract paper ID
+                paper_id = None
+                if input_text and "[Paper:" in input_text:
+                    try:
+                        paper_id = input_text.split("[Paper:")[1].split("]")[0].strip()
+                    except:
+                        pass
 
-            except Exception as e:
-                # Skip broken databases
-                continue
+                # Create label
+                if paper_id:
+                    label = f"{paper_id[:12]}"
+                elif input_text:
+                    label = input_text[:25].replace("\n", " ").strip()
+                else:
+                    label = interaction_id[:8]
 
-        # Compute cosine similarity edges
-        if include_similarity and len(chunk_embeddings) > 1:
-            similarity_edges = compute_similarity_edges(chunk_embeddings, similarity_threshold)
+                node_id = f"int:{interaction_id}"
+                nodes.append({
+                    "id": node_id,
+                    "label": label,
+                    "group": "page",
+                    "paper_id": paper_id
+                })
+
+                # Connect to mind or root (hierarchy edge)
+                parent = f"mind:{mind_vector_id}" if mind_vector_id else "root"
+                edges.append({"from": parent, "to": node_id, "type": "hierarchy"})
+
+                # Load vector for similarity computation
+                if output_vid:
+                    try:
+                        v_cursor = conn.execute("SELECT vec_blob FROM vectors WHERE vector_id = ?", (output_vid,))
+                        v_row = v_cursor.fetchone()
+                        if v_row and v_row[0]:
+                            embedding = np.frombuffer(v_row[0], dtype=np.float32)
+                            vector_embeddings[node_id] = embedding
+                    except Exception:
+                        pass
+
+        # Always compute similarity edges with LOW threshold (0.3)
+        # Client will filter by threshold slider for instant response
+        if len(vector_embeddings) > 1:
+            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.3, max_edges=200)
             edges.extend(similarity_edges)
 
-        return {'ok': True, 'nodes': nodes, 'edges': edges}
+        return {
+            'ok': True,
+            'nodes': nodes,
+            'edges': edges,
+            'node_count': len(nodes),
+            'edge_count': len(edges),
+            'similarity_edge_count': len([e for e in edges if e.get('type') == 'similarity'])
+        }
 
     except Exception as e:
-        return {'ok': False, 'error': str(e), 'nodes': [], 'edges': []}
+        import traceback
+        return {
+            'ok': False,
+            'error': str(e),
+            'trace': traceback.format_exc(),
+            'nodes': [{"id": "error", "label": "Error loading data", "group": "folder"}],
+            'edges': []
+        }
 
 
 def compute_similarity_edges(embeddings: Dict[str, Any], threshold: float = 0.7, max_edges: int = 100) -> List[Dict]:

@@ -21,7 +21,7 @@
   "consolidation_window": 10,
   "smasher": {
     "enabled": false,
-    "delay_ms": 104,
+    "delay_ms": 221,
     "batch_size": 1,
     "batch_pause_ms": 500,
     "max_chunks": 0

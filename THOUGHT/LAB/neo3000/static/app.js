@@ -239,52 +239,92 @@
         function updateSimThreshold(value) {
             similarityThreshold = parseFloat(value);
             document.getElementById('value-sim-threshold').innerText = similarityThreshold.toFixed(2);
-            // Reload constellation with new threshold
-            reloadConstellation();
+
+            // Count how many edges pass the threshold
+            const passingEdges = allLinks.filter(l => l.type === 'similarity' && l.weight >= similarityThreshold);
+            console.log(`[SIM] Threshold: ${similarityThreshold.toFixed(2)} → ${passingEdges.length} connections visible`);
+
+            // Just update visible links, don't reload everything
+            updateVisibleLinks();
         }
 
         async function reloadConstellation() {
             if (!Graph) return;
             try {
-                const res = await fetch(`/api/constellation?include_similarity=true&similarity_threshold=${similarityThreshold}`);
+                const res = await fetch('/api/constellation');
                 const data = await res.json();
                 if (!data.ok) return;
 
-                const nodes = data.nodes.map(n => ({
-                    id: n.id,
-                    label: n.label,
-                    group: n.group,
-                    path: n.path || '',
-                    val: n.group === 'folder' ? 3 : 1
-                }));
+                // Get current graph data to preserve positions
+                const currentData = Graph.graphData();
+                const currentPositions = new Map();
+                currentData.nodes.forEach(n => {
+                    if (n.x !== undefined) {
+                        currentPositions.set(n.id, { x: n.x, y: n.y, z: n.z });
+                    }
+                });
+
+                const nodes = data.nodes.map(n => {
+                    const pos = currentPositions.get(n.id);
+                    return {
+                        id: n.id,
+                        label: n.label,
+                        group: n.group,
+                        path: n.path || '',
+                        paper_id: n.paper_id || null,
+                        val: n.group === 'folder' ? 3 : 1,
+                        // Preserve position AND fix it to prevent flying
+                        ...(pos ? { x: pos.x, y: pos.y, z: pos.z, fx: pos.x, fy: pos.y, fz: pos.z } : {})
+                    };
+                });
 
                 allLinks = data.edges.map(e => ({
                     source: e.from,
                     target: e.to,
                     type: e.type || 'hierarchy',
-                    weight: e.weight || 0.5
+                    weight: e.weight || 0
                 }));
 
                 nodes.forEach(n => nodeRegistry.byId.set(n.id, n));
-                const visibleLinks = filterLinks(allLinks);
-                Graph.graphData({ nodes, links: visibleLinks });
+
+                // Update with ALL links - visibility handled by linkVisibility callback
+                Graph.graphData({ nodes, links: allLinks });
+
+                // Unfix positions after graph settles
+                setTimeout(() => {
+                    const data = Graph.graphData();
+                    data.nodes.forEach(n => {
+                        delete n.fx;
+                        delete n.fy;
+                        delete n.fz;
+                    });
+                }, 500);
             } catch (e) {
                 console.error('Failed to reload constellation:', e);
             }
         }
 
         function filterLinks(links) {
-            if (showSimilarityLinks) {
-                return links;
-            }
-            return links.filter(l => l.type !== 'similarity');
+            return links.filter(l => {
+                // Always show hierarchy edges
+                if (l.type !== 'similarity') return true;
+                // Filter similarity edges by toggle AND threshold
+                if (!showSimilarityLinks) return false;
+                // Only show similarity edges above threshold
+                return (l.weight || 0) >= similarityThreshold;
+            });
         }
 
         function updateVisibleLinks() {
-            if (!Graph || allLinks.length === 0) return;
-            const graphData = Graph.graphData();
-            const visibleLinks = filterLinks(allLinks);
-            Graph.graphData({ nodes: graphData.nodes, links: visibleLinks });
+            // Don't reload graph data - just trigger a re-render
+            // The linkVisibility callback will handle filtering
+            if (Graph) {
+                Graph.linkVisibility(link => {
+                    if (link.type !== 'similarity') return true;
+                    if (!showSimilarityLinks) return false;
+                    return (link.weight || 0) >= similarityThreshold;
+                });
+            }
         }
 
         // ===== FOG CONTROL =====
@@ -302,7 +342,6 @@
 
             switch (force) {
                 case 'center':
-                    // Now slider passes actual value (0-1)
                     window.graphForces.centerStrength = numValue;
                     Graph.d3Force('center').strength(numValue);
                     document.getElementById('value-center').innerText = numValue.toFixed(2);
@@ -314,7 +353,6 @@
                     document.getElementById('value-repel').innerText = chargeStrength;
                     break;
                 case 'linkStrength':
-                    // Now slider passes actual value (0-1)
                     window.graphForces.linkStrength = numValue;
                     Graph.d3Force('link').strength(numValue);
                     document.getElementById('value-link-strength').innerText = numValue.toFixed(2);
@@ -325,22 +363,27 @@
                     document.getElementById('value-link-distance').innerText = numValue;
                     break;
             }
-            Graph.d3ReheatSimulation();
+            // Gentle reheat - low alpha so nodes don't fly away
+            Graph.d3AlphaTarget(0.1).d3ReheatSimulation();
+            setTimeout(() => Graph.d3AlphaTarget(0), 300);
         }
 
         function resetGraphForces() {
             if (!Graph) return;
             window.graphForces = {
-                linkDistance: 100,
-                linkStrength: 0.5,
-                chargeStrength: -120,
-                centerStrength: 0.05
+                linkDistance: 80,
+                linkStrength: 0.7,
+                chargeStrength: -80,
+                centerStrength: 0.15
             };
-            Graph.d3Force('link').distance(100).strength(0.5);
-            Graph.d3Force('charge').strength(-120);
-            Graph.d3Force('center').strength(0.05);
+            Graph.d3Force('link').distance(80).strength(0.7);
+            Graph.d3Force('charge').strength(-80).distanceMax(200);
+            Graph.d3Force('center').strength(0.15);
             Graph.scene().fog.density = 0.003;
-            Graph.d3ReheatSimulation();
+
+            // Gentle reheat
+            Graph.d3AlphaTarget(0.1).d3ReheatSimulation();
+            setTimeout(() => Graph.d3AlphaTarget(0), 500);
 
             // Reset similarity settings
             showSimilarityLinks = true;
@@ -349,17 +392,17 @@
             document.getElementById('slider-sim-threshold').value = 0.70;
             document.getElementById('value-sim-threshold').innerText = '0.70';
 
-            // Sliders now use actual float values
+            // Sliders with stable defaults
             document.getElementById('slider-fog').value = 0.003;
-            document.getElementById('slider-center').value = 0.05;
-            document.getElementById('slider-repel').value = 120;
-            document.getElementById('slider-link-strength').value = 0.50;
-            document.getElementById('slider-link-distance').value = 100;
+            document.getElementById('slider-center').value = 0.15;
+            document.getElementById('slider-repel').value = 80;
+            document.getElementById('slider-link-strength').value = 0.70;
+            document.getElementById('slider-link-distance').value = 80;
             document.getElementById('value-fog').innerText = '0.0030';
-            document.getElementById('value-center').innerText = '0.05';
-            document.getElementById('value-repel').innerText = '-120';
-            document.getElementById('value-link-strength').innerText = '0.50';
-            document.getElementById('value-link-distance').innerText = '100';
+            document.getElementById('value-center').innerText = '0.15';
+            document.getElementById('value-repel').innerText = '-80';
+            document.getElementById('value-link-strength').innerText = '0.70';
+            document.getElementById('value-link-distance').innerText = '80';
 
             reloadConstellation();
         }
@@ -848,9 +891,9 @@
 
             try {
                 console.log('[CONSTELLATION] Fetching data...');
-                const res = await fetch('/api/constellation?include_similarity=true&similarity_threshold=' + similarityThreshold);
+                const res = await fetch('/api/constellation');
                 const data = await res.json();
-                console.log('[CONSTELLATION] Response:', data.ok, 'nodes:', data.nodes?.length, 'edges:', data.edges?.length);
+                console.log('[CONSTELLATION] Response:', data.ok, 'nodes:', data.nodes?.length, 'edges:', data.edges?.length, 'similarity:', data.similarity_edge_count);
 
                 if (!data.ok || !data.nodes || data.nodes.length === 0) {
                     console.log('[CONSTELLATION] No data available:', data.error || 'empty');
@@ -862,34 +905,36 @@
                     label: n.label,
                     group: n.group,
                     path: n.path || '',
+                    paper_id: n.paper_id || null,
                     val: n.group === 'folder' ? 3 : 1
                 }));
 
                 allLinks = data.edges.map(e => ({
                     source: e.from,
                     target: e.to,
-                    type: e.type || 'hierarchy',  // 'hierarchy' or 'similarity'
-                    weight: e.weight || 0.5
+                    type: e.type || 'hierarchy',
+                    weight: e.weight || 0
                 }));
 
-                const links = filterLinks(allLinks);
-                console.log('[CONSTELLATION] Nodes:', nodes.length, 'Links:', links.length);
+                const simLinks = allLinks.filter(l => l.type === 'similarity');
+                console.log('[CONSTELLATION] Nodes:', nodes.length, 'Total links:', allLinks.length, 'Similarity edges:', simLinks.length);
 
                 nodes.forEach(n => nodeRegistry.byId.set(n.id, n));
 
                 nodes.forEach(n => {
                     nodePulseState.set(n.id, {
-                        intensity: 0.4,  // Higher base intensity for visible pulse
+                        intensity: 0.4,
                         phase: Math.random() * Math.PI * 2,
-                        frequency: 0.5 + Math.random() * 0.5,  // Faster pulse
-                        lastActivity: Date.now()  // Start active
+                        frequency: 0.5 + Math.random() * 0.5,
+                        lastActivity: Date.now()
                     });
                 });
 
-                console.log('[CONSTELLATION] Creating graph with', nodes.length, 'nodes and', links.length, 'links');
+                console.log('[CONSTELLATION] Creating graph with', nodes.length, 'nodes');
 
+                // Load ALL links - visibility is controlled by linkVisibility callback
                 Graph = ForceGraph3D({ controlType: 'orbit' })(container)
-                    .graphData({ nodes, links })
+                    .graphData({ nodes, links: allLinks })
                     .backgroundColor('#000000')
                     .showNavInfo(false)
                     .nodeLabel(node => `${node.label}\n${node.path || node.id}`)
@@ -916,13 +961,19 @@
                     })
                     .linkOpacity(link => {
                         if (link.type === 'smash_trail') return 1.0;
-                        if (link.type === 'similarity') return 0.3;  // More transparent
+                        if (link.type === 'similarity') return 0.3;
                         return 0.2;
                     })
-                    .d3AlphaDecay(0.02)  // PERFORMANCE: Faster settling
-                    .d3VelocityDecay(0.5)  // PERFORMANCE: Less momentum
-                    .warmupTicks(50)   // PERFORMANCE: Less initial compute
-                    .cooldownTicks(100)  // PERFORMANCE: Faster cooldown
+                    .linkVisibility(link => {
+                        // Similarity edges filtered by toggle AND threshold
+                        if (link.type !== 'similarity') return true;
+                        if (!showSimilarityLinks) return false;
+                        return (link.weight || 0) >= similarityThreshold;
+                    })
+                    .d3AlphaDecay(0.05)  // Faster settling to prevent drift
+                    .d3VelocityDecay(0.7)  // Higher damping to prevent flying
+                    .warmupTicks(100)   // More warmup for stable initial layout
+                    .cooldownTicks(200)  // More cooldown for stability
                     .enableNodeDrag(false)  // PERFORMANCE: Disable dragging
                     .onNodeHover(node => {
                         if (node) {
@@ -937,15 +988,16 @@
                     });
 
                 window.graphForces = {
-                    linkDistance: 100,
-                    linkStrength: 0.5,
-                    chargeStrength: -120,
-                    centerStrength: 0.05
+                    linkDistance: 80,
+                    linkStrength: 0.7,
+                    chargeStrength: -80,
+                    centerStrength: 0.15
                 };
 
-                Graph.d3Force('link').distance(100).strength(0.5);
-                Graph.d3Force('charge').strength(-120).distanceMax(300);
-                Graph.d3Force('center').strength(0.05);
+                // Stable forces: strong center, limited repulsion, tight links
+                Graph.d3Force('link').distance(80).strength(0.7);
+                Graph.d3Force('charge').strength(-80).distanceMax(200);
+                Graph.d3Force('center').strength(0.15);
 
                 Graph.nodeThreeObject(node => {
                     const group = new THREE.Group();
@@ -1220,11 +1272,11 @@
             if (!Graph) return;
 
             // Read values from sliders and apply to Graph
-            const fog = parseFloat(document.getElementById('slider-fog').value);
-            const center = parseFloat(document.getElementById('slider-center').value);
-            const repel = parseFloat(document.getElementById('slider-repel').value);
-            const linkStrength = parseFloat(document.getElementById('slider-link-strength').value);
-            const linkDistance = parseFloat(document.getElementById('slider-link-distance').value);
+            const fog = parseFloat(document.getElementById('slider-fog').value) || 0.003;
+            const center = parseFloat(document.getElementById('slider-center').value) || 0.15;
+            const repel = parseFloat(document.getElementById('slider-repel').value) || 80;
+            const linkStrength = parseFloat(document.getElementById('slider-link-strength').value) || 0.7;
+            const linkDistance = parseFloat(document.getElementById('slider-link-distance').value) || 80;
 
             // Apply to Graph
             if (Graph.scene().fog) {
@@ -1239,7 +1291,7 @@
             };
 
             Graph.d3Force('link').distance(linkDistance).strength(linkStrength);
-            Graph.d3Force('charge').strength(-repel);
+            Graph.d3Force('charge').strength(-repel).distanceMax(200);
             Graph.d3Force('center').strength(center);
 
             // Update display values
