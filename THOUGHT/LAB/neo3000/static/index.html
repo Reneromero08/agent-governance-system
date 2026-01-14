@@ -68,50 +68,6 @@
                     </div>
                 </div>
 
-                <!-- Daemon Section -->
-                <div class="section" id="section-daemon">
-                    <div class="section-header" onclick="toggleSection('daemon')">
-                        <span class="section-title">Daemon</span>
-                        <span class="section-chevron">&#9660;</span>
-                    </div>
-                    <div class="section-content">
-                        <div class="daemon-status">
-                            <div class="daemon-state">
-                                <div class="daemon-led" id="daemon-led"></div>
-                                <span class="daemon-label" id="daemon-status-text">Stopped</span>
-                            </div>
-                            <button class="daemon-btn" id="daemon-toggle-btn" onclick="toggleDaemon()">Start</button>
-                        </div>
-
-                        <div class="behavior-item">
-                            <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>
-                            <div class="behavior-info">
-                                <div class="behavior-name">Memory Consolidation</div>
-                                <div class="behavior-interval">Find patterns</div>
-                            </div>
-                            <input type="number" class="behavior-input" id="input-consolidate" value="120" min="10" max="3600" onchange="updateInterval('memory_consolidation', this.value)">
-                        </div>
-
-                        <div class="behavior-item">
-                            <div class="behavior-toggle" id="toggle-reflect" onclick="toggleBehavior('self_reflection')"></div>
-                            <div class="behavior-info">
-                                <div class="behavior-name">Self-Reflection</div>
-                                <div class="behavior-interval">Generate questions</div>
-                            </div>
-                            <input type="number" class="behavior-input" id="input-reflect" value="60" min="10" max="3600" onchange="updateInterval('self_reflection', this.value)">
-                        </div>
-
-                        <div class="behavior-item">
-                            <div class="behavior-toggle" id="toggle-cassette" onclick="toggleBehavior('cassette_watch')"></div>
-                            <div class="behavior-info">
-                                <div class="behavior-name">Cassette Watch</div>
-                                <div class="behavior-interval">Monitor content</div>
-                            </div>
-                            <input type="number" class="behavior-input" id="input-cassette" value="15" min="5" max="600" onchange="updateInterval('cassette_watch', this.value)">
-                        </div>
-                    </div>
-                </div>
-
                 <!-- Particle Smasher Section -->
                 <div class="section" id="section-smasher">
                     <div class="section-header" onclick="toggleSection('smasher')">
@@ -182,6 +138,50 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+
+                <!-- Daemon Section -->
+                <div class="section" id="section-daemon">
+                    <div class="section-header" onclick="toggleSection('daemon')">
+                        <span class="section-title">Daemon</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="daemon-status">
+                            <div class="daemon-state">
+                                <div class="daemon-led" id="daemon-led"></div>
+                                <span class="daemon-label" id="daemon-status-text">Stopped</span>
+                            </div>
+                            <button class="daemon-btn" id="daemon-toggle-btn" onclick="toggleDaemon()">Start</button>
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Memory Consolidation</div>
+                                <div class="behavior-interval">Find patterns</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-consolidate" value="120" min="10" max="3600" onchange="updateInterval('memory_consolidation', this.value)">
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-reflect" onclick="toggleBehavior('self_reflection')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Self-Reflection</div>
+                                <div class="behavior-interval">Generate questions</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-reflect" value="60" min="10" max="3600" onchange="updateInterval('self_reflection', this.value)">
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-cassette" onclick="toggleBehavior('cassette_watch')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Cassette Watch</div>
+                                <div class="behavior-interval">Monitor content</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-cassette" value="15" min="5" max="600" onchange="updateInterval('cassette_watch', this.value)">
+                        </div>
                     </div>
                 </div>
 
