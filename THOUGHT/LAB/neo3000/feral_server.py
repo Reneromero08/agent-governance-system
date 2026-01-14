@@ -727,52 +727,92 @@ async def get_smasher_status():
     }
 
 
-class EThresholdRequest(BaseModel):
-    threshold: float
-
-
 class SmasherConfigUpdate(BaseModel):
     delay_ms: Optional[int] = None
     batch_size: Optional[int] = None
     batch_pause_ms: Optional[int] = None
-    E_threshold: Optional[float] = None
-
-
-@app.post("/api/smasher/threshold")
-async def set_e_threshold(request: EThresholdRequest):
-    """Set the E (resonance) threshold for the Born Rule gate"""
-    d = get_daemon()
-    # Clamp between 0.0 and 1.0
-    d.E_threshold = max(0.0, min(1.0, request.threshold))
-    return {
-        'ok': True,
-        'E_threshold': d.E_threshold
-    }
 
 
 @app.post("/api/smasher/config")
 async def update_smasher_config(request: SmasherConfigUpdate):
-    """Update smasher config LIVE - no restart needed"""
-    d = get_daemon()
+    """Update smasher config LIVE - writes to config.json"""
+    config_path = FERAL_RESIDENT_PATH / "config.json"
 
+    # Read current config
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        config = {}
+
+    # Ensure smasher section exists
+    if 'smasher' not in config:
+        config['smasher'] = {}
+
+    # Update values
     if request.delay_ms is not None:
-        d.smasher_config.delay_ms = max(10, request.delay_ms)
+        config['smasher']['delay_ms'] = max(10, request.delay_ms)
     if request.batch_size is not None:
-        d.smasher_config.batch_size = max(1, request.batch_size)
+        config['smasher']['batch_size'] = max(1, request.batch_size)
     if request.batch_pause_ms is not None:
-        d.smasher_config.batch_pause_ms = max(0, request.batch_pause_ms)
-    if request.E_threshold is not None:
-        d.E_threshold = max(0.0, min(1.0, request.E_threshold))
+        config['smasher']['batch_pause_ms'] = max(0, request.batch_pause_ms)
+
+    # Write back
+    with open(config_path, 'w') as f:
+        json.dump(config, f, indent=2)
 
     return {
         'ok': True,
-        'config': {
-            'delay_ms': d.smasher_config.delay_ms,
-            'batch_size': d.smasher_config.batch_size,
-            'batch_pause_ms': d.smasher_config.batch_pause_ms,
-            'E_threshold': d.E_threshold
-        }
+        'config': config['smasher']
     }
+
+
+# =============================================================================
+# Routes: Live Config (writes to config.json)
+# =============================================================================
+
+@app.get("/api/config")
+async def get_config():
+    """Get current config.json"""
+    config_path = FERAL_RESIDENT_PATH / "config.json"
+
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+        return {'ok': True, 'config': config, 'path': str(config_path)}
+    except FileNotFoundError:
+        return {'ok': False, 'error': 'config.json not found', 'path': str(config_path)}
+    except json.JSONDecodeError as e:
+        return {'ok': False, 'error': f'Invalid JSON: {e}', 'path': str(config_path)}
+
+
+@app.post("/api/config")
+async def update_config(updates: Dict[str, Any]):
+    """Update config.json - daemon reads on next cycle"""
+    config_path = FERAL_RESIDENT_PATH / "config.json"
+
+    # Read current config
+    try:
+        with open(config_path, 'r') as f:
+            config = json.load(f)
+    except (FileNotFoundError, json.JSONDecodeError):
+        config = {}
+
+    # Deep merge updates
+    def deep_merge(base, updates):
+        for key, value in updates.items():
+            if key in base and isinstance(base[key], dict) and isinstance(value, dict):
+                deep_merge(base[key], value)
+            else:
+                base[key] = value
+
+    deep_merge(config, updates)
+
+    # Write back
+    with open(config_path, 'w') as f:
+        json.dump(config, f, indent=2)
+
+    return {'ok': True, 'config': config}
 
 
 # =============================================================================

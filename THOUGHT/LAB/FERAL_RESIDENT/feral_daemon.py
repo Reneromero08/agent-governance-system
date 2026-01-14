@@ -21,6 +21,7 @@ The daemon is the scheduler. VectorResident is the brain.
 """
 
 import asyncio
+import json
 import random
 import time
 import sys
@@ -168,6 +169,58 @@ class FeralDaemon:
 
     VERSION = "2.1.0-q46"  # Updated for Three Laws of Geometric Stability
     MAX_ACTIVITY_LOG = 1000
+    CONFIG_FILE = FERAL_PATH / "config.json"
+
+    _config_mtime: float = 0.0  # Track file modification time
+    _config_cache: Dict = {}     # Cached config
+
+    def _read_config(self) -> Dict:
+        """
+        Read config.json only when file changes (check mtime).
+        Edit the file while running - next cycle picks up changes.
+        """
+        try:
+            if self.CONFIG_FILE.exists():
+                mtime = self.CONFIG_FILE.stat().st_mtime
+                if mtime != self._config_mtime:
+                    # File changed - read it
+                    self._config_mtime = mtime
+                    with open(self.CONFIG_FILE, 'r') as f:
+                        self._config_cache = json.load(f)
+                return self._config_cache
+        except (json.JSONDecodeError, IOError, OSError):
+            # Bad JSON or file error - use cached or empty
+            pass
+        return self._config_cache or {}
+
+    def _apply_config(self):
+        """Apply current config to daemon state."""
+        cfg = self._read_config()
+
+        # Update behavior intervals/enabled state
+        behaviors_cfg = cfg.get('behaviors', {})
+        for name, bcfg in behaviors_cfg.items():
+            if name in self.behaviors:
+                if 'enabled' in bcfg:
+                    self.behaviors[name].enabled = bcfg['enabled']
+                if 'interval' in bcfg:
+                    self.behaviors[name].interval = max(10, bcfg['interval'])
+
+        # Update consolidation window
+        if 'consolidation_window' in cfg:
+            self.consolidation_window = max(3, cfg['consolidation_window'])
+
+        # Update smasher config (if not actively running)
+        smasher_cfg = cfg.get('smasher', {})
+        if self._smasher_task is None and smasher_cfg:
+            self.smasher_config.delay_ms = smasher_cfg.get('delay_ms', self.smasher_config.delay_ms)
+            self.smasher_config.batch_size = smasher_cfg.get('batch_size', self.smasher_config.batch_size)
+            self.smasher_config.batch_pause_ms = smasher_cfg.get('batch_pause_ms', self.smasher_config.batch_pause_ms)
+            self.smasher_config.max_chunks = smasher_cfg.get('max_chunks', self.smasher_config.max_chunks)
+
+        # Debug settings
+        self._debug_verbose = cfg.get('debug', {}).get('verbose', False)
+        self._debug_log_threshold = cfg.get('debug', {}).get('log_threshold_changes', True)
 
     def __init__(
         self,
@@ -225,6 +278,13 @@ class FeralDaemon:
         self.smasher_config = SmasherConfig()
         self.smasher_stats = SmasherStats()
         self._smasher_task: Optional[asyncio.Task] = None
+
+        # Debug state (updated by config.json)
+        self._debug_verbose = False
+        self._debug_log_threshold = True
+
+        # Apply initial config if present
+        self._apply_config()
 
     @property
     def resident(self) -> VectorResident:
@@ -304,6 +364,12 @@ class FeralDaemon:
                     'chunks_per_second': self.smasher_stats.chunks_per_second,
                     'elapsed_seconds': self.smasher_stats.elapsed_seconds
                 }
+            },
+            # Live config (edit config.json while running)
+            'config': {
+                'file': str(self.CONFIG_FILE),
+                'consolidation_window': self.consolidation_window,
+                'debug_verbose': self._debug_verbose
             }
         }
 
@@ -559,6 +625,9 @@ class FeralDaemon:
         """Main daemon loop."""
         while self.running:
             try:
+                # Read config fresh each cycle (edit config.json while running)
+                self._apply_config()
+
                 now = time.time()
 
                 for name, cfg in self.behaviors.items():
