@@ -279,6 +279,10 @@ class FeralDaemon:
         self.smasher_stats = SmasherStats()
         self._smasher_task: Optional[asyncio.Task] = None
 
+        # Synchronization lock for resident access (prevents smasher/daemon conflicts)
+        # Created lazily when first accessed to ensure event loop exists
+        self._resident_lock: Optional[asyncio.Lock] = None
+
         # Debug state (updated by config.json)
         self._debug_verbose = False
         self._debug_log_threshold = True
@@ -298,6 +302,12 @@ class FeralDaemon:
             )
             self._resident_initialized = True
         return self._resident
+
+    def _get_lock(self) -> asyncio.Lock:
+        """Lazy initialization of lock (requires event loop)."""
+        if self._resident_lock is None:
+            self._resident_lock = asyncio.Lock()
+        return self._resident_lock
 
     # =========================================================================
     # Server Interface (Callbacks, Status, Config)
@@ -504,6 +514,9 @@ class FeralDaemon:
                 # Process the chunk
                 await self._smash_chunk(chunk)
 
+                # Yield to let daemon behaviors acquire lock (fairness)
+                await asyncio.sleep(0)
+
                 # Inter-chunk delay
                 await asyncio.sleep(self.smasher_config.delay_ms / 1000.0)
 
@@ -594,37 +607,39 @@ class FeralDaemon:
         is_new_node = full_node_id not in self._discovered_chunks
         self._discovered_chunks.add(full_node_id)
 
-        # Run ALL blocking operations in executor
-        loop = asyncio.get_event_loop()
-        result = await loop.run_in_executor(None, self._smash_chunk_sync, chunk)
+        # LOCK: Prevent conflicts with daemon behaviors accessing resident
+        async with self._get_lock():
+            # Run ALL blocking operations in executor
+            loop = asyncio.get_event_loop()
+            result = await loop.run_in_executor(None, self._smash_chunk_sync, chunk)
 
-        # Check for error
-        if 'error' in result:
-            self._log_activity('error', f"Smash error: {result['error'][:50]}",
-                              chunk_id=chunk_id, paper=paper_name)
-            return
+            # Check for error
+            if 'error' in result:
+                self._log_activity('error', f"Smash error: {result['error'][:50]}",
+                                  chunk_id=chunk_id, paper=paper_name)
+                return
 
-        # Extract results
-        E = result['E']
-        threshold = result['threshold']
-        gate_open = result['gate_open']
-        n_memories = result['n_memories']
-        similar_to = result['similar_to']
-        similar_E = result['similar_E']
+            # Extract results
+            E = result['E']
+            threshold = result['threshold']
+            gate_open = result['gate_open']
+            n_memories = result['n_memories']
+            similar_to = result['similar_to']
+            similar_E = result['similar_E']
 
-        # Cache chunk state (may be None on error)
-        if result.get('chunk_state') is not None:
-            self._chunk_states[full_node_id] = result['chunk_state']
+            # Cache chunk state (may be None on error)
+            if result.get('chunk_state') is not None:
+                self._chunk_states[full_node_id] = result['chunk_state']
 
-        # Update stats
-        if gate_open:
-            self.smasher_stats.chunks_absorbed += 1
-        else:
-            self.smasher_stats.chunks_rejected += 1
+            # Update stats
+            if gate_open:
+                self.smasher_stats.chunks_absorbed += 1
+            else:
+                self.smasher_stats.chunks_rejected += 1
 
-        self._explored_chunks.add(full_node_id)
-        self.smasher_stats.chunks_processed += 1
-        self.smasher_stats.last_chunk_time = time.time()
+            self._explored_chunks.add(full_node_id)
+            self.smasher_stats.chunks_processed += 1
+            self.smasher_stats.last_chunk_time = time.time()
 
         # Emit event with SEMANTIC anchor (most similar previous chunk)
         # Convert numpy types to Python types for JSON serialization
@@ -705,6 +720,8 @@ class FeralDaemon:
 
     async def _run_behavior(self, name: str):
         """Run a specific behavior."""
+        if self._debug_verbose:
+            self._log_activity('daemon', f"Running behavior: {name}")
         try:
             if name == 'paper_exploration':
                 await self._explore_paper()
@@ -774,24 +791,28 @@ class FeralDaemon:
         # Q44 BORN RULE CHECK + Q46 NUCLEATION
         # =================================================================
 
-        # 1. Initialize chunk to manifold (BOUNDARY operation)
-        chunk_state = self.resident.store.embed(chunk_text)
+        # LOCK: Only for embedding and gate check (NOT for LLM call)
+        async with self._get_lock():
+            # 1. Initialize chunk to manifold (BOUNDARY operation)
+            chunk_state = self.resident.store.embed(chunk_text)
 
-        # 2. Measure E with current mind state (PURE GEOMETRY)
-        mind_state = self.resident.store.get_mind_state()
-        if mind_state is not None:
-            E = chunk_state.E_with(mind_state)
-        else:
-            E = 0.5  # No mind yet, accept with neutral E
+            # 2. Measure E with current mind state (PURE GEOMETRY)
+            mind_state = self.resident.store.get_mind_state()
+            if mind_state is not None:
+                E = chunk_state.E_with(mind_state)
+            else:
+                E = 0.5  # No mind yet, accept with neutral E
 
-        # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
-        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
-        threshold = get_dynamic_threshold(n_memories)
-        gate_open = E > threshold
+            # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
+            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+            threshold = get_dynamic_threshold(n_memories)
+            gate_open = E > threshold
 
-        if gate_open:
-            # HIGH RESONANCE: Absorb into mind
             Df_before = self.resident.mind_evolution.get('current_Df', 0)
+
+        # IMPORTANT: Release lock before LLM call (which takes 2-5 seconds)
+        if gate_open:
+            # HIGH RESONANCE: Absorb into mind (LLM call outside lock)
             result = self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
             Df_after = self.resident.mind_evolution.get('current_Df', 0)
 
@@ -839,43 +860,52 @@ class FeralDaemon:
         Instead of simple word frequency analysis, use geometric superposition
         to find the "center of mass" of recent thoughts.
         """
-        try:
-            recent = self.resident.get_recent_interactions(limit=self.consolidation_window)
-        except Exception:
-            recent = []
+        # LOCK: Brief lock for reading state
+        async with self._get_lock():
+            try:
+                recent = self.resident.get_recent_interactions(limit=self.consolidation_window)
+            except Exception:
+                recent = []
 
-        if len(recent) < 3:
-            self._log_activity('consolidate', "Not enough memories to consolidate")
-            return
+            if len(recent) < 3:
+                self._log_activity('consolidate', "Not enough memories to consolidate")
+                return
 
-        # Get the memory component from resident
-        memory = self.resident.store.memory
+            # Get the memory component from resident
+            memory = self.resident.store.memory
 
-        if len(memory.memory_history) < self.consolidation_window:
-            self._log_activity('consolidate', "Not enough geometric memories")
-            return
+            if len(memory.memory_history) < self.consolidation_window:
+                self._log_activity('consolidate', "Not enough geometric memories")
+                return
 
-        # Blend recent memories using superposition
-        recent_indices = list(range(
-            max(0, len(memory.memory_history) - self.consolidation_window),
-            len(memory.memory_history)
-        ))
+            # Blend recent memories using superposition
+            recent_indices = list(range(
+                max(0, len(memory.memory_history) - self.consolidation_window),
+                len(memory.memory_history)
+            ))
 
-        blended = memory.blend_memories(recent_indices)
+            blended = memory.blend_memories(recent_indices)
 
-        if blended is None:
-            self._log_activity('consolidate', "Blend returned None")
-            return
+            if blended is None:
+                self._log_activity('consolidate', "Blend returned None")
+                return
 
-        # Find patterns: what concepts resonate with the blended state?
-        # Use dynamic threshold (Q46 Law 3: Nucleation)
-        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
-        threshold = get_dynamic_threshold(n_memories)
+            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+            threshold = get_dynamic_threshold(n_memories)
+
+            # Get paper chunks while holding lock
+            try:
+                paper_chunks = self.resident.store.get_paper_chunks()
+                sample_chunks = random.sample(paper_chunks, min(20, len(paper_chunks))) if paper_chunks else []
+            except Exception:
+                sample_chunks = []
+
+        # IMPORTANT: Release lock before embedding loop (heavy computation)
         patterns = []
-        try:
-            paper_chunks = self.resident.store.get_paper_chunks()
-            if paper_chunks:
-                for chunk in random.sample(paper_chunks, min(20, len(paper_chunks))):
+        for chunk in sample_chunks:
+            # Brief lock per embedding to allow smasher interleaving
+            async with self._get_lock():
+                try:
                     chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
                     E = blended.E_with(chunk_state)
                     if E > threshold:
@@ -883,8 +913,10 @@ class FeralDaemon:
                             'paper': chunk.get('paper_id'),
                             'E': E
                         })
-        except Exception:
-            pass
+                except Exception:
+                    pass
+            # Yield between embeddings to let smasher run
+            await asyncio.sleep(0)
 
         self._log_activity('consolidate',
                           f"Blended {len(recent_indices)} memories (Df={blended.Df:.1f})",
@@ -920,53 +952,64 @@ class FeralDaemon:
 
         Navigate toward unexplored regions of semantic space.
         """
-        mind_state = self.resident.store.get_mind_state()
-        if mind_state is None:
-            self._log_activity('reflect', "No mind state for geometric reflection")
-            return
+        # LOCK: Brief lock for reading state and computing geodesic
+        async with self._get_lock():
+            mind_state = self.resident.store.get_mind_state()
+            if mind_state is None:
+                self._log_activity('reflect', "No mind state for geometric reflection")
+                return
 
-        reasoner = self.resident.reasoner
+            reasoner = self.resident.reasoner
 
-        # Create a probe vector toward "unexplored" concepts
-        probe_prompts = [
-            "What connections am I missing?",
-            "What patterns remain hidden?",
-            "What have I not yet considered?",
-            "What lies beyond my current understanding?",
-        ]
-        probe = reasoner.initialize(random.choice(probe_prompts))
+            # Create a probe vector toward "unexplored" concepts
+            probe_prompts = [
+                "What connections am I missing?",
+                "What patterns remain hidden?",
+                "What have I not yet considered?",
+                "What lies beyond my current understanding?",
+            ]
+            probe = reasoner.initialize(random.choice(probe_prompts))
 
-        # Compute E between mind and probe
-        E_initial = mind_state.E_with(probe)
+            # Compute E between mind and probe
+            E_initial = mind_state.E_with(probe)
 
-        # If already high E, probe is too similar - try something more distant
-        if E_initial > 0.7:
-            self._log_activity('reflect',
-                              f"Probe too similar (E={E_initial:.2f}), skipping",
-                              mode='geometric', E=E_initial, skipped=True)
-            return
+            # If already high E, probe is too similar - try something more distant
+            if E_initial > 0.7:
+                self._log_activity('reflect',
+                                  f"Probe too similar (E={E_initial:.2f}), skipping",
+                                  mode='geometric', E=E_initial, skipped=True)
+                return
 
-        # Interpolate 20% along geodesic from mind -> probe
-        new_perspective = reasoner.interpolate(mind_state, probe, 0.2)
+            # Interpolate 20% along geodesic from mind -> probe
+            new_perspective = reasoner.interpolate(mind_state, probe, 0.2)
 
-        Df_before = mind_state.Df
-        Df_after = new_perspective.Df
+            Df_before = mind_state.Df
+            Df_after = new_perspective.Df
 
-        # Find what concepts resonate with this new perspective
-        # Use dynamic threshold (Q46 Law 3: Nucleation)
-        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
-        threshold = get_dynamic_threshold(n_memories)
+            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+            threshold = get_dynamic_threshold(n_memories)
+
+            # Get paper chunks while holding lock
+            try:
+                paper_chunks = self.resident.store.get_paper_chunks()
+                sample_chunks = random.sample(paper_chunks, min(10, len(paper_chunks))) if paper_chunks else []
+            except Exception:
+                sample_chunks = []
+
+        # IMPORTANT: Release lock before embedding loop (heavy computation)
         resonant_concepts = []
-        try:
-            paper_chunks = self.resident.store.get_paper_chunks()
-            if paper_chunks:
-                for chunk in random.sample(paper_chunks, min(10, len(paper_chunks))):
+        for chunk in sample_chunks:
+            # Brief lock per embedding to allow smasher interleaving
+            async with self._get_lock():
+                try:
                     chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
                     E = new_perspective.E_with(chunk_state)
                     if E > threshold:
                         resonant_concepts.append(chunk.get('paper_id', 'unknown'))
-        except Exception:
-            pass
+                except Exception:
+                    pass
+            # Yield between embeddings to let smasher run
+            await asyncio.sleep(0)
 
         self._log_activity('reflect',
                           f"Geodesic step: Df {Df_before:.1f} -> {Df_after:.1f}",
@@ -979,12 +1022,15 @@ class FeralDaemon:
 
     async def _reflect_with_llm(self):
         """LLM-assisted reflection for deeper questions."""
-        try:
-            recent = self.resident.get_recent_interactions(limit=5)
-            recent_topics = [r.get('input', '')[:50] for r in recent]
-        except Exception:
-            recent_topics = []
+        # LOCK: Only for reading recent interactions (NOT for LLM call)
+        async with self._get_lock():
+            try:
+                recent = self.resident.get_recent_interactions(limit=5)
+                recent_topics = [r.get('input', '')[:50] for r in recent]
+            except Exception:
+                recent_topics = []
 
+        # Build question outside lock
         if recent_topics:
             topic = random.choice(recent_topics)
             question = f"[Deep Reflection] What deeper meaning connects: {topic}?"
@@ -996,6 +1042,7 @@ class FeralDaemon:
             ]
             question = f"[Deep Reflection] {random.choice(questions)}"
 
+        # IMPORTANT: LLM call outside lock (takes 2-5 seconds)
         result = self.resident.think(question)
 
         self._log_activity('reflect',
