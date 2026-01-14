@@ -519,10 +519,10 @@ async def get_constellation(max_nodes: int = 100):
                     except Exception:
                         pass
 
-        # Always compute similarity edges with LOW threshold (0.3)
+        # Always compute ALL similarity edges (no threshold)
         # Client will filter by threshold slider for instant response
         if len(vector_embeddings) > 1:
-            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.3, max_edges=200)
+            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.0, max_edges=500)
             edges.extend(similarity_edges)
 
         return {

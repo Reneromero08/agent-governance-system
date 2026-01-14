@@ -7,51 +7,39 @@
 
 ### Fixed
 
-#### Similarity Connection Bug in Constellation Graph
+#### Similarity Connection Bug
 - **Root Cause**: Vector ID mismatch between `interactions` and `vectors` tables
-  - `interactions.output_vector_id` stored SHA256 prefix (e.g., `802ea2b9`)
-  - `vectors.vector_id` stored UUID fragment (e.g., `5f88ae6e`)
-  - JOIN on `vector_id` always failed, returning NULL for all vector lookups
+  - `interactions.output_vector_id` stored SHA256 prefix
+  - `vectors.vector_id` stored UUID fragment
+  - JOIN on `vector_id` always failed, returning NULL
 
-- **Impact**: 1080 interactions in database, but 0 similarity edges computed
-  - Constellation graph showed isolated nodes with no connections
-  - `/api/constellation` endpoint returned empty similarity edges
+- **Fix**: Changed query in `feral_server.py` to match by `vec_sha256` prefix
 
-- **Fix Applied**: Changed query in `NEO3000/feral_server.py:514`
-  ```python
-  # Before (broken):
-  SELECT vec_blob FROM vectors WHERE vector_id = ?
-  
-  # After (fixed):
-  SELECT vec_blob FROM vectors WHERE vec_sha256 LIKE ? || '%'
-  ```
+#### Slider Threshold Logic
+- **Root Cause**: `updateVisibleLinks()` mutated graphData but ForceGraph3D didn't recognize changes
+  - `reloadConstellation()` re-fetched from server instead of filtering client-side
 
-- **Verification**:
-  - Vectors loaded: 0 → 50
-  - Similarity edges: 0 → 1225 (threshold 0.3)
+- **Fixes**:
+  - `graph.js`: `updateVisibleLinks()` now passes new object to `graphData()`
+  - `settings.js`: Slider calls `updateVisibleLinks()` instead of `reloadConstellation()`
+  - `feral_server.py`: Server sends ALL similarity edges (threshold=0.0), client filters
 
-#### Similarity Threshold and Filter Logic
-- **Lowered default threshold**: 0.70 → 0.35 to show more connections
-  - With 1225 similarity pairs, high threshold showed empty graph
-  - New default exposes the constellation structure
-
-- **Fixed link filtering** in `graph.js`:
-  - `filterLinks()` now correctly applies both toggle AND threshold
-  - `updateVisibleLinks()` now properly mutates graphData links array
-  - Added null guard checks for Graph state
-
-- **Updated defaults**:
-  - `state.js`: `similarityThreshold = 0.35`
-  - `index.html`: default slider value = 0.35
-  - `graph.js`: reset function uses 0.35
+#### Slider Range Adjusted
+- Similarity weights cluster around 0.998-1.000
+- Config updated: min=0.998, max=1.0, step=0.0001, default=0.91
 
 ### Files Changed
 
-- `THOUGHT/LAB/NEO3000/feral_server.py` - Vector lookup fix
-- `THOUGHT/LAB/NEO3000/static/js/state.js` - Default threshold
-- `THOUGHT/LAB/NEO3000/static/js/graph.js` - Filter logic fix
-- `THOUGHT/LAB/NEO3000/static/app.js` - Updated defaults
-- `THOUGHT/LAB/NEO3000/static/index.html` - Updated slider default
+- `THOUGHT/LAB/NEO3000/feral_server.py` - Vector lookup fix, threshold=0.0
+- `THOUGHT/LAB/NEO3000/static/js/graph.js` - graphData() update fix
+- `THOUGHT/LAB/NEO3000/static/js/settings.js` - Slider calls updateVisibleLinks()
+- `THOUGHT/LAB/FERAL_RESIDENT/config.json` - Slider ranges
+- `THOUGHT/LAB/NEO3000/tests/spring_physics_demo.html` - Spring physics demo
+
+### Verification
+
+- Vectors loaded: 0 → 50
+- Similarity edges: 0 → 1225
 
 ---
 

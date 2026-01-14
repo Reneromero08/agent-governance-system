@@ -387,8 +387,7 @@ export function updateVisibleLinks() {
     if (!state.Graph) return;
     const graphData = state.Graph.graphData();
     const visibleLinks = filterLinks(state.allLinks);
-    graphData.links.length = 0;
-    visibleLinks.forEach(l => graphData.links.push(l));
+    state.Graph.graphData({ nodes: graphData.nodes, links: visibleLinks });
 }
 
 export async function reloadConstellation() {

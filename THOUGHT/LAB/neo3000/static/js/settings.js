@@ -136,5 +136,5 @@ export function toggleSimilarityLinks() {
 export function updateSimThreshold(value) {
     state.setSimilarityThreshold(parseFloat(value));
     document.getElementById('value-sim-threshold').innerText = state.similarityThreshold.toFixed(2);
-    reloadConstellation();
+    updateVisibleLinks();
 }
