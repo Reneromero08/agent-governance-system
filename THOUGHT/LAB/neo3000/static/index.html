@@ -333,16 +333,19 @@
         }
 
         .behavior-toggle {
-            width: 32px;
-            height: 18px;
-            background: var(--bg-elevated);
-            border-radius: 9px;
+            width: 36px;
+            height: 20px;
+            background: #333;
+            border: 1px solid var(--border);
+            border-radius: 10px;
             position: relative;
             cursor: pointer;
+            transition: background 0.2s ease;
         }
 
         .behavior-toggle.on {
             background: var(--accent);
+            border-color: var(--accent);
         }
 
         .behavior-toggle::after {
@@ -354,10 +357,12 @@
             border-radius: 50%;
             top: 2px;
             left: 2px;
+            transition: left 0.2s ease;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
         }
 
         .behavior-toggle.on::after {
-            left: 16px;
+            left: 18px;
         }
 
         .behavior-info {
@@ -413,6 +418,7 @@
 
         input[type="range"] {
             -webkit-appearance: none;
+            appearance: none;
             width: 100%;
             height: 4px;
             background: var(--bg-elevated);
@@ -423,11 +429,28 @@
 
         input[type="range"]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background: var(--accent);
             border-radius: 50%;
             cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="range"]::-moz-range-thumb {
+            width: 14px;
+            height: 14px;
+            background: var(--accent);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.5);
+        }
+
+        input[type="range"]::-moz-range-track {
+            height: 4px;
+            background: var(--bg-elevated);
+            border-radius: 2px;
         }
 
         .slider-value {
@@ -1420,6 +1443,7 @@
             showSimilarityLinks = !showSimilarityLinks;
             document.getElementById('toggle-similarity').className = showSimilarityLinks ? 'behavior-toggle on' : 'behavior-toggle';
             updateVisibleLinks();
+            saveSettings();  // Persist immediately
         }
 
         function updateSimThreshold(value) {
@@ -1822,6 +1846,7 @@
             staticCameraMode = !staticCameraMode;
             document.getElementById('toggle-static-camera').className =
                 staticCameraMode ? 'behavior-toggle on' : 'behavior-toggle';
+            saveSettings();  // Persist immediately
         }
 
         async function loadSmasherStatus() {
@@ -2052,10 +2077,10 @@
                         if (link.type === 'smash_trail') {
                             return 'rgba(255, 102, 0, 0.9)';
                         }
-                        // Similarity edges in cyan, hierarchy in dim green
+                        // Similarity edges in lighter cyan with more transparency
                         if (link.type === 'similarity') {
-                            const alpha = 0.3 + (link.weight || 0.5) * 0.5;
-                            return `rgba(0, 255, 255, ${alpha})`;
+                            const alpha = 0.15 + (link.weight || 0.5) * 0.25;  // Reduced opacity
+                            return `rgba(100, 255, 255, ${alpha})`;  // Lighter cyan
                         }
                         return 'rgba(0, 143, 17, 0.2)';
                     })
@@ -2066,7 +2091,7 @@
                     })
                     .linkOpacity(link => {
                         if (link.type === 'smash_trail') return 1.0;
-                        if (link.type === 'similarity') return 0.5;
+                        if (link.type === 'similarity') return 0.3;  // More transparent
                         return 0.2;
                     })
                     .d3AlphaDecay(0.02)  // PERFORMANCE: Faster settling
@@ -2290,8 +2315,104 @@
             }
         }
 
+        // ===== SETTINGS PERSISTENCE =====
+        function saveSettings() {
+            const settings = {
+                // Smasher config
+                smasher_delay_ms: smasherConfig.delay_ms,
+                smasher_batch_size: smasherConfig.batch_size,
+                smasher_E_threshold: smasherConfig.E_threshold,
+
+                // Graph settings
+                similarity_threshold: similarityThreshold,
+                show_similarity_links: showSimilarityLinks,
+                static_camera: staticCameraMode,
+
+                // Force params (if Graph exists)
+                fog_density: Graph ? parseFloat(document.getElementById('value-fog').innerText) : 0.003,
+                center_strength: Graph ? parseFloat(document.getElementById('value-center').innerText) : 0.05,
+                repel_strength: Graph ? parseFloat(document.getElementById('value-repel').innerText) : -120,
+                link_strength: Graph ? parseFloat(document.getElementById('value-link-strength').innerText) : 0.5,
+                link_distance: Graph ? parseFloat(document.getElementById('value-link-distance').innerText) : 100
+            };
+
+            localStorage.setItem('feral_settings', JSON.stringify(settings));
+        }
+
+        function loadSettings() {
+            const saved = localStorage.getItem('feral_settings');
+            if (!saved) return;
+
+            try {
+                const settings = JSON.parse(saved);
+
+                // Restore smasher config
+                if (settings.smasher_delay_ms !== undefined) {
+                    smasherConfig.delay_ms = settings.smasher_delay_ms;
+                    document.getElementById('slider-smasher-speed').value = settings.smasher_delay_ms;
+                    document.getElementById('value-smasher-speed').innerText = settings.smasher_delay_ms + 'ms';
+                }
+                if (settings.smasher_batch_size !== undefined) {
+                    smasherConfig.batch_size = settings.smasher_batch_size;
+                    document.getElementById('slider-smasher-batch').value = settings.smasher_batch_size;
+                    document.getElementById('value-smasher-batch').innerText = settings.smasher_batch_size;
+                }
+                if (settings.smasher_E_threshold !== undefined) {
+                    smasherConfig.E_threshold = settings.smasher_E_threshold;
+                    const thresholdPercent = Math.round(settings.smasher_E_threshold * 100);
+                    document.getElementById('slider-e-threshold').value = thresholdPercent;
+                    document.getElementById('value-e-threshold').innerText = settings.smasher_E_threshold.toFixed(2);
+                }
+
+                // Restore graph settings
+                if (settings.similarity_threshold !== undefined) {
+                    similarityThreshold = settings.similarity_threshold;
+                    const simPercent = Math.round(settings.similarity_threshold * 100);
+                    document.getElementById('slider-sim-threshold').value = simPercent;
+                    document.getElementById('value-sim-threshold').innerText = settings.similarity_threshold.toFixed(2);
+                }
+                if (settings.show_similarity_links !== undefined) {
+                    showSimilarityLinks = settings.show_similarity_links;
+                    document.getElementById('toggle-similarity').className =
+                        showSimilarityLinks ? 'behavior-toggle on' : 'behavior-toggle';
+                }
+                if (settings.static_camera !== undefined) {
+                    staticCameraMode = settings.static_camera;
+                    document.getElementById('toggle-static-camera').className =
+                        staticCameraMode ? 'behavior-toggle on' : 'behavior-toggle';
+                }
+
+                // Restore force params
+                if (settings.fog_density !== undefined) {
+                    document.getElementById('slider-fog').value = Math.round(settings.fog_density * 10000);
+                    document.getElementById('value-fog').innerText = settings.fog_density.toFixed(4);
+                }
+                if (settings.center_strength !== undefined) {
+                    document.getElementById('slider-center').value = Math.round(settings.center_strength * 100);
+                    document.getElementById('value-center').innerText = settings.center_strength.toFixed(2);
+                }
+                if (settings.repel_strength !== undefined) {
+                    document.getElementById('slider-repel').value = settings.repel_strength;
+                    document.getElementById('value-repel').innerText = settings.repel_strength;
+                }
+                if (settings.link_strength !== undefined) {
+                    document.getElementById('slider-link-strength').value = Math.round(settings.link_strength * 100);
+                    document.getElementById('value-link-strength').innerText = settings.link_strength.toFixed(2);
+                }
+                if (settings.link_distance !== undefined) {
+                    document.getElementById('slider-link-distance').value = settings.link_distance;
+                    document.getElementById('value-link-distance').innerText = settings.link_distance;
+                }
+
+                console.log('[SETTINGS] Restored from localStorage');
+            } catch (e) {
+                console.error('[SETTINGS] Failed to load:', e);
+            }
+        }
+
         // ===== INIT =====
         async function init() {
+            loadSettings();  // Load saved settings first
             await initConstellation();
             await loadStatus();
             await loadEvolution();
@@ -2304,6 +2425,7 @@
             setInterval(loadEvolution, 30000);
             setInterval(loadDaemonStatus, 5000);
             setInterval(loadSmasherStatus, 1000);  // Fast polling for smasher stats
+            setInterval(saveSettings, 5000);  // Auto-save settings every 5 seconds
         }
 
         window.onload = init;

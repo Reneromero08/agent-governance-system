@@ -130,4 +130,10 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/raw/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/markdown/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/pipeline_results.json
+
+# Feral Resident & NEO3000 databases (runtime artifacts)
 THOUGHT/LAB/FERAL_RESIDENT/*.db
+THOUGHT/LAB/FERAL_RESIDENT/data/
+!THOUGHT/LAB/FERAL_RESIDENT/data/.gitkeep
+THOUGHT/LAB/NEO3000/data/
+!THOUGHT/LAB/NEO3000/data/.gitkeep

@@ -47,6 +47,45 @@ from geometric_reasoner import GeometricReasoner, GeometricState
 
 
 # =============================================================================
+# The Three Laws of Geometric Stability (Q46)
+# =============================================================================
+
+# Law 2: Percolation - The asymptotic threshold (invariant constant)
+# ALWAYS use literal math, never 0.159
+CRITICAL_RESONANCE = 1.0 / (2.0 * np.pi)
+
+
+def get_dynamic_threshold(n_memories: int, grad_S: float = None) -> float:
+    """
+    Law 3: Nucleation - Dynamic threshold using the Living Formula's ∇S principle.
+
+    R = (E / ∇S) × σ^Df
+
+    At cold-start: ∇S is high → threshold is low (nucleation)
+    At steady-state: ∇S → 0 → threshold approaches 1/(2π)
+
+    If grad_S not provided, estimate from N:
+    ∇S ∝ 1/√N (entropy gradient decreases as mass accumulates)
+    Same principle as 1/N inertia - more mass = less entropy.
+
+    Args:
+        n_memories: Number of memories accumulated so far
+        grad_S: Optional explicit entropy gradient (defaults to 1/√N)
+
+    Returns:
+        Dynamic threshold that ramps from ~0.08 to 1/(2π) ≈ 0.159
+    """
+    if grad_S is None:
+        # Estimate ∇S from accumulated mass
+        grad_S = 1.0 / np.sqrt(max(n_memories, 1))
+
+    # threshold = (1/2π) / (1 + ∇S)
+    # When ∇S is high → threshold is low (nucleation)
+    # When ∇S → 0 → threshold → 1/(2π) (steady-state)
+    return CRITICAL_RESONANCE / (1.0 + grad_S)
+
+
+# =============================================================================
 # Data Classes
 # =============================================================================
 
@@ -127,14 +166,13 @@ class FeralDaemon:
         await daemon.start()
     """
 
-    VERSION = "2.0.0-q45"
+    VERSION = "2.1.0-q46"  # Updated for Three Laws of Geometric Stability
     MAX_ACTIVITY_LOG = 1000
 
     def __init__(
         self,
         resident: Optional[VectorResident] = None,
         thread_id: str = "eternal",
-        E_threshold: float = 0.3,  # Q44 Born Rule threshold (lower = more permissive)
         consolidation_window: int = 10
     ):
         """
@@ -143,13 +181,15 @@ class FeralDaemon:
         Args:
             resident: VectorResident instance (created if not provided)
             thread_id: Thread ID for the resident
-            E_threshold: Born Rule threshold for resonance gating
             consolidation_window: Number of recent memories to blend
+
+        Note:
+            E threshold is now computed dynamically via get_dynamic_threshold()
+            using the Living Formula's ∇S principle (Q46 Law 3: Nucleation).
         """
         self.thread_id = thread_id
         self._resident = resident
         self._resident_initialized = resident is not None
-        self.E_threshold = E_threshold
         self.consolidation_window = consolidation_window
 
         # State
@@ -249,7 +289,9 @@ class FeralDaemon:
             },
             'activity_count': len(self.activity_log),
             'explored_chunks': len(self._explored_chunks),
-            'E_threshold': self.E_threshold,
+            'threshold': get_dynamic_threshold(
+                len(self.resident.store.memory.memory_history) if self._resident_initialized and self.resident.store.memory else 0
+            ),
             # Particle Smasher status
             'smasher': {
                 'active': self.smasher_config.enabled and self._smasher_task is not None,
@@ -447,7 +489,10 @@ class FeralDaemon:
         # Cache this chunk's GeometricState for future E_with lookups
         self._chunk_states[full_node_id] = chunk_state
 
-        gate_open = E > self.E_threshold
+        # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
+        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+        threshold = get_dynamic_threshold(n_memories)
+        gate_open = E > threshold
 
         if gate_open:
             # Absorb
@@ -462,13 +507,15 @@ class FeralDaemon:
 
         # Emit event with SEMANTIC anchor (most similar previous chunk)
         self._log_activity('smash',
-                          f"E={E:.2f} {'ABSORBED' if gate_open else 'REJECTED'}",
+                          f"E={E:.3f} (θ={threshold:.3f}) {'ABSORBED' if gate_open else 'REJECTED'}",
                           chunk_id=chunk_id,
                           paper=paper_name,
                           full_node_id=full_node_id,
                           similar_to=similar_to,  # Most similar previous chunk
                           similar_E=similar_E,     # Cosine similarity score
                           E=E,
+                          threshold=threshold,
+                          n_memories=n_memories,
                           gate_open=gate_open,
                           is_new_node=is_new_node,
                           rate=self.smasher_stats.chunks_per_second)
@@ -598,7 +645,7 @@ class FeralDaemon:
         self._exploration_trail.append(full_node_id)
 
         # =================================================================
-        # Q44 BORN RULE CHECK
+        # Q44 BORN RULE CHECK + Q46 NUCLEATION
         # =================================================================
 
         # 1. Initialize chunk to manifold (BOUNDARY operation)
@@ -611,8 +658,10 @@ class FeralDaemon:
         else:
             E = 0.5  # No mind yet, accept with neutral E
 
-        # 3. Gate decision based on Born Rule
-        gate_open = E > self.E_threshold
+        # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
+        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+        threshold = get_dynamic_threshold(n_memories)
+        gate_open = E > threshold
 
         if gate_open:
             # HIGH RESONANCE: Absorb into mind
@@ -623,12 +672,14 @@ class FeralDaemon:
             self._explored_chunks.add(full_node_id)
 
             self._log_activity('paper',
-                              f"Absorbed {paper_name} (E={E:.2f}, gate=OPEN)",
+                              f"Absorbed {paper_name} (E={E:.3f}, θ={threshold:.3f}, gate=OPEN)",
                               paper=paper_name,
                               chunk_id=chunk_id,
                               full_node_id=full_node_id,
                               heading=heading,
                               E=E,
+                              threshold=threshold,
+                              n_memories=n_memories,
                               E_resonance=result.E_resonance,
                               Df_delta=Df_after - Df_before,
                               gate_open=True,
@@ -639,12 +690,14 @@ class FeralDaemon:
             self._explored_chunks.add(full_node_id)
 
             self._log_activity('paper',
-                              f"Ignored {paper_name} (E={E:.2f}, gate=CLOSED)",
+                              f"Ignored {paper_name} (E={E:.3f}, θ={threshold:.3f}, gate=CLOSED)",
                               paper=paper_name,
                               chunk_id=chunk_id,
                               full_node_id=full_node_id,
                               heading=heading,
                               E=E,
+                              threshold=threshold,
+                              n_memories=n_memories,
                               gate_open=False,
                               is_new_node=is_new_node,
                               source_node_id=source_node_id)
@@ -689,6 +742,9 @@ class FeralDaemon:
             return
 
         # Find patterns: what concepts resonate with the blended state?
+        # Use dynamic threshold (Q46 Law 3: Nucleation)
+        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+        threshold = get_dynamic_threshold(n_memories)
         patterns = []
         try:
             paper_chunks = self.resident.store.get_paper_chunks()
@@ -696,7 +752,7 @@ class FeralDaemon:
                 for chunk in random.sample(paper_chunks, min(20, len(paper_chunks))):
                     chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
                     E = blended.E_with(chunk_state)
-                    if E > self.E_threshold:
+                    if E > threshold:
                         patterns.append({
                             'paper': chunk.get('paper_id'),
                             'E': E
@@ -771,6 +827,9 @@ class FeralDaemon:
         Df_after = new_perspective.Df
 
         # Find what concepts resonate with this new perspective
+        # Use dynamic threshold (Q46 Law 3: Nucleation)
+        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+        threshold = get_dynamic_threshold(n_memories)
         resonant_concepts = []
         try:
             paper_chunks = self.resident.store.get_paper_chunks()
@@ -778,7 +837,7 @@ class FeralDaemon:
                 for chunk in random.sample(paper_chunks, min(10, len(paper_chunks))):
                     chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
                     E = new_perspective.E_with(chunk_state)
-                    if E > self.E_threshold:
+                    if E > threshold:
                         resonant_concepts.append(chunk.get('paper_id', 'unknown'))
         except Exception:
             pass

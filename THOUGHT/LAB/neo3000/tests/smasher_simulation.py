@@ -18,9 +18,10 @@ from vector_brain import VectorResident
 
 async def run_simulation():
     print("=== PARTICLE SMASHER SIMULATION ===")
-    
-    # Use a simulation thread/db
-    db_path = NEO3000_DIR / "feral_simulation.db"
+
+    # Use a simulation thread/db in data/ folder
+    db_path = NEO3000_DIR.parent / "data" / "feral_simulation.db"
+    db_path.parent.mkdir(exist_ok=True)  # Ensure data/ exists
     
     print(f"Initializing Resident (DB: {db_path})...")
     resident = VectorResident(
@@ -31,8 +32,8 @@ async def run_simulation():
     
     daemon = FeralDaemon(
         resident=resident,
-        thread_id="simulation",
-        E_threshold=0.3
+        thread_id="simulation"
+        # E_threshold removed - now computed dynamically via Q46 Law 3: Nucleation
     )
     
     # Check paper chunks
