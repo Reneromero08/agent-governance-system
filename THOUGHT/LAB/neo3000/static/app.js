@@ -316,15 +316,12 @@
         }
 
         function updateVisibleLinks() {
-            // Don't reload graph data - just trigger a re-render
-            // The linkVisibility callback will handle filtering
-            if (Graph) {
-                Graph.linkVisibility(link => {
-                    if (link.type !== 'similarity') return true;
-                    if (!showSimilarityLinks) return false;
-                    return (link.weight || 0) >= similarityThreshold;
-                });
-            }
+            if (!Graph) return;
+            const filteredLinks = filterLinks(allLinks);
+            Graph.graphData({
+                nodes: Graph.graphData().nodes,
+                links: filteredLinks
+            });
         }
 
         // ===== FOG CONTROL =====
@@ -387,10 +384,10 @@
 
             // Reset similarity settings
             showSimilarityLinks = true;
-            similarityThreshold = 0.7;
+            similarityThreshold = 0.35;
             document.getElementById('toggle-similarity').className = 'behavior-toggle on';
-            document.getElementById('slider-sim-threshold').value = 0.70;
-            document.getElementById('value-sim-threshold').innerText = '0.70';
+            document.getElementById('slider-sim-threshold').value = 0.35;
+            document.getElementById('value-sim-threshold').innerText = '0.35';
 
             // Sliders with stable defaults
             document.getElementById('slider-fog').value = 0.003;

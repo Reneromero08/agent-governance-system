@@ -1,5 +1,60 @@
 # Feral Resident Changelog
 
+## [0.6.6] - 2026-01-14 - CONSTELLATION SIMILARITY FIX
+
+**Status**: Fixed similarity connections in NEO3000 constellation graph
+**Version**: production-0.6.6
+
+### Fixed
+
+#### Similarity Connection Bug in Constellation Graph
+- **Root Cause**: Vector ID mismatch between `interactions` and `vectors` tables
+  - `interactions.output_vector_id` stored SHA256 prefix (e.g., `802ea2b9`)
+  - `vectors.vector_id` stored UUID fragment (e.g., `5f88ae6e`)
+  - JOIN on `vector_id` always failed, returning NULL for all vector lookups
+
+- **Impact**: 1080 interactions in database, but 0 similarity edges computed
+  - Constellation graph showed isolated nodes with no connections
+  - `/api/constellation` endpoint returned empty similarity edges
+
+- **Fix Applied**: Changed query in `NEO3000/feral_server.py:514`
+  ```python
+  # Before (broken):
+  SELECT vec_blob FROM vectors WHERE vector_id = ?
+  
+  # After (fixed):
+  SELECT vec_blob FROM vectors WHERE vec_sha256 LIKE ? || '%'
+  ```
+
+- **Verification**:
+  - Vectors loaded: 0 → 50
+  - Similarity edges: 0 → 1225 (threshold 0.3)
+
+#### Similarity Threshold and Filter Logic
+- **Lowered default threshold**: 0.70 → 0.35 to show more connections
+  - With 1225 similarity pairs, high threshold showed empty graph
+  - New default exposes the constellation structure
+
+- **Fixed link filtering** in `graph.js`:
+  - `filterLinks()` now correctly applies both toggle AND threshold
+  - `updateVisibleLinks()` now properly mutates graphData links array
+  - Added null guard checks for Graph state
+
+- **Updated defaults**:
+  - `state.js`: `similarityThreshold = 0.35`
+  - `index.html`: default slider value = 0.35
+  - `graph.js`: reset function uses 0.35
+
+### Files Changed
+
+- `THOUGHT/LAB/NEO3000/feral_server.py` - Vector lookup fix
+- `THOUGHT/LAB/NEO3000/static/js/state.js` - Default threshold
+- `THOUGHT/LAB/NEO3000/static/js/graph.js` - Filter logic fix
+- `THOUGHT/LAB/NEO3000/static/app.js` - Updated defaults
+- `THOUGHT/LAB/NEO3000/static/index.html` - Updated slider default
+
+---
+
 ## [0.6.5] - 2026-01-14 - NEO3000 TUI FIX + ENCODING
 
 **Status**: NEO3000 TUI display fixed, Windows encoding issues resolved

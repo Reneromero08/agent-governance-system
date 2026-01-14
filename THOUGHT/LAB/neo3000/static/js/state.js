@@ -7,7 +7,7 @@ export let behaviors = {};
 export let chatOpen = false;
 export let sidebarCollapsed = false;
 export let showSimilarityLinks = true;
-export let similarityThreshold = 0.7;
+export let similarityThreshold = 0.35;
 export let allLinks = [];
 
 // Particle Smasher state

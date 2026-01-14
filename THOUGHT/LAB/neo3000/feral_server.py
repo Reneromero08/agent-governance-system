@@ -511,7 +511,7 @@ async def get_constellation(max_nodes: int = 100):
                 # Load vector for similarity computation
                 if output_vid:
                     try:
-                        v_cursor = conn.execute("SELECT vec_blob FROM vectors WHERE vector_id = ?", (output_vid,))
+                        v_cursor = conn.execute("SELECT vec_blob FROM vectors WHERE vec_sha256 LIKE ? || '%'", (output_vid,))
                         v_row = v_cursor.fetchone()
                         if v_row and v_row[0]:
                             embedding = np.frombuffer(v_row[0], dtype=np.float32)

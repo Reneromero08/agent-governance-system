@@ -374,17 +374,21 @@ export function flashNode(nodeId, gateOpen, E) {
 
 // ===== SIMILARITY / LINK CONTROLS =====
 export function filterLinks(links) {
-    if (state.showSimilarityLinks) {
-        return links;
-    }
-    return links.filter(l => l.type !== 'similarity');
+    return links.filter(l => {
+        // Always show hierarchy edges
+        if (l.type !== 'similarity') return true;
+        // Filter similarity edges by toggle AND threshold
+        if (!state.showSimilarityLinks) return false;
+        return (l.weight || 0) >= state.similarityThreshold;
+    });
 }
 
 export function updateVisibleLinks() {
-    if (!state.Graph || state.allLinks.length === 0) return;
+    if (!state.Graph) return;
     const graphData = state.Graph.graphData();
     const visibleLinks = filterLinks(state.allLinks);
-    state.Graph.graphData({ nodes: graphData.nodes, links: visibleLinks });
+    graphData.links.length = 0;
+    visibleLinks.forEach(l => graphData.links.push(l));
 }
 
 export async function reloadConstellation() {
@@ -474,10 +478,10 @@ export function resetGraphForces() {
     state.Graph.d3ReheatSimulation();
 
     state.setShowSimilarityLinks(true);
-    state.setSimilarityThreshold(0.7);
+    state.setSimilarityThreshold(0.35);
     document.getElementById('toggle-similarity').className = 'behavior-toggle on';
-    document.getElementById('slider-sim-threshold').value = 0.70;
-    document.getElementById('value-sim-threshold').innerText = '0.70';
+    document.getElementById('slider-sim-threshold').value = 0.35;
+    document.getElementById('value-sim-threshold').innerText = '0.35';
 
     document.getElementById('slider-fog').value = 0.003;
     document.getElementById('slider-center').value = 0.05;
