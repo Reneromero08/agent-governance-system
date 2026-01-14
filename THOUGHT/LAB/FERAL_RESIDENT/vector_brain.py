@@ -534,6 +534,130 @@ RESPONSE:"""
             'Df_delta': abs(post_Df - pre_Df) if pre_Df and post_Df else None
         }
 
+    def prune_low_E_memories(self, threshold: float = None, dry_run: bool = True) -> Dict:
+        """
+        Prune memories with E below threshold (default: 1/(2π) ≈ 0.159).
+
+        This removes low-resonance memories that shouldn't have passed the gate.
+        After pruning, rebuilds mind state from remaining memories.
+
+        Args:
+            threshold: E threshold (default: 1/(2π))
+            dry_run: If True, only report what would be pruned without deleting
+
+        Returns:
+            Dict with pruning stats and list of pruned/kept memories
+        """
+        import math
+
+        # Default threshold: 1/(2π) - the theoretical maximum from Q46 Law 3
+        if threshold is None:
+            threshold = 1.0 / (2.0 * math.pi)
+
+        # Get all interactions for this thread
+        interactions = self.store.db.get_thread_interactions(self.thread_id, limit=10000)
+
+        if not interactions:
+            return {
+                'status': 'no_memories',
+                'threshold': threshold,
+                'total_memories': 0,
+                'pruned': 0,
+                'kept': 0
+            }
+
+        # Get current mind state for E computation
+        mind_state = self.store.get_mind_state()
+
+        results = {
+            'threshold': threshold,
+            'threshold_name': '1/(2π)',
+            'dry_run': dry_run,
+            'total_memories': len(interactions),
+            'to_prune': [],
+            'to_keep': [],
+            'pruned': 0,
+            'kept': 0
+        }
+
+        for interaction in interactions:
+            # Embed the input text to compute E
+            if not interaction.input_text:
+                continue
+
+            try:
+                input_state = self.store.embed(interaction.input_text, store=False)
+
+                # Compute E with mind state (or use 0 if no mind yet)
+                if mind_state is not None:
+                    E = input_state.E_with(mind_state)
+                else:
+                    E = 0.0
+
+                entry = {
+                    'interaction_id': interaction.interaction_id,
+                    'input_preview': interaction.input_text[:60],
+                    'E': float(E),
+                    'mind_Df': interaction.mind_Df,
+                    'created_at': interaction.created_at
+                }
+
+                if E < threshold:
+                    results['to_prune'].append(entry)
+                else:
+                    results['to_keep'].append(entry)
+
+            except Exception as e:
+                # Skip problematic entries
+                continue
+
+        results['pruned'] = len(results['to_prune'])
+        results['kept'] = len(results['to_keep'])
+
+        if dry_run:
+            return results
+
+        # Actually delete the low-E interactions
+        pruned_ids = [p['interaction_id'] for p in results['to_prune']]
+
+        if pruned_ids:
+            # Delete from interactions table
+            placeholders = ','.join(['?' for _ in pruned_ids])
+            self.store.db.conn.execute(
+                f"DELETE FROM interactions WHERE interaction_id IN ({placeholders})",
+                pruned_ids
+            )
+            self.store.db.conn.commit()
+
+            # Rebuild mind state from remaining interactions
+            self._rebuild_mind_from_interactions()
+
+        results['status'] = 'pruned' if pruned_ids else 'nothing_to_prune'
+        return results
+
+    def _rebuild_mind_from_interactions(self):
+        """Rebuild mind state from remaining interactions after pruning."""
+        # Clear current memory
+        self.store.memory.clear()
+
+        # Get remaining interactions in chronological order
+        interactions = self.store.db.get_thread_interactions(self.thread_id, limit=10000)
+
+        # Replay in chronological order (oldest first)
+        for interaction in reversed(interactions):
+            if interaction.input_text:
+                self.store.memory.remember(interaction.input_text)
+            if interaction.output_text:
+                self.store.memory.remember(interaction.output_text)
+
+        # Update thread with new mind state
+        if self.store.get_mind_hash():
+            self.store.db.update_thread(
+                self.thread_id,
+                self.store.get_mind_hash()[:8],
+                self.store.get_mind_Df()
+            )
+
     def close(self):
         """Close database connection"""
         self.store.close()

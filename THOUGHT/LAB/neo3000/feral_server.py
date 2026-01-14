@@ -853,6 +853,86 @@ async def update_smasher_config(request: SmasherConfigUpdate):
 
 
 # =============================================================================
+# Routes: Memory Pruning
+# =============================================================================
+
+class PruneRequest(BaseModel):
+    threshold: Optional[float] = None  # Default: 1/(2π)
+    dry_run: bool = True  # Default to preview mode
+
+
+@app.post("/api/prune")
+async def prune_memories(request: PruneRequest):
+    """
+    Prune low-E memories below threshold.
+
+    Default threshold is 1/(2π) ≈ 0.159 (Q46 Law 3 maximum).
+    Set dry_run=false to actually delete.
+
+    Usage:
+        # Preview what would be pruned
+        curl -X POST http://localhost:8420/api/prune -H "Content-Type: application/json" -d '{"dry_run": true}'
+
+        # Actually prune
+        curl -X POST http://localhost:8420/api/prune -H "Content-Type: application/json" -d '{"dry_run": false}'
+    """
+    r = get_resident()
+
+    result = r.prune_low_E_memories(
+        threshold=request.threshold,
+        dry_run=request.dry_run
+    )
+
+    return {
+        'ok': True,
+        **result
+    }
+
+
+@app.get("/api/memory/stats")
+async def get_memory_stats():
+    """Get memory statistics including count and E distribution."""
+    import math
+    r = get_resident()
+    mind_state = r.store.get_mind_state()
+
+    # Get all interactions
+    interactions = r.store.db.get_thread_interactions(r.thread_id, limit=10000)
+
+    threshold = 1.0 / (2.0 * math.pi)
+    above_threshold = 0
+    below_threshold = 0
+    E_values = []
+
+    for interaction in interactions:
+        if not interaction.input_text:
+            continue
+        try:
+            input_state = r.store.embed(interaction.input_text, store=False)
+            if mind_state is not None:
+                E = input_state.E_with(mind_state)
+                E_values.append(E)
+                if E >= threshold:
+                    above_threshold += 1
+                else:
+                    below_threshold += 1
+        except:
+            continue
+
+    return {
+        'ok': True,
+        'total_memories': len(interactions),
+        'above_threshold': above_threshold,
+        'below_threshold': below_threshold,
+        'threshold': threshold,
+        'threshold_name': '1/(2π)',
+        'E_mean': sum(E_values) / len(E_values) if E_values else 0,
+        'E_min': min(E_values) if E_values else 0,
+        'E_max': max(E_values) if E_values else 0
+    }
+
+
+# =============================================================================
 # Routes: Live Config (writes to config.json)
 # =============================================================================
 
