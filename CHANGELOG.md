@@ -1,8 +1,24 @@
-<!-- CONTENT_HASH: 4.0.1 -->
+<!-- CONTENT_HASH: 1fffb3f8 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.8.9] - 2026-01-14
+
+### Added
+- **Remote Model Server Support** — GeometricReasoner can now use external embedding server
+  - `CAPABILITY/PRIMITIVES/geometric_reasoner.py` — Auto-detects model server on port 8421
+  - Avoids loading transformer model in every process
+  - Falls back to local SentenceTransformer if server unavailable
+  - Configurable via `USE_MODEL_SERVER` environment variable
+
+### Changed
+- **Governance Check LAB Exclusion** — `THOUGHT/LAB/` changes no longer require main CHANGELOG
+  - `CAPABILITY/TOOLS/check-canon-governance.js` — Added LAB path exclusion
+  - LAB is experimental; changes documented in component-specific changelogs
 
 ---
 

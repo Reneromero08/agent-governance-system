@@ -55,6 +55,9 @@ function getChangedPaths() {
 function isBehaviorChange(p) {
     if (!p) return false;
 
+    // EXCLUDE: THOUGHT/LAB is experimental - doesn't require main changelog
+    if (p.startsWith("THOUGHT/LAB/")) return false;
+
     // TOOLS folder (runtime behavior)
     if (p.startsWith("CAPABILITY/TOOLS/") && !p.endsWith(".md")) return true;
     if (p.startsWith("CAPABILITY/PRIMITIVES/") && !p.endsWith(".md")) return true;

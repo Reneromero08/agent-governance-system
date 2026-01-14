@@ -18,6 +18,38 @@ from dataclasses import dataclass, field
 from enum import Enum
 import hashlib
 import json
+import os
+
+# Remote model server support
+REMOTE_EMBEDDER = None
+try:
+    import requests
+    def _check_model_server():
+        try:
+            resp = requests.get("http://localhost:8421/health", timeout=1)
+            return resp.status_code == 200
+        except:
+            return False
+
+    class _RemoteEmbedder:
+        """Uses model_server.py for embeddings - no local transformer loading!"""
+        def __init__(self):
+            self.dim = 384  # MiniLM dimension
+        def encode(self, texts, convert_to_numpy=True):
+            if isinstance(texts, str):
+                texts = [texts]
+            resp = requests.post("http://localhost:8421/embed", json={"texts": texts}, timeout=30)
+            resp.raise_for_status()
+            result = np.array(resp.json()["embeddings"])
+            return result if len(texts) > 1 else result[0]
+        def get_sentence_embedding_dimension(self):
+            return self.dim
+
+    # Auto-detect model server (silent - no print during import)
+    if os.environ.get("USE_MODEL_SERVER", "").lower() != "false" and _check_model_server():
+        REMOTE_EMBEDDER = _RemoteEmbedder()
+except ImportError:
+    pass
 
 try:
     from sentence_transformers import SentenceTransformer
@@ -303,10 +335,14 @@ class GeometricReasoner:
 
         NOT used for reasoning.
         """
-        if SentenceTransformer is None:
+        # Use remote embedder if available (no local transformer loading!)
+        if REMOTE_EMBEDDER is not None:
+            self.model = REMOTE_EMBEDDER
+        elif SentenceTransformer is None:
             raise ImportError("sentence-transformers required: pip install sentence-transformers")
+        else:
+            self.model = SentenceTransformer(model_name)
 
-        self.model = SentenceTransformer(model_name)
         self.dim = self.model.get_sentence_embedding_dimension()
         self.ops = GeometricOperations()
         self.model_name = model_name
