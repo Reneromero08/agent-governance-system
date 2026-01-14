@@ -14,4 +14,5 @@ export function toggleSection(name) {
 export function toggleChat() {
     state.setChatOpen(!state.chatOpen);
     document.getElementById('chat-panel').classList.toggle('open', state.chatOpen);
+    document.getElementById('chat-toggle').classList.toggle('shifted', state.chatOpen);
 }

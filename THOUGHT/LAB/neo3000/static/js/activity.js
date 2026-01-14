@@ -18,10 +18,16 @@ export function addActivity(activity) {
         hour12: false
     });
 
+    // Include packet name (paper:chunk_id) if available
+    let displayText = activity.summary;
+    if (activity.details && activity.details.paper && activity.details.chunk_id) {
+        displayText = `${activity.details.paper}:${activity.details.chunk_id} - ${activity.summary}`;
+    }
+
     item.innerHTML = `
         <span class="activity-time">${time}</span>
         <span class="activity-badge ${activity.action}">${activity.action}</span>
-        <span class="activity-text">${activity.summary}</span>
+        <span class="activity-text">${displayText}</span>
     `;
 
     feed.insertBefore(item, feed.firstChild);

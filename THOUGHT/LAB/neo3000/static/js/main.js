@@ -21,6 +21,11 @@ import { sendMessage } from './chat.js';
 
 // ===== WEBSOCKET MESSAGE HANDLER =====
 function handleWebSocketMessage(msg) {
+    // Debug: log all messages
+    if (msg.type !== 'mind_update') {
+        console.log('[WS]', msg.type, msg.data ? Object.keys(msg.data) : 'no data');
+    }
+
     if (msg.type === 'init') {
         updateMindState(msg.data.mind);
         updateDaemonStatus(msg.data.daemon);
@@ -35,6 +40,21 @@ function handleWebSocketMessage(msg) {
         activateNode(msg.data.node_id, msg.data.activity_type);
         addToTrail(msg.data.node_id, msg.data.activity_type);
     } else if (msg.type === 'smash_hit') {
+        console.log('[SMASH_HIT]', msg.data.node_id, 'E=', msg.data.E);
+        // Also show in activity feed for visibility
+        addActivity({
+            timestamp: new Date().toISOString(),
+            action: 'smash_hit',
+            summary: `${msg.data.node_id} E=${msg.data.E?.toFixed(2)}`,
+            details: {}
+        });
+        // Direct DOM update test
+        const container = document.getElementById('smasher-current');
+        const fileEl = document.getElementById('smasher-current-file');
+        if (container && fileEl) {
+            container.classList.add('active');
+            fileEl.innerText = msg.data.node_id || 'test';
+        }
         updateCurrentFile(msg.data);
         updateSmasherStats(msg.data.rate);
         queueSmashVisualization(msg.data);

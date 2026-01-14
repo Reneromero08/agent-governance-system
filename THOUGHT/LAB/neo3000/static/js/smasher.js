@@ -75,7 +75,13 @@ export function updateCurrentFile(data) {
     const fileEl = document.getElementById('smasher-current-file');
     const eEl = document.getElementById('smasher-current-e');
 
+    if (!container || !fileEl || !eEl) {
+        console.error('[updateCurrentFile] Missing elements!', { container, fileEl, eEl });
+        return;
+    }
+
     container.classList.add('active');
+    console.log('[updateCurrentFile] Showing:', data.node_id);
 
     const nodeId = data.node_id || '';
     const parts = nodeId.split(':');

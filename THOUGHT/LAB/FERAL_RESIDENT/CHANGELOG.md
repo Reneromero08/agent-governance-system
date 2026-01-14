@@ -1,5 +1,47 @@
 # Feral Resident Changelog
 
+## [0.6.5] - 2026-01-14 - NEO3000 TUI FIX + ENCODING
+
+**Status**: NEO3000 TUI display fixed, Windows encoding issues resolved
+**Version**: production-0.6.5
+
+### Fixed
+
+#### NEO3000 TUI Activity Display
+- **Real-time activity display** in Rich terminal interface
+  - Added explicit `live.refresh()` to TUI loop for real-time updates
+  - Added `TUIState.instance_id` and `event_count` for diagnostics
+  - Updated `/api/debug/tui` endpoint to expose TUI state
+
+#### Thread-Safety for WebSocket Broadcasts
+- **Fixed asyncio calls from executor threads**
+  - Added `safe_broadcast()` helper with `run_coroutine_threadsafe()` fallback
+  - Ensures WebSocket broadcasts work correctly from background threads
+  - Prevents RuntimeError when creating tasks outside event loop
+
+#### Windows Encoding Issues
+- **Fixed UnicodeEncodeError crashes in TUI**
+  - Replaced Greek theta (θ) with 'th' in smash summaries
+  - Prevents crashes with Windows cp1252 codec when rendering special characters
+  - TUI now displays: `E=0.500 (th=0.080)` instead of `E=0.500 (θ=0.080)`
+
+#### Error Handling in Feral Daemon
+- **Improved robustness of smash operations**
+  - Wrapped `_smash_chunk_sync()` in try/except for graceful error handling
+  - Changed `resident.think()` to `store.remember()` for faster memory absorption
+  - Added error checking in `_smash_chunk()` callback
+  - Errors logged as activity events instead of crashing daemon
+
+### Added
+
+#### Model Server for Embeddings
+- **Standalone server for GeometricState embeddings**
+  - `NEO3000/model_server.py` — Runs on port 8421 to serve feral daemon
+  - `NEO3000/model_client.py` — Client for testing embeddings
+  - Offloads transformer model from main server process
+
+---
+
 ## [0.6.4] - 2026-01-12 - LIL_Q CONTEXT FIX + LOGGING
 
 **Status**: LIL_Q context retrieval fixed, logging added

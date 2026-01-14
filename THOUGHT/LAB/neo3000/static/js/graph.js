@@ -181,6 +181,17 @@ export async function initConstellation() {
             }
         });
 
+        // Use ResizeObserver to size graph to container (not window)
+        const resizeObserver = new ResizeObserver(entries => {
+            for (const entry of entries) {
+                const { width, height } = entry.contentRect;
+                if (width > 0 && height > 0) {
+                    Graph.width(width).height(height);
+                }
+            }
+        });
+        resizeObserver.observe(container);
+
         console.log(`Constellation initialized with ${nodes.length} nodes`);
 
     } catch (e) {

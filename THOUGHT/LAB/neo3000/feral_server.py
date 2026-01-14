@@ -13,10 +13,16 @@ Run with: python feral_server.py
 Open: http://localhost:8420
 """
 
+# Suppress transformers/tokenizers output BEFORE any imports
+import os
+os.environ['TRANSFORMERS_VERBOSITY'] = 'error'
+os.environ['TOKENIZERS_PARALLELISM'] = 'false'
+os.environ['HF_HUB_DISABLE_PROGRESS_BARS'] = '1'
+os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = '1'
+
 import asyncio
 import json
 import sys
-import os
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from contextlib import asynccontextmanager
@@ -42,8 +48,41 @@ except ImportError:
     print("ERROR: FastAPI not installed. Run: pip install fastapi uvicorn websockets")
     sys.exit(1)
 
-from feral_daemon import FeralDaemon, ActivityEvent
-from vector_brain import VectorResident
+try:
+    from rich.console import Console, Group
+    from rich.panel import Panel
+    from rich.text import Text
+    from rich.table import Table
+    from rich.layout import Layout
+    from rich.live import Live
+    from rich.progress import Progress, SpinnerColumn, TextColumn, BarColumn
+    from rich.align import Align
+    from rich import box
+    RICH_AVAILABLE = True
+except ImportError:
+    RICH_AVAILABLE = False
+
+# Lazy imports - these load transformers, so import inside functions AFTER TUI starts
+FeralDaemon = None
+ActivityEvent = None
+VectorResident = None
+
+def _lazy_import_feral():
+    global FeralDaemon, ActivityEvent, VectorResident
+    if FeralDaemon is None:
+        # Suppress all warnings during import
+        import warnings
+        import logging
+        warnings.filterwarnings('ignore')
+        logging.getLogger('transformers').setLevel(logging.ERROR)
+        logging.getLogger('sentence_transformers').setLevel(logging.ERROR)
+        logging.getLogger('huggingface_hub').setLevel(logging.ERROR)
+
+        from feral_daemon import FeralDaemon as FD, ActivityEvent as AE
+        from vector_brain import VectorResident as VR
+        FeralDaemon = FD
+        ActivityEvent = AE
+        VectorResident = VR
 
 # Optional: CORTEX query module for constellation visualization
 try:
@@ -51,7 +90,6 @@ try:
     CORTEX_AVAILABLE = True
 except ImportError:
     CORTEX_AVAILABLE = False
-    print("WARNING: CORTEX query module not available. Constellation will be disabled.")
 
 
 # =============================================================================
@@ -146,7 +184,6 @@ class HotReloadWatcher:
         self._scan_files()  # Initial scan
         self._thread = threading.Thread(target=self._watch_loop, daemon=True)
         self._thread.start()
-        print(f"[HOT RELOAD] Watching {self.watch_dir} for changes...")
 
     def stop(self):
         self.running = False
@@ -174,7 +211,6 @@ class HotReloadWatcher:
                         path_str = str(path)
                         if path_str in self.file_mtimes:
                             if mtime > self.file_mtimes[path_str]:
-                                print(f"[HOT RELOAD] Changed: {path.name}")
                                 changed = True
                         self.file_mtimes[path_str] = mtime
                     except Exception:
@@ -194,30 +230,61 @@ class HotReloadWatcher:
 
 manager = ConnectionManager()
 hot_reload_watcher: Optional[HotReloadWatcher] = None
-daemon: Optional[FeralDaemon] = None
-resident: Optional[VectorResident] = None
+daemon = None  # Type: FeralDaemon (lazy loaded)
+resident = None  # Type: VectorResident (lazy loaded)
+tui_state = None  # TUI state for activity updates
 
 
-def get_resident() -> VectorResident:
+def get_resident():
     """Get or create the resident instance"""
     global resident
+    _lazy_import_feral()  # Load transformers NOW
     if resident is None:
         db_path = REPO_ROOT / "THOUGHT" / "LAB" / "FERAL_RESIDENT" / "data" / "feral_eternal.db"
         db_path.parent.mkdir(exist_ok=True)
-        resident = VectorResident(thread_id="eternal", db_path=str(db_path))
+        # Skip paper loading on startup - papers are in cassettes and loaded on demand
+        resident = VectorResident(thread_id="eternal", db_path=str(db_path), load_papers=False)
     return resident
 
 
-def get_daemon() -> FeralDaemon:
+def get_daemon():
     """Get or create the daemon instance"""
     global daemon
+    _lazy_import_feral()  # Load transformers NOW
     if daemon is None:
         daemon = FeralDaemon(resident=get_resident(), thread_id="eternal")
 
-        # Add WebSocket callback
+        # Add WebSocket callback - uses thread-safe broadcast scheduling
         def on_activity(event: ActivityEvent):
+            try:
+                # Update TUI if available (thread-safe - just appending to list)
+                if tui_state is not None:
+                    paper = event.details.get('paper', '')
+                    chunk_id = event.details.get('chunk_id', '')
+                    if paper and chunk_id:
+                        tui_state.add_activity(f"[{event.action}] {paper}:{chunk_id} - {event.summary[:30]}")
+                    else:
+                        tui_state.add_activity(f"[{event.action}] {event.summary[:50]}")
+            except Exception as e:
+                if tui_state is not None:
+                    tui_state.add_activity(f"[ERROR] {str(e)[:40]}")
+
+            # Thread-safe broadcast helper
+            def safe_broadcast(msg):
+                try:
+                    loop = asyncio.get_running_loop()
+                    asyncio.create_task(manager.broadcast(msg))
+                except RuntimeError:
+                    # No running loop in this thread - use run_coroutine_threadsafe
+                    try:
+                        loop = asyncio.get_event_loop()
+                        if loop.is_running():
+                            asyncio.run_coroutine_threadsafe(manager.broadcast(msg), loop)
+                    except Exception:
+                        pass  # Best effort - ignore broadcast failures
+
             # Broadcast activity to activity log
-            asyncio.create_task(manager.broadcast({
+            safe_broadcast({
                 'type': 'activity',
                 'data': {
                     'timestamp': event.timestamp,
@@ -225,38 +292,33 @@ def get_daemon() -> FeralDaemon:
                     'summary': event.summary,
                     'details': event.details
                 }
-            }))
+            })
 
-            # NEW: Broadcast constellation events for dynamic 3D visualization
+            # Broadcast constellation events for dynamic 3D visualization
             if event.details.get('chunk_id'):
                 chunk_id = event.details['chunk_id']
                 paper = event.details.get('paper', 'papers')
                 heading = event.details.get('heading', '')[:25] if event.details.get('heading') else ''
                 is_new = event.details.get('is_new_node', False)
-
-                # Use full IDs if provided (smasher sends these), otherwise construct
                 node_id = event.details.get('full_node_id') or f"chunk:{paper}:{chunk_id}"
-                # Use SEMANTIC similar_to for positioning (not sequential source)
                 similar_to = event.details.get('similar_to')
                 similar_E = event.details.get('similar_E', 0)
 
-                # Particle Smasher mode: lightweight flash events (no camera follow)
                 if event.action == 'smash':
-                    asyncio.create_task(manager.broadcast({
+                    safe_broadcast({
                         'type': 'smash_hit',
                         'data': {
                             'node_id': node_id,
                             'E': event.details.get('E', 0),
                             'gate_open': event.details.get('gate_open', False),
                             'is_new_node': is_new,
-                            'similar_to': similar_to,  # Semantic anchor for positioning
-                            'similar_E': similar_E,     # How similar (for edge weight)
+                            'similar_to': similar_to,
+                            'similar_E': similar_E,
                             'rate': event.details.get('rate', 0)
                         }
-                    }))
+                    })
                 elif is_new:
-                    # New node discovered - spawn animation
-                    asyncio.create_task(manager.broadcast({
+                    safe_broadcast({
                         'type': 'node_discovered',
                         'data': {
                             'node_id': node_id,
@@ -265,17 +327,16 @@ def get_daemon() -> FeralDaemon:
                             'activity_type': event.action,
                             'paper': paper
                         }
-                    }))
+                    })
                 else:
-                    # Existing node activated - highlight
-                    asyncio.create_task(manager.broadcast({
+                    safe_broadcast({
                         'type': 'node_activated',
                         'data': {
                             'node_id': node_id,
                             'similar_to': similar_to,
                             'activity_type': event.action
                         }
-                    }))
+                    })
 
         daemon.add_callback(on_activity)
 
@@ -291,9 +352,6 @@ async def lifespan(app: FastAPI):
     """Startup and shutdown events"""
     global hot_reload_watcher
 
-    print(f"[FERAL] Starting server...")
-    print(f"[FERAL] Dashboard: http://localhost:8420")
-
     # Initialize resident and daemon
     get_resident()
     get_daemon()
@@ -306,7 +364,6 @@ async def lifespan(app: FastAPI):
     yield
 
     # Shutdown
-    print(f"[FERAL] Shutting down...")
     if hot_reload_watcher:
         hot_reload_watcher.stop()
     if daemon and daemon.running:
@@ -529,6 +586,20 @@ async def get_activity(limit: int = 50):
             }
             for a in activities
         ]
+    }
+
+
+@app.get("/api/debug/tui")
+async def get_tui_debug():
+    """Debug: get TUI state"""
+    return {
+        'ok': True,
+        'tui_state_exists': tui_state is not None,
+        'instance_id': tui_state.instance_id if tui_state else None,
+        'event_count': tui_state.event_count if tui_state else 0,
+        'activity_count': len(tui_state.activity) if tui_state else 0,
+        'activity': list(tui_state.activity) if tui_state else [],
+        'ws_connections': len(manager.active_connections)
     }
 
 
@@ -856,21 +927,203 @@ async def websocket_endpoint(websocket: WebSocket):
 # Main
 # =============================================================================
 
-def main():
-    """Run the server"""
-    print("=" * 60)
-    print("  FERAL DASHBOARD SERVER")
-    print("=" * 60)
-    print(f"  URL: http://localhost:8420")
-    print(f"  Static: {STATIC_DIR}")
-    print("=" * 60)
+class TUIState:
+    """Holds TUI state for the static display"""
+    _instance_counter = 0
 
-    uvicorn.run(
-        app,
-        host="0.0.0.0",
-        port=8420,
-        log_level="info"
+    def __init__(self):
+        TUIState._instance_counter += 1
+        self.instance_id = TUIState._instance_counter
+        self.activity: list[str] = []
+        self.server_status = "Initializing..."
+        self.max_activity = 20
+        self.event_count = 0  # Track total events received
+
+    def add_activity(self, msg: str):
+        self.event_count += 1
+        self.activity.append(msg)
+        if len(self.activity) > self.max_activity:
+            self.activity.pop(0)
+
+    def set_server_status(self, status: str):
+        self.server_status = status
+
+
+def make_tui(state: TUIState):
+    """Create full-screen static TUI layout - all green on black"""
+    # Banner (ASCII-safe)
+    banner = Text()
+    banner.append("FERAL\n", style="bold green")
+    banner.append("Geometric Cognition Engine\n", style="green")
+    banner.append("v2.1.0-q46", style="dim green")
+
+    banner_panel = Panel(
+        banner,
+        border_style="green",
+        box=box.SQUARE,
+        padding=(0, 2)
     )
+
+    # Server Info table
+    info_table = Table(box=None, show_header=False, padding=(0, 1))
+    info_table.add_column("Key", style="dim green")
+    info_table.add_column("Value", style="green")
+    info_table.add_row("Dashboard", "http://localhost:8420")
+    info_table.add_row("Static Dir", str(STATIC_DIR.relative_to(REPO_ROOT)))
+    info_table.add_row("Database", "FERAL_RESIDENT/data/feral_eternal.db")
+    info_table.add_row("Hot Reload", "Enabled")
+    info_table.add_row("Status", state.server_status)
+    info_table.add_row("Events", str(state.event_count))
+    info_table.add_row("Instance", str(state.instance_id))
+    info_table.add_row("Exit", "Ctrl+C")
+
+    info_panel = Panel(
+        info_table,
+        title="[green]Server Info[/]",
+        border_style="green",
+        box=box.SQUARE
+    )
+
+    # Activity panel (packets being smashed)
+    activity_text = Text()
+    for line in state.activity:
+        activity_text.append(f"  {line}\n", style="green")
+    if not state.activity:
+        activity_text.append("  Waiting for activity...\n", style="dim green")
+
+    activity_panel = Panel(
+        activity_text,
+        title="[green]Activity[/]",
+        border_style="green",
+        box=box.SQUARE
+    )
+
+    # Build two-column layout
+    layout = Layout()
+
+    # Main split: left column, right column
+    layout.split_row(
+        Layout(name="left", ratio=1),
+        Layout(name="right", ratio=2)
+    )
+
+    # Left column: banner on top, info below
+    layout["left"].split_column(
+        Layout(name="banner"),
+        Layout(name="info")
+    )
+
+    # Right column: activity (full height)
+    layout["right"].update(activity_panel)
+
+    # Update left sections
+    layout["left"]["banner"].update(banner_panel)
+    layout["left"]["info"].update(info_panel)
+
+    return layout
+
+
+def main():
+    """Run the server with full-screen static TUI"""
+    global tui_state
+    import io
+    import os
+    import signal
+    import time
+
+    if not RICH_AVAILABLE:
+        uvicorn.run(app, host="0.0.0.0", port=8420, log_level="error")
+        return
+
+    # TUI state (global so activity callbacks can update it)
+    tui = TUIState()
+    tui_state = tui
+
+    # Save ORIGINAL stdout/stderr before ANY redirects
+    original_stdout = sys.stdout
+    original_stderr = sys.stderr
+
+    # Redirect stdout/stderr - suppress all library output
+    class NullIO(io.StringIO):
+        def write(self, s):
+            return len(s)
+        def flush(self):
+            pass
+
+    # Redirect EVERYTHING
+    sys.stdout = NullIO()
+    sys.stderr = NullIO()
+    sys.__stdout__ = NullIO()
+    sys.__stderr__ = NullIO()
+
+    # Create console with ORIGINAL stdout so TUI still renders
+    console = Console(file=original_stdout, force_terminal=True)
+
+    # Clear screen immediately
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+    with Live(make_tui(tui), console=console, refresh_per_second=10, screen=True) as live:
+        try:
+            # Force render FIRST
+            live.refresh()
+            time.sleep(0.1)
+
+            # Check if model server is running (fast boot!)
+            tui.set_server_status("Initializing...")
+            try:
+                import requests
+                resp = requests.get("http://localhost:8421/health", timeout=1)
+                model_server_running = resp.status_code == 200
+            except:
+                model_server_running = False
+
+            if model_server_running:
+                tui.add_activity("[init] Model server detected (fast boot!)")
+            else:
+                tui.add_activity("[init] Loading transformers locally...")
+            live.update(make_tui(tui))
+            live.refresh()
+
+            get_resident()
+
+            tui.add_activity("[init] Creating FeralDaemon...")
+            live.update(make_tui(tui))
+            live.refresh()
+            get_daemon()
+
+            tui.add_activity("[init] Starting uvicorn...")
+            live.update(make_tui(tui))
+            live.refresh()
+
+            # Start server
+            server_thread = threading.Thread(
+                target=uvicorn.run,
+                kwargs={"app": app, "host": "0.0.0.0", "port": 8420, "log_level": "critical"},
+                daemon=True
+            )
+            server_thread.start()
+
+            # Clear init messages, show ready state
+            tui.activity = []
+            tui.set_server_status("Running")
+            live.update(make_tui(tui))
+
+            # Keep TUI alive - refresh every 0.5s to show activity updates
+            while True:
+                time.sleep(0.5)
+                live.update(make_tui(tui))
+                live.refresh()
+
+        except KeyboardInterrupt:
+            tui.set_server_status("Shutting down...")
+            live.update(make_tui(tui))
+            time.sleep(0.5)
+        finally:
+            # Restore original streams
+            sys.stdout = original_stdout
+            sys.stderr = original_stderr
+            sys.__stdout__ = original_stdout
+            sys.__stderr__ = original_stderr
 
 
 if __name__ == "__main__":

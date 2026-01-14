@@ -456,7 +456,16 @@ class FeralDaemon:
         """
         try:
             paper_chunks = self.resident.store.get_paper_chunks()
-        except Exception:
+            if paper_chunks:
+                sample = paper_chunks[0]
+                self._log_activity('smasher', f"Found {len(paper_chunks)} chunks (first: {sample.get('paper_id')}:{sample.get('chunk_id')})")
+            else:
+                # Check for debug info
+                err = getattr(self.resident.store, '_last_error', 'Unknown')
+                self._log_activity('smasher', f"No chunks found: {err}")
+        except Exception as e:
+            import traceback
+            self._log_activity('smasher', f"Error getting chunks: {e}")
             paper_chunks = []
 
         if not paper_chunks:
@@ -513,6 +522,63 @@ class FeralDaemon:
         self.smasher_config.enabled = False
         self._smasher_task = None
 
+    def _smash_chunk_sync(self, chunk: Dict) -> Dict:
+        """
+        Synchronous chunk processing - runs in executor to avoid blocking.
+        Returns dict with all computed values.
+        """
+        chunk_id = chunk['chunk_id']
+        chunk_text = chunk.get('content', '')[:500]
+        paper_name = chunk.get('paper_id', 'unknown')
+        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+
+        try:
+            # Embed chunk
+            chunk_state = self.resident.store.embed(chunk_text)
+            mind_state = self.resident.store.get_mind_state()
+            E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
+
+            # Find similar chunks (skip for speed - positioning not critical)
+            similar_to = None
+            similar_E = 0.0
+
+            # Gate decision
+            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+            threshold = get_dynamic_threshold(n_memories)
+            gate_open = E > threshold
+
+            # Absorb if gate open - use remember() for fast absorption, not think() which invokes LLM
+            if gate_open:
+                self.resident.store.remember(f"[Paper: {paper_name}] {chunk_text}")
+
+            return {
+                'chunk_id': chunk_id,
+                'paper_name': paper_name,
+                'full_node_id': full_node_id,
+                'E': E,
+                'threshold': threshold,
+                'gate_open': gate_open,
+                'n_memories': n_memories,
+                'similar_to': similar_to,
+                'similar_E': similar_E,
+                'chunk_state': chunk_state
+            }
+        except Exception as e:
+            # Return error state so we can log it
+            return {
+                'chunk_id': chunk_id,
+                'paper_name': paper_name,
+                'full_node_id': full_node_id,
+                'E': 0.0,
+                'threshold': 0.15,
+                'gate_open': False,
+                'n_memories': 0,
+                'similar_to': None,
+                'similar_E': 0.0,
+                'chunk_state': None,
+                'error': str(e)
+            }
+
     async def _smash_chunk(self, chunk: Dict):
         """
         Process a single chunk in smasher mode.
@@ -521,48 +587,37 @@ class FeralDaemon:
         Compares to previously smashed chunks using cached embeddings.
         """
         chunk_id = chunk['chunk_id']
-        chunk_text = chunk.get('content', '')[:500]
         paper_name = chunk.get('paper_id', 'unknown')
-
-        # Build full node_id for consistent tracking
         full_node_id = f"chunk:{paper_name}:{chunk_id}"
 
         # Track discovery using full node_id
         is_new_node = full_node_id not in self._discovered_chunks
         self._discovered_chunks.add(full_node_id)
 
-        # Q44 Born Rule Check - embed the chunk as GeometricState
-        chunk_state = self.resident.store.embed(chunk_text)
-        mind_state = self.resident.store.get_mind_state()
-        E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
+        # Run ALL blocking operations in executor
+        loop = asyncio.get_event_loop()
+        result = await loop.run_in_executor(None, self._smash_chunk_sync, chunk)
 
-        # Find SEMANTICALLY SIMILAR previously known content to anchor to
-        # Use E-gating to find resonance using the current chunk as a query
-        # This "locks on" to relevant existing knowledge instead of random drifting
-        resonant_context = self.resident.store.find_paper_chunks(
-            chunk_state, k=1, min_E=0.1
-        )
-        
-        similar_to = None
-        similar_E = 0.0
-        
-        if resonant_context:
-            best_match = resonant_context[0]
-            # Use chunk_id to match the full_node_id format (chunk:paper:chunk_id)
-            similar_to = f"chunk:{best_match.get('paper_id')}:{best_match.get('chunk_id')}"
-            similar_E = best_match.get('E', 0.0)
+        # Check for error
+        if 'error' in result:
+            self._log_activity('error', f"Smash error: {result['error'][:50]}",
+                              chunk_id=chunk_id, paper=paper_name)
+            return
 
-        # Cache this chunk's GeometricState for future E_with lookups
-        self._chunk_states[full_node_id] = chunk_state
+        # Extract results
+        E = result['E']
+        threshold = result['threshold']
+        gate_open = result['gate_open']
+        n_memories = result['n_memories']
+        similar_to = result['similar_to']
+        similar_E = result['similar_E']
 
-        # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
-        n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
-        threshold = get_dynamic_threshold(n_memories)
-        gate_open = E > threshold
+        # Cache chunk state (may be None on error)
+        if result.get('chunk_state') is not None:
+            self._chunk_states[full_node_id] = result['chunk_state']
 
+        # Update stats
         if gate_open:
-            # Absorb
-            self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
             self.smasher_stats.chunks_absorbed += 1
         else:
             self.smasher_stats.chunks_rejected += 1
@@ -572,19 +627,21 @@ class FeralDaemon:
         self.smasher_stats.last_chunk_time = time.time()
 
         # Emit event with SEMANTIC anchor (most similar previous chunk)
+        # Convert numpy types to Python types for JSON serialization
+        # Use 'th' instead of θ to avoid Windows cp1252 encoding errors
         self._log_activity('smash',
-                          f"E={E:.3f} (θ={threshold:.3f}) {'ABSORBED' if gate_open else 'REJECTED'}",
+                          f"E={E:.3f} (th={threshold:.3f}) {'ABSORBED' if gate_open else 'REJECTED'}",
                           chunk_id=chunk_id,
                           paper=paper_name,
                           full_node_id=full_node_id,
                           similar_to=similar_to,  # Most similar previous chunk
-                          similar_E=similar_E,     # Cosine similarity score
-                          E=E,
-                          threshold=threshold,
-                          n_memories=n_memories,
-                          gate_open=gate_open,
-                          is_new_node=is_new_node,
-                          rate=self.smasher_stats.chunks_per_second)
+                          similar_E=float(similar_E) if similar_E else 0.0,
+                          E=float(E),
+                          threshold=float(threshold),
+                          n_memories=int(n_memories),
+                          gate_open=bool(gate_open),
+                          is_new_node=bool(is_new_node),
+                          rate=float(self.smasher_stats.chunks_per_second))
 
     # =========================================================================
     # Lifecycle (Async for Server)
