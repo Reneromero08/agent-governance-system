@@ -31,21 +31,61 @@ export function applySliderRange(sliderId, config, valueId = null) {
     }
 }
 
-export function saveSettings() {
-    const settings = {
-        smasher_delay_ms: state.smasherConfig.delay_ms,
-        smasher_batch_size: state.smasherConfig.batch_size,
-        similarity_threshold: state.similarityThreshold,
-        show_similarity_links: state.showSimilarityLinks,
-        static_camera: state.staticCameraMode,
-        fog_density: state.Graph ? parseFloat(document.getElementById('value-fog').innerText) : 0.003,
-        center_strength: state.Graph ? parseFloat(document.getElementById('value-center').innerText) : 0.05,
-        repel_strength: state.Graph ? parseFloat(document.getElementById('value-repel').innerText) : -120,
-        link_strength: state.Graph ? parseFloat(document.getElementById('value-link-strength').innerText) : 0.5,
-        link_distance: state.Graph ? parseFloat(document.getElementById('value-link-distance').innerText) : 100
+// Track last saved values to avoid unnecessary writes
+let _lastSavedConfig = null;
+
+export async function saveSettings() {
+    // Read from state (updated by updateFog/updateGraphForce when user changes sliders)
+    const smasherSpeed = state.smasherConfig.delay_ms;
+    const smasherBatch = state.smasherConfig.batch_size;
+    const simThreshold = state.similarityThreshold;
+    const fog = state.graphSettings.fog;
+    const center = state.graphSettings.center;
+    const repel = state.graphSettings.repel;
+    const linkStrength = state.graphSettings.linkStrength;
+    const linkDistance = state.graphSettings.linkDistance;
+
+    console.log('[SETTINGS] Reading from state:', {
+        fog, center, repel, linkStrength, linkDistance
+    });
+
+    // Build config update (matches config.json structure)
+    const configUpdate = {
+        smasher: {
+            delay_ms: smasherSpeed,
+            batch_size: smasherBatch
+        },
+        ui: {
+            sliders: {
+                speed: { default: smasherSpeed },
+                batch: { default: smasherBatch },
+                sim_threshold: { default: simThreshold },
+                fog: { default: fog },
+                center: { default: center },
+                repel: { default: repel },
+                link_strength: { default: linkStrength },
+                link_distance: { default: linkDistance }
+            }
+        }
     };
 
-    localStorage.setItem('feral_settings', JSON.stringify(settings));
+    // Only save if values changed (compare as JSON string)
+    const configStr = JSON.stringify(configUpdate);
+    if (configStr === _lastSavedConfig) {
+        return; // No changes
+    }
+
+    // Save to config.json via API
+    try {
+        const result = await api('/config', {
+            method: 'POST',
+            body: configStr
+        });
+        _lastSavedConfig = configStr;
+        console.log('[SETTINGS] Saved to config.json:', { fog, center, repel, ok: result.ok });
+    } catch (e) {
+        console.error('[SETTINGS] Failed to save config.json:', e);
+    }
 }
 
 export async function loadSettings() {
@@ -54,6 +94,42 @@ export async function loadSettings() {
         if (configRes.ok && configRes.config) {
             const cfg = configRes.config;
 
+            // Apply slider ranges first (min/max/step)
+            if (cfg.ui && cfg.ui.sliders) {
+                const s = cfg.ui.sliders;
+
+                applySliderRange('slider-smasher-speed', s.speed, 'value-smasher-speed');
+                applySliderRange('slider-smasher-batch', s.batch, 'value-smasher-batch');
+                applySliderRange('slider-sim-threshold', s.sim_threshold, 'value-sim-threshold');
+                applySliderRange('slider-fog', s.fog, 'value-fog');
+                applySliderRange('slider-center', s.center, 'value-center');
+                applySliderRange('slider-repel', s.repel, 'value-repel');
+                applySliderRange('slider-link-strength', s.link_strength, 'value-link-strength');
+                applySliderRange('slider-link-distance', s.link_distance, 'value-link-distance');
+
+                console.log('[SETTINGS] Loaded graph defaults:', {
+                    fog: s.fog?.default,
+                    center: s.center?.default,
+                    repel: s.repel?.default,
+                    linkStrength: s.link_strength?.default,
+                    linkDistance: s.link_distance?.default
+                });
+
+                // Apply defaults to state (for both similarity and graph settings)
+                if (s.sim_threshold?.default !== undefined) {
+                    state.setSimilarityThreshold(s.sim_threshold.default);
+                }
+                // Sync graph settings to state
+                state.setGraphSettings({
+                    fog: s.fog?.default ?? 0.0006,
+                    center: s.center?.default ?? 0.05,
+                    repel: s.repel?.default ?? 120,
+                    linkStrength: s.link_strength?.default ?? 0.5,
+                    linkDistance: s.link_distance?.default ?? 100
+                });
+            }
+
+            // Override with actual smasher config (these are the live values)
             if (cfg.smasher) {
                 if (cfg.smasher.delay_ms !== undefined) {
                     state.smasherConfig.delay_ms = cfg.smasher.delay_ms;
@@ -67,24 +143,6 @@ export async function loadSettings() {
                 }
             }
 
-            if (cfg.ui && cfg.ui.sliders) {
-                const s = cfg.ui.sliders;
-                localStorage.removeItem('feral_settings');
-
-                applySliderRange('slider-smasher-speed', s.speed, 'value-smasher-speed');
-                applySliderRange('slider-smasher-batch', s.batch, 'value-smasher-batch');
-                applySliderRange('slider-sim-threshold', s.sim_threshold, 'value-sim-threshold');
-                applySliderRange('slider-fog', s.fog, 'value-fog');
-                applySliderRange('slider-center', s.center, 'value-center');
-                applySliderRange('slider-repel', s.repel, 'value-repel');
-                applySliderRange('slider-link-strength', s.link_strength, 'value-link-strength');
-                applySliderRange('slider-link-distance', s.link_distance, 'value-link-distance');
-
-                if (s.sim_threshold?.default !== undefined) {
-                    state.setSimilarityThreshold(s.sim_threshold.default);
-                }
-            }
-
             console.log('[SETTINGS] Loaded config from config.json');
         }
     } catch (e) {
@@ -95,11 +153,8 @@ export async function loadSettings() {
 export function applyGraphSettings() {
     if (!state.Graph) return;
 
-    const fog = parseFloat(document.getElementById('slider-fog').value);
-    const center = parseFloat(document.getElementById('slider-center').value);
-    const repel = parseFloat(document.getElementById('slider-repel').value);
-    const linkStrength = parseFloat(document.getElementById('slider-link-strength').value);
-    const linkDistance = parseFloat(document.getElementById('slider-link-distance').value);
+    // Read from state (set by loadSettings)
+    const { fog, center, repel, linkStrength, linkDistance } = state.graphSettings;
 
     if (state.Graph.scene().fog) {
         state.Graph.scene().fog.density = fog;
@@ -116,13 +171,21 @@ export function applyGraphSettings() {
     state.Graph.d3Force('charge').strength(-repel);
     state.Graph.d3Force('center').strength(center);
 
+    // Update slider positions to match state
+    document.getElementById('slider-fog').value = fog;
+    document.getElementById('slider-center').value = center;
+    document.getElementById('slider-repel').value = repel;
+    document.getElementById('slider-link-strength').value = linkStrength;
+    document.getElementById('slider-link-distance').value = linkDistance;
+
+    // Update display values
     document.getElementById('value-fog').innerText = fog.toFixed(4);
     document.getElementById('value-center').innerText = center.toFixed(2);
     document.getElementById('value-repel').innerText = -repel;
     document.getElementById('value-link-strength').innerText = linkStrength.toFixed(2);
     document.getElementById('value-link-distance').innerText = linkDistance;
 
-    console.log('[SETTINGS] Applied graph settings: fog=' + fog + ', center=' + center + ', repel=' + repel);
+    console.log('[SETTINGS] Applied graph settings from state: fog=' + fog + ', center=' + center + ', repel=' + repel);
 }
 
 // ===== SIMILARITY CONTROLS =====

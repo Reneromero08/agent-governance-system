@@ -381,9 +381,19 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Static files
+# Static files with no-cache for JS (dev mode)
 STATIC_DIR = Path(__file__).parent / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+@app.middleware("http")
+async def add_no_cache_header(request, call_next):
+    """Disable caching for JS files during development."""
+    response = await call_next(request)
+    if request.url.path.endswith('.js'):
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+    return response
 
 
 # =============================================================================

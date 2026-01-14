@@ -102,6 +102,7 @@ window.updateFog = updateFog;
 window.updateGraphForce = updateGraphForce;
 window.resetGraphForces = resetGraphForces;
 window.sendMessage = sendMessage;
+window.saveSettings = saveSettings;
 
 // Start on load
 window.onload = init;

@@ -10,6 +10,15 @@ export let showSimilarityLinks = true;
 export let similarityThreshold = 0.35;
 export let allLinks = [];
 
+// Graph settings (persisted to config.json)
+export let graphSettings = {
+    fog: 0.0006,
+    center: 0.05,
+    repel: 120,
+    linkStrength: 0.5,
+    linkDistance: 100
+};
+
 // Particle Smasher state
 export let smasherActive = false;
 export let smasherConfig = { delay_ms: 100, batch_size: 10 };
@@ -57,3 +66,5 @@ export function setSmashQueue(val) { smashQueue = val; }
 export function setSmashRafPending(val) { smashRafPending = val; }
 export function setGraph(val) { Graph = val; }
 export function setTrailLine(val) { trailLine = val; }
+export function setGraphSettings(val) { graphSettings = { ...graphSettings, ...val }; }
+export function updateGraphSetting(key, val) { graphSettings[key] = val; }

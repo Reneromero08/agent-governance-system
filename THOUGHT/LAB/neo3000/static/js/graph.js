@@ -126,16 +126,20 @@ export async function initConstellation() {
 
         state.setGraph(Graph);
 
+        // Read from state (set by loadSettings) instead of DOM sliders
+        const { linkDistance, linkStrength, repel, center } = state.graphSettings;
+        console.log('[CONSTELLATION] Init forces from state:', { linkDistance, linkStrength, repel, center });
+
         window.graphForces = {
-            linkDistance: 100,
-            linkStrength: 0.5,
-            chargeStrength: -120,
-            centerStrength: 0.05
+            linkDistance: linkDistance,
+            linkStrength: linkStrength,
+            chargeStrength: -repel,
+            centerStrength: center
         };
 
-        Graph.d3Force('link').distance(100).strength(0.5);
-        Graph.d3Force('charge').strength(-120).distanceMax(300);
-        Graph.d3Force('center').strength(0.05);
+        Graph.d3Force('link').distance(linkDistance).strength(linkStrength);
+        Graph.d3Force('charge').strength(-repel).distanceMax(300);
+        Graph.d3Force('center').strength(center);
 
         Graph.nodeThreeObject(node => {
             const group = new THREE.Group();
@@ -170,7 +174,10 @@ export async function initConstellation() {
         const pointLight = new THREE.PointLight(0x00ff41, 1, 500);
         pointLight.position.set(0, 100, 100);
         scene.add(pointLight);
-        scene.fog = new THREE.FogExp2(0x000000, 0.003);
+        // Read fog from state (set by loadSettings)
+        const fogDensity = state.graphSettings.fog;
+        console.log('[CONSTELLATION] Init fog from state:', fogDensity);
+        scene.fog = new THREE.FogExp2(0x000000, fogDensity);
 
         Graph.cameraPosition({ x: 0, y: 0, z: 400 }, { x: 0, y: 0, z: 0 }, 0);
 
@@ -428,7 +435,9 @@ export function updateFog(value) {
     if (!state.Graph) return;
     const density = parseFloat(value);
     state.Graph.scene().fog.density = density;
+    state.updateGraphSetting('fog', density);  // Track in state
     document.getElementById('value-fog').innerText = density.toFixed(4);
+    window.saveSettings?.();  // Persist immediately
 }
 
 // ===== GRAPH FORCE CONTROLS =====
@@ -440,26 +449,31 @@ export function updateGraphForce(force, value) {
         case 'center':
             window.graphForces.centerStrength = numValue;
             state.Graph.d3Force('center').strength(numValue);
+            state.updateGraphSetting('center', numValue);  // Track in state
             document.getElementById('value-center').innerText = numValue.toFixed(2);
             break;
         case 'repel':
             const chargeStrength = -numValue;
             window.graphForces.chargeStrength = chargeStrength;
             state.Graph.d3Force('charge').strength(chargeStrength);
+            state.updateGraphSetting('repel', numValue);  // Track in state (positive value)
             document.getElementById('value-repel').innerText = chargeStrength;
             break;
         case 'linkStrength':
             window.graphForces.linkStrength = numValue;
             state.Graph.d3Force('link').strength(numValue);
+            state.updateGraphSetting('linkStrength', numValue);  // Track in state
             document.getElementById('value-link-strength').innerText = numValue.toFixed(2);
             break;
         case 'linkDistance':
             window.graphForces.linkDistance = numValue;
             state.Graph.d3Force('link').distance(numValue);
+            state.updateGraphSetting('linkDistance', numValue);  // Track in state
             document.getElementById('value-link-distance').innerText = numValue;
             break;
     }
     state.Graph.d3ReheatSimulation();
+    window.saveSettings?.();  // Persist immediately
 }
 
 export function resetGraphForces() {
