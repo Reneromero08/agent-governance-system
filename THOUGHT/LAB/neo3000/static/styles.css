@@ -577,38 +577,39 @@
             color: var(--text-muted);
         }
 
-        /* ===== CHAT SLIDE-OUT ===== */
-        .chat-toggle {
-            position: fixed;
-            bottom: calc(var(--activity-height) + 20px);
-            right: 20px;
-            width: 48px;
-            height: 48px;
-            background: var(--bg-primary);
+        .msg-toggle-container {
+            margin-left: auto;
+            padding-left: 16px;
+        }
+
+        .msg-toggle {
+            width: 32px;
+            height: 32px;
+            background: transparent;
             border: none;
-            border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            z-index: 200;
-            transition: right 0.3s ease;
+            border-radius: 4px;
+            transition: background 0.2s;
         }
 
-        .chat-toggle.shifted {
-            right: 420px;
+        .msg-toggle:hover {
+            background: var(--bg-tertiary);
         }
 
-        .chat-toggle:hover {
-            background: var(--bg-primary);
+        .msg-toggle svg {
+            width: 20px;
+            height: 20px;
+            fill: var(--text-secondary);
         }
 
-        .chat-toggle svg {
-            width: 24px;
-            height: 24px;
+        .msg-toggle:hover svg {
             fill: var(--accent);
         }
 
+        /* ===== CHAT SLIDE-OUT ===== */
         .chat-panel {
             position: fixed;
             top: 0;
@@ -629,7 +630,6 @@
         .chat-header {
             display: flex;
             align-items: center;
-            justify-content: space-between;
             padding: 16px;
             border-bottom: 1px solid var(--border);
         }
@@ -637,25 +637,6 @@
         .chat-title {
             font-size: 14px;
             font-weight: 600;
-        }
-
-        .chat-close {
-            width: 28px;
-            height: 28px;
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            cursor: pointer;
-            border-radius: 4px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-
-        .chat-close:hover {
-            background: var(--bg-tertiary);
-            color: var(--text-primary);
         }
 
         .chat-messages {

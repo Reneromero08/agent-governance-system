@@ -1,5 +1,17 @@
 # Feral Resident Changelog
 
+## [Unreleased]
+
+### Changed
+
+#### Msg Icon to Status Bar
+- Moved msg icon from floating button to bottom right of activity bar
+- Removed X button from chat panel header
+- Chat now toggles via icon click (open and close same way)
+- Added `.msg-toggle-container` and `.msg-toggle` styles
+
+---
+
 ## [0.6.6] - 2026-01-14 - CONSTELLATION SIMILARITY FIX
 
 **Status**: Fixed similarity connections in NEO3000 constellation graph
