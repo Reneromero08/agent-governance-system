@@ -470,13 +470,25 @@ async def get_constellation(max_nodes: int = 500):
 
         with sqlite3.connect(str(db_path)) as conn:
             # Get paper chunks from receipts (paper_load operation)
+            # Sample across ALL papers by using ROW_NUMBER to get N chunks per paper
+            chunks_per_paper = max(3, max_nodes // 100)  # At least 3 chunks per paper
             cursor = conn.execute("""
-                SELECT r.receipt_id, r.output_hash, r.metadata, v.vec_blob
-                FROM receipts r
-                LEFT JOIN vectors v ON v.vec_sha256 LIKE r.output_hash || '%'
-                WHERE r.operation = 'paper_load'
-                LIMIT ?
-            """, (max_nodes,))
+                WITH ranked_chunks AS (
+                    SELECT r.receipt_id, r.output_hash, r.metadata, v.vec_blob,
+                           json_extract(r.metadata, '$.paper_id') as paper_id,
+                           ROW_NUMBER() OVER (
+                               PARTITION BY json_extract(r.metadata, '$.paper_id')
+                               ORDER BY r.receipt_id
+                           ) as rn
+                    FROM receipts r
+                    LEFT JOIN vectors v ON v.vec_sha256 LIKE r.output_hash || '%'
+                    WHERE r.operation = 'paper_load'
+                )
+                SELECT receipt_id, output_hash, metadata, vec_blob
+                FROM ranked_chunks
+                WHERE rn <= ?
+                ORDER BY paper_id, rn
+            """, (chunks_per_paper,))
 
             rows = cursor.fetchall()
 

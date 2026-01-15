@@ -627,69 +627,61 @@ class VectorStore:
 
     def get_paper_chunks(self, limit: int = 1000) -> List[Dict]:
         """
-        Get paper chunks from cassette databases for exploration.
+        Get paper chunks from feral_eternal.db (GOD TIER papers).
 
         Returns:
             List of dicts with chunk_id, paper_id, heading, content
         """
         import sqlite3
+        import json
 
-        # Cassettes directory (REPO_ROOT/NAVIGATION/CORTEX/cassettes)
-        # vector_store.py is in THOUGHT/LAB/FERAL_RESIDENT, so go up 4 levels to REPO_ROOT
-        repo_root = Path(__file__).resolve().parent.parent.parent.parent
-        cassettes_dir = repo_root / "NAVIGATION" / "CORTEX" / "cassettes"
+        # FERAL database with GOD TIER papers
+        feral_dir = Path(__file__).resolve().parent.parent
+        db_path = feral_dir / "data" / "db" / "feral_eternal.db"
 
         chunks = []
-        if not cassettes_dir.exists():
-            # Store error info for debugging
-            self._last_error = f"Cassettes dir not found: {cassettes_dir}"
+        if not db_path.exists():
+            self._last_error = f"FERAL database not found: {db_path}"
             return chunks
 
-        per_cassette_limit = max(50, limit // 10)  # Distribute across cassettes
+        try:
+            with sqlite3.connect(str(db_path)) as conn:
+                # Get paper chunks from receipts (paper_load operation)
+                # Sample across all papers to get good coverage
+                chunks_per_paper = max(5, limit // 100)
+                cursor = conn.execute("""
+                    WITH ranked_chunks AS (
+                        SELECT receipt_id, metadata,
+                               json_extract(metadata, '$.paper_id') as paper_id,
+                               ROW_NUMBER() OVER (
+                                   PARTITION BY json_extract(metadata, '$.paper_id')
+                                   ORDER BY receipt_id
+                               ) as rn
+                        FROM receipts
+                        WHERE operation = 'paper_load'
+                    )
+                    SELECT receipt_id, metadata, paper_id
+                    FROM ranked_chunks
+                    WHERE rn <= ?
+                    ORDER BY paper_id, rn
+                    LIMIT ?
+                """, (chunks_per_paper, limit))
 
-        for db_file in cassettes_dir.glob("*.db"):
-            if len(chunks) >= limit:
-                break
+                for receipt_id, metadata_json, paper_id in cursor.fetchall():
+                    if not metadata_json:
+                        continue
 
-            cassette_name = db_file.stem
-            try:
-                with sqlite3.connect(str(db_file)) as conn:
-                    # Chunks table has: chunk_id, file_id, header_text, start_offset, end_offset
-                    # Content is in original files, not in DB
-                    cursor = conn.execute("""
-                        SELECT c.chunk_id, c.header_text, f.path, c.start_offset, c.end_offset
-                        FROM chunks c
-                        LEFT JOIN files f ON c.file_id = f.file_id
-                        WHERE c.header_text IS NOT NULL
-                        LIMIT ?
-                    """, (per_cassette_limit,))
+                    meta = json.loads(metadata_json)
+                    chunks.append({
+                        'chunk_id': receipt_id,
+                        'paper_id': meta.get('paper_id', paper_id or 'unknown'),
+                        'heading': meta.get('heading', ''),
+                        'content': meta.get('content', ''),
+                        'alias': meta.get('alias', '')
+                    })
 
-                    for row in cursor.fetchall():
-                        chunk_id, header, file_path, start_off, end_off = row
-
-                        # Try to read content from file
-                        content = ''
-                        if file_path and start_off is not None and end_off is not None:
-                            full_path = repo_root / file_path
-                            if full_path.exists():
-                                try:
-                                    text = full_path.read_text(encoding='utf-8')
-                                    content = text[start_off:end_off][:2000]
-                                except:
-                                    content = header or ''
-
-                        chunks.append({
-                            'chunk_id': str(chunk_id),
-                            'paper_id': cassette_name,
-                            'heading': header or '',
-                            'content': content,
-                            'alias': ''
-                        })
-
-                        if len(chunks) >= limit:
-                            break
-            except Exception:
-                continue  # Skip broken databases
+        except Exception as e:
+            self._last_error = f"Error loading paper chunks: {e}"
 
         return chunks
 
