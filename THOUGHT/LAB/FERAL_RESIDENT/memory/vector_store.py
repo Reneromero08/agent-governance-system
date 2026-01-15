@@ -554,13 +554,13 @@ class VectorStore:
         The resident can find_nearest() to paper chunks.
 
         Args:
-            papers_dir: Path to papers directory (default: research/papers/)
+            papers_dir: Path to papers directory (default: perception/research/papers/)
             max_chunks: Maximum chunks to load
 
         Returns:
             Loading stats
         """
-        from paper_indexer import PaperIndexer
+        from perception.paper_indexer import PaperIndexer
 
         indexer = PaperIndexer(papers_dir)
         stats = {'papers_loaded': 0, 'chunks_loaded': 0, 'skipped': 0}

@@ -1,0 +1,517 @@
+{
+  "total": 102,
+  "ready": 102,
+  "failed": 0,
+  "papers": [
+    {
+      "id": "Grok42",
+      "status": "ready",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\Grok 4.2 Thinking - Brain Prompt 1.md"
+    },
+    {
+      "id": "GPT52",
+      "status": "ready",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\GPT 5.2 Thinking - Brain Prompt.md"
+    },
+    {
+      "id": "Claude45",
+      "status": "ready",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\Claude 4.5 Sonnet Brain Prompt 1.md"
+    },
+    {
+      "id": "2111.06077",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2111.06077.md"
+    },
+    {
+      "id": "2112.15424",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2112.15424.md"
+    },
+    {
+      "id": "2301.10352",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2301.10352.md"
+    },
+    {
+      "id": "2106.05268",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2106.05268.md"
+    },
+    {
+      "id": "2501.16863",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2501.16863.md"
+    },
+    {
+      "id": "2310.06816",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2310.06816.md"
+    },
+    {
+      "id": "2311.13647",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2311.13647.md"
+    },
+    {
+      "id": "2402.12784",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.12784.md"
+    },
+    {
+      "id": "2401.12192",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2401.12192.md"
+    },
+    {
+      "id": "2504.00147",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2504.00147.md"
+    },
+    {
+      "id": "2412.06769",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2412.06769.md"
+    },
+    {
+      "id": "2510.04573",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2510.04573.md"
+    },
+    {
+      "id": "2510.11052",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2510.11052.md"
+    },
+    {
+      "id": "2510.13117",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2510.13117.md"
+    },
+    {
+      "id": "2410.17891",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2410.17891.md"
+    },
+    {
+      "id": "2508.10875",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2508.10875.md"
+    },
+    {
+      "id": "2304.12512",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2304.12512.md"
+    },
+    {
+      "id": "2412.08821",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2412.08821.md"
+    },
+    {
+      "id": "2508.00220",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2508.00220.md"
+    },
+    {
+      "id": "2601.05075",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2601.05075.md"
+    },
+    {
+      "id": "2403.15362",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2403.15362.md"
+    },
+    {
+      "id": "2312.09571",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2312.09571.md"
+    },
+    {
+      "id": "2409.13385",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2409.13385.md"
+    },
+    {
+      "id": "2512.24617",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2512.24617.md"
+    },
+    {
+      "id": "2405.07987",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2405.07987.md"
+    },
+    {
+      "id": "2505.12540",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2505.12540.md"
+    },
+    {
+      "id": "2507.01098",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2507.01098.md"
+    },
+    {
+      "id": "2509.19453",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2509.19453.md"
+    },
+    {
+      "id": "2510.17833",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2510.17833.md"
+    },
+    {
+      "id": "1908.10084",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\1908.10084.md"
+    },
+    {
+      "id": "2408.08073",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2408.08073.md"
+    },
+    {
+      "id": "2402.13130",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.13130.md"
+    },
+    {
+      "id": "2402.14776",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.14776.md"
+    },
+    {
+      "id": "2508.10824",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2508.10824.md"
+    },
+    {
+      "id": "2410.13166",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2410.13166.md"
+    },
+    {
+      "id": "2207.06881",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2207.06881.md"
+    },
+    {
+      "id": "2412.10390",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2412.10390.md"
+    },
+    {
+      "id": "2302.07200",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2302.07200.md"
+    },
+    {
+      "id": "2405.03524",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2405.03524.md"
+    },
+    {
+      "id": "2410.21242",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2410.21242.md"
+    },
+    {
+      "id": "2312.06648",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2312.06648.md"
+    },
+    {
+      "id": "2503.05037",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2503.05037.md"
+    },
+    {
+      "id": "2405.05200",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2405.05200.md"
+    },
+    {
+      "id": "2404.13950",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2404.13950.md"
+    },
+    {
+      "id": "2408.11119",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2408.11119.md"
+    },
+    {
+      "id": "2107.05720",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2107.05720.md"
+    },
+    {
+      "id": "2109.10086",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2109.10086.md"
+    },
+    {
+      "id": "2404.18812",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2404.18812.md"
+    },
+    {
+      "id": "2411.17040",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2411.17040.md"
+    },
+    {
+      "id": "2411.05195",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2411.05195.md"
+    },
+    {
+      "id": "2412.08802",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2412.08802.md"
+    },
+    {
+      "id": "2406.17639",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2406.17639.md"
+    },
+    {
+      "id": "2409.19425",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2409.19425.md"
+    },
+    {
+      "id": "2402.03216",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.03216.md"
+    },
+    {
+      "id": "2402.05672",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.05672.md"
+    },
+    {
+      "id": "2401.00368",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2401.00368.md"
+    },
+    {
+      "id": "2406.01607",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2406.01607.md"
+    },
+    {
+      "id": "2506.05176",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2506.05176.md"
+    },
+    {
+      "id": "2502.07972",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2502.07972.md"
+    },
+    {
+      "id": "2402.10200",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.10200.md"
+    },
+    {
+      "id": "2201.11903",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2201.11903.md"
+    },
+    {
+      "id": "2210.03493",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2210.03493.md"
+    },
+    {
+      "id": "2310.11703",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2310.11703.md"
+    },
+    {
+      "id": "2505.11783",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2505.11783.md"
+    },
+    {
+      "id": "2412.01940",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2412.01940.md"
+    },
+    {
+      "id": "2403.04871",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2403.04871.md"
+    },
+    {
+      "id": "2401.08281",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2401.08281.md"
+    },
+    {
+      "id": "2601.01291",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2601.01291.md"
+    },
+    {
+      "id": "2312.10997",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2312.10997.md"
+    },
+    {
+      "id": "2410.12837",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2410.12837.md"
+    },
+    {
+      "id": "2407.13193",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2407.13193.md"
+    },
+    {
+      "id": "2501.09136",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2501.09136.md"
+    },
+    {
+      "id": "2408.08921",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2408.08921.md"
+    },
+    {
+      "id": "2409.14924",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2409.14924.md"
+    },
+    {
+      "id": "2002.05709",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2002.05709.md"
+    },
+    {
+      "id": "2402.10150",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.10150.md"
+    },
+    {
+      "id": "2503.17538",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2503.17538.md"
+    },
+    {
+      "id": "2506.10159",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2506.10159.md"
+    },
+    {
+      "id": "2410.03258",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2410.03258.md"
+    },
+    {
+      "id": "2409.04599",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2409.04599.md"
+    },
+    {
+      "id": "2402.18376",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2402.18376.md"
+    },
+    {
+      "id": "2406.11687",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2406.11687.md"
+    },
+    {
+      "id": "1510.00149",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\1510.00149.md"
+    },
+    {
+      "id": "2101.09671",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2101.09671.md"
+    },
+    {
+      "id": "2307.02973",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2307.02973.md"
+    },
+    {
+      "id": "2509.04244",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2509.04244.md"
+    },
+    {
+      "id": "2407.04803",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2407.04803.md"
+    },
+    {
+      "id": "1706.03762",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\1706.03762.md"
+    },
+    {
+      "id": "2009.06732",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2009.06732.md"
+    },
+    {
+      "id": "2004.05150",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2004.05150.md"
+    },
+    {
+      "id": "2006.04768",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2006.04768.md"
+    },
+    {
+      "id": "2004.04906",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2004.04906.md"
+    },
+    {
+      "id": "2112.09118",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2112.09118.md"
+    },
+    {
+      "id": "2104.08663",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2104.08663.md"
+    },
+    {
+      "id": "2010.11386",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2010.11386.md"
+    },
+    {
+      "id": "2112.01488",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2112.01488.md"
+    },
+    {
+      "id": "2204.02311",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2204.02311.md"
+    },
+    {
+      "id": "2405.04532",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2405.04532.md"
+    },
+    {
+      "id": "2403.09636",
+      "status": "converted",
+      "md": "D:\\CCC 2.0\\AI\\agent-governance-system\\THOUGHT\\LAB\\FERAL_RESIDENT\\research\\papers\\markdown\\2403.09636.md"
+    }
+  ]
+}

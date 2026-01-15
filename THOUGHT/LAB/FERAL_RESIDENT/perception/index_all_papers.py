@@ -8,17 +8,18 @@ Reads the PAPERS list from paper_pipeline.py and indexes each one.
 import sys
 from pathlib import Path
 
-FERAL_DIR = Path(__file__).parent.parent  # perception/ -> FERAL_RESIDENT/
+PERCEPTION_DIR = Path(__file__).parent  # perception/
+FERAL_DIR = PERCEPTION_DIR.parent  # FERAL_RESIDENT/
 sys.path.insert(0, str(FERAL_DIR))
 
 from .paper_pipeline import PAPERS
 from .paper_indexer import PaperIndexer
 
-PAPERS_DIR = FERAL_DIR / "research" / "papers"
+PAPERS_DIR = PERCEPTION_DIR / "research" / "papers"
 MD_DIR = PAPERS_DIR / "markdown"
 
 
-def main():
+def index_all_papers():
     print("=" * 60)
     print("BULK PAPER INDEXER - B.1 Paper Flooding")
     print("=" * 60)
@@ -39,7 +40,7 @@ def main():
 
         # Determine markdown path
         if paper["type"] == "markdown":
-            md_path = FERAL_DIR / paper["source"]
+            md_path = PERCEPTION_DIR / paper["source"]
         else:
             md_path = MD_DIR / f"{paper_id}.md"
 
@@ -89,4 +90,4 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    index_all_papers()
