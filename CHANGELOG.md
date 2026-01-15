@@ -20,6 +20,21 @@ All notable changes to Agent Governance System will be documented in this file.
   - Pandoc installed automatically via `winget install JohnMacFarlane.Pandoc`
   - Dependencies: `requests`, `markdownify`, `beautifulsoup4` (already in venv)
 
+- **Constellation Architect** — Transform papers into GOD TIER markdown with deep heading hierarchy
+  - `THOUGHT/LAB/FERAL_RESIDENT/perception/research/constellation_architect.py` — Header normalization tool
+  - **Regex mode** (default): Parse existing markdown headers, normalize to `## ### #### #####` hierarchy
+  - **99 papers processed**: Attention, Transformers, RAG, Memory-Augmented models, Contextual Bandits
+  - **Deep hierarchy**: 15-55 headers per paper (Abstract → Introduction → Methods → Components → Definitions)
+  - Shifts all headers up by (2 - min_level) so main sections start at `##`
+  - Cleans malformed headers and excessive blank lines
+  - **8 low-header papers**: Enhanced via Haiku agent swarm for deep structural analysis
+  - Papers stored at `THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/`
+    - `markdown/` — Original converted papers (99 papers)
+    - `god_tier/` — Transformed papers with full heading hierarchy
+    - `manifest.json` — Paper catalog with arXiv IDs and aliases
+  - **Ralph Wiggum Loop implementation report** — Documentation for iterative LLM refinement patterns
+  - `.gitignore` updated to exclude paper directories (too large for git)
+
 ---
 
 ## [3.8.9] - 2026-01-14

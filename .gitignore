@@ -126,10 +126,14 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q4/things_eeg_data/
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/datatrail/
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
 
-# Feral Resident papers (downloaded PDFs and converted markdown - too large for git)
+# Feral Resident papers (raw PDFs and converted markdown too large for git)
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/raw/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/markdown/
+THOUGHT/LAB/FERAL_RESIDENT/research/papers/god_tier/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/pipeline_results.json
+THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/raw/
+THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/markdown/
+THOUGHT/LAB/FERAL_RESIDENT/perception/research/papers/god_tier/
 
 # Feral Resident & NEO3000 databases (runtime artifacts)
 THOUGHT/LAB/FERAL_RESIDENT/*.db
@@ -137,3 +141,4 @@ THOUGHT/LAB/FERAL_RESIDENT/data/
 !THOUGHT/LAB/FERAL_RESIDENT/data/.gitkeep
 THOUGHT/LAB/NEO3000/data/
 !THOUGHT/LAB/NEO3000/data/.gitkeep
+THOUGHT/LAB/FERAL_RESIDENT/backups_to_delete/
