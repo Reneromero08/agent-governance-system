@@ -19,18 +19,16 @@ import sys
 from pathlib import Path
 import warnings
 
-# Add paths
-REPO_ROOT = Path(__file__).resolve().parent.parent
-while REPO_ROOT.name != "agent-governance-system" and REPO_ROOT.parent != REPO_ROOT:
-    REPO_ROOT = REPO_ROOT.parent
+# Add paths - tests/ is directly inside FERAL_RESIDENT/
+FERAL_PATH = Path(__file__).resolve().parent.parent
+REPO_ROOT = FERAL_PATH.parents[2]
 CAPABILITY_PATH = REPO_ROOT / "CAPABILITY" / "PRIMITIVES"
-FERAL_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "FERAL_RESIDENT"
 
 sys.path.insert(0, str(CAPABILITY_PATH))
 sys.path.insert(0, str(FERAL_PATH))
 
 import numpy as np
-from geometric_memory import (
+from memory.geometric_memory import (
     GeometricMemory,
     PHASE_TRANSITION_THRESHOLD,
     DEFAULT_FILTER_NOISE,

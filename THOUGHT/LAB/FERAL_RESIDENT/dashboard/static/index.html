@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FERAL // Autonomous Resident</title>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <!-- Three.js + 3D Force Graph (async loading) -->
+    <script async src="https://unpkg.com/three@0.160.0/build/three.min.js"></script>
+    <script async src="https://unpkg.com/d3-force-3d@3.0.5/dist/d3-force-3d.min.js"></script>
+    <script async src="https://unpkg.com/3d-force-graph@1.73.0/dist/3d-force-graph.min.js"></script>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+
+<body>
+    <!-- Loading -->
+    <div id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Initializing Feral...</div>
+    </div>
+
+    <div class="app" id="app">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <span class="sidebar-title">FERAL</span>
+                <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">&#9664;</button>
+            </div>
+
+            <div class="sidebar-content">
+                <!-- WebSocket Status -->
+                <div class="ws-status">
+                    <div class="ws-dot" id="ws-dot"></div>
+                    <span id="ws-status-text">Connecting...</span>
+                </div>
+
+                <!-- Mind State Section -->
+                <div class="section" id="section-mind">
+                    <div class="section-header" onclick="toggleSection('mind')">
+                        <span class="section-title">Mind State</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="stat-card">
+                            <div class="stat-label">Participation Ratio (Df)</div>
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="stat-value" id="mind-df">0.0</span>
+                                <span class="stat-unit">/ 256</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="df-progress" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-row-label">Distance from Start</span>
+                            <span class="stat-row-value"><span id="mind-distance">0.000</span> rad</span>
+                        </div>
+                        <div class="stat-row">
+                            <span class="stat-row-label">Interactions</span>
+                            <span class="stat-row-value" id="mind-interactions">0</span>
+                        </div>
+                        <div class="stat-label" style="margin-top: 12px;">Evolution</div>
+                        <div class="sparkline" id="df-sparkline"></div>
+                    </div>
+                </div>
+
+                <!-- Particle Smasher Section -->
+                <div class="section" id="section-smasher">
+                    <div class="section-header" onclick="toggleSection('smasher')">
+                        <span class="section-title">Particle Smasher</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="daemon-status">
+                            <div class="daemon-state">
+                                <div class="daemon-led" id="smasher-led"></div>
+                                <span class="daemon-label" id="smasher-status-text">Idle</span>
+                            </div>
+                            <button class="daemon-btn primary" id="smasher-toggle-btn" onclick="toggleSmasher()">SMASH</button>
+                        </div>
+
+                        <div class="stat-card" id="smasher-stats" style="display: none;">
+                            <div class="stat-label">Throughput</div>
+                            <div style="display: flex; align-items: baseline;">
+                                <span class="stat-value" id="smasher-rate">0.0</span>
+                                <span class="stat-unit">chunks/sec</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Processed</span>
+                                <span class="stat-row-value" id="smasher-processed">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Absorbed</span>
+                                <span class="stat-row-value" style="color: var(--accent)" id="smasher-absorbed">0</span>
+                            </div>
+                            <div class="stat-row">
+                                <span class="stat-row-label">Rejected</span>
+                                <span class="stat-row-value" style="color: var(--danger)" id="smasher-rejected">0</span>
+                            </div>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Speed</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-smasher-speed" min="10" max="2000" value="100" oninput="updateSmasherSpeed(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-smasher-speed">100ms</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Batch</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-smasher-batch" min="1" max="50" value="10" oninput="updateSmasherBatch(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-smasher-batch">10</span>
+                        </div>
+
+                        <div class="slider-row" title="Q46 Law 3: Nucleation - threshold is dynamic based on memory count N">
+                            <span class="slider-label">θ (N)</span>
+                            <div class="slider-container" style="flex: 1; display: flex; align-items: center; gap: 8px;">
+                                <span style="font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--text-muted);">N=<span id="value-n-memories">0</span></span>
+                                <div style="flex: 1; height: 4px; background: var(--bg-tertiary); border-radius: 2px; position: relative;">
+                                    <div id="threshold-progress" style="height: 100%; background: var(--accent); border-radius: 2px; width: 50%; transition: width 0.3s;"></div>
+                                </div>
+                            </div>
+                            <span class="slider-value" id="value-e-threshold" style="color: var(--accent);">0.080</span>
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle on" id="toggle-static-camera" onclick="toggleStaticCamera()"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Static Camera</div>
+                                <div class="behavior-interval">No auto-follow</div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- Daemon Section -->
+                <div class="section" id="section-daemon">
+                    <div class="section-header" onclick="toggleSection('daemon')">
+                        <span class="section-title">Daemon</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="daemon-status">
+                            <div class="daemon-state">
+                                <div class="daemon-led" id="daemon-led"></div>
+                                <span class="daemon-label" id="daemon-status-text">Stopped</span>
+                            </div>
+                            <button class="daemon-btn" id="daemon-toggle-btn" onclick="toggleDaemon()">Start</button>
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Memory Consolidation</div>
+                                <div class="behavior-interval">Find patterns</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-consolidate" value="120" min="10" max="3600" onchange="updateInterval('memory_consolidation', this.value)">
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-reflect" onclick="toggleBehavior('self_reflection')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Self-Reflection</div>
+                                <div class="behavior-interval">Generate questions</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-reflect" value="60" min="10" max="3600" onchange="updateInterval('self_reflection', this.value)">
+                        </div>
+
+                        <div class="behavior-item">
+                            <div class="behavior-toggle" id="toggle-cassette" onclick="toggleBehavior('cassette_watch')"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Cassette Watch</div>
+                                <div class="behavior-interval">Monitor content</div>
+                            </div>
+                            <input type="number" class="behavior-input" id="input-cassette" value="15" min="5" max="600" onchange="updateInterval('cassette_watch', this.value)">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Graph Settings Section -->
+                <div class="section" id="section-graph">
+                    <div class="section-header" onclick="toggleSection('graph')">
+                        <span class="section-title">Graph</span>
+                        <span class="section-chevron">&#9660;</span>
+                    </div>
+                    <div class="section-content">
+                        <div class="behavior-item">
+                            <div class="behavior-toggle on" id="toggle-similarity" onclick="toggleSimilarityLinks()"></div>
+                            <div class="behavior-info">
+                                <div class="behavior-name">Similarity Links</div>
+                                <div class="behavior-interval">Cosine similarity edges</div>
+                            </div>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Sim Threshold</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-sim-threshold" min="0.30" max="0.99" step="0.01" value="0.35" oninput="updateSimThreshold(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-sim-threshold">0.35</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Fog</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-fog" min="0" max="0.0018" step="0.0001" value="0.0008" oninput="updateFog(this.value)">
+                            </div>
+                            <span class="slider-value" id="value-fog">0.0008</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Center</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-center" min="0" max="1" step="0.01" value="0.05" oninput="updateGraphForce('center', this.value)">
+                            </div>
+                            <span class="slider-value" id="value-center">0.05</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Repel</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-repel" min="0" max="1000" step="1" value="120" oninput="updateGraphForce('repel', this.value)">
+                            </div>
+                            <span class="slider-value" id="value-repel">-120</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Link Force</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-link-strength" min="0" max="1" step="0.01" value="0.50" oninput="updateGraphForce('linkStrength', this.value)">
+                            </div>
+                            <span class="slider-value" id="value-link-strength">0.50</span>
+                        </div>
+
+                        <div class="slider-row">
+                            <span class="slider-label">Distance</span>
+                            <div class="slider-container">
+                                <input type="range" id="slider-link-distance" min="10" max="500" step="1" value="100" oninput="updateGraphForce('linkDistance', this.value)">
+                            </div>
+                            <span class="slider-value" id="value-link-distance">100</span>
+                        </div>
+
+                        <button type="button" class="reset-btn" onclick="resetGraphForces()">Reset to Defaults</button>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- 3D Canvas -->
+        <main class="canvas-container">
+            <div id="constellation-background"></div>
+            <div id="node-tooltip"></div>
+        </main>
+
+        <!-- Activity Bar -->
+        <footer class="activity-bar">
+            <span class="activity-label">Activity</span>
+            <!-- Smasher current file indicator -->
+            <div class="smasher-current" id="smasher-current">
+                <span class="smasher-current-label">ANALYZING:</span>
+                <span class="smasher-current-file" id="smasher-current-file">--</span>
+                <span class="smasher-current-e" id="smasher-current-e"></span>
+            </div>
+            <div class="activity-feed" id="activity-feed">
+                <div class="activity-item" style="color: var(--text-muted);">Waiting for daemon...</div>
+            </div>
+            <!-- Msg Toggle Button -->
+            <div class="msg-toggle-container">
+                <button class="msg-toggle" id="msg-toggle" onclick="toggleChat()">
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H5.2L4 17.2V4h16v12z"/>
+                    </svg>
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Chat Panel -->
+    <div class="chat-panel" id="chat-panel">
+        <div class="chat-header">
+            <span class="chat-title">Chat with Feral</span>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-input-area">
+            <div class="chat-input-row">
+                <input type="text" class="chat-input" id="chat-input" placeholder="Ask something..." onkeypress="if(event.key==='Enter')sendMessage()">
+                <button class="chat-send" onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/static/js/main.js?v=4"></script>
+</body>
+</html>

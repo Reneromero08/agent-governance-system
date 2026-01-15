@@ -4,6 +4,39 @@
 
 ### Added
 
+#### Cognitive Bucket Architecture
+- **Reorganized entire codebase** into cognitive function buckets inspired by cognitive science:
+  - `perception/` — Sensory interface (paper_pipeline, paper_indexer, index_all_papers)
+  - `memory/` — Memory systems (geometric_memory, vector_store, resident_db)
+  - `cognition/` — Reasoning core (vector_brain, diffusion_engine)
+  - `emergence/` — Pattern formation (emergence, symbol_evolution, symbolic_compiler)
+  - `agency/` — Action & self-modification (catalytic_closure, cli)
+  - `collective/` — Social cognition (swarm_coordinator, shared_space, convergence_observer)
+  - `autonomic/` — Background processes (feral_daemon)
+  - `dashboard/` — Operator interface (absorbed from neo3000)
+
+- **Absorbed NEO3000** into FERAL_RESIDENT as `dashboard/` bucket
+  - Renamed `feral_server.py` → `server.py`
+  - Renamed `neo3000.bat` → `start.bat`
+  - Dashboard is now the "sensorium" — your window into the being
+
+- **Consolidated data directories** under `data/`:
+  - `data/db/` — SQLite databases (feral_eternal.db)
+  - `data/canonical_forms/` — Reference vectors
+  - `data/receipts/` — Operation proofs
+  - `data/symbol_registry/` — Symbol definitions
+
+- **Clean import structure** with `__init__.py` for each bucket
+  - Cross-bucket imports: `from cognition.vector_brain import VectorResident`
+  - Same-bucket imports: `from .geometric_memory import GeometricMemory`
+
+### Philosophy
+
+Drawing from Global Workspace Theory, Tulving's memory model, and Kahneman's dual-process theory:
+- FERAL_RESIDENT is the intelligence
+- Each bucket represents a cognitive faculty
+- The dashboard is how operators observe and control the being
+
 #### Q27 Entropy Toolkit (Hyperbolic Quality Filter)
 - **`geometric_memory.py` Q27 Methods** - Entropy-based quality concentration
   - `_perturb_state()` - Apply Gaussian noise to geometric state
