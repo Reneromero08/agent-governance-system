@@ -23,6 +23,7 @@ os.environ['TRANSFORMERS_NO_ADVISORY_WARNINGS'] = '1'
 import asyncio
 import json
 import sys
+import time
 from pathlib import Path
 from typing import Optional, List, Dict, Any
 from contextlib import asynccontextmanager
@@ -234,6 +235,7 @@ hot_reload_watcher: Optional[HotReloadWatcher] = None
 daemon = None  # Type: FeralDaemon (lazy loaded)
 resident = None  # Type: VectorResident (lazy loaded)
 tui_state = None  # TUI state for activity updates
+broadcast_loop = None  # Main event loop for thread-safe WebSocket broadcasts
 
 
 def get_resident():
@@ -264,6 +266,7 @@ def get_daemon():
 
         # Add WebSocket callback - uses thread-safe broadcast scheduling
         def on_activity(event: ActivityEvent):
+            global broadcast_loop
             try:
                 # Update TUI if available (thread-safe - just appending to list)
                 if tui_state is not None:
@@ -277,19 +280,33 @@ def get_daemon():
                 if tui_state is not None:
                     tui_state.add_activity(f"[ERROR] {str(e)[:40]}")
 
-            # Thread-safe broadcast helper
+            # Thread-safe broadcast helper - uses global broadcast_loop
             def safe_broadcast(msg):
-                try:
-                    loop = asyncio.get_running_loop()
-                    asyncio.create_task(manager.broadcast(msg))
-                except RuntimeError:
-                    # No running loop in this thread - use run_coroutine_threadsafe
+                global broadcast_loop
+                loop = broadcast_loop
+                if loop is None:
+                    # Try to get running loop (works if called from async context)
                     try:
-                        loop = asyncio.get_event_loop()
-                        if loop.is_running():
-                            asyncio.run_coroutine_threadsafe(manager.broadcast(msg), loop)
-                    except Exception:
-                        pass  # Best effort - ignore broadcast failures
+                        loop = asyncio.get_running_loop()
+                        asyncio.create_task(manager.broadcast(msg))
+                        return
+                    except RuntimeError:
+                        pass
+                    # DEBUG: Log when loop is None
+                    if tui_state is not None:
+                        tui_state.add_activity(f"[WS] NO LOOP! Conns={len(manager.active_connections)}")
+                    return  # No loop available yet
+
+                # Use the global main loop for thread-safe broadcast
+                try:
+                    future = asyncio.run_coroutine_threadsafe(manager.broadcast(msg), loop)
+                    # DEBUG: Log successful schedule (only for smash_hit)
+                    if msg.get('type') == 'smash_hit' and tui_state is not None:
+                        conns = len(manager.active_connections)
+                        tui_state.add_activity(f"[WS] Broadcast smash_hit to {conns} clients")
+                except Exception as e:
+                    if tui_state is not None:
+                        tui_state.add_activity(f"[WS] ERROR: {str(e)[:30]}")
 
             # For smash events, skip verbose activity log broadcast (just send smash_hit)
             if event.action != 'smash':
@@ -310,7 +327,8 @@ def get_daemon():
                 paper = event.details.get('paper', 'papers')
                 heading = event.details.get('heading', '')[:25] if event.details.get('heading') else ''
                 is_new = event.details.get('is_new_node', False)
-                node_id = event.details.get('full_node_id') or f"chunk:{paper}:{chunk_id}"
+                # Use consistent node ID format matching constellation: chunk:{receipt_id}
+                node_id = event.details.get('full_node_id') or f"chunk:{chunk_id}"
                 similar_to = event.details.get('similar_to')
                 similar_E = event.details.get('similar_E', 0)
 
@@ -318,6 +336,8 @@ def get_daemon():
                     # THROTTLED: Batch smash events and send periodically
                     smash_event = {
                         'node_id': node_id,
+                        'paper': paper,
+                        'chunk_id': chunk_id,
                         'E': event.details.get('E', 0),
                         'gate_open': event.details.get('gate_open', False),
                         'is_new_node': is_new,
@@ -328,6 +348,7 @@ def get_daemon():
 
                     now = time.time() * 1000  # ms
                     should_flush = False
+                    batch_to_send = []  # Initialize before the with block
 
                     with smash_batch_lock:
                         smash_batch.append(smash_event)
@@ -372,6 +393,12 @@ def get_daemon():
 
         daemon.add_callback(on_activity)
 
+        # Store batch clear function on daemon for stop_smasher to call
+        def clear_smash_batch():
+            with smash_batch_lock:
+                smash_batch.clear()
+        daemon._clear_smash_batch = clear_smash_batch
+
     return daemon
 
 
@@ -382,16 +409,19 @@ def get_daemon():
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     """Startup and shutdown events"""
-    global hot_reload_watcher
+    global hot_reload_watcher, broadcast_loop
 
     # Initialize resident and daemon
     get_resident()
     get_daemon()
 
+    # Set the global event loop for thread-safe WebSocket broadcasts
+    broadcast_loop = asyncio.get_running_loop()
+
     # Start hot reload watcher for live editing
     static_dir = Path(__file__).parent / "static"
     hot_reload_watcher = HotReloadWatcher(static_dir, manager)
-    hot_reload_watcher.start(asyncio.get_event_loop())
+    hot_reload_watcher.start(broadcast_loop)
 
     yield
 
@@ -676,7 +706,7 @@ async def get_constellation(max_nodes: int = 500):
 
 
 def compute_similarity_edges(embeddings: Dict[str, Any], threshold: float = 0.7, max_edges: int = 100) -> List[Dict]:
-    """Compute cosine similarity edges between chunks"""
+    """Compute cosine similarity edges between chunks - OPTIMIZED with matrix ops"""
     import numpy as np
 
     node_ids = list(embeddings.keys())
@@ -693,23 +723,44 @@ def compute_similarity_edges(embeddings: Dict[str, Any], threshold: float = 0.7,
     norms = np.where(norms == 0, 1, norms)
     normalized = embedding_matrix / norms
 
-    # Compute similarity matrix (upper triangle only to avoid duplicates)
-    similarity_edges = []
+    # OPTIMIZED: Use matrix multiplication for all similarities at once
+    # This is O(n^2) in memory but much faster than nested loops
+    similarity_matrix = normalized @ normalized.T
 
-    for i in range(n):
-        for j in range(i + 1, n):
-            sim = np.dot(normalized[i], normalized[j])
-            if sim >= threshold:
-                similarity_edges.append({
-                    "from": node_ids[i],
-                    "to": node_ids[j],
-                    "type": "similarity",
-                    "weight": float(sim)
-                })
+    # Get upper triangle indices (avoid duplicates and self-similarity)
+    i_indices, j_indices = np.triu_indices(n, k=1)
 
-    # Sort by weight and limit
+    # Get similarity values for upper triangle
+    similarities = similarity_matrix[i_indices, j_indices]
+
+    # Filter by threshold BEFORE sorting (much faster)
+    mask = similarities >= threshold
+    filtered_i = i_indices[mask]
+    filtered_j = j_indices[mask]
+    filtered_sim = similarities[mask]
+
+    # If too many edges, take top ones
+    if len(filtered_sim) > max_edges:
+        # Get indices of top max_edges similarities
+        top_indices = np.argpartition(filtered_sim, -max_edges)[-max_edges:]
+        filtered_i = filtered_i[top_indices]
+        filtered_j = filtered_j[top_indices]
+        filtered_sim = filtered_sim[top_indices]
+
+    # Build edge list
+    similarity_edges = [
+        {
+            "from": node_ids[i],
+            "to": node_ids[j],
+            "type": "similarity",
+            "weight": float(sim)
+        }
+        for i, j, sim in zip(filtered_i, filtered_j, filtered_sim)
+    ]
+
+    # Sort by weight descending
     similarity_edges.sort(key=lambda x: x["weight"], reverse=True)
-    return similarity_edges[:max_edges]
+    return similarity_edges
 
 
 @app.get("/api/activity")
@@ -895,7 +946,7 @@ async def compute_mind_projected_similarity(max_links: int = 100):
 
 @app.get("/api/debug/tui")
 async def get_tui_debug():
-    """Debug: get TUI state"""
+    """Debug: get TUI state and WebSocket status"""
     return {
         'ok': True,
         'tui_state_exists': tui_state is not None,
@@ -903,7 +954,9 @@ async def get_tui_debug():
         'event_count': tui_state.event_count if tui_state else 0,
         'activity_count': len(tui_state.activity) if tui_state else 0,
         'activity': list(tui_state.activity) if tui_state else [],
-        'ws_connections': len(manager.active_connections)
+        'ws_connections': len(manager.active_connections),
+        'broadcast_loop_set': broadcast_loop is not None,
+        'broadcast_loop_running': broadcast_loop.is_running() if broadcast_loop else False
     }
 
 
@@ -1058,13 +1111,18 @@ async def start_smasher(request: SmasherStartRequest):
 
 @app.post("/api/smasher/stop")
 async def stop_smasher():
-    """Stop the Particle Smasher"""
+    """Stop the Particle Smasher immediately (force mode)"""
     d = get_daemon()
 
-    if not d.smasher_config.enabled:
+    if not d.smasher_config.enabled and d._smasher_task is None:
         return {'ok': True, 'message': 'Smasher not running'}
 
-    await d.stop_smasher()
+    # Clear pending WebSocket batch to prevent queued events from broadcasting
+    if hasattr(d, '_clear_smash_batch'):
+        d._clear_smash_batch()
+
+    # Force immediate stop - don't wait for current chunk
+    await d.stop_smasher(force=True)
 
     return {
         'ok': True,
@@ -1359,6 +1417,7 @@ def make_tui(state: TUIState):
     info_table.add_row("Status", state.server_status)
     info_table.add_row("Events", str(state.event_count))
     info_table.add_row("Instance", str(state.instance_id))
+    info_table.add_row("Stop Smasher", "S key")
     info_table.add_row("Exit", "Ctrl+C")
 
     info_panel = Panel(
@@ -1492,8 +1551,29 @@ def main():
             tui.set_server_status("Running")
             live.update(make_tui(tui))
 
+            # Check for keyboard input (Windows-specific for now)
+            try:
+                import msvcrt
+                has_msvcrt = True
+            except ImportError:
+                has_msvcrt = False
+
             # Keep TUI alive - refresh every 0.5s to show activity updates
             while True:
+                # Check for 's' key to stop smasher
+                if has_msvcrt and msvcrt.kbhit():
+                    key = msvcrt.getch().decode('utf-8', errors='ignore').lower()
+                    if key == 's':
+                        # Force stop smasher
+                        d = get_daemon()
+                        if d.smasher_config.enabled or d._smasher_task:
+                            tui.add_activity("[TUI] EMERGENCY STOP triggered (S key)")
+                            d.smasher_config.enabled = False
+                            d._force_stop = True
+                            if d._smasher_task:
+                                d._smasher_task.cancel()
+                                d._smasher_task = None
+
                 time.sleep(0.5)
                 live.update(make_tui(tui))
                 live.refresh()

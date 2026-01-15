@@ -24,9 +24,17 @@ export function addActivity(activity) {
         displayText = `${activity.details.paper}:${activity.details.chunk_id} - ${activity.summary}`;
     }
 
+    // Color the BADGE based on absorbed/rejected (green/red squares like daemon)
+    let badgeClass = activity.action;
+    if (activity.summary && activity.summary.includes('ABSORBED')) {
+        badgeClass = 'smash absorbed';
+    } else if (activity.summary && activity.summary.includes('REJECTED')) {
+        badgeClass = 'smash rejected';
+    }
+
     item.innerHTML = `
         <span class="activity-time">${time}</span>
-        <span class="activity-badge ${activity.action}">${activity.action}</span>
+        <span class="activity-badge ${badgeClass}">${activity.action}</span>
         <span class="activity-text">${displayText}</span>
     `;
 

@@ -278,6 +278,7 @@ class FeralDaemon:
         self.smasher_config = SmasherConfig()
         self.smasher_stats = SmasherStats()
         self._smasher_task: Optional[asyncio.Task] = None
+        self._force_stop: bool = False  # Emergency stop flag
 
         # Synchronization lock for resident access (prevents smasher/daemon conflicts)
         # Created lazily when first accessed to ensure event loop exists
@@ -308,6 +309,45 @@ class FeralDaemon:
         if self._resident_lock is None:
             self._resident_lock = asyncio.Lock()
         return self._resident_lock
+
+    def _get_total_chunks(self) -> int:
+        """Get total chunks in DB (cached to avoid expensive queries)."""
+        now = time.time()
+        # Initialize instance cache if not present
+        if not hasattr(self, '_total_chunks_cache'):
+            self._total_chunks_cache = 0
+            self._total_chunks_time = 0.0
+
+        # Refresh every 30 seconds
+        if now - self._total_chunks_time > 30.0:
+            try:
+                # Access self.resident to trigger lazy init if needed
+                res = self.resident
+                if res and res.store:
+                    self._total_chunks_cache = res.store.get_total_chunks_count()
+                    self._total_chunks_time = now
+            except Exception:
+                pass  # Keep old cached value on error
+        return self._total_chunks_cache
+
+    def _get_absorbed_memories(self) -> int:
+        """Get absorbed memories count from DB (cached to avoid expensive queries)."""
+        now = time.time()
+        # Initialize instance cache if not present
+        if not hasattr(self, '_absorbed_cache'):
+            self._absorbed_cache = 0
+            self._absorbed_time = 0.0
+
+        # Refresh every 5 seconds (more frequent than total_chunks since it changes)
+        if now - self._absorbed_time > 5.0:
+            try:
+                res = self.resident
+                if res and res.store:
+                    self._absorbed_cache = res.store.get_absorbed_memories_count()
+                    self._absorbed_time = now
+            except Exception:
+                pass  # Keep old cached value on error
+        return self._absorbed_cache
 
     # =========================================================================
     # Server Interface (Callbacks, Status, Config)
@@ -359,9 +399,9 @@ class FeralDaemon:
             },
             'activity_count': len(self.activity_log),
             'explored_chunks': len(self._explored_chunks),
-            'threshold': get_dynamic_threshold(
-                len(self.resident.store.memory.memory_history) if self._resident_initialized and self.resident.store.memory else 0
-            ),
+            'n_memories': self._get_absorbed_memories(),
+            'total_chunks': self._get_total_chunks(),
+            'threshold': get_dynamic_threshold(self._get_absorbed_memories()),
             # Particle Smasher status
             'smasher': {
                 'active': self.smasher_config.enabled and self._smasher_task is not None,
@@ -435,21 +475,33 @@ class FeralDaemon:
 
         self._smasher_task = asyncio.create_task(self._smash_loop())
 
-    async def stop_smasher(self):
-        """Stop the Particle Smasher."""
-        if self._smasher_task is None:
+    async def stop_smasher(self, force: bool = False):
+        """Stop the Particle Smasher.
+
+        Args:
+            force: If True, don't wait for task to finish cleanly
+        """
+        if self._smasher_task is None and not self.smasher_config.enabled:
             return
 
+        # Immediately disable to stop new processing
         self.smasher_config.enabled = False
+        self._force_stop = True  # Signal to _smash_chunk to abort
 
         if self._smasher_task:
             self._smasher_task.cancel()
-            try:
-                await self._smasher_task
-            except asyncio.CancelledError:
-                pass
+            if not force:
+                try:
+                    # Wait max 1 second for clean shutdown
+                    await asyncio.wait_for(
+                        asyncio.shield(self._smasher_task),
+                        timeout=1.0
+                    )
+                except (asyncio.CancelledError, asyncio.TimeoutError):
+                    pass
             self._smasher_task = None
 
+        self._force_stop = False
         stats = self.smasher_stats
         self._log_activity('smasher',
                           f"Particle Smasher DISENGAGED - {stats.chunks_processed} chunks @ {stats.chunks_per_second:.1f}/sec",
@@ -483,9 +535,9 @@ class FeralDaemon:
             self.smasher_config.enabled = False
             return
 
-        # Filter to unexplored only (using full node_id format)
+        # Filter to unexplored only (using consistent node_id format)
         def get_full_id(c):
-            return f"chunk:{c.get('paper_id', 'unknown')}:{c['chunk_id']}"
+            return f"chunk:{c['chunk_id']}"
 
         unexplored = [c for c in paper_chunks if get_full_id(c) not in self._explored_chunks]
         if not unexplored:
@@ -495,8 +547,12 @@ class FeralDaemon:
         chunk_idx = 0
         batch_count = 0
 
-        while self.smasher_config.enabled:
+        while self.smasher_config.enabled and not self._force_stop:
             try:
+                # Check for stop more frequently
+                if self._force_stop:
+                    break
+
                 if chunk_idx >= len(unexplored):
                     # Exhausted all chunks
                     self._log_activity('smasher', "All chunks smashed!")
@@ -511,11 +567,16 @@ class FeralDaemon:
                 chunk_idx += 1
                 batch_count += 1
 
-                # Process the chunk
-                await self._smash_chunk(chunk)
+                # Process the chunk (skip if force stop)
+                if not self._force_stop:
+                    await self._smash_chunk(chunk)
 
                 # Yield to let daemon behaviors acquire lock (fairness)
                 await asyncio.sleep(0)
+
+                # Check stop again before sleeping
+                if self._force_stop or not self.smasher_config.enabled:
+                    break
 
                 # Inter-chunk delay
                 await asyncio.sleep(self.smasher_config.delay_ms / 1000.0)
@@ -523,14 +584,15 @@ class FeralDaemon:
                 # Batch pause
                 if batch_count >= self.smasher_config.batch_size:
                     batch_count = 0
-                    if self.smasher_config.batch_pause_ms > 0:
+                    if self.smasher_config.batch_pause_ms > 0 and not self._force_stop:
                         await asyncio.sleep(self.smasher_config.batch_pause_ms / 1000.0)
 
             except asyncio.CancelledError:
                 break
             except Exception as e:
                 self._log_activity('error', f"Smasher error: {e}")
-                await asyncio.sleep(0.5)
+                if not self._force_stop:
+                    await asyncio.sleep(0.5)
 
         self.smasher_config.enabled = False
         self._smasher_task = None
@@ -540,10 +602,11 @@ class FeralDaemon:
         Synchronous chunk processing - runs in executor to avoid blocking.
         Returns dict with all computed values.
         """
-        chunk_id = chunk['chunk_id']
+        chunk_id = chunk['chunk_id']  # This is actually receipt_id
         chunk_text = chunk.get('content', '')[:500]
         paper_name = chunk.get('paper_id', 'unknown')
-        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+        # Use consistent node ID format matching constellation: chunk:{receipt_id}
+        full_node_id = f"chunk:{chunk_id}"
 
         try:
             # Embed chunk
@@ -599,9 +662,10 @@ class FeralDaemon:
         Uses SEMANTIC SIMILARITY to find positioning anchor, not sequential order.
         Compares to previously smashed chunks using cached embeddings.
         """
-        chunk_id = chunk['chunk_id']
+        chunk_id = chunk['chunk_id']  # This is actually receipt_id from the database
         paper_name = chunk.get('paper_id', 'unknown')
-        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+        # Use consistent node ID format matching constellation API: chunk:{receipt_id}
+        full_node_id = f"chunk:{chunk_id}"
 
         # Track discovery using full node_id
         is_new_node = full_node_id not in self._discovered_chunks
@@ -758,9 +822,9 @@ class FeralDaemon:
             self._log_activity('paper', "No paper chunks available")
             return
 
-        # Build full node IDs for consistent tracking (match smasher format)
+        # Build full node IDs for consistent tracking (match constellation format)
         def get_full_id(c):
-            return f"chunk:{c.get('paper_id', 'unknown')}:{c['chunk_id']}"
+            return f"chunk:{c['chunk_id']}"
 
         # Filter to unexplored
         unexplored = [c for c in paper_chunks if get_full_id(c) not in self._explored_chunks]
@@ -777,8 +841,8 @@ class FeralDaemon:
         paper_name = chunk.get('paper_id', 'unknown')
         heading = chunk.get('heading', '')
 
-        # Build full node_id for consistent tracking
-        full_node_id = f"chunk:{paper_name}:{chunk_id}"
+        # Build full node_id for consistent tracking (matches constellation format)
+        full_node_id = f"chunk:{chunk_id}"
 
         # Track discovery state for constellation animation
         is_new_node = full_node_id not in self._discovered_chunks

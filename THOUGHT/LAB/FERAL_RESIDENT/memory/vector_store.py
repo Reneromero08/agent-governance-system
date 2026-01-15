@@ -625,6 +625,52 @@ class VectorStore:
 
         return stats
 
+    def get_total_chunks_count(self) -> int:
+        """
+        Get total count of paper chunks in feral_eternal.db.
+
+        Returns:
+            Total number of paper_load receipts (not sampled)
+        """
+        import sqlite3
+
+        feral_dir = Path(__file__).resolve().parent.parent
+        db_path = feral_dir / "data" / "db" / "feral_eternal.db"
+
+        if not db_path.exists():
+            return 0
+
+        try:
+            with sqlite3.connect(str(db_path)) as conn:
+                cursor = conn.execute(
+                    "SELECT COUNT(*) FROM receipts WHERE operation = 'paper_load'"
+                )
+                return cursor.fetchone()[0]
+        except Exception:
+            return 0
+
+    def get_absorbed_memories_count(self) -> int:
+        """
+        Get count of absorbed memories from interactions table.
+
+        Returns:
+            Total number of absorbed interactions (persisted to DB)
+        """
+        import sqlite3
+
+        feral_dir = Path(__file__).resolve().parent.parent
+        db_path = feral_dir / "data" / "db" / "feral_eternal.db"
+
+        if not db_path.exists():
+            return 0
+
+        try:
+            with sqlite3.connect(str(db_path)) as conn:
+                cursor = conn.execute("SELECT COUNT(*) FROM interactions")
+                return cursor.fetchone()[0]
+        except Exception:
+            return 0
+
     def get_paper_chunks(self, limit: int = 1000) -> List[Dict]:
         """
         Get paper chunks from feral_eternal.db (GOD TIER papers).

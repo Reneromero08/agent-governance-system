@@ -39,6 +39,19 @@ export let explorationTrail = [];
 export let trailLine = null;
 export const MAX_TRAIL_LENGTH = 50;
 
+// Smasher cursor state (persistent visual for current analysis)
+export let smasherCursor = null;
+export let smasherCurrentNodeId = null;
+export let smasherTrailNodes = [];  // Recent path for visualization
+export const SMASHER_TRAIL_LENGTH = 20;
+
+export function setSmasherCursor(val) { smasherCursor = val; }
+export function setSmasherCurrentNodeId(val) { smasherCurrentNodeId = val; }
+export function addToSmasherTrail(nodeId) {
+    smasherTrailNodes.push({ nodeId, timestamp: Date.now() });
+    while (smasherTrailNodes.length > SMASHER_TRAIL_LENGTH) smasherTrailNodes.shift();
+}
+
 export const ACTIVITY_COLORS = {
     paper: { main: 0x00ff41, glow: '#00ff41' },
     consolidate: { main: 0x00ff41, glow: '#00ff41' },

@@ -53,8 +53,18 @@ function handleWebSocketMessage(msg) {
         updateCurrentFile(msg.data);
         updateSmasherStats(msg.data.rate);
 
-        // Queue ALL batch items for graph visualization (batched processing)
+        // Add to activity feed and queue for graph visualization
         for (const item of batch) {
+            const gateStatus = item.gate_open ? 'ABSORBED' : 'REJECTED';
+            addActivity({
+                timestamp: Date.now(),
+                action: 'smash',
+                summary: `E=${item.E.toFixed(2)} ${gateStatus}`,
+                details: {
+                    paper: item.paper || 'unknown',
+                    chunk_id: item.chunk_id || item.node_id
+                }
+            });
             queueSmashVisualization(item);
         }
     } else if (msg.type === 'hot_reload') {

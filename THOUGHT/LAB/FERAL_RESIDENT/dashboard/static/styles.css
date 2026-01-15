@@ -594,6 +594,16 @@
             color: #ff6600;
         }
 
+        .activity-badge.smash.absorbed {
+            background: rgba(0, 255, 65, 0.3);
+            color: #00ff41;
+        }
+
+        .activity-badge.smash.rejected {
+            background: rgba(255, 68, 68, 0.3);
+            color: #ff4444;
+        }
+
         .activity-badge.smasher {
             background: rgba(255, 102, 0, 0.3);
             color: #ff6600;

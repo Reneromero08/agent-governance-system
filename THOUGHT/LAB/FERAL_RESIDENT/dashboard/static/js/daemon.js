@@ -30,6 +30,7 @@ export function updateDaemonStatus(data) {
     updateBehaviorUI('cassette_watch', 'cassette');
 
     // Q46: Update dynamic threshold display
+    // Use n_memories (absorbed memories) for N display - nucleation depends on absorbed count
     if (data.threshold !== undefined) {
         const n = data.n_memories || 0;
         updateThresholdDisplay(data.threshold, n);

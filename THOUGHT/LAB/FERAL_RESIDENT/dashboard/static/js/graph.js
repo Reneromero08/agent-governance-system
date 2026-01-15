@@ -14,6 +14,44 @@ export const ACTIVITY_COLORS = {
 let trailLine = null;
 const MAX_TRAIL_LENGTH = 50;
 
+// ===== SHARED GEOMETRIES & MATERIALS (Performance Optimization) =====
+// Create once, reuse for all nodes - avoids creating thousands of objects
+let sharedGeometries = null;
+let sharedMaterials = null;
+
+function initSharedAssets() {
+    if (sharedGeometries) return;  // Already initialized
+
+    // Shared geometries - created ONCE
+    sharedGeometries = {
+        folderSphere: new THREE.SphereGeometry(4, 6, 6),      // Low-poly for folders
+        nodeSphere: new THREE.SphereGeometry(2, 4, 4),        // Very low-poly for chunks
+        folderGlow: new THREE.SphereGeometry(5.2, 4, 4),      // Glow uses even fewer segments
+        nodeGlow: new THREE.SphereGeometry(2.6, 4, 4),
+    };
+
+    // Shared materials - created ONCE, cloned when needed for animation
+    sharedMaterials = {
+        folder: new THREE.MeshBasicMaterial({
+            color: 0x00ff41,
+            transparent: true,
+            opacity: 0.9
+        }),
+        node: new THREE.MeshBasicMaterial({
+            color: 0x008f11,
+            transparent: true,
+            opacity: 0.9
+        }),
+        glow: new THREE.MeshBasicMaterial({
+            color: 0x00ff41,
+            transparent: true,
+            opacity: 0.15
+        })
+    };
+
+    console.log('[PERF] Shared geometries/materials initialized');
+}
+
 export function waitForThreeJS() {
     return new Promise((resolve) => {
         function check() {
@@ -65,27 +103,46 @@ export async function initConstellation() {
         const links = filterLinks(state.allLinks);
         console.log('[CONSTELLATION] Nodes:', nodes.length, 'Links:', links.length);
 
+        // Performance mode for large datasets (>500 nodes)
+        const perfMode = nodes.length > 500;
+        if (perfMode) {
+            console.log('[PERF] Large dataset detected, enabling performance optimizations');
+        }
+
+        // Initialize shared assets BEFORE creating graph
+        initSharedAssets();
+
         nodes.forEach(n => state.nodeRegistry.byId.set(n.id, n));
 
-        nodes.forEach(n => {
-            state.nodePulseState.set(n.id, {
-                intensity: 0.4,
-                phase: Math.random() * Math.PI * 2,
-                frequency: 0.5 + Math.random() * 0.5,
-                lastActivity: Date.now()
+        // Only initialize pulse state for smaller datasets (perf optimization)
+        if (!perfMode) {
+            nodes.forEach(n => {
+                state.nodePulseState.set(n.id, {
+                    intensity: 0.4,
+                    phase: Math.random() * Math.PI * 2,
+                    frequency: 0.5 + Math.random() * 0.5,
+                    lastActivity: Date.now()
+                });
             });
-        });
+        }
 
         console.log('[CONSTELLATION] Creating graph with', nodes.length, 'nodes and', links.length, 'links');
 
-        const Graph = ForceGraph3D({ controlType: 'orbit' })(container)
+        const Graph = ForceGraph3D({
+            controlType: 'orbit',
+            rendererConfig: {
+                antialias: !perfMode,           // Disable AA in perf mode
+                powerPreference: 'high-performance',
+                precision: perfMode ? 'lowp' : 'highp'
+            }
+        })(container)
             .graphData({ nodes, links })
             .backgroundColor('#000000')
             .showNavInfo(false)
             .nodeLabel(node => `${node.label}\n${node.path || node.id}`)
             .nodeColor(node => node.group === 'folder' ? '#00ff41' : '#008f11')
             .nodeOpacity(0.9)
-            .nodeResolution(8)
+            .nodeResolution(perfMode ? 4 : 6)   // Lower resolution in perf mode
             .nodeVal(node => node.val)
             .linkColor(link => {
                 // Resident-decided links (different colors)
@@ -121,10 +178,10 @@ export async function initConstellation() {
                 if (link.type === 'similarity') return 0.3;
                 return 0.2;
             })
-            .d3AlphaDecay(0.02)
-            .d3VelocityDecay(0.5)
-            .warmupTicks(50)
-            .cooldownTicks(100)
+            .d3AlphaDecay(perfMode ? 0.05 : 0.02)     // Faster decay in perf mode
+            .d3VelocityDecay(perfMode ? 0.6 : 0.5)
+            .warmupTicks(perfMode ? 20 : 50)           // Much faster warmup
+            .cooldownTicks(perfMode ? 50 : 100)        // Faster cooldown
             .enableNodeDrag(false)
             .onNodeHover(node => {
                 if (node) {
@@ -157,28 +214,27 @@ export async function initConstellation() {
 
         Graph.nodeThreeObject(node => {
             const group = new THREE.Group();
+            const isFolder = node.group === 'folder';
 
-            const size = node.group === 'folder' ? 4 : 2;
-            const geometry = new THREE.SphereGeometry(size, 8, 8);
-            const material = new THREE.MeshBasicMaterial({
-                color: node.group === 'folder' ? 0x00ff41 : 0x008f11,
-                transparent: true,
-                opacity: 0.9
-            });
+            // Use SHARED geometry, clone material only for nodes that need animation
+            const geometry = isFolder ? sharedGeometries.folderSphere : sharedGeometries.nodeSphere;
+            const baseMaterial = isFolder ? sharedMaterials.folder : sharedMaterials.node;
+
+            // Clone material so each node can have independent color during flash
+            const material = baseMaterial.clone();
             const sphere = new THREE.Mesh(geometry, material);
             group.add(sphere);
 
-            const glowGeometry = new THREE.SphereGeometry(size * 1.3, 6, 6);
-            const glowMaterial = new THREE.MeshBasicMaterial({
-                color: 0x00ff41,
-                transparent: true,
-                opacity: 0.15
-            });
-            const glow = new THREE.Mesh(glowGeometry, glowMaterial);
-            group.add(glow);
+            // Only add glow in non-perf mode or for folders
+            if (!perfMode || isFolder) {
+                const glowGeometry = isFolder ? sharedGeometries.folderGlow : sharedGeometries.nodeGlow;
+                const glowMaterial = sharedMaterials.glow.clone();
+                const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+                group.add(glow);
+                node.__glowSphere = glow;
+            }
 
             node.__mainSphere = sphere;
-            node.__glowSphere = glow;
 
             return group;
         });
@@ -354,14 +410,181 @@ export function activateNode(nodeId, activityType) {
     }
 }
 
+// Smasher cursor - persistent visual showing current analysis position
+let smasherCursorGroup = null;
+let smasherCursorRing = null;
+let smasherTrailLine = null;
+let smasherAnimationFrame = null;
+
+function createSmasherCursor() {
+    if (!state.Graph) return;
+    const scene = state.Graph.scene();
+
+    // Remove old cursor if exists
+    if (smasherCursorGroup) {
+        scene.remove(smasherCursorGroup);
+        smasherCursorGroup = null;
+    }
+
+    smasherCursorGroup = new THREE.Group();
+
+    // Outer ring - rotating
+    const ringGeometry = new THREE.TorusGeometry(8, 0.5, 8, 32);
+    const ringMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff6600,  // Orange
+        transparent: true,
+        opacity: 0.8
+    });
+    smasherCursorRing = new THREE.Mesh(ringGeometry, ringMaterial);
+    smasherCursorGroup.add(smasherCursorRing);
+
+    // Inner glow sphere
+    const glowGeometry = new THREE.SphereGeometry(5, 16, 16);
+    const glowMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff6600,
+        transparent: true,
+        opacity: 0.3
+    });
+    const glow = new THREE.Mesh(glowGeometry, glowMaterial);
+    smasherCursorGroup.add(glow);
+
+    // Pulsing core
+    const coreGeometry = new THREE.SphereGeometry(2, 8, 8);
+    const coreMaterial = new THREE.MeshBasicMaterial({
+        color: 0xffaa00,
+        transparent: true,
+        opacity: 0.9
+    });
+    const core = new THREE.Mesh(coreGeometry, coreMaterial);
+    smasherCursorGroup.add(core);
+
+    smasherCursorGroup.visible = false;
+    scene.add(smasherCursorGroup);
+
+    // Start animation loop
+    if (!smasherAnimationFrame) {
+        animateSmasherCursor();
+    }
+
+    return smasherCursorGroup;
+}
+
+function animateSmasherCursor() {
+    smasherAnimationFrame = requestAnimationFrame(animateSmasherCursor);
+
+    if (!smasherCursorGroup || !smasherCursorGroup.visible) return;
+
+    const time = Date.now() * 0.002;
+
+    // Rotate the ring
+    if (smasherCursorRing) {
+        smasherCursorRing.rotation.x = time * 0.5;
+        smasherCursorRing.rotation.y = time * 0.7;
+    }
+
+    // Pulse the scale
+    const pulse = 1 + Math.sin(time * 3) * 0.15;
+    smasherCursorGroup.scale.setScalar(pulse);
+}
+
+export function moveSmasherCursor(nodeId, gateOpen) {
+    if (!state.Graph) return;
+
+    // Create cursor if it doesn't exist
+    if (!smasherCursorGroup) {
+        createSmasherCursor();
+    }
+
+    const node = state.nodeRegistry.byId.get(nodeId);
+    if (!node || node.x === undefined) {
+        smasherCursorGroup.visible = false;
+        return;
+    }
+
+    // Move cursor to node position
+    smasherCursorGroup.position.set(node.x, node.y, node.z);
+    smasherCursorGroup.visible = true;
+
+    // Change color based on gate state
+    const color = gateOpen ? 0x00ff41 : 0xff4444;
+    smasherCursorGroup.children.forEach(child => {
+        if (child.material) {
+            child.material.color.setHex(color);
+        }
+    });
+
+    // Add to smasher trail
+    state.addToSmasherTrail(nodeId);
+    updateSmasherTrail();
+}
+
+function updateSmasherTrail() {
+    if (!state.Graph) return;
+    const scene = state.Graph.scene();
+
+    // Remove old trail
+    if (smasherTrailLine) {
+        scene.remove(smasherTrailLine);
+        smasherTrailLine.geometry.dispose();
+        smasherTrailLine.material.dispose();
+        smasherTrailLine = null;
+    }
+
+    if (state.smasherTrailNodes.length < 2) return;
+
+    const points = [];
+    const colors = [];
+
+    state.smasherTrailNodes.forEach((entry, index) => {
+        const node = state.nodeRegistry.byId.get(entry.nodeId);
+        if (!node || node.x === undefined) return;
+
+        points.push(new THREE.Vector3(node.x, node.y, node.z));
+
+        // Fade from orange (old) to yellow (new)
+        const age = index / state.smasherTrailNodes.length;
+        const r = 1.0;
+        const g = 0.4 + age * 0.6;
+        const b = 0.0;
+        colors.push(r, g, b);
+    });
+
+    if (points.length < 2) return;
+
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+    const material = new THREE.LineBasicMaterial({
+        vertexColors: true,
+        transparent: true,
+        opacity: 0.8,
+        linewidth: 2
+    });
+    smasherTrailLine = new THREE.Line(geometry, material);
+    scene.add(smasherTrailLine);
+}
+
+export function hideSmasherCursor() {
+    if (smasherCursorGroup) {
+        smasherCursorGroup.visible = false;
+    }
+    // Clear the trail when cursor is hidden
+    if (smasherTrailLine) {
+        smasherTrailLine.visible = false;
+    }
+    state.smasherTrailNodes.length = 0;
+}
+
 export function flashNode(nodeId, gateOpen, E) {
     const node = state.nodeRegistry.byId.get(nodeId);
     if (!node) return;
 
+    // Move smasher cursor to this node
+    moveSmasherCursor(nodeId, gateOpen);
+
     const flashColor = gateOpen ? 0x00ff41 : 0xff4444;
 
     if (node.__mainSphere) {
-        node.__mainSphere.scale.setScalar(3.0);
+        node.__mainSphere.scale.setScalar(2.5);
         node.__mainSphere.material.color.setHex(flashColor);
         node.__mainSphere.material.opacity = 1.0;
 
@@ -371,11 +594,11 @@ export function flashNode(nodeId, gateOpen, E) {
                 node.__mainSphere.material.color.setHex(node.group === 'folder' ? 0x00ff41 : 0x008f11);
                 node.__mainSphere.material.opacity = 0.9;
             }
-        }, 300);
+        }, 500);  // Increased from 300ms
     }
 
     if (node.__glowSphere) {
-        node.__glowSphere.scale.setScalar(3.0);
+        node.__glowSphere.scale.setScalar(2.5);
         node.__glowSphere.material.color.setHex(flashColor);
         node.__glowSphere.material.opacity = 0.6;
 
@@ -385,7 +608,7 @@ export function flashNode(nodeId, gateOpen, E) {
                 node.__glowSphere.material.color.setHex(0x00ff41);
                 node.__glowSphere.material.opacity = 0.15;
             }
-        }, 300);
+        }, 500);  // Increased from 300ms
     }
 
     if (!state.staticCameraMode) {

@@ -1,7 +1,7 @@
 // ===== PARTICLE SMASHER =====
 import * as state from './state.js';
 import { api } from './api.js';
-import { flashNode, addToTrail, focusCameraOnNode } from './graph.js';
+import { flashNode, addToTrail, focusCameraOnNode, hideSmasherCursor } from './graph.js';
 import { saveSettings } from './settings.js';
 
 export async function toggleSmasher() {
@@ -35,9 +35,15 @@ export async function startSmasher() {
 
 export async function stopSmasher() {
     try {
+        // Immediately clear the local visualization queue to prevent lingering animations
+        state.smashQueue.length = 0;
+        state.setSmashRafPending(false);
+
         await api('/smasher/stop', { method: 'POST' });
         state.setSmasherActive(false);
         updateSmasherUI();
+        hideSmasherCursor();  // Hide the 3D cursor when stopped
+        clearCurrentFile();   // Clear the current file display
     } catch (e) {
         console.error('Failed to stop smasher:', e);
     }
@@ -56,13 +62,15 @@ export function updateSmasherUI() {
         btn.innerText = 'STOP';
         btn.className = 'daemon-btn';
         stats.style.display = 'block';
-        currentFile.classList.add('active');
+        // Don't touch currentFile here - let updateCurrentFile handle it
+        // currentFile.classList.add('active');
     } else {
         led.className = 'daemon-led';
         text.innerText = 'Idle';
         btn.innerText = 'SMASH';
         btn.className = 'daemon-btn primary';
-        currentFile.classList.remove('active');
+        // Only hide if NOT receiving smash updates (clearCurrentFile handles this on stop)
+        // currentFile.classList.remove('active');
     }
 }
 
