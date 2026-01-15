@@ -77,6 +77,50 @@ Drawing from Global Workspace Theory, Tulving's memory model, and Kahneman's dua
 
 **Reference**: `THOUGHT/LAB/FORMULA/research/questions/lower_priority/q27_hysteresis.md`
 
+#### Q48-Q50 Semiotic Health Metrics (Semiotic Conservation Law)
+- **`geometric_memory.py` Q48-Q50 Methods** - Semiotic health monitoring
+  - `compute_alpha()` - Returns alpha = 0.5 (topologically protected, Chern number derivation)
+  - `get_semiotic_health()` - Full health metrics (Df, alpha, target_Df, Df_ratio, interpretation)
+  - `get_octant_distribution()` - PCA-based 8-octant analysis (Peirce's Reduction Thesis)
+  - `estimate_sample_alpha()` - Diagnostic tool for empirical alpha estimation
+
+- **`vector_brain.py` Semiotic Integration**
+  - Extended `ThinkResult` dataclass with `semiotic_health` and `alpha` fields
+  - Extended `status` property with semiotic metrics
+  - Added `diagnose()` method for full health diagnostic with recommendations
+
+- **Q48-Q50 Constants**:
+  - `SEMIOTIC_CONSTANT = 8 * np.e` (approx 21.746) - Universal conservation value
+  - `CRITICAL_ALPHA = 0.5` - Riemann critical line, Chern number c_1 = 1
+  - `OCTANT_COUNT = 8` - 2^3 from Peirce's Reduction Thesis
+  - `MIN_MEMORIES_FOR_ALPHA = 20` - Minimum memories for reliable analysis
+
+- **Hardcore Test Suite** - `tests/test_semiotic_health.py` (8 tests, all pass)
+  - Alpha value validation (theoretical 0.5)
+  - Semiotic health metrics structure
+  - Instruction compression detection
+  - Octant coverage (>= 50% for diverse content)
+  - Octant entropy distribution (>= 40% normalized)
+  - Constants validation (8e, 0.5, 8)
+  - Edge case handling (empty, single, few memories)
+  - Health interpretation categories
+
+### Research
+
+**Q48-Q50 Discovery Applied**: Semiotic Conservation Law Df x alpha = 8e
+- **Finding**: Well-trained embedding models exhibit Df x alpha = 8e (CV < 3%)
+- **Alpha = 0.5**: Derived from Chern number c_1 = 1 (topological invariant)
+- **8 Octants**: 2^3 from Peirce's irreducible semiotic categories
+- **Target Df**: 8e / 0.5 = 43.49 for healthy semantic structure
+
+**Health Interpretations**:
+- `healthy`: Df ratio 70-130% (natural semantic structure)
+- `compressed`: Df ratio < 50% (alignment/instruction distortion)
+- `expanded`: Df ratio > 200% (over-dispersed representations)
+- `moderate`: Df ratio 50-70% or 130-200%
+
+**Reference**: `THOUGHT/LAB/FORMULA/research/questions/reports/Q50_COMPLETING_8E.md`
+
 ### Changed
 
 #### Msg Icon to Status Bar

@@ -37,6 +37,15 @@ PHASE_TRANSITION_THRESHOLD = 0.025
 DEFAULT_FILTER_NOISE = 0.1
 CRITICAL_RESONANCE = 1.0 / (2.0 * np.pi)  # Q46 threshold
 
+# ============================================================================
+# Q48-Q50 Semiotic Conservation Law Constants
+# ============================================================================
+# Universal conservation law: Df × α = 8e ≈ 21.746 (CV < 3% across 24 models)
+SEMIOTIC_CONSTANT = 8 * np.e  # ≈ 21.746
+CRITICAL_ALPHA = 0.5  # Riemann critical line, Chern number derivation (c₁ = 1)
+OCTANT_COUNT = 8  # 2³ from Peirce's Reduction Thesis (3 irreducible categories)
+MIN_MEMORIES_FOR_ALPHA = 20  # Minimum memories before alpha computation is stable
+
 
 def get_dynamic_threshold(n_memories: int) -> float:
     """Q46 nucleation threshold: θ(N) = (1/2π) / (1 + 1/√N)"""
@@ -553,6 +562,237 @@ class GeometricMemory:
             'Df_after': after_Df,
             'expected_quality': result['expected_quality_boost'],
             'intensity': intensity
+        }
+
+    # ========================================================================
+    # Q48-Q50 Semiotic Health Methods
+    # ========================================================================
+
+    def compute_alpha(self) -> float:
+        """
+        Get eigenspectrum decay exponent α (Q48-Q50).
+
+        The α ≈ 0.5 value is a fundamental property of well-trained embedding
+        models (sentence-transformers), derived from Chern number c₁ = 1.
+
+        This is NOT computed from user samples (which would require thousands of
+        samples to estimate accurately), but is the known theoretical value from
+        Q48-Q50 research validated across 24 models (CV = 6.93%).
+
+        The semiotic health check uses this theoretical α to verify that the
+        mind's Df follows the conservation law: Df × α ≈ 8e.
+
+        Returns:
+            α = 0.5 (critical value, topologically protected)
+        """
+        # Q48-Q50 validated: α ≈ 0.5 across all sentence-transformer models
+        # This is a property of the embedding model, not user data
+        # Deviations in Df × α from 8e indicate compression/distortion
+        return CRITICAL_ALPHA
+
+    def estimate_sample_alpha(self, n_eigenvalues: int = 50) -> Optional[float]:
+        """
+        Estimate eigenspectrum decay from sample covariance (for diagnostics).
+
+        WARNING: This is NOT the α from Q48-Q50. That α is computed from the
+        full embedding weight matrix, requiring millions of parameters.
+        This sample-based estimate is useful for diagnostics but will not
+        match the theoretical value of 0.5.
+
+        Returns:
+            Estimated α from sample covariance, or None if insufficient data
+        """
+        if len(self.memory_history) < MIN_MEMORIES_FOR_ALPHA:
+            return None
+
+        # Get all memory vectors
+        vectors = []
+        for mem in self.memory_history:
+            state = self.reasoner.initialize(mem['text'])
+            vectors.append(state.vector)
+
+        vectors = np.array(vectors)
+
+        # Compute Gram matrix (N×N) instead of covariance (D×D)
+        # This is more appropriate for N << D case
+        centered = vectors - np.mean(vectors, axis=0)
+        gram = np.dot(centered, centered.T)  # N×N Gram matrix
+
+        # Get eigenvalues
+        eigenvalues = np.linalg.eigvalsh(gram)
+        eigenvalues = np.sort(eigenvalues)[::-1]  # Descending order
+
+        # Take top n_eigenvalues (or fewer if not enough)
+        n = min(n_eigenvalues, len(eigenvalues))
+        eigenvalues = eigenvalues[:n]
+
+        # Filter out zero/negative eigenvalues for log
+        mask = eigenvalues > 1e-10
+        eigenvalues = eigenvalues[mask]
+
+        if len(eigenvalues) < 5:
+            return None
+
+        # Fit log(λ_k) vs log(k)
+        k = np.arange(1, len(eigenvalues) + 1)
+        log_k = np.log(k)
+        log_lambda = np.log(eigenvalues)
+
+        # Linear regression: log(λ) = -α × log(k) + const
+        slope, _ = np.polyfit(log_k, log_lambda, 1)
+        alpha = -slope
+
+        return float(alpha)
+
+    def get_semiotic_health(self) -> Dict:
+        """
+        Compute semiotic health metrics (Q48-Q50).
+
+        The conservation law Df × α = 8e ≈ 21.746 defines healthy semantic geometry.
+        With α = 0.5 (Chern number derivation), healthy Df ≈ 43.5.
+
+        The mind_state.Df is the participation ratio of the mind vector itself,
+        which measures how "spread out" the representation is across dimensions.
+
+        Health interpretation:
+        - Low Df (<30): Mind collapsed into few dimensions → compressed
+        - Healthy Df (30-60): Full semantic utilization
+        - High Df (>80): Possible noise/diffusion
+
+        Returns:
+            Dict with health metrics
+        """
+        if self.mind_state is None:
+            return {
+                'Df_alpha': 0.0,
+                'health_ratio': 0.0,
+                'alpha': None,
+                'Df': 0.0,
+                'interpretation': 'no_mind_state'
+            }
+
+        Df = self.mind_state.Df
+        alpha = self.compute_alpha()  # Returns 0.5 (theoretical value)
+
+        Df_alpha = Df * alpha
+        health_ratio = Df_alpha / SEMIOTIC_CONSTANT
+
+        # The "target" Df for α=0.5 is 8e/α = 43.49
+        target_Df = SEMIOTIC_CONSTANT / alpha
+
+        # Interpret health based on how close Df is to target
+        # Use log-ratio to handle both compression and expansion symmetrically
+        Df_ratio = Df / target_Df if target_Df > 0 else 0
+
+        if Df_ratio < 0.5:  # Less than half target
+            interpretation = 'compressed'
+        elif Df_ratio > 2.0:  # More than double target
+            interpretation = 'expanded'  # Possible noise/diffusion
+        elif 0.7 < Df_ratio < 1.3:  # Within 30% of target
+            interpretation = 'healthy'
+        else:
+            interpretation = 'moderate'  # Somewhat off but not critical
+
+        # Alignment compression: how much Df is below target
+        compression = max(0.0, 1.0 - Df_ratio) if Df_ratio < 1.0 else 0.0
+
+        return {
+            'Df_alpha': float(Df_alpha),
+            'health_ratio': float(health_ratio),
+            'alpha': float(alpha),
+            'Df': float(Df),
+            'target_Df': float(target_Df),
+            'target_8e': float(SEMIOTIC_CONSTANT),
+            'Df_ratio': float(Df_ratio),
+            'interpretation': interpretation,
+            'alignment_compression': float(compression)
+        }
+
+    def get_octant_distribution(self) -> Dict:
+        """
+        Analyze distribution across 8 semiotic octants (Q48-Q50).
+
+        Uses top 3 PCs of mind state history. Each octant = unique sign
+        combination of (PC1, PC2, PC3), giving 2³ = 8 octants.
+
+        Healthy cognition populates all 8 octants (diverse semantic coverage).
+        Alignment compression may collapse octants.
+
+        Returns:
+            Dict with:
+            - counts: 8-element array of population per octant
+            - coverage: fraction of octants populated (should be 8/8)
+            - entropy: distribution entropy (max = log(8) ≈ 2.08)
+            - dominant_octant: index of most populated octant
+            - octant_labels: sign patterns for each octant
+        """
+        if len(self.memory_history) < 10:
+            return {
+                'counts': np.zeros(OCTANT_COUNT),
+                'coverage': 0.0,
+                'entropy': 0.0,
+                'dominant_octant': None,
+                'message': 'Need 10+ memories for octant analysis'
+            }
+
+        # Get all memory vectors
+        vectors = []
+        for mem in self.memory_history:
+            state = self.reasoner.initialize(mem['text'])
+            vectors.append(state.vector)
+
+        vectors = np.array(vectors)
+
+        # PCA to get top 3 components
+        centered = vectors - np.mean(vectors, axis=0)
+        cov = np.dot(centered.T, centered) / len(vectors)
+
+        eigenvalues, eigenvectors = np.linalg.eigh(cov)
+        # Sort by eigenvalue descending
+        idx = np.argsort(eigenvalues)[::-1]
+        top3_vectors = eigenvectors[:, idx[:3]]
+
+        # Project all vectors onto top 3 PCs
+        projections = np.dot(centered, top3_vectors)  # Shape: (N, 3)
+
+        # Assign each point to an octant based on sign pattern
+        # Octant index = 4*(PC1>0) + 2*(PC2>0) + 1*(PC3>0)
+        octant_indices = (
+            4 * (projections[:, 0] > 0).astype(int) +
+            2 * (projections[:, 1] > 0).astype(int) +
+            1 * (projections[:, 2] > 0).astype(int)
+        )
+
+        # Count per octant
+        counts = np.bincount(octant_indices, minlength=OCTANT_COUNT)
+
+        # Coverage: fraction of octants with at least 1 member
+        coverage = np.sum(counts > 0) / OCTANT_COUNT
+
+        # Entropy of distribution
+        p = counts / counts.sum()
+        p = p[p > 0]  # Filter zeros for log
+        entropy = -np.sum(p * np.log(p)) if len(p) > 0 else 0.0
+
+        # Maximum entropy for 8 octants
+        max_entropy = np.log(OCTANT_COUNT)
+
+        # Octant labels (sign patterns)
+        octant_labels = [
+            '---', '--+', '-+-', '-++',
+            '+--', '+-+', '++-', '+++'
+        ]
+
+        return {
+            'counts': counts.tolist(),
+            'coverage': float(coverage),
+            'entropy': float(entropy),
+            'normalized_entropy': float(entropy / max_entropy) if max_entropy > 0 else 0.0,
+            'max_entropy': float(max_entropy),
+            'dominant_octant': int(np.argmax(counts)),
+            'dominant_label': octant_labels[np.argmax(counts)],
+            'octant_labels': octant_labels,
+            'total_memories': len(self.memory_history)
         }
 
     def get_receipt_chain(self) -> List[Dict]:

@@ -49,6 +49,9 @@ class ThinkResult:
     navigation_depth: int
     interaction_id: str
     receipt: Dict
+    # Q48-Q50 Semiotic Health Metrics
+    semiotic_health: Optional[float] = None  # Df × α / 8e (1.0 = perfect)
+    alpha: Optional[float] = None  # Eigenspectrum decay rate (should be ~0.5)
 
 
 class VectorResident:
@@ -278,6 +281,11 @@ class VectorResident:
             'navigation_depth': nav_result.total_depth
         }
 
+        # === Q48-Q50: Get Semiotic Health ===
+        semiotic = self.store.memory.get_semiotic_health()
+        semiotic_health = semiotic.get('health_ratio')
+        alpha = semiotic.get('alpha')
+
         return ThinkResult(
             response=response,
             E_resonance=E_resonance,
@@ -288,7 +296,9 @@ class VectorResident:
             distance_from_start=distance_from_start,
             navigation_depth=nav_result.total_depth,
             interaction_id=interaction_id,
-            receipt=receipt
+            receipt=receipt,
+            semiotic_health=semiotic_health,
+            alpha=alpha
         )
 
     def _generate_response(
@@ -431,7 +441,10 @@ RESPONSE:"""
 
     @property
     def status(self) -> Dict:
-        """Get current resident status"""
+        """Get current resident status including semiotic health (Q48-Q50)"""
+        # Get semiotic health metrics
+        semiotic = self.store.memory.get_semiotic_health()
+
         return {
             'thread_id': self.thread_id,
             'version': self.VERSION,
@@ -439,9 +452,99 @@ RESPONSE:"""
             'mind_hash': self.store.get_mind_hash(),
             'mind_Df': self.store.get_mind_Df(),
             'distance_from_start': self.store.get_distance_from_start(),
+            # Q48-Q50 Semiotic Health
+            'semiotic_health': semiotic.get('health_ratio'),
+            'alpha': semiotic.get('alpha'),
+            'alignment_compression': semiotic.get('alignment_compression', 0.0),
+            'semiotic_status': semiotic.get('interpretation'),
+            # Component stats
             'db_stats': self.store.db.get_stats(),
             'reasoner_stats': self.reasoner.get_stats(),
             'diffusion_stats': self.diffusion.get_stats()
+        }
+
+    def diagnose(self) -> Dict:
+        """
+        Full diagnostic of resident health including semiotic metrics (Q48-Q50).
+
+        Combines:
+        - Semiotic health (Df × α / 8e)
+        - Eigenspectrum decay (α, should be ~0.5)
+        - Octant coverage (should be 8/8)
+        - Alignment compression detection
+
+        Returns:
+            Dict with:
+            - semiotic_health: Df × α / 8e (1.0 = perfect)
+            - alpha: eigenspectrum decay (should be ~0.5)
+            - octant_coverage: fraction of 8 octants populated
+            - alignment_compression: how much format has distorted natural state
+            - recommendations: list of suggested actions if unhealthy
+        """
+        semiotic = self.store.memory.get_semiotic_health()
+        octants = self.store.memory.get_octant_distribution()
+
+        recommendations = []
+
+        # Check semiotic health via Df ratio
+        Df_ratio = semiotic.get('Df_ratio', 0.0)
+        interpretation = semiotic.get('interpretation', 'unknown')
+
+        if interpretation == 'compressed':
+            recommendations.append(
+                f"Df compression detected (Df ratio = {Df_ratio:.1%}). "
+                "Mind collapsed into few dimensions. Feed diverse content."
+            )
+        elif interpretation == 'expanded':
+            recommendations.append(
+                f"Df expansion detected (Df ratio = {Df_ratio:.1%}). "
+                "Mind may be diffusing. Consider consolidation cycle."
+            )
+
+        # Alpha is fixed at 0.5 (theoretical value from Q48-Q50)
+        alpha = semiotic.get('alpha')
+
+        # Check octant coverage
+        coverage = octants.get('coverage', 0.0)
+        if coverage < 0.75:  # Less than 6/8 octants
+            recommendations.append(
+                f"Octant coverage is {coverage:.0%} (only {int(coverage * 8)}/8 octants populated). "
+                "Semantic space is not fully explored - need more diverse content."
+            )
+
+        # Check entropy
+        normalized_entropy = octants.get('normalized_entropy', 0.0)
+        if normalized_entropy < 0.7:
+            recommendations.append(
+                f"Octant entropy is {normalized_entropy:.0%} of maximum. "
+                "Content is clustering in few octants - semantic diversity needed."
+            )
+
+        if interpretation == 'healthy' and not recommendations:
+            recommendations.append("Semiotic geometry is healthy. No action needed.")
+
+        return {
+            # Core health metrics
+            'semiotic_health': semiotic.get('health_ratio'),
+            'Df_ratio': Df_ratio,
+            'alpha': alpha,
+            'Df': semiotic.get('Df'),
+            'target_Df': semiotic.get('target_Df'),
+            'Df_alpha': semiotic.get('Df_alpha'),
+            'target_8e': semiotic.get('target_8e'),
+            # Octant analysis
+            'octant_coverage': coverage,
+            'octant_entropy': normalized_entropy,
+            'octant_counts': octants.get('counts'),
+            'dominant_octant': octants.get('dominant_label'),
+            # Compression metrics
+            'alignment_compression': semiotic.get('alignment_compression', 0.0),
+            # Overall status
+            'interpretation': interpretation,
+            'recommendations': recommendations,
+            # Memory stats
+            'memory_count': len(self.store.memory.memory_history),
+            'interaction_count': self.interaction_count
         }
 
     def get_Df_history(self) -> List[Tuple[str, float]]:
