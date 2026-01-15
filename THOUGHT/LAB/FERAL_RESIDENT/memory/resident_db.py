@@ -124,6 +124,23 @@ class ResidentDB:
         metadata JSON,
         created_at TEXT NOT NULL
     );
+
+    -- Resident Links table: tracks resident-decided connections
+    -- link_type: 'mind_projected' | 'co_retrieval' | 'entanglement'
+    CREATE TABLE IF NOT EXISTS resident_links (
+        link_id TEXT PRIMARY KEY,
+        source_hash TEXT NOT NULL,
+        target_hash TEXT NOT NULL,
+        link_type TEXT NOT NULL,
+        strength REAL,
+        mind_hash TEXT,
+        context JSON,
+        created_at TEXT NOT NULL
+    );
+
+    -- Index for link lookups
+    CREATE INDEX IF NOT EXISTS idx_resident_links_type ON resident_links(link_type);
+    CREATE INDEX IF NOT EXISTS idx_resident_links_source ON resident_links(source_hash);
     """
 
     def __init__(self, db_path: str = "feral_resident.db"):
@@ -554,6 +571,116 @@ class ResidentDB:
             receipts.extend([{'type': 'receipt', **r} for r in chain])
 
         return receipts
+
+    # =========================================================================
+    # Resident Links (Resident-Decided Connections)
+    # =========================================================================
+
+    def store_resident_link(
+        self,
+        source_hash: str,
+        target_hash: str,
+        link_type: str,
+        strength: float = 1.0,
+        mind_hash: Optional[str] = None,
+        context: Optional[Dict] = None
+    ) -> str:
+        """
+        Store a resident-decided connection between two chunks.
+
+        link_type:
+        - 'mind_projected': Similarity computed through mind state projection
+        - 'co_retrieval': Chunks retrieved together during thinking
+        - 'entanglement': Chunks explicitly entangled during reasoning
+        """
+        link_id = str(uuid.uuid4())[:8]
+        now = datetime.now(timezone.utc).isoformat()
+
+        self.conn.execute(
+            """
+            INSERT INTO resident_links
+            (link_id, source_hash, target_hash, link_type, strength, mind_hash, context, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (link_id, source_hash, target_hash, link_type, strength,
+             mind_hash, json.dumps(context or {}), now)
+        )
+        self.conn.commit()
+        return link_id
+
+    def get_resident_links(
+        self,
+        link_type: Optional[str] = None,
+        limit: int = 1000
+    ) -> List[Dict]:
+        """Get resident links, optionally filtered by type."""
+        if link_type:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM resident_links
+                WHERE link_type = ?
+                ORDER BY created_at DESC
+                LIMIT ?
+                """,
+                (link_type, limit)
+            ).fetchall()
+        else:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM resident_links
+                ORDER BY created_at DESC
+                LIMIT ?
+                """,
+                (limit,)
+            ).fetchall()
+
+        return [
+            {
+                'link_id': row['link_id'],
+                'source_hash': row['source_hash'],
+                'target_hash': row['target_hash'],
+                'link_type': row['link_type'],
+                'strength': row['strength'],
+                'mind_hash': row['mind_hash'],
+                'context': json.loads(row['context']) if row['context'] else {},
+                'created_at': row['created_at']
+            }
+            for row in rows
+        ]
+
+    def get_links_for_chunk(self, chunk_hash: str) -> List[Dict]:
+        """Get all resident links involving a specific chunk."""
+        rows = self.conn.execute(
+            """
+            SELECT * FROM resident_links
+            WHERE source_hash LIKE ? OR target_hash LIKE ?
+            ORDER BY created_at DESC
+            """,
+            (f"{chunk_hash}%", f"{chunk_hash}%")
+        ).fetchall()
+
+        return [
+            {
+                'link_id': row['link_id'],
+                'source_hash': row['source_hash'],
+                'target_hash': row['target_hash'],
+                'link_type': row['link_type'],
+                'strength': row['strength'],
+                'mind_hash': row['mind_hash'],
+                'context': json.loads(row['context']) if row['context'] else {},
+                'created_at': row['created_at']
+            }
+            for row in rows
+        ]
+
+    def resident_link_count(self, link_type: Optional[str] = None) -> int:
+        """Count resident links."""
+        if link_type:
+            return self.conn.execute(
+                "SELECT COUNT(*) FROM resident_links WHERE link_type = ?",
+                (link_type,)
+            ).fetchone()[0]
+        return self.conn.execute("SELECT COUNT(*) FROM resident_links").fetchone()[0]
 
 
 # ============================================================================

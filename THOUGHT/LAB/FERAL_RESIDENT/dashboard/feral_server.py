@@ -444,97 +444,140 @@ async def get_evolution():
 
 
 @app.get("/api/constellation")
-async def get_constellation(max_nodes: int = 100):
-    """Get document constellation graph from feral_eternal.db with arxiv papers.
+async def get_constellation(max_nodes: int = 500):
+    """Get document constellation graph showing GOD TIER papers and their headings.
 
-    Always computes ALL similarity edges (threshold >= 0.3) with weights.
-    Client filters by threshold for instant slider response.
+    Structure:
+    - Root "FERAL" node
+    - Paper nodes (folders) for each paper_id
+    - Heading nodes (pages) for each section
+    - Similarity edges between chunks
     """
     import sqlite3
     import numpy as np
+    import json
 
     db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
 
     nodes = []
     edges = []
     vector_embeddings = {}
+    paper_nodes = set()  # Track paper folders
 
     try:
         # Root node
-        nodes.append({"id": "root", "label": "FERAL", "group": "folder"})
+        nodes.append({"id": "root", "label": "FERAL CONSTELLATION", "group": "folder"})
 
-        # Connect to feral_eternal.db
         with sqlite3.connect(str(db_path)) as conn:
-            # Get mind state
-            cursor = conn.execute("SELECT mind_vector_id FROM threads WHERE thread_id = 'eternal'")
-            mind_row = cursor.fetchone()
-            mind_vector_id = None
-
-            if mind_row:
-                mind_vector_id = mind_row[0]
-                nodes.append({
-                    "id": f"mind:{mind_vector_id}",
-                    "label": f"Mind ({mind_vector_id[:8]})",
-                    "group": "folder"
-                })
-                edges.append({"from": "root", "to": f"mind:{mind_vector_id}", "type": "hierarchy"})
-
-            # Get recent interactions with their vectors
+            # Get paper chunks from receipts (paper_load operation)
             cursor = conn.execute("""
-                SELECT interaction_id, input_text, output_vector_id
-                FROM interactions
-                WHERE input_text IS NOT NULL
-                ORDER BY created_at DESC
+                SELECT r.receipt_id, r.output_hash, r.metadata, v.vec_blob
+                FROM receipts r
+                LEFT JOIN vectors v ON v.vec_sha256 LIKE r.output_hash || '%'
+                WHERE r.operation = 'paper_load'
                 LIMIT ?
             """, (max_nodes,))
 
             rows = cursor.fetchall()
 
-            for interaction_id, input_text, output_vid in rows:
-                # Extract paper ID
-                paper_id = None
-                if input_text and "[Paper:" in input_text:
-                    try:
-                        paper_id = input_text.split("[Paper:")[1].split("]")[0].strip()
-                    except:
-                        pass
+            for receipt_id, output_hash, metadata_json, vec_blob in rows:
+                if not metadata_json:
+                    continue
 
-                # Create label
-                if paper_id:
-                    label = f"{paper_id[:12]}"
-                elif input_text:
-                    label = input_text[:25].replace("\n", " ").strip()
-                else:
-                    label = interaction_id[:8]
+                meta = json.loads(metadata_json)
+                paper_id = meta.get('paper_id', 'unknown')
+                heading = meta.get('heading', '').strip()
 
-                node_id = f"int:{interaction_id}"
+                # Create paper folder node if not exists
+                paper_node_id = f"paper:{paper_id}"
+                if paper_node_id not in paper_nodes:
+                    paper_nodes.add(paper_node_id)
+                    nodes.append({
+                        "id": paper_node_id,
+                        "label": paper_id,
+                        "group": "folder",
+                        "paper_id": paper_id
+                    })
+                    edges.append({"from": "root", "to": paper_node_id, "type": "hierarchy"})
+
+                # Create heading node (chunk)
+                # Clean heading for label
+                label = heading.lstrip('#').strip()[:40]
+                if not label:
+                    label = "content"
+
+                chunk_node_id = f"chunk:{receipt_id}"
                 nodes.append({
-                    "id": node_id,
+                    "id": chunk_node_id,
                     "label": label,
                     "group": "page",
-                    "paper_id": paper_id
+                    "paper_id": paper_id,
+                    "heading": heading
                 })
 
-                # Connect to mind or root (hierarchy edge)
-                parent = f"mind:{mind_vector_id}" if mind_vector_id else "root"
-                edges.append({"from": parent, "to": node_id, "type": "hierarchy"})
+                # Connect chunk to paper
+                edges.append({"from": paper_node_id, "to": chunk_node_id, "type": "hierarchy"})
 
-                # Load vector for similarity computation
-                if output_vid:
+                # Store vector for similarity computation
+                if vec_blob:
                     try:
-                        v_cursor = conn.execute("SELECT vec_blob FROM vectors WHERE vec_sha256 LIKE ? || '%'", (output_vid,))
-                        v_row = v_cursor.fetchone()
-                        if v_row and v_row[0]:
-                            embedding = np.frombuffer(v_row[0], dtype=np.float32)
-                            vector_embeddings[node_id] = embedding
+                        embedding = np.frombuffer(vec_blob, dtype=np.float32)
+                        if len(embedding) > 0:
+                            vector_embeddings[chunk_node_id] = embedding
                     except Exception:
                         pass
 
-        # Always compute ALL similarity edges (no threshold)
-        # Client will filter by threshold slider for instant response
+        # Compute similarity edges between chunks
         if len(vector_embeddings) > 1:
-            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.0, max_edges=500)
+            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.0, max_edges=1000)
             edges.extend(similarity_edges)
+
+        # Load resident-decided links from database
+        resident_link_edges = []
+        with sqlite3.connect(str(db_path)) as conn:
+            cursor = conn.execute("""
+                SELECT source_hash, target_hash, link_type, strength
+                FROM resident_links
+                ORDER BY created_at DESC
+                LIMIT 500
+            """)
+
+            # Build hash -> node_id mapping
+            hash_to_node = {}
+            for node in nodes:
+                if node.get('id', '').startswith('chunk:'):
+                    # Get receipt_id from node id
+                    receipt_id = node['id'].replace('chunk:', '')
+                    hash_to_node[receipt_id] = node['id']
+
+            for source_hash, target_hash, link_type, strength in cursor.fetchall():
+                # Map hashes to node IDs (prefix match)
+                source_node = None
+                target_node = None
+                for h, nid in hash_to_node.items():
+                    if source_hash.startswith(h) or h.startswith(source_hash[:8]):
+                        source_node = nid
+                    if target_hash.startswith(h) or h.startswith(target_hash[:8]):
+                        target_node = nid
+
+                if source_node and target_node and source_node != target_node:
+                    resident_link_edges.append({
+                        "from": source_node,
+                        "to": target_node,
+                        "type": link_type,  # mind_projected, co_retrieval, entanglement
+                        "weight": float(strength) if strength else 1.0
+                    })
+
+        edges.extend(resident_link_edges)
+
+        # Edge type color legend (for frontend)
+        edge_colors = {
+            'hierarchy': '#008f11',      # Dark green - structural
+            'similarity': '#64ffff',      # Cyan - cosine similarity
+            'mind_projected': '#ff6b6b',  # Coral red - resident's perspective
+            'co_retrieval': '#ffd93d',    # Gold - retrieved together
+            'entanglement': '#c77dff'     # Purple - quantum bound
+        }
 
         return {
             'ok': True,
@@ -542,7 +585,9 @@ async def get_constellation(max_nodes: int = 100):
             'edges': edges,
             'node_count': len(nodes),
             'edge_count': len(edges),
-            'similarity_edge_count': len([e for e in edges if e.get('type') == 'similarity'])
+            'similarity_edge_count': len([e for e in edges if e.get('type') == 'similarity']),
+            'resident_link_count': len(resident_link_edges),
+            'edge_colors': edge_colors
         }
 
     except Exception as e:
@@ -612,6 +657,166 @@ async def get_activity(limit: int = 50):
             for a in activities
         ]
     }
+
+
+@app.post("/api/resident/link")
+async def create_resident_link(
+    source_hash: str,
+    target_hash: str,
+    link_type: str,
+    strength: float = 1.0
+):
+    """Create a resident-decided link between two chunks.
+
+    link_type must be one of:
+    - mind_projected: Similarity from resident's perspective
+    - co_retrieval: Chunks retrieved together
+    - entanglement: Chunks bound during reasoning
+    """
+    import sqlite3
+
+    if link_type not in ['mind_projected', 'co_retrieval', 'entanglement']:
+        return {'ok': False, 'error': f'Invalid link_type: {link_type}'}
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        # Get mind hash from resident
+        r = get_resident()
+        mind_hash = r.mind_hash
+
+        with sqlite3.connect(str(db_path)) as conn:
+            import uuid
+            from datetime import datetime, timezone
+            import json
+
+            link_id = str(uuid.uuid4())[:8]
+            now = datetime.now(timezone.utc).isoformat()
+
+            conn.execute(
+                """
+                INSERT INTO resident_links
+                (link_id, source_hash, target_hash, link_type, strength, mind_hash, context, created_at)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (link_id, source_hash, target_hash, link_type, strength,
+                 mind_hash, json.dumps({}), now)
+            )
+            conn.commit()
+
+        return {
+            'ok': True,
+            'link_id': link_id,
+            'link_type': link_type,
+            'strength': strength
+        }
+
+    except Exception as e:
+        return {'ok': False, 'error': str(e)}
+
+
+@app.post("/api/resident/compute_mind_projected")
+async def compute_mind_projected_similarity(max_links: int = 100):
+    """Compute mind-projected similarity and store as resident links.
+
+    Projects all chunks through the current mind state and finds
+    pairs that are similar from the resident's perspective.
+    """
+    import sqlite3
+    import numpy as np
+    import json
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        r = get_resident()
+        if not r.mind_state:
+            return {'ok': False, 'error': 'Resident has no mind state yet'}
+
+        mind_vector = r.mind_state.vector
+        mind_hash = r.mind_hash
+
+        with sqlite3.connect(str(db_path)) as conn:
+            # Get paper chunks with vectors
+            cursor = conn.execute("""
+                SELECT r.output_hash, v.vec_blob
+                FROM receipts r
+                JOIN vectors v ON v.vec_sha256 LIKE r.output_hash || '%'
+                WHERE r.operation = 'paper_load'
+                LIMIT 500
+            """)
+
+            chunks = []
+            for output_hash, vec_blob in cursor.fetchall():
+                if vec_blob:
+                    vec = np.frombuffer(vec_blob, dtype=np.float32)
+                    chunks.append((output_hash, vec))
+
+            if len(chunks) < 2:
+                return {'ok': False, 'error': 'Not enough chunks'}
+
+            # Project each chunk through mind state
+            # projected = chunk - (chunk · mind) * mind (orthogonal component)
+            # Or simpler: weighted by relevance to mind
+            mind_norm = mind_vector / np.linalg.norm(mind_vector)
+
+            projected = []
+            for hash_, vec in chunks:
+                # Weight by E (relevance to mind)
+                E = np.dot(vec / np.linalg.norm(vec), mind_norm)
+                # Project: blend original with mind-weighted version
+                weighted = vec * (0.5 + 0.5 * E)  # Boost mind-relevant chunks
+                projected.append((hash_, weighted, E))
+
+            # Find pairs with high mind-projected similarity
+            links_created = 0
+            for i in range(len(projected)):
+                for j in range(i + 1, len(projected)):
+                    if links_created >= max_links:
+                        break
+
+                    h1, v1, E1 = projected[i]
+                    h2, v2, E2 = projected[j]
+
+                    # Only link if both are relevant to mind
+                    if E1 < 0.3 or E2 < 0.3:
+                        continue
+
+                    # Compute projected similarity
+                    sim = np.dot(v1, v2) / (np.linalg.norm(v1) * np.linalg.norm(v2) + 1e-8)
+
+                    if sim > 0.7:  # High projected similarity
+                        import uuid
+                        from datetime import datetime, timezone
+
+                        link_id = str(uuid.uuid4())[:8]
+                        now = datetime.now(timezone.utc).isoformat()
+
+                        conn.execute(
+                            """
+                            INSERT INTO resident_links
+                            (link_id, source_hash, target_hash, link_type, strength, mind_hash, context, created_at)
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?)
+                            """,
+                            (link_id, h1[:16], h2[:16], 'mind_projected', float(sim),
+                             mind_hash, json.dumps({'E1': float(E1), 'E2': float(E2)}), now)
+                        )
+                        links_created += 1
+
+                if links_created >= max_links:
+                    break
+
+            conn.commit()
+
+        return {
+            'ok': True,
+            'links_created': links_created,
+            'mind_hash': mind_hash
+        }
+
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
 
 
 @app.get("/api/debug/tui")

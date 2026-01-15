@@ -4,6 +4,43 @@
 
 ### Added
 
+#### GOD TIER Database Rebuild
+- **Complete database format** - Nuclear rebuild from scratch with 99 curated papers
+  - `rebuild_god_tier.py` - 6-step rebuild script (nuke, manifest, index, load, thread, verify)
+  - Database reduced from 208 MB (stale) → 14.9 MB (clean)
+  - 99 papers indexed, 3487 chunks loaded
+  - Manifest points to `god_tier/` paths instead of `markdown/`
+
+- **Header normalization across all papers**:
+  - `apply_haiku_headers.py` - Applied Haiku-extracted headers to 10 papers
+  - All 99 papers now have proper ## ### #### hierarchy
+  - Replaced broken 2312.00752 with Mamba-2 paper (2405.21060)
+
+#### Resident-Decided Similarity Edges
+- **Three new edge types** for AI-driven constellation connections:
+  - `mind_projected` (coral red #ff6b6b) - Similarity from resident's current perspective
+  - `co_retrieval` (gold #ffd93d) - Chunks retrieved together above E threshold
+  - `entanglement` (purple #c77dff) - Quantum-bound through interaction
+
+- **Database schema** - Added `resident_links` table to `resident_db.py`:
+  - `store_resident_link()` - Store typed connections with strength and context
+  - `get_resident_links()` - Query by type, limit, threshold
+  - `get_links_for_chunk()` - Get all links involving a specific chunk
+
+- **API endpoints** in `dashboard/server.py`:
+  - `POST /api/resident/link` - Create manual resident link
+  - `POST /api/resident/compute_mind_projected` - Compute links from current mind state
+
+- **Dashboard visualization**:
+  - Updated `graph.js` with color-coded edge rendering
+  - Edge color legend in `index.html` and `styles.css`
+  - Five edge types: hierarchy (green), similarity (cyan), mind_projected (coral), co_retrieval (gold), entanglement (purple)
+
+#### Constellation API Update
+- **Papers with headings** - `/api/constellation` now shows paper chunks from receipts
+- Nodes display paper_id and heading (not just interaction symbols)
+- Folder → Paper → Heading hierarchy visible in graph
+
 #### Cognitive Bucket Architecture
 - **Reorganized entire codebase** into cognitive function buckets inspired by cognitive science:
   - `perception/` — Sensory interface (paper_pipeline, paper_indexer, index_all_papers)

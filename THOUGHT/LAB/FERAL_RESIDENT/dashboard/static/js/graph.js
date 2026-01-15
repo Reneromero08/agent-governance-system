@@ -88,14 +88,28 @@ export async function initConstellation() {
             .nodeResolution(8)
             .nodeVal(node => node.val)
             .linkColor(link => {
+                // Resident-decided links (different colors)
+                if (link.type === 'mind_projected') {
+                    const alpha = 0.4 + (link.weight || 0.5) * 0.5;
+                    return `rgba(255, 107, 107, ${alpha})`;  // Coral red
+                }
+                if (link.type === 'co_retrieval') {
+                    const alpha = 0.4 + (link.weight || 0.5) * 0.5;
+                    return `rgba(255, 217, 61, ${alpha})`;   // Gold
+                }
+                if (link.type === 'entanglement') {
+                    const alpha = 0.5 + (link.weight || 0.5) * 0.4;
+                    return `rgba(199, 125, 255, ${alpha})`;  // Purple
+                }
+                // Standard links
                 if (link.type === 'smash_trail') {
-                    return 'rgba(255, 102, 0, 0.9)';
+                    return 'rgba(255, 102, 0, 0.9)';         // Orange
                 }
                 if (link.type === 'similarity') {
                     const alpha = 0.15 + (link.weight || 0.5) * 0.25;
-                    return `rgba(100, 255, 255, ${alpha})`;
+                    return `rgba(100, 255, 255, ${alpha})`;  // Cyan
                 }
-                return 'rgba(0, 143, 17, 0.2)';
+                return 'rgba(0, 143, 17, 0.2)';              // Dark green (hierarchy)
             })
             .linkWidth(link => {
                 if (link.type === 'smash_trail') return 2;

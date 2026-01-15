@@ -382,6 +382,40 @@
             border-color: var(--accent);
         }
 
+        /* Edge Legend */
+        .edge-legend {
+            padding: 8px 0;
+            font-size: 11px;
+        }
+
+        .edge-legend-title {
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .edge-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin: 3px 0;
+        }
+
+        .edge-legend-color {
+            width: 12px;
+            height: 3px;
+            display: inline-block;
+        }
+
+        .edge-legend-color.hierarchy { background: #008f11; }
+        .edge-legend-color.similarity { background: #64ffff; }
+        .edge-legend-color.mind-projected { background: #ff6b6b; }
+        .edge-legend-color.co-retrieval { background: #ffd93d; }
+        .edge-legend-color.entanglement { background: #c77dff; }
+
+        .edge-legend-label {
+            color: var(--text-secondary);
+        }
+
         /* Graph Settings */
         .slider-row {
             display: flex;
