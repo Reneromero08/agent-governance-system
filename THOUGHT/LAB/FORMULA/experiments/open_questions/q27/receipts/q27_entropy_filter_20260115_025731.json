@@ -1,0 +1,185 @@
+{
+  "timestamp": "2026-01-15T02:57:31.263114",
+  "test": "Q27 Entropy Filter Analysis",
+  "findings": {
+    "phase_transition_noise": 0.025,
+    "optimal_noise": 0.0,
+    "optimal_qq_product": 2.8296843694472886,
+    "model_comparison": {
+      "r2_additive": 0.32341919793000884,
+      "r2_multiplicative": 0.16734793606113874,
+      "better_model": "additive",
+      "filter_d_correlation": 0.5913332236867715,
+      "power_law_exponent": 0.13444272199220828
+    }
+  },
+  "results": {
+    "0.0": {
+      "cohen_d": 3.075743879834009,
+      "acceptance_rate": 0.9200000000000002,
+      "filter_strength": 0.07999999999999996,
+      "qq_product": 2.8296843694472886,
+      "mean_survivor_E": 0.46885870040758804,
+      "std_d": 4.440892098500626e-16,
+      "n_trials": 10
+    },
+    "0.005": {
+      "cohen_d": 3.060507723323043,
+      "acceptance_rate": 0.915,
+      "filter_strength": 0.08499999999999996,
+      "qq_product": 2.8001488228831475,
+      "mean_survivor_E": 0.42987889603663954,
+      "std_d": 0.14449536205385433,
+      "n_trials": 10
+    },
+    "0.01": {
+      "cohen_d": 2.5917829664737866,
+      "acceptance_rate": 0.8619999999999999,
+      "filter_strength": 0.13800000000000004,
+      "qq_product": 2.232970931010934,
+      "mean_survivor_E": 0.3552696089619217,
+      "std_d": 0.23763621922916947,
+      "n_trials": 10
+    },
+    "0.015": {
+      "cohen_d": 2.244583669596346,
+      "acceptance_rate": 0.7289999999999999,
+      "filter_strength": 0.271,
+      "qq_product": 1.636215919426256,
+      "mean_survivor_E": 0.29930675508413823,
+      "std_d": 0.09996879736190725,
+      "n_trials": 10
+    },
+    "0.02": {
+      "cohen_d": 2.285227081160835,
+      "acceptance_rate": 0.584,
+      "filter_strength": 0.41600000000000004,
+      "qq_product": 1.3327287023604517,
+      "mean_survivor_E": 0.2753197154335375,
+      "std_d": 0.17329640001619845,
+      "n_trials": 10
+    },
+    "0.025": {
+      "cohen_d": 2.2067791834263897,
+      "acceptance_rate": 0.462,
+      "filter_strength": 0.538,
+      "qq_product": 1.015693011196858,
+      "mean_survivor_E": 0.24771832088009105,
+      "std_d": 0.13591413385792062,
+      "n_trials": 10
+    },
+    "0.03": {
+      "cohen_d": 2.410455500668534,
+      "acceptance_rate": 0.338,
+      "filter_strength": 0.662,
+      "qq_product": 0.8100826892798898,
+      "mean_survivor_E": 0.2442396596416479,
+      "std_d": 0.22575391114217294,
+      "n_trials": 10
+    },
+    "0.035": {
+      "cohen_d": 2.497843001114061,
+      "acceptance_rate": 0.29200000000000004,
+      "filter_strength": 0.708,
+      "qq_product": 0.7096532304777424,
+      "mean_survivor_E": 0.23668730558374595,
+      "std_d": 0.4330326141448905,
+      "n_trials": 10
+    },
+    "0.04": {
+      "cohen_d": 2.5105125314031067,
+      "acceptance_rate": 0.262,
+      "filter_strength": 0.738,
+      "qq_product": 0.6493702411855493,
+      "mean_survivor_E": 0.2282509711363101,
+      "std_d": 0.3218951943820953,
+      "n_trials": 10
+    },
+    "0.05": {
+      "cohen_d": 2.5968589135057565,
+      "acceptance_rate": 0.202,
+      "filter_strength": 0.798,
+      "qq_product": 0.5199088778953395,
+      "mean_survivor_E": 0.2192885072127863,
+      "std_d": 0.2900060829605153,
+      "n_trials": 10
+    },
+    "0.06": {
+      "cohen_d": 2.678477851894219,
+      "acceptance_rate": 0.162,
+      "filter_strength": 0.8380000000000001,
+      "qq_product": 0.42321765294561803,
+      "mean_survivor_E": 0.21469738984923364,
+      "std_d": 0.36856600995672567,
+      "n_trials": 10
+    },
+    "0.07": {
+      "cohen_d": 3.1478483848834338,
+      "acceptance_rate": 0.11100000000000002,
+      "filter_strength": 0.8889999999999999,
+      "qq_product": 0.3382741597440978,
+      "mean_survivor_E": 0.2151811662839811,
+      "std_d": 0.4612386216654781,
+      "n_trials": 10
+    },
+    "0.08": {
+      "cohen_d": 3.2407342134833947,
+      "acceptance_rate": 0.10300000000000002,
+      "filter_strength": 0.897,
+      "qq_product": 0.3266955167353328,
+      "mean_survivor_E": 0.21286580994676846,
+      "std_d": 0.49012103298273824,
+      "n_trials": 10
+    },
+    "0.1": {
+      "cohen_d": 3.176475434802486,
+      "acceptance_rate": 0.091,
+      "filter_strength": 0.909,
+      "qq_product": 0.28380355943640384,
+      "mean_survivor_E": 0.20679289180075838,
+      "std_d": 0.462853008330719,
+      "n_trials": 10
+    },
+    "0.15": {
+      "cohen_d": 4.197826130951711,
+      "acceptance_rate": 0.05399999999999999,
+      "filter_strength": 0.9460000000000001,
+      "qq_product": 0.21540204021772724,
+      "mean_survivor_E": 0.24024660099120365,
+      "std_d": 0.8126732455744563,
+      "n_trials": 10
+    },
+    "0.2": {
+      "cohen_d": 4.193227162811522,
+      "acceptance_rate": 0.046,
+      "filter_strength": 0.954,
+      "qq_product": 0.1789645205604427,
+      "mean_survivor_E": 0.22820541470355932,
+      "std_d": 1.0887035925895592,
+      "n_trials": 10
+    },
+    "0.25": {
+      "cohen_d": 4.537114283054857,
+      "acceptance_rate": 0.047,
+      "filter_strength": 0.953,
+      "qq_product": 0.18556941485576378,
+      "mean_survivor_E": 0.2352750512851136,
+      "std_d": 1.7552675768278145,
+      "n_trials": 10
+    },
+    "0.3": {
+      "cohen_d": 3.937499829590898,
+      "acceptance_rate": 0.041,
+      "filter_strength": 0.959,
+      "qq_product": 0.1555790481213387,
+      "mean_survivor_E": 0.21794457886368032,
+      "std_d": 0.7205992811741554,
+      "n_trials": 10
+    }
+  },
+  "conclusion": {
+    "multiplicative_confirmed": false,
+    "phase_transition_exists": true,
+    "optimal_noise_nonzero": false
+  }
+}

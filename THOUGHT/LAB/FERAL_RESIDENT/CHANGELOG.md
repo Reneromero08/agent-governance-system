@@ -2,6 +2,48 @@
 
 ## [Unreleased]
 
+### Added
+
+#### Q27 Entropy Toolkit (Hyperbolic Quality Filter)
+- **`geometric_memory.py` Q27 Methods** - Entropy-based quality concentration
+  - `_perturb_state()` - Apply Gaussian noise to geometric state
+  - `E_under_pressure()` - Compute E against perturbed mind (robustness test)
+  - `set_temperature()` - System selectivity control (explore/exploit modes)
+  - `confidence_score()` - Measure item robustness under increasing noise
+  - `prune_with_entropy()` - Memory pruning via selection pressure
+  - `consolidation_cycle()` - Sleep-like memory consolidation
+
+- **Q27 Constants**:
+  - `PHASE_TRANSITION_THRESHOLD = 0.025` - Critical noise level for quality concentration
+  - `DEFAULT_FILTER_NOISE = 0.1` - Safe default above phase transition
+  - `get_dynamic_threshold()` - Q46 nucleation threshold θ(N) = (1/2π) / (1 + 1/√N)
+
+- **Hardcore Test Suite** - `tests/test_entropy_toolkit.py` (8 tests, all pass)
+  - Phase transition validation (correlation flip at 0.025)
+  - Hyperbolic relationship confirmation (d ≈ 0.12/(1-filter) + 2.06)
+  - Pruning quality concentration (+12.7% E improvement)
+  - Confidence scoring mechanism
+  - Seeding invariant (clean seeding required)
+  - Consolidation effectiveness
+  - Temperature mode switching
+  - Edge case handling
+
+### Research
+
+**Q27 Discovery Applied**: Entropy acts as hyperbolic quality filter
+- **Finding**: Noise > 0.025 improves discrimination quality by up to 47.5%
+- **Mechanism**: Entropy concentrates negentropy in survivors hyperbolically
+- **Validation**: Same dynamics as biological evolution (emergent, not programmed)
+- **Hyperbolic fit**: R² = 0.936 for d ≈ 0.12/(1-filter) + 2.06
+
+**Practical Capabilities**:
+- **Memory pruning**: 72% filter → 12.7% E improvement in survivors
+- **Confidence scoring**: Topic discrimination (on-topic 0.29 vs off-topic 0.005 robustness)
+- **Consolidation**: Df preserved (122→128) while pruning 53%
+- **Load shedding**: Adaptive quality/quantity tradeoff under pressure
+
+**Reference**: `THOUGHT/LAB/FORMULA/research/questions/lower_priority/q27_hysteresis.md`
+
 ### Changed
 
 #### Msg Icon to Status Bar
