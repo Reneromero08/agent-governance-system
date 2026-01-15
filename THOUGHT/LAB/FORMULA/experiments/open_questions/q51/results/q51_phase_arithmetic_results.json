@@ -1,0 +1,43 @@
+{
+  "timestamp": "2026-01-15T19:58:24.056132Z",
+  "test": "Q51_PHASE_ARITHMETIC",
+  "hypothesis": "Phases add under semantic operations (theta_b - theta_a ~ theta_d - theta_c)",
+  "per_model": [
+    {
+      "model": "all-MiniLM-L6-v2",
+      "n_analogies": 22,
+      "mean_error": 0.33323891174137127,
+      "pass_rate": 0.8636363636363636,
+      "phase_correlation": 0.43481819985766323,
+      "separation_ratio": 4.145291025638647,
+      "status": "PARTIAL"
+    },
+    {
+      "model": "all-mpnet-base-v2",
+      "n_analogies": 22,
+      "mean_error": 0.19496910463608072,
+      "pass_rate": 1.0,
+      "phase_correlation": 0.9116500902355921,
+      "separation_ratio": 6.586394553460078,
+      "status": "PASS"
+    },
+    {
+      "model": "BAAI/bge-small-en-v1.5",
+      "n_analogies": 22,
+      "mean_error": 0.4033617658371275,
+      "pass_rate": 0.8636363636363636,
+      "phase_correlation": 0.5934142818660721,
+      "separation_ratio": 4.2227224181931495,
+      "status": "PASS"
+    }
+  ],
+  "cross_model": {
+    "n_models": 3,
+    "mean_analogy_error": 0.31052326073819314,
+    "mean_non_analogy_error": 1.456266830115193,
+    "mean_pass_rate": 0.9090909090909092,
+    "mean_separation_ratio": 4.984802665763958,
+    "hypothesis_supported": true,
+    "verdict": "CONFIRMED: Phases add under semantic operations"
+  }
+}

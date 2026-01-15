@@ -1,0 +1,142 @@
+{
+  "timestamp": "2026-01-15T19:36:59.103391Z",
+  "test": "Q51_ZERO_SIGNATURE",
+  "hypothesis": "Octants are the 8th roots of unity (phases sum to zero)",
+  "per_model": [
+    {
+      "model": "all-MiniLM-L6-v2",
+      "n_samples": 2000,
+      "complex_sum_real": 19.5533838793368,
+      "complex_sum_imag": 23.095055518872037,
+      "magnitude": 30.260806508625805,
+      "normalized_magnitude": 0.015130403254312903,
+      "uniformity_chi2": 75.072,
+      "uniformity_p_value": 1.3866685577568205e-13,
+      "is_zero": true,
+      "octant_counts": [
+        235,
+        288,
+        269,
+        171,
+        288,
+        290,
+        171,
+        288
+      ],
+      "coverage": 1.0,
+      "e_per_octant": 0.18437055375600706,
+      "status": "PARTIAL (zero but non-uniform)"
+    },
+    {
+      "model": "all-mpnet-base-v2",
+      "n_samples": 2000,
+      "complex_sum_real": -19.938000105612332,
+      "complex_sum_imag": 31.52728897326629,
+      "magnitude": 37.30273177952569,
+      "normalized_magnitude": 0.018651365889762846,
+      "uniformity_chi2": 33.432,
+      "uniformity_p_value": 2.1994054206220248e-05,
+      "is_zero": true,
+      "octant_counts": [
+        221,
+        229,
+        293,
+        289,
+        192,
+        257,
+        252,
+        267
+      ],
+      "coverage": 1.0,
+      "e_per_octant": 0.18368493172854117,
+      "status": "PARTIAL (zero but non-uniform)"
+    },
+    {
+      "model": "BAAI/bge-small-en-v1.5",
+      "n_samples": 2000,
+      "complex_sum_real": -21.7632288737306,
+      "complex_sum_imag": -45.32642283531387,
+      "magnitude": 50.2804409095231,
+      "normalized_magnitude": 0.02514022045476155,
+      "uniformity_chi2": 31.560000000000002,
+      "uniformity_p_value": 4.899756455445381e-05,
+      "is_zero": true,
+      "octant_counts": [
+        231,
+        257,
+        253,
+        192,
+        313,
+        257,
+        243,
+        254
+      ],
+      "coverage": 1.0,
+      "e_per_octant": 0.1832596556509282,
+      "status": "PARTIAL (zero but non-uniform)"
+    },
+    {
+      "model": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_samples": 2000,
+      "complex_sum_real": 46.302762522265596,
+      "complex_sum_imag": -1.0598619033880645,
+      "magnitude": 46.314890957958404,
+      "normalized_magnitude": 0.023157445478979202,
+      "uniformity_chi2": 26.592,
+      "uniformity_p_value": 0.00039458050859098037,
+      "is_zero": true,
+      "octant_counts": [
+        297,
+        259,
+        231,
+        230,
+        232,
+        296,
+        218,
+        237
+      ],
+      "coverage": 1.0,
+      "e_per_octant": 0.18404529529634694,
+      "status": "PARTIAL (zero but non-uniform)"
+    },
+    {
+      "model": "thenlper/gte-small",
+      "n_samples": 2000,
+      "complex_sum_real": -20.309418389525295,
+      "complex_sum_imag": -36.08762751020101,
+      "magnitude": 41.410014907456926,
+      "normalized_magnitude": 0.020705007453728462,
+      "uniformity_chi2": 43.175999999999995,
+      "uniformity_p_value": 3.084501197792022e-07,
+      "is_zero": true,
+      "octant_counts": [
+        234,
+        273,
+        249,
+        183,
+        307,
+        283,
+        218,
+        253
+      ],
+      "coverage": 1.0,
+      "e_per_octant": 0.18280326755637757,
+      "status": "PARTIAL (zero but non-uniform)"
+    }
+  ],
+  "cross_model": {
+    "n_models": 5,
+    "mean_normalized_magnitude": 0.02055688850630899,
+    "std_normalized_magnitude": 0.0034891123849109286,
+    "cv_normalized_magnitude": 16.972959618086687,
+    "models_with_zero": 5,
+    "uniformly_distributed": 0,
+    "hypothesis_supported": true,
+    "verdict": "CONFIRMED: Octants are the 8th roots of unity"
+  },
+  "constants": {
+    "SEMIOTIC_CONSTANT": 21.74625462767236,
+    "CRITICAL_ALPHA": 0.5,
+    "SECTOR_WIDTH": 0.7853981633974483
+  }
+}

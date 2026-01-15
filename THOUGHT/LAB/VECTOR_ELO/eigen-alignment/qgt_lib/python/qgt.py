@@ -192,16 +192,13 @@ def berry_connection(path: np.ndarray) -> np.ndarray:
 
 def berry_phase(path: np.ndarray, closed: bool = True) -> float:
     """
-    Compute the Berry phase around a closed loop.
+    Compute the Berry phase as winding angle in 2D PCA projection.
 
-    For real embeddings, the Berry phase is computed as:
-    γ = Σ arccos(⟨v_i|v_{i+1}⟩) - (n-2)π
+    For high-dimensional embeddings, project to 2D via PCA and
+    compute the winding angle (total angle swept in complex plane).
 
-    where n is the number of vertices in the closed loop.
-
-    This measures the "solid angle" subtended by the loop on the sphere.
-
-    Non-zero Berry phase indicates topological structure.
+    This is more robust than spherical excess for high-D data where
+    the (n-2)*pi correction assumes 2D geometry.
 
     Args:
         path: (n_points, dim) array of embeddings forming a loop
@@ -209,7 +206,7 @@ def berry_phase(path: np.ndarray, closed: bool = True) -> float:
         closed: Whether to close the loop (connect last to first)
 
     Returns:
-        Berry phase in radians
+        Berry phase (winding angle) in radians
     """
     path = normalize_embeddings(path)
 
@@ -217,20 +214,28 @@ def berry_phase(path: np.ndarray, closed: bool = True) -> float:
         # Close the loop
         path = np.vstack([path, path[0:1]])
 
-    # Compute angles along the path
-    angles = berry_connection(path)
+    # Project to 2D via PCA for winding computation
+    centered = path - path.mean(axis=0)
+    try:
+        U, S, Vt = np.linalg.svd(centered, full_matrices=False)
+        proj_2d = centered @ Vt[:2].T
+    except:
+        return 0.0
 
-    # Total phase = sum of angles
-    total_angle = np.sum(angles)
+    if proj_2d.shape[1] < 2:
+        return 0.0
 
-    # For a geodesic n-gon on a sphere, the excess angle is the solid angle
-    # Solid angle = total_angle - (n-2)π
-    n_vertices = len(path) - 1  # -1 because we closed the loop
-    geodesic_sum = (n_vertices - 2) * np.pi
+    # Map to complex plane
+    z = proj_2d[:, 0] + 1j * proj_2d[:, 1]
 
-    berry_phase_value = total_angle - geodesic_sum
+    # Handle zero magnitudes
+    z = np.where(np.abs(z) > 1e-10, z, 1e-10)
 
-    return berry_phase_value
+    # Compute winding angle (sum of angle changes)
+    phase_diffs = np.angle(z[1:] / z[:-1])
+    winding_angle = np.sum(phase_diffs)
+
+    return winding_angle
 
 
 def holonomy(path: np.ndarray, vector: np.ndarray) -> np.ndarray:
