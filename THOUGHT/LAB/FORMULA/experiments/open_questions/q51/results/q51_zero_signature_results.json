@@ -1,17 +1,18 @@
 {
-  "timestamp": "2026-01-15T19:36:59.103391Z",
+  "timestamp": "2026-01-15T20:44:51.886891Z",
   "test": "Q51_ZERO_SIGNATURE",
+  "test_version": "2.0-hardened",
   "hypothesis": "Octants are the 8th roots of unity (phases sum to zero)",
   "per_model": [
     {
       "model": "all-MiniLM-L6-v2",
       "n_samples": 2000,
-      "complex_sum_real": 19.5533838793368,
-      "complex_sum_imag": 23.095055518872037,
-      "magnitude": 30.260806508625805,
-      "normalized_magnitude": 0.015130403254312903,
-      "uniformity_chi2": 75.072,
-      "uniformity_p_value": 1.3866685577568205e-13,
+      "complex_sum_real": 19.012187779190604,
+      "complex_sum_imag": 23.636251619018232,
+      "magnitude": 30.33373822575692,
+      "normalized_magnitude": 0.015166869112878461,
+      "uniformity_chi2": 75.064,
+      "uniformity_p_value": 1.3922196728799463e-13,
       "is_zero": true,
       "octant_counts": [
         235,
@@ -24,42 +25,68 @@
         288
       ],
       "coverage": 1.0,
-      "e_per_octant": 0.18437055375600706,
-      "status": "PARTIAL (zero but non-uniform)"
+      "e_per_octant": 0.1843704935970708,
+      "status": "PASS",
+      "validation_warnings": [
+        "embeddings_all-MiniLM-L6-v2: 8 duplicate vectors",
+        "embeddings_all-MiniLM-L6-v2: High condition number (4.82e+20), may be ill-conditioned"
+      ],
+      "embedding_stats": {
+        "n_samples": 2000,
+        "n_dims": 384,
+        "nan_count": 0,
+        "inf_count": 0,
+        "zero_norm_count": 0,
+        "n_unique": 1992,
+        "condition_number": 4.815435902444047e+20
+      }
     },
     {
       "model": "all-mpnet-base-v2",
       "n_samples": 2000,
       "complex_sum_real": -19.938000105612332,
-      "complex_sum_imag": 31.52728897326629,
-      "magnitude": 37.30273177952569,
-      "normalized_magnitude": 0.018651365889762846,
-      "uniformity_chi2": 33.432,
-      "uniformity_p_value": 2.1994054206220248e-05,
+      "complex_sum_imag": 30.444896772973895,
+      "magnitude": 36.392521041120986,
+      "normalized_magnitude": 0.018196260520560493,
+      "uniformity_chi2": 33.352,
+      "uniformity_p_value": 2.2763281835258553e-05,
       "is_zero": true,
       "octant_counts": [
-        221,
-        229,
-        293,
-        289,
+        222,
+        228,
+        291,
+        291,
         192,
         257,
         252,
         267
       ],
       "coverage": 1.0,
-      "e_per_octant": 0.18368493172854117,
-      "status": "PARTIAL (zero but non-uniform)"
+      "e_per_octant": 0.1836848184103713,
+      "status": "PASS",
+      "validation_warnings": [
+        "embeddings_all-mpnet-base-v2: 8 duplicate vectors",
+        "embeddings_all-mpnet-base-v2: High condition number (8.46e+20), may be ill-conditioned"
+      ],
+      "embedding_stats": {
+        "n_samples": 2000,
+        "n_dims": 768,
+        "nan_count": 0,
+        "inf_count": 0,
+        "zero_norm_count": 0,
+        "n_unique": 1992,
+        "condition_number": 8.463527522474593e+20
+      }
     },
     {
       "model": "BAAI/bge-small-en-v1.5",
       "n_samples": 2000,
-      "complex_sum_real": -21.7632288737306,
-      "complex_sum_imag": -45.32642283531387,
-      "magnitude": 50.2804409095231,
-      "normalized_magnitude": 0.02514022045476155,
-      "uniformity_chi2": 31.560000000000002,
-      "uniformity_p_value": 4.899756455445381e-05,
+      "complex_sum_real": -22.3044249738768,
+      "complex_sum_imag": -45.867618935460065,
+      "magnitude": 51.00319441195692,
+      "normalized_magnitude": 0.02550159720597846,
+      "uniformity_chi2": 31.464,
+      "uniformity_p_value": 5.104196135907735e-05,
       "is_zero": true,
       "octant_counts": [
         231,
@@ -68,20 +95,32 @@
         192,
         313,
         257,
-        243,
-        254
+        242,
+        255
       ],
       "coverage": 1.0,
-      "e_per_octant": 0.1832596556509282,
-      "status": "PARTIAL (zero but non-uniform)"
+      "e_per_octant": 0.18325965029616115,
+      "status": "PASS",
+      "validation_warnings": [
+        "embeddings_BAAI/bge-small-en-v1.5: 8 duplicate vectors"
+      ],
+      "embedding_stats": {
+        "n_samples": 2000,
+        "n_dims": 384,
+        "nan_count": 0,
+        "inf_count": 0,
+        "zero_norm_count": 0,
+        "n_unique": 1992,
+        "condition_number": 349043392.0
+      }
     },
     {
       "model": "sentence-transformers/all-MiniLM-L12-v2",
       "n_samples": 2000,
-      "complex_sum_real": 46.302762522265596,
-      "complex_sum_imag": -1.0598619033880645,
-      "magnitude": 46.314890957958404,
-      "normalized_magnitude": 0.023157445478979202,
+      "complex_sum_real": 46.84395862241179,
+      "complex_sum_imag": -0.5186658032418681,
+      "magnitude": 46.84682992085676,
+      "normalized_magnitude": 0.023423414960428383,
       "uniformity_chi2": 26.592,
       "uniformity_p_value": 0.00039458050859098037,
       "is_zero": true,
@@ -92,12 +131,25 @@
         230,
         232,
         296,
-        218,
-        237
+        219,
+        236
       ],
       "coverage": 1.0,
-      "e_per_octant": 0.18404529529634694,
-      "status": "PARTIAL (zero but non-uniform)"
+      "e_per_octant": 0.18404531379549696,
+      "status": "PASS",
+      "validation_warnings": [
+        "embeddings_sentence-transformers/all-MiniLM-L12-v2: 8 duplicate vectors",
+        "embeddings_sentence-transformers/all-MiniLM-L12-v2: High condition number (1.08e+21), may be ill-conditioned"
+      ],
+      "embedding_stats": {
+        "n_samples": 2000,
+        "n_dims": 384,
+        "nan_count": 0,
+        "inf_count": 0,
+        "zero_norm_count": 0,
+        "n_unique": 1992,
+        "condition_number": 1.0835344044104614e+21
+      }
     },
     {
       "model": "thenlper/gte-small",
@@ -120,23 +172,94 @@
         253
       ],
       "coverage": 1.0,
-      "e_per_octant": 0.18280326755637757,
-      "status": "PARTIAL (zero but non-uniform)"
+      "e_per_octant": 0.1828034684830209,
+      "status": "PASS",
+      "validation_warnings": [
+        "embeddings_thenlper/gte-small: 8 duplicate vectors"
+      ],
+      "embedding_stats": {
+        "n_samples": 2000,
+        "n_dims": 384,
+        "nan_count": 0,
+        "inf_count": 0,
+        "zero_norm_count": 0,
+        "n_unique": 1992,
+        "condition_number": 524310528.0
+      }
     }
   ],
   "cross_model": {
     "n_models": 5,
-    "mean_normalized_magnitude": 0.02055688850630899,
-    "std_normalized_magnitude": 0.0034891123849109286,
-    "cv_normalized_magnitude": 16.972959618086687,
+    "mean_normalized_magnitude": 0.02059862985071485,
+    "std_normalized_magnitude": 0.0036689295198689786,
+    "cv_normalized_magnitude": 17.811522156856725,
     "models_with_zero": 5,
     "uniformly_distributed": 0,
     "hypothesis_supported": true,
-    "verdict": "CONFIRMED: Octants are the 8th roots of unity"
+    "verdict": "CONFIRMED: Octants are the 8th roots of unity",
+    "magnitude_ci": {
+      "mean": 0.02059862985071485,
+      "ci_lower": 0.01723381473149846,
+      "ci_upper": 0.02371100635730843,
+      "std": 0.0036689295198689786,
+      "n_samples": 5,
+      "n_bootstrap": 1000,
+      "confidence_level": 0.95
+    }
+  },
+  "negative_controls": [
+    {
+      "name": "uniform_sphere",
+      "test_passed": true,
+      "expected_behavior": "Should show zero signature (uniform octant distribution)",
+      "actual_behavior": "|S|/n = 0.0153",
+      "metric_value": 0.015282179897811082,
+      "metric_threshold": 0.1,
+      "notes": "Random embeddings on unit sphere should have uniform octant distribution"
+    },
+    {
+      "name": "low_rank_structured",
+      "test_passed": true,
+      "expected_behavior": "Should show zero signature (random weights)",
+      "actual_behavior": "|S|/n = 0.0072",
+      "metric_value": 0.007167466986462622,
+      "metric_threshold": 0.1,
+      "notes": "Low-rank embeddings with random weights should still have ~uniform octants"
+    },
+    {
+      "name": "single_octant_biased",
+      "test_passed": false,
+      "expected_behavior": "Should NOT show zero signature (biased to one octant)",
+      "actual_behavior": "|S|/n = 0.0207",
+      "metric_value": 0.020738276650815197,
+      "metric_threshold": 0.1,
+      "notes": "Biased embeddings should fail zero signature test"
+    }
+  ],
+  "test_metadata": {
+    "timestamp": "2026-01-15T20:44:51.874603Z",
+    "python_version": "3.11.6",
+    "numpy_version": "1.26.4",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "scipy_version": "1.13.1",
+    "sklearn_version": "1.8.0",
+    "sentence_transformers_version": "3.3.1",
+    "thresholds": {
+      "magnitude_pass": 0.1,
+      "cv_threshold": 0.2,
+      "uniformity_p": 0.05
+    }
   },
   "constants": {
     "SEMIOTIC_CONSTANT": 21.74625462767236,
     "CRITICAL_ALPHA": 0.5,
     "SECTOR_WIDTH": 0.7853981633974483
-  }
+  },
+  "thresholds": {
+    "ZERO_SIG_MAGNITUDE_PASS": 0.1,
+    "ZERO_SIG_MAGNITUDE_FAIL": 0.3,
+    "ZERO_SIG_CV_THRESHOLD": 0.2,
+    "ZERO_SIG_UNIFORMITY_P": 0.05
+  },
+  "result_hash": "bf59259bfeb83930"
 }

@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-15T19:59:35.920087Z",
+  "timestamp": "2026-01-15T20:48:46.567984Z",
   "test": "Q51_BERRY_HOLONOMY",
   "hypothesis": "Closed semantic loops have Berry phase ~ 2*pi*n",
   "per_model": [
@@ -9,7 +9,33 @@
       "mean_berry_phase": -0.7853980511426926,
       "mean_berry_ratio": -0.12499998213410074,
       "quantization_score": 0.9999999124089386,
-      "status": "PASS"
+      "status": "PASS",
+      "validation_warnings": [
+        "berry_all-MiniLM-L6-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (2.66e+26), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (1.17e+25), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (3.02e+25), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 5 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (5.70e+25), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 7 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (5.84e+24), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 6 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (1.29e+25), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 6 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (7.77e+24), may be ill-conditioned",
+        "berry_all-MiniLM-L6-v2: Only 7 samples, CI may be unreliable",
+        "berry_all-MiniLM-L6-v2: 1 duplicate vectors",
+        "berry_all-MiniLM-L6-v2: High condition number (2.50e+26), may be ill-conditioned"
+      ]
     },
     {
       "model": "all-mpnet-base-v2",
@@ -17,7 +43,33 @@
       "mean_berry_phase": 2.3561944663524628,
       "mean_berry_ratio": 0.37499999620576496,
       "quantization_score": 0.9999998924888114,
-      "status": "PASS"
+      "status": "PASS",
+      "validation_warnings": [
+        "berry_all-mpnet-base-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (1.84e+27), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (5.96e+26), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 8 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (9.43e+28), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 5 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (1.54e+28), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 7 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (2.92e+27), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 6 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (4.28e+27), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 6 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (3.17e+27), may be ill-conditioned",
+        "berry_all-mpnet-base-v2: Only 7 samples, CI may be unreliable",
+        "berry_all-mpnet-base-v2: 1 duplicate vectors",
+        "berry_all-mpnet-base-v2: High condition number (2.92e+27), may be ill-conditioned"
+      ]
     },
     {
       "model": "BAAI/bge-small-en-v1.5",
@@ -25,15 +77,140 @@
       "mean_berry_phase": 1.5707963705062866,
       "mean_berry_ratio": 0.2500000069568838,
       "quantization_score": 0.999999948140737,
-      "status": "PASS"
+      "status": "PASS",
+      "validation_warnings": [
+        "berry_BAAI/bge-small-en-v1.5: Only 8 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (1.33e+12), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 8 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (3.30e+12), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 8 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (5.63e+11), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 5 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (1.15e+12), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 7 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (8.71e+11), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 6 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (1.09e+12), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 6 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (4.40e+11), may be ill-conditioned",
+        "berry_BAAI/bge-small-en-v1.5: Only 7 samples, CI may be unreliable",
+        "berry_BAAI/bge-small-en-v1.5: 1 duplicate vectors",
+        "berry_BAAI/bge-small-en-v1.5: High condition number (7.08e+11), may be ill-conditioned"
+      ]
+    },
+    {
+      "model": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_loops": 8,
+      "mean_berry_phase": 3.141592651605606,
+      "mean_berry_ratio": 0.49999999968420683,
+      "quantization_score": 0.9999999158858082,
+      "status": "PASS",
+      "validation_warnings": [
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 8 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (8.13e+25), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 8 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (2.80e+26), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 8 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (4.99e+25), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 5 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (3.39e+27), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 7 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (4.04e+25), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 6 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (5.91e+25), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 6 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (1.52e+26), may be ill-conditioned",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: Only 7 samples, CI may be unreliable",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: 1 duplicate vectors",
+        "berry_sentence-transformers/all-MiniLM-L12-v2: High condition number (2.44e+26), may be ill-conditioned"
+      ]
+    },
+    {
+      "model": "thenlper/gte-small",
+      "n_loops": 8,
+      "mean_berry_phase": 1.5707963407039642,
+      "mean_berry_ratio": 0.25000000221369684,
+      "quantization_score": 0.999999923477423,
+      "status": "PASS",
+      "validation_warnings": [
+        "berry_thenlper/gte-small: Only 8 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (4.74e+11), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 8 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (1.07e+12), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 8 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (1.48e+12), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 5 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (4.14e+12), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 7 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (1.57e+12), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 6 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (1.72e+12), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 6 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (5.92e+11), may be ill-conditioned",
+        "berry_thenlper/gte-small: Only 7 samples, CI may be unreliable",
+        "berry_thenlper/gte-small: 1 duplicate vectors",
+        "berry_thenlper/gte-small: High condition number (1.02e+12), may be ill-conditioned"
+      ]
     }
   ],
   "cross_model": {
-    "n_models": 3,
-    "mean_berry_ratio": 0.16666667367618268,
-    "std_berry_ratio": 0.21245913789357368,
-    "mean_quantization_score": 0.9999999176794957,
+    "n_models": 5,
+    "mean_berry_ratio": 0.2500000045852903,
+    "std_berry_ratio": 0.20916499969838187,
+    "mean_quantization_score": 0.9999999184803438,
     "hypothesis_supported": true,
-    "verdict": "CONFIRMED: Berry phase quantized to 2*pi*n"
-  }
+    "verdict": "CONFIRMED: Berry phase quantized to 2*pi*n",
+    "quantization_ci": {
+      "mean": 0.9999999184803438,
+      "ci_lower": 0.9999998924888114,
+      "ci_upper": 0.999999948140737,
+      "std": 1.802144865899105e-08,
+      "n_samples": 5,
+      "n_bootstrap": 0,
+      "confidence_level": 0.95
+    },
+    "test_metadata": {
+      "timestamp": "2026-01-15T20:48:46.523262Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "thresholds": {
+      "BERRY_QUANT_SCORE_PASS": 0.6,
+      "BERRY_QUANT_SCORE_PARTIAL": 0.3,
+      "BERRY_TOLERANCE": 0.2
+    },
+    "seeds": {
+      "SYNTHETIC_EMBEDDINGS": 12345,
+      "BOOTSTRAP": 9999
+    }
+  },
+  "result_hash": "ed87bacaf927bb4f"
 }

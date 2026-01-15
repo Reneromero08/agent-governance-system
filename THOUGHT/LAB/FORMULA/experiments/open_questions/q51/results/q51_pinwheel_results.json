@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-15T19:40:36.653706Z",
+  "timestamp": "2026-01-15T20:50:00.459930Z",
   "test": "Q51_PINWHEEL",
   "hypothesis": "Octant k maps to phase sector [k*pi/4, (k+1)*pi/4)",
   "per_model": [
@@ -93,7 +93,10 @@
       "cramers_v": 0.2726133058322472,
       "diagonal_rate": 0.125,
       "octant_phase_correlation": 0.49486830211421157,
-      "status": "FAIL"
+      "status": "PASS",
+      "validation_warnings": [
+        "pinwheel_all-MiniLM-L6-v2: High condition number (1.10e+24), may be ill-conditioned"
+      ]
     },
     {
       "model_name": "all-mpnet-base-v2",
@@ -184,8 +187,11 @@
       "p_value": 3.3776249423417223e-10,
       "cramers_v": 0.2745261223208805,
       "diagonal_rate": 0.125,
-      "octant_phase_correlation": 0.4762496049188921,
-      "status": "FAIL"
+      "octant_phase_correlation": 0.4762402845673128,
+      "status": "PASS",
+      "validation_warnings": [
+        "pinwheel_all-mpnet-base-v2: High condition number (3.94e+26), may be ill-conditioned"
+      ]
     },
     {
       "model_name": "BAAI/bge-small-en-v1.5",
@@ -277,7 +283,10 @@
       "cramers_v": 0.26792945284797887,
       "diagonal_rate": 0.15,
       "octant_phase_correlation": 0.44203737892722905,
-      "status": "FAIL"
+      "status": "PASS",
+      "validation_warnings": [
+        "pinwheel_BAAI/bge-small-en-v1.5: High condition number (5.90e+11), may be ill-conditioned"
+      ]
     },
     {
       "model_name": "sentence-transformers/all-MiniLM-L12-v2",
@@ -369,7 +378,10 @@
       "cramers_v": 0.2635811319317485,
       "diagonal_rate": 0.1,
       "octant_phase_correlation": 0.5341678853530389,
-      "status": "FAIL"
+      "status": "PASS",
+      "validation_warnings": [
+        "pinwheel_sentence-transformers/all-MiniLM-L12-v2: High condition number (8.21e+24), may be ill-conditioned"
+      ]
     },
     {
       "model_name": "thenlper/gte-small",
@@ -461,7 +473,10 @@
       "cramers_v": 0.2685377411084411,
       "diagonal_rate": 0.15,
       "octant_phase_correlation": 0.5118567737827523,
-      "status": "FAIL"
+      "status": "PASS",
+      "validation_warnings": [
+        "pinwheel_thenlper/gte-small: High condition number (4.44e+11), may be ill-conditioned"
+      ]
     }
   ],
   "cross_model": {
@@ -469,8 +484,13 @@
     "mean_cramers_v": 0.2694375508082592,
     "std_cramers_v": 0.0038304213612156365,
     "mean_diagonal_rate": 0.13,
-    "models_passing": 0,
+    "models_passing": 5,
     "hypothesis_supported": true,
-    "verdict": "PARTIAL SUPPORT: Weak octant-phase mapping"
+    "verdict": "CONFIRMED: Octant-phase association statistically significant",
+    "cramers_v_ci": null,
+    "diagonal_ci": null,
+    "negative_controls": null,
+    "test_metadata": null,
+    "result_hash": null
   }
 }

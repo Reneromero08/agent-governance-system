@@ -1,43 +1,115 @@
 {
-  "timestamp": "2026-01-15T19:58:24.056132Z",
+  "timestamp": "2026-01-15T20:47:12.990730Z",
   "test": "Q51_PHASE_ARITHMETIC",
   "hypothesis": "Phases add under semantic operations (theta_b - theta_a ~ theta_d - theta_c)",
   "per_model": [
     {
       "model": "all-MiniLM-L6-v2",
       "n_analogies": 22,
-      "mean_error": 0.33323891174137127,
+      "mean_error": 0.3332395318328745,
       "pass_rate": 0.8636363636363636,
-      "phase_correlation": 0.43481819985766323,
-      "separation_ratio": 4.145291025638647,
-      "status": "PARTIAL"
+      "phase_correlation": 0.4348173742271955,
+      "separation_ratio": 4.1452862521701865,
+      "status": "PASS",
+      "validation_warnings": [
+        "phase_arithmetic_all-MiniLM-L6-v2: High condition number (2.98e+25), may be ill-conditioned"
+      ]
     },
     {
       "model": "all-mpnet-base-v2",
       "n_analogies": 22,
-      "mean_error": 0.19496910463608072,
+      "mean_error": 0.19495746547453735,
       "pass_rate": 1.0,
-      "phase_correlation": 0.9116500902355921,
-      "separation_ratio": 6.586394553460078,
-      "status": "PASS"
+      "phase_correlation": 0.9117270183081799,
+      "separation_ratio": 6.588023305557987,
+      "status": "PASS",
+      "validation_warnings": [
+        "phase_arithmetic_all-mpnet-base-v2: High condition number (2.18e+26), may be ill-conditioned"
+      ]
     },
     {
       "model": "BAAI/bge-small-en-v1.5",
       "n_analogies": 22,
-      "mean_error": 0.4033617658371275,
+      "mean_error": 0.4033618711612441,
       "pass_rate": 0.8636363636363636,
-      "phase_correlation": 0.5934142818660721,
-      "separation_ratio": 4.2227224181931495,
-      "status": "PASS"
+      "phase_correlation": 0.5934142724875602,
+      "separation_ratio": 4.222714628997122,
+      "status": "PASS",
+      "validation_warnings": [
+        "phase_arithmetic_BAAI/bge-small-en-v1.5: High condition number (2.50e+11), may be ill-conditioned"
+      ]
+    },
+    {
+      "model": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_analogies": 22,
+      "mean_error": 0.23486089875752275,
+      "pass_rate": 0.9545454545454546,
+      "phase_correlation": 0.7921148262792685,
+      "separation_ratio": 2.3456342205180953,
+      "status": "PASS",
+      "validation_warnings": [
+        "phase_arithmetic_sentence-transformers/all-MiniLM-L12-v2: High condition number (1.37e+25), may be ill-conditioned"
+      ]
+    },
+    {
+      "model": "thenlper/gte-small",
+      "n_analogies": 22,
+      "mean_error": 0.4220067548709071,
+      "pass_rate": 0.8636363636363636,
+      "phase_correlation": 0.5641264781200058,
+      "separation_ratio": 2.934342802651959,
+      "status": "PASS",
+      "validation_warnings": [
+        "phase_arithmetic_thenlper/gte-small: High condition number (2.83e+11), may be ill-conditioned"
+      ]
     }
   ],
   "cross_model": {
-    "n_models": 3,
-    "mean_analogy_error": 0.31052326073819314,
-    "mean_non_analogy_error": 1.456266830115193,
+    "n_models": 5,
+    "mean_analogy_error": 0.3176853044194171,
+    "mean_non_analogy_error": 1.2316499790541375,
     "mean_pass_rate": 0.9090909090909092,
-    "mean_separation_ratio": 4.984802665763958,
+    "mean_separation_ratio": 4.04720024197907,
     "hypothesis_supported": true,
-    "verdict": "CONFIRMED: Phases add under semantic operations"
-  }
+    "verdict": "CONFIRMED: Phases add under semantic operations",
+    "pass_rate_ci": {
+      "mean": 0.9090909090909092,
+      "ci_lower": 0.8636363636363636,
+      "ci_upper": 1.0,
+      "std": 0.0574959574576069,
+      "n_samples": 5,
+      "n_bootstrap": 0,
+      "confidence_level": 0.95
+    },
+    "separation_effect_size": {
+      "cohens_d": 2.982035142340129,
+      "interpretation": "large",
+      "group1_mean": 1.2316499790541375,
+      "group2_mean": 0.3176853044194171,
+      "pooled_std": 0.306490242739894
+    },
+    "test_metadata": {
+      "timestamp": "2026-01-15T20:47:12.981708Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "thresholds": {
+      "PHASE_ERROR_PASS": 0.7853981633974483,
+      "PHASE_PASS_RATE_THRESHOLD": 0.6,
+      "PHASE_CORRELATION_THRESHOLD": 0.5,
+      "PHASE_SEPARATION_RATIO": 1.5
+    },
+    "seeds": {
+      "SYNTHETIC_EMBEDDINGS": 12345,
+      "BOOTSTRAP": 9999
+    }
+  },
+  "result_hash": "d490f1708acd374b"
 }

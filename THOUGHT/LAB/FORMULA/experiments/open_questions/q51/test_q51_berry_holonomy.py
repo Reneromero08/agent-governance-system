@@ -1,5 +1,5 @@
 """
-Q51 Berry Phase / Holonomy Test - 2*pi Winding Verification
+Q51 Berry Phase / Holonomy Test - 2*pi Winding Verification (HARDENED)
 
 From Q50: Growth rate is 2*pi (from Chern number c1 = 1).
 This predicts: closed loops in semantic space accumulate 2*pi phase.
@@ -13,10 +13,16 @@ Tests:
 2. Holonomy angle from parallel transport
 3. Quantization to multiples of 2*pi
 
-Pass criteria:
-    - Mean Berry phase within 20% of 2*pi (or multiples)
+Pass criteria (from Q51Thresholds):
+    - Quantization score > 0.6 - BERRY_QUANT_SCORE_PASS
+    - Mean Berry phase within 20% of 2*pi*n - BERRY_TOLERANCE
     - Consistent across different loop sizes
-    - Holonomy angle shows quantization structure
+
+Hardening:
+    - Input validation via validate_loop()
+    - Bootstrap confidence intervals for quantization score
+    - Multiple semantic loop categories
+    - Reproducible seeding
 """
 
 import sys
@@ -24,13 +30,32 @@ from pathlib import Path
 import numpy as np
 from datetime import datetime
 import json
+import traceback
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass, asdict
 
 # Add paths
 SCRIPT_DIR = Path(__file__).parent
 QGT_PATH = SCRIPT_DIR.parent.parent.parent.parent / "VECTOR_ELO" / "eigen-alignment" / "qgt_lib" / "python"
+sys.path.insert(0, str(SCRIPT_DIR))  # For harness
 sys.path.insert(0, str(QGT_PATH))
+
+# Import test harness
+from q51_test_harness import (
+    Q51Thresholds,
+    Q51Seeds,
+    Q51ValidationError,
+    ValidationResult,
+    BootstrapCI,
+    NegativeControlResult,
+    validate_embeddings,
+    validate_loop,
+    bootstrap_ci,
+    compute_result_hash,
+    format_ci,
+    get_test_metadata,
+    Q51Logger,
+)
 
 # Import QGT functions
 try:
@@ -185,6 +210,8 @@ MODELS = [
     "all-MiniLM-L6-v2",
     "all-mpnet-base-v2",
     "BAAI/bge-small-en-v1.5",
+    "sentence-transformers/all-MiniLM-L12-v2",
+    "thenlper/gte-small",
 ]
 
 
@@ -224,6 +251,8 @@ class ModelBerryHolonomyResult:
     mean_holonomy_angle: float
     quantization_score: float  # How close to integer multiples of 2*pi
     status: str
+    # Hardening additions
+    validation_warnings: Optional[List[str]] = None
 
 
 @dataclass
@@ -235,32 +264,61 @@ class CrossModelBerryResult:
     mean_quantization_score: float
     hypothesis_supported: bool
     verdict: str
+    # Hardening additions
+    quantization_ci: Optional[dict] = None
+    test_metadata: Optional[dict] = None
+    result_hash: Optional[str] = None
 
 
 # =============================================================================
 # Helper Functions
 # =============================================================================
 
-def get_embeddings(model_name: str, words: List[str]) -> np.ndarray:
-    """Get embeddings for words."""
+def get_embeddings(
+    model_name: str,
+    words: List[str],
+    do_validation: bool = True
+) -> Tuple[np.ndarray, ValidationResult]:
+    """Get embeddings for words with validation."""
+    embeddings = None
+    model_error = None
+
     if HAS_ST:
         try:
             model = SentenceTransformer(model_name)
             embeddings = model.encode(words, show_progress_bar=False)
-            return np.array(embeddings)
+            embeddings = np.array(embeddings)
         except Exception as e:
+            model_error = str(e)
             print(f"  Warning: Could not load {model_name}: {e}")
 
     # Synthetic fallback
-    np.random.seed(hash(model_name) % 2**32)
-    dim = 384
-    embeddings = []
-    for word in words:
-        np.random.seed(hash(word) % 2**32)
-        vec = np.random.randn(dim)
-        vec = vec / np.linalg.norm(vec)
-        embeddings.append(vec)
-    return np.array(embeddings)
+    if embeddings is None:
+        np.random.seed(Q51Seeds.SYNTHETIC_EMBEDDINGS)
+        dim = 384
+        embeddings = []
+        for word in words:
+            np.random.seed(hash(word) % 2**32)
+            vec = np.random.randn(dim)
+            norm = np.linalg.norm(vec)
+            if norm > 1e-10:
+                vec = vec / norm
+            embeddings.append(vec)
+        embeddings = np.array(embeddings)
+
+    # Validation
+    if do_validation:
+        validation = validate_embeddings(
+            embeddings,
+            min_samples=3,
+            name=f"berry_{model_name}"
+        )
+        if model_error:
+            validation.warnings.append(f"Using synthetic fallback: {model_error}")
+    else:
+        validation = ValidationResult(True, [], [], {'n_samples': len(embeddings)})
+
+    return embeddings, validation
 
 
 def quantization_score(phase: float) -> float:
@@ -324,6 +382,8 @@ def test_berry_holonomy_single_model(
     verbose: bool = True
 ) -> ModelBerryHolonomyResult:
     """Test Berry phase and holonomy for single model."""
+    logger = Q51Logger(f"berry_{model_name}", verbose=verbose)
+
     if verbose:
         print(f"\n{'='*60}")
         print(f"Berry Phase / Holonomy Test: {model_name}")
@@ -331,11 +391,25 @@ def test_berry_holonomy_single_model(
 
     berry_results = []
     holonomy_results = []
+    all_warnings = []
 
     for loop in loops:
         try:
-            # Get embeddings
-            embeddings = get_embeddings(model_name, loop)
+            # Validate loop structure
+            loop_validation = validate_loop(loop, min_length=3)
+            if not loop_validation.valid:
+                logger.warn(f"Loop validation failed: {loop_validation.errors}")
+                continue
+
+            # Get embeddings with validation
+            embeddings, validation = get_embeddings(model_name, loop)
+
+            if not validation.valid:
+                logger.warn(f"Embedding validation failed for loop: {validation.errors}")
+                continue
+
+            if validation.warnings:
+                all_warnings.extend(validation.warnings)
 
             # Berry phase
             bp_result = test_loop_berry_phase(embeddings, loop)
@@ -381,11 +455,11 @@ def test_berry_holonomy_single_model(
             loop_str = "->".join(r.loop_words[:3]) + "..."
             print(f"{loop_str:<40} {r.berry_phase:>10.4f} {r.berry_phase_ratio:>10.4f} {r.nearest_integer:>10d}*2pi")
 
-    # Determine status
+    # Determine status using threshold constants
     # Berry phase should be close to 2*pi (or multiples) with ~20% tolerance
-    if mean_q_score > 0.6:
+    if mean_q_score > Q51Thresholds.BERRY_QUANT_SCORE_PASS:
         status = "PASS"
-    elif mean_q_score > 0.3:
+    elif mean_q_score > Q51Thresholds.BERRY_QUANT_SCORE_PARTIAL:
         status = "PARTIAL"
     else:
         status = "FAIL"
@@ -403,7 +477,8 @@ def test_berry_holonomy_single_model(
         mean_berry_ratio=float(mean_ratio),
         mean_holonomy_angle=float(mean_holonomy),
         quantization_score=float(mean_q_score),
-        status=status
+        status=status,
+        validation_warnings=all_warnings if all_warnings else None
     )
 
 
@@ -434,9 +509,32 @@ def test_berry_holonomy_cross_model(
         raise RuntimeError("No models tested successfully")
 
     # Aggregate
+    q_scores = [r.quantization_score for r in results]
     mean_ratio = np.mean([r.mean_berry_ratio for r in results])
     std_ratio = np.std([r.mean_berry_ratio for r in results])
-    mean_q_score = np.mean([r.quantization_score for r in results])
+    mean_q_score = np.mean(q_scores)
+
+    # Bootstrap CI for quantization score
+    quantization_ci = None
+    if len(q_scores) >= Q51Thresholds.MIN_SAMPLES_FOR_CI:
+        quantization_ci = bootstrap_ci(
+            np.array(q_scores),
+            statistic=np.mean,
+            n_bootstrap=Q51Thresholds.BOOTSTRAP_ITERATIONS,
+            confidence_level=Q51Thresholds.CONFIDENCE_LEVEL,
+            seed=Q51Seeds.BOOTSTRAP
+        )
+    else:
+        # For small samples, use simpler CI
+        quantization_ci = BootstrapCI(
+            mean=float(mean_q_score),
+            ci_lower=float(np.min(q_scores)),
+            ci_upper=float(np.max(q_scores)),
+            std=float(np.std(q_scores)),
+            n_samples=len(q_scores),
+            n_bootstrap=0,
+            confidence_level=Q51Thresholds.CONFIDENCE_LEVEL
+        )
 
     # Verdict
     if mean_q_score > 0.5:
@@ -449,13 +547,18 @@ def test_berry_holonomy_cross_model(
         hypothesis_supported = False
         verdict = "FALSIFIED: Berry phase not quantized"
 
+    # Test metadata
+    test_metadata = get_test_metadata()
+
     cross_result = CrossModelBerryResult(
         n_models=len(results),
         mean_berry_ratio=float(mean_ratio),
         std_berry_ratio=float(std_ratio),
         mean_quantization_score=float(mean_q_score),
         hypothesis_supported=hypothesis_supported,
-        verdict=verdict
+        verdict=verdict,
+        quantization_ci=asdict(quantization_ci) if quantization_ci else None,
+        test_metadata=test_metadata
     )
 
     # Print summary
@@ -489,7 +592,7 @@ def save_results(
     cross_result: CrossModelBerryResult,
     output_dir: Path
 ):
-    """Save results to JSON."""
+    """Save results to JSON with integrity hash."""
     output_dir.mkdir(parents=True, exist_ok=True)
 
     output = {
@@ -503,18 +606,35 @@ def save_results(
                 'mean_berry_phase': r.mean_berry_phase,
                 'mean_berry_ratio': r.mean_berry_ratio,
                 'quantization_score': r.quantization_score,
-                'status': r.status
+                'status': r.status,
+                'validation_warnings': r.validation_warnings
             }
             for r in results
         ],
-        'cross_model': asdict(cross_result)
+        'cross_model': asdict(cross_result),
+        'hardening': {
+            'thresholds': {
+                'BERRY_QUANT_SCORE_PASS': Q51Thresholds.BERRY_QUANT_SCORE_PASS,
+                'BERRY_QUANT_SCORE_PARTIAL': Q51Thresholds.BERRY_QUANT_SCORE_PARTIAL,
+                'BERRY_TOLERANCE': Q51Thresholds.BERRY_TOLERANCE,
+            },
+            'seeds': {
+                'SYNTHETIC_EMBEDDINGS': Q51Seeds.SYNTHETIC_EMBEDDINGS,
+                'BOOTSTRAP': Q51Seeds.BOOTSTRAP,
+            }
+        }
     }
+
+    # Compute result hash
+    result_hash = compute_result_hash(output)
+    output['result_hash'] = result_hash
 
     output_path = output_dir / 'q51_berry_holonomy_results.json'
     with open(output_path, 'w') as f:
         json.dump(output, f, indent=2)
 
     print(f"\nResults saved to: {output_path}")
+    print(f"Result hash: {result_hash[:16]}...")
 
 
 # =============================================================================
