@@ -6,6 +6,22 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.10] - 2026-01-15
+
+### Added
+- **arXiv to Markdown Skill** — Convert arXiv papers directly to markdown with proper heading structure
+  - `CAPABILITY/SKILLS/utilities/arxiv-to-md/` — New skill for arXiv paper conversion
+  - `pdf_converter.py` — Dual-method converter: LaTeX (via pandoc) or HTML (via ar5iv)
+  - **LaTeX method**: Downloads source .tex, converts via pandoc (best heading structure)
+  - **HTML method**: Fetches ar5iv.org HTML, converts to markdown (fast fallback)
+  - **Auto mode**: Tries LaTeX first, falls back to HTML on failure
+  - Supports arXiv IDs (`1706.03762`) or full URLs
+  - Outputs clean markdown with `#`, `##`, `###` ATX-style headings
+  - Pandoc installed automatically via `winget install JohnMacFarlane.Pandoc`
+  - Dependencies: `requests`, `markdownify`, `beautifulsoup4` (already in venv)
+
+---
+
 ## [3.8.9] - 2026-01-14
 
 ### Added
