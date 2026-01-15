@@ -1,0 +1,176 @@
+{
+  "timestamp": "2026-01-15T16:10:41.473410Z",
+  "test": "Q50_ALIGNMENT_DISTORTION",
+  "target": 21.74625462767236,
+  "comparisons": [
+    {
+      "family": "BGE-small",
+      "base": {
+        "name": "BGE-small-base",
+        "shape": [
+          75,
+          384
+        ],
+        "Df": 42.68691954220158,
+        "alpha": 0.537339767899259,
+        "Df_alpha": 22.937379439140937,
+        "vs_8e_percent": 5.477379125106243
+      },
+      "instruct": {
+        "name": "BGE-small-instruct",
+        "shape": [
+          80,
+          384
+        ],
+        "Df": 23.444143239798468,
+        "alpha": 0.6576485519494611,
+        "Df_alpha": 15.41800685334921,
+        "vs_8e_percent": -29.100403185155304
+      },
+      "delta": 7.519372585791727,
+      "delta_percent": 32.78217812868577
+    },
+    {
+      "family": "BGE-base",
+      "base": {
+        "name": "BGE-base-base",
+        "shape": [
+          75,
+          768
+        ],
+        "Df": 48.45080953423225,
+        "alpha": 0.4475672236444166,
+        "Df_alpha": 21.684994306560757,
+        "vs_8e_percent": -0.2817051587064992
+      },
+      "instruct": {
+        "name": "BGE-base-instruct",
+        "shape": [
+          80,
+          768
+        ],
+        "Df": 30.420169474968798,
+        "alpha": 0.5632470651368207,
+        "Df_alpha": 17.134071177740875,
+        "vs_8e_percent": -21.209093376762127
+      },
+      "delta": 4.550923128819882,
+      "delta_percent": 20.98650829455375
+    },
+    {
+      "family": "MiniLM-L6-input",
+      "base": {
+        "name": "MiniLM-L6-input-base",
+        "shape": [
+          75,
+          384
+        ],
+        "Df": 45.54527251422784,
+        "alpha": 0.4781882553049781,
+        "Df_alpha": 21.779214400968385,
+        "vs_8e_percent": 0.15156528726598656
+      },
+      "instruct": {
+        "name": "MiniLM-L6-input-instruct",
+        "shape": [
+          80,
+          384
+        ],
+        "Df": 23.51962309288694,
+        "alpha": 0.6320358714923876,
+        "Df_alpha": 14.865245478685281,
+        "vs_8e_percent": -31.64227250531186
+      },
+      "delta": 6.913968922283104,
+      "delta_percent": 31.745722297383157
+    },
+    {
+      "family": "MPNet-base-input",
+      "base": {
+        "name": "MPNet-base-input-base",
+        "shape": [
+          75,
+          768
+        ],
+        "Df": 45.40061131956386,
+        "alpha": 0.48855905035274577,
+        "Df_alpha": 22.18087955172024,
+        "vs_8e_percent": 1.9986196772239224
+      },
+      "instruct": {
+        "name": "MPNet-base-input-instruct",
+        "shape": [
+          80,
+          768
+        ],
+        "Df": 36.7048091976101,
+        "alpha": 0.5629489472486229,
+        "Df_alpha": 20.662933696756177,
+        "vs_8e_percent": -4.981643733434655
+      },
+      "delta": 1.5179458549640614,
+      "delta_percent": 6.8434881106702425
+    },
+    {
+      "family": "GTR-T5-base",
+      "base": {
+        "name": "GTR-T5-base-plain",
+        "shape": [
+          75,
+          768
+        ],
+        "Df": 48.1799592362311,
+        "alpha": 0.4602096599301091,
+        "Df_alpha": 22.17288265555243,
+        "vs_8e_percent": 1.9618460060574365
+      },
+      "instruct": {
+        "name": "GTR-T5-base-instruct",
+        "shape": [
+          80,
+          768
+        ],
+        "Df": 26.6601144151258,
+        "alpha": 0.5790273224110967,
+        "Df_alpha": 15.436934664963772,
+        "vs_8e_percent": -29.013363775663265
+      },
+      "delta": 6.7359479905886595,
+      "architecture": "encoder-decoder"
+    },
+    {
+      "family": "ST5-base",
+      "base": {
+        "name": "ST5-base-plain",
+        "shape": [
+          75,
+          768
+        ],
+        "Df": 44.41154065675046,
+        "alpha": 0.5229002835990713,
+        "Df_alpha": 23.2228072044865,
+        "vs_8e_percent": 6.789916710232985
+      },
+      "instruct": {
+        "name": "ST5-base-instruct",
+        "shape": [
+          80,
+          768
+        ],
+        "Df": 22.523579518959945,
+        "alpha": 0.635048391096053,
+        "Df_alpha": 14.303562935239526,
+        "vs_8e_percent": -34.225165757794095
+      },
+      "delta": 8.919244269246974,
+      "architecture": "encoder-decoder"
+    }
+  ],
+  "summary": {
+    "n_comparisons": 6,
+    "mean_delta": 6.026233791949068,
+    "compression_count": 6,
+    "expansion_count": 0,
+    "hypothesis_supported": "True"
+  }
+}

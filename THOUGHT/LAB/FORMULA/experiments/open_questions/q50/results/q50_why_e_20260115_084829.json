@@ -1,0 +1,95 @@
+{
+  "timestamp": "2026-01-15T15:48:04.157802Z",
+  "test": "Q50_WHY_E_PER_OCTANT",
+  "hypotheses": {
+    "H1_1_entropy": {
+      "octants": [
+        {
+          "octant": 0,
+          "n_points": 3,
+          "entropy_nats": 0.6916798377696113,
+          "entropy_over_e": 0.2544547921882385
+        },
+        {
+          "octant": 1,
+          "n_points": 14,
+          "entropy_nats": 2.4805024871974304,
+          "entropy_over_e": 0.9125258688145635
+        },
+        {
+          "octant": 2,
+          "n_points": 16,
+          "entropy_nats": 2.6515550269316397,
+          "entropy_over_e": 0.9754525815429403
+        },
+        {
+          "octant": 3,
+          "n_points": 6,
+          "entropy_nats": 1.5922696506514358,
+          "entropy_over_e": 0.585763269275898
+        },
+        {
+          "octant": 4,
+          "n_points": 10,
+          "entropy_nats": 2.109579345496216,
+          "entropy_over_e": 0.7760708707279651
+        },
+        {
+          "octant": 5,
+          "n_points": 8,
+          "entropy_nats": 1.8905987591141191,
+          "entropy_over_e": 0.6955124149823245
+        },
+        {
+          "octant": 6,
+          "n_points": 5,
+          "entropy_nats": 1.368765690678322,
+          "entropy_over_e": 0.5035407573813845
+        },
+        {
+          "octant": 7,
+          "n_points": 13,
+          "entropy_nats": 2.3943000065070197,
+          "entropy_over_e": 0.8808137483905831
+        }
+      ],
+      "mean_entropy_nats": 1.8974063505432244,
+      "mean_entropy_over_e": 0.6980167879129872,
+      "verdict": "NOT_CLOSE"
+    },
+    "H1_2_integral": {
+      "trace": 0.6672226343243558,
+      "normalized_trace": 16.283519227045566,
+      "normalized_trace_over_8": 2.035439903380696,
+      "ratio_to_e": 0.7487964941937449,
+      "verdict": "CLOSE"
+    },
+    "H1_3_thermodynamic": {
+      "temperature": 2.091226601461012,
+      "partition_function": 383.68205575700097,
+      "free_energy": -12.44240979115848,
+      "average_energy": 0.0017268780678528037,
+      "entropy": 5.950640002634041,
+      "F_per_octant": -1.55530122389481,
+      "F_per_octant_over_e": -0.572163345099683,
+      "verdict": "CLOSE"
+    },
+    "H1_4_spiral": {
+      "total_winding_radians": 1.8260607573167877,
+      "total_winding_degrees": 104.6255745287148,
+      "total_winding_over_e": 0.6717702109468007,
+      "winding_per_octant": 0.22825759466459847,
+      "log_Df_over_8": 0.4773383539481134,
+      "verdict": "NOT_OBVIOUS"
+    },
+    "H1_5_participation": {
+      "measured_Df": 45.54527251422784,
+      "predicted_Df": 45.47634615953307,
+      "ratio": 1.0015156528726599,
+      "contribution_per_octant": 2.722401800121048,
+      "contribution_over_e": 1.0015156528726599,
+      "error_percent": 0.15156528726598656,
+      "verdict": "CONFIRMED"
+    }
+  }
+}

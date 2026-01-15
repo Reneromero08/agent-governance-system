@@ -1,0 +1,44 @@
+{
+  "test": "Q48_UNIVERSAL_CONSTANT",
+  "timestamp": "2026-01-15T14:50:17.563030Z",
+  "results": {
+    "MiniLM": {
+      "Df": 45.54527250957976,
+      "alpha": 0.4781882556432532,
+      "Df_times_alpha": 21.77921441415256,
+      "n_eigenvalues": 74
+    },
+    "MPNet": {
+      "Df": 45.400611301536884,
+      "alpha": 0.4885590504023491,
+      "Df_times_alpha": 22.18087954516502,
+      "n_eigenvalues": 74
+    },
+    "ParaMiniLM": {
+      "Df": 40.10137853880662,
+      "alpha": 0.5434802527759898,
+      "Df_times_alpha": 21.794307344936275,
+      "n_eigenvalues": 74
+    },
+    "DistilRoBERTa": {
+      "Df": 47.77459793815006,
+      "alpha": 0.46060554871096643,
+      "Df_times_alpha": 22.005244897747414,
+      "n_eigenvalues": 74
+    },
+    "GloVe-100": {
+      "Df": 24.63622593356944,
+      "alpha": 0.8396710454230092,
+      "Df_times_alpha": 20.6863255849177,
+      "n_eigenvalues": 74
+    },
+    "GloVe-300": {
+      "Df": 37.630732322324796,
+      "alpha": 0.6007703606139555,
+      "Df_times_alpha": 22.6074286274503,
+      "n_eigenvalues": 74
+    }
+  },
+  "mean_df_alpha": 21.84223340239488,
+  "cv": 0.026885944602809658
+}

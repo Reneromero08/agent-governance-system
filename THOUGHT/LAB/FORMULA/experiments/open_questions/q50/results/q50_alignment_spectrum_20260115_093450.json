@@ -1,0 +1,225 @@
+{
+  "timestamp": "2026-01-15T16:34:15.109251Z",
+  "test": "Q50_ALIGNMENT_SPECTRUM",
+  "target": 21.74625462767236,
+  "models": [
+    {
+      "model": "MiniLM-L6",
+      "model_id": "all-MiniLM-L6-v2",
+      "levels": [
+        {
+          "level": 0,
+          "name": "Single words",
+          "description": "Just the word itself",
+          "Df": 47.85295960680953,
+          "alpha": 0.4824605266680239,
+          "Df_alpha": 23.087164094525,
+          "vs_8e_percent": 6.166162816590574,
+          "compression_from_level_0": 0.0
+        },
+        {
+          "level": 1,
+          "name": "Simple phrases",
+          "description": "Article + word",
+          "Df": 44.028360945918536,
+          "alpha": 0.5337014616787652,
+          "Df_alpha": 23.498000592156984,
+          "vs_8e_percent": 8.055391581111657,
+          "compression_from_level_0": -1.7795017870099128
+        },
+        {
+          "level": 2,
+          "name": "Definitions",
+          "description": "What is X?",
+          "Df": 50.86527975317366,
+          "alpha": 0.42985576991339713,
+          "Df_alpha": 21.864733990160794,
+          "vs_8e_percent": 0.5448265207824177,
+          "compression_from_level_0": 5.294847385149829
+        },
+        {
+          "level": 3,
+          "name": "Query prefix",
+          "description": "query: What is X?",
+          "Df": 45.64580246003699,
+          "alpha": 0.505640810805263,
+          "Df_alpha": 23.080380565749973,
+          "vs_8e_percent": 6.134968806903979,
+          "compression_from_level_0": 0.029382252178111495
+        },
+        {
+          "level": 4,
+          "name": "Elaborate prompt",
+          "description": "Full instruction format",
+          "Df": 45.071711273770994,
+          "alpha": 0.5182606023847742,
+          "Df_alpha": 23.358892235257176,
+          "vs_8e_percent": 7.415702773629422,
+          "compression_from_level_0": -1.1769662987608536
+        },
+        {
+          "level": 5,
+          "name": "System prompt style",
+          "description": "Highly structured system prompt",
+          "Df": 45.42486835896149,
+          "alpha": 0.501824927598095,
+          "Df_alpha": 22.795331275388847,
+          "vs_8e_percent": 4.824171636349388,
+          "compression_from_level_0": 1.264047926983637
+        }
+      ],
+      "is_monotonic_decreasing": false,
+      "floor_value": 21.864733990160794,
+      "ceiling_value": 23.498000592156984,
+      "total_compression": 6.950662017351945
+    },
+    {
+      "model": "MPNet-base",
+      "model_id": "all-mpnet-base-v2",
+      "levels": [
+        {
+          "level": 0,
+          "name": "Single words",
+          "description": "Just the word itself",
+          "Df": 47.84766360119233,
+          "alpha": 0.4920050068754049,
+          "Df_alpha": 23.541290059076694,
+          "vs_8e_percent": 8.254457892349562,
+          "compression_from_level_0": 0.0
+        },
+        {
+          "level": 1,
+          "name": "Simple phrases",
+          "description": "Article + word",
+          "Df": 36.22691619243186,
+          "alpha": 0.6186632046156115,
+          "Df_alpha": 22.41226006495108,
+          "vs_8e_percent": 3.0626213510404705,
+          "compression_from_level_0": 4.795956344330836
+        },
+        {
+          "level": 2,
+          "name": "Definitions",
+          "description": "What is X?",
+          "Df": 46.20791073408625,
+          "alpha": 0.5000872777695112,
+          "Df_alpha": 23.10798829042577,
+          "vs_8e_percent": 6.2619227359758165,
+          "compression_from_level_0": 1.8406033295692668
+        },
+        {
+          "level": 3,
+          "name": "Query prefix",
+          "description": "query: What is X?",
+          "Df": 44.552791042167534,
+          "alpha": 0.5335860431784012,
+          "Df_alpha": 23.772747484744293,
+          "vs_8e_percent": 9.318813247469278,
+          "compression_from_level_0": -0.9831977138328398
+        },
+        {
+          "level": 4,
+          "name": "Elaborate prompt",
+          "description": "Full instruction format",
+          "Df": 46.09584309037301,
+          "alpha": 0.5054510200546727,
+          "Df_alpha": 23.29919091030917,
+          "vs_8e_percent": 7.141166647891087,
+          "compression_from_level_0": 1.0284022165309392
+        },
+        {
+          "level": 5,
+          "name": "System prompt style",
+          "description": "Highly structured system prompt",
+          "Df": 48.267885292570625,
+          "alpha": 0.48374713017099386,
+          "Df_alpha": 23.34945098970376,
+          "vs_8e_percent": 7.372287271902514,
+          "compression_from_level_0": 0.8149046585446823
+        }
+      ],
+      "is_monotonic_decreasing": false,
+      "floor_value": 22.41226006495108,
+      "ceiling_value": 23.772747484744293,
+      "total_compression": 5.722886766312054
+    },
+    {
+      "model": "BGE-small",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "levels": [
+        {
+          "level": 0,
+          "name": "Single words",
+          "description": "Just the word itself",
+          "Df": 44.869489849638114,
+          "alpha": 0.5376991918373697,
+          "Df_alpha": 24.126288430305475,
+          "vs_8e_percent": 10.944568816022663,
+          "compression_from_level_0": 0.0
+        },
+        {
+          "level": 1,
+          "name": "Simple phrases",
+          "description": "Article + word",
+          "Df": 42.475797510991846,
+          "alpha": 0.5636712912224694,
+          "Df_alpha": 23.942387628724926,
+          "vs_8e_percent": 10.098902264567256,
+          "compression_from_level_0": 0.76224240670831
+        },
+        {
+          "level": 2,
+          "name": "Definitions",
+          "description": "What is X?",
+          "Df": 43.95344319613609,
+          "alpha": 0.5393664139078265,
+          "Df_alpha": 23.70701103560128,
+          "vs_8e_percent": 9.016524645277691,
+          "compression_from_level_0": 1.7378445752871527
+        },
+        {
+          "level": 3,
+          "name": "Query prefix",
+          "description": "query: What is X?",
+          "Df": 44.23803644295972,
+          "alpha": 0.5339051413804796,
+          "Df_alpha": 23.618915101473217,
+          "vs_8e_percent": 8.611416107571342,
+          "compression_from_level_0": 2.102989567988989
+        },
+        {
+          "level": 4,
+          "name": "Elaborate prompt",
+          "description": "Full instruction format",
+          "Df": 41.87099991296265,
+          "alpha": 0.5632195134309285,
+          "Df_alpha": 23.582564197845272,
+          "vs_8e_percent": 8.444256731162277,
+          "compression_from_level_0": 2.253658842017412
+        },
+        {
+          "level": 5,
+          "name": "System prompt style",
+          "description": "Highly structured system prompt",
+          "Df": 43.60559401769202,
+          "alpha": 0.5449207522679576,
+          "Df_alpha": 23.761593095211886,
+          "vs_8e_percent": 9.267519865121894,
+          "compression_from_level_0": 1.511609778466749
+        }
+      ],
+      "is_monotonic_decreasing": false,
+      "floor_value": 23.582564197845272,
+      "ceiling_value": 24.126288430305475,
+      "total_compression": 2.253658842017412
+    }
+  ],
+  "summary": {
+    "mean_floor": 22.619852750985714,
+    "mean_ceiling": 23.799012169068916,
+    "mean_compression_percent": 4.975735875227137,
+    "monotonic_count": 0,
+    "floor_vs_8e_percent": 4.017234867661716,
+    "ceiling_vs_8e_percent": 9.43959121486786
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "timestamp": "2026-01-15T16:46:48.577069Z",
+  "test": "Q50_RIEMANN_DEEP",
+  "hypothesis": "\u03b1 \u2248 1/2 (Riemann critical line)",
+  "models": [
+    {
+      "model": "MiniLM-L6",
+      "alpha": 0.4824605266680239,
+      "alpha_deviation_from_0.5": 0.017539473331976085,
+      "Df": 47.85295960680953,
+      "Df_deviation_from_16e": 4.360450351464806
+    },
+    {
+      "model": "MPNet-base",
+      "alpha": 0.4920050068754049,
+      "alpha_deviation_from_0.5": 0.007994993124595118,
+      "Df": 47.84766360119233,
+      "Df_deviation_from_16e": 4.355154345847609
+    },
+    {
+      "model": "BGE-small",
+      "alpha": 0.5376991918373697,
+      "alpha_deviation_from_0.5": 0.037699191837369694,
+      "Df": 44.869489849638114,
+      "Df_deviation_from_16e": 1.3769805942933928
+    },
+    {
+      "model": "ParaMiniLM",
+      "alpha": 0.5520734083743277,
+      "alpha_deviation_from_0.5": 0.05207340837432772,
+      "Df": 41.74714152842173,
+      "Df_deviation_from_16e": 1.7453677269229928
+    },
+    {
+      "model": "DistilRoBERTa",
+      "alpha": 0.4620929200019625,
+      "alpha_deviation_from_0.5": 0.037907079998037496,
+      "Df": 50.3115088012728,
+      "Df_deviation_from_16e": 6.818999545928079
+    }
+  ],
+  "summary": {
+    "mean_alpha": 0.5052662107514176,
+    "alpha_deviation_percent": 1.0532421502835287,
+    "spacing_correlation": 0.7692587116561337,
+    "predicted_alpha_from_pi": 0.477464829275686,
+    "alpha_vs_pi_prediction": 5.8227077202537245
+  }
+}

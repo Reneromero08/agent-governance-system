@@ -1,0 +1,73 @@
+{
+  "test": "Q49_FALSIFICATION_BATTERY",
+  "timestamp": "2026-01-15T15:09:28.840253Z",
+  "target_constant": 21.74625462767236,
+  "results": {
+    "test_1_1": {
+      "test": "1.1_random_matrix_baseline",
+      "passed": "False",
+      "n_trials": 500,
+      "mean_df_alpha": 14.487578955533621,
+      "std_df_alpha": 0.3564342719516323,
+      "cv_percent": 2.46027492271571,
+      "target_8e": 21.74625462767236,
+      "close_to_8e_count": 0,
+      "close_to_8e_pct": 0.0
+    },
+    "test_1_2": {
+      "models": [
+        {
+          "model": "MiniLM",
+          "real_df_alpha": 21.779214400968385,
+          "perm_mean": 14.63759913844836,
+          "perm_std": 0.3566632075947669,
+          "z_score": 20.023414555936412,
+          "p_value": 0.0,
+          "passed": "True"
+        },
+        {
+          "model": "MPNet",
+          "real_df_alpha": 22.18087955172024,
+          "perm_mean": 11.44395552981953,
+          "perm_std": 0.30579298713482145,
+          "z_score": 35.1117405356549,
+          "p_value": 0.0,
+          "passed": "True"
+        }
+      ],
+      "all_passed": true
+    },
+    "test_1_3": {
+      "test": "1.3_vocabulary_independence",
+      "passed": "True",
+      "n_vocab_sets": 10,
+      "vocab_size": 75,
+      "mean_df_alpha": 21.87097493413408,
+      "std_df_alpha": 0.36321148922759244,
+      "cv_percent": 1.6607009533019375,
+      "values": [
+        21.117413842469105,
+        21.8965374111596,
+        22.216276856852478,
+        21.941971866676877,
+        21.848611245723024,
+        22.444024981959117,
+        21.957850302525408,
+        21.863797680515482,
+        21.365815566229916,
+        22.057449587229787
+      ]
+    },
+    "test_1_4": {
+      "test": "1.4_monte_carlo",
+      "passed": false,
+      "observed_cv": 1.5713825827635757,
+      "n_fake_constants": 5000,
+      "better_matches": 2749,
+      "p_value": 0.5498
+    }
+  },
+  "tests_passed": "2",
+  "tests_total": 4,
+  "conclusion": "PARTIAL"
+}

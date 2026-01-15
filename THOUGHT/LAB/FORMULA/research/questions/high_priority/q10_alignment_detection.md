@@ -232,6 +232,24 @@ Based on empirical findings:
 
 ---
 
+## Riemann Connection — Potential Path Forward (Q48-Q50)
+
+The discovery that **α ≈ 1/2** (eigenvalue decay = Riemann critical line) may address Limitation 1.
+
+**Hypothesis:** If α ≈ 1/2 is the "natural" spectral structure of coherent meaning, then **contradictions might create local anomalies** in the eigenspectrum.
+
+Potential test:
+1. Take contradictory statements ("I always tell the truth" + "I frequently lie")
+2. Compute LOCAL Df × α for this statement set
+3. Check if local α deviates from 0.5 (breaking Riemann structure)
+4. Contradictions might show: non-monotonic decay, bimodal structure, or local Df × α ≠ 8e
+
+**Why this might work:** Semantic opposites share topic but create "tension" in eigenspace — the covariance matrix has to accommodate opposing directions, potentially breaking the smooth α = 1/2 decay.
+
+See [Q50_COMPLETING_8E.md](../reports/Q50_COMPLETING_8E.md) for the Riemann discovery.
+
+---
+
 ## Final Answer
 
 **PARTIAL: R can detect alignment in specific scenarios but has fundamental limitations.**

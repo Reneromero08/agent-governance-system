@@ -1,0 +1,56 @@
+{
+  "timestamp": "2026-01-15T15:49:54.870979Z",
+  "test": "Q50_CROSS_MODAL",
+  "target": 21.74625462767236,
+  "models": [
+    {
+      "name": "Text-MiniLM",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 45.54527251422784,
+      "alpha": 0.4781882553049781,
+      "Df_alpha": 21.779214400968385,
+      "vs_8e_percent": 0.15156528726598656,
+      "modality": "text",
+      "model_id": "all-MiniLM-L6-v2"
+    },
+    {
+      "name": "Text-MPNet",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 45.40061131956386,
+      "alpha": 0.48855905035274577,
+      "Df_alpha": 22.18087955172024,
+      "vs_8e_percent": 1.9986196772239224,
+      "modality": "text",
+      "model_id": "all-mpnet-base-v2"
+    },
+    {
+      "name": "CLIP-text-encoder",
+      "shape": [
+        78,
+        512
+      ],
+      "Df": 43.40290424112352,
+      "alpha": 0.5406985990317053,
+      "Df_alpha": 23.467889517082746,
+      "vs_8e_percent": 7.91692601271938,
+      "modality": "vision-text",
+      "model_id": "clip-ViT-B-32"
+    }
+  ],
+  "summary": {
+    "n_models": 3,
+    "mean_df_alpha": 22.47599448992379,
+    "std_df_alpha": 0.7202895399347529,
+    "cv_percent": 3.2047059820096764,
+    "vs_8e_percent": 3.355703659069758,
+    "passes_cv_threshold": "True",
+    "passes_mean_threshold": "True",
+    "overall_pass": "True"
+  }
+}

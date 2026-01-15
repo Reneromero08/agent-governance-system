@@ -1,0 +1,286 @@
+{
+  "timestamp": "2026-01-15T16:31:32.923529Z",
+  "test": "Q50_PC_VALIDATION",
+  "hypothesis": {
+    "PC1": "Secondness (Concrete \u2194 Abstract)",
+    "PC2": "Firstness (Positive \u2194 Negative)",
+    "PC3": "Thirdness (Agent \u2194 Patient)"
+  },
+  "models": [
+    {
+      "model": "MiniLM-L6",
+      "model_id": "all-MiniLM-L6-v2",
+      "n_words_per_category": 32,
+      "variance_explained": [
+        0.05160856992006302,
+        0.037583127617836,
+        0.031066445633769035,
+        0.03070712275803089,
+        0.025587886571884155
+      ],
+      "axes": {
+        "Secondness": {
+          "best_pc": 0,
+          "results": {
+            "label1": "Concrete",
+            "label2": "Abstract",
+            "pc_axis": 0,
+            "mean1": 0.12158983200788498,
+            "mean2": -0.11995765566825867,
+            "std1": 0.0739113911986351,
+            "std2": 0.13102367520332336,
+            "cohens_d": 2.2350136825973,
+            "threshold_accuracy": 0.890625,
+            "lr_accuracy": 0.890625,
+            "separation_direction": "positive"
+          }
+        },
+        "Firstness": {
+          "best_pc": 2,
+          "results": {
+            "label1": "Positive",
+            "label2": "Negative",
+            "pc_axis": 2,
+            "mean1": 0.0938563197851181,
+            "mean2": -0.1298922747373581,
+            "std1": 0.09991680085659027,
+            "std2": 0.14370697736740112,
+            "cohens_d": 1.7793926624742415,
+            "threshold_accuracy": 0.828125,
+            "lr_accuracy": 0.828125,
+            "separation_direction": "positive"
+          }
+        },
+        "Thirdness": {
+          "best_pc": 4,
+          "results": {
+            "label1": "Agent",
+            "label2": "Patient",
+            "pc_axis": 4,
+            "mean1": -0.05515156686306,
+            "mean2": 0.08557035773992538,
+            "std1": 0.17206938564777374,
+            "std2": 0.13596348464488983,
+            "cohens_d": 0.8931767770447624,
+            "threshold_accuracy": 0.671875,
+            "lr_accuracy": 0.671875,
+            "separation_direction": "negative"
+          }
+        }
+      },
+      "hypothesized_mapping": [
+        {
+          "category": "Secondness",
+          "expected_pc": 0,
+          "cohens_d": 2.2350136825973,
+          "lr_accuracy": 0.890625,
+          "passes_80pct": true,
+          "passes_d_1": true
+        },
+        {
+          "category": "Firstness",
+          "expected_pc": 1,
+          "cohens_d": 0.10205525651992005,
+          "lr_accuracy": 0.5625,
+          "passes_80pct": false,
+          "passes_d_1": false
+        },
+        {
+          "category": "Thirdness",
+          "expected_pc": 2,
+          "cohens_d": 0.18326464774936987,
+          "lr_accuracy": 0.53125,
+          "passes_80pct": false,
+          "passes_d_1": false
+        }
+      ],
+      "hypothesis_supported": false,
+      "all_d_above_1": false
+    },
+    {
+      "model": "MPNet-base",
+      "model_id": "all-mpnet-base-v2",
+      "n_words_per_category": 32,
+      "variance_explained": [
+        0.07029459625482559,
+        0.034437645226716995,
+        0.03258567675948143,
+        0.028775157406926155,
+        0.02616092376410961
+      ],
+      "axes": {
+        "Secondness": {
+          "best_pc": 2,
+          "results": {
+            "label1": "Concrete",
+            "label2": "Abstract",
+            "pc_axis": 2,
+            "mean1": 0.16505266726016998,
+            "mean2": -0.14204509556293488,
+            "std1": 0.06443893909454346,
+            "std2": 0.13766108453273773,
+            "cohens_d": 2.812313800890537,
+            "threshold_accuracy": 0.90625,
+            "lr_accuracy": 0.90625,
+            "separation_direction": "positive"
+          }
+        },
+        "Firstness": {
+          "best_pc": 3,
+          "results": {
+            "label1": "Positive",
+            "label2": "Negative",
+            "pc_axis": 3,
+            "mean1": -0.18752390146255493,
+            "mean2": 0.12126371264457703,
+            "std1": 0.11773437261581421,
+            "std2": 0.11792507022619247,
+            "cohens_d": 2.5793527392766236,
+            "threshold_accuracy": 0.859375,
+            "lr_accuracy": 0.859375,
+            "separation_direction": "negative"
+          }
+        },
+        "Thirdness": {
+          "best_pc": 0,
+          "results": {
+            "label1": "Agent",
+            "label2": "Patient",
+            "pc_axis": 0,
+            "mean1": -0.35472172498703003,
+            "mean2": -0.17572203278541565,
+            "std1": 0.06548681110143661,
+            "std2": 0.15392442047595978,
+            "cohens_d": 1.4894968153328914,
+            "threshold_accuracy": 0.75,
+            "lr_accuracy": 0.75,
+            "separation_direction": "negative"
+          }
+        }
+      },
+      "hypothesized_mapping": [
+        {
+          "category": "Secondness",
+          "expected_pc": 0,
+          "cohens_d": 1.6415593503658812,
+          "lr_accuracy": 0.765625,
+          "passes_80pct": false,
+          "passes_d_1": true
+        },
+        {
+          "category": "Firstness",
+          "expected_pc": 1,
+          "cohens_d": 0.8946492588258249,
+          "lr_accuracy": 0.609375,
+          "passes_80pct": false,
+          "passes_d_1": false
+        },
+        {
+          "category": "Thirdness",
+          "expected_pc": 2,
+          "cohens_d": 0.33276864082165464,
+          "lr_accuracy": 0.625,
+          "passes_80pct": false,
+          "passes_d_1": false
+        }
+      ],
+      "hypothesis_supported": false,
+      "all_d_above_1": false
+    },
+    {
+      "model": "BGE-small",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "n_words_per_category": 32,
+      "variance_explained": [
+        0.06637328118085861,
+        0.06150776892900467,
+        0.04048652574419975,
+        0.034460846334695816,
+        0.029820069670677185
+      ],
+      "axes": {
+        "Secondness": {
+          "best_pc": 2,
+          "results": {
+            "label1": "Concrete",
+            "label2": "Abstract",
+            "pc_axis": 2,
+            "mean1": 0.18106301128864288,
+            "mean2": -0.06012412905693054,
+            "std1": 0.06538595259189606,
+            "std2": 0.11142171919345856,
+            "cohens_d": 2.598634754628639,
+            "threshold_accuracy": 0.921875,
+            "lr_accuracy": 0.921875,
+            "separation_direction": "positive"
+          }
+        },
+        "Firstness": {
+          "best_pc": 1,
+          "results": {
+            "label1": "Positive",
+            "label2": "Negative",
+            "pc_axis": 1,
+            "mean1": -0.18858271837234497,
+            "mean2": 0.22610916197299957,
+            "std1": 0.08113598823547363,
+            "std2": 0.09697746485471725,
+            "cohens_d": 4.565135540741589,
+            "threshold_accuracy": 0.984375,
+            "lr_accuracy": 0.984375,
+            "separation_direction": "negative"
+          }
+        },
+        "Thirdness": {
+          "best_pc": 0,
+          "results": {
+            "label1": "Agent",
+            "label2": "Patient",
+            "pc_axis": 0,
+            "mean1": 0.20910978317260742,
+            "mean2": 0.13462819159030914,
+            "std1": 0.07148407399654388,
+            "std2": 0.074856698513031,
+            "cohens_d": 1.0016226778741373,
+            "threshold_accuracy": 0.6875,
+            "lr_accuracy": 0.6875,
+            "separation_direction": "positive"
+          }
+        }
+      },
+      "hypothesized_mapping": [
+        {
+          "category": "Secondness",
+          "expected_pc": 0,
+          "cohens_d": 0.8298416010921655,
+          "lr_accuracy": 0.6875,
+          "passes_80pct": false,
+          "passes_d_1": false
+        },
+        {
+          "category": "Firstness",
+          "expected_pc": 1,
+          "cohens_d": 4.565135540741589,
+          "lr_accuracy": 0.984375,
+          "passes_80pct": true,
+          "passes_d_1": true
+        },
+        {
+          "category": "Thirdness",
+          "expected_pc": 2,
+          "cohens_d": 0.37201627199897025,
+          "lr_accuracy": 0.640625,
+          "passes_80pct": false,
+          "passes_d_1": false
+        }
+      ],
+      "hypothesis_supported": false,
+      "all_d_above_1": false
+    }
+  ],
+  "summary": {
+    "n_models": 3,
+    "hypothesis_supported_count": 0,
+    "hypothesis_supported_ratio": 0.0
+  }
+}

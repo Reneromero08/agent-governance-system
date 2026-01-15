@@ -1,0 +1,329 @@
+{
+  "timestamp": "2026-01-15T16:01:08.959054Z",
+  "test": "Q50_CROSS_MODAL",
+  "target": 21.74625462767236,
+  "models": [
+    {
+      "name": "MiniLM-L6",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 45.54527251422784,
+      "alpha": 0.4781882553049781,
+      "Df_alpha": 21.779214400968385,
+      "vs_8e_percent": 0.15156528726598656,
+      "modality": "text",
+      "model_id": "all-MiniLM-L6-v2"
+    },
+    {
+      "name": "MPNet-base",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 45.40061131956386,
+      "alpha": 0.48855905035274577,
+      "Df_alpha": 22.18087955172024,
+      "vs_8e_percent": 1.9986196772239224,
+      "modality": "text",
+      "model_id": "all-mpnet-base-v2"
+    },
+    {
+      "name": "BERT-base-NLI",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 23.256239728985776,
+      "alpha": 0.902872503966038,
+      "Df_alpha": 20.99741939694384,
+      "vs_8e_percent": 3.4435135776237025,
+      "modality": "text",
+      "model_id": "bert-base-nli-mean-tokens"
+    },
+    {
+      "name": "DistilBERT-NLI",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 23.660829096950277,
+      "alpha": 0.9114274118800147,
+      "Df_alpha": 21.56512822676874,
+      "vs_8e_percent": 0.8329084893227395,
+      "modality": "text",
+      "model_id": "distilbert-base-nli-mean-tokens"
+    },
+    {
+      "name": "MiniLM-Paraphrase",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 40.10137850897741,
+      "alpha": 0.5434802533673897,
+      "Df_alpha": 21.79430735244064,
+      "vs_8e_percent": 0.22097011918149675,
+      "modality": "text",
+      "model_id": "paraphrase-MiniLM-L6-v2"
+    },
+    {
+      "name": "MPNet-Paraphrase",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 46.03484876479591,
+      "alpha": 0.4679743062685555,
+      "Df_alpha": 21.543126414883236,
+      "vs_8e_percent": 0.934083667587712,
+      "modality": "text",
+      "model_id": "paraphrase-mpnet-base-v2"
+    },
+    {
+      "name": "E5-small",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 44.13890888101852,
+      "alpha": 0.5123843276662089,
+      "Df_alpha": 22.616085150920732,
+      "vs_8e_percent": 3.999909585080926,
+      "modality": "text",
+      "model_id": "intfloat/e5-small-v2"
+    },
+    {
+      "name": "E5-base",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 44.03563508704138,
+      "alpha": 0.5321489290619665,
+      "Df_alpha": 23.433516052132628,
+      "vs_8e_percent": 7.758859874257186,
+      "modality": "text",
+      "model_id": "intfloat/e5-base-v2"
+    },
+    {
+      "name": "BGE-small",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 42.68691954220158,
+      "alpha": 0.537339767899259,
+      "Df_alpha": 22.937379439140937,
+      "vs_8e_percent": 5.477379125106243,
+      "modality": "text",
+      "model_id": "BAAI/bge-small-en-v1.5"
+    },
+    {
+      "name": "BGE-base",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 48.45080953423225,
+      "alpha": 0.4475672236444166,
+      "Df_alpha": 21.684994306560757,
+      "vs_8e_percent": 0.2817051587064992,
+      "modality": "text",
+      "model_id": "BAAI/bge-base-en-v1.5"
+    },
+    {
+      "name": "GTE-small",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 49.32943381741554,
+      "alpha": 0.43794960016461515,
+      "Df_alpha": 21.60380581668398,
+      "vs_8e_percent": 0.6550498622742723,
+      "modality": "text",
+      "model_id": "thenlper/gte-small"
+    },
+    {
+      "name": "GTE-base",
+      "shape": [
+        75,
+        768
+      ],
+      "Df": 52.25520612365164,
+      "alpha": 0.3999651555745431,
+      "Df_alpha": 20.900261646826145,
+      "vs_8e_percent": 3.890292812858357,
+      "modality": "text",
+      "model_id": "thenlper/gte-base"
+    },
+    {
+      "name": "MiniLM-L12",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 46.4065581898461,
+      "alpha": 0.46630813123308434,
+      "Df_alpha": 21.63975542646652,
+      "vs_8e_percent": 0.4897358328101131,
+      "modality": "text",
+      "model_id": "all-MiniLM-L12-v2"
+    },
+    {
+      "name": "mMiniLM-L12",
+      "shape": [
+        75,
+        384
+      ],
+      "Df": 39.934871713868084,
+      "alpha": 0.5546689379740751,
+      "Df_alpha": 22.150632881662144,
+      "vs_8e_percent": 1.8595305762455632,
+      "modality": "text",
+      "model_id": "paraphrase-multilingual-MiniLM-L12-v2"
+    },
+    {
+      "name": "mDistilUSE",
+      "shape": [
+        75,
+        512
+      ],
+      "Df": 47.16813694848258,
+      "alpha": 0.4628130516084745,
+      "Df_alpha": 21.83002939981366,
+      "vs_8e_percent": 0.3852377044950806,
+      "modality": "text",
+      "model_id": "distiluse-base-multilingual-cased-v1"
+    },
+    {
+      "name": "CLIP-ViT-B-32",
+      "shape": [
+        78,
+        512
+      ],
+      "Df": 43.40290424112352,
+      "alpha": 0.5406985990317053,
+      "Df_alpha": 23.467889517082746,
+      "vs_8e_percent": 7.91692601271938,
+      "modality": "vision-text",
+      "model_id": "clip-ViT-B-32"
+    },
+    {
+      "name": "CLIP-ViT-B-16",
+      "shape": [
+        78,
+        512
+      ],
+      "Df": 43.18624840752056,
+      "alpha": 0.5449666470510346,
+      "Df_alpha": 23.535064993359562,
+      "vs_8e_percent": 8.225831971133637,
+      "modality": "vision-text",
+      "model_id": "clip-ViT-B-16"
+    },
+    {
+      "name": "CLIP-ViT-L-14",
+      "shape": [
+        78,
+        768
+      ],
+      "Df": 47.53722415646781,
+      "alpha": 0.48303648107096225,
+      "Df_alpha": 22.962213476421752,
+      "vs_8e_percent": 5.591578272067456,
+      "modality": "vision-text",
+      "model_id": "clip-ViT-L-14"
+    },
+    {
+      "name": "MiniLM-code",
+      "shape": [
+        71,
+        384
+      ],
+      "Df": 37.800141330820296,
+      "alpha": 0.575101063116607,
+      "Df_alpha": 21.73890146531275,
+      "vs_8e_percent": 0.03381346574620432,
+      "modality": "code",
+      "model_id": "all-MiniLM-L6-v2"
+    },
+    {
+      "name": "MPNet-code",
+      "shape": [
+        71,
+        768
+      ],
+      "Df": 35.04314896069776,
+      "alpha": 0.6258578272252352,
+      "Df_alpha": 21.932029067672563,
+      "vs_8e_percent": 0.8542824646401492,
+      "modality": "code",
+      "model_id": "all-mpnet-base-v2"
+    },
+    {
+      "name": "BGE-small-instruct",
+      "shape": [
+        70,
+        384
+      ],
+      "Df": 30.401606826104974,
+      "alpha": 0.6388361789527943,
+      "Df_alpha": 19.42164633881409,
+      "vs_8e_percent": 10.689694978096048,
+      "modality": "instruction-tuned",
+      "model_id": "BAAI/bge-small-en-v1.5"
+    },
+    {
+      "name": "E5-small-instruct",
+      "shape": [
+        70,
+        384
+      ],
+      "Df": 32.581439840031244,
+      "alpha": 0.5977664288113506,
+      "Df_alpha": 19.476090938707337,
+      "vs_8e_percent": 10.439331865801913,
+      "modality": "instruction-tuned",
+      "model_id": "intfloat/e5-small-v2"
+    },
+    {
+      "name": "GTR-T5-base",
+      "shape": [
+        70,
+        768
+      ],
+      "Df": 37.06472943988516,
+      "alpha": 0.5324165698000559,
+      "Df_alpha": 19.733876108950806,
+      "vs_8e_percent": 9.253908561158756,
+      "modality": "instruction-tuned",
+      "model_id": "sentence-transformers/gtr-t5-base"
+    },
+    {
+      "name": "ST5-base",
+      "shape": [
+        70,
+        768
+      ],
+      "Df": 24.369831964330075,
+      "alpha": 0.6858074893256477,
+      "Df_alpha": 16.713013274745126,
+      "vs_8e_percent": 23.145325202448316,
+      "modality": "instruction-tuned",
+      "model_id": "sentence-transformers/sentence-t5-base"
+    }
+  ],
+  "summary": {
+    "n_models": 24,
+    "mean_df_alpha": 21.568219193541637,
+    "std_df_alpha": 1.4948228266399455,
+    "cv_percent": 6.930673382100798,
+    "vs_8e_percent": 0.8186947002090723,
+    "passes_cv_threshold": "True",
+    "passes_mean_threshold": "True",
+    "overall_pass": "True"
+  }
+}

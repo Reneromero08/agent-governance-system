@@ -1,0 +1,18 @@
+{
+  "test": "Q48_QGT_BRIDGE",
+  "timestamp": "2026-01-15T14:52:11.911931Z",
+  "results": {
+    "qgt_df": 45.545272870262586,
+    "our_df": 45.545276746409016,
+    "alpha": 0.4781882553049781,
+    "df_times_alpha": 21.779216424747716,
+    "eigenvalue_correlation": 0.9999999999999978,
+    "qgt_analysis": {
+      "participation_ratio": 45.545272870262586,
+      "chern_estimate": 0.08785835710083953,
+      "eigenvalue_ratio": 3.907108343981884
+    },
+    "best_constant_match": "8e",
+    "sigma_c": 2.091226601461012
+  }
+}

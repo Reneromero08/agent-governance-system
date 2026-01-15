@@ -1,0 +1,7 @@
+{
+  "test": "RIEMANN_PI_PATTERN",
+  "timestamp": "2026-01-15T17:07:07.746519Z",
+  "finding": "log(\u03b6_sem)/\u03c0 is approximately linear in s",
+  "slope": 1.9693297925062128,
+  "intercept": 0.9213724952019519,
+  "slope_close_to_2": 

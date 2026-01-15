@@ -1,0 +1,259 @@
+{
+  "timestamp": "2026-01-15T16:38:59.648267Z",
+  "test": "Q50_FIRST_PRINCIPLES",
+  "target": 21.74625462767236,
+  "e": 2.718281828459045,
+  "models": [
+    {
+      "model": "MiniLM-L6",
+      "model_id": "all-MiniLM-L6-v2",
+      "H1": {
+        "hypothesis": "H1_entropy_per_octant",
+        "model": "MiniLM-L6",
+        "total_entropy_nats": 4.098305305314678,
+        "total_entropy_over_e": 1.5076822654691213,
+        "mean_octant_entropy_nats": 2.098387342304601,
+        "mean_octant_entropy_over_e": 0.7719535628482447,
+        "n_octants_measured": 8,
+        "entropy_ratio_to_e": 0.7719535628482447
+      },
+      "H2": {
+        "hypothesis": "H2_integral_normalization",
+        "model": "MiniLM-L6",
+        "Df": 47.85295960680953,
+        "alpha": 0.4824605266680239,
+        "numerical_integral": 0.6675347410889577,
+        "theoretical_integral": 12.372377585297151,
+        "predicted_alpha_from_8e": 0.45443907349416784,
+        "predicted_integral_from_8e": 13.2904208766404,
+        "alpha_prediction_error": 5.808030216975106
+      },
+      "H3": {
+        "hypothesis": "H3_thermodynamic",
+        "model": "MiniLM-L6",
+        "semantic_temperature": 2.072708428410123,
+        "partition_functions": {
+          "Z1_boltzmann": 383.6790210805637,
+          "F1": -12.332213707784568,
+          "F1_per_octant": -1.541526713473071,
+          "F1_per_octant_over_e": -0.5670959859033234,
+          "Z2_canonical": 1.612758357488239,
+          "F2": -0.9906426580690351,
+          "F2_per_octant": -0.12383033225862938,
+          "F2_per_octant_over_e": -0.045554633431378604,
+          "Z3_log_eigenvalue": 971.7524197639717,
+          "F3": -14.258370746612888,
+          "F3_per_octant": -1.782296343326611,
+          "F3_per_octant_over_e": -0.6556701827848987
+        },
+        "mean_eigenvalue": 0.0017383717215858274,
+        "equipartition_prediction": 49.59261635070163
+      },
+      "H4": {
+        "hypothesis": "H4_spiral_winding",
+        "model": "MiniLM-L6",
+        "Df": 47.85295960680953,
+        "alpha": 0.4824605266680239,
+        "total_arc_length": 23.960455089812935,
+        "theta_total": 3.8681329677481764,
+        "winding_number": 0.6156324823538453,
+        "theta_per_octant": 0.48351662096852205,
+        "winding_per_octant": 0.07695406029423066,
+        "theta_per_octant_over_e": 0.17787582431900398,
+        "theta_times_8_over_e": 1.4230065945520318,
+        "angular_momentum": 1.8662214688417316,
+        "angular_momentum_over_e": 0.6865445110596445,
+        "theoretical_angular_momentum": 1.7578307620157272
+      },
+      "H5": {
+        "hypothesis": "H5_peircean_triads",
+        "model": "MiniLM-L6",
+        "entropy_PC1": -0.4195402247674243,
+        "entropy_PC2": -0.5830701819288652,
+        "entropy_PC3": -0.5676391048161149,
+        "sum_entropies": -1.5702495115124044,
+        "sum_entropies_over_e": -0.5776625127949137,
+        "variance_explained_top3": 0.1424868144094944,
+        "joint_entropy_PC123": 4.202199237736838,
+        "joint_entropy_over_e": 1.5459027072696887,
+        "mutual_info_triadic": -5.772448749249242,
+        "mutual_info_over_e": -2.1235652200646022,
+        "df_alpha": 23.087164094525,
+        "df_alpha_over_8e": 1.0616616281659057,
+        "joint_entropy_per_octant": 0.5252749047171047,
+        "ratio_to_e": 0.1932378384087111
+      }
+    },
+    {
+      "model": "MPNet-base",
+      "model_id": "all-mpnet-base-v2",
+      "H1": {
+        "hypothesis": "H1_entropy_per_octant",
+        "model": "MPNet-base",
+        "total_entropy_nats": 4.104651902380988,
+        "total_entropy_over_e": 1.5100170480512156,
+        "mean_octant_entropy_nats": 2.120095035924809,
+        "mean_octant_entropy_over_e": 0.7799393770463677,
+        "n_octants_measured": 8,
+        "entropy_ratio_to_e": 0.7799393770463677
+      },
+      "H2": {
+        "hypothesis": "H2_integral_normalization",
+        "model": "MPNet-base",
+        "Df": 47.84766360119233,
+        "alpha": 0.4920050068754049,
+        "numerical_integral": 0.7353637660021624,
+        "theoretical_integral": 12.075819133576083,
+        "predicted_alpha_from_8e": 0.45448937295927777,
+        "predicted_integral_from_8e": 13.287790892363748,
+        "alpha_prediction_error": 7.625051247827555
+      },
+      "H3": {
+        "hypothesis": "H3_thermodynamic",
+        "model": "MPNet-base",
+        "semantic_temperature": 2.032499641316129,
+        "partition_functions": {
+          "Z1_boltzmann": 767.6395601604228,
+          "F1": -13.502546127454083,
+          "F1_per_octant": -1.6878182659317604,
+          "F1_per_octant_over_e": -0.6209136404699289,
+          "Z2_canonical": 1.5733355907507598,
+          "F2": -0.921124662136425,
+          "F2_per_octant": -0.11514058276705312,
+          "F2_per_octant_over_e": -0.04235785324449771,
+          "Z3_log_eigenvalue": 960.5597563306472,
+          "F3": -13.958224201135602,
+          "F3_per_octant": -1.7447780251419502,
+          "F3_per_octant_over_e": -0.6418679648574335
+        },
+        "mean_eigenvalue": 0.0009575049036486489,
+        "equipartition_prediction": 48.62517955361911
+      },
+      "H4": {
+        "hypothesis": "H4_spiral_winding",
+        "model": "MPNet-base",
+        "Df": 47.84766360119233,
+        "alpha": 0.4920050068754049,
+        "total_arc_length": 24.761693913005097,
+        "theta_total": 3.8680222891455704,
+        "winding_number": 0.615614867307146,
+        "theta_per_octant": 0.4835027861431963,
+        "winding_per_octant": 0.07695185841339325,
+        "theta_per_octant_over_e": 0.17787073477119444,
+        "theta_times_8_over_e": 1.4229658781695556,
+        "angular_momentum": 1.9030863329652856,
+        "angular_momentum_over_e": 0.7001063366722787,
+        "theoretical_angular_momentum": 1.7579750247862804
+      },
+      "H5": {
+        "hypothesis": "H5_peircean_triads",
+        "model": "MPNet-base",
+        "entropy_PC1": -0.3490088356584824,
+        "entropy_PC2": -0.4799282398362674,
+        "entropy_PC3": -0.5060200345466337,
+        "sum_entropies": -1.3349571100413835,
+        "sum_entropies_over_e": -0.49110327562986783,
+        "variance_explained_top3": 0.14504142850637436,
+        "joint_entropy_PC123": 4.0851459570587325,
+        "joint_entropy_over_e": 1.5028412117865435,
+        "mutual_info_triadic": -5.420103067100116,
+        "mutual_info_over_e": -1.9939444874164112,
+        "df_alpha": 23.541290059076694,
+        "df_alpha_over_8e": 1.0825445789234955,
+        "joint_entropy_per_octant": 0.5106432446323416,
+        "ratio_to_e": 0.18785515147331794
+      }
+    },
+    {
+      "model": "BGE-small",
+      "model_id": "BAAI/bge-small-en-v1.5",
+      "H1": {
+        "hypothesis": "H1_entropy_per_octant",
+        "model": "BGE-small",
+        "total_entropy_nats": 4.053387503044359,
+        "total_entropy_over_e": 1.491157929471267,
+        "mean_octant_entropy_nats": 2.110937013716744,
+        "mean_octant_entropy_over_e": 0.7765703289542291,
+        "n_octants_measured": 8,
+        "entropy_ratio_to_e": 0.7765703289542291
+      },
+      "H2": {
+        "hypothesis": "H2_integral_normalization",
+        "model": "BGE-small",
+        "Df": 44.869489849638114,
+        "alpha": 0.5376991918373697,
+        "numerical_integral": 0.37545079268202636,
+        "theoretical_integral": 10.390662438356067,
+        "predicted_alpha_from_8e": 0.4846557137276601,
+        "predicted_integral_from_8e": 11.838816529254142,
+        "alpha_prediction_error": 9.864898239563082
+      },
+      "H3": {
+        "hypothesis": "H3_thermodynamic",
+        "model": "BGE-small",
+        "semantic_temperature": 1.8597759029224206,
+        "partition_functions": {
+          "Z1_boltzmann": 383.798573594697,
+          "F1": -11.065885828657716,
+          "F1_per_octant": -1.3832357285822146,
+          "F1_per_octant_over_e": -0.508863986839198,
+          "Z2_canonical": 1.4043697281611138,
+          "F2": -0.6315587139375051,
+          "F2_per_octant": -0.07894483924218813,
+          "F2_per_octant_over_e": -0.029042183343785524,
+          "Z3_log_eigenvalue": 1843.7785467598922,
+          "F3": -13.984719369321695,
+          "F3_per_octant": -1.748089921165212,
+          "F3_per_octant_over_e": -0.6430863433156888
+        },
+        "mean_eigenvalue": 0.0009777364392761104,
+        "equipartition_prediction": 41.723597999389554
+      },
+      "H4": {
+        "hypothesis": "H4_spiral_winding",
+        "model": "BGE-small",
+        "Df": 44.869489849638114,
+        "alpha": 0.5376991918373697,
+        "total_arc_length": 23.3427973433062,
+        "theta_total": 3.8037580504032698,
+        "winding_number": 0.6053868960472711,
+        "theta_per_octant": 0.4754697563004087,
+        "winding_per_octant": 0.07567336200590889,
+        "theta_per_octant_over_e": 0.17491554824171623,
+        "theta_times_8_over_e": 1.3993243859337299,
+        "angular_momentum": 2.045277629646727,
+        "angular_momentum_over_e": 0.7524155914348902,
+        "theoretical_angular_momentum": 1.8435130727655298
+      },
+      "H5": {
+        "hypothesis": "H5_peircean_triads",
+        "model": "BGE-small",
+        "entropy_PC1": -0.6752787773836775,
+        "entropy_PC2": -0.7230971005075315,
+        "entropy_PC3": -0.83309001593626,
+        "sum_entropies": -2.231465893827469,
+        "sum_entropies_over_e": -0.8209104260143824,
+        "variance_explained_top3": 0.14582768827676773,
+        "joint_entropy_PC123": 4.19565863593978,
+        "joint_entropy_over_e": 1.5434965543356622,
+        "mutual_info_triadic": -6.427124529767249,
+        "mutual_info_over_e": -2.3644069803500445,
+        "df_alpha": 24.126288430305475,
+        "df_alpha_over_8e": 1.1094456881602266,
+        "joint_entropy_per_octant": 0.5244573294924725,
+        "ratio_to_e": 0.19293706929195778
+      }
+    }
+  ],
+  "summary": {
+    "scores": {
+      "H1": 0.2238455770503861,
+      "H2": 0.07765993234788582,
+      "H3": 1.5656245377374836,
+      "H4": 0.8231126308893618,
+      "H5": 0.5307468244639646
+    },
+    "best_hypothesis": "H2",
+    "best_score": 0.07765993234788582
+  }
+}

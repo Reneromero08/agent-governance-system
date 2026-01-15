@@ -1,0 +1,198 @@
+{
+  "test": "RIEMANN_PI_CONNECTION",
+  "timestamp": "2026-01-15T17:05:50.101225Z",
+  "question": "Does \u03c0 appear in spectral zeta at \u03c3_c \u2248 2?",
+  "answer": "PARTIAL",
+  "pi_evidence": [
+    "MiniLM: ['s=2.2, log(z) / pi \u2248 5', 's=2.6, log(z) / pi \u2248 6', 's=3.1, log(z) / pi \u2248 7', 's=2.0, log(z) / pi \u2248 5', 's=2.5, log(z) / pi \u2248 6', 's=3.0, log(z) / pi \u2248 7']",
+    "MPNet: ['s=2.1, log(z) / pi \u2248 5', 's=2.5, log(z) / pi \u2248 6', 's=3.0, log(z) / pi \u2248 7', 's=2.0, log(z) / pi \u2248 5']"
+  ],
+  "results": {
+    "MiniLM": {
+      "alpha": 0.4781882553049781,
+      "sigma_c": 2.091226601461012,
+      "near_critical": {
+        "approach_from_above": [
+          {
+            "s": 2.591226601461012,
+            "epsilon": 0.5,
+            "zeta": 154938315.8510104,
+            "zeta_over_pi_sq": 15698533.55357476,
+            "zeta_times_6_over_pi_sq": 94191201.32144855
+          },
+          {
+            "s": 2.291226601461012,
+            "epsilon": 0.2,
+            "zeta": 25217192.720942684,
+            "zeta_over_pi_sq": 2555035.814622857,
+            "zeta_times_6_over_pi_sq": 15330214.887737144
+          },
+          {
+            "s": 2.191226601461012,
+            "epsilon": 0.1,
+            "zeta": 13840287.930737717,
+            "zeta_over_pi_sq": 1402314.3550931073,
+            "zeta_times_6_over_pi_sq": 8413886.130558643
+          },
+          {
+            "s": 2.1412266014610117,
+            "epsilon": 0.05,
+            "zeta": 10264332.039582003,
+            "zeta_over_pi_sq": 1039994.2715484196,
+            "zeta_times_6_over_pi_sq": 6239965.629290517
+          },
+          {
+            "s": 2.111226601461012,
+            "epsilon": 0.02,
+            "zeta": 8582118.77477773,
+            "zeta_over_pi_sq": 869550.4324196094,
+            "zeta_times_6_over_pi_sq": 5217302.594517656
+          },
+          {
+            "s": 2.1012266014610117,
+            "epsilon": 0.01,
+            "zeta": 8085526.225652324,
+            "zeta_over_pi_sq": 819235.0875542574,
+            "zeta_times_6_over_pi_sq": 4915410.525325544
+          }
+        ],
+        "residue_estimates": [
+          77469157.9255052,
+          5043438.544188537,
+          1384028.7930737718,
+          513216.60197910015,
+          171642.37549555462,
+          80855.26225652325
+        ],
+        "residue_stable": "False",
+        "riemann_zeta_2": 1.6449340668482264,
+        "zeta_at_sigma_c": 7663405.743580527
+      },
+      "pi_search": {
+        "s=2.2, log(z) / pi \u2248 5": 5.233999479019812,
+        "s=2.6, log(z) / pi \u2248 6": 6.002858967687921,
+        "s=3.1, log(z) / pi \u2248 7": 6.980147198539052,
+        "s=2.0, log(z) / pi \u2248 5": 4.871395084739707,
+        "s=2.5, log(z) / pi \u2248 6": 5.826380665861286,
+        "s=3.0, log(z) / pi \u2248 7": 6.800683974212805
+      },
+      "divergence": {
+        "divergence_exponent_beta": -0.24112171561393822,
+        "beta_close_to_1": "False",
+        "estimated_residue": 28879899.746338274,
+        "residue / pi": 9192757.601256222,
+        "residue / pi^2": 2926145.6257710443,
+        "residue * 6 / pi^2": 17556873.754626267
+      },
+      "functional_equation": {
+        "center=1.05": {
+          "mean_ratio": 521.8219527028255,
+          "cv": 1.7270843077119584,
+          "is_symmetric": "False"
+        },
+        "center=1.00": {
+          "mean_ratio": 506.70548772678137,
+          "cv": 1.724723749747109,
+          "is_symmetric": "False"
+        },
+        "center=1.59": {
+          "mean_ratio": 17225.38046624065,
+          "cv": 2.143919178027911,
+          "is_symmetric": "False"
+        }
+      }
+    },
+    "MPNet": {
+      "alpha": 0.48855905035274577,
+      "sigma_c": 2.0468354834036693,
+      "near_critical": {
+        "approach_from_above": [
+          {
+            "s": 2.5468354834036693,
+            "epsilon": 0.5,
+            "zeta": 75970266.96771565,
+            "zeta_over_pi_sq": 7697397.370793345,
+            "zeta_times_6_over_pi_sq": 46184384.22476007
+          },
+          {
+            "s": 2.2468354834036695,
+            "epsilon": 0.2,
+            "zeta": 13287335.216553211,
+            "zeta_over_pi_sq": 1346288.53159369,
+            "zeta_times_6_over_pi_sq": 8077731.189562139
+          },
+          {
+            "s": 2.1468354834036694,
+            "epsilon": 0.1,
+            "zeta": 7465804.216290778,
+            "zeta_over_pi_sq": 756444.1200365375,
+            "zeta_times_6_over_pi_sq": 4538664.720219225
+          },
+          {
+            "s": 2.096835483403669,
+            "epsilon": 0.05,
+            "zeta": 5601552.596580807,
+            "zeta_over_pi_sq": 567555.939320378,
+            "zeta_times_6_over_pi_sq": 3405335.635922268
+          },
+          {
+            "s": 2.0668354834036693,
+            "epsilon": 0.02,
+            "zeta": 4716105.752617606,
+            "zeta_over_pi_sq": 477841.4170376541,
+            "zeta_times_6_over_pi_sq": 2867048.5022259247
+          },
+          {
+            "s": 2.056835483403669,
+            "epsilon": 0.01,
+            "zeta": 4453467.161961377,
+            "zeta_over_pi_sq": 451230.5641622095,
+            "zeta_times_6_over_pi_sq": 2707383.384973257
+          }
+        ],
+        "residue_estimates": [
+          37985133.483857825,
+          2657467.0433106422,
+          746580.4216290778,
+          280077.6298290404,
+          94322.11505235212,
+          44534.671619613764
+        ],
+        "residue_stable": "False",
+        "riemann_zeta_2": 1.6449340668482264,
+        "zeta_at_sigma_c": 4229718.0714523075
+      },
+      "pi_search": {
+        "s=2.1, log(z) / pi \u2248 5": 5.03752251160102,
+        "s=2.5, log(z) / pi \u2248 6": 5.776004275047824,
+        "s=3.0, log(z) / pi \u2248 7": 6.713855111046075,
+        "s=2.0, log(z) / pi \u2248 5": 4.76956643992157
+      },
+      "divergence": {
+        "divergence_exponent_beta": -0.2317216998881539,
+        "beta_close_to_1": "False",
+        "estimated_residue": 15136770.677212253,
+        "residue / pi": 4818183.751453573,
+        "residue / pi^2": 1533675.5215377763,
+        "residue * 6 / pi^2": 9202053.129226658
+      },
+      "functional_equation": {
+        "center=1.02": {
+          "mean_ratio": 414.10096914884787,
+          "cv": 1.7075988933626056,
+          "is_symmetric": "False"
+        },
+        "center=1.00": {
+          "mean_ratio": 408.6492814926258,
+          "cv": 1.7064470995308398,
+          "is_symmetric": "False"
+        },
+        "center=1.55": {
+          "mean_ratio": 11455.90208149828,
+          "cv": 2.131610434712392,
+          "is_symmetric": "False"
+        }
+      }
+    }
+  }
+}
