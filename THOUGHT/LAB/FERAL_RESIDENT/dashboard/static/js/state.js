@@ -26,10 +26,10 @@ export let currentThreshold = 0.080;
 export let nMemories = 0;
 export let staticCameraMode = true;
 
-// Render throttling
+// Render throttling (increased since server batches events)
 export let smashQueue = [];
 export let smashRafPending = false;
-export const MAX_SMASH_BATCH = 5;
+export const MAX_SMASH_BATCH = 15;  // Increased from 5 - server sends batches of 10
 
 // 3D Graph state
 export let Graph = null;

@@ -255,6 +255,13 @@ def get_daemon():
     if daemon is None:
         daemon = FeralDaemon(resident=get_resident(), thread_id="eternal")
 
+        # Smash event throttling - batch and rate limit WebSocket broadcasts
+        smash_batch = []
+        smash_batch_lock = threading.Lock()
+        last_smash_broadcast = [0.0]  # Use list for mutable closure
+        SMASH_THROTTLE_MS = 100  # Broadcast at most every 100ms
+        SMASH_BATCH_SIZE = 10   # Or when batch reaches this size
+
         # Add WebSocket callback - uses thread-safe broadcast scheduling
         def on_activity(event: ActivityEvent):
             try:
@@ -284,16 +291,18 @@ def get_daemon():
                     except Exception:
                         pass  # Best effort - ignore broadcast failures
 
-            # Broadcast activity to activity log
-            safe_broadcast({
-                'type': 'activity',
-                'data': {
-                    'timestamp': event.timestamp,
-                    'action': event.action,
-                    'summary': event.summary,
-                    'details': event.details
-                }
-            })
+            # For smash events, skip verbose activity log broadcast (just send smash_hit)
+            if event.action != 'smash':
+                # Broadcast activity to activity log (non-smash events only)
+                safe_broadcast({
+                    'type': 'activity',
+                    'data': {
+                        'timestamp': event.timestamp,
+                        'action': event.action,
+                        'summary': event.summary,
+                        'details': event.details
+                    }
+                })
 
             # Broadcast constellation events for dynamic 3D visualization
             if event.details.get('chunk_id'):
@@ -306,18 +315,40 @@ def get_daemon():
                 similar_E = event.details.get('similar_E', 0)
 
                 if event.action == 'smash':
-                    safe_broadcast({
-                        'type': 'smash_hit',
-                        'data': {
-                            'node_id': node_id,
-                            'E': event.details.get('E', 0),
-                            'gate_open': event.details.get('gate_open', False),
-                            'is_new_node': is_new,
-                            'similar_to': similar_to,
-                            'similar_E': similar_E,
-                            'rate': event.details.get('rate', 0)
-                        }
-                    })
+                    # THROTTLED: Batch smash events and send periodically
+                    smash_event = {
+                        'node_id': node_id,
+                        'E': event.details.get('E', 0),
+                        'gate_open': event.details.get('gate_open', False),
+                        'is_new_node': is_new,
+                        'similar_to': similar_to,
+                        'similar_E': similar_E,
+                        'rate': event.details.get('rate', 0)
+                    }
+
+                    now = time.time() * 1000  # ms
+                    should_flush = False
+
+                    with smash_batch_lock:
+                        smash_batch.append(smash_event)
+                        elapsed = now - last_smash_broadcast[0]
+                        if len(smash_batch) >= SMASH_BATCH_SIZE or elapsed >= SMASH_THROTTLE_MS:
+                            should_flush = True
+                            batch_to_send = smash_batch.copy()
+                            smash_batch.clear()
+                            last_smash_broadcast[0] = now
+
+                    if should_flush and batch_to_send:
+                        # Send latest hit for UI update + batch stats
+                        latest = batch_to_send[-1]
+                        safe_broadcast({
+                            'type': 'smash_hit',
+                            'data': {
+                                **latest,
+                                'batch_size': len(batch_to_send),
+                                'batch': batch_to_send  # Include full batch for bulk graph updates
+                            }
+                        })
                 elif is_new:
                     safe_broadcast({
                         'type': 'node_discovered',

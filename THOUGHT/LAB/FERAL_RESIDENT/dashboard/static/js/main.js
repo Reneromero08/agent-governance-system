@@ -40,24 +40,23 @@ function handleWebSocketMessage(msg) {
         activateNode(msg.data.node_id, msg.data.activity_type);
         addToTrail(msg.data.node_id, msg.data.activity_type);
     } else if (msg.type === 'smash_hit') {
-        console.log('[SMASH_HIT]', msg.data.node_id, 'E=', msg.data.E);
-        // Also show in activity feed for visibility
-        addActivity({
-            timestamp: new Date().toISOString(),
-            action: 'smash_hit',
-            summary: `${msg.data.node_id} E=${msg.data.E?.toFixed(2)}`,
-            details: {}
-        });
-        // Direct DOM update test
-        const container = document.getElementById('smasher-current');
-        const fileEl = document.getElementById('smasher-current-file');
-        if (container && fileEl) {
-            container.classList.add('active');
-            fileEl.innerText = msg.data.node_id || 'test';
+        // BATCHED: Server sends batched smash events to reduce WebSocket flood
+        const batch = msg.data.batch || [msg.data];
+        const batchSize = batch.length;
+
+        // Only log if small batch (avoid console spam)
+        if (batchSize <= 3) {
+            console.log('[SMASH_HIT]', msg.data.node_id, 'E=', msg.data.E);
         }
+
+        // Update UI with latest hit only (not every item in batch)
         updateCurrentFile(msg.data);
         updateSmasherStats(msg.data.rate);
-        queueSmashVisualization(msg.data);
+
+        // Queue ALL batch items for graph visualization (batched processing)
+        for (const item of batch) {
+            queueSmashVisualization(item);
+        }
     } else if (msg.type === 'hot_reload') {
         console.log('[HOT RELOAD] File changed, reloading...');
         window.location.reload();
@@ -76,12 +75,12 @@ async function init() {
     connectWebSocket(handleWebSocketMessage);
     document.getElementById('loading').classList.add('hidden');
 
-    // Polling intervals
+    // Polling intervals (reduced frequency - WebSocket handles real-time updates)
     setInterval(loadStatus, 10000);
     setInterval(loadEvolution, 30000);
     setInterval(loadDaemonStatus, 5000);
-    setInterval(loadSmasherStatus, 1000);
-    setInterval(saveSettings, 5000);
+    setInterval(loadSmasherStatus, 2000);  // Reduced from 1000ms
+    setInterval(saveSettings, 10000);       // Reduced from 5000ms
 }
 
 // ===== EXPOSE TO GLOBAL SCOPE FOR HTML onclick =====
