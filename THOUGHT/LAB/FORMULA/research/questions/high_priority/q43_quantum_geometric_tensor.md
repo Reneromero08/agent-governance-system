@@ -175,6 +175,28 @@ spherical geometry, NOT flat Euclidean geometry.
 **Terminology correction:** This should be called "solid angle" or "holonomy",
 not "Berry phase" (which requires complex structure).
 
+### 2.6 Experimental Validation (2026-01-15)
+
+Geodesic transport experiments confirm holonomy is measurable in practice:
+
+| Loop | Concepts | Mean |delta E| |
+|------|----------|---------------------|
+| ML Loop | ML -> neural nets -> deep learning -> AI | 3.2% |
+| Physics Loop | quantum mechanics -> relativity -> thermodynamics -> electromagnetism | 10.6% |
+| Emotion Loop | happy -> excited -> anxious -> sad | 3.8% |
+| Code Loop | python -> javascript -> rust -> go | 4.2% |
+
+**Mean effect: 5.4% similarity change from transport.**
+
+Most striking: "quantum mechanics" transported through the physics loop became:
+- **+49% more similar** to "gravity"
+- **-20% less similar** to "wave function"
+
+The path through concept space CHANGES the resulting state. This is holonomy -
+parallel transport on a curved manifold accumulates geometric rotation.
+
+**Test script:** `THOUGHT/LAB/FORMULA/experiments/test_berry_phase.py`
+
 ---
 
 ## 3. On Chern Numbers for Real Bundles

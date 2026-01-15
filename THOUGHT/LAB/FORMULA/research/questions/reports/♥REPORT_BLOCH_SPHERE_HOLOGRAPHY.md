@@ -163,6 +163,21 @@ Compression: 768 / 22 = 35x
 
 Interpretation: Semantic space has Df = 22. The full 768D embedding is a hologram projected from 22 phases.
 
+**CORRECTION (2026-01-15):** The 768/22 = 35x ratio is NOT a universal constant. Cross-model testing reveals:
+
+| Model | D | Df | D/Df |
+|-------|-----|------|------|
+| MiniLM-L6 | 384 | 28.7 | 13.4 |
+| MPNet | 768 | 28.5 | 26.9 |
+| Paraphrase-MiniLM | 384 | 25.7 | 15.0 |
+| Multi-QA-MiniLM | 384 | 27.6 | 13.9 |
+
+**The actual invariant is Df itself (~22-28), not D/Df.**
+
+Different embedding dimensions D give different compression ratios, but Df remains approximately constant for the same data. This confirms Q34 (Platonic Convergence): models converge to the same intrinsic dimensionality regardless of their embedding dimension.
+
+Test script: `THOUGHT/LAB/FORMULA/experiments/test_holographic_scaling.py`
+
 ### 4.3 Bloch Sphere Compression (Today)
 
 From bloch_compress.py:

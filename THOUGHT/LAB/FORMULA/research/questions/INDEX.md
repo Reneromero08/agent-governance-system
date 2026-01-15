@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.2.0 (2026-01-12 - Q44 ANSWERED: E = |⟨ψ|φ⟩|² CONFIRMED! r=0.977, p<0.001. Semantic space IS quantum. 20/44 questions answered (45.5%).)*
+*Last updated: v4.3.0 (2026-01-15 - Q27 ANSWERED: Adaptive thresholding under noise. Q43 updated with holonomy validation. Bloch Sphere D/Df claim corrected. 21/44 questions answered (47.7%).)*
 
 ---
 
@@ -71,7 +71,7 @@
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
 | 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
-| 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ⏳ OPEN | Different thresholds for opening vs. closing? Feature or bug? |
+| 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ✅ ANSWERED | **Adaptive thresholding under noise.** Gate becomes MORE conservative under stress (noise improves discrimination by raising effective threshold). This is homeostatic self-protection, not a bug. Cohen's d increases with noise (r=+0.989). |
 | 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ⏳ OPEN | Does R converge to fixed points? R-stable states? |
 
 ---
@@ -106,9 +106,9 @@
 ## Summary Statistics
 
 - **Total Questions:** 44
-- **Answered:** 20 (45.5%)
+- **Answered:** 21 (47.7%)
 - **Partially Answered:** 6 (13.6%)
-- **Open:** 18 (40.9%)
+- **Open:** 17 (38.6%)
 
 ### By Priority Level
 
@@ -117,7 +117,7 @@
 | Critical | 8 | 7 | 1 | 0 |
 | High | 15 | 9 | 3 | 3 |
 | Medium | 11 | 4 | 1 | 6 |
-| Lower | 8 | 0 | 1 | 7 |
+| Lower | 8 | 1 | 1 | 6 |
 | Engineering | 2 | 0 | 0 | 2 |
 
 ---

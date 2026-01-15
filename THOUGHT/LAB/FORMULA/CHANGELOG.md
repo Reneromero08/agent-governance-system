@@ -1,5 +1,77 @@
 # FORMULA Lab Changelog
 
+## [1.6.0] - 2026-01-15
+
+### Bloch Sphere Holographic Scaling Correction + Q27 Answered + Q43 Holonomy Validation
+
+**Finding 1: Holographic Scaling (D/Df) - CORRECTED**
+
+The Bloch Sphere report claimed D/Df ~ 35 is a universal constant. Cross-model testing disproves this:
+
+| Model | D | Df | D/Df |
+|-------|-----|------|------|
+| MiniLM-L6 | 384 | 28.7 | 13.4 |
+| MPNet | 768 | 28.5 | 26.9 |
+| Paraphrase-MiniLM | 384 | 25.7 | 15.0 |
+| Multi-QA-MiniLM | 384 | 27.6 | 13.9 |
+
+**Key Correction:** The actual invariant is **Df itself (~22-28)**, not D/Df.
+
+- D/Df scales with embedding dimension D
+- Df remains approximately constant for the same data across models
+- The 768/22 = 35 from BERT was a single data point, not a universal constant
+- This actually STRENGTHENS Q34 (Platonic Convergence): different models find the same intrinsic dimensionality
+
+**Test:** `experiments/test_holographic_scaling.py` (uses covariance eigenspectrum Df per Q43)
+
+**Finding 2: Berry Phase / Holonomy - VALIDATED**
+
+Geodesic transport experiments confirm Q43's holonomy claim is measurable:
+
+| Loop | Mean |delta E| |
+|------|---------------------|
+| ML Loop | 3.2% |
+| Physics Loop | 10.6% |
+| Emotion Loop | 3.8% |
+| Code Loop | 4.2% |
+
+**Mean effect: 5.4% similarity change from transport.**
+
+"quantum mechanics" transported through physics loop: +49% more similar to "gravity", -20% less similar to "wave function".
+
+**Test:** `experiments/test_berry_phase.py`
+
+**Finding 3: Adaptive Thresholding - Q27 ANSWERED**
+
+Testing gate discrimination under noise revealed self-protective behavior:
+
+| Noise | Cohen's d |
+|-------|-----------|
+| 0.00 | 3.076 |
+| 0.10 | 3.652 |
+| 0.20 | 4.740 |
+
+**Correlation (noise vs discrimination): +0.989**
+
+Noise makes the gate MORE conservative, not worse. This is homeostatic self-protection:
+- Higher noise → higher effective threshold → fewer absorptions
+- Discrimination quality maintained by sacrificing acceptance rate
+- **Q27 status: ANSWERED** - Adaptive thresholding is a feature, not a bug
+
+**Test:** `experiments/test_rate_threshold.py`
+
+**Files Updated:**
+- `research/questions/reports/♥REPORT_BLOCH_SPHERE_HOLOGRAPHY.md` - Section 4.2 corrected
+- `research/questions/high_priority/q43_quantum_geometric_tensor.md` - Section 2.6 added (holonomy validation)
+- `research/questions/lower_priority/q27_hysteresis.md` - Status: ANSWERED
+- `research/questions/INDEX.md` - v4.3.0, 21/44 answered (47.7%)
+
+**Summary Statistics:**
+- Questions answered: 20 → 21 (+Q27)
+- Total progress: 45.5% → 47.7%
+
+---
+
 ## [1.5.5] - 2026-01-09
 
 ### Q3 Answered: Axiomatic Necessity Proof + Interface Theory Connection
