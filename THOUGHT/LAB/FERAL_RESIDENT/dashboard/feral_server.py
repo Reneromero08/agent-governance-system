@@ -474,11 +474,11 @@ async def get_constellation(max_nodes: int = 500):
             chunks_per_paper = max(3, max_nodes // 100)  # At least 3 chunks per paper
             cursor = conn.execute("""
                 WITH ranked_chunks AS (
-                    SELECT r.receipt_id, r.output_hash, r.metadata, v.vec_blob,
+                    SELECT r.receipt_id, r.output_hash, r.metadata, v.vec_blob, r.created_at,
                            json_extract(r.metadata, '$.paper_id') as paper_id,
                            ROW_NUMBER() OVER (
                                PARTITION BY json_extract(r.metadata, '$.paper_id')
-                               ORDER BY r.receipt_id
+                               ORDER BY r.created_at
                            ) as rn
                     FROM receipts r
                     LEFT JOIN vectors v ON v.vec_sha256 LIKE r.output_hash || '%'
@@ -487,10 +487,13 @@ async def get_constellation(max_nodes: int = 500):
                 SELECT receipt_id, output_hash, metadata, vec_blob
                 FROM ranked_chunks
                 WHERE rn <= ?
-                ORDER BY paper_id, rn
+                ORDER BY paper_id, created_at
             """, (chunks_per_paper,))
 
             rows = cursor.fetchall()
+
+            # Track heading hierarchy per paper: paper_id -> {level: last_node_id}
+            heading_parents = {}
 
             for receipt_id, output_hash, metadata_json, vec_blob in rows:
                 if not metadata_json:
@@ -511,6 +514,14 @@ async def get_constellation(max_nodes: int = 500):
                         "paper_id": paper_id
                     })
                     edges.append({"from": "root", "to": paper_node_id, "type": "hierarchy"})
+                    # Initialize heading hierarchy for this paper
+                    heading_parents[paper_id] = {0: paper_node_id}  # Level 0 = paper itself
+
+                # Parse heading level from # count
+                heading_level = 0
+                if heading.startswith('#'):
+                    stripped = heading.lstrip('#')
+                    heading_level = len(heading) - len(stripped)
 
                 # Create heading node (chunk)
                 # Clean heading for label
@@ -524,11 +535,31 @@ async def get_constellation(max_nodes: int = 500):
                     "label": label,
                     "group": "page",
                     "paper_id": paper_id,
-                    "heading": heading
+                    "heading": heading,
+                    "level": heading_level
                 })
 
-                # Connect chunk to paper
-                edges.append({"from": paper_node_id, "to": chunk_node_id, "type": "hierarchy"})
+                # Find appropriate parent based on heading level
+                # A ### (level 3) should connect to the most recent ## (level 2)
+                # If no ## exists yet, connect to the paper node
+                parent_node_id = paper_node_id
+                if paper_id in heading_parents:
+                    # Look for closest ancestor (any level < current)
+                    for check_level in range(heading_level - 1, -1, -1):
+                        if check_level in heading_parents[paper_id]:
+                            parent_node_id = heading_parents[paper_id][check_level]
+                            break
+
+                # Connect chunk to its hierarchical parent
+                edges.append({"from": parent_node_id, "to": chunk_node_id, "type": "hierarchy"})
+
+                # Update hierarchy tracker: this node becomes the parent for deeper levels
+                if paper_id in heading_parents:
+                    heading_parents[paper_id][heading_level] = chunk_node_id
+                    # Clear any deeper levels (new section resets subsections)
+                    for deeper in list(heading_parents[paper_id].keys()):
+                        if deeper > heading_level:
+                            del heading_parents[paper_id][deeper]
 
                 # Store vector for similarity computation
                 if vec_blob:
