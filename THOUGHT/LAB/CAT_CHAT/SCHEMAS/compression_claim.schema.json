@@ -2,7 +2,7 @@
   "$schema": "http://json-schema.org/draft-07/schema#",
   "$id": "https://ags.example.com/schemas/compression_claim.schema.json",
   "title": "Compression Claim",
-  "description": "Deterministic claim about compression efficiency for a bundle",
+  "description": "Deterministic claim about compression efficiency for a bundle with task performance validation",
   "type": "object",
   "additionalProperties": false,
   "required": [
@@ -106,6 +106,101 @@
           "type": "integer",
           "description": "Tokens for cas component (if included)",
           "minimum": 0
+        }
+      }
+    },
+    "task_performance": {
+      "type": "object",
+      "description": "Task performance validation (Phase 6.4.1-6.4.4)",
+      "additionalProperties": false,
+      "properties": {
+        "benchmark_version": {
+          "type": "string",
+          "description": "Version of benchmark suite used",
+          "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$"
+        },
+        "tasks_run": {
+          "type": "integer",
+          "description": "Number of benchmark tasks executed",
+          "minimum": 0
+        },
+        "baseline_results": {
+          "type": "object",
+          "description": "Results with full uncompressed context",
+          "additionalProperties": false,
+          "properties": {
+            "tasks_passed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "tasks_failed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "success_rate": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          },
+          "required": ["tasks_passed", "tasks_failed", "success_rate"]
+        },
+        "compressed_results": {
+          "type": "object",
+          "description": "Results with compressed/retrieved context",
+          "additionalProperties": false,
+          "properties": {
+            "tasks_passed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "tasks_failed": {
+              "type": "integer",
+              "minimum": 0
+            },
+            "success_rate": {
+              "type": "number",
+              "minimum": 0.0,
+              "maximum": 1.0
+            }
+          },
+          "required": ["tasks_passed", "tasks_failed", "success_rate"]
+        },
+        "parity_achieved": {
+          "type": "boolean",
+          "description": "True if compressed_success_rate >= baseline_success_rate"
+        },
+        "task_details": {
+          "type": "array",
+          "description": "Per-task breakdown",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "properties": {
+              "task_id": {
+                "type": "string"
+              },
+              "task_type": {
+                "type": "string",
+                "enum": ["code_compiles", "tests_pass", "bugs_found", "semantic_match"]
+              },
+              "baseline_passed": {
+                "type": "boolean"
+              },
+              "compressed_passed": {
+                "type": "boolean"
+              },
+              "tokens_used_baseline": {
+                "type": "integer",
+                "minimum": 0
+              },
+              "tokens_used_compressed": {
+                "type": "integer",
+                "minimum": 0
+              }
+            },
+            "required": ["task_id", "task_type", "baseline_passed", "compressed_passed"]
+          }
         }
       }
     },

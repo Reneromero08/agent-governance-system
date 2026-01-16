@@ -6,6 +6,23 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.12] - 2026-01-16
+
+### Added
+- **Phase 6.4 Compression Validation** - Benchmark tasks and auditable proof bundles
+  - `NAVIGATION/PROOFS/COMPRESSION/benchmark_tasks.py` - Deterministic benchmark suite
+  - `NAVIGATION/PROOFS/COMPRESSION/corpus_spec.py` - Baseline and compressed context specs
+  - `NAVIGATION/PROOFS/COMPRESSION/proof_compression_run.py` - Unified compression proof runner
+  - `NAVIGATION/PROOFS/CATALYTIC/proof_catalytic_run.py` - Restore + purity validation
+  - `NAVIGATION/PROOFS/proof_runner.py` - Pack generation binding
+  - `CAPABILITY/TESTBENCH/phase6/test_compression_validation.py` - 19 tests for validation
+
+### Changed
+- **Compression claim schema updated** - Added task_performance field
+  - `THOUGHT/LAB/CAT_CHAT/SCHEMAS/compression_claim.schema.json` - Benchmark results, parity check
+
+---
+
 ## [3.8.11] - 2026-01-16
 
 ### Added

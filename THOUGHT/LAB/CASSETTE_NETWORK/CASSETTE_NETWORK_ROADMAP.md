@@ -687,37 +687,54 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 - [x] Cassette network is portable as cartridges + receipts ✅
 
 ### 6.4 Compression Validation (M.4)
+**Status:** COMPLETE (2026-01-16)
 **From AGS_ROADMAP_MASTER Phase 6.4:**
 
-- [ ] 6.4.1 Add `task_performance` field to compression claims (M.4.1)
-- [ ] 6.4.2 Run benchmark tasks (baseline vs compressed context) (M.4.2)
-- [ ] 6.4.3 Measure success rates (code compiles, tests pass, bugs found) (M.4.3)
-- [ ] 6.4.4 Validate compressed success rate ≥ baseline (M.4.4)
+- [x] 6.4.1 Add `task_performance` field to compression claims (M.4.1) ✅
+  - **Implemented:** `compression_claim.schema.json` updated with task_performance object
+  - Includes benchmark_version, tasks_run, baseline_results, compressed_results, parity_achieved, task_details
+- [x] 6.4.2 Run benchmark tasks (baseline vs compressed context) (M.4.2) ✅
+  - **Implemented:** `benchmark_tasks.py` with BenchmarkRunner class
+  - Task types: semantic_match, code_compiles, tests_pass, bugs_found
+- [x] 6.4.3 Measure success rates (code compiles, tests pass, bugs found) (M.4.3) ✅
+  - **Implemented:** TaskResult with passed/failed tracking per task
+  - Aggregate success rates computed in BenchmarkResults
+- [x] 6.4.4 Validate compressed success rate >= baseline (M.4.4) ✅
+  - **Implemented:** `parity_achieved` field in results
+  - Compression valid only when compressed_success_rate >= baseline_success_rate
 - [x] 6.4.5 Define **token measurement** for all claims (M.4.5) ✅ DONE
   - Must specify tokenizer + encoding (e.g. `tiktoken` + `o200k_base` or `cl100k_base`)
   - Must record tokenizer version + encoding name in receipts
   - **Implemented:** `run_compression_proof.py` uses `tiktoken` v0.12.0 + `o200k_base`
-- [ ] 6.4.6 Define **baseline corpus** precisely (M.4.6)
-  - Must be an explicit file allowlist (paths) + integrity anchors (hashes or git rev)
-  - Must define aggregation rule (sum per-file counts vs tokenize concatenated corpus)
-- [ ] 6.4.7 Define **compressed context** precisely (M.4.7)
-  - Must specify retrieval method (semantic / FTS fallback) and parameters (`top_k`, thresholds)
-  - Must record retrieved identifiers (hashes) and provide deterministic tie-breaking
-- [ ] 6.4.8 Emit **auditable proof bundle** for math correctness (M.4.8)
-  - A machine-readable JSON data file containing raw counts + formulas + inputs/outputs
-  - A human-readable report summarizing baselines, per-benchmark results, and reproduction commands
-- [ ] 6.4.9 Implement `proof_compression_run` (machine + human artifacts)
-  - Emit `NAVIGATION/PROOFS/COMPRESSION/` JSON data + MD report + receipts
-  - Include tokenizer/version, baseline corpus anchors, retrieved hashes, formulas
-- [ ] 6.4.10 Implement `proof_catalytic_run` (restore + purity)
-  - Emit `NAVIGATION/PROOFS/CATALYTIC/` RESTORE_PROOF + purity scan outputs + receipts
-- [ ] 6.4.11 Bind proofs into pack generation (fresh per pack run; seal in public packs per Phase 2.4)
+- [x] 6.4.6 Define **baseline corpus** precisely (M.4.6) ✅
+  - **Implemented:** `corpus_spec.py` with BaselineCorpusSpec
+  - Explicit file allowlist from FILE_INDEX.json + integrity anchors (SHA256)
+  - Aggregation mode: sum_per_file with include/exclude patterns
+- [x] 6.4.7 Define **compressed context** precisely (M.4.7) ✅
+  - **Implemented:** `corpus_spec.py` with CompressedContextSpec
+  - Retrieval method (semantic/FTS), top_k=10, min_similarity=0.4
+  - Deterministic tie-breaking: (similarity DESC, hash ASC)
+- [x] 6.4.8 Emit **auditable proof bundle** for math correctness (M.4.8) ✅
+  - **Implemented:** PROOF_COMPRESSION_BUNDLE.json + PROOF_CATALYTIC_BUNDLE.json
+  - Machine-readable JSON with raw counts, formulas, corpus anchors
+  - Human-readable MD reports with verification commands
+- [x] 6.4.9 Implement `proof_compression_run` (machine + human artifacts) ✅
+  - **Implemented:** `NAVIGATION/PROOFS/COMPRESSION/proof_compression_run.py`
+  - Emits PROOF_COMPRESSION_BUNDLE.json, BENCHMARK_RESULTS.json, CORPUS_SPEC.json
+- [x] 6.4.10 Implement `proof_catalytic_run` (restore + purity) ✅
+  - **Implemented:** `NAVIGATION/PROOFS/CATALYTIC/proof_catalytic_run.py`
+  - Emits RESTORE_PROOF.json, PURITY_SCAN.json, PROOF_CATALYTIC_REPORT.md
+  - Uses Phase 6.3 cassette restore infrastructure
+- [x] 6.4.11 Bind proofs into pack generation (fresh per pack run; seal in public packs per Phase 2.4) ✅
+  - **Implemented:** `NAVIGATION/PROOFS/proof_runner.py`
+  - ProofRunner class with run_all_proofs(), get_proof_artifacts()
+  - Fail-closed: pack generation fails if proofs cannot be computed
 
 **Acceptance:**
-- [ ] Benchmarks reproducible from fixtures
-- [ ] Compression claimed only when nutritious (success parity)
-- [ ] Token counts are reproducible via the declared tokenizer/encoding (no proxy counts)
-- [ ] Proof bundle contains raw counts, formulas, and retrieved hashes (independent audit possible)
+- [x] Benchmarks reproducible from fixtures ✅
+- [x] Compression claimed only when nutritious (success parity) ✅
+- [x] Token counts are reproducible via the declared tokenizer/encoding (no proxy counts) ✅
+- [x] Proof bundle contains raw counts, formulas, and retrieved hashes (independent audit possible) ✅
 
 ---
 

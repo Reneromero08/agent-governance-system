@@ -4,6 +4,70 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
+## [5.1.0] - 2026-01-16
+
+### Phase 6.4: Compression Validation - COMPLETE
+
+**Goal:** Prove compression preserves task success with auditable proof bundles
+
+#### 6.4.1-6.4.4: Task Performance Validation
+
+**Schema Update:**
+- `compression_claim.schema.json` extended with `task_performance` object
+- Fields: benchmark_version, tasks_run, baseline_results, compressed_results, parity_achieved
+- task_details array with per-task breakdown
+
+**Benchmark Tasks:**
+- New file: `NAVIGATION/PROOFS/COMPRESSION/benchmark_tasks.py`
+- Task types: semantic_match, code_compiles, tests_pass, bugs_found
+- BenchmarkRunner compares baseline vs compressed context
+- Parity check: compression valid only when compressed >= baseline success rate
+
+#### 6.4.6-6.4.7: Corpus Specification
+
+**Baseline Corpus (6.4.6):**
+- New file: `NAVIGATION/PROOFS/COMPRESSION/corpus_spec.py`
+- BaselineCorpusSpec with explicit file allowlist from FILE_INDEX.json
+- CorpusAnchor with SHA256 hashes for integrity verification
+- Aggregation mode: sum_per_file with include/exclude patterns
+
+**Compressed Context (6.4.7):**
+- CompressedContextSpec with retrieval parameters
+- Semantic search: top_k=10, min_similarity=0.4
+- Deterministic tie-breaking: (similarity DESC, hash ASC)
+
+#### 6.4.8-6.4.11: Proof Infrastructure
+
+**Auditable Proof Bundles (6.4.8):**
+- Machine-readable: PROOF_COMPRESSION_BUNDLE.json, PROOF_CATALYTIC_BUNDLE.json
+- Human-readable: MD reports with verification commands
+- Cryptographic receipts tying methodology + data + findings
+
+**proof_compression_run (6.4.9):**
+- New file: `NAVIGATION/PROOFS/COMPRESSION/proof_compression_run.py`
+- Runs token savings proof + benchmark tasks
+- Emits BENCHMARK_RESULTS.json, CORPUS_SPEC.json
+
+**proof_catalytic_run (6.4.10):**
+- New file: `NAVIGATION/PROOFS/CATALYTIC/proof_catalytic_run.py`
+- Tests restore guarantee using Phase 6.3 infrastructure
+- 6-step validation: create, export, corrupt, import, verify content, verify Merkle
+- Purity scan for side effects
+
+**Pack Generation Binding (6.4.11):**
+- New file: `NAVIGATION/PROOFS/proof_runner.py`
+- ProofRunner class for unified proof execution
+- Fail-closed: pack fails if proofs cannot be computed
+- get_proof_artifacts() for bundle inclusion
+
+#### Tests
+
+- New file: `CAPABILITY/TESTBENCH/phase6/test_compression_validation.py`
+- 19 tests covering benchmark tasks, corpus specs, schema, proof runner
+- All tests pass
+
+---
+
 ## [5.0.0] - 2026-01-16
 
 ### Phase 6.0-6.3: Canonical Cassette Substrate - COMPLETE
