@@ -101,7 +101,8 @@ import {
 } from './smasher.js';
 import {
     initConstellation, spawnNode, activateNode, addToTrail,
-    updateFog, updateGraphForce, resetGraphForces, reloadConstellation
+    updateFog, updateGraphForce, resetGraphForces, reloadConstellation,
+    invalidateConstellationCache
 } from './graph.js';
 import { loadSettings, saveSettings, applyGraphSettings, toggleSimilarityLinks, updateSimThreshold } from './settings.js';
 import { sendMessage } from './chat.js';

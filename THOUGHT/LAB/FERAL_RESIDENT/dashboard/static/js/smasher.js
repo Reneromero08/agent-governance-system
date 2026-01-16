@@ -40,8 +40,12 @@
 import { CONFIG } from './config.js';
 import * as state from './state.js';
 import { api } from './api.js';
-import { flashNode, addToTrail, focusCameraOnNode, hideSmasherCursor } from './graph.js';
+import { flashNode, addToTrail, focusCameraOnNode, hideSmasherCursor, invalidateConstellationCache, reloadConstellation } from './graph.js';
 import { saveSettings } from './settings.js';
+
+// Track smasher state for cache invalidation
+let _lastSmasherActive = false;
+let _lastAbsorbedCount = 0;
 
 // =============================================================================
 // SECTION 2: TOGGLE/START/STOP CONTROLS
@@ -507,7 +511,11 @@ export async function loadSmasherStatus() {
     try {
         const res = await api('/smasher/status');
         if (res.ok) {
-            state.setSmasherActive(res.active);
+            const wasActive = _lastSmasherActive;
+            const isActive = res.active;
+            const currentAbsorbed = res.stats?.chunks_absorbed || 0;
+
+            state.setSmasherActive(isActive);
 
             // Update stats display
             if (res.stats) {
@@ -518,6 +526,23 @@ export async function loadSmasherStatus() {
             }
 
             updateSmasherUI();
+
+            // CACHE INVALIDATION: When smasher stops and new data was absorbed
+            if (wasActive && !isActive && currentAbsorbed > _lastAbsorbedCount) {
+                console.log('[SMASHER] Session ended with new absorptions - invalidating cache');
+                await invalidateConstellationCache();
+                // Reload constellation to show new data
+                await reloadConstellation(true);  // Force refresh
+            }
+
+            // Update tracking state
+            _lastSmasherActive = isActive;
+            if (!isActive) {
+                // Reset absorbed count when not running
+                _lastAbsorbedCount = 0;
+            } else {
+                _lastAbsorbedCount = currentAbsorbed;
+            }
         }
     } catch (e) {
         // Ignore polling errors silently

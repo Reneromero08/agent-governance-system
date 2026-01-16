@@ -139,7 +139,7 @@ body, html {
 .sidebar {
     grid-area: sidebar;
     background: var(--bg-secondary);
-    border-right: 1px solid var(--border);
+    /* border-right: 1px solid var(--border); */
     overflow-y: auto;
     overflow-x: hidden;
     display: flex;
@@ -666,7 +666,7 @@ input[type="range"]::-moz-range-track {
     border-top: 1px solid var(--border);
     display: flex;
     align-items: center;
-    padding: 0 16px;
+    padding: 0 6px;
     overflow: hidden;
     min-height: var(--activity-height);
     max-height: var(--activity-height);
@@ -737,6 +737,37 @@ input[type="range"]::-moz-range-track {
     background: rgba(255, 102, 0, 0.3);
     color: #ff6600;
     font-weight: 700;
+}
+
+/* ----- DAEMON BEHAVIOR BADGES ----- */
+.activity-badge.paper {
+    background: rgba(100, 255, 218, 0.2);
+    color: #64ffda;
+}
+
+.activity-badge.consolidate {
+    background: rgba(187, 134, 252, 0.2);
+    color: #bb86fc;
+}
+
+.activity-badge.reflect {
+    background: rgba(255, 215, 0, 0.2);
+    color: #ffd700;
+}
+
+.activity-badge.cassette {
+    background: rgba(255, 182, 193, 0.2);
+    color: #ffb6c1;
+}
+
+.activity-badge.daemon {
+    background: rgba(0, 255, 65, 0.2);
+    color: var(--accent);
+}
+
+.activity-badge.config {
+    background: rgba(128, 128, 128, 0.2);
+    color: #999999;
 }
 
 .activity-text {
@@ -845,7 +876,7 @@ input[type="range"]::-moz-range-track {
 
 .smasher-current-file {
     font-size: 12px;
-    font-weight: 600;
+    font-weight: 400;
     color: #ffffff;
     /* TWEAK: Change max-width for longer/shorter file names */
     max-width: 300px;
@@ -858,7 +889,7 @@ input[type="range"]::-moz-range-track {
 .smasher-current-e {
     font-size: 10px;
     font-weight: 700;
-    padding: 2px 8px;
+    padding: 2px 4px;
     border-radius: 3px;
 }
 

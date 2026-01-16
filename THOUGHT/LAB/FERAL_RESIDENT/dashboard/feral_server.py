@@ -95,6 +95,65 @@ except ImportError:
 
 
 # =============================================================================
+# Performance Cache Infrastructure
+# =============================================================================
+
+class TTLCache:
+    """Simple TTL-based cache for expensive computations."""
+
+    def __init__(self, default_ttl: int = 300):
+        self._cache: Dict[str, Any] = {}
+        self._timestamps: Dict[str, float] = {}
+        self.default_ttl = default_ttl
+
+    def get(self, key: str, ttl: Optional[int] = None) -> Optional[Any]:
+        """Get cached value if not expired."""
+        if key not in self._cache:
+            return None
+        ttl = ttl or self.default_ttl
+        if time.time() - self._timestamps[key] > ttl:
+            del self._cache[key]
+            del self._timestamps[key]
+            return None
+        return self._cache[key]
+
+    def set(self, key: str, value: Any):
+        """Store value with current timestamp."""
+        self._cache[key] = value
+        self._timestamps[key] = time.time()
+
+    def invalidate(self, key: str = None):
+        """Clear specific key or all cache."""
+        if key:
+            self._cache.pop(key, None)
+            self._timestamps.pop(key, None)
+        else:
+            self._cache.clear()
+            self._timestamps.clear()
+
+
+# Global caches
+_constellation_cache = TTLCache(default_ttl=300)  # 5 min default
+_config_cache: Dict[str, Any] = {}  # Cached config.json
+_config_mtime: float = 0  # Last modified time
+
+
+def get_cache_config() -> Dict[str, Any]:
+    """Get cache settings from config.json (with file mtime caching)."""
+    global _config_cache, _config_mtime
+    config_path = FERAL_RESIDENT_PATH / "config.json"
+    try:
+        mtime = config_path.stat().st_mtime
+        if mtime > _config_mtime or not _config_cache:
+            with open(config_path, 'r') as f:
+                _config_cache = json.load(f)
+            _config_mtime = mtime
+    except Exception:
+        pass
+    return _config_cache.get('cache', {})
+
+
+# =============================================================================
 # Pydantic Models
 # =============================================================================
 
@@ -443,19 +502,103 @@ app = FastAPI(
     lifespan=lifespan
 )
 
-# Static files with no-cache for JS (dev mode)
+# Static files - caching controlled by config.json cache.dev_mode
 STATIC_DIR = Path(__file__).parent / "static"
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
 
 @app.middleware("http")
-async def add_no_cache_header(request, call_next):
-    """Disable caching for JS files during development."""
+async def static_cache_middleware(request, call_next):
+    """Apply caching headers based on config.json cache settings.
+
+    In dev_mode (default): no-cache for hot reload
+    In production: long-lived cache for performance
+    """
     response = await call_next(request)
-    if request.url.path.endswith('.js'):
-        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
-        response.headers["Pragma"] = "no-cache"
-        response.headers["Expires"] = "0"
+    path = request.url.path
+
+    # Only apply to static assets
+    if path.startswith('/static/'):
+        cache_cfg = get_cache_config()
+        dev_mode = cache_cfg.get('dev_mode', True)  # Default to dev mode for safety
+
+        if dev_mode:
+            # Development: no caching for hot reload
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Pragma"] = "no-cache"
+            response.headers["Expires"] = "0"
+        else:
+            # Production: aggressive caching (configurable max-age)
+            max_age = cache_cfg.get('static_max_age', 86400)  # Default 1 day
+            if path.endswith('.js') or path.endswith('.css'):
+                response.headers["Cache-Control"] = f"public, max-age={max_age}, immutable"
+            elif path.endswith('.html'):
+                # HTML should revalidate more often
+                response.headers["Cache-Control"] = "public, max-age=300, must-revalidate"
+            else:
+                response.headers["Cache-Control"] = f"public, max-age={max_age}"
+
     return response
+
+
+# =============================================================================
+# Routes: Cache Management
+# =============================================================================
+
+@app.get("/api/cache/status")
+async def get_cache_status():
+    """Get cache status and stats for all caches."""
+    cache_cfg = get_cache_config()
+
+    # Try to get embedding cache stats
+    embedding_stats = None
+    try:
+        from model_client import get_cache_stats
+        embedding_stats = get_cache_stats()
+    except ImportError:
+        pass
+
+    return {
+        'ok': True,
+        'config': cache_cfg,
+        'constellation': {
+            'cached': bool(_constellation_cache.get('constellation:500')),
+            'ttl_sec': cache_cfg.get('constellation_ttl_sec', 300)
+        },
+        'embedding': embedding_stats,
+        'static_assets': {
+            'dev_mode': cache_cfg.get('dev_mode', True),
+            'max_age_sec': cache_cfg.get('static_max_age', 86400) if not cache_cfg.get('dev_mode', True) else 0
+        }
+    }
+
+
+@app.post("/api/cache/invalidate")
+async def invalidate_cache(target: str = "constellation"):
+    """Invalidate cached data.
+
+    Args:
+        target: Which cache to invalidate ('constellation', 'embedding', 'all')
+    """
+    if target == "constellation":
+        _constellation_cache.invalidate()
+        return {'ok': True, 'message': 'Constellation cache invalidated'}
+    elif target == "embedding":
+        try:
+            from model_client import clear_embedding_cache
+            clear_embedding_cache()
+            return {'ok': True, 'message': 'Embedding cache cleared'}
+        except ImportError:
+            return {'ok': False, 'error': 'Embedding cache not available'}
+    elif target == "all":
+        _constellation_cache.invalidate()
+        try:
+            from model_client import clear_embedding_cache
+            clear_embedding_cache()
+        except ImportError:
+            pass
+        return {'ok': True, 'message': 'All caches invalidated'}
+    else:
+        return {'ok': False, 'error': f'Unknown cache target: {target}'}
 
 
 # =============================================================================
@@ -505,7 +648,7 @@ async def get_evolution():
 
 
 @app.get("/api/constellation")
-async def get_constellation(max_nodes: int = 500):
+async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False):
     """Get document constellation graph showing GOD TIER papers and their headings.
 
     Structure:
@@ -513,10 +656,25 @@ async def get_constellation(max_nodes: int = 500):
     - Paper nodes (folders) for each paper_id
     - Heading nodes (pages) for each section
     - Similarity edges between chunks
+
+    Caching:
+    - Results cached for constellation_ttl_sec (default 5 min)
+    - Use bypass_cache=true to force refresh
     """
     import sqlite3
     import numpy as np
     import json
+
+    # Check cache first (unless bypassed)
+    cache_key = f"constellation:{max_nodes}"
+    cache_cfg = get_cache_config()
+    ttl = cache_cfg.get('constellation_ttl_sec', 300)
+
+    if not bypass_cache:
+        cached = _constellation_cache.get(cache_key, ttl=ttl)
+        if cached:
+            cached['from_cache'] = True
+            return cached
 
     db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
 
@@ -683,7 +841,7 @@ async def get_constellation(max_nodes: int = 500):
             'entanglement': '#c77dff'     # Purple - quantum bound
         }
 
-        return {
+        result = {
             'ok': True,
             'nodes': nodes,
             'edges': edges,
@@ -691,8 +849,14 @@ async def get_constellation(max_nodes: int = 500):
             'edge_count': len(edges),
             'similarity_edge_count': len([e for e in edges if e.get('type') == 'similarity']),
             'resident_link_count': len(resident_link_edges),
-            'edge_colors': edge_colors
+            'edge_colors': edge_colors,
+            'from_cache': False
         }
+
+        # Store in cache
+        _constellation_cache.set(cache_key, result)
+
+        return result
 
     except Exception as e:
         import traceback

@@ -46,11 +46,11 @@ import { CONFIG } from './config.js';
 
 export const ACTIVITY_COLORS = {
     paper:       { main: 0x00ff41, glow: '#00ff41' },  // Green
-    consolidate: { main: 0x00ff41, glow: '#00ff41' },
+    consolidate: { main: 0x00ff41, glow: '#003cff' },
     reflect:     { main: 0x00ff41, glow: '#00ff41' },
     cassette:    { main: 0x00ff41, glow: '#00ff41' },
     daemon:      { main: 0x00ff41, glow: '#00ff41' },
-    smash:       { main: 0x00ff41, glow: '#00ff41' },
+    smash:       { main: 0x00ff41, glow: '#ff00ea' },
     default:     { main: 0x00ff41, glow: '#00ff41' }
 };
 
@@ -863,33 +863,107 @@ export function updateVisibleLinks() {
     state.Graph.graphData({ nodes: graphData.nodes, links: visibleLinks });
 }
 
-export async function reloadConstellation() {
+// LocalStorage cache key and TTL (5 minutes default, matches server)
+const CONSTELLATION_CACHE_KEY = 'feral_constellation_cache';
+const CONSTELLATION_CACHE_TTL = 5 * 60 * 1000; // 5 minutes in ms
+
+function getConstellationCache() {
+    try {
+        const cached = localStorage.getItem(CONSTELLATION_CACHE_KEY);
+        if (!cached) return null;
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CONSTELLATION_CACHE_TTL) {
+            localStorage.removeItem(CONSTELLATION_CACHE_KEY);
+            return null;
+        }
+        return data;
+    } catch (e) {
+        return null;
+    }
+}
+
+function setConstellationCache(data) {
+    try {
+        localStorage.setItem(CONSTELLATION_CACHE_KEY, JSON.stringify({
+            data,
+            timestamp: Date.now()
+        }));
+    } catch (e) {
+        // localStorage might be full or disabled
+        console.warn('[GRAPH] Could not cache constellation:', e);
+    }
+}
+
+/**
+ * Clear the constellation cache (call when new data is added)
+ * Also invalidates server-side cache
+ */
+export async function invalidateConstellationCache() {
+    localStorage.removeItem(CONSTELLATION_CACHE_KEY);
+    console.log('[GRAPH] LocalStorage constellation cache cleared');
+    // Also invalidate server cache
+    try {
+        await fetch('/api/cache/invalidate?target=constellation', { method: 'POST' });
+        console.log('[GRAPH] Server constellation cache invalidated');
+    } catch (e) {
+        console.warn('[GRAPH] Could not invalidate server cache:', e);
+    }
+}
+
+function applyConstellationData(data) {
+    const nodes = data.nodes.map(n => ({
+        id: n.id, label: n.label, group: n.group,
+        path: n.path || '', val: n.group === 'folder' ? 3 : 1
+    }));
+
+    state.allLinks.length = 0;
+    data.edges.forEach(e => {
+        state.allLinks.push({
+            source: e.from, target: e.to,
+            type: e.type || 'hierarchy', weight: e.weight || 0.5
+        });
+    });
+
+    nodes.forEach(n => state.nodeRegistry.byId.set(n.id, n));
+    state.Graph.graphData({ nodes, links: filterLinks(state.allLinks) });
+}
+
+export async function reloadConstellation(forceRefresh = false) {
     if (!state.Graph) return;
 
     try {
-        const url = `/api/constellation?include_similarity=true&similarity_threshold=${state.similarityThreshold}`;
-        const res = await fetch(url);
-        const data = await res.json();
-        if (!data.ok) return;
+        // Try localStorage cache first for instant loading (unless forcing refresh)
+        if (!forceRefresh) {
+            const cached = getConstellationCache();
+            if (cached) {
+                console.log('[GRAPH] Using cached constellation (instant load)');
+                applyConstellationData(cached);
+                // Fetch fresh data in background to update cache
+                fetchAndCacheConstellation().catch(() => {});
+                return;
+            }
+        }
 
-        const nodes = data.nodes.map(n => ({
-            id: n.id, label: n.label, group: n.group,
-            path: n.path || '', val: n.group === 'folder' ? 3 : 1
-        }));
-
-        state.allLinks.length = 0;
-        data.edges.forEach(e => {
-            state.allLinks.push({
-                source: e.from, target: e.to,
-                type: e.type || 'hierarchy', weight: e.weight || 0.5
-            });
-        });
-
-        nodes.forEach(n => state.nodeRegistry.byId.set(n.id, n));
-        state.Graph.graphData({ nodes, links: filterLinks(state.allLinks) });
+        // No cache or force refresh - fetch from server
+        await fetchAndCacheConstellation();
     } catch (e) {
         console.error('[GRAPH] Reload error:', e);
     }
+}
+
+async function fetchAndCacheConstellation() {
+    const url = `/api/constellation?include_similarity=true&similarity_threshold=${state.similarityThreshold}`;
+    const res = await fetch(url);
+    const data = await res.json();
+    if (!data.ok) return;
+
+    // Cache the response (unless it came from server cache - avoid double caching)
+    if (!data.from_cache) {
+        setConstellationCache(data);
+        console.log('[GRAPH] Constellation cached to localStorage');
+    }
+
+    applyConstellationData(data);
 }
 
 // =============================================================================
