@@ -27,14 +27,16 @@ SYSTEM_PROMPT = """You are a computational assistant with extensive tool access.
 CRITICAL: Use the RIGHT tool for the job. Don't search if you can compute. Don't compute if you need current data.
 
 TOOLS:
-1. Python (math, numpy, sympy) - Use for computation
-2. search_web("query") - Use for current data, prices, news
-3. wiki("topic") - Use for general verified facts from Wikipedia
-4. grok("topic") - Use for Grokipedia knowledge base (preferred for technical topics)
-5. oracle("question") - Ask another AI for help (use for hard questions you can't answer)
-6. fetch_url("url") - Use to read a webpage
-7. read_file("path") - Use to read local files
-8. list_dir("path") - Use to list directory contents
+1. Python (math, numpy, scipy, sympy, pandas) - Use for computation
+2. grok("topic") - Use for Grokipedia knowledge base (preferred for technical topics)
+3. fetch_url("url") - Use to read a webpage
+4. read_file("path") - Use to read local files
+5. list_dir("path") - Use to list directory contents
+
+DISABLED (API required, not configured):
+- search_web("query") - Requires duckduckgo-search
+- wiki("topic") - Requires wikipedia-api
+- oracle("question") - Requires oracle_bridge module
 
 SYNTAX:
 For Python, use code blocks:
@@ -45,11 +47,10 @@ print(result)
 ```
 
 For tools, use function call syntax directly in your response:
-search_web("current Bitcoin price")
-wiki("Riemann Hypothesis")
 grok("machine learning")
-oracle("What is the latest development in quantum computing?")
+fetch_url("https://example.com")
 read_file("config.json")
+list_dir(".")
 
 Be fast. Choose the right tool. Execute immediately."""
 
@@ -72,8 +73,10 @@ def execute_python(code: str) -> str:
         imports = [
             "import math",
             "import numpy as np",
+            "import scipy.stats as stats",
             "from sympy import *",
             "from fractions import Fraction",
+            "import pandas as pd",
         ]
 
     full_code = "\n".join(imports) + "\n" + code if imports else code
@@ -431,23 +434,23 @@ def extract_tool_call(text: str) -> Optional[tuple]:
         pass
 
     # Try function call syntax: search_web("query")
+    # ONLY include working tools - disabled tools won't be parsed
     patterns = [
-        (r'search_web\("([^"]+)"\)', search_web),
-        (r"search_web\('([^']+)'\)", search_web),
+        # WORKING TOOLS
         (r'fetch_url\("([^"]+)"\)', fetch_url),
         (r"fetch_url\('([^']+)'\)", fetch_url),
-        (r'wiki\("([^"]+)"\)', wikipedia_lookup),
-        (r"wiki\('([^']+)'\)", wikipedia_lookup),
         (r'grok\("([^"]+)"\)', grokipedia_lookup),
         (r"grok\('([^']+)'\)", grokipedia_lookup),
         (r'grokipedia\("([^"]+)"\)', grokipedia_lookup),
         (r"grokipedia\('([^']+)'\)", grokipedia_lookup),
-        (r'oracle\("([^"]+)"\)', ask_oracle),
-        (r"oracle\('([^']+)'\)", ask_oracle),
         (r'read_file\("([^"]+)"\)', read_file_safe),
         (r"read_file\('([^']+)'\)", read_file_safe),
         (r'list_dir\("([^"]+)"\)', list_directory),
         (r"list_dir\('([^']+)'\)", list_directory),
+        # DISABLED - commented out so model won't try to use them
+        # (r'search_web\("([^"]+)"\)', search_web),
+        # (r'wiki\("([^"]+)"\)', wikipedia_lookup),
+        # (r'oracle\("([^"]+)"\)', ask_oracle),
     ]
 
     for pattern, func in patterns:

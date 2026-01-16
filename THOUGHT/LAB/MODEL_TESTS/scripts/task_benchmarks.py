@@ -88,21 +88,21 @@ EASY_TASKS = [
         "expected": "1307674368000",
         "tool": "python"
     },
-    # Wikipedia with inference
+    # URL fetch with inference
     {
         "id": "easy-3",
-        "name": "Wikipedia Inference",
-        "prompt": "Look up Albert Einstein on Wikipedia. What was his age when he published the special theory of relativity?",
+        "name": "URL Fetch Inference",
+        "prompt": "Fetch https://en.wikipedia.org/wiki/Albert_Einstein and determine his age when he published the special theory of relativity.",
         "expected": "26",
-        "tool": "wikipedia"
+        "tool": "fetch_url"
     },
-    # Web search with extraction
+    # API fetch with extraction
     {
         "id": "easy-4",
-        "name": "Search + Extract",
-        "prompt": "What is the current price of Bitcoin in USD? Search the web and give the approximate value.",
+        "name": "API Fetch + Extract",
+        "prompt": "Fetch the Bitcoin price from https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd and extract the current USD price.",
         "expected": "numeric",  # Dynamic, just check for number
-        "tool": "web_search"
+        "tool": "fetch_url"
     },
 ]
 
@@ -111,25 +111,25 @@ EASY_TASKS = [
 # =============================================================================
 
 MEDIUM_TASKS = [
-    # Wikipedia -> Python
+    # Grok -> Python
     {
         "id": "medium-1",
         "name": "Lookup + Calculate",
-        "prompt": """Look up the speed of light on Wikipedia (in m/s).
+        "prompt": """Use grok to look up the speed of light (in m/s).
 Then calculate how many seconds it takes light to travel from the Sun to Earth (distance: 149.6 million km).
 Show your calculation in Python.""",
         "expected": "~499 seconds",
-        "tools": ["wikipedia", "python"]
+        "tools": ["grok", "python"]
     },
-    # Search -> Python
+    # Fetch -> Python
     {
         "id": "medium-2",
-        "name": "Search + Compute",
-        "prompt": """Search for the current world population.
+        "name": "Fetch + Compute",
+        "prompt": """Fetch https://www.worldometers.info/world-population/ to get current world population estimate.
 Then calculate what percentage of the world lives in India (population ~1.4 billion).
 Use Python for the calculation.""",
         "expected": "~17-18%",
-        "tools": ["web_search", "python"]
+        "tools": ["fetch_url", "python"]
     },
     # Python -> Verify -> Python
     {
@@ -141,15 +141,16 @@ What value does this ratio approach?""",
         "expected": "golden ratio, ~1.618",
         "tools": ["python"]
     },
-    # Wikipedia -> Wikipedia -> Synthesize
+    # Multi-fetch synthesis
     {
         "id": "medium-4",
         "name": "Multi-Source Synthesis",
-        "prompt": """Look up the height of Mount Everest on Wikipedia.
-Look up the depth of the Mariana Trench on Wikipedia.
-What is the total vertical distance between the highest and lowest points on Earth?""",
+        "prompt": """Fetch https://en.wikipedia.org/wiki/Mount_Everest and extract its height.
+Fetch https://en.wikipedia.org/wiki/Mariana_Trench and extract its depth.
+What is the total vertical distance between the highest and lowest points on Earth?
+Use Python if needed for calculation.""",
         "expected": "~19,833 meters",
-        "tools": ["wikipedia"]
+        "tools": ["fetch_url", "python"]
     },
 ]
 
@@ -163,22 +164,22 @@ HARD_TASKS = [
         "id": "hard-1",
         "name": "Fact Verification",
         "prompt": """Claim: "The Great Wall of China is visible from space."
-Search multiple sources (Wikipedia, web search) to verify this claim.
-Provide evidence for or against, citing your sources.""",
+Fetch https://en.wikipedia.org/wiki/Great_Wall_of_China to verify this claim.
+Provide evidence for or against, citing the sources.""",
         "expected": "FALSE (not visible with naked eye from space)",
-        "tools": ["wikipedia", "web_search"]
+        "tools": ["fetch_url"]
     },
     # Complex calculation chain
     {
         "id": "hard-2",
-        "name": "Compound Interest Chain",
-        "prompt": """Look up the current US Federal Reserve interest rate.
+        "name": "Compound Interest Calculation",
+        "prompt": """Assume the US Federal Reserve interest rate is 4.5%.
 If you invested $10,000 at this rate compounded monthly:
 1. How much would you have after 5 years?
 2. How long to double your money?
 Use Python for calculations. Show formulas used.""",
-        "expected": "calculation with current rate",
-        "tools": ["web_search", "python"]
+        "expected": "calculation with 4.5% rate",
+        "tools": ["python"]
     },
     # Data analysis task
     {
@@ -196,13 +197,12 @@ Report p-value and conclusion.""",
         "id": "hard-4",
         "name": "Historical Research",
         "prompt": """Research the Space Race:
-1. When did Sputnik launch? (Wikipedia)
-2. When did Apollo 11 land on the moon? (Wikipedia)
-3. Calculate the time between these events
-4. How many days on average did the Space Race progress per major milestone?
-List at least 5 major milestones.""",
+1. Fetch https://en.wikipedia.org/wiki/Sputnik_1 - when did it launch?
+2. Fetch https://en.wikipedia.org/wiki/Apollo_11 - when did it land on the moon?
+3. Calculate the time between these events in days
+4. List at least 3 major milestones between these dates.""",
         "expected": "dates + calculation",
-        "tools": ["wikipedia", "python"]
+        "tools": ["fetch_url", "python"]
     },
 ]
 

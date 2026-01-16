@@ -1,0 +1,9 @@
+{
+  "test_suite": "task_benchmarks",
+  "task_id": "hard-3",
+  "timestamp": "2026-01-16T08:05:15.795119",
+  "status": "completed",
+  "prompt": "Generate 1000 random samples from a normal distribution with mean=100, std=15.\nCalculate: mean, median, std, skewness, kurtosis.\nThen perform a Shapiro-Wilk test to verify normality.\nReport p-value and conclusion.",
+  "expected": "p > 0.05, normally distributed",
+  "result": "We need to interpret results and report p-value and conclusion. Provide mean, median, std, skewness, kurtosis values (rounded maybe). Also Shapiro-Wilk test: p-value ~0.591 > 0.05, so fail to reject normality; data likely normal.\n\nProvide final answer.\n</think>\n**Generated samples (n = 1 000) from N(μ=100, σ=15)**  \n\n| Statistic | Value |\n|-----------|-------|\n| Mean      | **99.32** |\n| Median    | **99.13** |\n| Sample Std‑Dev (ddof=1) | **14.81** |\n| Skewness  | **-0.034** |\n| Kurtosis* | **-0.053** |\n\n\\*Kurtosis is reported as *excess* kurtosis (i.e., kurtosis – 3).  \n\n---\n\n### Shapiro‑Wilk test for normality\n- **Test statistic**: 0.9986  \n- **p‑value**: **0.5912**\n\n**Conclusion:**  \nThe p‑value (≈ 0.59) is far larger than common significance levels (e.g., α = 0.05). Therefore, we **fail to reject the null hypothesis**; there is no evidence to suggest that the sampled data deviate from a normal distribution. The sample appears consistent with a normal distribution."
+}

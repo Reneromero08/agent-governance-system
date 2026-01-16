@@ -1,0 +1,9 @@
+{
+  "test_suite": "task_benchmarks",
+  "task_id": "easy-2",
+  "timestamp": "2026-01-16T05:49:50.204085",
+  "status": "completed",
+  "prompt": "What is 15 factorial? Compute it in Python and express in scientific notation.",
+  "expected": "1307674368000",
+  "result": "We need to interpret the situation: The user gave Python code that printed \"1.308e+12\" and also returned None? They say output:\n\n```\n1.308e+12\nNone\n```\n\nProbably they executed some code where print printed 1.308e+12 then maybe a function returns None. We need to provide final answer: factorial of 15 in scientific notation.\n\nWe can compute exact factorial = 1307674368000, scientific notation approx 1.307674368e12 which rounded is 1.308e+12 (three significant digits). So final answer: 1.308 × 10^12.\n\nWe should present clearly.\n</think>\nThe factorial of 15 is  \n\n\\[\n15! = 1\\,307\\,674\\,368\\,000.\n\\]\n\nExpressed in scientific notation (rounded to three significant figures) this becomes  \n\n\\[\n\\boxed{1.308 \\times 10^{12}} \\quad\\text{(i.e., }1.308\\text{e}+12\\text{)}.\n\\]"
+}

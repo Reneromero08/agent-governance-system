@@ -1,0 +1,9 @@
+{
+  "test_suite": "task_benchmarks",
+  "task_id": "medium-2",
+  "timestamp": "2026-01-16T06:50:48.034494",
+  "status": "completed",
+  "prompt": "Fetch https://www.worldometers.info/world-population/ to get current world population estimate.\nThen calculate what percentage of the world lives in India (population ~1.4 billion).\nUse Python for the calculation.",
+  "expected": "~17-18%",
+  "result": "We have fetched page and computed percentage; output shows \"India's population is 17.5% of the world total.\" plus None (maybe stray print). The user wants final answer probably just that percentage. Provide final concise answer.\n</think>\n**Answer:** Approximately **17.5 %** of the current world population lives in India."
+}

@@ -1,0 +1,9 @@
+{
+  "test_suite": "task_benchmarks",
+  "task_id": "medium-4",
+  "timestamp": "2026-01-16T07:27:12.891966",
+  "status": "completed",
+  "prompt": "Fetch https://en.wikipedia.org/wiki/Mount_Everest and extract its height.\nFetch https://en.wikipedia.org/wiki/Mariana_Trench and extract its depth.\nWhat is the total vertical distance between the highest and lowest points on Earth?\nUse Python if needed for calculation.",
+  "expected": "~19,833 meters",
+  "result": "We need to respond with final answer. The user wants the total vertical distance between highest and lowest points on Earth. We have computed it as 19,832 meters (or about 19.8 km). Provide final answer.\n</think>\nThe summit of Mount Everest rises **≈ 8,848 m** above sea level, while the Challenger Deep of the Mariana Trench lies **≈ 10,984 m** below sea level.\n\nAdding these magnitudes gives a total vertical span:\n\n\\[\n8{,}848\\ \\text{m} + 10{,}984\\ \\text{m} = \\mathbf{19{,}832\\ metres}\n\\]\n\nSo the greatest vertical distance between the highest and lowest points on Earth is **about 19.8 km**."
+}
