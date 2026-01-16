@@ -75,13 +75,12 @@
                         <span class="section-chevron">&#9660;</span>
                     </div>
                     <div class="section-content">
-                        <div class="daemon-status">
-                            <div class="daemon-state">
-                                <div class="daemon-led" id="smasher-led"></div>
-                                <span class="daemon-label" id="smasher-status-text">Idle</span>
-                            </div>
-                            <button class="daemon-btn primary" id="smasher-toggle-btn" onclick="toggleSmasher()">SMASH</button>
-                        </div>
+                        <!-- Full-width action button -->
+                        <button type="button" class="action-btn" id="smasher-toggle-btn" onclick="toggleSmasher()">
+                            <img src="/static/icons/smash_1.svg" class="action-btn-icon" id="smasher-icon-left" alt="">
+                            <span class="action-btn-text" id="smasher-btn-text">SMASH</span>
+                            <img src="/static/icons/smash_2.svg" class="action-btn-icon action-btn-icon-right hidden" id="smasher-icon-right" alt="">
+                        </button>
 
                         <div class="stat-card" id="smasher-stats" style="display: none;">
                             <div class="stat-label">Throughput</div>
@@ -130,12 +129,10 @@
                             <span class="slider-value" id="value-e-threshold" style="color: var(--accent);">0.080</span>
                         </div>
 
-                        <div class="behavior-item">
-                            <div class="behavior-toggle on" id="toggle-static-camera" onclick="toggleStaticCamera()"></div>
-                            <div class="behavior-info">
-                                <div class="behavior-name">Static Camera</div>
-                                <div class="behavior-interval">No auto-follow</div>
-                            </div>
+                        <div class="behavior-item follow-toggle-item">
+                            <div class="behavior-toggle" id="toggle-static-camera" onclick="toggleStaticCamera()"></div>
+                            <img src="/static/icons/camera.svg" class="follow-icon" alt="">
+                            <span class="follow-label">Follow</span>
                         </div>
 
                     </div>
@@ -148,13 +145,10 @@
                         <span class="section-chevron">&#9660;</span>
                     </div>
                     <div class="section-content">
-                        <div class="daemon-status">
-                            <div class="daemon-state">
-                                <div class="daemon-led" id="daemon-led"></div>
-                                <span class="daemon-label" id="daemon-status-text">Stopped</span>
-                            </div>
-                            <button class="daemon-btn" id="daemon-toggle-btn" onclick="toggleDaemon()">Start</button>
-                        </div>
+                        <!-- Full-width action button -->
+                        <button type="button" class="action-btn" id="daemon-toggle-btn" onclick="toggleDaemon()">
+                            <span class="action-btn-text" id="daemon-btn-text">START</span>
+                        </button>
 
                         <div class="behavior-item">
                             <div class="behavior-toggle" id="toggle-consolidate" onclick="toggleBehavior('memory_consolidation')"></div>

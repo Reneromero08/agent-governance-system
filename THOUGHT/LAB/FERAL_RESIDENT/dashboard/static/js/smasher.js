@@ -146,18 +146,26 @@ export async function stopSmasher() {
 export function updateSmasherUI() {
     const btn = document.getElementById('smasher-toggle-btn');
     const btnText = document.getElementById('smasher-btn-text');
-    const btnIcon = document.getElementById('smasher-icon');
+    const iconLeft = document.getElementById('smasher-icon-left');
+    const iconRight = document.getElementById('smasher-icon-right');
     const stats = document.getElementById('smasher-stats');
 
     if (state.smasherActive) {
         btn.classList.add('active');
         btnText.innerText = 'SMASHING';
-        if (btnIcon) btnIcon.src = '/static/icons/smash_2.svg';
+        // Show both icons with smash_2_green (green on orange button)
+        if (iconLeft) iconLeft.src = '/static/icons/smash_2_green.svg';
+        if (iconRight) {
+            iconRight.src = '/static/icons/smash_2_green.svg';
+            iconRight.classList.remove('hidden');
+        }
         stats.style.display = 'block';
     } else {
         btn.classList.remove('active');
         btnText.innerText = 'SMASH';
-        if (btnIcon) btnIcon.src = '/static/icons/smash_1.svg';
+        // Show only left icon with smash_1
+        if (iconLeft) iconLeft.src = '/static/icons/smash_1.svg';
+        if (iconRight) iconRight.classList.add('hidden');
     }
 }
 
@@ -497,15 +505,21 @@ async function sendSmasherConfig(updates) {
 }
 
 /**
- * Toggle static camera mode
- * When ON, camera doesn't auto-follow smasher cursor
+ * Toggle follow mode (camera auto-follow)
+ * When toggle is ON, camera auto-follows smasher cursor
+ * When toggle is OFF, camera stays static
  *
- * TWEAK: Default state is set in state.js (staticCameraMode)
+ * Note: Internally uses staticCameraMode where:
+ *   staticCameraMode = true  -> no follow (toggle OFF)
+ *   staticCameraMode = false -> follow enabled (toggle ON)
+ *
+ * TWEAK: Default state is set in state.js (staticCameraMode = true = Follow OFF)
  */
 export function toggleStaticCamera() {
     state.setStaticCameraMode(!state.staticCameraMode);
+    // Invert display: toggle ON when staticCameraMode is false (follow enabled)
     document.getElementById('toggle-static-camera').className =
-        state.staticCameraMode ? 'behavior-toggle on' : 'behavior-toggle';
+        state.staticCameraMode ? 'behavior-toggle' : 'behavior-toggle on';
     saveSettings();
 }
 
