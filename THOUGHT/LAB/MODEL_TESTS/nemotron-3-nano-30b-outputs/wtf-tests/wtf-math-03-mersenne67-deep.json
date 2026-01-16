@@ -1,0 +1,47 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "math",
+  "test_name": "Mersenne 67 - Deep number theory reasoning",
+  "timestamp": "2026-01-15",
+  "status": "partial",
+  "prompt": "Determine whether M_67 = 2^67 - 1 is prime or composite. If composite, give complete prime factorization.",
+  "model_reasoning": {
+    "initial_analysis": [
+      "2^67-1 is a large integer: about 20 digits",
+      "Mersenne numbers M_p for prime exponent p are sometimes prime",
+      "Known Mersenne primes have exponents: 2,3,5,7,13,17,19,31,61,...",
+      "Exponent 67 is not in the known list - thus 2^67 - 1 is composite"
+    ],
+    "number_theory_knowledge": [
+      "If p is a prime divisor of 2^n - 1 then order of 2 modulo p divides n",
+      "For Mersenne numbers where exponent p is prime, any divisor q must be congruent to 1 mod 2p",
+      "Any prime divisor q must be of form 2kp+1 and q = 1 (mod 8)",
+      "For p=67: any divisor must be of form 134k+1"
+    ],
+    "candidate_primes_derived": [
+      "k=1: 135 (not prime)",
+      "k=2: 269 (prime - potential factor!)",
+      "k=3: 403 (not prime)",
+      "k=12: 1609 (prime - potential factor)"
+    ],
+    "verification_attempt": "Tried to compute 2^67 mod 269 to check if order is exactly 67"
+  },
+  "code_executed": {
+    "tool_call": "stateful_python_code_exec",
+    "code": "n = (1 << 67) - 1\nn, len(str(n))",
+    "note": "Model correctly used bit shift for efficiency"
+  },
+  "result": {
+    "correctly_identified_composite": true,
+    "knew_mersenne_prime_list": true,
+    "derived_divisor_form": "q = 134k + 1",
+    "found_candidate_269": true,
+    "completed_factorization": false,
+    "failure_reason": "Token limit / complexity"
+  },
+  "analysis": {
+    "number_theory_depth": "Graduate-level",
+    "correct_theorems_applied": ["Fermat's Little Theorem", "Order of elements", "Quadratic residues"],
+    "reasoning_chain": "EXCELLENT - derived candidate primes from first principles"
+  }
+}

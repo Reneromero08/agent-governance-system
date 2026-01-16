@@ -21,8 +21,8 @@
   "consolidation_window": 10,
   "smasher": {
     "enabled": false,
-    "delay_ms": 853,
-    "batch_size": 1,
+    "delay_ms": 525,
+    "batch_size": 10,
     "batch_pause_ms": 500,
     "max_chunks": 0
   },
@@ -37,49 +37,49 @@
         "min": 10,
         "max": 2000,
         "step": 1,
-        "default": 853
+        "default": 525
       },
       "batch": {
         "min": 1,
         "max": 100,
         "step": 1,
-        "default": 1
+        "default": 10
       },
       "sim_threshold": {
-        "min": 0.998,
+        "min": 0.0,
         "max": 1,
-        "step": 0.0001,
-        "default": 0.998
+        "step": 0.001,
+        "default": 0.753
       },
       "fog": {
         "min": 0,
         "max": 0.002,
         "step": 0.0001,
-        "default": 0.002
+        "default": 0
       },
       "center": {
         "min": 0,
         "max": 1,
         "step": 0.01,
-        "default": 1
+        "default": 0
       },
       "repel": {
         "min": 0,
         "max": 1000,
         "step": 1,
-        "default": 0
+        "default": 388
       },
       "link_strength": {
         "min": 0,
         "max": 1,
         "step": 0.01,
-        "default": 0
+        "default": 0.28
       },
       "link_distance": {
         "min": 10,
         "max": 500,
         "step": 1,
-        "default": 10
+        "default": 177
       }
     }
   }

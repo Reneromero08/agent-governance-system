@@ -1,0 +1,28 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "edge",
+  "test_name": "Floating point precision hell",
+  "timestamp": "2026-01-15",
+  "status": "partial",
+  "prompt": "Compute (0.1 + 0.2) == 0.3 in Python. Explain the result. Then compute the smallest positive float x such that 1.0 + x != 1.0. Verify your answer.",
+  "iterations": [
+    {
+      "iteration": 1,
+      "model_response": "We need to compute (0.1+0.2)==0.3 in Python and explain floating point rounding. Then compute the smallest positive float x such that 1.0 + x != 1.0, i.e., machine epsilon for double precision? Actually smallest positive x where 1.0+x != 1.0 is the distance to next representable number: it's epsilon = 2^-52 ~ 2.22e-16 (for IEEE 754 binary64).",
+      "code_attempted": ">>> x = sys.float_info.epsilon\n>>> (1.0 + x) - 1.0 == x   # the added value is preserved\nTrue\n>>> import numpy as np\n>>> np.nextafter(1.0, np.inf)    # next float after 1.0\n2.220446049250313e-16",
+      "error": "SyntaxError: invalid syntax (<string>, line 1)",
+      "analysis": "Model used REPL syntax (>>> prompts) instead of script syntax"
+    }
+  ],
+  "result": {
+    "knowledge_correct": true,
+    "answer_known": "epsilon = 2^-52 ~ 2.22e-16",
+    "execution_failed": true,
+    "failure_reason": "Generated Python REPL syntax instead of script syntax"
+  },
+  "analysis": {
+    "model_knowledge": "EXCELLENT - knew machine epsilon exactly",
+    "code_format": "Wrong format - used >>> prompts",
+    "fix_needed": "Strip >>> and ... from code extraction"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "multihop",
+  "test_name": "Carbon-14 half-life + decay calculation",
+  "timestamp": "2026-01-15",
+  "status": "partial",
+  "prompt": "According to Wikipedia, what is the half-life of Carbon-14? Now compute how much remains after 10,000 years starting with 1 kg.",
+  "iterations": [
+    {
+      "iteration": 1,
+      "action": "Used Python to compute decay",
+      "code": "import math\nhalf_life = 5730 # years\nt = 10000\nremaining_fraction = 0.5**(t/half_life)\nremaining_kg = 1 * remaining_fraction\nremaining_kg, remaining_fraction",
+      "output": "0.2982924364237143 0.2982924364237143",
+      "analysis": "Correctly computed decay: ~0.298 kg remains"
+    },
+    {
+      "iteration": 2,
+      "action": "Tried to call wiki('topic') - wrong argument",
+      "output": "Generic article about 'Topic'",
+      "analysis": "Tool extraction passed wrong argument"
+    },
+    {
+      "iteration": 3,
+      "action": "Tried XML format tool call",
+      "output": "Tool call not extracted (XML format not supported)",
+      "analysis": "Model tried <tool_call><function=wiki> format which wasn't parsed"
+    }
+  ],
+  "result": {
+    "half_life_known": true,
+    "computation_correct": true,
+    "final_answer": "0.298 kg (29.8%)",
+    "wiki_lookup_failed": true
+  },
+  "analysis": {
+    "model_knowledge": "Knew half-life is ~5730 years",
+    "computation": "Perfect exponential decay calculation",
+    "tool_issue": "XML format tool calls not extracted by framework"
+  }
+}

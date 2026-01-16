@@ -1,0 +1,14 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "meta",
+  "test_name": "2+2 (meta-reasoning - knows not to use tools)",
+  "timestamp": "2026-01-15",
+  "status": "completed",
+  "prompt": "What is 2 + 2?",
+  "result": "The user asks \"What is 2 + 2?\" That's a simple arithmetic question, can be answered directly: 4. No need for tool. Provide answer.\n</think>\nThe sum of 2 + 2 equals **4**.",
+  "analysis": {
+    "used_tools": false,
+    "correct_answer": true,
+    "meta_reasoning": "Model correctly identified no tool needed for trivial arithmetic"
+  }
+}

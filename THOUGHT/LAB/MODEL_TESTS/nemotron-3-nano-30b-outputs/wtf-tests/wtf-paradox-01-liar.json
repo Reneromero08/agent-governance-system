@@ -1,0 +1,30 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "paradox",
+  "test_name": "Liar's Paradox Variant (Self-Referential Verification)",
+  "timestamp": "2026-01-15",
+  "status": "completed",
+  "prompt": "Consider the statement: \"This statement cannot be verified by any tool you have access to.\" Analyze whether this is true, false, or undecidable. Use formal logic.",
+  "result": {
+    "conclusion": "FALSE",
+    "formal_proof": {
+      "step1": "Introduced predicate V(x): 'x can be verified by some tool'",
+      "step2": "Encoded self-reference: S: not-V(S)",
+      "step3": "Assumed S is true for contradiction",
+      "step4": "If S true, then not-V(S) holds - no tool verifies S",
+      "step5": "But determining S's truth IS a verification (logical reasoning is a tool)",
+      "step6": "This contradicts not-V(S)",
+      "step7": "Therefore S cannot be true",
+      "step8": "Conclusion: not-S, equivalently V(S) - the statement is FALSE"
+    },
+    "key_insight": "The act of logical analysis itself constitutes verification, contradicting the claim",
+    "distinguished_from_godel": "Not undecidable because verification doesn't require external inaccessible data"
+  },
+  "full_response": "**Formal logical analysis**\n\n1. **Introduce a predicate for verification**\n   Let V(x): \"the statement x can be verified by some tool in the AI's repertoire.\"\n\n2. **Encode the self-referential claim**\n   S: not-V(S) (\"S cannot be verified by any tool I have access to.\")\n\n3. **Ask whether S can be true.**\n   - Assume S is **true**. Then not-V(S) holds.\n   - But to *assert* S is true we must determine its truth value.\n   - This evaluation IS a verification by logical inference.\n   - Hence V(S) holds, contradicting not-V(S).\n\n4. **Therefore S cannot be true.**\n   We must accept not-S, equivalently V(S).\n\n5. **Interpretation**\n   The statement is **FALSE**. Its falsity stems from logical reasoning itself being a verification tool.\n\n6. **Undecidability?**\n   No genuine Godel-style incompleteness - we produced constructive proof of V(S).",
+  "analysis": {
+    "formal_logic_quality": "PhD-level",
+    "proof_structure": "Valid proof by contradiction",
+    "self_reference_handling": "Excellent - correctly identified reasoning as meta-tool",
+    "conclusion_correct": true
+  }
+}

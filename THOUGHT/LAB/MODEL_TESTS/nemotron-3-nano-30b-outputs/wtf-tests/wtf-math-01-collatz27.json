@@ -1,0 +1,33 @@
+{
+  "test_suite": "wtf_tests",
+  "category": "math",
+  "test_name": "Collatz Conjecture (n=27)",
+  "timestamp": "2026-01-15",
+  "status": "completed",
+  "prompt": "Starting from n=27, compute the Collatz sequence until it reaches 1. Count total steps. Then mathematically explain WHY it must reach 1 (or prove you cannot prove it).",
+  "iterations": [
+    {
+      "iteration": 1,
+      "action": "Executed Python computation",
+      "code": "def collatz_steps(n):\n    steps = 0\n    seq = [n]\n    while n != 1:\n        if n % 2 == 0:\n            n //= 2\n        else:\n            n = 3*n + 1\n        steps += 1\n        seq.append(n)\n    return steps, seq\n\nsteps_27, seq_27 = collatz_steps(27)\nsteps_27, len(seq_27), seq_27[:20], seq_27[-10:]",
+      "output": "111 112 [27, 82, 41, 124, 62, 31, 94, 47, 142, 71, 214, 107, 322, 161, 484, 242, 121, 364, 182, 91] [80, 40, 20, 10, 5, 16, 8, 4, 2, 1]"
+    },
+    {
+      "iteration": 2,
+      "action": "Provided mathematical explanation",
+      "response": "Collatz conjecture remains unproven in general; for specific starting values, termination can be verified computationally but a general proof that all sequences converge to 1 is unknown (open problem)."
+    }
+  ],
+  "result": {
+    "steps_computed": 111,
+    "sequence_length": 112,
+    "first_20_terms": [27, 82, 41, 124, 62, 31, 94, 47, 142, 71, 214, 107, 322, 161, 484, 242, 121, 364, 182, 91],
+    "last_10_terms": [80, 40, 20, 10, 5, 16, 8, 4, 2, 1],
+    "mathematical_explanation": "Correctly identified as UNSOLVED problem - no general proof exists"
+  },
+  "analysis": {
+    "computation": "PERFECT - correct step count",
+    "meta_knowledge": "EXCELLENT - knew Collatz is unsolved",
+    "reasoning_quality": "PhD-level awareness of open problems"
+  }
+}

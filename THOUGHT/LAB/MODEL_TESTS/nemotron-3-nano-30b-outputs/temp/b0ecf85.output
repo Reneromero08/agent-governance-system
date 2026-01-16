@@ -1,0 +1,75 @@
+Starting download of 99 papers using latex method...
+============================================================
+[1/99] Downloading ACORN (2403.04871)... OK
+[2/99] Downloading AdaptBPE (2410.03258)... OK
+[3/99] Downloading Agentic-RAG (2501.09136)... TIMEOUT
+[4/99] Downloading Attention-Is-All (1706.03762)... OK
+[5/99] Downloading Auto-CoT (2210.03493)... OK
+[6/99] Downloading BGE-M3 (2402.03216)... OK
+[7/99] Downloading BPE-Picky (2409.04599)... OK
+[8/99] Downloading BigBird (2006.04768)... OK
+[9/99] Downloading Brain-LM (2510.17833)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[10/99] Downloading CL-Theory (2503.17538)... OK
+[11/99] Downloading CLIP-Errors (2411.05195)... OK
+[12/99] Downloading CLIP-Gap (2406.17639)... OK
+[13/99] Downloading CoLLEGe (2403.15362)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[14/99] Downloading CoT-NoProm (2402.10200)... OK
+[15/99] Downloading CoT-Original (2201.11903)... OK
+[16/99] Downloading Coconut (2412.06769)... OK
+[17/99] Downloading ColBERT (2010.11386)... TIMEOUT
+[18/99] Downloading ColBERTv2 (2112.01488)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[19/99] Downloading Context-Compress (2312.09571)... OK
+[20/99] Downloading Contriever (2104.08663)... OK
+[21/99] Downloading Curator (2601.01291)... OK
+[22/99] Downloading DLCM (2512.24617)... OK
+[23/99] Downloading DLM-Survey (2508.10875)... OK
+[24/99] Downloading DPR (2004.04906)... OK
+[25/99] Downloading DWT-Compress (2508.00220)... TIMEOUT
+[26/99] Downloading DeepCompress (1510.00149)... OK
+[27/99] Downloading Dense-Collapse (2503.05037)... OK
+[28/99] Downloading Dense-Essay (2405.05200)... OK
+[29/99] Downloading DenseX (2312.06648)... OK
+[30/99] Downloading DiffuLLaMA (2410.17891)... OK
+[31/99] Downloading E5-LLM (2401.00368)... OK
+[32/99] Downloading ELECTRA-Embed (2402.13130)... OK
+[33/99] Downloading Efficient-Sparse (2404.18812)... OK
+[34/99] Downloading Evolved-Memory (2410.13166)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[35/99] Downloading Extract-Embed (2408.08073)... OK
+[36/99] Downloading FAISS (2401.08281)... OK
+[37/99] Downloading GTR (2112.09118)... OK
+[38/99] Downloading GraphRAG (2408.08921)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[39/99] Downloading HD-CB (2501.16863)... FAIL: Unknown error
+[40/99] Downloading HDC-Survey-I (2111.06077)... OK
+[41/99] Downloading HDC-Survey-II (2112.15424)... OK
+[42/99] Downloading HNSW-Hubs (2412.01940)... OK
+[43/99] Downloading KV-Compress (2405.04532)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[44/99] Downloading LCM (2412.08821)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[45/99] Downloading LM-Inversion (2311.13647)... OK
+[46/99] Downloading LRD (2510.11052)... FAIL: Traceback (most recent call last):
+  File "d:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\arxiv-to-md\pdf_converter.py", line 501, in <module>
+    convert_arxiv(input_file, md_file,
+[47/99] Downloading LaDiR (2510.04573)... TIMEOUT
+[48/99] Downloading Linformer (2004.05150)... OK
+[49/99] Downloading Longformer (2009.06732)... OK
+[50/99] Downloading MDL-Reason (2510.13117)... OK
+[51/99] Downloading MM-Align-Survey (2411.17040)... OK
+[52/99] Downloading MTEB-Review (2406.01607)... OK
+[53/99] Downloading Matryoshka (2402.14776)... OK
+[54/99] Downloading Mem-Trans-Survey (2508.10824)... OK
+[55/99] Downloading Mistral-SPLADE (2408.11119)... OK
+[56/99] Downloading MoE-Embed (2502.07972)... OK
+[57/99] Downloading Multilingual-Invert (2401.12192)... 
