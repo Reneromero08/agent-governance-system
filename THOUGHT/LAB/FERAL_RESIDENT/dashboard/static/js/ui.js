@@ -28,6 +28,7 @@
 // =============================================================================
 
 import * as state from './state.js';
+import { api } from './api.js';
 
 // =============================================================================
 // SECTION 2: SIDEBAR TOGGLE
@@ -69,10 +70,41 @@ export function toggleSidebar() {
  * TWEAK: Collapsed section styling in styles.css
  *   - .section.collapsed .section-content (hidden)
  *   - .section.collapsed .section-chevron (rotated)
+ *
+ * Persists state to config.json via /api/config
  */
 export function toggleSection(name) {
     const section = document.getElementById(`section-${name}`);
     section.classList.toggle('collapsed');
+
+    // Save to config.json
+    const isCollapsed = section.classList.contains('collapsed');
+    api('/config', {
+        method: 'POST',
+        body: JSON.stringify({ ui: { accordion: { [name]: isCollapsed } } })
+    }).catch(() => {}); // Silently ignore save errors
+}
+
+/**
+ * Load accordion states from config.json and apply to DOM
+ * Called on page load from main.js
+ */
+export async function loadAccordionState() {
+    try {
+        const res = await api('/config');
+        if (res.ok && res.config?.ui?.accordion) {
+            const states = res.config.ui.accordion;
+            for (const [name, collapsed] of Object.entries(states)) {
+                if (name === '_comment') continue;
+                const section = document.getElementById(`section-${name}`);
+                if (section) {
+                    section.classList.toggle('collapsed', collapsed);
+                }
+            }
+        }
+    } catch (e) {
+        console.warn('[UI] Could not load accordion state:', e);
+    }
 }
 
 // =============================================================================

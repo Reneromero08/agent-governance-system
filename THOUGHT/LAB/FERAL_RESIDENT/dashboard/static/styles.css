@@ -63,6 +63,17 @@
     /* ----- SEMANTIC COLORS ----- */
     --danger: #ff4444;            /* Error, rejected states */
 
+    /* ----- ACTIVITY COLORS ----- */
+    /* TWEAK: Colors for daemon behaviors and activity badges */
+    --activity-paper: #64ffda;        /* Teal - paper exploration */
+    --activity-consolidate: #bb86fc;  /* Purple - memory consolidation */
+    --activity-reflect: #ffd700;      /* Gold - self reflection */
+    --activity-cassette: #ffb6c1;     /* Pink - cassette watch */
+    --activity-daemon: #00ff41;       /* Green - general daemon */
+    --activity-config: #999999;       /* Gray - config changes */
+    --activity-smash: #ff6600;        /* Orange - smasher */
+    --activity-error: #ff4444;        /* Red - errors */
+
     /* ----- LAYOUT SIZES ----- */
     /* TWEAK: Adjust sidebar width and activity bar height */
     --sidebar-width: 280px;       /* Width of left sidebar */
@@ -740,34 +751,35 @@ input[type="range"]::-moz-range-track {
 }
 
 /* ----- DAEMON BEHAVIOR BADGES ----- */
+/* TWEAK: Edit --activity-* vars in :root to change these colors */
 .activity-badge.paper {
-    background: rgba(100, 255, 218, 0.2);
-    color: #64ffda;
+    background: color-mix(in srgb, var(--activity-paper) 20%, transparent);
+    color: var(--activity-paper);
 }
 
 .activity-badge.consolidate {
-    background: rgba(187, 134, 252, 0.2);
-    color: #bb86fc;
+    background: color-mix(in srgb, var(--activity-consolidate) 20%, transparent);
+    color: var(--activity-consolidate);
 }
 
 .activity-badge.reflect {
-    background: rgba(255, 215, 0, 0.2);
-    color: #ffd700;
+    background: color-mix(in srgb, var(--activity-reflect) 20%, transparent);
+    color: var(--activity-reflect);
 }
 
 .activity-badge.cassette {
-    background: rgba(255, 182, 193, 0.2);
-    color: #ffb6c1;
+    background: color-mix(in srgb, var(--activity-cassette) 20%, transparent);
+    color: var(--activity-cassette);
 }
 
 .activity-badge.daemon {
-    background: rgba(0, 255, 65, 0.2);
-    color: var(--accent);
+    background: color-mix(in srgb, var(--activity-daemon) 20%, transparent);
+    color: var(--activity-daemon);
 }
 
 .activity-badge.config {
-    background: rgba(128, 128, 128, 0.2);
-    color: #999999;
+    background: color-mix(in srgb, var(--activity-config) 20%, transparent);
+    color: var(--activity-config);
 }
 
 .activity-text {

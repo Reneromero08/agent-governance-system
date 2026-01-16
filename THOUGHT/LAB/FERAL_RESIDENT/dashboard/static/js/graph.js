@@ -39,20 +39,33 @@ import * as state from './state.js';
 import { CONFIG } from './config.js';
 
 // =============================================================================
-// 1. ACTIVITY COLORS
+// 1. ACTIVITY COLORS (from CSS variables)
 // =============================================================================
-// Colors for different activity types in the exploration trail
-// TWEAK: Edit these hex values to change trail/node colors by activity type
+// Colors read from CSS --activity-* variables defined in styles.css :root
+// TWEAK: Edit the CSS variables in styles.css to change these colors
 
-export const ACTIVITY_COLORS = {
-    paper:       { main: 0x00ff41, glow: '#00ff41' },  // Green
-    consolidate: { main: 0x00ff41, glow: '#003cff' },
-    reflect:     { main: 0x00ff41, glow: '#00ff41' },
-    cassette:    { main: 0x00ff41, glow: '#00ff41' },
-    daemon:      { main: 0x00ff41, glow: '#00ff41' },
-    smash:       { main: 0x00ff41, glow: '#ff00ea' },
-    default:     { main: 0x00ff41, glow: '#00ff41' }
-};
+function getCSSColor(varName) {
+    const style = getComputedStyle(document.documentElement);
+    return style.getPropertyValue(varName).trim() || '#00ff41';
+}
+
+function hexToInt(hex) {
+    return parseInt(hex.replace('#', ''), 16);
+}
+
+export function getActivityColor(type) {
+    const cssVar = `--activity-${type}`;
+    const color = getCSSColor(cssVar) || getCSSColor('--accent');
+    return { main: hexToInt(color), glow: color };
+}
+
+// Legacy export for compatibility - reads from CSS on access
+export const ACTIVITY_COLORS = new Proxy({}, {
+    get(_target, prop) {
+        if (prop === 'default') return getActivityColor('daemon');
+        return getActivityColor(prop);
+    }
+});
 
 // =============================================================================
 // 2. MODULE STATE

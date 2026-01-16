@@ -90,7 +90,7 @@
 import { CONFIG } from './config.js';
 import * as state from './state.js';
 import { connectWebSocket } from './api.js';
-import { toggleSidebar, toggleSection, toggleChat } from './ui.js';
+import { toggleSidebar, toggleSection, toggleChat, loadAccordionState } from './ui.js';
 import { updateMindState, loadStatus, loadEvolution } from './mind.js';
 import { addActivity } from './activity.js';
 import { loadDaemonStatus, updateDaemonStatus, toggleDaemon, toggleBehavior, updateInterval } from './daemon.js';
@@ -231,6 +231,9 @@ function handleSmashHit(data) {
 async function init() {
     // Load user settings from config.json
     await loadSettings();
+
+    // Load UI state (accordion sections)
+    await loadAccordionState();
 
     // Initialize 3D graph (must be after settings for defaults)
     await initConstellation();

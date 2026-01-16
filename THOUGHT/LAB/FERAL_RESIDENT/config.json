@@ -2,7 +2,7 @@
   "_comment": "Feral Daemon live config - edit while running, changes apply on next cycle",
   "cache": {
     "_comment": "Performance caching settings",
-    "dev_mode": false,
+    "dev_mode": true,
     "static_max_age": 86400,
     "constellation_ttl_sec": 300,
     "embedding_lru_size": 500
@@ -38,7 +38,14 @@
     "log_threshold_changes": true
   },
   "ui": {
-    "_comment": "Slider ranges - now use actual float values. Edit min/max/step/default as needed.",
+    "_comment": "UI state and slider ranges",
+    "accordion": {
+      "_comment": "Section collapsed states (true = collapsed)",
+      "mind": false,
+      "smasher": true,
+      "daemon": false,
+      "graph": true
+    },
     "sliders": {
       "speed": {
         "min": 10,

@@ -35,9 +35,9 @@ export const CONFIG = {
 
         // Folder nodes (larger, more prominent)
         FOLDER_SPHERE_SEGMENTS: 12,      // Default: 12, Min: 6, Max: 24
-        FOLDER_SPHERE_RADIUS: 4,         // Default: 4
+        FOLDER_SPHERE_RADIUS: 10,         // Default: 4
         FOLDER_GLOW_SEGMENTS: 8,         // Default: 8
-        FOLDER_GLOW_RADIUS: 5.2,         // Default: 5.2 (slightly larger than sphere)
+        FOLDER_GLOW_RADIUS: 10,         // Default: 5.2 (slightly larger than sphere)
 
         // Chunk/page nodes (smaller, numerous)
         NODE_SPHERE_SEGMENTS: 8,         // Default: 8, Min: 4, Max: 16
@@ -64,7 +64,7 @@ export const CONFIG = {
         // ----- LINK WIDTHS -----
         // Thickness of connection lines between nodes
         // Range: 0.1-5.0
-        LINK_WIDTH_HIERARCHY: 0.5,       // Default: 0.5 (parent-child connections)
+        LINK_WIDTH_HIERARCHY: 1.5,       // Default: 0.5 (parent-child connections)
         LINK_WIDTH_SIMILARITY: 1.5,      // Default: 1.5 (cosine similarity edges)
         LINK_WIDTH_SMASH_TRAIL: 2.5,     // Default: 2.5 (smasher traversal path)
         LINK_WIDTH_MIND_PROJECTED: 1.5,  // Default: 1.5 (mind-created links)
@@ -128,7 +128,7 @@ export const CONFIG = {
         RING_OPACITY: 0.8,               // Default: 0.8
 
         // ----- GLOW SPHERE (middle layer) -----
-        GLOW_RADIUS: 5,                  // Default: 5
+        GLOW_RADIUS: 10,                  // Default: 5
         GLOW_SEGMENTS: 16,               // Default: 16
         GLOW_COLOR: 0xff6600,            // Default: 0xff6600
         GLOW_OPACITY: 0.3,               // Default: 0.3
@@ -262,7 +262,7 @@ export const CONFIG = {
     COLORS: {
         // ----- NODE COLORS -----
         FOLDER_COLOR: 0x00ff41,          // Default: 0x00ff41 (bright green)
-        NODE_COLOR: 0x008f11,            // Default: 0x008f11 (dark green)
+        NODE_COLOR: 0x032C07,            // Default: 0x008f11 (dark green)
         GLOW_COLOR: 0x00ff41,            // Default: 0x00ff41 (bright green)
 
         // ----- MATERIAL OPACITY -----
