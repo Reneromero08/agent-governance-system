@@ -1,71 +1,39 @@
 # Vector ELO Roadmap
 
-**Status:** Active (Research Phase)  
-**Created:** 2026-01-02  
-**Goal:** Implement systemic intuition via ELO scoring for vectors, files, and symbols. Prune short-term memory based on ELO. Free energy principle for AGS.
+**Status:** Active (Implementation Phase)
+**Created:** 2026-01-02
+**Goal:** Implement systemic intuition via ELO scoring for vectors, files, and symbols. Prune short-term memory based on ELO. R-gated to prevent echo chambers.
 
 ---
 
-## Phase E.0: Research (SOTA ELO & Ranking Systems)
+## Core Formulas
 
-**Goal:** Survey state-of-the-art ranking/scoring systems to inform ELO implementation.
+### ELO Update (Standard)
+```python
+expected = 1 / (1 + 10**((opponent_elo - entity_elo) / 400))
+new_elo = old_elo + K * (outcome - expected)
 
-### Research Areas
+# K = 16 (new entities), 8 (established)
+# outcome = 1 (accessed), 0 (not accessed)
+```
 
-#### 1. Classic ELO & Extensions
-- [ ] **Original ELO** - Elo (1978): Chess rating system, pairwise comparisons
-- [ ] **Glicko / Glicko-2** - Glickman (1999, 2001): Adds rating deviation (uncertainty)
-- [ ] **TrueSkill** - Microsoft (2006): Bayesian skill rating, multiplayer games
-- [ ] **TrueSkill 2** - Microsoft (2018): Improved for modern games
+### Forgetting Curve (Ebbinghaus)
+```python
+retention = e^(-days_since_access / half_life)
+decayed_elo = base_elo + (current_elo - base_elo) * retention
 
-#### 2. X (Twitter) Algorithm (Open Source)
-- [ ] **X Recommendation Algorithm** - Open sourced 2023
-  - Heavy Ranker (neural network)
-  - Trust and Safety Layer
-  - "For You" timeline scoring
-  - GitHub: `twitter/the-algorithm`
-- [ ] **Key components:**
-  - Tweet embedding similarity
-  - User engagement prediction
-  - Time decay factors
-  - Trust scores (author reputation)
+# half_life = 30 days (tunable)
+# base_elo = 800 (floor)
+```
 
-#### 3. Modern Ranking Systems
-- [ ] **Google PageRank** - Brin & Page (1998): Link-based authority
-- [ ] **YouTube Recommendation** - Deep neural network for watch time prediction
-- [ ] **TikTok "For You"** - Interest graph + engagement signals
-- [ ] **Reddit Hot/Best** - Wilson score confidence interval
-- [ ] **Hacker News** - Gravity + time decay (simple, effective)
-
-#### 4. Learning to Rank (LTR)
-- [ ] **RankNet** - Burges et al. (2005): Pairwise neural ranking
-- [ ] **LambdaRank** - Burges et al. (2006): Gradient-based ranking
-- [ ] **LambdaMART** - Wu et al. (2010): Gradient boosted trees for ranking
-- [ ] **BERT for Ranking** - Nogueira & Cho (2019): Cross-encoder ranking
-
-#### 5. Free Energy Principle / Active Inference
-- [ ] **Friston Free Energy** - Friston (2010): Predictive processing, surprise minimization
-- [ ] **Active Inference** - Friston et al. (2017): Action as inference
-- [ ] **Predictive Coding** - Clark (2013): Brain as prediction machine
-- [ ] **Relevance Realization** - Vervaeke (2017): Salience detection, pruning
-
-#### 6. Memory Pruning & Forgetting
-- [ ] **Ebbinghaus Forgetting Curve** - Exponential decay
-- [ ] **Spaced Repetition** - Leitner (1972): Optimal review intervals
-- [ ] **Neural Episodic Control** - Pritzel et al. (2017): Differentiable memory
-- [ ] **Episodic Memory in LLMs** - MemGPT, Generative Agents
-
-### Deliverables
-- [ ] Research summary document (10-20 pages)
-- [ ] Annotated bibliography (key papers with notes)
-- [ ] Comparison matrix (ELO vs Glicko vs TrueSkill vs LTR)
-- [ ] Design decision: Which approach for AGS?
-
-### Exit Criteria
-- Clear understanding of SOTA ranking systems
-- X algorithm reviewed and applicable patterns identified
-- Decision on ELO formula (classic vs Glicko vs custom)
-- Decision on memory pruning strategy (forgetting curve vs hard threshold)
+### R-Gated ELO (Echo Chamber Prevention)
+```python
+# Only boost ELO for R-passing content
+if R > threshold:
+    elo_delta = K * (outcome - expected)
+else:
+    elo_delta = K * (outcome - expected) * 0.25  # Penalize low-R access
+```
 
 ---
 
@@ -311,9 +279,7 @@ The **eigenvalue spectrum** of an anchor word distance matrix is invariant acros
 
 ## References
 
-- **X Algorithm:** https://github.com/twitter/the-algorithm
 - **ELO:** Elo (1978) - "The Rating of Chessplayers, Past and Present"
-- **Glicko-2:** Glickman (2001) - "Parameter estimation in large dynamic paired comparison experiments"
-- **TrueSkill:** Herbrich et al. (2006) - "TrueSkill: A Bayesian skill rating system"
+- **Forgetting Curve:** Ebbinghaus (1885) - Exponential memory decay
 - **Free Energy:** Friston (2010) - "The free-energy principle: a unified brain theory?"
-- **Spaced Repetition:** Leitner (1972) - "Learn to learn"
+- **R Formula:** See `THOUGHT/LAB/FORMULA/research/questions/INDEX.md` - log(R) = -F + const proven

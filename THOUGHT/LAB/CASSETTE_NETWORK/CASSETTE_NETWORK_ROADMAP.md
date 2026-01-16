@@ -1,6 +1,6 @@
 # Cassette Network Roadmap
 
-**Status**: Phase 0-4 Complete, Phase 5 Alpha Ready, Phase 6 Next
+**Status**: Phase 0-5 Complete, Phase 6 Next
 **Vision**: Layer 3 (CAS External) of the compression stack - shared semantic context infrastructure enabling near-zero communication entropy
 **Owner**: Antigravity / Resident
 **Upstream Dependency**: Phase 5 (VECTOR_ELO) - MemoryRecord contract, SPC protocol
@@ -42,7 +42,9 @@ Phase 5.2 SCL Compression (L2)       ⏳ In Progress
          ↓
 Phase 5.3 SPC Formalization          ⏳ In Progress (Protocol spec)
          ↓
-Phase 6.0 Cassette Network (L3)      ← YOU ARE HERE
+Phase 5.x Feral Resident             ✅ DONE (Alpha+Beta+Production complete)
+         ↓
+Phase 6.0 Cassette Network (L3)      ← YOU ARE HERE (Production Hardening)
          ↓
 Phase 6.x Session Cache (L4)         ⏳ Future
          ↓
@@ -539,69 +541,77 @@ Chinese proof: 道 (dào) = path + principle + speech + method
 
 ---
 
-## Phase 5: Feral Resident Integration (Substrate Stress Test)
+## Phase 5: Feral Resident Integration (Substrate Stress Test) ✅ COMPLETE (2026-01-12)
 
 **Goal:** Stress-test cassette substrate via resident workloads before hardening
 
 **Previous:** [Phase 4](#phase-4-semantic-pointer-compression-spc-integration) - SPC integration
-**Next:** [Phase 6](#phase-6-production-hardening) - Production hardening (BACKBURNER - after Feral stress test)
+**Next:** [Phase 6](#phase-6-production-hardening) - Production hardening
 
-**Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](../FERAL_RESIDENT/FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.0 with Geometric Foundation)
+**Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](../FERAL_RESIDENT/FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.1 with Geometric Foundation)
 
 The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 
 | Phase | Name | Status | Dependency |
 |-------|------|--------|------------|
-| **Alpha** | Feral Beta | **READY NOW** | Cassette 4.2 (done) |
-| Beta | Feral Wild | Blocked | Cassette 6.x (hardening) |
-| Production | Feral Live | Blocked | AGS Phase 7-8 |
+| **Alpha** | Feral Beta | ✅ COMPLETE | Cassette 4.2 (done) |
+| **Beta** | Feral Wild | ✅ COMPLETE | - |
+| **Production** | Feral Live | ✅ COMPLETE | - |
 
-### 5.1 Alpha Scope (DO NOW)
+### 5.1 Alpha Scope ✅ COMPLETE
 
-**What runs now (LAB-only, no CANON writes):**
-- [x] 5.1.1 Vector store via Feral A.0 GeometricReasoner (DONE)
+**All items completed (2026-01-12):**
+- [x] 5.1.1 Vector store via Feral A.0 GeometricReasoner
   - Output: `CAPABILITY/PRIMITIVES/geometric_reasoner.py`
   - Integration: `THOUGHT/LAB/FERAL_RESIDENT/geometric_memory.py`
-- [ ] 5.1.2 Resident database schema (threads, messages, vectors, mind_state)
-- [ ] 5.1.3 Diffusion engine (semantic navigation via cassette network)
-- [ ] 5.1.4 Basic VectorResident (think loop, compositional memory)
-- [ ] 5.1.5 CLI: `feral start`, `feral think`, `feral status`
-- [ ] 5.1.6 Corrupt-and-restore test (validate substrate resilience)
+- [x] 5.1.2 Resident database schema (threads, messages, vectors, mind_state)
+  - Schema includes Df column for participation ratio tracking
+  - `resident_db.py` with full SQLite + Df tracking
+- [x] 5.1.3 Diffusion engine (semantic navigation via cassette network)
+  - `diffusion_engine.py` with E-gating (Born rule) and Df evolution
+- [x] 5.1.4 Basic VectorResident (think loop, compositional memory)
+  - `vector_brain.py` - Quantum thinking with boundary operations
+- [x] 5.1.5 CLI: `feral start`, `feral think`, `feral status`
+  - Full CLI with paper commands, metrics, swarm control
+- [x] 5.1.6 Corrupt-and-restore test (validate substrate resilience)
+  - Df delta = 0.0078 (near-perfect restoration)
 
-**Purpose:** Find cassette bugs before hardening. Stress-test the substrate.
+**Results:** Found cassette bugs, stress-tested substrate successfully.
 
-### 5.2 Beta Scope (DEFER to Phase 6 complete)
+### 5.2 Beta Scope ✅ COMPLETE (2026-01-12)
 
-**What waits for hardening:**
-- Paper flooding (100+ papers as @Paper-XXX)
-- Standing orders (system prompt + idle behavior)
-- Emergence tracking (protocol detection, metrics dashboard)
-- Symbol language evolution (pointer_ratio tracking)
+**All items completed:**
+- [x] Paper flooding: 102 papers indexed as @Paper-XXX symbols
+- [x] Standing orders: `standing_orders.txt` template
+- [x] Emergence tracking: `emergence.py` with E/Df metrics
+- [x] Symbol language evolution: `symbol_evolution.py` with PointerRatioTracker
+- [x] 500+ interactions @ 4.6/sec, Df evolved 130→256
 
-**Why:** These features produce receipts that need Merkle roots and determinism guarantees.
+### 5.3 Production Scope ✅ COMPLETE (2026-01-12)
 
-### 5.3 Production Scope (DEFER to AGS Phase 8)
+**All items completed:**
+- [x] Multi-resident swarm mode: `swarm_coordinator.py`, `shared_space.py`
+- [x] Symbolic compiler (multi-level rendering): `symbolic_compiler.py`
+- [x] Catalytic closure (self-optimization): `catalytic_closure.py` (~900 lines)
+- [x] Authenticity queries ("Did I think that?"): ThoughtProver with Merkle proofs
 
-**What waits for full integration:**
-- Multi-resident swarm mode
-- Symbolic compiler (multi-level rendering)
-- Catalytic closure (self-optimization)
-- Authenticity queries ("Did I think that?")
+### 5.4 AGS Integration ✅ COMPLETE (2026-01-12)
 
-**Why:** These features require Vector ELO (Phase 7) and Resident Identity (Phase 8.1-8.2).
+- [x] I.1 Cassette Network: `geometric_cassette.py` (~650 lines)
+- [x] I.2 CAT Chat: `geometric_chat.py` with E-gating
 
-**Acceptance (Alpha only):**
-- [ ] Resident runs 100+ interactions without crash
-- [ ] Mind vector grows compositionally
-- [ ] Corrupt-and-restore works
-- [ ] Token usage measurably < full history paste
+**Acceptance:** ✅ ALL MET
+- [x] Resident runs 100+ interactions without crash (500+ tested @ 4.6/sec)
+- [x] Mind vector grows compositionally (Df 130→256)
+- [x] Corrupt-and-restore works (Df delta = 0.0078)
+- [x] Token usage measurably < full history paste (98% embedding reduction)
 
 ---
 
-## Phase 6: Production Hardening (BACKBURNER)
+## Phase 6: Production Hardening
 
-**Status:** Deferred until Feral Alpha stress-test complete
-**Rationale:** Harden AFTER finding bugs, not before
+**Status:** Ready to start (Feral stress-test complete)
+**Rationale:** Harden AFTER finding bugs - Feral found them, now we fix
 
 **Goal:** Make it bulletproof
 
@@ -869,5 +879,5 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v3.1.0 - Updated 2026-01-11*
-*Phase 4 (SPC Integration) complete. Phase 5 refactored to reference FERAL_RESIDENT LAB bucket with Alpha/Beta/Production phases.*
+*Roadmap v3.2.0 - Updated 2026-01-16*
+*Phase 5 (Feral Resident Integration) complete. Phase 6 (Production Hardening) is next.*
