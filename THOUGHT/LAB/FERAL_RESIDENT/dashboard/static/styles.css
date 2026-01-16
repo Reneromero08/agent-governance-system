@@ -161,7 +161,9 @@ body, html {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 12px;
     padding: 5px 16px;
+    margin-right: -7px;
     border-bottom: 1px solid var(--border);
 }
 
@@ -860,7 +862,7 @@ input[type="range"]::-moz-range-track {
     display: none;
     align-items: center;
     gap: 10px;
-    padding: 6px 16px;
+    padding: 2px 4px;
     /* TWEAK: Change background/border colors for indicator box */
     background: rgba(255, 102, 0, 0.2);
     border: 1px solid rgba(255, 102, 0, 0.5);
@@ -1127,17 +1129,28 @@ input[type="range"]::-moz-range-track {
     gap: 6px;
     font-size: 10px;
     color: var(--text-muted);
-    padding: 8px 16px;
-    border-bottom: 1px solid var(--border-subtle);
+    padding: 0;
+    padding-top: 2px;
+    flex: 1;
+    justify-content: flex-end;
 }
 
 .ws-dot {
-    width: 6px;
-    height: 6px;
+    width: 8px;
+    height: 8px;
     border-radius: 50%;
     background: var(--accent);
+    box-shadow: 0 0 8px var(--accent);
+    animation: ws-pulse 2s ease-in-out infinite;
+}
+
+@keyframes ws-pulse {
+    0%, 100% { box-shadow: 0 0 6px var(--accent); }
+    50% { box-shadow: 0 0 10px var(--accent), 0 0 14px var(--accent); }
 }
 
 .ws-dot.offline {
     background: var(--danger);
+    box-shadow: 0 0 8px var(--danger);
+    animation: none;
 }
