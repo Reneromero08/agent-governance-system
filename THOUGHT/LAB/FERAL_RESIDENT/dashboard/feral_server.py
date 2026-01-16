@@ -1064,16 +1064,46 @@ async def stop_daemon():
 
 @app.post("/api/daemon/config")
 async def configure_daemon(request: BehaviorConfigRequest):
-    """Configure a daemon behavior"""
+    """Configure a daemon behavior and persist to config.json"""
     d = get_daemon()
 
     try:
+        # Update in-memory state
         d.configure_behavior(
             request.behavior,
             enabled=request.enabled,
             interval=request.interval
         )
-        return {'ok': True, 'message': f'Configured {request.behavior}'}
+
+        # Persist to config.json so settings survive refresh
+        config_path = FERAL_RESIDENT_PATH / "config.json"
+
+        # Read current config
+        try:
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+        except (FileNotFoundError, json.JSONDecodeError):
+            config = {}
+
+        # Ensure behaviors section exists
+        if 'behaviors' not in config:
+            config['behaviors'] = {}
+
+        # Ensure this behavior exists
+        if request.behavior not in config['behaviors']:
+            config['behaviors'][request.behavior] = {}
+
+        # Update values
+        if request.enabled is not None:
+            config['behaviors'][request.behavior]['enabled'] = request.enabled
+        if request.interval is not None:
+            config['behaviors'][request.behavior]['interval'] = max(10, request.interval)
+
+        # Write back
+        with open(config_path, 'w') as f:
+            json.dump(config, f, indent=2)
+
+        return {'ok': True, 'message': f'Configured {request.behavior}', 'persisted': True}
     except ValueError as e:
         raise HTTPException(status_code=400, detail=str(e))
 
