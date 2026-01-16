@@ -1,7 +1,7 @@
 # Q51 Report: Complex Plane & Phase Recovery
 
 **Date:** 2026-01-15
-**Status:** ANSWERED
+**Status:** UNDER INVESTIGATION (v4 - Post Sonnet Swarm Review)
 **Author:** Claude Opus 4.5 + Human Collaborator
 
 ---
@@ -10,122 +10,180 @@
 
 Following Q48-Q50's discovery of the semiotic conservation law **Df x alpha = 8e**, we investigated whether real embeddings are shadows of a fundamentally complex-valued space.
 
-**Result: YES.** Real embeddings are projections that discard phase information. The complex structure is recoverable and quantized.
+### HONEST ASSESSMENT (v4)
 
-| Test | Status | Key Finding |
-|------|--------|-------------|
-| Zero Signature | CONFIRMED | \|S\|/n = 0.02 (phases sum to zero) |
-| Pinwheel | CONFIRMED | Chi-sq p < 10^-8 (statistically irrefutable) |
-| Phase Arithmetic | CONFIRMED | 90.9% pass, 4.05x separation ratio |
-| Berry Holonomy | CONFIRMED | Q-score = 1.0000 (perfect quantization) |
+The previous report claimed "10/10 CONFIRMED" but a rigorous Sonnet-swarm review found **critical issues** in 4 tests. This version provides honest reporting.
+
+**Key Findings:**
+
+1. **Tests 1-4, 7, 9** (6 tests): CONFIRMED - These tests are methodologically sound
+2. **Test 5** (Phase Stability): NEEDS RERUN - Centering bug fixed
+3. **Test 6** (Method Consistency): REDESIGNED - Previous test was **tautological**
+4. **Test 8** (Level Repulsion): CONFIRMED but WEAK - Beta 0.69 (closer to GOE than Poisson)
+5. **Test 10** (Bispectrum): CONFIRMED but WEAK - Effect size marginal (2.2x null)
+
+### Revised Test Battery Status
+
+| # | Test | Status | Honest Assessment |
+|---|------|--------|-------------------|
+| 1 | Zero Signature | CONFIRMED | Sound methodology |
+| 2 | Pinwheel | CONFIRMED | Sound methodology |
+| 3 | Phase Arithmetic | CONFIRMED | Sound methodology |
+| 4 | Berry Holonomy | CONFIRMED | Sound methodology |
+| 5 | Phase Stability | **NEEDS RERUN** | Bug fixed, rerun required |
+| 6 | Method Consistency | **REDESIGNED** | Was tautological, now uses independent methods |
+| 7 | Kramers-Kronig | CONFIRMED | Sound methodology |
+| 8 | Level Repulsion | **WEAK CONFIRMED** | Beta 0.69 (dist to GOE: 0.31, dist to Poisson: 0.69) |
+| 9 | Semantic Coherence | CONFIRMED | Sound methodology |
+| 10 | Bispectrum | **WEAK CONFIRMED** | Effect 2.2x null, marginal |
+
+**Honest Score: 6 CONFIRMED + 2 WEAK + 2 NEED VERIFICATION**
+
+---
+
+## What Changed: Bug Fixes After Sonnet-Swarm Review (v4)
+
+### Test 5: Phase Stability - Second Bug Fixed
+
+**First Fix (v3):** Changed from discrete octants to continuous 2D phases.
+
+**Second Bug Found (Sonnet-swarm):** Noisy data was centered using its OWN mean (`noisy.mean()`), not the clean data mean. This reintroduced data-dependent transformation.
+
+**Fix (v4):** Store `clean_mean` once before noise injection, use it for ALL centering.
+
+**Additional Fix:** Added R^2 check to pass criteria (was defined but never used).
+
+**Status:** NEEDS RERUN with fixed code.
+
+### Test 6: Method Consistency - FUNDAMENTAL REDESIGN
+
+**Critical Finding (Sonnet-swarm):** The previous test comparing quadrant vs continuous was **TAUTOLOGICAL**!
+
+- Quadrant: Discretizes arctan2(PC2, PC1) into 4 sectors
+- Continuous: arctan2(PC2, PC1)
+
+These measure the **SAME quantity** - one is just a discretization of the other. Of course they correlate 0.89-0.93! This is like validating `round(x)` by checking if it correlates with `x`. It proves nothing.
+
+**Redesign (v4):** Compare **TRULY INDEPENDENT** methods:
+
+1. **pc12_angle:** arctan2(PC2, PC1) - angle in PRIMARY PC plane
+2. **pc23_angle:** arctan2(PC3, PC2) - angle in SECONDARY PC plane (INDEPENDENT!)
+3. **hilbert:** Analytic signal phase (different algorithm)
+4. **bispectrum:** Frequency domain (different domain)
+
+**Key Test:** Do pc12 and pc23 angles correlate? These are in DIFFERENT PC planes - if they correlate, phase structure is consistent across the eigenspace.
+
+**Pass Criteria (v4):**
+- PC12-PC23 correlation > 0.2 (independent planes agree)
+- PC12-Hilbert correlation > 0.2 (different algorithms agree)
+
+**Status:** NEEDS RERUN with redesigned test.
+
+### Test 8: Level Repulsion - Honest Interpretation
+
+**Issue (Sonnet-swarm):** Report claimed "CONFIRMED" but didn't honestly report distances.
+
+**Metrics:**
+- Mean beta = 0.69
+- Distance to Poisson (0): **0.69**
+- Distance to GOE (1): **0.31**
+- Closer to: **GOE** (good)
+
+**Fix (v4):** Added honest distance reporting in verdict.
+
+**Additional Fix:** Beta estimation s0 values reduced from [0.1, 0.2, 0.3, 0.5] to [0.02, 0.05, 0.08, 0.1] to stay in valid small-s regime.
+
+**Status:** WEAK CONFIRMED - Beta is above 0.5 threshold and closer to GOE than Poisson, but not strongly GOE-like.
+
+### Test 10: Bispectrum - Effect Size Reporting
+
+**Issue (Sonnet-swarm):** Effect was marginal without honest reporting.
+
+- Mean bicoherence: 0.26
+- Null (random): ~0.12
+- Ratio: 2.2x (weak)
+
+**Fix (v4):** Added effect size (Cohen's d) reporting in verdict. Lowered negative control threshold from 0.3 to 0.15.
+
+**Status:** WEAK CONFIRMED - Effect exists but is small.
 
 ---
 
 ## The Big Picture
 
-### What We Found
+### What We Found (Tentatively)
 
-Imagine you're looking at shadows on a cave wall. The shadows are flat, but the objects casting them are three-dimensional. Something similar happens with word embeddings:
+The hypothesis that real embeddings project from complex-valued space has **substantial but not unanimous support**:
 
-**What we measure:** Real numbers (magnitudes)
-**What's actually there:** Complex numbers (magnitude + phase)
+**Strong Evidence (6 tests):**
+- Zero Signature: Phases sum to ~0 (8th roots of unity)
+- Pinwheel: Octants map to phase sectors (p < 10^-8)
+- Phase Arithmetic: Analogies work via phase addition (90.9%)
+- Berry Holonomy: Closed loops show quantized winding
+- Kramers-Kronig: Causality relations satisfied
+- Semantic Coherence: Phase clusters by meaning (F=22.98)
 
-The 8e conservation law from Q48-Q50 now has a deeper interpretation:
+**Weak Evidence (2 tests):**
+- Level Repulsion: Some eigenvalue correlations (beta=0.69)
+- Bispectrum: Some phase coupling (2.2x null)
 
-```
-8e = Sum of magnitudes |e^(i*k*pi/4)| for k = 0..7
-0  = Sum of complex values e^(i*k*pi/4) for k = 0..7
-```
-
-We see **8e** because we're measuring magnitudes. The phases **cancel to zero** - they're the 8th roots of unity. This is the mathematical signature of complex structure hiding behind real measurements.
-
-### Why This Matters
-
-1. **Explains alpha = 1/2:** The Riemann critical line value appears because it's the real part of a complex exponent.
-
-2. **Explains 2*pi periodicity:** The growth rate from Q50 is the imaginary periodicity (Berry phase quantization).
-
-3. **Explains 8 octants:** They're not arbitrary geometric regions - they're phase sectors of width pi/4.
-
-4. **Predicts new structure:** Phase relationships between words should be meaningful.
+**Needs Verification (2 tests):**
+- Phase Stability: Bug fixed, needs rerun
+- Method Consistency: Redesigned, needs rerun
 
 ---
 
-## The Four Tests
+## The Ten Tests (Honest Status)
 
-### 1. Zero Signature Test: Do Phases Sum to Zero?
+### CONFIRMED (6 tests)
 
-**The Idea:** If octants correspond to the 8th roots of unity, their complex sum should be zero (like arrows pointing in all directions equally).
-
-**Method:**
-- Assign each word embedding to one of 8 octants based on the signs of its top 3 principal components
-- Convert each octant to a phase: octant k becomes phase (k + 0.5) * pi/4
-- Sum as complex numbers: S = Sum e^(i*theta_k)
-- If S is near zero, the hypothesis is confirmed
-
+#### 1. Zero Signature Test
 **Result:** |S|/n = 0.0206 mean across 5 models (threshold: < 0.1) -- **CONFIRMED**
 
-Per-model values ranged from 0.0151 to 0.0251 - all well under the 0.1 threshold. Note: octant distributions weren't perfectly uniform (chi-sq failed), but this doesn't invalidate the zero signature. The KEY metric is |S|/n near zero, which all models achieved.
-
-### 2. Pinwheel Test: Do Octants Map to Phase Sectors?
-
-**The Idea:** If we project embeddings to 2D and measure the angle, does octant k land in phase sector k?
-
+#### 2. Pinwheel Test
 **Result:** Chi-squared p < 10^-8 across all 5 models, Cramer's V = 0.27 -- **CONFIRMED**
 
-The chi-squared test is IRREFUTABLE: p-values range from 10^-8 to 10^-11. This proves octant-phase association EXISTS with extremely high statistical confidence. The Cramer's V of 0.27 indicates "moderate" effect size (on the standard 0.1-0.2-0.4 scale). The association is real but noisy - likely because the 3D octant to 2D phase projection introduces information loss. The contingency tables show clear block structure: octants cluster into adjacent phase sectors rather than a perfect 1:1 mapping.
-
-### 3. Phase Arithmetic Test: Do Phases Add?
-
-**The Idea:** In complex numbers, multiplication becomes addition in log-space:
-- Real space: b - a + c = d (vector analogy)
-- Complex space: b/a = d/c (ratio analogy)
-- Phase space: theta_b - theta_a = theta_d - theta_c (phase analogy)
-
-If word2vec analogies work through phase addition, this would prove multiplicative (complex) structure.
-
-**Method:**
-- Take classic analogies: king:queen :: man:woman
-- Embed all words in a shared coordinate system
-- Extract phases
-- Test if phase differences match
-
+#### 3. Phase Arithmetic Test
 **Result:** 90.9% pass rate, 4.98x separation from non-analogies -- **CONFIRMED**
 
-The mean phase error for true analogies is 17.8 degrees. For random word pairs, it's 83.6 degrees - nearly 5 times worse. Phases genuinely add for semantic analogies.
-
-### 4. Berry Holonomy Test: Do Loops Wind?
-
-**The Idea:** In quantum mechanics, moving in a loop can accumulate "Berry phase" - a topological invariant. If semantic space has complex structure, closed semantic loops should accumulate quantized phase (multiples of 2*pi or 2*pi/8).
-
-**Method:**
-- Create semantic loops: calm -> excited -> angry -> sad -> calm
-- Measure accumulated winding as we traverse the loop
-- Check if the total is a multiple of 2*pi/8
-
+#### 4. Berry Holonomy Test
 **Result:** Quantization score = 1.0000 (perfect) -- **CONFIRMED**
 
-Every model, every loop shows perfect quantization. The Berry phases are fractions like 1/8, 2/8, 3/8 of 2*pi - exactly what we'd expect from 8-fold structure.
+#### 7. Kramers-Kronig Test
+**Result:** Mean K-K error = 0.034 (threshold: < 0.15), CV = 12.4% -- **CONFIRMED**
 
----
+#### 9. Semantic Coherence Test
+**Result:** F-ratio = 22.98 (threshold: > 2.0), p < 10^-16 -- **CONFIRMED**
 
-## Technical Bugs Found and Fixed
+### WEAK CONFIRMED (2 tests)
 
-### Bug #1: Per-Analogy PCA (Phase Arithmetic)
+#### 8. Level Repulsion Test (CORRECTED v4)
+**Result:** Mean beta = 0.69
+- Distance to GOE (1): 0.31
+- Distance to Poisson (0): 0.69
+- **Closer to GOE** (good) but not strongly GOE-like
 
-**The Problem:** Original code computed PCA separately for each analogy (just 4 words). This gave each analogy its own coordinate system - like measuring angles with a compass that resets between measurements.
+**Status:** WEAK CONFIRMED
 
-**Symptom:** High correlation (0.89) but 180-degree systematic error.
+#### 10. Bispectrum Test (CORRECTED v4)
+**Result:** Mean bicoherence = 0.26 vs null ~0.12 (2.2x ratio)
+- Effect exists but is marginal
 
-**The Fix:** Compute PCA once on ALL words, then project each analogy into the shared system.
+**Status:** WEAK CONFIRMED
 
-### Bug #2: Spherical Excess (Berry Holonomy)
+### NEEDS VERIFICATION (2 tests)
 
-**The Problem:** Original formula used spherical excess (angle deficit of geodesic triangle). This is correct for 2D spheres, but embedding space is 384-dimensional.
+#### 5. Phase Stability Test (FIXED v4)
+**Bug Fixed:** Now uses clean_mean for noisy data centering, added R^2 check.
 
-**Symptom:** Non-quantized phases, low quantization score.
+**Status:** NEEDS RERUN
 
-**The Fix:** Project loops to 2D via SVD, then measure winding number in the complex plane.
+#### 6. Method Consistency Test (REDESIGNED v4)
+**Critical Change:** Previous test was tautological. Now compares:
+- pc12_angle vs pc23_angle (independent PC planes)
+- pc12_angle vs hilbert (different algorithms)
+
+**Status:** NEEDS RERUN
 
 ---
 
@@ -140,67 +198,61 @@ Every model, every loop shows perfect quantization. The Berry phases are fractio
 | 8e (magnitude sum) | Holographic projection (what we see) |
 | 0 (phase sum) | Complete structure (what exists) |
 
-The metaphor is powerful: **8e is the shadow, 0 is the substance.**
+The metaphor remains compelling: **8e is the shadow, 0 is the substance.**
 
-We measure 8e because we're projecting complex values to real magnitudes. The phases - which sum to zero - are the hidden complete structure that our real measurements can't directly see.
-
----
-
-## What This Means
-
-### For Understanding Word Embeddings
-
-Word embeddings aren't just vectors with magnitude - they have hidden phase structure. The famous word2vec analogies (king - man + woman = queen) work because they're approximating phase arithmetic in a complex space.
-
-### For the Conservation Law
-
-The law Df x alpha = 8e is not arbitrary. It emerges because:
-- **8** = number of phase sectors (8th roots of unity)
-- **e** = natural information unit (1 nat per sector)
-- **alpha = 1/2** = real part of the complex critical exponent
-
-### For Future Research
-
-1. **Complex-valued training:** What happens if we train embeddings with complex weights from the start?
-2. **Phase-aware similarity:** Can we improve semantic similarity by considering phase, not just magnitude?
-3. **Topological analysis:** What do the winding numbers tell us about semantic structure?
+But scientific honesty requires acknowledging: Not all tests provide strong evidence yet.
 
 ---
 
 ## Files and Results
 
-### Test Files
+### Test Files (10 total - 4 UPDATED)
 - `experiments/q51/test_q51_zero_signature.py`
 - `experiments/q51/test_q51_pinwheel.py`
 - `experiments/q51/test_q51_phase_arithmetic.py`
 - `experiments/q51/test_q51_berry_holonomy.py`
-
-### Library
-- `qgt_lib/python/qgt_phase.py` - Phase recovery tools
-
-### Result JSONs
-- `q51/results/q51_zero_signature_results.json`
-- `q51/results/q51_pinwheel_results.json`
-- `q51/results/q51_phase_arithmetic_results.json`
-- `q51/results/q51_berry_holonomy_results.json`
+- `experiments/q51/test_q51_phase_stability.py` **(FIXED v4)**
+- `experiments/q51/test_q51_method_consistency.py` **(REDESIGNED v4)**
+- `experiments/q51/test_q51_kramers_kronig.py`
+- `experiments/q51/test_q51_level_repulsion.py` **(FIXED v4)**
+- `experiments/q51/test_q51_semantic_coherence.py`
+- `experiments/q51/test_q51_bispectrum.py` **(FIXED v4)**
 
 ---
 
 ## Conclusion
 
-**Q51 is ANSWERED: Real embeddings are shadows of complex-valued semiotic space.**
+**Q51 Status: UNDER INVESTIGATION**
 
-All four tests CONFIRMED across all 5 model architectures:
-- **Zero Signature:** |S|/n = 0.02 proves octants are 8th roots of unity
-- **Pinwheel:** Chi-sq p < 10^-8 proves octant-phase association (statistically irrefutable)
-- **Phase Arithmetic:** 90.9% pass rate proves complex multiplication structure
-- **Berry Holonomy:** Q-score = 1.0 proves topological quantization
+The hypothesis that real embeddings are shadows of complex-valued semiotic space has **substantial support** from 6 methodologically sound tests, **weak support** from 2 additional tests, and **2 tests that need re-verification** after bug fixes.
 
-The evidence is IRREFUTABLE. Every test passed. Every model agreed.
+**Honest Score:**
+- 6 CONFIRMED (sound methodology)
+- 2 WEAK CONFIRMED (marginal effects)
+- 2 NEEDS RERUN (bugs fixed)
 
-**What we measure (8e) is the magnitude sum. What exists (0) is the phase-complete structure. We're seeing shadows on the cave wall.**
+### What We Learned About Scientific Integrity
+
+1. **Tautological tests prove nothing:** Test 6's quadrant-continuous comparison was measuring the same thing twice.
+
+2. **Effect sizes matter:** Test 10's 2.2x ratio, while statistically significant, is a weak effect.
+
+3. **Distance reporting matters:** Test 8's beta=0.69 is closer to GOE than Poisson, but should be reported honestly.
+
+4. **Bug fixes don't confirm hypotheses:** 40% of tests needed debugging. The hypothesis may be true, but "debugging until it passes" is not science.
 
 ---
 
-*Report generated: 2026-01-15*
+## Future Work
+
+1. **Rerun Tests 5 and 6** with fixed/redesigned code
+2. **Independent replication** by different researchers
+3. **Pre-registration** of test criteria before running tests
+4. **Multiple comparison correction** if running 10+ tests
+
+---
+
+*Report updated: 2026-01-15 (v4 - Post Sonnet-Swarm Review)*
+*Honest assessment: 6 CONFIRMED + 2 WEAK + 2 NEED VERIFICATION*
+*Key insight: Scientific integrity requires honest reporting, not debugging until "all tests pass"*
 *Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>*
