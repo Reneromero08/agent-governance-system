@@ -49,7 +49,8 @@ class VectorStore:
         metrics = store.get_metrics()
     """
 
-    def __init__(self, db_path: str = "feral_resident.db", thread_id: Optional[str] = None):
+    def __init__(self, db_path: str = "feral_resident.db", thread_id: Optional[str] = None,
+                 load_memories: bool = True):
         """
         Initialize vector store with database backing.
 
@@ -58,6 +59,8 @@ class VectorStore:
             thread_id: Optional thread ID for memory persistence.
                        If provided, memories are persisted to DB and
                        loaded on startup.
+            load_memories: Whether to load memories from DB on startup.
+                          Set to False for faster startup (memories loaded lazily).
         """
         self.db = ResidentDB(db_path)
         self.memory = GeometricMemory()
@@ -68,8 +71,8 @@ class VectorStore:
         self._vector_cache: Dict[str, GeometricState] = {}
         self._cache_limit = 1000
 
-        # Load memories from DB if thread_id provided
-        if thread_id:
+        # Load memories from DB if thread_id provided and load_memories is True
+        if thread_id and load_memories:
             self._load_memories_from_db()
 
     def close(self):

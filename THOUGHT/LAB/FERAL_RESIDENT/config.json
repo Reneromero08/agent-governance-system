@@ -1,5 +1,10 @@
 {
   "_comment": "Feral Daemon live config - edit while running, changes apply on next cycle",
+  "startup": {
+    "_comment": "Startup options - require server restart to take effect",
+    "load_memories": false,
+    "load_papers": false
+  },
   "cache": {
     "_comment": "Performance caching settings",
     "dev_mode": true,
@@ -14,11 +19,11 @@
     },
     "memory_consolidation": {
       "enabled": true,
-      "interval": 120
+      "interval": 180
     },
     "self_reflection": {
       "enabled": true,
-      "interval": 60
+      "interval": 120
     },
     "cassette_watch": {
       "enabled": false,
@@ -29,8 +34,8 @@
   "activity_log_max": 200,
   "smasher": {
     "enabled": false,
-    "delay_ms": 1028,
-    "batch_size": 10,
+    "delay_ms": 2000,
+    "batch_size": 1,
     "batch_pause_ms": 500,
     "max_chunks": 0
   },
@@ -52,13 +57,13 @@
         "min": 10,
         "max": 2000,
         "step": 1,
-        "default": 1028
+        "default": 2000
       },
       "batch": {
         "min": 1,
         "max": 100,
         "step": 1,
-        "default": 10
+        "default": 1
       },
       "sim_threshold": {
         "min": 0.0,

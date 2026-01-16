@@ -47,6 +47,9 @@ import { saveSettings } from './settings.js';
 let _lastSmasherActive = false;
 let _lastAbsorbedCount = 0;
 
+// Debouncing: Prevent rapid toggle clicks from causing race conditions
+let _smasherTogglePending = false;
+
 // =============================================================================
 // SECTION 2: TOGGLE/START/STOP CONTROLS
 // =============================================================================
@@ -55,12 +58,26 @@ let _lastAbsorbedCount = 0;
 /**
  * Toggle smasher on/off
  * Called when user clicks the SMASH/STOP button
+ *
+ * BUG FIX: Added debouncing to prevent race conditions from rapid clicks.
+ * While an API request is in-flight, additional clicks are ignored.
  */
 export async function toggleSmasher() {
-    if (state.smasherActive) {
-        await stopSmasher();
-    } else {
-        await startSmasher();
+    // Debounce: Ignore clicks while a toggle operation is in progress
+    if (_smasherTogglePending) {
+        console.log('[SMASHER] Toggle already pending, ignoring click');
+        return;
+    }
+
+    _smasherTogglePending = true;
+    try {
+        if (state.smasherActive) {
+            await stopSmasher();
+        } else {
+            await startSmasher();
+        }
+    } finally {
+        _smasherTogglePending = false;
     }
 }
 
@@ -127,22 +144,20 @@ export async function stopSmasher() {
  * TWEAK: LED colors are set via CSS classes (see styles.css .daemon-led)
  */
 export function updateSmasherUI() {
-    const led = document.getElementById('smasher-led');
-    const text = document.getElementById('smasher-status-text');
     const btn = document.getElementById('smasher-toggle-btn');
+    const btnText = document.getElementById('smasher-btn-text');
+    const btnIcon = document.getElementById('smasher-icon');
     const stats = document.getElementById('smasher-stats');
 
     if (state.smasherActive) {
-        led.className = 'daemon-led on';
-        text.innerText = 'SMASHING';
-        btn.innerText = 'STOP';
-        btn.className = 'daemon-btn';
+        btn.classList.add('active');
+        btnText.innerText = 'SMASHING';
+        if (btnIcon) btnIcon.src = '/static/icons/smash_2.svg';
         stats.style.display = 'block';
     } else {
-        led.className = 'daemon-led';
-        text.innerText = 'Idle';
-        btn.innerText = 'SMASH';
-        btn.className = 'daemon-btn primary';
+        btn.classList.remove('active');
+        btnText.innerText = 'SMASH';
+        if (btnIcon) btnIcon.src = '/static/icons/smash_1.svg';
     }
 }
 

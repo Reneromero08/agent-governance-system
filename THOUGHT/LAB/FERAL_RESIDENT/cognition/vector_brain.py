@@ -97,7 +97,8 @@ class VectorResident:
         mode: str = "beta",
         model: str = "dolphin3:latest",
         ollama_url: str = "http://localhost:11434",
-        load_papers: bool = True
+        load_papers: bool = True,
+        load_memories: bool = True
     ):
         """
         Initialize the Feral Resident.
@@ -112,6 +113,7 @@ class VectorResident:
             model: Ollama model name (default: dolphin3:latest)
             ollama_url: Ollama API endpoint
             load_papers: Whether to load indexed papers on init
+            load_memories: Whether to load memories from DB on init (False = faster startup)
         """
         self.thread_id = thread_id
         self.db_path = db_path or f"feral_{thread_id}.db"
@@ -127,7 +129,7 @@ class VectorResident:
             self.standing_orders = "You are a feral resident intelligence."
 
         # Core components (thread_id enables memory persistence)
-        self.store = VectorStore(self.db_path, thread_id=thread_id)
+        self.store = VectorStore(self.db_path, thread_id=thread_id, load_memories=load_memories)
         self.diffusion = SemanticDiffusion(self.store)
         self.reasoner = self.store.reasoner
 

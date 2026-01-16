@@ -304,8 +304,26 @@ def get_resident():
     if resident is None:
         db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
         db_path.parent.mkdir(exist_ok=True)
-        # Skip paper loading on startup - papers are in cassettes and loaded on demand
-        resident = VectorResident(thread_id="eternal", db_path=str(db_path), load_papers=False)
+
+        # Check config.json for startup settings
+        config_path = FERAL_RESIDENT_PATH / "config.json"
+        load_memories = False  # Default: skip for fast startup
+        load_papers = False    # Default: skip, loaded on demand
+        try:
+            with open(config_path, 'r') as f:
+                config = json.load(f)
+                startup_cfg = config.get('startup', {})
+                load_memories = startup_cfg.get('load_memories', False)
+                load_papers = startup_cfg.get('load_papers', False)
+        except (FileNotFoundError, json.JSONDecodeError):
+            pass
+
+        resident = VectorResident(
+            thread_id="eternal",
+            db_path=str(db_path),
+            load_papers=load_papers,
+            load_memories=load_memories
+        )
     return resident
 
 
@@ -648,7 +666,8 @@ async def get_evolution():
 
 
 @app.get("/api/constellation")
-async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False):
+async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False,
+                            include_similarity: bool = True, similarity_threshold: float = 0.35):
     """Get document constellation graph showing GOD TIER papers and their headings.
 
     Structure:
@@ -666,7 +685,7 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False):
     import json
 
     # Check cache first (unless bypassed)
-    cache_key = f"constellation:{max_nodes}"
+    cache_key = f"constellation:{max_nodes}:{include_similarity}:{similarity_threshold}"
     cache_cfg = get_cache_config()
     ttl = cache_cfg.get('constellation_ttl_sec', 300)
 
@@ -789,9 +808,9 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False):
                     except Exception:
                         pass
 
-        # Compute similarity edges between chunks
-        if len(vector_embeddings) > 1:
-            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=0.0, max_edges=1000)
+        # Compute similarity edges between chunks (skip if client doesn't want them)
+        if include_similarity and len(vector_embeddings) > 1:
+            similarity_edges = compute_similarity_edges(vector_embeddings, threshold=similarity_threshold, max_edges=1000)
             edges.extend(similarity_edges)
 
         # Load resident-decided links from database
@@ -804,23 +823,30 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False):
                 LIMIT 500
             """)
 
-            # Build hash -> node_id mapping
+            # Build hash -> node_id mappings for efficient lookup
+            # Full hash lookup and 8-char prefix lookup
             hash_to_node = {}
+            prefix_to_node = {}
             for node in nodes:
                 if node.get('id', '').startswith('chunk:'):
-                    # Get receipt_id from node id
                     receipt_id = node['id'].replace('chunk:', '')
                     hash_to_node[receipt_id] = node['id']
+                    if len(receipt_id) >= 8:
+                        prefix_to_node[receipt_id[:8]] = node['id']
+
+            def find_node(h):
+                """Find node by hash (O(1) lookup instead of O(n) iteration)"""
+                # Try direct lookup first
+                if h in hash_to_node:
+                    return hash_to_node[h]
+                # Try 8-char prefix lookup
+                if len(h) >= 8 and h[:8] in prefix_to_node:
+                    return prefix_to_node[h[:8]]
+                return None
 
             for source_hash, target_hash, link_type, strength in cursor.fetchall():
-                # Map hashes to node IDs (prefix match)
-                source_node = None
-                target_node = None
-                for h, nid in hash_to_node.items():
-                    if source_hash.startswith(h) or h.startswith(source_hash[:8]):
-                        source_node = nid
-                    if target_hash.startswith(h) or h.startswith(target_hash[:8]):
-                        target_node = nid
+                source_node = find_node(source_hash)
+                target_node = find_node(target_hash)
 
                 if source_node and target_node and source_node != target_node:
                     resident_link_edges.append({
@@ -1335,9 +1361,13 @@ async def get_smasher_status():
     """Get Particle Smasher status and stats"""
     d = get_daemon()
 
+    # BUG FIX: Check BOTH enabled flag AND task existence
+    # When smasher finishes naturally, enabled may stay True but task is None
+    is_active = d.smasher_config.enabled and d._smasher_task is not None
+
     return {
         'ok': True,
-        'active': d.smasher_config.enabled,
+        'active': is_active,
         'config': {
             'delay_ms': d.smasher_config.delay_ms,
             'batch_size': d.smasher_config.batch_size,

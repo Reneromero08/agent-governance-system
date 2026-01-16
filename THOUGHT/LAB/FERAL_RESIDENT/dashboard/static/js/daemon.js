@@ -35,6 +35,9 @@ import * as state from './state.js';
 import { api } from './api.js';
 import { updateThresholdDisplay } from './smasher.js';
 
+// Debouncing: Prevent rapid toggle clicks from causing race conditions
+let _daemonTogglePending = false;
+
 // =============================================================================
 // SECTION 2: STATUS LOADING
 // =============================================================================
@@ -81,14 +84,16 @@ export function updateDaemonStatus(data) {
     state.setDaemonRunning(data.running);
     state.setBehaviors(data.behaviors || {});
 
-    // Update main daemon status display
-    document.getElementById('daemon-status-text').innerText = data.running ? 'Running' : 'Stopped';
-    document.getElementById('daemon-led').className = data.running ? 'daemon-led on' : 'daemon-led';
-
-    // Update toggle button
+    // Update toggle button (action-btn style)
     const btn = document.getElementById('daemon-toggle-btn');
-    btn.innerText = data.running ? 'Stop' : 'Start';
-    btn.className = data.running ? 'daemon-btn' : 'daemon-btn primary';
+    const btnText = document.getElementById('daemon-btn-text');
+    if (data.running) {
+        btn.classList.add('active');
+        btnText.innerText = 'RUNNING';
+    } else {
+        btn.classList.remove('active');
+        btnText.innerText = 'START';
+    }
 
     // Update individual behavior toggles and intervals
     // Note: paper_exploration has no UI toggle (always enabled when daemon runs)
@@ -139,14 +144,30 @@ function updateBehaviorUI(name, shortName) {
 /**
  * Toggle daemon running state
  * Called when user clicks the Start/Stop button
+ *
+ * BUG FIX: Added debouncing and error handling to prevent race conditions
+ * from rapid clicks and to gracefully handle API failures.
  */
 export async function toggleDaemon() {
-    if (state.daemonRunning) {
-        await api('/daemon/stop', { method: 'POST' });
-    } else {
-        await api('/daemon/start', { method: 'POST' });
+    // Debounce: Ignore clicks while a toggle operation is in progress
+    if (_daemonTogglePending) {
+        console.log('[DAEMON] Toggle already pending, ignoring click');
+        return;
     }
-    loadDaemonStatus();
+
+    _daemonTogglePending = true;
+    try {
+        if (state.daemonRunning) {
+            await api('/daemon/stop', { method: 'POST' });
+        } else {
+            await api('/daemon/start', { method: 'POST' });
+        }
+        await loadDaemonStatus();
+    } catch (e) {
+        console.error('Failed to toggle daemon:', e);
+    } finally {
+        _daemonTogglePending = false;
+    }
 }
 
 // =============================================================================

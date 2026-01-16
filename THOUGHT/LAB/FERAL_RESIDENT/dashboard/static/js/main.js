@@ -229,23 +229,24 @@ function handleSmashHit(data) {
  *   7. Start polling intervals
  */
 async function init() {
-    // Load user settings from config.json
-    await loadSettings();
+    // PHASE 1: Load settings and UI state in parallel (needed by later phases)
+    await Promise.all([
+        loadSettings(),
+        loadAccordionState()
+    ]);
 
-    // Load UI state (accordion sections)
-    await loadAccordionState();
+    // PHASE 2: Initialize graph and load all status data in parallel
+    // These are independent and can run concurrently for faster load
+    await Promise.all([
+        initConstellation(),
+        loadStatus(),
+        loadEvolution(),
+        loadDaemonStatus(),
+        loadSmasherStatus()
+    ]);
 
-    // Initialize 3D graph (must be after settings for defaults)
-    await initConstellation();
-
-    // Apply graph settings from loaded config
+    // PHASE 3: Apply graph settings (needs constellation to exist)
     applyGraphSettings();
-
-    // Load initial data via REST API
-    await loadStatus();
-    await loadEvolution();
-    await loadDaemonStatus();
-    await loadSmasherStatus();
 
     // Connect WebSocket for real-time updates
     connectWebSocket(handleWebSocketMessage);

@@ -497,15 +497,11 @@ class FeralDaemon:
 
         if self._smasher_task:
             self._smasher_task.cancel()
-            if not force:
-                try:
-                    # Wait max 1 second for clean shutdown
-                    await asyncio.wait_for(
-                        asyncio.shield(self._smasher_task),
-                        timeout=1.0
-                    )
-                except (asyncio.CancelledError, asyncio.TimeoutError):
-                    pass
+            try:
+                # Wait max 1 second for task to finish
+                await asyncio.wait_for(self._smasher_task, timeout=1.0)
+            except (asyncio.CancelledError, asyncio.TimeoutError):
+                pass
             self._smasher_task = None
 
         self._force_stop = False
@@ -603,6 +599,9 @@ class FeralDaemon:
                 if not self._force_stop:
                     await asyncio.sleep(0.5)
 
+        # BUG FIX: When loop finishes naturally (all chunks processed or max reached),
+        # we must reset enabled flag to keep state consistent with _smasher_task being None.
+        # This prevents the state where enabled=True but task=None which confuses the UI.
         self.smasher_config.enabled = False
         self._smasher_task = None
 
@@ -734,8 +733,8 @@ class FeralDaemon:
         if self._task:
             self._task.cancel()
             try:
-                await self._task
-            except asyncio.CancelledError:
+                await asyncio.wait_for(self._task, timeout=1.0)
+            except (asyncio.CancelledError, asyncio.TimeoutError):
                 pass
             self._task = None
 
