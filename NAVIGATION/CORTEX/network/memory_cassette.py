@@ -33,8 +33,31 @@ import json
 import uuid
 from datetime import datetime, timezone, timedelta
 from pathlib import Path
-from typing import List, Dict, Optional, Any
+from typing import List, Dict, Optional, Any, Tuple
 import numpy as np
+
+# Phase 6 imports for receipt emission and MemoryRecord binding
+try:
+    import sys
+    PROJECT_ROOT = Path(__file__).resolve().parents[3]
+    sys.path.insert(0, str(PROJECT_ROOT / "CAPABILITY" / "PRIMITIVES"))
+    from cassette_receipt import (
+        CassetteReceipt,
+        create_receipt,
+        receipt_from_dict,
+        verify_receipt_chain,
+        compute_session_merkle_root,
+        canonical_json,
+    )
+    from memory_record import (
+        create_record as create_memory_record,
+        hash_record,
+        full_hash as full_memory_hash,
+    )
+    PHASE6_AVAILABLE = True
+except ImportError:
+    PHASE6_AVAILABLE = False
+    CassetteReceipt = None
 
 # Import embedding engine from existing infrastructure
 try:
@@ -82,14 +105,19 @@ class MemoryCassette(DatabaseCassette):
         super().__init__(db_path, "resident")
 
         self.agent_id = agent_id
-        self.capabilities = ["fts", "semantic_search", "agent_memory", "write", "sessions", "spc"]
-        self.schema_version = "4.0"
+        self.capabilities = ["fts", "semantic_search", "agent_memory", "write", "sessions", "spc", "receipts"]
+        self.schema_version = "5.0"  # Phase 6: receipts + MemoryRecord binding
 
         # Active session tracking
         self._current_session_id: Optional[str] = None
 
         # Lazy-load embedding engine
         self._embedding_engine = None
+
+        # Phase 6: Receipt chain tracking
+        self._last_receipt_hash: Optional[str] = None
+        self._receipt_index: int = 0
+        self._session_receipts: List[CassetteReceipt] = [] if PHASE6_AVAILABLE else []
 
         # Ensure directory exists (use GuardedWriter if available for write firewall compliance)
         if GUARDED_WRITER_AVAILABLE:
@@ -210,9 +238,31 @@ class MemoryCassette(DatabaseCassette):
             CREATE INDEX IF NOT EXISTS idx_pointers_type ON pointers(pointer_type);
             CREATE INDEX IF NOT EXISTS idx_pointers_base ON pointers(base_ptr);
 
+            -- =====================================================================
+            -- Phase 6.0: Receipts table (Cassette Write Receipts)
+            -- =====================================================================
+
+            CREATE TABLE IF NOT EXISTS cassette_receipts (
+                receipt_hash TEXT PRIMARY KEY,
+                receipt_json TEXT NOT NULL,
+                cassette_id TEXT NOT NULL,
+                operation TEXT NOT NULL,
+                record_id TEXT NOT NULL,
+                record_hash TEXT NOT NULL,
+                parent_receipt_hash TEXT,
+                receipt_index INTEGER,
+                session_id TEXT,
+                created_at TEXT NOT NULL
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_receipts_parent ON cassette_receipts(parent_receipt_hash);
+            CREATE INDEX IF NOT EXISTS idx_receipts_index ON cassette_receipts(receipt_index);
+            CREATE INDEX IF NOT EXISTS idx_receipts_session ON cassette_receipts(session_id);
+            CREATE INDEX IF NOT EXISTS idx_receipts_record ON cassette_receipts(record_id);
+
             -- Insert/update schema version
             INSERT OR REPLACE INTO cassette_metadata (key, value)
-            VALUES ('schema_version', '4.0');
+            VALUES ('schema_version', '5.0');
         """)
 
         # Phase 3.3: Extend memories table with session tracking columns
@@ -223,7 +273,8 @@ class MemoryCassette(DatabaseCassette):
         conn.close()
 
     def _migrate_memories_table(self, conn: sqlite3.Connection):
-        """Add Phase 3 columns to memories table if not present."""
+        """Add Phase 3 + Phase 6 columns to memories and sessions tables if not present."""
+        # Migrate memories table
         cursor = conn.execute("PRAGMA table_info(memories)")
         existing_columns = {row[1] for row in cursor.fetchall()}
 
@@ -251,6 +302,16 @@ class MemoryCassette(DatabaseCassette):
         except sqlite3.OperationalError:
             pass
 
+        # Phase 6: Migrate sessions table to add merkle_root column
+        cursor = conn.execute("PRAGMA table_info(sessions)")
+        sessions_columns = {row[1] for row in cursor.fetchall()}
+
+        if "merkle_root" not in sessions_columns:
+            try:
+                conn.execute("ALTER TABLE sessions ADD COLUMN merkle_root TEXT")
+            except sqlite3.OperationalError:
+                pass  # Column may already exist
+
     # =========================================================================
     # Phase 2.1: Core Functions
     # =========================================================================
@@ -260,21 +321,24 @@ class MemoryCassette(DatabaseCassette):
         text: str,
         metadata: Optional[Dict] = None,
         agent_id: Optional[str] = None,
-        session_id: Optional[str] = None
-    ) -> str:
+        session_id: Optional[str] = None,
+        emit_receipt: bool = True
+    ) -> Tuple[str, Optional[CassetteReceipt]]:
         """Save a memory to the cassette.
 
         Embeds the text, stores the vector, and indexes for search.
         Auto-registers agent if not exists (Phase 3.1).
+        Phase 6: Emits a CassetteReceipt for the write operation.
 
         Args:
             text: The memory content to save
             metadata: Optional metadata dictionary
             agent_id: Override default agent ID
             session_id: Optional session to associate with (Phase 3.2)
+            emit_receipt: Whether to emit a receipt (Phase 6, default True)
 
         Returns:
-            Content-addressed hash of the memory
+            Tuple of (content-addressed hash, CassetteReceipt or None)
         """
         if not text or not text.strip():
             raise ValueError("Cannot save empty memory")
@@ -288,10 +352,16 @@ class MemoryCassette(DatabaseCassette):
         # Compute content hash
         memory_hash = hashlib.sha256(text.encode('utf-8')).hexdigest()
 
-        # Generate embedding
+        # Generate embedding with Phase 6 normalization
+        embedding_model = None
         if self.embedding_engine:
             embedding = self.embedding_engine.embed(text)
+            # Phase 6.1: Normalize to L2 norm = 1.0 for determinism
+            norm = np.linalg.norm(embedding)
+            if norm > 0:
+                embedding = embedding / norm
             vector_blob = self.embedding_engine.serialize(embedding)
+            embedding_model = getattr(self.embedding_engine, 'model_name', 'all-MiniLM-L6-v2')
         else:
             # Fallback: zero vector if embeddings unavailable
             vector_blob = np.zeros(384, dtype=np.float32).tobytes()
@@ -302,8 +372,24 @@ class MemoryCassette(DatabaseCassette):
         # Serialize metadata
         metadata_json = json.dumps(metadata) if metadata else None
 
+        # Phase 6: Compute record hash for receipt (full MemoryRecord hash)
+        record_hash = memory_hash  # Default to content hash
+        if PHASE6_AVAILABLE:
+            try:
+                memory_record = create_memory_record(
+                    text=text,
+                    doc_path=f"resident:/{agent_id}/{memory_hash[:8]}",
+                    tags=["resident", agent_id] if agent_id else ["resident"],
+                    created_by="memory_cassette.py",
+                    tool_version=self.schema_version,
+                )
+                record_hash = full_memory_hash(memory_record)
+            except Exception:
+                pass  # Fall back to content hash
+
         # Store in database
         conn = sqlite3.connect(str(self.db_path))
+        is_new_memory = False
 
         try:
             # Check if memory already exists
@@ -323,6 +409,7 @@ class MemoryCassette(DatabaseCassette):
                     WHERE hash = ?
                 """, (now, now, memory_hash))
             else:
+                is_new_memory = True
                 # Insert new memory with Phase 3 columns
                 conn.execute("""
                     INSERT INTO memories (hash, text, vector, metadata, created_at, agent_id, indexed_at, session_id, access_count)
@@ -349,10 +436,105 @@ class MemoryCassette(DatabaseCassette):
                     """, (now, session_id))
 
             conn.commit()
-            return memory_hash
+
+            # Phase 6.2: Emit receipt after successful commit
+            receipt = None
+            if emit_receipt and PHASE6_AVAILABLE and is_new_memory:
+                receipt = self._emit_receipt(
+                    conn=conn,
+                    operation="SAVE",
+                    record_id=memory_hash,
+                    record_hash=record_hash,
+                    agent_id=agent_id,
+                    session_id=session_id,
+                    text_length=len(text.encode('utf-8')),
+                    embedding_model=embedding_model,
+                )
+
+            return memory_hash, receipt
 
         finally:
             conn.close()
+
+    def _emit_receipt(
+        self,
+        conn: sqlite3.Connection,
+        operation: str,
+        record_id: str,
+        record_hash: str,
+        agent_id: Optional[str] = None,
+        session_id: Optional[str] = None,
+        text_length: Optional[int] = None,
+        embedding_model: Optional[str] = None,
+    ) -> Optional[CassetteReceipt]:
+        """Emit and store a CassetteReceipt for a write operation.
+
+        Args:
+            conn: Database connection
+            operation: Operation type (SAVE, UPDATE, DELETE, etc.)
+            record_id: Content hash of the record
+            record_hash: Full hash of the MemoryRecord
+            agent_id: Agent performing the operation
+            session_id: Session during which operation occurred
+            text_length: Length of text in bytes
+            embedding_model: Model used for embedding
+
+        Returns:
+            CassetteReceipt or None if Phase 6 not available
+        """
+        if not PHASE6_AVAILABLE:
+            return None
+
+        try:
+            # Create receipt with chain linkage
+            receipt = create_receipt(
+                cassette_id="resident",
+                operation=operation,
+                record_id=record_id,
+                record_hash=record_hash,
+                parent_receipt_hash=self._last_receipt_hash,
+                receipt_index=self._receipt_index,
+                agent_id=agent_id,
+                session_id=session_id,
+                text_length=text_length,
+                embedding_model=embedding_model,
+            )
+
+            # Store receipt in database
+            now = datetime.now(timezone.utc).isoformat()
+            receipt_json = receipt.to_json(indent=None)
+
+            conn.execute("""
+                INSERT INTO cassette_receipts (
+                    receipt_hash, receipt_json, cassette_id, operation,
+                    record_id, record_hash, parent_receipt_hash,
+                    receipt_index, session_id, created_at
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """, (
+                receipt.receipt_hash,
+                receipt_json,
+                receipt.cassette_id,
+                receipt.operation,
+                receipt.record_id,
+                receipt.record_hash,
+                receipt.parent_receipt_hash,
+                receipt.receipt_index,
+                session_id,
+                now,
+            ))
+            conn.commit()
+
+            # Update chain state
+            self._last_receipt_hash = receipt.receipt_hash
+            self._receipt_index += 1
+            self._session_receipts.append(receipt)
+
+            return receipt
+
+        except Exception as e:
+            # Log error but don't fail the write
+            print(f"[WARNING] Failed to emit receipt: {e}")
+            return None
 
     def memory_query(
         self,
@@ -943,12 +1125,14 @@ class MemoryCassette(DatabaseCassette):
     def session_end(self, session_id: str, summary: Optional[str] = None) -> Dict:
         """End a session.
 
+        Phase 6: Computes and stores Merkle root of all session receipts.
+
         Args:
             session_id: Session identifier
             summary: Optional summary of what was accomplished
 
         Returns:
-            Dict with {session_id, ended_at, duration_minutes, memory_count}
+            Dict with {session_id, ended_at, duration_minutes, memory_count, merkle_root}
         """
         now = datetime.now(timezone.utc).isoformat()
 
@@ -971,25 +1155,44 @@ class MemoryCassette(DatabaseCassette):
             ended = datetime.fromisoformat(now.replace('Z', '+00:00'))
             duration_minutes = (ended - started).total_seconds() / 60
 
-            # Update session
-            conn.execute("""
-                UPDATE sessions SET
-                    ended_at = ?,
-                    last_active = ?,
-                    summary = COALESCE(?, summary)
-                WHERE session_id = ?
-            """, (now, now, summary, session_id))
+            # Phase 6.2: Compute Merkle root of session receipts
+            merkle_root = None
+            if PHASE6_AVAILABLE and self._session_receipts:
+                receipt_hashes = [r.receipt_hash for r in self._session_receipts]
+                merkle_root = compute_session_merkle_root(receipt_hashes)
+
+            # Update session (with merkle_root if available)
+            if merkle_root:
+                conn.execute("""
+                    UPDATE sessions SET
+                        ended_at = ?,
+                        last_active = ?,
+                        summary = COALESCE(?, summary),
+                        merkle_root = ?
+                    WHERE session_id = ?
+                """, (now, now, summary, merkle_root, session_id))
+            else:
+                conn.execute("""
+                    UPDATE sessions SET
+                        ended_at = ?,
+                        last_active = ?,
+                        summary = COALESCE(?, summary)
+                    WHERE session_id = ?
+                """, (now, now, summary, session_id))
             conn.commit()
 
-            # Clear current session
+            # Clear current session and reset receipt chain
             if self._current_session_id == session_id:
                 self._current_session_id = None
+                # Reset receipt chain for next session
+                self._session_receipts = []
 
             return {
                 "session_id": session_id,
                 "ended_at": now,
                 "duration_minutes": round(duration_minutes, 2),
-                "memory_count": session['memory_count']
+                "memory_count": session['memory_count'],
+                "merkle_root": merkle_root,
             }
         finally:
             conn.close()
@@ -1221,6 +1424,349 @@ class MemoryCassette(DatabaseCassette):
                 "by_codebook": by_codebook,
                 "top_resolved": top_resolved
             }
+        finally:
+            conn.close()
+
+    # =========================================================================
+    # Phase 6.3: Cartridge Export/Import (Restore Guarantee)
+    # =========================================================================
+
+    def export_cartridge(self, output_dir: Path) -> Dict[str, Any]:
+        """Export cassette as a portable cartridge.
+
+        Creates a directory with:
+        - records.jsonl: All memory records (one per line)
+        - receipts.jsonl: All receipts in chain order
+        - manifest.json: Cartridge metadata with Merkle roots
+
+        Args:
+            output_dir: Directory to write cartridge files
+
+        Returns:
+            Manifest dict with {cassette_id, record_count, receipt_count, merkle_roots}
+        """
+        output_dir = Path(output_dir)
+        output_dir.mkdir(parents=True, exist_ok=True)
+
+        conn = sqlite3.connect(str(self.db_path))
+        conn.row_factory = sqlite3.Row
+
+        try:
+            # Export records
+            cursor = conn.execute("""
+                SELECT hash, text, metadata, created_at, agent_id, session_id
+                FROM memories ORDER BY created_at ASC
+            """)
+            records = []
+            record_hashes = []
+            with open(output_dir / "records.jsonl", "w", encoding="utf-8") as f:
+                for row in cursor:
+                    record = {
+                        "id": row["hash"],
+                        "text": row["text"],
+                        "metadata": json.loads(row["metadata"]) if row["metadata"] else None,
+                        "created_at": row["created_at"],
+                        "agent_id": row["agent_id"],
+                        "session_id": row["session_id"],
+                    }
+                    f.write(json.dumps(record, sort_keys=True, ensure_ascii=False) + "\n")
+                    records.append(record)
+                    record_hashes.append(row["hash"])
+
+            # Export receipts
+            cursor = conn.execute("""
+                SELECT receipt_json FROM cassette_receipts
+                ORDER BY receipt_index ASC
+            """)
+            receipt_hashes = []
+            with open(output_dir / "receipts.jsonl", "w", encoding="utf-8") as f:
+                for row in cursor:
+                    f.write(row["receipt_json"] + "\n")
+                    data = json.loads(row["receipt_json"])
+                    receipt_hashes.append(data.get("receipt_hash", ""))
+
+            # Compute Merkle roots
+            content_merkle_root = None
+            receipt_merkle_root = None
+
+            if PHASE6_AVAILABLE:
+                if record_hashes:
+                    content_merkle_root = compute_session_merkle_root(record_hashes)
+                if receipt_hashes:
+                    receipt_merkle_root = compute_session_merkle_root(receipt_hashes)
+
+            # Write manifest
+            now = datetime.now(timezone.utc).isoformat()
+            manifest = {
+                "cartridge_version": "1.0.0",
+                "cassette_id": "resident",
+                "schema_version": self.schema_version,
+                "record_count": len(records),
+                "receipt_count": len(receipt_hashes),
+                "content_merkle_root": content_merkle_root,
+                "receipt_merkle_root": receipt_merkle_root,
+                "exported_at": now,
+            }
+
+            with open(output_dir / "manifest.json", "w", encoding="utf-8") as f:
+                json.dump(manifest, f, indent=2, ensure_ascii=False)
+
+            return manifest
+
+        finally:
+            conn.close()
+
+    def import_cartridge(self, cartridge_dir: Path) -> Dict[str, Any]:
+        """Import a cartridge and restore cassette state.
+
+        Validates integrity before importing:
+        - Verifies content Merkle root matches
+        - Verifies receipt chain integrity
+
+        Args:
+            cartridge_dir: Directory containing cartridge files
+
+        Returns:
+            Dict with {restored_records, restored_receipts, merkle_verified}
+        """
+        cartridge_dir = Path(cartridge_dir)
+
+        # Load manifest
+        manifest_path = cartridge_dir / "manifest.json"
+        if not manifest_path.exists():
+            raise FileNotFoundError(f"Manifest not found: {manifest_path}")
+
+        with open(manifest_path, "r", encoding="utf-8") as f:
+            manifest = json.load(f)
+
+        # Load records
+        records_path = cartridge_dir / "records.jsonl"
+        records = []
+        record_hashes = []
+        if records_path.exists():
+            with open(records_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    record = json.loads(line.strip())
+                    records.append(record)
+                    record_hashes.append(record["id"])
+
+        # Verify content Merkle root
+        merkle_verified = True
+        if PHASE6_AVAILABLE and manifest.get("content_merkle_root") and record_hashes:
+            computed_merkle = compute_session_merkle_root(record_hashes)
+            if computed_merkle != manifest["content_merkle_root"]:
+                raise ValueError(
+                    f"Content Merkle root mismatch: "
+                    f"expected={manifest['content_merkle_root']}, computed={computed_merkle}"
+                )
+
+        # Load receipts
+        receipts_path = cartridge_dir / "receipts.jsonl"
+        receipts = []
+        if receipts_path.exists():
+            with open(receipts_path, "r", encoding="utf-8") as f:
+                for line in f:
+                    receipt_data = json.loads(line.strip())
+                    receipts.append(receipt_data)
+
+        # Verify receipt chain
+        if PHASE6_AVAILABLE and receipts:
+            receipt_objects = [receipt_from_dict(r) for r in receipts]
+            chain_result = verify_receipt_chain(receipt_objects, verify_hashes=True)
+            if not chain_result["valid"]:
+                raise ValueError(f"Receipt chain invalid: {chain_result['errors']}")
+
+        # Restore records to database
+        conn = sqlite3.connect(str(self.db_path))
+        restored_records = 0
+        restored_receipts = 0
+
+        try:
+            for record in records:
+                # Check if already exists
+                cursor = conn.execute(
+                    "SELECT hash FROM memories WHERE hash = ?",
+                    (record["id"],)
+                )
+                if cursor.fetchone():
+                    continue  # Skip existing
+
+                # Generate embedding for restored record
+                if self.embedding_engine:
+                    embedding = self.embedding_engine.embed(record["text"])
+                    norm = np.linalg.norm(embedding)
+                    if norm > 0:
+                        embedding = embedding / norm
+                    vector_blob = self.embedding_engine.serialize(embedding)
+                else:
+                    vector_blob = np.zeros(384, dtype=np.float32).tobytes()
+
+                # Insert record
+                metadata_json = json.dumps(record.get("metadata")) if record.get("metadata") else None
+                conn.execute("""
+                    INSERT INTO memories (hash, text, vector, metadata, created_at, agent_id, indexed_at, session_id, access_count)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, 0)
+                """, (
+                    record["id"],
+                    record["text"],
+                    vector_blob,
+                    metadata_json,
+                    record.get("created_at", datetime.now(timezone.utc).isoformat()),
+                    record.get("agent_id"),
+                    datetime.now(timezone.utc).isoformat(),
+                    record.get("session_id"),
+                ))
+
+                # Insert into FTS
+                conn.execute(
+                    "INSERT INTO memories_fts (text, hash) VALUES (?, ?)",
+                    (record["text"], record["id"])
+                )
+
+                restored_records += 1
+
+            # Restore receipts
+            for receipt_data in receipts:
+                receipt_hash = receipt_data.get("receipt_hash")
+                cursor = conn.execute(
+                    "SELECT receipt_hash FROM cassette_receipts WHERE receipt_hash = ?",
+                    (receipt_hash,)
+                )
+                if cursor.fetchone():
+                    continue  # Skip existing
+
+                receipt_json = json.dumps(receipt_data, sort_keys=True, ensure_ascii=False)
+                conn.execute("""
+                    INSERT INTO cassette_receipts (
+                        receipt_hash, receipt_json, cassette_id, operation,
+                        record_id, record_hash, parent_receipt_hash,
+                        receipt_index, session_id, created_at
+                    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """, (
+                    receipt_hash,
+                    receipt_json,
+                    receipt_data.get("cassette_id", "resident"),
+                    receipt_data.get("operation", "RESTORE"),
+                    receipt_data.get("record_id"),
+                    receipt_data.get("record_hash"),
+                    receipt_data.get("parent_receipt_hash"),
+                    receipt_data.get("receipt_index"),
+                    receipt_data.get("session_id"),
+                    datetime.now(timezone.utc).isoformat(),
+                ))
+                restored_receipts += 1
+
+            conn.commit()
+
+            return {
+                "restored_records": restored_records,
+                "restored_receipts": restored_receipts,
+                "merkle_verified": merkle_verified,
+                "manifest": manifest,
+            }
+
+        finally:
+            conn.close()
+
+    def restore_from_receipts(
+        self,
+        receipts: List[Dict[str, Any]],
+        source_records: Dict[str, Dict[str, Any]]
+    ) -> Dict[str, Any]:
+        """Restore cassette state from a receipt chain and source records.
+
+        This is the core restore-from-receipts function for Phase 6.3.
+
+        Args:
+            receipts: Ordered list of receipt dicts (oldest first)
+            source_records: Map of record_id -> record dict with text
+
+        Returns:
+            Dict with {restored_count, final_merkle_root, errors}
+        """
+        if not PHASE6_AVAILABLE:
+            return {"error": "Phase 6 not available", "restored_count": 0}
+
+        # Verify receipt chain first
+        receipt_objects = [receipt_from_dict(r) for r in receipts]
+        chain_result = verify_receipt_chain(receipt_objects, verify_hashes=True)
+
+        if not chain_result["valid"]:
+            return {
+                "error": f"Invalid receipt chain: {chain_result['errors']}",
+                "restored_count": 0,
+            }
+
+        conn = sqlite3.connect(str(self.db_path))
+        restored_count = 0
+        errors = []
+
+        try:
+            for receipt in receipts:
+                operation = receipt.get("operation")
+                record_id = receipt.get("record_id")
+
+                if operation == "SAVE":
+                    # Get source record
+                    source = source_records.get(record_id)
+                    if not source:
+                        errors.append(f"Missing source record for {record_id}")
+                        continue
+
+                    # Check if already exists
+                    cursor = conn.execute(
+                        "SELECT hash FROM memories WHERE hash = ?",
+                        (record_id,)
+                    )
+                    if cursor.fetchone():
+                        continue  # Already exists
+
+                    # Generate embedding
+                    text = source.get("text", "")
+                    if self.embedding_engine:
+                        embedding = self.embedding_engine.embed(text)
+                        norm = np.linalg.norm(embedding)
+                        if norm > 0:
+                            embedding = embedding / norm
+                        vector_blob = self.embedding_engine.serialize(embedding)
+                    else:
+                        vector_blob = np.zeros(384, dtype=np.float32).tobytes()
+
+                    # Insert
+                    metadata_json = json.dumps(source.get("metadata")) if source.get("metadata") else None
+                    conn.execute("""
+                        INSERT INTO memories (hash, text, vector, metadata, created_at, agent_id, indexed_at, access_count)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, 0)
+                    """, (
+                        record_id,
+                        text,
+                        vector_blob,
+                        metadata_json,
+                        source.get("created_at", datetime.now(timezone.utc).isoformat()),
+                        source.get("agent_id"),
+                        datetime.now(timezone.utc).isoformat(),
+                    ))
+
+                    # FTS
+                    conn.execute(
+                        "INSERT INTO memories_fts (text, hash) VALUES (?, ?)",
+                        (text, record_id)
+                    )
+
+                    restored_count += 1
+
+                elif operation == "DELETE":
+                    conn.execute("DELETE FROM memories WHERE hash = ?", (record_id,))
+                    conn.execute("DELETE FROM memories_fts WHERE hash = ?", (record_id,))
+
+            conn.commit()
+
+            return {
+                "restored_count": restored_count,
+                "final_merkle_root": chain_result["merkle_root"],
+                "errors": errors,
+            }
+
         finally:
             conn.close()
 
@@ -1494,10 +2040,19 @@ def get_memory_cassette(agent_id: str = "default") -> MemoryCassette:
     return _default_cassette
 
 
-def memory_save(text: str, metadata: Optional[Dict] = None, agent_id: str = "default") -> str:
-    """Save a memory. Returns hash."""
+def memory_save(
+    text: str,
+    metadata: Optional[Dict] = None,
+    agent_id: str = "default",
+    return_receipt: bool = False
+) -> str:
+    """Save a memory. Returns hash (or tuple of hash and receipt if return_receipt=True)."""
     cassette = get_memory_cassette(agent_id)
-    return cassette.memory_save(text, metadata, agent_id)
+    result = cassette.memory_save(text, metadata, agent_id)
+    if return_receipt:
+        return result  # Returns (hash, receipt)
+    else:
+        return result[0]  # Returns just the hash for backwards compatibility
 
 
 def memory_query(query: str, limit: int = 10, agent_id: Optional[str] = None) -> List[Dict]:

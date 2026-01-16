@@ -1,0 +1,92 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "cassette_receipt.schema.json",
+  "title": "CassetteReceipt - Cassette Write Operation Receipt",
+  "description": "Phase 6.0/6.2: Receipt for cassette write operations. Every write emits a receipt for provenance and restore capability.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "cassette_id",
+    "operation",
+    "record_id",
+    "record_hash",
+    "receipt_hash"
+  ],
+  "properties": {
+    "schema_version": {
+      "type": "string",
+      "const": "1.0.0",
+      "description": "Schema version for forward compatibility"
+    },
+    "cassette_id": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Identifier of the cassette (e.g., 'resident', 'canon')"
+    },
+    "operation": {
+      "type": "string",
+      "enum": ["SAVE", "UPDATE", "DELETE", "MIGRATE", "COMPACT", "RESTORE"],
+      "description": "Type of write operation"
+    },
+    "record_id": {
+      "$ref": "#/definitions/sha256",
+      "description": "SHA-256 hash of record text (MemoryRecord.id)"
+    },
+    "record_hash": {
+      "$ref": "#/definitions/sha256",
+      "description": "Full hash of entire MemoryRecord (detects any change)"
+    },
+    "parent_receipt_hash": {
+      "oneOf": [
+        {"$ref": "#/definitions/sha256"},
+        {"type": "null"}
+      ],
+      "description": "Hash of previous receipt in chain (null for first receipt)"
+    },
+    "receipt_index": {
+      "oneOf": [
+        {"type": "integer", "minimum": 0},
+        {"type": "null"}
+      ],
+      "description": "0-based index in receipt chain (null if not using indices)"
+    },
+    "agent_id": {
+      "type": "string",
+      "description": "Agent that performed the operation"
+    },
+    "session_id": {
+      "type": "string",
+      "description": "Session during which operation occurred"
+    },
+    "text_length": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Length of text content in bytes"
+    },
+    "embedding_model": {
+      "type": "string",
+      "description": "Embedding model used (e.g., 'all-MiniLM-L6-v2')"
+    },
+    "timestamp_utc": {
+      "$ref": "#/definitions/iso_timestamp",
+      "description": "ISO8601 timestamp of operation"
+    },
+    "receipt_hash": {
+      "$ref": "#/definitions/sha256",
+      "description": "SHA-256 hash of receipt (excludes receipt_hash and timestamp_utc for determinism)"
+    }
+  },
+  "definitions": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hex digest (64 lowercase hex characters)"
+    },
+    "iso_timestamp": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}T\\d{2}:\\d{2}:\\d{2}",
+      "description": "ISO8601 timestamp"
+    }
+  }
+}

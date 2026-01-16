@@ -197,18 +197,6 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
   - [ ] Deterministic resume: same capsule + corpus → same behavior
   - [ ] One end-to-end run: route → tools → persist → resume with identical behavior
 
-## 3.5 BitNet Backend Runner (cheap worker backend)
-- [ ] 3.5.1 Add BitNet backend runner integration (bitnet.cpp) as a selectable local model backend
-  - No auto-downloads; explicit local path configuration only
-  - Subprocess invocation must be deterministic (args ordering, env capture)
-- [ ] 3.5.2 Add router support: allow BitNet for “mechanical” task types (scans, lint, manifests, receipts)
-- [ ] 3.5.3 Add verification harness
-  - Golden prompt fixture → deterministic output parsing
-  - Receipts include binary hash, args, stdout/stderr digests, exit status
-- **Exit Criteria**
-  - [ ] BitNet can be used as a cheap producer without weakening governance guarantees
-
-
 # Phase 5: Vector/Symbol Integration (addressability) ✅ COMPLETE
 
 **Status:** All 529 tests pass, Global DoD met (2026-01-11)

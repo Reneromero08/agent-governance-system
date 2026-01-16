@@ -6,6 +6,26 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.11] - 2026-01-16
+
+### Added
+- **Phase 6 Cassette Network: Cartridge-First Substrate** - Receipt chain and portable backup system
+  - `CAPABILITY/PRIMITIVES/cassette_receipt.py` - CassetteReceipt dataclass with deterministic hashing
+  - `LAW/SCHEMAS/cassette_receipt.schema.json` - JSON schema for receipt validation
+  - `NAVIGATION/CORTEX/network/receipt_verifier.py` - Receipt chain verification tooling
+  - `CAPABILITY/TESTBENCH/phase6/` - 31 tests for receipts, restore, and Merkle verification
+
+### Changed
+- **MemoryCassette schema v5.0** - Receipt emission and MemoryRecord binding
+  - `NAVIGATION/CORTEX/network/memory_cassette.py` - Emit receipts on all writes, export/import cartridge
+  - Receipt chain with parent linkage for provenance tracking
+  - Vector L2 normalization for deterministic embeddings
+  - Session Merkle root computation
+  - Restore-from-receipts with integrity verification
+  - Corrupt-and-restore guarantee validated
+
+---
+
 ## [3.8.10] - 2026-01-15
 
 ### Added

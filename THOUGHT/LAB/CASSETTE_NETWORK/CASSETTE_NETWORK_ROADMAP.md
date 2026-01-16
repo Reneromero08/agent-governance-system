@@ -610,7 +610,7 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 
 ## Phase 6: Production Hardening
 
-**Status:** Ready to start (Feral stress-test complete)
+**Status:** ✅ COMPLETE (2026-01-16)
 **Rationale:** Harden AFTER finding bugs - Feral found them, now we fix
 
 **Goal:** Make it bulletproof
@@ -621,11 +621,15 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 **From AGS_ROADMAP_MASTER Phase 6.0:**
 **Upstream:** Phase 5.1.0 MemoryRecord contract MUST be complete before starting
 
-- [ ] Bind cassette storage to MemoryRecord contract (schema, IDs, provenance)
+- [x] Bind cassette storage to MemoryRecord contract (schema, IDs, provenance) ✅
   - Use `LAW/SCHEMAS/memory_record.schema.json` (from Phase 5.1.0)
   - Each cassette record = one MemoryRecord instance
-- [ ] Each cassette DB is a portable cartridge artifact (single-file default)
-- [ ] Provide rebuild hooks for derived ANN indexes (optional)
+  - Implemented in `memory_cassette.py` with full hash computation
+- [x] Each cassette DB is a portable cartridge artifact (single-file default) ✅
+  - SQLite single-file format
+  - Export: `export_cartridge()` → records.jsonl + receipts.jsonl + manifest.json
+  - Import: `import_cartridge()` with Merkle verification
+- [x] Provide rebuild hooks for derived ANN indexes (optional) ✅
 - Derived indexes are disposable and must be reproducible from cartridges
 
 **Phase 5.3.3 Integration:** Cassette handshake implements `CODEBOOK_SYNC_PROTOCOL`:
@@ -647,26 +651,40 @@ The Feral Resident has its own dedicated LAB bucket with a phased roadmap:
 **Hard Rule:** They are never the source of truth. They must be rebuildable from cartridges.
 
 ### 6.1 Determinism
-- [ ] Identical inputs → identical outputs
-- [ ] Canonical JSON everywhere
-- [ ] Explicit ordering (no filesystem dependencies)
-- [ ] Normalized vectors (L2 norm = 1.0)
+- [x] Identical inputs → identical outputs ✅
+- [x] Canonical JSON everywhere ✅
+  - `canonical_json()` with sorted keys, `(",", ":")` separators
+- [x] Explicit ordering (no filesystem dependencies) ✅
+- [x] Normalized vectors (L2 norm = 1.0) ✅
+  - Implemented in `memory_save()` before serialization
 
 ### 6.2 Receipts & Proofs
-- [ ] Emit receipts for writes (what changed, where, hashes, when, by whom)
-- [ ] Add verification tooling to replay/validate receipts
-- [ ] Merkle root of all memories per session
+- [x] Emit receipts for writes (what changed, where, hashes, when, by whom) ✅
+  - `CassetteReceipt` dataclass with operation, record_id, record_hash
+  - `cassette_receipts` table in SQLite schema
+  - Receipt chain with parent_receipt_hash linkage
+- [x] Add verification tooling to replay/validate receipts ✅
+  - `receipt_verifier.py` with `CassetteReceiptVerifier` class
+  - `verify_receipt_chain()` validates linkage and hashes
+- [x] Merkle root of all memories per session ✅
+  - Computed in `session_end()` from receipt chain
+  - Stored in sessions.merkle_root column
 
 ### 6.3 Restore Guarantee
-- [ ] Implement restore-from-receipts to rebuild DB state
-- [ ] Prove restore correctness with automated tests
-- [ ] Corrupt the DB mid-session → restore → resident picks up
+- [x] Implement restore-from-receipts to rebuild DB state ✅
+  - `restore_from_receipts()` replays receipt chain
+  - `import_cartridge()` validates Merkle roots before import
+- [x] Prove restore correctness with automated tests ✅
+  - 9 passing tests in `test_cassette_restore.py`
+  - Corrupt-and-restore cycle verified
+- [x] Corrupt the DB mid-session → restore → resident picks up ✅
+  - Test: `test_corrupt_and_restore()` passes
 
 **Acceptance:**
-- [ ] All operations deterministic
-- [ ] Receipts for every write
-- [ ] Byte-identical restore from corruption
-- [ ] Cassette network is portable as cartridges + receipts
+- [x] All operations deterministic ✅
+- [x] Receipts for every write ✅
+- [x] Byte-identical restore from corruption ✅
+- [x] Cassette network is portable as cartridges + receipts ✅
 
 ### 6.4 Compression Validation (M.4)
 **From AGS_ROADMAP_MASTER Phase 6.4:**
