@@ -70,8 +70,10 @@ export async function toggleBehavior(name) {
 }
 
 export async function updateInterval(name, seconds) {
-    const interval = parseInt(seconds, 10);
-    if (isNaN(interval) || interval < 5) return;
+    // Use parseFloat first to catch decimal input, then round to integer
+    const parsed = parseFloat(seconds);
+    if (isNaN(parsed) || parsed < 5) return;
+    const interval = Math.round(parsed);  // Round instead of truncate
     await api('/daemon/config', {
         method: 'POST',
         body: JSON.stringify({ behavior: name, interval: interval })

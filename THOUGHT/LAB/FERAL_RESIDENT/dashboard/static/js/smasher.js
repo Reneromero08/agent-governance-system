@@ -111,7 +111,17 @@ export function clearCurrentFile() {
     document.getElementById('smasher-current-e').innerText = '';
 }
 
+// Maximum queue size to prevent memory exhaustion under heavy load
+const MAX_QUEUE_SIZE = 100;
+
 export function queueSmashVisualization(data) {
+    // Prevent unbounded queue growth - drop oldest items if queue is full
+    if (state.smashQueue.length >= MAX_QUEUE_SIZE) {
+        // Drop oldest 20% when limit hit
+        const dropCount = Math.floor(MAX_QUEUE_SIZE * 0.2);
+        state.smashQueue.splice(0, dropCount);
+        console.warn(`[SMASHER] Queue overflow, dropped ${dropCount} items`);
+    }
     state.smashQueue.push(data);
     if (!state.smashRafPending) {
         state.setSmashRafPending(true);
@@ -150,6 +160,11 @@ function processSmashQueue() {
 
 function processSmashItem(data, graphData) {
     const nodeId = data.node_id;
+    if (!nodeId) {
+        console.warn('[SMASHER] processSmashItem called with no node_id');
+        return { updated: false, node: null };
+    }
+
     const similarTo = data.similar_to;
     const similarE = data.similar_E || 0;
     let updated = false;
@@ -160,9 +175,9 @@ function processSmashItem(data, graphData) {
         let pos = { x: 0, y: 0, z: 0 };
         let foundAnchor = false;
 
-        if (similarTo) {
+        if (similarTo && state.nodeRegistry.byId.has(similarTo)) {
             const anchorNode = state.nodeRegistry.byId.get(similarTo);
-            if (anchorNode && anchorNode.x !== undefined) {
+            if (anchorNode && typeof anchorNode.x === 'number') {
                 const offset = 15 + (1 - similarE) * 25;
                 pos = {
                     x: anchorNode.x + (Math.random() - 0.5) * offset,

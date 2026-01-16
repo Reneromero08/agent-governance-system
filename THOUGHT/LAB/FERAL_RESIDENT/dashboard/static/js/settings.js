@@ -36,16 +36,29 @@ let _lastSavedConfig = null;
 
 export async function saveSettings() {
     // Read from state (updated by updateFog/updateGraphForce when user changes sliders)
+    // Also sync with DOM slider values to catch any missed updates
     const smasherSpeed = state.smasherConfig.delay_ms;
     const smasherBatch = state.smasherConfig.batch_size;
     const simThreshold = state.similarityThreshold;
-    const fog = state.graphSettings.fog;
-    const center = state.graphSettings.center;
-    const repel = state.graphSettings.repel;
-    const linkStrength = state.graphSettings.linkStrength;
-    const linkDistance = state.graphSettings.linkDistance;
 
-    console.log('[SETTINGS] Reading from state:', {
+    // Read graph settings from state, but also check DOM as fallback for stale closures
+    const fogSlider = document.getElementById('slider-fog');
+    const centerSlider = document.getElementById('slider-center');
+    const repelSlider = document.getElementById('slider-repel');
+    const linkStrengthSlider = document.getElementById('slider-link-strength');
+    const linkDistanceSlider = document.getElementById('slider-link-distance');
+
+    // Use slider values if they exist and differ from state (handles stale closure)
+    const fog = fogSlider ? parseFloat(fogSlider.value) : state.graphSettings.fog;
+    const center = centerSlider ? parseFloat(centerSlider.value) : state.graphSettings.center;
+    const repel = repelSlider ? parseFloat(repelSlider.value) : state.graphSettings.repel;
+    const linkStrength = linkStrengthSlider ? parseFloat(linkStrengthSlider.value) : state.graphSettings.linkStrength;
+    const linkDistance = linkDistanceSlider ? parseFloat(linkDistanceSlider.value) : state.graphSettings.linkDistance;
+
+    // Sync state with slider values
+    state.setGraphSettings({ fog, center, repel, linkStrength, linkDistance });
+
+    console.log('[SETTINGS] Reading from sliders:', {
         fog, center, repel, linkStrength, linkDistance
     });
 

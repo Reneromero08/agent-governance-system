@@ -71,6 +71,14 @@ export async function initConstellation() {
     const container = document.getElementById('constellation-background');
     const tooltip = document.getElementById('node-tooltip');
 
+    if (!container) {
+        console.error('[CONSTELLATION] Missing container element: constellation-background');
+        return;
+    }
+    if (!tooltip) {
+        console.warn('[CONSTELLATION] Missing tooltip element: node-tooltip');
+    }
+
     try {
         console.log('[CONSTELLATION] Fetching data...');
         const res = await fetch('/api/constellation?include_similarity=true&similarity_threshold=' + state.similarityThreshold);
@@ -184,6 +192,7 @@ export async function initConstellation() {
             .cooldownTicks(perfMode ? 50 : 100)        // Faster cooldown
             .enableNodeDrag(false)
             .onNodeHover(node => {
+                if (!tooltip) return;
                 if (node) {
                     tooltip.innerHTML = `<strong>${node.label}</strong><br><span style="color: var(--text-muted)">${node.path || node.id}</span>`;
                     tooltip.style.display = 'block';
@@ -572,7 +581,15 @@ export function hideSmasherCursor() {
         smasherTrailLine.visible = false;
     }
     state.smasherTrailNodes.length = 0;
+    // Cancel animation frame to stop wasting CPU when cursor is hidden
+    if (smasherAnimationFrame) {
+        cancelAnimationFrame(smasherAnimationFrame);
+        smasherAnimationFrame = null;
+    }
 }
+
+// Track active flash timers to prevent memory leaks
+const activeFlashTimers = new Map();
 
 export function flashNode(nodeId, gateOpen, E) {
     const node = state.nodeRegistry.byId.get(nodeId);
@@ -581,6 +598,13 @@ export function flashNode(nodeId, gateOpen, E) {
     // Move smasher cursor to this node
     moveSmasherCursor(nodeId, gateOpen);
 
+    // Cancel any existing timers for this node to prevent memory leaks
+    const existingTimers = activeFlashTimers.get(nodeId);
+    if (existingTimers) {
+        existingTimers.forEach(timerId => clearTimeout(timerId));
+    }
+    const newTimers = [];
+
     const flashColor = gateOpen ? 0x00ff41 : 0xff4444;
 
     if (node.__mainSphere) {
@@ -588,13 +612,21 @@ export function flashNode(nodeId, gateOpen, E) {
         node.__mainSphere.material.color.setHex(flashColor);
         node.__mainSphere.material.opacity = 1.0;
 
-        setTimeout(() => {
+        const mainTimer = setTimeout(() => {
             if (node.__mainSphere) {
                 node.__mainSphere.scale.setScalar(1.0);
                 node.__mainSphere.material.color.setHex(node.group === 'folder' ? 0x00ff41 : 0x008f11);
                 node.__mainSphere.material.opacity = 0.9;
             }
-        }, 500);  // Increased from 300ms
+            // Clean up timer reference
+            const timers = activeFlashTimers.get(nodeId);
+            if (timers) {
+                const idx = timers.indexOf(mainTimer);
+                if (idx > -1) timers.splice(idx, 1);
+                if (timers.length === 0) activeFlashTimers.delete(nodeId);
+            }
+        }, 500);
+        newTimers.push(mainTimer);
     }
 
     if (node.__glowSphere) {
@@ -602,13 +634,25 @@ export function flashNode(nodeId, gateOpen, E) {
         node.__glowSphere.material.color.setHex(flashColor);
         node.__glowSphere.material.opacity = 0.6;
 
-        setTimeout(() => {
+        const glowTimer = setTimeout(() => {
             if (node.__glowSphere) {
                 node.__glowSphere.scale.setScalar(1.3);
                 node.__glowSphere.material.color.setHex(0x00ff41);
                 node.__glowSphere.material.opacity = 0.15;
             }
-        }, 500);  // Increased from 300ms
+            // Clean up timer reference
+            const timers = activeFlashTimers.get(nodeId);
+            if (timers) {
+                const idx = timers.indexOf(glowTimer);
+                if (idx > -1) timers.splice(idx, 1);
+                if (timers.length === 0) activeFlashTimers.delete(nodeId);
+            }
+        }, 500);
+        newTimers.push(glowTimer);
+    }
+
+    if (newTimers.length > 0) {
+        activeFlashTimers.set(nodeId, newTimers);
     }
 
     if (!state.staticCameraMode) {
@@ -668,13 +712,24 @@ export async function reloadConstellation() {
 }
 
 // ===== FOG CONTROL =====
+// Debounce timer for settings save to prevent race conditions
+let saveSettingsTimer = null;
+function debouncedSaveSettings() {
+    if (saveSettingsTimer) clearTimeout(saveSettingsTimer);
+    saveSettingsTimer = setTimeout(() => {
+        window.saveSettings?.();
+        saveSettingsTimer = null;
+    }, 300);
+}
+
 export function updateFog(value) {
     if (!state.Graph) return;
     const density = parseFloat(value);
     state.Graph.scene().fog.density = density;
     state.updateGraphSetting('fog', density);  // Track in state
-    document.getElementById('value-fog').innerText = density.toFixed(4);
-    window.saveSettings?.();  // Persist immediately
+    const valueEl = document.getElementById('value-fog');
+    if (valueEl) valueEl.innerText = density.toFixed(4);
+    debouncedSaveSettings();  // Debounced persist
 }
 
 // ===== GRAPH FORCE CONTROLS =====
@@ -682,35 +737,44 @@ export function updateGraphForce(force, value) {
     if (!state.Graph || !window.graphForces) return;
     const numValue = parseFloat(value);
 
+    // Safely get d3 forces with null checks
+    const linkForce = state.Graph.d3Force('link');
+    const chargeForce = state.Graph.d3Force('charge');
+    const centerForce = state.Graph.d3Force('center');
+
     switch (force) {
         case 'center':
             window.graphForces.centerStrength = numValue;
-            state.Graph.d3Force('center').strength(numValue);
-            state.updateGraphSetting('center', numValue);  // Track in state
-            document.getElementById('value-center').innerText = numValue.toFixed(2);
+            if (centerForce) centerForce.strength(numValue);
+            state.updateGraphSetting('center', numValue);
+            const centerEl = document.getElementById('value-center');
+            if (centerEl) centerEl.innerText = numValue.toFixed(2);
             break;
         case 'repel':
             const chargeStrength = -numValue;
             window.graphForces.chargeStrength = chargeStrength;
-            state.Graph.d3Force('charge').strength(chargeStrength);
-            state.updateGraphSetting('repel', numValue);  // Track in state (positive value)
-            document.getElementById('value-repel').innerText = chargeStrength;
+            if (chargeForce) chargeForce.strength(chargeStrength);
+            state.updateGraphSetting('repel', numValue);
+            const repelEl = document.getElementById('value-repel');
+            if (repelEl) repelEl.innerText = chargeStrength;
             break;
         case 'linkStrength':
             window.graphForces.linkStrength = numValue;
-            state.Graph.d3Force('link').strength(numValue);
-            state.updateGraphSetting('linkStrength', numValue);  // Track in state
-            document.getElementById('value-link-strength').innerText = numValue.toFixed(2);
+            if (linkForce) linkForce.strength(numValue);
+            state.updateGraphSetting('linkStrength', numValue);
+            const linkStrEl = document.getElementById('value-link-strength');
+            if (linkStrEl) linkStrEl.innerText = numValue.toFixed(2);
             break;
         case 'linkDistance':
             window.graphForces.linkDistance = numValue;
-            state.Graph.d3Force('link').distance(numValue);
-            state.updateGraphSetting('linkDistance', numValue);  // Track in state
-            document.getElementById('value-link-distance').innerText = numValue;
+            if (linkForce) linkForce.distance(numValue);
+            state.updateGraphSetting('linkDistance', numValue);
+            const linkDistEl = document.getElementById('value-link-distance');
+            if (linkDistEl) linkDistEl.innerText = numValue;
             break;
     }
     state.Graph.d3ReheatSimulation();
-    window.saveSettings?.();  // Persist immediately
+    debouncedSaveSettings();  // Debounced persist
 }
 
 export function resetGraphForces() {

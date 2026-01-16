@@ -15,10 +15,15 @@ export async function sendMessage() {
             method: 'POST',
             body: JSON.stringify({ query })
         });
-        addChatMessage('feral', data.response, data.E_resonance, data.gate_open);
+        // Validate response data to prevent rendering "undefined"
+        const response = data.response || '[No response received]';
+        const E = typeof data.E_resonance === 'number' ? data.E_resonance : 0;
+        const gateOpen = Boolean(data.gate_open);
+        addChatMessage('feral', response, E, gateOpen);
         loadStatus();
         loadEvolution();
     } catch (e) {
+        console.error('[CHAT] Think API error:', e);
         addChatMessage('feral', '[ERROR] Failed to get response', 0, false);
     }
 }
