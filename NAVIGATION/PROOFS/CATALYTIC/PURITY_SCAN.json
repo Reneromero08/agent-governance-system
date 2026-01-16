@@ -1,0 +1,23 @@
+{
+  "checks": [
+    {
+      "escaped_files": 0,
+      "files_in_test_dir": 7,
+      "name": "directory_isolation",
+      "status": "pass"
+    },
+    {
+      "chain_length": 5,
+      "chain_valid": true,
+      "name": "receipt_chain",
+      "status": "pass"
+    },
+    {
+      "name": "temp_cleanup",
+      "status": "pass",
+      "temp_files_found": 0
+    }
+  ],
+  "status": "PASS",
+  "timestamp_utc": "2026-01-16T20:40:16Z"
+}

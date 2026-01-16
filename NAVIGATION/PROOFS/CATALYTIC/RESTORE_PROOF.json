@@ -1,0 +1,50 @@
+{
+  "status": "PASS",
+  "steps": [
+    {
+      "hashes": [
+        "0ac93a38bc0c404c50d927484233c6b99b8e4ff938ed639452ad178b4e18807f",
+        "6b3032f70f2a1ce1bc3bae2876ea040422cd4383b78d418f4210966f08d7d3cf",
+        "1af26e0fbb12a1d2d141e6ae31b135b572dfef89739f5353960269e5c6694f02",
+        "6555877a037805a4a4d3850670776009ef23a8bc1bf4910cdd6df3fb9329acc7",
+        "23ca5b64867783ca043d722bec7efaa8c0b7bd033e2201a62c9f9ae4e2fee4b3"
+      ],
+      "memories_saved": 5,
+      "name": "create_and_save",
+      "status": "pass"
+    },
+    {
+      "name": "export_cartridge",
+      "original_merkle_root": "754e983367416bce1a9279dc80e982e360a4601f243d1bef2b7f64cfb1dd2632",
+      "receipt_count": 5,
+      "record_count": 5,
+      "status": "pass"
+    },
+    {
+      "db_deleted": true,
+      "name": "simulate_corruption",
+      "status": "pass"
+    },
+    {
+      "merkle_verified": true,
+      "name": "import_cartridge",
+      "restored_records": 5,
+      "status": "pass"
+    },
+    {
+      "all_match": true,
+      "name": "verify_content",
+      "status": "pass",
+      "verified_count": 5
+    },
+    {
+      "merkle_match": true,
+      "name": "verify_merkle",
+      "original_root": "754e983367416bce...",
+      "restored_root": "754e983367416bce...",
+      "status": "pass"
+    }
+  ],
+  "test_id": "55bb2c83",
+  "timestamp_utc": "2026-01-16T20:40:01Z"
+}

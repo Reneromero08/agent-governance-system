@@ -294,5 +294,114 @@ class TestDeterminism:
         assert len(hash1) == 64
 
 
+class TestLLMBenchmarkRunner:
+    """Test LLM benchmark runner (import and structure tests only)."""
+
+    def test_import_llm_benchmark_module(self):
+        """Test that LLM benchmark module imports correctly."""
+        from llm_benchmark_runner import (
+            BENCHMARK_VERSION,
+            LLMBenchmarkRunner,
+            LLMTask,
+            LLMTaskResult,
+            get_llm_semantic_tasks,
+        )
+
+        assert BENCHMARK_VERSION is not None
+        assert LLMBenchmarkRunner is not None
+
+    def test_get_llm_semantic_tasks(self):
+        """Test that LLM semantic tasks are defined."""
+        from llm_benchmark_runner import get_llm_semantic_tasks, LLMTask
+
+        tasks = get_llm_semantic_tasks()
+
+        assert len(tasks) >= 3
+        for task in tasks:
+            assert isinstance(task, LLMTask)
+            assert task.task_id is not None
+            assert task.question is not None
+            assert len(task.expected_keywords) > 0
+
+    def test_llm_task_to_dict(self):
+        """Test LLMTask serialization."""
+        from llm_benchmark_runner import LLMTask
+
+        task = LLMTask(
+            task_id="test_001",
+            question="What is the answer?",
+            expected_keywords=["answer", "response"],
+            context_hint="test context",
+            difficulty="easy",
+        )
+
+        d = task.to_dict()
+        assert d["task_id"] == "test_001"
+        assert d["question"] == "What is the answer?"
+        assert "answer" in d["expected_keywords"]
+
+    def test_llm_task_result_to_dict(self):
+        """Test LLMTaskResult serialization."""
+        from llm_benchmark_runner import LLMTaskResult
+
+        result = LLMTaskResult(
+            task_id="test_001",
+            passed=True,
+            context_type="baseline",
+            response="The answer is 42",
+            matched_keywords=["answer"],
+            missing_keywords=["response"],
+            latency_ms=100.5,
+            tokens_used=50,
+        )
+
+        d = result.to_dict()
+        assert d["task_id"] == "test_001"
+        assert d["passed"] is True
+        assert d["latency_ms"] == 100.5
+
+    def test_llm_benchmark_runner_creation(self):
+        """Test LLMBenchmarkRunner can be created."""
+        from llm_benchmark_runner import LLMBenchmarkRunner
+
+        runner = LLMBenchmarkRunner()
+        assert runner is not None
+        assert runner.endpoint is not None
+
+    def test_validate_response(self):
+        """Test response validation function."""
+        from llm_benchmark_runner import _validate_response
+
+        # Test successful match
+        passed, matched, missing = _validate_response(
+            "The answer contains agent and governance keywords",
+            ["agent", "governance", "missing"],
+        )
+        assert "agent" in matched
+        assert "governance" in matched
+        assert "missing" in missing
+        # 2/3 matched = 66% >= 50%, should pass
+        assert passed is True
+
+        # Test failed match
+        passed2, matched2, missing2 = _validate_response(
+            "Nothing relevant here",
+            ["agent", "governance", "rules"],
+        )
+        assert len(matched2) == 0
+        assert passed2 is False
+
+    def test_load_sample_corpus(self):
+        """Test sample corpus loading."""
+        from llm_benchmark_runner import load_sample_corpus
+
+        baseline, compressed = load_sample_corpus()
+
+        # Should have some content
+        assert len(baseline) > 0
+        # Compressed should be smaller or equal
+        assert len(compressed) <= len(baseline)
+
+
 if __name__ == "__main__":
     pytest.main([__file__, "-v"])

@@ -1,0 +1,118 @@
+{
+  "benchmark_version": "1.1.0",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "model": "nemotron-3-nano-30b-a3b",
+  "tasks_run": 5,
+  "baseline_results": {
+    "tasks_passed": 5,
+    "tasks_failed": 0,
+    "success_rate": 1.0
+  },
+  "compressed_results": {
+    "tasks_passed": 5,
+    "tasks_failed": 0,
+    "success_rate": 1.0
+  },
+  "parity_achieved": true,
+  "task_details": [
+    {
+      "task_id": "llm_semantic_001",
+      "question": "What is the Genesis Prompt used for in this system?",
+      "difficulty": "easy",
+      "baseline_passed": true,
+      "baseline_matched": [
+        "bootstrap",
+        "governance"
+      ],
+      "compressed_passed": true,
+      "compressed_matched": [
+        "bootstrap",
+        "load",
+        "governance"
+      ],
+      "baseline_latency_ms": 73437.84809112549,
+      "compressed_latency_ms": 83280.42030334473
+    },
+    {
+      "task_id": "llm_semantic_002",
+      "question": "What fields does the MemoryRecord data structure contain?",
+      "difficulty": "easy",
+      "baseline_passed": true,
+      "baseline_matched": [
+        "text",
+        "embeddings",
+        "payload",
+        "receipts"
+      ],
+      "compressed_passed": true,
+      "compressed_matched": [
+        "text",
+        "embeddings",
+        "payload",
+        "receipts"
+      ],
+      "baseline_latency_ms": 84833.82439613342,
+      "compressed_latency_ms": 101036.60774230957
+    },
+    {
+      "task_id": "llm_semantic_003",
+      "question": "How does the cassette receipt system ensure data integrity?",
+      "difficulty": "medium",
+      "baseline_passed": true,
+      "baseline_matched": [
+        "receipt",
+        "hash",
+        "chain",
+        "merkle"
+      ],
+      "compressed_passed": true,
+      "compressed_matched": [
+        "receipt",
+        "hash",
+        "chain",
+        "merkle"
+      ],
+      "baseline_latency_ms": 92498.88753890991,
+      "compressed_latency_ms": 82220.95799446106
+    },
+    {
+      "task_id": "llm_semantic_004",
+      "question": "What is the cartridge export/import cycle used for?",
+      "difficulty": "medium",
+      "baseline_passed": true,
+      "baseline_matched": [
+        "export",
+        "import"
+      ],
+      "compressed_passed": true,
+      "compressed_matched": [
+        "export",
+        "import"
+      ],
+      "baseline_latency_ms": 115607.30457305908,
+      "compressed_latency_ms": 118271.02518081665
+    },
+    {
+      "task_id": "llm_semantic_005",
+      "question": "What is the CORTEX cassette network used for?",
+      "difficulty": "hard",
+      "baseline_passed": true,
+      "baseline_matched": [
+        "cassette",
+        "semantic",
+        "search",
+        "navigation"
+      ],
+      "compressed_passed": true,
+      "compressed_matched": [
+        "cassette",
+        "semantic",
+        "search",
+        "navigation"
+      ],
+      "baseline_latency_ms": 68548.29001426697,
+      "compressed_latency_ms": 80081.6707611084
+    }
+  ],
+  "total_latency_ms": 899816.84
+}

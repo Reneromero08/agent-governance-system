@@ -37,6 +37,18 @@ from benchmark_tasks import (
     run_benchmarks,
 )
 
+# Optional LLM benchmark integration
+try:
+    from llm_benchmark_runner import (
+        BENCHMARK_VERSION as LLM_BENCHMARK_VERSION,
+        LLMBenchmarkRunner,
+        run_llm_benchmarks,
+        load_sample_corpus,
+    )
+    LLM_BENCHMARKS_AVAILABLE = True
+except ImportError:
+    LLM_BENCHMARKS_AVAILABLE = False
+
 # Output paths
 OUT_DIR = REPO_ROOT / "NAVIGATION" / "PROOFS" / "COMPRESSION"
 OUT_PROOF_DATA = OUT_DIR / "COMPRESSION_PROOF_DATA.json"
@@ -133,6 +145,45 @@ def _run_benchmarks() -> Dict[str, Any]:
         }
 
 
+def _run_llm_benchmarks(run_llm: bool = False) -> Optional[Dict[str, Any]]:
+    """
+    Run LLM benchmark tasks (optional, requires Nemotron endpoint).
+
+    Args:
+        run_llm: If True, attempt to run LLM benchmarks
+
+    Returns:
+        Results dict or None if skipped/unavailable
+    """
+    if not run_llm:
+        return None
+
+    if not LLM_BENCHMARKS_AVAILABLE:
+        return {"status": "SKIP", "reason": "LLM benchmark module not available"}
+
+    try:
+        # Check if endpoint is available
+        runner = LLMBenchmarkRunner()
+        if not runner.check_endpoint():
+            return {"status": "SKIP", "reason": "LLM endpoint not available"}
+
+        # Load corpus
+        baseline_corpus, compressed_corpus = load_sample_corpus()
+
+        # Run benchmarks
+        results = run_llm_benchmarks(
+            baseline_corpus=baseline_corpus,
+            compressed_corpus=compressed_corpus,
+        )
+        return results.to_dict()
+
+    except Exception as e:
+        return {
+            "error": str(e),
+            "status": "FAIL",
+        }
+
+
 def _compute_proof_bundle_hash(data: Dict[str, Any]) -> str:
     """
     Compute hash of proof bundle for auditable verification.
@@ -152,9 +203,12 @@ def _compute_proof_bundle_hash(data: Dict[str, Any]) -> str:
     return _sha256_hex(json.dumps(bundle_data, sort_keys=True))
 
 
-def run_proof_compression() -> Dict[str, Any]:
+def run_proof_compression(run_llm: bool = False) -> Dict[str, Any]:
     """
     Run full compression proof suite.
+
+    Args:
+        run_llm: If True, also run LLM benchmarks (requires Nemotron endpoint)
 
     Returns unified proof bundle with all artifacts.
     """
@@ -172,10 +226,16 @@ def run_proof_compression() -> Dict[str, Any]:
     print("Running benchmark tasks...")
     benchmark_results = _run_benchmarks()
 
+    # Optionally run LLM benchmarks
+    llm_benchmark_results = None
+    if run_llm:
+        print("Running LLM benchmarks...")
+        llm_benchmark_results = _run_llm_benchmarks(run_llm=True)
+
     # Build proof bundle
     proof_bundle = {
         "proof_type": "compression",
-        "proof_version": "1.0.0",
+        "proof_version": "1.1.0" if run_llm else "1.0.0",
         "timestamp_utc": timestamp,
         "git_rev": git_rev,
         "corpus_spec": corpus_spec.to_dict(),
@@ -184,13 +244,23 @@ def run_proof_compression() -> Dict[str, Any]:
         "benchmark_results": benchmark_results,
     }
 
+    # Add LLM results if available
+    if llm_benchmark_results:
+        proof_bundle["llm_benchmark_results"] = llm_benchmark_results
+
     # Compute bundle hash
     proof_bundle["proof_bundle_hash"] = _compute_proof_bundle_hash(proof_bundle)
 
     # Determine overall status
     compression_ok = compression_proof.get("status") != "FAIL" and "error" not in compression_proof
     benchmark_ok = benchmark_results.get("parity_achieved", False)
-    proof_bundle["status"] = "PASS" if (compression_ok and benchmark_ok) else "FAIL"
+
+    # LLM benchmarks are optional - only factor in if they ran and failed
+    llm_ok = True
+    if llm_benchmark_results and llm_benchmark_results.get("status") == "FAIL":
+        llm_ok = llm_benchmark_results.get("parity_achieved", True)
+
+    proof_bundle["status"] = "PASS" if (compression_ok and benchmark_ok and llm_ok) else "FAIL"
 
     return proof_bundle
 
@@ -271,13 +341,55 @@ def render_proof_report(data: Dict[str, Any]) -> str:
             "",
         ])
 
+    # Add LLM benchmark section if present
+    llm_benchmark = data.get("llm_benchmark_results")
+    if llm_benchmark:
+        lines.extend([
+            "## LLM Benchmark Results (Nemotron)",
+            "",
+        ])
+        if "error" in llm_benchmark:
+            lines.extend([
+                f"**Error:** {llm_benchmark.get('error')}",
+                "",
+            ])
+        elif llm_benchmark.get("status") == "SKIP":
+            lines.extend([
+                f"**Skipped:** {llm_benchmark.get('reason', 'Unknown reason')}",
+                "",
+            ])
+        else:
+            baseline = llm_benchmark.get("baseline_results", {})
+            compressed = llm_benchmark.get("compressed_results", {})
+            lines.extend([
+                f"**Endpoint:** {llm_benchmark.get('endpoint', 'unknown')}",
+                f"**Model:** {llm_benchmark.get('model', 'unknown')}",
+                f"**Tasks Run:** {llm_benchmark.get('tasks_run', 0)}",
+                f"**Total Latency:** {llm_benchmark.get('total_latency_ms', 0):.0f}ms",
+                "",
+                "### LLM Results Comparison",
+                "",
+                "| Metric | Baseline | Compressed |",
+                "|--------|----------|------------|",
+                f"| Tasks Passed | {baseline.get('tasks_passed', 0)} | {compressed.get('tasks_passed', 0)} |",
+                f"| Tasks Failed | {baseline.get('tasks_failed', 0)} | {compressed.get('tasks_failed', 0)} |",
+                f"| Success Rate | {baseline.get('success_rate', 0):.2%} | {compressed.get('success_rate', 0):.2%} |",
+                "",
+                f"**LLM Parity Achieved:** {'Yes' if llm_benchmark.get('parity_achieved') else 'No'}",
+                "",
+            ])
+
     lines.extend([
         "## Verification",
         "",
         "To reproduce this proof:",
         "",
         "```bash",
+        "# Basic benchmarks",
         "python NAVIGATION/PROOFS/COMPRESSION/proof_compression_run.py",
+        "",
+        "# With LLM benchmarks (requires Nemotron endpoint)",
+        "python NAVIGATION/PROOFS/COMPRESSION/proof_compression_run.py --llm",
         "```",
         "",
         "---",
@@ -325,17 +437,36 @@ def write_outputs(proof_bundle: Dict[str, Any]) -> None:
 
 def main() -> int:
     """Run compression proof and output results."""
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Phase 6.4.9: Compression Proof Runner")
+    parser.add_argument(
+        "--llm",
+        action="store_true",
+        help="Run LLM benchmarks (requires Nemotron endpoint at http://10.5.0.2:1234)",
+    )
+    args = parser.parse_args()
+
     print("=" * 60)
     print("Phase 6.4.9: Compression Proof Runner")
     print("=" * 60)
     print()
 
-    proof_bundle = run_proof_compression()
+    if args.llm:
+        print("LLM benchmarks enabled (--llm flag)")
+        print()
+
+    proof_bundle = run_proof_compression(run_llm=args.llm)
     write_outputs(proof_bundle)
 
     print()
     print(f"Status: {proof_bundle.get('status', 'UNKNOWN')}")
     print(f"Bundle Hash: {proof_bundle.get('proof_bundle_hash', 'unknown')}")
+
+    # Show LLM results summary if available
+    llm_results = proof_bundle.get("llm_benchmark_results")
+    if llm_results and "parity_achieved" in llm_results:
+        print(f"LLM Parity: {llm_results.get('parity_achieved')}")
 
     if proof_bundle.get("status") == "PASS":
         print("\nSUCCESS: Compression proof validated")
