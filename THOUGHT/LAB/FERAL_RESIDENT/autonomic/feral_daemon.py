@@ -567,25 +567,27 @@ class FeralDaemon:
                 chunk_idx += 1
                 batch_count += 1
 
+                # FAIRNESS: Yield before processing to let waiting daemon behaviors run
+                # This is crucial when daemon is due for a behavior cycle
+                await asyncio.sleep(0)
+
                 # Process the chunk (skip if force stop)
                 if not self._force_stop:
                     await self._smash_chunk(chunk)
-
-                # Yield to let daemon behaviors acquire lock (fairness)
-                await asyncio.sleep(0)
 
                 # Check stop again before sleeping
                 if self._force_stop or not self.smasher_config.enabled:
                     break
 
-                # Inter-chunk delay
+                # Inter-chunk delay (gives daemon time to acquire lock)
                 await asyncio.sleep(self.smasher_config.delay_ms / 1000.0)
 
-                # Batch pause
+                # Batch pause - ensure minimum 50ms to let daemon behaviors run
                 if batch_count >= self.smasher_config.batch_size:
                     batch_count = 0
-                    if self.smasher_config.batch_pause_ms > 0 and not self._force_stop:
-                        await asyncio.sleep(self.smasher_config.batch_pause_ms / 1000.0)
+                    pause_ms = max(50, self.smasher_config.batch_pause_ms)
+                    if not self._force_stop:
+                        await asyncio.sleep(pause_ms / 1000.0)
 
             except asyncio.CancelledError:
                 break
@@ -597,72 +599,36 @@ class FeralDaemon:
         self.smasher_config.enabled = False
         self._smasher_task = None
 
-    def _smash_chunk_sync(self, chunk: Dict) -> Dict:
+    def _embed_chunk_sync(self, chunk_text: str) -> Any:
         """
-        Synchronous chunk processing - runs in executor to avoid blocking.
-        Returns dict with all computed values.
+        Synchronous embedding only - runs in executor WITHOUT holding lock.
+        This is the CPU-intensive part that was causing lock starvation.
         """
-        chunk_id = chunk['chunk_id']  # This is actually receipt_id
-        chunk_text = chunk.get('content', '')[:500]
-        paper_name = chunk.get('paper_id', 'unknown')
-        # Use consistent node ID format matching constellation: chunk:{receipt_id}
-        full_node_id = f"chunk:{chunk_id}"
-
         try:
-            # Embed chunk
-            chunk_state = self.resident.store.embed(chunk_text)
-            mind_state = self.resident.store.get_mind_state()
-            E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
+            return self.resident.store.embed(chunk_text)
+        except Exception:
+            return None
 
-            # Find similar chunks (skip for speed - positioning not critical)
-            similar_to = None
-            similar_E = 0.0
-
-            # Gate decision
-            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
-            threshold = get_dynamic_threshold(n_memories)
-            gate_open = E > threshold
-
-            # Absorb if gate open - use remember() for fast absorption, not think() which invokes LLM
-            if gate_open:
-                self.resident.store.remember(f"[Paper: {paper_name}] {chunk_text}")
-
-            return {
-                'chunk_id': chunk_id,
-                'paper_name': paper_name,
-                'full_node_id': full_node_id,
-                'E': E,
-                'threshold': threshold,
-                'gate_open': gate_open,
-                'n_memories': n_memories,
-                'similar_to': similar_to,
-                'similar_E': similar_E,
-                'chunk_state': chunk_state
-            }
-        except Exception as e:
-            # Return error state so we can log it
-            return {
-                'chunk_id': chunk_id,
-                'paper_name': paper_name,
-                'full_node_id': full_node_id,
-                'E': 0.0,
-                'threshold': 0.15,
-                'gate_open': False,
-                'n_memories': 0,
-                'similar_to': None,
-                'similar_E': 0.0,
-                'chunk_state': None,
-                'error': str(e)
-            }
+    def _absorb_chunk_sync(self, paper_name: str, chunk_text: str) -> bool:
+        """
+        Synchronous absorption - called WITH lock held.
+        This is fast (just state mutation).
+        """
+        try:
+            self.resident.store.remember(f"[Paper: {paper_name}] {chunk_text}")
+            return True
+        except Exception:
+            return False
 
     async def _smash_chunk(self, chunk: Dict):
         """
         Process a single chunk in smasher mode.
 
-        Uses SEMANTIC SIMILARITY to find positioning anchor, not sequential order.
-        Compares to previously smashed chunks using cached embeddings.
+        CRITICAL FIX: Runs expensive embedding OUTSIDE the lock to prevent
+        starving daemon behaviors when both run concurrently.
         """
         chunk_id = chunk['chunk_id']  # This is actually receipt_id from the database
+        chunk_text = chunk.get('content', '')[:500]
         paper_name = chunk.get('paper_id', 'unknown')
         # Use consistent node ID format matching constellation API: chunk:{receipt_id}
         full_node_id = f"chunk:{chunk_id}"
@@ -671,29 +637,37 @@ class FeralDaemon:
         is_new_node = full_node_id not in self._discovered_chunks
         self._discovered_chunks.add(full_node_id)
 
-        # LOCK: Prevent conflicts with daemon behaviors accessing resident
+        # PHASE 1: Embedding - run in executor WITHOUT holding lock
+        # This is the CPU-intensive part (~50-100ms) that was starving daemon
+        loop = asyncio.get_event_loop()
+        chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
+
+        if chunk_state is None:
+            self._log_activity('error', f"Smash embed failed",
+                              chunk_id=chunk_id, paper=paper_name)
+            return
+
+        # Check for force stop between phases
+        if self._force_stop:
+            return
+
+        # PHASE 2: Gate check and absorption - brief lock for state access
         async with self._get_lock():
-            # Run ALL blocking operations in executor
-            loop = asyncio.get_event_loop()
-            result = await loop.run_in_executor(None, self._smash_chunk_sync, chunk)
+            # Get mind state and compute E (fast - just vector ops)
+            mind_state = self.resident.store.get_mind_state()
+            E = chunk_state.E_with(mind_state) if mind_state is not None else 0.5
 
-            # Check for error
-            if 'error' in result:
-                self._log_activity('error', f"Smash error: {result['error'][:50]}",
-                                  chunk_id=chunk_id, paper=paper_name)
-                return
+            # Gate decision
+            n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
+            threshold = get_dynamic_threshold(n_memories)
+            gate_open = E > threshold
 
-            # Extract results
-            E = result['E']
-            threshold = result['threshold']
-            gate_open = result['gate_open']
-            n_memories = result['n_memories']
-            similar_to = result['similar_to']
-            similar_E = result['similar_E']
+            # Absorb if gate open (fast - just state mutation)
+            if gate_open:
+                self._absorb_chunk_sync(paper_name, chunk_text)
 
-            # Cache chunk state (may be None on error)
-            if result.get('chunk_state') is not None:
-                self._chunk_states[full_node_id] = result['chunk_state']
+            # Cache chunk state for similarity lookups
+            self._chunk_states[full_node_id] = chunk_state
 
             # Update stats
             if gate_open:
@@ -704,6 +678,10 @@ class FeralDaemon:
             self._explored_chunks.add(full_node_id)
             self.smasher_stats.chunks_processed += 1
             self.smasher_stats.last_chunk_time = time.time()
+
+        # Skip similarity lookup for speed
+        similar_to = None
+        similar_E = 0.0
 
         # Emit event with SEMANTIC anchor (most similar previous chunk)
         # Convert numpy types to Python types for JSON serialization
@@ -855,19 +833,24 @@ class FeralDaemon:
         # Q44 BORN RULE CHECK + Q46 NUCLEATION
         # =================================================================
 
-        # LOCK: Only for embedding and gate check (NOT for LLM call)
-        async with self._get_lock():
-            # 1. Initialize chunk to manifold (BOUNDARY operation)
-            chunk_state = self.resident.store.embed(chunk_text)
+        # PHASE 1: Embedding OUTSIDE lock (CPU-intensive, same fix as smasher)
+        loop = asyncio.get_event_loop()
+        chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
 
-            # 2. Measure E with current mind state (PURE GEOMETRY)
+        if chunk_state is None:
+            self._log_activity('paper', f"Embed failed for {paper_name}")
+            return
+
+        # PHASE 2: Brief lock for gate check only (fast - just vector ops)
+        async with self._get_lock():
+            # Measure E with current mind state (PURE GEOMETRY)
             mind_state = self.resident.store.get_mind_state()
             if mind_state is not None:
                 E = chunk_state.E_with(mind_state)
             else:
                 E = 0.5  # No mind yet, accept with neutral E
 
-            # 3. Gate decision using Q46 Law 3: Nucleation (∇S-driven threshold)
+            # Gate decision using Q46 Law 3: Nucleation
             n_memories = len(self.resident.store.memory.memory_history) if self.resident.store.memory else 0
             threshold = get_dynamic_threshold(n_memories)
             gate_open = E > threshold
@@ -964,21 +947,23 @@ class FeralDaemon:
             except Exception:
                 sample_chunks = []
 
-        # IMPORTANT: Release lock before embedding loop (heavy computation)
+        # IMPORTANT: Run embeddings OUTSIDE lock (same pattern as smasher fix)
         patterns = []
+        loop = asyncio.get_event_loop()
         for chunk in sample_chunks:
-            # Brief lock per embedding to allow smasher interleaving
-            async with self._get_lock():
-                try:
-                    chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
-                    E = blended.E_with(chunk_state)
-                    if E > threshold:
-                        patterns.append({
-                            'paper': chunk.get('paper_id'),
-                            'E': E
-                        })
-                except Exception:
-                    pass
+            # Embedding outside lock - this is the slow part
+            chunk_text = chunk.get('content', '')[:200]
+            chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
+
+            if chunk_state is not None:
+                # E comparison is fast, no lock needed (blended is local copy)
+                E = blended.E_with(chunk_state)
+                if E > threshold:
+                    patterns.append({
+                        'paper': chunk.get('paper_id'),
+                        'E': E
+                    })
+
             # Yield between embeddings to let smasher run
             await asyncio.sleep(0)
 
@@ -1060,18 +1045,20 @@ class FeralDaemon:
             except Exception:
                 sample_chunks = []
 
-        # IMPORTANT: Release lock before embedding loop (heavy computation)
+        # IMPORTANT: Run embeddings OUTSIDE lock (same pattern as smasher fix)
         resonant_concepts = []
+        loop = asyncio.get_event_loop()
         for chunk in sample_chunks:
-            # Brief lock per embedding to allow smasher interleaving
-            async with self._get_lock():
-                try:
-                    chunk_state = self.resident.store.embed(chunk.get('content', '')[:200])
-                    E = new_perspective.E_with(chunk_state)
-                    if E > threshold:
-                        resonant_concepts.append(chunk.get('paper_id', 'unknown'))
-                except Exception:
-                    pass
+            # Embedding outside lock - this is the slow part
+            chunk_text = chunk.get('content', '')[:200]
+            chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
+
+            if chunk_state is not None:
+                # E comparison is fast, no lock needed (new_perspective is local copy)
+                E = new_perspective.E_with(chunk_state)
+                if E > threshold:
+                    resonant_concepts.append(chunk.get('paper_id', 'unknown'))
+
             # Yield between embeddings to let smasher run
             await asyncio.sleep(0)
 
