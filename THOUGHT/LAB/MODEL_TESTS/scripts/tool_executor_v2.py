@@ -305,6 +305,35 @@ def list_directory(path: str = ".") -> str:
 def extract_python_code(text: str) -> Optional[str]:
     """Extract Python code from various formats."""
 
+    def normalize_unicode(code: str) -> str:
+        """Convert fancy Unicode characters to ASCII equivalents."""
+        replacements = {
+            # Fancy quotes to ASCII
+            '\u201c': '"',  # "
+            '\u201d': '"',  # "
+            '\u2018': "'",  # '
+            '\u2019': "'",  # '
+            '\u00ab': '"',  # <<
+            '\u00bb': '"',  # >>
+            '\u201e': '"',  # ,,
+            '\u201a': "'",  # ,
+            # Dashes
+            '\u2013': '-',  # en-dash
+            '\u2014': '-',  # em-dash
+            '\u2212': '-',  # minus sign
+            # Spaces
+            '\u00a0': ' ',  # non-breaking space
+            '\u2003': ' ',  # em space
+            '\u2002': ' ',  # en space
+            # Other common issues
+            '\u2026': '...',  # ellipsis
+            '\u00d7': '*',    # multiplication sign
+            '\u00f7': '/',    # division sign
+        }
+        for unicode_char, ascii_char in replacements.items():
+            code = code.replace(unicode_char, ascii_char)
+        return code
+
     def strip_repl_prompts(code: str) -> str:
         """Strip >>> and ... prompts from REPL-style code."""
         lines = code.split('\n')
@@ -323,19 +352,25 @@ def extract_python_code(text: str) -> Optional[str]:
                 cleaned.append(line)
         return '\n'.join(cleaned)
 
+    def clean_code(code: str) -> str:
+        """Apply all cleaning steps."""
+        code = normalize_unicode(code)
+        code = strip_repl_prompts(code)
+        return code
+
     # Try markdown code blocks first
     pattern = r"```python\s*(.*?)```"
     matches = re.findall(pattern, text, re.DOTALL)
     if matches:
         code = matches[-1].strip()
-        return strip_repl_prompts(code)
+        return clean_code(code)
 
     # Try <tool_call> format
     pattern = r"<parameter=code>\s*(.*?)</parameter>"
     matches = re.findall(pattern, text, re.DOTALL)
     if matches:
         code = matches[-1].strip()
-        return strip_repl_prompts(code)
+        return clean_code(code)
 
     # Try generic code blocks
     pattern = r"```\s*(.*?)```"
@@ -343,7 +378,7 @@ def extract_python_code(text: str) -> Optional[str]:
     if matches:
         code = matches[-1].strip()
         if any(kw in code for kw in ['import', 'print', 'def ', '=', 'for ', 'if ', '>>>']):
-            return strip_repl_prompts(code)
+            return clean_code(code)
 
     return None
 
@@ -432,7 +467,7 @@ def call_model(messages: list) -> Dict[str, Any]:
         "max_tokens": 2000,
     }
 
-    response = requests.post(API_URL, json=payload, timeout=300)  # 5 minutes for complex prompts
+    response = requests.post(API_URL, json=payload, timeout=900)  # 5 minutes for complex prompts
     response.raise_for_status()
     return response.json()
 
@@ -483,7 +518,7 @@ def run_with_tools(prompt: str, verbose: bool = True) -> str:
             vprint("--------------")
 
             messages.append({"role": "assistant", "content": assistant_msg})
-            messages.append({"role": "user", "content": f"Python output:\n```\n{output}\n```\n\nContinue your analysis."})
+            messages.append({"role": "user", "content": f"Python output:\n```\n{output}\n```\n\nContinue if needed, or provide your final answer."})
 
             full_response = assistant_msg + f"\n\n[Executed: {output}]\n\n"
 
@@ -498,7 +533,7 @@ def run_with_tools(prompt: str, verbose: bool = True) -> str:
             vprint("-------------------")
 
             messages.append({"role": "assistant", "content": assistant_msg})
-            messages.append({"role": "user", "content": f"Tool output:\n```\n{output}\n```\n\nContinue your analysis."})
+            messages.append({"role": "user", "content": f"Tool output:\n```\n{output}\n```\n\nContinue if needed, or provide your final answer."})
 
             full_response = assistant_msg + f"\n\n[Tool: {output}]\n\n"
 

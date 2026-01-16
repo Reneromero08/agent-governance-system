@@ -14,7 +14,7 @@ import os
 from pathlib import Path
 
 # Configuration
-BRIDGE_URL = "http://127.0.0.1:4000/terminal"
+BRIDGE_URL = "http://127.0.0.1:4001/terminal"
 
 def load_json(path):
     with open(path, 'r', encoding='utf-8') as f:
