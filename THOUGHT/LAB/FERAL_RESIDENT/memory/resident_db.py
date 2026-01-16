@@ -141,6 +141,25 @@ class ResidentDB:
     -- Index for link lookups
     CREATE INDEX IF NOT EXISTS idx_resident_links_type ON resident_links(link_type);
     CREATE INDEX IF NOT EXISTS idx_resident_links_source ON resident_links(source_hash);
+
+    -- Memories table: persistent memory history for GeometricMemory
+    -- Stores each memory entry that survives consolidation
+    CREATE TABLE IF NOT EXISTS memories (
+        memory_id TEXT PRIMARY KEY,
+        thread_id TEXT NOT NULL,
+        text TEXT NOT NULL,
+        interaction_hash TEXT NOT NULL,
+        mind_hash TEXT,
+        Df REAL,
+        distance_from_start REAL,
+        memory_index INTEGER,
+        created_at TEXT NOT NULL,
+        FOREIGN KEY (thread_id) REFERENCES threads(thread_id)
+    );
+
+    -- Index for thread lookups and ordering
+    CREATE INDEX IF NOT EXISTS idx_memories_thread ON memories(thread_id);
+    CREATE INDEX IF NOT EXISTS idx_memories_created ON memories(thread_id, created_at);
     """
 
     def __init__(self, db_path: str = "feral_resident.db"):
@@ -517,6 +536,7 @@ class ResidentDB:
             'interaction_count': self.interaction_count(),
             'thread_count': len(self.list_threads()),
             'receipt_count': self.conn.execute("SELECT COUNT(*) FROM receipts").fetchone()[0],
+            'memory_count': self.memory_count(),
             'db_size_bytes': self.db_path.stat().st_size if self.db_path.exists() else 0
         }
 
@@ -681,6 +701,154 @@ class ResidentDB:
                 (link_type,)
             ).fetchone()[0]
         return self.conn.execute("SELECT COUNT(*) FROM resident_links").fetchone()[0]
+
+    # =========================================================================
+    # Memory Operations (Persistent GeometricMemory)
+    # =========================================================================
+
+    def store_memory(
+        self,
+        thread_id: str,
+        text: str,
+        interaction_hash: str,
+        mind_hash: Optional[str] = None,
+        Df: Optional[float] = None,
+        distance_from_start: Optional[float] = None,
+        memory_index: Optional[int] = None
+    ) -> str:
+        """
+        Store a memory entry for persistent GeometricMemory.
+
+        Args:
+            thread_id: Thread this memory belongs to
+            text: The interaction text that was remembered
+            interaction_hash: Hash of the interaction text
+            mind_hash: Hash of the mind state after this memory
+            Df: Participation ratio after this memory
+            distance_from_start: Geodesic distance from initial state
+            memory_index: Index in the memory sequence
+
+        Returns:
+            memory_id: Unique ID for this memory
+        """
+        memory_id = str(uuid.uuid4())[:8]
+        now = datetime.now(timezone.utc).isoformat()
+
+        self.conn.execute(
+            """
+            INSERT INTO memories
+            (memory_id, thread_id, text, interaction_hash, mind_hash, Df,
+             distance_from_start, memory_index, created_at)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (memory_id, thread_id, text, interaction_hash, mind_hash, Df,
+             distance_from_start, memory_index, now)
+        )
+        self.conn.commit()
+
+        return memory_id
+
+    def get_memories(
+        self,
+        thread_id: str,
+        limit: Optional[int] = None
+    ) -> List[Dict]:
+        """
+        Get memories for a thread, ordered by creation time.
+
+        Args:
+            thread_id: Thread to get memories for
+            limit: Optional max number of memories (None = unlimited)
+
+        Returns:
+            List of memory dicts with all fields
+        """
+        if limit:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM memories
+                WHERE thread_id = ?
+                ORDER BY created_at ASC
+                LIMIT ?
+                """,
+                (thread_id, limit)
+            ).fetchall()
+        else:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM memories
+                WHERE thread_id = ?
+                ORDER BY created_at ASC
+                """,
+                (thread_id,)
+            ).fetchall()
+
+        return [
+            {
+                'memory_id': row['memory_id'],
+                'thread_id': row['thread_id'],
+                'text': row['text'],
+                'interaction_hash': row['interaction_hash'],
+                'mind_hash': row['mind_hash'],
+                'Df': row['Df'],
+                'distance_from_start': row['distance_from_start'],
+                'memory_index': row['memory_index'],
+                'created_at': row['created_at']
+            }
+            for row in rows
+        ]
+
+    def memory_count(self, thread_id: Optional[str] = None) -> int:
+        """Count memories (optionally for a specific thread)."""
+        if thread_id:
+            return self.conn.execute(
+                "SELECT COUNT(*) FROM memories WHERE thread_id = ?",
+                (thread_id,)
+            ).fetchone()[0]
+        return self.conn.execute("SELECT COUNT(*) FROM memories").fetchone()[0]
+
+    def clear_memories(self, thread_id: str):
+        """Clear all memories for a thread (used during consolidation rebuild)."""
+        self.conn.execute(
+            "DELETE FROM memories WHERE thread_id = ?",
+            (thread_id,)
+        )
+        self.conn.commit()
+
+    def replace_memories(self, thread_id: str, memories: List[Dict]):
+        """
+        Replace all memories for a thread atomically.
+
+        Used after consolidation to persist the pruned/rebuilt memory set.
+
+        Args:
+            thread_id: Thread to replace memories for
+            memories: List of memory dicts to store
+        """
+        # Use transaction for atomicity
+        cursor = self.conn.cursor()
+        try:
+            cursor.execute("DELETE FROM memories WHERE thread_id = ?", (thread_id,))
+
+            now = datetime.now(timezone.utc).isoformat()
+            for i, mem in enumerate(memories):
+                memory_id = str(uuid.uuid4())[:8]
+                cursor.execute(
+                    """
+                    INSERT INTO memories
+                    (memory_id, thread_id, text, interaction_hash, mind_hash, Df,
+                     distance_from_start, memory_index, created_at)
+                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    """,
+                    (memory_id, thread_id, mem.get('text', ''),
+                     mem.get('interaction_hash', ''), mem.get('mind_hash'),
+                     mem.get('Df'), mem.get('distance_from_start'), i, now)
+                )
+
+            self.conn.commit()
+        except Exception:
+            self.conn.rollback()
+            raise
 
 
 # ============================================================================

@@ -26,6 +26,7 @@
     }
   },
   "consolidation_window": 10,
+  "activity_log_max": 200,
   "smasher": {
     "enabled": false,
     "delay_ms": 1028,
@@ -42,7 +43,7 @@
     "accordion": {
       "_comment": "Section collapsed states (true = collapsed)",
       "mind": false,
-      "smasher": true,
+      "smasher": false,
       "daemon": false,
       "graph": true
     },

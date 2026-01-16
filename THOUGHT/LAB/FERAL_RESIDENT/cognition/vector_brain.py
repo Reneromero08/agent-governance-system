@@ -126,8 +126,8 @@ class VectorResident:
         else:
             self.standing_orders = "You are a feral resident intelligence."
 
-        # Core components
-        self.store = VectorStore(self.db_path)
+        # Core components (thread_id enables memory persistence)
+        self.store = VectorStore(self.db_path, thread_id=thread_id)
         self.diffusion = SemanticDiffusion(self.store)
         self.reasoner = self.store.reasoner
 

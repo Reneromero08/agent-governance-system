@@ -49,20 +49,28 @@ class VectorStore:
         metrics = store.get_metrics()
     """
 
-    def __init__(self, db_path: str = "feral_resident.db"):
+    def __init__(self, db_path: str = "feral_resident.db", thread_id: Optional[str] = None):
         """
         Initialize vector store with database backing.
 
         Args:
             db_path: Path to SQLite database
+            thread_id: Optional thread ID for memory persistence.
+                       If provided, memories are persisted to DB and
+                       loaded on startup.
         """
         self.db = ResidentDB(db_path)
         self.memory = GeometricMemory()
         self.reasoner = self.memory.reasoner
+        self.thread_id = thread_id
 
         # Cache for quick vector lookups
         self._vector_cache: Dict[str, GeometricState] = {}
         self._cache_limit = 1000
+
+        # Load memories from DB if thread_id provided
+        if thread_id:
+            self._load_memories_from_db()
 
     def close(self):
         """Close database connection"""
@@ -416,6 +424,9 @@ class VectorStore:
 
             self._cache_state(vector_id, self.memory.mind_state)
 
+        # Persist memory entry to DB for recovery on restart
+        self._persist_memory(text, receipt)
+
         return receipt
 
     def recall(
@@ -541,6 +552,67 @@ class VectorStore:
         """Clear in-memory state (not database)"""
         self.memory.clear()
         self._vector_cache.clear()
+
+    # =========================================================================
+    # Memory Persistence
+    # =========================================================================
+
+    def _load_memories_from_db(self):
+        """
+        Load memories from database and rebuild mind state.
+
+        Called on init if thread_id is provided.
+        Replays all stored memories to reconstruct the GeometricMemory state.
+        """
+        if not self.thread_id:
+            return
+
+        memories = self.db.get_memories(self.thread_id)
+        if not memories:
+            return
+
+        # Clear any existing in-memory state
+        self.memory.clear()
+
+        # Replay memories to rebuild mind state
+        for mem in memories:
+            self.memory.remember(mem['text'])
+
+        # Log recovery
+        print(f"[VectorStore] Loaded {len(memories)} memories from DB for thread {self.thread_id}")
+
+    def _persist_memory(self, text: str, receipt: Dict):
+        """
+        Persist a memory entry to the database.
+
+        Args:
+            text: The text that was remembered
+            receipt: Receipt from GeometricMemory.remember()
+        """
+        if not self.thread_id:
+            return
+
+        self.db.store_memory(
+            thread_id=self.thread_id,
+            text=text,
+            interaction_hash=receipt.get('interaction_hash', ''),
+            mind_hash=receipt.get('mind_hash'),
+            Df=receipt.get('Df'),
+            distance_from_start=receipt.get('distance_from_start'),
+            memory_index=receipt.get('memory_index')
+        )
+
+    def sync_memories_to_db(self):
+        """
+        Sync current in-memory state to database.
+
+        Replaces all DB memories with current memory_history.
+        Used after consolidation/pruning to persist the new state.
+        """
+        if not self.thread_id:
+            return
+
+        self.db.replace_memories(self.thread_id, self.memory.memory_history)
 
     # =========================================================================
     # Paper Index Integration

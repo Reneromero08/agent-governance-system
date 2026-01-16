@@ -168,7 +168,7 @@ class FeralDaemon:
     """
 
     VERSION = "2.1.0-q46"  # Updated for Three Laws of Geometric Stability
-    MAX_ACTIVITY_LOG = 1000
+    MAX_ACTIVITY_LOG = 200  # Default, configurable via config.json activity_log_max
     CONFIG_FILE = FERAL_PATH / "config.json"
 
     _config_mtime: float = 0.0  # Track file modification time
@@ -221,6 +221,13 @@ class FeralDaemon:
         # Debug settings
         self._debug_verbose = cfg.get('debug', {}).get('verbose', False)
         self._debug_log_threshold = cfg.get('debug', {}).get('log_threshold_changes', True)
+
+        # Activity log size (recreate deque if maxlen changed)
+        new_max = cfg.get('activity_log_max', self.MAX_ACTIVITY_LOG)
+        if hasattr(self, 'activity_log') and self.activity_log.maxlen != new_max:
+            # Preserve existing items, capped to new max
+            old_items = list(self.activity_log)
+            self.activity_log = deque(old_items[-new_max:], maxlen=new_max)
 
     def __init__(
         self,
