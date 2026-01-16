@@ -1,0 +1,165 @@
+{
+  "version": "1.0.0",
+  "description": "Ground truth test cases for Cassette Network retrieval validation",
+  "created_at": "2026-01-16",
+  "corpus_source": "NAVIGATION/CORTEX/cassettes/canon.db",
+  "notes": [
+    "Each test case has known correct chunks that MUST be retrieved",
+    "Required concepts verify semantic understanding, not keyword matching",
+    "Forbidden concepts verify the system avoids false positives",
+    "min_recall is the fraction of expected_chunks that must be found"
+  ],
+  "test_cases": [
+    {
+      "id": "GT-001",
+      "query": "What are the system invariants that must never be violated?",
+      "expected_chunks": [
+        "6bc45779152360f68f6d72227ab61e3f9373cc9b451ff41ecc453aebfe3b361e",
+        "bfd5a1b2a8cd97f396095ef16ae48f65755747d1d0b07a5ffb1632fa4f4a2ef5"
+      ],
+      "required_concepts": ["invariant", "violation"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve INVARIANTS.md chunks about system invariants",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-002",
+      "query": "How do I bootstrap a new AI agent in this system?",
+      "expected_chunks": [
+        "04b0a9ab8d530edc207b59fce8ac2e018c58d9faa24e757c38268a386a02efaf",
+        "99f85ba897d28ec202dfd07abfb7e361ad4d7fc91658b587d6f08b41bf447443"
+      ],
+      "required_concepts": ["genesis", "prompt"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve GENESIS.md about agent bootstrapping",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-003",
+      "query": "What rules govern how contracts can be changed?",
+      "expected_chunks": [
+        "00993a8c4a351abcb5dc9ba67d6d5f5718cc9ad80753864265c2896b79fd748f",
+        "3a8cb4988098eb19489fa968dfbb27cd1f0a9b5737c6934a79656b58eebec610"
+      ],
+      "required_concepts": ["contract", "change"],
+      "forbidden_concepts": ["delete", "remove"],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve CONTRACT.md change ceremony rules",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-004",
+      "query": "How does the catalytic computing model ensure data restoration?",
+      "expected_chunks": [
+        "6869dd574d24be20",
+        "6c018ba2ed8ee3d1"
+      ],
+      "required_concepts": ["catalytic", "restore"],
+      "forbidden_concepts": ["delete"],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve CATALYTIC_COMPUTING.md restore guarantee pattern",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-005",
+      "query": "What is the verification protocol for checking system integrity?",
+      "expected_chunks": [
+        "0de34223bb4ee2e2cc5b1938cc3989cc6fe52f84c58fc217016ffb9893efa4ee",
+        "58d3a8cba06ac84a87d132f02471def10d9cb44ab0d131ce54851e5afbf2e43d"
+      ],
+      "required_concepts": ["verification", "chain"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve SPECTRUM-03 chain verification or verification protocol",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-006",
+      "query": "What happens when an invariant is violated and how do I recover?",
+      "expected_chunks": [
+        "249438191df0019f5b9b6dc2b7d9ffeb66f5c7e7f03890a1f5ec3d5b5b36d9f3",
+        "963dc98528b87e00eb21bac3cd1519be5253e0ea444c983afad1d5220dfa635c"
+      ],
+      "required_concepts": ["invariant", "violation", "recovery"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve INVARIANTS.md recovery and remediation section",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-007",
+      "query": "What are the non-negotiable rules in the canon contract?",
+      "expected_chunks": [
+        "4a616337cccbfb86b898660d018e9c3a7a0c603318c388a0db3c06eb483eeb8b"
+      ],
+      "required_concepts": ["non-negotiable", "rule"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve CONTRACT.md non-negotiable rules section",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-008",
+      "query": "How is the authority gradient structured in this governance system?",
+      "expected_chunks": [
+        "ae7ca6af3cf7610a4aae51ff2ef6d827b56d483259c9d038ffd1ebc52a5a649d"
+      ],
+      "required_concepts": ["authority", "gradient"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve CONTRACT.md authority gradient section",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-009",
+      "query": "What cryptographic methods ensure data integrity in the system?",
+      "expected_chunks": [
+        "50c11cdb0219a96e"
+      ],
+      "required_concepts": ["cryptographic", "hash"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve CATALYTIC_COMPUTING.md cryptographic binding section",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-010",
+      "query": "What is the compressed version of the genesis prompt?",
+      "expected_chunks": [
+        "467acfb705e77d8a316a3c442f1805e33bda89a248ac326133c8c804e0e6a2b6",
+        "af49bc47ceb7788ec96d8b7838b8c7df440a538072d8eab7464732e9dcc57ec8"
+      ],
+      "required_concepts": ["compressed", "genesis"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve GENESIS_COMPACT.md compressed prompt",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-011",
+      "query": "What formal model from complexity theory underlies catalytic computing?",
+      "expected_chunks": [
+        "f8b5d46c03edc3e2"
+      ],
+      "required_concepts": ["complexity", "formal"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve CATALYTIC_COMPUTING.md formal model section",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-012",
+      "query": "Where are receipts stored and how do I access them?",
+      "expected_chunks": [
+        "769663b13e0100f2a477546f6cd6f3a686b7a313cf64d157e8381af4147e08b2"
+      ],
+      "required_concepts": ["receipt", "live"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve INVARIANTS.md section about where receipts live",
+      "difficulty": "medium"
+    }
+  ]
+}

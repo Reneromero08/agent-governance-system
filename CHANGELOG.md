@@ -6,6 +6,31 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.13] - 2026-01-16
+
+### Added
+- **Phase 6.4.12 Rigorous Cassette Network Test Suite** - Scientific validation replacing keyword benchmarks
+  - `CAPABILITY/TESTBENCH/cassette_network/adversarial/test_negative_controls.py` - Negative control and semantic confuser tests
+  - `CAPABILITY/TESTBENCH/cassette_network/ground_truth/test_retrieval_accuracy.py` - Ground truth retrieval validation
+  - `CAPABILITY/TESTBENCH/cassette_network/determinism/test_determinism.py` - Determinism and reproducibility tests
+  - `CAPABILITY/TESTBENCH/cassette_network/adversarial/fixtures/negative_controls.json` - 15 negative test cases calibrated for all-MiniLM-L6-v2
+  - `CAPABILITY/TESTBENCH/cassette_network/ground_truth/fixtures/retrieval_gold_standard.json` - 12 ground truth Q&A pairs with chunk hashes
+  - `CAPABILITY/TESTBENCH/cassette_network/adversarial/fixtures/semantic_confusers.json` - 10 vocabulary disambiguation test pairs
+
+### Changed
+- **Test infrastructure switched to GeometricCassetteNetwork** - Uses real vector embeddings instead of FTS text matching
+  - E-score similarity (Born rule inner product) replaces binary text matches
+  - Thresholds empirically calibrated for all-MiniLM-L6-v2 embedding model
+  - Tests now expose real system weaknesses: vocabulary overlap, false positives on technical terms
+
+### Test Results
+- Initial run: 25 passed, 2 xfailed (known failures), 2 skipped, 7 failed
+- **Known failures documented:** XSS payloads (0.487 similarity), destructive commands (0.565), random numbers (0.46)
+- **Ground truth: 50% pass rate** - Exposes chunk hash mismatches and forbidden concept leakage
+- **Semantic confusers: 8 false positives** - System struggles with vocabulary in different contexts
+
+---
+
 ## [3.8.12] - 2026-01-16
 
 ### Added

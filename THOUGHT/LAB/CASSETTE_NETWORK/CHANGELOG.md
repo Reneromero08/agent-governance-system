@@ -4,6 +4,69 @@ Research changelog for Cassette Network Phase 6.
 
 ---
 
+## [5.2.0] - 2026-01-16
+
+### Phase 6.4.12: Rigorous Test Suite for Cassette Network
+
+**Goal:** Replace keyword-matching benchmarks with rigorous tests that prove semantic search correctness
+
+**Problem Identified:**
+Previous Phase 6.4 benchmarks had critical validity issues:
+- Keyword matching at 50% threshold (tested vocabulary, not semantic understanding)
+- Verification hits missing: 2/3 queries failed to find expected files
+- Threshold gaming: lowered min_similarity to 0.0 to get any results
+- SQL injection negative control failed with 0.536 similarity
+- Token counting != task preservation proof
+
+**Solution Implemented:**
+
+#### Test Architecture
+Created comprehensive test suite in `CAPABILITY/TESTBENCH/cassette_network/`:
+- **Ground truth tests**: Known correct answers with chunk hash validation
+- **Negative controls**: Queries that MUST be rejected
+- **Semantic confusers**: Disambiguation between similar vocabulary
+- **Determinism tests**: Reproducibility validation
+- **Security vectors**: Attack payload rejection
+
+#### Test Infrastructure
+- **Switched to GeometricCassetteNetwork**: Uses real vector embeddings (all-MiniLM-L6-v2)
+- **E-score similarity**: Born rule inner product (0.0-1.0) instead of FTS text matching
+- **Empirical threshold calibration**: Based on actual embedding model behavior
+- **Fixture-driven**: JSON test cases with expected outcomes
+
+#### Files Created
+1. `test_negative_controls.py`: Negative control and semantic confuser tests
+2. `test_retrieval_accuracy.py`: Ground truth retrieval validation
+3. `test_determinism.py`: Determinism and reproducibility tests
+4. `negative_controls.json`: 15 negative test cases calibrated for all-MiniLM-L6-v2
+5. `retrieval_gold_standard.json`: 12 ground truth Q&A pairs with chunk hashes
+6. `semantic_confusers.json`: 10 vocabulary disambiguation test pairs
+
+#### Test Results (Initial Run)
+- **25 passed**, 2 xfailed (known failures), 2 skipped, **7 failed**
+- Tests successfully expose real system weaknesses
+
+**Known Failures (Documented):**
+- NC-006: `rm -rf /` destructive command matches shell content (0.565 > 0.40)
+- NC-009: XSS payload `<script>alert()` matches code content (0.487 > 0.35)
+- NC-012: Random numbers match version strings (0.46 > 0.50)
+
+**Ground Truth Issues:**
+- 50% pass rate (6/12 test cases)
+- Some expected chunk hashes from canon.db don't match geometric_index doc_ids
+- Forbidden concepts appearing in results ("delete" in contract change docs)
+
+**Semantic Confuser Issues (8 false positives):**
+- "restore iPhone from backup" → matches governance "restore" (0.456)
+- "compress images for website" → matches compression docs (0.558)
+- "verify email address" → matches verification protocols (0.411)
+- System struggles with vocabulary overlap in different contexts
+
+**Key Achievement:**
+Tests now prove semantic search WORKS and FAILS in measurable ways, replacing arbitrary keyword metrics with scientific validation.
+
+---
+
 ## [5.1.0] - 2026-01-16
 
 ### Phase 6.4: Compression Validation - COMPLETE
