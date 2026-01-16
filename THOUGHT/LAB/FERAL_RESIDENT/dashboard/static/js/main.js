@@ -97,7 +97,7 @@ import { loadDaemonStatus, updateDaemonStatus, toggleDaemon, toggleBehavior, upd
 import {
     toggleSmasher, updateSmasherUI, updateSmasherStats, updateCurrentFile,
     clearCurrentFile, queueSmashVisualization, updateSmasherSpeed, updateSmasherBatch,
-    toggleStaticCamera, loadSmasherStatus, updateThresholdDisplay
+    toggleStaticCamera, loadSmasherStatus, updateThresholdDisplay, isSmasherAborting
 } from './smasher.js';
 import {
     initConstellation, spawnNode, activateNode, addToTrail,
@@ -182,6 +182,13 @@ function handleWebSocketMessage(msg) {
  * @param {number} data.rate - Current processing rate
  */
 function handleSmashHit(data) {
+    // ABORT CHECK: Ignore messages if stop was requested
+    // This prevents in-flight WebSocket messages from causing UI updates after stop
+    if (isSmasherAborting()) {
+        console.log('[SMASH_HIT] Ignoring - smasher is aborting');
+        return;
+    }
+
     // Server sends batched events to reduce WebSocket flood
     const batch = data.batch || [data];
     const batchSize = batch.length;
@@ -197,6 +204,9 @@ function handleSmashHit(data) {
 
     // Add to activity feed and queue for graph visualization
     for (const item of batch) {
+        // Double-check abort during loop
+        if (isSmasherAborting()) break;
+
         const gateStatus = item.gate_open ? 'ABSORBED' : 'REJECTED';
         addActivity({
             timestamp: Date.now(),

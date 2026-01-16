@@ -206,6 +206,10 @@ export const CONFIG = {
         QUEUE_DROP_PERCENT: 0.2,         // Default: 0.2 (drop 20% when overflow)
         MAX_BATCH_PER_FRAME: 15,         // Default: 15 (items processed per animation frame)
 
+        // ----- GRAPH UPDATE THROTTLE -----
+        // Prevents main thread blocking from too-frequent graph updates
+        GRAPH_UPDATE_THROTTLE_MS: 100,   // Default: 100 (min ms between graph.graphData calls)
+
         // ----- NEW NODE POSITIONING -----
         // Where to place newly discovered nodes
         ANCHOR_OFFSET_BASE: 15,          // Default: 15 (min offset from anchor)

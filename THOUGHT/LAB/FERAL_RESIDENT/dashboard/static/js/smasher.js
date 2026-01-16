@@ -50,6 +50,28 @@ let _lastAbsorbedCount = 0;
 // Debouncing: Prevent rapid toggle clicks from causing race conditions
 let _smasherTogglePending = false;
 
+// ABORT FLAG: When true, ignore all incoming smash_hit messages
+// This prevents queued WebSocket messages from causing updates after stop
+let _smasherAborting = false;
+
+// Timestamp of last stop request - used to ignore stale messages
+let _stopRequestTime = 0;
+
+// RAF handle for cancellation
+let _smashRafHandle = null;
+
+// Graph update throttling - prevents main thread blocking
+let _lastGraphUpdateTime = 0;
+let _pendingGraphUpdate = null;  // Stores pending graph data for deferred update
+
+/**
+ * Check if smasher is currently aborting (stop was requested)
+ * Used by main.js to filter incoming WebSocket messages
+ */
+export function isSmasherAborting() {
+    return _smasherAborting;
+}
+
 // =============================================================================
 // SECTION 2: TOGGLE/START/STOP CONTROLS
 // =============================================================================
@@ -93,6 +115,12 @@ export async function toggleSmasher() {
  */
 export async function startSmasher() {
     try {
+        // Clear abort flag and state when starting
+        _smasherAborting = false;
+        _stopRequestTime = 0;
+        _pendingGraphUpdate = null;
+        _lastGraphUpdateTime = 0;
+
         clearCurrentFile();
         const res = await api('/smasher/start', {
             method: 'POST',
@@ -115,18 +143,36 @@ export async function startSmasher() {
 /**
  * Stop the particle smasher
  * Clears local queue immediately for responsive UI
+ *
+ * CRITICAL: Sets abort flag FIRST to ignore in-flight WebSocket messages
  */
 export async function stopSmasher() {
     try {
-        // Immediately clear local visualization queue to prevent lingering animations
+        // STEP 1: Set abort flag IMMEDIATELY - this causes all incoming messages to be ignored
+        _smasherAborting = true;
+        _stopRequestTime = Date.now();
+        console.log('[SMASHER] Stop requested, abort flag set');
+
+        // STEP 2: Cancel any pending RAF to stop queue processing
+        if (_smashRafHandle) {
+            cancelAnimationFrame(_smashRafHandle);
+            _smashRafHandle = null;
+        }
+
+        // STEP 3: Clear local visualization queue
         state.smashQueue.length = 0;
         state.setSmashRafPending(false);
 
-        await api('/smasher/stop', { method: 'POST' });
+        // STEP 4: Update UI immediately (before API call returns)
         state.setSmasherActive(false);
         updateSmasherUI();
-        hideSmasherCursor();  // Hide the 3D cursor when stopped
-        clearCurrentFile();   // Clear the current file display
+        hideSmasherCursor();
+        clearCurrentFile();
+
+        // STEP 5: Tell server to stop (non-blocking - UI already updated)
+        await api('/smasher/stop', { method: 'POST' });
+        console.log('[SMASHER] Server confirmed stop');
+
     } catch (e) {
         console.error('Failed to stop smasher:', e);
     }
@@ -255,8 +301,14 @@ export function clearCurrentFile() {
  * Uses requestAnimationFrame for smooth batched rendering
  *
  * @param {Object} data - Smash hit data from WebSocket
+ * @returns {boolean} true if queued, false if ignored (aborting)
  */
 export function queueSmashVisualization(data) {
+    // ABORT CHECK: Ignore all incoming messages when stop was requested
+    if (_smasherAborting) {
+        return false;
+    }
+
     // Prevent unbounded queue growth - drop oldest items if queue is full
     // TWEAK: Adjust CONFIG.SMASHER.MAX_QUEUE_SIZE and QUEUE_DROP_PERCENT
     if (state.smashQueue.length >= CONFIG.SMASHER.MAX_QUEUE_SIZE) {
@@ -270,8 +322,10 @@ export function queueSmashVisualization(data) {
     // Schedule processing if not already scheduled
     if (!state.smashRafPending) {
         state.setSmashRafPending(true);
-        requestAnimationFrame(processSmashQueue);
+        _smashRafHandle = requestAnimationFrame(processSmashQueue);
     }
+
+    return true;
 }
 
 /**
@@ -279,9 +333,18 @@ export function queueSmashVisualization(data) {
  * Called via requestAnimationFrame for smooth rendering
  *
  * TWEAK: CONFIG.SMASHER.MAX_BATCH_PER_FRAME controls items per frame
+ * TWEAK: CONFIG.SMASHER.GRAPH_UPDATE_THROTTLE_MS controls graph update frequency
  */
 function processSmashQueue() {
+    _smashRafHandle = null;
     state.setSmashRafPending(false);
+
+    // ABORT CHECK: Stop processing if abort flag is set
+    if (_smasherAborting) {
+        state.smashQueue.length = 0;  // Clear any remaining items
+        _pendingGraphUpdate = null;   // Clear pending graph updates
+        return;
+    }
 
     // Process up to MAX_BATCH_PER_FRAME items per frame
     // TWEAK: Adjust in config.js if animation is choppy (lower) or lagging (higher)
@@ -294,6 +357,12 @@ function processSmashQueue() {
 
     // Process each item in the batch
     for (const data of batch) {
+        // Double-check abort during processing
+        if (_smasherAborting) {
+            state.smashQueue.length = 0;
+            _pendingGraphUpdate = null;
+            return;
+        }
         const result = processSmashItem(data, graphData);
         if (result.updated) graphUpdated = true;
         if (result.node) {
@@ -305,20 +374,44 @@ function processSmashQueue() {
         }
     }
 
-    // Single graph update for entire batch (more efficient)
-    if (graphUpdated) {
-        state.Graph.graphData(graphData);
+    // THROTTLED GRAPH UPDATE: Only update graph if enough time has passed
+    // This prevents main thread blocking from too-frequent expensive updates
+    const now = Date.now();
+    const timeSinceLastUpdate = now - _lastGraphUpdateTime;
+    const throttleMs = CONFIG.SMASHER.GRAPH_UPDATE_THROTTLE_MS || 100;
+
+    if (graphUpdated && !_smasherAborting) {
+        if (timeSinceLastUpdate >= throttleMs) {
+            // Enough time passed - update immediately
+            state.Graph.graphData(graphData);
+            _lastGraphUpdateTime = now;
+            _pendingGraphUpdate = null;
+        } else {
+            // Too soon - defer update (will be applied on next frame that passes throttle)
+            _pendingGraphUpdate = graphData;
+        }
+    } else if (_pendingGraphUpdate && timeSinceLastUpdate >= throttleMs && !_smasherAborting) {
+        // Apply any pending deferred update
+        state.Graph.graphData(_pendingGraphUpdate);
+        _lastGraphUpdateTime = now;
+        _pendingGraphUpdate = null;
     }
 
-    // Flash all processed nodes
-    for (const item of nodesToFlash) {
-        flashNode(item.nodeId, item.gateOpen, item.E);
+    // Flash all processed nodes (skip if aborting)
+    if (!_smasherAborting) {
+        for (const item of nodesToFlash) {
+            flashNode(item.nodeId, item.gateOpen, item.E);
+        }
     }
 
-    // Continue processing if more items in queue
-    if (state.smashQueue.length > 0) {
+    // Continue processing if more items in queue (and not aborting)
+    if (state.smashQueue.length > 0 && !_smasherAborting) {
         state.setSmashRafPending(true);
-        requestAnimationFrame(processSmashQueue);
+        _smashRafHandle = requestAnimationFrame(processSmashQueue);
+    } else if (_pendingGraphUpdate && !_smasherAborting) {
+        // Queue is empty but we have a pending graph update - schedule one more frame
+        state.setSmashRafPending(true);
+        _smashRafHandle = requestAnimationFrame(processSmashQueue);
     }
 }
 

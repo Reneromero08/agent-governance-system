@@ -147,6 +147,7 @@ function updateBehaviorUI(name, shortName) {
  *
  * BUG FIX: Added debouncing and error handling to prevent race conditions
  * from rapid clicks and to gracefully handle API failures.
+ * Also updates UI immediately for responsive feedback.
  */
 export async function toggleDaemon() {
     // Debounce: Ignore clicks while a toggle operation is in progress
@@ -156,17 +157,51 @@ export async function toggleDaemon() {
     }
 
     _daemonTogglePending = true;
+    const wasRunning = state.daemonRunning;
+
     try {
-        if (state.daemonRunning) {
+        if (wasRunning) {
+            // STOP: Update UI immediately for responsive feedback
+            console.log('[DAEMON] Stop requested');
+            state.setDaemonRunning(false);
+            updateDaemonUIOnly(false);
+
             await api('/daemon/stop', { method: 'POST' });
+            console.log('[DAEMON] Server confirmed stop');
         } else {
+            // START: Update UI immediately
+            console.log('[DAEMON] Start requested');
+            state.setDaemonRunning(true);
+            updateDaemonUIOnly(true);
+
             await api('/daemon/start', { method: 'POST' });
+            console.log('[DAEMON] Server confirmed start');
         }
+        // Refresh full status from server to sync state
         await loadDaemonStatus();
     } catch (e) {
         console.error('Failed to toggle daemon:', e);
+        // Revert UI on error
+        state.setDaemonRunning(wasRunning);
+        updateDaemonUIOnly(wasRunning);
     } finally {
         _daemonTogglePending = false;
+    }
+}
+
+/**
+ * Update only the daemon button UI (not behaviors)
+ * Used for immediate feedback before server response
+ */
+function updateDaemonUIOnly(running) {
+    const btn = document.getElementById('daemon-toggle-btn');
+    const btnText = document.getElementById('daemon-btn-text');
+    if (running) {
+        btn.classList.add('active');
+        btnText.innerText = 'RUNNING';
+    } else {
+        btn.classList.remove('active');
+        btnText.innerText = 'START';
     }
 }
 

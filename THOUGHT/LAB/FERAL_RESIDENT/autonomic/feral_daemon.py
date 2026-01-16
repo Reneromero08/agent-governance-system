@@ -285,7 +285,10 @@ class FeralDaemon:
         self.smasher_config = SmasherConfig()
         self.smasher_stats = SmasherStats()
         self._smasher_task: Optional[asyncio.Task] = None
-        self._force_stop: bool = False  # Emergency stop flag
+        self._force_stop: bool = False  # Emergency stop flag for smasher
+
+        # Daemon stop flag - allows behaviors to abort quickly
+        self._daemon_stopping: bool = False
 
         # Synchronization lock for resident access (prevents smasher/daemon conflicts)
         # Created lazily when first accessed to ensure event loop exists
@@ -316,6 +319,31 @@ class FeralDaemon:
         if self._resident_lock is None:
             self._resident_lock = asyncio.Lock()
         return self._resident_lock
+
+    async def _acquire_lock_safe(self, timeout: float = 0.5) -> bool:
+        """
+        Try to acquire lock with timeout, checking for stop flags.
+
+        Returns True if lock acquired, False if timed out or stopping.
+        Caller MUST release the lock if True is returned.
+
+        This prevents behaviors from blocking indefinitely when smasher
+        is holding the lock and daemon stop is requested.
+        """
+        if self._daemon_stopping or self._force_stop:
+            return False
+
+        lock = self._get_lock()
+        try:
+            # Try to acquire with timeout
+            await asyncio.wait_for(lock.acquire(), timeout=timeout)
+            # Double-check stop flags after acquiring
+            if self._daemon_stopping or self._force_stop:
+                lock.release()
+                return False
+            return True
+        except asyncio.TimeoutError:
+            return False
 
     def _get_total_chunks(self) -> int:
         """Get total chunks in DB (cached to avoid expensive queries)."""
@@ -498,8 +526,8 @@ class FeralDaemon:
         if self._smasher_task:
             self._smasher_task.cancel()
             try:
-                # Wait max 1 second for task to finish
-                await asyncio.wait_for(self._smasher_task, timeout=1.0)
+                # Wait max 200ms for task to finish (was 1s, reduced for faster stop)
+                await asyncio.wait_for(self._smasher_task, timeout=0.2)
             except (asyncio.CancelledError, asyncio.TimeoutError):
                 pass
             self._smasher_task = None
@@ -715,6 +743,7 @@ class FeralDaemon:
         if self.running:
             return
 
+        self._daemon_stopping = False  # Clear stopping flag
         self.running = True
         self.started_at = time.time()
 
@@ -728,16 +757,20 @@ class FeralDaemon:
         if not self.running:
             return
 
+        # Set stopping flag FIRST - behaviors check this to abort quickly
+        self._daemon_stopping = True
         self.running = False
 
         if self._task:
             self._task.cancel()
             try:
-                await asyncio.wait_for(self._task, timeout=1.0)
+                # Reduced timeout from 1s to 200ms for faster stop
+                await asyncio.wait_for(self._task, timeout=0.2)
             except (asyncio.CancelledError, asyncio.TimeoutError):
                 pass
             self._task = None
 
+        self._daemon_stopping = False
         self._log_activity('daemon', "Daemon stopped",
                           uptime=time.time() - self.started_at if self.started_at else 0)
 
@@ -768,6 +801,10 @@ class FeralDaemon:
 
     async def _run_behavior(self, name: str):
         """Run a specific behavior."""
+        # Check if daemon is stopping - abort immediately
+        if self._daemon_stopping:
+            return
+
         if self._debug_verbose:
             self._log_activity('daemon', f"Running behavior: {name}")
         try:
@@ -779,6 +816,9 @@ class FeralDaemon:
                 await self._self_reflect()
             elif name == 'cassette_watch':
                 await self._watch_cassettes()
+        except asyncio.CancelledError:
+            # Propagate cancellation for clean shutdown
+            raise
         except Exception as e:
             self._log_activity('error', f"{name} failed: {e}")
 
@@ -848,7 +888,10 @@ class FeralDaemon:
             return
 
         # PHASE 2: Brief lock for gate check only (fast - just vector ops)
-        async with self._get_lock():
+        # Use safe lock acquisition that aborts if daemon is stopping
+        if not await self._acquire_lock_safe(timeout=0.5):
+            return  # Daemon stopping or lock busy - abort
+        try:
             # Measure E with current mind state (PURE GEOMETRY)
             mind_state = self.resident.store.get_mind_state()
             if mind_state is not None:
@@ -862,9 +905,15 @@ class FeralDaemon:
             gate_open = E > threshold
 
             Df_before = self.resident.mind_evolution.get('current_Df', 0)
+        finally:
+            self._get_lock().release()
 
         # IMPORTANT: Release lock before LLM call (which takes 2-5 seconds)
         if gate_open:
+            # Check if daemon is stopping before expensive LLM call
+            if self._daemon_stopping:
+                return
+
             # HIGH RESONANCE: Absorb into mind (LLM call outside lock)
             result = self.resident.think(f"[Paper: {paper_name}] {chunk_text}")
             Df_after = self.resident.mind_evolution.get('current_Df', 0)
@@ -914,7 +963,10 @@ class FeralDaemon:
         to find the "center of mass" of recent thoughts.
         """
         # LOCK: Brief lock for reading state
-        async with self._get_lock():
+        # Use safe lock acquisition that aborts if daemon is stopping
+        if not await self._acquire_lock_safe(timeout=0.5):
+            return  # Daemon stopping or lock busy - abort
+        try:
             try:
                 recent = self.resident.get_recent_interactions(limit=self.consolidation_window)
             except Exception:
@@ -952,11 +1004,17 @@ class FeralDaemon:
                 sample_chunks = random.sample(paper_chunks, min(20, len(paper_chunks))) if paper_chunks else []
             except Exception:
                 sample_chunks = []
+        finally:
+            self._get_lock().release()
 
         # IMPORTANT: Run embeddings OUTSIDE lock (same pattern as smasher fix)
         patterns = []
         loop = asyncio.get_event_loop()
         for chunk in sample_chunks:
+            # Check if daemon is stopping - abort early
+            if self._daemon_stopping:
+                return
+
             # Embedding outside lock - this is the slow part
             chunk_text = chunk.get('content', '')[:200]
             chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
@@ -972,6 +1030,10 @@ class FeralDaemon:
 
             # Yield between embeddings to let smasher run
             await asyncio.sleep(0)
+
+        # Don't log if we're stopping
+        if self._daemon_stopping:
+            return
 
         self._log_activity('consolidate',
                           f"Blended {len(recent_indices)} memories (Df={blended.Df:.1f})",
@@ -1008,7 +1070,10 @@ class FeralDaemon:
         Navigate toward unexplored regions of semantic space.
         """
         # LOCK: Brief lock for reading state and computing geodesic
-        async with self._get_lock():
+        # Use safe lock acquisition that aborts if daemon is stopping
+        if not await self._acquire_lock_safe(timeout=0.5):
+            return  # Daemon stopping or lock busy - abort
+        try:
             mind_state = self.resident.store.get_mind_state()
             if mind_state is None:
                 self._log_activity('reflect', "No mind state for geometric reflection")
@@ -1050,11 +1115,17 @@ class FeralDaemon:
                 sample_chunks = random.sample(paper_chunks, min(10, len(paper_chunks))) if paper_chunks else []
             except Exception:
                 sample_chunks = []
+        finally:
+            self._get_lock().release()
 
         # IMPORTANT: Run embeddings OUTSIDE lock (same pattern as smasher fix)
         resonant_concepts = []
         loop = asyncio.get_event_loop()
         for chunk in sample_chunks:
+            # Check if daemon is stopping - abort early
+            if self._daemon_stopping:
+                return
+
             # Embedding outside lock - this is the slow part
             chunk_text = chunk.get('content', '')[:200]
             chunk_state = await loop.run_in_executor(None, self._embed_chunk_sync, chunk_text)
@@ -1068,6 +1139,10 @@ class FeralDaemon:
             # Yield between embeddings to let smasher run
             await asyncio.sleep(0)
 
+        # Don't log if we're stopping
+        if self._daemon_stopping:
+            return
+
         self._log_activity('reflect',
                           f"Geodesic step: Df {Df_before:.1f} -> {Df_after:.1f}",
                           mode='geometric',
@@ -1080,12 +1155,21 @@ class FeralDaemon:
     async def _reflect_with_llm(self):
         """LLM-assisted reflection for deeper questions."""
         # LOCK: Only for reading recent interactions (NOT for LLM call)
-        async with self._get_lock():
+        # Use safe lock acquisition that aborts if daemon is stopping
+        if not await self._acquire_lock_safe(timeout=0.5):
+            return  # Daemon stopping or lock busy - abort
+        try:
             try:
                 recent = self.resident.get_recent_interactions(limit=5)
                 recent_topics = [r.get('input', '')[:50] for r in recent]
             except Exception:
                 recent_topics = []
+        finally:
+            self._get_lock().release()
+
+        # Check if daemon is stopping before building question
+        if self._daemon_stopping:
+            return
 
         # Build question outside lock
         if recent_topics:
@@ -1098,6 +1182,10 @@ class FeralDaemon:
                 "What connections am I missing?",
             ]
             question = f"[Deep Reflection] {random.choice(questions)}"
+
+        # Check again before expensive LLM call
+        if self._daemon_stopping:
+            return
 
         # IMPORTANT: LLM call outside lock (takes 2-5 seconds)
         result = self.resident.think(question)
