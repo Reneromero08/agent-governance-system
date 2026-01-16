@@ -155,7 +155,7 @@ class CrossModelLevelRepulsionResult:
     n_models: int
     mean_beta: float
     std_beta: float
-    models_gue_like: int  # Number with GUE-like spacing
+    models_goe_like: int  # Number with GUE-like spacing
     models_passing: int
     hypothesis_supported: bool
     verdict: str
@@ -242,29 +242,42 @@ def compute_eigenvalue_spacings(eigenvalues: np.ndarray) -> np.ndarray:
     return spacings
 
 
-def estimate_beta(spacings: np.ndarray) -> float:
+def estimate_beta(spacings: np.ndarray) -> Tuple[float, float, bool]:
     """
     Estimate level repulsion exponent beta from spacing distribution.
 
     For small s: P(s) ~ s^beta
     Fit by looking at fraction of small spacings.
+
+    CRITICAL LIMITATION (v3):
+        With small sample sizes (N < 200 spacings), this estimation method is
+        UNRELIABLE. True GOE data gives beta estimates of 0.4-0.7 instead of 1.0.
+        The method requires thousands of spacings for accurate estimates.
+
+    Returns:
+        Tuple of (beta_estimate, r_squared, is_reliable)
+        - beta_estimate: Estimated beta (clipped to [0, 1] since GOE max is 1)
+        - r_squared: R^2 of the linear fit (low R^2 = unreliable)
+        - is_reliable: False if sample size too small or poor fit
     """
+    MIN_SPACINGS_FOR_RELIABILITY = 200  # Need many spacings for accurate estimation
+
     if len(spacings) < 10:
-        return 0.0
+        return 0.0, 0.0, False
 
     # Normalize spacings
     spacings = spacings / np.mean(spacings)
 
     # Use method of ratios for small spacings
     # P(s < s0) ~ s0^(beta+1) for small s0
-    # FIXED (Sonnet-swarm review): s0=0.5 violates small-s assumption!
-    # Must stay in small-s regime where P(s) ~ s^beta approximation holds
-    s0_values = [0.02, 0.05, 0.08, 0.1]
+    s0_values = [0.1, 0.15, 0.2, 0.25]
     log_s0 = np.log(np.array(s0_values))
     log_cdf = []
+    fractions = []
 
     for s0 in s0_values:
         fraction = np.mean(spacings < s0)
+        fractions.append(fraction)
         if fraction > 0:
             log_cdf.append(np.log(fraction))
         else:
@@ -275,11 +288,29 @@ def estimate_beta(spacings: np.ndarray) -> float:
     # Linear fit: log(P) ~ (beta+1) * log(s0)
     # Slope = beta + 1
     if len(log_s0) >= 2:
-        slope = np.polyfit(log_s0, log_cdf, 1)[0]
+        coeffs = np.polyfit(log_s0, log_cdf, 1)
+        slope = coeffs[0]
+        intercept = coeffs[1]
         beta = slope - 1
-        return float(np.clip(beta, 0, 4))
 
-    return 0.0
+        # Compute R^2
+        y_pred = slope * log_s0 + intercept
+        ss_res = np.sum((log_cdf - y_pred) ** 2)
+        ss_tot = np.sum((log_cdf - np.mean(log_cdf)) ** 2)
+        r_squared = 1 - ss_res / ss_tot if ss_tot > 0 else 0.0
+
+        # Clip to [0, 1] - GOE maximum is 1, values above are estimation error
+        # Previous clip to 4 was wrong - beta > 1 is impossible for real symmetric matrices
+        beta = float(np.clip(beta, 0, 1.0))
+
+        # Reliability check: Need enough spacings AND good fit
+        is_reliable = (len(spacings) >= MIN_SPACINGS_FOR_RELIABILITY and
+                       r_squared > 0.8 and
+                       min(fractions) > 0.01)  # Need enough samples below each threshold
+
+        return beta, float(r_squared), is_reliable
+
+    return 0.0, 0.0, False
 
 
 def generate_goe_spacings(n: int, seed: int = 42) -> np.ndarray:
@@ -381,7 +412,7 @@ def test_level_repulsion_single_model(
     spacing_std = float(np.std(spacings))
 
     # Estimate beta (level repulsion exponent)
-    beta = estimate_beta(spacings)
+    beta, beta_r2, beta_reliable = estimate_beta(spacings)
 
     # Generate reference distributions - GOE (not GUE!) and Poisson
     goe_spacings = generate_goe_spacings(len(spacings), seed=Q51Seeds.NEGATIVE_CONTROL)
@@ -404,14 +435,26 @@ def test_level_repulsion_single_model(
     if verbose:
         print(f"\nLevel Repulsion Analysis:")
         print(f"  Beta estimate: {beta:.3f} (GOE = 1, Poisson = 0)")
+        print(f"  Beta fit R^2: {beta_r2:.3f}")
+        print(f"  Beta reliable: {beta_reliable} (need N>=200 spacings, R^2>0.8)")
+        print(f"  Spacings count: {len(spacings)}")
         print(f"  Mean spacing: {mean_spacing:.4f}")
         print(f"  Spacing std: {spacing_std:.4f}")
         print(f"  KS stat vs GOE: {ks_stat_goe:.4f}")
         print(f"  KS stat vs Poisson: {ks_stat_poisson:.4f}")
         print(f"  Closer to GOE: {goe_is_better}")
 
-    # Determine status - CORRECTED for GOE comparison
-    if beta > BETA_PASS and goe_is_better:
+    # Determine status
+    # CRITICAL v3: Beta estimation is UNRELIABLE with small samples
+    # With ~70 spacings, even true GOE gives beta estimates of 0.4-0.7
+    # We can only use KS test as primary metric
+    if not beta_reliable:
+        # Beta is unreliable, use only KS test
+        if goe_is_better:
+            status = "UNRELIABLE_KS_GOE"  # KS suggests GOE but beta unreliable
+        else:
+            status = "UNRELIABLE_KS_POISSON"  # KS suggests Poisson, beta unreliable
+    elif beta > BETA_PASS and goe_is_better:
         status = "PASS"
     elif beta > BETA_PARTIAL or goe_is_better:
         status = "PARTIAL"
@@ -449,13 +492,14 @@ def run_negative_control(verbose: bool = True) -> NegativeControlResult:
     # Generate uncorrelated (Poisson) eigenvalues
     eigenvalues = np.random.exponential(1.0, 100)
     spacings = compute_eigenvalue_spacings(eigenvalues)
-    beta = estimate_beta(spacings)
+    beta, beta_r2, beta_reliable = estimate_beta(spacings)
 
     # Should be near 0 (no repulsion)
     is_near_zero = beta < 0.5
 
     if verbose:
         print(f"    Beta estimate: {beta:.3f} (expected ~0)")
+        print(f"    Beta R^2: {beta_r2:.3f}, reliable: {beta_reliable}")
         status = "PASS" if is_near_zero else "FAIL"
         print(f"    Status: {status}")
 
@@ -463,7 +507,7 @@ def run_negative_control(verbose: bool = True) -> NegativeControlResult:
         name="poisson_eigenvalues_beta",
         test_passed=is_near_zero,
         expected_behavior="Uncorrelated eigenvalues should have beta ~ 0",
-        actual_behavior=f"Beta = {beta:.3f}",
+        actual_behavior=f"Beta = {beta:.3f} (R^2={beta_r2:.2f}, reliable={beta_reliable})",
         metric_value=beta,
         metric_threshold=0.5,
         notes="Poisson (uncorrelated) should show no level repulsion"
@@ -508,8 +552,11 @@ def test_level_repulsion_cross_model(
     mean_beta = float(np.mean(betas))
     std_beta = float(np.std(betas))
 
-    gue_like = sum(1 for r in results if r.gue_is_better)
+    goe_like = sum(1 for r in results if r.gue_is_better)
+    # Count different statuses
+    unreliable_count = sum(1 for r in results if r.status.startswith("UNRELIABLE"))
     passing = sum(1 for r in results if r.status == "PASS")
+    partial = sum(1 for r in results if r.status == "PARTIAL")
 
     # Bootstrap CI
     if len(betas) >= 3:
@@ -521,18 +568,30 @@ def test_level_repulsion_cross_model(
             confidence_level=Q51Thresholds.CONFIDENCE_LEVEL
         )
 
-    # Verdict - Based on MEAN BETA (level repulsion exponent)
-    # Beta > 0 indicates SOME eigenvalue correlations (not pure Poisson)
-    # Beta = 1 is full GOE, Beta = 0 is pure Poisson
-    # Intermediate values indicate partial structure
+    # Verdict
+    # CRITICAL v3: Beta estimation is UNRELIABLE with < 200 spacings
+    # With ~70 spacings (typical for our corpus), even true GOE gives beta = 0.4-0.7
+    # We must report this limitation honestly
     #
-    # HONEST REPORTING (Sonnet-swarm review):
-    # Report distance to both GOE and Poisson for transparency
+    # We can still use KS test as a secondary metric (closer to GOE or Poisson)
     dist_to_poisson = abs(mean_beta - 0.0)
     dist_to_goe = abs(mean_beta - 1.0)
     closer_to = "GOE" if dist_to_goe < dist_to_poisson else "Poisson"
 
-    if mean_beta > BETA_PASS:
+    if unreliable_count == len(results):
+        # All estimates are unreliable - verdict based on KS tests only
+        hypothesis_supported = None  # Cannot determine
+        if goe_like >= len(results) * 0.6:
+            verdict = (f"INCONCLUSIVE (UNRELIABLE BETA): All {len(results)} models have "
+                      f"insufficient spacings for reliable beta estimation. "
+                      f"KS tests suggest {goe_like}/{len(results)} models closer to GOE. "
+                      f"Mean beta = {mean_beta:.2f} (unreliable, capped at 1.0).")
+        else:
+            verdict = (f"INCONCLUSIVE (UNRELIABLE BETA): All {len(results)} models have "
+                      f"insufficient spacings for reliable beta estimation. "
+                      f"KS tests suggest {goe_like}/{len(results)} models closer to GOE. "
+                      f"Mean beta = {mean_beta:.2f} (unreliable, capped at 1.0).")
+    elif mean_beta > BETA_PASS:
         hypothesis_supported = True
         verdict = (f"CONFIRMED: Mean beta = {mean_beta:.2f} (dist to GOE: {dist_to_goe:.2f}, "
                    f"dist to Poisson: {dist_to_poisson:.2f}, closer to {closer_to})")
@@ -552,7 +611,7 @@ def test_level_repulsion_cross_model(
         n_models=len(results),
         mean_beta=mean_beta,
         std_beta=std_beta,
-        models_gue_like=gue_like,
+        models_goe_like=goe_like,
         models_passing=passing,
         hypothesis_supported=hypothesis_supported,
         verdict=verdict,
@@ -567,7 +626,8 @@ def test_level_repulsion_cross_model(
     print("=" * 70)
     print(f"\nModels tested: {len(results)}")
     print(f"Mean beta: {format_ci(beta_ci)} (GOE = 1, Poisson = 0)")
-    print(f"Models GOE-like: {gue_like}/{len(results)}")  # Keep var name, means GOE now
+    print(f"Models GOE-like (KS): {goe_like}/{len(results)}")
+    print(f"Models with unreliable beta: {unreliable_count}/{len(results)}")
     print(f"Models passing: {passing}/{len(results)}")
     print(f"\n{verdict}")
 

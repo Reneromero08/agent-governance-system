@@ -1,0 +1,124 @@
+{
+  "timestamp": "2026-01-16T09:33:50.340472Z",
+  "test": "Q51_BISPECTRUM",
+  "hypothesis": "Bispectrum recovers phases that agree with octant phases",
+  "per_model": [
+    {
+      "model_name": "all-MiniLM-L6-v2",
+      "n_samples": 64,
+      "mean_bicoherence": 0.16046457636138375,
+      "max_bicoherence": 0.740349250749915,
+      "phase_closure_error": 1.2229381087653834,
+      "octant_correlation": 0.03749157980908969,
+      "n_freq": 32,
+      "status": "PARTIAL",
+      "validation_warnings": [
+        "bispectrum_all-MiniLM-L6-v2: High condition number (4.73e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "all-mpnet-base-v2",
+      "n_samples": 64,
+      "mean_bicoherence": 0.18463133524051528,
+      "max_bicoherence": 1.0,
+      "phase_closure_error": 1.3059956486805366,
+      "octant_correlation": 0.061299008490309975,
+      "n_freq": 32,
+      "status": "PARTIAL",
+      "validation_warnings": [
+        "bispectrum_all-mpnet-base-v2: High condition number (1.29e+27), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "BAAI/bge-small-en-v1.5",
+      "n_samples": 64,
+      "mean_bicoherence": 0.2689016462473729,
+      "max_bicoherence": 1.0,
+      "phase_closure_error": 1.5578144587606613,
+      "octant_correlation": 0.23195428059605588,
+      "n_freq": 32,
+      "status": "PASS",
+      "validation_warnings": [
+        "bispectrum_BAAI/bge-small-en-v1.5: High condition number (1.31e+12), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_samples": 64,
+      "mean_bicoherence": 0.15381176204432226,
+      "max_bicoherence": 0.4352243474427725,
+      "phase_closure_error": 1.00356457813347,
+      "octant_correlation": 0.10793042900094318,
+      "n_freq": 32,
+      "status": "PARTIAL",
+      "validation_warnings": [
+        "bispectrum_sentence-transformers/all-MiniLM-L12-v2: High condition number (6.91e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "thenlper/gte-small",
+      "n_samples": 64,
+      "mean_bicoherence": 0.5336984058002336,
+      "max_bicoherence": 1.0,
+      "phase_closure_error": 1.5759363890557487,
+      "octant_correlation": 0.18180426362826266,
+      "n_freq": 32,
+      "status": "PASS",
+      "validation_warnings": [
+        "bispectrum_thenlper/gte-small: High condition number (1.29e+11), may be ill-conditioned"
+      ]
+    }
+  ],
+  "cross_model": {
+    "n_models": 5,
+    "mean_bicoherence": 0.2603015451387655,
+    "std_bicoherence": 0.14272580710076732,
+    "mean_correlation": 0.12409591230493226,
+    "mean_phase_closure": 1.33324983667916,
+    "models_passing": 2,
+    "hypothesis_supported": true,
+    "verdict": "CONFIRMED: Mean bicoherence 0.260 vs null 0.108 (2.4x, effect size 3.05 [LARGE])",
+    "bicoherence_ci": {
+      "mean": 0.2603015451387655,
+      "ci_lower": 0.16263680241038547,
+      "ci_upper": 0.40479498921006457,
+      "std": 0.14272580710076732,
+      "n_samples": 5,
+      "n_bootstrap": 1000,
+      "confidence_level": 0.95
+    },
+    "negative_controls": [
+      {
+        "name": "random_embeddings_bicoherence",
+        "test_passed": true,
+        "expected_behavior": "Random embeddings should have low bicoherence",
+        "actual_behavior": "Mean bicoherence = 0.1078",
+        "metric_value": 0.10783250958551813,
+        "metric_threshold": 0.15,
+        "notes": "Random phases should not show phase coupling"
+      }
+    ],
+    "test_metadata": {
+      "timestamp": "2026-01-16T09:33:50.327751Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "thresholds": {
+      "BICOHERENCE_PASS": 0.2,
+      "BICOHERENCE_PARTIAL": 0.1,
+      "PHASE_CLOSURE_PASS": 0.5,
+      "CORRELATION_PASS": 0.4
+    },
+    "seeds": {
+      "NEGATIVE_CONTROL": 7777
+    }
+  },
+  "result_hash": "52c680172a4c6b52"
+}

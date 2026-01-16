@@ -1,0 +1,448 @@
+{
+  "timestamp": "2026-01-16T09:41:09.784549Z",
+  "test": "Q51_METHOD_CONSISTENCY",
+  "hypothesis": "Different phase recovery methods should agree",
+  "per_model": [
+    {
+      "model_name": "all-MiniLM-L6-v2",
+      "n_samples": 62,
+      "pairwise_correlations": [
+        {
+          "method1": "pc12_angle",
+          "method2": "pc34_angle",
+          "circular_correlation": 0.05672912039588906,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.17416542490255427,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.043391284787767784,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.39198276137790483,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.16001320362592417,
+          "n_samples": 62
+        },
+        {
+          "method1": "hilbert",
+          "method2": "bispectrum",
+          "circular_correlation": 0.18497032117393816,
+          "n_samples": 62
+        }
+      ],
+      "correlation_matrix": [
+        [
+          1.0,
+          0.05672912039588906,
+          0.17416542490255427,
+          0.043391284787767784
+        ],
+        [
+          0.05672912039588906,
+          1.0,
+          0.39198276137790483,
+          0.16001320362592417
+        ],
+        [
+          0.17416542490255427,
+          0.39198276137790483,
+          1.0,
+          0.18497032117393816
+        ],
+        [
+          0.043391284787767784,
+          0.16001320362592417,
+          0.18497032117393816,
+          1.0
+        ]
+      ],
+      "mean_correlation": 0.1685420193773297,
+      "min_correlation": 0.043391284787767784,
+      "max_correlation": 0.39198276137790483,
+      "methods_connected": false,
+      "status": "PARTIAL",
+      "validation_warnings": [
+        "consistency_all-MiniLM-L6-v2: High condition number (3.15e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "all-mpnet-base-v2",
+      "n_samples": 62,
+      "pairwise_correlations": [
+        {
+          "method1": "pc12_angle",
+          "method2": "pc34_angle",
+          "circular_correlation": 0.16578508469191824,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.17481276527488615,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.0660161613530545,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.4388586569306465,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.03439275285061863,
+          "n_samples": 62
+        },
+        {
+          "method1": "hilbert",
+          "method2": "bispectrum",
+          "circular_correlation": 0.13964130639744526,
+          "n_samples": 62
+        }
+      ],
+      "correlation_matrix": [
+        [
+          1.0,
+          0.16578508469191824,
+          0.17481276527488615,
+          0.0660161613530545
+        ],
+        [
+          0.16578508469191824,
+          1.0,
+          0.4388586569306465,
+          0.03439275285061863
+        ],
+        [
+          0.17481276527488615,
+          0.4388586569306465,
+          1.0,
+          0.13964130639744526
+        ],
+        [
+          0.0660161613530545,
+          0.03439275285061863,
+          0.13964130639744526,
+          1.0
+        ]
+      ],
+      "mean_correlation": 0.1699177879164282,
+      "min_correlation": 0.03439275285061863,
+      "max_correlation": 0.4388586569306465,
+      "methods_connected": false,
+      "status": "PASS",
+      "validation_warnings": [
+        "consistency_all-mpnet-base-v2: High condition number (6.69e+26), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "BAAI/bge-small-en-v1.5",
+      "n_samples": 62,
+      "pairwise_correlations": [
+        {
+          "method1": "pc12_angle",
+          "method2": "pc34_angle",
+          "circular_correlation": 0.04265928177113418,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.09752990004844764,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.15518514424811083,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.4471765868801006,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.21193228079005463,
+          "n_samples": 62
+        },
+        {
+          "method1": "hilbert",
+          "method2": "bispectrum",
+          "circular_correlation": 0.1311518403709174,
+          "n_samples": 62
+        }
+      ],
+      "correlation_matrix": [
+        [
+          1.0,
+          0.04265928177113418,
+          0.09752990004844764,
+          0.15518514424811083
+        ],
+        [
+          0.04265928177113418,
+          1.0,
+          0.4471765868801006,
+          0.21193228079005463
+        ],
+        [
+          0.09752990004844764,
+          0.4471765868801006,
+          1.0,
+          0.1311518403709174
+        ],
+        [
+          0.15518514424811083,
+          0.21193228079005463,
+          0.1311518403709174,
+          1.0
+        ]
+      ],
+      "mean_correlation": 0.18093917235146087,
+      "min_correlation": 0.04265928177113418,
+      "max_correlation": 0.4471765868801006,
+      "methods_connected": false,
+      "status": "FAIL",
+      "validation_warnings": [
+        "consistency_BAAI/bge-small-en-v1.5: High condition number (1.85e+11), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_samples": 62,
+      "pairwise_correlations": [
+        {
+          "method1": "pc12_angle",
+          "method2": "pc34_angle",
+          "circular_correlation": 0.032733029400970136,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.2822224143225232,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.25840598471819887,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.3668198684933426,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.4068667053660811,
+          "n_samples": 62
+        },
+        {
+          "method1": "hilbert",
+          "method2": "bispectrum",
+          "circular_correlation": 0.1104648304520214,
+          "n_samples": 62
+        }
+      ],
+      "correlation_matrix": [
+        [
+          1.0,
+          0.032733029400970136,
+          0.2822224143225232,
+          0.25840598471819887
+        ],
+        [
+          0.032733029400970136,
+          1.0,
+          0.3668198684933426,
+          0.4068667053660811
+        ],
+        [
+          0.2822224143225232,
+          0.3668198684933426,
+          1.0,
+          0.1104648304520214
+        ],
+        [
+          0.25840598471819887,
+          0.4068667053660811,
+          0.1104648304520214,
+          1.0
+        ]
+      ],
+      "mean_correlation": 0.24291880545885622,
+      "min_correlation": 0.032733029400970136,
+      "max_correlation": 0.4068667053660811,
+      "methods_connected": true,
+      "status": "PARTIAL",
+      "validation_warnings": [
+        "consistency_sentence-transformers/all-MiniLM-L12-v2: High condition number (1.54e+26), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "thenlper/gte-small",
+      "n_samples": 62,
+      "pairwise_correlations": [
+        {
+          "method1": "pc12_angle",
+          "method2": "pc34_angle",
+          "circular_correlation": 0.07090379066004489,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.128823543610266,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc12_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.08498814104433852,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "hilbert",
+          "circular_correlation": 0.2495693024392794,
+          "n_samples": 62
+        },
+        {
+          "method1": "pc34_angle",
+          "method2": "bispectrum",
+          "circular_correlation": 0.159215025221185,
+          "n_samples": 62
+        },
+        {
+          "method1": "hilbert",
+          "method2": "bispectrum",
+          "circular_correlation": 0.016460043680266347,
+          "n_samples": 62
+        }
+      ],
+      "correlation_matrix": [
+        [
+          1.0,
+          0.07090379066004489,
+          0.128823543610266,
+          0.08498814104433852
+        ],
+        [
+          0.07090379066004489,
+          1.0,
+          0.2495693024392794,
+          0.159215025221185
+        ],
+        [
+          0.128823543610266,
+          0.2495693024392794,
+          1.0,
+          0.016460043680266347
+        ],
+        [
+          0.08498814104433852,
+          0.159215025221185,
+          0.016460043680266347,
+          1.0
+        ]
+      ],
+      "mean_correlation": 0.11832664110923002,
+      "min_correlation": 0.016460043680266347,
+      "max_correlation": 0.2495693024392794,
+      "methods_connected": false,
+      "status": "FAIL",
+      "validation_warnings": [
+        "consistency_thenlper/gte-small: High condition number (2.06e+11), may be ill-conditioned"
+      ]
+    }
+  ],
+  "cross_model": {
+    "n_models": 5,
+    "mean_correlation": 0.17612888524266102,
+    "std_correlation": 0.03980268833903065,
+    "models_passing": 1,
+    "hypothesis_supported": false,
+    "verdict": "FALSIFIED: Methods do not agree - phases may be artifacts",
+    "correlation_ci": {
+      "mean": 0.17612888524266102,
+      "ci_lower": 0.14089222301129617,
+      "ci_upper": 0.21564752162107187,
+      "std": 0.03980268833903065,
+      "n_samples": 5,
+      "n_bootstrap": 1000,
+      "confidence_level": 0.95
+    },
+    "method_summary": {
+      "pc12_angle": 0.12229007141534028,
+      "pc34_angle": 0.21570916339300625,
+      "hilbert": 0.22230997109030265,
+      "bispectrum": 0.14420633507199485
+    },
+    "negative_controls": [
+      {
+        "name": "random_embeddings_independent_pcs",
+        "test_passed": true,
+        "expected_behavior": "PC12-PC34 correlation should be < 0.15 for random data",
+        "actual_behavior": "PC12-PC34 correlation = 0.0621",
+        "metric_value": 0.06211484066105504,
+        "metric_threshold": 0.15,
+        "notes": "Truly independent PC pairs (no shared components) should have ~0 correlation for random data"
+      }
+    ],
+    "test_metadata": {
+      "timestamp": "2026-01-16T09:41:09.774551Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "methods": [
+      "pc12_angle",
+      "pc34_angle",
+      "hilbert",
+      "bispectrum"
+    ],
+    "thresholds": {
+      "MEAN_CORR_PASS": 0.5,
+      "MEAN_CORR_PARTIAL": 0.3,
+      "MIN_PAIR_CORR": 0.2
+    },
+    "seeds": {
+      "NEGATIVE_CONTROL": 7777
+    }
+  },
+  "result_hash": "67c0ff480b340904"
+}

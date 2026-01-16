@@ -1,0 +1,122 @@
+{
+  "timestamp": "2026-01-15T21:14:50.941640Z",
+  "test": "Q51_KRAMERS_KRONIG",
+  "hypothesis": "Embeddings satisfy K-K dispersion relations (analytic)",
+  "per_model": [
+    {
+      "model_name": "all-MiniLM-L6-v2",
+      "n_samples": 48,
+      "n_dims": 384,
+      "kk_error_real": 0.0721687819089708,
+      "kk_error_imag": 3.676458285782984e-16,
+      "kk_error_mean": 0.03608439095448558,
+      "reconstruction_quality": 0.9639156090455144,
+      "status": "PASS",
+      "validation_warnings": [
+        "kk_all-MiniLM-L6-v2: High condition number (8.55e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "all-mpnet-base-v2",
+      "n_samples": 48,
+      "n_dims": 768,
+      "kk_error_real": 0.051031033822361085,
+      "kk_error_imag": 3.812945439499633e-16,
+      "kk_error_mean": 0.025515516911180734,
+      "reconstruction_quality": 0.9744844830888193,
+      "status": "PASS",
+      "validation_warnings": [
+        "kk_all-mpnet-base-v2: High condition number (7.94e+25), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "BAAI/bge-small-en-v1.5",
+      "n_samples": 48,
+      "n_dims": 384,
+      "kk_error_real": 0.07216878067892316,
+      "kk_error_imag": 3.698498960309322e-16,
+      "kk_error_mean": 0.036084390339461765,
+      "reconstruction_quality": 0.9639156096605382,
+      "status": "PASS",
+      "validation_warnings": [
+        "kk_BAAI/bge-small-en-v1.5: High condition number (5.18e+12), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_samples": 48,
+      "n_dims": 384,
+      "kk_error_real": 0.07216878194301446,
+      "kk_error_imag": 3.7607980144419426e-16,
+      "kk_error_mean": 0.03608439097150742,
+      "reconstruction_quality": 0.9639156090284926,
+      "status": "PASS",
+      "validation_warnings": [
+        "kk_sentence-transformers/all-MiniLM-L12-v2: High condition number (1.17e+25), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "thenlper/gte-small",
+      "n_samples": 48,
+      "n_dims": 384,
+      "kk_error_real": 0.07216877770767656,
+      "kk_error_imag": 3.755495771102198e-16,
+      "kk_error_mean": 0.03608438885383847,
+      "reconstruction_quality": 0.9639156111461615,
+      "status": "PASS",
+      "validation_warnings": [
+        "kk_thenlper/gte-small: High condition number (1.19e+12), may be ill-conditioned"
+      ]
+    }
+  ],
+  "cross_model": {
+    "n_models": 5,
+    "mean_kk_error": 0.033970615606094795,
+    "std_kk_error": 0.0042275493474571,
+    "cv_kk_error": 12.444723982860705,
+    "models_passing": 5,
+    "hypothesis_supported": true,
+    "verdict": "CONFIRMED: Embeddings satisfy K-K relations (analytic)",
+    "kk_error_ci": {
+      "mean": 0.033970615606094795,
+      "ci_lower": 0.029743065985368487,
+      "ci_upper": 0.03608439083828955,
+      "std": 0.0042275493474571,
+      "n_samples": 5,
+      "n_bootstrap": 1000,
+      "confidence_level": 0.95
+    },
+    "negative_controls": [
+      {
+        "name": "non_analytic_kk_error",
+        "test_passed": true,
+        "expected_behavior": "Non-analytic signals should have high K-K error",
+        "actual_behavior": "Mean K-K error = 1.4205",
+        "metric_value": 1.4205311332276405,
+        "metric_threshold": 0.5,
+        "notes": "Independent real/imaginary parts violate K-K"
+      }
+    ],
+    "test_metadata": {
+      "timestamp": "2026-01-15T21:14:50.929760Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "thresholds": {
+      "KK_ERROR_PASS": 0.15,
+      "KK_ERROR_PARTIAL": 0.25,
+      "CV_THRESHOLD": 0.25
+    },
+    "seeds": {
+      "NEGATIVE_CONTROL": 7777
+    }
+  },
+  "result_hash": "64f6863d16a74e6b"
+}

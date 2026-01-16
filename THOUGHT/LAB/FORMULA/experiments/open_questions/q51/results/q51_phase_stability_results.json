@@ -1,0 +1,309 @@
+{
+  "timestamp": "2026-01-16T09:40:32.697362Z",
+  "test": "Q51_PHASE_STABILITY",
+  "hypothesis": "Phases are stable under noise (structural, not artifacts)",
+  "per_model": [
+    {
+      "model_name": "all-MiniLM-L6-v2",
+      "n_samples": 44,
+      "snr_results": [
+        {
+          "snr_db": 40.0,
+          "mean_phase_error": 0.0019154518758873703,
+          "std_phase_error": 0.00033950260001041656,
+          "octant_flip_rate": 0.0022727272727272726,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 30.0,
+          "mean_phase_error": 0.006039565488952228,
+          "std_phase_error": 0.0010458091325517204,
+          "octant_flip_rate": 0.013636363636363637,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 20.0,
+          "mean_phase_error": 0.0189723034799693,
+          "std_phase_error": 0.0030039399263889354,
+          "octant_flip_rate": 0.4204545454545454,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 10.0,
+          "mean_phase_error": 0.06351613294228822,
+          "std_phase_error": 0.0156778511425017,
+          "octant_flip_rate": 0.7704545454545454,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 6.0,
+          "mean_phase_error": 0.1003630634124391,
+          "std_phase_error": 0.019395979837916997,
+          "octant_flip_rate": 0.815909090909091,
+          "n_trials": 10
+        }
+      ],
+      "error_at_20db": 0.0189723034799693,
+      "power_law_alpha": 19.734594069223668,
+      "power_law_r2": 0.9998905976340235,
+      "decay_trend": "increasing",
+      "status": "PASS",
+      "validation_warnings": [
+        "stability_all-MiniLM-L6-v2: High condition number (1.68e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "all-mpnet-base-v2",
+      "n_samples": 44,
+      "snr_results": [
+        {
+          "snr_db": 40.0,
+          "mean_phase_error": 0.0011680346804719315,
+          "std_phase_error": 0.0001570442629019934,
+          "octant_flip_rate": 0.0,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 30.0,
+          "mean_phase_error": 0.003708861085039652,
+          "std_phase_error": 0.0004987379542585082,
+          "octant_flip_rate": 0.01818181818181818,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 20.0,
+          "mean_phase_error": 0.01193274205656116,
+          "std_phase_error": 0.0015846054027653796,
+          "octant_flip_rate": 0.22272727272727275,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 10.0,
+          "mean_phase_error": 0.04106925780438972,
+          "std_phase_error": 0.005004291801489749,
+          "octant_flip_rate": 0.4022727272727272,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 6.0,
+          "mean_phase_error": 0.07159245173090367,
+          "std_phase_error": 0.007405600886197587,
+          "octant_flip_rate": 0.5409090909090909,
+          "n_trials": 10
+        }
+      ],
+      "error_at_20db": 0.01193274205656116,
+      "power_law_alpha": 19.1085390791891,
+      "power_law_r2": 0.9993609850955504,
+      "decay_trend": "increasing",
+      "status": "PASS",
+      "validation_warnings": [
+        "stability_all-mpnet-base-v2: High condition number (1.36e+26), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "BAAI/bge-small-en-v1.5",
+      "n_samples": 44,
+      "snr_results": [
+        {
+          "snr_db": 40.0,
+          "mean_phase_error": 0.002864136928384141,
+          "std_phase_error": 0.0009012988531567482,
+          "octant_flip_rate": 0.020454545454545454,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 30.0,
+          "mean_phase_error": 0.009108887756802967,
+          "std_phase_error": 0.0028570069662018044,
+          "octant_flip_rate": 0.04090909090909091,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 20.0,
+          "mean_phase_error": 0.04042881719007719,
+          "std_phase_error": 0.019616394894824602,
+          "octant_flip_rate": 0.2681818181818182,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 10.0,
+          "mean_phase_error": 0.09572548920168301,
+          "std_phase_error": 0.02563802931315888,
+          "octant_flip_rate": 0.9045454545454545,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 6.0,
+          "mean_phase_error": 0.13637622660764456,
+          "std_phase_error": 0.02772112995511289,
+          "octant_flip_rate": 0.934090909090909,
+          "n_trials": 10
+        }
+      ],
+      "error_at_20db": 0.04042881719007719,
+      "power_law_alpha": 19.955076795222435,
+      "power_law_r2": 0.9906290884631836,
+      "decay_trend": "increasing",
+      "status": "PASS",
+      "validation_warnings": [
+        "stability_BAAI/bge-small-en-v1.5: High condition number (3.21e+11), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "sentence-transformers/all-MiniLM-L12-v2",
+      "n_samples": 44,
+      "snr_results": [
+        {
+          "snr_db": 40.0,
+          "mean_phase_error": 0.0015336457675262196,
+          "std_phase_error": 0.0001890143767926955,
+          "octant_flip_rate": 0.006818181818181818,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 30.0,
+          "mean_phase_error": 0.004849895688940996,
+          "std_phase_error": 0.0005986139380387339,
+          "octant_flip_rate": 0.02954545454545455,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 20.0,
+          "mean_phase_error": 0.015349654458088082,
+          "std_phase_error": 0.0019039270542502843,
+          "octant_flip_rate": 0.06818181818181818,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 10.0,
+          "mean_phase_error": 0.04908287817318562,
+          "std_phase_error": 0.005994672417743866,
+          "octant_flip_rate": 0.5022727272727273,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 6.0,
+          "mean_phase_error": 0.07878610020326701,
+          "std_phase_error": 0.009447881211926775,
+          "octant_flip_rate": 0.6522727272727273,
+          "n_trials": 10
+        }
+      ],
+      "error_at_20db": 0.015349654458088082,
+      "power_law_alpha": 19.88820834653908,
+      "power_law_r2": 0.9999865941792601,
+      "decay_trend": "increasing",
+      "status": "PASS",
+      "validation_warnings": [
+        "stability_sentence-transformers/all-MiniLM-L12-v2: High condition number (6.60e+24), may be ill-conditioned"
+      ]
+    },
+    {
+      "model_name": "thenlper/gte-small",
+      "n_samples": 44,
+      "snr_results": [
+        {
+          "snr_db": 40.0,
+          "mean_phase_error": 0.0032346455515932194,
+          "std_phase_error": 0.000214662991192258,
+          "octant_flip_rate": 0.05454545454545454,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 30.0,
+          "mean_phase_error": 0.010239739558613164,
+          "std_phase_error": 0.0006932213130160553,
+          "octant_flip_rate": 0.18863636363636366,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 20.0,
+          "mean_phase_error": 0.0325316908465342,
+          "std_phase_error": 0.0024090887367133845,
+          "octant_flip_rate": 0.48636363636363633,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 10.0,
+          "mean_phase_error": 0.10551803249795366,
+          "std_phase_error": 0.010016083637691681,
+          "octant_flip_rate": 0.8363636363636363,
+          "n_trials": 10
+        },
+        {
+          "snr_db": 6.0,
+          "mean_phase_error": 0.17791507876310725,
+          "std_phase_error": 0.02705076987582618,
+          "octant_flip_rate": 0.8704545454545455,
+          "n_trials": 10
+        }
+      ],
+      "error_at_20db": 0.0325316908465342,
+      "power_law_alpha": 19.61994983066292,
+      "power_law_r2": 0.9997883341125892,
+      "decay_trend": "increasing",
+      "status": "PASS",
+      "validation_warnings": [
+        "stability_thenlper/gte-small: High condition number (3.19e+11), may be ill-conditioned"
+      ]
+    }
+  ],
+  "cross_model": {
+    "n_models": 5,
+    "mean_error_at_20db": 0.023843041606245986,
+    "std_error_at_20db": 0.010847096642368905,
+    "mean_power_law_alpha": 19.661273624167443,
+    "models_passing": 5,
+    "hypothesis_supported": false,
+    "verdict": "INCONCLUSIVE: Negative control failed. Random data shows same error ratio (58.0x) as real data. This test measures PCA projection stability, not phase structure.",
+    "error_20db_ci": {
+      "mean": 0.023843041606245986,
+      "ci_lower": 0.014650216098876848,
+      "ci_upper": 0.03315017689466539,
+      "std": 0.010847096642368905,
+      "n_samples": 5,
+      "n_bootstrap": 1000,
+      "confidence_level": 0.95
+    },
+    "negative_controls": [
+      {
+        "name": "random_embeddings_flat",
+        "test_passed": false,
+        "expected_behavior": "Error ratio should be < 2.0x (no structure to preserve)",
+        "actual_behavior": "Error ratio = 57.99x",
+        "metric_value": 57.989551185534296,
+        "metric_threshold": 2.0,
+        "notes": "Random phases have no structure, so noise shouldn't systematically increase error"
+      }
+    ],
+    "test_metadata": {
+      "timestamp": "2026-01-16T09:40:32.665364Z",
+      "python_version": "3.11.6",
+      "numpy_version": "1.26.4",
+      "platform": "Windows-10-10.0.26100-SP0",
+      "scipy_version": "1.13.1",
+      "sklearn_version": "1.8.0",
+      "sentence_transformers_version": "3.3.1"
+    },
+    "result_hash": null
+  },
+  "hardening": {
+    "snr_levels": [
+      40,
+      30,
+      20,
+      10,
+      6
+    ],
+    "thresholds": {
+      "PHASE_ERROR_AT_20DB_PASS": 0.3,
+      "PHASE_ERROR_AT_20DB_PARTIAL": 0.5,
+      "POWER_LAW_ALPHA_PASS": 15.0
+    },
+    "seeds": {
+      "NEGATIVE_CONTROL": 7777
+    }
+  },
+  "result_hash": "9444038ef076f0da"
+}

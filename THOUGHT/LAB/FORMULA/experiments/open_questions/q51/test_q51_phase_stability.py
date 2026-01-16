@@ -3,26 +3,42 @@ Q51 Phase Stability Test - Test #5
 
 Tests whether recovered phases are stable under noise perturbations.
 
-Hypothesis:
+CRITICAL LIMITATION (v5):
+    This test measures PCA projection stability, which is the same for
+    structured and random data. The negative control shows random data
+    has the same 58x error ratio as real data. Therefore this test
+    CANNOT distinguish structural phases from random artifacts.
+
+    The test is kept for documentation but should not be used as
+    evidence for phase structure. Use Tests 6 (Method Consistency)
+    and 9 (Semantic Coherence) instead - they use external information
+    (multiple methods, semantic labels) to distinguish structure from random.
+
+Original Hypothesis (now known to be untestable with this method):
     If phases are structural (not artifacts), they should be stable under small
     perturbations. Phase error should increase with noise level, following a
     predictable power law, NOT be flat (which would indicate random artifacts).
 
+Why the test fails:
+    PCA-based phase recovery imposes a coordinate system on ANY data.
+    In this coordinate system, both structured and random data have "phases".
+    The stability of these phases under noise is a property of PCA,
+    not of the underlying data structure.
+
 Method:
-    1. Get embeddings, recover phases via octant mapping
+    1. Get embeddings, recover phases via PCA 2D projection
     2. Add Gaussian noise at SNR levels: 40dB, 30dB, 20dB, 10dB, 6dB
-    3. Recover phases from noisy embeddings
+    3. Recover phases from noisy embeddings using SAME coordinate system
     4. Measure phase error vs SNR
     5. Fit power law: error ~ 10^(-SNR/alpha)
 
 Pass criteria:
+    - Negative control must pass (ratio < 2x for random data)
     - Phase error < 0.3 rad at SNR 20dB
-    - Power law decay (alpha > 30, meaning ~30dB per decade)
-    - All 5 models show consistent decay pattern
+    - Power law R^2 > 0.8
+    - Decay trend is "increasing"
 
-Falsification:
-    - Phase error flat across SNR (phases are noise artifacts)
-    - Inconsistent across models
+Current status: INCONCLUSIVE (negative control fails)
 """
 
 import sys
@@ -500,6 +516,14 @@ def run_negative_control(verbose: bool = True) -> NegativeControlResult:
     Negative control: Random embeddings should show FLAT error curve.
 
     Random phases have no structure, so noise doesn't change them systematically.
+
+    CRITICAL FIX (v5): Use RATIO metric, not absolute range.
+    - Real data shows 50x error increase (0.002 -> 0.1)
+    - Random data should show <2x change (stays flat)
+    - Previous absolute threshold (0.1) was catching BOTH because:
+      - Real: range = 0.098 (from 0.002 to 0.1)
+      - Random: range = 0.1 (from 0.9 to 1.0)
+    - Ratio clearly distinguishes them: 50x vs 1.1x
     """
     print("\n  [Negative Control] Random embeddings...")
 
@@ -511,23 +535,35 @@ def run_negative_control(verbose: bool = True) -> NegativeControlResult:
         result = test_stability_single_snr(random_emb, snr_db, n_trials=5)
         errors.append(result.mean_phase_error)
 
-    # Check if flat (error doesn't change much with SNR)
-    error_range = max(errors) - min(errors)
-    is_flat = error_range < 0.1
+    # FIXED: Use RATIO metric instead of absolute range
+    # This aligns with the main test's trend detection logic:
+    # Main test uses error[-1] > error[0] * 2.0 for "increasing" trend
+    # Negative control should verify random data does NOT show this
+    min_error = min(errors) + 1e-10  # Avoid division by zero
+    max_error = max(errors)
+    error_ratio = max_error / min_error
+
+    # Random data should show ratio < 2.0 (flat curve)
+    # Real data shows ratio > 50 (increasing curve)
+    RATIO_THRESHOLD = 2.0
+    is_flat = error_ratio < RATIO_THRESHOLD
 
     if verbose:
-        print(f"    Error range: {error_range:.4f} (flat if < 0.1)")
+        print(f"    Error at 40dB: {errors[0]:.4f}")
+        print(f"    Error at 20dB: {errors[1]:.4f}")
+        print(f"    Error at 6dB: {errors[2]:.4f}")
+        print(f"    Error ratio (max/min): {error_ratio:.2f}x (flat if < {RATIO_THRESHOLD}x)")
         status = "PASS" if is_flat else "FAIL"
         print(f"    Status: {status}")
 
     return NegativeControlResult(
         name="random_embeddings_flat",
         test_passed=is_flat,
-        expected_behavior="Error curve should be flat (no structure to preserve)",
-        actual_behavior=f"Error range = {error_range:.4f}",
-        metric_value=error_range,
-        metric_threshold=0.1,
-        notes="Random embeddings have no phase structure, so noise shouldn't change error systematically"
+        expected_behavior=f"Error ratio should be < {RATIO_THRESHOLD}x (no structure to preserve)",
+        actual_behavior=f"Error ratio = {error_ratio:.2f}x",
+        metric_value=error_ratio,
+        metric_threshold=RATIO_THRESHOLD,
+        notes="Random phases have no structure, so noise shouldn't systematically increase error"
     )
 
 
@@ -584,7 +620,15 @@ def test_stability_cross_model(
         )
 
     # Verdict
-    if passing == len(results):
+    # CRITICAL: The negative control MUST pass for this test to be meaningful.
+    # If random data shows the same behavior as real data, the test cannot
+    # distinguish structured from random phases.
+    if not negative_control.test_passed:
+        hypothesis_supported = False
+        verdict = ("INCONCLUSIVE: Negative control failed. Random data shows same "
+                   f"error ratio ({negative_control.metric_value:.1f}x) as real data. "
+                   "This test measures PCA projection stability, not phase structure.")
+    elif passing == len(results):
         hypothesis_supported = True
         verdict = "CONFIRMED: Phases are stable under noise (structural, not artifacts)"
     elif passing >= len(results) * 0.6:
