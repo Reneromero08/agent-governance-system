@@ -103,3 +103,41 @@ def get_canonical_hash() -> str:
 
 # Pre-computed hash for quick verification
 CANONICAL_128_HASH = compute_anchor_hash(CANONICAL_128)
+
+
+# Optimized 64-word anchor set - most stable across models
+# Selected by analyzing cross-model distance matrix correlations
+# across nomic-embed-v1.5, all-MiniLM-L6-v2, and all-mpnet-base-v2
+# Lower Procrustes residual = better cross-model alignment
+STABLE_64: List[str] = [
+    # Highest stability (0.60+): concrete nouns, nature, seasons
+    "outside", "nature", "animal", "tree", "science", "summer", "water", "technology",
+    "autumn", "plant", "mountain", "spring", "winter", "wood", "car", "building",
+    # High stability (0.55+): objects, domains
+    "book", "machine", "earth", "paper", "art", "music", "food", "stone",
+    "space", "enemy", "river", "math", "house", "north", "effect", "dog",
+    # Medium stability (0.50+): mixed
+    "glass", "cat", "road", "walk", "know", "leader", "air", "teacher",
+    "evening", "person", "destroy", "language", "morning", "see", "fire", "answer",
+    # Lower stability (0.45+): actions, senses
+    "fast", "child", "question", "speak", "problem", "dark", "night", "society",
+    "touch", "taste", "think", "sad", "cold", "south", "give", "hear",
+]
+
+STABLE_64_HASH = compute_anchor_hash(STABLE_64)
+
+
+def get_recommended_anchors(priority: str = "stability") -> List[str]:
+    """Get recommended anchor set based on priority.
+
+    Args:
+        priority: "stability" for best cross-model alignment,
+                  "coverage" for maximum semantic coverage
+
+    Returns:
+        Recommended anchor set
+    """
+    if priority == "stability":
+        return STABLE_64
+    else:
+        return CANONICAL_128

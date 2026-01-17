@@ -1,0 +1,787 @@
+{
+  "test_suite": "q40-quantum-error-correction",
+  "timestamp": "2026-01-17T02:39:03.338192+00:00",
+  "mode": "full",
+  "tests": {
+    "code_distance": {
+      "test_id": "q40-code-distance",
+      "timestamp": "2026-01-17T02:39:26.632047+00:00",
+      "parameters": {
+        "n_samples": 100,
+        "max_errors": 20,
+        "n_trials": 50,
+        "dim": 384,
+        "n_random_seeds": 5
+      },
+      "semantic_df": 16.90571953920783,
+      "random_df_mean": 78.97647524121594,
+      "error_types": {
+        "dimension_flip": {
+          "semantic_t_max": 20,
+          "semantic_code_distance": 41,
+          "semantic_pass_rates": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "random_t_maxes": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "random_t_max_mean": 20.0,
+          "random_code_distance_mean": 41.0,
+          "p_value": 0.5,
+          "is_significant": false
+        },
+        "gaussian_noise": {
+          "semantic_t_max": 1,
+          "semantic_code_distance": 3,
+          "semantic_pass_rates": [
+            1.0,
+            1.0,
+            0.14,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0,
+            0.0
+          ],
+          "random_t_maxes": [
+            1,
+            1,
+            1,
+            1,
+            1
+          ],
+          "random_t_max_mean": 1.0,
+          "random_code_distance_mean": 3.0,
+          "p_value": 0.5,
+          "is_significant": false
+        },
+        "random_direction": {
+          "semantic_t_max": 20,
+          "semantic_code_distance": 41,
+          "semantic_pass_rates": [
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0,
+            1.0
+          ],
+          "random_t_maxes": [
+            20,
+            20,
+            20,
+            20,
+            20
+          ],
+          "random_t_max_mean": 20.0,
+          "random_code_distance_mean": 41.0,
+          "p_value": 0.5,
+          "is_significant": false
+        }
+      },
+      "verdict": {
+        "significant_error_types": 0,
+        "total_error_types": 3,
+        "overall_pass": false,
+        "interpretation": "FAIL: Semantic embeddings do not show significantly better error correction than random baseline."
+      }
+    },
+    "syndrome": {
+      "test_id": "q40-syndrome-detection",
+      "timestamp": "2026-01-17T02:39:43.540257+00:00",
+      "parameters": {
+        "n_syndromes": 50,
+        "held_out_fraction": 0.3,
+        "syndrome_methods": [
+          "v1",
+          "v2",
+          "v3"
+        ],
+        "dim": 384
+      },
+      "semantic_df": 7.949271593329724,
+      "methods": {
+        "v1": {
+          "type_accuracy": 0.0,
+          "full_accuracy": 0.0,
+          "random_baseline_accuracy": 0.25,
+          "syndrome_uniqueness": 0.9642857142857143,
+          "n_train": 28,
+          "n_test": 12
+        },
+        "v2": {
+          "type_accuracy": 0.08333333333333333,
+          "full_accuracy": 0.0,
+          "random_baseline_accuracy": 0.4166666666666667,
+          "syndrome_uniqueness": 0.8571428571428571,
+          "n_train": 28,
+          "n_test": 12
+        },
+        "v3": {
+          "type_accuracy": 0.0,
+          "full_accuracy": 0.0,
+          "random_baseline_accuracy": 0.3333333333333333,
+          "syndrome_uniqueness": 0.9642857142857143,
+          "n_train": 28,
+          "n_test": 12
+        }
+      },
+      "verdict": {
+        "best_method": "v2",
+        "best_accuracy": 0.08333333333333333,
+        "good_accuracy": false,
+        "better_than_random": false,
+        "good_uniqueness": true,
+        "overall_pass": false,
+        "interpretation": "FAIL: Syndrome detection insufficient. Best accuracy 8% (random: 42%)."
+      }
+    },
+    "error_threshold": {
+      "test_id": "q40-error-threshold",
+      "timestamp": "2026-01-17T02:39:44.874014+00:00",
+      "parameters": {
+        "n_epsilon": 30,
+        "n_trials": 200,
+        "dim": 384,
+        "n_random_seeds": 3
+      },
+      "semantic_df": 8.225912635080636,
+      "epsilon_range": [
+        0.0001,
+        0.00013738237958832623,
+        0.00018873918221350977,
+        0.0002592943797404667,
+        0.0003562247890262444,
+        0.0004893900918477494,
+        0.0006723357536499335,
+        0.0009236708571873865,
+        0.0012689610031679222,
+        0.0017433288221999873,
+        0.002395026619987486,
+        0.0032903445623126675,
+        0.004520353656360241,
+        0.006210169418915616,
+        0.008531678524172805,
+        0.011721022975334805,
+        0.01610262027560939,
+        0.02212216291070448,
+        0.03039195382313198,
+        0.041753189365604,
+        0.05736152510448681,
+        0.07880462815669913,
+        0.1082636733874054,
+        0.14873521072935117,
+        0.20433597178569418,
+        0.2807216203941176,
+        0.38566204211634725,
+        0.5298316906283708,
+        0.7278953843983146,
+        1.0
+      ],
+      "semantic": {
+        "logical_errors": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.805,
+          1.0,
+          1.0,
+          0.855,
+          0.215,
+          0.025,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ],
+        "params": {
+          "eps_th": 0.04279830631268968,
+          "k_below": 0.9662627360710273,
+          "k_above": 0.10000000000000399,
+          "baseline": 11.873169307678873
+        },
+        "r_squared": -0.15631485486363594
+      },
+      "random": {
+        "k_belows": [
+          0.9806456361443538,
+          0.9880417096579767,
+          0.867083183880672
+        ],
+        "k_mean": 0.9452568432276675,
+        "k_std": 0.05535952936715776
+      },
+      "verdict": {
+        "is_qecc": false,
+        "is_better_than_random": false,
+        "good_fit": false,
+        "overall_pass": false,
+        "interpretation": "FAIL: Suppression exponent k=0.97 does not indicate strong QECC behavior."
+      }
+    },
+    "holographic": {
+      "test_id": "q40-holographic-reconstruction",
+      "timestamp": "2026-01-17T02:39:47.812169+00:00",
+      "parameters": {
+        "area_range": [
+          2,
+          3,
+          5,
+          7,
+          10,
+          15,
+          20,
+          30,
+          50
+        ],
+        "n_trials": 50,
+        "dim": 384
+      },
+      "observation_sets": {
+        "set_0": {
+          "n_observations": 20,
+          "semantic_df": 3.949982379942757,
+          "random_df": 18.1700508835754,
+          "areas": [
+            2,
+            3,
+            5,
+            7,
+            10,
+            15,
+            20
+          ],
+          "semantic_errors": [
+            0.1960736608505249,
+            0.12002138137817382,
+            0.06588645815849305,
+            0.046003735065460204,
+            0.025055497884750366,
+            0.007005171775817871,
+            2.384185791015625e-09
+          ],
+          "semantic_stds": [
+            0.08024044449936264,
+            0.05722008826019943,
+            0.030894422895314876,
+            0.02752874052446283,
+            0.01693919857071272,
+            0.0038024166260491837,
+            1.1680077279964345e-08
+          ],
+          "random_errors": [
+            0.6975524263068738,
+            0.6280393230888816,
+            0.511344673733823,
+            0.42367936349772406,
+            0.3113497155112357,
+            0.1437939940218583,
+            4.884981308350689e-17
+          ],
+          "random_stds": [
+            0.04044879604014697,
+            0.048064430749983,
+            0.03906707433354368,
+            0.03276765113393792,
+            0.024098959306700456,
+            0.00951701259561665,
+            5.941508689604037e-17
+          ],
+          "semantic_params": {
+            "c": 0.44296144265938703,
+            "const": 0.3547699707421711
+          },
+          "semantic_r2": 0.9812333807735786,
+          "random_params": {
+            "c": 0.34485256400058195,
+            "const": 0.9079554381212301
+          },
+          "random_r2": 0.974871260070731,
+          "saturation_area": 5
+        },
+        "set_1": {
+          "n_observations": 20,
+          "semantic_df": 4.647546904128776,
+          "random_df": 18.113764358648375,
+          "areas": [
+            2,
+            3,
+            5,
+            7,
+            10,
+            15,
+            20
+          ],
+          "semantic_errors": [
+            0.17940154075622558,
+            0.11907364249229431,
+            0.07984755039215088,
+            0.04533601760864258,
+            0.02758343458175659,
+            0.009008080959320068,
+            6.67572021484375e-08
+          ],
+          "semantic_stds": [
+            0.04571984377727184,
+            0.04458552691668583,
+            0.043254325866612965,
+            0.025764915760821298,
+            0.01322444408516618,
+            0.0047439556927612895,
+            3.071808511430055e-08
+          ],
+          "random_errors": [
+            0.6747628866739294,
+            0.596978866153922,
+            0.4871969693920645,
+            0.39678083831450306,
+            0.2815727582283105,
+            0.12427494039806897,
+            -4.440892098500626e-18
+          ],
+          "random_stds": [
+            0.04298605303082746,
+            0.03999640215318664,
+            0.030804459922068466,
+            0.02704613399838482,
+            0.02072381399081082,
+            0.00740331166030685,
+            3.108624468950438e-17
+          ],
+          "semantic_params": {
+            "c": 0.40439924286360757,
+            "const": 0.290111421919446
+          },
+          "semantic_r2": 0.9886581103323823,
+          "random_params": {
+            "c": 0.33262773245562294,
+            "const": 0.8536676104028068
+          },
+          "random_r2": 0.9939995477503115,
+          "saturation_area": 5
+        },
+        "set_2": {
+          "n_observations": 20,
+          "semantic_df": 4.814753916454479,
+          "random_df": 18.124823568493948,
+          "areas": [
+            2,
+            3,
+            5,
+            7,
+            10,
+            15,
+            20
+          ],
+          "semantic_errors": [
+            0.14794029474258422,
+            0.1082817256450653,
+            0.06020581483840942,
+            0.03915475249290466,
+            0.020774638652801512,
+            0.008925676345825195,
+            2.741813659667969e-08
+          ],
+          "semantic_stds": [
+            0.031997939589537006,
+            0.0415745764783006,
+            0.02882328932915015,
+            0.01610868389351631,
+            0.01088463687524616,
+            0.0049915056843980584,
+            2.97068018779209e-08
+          ],
+          "random_errors": [
+            0.7046803955934376,
+            0.6344367619894777,
+            0.5236439495341018,
+            0.43240504690510584,
+            0.3071956472319953,
+            0.14202743469634505,
+            -1.1102230246251566e-17
+          ],
+          "random_stds": [
+            0.05023340803425653,
+            0.04967616141466628,
+            0.038592730660403765,
+            0.03572596715410806,
+            0.027229703846464403,
+            0.008550490882304026,
+            1.0235750533041806e-16
+          ],
+          "semantic_params": {
+            "c": 0.4254847770039994,
+            "const": 0.24951238337745976
+          },
+          "semantic_r2": 0.9959015764999007,
+          "random_params": {
+            "c": 0.3155752937242624,
+            "const": 0.8870070862110498
+          },
+          "random_r2": 0.9928187256880384,
+          "saturation_area": 5
+        },
+        "set_3": {
+          "n_observations": 20,
+          "semantic_df": 4.489086923861647,
+          "random_df": 18.00545356738022,
+          "areas": [
+            2,
+            3,
+            5,
+            7,
+            10,
+            15,
+            20
+          ],
+          "semantic_errors": [
+            0.15983060121536255,
+            0.12683140158653258,
+            0.06973987102508544,
+            0.04589344978332519,
+            0.02599152684211731,
+            0.00974779725074768,
+            -9.5367431640625e-09
+          ],
+          "semantic_stds": [
+            0.05535931060282017,
+            0.054033829440856065,
+            0.03437161929622869,
+            0.025327097848111477,
+            0.011372943824160242,
+            0.005541912428381922,
+            3.2340669551493016e-08
+          ],
+          "random_errors": [
+            0.6792474435120692,
+            0.6234532231996799,
+            0.4950770834288986,
+            0.4040381421950856,
+            0.28932507294245774,
+            0.13161861161060004,
+            0.0
+          ],
+          "random_stds": [
+            0.04361196999919238,
+            0.03616029328544883,
+            0.04507845369509063,
+            0.030125792626807663,
+            0.020160681258387478,
+            0.009102051815703336,
+            0.0
+          ],
+          "semantic_params": {
+            "c": 0.3743705013541127,
+            "const": 0.2628655030296274
+          },
+          "semantic_r2": 0.9959591461630246,
+          "random_params": {
+            "c": 0.3280560292337053,
+            "const": 0.8678531078720118
+          },
+          "random_r2": 0.9945877237205297,
+          "saturation_area": 5
+        }
+      },
+      "aggregate": {
+        "mean_semantic_r2": 0.9904380534422215,
+        "mean_random_r2": 0.9890693143074026,
+        "mean_saturation_area": 5.0
+      },
+      "verdict": {
+        "good_fit": true,
+        "saturation_exists": true,
+        "semantic_better_than_random": true,
+        "overall_pass": true,
+        "interpretation": "PASS: Ryu-Takayanagi scaling confirmed. R2=0.990. Boundary encodes bulk with saturation at Area~5. M field IS holographic."
+      }
+    },
+    "hallucination": {
+      "test_id": "q40-hallucination-detection",
+      "timestamp": "2026-01-17T02:39:58.207445+00:00",
+      "parameters": {
+        "n_valid": 50,
+        "n_invalid": 50,
+        "model_names": [
+          "all-MiniLM-L6-v2",
+          "paraphrase-MiniLM-L6-v2"
+        ]
+      },
+      "models": {
+        "all-MiniLM-L6-v2": {
+          "valid_df": 20.836675221334257,
+          "invalid_df": 30.700275648896284,
+          "valid_full_signature": 0.32117425238889163,
+          "invalid_full_signature": 0.17086580312184207,
+          "valid_mean": 0.13037690629510948,
+          "valid_std": 0.09670921378006636,
+          "invalid_mean": 0.2026595291681135,
+          "invalid_std": 0.06127669000462237,
+          "cohens_d": 0.8418071837302125,
+          "roc_auc": 0.7037037037037037,
+          "t_test_p_value": 0.046552935972940496,
+          "category_results": {
+            "word_salad": 0.08284271247461897,
+            "category_error": 0.2650281539872884,
+            "contradiction": 0.27320508075688765,
+            "nonsense": 0.27320508075688765,
+            "semantic_drift": 0.24566564318932704
+          }
+        },
+        "paraphrase-MiniLM-L6-v2": {
+          "valid_df": 19.004356724399887,
+          "invalid_df": 27.836341995256838,
+          "valid_full_signature": 0.16253200369200227,
+          "invalid_full_signature": 0.14619364897980505,
+          "valid_mean": 0.20226928716912854,
+          "valid_std": 0.09908064151530374,
+          "invalid_mean": 0.23547109378787148,
+          "invalid_std": 0.09935807385250958,
+          "cohens_d": 0.31549219441785176,
+          "roc_auc": 0.6296296296296297,
+          "t_test_p_value": 0.2564359798192247,
+          "category_results": {
+            "word_salad": 0.2828427124746191,
+            "category_error": 0.3414213562373096,
+            "contradiction": 0.34641016151377535,
+            "nonsense": 0.27320508075688776,
+            "semantic_drift": 0.21462643699419726
+          }
+        }
+      },
+      "aggregate": {
+        "valid_mean": 0.16632309673211898,
+        "valid_std": 0.10429262382093524,
+        "invalid_mean": 0.2190653114779925,
+        "invalid_std": 0.08415806248958448,
+        "cohens_d": 0.5408963797434532,
+        "roc_auc": 0.6604938271604939
+      },
+      "verdict": {
+        "valid_below_0.05": false,
+        "invalid_above_0.15": true,
+        "cohens_d_above_2": false,
+        "auc_above_0.85": false,
+        "overall_pass": false,
+        "interpretation": "FAIL: Phase parity does not reliably detect hallucinations. AUC=0.660, d=0.54."
+      }
+    },
+    "adversarial": {
+      "test_id": "q40-adversarial-attacks",
+      "timestamp": "2026-01-17T02:40:24.473920+00:00",
+      "parameters": {
+        "n_trials": 30,
+        "model_name": "all-MiniLM-L6-v2"
+      },
+      "df": 3.8900770941798255,
+      "attacks": {
+        "gradual_drift": {
+          "detection_rate": 0.0,
+          "early_detection_rate": 0.0,
+          "mean_detection_alpha": null,
+          "pass": false
+        },
+        "random_dimensions": {
+          "detection_rate": 0.0,
+          "mean_detection_dims": null,
+          "pass": false
+        },
+        "coordinated": {
+          "sigma_anomaly_rate": 1.0,
+          "mean_detection_fraction": 0.10000000000000003,
+          "pass": true
+        }
+      },
+      "verdict": {
+        "attacks_passed": 1,
+        "total_attacks": 3,
+        "overall_pass": false,
+        "interpretation": "FAIL: Only 1/3 attack types detected."
+      }
+    },
+    "cascade": {
+      "test_id": "q40-cross-model-cascade",
+      "timestamp": "2026-01-17T02:40:25.060766+00:00",
+      "parameters": {
+        "model_names": [
+          "all-MiniLM-L6-v2",
+          "paraphrase-MiniLM-L6-v2",
+          "all-MiniLM-L12-v2"
+        ],
+        "n_trials": 30,
+        "n_anchors": 32
+      },
+      "error_types": {
+        "semantic": {
+          "growths": [
+            4.550478676730263,
+            5.373684899478491,
+            3.1944628309976317,
+            3.125306366879311,
+            4.668433937403429,
+            4.193788010973465,
+            4.994355510752668,
+            4.4322840809596205,
+            3.7450275464978393,
+            5.2163255671119515,
+            5.042534143256817,
+            4.509540824268909,
+            5.031857079552677,
+            4.093383622952431,
+            4.186292950850562,
+            4.400395667299813,
+            5.4616539687974415,
+            4.48023881770992,
+            4.09492083467443,
+            4.615110396580722,
+            4.466473115470893,
+            4.486552987245098,
+            4.516475000107774,
+            4.620144667041106,
+            5.255158698515778,
+            4.778446049057271,
+            6.379654535043047,
+            4.801130432888788,
+            3.9488330611492435,
+            4.249588599097108
+          ],
+          "mean_growth": 4.563751095978149,
+          "std_growth": 0.6403107498706808
+        },
+        "random": {
+          "growths": [
+            14.466745051984962,
+            13.059168586130507,
+            11.007581736884639,
+            10.235135773348496,
+            9.970117951291973,
+            14.128972224693948,
+            15.6236847769133,
+            9.743356946831808,
+            7.511561683803981,
+            12.655661817044459,
+            13.18239863741584,
+            10.43931864894786,
+            10.184081006850905,
+            7.353123802503964,
+            13.08546150144167,
+            10.039427954960177,
+            11.769927481672951,
+            12.792833729799229,
+            9.039991824398289,
+            10.837265083412952,
+            13.322320161708813,
+            11.711920487103397,
+            13.664107315150641,
+            9.983567282788028,
+            11.520331292477728,
+            10.82635969447986,
+            11.845521403382335,
+            10.085397233190784,
+            7.701151167116787,
+            8.51735762016488
+          ],
+          "mean_growth": 11.210128329263174,
+          "std_growth": 2.0749023436063894
+        }
+      },
+      "cross_model_detection": {
+        "single_model_misses": 30,
+        "cross_model_catches": 0,
+        "detection_rate": 0.0
+      },
+      "verdict": {
+        "semantic_suppression": false,
+        "random_amplification": true,
+        "good_cross_detection": false,
+        "overall_pass": true,
+        "interpretation": "PASS: Network shows differential error handling. Semantic growth=4.56, Random growth=11.21, Cross-detection=0%. Multi-model consensus improves error correction."
+      }
+    }
+  },
+  "verdicts": {
+    "code_distance": false,
+    "syndrome": false,
+    "error_threshold": false,
+    "holographic": true,
+    "hallucination": false,
+    "adversarial": false,
+    "cascade": true
+  },
+  "summary": {
+    "tests_passed": 2,
+    "tests_total": 7,
+    "critical_passed": false,
+    "overall_pass": false,
+    "interpretation": "Q40 NOT PROVEN: Only 2/7 tests passed. Additional investigation needed."
+  }
+}
