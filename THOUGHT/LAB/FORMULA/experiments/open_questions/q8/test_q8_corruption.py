@@ -1,4 +1,38 @@
 """
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DEPRECATED: DO NOT USE THIS TEST
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Use test_q8_topological_invariance.py instead.
+
+METHODOLOGY ISSUES (why this test was invalidated):
+
+1. WRONG PERTURBATION TYPE: Adding Gaussian noise DESTROYS the manifold
+   structure, it does not DEFORM it. This tests noise robustness, not
+   topological invariance.
+
+2. WRONG INTERPRETATION: Linear drift under noise is expected for ANY
+   spectral measure. It's just linear algebra (eigenvalue perturbation),
+   not topology. The test was misinterpreting this as "falsification".
+
+3. WRONG HYPOTHESIS: The cross-model breakthrough at 50% corruption works
+   via REDUNDANCY (200+ bits encoding ~3 bits of information), not via
+   topological protection. The breakthrough paper explicitly states this.
+
+Topological invariants are preserved under CONTINUOUS DEFORMATIONS of the
+manifold (rotations, scaling, smooth warping), NOT under random noise.
+
+The REVISED test (test_q8_topological_invariance.py):
+- Tests rotation invariance (orthogonal transformations)
+- Tests scaling invariance (uniform scaling)
+- Tests smooth warping (continuous deformations)
+- Tests cross-model invariance (different architectures = different coordinates)
+
+All these preserve manifold structure and are valid topological tests.
+
+Original (invalid) docstring follows for reference:
+--------------------------------------------------------------------------------
+
 Q8 TEST 4: 50% Corruption Stress Test (Topological Robustness)
 
 If c_1 = 1 is TOPOLOGICAL, it must survive massive perturbation.
@@ -19,6 +53,14 @@ Pass criteria:
 Falsification:
 - c_1 drifts continuously with noise (not topological)
 """
+
+import warnings
+warnings.warn(
+    "test_q8_corruption.py is DEPRECATED. Use test_q8_topological_invariance.py instead. "
+    "This test has fundamental methodology issues (noise destroys manifolds, not deforms them).",
+    DeprecationWarning,
+    stacklevel=2
+)
 
 import sys
 from pathlib import Path

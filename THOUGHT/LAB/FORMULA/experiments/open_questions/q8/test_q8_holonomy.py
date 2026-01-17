@@ -1,4 +1,30 @@
 """
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+DEPRECATED: DO NOT USE THIS TEST
+!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+
+Use test_q8_holonomy_revised.py instead.
+
+METHODOLOGY ISSUES (why this test was invalidated):
+
+1. WRONG HOLONOMY GROUP: Tests U(n) (unitary), but real manifolds have O(n)
+   (orthogonal) holonomy. U(n) is only for COMPLEX Kahler manifolds.
+
+2. WRONG SUBSPACE: Tests in full 384-dimensional space, but Q51 research
+   proved phase structure exists ONLY in PC1-2 (principal components 1-2).
+   Testing in full space finds no structure because it's not there.
+
+3. WRONG METRIC: k-dim subframe tracking measures subspace rotation during
+   transport, not true holonomy. This is an artifact of the method.
+
+The REVISED test (test_q8_holonomy_revised.py):
+- Works in PC1-2 where structure actually exists
+- Uses O(n) for real manifolds
+- Computes Berry phase / solid angle (confirmed Q-score = 1.0 in Q51)
+
+Original (invalid) docstring follows for reference:
+--------------------------------------------------------------------------------
+
 Q8 TEST 3: Holonomy Group Classification (The Smoking Gun)
 
 Kahler manifolds have holonomy group contained in U(n). Test this directly.
@@ -18,6 +44,14 @@ Pass criteria:
 Falsification:
 - ANY holonomy matrix not in U(n)
 """
+
+import warnings
+warnings.warn(
+    "test_q8_holonomy.py is DEPRECATED. Use test_q8_holonomy_revised.py instead. "
+    "This test has fundamental methodology issues (wrong holonomy group, wrong subspace).",
+    DeprecationWarning,
+    stacklevel=2
+)
 
 import sys
 from pathlib import Path

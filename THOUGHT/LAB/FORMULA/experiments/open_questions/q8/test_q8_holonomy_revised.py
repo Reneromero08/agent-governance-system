@@ -77,15 +77,22 @@ VOCAB_CORE = [
 ]
 
 # Semantic loops for Berry phase test
+# NOTE: All words MUST be present in VOCAB_CORE for loops to work
 SEMANTIC_LOOPS = [
-    # Emotion loop
-    ["joy", "excitement", "anxiety", "fear", "sadness", "calm", "contentment", "joy"],
-    # Concrete-abstract loop
-    ["stone", "earth", "nature", "life", "spirit", "mind", "thought", "stone"],
-    # Action loop
-    ["run", "walk", "rest", "think", "speak", "act", "run"],
-    # Valence loop
-    ["love", "hope", "fear", "hate", "anger", "calm", "peace", "love"],
+    # Valence/emotion loop (all words verified in VOCAB_CORE)
+    ["love", "hope", "fear", "hate", "love"],
+    # Element loop (classical elements)
+    ["water", "fire", "earth", "air", "water"],
+    # Nature loop
+    ["stone", "tree", "river", "mountain", "stone"],
+    # Action intensity loop
+    ["walk", "run", "jump", "fly", "walk"],
+    # Light/celestial loop
+    ["sun", "moon", "star", "sky", "sun"],
+    # Entity loop
+    ["human", "animal", "god", "child", "human"],
+    # Opposition loop
+    ["good", "bad", "old", "new", "good"],
 ]
 
 # Thresholds

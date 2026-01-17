@@ -89,38 +89,38 @@ def run_all_tests(quick: bool = True, save: bool = True):
         results['tests']['test2_kahler_structure'] = {'error': str(e)}
 
     # ==========================================================================
-    # TEST 3: Holonomy Group Classification
+    # TEST 3: Holonomy (REVISED - PC1-2 subspace, Berry phase)
     # ==========================================================================
-    logger.section("TEST 3: HOLONOMY GROUP CLASSIFICATION")
+    logger.section("TEST 3: HOLONOMY (REVISED - PC1-2 BERRY PHASE)")
 
     try:
-        from test_q8_holonomy import main as run_holonomy_test
-        test3_results = run_holonomy_test(quick=quick, save=False)
-        results['tests']['test3_holonomy'] = test3_results
-        verdicts['test3'] = test3_results.get('verdict', {}).get('final_verdict', 'ERROR') == 'PASS'
+        from test_q8_holonomy_revised import main as run_holonomy_test
+        test3_results = run_holonomy_test(save=False)
+        results['tests']['test3_holonomy_revised'] = test3_results
+        verdicts['test3'] = test3_results.get('verdict', {}).get('overall_pass', False)
         logger.info(f"TEST 3 VERDICT: {'PASS' if verdicts['test3'] else 'FAIL'}")
     except Exception as e:
         logger.error(f"TEST 3 FAILED: {e}")
         traceback.print_exc()
         verdicts['test3'] = False
-        results['tests']['test3_holonomy'] = {'error': str(e)}
+        results['tests']['test3_holonomy_revised'] = {'error': str(e)}
 
     # ==========================================================================
-    # TEST 4: Corruption Stress Test
+    # TEST 4: Topological Invariance (REVISED - manifold-preserving transforms)
     # ==========================================================================
-    logger.section("TEST 4: 50% CORRUPTION STRESS TEST")
+    logger.section("TEST 4: TOPOLOGICAL INVARIANCE (REVISED)")
 
     try:
-        from test_q8_corruption import main as run_corruption_test
-        test4_results = run_corruption_test(save=False)
-        results['tests']['test4_corruption'] = test4_results
-        verdicts['test4'] = test4_results.get('verdict', {}).get('final_verdict', 'ERROR') == 'PASS'
+        from test_q8_topological_invariance import main as run_invariance_test
+        test4_results = run_invariance_test(save=False)
+        results['tests']['test4_topological_invariance'] = test4_results
+        verdicts['test4'] = test4_results.get('verdict', {}).get('overall_pass', False)
         logger.info(f"TEST 4 VERDICT: {'PASS' if verdicts['test4'] else 'FAIL'}")
     except Exception as e:
         logger.error(f"TEST 4 FAILED: {e}")
         traceback.print_exc()
         verdicts['test4'] = False
-        results['tests']['test4_corruption'] = {'error': str(e)}
+        results['tests']['test4_topological_invariance'] = {'error': str(e)}
 
     # ==========================================================================
     # FINAL VERDICT

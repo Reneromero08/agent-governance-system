@@ -475,14 +475,12 @@ def solid_angle_triangle(v1: np.ndarray, v2: np.ndarray, v3: np.ndarray) -> floa
         return berry_phase_triangle(v1, v2, v3) * 2
 
 
-def monte_carlo_chern_class(
+def spectral_chern_class(
     embeddings: np.ndarray,
-    n_triangles: int = Q8Thresholds.CHERN_MONTE_CARLO_SAMPLES,
-    seed: int = Q8Seeds.TRIANGULATION,
-    use_solid_angle: bool = True
+    seed: int = Q8Seeds.TRIANGULATION
 ) -> Tuple[float, np.ndarray]:
     """
-    Estimate first Chern class via SPECTRAL method.
+    Estimate first Chern class via SPECTRAL method (eigenvalue decay).
 
     From Q50 derivation: alpha = 1/(2*c_1) where alpha is eigenvalue decay exponent.
     Therefore: c_1 = 1/(2*alpha)
@@ -492,16 +490,20 @@ def monte_carlo_chern_class(
 
     This provides a DISCRIMINATIVE test that differs between trained and random.
 
+    Method:
+    1. Compute covariance matrix eigenspectrum
+    2. Fit power law decay: lambda_k ~ k^(-alpha) to first half of eigenvalues
+    3. Derive c_1 = 1/(2*alpha) from Q50 relationship
+
     Args:
-        embeddings: (n_samples, dim) normalized embeddings
-        n_triangles: Not used in spectral method, kept for API compatibility
-        seed: Random seed for bootstrap
-        use_solid_angle: Not used, kept for API compatibility
+        embeddings: (n_samples, dim) embedding vectors
+        seed: Random seed for bootstrap resampling
 
     Returns:
-        (c1_estimate, alpha_samples): Chern class and bootstrap alpha samples
+        (c1_estimate, alpha_samples): Chern class estimate and bootstrap samples
     """
-    np.random.seed(seed)
+    # Use isolated random state
+    rng = np.random.default_rng(seed)
 
     # Normalize embeddings
     norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
@@ -545,7 +547,7 @@ def monte_carlo_chern_class(
 
     for _ in range(n_bootstrap):
         # Resample embeddings
-        idx = np.random.choice(len(embeddings), len(embeddings), replace=True)
+        idx = rng.choice(len(embeddings), len(embeddings), replace=True)
         boot_emb = embeddings[idx]
 
         centered_boot = boot_emb - boot_emb.mean(axis=0)
@@ -571,6 +573,36 @@ def monte_carlo_chern_class(
     alpha_samples = np.array(alpha_samples) if alpha_samples else np.array([alpha])
 
     return c1_estimate, alpha_samples
+
+
+def monte_carlo_chern_class(
+    embeddings: np.ndarray,
+    n_triangles: int = Q8Thresholds.CHERN_MONTE_CARLO_SAMPLES,
+    seed: int = Q8Seeds.TRIANGULATION,
+    use_solid_angle: bool = True
+) -> Tuple[float, np.ndarray]:
+    """
+    DEPRECATED: Use spectral_chern_class() instead.
+
+    This function was misnamed - it uses spectral methods, not Monte Carlo.
+    Kept for backward compatibility with existing code.
+
+    Args:
+        embeddings: Embedding vectors
+        n_triangles: IGNORED (not used in spectral method)
+        seed: Random seed
+        use_solid_angle: IGNORED (not used in spectral method)
+
+    Returns:
+        (c1_estimate, alpha_samples): Same as spectral_chern_class()
+    """
+    warnings.warn(
+        "monte_carlo_chern_class is deprecated, use spectral_chern_class instead. "
+        "The function uses spectral methods (eigenvalue decay), not Monte Carlo.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+    return spectral_chern_class(embeddings, seed)
 
 
 def compute_alpha_from_spectrum(embeddings: np.ndarray) -> Tuple[float, float, float]:

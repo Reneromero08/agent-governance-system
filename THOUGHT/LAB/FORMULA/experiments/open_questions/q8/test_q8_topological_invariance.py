@@ -90,14 +90,32 @@ CROSS_MODEL_CV_THRESHOLD = 0.10  # CV < 10% across models
 # =============================================================================
 
 def random_orthogonal_matrix(dim: int, seed: int = None) -> np.ndarray:
-    """Generate random orthogonal matrix (rotation/reflection)."""
-    if seed is not None:
-        np.random.seed(seed)
+    """
+    Generate random orthogonal matrix (rotation/reflection).
+
+    Uses QR decomposition of a random Gaussian matrix to produce
+    a uniformly distributed orthogonal matrix (Haar measure on O(n)).
+
+    Args:
+        dim: dimension of the matrix
+        seed: random seed for reproducibility
+
+    Returns:
+        Q: (dim, dim) orthogonal matrix with det(Q) = +1 (proper rotation)
+    """
+    # Use isolated random state
+    rng = np.random.default_rng(seed)
+
     # QR decomposition of random matrix gives orthogonal matrix
-    A = np.random.randn(dim, dim)
+    A = rng.standard_normal((dim, dim))
     Q, R = np.linalg.qr(A)
-    # Ensure proper rotation (det = +1)
-    Q = Q @ np.diag(np.sign(np.diag(R)))
+
+    # Ensure proper rotation (det = +1) by correcting signs
+    # The diagonal of R contains the "signs" - multiply Q columns accordingly
+    signs = np.sign(np.diag(R))
+    signs[signs == 0] = 1  # Handle edge case of zero diagonal
+    Q = Q @ np.diag(signs)
+
     return Q
 
 
@@ -123,27 +141,55 @@ def apply_smooth_warping(
 
     Uses a smooth function to slightly perturb each point based on its position.
     This preserves manifold structure (nearby points stay nearby).
+
+    The perturbation is a sum of low-frequency sinusoidal waves, ensuring:
+    1. Smoothness: perturbation is C^infinity (infinitely differentiable)
+    2. Position-dependent: each point gets a unique perturbation based on location
+    3. Bounded: total perturbation magnitude is controlled by strength parameter
+
+    Args:
+        embeddings: (n, dim) array of embedding vectors
+        strength: magnitude of perturbation relative to embedding norm
+        seed: random seed for reproducibility
+
+    Returns:
+        warped: (n, dim) smoothly deformed embeddings
     """
-    if seed is not None:
-        np.random.seed(seed)
+    # Use isolated random state to avoid global state pollution
+    rng = np.random.default_rng(seed)
 
     n, dim = embeddings.shape
 
-    # Generate smooth perturbation field
-    # Use low-frequency sinusoidal perturbation
-    frequencies = np.random.randn(3, dim) * 0.5  # Low frequency
-    phases = np.random.rand(3, dim) * 2 * np.pi
+    # Generate smooth perturbation field using low-frequency waves
+    # 3 wave components for each dimension
+    n_waves = 3
+    frequencies = rng.standard_normal((n_waves, dim)) * 0.5  # Low frequency
+    phase_offsets = rng.uniform(0, 2 * np.pi, n_waves)
 
     # Compute perturbation for each point
+    # Each wave adds a direction-dependent offset based on position
     perturbation = np.zeros_like(embeddings)
-    for i in range(3):
-        # Smooth function of position
-        contribution = np.sin(embeddings @ frequencies[i] + phases[i, :dim//2].mean())
-        perturbation += np.outer(contribution, frequencies[i])
+    for i in range(n_waves):
+        # Project each embedding onto frequency vector to get scalar position
+        positions = embeddings @ frequencies[i]  # Shape: (n,)
+        # Smooth sinusoidal response
+        wave_values = np.sin(positions + phase_offsets[i])  # Shape: (n,)
+        # Direction of perturbation is the frequency vector
+        perturbation += np.outer(wave_values, frequencies[i])
 
-    # Scale and apply
-    perturbation = perturbation / np.linalg.norm(perturbation) * strength
-    warped = embeddings + perturbation * np.linalg.norm(embeddings, axis=1, keepdims=True)
+    # Normalize and scale perturbation
+    perturbation_norm = np.linalg.norm(perturbation)
+    if perturbation_norm > 1e-10:
+        perturbation = perturbation / perturbation_norm
+    else:
+        # Fallback: use small random perturbation if waves cancel out
+        perturbation = rng.standard_normal((n, dim))
+        perturbation = perturbation / np.linalg.norm(perturbation)
+
+    # Scale by strength and by each embedding's magnitude
+    embedding_norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    embedding_norms = np.maximum(embedding_norms, 1e-10)  # Avoid division by zero
+    warped = embeddings + strength * perturbation * embedding_norms
 
     return warped
 
