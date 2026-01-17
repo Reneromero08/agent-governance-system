@@ -1,0 +1,476 @@
+{
+  "test_suite": "Q8_TOPOLOGY_CLASSIFICATION",
+  "timestamp": "2026-01-17T10:04:28.145987",
+  "mode": "QUICK",
+  "tests": {
+    "test1_chern_class": {
+      "test_name": "Q8_TEST1_CHERN_CLASS",
+      "timestamp": "2026-01-17T10:05:38.764573",
+      "config": {
+        "quick_mode": true,
+        "n_triangles": 10000,
+        "c1_target": 1.0,
+        "c1_tolerance": 0.1
+      },
+      "positive_tests": {
+        "models": {
+          "MiniLM-L6": {
+            "c1": 0.9427856498277948,
+            "ci": {
+              "mean": 0.8885727601210042,
+              "ci_lower": 0.8752456376450226,
+              "ci_upper": 0.9000539393637774,
+              "std": 0.006890476169377663,
+              "n_samples": 100,
+              "n_bootstrap": 1000,
+              "confidence_level": 0.95
+            },
+            "n_triangles": 100,
+            "method": "spectral_alpha",
+            "passes_test": true,
+            "p_value": 0.4560423272111904
+          },
+          "MPNet-base": {
+            "c1": 0.9355162529589827,
+            "ci": {
+              "mean": 0.8719037502971454,
+              "ci_lower": 0.8594368597703984,
+              "ci_upper": 0.8823365211166966,
+              "std": 0.006031290831289496,
+              "n_samples": 100,
+              "n_bootstrap": 1000,
+              "confidence_level": 0.95
+            },
+            "n_triangles": 100,
+            "method": "spectral_alpha",
+            "passes_test": true,
+            "p_value": 0.3905432985219135
+          }
+        },
+        "summary": {
+          "n_models": 2,
+          "mean_c1": 0.9391509513933887,
+          "std_c1": 0.0036346984344060584,
+          "cv": 0.0038701961905201407,
+          "min_c1": 0.9355162529589827,
+          "max_c1": 0.9427856498277948,
+          "all_pass": true,
+          "cv_passes": true
+        },
+        "metadata": {
+          "timestamp": "2026-01-17T10:05:38.764573",
+          "numpy_version": "1.26.4",
+          "seeds": {
+            "triangulation": 42,
+            "holonomy": 12345,
+            "bootstrap": 9999,
+            "negative_control": 7777
+          },
+          "thresholds": {
+            "c1_target": 1.0,
+            "c1_tolerance": 0.1,
+            "kahler_j_tolerance": 1e-10,
+            "kahler_closure_tolerance": 1e-06,
+            "holonomy_unitary_tolerance": 1e-08,
+            "cross_arch_cv_pass": 0.1
+          }
+        }
+      },
+      "negative_controls": {
+        "random": {
+          "c1": 1.944679934927264,
+          "ci": {
+            "mean": 1.2190087488907246,
+            "ci_lower": 1.172107796319297,
+            "ci_upper": 1.2454328368650511,
+            "std": 0.018326335929128107,
+            "n_samples": 100,
+            "n_bootstrap": 1000,
+            "confidence_level": 0.95
+          },
+          "expected_to_fail": true,
+          "did_fail": true
+        },
+        "shuffled": {
+          "c1": 2.0636154115599252,
+          "ci": {
+            "mean": 1.2082216441351774,
+            "ci_lower": 1.1777732164832015,
+            "ci_upper": 1.243976655873491,
+            "std": 0.018712703584857382,
+            "n_samples": 100,
+            "n_bootstrap": 1000,
+            "confidence_level": 0.95
+          },
+          "expected_to_fail": true,
+          "did_fail": true
+        },
+        "degenerate": {
+          "c1": 0.0,
+          "ci": {
+            "mean": Infinity,
+            "ci_lower": NaN,
+            "ci_upper": NaN,
+            "std": NaN,
+            "n_samples": 1,
+            "n_bootstrap": 1000,
+            "confidence_level": 0.95
+          },
+          "expected_to_fail": true,
+          "did_fail": true
+        },
+        "summary": {
+          "all_negative_controls_failed": true,
+          "interpretation": "GOOD - Negative controls fail as expected"
+        }
+      },
+      "verdict": {
+        "positive_tests_pass": true,
+        "negative_controls_pass": true,
+        "cv_passes": true,
+        "final_verdict": "PASS",
+        "c1_equals_1": true
+      }
+    },
+    "test2_kahler_structure": {
+      "test_name": "Q8_TEST2_KAHLER_STRUCTURE",
+      "timestamp": "2026-01-17T10:06:43.934724",
+      "config": {
+        "quick_mode": true,
+        "j_squared_tolerance": 1e-10,
+        "closure_tolerance": 1e-06
+      },
+      "positive_tests": {
+        "models": {
+          "MiniLM-L6": {
+            "j_squared_norm": 4.8017811207858667e-14,
+            "omega_closure_norm": 6511.560544705596,
+            "omega_determinant": 0.0,
+            "is_kahler": false,
+            "conditions_passed": {
+              "j_squared_equals_neg_i": true,
+              "metric_compatible": false,
+              "omega_antisymmetric": true,
+              "omega_nondegenerate": false,
+              "omega_closed": false
+            }
+          },
+          "MPNet-base": {
+            "j_squared_norm": 7.248392622424883e-14,
+            "omega_closure_norm": 0.0008098528141695471,
+            "omega_determinant": 0.0,
+            "is_kahler": false,
+            "conditions_passed": {
+              "j_squared_equals_neg_i": true,
+              "metric_compatible": false,
+              "omega_antisymmetric": true,
+              "omega_nondegenerate": false,
+              "omega_closed": false
+            }
+          }
+        },
+        "summary": {
+          "n_models": 2,
+          "n_passed": 0,
+          "pass_rate": 0.0,
+          "all_pass": false
+        },
+        "metadata": {
+          "timestamp": "2026-01-17T10:06:43.934724",
+          "numpy_version": "1.26.4",
+          "seeds": {
+            "triangulation": 42,
+            "holonomy": 12345,
+            "bootstrap": 9999,
+            "negative_control": 7777
+          },
+          "thresholds": {
+            "c1_target": 1.0,
+            "c1_tolerance": 0.1,
+            "kahler_j_tolerance": 1e-10,
+            "kahler_closure_tolerance": 1e-06,
+            "holonomy_unitary_tolerance": 1e-08,
+            "cross_arch_cv_pass": 0.1
+          }
+        }
+      },
+      "negative_controls": {
+        "random": {
+          "is_kahler": false,
+          "conditions": {
+            "j_squared_equals_neg_i": true,
+            "metric_compatible": false,
+            "omega_antisymmetric": true,
+            "omega_nondegenerate": false,
+            "omega_closed": true
+          },
+          "expected_to_fail": true,
+          "did_fail": true
+        },
+        "shuffled": {
+          "is_kahler": false,
+          "conditions": {
+            "j_squared_equals_neg_i": true,
+            "metric_compatible": false,
+            "omega_antisymmetric": true,
+            "omega_nondegenerate": false,
+            "omega_closed": false
+          },
+          "expected_to_fail": true,
+          "did_fail": true
+        },
+        "summary": {
+          "all_negative_controls_failed": true,
+          "interpretation": "GOOD - Random is not Kahler"
+        }
+      },
+      "verdict": {
+        "positive_tests_pass": false,
+        "negative_controls_pass": true,
+        "final_verdict": "FAIL",
+        "is_kahler": false
+      }
+    },
+    "test3_holonomy": {
+      "test_name": "Q8_TEST3_HOLONOMY",
+      "timestamp": "2026-01-17T10:09:59.614170",
+      "config": {
+        "quick_mode": true,
+        "n_loops": 50,
+        "unitary_tolerance": 1e-08
+      },
+      "positive_tests": {
+        "models": {
+          "MiniLM-L6": {
+            "n_loops": 50,
+            "n_unitary": 0,
+            "unitary_fraction": 0.0,
+            "max_deviation": 0.9002676099329693,
+            "mean_deviation": 0.5736596077060577,
+            "is_unitary": false
+          }
+        },
+        "summary": {
+          "n_models": 1,
+          "n_passed": 0,
+          "pass_rate": 0.0,
+          "mean_unitary_fraction": 0.0,
+          "min_unitary_fraction": 0.0,
+          "all_pass": false
+        },
+        "metadata": {
+          "timestamp": "2026-01-17T10:09:59.615170",
+          "numpy_version": "1.26.4",
+          "seeds": {
+            "triangulation": 42,
+            "holonomy": 12345,
+            "bootstrap": 9999,
+            "negative_control": 7777
+          },
+          "thresholds": {
+            "c1_target": 1.0,
+            "c1_tolerance": 0.1,
+            "kahler_j_tolerance": 1e-10,
+            "kahler_closure_tolerance": 1e-06,
+            "holonomy_unitary_tolerance": 1e-08,
+            "cross_arch_cv_pass": 0.1
+          }
+        }
+      },
+      "negative_controls": {
+        "random": {
+          "unitary_fraction": 0.0,
+          "expected_to_differ": true,
+          "max_deviation": 0.8559702723222471
+        }
+      },
+      "verdict": {
+        "positive_tests_pass": false,
+        "final_verdict": "FAIL",
+        "holonomy_is_unitary": false
+      }
+    },
+    "test4_corruption": {
+      "test_name": "Q8_TEST4_CORRUPTION",
+      "timestamp": "2026-01-17T10:10:07.697087",
+      "config": {
+        "corruption_levels": [
+          0.0,
+          0.1,
+          0.25,
+          0.5,
+          0.75,
+          0.9
+        ],
+        "stability_threshold": 0.1
+      },
+      "tests": {
+        "models": {
+          "MiniLM-L6": {
+            "levels": [
+              0.0,
+              0.1,
+              0.25,
+              0.5,
+              0.75,
+              0.9
+            ],
+            "c1_values": [
+              0.08610910869832525,
+              0.08218616138259732,
+              0.07661879273785976,
+              0.06960622612769245,
+              0.06574114401206772,
+              0.06486948721700937
+            ],
+            "ci_lower": [
+              0.084708531538497,
+              0.08075403949242002,
+              0.07507290555084654,
+              0.06777784622592917,
+              0.06370891056955863,
+              0.06283605665792474
+            ],
+            "ci_upper": [
+              0.08746752707564896,
+              0.08365433528683261,
+              0.07821559177330757,
+              0.07147309164999831,
+              0.0678157357593927,
+              0.06701320598973166
+            ],
+            "relative_change": [
+              0.0,
+              0.045557866932191625,
+              0.11021268369777079,
+              0.1916508348547541,
+              0.23653670319146697,
+              0.24665940459013216
+            ],
+            "analysis": {
+              "baseline_c1": 0.08610910869832525,
+              "c1_at_50_percent": 0.06960622612769245,
+              "change_at_50_percent": 0.1916508348547541,
+              "stable_up_to_50": false,
+              "critical_transition_level": 0.25,
+              "passes_test": false
+            }
+          },
+          "MPNet-base": {
+            "levels": [
+              0.0,
+              0.1,
+              0.25,
+              0.5,
+              0.75,
+              0.9
+            ],
+            "c1_values": [
+              0.08825014448994419,
+              0.08350651498373919,
+              0.07684906993995759,
+              0.06796980505436381,
+              0.06305911807765488,
+              0.06204933166413969
+            ],
+            "ci_lower": [
+              0.08691397143354718,
+              0.08212847839373465,
+              0.0753490526452411,
+              0.06615346528676189,
+              0.060847913835355164,
+              0.05970371031830973
+            ],
+            "ci_upper": [
+              0.08966888989161098,
+              0.08495533478971933,
+              0.07840478221219786,
+              0.06986992311742499,
+              0.06540762780818846,
+              0.06452011993251223
+            ],
+            "relative_change": [
+              0.0,
+              0.053752087700496796,
+              0.12919043493787946,
+              0.229805169756875,
+              0.2854502568566303,
+              0.2968925770856953
+            ],
+            "analysis": {
+              "baseline_c1": 0.08825014448994419,
+              "c1_at_50_percent": 0.06796980505436381,
+              "change_at_50_percent": 0.229805169756875,
+              "stable_up_to_50": false,
+              "critical_transition_level": 0.25,
+              "passes_test": false
+            }
+          }
+        },
+        "summary": {
+          "n_models": 2,
+          "n_passed": 0,
+          "pass_rate": 0.0,
+          "all_pass": false,
+          "mean_critical_level": 0.25,
+          "std_critical_level": 0.0
+        },
+        "metadata": {
+          "timestamp": "2026-01-17T10:10:07.697087",
+          "numpy_version": "1.26.4",
+          "seeds": {
+            "triangulation": 42,
+            "holonomy": 12345,
+            "bootstrap": 9999,
+            "negative_control": 7777
+          },
+          "thresholds": {
+            "c1_target": 1.0,
+            "c1_tolerance": 0.1,
+            "kahler_j_tolerance": 1e-10,
+            "kahler_closure_tolerance": 1e-06,
+            "holonomy_unitary_tolerance": 1e-08,
+            "cross_arch_cv_pass": 0.1
+          }
+        }
+      },
+      "verdict": {
+        "all_pass": false,
+        "final_verdict": "FAIL",
+        "c1_is_topological": false
+      }
+    }
+  },
+  "verdicts": {
+    "test1": true,
+    "test2": false,
+    "test3": false,
+    "test4": false
+  },
+  "metadata": {
+    "timestamp": "2026-01-17T10:04:28.145987",
+    "numpy_version": "1.26.4",
+    "seeds": {
+      "triangulation": 42,
+      "holonomy": 12345,
+      "bootstrap": 9999,
+      "negative_control": 7777
+    },
+    "thresholds": {
+      "c1_target": 1.0,
+      "c1_tolerance": 0.1,
+      "kahler_j_tolerance": 1e-10,
+      "kahler_closure_tolerance": 1e-06,
+      "holonomy_unitary_tolerance": 1e-08,
+      "cross_arch_cv_pass": 0.1
+    }
+  },
+  "final_verdict": {
+    "tests_passed": 1,
+    "tests_total": 4,
+    "pass_rate": 0.25,
+    "verdict": "FALSIFIED",
+    "q8_status": "FALSIFIED",
+    "conclusion": "c_1 = 1 HYPOTHESIS NOT SUPPORTED.\n  Failed tests: test2, test3, test4\n  The theory needs revision or the tests need debugging."
+  }
+}

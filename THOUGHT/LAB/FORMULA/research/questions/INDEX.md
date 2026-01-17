@@ -30,7 +30,7 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ✅ ANSWERED | **R is RG fixed point.** CV=0.158 across 4 scales proves intensivity. 5/5 alternatives fail (uniqueness), 6/6 adversarial domains pass, 4/4 negative controls fail. tau_c=0.1 connects to Q12 (alpha=0.9). |
-| 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ⏳ OPEN | Which manifolds allow local curvature to reveal global truth? |
+| 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ✅ ANSWERED | **NOT Kahler. alpha=0.5 is EMERGENT, not topological.** c_1≈0.94 measured (1/4 tests pass). 50% corruption → 65% drift falsifies invariance. Local curvature reveals training statistics, not global topology. |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ✅ ANSWERED | `log(R) = -F + const` for any location-scale family. Gaussian uses std, Laplace uses MAD. Family-scoped equivalence proven (Q1 Test 4). |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | 🔄 PARTIAL | **18/18 tests pass.** Behavioral consistency (1.79x discrimination), multi-agent misalignment (28% R drop). LIMITATION: Cannot detect logical contradictions (semantic opposites are topically similar). |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
