@@ -1,0 +1,77 @@
+{
+  "version": "1.0.0",
+  "description": "Tasks for cross-model retrieval validation",
+  "created_at": "2026-01-16",
+  "notes": [
+    "Same tasks as compression proof for comparison",
+    "Tests whether cross-model retrieval achieves task parity",
+    "Keywords must be found in retrieved content"
+  ],
+  "tasks": [
+    {
+      "id": "CROSS-001",
+      "query": "What are the 5 invariants of integrity?",
+      "expected_keywords": ["declared", "truth", "verified", "linked", "restorable"],
+      "expected_min_keywords": 3,
+      "rationale": "Core governance content - must transfer across models"
+    },
+    {
+      "id": "CROSS-002",
+      "query": "What is the genesis prompt for bootstrapping?",
+      "expected_keywords": ["bootstrap", "genesis", "agent", "prompt"],
+      "expected_min_keywords": 2,
+      "rationale": "Foundational content - semantic meaning must preserve"
+    },
+    {
+      "id": "CROSS-003",
+      "query": "How does catalytic computing ensure restoration?",
+      "expected_keywords": ["catalytic", "restore", "borrow", "memory", "proof"],
+      "expected_min_keywords": 3,
+      "rationale": "Technical concept - tests semantic preservation"
+    },
+    {
+      "id": "CROSS-004",
+      "query": "What are the contract rules?",
+      "expected_keywords": ["contract", "rule", "canon", "governance"],
+      "expected_min_keywords": 2,
+      "rationale": "Governance rules - core retrieval target"
+    },
+    {
+      "id": "CROSS-005",
+      "query": "What is the authority gradient?",
+      "expected_keywords": ["authority", "gradient", "hierarchy", "escalation"],
+      "expected_min_keywords": 2,
+      "rationale": "Authority structure - semantic concept must transfer"
+    }
+  ],
+  "similarity_test_pairs": [
+    {
+      "id": "SIM-001",
+      "text_a": "What are the system invariants?",
+      "text_b": "The five invariants of integrity are: declared, truth-linked, verified, provenance-linked, and restorable.",
+      "expected_similarity_range": [0.4, 0.8],
+      "notes": "Query-answer pair should have moderate-high similarity"
+    },
+    {
+      "id": "SIM-002",
+      "text_a": "bootstrap agent genesis",
+      "text_b": "The genesis prompt initializes a new agent with governance context.",
+      "expected_similarity_range": [0.5, 0.9],
+      "notes": "Related concepts should align"
+    },
+    {
+      "id": "SIM-003",
+      "text_a": "catalytic computing memory restoration",
+      "text_b": "Catalytic computing borrows memory and guarantees restoration.",
+      "expected_similarity_range": [0.6, 0.95],
+      "notes": "Near-duplicate concepts"
+    },
+    {
+      "id": "SIM-004",
+      "text_a": "What are basketball rules?",
+      "text_b": "The governance contract rules C1-C13 define system behavior.",
+      "expected_similarity_range": [0.0, 0.3],
+      "notes": "Unrelated content should have low similarity"
+    }
+  ]
+}
