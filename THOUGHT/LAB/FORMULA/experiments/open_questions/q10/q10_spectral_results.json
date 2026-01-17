@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-01-17T19:31:13.543207Z",
+  "model": "sentence-transformers/all-MiniLM-L6-v2",
+  "hypothesis": "Contradictions break spectral structure even when R is high",
+  "hypothesis_result": "FALSIFIED",
+  "reference_constants": {
+    "healthy_alpha": 0.5,
+    "healthy_c1": 1.0,
+    "healthy_Df_alpha": 21.74625462767236
+  },
+  "results": {
+    "Coherent-Aligned": {
+      "name": "Coherent-Aligned",
+      "n_statements": 15.0,
+      "R_value": 3.2012020671672947,
+      "E_agreement": 0.43519464135169983,
+      "sigma_dispersion": 0.13594725728034973,
+      "alpha": 0.6668380885874691,
+      "c_1": 0.7498071999143389,
+      "Df": 9.067364109918303,
+      "Df_times_alpha": 6.046463751584539,
+      "alpha_deviation": 0.16683808858746907,
+      "c1_deviation": 0.25019280008566114,
+      "conservation_deviation": 15.699790876087821
+    },
+    "Coherent-Contradictory": {
+      "name": "Coherent-Contradictory",
+      "n_statements": 15.0,
+      "R_value": 3.556574548189515,
+      "E_agreement": 0.39088907837867737,
+      "sigma_dispersion": 0.10990605503320694,
+      "alpha": 0.5490380125990415,
+      "c_1": 0.910683756909827,
+      "Df": 10.562408251444358,
+      "Df_times_alpha": 5.799163634632728,
+      "alpha_deviation": 0.0490380125990415,
+      "c1_deviation": 0.08931624309017305,
+      "conservation_deviation": 15.947090993039634
+    },
+    "Incoherent-Random": {
+      "name": "Incoherent-Random",
+      "n_statements": 15.0,
+      "R_value": 1.0485759793519678,
+      "E_agreement": 0.10034617781639099,
+      "sigma_dispersion": 0.09569757431745529,
+      "alpha": 0.267391048079637,
+      "c_1": 1.8699204913213294,
+      "Df": 12.495459897199282,
+      "Df_times_alpha": 3.341174118149189,
+      "alpha_deviation": 0.23260895192036302,
+      "c1_deviation": 0.8699204913213294,
+      "conservation_deviation": 18.40508050952317
+    }
+  },
+  "discrimination": {
+    "R_discriminates": false,
+    "alpha_discriminates": false,
+    "c1_discriminates": false,
+    "conservation_discriminates": false
+  },
+  "key_finding": "Contradictory statements have BETTER spectral health than aligned - they sample both sides of semantic space",
+  "verdict": "FAILURE",
+  "q10_implication": "Contradiction detection requires symbolic reasoning, not embedding geometry"
+}

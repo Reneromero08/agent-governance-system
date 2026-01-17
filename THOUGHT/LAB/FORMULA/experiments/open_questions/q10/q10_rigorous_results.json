@@ -1,0 +1,236 @@
+{
+  "timestamp": "2026-01-17T19:36:53.724984Z",
+  "experiment": "Q10_RIGOROUS_CONTRADICTION_DETECTION",
+  "data_source": "SNLI/MultiNLI human-annotated pairs",
+  "n_contradiction_pairs": 50,
+  "n_entailment_pairs": 50,
+  "n_bootstrap": 1000,
+  "confidence_level": 0.95,
+  "models_tested": [
+    "all-MiniLM-L6-v2",
+    "all-mpnet-base-v2",
+    "paraphrase-MiniLM-L6-v2"
+  ],
+  "results_by_model": {
+    "all-MiniLM-L6-v2": {
+      "n_contradiction_pairs": 50,
+      "n_entailment_pairs": 50,
+      "comparisons": [
+        {
+          "metric_name": "R_value",
+          "group1_mean": 15.390476588609902,
+          "group1_ci_lower": 10.603799951041017,
+          "group1_ci_upper": 22.16221738493005,
+          "group2_mean": 6.017629511069275,
+          "group2_ci_lower": 5.2141949241982894,
+          "group2_ci_upper": 6.8695045156380115,
+          "cohens_d": 0.5889113109196706,
+          "p_value": 9.960120895997481e-05,
+          "significant": true
+        },
+        {
+          "metric_name": "alpha",
+          "group1_mean": 0.5,
+          "group1_ci_lower": 0.5,
+          "group1_ci_upper": 0.5,
+          "group2_mean": 0.5,
+          "group2_ci_lower": 0.5,
+          "group2_ci_upper": 0.5,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|alpha - 0.5|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "c_1",
+          "group1_mean": 1.0,
+          "group1_ci_lower": 1.0,
+          "group1_ci_upper": 1.0,
+          "group2_mean": 1.0,
+          "group2_ci_lower": 1.0,
+          "group2_ci_upper": 1.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|c_1 - 1.0|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        }
+      ],
+      "summary": {
+        "R_discriminates": true,
+        "alpha_discriminates": false,
+        "alpha_dev_discriminates": false,
+        "c1_discriminates": false,
+        "c1_dev_discriminates": false
+      }
+    },
+    "all-mpnet-base-v2": {
+      "n_contradiction_pairs": 50,
+      "n_entailment_pairs": 50,
+      "comparisons": [
+        {
+          "metric_name": "R_value",
+          "group1_mean": 11.027798185980853,
+          "group1_ci_lower": 7.678000000162114,
+          "group1_ci_upper": 15.212959174346551,
+          "group2_mean": 9.679796994607107,
+          "group2_ci_lower": 7.3847827365868755,
+          "group2_ci_upper": 12.504245564220495,
+          "cohens_d": 0.11353573991602722,
+          "p_value": 0.44209463261794313,
+          "significant": false
+        },
+        {
+          "metric_name": "alpha",
+          "group1_mean": 0.5,
+          "group1_ci_lower": 0.5,
+          "group1_ci_upper": 0.5,
+          "group2_mean": 0.5,
+          "group2_ci_lower": 0.5,
+          "group2_ci_upper": 0.5,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|alpha - 0.5|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "c_1",
+          "group1_mean": 1.0,
+          "group1_ci_lower": 1.0,
+          "group1_ci_upper": 1.0,
+          "group2_mean": 1.0,
+          "group2_ci_lower": 1.0,
+          "group2_ci_upper": 1.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|c_1 - 1.0|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        }
+      ],
+      "summary": {
+        "R_discriminates": false,
+        "alpha_discriminates": false,
+        "alpha_dev_discriminates": false,
+        "c1_discriminates": false,
+        "c1_dev_discriminates": false
+      }
+    },
+    "paraphrase-MiniLM-L6-v2": {
+      "n_contradiction_pairs": 50,
+      "n_entailment_pairs": 50,
+      "comparisons": [
+        {
+          "metric_name": "R_value",
+          "group1_mean": 4.861296410302113,
+          "group1_ci_lower": 3.9830729343910343,
+          "group1_ci_upper": 6.045976382889926,
+          "group2_mean": 6.262015125635169,
+          "group2_ci_lower": 5.537306996894178,
+          "group2_ci_upper": 7.105513327422999,
+          "cohens_d": -0.416793414233378,
+          "p_value": 0.0003329263883888094,
+          "significant": true
+        },
+        {
+          "metric_name": "alpha",
+          "group1_mean": 0.5,
+          "group1_ci_lower": 0.5,
+          "group1_ci_upper": 0.5,
+          "group2_mean": 0.5,
+          "group2_ci_lower": 0.5,
+          "group2_ci_upper": 0.5,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|alpha - 0.5|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "c_1",
+          "group1_mean": 1.0,
+          "group1_ci_lower": 1.0,
+          "group1_ci_upper": 1.0,
+          "group2_mean": 1.0,
+          "group2_ci_lower": 1.0,
+          "group2_ci_upper": 1.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        },
+        {
+          "metric_name": "|c_1 - 1.0|",
+          "group1_mean": 0.0,
+          "group1_ci_lower": 0.0,
+          "group1_ci_upper": 0.0,
+          "group2_mean": 0.0,
+          "group2_ci_lower": 0.0,
+          "group2_ci_upper": 0.0,
+          "cohens_d": 0.0,
+          "p_value": 1.0,
+          "significant": false
+        }
+      ],
+      "summary": {
+        "R_discriminates": false,
+        "alpha_discriminates": false,
+        "alpha_dev_discriminates": false,
+        "c1_discriminates": false,
+        "c1_dev_discriminates": false
+      }
+    }
+  },
+  "verdict": "NEEDS_INVESTIGATION"
+}
