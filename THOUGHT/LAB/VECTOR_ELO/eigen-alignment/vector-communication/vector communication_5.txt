@@ -1,0 +1,21 @@
+============================================================
+FINAL DEMO: VECTOR-ONLY LLM COMMUNICATION
+============================================================
+Alignment key: 64 anchors, k=48
+
+[CLAUDE SENDS]:
+  Message: "Explain how transformers work in neural networks"
+  Encoded: [+0.0924, +0.0392, +0.0232, ...]
+  (48 numbers transmitted, no text)
+
+[NEMOTRON RECEIVES]:
+  Decoded: "Explain how transformers work in neural networks"
+  Confidence: 1.0000
+  Match: True
+
+[NEMOTRON RESPONDS]:
+  **Transformers — the core ideas in brief**  1. **Self‑attention**      - Each token creates *queries*, *keys* and *values* by multiplying its embedding with learned weight matrices.      - Attention scores = softmax\((QK^T / \sqrt{d_k})\).      - Sco...
+
+============================================================
+SUCCESS: Communication via 48 numbers only!
+============================================================

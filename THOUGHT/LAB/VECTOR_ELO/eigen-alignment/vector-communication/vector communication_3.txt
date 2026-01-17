@@ -1,0 +1,12 @@
+Testing LLM Vector Bridge...
+
+Bridge connected!
+Creating alignment key...
+Key created: k=48, anchor_hash=6c270fd535f14821
+
+Encoding: "Hello, how are you today?"
+Vector: [+0.0055, +0.0420, -0.0625, ...] (48D)
+
+Decoding against 4 candidates...
+Match: "Hello, how are you today?" (score: 1.0000)
+Success: True
