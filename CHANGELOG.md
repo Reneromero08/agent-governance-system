@@ -1,8 +1,36 @@
-<!-- CONTENT_HASH: 1fffb3f8 -->
+<!-- CONTENT_HASH: 2cde9a17 -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.8.17] - 2026-01-17
+
+### Added
+- **STABLE_32 Ultra-Stable Anchor Set** (`CAPABILITY/PRIMITIVES/canonical_anchors.py`)
+  - 32 anchors with lowest per-anchor alignment error across models
+  - 59% Procrustes residual reduction (1.08 vs 2.63)
+  - `get_anchor_sets()` helper function for anchor set discovery
+  - Updated `get_recommended_anchors()` with "cross_model" priority
+
+- **Cross-Model Alignment Analysis** (`THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`)
+  - `diagnose_procrustes.py` - Sign correction experiments (rejected hypothesis)
+  - `find_stable_anchors.py` - Per-anchor alignment error analysis
+  - `cross_model_quick.py` - Quick verification test
+  - `CROSS_MODEL_ALIGNMENT_REPORT.md` - Full documentation
+
+### Key Findings
+- Procrustes residual NOT from MDS sign ambiguity
+- Root cause: anchor-level geometric differences between models
+- Stable anchors: concrete nouns, simple actions, physical properties
+- Unstable anchors: communication words, directions, sensory terms
+
+### Results
+- **Same-model**: 94% corruption tolerance (unchanged)
+- **Cross-model**: ~50% corruption tolerance (fundamental limit)
+- **Residual**: 59% reduction with STABLE_32 anchor selection
 
 ---
 

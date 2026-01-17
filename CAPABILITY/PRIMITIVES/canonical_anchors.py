@@ -127,17 +127,55 @@ STABLE_64: List[str] = [
 STABLE_64_HASH = compute_anchor_hash(STABLE_64)
 
 
+# Ultra-stable 32-word anchor set - BEST for cross-model alignment
+# Selected by per-anchor alignment error analysis across nomic, MiniLM, MPNet
+# Achieves 59% residual reduction vs STABLE_64 (1.08 vs 2.63)
+# Use when cross-model communication is more important than same-model redundancy
+# Discovered 2026-01-17 via find_stable_anchors.py analysis
+STABLE_32: List[str] = [
+    # Lowest error (0.21-0.27): actions, effects, animals
+    "destroy", "effect", "animal", "fast", "art", "cold", "child", "walk",
+    # Low error (0.27-0.29): objects, concepts
+    "stone", "think", "give", "space", "society", "glass", "touch", "air",
+    # Medium-low error (0.29-0.30): nature, times
+    "evening", "mountain", "book", "leader", "sad", "dog", "cat", "winter",
+    # Medium error (0.30-0.32): buildings, people
+    "wood", "morning", "know", "fire", "car", "building", "person", "enemy",
+]
+
+STABLE_32_HASH = compute_anchor_hash(STABLE_32)
+
+
 def get_recommended_anchors(priority: str = "stability") -> List[str]:
     """Get recommended anchor set based on priority.
 
     Args:
-        priority: "stability" for best cross-model alignment,
-                  "coverage" for maximum semantic coverage
+        priority: "cross_model" for best cross-model alignment (STABLE_32),
+                  "stability" for good balance (STABLE_64),
+                  "coverage" for maximum semantic coverage (CANONICAL_128)
 
     Returns:
         Recommended anchor set
     """
-    if priority == "stability":
+    if priority == "cross_model":
+        return STABLE_32
+    elif priority == "stability":
         return STABLE_64
     else:
         return CANONICAL_128
+
+
+def get_anchor_sets() -> dict:
+    """Get all available anchor sets with their properties.
+
+    Returns:
+        Dict mapping name to (anchor_list, hash, description)
+    """
+    return {
+        "CANONICAL_128": (CANONICAL_128, CANONICAL_128_HASH,
+                         "Full coverage, max redundancy, higher residual"),
+        "STABLE_64": (STABLE_64, STABLE_64_HASH,
+                      "Good balance of coverage and stability"),
+        "STABLE_32": (STABLE_32, STABLE_32_HASH,
+                      "Best cross-model alignment, 59% lower residual"),
+    }
