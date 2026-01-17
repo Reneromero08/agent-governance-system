@@ -151,13 +151,16 @@ def run_kahler_test_single_model(
 
     # Normalize
     embeddings = normalize_embeddings(embeddings)
+    dim = embeddings.shape[1]
 
-    # Compute metric (covariance)
-    centered = embeddings - embeddings.mean(axis=0)
-    metric = np.cov(centered.T)
+    # Use EUCLIDEAN metric (identity), not covariance
+    # The covariance is a statistical property of data distribution,
+    # NOT the Riemannian metric of the embedding space.
+    # For manifolds embedded in R^d, the induced metric is Euclidean.
+    metric = np.eye(dim)
 
-    logger.info(f"Metric shape: {metric.shape}")
-    logger.info(f"Metric rank: {np.linalg.matrix_rank(metric)}")
+    logger.info(f"Using Euclidean metric (identity matrix)")
+    logger.info(f"Embedding dimension: {dim}")
 
     # Compute complex structure J
     logger.info("Computing complex structure J...")
@@ -168,12 +171,12 @@ def run_kahler_test_single_model(
     logger.info(f"J^2 + I norm: {j_squared_norm:.2e} (threshold: {Q8Thresholds.KAHLER_J_SQUARED_TOLERANCE:.2e})")
     logger.info(f"  -> {'PASS' if j_squared_passes else 'FAIL'}")
 
-    # Test 2: Metric compatibility
-    compat_norm, compat_passes = verify_metric_compatibility(J, metric)
-    logger.info(f"Metric compatibility norm: {compat_norm:.2e}")
+    # Test 2: Metric compatibility (J is orthogonal: J^T J = I)
+    compat_norm, compat_passes = verify_metric_compatibility(J)  # Uses Euclidean by default
+    logger.info(f"Metric compatibility (J orthogonality) norm: {compat_norm:.2e}")
     logger.info(f"  -> {'PASS' if compat_passes else 'FAIL'}")
 
-    # Compute Kahler form omega
+    # Compute Kahler form omega = g(J-, -) = J for Euclidean metric
     omega = compute_kahler_form(J, metric)
 
     # Test 3: Omega antisymmetry

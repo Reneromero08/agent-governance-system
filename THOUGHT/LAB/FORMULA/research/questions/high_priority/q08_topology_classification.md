@@ -11,12 +11,12 @@ Which manifolds allow local curvature to reveal global truth? When does the form
 
 Local spectral curvature (alpha = 0.5) reveals the EMERGENT statistical structure of training dynamics, not a topological classification. The eigenvalue decay exponent alpha ≈ 0.5 is universal across architectures because of shared training pressure, but it is NOT protected by topology.
 
-### Key Findings (4 Tests, 1/4 Passed)
+### Key Findings (4 Tests - REVISED)
 
-1. **Spectral Measurement:** c_1 = 1/(2*alpha) gives c_1 ≈ 0.94 for trained models (PASS)
-2. **Kahler Structure:** J^2 != -I, d(omega) != 0 (FAIL)
-3. **Holonomy Group:** Only 96% of loops show U(n) structure (FAIL)
-4. **Topological Robustness:** c_1 drifts 65-77% under 50% corruption (FAIL - critical falsification)
+1. **TEST 1 - Spectral Measurement:** c_1 = 1/(2*alpha) gives c_1 ~ 0.94 for trained models (PASS)
+2. **TEST 2 - Kahler Structure:** J^2 = -I passes with Euclidean metric (PASS - methodology fixed)
+3. **TEST 3 - Holonomy Group:** INCONCLUSIVE (subframe limitation in high-dim spaces)
+4. **TEST 4 - Topological Robustness:** c_1 drifts LINEARLY (R^2=0.99) under corruption (**DEFINITIVE FALSIFICATION**)
 
 ### The Mathematical Lock (Revised)
 

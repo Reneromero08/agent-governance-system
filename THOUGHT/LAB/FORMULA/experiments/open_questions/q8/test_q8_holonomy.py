@@ -212,6 +212,14 @@ def compute_holonomy_for_loop(
     """
     Compute holonomy matrix for a closed loop.
 
+    The holonomy measures how a frame rotates after parallel transport around
+    a closed loop. For orthonormal frames Q_init and Q_transported (both dim x k),
+    the holonomy is H = Q_transported.T @ Q_init.
+
+    NOTE: This computation is only valid when both frames span the same
+    k-dimensional subspace. Since parallel transport may change the subspace,
+    this test has inherent limitations for subframes (k < dim-1).
+
     Returns:
         (H, deviation, is_unitary): Holonomy matrix, deviation from U(n), whether unitary
     """
@@ -221,21 +229,25 @@ def compute_holonomy_for_loop(
     # Use smaller frame for efficiency
     k = min(10, dim // 4)
 
-    # Initial frame from principal directions
-    centered = embeddings - embeddings.mean(axis=0)
-    cov = np.cov(centered.T)
-    eigenvalues, eigenvectors = np.linalg.eigh(cov)
-    idx = np.argsort(eigenvalues)[::-1]
-    initial_frame = eigenvectors[:, idx[:k]]
+    # Get starting point tangent space
+    p0 = embeddings[loop_indices[0]]
+    tangent_proj = np.eye(dim) - np.outer(p0, p0)
+
+    # Initial frame: random orthonormal vectors in tangent space at p0
+    np.random.seed(hash(tuple(loop_indices)) % (2**31))
+    random_frame = np.random.randn(dim, k)
+    random_frame = tangent_proj @ random_frame
+    initial_frame, _ = np.linalg.qr(random_frame)
 
     # Transport frame around loop
     transported = parallel_transport_frame(embeddings, loop_indices, initial_frame)
 
-    # Compute holonomy: H = transported @ pinv(initial)
-    H, residuals, rank, s = np.linalg.lstsq(initial_frame, transported, rcond=None)
-    H = H.T
+    # Holonomy: H = Q_transported.T @ Q_initial
+    # For orthonormal frames spanning same subspace, this is unitary
+    # Deviation from unitarity measures how much the subspace changed
+    H = transported.T @ initial_frame
 
-    # Check if unitary
+    # Check if unitary (H @ H.T = I)
     is_u, deviation = is_unitary(H, Q8Thresholds.HOLONOMY_UNITARY_TOLERANCE)
 
     return H, deviation, is_u
