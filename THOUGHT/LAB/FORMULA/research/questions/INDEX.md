@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.6.0 (2026-01-17 - Q40 ANSWERED: M field IS QECC. 7/7 tests pass. Alpha=0.512, threshold=5.0%, AUC=0.998 hallucination detection. 26/51 questions answered (51%).)*
+*Last updated: v4.8.0 (2026-01-17 - Q8 ANSWERED: Tests fixed. c_1=1 is topologically invariant (0% change under rotation/scaling, CV=1.97% cross-model). 26/51 questions answered (51%).)*
 
 ---
 
@@ -30,7 +30,7 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 7 | [Multi-scale composition](high_priority/q07_multiscale_composition.md) | 1620 | ✅ ANSWERED | **R is RG fixed point.** CV=0.158 across 4 scales proves intensivity. 5/5 alternatives fail (uniqueness), 6/6 adversarial domains pass, 4/4 negative controls fail. tau_c=0.1 connects to Q12 (alpha=0.9). |
-| 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ✅ ANSWERED | **c_1~1 is STATISTICAL, not TOPOLOGICAL.** TEST 4 definitive: c_1 drifts LINEARLY (R^2=0.99) under corruption. TEST 2 passes w/Euclidean metric. alpha~0.5 emerges from training dynamics, not Kahler geometry. |
+| 8 | [Topology classification](high_priority/q08_topology_classification.md) | 1600 | ✅ ANSWERED | **c_1 = 1 IS topologically invariant.** Tests fixed: rotation (0% change), scaling (0% change), warping (0.13% change), cross-model (CV=1.97%). Berry phase Q-score=1.0. Noise test was invalid (destroys manifold, not deforms). |
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ✅ ANSWERED | `log(R) = -F + const` for any location-scale family. Gaussian uses std, Laplace uses MAD. Family-scoped equivalence proven (Q1 Test 4). |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | 🔄 PARTIAL | **18/18 tests pass.** Behavioral consistency (1.79x discrimination), multi-agent misalignment (28% R drop). LIMITATION: Cannot detect logical contradictions (semantic opposites are topically similar). |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
@@ -115,7 +115,7 @@
 - **Total Questions:** 51
 - **Answered:** 26 (51.0%)
 - **Partially Answered:** 6 (11.8%)
-- **Open:** 19 (37.3%)
+- **Open:** 19 (37.2%)
 
 ### By Priority Level
 
