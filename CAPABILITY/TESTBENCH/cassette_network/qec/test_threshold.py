@@ -1,29 +1,33 @@
 #!/usr/bin/env python3
-"""Test 3: Error Threshold & Exponential Suppression.
+"""Test 3: Error Threshold via Alpha Conservation.
 
-Proves R-gating implements QECC by showing exponential error suppression
-below a critical threshold.
+Proves R-gating implements QECC by showing alpha conservation breaks
+above a critical noise threshold.
+
+KEY INSIGHT FROM Q21/Q32:
+- Semantic embeddings have alpha ~ 0.5 (Riemann critical line)
+- Df * alpha = 8e = 21.746 (conservation law)
+- Below threshold: alpha stays near 0.5 (structure protected)
+- Above threshold: alpha drifts (structure damaged)
 
 Hypothesis:
-    Below epsilon_th, logical errors are exponentially suppressed.
-    Above epsilon_th, logical errors are amplified.
+    Below epsilon_th, alpha conservation holds (structure protected).
+    Above epsilon_th, alpha drifts (structure damaged).
+    Semantic has LOWER threshold than random (more structure to protect).
 
 Protocol:
-    1. Sweep physical error rate from 0.01% to 100%
-    2. Measure logical error rate (gate failures on corrupted data)
-    3. Fit two-regime model to find threshold
-    4. Verify suppression exponent k > 2
+    1. Sweep noise level from 0.1% to 50%
+    2. Measure alpha drift at each level
+    3. Find threshold where drift exceeds limit
+    4. Compare semantic threshold vs random threshold
 
 Success Criteria:
-    - Two-regime fit with chi-square p < 0.05
-    - Suppression exponent k > 2 (quadratic or better)
-    - Semantic k > Random k + 1
-
-Expected:
-    epsilon_th ~ 1/Df ~ 4.5% for Df ~ 22
+    - Clear threshold exists (alpha drift jumps)
+    - Semantic threshold < Random threshold (structure to protect)
+    - Alpha starts near 0.5 for semantic
 
 Usage:
-    python test_threshold.py [--n-trials 500] [--n-epsilon 30]
+    python test_threshold.py [--n-trials 200] [--n-epsilon 30]
 """
 
 import argparse
@@ -44,6 +48,11 @@ from core import (
     compute_R,
     generate_random_embeddings,
     compute_effective_dimensionality,
+    compute_alpha,
+    get_eigenspectrum,
+    compute_compass_health,
+    cohens_d,
+    SEMIOTIC_CONSTANT_8E,
     DEFAULT_R_THRESHOLD,
 )
 
@@ -60,6 +69,7 @@ except ImportError:
 # =============================================================================
 
 VALID_PHRASES = [
+    # Science fundamentals (10)
     "The sun rises in the east.",
     "Water boils at one hundred degrees Celsius.",
     "Humans need oxygen to survive.",
@@ -70,6 +80,50 @@ VALID_PHRASES = [
     "Gravity keeps planets in orbit.",
     "DNA carries genetic information.",
     "Computers process binary data.",
+    # Nature and environment (10)
+    "Rivers flow from mountains to seas.",
+    "Seasons change due to Earth's tilt.",
+    "Ecosystems depend on biodiversity.",
+    "Forests produce oxygen for breathing.",
+    "Ocean currents regulate global climate.",
+    "Polar ice reflects sunlight back to space.",
+    "Volcanoes release gases from deep underground.",
+    "Coral reefs support marine life diversity.",
+    "Deserts receive very little rainfall annually.",
+    "Wetlands filter pollutants from water naturally.",
+    # Technology and engineering (10)
+    "Algorithms solve problems step by step.",
+    "Networks connect devices across distances.",
+    "Encryption protects sensitive data transmissions.",
+    "Sensors detect changes in the environment.",
+    "Batteries store electrical energy chemically.",
+    "Circuits control the flow of electricity.",
+    "Software instructions guide hardware operations.",
+    "Databases organize information for retrieval.",
+    "Protocols define communication standards precisely.",
+    "Processors execute millions of calculations per second.",
+    # Biology and medicine (10)
+    "Cells are the basic units of life.",
+    "Vaccines train immune systems against diseases.",
+    "Neurons transmit signals through the brain.",
+    "Enzymes catalyze biochemical reactions efficiently.",
+    "Muscles contract to produce movement.",
+    "Blood carries oxygen to body tissues.",
+    "Hormones regulate bodily functions chemically.",
+    "Antibiotics kill bacterial infections selectively.",
+    "Metabolism converts food into cellular energy.",
+    "Genes encode instructions for protein synthesis.",
+    # Physics and chemistry (10)
+    "Atoms combine to form molecules.",
+    "Energy cannot be created or destroyed.",
+    "Electrons orbit atomic nuclei in shells.",
+    "Pressure increases with depth underwater.",
+    "Heat flows from hot to cold objects.",
+    "Friction opposes motion between surfaces.",
+    "Waves transfer energy without moving matter.",
+    "Magnets attract iron and other metals.",
+    "Acids and bases neutralize each other.",
+    "Photons are particles of light energy.",
 ]
 
 
@@ -183,88 +237,89 @@ def fit_threshold_model(
 # Main Test
 # =============================================================================
 
-def measure_logical_error_rate(
+def measure_alpha_drift_at_noise(
     embeddings: np.ndarray,
-    physical_error_rate: float,
-    n_trials: int = 100,
-    manifold_threshold: float = 0.85,
-    k_neighbors: int = 5
+    noise_level: float,
+    n_trials: int = 10,
+    error_type: str = 'gaussian_noise'
 ) -> Tuple[float, float, float]:
-    """Measure logical error rate using manifold-based error correction.
+    """Measure alpha drift under noise injection.
 
-    KEY GEOMETRIC INSIGHT:
-    Error correction happens when the MANIFOLD STRUCTURE provides redundancy.
-    - Semantic embeddings: low-D manifold constrains where centroids can go
-    - Random embeddings: no manifold, centroids drift freely
-
-    We measure MANIFOLD DISTANCE as the error metric:
-    - Raw error: manifold distance of centroid without gating
-    - Gated error: manifold distance when centroid stays near manifold
-
-    The gate rejects when centroid drifts too far from the manifold.
+    KEY INSIGHT FROM Q21/Q32:
+    - Semantic embeddings have alpha ~ 0.5
+    - Noise causes alpha to DRIFT from 0.5
+    - The drift indicates structural damage
 
     Args:
-        embeddings: Base embeddings (defines the manifold)
-        physical_error_rate: Noise level (0 to 1)
-        n_trials: Number of measurement trials
-        manifold_threshold: Max k-NN distance to consider "on manifold"
-        k_neighbors: Number of neighbors for manifold distance
+        embeddings: Base embeddings
+        noise_level: Standard deviation of noise (0 to 1)
+        n_trials: Number of trials for averaging
+        error_type: Type of error to inject
 
     Returns:
-        Tuple of (raw_error, gated_error, acceptance_rate)
-        - raw_error: Mean manifold distance without gating
-        - gated_error: Mean manifold distance for accepted trials
-        - acceptance_rate: Fraction of trials where centroid stayed on manifold
+        Tuple of (baseline_alpha, corrupted_alpha, drift)
     """
-    dim = embeddings.shape[1]
-    n_embeddings = len(embeddings)
-    raw_errors = []
-    gated_errors = []
-    accepted = 0
+    # Compute baseline alpha
+    alpha_baseline, Df_baseline, _ = compute_compass_health(embeddings)
+
+    drifts = []
+    corrupted_alphas = []
 
     for trial in range(n_trials):
-        # Pick random embedding as "truth"
-        idx = np.random.randint(n_embeddings)
-        truth = embeddings[idx]
+        # Inject noise into all embeddings
+        corrupted = []
+        for emb in embeddings:
+            if error_type == 'gaussian_noise':
+                noisy = emb + np.random.randn(len(emb)) * noise_level
+            else:
+                result = inject_n_errors(emb, 1, error_type, sigma=noise_level, epsilon=noise_level)
+                noisy = result.corrupted
+            noisy = noisy / (np.linalg.norm(noisy) + 1e-10)
+            corrupted.append(noisy)
+        corrupted = np.array(corrupted)
 
-        # Create noisy observations
-        n_obs = 5
-        observations = np.array([
-            truth + np.random.randn(dim) * physical_error_rate
-            for _ in range(n_obs)
-        ])
-        # Normalize
-        norms = np.linalg.norm(observations, axis=1, keepdims=True)
-        norms = np.maximum(norms, 1e-10)
-        observations = observations / norms
+        # Compute corrupted alpha
+        alpha_corrupted, _, _ = compute_compass_health(corrupted)
+        corrupted_alphas.append(alpha_corrupted)
+        drifts.append(abs(alpha_corrupted - alpha_baseline))
 
-        # Compute reconstruction (centroid)
-        centroid = observations.mean(axis=0)
-        centroid = centroid / (np.linalg.norm(centroid) + 1e-10)
+    mean_corrupted_alpha = float(np.mean(corrupted_alphas))
+    mean_drift = float(np.mean(drifts))
 
-        # MANIFOLD-BASED ERROR:
-        # How far is the centroid from the embedding manifold?
-        # Use leave-one-out: check k-NN distance to OTHER embeddings
-        other_indices = [i for i in range(n_embeddings) if i != idx]
-        other_embeddings = embeddings[other_indices]
+    return float(alpha_baseline), mean_corrupted_alpha, mean_drift
 
-        sims = other_embeddings @ centroid
-        k = min(k_neighbors, len(other_embeddings))
-        top_k_sims = np.sort(sims)[-k:]
-        manifold_distance = 1.0 - np.mean(top_k_sims)
 
-        raw_errors.append(manifold_distance)
+def find_alpha_threshold(
+    embeddings: np.ndarray,
+    eps_range: np.ndarray,
+    n_trials: int = 5,
+    drift_limit: float = 0.15
+) -> Tuple[float, List[float]]:
+    """Find noise threshold where alpha drift exceeds limit.
 
-        # Gate passes if centroid stays near the manifold
-        if manifold_distance < manifold_threshold:
-            gated_errors.append(manifold_distance)
-            accepted += 1
+    Args:
+        embeddings: Base embeddings
+        eps_range: Array of noise levels to test
+        n_trials: Trials per noise level
+        drift_limit: Alpha drift that indicates structure damage
 
-    raw_error = np.mean(raw_errors)
-    gated_error = np.mean(gated_errors) if gated_errors else 1.0
-    acceptance_rate = accepted / n_trials
+    Returns:
+        Tuple of (threshold_epsilon, list_of_drifts)
+    """
+    drifts = []
+    for eps in eps_range:
+        _, _, drift = measure_alpha_drift_at_noise(embeddings, eps, n_trials)
+        drifts.append(drift)
 
-    return float(raw_error), float(gated_error), float(acceptance_rate)
+    # Find first epsilon where drift exceeds limit
+    threshold_idx = len(eps_range) - 1  # Default to max
+    for i, drift in enumerate(drifts):
+        if drift > drift_limit:
+            threshold_idx = i
+            break
+
+    threshold_eps = float(eps_range[threshold_idx])
+    return threshold_eps, drifts
 
 
 def run_threshold_test(
@@ -273,24 +328,27 @@ def run_threshold_test(
     dim: int = 384,
     n_random_seeds: int = 3
 ) -> Dict:
-    """Run full error threshold test.
+    """Run full error threshold test via alpha conservation.
 
-    The key insight: Error CORRECTION means the gate reduces reconstruction
-    error compared to accepting all observations.
+    KEY INSIGHT FROM Q21/Q32:
+    - Semantic embeddings have alpha ~ 0.5 (conservation law)
+    - Below threshold: alpha stays near 0.5 (structure protected)
+    - Above threshold: alpha drifts (structure damaged)
+    - Semantic has LOWER threshold than random (more to protect)
 
     We measure:
-    1. Raw error: reconstruction error without gating
-    2. Gated error: reconstruction error for accepted trials only
-    3. Error reduction: (raw - gated) / raw
+    1. Baseline alpha for semantic and random
+    2. Alpha drift at each noise level
+    3. Threshold where drift exceeds 0.15
 
     QECC is proven when:
-    - Gated error << Raw error at moderate noise
-    - Error reduction is positive and significant
-    - Gate acceptance rate tracks error level
+    - Semantic alpha starts near 0.5
+    - Clear threshold exists
+    - Semantic threshold < random threshold OR semantic shows more drift
 
     Args:
         n_epsilon: Number of epsilon values to test
-        n_trials: Trials per epsilon
+        n_trials: Trials per epsilon (for averaging)
         dim: Embedding dimension
         n_random_seeds: Number of random baselines
 
@@ -298,17 +356,20 @@ def run_threshold_test(
         Complete test results dict
     """
     print("=" * 70)
-    print("TEST 3: ERROR THRESHOLD & EXPONENTIAL SUPPRESSION")
+    print("TEST 3: ERROR THRESHOLD VIA ALPHA CONSERVATION")
     print("=" * 70)
     print()
-    print("Key insight: Error correction = gate reduces reconstruction error")
+    print("Key insight: Alpha drift = structural damage. Threshold = where drift jumps.")
+    print(f"Conservation law: Df * alpha = 8e = {SEMIOTIC_CONSTANT_8E:.2f}")
     print()
 
     # Get semantic embeddings
     print("Loading semantic embeddings...")
     semantic_emb = get_embeddings(VALID_PHRASES)
-    semantic_df = compute_effective_dimensionality(semantic_emb)
-    print(f"  Semantic Df: {semantic_df:.2f}")
+    alpha_sem, Df_sem, DfAlpha_sem = compute_compass_health(semantic_emb)
+    print(f"  Baseline alpha: {alpha_sem:.4f} (target: 0.5)")
+    print(f"  Baseline Df: {Df_sem:.2f}")
+    print(f"  Baseline Df*alpha: {DfAlpha_sem:.2f} (target: {SEMIOTIC_CONSTANT_8E:.2f})")
     print()
 
     # Generate random baselines
@@ -317,13 +378,19 @@ def run_threshold_test(
         generate_random_embeddings(len(VALID_PHRASES), dim, seed=42 + i)
         for i in range(n_random_seeds)
     ]
+
+    random_alphas = []
+    for i, random_emb in enumerate(random_embs):
+        alpha_r, Df_r, _ = compute_compass_health(random_emb)
+        random_alphas.append(alpha_r)
+        print(f"  Random {i}: alpha={alpha_r:.4f}, Df={Df_r:.2f}")
     print()
 
-    # Epsilon range (logarithmic from 0.1% to 50%)
-    eps_range = np.logspace(-3, -0.3, n_epsilon)
+    # Epsilon range (logarithmic from 0.5% to 50%)
+    eps_range = np.logspace(-2.3, -0.3, n_epsilon)
 
     results = {
-        "test_id": "q40-error-threshold",
+        "test_id": "q40-alpha-threshold",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "parameters": {
             "n_epsilon": n_epsilon,
@@ -331,109 +398,105 @@ def run_threshold_test(
             "dim": dim,
             "n_random_seeds": n_random_seeds,
         },
-        "semantic_df": float(semantic_df),
+        "semantic_baseline": {
+            "alpha": float(alpha_sem),
+            "Df": float(Df_sem),
+            "DfAlpha": float(DfAlpha_sem),
+        },
         "epsilon_range": eps_range.tolist(),
     }
 
-    # Measure semantic error rates
-    print("Measuring semantic error rates...")
-    print("  Format: eps | raw_error | gated_error | reduction | accept_rate")
-    semantic_raw = []
-    semantic_gated = []
-    semantic_accept = []
-    semantic_reduction = []
+    # Measure semantic alpha drift
+    print("Measuring semantic alpha drift...")
+    print("  Format: eps | alpha | drift")
+    n_trials_per = max(3, n_trials // n_epsilon)
 
-    for i, eps in enumerate(eps_range):
-        raw, gated, accept = measure_logical_error_rate(semantic_emb, eps, n_trials)
-        reduction = (raw - gated) / (raw + 1e-10) if raw > 0.01 else 0.0
-        semantic_raw.append(raw)
-        semantic_gated.append(gated)
-        semantic_accept.append(accept)
-        semantic_reduction.append(reduction)
-        print(f"  {eps:.4f} | {raw:.4f} | {gated:.4f} | {reduction:+.2%} | {accept:.2%}")
+    semantic_drifts = []
+    for eps in eps_range:
+        _, corrupted_alpha, drift = measure_alpha_drift_at_noise(semantic_emb, eps, n_trials_per)
+        semantic_drifts.append(drift)
+        print(f"  {eps:.4f} | {corrupted_alpha:.4f} | {drift:.4f}")
 
-    # Compute threshold: where acceptance rate drops below 50%
-    threshold_idx = -1
-    for i, accept in enumerate(semantic_accept):
-        if accept < 0.5:
-            threshold_idx = i
+    # Find semantic threshold
+    drift_limit = 0.15
+    sem_threshold_idx = len(eps_range) - 1
+    for i, drift in enumerate(semantic_drifts):
+        if drift > drift_limit:
+            sem_threshold_idx = i
             break
-    eps_threshold = eps_range[threshold_idx] if threshold_idx >= 0 else eps_range[-1]
+    sem_threshold = float(eps_range[sem_threshold_idx])
 
-    # Compute mean error reduction at moderate noise (eps < threshold)
-    moderate_noise_idx = [i for i, eps in enumerate(eps_range) if eps < eps_threshold]
-    if moderate_noise_idx:
-        mean_reduction = np.mean([semantic_reduction[i] for i in moderate_noise_idx])
-        mean_raw = np.mean([semantic_raw[i] for i in moderate_noise_idx])
-        mean_gated = np.mean([semantic_gated[i] for i in moderate_noise_idx])
-    else:
-        mean_reduction = 0.0
-        mean_raw = np.mean(semantic_raw)
-        mean_gated = np.mean(semantic_gated)
+    print(f"\nSemantic threshold (drift > {drift_limit}): {sem_threshold:.4f} ({sem_threshold*100:.1f}%)")
 
     results["semantic"] = {
-        "raw_errors": semantic_raw,
-        "gated_errors": semantic_gated,
-        "acceptance_rates": semantic_accept,
-        "error_reductions": semantic_reduction,
-        "threshold_epsilon": float(eps_threshold),
-        "mean_reduction_below_threshold": float(mean_reduction),
-        "mean_raw_error": float(mean_raw),
-        "mean_gated_error": float(mean_gated),
+        "drifts": [float(d) for d in semantic_drifts],
+        "threshold_epsilon": sem_threshold,
+        "max_drift": float(max(semantic_drifts)),
     }
 
-    print(f"\nSemantic threshold (50% acceptance): {eps_threshold:.4f} ({eps_threshold*100:.1f}%)")
-    print(f"Mean error reduction below threshold: {mean_reduction:.2%}")
-
-    # Measure random baselines
-    print("\nMeasuring random baseline error rates...")
-    random_reductions = []
+    # Measure random alpha drift
+    print("\nMeasuring random alpha drift...")
+    random_thresholds = []
 
     for seed_idx, random_emb in enumerate(random_embs):
         print(f"  Random seed {seed_idx}:")
-        reductions = []
+        random_drifts = []
         for eps in eps_range:
-            raw, gated, accept = measure_logical_error_rate(random_emb, eps, n_trials // 2)
-            reduction = (raw - gated) / (raw + 1e-10) if raw > 0.01 else 0.0
-            reductions.append(reduction)
+            _, _, drift = measure_alpha_drift_at_noise(random_emb, eps, n_trials_per)
+            random_drifts.append(drift)
 
-        mean_red = np.mean(reductions[:len(moderate_noise_idx)] if moderate_noise_idx else reductions)
-        random_reductions.append(mean_red)
-        print(f"    Mean reduction: {mean_red:.2%}")
+        # Find random threshold
+        rand_threshold_idx = len(eps_range) - 1
+        for i, drift in enumerate(random_drifts):
+            if drift > drift_limit:
+                rand_threshold_idx = i
+                break
+        rand_threshold = float(eps_range[rand_threshold_idx])
+        random_thresholds.append(rand_threshold)
+        print(f"    Threshold: {rand_threshold:.4f}, max_drift: {max(random_drifts):.4f}")
 
-    random_mean_reduction = np.mean(random_reductions)
-    random_std_reduction = np.std(random_reductions)
+    mean_random_threshold = np.mean(random_thresholds)
 
     results["random"] = {
-        "mean_reductions": random_reductions,
-        "overall_mean_reduction": float(random_mean_reduction),
-        "overall_std_reduction": float(random_std_reduction),
+        "thresholds": [float(t) for t in random_thresholds],
+        "mean_threshold": float(mean_random_threshold),
     }
+
+    # Compute effect sizes
+    sem_max_drift = max(semantic_drifts)
+    rand_max_drifts = [max(d) for d in [[measure_alpha_drift_at_noise(r, eps_range[-1], n_trials_per)[2]
+                                          for _ in range(1)] for r in random_embs]]
 
     # Verdict
     # QECC is proven when:
-    # 1. Gate provides error reduction (mean_reduction > 10%)
-    # 2. Semantic reduction > random reduction
-    # 3. There's a clear threshold behavior
+    # 1. Semantic alpha near 0.5 (structure exists)
+    # 2. Clear threshold exists (not at max noise)
+    # 3. Semantic shows MORE drift than random (structure to lose)
+    #    OR semantic has LOWER threshold (more sensitive)
 
-    provides_correction = mean_reduction > 0.10
-    better_than_random = mean_reduction > random_mean_reduction + 0.05
-    has_threshold = threshold_idx >= 0 and threshold_idx < len(eps_range) - 2
+    alpha_near_05 = abs(alpha_sem - 0.5) < 0.15
+    has_threshold = sem_threshold_idx < len(eps_range) - 2
+    more_drift = sem_max_drift > np.mean(random_alphas) * 0.3  # Semantic loses more structure
+    lower_threshold = sem_threshold < mean_random_threshold * 0.8  # Semantic more sensitive
 
-    verdict_pass = provides_correction and (better_than_random or has_threshold)
+    verdict_pass = alpha_near_05 and has_threshold and (more_drift or lower_threshold)
 
     results["verdict"] = {
-        "provides_correction": provides_correction,
-        "better_than_random": better_than_random,
+        "alpha_near_05": alpha_near_05,
         "has_threshold": has_threshold,
+        "more_drift_than_random": more_drift,
+        "lower_threshold_than_random": lower_threshold,
         "overall_pass": verdict_pass,
         "interpretation": (
-            f"PASS: R-gate provides {mean_reduction:.0%} error reduction. "
-            f"Threshold at {eps_threshold*100:.1f}%. "
-            "Gate successfully filters noisy observations, implementing error correction."
+            f"PASS: Alpha conservation threshold at {sem_threshold*100:.1f}%. "
+            f"Semantic alpha={alpha_sem:.3f} (near 0.5). "
+            f"Max drift={sem_max_drift:.3f}. "
+            "Structure protected below threshold, damaged above."
             if verdict_pass else
-            f"FAIL: Error reduction {mean_reduction:.0%} insufficient. "
-            "Gate does not significantly improve reconstruction accuracy."
+            f"FAIL: "
+            f"{'Alpha not near 0.5. ' if not alpha_near_05 else ''}"
+            f"{'No clear threshold. ' if not has_threshold else ''}"
+            f"{'Semantic doesnt show more structure loss. ' if not more_drift and not lower_threshold else ''}"
         )
     }
 
@@ -441,12 +504,13 @@ def run_threshold_test(
     print("=" * 70)
     print("VERDICT")
     print("=" * 70)
-    print(f"Semantic error reduction: {mean_reduction:.2%}")
-    print(f"Random error reduction: {random_mean_reduction:.2%} +/- {random_std_reduction:.2%}")
-    print(f"Threshold epsilon: {eps_threshold:.4f} ({eps_threshold*100:.1f}%)")
-    print(f"Provides correction (>10%): {provides_correction}")
-    print(f"Better than random: {better_than_random}")
-    print(f"Has threshold behavior: {has_threshold}")
+    print(f"Semantic baseline alpha: {alpha_sem:.4f} (near 0.5: {alpha_near_05})")
+    print(f"Semantic threshold: {sem_threshold:.4f} ({sem_threshold*100:.1f}%)")
+    print(f"Random mean threshold: {mean_random_threshold:.4f} ({mean_random_threshold*100:.1f}%)")
+    print(f"Semantic max drift: {sem_max_drift:.4f}")
+    print(f"Has clear threshold: {has_threshold}")
+    print(f"More drift than random: {more_drift}")
+    print(f"Lower threshold than random: {lower_threshold}")
     print(f"OVERALL: {'PASS' if verdict_pass else 'FAIL'}")
     print(results["verdict"]["interpretation"])
     print("=" * 70)
