@@ -1,0 +1,150 @@
+======================================================================
+CROSS-MODEL COMMUNICATION DEMONSTRATION
+======================================================================
+
+[1] Loading models...
+    Model A: all-MiniLM-L6-v2  (384D)
+    Model B: all-mpnet-base-v2 (768D)
+    These models have DIFFERENT architectures and dimensions.
+
+[2] Creating communication channel...
+    Anchors: 64 semantic reference points
+    k: 32 (channel dimension)
+
+[3] Channel statistics:
+    Spectrum correlation: 1.0000
+    Procrustes residual:  3.1924
+    Channel dimension:    32
+    Compression A:        384D -> 32D (12.0x)
+    Compression B:        768D -> 32D (24.0x)
+
+[4] Communication test:
+    Messages: 8
+    Distractor pool: 12
+    Total candidates: 20
+
+======================================================================
+MODEL A --> MODEL B
+======================================================================
+
+  TX: "The quick brown fox jumps over the lazy dog"
+  VEC: [+0.015, -0.114, +0.085, ... ] (32D)
+  RX: "The quick brown fox jumps over the lazy dog"
+  SIM: 0.6298  [OK]
+
+  TX: "I love programming and building things"
+  VEC: [-0.239, +0.039, -0.046, ... ] (32D)
+  RX: "I love programming and building things"
+  SIM: 0.5925  [OK]
+
+  TX: "The weather is cold and rainy today"
+  VEC: [-0.058, -0.093, +0.102, ... ] (32D)
+  RX: "The weather is cold and rainy today"
+  SIM: 0.7006  [OK]
+
+  TX: "Mathematics is the language of the universe"
+  VEC: [-0.213, +0.141, -0.105, ... ] (32D)
+  RX: "Mathematics is the language of the universe"
+  SIM: 0.8036  [OK]
+
+  TX: "She walked slowly through the quiet forest"
+  VEC: [-0.059, -0.062, +0.198, ... ] (32D)
+  RX: "She walked slowly through the quiet forest"
+  SIM: 0.7549  [OK]
+
+  TX: "The coffee was hot and delicious this morning"
+  VEC: [+0.035, +0.005, +0.059, ... ] (32D)
+  RX: "The coffee was hot and delicious this morning"
+  SIM: 0.7586  [OK]
+
+  TX: "Scientists discovered a new species of butter..."
+  VEC: [-0.128, -0.033, -0.033, ... ] (32D)
+  RX: "Scientists discovered a new species of butter..."
+  SIM: 0.6545  [OK]
+
+  TX: "He played the piano beautifully at the concer..."
+  VEC: [-0.076, +0.014, +0.012, ... ] (32D)
+  RX: "He played the piano beautifully at the concer..."
+  SIM: 0.4699  [OK]
+
+======================================================================
+MODEL B --> MODEL A
+======================================================================
+
+  TX: "The quick brown fox jumps over the lazy dog"
+  VEC: [+0.013, -0.012, -0.042, ... ] (32D)
+  RX: "The cat sat on the mat"
+  SIM: 0.7154  [FAIL]
+
+  TX: "I love programming and building things"
+  VEC: [+0.100, +0.019, +0.030, ... ] (32D)
+  RX: "I love programming and building things"
+  SIM: 0.5925  [OK]
+
+  TX: "The weather is cold and rainy today"
+  VEC: [+0.087, -0.144, -0.280, ... ] (32D)
+  RX: "The weather is cold and rainy today"
+  SIM: 0.7006  [OK]
+
+  TX: "Mathematics is the language of the universe"
+  VEC: [+0.119, +0.169, +0.164, ... ] (32D)
+  RX: "Mathematics is the language of the universe"
+  SIM: 0.8036  [OK]
+
+  TX: "She walked slowly through the quiet forest"
+  VEC: [+0.103, -0.161, -0.164, ... ] (32D)
+  RX: "She walked slowly through the quiet forest"
+  SIM: 0.7549  [OK]
+
+  TX: "The coffee was hot and delicious this morning"
+  VEC: [-0.011, -0.015, -0.155, ... ] (32D)
+  RX: "The coffee was hot and delicious this morning"
+  SIM: 0.7586  [OK]
+
+  TX: "Scientists discovered a new species of butter..."
+  VEC: [+0.034, +0.061, +0.010, ... ] (32D)
+  RX: "Scientists discovered a new species of butter..."
+  SIM: 0.6545  [OK]
+
+  TX: "He played the piano beautifully at the concer..."
+  VEC: [+0.020, +0.033, -0.117, ... ] (32D)
+  RX: "He played the piano beautifully at the concer..."
+  SIM: 0.4699  [OK]
+
+======================================================================
+RESULTS
+======================================================================
+
+  A -> B: 8/8 (100%)
+  B -> A: 7/8 (88%)
+  Total:  15/16 (94%)
+
+  Spectrum correlation: 1.0000
+  Channel dimension:    32
+  Compression:          384D/768D -> 32D
+
+======================================================================
+CONCLUSION
+======================================================================
+
+  Two models with DIFFERENT architectures and dimensions can communicate
+  meaning through vectors by exploiting the UNIVERSAL geometric structure
+  of high-dimensional semantic space.
+
+  The eigenvalue spectrum is INVARIANT - this is not a property of trained
+  models specifically, but of the mathematics of high-dimensional geometry.
+  Meaning can be encoded because the structure exists in the math itself.
+
+  Protocol:
+    1. Share anchor set (64 words)
+    2. Each model computes MDS of anchor distances
+    3. Procrustes finds rotation between coordinate systems
+    4. Communication: project to MDS space, rotate, match
+
+  This is H(X|S) in action:
+    - S = shared anchors + alignment
+    - X = message
+    - H(X|S) ~ log2(candidates) bits to identify the message
+2026-01-16 18:24:12.188676: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-16 18:24:13.229616: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.

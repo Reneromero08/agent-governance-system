@@ -1,0 +1,94 @@
+============================================================
+VECTOR CHANNEL TEST
+============================================================
+
+Loading models...
+  Model A: all-MiniLM-L6-v2 (dim=384)
+  Model B: all-mpnet-base-v2 (dim=768)
+
+Anchor set: 64 words
+
+Creating endpoints...
+  Endpoint A: k=16, effective_rank=13.77
+  Endpoint B: k=16, effective_rank=14.58
+
+Aligning endpoints...
+  Spectrum correlation: 1.0000
+  Procrustes residual: 3.1892
+
+============================================================
+COMMUNICATION TEST: Model A -> Model B
+============================================================
+
+Sent: "The quick brown fox jumps over the lazy dog"
+  Vector: [0.006, -0.109, 0.096, ...] (k=16)
+  Received: "She walked slowly through the quiet forest"
+  Score: 0.6732
+  Match: FAIL
+
+Sent: "I love programming and building things"
+  Vector: [-0.215, 0.068, -0.029, ...] (k=16)
+  Received: "I love programming and building things"
+  Score: 0.6544
+  Match: OK
+
+Sent: "The weather is cold and rainy today"
+  Vector: [-0.099, -0.114, 0.120, ...] (k=16)
+  Received: "She walked slowly through the quiet forest"
+  Score: 0.6556
+  Match: FAIL
+
+Sent: "Mathematics is the language of the universe"
+  Vector: [-0.222, 0.138, -0.137, ...] (k=16)
+  Received: "Mathematics is the language of the universe"
+  Score: 0.8525
+  Match: OK
+
+Sent: "She walked slowly through the quiet forest"
+  Vector: [-0.067, -0.041, 0.224, ...] (k=16)
+  Received: "She walked slowly through the quiet forest"
+  Score: 0.8130
+  Match: OK
+
+============================================================
+RESULTS
+============================================================
+  Accuracy: 3/5 (60.0%)
+  Spectrum correlation: 1.0000
+  Vector dimension: 16 (vs original 384)
+  Compression: 24.0x
+
+============================================================
+COMMUNICATION TEST: Model B -> Model A
+============================================================
+
+Sent: "The quick brown fox jumps over the lazy ..."
+  Received: "The cat sat on the mat"
+  Score: 0.5733, Match: FAIL
+
+Sent: "I love programming and building things"
+  Received: "Mathematics is the language of the unive..."
+  Score: 0.7044, Match: FAIL
+
+Sent: "The weather is cold and rainy today"
+  Received: "The weather is cold and rainy today"
+  Score: 0.6495, Match: OK
+
+Sent: "Mathematics is the language of the unive..."
+  Received: "Mathematics is the language of the unive..."
+  Score: 0.8525, Match: OK
+
+Sent: "She walked slowly through the quiet fore..."
+  Received: "She walked slowly through the quiet fore..."
+  Score: 0.8130, Match: OK
+
+============================================================
+FINAL SUMMARY
+============================================================
+  A -> B accuracy: 3/5 (60.0%)
+  B -> A accuracy: 3/5 (60.0%)
+  Bidirectional: 60.0%
+  Compression: 384D -> 16D (24.0x)
+2026-01-16 18:20:27.074525: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-16 18:20:28.813355: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.

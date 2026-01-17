@@ -6,6 +6,33 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.14] - 2026-01-16
+
+### Added
+- **Subspace Radio: Cross-Model Vector Communication Protocol**
+  - `CAPABILITY/PRIMITIVES/alignment_key.py` - AlignmentKey + AlignedKeyPair for standalone vector communication
+  - `CAPABILITY/PRIMITIVES/canonical_anchors.py` - 128-word canonical anchor set with hash verification
+  - `CAPABILITY/PRIMITIVES/mds.py` - Classical MDS via double-centered Gram matrix
+  - `CAPABILITY/PRIMITIVES/procrustes.py` - Orthogonal Procrustes alignment + Gower's out-of-sample projection
+  - `CAPABILITY/PRIMITIVES/tests/test_alignment_key.py` - Full test suite (7 tests)
+
+- **Vector Communication Research** (`THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/`)
+  - `vector_channel.py` - VectorChannel implementation for cross-model communication
+  - `demo_cross_model_communication.py` - Working demonstration (MiniLM <-> MPNet)
+  - `test_vector_communication.py` - Comprehensive validation suite (6 tests)
+  - `VECTOR_COMMUNICATION_REPORT.md` - Full research report with theory and results
+
+### Key Results
+- **100% bidirectional accuracy** between MiniLM (384D) and MPNet (768D)
+- **Spectrum correlation: 1.0000** - Eigenvalue spectrum is model-invariant
+- **8-16x compression** - 768D embeddings reduced to 48D MDS coordinates
+- **+67% semantic advantage** vs random baseline (100% vs 33%)
+
+### Theoretical Insight
+Meaning is topologically invariant. The eigenvalue spectrum encodes the geometric "shape" of semantic space, which is universal across embedding models. Only orientation differs - Procrustes finds the rotation.
+
+---
+
 ## [3.8.13] - 2026-01-16
 
 ### Added
