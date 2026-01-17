@@ -1,8 +1,69 @@
-<!-- CONTENT_HASH: 4bf0e2c9 -->
+<!-- CONTENT_HASH: 5a3c8f1b -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.8.19] - 2026-01-17
+
+### Added: SVTP - Semantic Vector Transport Protocol
+
+**The TCP/IP of AI communication.**
+
+SVTP structures 256D vectors like network packets, enabling structured cross-model semantic communication with integrity and authentication.
+
+### Packet Structure (256D)
+
+```
+[0-199]   PAYLOAD     - Holographic semantic content (200D)
+[200-219] PILOT TONE  - Geometric checksum (20D)
+[220-254] AUTH TOKEN  - Rotation hash for sender verification (35D)
+[255]     SEQUENCE    - Packet ordering scalar clock (1D)
+```
+
+### Features
+
+- **Pilot Tone:** Encodes "truth" concept as geometric checksum. If corrupted, similarity drops below threshold.
+- **Auth Token:** Eigenvalue signature of Procrustes rotation matrix proves sender identity.
+- **Sequence Clock:** Single dimension encodes 0-255 for packet ordering.
+
+### New Files
+
+- `CAPABILITY/PRIMITIVES/vector_packet.py` - Full SVTP implementation
+  - `SVTPEncoder` / `SVTPDecoder` - Single-model encode/decode
+  - `CrossModelEncoder` / `CrossModelDecoder` - Cross-model communication
+  - `SVTPPacket` - Packet dataclass with serialization
+  - `DecodeResult` - Decode result with validity checks
+  - `create_svtp_channel()` - Convenience function for bidirectional channels
+
+- `CAPABILITY/PRIMITIVES/SVTP_SPECIFICATION.md` - Protocol specification
+
+- `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/vector-communication/test_svtp.py` - Protocol tests
+
+### Test Results
+
+```
+single_model:     [PASS]  - 100% encode/decode accuracy
+pilot_corruption: [PASS]  - Detects corrupted pilot tone
+cross_model:      [PASS]  - 100% MiniLM <-> MPNet accuracy
+sequence:         [PASS]  - Sequence numbers preserved
+serialization:    [PASS]  - Packet to/from bytes
+```
+
+### Usage
+
+```python
+# Cross-model communication
+pair = key_a.align_with(key_b)
+enc_a, dec_a, enc_b, dec_b = create_svtp_channel(pair, embed_fn_a, embed_fn_b)
+
+# A sends to B
+packet = enc_a.encode_to_other("Hello world", sequence=0)
+result = dec_b.decode(packet.vector, candidates)
+# result.payload == "Hello world"
+```
 
 ---
 
