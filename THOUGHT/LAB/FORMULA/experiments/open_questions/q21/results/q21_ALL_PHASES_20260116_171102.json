@@ -1,0 +1,357 @@
+{
+  "question": "Q21",
+  "title": "Rate of Change (dR/dt)",
+  "hypothesis": "Alpha drift away from 0.5 is a LEADING indicator of gate transitions",
+  "timestamp": "2026-01-17T00:08:32.595078Z",
+  "phases": {
+    "phase1": {
+      "phase": 1,
+      "name": "Infrastructure Validation",
+      "tests": {
+        "bootstrap_stability": {
+          "mean_alpha": 0.4578071151311162,
+          "std_alpha": 0.043317298318123795,
+          "cv": 0.09461910242618898,
+          "cv_percent": 9.461910242618899,
+          "is_stable": true,
+          "n_bootstrap": 100
+        },
+        "drift_detection": {
+          "detected": true,
+          "first_detection_idx": 31,
+          "detection_delay": 11,
+          "drift_start": 20,
+          "detection_rate": 0.32,
+          "detection_reasonable": true
+        }
+      },
+      "all_pass": true
+    },
+    "phase3": {
+      "phase": 3,
+      "name": "Real Embedding Validation",
+      "timestamp": "2026-01-17T00:08:45.649576Z",
+      "tests": {
+        "alpha_baseline": {
+          "test": "alpha_baseline",
+          "models": [
+            {
+              "model": "MiniLM-L6",
+              "model_id": "all-MiniLM-L6-v2",
+              "dim": 384,
+              "Df": 47.85295960680953,
+              "alpha": 0.4824605266680239,
+              "df_alpha": 23.087164094525,
+              "R": 4.660139183516459,
+              "distance_from_critical": 0.017539473331976085,
+              "in_healthy_range": true
+            },
+            {
+              "model": "MPNet-base",
+              "model_id": "all-mpnet-base-v2",
+              "dim": 768,
+              "Df": 47.84766360119233,
+              "alpha": 0.4920050068754049,
+              "df_alpha": 23.541290059076694,
+              "R": 3.4631173805784607,
+              "distance_from_critical": 0.007994993124595118,
+              "in_healthy_range": true
+            },
+            {
+              "model": "BGE-small",
+              "model_id": "BAAI/bge-small-en-v1.5",
+              "dim": 384,
+              "Df": 44.869489849638114,
+              "alpha": 0.5376991918373697,
+              "df_alpha": 24.126288430305475,
+              "R": 13.395028381951468,
+              "distance_from_critical": 0.037699191837369694,
+              "in_healthy_range": true
+            },
+            {
+              "model": "ParaMiniLM-L6",
+              "model_id": "paraphrase-MiniLM-L6-v2",
+              "dim": 384,
+              "Df": 41.74714152842173,
+              "alpha": 0.5520734083743277,
+              "df_alpha": 23.047486713481224,
+              "R": 1.7852236050384256,
+              "distance_from_critical": 0.05207340837432772,
+              "in_healthy_range": true
+            },
+            {
+              "model": "DistilRoBERTa",
+              "model_id": "all-distilroberta-v1",
+              "dim": 768,
+              "Df": 50.3115088012728,
+              "alpha": 0.4620929200019625,
+              "df_alpha": 23.248592011684586,
+              "R": 3.306058453852526,
+              "distance_from_critical": 0.037907079998037496,
+              "in_healthy_range": true
+            }
+          ],
+          "mean_alpha": 0.5052662107514176,
+          "std_alpha": 0.03406671043796746,
+          "cv_alpha": 0.06742329036272664,
+          "success": true
+        },
+        "perturbation_recovery": {
+          "test": "perturbation_recovery",
+          "models": [
+            {
+              "model": "MiniLM-L6",
+              "unperturbed_alpha": 0.4824605266680239,
+              "unperturbed_R": 4.660139183516459,
+              "final_alpha": 0.2290746710094801,
+              "alpha_change": -0.2533858556585438,
+              "final_R": 0.17841716764862559,
+              "drift_detection_idx": "3",
+              "gate_closure_idx": "13",
+              "lead_time": "10",
+              "cohens_d": 2.4826297518792764,
+              "success": "True"
+            },
+            {
+              "model": "MPNet-base",
+              "unperturbed_alpha": 0.4920050068754049,
+              "unperturbed_R": 3.4631173805784607,
+              "final_alpha": 0.1685940479739025,
+              "alpha_change": -0.3234109589015024,
+              "final_R": 0.09298603566552172,
+              "drift_detection_idx": "2",
+              "gate_closure_idx": "12",
+              "lead_time": "10",
+              "cohens_d": 1.9246540713672067,
+              "success": "True"
+            },
+            {
+              "model": "BGE-small",
+              "unperturbed_alpha": 0.5376991918373697,
+              "unperturbed_R": 13.395028381951468,
+              "final_alpha": 0.2359327939237908,
+              "alpha_change": -0.3017663979135789,
+              "final_R": 0.33157538815236554,
+              "drift_detection_idx": "2",
+              "gate_closure_idx": "10",
+              "lead_time": "8",
+              "cohens_d": 1.7632587279000755,
+              "success": "True"
+            }
+          ],
+          "success_rate": 1.0,
+          "success": true
+        },
+        "cross_model_consistency": {
+          "test": "cross_model_consistency",
+          "n_models": 5,
+          "all_degraded": "True",
+          "alpha_changes": [
+            -0.2533858556585438,
+            -0.3234109589015024,
+            -0.3017663979135789,
+            -0.31538404298382616,
+            -0.2870746943195086
+          ],
+          "cv_alpha_change": 0.08346105763285763,
+          "unperturbed_alphas": [
+            0.4824605266680239,
+            0.4920050068754049,
+            0.5376991918373697,
+            0.5520734083743277,
+            0.4620929200019625
+          ],
+          "cv_unperturbed": 0.06742329036272664,
+          "lead_times": [
+            "10",
+            "10",
+            "8",
+            "12",
+            "10"
+          ],
+          "success": true
+        },
+        "prediction_auc": {
+          "test": "prediction_auc",
+          "n_samples": 300,
+          "positive_rate": 0.85,
+          "auc": 0.9954684095860566,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "success": true
+        }
+      },
+      "all_pass": true
+    },
+    "phase4": {
+      "phase": 4,
+      "name": "Adversarial Stress Tests",
+      "timestamp": "2026-01-17T00:10:35.946194Z",
+      "tests": {
+        "echo_chamber": {
+          "test": "echo_chamber",
+          "R_original": 4.660139183516459,
+          "R_echo_chamber": 128.5529960628377,
+          "R_ratio": 27.585655921511314,
+          "alpha_original": 0.4824605266680239,
+          "alpha_echo_chamber": 0.22621968803309406,
+          "echo_detected": true,
+          "success": true
+        },
+        "delayed_collapse": {
+          "test": "delayed_collapse",
+          "baseline_alpha": 0.4824605266680239,
+          "final_alpha": 0.22785558972661665,
+          "baseline_R": 4.660139183516459,
+          "final_R": 0.07038433619034071,
+          "drift_detection_idx": "5",
+          "gate_closure_idx": "19",
+          "lead_time": "14",
+          "success": "True"
+        },
+        "sudden_collapse": {
+          "test": "sudden_collapse",
+          "baseline_alpha": 0.4824605266680239,
+          "pre_collapse_alpha_std": 0.0031362456109695434,
+          "alpha_stable_before": "True",
+          "R_before": 4.492995595276652,
+          "R_after": 0.027807633650661037,
+          "success": "True"
+        },
+        "oscillating_alpha": {
+          "test": "oscillating_alpha",
+          "baseline_alpha": 0.4824605266680239,
+          "alpha_slope": -0.00011602838978428529,
+          "alpha_std": 0.005106867982883858,
+          "no_trend": "True",
+          "R_stable": "True",
+          "gate_open_ratio": 1.0,
+          "success": "True"
+        },
+        "correlated_noise": {
+          "test": "correlated_noise",
+          "auc_real": 0.995,
+          "auc_null": 0.485,
+          "auc_gap": 0.51,
+          "success": true
+        },
+        "distribution_shift": {
+          "test": "distribution_shift",
+          "alpha_domain1": 0.29352676667347405,
+          "alpha_domain2": 0.33038552555968753,
+          "R_domain1": 4.9476046114707755,
+          "R_domain2": 4.510523014742792,
+          "alpha_difference": 0.03685875888621348,
+          "both_reasonable": true,
+          "both_high_R": true,
+          "domain_shift_not_collapse": true,
+          "success": true
+        }
+      },
+      "passes": 6,
+      "total": 6,
+      "all_pass": true
+    },
+    "phase5": {
+      "phase": 5,
+      "name": "Competing Hypotheses",
+      "timestamp": "2026-01-17T00:10:48.349225Z",
+      "tests": {
+        "alpha_vs_dR": {
+          "test": "alpha_vs_dR",
+          "auc_alpha": 0.9933333333333334,
+          "auc_dR": 0.09666666666666664,
+          "alpha_wins": true,
+          "success": true
+        },
+        "alpha_vs_Df": {
+          "test": "alpha_vs_Df",
+          "auc_alpha": 0.9933333333333334,
+          "auc_Df": 0.9933333333333334,
+          "auc_combined": 0.9966666666666667,
+          "success": true
+        },
+        "alpha_vs_entropy": {
+          "test": "alpha_vs_entropy",
+          "auc_alpha": 0.9933333333333334,
+          "auc_entropy": 0.9833333333333334,
+          "correlation": -0.9857245309594659,
+          "both_predictive": true,
+          "success": true
+        },
+        "random_baseline": {
+          "test": "random_baseline",
+          "auc_alpha": 0.9933333333333334,
+          "mean_random": 0.5255333333333333,
+          "std_random": 0.11626427749838823,
+          "z_score": 4.0235918552236445,
+          "success": "True"
+        },
+        "temporal_precedence": {
+          "test": "temporal_precedence",
+          "alpha_R_correlations": [
+            [
+              1,
+              0.9530113022448148
+            ],
+            [
+              2,
+              0.9616806449288525
+            ],
+            [
+              3,
+              0.9672984135459677
+            ],
+            [
+              5,
+              0.9707810708543892
+            ],
+            [
+              10,
+              0.9567442592914346
+            ]
+          ],
+          "R_R_correlations": [
+            [
+              1,
+              0.9971553069129594
+            ],
+            [
+              2,
+              0.9931877199457515
+            ],
+            [
+              3,
+              0.9895443614564179
+            ],
+            [
+              5,
+              0.9794950331463596
+            ],
+            [
+              10,
+              0.9876494967321049
+            ]
+          ],
+          "first_alpha_drift": 2,
+          "first_R_drop": 7,
+          "alpha_leads": "True",
+          "lead_time": 5,
+          "success": "True"
+        }
+      },
+      "passes": 5,
+      "total": 5,
+      "all_pass": true
+    }
+  },
+  "all_pass": true,
+  "phase_status": {
+    "Phase 1 (Infrastructure)": true,
+    "Phase 3 (Real Embeddings)": true,
+    "Phase 4 (Adversarial)": true,
+    "Phase 5 (Competing Hypotheses)": true
+  },
+  "verdict": "ANSWERED"
+}

@@ -1,0 +1,157 @@
+{
+  "phase": 3,
+  "name": "Real Embedding Validation",
+  "timestamp": "2026-01-16T23:59:31.580077Z",
+  "tests": {
+    "alpha_baseline": {
+      "test": "alpha_baseline",
+      "models": [
+        {
+          "model": "MiniLM-L6",
+          "model_id": "all-MiniLM-L6-v2",
+          "dim": 384,
+          "Df": 47.85295960680953,
+          "alpha": 0.4824605266680239,
+          "df_alpha": 23.087164094525,
+          "R": 4.660139183516459,
+          "distance_from_critical": 0.017539473331976085,
+          "in_healthy_range": true
+        },
+        {
+          "model": "MPNet-base",
+          "model_id": "all-mpnet-base-v2",
+          "dim": 768,
+          "Df": 47.84766360119233,
+          "alpha": 0.4920050068754049,
+          "df_alpha": 23.541290059076694,
+          "R": 3.4631173805784607,
+          "distance_from_critical": 0.007994993124595118,
+          "in_healthy_range": true
+        },
+        {
+          "model": "BGE-small",
+          "model_id": "BAAI/bge-small-en-v1.5",
+          "dim": 384,
+          "Df": 44.869489849638114,
+          "alpha": 0.5376991918373697,
+          "df_alpha": 24.126288430305475,
+          "R": 13.395028381951468,
+          "distance_from_critical": 0.037699191837369694,
+          "in_healthy_range": true
+        },
+        {
+          "model": "ParaMiniLM-L6",
+          "model_id": "paraphrase-MiniLM-L6-v2",
+          "dim": 384,
+          "Df": 41.74714152842173,
+          "alpha": 0.5520734083743277,
+          "df_alpha": 23.047486713481224,
+          "R": 1.7852236050384256,
+          "distance_from_critical": 0.05207340837432772,
+          "in_healthy_range": true
+        },
+        {
+          "model": "DistilRoBERTa",
+          "model_id": "all-distilroberta-v1",
+          "dim": 768,
+          "Df": 50.3115088012728,
+          "alpha": 0.4620929200019625,
+          "df_alpha": 23.248592011684586,
+          "R": 3.306058453852526,
+          "distance_from_critical": 0.037907079998037496,
+          "in_healthy_range": true
+        }
+      ],
+      "mean_alpha": 0.5052662107514176,
+      "std_alpha": 0.03406671043796746,
+      "cv_alpha": 0.06742329036272664,
+      "success": true
+    },
+    "perturbation_recovery": {
+      "test": "perturbation_recovery",
+      "models": [
+        {
+          "model": "MiniLM-L6",
+          "unperturbed_alpha": 0.4824605266680239,
+          "unperturbed_R": 4.660139183516459,
+          "final_alpha": 0.2290746710094801,
+          "alpha_change": -0.2533858556585438,
+          "final_R": 0.17841716764862559,
+          "drift_detection_idx": "3",
+          "gate_closure_idx": "13",
+          "lead_time": "10",
+          "cohens_d": 2.4826297518792764,
+          "success": "True"
+        },
+        {
+          "model": "MPNet-base",
+          "unperturbed_alpha": 0.4920050068754049,
+          "unperturbed_R": 3.4631173805784607,
+          "final_alpha": 0.1685940479739025,
+          "alpha_change": -0.3234109589015024,
+          "final_R": 0.09298603566552172,
+          "drift_detection_idx": "2",
+          "gate_closure_idx": "12",
+          "lead_time": "10",
+          "cohens_d": 1.9246540713672067,
+          "success": "True"
+        },
+        {
+          "model": "BGE-small",
+          "unperturbed_alpha": 0.5376991918373697,
+          "unperturbed_R": 13.395028381951468,
+          "final_alpha": 0.2359327939237908,
+          "alpha_change": -0.3017663979135789,
+          "final_R": 0.33157538815236554,
+          "drift_detection_idx": "2",
+          "gate_closure_idx": "10",
+          "lead_time": "8",
+          "cohens_d": 1.7632587279000755,
+          "success": "True"
+        }
+      ],
+      "success_rate": 1.0,
+      "success": true
+    },
+    "cross_model_consistency": {
+      "test": "cross_model_consistency",
+      "n_models": 5,
+      "all_degraded": "True",
+      "alpha_changes": [
+        -0.2533858556585438,
+        -0.3234109589015024,
+        -0.3017663979135789,
+        -0.31538404298382616,
+        -0.2870746943195086
+      ],
+      "cv_alpha_change": 0.08346105763285763,
+      "unperturbed_alphas": [
+        0.4824605266680239,
+        0.4920050068754049,
+        0.5376991918373697,
+        0.5520734083743277,
+        0.4620929200019625
+      ],
+      "cv_unperturbed": 0.06742329036272664,
+      "lead_times": [
+        "10",
+        "10",
+        "8",
+        "12",
+        "10"
+      ],
+      "success": true
+    },
+    "prediction_auc": {
+      "test": "prediction_auc",
+      "n_samples": 300,
+      "positive_rate": 0.85,
+      "auc": 0.9954684095860566,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "success": true
+    }
+  },
+  "all_pass": true
+}

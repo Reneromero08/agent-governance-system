@@ -1,0 +1,146 @@
+{
+  "phase": 3,
+  "name": "Real Embedding Validation",
+  "timestamp": "2026-01-16T23:56:38.051328Z",
+  "tests": {
+    "alpha_baseline": {
+      "test": "alpha_baseline",
+      "models": [
+        {
+          "model": "MiniLM-L6",
+          "model_id": "all-MiniLM-L6-v2",
+          "dim": 384,
+          "Df": 47.85295960680953,
+          "alpha": 0.4824605266680239,
+          "df_alpha": 23.087164094525,
+          "R": 4.660139183516459,
+          "distance_from_critical": 0.017539473331976085,
+          "in_healthy_range": true
+        },
+        {
+          "model": "MPNet-base",
+          "model_id": "all-mpnet-base-v2",
+          "dim": 768,
+          "Df": 47.84766360119233,
+          "alpha": 0.4920050068754049,
+          "df_alpha": 23.541290059076694,
+          "R": 3.4631173805784607,
+          "distance_from_critical": 0.007994993124595118,
+          "in_healthy_range": true
+        },
+        {
+          "model": "BGE-small",
+          "model_id": "BAAI/bge-small-en-v1.5",
+          "dim": 384,
+          "Df": 44.869489849638114,
+          "alpha": 0.5376991918373697,
+          "df_alpha": 24.126288430305475,
+          "R": 13.395028381951468,
+          "distance_from_critical": 0.037699191837369694,
+          "in_healthy_range": true
+        },
+        {
+          "model": "ParaMiniLM-L6",
+          "model_id": "paraphrase-MiniLM-L6-v2",
+          "dim": 384,
+          "Df": 41.74714152842173,
+          "alpha": 0.5520734083743277,
+          "df_alpha": 23.047486713481224,
+          "R": 1.7852236050384256,
+          "distance_from_critical": 0.05207340837432772,
+          "in_healthy_range": true
+        },
+        {
+          "model": "DistilRoBERTa",
+          "model_id": "all-distilroberta-v1",
+          "dim": 768,
+          "Df": 50.3115088012728,
+          "alpha": 0.4620929200019625,
+          "df_alpha": 23.248592011684586,
+          "R": 3.306058453852526,
+          "distance_from_critical": 0.037907079998037496,
+          "in_healthy_range": true
+        }
+      ],
+      "mean_alpha": 0.5052662107514176,
+      "std_alpha": 0.03406671043796746,
+      "cv_alpha": 0.06742329036272664,
+      "success": true
+    },
+    "perturbation_recovery": {
+      "test": "perturbation_recovery",
+      "models": [
+        {
+          "model": "MiniLM-L6",
+          "baseline_alpha": 0.3753602135524539,
+          "final_alpha": 0.22834977047702493,
+          "alpha_change": -0.147010443075429,
+          "baseline_R": 3.543279291229743,
+          "final_R": 0.024538563744756048,
+          "drift_detection_idx": null,
+          "gate_closure_idx": "5",
+          "lead_time": 0,
+          "cohens_d": 1.1843876385948064,
+          "success": false
+        },
+        {
+          "model": "MPNet-base",
+          "baseline_alpha": 0.32666583532371424,
+          "final_alpha": 0.17127795589046882,
+          "alpha_change": -0.15538787943324542,
+          "baseline_R": 2.593693957468074,
+          "final_R": 0.06424644087520434,
+          "drift_detection_idx": null,
+          "gate_closure_idx": "5",
+          "lead_time": 0,
+          "cohens_d": 0.9401153988554116,
+          "success": false
+        },
+        {
+          "model": "BGE-small",
+          "baseline_alpha": 0.3723901314895267,
+          "final_alpha": 0.22233500932033368,
+          "alpha_change": -0.15005512216919303,
+          "baseline_R": 9.267898785835488,
+          "final_R": 0.09977140401820078,
+          "drift_detection_idx": null,
+          "gate_closure_idx": "4",
+          "lead_time": 0,
+          "cohens_d": 0.9972842090578259,
+          "success": false
+        }
+      ],
+      "success_rate": 0.0,
+      "success": false
+    },
+    "cross_model_consistency": {
+      "test": "cross_model_consistency",
+      "n_models": 1,
+      "lead_times": [
+        "-2"
+      ],
+      "mean_lead_time": 0.0,
+      "std_lead_time": 0.0,
+      "cv_lead_time": 0.0,
+      "alpha_changes": [
+        -0.14083426215718775,
+        -0.16309264255308809,
+        -0.13531453134381452,
+        -0.18591149168767696,
+        -0.1328229835326364
+      ],
+      "success": false
+    },
+    "prediction_auc": {
+      "test": "prediction_auc",
+      "n_samples": 300,
+      "positive_rate": 0.85,
+      "auc": 0.9954684095860566,
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "success": true
+    }
+  },
+  "all_pass": false
+}

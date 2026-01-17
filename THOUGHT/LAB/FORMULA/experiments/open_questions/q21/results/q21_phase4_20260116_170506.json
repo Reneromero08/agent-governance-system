@@ -1,0 +1,69 @@
+{
+  "phase": 4,
+  "name": "Adversarial Stress Tests",
+  "timestamp": "2026-01-17T00:04:42.138363Z",
+  "tests": {
+    "echo_chamber": {
+      "test": "echo_chamber",
+      "R_original": 4.660139183516459,
+      "R_echo_chamber": 128.5529960628377,
+      "R_ratio": 27.585655921511314,
+      "alpha_original": 0.4824605266680239,
+      "alpha_echo_chamber": 0.22621968803309406,
+      "echo_detected": true,
+      "success": true
+    },
+    "delayed_collapse": {
+      "test": "delayed_collapse",
+      "baseline_alpha": 0.4824605266680239,
+      "final_alpha": 0.22785558972661665,
+      "baseline_R": 4.660139183516459,
+      "final_R": 0.07038433619034071,
+      "drift_detection_idx": "5",
+      "gate_closure_idx": "19",
+      "lead_time": "14",
+      "success": "True"
+    },
+    "sudden_collapse": {
+      "test": "sudden_collapse",
+      "baseline_alpha": 0.4824605266680239,
+      "pre_collapse_alpha_std": 0.0031362456109695434,
+      "alpha_stable_before": "True",
+      "R_before": 4.492995595276652,
+      "R_after": 0.027807633650661037,
+      "success": "True"
+    },
+    "oscillating_alpha": {
+      "test": "oscillating_alpha",
+      "baseline_alpha": 0.4824605266680239,
+      "alpha_slope": -0.00011602838978428529,
+      "alpha_std": 0.005106867982883858,
+      "no_trend": "True",
+      "R_stable": "True",
+      "gate_open_ratio": 1.0,
+      "success": "True"
+    },
+    "correlated_noise": {
+      "test": "correlated_noise",
+      "auc_real": 0.995,
+      "auc_null": 0.485,
+      "auc_gap": 0.51,
+      "success": true
+    },
+    "distribution_shift": {
+      "test": "distribution_shift",
+      "alpha_domain1": 0.29352676667347405,
+      "alpha_domain2": 0.33038552555968753,
+      "R_domain1": 4.9476046114707755,
+      "R_domain2": 4.510523014742792,
+      "alpha_difference": 0.03685875888621348,
+      "both_reasonable": true,
+      "both_high_R": true,
+      "domain_shift_not_collapse": true,
+      "success": true
+    }
+  },
+  "passes": 6,
+  "total": 6,
+  "all_pass": true
+}

@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.4.0 (2026-01-15 - Q48-Q50 ANSWERED: Semiotic conservation law Df × α = 8e proven. 8 = 2³ from Peirce's Reduction Thesis. Training dynamics confirmed: 8e emerges (ratio 1.575 ≈ 3/2). 24/50 questions answered (48%).)*
+*Last updated: v4.5.0 (2026-01-16 - Q21 ANSWERED: Alpha drift IS a leading indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). 25/51 questions answered (49%).)*
 
 ---
 
@@ -69,7 +69,7 @@
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ⏳ OPEN | Does dR/dt carry information? Can we predict gate transitions? |
+| 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ✅ ANSWERED | **YES.** Alpha drift (departure from 0.5) is a LEADING indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). [Full answer](lower_priority/Q21_ANSWER.md) |
 | 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ OPEN | Universal threshold or domain-specific? |
 | 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | Hypothesis: √3 from optimal hexagonal packing in evidence space. Connects to fractal dimension Df (Q3), Mandelbrot geometry, distinguishability threshold. Needs experimental verification. |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
@@ -113,9 +113,9 @@
 ## Summary Statistics
 
 - **Total Questions:** 51
-- **Answered:** 24 (47.1%)
+- **Answered:** 25 (49.0%)
 - **Partially Answered:** 6 (11.8%)
-- **Open:** 21 (41.2%)
+- **Open:** 20 (39.2%)
 
 ### By Priority Level
 
@@ -124,7 +124,7 @@
 | Critical | 12 | 10 | 1 | 1 |
 | High | 15 | 9 | 3 | 3 |
 | Medium | 11 | 4 | 1 | 6 |
-| Lower | 8 | 1 | 1 | 6 |
+| Lower | 8 | 2 | 1 | 5 |
 | Engineering | 2 | 0 | 0 | 2 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |
 

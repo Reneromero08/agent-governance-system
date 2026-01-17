@@ -1,0 +1,92 @@
+{
+  "phase": 5,
+  "name": "Competing Hypotheses",
+  "timestamp": "2026-01-17T00:07:32.248100Z",
+  "tests": {
+    "alpha_vs_dR": {
+      "test": "alpha_vs_dR",
+      "auc_alpha": 0.9933333333333334,
+      "auc_dR": 0.09666666666666664,
+      "alpha_wins": true,
+      "success": true
+    },
+    "alpha_vs_Df": {
+      "test": "alpha_vs_Df",
+      "auc_alpha": 0.9933333333333334,
+      "auc_Df": 0.9933333333333334,
+      "auc_combined": 0.9966666666666667,
+      "success": true
+    },
+    "alpha_vs_entropy": {
+      "test": "alpha_vs_entropy",
+      "auc_alpha": 0.9933333333333334,
+      "auc_entropy": 0.9833333333333334,
+      "correlation": -0.9857245309594659,
+      "both_predictive": true,
+      "success": true
+    },
+    "random_baseline": {
+      "test": "random_baseline",
+      "auc_alpha": 0.9933333333333334,
+      "mean_random": 0.5255333333333333,
+      "std_random": 0.11626427749838823,
+      "z_score": 4.0235918552236445,
+      "success": "True"
+    },
+    "temporal_precedence": {
+      "test": "temporal_precedence",
+      "alpha_R_correlations": [
+        [
+          1,
+          0.9530113022448148
+        ],
+        [
+          2,
+          0.9616806449288525
+        ],
+        [
+          3,
+          0.9672984135459677
+        ],
+        [
+          5,
+          0.9707810708543892
+        ],
+        [
+          10,
+          0.9567442592914346
+        ]
+      ],
+      "R_R_correlations": [
+        [
+          1,
+          0.9971553069129594
+        ],
+        [
+          2,
+          0.9931877199457515
+        ],
+        [
+          3,
+          0.9895443614564179
+        ],
+        [
+          5,
+          0.9794950331463596
+        ],
+        [
+          10,
+          0.9876494967321049
+        ]
+      ],
+      "first_alpha_drift": 2,
+      "first_R_drop": 7,
+      "alpha_leads": "True",
+      "lead_time": 5,
+      "success": "True"
+    }
+  },
+  "passes": 5,
+  "total": 5,
+  "all_pass": true
+}

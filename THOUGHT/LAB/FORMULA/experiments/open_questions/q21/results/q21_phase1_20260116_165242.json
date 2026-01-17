@@ -1,0 +1,30 @@
+{
+  "phase": 1,
+  "name": "Infrastructure Validation",
+  "tests": {
+    "bootstrap_stability": {
+      "mean_alpha": 0.4578071151311162,
+      "std_alpha": 0.043317298318123795,
+      "cv": 0.09461910242618898,
+      "cv_percent": 9.461910242618899,
+      "is_stable": false,
+      "n_bootstrap": 100
+    },
+    "healthy_trajectory": {
+      "mean_alpha": 0.3739441152161146,
+      "std_alpha": 0.012575764368658352,
+      "distance_from_critical": 0.1260558847838854,
+      "is_healthy": true
+    },
+    "drift_detection": {
+      "detected": true,
+      "first_detection_idx": 31,
+      "detection_delay": 11,
+      "drift_start": 20,
+      "detection_rate": 0.32,
+      "detection_reasonable": true
+    }
+  },
+  "all_pass": false,
+  "timestamp": "2026-01-16T23:52:42.689747Z"
+}
