@@ -1,0 +1,571 @@
+{
+  "test_id": "dark-forest-holographic",
+  "message": "Explain how transformers work in neural networks",
+  "k": 48,
+  "candidates": [
+    "Explain how transformers work in neural networks",
+    "Explain how neural networks learn from data",
+    "What is machine learning and how does it work",
+    "Describe the architecture of convolutional networks",
+    "How do recurrent neural networks process sequences",
+    "What is deep learning and artificial intelligence",
+    "Explain the attention mechanism in detail",
+    "How do computers understand natural language"
+  ],
+  "corruption_tests": [
+    {
+      "n_corrupted": 0,
+      "corruption_percent": 0.0,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 1.0,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 1.0,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 1.0,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 5,
+      "corruption_percent": 10.416666666666666,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            24,
+            26,
+            27,
+            40,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.9762654533865244,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            6,
+            13,
+            14,
+            26,
+            33
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.8321960110650602,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            5,
+            6,
+            36,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.8573318843929236,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 10,
+      "corruption_percent": 20.833333333333332,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            4,
+            12,
+            19,
+            24,
+            25,
+            26,
+            27,
+            37,
+            40,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.9212570210399487,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            5,
+            6,
+            13,
+            14,
+            18,
+            22,
+            26,
+            31,
+            33,
+            34
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.7684990579727066,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            5,
+            6,
+            17,
+            27,
+            33,
+            36,
+            39,
+            42,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.7837521305131065,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 15,
+      "corruption_percent": 31.25,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            3,
+            4,
+            6,
+            8,
+            12,
+            19,
+            24,
+            25,
+            26,
+            27,
+            33,
+            37,
+            39,
+            40,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.7208287668356074,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            5,
+            6,
+            7,
+            13,
+            14,
+            18,
+            19,
+            22,
+            26,
+            31,
+            33,
+            34,
+            37,
+            39,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.672846060022007,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            5,
+            6,
+            11,
+            13,
+            15,
+            17,
+            26,
+            27,
+            31,
+            33,
+            36,
+            39,
+            42,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.7466158997057731,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 20,
+      "corruption_percent": 41.666666666666664,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            3,
+            4,
+            6,
+            8,
+            9,
+            12,
+            13,
+            15,
+            17,
+            19,
+            24,
+            25,
+            26,
+            27,
+            33,
+            37,
+            39,
+            40,
+            43,
+            45
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6570235316272331,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            13,
+            14,
+            18,
+            19,
+            20,
+            22,
+            26,
+            28,
+            31,
+            32,
+            33,
+            34,
+            37,
+            39,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6364202858280015,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            2,
+            5,
+            6,
+            11,
+            12,
+            13,
+            15,
+            17,
+            26,
+            27,
+            30,
+            31,
+            33,
+            34,
+            36,
+            39,
+            40,
+            42,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6865541143804469,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 24,
+      "corruption_percent": 50.0,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            3,
+            4,
+            6,
+            8,
+            9,
+            12,
+            13,
+            15,
+            16,
+            17,
+            19,
+            24,
+            25,
+            26,
+            27,
+            29,
+            32,
+            33,
+            37,
+            39,
+            40,
+            43,
+            45,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6251623619446167,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            13,
+            14,
+            15,
+            18,
+            19,
+            20,
+            22,
+            26,
+            28,
+            31,
+            32,
+            33,
+            34,
+            37,
+            38,
+            39,
+            42,
+            43
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6285560043024548,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            2,
+            5,
+            6,
+            11,
+            12,
+            13,
+            15,
+            16,
+            17,
+            24,
+            26,
+            27,
+            28,
+            30,
+            31,
+            33,
+            34,
+            36,
+            38,
+            39,
+            40,
+            42,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.6516787361384285,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    },
+    {
+      "n_corrupted": 36,
+      "corruption_percent": 75.0,
+      "trials": [
+        {
+          "trial": 0,
+          "corrupted_dims": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            8,
+            9,
+            11,
+            12,
+            13,
+            15,
+            16,
+            17,
+            19,
+            21,
+            24,
+            25,
+            26,
+            27,
+            29,
+            30,
+            31,
+            32,
+            33,
+            34,
+            35,
+            36,
+            37,
+            39,
+            40,
+            43,
+            44,
+            45,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.4750348588929488,
+          "matches": true
+        },
+        {
+          "trial": 1,
+          "corrupted_dims": [
+            1,
+            3,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            12,
+            13,
+            14,
+            15,
+            18,
+            19,
+            20,
+            22,
+            24,
+            25,
+            26,
+            28,
+            29,
+            31,
+            32,
+            33,
+            34,
+            36,
+            37,
+            38,
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45,
+            47
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.5436419464142173,
+          "matches": true
+        },
+        {
+          "trial": 2,
+          "corrupted_dims": [
+            0,
+            1,
+            2,
+            4,
+            5,
+            6,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13,
+            14,
+            15,
+            16,
+            17,
+            18,
+            19,
+            21,
+            24,
+            26,
+            27,
+            28,
+            29,
+            30,
+            31,
+            33,
+            34,
+            36,
+            37,
+            38,
+            39,
+            40,
+            42,
+            43,
+            46
+          ],
+          "decoded": "Explain how transformers work in neural networks",
+          "confidence": 0.4554816416243856,
+          "matches": true
+        }
+      ],
+      "accuracy": 1.0
+    }
+  ],
+  "summary": {
+    "threshold_corruption": 48,
+    "threshold_percent": 100.0,
+    "failure_point": 48,
+    "failure_percent": 100.0
+  },
+  "verdict": {
+    "is_holographic": true,
+    "interpretation": "Meaning is holographically distributed"
+  }
+}

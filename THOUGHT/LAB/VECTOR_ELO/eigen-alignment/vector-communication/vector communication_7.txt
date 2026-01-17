@@ -1,0 +1,8 @@
+EXTREME CORRUPTION TEST
+==================================================
+40/48 dims zeroed (83%): 5/5 = 100%
+42/48 dims zeroed (88%): 5/5 = 100%
+44/48 dims zeroed (92%): 5/5 = 100%
+45/48 dims zeroed (94%): 5/5 = 100%
+46/48 dims zeroed (96%): 3/5 = 60%
+47/48 dims zeroed (98%): 2/5 = 40%

@@ -1,0 +1,229 @@
+================================================================================
+DARK FOREST SCALED TEST - 110%
+================================================================================
+Timestamp: 2026-01-17T14:33:16.987807+00:00
+
+Pre-caching all embeddings...
+  Cached 20 embeddings
+
+============================================================
+k = 16
+============================================================
+
+  Strategy: random_zero
+       0% ( 0/16 dims): OK (conf=1.000)
+      50% ( 8/16 dims): 84% (conf=0.672)
+      75% (12/16 dims): 44% (conf=0.557)
+      90% (14/16 dims): 20% (conf=0.523)
+      94% (15/16 dims): 9% (conf=0.459)
+      96% (15/16 dims): 9% (conf=0.459)
+      98% (15/16 dims): 9% (conf=0.459)
+
+  Strategy: magnitude_high
+       0% ( 0/16 dims): OK (conf=1.000)
+      50% ( 8/16 dims): 7% (conf=0.481)
+      75% (12/16 dims): 0% (conf=0.403)
+      90% (14/16 dims): 0% (conf=0.447)
+      94% (15/16 dims): 0% (conf=0.458)
+      96% (15/16 dims): 0% (conf=0.458)
+      98% (15/16 dims): 0% (conf=0.458)
+
+  Strategy: sign_flip
+       0% ( 0/16 dims): OK (conf=1.000)
+      50% ( 8/16 dims): 4% (conf=0.408)
+      75% (12/16 dims): 0% (conf=0.411)
+      90% (14/16 dims): 0% (conf=0.375)
+      94% (15/16 dims): 0% (conf=0.347)
+      96% (15/16 dims): 0% (conf=0.347)
+      98% (15/16 dims): 0% (conf=0.347)
+
+  Strategy: gaussian_noise
+       0% ( 0/16 dims): OK (conf=1.000)
+      50% ( 8/16 dims): 82% (conf=0.591)
+      75% (12/16 dims): 71% (conf=0.580)
+      90% (14/16 dims): 62% (conf=0.581)
+      94% (15/16 dims): 56% (conf=0.584)
+      96% (15/16 dims): 56% (conf=0.584)
+      98% (15/16 dims): 56% (conf=0.584)
+
+============================================================
+k = 32
+============================================================
+
+  Strategy: random_zero
+       0% ( 0/32 dims): OK (conf=1.000)
+      50% (16/32 dims): 98% (conf=0.718)
+      75% (24/32 dims): 71% (conf=0.486)
+      90% (28/32 dims): 40% (conf=0.427)
+      94% (30/32 dims): 22% (conf=0.353)
+      96% (30/32 dims): 22% (conf=0.353)
+      98% (31/32 dims): 11% (conf=0.355)
+
+  Strategy: magnitude_high
+       0% ( 0/32 dims): OK (conf=1.000)
+      50% (16/32 dims): 40% (conf=0.343)
+      75% (24/32 dims): 0% (conf=0.278)
+      90% (28/32 dims): 0% (conf=0.267)
+      94% (30/32 dims): 0% (conf=0.275)
+      96% (30/32 dims): 0% (conf=0.275)
+      98% (31/32 dims): 0% (conf=0.333)
+
+  Strategy: sign_flip
+       0% ( 0/32 dims): OK (conf=1.000)
+      50% (16/32 dims): 11% (conf=0.342)
+      75% (24/32 dims): 0% (conf=0.293)
+      90% (28/32 dims): 0% (conf=0.259)
+      94% (30/32 dims): 0% (conf=0.247)
+      96% (30/32 dims): 0% (conf=0.247)
+      98% (31/32 dims): 0% (conf=0.245)
+
+  Strategy: gaussian_noise
+       0% ( 0/32 dims): OK (conf=1.000)
+      50% (16/32 dims): 91% (conf=0.545)
+      75% (24/32 dims): 73% (conf=0.487)
+      90% (28/32 dims): 73% (conf=0.444)
+      94% (30/32 dims): 71% (conf=0.441)
+      96% (30/32 dims): 71% (conf=0.441)
+      98% (31/32 dims): 69% (conf=0.433)
+
+============================================================
+k = 48
+============================================================
+
+  Strategy: random_zero
+       0% ( 0/48 dims): OK (conf=1.000)
+      50% (24/48 dims): OK (conf=0.728)
+      75% (36/48 dims): 93% (conf=0.503)
+      90% (43/48 dims): 53% (conf=0.343)
+      94% (45/48 dims): 38% (conf=0.277)
+      96% (46/48 dims): 20% (conf=0.259)
+      98% (47/48 dims): 11% (conf=0.218)
+
+  Strategy: magnitude_high
+       0% ( 0/48 dims): OK (conf=1.000)
+      50% (24/48 dims): 27% (conf=0.302)
+      75% (36/48 dims): 0% (conf=0.256)
+      90% (43/48 dims): 0% (conf=0.231)
+      94% (45/48 dims): 0% (conf=0.223)
+      96% (46/48 dims): 0% (conf=0.216)
+      98% (47/48 dims): 0% (conf=0.262)
+
+  Strategy: sign_flip
+       0% ( 0/48 dims): OK (conf=1.000)
+      50% (24/48 dims): 20% (conf=0.261)
+      75% (36/48 dims): 0% (conf=0.217)
+      90% (43/48 dims): 0% (conf=0.188)
+      94% (45/48 dims): 0% (conf=0.178)
+      96% (46/48 dims): 0% (conf=0.169)
+      98% (47/48 dims): 0% (conf=0.185)
+
+  Strategy: gaussian_noise
+       0% ( 0/48 dims): OK (conf=1.000)
+      50% (24/48 dims): 96% (conf=0.618)
+      75% (36/48 dims): 93% (conf=0.528)
+      90% (43/48 dims): 89% (conf=0.499)
+      94% (45/48 dims): 91% (conf=0.502)
+      96% (46/48 dims): 87% (conf=0.498)
+      98% (47/48 dims): 84% (conf=0.493)
+
+============================================================
+FINDING TRUE MINIMUM DIMENSIONS (k=48)
+============================================================
+
+Message: 'Explain how transformers work in neural networks'
+
+Testing each dimension count (50 trials each)...
+  Keep  1 dims:  10.0%
+  Keep  2 dims:  20.0%
+  Keep  3 dims:  28.0%
+  Keep  4 dims:  40.0%
+  Keep  5 dims:  48.0%
+  Keep  6 dims:  54.0%
+  Keep  7 dims:  62.0%
+  Keep  8 dims:  64.0%
+  Keep  9 dims:  68.0%
+  Keep 10 dims:  78.0%
+  Keep 11 dims:  80.0%
+  Keep 12 dims:  84.0%
+  Keep 13 dims:  88.0%
+  Keep 14 dims:  88.0%
+  Keep 15 dims:  88.0%
+  Keep 16 dims:  88.0%
+  Keep 17 dims:  90.0%
+  Keep 18 dims:  94.0%
+  Keep 19 dims:  96.0%
+  Keep 20 dims:  98.0%
+  Keep 21 dims:  96.0%
+  Keep 22 dims:  98.0%
+  Keep 28 dims:  98.0%
+
+  Minimum for 100% accuracy: 29 dims (60.4% of vector)
+  Minimum for 90% accuracy: 17 dims (35.4% of vector)
+  Minimum for 50% accuracy: 6 dims (12.5% of vector)
+
+============================================================
+WORST CASE ANALYSIS (delete highest magnitude dims)
+============================================================
+  Keep  1 dims (worst case): FAIL (conf=0.183)
+  Keep  2 dims (worst case): FAIL (conf=0.273)
+  Keep  3 dims (worst case): FAIL (conf=0.283)
+  Keep  4 dims (worst case): FAIL (conf=0.293)
+  Keep  5 dims (worst case): FAIL (conf=0.196)
+  Keep  6 dims (worst case): FAIL (conf=0.371)
+  Keep  7 dims (worst case): FAIL (conf=0.404)
+  Keep  8 dims (worst case): FAIL (conf=0.404)
+  Keep  9 dims (worst case): FAIL (conf=0.332)
+  Keep 10 dims (worst case): FAIL (conf=0.323)
+  Keep 11 dims (worst case): FAIL (conf=0.272)
+  Keep 12 dims (worst case): FAIL (conf=0.327)
+  Keep 13 dims (worst case): FAIL (conf=0.264)
+  Keep 14 dims (worst case): FAIL (conf=0.220)
+  Keep 15 dims (worst case): FAIL (conf=0.265)
+  Keep 16 dims (worst case): FAIL (conf=0.254)
+  Keep 17 dims (worst case): FAIL (conf=0.185)
+  Keep 18 dims (worst case): FAIL (conf=0.247)
+  Keep 19 dims (worst case): FAIL (conf=0.284)
+  Keep 20 dims (worst case): FAIL (conf=0.328)
+  Keep 21 dims (worst case): FAIL (conf=0.416)
+  Keep 22 dims (worst case): FAIL (conf=0.382)
+  Keep 23 dims (worst case): FAIL (conf=0.422)
+  Keep 24 dims (worst case): FAIL (conf=0.360)
+  Keep 25 dims (worst case): FAIL (conf=0.397)
+  Keep 26 dims (worst case): FAIL (conf=0.412)
+  Keep 27 dims (worst case): FAIL (conf=0.411)
+  Keep 28 dims (worst case): FAIL (conf=0.422)
+  Keep 29 dims (worst case): FAIL (conf=0.385)
+
+  Worst-case minimum: 30 dims (62.5%)
+
+============================================================
+CROSS-MODEL CORRUPTION TEST
+============================================================
+  Nomic -> MPNet alignment:
+    Spectrum correlation: 1.0000
+    Procrustes residual: 2.8135
+
+  Cross-model corruption tolerance:
+       0% corruption: 0%
+      50% corruption: 0%
+      75% corruption: 0%
+      90% corruption: 0%
+      94% corruption: 0%
+
+================================================================================
+FINAL SUMMARY
+================================================================================
+
+  Holographic Score: 39.6% of vector can be deleted
+  Random corruption threshold: 39.6%
+  Worst-case threshold: 37.5%
+  Minimum dims (random): 29/48
+  Minimum dims (worst): 30/48
+
+  Minimum dims > 5: Partial holographic encoding
+
+Time: 104.7s
+Results: d:\CCC 2.0\AI\agent-governance-system\THOUGHT\LAB\VECTOR_ELO\eigen-alignment\vector-communication\dark_forest_scaled_results.json
+2026-01-17 07:33:54.609584: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-17 07:33:56.105930: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
