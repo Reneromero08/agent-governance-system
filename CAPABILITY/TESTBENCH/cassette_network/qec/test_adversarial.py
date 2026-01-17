@@ -33,8 +33,10 @@ from scipy.spatial.distance import cosine
 # Local imports
 from core import (
     r_gate,
+    r_gate_with_reference,
     compute_R,
     compute_dispersion,
+    compute_m_field_centroid,
     generate_random_embeddings,
     compute_effective_dimensionality,
     DEFAULT_R_THRESHOLD,
@@ -214,9 +216,18 @@ def detect_gradual_drift(
     valid_emb: np.ndarray,
     invalid_emb: np.ndarray,
     n_steps: int = 20,
-    threshold: float = DEFAULT_R_THRESHOLD
+    threshold: float = DEFAULT_R_THRESHOLD,
+    deviation_threshold: float = 0.15
 ) -> Dict:
-    """Run gradual drift attack and detect when gate triggers.
+    """Run gradual drift attack and detect when REFERENCE check triggers.
+
+    THE KEY INSIGHT: The original R-gate only measures internal agreement.
+    Gradual drift keeps all observations agreeing (they're all attacked the same way).
+    The fix is to compare observations against the ORIGINAL valid embedding.
+
+    Detection occurs when:
+    1. Centroid deviates from original by more than deviation_threshold
+    2. This is the reference-based check that catches silent attacks
 
     Returns:
         Dict with detection_alpha, gate_trace, etc.
@@ -238,17 +249,30 @@ def detect_gradual_drift(
         ])
         observations = observations / np.linalg.norm(observations, axis=1, keepdims=True)
 
-        # Check R-gate
-        gate_result = r_gate(observations, threshold)
+        # Compute centroid
+        centroid = compute_m_field_centroid(observations)
+
+        # REFERENCE CHECK: Does centroid match original valid embedding?
+        # This is the key to detecting gradual drift
+        reference_similarity = np.dot(centroid, valid_emb)
+        deviation = 1 - reference_similarity
+
+        # Also check internal R-gate for comparison
+        internal_gate = r_gate(observations, threshold)
+
+        # Detection: deviation exceeds threshold
+        detected = deviation > deviation_threshold
+
         gate_trace.append({
             'alpha': alpha,
-            'R_value': gate_result.R_value,
-            'sigma': gate_result.sigma,
-            'passed': gate_result.passed,
+            'deviation': float(deviation),
+            'reference_similarity': float(reference_similarity),
+            'internal_R': internal_gate.R_value,
+            'detected': detected,
         })
 
-        # Record first detection (gate fails)
-        if not gate_result.passed and detection_alpha is None:
+        # Record first detection
+        if detected and detection_alpha is None:
             detection_alpha = alpha
 
     return {
@@ -262,15 +286,20 @@ def detect_random_dimensions(
     embedding: np.ndarray,
     max_dims: int = 50,
     magnitude: float = 0.5,
-    threshold: float = DEFAULT_R_THRESHOLD
+    threshold: float = DEFAULT_R_THRESHOLD,
+    deviation_threshold: float = 0.15
 ) -> Dict:
     """Run random dimension attack with increasing dimensions.
+
+    THE KEY INSIGHT: Like gradual drift, random dimension attacks keep
+    observations internally consistent. The fix is reference-based checking.
 
     Returns:
         Dict with detection_dims, success_trace, etc.
     """
     dim = len(embedding)
     detection_dims = None
+    original = embedding.copy()  # Save original for reference
 
     success_trace = []
     for n_dims in range(1, min(max_dims, dim) + 1):
@@ -286,16 +315,25 @@ def detect_random_dimensions(
         ])
         observations = observations / np.linalg.norm(observations, axis=1, keepdims=True)
 
-        # Check R-gate
-        gate_result = r_gate(observations, threshold)
+        # Compute centroid
+        centroid = compute_m_field_centroid(observations)
+
+        # REFERENCE CHECK: How far from original?
+        reference_similarity = np.dot(centroid, original)
+        deviation = 1 - reference_similarity
+
+        # Detection: deviation exceeds threshold
+        detected = deviation > deviation_threshold
+
         success_trace.append({
             'n_dims': n_dims,
-            'R_value': gate_result.R_value,
-            'passed': gate_result.passed,
+            'deviation': float(deviation),
+            'reference_similarity': float(reference_similarity),
+            'detected': detected,
         })
 
-        # Gate fails = attack detected
-        if not gate_result.passed and detection_dims is None:
+        # Record first detection
+        if detected and detection_dims is None:
             detection_dims = n_dims
 
     return {

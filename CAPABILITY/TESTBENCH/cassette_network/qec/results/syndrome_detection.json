@@ -1,0 +1,25 @@
+{
+  "test_id": "q40-syndrome-detection",
+  "timestamp": "2026-01-17T13:43:13.864924+00:00",
+  "parameters": {
+    "n_trials": 50,
+    "dim": 384,
+    "n_random_seeds": 3
+  },
+  "semantic_df": 11.431810988194771,
+  "error_types": {
+    "gaussian_noise": {
+      "semantic_improvements": [
+        -1.1574811364298074,
+        -0.1426086669021597,
+        0.09354190313346107
+      ],
+      "random_improvements": [
+        -2.5773383694408722,
+        -0.9413555251523734,
+        -0.47711761680783127
+      ],
+      "semantic_mean": -0.40218263339950205,
+      "random_mean": -1.3319371704670255,
+      "cohens_d": 1.0208623431791373,
+      "better_than_random": 

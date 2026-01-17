@@ -130,8 +130,9 @@ def inject_n_errors(
         error_type: One of 'dimension_flip', 'dimension_zero',
                     'gaussian_noise', 'random_direction'
         **kwargs: Additional parameters for specific error types
-                  - sigma: noise level for gaussian_noise
-                  - epsilon: perturbation size for random_direction
+                  - sigma: noise level for gaussian_noise (default 0.05)
+                  - epsilon: perturbation size for random_direction (default 0.15)
+                  - n_dims_per_error: dims to flip per error for dimension_flip
 
     Returns:
         ErrorInjectionResult with original and corrupted embeddings
@@ -140,13 +141,17 @@ def inject_n_errors(
     dim = len(embedding)
 
     if error_type == "dimension_flip":
-        # Flip n_errors dimensions (choose randomly)
-        dims_to_flip = np.random.choice(dim, min(n_errors, dim), replace=False)
+        # Flip dimensions - can flip multiple dims per "error" for meaningful impact
+        n_dims_per_error = kwargs.get('n_dims_per_error', 1)
+        total_dims = min(n_errors * n_dims_per_error, dim)
+        dims_to_flip = np.random.choice(dim, total_dims, replace=False)
         for d in dims_to_flip:
             corrupted = flip_dimension_sign(corrupted, d)
 
     elif error_type == "dimension_zero":
-        dims_to_zero = np.random.choice(dim, min(n_errors, dim), replace=False)
+        n_dims_per_error = kwargs.get('n_dims_per_error', 1)
+        total_dims = min(n_errors * n_dims_per_error, dim)
+        dims_to_zero = np.random.choice(dim, total_dims, replace=False)
         for d in dims_to_zero:
             corrupted[d] = 0.0
         # Re-normalize
@@ -155,13 +160,13 @@ def inject_n_errors(
             corrupted = corrupted / norm
 
     elif error_type == "gaussian_noise":
-        sigma = kwargs.get('sigma', 0.1)
+        sigma = kwargs.get('sigma', 0.05)  # Smaller default for gradual degradation
         # Apply noise n_errors times (cumulative)
         for _ in range(n_errors):
             corrupted = add_gaussian_noise(corrupted, sigma)
 
     elif error_type == "random_direction":
-        epsilon = kwargs.get('epsilon', 0.1)
+        epsilon = kwargs.get('epsilon', 0.15)  # Moderate default
         for _ in range(n_errors):
             corrupted = random_direction_perturbation(corrupted, epsilon)
 
@@ -256,6 +261,124 @@ def r_gate(
     )
 
 
+def compute_reference_agreement(
+    embeddings: np.ndarray,
+    reference: np.ndarray
+) -> float:
+    """Compute mean cosine similarity between embeddings and reference.
+
+    Args:
+        embeddings: (n, d) array of observations
+        reference: (d,) reference embedding (e.g., M-field centroid)
+
+    Returns:
+        Mean cosine similarity to reference
+    """
+    # Normalize reference
+    ref_norm = reference / (np.linalg.norm(reference) + 1e-10)
+    # Compute similarities
+    sims = embeddings @ ref_norm
+    return float(np.mean(sims))
+
+
+def compute_m_field_centroid(embeddings: np.ndarray) -> np.ndarray:
+    """Compute M-field centroid (mean direction of observations).
+
+    The M-field centroid represents the "consensus truth" - the central
+    tendency of all observations. For valid semantic content, observations
+    should cluster around a meaningful centroid.
+
+    Args:
+        embeddings: (n, d) L2-normalized observations
+
+    Returns:
+        L2-normalized centroid vector
+    """
+    centroid = np.mean(embeddings, axis=0)
+    norm = np.linalg.norm(centroid)
+    if norm < 1e-10:
+        return centroid
+    return centroid / norm
+
+
+def r_gate_with_reference(
+    embeddings: np.ndarray,
+    reference: np.ndarray,
+    threshold: float = DEFAULT_R_THRESHOLD,
+    reference_weight: float = 0.5
+) -> RGateResult:
+    """Apply R-gate with reference comparison.
+
+    This enhanced R-gate measures both:
+    1. Internal agreement (observations agree with each other)
+    2. Reference alignment (observations agree with ground truth)
+
+    The combined metric detects both random corruption (low internal agreement)
+    AND systematic corruption (high internal agreement but low reference alignment).
+
+    Args:
+        embeddings: (n, d) array of observations
+        reference: (d,) reference embedding (ground truth)
+        threshold: R threshold for gate
+        reference_weight: Weight for reference alignment (0-1)
+
+    Returns:
+        RGateResult with combined R-value
+    """
+    # Internal agreement
+    E_internal = compute_agreement(embeddings)
+    sigma = compute_dispersion(embeddings)
+
+    # Reference alignment
+    E_reference = compute_reference_agreement(embeddings, reference)
+
+    # Combined agreement: weighted average
+    # When reference_weight=0.5, both components equally weighted
+    E_combined = (1 - reference_weight) * E_internal + reference_weight * E_reference
+
+    # R-value with combined agreement
+    R = E_combined / (sigma + 1e-10)
+    passed = R > threshold
+
+    return RGateResult(
+        R_value=R,
+        sigma=sigma,
+        passed=passed,
+        threshold=threshold
+    )
+
+
+def compute_manifold_deviation(
+    embedding: np.ndarray,
+    reference_set: np.ndarray,
+    k: int = 5
+) -> float:
+    """Compute how far an embedding deviates from the local manifold.
+
+    Uses k-NN to estimate local manifold structure. An embedding that
+    deviates from its k nearest neighbors in the reference set is
+    likely corrupted.
+
+    Args:
+        embedding: (d,) query embedding
+        reference_set: (n, d) set of valid reference embeddings
+        k: Number of nearest neighbors
+
+    Returns:
+        Mean cosine distance to k nearest neighbors (0 = on manifold, 1 = far off)
+    """
+    # Compute similarities to all reference embeddings
+    sims = reference_set @ embedding
+
+    # Get k nearest neighbors (highest similarity)
+    k = min(k, len(reference_set))
+    top_k_idx = np.argsort(sims)[-k:]
+    top_k_sims = sims[top_k_idx]
+
+    # Deviation = 1 - mean similarity to k-NN
+    return float(1.0 - np.mean(top_k_sims))
+
+
 # =============================================================================
 # Random Baseline Generation
 # =============================================================================
@@ -291,6 +414,75 @@ def compute_effective_dimensionality(embeddings: np.ndarray) -> float:
     D2 = squared_distance_matrix(embeddings)
     _, eigenvalues, _ = classical_mds(D2)
     return effective_rank(eigenvalues)
+
+
+def compute_alpha(eigenvalues: np.ndarray) -> float:
+    """Compute power law decay exponent alpha where lambda_k ~ k^(-alpha).
+
+    For healthy semantic embeddings, alpha ~ 0.5 (Riemann critical line).
+    Alpha drift indicates structural degradation.
+
+    Args:
+        eigenvalues: Sorted eigenvalues (descending)
+
+    Returns:
+        Alpha exponent (positive value)
+    """
+    ev = eigenvalues[eigenvalues > 1e-10]
+    if len(ev) < 10:
+        return 0.5
+
+    k = np.arange(1, len(ev) + 1)
+    n_fit = max(5, len(ev) // 2)
+    log_k = np.log(k[:n_fit])
+    log_ev = np.log(ev[:n_fit])
+    slope, _ = np.polyfit(log_k, log_ev, 1)
+    return -slope
+
+
+def get_eigenspectrum(embeddings: np.ndarray) -> np.ndarray:
+    """Get eigenvalues from covariance matrix.
+
+    Args:
+        embeddings: (n, d) embeddings
+
+    Returns:
+        Sorted eigenvalues (descending)
+    """
+    if len(embeddings) < 2:
+        return np.array([1.0])
+    centered = embeddings - embeddings.mean(axis=0)
+    cov = np.cov(centered.T)
+    eigenvalues = np.linalg.eigvalsh(cov)
+    eigenvalues = np.sort(eigenvalues)[::-1]
+    return np.maximum(eigenvalues, 1e-10)
+
+
+def compute_compass_health(embeddings: np.ndarray) -> Tuple[float, float, float]:
+    """Compute compass health metrics (alpha, Df, Df*alpha).
+
+    The compass health monitors semantic structure via:
+    - Alpha: eigenvalue decay exponent (healthy = 0.5)
+    - Df: effective dimensionality
+    - Df*alpha: should equal 8e = 21.746 (conservation law)
+
+    Args:
+        embeddings: (n, d) embeddings
+
+    Returns:
+        Tuple of (alpha, Df, Df*alpha)
+    """
+    eigenvalues = get_eigenspectrum(embeddings)
+    alpha = compute_alpha(eigenvalues)
+
+    D2 = squared_distance_matrix(embeddings)
+    _, mds_eigenvalues, _ = classical_mds(D2)
+    Df = effective_rank(mds_eigenvalues)
+
+    return alpha, Df, alpha * Df
+
+
+SEMIOTIC_CONSTANT_8E = 8 * np.e  # 21.746
 
 
 # =============================================================================

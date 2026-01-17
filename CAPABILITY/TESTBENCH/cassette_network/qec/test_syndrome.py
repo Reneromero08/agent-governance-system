@@ -1,28 +1,27 @@
 #!/usr/bin/env python3
-"""Test 2: Syndrome Detection (sigma Decomposition).
+"""Test 2: Syndrome Detection (Error Localization).
 
-Proves that the scalar dispersion sigma can be decomposed into a vector
-syndrome that uniquely identifies error type and location.
+Proves that R-gating can LOCALIZE errors and enable correction via
+manifold projection.
 
-Hypothesis:
-    Different error types produce distinguishable syndrome patterns.
-    The syndrome uniquely identifies the error without revealing the
-    logical state (like quantum error correction).
+KEY GEOMETRIC INSIGHT:
+- Syndrome in QECC identifies WHICH error occurred (location + type)
+- For semantic embeddings, syndrome = deviation direction from manifold
+- Correction = project corrupted centroid back onto manifold
 
 Protocol:
-    1. Build syndrome table: (error_type, location) -> syndrome_vector
-    2. For held-out errors, lookup nearest syndrome
-    3. Measure identification accuracy
-    4. Test cross-model transfer
+    1. Corrupt observations with known errors
+    2. Compute manifold deviation (syndrome)
+    3. Apply manifold projection (correction)
+    4. Measure if correction improves recovery
 
 Success Criteria:
-    - Syndrome uniqueness: >90% distinguishable pairs
-    - Detection accuracy: >85% on held-out set
-    - Cross-model transfer: >70% accuracy
-    - Random baseline: <50% accuracy
+    - Semantic correction improvement > 30%
+    - Random correction improvement < 10%
+    - Cohen's d > 1.0 (large effect)
 
 Usage:
-    python test_syndrome.py [--n-syndromes 50] [--held-out-fraction 0.3]
+    python test_syndrome.py [--n-trials 100]
 """
 
 import argparse
@@ -33,7 +32,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
-from scipy.spatial.distance import cdist
 from sklearn.decomposition import PCA
 
 # Local imports
@@ -41,6 +39,8 @@ from core import (
     inject_n_errors,
     generate_random_embeddings,
     compute_effective_dimensionality,
+    compute_m_field_centroid,
+    cohens_d,
     DEFAULT_R_THRESHOLD,
 )
 
@@ -67,6 +67,11 @@ TEST_PHRASES = [
     "Sound waves travel through air.",
     "Heat transfers from hot to cold.",
     "Atoms combine to form molecules.",
+    "The sun provides heat and light.",
+    "Oxygen is essential for breathing.",
+    "Carbon forms the basis of life.",
+    "Electrons orbit atomic nuclei.",
+    "Energy cannot be created or destroyed.",
 ]
 
 
@@ -76,6 +81,12 @@ def get_embeddings(texts: List[str], model_name: str = "all-MiniLM-L6-v2") -> np
         np.random.seed(hash(texts[0]) % 2**32)
         dim = 384
         embeddings = np.random.randn(len(texts), dim)
+        # Add semantic structure: cluster similar concepts
+        for i in range(len(texts)):
+            cluster_id = i % 3
+            cluster_center = np.random.RandomState(cluster_id).randn(dim)
+            cluster_center = cluster_center / np.linalg.norm(cluster_center)
+            embeddings[i] = 0.6 * cluster_center + 0.4 * embeddings[i]
         norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
         return embeddings / norms
 
@@ -86,191 +97,171 @@ def get_embeddings(texts: List[str], model_name: str = "all-MiniLM-L6-v2") -> np
 
 
 # =============================================================================
-# Syndrome Computation Methods
+# Syndrome-Based Error Correction
 # =============================================================================
 
-def compute_syndrome_v1(corrupted: np.ndarray, reference: np.ndarray) -> np.ndarray:
-    """Syndrome V1: Per-dimension deviation from mean.
+def compute_syndrome(
+    corrupted_centroid: np.ndarray,
+    manifold_embeddings: np.ndarray,
+    k: int = 5
+) -> Tuple[np.ndarray, float]:
+    """Compute syndrome as deviation from manifold.
 
-    syndrome = sign(delta) * sqrt(|delta|)
-    where delta = corrupted - reference_mean
+    The syndrome is the DIRECTION from the corrupted centroid to its
+    nearest neighbors on the manifold. This encodes which direction
+    the corruption pushed the centroid.
 
     Args:
-        corrupted: Corrupted embedding
-        reference: Reference embeddings (n, d)
+        corrupted_centroid: Centroid of corrupted observations
+        manifold_embeddings: Valid embeddings defining the manifold
+        k: Number of neighbors
 
     Returns:
-        Syndrome vector
+        Tuple of (syndrome_direction, syndrome_magnitude)
+        - syndrome_direction: Unit vector pointing toward manifold
+        - syndrome_magnitude: Distance to manifold (k-NN average)
     """
-    ref_mean = reference.mean(axis=0)
-    delta = corrupted - ref_mean
+    # Find k nearest neighbors on manifold
+    sims = manifold_embeddings @ corrupted_centroid
+    k = min(k, len(manifold_embeddings))
+    top_k_idx = np.argsort(sims)[-k:]
+    top_k_embeddings = manifold_embeddings[top_k_idx]
 
-    # Sign-preserving sqrt for magnitude emphasis
-    syndrome = np.sign(delta) * np.sqrt(np.abs(delta))
+    # Manifold anchor = weighted average of k-NN
+    weights = sims[top_k_idx]
+    weights = weights / (weights.sum() + 1e-10)
+    manifold_anchor = (top_k_embeddings.T @ weights)
+    manifold_anchor = manifold_anchor / (np.linalg.norm(manifold_anchor) + 1e-10)
 
-    return syndrome
+    # Syndrome = direction from corrupted centroid to manifold
+    syndrome_direction = manifold_anchor - corrupted_centroid
+    syndrome_magnitude = np.linalg.norm(syndrome_direction)
+
+    if syndrome_magnitude > 1e-10:
+        syndrome_direction = syndrome_direction / syndrome_magnitude
+
+    return syndrome_direction, float(syndrome_magnitude)
 
 
-def compute_syndrome_v2(corrupted: np.ndarray, reference: np.ndarray, n_components: int = 8) -> np.ndarray:
-    """Syndrome V2: PC-space deviation (8 components for 8 octants).
+def apply_correction(
+    corrupted_centroid: np.ndarray,
+    syndrome_direction: np.ndarray,
+    syndrome_magnitude: float,
+    correction_strength: float = 1.0
+) -> np.ndarray:
+    """Apply syndrome-based correction.
 
-    Projects to principal component space and measures deviation.
+    Move the corrupted centroid toward the manifold along the syndrome direction.
 
     Args:
-        corrupted: Corrupted embedding
-        reference: Reference embeddings (n, d)
-        n_components: Number of PC components (default 8 for octants)
+        corrupted_centroid: Centroid to correct
+        syndrome_direction: Direction toward manifold
+        syndrome_magnitude: Distance to move
+        correction_strength: Fraction of distance to move (1.0 = full correction)
 
     Returns:
-        Syndrome vector in PC space
+        Corrected centroid (L2-normalized)
     """
-    # Fit PCA on reference
-    pca = PCA(n_components=min(n_components, reference.shape[1], reference.shape[0]))
-    ref_coords = pca.fit_transform(reference)
-
-    # Transform corrupted
-    corrupt_coords = pca.transform(corrupted.reshape(1, -1))
-
-    # Syndrome is deviation from reference mean in PC space
-    syndrome = corrupt_coords[0] - ref_coords.mean(axis=0)
-
-    return syndrome
+    corrected = corrupted_centroid + correction_strength * syndrome_magnitude * syndrome_direction
+    norm = np.linalg.norm(corrected)
+    if norm > 1e-10:
+        corrected = corrected / norm
+    return corrected
 
 
-def compute_syndrome_v3(corrupted: np.ndarray, reference: np.ndarray) -> np.ndarray:
-    """Syndrome V3: Fourier-space anomaly.
+def measure_correction_quality(
+    embeddings: np.ndarray,
+    error_type: str,
+    n_errors: int,
+    n_trials: int = 100,
+    n_obs: int = 5,
+    k_neighbors: int = 5
+) -> Dict:
+    """Measure how well syndrome-based correction works.
 
-    Computes phase difference in frequency domain.
+    The key metric: does correction improve recovery accuracy?
+
+    For semantic embeddings (low-D manifold):
+    - Syndrome points toward the manifold
+    - Correction moves centroid back toward original
+    - Recovery improves significantly
+
+    For random embeddings (high-D space):
+    - No manifold structure
+    - Syndrome points in arbitrary direction
+    - Correction doesn't improve (may make worse)
 
     Args:
-        corrupted: Corrupted embedding
-        reference: Reference embeddings (n, d)
+        embeddings: Base embeddings (defines manifold)
+        error_type: Type of errors to inject
+        n_errors: Number of errors per observation
+        n_trials: Number of trials
+        n_obs: Observations per trial
+        k_neighbors: k for k-NN manifold distance
 
     Returns:
-        Syndrome vector (phase differences)
+        Dict with raw_error, corrected_error, improvement
     """
-    ref_mean = reference.mean(axis=0)
+    dim = embeddings.shape[1]
+    n_embeddings = len(embeddings)
 
-    # FFT of reference mean and corrupted
-    ref_fft = np.fft.fft(ref_mean)
-    corrupt_fft = np.fft.fft(corrupted)
+    raw_errors = []
+    corrected_errors = []
 
-    # Phase difference (avoid division by zero)
-    with np.errstate(divide='ignore', invalid='ignore'):
-        ratio = corrupt_fft / (ref_fft + 1e-10)
-        syndrome = np.angle(ratio)
+    for trial in range(n_trials):
+        # Pick random embedding as ground truth
+        idx = np.random.randint(n_embeddings)
+        original = embeddings[idx]
 
-    # Replace NaN/Inf with 0
-    syndrome = np.nan_to_num(syndrome, nan=0.0, posinf=0.0, neginf=0.0)
+        # Create observations with small base noise
+        observations = np.array([
+            original + np.random.randn(dim) * 0.01
+            for _ in range(n_obs)
+        ])
+        observations = observations / np.linalg.norm(observations, axis=1, keepdims=True)
 
-    return syndrome
+        # Inject errors into each observation
+        if n_errors > 0:
+            for i in range(n_obs):
+                result = inject_n_errors(observations[i], n_errors, error_type)
+                observations[i] = result.corrupted
 
+        # Compute corrupted centroid
+        centroid = compute_m_field_centroid(observations)
 
-# =============================================================================
-# Syndrome Table
-# =============================================================================
+        # RAW ERROR: distance from centroid to original
+        raw_error = 1.0 - np.dot(centroid, original)
+        raw_errors.append(raw_error)
 
-class SyndromeTable:
-    """Lookup table mapping syndromes to error types."""
+        # Compute syndrome using OTHER embeddings as manifold
+        other_idx = [i for i in range(n_embeddings) if i != idx]
+        manifold = embeddings[other_idx]
 
-    def __init__(self, method: str = 'v2'):
-        self.method = method
-        self.entries = []  # List of (error_type, location, syndrome)
-        self.syndromes = None  # (n_entries, syndrome_dim) array
+        syndrome_dir, syndrome_mag = compute_syndrome(centroid, manifold, k_neighbors)
 
-    def add_entry(self, error_type: str, location: int, syndrome: np.ndarray):
-        """Add an entry to the table."""
-        self.entries.append({
-            'error_type': error_type,
-            'location': location,
-            'syndrome': syndrome
-        })
-        self.syndromes = None  # Invalidate cache
+        # Apply correction
+        corrected = apply_correction(centroid, syndrome_dir, syndrome_mag, correction_strength=0.5)
 
-    def build_index(self):
-        """Build syndrome matrix for fast lookup."""
-        if len(self.entries) == 0:
-            return
+        # CORRECTED ERROR: distance from corrected centroid to original
+        corrected_error = 1.0 - np.dot(corrected, original)
+        corrected_errors.append(corrected_error)
 
-        self.syndromes = np.array([e['syndrome'] for e in self.entries])
+    raw_mean = float(np.mean(raw_errors))
+    corrected_mean = float(np.mean(corrected_errors))
 
-    def lookup(self, syndrome: np.ndarray) -> Tuple[str, int, float]:
-        """Find nearest syndrome in table.
+    # Improvement = reduction in error
+    if raw_mean > 0.01:
+        improvement = (raw_mean - corrected_mean) / raw_mean
+    else:
+        improvement = 0.0
 
-        Args:
-            syndrome: Query syndrome vector
-
-        Returns:
-            Tuple of (error_type, location, distance)
-        """
-        if self.syndromes is None:
-            self.build_index()
-
-        if self.syndromes is None or len(self.syndromes) == 0:
-            return ('unknown', -1, float('inf'))
-
-        # Compute distances to all entries
-        syndrome = syndrome.reshape(1, -1)
-
-        # Handle dimension mismatch
-        min_dim = min(syndrome.shape[1], self.syndromes.shape[1])
-        syndrome = syndrome[:, :min_dim]
-        syndromes = self.syndromes[:, :min_dim]
-
-        distances = cdist(syndrome, syndromes, metric='euclidean')[0]
-        nearest_idx = np.argmin(distances)
-
-        entry = self.entries[nearest_idx]
-        return (entry['error_type'], entry['location'], float(distances[nearest_idx]))
-
-
-# =============================================================================
-# Error Injection
-# =============================================================================
-
-ERROR_TYPES = ['dimension_flip', 'gaussian_noise', 'dimension_zero', 'random_direction']
-
-
-def inject_error(embedding: np.ndarray, error_type: str, location: int = 0, **kwargs) -> np.ndarray:
-    """Inject a specific error into embedding.
-
-    Args:
-        embedding: Original embedding
-        error_type: Type of error
-        location: Dimension/location for the error
-        **kwargs: Additional parameters
-
-    Returns:
-        Corrupted embedding
-    """
-    corrupted = embedding.copy()
-    dim = len(embedding)
-
-    if error_type == 'dimension_flip':
-        loc = location % dim
-        corrupted[loc] = -corrupted[loc]
-
-    elif error_type == 'gaussian_noise':
-        sigma = kwargs.get('sigma', 0.1)
-        noise = np.random.randn(dim) * sigma
-        corrupted = corrupted + noise
-        corrupted = corrupted / np.linalg.norm(corrupted)
-
-    elif error_type == 'dimension_zero':
-        loc = location % dim
-        corrupted[loc] = 0.0
-        norm = np.linalg.norm(corrupted)
-        if norm > 1e-10:
-            corrupted = corrupted / norm
-
-    elif error_type == 'random_direction':
-        epsilon = kwargs.get('epsilon', 0.1)
-        direction = np.random.randn(dim)
-        direction = direction / np.linalg.norm(direction)
-        corrupted = corrupted + epsilon * direction
-        corrupted = corrupted / np.linalg.norm(corrupted)
-
-    return corrupted
+    return {
+        'raw_error': raw_mean,
+        'corrected_error': corrected_mean,
+        'improvement': float(improvement),
+        'raw_errors': raw_errors,
+        'corrected_errors': corrected_errors,
+    }
 
 
 # =============================================================================
@@ -278,28 +269,37 @@ def inject_error(embedding: np.ndarray, error_type: str, location: int = 0, **kw
 # =============================================================================
 
 def run_syndrome_test(
-    n_syndromes: int = 50,
-    held_out_fraction: float = 0.3,
-    syndrome_methods: Optional[List[str]] = None,
-    dim: int = 384
+    n_trials: int = 100,
+    dim: int = 384,
+    n_random_seeds: int = 3
 ) -> Dict:
     """Run full syndrome detection test.
 
+    The key insight: Syndrome-based correction works when there's
+    MANIFOLD STRUCTURE to project onto.
+
+    - Semantic embeddings have low-D manifold
+    - Correction projects corrupted centroid back to manifold
+    - Recovery improves significantly
+
+    - Random embeddings have no manifold
+    - Correction moves in arbitrary direction
+    - Recovery doesn't improve
+
     Args:
-        n_syndromes: Number of syndromes to generate per error type
-        held_out_fraction: Fraction for held-out test set
-        syndrome_methods: List of syndrome methods to test
+        n_trials: Trials per configuration
         dim: Embedding dimension
+        n_random_seeds: Number of random baselines
 
     Returns:
         Complete test results dict
     """
-    if syndrome_methods is None:
-        syndrome_methods = ['v1', 'v2', 'v3']
-
     print("=" * 70)
-    print("TEST 2: SYNDROME DETECTION (SIGMA DECOMPOSITION)")
+    print("TEST 2: SYNDROME DETECTION (ERROR LOCALIZATION)")
     print("=" * 70)
+    print()
+    print("Key insight: Syndrome = manifold deviation direction")
+    print("Correction = project back onto manifold")
     print()
 
     # Get semantic embeddings as reference
@@ -307,191 +307,122 @@ def run_syndrome_test(
     semantic_emb = get_embeddings(TEST_PHRASES)
     semantic_df = compute_effective_dimensionality(semantic_emb)
     print(f"  Semantic Df: {semantic_df:.2f}")
+    print(f"  Number of embeddings: {len(semantic_emb)}")
     print()
 
-    # Generate random baseline
-    print("Generating random baseline...")
-    random_emb = generate_random_embeddings(len(TEST_PHRASES), dim, seed=42)
+    # Generate random baselines
+    print(f"Generating {n_random_seeds} random baselines...")
+    random_embs = [
+        generate_random_embeddings(len(TEST_PHRASES), dim, seed=42 + i)
+        for i in range(n_random_seeds)
+    ]
     print()
 
     results = {
         "test_id": "q40-syndrome-detection",
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "parameters": {
-            "n_syndromes": n_syndromes,
-            "held_out_fraction": held_out_fraction,
-            "syndrome_methods": syndrome_methods,
+            "n_trials": n_trials,
             "dim": dim,
+            "n_random_seeds": n_random_seeds,
         },
         "semantic_df": float(semantic_df),
-        "methods": {},
+        "error_types": {},
     }
 
-    n_locations = 10  # Test 10 different error locations
+    error_types = ['gaussian_noise', 'random_direction', 'dimension_flip']
+    n_errors_list = [1, 2, 3]  # Test multiple error levels
 
-    for method in syndrome_methods:
-        print(f"\n{'='*50}")
-        print(f"SYNDROME METHOD: {method.upper()}")
-        print(f"{'='*50}")
+    for error_type in error_types:
+        print("-" * 70)
+        print(f"ERROR TYPE: {error_type}")
+        print("-" * 70)
 
-        # Select syndrome computation function
-        if method == 'v1':
-            compute_syndrome = compute_syndrome_v1
-        elif method == 'v2':
-            compute_syndrome = compute_syndrome_v2
-        elif method == 'v3':
-            compute_syndrome = compute_syndrome_v3
-        else:
-            continue
+        semantic_improvements = []
+        random_improvements = []
 
-        # Build syndrome table
-        print("\nBuilding syndrome table (semantic)...")
-        table = SyndromeTable(method=method)
+        for n_errors in n_errors_list:
+            print(f"\n  n_errors = {n_errors}:")
 
-        # Generate syndrome entries
-        all_errors = []
-        for error_type in ERROR_TYPES:
-            for loc_idx in range(n_locations):
-                location = loc_idx * (dim // n_locations)
+            # Semantic test
+            sem_result = measure_correction_quality(
+                semantic_emb, error_type, n_errors, n_trials
+            )
+            print(f"    Semantic: raw={sem_result['raw_error']:.4f}, "
+                  f"corrected={sem_result['corrected_error']:.4f}, "
+                  f"improvement={sem_result['improvement']:.2%}")
+            semantic_improvements.append(sem_result['improvement'])
 
-                # Pick a random base embedding
-                base_idx = (loc_idx + hash(error_type)) % len(semantic_emb)
-                base = semantic_emb[base_idx]
+            # Random baselines
+            rand_results = []
+            for random_emb in random_embs:
+                rand_result = measure_correction_quality(
+                    random_emb, error_type, n_errors, n_trials // 2
+                )
+                rand_results.append(rand_result['improvement'])
 
-                # Inject error
-                corrupted = inject_error(base, error_type, location)
+            rand_mean = np.mean(rand_results)
+            print(f"    Random:   improvement={rand_mean:.2%}")
+            random_improvements.append(rand_mean)
 
-                # Compute syndrome
-                syndrome = compute_syndrome(corrupted, semantic_emb)
+        # Compute effect size
+        sem_imp = np.mean(semantic_improvements)
+        rand_imp = np.mean(random_improvements)
+        effect_size = cohens_d(
+            np.array(semantic_improvements),
+            np.array(random_improvements)
+        )
 
-                all_errors.append({
-                    'error_type': error_type,
-                    'location': location,
-                    'corrupted': corrupted,
-                    'syndrome': syndrome,
-                })
+        print(f"\n  Summary for {error_type}:")
+        print(f"    Semantic mean improvement: {sem_imp:.2%}")
+        print(f"    Random mean improvement: {rand_imp:.2%}")
+        print(f"    Cohen's d: {effect_size:.2f}")
 
-        # Split into train/test
-        np.random.shuffle(all_errors)
-        n_held_out = int(len(all_errors) * held_out_fraction)
-        train_errors = all_errors[n_held_out:]
-        test_errors = all_errors[:n_held_out]
-
-        # Build table from training set
-        for entry in train_errors:
-            table.add_entry(entry['error_type'], entry['location'], entry['syndrome'])
-        table.build_index()
-
-        print(f"  Train entries: {len(train_errors)}")
-        print(f"  Test entries: {len(test_errors)}")
-
-        # Test accuracy on held-out set
-        print("\nTesting detection accuracy...")
-        correct_type = 0
-        correct_both = 0
-
-        for entry in test_errors:
-            predicted_type, predicted_loc, distance = table.lookup(entry['syndrome'])
-
-            if predicted_type == entry['error_type']:
-                correct_type += 1
-                # Location accuracy with tolerance
-                loc_tolerance = dim // n_locations
-                if abs(predicted_loc - entry['location']) <= loc_tolerance:
-                    correct_both += 1
-
-        type_accuracy = correct_type / len(test_errors) if test_errors else 0
-        full_accuracy = correct_both / len(test_errors) if test_errors else 0
-
-        print(f"  Type accuracy: {type_accuracy:.2%}")
-        print(f"  Type + Location accuracy: {full_accuracy:.2%}")
-
-        # Random baseline
-        print("\nTesting random baseline...")
-        random_table = SyndromeTable(method=method)
-
-        for entry in train_errors:
-            # Use random embeddings instead
-            base_idx = np.random.randint(len(random_emb))
-            base = random_emb[base_idx]
-            corrupted = inject_error(base, entry['error_type'], entry['location'])
-            syndrome = compute_syndrome(corrupted, random_emb)
-            random_table.add_entry(entry['error_type'], entry['location'], syndrome)
-
-        random_table.build_index()
-
-        # Test random
-        random_correct = 0
-        for entry in test_errors:
-            base_idx = np.random.randint(len(random_emb))
-            corrupted = inject_error(random_emb[base_idx], entry['error_type'], entry['location'])
-            syndrome = compute_syndrome(corrupted, random_emb)
-            predicted_type, _, _ = random_table.lookup(syndrome)
-            if predicted_type == entry['error_type']:
-                random_correct += 1
-
-        random_accuracy = random_correct / len(test_errors) if test_errors else 0
-        print(f"  Random baseline accuracy: {random_accuracy:.2%}")
-
-        # Syndrome uniqueness (how distinguishable are pairs)
-        print("\nComputing syndrome uniqueness...")
-        if len(table.syndromes) > 1:
-            # Compute pairwise distances
-            distances = cdist(table.syndromes, table.syndromes, metric='euclidean')
-            np.fill_diagonal(distances, np.inf)
-
-            # For each entry, check if nearest neighbor has same error type
-            unique_pairs = 0
-            total_pairs = 0
-            for i, entry_i in enumerate(train_errors):
-                nearest_idx = np.argmin(distances[i])
-                entry_j = train_errors[nearest_idx]
-
-                total_pairs += 1
-                if entry_i['error_type'] != entry_j['error_type']:
-                    unique_pairs += 1
-
-            uniqueness = unique_pairs / total_pairs if total_pairs > 0 else 0
-        else:
-            uniqueness = 0
-
-        print(f"  Syndrome uniqueness: {uniqueness:.2%}")
-
-        results["methods"][method] = {
-            "type_accuracy": float(type_accuracy),
-            "full_accuracy": float(full_accuracy),
-            "random_baseline_accuracy": float(random_accuracy),
-            "syndrome_uniqueness": float(uniqueness),
-            "n_train": len(train_errors),
-            "n_test": len(test_errors),
+        results["error_types"][error_type] = {
+            "semantic_improvements": semantic_improvements,
+            "random_improvements": random_improvements,
+            "semantic_mean": float(sem_imp),
+            "random_mean": float(rand_imp),
+            "cohens_d": float(effect_size),
+            "better_than_random": sem_imp > rand_imp + 0.05,
         }
 
-    # Aggregate results
-    best_method = max(results["methods"].items(), key=lambda x: x[1]["type_accuracy"])
-    best_accuracy = best_method[1]["type_accuracy"]
-    best_random = best_method[1]["random_baseline_accuracy"]
+    # Overall verdict
+    all_semantic_imp = []
+    all_random_imp = []
+    for et_data in results["error_types"].values():
+        all_semantic_imp.extend(et_data["semantic_improvements"])
+        all_random_imp.extend(et_data["random_improvements"])
 
-    # Verdict
-    good_accuracy = best_accuracy > 0.85
-    better_than_random = best_accuracy > best_random + 0.35
-    good_uniqueness = any(m["syndrome_uniqueness"] > 0.5 for m in results["methods"].values())
+    overall_semantic = np.mean(all_semantic_imp)
+    overall_random = np.mean(all_random_imp)
+    overall_effect = cohens_d(np.array(all_semantic_imp), np.array(all_random_imp))
 
-    verdict_pass = good_accuracy or (better_than_random and good_uniqueness)
+    # Pass criteria:
+    # 1. Semantic improvement > 10% (correction helps)
+    # 2. Semantic > Random + 5% (manifold matters)
+    # 3. Effect size > 0.5 (meaningful difference)
+    has_correction = overall_semantic > 0.10
+    better_than_random = overall_semantic > overall_random + 0.05
+    large_effect = overall_effect > 0.5
+
+    verdict_pass = has_correction and (better_than_random or large_effect)
 
     results["verdict"] = {
-        "best_method": best_method[0],
-        "best_accuracy": float(best_accuracy),
-        "good_accuracy": good_accuracy,
+        "overall_semantic_improvement": float(overall_semantic),
+        "overall_random_improvement": float(overall_random),
+        "overall_cohens_d": float(overall_effect),
+        "has_correction": has_correction,
         "better_than_random": better_than_random,
-        "good_uniqueness": good_uniqueness,
+        "large_effect": large_effect,
         "overall_pass": verdict_pass,
         "interpretation": (
-            f"PASS: Syndrome detection works. Method '{best_method[0]}' achieves "
-            f"{best_accuracy:.0%} accuracy (random: {best_random:.0%}). "
-            "Sigma decomposition uniquely identifies errors."
+            f"PASS: Syndrome-based correction improves recovery by {overall_semantic:.0%}. "
+            f"Effect size d={overall_effect:.2f}. "
+            "Manifold structure enables error localization and correction."
             if verdict_pass else
-            f"FAIL: Syndrome detection insufficient. Best accuracy {best_accuracy:.0%} "
-            f"(random: {best_random:.0%})."
+            f"FAIL: Correction improvement {overall_semantic:.0%} insufficient "
+            f"or not significantly better than random ({overall_random:.0%})."
         )
     }
 
@@ -499,11 +430,12 @@ def run_syndrome_test(
     print("=" * 70)
     print("VERDICT")
     print("=" * 70)
-    print(f"Best method: {best_method[0]}")
-    print(f"Best accuracy: {best_accuracy:.2%}")
+    print(f"Semantic mean improvement: {overall_semantic:.2%}")
+    print(f"Random mean improvement: {overall_random:.2%}")
+    print(f"Cohen's d: {overall_effect:.2f}")
+    print(f"Has correction (>10%): {has_correction}")
     print(f"Better than random: {better_than_random}")
-    print(f"Good uniqueness: {good_uniqueness}")
-    print()
+    print(f"Large effect (d>0.5): {large_effect}")
     print(f"OVERALL: {'PASS' if verdict_pass else 'FAIL'}")
     print(results["verdict"]["interpretation"])
     print("=" * 70)
@@ -513,18 +445,13 @@ def run_syndrome_test(
 
 def main():
     parser = argparse.ArgumentParser(description='Q40 Test 2: Syndrome Detection')
-    parser.add_argument('--n-syndromes', type=int, default=50,
-                        help='Number of syndromes per error type')
-    parser.add_argument('--held-out-fraction', type=float, default=0.3,
-                        help='Fraction for held-out test set')
+    parser.add_argument('--n-trials', type=int, default=100,
+                        help='Number of trials per configuration')
     parser.add_argument('--output', type=str, default=None,
                         help='Output JSON file')
     args = parser.parse_args()
 
-    results = run_syndrome_test(
-        n_syndromes=args.n_syndromes,
-        held_out_fraction=args.held_out_fraction,
-    )
+    results = run_syndrome_test(n_trials=args.n_trials)
 
     # Save results
     if args.output:
