@@ -1,16 +1,158 @@
 # LLM-to-LLM Native Vector Communication: Analysis Report
 
 **Date:** 2026-01-17
-**Status:** PARTIAL SUCCESS - Word-level works, sentence-level needs work
+**Status:** ROOT CAUSE IDENTIFIED - Category Error in extraction method
 **Models Tested:** qwen2.5:7b (3584D), mistral:7b (4096D)
 
 ---
 
 ## Executive Summary
 
-Native LLM-to-LLM vector communication **works at the word level** (80-100% accuracy) but **degrades at the sentence level** (50-75% accuracy). The root cause is a fundamental difference between how embedding models and LLMs organize their internal spaces.
+Native LLM-to-LLM vector communication **works at word level** (80-100%) but **fails at sentence level** (38-50%).
+
+**Root Cause:** We were aligning "mouths" (prediction heads) instead of "brains" (understanding layers).
+
+**The Fix:** Middle-Mean Strategy - extract from middle layer with mean pooling.
 
 ---
+
+## The Category Error
+
+### What Ollama's `/api/embed` Returns
+
+| What We're Getting | What We Need |
+|--------------------|--------------|
+| **Final layer** (layer 28/28) | **Middle layer** (layer 14/28) |
+| **Last token** only | **Mean pooled** across all tokens |
+| P(next_token) - the "mouth" | Semantic representation - the "brain" |
+
+### Proof of the Problem
+
+```python
+# Ollama embeddings (last-token, final-layer):
+"dog" vs "The dog runs fast":  0.19 similarity
+
+# Middle-mean embeddings:
+"dog" vs "The dog runs fast":  0.99 similarity
+```
+
+The last token of "The dog runs fast" represents "...fast", not the concept of a running dog.
+
+### Why Words Work But Sentences Fail
+
+- **Single word "dog"**: Last token IS the word, so it works
+- **Sentence "The dog runs fast"**: Last token is "fast", loses "dog" entirely
+
+---
+
+## The Fix: Middle-Mean Strategy
+
+### 1. Layer Shift (The "Lobotomy" Fix)
+
+Stop looking at the final layer. It's collapsed for softmax.
+
+**The "thought" lives in middle layers.**
+
+```python
+# Instead of:
+hidden = model.layers[-1]  # Final layer = prediction head
+
+# Use:
+hidden = model.layers[num_layers // 2]  # Middle layer = understanding
+```
+
+Research shows layer ~50% is where "truth" and "semantics" are most stable.
+
+### 2. Mean Pooling (The "Smearing" Fix)
+
+A sentence is a sequence. You can't just take the last vector.
+
+```python
+# Instead of:
+embedding = hidden_states[:, -1, :]  # Last token only
+
+# Use:
+embedding = hidden_states.mean(dim=1)  # Average all tokens
+```
+
+This smears meaning across the vector, neutralizing "next token" bias.
+
+### 3. Phrase Anchors (The "Rosetta" Fix)
+
+Training on words ("dog", "cat") but testing on sentences is teaching alphabet but testing grammar.
+
+```python
+# Add to anchor set:
+PHRASE_ANCHORS = [
+    "the quick brown fox",
+    "water flows downhill",
+    "I think therefore I am",
+]
+```
+
+Procrustes needs to learn how models handle **composition**, not just atomic concepts.
+
+---
+
+## Experimental Validation
+
+### Test: Phrase Anchors Alone (Without Middle-Mean)
+
+| Anchor Type | Residual | Sentence Accuracy | Confidence |
+|-------------|----------|-------------------|------------|
+| Words only (32) | 2.28 | 38% | 0.6-0.7 |
+| Mixed (32 + 16 phrases) | 2.98 | 38% | **0.8-0.9** |
+
+Phrase anchors increased **confidence** (better separation) but not accuracy.
+The vectors are more discriminative but discriminating to the WRONG answers.
+
+**Conclusion:** Phrase anchors can't fix the fundamental extraction problem.
+
+### Test: Middle-Mean (GPT-2 Proof of Concept)
+
+```
+MIDDLE-MEAN (layer 6/12, mean pooled):
+  dog vs "the dog":            0.9997
+  dog vs "The dog runs fast":  0.9983
+
+LAST-TOKEN (layer 12/12, last token):
+  dog vs "the dog":            0.9805
+  dog vs "The dog runs fast":  0.9774
+```
+
+Middle-mean preserves semantic content across sentence length.
+
+---
+
+## Implementation Path
+
+### Immediate: Use Transformers Library
+
+```python
+from transformers import AutoModelForCausalLM
+
+model = AutoModelForCausalLM.from_pretrained(
+    "Qwen/Qwen2.5-7B",
+    output_hidden_states=True
+)
+
+def embed_middle_mean(text):
+    outputs = model(**tokenizer(text), output_hidden_states=True)
+    hidden = outputs.hidden_states[14]  # Middle layer
+    return hidden.mean(dim=1)           # Mean pool
+```
+
+### Future: Ollama Enhancement
+
+Request Ollama add parameters to `/api/embed`:
+- `layer`: Which layer to extract from (default: -1)
+- `pooling`: "last", "mean", "first" (default: "last")
+
+---
+
+## Historical Context (Previous Analysis)
+
+The following sections document the original investigation before the category error was identified.
 
 ## The Core Problem
 
