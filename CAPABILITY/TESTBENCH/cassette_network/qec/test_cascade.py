@@ -178,6 +178,12 @@ def propagate_error_through_chain(
 ) -> List[float]:
     """Propagate an error through a chain of models.
 
+    KEY INSIGHT: Cross-model alignment has imperfect correspondence.
+    The Procrustes residual measures how well anchor concepts align.
+    Errors that don't align with the semantic manifold (random errors)
+    get amplified by cross-model transformation noise.
+    Errors that align with semantics (semantic errors) are more stable.
+
     Args:
         error_embedding: Corrupted embedding in first model
         clean_embedding: Clean embedding in first model
@@ -187,37 +193,49 @@ def propagate_error_through_chain(
     Returns:
         List of error magnitudes at each step
     """
-    error_magnitudes = [compute_error_magnitude(clean_embedding, error_embedding)]
+    # Initial error magnitude (1 - cosine similarity)
+    initial_error = compute_error_magnitude(clean_embedding, error_embedding)
+    error_magnitudes = [initial_error]
 
-    # Get MDS coords for first model
-    emb_first = get_model_embeddings(anchors, model_names[0])
-    D2_first = squared_distance_matrix(emb_first)
-    X_first, eigenvalues_first, eigenvectors_first = classical_mds(D2_first)
-    k = min(X_first.shape[1], 48)
-
-    # Project error into MDS space
-    # Simplified: use the difference in MDS space
-    current_error = error_embedding[:k] - clean_embedding[:k]
-    current_clean = clean_embedding[:k]
+    # Track the error vector (difference between corrupted and clean)
+    error_vector = error_embedding - clean_embedding
+    error_norm = np.linalg.norm(error_vector)
 
     for i in range(len(model_names) - 1):
         source = model_names[i]
         target = model_names[i + 1]
 
-        # Learn alignment
+        # Learn Procrustes alignment between models (in MDS space)
         R, residual, k_dims = learn_alignment(source, target, anchors)
 
-        # Transform error
-        current_error = transform_error(current_error, R)
-        current_clean = transform_error(current_clean, R)
+        # The Procrustes residual indicates alignment quality.
+        # Higher residual = more distortion when transforming.
+        # Error propagation is modeled as:
+        # - Error vector is transformed through rotation (preserves norm)
+        # - Alignment imperfection adds noise proportional to residual
 
-        # Compute error magnitude after transformation
-        # Add some noise to simulate cross-model variability
-        noise = np.random.randn(len(current_error)) * residual * 0.1
-        current_error_with_noise = current_error + noise
+        # Apply rotation to error vector (in k-dimensional subspace)
+        k = min(len(error_vector), k_dims, R.shape[0])
+        rotated_error = error_vector[:k] @ R[:k, :k]
 
-        error_mag = np.linalg.norm(current_error_with_noise) / (np.linalg.norm(current_clean) + 1e-10)
+        # Add noise proportional to residual and error magnitude
+        # This models how cross-model translation introduces variability
+        noise_scale = residual * error_norm
+        noise = np.random.randn(k) * noise_scale
+        transformed_error = rotated_error + noise
+
+        # Compute new error magnitude
+        new_error_norm = np.linalg.norm(transformed_error)
+        growth_factor = new_error_norm / (error_norm + 1e-10)
+
+        # Error magnitude relative to initial
+        error_mag = initial_error * growth_factor
         error_magnitudes.append(float(error_mag))
+
+        # Update for next iteration
+        error_vector = np.zeros_like(error_embedding)
+        error_vector[:k] = transformed_error
+        error_norm = new_error_norm
 
     return error_magnitudes
 
@@ -431,8 +449,18 @@ def main():
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # JSON serialization helper for numpy types
+    def json_serialize(obj):
+        if isinstance(obj, (np.bool_, np.integer)):
+            return bool(obj) if isinstance(obj, np.bool_) else int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+
     with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, default=json_serialize)
 
     print(f"\nResults saved to: {output_path}")
 

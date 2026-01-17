@@ -37,7 +37,6 @@ from pathlib import Path
 from typing import Dict, List, Optional, Tuple
 
 import numpy as np
-from sklearn.decomposition import PCA
 
 # Local imports
 from core import (
@@ -494,8 +493,18 @@ def main():
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # JSON serialization helper for numpy types
+    def json_serialize(obj):
+        if isinstance(obj, (np.bool_, np.integer)):
+            return bool(obj) if isinstance(obj, np.bool_) else int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+
     with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, default=json_serialize)
 
     print(f"\nResults saved to: {output_path}")
 

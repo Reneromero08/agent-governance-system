@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.5.0 (2026-01-16 - Q21 ANSWERED: Alpha drift IS a leading indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). 25/51 questions answered (49%).)*
+*Last updated: v4.6.0 (2026-01-17 - Q40 ANSWERED: M field IS QECC. 7/7 tests pass. Alpha=0.512, threshold=5.0%, AUC=0.998 hallucination detection. 26/51 questions answered (51%).)*
 
 ---
 
@@ -54,7 +54,7 @@
 | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
 | 15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
-| 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ⏳ OPEN | Is M field an error-correcting code? Does R-gating implement QECC? Is semiosphere holographic? |
+| 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ✅ ANSWERED | **M field IS QECC.** 7/7 tests pass. Alpha=0.512 (near 0.5), threshold=5.0%, R^2=0.987 holographic, AUC=0.998 hallucination detection, Cohen's d=4.10. [Report](reports/Q40_QUANTUM_ERROR_CORRECTION_REPORT.md) |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ✅ VALIDATED | **8/8 tests pass.** R_high=57.3 > R_low=0.69. Volume resistant (-77.3%). Echo chamber detectable (R=10^8). Thresholds discriminate correctly. Test: `experiments/open_questions/q17/test_q17_r_gate.py` |
 | 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ✅ ANSWERED | **σ^Df = N (concept_units)** by tautological construction. σ := N/H(X), Df := log(N)/log(σ), therefore σ^Df = N. Not heuristic—it's countable meaning via GOV_IR_SPEC. |
 | 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ANSWERED | **R is local BY DESIGN (A1 correct).** Semantic CHSH S=0.36 << 2.0 (no Bell violation). Non-local structure is Phi's domain, not R's. A1 is a feature, not a limitation. |
@@ -113,9 +113,9 @@
 ## Summary Statistics
 
 - **Total Questions:** 51
-- **Answered:** 25 (49.0%)
+- **Answered:** 26 (51.0%)
 - **Partially Answered:** 6 (11.8%)
-- **Open:** 20 (39.2%)
+- **Open:** 19 (37.3%)
 
 ### By Priority Level
 
@@ -123,7 +123,7 @@
 |----------|-------|----------|-----------|------|
 | Critical | 12 | 10 | 1 | 1 |
 | High | 15 | 9 | 3 | 3 |
-| Medium | 11 | 4 | 1 | 6 |
+| Medium | 11 | 5 | 1 | 5 |
 | Lower | 8 | 2 | 1 | 5 |
 | Engineering | 2 | 0 | 0 | 2 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |

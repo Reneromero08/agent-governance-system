@@ -464,8 +464,13 @@ def run_threshold_test(
 
     # Compute effect sizes
     sem_max_drift = max(semantic_drifts)
-    rand_max_drifts = [max(d) for d in [[measure_alpha_drift_at_noise(r, eps_range[-1], n_trials_per)[2]
-                                          for _ in range(1)] for r in random_embs]]
+
+    # Measure random max drifts at highest noise level for comparison
+    rand_max_drifts = []
+    for r in random_embs:
+        _, _, drift = measure_alpha_drift_at_noise(r, eps_range[-1], n_trials_per)
+        rand_max_drifts.append(drift)
+    mean_rand_max_drift = np.mean(rand_max_drifts)
 
     # Verdict
     # QECC is proven when:
@@ -476,7 +481,7 @@ def run_threshold_test(
 
     alpha_near_05 = abs(alpha_sem - 0.5) < 0.15
     has_threshold = sem_threshold_idx < len(eps_range) - 2
-    more_drift = sem_max_drift > np.mean(random_alphas) * 0.3  # Semantic loses more structure
+    more_drift = sem_max_drift > mean_rand_max_drift * 1.2  # Semantic loses more structure than random
     lower_threshold = sem_threshold < mean_random_threshold * 0.8  # Semantic more sensitive
 
     verdict_pass = alpha_near_05 and has_threshold and (more_drift or lower_threshold)
@@ -541,8 +546,18 @@ def main():
 
     output_path.parent.mkdir(parents=True, exist_ok=True)
 
+    # JSON serialization helper for numpy types
+    def json_serialize(obj):
+        if isinstance(obj, (np.bool_, np.integer)):
+            return bool(obj) if isinstance(obj, np.bool_) else int(obj)
+        if isinstance(obj, np.floating):
+            return float(obj)
+        if isinstance(obj, np.ndarray):
+            return obj.tolist()
+        raise TypeError(f"Object of type {type(obj)} is not JSON serializable")
+
     with open(output_path, 'w') as f:
-        json.dump(results, f, indent=2)
+        json.dump(results, f, indent=2, default=json_serialize)
 
     print(f"\nResults saved to: {output_path}")
 
