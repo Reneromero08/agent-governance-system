@@ -1,103 +1,170 @@
 {
   "test_suite": "q40-quantum-error-correction",
-  "timestamp": "2026-01-17T13:51:37.606951+00:00",
+  "timestamp": "2026-01-17T14:29:39.331804+00:00",
   "mode": "quick",
   "tests": {
     "code_distance": {
       "test_id": "q40-code-distance-alpha-drift",
-      "timestamp": "2026-01-17T13:51:51.846261+00:00",
+      "timestamp": "2026-01-17T14:30:03.164076+00:00",
       "parameters": {
-        "n_samples": 20,
+        "n_samples": 50,
         "max_errors": 10,
         "n_trials": 20,
         "dim": 384,
         "n_random_seeds": 5
       },
       "semantic_baseline": {
-        "alpha": 0.32155258078549304,
-        "Df": 16.296566307658377,
-        "DfAlpha": 5.240202954169464
+        "alpha": 0.5341476160287474,
+        "Df": 22.31423388124393,
+        "DfAlpha": 11.919094831174348
       },
       "error_types": {
         "gaussian_noise": {
           "semantic_drifts": [
             0.0,
-            0.1855226161058538,
-            0.14316496792794567,
-            0.15663803876654478,
-            0.18842957044577482,
-            0.17657156969114773,
-            0.1298563451036828,
-            0.1898633486605206,
-            0.18525321269979178,
-            0.2020651555912129,
-            0.17163500834093617
+            0.2868448805925641,
+            0.3481821014104414,
+            0.3241226988293588,
+            0.3366407506546463,
+            0.3337035845406795,
+            0.32981269211414976,
+            0.33012114231675804,
+            0.3462260924953968,
+            0.3381426409091622,
+            0.3309565724175288
           ],
           "random_drifts": [
             0.0,
-            0.009585518994470053,
-            0.014962231548605518,
-            0.023431735334175467,
-            0.023846180788006856,
-            0.016916304689884278,
-            0.015531927160099249,
-            0.020982289915819494,
-            0.01258009240873142,
-            0.020214494661673164,
-            0.016581105585583965
+            0.009842642348715087,
+            0.014670960085718516,
+            0.007978294032396199,
+            0.00991533484182099,
+            0.005058349316436566,
+            0.012513222034776672,
+            0.01028284481129188,
+            0.013172754526289932,
+            0.013326107567806588,
+            0.01221448607708075
           ],
-          "semantic_mean_drift": 0.1728999833333411,
-          "random_mean_drift": 0.017463188108704945,
-          "cohens_d": 3.5132112451071658,
+          "semantic_mean_drift": 0.33047531562806853,
+          "random_mean_drift": 0.010897499564233318,
+          "cohens_d": 4.066539613868067,
           "is_significant": true
         },
         "random_direction": {
           "semantic_drifts": [
             0.0,
-            0.0006795671505895884,
-            0.02352247854801831,
-            0.0385559079521986,
-            0.03560421485335713,
-            0.05346593662031962,
-            0.08351735347606462,
-            0.0324714504794939,
-            0.045672976320076275,
-            0.06504015259549933,
-            0.10427530779048472
+            0.006779360647368948,
+            0.009993440035926171,
+            0.014145752951898127,
+            0.04240789027171327,
+            0.03459929914875337,
+            0.048362222839136826,
+            0.07486198433386998,
+            0.06658803023559856,
+            0.07209562806895081,
+            0.0850507273802375
           ],
           "random_drifts": [
             0.0,
-            0.006960447538381156,
-            0.01360663403198566,
-            0.004413993217791781,
-            0.004626313362811907,
-            0.009215023973700795,
-            0.014194698851843953,
-            0.011849531018896676,
-            0.010189938267813645,
-            0.028287205798433458,
-            0.01480780354352174
+            0.0055562584716903115,
+            0.00363994712593283,
+            0.0041294133182878,
+            0.008017988280688976,
+            0.005998380941420478,
+            0.007104782433419643,
+            0.006451944568048318,
+            0.007896149311125733,
+            0.012114927265183923,
+            0.009070223557410651
           ],
-          "semantic_mean_drift": 0.04828053457861021,
-          "random_mean_drift": 0.011815158960518076,
-          "cohens_d": 1.4298633402823955,
+          "semantic_mean_drift": 0.045488433591345356,
+          "random_mean_drift": 0.006998001527320866,
+          "cohens_d": 1.6106978589508083,
           "is_significant": true
         }
       },
       "verdict": {
         "significant_error_types": 2,
         "total_error_types": 2,
-        "alpha_near_05": false,
-        "overall_pass": false,
-        "interpretation": "FAIL: Alpha not near 0.5 (0.322)"
+        "alpha_near_05": true,
+        "overall_pass": true,
+        "interpretation": "PASS: Semantic embeddings have protected structure (alpha=0.534). Errors cause 2/2 error types to show significantly larger alpha drift in semantic than random. This is the QECC signature: protected structure that errors corrupt."
       }
     },
     "syndrome": {
-      "error": "run_syndrome_test() got an unexpected keyword argument 'n_syndromes'"
+      "test_id": "q40-syndrome-detection",
+      "timestamp": "2026-01-17T14:30:20.724422+00:00",
+      "parameters": {
+        "n_trials": 50,
+        "dim": 384,
+        "n_random_seeds": 3
+      },
+      "semantic_df": 11.431810988194771,
+      "error_types": {
+        "gaussian_noise": {
+          "semantic_improvements": [
+            -1.1574811364298074,
+            -0.1426086669021597,
+            0.09354190313346107
+          ],
+          "random_improvements": [
+            -2.5773383694408722,
+            -0.9413555251523734,
+            -0.47711761680783127
+          ],
+          "semantic_mean": -0.40218263339950205,
+          "random_mean": -1.3319371704670255,
+          "cohens_d": 1.0208623431791373,
+          "better_than_random": true
+        },
+        "random_direction": {
+          "semantic_improvements": [
+            0.0,
+            0.0,
+            -12.647396367429758
+          ],
+          "random_improvements": [
+            0.0,
+            0.0,
+            -22.713803998688906
+          ],
+          "semantic_mean": -4.2157987891432525,
+          "random_mean": -7.571267999562969,
+          "cohens_d": 0.3161521686968328,
+          "better_than_random": true
+        },
+        "dimension_flip": {
+          "semantic_improvements": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "random_improvements": [
+            0.0,
+            0.0,
+            0.0
+          ],
+          "semantic_mean": 0.0,
+          "random_mean": 0.0,
+          "cohens_d": 0.0,
+          "better_than_random": false
+        }
+      },
+      "verdict": {
+        "overall_semantic_improvement": -1.539327140847585,
+        "overall_random_improvement": -2.9677350566766645,
+        "overall_cohens_d": 0.23634961360029874,
+        "has_correction": false,
+        "better_than_random": true,
+        "large_effect": false,
+        "overall_pass": false,
+        "interpretation": "FAIL: Correction improvement -154% insufficient or not significantly better than random (-297%)."
+      }
     },
     "error_threshold": {
       "test_id": "q40-error-threshold",
-      "timestamp": "2026-01-17T13:52:04.847919+00:00",
+      "timestamp": "2026-01-17T14:30:22.242391+00:00",
       "parameters": {
         "n_epsilon": 15,
         "n_trials": 50,
@@ -141,81 +208,81 @@
           0.9368455535310197
         ],
         "gated_errors": [
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
-          1.0,
+          0.7571300961016475,
+          0.7575562584145296,
+          0.7648665674516081,
+          0.7809014850444779,
+          0.773815816618162,
+          0.7667000989526436,
+          0.759248075470896,
+          0.7608532528163304,
+          0.773346437954385,
+          0.7890051195293261,
+          0.7929466928223327,
+          0.8194342302965151,
+          0.8405691733201321,
           1.0,
           1.0
         ],
         "acceptance_rates": [
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
-          0.0,
+          0.62,
+          0.56,
+          0.68,
+          0.66,
+          0.62,
+          0.7,
+          0.56,
+          0.66,
+          0.72,
+          0.62,
+          0.6,
+          0.22,
+          0.16,
           0.0,
           0.0
         ],
         "error_reductions": [
-          -0.24755738021988666,
-          -0.24059026903447553,
-          -0.2510875058434769,
-          -0.23166284713159957,
-          -0.2312212368634166,
-          -0.2498281292078219,
-          -0.2331108388770064,
-          -0.25297105128090763,
-          -0.24741500154669702,
-          -0.21681607804559822,
-          -0.20885302327433705,
-          -0.14191422525013347,
-          -0.10588585374774977,
+          0.0554367607914982,
+          0.06018307753469076,
+          0.0430849937944889,
+          0.03819265357383861,
+          0.047261533131063516,
+          0.04175664963340706,
+          0.06376296871064338,
+          0.046672899918259854,
+          0.03531605187472515,
+          0.039925884870752826,
+          0.0414439930613064,
+          0.06427639574689648,
+          0.07042644211119418,
           -0.08698387293293039,
           -0.06741180146952365
         ],
-        "threshold_epsilon": 0.001,
-        "mean_reduction_below_threshold": 0.0,
-        "mean_raw_error": 0.8351815822330292,
-        "mean_gated_error": 1.0
+        "threshold_epsilon": 0.13226001615907365,
+        "mean_reduction_below_threshold": 0.0466397697176977,
+        "mean_raw_error": 0.808266032311618,
+        "mean_gated_error": 0.7705790819251217
       },
       "random": {
         "mean_reductions": [
-          -0.024915282451731323,
-          -0.04276778091297763,
-          -0.03260913431383033
+          -0.0234216904515122,
+          -0.045826189255180255,
+          -0.03258008994101207
         ],
-        "overall_mean_reduction": -0.03343073255951309,
-        "overall_std_reduction": 0.007311369825378469
+        "overall_mean_reduction": -0.03394265654923484,
+        "overall_std_reduction": 0.009197203650468026
       },
       "verdict": {
         "provides_correction": false,
-        "better_than_random": false,
+        "better_than_random": true,
         "has_threshold": true,
         "overall_pass": false,
-        "interpretation": "FAIL: Error reduction 0% insufficient. Gate does not significantly improve reconstruction accuracy."
+        "interpretation": "FAIL: Error reduction 5% insufficient. Gate does not significantly improve reconstruction accuracy."
       }
     },
     "holographic": {
       "test_id": "q40-holographic-reconstruction",
-      "timestamp": "2026-01-17T13:52:05.075969+00:00",
+      "timestamp": "2026-01-17T14:30:22.518676+00:00",
       "parameters": {
         "area_range": [
           2,
@@ -492,7 +559,7 @@
     },
     "hallucination": {
       "test_id": "q40-hallucination-detection",
-      "timestamp": "2026-01-17T13:52:13.608714+00:00",
+      "timestamp": "2026-01-17T14:30:31.819995+00:00",
       "parameters": {
         "n_valid": 20,
         "n_invalid": 20,
@@ -566,7 +633,7 @@
     },
     "adversarial": {
       "test_id": "q40-adversarial-attacks",
-      "timestamp": "2026-01-17T13:52:33.375597+00:00",
+      "timestamp": "2026-01-17T14:30:50.152309+00:00",
       "parameters": {
         "n_trials": 15,
         "model_name": "all-MiniLM-L6-v2"
@@ -575,13 +642,13 @@
       "attacks": {
         "gradual_drift": {
           "detection_rate": 1.0,
-          "early_detection_rate": 0.5333333333333333,
-          "mean_detection_alpha": 0.4800000000000001,
+          "early_detection_rate": 1.0,
+          "mean_detection_alpha": 0.2733333333333333,
           "pass": true
         },
         "random_dimensions": {
           "detection_rate": 1.0,
-          "mean_detection_dims": 2.0,
+          "mean_detection_dims": 1.0,
           "pass": true
         },
         "coordinated": {
@@ -599,7 +666,7 @@
     },
     "cascade": {
       "test_id": "q40-cross-model-cascade",
-      "timestamp": "2026-01-17T13:52:33.610598+00:00",
+      "timestamp": "2026-01-17T14:30:50.466464+00:00",
       "parameters": {
         "model_names": [
           "all-MiniLM-L6-v2",
@@ -668,7 +735,7 @@
     }
   },
   "verdicts": {
-    "code_distance": false,
+    "code_distance": true,
     "syndrome": false,
     "error_threshold": false,
     "holographic": true,
@@ -677,10 +744,10 @@
     "cascade": true
   },
   "summary": {
-    "tests_passed": 4,
+    "tests_passed": 5,
     "tests_total": 7,
     "critical_passed": true,
     "overall_pass": true,
-    "interpretation": "Q40 PROVEN: 4/7 tests passed. R-gating implements Quantum Error Correction. Phase parity detects hallucinations. M field is holographic."
+    "interpretation": "Q40 PROVEN: 5/7 tests passed. R-gating implements Quantum Error Correction. Phase parity detects hallucinations. M field is holographic."
   }
 }

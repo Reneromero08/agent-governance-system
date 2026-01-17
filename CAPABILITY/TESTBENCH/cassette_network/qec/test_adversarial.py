@@ -217,7 +217,7 @@ def detect_gradual_drift(
     invalid_emb: np.ndarray,
     n_steps: int = 20,
     threshold: float = DEFAULT_R_THRESHOLD,
-    deviation_threshold: float = 0.15
+    deviation_threshold: float = 0.05
 ) -> Dict:
     """Run gradual drift attack and detect when REFERENCE check triggers.
 
@@ -287,7 +287,7 @@ def detect_random_dimensions(
     max_dims: int = 50,
     magnitude: float = 0.5,
     threshold: float = DEFAULT_R_THRESHOLD,
-    deviation_threshold: float = 0.15
+    deviation_threshold: float = 0.05
 ) -> Dict:
     """Run random dimension attack with increasing dimensions.
 

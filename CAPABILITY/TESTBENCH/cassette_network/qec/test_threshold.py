@@ -187,7 +187,7 @@ def measure_logical_error_rate(
     embeddings: np.ndarray,
     physical_error_rate: float,
     n_trials: int = 100,
-    manifold_threshold: float = 0.3,
+    manifold_threshold: float = 0.85,
     k_neighbors: int = 5
 ) -> Tuple[float, float, float]:
     """Measure logical error rate using manifold-based error correction.

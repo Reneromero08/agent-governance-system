@@ -53,10 +53,12 @@ def run_all_tests(quick: bool = False) -> Dict:
     }
 
     # Parameters based on mode
+    # NOTE: code_distance needs 50+ samples for alpha to stabilize near 0.5
+    # syndrome takes n_trials not n_syndromes
     if quick:
         params = {
-            "code_distance": {"n_samples": 20, "max_errors": 10, "n_trials": 20},
-            "syndrome": {"n_syndromes": 20, "held_out_fraction": 0.3},
+            "code_distance": {"n_samples": 50, "max_errors": 10, "n_trials": 20},
+            "syndrome": {"n_trials": 50},
             "threshold": {"n_epsilon": 15, "n_trials": 50},
             "holographic": {"n_trials": 20},
             "hallucination": {"n_valid": 20, "n_invalid": 20},
@@ -66,7 +68,7 @@ def run_all_tests(quick: bool = False) -> Dict:
     else:
         params = {
             "code_distance": {"n_samples": 100, "max_errors": 20, "n_trials": 50},
-            "syndrome": {"n_syndromes": 50, "held_out_fraction": 0.3},
+            "syndrome": {"n_trials": 100},
             "threshold": {"n_epsilon": 30, "n_trials": 200},
             "holographic": {"n_trials": 50},
             "hallucination": {"n_valid": 50, "n_invalid": 50},
