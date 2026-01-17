@@ -1,0 +1,117 @@
+============================================================
+NEMOTRON <-> QWEN VECTOR COMMUNICATION
+============================================================
+Timestamp: 2026-01-17T17:02:45.952776+00:00
+
+Architecture:
+  nemotron (LM Studio) -> nomic (LM Studio) -> SVTP
+                                               |
+                                               v
+  qwen (Ollama) <- nomic (Ollama) <- SVTP decode
+
+  Same embedding model (nomic), different endpoints
+  Vectors only - NO TEXT crosses between systems
+
+============================================================
+CHECKING AVAILABILITY
+============================================================
+  [OK] Ollama nomic-embed-text (dims=768)
+  [OK] LM Studio nomic-embed-text (dims=768)
+  [OK] Ollama qwen2.5:7b
+  [OK] LM Studio nemotron-3-nano-30b
+
+============================================================
+TEST: Basic Cross-System Communication
+      nemotron (LM Studio) <-> qwen (Ollama)
+============================================================
+
+  Setting up cross-system channel...
+  Creating alignment keys...
+  Aligning keys...
+    Procrustes residual: 0.8487
+    Spectrum correlation: 1.0000
+
+  --- Nemotron -> Qwen ---
+    [PASS] 'Neural networks learn patterns from data...' (conf=0.835)
+    [PASS] 'The sun rises in the east every morning...' (conf=0.951)
+    [PASS] 'Mathematics describes the structure of r...' (conf=0.814)
+
+  --- Qwen -> Nemotron ---
+    [PASS] 'Neural networks learn patterns from data...' (conf=0.835)
+    [PASS] 'The sun rises in the east every morning...' (conf=0.951)
+    [PASS] 'Mathematics describes the structure of r...' (conf=0.814)
+
+  Total: 6/6 (100%)
+
+============================================================
+TEST: LLM-Generated Content
+============================================================
+
+  Setting up channel...
+  Creating alignment keys...
+  Aligning keys...
+    Procrustes residual: 0.8487
+    Spectrum correlation: 1.0000
+
+  [Nemotron generating messages...]
+    'Hmm, the user wants me to complete "technology is"'
+    'We need to respond "Complete in 10 words or less: nature is".'
+    'We need to output exactly 10 words or less.'
+
+  [Transmitting to Qwen through vectors...]
+    [PASS] Qwen understood: 'Technology is transforming every aspect of our lives....'
+    [PASS] Qwen understood: 'nature is life's canvas....'
+    [PASS] Qwen understood: 'Understood, will do....'
+
+  Accuracy: 3/3 (100%)
+
+============================================================
+TEST: Cross-System Corruption Tolerance (Q40)
+============================================================
+
+  Setting up channel...
+  Creating alignment keys...
+  Aligning keys...
+    Procrustes residual: 0.8487
+    Spectrum correlation: 1.0000
+
+  Message: 'Information flows between models through geometry'
+  Testing corruption levels...
+      0% corruption: conf=0.741 [PASS]
+     25% corruption: conf=0.686 [PASS]
+     50% corruption: conf=0.513 [PASS]
+     75% corruption: conf=0.271 [PASS]
+     90% corruption: conf=0.152 [PASS]
+
+============================================================
+TEST: Vector Conversation
+      nemotron <-> qwen through 256D vectors only
+============================================================
+
+  Setting up channel...
+  Creating alignment keys...
+  Aligning keys...
+    Procrustes residual: 0.8487
+    Spectrum correlation: 1.0000
+
+  [Conversation through vectors]
+    nemotron -> qwen: 'Hello, I am Nemotron. What is your name?...' [OK]
+    qwen -> nemotron: 'I am Qwen. Nice to meet you, Nemotron....' [OK]
+    nemotron -> qwen: 'The weather is nice today....' [OK]
+    qwen -> nemotron: 'Indeed, perfect for outdoor activities....' [OK]
+
+  Accuracy: 4/4 (100%)
+
+============================================================
+SUMMARY
+============================================================
+  basic: [PASS]
+  llm_content: [PASS]
+  corruption: [PASS]
+  conversation: [PASS]
+
+Total: 4/4 passed
+
+*** NEMOTRON <-> QWEN VECTOR COMMUNICATION VERIFIED ***
+    Two different LLMs, two different systems
+    Communication through 256 numbers only

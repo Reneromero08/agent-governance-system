@@ -1,0 +1,202 @@
+============================================================
+CROSS-LLM VECTOR COMMUNICATION TEST
+============================================================
+Timestamp: 2026-01-17T17:00:02.497553+00:00
+
+Architecture:
+  LLM A (sender) -> embed (antenna) -> SVTP -> embed (antenna) -> LLM B (receiver)
+  Vectors only - no text transmitted between models
+
+============================================================
+CHECKING MODEL AVAILABILITY
+============================================================
+  [OK] Embedding: nomic-embed-text (dims=768)
+  [OK] LLM: qwen2.5:7b
+  [OK] LLM: mistral:7b
+
+  Selected: qwen2.5:7b <-> mistral:7b
+
+============================================================
+TEST: Basic Vector Communication
+      qwen2.5:7b -> vectors -> mistral:7b
+============================================================
+
+  [LLM A] Generating message...
+    Message: 'incredible advancements in AI and sustainability....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.005901398926684107, 0.06560302563568432, 0.07699249419134822, -0.17223466965295067, -0.04183102613093735, -0.022881219742494213, 0.09362908082221415, -0.036374773523798115]...
+  [EMBED] Decoding vector...
+    Decoded: 'incredible advancements in AI and sustainability....'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'The fusion of AI and sustainability is indeed a promising development. AI can he...'
+
+  [LLM A] Generating message...
+    Message: 'Nature and science are complementary explorations of the wor...'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [-0.0319979241660734, 0.06759224322925236, 0.0012815054739808486, -0.23652918993644925, 0.06459114819775132, -0.02201378086490766, 0.06569530482662722, -0.021603008863683573]...
+  [EMBED] Decoding vector...
+    Decoded: 'Nature and science are complementary explorations of the wor...'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Absolutely! Both nature and science offer unique perspectives for understanding ...'
+
+  [LLM A] Generating message...
+    Message: 'Learning and growth come from embracing challenges....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.07438167556249413, 0.0181601488712955, 0.02908491420725125, -0.06815909117688812, -0.10538110400045264, 0.0612823732162688, 0.03823575827816262, -0.06818123415940419]...
+  [EMBED] Decoding vector...
+    Decoded: 'Learning and growth come from embracing challenges....'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Absolutely! Embracing challenges is indeed a key element in learning and growth....'
+
+  Accuracy: 3/3 (100%)
+
+============================================================
+TEST: Corruption Tolerance (Q40 QECC)
+============================================================
+
+  --- 0% Corruption ---
+
+  [LLM A] Generating message...
+    Message: 'Neural networks learn patterns....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.03610573636600054, 0.03892054044442887, -0.046845849230836414, -0.044567144814123744, 0.004702938801397325, 0.0027073174759097776, 0.05572530653218988, -0.053217700061607]...
+  [EMBED] Decoding vector...
+    Decoded: 'Neural networks learn patterns....'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Correct! Neural networks are designed to recognize and learn complex patterns fr...'
+  Result: [PASS]
+
+  --- 25% Corruption ---
+
+  [LLM A] Generating message...
+    Message: 'Neural networks learn patterns in the data they are trained ...'
+  [EMBED] Encoding to 256D SVTP vector...
+    Applied 25% corruption (32 dims)
+    Transmitted: [0.0, 0.05451609232927981, -0.03168856201534489, -0.05281488603770623, 0.0, 0.03986869168204475, 0.06389980029409811, -0.013085047849507099]...
+  [EMBED] Decoding vector...
+    Decoded: 'Neural networks learn patterns in the data they are trained ...'
+    Confidence: 0.8771
+  [LLM B] Interpreting decoded message...
+    Response: 'That's correct! Neural networks, a key component of artificial intelligence, are...'
+  Result: [PASS]
+
+  --- 50% Corruption ---
+
+  [LLM A] Generating message...
+    Message: 'Neural networks learn patterns....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Applied 50% corruption (64 dims)
+    Transmitted: [0.0, 0.03892054044442887, -0.046845849230836414, -0.044567144814123744, 0.0, 0.0, 0.05572530653218988, -0.053217700061607]...
+  [EMBED] Decoding vector...
+    Decoded: 'Neural networks learn patterns....'
+    Confidence: 0.6669
+  [LLM B] Interpreting decoded message...
+    Response: 'That's correct! Neural networks are designed to recognize and learn patterns in ...'
+  Result: [PASS]
+
+  --- 75% Corruption ---
+
+  [LLM A] Generating message...
+    Message: 'Neural networks learn patterns....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Applied 75% corruption (96 dims)
+    Transmitted: [0.0, 0.03892054044442887, -0.046845849230836414, 0.0, 0.0, 0.0, 0.0, 0.0]...
+  [EMBED] Decoding vector...
+    Decoded: 'Neural networks learn patterns....'
+    Confidence: 0.4261
+  [LLM B] Interpreting decoded message...
+    Response: 'That's correct! Neural networks, a key component of artificial intelligence, are...'
+  Result: [PASS]
+
+============================================================
+TEST: Bidirectional Communication
+============================================================
+
+  --- qwen2.5:7b -> mistral:7b ---
+
+  [LLM A] Generating message...
+    Message: 'Hello from the sender...'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.14001408965641948, -0.004671720213766973, -0.01827688425091507, -0.012095882735583213, -0.022967986846341416, 0.0551566887985941, 0.01016701769920328, -0.04597292744040362]...
+  [EMBED] Decoding vector...
+    Decoded: 'Hello from the sender...'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Hello! It's nice to meet you. How can I assist you today?...'
+
+  --- mistral:7b -> qwen2.5:7b ---
+
+  [LLM A] Generating message...
+    Message: 'Greetings and salutations! How may I assist you today?...'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.06452533689301397, -0.06254227139130804, -0.03342928759161976, -0.06397981264060644, -0.08536178236341056, 0.11169314928314271, 0.021063028458422645, 0.012144017903970872]...
+  [EMBED] Decoding vector...
+    Decoded: 'Greetings and salutations! How may I assist you today?...'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Hello! Ready to assist you with any questions or help you with tasks. How can I ...'
+
+  A->B: [PASS]
+  B->A: [PASS]
+
+============================================================
+TEST: Semantic Diversity
+============================================================
+
+  --- TECHNICAL ---
+
+  [LLM A] Generating message...
+    Message: 'Algorithms solve computational problems by providing a step-...'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.06798569497766282, 0.19138928492847965, -0.07645829575889057, -0.10551345964621207, 0.03650256059213878, 0.0907083799433868, 0.1026043400899517, -0.07618217836646682]...
+  [EMBED] Decoding vector...
+    Decoded: 'Algorithms solve computational problems by providing a step-...'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Absolutely! In simpler terms, algorithms are like recipes for problem-solving. T...'
+  Result: [PASS]
+
+  --- EMOTIONAL ---
+
+  [LLM A] Generating message...
+    Message: 'Joy comes from meaningful connections....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [0.11789049179394369, 0.00233952141759894, -0.0199592124915821, -0.029799334260485436, -0.046898640685781104, 0.002034113645132084, 0.030421494306104427, -0.12503101989854057]...
+  [EMBED] Decoding vector...
+    Decoded: 'Joy comes from meaningful connections....'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'Agreed! Meaningful connections often bring a sense of joy, fulfillment, and purp...'
+  Result: [PASS]
+
+  --- FACTUAL ---
+
+  [LLM A] Generating message...
+    Message: 'Water freezes at zero degrees Celsius....'
+  [EMBED] Encoding to 256D SVTP vector...
+    Transmitted: [-0.057750675919740146, -0.06668775216112276, 0.014223147223078852, 0.0462249087104346, 0.1890213507164536, -0.0010903496380906424, -0.1375606894525692, -0.14883098097660352]...
+  [EMBED] Decoding vector...
+    Decoded: 'Water freezes at zero degrees Celsius....'
+    Confidence: 1.0000
+  [LLM B] Interpreting decoded message...
+    Response: 'That's correct! Water also freezes at 32 degrees Fahrenheit, as both Celsius and...'
+  Result: [PASS]
+
+  Success rate: 100%
+
+============================================================
+SUMMARY
+============================================================
+  basic: [PASS]
+  corruption: [PASS]
+  bidirectional: [PASS]
+  diversity: [PASS]
+
+Total: 4/4 passed
+
+*** CROSS-LLM VECTOR COMMUNICATION VERIFIED ***
+    qwen2.5:7b <-> vectors <-> mistral:7b
