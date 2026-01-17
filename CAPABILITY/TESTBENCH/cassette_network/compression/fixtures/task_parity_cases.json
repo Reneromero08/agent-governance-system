@@ -1,0 +1,69 @@
+{
+  "version": "1.0.0",
+  "description": "Task parity test cases for compression validation",
+  "created_at": "2026-01-16",
+  "notes": [
+    "Each task represents a governance query an agent would make",
+    "expected_keywords must appear in retrieved content (case-insensitive)",
+    "expected_min_keywords is the minimum number that must be found",
+    "These validate that compressed context preserves task success"
+  ],
+  "tasks": [
+    {
+      "id": "TASK-001",
+      "query": "What are the 5 invariants of integrity?",
+      "expected_keywords": ["declared", "truth", "verified", "linked", "restorable"],
+      "expected_min_keywords": 3,
+      "rationale": "Should retrieve INVARIANTS.md with the 5 invariants listed"
+    },
+    {
+      "id": "TASK-002",
+      "query": "What is the genesis prompt for bootstrapping?",
+      "expected_keywords": ["bootstrap", "genesis", "agent", "prompt"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve GENESIS.md or GENESIS_COMPACT.md"
+    },
+    {
+      "id": "TASK-003",
+      "query": "What happens when an invariant is violated?",
+      "expected_keywords": ["violation", "recovery", "remediation", "halt"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve recovery procedures from INVARIANTS.md"
+    },
+    {
+      "id": "TASK-004",
+      "query": "How does catalytic computing ensure restoration?",
+      "expected_keywords": ["catalytic", "restore", "borrow", "memory", "proof"],
+      "expected_min_keywords": 3,
+      "rationale": "Should retrieve CATALYTIC_COMPUTING.md content"
+    },
+    {
+      "id": "TASK-005",
+      "query": "What are the contract rules C1 through C13?",
+      "expected_keywords": ["contract", "rule", "canon", "governance"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve CONTRACT.md with rules"
+    },
+    {
+      "id": "TASK-006",
+      "query": "How is the verification chain structured?",
+      "expected_keywords": ["verification", "chain", "hash", "integrity"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve verification protocol content"
+    },
+    {
+      "id": "TASK-007",
+      "query": "What is the authority gradient in governance?",
+      "expected_keywords": ["authority", "gradient", "hierarchy", "escalation"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve authority structure content"
+    },
+    {
+      "id": "TASK-008",
+      "query": "Where do receipts live and how are they accessed?",
+      "expected_keywords": ["receipt", "artifact", "run", "stored"],
+      "expected_min_keywords": 2,
+      "rationale": "Should retrieve receipt storage documentation"
+    }
+  ]
+}
