@@ -120,22 +120,23 @@ Single `_generated/cat_chat.db` contains all tables:
 
 ### A. Session Persistence Tests (P0 - Blocking)
 
-**Status:** Infrastructure done, tests pending
+**Status:** COMPLETE
 **Files:** session_capsule.py, cortex_expansion_resolver.py
+**Tests:** tests/test_session_capsule.py (17 tests, all passing)
 
-- [ ] A.1 Save/resume determinism test (byte-identical replay)
-- [ ] A.2 Partial execution resume test (no state loss)
-- [ ] A.3 Tamper detection test (fail-closed on corruption)
-- [ ] A.4 Hydration failure test (fail-closed on unresolvable symbols)
+- [x] A.1 Save/resume determinism test (byte-identical replay)
+- [x] A.2 Partial execution resume test (no state loss)
+- [x] A.3 Tamper detection test (fail-closed on corruption)
+- [x] A.4 Hydration failure test (fail-closed on unresolvable symbols)
 
-**Exit Criteria:** All 4 fixtures green, determinism proven
+**Exit Criteria:** All 4 fixtures green, determinism proven - ACHIEVED
 
 ---
 
-### B. Main Cassette Network Integration (P0 - Critical)
+### B. Main Cassette Network Integration (P1 - Enhancement)
 
 **Status:** Not started
-**Purpose:** Connect to existing cassette infrastructure instead of duplicating
+**Purpose:** Connect to existing cassette infrastructure for richer content (not blocking C)
 
 - [ ] B.1 CassetteClient for reading main cassettes:
   - Read from `NAVIGATION/CORTEX/cassettes/*.db`
@@ -159,7 +160,11 @@ Single `_generated/cat_chat.db` contains all tables:
 
 **Status:** Not started
 **Purpose:** Virtual memory for LLMs - automatic working set management
-**Depends On:** A (session persistence), B (cassette network for content)
+**Depends On:** A (session persistence)
+**E-Score Implementation:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q44/q44_core.py`
+- `compute_E_linear(query_vec, context_vecs)` - E = mean overlap (Born rule)
+- `compute_born_probability(query_vec, context_vecs)` - P = |<psi|phi>|^2
+- Threshold = 0.5 (validated in Q44)
 
 This is THE core catalytic behavior. Without this, nothing is actually catalytic.
 
@@ -305,8 +310,8 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 | Priority | Phase | Blocker? | Effort |
 |----------|-------|----------|--------|
-| P0 | A. Session Tests | Yes | Small |
-| P0 | B. Cassette Network Integration | Yes | Medium |
+| P0 | A. Session Tests | DONE | Small |
+| P1 | B. Cassette Network Integration | No | Medium |
 | P0 | C. Auto-Controlled Context Loop | Yes | Large |
 | P1 | D. SPC Integration | No | Medium |
 | P2 | E. Vector Fallback | No | Medium |
@@ -315,9 +320,9 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
 
-**Recommended order:** A -> B -> C -> D -> E -> F -> G -> H -> I
+**Recommended order:** A -> C -> B -> D -> E -> F -> G -> H -> I
 
-**Note:** C (Auto-Controlled Context) is the core catalytic behavior. Everything before it (A, B) provides foundation. Everything after it (D-I) provides optimization and polish. Without C, the system is not actually catalytic.
+**Note:** C (Auto-Controlled Context) is the core catalytic behavior. A provides foundation. B provides richer content but is not blocking - C can work with local index. E-score computation exists in q44_core.py (Born rule). Without C, the system is not actually catalytic.
 
 ---
 
