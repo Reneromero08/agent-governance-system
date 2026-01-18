@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-01-18T08:44:24.564669",
+  "negative_controls": {
+    "random_embeddings": {
+      "control_name": "random_embeddings",
+      "expected_to_fail": false,
+      "actually_failed": true,
+      "passed_validation": false,
+      "metric_trained": 0.5226097680290778,
+      "metric_control": 0.5112355475066234,
+      "cohens_d": 0.5579361746489334,
+      "interpretation": "Random embeddings should show no alpha preference (confirms semantic origin)"
+    },
+    "shuffled_embeddings": {
+      "control_name": "shuffled_embeddings",
+      "expected_to_fail": true,
+      "actually_failed": 

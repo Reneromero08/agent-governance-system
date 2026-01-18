@@ -1,0 +1,17 @@
+{
+  "timestamp": "2026-01-18T08:22:54.813680",
+  "negative_controls": {
+    "random_embeddings": {
+      "control_name": "random_embeddings",
+      "expected_to_fail": true,
+      "actually_failed": false,
+      "passed_validation": false,
+      "metric_trained": 1.0,
+      "metric_control": 1.0,
+      "cohens_d": 0.0,
+      "interpretation": "sqrt(3) should not be optimal for random embeddings"
+    },
+    "shuffled_embeddings": {
+      "control_name": "shuffled_embeddings",
+      "expected_to_fail": true,
+      "actually_failed": 

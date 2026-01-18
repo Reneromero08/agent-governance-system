@@ -1,0 +1,7 @@
+{
+  "timestamp": "2026-01-18T08:17:27.017868",
+  "model": "all-MiniLM-L6-v2",
+  "vocabulary_size": 135,
+  "angle_distribution": {
+    "test_name": "angle_distribution",
+    "passed": 

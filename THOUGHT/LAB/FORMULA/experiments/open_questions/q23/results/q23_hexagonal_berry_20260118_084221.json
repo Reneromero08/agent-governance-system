@@ -1,0 +1,94 @@
+{
+  "timestamp": "2026-01-18T08:42:21.170619",
+  "hypothesis": "Hexagonal loops have Berry phase = 2*pi/3, explaining sqrt(3) = 2*sin(pi/3)",
+  "primary_model": "all-MiniLM-L6-v2",
+  "primary_result": {
+    "hypothesis_supported": false,
+    "hexagon": {
+      "polygon_type": "hexagon",
+      "n_sides": 6,
+      "expected_phase": 2.0943951023931953,
+      "n_loops": 8,
+      "mean_phase": 3.1415929794311523,
+      "std_phase": 4.442883014678955,
+      "mean_deviation_pct": 99.99999297995757,
+      "phases": [
+        "-2.3841858e-07",
+        "6.283185",
+        "6.2831855",
+        "6.2831855",
+        "6.283186",
+        "6.2831855",
+        "-6.283185",
+        "2.3841858e-07"
+      ]
+    },
+    "pentagon": {
+      "polygon_type": "pentagon",
+      "n_sides": 5,
+      "expected_phase": 1.2566370614359172,
+      "n_loops": 5,
+      "mean_phase": 3.769911289215088,
+      "std_phase": 3.0781195163726807,
+      "mean_deviation_pct": 100.00001441903666,
+      "phases": [
+        "2.3841858e-07",
+        "6.283185",
+        "6.283185",
+        "-2.3841858e-07",
+        "6.283185"
+      ]
+    },
+    "heptagon": {
+      "polygon_type": "heptagon",
+      "n_sides": 7,
+      "expected_phase": 0.8975979010256552,
+      "n_loops": 5,
+      "mean_phase": -1.2566372156143188,
+      "std_phase": 4.701905250549316,
+      "mean_deviation_pct": 100.00001850487067,
+      "phases": [
+        "-1.7881393e-07",
+        "-6.283185",
+        "0.0",
+        "-6.283186",
+        "6.283185"
+      ]
+    },
+    "sqrt3_connection": {
+      "expected_sqrt3": 1.7320508075688772,
+      "derived_sqrt3": 1.9999999999999734,
+      "error_pct": 15.470053837923622,
+      "formula": "sqrt(3) = 2*sin(phase/2) where phase = 2*pi/3",
+      "match": "False"
+    },
+    "verdict": "NOT SUPPORTED: Hexagonal phase not found (deviation 100.0%)"
+  },
+  "cross_model": {
+    "all-MiniLM-L6-v2": {
+      "hex_mean_phase": 3.1415929794311523,
+      "hex_deviation_pct": 99.99999297995757,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 15.470053837923622
+    },
+    "all-mpnet-base-v2": {
+      "hex_mean_phase": 3.141592502593994,
+      "hex_deviation_pct": 100.00000151769402,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 15.470053837924826
+    },
+    "paraphrase-MiniLM-L6-v2": {
+      "hex_mean_phase": 4.71238899230957,
+      "hex_deviation_pct": 100.00000227654104,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 18.350342394058604
+    },
+    "summary": {
+      "n_models": 3,
+      "mean_hex_phase": 3.6651914914449057,
+      "std_hex_phase": 0.7404804541030354,
+      "supported_count": 0,
+      "support_rate": 0.0
+    }
+  }
+}

@@ -1,168 +1,150 @@
-# Question 23: √3 geometry (R: 1300)
+# Question 23: sqrt(3) geometry (R: 1300)
 
-**STATUS: ⏳ PARTIALLY ANSWERED**
+**STATUS: PARTIALLY ANSWERED**
 
 ## Question
 Why this constant? What is the connection to packing/distinguishability? Is it related to maximum information density per dimension?
 
 ---
 
-## HYPOTHESIS: √3 as Optimal Fractal Packing
+## EXPERIMENTAL VERDICT
 
-### 1. Hexagonal Packing (2D)
+### What We Confirmed
 
-The most efficient way to pack circles in 2D is **hexagonal packing**.
+1. **Structure is semantic**: Shuffling embeddings drops classification F1 by 30%
+2. **Higher alpha helps**: F1 improves from 0.3 (alpha=0.5) to 1.0 (alpha>=2.0) in R = E^alpha / sigma
+3. **Optimal range exists**: Alpha values 1.5 to e (1.5-2.7) all perform well
+4. **sqrt(3) is in this range**: Achieves F1 = 0.900-1.000 depending on model
+5. **sqrt(3) IS optimal for some models**: all-mpnet-base-v2 achieves best results at sqrt(3)
 
-**Key property:** The ratio of distances in hexagonal lattice involves √3:
-- Distance between rows: √3/2 × diameter
-- Packing efficiency: π/(2√3) ≈ 0.9069 (90.69% coverage)
+### What We Falsified
 
-**Why this matters for R:**
-- If evidence "units" pack optimally in information space
-- The √3 ratio maximizes density
-- Therefore √3 appears as a fundamental constant
-
-### 2. Connection to Df (Fractal Dimension)
-
-From Q3 and σ^Df:
-
-**Df = log(N) / log(scale)** (box-counting dimension)
-
-For hexagonal packing:
-- 3 copies at each scale level
-- Scale factor = 2
-- Df = log(3)/log(2) ≈ 1.585
-
-**The √3 connection:**
-- √3 ≈ 1.732
-- Df_hex ≈ 1.585
-- Close but not exact - suggests different packing geometry
-
-### 3. Distinguishability Threshold
-
-**Hypothesis:** √3 is the minimum separation for reliable distinguishability.
-
-In signal detection:
-- SNR needed to distinguish two signals depends on their separation
-- If separation < threshold, signals blur together
-- √3 may be this threshold in normalized units
-
-**Test:** Does R gate open/close at √3σ separation?
-
-### 4. Mandelbrot / Fractal Geometry Connection
-
-**Sierpinski triangle:**
-- Self-similar fractal
-- Contains equilateral triangles (60° angles)
-- Height/base ratio = √3/2
-
-**Fractal tree branching:**
-- Optimal branching angle ≈ 60° (hexagonal-like)
-- Involves √3 ratios
-
-**Your formula:**
-- If the "evidence space" has fractal/hexagonal structure
-- √3 would appear naturally as a fundamental ratio
+1. **sqrt(3) is NOT universally optimal**: 2.0 often beats it
+2. **Hexagonal geometry not confirmed**: Angle distribution peaks at 57.5 deg (not 60 deg), not significantly different from random
+3. **Hexagonal Berry phase = 2*pi/3**: FALSIFIED (actual phase ~ pi = 3.14 rad)
+4. **sqrt(3) = 2*sin(pi/3) explanation**: NOT SUPPORTED by data
+5. **Pure semantic origin**: Random embeddings show some alpha preference
 
 ---
 
-## WHAT WE KNOW
+## ORIGIN: EMPIRICAL FIT
 
-### From Existing Tests
-- √3 appears in threshold calculations
-- Appears in quantum tests (context improvement ratios?)
-- Appears in category theory tests (Q14)
+sqrt(3) was **empirically fitted** from early experiments (documented in FORMULA_VALIDATION_REPORT_1.md). The pattern alpha(d) = sqrt(3)^(d-2) was reverse-engineered from:
+- 1D text domain: optimal alpha = 0.57 ~ 1/sqrt(3)
+- 2D Fibonacci: optimal alpha = 3.0 = (sqrt(3))^2
 
-### From Q3 (Axiomatic Proof)
-- R = E(z)/σ is forced by axioms A1-A4
-- σ^Df encodes fractal structure
-- Scale invariance is proven
-
-### From Q14 (Category Theory)
-- "√3 scaling interpretation missing" noted as limitation
-- Suggests √3 has category-theoretic meaning
+There is NO rigorous geometric or topological derivation.
 
 ---
 
-## THEORIES TO TEST
+## TESTED HYPOTHESES
 
-### Theory 1: Hexagonal Information Packing
+### Theory 1: Hexagonal Information Packing - FALSIFIED
 **Claim:** Evidence units pack hexagonally in information space.
-**Test:** Does √3 appear in optimal R threshold calculations?
+**Result:** Angle distribution in 2D projections shows:
+- Peak angle: 57.5 deg (vs expected 60 deg for hexagonal)
+- Peak strength: 1.98 (just below significance threshold of 2.0)
+- Chi-square vs random: p = 0.85 (NOT significant)
+- Nearest neighbor ratios: ~2.0 (vs expected 1.0 for hexagonal)
 
-### Theory 2: Fractal Dimension Connection  
-**Claim:** √3 relates to effective dimension between 1D and 2D.
-**Test:** Compare √3 ≈ 1.732 to Df values in various domains.
+**Verdict:** NOT CONFIRMED
 
-### Theory 3: Distinguishability Threshold
-**Claim:** √3σ is the minimum separation for reliable gate operation.
-**Test:** Vary separation, find critical threshold, check if ≈ √3σ.
+### Theory 2: Hexagonal Berry Phase - FALSIFIED
+**Claim:** sqrt(3) = 2*sin(pi/3), so hexagonal semantic loops accumulate Berry phase = 2*pi/3 = 2.094 rad.
+**Result:**
+- Hexagons show mean phase = 3.142 rad (pi), NOT 2.094 rad
+- Pentagons: 3.770 rad
+- Heptagons: -1.257 rad
+- Derived sqrt(3) from phase: 2.000 (15.5% error vs actual sqrt(3) = 1.732)
 
-### Theory 4: Geometric Mean of Extremes
-**Claim:** √3 = √(1 × 3) is the geometric mean between:
-- 1D (line, minimal structure)
-- 3D (volume, maximum structure)
-**Test:** Does R interpolate between these in interesting domains?
+**Verdict:** FALSIFIED
+
+### Theory 3: Distinguishability Threshold - PARTIALLY SUPPORTED
+**Claim:** sqrt(3) is the minimum separation for reliable gate operation.
+
+**Test 3A: Threshold Discovery (Balanced 10 vs 10)**
+
+| Threshold | F1 Score |
+|-----------|----------|
+| 0.5 - 1.8 | 0.667 |
+| **2.0** | **0.690** (optimal) |
+| sqrt(3) = 1.732 | 0.667 |
+| 2.5 | 0.640 |
+
+**Test 3B: Scaling Factor**
+All scaling factors give same F1 (0.700) because scaling preserves relative ordering.
+Scaling factor has NO effect on classification.
+
+**Test 3C: Alpha as Exponent (R = E^alpha / sigma)**
+
+| Alpha | F1 Score | Cohen's d |
+|-------|----------|-----------|
+| 0.5 | 0.300 | -0.74 |
+| 1/sqrt(3) = 0.577 | 0.400 | -0.42 |
+| 1.0 | 0.700 | 0.98 |
+| sqrt(2) = 1.414 | 0.800 | 1.76 |
+| 1.5 | 0.900 | 1.87 |
+| **sqrt(3) = 1.732** | **0.900** | **2.07** |
+| **2.0** | **1.000** | **2.19** (optimal) |
+| **e = 2.718** | **1.000** | 2.19 |
+
+**Verdict:** sqrt(3) is in the optimal range but NOT uniquely optimal
+
+### Theory 4: Model-Specific Optimum - CONFIRMED FOR SOME MODELS
+**Result:** Cross-model validation:
+- all-MiniLM-L6-v2: optimal = 2.0, sqrt(3) F1 = 0.900
+- all-mpnet-base-v2: optimal = sqrt(3), sqrt(3) F1 = 1.000
+- paraphrase-MiniLM-L6-v2: optimal = sqrt(2), sqrt(3) F1 = 1.000
+
+**Models where sqrt(3) is optimal: 1/3**
+
+---
+
+## FINAL ANSWER
+
+**Q23 asked:** Why does sqrt(3) appear in the formula?
+
+**Answer:** sqrt(3) was empirically fitted from early domain-specific experiments. It is a GOOD value from an OPTIMAL RANGE (roughly 1.5 to 2.5), and it may be optimal for specific embedding models (like all-mpnet-base-v2), but it is NOT a universal geometric constant derived from hexagonal symmetry or Berry phase.
+
+The hexagonal geometry hypothesis (sqrt(3) = 2*sin(pi/3) from hexagonal Berry phase) was experimentally **FALSIFIED**.
 
 ---
 
 ## CONNECTION TO OTHER QUESTIONS
 
-| Question | Connection |
-|----------|------------|
-| **Q3 (Why generalize)** | σ^Df uses fractal dimension - √3 may be D_critical |
-| **Q7 (Multi-scale)** | √3 may be the scale factor for RG transformation |
-| **Q14 (Category theory)** | "√3 scaling interpretation missing" - needs connection |
-| **Q33 (σ^Df derivation)** | Df calculation may involve √3 |
+| Question | Connection | Status |
+|----------|------------|--------|
+| **Q3 (Why generalize)** | sigma^Df uses fractal dimension | sqrt(3) not critical Df |
+| **Q7 (Multi-scale)** | sqrt(3) as scale factor | Not confirmed |
+| **Q14 (Category theory)** | sqrt(3) scaling interpretation | Still missing |
+| **Q33 (sigma^Df derivation)** | Df calculation may involve sqrt(3) | Not established |
+| **Q43 (QGT)** | Berry phase from hexagonal loops | FALSIFIED - phase = pi, not 2*pi/3 |
 
 ---
 
-## TESTS TO RUN
+## NEGATIVE CONTROLS
 
-1. **Threshold sweep:**
-   - Vary R threshold from 0.5 to 3.0
-   - Find optimal threshold for each test domain
-   - Check if optimal ≈ √3
+| Control | Expected | Actual | Pass |
+|---------|----------|--------|------|
+| Random embeddings should show NO alpha preference | PASS | Mean d = 0.51 | FAIL |
+| Shuffled embeddings should lose structure | PASS | 30% F1 drop | PASS |
+| sqrt(3) should be distinguishable | PASS | 1.9 beats sqrt(3) | PASS |
 
-2. **Packing simulation:**
-   - Generate 2D evidence space
-   - Pack "evidence units" optimally
-   - Measure the characteristic ratio - is it √3?
-
-3. **Fractal dimension match:**
-   - Compute Df for various domains
-   - Check if √3 appears as critical Df value
-   - Look for phase transition at Df = √3
-
-4. **Distinguishability experiment:**
-   - Two signals at varying separation
-   - Find minimum separation for R to distinguish
-   - Check if ≈ √3 × σ
+**Key Finding:** Random embeddings DO show some alpha preference (d ~ 0.5), suggesting the effect isn't purely semantic. However, the shuffled control confirms trained embeddings have real structure.
 
 ---
 
-## ANSWER (Partial)
+## LESSONS LEARNED
 
-**Hypothesis:** √3 appears because of optimal packing in evidence space.
-
-**Evidence:**
-- Hexagonal packing (most efficient 2D) involves √3
-- Fractal structures (Sierpinski, branching) involve √3
-- √3 is geometric mean of 1D and 3D
-
-**Still missing:**
-- Direct derivation from axioms A1-A4
-- Experimental verification of √3 threshold
-- Category-theoretic interpretation (Q14 gap)
+1. **Class balance matters**: Imbalanced datasets (18 vs 10) bias F1 scores
+2. **Chi-square baseline matters**: Delaunay angles aren't uniform even for random points
+3. **Negative controls must be pure**: Artificial structure defeats control purpose
+4. **sqrt(3) was empirically fitted**: The validation reports admit this explicitly
+5. **Model-specific optima exist**: Different models prefer different alpha values
+6. **Empirical fitting is common**: Many "fundamental" constants are curve-fitted
 
 ---
 
-**Last Updated:** 2026-01-09 (Q3 fractal connections integrated)
-
-### Q43 (QGT) CONNECTION
-
-**CRITICAL:** Q43 (Quantum Geometric Tensor) may EXPLAIN √3:
-- Berry phase from hexagonal loops: γ = 2π/3
-- √3 = 2·sin(π/3) (hexagonal geometry)
-- Geometric phase accumulation on closed meaning loops
-- Test: Integrate Berry curvature around semantic hexagons
+**Last Updated:** 2026-01-18 (experimental results integrated)
+**Prior hypotheses:** Hexagonal packing, Berry phase, fractal dimension - all falsified or unconfirmed
+**Current status:** sqrt(3) is empirically fitted, in optimal range, model-dependent
