@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.10.2 (2026-01-18 - Q52 added: Chaos Theory Connections. Q22 downgraded to PARTIAL. 27/52 questions answered (52%).)*
+*Last updated: v4.10.3 (2026-01-18 - Q53 added: Pentagonal Phi Geometry. Q36 upgraded to VALIDATED. 28/53 questions answered (53%).)*
 
 ---
 
@@ -41,7 +41,7 @@
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ✅ ANSWERED | **ALL 6 TIERs PASS:** TIER 1 (categorical equiv: 0.32 nn, 0.96 spec), TIER 2 (L-func, Ramanujan), TIER 3/4 (Hecke, Automorphic), TIER 5 (Trace Formula), TIER 6 (primes: 0.84 align, 0% ramified). Langlands applies to semiosphere. |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
-| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | **PARTIAL** | Core mapping proven by Q42: Phi=Implicate, R=Explicate. XOR system demonstrates implicate order (high Phi, low R). Dynamics (unfoldment, holomovement) still open. |
+| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ✅ ANSWERED | **9/9 tests PASS.** Phi=Implicate, R=Explicate. Unfoldment=geodesic (L_CV=3.14e-07). Conservation=angular momentum. 5 architectures confirm. Pentagonal geometry discovered (Q53). |
 | 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). |
 | 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ✅ ANSWERED | R-gating = blanket maintenance (ALIGNED/DISSOLVED/PENDING). Active Inference = handshake protocol (predict→verify→error→resync). Markov blankets ⇔ R > τ state. |
 
@@ -77,6 +77,7 @@
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
 | 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ✅ ANSWERED | **Adaptive thresholding under noise.** Gate becomes MORE conservative under stress (noise improves discrimination by raising effective threshold). This is homeostatic self-protection, not a bug. Cohen's d increases with noise (r=+0.989). |
 | 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ⏳ OPEN | Does R converge to fixed points? R-stable states? |
+| 53 | [Pentagonal Phi Geometry](high_priority/q53_pentagonal_phi_geometry.md) | 1200 | ⏳ PARTIAL | **Phi is more fundamental than spirals.** Concept angles cluster at ~72 deg (pentagonal), not 137.5 deg (golden spiral). Spirals EMERGE from geodesic motion through icosahedral geometry. Discovered during Q36 golden angle tests. |
 
 ---
 
@@ -112,23 +113,26 @@
 **Cluster F: Dynamical Systems** (Q12, Q28, Q52)
 > How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). Can R detect edge of chaos or predict bifurcations?
 
+**Cluster G: Geometry & Symmetry** (Q8, Q36, Q38, Q43, Q53)
+> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -4.7 rad), conserves angular momentum (CV=6e-7), and has pentagonal (~72 deg) packing.
+
 ---
 
 ## Summary Statistics
 
-- **Total Questions:** 52
-- **Answered:** 27 (51.9%)
-- **Partially Answered:** 6 (11.5%)
-- **Open:** 19 (36.5%)
+- **Total Questions:** 53
+- **Answered:** 28 (52.8%)
+- **Partially Answered:** 6 (11.3%)
+- **Open:** 19 (35.8%)
 
 ### By Priority Level
 
 | Priority | Total | Answered | Partially | Open |
 |----------|-------|----------|-----------|------|
 | Critical | 12 | 10 | 1 | 1 |
-| High | 15 | 10 | 2 | 3 |
+| High | 15 | 11 | 1 | 3 |
 | Medium | 11 | 5 | 1 | 5 |
-| Lower | 8 | 2 | 2 | 4 |
+| Lower | 9 | 2 | 3 | 4 |
 | Engineering | 3 | 0 | 0 | 3 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |
 

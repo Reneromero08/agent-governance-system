@@ -1,0 +1,63 @@
+{
+  "golden_ratio": 1.618033988749895,
+  "golden_angle_deg": 137.50776405003785,
+  "golden_angle_rad": 2.399963229728653,
+  "aggregate": {
+    "total_pairs": 2480,
+    "mean_deg": 62.33667100332529,
+    "std_deg": 23.06987041683942,
+    "peak_bin_center_deg": 75.0
+  },
+  "by_model": {
+    "glove": {
+      "n_pairs": 496,
+      "mean_deg": 75.17779628475519,
+      "std_deg": 6.847051777309541,
+      "min_deg": 45.58371741580961,
+      "max_deg": 89.99904881778428,
+      "ratio_to_golden": 0.5467167385355685,
+      "near_golden_pct": 0.0,
+      "deviation_from_90": -14.822203715244811
+    },
+    "word2vec": {
+      "n_pairs": 496,
+      "mean_deg": 81.22107246722774,
+      "std_deg": 6.314559503284025,
+      "min_deg": 39.96818665625712,
+      "max_deg": 92.9473709795596,
+      "ratio_to_golden": 0.5906653564497792,
+      "near_golden_pct": 0.0,
+      "deviation_from_90": -8.778927532772258
+    },
+    "fasttext": {
+      "n_pairs": 496,
+      "mean_deg": 66.33471131078615,
+      "std_deg": 6.028426224295242,
+      "min_deg": 35.71008671957449,
+      "max_deg": 78.18294935999029,
+      "ratio_to_golden": 0.48240702457097284,
+      "near_golden_pct": 0.0,
+      "deviation_from_90": -23.665288689213853
+    },
+    "bert": {
+      "n_pairs": 496,
+      "mean_deg": 18.815464415871446,
+      "std_deg": 4.666913128499254,
+      "min_deg": 9.1578318645638,
+      "max_deg": 33.92733205101621,
+      "ratio_to_golden": 0.13683201487462676,
+      "near_golden_pct": 0.0,
+      "deviation_from_90": -71.18453558412855
+    },
+    "sentence": {
+      "n_pairs": 496,
+      "mean_deg": 70.13431053798598,
+      "std_deg": 4.880448341369048,
+      "min_deg": 47.10063427777408,
+      "max_deg": 80.87776745904544,
+      "ratio_to_golden": 0.5100389132388534,
+      "near_golden_pct": 0.0,
+      "deviation_from_90": -19.865689462014018
+    }
+  }
+}
