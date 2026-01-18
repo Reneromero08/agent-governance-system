@@ -41,6 +41,16 @@ THOUGHT/LAB/CAT_CHAT/
 
 **Session Model:** Session = tiny working set (clean space) + hash pointers to offloaded state (catalytic space).
 
+**Auto-Controlled Context (Virtual Memory for LLMs):**
+The system automatically manages what's in context vs what's offloaded:
+- **Working Set:** What's currently materialized in context (auto-managed)
+- **Pointer Set:** What's available but offloaded to disk (auto-retrieved when relevant)
+- **Auto-Eviction:** When budget exceeded, lowest-E items move to pointer set
+- **Auto-Hydration:** On each query, high-E items from pointer set get materialized
+- **Turn Compression:** After response, old turns compress to hash pointers
+
+The model never manually requests content - it thinks about a topic and the system notices the E-score spike and hydrates relevant content automatically.
+
 **Retrieval Order:** Main cassettes (NAVIGATION/CORTEX/) -> Local index -> CAS (exact hash) -> Vectors (approximate fallback).
 
 **Catalytic Invariants:**
@@ -50,11 +60,13 @@ THOUGHT/LAB/CAT_CHAT/
 4. **INV-CATALYTIC-04 (Clean Space Bound):** Context uses pointers, not full content
 5. **INV-CATALYTIC-05 (Fail-Closed):** Restoration failure = hard exit
 6. **INV-CATALYTIC-06 (Determinism):** Identical inputs = identical Merkle root
+7. **INV-CATALYTIC-07 (Auto-Context):** Working set managed by system, not manual references
 
 **Design Decisions:**
 - ELO scores are informational metadata only, not used for ranking
 - Vectors are fallback only, not primary retrieval path
 - All expansions bounded (no `ALL` slices)
+- Context management is automatic, not manual @symbol references
 
 ---
 
@@ -143,7 +155,55 @@ Single `_generated/cat_chat.db` contains all tables:
 
 ---
 
-### C. Semantic Pointer Compression Integration (P1)
+### C. Auto-Controlled Context Loop (P0 - Core Catalytic Behavior)
+
+**Status:** Not started
+**Purpose:** Virtual memory for LLMs - automatic working set management
+**Depends On:** A (session persistence), B (cassette network for content)
+
+This is THE core catalytic behavior. Without this, nothing is actually catalytic.
+
+**C.1 Context Budget & Working Set:**
+- [ ] C.1.1 Define clean space budget (max tokens for working set)
+- [ ] C.1.2 Track working_set (materialized) vs pointer_set (offloaded) per session
+- [ ] C.1.3 Hard fail if working_set exceeds budget (INV-CATALYTIC-04)
+
+**C.2 E-Score Based Eviction:**
+- [ ] C.2.1 On budget exceeded, compute E-score of each working_set item vs current query
+- [ ] C.2.2 Evict lowest-E items to pointer_set until under budget
+- [ ] C.2.3 Log eviction events to session_events (hash-chained)
+
+**C.3 E-Score Based Hydration:**
+- [ ] C.3.1 On each query, compute E-score of query vs all pointer_set items
+- [ ] C.3.2 Hydrate high-E items (above threshold) into working_set
+- [ ] C.3.3 Hydration is bounded - max N items per query, respects budget
+- [ ] C.3.4 Log hydration events to session_events
+
+**C.4 Turn Compression:**
+- [ ] C.4.1 After response, old turns (beyond window) compress to hash pointers
+- [ ] C.4.2 Full turn content stored in catalytic space (session_events)
+- [ ] C.4.3 Only hash pointer + summary remains in working_set
+
+**C.5 Catalytic Chat Loop:**
+- [ ] C.5.1 Wire together: query -> hydrate -> assemble -> LLM -> compress -> evict
+- [ ] C.5.2 Session capsule logs every step (deterministic replay)
+- [ ] C.5.3 All context assembly uses ContextAssembler with budgets
+- [ ] C.5.4 GeometricChat.respond() uses auto-managed context, not raw docs
+
+**C.6 E-Gating Threshold Tuning:**
+- [ ] C.6.1 Default threshold = 0.5 (from Q44 validation)
+- [ ] C.6.2 Configurable per-session
+- [ ] C.6.3 Track E-score vs response quality correlation
+
+**Exit Criteria:**
+- Model runs with fully auto-managed context
+- No manual @symbol references needed
+- Working set stays within budget across entire session
+- Eviction/hydration decisions logged and reproducible
+
+---
+
+### D. Semantic Pointer Compression Integration (P1)
 
 **Status:** Not started
 **Purpose:** Use SPC instead of verbose @symbols
@@ -160,25 +220,6 @@ Single `_generated/cat_chat.db` contains all tables:
   - Prove compression claims
 
 **Exit Criteria:** SPC pointers resolve correctly with fail-closed semantics
-
----
-
-### D. Geometric E-Gating Integration (P1)
-
-**Status:** geometric_chat.py exists, integration pending
-**Purpose:** Use E-scoring for relevance filtering
-
-- [ ] D.1 Wire geometric_chat.py into main flow:
-  - E-gate before LLM calls (threshold=0.5)
-  - Track E-scores in receipts
-- [ ] D.2 Context assembly via E-scoring:
-  - Rank retrieved content by geometric relevance
-  - Bounded expansion with E-gated filtering
-- [ ] D.3 Correlation validation:
-  - Prove high-E responses are measurably better
-  - Track E-score vs response quality
-
-**Exit Criteria:** E-gating operational, correlation measured
 
 ---
 
@@ -266,8 +307,8 @@ Single `_generated/cat_chat.db` contains all tables:
 |----------|-------|----------|--------|
 | P0 | A. Session Tests | Yes | Small |
 | P0 | B. Cassette Network Integration | Yes | Medium |
-| P1 | C. SPC Integration | No | Medium |
-| P1 | D. E-Gating Integration | No | Medium |
+| P0 | C. Auto-Controlled Context Loop | Yes | Large |
+| P1 | D. SPC Integration | No | Medium |
 | P2 | E. Vector Fallback | No | Medium |
 | P2 | F. Docs Index | No | Medium |
 | P2 | G. Bundle Replay | No | Medium |
@@ -275,6 +316,8 @@ Single `_generated/cat_chat.db` contains all tables:
 | P3 | I. Measurement | No | Medium |
 
 **Recommended order:** A -> B -> C -> D -> E -> F -> G -> H -> I
+
+**Note:** C (Auto-Controlled Context) is the core catalytic behavior. Everything before it (A, B) provides foundation. Everything after it (D-I) provides optimization and polish. Without C, the system is not actually catalytic.
 
 ---
 
@@ -293,8 +336,9 @@ All dependencies satisfied. Integration work is unblocked.
 
 CAT Chat graduates from LAB to main system when:
 
-1. All P0/P1 items complete
-2. Tests pass with main cassette network
-3. Catalytic invariants verified
-4. Compression claims proven with benchmarks
-5. Golden demo works from fresh clone
+1. All P0 items complete (A, B, C)
+2. Auto-controlled context loop operational (C) - the core catalytic behavior
+3. Tests pass with main cassette network
+4. All 7 catalytic invariants verified (including INV-CATALYTIC-07: Auto-Context)
+5. Compression claims proven with benchmarks
+6. Golden demo works from fresh clone with auto-managed context
