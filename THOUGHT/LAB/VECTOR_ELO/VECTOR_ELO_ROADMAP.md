@@ -37,7 +37,7 @@ else:
 
 ---
 
-## Phase E.1: Logging Infrastructure (P0) - MODULES DONE
+## Phase E.1: Logging Infrastructure (P0) - DONE
 
 **Goal:** Log everything to enable ELO calculation.
 
@@ -45,11 +45,11 @@ else:
 - [x] **E.1.1**: SearchLogger module (`CAPABILITY/PRIMITIVES/search_logger.py`)
   - Log: session_id, timestamp, tool, query, results (hash, path, rank, similarity)
   - Storage: `NAVIGATION/CORTEX/_generated/search_log.jsonl`
-  - [ ] **PENDING:** Wire into MCP server search tools
+  - [x] **DONE (2026-01-18):** Wired into SemanticMCPAdapter (cassette_network_query, memory_query, semantic_neighbors)
 - [x] **E.1.2**: SessionAuditor module (`CAPABILITY/PRIMITIVES/session_auditor.py`)
   - Log: session_id, agent_id, start/end time, files accessed, symbols expanded
   - Storage: `NAVIGATION/CORTEX/_generated/session_audit.jsonl`
-  - [ ] **PENDING:** Wire into MCP session handling
+  - [x] **DONE (2026-01-18):** Wired into AGSMCPServer (tracks canon_read, context_search, codebook_lookup, semantic searches)
 - [x] **E.1.3**: critic.py check for search protocol compliance (`CAPABILITY/TOOLS/critic.py`)
   - Flag: keyword search for conceptual queries
   - Flag: missing session_id
@@ -58,8 +58,8 @@ else:
   - Access layer: `CAPABILITY/PRIMITIVES/elo_db.py`
 
 ### Exit Criteria
-- [ ] All MCP searches are logged (pending integration)
-- [ ] Session audits capture all file/symbol access (pending integration)
+- [x] All MCP semantic searches are logged (cassette_network_query, memory_query, semantic_neighbors)
+- [x] Session audits capture all file/symbol access (wired via _track_tool_access in server.py)
 - [x] critic.py enforces search protocol
 - [x] elo_scores.db schema ready
 
@@ -144,25 +144,42 @@ else:
 
 ---
 
-## Phase E.5: Search Result Ranking (P2) - MODULES DONE
+## Phase E.5: Search Result Annotation (P2) - DONE
 
-**Goal:** Boost search results by ELO score.
+**Goal:** Attach ELO metadata to search results (does NOT modify ranking).
+
+**DESIGN DECISION (2026-01-18):** ELO is metadata only, not a ranking modifier.
+- Prevents echo chambers (popular content can't bury relevant content)
+- Avoids "lost treasures" (undiscovered content still surfaces)
+- Relevance always wins (similarity is the only ranking factor)
+- ELO provides context ("this file is frequently accessed")
 
 ### Tasks
 - [x] **E.5.1**: EloRanker module (`CAPABILITY/TOOLS/elo_ranker.py`)
-  - `compute_final_score(similarity, elo)` = similarity * 0.7 + (elo / 2000) * 0.3
-  - `boost_semantic_search(results)` → re-ranked results
-  - [ ] **PENDING:** Wire into MCP semantic_search
-- [x] **E.5.2**: `boost_cortex_query(results)` → ELO as secondary sort
-  - [ ] **PENDING:** Wire into MCP cortex_query
+  - `annotate_results(results)` -> attach ELO metadata, preserve order
+  - `boost_semantic_search(results)` -> DOES NOT re-rank (backward compat)
+  - [x] **DONE (2026-01-18):** Wired into SemanticMCPAdapter
+- [x] **E.5.2**: `boost_cortex_query(results)` -> attach metadata only
+  - [x] **DONE (2026-01-18):** Wired into SemanticMCPAdapter
 - [x] **E.5.3**: ELO in result metadata (RankedResult dataclass)
-  - Shows: file_path, content_hash, similarity, elo_score, elo_tier, final_score, rank
+  - Shows: file_path, content_hash, similarity, elo_score, elo_tier, rank
+  - Note: final_score = similarity (ELO has zero weight)
 - [x] **E.5.4**: `get_quality_stats(results)` for benchmarking
 
+### Formula History
+```python
+# ORIGINAL (rejected - causes echo chambers):
+# final_score = similarity * 0.7 + (elo / 2000) * 0.3
+
+# CURRENT (adopted):
+final_score = similarity  # ELO has zero weight on ranking
+```
+
 ### Exit Criteria
-- [x] Search ranking logic implemented
-- [ ] Search results boosted by ELO (pending MCP integration)
+- [x] ELO annotation logic implemented
+- [x] ELO metadata attached to search results (integrated into SemanticMCPAdapter)
 - [x] Quality stats available for measurement
+- [x] Similarity-only ranking verified by tests
 
 ---
 
@@ -188,62 +205,18 @@ else:
 
 ---
 
-## Phase E.X: Eigenvalue Alignment Protocol (Research Complete)
+## Phase E.X: Eigenvalue Alignment Protocol (MOVED)
 
-**Status:** VALIDATED (2026-01-08)
-**Goal:** Cross-model semantic alignment via eigenvalue spectrum invariance.
+**Status:** Research VALIDATED (2026-01-08), production tasks moved to Cassette Network
 
-### Discovery
+ESAP is about cross-model semantic alignment, not ELO tracking. Production implementation tasks have been moved to:
+- [CASSETTE_NETWORK_ROADMAP.md](../CASSETTE_NETWORK/CASSETTE_NETWORK_ROADMAP.md) - ESAP section
 
-The **eigenvalue spectrum** of an anchor word distance matrix is invariant across embedding models (r = 0.99+), even when raw distance matrices are uncorrelated or inverted.
-
-| Model Pair | Raw Distance Correlation | Eigenvalue Correlation |
-|------------|-------------------------|------------------------|
-| MiniLM ↔ E5-large | -0.05 | **0.9869** |
-| MiniLM ↔ MPNET | 0.914 | 0.9954 |
-| MiniLM ↔ BGE | 0.277 | 0.9895 |
-| MiniLM ↔ GTE | 0.198 | 0.9865 |
-
-### Proven Method
-
-1. Compute squared distance matrix D² for anchor words
-2. Apply classical MDS: B = -½ J D² J (double-centered Gram)
-3. Eigendecompose: B = VΛV^T
-4. Get MDS coordinates: X = V√Λ
-5. Procrustes rotation: R = argmin ||X₁R - X₂||
-6. Align new points via Gower's out-of-sample formula
-
-### Proof Result
-
-- Raw MDS similarity: -0.0053
-- After Procrustes alignment: **0.8377**
-- Improvement: **+0.8430**
-
-### Existing Artifacts
-
-| File | Description |
-|------|-------------|
-| `experiments/semantic_anchor_test.py` | Cross-model distance matrix testing |
-| `experiments/invariant_search.py` | Invariant discovery |
-| `experiments/eigen_alignment_proof.py` | MDS + Procrustes proof |
-| `research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md` | Proof report |
-| `research/cassette-network/01-08-2026_UNIVERSAL_SEMANTIC_ANCHOR_HYPOTHESIS.md` | Hypothesis doc |
-| `research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md` | Full protocol spec |
-
-### Future Work (E.X.1)
-
-- [ ] **E.X.1.1**: Implement full protocol per OPUS pack spec
-  - Protocol message types: ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP
-  - CLI: `anchors build`, `signature compute`, `map fit`, `map apply`
-- [ ] **E.X.1.2**: Benchmark with 8/16/32/64 anchor sets
-- [ ] **E.X.1.3**: Test neighborhood overlap@k on held-out set
-- [ ] **E.X.1.4**: Compare with vec2vec (arXiv:2505.12540) neural approach
-- [ ] **E.X.1.5**: Integrate as cassette handshake artifact
-
-### Related Papers
-
-- arXiv:2405.07987 - Platonic Representation Hypothesis
-- arXiv:2505.12540 - vec2vec (neural approach)
+**Research artifacts remain here:**
+- `experiments/semantic_anchor_test.py` - Cross-model distance matrix testing
+- `experiments/eigen_alignment_proof.py` - MDS + Procrustes proof
+- `research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md` - Proof report
+- `research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md` - Protocol spec
 
 ---
 

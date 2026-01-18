@@ -79,6 +79,7 @@ The Cassette Network is **not just a distributed database**. It is infrastructur
 
 **Remaining future work:**
 - Phase 7: ELO Integration (scores.elo field in MemoryRecord)
+- ESAP: Eigenvalue Spectrum Alignment Protocol (cross-model portability)
 
 ---
 
@@ -924,6 +925,59 @@ Meaning itself → THE TERRITORY
 Compression isn't clever encoding tricks. It's reducing the gap between map and territory.
 
 **The cassette network stores the territory. Symbols point into it.**
+
+---
+
+## Future: ESAP - Eigenvalue Spectrum Alignment Protocol (P3)
+
+**Status:** Research VALIDATED (2026-01-08), production implementation pending
+**Purpose:** Cross-model semantic alignment via eigenvalue spectrum invariance
+
+### The Problem
+
+Different embedding models (MiniLM, E5, BGE, GTE) produce incompatible vector spaces.
+Raw distance correlation between models: -0.05 to 0.91 (highly variable).
+
+### The Discovery
+
+The **eigenvalue spectrum** of an anchor word distance matrix is invariant across models (r = 0.99+).
+
+| Model Pair | Raw Distance Correlation | Eigenvalue Correlation |
+|------------|-------------------------|------------------------|
+| MiniLM <-> E5-large | -0.05 | **0.9869** |
+| MiniLM <-> MPNET | 0.914 | 0.9954 |
+| MiniLM <-> BGE | 0.277 | 0.9895 |
+| MiniLM <-> GTE | 0.198 | 0.9865 |
+
+### Production Tasks
+
+- [ ] ESAP.1 Implement full protocol per OPUS pack spec
+  - Protocol message types: ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP
+  - CLI: `anchors build`, `signature compute`, `map fit`, `map apply`
+- [ ] ESAP.2 Benchmark with 8/16/32/64 anchor sets
+- [ ] ESAP.3 Test neighborhood overlap@k on held-out set
+- [ ] ESAP.4 Compare with vec2vec (arXiv:2505.12540) neural approach
+- [ ] ESAP.5 Integrate as cassette handshake artifact (cross-model portability)
+
+### Method (Proven)
+
+1. Compute squared distance matrix D^2 for anchor words
+2. Apply classical MDS: B = -1/2 J D^2 J (double-centered Gram)
+3. Eigendecompose: B = V*Lambda*V^T
+4. Get MDS coordinates: X = V*sqrt(Lambda)
+5. Procrustes rotation: R = argmin ||X1*R - X2||
+6. Align new points via Gower's out-of-sample formula
+
+**Result:** Raw MDS similarity -0.0053 -> After Procrustes: **0.8377** (+0.8430 improvement)
+
+### Related Research
+
+- arXiv:2405.07987 - Platonic Representation Hypothesis
+- arXiv:2505.12540 - vec2vec (neural approach)
+
+**Proof Documents:**
+- [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](../VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
+- [OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md](../VECTOR_ELO/research/cassette-network/OPUS_EIGEN_SPECTRUM_ALIGNMENT_PROTOCOL_PACK.md)
 
 ---
 

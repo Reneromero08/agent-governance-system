@@ -6,6 +6,39 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.22] - 2026-01-18
+
+### Added: Vector ELO MCP Integration (E.1.2, E.5)
+
+Wired Vector ELO modules into MCP server for complete usage tracking.
+
+**Design Decision: ELO as suggestion, not modification**
+- ELO is metadata only - does NOT modify search ranking
+- Prevents echo chambers (popular content can't bury relevant content)
+- Avoids lost treasures (undiscovered content still surfaces)
+- Relevance always wins (final_score = similarity only)
+
+**MCP Integration:**
+- `CAPABILITY/MCP/semantic_adapter.py` - SearchLogger + EloRanker wired into all search methods
+  - cassette_network_query, memory_query, semantic_neighbors
+  - Logs all searches to search_log.jsonl
+  - Attaches ELO metadata to results (elo_score, elo_tier)
+- `CAPABILITY/MCP/server.py` - SessionAuditor tracks file/symbol/search access
+  - Tool mapping: canon_read -> file access, context_search -> keyword search
+  - codebook_lookup -> symbol expansion, cassette_network_query -> semantic search
+  - Session lifecycle: start on server init, end via atexit handler
+- `CAPABILITY/TOOLS/elo_ranker.py` - Rewritten with suggestion-only design
+  - compute_final_score() returns similarity (ELO explicitly ignored)
+  - annotate_results() attaches metadata without re-ranking
+
+**Verified:**
+- All MCP semantic searches logged to search_log.jsonl
+- Session audits capture file/symbol access in session_audit.jsonl
+- ELO metadata attached to search results (no ranking change)
+- All tests passing
+
+---
+
 ## [3.8.21] - 2026-01-18
 
 ### Added: Phase 7 - Vector ELO (Systemic Intuition)

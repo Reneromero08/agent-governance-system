@@ -1,21 +1,66 @@
-# Vector ELO Scoring System (R-Gated)
+# Vector ELO Scoring System
 
-**Status:** Design Spec
+**Status:** Design Spec (Updated 2026-01-18)
 **Created:** 2026-01-02
-**Purpose:** Implement systemic intuition via ELO scoring for vectors, files, and symbols. R-gated to prevent echo chambers.
+**Purpose:** Implement systemic intuition via ELO scoring for vectors, files, and symbols.
+
+---
+
+## Design Decision: ELO as Suggestion, Not Modification
+
+**CRITICAL:** ELO is metadata only. It does NOT affect search ranking.
+
+### Why This Design?
+
+| Problem | Risk | Solution |
+|---------|------|----------|
+| Echo chamber | Popular content buries relevant content | ELO doesn't change ranking |
+| Lost treasures | Undiscovered content decays forever | Similarity alone determines relevance |
+| Arbitrary scores | Numbers without meaning control results | ELO informs, similarity decides |
+
+### What ELO Controls vs. Suggests
+
+| Component | ELO Role | Rationale |
+|-----------|----------|-----------|
+| **Search ranking** | Suggestion (metadata only) | Relevance must win |
+| **LITE packs** | Controls compression | Token budget is real constraint |
+| **Memory pruning** | Controls archival | Storage is real constraint |
+| **Dashboard** | Display metric | Visibility into usage patterns |
+
+### Formula History
+
+```python
+# ORIGINAL (rejected - causes echo chambers):
+# final_score = similarity * 0.7 + (elo / 2000) * 0.3
+
+# CURRENT (adopted):
+final_score = similarity  # ELO has zero weight on ranking
+# ELO attached as metadata for display/filtering only
+```
+
+### Example Output
+
+```
+Search: "authentication config"
+
+Results (ranked by similarity only):
+1. docs/auth/config.md     (sim: 0.92)  [ELO: 1847 - frequently accessed]
+2. src/auth/handler.py     (sim: 0.88)  [ELO: 623 - rarely accessed]
+3. tests/auth_test.py      (sim: 0.85)  [ELO: 1204 - moderate access]
+```
+
+Result #2 surfaces despite low ELO because it's RELEVANT.
+The ELO metadata tells you it's rarely accessed - useful context, not a penalty.
 
 ---
 
 ## Core Concept
 
-**ELO tracks usage. R gates truth.**
+**ELO tracks usage. Similarity determines relevance.**
 
 - ELO measures what you ACCESS (pragmatic importance)
-- R measures what is TRUE (semantic quality) - see `THOUGHT/LAB/FORMULA/`
-- Combined: High R + High ELO = true AND important content
-
-**Echo Chamber Prevention:**
-Low R + High ELO = frequently accessed noise. R-gating prevents this from dominating.
+- Similarity measures what MATCHES your query (semantic relevance)
+- ELO is informational context, not a ranking factor
 
 ---
 
@@ -226,9 +271,30 @@ See `VECTOR_ELO_ROADMAP.md` for full details.
 
 ---
 
-## Next Steps
+## Implementation Status (2026-01-18)
 
-1. **Implement E.1** (Logging Infrastructure) - see VECTOR_ELO_ROADMAP.md
-2. **Implement E.2** (ELO Engine with R-gating + forgetting curve)
-3. **Integrate E.3** (Memory pruning based on R x ELO)
-4. **Monitor and tune** - Adjust K, half_life, R threshold based on results
+**All core phases complete.** See VECTOR_ELO_ROADMAP.md for details.
+
+| Phase | Status | Key Components |
+|-------|--------|----------------|
+| E.1 Logging | DONE | SearchLogger, SessionAuditor wired into MCP |
+| E.2 ELO Engine | DONE | update_elo, decay, tiers, batch processing |
+| E.3 Memory Pruning | DONE | prune_memory.py with dry-run |
+| E.4 LITE Packs | DONE | ELO-filtered pack generation |
+| E.5 Search Annotation | DONE | EloRanker metadata (no ranking change) |
+| E.6 Dashboard | DONE | CLI interactive mode |
+
+**Operational Tasks (manual triggers):**
+- `elo_engine.process_search_log()` - batch update ELO from logs
+- `elo_engine.decay_all_stale()` - apply forgetting curve
+- `prune_memory.execute_pruning()` - archive stale content
+
+---
+
+## Remaining Future Work (P3)
+
+### E.6.2-E.6.3 Monitoring & Alerts
+- [ ] E.6.2 Export ELO metrics to Prometheus/Grafana
+- [ ] E.6.3 Add ELO alerts (low-ELO content accessed frequently = echo chamber indicator)
+
+**Note:** Eigenvalue Alignment Protocol (ESAP) moved to [CASSETTE_NETWORK_ROADMAP.md](../CASSETTE_NETWORK/CASSETTE_NETWORK_ROADMAP.md) - it's about cross-model portability, not ELO.

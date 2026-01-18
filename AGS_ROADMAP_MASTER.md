@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.8.0
-last_updated: 2026-01-16
+version: 3.8.22
+last_updated: 2026-01-18
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
 notes:
@@ -248,28 +248,53 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 - Session cache: 98% per warm query
 - 39 tests passing, all benchmarks verified
 
+## Remaining Future Work (P3):
+
+### ESAP - Eigenvalue Spectrum Alignment Protocol
+Cross-model semantic alignment via eigenvalue spectrum invariance.
+**Research Status:** VALIDATED (r = 0.99+ eigenvalue correlation across models)
+**Proof:** [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](THOUGHT/LAB/VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
+
+- [ ] ESAP.1 Implement full protocol per OPUS pack spec
+  - Protocol message types: ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP
+  - CLI: `anchors build`, `signature compute`, `map fit`, `map apply`
+- [ ] ESAP.2 Benchmark with 8/16/32/64 anchor sets
+- [ ] ESAP.3 Test neighborhood overlap@k on held-out set
+- [ ] ESAP.4 Compare with vec2vec (arXiv:2505.12540) neural approach
+- [ ] ESAP.5 Integrate as cassette handshake artifact (cross-model portability)
+
 **Next:** Phase 7 - ELO Integration (scores.elo field)
 
-# Phase 7: Vector ELO (Systemic Intuition) (P1) - MODULES COMPLETE
+# Phase 7: Vector ELO (Systemic Intuition) (P1) ✅ CORE COMPLETE
 
-**Status:** Modules complete, MCP integration pending
+**Status:** Core phases complete (E.1-E.6), MCP integration complete (2026-01-18)
 **Canonical Roadmap:** [VECTOR_ELO_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md)
 **Specification:** [VECTOR_ELO_SPEC.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_SPEC.md)
 
-**Core Principle:** ELO tracks usage. R gates truth.
+**Core Principle:** ELO tracks usage. Similarity determines relevance.
+**Design Decision:** ELO is metadata only - does NOT modify search ranking (prevents echo chambers).
 
-**Completed Modules (2026-01-18):**
-- E.1: Logging Infrastructure - search_logger.py, session_auditor.py, critic.py, elo_db.py, elo_scores.db
-- E.2: ELO Engine - elo_engine.py with update/get/decay/tier classification
-- E.3: Memory Pruning - prune_memory.py (VERY LOW + stale to archive)
-- E.4: LITE Pack - lite_pack.py with ELO tier filtering (blocks INBOX/LAB)
-- E.5: Search Ranking - elo_ranker.py (similarity * 0.7 + elo * 0.3)
-- E.6: Dashboard - elo_dashboard.py (CLI with interactive mode)
+## Completed (2026-01-18):
 
-**Remaining (MCP Integration):**
-- [ ] Wire SearchLogger into MCP server search tools
-- [ ] Wire SessionAuditor into MCP session handling
-- [ ] Wire EloRanker into search result pipeline
+| Phase | Status | Components |
+|-------|--------|------------|
+| E.1 Logging | DONE | SearchLogger, SessionAuditor wired into MCP |
+| E.2 ELO Engine | DONE | update_elo, decay, tiers, batch processing |
+| E.3 Memory Pruning | DONE | prune_memory.py with dry-run |
+| E.4 LITE Packs | DONE | ELO-filtered pack generation |
+| E.5 Search Annotation | DONE | EloRanker metadata (no ranking change) |
+| E.6.1 Dashboard | DONE | CLI interactive mode |
+
+**MCP Integration (DONE):**
+- [x] SearchLogger wired into SemanticMCPAdapter (cassette_network_query, memory_query, semantic_neighbors)
+- [x] SessionAuditor wired into AGSMCPServer (tracks file/symbol/search access)
+- [x] EloRanker annotates results with elo_score/elo_tier metadata (no re-ranking)
+
+## Remaining Future Work (P3):
+
+### E.6.2-E.6.3 Monitoring & Alerts
+- [ ] E.6.2 Export ELO metrics to Prometheus/Grafana
+- [ ] E.6.3 Add ELO alerts (low-ELO content accessed frequently = potential echo chamber)
 
 **Success Metrics (Targets):**
 - ELO convergence: Variance <10% after 100 sessions

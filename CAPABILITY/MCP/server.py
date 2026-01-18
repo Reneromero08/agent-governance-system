@@ -1232,6 +1232,7 @@ class AGSMCPServer:
 
     def __init__(self):
         import uuid
+        import atexit
         self.tools_schema = load_schema("tools")
         self.resources_schema = load_schema("resources")
         self._initialized = False
@@ -1240,6 +1241,12 @@ class AGSMCPServer:
         self.semantic_adapter = None
         self.semantic_available = False
         self._semantic_init_attempted = False
+        # Session auditor for ELO file/symbol tracking (E.1.2)
+        self.session_auditor = None
+        self._session_auditor_available = False
+        self._init_session_auditor()
+        # Register atexit handler to end session cleanly
+        atexit.register(self._end_session_audit)
         # Write enforcement
         self.writer = GuardedWriter(
             project_root=PROJECT_ROOT,
@@ -1265,11 +1272,170 @@ class AGSMCPServer:
 
 
 
+    def _init_session_auditor(self) -> None:
+        """Initialize the session auditor for ELO file/symbol tracking (E.1.2).
+
+        The SessionAuditor tracks:
+        - Files accessed via MCP tools (canon_read, context_search, etc.)
+        - ADR reads
+        - Symbol expansions (codebook_lookup)
+        - Search query counts (semantic vs keyword)
+        """
+        try:
+            # Add CAPABILITY to path for import
+            sys.path.insert(0, str(CAPABILITY_ROOT))
+            from PRIMITIVES.session_auditor import SessionAuditor
+
+            # Initialize auditor with log dir and agent ID
+            log_dir = NAVIGATION_ROOT / "CORTEX" / "_generated"
+            log_dir.mkdir(parents=True, exist_ok=True)
+
+            self.session_auditor = SessionAuditor(
+                log_dir=str(log_dir),
+                agent_id="mcp-server"
+            )
+            # Start the session
+            self.session_auditor.start_session()
+            self._session_auditor_available = True
+            print(f"[INFO] Session auditor initialized (session: {self.session_auditor.current_session_id})", file=sys.stderr)
+        except Exception as e:
+            self.session_auditor = None
+            self._session_auditor_available = False
+            print(f"[WARNING] Session auditor unavailable: {e}", file=sys.stderr)
+
+    def _end_session_audit(self) -> None:
+        """End the session audit and write to log file."""
+        if self.session_auditor and self.session_auditor.is_active:
+            try:
+                entry = self.session_auditor.end_session()
+                print(f"[INFO] Session audit complete: {entry.search_queries} searches, {len(entry.files_accessed)} files", file=sys.stderr)
+            except Exception as e:
+                print(f"[WARNING] Failed to end session audit: {e}", file=sys.stderr)
+
+    def _audit_file_access(self, file_path: str) -> None:
+        """Record a file access for ELO tracking."""
+        if self.session_auditor and self._session_auditor_available:
+            try:
+                # Normalize to relative path from project root
+                path = Path(file_path)
+                if path.is_absolute():
+                    try:
+                        rel_path = path.relative_to(PROJECT_ROOT)
+                        file_path = str(rel_path)
+                    except ValueError:
+                        pass  # Keep absolute path if not under project root
+                self.session_auditor.record_file_access(file_path)
+            except Exception:
+                pass  # Don't let audit failures break tool calls
+
+    def _audit_adr_read(self, adr_id: str) -> None:
+        """Record an ADR read for ELO tracking."""
+        if self.session_auditor and self._session_auditor_available:
+            try:
+                self.session_auditor.record_adr_read(adr_id)
+            except Exception:
+                pass
+
+    def _audit_symbol_expansion(self, symbol: str) -> None:
+        """Record a symbol expansion for ELO tracking."""
+        if self.session_auditor and self._session_auditor_available:
+            try:
+                self.session_auditor.record_symbol_expansion(symbol)
+            except Exception:
+                pass
+
+    def _audit_search(self, is_semantic: bool) -> None:
+        """Record a search for ELO tracking."""
+        if self.session_auditor and self._session_auditor_available:
+            try:
+                self.session_auditor.record_search(is_semantic=is_semantic)
+            except Exception:
+                pass
+
+    def _track_tool_access(self, tool_name: str, arguments: Dict, result: Dict) -> None:
+        """Track file/symbol/search access based on tool call (E.1.2).
+
+        Maps tool calls to ELO-relevant events:
+        - canon_read -> file access + potential ADR read
+        - context_search/context_review -> file access (from results)
+        - codebook_lookup -> symbol expansion
+        - cassette_network_query/memory_query/skill_discovery -> semantic search
+        - find_related -> semantic search
+        """
+        try:
+            # Canon read - track file access
+            if tool_name == "canon_read":
+                file_name = arguments.get("file", "")
+                if file_name:
+                    file_path = f"LAW/CANON/{file_name.upper()}.md"
+                    self._audit_file_access(file_path)
+
+            # Context search/review - track file accesses from results
+            elif tool_name in ("context_search", "context_review"):
+                self._audit_search(is_semantic=False)  # Keyword search
+                # Extract file paths from result
+                try:
+                    content = result.get("content", [])
+                    if content and content[0].get("type") == "text":
+                        import json
+                        records = json.loads(content[0].get("text", "[]"))
+                        for record in records:
+                            if isinstance(record, dict) and "path" in record:
+                                self._audit_file_access(record["path"])
+                                # Check if it's an ADR
+                                path = record.get("path", "")
+                                if "ADR-" in path:
+                                    import re
+                                    adr_match = re.search(r"ADR-(\d+)", path)
+                                    if adr_match:
+                                        self._audit_adr_read(f"ADR-{adr_match.group(1)}")
+                except Exception:
+                    pass
+
+            # Codebook lookup - track symbol expansion
+            elif tool_name == "codebook_lookup":
+                symbol_id = arguments.get("id", "")
+                if symbol_id:
+                    self._audit_symbol_expansion(symbol_id)
+                # Also track as keyword search if expand=True
+                if arguments.get("expand"):
+                    self._audit_search(is_semantic=False)
+
+            # Semantic search tools
+            elif tool_name in ("cassette_network_query", "memory_query", "skill_discovery",
+                               "find_related", "semantic_neighbors"):
+                self._audit_search(is_semantic=True)
+                # Extract file paths from cassette_network_query results
+                if tool_name == "cassette_network_query":
+                    try:
+                        content = result.get("content", [])
+                        if content and content[0].get("type") == "text":
+                            import json
+                            data = json.loads(content[0].get("text", "{}"))
+                            for res in data.get("results", []):
+                                path = res.get("path", res.get("file_path", ""))
+                                if path:
+                                    self._audit_file_access(path)
+                    except Exception:
+                        pass
+
+            # ADR creation - track ADR read (reviewing existing ADRs)
+            elif tool_name == "adr_create":
+                # The ADR being created
+                adr_id = arguments.get("id", "")
+                if adr_id:
+                    self._audit_adr_read(adr_id)
+
+        except Exception:
+            pass  # Don't let tracking failures break tool calls
+
     def _ensure_semantic_adapter(self) -> None:
         """Lazy initialization of the semantic adapter.
 
         VS Code/Antigravity expect the server to respond quickly to `initialize`.
         Any heavy/optional init must be deferred until a semantic tool is actually called.
+
+        ELO Integration: Passes session_id to adapter for search logging.
         """
         if getattr(self, "_semantic_init_attempted", False):
             return
@@ -1281,11 +1447,13 @@ class AGSMCPServer:
             except Exception:
                 from semantic_adapter import SemanticMCPAdapter  # type: ignore
 
-            adapter = SemanticMCPAdapter()
-            adapter.initialize()
+            # Pass session_id for ELO search logging
+            adapter = SemanticMCPAdapter(session_id=self.session_id)
+            init_result = adapter.initialize()
             self.semantic_adapter = adapter
             self.semantic_available = True
-            print("[INFO] Semantic adapter initialized", file=sys.stderr)
+            elo_status = "enabled" if init_result.get("elo_available") else "disabled"
+            print(f"[INFO] Semantic adapter initialized (ELO: {elo_status})", file=sys.stderr)
         except Exception as e:
             self.semantic_adapter = None
             self.semantic_available = False
@@ -1513,6 +1681,9 @@ class AGSMCPServer:
                 duration = time.time() - start_time
                 is_error = result.get("isError", False)
                 self._audit_log(tool_name, arguments, "error" if is_error else "success", result, duration)
+                # E.1.2: Track file/symbol/search access for ELO
+                if not is_error:
+                    self._track_tool_access(tool_name, arguments, result)
                 return result
             except Exception as e:
                 duration = time.time() - start_time

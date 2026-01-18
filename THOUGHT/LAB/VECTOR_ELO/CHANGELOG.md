@@ -4,11 +4,67 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.48] - 2026-01-18
+
+### E.1.2 COMPLETE - SessionAuditor MCP Integration
+
+**Status:** SessionAuditor now wired into AGSMCPServer for complete file/symbol/search tracking.
+
+**MCP Integration (E.1.2):**
+- `CAPABILITY/MCP/server.py` - SessionAuditor wired into AGSMCPServer
+  - `_init_session_auditor()` - Initialize auditor on server start
+  - `_end_session_audit()` - Clean shutdown via atexit handler
+  - `_track_tool_access()` - Maps tool calls to ELO events:
+    - `canon_read` -> file access
+    - `context_search/context_review` -> file access + keyword search count
+    - `codebook_lookup` -> symbol expansion
+    - `cassette_network_query/memory_query/skill_discovery` -> semantic search count
+  - `_audit_file_access()`, `_audit_adr_read()`, `_audit_symbol_expansion()`, `_audit_search()`
+
+**Verified:**
+- `session_auditor_available: True` on server init
+- Files accessed tracked correctly
+- ADR reads tracked correctly
+- Symbol expansions tracked correctly
+- Semantic vs keyword search counts tracked
+- Session audit written to `session_audit.jsonl` on server shutdown
+
+---
+
+## [3.7.47] - 2026-01-18
+
+### Phase 7 COMPLETE - MCP Integration (E.1.1 + E.5)
+
+**Status:** SearchLogger and EloRanker wired into SemanticMCPAdapter.
+
+**MCP Integration (E.1.1 + E.5):**
+- `CAPABILITY/MCP/semantic_adapter.py` - ELO wired into SemanticMCPAdapter
+  - SearchLogger logging all semantic searches (cassette_network_query, memory_query, semantic_neighbors)
+  - EloRanker annotating results with elo_score and elo_tier metadata
+  - Session ID passed through for search attribution
+- `CAPABILITY/MCP/server.py` - Session ID passed to adapter initialization
+
+**Design Decision (2026-01-18): ELO as Suggestion Only**
+- ELO is metadata only - does NOT affect search ranking
+- Formula: `final_score = similarity` (ELO has zero weight)
+- Prevents echo chambers (popular content can't bury relevant content)
+- Avoids "lost treasures" (undiscovered content still surfaces)
+- Where ELO controls: LITE pack compression, memory pruning
+- Where ELO suggests: Search ranking (metadata annotation only)
+
+**Verified:**
+- `elo_available: True` in adapter initialization
+- `elo_annotated: True` in search results
+- Results contain elo_score and elo_tier fields
+- search_log.jsonl created on semantic queries
+
+---
+
 ## [3.7.46] - 2026-01-18
 
 ### Phase 7 MODULES COMPLETE - Vector ELO Implementation
 
-**Status:** All standalone modules implemented and tested. MCP integration pending.
+**Status:** All standalone modules implemented and tested.
 
 **Wave 1 - Logging Infrastructure (E.1):**
 - `CAPABILITY/PRIMITIVES/search_logger.py` - SearchLogger class for JSONL search logging
@@ -31,8 +87,9 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 - `CAPABILITY/TOOLS/lite_pack.py` - LitePackGenerator class
   - HIGH: Full content, MEDIUM: Summarized, LOW: Pointer, VERY_LOW: Excluded
   - Blocks INBOX/, THOUGHT/LAB/, _generated/ from packs
-- `CAPABILITY/TOOLS/elo_ranker.py` - EloRanker class
-  - Formula: final_score = similarity * 0.7 + (elo / 2000) * 0.3
+- `CAPABILITY/TOOLS/elo_ranker.py` - EloRanker class (rewritten for suggestion-only mode)
+  - Formula: final_score = similarity (ELO is metadata only)
+  - annotate_results() method for MCP integration
 
 **Wave 4 - Visualization (E.6):**
 - `CAPABILITY/TOOLS/elo_dashboard.py` - EloDashboard CLI
@@ -44,11 +101,6 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 - 9 subagents total (4 + 1 + 3 + 1)
 - 4,709 lines of code
 - All self-tests passing
-
-**Remaining (MCP Integration):**
-- Wire SearchLogger into MCP server search tools
-- Wire SessionAuditor into MCP session handling
-- Wire EloRanker into search result pipeline
 
 ---
 

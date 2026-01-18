@@ -7,18 +7,24 @@ Provides vector-based semantic search capabilities via MCP tools.
 
 Note: system1.db is deprecated. All semantic search is now handled
 by the cassette network (NAVIGATION/CORTEX/cassettes/).
+
+ELO Integration (Phase E.5):
+- SearchLogger: Logs all searches to search_log.jsonl
+- EloRanker: Attaches ELO metadata to results (does NOT modify ranking)
 """
 
 import json
 import sys
 from pathlib import Path
-from typing import Dict, List, Any
+from typing import Dict, List, Any, Optional
 
 # Add CORTEX to path
 PROJECT_ROOT = Path(__file__).resolve().parents[2]
 CORTEX_ROOT = PROJECT_ROOT / "NAVIGATION" / "CORTEX"
+CAPABILITY_ROOT = PROJECT_ROOT / "CAPABILITY"
 sys.path.insert(0, str(CORTEX_ROOT))
 sys.path.insert(0, str(CORTEX_ROOT / "network"))
+sys.path.insert(0, str(CAPABILITY_ROOT))
 
 # Cassette network is the primary semantic search system
 try:
@@ -54,16 +60,37 @@ except ImportError as e:
     print(f"[WARNING] Memory cassette not available: {e}", file=sys.stderr)
     MEMORY_AVAILABLE = False
 
+# Phase E.5: ELO Integration (search logging + result annotation)
+try:
+    from PRIMITIVES.search_logger import SearchLogger
+    from PRIMITIVES.elo_db import EloDatabase
+    from PRIMITIVES.elo_engine import EloEngine
+    from TOOLS.elo_ranker import EloRanker
+    ELO_AVAILABLE = True
+except ImportError as e:
+    print(f"[WARNING] ELO modules not available: {e}", file=sys.stderr)
+    ELO_AVAILABLE = False
+
 
 class SemanticMCPAdapter:
     """Adapter that provides semantic search tools via MCP.
 
     Uses the cassette network for all semantic search operations.
+
+    ELO Integration:
+    - SearchLogger: Logs all searches to search_log.jsonl for ELO calculation
+    - EloRanker: Attaches ELO metadata to results (does NOT modify ranking)
     """
 
-    def __init__(self):
+    def __init__(self, session_id: Optional[str] = None):
         self.network_hub = None
         self.memory_cassette = None  # Phase 2: Memory persistence
+        # Phase E.5: ELO integration
+        self.search_logger = None
+        self.elo_ranker = None
+        self.elo_db = None
+        self.elo_engine = None
+        self.session_id = session_id  # Passed from AGSMCPServer
 
     def initialize(self):
         """Initialize semantic tools."""
@@ -79,10 +106,35 @@ class SemanticMCPAdapter:
             if MEMORY_AVAILABLE:
                 self.memory_cassette = MemoryCassette()
 
+            # Initialize ELO integration (Phase E.5)
+            elo_initialized = False
+            if ELO_AVAILABLE:
+                try:
+                    elo_dir = CORTEX_ROOT / "_generated"
+                    elo_dir.mkdir(parents=True, exist_ok=True)
+
+                    # Initialize search logger
+                    self.search_logger = SearchLogger(str(elo_dir))
+
+                    # Initialize ELO database and engine
+                    db_path = elo_dir / "elo_scores.db"
+                    log_path = elo_dir / "elo_updates.jsonl"
+                    self.elo_db = EloDatabase(str(db_path))
+                    self.elo_engine = EloEngine(self.elo_db, str(log_path))
+
+                    # Initialize ELO ranker (metadata only, no ranking modification)
+                    self.elo_ranker = EloRanker(self.elo_db, self.elo_engine)
+
+                    elo_initialized = True
+                    print("[INFO] ELO integration initialized", file=sys.stderr)
+                except Exception as elo_err:
+                    print(f"[WARNING] ELO initialization failed: {elo_err}", file=sys.stderr)
+
             return {
                 "status": "initialized",
                 "cassettes_registered": len(self.network_hub.cassettes) if self.network_hub else 0,
-                "memory_available": MEMORY_AVAILABLE
+                "memory_available": MEMORY_AVAILABLE,
+                "elo_available": elo_initialized
             }
         except Exception as e:
             return {"error": f"Initialization failed: {str(e)}"}
@@ -105,6 +157,16 @@ class SemanticMCPAdapter:
         except Exception as e:
             print(f"[ERROR] Failed to load cassette config: {e}", file=sys.stderr)
 
+    def set_session_id(self, session_id: str) -> None:
+        """Set the session ID for search logging.
+
+        Called by AGSMCPServer to link searches to the current session.
+
+        Args:
+            session_id: The MCP session UUID
+        """
+        self.session_id = session_id
+
     def cassette_network_query(self, args: Dict) -> Dict:
         """MCP tool: Query the cassette network.
 
@@ -113,6 +175,10 @@ class SemanticMCPAdapter:
             limit: Max results (default 10)
             cassettes: List of cassette IDs to query (default: all)
             capability: Filter by capability (optional)
+
+        ELO Integration:
+        - Logs search to search_log.jsonl for ELO calculation
+        - Attaches ELO metadata to results (does NOT modify ranking)
         """
         if not NETWORK_AVAILABLE or not self.network_hub:
             return {
@@ -142,8 +208,41 @@ class SemanticMCPAdapter:
                     result["cassette_id"] = cassette_id
                     all_results.append(result)
 
-            # Sort by score if available
+            # Sort by score if available (similarity-only ranking)
             all_results.sort(key=lambda x: x.get("score", 0), reverse=True)
+            final_results = all_results[:top_k]
+
+            # ELO Integration: Log search and annotate results
+            if self.search_logger and self.session_id:
+                try:
+                    # Prepare results for logging (with required fields)
+                    log_results = []
+                    for rank, r in enumerate(final_results, 1):
+                        log_results.append({
+                            "hash": r.get("hash", r.get("content_hash", "")),
+                            "file_path": r.get("path", r.get("file_path", "")),
+                            "rank": rank,
+                            "similarity": r.get("score", 0.0)
+                        })
+                    self.search_logger.log_search(
+                        session_id=self.session_id,
+                        tool="cassette_network_query",
+                        query=query,
+                        results=log_results
+                    )
+                except Exception as log_err:
+                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
+
+            # ELO Integration: Annotate results with ELO metadata (no re-ranking)
+            if self.elo_ranker:
+                try:
+                    # Convert to format expected by elo_ranker
+                    for r in final_results:
+                        r["file_path"] = r.get("path", r.get("file_path", ""))
+                        r["similarity"] = r.get("score", 0.0)
+                    final_results = self.elo_ranker.annotate_results(final_results)
+                except Exception as elo_err:
+                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
 
             return {
                 "content": [{
@@ -152,8 +251,9 @@ class SemanticMCPAdapter:
                         "query": query,
                         "capability": capability,
                         "cassettes_filter": cassette_filter if cassette_filter else "all",
-                        "results": all_results[:top_k],
-                        "cassettes_queried": len(results)
+                        "results": final_results,
+                        "cassettes_queried": len(results),
+                        "elo_annotated": self.elo_ranker is not None
                     }, indent=2)
                 }]
             }
@@ -286,6 +386,10 @@ class SemanticMCPAdapter:
 
         Returns:
             List of matching memories with similarity scores
+
+        ELO Integration:
+        - Logs search to search_log.jsonl for ELO calculation
+        - Attaches ELO metadata to results (does NOT modify ranking)
         """
         if not MEMORY_AVAILABLE:
             return {
@@ -306,13 +410,41 @@ class SemanticMCPAdapter:
 
             results = memory_query(query, limit, agent_id)
 
+            # ELO Integration: Log search
+            if self.search_logger and self.session_id:
+                try:
+                    log_results = []
+                    for rank, r in enumerate(results, 1):
+                        log_results.append({
+                            "hash": r.get("hash", ""),
+                            "file_path": r.get("file_path", f"memory:{r.get('hash', '')}"),
+                            "rank": rank,
+                            "similarity": r.get("similarity", r.get("score", 0.0))
+                        })
+                    self.search_logger.log_search(
+                        session_id=self.session_id,
+                        tool="memory_query",
+                        query=query,
+                        results=log_results
+                    )
+                except Exception as log_err:
+                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
+
+            # ELO Integration: Annotate results with ELO metadata
+            if self.elo_ranker:
+                try:
+                    results = self.elo_ranker.annotate_results(results)
+                except Exception as elo_err:
+                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+
             return {
                 "content": [{
                     "type": "text",
                     "text": json.dumps({
                         "query": query,
                         "results": results,
-                        "count": len(results)
+                        "count": len(results),
+                        "elo_annotated": self.elo_ranker is not None
                     }, indent=2)
                 }]
             }
@@ -380,6 +512,10 @@ class SemanticMCPAdapter:
 
         Returns:
             List of similar memories (excluding the anchor)
+
+        ELO Integration:
+        - Logs search to search_log.jsonl for ELO calculation
+        - Attaches ELO metadata to results (does NOT modify ranking)
         """
         if not MEMORY_AVAILABLE:
             return {
@@ -399,13 +535,41 @@ class SemanticMCPAdapter:
 
             neighbors = semantic_neighbors(memory_hash, limit)
 
+            # ELO Integration: Log search
+            if self.search_logger and self.session_id:
+                try:
+                    log_results = []
+                    for rank, n in enumerate(neighbors, 1):
+                        log_results.append({
+                            "hash": n.get("hash", ""),
+                            "file_path": n.get("file_path", f"memory:{n.get('hash', '')}"),
+                            "rank": rank,
+                            "similarity": n.get("similarity", n.get("score", 0.0))
+                        })
+                    self.search_logger.log_search(
+                        session_id=self.session_id,
+                        tool="semantic_neighbors",
+                        query=f"neighbors:{memory_hash}",
+                        results=log_results
+                    )
+                except Exception as log_err:
+                    print(f"[WARNING] Search logging failed: {log_err}", file=sys.stderr)
+
+            # ELO Integration: Annotate results with ELO metadata
+            if self.elo_ranker:
+                try:
+                    neighbors = self.elo_ranker.annotate_results(neighbors)
+                except Exception as elo_err:
+                    print(f"[WARNING] ELO annotation failed: {elo_err}", file=sys.stderr)
+
             return {
                 "content": [{
                     "type": "text",
                     "text": json.dumps({
                         "anchor_hash": memory_hash,
                         "neighbors": neighbors,
-                        "count": len(neighbors)
+                        "count": len(neighbors),
+                        "elo_annotated": self.elo_ranker is not None
                     }, indent=2)
                 }]
             }
