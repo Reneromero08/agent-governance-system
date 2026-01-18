@@ -1,34 +1,53 @@
 """
-Q23 Phase 3: Hexagonal Berry Phase Test
+Q23 Phase 3: Hexagonal Winding Angle Test
 
 HYPOTHESIS: sqrt(3) appears because of hexagonal geometry in semantic space.
 
 Mathematical connection:
 - Hexagonal loops have interior angle 120 degrees = 2*pi/3 radians
 - sin(pi/3) = sqrt(3)/2, therefore sqrt(3) = 2*sin(pi/3)
-- If semantic hexagons accumulate Berry phase = 2*pi/3, this explains sqrt(3)
+- If semantic hexagons accumulate winding angle = 2*pi/3, this explains sqrt(3)
 
 Test Design:
 1. Construct 6-vertex semantic hexagons (words forming conceptual cycles)
-2. Measure Berry phase (solid angle / holonomy) around each hexagon
-3. Check if mean phase is close to 2*pi/3 = 2.094 radians
+2. Measure winding angle (total rotation in 2D PCA projection) around each hexagon
+3. Check if mean angle is close to 2*pi/3 = 2.094 radians
 4. Compare to 5-vertex (pentagons) and 7-vertex (heptagons) as controls
 
 Pass Criteria:
-- Mean hexagon phase within 15% of 2*pi/3
-- Hexagons show more consistent phase than pentagons/heptagons
+- Mean hexagon winding angle within 15% of 2*pi/3
+- Hexagons show more consistent angle than pentagons/heptagons
 - Effect is present across multiple models
 
-IMPORTANT CONCEPTUAL LIMITATION:
-The expected phases (2*pi/n for n-gons) assume REGULAR polygons on a sphere.
-Semantic loops are NOT geometrically regular - vertices are placed by meaning,
-not geometry. The Berry phase for an arbitrary closed loop depends on the
-actual solid angle subtended, which has no mathematical reason to equal 2*pi/n.
+CRITICAL DISTINCTION - WINDING ANGLE vs BERRY PHASE:
+This module measures WINDING ANGLE, NOT true geometric Berry phase.
 
-This test is exploratory: if semantic hexagons DO show phase near 2*pi/3, it
-would be remarkable and suggest deep geometric structure. But failure to find
-this phase does NOT disprove hexagonal semantic structure - it only shows that
-semantic hexagons are not geometrically regular.
+Winding angle: Total rotation accumulated when traversing points in a 2D
+projection (via PCA). This is a property of the 2D projected path, not the
+original high-dimensional embedding space.
+
+True Berry phase: Geometric phase accumulated during parallel transport of
+a quantum state around a closed loop. Requires:
+1. A well-defined connection (how to parallel transport vectors)
+2. Integration of the connection 1-form around the loop
+3. The result is gauge-invariant and captures intrinsic geometry
+
+Why we measure winding angle instead:
+- Embedding spaces lack a natural connection for parallel transport
+- PCA projection to 2D gives a concrete, computable quantity
+- Winding angle is still geometrically meaningful, just not Berry phase
+
+IMPORTANT LIMITATIONS:
+1. Per-loop PCA would make comparisons meaningless (each loop gets its own
+   coordinate system). We use a SHARED PCA fitted on all vocabulary.
+2. Even if winding angle = 2*pi/3, this does NOT prove hexagonal Berry phase.
+3. The relationship between winding angle and any deeper geometric structure
+   is unclear and should not be over-interpreted.
+4. Expected phases (2*pi/n) assume REGULAR polygons - semantic loops are NOT
+   regular, so there is no mathematical reason to expect these values.
+
+This test is exploratory: interesting patterns may emerge, but should be
+interpreted cautiously given the conceptual limitations above.
 """
 
 import numpy as np
@@ -51,7 +70,7 @@ class LoopPhaseResult:
     """Result for a single loop."""
     loop_words: List[str]
     n_vertices: int
-    berry_phase: float  # radians
+    winding_angle: float  # radians (NOT Berry phase - see module docstring)
     expected_phase: float  # Expected for this polygon type
     deviation: float  # Absolute deviation from expected
     deviation_pct: float  # Percentage deviation
@@ -133,17 +152,36 @@ SEMANTIC_HEPTAGONS = [
 
 
 # =============================================================================
-# BERRY PHASE COMPUTATION
+# WINDING ANGLE COMPUTATION (NOT Berry phase - see module docstring)
 # =============================================================================
 
-def compute_berry_phase_winding(path: np.ndarray, closed: bool = True) -> float:
+def compute_winding_angle(
+    path: np.ndarray,
+    closed: bool = True,
+    pca_components: np.ndarray = None
+) -> float:
     """
-    Compute Berry phase as winding number in 2D PCA projection.
+    Compute winding angle (total rotation) in 2D projection.
 
-    For high-dimensional embeddings, project to 2D via PCA and
-    compute the winding angle (total angle swept in complex plane).
+    NOTE: This is NOT Berry phase. Berry phase requires parallel transport
+    with a well-defined connection. This function computes the winding angle
+    (total angle swept) when the path is projected to 2D and traversed in
+    the complex plane.
 
-    This is consistent with the Q51 implementation.
+    Winding angle is a property of the 2D projected path, not the original
+    high-dimensional geometry. It measures how many times and in what
+    direction the projected path winds around the origin.
+
+    Args:
+        path: Array of shape (n_points, n_dims) with embedding vectors
+        closed: If True, close the loop by appending the first point
+        pca_components: Optional pre-fitted PCA components (shape 2, n_dims).
+            If provided, uses these for projection (enables consistent
+            comparison across loops). If None, fits PCA on this path only
+            (WARNING: per-loop PCA makes cross-loop comparisons meaningless).
+
+    Returns:
+        Winding angle in radians. Positive = counterclockwise, negative = clockwise.
     """
     # Normalize embeddings
     norms = np.linalg.norm(path, axis=1, keepdims=True)
@@ -154,13 +192,19 @@ def compute_berry_phase_winding(path: np.ndarray, closed: bool = True) -> float:
     if closed and not np.allclose(path[0], path[-1]):
         path = np.vstack([path, path[0:1]])
 
-    # Project to 2D via PCA
-    centered = path - path.mean(axis=0)
-    try:
-        U, S, Vt = np.linalg.svd(centered, full_matrices=False)
-        proj_2d = centered @ Vt[:2].T
-    except:
-        return 0.0
+    # Project to 2D
+    if pca_components is not None:
+        # Use pre-fitted PCA components for consistent projection
+        centered = path - path.mean(axis=0)
+        proj_2d = centered @ pca_components.T
+    else:
+        # Fit PCA on this path only (WARNING: makes cross-loop comparison meaningless)
+        centered = path - path.mean(axis=0)
+        try:
+            U, S, Vt = np.linalg.svd(centered, full_matrices=False)
+            proj_2d = centered @ Vt[:2].T
+        except:
+            return 0.0
 
     if proj_2d.shape[1] < 2:
         return 0.0
@@ -257,21 +301,94 @@ def get_embeddings(words: List[str], model_name: str = "all-MiniLM-L6-v2") -> np
 # TEST FUNCTIONS
 # =============================================================================
 
+def fit_shared_pca(
+    all_loops: List[List[str]],
+    model_name: str = "all-MiniLM-L6-v2"
+) -> Tuple[np.ndarray, np.ndarray]:
+    """
+    Fit PCA on all unique words from all loops combined.
+
+    This ensures consistent projection across all loops, making winding angle
+    comparisons meaningful. Without shared PCA, each loop would have its own
+    coordinate system, making cross-loop comparisons invalid.
+
+    Args:
+        all_loops: List of word loops (each loop is a list of words)
+        model_name: Name of the sentence transformer model
+
+    Returns:
+        Tuple of (pca_components, all_embeddings) where:
+        - pca_components: Shape (2, n_dims) - first 2 principal components
+        - all_embeddings: Shape (n_words, n_dims) - embeddings of all unique words
+    """
+    # Collect all unique words
+    all_words = []
+    seen = set()
+    for loop in all_loops:
+        for word in loop:
+            if word not in seen:
+                all_words.append(word)
+                seen.add(word)
+
+    # Get embeddings for all words
+    all_embeddings = get_embeddings(all_words, model_name)
+
+    # Normalize embeddings
+    norms = np.linalg.norm(all_embeddings, axis=1, keepdims=True)
+    norms = np.where(norms > 0, norms, 1.0)
+    all_embeddings = all_embeddings / norms
+
+    # Fit PCA on all embeddings
+    centered = all_embeddings - all_embeddings.mean(axis=0)
+    try:
+        U, S, Vt = np.linalg.svd(centered, full_matrices=False)
+        pca_components = Vt[:2]  # First 2 principal components
+    except:
+        # Fallback: use identity-like projection
+        pca_components = np.zeros((2, all_embeddings.shape[1]))
+        pca_components[0, 0] = 1.0
+        pca_components[1, 1] = 1.0
+
+    return pca_components, all_embeddings
+
+
 def test_polygon_type(
     loops: List[List[str]],
     polygon_type: str,
     expected_phase: float,
     model_name: str = "all-MiniLM-L6-v2",
+    pca_components: np.ndarray = None,
     verbose: bool = True
 ) -> PolygonTypeResult:
-    """Test Berry phase for all loops of a given type."""
+    """
+    Test winding angle for all loops of a given polygon type.
+
+    NOTE: This measures winding angle, NOT Berry phase. See module docstring.
+
+    Args:
+        loops: List of word loops to test
+        polygon_type: Name of polygon type (e.g., "hexagon")
+        expected_phase: Expected winding angle in radians
+        model_name: Sentence transformer model name
+        pca_components: Pre-fitted PCA components for consistent projection.
+            If None, each loop gets its own PCA (WARNING: makes comparisons
+            meaningless across loops).
+        verbose: Print progress information
+
+    Returns:
+        PolygonTypeResult with statistics for this polygon type
+    """
     phases = []
     deviations = []
 
     for loop in loops:
         try:
             embeddings = get_embeddings(loop, model_name)
-            phase = compute_berry_phase_winding(embeddings, closed=True)
+            phase = compute_winding_angle(
+                embeddings,
+                closed=True,
+                pca_components=pca_components
+            )
             phases.append(phase)
 
             # Normalize phase to [0, 2*pi]
@@ -317,19 +434,24 @@ def test_hexagonal_berry_phase(
     verbose: bool = True
 ) -> HexagonalBerryResult:
     """
-    Test the hexagonal Berry phase hypothesis.
+    Test the hexagonal winding angle hypothesis.
 
-    If semantic hexagons accumulate Berry phase = 2*pi/3, this connects to sqrt(3).
+    NOTE: This measures WINDING ANGLE, not true Berry phase. See module docstring
+    for the important distinction. The name is kept for backward compatibility.
+
+    If semantic hexagons accumulate winding angle = 2*pi/3, this connects to sqrt(3).
+    However, even if this is observed, it does NOT prove hexagonal Berry phase.
     """
     if verbose:
         print("\n" + "=" * 70)
-        print("Q23 PHASE 3: HEXAGONAL BERRY PHASE TEST")
+        print("Q23 PHASE 3: HEXAGONAL WINDING ANGLE TEST")
         print("=" * 70)
-        print(f"\nHypothesis: Hexagonal loops have Berry phase = 2*pi/3 = {TWO_PI_OVER_3:.4f} rad")
+        print(f"\nHypothesis: Hexagonal loops have winding angle near 2*pi/3 = {TWO_PI_OVER_3:.4f} rad")
         print(f"Connection: sqrt(3) = 2*sin(pi/3) = {SQRT_3:.4f}")
         print(f"\nModel: {model_name}")
+        print("\nNOTE: This measures winding angle in 2D projection, NOT true Berry phase.")
 
-    # Expected phases for different polygon types
+    # Expected angles for different polygon types
     # NOTE: These expectations assume REGULAR polygons on a sphere.
     # Semantic loops are NOT regular - they're placed by meaning, not geometry.
     # These serve as reference points, not strict predictions.
@@ -339,46 +461,61 @@ def test_hexagonal_berry_phase(
     pent_expected = 2 * PI / 5  # 1.257 rad = 72 deg (for comparison)
     hept_expected = 2 * PI / 7  # 0.898 rad = 51.4 deg (for comparison)
 
+    # Fit shared PCA on all words from all polygon types
+    # This ensures consistent projection across all loops
+    all_loops = SEMANTIC_HEXAGONS + SEMANTIC_PENTAGONS + SEMANTIC_HEPTAGONS
+    if verbose:
+        print(f"\nFitting shared PCA on {len(all_loops)} loops...")
+
+    pca_components, _ = fit_shared_pca(all_loops, model_name)
+
+    if verbose:
+        print("Shared PCA fitted. All loops will use the same 2D projection.")
+
     # Test hexagons
     if verbose:
         print(f"\n--- Testing Hexagons (6 vertices) ---")
-        print(f"Expected phase: {hex_expected:.4f} rad = {np.degrees(hex_expected):.1f} deg")
+        print(f"Expected angle: {hex_expected:.4f} rad = {np.degrees(hex_expected):.1f} deg")
 
     hex_result = test_polygon_type(
-        SEMANTIC_HEXAGONS, "hexagon", hex_expected, model_name, verbose
+        SEMANTIC_HEXAGONS, "hexagon", hex_expected, model_name,
+        pca_components=pca_components, verbose=verbose
     )
 
     if verbose:
-        print(f"Mean phase: {hex_result.mean_phase:.4f} rad = {np.degrees(hex_result.mean_phase):.1f} deg")
+        print(f"Mean angle: {hex_result.mean_phase:.4f} rad = {np.degrees(hex_result.mean_phase):.1f} deg")
         print(f"Std: {hex_result.std_phase:.4f} rad")
         print(f"Mean deviation: {hex_result.mean_deviation_pct:.1f}%")
 
     # Test pentagons (control)
     if verbose:
         print(f"\n--- Testing Pentagons (5 vertices, control) ---")
-        print(f"Expected phase: {pent_expected:.4f} rad = {np.degrees(pent_expected):.1f} deg")
+        print(f"Expected angle: {pent_expected:.4f} rad = {np.degrees(pent_expected):.1f} deg")
 
     pent_result = test_polygon_type(
-        SEMANTIC_PENTAGONS, "pentagon", pent_expected, model_name, verbose
+        SEMANTIC_PENTAGONS, "pentagon", pent_expected, model_name,
+        pca_components=pca_components, verbose=verbose
     )
 
     if verbose:
-        print(f"Mean phase: {pent_result.mean_phase:.4f} rad = {np.degrees(pent_result.mean_phase):.1f} deg")
+        print(f"Mean angle: {pent_result.mean_phase:.4f} rad = {np.degrees(pent_result.mean_phase):.1f} deg")
 
     # Test heptagons (control)
     if verbose:
         print(f"\n--- Testing Heptagons (7 vertices, control) ---")
-        print(f"Expected phase: {hept_expected:.4f} rad = {np.degrees(hept_expected):.1f} deg")
+        print(f"Expected angle: {hept_expected:.4f} rad = {np.degrees(hept_expected):.1f} deg")
 
     hept_result = test_polygon_type(
-        SEMANTIC_HEPTAGONS, "heptagon", hept_expected, model_name, verbose
+        SEMANTIC_HEPTAGONS, "heptagon", hept_expected, model_name,
+        pca_components=pca_components, verbose=verbose
     )
 
     if verbose:
         print(f"Mean phase: {hept_result.mean_phase:.4f} rad = {np.degrees(hept_result.mean_phase):.1f} deg")
 
     # Check sqrt(3) connection
-    # If mean hexagon phase is close to 2*pi/3, compute derived sqrt(3)
+    # If mean hexagon winding angle is close to 2*pi/3, compute derived sqrt(3)
+    # NOTE: This is purely numerical - it does NOT prove geometric Berry phase
     derived_sqrt3 = 2 * np.sin(abs(hex_result.mean_phase) / 2) if hex_result.mean_phase != 0 else 0
     sqrt3_error = abs(derived_sqrt3 - SQRT_3) / SQRT_3 * 100
 
@@ -386,45 +523,71 @@ def test_hexagonal_berry_phase(
         "expected_sqrt3": SQRT_3,
         "derived_sqrt3": derived_sqrt3,
         "error_pct": sqrt3_error,
-        "formula": "sqrt(3) = 2*sin(phase/2) where phase = 2*pi/3",
+        "formula": "sqrt(3) = 2*sin(angle/2) where angle = 2*pi/3",
         "match": sqrt3_error < 15,  # Within 15%
+        "caveat": "Numerical match does NOT prove Berry phase relationship",
     }
 
     # Determine if hypothesis is supported
     # Criteria:
-    # 1. Hexagon mean phase within 20% of 2*pi/3
+    # 1. Hexagon mean winding angle within 30% of 2*pi/3
     # 2. Hexagons have lower deviation than controls
+    #
+    # IMPORTANT: Even if supported, this only shows winding angle correlation,
+    # NOT true Berry phase. The interpretation is limited.
     hex_close = hex_result.mean_deviation_pct < 30
     hex_better_than_pent = hex_result.mean_deviation_pct < pent_result.mean_deviation_pct + 10
     hex_better_than_hept = hex_result.mean_deviation_pct < hept_result.mean_deviation_pct + 10
 
     hypothesis_supported = hex_close and (hex_better_than_pent or hex_better_than_hept)
 
+    # Build honest verdict that acknowledges limitations
     if hypothesis_supported:
-        verdict = f"SUPPORTED: Hexagonal loops show phase near 2*pi/3 (deviation {hex_result.mean_deviation_pct:.1f}%)"
+        verdict = (
+            f"WINDING ANGLE CORRELATION OBSERVED: Hexagonal loops show winding angle "
+            f"near 2*pi/3 (deviation {hex_result.mean_deviation_pct:.1f}%). "
+            f"IMPORTANT CAVEAT: This measures winding angle in 2D PCA projection, "
+            f"NOT true geometric Berry phase. The connection to Berry phase is unclear."
+        )
     elif hex_result.mean_deviation_pct < 50:
-        verdict = f"PARTIAL: Some hexagonal structure (deviation {hex_result.mean_deviation_pct:.1f}%)"
+        verdict = (
+            f"PARTIAL CORRELATION: Some hexagonal structure in winding angle "
+            f"(deviation {hex_result.mean_deviation_pct:.1f}%). "
+            f"NOTE: This is winding angle, not Berry phase."
+        )
     else:
-        verdict = f"NOT SUPPORTED: Hexagonal phase not found (deviation {hex_result.mean_deviation_pct:.1f}%)"
+        verdict = (
+            f"NO CORRELATION: Hexagonal winding angle not found "
+            f"(deviation {hex_result.mean_deviation_pct:.1f}%). "
+            f"This does not rule out other forms of hexagonal structure."
+        )
 
     if verbose:
         print("\n" + "=" * 70)
         print("RESULTS SUMMARY")
         print("=" * 70)
 
-        print(f"\n| Polygon   | N   | Expected | Mean Phase | Deviation |")
+        print(f"\n| Polygon   | N   | Expected | Mean Angle | Deviation |")
         print(f"|-----------|-----|----------|------------|-----------|")
         print(f"| Hexagon   | {hex_result.n_loops:>3} | {hex_expected:>8.3f} | {hex_result.mean_phase:>10.3f} | {hex_result.mean_deviation_pct:>8.1f}% |")
         print(f"| Pentagon  | {pent_result.n_loops:>3} | {pent_expected:>8.3f} | {pent_result.mean_phase:>10.3f} | {pent_result.mean_deviation_pct:>8.1f}% |")
         print(f"| Heptagon  | {hept_result.n_loops:>3} | {hept_expected:>8.3f} | {hept_result.mean_phase:>10.3f} | {hept_result.mean_deviation_pct:>8.1f}% |")
 
-        print(f"\nsqrt(3) Connection:")
+        print(f"\nsqrt(3) Connection (via winding angle, NOT Berry phase):")
         print(f"  Expected sqrt(3): {SQRT_3:.4f}")
         print(f"  Derived sqrt(3): {derived_sqrt3:.4f}")
         print(f"  Error: {sqrt3_error:.1f}%")
 
         print(f"\n{'='*70}")
-        print(f"VERDICT: {verdict}")
+        print("IMPORTANT METHODOLOGICAL NOTE:")
+        print("This test measures WINDING ANGLE (total rotation in 2D PCA projection),")
+        print("NOT true Berry phase. Even if winding angle = 2*pi/3, this does NOT prove:")
+        print("  1. Hexagonal geometry exists in embedding space")
+        print("  2. Berry phase accumulates around semantic loops")
+        print("  3. sqrt(3) arises from geometric phase effects")
+        print("See module docstring for full explanation of limitations.")
+        print("=" * 70)
+        print(f"\nVERDICT: {verdict}")
         print("=" * 70)
 
     return HexagonalBerryResult(
@@ -441,11 +604,12 @@ def run_cross_model_validation(
     model_names: List[str],
     verbose: bool = True
 ) -> Dict[str, Any]:
-    """Run hexagonal Berry phase test across multiple models."""
+    """Run hexagonal winding angle test across multiple models."""
     if verbose:
         print("\n" + "=" * 70)
-        print("CROSS-MODEL VALIDATION: HEXAGONAL BERRY PHASE")
+        print("CROSS-MODEL VALIDATION: HEXAGONAL WINDING ANGLE")
         print("=" * 70)
+        print("NOTE: This measures winding angle, NOT Berry phase.")
 
     results = {}
     hex_phases = []
@@ -470,9 +634,9 @@ def run_cross_model_validation(
                 supported_count += 1
 
             if verbose:
-                print(f"  Hex phase: {result.hexagon_results.mean_phase:.4f} rad")
+                print(f"  Hex winding angle: {result.hexagon_results.mean_phase:.4f} rad")
                 print(f"  Deviation: {result.hexagon_results.mean_deviation_pct:.1f}%")
-                print(f"  Supported: {result.hypothesis_supported}")
+                print(f"  Correlation found: {result.hypothesis_supported}")
 
         except Exception as e:
             print(f"  Error: {e}")
@@ -481,10 +645,11 @@ def run_cross_model_validation(
     if hex_phases:
         results["summary"] = {
             "n_models": len(hex_phases),
-            "mean_hex_phase": float(np.mean(hex_phases)),
-            "std_hex_phase": float(np.std(hex_phases)),
+            "mean_hex_winding_angle": float(np.mean(hex_phases)),
+            "std_hex_winding_angle": float(np.std(hex_phases)),
             "supported_count": supported_count,
             "support_rate": supported_count / len(hex_phases),
+            "note": "These are winding angles, NOT Berry phases",
         }
 
         if verbose:
@@ -492,9 +657,10 @@ def run_cross_model_validation(
             print("SUMMARY")
             print("=" * 70)
             print(f"Models tested: {len(hex_phases)}")
-            print(f"Mean hexagon phase: {np.mean(hex_phases):.4f} rad")
+            print(f"Mean hexagon winding angle: {np.mean(hex_phases):.4f} rad")
             print(f"Expected (2*pi/3): {TWO_PI_OVER_3:.4f} rad")
-            print(f"Models supporting hypothesis: {supported_count}/{len(hex_phases)}")
+            print(f"Models showing correlation: {supported_count}/{len(hex_phases)}")
+            print("\nREMINDER: Winding angle is NOT Berry phase.")
 
     return results
 
@@ -504,12 +670,14 @@ def run_cross_model_validation(
 # =============================================================================
 
 def main():
-    """Run the hexagonal Berry phase test."""
+    """Run the hexagonal winding angle test."""
     print("=" * 70)
-    print("Q23 PHASE 3: HEXAGONAL BERRY PHASE TEST")
+    print("Q23 PHASE 3: HEXAGONAL WINDING ANGLE TEST")
     print("=" * 70)
-    print("\nTesting if hexagonal semantic loops accumulate Berry phase = 2*pi/3")
-    print("This would explain the sqrt(3) constant via: sqrt(3) = 2*sin(pi/3)")
+    print("\nTesting if hexagonal semantic loops show winding angle near 2*pi/3")
+    print("This would connect to sqrt(3) via: sqrt(3) = 2*sin(pi/3)")
+    print("\nIMPORTANT: This measures WINDING ANGLE (rotation in 2D projection),")
+    print("NOT true geometric Berry phase. See module docstring for details.")
 
     # Test primary model
     result = test_hexagonal_berry_phase("all-MiniLM-L6-v2", verbose=True)
@@ -525,10 +693,15 @@ def main():
     # Save results
     output = {
         "timestamp": datetime.now().isoformat(),
-        "hypothesis": "Hexagonal loops have Berry phase = 2*pi/3, explaining sqrt(3) = 2*sin(pi/3)",
+        "hypothesis": "Hexagonal loops show winding angle near 2*pi/3, connecting to sqrt(3) = 2*sin(pi/3)",
+        "methodology_note": (
+            "This test measures WINDING ANGLE (total rotation in 2D PCA projection), "
+            "NOT true geometric Berry phase. Even if winding angle correlates with 2*pi/3, "
+            "this does NOT prove hexagonal Berry phase or geometric phase effects."
+        ),
         "primary_model": "all-MiniLM-L6-v2",
         "primary_result": {
-            "hypothesis_supported": result.hypothesis_supported,
+            "correlation_found": result.hypothesis_supported,
             "hexagon": asdict(result.hexagon_results),
             "pentagon": asdict(result.pentagon_results),
             "heptagon": asdict(result.heptagon_results),

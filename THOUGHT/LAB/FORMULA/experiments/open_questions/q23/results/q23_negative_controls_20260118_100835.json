@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-01-18T10:08:35.789416",
+  "negative_controls": {
+    "random_embeddings": {
+      "control_name": "random_embeddings",
+      "expected_to_fail": false,
+      "actually_failed": false,
+      "passed_validation": true,
+      "metric_trained": 0.30000000000000004,
+      "metric_control": 0.1999999999999999,
+      "cohens_d": 0.6624016125310406,
+      "interpretation": "Trained embeddings should show stronger alpha-F1 relationship than random"
+    },
+    "shuffled_embeddings": {
+      "control_name": "shuffled_embeddings",
+      "expected_to_fail": true,
+      "actually_failed": true,
+      "passed_validation": true,
+      "metric_trained": 0.9,
+      "metric_control": 0.6,
+      "cohens_d": 0.30000000000000004,
+      "interpretation": "Shuffling should destroy semantic structure"
+    },
+    "alternative_constants": {
+      "control_name": "alternative_constants",
+      "expected_to_fail": false,
+      "actually_failed": true,
+      "passed_validation": false,
+      "metric_trained": 0.9,
+      "metric_control": 1.0,
+      "cohens_d": -0.09999999999999998,
+      "interpretation": "sqrt(3) is NOT optimal (rank 4, F1=0.900). Best is 1.9=1.000. sqrt(3) hypothesis NOT supported."
+    }
+  },
+  "cross_model": {
+    "all-MiniLM-L6-v2": {
+      "f1_scores": {
+        "1.0": 0.7,
+        "sqrt(2)": 0.8000000000000002,
+        "1.5": 0.9,
+        "sqrt(3)": 0.9,
+        "2.0": 1.0,
+        "e": 1.0
+      },
+      "optimal_alpha": "2.0",
+      "sqrt3_f1": 0.9
+    },
+    "all-mpnet-base-v2": {
+      "f1_scores": {
+        "1.0": 0.7,
+        "sqrt(2)": 0.8000000000000002,
+        "1.5": 0.9,
+        "sqrt(3)": 1.0,
+        "2.0": 1.0,
+        "e": 1.0
+      },
+      "optimal_alpha": "sqrt(3)",
+      "sqrt3_f1": 1.0
+    },
+    "paraphrase-MiniLM-L6-v2": {
+      "f1_scores": {
+        "1.0": 0.9,
+        "sqrt(2)": 1.0,
+        "1.5": 1.0,
+        "sqrt(3)": 1.0,
+        "2.0": 1.0,
+        "e": 1.0
+      },
+      "optimal_alpha": "sqrt(2)",
+      "sqrt3_f1": 1.0
+    },
+    "summary": {
+      "n_models": 3,
+      "sqrt3_optimal_count": 1,
+      "sqrt3_optimal_rate": 0.3333333333333333,
+      "optimal_alphas": [
+        "2.0",
+        "sqrt(3)",
+        "sqrt(2)"
+      ]
+    }
+  },
+  "summary": {
+    "negative_controls_passed": 2,
+    "negative_controls_total": 3
+  }
+}

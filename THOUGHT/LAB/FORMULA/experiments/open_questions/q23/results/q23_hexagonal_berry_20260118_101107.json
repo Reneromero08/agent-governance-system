@@ -1,0 +1,97 @@
+{
+  "timestamp": "2026-01-18T10:11:07.261838",
+  "hypothesis": "Hexagonal loops show winding angle near 2*pi/3, connecting to sqrt(3) = 2*sin(pi/3)",
+  "methodology_note": "This test measures WINDING ANGLE (total rotation in 2D PCA projection), NOT true geometric Berry phase. Even if winding angle correlates with 2*pi/3, this does NOT prove hexagonal Berry phase or geometric phase effects.",
+  "primary_model": "all-MiniLM-L6-v2",
+  "primary_result": {
+    "correlation_found": false,
+    "hexagon": {
+      "polygon_type": "hexagon",
+      "n_sides": 6,
+      "expected_phase": 2.0943951023931953,
+      "n_loops": 8,
+      "mean_phase": -1.570796251296997,
+      "std_phase": 4.1559367179870605,
+      "mean_deviation_pct": 99.99999817393592,
+      "phases": [
+        "-2.3841858e-07",
+        "6.2831855",
+        "-6.283185",
+        "-5.9604645e-08",
+        "-6.283185",
+        "4.7683716e-07",
+        "-6.2831855",
+        "-4.7683716e-07"
+      ]
+    },
+    "pentagon": {
+      "polygon_type": "pentagon",
+      "n_sides": 5,
+      "expected_phase": 1.2566370614359172,
+      "n_loops": 5,
+      "mean_phase": 0.0,
+      "std_phase": 7.9476704597473145,
+      "mean_deviation_pct": 100.0,
+      "phases": [
+        "-6.2831855",
+        "6.283185",
+        "6.2831855",
+        "6.283185",
+        "-12.56637"
+      ]
+    },
+    "heptagon": {
+      "polygon_type": "heptagon",
+      "n_sides": 7,
+      "expected_phase": 0.8975979010256552,
+      "n_loops": 5,
+      "mean_phase": 1.2566368579864502,
+      "std_phase": 4.701905727386475,
+      "mean_deviation_pct": 100.00001204125314,
+      "phases": [
+        "6.2831855",
+        "6.2831855",
+        "2.3841858e-07",
+        "0.0",
+        "-6.2831864"
+      ]
+    },
+    "sqrt3_connection": {
+      "expected_sqrt3": 1.7320508075688772,
+      "derived_sqrt3": 1.4142135089880172,
+      "error_pct": 18.350344989416296,
+      "formula": "sqrt(3) = 2*sin(angle/2) where angle = 2*pi/3",
+      "match": "False",
+      "caveat": "Numerical match does NOT prove Berry phase relationship"
+    },
+    "verdict": "NO CORRELATION: Hexagonal winding angle not found (deviation 100.0%). This does not rule out other forms of hexagonal structure."
+  },
+  "cross_model": {
+    "all-MiniLM-L6-v2": {
+      "hex_mean_phase": -1.570796251296997,
+      "hex_deviation_pct": 99.99999817393592,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 18.350344989416296
+    },
+    "all-mpnet-base-v2": {
+      "hex_mean_phase": -3.1415927410125732,
+      "hex_deviation_pct": 99.9999956363938,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 15.470053837925043
+    },
+    "paraphrase-MiniLM-L6-v2": {
+      "hex_mean_phase": 2.3561947345733643,
+      "hex_deviation_pct": 99.99999188905602,
+      "hypothesis_supported": false,
+      "sqrt3_error_pct": 6.680424758247083
+    },
+    "summary": {
+      "n_models": 3,
+      "mean_hex_winding_angle": -0.7853980859120687,
+      "std_hex_winding_angle": 2.3121497198235104,
+      "supported_count": 0,
+      "support_rate": 0.0,
+      "note": "These are winding angles, NOT Berry phases"
+    }
+  }
+}

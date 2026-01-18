@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.9.0 (2026-01-17 - Q10 ANSWERED: Spectral experiment proved contradiction detection is fundamentally outside embedding geometry. Contradictions have BETTER spectral health. 27/51 questions answered (53%).)*
+*Last updated: v4.10.0 (2026-01-18 - Q22 ANSWERED: Thresholds are domain-specific, use median(R). Q23 experimental verification complete: sqrt(3) is empirically fitted, hexagonal geometry FALSIFIED. 28/51 questions answered (55%).)*
 
 ---
 
@@ -70,8 +70,8 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ✅ ANSWERED | **YES.** Alpha drift (departure from 0.5) is a LEADING indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). [Full answer](lower_priority/Q21_ANSWER.md) |
-| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ OPEN | Universal threshold or domain-specific? |
-| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | Hypothesis: √3 from optimal hexagonal packing in evidence space. Connects to fractal dimension Df (Q3), Mandelbrot geometry, distinguishability threshold. Needs experimental verification. |
+| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ✅ ANSWERED | **Domain-specific.** median(R) outperforms fixed constants (sqrt(2), sqrt(3), phi). Different models have different optimal alpha values. No universal threshold exists. |
+| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | **Empirically fitted, NOT geometric.** sqrt(3) is in optimal range (1.5-2.5) but not uniquely special. Hexagonal packing: NOT CONFIRMED. Winding angle = 2*pi/3: FALSIFIED. Model-dependent (sqrt(3) optimal for all-mpnet-base-v2 only). |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
 | 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
@@ -113,9 +113,9 @@
 ## Summary Statistics
 
 - **Total Questions:** 51
-- **Answered:** 27 (52.9%)
+- **Answered:** 28 (54.9%)
 - **Partially Answered:** 5 (9.8%)
-- **Open:** 19 (37.3%)
+- **Open:** 18 (35.3%)
 
 ### By Priority Level
 
@@ -124,7 +124,7 @@
 | Critical | 12 | 10 | 1 | 1 |
 | High | 15 | 10 | 2 | 3 |
 | Medium | 11 | 5 | 1 | 5 |
-| Lower | 8 | 2 | 1 | 5 |
+| Lower | 8 | 3 | 1 | 4 |
 | Engineering | 2 | 0 | 0 | 2 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |
 
@@ -153,7 +153,7 @@
 ### What's Still Unknown
 1. **Which likelihood kernel E(z) is "right"** - Gaussian vs Laplace vs domain-specific tails (modeling choice, not just algebra)
 2. **The sigma^Df term** - Full formula `R = (E/∇S) × σ^Df` is still unexamined from first principles (see Q33)
-3. **√3 geometry** - Experimental verification of hexagonal packing hypothesis (Q23 partial)
+3. **√3 origin** - Q23 experimentally verified: sqrt(3) is empirically fitted (not geometric). Hexagonal packing NOT CONFIRMED, winding angle FALSIFIED. sqrt(3) is in optimal range (1.5-2.5) but model-dependent, not a universal constant.
 
 ### Recent Discovery (2026-01-10): J Coupling + Effective Dimensionality + Geodesic Geometry
 

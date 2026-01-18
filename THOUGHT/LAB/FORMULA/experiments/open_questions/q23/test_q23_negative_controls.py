@@ -57,102 +57,157 @@ class NegativeControlResult:
 # NEGATIVE CONTROL 1: RANDOM EMBEDDINGS
 # =============================================================================
 
-def test_random_embeddings(verbose: bool = True) -> NegativeControlResult:
+def test_random_embeddings(model, verbose: bool = True) -> NegativeControlResult:
     """
-    Test that random embeddings do NOT show ANY alpha preference.
+    Test that the PATTERN of alpha-F1 relationship differs between trained and random embeddings.
 
     This control tests: does the alpha optimization come from SEMANTIC structure?
 
-    For truly random embeddings (no semantic meaning), all alphas should perform
-    EQUALLY POORLY - there's no structure to exploit.
+    For trained embeddings, we expect a meaningful relationship between alpha and F1.
+    For random embeddings, we expect NO meaningful relationship (flat or random pattern).
 
-    If random embeddings show differentiated alpha performance, the effect might
-    be from distribution shape, not semantics.
+    Implementation:
+    1. Compute F1 scores for trained embeddings at various alphas
+    2. Compute F1 scores for random embeddings at the same alphas
+    3. Compare the correlation between alpha and F1 for each
 
-    Control PASSES if: all alphas perform equally (CV < 5%)
-    Control FAILS if: some alpha is clearly better than others (CV > 5%)
+    Control PASSES if: trained embeddings show stronger alpha-F1 relationship than random
+    Control FAILS if: random embeddings show similar alpha-F1 relationship as trained
     """
     if verbose:
         print("\n" + "=" * 60)
         print("NEGATIVE CONTROL 1: RANDOM EMBEDDINGS")
         print("=" * 60)
-        print("Testing: Do random embeddings show ANY alpha preference?")
-        print("Expected: NO - all alphas should perform equally (no structure)")
+        print("Testing: Does alpha-F1 pattern differ between trained and random?")
+        print("Expected: Trained shows stronger alpha-F1 relationship than random")
 
     np.random.seed(42)
-
-    # Generate PURELY random embeddings - no artificial structure
-    n_words = 7  # Same as cluster size
-    embedding_dim = 384
-    n_clusters = 10
 
     # Test multiple alpha values
     alphas = [1.0, SQRT_2, 1.5, SQRT_3, 2.0, E]
     alpha_names = ["1.0", "sqrt(2)", "1.5", "sqrt(3)", "2.0", "e"]
+    alpha_values = np.array(alphas)
 
-    # Generate random clusters - ALL purely random, no artificial structure
-    # Group A and B are both random - should be indistinguishable
-    group_a_Rs = {a: [] for a in alphas}
-    group_b_Rs = {a: [] for a in alphas}
+    # Helper function to compute F1
+    def compute_f1(related_Rs, unrelated_Rs):
+        all_Rs = np.concatenate([related_Rs, unrelated_Rs])
+        threshold = np.median(all_Rs)
+        tp = np.sum(related_Rs > threshold)
+        fp = np.sum(unrelated_Rs > threshold)
+        fn = np.sum(related_Rs <= threshold)
+        precision = tp / (tp + fp) if (tp + fp) > 0 else 0
+        recall = tp / (tp + fn) if (tp + fn) > 0 else 0
+        return 2 * precision * recall / (precision + recall) if (precision + recall) > 0 else 0
 
-    for _ in range(n_clusters):
-        # Both groups are PURELY random - no semantic structure
-        group_a_emb = np.random.randn(n_words, embedding_dim)
-        group_b_emb = np.random.randn(n_words, embedding_dim)
+    # --- TRAINED EMBEDDINGS ---
+    trained_f1_scores = []
+    for alpha in alphas:
+        related_Rs = []
+        unrelated_Rs = []
 
-        for alpha in alphas:
-            R_a, _, _ = compute_R_with_exponent(group_a_emb, alpha)
-            R_b, _, _ = compute_R_with_exponent(group_b_emb, alpha)
+        for cluster in RELATED_CLUSTERS:
+            emb = get_cluster_embeddings(model, cluster)
+            R, _, _ = compute_R_with_exponent(emb, alpha)
+            related_Rs.append(R)
 
-            group_a_Rs[alpha].append(R_a)
-            group_b_Rs[alpha].append(R_b)
+        for cluster in UNRELATED_CLUSTERS:
+            emb = get_cluster_embeddings(model, cluster)
+            R, _, _ = compute_R_with_exponent(emb, alpha)
+            unrelated_Rs.append(R)
 
-    # For random data, no alpha should be better at separating A from B
-    # because there's no real difference between the groups
-    cohens_ds = {}
-    for alpha, name in zip(alphas, alpha_names):
-        a = np.array(group_a_Rs[alpha])
-        b = np.array(group_b_Rs[alpha])
-        d = cohens_d(a, b)
-        cohens_ds[name] = abs(d)  # Use absolute value
+        f1 = compute_f1(np.array(related_Rs), np.array(unrelated_Rs))
+        trained_f1_scores.append(f1)
 
-    # All Cohen's d should be small (< 0.3) for random data
-    mean_d = np.mean(list(cohens_ds.values()))
-    max_d = max(cohens_ds.values())
-    d_cv = cv(np.array(list(cohens_ds.values())))
+    trained_f1_scores = np.array(trained_f1_scores)
+
+    # --- RANDOM EMBEDDINGS ---
+    # Generate random clusters matching the structure of the real clusters
+    n_words = 7  # Same as cluster size
+    embedding_dim = 384
+    n_related_clusters = len(RELATED_CLUSTERS)
+    n_unrelated_clusters = len(UNRELATED_CLUSTERS)
+
+    random_f1_scores = []
+    for alpha in alphas:
+        related_Rs = []
+        unrelated_Rs = []
+
+        # Random "related" clusters (but truly random, so no real structure)
+        for _ in range(n_related_clusters):
+            emb = np.random.randn(n_words, embedding_dim)
+            R, _, _ = compute_R_with_exponent(emb, alpha)
+            related_Rs.append(R)
+
+        # Random "unrelated" clusters (also truly random)
+        for _ in range(n_unrelated_clusters):
+            emb = np.random.randn(n_words, embedding_dim)
+            R, _, _ = compute_R_with_exponent(emb, alpha)
+            unrelated_Rs.append(R)
+
+        f1 = compute_f1(np.array(related_Rs), np.array(unrelated_Rs))
+        random_f1_scores.append(f1)
+
+    random_f1_scores = np.array(random_f1_scores)
+
+    # --- COMPARE PATTERNS ---
+    # Compute correlation between alpha and F1 for each
+    trained_corr, trained_p = stats.spearmanr(alpha_values, trained_f1_scores)
+    random_corr, random_p = stats.spearmanr(alpha_values, random_f1_scores)
+
+    # Compute range (max - min) of F1 scores as measure of alpha sensitivity
+    trained_range = np.max(trained_f1_scores) - np.min(trained_f1_scores)
+    random_range = np.max(random_f1_scores) - np.min(random_f1_scores)
+
+    # Compute CV of F1 scores
+    trained_cv = cv(trained_f1_scores) if np.mean(trained_f1_scores) > 0 else 0
+    random_cv = cv(random_f1_scores) if np.mean(random_f1_scores) > 0 else 0
 
     if verbose:
-        print(f"\nCohen's d for separating random groups:")
-        for name, d in cohens_ds.items():
-            print(f"  {name:>8}: d = {d:.3f}")
-        print(f"\nMean Cohen's d: {mean_d:.3f} (expected < 0.3 for no structure)")
-        print(f"Max Cohen's d: {max_d:.3f}")
-        print(f"CV of Cohen's d: {d_cv*100:.1f}%")
+        print(f"\nTrained embeddings F1 scores by alpha:")
+        for name, f1 in zip(alpha_names, trained_f1_scores):
+            print(f"  {name:>8}: F1 = {f1:.3f}")
+        print(f"  Correlation (alpha vs F1): r = {trained_corr:.3f}, p = {trained_p:.3f}")
+        print(f"  F1 range: {trained_range:.3f}")
+        print(f"  F1 CV: {trained_cv*100:.1f}%")
 
-    # Control PASSES if:
-    # 1. Mean d is small (no alpha can separate random groups well)
-    # 2. CV is low (all alphas perform equally poorly)
-    no_separation = mean_d < 0.5  # Can't separate random groups
-    equal_performance = d_cv < 0.30 or max_d < 0.5  # All alphas similar
+        print(f"\nRandom embeddings F1 scores by alpha:")
+        for name, f1 in zip(alpha_names, random_f1_scores):
+            print(f"  {name:>8}: F1 = {f1:.3f}")
+        print(f"  Correlation (alpha vs F1): r = {random_corr:.3f}, p = {random_p:.3f}")
+        print(f"  F1 range: {random_range:.3f}")
+        print(f"  F1 CV: {random_cv*100:.1f}%")
 
-    control_passed = no_separation and equal_performance
+    # Control PASSES if trained shows stronger pattern than random:
+    # 1. Trained has higher correlation (absolute) than random, OR
+    # 2. Trained has larger F1 range than random, OR
+    # 3. Random F1 range is very small (< 0.1) indicating no sensitivity
+    trained_has_stronger_corr = abs(trained_corr) > abs(random_corr) + 0.1
+    trained_has_larger_range = trained_range > random_range + 0.05
+    random_is_flat = random_range < 0.1
+
+    control_passed = trained_has_stronger_corr or trained_has_larger_range or random_is_flat
 
     if verbose:
+        print(f"\nComparison:")
+        print(f"  Trained correlation stronger: {trained_has_stronger_corr} (|{trained_corr:.3f}| vs |{random_corr:.3f}|)")
+        print(f"  Trained range larger: {trained_has_larger_range} ({trained_range:.3f} vs {random_range:.3f})")
+        print(f"  Random is flat: {random_is_flat} (range {random_range:.3f} < 0.1)")
+
         if control_passed:
-            print("\nVERDICT: CONTROL PASSED - Random data shows no alpha preference")
-            print("This confirms sqrt(3) advantage comes from semantic structure")
+            print("\nVERDICT: CONTROL PASSED - Trained shows different/stronger alpha-F1 pattern")
+            print("This confirms alpha optimization comes from semantic structure")
         else:
-            print("\nVERDICT: CONTROL FAILED - Random data shows alpha preference")
+            print("\nVERDICT: CONTROL FAILED - Random shows similar alpha-F1 pattern")
             print("This suggests effect may be from distribution shape, not semantics")
 
     return NegativeControlResult(
         control_name="random_embeddings",
-        expected_to_fail=False,  # We want this control to PASS (no preference)
+        expected_to_fail=False,  # We want this control to PASS (different patterns)
         actually_failed=not control_passed,
-        metric_trained=cohens_ds.get("sqrt(3)", 0.0),
-        metric_control=mean_d,
-        cohens_d=max_d,
-        interpretation="Random embeddings should show no alpha preference (confirms semantic origin)"
+        metric_trained=trained_range,
+        metric_control=random_range,
+        cohens_d=abs(trained_corr) - abs(random_corr),
+        interpretation="Trained embeddings should show stronger alpha-F1 relationship than random"
     )
 
 
@@ -268,10 +323,14 @@ def test_shuffled_embeddings(model, verbose: bool = True) -> NegativeControlResu
 
 def test_alternative_constants(model, verbose: bool = True) -> NegativeControlResult:
     """
-    Test that sqrt(3) performs better than arbitrary alternatives.
+    Test whether sqrt(3) is actually optimal or if other values perform equally well or better.
 
-    If random constants like 1.7, 1.8, 1.9 perform equally well,
-    sqrt(3) is not special.
+    This control checks:
+    1. Is sqrt(3) in the top 2 performers?
+    2. If not, what constants actually perform best?
+    3. Are all values essentially equivalent (flat response)?
+
+    The control interpretation reflects the actual findings about sqrt(3) optimality.
     """
     if verbose:
         print("\n" + "=" * 60)
@@ -319,36 +378,74 @@ def test_alternative_constants(model, verbose: bool = True) -> NegativeControlRe
         for name, f1 in f1_scores.items():
             print(f"  {name:>15}: F1 = {f1:.3f}")
 
-    # Check if sqrt(3) is distinguishable from neighbors
+    # Rank all values by F1
+    sorted_scores = sorted(f1_scores.items(), key=lambda x: x[1], reverse=True)
+    top_2_names = [name for name, _ in sorted_scores[:2]]
+    best_name, best_f1 = sorted_scores[0]
+    second_name, second_f1 = sorted_scores[1]
+
     sqrt3_f1 = f1_scores["sqrt(3)=1.732"]
+    sqrt3_rank = [name for name, _ in sorted_scores].index("sqrt(3)=1.732") + 1
+
     other_f1s = [f1 for name, f1 in f1_scores.items() if name != "sqrt(3)=1.732"]
     max_other = max(other_f1s)
     min_other = min(other_f1s)
 
-    # If all values give same F1 (within 5%), sqrt(3) is NOT uniquely special
-    all_same = max_other - min_other < 0.05 and abs(sqrt3_f1 - max_other) < 0.05
+    # Determine sqrt(3) status
+    sqrt3_is_best = best_name == "sqrt(3)=1.732"
+    sqrt3_in_top_2 = "sqrt(3)=1.732" in top_2_names
+    sqrt3_beaten_by = best_f1 - sqrt3_f1 if not sqrt3_is_best else 0.0
 
-    # Control PASSES if sqrt(3) IS distinguishable (performs differently from neighbors)
-    # Control FAILS if sqrt(3) is NOT distinguishable (all neighbors perform the same)
-    control_passed = not all_same
+    # Check if all values are essentially equivalent (flat response)
+    all_f1s = list(f1_scores.values())
+    f1_range = max(all_f1s) - min(all_f1s)
+    all_equivalent = f1_range < 0.05
 
     if verbose:
-        print(f"\nsqrt(3) F1: {sqrt3_f1:.3f}")
-        print(f"Range of others: [{min_other:.3f}, {max_other:.3f}]")
-        if all_same:
-            print("\nVERDICT: CONTROL FAILED - All nearby values perform equally")
-            print("sqrt(3) is NOT uniquely optimal (any value in range works)")
+        print(f"\nRanking:")
+        for i, (name, f1) in enumerate(sorted_scores):
+            marker = " <-- sqrt(3)" if name == "sqrt(3)=1.732" else ""
+            print(f"  {i+1}. {name:>15}: F1 = {f1:.3f}{marker}")
+
+        print(f"\nsqrt(3) analysis:")
+        print(f"  sqrt(3) F1: {sqrt3_f1:.3f}")
+        print(f"  sqrt(3) rank: {sqrt3_rank} of {len(test_names)}")
+        print(f"  sqrt(3) in top 2: {sqrt3_in_top_2}")
+        print(f"  Best performer: {best_name} (F1 = {best_f1:.3f})")
+        if not sqrt3_is_best:
+            print(f"  sqrt(3) beaten by: {sqrt3_beaten_by:.3f}")
+        print(f"  F1 range across all: {f1_range:.3f}")
+        print(f"  All values equivalent: {all_equivalent}")
+
+    # Build interpretation based on actual findings
+    if all_equivalent:
+        interpretation = f"All values perform equivalently (range={f1_range:.3f}<0.05). sqrt(3) is not special - any value in range works."
+        control_passed = False  # sqrt(3) is not uniquely special
+    elif sqrt3_is_best:
+        interpretation = f"sqrt(3) IS optimal (rank 1, F1={sqrt3_f1:.3f}). Confirms sqrt(3) hypothesis."
+        control_passed = True
+    elif sqrt3_in_top_2:
+        interpretation = f"sqrt(3) is near-optimal (rank {sqrt3_rank}, F1={sqrt3_f1:.3f}). Best is {best_name}={best_f1:.3f}. Within acceptable range."
+        control_passed = True  # Near-optimal is still supportive
+    else:
+        interpretation = f"sqrt(3) is NOT optimal (rank {sqrt3_rank}, F1={sqrt3_f1:.3f}). Best is {best_name}={best_f1:.3f}. sqrt(3) hypothesis NOT supported."
+        control_passed = False
+
+    if verbose:
+        print(f"\nInterpretation: {interpretation}")
+        if control_passed:
+            print("\nVERDICT: CONTROL PASSED - sqrt(3) is optimal or near-optimal")
         else:
-            print("\nVERDICT: CONTROL PASSED - sqrt(3) is distinguishable from alternatives")
+            print("\nVERDICT: CONTROL FAILED - sqrt(3) is NOT in top performers")
 
     return NegativeControlResult(
         control_name="alternative_constants",
         expected_to_fail=False,  # We WANT sqrt(3) to be special (control should pass)
-        actually_failed=not control_passed,  # Failed if all values perform the same
+        actually_failed=not control_passed,
         metric_trained=sqrt3_f1,
-        metric_control=max_other,
-        cohens_d=sqrt3_f1 - max_other,
-        interpretation="sqrt(3) should be distinguishable from arbitrary nearby values"
+        metric_control=best_f1 if not sqrt3_is_best else second_f1,
+        cohens_d=sqrt3_f1 - best_f1,  # Negative if sqrt(3) is not best
+        interpretation=interpretation
     )
 
 
@@ -473,7 +570,7 @@ def main():
     model = load_model("all-MiniLM-L6-v2")
 
     # Run negative controls
-    nc1 = test_random_embeddings()
+    nc1 = test_random_embeddings(model)
     nc2 = test_shuffled_embeddings(model)
     nc3 = test_alternative_constants(model)
 

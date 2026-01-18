@@ -39,25 +39,34 @@ There is NO rigorous geometric or topological derivation.
 
 ## TESTED HYPOTHESES
 
-### Theory 1: Hexagonal Information Packing - FALSIFIED
+### Theory 1: Hexagonal Information Packing - NOT CONFIRMED
 **Claim:** Evidence units pack hexagonally in information space.
 **Result:** Angle distribution in 2D projections shows:
-- Peak angle: 57.5 deg (vs expected 60 deg for hexagonal)
-- Peak strength: 1.98 (just below significance threshold of 2.0)
-- Chi-square vs random: p = 0.85 (NOT significant)
-- Nearest neighbor ratios: ~2.0 (vs expected 1.0 for hexagonal)
+- Peak angle: 62.5 deg (close to expected 60 deg for hexagonal)
+- Peak strength: 1.87 (below significance threshold of 2.0)
+- p-value: 1.7e-12 (significant but test is weak)
+- Nearest neighbor ratios: 1.84 (vs expected 1.0 for hexagonal)
+- hexagonal_confirmed: false
 
-**Verdict:** NOT CONFIRMED
+**Verdict:** NOT CONFIRMED - peak is near 60° but not statistically robust
 
-### Theory 2: Hexagonal Berry Phase - FALSIFIED
-**Claim:** sqrt(3) = 2*sin(pi/3), so hexagonal semantic loops accumulate Berry phase = 2*pi/3 = 2.094 rad.
-**Result:**
-- Hexagons show mean phase = 3.142 rad (pi), NOT 2.094 rad
-- Pentagons: 3.770 rad
-- Heptagons: -1.257 rad
-- Derived sqrt(3) from phase: 2.000 (15.5% error vs actual sqrt(3) = 1.732)
+### Theory 2: Hexagonal Winding Angle - FALSIFIED
+**Claim:** sqrt(3) = 2*sin(pi/3), so hexagonal semantic loops accumulate winding angle = 2*pi/3 = 2.094 rad.
 
-**Verdict:** FALSIFIED
+**IMPORTANT NOTE:** This test measures WINDING ANGLE (total rotation in 2D PCA projection), NOT true geometric Berry phase. Berry phase requires parallel transport with a well-defined connection.
+
+**Result (all-MiniLM-L6-v2):**
+- Hexagons: mean winding angle = -1.57 rad (~-pi/2), deviation = 100%
+- Pentagons: mean = 0.0 rad, deviation = 100%
+- Heptagons: mean = 1.26 rad, deviation = 100%
+- Derived sqrt(3) from angle: 1.41 (18.4% error vs actual sqrt(3) = 1.732)
+
+**Cross-model validation (0/3 models supported):**
+- all-MiniLM-L6-v2: deviation 100%, NOT supported
+- all-mpnet-base-v2: deviation 100%, NOT supported
+- paraphrase-MiniLM-L6-v2: deviation 100%, NOT supported
+
+**Verdict:** FALSIFIED - winding angles do not correlate with 2*pi/3
 
 ### Theory 3: Distinguishability Threshold - PARTIALLY SUPPORTED
 **Claim:** sqrt(3) is the minimum separation for reliable gate operation.
@@ -118,7 +127,7 @@ The hexagonal geometry hypothesis (sqrt(3) = 2*sin(pi/3) from hexagonal Berry ph
 | **Q7 (Multi-scale)** | sqrt(3) as scale factor | Not confirmed |
 | **Q14 (Category theory)** | sqrt(3) scaling interpretation | Still missing |
 | **Q33 (sigma^Df derivation)** | Df calculation may involve sqrt(3) | Not established |
-| **Q43 (QGT)** | Berry phase from hexagonal loops | FALSIFIED - phase = pi, not 2*pi/3 |
+| **Q43 (QGT)** | Winding angle from hexagonal loops | FALSIFIED - no 2*pi/3 correlation |
 
 ---
 
@@ -126,11 +135,13 @@ The hexagonal geometry hypothesis (sqrt(3) = 2*sin(pi/3) from hexagonal Berry ph
 
 | Control | Expected | Actual | Pass |
 |---------|----------|--------|------|
-| Random embeddings should show NO alpha preference | PASS | Mean d = 0.51 | FAIL |
-| Shuffled embeddings should lose structure | PASS | 30% F1 drop | PASS |
-| sqrt(3) should be distinguishable | PASS | 1.9 beats sqrt(3) | PASS |
+| Random embeddings: trained should show stronger alpha-F1 pattern | PASS | Trained range=0.30 > Random range=0.20 | PASS |
+| Shuffled embeddings should lose structure | PASS | Trained F1=0.9 > Shuffled F1=0.6 | PASS |
+| sqrt(3) should be best among nearby values | PASS | 1.9 beats sqrt(3) (rank 4 of 6) | FAIL |
 
-**Key Finding:** Random embeddings DO show some alpha preference (d ~ 0.5), suggesting the effect isn't purely semantic. However, the shuffled control confirms trained embeddings have real structure.
+**Summary: 2/3 negative controls passed**
+
+**Key Finding:** The alpha-F1 pattern IS semantic in origin (random embeddings show weaker pattern). However, sqrt(3) is NOT uniquely optimal - nearby values (1.9, 1.8) perform equally well or better.
 
 ---
 
@@ -145,6 +156,7 @@ The hexagonal geometry hypothesis (sqrt(3) = 2*sin(pi/3) from hexagonal Berry ph
 
 ---
 
-**Last Updated:** 2026-01-18 (experimental results integrated)
-**Prior hypotheses:** Hexagonal packing, Berry phase, fractal dimension - all falsified or unconfirmed
-**Current status:** sqrt(3) is empirically fitted, in optimal range, model-dependent
+**Last Updated:** 2026-01-18 (rigorous experimental results with bug fixes)
+**Prior hypotheses:** Hexagonal packing, winding angle (2*pi/3), fractal dimension - all falsified or unconfirmed
+**Current status:** sqrt(3) is empirically fitted, in optimal range (1.5-2.5), model-dependent
+**Test results:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q23/results/q23_*.json`

@@ -456,6 +456,16 @@ def test_dimensional_discovery(model, verbose: bool = True) -> Dict[str, SweepRe
     alpha(d) = base^(d-2)
 
     Uses R = E^alpha / sigma (alpha as EXPONENT on E, not as multiplier on R).
+
+    IMPORTANT FIXES:
+    1. Single PCA fitted on ALL embeddings combined, then used to transform each
+       cluster. This preserves cross-cluster comparability (fitting PCA per-cluster
+       would destroy it).
+    2. Dimensions start at 3, not 2. At dim=2, alpha = base^(dim-2) = base^0 = 1
+       for ALL bases, making the test trivial/useless.
+    3. Dimensions limited to < min(cluster_size) - 1 to avoid degeneracy.
+       With 7-word clusters, dim >= 6 is degenerate (not enough samples for
+       meaningful PCA/covariance estimation).
     """
     if verbose:
         print("\n" + "=" * 60)
@@ -469,14 +479,55 @@ def test_dimensional_discovery(model, verbose: bool = True) -> Dict[str, SweepRe
     bases = [SQRT_2, PHI, SQRT_3, 1.8, 2.0, E, SQRT_5]
     base_names = ["sqrt(2)", "phi", "sqrt(3)", "1.8", "2.0", "e", "sqrt(5)"]
 
-    # Dimensions limited by cluster size (7 words = max 6 dimensions after mean-centering)
-    dimensions = [2, 3, 5, 6]
+    # Determine minimum cluster size to avoid degeneracy
+    all_clusters = RELATED_CLUSTERS + UNRELATED_CLUSTERS
+    min_cluster_size = min(len(cluster) for cluster in all_clusters)
+
+    # Dimensions: start at 3 (dim=2 is trivial since alpha = base^0 = 1 for all bases)
+    # End at min_cluster_size - 2 to avoid degeneracy (need n > dim for valid PCA/stats)
+    max_dim = min_cluster_size - 2  # With 7-word clusters, max_dim = 5
+    dimensions = [d for d in [3, 4, 5] if d <= max_dim]
+
+    if verbose:
+        print(f"  Min cluster size: {min_cluster_size}")
+        print(f"  Testing dimensions: {dimensions} (skipping dim=2: trivial, dim>={max_dim+1}: degenerate)")
+
+    # Collect ALL words from all clusters for fitting a single shared PCA
+    all_words = []
+    cluster_indices = []  # Track which embeddings belong to which cluster
+    cluster_types = []    # Track if cluster is related (1) or unrelated (0)
+
+    for i, cluster in enumerate(RELATED_CLUSTERS):
+        for word in cluster:
+            all_words.append(word)
+            cluster_indices.append(i)
+            cluster_types.append(1)  # related
+
+    for i, cluster in enumerate(UNRELATED_CLUSTERS):
+        for word in cluster:
+            all_words.append(word)
+            cluster_indices.append(len(RELATED_CLUSTERS) + i)
+            cluster_types.append(0)  # unrelated
+
+    # Get embeddings for ALL words at once
+    all_embeddings = model.encode(all_words, convert_to_numpy=True)
 
     results = {}
 
     for dim in dimensions:
         if verbose:
             print(f"\n--- Dimension {dim} ---")
+
+        # Fit a SINGLE PCA on ALL embeddings combined
+        # This preserves cross-cluster comparability
+        pca = PCA(n_components=dim)
+        all_projected = pca.fit_transform(all_embeddings)
+
+        # Now extract each cluster's projected embeddings
+        cluster_embeddings = {}
+        for idx in range(len(RELATED_CLUSTERS) + len(UNRELATED_CLUSTERS)):
+            mask = [i for i, ci in enumerate(cluster_indices) if ci == idx]
+            cluster_embeddings[idx] = all_projected[mask]
 
         # Test each alpha base
         f1_scores = []
@@ -489,25 +540,14 @@ def test_dimensional_discovery(model, verbose: bool = True) -> Dict[str, SweepRe
 
             # Compute R = E^alpha / sigma for each cluster (CORRECT: alpha as exponent)
             related_Rs = []
-            for cluster in RELATED_CLUSTERS:
-                emb = get_cluster_embeddings(model, cluster)
-
-                # Project to target dimension if needed
-                if emb.shape[1] > dim:
-                    pca = PCA(n_components=dim)
-                    emb = pca.fit_transform(emb)
-
+            for i in range(len(RELATED_CLUSTERS)):
+                emb = cluster_embeddings[i]
                 R, _, _ = compute_R_with_exponent(emb, alpha)
                 related_Rs.append(R)
 
             unrelated_Rs = []
-            for cluster in UNRELATED_CLUSTERS:
-                emb = get_cluster_embeddings(model, cluster)
-
-                if emb.shape[1] > dim:
-                    pca = PCA(n_components=dim)
-                    emb = pca.fit_transform(emb)
-
+            for i in range(len(UNRELATED_CLUSTERS)):
+                emb = cluster_embeddings[len(RELATED_CLUSTERS) + i]
                 R, _, _ = compute_R_with_exponent(emb, alpha)
                 unrelated_Rs.append(R)
 
