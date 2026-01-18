@@ -305,12 +305,15 @@ class EloEngine:
                         continue
 
                     # Determine outcome based on rank
+                    # All outcomes > 0.5 to ensure positive ELO delta
+                    # (expected = 0.5 for equal-ELO matchup)
+                    # rank 1: +8 delta, rank 2-5: +4 delta, rank 6+: +2 delta
                     if rank == 1:
-                        outcome = 1.0
+                        outcome = 1.0      # delta = K * 0.5 = +8 (K=16)
                     elif rank <= 5:
-                        outcome = 0.7
+                        outcome = 0.75     # delta = K * 0.25 = +4
                     else:
-                        outcome = 0.4
+                        outcome = 0.625    # delta = K * 0.125 = +2
 
                     # Build reason string
                     reason = f"{tool}_rank_{rank}"

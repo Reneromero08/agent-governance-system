@@ -95,7 +95,10 @@ else:
 **Initial ELO:**
 - **HIGH tier (1600):** LAW/CANON/*, AGENTS.md, NAVIGATION/MAPS/*
 - **MEDIUM tier (1200):** CAPABILITY/SKILLS/*, LAW/CONTEXT/decisions/*
-- **LOW tier (800):** THOUGHT/LAB/*, MEMORY/ARCHIVE/*, fixtures
+- **DEFAULT (1000):** Everything else starts at default
+
+**Pack Exclusions (not ELO-based):**
+- THOUGHT/LAB/*, MEMORY/ARCHIVE/*, INBOX/*, _generated/* are excluded from LITE packs entirely (via path policy, not ELO penalty)
 
 ---
 
@@ -103,7 +106,7 @@ else:
 
 ### 1. **Vectors (Embeddings)**
 - Every semantic search increments ELO for retrieved vectors
-- Top-K results get higher boost (+16 for rank 1, +8 for rank 2-5, +4 for rank 6-10)
+- Top-K results get higher boost (+8 for rank 1, +4 for rank 2-5, +2 for rank 6+)
 
 ### 2. **Files**
 - Every file read (via `view_file`, `grep_search`, etc.) increments ELO

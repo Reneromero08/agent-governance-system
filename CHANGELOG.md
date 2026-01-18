@@ -6,6 +6,32 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.23] - 2026-01-18
+
+### Fixed: Vector ELO rank-based deltas and seed data tiers
+
+**Bug Fix: Rank 6+ giving negative ELO delta**
+- `CAPABILITY/PRIMITIVES/elo_engine.py` - Fixed outcome values to ensure all ranks get positive ELO
+  - rank 1:  outcome=1.0   -> delta +8 (unchanged)
+  - rank 2-5: outcome=0.75 -> delta +4 (was +3.2)
+  - rank 6+:  outcome=0.625-> delta +2 (was -1.6, BUG)
+- All search result ranks now correctly increase ELO scores
+
+**Seed Data Corrections:**
+- `CAPABILITY/PRIMITIVES/elo_db.py` - Updated initial ELO values per spec
+  - CANON/CONSTITUTION.md: 1300 -> 1600 (HIGH tier)
+  - CANON/INVARIANTS.md: added at 1600 (HIGH tier)
+  - AGENTS.md: added at 1600 (HIGH tier)
+  - NAVIGATION/CORTEX/README.md: 1150 -> 1200 (MEDIUM tier)
+- Production database updated with correct values
+
+**Spec Clarification:**
+- `THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_SPEC.md` - Clarified pack exclusions
+  - THOUGHT/LAB, MEMORY/ARCHIVE excluded via path policy (not ELO penalty)
+  - Updated rank boost values to match implementation (+8/+4/+2)
+
+---
+
 ## [3.8.22] - 2026-01-18
 
 ### Added: Vector ELO MCP Integration (E.1.2, E.5)

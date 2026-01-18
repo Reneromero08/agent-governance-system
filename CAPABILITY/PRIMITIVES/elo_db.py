@@ -453,13 +453,22 @@ if __name__ == "__main__":
     # Add some initial seed data for demonstration
     print("\nSeeding initial data...")
 
-    # Seed some example entities
+    # Seed entities per spec (VECTOR_ELO_SPEC.md lines 96-98)
+    # HIGH tier (1600): LAW/CANON/*, AGENTS.md, NAVIGATION/MAPS/*
+    # MEDIUM tier (1200): CAPABILITY/SKILLS/*, ADRs
+    # Note: THOUGHT/LAB and MEMORY/ARCHIVE are excluded from packs entirely,
+    #       not penalized with low ELO - they start at default (1000)
     seed_data = [
-        ("adr", "ADR-001", 1200.0),  # Frequently referenced ADR
-        ("adr", "ADR-002", 1100.0),  # Common ADR
-        ("file", "CANON/CONSTITUTION.md", 1300.0),  # Core governance doc
-        ("file", "NAVIGATION/CORTEX/README.md", 1150.0),  # Important readme
-        ("symbol", "@EloDatabase", 1000.0),  # This class
+        # HIGH tier - core governance
+        ("file", "CANON/CONSTITUTION.md", 1600.0),
+        ("file", "CANON/INVARIANTS.md", 1600.0),
+        ("file", "AGENTS.md", 1600.0),
+        # MEDIUM tier - decisions and skills
+        ("adr", "ADR-001", 1200.0),
+        ("adr", "ADR-002", 1200.0),
+        ("file", "NAVIGATION/CORTEX/README.md", 1200.0),
+        # Default tier - symbols
+        ("symbol", "@EloDatabase", 1000.0),
     ]
 
     for entity_type, entity_id, score in seed_data:
