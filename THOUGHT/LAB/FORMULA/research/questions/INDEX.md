@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.10.0 (2026-01-18 - Q22 ANSWERED: Thresholds are domain-specific, use median(R). Q23 experimental verification complete: sqrt(3) is empirically fitted, hexagonal geometry FALSIFIED. 28/51 questions answered (55%).)*
+*Last updated: v4.10.2 (2026-01-18 - Q52 added: Chaos Theory Connections. Q22 downgraded to PARTIAL. 27/52 questions answered (52%).)*
 
 ---
 
@@ -70,7 +70,7 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ✅ ANSWERED | **YES.** Alpha drift (departure from 0.5) is a LEADING indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). [Full answer](lower_priority/Q21_ANSWER.md) |
-| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ✅ ANSWERED | **Domain-specific.** median(R) outperforms fixed constants (sqrt(2), sqrt(3), phi). Different models have different optimal alpha values. No universal threshold exists. |
+| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ PARTIAL | **Core principle established.** median(R) outperforms fixed constants. No universal threshold. GAP: Only 1 domain tested (semantic clustering); multi-domain validation needed. |
 | 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | **Empirically fitted, NOT geometric.** sqrt(3) is in optimal range (1.5-2.5) but not uniquely special. Hexagonal packing: NOT CONFIRMED. Winding angle = 2*pi/3: FALSIFIED. Model-dependent (sqrt(3) optimal for all-mpnet-base-v2 only). |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
 | 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
@@ -85,6 +85,7 @@
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 29 | [Numerical stability](engineering/q29_numerical_stability.md) | 1180 | ⏳ OPEN | Handle near-singular cases without losing gate sensitivity? |
+| 52 | [Chaos theory connections](lower_priority/q52_chaos_theory.md) | 1180 | ⏳ OPEN | Can R detect edge of chaos, predict bifurcations, or correlate with Lyapunov exponents? Lorenz test CORRECTLY FAILS (R^2=-9.74). |
 | 30 | [Approximations](engineering/q30_approximations.md) | 1160 | ⏳ OPEN | Faster approximations that preserve gate behavior? |
 
 ---
@@ -108,14 +109,17 @@
 **Cluster E: Semiotic Conservation** (Q48, Q49, Q50, Q51)
 > The conservation law Df × α = 8e: Why 8? (Peirce's 3 categories → 2³). Why e? (Information unit). Why does it emerge through training? What does human alignment distort? Q51: Are real embeddings shadows of complex structure?
 
+**Cluster F: Dynamical Systems** (Q12, Q28, Q52)
+> How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). Can R detect edge of chaos or predict bifurcations?
+
 ---
 
 ## Summary Statistics
 
-- **Total Questions:** 51
-- **Answered:** 28 (54.9%)
-- **Partially Answered:** 5 (9.8%)
-- **Open:** 18 (35.3%)
+- **Total Questions:** 52
+- **Answered:** 27 (51.9%)
+- **Partially Answered:** 6 (11.5%)
+- **Open:** 19 (36.5%)
 
 ### By Priority Level
 
@@ -124,8 +128,8 @@
 | Critical | 12 | 10 | 1 | 1 |
 | High | 15 | 10 | 2 | 3 |
 | Medium | 11 | 5 | 1 | 5 |
-| Lower | 8 | 3 | 1 | 4 |
-| Engineering | 2 | 0 | 0 | 2 |
+| Lower | 8 | 2 | 2 | 4 |
+| Engineering | 3 | 0 | 0 | 3 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |
 
 ---

@@ -1,6 +1,6 @@
 # Question 22: Threshold calibration (R: 1320)
 
-**STATUS: ANSWERED**
+**STATUS: PARTIALLY ANSWERED**
 
 ## Question
 How do we set the gate threshold for different domains? Is there a universal threshold or must it be domain-specific?
@@ -135,6 +135,21 @@ The confusion arose from conflating:
 
 ---
 
+## REMAINING GAPS
+
+To fully answer "for different domains":
+
+| Gap | What's Needed |
+|-----|---------------|
+| **Multi-domain validation** | Test threshold calibration on binary classification, multi-class, regression domains |
+| **Domain-specific R ranges** | Measure actual R distributions for each domain (currently "Varies" placeholders) |
+| **Sample size guidance** | How much calibration data is needed per domain? |
+| **Confidence intervals** | What's the uncertainty on optimal thresholds? |
+
+**Current evidence:** 1 domain (semantic clustering), 3 embedding models
+
+---
+
 **Last Updated:** 2026-01-18
-**Status:** ANSWERED - Use adaptive thresholds, not fixed constants
-**Key Finding:** median(R) outperforms fixed mathematical constants
+**Status:** PARTIALLY ANSWERED - Core principle established, multi-domain validation missing
+**Key Finding:** median(R) outperforms fixed mathematical constants (tested on 1 domain only)
