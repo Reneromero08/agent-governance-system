@@ -4,6 +4,54 @@ Research changelog for Vector ELO / Semantic Alignment / Phase 5.
 
 ---
 
+## [3.7.46] - 2026-01-18
+
+### Phase 7 MODULES COMPLETE - Vector ELO Implementation
+
+**Status:** All standalone modules implemented and tested. MCP integration pending.
+
+**Wave 1 - Logging Infrastructure (E.1):**
+- `CAPABILITY/PRIMITIVES/search_logger.py` - SearchLogger class for JSONL search logging
+- `CAPABILITY/PRIMITIVES/session_auditor.py` - SessionAuditor for session-level audit tracking
+- `CAPABILITY/PRIMITIVES/elo_db.py` - EloDatabase SQLite wrapper (4 tables: vector/file/symbol/adr)
+- `CAPABILITY/TOOLS/critic.py` - check_search_protocol() for compliance checking
+- `NAVIGATION/CORTEX/_generated/elo_scores.db` - Production database with seed data
+
+**Wave 2 - ELO Engine (E.2):**
+- `CAPABILITY/PRIMITIVES/elo_engine.py` - EloEngine class with:
+  - Standard ELO update (K=16 new, K=8 established)
+  - Ebbinghaus forgetting curve (30-day half-life, floor at 800)
+  - Tier classification: HIGH (1600+), MEDIUM (1200-1599), LOW (800-1199), VERY_LOW (<800)
+  - Batch log processing with resume support
+
+**Wave 3 - Integration Tools (E.3-E.5):**
+- `CAPABILITY/TOOLS/prune_memory.py` - MemoryPruner class
+  - Archives VERY_LOW + 30 days stale to MEMORY/ARCHIVE/pruned/
+  - Never prunes HIGH ELO content
+- `CAPABILITY/TOOLS/lite_pack.py` - LitePackGenerator class
+  - HIGH: Full content, MEDIUM: Summarized, LOW: Pointer, VERY_LOW: Excluded
+  - Blocks INBOX/, THOUGHT/LAB/, _generated/ from packs
+- `CAPABILITY/TOOLS/elo_ranker.py` - EloRanker class
+  - Formula: final_score = similarity * 0.7 + (elo / 2000) * 0.3
+
+**Wave 4 - Visualization (E.6):**
+- `CAPABILITY/TOOLS/elo_dashboard.py` - EloDashboard CLI
+  - Top entities, ASCII histogram, tier summary, recent activity
+  - Interactive mode with commands: top, hist, tiers, activity, updates, full
+
+**Implementation Stats:**
+- 4 parallel waves using Opus subagents
+- 9 subagents total (4 + 1 + 3 + 1)
+- 4,709 lines of code
+- All self-tests passing
+
+**Remaining (MCP Integration):**
+- Wire SearchLogger into MCP server search tools
+- Wire SessionAuditor into MCP session handling
+- Wire EloRanker into search result pipeline
+
+---
+
 ## [3.7.45] - 2026-01-11
 
 ### Phase 5.3.6 COMPLETE — PAPER_SPC.md Research Skeleton

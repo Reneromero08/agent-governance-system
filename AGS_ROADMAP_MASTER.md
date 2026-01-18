@@ -250,52 +250,34 @@ Retrieval order: **CORTEX first** (symbols, indexes) → CAS (exact hash) → Ve
 
 **Next:** Phase 7 - ELO Integration (scores.elo field)
 
-# Phase 7: Vector ELO (Systemic Intuition) (P1)
-## 7.1 Research Decisions (E.0)
-- [ ] 7.1.1 Survey: Classic ELO, Glicko-2, TrueSkill, TrueSkill 2 (E.0.1)
-- [ ] 7.1.2 Survey: X ranker concepts (trust, heavy ranker) (E.0.2)
-- [ ] 7.1.3 Survey: PageRank/YouTube/TikTok/Reddit/HN (E.0.3)
-- [ ] 7.1.4 Survey: Learning-to-Rank (RankNet/LambdaRank/LambdaMART/BERT) (E.0.4)
-- [ ] 7.1.5 Survey: Free Energy Principle (Friston, Active Inference) (E.0.5)
-- [ ] 7.1.6 Survey: Memory pruning (forgetting curve, spaced repetition, MemGPT) (E.0.6)
-- **Exit Criteria**
-  - [ ] Decision: ELO formula
-  - [ ] Decision: pruning strategy
+# Phase 7: Vector ELO (Systemic Intuition) (P1) - MODULES COMPLETE
 
-## 7.2 Logging Infrastructure (E.1) (P0)
-- [ ] 7.2.1 Add search logging to MCP server (`search_log.jsonl`) (E.1.1)
-- [ ] 7.2.2 Add session audit logging (`session_audit.jsonl`) (E.1.2)
-- [ ] 7.2.3 Add `critic.py` check for search protocol compliance (E.1.3)
-- [ ] 7.2.4 Create `elo_scores.db` (SQLite tables for vector/file/symbol/adr ELO) (E.1.4)
+**Status:** Modules complete, MCP integration pending
+**Canonical Roadmap:** [VECTOR_ELO_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md)
+**Specification:** [VECTOR_ELO_SPEC.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_SPEC.md)
 
-## 7.3 ELO Engine (E.2)
-- [ ] 7.3.1 Implement `elo_engine.py` (update, get, decay, tier classification) (E.2.1)
-- [ ] 7.3.2 Batch updates: process logs → update DB (E.2.2)
-- [ ] 7.3.3 Add forgetting curve decay (E.2.3)
-- [ ] 7.3.4 Add ELO update logging (`elo_updates.jsonl`) (E.2.4)
+**Core Principle:** ELO tracks usage. R gates truth.
 
-## 7.4 Memory Pruning (E.3)
-- [ ] 7.4.1 Define short-term memory scope (INBOX, scratch, logs) (E.3.1)
-- [ ] 7.4.2 Implement pruning policy (VERY LOW + stale → archive) (E.3.2)
-- [ ] 7.4.3 Implement pruning script (`prune_memory.py`) (E.3.3)
-- [ ] 7.4.4 Add pruning report to session audit (E.3.4)
+**Completed Modules (2026-01-18):**
+- E.1: Logging Infrastructure - search_logger.py, session_auditor.py, critic.py, elo_db.py, elo_scores.db
+- E.2: ELO Engine - elo_engine.py with update/get/decay/tier classification
+- E.3: Memory Pruning - prune_memory.py (VERY LOW + stale to archive)
+- E.4: LITE Pack - lite_pack.py with ELO tier filtering (blocks INBOX/LAB)
+- E.5: Search Ranking - elo_ranker.py (similarity * 0.7 + elo * 0.3)
+- E.6: Dashboard - elo_dashboard.py (CLI with interactive mode)
 
-## 7.5 LITE Pack Integration (E.4)
-- [ ] 7.5.1 Update `Engine/packer/lite.py` to query `elo_scores.db` (E.4.1)
-- [ ] 7.5.2 Filter by ELO tier (HIGH include, MEDIUM summarize, LOW omit) (E.4.2)
-- [ ] 7.5.3 Add ELO metadata to pack manifest (E.4.3)
-- [ ] 7.5.4 Benchmark LITE pack size (goal 80%+ smaller) (E.4.4)
+**Remaining (MCP Integration):**
+- [ ] Wire SearchLogger into MCP server search tools
+- [ ] Wire SessionAuditor into MCP session handling
+- [ ] Wire EloRanker into search result pipeline
 
-## 7.6 Search Result Ranking (E.5)
-- [ ] 7.6.1 Boost semantic_search by ELO (E.5.1)
-- [ ] 7.6.2 Sort cortex_query results by ELO (secondary) (E.5.2)
-- [ ] 7.6.3 Add ELO to result metadata (E.5.3)
-- [ ] 7.6.4 Benchmark search quality (goal: 80%+ top-5 high-ELO) (E.5.4)
+**Success Metrics (Targets):**
+- ELO convergence: Variance <10% after 100 sessions
+- LITE pack accuracy: 90%+ accessed files are high-ELO
+- Search efficiency: 80%+ top-5 results are high-ELO
+- Token savings: 80%+ smaller LITE packs
 
-## 7.7 Visualization & Monitoring (E.6)
-- [ ] 7.7.1 Build ELO dashboard (web UI or CLI) (E.6.1)
-- [ ] 7.7.2 Export to Prometheus/Grafana (E.6.2)
-- [ ] 7.7.3 Add alerts (entity drops, pruning limits) (E.6.3)
+**Dependencies:** Phase 5 (MemoryRecord.scores.elo field), Phase 6 (Cassette Network)
 
 # Phase 8: Resident AI ✅ COMPLETE (2026-01-12)
 

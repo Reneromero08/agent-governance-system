@@ -6,6 +6,47 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.21] - 2026-01-18
+
+### Added: Phase 7 - Vector ELO (Systemic Intuition)
+
+Complete Vector ELO scoring system implementing "ELO tracks usage. R gates truth."
+
+**Wave 1 - Logging Infrastructure (E.1):**
+- `CAPABILITY/PRIMITIVES/search_logger.py` - JSONL logging for all search operations
+- `CAPABILITY/PRIMITIVES/session_auditor.py` - Session-level audit tracking
+- `CAPABILITY/PRIMITIVES/elo_db.py` - SQLite database with 4 entity tables (vector/file/symbol/adr)
+- `CAPABILITY/TOOLS/critic.py` - Search protocol compliance checking
+- `NAVIGATION/CORTEX/_generated/elo_scores.db` - Production database with seed data
+
+**Wave 2 - ELO Engine (E.2):**
+- `CAPABILITY/PRIMITIVES/elo_engine.py` - Core ELO scoring algorithm
+  - Standard ELO update with adaptive K-factor (K=16 new, K=8 established)
+  - Ebbinghaus forgetting curve decay (30-day half-life, floor at 800)
+  - Tier classification: HIGH (1600+), MEDIUM (1200-1599), LOW (800-1199), VERY_LOW (<800)
+  - Batch log processing with resume support
+
+**Wave 3 - Integration Layer (E.3-E.5):**
+- `CAPABILITY/TOOLS/prune_memory.py` - Memory pruning based on ELO tiers
+  - Archives VERY_LOW + 30 days stale to `MEMORY/ARCHIVE/pruned/`
+  - Never prunes HIGH ELO content (>= 1600)
+- `CAPABILITY/TOOLS/lite_pack.py` - LITE pack generator with ELO filtering
+  - HIGH: Full content, MEDIUM: Summarized, LOW: Pointer only, VERY_LOW: Excluded
+  - Blocks INBOX/, THOUGHT/LAB/, _generated/ from packs
+  - Smart summarization: Python/JS signatures, markdown headers
+- `CAPABILITY/TOOLS/elo_ranker.py` - Search result ranking with ELO boost
+  - Formula: final_score = similarity * 0.7 + (elo / 2000) * 0.3
+
+**Wave 4 - Visualization (E.6):**
+- `CAPABILITY/TOOLS/elo_dashboard.py` - CLI dashboard with interactive mode
+  - Top entities by ELO, ASCII histogram, tier summary, recent activity
+
+**Implementation:** 4 parallel waves, 9 Opus subagents, 4709 lines of code, all with comprehensive self-tests
+
+**Roadmap:** Phase 7 implementation complete, ready for MCP integration
+
+---
+
 ## [3.8.20] - 2026-01-18
 
 ### Added: Session Cache (L4) - Warm Query Compression
