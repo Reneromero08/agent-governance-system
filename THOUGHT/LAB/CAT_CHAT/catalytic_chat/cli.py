@@ -22,6 +22,7 @@ from catalytic_chat.ants import spawn_ants, run_ant_worker
 from catalytic_chat.bundle import BundleBuilder, BundleVerifier, BundleError
 from catalytic_chat.executor import BundleExecutor
 from catalytic_chat.compression_validator import validate_compression_claim
+from catalytic_chat.session_capsule import SessionCapsule, SessionCapsuleError
 
 try:
     from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
@@ -1589,6 +1590,187 @@ def cmd_compress_verify(args) -> int:
         return 3
 
 
+# =============================================================================
+# Session Commands (Phase 3.4)
+# =============================================================================
+
+def cmd_session_create(args) -> int:
+    """Create a new session."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        session_id = capsule.create_session(
+            session_id=getattr(args, 'session_id', None),
+            corpus_snapshot_id=getattr(args, 'corpus_snapshot', None)
+        )
+        print(f"[OK] Session created")
+        print(f"      session_id: {session_id}")
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_list(args) -> int:
+    """List sessions."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        active_only = getattr(args, 'active', False)
+        sessions = capsule.list_sessions(active_only=active_only)
+
+        if not sessions:
+            print("[INFO] No sessions found")
+            return 0
+
+        for s in sessions:
+            status = "active" if s.is_active else "ended"
+            print(f"{s.session_id} [{status}] events={s.event_count} created={s.created_at[:19]}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_show(args) -> int:
+    """Show session details."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        state = capsule.get_session_state(args.session_id)
+
+        print(f"Session: {state.session_id}")
+        print(f"  Created: {state.created_at}")
+        print(f"  Last Event: {state.last_event_at}")
+        print(f"  Event Count: {state.event_count}")
+        print(f"  Active: {state.is_active}")
+        print(f"  Chain Head: {state.chain_head[:16]}...")
+        print(f"  Working Set: {len(state.working_set)} items")
+        print(f"  Pointer Set: {len(state.pointer_set)} items")
+        if state.corpus_snapshot_id:
+            print(f"  Corpus Snapshot: {state.corpus_snapshot_id}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_events(args) -> int:
+    """Show session events."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        limit = getattr(args, 'limit', None)
+        event_type = getattr(args, 'type', None)
+
+        events = capsule.get_events(
+            args.session_id,
+            event_type=event_type,
+            limit=limit
+        )
+
+        for e in events:
+            print(f"[{e.sequence_num:04d}] {e.event_type:20s} {e.timestamp[:19]}")
+            if getattr(args, 'verbose', False):
+                print(f"       hash: {e.chain_hash[:16]}...")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_verify(args) -> int:
+    """Verify session chain integrity."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        is_valid, error = capsule.verify_chain(args.session_id)
+
+        if is_valid:
+            print(f"[OK] Session chain verified: {args.session_id}")
+            return 0
+        else:
+            print(f"[FAIL] Chain integrity error: {error}")
+            return 1
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_save(args) -> int:
+    """Export session to JSON file."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+
+        # Verify chain before export
+        is_valid, error = capsule.verify_chain(args.session_id)
+        if not is_valid:
+            sys.stderr.write(f"[FAIL] Cannot export: chain integrity error: {error}\n")
+            return 1
+
+        data = capsule.export_session(args.session_id)
+
+        output_path = Path(args.output)
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=2)
+
+        print(f"[OK] Session saved")
+        print(f"      session_id: {args.session_id}")
+        print(f"      output: {output_path}")
+        print(f"      events: {len(data['events'])}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_session_resume(args) -> int:
+    """Import session from JSON file."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+
+        input_path = Path(args.input)
+        with open(input_path, 'r', encoding='utf-8') as f:
+            data = json.load(f)
+
+        session_id = capsule.import_session(data)
+
+        print(f"[OK] Session resumed")
+        print(f"      session_id: {session_id}")
+        print(f"      events: {len(data['events'])}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except FileNotFoundError:
+        sys.stderr.write(f"[FAIL] File not found: {args.input}\n")
+        return 1
+    except json.JSONDecodeError as e:
+        sys.stderr.write(f"[FAIL] Invalid JSON: {e}\n")
+        return 1
+
+
+def cmd_session_end(args) -> int:
+    """End an active session."""
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+        capsule.end_session(args.session_id)
+
+        print(f"[OK] Session ended: {args.session_id}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -1817,6 +1999,39 @@ def main():
     geometric_retrieve_parser.add_argument("--k", type=int, default=5, help="Number of results (default: 5)")
     geometric_retrieve_parser.add_argument("--threshold", type=float, default=0.5, help="E-threshold for gating (default: 0.5)")
 
+    # Session commands (Phase 3.4 - Session Persistence)
+    session_parser = subparsers.add_parser("session", help="Session persistence commands (Phase 3.4)")
+    session_subparsers = session_parser.add_subparsers(dest="session_command", help="Session commands")
+
+    session_create_parser = session_subparsers.add_parser("create", help="Create a new session")
+    session_create_parser.add_argument("--session-id", help="Optional session ID (generated if not provided)")
+    session_create_parser.add_argument("--corpus-snapshot", help="Optional corpus snapshot ID")
+
+    session_list_parser = session_subparsers.add_parser("list", help="List sessions")
+    session_list_parser.add_argument("--active", action="store_true", help="Show only active sessions")
+
+    session_show_parser = session_subparsers.add_parser("show", help="Show session details")
+    session_show_parser.add_argument("session_id", help="Session ID")
+
+    session_events_parser = session_subparsers.add_parser("events", help="Show session events")
+    session_events_parser.add_argument("session_id", help="Session ID")
+    session_events_parser.add_argument("--type", help="Filter by event type")
+    session_events_parser.add_argument("--limit", type=int, help="Limit number of events")
+    session_events_parser.add_argument("--verbose", "-v", action="store_true", help="Show hashes")
+
+    session_verify_parser = session_subparsers.add_parser("verify", help="Verify session chain integrity")
+    session_verify_parser.add_argument("session_id", help="Session ID")
+
+    session_save_parser = session_subparsers.add_parser("save", help="Export session to JSON file")
+    session_save_parser.add_argument("session_id", help="Session ID")
+    session_save_parser.add_argument("--output", "-o", required=True, help="Output file path")
+
+    session_resume_parser = session_subparsers.add_parser("resume", help="Import session from JSON file")
+    session_resume_parser.add_argument("--input", "-i", required=True, help="Input file path")
+
+    session_end_parser = session_subparsers.add_parser("end", help="End an active session")
+    session_end_parser.add_argument("session_id", help="Session ID")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -1946,6 +2161,25 @@ def main():
             sys.exit(1)
 
         sys.exit(geometric_commands[args.geometric_command](args))
+
+    if args.command == "session":
+        session_commands = {
+            "create": cmd_session_create,
+            "list": cmd_session_list,
+            "show": cmd_session_show,
+            "events": cmd_session_events,
+            "verify": cmd_session_verify,
+            "save": cmd_session_save,
+            "resume": cmd_session_resume,
+            "end": cmd_session_end
+        }
+
+        if args.session_command not in session_commands:
+            print(f"[FAIL] Unknown session command: {args.session_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(session_commands[args.session_command](args))
 
     if args.command not in commands:
         print(f"[FAIL] Unknown command: {args.command}")

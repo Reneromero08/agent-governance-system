@@ -146,7 +146,8 @@ class GeometricContextAssembler(ContextAssembler):
         expansions: List[ContextExpansion],
         budget: ContextBudget,
         query_state: 'GeometricState',
-        conversation_state: Optional['GeometricState'] = None
+        conversation_state: Optional['GeometricState'] = None,
+        corpus_snapshot_id: Optional[str] = None
     ) -> Tuple[List[AssembledItem], GeometricAssemblyReceipt]:
         """
         Assemble context with E-scoring within tiers.
@@ -199,6 +200,9 @@ class GeometricContextAssembler(ContextAssembler):
             token_usage_total=base_receipt.token_usage_total,
             success=base_receipt.success,
             failure_reason=base_receipt.failure_reason,
+            working_set=base_receipt.working_set,
+            pointer_set=base_receipt.pointer_set,
+            corpus_snapshot_id=corpus_snapshot_id,
             query_Df=query_state.Df,
             mean_E=mean_E,
             max_E=max_E,
@@ -341,7 +345,9 @@ class GeometricContextAssembler(ContextAssembler):
                 final_assemblage_hash="",
                 token_usage_total=0,
                 success=False,
-                failure_reason="Mandatory items exceed budget"
+                failure_reason="Mandatory items exceed budget",
+                working_set=[],
+                pointer_set=[]
             )
 
         current_tokens += cost_tier1
@@ -439,13 +445,19 @@ class GeometricContextAssembler(ContextAssembler):
         payload_str = json.dumps([asdict(x) for x in final_list], sort_keys=True)
         final_hash = hashlib.sha256(payload_str.encode()).hexdigest()
 
+        # Phase 3.2.3: Build working_set and pointer_set
+        working_set = [x.original_id for x in final_list]
+        pointer_set = [item["id"] for item in excluded_items_info]
+
         receipt = AssemblyReceipt(
             budget_used=asdict(budget),
             items_included=[x.original_id for x in final_list],
             items_excluded=excluded_items_info,
             final_assemblage_hash=final_hash,
             token_usage_total=current_tokens,
-            success=True
+            success=True,
+            working_set=working_set,
+            pointer_set=pointer_set
         )
 
         return final_list, receipt

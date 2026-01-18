@@ -71,6 +71,11 @@ class AssemblyReceipt:
     token_usage_total: int
     success: bool
     failure_reason: Optional[str] = None
+    # Phase 3.2.3: Track what's in working set vs pointer set
+    working_set: List[str] = field(default_factory=list)  # IDs of items with full content
+    pointer_set: List[str] = field(default_factory=list)  # IDs of items referenced but not included
+    # Phase 3.2.4: Corpus snapshot for deterministic replay
+    corpus_snapshot_id: Optional[str] = None  # Hash of CORTEX index + symbol registry state
 
 class ContextAssembler:
     
@@ -85,7 +90,8 @@ class ContextAssembler:
         self,
         messages: List[ContextMessage],
         expansions: List[ContextExpansion],
-        budget: ContextBudget
+        budget: ContextBudget,
+        corpus_snapshot_id: Optional[str] = None
     ) -> Tuple[List[AssembledItem], AssemblyReceipt]:
         
         # 0. Initialize
@@ -213,7 +219,8 @@ class ContextAssembler:
              return [], AssemblyReceipt(
                  budget_used=asdict(budget), items_included=[], items_excluded=[],
                  final_assemblage_hash="", token_usage_total=0, success=False,
-                 failure_reason="Mandatory items exceed budget"
+                 failure_reason="Mandatory items exceed budget",
+                 working_set=[], pointer_set=[], corpus_snapshot_id=corpus_snapshot_id
              )
         
         current_tokens += cost_tier1
@@ -325,14 +332,21 @@ class ContextAssembler:
         # 5. Receipt
         payload_str = json.dumps([asdict(x) for x in final_list], sort_keys=True)
         final_hash = hashlib.sha256(payload_str.encode()).hexdigest()
-        
+
+        # Phase 3.2.3: Build working_set (included with content) and pointer_set (excluded but referenced)
+        working_set = [x.original_id for x in final_list]
+        pointer_set = [item["id"] for item in excluded_items_info]
+
         receipt = AssemblyReceipt(
             budget_used=asdict(budget),
             items_included=[x.original_id for x in final_list],
             items_excluded=excluded_items_info,
             final_assemblage_hash=final_hash,
             token_usage_total=current_tokens,
-            success=True
+            success=True,
+            working_set=working_set,
+            pointer_set=pointer_set,
+            corpus_snapshot_id=corpus_snapshot_id
         )
-        
+
         return final_list, receipt

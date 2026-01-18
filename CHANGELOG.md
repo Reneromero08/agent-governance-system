@@ -6,6 +6,53 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.24] - 2026-01-18
+
+### Added: CAT Chat Phase 3 Preparation (3.2.3-3.2.5, 3.4)
+
+Completed infrastructure for session persistence and CORTEX-first retrieval.
+
+**Context Assembly Enhancements (3.2.3-3.2.4):**
+- `THOUGHT/LAB/CAT_CHAT/catalytic_chat/context_assembler.py`
+  - Added `working_set` tracking (items included with full content)
+  - Added `pointer_set` tracking (items referenced but excluded due to budget)
+  - Added `corpus_snapshot_id` for deterministic replay
+- `THOUGHT/LAB/CAT_CHAT/catalytic_chat/geometric_context_assembler.py`
+  - Updated to support new receipt fields
+
+**CORTEX Retrieval Integration (3.2.5):**
+- `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cortex_expansion_resolver.py` (NEW)
+  - CORTEX-first retrieval order: cortex_query → cassette_network → semantic_search → symbol_registry
+  - Fail-closed on unresolvable dependencies
+  - Retrieval path tracking in RetrievalResult
+  - `compute_corpus_snapshot_id()` for state hashing
+
+**Session Persistence (3.4.1-3.4.5):**
+- `THOUGHT/LAB/CAT_CHAT/catalytic_chat/session_capsule.py` (NEW)
+  - Hash-chained append-only event log with SQLite backend
+  - Event types: session_start, user_message, assistant_response, tool_call, tool_result, expansion, assembly, session_end
+  - Chain integrity verification with `verify_chain()`
+  - Append-only enforcement via triggers
+  - Export/import for save/resume workflow
+
+**CLI Commands (3.4.5):**
+- `THOUGHT/LAB/CAT_CHAT/catalytic_chat/cli.py`
+  - `session create` - Create new session
+  - `session list` - List sessions (--active for active only)
+  - `session show` - Show session state
+  - `session events` - Show event log (--verbose for hashes)
+  - `session verify` - Verify chain integrity
+  - `session save` - Export session to JSON
+  - `session resume` - Import session from JSON
+  - `session end` - End active session
+
+**Design Decisions:**
+- 3.2.2 (ELO tier integration) SKIPPED - conflicts with "ELO as metadata" design from Phase 7
+- All Phase 3.2-3.4 infrastructure ready for CAT Chat implementation
+- Integration tests pending (require end-to-end chat)
+
+---
+
 ## [3.8.23] - 2026-01-18
 
 ### Fixed: Vector ELO rank-based deltas and seed data tiers
