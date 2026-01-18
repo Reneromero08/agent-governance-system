@@ -18,6 +18,17 @@ Pass Criteria:
 - Mean hexagon phase within 15% of 2*pi/3
 - Hexagons show more consistent phase than pentagons/heptagons
 - Effect is present across multiple models
+
+IMPORTANT CONCEPTUAL LIMITATION:
+The expected phases (2*pi/n for n-gons) assume REGULAR polygons on a sphere.
+Semantic loops are NOT geometrically regular - vertices are placed by meaning,
+not geometry. The Berry phase for an arbitrary closed loop depends on the
+actual solid angle subtended, which has no mathematical reason to equal 2*pi/n.
+
+This test is exploratory: if semantic hexagons DO show phase near 2*pi/3, it
+would be remarkable and suggest deep geometric structure. But failure to find
+this phase does NOT disprove hexagonal semantic structure - it only shows that
+semantic hexagons are not geometrically regular.
 """
 
 import numpy as np
@@ -75,15 +86,16 @@ class HexagonalBerryResult:
 # =============================================================================
 
 # 6-vertex HEXAGONS (conceptual cycles that return to start)
+# Words chosen to be semantically distinct yet connected in a cycle
 SEMANTIC_HEXAGONS = [
-    # Emotion cycle
+    # Emotion cycle (distinct emotional states)
     ["calm", "happy", "excited", "anxious", "sad", "peaceful"],
 
-    # Time cycle
-    ["morning", "noon", "afternoon", "evening", "night", "dawn"],
+    # Time of day cycle (evenly spaced)
+    ["dawn", "morning", "noon", "afternoon", "evening", "night"],
 
-    # Season cycle (extended)
-    ["spring", "early_summer", "summer", "autumn", "winter", "late_winter"],
+    # Season cycle (each season distinct)
+    ["spring", "summer", "autumn", "winter", "thaw", "bloom"],
 
     # Knowledge cycle
     ["ignorance", "curiosity", "learning", "understanding", "wisdom", "teaching"],
@@ -95,7 +107,7 @@ SEMANTIC_HEXAGONS = [
     ["ocean", "evaporation", "cloud", "rain", "river", "delta"],
 
     # Life stage cycle
-    ["birth", "childhood", "youth", "adulthood", "old_age", "death"],
+    ["birth", "childhood", "youth", "adulthood", "elder", "death"],
 
     # Color wheel (RGB + CMY)
     ["red", "yellow", "green", "cyan", "blue", "magenta"],
@@ -114,7 +126,7 @@ SEMANTIC_PENTAGONS = [
 SEMANTIC_HEPTAGONS = [
     ["calm", "content", "happy", "excited", "anxious", "sad", "peaceful"],
     ["dawn", "morning", "noon", "afternoon", "evening", "night", "midnight"],
-    ["spring", "early_summer", "summer", "late_summer", "autumn", "winter", "thaw"],
+    ["spring", "bloom", "summer", "harvest", "autumn", "winter", "thaw"],
     ["growth", "expansion", "boom", "peak", "decline", "recession", "recovery"],
     ["ocean", "evaporation", "cloud", "rain", "stream", "river", "delta"],
 ]
@@ -318,12 +330,14 @@ def test_hexagonal_berry_phase(
         print(f"\nModel: {model_name}")
 
     # Expected phases for different polygon types
-    # For regular n-gon on sphere: expected phase = 2*pi/n (for small polygons)
-    # For hexagon: 2*pi/6 = pi/3 is one possibility
-    # But the hypothesis is specifically 2*pi/3 from hexagonal symmetry
-    hex_expected = TWO_PI_OVER_3  # 2.094 rad
-    pent_expected = 2 * PI / 5  # 1.257 rad
-    hept_expected = 2 * PI / 7  # 0.898 rad
+    # NOTE: These expectations assume REGULAR polygons on a sphere.
+    # Semantic loops are NOT regular - they're placed by meaning, not geometry.
+    # These serve as reference points, not strict predictions.
+    #
+    # The hypothesis is specifically 2*pi/3 from hexagonal symmetry (120 deg interior angle)
+    hex_expected = TWO_PI_OVER_3  # 2.094 rad = 120 deg
+    pent_expected = 2 * PI / 5  # 1.257 rad = 72 deg (for comparison)
+    hept_expected = 2 * PI / 7  # 0.898 rad = 51.4 deg (for comparison)
 
     # Test hexagons
     if verbose:

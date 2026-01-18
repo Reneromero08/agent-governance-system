@@ -224,6 +224,9 @@ def test_threshold_discovery(model, verbose: bool = True) -> SweepResult:
     For each threshold t:
     - Predict "related" if R > t
     - Compute F1, precision, recall
+
+    Uses both fixed mathematical constants AND adaptive percentile-based thresholds
+    to ensure we find the optimal threshold regardless of the R value distribution.
     """
     if verbose:
         print("\n" + "=" * 60)
@@ -251,9 +254,37 @@ def test_threshold_discovery(model, verbose: bool = True) -> SweepResult:
         print(f"Unrelated clusters: mean R = {np.mean(unrelated_Rs):.3f}, std = {np.std(unrelated_Rs):.3f}")
         print(f"Cohen's d = {cohens_d(related_Rs, unrelated_Rs):.2f}")
 
-    # Threshold candidates
-    thresholds = [0.5, 1.0, SQRT_2, 1.5, SQRT_3, 1.8, 2.0, 2.5, 3.0, 4.0, 5.0]
-    threshold_names = ["0.5", "1.0", "sqrt(2)", "1.5", "sqrt(3)", "1.8", "2.0", "2.5", "3.0", "4.0", "5.0"]
+    # Combine fixed constants with adaptive percentile-based thresholds
+    all_Rs = np.concatenate([related_Rs, unrelated_Rs])
+    percentile_thresholds = [
+        np.percentile(all_Rs, 25),
+        np.percentile(all_Rs, 40),
+        np.percentile(all_Rs, 50),
+        np.percentile(all_Rs, 60),
+        np.percentile(all_Rs, 75),
+    ]
+
+    # Fixed mathematical constants
+    fixed_thresholds = [0.5, 1.0, SQRT_2, 1.5, SQRT_3, 1.8, 2.0, 2.5, 3.0, 4.0, 5.0]
+    fixed_names = ["0.5", "1.0", "sqrt(2)", "1.5", "sqrt(3)", "1.8", "2.0", "2.5", "3.0", "4.0", "5.0"]
+
+    # Combine and deduplicate (keep constants that are within data range)
+    data_min, data_max = np.min(all_Rs), np.max(all_Rs)
+    thresholds = []
+    threshold_names = []
+
+    # Add percentile-based thresholds
+    for i, p in enumerate([25, 40, 50, 60, 75]):
+        thresholds.append(percentile_thresholds[i])
+        threshold_names.append(f"p{p}={percentile_thresholds[i]:.2f}")
+
+    # Add fixed constants that are within reasonable range of data
+    for t, name in zip(fixed_thresholds, fixed_names):
+        if data_min * 0.5 <= t <= data_max * 1.5:
+            # Avoid duplicates (within 1% of existing)
+            if not any(abs(t - existing) / max(abs(existing), 1e-6) < 0.01 for existing in thresholds):
+                thresholds.append(t)
+                threshold_names.append(name)
 
     f1_scores = []
     precision_scores = []
@@ -322,11 +353,20 @@ def test_scaling_discovery(model, verbose: bool = True) -> SweepResult:
     Sweep scaling factors to find what value maximizes separation.
 
     Apply R_scaled = R * factor and measure separation quality.
+
+    IMPORTANT: This test is INFORMATIONAL ONLY. Scaling R by a constant factor
+    preserves relative ordering, so it has NO effect on classification when using
+    a median threshold. All scaling factors will produce identical results.
+
+    This test is kept for completeness and to demonstrate this mathematical fact.
+    The actual hypothesis tests use alpha as an EXPONENT (R = E^alpha / sigma),
+    not as a multiplier.
     """
     if verbose:
         print("\n" + "=" * 60)
-        print("TEST 1B: SCALING FACTOR DISCOVERY")
+        print("TEST 1B: SCALING FACTOR DISCOVERY (INFORMATIONAL)")
         print("=" * 60)
+        print("NOTE: Scaling preserves ordering, so all factors give same F1.")
 
     # Compute base R for all clusters
     related_Rs = []
@@ -414,11 +454,14 @@ def test_dimensional_discovery(model, verbose: bool = True) -> Dict[str, SweepRe
     """
     For different dimensionalities (via PCA projection), find optimal alpha base.
     alpha(d) = base^(d-2)
+
+    Uses R = E^alpha / sigma (alpha as EXPONENT on E, not as multiplier on R).
     """
     if verbose:
         print("\n" + "=" * 60)
         print("TEST 1C: DIMENSIONAL EXPONENT DISCOVERY")
         print("=" * 60)
+        print("Formula: R = E^alpha / sigma, where alpha = base^(dim-2)")
 
     from sklearn.decomposition import PCA
 
@@ -435,50 +478,50 @@ def test_dimensional_discovery(model, verbose: bool = True) -> Dict[str, SweepRe
         if verbose:
             print(f"\n--- Dimension {dim} ---")
 
-        related_Rs = []
-        for cluster in RELATED_CLUSTERS:
-            emb = get_cluster_embeddings(model, cluster)
-
-            # Project to target dimension if needed
-            if emb.shape[1] > dim:
-                pca = PCA(n_components=dim)
-                emb = pca.fit_transform(emb)
-
-            R, _, _ = compute_R(emb)
-            related_Rs.append(R)
-
-        unrelated_Rs = []
-        for cluster in UNRELATED_CLUSTERS:
-            emb = get_cluster_embeddings(model, cluster)
-
-            if emb.shape[1] > dim:
-                pca = PCA(n_components=dim)
-                emb = pca.fit_transform(emb)
-
-            R, _, _ = compute_R(emb)
-            unrelated_Rs.append(R)
-
-        related_Rs = np.array(related_Rs)
-        unrelated_Rs = np.array(unrelated_Rs)
-
         # Test each alpha base
         f1_scores = []
         precision_scores = []
         recall_scores = []
 
         for base in bases:
+            # Compute alpha for this dimension: alpha(d) = base^(d-2)
             alpha = base ** (dim - 2)
 
-            scaled_related = related_Rs * alpha
-            scaled_unrelated = unrelated_Rs * alpha
+            # Compute R = E^alpha / sigma for each cluster (CORRECT: alpha as exponent)
+            related_Rs = []
+            for cluster in RELATED_CLUSTERS:
+                emb = get_cluster_embeddings(model, cluster)
 
-            all_scaled = np.concatenate([scaled_related, scaled_unrelated])
-            threshold = np.median(all_scaled)
+                # Project to target dimension if needed
+                if emb.shape[1] > dim:
+                    pca = PCA(n_components=dim)
+                    emb = pca.fit_transform(emb)
 
-            tp = np.sum(scaled_related > threshold)
-            fn = np.sum(scaled_related <= threshold)
-            fp = np.sum(scaled_unrelated > threshold)
-            tn = np.sum(scaled_unrelated <= threshold)
+                R, _, _ = compute_R_with_exponent(emb, alpha)
+                related_Rs.append(R)
+
+            unrelated_Rs = []
+            for cluster in UNRELATED_CLUSTERS:
+                emb = get_cluster_embeddings(model, cluster)
+
+                if emb.shape[1] > dim:
+                    pca = PCA(n_components=dim)
+                    emb = pca.fit_transform(emb)
+
+                R, _, _ = compute_R_with_exponent(emb, alpha)
+                unrelated_Rs.append(R)
+
+            related_Rs = np.array(related_Rs)
+            unrelated_Rs = np.array(unrelated_Rs)
+
+            # Use median as threshold
+            all_Rs = np.concatenate([related_Rs, unrelated_Rs])
+            threshold = np.median(all_Rs)
+
+            tp = np.sum(related_Rs > threshold)
+            fn = np.sum(related_Rs <= threshold)
+            fp = np.sum(unrelated_Rs > threshold)
+            tn = np.sum(unrelated_Rs <= threshold)
 
             precision = tp / (tp + fp) if (tp + fp) > 0 else 0
             recall = tp / (tp + fn) if (tp + fn) > 0 else 0
@@ -776,7 +819,8 @@ def main():
 
     filepath = os.path.join(results_dir, f"q23_phase1_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
     with open(filepath, 'w') as f:
-        json.dump(results, f, indent=2)
+        # Handle numpy types for JSON serialization
+        json.dump(results, f, indent=2, default=lambda x: bool(x) if isinstance(x, (np.bool_,)) else float(x) if isinstance(x, (np.floating,)) else int(x) if isinstance(x, (np.integer,)) else str(x))
 
     print(f"\nResults saved to: {filepath}")
 

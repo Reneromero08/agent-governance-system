@@ -30,6 +30,7 @@ from q23_utils import (
 # =============================================================================
 
 # Common English words across different categories
+# NOTE: All words are unique - no duplicates in source list
 VOCABULARY = [
     # Emotions (20)
     "happy", "sad", "angry", "afraid", "surprised", "disgusted", "joy", "love",
@@ -37,12 +38,12 @@ VOCABULARY = [
     "calm", "frustrated", "hopeful", "desperate",
 
     # Animals (20)
-    "dog", "cat", "bird", "fish", "horse", "cow", "pig", "sheep", "lion", "tiger",
+    "dog", "cat", "bird", "salmon", "horse", "cow", "pig", "sheep", "lion", "tiger",
     "elephant", "monkey", "snake", "eagle", "dolphin", "whale", "bear", "wolf",
     "rabbit", "deer",
 
     # Food (20)
-    "apple", "bread", "cheese", "water", "coffee", "rice", "meat", "fish", "egg",
+    "apple", "bread", "cheese", "water", "coffee", "rice", "meat", "tuna", "egg",
     "milk", "sugar", "salt", "butter", "oil", "flour", "honey", "wine", "beer",
     "soup", "salad",
 
@@ -59,16 +60,16 @@ VOCABULARY = [
     # Actions (20)
     "run", "walk", "eat", "sleep", "talk", "read", "write", "think", "feel", "see",
     "hear", "touch", "smell", "taste", "work", "play", "learn", "teach", "help",
-    "love",
+    "create",
 
     # Concepts (20)
     "time", "space", "life", "death", "truth", "beauty", "power", "freedom", "peace",
     "war", "justice", "hope", "faith", "reason", "wisdom", "courage", "honor",
-    "love", "hate", "fear",
+    "duty", "virtue", "mercy",
 ]
 
-# Remove duplicates
-VOCABULARY = list(set(VOCABULARY))
+# Verify no duplicates (should be 140 unique words)
+assert len(VOCABULARY) == len(set(VOCABULARY)), "Duplicate words in VOCABULARY!"
 
 
 @dataclass
@@ -443,7 +444,8 @@ def main():
 
     filepath = os.path.join(results_dir, f"q23_phase2_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
     with open(filepath, 'w') as f:
-        json.dump(results, f, indent=2)
+        # Handle numpy types for JSON serialization
+        json.dump(results, f, indent=2, default=lambda x: bool(x) if isinstance(x, (np.bool_,)) else float(x) if isinstance(x, (np.floating,)) else int(x) if isinstance(x, (np.integer,)) else str(x))
 
     print(f"\nResults saved to: {filepath}")
 

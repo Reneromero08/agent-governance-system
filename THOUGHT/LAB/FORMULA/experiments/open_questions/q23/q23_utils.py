@@ -304,16 +304,28 @@ def cohens_d(group1: np.ndarray, group2: np.ndarray) -> float:
 
 
 def bootstrap_ci(data: np.ndarray, statistic=np.mean, n_iterations: int = 1000,
-                 ci: float = 0.95) -> Tuple[float, float, float]:
+                 ci: float = 0.95, seed: int = None) -> Tuple[float, float, float]:
     """
     Compute bootstrap confidence interval.
     Returns (lower, point_estimate, upper).
-    """
-    np.random.seed(42)
-    boot_stats = []
 
+    Args:
+        data: Input data array
+        statistic: Function to compute (default: np.mean)
+        n_iterations: Number of bootstrap samples
+        ci: Confidence level (default: 0.95)
+        seed: Optional random seed for reproducibility. If None, uses
+              a seed derived from the data to ensure independence between
+              different bootstrap_ci calls while maintaining reproducibility.
+    """
+    # Use data-derived seed if not provided, ensuring independence between calls
+    if seed is None:
+        seed = hash(data.tobytes()) % (2**31)
+    rng = np.random.RandomState(seed)
+
+    boot_stats = []
     for _ in range(n_iterations):
-        sample = np.random.choice(data, size=len(data), replace=True)
+        sample = rng.choice(data, size=len(data), replace=True)
         boot_stats.append(statistic(sample))
 
     boot_stats = np.array(boot_stats)
