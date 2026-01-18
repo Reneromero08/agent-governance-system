@@ -526,6 +526,113 @@ class GeometricChat:
             'geometric_ops': 0
         }
 
+    # ========================================================================
+    # Auto-Controlled Context Integration (Phase C.5)
+    # ========================================================================
+
+    def respond_catalytic(
+        self,
+        user_query: str,
+        llm_generate: Callable[[str, str], str],
+        auto_context_manager: 'AutoContextManager',
+        system_prompt: str = ""
+    ) -> 'CatalyticChatResult':
+        """
+        Generate response with auto-controlled context management.
+
+        This method integrates with the AutoContextManager for fully
+        automatic context hydration/eviction based on E-scores.
+
+        5-Step Catalytic Pipeline:
+        1. PARTITION: Score all items, partition working_set/pointer_set
+        2. HYDRATE: Bring high-E compressed turns back into context
+        3. ASSEMBLE: Build context from working_set
+        4. GENERATE: LLM response with E-gating
+        5. COMPRESS: Store turn, add pointer to pool
+
+        Args:
+            user_query: User's question/input
+            llm_generate: Function(system_prompt, context_with_query) -> response
+            auto_context_manager: AutoContextManager instance
+            system_prompt: System prompt for LLM
+
+        Returns:
+            CatalyticChatResult with full turn details
+
+        Example:
+            from catalytic_chat.auto_context_manager import create_auto_context_manager
+
+            manager = create_auto_context_manager(
+                db_path=Path("_generated/cat_chat.db"),
+                session_id="session_123",
+                model_context_window=40961
+            )
+
+            result = chat.respond_catalytic(
+                "What is catalytic computing?",
+                lambda s, p: llm.generate(s, p),
+                manager,
+                system_prompt="You are a helpful assistant."
+            )
+        """
+        # Defer import to avoid circular dependency
+        from .auto_context_manager import CatalyticChatResult
+
+        self._stats['turns'] += 1
+
+        # Get query embedding via our reasoner
+        query_state = self.reasoner.initialize(user_query)
+        self._stats['embedding_calls'] += 1
+        query_embedding = query_state.vector
+
+        # Run the full catalytic loop via the manager
+        result = auto_context_manager.respond_catalytic(
+            query=user_query,
+            llm_generate=llm_generate,
+            query_embedding=query_embedding,
+            system_prompt=system_prompt,
+        )
+
+        # Update our conversation state with the response
+        response_state = self.reasoner.initialize(result.response)
+        self._stats['embedding_calls'] += 1
+
+        E_compression = self._update_conversation_state(response_state)
+        self._stats['geometric_ops'] += 1
+
+        # Track gate status
+        if result.E_mean >= self.E_threshold:
+            self._stats['gate_opens'] += 1
+        else:
+            self._stats['gate_closes'] += 1
+
+        # Build combined receipt
+        receipt = {
+            'turn_index': result.turn_index,
+            'catalytic': True,
+            'E_mean': result.E_mean,
+            'E_compression': E_compression,
+            'tokens_in_context': result.tokens_in_context,
+            'compression_ratio': result.compression_ratio,
+            'working_set_count': len(result.prepare_result.working_set),
+            'hydrated_turns': len(result.prepare_result.hydrated_turns),
+            'budget_passed': result.prepare_result.budget_checked,
+        }
+
+        self.turn_history.append(receipt)
+
+        return result
+
+    def get_embedding(self, text: str):
+        """
+        Get embedding for text using the reasoner.
+
+        Convenience method for external components that need embeddings.
+        """
+        state = self.reasoner.initialize(text)
+        self._stats['embedding_calls'] += 1
+        return state.vector
+
 
 # ============================================================================
 # Example Usage

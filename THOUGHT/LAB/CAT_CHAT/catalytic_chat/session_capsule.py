@@ -42,6 +42,12 @@ EVENT_EXPANSION = "expansion"
 EVENT_ASSEMBLY = "assembly"
 EVENT_SESSION_END = "session_end"
 
+# Phase C.4: Auto-Controlled Context Loop event types
+EVENT_PARTITION = "partition"  # Context re-partitioning based on E-scores
+EVENT_TURN_STORED = "turn_stored"  # Turn compression to catalytic space
+EVENT_TURN_HYDRATED = "turn_hydrated"  # Turn rehydration from catalytic space
+EVENT_BUDGET_CHECK = "budget_check"  # Budget invariant verification
+
 VALID_EVENT_TYPES = {
     EVENT_SESSION_START,
     EVENT_USER_MESSAGE,
@@ -51,6 +57,11 @@ VALID_EVENT_TYPES = {
     EVENT_EXPANSION,
     EVENT_ASSEMBLY,
     EVENT_SESSION_END,
+    # Auto-Controlled Context Loop events
+    EVENT_PARTITION,
+    EVENT_TURN_STORED,
+    EVENT_TURN_HYDRATED,
+    EVENT_BUDGET_CHECK,
 }
 
 
@@ -430,6 +441,166 @@ class SessionCapsule:
             "pointer_set": receipt.pointer_set,
             "corpus_snapshot_id": receipt.corpus_snapshot_id
         })
+
+    # =========================================================================
+    # Phase C.4: Auto-Controlled Context Loop Event Logging
+    # =========================================================================
+
+    def log_partition(
+        self,
+        session_id: str,
+        query_hash: str,
+        working_set_ids: List[str],
+        pointer_set_ids: List[str],
+        budget_total: int,
+        budget_used: int,
+        threshold: float,
+        E_mean: float,
+        E_min: float,
+        E_max: float,
+        items_below_threshold: int,
+        items_over_budget: int
+    ) -> SessionEvent:
+        """
+        Log a context partition event.
+
+        Records the result of re-partitioning all items based on E-scores
+        against the current query.
+        """
+        # Update working set and pointer set tables
+        conn = self._get_conn()
+        now = _now_iso()
+
+        # Clear and repopulate (partition is a full replacement)
+        conn.execute(
+            "DELETE FROM session_working_set WHERE session_id = ?",
+            (session_id,)
+        )
+        conn.execute(
+            "DELETE FROM session_pointer_set WHERE session_id = ?",
+            (session_id,)
+        )
+
+        # Deduplicate item IDs (safety net for any upstream bugs)
+        unique_working = list(dict.fromkeys(working_set_ids))
+        unique_pointer = list(dict.fromkeys(pointer_set_ids))
+
+        for item_id in unique_working:
+            conn.execute("""
+                INSERT INTO session_working_set
+                (session_id, item_id, added_at) VALUES (?, ?, ?)
+            """, (session_id, item_id, now))
+
+        for item_id in unique_pointer:
+            conn.execute("""
+                INSERT INTO session_pointer_set
+                (session_id, item_id, added_at) VALUES (?, ?, ?)
+            """, (session_id, item_id, now))
+
+        conn.commit()
+
+        return self.append_event(session_id, EVENT_PARTITION, {
+            "query_hash": query_hash,
+            "working_set": working_set_ids,
+            "pointer_set": pointer_set_ids,
+            "budget_total": budget_total,
+            "budget_used": budget_used,
+            "threshold": threshold,
+            "E_mean": E_mean,
+            "E_min": E_min,
+            "E_max": E_max,
+            "items_below_threshold": items_below_threshold,
+            "items_over_budget": items_over_budget,
+        })
+
+    def log_turn_stored(
+        self,
+        session_id: str,
+        turn_id: str,
+        content_hash: str,
+        summary: str,
+        original_tokens: int,
+        pointer_tokens: int
+    ) -> SessionEvent:
+        """
+        Log turn compression to catalytic space.
+
+        Records when a turn's full content is stored and replaced with a pointer.
+        """
+        return self.append_event(session_id, EVENT_TURN_STORED, {
+            "turn_id": turn_id,
+            "content_hash": content_hash,
+            "summary": summary,
+            "original_tokens": original_tokens,
+            "pointer_tokens": pointer_tokens,
+            "compression_ratio": original_tokens / max(pointer_tokens, 1),
+        })
+
+    def log_turn_hydrated(
+        self,
+        session_id: str,
+        turn_id: str,
+        content_hash: str,
+        E_score: float,
+        tokens_added: int
+    ) -> SessionEvent:
+        """
+        Log turn rehydration from catalytic space.
+
+        Records when a turn's full content is retrieved because it scored
+        high enough on E-score relevance.
+        """
+        return self.append_event(session_id, EVENT_TURN_HYDRATED, {
+            "turn_id": turn_id,
+            "content_hash": content_hash,
+            "E_score": E_score,
+            "tokens_added": tokens_added,
+        })
+
+    def log_budget_check(
+        self,
+        session_id: str,
+        budget_available: int,
+        budget_used: int,
+        item_count: int,
+        passed: bool,
+        context_window: int,
+        model_id: str
+    ) -> SessionEvent:
+        """
+        Log budget invariant check.
+
+        Records verification of INV-CATALYTIC-04 (Clean Space Bound).
+        """
+        return self.append_event(session_id, EVENT_BUDGET_CHECK, {
+            "budget_available": budget_available,
+            "budget_used": budget_used,
+            "item_count": item_count,
+            "passed": passed,
+            "utilization_pct": budget_used / max(budget_available, 1),
+            "context_window": context_window,
+            "model_id": model_id,
+        })
+
+    def get_working_set_tokens(
+        self,
+        session_id: str,
+        token_estimator: Optional[callable] = None
+    ) -> int:
+        """
+        Compute current working set token usage.
+
+        Note: This requires the actual content to be stored somewhere.
+        For now, we track the latest partition's budget_used.
+        """
+        events = self.get_events(session_id, event_type=EVENT_PARTITION, limit=1)
+        if events:
+            # Get from most recent partition event (they're ordered ASC)
+            all_partitions = self.get_events(session_id, event_type=EVENT_PARTITION)
+            if all_partitions:
+                latest = all_partitions[-1]
+                return latest.payload.get("budget_used", 0)
+        return 0
 
     def end_session(self, session_id: str) -> SessionEvent:
         """End a session."""
