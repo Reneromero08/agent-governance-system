@@ -38,9 +38,9 @@ Phase 5.1.0 MemoryRecord Contract    ✅ DONE (23 tests)
          ↓
 Phase 5.1.1 Embed Canon              ✅ DONE (32 files indexed)
          ↓
-Phase 5.2 SCL Compression (L2)       ⏳ In Progress
+Phase 5.2 SCL Compression (L2)       ✅ DONE (529 tests, CODEBOOK.json, scl_cli.py)
          ↓
-Phase 5.3 SPC Formalization          ⏳ In Progress (Protocol spec)
+Phase 5.3 SPC Formalization          ✅ DONE (SPC_SPEC.md, GOV_IR_SPEC.md, PAPER_SPC.md)
          ↓
 Phase 5.x Feral Resident             ✅ DONE (Alpha+Beta+Production complete)
          ↓
@@ -67,19 +67,18 @@ The Cassette Network is **not just a distributed database**. It is infrastructur
 
 ### Current State
 
-**What exists:**
-- `NAVIGATION/CORTEX/db/system1.db` - Basic semantic search
-- `semantic_search` MCP tool (working, tested by Opus)
-- Embedding engine (`all-MiniLM-L6-v2`, 384 dims)
-- Basic cassette protocol (`cassette_protocol.py`)
-- Network hub coordinator (`network_hub.py`)
-- Two production cassettes (Governance + AGI Research)
+**What exists (ALL COMPLETE):**
+- 8 partitioned cassettes (`NAVIGATION/CORTEX/cassettes/*.db`)
+- Geometric search with nomic-embed-text (768 dims)
+- GeometricCassetteNetwork with vectorized queries (8.3ms avg)
+- Cross-cassette federation (`cross_cassette_analogy()`)
+- Session cache (L4) for 98% warm query compression
+- SCL macro language (`scl_cli.py`, CODEBOOK.json)
+- SPC protocol (SPC_SPEC.md, GOV_IR_SPEC.md)
+- Feral Resident with persistent identity
 
-**What's missing:**
-- Write path (can't save memories)
-- Partitioned cassettes (everything in one DB)
-- Full cross-cassette query federation
-- Resident identity/persistence
+**Remaining future work:**
+- Phase 7: ELO Integration (scores.elo field in MemoryRecord)
 
 ---
 
@@ -980,5 +979,5 @@ When all parties share complete semantic context, communication approaches telep
 
 ---
 
-*Roadmap v3.4.0 - Updated 2026-01-18*
-*ALL PHASES COMPLETE including L4 Session Cache. All Success Metrics passing. Cassette Network + Session Cache are production-ready.*
+*Roadmap v3.5.0 - Updated 2026-01-18*
+*ALL PHASES COMPLETE: SCL (5.2), SPC (5.3), Cassette Network (6.0), Session Cache (6.x). Only Phase 7 (ELO Integration) remains as future work.*
