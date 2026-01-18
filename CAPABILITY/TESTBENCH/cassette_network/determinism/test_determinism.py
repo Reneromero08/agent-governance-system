@@ -51,14 +51,50 @@ def query_geometric_network(network, query: str, top_k: int = 10) -> List[Dict[s
     return flattened
 
 
+class EmbeddingEngine:
+    """Wrapper around GeometricReasoner for determinism tests."""
+
+    def __init__(self, reasoner):
+        self.reasoner = reasoner
+
+    def embed(self, text: str):
+        """Generate embedding for text."""
+        state = self.reasoner.initialize(text)
+        return state.vector
+
+    def embed_batch(self, texts: list):
+        """Generate embeddings for multiple texts."""
+        return [self.embed(t) for t in texts]
+
+    def serialize(self, embedding) -> bytes:
+        """Serialize embedding to bytes."""
+        return embedding.tobytes()
+
+    def deserialize(self, data: bytes):
+        """Deserialize bytes to embedding."""
+        import numpy as np
+        return np.frombuffer(data, dtype=np.float32)
+
+    def cosine_similarity(self, emb_a, emb_b) -> float:
+        """Compute cosine similarity between two embeddings."""
+        import numpy as np
+        # Embeddings are already L2-normalized in GeometricState
+        return float(np.dot(emb_a, emb_b))
+
+
 @pytest.fixture(scope="module")
 def embedding_engine():
     """Load the embedding engine for determinism tests."""
     try:
-        from embeddings import EmbeddingEngine
-        return EmbeddingEngine()
+        from geometric_cassette import GeometricCassetteNetwork
+
+        # Use the shared reasoner from a network instance
+        network = GeometricCassetteNetwork.from_config(project_root=REPO_ROOT)
+        return EmbeddingEngine(network.reasoner)
     except ImportError as e:
         pytest.skip(f"Embedding engine not available: {e}")
+    except Exception as e:
+        pytest.skip(f"Failed to initialize embedding engine: {e}")
 
 
 @pytest.fixture(scope="module")

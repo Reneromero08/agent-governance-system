@@ -65,6 +65,9 @@ class TestQueryLatency:
 
     def test_single_query_latency(self, geometric_network, benchmark_queries):
         """Measure latency for single queries."""
+        # Warm up embedding model and caches
+        geometric_network.query_all_text(benchmark_queries[0], k=10)
+
         latencies = []
 
         for query in benchmark_queries:
@@ -86,9 +89,9 @@ class TestQueryLatency:
         print(f"P95: {p95:.1f}ms")
         print(f"Max: {max_latency:.1f}ms")
 
-        # Performance targets
-        assert avg_latency < 500, f"Average latency {avg_latency:.1f}ms > 500ms target"
-        assert p95 < 1000, f"P95 latency {p95:.1f}ms > 1000ms target"
+        # Performance targets (per Success Metrics in CASSETTE_NETWORK_ROADMAP.md)
+        assert avg_latency < 100, f"Average latency {avg_latency:.1f}ms > 100ms target"
+        assert p95 < 200, f"P95 latency {p95:.1f}ms > 200ms target"
 
     def test_cold_start_latency(self, benchmark_queries):
         """Measure cold start (network load + first query)."""
@@ -109,8 +112,8 @@ class TestQueryLatency:
         print(f"First query: {first_query:.1f}ms")
         print(f"Total cold start: {total_cold_start:.0f}ms")
 
-        # Cold start should be under 10 seconds
-        assert total_cold_start < 10000, f"Cold start {total_cold_start:.0f}ms > 10s"
+        # Cold start should be under 5 seconds (including index loading)
+        assert total_cold_start < 5000, f"Cold start {total_cold_start:.0f}ms > 5s"
 
     def test_throughput(self, geometric_network, benchmark_queries):
         """Measure queries per second."""

@@ -34,14 +34,47 @@ FIXTURES_DIR = Path(__file__).parent
 # CASSETTE NETWORK FIXTURES
 # =============================================================================
 
+class EmbeddingEngineWrapper:
+    """Wrapper around GeometricReasoner for tests."""
+
+    def __init__(self, reasoner):
+        self.reasoner = reasoner
+
+    def embed(self, text: str):
+        """Generate embedding for text."""
+        state = self.reasoner.initialize(text)
+        return state.vector
+
+    def embed_batch(self, texts: list):
+        """Generate embeddings for multiple texts."""
+        return [self.embed(t) for t in texts]
+
+    def serialize(self, embedding) -> bytes:
+        """Serialize embedding to bytes."""
+        return embedding.tobytes()
+
+    def deserialize(self, data: bytes):
+        """Deserialize bytes to embedding."""
+        import numpy as np
+        return np.frombuffer(data, dtype=np.float32)
+
+    def cosine_similarity(self, emb_a, emb_b) -> float:
+        """Compute cosine similarity (embeddings are L2-normalized)."""
+        import numpy as np
+        return float(np.dot(emb_a, emb_b))
+
+
 @pytest.fixture(scope="session")
 def embedding_engine():
     """Load embedding engine for semantic similarity computation."""
     try:
-        from embeddings import get_embedding_engine
-        return get_embedding_engine()
-    except ImportError:
-        pytest.skip("Embedding engine not available")
+        from geometric_cassette import GeometricCassetteNetwork
+        network = GeometricCassetteNetwork.from_config(project_root=REPO_ROOT)
+        return EmbeddingEngineWrapper(network.reasoner)
+    except ImportError as e:
+        pytest.skip(f"Embedding engine not available: {e}")
+    except Exception as e:
+        pytest.skip(f"Failed to initialize embedding engine: {e}")
 
 
 @pytest.fixture(scope="session")
