@@ -22,6 +22,10 @@ from catalytic_chat.context_assembler import ContextExpansion
 from catalytic_chat.mcp_integration import ChatToolExecutor, McpAccessError
 
 
+# Forward reference for type hints - actual import is lazy
+CassetteClient = None
+
+
 @dataclass
 class RetrievalResult:
     """Result of a CORTEX retrieval operation."""
@@ -102,6 +106,17 @@ class CortexExpansionResolver:
             )
         return self._symbol_resolver
 
+    @property
+    def cassette_client(self):
+        """Lazy load cassette client for main cassette network access."""
+        if not hasattr(self, '_cassette_client') or self._cassette_client is None:
+            from catalytic_chat.cassette_client import CassetteClient
+            self._cassette_client = CassetteClient(
+                repo_root=self.repo_root,
+                tool_executor=self.tool_executor
+            )
+        return self._cassette_client
+
     def _get_timestamp(self) -> str:
         """Get ISO8601 timestamp."""
         return datetime.now(timezone.utc).isoformat().replace('+00:00', 'Z')
@@ -134,7 +149,11 @@ class CortexExpansionResolver:
                     text = content[0].get("text", "")
                     if text:
                         try:
-                            return json.loads(text)
+                            data = json.loads(text)
+                            # Extract results list from response dict
+                            if isinstance(data, dict):
+                                return data.get("results", [])
+                            return data if isinstance(data, list) else []
                         except json.JSONDecodeError:
                             return []
             return []
@@ -163,7 +182,11 @@ class CortexExpansionResolver:
                     text = content[0].get("text", "")
                     if text:
                         try:
-                            return json.loads(text)
+                            data = json.loads(text)
+                            # Extract results list from response dict
+                            if isinstance(data, dict):
+                                return data.get("results", [])
+                            return data if isinstance(data, list) else []
                         except json.JSONDecodeError:
                             return []
             return []
@@ -192,12 +215,41 @@ class CortexExpansionResolver:
                     text = content[0].get("text", "")
                     if text:
                         try:
-                            return json.loads(text)
+                            data = json.loads(text)
+                            # Extract results list from response dict
+                            if isinstance(data, dict):
+                                return data.get("results", [])
+                            return data if isinstance(data, list) else []
                         except json.JSONDecodeError:
                             return []
             return []
         except McpAccessError:
             return []
+
+    def _try_cassette_network_symbol(self, symbol_id: str, limit: int = 3) -> Optional[str]:
+        """
+        Try cassette network with symbol-aware query (Phase B.2).
+
+        For @CANON/INVARIANTS:
+        1. Extract base name: "INVARIANTS"
+        2. Extract path hint: "CANON" -> cassette "canon"
+        3. Query cassette network with targeted search
+
+        This is more targeted than raw text search, improving resolution
+        for well-formed symbol references.
+
+        Args:
+            symbol_id: Symbol ID like "@CANON/INVARIANTS"
+            limit: Max results to consider
+
+        Returns:
+            Content string or None if not found
+        """
+        try:
+            content = self.cassette_client.resolve_symbol(symbol_id, limit=limit)
+            return content
+        except Exception:
+            return None
 
     def _try_symbol_resolver(self, symbol_id: str) -> Optional[str]:
         """
@@ -224,12 +276,13 @@ class CortexExpansionResolver:
         """
         Resolve a symbol to content using CORTEX-first retrieval.
 
-        Retrieval order:
+        Retrieval order (Phase B.2 updated):
         1. CORTEX query (if query_hint provided or symbol looks like a query)
-        2. Cassette network
-        3. Semantic search
-        4. Symbol registry
-        5. Fail-closed
+        2. Cassette network symbol (targeted search for @SYMBOL refs)
+        3. Cassette network (general FTS)
+        4. Semantic search
+        5. Symbol registry (local)
+        6. Fail-closed
 
         Args:
             symbol_id: Symbol ID or query to resolve
@@ -263,7 +316,23 @@ class CortexExpansionResolver:
                 retrieved_at=self._get_timestamp()
             )
 
-        # 2. Try cassette network
+        # 2. Try cassette network with symbol-aware search (Phase B.2)
+        # This is targeted: @CANON/INVARIANTS searches "INVARIANTS" in canon cassette
+        if symbol_id.startswith("@") or "/" in symbol_id:
+            retrieval_path.append("cassette_network_symbol")
+            content = self._try_cassette_network_symbol(symbol_id)
+            if content:
+                self._stats["cassette_hits"] += 1
+                return RetrievalResult(
+                    symbol_id=symbol_id,
+                    content=content,
+                    source="cassette",
+                    retrieval_path=retrieval_path,
+                    content_hash=self._compute_hash(content),
+                    retrieved_at=self._get_timestamp()
+                )
+
+        # 3. Try cassette network (general FTS)
         results = self._try_cassette_network(query)
         retrieval_path.append("cassette_network")
         if results:
@@ -278,7 +347,7 @@ class CortexExpansionResolver:
                 retrieved_at=self._get_timestamp()
             )
 
-        # 3. Try semantic search
+        # 4. Try semantic search
         results = self._try_semantic_search(query)
         retrieval_path.append("semantic_search")
         if results:
@@ -293,7 +362,7 @@ class CortexExpansionResolver:
                 retrieved_at=self._get_timestamp()
             )
 
-        # 4. Try symbol resolver (for @SYMBOL references)
+        # 5. Try symbol resolver (local, for @SYMBOL references)
         if symbol_id.startswith("@"):
             retrieval_path.append("symbol_registry")
             content = self._try_symbol_resolver(symbol_id)
