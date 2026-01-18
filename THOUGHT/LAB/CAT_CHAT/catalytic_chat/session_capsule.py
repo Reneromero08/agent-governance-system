@@ -127,7 +127,7 @@ class SessionCapsule:
         Initialize session capsule.
 
         Args:
-            db_path: Path to SQLite database (default: system3.db)
+            db_path: Path to SQLite database (default: cat_chat.db)
             repo_root: Repository root for default paths
         """
         if repo_root is None:
@@ -135,10 +135,8 @@ class SessionCapsule:
         self.repo_root = repo_root
 
         if db_path is None:
-            db_path = (
-                repo_root / "THOUGHT" / "LAB" / "CAT_CHAT" /
-                "CAT_CORTEX" / "_generated" / "sessions.db"
-            )
+            from .paths import get_cat_chat_db
+            db_path = get_cat_chat_db(repo_root)
 
         self.db_path = Path(db_path)
         self.db_path.parent.mkdir(parents=True, exist_ok=True)

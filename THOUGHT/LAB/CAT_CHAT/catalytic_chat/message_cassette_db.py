@@ -14,8 +14,8 @@ from .paths import get_system3_db, get_sqlite_connection
 
 
 class MessageCassetteDB:
-    
-    DB_NAME = "system3.db"
+
+    DB_NAME = "cat_chat.db"  # Consolidated DB
     DB_VERSION = 1
     
     def __init__(self, repo_root: Optional[Path] = None, db_path: Optional[Path] = None):

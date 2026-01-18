@@ -2,8 +2,16 @@
 """
 Canonical Path Helpers
 
-Single source of truth for all artifact paths in CAT_CORTEX substrate.
+Single source of truth for all artifact paths in CAT_CHAT sandbox.
 Ensures consistency across all modules and prevents path mismatches.
+
+Structure:
+    THOUGHT/LAB/CAT_CHAT/
+        _generated/
+            cat_chat.db     # Single consolidated database
+            bundles/        # Bundle outputs
+
+On graduation, _generated/cat_chat.db moves to NAVIGATION/CORTEX/cassettes/cat_chat.db
 """
 
 import sqlite3
@@ -11,61 +19,58 @@ from pathlib import Path
 from typing import Optional
 
 
-def get_cortex_dir(repo_root: Optional[Path] = None) -> Path:
-    """Get CAT_CORTEX/_generated directory.
-    
+def get_generated_dir(repo_root: Optional[Path] = None) -> Path:
+    """Get _generated directory for CAT_CHAT sandbox.
+
     Args:
         repo_root: Repository root path. Defaults to current working directory.
-    
+
     Returns:
-        Path to CAT_CORTEX/_generated
+        Path to THOUGHT/LAB/CAT_CHAT/_generated
     """
     if repo_root is None:
         repo_root = Path.cwd()
-    
-    cortex_dir = repo_root / "THOUGHT" / "LAB" / "CAT_CHAT" / "CAT_CORTEX" / "_generated"
-    cortex_dir.mkdir(parents=True, exist_ok=True)
-    return cortex_dir
+
+    generated_dir = repo_root / "THOUGHT" / "LAB" / "CAT_CHAT" / "_generated"
+    generated_dir.mkdir(parents=True, exist_ok=True)
+    return generated_dir
 
 
-def get_db_path(repo_root: Optional[Path] = None, name: str = "system1.db") -> Path:
-    """Get path to a database file in CAT_CORTEX/_generated.
-    
+def get_cat_chat_db(repo_root: Optional[Path] = None) -> Path:
+    """Get path to the consolidated cat_chat.db.
+
+    All tables (index, cassette, session) are in this single database.
+
     Args:
         repo_root: Repository root path. Defaults to current working directory.
-        name: Database filename (e.g., "system1.db", "system3.db")
-    
+
     Returns:
-        Path to database file
+        Path to cat_chat.db
     """
-    cortex_dir = get_cortex_dir(repo_root)
-    db_path = cortex_dir / name
-    db_path.parent.mkdir(parents=True, exist_ok=True)
+    generated_dir = get_generated_dir(repo_root)
+    db_path = generated_dir / "cat_chat.db"
     return db_path
 
 
+# Legacy aliases - all point to consolidated DB
+def get_cortex_dir(repo_root: Optional[Path] = None) -> Path:
+    """Legacy alias for get_generated_dir."""
+    return get_generated_dir(repo_root)
+
+
+def get_db_path(repo_root: Optional[Path] = None, name: str = "cat_chat.db") -> Path:
+    """Get path to database file. Now always returns cat_chat.db."""
+    return get_cat_chat_db(repo_root)
+
+
 def get_system1_db(repo_root: Optional[Path] = None) -> Path:
-    """Get path to system1.db (sections, symbols, expansion_cache).
-    
-    Args:
-        repo_root: Repository root path. Defaults to current working directory.
-    
-    Returns:
-        Path to system1.db
-    """
-    return get_db_path(repo_root, "system1.db")
+    """Legacy alias - now points to consolidated cat_chat.db."""
+    return get_cat_chat_db(repo_root)
 
 
 def get_system3_db(repo_root: Optional[Path] = None) -> Path:
-    """Get path to system3.db (cassette_* tables).
-    
-    Args:
-        repo_root: Repository root path. Defaults to current working directory.
-    
-    Returns:
-        Path to system3.db
-    """
-    return get_db_path(repo_root, "system3.db")
+    """Legacy alias - now points to consolidated cat_chat.db."""
+    return get_cat_chat_db(repo_root)
 
 
 def get_sqlite_connection(db_path: Path) -> sqlite3.Connection:

@@ -59,9 +59,8 @@ class VectorStore:
         if db_path is not None:
             self.db_path = db_path
         else:
-            if repo_root is None:
-                repo_root = Path.cwd()
-            self.db_path = repo_root / "CORTEX" / "db" / "system1.db"
+            from ..paths import get_cat_chat_db
+            self.db_path = get_cat_chat_db(repo_root)
         
         self.db_path.parent.mkdir(parents=True, exist_ok=True)
         self._conn = None
