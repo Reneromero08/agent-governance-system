@@ -304,11 +304,15 @@ Cross-model semantic alignment via eigenvalue spectrum invariance.
 
 **Dependencies:** Phase 5 (MemoryRecord.scores.elo field), Phase 6 (Cassette Network)
 
-# Phase 8: Resident AI ✅ COMPLETE (2026-01-12)
+# Phase 8: Resident AI (8.0-8.5 COMPLETE, 8.6 NOT STARTED)
 
 **Canonical Roadmap:** [FERAL_RESIDENT_QUANTUM_ROADMAP.md](THOUGHT/LAB/FERAL_RESIDENT/FERAL_RESIDENT_QUANTUM_ROADMAP.md) (v2.1 with Geometric Foundation)
 
-The Feral Resident has completed all phases ahead of schedule:
+**Scope Clarification:**
+- **8.0-8.5 (COMPLETE):** Vector-based *memory and reasoning* - the Feral Resident uses geometric manifolds for semantic memory, recall, and swarm coordination. Embeddings at boundaries only, pure vector operations for reasoning.
+- **8.6 (NOT STARTED):** Vector-based *code execution* - executing actual code (fibonacci, map/reduce) entirely in vector space via a Vector ISA. This is a separate, long-horizon research initiative.
+
+The Feral Resident (8.0-8.5) has completed all phases ahead of schedule:
 
 | Phase | Name | Scope | Status |
 |-------|------|-------|--------|
@@ -371,7 +375,14 @@ The Feral Resident has completed all phases ahead of schedule:
 - [x] I.1 Cassette Network: `geometric_cassette.py` (~650 lines)
 - [x] I.2 CAT Chat: `geometric_chat.py` with E-gating
 
-## 8.6 Vector Execution (R.6) (P2, long-horizon)
+## 8.6 Vector Execution (R.6) - NOT STARTED (P2, long-horizon)
+
+**Status:** Design-only specification. Zero implementation work has begun.
+**Priority:** P2 (medium-low), long-horizon (year 2+ scope)
+**Distinct from 8.0-8.5:** This is about executing *code* in vector space (e.g., running fibonacci via vector ISA), NOT the vector-based memory/reasoning already implemented in the Feral Resident.
+
+**Research foundation exists:** HDC/VSA papers indexed (5), vec2text papers (5), CodeBERT citations documented in archived roadmap.
+
 - [ ] 8.6.1 Code vector representation research + implementation (R.6.1)
 - [ ] 8.6.2 Vector ISA design + interpreter (R.6.2)
 - [ ] 8.6.3 Hybrid execution runtime + fallback (R.6.3)
