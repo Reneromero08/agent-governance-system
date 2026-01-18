@@ -36,6 +36,7 @@ try:
     from .memory_cassette import MemoryCassette
     from .spc_metrics import SPCMetricsTracker, get_metrics_tracker
     from .codebook_sync import CodebookSync, SyncTuple, BlanketStatus
+    from .session_cache import SessionCache, estimate_tokens
 except ImportError:
     from spc_decoder import (
         SPCDecoder,
@@ -51,6 +52,7 @@ except ImportError:
     from memory_cassette import MemoryCassette
     from spc_metrics import SPCMetricsTracker, get_metrics_tracker
     from codebook_sync import CodebookSync, SyncTuple, BlanketStatus
+    from session_cache import SessionCache, estimate_tokens
 
 # Project root for default paths
 PROJECT_ROOT = Path(__file__).resolve().parents[3]
@@ -71,7 +73,8 @@ class SPCIntegration:
         db_path: Optional[Path] = None,
         codebook_path: Optional[Path] = None,
         auto_register: bool = True,
-        track_metrics: bool = True
+        track_metrics: bool = True,
+        enable_session_cache: bool = True
     ):
         """Initialize integrated SPC system.
 
@@ -80,6 +83,7 @@ class SPCIntegration:
             codebook_path: Path to CODEBOOK.json
             auto_register: If True, automatically register CAS lookup
             track_metrics: If True, track CDR/ECR metrics (Q33)
+            enable_session_cache: If True, enable L4 session caching
         """
         self.db_path = db_path or PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "db" / "memory.db"
         self.codebook_path = codebook_path or PROJECT_ROOT / "THOUGHT" / "LAB" / "COMMONSENSE" / "CODEBOOK.json"
@@ -100,6 +104,10 @@ class SPCIntegration:
         self._track_metrics = track_metrics
         self._metrics_tracker = SPCMetricsTracker() if track_metrics else None
 
+        # L4: Session cache for warm query compression
+        self._enable_session_cache = enable_session_cache
+        self._session_cache: Optional[SessionCache] = None
+
         if auto_register:
             self.enable_cas()
 
@@ -114,6 +122,79 @@ class SPCIntegration:
         if self._cas_registered:
             unregister_cas_lookup()
             self._cas_registered = False
+
+    # =========================================================================
+    # L4 SESSION CACHE METHODS
+    # =========================================================================
+
+    def bind_session(self, session_id: str) -> Dict:
+        """Bind to active session for L4 caching.
+
+        Creates a new SessionCache bound to the given session. Must be called
+        before resolve() can use session caching.
+
+        Args:
+            session_id: Unique session identifier
+
+        Returns:
+            Dict with cache initialization status
+        """
+        if not self._enable_session_cache:
+            return {"cache_initialized": False, "reason": "session_cache_disabled"}
+
+        self._session_cache = SessionCache(
+            session_id=session_id,
+            codebook_hash=self.decoder.codebook_hash
+        )
+
+        return {
+            "cache_initialized": True,
+            "session_id": session_id,
+            "codebook_hash": self.decoder.codebook_hash[:16]
+        }
+
+    def unbind_session(self) -> Dict:
+        """Unbind session and return cache stats.
+
+        Clears the session cache and returns final statistics.
+
+        Returns:
+            Dict with cache statistics from the session
+        """
+        if not self._session_cache:
+            return {"cache_stats": None, "reason": "no_active_session"}
+
+        stats = self._session_cache.get_stats().to_dict()
+        snapshot = self._session_cache.snapshot()
+        self._session_cache = None
+
+        return {
+            "cache_stats": stats,
+            "cache_snapshot": snapshot
+        }
+
+    def get_session_cache_snapshot(self) -> Optional[Dict]:
+        """Get current session cache snapshot for persistence.
+
+        Returns:
+            Cache snapshot dict or None if no active session
+        """
+        if not self._session_cache:
+            return None
+        return self._session_cache.snapshot()
+
+    def restore_session_cache(self, snapshot: Dict) -> int:
+        """Restore session cache from snapshot.
+
+        Args:
+            snapshot: Snapshot from get_session_cache_snapshot()
+
+        Returns:
+            Number of entries restored
+        """
+        if not self._session_cache:
+            return 0
+        return self._session_cache.restore(snapshot)
 
     def sync_handshake(self) -> Dict:
         """Perform sync handshake per CODEBOOK_SYNC_PROTOCOL.
@@ -184,7 +265,8 @@ class SPCIntegration:
         pointer: str,
         context_keys: Optional[Dict] = None,
         cache: bool = True,
-        record_metrics: bool = True
+        record_metrics: bool = True,
+        use_session_cache: bool = True
     ) -> Dict:
         """Resolve a pointer with full integration.
 
@@ -193,6 +275,7 @@ class SPCIntegration:
             context_keys: Context keys for disambiguation
             cache: Whether to cache the result
             record_metrics: Whether to record CDR/ECR metrics
+            use_session_cache: Whether to use L4 session cache
 
         Returns:
             Dict with resolution result
@@ -201,7 +284,23 @@ class SPCIntegration:
         if self._blanket_status != "ALIGNED":
             self.sync_handshake()
 
-        # Check cache first
+        # L4: Check session cache FIRST (highest priority)
+        if use_session_cache and self._session_cache:
+            entry = self._session_cache.get(pointer)
+            if entry:
+                # Session cache hit - return hash confirmation
+                return {
+                    "status": "SUCCESS",
+                    "source": "session_cache",
+                    "expansion_hash": entry.expansion_hash,
+                    "expansion": entry.expansion_text,
+                    "tokens_cold": entry.tokens_cold,
+                    "tokens_warm": 1,
+                    "tokens_saved": entry.tokens_cold - 1,
+                    "cache_hit": True
+                }
+
+        # Check pointer cache (L3 persistent cache)
         if cache:
             cached = self.memory.pointer_lookup(pointer)
             if cached:
@@ -239,6 +338,12 @@ class SPCIntegration:
                 target_hash=content_hash,
                 codebook_id=self._sync_tuple["codebook_id"] if self._sync_tuple else "ags-codebook"
             )
+
+            # L4: Store in session cache for warm query compression
+            if use_session_cache and self._session_cache:
+                expansion_text = self._get_expansion_text(expansion)
+                token_count = estimate_tokens(expansion_text)
+                self._session_cache.put(pointer, expansion_text, token_count)
 
             # Record metrics (Q33 CDR/ECR tracking)
             if record_metrics and self._metrics_tracker and self._track_metrics:
@@ -319,6 +424,12 @@ class SPCIntegration:
             "pointer_cache": self.memory.pointer_stats(),
             "memory_stats": self.memory.get_stats()
         }
+
+        # L4: Add session cache stats
+        if self._session_cache:
+            stats["session_cache"] = self._session_cache.get_stats().to_dict()
+        else:
+            stats["session_cache"] = None
 
         # Add CDR/ECR metrics (Q33)
         if self._metrics_tracker:

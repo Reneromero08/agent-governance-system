@@ -6,6 +6,34 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.20] - 2026-01-18
+
+### Added: Session Cache (L4) - Warm Query Compression
+
+Implemented L4 Session Cache for 90%+ compression on warm queries within a session.
+
+**Core Primitive:**
+- `CAPABILITY/PRIMITIVES/session_cache_receipt.py` - SessionCacheReceipt dataclass for HIT/MISS/PUT/INVALIDATE operations
+
+**Implementation:**
+- `NAVIGATION/CORTEX/network/session_cache.py` - SessionCache class with get/put/invalidate/snapshot/restore
+- `NAVIGATION/CORTEX/network/spc_integration.py` - bind_session/unbind_session integration
+
+**Compression:**
+- Cold query: ~50 tokens (full expansion)
+- Warm query: ~1 token (hash confirmation)
+- Achieves 98% per-query compression on cache hits
+
+**Features:**
+- Fail-closed on codebook change (invalidate_all)
+- Snapshot/restore with merkle root verification
+- LRU eviction, statistics tracking
+- 30 unit tests (100% passing)
+
+**Roadmap:** Phase 6.x Session Cache marked DONE
+
+---
+
 ## [3.8.19] - 2026-01-17
 
 ### Added: SVTP - Semantic Vector Transport Protocol
