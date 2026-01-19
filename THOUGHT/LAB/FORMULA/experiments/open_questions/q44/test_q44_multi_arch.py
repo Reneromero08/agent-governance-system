@@ -25,6 +25,17 @@ from q44_statistics import full_correlation_analysis, check_monotonicity
 
 
 # =============================================================================
+# Embedding Validation
+# =============================================================================
+
+def validate_embeddings(embeddings: np.ndarray) -> np.ndarray:
+    """Ensure embeddings are unit normalized."""
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    norms = np.where(norms > 1e-10, norms, 1.0)
+    return embeddings / norms
+
+
+# =============================================================================
 # Model Configurations
 # =============================================================================
 

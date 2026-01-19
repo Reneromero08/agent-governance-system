@@ -63,8 +63,9 @@ emergent spiral patterns (what we observe)
 
 1. **Pentagon diagonal/side ratio = phi** (1.618...)
 2. **72 degrees = 360/5** (pentagonal symmetry)
-3. **Solid angle from Q43: -4.7 rad = ~270 deg = 2 x golden angle** (275 deg)
-4. **180/phi^2 = 68.75 deg** (close to FastText's 66 deg)
+3. **180/phi^2 = 68.75 deg** (close to FastText's 66 deg)
+
+**Note on Q43 solid angle:** The Q43 solid angle measurement was corrected from -4.7 rad to mean: -0.10 rad (range: -0.60 to +0.41 rad). The previous value was from an incorrect PCA winding method. The "2 x golden angle" connection (2 x 137.5 deg = 275 deg = 4.8 rad) based on the old data is no longer supported.
 
 ## Open Questions
 

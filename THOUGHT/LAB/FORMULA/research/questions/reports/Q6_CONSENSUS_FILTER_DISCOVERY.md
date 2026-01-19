@@ -1,8 +1,8 @@
 # Q6 Resolution Report: The Consensus Filter Discovery
 
-**Date:** 2026-01-08  
-**Question:** Does R relate to Integrated Information (Phi)?  
-**Status:** DEFINITIVELY ANSWERED  
+**Date:** 2026-01-08 (updated 2026-01-18)
+**Question:** Does R relate to Integrated Information (Phi)?
+**Status:** DEFINITIVELY ANSWERED
 **Impact:** CRITICAL - Fundamentally redefines formula's scope and limitations
 
 ---
@@ -12,6 +12,19 @@
 We have rigorously proven that **R is not equivalent to Integrated Information (Phi)**. Instead, R measures a strict subset: **redundant integration** (consensus), while rejecting **synergistic integration** (distributed truth).
 
 This discovery reveals the formula's core philosophy: it is **epistemologically conservative**, demanding visible local agreement before signaling confidence, even when distributed sources collectively encode truth.
+
+**2026-01-18 UPDATE:** We now compute TRUE IIT Phi (with partition analysis), not just Multi-Information. The original "Phi" was actually Multi-Information (Total Correlation), which inflates true integration by 1.3x-3.0x. The core finding remains unchanged: R does not equal Phi.
+
+---
+
+## Important Terminology Clarification
+
+**The original "Phi" in this research was actually Multi-Information (Total Correlation)**, not TRUE IIT Phi:
+
+- **Multi-Information (Total Correlation)**: Sum of individual entropies minus joint entropy. Measures total shared information without partition analysis.
+- **TRUE IIT Phi**: Requires finding the Minimum Information Partition (MIP) - the partition that minimizes integrated information. TRUE Phi = Multi-Info - (Info across MIP).
+
+We now compute BOTH metrics to show that Multi-Information INFLATES the true integration measure.
 
 ---
 
@@ -23,27 +36,39 @@ We created three continuous sensor systems (10 trials, 4 sensors, 5000 samples e
 
 1. **Independent**: Random noise (no structure)
 2. **Redundant**: All sensors see the same value (consensus)
-3. **Synergistic (XOR)**: Sensors disagree wildly, but mean = truth exactly
+3. **Compensation** (formerly "XOR"): Sensors disagree wildly, but mean = truth exactly
 
-### Results
+**Note on naming:** The "XOR" system has been renamed to "Compensation" because:
+- It was never true XOR (binary exclusive-or)
+- It implements a forced compensation mechanism where sensors disagree but sum to truth
+- The name change is honest about what we're measuring
 
-| System | Phi (Integration) | R (Agreement) | Error | Dispersion |
-|--------|------------------|---------------|-------|------------|
-| **Synergistic** | **1.518 ± 0.026** | **0.364 ± 0.003** | **0.000** | **3.299** |
-| **Redundant** | **6.552 ± 0.083** | **>6B ± 33M** | 0.799 | **0.000** |
-| Independent | 0.179 ± 0.014 | 0.492 ± 0.004 | 0.797 | 1.597 |
+### Results (Updated with TRUE Phi)
+
+| System | Multi-Info | TRUE Phi | R | Inflation Factor |
+|--------|------------|----------|---|------------------|
+| **Independent** | 0.179 | 0.134 | 0.490 | 1.3x |
+| **Redundant** | 6.566 | 2.189 | 5.768 | 3.0x (worst!) |
+| **Compensation** | 1.505 | 0.836 | 0.364 | 1.8x |
 
 ### Key Finding: The Synergistic Divergence
 
-The XOR system demonstrates:
+The Compensation system demonstrates:
 - **Perfect collective accuracy**: Error = 0.0000 (mean equals truth)
 - **High dispersion**: Std = 3.299 (sensors disagree strongly)
-- **Phi detects structure**: 1.518 (8.5x higher than random)
+- **TRUE Phi detects structure**: 0.836 (6.2x higher than Independent's 0.134)
 - **R punishes disagreement**: 0.364 (LOW, despite perfect accuracy)
 
-**Separation ratios:**
-- Phi (XOR/Redundant): 0.23x
-- R (XOR/Redundant): 0.00000006x (**R drops 1 million times**)
+**Separation ratios (using TRUE Phi):**
+- TRUE Phi (Compensation/Redundant): 0.38x
+- R (Compensation/Redundant): 0.063x (**R drops ~16x**)
+
+### Key Insight: Multi-Information Inflation
+
+Multi-Information INFLATES the true integration measure:
+- Independent: 1.3x inflation (mild)
+- Compensation: 1.8x inflation (significant)
+- Redundant: 3.0x inflation (worst!)
 
 ---
 
@@ -51,21 +76,30 @@ The XOR system demonstrates:
 
 ### The Relationship
 
-**Proven:**
+**Proven (with TRUE Phi):**
 1. **High R → High Phi** (Sufficient condition)
-   - Redundant case: both metrics extremely high
-   
-2. **High Phi ↛ High R** (Not necessary)
-   - XOR case: Phi detects structure, R rejects it
+   - Redundant case: R=5.768, TRUE Phi=2.189
+
+2. **High Phi (does not imply) High R** (Not necessary)
+   - Compensation case: TRUE Phi=0.836 (detects structure), R=0.364 (rejects it)
 
 **Therefore:** R is a **strict subset** of Integrated Information.
 
+### Multi-Info vs TRUE Phi
+
+| Metric | What it measures | Inflation |
+|--------|------------------|-----------|
+| Multi-Information | Total shared info (no partition analysis) | 1.3x-3.0x |
+| TRUE IIT Phi | Info above minimum partition | Baseline (honest) |
+
+The original Q6 analysis used Multi-Information, which inflates integration. With TRUE Phi, the inflation is removed, but the core finding remains: **R does not equal Phi**.
+
 ### The Divergence
 
-**Phi (Integrated Information Theory):**
+**Phi (TRUE IIT, with partition analysis):**
 - Accepts ANY structure where Whole > Sum of Parts
 - Includes: Redundancy (consensus) AND Synergy (distributed truth)
-- Measures: "Is there constraint/structure?"
+- Measures: "Is there constraint/structure above minimum partition?"
 
 **R (The Formula):**
 - ONLY accepts low-dispersion structures
@@ -247,6 +281,14 @@ Whether this is appropriate for AGS depends on the answer to:
 
 ---
 
-**Test Code:** `experiments/open_questions/q6/q6_iit_rigorous_test.py`  
-**Full Analysis:** `research/questions/critical/q06_iit_connection.md`  
+**Test Code (original Multi-Info):** `experiments/open_questions/q6/q6_iit_rigorous_test.py`
+**Test Code (TRUE Phi):** `experiments/open_questions/q6/q6_true_iit_phi_test.py`
+**Full Analysis:** `research/questions/critical/q06_iit_connection.md`
 **Proof Status:** DEFINITIVE (5/5 criteria passed, statistical validation)
+
+**2026-01-18 Clarifications:**
+- Original "Phi" was Multi-Information (Total Correlation), not TRUE IIT Phi
+- TRUE IIT Phi requires partition analysis (finding Minimum Information Partition)
+- Multi-Information inflates integration by 1.3x-3.0x
+- "XOR" system renamed to "Compensation" (more honest naming)
+- Core finding unchanged: R does not equal Phi

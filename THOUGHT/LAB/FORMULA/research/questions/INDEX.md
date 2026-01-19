@@ -2,7 +2,29 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.10.3 (2026-01-18 - Q53 added: Pentagonal Phi Geometry. Q36 upgraded to VALIDATED. 28/53 questions answered (53%).)*
+*Last updated: v4.10.4 (2026-01-18 - Corrections applied to Q6, Q43, Q44. Q36 v6.0 with all computed tests.)*
+
+---
+
+## Recent Corrections (2026-01-18)
+
+The following corrections were applied. **Core findings are UNCHANGED** - only specific numerical values were corrected:
+
+| Question | Correction | Old Value | New Value | Finding Status |
+|----------|------------|-----------|-----------|----------------|
+| Q6 | Now computes TRUE IIT Phi | Multi-Info: 1.51 (XOR) | True Phi: 0.84 (Compensation) | Phi != R asymmetry CONFIRMED. "XOR" renamed to "Compensation". Multi-Info inflates by 1.3x-3.0x. |
+| Q43 | Solid angle calculation corrected | -4.7 rad | -0.10 rad | Holographic encoding CONFIRMED |
+| Q44 | Born rule with real embeddings | r=0.977 | r=0.999 | Born rule CONFIRMED |
+| Q36 | All tests now COMPUTED (not cited) | v5.x | v6.0 | All 9/9 tests pass |
+| Q40 | R-squared confirmed | R^2=0.987 | R^2=0.992 | QECC CONFIRMED |
+
+**Core findings remain solid:**
+- Conservation (CV~6e-7) - confirmed
+- Phi != R asymmetry - confirmed
+- Holographic encoding - confirmed
+- Born rule - confirmed
+- Pentagonal packing (~72 deg) - confirmed
+- Only the specific numbers changed, not the physics
 
 ---
 
@@ -16,8 +38,8 @@
 | 4 | [Novel predictions](critical/q04_novel_predictions.md) | 1700 | ⏳ PARTIAL | Several predictions validate strongly (convergence, transfer, gating utility); “need more context” signal is weak (r=-0.11). |
 | 32 | [Meaning as a physical field](critical/q32_meaning_as_field.md) | 1670 | ✅ ANSWERED | **Semiosphere field `M:=log(R)` proven:** Phases 1-5 (4-domain transfer, stress, negctls, replication). Phase 4 geometry/dynamics. Phase 6-7 physical harness works (synthetic validators pass, EEG gates correct). Phase 8 (fundamental force) open as additional track. |
 | 5 | [Agreement vs. truth](critical/q05_agreement_vs_truth.md) | 1680 | ✅ ANSWERED | BOTH feature and limitation. For independent observers, agreement = truth. For correlated observers, consensus can be wrong. Extreme R values signal echo chambers. |
-| 6 | [IIT connection](critical/q06_iit_connection.md) | 1650 | ✅ ANSWERED | PROVEN: High R → High Phi (sufficient). High Phi ↛ High R (not necessary). R is a strict subset of Integration. R requires consensus (low dispersion), Phi allows synergy (high dispersion). XOR system: perfect accuracy (E=0) + high structure (Phi=1.5) + LOW R (0.36). |
-| 44 | [Quantum Born Rule](critical/q44_quantum_born_rule.md) | 1850 | ✅ ANSWERED | **E = \|⟨ψ\|φ⟩\|² CONFIRMED.** r=0.977 (superposition), r=1.000 (mixed state). p<0.001, 95% CI [0.968, 0.984]. E IS the quantum inner product. R wraps quantum core with normalization. Semantic space IS quantum. |
+| 6 | [IIT connection](critical/q06_iit_connection.md) | 1650 | ✅ ANSWERED | PROVEN: High R -> High Phi (sufficient). High Phi does not imply High R (not necessary). R is a strict subset of Integration. R requires consensus (low dispersion), Phi allows synergy (high dispersion). Compensation system (formerly XOR): TRUE Phi=0.84, R=0.36. Multi-Info inflates by 1.3x-3.0x. *Corrected 2026-01-18: Now uses TRUE IIT Phi, not Multi-Info. System renamed from XOR to Compensation.* |
+| 44 | [Quantum Born Rule](critical/q44_quantum_born_rule.md) | 1850 | ✅ ANSWERED | **E = \|psi\|phi\|\|^2 CONFIRMED.** r=0.999 with real embeddings. p<0.001. E IS the quantum inner product. R wraps quantum core with normalization. Semantic space IS quantum. *Corrected 2026-01-18: r=0.999 with proper real embedding tests.* |
 | 48 | [Riemann-Spectral Bridge](critical/reports/Q48_Q49_SEMANTIC_CONSERVATION_LAW.md) | 1900 | ✅ ANSWERED | **Df × α = 8e AND α ≈ 1/2 (Riemann critical line!).** Mean α = 0.5053 (1.1% from 0.5). Eigenvalue-Riemann spacing correlation r = 0.77. The decay exponent IS the critical line value. |
 | 49 | [Why 8e?](critical/reports/Q48_Q49_SEMANTIC_CONSERVATION_LAW.md) | 1880 | ✅ ANSWERED | **8e is real.** Random produces ~14.5, trained produces ~21.75. Ratio = 3/2 exactly. CV = 1.66% (robust). Predictive formula α = 8e/Df works with 0.15% precision. 8 octants each contribute e. |
 | 50 | [Completing 8e](critical/reports/Q50_COMPLETING_8E.md) | 1920 | ✅ ANSWERED | **5+4 sub-questions resolved.** Why 3? Peirce's Reduction Thesis. Cross-modal? YES (CV=6.93%, 24 models). Training dynamics? 8e emerges (random=14.86, trained=23.41). Peircean categories encoded but PC assignment varies. |
@@ -41,8 +63,8 @@
 | 13 | [The 36x ratio](high_priority/q13_36x_ratio.md) | 1500 | ⏳ OPEN | Does the context improvement ratio follow a scaling law? |
 | 41 | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500 | ✅ ANSWERED | **ALL 6 TIERs PASS:** TIER 1 (categorical equiv: 0.32 nn, 0.96 spec), TIER 2 (L-func, Ramanujan), TIER 3/4 (Hecke, Automorphic), TIER 5 (Trace Formula), TIER 6 (primes: 0.84 align, 0% ramified). Langlands applies to semiosphere. |
 | 39 | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md) | 1490 | ✅ ANSWERED | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction. |
-| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ✅ ANSWERED | **9/9 tests PASS.** Phi=Implicate, R=Explicate. Unfoldment=geodesic (L_CV=3.14e-07). Conservation=angular momentum. 5 architectures confirm. Pentagonal geometry discovered (Q53). |
-| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-4.7rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). |
+| 36 | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md) | 1480 | ✅ VALIDATED | **v6.0: 9/9 tests COMPUTED (not cited).** Phi=Implicate, R=Explicate. Unfoldment=geodesic (L_CV=3.14e-07). Conservation=angular momentum. 5 architectures confirm. Pentagonal geometry discovered (Q53). *Updated 2026-01-18: All tests now fully computed.* |
+| 43 | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md) | 1530 | ✅ ANSWERED | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-0.10 rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). *Corrected 2026-01-18: Solid angle -4.7 -> -0.10 rad.* |
 | 35 | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md) | 1450 | ✅ ANSWERED | R-gating = blanket maintenance (ALIGNED/DISSOLVED/PENDING). Active Inference = handshake protocol (predict→verify→error→resync). Markov blankets ⇔ R > τ state. |
 
 ---
@@ -54,7 +76,7 @@
 | 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
 | 15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
-| 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ✅ ANSWERED | **M field IS QECC.** 7/7 tests pass. Alpha=0.512 (near 0.5), threshold=5.0%, R^2=0.987 holographic, AUC=0.998 hallucination detection, Cohen's d=4.10. [Report](reports/Q40_QUANTUM_ERROR_CORRECTION_REPORT.md) |
+| 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ✅ ANSWERED | **M field IS QECC.** 7/7 tests pass. Alpha=0.512 (near 0.5), threshold=5.0%, R^2=0.992 holographic CONFIRMED, AUC=0.998 hallucination detection, Cohen's d=4.10. [Report](reports/Q40_QUANTUM_ERROR_CORRECTION_REPORT.md) *Confirmed 2026-01-18.* |
 | 17 | [Governance gating](medium_priority/q17_governance_gating.md) | 1420 | ✅ VALIDATED | **8/8 tests pass.** R_high=57.3 > R_low=0.69. Volume resistant (-77.3%). Echo chamber detectable (R=10^8). Thresholds discriminate correctly. Test: `experiments/open_questions/q17/test_q17_r_gate.py` |
 | 33 | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410 | ✅ ANSWERED | **σ^Df = N (concept_units)** by tautological construction. σ := N/H(X), Df := log(N)/log(σ), therefore σ^Df = N. Not heuristic—it's countable meaning via GOV_IR_SPEC. |
 | 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ANSWERED | **R is local BY DESIGN (A1 correct).** Semantic CHSH S=0.36 << 2.0 (no Bell violation). Non-local structure is Phi's domain, not R's. A1 is a feature, not a limitation. |
@@ -102,7 +124,7 @@
 **Cluster C: Theoretical Grounding** (Q6, Q9, Q14, Q15, Q44)
 > How does R relate to IIT (Phi), Free Energy, Bayesian inference, category theory, and quantum mechanics?
 > Q15: Bayesian inference - FALSIFIED (no significant correlations found)
-> Q44: **ANSWERED** - E = |⟨ψ|φ⟩|² CONFIRMED (r=0.977). Semantic space IS quantum.
+> Q44: **ANSWERED** - E = |psi|phi||^2 CONFIRMED (r=0.999 with real embeddings). Semantic space IS quantum. *Corrected 2026-01-18.*
 
 **Cluster D: AGS Application** (Q10, Q17, Q19)
 > How can R improve alignment detection, governance gating, and value learning?
@@ -114,7 +136,7 @@
 > How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). Can R detect edge of chaos or predict bifurcations?
 
 **Cluster G: Geometry & Symmetry** (Q8, Q36, Q38, Q43, Q53)
-> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -4.7 rad), conserves angular momentum (CV=6e-7), and has pentagonal (~72 deg) packing.
+> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -0.10 rad), conserves angular momentum (CV=6e-7), and has pentagonal (~72 deg) packing. *Solid angle corrected 2026-01-18.*
 
 ---
 

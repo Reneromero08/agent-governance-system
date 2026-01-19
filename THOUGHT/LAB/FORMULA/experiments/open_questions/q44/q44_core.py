@@ -79,10 +79,10 @@ def compute_born_probability(
     psi = normalize(query_vec)
 
     # Context superposition: |phi_context> = (1/sqrt(n)) * sum(|phi_i>)
-    # This creates a normalized superposition state
     phi_sum = np.sum(context_vecs, axis=0)
     phi_context = phi_sum / np.sqrt(len(context_vecs))
-    phi_context = normalize(phi_context)
+    # DO NOT normalize again - the norm carries information about coherence
+    # phi_context = normalize(phi_context)  # REMOVED: double normalization
 
     # Born rule: |<psi|phi>|^2
     overlap = np.dot(psi, phi_context)
@@ -169,9 +169,8 @@ def compute_grad_S(overlaps: List[float]) -> float:
     (not 1e-6) to avoid artificially inflating R values.
     """
     if len(overlaps) < 2:
-        # Single context: return 1.0 to keep R = E (no scaling)
-        return 1.0
-    return float(max(np.std(overlaps, ddof=1), 1e-6))
+        return 1.0  # Single context
+    return float(max(np.std(overlaps, ddof=0), 1e-6))  # Use population std
 
 
 def compute_sigma(n_context: int) -> float:
@@ -360,8 +359,8 @@ def compute_R_simple(
     # E = mean overlap
     E = np.mean(overlaps)
 
-    # grad_S = std of overlaps
-    grad_S = max(np.std(overlaps), 1e-6) if len(overlaps) > 1 else 1e-6
+    # grad_S = std of overlaps (population std, consistent with compute_grad_S)
+    grad_S = float(max(np.std(overlaps, ddof=0), 1e-6)) if len(overlaps) > 1 else 1.0
 
     # R_simple
     R_simple = E / grad_S
@@ -392,7 +391,7 @@ def compute_E_squared_R(
     overlaps = [float(np.dot(psi, phi)) for phi in context_normalized]
     E = np.mean(overlaps)
     E_squared = E ** 2
-    grad_S = max(np.std(overlaps), 1e-6) if len(overlaps) > 1 else 1e-6
+    grad_S = float(max(np.std(overlaps, ddof=0), 1e-6)) if len(overlaps) > 1 else 1.0
 
     R_E2 = E_squared / grad_S
     P_born = compute_born_probability(psi, context_normalized)

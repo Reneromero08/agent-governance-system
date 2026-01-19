@@ -6,9 +6,18 @@ with optional C library acceleration via ctypes.
 
 Key functions:
 - fubini_study_metric(): Compute the Fubini-Study metric tensor
-- berry_phase(): Compute Berry phase around closed loops
+- pca_winding_angle(): Compute winding angle in 2D PCA projection
+  (NOTE: This is NOT true Berry phase - see docstring for details)
+- spherical_excess(): Compute spherical excess (solid angle) on S^{d-1}
+- holonomy(): Parallel transport a vector around a closed loop
+- holonomy_angle(): Compute rotation angle from holonomy
 - participation_ratio(): Effective dimensionality (Df)
 - natural_gradient(): QGT-based gradient for compass mode
+
+IMPORTANT CORRECTIONS (2025):
+- berry_phase() was misnamed - it computes PCA winding angle, not Berry phase
+- chern_number_estimate() is invalid for real bundles (Chern numbers require
+  complex structure). This function is deprecated and should not be used.
 
 References:
 - Q43: Quantum Geometric Tensor for Semiosphere
@@ -190,15 +199,18 @@ def berry_connection(path: np.ndarray) -> np.ndarray:
     return angles
 
 
-def berry_phase(path: np.ndarray, closed: bool = True) -> float:
+def pca_winding_angle(path: np.ndarray, closed: bool = True) -> float:
     """
-    Compute the Berry phase as winding angle in 2D PCA projection.
+    Compute the winding angle in 2D PCA projection.
 
-    For high-dimensional embeddings, project to 2D via PCA and
-    compute the winding angle (total angle swept in complex plane).
+    WARNING: This is NOT the actual Berry phase on S^{d-1}.
+    It computes how much the path winds around in the top 2 PCA
+    dimensions, which is a proxy for geometric structure but not
+    a rigorous topological invariant.
 
-    This is more robust than spherical excess for high-D data where
-    the (n-2)*pi correction assumes 2D geometry.
+    For true Berry phase on high-dimensional spheres, you need:
+    - Holonomy via parallel transport (see holonomy() function)
+    - Or integration of the Berry connection around the loop
 
     Args:
         path: (n_points, dim) array of embeddings forming a loop
@@ -206,7 +218,7 @@ def berry_phase(path: np.ndarray, closed: bool = True) -> float:
         closed: Whether to close the loop (connect last to first)
 
     Returns:
-        Berry phase (winding angle) in radians
+        Winding angle in radians (can be negative)
     """
     path = normalize_embeddings(path)
 
@@ -238,19 +250,102 @@ def berry_phase(path: np.ndarray, closed: bool = True) -> float:
     return winding_angle
 
 
-def holonomy(path: np.ndarray, vector: np.ndarray) -> np.ndarray:
+# Alias for backward compatibility (deprecated)
+def berry_phase(path: np.ndarray, closed: bool = True) -> float:
     """
-    Parallel transport a vector around a closed loop.
+    DEPRECATED: Use pca_winding_angle() instead.
 
-    The holonomy is the rotation of the vector after parallel transport
-    around a closed loop. Non-trivial holonomy indicates curvature.
+    This function was misnamed - it computes PCA winding angle,
+    not the actual Berry phase. See pca_winding_angle() docstring
+    for details.
+    """
+    warnings.warn(
+        "berry_phase() is deprecated and misnamed. Use pca_winding_angle() instead. "
+        "This function computes 2D PCA winding, NOT the actual Berry phase on S^{d-1}.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+    return pca_winding_angle(path, closed)
+
+
+def spherical_excess(path: np.ndarray) -> float:
+    """
+    Compute the spherical excess (solid angle) of a closed loop on S^{d-1}.
+
+    For a polygon on a sphere, the spherical excess is:
+    Omega = sum of interior angles - (n-2)*pi
+
+    NOTE: This requires computing INTERIOR ANGLES at each vertex,
+    not the arc lengths between vertices.
 
     Args:
-        path: (n_points, dim) embeddings forming a closed loop
-        vector: (dim,) tangent vector to transport
+        path: (n_points, dim) array of embeddings forming a closed loop
 
     Returns:
-        Transported vector after completing the loop
+        Spherical excess in radians
+    """
+    path = normalize_embeddings(path)
+    n = len(path)
+    if n < 3:
+        return 0.0
+
+    # Ensure closed
+    if not np.allclose(path[0], path[-1]):
+        path = np.vstack([path, path[0:1]])
+        n += 1
+
+    # Compute interior angles at each vertex
+    interior_angles = []
+    for i in range(n - 1):
+        # Vectors from vertex i to neighbors
+        prev_idx = (i - 1) % (n - 1)
+        next_idx = (i + 1) % (n - 1)
+
+        v_prev = path[prev_idx] - path[i]
+        v_next = path[next_idx] - path[i]
+
+        # Project to tangent space at path[i]
+        normal = path[i]
+        v_prev = v_prev - np.dot(v_prev, normal) * normal
+        v_next = v_next - np.dot(v_next, normal) * normal
+
+        # Angle between tangent vectors
+        norm_prev = np.linalg.norm(v_prev)
+        norm_next = np.linalg.norm(v_next)
+        if norm_prev > 1e-10 and norm_next > 1e-10:
+            cos_angle = np.dot(v_prev, v_next) / (norm_prev * norm_next)
+            cos_angle = np.clip(cos_angle, -1, 1)
+            interior_angles.append(np.arccos(cos_angle))
+
+    # Spherical excess
+    sum_angles = sum(interior_angles)
+    flat_sum = (len(interior_angles) - 2) * np.pi
+    return sum_angles - flat_sum
+
+
+def holonomy(path: np.ndarray, vector: np.ndarray) -> np.ndarray:
+    """
+    Parallel transport a vector around a closed loop on S^{d-1}.
+
+    The holonomy is the rotation of a tangent vector after parallel transport
+    around a closed loop. Non-trivial holonomy indicates intrinsic curvature
+    of the manifold.
+
+    This implementation uses a simple projection-based approximation to
+    parallel transport (Schild's ladder approximation). For each step:
+    1. The vector is projected onto the tangent space at the next point
+    2. The vector is re-normalized to preserve unit length
+
+    Note: This is an approximation that works well for small steps.
+    For accurate parallel transport, finer path discretization is needed.
+
+    Args:
+        path: (n_points, dim) embeddings forming a closed loop on S^{d-1}
+        vector: (dim,) tangent vector to transport (will be projected to
+                tangent space at path[0])
+
+    Returns:
+        Transported vector after completing the loop (in tangent space at path[0])
     """
     path = normalize_embeddings(path)
 
@@ -259,17 +354,18 @@ def holonomy(path: np.ndarray, vector: np.ndarray) -> np.ndarray:
         path = np.vstack([path, path[0:1]])
 
     v = vector.copy()
-    v = v - np.dot(v, path[0]) * path[0]  # Project to tangent space
+    # Initial projection to tangent space at path[0]
+    v = v - np.dot(v, path[0]) * path[0]
     v = v / (np.linalg.norm(v) + 1e-10)
 
     for i in range(len(path) - 1):
         p1, p2 = path[i], path[i + 1]
 
-        # Parallel transport from p1 to p2
-        # Project v onto tangent space at p2
-        v = v - np.dot(v, p2) * p2
+        # Transport v from tangent space at p1 to tangent space at p2
+        # Using Schild's ladder approximation for parallel transport
 
-        # Normalize (preserve length)
+        # Project v to tangent space at p2
+        v = v - np.dot(v, p2) * p2
         norm = np.linalg.norm(v)
         if norm > 1e-10:
             v = v / norm
@@ -392,29 +488,52 @@ def create_analogy_loop(
     return np.array(loop)
 
 
-def analogy_berry_phase(
+def analogy_winding_angle(
     embeddings: dict,
     analogy: Tuple[str, str, str, str]
 ) -> float:
     """
-    Compute Berry phase for a word analogy loop.
+    Compute PCA winding angle for a word analogy loop.
 
     Standard analogy format: (a, b, c, d) where a:b :: c:d
     Example: ("king", "queen", "man", "woman")
 
-    Creates loop: a → b → d → c → a
+    Creates loop: a -> b -> d -> c -> a
     (This traces the parallelogram of the analogy)
+
+    Note: This computes PCA winding angle, not true Berry phase.
+    See pca_winding_angle() for details.
 
     Args:
         embeddings: Dict mapping words to embedding vectors
         analogy: Tuple of (a, b, c, d) for a:b :: c:d
 
     Returns:
-        Berry phase in radians
+        Winding angle in radians
     """
     a, b, c, d = analogy
     loop = create_analogy_loop(embeddings, [a, b, d, c])
-    return berry_phase(loop, closed=True)
+    return pca_winding_angle(loop, closed=True)
+
+
+# Alias for backward compatibility (deprecated)
+def analogy_berry_phase(
+    embeddings: dict,
+    analogy: Tuple[str, str, str, str]
+) -> float:
+    """
+    DEPRECATED: Use analogy_winding_angle() instead.
+
+    This function was misnamed - it computes PCA winding angle,
+    not the actual Berry phase.
+    """
+    warnings.warn(
+        "analogy_berry_phase() is deprecated and misnamed. "
+        "Use analogy_winding_angle() instead.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+    return analogy_winding_angle(embeddings, analogy)
 
 
 # =============================================================================
@@ -427,16 +546,20 @@ def chern_number_estimate(
     seed: int = 42
 ) -> float:
     """
-    Estimate the Chern number by Monte Carlo integration of Berry curvature.
+    DEPRECATED / INVALID: Chern numbers are undefined for real vector bundles.
 
-    For real embeddings, the local Berry curvature is zero, but we can
-    estimate a discrete Chern-like invariant from the topology of the
-    embedding distribution.
+    This function computes a Monte Carlo average of winding angles,
+    which is NOT a Chern number. The result is not a topological
+    invariant and has no rigorous mathematical meaning.
 
-    This uses random triangulations to estimate the integrated curvature.
+    Kept for historical reference only. DO NOT use for claims about
+    topological protection.
 
-    WARNING: This is an approximation. True Chern numbers require
-    complex structure or proper fiber bundle formulation.
+    Mathematical issues:
+    - Chern numbers require complex line bundles (U(1) structure)
+    - Real vector bundles have Stiefel-Whitney classes, not Chern classes
+    - The "Berry phase" used here is actually PCA winding angle
+    - Random triangle sampling does not approximate any well-defined integral
 
     Args:
         embeddings: (n_samples, dim) array of embeddings
@@ -444,8 +567,17 @@ def chern_number_estimate(
         seed: Random seed
 
     Returns:
-        Estimated Chern number (should be integer-ish if well-defined)
+        A meaningless number that is NOT a Chern number
     """
+    warnings.warn(
+        "chern_number_estimate() is mathematically invalid for real bundles. "
+        "Chern numbers are only defined for complex vector bundles. "
+        "This function returns a meaningless value and should not be used "
+        "for claims about topological protection.",
+        DeprecationWarning,
+        stacklevel=2
+    )
+
     np.random.seed(seed)
     embeddings = normalize_embeddings(embeddings)
     n_points = len(embeddings)
@@ -457,12 +589,11 @@ def chern_number_estimate(
         idx = np.random.choice(n_points, size=3, replace=False)
         triangle = embeddings[idx]
 
-        # Compute Berry phase around triangle
-        phase = berry_phase(triangle, closed=True)
+        # Compute winding angle around triangle (NOT Berry phase)
+        phase = pca_winding_angle(triangle, closed=True)
         total_phase += phase
 
-    # Average phase per triangle, scaled to approximate Chern number
-    # Chern = (1/2π) ∫ Ω
+    # Average phase per triangle, scaled (but NOT a Chern number)
     avg_phase = total_phase / n_samples
     chern_estimate = avg_phase / (2 * np.pi)
 
@@ -633,13 +764,30 @@ if __name__ == "__main__":
     print(f"  Low-rank Df: {pr:.1f} (expected ~22)")
     print()
 
-    # Test Berry phase
-    print("Testing Berry phase with random loop:")
+    # Test PCA winding angle (formerly misnamed "Berry phase")
+    print("Testing PCA winding angle with random loop:")
     loop = np.random.randn(4, 768)
-    phase = berry_phase(loop)
-    print(f"  Berry phase: {phase:.4f} rad ({np.degrees(phase):.2f} deg)")
+    winding = pca_winding_angle(loop)
+    print(f"  PCA winding angle: {winding:.4f} rad ({np.degrees(winding):.2f} deg)")
     print()
 
-    # Full analysis
-    print("Full QGT analysis:")
-    analyze_qgt_structure(low_rank)
+    # Test spherical excess
+    print("Testing spherical excess with random triangle:")
+    triangle = np.random.randn(3, 768)
+    excess = spherical_excess(triangle)
+    print(f"  Spherical excess: {excess:.4f} rad ({np.degrees(excess):.2f} deg)")
+    print()
+
+    # Test holonomy
+    print("Testing holonomy with random loop:")
+    loop = np.random.randn(5, 768)
+    vector = np.random.randn(768)
+    angle = holonomy_angle(loop, vector)
+    print(f"  Holonomy angle: {angle:.4f} rad ({np.degrees(angle):.2f} deg)")
+    print()
+
+    # Full analysis (note: chern_number_estimate will warn)
+    print("Full QGT analysis (expect deprecation warning for Chern estimate):")
+    with warnings.catch_warnings():
+        warnings.simplefilter("always")
+        analyze_qgt_structure(low_rank)

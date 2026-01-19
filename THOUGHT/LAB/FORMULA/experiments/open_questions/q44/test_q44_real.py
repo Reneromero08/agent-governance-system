@@ -29,6 +29,17 @@ from q44_statistics import (
 
 
 # =============================================================================
+# Embedding Validation
+# =============================================================================
+
+def validate_embeddings(embeddings: np.ndarray) -> np.ndarray:
+    """Ensure embeddings are unit normalized."""
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    norms = np.where(norms > 1e-10, norms, 1.0)
+    return embeddings / norms
+
+
+# =============================================================================
 # Embedding with REAL model
 # =============================================================================
 
@@ -79,7 +90,9 @@ def compute_born_probability_mixed(query_vec: np.ndarray, context_vecs: List[np.
     """
     if len(context_vecs) == 0:
         return 0.0
-    return float(np.mean([abs(np.dot(query_vec, phi))**2 for phi in context_vecs]))
+    # NORMALIZE query vector
+    psi = query_vec / (np.linalg.norm(query_vec) + 1e-15)
+    return float(np.mean([abs(np.dot(psi, phi))**2 for phi in context_vecs]))
 
 
 # =============================================================================

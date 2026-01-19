@@ -134,8 +134,8 @@ def permutation_test(
 
     null_correlations = np.array(null_correlations)
 
-    # One-tailed p-value (testing rho > 0)
-    p_value = float(np.mean(null_correlations >= observed_corr))
+    # Two-tailed p-value for correlation test
+    p_value = float(np.mean(np.abs(null_correlations) >= np.abs(observed_corr)))
 
     return p_value, list(null_correlations)
 
@@ -211,8 +211,8 @@ def full_correlation_analysis(
         R_values, P_values, n_permutations, seed=seed
     )
 
-    # Verdict based on normalized correlation
-    verdict = get_verdict(r_normalized)
+    # Verdict based on raw correlation (not normalized)
+    verdict = get_verdict(r)
 
     return CorrelationResult(
         r=r,

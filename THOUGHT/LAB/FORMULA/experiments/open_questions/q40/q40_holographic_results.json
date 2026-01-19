@@ -1,0 +1,199 @@
+{
+  "test_id": "q40-holographic-actual",
+  "timestamp": "2026-01-19T02:26:23.119806+00:00",
+  "semantic": {
+    "reconstruction": {
+      "mask_fractions": [
+        0.1,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "r_squared": [
+        0.9955156760057434,
+        0.992268797988072,
+        0.9758280396461487,
+        0.8428087398409844
+      ],
+      "r_squared_std": [
+        0.0003400006610067826,
+        0.00040193516835709863,
+        0.0009824005414033603,
+        0.0033350190489611423
+      ]
+    },
+    "boundary_bulk": {
+      "n_components": [
+        2,
+        5,
+        10,
+        20,
+        50
+      ],
+      "r_squared": [
+        0.20012086667788112,
+        0.40642439935136954,
+        0.5135071389088007,
+        0.6091894251311355,
+        0.6582343471362221
+      ],
+      "correlation": [
+        0.447348708143749,
+        0.6375142346264666,
+        0.7165941242494253,
+        0.7805058777044126,
+        0.8113164284890465
+      ]
+    },
+    "entropy_scaling": {
+      "subsystem_fractions": [
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5
+      ],
+      "boundary_size": [
+        30,
+        60,
+        90,
+        120,
+        150
+      ],
+      "entropy": [
+        0.6412946581840515,
+        0.9095813035964966,
+        1.0723178386688232,
+        1.146858811378479,
+        1.1733468770980835
+      ],
+      "volume": [
+        30,
+        60,
+        90,
+        120,
+        150
+      ],
+      "area_law_r_squared": 0.9817211862286465,
+      "volume_law_r_squared": 0.8772791654914268,
+      "area_law_slope": 0.3481833287066738,
+      "area_vs_volume": "area"
+    }
+  },
+  "random_baseline": {
+    "reconstruction": {
+      "mask_fractions": [
+        0.1,
+        0.25,
+        0.5,
+        0.75
+      ],
+      "r_squared": [
+        0.6616339902704342,
+        0.6019315087667432,
+        0.47277993680669594,
+        0.2820910414662835
+      ],
+      "r_squared_std": [
+        0.0025953284806260486,
+        0.003706960525100261,
+        0.00442104495641385,
+        0.0016414960251712294
+      ]
+    },
+    "boundary_bulk": {
+      "n_components": [
+        2,
+        5,
+        10,
+        20,
+        50
+      ],
+      "r_squared": [
+        0.08420810408971106,
+        0.22359656374088985,
+        0.4127604040219375,
+        0.6634344198151113,
+        0.9055018414633653
+      ],
+      "correlation": [
+        0.2901863265036984,
+        0.4728599832306492,
+        0.6424643212054172,
+        0.8145148370748757,
+        0.9515786049840367
+      ]
+    },
+    "entropy_scaling": {
+      "subsystem_fractions": [
+        0.1,
+        0.2,
+        0.3,
+        0.4,
+        0.5
+      ],
+      "boundary_size": [
+        30,
+        60,
+        90,
+        120,
+        150
+      ],
+      "entropy": [
+        3.2016400047409963,
+        3.6730770316119545,
+        3.859301294386064,
+        3.9340553041033175,
+        3.9501710606415013
+      ],
+      "volume": [
+        30,
+        60,
+        90,
+        120,
+        150
+      ],
+      "area_law_r_squared": 0.9423124638534671,
+      "volume_law_r_squared": 0.7944534262058446,
+      "area_law_slope": 0.4842505417185155,
+      "area_vs_volume": "area"
+    }
+  },
+  "comparison": {
+    "reconstruction_r2": {
+      "semantic": 0.992268797988072,
+      "random": 0.6019315087667432,
+      "semantic_better": true
+    },
+    "boundary_bulk_r2": {
+      "semantic": 0.5135071389088007,
+      "random": 0.4127604040219375,
+      "semantic_better": true
+    },
+    "area_law_r2": {
+      "semantic": 0.9817211862286465,
+      "random": 0.9423124638534671,
+      "semantic_better": true
+    }
+  },
+  "verdict": {
+    "reconstruction_holographic": true,
+    "reconstruction_r2": 0.992268797988072,
+    "boundary_bulk_holographic": true,
+    "boundary_bulk_r2": 0.5135071389088007,
+    "area_law_holds": true,
+    "semantic_better_than_random": true,
+    "semantic_advantage_reconstruction": 0.3903372892213288,
+    "semantic_advantage_bb": 0.10074673488686325,
+    "overall_pass": true,
+    "key_metrics": {
+      "reconstruction_r2_25pct_mask": 0.992268797988072,
+      "boundary_bulk_r2_10_components": 0.5135071389088007,
+      "area_law_r2": 0.9817211862286465
+    }
+  },
+  "embedding_source": "glove-wiki-gigaword-300",
+  "n_words": 84,
+  "dim": 300,
+  "receipt_hash": "4f52f89edad6cd54"
+}

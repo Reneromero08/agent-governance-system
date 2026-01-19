@@ -40,6 +40,17 @@ from q44_statistics import (
 )
 
 
+# =============================================================================
+# Embedding Validation
+# =============================================================================
+
+def validate_embeddings(embeddings: np.ndarray) -> np.ndarray:
+    """Ensure embeddings are unit normalized."""
+    norms = np.linalg.norm(embeddings, axis=1, keepdims=True)
+    norms = np.where(norms > 1e-10, norms, 1.0)
+    return embeddings / norms
+
+
 def run_single_test(test_case: Dict[str, Any], dim: int = 384) -> Dict[str, Any]:
     """
     Run a single test case comparing R to Born rule probability.

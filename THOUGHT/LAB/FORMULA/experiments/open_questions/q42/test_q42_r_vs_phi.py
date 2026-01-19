@@ -4,15 +4,25 @@ Q42 Test 4: R vs Phi Complementarity
 
 PURPOSE: Test whether R and Phi together capture complete structure.
 
+TERMINOLOGY CLARIFICATION:
+--------------------------
+- R = consensus/agreement metric (E/sigma formula)
+- Phi = integrated information (IIT metric)
+- CHSH S = Bell inequality statistic (separate from R!)
+
+The value R=0.364 for XOR systems is an R consensus value.
+This is UNRELATED to the CHSH S statistic used in Bell tests.
+Do not confuse R=0.36 with CHSH S=0.36 - they measure different things.
+
 From Q6 (IIT Connection - ANSWERED):
-- High R → High Phi (sufficient)
-- High Phi ↛ High R (not necessary)
+- High R -> High Phi (sufficient)
+- High Phi -/-> High R (not necessary)
 - XOR system: Phi=1.518, R=0.364 (high structure, low consensus)
 
 This supports H2: R measures Explicate Order, Phi measures Implicate Order.
 
 Test criteria for H2:
-- R ⊥ Phi on synergistic systems (ρ < -0.5)
+- R and Phi are complementary on synergistic systems
 - Joint (R, Phi) predicts better than either alone
 - XOR case reproduces Q6 finding
 

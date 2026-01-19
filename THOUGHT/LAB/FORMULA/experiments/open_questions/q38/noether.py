@@ -42,6 +42,14 @@ except ImportError:
 
 
 # =============================================================================
+# Threshold Constants
+# =============================================================================
+
+CV_THRESHOLD_CONSERVED = 0.01  # 1% variation threshold for conservation
+CV_THRESHOLD_STRICT = 1e-5    # Machine precision threshold
+
+
+# =============================================================================
 # Core Normalization (fallback if QGT not available)
 # =============================================================================
 
@@ -120,7 +128,7 @@ def sphere_geodesic_trajectory(
     return trajectory
 
 
-def geodesic_velocity(trajectory: np.ndarray) -> np.ndarray:
+def geodesic_velocity(trajectory: np.ndarray, t_max: float = 1.0) -> np.ndarray:
     """
     Compute velocity (tangent vector) along trajectory.
 
@@ -128,6 +136,7 @@ def geodesic_velocity(trajectory: np.ndarray) -> np.ndarray:
 
     Args:
         trajectory: (n_steps, d) array of points
+        t_max: Maximum time parameter (used to compute dt)
 
     Returns:
         (n_steps, d) array of velocities (endpoints use one-sided diff)
@@ -135,14 +144,19 @@ def geodesic_velocity(trajectory: np.ndarray) -> np.ndarray:
     n = len(trajectory)
     velocities = np.zeros_like(trajectory)
 
+    if n > 1:
+        dt = t_max / (n - 1)
+    else:
+        dt = 1.0
+
     # Central difference for interior points
     if n > 2:
-        velocities[1:-1] = (trajectory[2:] - trajectory[:-2]) / 2.0
+        velocities[1:-1] = (trajectory[2:] - trajectory[:-2]) / (2.0 * dt)
 
     # One-sided for endpoints
     if n > 1:
-        velocities[0] = trajectory[1] - trajectory[0]
-        velocities[-1] = trajectory[-1] - trajectory[-2]
+        velocities[0] = (trajectory[1] - trajectory[0]) / dt
+        velocities[-1] = (trajectory[-1] - trajectory[-2]) / dt
 
     return velocities
 
@@ -267,7 +281,7 @@ def conservation_test(
     Track Q_a along trajectory, measure coefficient of variation.
 
     CV = std / |mean| is the relative fluctuation.
-    CV < 0.05 indicates good conservation.
+    CV < CV_THRESHOLD_CONSERVED indicates good conservation.
 
     Args:
         trajectory: (n_steps, d) array of points along geodesic
@@ -309,18 +323,20 @@ def conservation_test(
 
 def count_conserved_directions(
     conservation_results: Dict[int, Dict[str, float]],
-    cv_threshold: float = 0.05
+    cv_threshold: float = None
 ) -> Tuple[int, int]:
     """
     Count how many directions have CV below threshold (conserved).
 
     Args:
         conservation_results: Output from conservation_test()
-        cv_threshold: Maximum CV for "conserved" (default: 0.05 = 5%)
+        cv_threshold: Maximum CV for "conserved" (default: CV_THRESHOLD_CONSERVED)
 
     Returns:
         (n_conserved, n_total)
     """
+    if cv_threshold is None:
+        cv_threshold = CV_THRESHOLD_CONSERVED
     n_conserved = sum(1 for d in conservation_results.values() if d['cv'] < cv_threshold)
     n_total = len(conservation_results)
     return n_conserved, n_total
@@ -388,7 +404,8 @@ def perturb_trajectory(
     """
     Create a perturbed version of trajectory (not a geodesic).
 
-    Used to verify that geodesics minimize action.
+    Used to verify that geodesics minimize action. Uses tangent space
+    perturbation to preserve geodesic structure naturally via exponential map.
 
     Args:
         trajectory: (n_steps, d) array of points
@@ -401,15 +418,22 @@ def perturb_trajectory(
     if seed is not None:
         np.random.seed(seed)
 
-    # Add noise to interior points (keep endpoints fixed)
     perturbed = trajectory.copy()
 
-    if len(trajectory) > 2:
-        noise = np.random.randn(len(trajectory) - 2, trajectory.shape[1]) * noise_scale
-        perturbed[1:-1] += noise
+    for i in range(1, len(trajectory) - 1):
+        # Get tangent space at this point
+        normal = trajectory[i] / (np.linalg.norm(trajectory[i]) + 1e-15)
 
-        # Re-normalize to sphere
-        perturbed[1:-1] = _normalize_embeddings(perturbed[1:-1])
+        # Random noise
+        noise = np.random.randn(len(trajectory[i])) * noise_scale
+        # Project to tangent space
+        noise = noise - np.dot(noise, normal) * normal
+
+        # Apply via exponential map (small angle approximation)
+        angle = np.linalg.norm(noise)
+        if angle > 1e-10:
+            direction = noise / angle
+            perturbed[i] = np.cos(angle) * trajectory[i] + np.sin(angle) * direction
 
     return perturbed
 
@@ -468,7 +492,7 @@ def angular_momentum_magnitude(x: np.ndarray, v: np.ndarray) -> float:
     Compute magnitude of angular momentum |L| = |x × v|.
 
     For orthogonal x and v (which they are on sphere tangent),
-    |L| = |x| * |v| * sin(90°) = |v| (since |x| = 1).
+    |L| = |x| * |v| * sin(90 deg) = |v| (since |x| = 1).
 
     This should be conserved along geodesics.
 
@@ -479,6 +503,7 @@ def angular_momentum_magnitude(x: np.ndarray, v: np.ndarray) -> float:
     Returns:
         Magnitude of angular momentum
     """
+    x = x / (np.linalg.norm(x) + 1e-15)  # Ensure unit norm
     L = angular_momentum_tensor(x, v)
     # Frobenius norm / sqrt(2) gives the "vector" magnitude
     return np.linalg.norm(L, 'fro') / np.sqrt(2)
@@ -680,8 +705,8 @@ def analyze_conservation(
     cv_random = aggregate_cv(random_results)
 
     # Count conserved
-    n_conserved_principal = np.sum(cv_principal < 0.05)
-    n_conserved_random = np.sum(cv_random < 0.05)
+    n_conserved_principal = np.sum(cv_principal < CV_THRESHOLD_CONSERVED)
+    n_conserved_random = np.sum(cv_random < CV_THRESHOLD_CONSERVED)
 
     return {
         'participation_ratio': float(df),
