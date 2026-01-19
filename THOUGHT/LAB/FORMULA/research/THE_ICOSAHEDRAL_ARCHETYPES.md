@@ -104,11 +104,12 @@ Evidence:
 ### 4. IMPLICA - The Hidden
 
 **What It Is:** Bohm's implicate order - structure that isn't yet manifest
-**What We Measured:** TRUE IIT Phi = 0.84 for XOR systems (Q6, Q36)
+**What We Measured:** TRUE IIT Phi = 0.84 for genuine XOR systems (Q6, Q36)
 **Role:** The latent pattern waiting to unfold
 
 Key insight (Q42): High Phi does NOT guarantee high R
-- XOR system: TRUE IIT Phi = 0.84 (Multi-Info was 1.51, inflated)
+- TRUE XOR system (A XOR B): Phi = 1.00 (exact, for binary gate)
+- Compensation system: TRUE Phi = 0.84 (Multi-Info was 1.51, inflated 1.8x)
 - High implicate, low explicate
 - 100% asymmetry confirmed
 
