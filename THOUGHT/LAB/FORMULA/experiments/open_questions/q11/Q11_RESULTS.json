@@ -1,0 +1,228 @@
+{
+  "timestamp": "2026-01-19T14:21:24.233976",
+  "question": "Q11: Valley Blindness",
+  "core_question": "Can we extend information horizon without changing epistemology?",
+  "analysis": {
+    "status": "ANSWERED",
+    "answer": "STRUCTURAL: Some horizons require epistemology change to extend",
+    "answer_type": "structural",
+    "passed": 12,
+    "failed": 0,
+    "total": 12,
+    "pass_rate": 1.0,
+    "horizon_types": {
+      "structural": 8,
+      "computational": 1,
+      "semantic": 1,
+      "temporal": 1,
+      "ontological": 1
+    },
+    "pass_threshold": 8,
+    "meets_threshold": true
+  },
+  "results": [
+    {
+      "module_name": "test_q11_semantic_horizon",
+      "test_name": "2.1 Semantic Event Horizon",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "Semantic horizon detected via plateau effect (drop: 80.6%, final sim: 0.194)",
+      "metrics": {
+        "d_critical": null,
+        "decay_type": "exponential",
+        "exp_r_squared": 0.9473636114265173,
+        "linear_r_squared": 0.5628813824963563,
+        "initial_similarity": 1.0000000238418578,
+        "final_similarity": 0.19449653588235377,
+        "drop_ratio": 0.8055034687548048
+      },
+      "error": null,
+      "duration_sec": 22.69411063194275
+    },
+    {
+      "module_name": "test_q11_bayesian_prison",
+      "test_name": "2.2 Bayesian Prison Break",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "CONFIRMED: Escape requires epistemology change (structural horizon)",
+      "metrics": {
+        "category_a_b_escaped": false,
+        "category_c_escaped": true,
+        "control_passed": true,
+        "n_observations": 1000
+      },
+      "error": null,
+      "duration_sec": 0.030804872512817383
+    },
+    {
+      "module_name": "test_q11_kolmogorov_ceiling",
+      "test_name": "2.3 Kolmogorov Ceiling",
+      "passed": true,
+      "horizon_type": "computational",
+      "notes": "Kolmogorov ceiling confirmed: finite agents have complexity barriers",
+      "metrics": {
+        "ceilings_exist": true,
+        "barriers_universal": true,
+        "scaling_correlation": 0.9999667203278401,
+        "compression_advantage": 0,
+        "avg_barrier_ratio": 1.8406000000000002
+      },
+      "error": null,
+      "duration_sec": 3.8240907192230225
+    },
+    {
+      "module_name": "test_q11_incommensurability",
+      "test_name": "2.4 Incommensurability",
+      "passed": true,
+      "horizon_type": "semantic",
+      "notes": "Incommensurability confirmed: ('phenomenology', 'mathematics') has 56.2% loss",
+      "metrics": {
+        "total_pairs": 15,
+        "incommensurable_count": 15,
+        "partial_count": 0,
+        "commensurable_count": 0,
+        "min_fidelity": 0.3994614608585835,
+        "mean_fidelity": 0.5391935479144255
+      },
+      "error": null,
+      "duration_sec": 9.001218318939209
+    },
+    {
+      "module_name": "test_q11_unknown_unknowns",
+      "test_name": "2.5 Unknown Unknowns",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "Void detection works: 100% of unknown unknowns found",
+      "metrics": {
+        "void_detection_rate": 1.0,
+        "gap_prediction_accuracy": 0.0,
+        "dim_ratio": "0.47133678",
+        "outside_ratio": 0.0,
+        "voids_found": 250
+      },
+      "error": null,
+      "duration_sec": 3.4020159244537354
+    },
+    {
+      "module_name": "test_q11_horizon_extension",
+      "test_name": "2.6 Horizon Extension (CORE)",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "CONFIRMED: 3 of 4 horizons require epistemology change to extend",
+      "metrics": {
+        "total_scenarios": 4,
+        "instrumental_count": 1,
+        "structural_count": 3,
+        "absolute_count": 0,
+        "prediction_accuracy": 1.0,
+        "requires_epistemology_change": true
+      },
+      "error": null,
+      "duration_sec": 0.002619504928588867
+    },
+    {
+      "module_name": "test_q11_entanglement_bridge",
+      "test_name": "2.7 Entanglement Bridge",
+      "passed": "True",
+      "horizon_type": "structural",
+      "notes": "Bridge works: 58% success vs 20% random baseline",
+      "metrics": {
+        "overall_bridge_success": 0.5833333333333334,
+        "overall_improvement": 1.0,
+        "overall_similarity": 0.7569874475399653,
+        "avg_entanglement": 0.31081455474486575,
+        "n_queries_tested": 12,
+        "n_domain_pairs": 4
+      },
+      "error": null,
+      "duration_sec": 1.4675781726837158
+    },
+    {
+      "module_name": "test_q11_time_asymmetry",
+      "test_name": "2.8 Time Asymmetry",
+      "passed": true,
+      "horizon_type": "temporal",
+      "notes": "Time asymmetry confirmed: 1/5 series, max |asymmetry|=0.092 (forward easier)",
+      "metrics": {
+        "overall_avg_asymmetry": -0.022541965346784733,
+        "max_abs_asymmetry": 0.09207093426153294,
+        "asymmetric_count": 1,
+        "backward_easier_count": 0,
+        "forward_easier_count": 1,
+        "any_asymmetric": true,
+        "thermodynamic_asymmetry": false,
+        "n_series_tested": 5
+      },
+      "error": null,
+      "duration_sec": 0.1659560203552246
+    },
+    {
+      "module_name": "test_q11_renormalization",
+      "test_name": "2.9 Renormalization Escape",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "Renormalization works: coarse ARI=0.70, improvement=0.61",
+      "metrics": {
+        "fine_signal": 0.08540557298859464,
+        "coarse_ari": 0.6996795203142768,
+        "improvement": 0.6142739473256822,
+        "silhouette": 0.04078495502471924,
+        "coarse_more_robust": false,
+        "min_compression_components": 2
+      },
+      "error": null,
+      "duration_sec": 2.1668601036071777
+    },
+    {
+      "module_name": "test_q11_goedel_construction",
+      "test_name": "2.10 Goedel Construction",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "Goedel horizon confirmed in 3/3 systems: true statements that cannot be proven",
+      "metrics": {
+        "total_systems": 3,
+        "goedel_horizons_found": 3,
+        "paradoxes_triggered": 3,
+        "horizon_rate": 1.0
+      },
+      "error": null,
+      "duration_sec": 0.0011227130889892578
+    },
+    {
+      "module_name": "test_q11_qualia_horizon",
+      "test_name": "2.11 Qualia Horizon",
+      "passed": true,
+      "horizon_type": "ontological",
+      "notes": "Qualia horizon detected: 5/5 qualia have gaps, 5/5 stable",
+      "metrics": {
+        "gaps_remain_count": 5,
+        "combined_gaps_remain_count": 5,
+        "stable_gaps_count": 5,
+        "total_qualia": 5,
+        "avg_gap": 0.47516830563545226,
+        "max_gap": 0.5425052046775818,
+        "min_gap": 0.3960750102996826,
+        "hardest_qualia": "fear"
+      },
+      "error": null,
+      "duration_sec": 1.8789067268371582
+    },
+    {
+      "module_name": "test_q11_self_detection",
+      "test_name": "2.12 Self-Detection (ULTIMATE)",
+      "passed": true,
+      "horizon_type": "structural",
+      "notes": "Self-detection confirmed: Level 2 achievable, Level 3 impossible (max level = 4)",
+      "metrics": {
+        "control_max_level": 0,
+        "meta_max_level": 4,
+        "level_1_detection_rate": 1.0,
+        "level_2_accuracy": 1.0,
+        "level_3_descriptions": 0,
+        "level_4_facts_learned": 3
+      },
+      "error": null,
+      "duration_sec": 0.0016748905181884766
+    }
+  ]
+}

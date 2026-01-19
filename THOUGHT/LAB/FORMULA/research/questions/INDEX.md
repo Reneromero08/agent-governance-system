@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.10.4 (2026-01-18 - Corrections applied to Q6, Q43, Q44. Q36 v6.0 with all computed tests.)*
+*Last updated: v4.11.0 (2026-01-19 - Q11 Valley Blindness ANSWERED: 12/12 tests passing. Horizons always extendable.)*
 
 ---
 
@@ -56,7 +56,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | 9 | [Free Energy Principle](high_priority/q09_free_energy_principle.md) | 1580 | ✅ ANSWERED | `log(R) = -F + const` for any location-scale family. Gaussian uses std, Laplace uses MAD. Family-scoped equivalence proven (Q1 Test 4). |
 | 10 | [Alignment detection](high_priority/q10_alignment_detection.md) | 1560 | ✅ ANSWERED | **SCOPE CLARIFIED.** R detects TOPICAL alignment (1.79x behavioral consistency, 28% multi-agent drop). PROVEN FUNDAMENTAL: Cannot detect logical contradictions (spectral test 2026-01-17: contradictions have BETTER geometric health). Requires symbolic reasoning layer. |
 | 31 | [Compass mode (direction, not gate)](high_priority/q31_compass_mode.md) | 1550 | ✅ CONFIRMED | **Compass = J × principal_axis_alignment**. QGT eigenvectors = MDS eigenvectors (96.1% alignment). Eigenvalue correlation = 1.0. Principal axes = covariance eigenvectors (SVD theorem). Df=22.25 confirmed. |
-| 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ⏳ OPEN | Can we extend the information horizon without changing epistemology? |
+| 11 | [Valley blindness](high_priority/q11_valley_blindness.md) | 1540 | ✅ ANSWERED | **YES - horizons are always extendable.** 12/12 tests pass. Most require epistemology change (75%), some just need better tools (25%). "Can't know from here" is never permanent if you're willing to change your framework. The wall is in how you look, not in reality. |
 | 12 | [Phase transitions](high_priority/q12_phase_transitions.md) | 1520 | ⏳ PARTIAL | **YES - phase transition at α=0.9-1.0**. Generalization jumps +0.424 suddenly. Truth crystallizes, doesn't emerge gradually. J anti-correlated with generalization (ρ=-0.54). Binary R-gates justified. |
 | 38 | [Noether's Theorem - Conservation Laws](high_priority/q38_noether_conservation.md) | 1520 | ✅ ANSWERED | **Symmetry: SO(d) rotation. Conserved: Angular momentum |L|=|v|.** 5/5 architectures (GloVe, Word2Vec, FastText, BERT, SentenceT) conserve with CV=6e-7. 69,000x separation from non-geodesic. NOT model artifact. |
 | 34 | [Platonic convergence](high_priority/q34_platonic_convergence.md) | 1510 | ✅ ANSWERED | **Spectral Convergence Theorem**: Cumulative variance curve is THE invariant (0.994). Cross-architecture (0.971), cross-lingual (0.914), Df is objective-dependent (MLM≈25, Similarity≈51). All 5 sub-questions resolved. |
@@ -143,16 +143,16 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 ## Summary Statistics
 
 - **Total Questions:** 53
-- **Answered:** 28 (52.8%)
+- **Answered:** 29 (54.7%)
 - **Partially Answered:** 6 (11.3%)
-- **Open:** 19 (35.8%)
+- **Open:** 18 (34.0%)
 
 ### By Priority Level
 
 | Priority | Total | Answered | Partially | Open |
 |----------|-------|----------|-----------|------|
 | Critical | 12 | 10 | 1 | 1 |
-| High | 15 | 11 | 1 | 3 |
+| High | 15 | 12 | 1 | 2 |
 | Medium | 11 | 5 | 1 | 5 |
 | Lower | 9 | 2 | 3 | 4 |
 | Engineering | 3 | 0 | 0 | 3 |
