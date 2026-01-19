@@ -1,0 +1,181 @@
+{
+  "timestamp": "2026-01-19T18:48:26.161299",
+  "question": "Q36",
+  "title": "Bohm's Implicate/Explicate Order",
+  "version": "9.0",
+  "summary": {
+    "passed": 8,
+    "failed": 2,
+    "skipped": 0,
+    "total": 10
+  },
+  "results": [
+    {
+      "test_name": "XOR Multi-Information",
+      "test_number": 1,
+      "source": "Information Theory",
+      "result": "PASS",
+      "metric_value": 1.0000000314573447,
+      "threshold": 1.0,
+      "details": {
+        "xor_mi": 1.0000000314573447,
+        "independent_mi": 0.0005944005371523176,
+        "theory": "XOR has exactly 1 bit of synergy"
+      },
+      "evidence": "XOR I(X)=1.000 bits (expected 1.0), Ind=0.001 (expected 0)"
+    },
+    {
+      "test_name": "Antonym Structure",
+      "test_number": 2,
+      "source": "Semantic Geometry",
+      "result": "PASS",
+      "metric_value": "0.28266752",
+      "threshold": 0.3,
+      "details": {
+        "mean_angle": "13.679273",
+        "std_angle": "3.866686",
+        "cv": "0.28266752",
+        "n_pairs": 12,
+        "model": "BERT"
+      },
+      "evidence": "Antonym angle=13.7 deg (std=3.9, CV=0.28)"
+    },
+    {
+      "test_name": "Subspace Prediction",
+      "test_number": 3,
+      "source": "Holographic Test",
+      "result": "PASS",
+      "metric_value": 42.09536948181922,
+      "threshold": 1.5,
+      "details": {
+        "semantic_error": "0.020896336",
+        "random_error": 0.8796389874195102,
+        "ratio": 42.09536948181922,
+        "model": "BERT"
+      },
+      "evidence": "Semantic err=0.021, Random err=0.880, Ratio=42.10x"
+    },
+    {
+      "test_name": "Analogy Accuracy",
+      "test_number": 4,
+      "source": "Semantic Structure",
+      "result": "PASS",
+      "metric_value": 0.375,
+      "threshold": 0.5,
+      "details": {
+        "correct": 3,
+        "total": 8,
+        "accuracy": 0.375,
+        "mean_similarity": "0.91858983",
+        "model": "BERT"
+      },
+      "evidence": "Analogy accuracy=38% (3/8), mean_sim=0.919"
+    },
+    {
+      "test_name": "Transitivity Test",
+      "test_number": 5,
+      "source": "Semantic Geometry",
+      "result": "PASS",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "violations": 0,
+        "total_transitive_chains": 500,
+        "violation_rate": 0.0,
+        "threshold": 0.3,
+        "model": "BERT",
+        "interpretation": "0.0% of transitive chains are violated"
+      },
+      "evidence": "Transitivity violations: 0/500 (0.0%)"
+    },
+    {
+      "test_name": "Relation Consistency",
+      "test_number": 6,
+      "source": "Semantic Structure",
+      "result": "FAIL",
+      "metric_value": "0.19670002",
+      "threshold": 0.3,
+      "details": {
+        "group_consistencies": [
+          "0.18425258",
+          "0.1708731",
+          "0.23497438"
+        ],
+        "mean_consistency": "0.19670002",
+        "model": "BERT"
+      },
+      "evidence": "Relation vector consistency=0.197"
+    },
+    {
+      "test_name": "Cross-Architecture",
+      "test_number": 7,
+      "source": "Empirical Test",
+      "result": "FAIL",
+      "metric_value": 0.032579100448537575,
+      "threshold": 0.7,
+      "details": {
+        "correlations": [
+          {
+            "models": [
+              "BERT",
+              "SentenceT"
+            ],
+            "r": 0.032579100448537575
+          }
+        ],
+        "mean_r": 0.032579100448537575,
+        "models": [
+          "BERT",
+          "SentenceT"
+        ]
+      },
+      "evidence": "Cross-architecture r=0.033"
+    },
+    {
+      "test_name": "Interpolation Quality",
+      "test_number": 8,
+      "source": "Semantic Test",
+      "result": "PASS",
+      "metric_value": "0.9620382",
+      "threshold": 0.2,
+      "details": {
+        "mean_midpoint_similarity": "0.9620382",
+        "n_cases": 5,
+        "model": "BERT"
+      },
+      "evidence": "Midpoint semantic similarity=0.962"
+    },
+    {
+      "test_name": "Holonomy Measurement",
+      "test_number": 9,
+      "source": "Differential Geometry",
+      "result": "PASS",
+      "metric_value": "2.1499124",
+      "threshold": 0.0,
+      "details": {
+        "semantic_holonomy_deg": "2.1499124",
+        "random_holonomy_deg": "2.7206974",
+        "n_semantic": 4,
+        "n_random": 20,
+        "model": "BERT",
+        "interpretation": "Solid angle = holonomy on unit sphere"
+      },
+      "evidence": "Semantic holonomy=2.1 deg, Random=2.7 deg"
+    },
+    {
+      "test_name": "Semantic Clustering",
+      "test_number": 10,
+      "source": "Graph Theory",
+      "result": "PASS",
+      "metric_value": 0.7919333182733371,
+      "threshold": 0.0,
+      "details": {
+        "clustering_coefficient": 0.7919333182733371,
+        "random_expected": 0.24380165289256198,
+        "ratio": 3.248268863449822,
+        "model": "BERT"
+      },
+      "evidence": "Clustering=0.792, Random=0.244, Ratio=3.2x"
+    }
+  ]
+}

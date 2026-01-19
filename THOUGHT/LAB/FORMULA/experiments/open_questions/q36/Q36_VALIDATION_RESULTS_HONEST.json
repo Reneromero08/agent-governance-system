@@ -1,0 +1,250 @@
+{
+  "timestamp": "2026-01-19T18:09:43.404791",
+  "question": "Q36",
+  "title": "Bohm's Implicate/Explicate Order - HONEST VERSION",
+  "version": "7.0-HONEST",
+  "summary": {
+    "passed": 4,
+    "failed": 1,
+    "skipped": 0,
+    "removed": 5,
+    "total_tests": 10,
+    "honest_assessment": "Most 'physics' tests were removed as inapplicable to classical embeddings"
+  },
+  "results": [
+    {
+      "test_name": "XOR Multi-Information",
+      "test_number": 1,
+      "source": "Information Theory (Shannon)",
+      "result": "PASS",
+      "metric_value": 1.0000000314573447,
+      "threshold": 1.0,
+      "details": {
+        "xor_multi_information": 1.0000000314573447,
+        "independent_multi_information": 0.0005944005371523176,
+        "expected_xor_mi": 1.0,
+        "expected_ind_mi": 0.0,
+        "n_samples": 10000,
+        "interpretation": "XOR has 1 bit of irreducible integration",
+        "what_this_proves": "Multi-Information correctly measures synergy in XOR systems"
+      },
+      "evidence": "XOR I(X)=1.000 bits (expected 1.0), Independent I(X)=0.001 bits (expected 0.0)"
+    },
+    {
+      "test_name": "SLERP is Geodesic",
+      "test_number": 2,
+      "source": "Differential Geometry (Noether)",
+      "result": "PASS",
+      "metric_value": 5.386331023367438e-07,
+      "threshold": 1e-05,
+      "details": {
+        "mean_cv": 5.386331023367438e-07,
+        "model": "GloVe",
+        "pairs_tested": 5,
+        "honest_interpretation": "This verifies SLERP is implemented correctly as geodesic",
+        "what_this_does_NOT_prove": "It does NOT prove semantic space has special conservation laws",
+        "why": "SLERP is geodesic BY DEFINITION on ANY unit sphere"
+      },
+      "evidence": "SLERP CV=5.39e-07 (verifies correct geodesic implementation)"
+    },
+    {
+      "test_name": "[REMOVED] Holographic Correlation",
+      "test_number": 3,
+      "source": "REMOVED - Was methodologically wrong",
+      "result": "REMOVED",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "why_removed": "Test claimed 'holographic scaling' but actually tested centroid estimation",
+        "what_it_actually_tested": "Can you estimate mean from a subset? (Yes - Central Limit Theorem)",
+        "why_wrong": "Ryu-Takayanagi requires AdS bulk geometry and CFT boundary entropy",
+        "honest_conclusion": "Classical embeddings have no holographic duality"
+      },
+      "evidence": "REMOVED - Tested statistics, not holography"
+    },
+    {
+      "test_name": "Similarity Along Geodesic",
+      "test_number": 4,
+      "source": "Empirical Semantic Test",
+      "result": "PASS",
+      "metric_value": 1.0,
+      "threshold": 0.8,
+      "details": {
+        "monotonic_pairs": 10,
+        "total_pairs": 10,
+        "pct_monotonic": 1.0,
+        "model": "GloVe",
+        "interpretation": "SLERP produces semantically meaningful interpolation"
+      },
+      "evidence": "100% of word pairs have monotonic similarity along SLERP"
+    },
+    {
+      "test_name": "[REMOVED] Bell Inequality",
+      "test_number": 5,
+      "source": "REMOVED - Inapplicable to classical embeddings",
+      "result": "REMOVED",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "why_removed": "Bell inequalities test quantum entanglement; embeddings are classical",
+        "what_it_would_prove": "Nothing - classical systems always satisfy Bell bounds",
+        "previous_bug": "Test used independent noise (no correlation by construction)",
+        "honest_conclusion": "Classical embeddings cannot violate Bell inequalities"
+      },
+      "evidence": "REMOVED - Bell inequality is inapplicable to classical vectors"
+    },
+    {
+      "test_name": "[REMOVED] Born Rule",
+      "test_number": 6,
+      "source": "REMOVED - Was a mathematical tautology",
+      "result": "REMOVED",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "why_removed": "P_born = n * E^2 by algebra, regardless of physics",
+        "the_algebra": "P = |sum(overlap)/sqrt(n)|^2 = (sum)^2/n = n*(mean)^2 = n*E^2",
+        "what_high_correlation_meant": "The correlation was 1.0 by definition",
+        "honest_conclusion": "Cannot test Born rule with classical embeddings (no complex amplitudes)"
+      },
+      "evidence": "REMOVED - Tested an algebraic identity, not the Born rule"
+    },
+    {
+      "test_name": "Cross-Architecture Consistency",
+      "test_number": 7,
+      "source": "Empirical Test",
+      "result": "FAIL",
+      "metric_value": 0.521702540445531,
+      "threshold": 0.7,
+      "details": {
+        "pairwise_correlations": [
+          {
+            "models": [
+              "GloVe",
+              "Word2Vec"
+            ],
+            "r": 0.7757726424751512
+          },
+          {
+            "models": [
+              "GloVe",
+              "FastText"
+            ],
+            "r": 0.6747831793410307
+          },
+          {
+            "models": [
+              "GloVe",
+              "BERT"
+            ],
+            "r": 0.27084485853731904
+          },
+          {
+            "models": [
+              "GloVe",
+              "SentenceT"
+            ],
+            "r": 0.8144108827031472
+          },
+          {
+            "models": [
+              "Word2Vec",
+              "FastText"
+            ],
+            "r": 0.9187287551969672
+          },
+          {
+            "models": [
+              "Word2Vec",
+              "BERT"
+            ],
+            "r": 0.06638889202739821
+          },
+          {
+            "models": [
+              "Word2Vec",
+              "SentenceT"
+            ],
+            "r": 0.5841120103336999
+          },
+          {
+            "models": [
+              "FastText",
+              "BERT"
+            ],
+            "r": 0.029024044654855235
+          },
+          {
+            "models": [
+              "FastText",
+              "SentenceT"
+            ],
+            "r": 0.6281823712109283
+          },
+          {
+            "models": [
+              "BERT",
+              "SentenceT"
+            ],
+            "r": 0.45477776797481245
+          }
+        ],
+        "mean_correlation": 0.521702540445531,
+        "models_compared": [
+          "GloVe",
+          "Word2Vec",
+          "FastText",
+          "BERT",
+          "SentenceT"
+        ],
+        "interpretation": "Models disagree on similarity structure"
+      },
+      "evidence": "Mean cross-architecture similarity correlation r=0.522"
+    },
+    {
+      "test_name": "[REMOVED] SLERP Conservation (duplicate)",
+      "test_number": 8,
+      "source": "REMOVED - Duplicate of Test 2",
+      "result": "REMOVED",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "why_removed": "Was identical to Test 2 (SLERP is geodesic by definition)",
+        "both_tests_proved": "SLERP is correctly implemented as geodesic"
+      },
+      "evidence": "REMOVED - Redundant with Test 2"
+    },
+    {
+      "test_name": "[REMOVED] Holonomy / Solid Angle",
+      "test_number": 9,
+      "source": "REMOVED - Measured random geometry, not holonomy",
+      "result": "REMOVED",
+      "metric_value": 0.0,
+      "threshold": 0.0,
+      "details": {
+        "why_removed": "Test measured non-planarity of 4 random points, not parallel transport",
+        "what_it_actually_measured": "Do 4 arbitrary words lie in a 2D plane? (No, trivially)",
+        "what_real_holonomy_requires": "Parallel transport around a semantic path",
+        "numerical_fact": "Any 4 random unit vectors in d>3 have non-zero spherical excess"
+      },
+      "evidence": "REMOVED - Measured random geometry, not semantic curvature"
+    },
+    {
+      "test_name": "Pairwise Angle Distribution",
+      "test_number": 10,
+      "source": "Q53 (Empirical)",
+      "result": "PASS",
+      "metric_value": 76.73457429609667,
+      "threshold": 90.0,
+      "details": {
+        "mean_angle_deg": 76.73457429609667,
+        "std_angle_deg": 6.5204747597319965,
+        "random_expectation": 90.0,
+        "deviation_from_random": 13.265425703903333,
+        "n_pairs": 190,
+        "model": "GloVe",
+        "interpretation": "Semantic angles deviate 13.3 deg from random"
+      },
+      "evidence": "Mean pairwise angle = 76.7 deg (random would be 90 deg)"
+    }
+  ]
+}
