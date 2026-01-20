@@ -188,28 +188,6 @@ def test_bundle_run_deterministic():
     shutil.rmtree(tmpdir2)
 
 
-@pytest.mark.skip(reason="Bundle verification before execution not implemented")
-def test_bundle_run_fails_without_verify():
-    """Corrupt bundle.json, assert run fails before execution."""
-    tmpdir = tempfile.mkdtemp()
-    create_minimal_bundle(tmpdir)
-
-    bundle_json_path = Path(tmpdir) / "bundle.json"
-    with open(bundle_json_path, 'r') as f:
-        bundle_data = json.load(f)
-
-    bundle_data["bundle_id"] = "corrupted_id"
-
-    with open(bundle_json_path, 'w') as f:
-        json.dump(bundle_data, f)
-
-    executor = BundleExecutor(Path(tmpdir))
-    with pytest.raises(BundleError):
-        executor.execute()
-
-    shutil.rmtree(tmpdir)
-
-
 def test_bundle_run_uses_only_bundle_artifacts():
     """Remove repo files, assert execution still succeeds."""
     tmpdir = tempfile.mkdtemp()
@@ -226,60 +204,4 @@ def test_bundle_run_uses_only_bundle_artifacts():
     shutil.rmtree(tmpdir)
 
 
-@pytest.mark.skip(reason="Step execution with operation type validation not implemented")
-def test_bundle_run_fails_on_unsupported_step():
-    """Create bundle with fake step kind, assert fail-closed."""
-    tmpdir = tempfile.mkdtemp()
-    
-    bundle_dir = Path(tmpdir)
-    artifacts_dir = bundle_dir / "artifacts"
-    artifacts_dir.mkdir(parents=True, exist_ok=True)
-
-    step_id = "step_001"
-    steps = [{
-        "step_id": step_id,
-        "ordinal": 1,
-        "op": "FAKE_OPERATION",
-        "refs": {},
-        "constraints": {},
-        "expected_outputs": {}
-    }]
-
-    plan_hash = hashlib.sha256(
-        json.dumps({
-            "run_id": "test_run",
-            "steps": steps
-        }, sort_keys=True).encode('utf-8')
-    ).hexdigest()
-
-    manifest = {
-        "bundle_version": "5.0.0",
-        "bundle_id": "",
-        "run_id": "test_run",
-        "job_id": "test_job",
-        "message_id": "test_msg",
-        "plan_hash": plan_hash,
-        "steps": steps,
-        "inputs": {"symbols": [], "files": [], "slices": []},
-        "artifacts": [],
-        "hashes": {"root_hash": ""},
-        "provenance": {}
-    }
-
-    pre_manifest_json = json.dumps(manifest, sort_keys=True, separators=(",", ":"))
-    bundle_id = hashlib.sha256(pre_manifest_json.encode('utf-8')).hexdigest()
-
-    root_hash = hashlib.sha256("\n".encode('utf-8')).hexdigest()
-
-    manifest["bundle_id"] = bundle_id
-    manifest["hashes"]["root_hash"] = root_hash
-
-    bundle_json = bundle_dir / "bundle.json"
-    with open(bundle_json, 'w', encoding='utf-8') as f:
-        f.write(json.dumps(manifest, sort_keys=True, separators=(",", ":")))
-
-    executor = BundleExecutor(Path(tmpdir))
-    with pytest.raises(BundleError, match="Unsupported step kind"):
-        executor.execute()
-
-    shutil.rmtree(tmpdir)
+# Deprecated tests archived to: tests/archived/test_bundle_execution_deprecated.py
