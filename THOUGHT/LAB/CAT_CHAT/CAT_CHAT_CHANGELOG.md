@@ -1,8 +1,83 @@
-<!-- CONTENT_HASH: updated_with_phase_g_and_h -->
+<!-- CONTENT_HASH: updated_with_phase_i -->
 
 All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file.
 
-## [1.2.7] - 2026-01-19
+## [1.2.9] - 2026-01-19
+
+### Added
+
+**Phase I: Measurement & Benchmarking (P3) - COMPLETE**
+
+- **Per-step metrics collection (I.1):**
+  - `catalytic_chat/metrics_collector.py` (new) - MetricsCollector class
+    - `StepMetrics` dataclass - Per-operation telemetry (step_name, latency, bytes_in/out, cache_hit, source)
+    - `TurnMetrics` dataclass - Aggregated turn metrics (steps, bytes_expanded/compressed, cache_hit_rate, e_score_mean)
+    - `SessionMetrics` dataclass - Full session metrics (compression_ratio, cache_hit_rate, e_score_distribution, invariant_checks)
+    - `MetricsCollector` class with `measure_step()` context manager for instrumentation
+  - `catalytic_chat/session_capsule.py` (updated) - Added event types:
+    - `EVENT_STEP_METRICS` - Per-step telemetry events
+    - `EVENT_TURN_METRICS` - Per-turn aggregation events
+    - `EVENT_SESSION_METRICS` - Session summary events
+    - `EVENT_INVARIANT_CHECK` - Invariant verification events
+  - `tests/test_metrics_collector.py` (new) - 32 comprehensive tests, all passing
+
+- **Compression benchmarks (I.2):**
+  - `benchmarks/scenarios.py` (new) - 5 deterministic benchmark scenarios:
+    - `SHORT_CONVERSATION` (10 turns, 2 planted facts) - Quick sanity check
+    - `MEDIUM_CONVERSATION` (30 turns, 5 planted facts) - Typical usage
+    - `LONG_CONVERSATION` (100 turns, 13 planted facts) - Memory stress test
+    - `SOFTWARE_ARCHITECTURE` (34 turns, 6 planted facts) - Real domain scenario
+    - `DENSE_TECHNICAL` (50 turns, 7 planted facts) - High compression potential
+  - `benchmarks/runner.py` (new) - BenchmarkRunner class:
+    - `BenchmarkResult` dataclass with full metrics (tokens, compression, recall, latency)
+    - `run()` method for single-mode execution
+    - `run_comparison()` method for A/B testing (catalytic vs baseline)
+    - Mock chat implementations for testing without full LLM integration
+  - `benchmarks/reporter.py` (new) - Report generation:
+    - `ComparisonReport` dataclass with markdown/JSON export
+    - `BenchmarkReporter` with format_markdown(), format_console(), save methods
+    - `AggregateReporter` for multi-scenario summaries
+  - `benchmarks/__init__.py` (new) - Package initialization with exports
+
+- **Invariant verification suite (I.3):**
+  - `catalytic_chat/invariant_verifier.py` (new) - InvariantVerifier class:
+    - `verify_inv_01_restoration()` - File restoration invariant (INV-CATALYTIC-01)
+    - `verify_inv_02_verification()` - Proof size O(1) invariant (INV-CATALYTIC-02)
+    - `verify_inv_03_reversibility()` - Snapshot reversibility invariant (INV-CATALYTIC-03)
+    - `verify_inv_04_clean_space_bound()` - Budget compliance invariant (INV-CATALYTIC-04)
+    - `verify_inv_05_fail_closed()` - Fail-closed restoration invariant (INV-CATALYTIC-05)
+    - `verify_inv_06_determinism()` - Deterministic execution invariant (INV-CATALYTIC-06)
+    - `verify_inv_07_auto_context()` - Auto-context management invariant (INV-CATALYTIC-07)
+    - `InvariantResult` dataclass for verification results
+    - `VerificationReport` dataclass with markdown export
+  - `tests/test_invariants.py` (new) - 25 comprehensive tests, all passing
+
+- **CLI commands for Phase I:**
+  - `catalytic_chat/cli.py` (updated) - Added benchmark, metrics, and invariants subcommands:
+    - `benchmark run --scenario <name> --mode catalytic|baseline` - Run benchmark scenario
+    - `benchmark compare --scenario <name>` - A/B comparison report
+    - `benchmark list [--verbose]` - List available scenarios
+    - `metrics show <session_id> [--verbose]` - Show session metrics
+    - `metrics export <session_id> -o <path> [--format json|csv]` - Export metrics
+    - `invariants verify <session_id> [--invariant <id>]` - Verify invariants
+    - `invariants report <session_id> -o <path> [--format md|json]` - Generate report
+
+### Tests
+
+- **57 Phase I tests passing:**
+  - 32 tests in test_metrics_collector.py - All passing
+  - 25 tests in test_invariants.py - All passing
+  - Full integration with existing test suite (128 tests passing overall)
+
+### Exit Criteria
+
+- [x] Per-step metrics captured for every operation (I.1)
+- [x] Benchmark comparison shows quantified compression benefit (I.2)
+- [x] All 7 catalytic invariants verified with automated tests (I.3)
+- [x] CLI commands for running benchmarks and viewing metrics
+- [x] 57 comprehensive tests passing
+
+## [1.2.8] - 2026-01-19
 
 ### Added
 
@@ -53,6 +128,10 @@ All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file
     - Links to specification documents
     - Positioned at top for new users
 
+## [1.2.7] - 2026-01-19
+
+### Added
+
 **Phase G: Bundle Replay & Verification (P2) - COMPLETE**
 
 - **Bundle verification and execution:**
@@ -79,10 +158,6 @@ All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file
     - Receipt generation and hash computation
     - Deterministic execution (same bundle = same receipt)
     - Chain integrity verification
-
-### Changed
-
-- `CAT_CHAT_ROADMAP_2.0.md` - Marked Phase G and Phase H as COMPLETE with deliverables
 
 ## [1.2.6] - 2026-01-19
 

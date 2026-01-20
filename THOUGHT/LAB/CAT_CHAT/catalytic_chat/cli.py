@@ -1918,6 +1918,302 @@ def cmd_docs_stats(args) -> int:
         return 1
 
 
+# =============================================================================
+# Benchmark Commands (Phase I.2)
+# =============================================================================
+
+def cmd_benchmark_run(args) -> int:
+    """Run a benchmark scenario.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        from benchmarks import get_scenario, BenchmarkRunner
+
+        scenario = get_scenario(args.scenario)
+        runner = BenchmarkRunner()
+
+        print(f"Running benchmark: {args.scenario}")
+        print(f"  Turns: {scenario.total_turns}")
+        print(f"  Planted facts: {scenario.total_planted_facts}")
+        print()
+
+        result = runner.run(scenario, mode=args.mode)
+
+        print(f"Results ({args.mode} mode):")
+        print(f"  Turns completed: {result.turns_completed}")
+        print(f"  Compression ratio: {result.compression_ratio:.1f}x")
+        print(f"  Recall rate: {result.recall_rate:.1%}")
+        print(f"  Peak context tokens: {result.peak_context_tokens:,}")
+        print(f"  Total latency: {result.total_latency_ms:.0f}ms")
+
+        if result.errors:
+            print(f"  Errors: {len(result.errors)}")
+
+        return 0
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_benchmark_compare(args) -> int:
+    """Run benchmark comparison between modes.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        from benchmarks import get_scenario, BenchmarkRunner, BenchmarkReporter
+
+        scenario = get_scenario(args.scenario)
+        runner = BenchmarkRunner()
+
+        print(f"Running comparison benchmark: {args.scenario}")
+        print()
+
+        comparison = runner.run_comparison(scenario)
+
+        # Generate report
+        from benchmarks.runner import BenchmarkResult
+        catalytic = BenchmarkResult(**{k: v for k, v in comparison['catalytic'].items()
+                                       if k in BenchmarkResult.__dataclass_fields__})
+        baseline = BenchmarkResult(**{k: v for k, v in comparison['baseline'].items()
+                                      if k in BenchmarkResult.__dataclass_fields__})
+
+        reporter = BenchmarkReporter()
+        report = reporter.create_comparison_report(catalytic, baseline)
+
+        if getattr(args, 'output', None):
+            output_path = Path(args.output)
+            if output_path.suffix == '.md':
+                reporter.save_markdown(report, output_path)
+            else:
+                reporter.save_json(report, output_path)
+            print(f"Report saved to: {output_path}")
+        else:
+            print(reporter.format_console(report))
+
+        return 0
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_benchmark_list(args) -> int:
+    """List available benchmark scenarios.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        from benchmarks import list_scenarios, get_scenario
+
+        print("Available benchmark scenarios:")
+        print()
+
+        for name in list_scenarios():
+            scenario = get_scenario(name)
+            print(f"  {name}")
+            print(f"    {scenario.description}")
+            print(f"    Turns: {scenario.total_turns}, Facts: {scenario.total_planted_facts}")
+            print()
+
+        return 0
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+# =============================================================================
+# Metrics Commands (Phase I.1)
+# =============================================================================
+
+def cmd_metrics_show(args) -> int:
+    """Show metrics for a session.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+
+        # Get session metrics events
+        from catalytic_chat.session_capsule import EVENT_SESSION_METRICS, EVENT_TURN_METRICS
+
+        session_events = capsule.get_events(args.session_id, event_type=EVENT_SESSION_METRICS)
+        turn_events = capsule.get_events(args.session_id, event_type=EVENT_TURN_METRICS)
+
+        if session_events:
+            latest = session_events[-1]
+            payload = latest.payload
+
+            print(f"Session Metrics: {args.session_id}")
+            print(f"  Total turns: {payload.get('total_turns', 'N/A')}")
+            print(f"  Compression ratio: {payload.get('overall_compression_ratio', 'N/A')}")
+            print(f"  Cache hit rate: {payload.get('cache_hit_rate', 'N/A')}")
+            print(f"  Mean E-score: {payload.get('mean_e_score', 'N/A')}")
+        else:
+            print(f"No session metrics found for: {args.session_id}")
+            print(f"  Turn metrics events: {len(turn_events)}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_metrics_export(args) -> int:
+    """Export session metrics to file.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        capsule = SessionCapsule(repo_root=args.repo_root)
+
+        # Export all metric events
+        from catalytic_chat.session_capsule import (
+            EVENT_STEP_METRICS, EVENT_TURN_METRICS, EVENT_SESSION_METRICS
+        )
+
+        metrics = {
+            "session_id": args.session_id,
+            "step_metrics": [],
+            "turn_metrics": [],
+            "session_metrics": []
+        }
+
+        for event_type, key in [
+            (EVENT_STEP_METRICS, "step_metrics"),
+            (EVENT_TURN_METRICS, "turn_metrics"),
+            (EVENT_SESSION_METRICS, "session_metrics")
+        ]:
+            events = capsule.get_events(args.session_id, event_type=event_type)
+            metrics[key] = [e.payload for e in events]
+
+        output_path = Path(args.output)
+        output_path.parent.mkdir(parents=True, exist_ok=True)
+
+        with open(output_path, 'w', encoding='utf-8') as f:
+            json.dump(metrics, f, indent=2)
+
+        print(f"[OK] Metrics exported to: {output_path}")
+        print(f"     Step metrics: {len(metrics['step_metrics'])}")
+        print(f"     Turn metrics: {len(metrics['turn_metrics'])}")
+        print(f"     Session metrics: {len(metrics['session_metrics'])}")
+
+        capsule.close()
+        return 0
+    except SessionCapsuleError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+# =============================================================================
+# Invariant Commands (Phase I.3)
+# =============================================================================
+
+def cmd_invariants_verify(args) -> int:
+    """Verify invariants for a session.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        from catalytic_chat.invariant_verifier import InvariantVerifier
+
+        verifier = InvariantVerifier(repo_root=args.repo_root)
+
+        if getattr(args, 'invariant', None):
+            # Verify single invariant
+            result = verifier.verify_single(args.session_id, args.invariant)
+            status = "PASS" if result.passed else "FAIL"
+            print(f"[{status}] {result.invariant_id}: {result.invariant_name}")
+            if result.details:
+                print(f"       {result.details}")
+            verifier.close()
+            return 0 if result.passed else 1
+        else:
+            # Verify all invariants
+            report = verifier.verify_all(args.session_id)
+
+            print(f"Invariant Verification: {args.session_id}")
+            print(f"  Status: {'PASS' if report.all_passed else 'FAIL'}")
+            print(f"  Passed: {report.passed_count}/{len(report.results)}")
+            print()
+
+            for result in report.results:
+                status = "PASS" if result.passed else "FAIL"
+                print(f"  [{status}] {result.invariant_id}: {result.invariant_name}")
+                if result.details and not result.passed:
+                    print(f"         {result.details}")
+
+            verifier.close()
+            return 0 if report.all_passed else 1
+
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_invariants_report(args) -> int:
+    """Generate invariant verification report.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        from catalytic_chat.invariant_verifier import InvariantVerifier
+
+        verifier = InvariantVerifier(repo_root=args.repo_root)
+        report = verifier.verify_all(args.session_id)
+
+        if getattr(args, 'output', None):
+            output_path = Path(args.output)
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+
+            if output_path.suffix == '.md':
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    f.write(report.to_markdown())
+            else:
+                with open(output_path, 'w', encoding='utf-8') as f:
+                    json.dump(report.to_dict(), f, indent=2)
+
+            print(f"[OK] Report saved to: {output_path}")
+        else:
+            print(report.to_markdown())
+
+        verifier.close()
+        return 0 if report.all_passed else 1
+
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -2201,6 +2497,62 @@ def main():
 
     docs_stats_parser = docs_subparsers.add_parser("stats", help="Show index statistics")
 
+    # Benchmark commands (Phase I.2)
+    benchmark_parser = subparsers.add_parser("benchmark", help="Benchmark commands (Phase I)")
+    benchmark_subparsers = benchmark_parser.add_subparsers(dest="benchmark_command", help="Benchmark commands")
+
+    benchmark_run_parser = benchmark_subparsers.add_parser("run", help="Run a benchmark scenario")
+    benchmark_run_parser.add_argument("--scenario", type=str, required=True,
+                                       help="Scenario name (short, medium, long, software_architecture, dense_technical)")
+    benchmark_run_parser.add_argument("--mode", type=str, choices=["catalytic", "baseline"],
+                                       default="catalytic", help="Mode to run (default: catalytic)")
+    benchmark_run_parser.add_argument("--output", "-o", type=Path,
+                                       help="Output directory for results")
+
+    benchmark_compare_parser = benchmark_subparsers.add_parser("compare", help="Run A/B comparison benchmark")
+    benchmark_compare_parser.add_argument("--scenario", type=str, required=True,
+                                           help="Scenario name")
+    benchmark_compare_parser.add_argument("--output", "-o", type=Path,
+                                           help="Output path for report")
+
+    benchmark_list_parser = benchmark_subparsers.add_parser("list", help="List available scenarios")
+    benchmark_list_parser.add_argument("--verbose", "-v", action="store_true",
+                                        help="Show detailed scenario info")
+
+    # Metrics commands (Phase I.1)
+    metrics_parser = subparsers.add_parser("metrics", help="Metrics commands (Phase I)")
+    metrics_subparsers = metrics_parser.add_subparsers(dest="metrics_command", help="Metrics commands")
+
+    metrics_show_parser = metrics_subparsers.add_parser("show", help="Show session metrics")
+    metrics_show_parser.add_argument("session_id", help="Session ID")
+    metrics_show_parser.add_argument("--verbose", "-v", action="store_true",
+                                      help="Show detailed step metrics")
+
+    metrics_export_parser = metrics_subparsers.add_parser("export", help="Export session metrics")
+    metrics_export_parser.add_argument("session_id", help="Session ID")
+    metrics_export_parser.add_argument("--output", "-o", type=Path, required=True,
+                                        help="Output file path")
+    metrics_export_parser.add_argument("--format", choices=["json", "csv"], default="json",
+                                        help="Export format (default: json)")
+
+    # Invariants commands (Phase I.3)
+    invariants_parser = subparsers.add_parser("invariants", help="Invariant verification commands (Phase I)")
+    invariants_subparsers = invariants_parser.add_subparsers(dest="invariants_command", help="Invariants commands")
+
+    invariants_verify_parser = invariants_subparsers.add_parser("verify", help="Verify invariants for session")
+    invariants_verify_parser.add_argument("session_id", help="Session ID")
+    invariants_verify_parser.add_argument("--invariant", type=str,
+                                           help="Specific invariant to verify (e.g., INV-CATALYTIC-01)")
+    invariants_verify_parser.add_argument("--verbose", "-v", action="store_true",
+                                           help="Show detailed evidence")
+
+    invariants_report_parser = invariants_subparsers.add_parser("report", help="Generate invariant verification report")
+    invariants_report_parser.add_argument("session_id", help="Session ID")
+    invariants_report_parser.add_argument("--output", "-o", type=Path,
+                                           help="Output file path")
+    invariants_report_parser.add_argument("--format", choices=["md", "json"], default="md",
+                                           help="Report format (default: md)")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -2364,6 +2716,46 @@ def main():
             sys.exit(1)
 
         sys.exit(docs_commands[args.docs_command](args))
+
+    if args.command == "benchmark":
+        benchmark_commands = {
+            "run": cmd_benchmark_run,
+            "compare": cmd_benchmark_compare,
+            "list": cmd_benchmark_list
+        }
+
+        if args.benchmark_command not in benchmark_commands:
+            print(f"[FAIL] Unknown benchmark command: {args.benchmark_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(benchmark_commands[args.benchmark_command](args))
+
+    if args.command == "metrics":
+        metrics_commands = {
+            "show": cmd_metrics_show,
+            "export": cmd_metrics_export
+        }
+
+        if args.metrics_command not in metrics_commands:
+            print(f"[FAIL] Unknown metrics command: {args.metrics_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(metrics_commands[args.metrics_command](args))
+
+    if args.command == "invariants":
+        invariants_commands = {
+            "verify": cmd_invariants_verify,
+            "report": cmd_invariants_report
+        }
+
+        if args.invariants_command not in invariants_commands:
+            print(f"[FAIL] Unknown invariants command: {args.invariants_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(invariants_commands[args.invariants_command](args))
 
     if args.command not in commands:
         print(f"[FAIL] Unknown command: {args.command}")

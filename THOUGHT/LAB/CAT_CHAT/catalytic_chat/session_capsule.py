@@ -52,6 +52,12 @@ EVENT_BUDGET_CHECK = "budget_check"  # Budget invariant verification
 EVENT_CODEBOOK_SYNC = "codebook_sync"  # Codebook sync handshake result
 EVENT_SPC_METRICS = "spc_metrics"  # SPC compression metrics snapshot
 
+# Phase I: Measurement & Benchmarking event types
+EVENT_STEP_METRICS = "step_metrics"  # Per-step telemetry
+EVENT_TURN_METRICS = "turn_metrics"  # Per-turn aggregation
+EVENT_SESSION_METRICS = "session_metrics"  # Session summary
+EVENT_INVARIANT_CHECK = "invariant_check"  # Invariant verification result
+
 VALID_EVENT_TYPES = {
     EVENT_SESSION_START,
     EVENT_USER_MESSAGE,
@@ -69,6 +75,11 @@ VALID_EVENT_TYPES = {
     # SPC Integration events
     EVENT_CODEBOOK_SYNC,
     EVENT_SPC_METRICS,
+    # Phase I: Measurement & Benchmarking events
+    EVENT_STEP_METRICS,
+    EVENT_TURN_METRICS,
+    EVENT_SESSION_METRICS,
+    EVENT_INVARIANT_CHECK,
 }
 
 
@@ -932,6 +943,118 @@ class SessionCapsule:
             sessions.append(self.get_session_state(row["session_id"]))
 
         return sessions
+
+    # =========================================================================
+    # Phase I: Measurement & Benchmarking Event Logging
+    # =========================================================================
+
+    def log_step_metrics(
+        self,
+        session_id: str,
+        step_name: str,
+        latency_ms: float,
+        bytes_in: int,
+        bytes_out: int,
+        cache_hit: bool,
+        source: str,
+        success: bool,
+        metadata: Optional[Dict[str, Any]] = None
+    ) -> SessionEvent:
+        """
+        Log per-step metrics.
+
+        Records telemetry for a single operation step (resolution, compression, etc).
+        """
+        return self.append_event(session_id, EVENT_STEP_METRICS, {
+            "step_name": step_name,
+            "latency_ms": latency_ms,
+            "bytes_in": bytes_in,
+            "bytes_out": bytes_out,
+            "cache_hit": cache_hit,
+            "source": source,
+            "success": success,
+            "metadata": metadata or {},
+        })
+
+    def log_turn_metrics(
+        self,
+        session_id: str,
+        turn_index: int,
+        total_latency_ms: float,
+        bytes_expanded: int,
+        bytes_compressed: int,
+        cache_hit_rate: float,
+        e_score_mean: float,
+        tokens_in_context: int,
+        resolution_chain: Dict[str, int]
+    ) -> SessionEvent:
+        """
+        Log per-turn aggregated metrics.
+
+        Records aggregated telemetry for a complete conversation turn.
+        """
+        compression_ratio = bytes_expanded / bytes_compressed if bytes_compressed > 0 else 0.0
+        return self.append_event(session_id, EVENT_TURN_METRICS, {
+            "turn_index": turn_index,
+            "total_latency_ms": total_latency_ms,
+            "bytes_expanded": bytes_expanded,
+            "bytes_compressed": bytes_compressed,
+            "compression_ratio": compression_ratio,
+            "cache_hit_rate": cache_hit_rate,
+            "e_score_mean": e_score_mean,
+            "tokens_in_context": tokens_in_context,
+            "resolution_chain": resolution_chain,
+        })
+
+    def log_session_metrics(
+        self,
+        session_id: str,
+        total_turns: int,
+        total_latency_ms: float,
+        total_bytes_expanded: int,
+        total_bytes_compressed: int,
+        overall_compression_ratio: float,
+        cache_hit_rate: float,
+        mean_e_score: float,
+        invariant_checks: Dict[str, bool],
+        resolution_chain: Dict[str, int]
+    ) -> SessionEvent:
+        """
+        Log session-level summary metrics.
+
+        Records final metrics summary for the entire session.
+        """
+        return self.append_event(session_id, EVENT_SESSION_METRICS, {
+            "total_turns": total_turns,
+            "total_latency_ms": total_latency_ms,
+            "total_bytes_expanded": total_bytes_expanded,
+            "total_bytes_compressed": total_bytes_compressed,
+            "overall_compression_ratio": overall_compression_ratio,
+            "cache_hit_rate": cache_hit_rate,
+            "mean_e_score": mean_e_score,
+            "invariant_checks": invariant_checks,
+            "resolution_chain": resolution_chain,
+        })
+
+    def log_invariant_check(
+        self,
+        session_id: str,
+        invariant_id: str,
+        invariant_name: str,
+        passed: bool,
+        evidence: Dict[str, Any]
+    ) -> SessionEvent:
+        """
+        Log an invariant verification check.
+
+        Records whether a catalytic invariant was satisfied.
+        """
+        return self.append_event(session_id, EVENT_INVARIANT_CHECK, {
+            "invariant_id": invariant_id,
+            "invariant_name": invariant_name,
+            "passed": passed,
+            "evidence": evidence,
+        })
 
     def close(self) -> None:
         """Close database connection."""

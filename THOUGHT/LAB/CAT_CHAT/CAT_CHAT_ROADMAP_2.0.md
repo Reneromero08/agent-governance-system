@@ -353,14 +353,14 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### I. Measurement & Benchmarking (P3)
 
-**Status:** Not started
+**Status:** COMPLETE (v1.2.9 - 2026-01-19)
 **Purpose:** Prove catalytic compression with numbers
 
-- [ ] I.1 Per-step metrics (bytes expanded, cache hits, reuse rate)
-- [ ] I.2 Compression benchmarks vs baseline
-- [ ] I.3 Catalytic invariant verification suite
+- [x] I.1 Per-step metrics (bytes expanded, cache hits, reuse rate)
+- [x] I.2 Compression benchmarks vs baseline
+- [x] I.3 Catalytic invariant verification suite
 
-**Exit Criteria:** Compression claims backed by reproducible benchmarks
+**Exit Criteria:** Compression claims backed by reproducible benchmarks - ACHIEVED
 
 ---
 
