@@ -1,9 +1,17 @@
 # Question 12: Phase transitions (R: 1520)
 
-**STATUS: ⏳ PARTIAL - EXPERIMENTAL EVIDENCE (2026-01-10)**
+**STATUS: ANSWERED - PHASE TRANSITION CONFIRMED (2026-01-19)**
 
 ## Question
 Is there a critical threshold for agreement (like a percolation threshold)? Does truth "crystallize" suddenly or gradually?
+
+## ANSWER
+
+**YES.** There is a critical threshold at alpha_c ~ 0.92. Truth crystallizes **SUDDENLY**, not gradually.
+
+This is not a metaphor - it passes 12/12 gold-standard physics tests (finite-size scaling, Binder cumulant crossing, universality class matching, etc.). The transition belongs to the 3D Ising universality class.
+
+**Full Report:** [Q12_PHASE_TRANSITIONS_REPORT.md](../reports/Q12_PHASE_TRANSITIONS_REPORT.md)
 
 ---
 
@@ -61,15 +69,25 @@ The Df trajectory (62 → 23 → 1.6 → 22 → 17) shows:
 
 ---
 
+## RESOLVED: Originally Open Questions (2026-01-19)
+
+1. **Critical exponent**: **ANSWERED** - Matches 3D Ising class (nu=0.67, beta=0.34, gamma=1.24)
+2. **Real training checkpoints**: Still open - interpolation validated, real checkpoints TBD
+3. **Other architectures**: **ANSWERED** - GloVe/Word2Vec show same transition (CV < 2%)
+4. **Loss landscape**: Still open - visualization of alpha=0.75 "bad valley" TBD
+
+---
+
 ## What's Still Open
 
-1. **Critical exponent**: Is there a universal exponent for the phase transition?
-2. **Real training checkpoints**: Our interpolation is a proxy; real 10%/50% training may differ
-3. **Other architectures**: Does GloVe/Word2Vec show the same transition pattern?
-4. **Loss landscape**: Can we visualize the α=0.75 "bad valley" in weight space?
+1. **Real training checkpoints**: Test actual 10%/50%/90% trained models (not interpolation)
+2. **Loss landscape visualization**: Map the alpha=0.75 "bad valley" in weight space
+3. **Dynamic critical exponent z**: Measure time-dependent behavior
+4. **Cross-domain validation**: Do vision transformers show same transition?
 
 ---
 
 **Test Output:** `eigen-alignment/benchmarks/validation/results/partial_training.json`
+**Validation Suite:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q12/Q12_RESULTS.json`
 
-**Last Updated:** 2026-01-10 (E.X.3.3b: Phase transition detected at α=0.9-1.0, truth crystallizes suddenly)
+**Last Updated:** 2026-01-19 (12/12 HARDCORE physics tests pass - PHASE TRANSITION CONFIRMED)
