@@ -331,14 +331,23 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### H. Specs & Golden Demo (P3)
 
-**Status:** Not started
+**Status:** COMPLETE
 **Purpose:** Authoritative documentation + runnable demo
 
-- [ ] H.1 Authoritative specs (bundle, receipts, trust, execution)
-- [ ] H.2 Runbook: copy-paste runnable on Windows PowerShell
-- [ ] H.3 Golden demo from fresh clone
+- [x] H.1 Authoritative specs (bundle, receipts, trust, execution)
+  - `docs/specs/BUNDLE_SPEC.md` - Bundle protocol v5.0.0
+  - `docs/specs/RECEIPT_SPEC.md` - Receipt format v1.0.0
+  - `docs/specs/TRUST_SPEC.md` - Trust model v1.0.0
+  - `docs/specs/EXECUTION_SPEC.md` - Execution semantics v1.0.0
+  - `docs/specs/SPEC_INDEX.md` - Specification index
+- [x] H.2 Runbook: copy-paste runnable on Windows PowerShell
+  - `docs/CAT_CHAT_USAGE_GUIDE.md` - Updated with Fresh Clone Quick Start
+- [x] H.3 Golden demo from fresh clone
+  - `golden_demo/golden_demo.py` - Self-contained demo script
+  - `golden_demo/README.md` - Demo documentation
+  - `golden_demo/fixtures/` - Demo content and fixtures
 
-**Exit Criteria:** New user can run golden demo from README
+**Exit Criteria:** New user can run golden demo from README - ACHIEVED
 
 ---
 

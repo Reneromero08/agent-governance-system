@@ -1,6 +1,88 @@
-<!-- CONTENT_HASH: 3a4c968a174f1762576c6c8adf20bf0989dd63b5a1aa7c8e96fc0e15494e2f31 -->
+<!-- CONTENT_HASH: updated_with_phase_g_and_h -->
 
 All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file.
+
+## [1.2.7] - 2026-01-19
+
+### Added
+
+**Phase H: Specs & Golden Demo (P3) - COMPLETE**
+
+- **Authoritative specifications in `docs/specs/`:**
+  - `SPEC_INDEX.md` - Index linking all specification documents
+  - `BUNDLE_SPEC.md` - Bundle protocol v5.0.0 specification
+    - Bundle structure (bundle.json, artifacts/)
+    - Manifest and artifact schemas
+    - Hash computation algorithms (bundle_id, root_hash, plan_hash)
+    - Completeness gate and boundedness constraints
+    - Canonical JSON rules and verification protocol
+  - `RECEIPT_SPEC.md` - Receipt format v1.0.0 specification
+    - Receipt schema and step result format
+    - Receipt hash computation algorithm
+    - Chain linking protocol (parent_receipt_hash)
+    - Merkle root computation (binary tree)
+    - Attestation object structure and signing process
+  - `TRUST_SPEC.md` - Trust model v1.0.0 specification
+    - Trust policy schema and validator entries
+    - Trust index construction (by_public_key, by_validator_id)
+    - Key authorization check algorithm
+    - Scope definitions (RECEIPT, MERKLE)
+    - Strict trust and strict identity modes
+    - Signature verification (Ed25519)
+  - `EXECUTION_SPEC.md` - Execution semantics v1.0.0 specification
+    - Execution policy schema and fields
+    - Execution flow and step execution
+    - Fail-closed behavior table
+    - Post-execution policy enforcement
+    - Exit codes (0=OK, 1=verify fail, 2=invalid input, 3=internal error)
+    - Determinism requirements and artifact confinement
+
+- **Golden demo in `golden_demo/`:**
+  - `golden_demo.py` (290 lines) - Self-contained demo script
+    - No external dependencies except Python stdlib + jsonschema
+    - Demonstrates complete pipeline: bundle creation, verification, execution, receipt verification
+    - Determinism check: re-runs bundle creation to verify identical hashes
+    - Clear step-by-step output with progress indicators
+  - `README.md` - Demo documentation with quick start, expected output, troubleshooting
+  - `fixtures/demo_content.txt` - Sample content demonstrating CAT_CHAT principles
+  - `fixtures/demo_trust_policy.json` - Example trust policy for demo
+
+- **Updated documentation:**
+  - `docs/CAT_CHAT_USAGE_GUIDE.md` - Added "Fresh Clone Quick Start" section
+    - Direct link to golden demo execution
+    - Links to specification documents
+    - Positioned at top for new users
+
+**Phase G: Bundle Replay & Verification (P2) - COMPLETE**
+
+- **Bundle verification and execution:**
+  - `catalytic_chat/bundle.py` - BundleVerifier class (lines 393-569)
+    - Schema validation (required fields check)
+    - Ordering validation (steps by ordinal/step_id, artifacts by artifact_id)
+    - Artifact hash verification (SHA256 matching)
+    - Root hash recomputation and comparison
+    - Bundle ID recomputation and verification
+    - Boundedness validation (no ALL slices, all artifacts referenced)
+    - Forbidden fields rejection (no timestamps, cwd, os, locale)
+  - `catalytic_chat/executor.py` - BundleExecutor class (lines 15-249)
+    - Deterministic bundle execution
+    - Receipt generation from bundle results
+    - Receipt signing with Ed25519 keys
+    - Post-execution policy enforcement
+    - Chain linking support (parent_receipt_hash)
+  - Exit codes: 0 (success), 1 (verification failed), 2 (invalid input), 3 (internal error)
+
+- **Test coverage for bundle execution:**
+  - `tests/test_bundle_execution.py` (10 tests, all passing)
+    - Bundle verification with absolute and relative paths
+    - Bundle verification with bundle.json path
+    - Receipt generation and hash computation
+    - Deterministic execution (same bundle = same receipt)
+    - Chain integrity verification
+
+### Changed
+
+- `CAT_CHAT_ROADMAP_2.0.md` - Marked Phase G and Phase H as COMPLETE with deliverables
 
 ## [1.2.6] - 2026-01-19
 

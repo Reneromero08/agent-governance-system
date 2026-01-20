@@ -1,0 +1,42 @@
+# CAT_CHAT Golden Demo Content
+
+This file contains sample content for the golden demo.
+
+## Section: Introduction
+
+CAT_CHAT implements catalytic computing principles for bounded, deterministic execution.
+The system ensures that all operations are verifiable and reproducible.
+
+Key principles:
+- Determinism: Same inputs always produce identical outputs
+- Boundedness: No unbounded operations allowed
+- Fail-Closed: Invalid state halts execution immediately
+- Verification: Hash integrity at every level
+
+## Section: Bundle Protocol
+
+A bundle is a self-contained execution package containing:
+1. bundle.json manifest with metadata
+2. artifacts/ directory with content files
+
+Bundles are built from completed jobs where all steps are COMMITTED.
+
+## Section: Receipt System
+
+Receipts are immutable proofs of bundle execution.
+They form a hash-linked chain enabling verification of execution history.
+
+Each receipt contains:
+- bundle_id: identifies the executed bundle
+- receipt_hash: SHA-256 of receipt content
+- parent_receipt_hash: link to previous receipt
+- attestation: optional cryptographic signature
+
+## Section: Trust Model
+
+The trust policy pins which validator keys may sign receipts.
+Unknown keys are rejected (fail-closed behavior).
+
+Validators are authorized by scope:
+- RECEIPT: may sign individual receipts
+- MERKLE: may sign chain Merkle roots

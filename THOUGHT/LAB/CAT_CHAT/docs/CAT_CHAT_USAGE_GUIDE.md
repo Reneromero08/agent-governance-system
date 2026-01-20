@@ -1,8 +1,26 @@
-<!-- CONTENT_HASH: 84782362b5ccbfd85e2e1bc3144a142f6a1ced24fd6c11b8cb49cc9a9eb426e0 -->
+<!-- CONTENT_HASH: updated_for_phase_h -->
 
 # CAT_CHAT Usage Guide (CLI)
 
 This is a practical, copy-paste oriented guide for using **CAT_CHAT** from the repo root on Windows PowerShell.
+
+## Fresh Clone Quick Start
+
+**New to CAT_CHAT?** Run the golden demo to see the system in action:
+
+```powershell
+cd "D:\CCC 2.0\AI\agent-governance-system"
+$env:PYTHONPATH = "THOUGHT\LAB\CAT_CHAT"
+python THOUGHT\LAB\CAT_CHAT\golden_demo\golden_demo.py
+```
+
+This demo shows:
+- Bundle creation (deterministic packaging)
+- Bundle verification (hash integrity)
+- Bundle execution (receipt generation)
+- Receipt verification (chain integrity)
+
+For detailed specifications, see [docs/specs/SPEC_INDEX.md](specs/SPEC_INDEX.md).
 
 ## 0) One-time setup (PowerShell)
 

@@ -1,0 +1,12 @@
+{
+  "policy_version": "1.0.0",
+  "allow": [
+    {
+      "validator_id": "golden_demo_validator",
+      "public_key": "0000000000000000000000000000000000000000000000000000000000000000",
+      "schemes": ["ed25519"],
+      "scope": ["RECEIPT", "MERKLE"],
+      "enabled": true
+    }
+  ]
+}
