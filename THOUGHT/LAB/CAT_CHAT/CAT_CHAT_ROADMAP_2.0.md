@@ -307,14 +307,25 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### G. Bundle Replay & Verification (P2)
 
-**Status:** Not started
+**Status:** COMPLETE (2026-01-19)
 **Purpose:** Prove bundles are self-contained and reproducible
+**Files:** bundle_runner.py
+**Tests:** tests/test_bundle_replay.py (28 tests, all passing)
 
-- [ ] G.1 Bundle runner: takes bundle.json + artifacts only
-- [ ] G.2 Verify-before-run: hard fail on mismatch
-- [ ] G.3 Reproducibility: run twice -> identical receipts
+- [x] G.1 Bundle runner: takes bundle.json + artifacts only
+  - BundleRunner class operates without repo_root or database access
+  - All inputs resolved from artifacts/ directory
+  - replay_bundle() convenience function for single-shot replay
+- [x] G.2 Verify-before-run: hard fail on mismatch
+  - Verification delegated to BundleVerifier before any execution
+  - BundleRunnerError raised on any verification failure
+  - No partial execution - no receipt written on failure
+- [x] G.3 Reproducibility: run twice -> identical receipts
+  - Byte-identical receipt files on repeat runs
+  - Identical receipt_hash and merkle_root
+  - Deterministic across different directories (no path leakage)
 
-**Exit Criteria:** Bundle can be replayed offline with identical outputs
+**Exit Criteria:** Bundle can be replayed offline with identical outputs - ACHIEVED
 
 ---
 
@@ -636,17 +647,17 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 | P0 | C. Auto-Controlled Context Loop | Core done (C.6.3 pending) | Large |
 | P1 | D. SPC Integration | DONE | Medium |
 | P2 | E. Vector Fallback | DONE | Medium |
-| P2 | F. Docs Index | No | Medium |
-| P2 | G. Bundle Replay | No | Medium |
+| P2 | F. Docs Index | DONE | Medium |
+| P2 | G. Bundle Replay | DONE | Medium |
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
 | P3 | J. Scaling & Hierarchical Memory | No | Large |
 
-**Recommended order:** F -> G -> H -> I -> J
+**Recommended order:** H -> I -> J
 
 **Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
-**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 E complete. C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, and governed vector fallback.
+**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 complete (E, F, G). C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, governed vector fallback, docs index, and offline bundle replay.
 
 ---
 
