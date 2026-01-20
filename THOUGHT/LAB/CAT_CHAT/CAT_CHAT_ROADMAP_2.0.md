@@ -310,6 +310,289 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ---
 
+### J. Recursive E-Score Hierarchy (P3 - Future)
+
+**Status:** Not started
+**Purpose:** Extend effective memory from ~1,000 turns to ~100,000+ turns
+**Depends On:** C (Auto-Controlled Context Loop must work first)
+
+**Philosophy:** E guides to E guides to E. No external tools. No indexes. No approximate nearest neighbor hacks. Just recursive vector math - the same E-score at every level of the tree.
+
+---
+
+**The Core Insight:**
+
+Every turn has an embedding vector. E-score is computed FROM vectors:
+```
+E = |<query_vec | item_vec>|^2   (Born rule)
+```
+
+A "drawer" is just a GROUP of vectors with a CENTROID (average vector). E-score against the centroid predicts whether the contents are worth checking:
+```
+centroid = mean([child_1_vec, child_2_vec, ..., child_n_vec])
+
+E(query, centroid) low  --> contents probably all low E --> SKIP
+E(query, centroid) high --> some contents probably high E --> RECURSE
+```
+
+**No text summaries. No LLM calls. Just vector centroids.**
+
+---
+
+**The Structure:**
+```
+L3: 10 centroids      (each = average of 10,000 turn vectors)
+    |
+L2: 100 centroids     (each = average of 1,000 turn vectors)
+    |
+L1: 1,000 centroids   (each = average of 100 turn vectors)
+    |
+L0: 100,000 vectors   (actual turn embeddings + content)
+```
+
+---
+
+**The Algorithm:**
+```
+Query: "What signing algorithm?"
+       |
+       v
+E(query, centroid_L3_A) = 0.1 --> SKIP (prune 10,000 turns)
+E(query, centroid_L3_B) = 0.6 --> OPEN
+                                   |
+                                   v
+              E(query, centroid_L2_B1) = 0.2 --> SKIP (prune 1,000 turns)
+              E(query, centroid_L2_B2) = 0.7 --> OPEN
+                                                  |
+                                                  v
+                         E(query, centroid_L1_B2a) = 0.3 --> SKIP
+                         E(query, centroid_L1_B2b) = 0.8 --> OPEN
+                                                             |
+                                                             v
+                                    E(query, turn_47) = 0.9 --> RETRIEVE
+                                    E(query, turn_48) = 0.2 --> skip
+```
+
+**Same function at every level. Same threshold. E guides to E guides to E.**
+
+---
+
+**J.0 Vector Persistence (PREREQUISITE):**
+
+Currently CAT Chat stores text but computes embeddings on-the-fly. This is 10,000x slower than using stored vectors:
+```
+Embedding API call: ~10-100ms per item
+Dot product:        ~0.001ms per item
+```
+
+Without stored vectors, the hierarchy can't work at scale.
+
+- [ ] J.0.1 Add `embedding` BLOB column to `session_events` table
+- [ ] J.0.2 Store embedding at turn compression time (one API call, then persisted)
+- [ ] J.0.3 Add `load_vectors(session_id)` to load all embeddings on session resume
+- [ ] J.0.4 Migrate existing sessions: backfill embeddings for turns without them
+
+**Storage:** 384-dim float32 = 1.5KB per turn. 100K turns = 150MB. Acceptable.
+
+---
+
+**J.1 Centroid Structure:**
+- [ ] J.1.1 Define levels: L0 (turns), L1 (100 turns), L2 (1000 turns), L3 (10000 turns)
+- [ ] J.1.2 Each node has: centroid_vector, child_pointers, turn_count
+- [ ] J.1.3 Centroid = mean(child vectors) - pure vector math, no LLM
+- [ ] J.1.4 Store in session_events with level metadata and parent pointer
+
+**J.2 Recursive Retrieval:**
+- [ ] J.2.1 `retrieve(query_vec, node)` - single recursive function
+- [ ] J.2.2 Base case (L0): return turn content if budget allows
+- [ ] J.2.3 Recursive case: E(query, centroid) >= threshold? recurse into children
+- [ ] J.2.4 Budget-aware: stop if working_set would exceed limit
+
+```python
+def retrieve(query_vec, node, budget):
+    if node.level == 0:
+        return [node.content] if budget > node.tokens else []
+
+    results = []
+    for child in node.children:
+        E = compute_E(query_vec, child.centroid)
+        if E >= THRESHOLD:
+            results.extend(retrieve(query_vec, child, budget))
+            budget -= sum(r.tokens for r in results)
+    return results
+```
+
+**J.3 Tree Maintenance:**
+- [ ] J.3.1 On turn compression: add vector to current L1 node, update centroid
+- [ ] J.3.2 When L1 has 100 children: close it, start new L1
+- [ ] J.3.3 When 10 L1 nodes exist: create L2 parent with centroid of L1 centroids
+- [ ] J.3.4 Centroid update: `new_centroid = (old_centroid * n + new_vec) / (n + 1)`
+
+**J.4 Hot Path (Recent Turns):**
+- [ ] J.4.1 Last 100 turns: check directly (skip hierarchy)
+- [ ] J.4.2 Older turns: use recursive hierarchy
+
+**J.5 Forgetting:**
+- [ ] J.5.1 Track last_accessed per node
+- [ ] J.5.2 Archive old nodes: keep centroid, drop L0 content
+- [ ] J.5.3 Archived nodes still participate in E-score (centroid remains)
+
+---
+
+**Complexity:**
+```
+Brute force:  O(n)                    100K turns = 100,000 E-computations
+Hierarchy:    O(b * log_b(n))         100K turns = ~250 E-computations (b=100)
+                                      1M turns   = ~300 E-computations
+```
+
+**Exit Criteria:**
+- O(log n) E-computations per query
+- Recall >= 80% at 100K turns
+- Zero external dependencies
+- Self-maintaining tree structure
+
+---
+
+**Mathematical Foundation:**
+
+The hierarchy works because E-score against centroid approximates mean E-score of contents:
+```
+E(query, centroid) ~ mean(E(query, child_i))
+```
+
+If the average is low, most children are low. If the average is high, at least some children are high.
+
+**This is why E guides to E: the centroid IS just another vector, and E-score IS the decision function at every level.**
+
+---
+
+**Experimental Validation (SQuAD Dataset):**
+
+Tested on SQuAD reading comprehension dataset (10K passages, 1K questions with known answers).
+
+**Key Findings:**
+
+| Metric | Brute Force | Hierarchy | Notes |
+|--------|-------------|-----------|-------|
+| Recall@10 | 88% | 85% | 97% of brute force quality |
+| E-computations | 10,000 | 1,785 | **5.6x speedup** |
+| LLM accuracy | 100%* | 100%* | *on gold context |
+
+**Critical Insights:**
+
+1. **Top-K centroid selection > threshold-based pruning**
+   - Threshold-based pruning (E >= 0.5) was too aggressive
+   - Top-K selection (explore K=10 highest-E centroids) works much better
+   - Reason: centroids smooth out E-scores, making threshold decisions unreliable
+
+2. **Semantic clustering is REQUIRED**
+   - Random grouping (by index) creates meaningless centroids
+   - k-means clustering before building hierarchy is essential
+   - Groups semantically similar passages -> discriminative centroids
+
+3. **Retrieval is the bottleneck, not LLM**
+   - LLM (lfm2.5-1.2b) achieves 100% accuracy when given gold context
+   - All failures are retrieval misses, not LLM comprehension failures
+
+**Implementation Note:** Test file at `examples/test_hierarchy_squad.py`
+
+**Updated Algorithm (based on findings):**
+```
+def retrieve_hierarchical(query_vec, root, top_k=10):
+    """Top-K centroid selection - NOT threshold-based."""
+    if node.level == 0:
+        return [(node, E(query_vec, node.centroid))]
+
+    # Score ALL children, take top-K
+    child_scores = [(child, E(query_vec, child.centroid))
+                    for child in node.children]
+    child_scores.sort(by E, descending)
+
+    results = []
+    for child, _ in child_scores[:top_k]:
+        results.extend(retrieve_hierarchical(query_vec, child, top_k))
+    return results
+```
+
+**Research-Backed Optimizations (from FORMULA/research/questions):**
+
+The following findings from the research index could further improve retrieval:
+
+| Finding | Source | Implication |
+|---------|--------|-------------|
+| Df = 22 effective dimensions | Q43 (QGT) | Cluster in PCA-reduced space, not full 384D |
+| Space is curved (holonomy -0.10 rad) | Q43 | Consider spherical k-means instead of flat |
+| Phase transition at alpha=0.9 | Q12 | Sharp boundary between meaningful/meaningless |
+| Angular momentum conserved (CV=6e-7) | Q38 | Geodesic distance may outperform cosine^2 |
+| E = Born rule CONFIRMED (r=0.999) | Q44 | Current E-score formula is correct |
+
+**Potential Improvement: PCA Pre-clustering**
+```python
+from sklearn.decomposition import PCA
+
+Df = 22  # Effective dimensionality from Q43
+pca = PCA(n_components=Df)
+projected = pca.fit_transform(vectors)
+
+# Cluster in reduced space - removes ~362 dimensions of noise
+kmeans = KMeans(n_clusters=n_clusters)
+labels = kmeans.fit_predict(projected)
+```
+
+**Why this might help:** Random directions in 384D dilute centroid signal. Projecting to the ~22 "carved semantic directions" (Q43) concentrates information where it matters. Untested but theoretically sound.
+
+---
+
+**Iso-Temporal Protocol Validation (VALIDATED!):**
+
+**The Hypothesis:** Tracking "rotation signature" (processing context) improves retrieval.
+
+**VALIDATED on REAL DATA (99 arxiv papers, 3487 sections):**
+
+After adding temporal links to feral_eternal.db with explicit prev/next pointers:
+
+| Method | Recall@10 | vs Pure E |
+|--------|-----------|-----------|
+| Pure E-score | 33.0% | baseline |
+| Context (lambda=0.2) | 36.5% | **+10.6%** |
+| Frame+E (lambda=0.5) | **38.5%** | **+16.7%** |
+| Context-only | 21.0% | -36% |
+| Frame-only | 23.0% | -30% |
+
+**Also validated with synthetic causal data:**
+
+| Context Influence | Pure E | Context+E | Frame+E | Improvement |
+|-------------------|--------|-----------|---------|-------------|
+| 30% (weak) | 55.3% | 76.0% | 75.3% | **+37.3%** |
+| 50% | 64.7% | 86.0% | 87.3% | **+33.0%** |
+| 70% | 78.7% | 93.3% | 94.0% | **+18.6%** |
+| 90% (strong) | 88.7% | 96.7% | 97.3% | **+9.0%** |
+
+**Key Insights:**
+
+1. **CONTEXT HELPS** even on authored paper content (+10.6-16.7% improvement)
+2. **Rotation frames beat centroid** by 5.7% on real data (38.5% vs 36.5%)
+3. **Best lambda is low (0.2-0.5)** - too much context weight hurts recall
+4. **Requires temporal DB schema** - without explicit prev/next pointers, context must be reconstructed
+
+**Schema Requirements (implemented in feral_eternal.db):**
+```sql
+ALTER TABLE vectors ADD COLUMN prev_vector_id TEXT;
+ALTER TABLE vectors ADD COLUMN next_vector_id TEXT;
+ALTER TABLE vectors ADD COLUMN context_vec_blob BLOB;  -- precomputed centroid
+ALTER TABLE vectors ADD COLUMN sequence_id TEXT;       -- paper_id, session_id, etc
+ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
+```
+
+**Migration:** `FERAL_RESIDENT/migrations/001_add_temporal_links.py`
+
+**Implication for CAT Chat:** The Auto-Controlled Context Loop (Section C) should store context signatures with each turn. During retrieval, score items by: `E(query, item) + lambda * E(query, item_context)`
+
+**Test file:** `examples/test_isotemporal_feral.py --rotation`
+
+---
+
 ## Priority Summary
 
 | Priority | Phase | Blocker? | Effort |
@@ -323,8 +606,11 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 | P2 | G. Bundle Replay | No | Medium |
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
+| P3 | J. Scaling & Hierarchical Memory | No | Large |
 
-**Recommended order:** C -> D -> E -> F -> G -> H -> I
+**Recommended order:** C -> D -> E -> F -> G -> H -> I -> J
+
+**Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
 **Note:** C (Auto-Controlled Context) is the core catalytic behavior and remaining P0 blocker. A and B are complete. E-score computation exists in q44_core.py (Born rule). Without C, the system is not actually catalytic.
 

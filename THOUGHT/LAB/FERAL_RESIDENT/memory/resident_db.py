@@ -26,11 +26,24 @@ class VectorRecord:
     composition_op: str
     parent_ids: List[str]
     created_at: str
+    # Temporal links (Iso-Temporal Protocol)
+    prev_vector_id: Optional[str] = None
+    next_vector_id: Optional[str] = None
+    context_vec_blob: Optional[bytes] = None
+    sequence_id: Optional[str] = None
+    sequence_idx: Optional[int] = None
 
     @property
     def vector(self) -> np.ndarray:
         """Deserialize vector from blob"""
         return np.frombuffer(self.vec_blob, dtype=np.float32)
+
+    @property
+    def context_vector(self) -> Optional[np.ndarray]:
+        """Deserialize context vector from blob (if exists)"""
+        if self.context_vec_blob is None:
+            return None
+        return np.frombuffer(self.context_vec_blob, dtype=np.float32)
 
 
 @dataclass
