@@ -46,11 +46,12 @@ class CortexExpansionResolver:
     """
     CORTEX-first expansion resolver for context assembly.
 
-    Implements 3.2.5 retrieval order:
-    1. CORTEX semantic search
-    2. Cassette network query
-    3. Symbol registry fallback
-    4. Fail-closed if unresolvable
+    Implements 3.2.5 retrieval order (updated with Phase D SPC integration):
+    1. SPC resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR) - Phase D
+    2. CORTEX semantic search
+    3. Cassette network query
+    4. Symbol registry fallback
+    5. Fail-closed if unresolvable
     """
 
     def __init__(
@@ -58,7 +59,8 @@ class CortexExpansionResolver:
         repo_root: Optional[Path] = None,
         tool_executor: Optional[ChatToolExecutor] = None,
         symbol_resolver: Optional[Any] = None,
-        fail_on_unresolved: bool = True
+        fail_on_unresolved: bool = True,
+        enable_spc: bool = True
     ):
         """
         Initialize CORTEX expansion resolver.
@@ -68,6 +70,7 @@ class CortexExpansionResolver:
             tool_executor: ChatToolExecutor instance (lazy loaded if None)
             symbol_resolver: SymbolResolver instance (lazy loaded if None)
             fail_on_unresolved: If True, raise error on unresolvable symbols
+            enable_spc: If True, enable SPC pointer resolution (Phase D)
         """
         if repo_root is None:
             repo_root = Path(__file__).resolve().parents[4]
@@ -77,8 +80,13 @@ class CortexExpansionResolver:
         self._symbol_resolver = symbol_resolver
         self.fail_on_unresolved = fail_on_unresolved
 
+        # Phase D: SPC integration
+        self._enable_spc = enable_spc
+        self._spc_bridge = None
+
         # Stats tracking
         self._stats = {
+            "spc_hits": 0,  # Phase D: SPC resolution hits
             "cortex_hits": 0,
             "cassette_hits": 0,
             "symbol_hits": 0,
@@ -116,6 +124,51 @@ class CortexExpansionResolver:
                 tool_executor=self.tool_executor
             )
         return self._cassette_client
+
+    @property
+    def spc_bridge(self):
+        """Lazy load SPC bridge for pointer resolution (Phase D)."""
+        if self._spc_bridge is None and self._enable_spc:
+            try:
+                from catalytic_chat.spc_bridge import SPCBridge
+                self._spc_bridge = SPCBridge(self.repo_root)
+                # Auto-sync on first access
+                self._spc_bridge.sync_handshake("resolver-session")
+            except ImportError:
+                # SPC not available, disable
+                self._enable_spc = False
+                return None
+        return self._spc_bridge
+
+    def _try_spc_resolution(self, symbol_id: str) -> Optional[str]:
+        """
+        Try SPC resolution for pointer-like symbols (Phase D.2).
+
+        Supports:
+        - SYMBOL_PTR: C, I, V, or CJK glyphs
+        - HASH_PTR: sha256:abc123...
+        - COMPOSITE_PTR: C3, C&I, L.C.3, C:build
+
+        Args:
+            symbol_id: Symbol or pointer to resolve
+
+        Returns:
+            Expanded content string, or None if not an SPC pointer
+        """
+        if not self._enable_spc:
+            return None
+
+        bridge = self.spc_bridge
+        if bridge is None:
+            return None
+
+        if not bridge.is_spc_pointer(symbol_id):
+            return None
+
+        result = bridge.resolve_pointer(symbol_id)
+        if result:
+            return bridge.get_expansion_text(result)
+        return None
 
     def _get_timestamp(self) -> str:
         """Get ISO8601 timestamp."""
@@ -274,15 +327,16 @@ class CortexExpansionResolver:
         is_explicit_reference: bool = True
     ) -> RetrievalResult:
         """
-        Resolve a symbol to content using CORTEX-first retrieval.
+        Resolve a symbol to content using SPC-first, CORTEX-second retrieval.
 
-        Retrieval order (Phase B.2 updated):
-        1. CORTEX query (if query_hint provided or symbol looks like a query)
-        2. Cassette network symbol (targeted search for @SYMBOL refs)
-        3. Cassette network (general FTS)
-        4. Semantic search
-        5. Symbol registry (local)
-        6. Fail-closed
+        Retrieval order (Phase D updated):
+        1. SPC resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR) - Phase D
+        2. CORTEX query (if query_hint provided or symbol looks like a query)
+        3. Cassette network symbol (targeted search for @SYMBOL refs)
+        4. Cassette network (general FTS)
+        5. Semantic search
+        6. Symbol registry (local)
+        7. Fail-closed
 
         Args:
             symbol_id: Symbol ID or query to resolve
@@ -298,10 +352,25 @@ class CortexExpansionResolver:
         self._stats["total_queries"] += 1
         retrieval_path = []
 
+        # 1. Try SPC resolution FIRST (Phase D - highest priority)
+        if self._enable_spc:
+            retrieval_path.append("spc_resolve")
+            content = self._try_spc_resolution(symbol_id)
+            if content:
+                self._stats["spc_hits"] += 1
+                return RetrievalResult(
+                    symbol_id=symbol_id,
+                    content=content,
+                    source="spc",
+                    retrieval_path=retrieval_path,
+                    content_hash=self._compute_hash(content),
+                    retrieved_at=self._get_timestamp()
+                )
+
         # Determine query string
         query = query_hint if query_hint else symbol_id
 
-        # 1. Try CORTEX query
+        # 2. Try CORTEX query
         results = self._try_cortex_query(query)
         retrieval_path.append("cortex_query")
         if results:

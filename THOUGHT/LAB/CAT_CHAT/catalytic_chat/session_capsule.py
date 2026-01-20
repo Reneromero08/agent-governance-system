@@ -48,6 +48,10 @@ EVENT_TURN_STORED = "turn_stored"  # Turn compression to catalytic space
 EVENT_TURN_HYDRATED = "turn_hydrated"  # Turn rehydration from catalytic space
 EVENT_BUDGET_CHECK = "budget_check"  # Budget invariant verification
 
+# Phase D: SPC Integration event types
+EVENT_CODEBOOK_SYNC = "codebook_sync"  # Codebook sync handshake result
+EVENT_SPC_METRICS = "spc_metrics"  # SPC compression metrics snapshot
+
 VALID_EVENT_TYPES = {
     EVENT_SESSION_START,
     EVENT_USER_MESSAGE,
@@ -62,6 +66,9 @@ VALID_EVENT_TYPES = {
     EVENT_TURN_STORED,
     EVENT_TURN_HYDRATED,
     EVENT_BUDGET_CHECK,
+    # SPC Integration events
+    EVENT_CODEBOOK_SYNC,
+    EVENT_SPC_METRICS,
 }
 
 
@@ -581,6 +588,56 @@ class SessionCapsule:
             "context_window": context_window,
             "model_id": model_id,
         })
+
+    # =========================================================================
+    # Phase D: SPC Integration Event Logging
+    # =========================================================================
+
+    def log_codebook_sync(
+        self,
+        session_id: str,
+        codebook_id: str,
+        codebook_sha256: str,
+        codebook_version: str,
+        kernel_version: str,
+        blanket_status: str
+    ) -> SessionEvent:
+        """
+        Log codebook sync handshake result.
+
+        Records the SPC codebook synchronization per D.1 requirement.
+
+        Args:
+            session_id: Session ID
+            codebook_id: Codebook identifier (e.g., "ags-codebook")
+            codebook_sha256: SHA-256 hash of canonical codebook JSON
+            codebook_version: Codebook semantic version
+            kernel_version: SPC kernel version
+            blanket_status: "ALIGNED" or "DISSOLVED"
+        """
+        return self.append_event(session_id, EVENT_CODEBOOK_SYNC, {
+            "codebook_id": codebook_id,
+            "codebook_sha256": codebook_sha256,
+            "codebook_version": codebook_version,
+            "kernel_version": kernel_version,
+            "blanket_status": blanket_status,
+        })
+
+    def log_spc_metrics(
+        self,
+        session_id: str,
+        metrics: Dict[str, Any]
+    ) -> SessionEvent:
+        """
+        Log SPC compression metrics snapshot.
+
+        Records compression metrics per D.3 requirement.
+
+        Args:
+            session_id: Session ID
+            metrics: Metrics dict from SPCBridge.get_metrics()
+        """
+        return self.append_event(session_id, EVENT_SPC_METRICS, metrics)
 
     def get_working_set_tokens(
         self,

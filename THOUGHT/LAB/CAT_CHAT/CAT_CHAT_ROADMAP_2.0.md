@@ -1,6 +1,6 @@
 # CAT Chat Roadmap v2.0
 
-**Last updated:** 2026-01-18
+**Last updated:** 2026-01-19
 **Scope:** Pending work to make CAT Chat a fully catalytic, integrated system
 **Previous:** CAT_CHAT_ROADMAP_1.1.md (archived)
 **Design Spec:** `INBOX/reports/V4/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md`
@@ -111,8 +111,12 @@ Single `_generated/cat_chat.db` contains all tables:
 | Context Assembly | context_assembler.py, geometric_context_assembler.py | Done |
 | MCP Integration | mcp_integration.py | Done |
 | Geometric Chat | geometric_chat.py | Done |
-| Session Capsule | session_capsule.py | Tests pending (A) |
-| CORTEX Resolver | cortex_expansion_resolver.py | Tests pending (A) |
+| Session Capsule | session_capsule.py | Done |
+| CORTEX Resolver | cortex_expansion_resolver.py | Done |
+| Auto-Context Manager | auto_context_manager.py | Done |
+| Context Partitioner | context_partitioner.py | Done |
+| Turn Compressor | turn_compressor.py | Done |
+| Adaptive Budget | adaptive_budget.py | Done |
 
 ---
 
@@ -162,9 +166,11 @@ Single `_generated/cat_chat.db` contains all tables:
 
 ### C. Auto-Controlled Context Loop (P0 - Core Catalytic Behavior)
 
-**Status:** Not started
+**Status:** Core complete, C.6.3 pending
 **Purpose:** Virtual memory for LLMs - automatic working set management
 **Depends On:** A (session persistence)
+**Files:** auto_context_manager.py, context_partitioner.py, turn_compressor.py, adaptive_budget.py
+**Tests:** tests/test_auto_context_loop.py
 **E-Score Implementation:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q44/q44_core.py`
 - `compute_E_linear(query_vec, context_vecs)` - E = mean overlap (Born rule)
 - `compute_born_probability(query_vec, context_vecs)` - P = |<psi|phi>|^2
@@ -173,38 +179,38 @@ Single `_generated/cat_chat.db` contains all tables:
 This is THE core catalytic behavior. Without this, nothing is actually catalytic.
 
 **C.1 Context Budget & Working Set:**
-- [ ] C.1.1 Define clean space budget (max tokens for working set)
-- [ ] C.1.2 Track working_set (materialized) vs pointer_set (offloaded) per session
-- [ ] C.1.3 Hard fail if working_set exceeds budget (INV-CATALYTIC-04)
+- [x] C.1.1 Define clean space budget (max tokens for working set)
+- [x] C.1.2 Track working_set (materialized) vs pointer_set (offloaded) per session
+- [x] C.1.3 Hard fail if working_set exceeds budget (INV-CATALYTIC-04)
 
 **C.2 E-Score Based Eviction:**
-- [ ] C.2.1 On budget exceeded, compute E-score of each working_set item vs current query
-- [ ] C.2.2 Evict lowest-E items to pointer_set until under budget
-- [ ] C.2.3 Log eviction events to session_events (hash-chained)
+- [x] C.2.1 On budget exceeded, compute E-score of each working_set item vs current query
+- [x] C.2.2 Evict lowest-E items to pointer_set until under budget
+- [x] C.2.3 Log eviction events to session_events (hash-chained)
 
 **C.3 E-Score Based Hydration:**
-- [ ] C.3.1 On each query, compute E-score of query vs all pointer_set items
-- [ ] C.3.2 Hydrate high-E items (above threshold) into working_set
-- [ ] C.3.3 Hydration is bounded - max N items per query, respects budget
-- [ ] C.3.4 Log hydration events to session_events
+- [x] C.3.1 On each query, compute E-score of query vs all pointer_set items
+- [x] C.3.2 Hydrate high-E items (above threshold) into working_set
+- [x] C.3.3 Hydration is bounded - max N items per query, respects budget
+- [x] C.3.4 Log hydration events to session_events
 
 **C.4 Turn Compression:**
-- [ ] C.4.1 After response, old turns (beyond window) compress to hash pointers
-- [ ] C.4.2 Full turn content stored in catalytic space (session_events)
-- [ ] C.4.3 Only hash pointer + summary remains in working_set
+- [x] C.4.1 After response, old turns (beyond window) compress to hash pointers
+- [x] C.4.2 Full turn content stored in catalytic space (session_events)
+- [x] C.4.3 Only hash pointer + summary remains in working_set
 
 **C.5 Catalytic Chat Loop:**
-- [ ] C.5.1 Wire together: query -> hydrate -> assemble -> LLM -> compress -> evict
-- [ ] C.5.2 Session capsule logs every step (deterministic replay)
-- [ ] C.5.3 All context assembly uses ContextAssembler with budgets
-- [ ] C.5.4 GeometricChat.respond() uses auto-managed context, not raw docs
+- [x] C.5.1 Wire together: query -> hydrate -> assemble -> LLM -> compress -> evict
+- [x] C.5.2 Session capsule logs every step (deterministic replay)
+- [x] C.5.3 All context assembly uses ContextAssembler with budgets
+- [x] C.5.4 GeometricChat.respond() uses auto-managed context, not raw docs
 
 **C.6 E-Gating Threshold Tuning:**
-- [ ] C.6.1 Default threshold = 0.5 (from Q44 validation)
-- [ ] C.6.2 Configurable per-session
-- [ ] C.6.3 Track E-score vs response quality correlation
+- [x] C.6.1 Default threshold = 0.5 (from Q44 validation)
+- [x] C.6.2 Configurable per-session
+- [ ] C.6.3 Track E-score vs response quality correlation (marked "Future" in threshold_adapter.py)
 
-**Exit Criteria:**
+**Exit Criteria:** Core achieved, quality correlation tracking pending
 - Model runs with fully auto-managed context
 - No manual @symbol references needed
 - Working set stays within budget across entire session
@@ -214,21 +220,27 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### D. Semantic Pointer Compression Integration (P1)
 
-**Status:** Not started
+**Status:** COMPLETE
 **Purpose:** Use SPC instead of verbose @symbols
+**Files:** spc_bridge.py
+**Tests:** tests/test_spc_integration.py (35 tests, all passing)
 
-- [ ] C.1 Codebook sync handshake:
+- [x] D.1 Codebook sync handshake:
   - Verify codebook_id + SHA256 on session start
   - Fail-closed on mismatch
-- [ ] C.2 Pointer resolution:
-  - Support SYMBOL_PTR (CJK characters like `法`)
+  - EVENT_CODEBOOK_SYNC logged to session events
+- [x] D.2 Pointer resolution:
+  - Support SYMBOL_PTR (CJK characters like `法` + ASCII radicals CIVLGSRAJP)
   - Support HASH_PTR (sha256:7cfd0418...)
-  - Support COMPOSITE_PTR (`法.驗`, `C3:build`)
-- [ ] C.3 Compression metrics:
-  - Track pointer vs full-content savings
-  - Prove compression claims
+  - Support COMPOSITE_PTR (`法.驗`, `C3:build`, `C&I`)
+  - SPC is highest priority in resolution chain (before CORTEX)
+- [x] D.3 Compression metrics:
+  - Track tokens_expanded, tokens_pointers, tokens_saved
+  - Track CDR (Concept Density Ratio) per Q33
+  - Per-symbol usage and savings tracking
+  - EVENT_SPC_METRICS for session logging
 
-**Exit Criteria:** SPC pointers resolve correctly with fail-closed semantics
+**Exit Criteria:** SPC pointers resolve correctly with fail-closed semantics - ACHIEVED
 
 ---
 
@@ -599,8 +611,8 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 |----------|-------|----------|--------|
 | P0 | A. Session Tests | DONE | Small |
 | P1 | B. Cassette Network Integration | DONE | Medium |
-| P0 | C. Auto-Controlled Context Loop | Yes | Large |
-| P1 | D. SPC Integration | No | Medium |
+| P0 | C. Auto-Controlled Context Loop | Core done (C.6.3 pending) | Large |
+| P1 | D. SPC Integration | DONE | Medium |
 | P2 | E. Vector Fallback | No | Medium |
 | P2 | F. Docs Index | No | Medium |
 | P2 | G. Bundle Replay | No | Medium |
@@ -608,11 +620,11 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 | P3 | I. Measurement | No | Medium |
 | P3 | J. Scaling & Hierarchical Memory | No | Large |
 
-**Recommended order:** C -> D -> E -> F -> G -> H -> I -> J
+**Recommended order:** E -> F -> G -> H -> I -> J
 
 **Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
-**Note:** C (Auto-Controlled Context) is the core catalytic behavior and remaining P0 blocker. A and B are complete. E-score computation exists in q44_core.py (Born rule). Without C, the system is not actually catalytic.
+**Note:** P0 core complete (A, B, C core), P1 complete (D). C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context and SPC pointer compression.
 
 ---
 
@@ -631,8 +643,8 @@ All dependencies satisfied. Integration work is unblocked.
 
 CAT Chat graduates from LAB to main system when:
 
-1. All P0 items complete (A: DONE, B: DONE, C: pending)
-2. Auto-controlled context loop operational (C) - the core catalytic behavior
+1. All P0 items complete (A: DONE, B: DONE, C: Core done, C.6.3 pending)
+2. Auto-controlled context loop operational (C) - Core done
 3. Tests pass with main cassette network
 4. All 7 catalytic invariants verified (including INV-CATALYTIC-07: Auto-Context)
 5. Compression claims proven with benchmarks
