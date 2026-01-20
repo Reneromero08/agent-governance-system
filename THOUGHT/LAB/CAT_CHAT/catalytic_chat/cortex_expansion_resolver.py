@@ -1,18 +1,27 @@
 """
-CORTEX Expansion Resolver (Phase 3.2.5)
+CORTEX Expansion Resolver (Phase 3.2.5 + Phase E)
 
-Provides CORTEX-first retrieval for expansion resolution.
+Provides governed retrieval for expansion resolution.
 
-Retrieval Order:
-1. CORTEX (semantic search / cassette network)
-2. Symbol Registry (local symbol resolution)
-3. Fail-closed if unresolvable
+Retrieval Order (Phase E - Vector Fallback Chain):
+1. SPC resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR) - Phase D
+2. Main Cassette FTS (cassette network)
+3. Local Index (symbol registry)
+4. CAS (exact hash lookup) - Phase E.1
+5. Vector Fallback (governed semantic search) - Phase E.2
+6. Fail-closed if unresolvable
+
+Phase E additions:
+- E.1: Strict retrieval order enforcement
+- E.2: Vector governance with hard token budgets
+- E.3: ELO metadata tracking (no ranking influence)
 
 This module bridges the context assembly pipeline with the CORTEX infrastructure.
 """
 
 import hashlib
 import json
+import re
 from pathlib import Path
 from dataclasses import dataclass
 from typing import List, Dict, Any, Optional, Tuple
@@ -22,8 +31,11 @@ from catalytic_chat.context_assembler import ContextExpansion
 from catalytic_chat.mcp_integration import ChatToolExecutor, McpAccessError
 
 
-# Forward reference for type hints - actual import is lazy
+# Forward references for type hints - actual imports are lazy
 CassetteClient = None
+CASResolver = None
+VectorFallbackResolver = None
+EloObserver = None
 
 
 @dataclass
@@ -44,15 +56,24 @@ class CortexRetrievalError(Exception):
 
 class CortexExpansionResolver:
     """
-    CORTEX-first expansion resolver for context assembly.
+    Governed expansion resolver for context assembly.
 
-    Implements 3.2.5 retrieval order (updated with Phase D SPC integration):
+    Implements retrieval order (Phase E - Vector Fallback Chain):
     1. SPC resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR) - Phase D
-    2. CORTEX semantic search
-    3. Cassette network query
-    4. Symbol registry fallback
-    5. Fail-closed if unresolvable
+    2. Main Cassette FTS (cassette network)
+    3. Local Index (symbol registry for @SYMBOL refs)
+    4. CAS (exact hash lookup) - Phase E.1
+    5. Vector Fallback (governed semantic search) - Phase E.2
+    6. Fail-closed if unresolvable
+
+    Phase E governance:
+    - Hard token budgets on vector retrieval (max 2000 tokens)
+    - No trust bypass - all results hash-verified
+    - ELO metadata tracking (does NOT affect ranking)
     """
+
+    # SHA-256 hash pattern for CAS lookup
+    HASH_PATTERN = re.compile(r'^(?:sha256:)?([0-9a-fA-F]{64})$')
 
     def __init__(
         self,
@@ -60,7 +81,10 @@ class CortexExpansionResolver:
         tool_executor: Optional[ChatToolExecutor] = None,
         symbol_resolver: Optional[Any] = None,
         fail_on_unresolved: bool = True,
-        enable_spc: bool = True
+        enable_spc: bool = True,
+        enable_vector_fallback: bool = True,
+        enable_elo_observer: bool = True,
+        session_id: Optional[str] = None
     ):
         """
         Initialize CORTEX expansion resolver.
@@ -71,6 +95,9 @@ class CortexExpansionResolver:
             symbol_resolver: SymbolResolver instance (lazy loaded if None)
             fail_on_unresolved: If True, raise error on unresolvable symbols
             enable_spc: If True, enable SPC pointer resolution (Phase D)
+            enable_vector_fallback: If True, enable vector fallback (Phase E)
+            enable_elo_observer: If True, enable ELO metadata tracking (Phase E.3)
+            session_id: Session ID for ELO tracking
         """
         if repo_root is None:
             repo_root = Path(__file__).resolve().parents[4]
@@ -84,12 +111,22 @@ class CortexExpansionResolver:
         self._enable_spc = enable_spc
         self._spc_bridge = None
 
-        # Stats tracking
+        # Phase E: Vector Fallback Chain
+        self._enable_vector_fallback = enable_vector_fallback
+        self._enable_elo_observer = enable_elo_observer
+        self._cas_resolver = None
+        self._vector_fallback = None
+        self._elo_observer = None
+        self._session_id = session_id or "default-session"
+
+        # Stats tracking (Phase E adds cas_hits, vector_fallback_hits)
         self._stats = {
-            "spc_hits": 0,  # Phase D: SPC resolution hits
+            "spc_hits": 0,           # Phase D: SPC resolution hits
             "cortex_hits": 0,
             "cassette_hits": 0,
             "symbol_hits": 0,
+            "cas_hits": 0,           # Phase E: CAS exact hash hits
+            "vector_fallback_hits": 0,  # Phase E: Vector fallback hits
             "failures": 0,
             "total_queries": 0
         }
@@ -139,6 +176,82 @@ class CortexExpansionResolver:
                 self._enable_spc = False
                 return None
         return self._spc_bridge
+
+    @property
+    def cas_resolver(self):
+        """Lazy load CAS resolver for exact hash lookup (Phase E.1)."""
+        if self._cas_resolver is None:
+            from catalytic_chat.cas_resolver import CASResolver
+            self._cas_resolver = CASResolver(
+                repo_root=self.repo_root,
+                tool_executor=self.tool_executor
+            )
+        return self._cas_resolver
+
+    @property
+    def vector_fallback(self):
+        """Lazy load vector fallback resolver (Phase E.2)."""
+        if self._vector_fallback is None and self._enable_vector_fallback:
+            try:
+                from catalytic_chat.vector_fallback import VectorFallbackResolver
+                self._vector_fallback = VectorFallbackResolver(
+                    repo_root=self.repo_root,
+                    tool_executor=self.tool_executor
+                )
+            except ImportError:
+                self._enable_vector_fallback = False
+                return None
+        return self._vector_fallback
+
+    @property
+    def elo_observer(self):
+        """Lazy load ELO observer for metadata tracking (Phase E.3)."""
+        if self._elo_observer is None and self._enable_elo_observer:
+            try:
+                from catalytic_chat.elo_observer import EloObserver
+                # ELO observer without DB connection for now (logs only)
+                self._elo_observer = EloObserver(enable_elo_updates=False)
+            except ImportError:
+                self._enable_elo_observer = False
+                return None
+        return self._elo_observer
+
+    def _looks_like_hash(self, symbol_id: str) -> bool:
+        """Check if symbol_id looks like a SHA-256 hash."""
+        return bool(self.HASH_PATTERN.match(symbol_id))
+
+    def _notify_elo_observer(
+        self,
+        source: str,
+        entity_id: str,
+        rank: int = 1,
+        was_used: bool = True
+    ) -> None:
+        """
+        Notify ELO observer of retrieval event (Phase E.3).
+
+        CRITICAL: This is called AFTER retrieval. It NEVER affects ranking.
+
+        Args:
+            source: Retrieval source (spc, cassette_fts, local_index, cas, vector_fallback)
+            entity_id: ID of retrieved entity
+            rank: Position in results (1 = first)
+            was_used: Whether result was included in context
+        """
+        if not self._enable_elo_observer:
+            return
+
+        observer = self.elo_observer
+        if observer is None:
+            return
+
+        observer.on_retrieval_complete(
+            session_id=self._session_id,
+            source=source,
+            entity_id=entity_id,
+            rank=rank,
+            was_used=was_used
+        )
 
     def _try_spc_resolution(self, symbol_id: str) -> Optional[str]:
         """
@@ -324,24 +437,25 @@ class CortexExpansionResolver:
         self,
         symbol_id: str,
         query_hint: Optional[str] = None,
-        is_explicit_reference: bool = True
+        is_explicit_reference: bool = True,
+        remaining_budget: Optional[int] = None
     ) -> RetrievalResult:
         """
-        Resolve a symbol to content using SPC-first, CORTEX-second retrieval.
+        Resolve a symbol to content using governed retrieval chain.
 
-        Retrieval order (Phase D updated):
+        Retrieval order (Phase E - Vector Fallback Chain):
         1. SPC resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR) - Phase D
-        2. CORTEX query (if query_hint provided or symbol looks like a query)
-        3. Cassette network symbol (targeted search for @SYMBOL refs)
-        4. Cassette network (general FTS)
-        5. Semantic search
-        6. Symbol registry (local)
-        7. Fail-closed
+        2. Main Cassette FTS (cassette network)
+        3. Local Index (symbol registry for @SYMBOL refs)
+        4. CAS (exact hash lookup) - Phase E.1
+        5. Vector Fallback (governed semantic search) - Phase E.2
+        6. Fail-closed
 
         Args:
             symbol_id: Symbol ID or query to resolve
             query_hint: Optional search query hint
             is_explicit_reference: Whether this is an explicit user reference
+            remaining_budget: Tokens available for vector fallback (Phase E)
 
         Returns:
             RetrievalResult with content and metadata
@@ -358,99 +472,122 @@ class CortexExpansionResolver:
             content = self._try_spc_resolution(symbol_id)
             if content:
                 self._stats["spc_hits"] += 1
+                content_hash = self._compute_hash(content)
+                self._notify_elo_observer("spc", symbol_id, rank=1)
                 return RetrievalResult(
                     symbol_id=symbol_id,
                     content=content,
                     source="spc",
                     retrieval_path=retrieval_path,
-                    content_hash=self._compute_hash(content),
+                    content_hash=content_hash,
                     retrieved_at=self._get_timestamp()
                 )
 
         # Determine query string
         query = query_hint if query_hint else symbol_id
 
-        # 2. Try CORTEX query
-        results = self._try_cortex_query(query)
-        retrieval_path.append("cortex_query")
-        if results:
-            self._stats["cortex_hits"] += 1
-            content = self._format_results(results)
-            return RetrievalResult(
-                symbol_id=symbol_id,
-                content=content,
-                source="cortex",
-                retrieval_path=retrieval_path,
-                content_hash=self._compute_hash(content),
-                retrieved_at=self._get_timestamp()
-            )
-
-        # 2. Try cassette network with symbol-aware search (Phase B.2)
-        # This is targeted: @CANON/INVARIANTS searches "INVARIANTS" in canon cassette
+        # 2. Try Main Cassette FTS (cassette network)
+        # Try symbol-aware search first for @SYMBOL references
         if symbol_id.startswith("@") or "/" in symbol_id:
             retrieval_path.append("cassette_network_symbol")
             content = self._try_cassette_network_symbol(symbol_id)
             if content:
                 self._stats["cassette_hits"] += 1
+                content_hash = self._compute_hash(content)
+                self._notify_elo_observer("cassette_fts", symbol_id, rank=1)
                 return RetrievalResult(
                     symbol_id=symbol_id,
                     content=content,
                     source="cassette",
                     retrieval_path=retrieval_path,
-                    content_hash=self._compute_hash(content),
+                    content_hash=content_hash,
                     retrieved_at=self._get_timestamp()
                 )
 
-        # 3. Try cassette network (general FTS)
+        # Try general FTS
         results = self._try_cassette_network(query)
         retrieval_path.append("cassette_network")
         if results:
             self._stats["cassette_hits"] += 1
             content = self._format_results(results)
+            content_hash = self._compute_hash(content)
+            self._notify_elo_observer("cassette_fts", query, rank=1)
             return RetrievalResult(
                 symbol_id=symbol_id,
                 content=content,
                 source="cassette",
                 retrieval_path=retrieval_path,
-                content_hash=self._compute_hash(content),
+                content_hash=content_hash,
                 retrieved_at=self._get_timestamp()
             )
 
-        # 4. Try semantic search
-        results = self._try_semantic_search(query)
-        retrieval_path.append("semantic_search")
-        if results:
-            self._stats["cortex_hits"] += 1
-            content = self._format_results(results)
-            return RetrievalResult(
-                symbol_id=symbol_id,
-                content=content,
-                source="cortex",
-                retrieval_path=retrieval_path,
-                content_hash=self._compute_hash(content),
-                retrieved_at=self._get_timestamp()
-            )
-
-        # 5. Try symbol resolver (local, for @SYMBOL references)
+        # 3. Try Local Index (symbol resolver for @SYMBOL references)
         if symbol_id.startswith("@"):
             retrieval_path.append("symbol_registry")
             content = self._try_symbol_resolver(symbol_id)
             if content:
                 self._stats["symbol_hits"] += 1
+                content_hash = self._compute_hash(content)
+                self._notify_elo_observer("local_index", symbol_id, rank=1)
                 return RetrievalResult(
                     symbol_id=symbol_id,
                     content=content,
                     source="symbol_registry",
                     retrieval_path=retrieval_path,
-                    content_hash=self._compute_hash(content),
+                    content_hash=content_hash,
                     retrieved_at=self._get_timestamp()
                 )
 
-        # 5. Fail-closed
+        # 4. Try CAS (exact hash lookup) - Phase E.1
+        if self._looks_like_hash(symbol_id):
+            retrieval_path.append("cas_lookup")
+            result = self.cas_resolver.lookup(symbol_id)
+            if result and result.verified:
+                self._stats["cas_hits"] += 1
+                self._notify_elo_observer("cas", result.content_hash, rank=1)
+                return RetrievalResult(
+                    symbol_id=symbol_id,
+                    content=result.content,
+                    source="cas",
+                    retrieval_path=retrieval_path,
+                    content_hash=result.content_hash,
+                    retrieved_at=self._get_timestamp()
+                )
+
+        # 5. Try Vector Fallback (governed semantic search) - Phase E.2
+        # Only if budget is available and vector fallback is enabled
+        if self._enable_vector_fallback and remaining_budget and remaining_budget > 0:
+            retrieval_path.append("vector_fallback")
+            fallback = self.vector_fallback
+            if fallback:
+                vector_results = fallback.search(query, remaining_budget)
+                if vector_results:
+                    self._stats["vector_fallback_hits"] += 1
+                    # Notify ELO for each result
+                    for i, vr in enumerate(vector_results):
+                        self._notify_elo_observer(
+                            "vector_fallback",
+                            vr.content_hash,
+                            rank=i + 1,
+                            was_used=True
+                        )
+                    # Format vector results
+                    content = self._format_vector_results(vector_results)
+                    content_hash = self._compute_hash(content)
+                    return RetrievalResult(
+                        symbol_id=symbol_id,
+                        content=content,
+                        source="vector_fallback",
+                        retrieval_path=retrieval_path,
+                        content_hash=content_hash,
+                        retrieved_at=self._get_timestamp()
+                    )
+
+        # 6. Fail-closed
         self._stats["failures"] += 1
         if self.fail_on_unresolved:
             raise CortexRetrievalError(
-                f"Failed to resolve '{symbol_id}' via CORTEX or symbol registry. "
+                f"Failed to resolve '{symbol_id}' via governed retrieval chain. "
                 f"Retrieval path: {' -> '.join(retrieval_path)}"
             )
 
@@ -463,6 +600,22 @@ class CortexExpansionResolver:
             content_hash=self._compute_hash(""),
             retrieved_at=self._get_timestamp()
         )
+
+    def _format_vector_results(self, results: List[Any]) -> str:
+        """Format vector search results into content string (Phase E)."""
+        if not results:
+            return ""
+
+        formatted_parts = []
+        for r in results:
+            if hasattr(r, 'content'):
+                formatted_parts.append(r.content)
+            elif isinstance(r, dict) and 'content' in r:
+                formatted_parts.append(r['content'])
+            else:
+                formatted_parts.append(str(r))
+
+        return "\n\n---\n\n".join(formatted_parts)
 
     def _format_results(self, results: List[Dict[str, Any]]) -> str:
         """Format search results into content string."""
@@ -588,11 +741,16 @@ class CortexExpansionResolver:
         return hashlib.sha256(combined.encode('utf-8')).hexdigest()[:16]
 
     def get_stats(self) -> Dict[str, Any]:
-        """Get resolver statistics."""
+        """Get resolver statistics (Phase E updated)."""
+        total_hits = (
+            self._stats["spc_hits"] +
+            self._stats["cortex_hits"] +
+            self._stats["cassette_hits"] +
+            self._stats["symbol_hits"] +
+            self._stats["cas_hits"] +
+            self._stats["vector_fallback_hits"]
+        )
         return {
             **self._stats,
-            "hit_rate": (
-                (self._stats["cortex_hits"] + self._stats["cassette_hits"] +
-                 self._stats["symbol_hits"]) / max(1, self._stats["total_queries"])
-            )
+            "hit_rate": total_hits / max(1, self._stats["total_queries"])
         }

@@ -246,22 +246,31 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### E. Vector Fallback Chain (P2)
 
-**Status:** Not started
+**Status:** COMPLETE
 **Purpose:** Vectors as governed fallback, not primary path
+**Files:** cas_resolver.py, vector_fallback.py, elo_observer.py, cortex_expansion_resolver.py
+**Tests:** tests/test_cas_resolver.py (19 tests), tests/test_vector_fallback.py (24 tests), tests/test_retrieval_order.py (11 tests) - all 54 passing
 
-- [ ] E.1 Retrieval order enforcement:
-  - 1st: Main cassette FTS
-  - 2nd: Local index
-  - 3rd: CAS (exact hash)
-  - 4th: Vector search (fallback only)
-- [ ] E.2 Vector governance boundaries:
-  - Hard token budgets on vector retrieval
-  - No trust-vectors bypass of verification
-- [ ] E.3 ELO as metadata:
-  - Track usage patterns
-  - Do NOT modify ranking based on ELO
+- [x] E.1 Retrieval order enforcement:
+  - 1st: SPC (Phase D)
+  - 2nd: Main cassette FTS
+  - 3rd: Local index
+  - 4th: CAS (exact hash)
+  - 5th: Vector search (fallback only)
+  - 6th: Fail-closed
+- [x] E.2 Vector governance:
+  - Agent is FREE to search until it finds what it needs
+  - Budget is SAFETY BOUNDARY, not fill target (most searches find what they need early)
+  - Only ONE config param: `min_similarity` (0.5, empirically validated in Q44)
+  - Config file: `_generated/vector_fallback_config.json` for tuning
+  - Search logging: `_generated/vector_fallback_search.jsonl` for analysis
+  - No trust-vectors bypass (all results hash-verified)
+- [x] E.3 ELO as metadata:
+  - EloObserver tracks usage patterns after retrieval
+  - Does NOT modify ranking (called AFTER results returned)
+  - Logs to session for analytics
 
-**Exit Criteria:** Vector fallback operational with governance
+**Exit Criteria:** Vector fallback operational with governance - ACHIEVED
 
 ---
 
@@ -613,18 +622,18 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 | P1 | B. Cassette Network Integration | DONE | Medium |
 | P0 | C. Auto-Controlled Context Loop | Core done (C.6.3 pending) | Large |
 | P1 | D. SPC Integration | DONE | Medium |
-| P2 | E. Vector Fallback | No | Medium |
+| P2 | E. Vector Fallback | DONE | Medium |
 | P2 | F. Docs Index | No | Medium |
 | P2 | G. Bundle Replay | No | Medium |
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
 | P3 | J. Scaling & Hierarchical Memory | No | Large |
 
-**Recommended order:** E -> F -> G -> H -> I -> J
+**Recommended order:** F -> G -> H -> I -> J
 
 **Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
-**Note:** P0 core complete (A, B, C core), P1 complete (D). C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context and SPC pointer compression.
+**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 E complete. C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, and governed vector fallback.
 
 ---
 
