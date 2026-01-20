@@ -276,19 +276,32 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### F. Docs Index (P2)
 
-**Status:** Not started
+**Status:** COMPLETE (2026-01-19)
 **Purpose:** Fast, bounded discovery via FTS
+**Files:** docs_index.py, cli.py (docs commands), cortex_expansion_resolver.py (step 3b integration)
+**Tests:** tests/test_docs_index.py (26 tests) - all passing
 
-- [ ] F.1 FTS tables in cat_chat.db:
-  - `docs_files` (path, sha256, size)
-  - `docs_content` (file_id, normalized text)
-  - `docs_content_fts` (FTS5)
-- [ ] F.2 Query API:
-  - `docs search --query "..." --limit N`
-  - Returns identifiers + bounded snippets only
-- [ ] F.3 Deterministic ranking with stable tie-breakers
+- [x] F.1 FTS tables in cat_chat.db:
+  - `docs_files` (path, sha256, size_bytes, indexed_at)
+  - `docs_content` (file_id, chunk_index, content_normalized)
+  - `docs_content_fts` (FTS5 with Porter stemming)
+  - Automatic sync triggers for INSERT/UPDATE/DELETE
+- [x] F.2 Query API:
+  - `docs index` - build/rebuild documentation index (sha256 deduplication)
+  - `docs search --query "..." --limit N` - bounded search with JSON output
+  - `docs show <sha256>` - retrieve file by hash
+  - `docs stats` - index statistics
+  - Returns identifiers + bounded snippets (max 200 chars)
+- [x] F.3 Deterministic ranking with stable tie-breakers:
+  - BM25 score (ascending)
+  - file_path (alphabetical tie-breaker)
+  - chunk_index (secondary tie-breaker)
+- [x] F.4 Integration into retrieval chain:
+  - Step 3b: After symbol registry, before CAS
+  - `docs_index_hits` stat tracking
+  - Lazy-loaded DocsIndex property
 
-**Exit Criteria:** `docs search` returns bounded, deterministic results
+**Exit Criteria:** `docs search` returns bounded, deterministic results - ACHIEVED
 
 ---
 

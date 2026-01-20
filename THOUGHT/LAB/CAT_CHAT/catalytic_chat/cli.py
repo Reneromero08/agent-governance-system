@@ -23,6 +23,7 @@ from catalytic_chat.bundle import BundleBuilder, BundleVerifier, BundleError
 from catalytic_chat.executor import BundleExecutor
 from catalytic_chat.compression_validator import validate_compression_claim
 from catalytic_chat.session_capsule import SessionCapsule, SessionCapsuleError
+from catalytic_chat.docs_index import DocsIndex, DocsIndexError, build_docs_index, search_docs
 
 try:
     from catalytic_chat.attestation import sign_receipt_bytes, verify_receipt_bytes
@@ -1771,6 +1772,152 @@ def cmd_session_end(args) -> int:
         return 1
 
 
+# =============================================================================
+# Docs Index Commands (Phase F)
+# =============================================================================
+
+def cmd_docs_index(args) -> int:
+    """Build documentation index.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        incremental = not getattr(args, 'full', False)
+        stats = build_docs_index(repo_root=args.repo_root, incremental=incremental)
+
+        print(f"[OK] Documentation index built")
+        print(f"      indexed: {stats.indexed}")
+        print(f"      skipped: {stats.skipped}")
+        print(f"      errors: {stats.errors}")
+        if stats.files_removed > 0:
+            print(f"      removed: {stats.files_removed}")
+
+        return 0 if stats.errors == 0 else 1
+    except DocsIndexError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] Index failed: {e}\n")
+        return 1
+
+
+def cmd_docs_search(args) -> int:
+    """Search documentation.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        idx = DocsIndex(repo_root=args.repo_root)
+        response = idx.search(
+            query=args.query,
+            limit=args.limit,
+            offset=getattr(args, 'offset', 0)
+        )
+
+        json_mode = getattr(args, 'json', False)
+
+        if json_mode:
+            output = {
+                "query": response.query,
+                "total_matches": response.total_matches,
+                "limit": response.limit_applied,
+                "search_time_ms": round(response.search_time_ms, 2),
+                "results": [
+                    {
+                        "file_path": r.file_path,
+                        "sha256": r.file_sha256,
+                        "snippet": r.snippet,
+                        "score": round(r.match_score, 4),
+                        "chunk_index": r.chunk_index
+                    }
+                    for r in response.results
+                ]
+            }
+            print(json.dumps(output, indent=2))
+        else:
+            if not response.results:
+                print(f"[INFO] No results for query: {args.query}")
+                return 0
+
+            print(f"Found {response.total_matches} matches ({response.search_time_ms:.1f}ms)\n")
+
+            for i, r in enumerate(response.results, 1):
+                print(f"[{i}] {r.file_path} (score: {abs(r.match_score):.2f})")
+                # Format snippet with highlights
+                snippet = r.snippet.replace('>>>', '\033[1m').replace('<<<', '\033[0m')
+                print(f"    {snippet}")
+                print()
+
+        idx.close()
+        return 0
+    except DocsIndexError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+    except Exception as e:
+        sys.stderr.write(f"[FAIL] Search failed: {e}\n")
+        return 1
+
+
+def cmd_docs_show(args) -> int:
+    """Show file content by SHA-256 hash.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        idx = DocsIndex(repo_root=args.repo_root)
+        content = idx.get_file_content(args.sha256)
+
+        if content is None:
+            sys.stderr.write(f"[FAIL] File not found with hash: {args.sha256}\n")
+            idx.close()
+            return 1
+
+        print(content)
+        idx.close()
+        return 0
+    except DocsIndexError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
+def cmd_docs_stats(args) -> int:
+    """Show documentation index statistics.
+
+    Args:
+        args: Parsed command-line arguments
+
+    Returns:
+        Exit code (0 for success)
+    """
+    try:
+        idx = DocsIndex(repo_root=args.repo_root)
+        stats = idx.get_stats()
+
+        print(f"Documentation Index Statistics")
+        print(f"  Files: {stats['files']}")
+        print(f"  Chunks: {stats['chunks']}")
+        print(f"  Total bytes: {stats['total_bytes']:,}")
+        print(f"  Database: {stats['db_path']}")
+
+        idx.close()
+        return 0
+    except DocsIndexError as e:
+        sys.stderr.write(f"[FAIL] {e}\n")
+        return 1
+
+
 def main():
     """Main CLI entry point."""
     parser = argparse.ArgumentParser(
@@ -2032,6 +2179,28 @@ def main():
     session_end_parser = session_subparsers.add_parser("end", help="End an active session")
     session_end_parser.add_argument("session_id", help="Session ID")
 
+    # Docs Index commands (Phase F)
+    docs_parser = subparsers.add_parser("docs", help="Documentation index commands (Phase F)")
+    docs_subparsers = docs_parser.add_subparsers(dest="docs_command", help="Docs commands")
+
+    docs_index_parser = docs_subparsers.add_parser("index", help="Build documentation index")
+    docs_index_parser.add_argument("--full", action="store_true",
+                                   help="Full rebuild (default: incremental)")
+
+    docs_search_parser = docs_subparsers.add_parser("search", help="Search documentation")
+    docs_search_parser.add_argument("--query", "-q", required=True, help="Search query")
+    docs_search_parser.add_argument("--limit", "-n", type=int, default=10,
+                                    help="Max results (default: 10)")
+    docs_search_parser.add_argument("--offset", type=int, default=0,
+                                    help="Skip first N results")
+    docs_search_parser.add_argument("--json", action="store_true",
+                                    help="Output JSON format")
+
+    docs_show_parser = docs_subparsers.add_parser("show", help="Show file content by SHA-256 hash")
+    docs_show_parser.add_argument("sha256", help="File SHA-256 hash")
+
+    docs_stats_parser = docs_subparsers.add_parser("stats", help="Show index statistics")
+
     args = parser.parse_args()
 
     if args.command is None:
@@ -2180,6 +2349,21 @@ def main():
             sys.exit(1)
 
         sys.exit(session_commands[args.session_command](args))
+
+    if args.command == "docs":
+        docs_commands = {
+            "index": cmd_docs_index,
+            "search": cmd_docs_search,
+            "show": cmd_docs_show,
+            "stats": cmd_docs_stats
+        }
+
+        if args.docs_command not in docs_commands:
+            print(f"[FAIL] Unknown docs command: {args.docs_command}")
+            parser.print_help()
+            sys.exit(1)
+
+        sys.exit(docs_commands[args.docs_command](args))
 
     if args.command not in commands:
         print(f"[FAIL] Unknown command: {args.command}")

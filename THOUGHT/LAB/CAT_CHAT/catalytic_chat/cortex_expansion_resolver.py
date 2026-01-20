@@ -119,12 +119,16 @@ class CortexExpansionResolver:
         self._elo_observer = None
         self._session_id = session_id or "default-session"
 
-        # Stats tracking (Phase E adds cas_hits, vector_fallback_hits)
+        # Phase F: Docs Index
+        self._docs_index = None
+
+        # Stats tracking (Phase E adds cas_hits, vector_fallback_hits, Phase F adds docs_index_hits)
         self._stats = {
             "spc_hits": 0,           # Phase D: SPC resolution hits
             "cortex_hits": 0,
             "cassette_hits": 0,
             "symbol_hits": 0,
+            "docs_index_hits": 0,    # Phase F: DocsIndex FTS hits
             "cas_hits": 0,           # Phase E: CAS exact hash hits
             "vector_fallback_hits": 0,  # Phase E: Vector fallback hits
             "failures": 0,
@@ -215,6 +219,17 @@ class CortexExpansionResolver:
                 self._enable_elo_observer = False
                 return None
         return self._elo_observer
+
+    @property
+    def docs_index(self):
+        """Lazy load DocsIndex for FTS search (Phase F)."""
+        if self._docs_index is None:
+            try:
+                from catalytic_chat.docs_index import DocsIndex
+                self._docs_index = DocsIndex(repo_root=self.repo_root)
+            except ImportError:
+                return None
+        return self._docs_index
 
     def _looks_like_hash(self, symbol_id: str) -> bool:
         """Check if symbol_id looks like a SHA-256 hash."""
@@ -538,6 +553,26 @@ class CortexExpansionResolver:
                     retrieved_at=self._get_timestamp()
                 )
 
+        # 3b. Try DocsIndex FTS (keyword search) - Phase F
+        if query:
+            retrieval_path.append("docs_index_fts")
+            docs_idx = self.docs_index
+            if docs_idx:
+                docs_results = docs_idx.search(query, limit=3)
+                if docs_results.results:
+                    self._stats["docs_index_hits"] += 1
+                    content = self._format_docs_results(docs_results.results)
+                    content_hash = self._compute_hash(content)
+                    self._notify_elo_observer("docs_index", query, rank=1)
+                    return RetrievalResult(
+                        symbol_id=symbol_id,
+                        content=content,
+                        source="docs_index",
+                        retrieval_path=retrieval_path,
+                        content_hash=content_hash,
+                        retrieved_at=self._get_timestamp()
+                    )
+
         # 4. Try CAS (exact hash lookup) - Phase E.1
         if self._looks_like_hash(symbol_id):
             retrieval_path.append("cas_lookup")
@@ -612,6 +647,25 @@ class CortexExpansionResolver:
                 formatted_parts.append(r.content)
             elif isinstance(r, dict) and 'content' in r:
                 formatted_parts.append(r['content'])
+            else:
+                formatted_parts.append(str(r))
+
+        return "\n\n---\n\n".join(formatted_parts)
+
+    def _format_docs_results(self, results: List[Any]) -> str:
+        """Format DocsIndex search results into content string (Phase F)."""
+        if not results:
+            return ""
+
+        formatted_parts = []
+        for r in results:
+            # DocsSearchResult has file_path and snippet
+            if hasattr(r, 'file_path') and hasattr(r, 'snippet'):
+                formatted_parts.append(f"[{r.file_path}]\n{r.snippet}")
+            elif isinstance(r, dict):
+                path = r.get('file_path', 'unknown')
+                snippet = r.get('snippet', '')
+                formatted_parts.append(f"[{path}]\n{snippet}")
             else:
                 formatted_parts.append(str(r))
 
@@ -741,12 +795,13 @@ class CortexExpansionResolver:
         return hashlib.sha256(combined.encode('utf-8')).hexdigest()[:16]
 
     def get_stats(self) -> Dict[str, Any]:
-        """Get resolver statistics (Phase E updated)."""
+        """Get resolver statistics (Phase E + F updated)."""
         total_hits = (
             self._stats["spc_hits"] +
             self._stats["cortex_hits"] +
             self._stats["cassette_hits"] +
             self._stats["symbol_hits"] +
+            self._stats["docs_index_hits"] +
             self._stats["cas_hits"] +
             self._stats["vector_fallback_hits"]
         )

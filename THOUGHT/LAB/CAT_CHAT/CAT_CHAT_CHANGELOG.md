@@ -2,6 +2,355 @@
 
 All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file.
 
+## [1.2.6] - 2026-01-19
+
+### Added
+
+**Phase F: Docs Index (P2) - COMPLETE**
+
+- **Full-text search index for repository documentation**
+  - `catalytic_chat/docs_index.py` (600+ lines) - DocsIndex class with FTS5
+    - `DocsSearchResult`, `DocsSearchResponse`, `IndexStats` dataclasses
+    - `index_file()` - Index single file with sha256 deduplication
+    - `index_all()` - Build/rebuild full index (incremental by default)
+    - `search()` - Bounded, deterministic FTS5 search
+    - `get_file_content()` - Retrieve file by hash
+    - `get_stats()` - Index statistics
+  - Text normalization: lowercase, strip markdown, collapse whitespace
+  - Chunking support: Files > 50KB split at paragraph boundaries
+  - Porter stemming tokenizer for English documents
+
+- **FTS5 database schema in cat_chat.db:**
+  - `docs_files` table - File metadata with sha256 uniqueness
+  - `docs_content` table - Normalized text with chunk support
+  - `docs_content_fts` - FTS5 virtual table with Porter stemming
+  - Automatic sync triggers (INSERT, UPDATE, DELETE)
+  - Foreign key constraints and indexes
+
+- **CLI commands for documentation search:**
+  - `catalytic_chat/cli.py` (+150 lines) - Added `docs` subcommand group:
+    - `docs index [--full]` - Build/rebuild documentation index
+    - `docs search --query "..." --limit N [--offset N] [--json]` - Search with bounded results
+    - `docs show <sha256>` - Show file content by hash
+    - `docs stats` - Show index statistics
+  - JSON output mode for machine consumption
+  - Snippet highlighting with ANSI codes in terminal output
+
+- **Deterministic ranking:**
+  - BM25 score (ascending - lower is better in FTS5)
+  - file_path (alphabetical) - stable tie-breaker
+  - chunk_index (ascending) - secondary tie-breaker
+  - Same query always returns same results in same order
+
+- **Integration with retrieval chain (Phase F.4):**
+  - `catalytic_chat/cortex_expansion_resolver.py` (+40 lines) - Step 3b integration:
+    - DocsIndex inserted between symbol registry and CAS
+    - Lazy-loaded `docs_index` property
+    - `_format_docs_results()` method for result formatting
+    - `docs_index_hits` stat tracking
+    - Updated retrieval order:
+      1. SPC resolution (Phase D)
+      2. Main Cassette FTS
+      3. Symbol registry (local index)
+      3b. DocsIndex FTS (NEW - Phase F)
+      4. CAS (exact hash)
+      5. Vector Fallback
+      6. Fail-closed
+
+- **Comprehensive test coverage:**
+  - `tests/test_docs_index.py` (400+ lines) - 26 tests, all passing:
+    - Schema creation and indexes
+    - File indexing with sha256 deduplication
+    - Incremental indexing (skip unchanged files)
+    - Search with bounded results
+    - Deterministic ranking verification
+    - Snippet length enforcement (200 char max)
+    - Large file chunking
+    - FTS sync triggers
+    - Content retrieval by hash
+    - Text normalization
+    - Empty query handling
+    - Convenience functions
+
+### Changed
+
+**Retrieval Chain Order (Phase F Integration)**
+
+- DocsIndex now at position 3b (between symbol registry and CAS)
+- Provides fast keyword-based discovery before expensive vector search
+- All results hash-verified (no trust bypass)
+
+**Statistics Tracking**
+
+- Added `docs_index_hits` to resolver statistics
+- Updated `get_stats()` to include docs_index in total_hits calculation
+
+### Security
+
+- Content-addressable storage (sha256)
+- Bounded results (max limit enforced)
+- Bounded snippets (200 char max)
+- No absolute paths (all relative to repo_root)
+- Deterministic behavior (no timestamps in search results)
+
+**Tests**
+
+- 26 tests passing in test_docs_index.py
+- Full integration with existing test suite
+- Determinism verified across multiple runs
+
+**Exit Criteria Verification**
+
+- [x] FTS tables exist in cat_chat.db
+- [x] `docs index` rebuilds index (3 files indexed in test run)
+- [x] `docs search --query "..." --limit N` returns bounded results
+- [x] Results are deterministic (verified with 3 consecutive runs)
+- [x] Snippets bounded at 200 chars
+- [x] All 26 tests passing
+- [x] Integrated into retrieval chain (step 3b)
+
+---
+
+## [1.2.5] - 2026-01-19
+
+### Added
+
+**Phase E: Vector Fallback Chain (P2) - COMPLETE**
+
+**E.1: Retrieval Order Enforcement**
+
+- **Strict retrieval chain with governed fallback to vectors**
+  - `catalytic_chat/cortex_expansion_resolver.py` (updated) - Enforced retrieval order:
+    1. SPC resolution (Phase D)
+    2. Main Cassette FTS
+    3. Local Index (symbol registry)
+    4. CAS (exact hash lookup)
+    5. Vector Fallback (governed semantic search)
+    6. Fail-closed
+  - No trust-vectors bypass - all results hash-verified
+  - Stats tracking for each retrieval source
+
+**E.2: Vector Governance**
+
+- **Governed semantic search with hard token budgets**
+  - `catalytic_chat/vector_fallback.py` (new) - VectorFallbackResolver class
+    - Agent is FREE to search until it finds what it needs
+    - Budget is SAFETY BOUNDARY, not fill target
+    - `min_similarity` = 0.5 (empirically validated in Q44)
+    - Config file: `_generated/vector_fallback_config.json` for tuning
+    - Search logging: `_generated/vector_fallback_search.jsonl` for analysis
+  - `catalytic_chat/cas_resolver.py` (new) - CASResolver for exact hash lookup
+    - Content-addressable storage with verification
+    - Hash-based deduplication
+    - Fail-closed on mismatch
+
+**E.3: ELO Metadata Tracking**
+
+- **Usage pattern tracking (does NOT affect ranking)**
+  - `catalytic_chat/elo_observer.py` (new) - EloObserver class
+    - Tracks retrieval events AFTER results returned
+    - Logs to session for analytics
+    - Never modifies ranking (called after retrieval complete)
+  - Session-scoped tracking with `on_retrieval_complete()` method
+
+### Tests
+
+- `tests/test_cas_resolver.py` (19 tests) - CAS exact hash lookup
+- `tests/test_vector_fallback.py` (24 tests) - Vector fallback with governance
+- `tests/test_retrieval_order.py` (11 tests) - Retrieval chain order enforcement
+- **54 tests passing total**
+
+### Exit Criteria
+
+- [x] Retrieval order enforced (6 steps)
+- [x] Vector governance with hard budgets
+- [x] ELO tracking as metadata only
+- [x] All 54 tests passing
+
+---
+
+## [1.2.4] - 2026-01-19
+
+### Added
+
+**Phase D: SPC Integration (P1) - COMPLETE**
+
+**D.1: Codebook Sync Handshake**
+
+- **Fail-closed codebook verification on session start**
+  - `catalytic_chat/spc_bridge.py` (new) - SPCBridge class
+    - `sync_handshake()` - Verify codebook_id + SHA256
+    - Fail-closed on mismatch
+    - EVENT_CODEBOOK_SYNC logged to session events
+  - Ensures SPC pointers resolve to correct expansions
+
+**D.2: Pointer Resolution**
+
+- **Support for three pointer types:**
+  - SYMBOL_PTR - CJK characters (`法`) + ASCII radicals (C, I, V, L, G, S, R, A, J, P)
+  - HASH_PTR - sha256 prefixed hashes (`sha256:7cfd0418...`)
+  - COMPOSITE_PTR - Combined forms (`法.驗`, `C3:build`, `C&I`)
+- **Highest priority in resolution chain**
+  - SPC resolves BEFORE CORTEX queries
+  - Integrated into cortex_expansion_resolver.py
+
+**D.3: Compression Metrics**
+
+- **Token savings tracking:**
+  - tokens_expanded - Full content tokens
+  - tokens_pointers - Pointer tokens used
+  - tokens_saved - Compression achieved
+  - CDR (Concept Density Ratio) per Q33
+  - Per-symbol usage and savings tracking
+  - EVENT_SPC_METRICS for session logging
+
+### Tests
+
+- `tests/test_spc_integration.py` (35 tests) - All passing
+  - Codebook sync verification
+  - Pointer resolution (SYMBOL_PTR, HASH_PTR, COMPOSITE_PTR)
+  - Compression metrics calculation
+  - Fail-closed on mismatch
+
+### Exit Criteria
+
+- [x] Codebook sync handshake with fail-closed
+- [x] Three pointer types resolve correctly
+- [x] Compression metrics tracked
+- [x] All 35 tests passing
+
+---
+
+## [1.2.3] - 2026-01-18
+
+### Added
+
+**Phase C: Auto-Controlled Context Loop (P0) - COMPLETE**
+
+**C.1-C.5: Core Catalytic Behavior**
+
+- **Virtual memory for LLMs - automatic working set management**
+  - `catalytic_chat/auto_context_manager.py` (new) - AutoContextManager class
+    - Working set (materialized) vs pointer set (offloaded)
+    - E-score based eviction when budget exceeded
+    - E-score based hydration (above threshold)
+    - Hard fail if working_set exceeds budget (INV-CATALYTIC-04)
+  - `catalytic_chat/context_partitioner.py` (new) - Context partitioning logic
+  - `catalytic_chat/turn_compressor.py` (new) - Turn compression to hash pointers
+  - `catalytic_chat/adaptive_budget.py` (new) - Budget management
+
+**E-Score Implementation:**
+
+- **Born rule quantum overlap for relevance scoring**
+  - E = |<query_vec | item_vec>|^2 (Born rule)
+  - Threshold = 0.5 (validated in Q44)
+  - `THOUGHT/LAB/FORMULA/experiments/open_questions/q44/q44_core.py`:
+    - `compute_E_linear(query_vec, context_vecs)` - E = mean overlap
+    - `compute_born_probability(query_vec, context_vecs)` - P = |<psi|phi>|^2
+
+**Catalytic Chat Loop:**
+
+- **Wire together: query -> hydrate -> assemble -> LLM -> compress -> evict**
+  - Session capsule logs every step (deterministic replay)
+  - All context assembly uses ContextAssembler with budgets
+  - GeometricChat.respond() uses auto-managed context
+
+### Tests
+
+- `tests/test_auto_context_loop.py` - Core loop tests
+- Real conversation tests:
+  - 500-turn extreme marathon with context decay analysis
+  - 1000-turn ultimate marathon
+  - Nemotron demo
+
+### Exit Criteria
+
+- [x] Model runs with fully auto-managed context
+- [x] No manual @symbol references needed
+- [x] Working set stays within budget across entire session
+- [x] Eviction/hydration decisions logged and reproducible
+- [ ] C.6.3 E-score vs quality correlation tracking (marked "Future")
+
+---
+
+## [1.2.2] - 2026-01-17
+
+### Added
+
+**Phase B: Main Cassette Network Integration (P1) - COMPLETE**
+
+**B.1-B.2: Cassette Network Access**
+
+- **Connect to existing cassette infrastructure for richer content**
+  - `catalytic_chat/cassette_client.py` (new) - CassetteClient class
+    - Read from `NAVIGATION/CORTEX/cassettes/*.db`
+    - Search across canon.db, governance.db, etc.
+    - Respect cassette network conventions
+  - Symbol resolution via main cassettes:
+    - Resolve @symbols to content in main cassettes
+    - Fall back to local index if not found
+
+**B.3: Write Isolation**
+
+- **Reads: main cassettes (shared), Writes: _generated/cat_chat.db (sandbox)**
+  - Documented in `docs/WRITE_ISOLATION.md`
+  - Prevents CAT Chat from polluting main cassette network
+  - Safe experimentation in LAB environment
+
+**B.4: Graduation Path**
+
+- **Documented future migration path**
+  - `docs/GRADUATION_PATH.md` (future reference)
+  - CAT Chat stays in LAB for now
+  - Clear criteria for promotion to NAVIGATION/CORTEX
+
+### Tests
+
+- `tests/test_cassette_client.py` (22 tests) - Cassette network reading
+- `tests/test_cassette_symbol_resolution.py` (15 tests) - Symbol resolution
+- **37 tests passing total**
+
+### Exit Criteria
+
+- [x] CAT Chat reads from main cassette network
+- [x] Writes isolated to _generated/cat_chat.db
+- [x] Write isolation documented
+- [x] All 37 tests passing
+
+---
+
+## [1.2.1] - 2026-01-16
+
+### Added
+
+**Phase A: Session Persistence Tests (P0) - COMPLETE**
+
+**A.1-A.4: Deterministic Session Persistence**
+
+- **Byte-identical replay and fail-closed tamper detection**
+  - `tests/test_session_persistence.py` - 4 comprehensive tests:
+    - A.1: Save/resume determinism test (byte-identical replay)
+    - A.2: Partial execution resume test (no state loss)
+    - A.3: Tamper detection test (fail-closed on corruption)
+    - A.4: Hydration failure test (fail-closed on unresolvable symbols)
+  - Session capsule foundation for catalytic behavior
+  - Hash-chained event log for integrity
+
+### Tests
+
+- 4 fixtures created and all green
+- Determinism proven across save/resume cycles
+- Fail-closed behavior verified
+
+### Exit Criteria
+
+- [x] All 4 fixtures green
+- [x] Determinism proven (byte-identical replay)
+- [x] Tamper detection works (fail-closed)
+- [x] Hydration failure handling (fail-closed)
+
+---
+
 ## [1.1.0] - 2026-01-02
 
 ### Documentation Reorganization (v1.1 Housekeeping)
