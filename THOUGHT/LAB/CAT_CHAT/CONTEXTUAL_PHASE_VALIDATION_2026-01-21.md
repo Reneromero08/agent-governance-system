@@ -280,8 +280,24 @@ def phase_arithmetic_test(words, analogies, axis):
 |------|---------|
 | `tests/test_contextual_phase_sweep.py` | Comprehensive test suite (17 tests) |
 | `tests/test_gemini_proposals.py` | Gemini Q12/Q13 validation (11 tests) |
-| `catalytic_chat/triangulated_agent.py` | Coherence engine implementation |
 | `CONTEXTUAL_PHASE_VALIDATION_2026-01-21.md` | This report |
+
+### REMOVED: TriangulatedAgent (2026-01-21)
+
+`catalytic_chat/triangulated_agent.py` was removed because:
+
+> **Heavy additions add complexity without proportional gains.**
+
+The 200+ line LIQUID/CRYSTAL coherence engine was overkill. The real breakthrough is one line:
+
+```python
+model.encode(f"{word}, in terms of {axis}")
+```
+
+**Findings preserved** (see Grok Proposal Validation above):
+- Coherence threshold: 0.67 (empirically calibrated)
+- Rule of 3: Confirmed
+- Concept valid; infrastructure unnecessary
 
 ---
 

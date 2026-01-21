@@ -404,10 +404,24 @@ Empirical calibration shows 0.67 provides clean separation:
 
 ### Implementation
 
-- `triangulated_agent.py`: Gemini's coherence engine with calibrated threshold
 - `test_gemini_proposals.py`: 11 tests for Q12/Q13 validation
 - `test_contextual_phase_sweep.py`: +6 Grok tests
 - `complex_compass.py`: Added `contextual_embed()` method
+
+### REMOVED: TriangulatedAgent (2026-01-21)
+
+**Why removed:** Heavy additions add complexity without proportional gains.
+
+The `triangulated_agent.py` (200+ lines) implemented LIQUID/CRYSTAL classification, but the real breakthrough is ONE LINE:
+
+```python
+model.encode(f"{word}, in terms of {axis}")
+```
+
+**Findings preserved:**
+- Coherence threshold: 0.67 (not Gemini's 0.92)
+- Rule of 3: CONFIRMED (score decays after N=3)
+- The concept is valid; the infrastructure is overkill
 
 ---
 
