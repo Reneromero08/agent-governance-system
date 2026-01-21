@@ -1,0 +1,61 @@
+{
+  "timestamp": "2026-01-20T17:53:48.938739",
+  "tier": 3,
+  "test_type": "Cross-Lingual Convergence",
+  "data_source": "Multilingual Embeddings",
+  "pass_rate": 1.0,
+  "tests": [
+    {
+      "tier": 3,
+      "test": "3.1 Translation Equivalents",
+      "passed": 1,
+      "metric": "Distance Ratio",
+      "value": 2.0452778339385986,
+      "threshold": 1.5,
+      "details": {
+        "mean_intra_distance": 0.35266897082328796,
+        "mean_inter_distance": 0.7213060259819031,
+        "n_concepts": 12,
+        "intra_threshold": 0.4
+      }
+    },
+    {
+      "tier": 3,
+      "test": "3.2 Language Family Phylogeny",
+      "passed": true,
+      "metric": "Fowlkes-Mallows Index",
+      "value": 0.6043672230190352,
+      "threshold": 0.3,
+      "details": {
+        "adjusted_rand_index": 0.41529235382308843,
+        "n_languages": 13,
+        "n_families": 6
+      }
+    },
+    {
+      "tier": 3,
+      "test": "3.3 Isolate Convergence",
+      "passed": 1,
+      "metric": "P-value",
+      "value": 3.889338937718145e-12,
+      "threshold": 0.05,
+      "details": {
+        "mean_same_concept": 0.4091673791408539,
+        "mean_diff_concept": 0.5227392315864563,
+        "mann_whitney_u": 142362.0,
+        "isolate_langs": [
+          "eu",
+          "ko",
+          "fi",
+          "ja"
+        ],
+        "reference_langs": [
+          "en",
+          "es",
+          "de",
+          "fr"
+        ]
+      }
+    }
+  ]
+}

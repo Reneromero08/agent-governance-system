@@ -1,0 +1,93 @@
+{
+  "timestamp": "2026-01-20T19:50:30.844083",
+  "tier": 1,
+  "test_type": "Historical Semantic Drift",
+  "data_source": "HistWords (REAL DATA)",
+  "pass_rate": 0.6666666666666666,
+  "tests": [
+    {
+      "tier": 1,
+      "test": "1.1 Drift Rate Measurement",
+      "passed": 1,
+      "metric": "CV",
+      "value": 0.1855481340370234,
+      "threshold": 0.5,
+      "details": {
+        "n_words": 200,
+        "mean_drift": 0.7917386932044814,
+        "std_drift": 0.1469056371691884,
+        "sample_words": [
+          "the",
+          "of",
+          "to",
+          "and",
+          "in",
+          "a",
+          "that",
+          "i",
+          "was",
+          "he"
+        ]
+      }
+    },
+    {
+      "tier": 1,
+      "test": "1.2 R-Stability Through Time",
+      "passed": true,
+      "metric": "Viable Fraction",
+      "value": 0.97,
+      "threshold": 0.5,
+      "details": {
+        "mean_R": 0.7046048105109476,
+        "std_R": 0.6166462129038108,
+        "n_words": 100
+      }
+    },
+    {
+      "tier": 1,
+      "test": "1.3 Extinction Events",
+      "passed": 0,
+      "metric": "Drift Ratio",
+      "value": 1.098826488989237,
+      "threshold": 1.1,
+      "details": {
+        "mean_changed_drift": 1.0081233745463873,
+        "mean_stable_drift": 0.9174545614318214,
+        "n_changed": 15,
+        "n_stable": 23,
+        "changed_words": [
+          "gay",
+          "awful",
+          "nice",
+          "silly",
+          "meat",
+          "girl",
+          "guy",
+          "bully",
+          "artificial",
+          "brave",
+          "naughty",
+          "egregious",
+          "manufacture",
+          "clue",
+          "fizzle",
+          "hussy",
+          "spinster",
+          "wench"
+        ],
+        "stable_words": [
+          "water",
+          "fire",
+          "stone",
+          "tree",
+          "sun",
+          "moon",
+          "mother",
+          "father",
+          "house",
+          "hand"
+        ]
+      }
+    }
+  ]
+}

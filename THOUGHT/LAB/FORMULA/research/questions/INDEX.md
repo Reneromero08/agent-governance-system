@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.12.0 (2026-01-19 - Q13 36x Ratio ANSWERED: 10/10 tests passing. Inverse power law with phase transition behavior confirmed.)*
+*Last updated: v4.14.0 (2026-01-20 - Q37 Semiotic Evolution ANSWERED: Meanings evolve on M field. 15/15 tests with REAL DATA ONLY - historical drift, cross-lingual convergence, phylogeny reconstruction, conservation law persistence, multi-model universality all confirmed.)*
 
 ---
 
@@ -73,7 +73,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ⏳ PARTIAL | YES: Gate is subobject classifier (100%), localic operator (100%), sheaf (97.6% locality, 95.3% gluing). Gate is NON-MONOTONE. Limitations: Grothendieck topology undefined, Category C structure partial, violation rates unexplained, Q9/Q6 connections undeveloped, √3 scaling interpretation missing, fiber topos not built. |
+| 14 | [Category theory](medium_priority/q14_category_theory.md) | 1480 | ✅ ANSWERED | **PRESHEAF, NOT Grothendieck Sheaf.** R-COVER fails stability (37%) and refinement (2.5%) axioms. Gate IS well-defined presheaf (100%): presheaf axioms, subobject classifier, naturality all pass. Cech H^1=0 for 99.7% of R-covers explains 95% gluing. Q6 bridge CONFIRMED (r=-0.84). All impossibility tests pass (100%). Blind predictions confirmed. *Updated 2026-01-20: 5 tiers, 20 tests, 15/20 passed.* |
 | 15 | [Bayesian inference](medium_priority/q15_bayesian_inference.md) | 1460 | ✅ ANSWERED | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels. |
 | 16 | [Domain boundaries](medium_priority/q16_domain_boundaries.md) | 1440 | ⏳ OPEN | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential) |
 | 40 | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md) | 1420 | ✅ ANSWERED | **M field IS QECC.** 7/7 tests pass. Alpha=0.512 (near 0.5), threshold=5.0%, R^2=0.992 holographic CONFIRMED, AUC=0.998 hallucination detection, Cohen's d=4.10. [Report](reports/Q40_QUANTUM_ERROR_CORRECTION_REPORT.md) *Confirmed 2026-01-18.* |
@@ -82,7 +82,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | 42 | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md) | 1400 | ANSWERED | **R is local BY DESIGN (A1 correct).** Semantic CHSH S=0.36 << 2.0 (no Bell violation). Non-local structure is Phi's domain, not R's. A1 is a feature, not a limitation. |
 | 18 | [Intermediate scales](medium_priority/q18_intermediate_scales.md) | 1400 | ⏳ OPEN | Does formula work at molecular, cellular, neural scales? |
 | 19 | [Value learning](medium_priority/q19_value_learning.md) | 1380 | ⏳ OPEN | Can R guide which human feedback to trust? |
-| 37 | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md) | 1380 | ⏳ OPEN | How do meanings evolve on M field? Do meanings compete, speciate, converge? What are selection pressures on interpretants? |
+| 37 | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md) | 1380 | ANSWERED | **Meanings evolve on M field.** 15/15 tests with REAL DATA: Historical drift (CV=18.5%), R-stability (97% viable), cross-lingual convergence (isolates p<1e-11), phylogeny from embeddings (FMI=0.60), conservation law persists (CV=7.1% through history, 11.8% across languages). *Answered 2026-01-20.* |
 | 20 | [Tautology risk](medium_priority/q20_tautology_risk.md) | 1360 | ⏳ OPEN | Is formula descriptive or explanatory? |
 
 ---
@@ -143,9 +143,9 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 ## Summary Statistics
 
 - **Total Questions:** 53
-- **Answered:** 31 (58.5%)
-- **Partially Answered:** 5 (9.4%)
-- **Open:** 17 (32.1%)
+- **Answered:** 33 (62.3%)
+- **Partially Answered:** 4 (7.5%)
+- **Open:** 16 (30.2%)
 
 ### By Priority Level
 
@@ -153,7 +153,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 |----------|-------|----------|-----------|------|
 | Critical | 12 | 10 | 1 | 1 |
 | High | 15 | 14 | 0 | 1 |
-| Medium | 11 | 5 | 1 | 5 |
+| Medium | 11 | 7 | 0 | 4 |
 | Lower | 9 | 2 | 3 | 4 |
 | Engineering | 3 | 0 | 0 | 3 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 1 |

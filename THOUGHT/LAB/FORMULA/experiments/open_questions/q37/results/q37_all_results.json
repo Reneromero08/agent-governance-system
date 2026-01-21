@@ -1,0 +1,361 @@
+{
+  "timestamp": "2026-01-20T19:53:51.015082",
+  "question": "Q37 Semiotic Evolution Dynamics",
+  "data_type": "REAL DATA ONLY",
+  "tiers": {
+    "tier_1": {
+      "passed": 3,
+      "total": 3,
+      "pass_rate": 1.0,
+      "tests": [
+        {
+          "tier": 1,
+          "test": "1.1 Drift Rate Measurement",
+          "passed": 1,
+          "metric": "CV",
+          "value": 0.1855481340370234,
+          "threshold": 0.5,
+          "details": {
+            "n_words": 200,
+            "mean_drift": 0.7917386932044814,
+            "std_drift": 0.1469056371691884,
+            "sample_words": [
+              "the",
+              "of",
+              "to",
+              "and",
+              "in",
+              "a",
+              "that",
+              "i",
+              "was",
+              "he"
+            ]
+          }
+        },
+        {
+          "tier": 1,
+          "test": "1.2 R-Stability Through Time",
+          "passed": true,
+          "metric": "Viable Fraction",
+          "value": 0.97,
+          "threshold": 0.5,
+          "details": {
+            "mean_R": 0.7046048105109476,
+            "std_R": 0.6166462129038108,
+            "n_words": 100
+          }
+        },
+        {
+          "tier": 1,
+          "test": "1.3 Extinction Events",
+          "passed": 1,
+          "metric": "Drift Ratio",
+          "value": 1.098826488989237,
+          "threshold": 1.05,
+          "details": {
+            "mean_changed_drift": 1.0081233745463873,
+            "mean_stable_drift": 0.9174545614318214,
+            "n_changed": 15,
+            "n_stable": 23,
+            "changed_words": [
+              "gay",
+              "awful",
+              "nice",
+              "silly",
+              "meat",
+              "girl",
+              "guy",
+              "bully",
+              "artificial",
+              "brave",
+              "naughty",
+              "egregious",
+              "manufacture",
+              "clue",
+              "fizzle",
+              "hussy",
+              "spinster",
+              "wench"
+            ],
+            "stable_words": [
+              "water",
+              "fire",
+              "stone",
+              "tree",
+              "sun",
+              "moon",
+              "mother",
+              "father",
+              "house",
+              "hand"
+            ]
+          }
+        }
+      ]
+    },
+    "tier_3": {
+      "passed": 3,
+      "total": 3,
+      "pass_rate": 1.0,
+      "tests": [
+        {
+          "tier": 3,
+          "test": "3.1 Translation Equivalents",
+          "passed": 1,
+          "metric": "Distance Ratio",
+          "value": 2.0452778339385986,
+          "threshold": 1.5,
+          "details": {
+            "mean_intra_distance": 0.35266897082328796,
+            "mean_inter_distance": 0.7213060259819031,
+            "n_concepts": 12,
+            "intra_threshold": 0.4
+          }
+        },
+        {
+          "tier": 3,
+          "test": "3.2 Language Family Phylogeny",
+          "passed": true,
+          "metric": "Fowlkes-Mallows Index",
+          "value": 0.6043672230190352,
+          "threshold": 0.3,
+          "details": {
+            "adjusted_rand_index": 0.41529235382308843,
+            "n_languages": 13,
+            "n_families": 6
+          }
+        },
+        {
+          "tier": 3,
+          "test": "3.3 Isolate Convergence",
+          "passed": 1,
+          "metric": "P-value",
+          "value": 3.889338937718145e-12,
+          "threshold": 0.05,
+          "details": {
+            "mean_same_concept": 0.4091673791408539,
+            "mean_diff_concept": 0.5227392315864563,
+            "mann_whitney_u": 142362.0,
+            "isolate_langs": [
+              "eu",
+              "ko",
+              "fi",
+              "ja"
+            ],
+            "reference_langs": [
+              "en",
+              "es",
+              "de",
+              "fr"
+            ]
+          }
+        }
+      ]
+    },
+    "tier_4": {
+      "passed": 3,
+      "total": 3,
+      "pass_rate": 1.0,
+      "tests": [
+        {
+          "tier": 4,
+          "test": "4.1 Hierarchical Distance Preservation",
+          "passed": 1,
+          "metric": "Spearman Correlation",
+          "value": 0.16529201115810585,
+          "threshold": 0.1,
+          "details": {
+            "p_value": 5.842622380712579e-32,
+            "n_pairs": 5000,
+            "fowlkes_mallows_index": 0.3307028180648835,
+            "n_words": 365,
+            "n_clusters": 15
+          }
+        },
+        {
+          "tier": 4,
+          "test": "4.2 Hyponymy Prediction",
+          "passed": true,
+          "metric": "Precision@10",
+          "value": 0.4733893557422969,
+          "threshold": 0.4,
+          "details": {
+            "correct": 169,
+            "total": 357,
+            "k": 10
+          }
+        },
+        {
+          "tier": 4,
+          "test": "4.3 Ancestral Reconstruction",
+          "passed": 1,
+          "metric": "Signal Ratio",
+          "value": 2.0449752807617188,
+          "threshold": 1.5,
+          "details": {
+            "mean_similarity": 0.5558367371559143,
+            "std_similarity": 0.12449857592582703,
+            "random_baseline": 0.27180609107017517,
+            "n_groups": 67
+          }
+        }
+      ]
+    },
+    "tier_9": {
+      "passed": 3,
+      "total": 3,
+      "pass_rate": 1.0,
+      "tests": [
+        {
+          "tier": 9,
+          "test": "9.1 Conservation Through History",
+          "passed": 1,
+          "metric": "CV",
+          "value": 0.07136960689399792,
+          "threshold": 0.15,
+          "details": {
+            "mean_df_alpha": 58.236964290495784,
+            "std_df_alpha": 4.15634924811255,
+            "cv_df": 0.22745957991809432,
+            "cv_alpha": 0.29541869983658636,
+            "n_decades": 15,
+            "decade_range": "1850-1990",
+            "n_consistent_words": 1000,
+            "excluded_decades": [
+              "1800",
+              "1810",
+              "1820",
+              "1830",
+              "1840"
+            ]
+          }
+        },
+        {
+          "tier": 9,
+          "test": "9.2 Conservation Across Languages",
+          "passed": 1,
+          "metric": "CV",
+          "value": 0.1179259489829871,
+          "threshold": 0.15,
+          "details": {
+            "mean_df_alpha": 6.3653590811529295,
+            "std_df_alpha": 0.7506410102625519,
+            "n_languages": 10,
+            "per_language": {
+              "en": 5.131725859842632,
+              "es": 6.343469475622305,
+              "de": 6.45566039512002,
+              "fr": 7.115556994781629,
+              "it": 5.092034807649236,
+              "ru": 6.388247691649266,
+              "zh": 7.660496354147599,
+              "ja": 6.260584046429236,
+              "ko": 6.846056104889567,
+              "fi": 6.359759081397797
+            }
+          }
+        },
+        {
+          "tier": 9,
+          "test": "9.3 Conservation Across Categories",
+          "passed": 1,
+          "metric": "CV",
+          "value": 0.01034743241214267,
+          "threshold": 0.2,
+          "details": {
+            "by_category": {
+              "physical_entity": 40.4841517469628,
+              "abstraction": 40.32281205170823,
+              "psychological_feature": 40.40345245307906,
+              "event": 41.36574196375364
+            },
+            "mean_df_alpha": 40.644039553875935,
+            "std_df_alpha": 0.4205614522401949,
+            "mean_deviation_from_target": 0.8690133197537346,
+            "target": 21.74625462767236,
+            "n_categories": 4
+          }
+        }
+      ]
+    },
+    "tier_10": {
+      "passed": 3,
+      "total": 3,
+      "pass_rate": 1.0,
+      "tests": [
+        {
+          "tier": 10,
+          "test": "10.1 Semantic Structure Universality",
+          "passed": 1,
+          "metric": "CV",
+          "value": 0.02002076440059416,
+          "threshold": 0.2,
+          "details": {
+            "mean_df_alpha": 48.862817572494194,
+            "std_df_alpha": 0.9782709585681385,
+            "by_model": {
+              "all-MiniLM-L6-v2": 49.374574573006996,
+              "all-mpnet-base-v2": 49.49170798420395,
+              "paraphrase-multilingual-MiniLM-L12-v2": 46.93886264133469,
+              "all-distilroberta-v1": 49.4986885023564,
+              "multi-qa-MiniLM-L6-cos-v1": 49.01025416156891
+            },
+            "n_models": 5
+          }
+        },
+        {
+          "tier": 10,
+          "test": "10.2 Hierarchy Preservation Universality",
+          "passed": true,
+          "metric": "Mean Correlation",
+          "value": 0.1347394880048532,
+          "threshold": 0.07,
+          "details": {
+            "min_correlation": 0.1104430585271438,
+            "by_model": {
+              "all-MiniLM-L6-v2": 0.1104430585271438,
+              "all-mpnet-base-v2": 0.16060382660592448,
+              "paraphrase-multilingual-MiniLM-L12-v2": 0.15353436341010934,
+              "all-distilroberta-v1": 0.13520265216675573,
+              "multi-qa-MiniLM-L6-cos-v1": 0.11391353931433261
+            },
+            "p_values": {
+              "all-MiniLM-L6-v2": 1.4570466059663828e-09,
+              "all-mpnet-base-v2": 1.0769033038487509e-18,
+              "paraphrase-multilingual-MiniLM-L12-v2": 3.354715720444721e-17,
+              "all-distilroberta-v1": 1.2019917551118264e-13,
+              "multi-qa-MiniLM-L6-cos-v1": 4.365765483387095e-10
+            },
+            "n_models": 5,
+            "all_significant": true
+          }
+        },
+        {
+          "tier": 10,
+          "test": "10.3 Cross-Model Phylogeny Agreement",
+          "passed": 1,
+          "metric": "Mean FMI",
+          "value": 0.46835842472392664,
+          "threshold": 0.4,
+          "details": {
+            "min_fmi": 0.3123632722366654,
+            "n_pairs": 10,
+            "models": [
+              "all-MiniLM-L6-v2",
+              "all-mpnet-base-v2",
+              "paraphrase-multilingual-MiniLM-L12-v2",
+              "all-distilroberta-v1",
+              "multi-qa-MiniLM-L6-cos-v1"
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "overall": {
+    "total_passed": 15,
+    "total_tests": 15,
+    "pass_rate": 1.0
+  }
+}

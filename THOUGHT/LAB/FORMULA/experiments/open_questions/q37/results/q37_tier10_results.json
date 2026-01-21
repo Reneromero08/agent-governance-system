@@ -1,0 +1,73 @@
+{
+  "timestamp": "2026-01-20T18:04:04.158031",
+  "tier": 10,
+  "test_type": "Multi-Model Universality",
+  "models": [
+    "all-MiniLM-L6-v2",
+    "all-mpnet-base-v2",
+    "paraphrase-multilingual-MiniLM-L12-v2",
+    "all-distilroberta-v1",
+    "multi-qa-MiniLM-L6-cos-v1"
+  ],
+  "pass_rate": 0.6666666666666666,
+  "tests": [
+    {
+      "tier": 10,
+      "test": "10.1 Semantic Structure Universality",
+      "passed": 1,
+      "metric": "CV",
+      "value": 0.021761474547274284,
+      "threshold": 0.2,
+      "details": {
+        "mean_df_alpha": 17.40067571796274,
+        "std_df_alpha": 0.3786643617418416,
+        "by_model": {
+          "all-MiniLM-L6-v2": 17.153030793886483,
+          "all-mpnet-base-v2": 17.953689232228527,
+          "paraphrase-multilingual-MiniLM-L12-v2": 17.7023418468565,
+          "all-distilroberta-v1": 16.904112365873413,
+          "multi-qa-MiniLM-L6-cos-v1": 17.29020435096877
+        },
+        "n_models": 5
+      }
+    },
+    {
+      "tier": 10,
+      "test": "10.2 Hierarchy Preservation Universality",
+      "passed": false,
+      "metric": "Min Correlation",
+      "value": -0.02639087499080778,
+      "threshold": 0.1,
+      "details": {
+        "mean_correlation": 0.03737383506204911,
+        "by_model": {
+          "all-MiniLM-L6-v2": -0.02639087499080778,
+          "all-mpnet-base-v2": 0.024155035612179743,
+          "paraphrase-multilingual-MiniLM-L12-v2": 0.0657857803254035,
+          "all-distilroberta-v1": 0.047407648388182386,
+          "multi-qa-MiniLM-L6-cos-v1": 0.0759115859752877
+        },
+        "n_models": 5
+      }
+    },
+    {
+      "tier": 10,
+      "test": "10.3 Cross-Model Phylogeny Agreement",
+      "passed": 1,
+      "metric": "Mean FMI",
+      "value": 0.4292524262160747,
+      "threshold": 0.4,
+      "details": {
+        "min_fmi": 0.31367476277270323,
+        "n_pairs": 10,
+        "models": [
+          "all-MiniLM-L6-v2",
+          "all-mpnet-base-v2",
+          "paraphrase-multilingual-MiniLM-L12-v2",
+          "all-distilroberta-v1",
+          "multi-qa-MiniLM-L6-cos-v1"
+        ]
+      }
+    }
+  ]
+}

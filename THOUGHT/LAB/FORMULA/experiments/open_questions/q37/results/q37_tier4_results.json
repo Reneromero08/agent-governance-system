@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-01-20T17:49:28.382873",
+  "tier": 4,
+  "test_type": "Phylogenetic Reconstruction",
+  "data_source": "WordNet 3.0",
+  "pass_rate": 1.0,
+  "tests": [
+    {
+      "tier": 4,
+      "test": "4.1 Hierarchical Distance Preservation",
+      "passed": 1,
+      "metric": "Spearman Correlation",
+      "value": 0.19512764576723052,
+      "threshold": 0.15,
+      "details": {
+        "p_value": 4.267274430631333e-44,
+        "n_pairs": 5000,
+        "fowlkes_mallows_index": 0.3022250051402463,
+        "n_words": 334,
+        "n_clusters": 15
+      }
+    },
+    {
+      "tier": 4,
+      "test": "4.2 Hyponymy Prediction",
+      "passed": true,
+      "metric": "Precision@10",
+      "value": 0.45962732919254656,
+      "threshold": 0.4,
+      "details": {
+        "correct": 148,
+        "total": 322,
+        "k": 10
+      }
+    },
+    {
+      "tier": 4,
+      "test": "4.3 Ancestral Reconstruction",
+      "passed": 1,
+      "metric": "Signal Ratio",
+      "value": 2.2326393127441406,
+      "threshold": 1.5,
+      "details": {
+        "mean_similarity": 0.5607293844223022,
+        "std_similarity": 0.1310654729604721,
+        "random_baseline": 0.251150906085968,
+        "n_groups": 60
+      }
+    }
+  ]
+}

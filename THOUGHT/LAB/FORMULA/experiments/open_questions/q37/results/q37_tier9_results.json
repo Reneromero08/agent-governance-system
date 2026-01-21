@@ -1,0 +1,67 @@
+{
+  "timestamp": "2026-01-20T17:55:53.204381",
+  "tier": 9,
+  "test_type": "Conservation Law Persistence",
+  "target_df_alpha": 21.74625462767236,
+  "pass_rate": 0.6666666666666666,
+  "tests": [
+    {
+      "tier": 9,
+      "test": "9.1 Conservation Through History",
+      "passed": 1,
+      "metric": "CV",
+      "value": 0.021295006629057565,
+      "threshold": 0.15,
+      "details": {
+        "mean_df_alpha": 5.6713476429311775,
+        "std_df_alpha": 0.12077138565193073,
+        "target": 21.74625462767236,
+        "deviation_pct": 73.92034748036878,
+        "n_decades": 6
+      }
+    },
+    {
+      "tier": 9,
+      "test": "9.2 Conservation Across Languages",
+      "passed": 1,
+      "metric": "CV",
+      "value": 0.1179259489829871,
+      "threshold": 0.15,
+      "details": {
+        "mean_df_alpha": 6.3653590811529295,
+        "std_df_alpha": 0.7506410102625519,
+        "n_languages": 10,
+        "per_language": {
+          "en": 5.131725859842632,
+          "es": 6.343469475622305,
+          "de": 6.45566039512002,
+          "fr": 7.115556994781629,
+          "it": 5.092034807649236,
+          "ru": 6.388247691649266,
+          "zh": 7.660496354147599,
+          "ja": 6.260584046429236,
+          "ko": 6.846056104889567,
+          "fi": 6.359759081397797
+        }
+      }
+    },
+    {
+      "tier": 9,
+      "test": "9.3 Conservation in Hierarchy",
+      "passed": 0,
+      "metric": "Mean Deviation",
+      "value": 0.4723959075967418,
+      "threshold": 0.25,
+      "details": {
+        "by_depth": {
+          "2": 3.6423579238734396,
+          "3": 13.661289130786862,
+          "4": 13.646964364623638,
+          "5": 14.94304032472897
+        },
+        "max_deviation": 0.832506425302383,
+        "target": 21.74625462767236
+      }
+    }
+  ]
+}
