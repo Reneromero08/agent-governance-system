@@ -1,0 +1,67 @@
+{
+  "stress_tests": {
+    "flash_crash": {
+      "paradigm": 0.028540490012074152,
+      "traditional": 0.3191161177096979,
+      "buyhold": 1.0684029179057355,
+      "regimes": {
+        "STABLE": 0.0,
+        "SHIFT": 0.998,
+        "TRANSITIONAL": 0.002
+      }
+    },
+    "slow_bleed": {
+      "paradigm": -0.019325430438747716,
+      "traditional": -0.05340004708690394,
+      "buyhold": -0.04684706261211005,
+      "regimes": {
+        "STABLE": 0.0,
+        "SHIFT": 0.996,
+        "TRANSITIONAL": 0.004
+      }
+    },
+    "2008_style": {
+      "paradigm": 0.014116979547201336,
+      "traditional": 0.014511239421877398,
+      "buyhold": -0.8063773401209094,
+      "regimes": {
+        "STABLE": 0.0,
+        "SHIFT": 0.992,
+        "TRANSITIONAL": 0.008
+      }
+    },
+    "covid_style": {
+      "paradigm": -0.010840443054900097,
+      "traditional": 0.2268344474493021,
+      "buyhold": -0.10626692894251562,
+      "regimes": {
+        "STABLE": 0.0,
+        "SHIFT": 0.992,
+        "TRANSITIONAL": 0.008
+      }
+    },
+    "double_dip": {
+      "paradigm": 0.055949619970515195,
+      "traditional": 0.4649846722564264,
+      "buyhold": -0.543728077944495,
+      "regimes": {
+        "STABLE": 0.0,
+        "SHIFT": 0.988,
+        "TRANSITIONAL": 0.012
+      }
+    }
+  },
+  "monte_carlo": {
+    "n_runs": 30,
+    "paradigm": {
+      "mean": 0.007860074571965,
+      "worst": -0.030294994937435985,
+      "p_loss": 0.43333333333333335
+    },
+    "traditional": {
+      "mean": 0.11961058365119911
+    }
+  },
+  "detector": "CachedParadigmDetector (real embeddings)",
+  "timestamp": "2026-01-21T14:28:19.864020"
+}

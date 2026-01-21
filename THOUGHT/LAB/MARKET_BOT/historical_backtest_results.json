@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-01-21T15:07:21.748568",
+  "results": [
+    {
+      "event_name": "covid_crash_2020",
+      "event_description": "COVID-19 market crash",
+      "bot_return": 0.02166993262847536,
+      "bot_max_drawdown": 0.013525134862382571,
+      "bh_return": 0.11379269755243217,
+      "bh_max_drawdown": 0.3371727560591251,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "2019-12-19",
+      "crash_start": "2020-02-19"
+    },
+    {
+      "event_name": "financial_crisis_2008",
+      "event_description": "2008 Financial Crisis",
+      "bot_return": -0.07925267837820939,
+      "bot_max_drawdown": 0.09827418672919809,
+      "bh_return": -0.27260690487407213,
+      "bh_max_drawdown": 0.5518945652310072,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "2007-09-18",
+      "crash_start": "2007-10-09"
+    },
+    {
+      "event_name": "flash_crash_2010",
+      "event_description": "Flash Crash of May 6, 2010",
+      "bot_return": -0.01708455150335969,
+      "bot_max_drawdown": 0.023035015415400137,
+      "bh_return": -0.07387206304863785,
+      "bh_max_drawdown": 0.1569964882852358,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "2010-03-18",
+      "crash_start": "2010-05-06"
+    },
+    {
+      "event_name": "vix_explosion_2018",
+      "event_description": "February 2018 VIX explosion",
+      "bot_return": 0.006331795360587566,
+      "bot_max_drawdown": 0.00785486447255114,
+      "bh_return": 0.02508789674032951,
+      "bh_max_drawdown": 0.10101928013679688,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "2017-12-19",
+      "crash_start": "2018-01-26"
+    },
+    {
+      "event_name": "china_deval_2015",
+      "event_description": "China devaluation / Aug 2015 crash",
+      "bot_return": -0.015481919177269156,
+      "bot_max_drawdown": 0.021714168282694908,
+      "bh_return": -0.05716546191965194,
+      "bh_max_drawdown": 0.13022910808044366,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "2015-06-18",
+      "crash_start": "2015-08-18"
+    },
+    {
+      "event_name": "dot_com_crash",
+      "event_description": "Dot-com bubble burst",
+      "bot_return": -0.04257577303862141,
+      "bot_max_drawdown": 0.060139937352405914,
+      "bh_return": -0.37466982258431114,
+      "bh_max_drawdown": 0.4751586691029875,
+      "protected_capital": true,
+      "early_warning": true,
+      "first_warning_date": "1999-12-17",
+      "crash_start": "2000-03-10"
+    }
+  ],
+  "summary": {
+    "n_events": 6,
+    "n_protected": 6,
+    "protection_rate": 1.0,
+    "n_warned": 6,
+    "warning_rate": 1.0,
+    "avg_bot_return": -0.021065532351399453,
+    "avg_bh_return": -0.1065722763556519,
+    "avg_bot_dd": 0.037423884519105464,
+    "avg_bh_dd": 0.29207847781593266,
+    "worst_bot_dd": 0.09827418672919809,
+    "worst_bh_dd": 0.5518945652310072,
+    "dd_improvement": 0.2546545932968272
+  }
+}
