@@ -349,13 +349,65 @@ No PCA needed. No anchors needed. No complex transforms. **Context in the prompt
    - May be a constraint of sphere packing in high dimensions
    - Not related to complex structure per se
 
-4. **What are the optimal context templates for different relational axes?**
-   - "in terms of gender" works for male/female
-   - Need to test: tense, size, sentiment, etc.
+4. ~~**What are the optimal context templates for different relational axes?**~~
+   - **ANSWERED (Grok proposal validation 2026-01-21)**
+   - "in terms of gender" is best for gender (21.3 deg)
+   - "in terms of good or bad" is best for valence (45.8 deg vs 111 deg for "in terms of")
+   - **Different axes need different templates!**
 
-5. **Does contextual phase arithmetic generalize across models?**
-   - Tested on all-MiniLM-L6-v2
-   - Need cross-model validation like Q51
+5. ~~**Does contextual phase arithmetic generalize across models?**~~
+   - **ANSWERED** - Yes, 90% mean error reduction across 3 models
+
+6. ~~**Does native-language context help cross-lingual alignment?**~~
+   - **ANSWERED (Grok proposal validation 2026-01-21)**
+   - Japanese: Native context DRAMATICALLY better (3.2 deg vs 108 deg)
+   - German: Native context slightly better (108 deg vs 119 deg)
+
+---
+
+## Gemini + Grok Proposal Validation (2026-01-21)
+
+### Gemini's Proposals (11/11 tests pass)
+
+| Proposal | Gemini's Claim | Actual Result |
+|----------|----------------|---------------|
+| Coherence Threshold (Q12) | 0.92 | **0.67** (calibrated) |
+| Rule of 3 (Q13) | N=3 optimal | **CONFIRMED** |
+| TriangulatedAgent | LIQUID/CRYSTAL | **IMPLEMENTED** |
+
+**Key insight:** Gemini's coherence threshold from Q12 (0.92) was too strict for RAG.
+Empirical calibration shows 0.67 provides clean separation:
+- Coherent sources: 0.73-0.82
+- Incoherent sources: 0.57-0.60
+
+### Grok's Proposals (6/6 tests pass)
+
+| Proposal | Result |
+|----------|--------|
+| Template Optimization | **CONFIRMED** - Different axes need different templates |
+| Multi-Axis Composition | **SUBLINEAR** (ratio=0.59, interference not additive) |
+| Native Context | **MASSIVE WIN** (Japanese: 3.2 deg vs 108 deg) |
+
+**Template optimization findings:**
+
+| Axis | Best Template | Error | Worst Template | Error |
+|------|---------------|-------|----------------|-------|
+| Gender | "in terms of" | 21.3 deg | "with respect to" | 36.5 deg |
+| Valence | "good or bad" | 45.8 deg | "in terms of valence" | 111 deg |
+
+**Native context findings:**
+
+| Language | English Context | Native Context | Improvement |
+|----------|-----------------|----------------|-------------|
+| Japanese | 108.2 deg | 3.2 deg | 104.9 deg |
+| German | 119.0 deg | 108.5 deg | 10.6 deg |
+
+### Implementation
+
+- `triangulated_agent.py`: Gemini's coherence engine with calibrated threshold
+- `test_gemini_proposals.py`: 11 tests for Q12/Q13 validation
+- `test_contextual_phase_sweep.py`: +6 Grok tests
+- `complex_compass.py`: Added `contextual_embed()` method
 
 ---
 
@@ -371,4 +423,5 @@ No PCA needed. No anchors needed. No complex transforms. **Context in the prompt
 *Report generated: 2026-01-21*
 *Updated: 2026-01-21 with Q51 validation results*
 *Updated: 2026-01-21 with BREAKTHROUGH - Context as Phase Selector*
-*Status: BREAKTHROUGH ACHIEVED - Context IS the phase selector (87% error reduction)*
+*Updated: 2026-01-21 with Gemini + Grok proposal validation (17/17 tests pass)*
+*Status: BREAKTHROUGH ACHIEVED + AI PROPOSALS VALIDATED*

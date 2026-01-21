@@ -221,19 +221,56 @@ def phase_arithmetic_test(words, analogies, axis):
 
 ---
 
-## Open Questions
+## Open Questions - ANSWERED (Grok Proposal Validation)
 
-1. **Optimal context templates** for different axes
-   - "in terms of gender" works for gender
-   - What about: tense, causality, agency, modality?
+1. ~~**Optimal context templates** for different axes~~
+   - **ANSWERED**: Different axes need different templates!
+   - Gender: "in terms of" best (21.3 deg)
+   - Valence: "good or bad" best (45.8 deg vs 111 deg for "in terms of")
 
-2. **Multi-axis context** - Can multiple axes be selected simultaneously?
-   - e.g., "in terms of gender and formality"
+2. ~~**Multi-axis context** - Can multiple axes be selected simultaneously?~~
+   - **ANSWERED**: SUBLINEAR composition (ratio=0.59)
+   - Combined context shows interference, not additive composition
+   - But PC1 variance slightly improves (38.1% vs 35.6-36.9%)
 
-3. **Language-specific contexts** - Do non-English models benefit from native context?
-   - Japanese context for Japanese words?
+3. ~~**Language-specific contexts** - Do non-English models benefit from native context?~~
+   - **ANSWERED**: YES, dramatically for distant languages!
+   - Japanese: 3.2 deg with native context vs 108 deg with English (104.9 deg improvement!)
+   - German: 108 deg with native vs 119 deg with English (10.6 deg improvement)
 
 4. **Context length sensitivity** - Does longer context help or hurt?
+   - Still open - needs testing
+
+---
+
+## Grok Proposal Validation Results (2026-01-21)
+
+### Template Optimization
+
+| Axis | Best Template | Error | Worst Template | Error |
+|------|---------------|-------|----------------|-------|
+| Gender | "in terms of" | 21.3 deg | "with respect to" | 36.5 deg |
+| Valence | "good or bad" | 45.8 deg | "in terms of valence" | 111 deg |
+
+**Key finding:** "in terms of" is NOT universal. For valence, use "good or bad".
+
+### Multi-Axis Composition
+
+| Metric | Single-Axis | Combined | Result |
+|--------|-------------|----------|--------|
+| Distance ratio | sum=0.51 | actual=0.31 | SUBLINEAR (0.59) |
+| PC1 variance | 35.6-36.9% | 38.1% | Slight improvement |
+
+**Key finding:** Multi-axis prompting shows interference, not linear addition.
+
+### Native Context
+
+| Language | English | Native | Improvement |
+|----------|---------|--------|-------------|
+| Japanese | 108.2 deg | **3.2 deg** | **104.9 deg** |
+| German | 119.0 deg | 108.5 deg | 10.6 deg |
+
+**Key finding:** Native context is dramatically better for distant languages (Japanese nearly perfect at 3.2 deg).
 
 ---
 
@@ -241,10 +278,13 @@ def phase_arithmetic_test(words, analogies, axis):
 
 | File | Purpose |
 |------|---------|
-| `tests/test_contextual_phase_sweep.py` | Comprehensive test suite |
+| `tests/test_contextual_phase_sweep.py` | Comprehensive test suite (17 tests) |
+| `tests/test_gemini_proposals.py` | Gemini Q12/Q13 validation (11 tests) |
+| `catalytic_chat/triangulated_agent.py` | Coherence engine implementation |
 | `CONTEXTUAL_PHASE_VALIDATION_2026-01-21.md` | This report |
 
 ---
 
 *Report generated: 2026-01-21*
 *Validates COMPLEX_COMPASS_REPORT_2026-01-21.md breakthrough discovery*
+*Updated: 2026-01-21 with Grok proposal validation (template, multi-axis, native context)*
