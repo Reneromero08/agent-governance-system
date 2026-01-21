@@ -1,7 +1,28 @@
 """
 Complex Compass - CP^n Navigation for Semantic Space
 
-Hypothesis (from Q53 + Grok/Gemini analysis):
+EXPERIMENTAL RESULTS (2026-01-21):
+====================================
+The Grok/Gemini hypothesis has been PARTIALLY FALSIFIED:
+
+CONFIRMED:
+- Pentagonal geometry (~72 deg) persists in complex space geodesic angles
+- Sign-to-phase and Hilbert methods produce mathematically valid complex states
+- Exact mathematical opposites (v, -v) have 180 deg phase shift (as expected)
+
+FALSIFIED:
+- "Complexification reveals hidden phase structure" - NO, it adds artifact/noise
+- "Semantic opposites have ~180 deg phase shift" - NO, phase is ~0-4 deg
+- "Hermitian similarity reveals structure cosine cannot see" - NO, they track closely
+
+KEY INSIGHT (from Q51):
+Complex structure in semantic space exists in RELATIONSHIPS (global PCA on
+multiple words), NOT in individual vectors complexified via local transforms
+like Hilbert or sign-to-phase.
+
+See COMPLEX_COMPASS_REPORT_2026-01-21.md for full experimental results.
+
+ORIGINAL HYPOTHESIS (from Q53 + Grok/Gemini analysis):
 - Real embeddings are "shadows" of complex vectors (Q51)
 - Pentagonal geometry (72 deg clusters in Q53) suggests 5th roots of unity
 - Complexifying embeddings via Hilbert transform recovers "ghost phase"
@@ -16,12 +37,14 @@ Mathematical basis:
 Connection to Q31 Compass Mode:
 - Original compass: Direction = argmax_a [J(s+a) * alignment_to_principal_axes(s+a)]
 - Complex compass: Direction = argmax_a [J(s+a) * phase_coherence(s+a)]
-- Phase coherence replaces principal axis alignment in CP^n
+- NOTE: phase_coherence is near-constant for sign-to-phase, so this reduces
+  to magnitude-only scoring (equivalent to cosine similarity).
 
 Design principles (STYLE-002 Engineering Integrity):
 - No hacks or patches - proper mathematical foundation
 - Clean integration with existing GeometricState
 - Full test coverage for all claims
+- Honest documentation of negative results
 """
 
 import numpy as np
@@ -393,6 +416,63 @@ class ComplexCompass:
         self.stats['model_calls'] += 1
         return self.complexify(real_vec)
 
+    def contextual_embed(
+        self,
+        text: str,
+        axis: str = "",
+        complexify: bool = False
+    ) -> Union[np.ndarray, ComplexGeometricState]:
+        """
+        Embed text with contextual phase selection (Q51.5 breakthrough).
+
+        The key insight: Context in the prompt IS the phase selector.
+        Single-word embeddings are phase-averaged superpositions - all relational
+        contexts collapsed into one vector. Adding explicit context selects the
+        specific relational phase.
+
+        Experimental validation (2026-01-21):
+        - Isolated words: 161.9 deg error, 0% pass rate
+        - Contextual ("in terms of gender"): 21.3 deg error, 100% pass rate
+        - 87% reduction in phase error - no PCA needed
+
+        Template optimization findings (Grok proposal):
+        - "in terms of" works best for gender
+        - "good or bad" works best for valence (NOT "in terms of")
+        - Native-language context dramatically helps cross-lingual (104 deg improvement)
+
+        Args:
+            text: Text to embed
+            axis: Contextual axis (e.g., "gender", "thermodynamics")
+            complexify: If True, return ComplexGeometricState; else return numpy array
+
+        Returns:
+            Real embedding vector or ComplexGeometricState
+        """
+        if axis:
+            prompt = f"{text}, in terms of {axis}"
+        else:
+            prompt = text
+
+        real_vec = self.model.encode(prompt, convert_to_numpy=True)
+        self.stats['model_calls'] += 1
+
+        if complexify:
+            return self.complexify(real_vec)
+        return real_vec
+
+    def axis_select_embed(
+        self,
+        text: str,
+        axis: str = ""
+    ) -> np.ndarray:
+        """
+        Alias for contextual_embed() with complexify=False.
+
+        Provided for semantic clarity when the goal is axis selection,
+        not complexification.
+        """
+        return self.contextual_embed(text, axis, complexify=False)
+
     # ========================================================================
     # Comparison Methods
     # ========================================================================
@@ -603,7 +683,22 @@ class ComplexCompass:
         """
         Compass mode: Choose best direction from candidates.
 
-        Uses: argmax_a [E_magnitude(s, a) * phase_coherence(a)]
+        Scoring: score = E_magnitude(current, candidate) * coherence(candidate) * weight
+
+        IMPORTANT NOTE (2026-01-21):
+        For sign-to-phase complexification, phase_coherence is near-constant
+        (~0.01-0.11) for typical random/embedding vectors because roughly half
+        the components are positive and half negative. This means coherence
+        does NOT differentiate candidates, and the scoring reduces to:
+
+            score ~= E_magnitude * constant
+
+        Since E_magnitude tracks cosine similarity very closely (difference < 0.01),
+        navigation with sign-to-phase is effectively equivalent to cosine-based
+        navigation. The phase structure adds no additional signal.
+
+        For Hilbert transform, coherence has more variation but the E_magnitude
+        still dominates the scoring in practice.
 
         Args:
             current: Current state

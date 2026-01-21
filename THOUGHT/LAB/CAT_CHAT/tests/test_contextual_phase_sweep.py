@@ -808,6 +808,317 @@ class TestCompassBoost:
 
 
 # ============================================================================
+# TEST 5: Template Optimization (Grok Proposal)
+# ============================================================================
+
+@pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
+class TestTemplateOptimization:
+    """
+    Grok's suggestion: Test context template variants.
+
+    Different phrasings may work better for different axes:
+    - "in terms of X"
+    - "regarding X"
+    - "with respect to X"
+    - "as X"
+    - "specifically the X aspect"
+    """
+
+    def test_template_variants_for_gender(self, model):
+        """Compare template variants for gender axis."""
+        print("\n" + "=" * 70)
+        print("TEMPLATE OPTIMIZATION: Gender Axis")
+        print("=" * 70)
+
+        templates = {
+            'in_terms_of': "in terms of gender",
+            'regarding': "regarding gender",
+            'with_respect_to': "with respect to gender",
+            'as': "as a gendered concept",
+            'specifically': "specifically the gender aspect",
+            'from_perspective': "from the perspective of gender",
+        }
+
+        words = ['king', 'queen', 'man', 'woman', 'brother', 'sister', 'boy', 'girl']
+        analogies = [
+            ('king', 'queen', 'man', 'woman'),
+            ('brother', 'sister', 'boy', 'girl'),
+        ]
+
+        results = []
+        for name, template in templates.items():
+            # Embed with template
+            vecs = np.array([model.encode(f"{w}, {template}") for w in words])
+            embeddings = {w: v for w, v in zip(words, vecs)}
+
+            # Fit global PCA
+            pca = PCA(n_components=2)
+            pca.fit(vecs)
+
+            # Compute mean phase error
+            errors = []
+            for analogy in analogies:
+                error = compute_phase_error_global(embeddings, analogy, pca)
+                errors.append(error)
+
+            mean_error = np.mean(errors)
+            results.append({
+                'template': name,
+                'mean_error': mean_error,
+                'errors': errors,
+            })
+
+            print(f"{name:20s}: {mean_error:6.1f} deg")
+
+        # Find best template
+        best = min(results, key=lambda x: x['mean_error'])
+        worst = max(results, key=lambda x: x['mean_error'])
+
+        print("-" * 70)
+        print(f"Best:  {best['template']} ({best['mean_error']:.1f} deg)")
+        print(f"Worst: {worst['template']} ({worst['mean_error']:.1f} deg)")
+        print(f"Range: {worst['mean_error'] - best['mean_error']:.1f} deg")
+
+    def test_template_variants_for_valence(self, model):
+        """Compare template variants for valence axis."""
+        print("\n" + "=" * 70)
+        print("TEMPLATE OPTIMIZATION: Valence Axis")
+        print("=" * 70)
+
+        templates = {
+            'in_terms_of': "in terms of positive or negative valence",
+            'regarding': "regarding emotional valence",
+            'sentiment': "in terms of sentiment",
+            'good_bad': "in terms of good or bad",
+            'positive_negative': "as positive or negative",
+        }
+
+        words = ['good', 'bad', 'happy', 'sad', 'love', 'hate', 'beautiful', 'ugly']
+        analogies = [
+            ('good', 'bad', 'happy', 'sad'),
+            ('love', 'hate', 'beautiful', 'ugly'),
+        ]
+
+        results = []
+        for name, template in templates.items():
+            vecs = np.array([model.encode(f"{w}, {template}") for w in words])
+            embeddings = {w: v for w, v in zip(words, vecs)}
+
+            pca = PCA(n_components=2)
+            pca.fit(vecs)
+
+            errors = []
+            for analogy in analogies:
+                error = compute_phase_error_global(embeddings, analogy, pca)
+                errors.append(error)
+
+            mean_error = np.mean(errors)
+            results.append({
+                'template': name,
+                'mean_error': mean_error,
+            })
+
+            print(f"{name:20s}: {mean_error:6.1f} deg")
+
+        best = min(results, key=lambda x: x['mean_error'])
+        print("-" * 70)
+        print(f"Best template: {best['template']} ({best['mean_error']:.1f} deg)")
+
+
+# ============================================================================
+# TEST 6: Multi-Axis Composition (Grok Proposal)
+# ============================================================================
+
+@pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
+class TestMultiAxisComposition:
+    """
+    Grok's suggestion: Does multi-axis prompting compose linearly?
+
+    Test "in terms of gender and social status" vs single axes.
+    """
+
+    def test_dual_axis_composition(self, model):
+        """Test if combined axes compose linearly or interfere."""
+        print("\n" + "=" * 70)
+        print("MULTI-AXIS COMPOSITION: Gender + Status")
+        print("=" * 70)
+
+        words = ['king', 'queen', 'servant', 'master', 'prince', 'princess', 'peasant', 'noble']
+
+        # Single axes
+        gender_context = "in terms of gender"
+        status_context = "in terms of social status"
+        combined_context = "in terms of gender and social status"
+
+        vecs_gender = np.array([model.encode(f"{w}, {gender_context}") for w in words])
+        vecs_status = np.array([model.encode(f"{w}, {status_context}") for w in words])
+        vecs_combined = np.array([model.encode(f"{w}, {combined_context}") for w in words])
+        vecs_neutral = np.array([model.encode(w) for w in words])
+
+        # Compute distances from neutral
+        def mean_dist(vecs1, vecs2):
+            dists = [1 - cosine_similarity(v1, v2) for v1, v2 in zip(vecs1, vecs2)]
+            return np.mean(dists)
+
+        dist_gender = mean_dist(vecs_neutral, vecs_gender)
+        dist_status = mean_dist(vecs_neutral, vecs_status)
+        dist_combined = mean_dist(vecs_neutral, vecs_combined)
+
+        # Check linearity: combined ~ gender + status?
+        predicted_combined = dist_gender + dist_status
+        actual_combined = dist_combined
+        ratio = actual_combined / predicted_combined if predicted_combined > 0 else 0
+
+        print(f"Distance from neutral:")
+        print(f"  Gender only:   {dist_gender:.4f}")
+        print(f"  Status only:   {dist_status:.4f}")
+        print(f"  Combined:      {actual_combined:.4f}")
+        print(f"  Predicted (sum): {predicted_combined:.4f}")
+        print(f"  Ratio (actual/predicted): {ratio:.2f}")
+
+        if ratio > 0.8:
+            print("\nResult: APPROXIMATELY LINEAR (additive composition)")
+        elif ratio < 0.5:
+            print("\nResult: SUBLINEAR (interference/saturation)")
+        else:
+            print("\nResult: INTERMEDIATE")
+
+        # Check if combined has higher variance (better structure)
+        var_gender = np.var(vecs_gender)
+        var_status = np.var(vecs_status)
+        var_combined = np.var(vecs_combined)
+
+        print(f"\nVariance:")
+        print(f"  Gender:   {var_gender:.4f}")
+        print(f"  Status:   {var_status:.4f}")
+        print(f"  Combined: {var_combined:.4f}")
+
+    def test_triple_axis_composition(self, model):
+        """Test three axes combined."""
+        print("\n" + "=" * 70)
+        print("MULTI-AXIS COMPOSITION: Gender + Status + Age")
+        print("=" * 70)
+
+        words = ['king', 'queen', 'prince', 'princess', 'boy', 'girl', 'man', 'woman']
+
+        single_contexts = [
+            ("gender", "in terms of gender"),
+            ("status", "in terms of social status"),
+            ("age", "in terms of age"),
+        ]
+
+        combined_context = "in terms of gender, social status, and age"
+
+        results = {}
+        for name, ctx in single_contexts:
+            vecs = np.array([model.encode(f"{w}, {ctx}") for w in words])
+            pca = PCA(n_components=2)
+            pca.fit(vecs)
+            results[name] = {
+                'explained': pca.explained_variance_ratio_[0],
+                'vecs': vecs,
+            }
+            print(f"{name:10s}: PC1 explains {pca.explained_variance_ratio_[0]:.1%}")
+
+        vecs_combined = np.array([model.encode(f"{w}, {combined_context}") for w in words])
+        pca_combined = PCA(n_components=2)
+        pca_combined.fit(vecs_combined)
+        print(f"{'combined':10s}: PC1 explains {pca_combined.explained_variance_ratio_[0]:.1%}")
+
+        print("-" * 70)
+        if pca_combined.explained_variance_ratio_[0] > max(r['explained'] for r in results.values()):
+            print("Combined context IMPROVES structure (higher PC1 variance)")
+        else:
+            print("Combined context does NOT improve over single axes")
+
+
+# ============================================================================
+# TEST 7: Native Context (Grok Proposal)
+# ============================================================================
+
+@pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
+class TestNativeContext:
+    """
+    Grok's suggestion: Test native-language templates vs English.
+
+    For Japanese/Korean/German words, does native context help?
+    """
+
+    def test_native_vs_english_japanese(self, model):
+        """Compare English vs Japanese context for Japanese words."""
+        print("\n" + "=" * 70)
+        print("NATIVE CONTEXT: Japanese")
+        print("=" * 70)
+
+        # Japanese gender words (romanized)
+        words = ['otoko', 'onna']  # man, woman
+        analogy = ('man', 'woman', 'otoko', 'onna')
+
+        # English context
+        english_context = "in terms of gender"
+        # Japanese context (romanized approximation)
+        japanese_context = "seibetsu no kanten kara"  # from gender perspective
+
+        all_words = ['man', 'woman', 'otoko', 'onna']
+
+        # Test with English context
+        vecs_en = np.array([model.encode(f"{w}, {english_context}") for w in all_words])
+        embs_en = {w: v for w, v in zip(all_words, vecs_en)}
+        pca_en = PCA(n_components=2)
+        pca_en.fit(vecs_en)
+        error_en = compute_phase_error_global(embs_en, analogy, pca_en)
+
+        # Test with Japanese context
+        vecs_jp = np.array([model.encode(f"{w}, {japanese_context}") for w in all_words])
+        embs_jp = {w: v for w, v in zip(all_words, vecs_jp)}
+        pca_jp = PCA(n_components=2)
+        pca_jp.fit(vecs_jp)
+        error_jp = compute_phase_error_global(embs_jp, analogy, pca_jp)
+
+        print(f"English context: {error_en:.1f} deg")
+        print(f"Japanese context: {error_jp:.1f} deg")
+
+        if error_jp < error_en:
+            print(f"\nNative context IMPROVES by {error_en - error_jp:.1f} deg")
+        else:
+            print(f"\nEnglish context is BETTER by {error_jp - error_en:.1f} deg")
+
+    def test_native_vs_english_german(self, model):
+        """Compare English vs German context for German words."""
+        print("\n" + "=" * 70)
+        print("NATIVE CONTEXT: German")
+        print("=" * 70)
+
+        words = ['mann', 'frau']  # man, woman
+        analogy = ('man', 'woman', 'mann', 'frau')
+
+        english_context = "in terms of gender"
+        german_context = "in Bezug auf Geschlecht"
+
+        all_words = ['man', 'woman', 'mann', 'frau']
+
+        vecs_en = np.array([model.encode(f"{w}, {english_context}") for w in all_words])
+        embs_en = {w: v for w, v in zip(all_words, vecs_en)}
+        pca_en = PCA(n_components=2)
+        pca_en.fit(vecs_en)
+        error_en = compute_phase_error_global(embs_en, analogy, pca_en)
+
+        vecs_de = np.array([model.encode(f"{w}, {german_context}") for w in all_words])
+        embs_de = {w: v for w, v in zip(all_words, vecs_de)}
+        pca_de = PCA(n_components=2)
+        pca_de.fit(vecs_de)
+        error_de = compute_phase_error_global(embs_de, analogy, pca_de)
+
+        print(f"English context: {error_en:.1f} deg")
+        print(f"German context:  {error_de:.1f} deg")
+
+        if error_de < error_en:
+            print(f"\nNative context IMPROVES by {error_en - error_de:.1f} deg")
+        else:
+            print(f"\nEnglish context is BETTER by {error_de - error_en:.1f} deg")
+
+
+# ============================================================================
 # Summary Test
 # ============================================================================
 
