@@ -958,6 +958,12 @@ The **eigenvalue spectrum** of an anchor word distance matrix is invariant acros
 - [ ] ESAP.3 Test neighborhood overlap@k on held-out set
 - [ ] ESAP.4 Compare with vec2vec (arXiv:2505.12540) neural approach
 - [ ] ESAP.5 Integrate as cassette handshake artifact (cross-model portability)
+- [ ] ESAP.6 8e Conservation Law Integration (Research Validation Pending)
+  - Q48-50 discovered: `Df x alpha = 8e ~ 21.746` (CV<2% across 24 models)
+  - Infrastructure exists: `cassette_network/qec/core.py` (SEMIOTIC_CONSTANT_8E, compute_compass_health)
+  - **NOT integrated into SVTP handshake** - research not yet independently validated
+  - Decision: Track as telemetry first, gate later if research holds up
+  - Potential use: manifold health check to detect distorted alignments
 
 ### Method (Proven)
 
