@@ -9,12 +9,17 @@ The bot sees SIGNALS, not prices. The formula operates on VECTORS.
 """
 
 import numpy as np
+import sys
+from pathlib import Path
 from typing import Dict, List, Optional
 from dataclasses import dataclass
 from datetime import datetime
 
-from signal_vocabulary import SignalState, AssetClass
-from real_data_ingest import (
+# Add parent to path for cross-package imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from .signal_vocabulary import SignalState, AssetClass
+from data.real_data_ingest import (
     MarketData, OHLCV,
     compute_sma, compute_rsi, compute_volatility, compute_volume_ratio
 )
@@ -385,7 +390,7 @@ class SignalExtractor:
 # =============================================================================
 
 if __name__ == "__main__":
-    from real_data_ingest import RealDataFetcher
+    from data.real_data_ingest import RealDataFetcher
 
     print("=" * 60)
     print("SIGNAL EXTRACTOR - Demo")

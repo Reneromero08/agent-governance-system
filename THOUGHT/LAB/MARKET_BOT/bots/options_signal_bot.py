@@ -26,16 +26,16 @@ from typing import Dict, List, Optional
 from dataclasses import dataclass
 from enum import Enum
 
-from signal_vocabulary import SignalState, AssetClass
-from signal_extractor import SignalExtractor
-from real_data_ingest import RealDataFetcher
-from prime_radiant import PrimeRadiant
-from formula_executor import MarketFormulaExecutor
-from seldon_gate import SeldonGate, GateTier, AlphaWarningLevel
+# Add parent to path for package imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from core import SignalState, AssetClass, SignalExtractor, PrimeRadiant
+from core import MarketFormulaExecutor, SeldonGate, GateTier, AlphaWarningLevel
+from data import RealDataFetcher
 
 # Try to import notifier (optional dependency)
 try:
-    from notifier import Notifier
+    from utils import Notifier
     NOTIFIER_AVAILABLE = True
 except ImportError:
     NOTIFIER_AVAILABLE = False

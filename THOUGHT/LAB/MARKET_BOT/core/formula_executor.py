@@ -22,7 +22,8 @@ from pathlib import Path
 import sys
 
 # Add FORMULA path for q44_core imports
-FORMULA_PATH = Path(__file__).parent.parent / "FORMULA" / "experiments" / "open_questions" / "q44"
+# From core/ -> MARKET_BOT/ -> LAB/ -> FORMULA/
+FORMULA_PATH = Path(__file__).parent.parent.parent / "FORMULA" / "experiments" / "open_questions" / "q44"
 sys.path.insert(0, str(FORMULA_PATH))
 
 try:

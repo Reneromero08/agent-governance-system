@@ -17,6 +17,7 @@ import sys
 from datetime import datetime, timedelta
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
+from pathlib import Path
 import numpy as np
 
 try:
@@ -25,9 +26,11 @@ except ImportError:
     print("Need yfinance: pip install yfinance")
     sys.exit(1)
 
-from signal_vocabulary import SignalState, AssetClass
-from prime_radiant import PrimeRadiant
-from formula_executor import MarketFormulaExecutor, RVelocityResult
+# Add parent to path for package imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from core import SignalState, AssetClass, PrimeRadiant
+from core import MarketFormulaExecutor, RVelocityResult
 
 
 # =============================================================================

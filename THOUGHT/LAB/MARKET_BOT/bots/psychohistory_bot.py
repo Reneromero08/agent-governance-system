@@ -14,16 +14,19 @@ The formula decides, the bot executes.
 """
 
 import numpy as np
+import sys
 from dataclasses import dataclass, field
 from typing import Dict, List, Optional, Tuple
 from datetime import datetime
 from pathlib import Path
 import json
 
-from signal_vocabulary import SignalState, AssetClass, get_signal_by_id
-from prime_radiant import PrimeRadiant
-from formula_executor import MarketFormulaExecutor, FormulaResult, AlphaResult
-from seldon_gate import SeldonGate, GateTier, FullGateResult, AlphaWarningLevel
+# Add parent to path for package imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from core.signal_vocabulary import SignalState, AssetClass, get_signal_by_id
+from core import PrimeRadiant, MarketFormulaExecutor, FormulaResult, AlphaResult
+from core.seldon_gate import SeldonGate, GateTier, FullGateResult, AlphaWarningLevel
 
 
 # =============================================================================

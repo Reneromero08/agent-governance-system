@@ -17,19 +17,20 @@ Key events:
 
 import numpy as np
 import pandas as pd
+import sys
 from datetime import datetime
 from typing import Dict, List, Tuple, Optional
 from dataclasses import dataclass
 from pathlib import Path
 import json
 
-from signal_vocabulary import SignalState, AssetClass
-from real_data_ingest import RealDataFetcher, MarketData, HISTORICAL_EVENTS
-from signal_extractor import SignalExtractor
-from prime_radiant import PrimeRadiant
-from formula_executor import MarketFormulaExecutor
-from seldon_gate import SeldonGate, GateTier, AlphaWarningLevel
-from psychohistory_bot import PsychohistoryBot, BotConfig
+# Add parent to path for package imports
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from core import SignalState, AssetClass, SignalExtractor, PrimeRadiant
+from core import MarketFormulaExecutor, SeldonGate, GateTier, AlphaWarningLevel
+from data.real_data_ingest import RealDataFetcher, MarketData, HISTORICAL_EVENTS
+from bots.psychohistory_bot import PsychohistoryBot, BotConfig
 
 
 # =============================================================================

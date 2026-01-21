@@ -17,7 +17,7 @@ from typing import Dict, List, Optional, Tuple
 from dataclasses import dataclass
 import json
 
-from signal_vocabulary import (
+from .signal_vocabulary import (
     get_all_signals,
     get_signal_descriptions,
     SignalDefinition,
@@ -30,7 +30,7 @@ from signal_vocabulary import (
 # CONFIGURATION
 # =============================================================================
 
-MARKET_BOT_DIR = Path(__file__).parent
+MARKET_BOT_DIR = Path(__file__).parent.parent
 RADIANT_DIR = MARKET_BOT_DIR / "radiant_cache"
 RADIANT_DB = RADIANT_DIR / "prime_radiant.db"
 EMBEDDING_DIM = 384  # all-MiniLM-L6-v2 dimension
