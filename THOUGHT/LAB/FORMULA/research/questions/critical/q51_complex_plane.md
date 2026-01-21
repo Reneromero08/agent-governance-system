@@ -482,6 +482,70 @@ projection and the full complex reality.
 
 ---
 
+## Q51.5: Contextual Phase Selection (BREAKTHROUGH - 2026-01-21)
+
+**Discovery:** Context in the prompt IS the phase selector.
+
+### The Problem with Global PCA
+
+Global PCA works (90.9% pass rate) but requires:
+1. Collecting all words in advance
+2. Computing covariance matrix
+3. Fitting PCA on entire corpus
+
+### The Breakthrough
+
+Single-word embeddings are **phase-averaged superpositions** - all relational contexts
+collapsed into one vector. Adding explicit context to the prompt selects the specific
+relational phase:
+
+```python
+def phase_embed(word, axis=""):
+    """Select phase via explicit context."""
+    if axis:
+        return model.encode(f"{word}, in terms of {axis}")
+    return model.encode(word)
+```
+
+### Experimental Results
+
+| Method | Mean Phase Error | Pass Rate |
+|--------|------------------|-----------|
+| Isolated words (no context) | 161.9 deg | 0% |
+| Contextual ("in terms of gender") | 21.3 deg | 100% |
+
+**87% reduction in phase error** - no PCA needed.
+
+### Cross-Model Validation
+
+| Model | Isolated | Context | Reduction |
+|-------|----------|---------|-----------|
+| all-MiniLM-L6-v2 | 161.9 deg | 21.3 deg | 86.8% |
+| all-mpnet-base-v2 | 87.2 deg | 9.6 deg | 89.0% |
+| all-MiniLM-L12-v2 | 128.0 deg | 7.4 deg | 94.2% |
+| **MEAN** | | | **90.0%** |
+
+### Why This Works
+
+- **Global PCA** implicitly recovers the dominant relational context from covariance
+- **Contextual prompting** EXPLICITLY selects the relational axis
+- Both establish a shared coordinate system, but prompting is direct and lightweight
+
+### Implications
+
+1. Phase recovery does NOT require complex transforms (Hilbert, sign-to-phase FAIL)
+2. Phase recovery does NOT require global PCA (contextual prompting WORKS)
+3. The model already knows the phases - we just need to prompt the right context
+4. "Tight and light" compass: just add context to your prompts
+
+### Test Files
+
+- `THOUGHT/LAB/CAT_CHAT/tests/test_contextual_phase_sweep.py` - Validation suite
+- `THOUGHT/LAB/CAT_CHAT/CONTEXTUAL_PHASE_VALIDATION_2026-01-21.md` - Full report
+
+---
+
 *Created: 2026-01-15*
 *Resolved: 2026-01-15*
+*Updated: 2026-01-21 (Q51.5 - Contextual Phase Selection breakthrough)*
 *Co-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>*

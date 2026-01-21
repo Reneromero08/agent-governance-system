@@ -190,3 +190,68 @@ Where `principal_axes` = top-22 eigenvectors of the embedding covariance matrix.
 - ✅ QGT eigenvectors match your principal axes (22D) - **96.1% alignment proven**
 - ❌ ~~J coupling = Berry curvature magnitude~~ (Berry curvature = 0 for real vectors)
 - ✅ Compass = following geodesics on curved semantic manifold (holonomy proves curvature)
+
+---
+
+## CONTEXTUAL PHASE SELECTION BOOST (2026-01-21)
+
+**Discovery:** Adding explicit context to prompts significantly improves compass discrimination.
+
+### The Finding
+
+From Q51.5 (Contextual Phase Selection), we discovered that context in the prompt acts as
+a phase selector. This has direct implications for compass mode:
+
+| Metric | Without Context | With Context | Boost |
+|--------|-----------------|--------------|-------|
+| J coupling variance | 0.014 | 0.057 | **4.13x** |
+| PC1 explained variance | 0.24 | 0.27 | 1.09x |
+| Similarity range | 0.56 | 0.74 | 1.34x |
+
+### Context-Aware Compass
+
+```python
+def compass_navigate(current_word, candidates, axis=""):
+    """Context-aware compass navigation."""
+    if axis:
+        current = model.encode(f"{current_word}, {axis}")
+        candidate_vecs = [model.encode(f"{c}, {axis}") for c in candidates]
+    else:
+        current = model.encode(current_word)
+        candidate_vecs = [model.encode(c) for c in candidates]
+
+    scores = [cosine(current, c) for c in candidate_vecs]
+    return candidates[np.argmax(scores)]
+```
+
+### When to Use Contextual Compass
+
+| Scenario | Use Context? | Example |
+|----------|--------------|---------|
+| Navigating known domain | YES | "in terms of medical terminology" |
+| General exploration | NO | Let natural structure guide |
+| Analogy completion | YES | Match the relational axis |
+| Disambiguation | YES | "bank, in terms of finance" |
+
+### Connection to Original Compass Formula
+
+The original compass formula was:
+```
+Direction = argmax_a [J(s+a) * alignment_to_principal_axes(s+a)]
+```
+
+With contextual phase selection, this becomes:
+```
+Direction = argmax_a [J_ctx(s+a, axis) * alignment_ctx(s+a, axis)]
+```
+
+Where `_ctx` indicates embeddings computed with explicit relational context.
+
+**Key insight:** Context gives the compass a 4x sharper lens when you know what relational
+axis matters. The J coupling boost (4.13x) means the compass can make much sharper
+distinctions between related and unrelated concepts.
+
+### Test Files
+
+- `THOUGHT/LAB/CAT_CHAT/tests/test_contextual_phase_sweep.py` - TestCompassBoost class
+- `THOUGHT/LAB/CAT_CHAT/CONTEXTUAL_PHASE_VALIDATION_2026-01-21.md` - Full report
