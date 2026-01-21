@@ -135,12 +135,21 @@ class CipherMarathonScenario:
 class CipherStressRunner:
     def __init__(self, args):
         self.args = args
+        self.timeout = args.timeout
         self.scenario = CipherMarathonScenario(num_agents=50, total_turns=200)
         
-        import tempfile
-        self.tmpdir = Path(tempfile.gettempdir()) / f"cat_cipher_{int(time.time())}"
-        self.tmpdir.mkdir(exist_ok=True)
-        self.db_path = self.tmpdir / "cipher.db"
+        if args.output_dir:
+            out_path = Path(args.output_dir)
+            out_path.mkdir(parents=True, exist_ok=True)
+            self.db_path = out_path / f"cipher_marathon_{int(time.time())}.db"
+        else:
+            import tempfile
+            self.tmpdir = Path(tempfile.gettempdir()) / f"cat_cipher_{int(time.time())}"
+            self.tmpdir.mkdir(exist_ok=True)
+            self.db_path = self.tmpdir / "cipher.db"
+        
+        print(f"Database Path: {self.db_path}")
+        print(f"LLM Timeout: {self.timeout}s")
         
         self.capsule = SessionCapsule(db_path=self.db_path)
         self.session_id = self.capsule.create_session()
@@ -185,13 +194,13 @@ class CipherStressRunner:
                 json={
                     "model": self.args.model,
                     "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
-                    "max_tokens": 128,
-                    "temperature": 0.1 # Absolute precision required
-                },
-                timeout=60
+                    "max_tokens": 2048,
+                    "temperature": 0.1
+                }
             )
             return resp.json()["choices"][0]["message"]["content"]
-        except:
+        except Exception as e:
+            print(f"      [LLM ERROR: {e}]")
             return "ERROR"
 
     def run(self):
@@ -290,6 +299,8 @@ def main():
     parser.add_argument("--url", default=DEFAULT_LLM_BASE)
     parser.add_argument("--model", default=DEFAULT_MODEL)
     parser.add_argument("--threshold", type=float, default=DEFAULT_E_THRESHOLD)
+    parser.add_argument("--output-dir", help="Directory to save session database")
+    parser.add_argument("--timeout", type=int, default=300, help="LLM API timeout in seconds (default: 300)")
     args = parser.parse_args()
     
     CipherStressRunner(args).run()

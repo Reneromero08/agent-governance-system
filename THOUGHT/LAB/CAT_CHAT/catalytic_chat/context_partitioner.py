@@ -48,8 +48,13 @@ except ImportError:
     ) -> Tuple[float, List[float]]:
         if len(context_vecs) == 0:
             return 0.0, []
+        # Filter out non-numeric vectors
+        valid_vecs = [v for v in context_vecs 
+                      if isinstance(v, np.ndarray) and v.dtype.kind in ('f', 'i', 'u')]
+        if len(valid_vecs) == 0:
+            return 0.0, []
         psi = normalize(query_vec)
-        overlaps = [float(np.dot(psi, normalize(phi))) for phi in context_vecs]
+        overlaps = [float(np.dot(psi, normalize(phi))) for phi in valid_vecs]
         return float(np.mean(overlaps)), overlaps
 
 
@@ -79,8 +84,17 @@ class ContextItem:
 
     def __post_init__(self):
         """Ensure embedding is numpy array if provided."""
-        if self.embedding is not None and not isinstance(self.embedding, np.ndarray):
-            self.embedding = np.array(self.embedding)
+        if self.embedding is not None:
+            if isinstance(self.embedding, str):
+                # String passed as embedding - this is a bug, clear it
+                self.embedding = None
+            elif not isinstance(self.embedding, np.ndarray):
+                arr = np.array(self.embedding, dtype=np.float32)
+                # Validate it's actually numeric
+                if arr.dtype.kind not in ('f', 'i', 'u'):
+                    self.embedding = None
+                else:
+                    self.embedding = arr
 
     def to_dict(self) -> Dict[str, Any]:
         """Convert to dictionary (without embedding for serialization)."""

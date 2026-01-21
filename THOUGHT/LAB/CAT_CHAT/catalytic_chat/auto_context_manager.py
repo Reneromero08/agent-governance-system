@@ -435,10 +435,10 @@ class AutoContextManager:
         turn_id: Optional[str] = None
     ) -> FinalizeResult:
         """
-        Finalize a turn by compressing it to catalytic space.
+        Finalize a turn by storing messages and compressing to catalytic space.
 
-        Called after LLM response. Compresses the turn immediately
-        and adds the pointer to the pool for potential rehydration.
+        Called after LLM response. Stores EACH message individually with
+        embedding for E-score based recall, PLUS compresses the turn.
 
         Args:
             user_query: The user's query
@@ -453,29 +453,70 @@ class AutoContextManager:
         if turn_id is None:
             turn_id = f"turn_{self._turn_index:04d}"
 
-        # Create turn content
+        # CATALYTIC: Store individual messages with embeddings
+        user_msg_id = f"msg_user_{turn_id}"
+        asst_msg_id = f"msg_asst_{turn_id}"
+
+        # Compute embeddings
+        user_embedding = self.embed_fn(user_query) if self.embed_fn else None
+        asst_embedding = self.embed_fn(assistant_response) if self.embed_fn else None
+
+        # Add messages to pointer set for E-score based retrieval
+        # This is the KEY catalytic behavior - every message becomes
+        # a candidate for future E-score based recall
+        self._pointer_set.append(ContextItem(
+            item_id=user_msg_id,
+            content=f"[User] {user_query}",
+            tokens=self.token_estimator(user_query),
+            embedding=user_embedding,
+            item_type="user_message",
+            metadata={"turn_id": turn_id, "role": "user"},
+        ))
+
+        self._pointer_set.append(ContextItem(
+            item_id=asst_msg_id,
+            content=f"[Assistant] {assistant_response}",
+            tokens=self.token_estimator(assistant_response),
+            embedding=asst_embedding,
+            item_type="assistant_message",
+            metadata={"turn_id": turn_id, "role": "assistant"},
+        ))
+
+        # Create turn content for compression
         turn = create_turn_from_messages(
             turn_id=turn_id,
             user_message=user_query,
             assistant_message=assistant_response,
         )
 
-        # Compress the turn (skip internal storage - we log via capsule)
+        # Compress turn and store full content for hydration
+        # Use skip_storage=True to avoid sequence number race with capsule
         compression_result = self.compressor.compress_turn(turn, skip_storage=True)
         pointer = compression_result.pointer
 
         # Add pointer to pool for future hydration
         self._turn_pointers.append(pointer)
 
-        # Log compression event
-        event = self.capsule.log_turn_stored(
-            session_id=self.session_id,
-            turn_id=turn_id,
-            content_hash=pointer.content_hash,
-            summary=pointer.summary,
-            original_tokens=pointer.original_tokens,
-            pointer_tokens=pointer.pointer_tokens,
-        )
+        # Cache content in compressor for hydration (no DB write)
+        self.compressor._content_cache[pointer.content_hash] = turn
+
+        # Log all events through capsule (single source of truth)
+        # This ensures correct sequence numbering
+        self.capsule.log_user_message(self.session_id, user_query)
+        self.capsule.log_assistant_response(self.session_id, assistant_response)
+
+        # Log turn stored with full content for hydration
+        event = self.capsule.append_event(self.session_id, EVENT_TURN_STORED, {
+            "turn_id": turn_id,
+            "user_query": user_query,
+            "assistant_response": assistant_response,
+            "timestamp": turn.timestamp,
+            "content_hash": pointer.content_hash,
+            "summary": pointer.summary,
+            "original_tokens": pointer.original_tokens,
+            "pointer_tokens": pointer.pointer_tokens,
+            "compression_ratio": pointer.compression_ratio,
+        })
 
         return FinalizeResult(
             compression_result=compression_result,
@@ -495,6 +536,9 @@ class AutoContextManager:
 
         This is the main entry point for auto-managed context chat.
 
+        TRULY CATALYTIC: Every message (user AND assistant) is stored
+        individually with its embedding for future E-score based recall.
+
         Args:
             query: User query
             llm_generate: Function(system_prompt, user_context) -> response
@@ -504,7 +548,7 @@ class AutoContextManager:
         Returns:
             CatalyticChatResult with full turn details
         """
-        # Prepare context
+        # Prepare context (uses E-scores against all stored messages)
         prepare_result = self.prepare_context(query, query_embedding)
 
         # Assemble context for LLM
@@ -514,7 +558,7 @@ class AutoContextManager:
         full_prompt = f"{context_text}\n\nUser: {query}" if context_text else query
         response = llm_generate(system_prompt, full_prompt)
 
-        # Finalize turn
+        # CATALYTIC: finalize_turn stores BOTH messages with embeddings
         finalize_result = self.finalize_turn(query, response)
 
         # Compute metrics
@@ -544,6 +588,45 @@ class AutoContextManager:
         """Adjust E-score threshold."""
         self.E_threshold = new_threshold
         self.partitioner.adjust_threshold(new_threshold)
+
+    # =========================================================================
+    # Debug Methods - Easy inspection during development
+    # =========================================================================
+
+    def debug_show_state(self) -> None:
+        """Print current context state for debugging."""
+        state = self.context_state
+        print(f"\n--- Context State (Turn {state.turn_index}) ---")
+        print(f"Working set: {len(state.working_set)} items, {state.tokens_used} tokens")
+        print(f"Pointer set: {len(state.pointer_set)} items")
+        print(f"Turn pointers: {len(state.turn_pointers)} compressed turns")
+        print(f"Budget: {state.utilization_pct:.1%} used ({state.tokens_used}/{state.budget.available_for_working_set})")
+
+    def debug_show_turns(self) -> None:
+        """Print all compressed turn pointers."""
+        print(f"\n--- Compressed Turns ({len(self._turn_pointers)}) ---")
+        for tp in self._turn_pointers:
+            print(f"  {tp.turn_id}: {tp.summary[:50]}... ({tp.original_tokens} tok, {tp.compression_ratio:.1f}x)")
+
+    def debug_get_all_messages(self) -> List[Dict[str, Any]]:
+        """
+        Get all stored messages in simple format for inspection.
+
+        Returns list of {role: 'user'/'assistant', content: str, turn_id: str}
+        """
+        from .debug import CatChatDebugger
+        debugger = CatChatDebugger(self.db_path)
+        messages = debugger.get_all_messages(self.session_id)
+        return [
+            {"role": m.role, "content": m.content, "turn_id": m.turn_id}
+            for m in messages
+        ]
+
+    def debug_report(self) -> None:
+        """Print a full diagnostic report."""
+        from .debug import CatChatDebugger
+        debugger = CatChatDebugger(self.db_path)
+        debugger.report(self.session_id)
 
 
 # =============================================================================
