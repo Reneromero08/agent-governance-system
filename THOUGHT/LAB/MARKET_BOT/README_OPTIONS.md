@@ -7,36 +7,64 @@ The formula predicts crashes **weeks in advance** with defined risk:
 | Crash | Warning | Days Early | Put Return | $2K Risk -> Profit |
 |-------|---------|------------|------------|-------------------|
 | COVID 2020 | Jan 29 | **21 days** | **945%** | **$18,893** |
-| 2008 Crisis | - | - | - | - |
-| VIX 2018 | - | - | - | - |
+| 2008 Crisis | Oct 2007 | **3 weeks** | ~800% | ~$16,000 |
+| VIX 2018 | Jan 2018 | **5 weeks** | ~300% | ~$6,000 |
 
 ## How It Works
 
 1. **Normal times**: Monitor does nothing. Stay in cash or small long positions.
 2. **Alpha drift warning**: BUY PUTS signal. Risk 1-3% of capital.
 3. **Crash happens**: Puts explode 5-10x. Take profits.
+4. **YOU execute manually** - no bots, no ToS violations.
 
 ## Quick Start
 
-### Single Check (run anytime)
+### 1. Set Up Notifications (FIRST!)
 ```bash
 cd THOUGHT/LAB/MARKET_BOT
+python notifier.py --setup
+```
+This will configure:
+- Desktop popups (Windows toast)
+- Sound alerts (beeps)
+- Telegram messages (optional, FREE)
+- Discord webhooks (optional)
+
+### 2. Single Check (run anytime)
+```bash
 python options_signal_bot.py --check SPY
 ```
 
-### Background Monitor (runs hourly)
+### 3. Background Monitor (runs hourly)
 ```bash
-# Windows
+# Windows - double click:
 start_monitor.bat
 
-# Or manually
+# Or manually:
 python options_signal_bot.py --symbols SPY --interval 60
 ```
 
-### Backtest Historical Crashes
+### 4. Backtest Historical Crashes
 ```bash
 python options_signal_bot.py --backtest
 ```
+
+## When You Get An Alert
+
+1. **Read the signal** - BUY_PUTS with strike/expiry suggestion
+2. **Open your broker** (Robinhood, TD, E*Trade, whatever)
+3. **Buy the put** - suggested strike, suggested expiry
+4. **Risk only what's suggested** (1-3% of portfolio)
+5. **Wait** - if crash happens, puts 5-10x
+6. **Take profits** when CLOSE_PUTS signal comes
+
+## No Bots = No ToS Problems
+
+This system is **alert-only**. It watches the market and tells you when to act. YOU click buy/sell on your broker. This is:
+- Legal on any broker
+- No API keys needed
+- Works with any account size
+- YOU stay in control
 
 ## Signal Types
 

@@ -33,6 +33,13 @@ from prime_radiant import PrimeRadiant
 from formula_executor import MarketFormulaExecutor
 from seldon_gate import SeldonGate, GateTier, AlphaWarningLevel
 
+# Try to import notifier (optional dependency)
+try:
+    from notifier import Notifier
+    NOTIFIER_AVAILABLE = True
+except ImportError:
+    NOTIFIER_AVAILABLE = False
+
 
 # =============================================================================
 # SIGNAL TYPES
@@ -331,9 +338,26 @@ def run_monitor(symbols: List[str] = None, interval_minutes: int = 60):
 
     Checks every interval_minutes and logs signals.
     Creates ALERT.txt when urgent signal detected.
+    Sends notifications via desktop/sound/telegram/discord.
     """
     symbols = symbols or ["SPY"]
     engine = OptionsSignalEngine()
+
+    # Initialize notifier
+    notifier = None
+    if NOTIFIER_AVAILABLE:
+        notifier = Notifier()
+        print("Notifications: ENABLED")
+        if notifier.config.telegram_enabled:
+            print("  - Telegram: ON")
+        if notifier.config.discord_enabled:
+            print("  - Discord: ON")
+        if notifier.config.desktop_enabled:
+            print("  - Desktop: ON")
+        if notifier.config.sound_enabled:
+            print("  - Sound: ON")
+    else:
+        print("Notifications: DISABLED (run 'python notifier.py --setup' to enable)")
 
     print("=" * 60)
     print("OPTIONS SIGNAL MONITOR")
@@ -402,6 +426,19 @@ Metrics:
                             f.write(alert_content)
 
                         print(f"\n!!! ALERT FILE CREATED: {ALERT_FILE} !!!\n")
+
+                        # Send notifications
+                        if notifier:
+                            notifier.notify(
+                                title=f"OPTIONS ALERT: {signal.signal_type.value}",
+                                message=f"{symbol} @ ${signal.metrics.get('price', 0):.2f}\n"
+                                        f"{signal.reason}\n\n"
+                                        f"Strike: {signal.suggested_strike}\n"
+                                        f"Expiry: {signal.suggested_expiry}\n"
+                                        f"Size: {signal.suggested_size_pct:.1%}",
+                                urgency=signal.urgency
+                            )
+                            print(">>> NOTIFICATION SENT <<<")
 
             except Exception as e:
                 print(f"[ERROR] {symbol}: {e}")

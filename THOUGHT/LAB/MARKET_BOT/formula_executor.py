@@ -71,6 +71,18 @@ class AlphaResult:
     conservation_error: float   # Deviation from 8e
 
 
+@dataclass
+class RVelocityResult:
+    """Result of R velocity (dR/dt) computation - THE KEY INSIGHT."""
+    R: float                    # Current R value
+    R_prev: float               # Previous R value
+    dR: float                   # R velocity (change per step)
+    dR_normalized: float        # Normalized velocity (-1 to +1)
+    momentum_phase: str         # BUILDING, STABLE, FADING, REVERSING
+    signal: str                 # BUY, HOLD, SELL, WAIT
+    confidence: float           # 0-1 signal confidence
+
+
 # =============================================================================
 # FORMULA EXECUTOR CLASS
 # =============================================================================
@@ -383,6 +395,160 @@ class MarketFormulaExecutor:
             results.append(self.compute_alpha(window_vecs))
 
         return results
+
+    # =========================================================================
+    # R VELOCITY (dR/dt) - THE KEY INSIGHT
+    # =========================================================================
+
+    def compute_R_velocity(
+        self,
+        R_history: List[float],
+        price_trend: float = 0.0,
+        smoothing_window: int = 3,
+    ) -> RVelocityResult:
+        """
+        Compute R velocity (dR/dt) - the rate of change of resonance.
+
+        THE KEY INSIGHT:
+        - dR/dt > 0 = coherence building = momentum strengthening = ENTRY
+        - dR/dt < 0 = coherence breaking = momentum fading = EXIT
+        - dR/dt ~ 0, R high = stable trend = HOLD
+        - dR/dt ~ 0, R low = noise = WAIT
+
+        Args:
+            R_history: List of recent R values (oldest to newest)
+            price_trend: Direction of price movement (+1 up, -1 down, 0 flat)
+            smoothing_window: Window for smoothing R values
+
+        Returns:
+            RVelocityResult with velocity, phase, and trading signal
+        """
+        if len(R_history) < 2:
+            return RVelocityResult(
+                R=R_history[-1] if R_history else 0.0,
+                R_prev=0.0,
+                dR=0.0,
+                dR_normalized=0.0,
+                momentum_phase="WAIT",
+                signal="WAIT",
+                confidence=0.0,
+            )
+
+        # Smooth R values to reduce noise
+        if len(R_history) >= smoothing_window:
+            R_smoothed = [
+                np.mean(R_history[max(0, i-smoothing_window+1):i+1])
+                for i in range(len(R_history))
+            ]
+        else:
+            R_smoothed = R_history
+
+        R_current = R_smoothed[-1]
+        R_prev = R_smoothed[-2]
+
+        # Raw velocity
+        dR = R_current - R_prev
+
+        # Normalized velocity (scale by typical R range)
+        R_std = np.std(R_history) if len(R_history) > 2 else 1.0
+        dR_normalized = dR / max(R_std, 0.01)
+        dR_normalized = np.clip(dR_normalized, -1.0, 1.0)
+
+        # Classify momentum phase
+        # Thresholds tuned for sensitivity
+        VELOCITY_THRESHOLD = 0.1  # Significant change
+        R_HIGH_THRESHOLD = 0.8    # "High" R (relative to recent)
+        R_LOW_THRESHOLD = 0.3     # "Low" R
+
+        # Dynamic thresholds based on recent R range
+        R_mean = np.mean(R_history)
+        R_high = R_mean + 0.5 * R_std if R_std > 0 else R_HIGH_THRESHOLD
+        R_low = R_mean - 0.5 * R_std if R_std > 0 else R_LOW_THRESHOLD
+
+        if dR_normalized > VELOCITY_THRESHOLD:
+            momentum_phase = "BUILDING"  # Resonance increasing
+        elif dR_normalized < -VELOCITY_THRESHOLD:
+            momentum_phase = "FADING"    # Resonance decreasing
+        elif R_current > R_high:
+            momentum_phase = "STABLE"    # High and stable
+        else:
+            momentum_phase = "WAITING"   # Low or unclear
+
+        # Generate trading signal based on phase + price trend
+        signal = "WAIT"
+        confidence = 0.0
+
+        if momentum_phase == "BUILDING":
+            if price_trend > 0:
+                signal = "BUY"
+                confidence = min(abs(dR_normalized) * R_current, 1.0)
+            elif price_trend < 0:
+                signal = "SHORT"  # Or avoid if no shorting
+                confidence = min(abs(dR_normalized) * R_current, 1.0) * 0.7
+
+        elif momentum_phase == "FADING":
+            if R_current > R_low:  # Was high, now falling
+                signal = "SELL"
+                confidence = min(abs(dR_normalized), 1.0)
+            else:
+                signal = "WAIT"
+                confidence = 0.3
+
+        elif momentum_phase == "STABLE":
+            if price_trend > 0:
+                signal = "HOLD"
+                confidence = min(R_current / max(R_high, 0.01), 1.0)
+            elif price_trend < 0:
+                signal = "SELL"
+                confidence = 0.5
+
+        return RVelocityResult(
+            R=float(R_current),
+            R_prev=float(R_prev),
+            dR=float(dR),
+            dR_normalized=float(dR_normalized),
+            momentum_phase=momentum_phase,
+            signal=signal,
+            confidence=float(confidence),
+        )
+
+    def compute_R_velocity_sequence(
+        self,
+        state_vectors: List[np.ndarray],
+        price_changes: List[float],
+        lookback: int = 10,
+    ) -> List[RVelocityResult]:
+        """
+        Compute R velocity for a sequence of states.
+
+        Args:
+            state_vectors: List of state vectors
+            price_changes: List of price changes (for trend direction)
+            lookback: Context window for R computation
+
+        Returns:
+            List of RVelocityResult for each step
+        """
+        # First compute R sequence
+        R_results = self.compute_R_sequence(state_vectors, lookback)
+        R_values = [r.R for r in R_results]
+
+        # Then compute velocity for each point
+        velocity_results = []
+        for i in range(len(state_vectors)):
+            R_history = R_values[max(0, i-5):i+1]  # Use recent 5 R values
+
+            # Get price trend (positive = up, negative = down)
+            if i < len(price_changes):
+                price_trend = 1.0 if price_changes[i] > 0.005 else (-1.0 if price_changes[i] < -0.005 else 0.0)
+            else:
+                price_trend = 0.0
+
+            velocity_results.append(
+                self.compute_R_velocity(R_history, price_trend)
+            )
+
+        return velocity_results
 
 
 # =============================================================================
