@@ -1,25 +1,39 @@
 """
 Comprehensive Test Suite: Complex Compass (CP^n Navigation)
 
-Tests the hypothesis from Q53 + Grok/Gemini analysis:
-1. Real embeddings are "shadows" of complex vectors
-2. Pentagonal geometry (72 deg) should appear sharper in phase space
-3. Hermitian similarity may reveal structure cosine cannot see
-4. Opposites (negation) should have ~180 deg phase shift
+HYPOTHESIS STATUS (2026-01-21):
+================================
+This test suite was built to test the Grok/Gemini hypothesis:
+1. Real embeddings are "shadows" of complex vectors - PARTIALLY CONFIRMED
+2. Pentagonal geometry (72 deg) should appear sharper in phase space - NO
+3. Hermitian similarity may reveal structure cosine cannot see - NO
+4. Opposites (negation) should have ~180 deg phase shift - NO (for semantic opposites)
+
+KEY FINDINGS:
+- Pentagonal geometry (~72 deg) PERSISTS in complex space (confirms Q53)
+- Hermitian magnitude TRACKS cosine similarity closely (<0.01 difference)
+- Semantic opposites (good/bad) have ~0-4 deg phase shift, NOT ~180 deg
+- Exact mathematical opposites (v, -v) DO have 180 deg phase shift (trivially)
+- Phase coherence is near-constant (~0.01-0.11) for sign-to-phase method
+
+The tests below are designed to VERIFY THESE NEGATIVE RESULTS. Tests that pass
+confirm the hypothesis is FALSIFIED for these specific claims. This is proper
+scientific methodology - we test what is, not what we hoped.
 
 Test Categories:
-- T1: ComplexGeometricState axioms and properties
+- T1: ComplexGeometricState axioms and properties (mathematical correctness)
 - T2: Complexification methods (sign-to-phase, Hilbert, FFT)
-- T3: Hermitian vs Cosine similarity comparison
-- T4: Negation/opposition detection via phase
-- T5: Pentagonal geometry analysis
-- T6: Compass mode navigation
+- T3: Hermitian vs Cosine similarity comparison (tests claim #3 - NEGATIVE RESULT)
+- T4: Negation/opposition detection via phase (tests claim #4 - NEGATIVE RESULT)
+- T5: Pentagonal geometry analysis (confirms Q53 finding)
+- T6: Compass mode navigation (effectively cosine-based due to constant coherence)
 - T7: Q53 replication in complex space
 - T8: Integration with existing GeometricReasoner
 - T9: Determinism and reproducibility
 - T10: Edge cases and error handling
 
 Design follows CAT_CHAT test patterns (STYLE-002 compliant).
+Documentation of negative results follows scientific best practices.
 """
 
 import sys
@@ -425,22 +439,44 @@ class TestHermitianVsCosineSimilarity:
 # ============================================================================
 
 class TestNegationDetection:
-    """Test T4: Phase-based negation detection."""
+    """
+    Test T4: Phase-based negation detection.
 
-    def test_opposite_vectors_detected_as_negation(
+    CRITICAL NOTE (2026-01-21):
+    The Grok/Gemini hypothesis was that semantic opposites (good/bad) should
+    have ~180 deg phase shift after complexification. This hypothesis is
+    FALSIFIED by our tests:
+    - Exact mathematical opposites (v, -v): Phase = 180 deg (WORKS)
+    - Semantic opposites (good/bad): Phase = ~0-4 deg (FAILS)
+
+    The tests below document both the success case (exact opposites) and
+    the failure case (semantic opposites) accurately.
+    """
+
+    def test_exact_opposite_vectors_have_180_deg_phase(
         self,
         compass_sign,
         opposite_vectors
     ):
-        """Exact opposites should be detected as negations."""
+        """
+        EXACT mathematical opposites (v, -v) have 180 deg phase shift.
+
+        This is expected from sign-to-phase math: every component changes
+        sign, so every phase shifts by pi, giving Hermitian inner product = -1.
+        """
         v1, v2 = opposite_vectors
         s1 = compass_sign.complexify(v1)
         s2 = compass_sign.complexify(v2)
 
         negation = compass_sign.detect_negation(s1, s2)
 
-        # With sign-to-phase, exact opposite should have high phase
-        assert negation['is_negation'] or negation['magnitude'] < 0.3
+        # For exact opposites, phase must be ~180 deg
+        assert abs(negation['phase_abs_deg'] - 180.0) < 1.0, \
+            f"Expected ~180 deg, got {negation['phase_abs_deg']:.2f}"
+        assert negation['magnitude'] > 0.99, \
+            f"Expected magnitude ~1.0, got {negation['magnitude']:.4f}"
+        assert negation['is_negation'], \
+            "Exact opposites should be detected as negation"
 
     def test_similar_vectors_not_detected_as_negation(
         self,
@@ -457,38 +493,76 @@ class TestNegationDetection:
         assert not negation['is_negation']
 
     @pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
-    def test_semantic_opposites_have_phase_difference(self, compass_sign, word_embeddings):
-        """Semantic opposites (good/bad) should have phase difference."""
-        s_good = compass_sign.complexify(word_embeddings['good'])
-        s_bad = compass_sign.complexify(word_embeddings['bad'])
+    def test_semantic_opposites_have_small_phase_not_180(self, compass_sign, word_embeddings):
+        """
+        NEGATIVE RESULT: Semantic opposites do NOT have ~180 deg phase shift.
 
-        comparison = compass_sign.compare_real_vs_complex(s_good, s_bad)
+        This FALSIFIES the Grok/Gemini hypothesis for sign-to-phase method.
+        The phase shift between semantic opposites (good/bad, hot/cold) is
+        ~0-4 degrees, not ~180 degrees as hypothesized.
 
-        # Record the phase - this is what we're testing
-        phase_deg = abs(comparison['hermitian_phase_deg'])
+        Q51 showed that complex structure exists in RELATIONSHIPS (global PCA),
+        not in individual vectors complexified via local transforms.
+        """
+        pairs = [
+            ('good', 'bad'),
+            ('hot', 'cold'),
+            ('love', 'hate'),
+        ]
 
-        # Phase should be non-trivial for opposites
-        # (Note: exact value depends on embedding model)
-        assert phase_deg > 0  # At minimum, non-zero
+        for w1, w2 in pairs:
+            s1 = compass_sign.complexify(word_embeddings[w1])
+            s2 = compass_sign.complexify(word_embeddings[w2])
+            comparison = compass_sign.compare_real_vs_complex(s1, s2)
+
+            phase_deg = abs(comparison['hermitian_phase_deg'])
+
+            # NEGATIVE RESULT: Phase is NOT ~180 deg
+            # Instead, phase is very small (~0-10 deg)
+            assert phase_deg < 20.0, \
+                f"{w1}/{w2}: Expected small phase (<20 deg), got {phase_deg:.2f}"
+
+            # Hermitian magnitude tracks cosine similarity closely
+            mag = comparison['hermitian_magnitude']
+            cosine = comparison['cosine_similarity']
+            assert abs(mag - cosine) < 0.01, \
+                f"{w1}/{w2}: Hermitian magnitude ({mag:.4f}) should track cosine ({cosine:.4f})"
 
     @pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
-    def test_semantic_pairs_have_different_phases(self, compass_sign, word_embeddings):
-        """Different semantic relationships should have different phases."""
-        # Opposites
-        phase_good_bad = abs(compass_sign.compare(
-            compass_sign.complexify(word_embeddings['good']),
-            compass_sign.complexify(word_embeddings['bad'])
-        )[1])
+    def test_hermitian_tracks_cosine_for_semantic_pairs(self, compass_sign, word_embeddings):
+        """
+        Hermitian magnitude tracks cosine similarity closely for all semantic pairs.
 
-        # Similar (king/queen)
-        phase_king_queen = abs(compass_sign.compare(
-            compass_sign.complexify(word_embeddings['king']),
-            compass_sign.complexify(word_embeddings['queen'])
-        )[1])
+        This confirms the NEGATIVE RESULT from the report: complexification
+        via sign-to-phase or Hilbert does NOT reveal additional structure
+        beyond what cosine similarity already shows.
+        """
+        pairs = [
+            ('good', 'bad'),
+            ('hot', 'cold'),
+            ('king', 'queen'),
+            ('man', 'woman'),
+        ]
 
-        # Record both phases for analysis
-        assert phase_good_bad >= 0
-        assert phase_king_queen >= 0
+        max_difference = 0.0
+
+        for w1, w2 in pairs:
+            s1 = compass_sign.complexify(word_embeddings[w1])
+            s2 = compass_sign.complexify(word_embeddings[w2])
+
+            mag = s1.E_magnitude(s2)
+            cosine = float(np.dot(word_embeddings[w1], word_embeddings[w2]))
+
+            difference = abs(mag - cosine)
+            max_difference = max(max_difference, difference)
+
+            # Hermitian magnitude should track cosine very closely
+            assert difference < 0.01, \
+                f"{w1}/{w2}: Hermitian mag ({mag:.4f}) diverges from cosine ({cosine:.4f})"
+
+        # Overall, the maximum difference should be tiny
+        assert max_difference < 0.01, \
+            f"Max Hermitian/cosine difference is {max_difference:.4f}, expected < 0.01"
 
 
 # ============================================================================
@@ -935,6 +1009,164 @@ class TestPhaseSharpening:
         # Test passes if analysis runs without error
         # Actual sharpening is recorded for human review
         assert analysis_sign is not None
+
+
+# ============================================================================
+# T11: Q51 Methodology Comparison (Local vs Global Phase Extraction)
+# ============================================================================
+
+@pytest.mark.skipif(not TRANSFORMERS_AVAILABLE, reason="transformers not available")
+class TestQ51Methodology:
+    """
+    Test T11: Compare local complexification vs Q51 global PCA methodology.
+
+    CRITICAL INSIGHT from running the actual Q51 tests:
+    - Local complexification (Hilbert, sign-to-phase): FAILS to find phase structure
+    - Global PCA + phase arithmetic (Q51 methodology): 90.9% pass rate, 4.05x separation
+
+    The complex structure is in RELATIONSHIPS, not individual vectors.
+
+    Q51 test results (test_q51_phase_arithmetic.py):
+    - all-MiniLM-L6-v2: 86.4% pass, 4.15x separation
+    - all-mpnet-base-v2: 100.0% pass, 6.59x separation
+    - bge-small-en-v1.5: 86.4% pass, 4.22x separation
+    - all-MiniLM-L12-v2: 95.5% pass, 2.35x separation
+    - gte-small: 86.4% pass, 2.93x separation
+    - CROSS-MODEL: 90.9% mean pass, 4.05x mean separation
+    """
+
+    def test_local_vs_global_phase_extraction(self, word_embeddings):
+        """
+        Demonstrate the difference between local and global phase extraction.
+
+        Local (per-pair PCA): Extract phase from 2D PCA fitted per analogy pair
+        Global (Q51): Extract phase from PCA on ENTIRE word ensemble
+
+        The key insight: Global PCA establishes a SHARED coordinate system that
+        preserves relational structure. Per-pair PCA loses this.
+        """
+        from sklearn.decomposition import PCA
+        from sentence_transformers import SentenceTransformer
+
+        model = SentenceTransformer('all-MiniLM-L6-v2')
+
+        # Classic analogies from Q51 test
+        analogies = [
+            ('king', 'queen', 'man', 'woman'),
+            ('brother', 'sister', 'boy', 'girl'),
+            ('walk', 'walked', 'run', 'ran'),
+            ('big', 'bigger', 'small', 'smaller'),
+            ('good', 'better', 'bad', 'worse'),
+            ('father', 'mother', 'son', 'daughter'),
+        ]
+
+        # Non-analogies (random 4-tuples that should FAIL)
+        non_analogies = [
+            ('king', 'walked', 'good', 'sister'),
+            ('queen', 'bigger', 'worse', 'ran'),
+            ('man', 'father', 'walk', 'small'),
+        ]
+
+        # Get all words
+        all_words = list(set(w for a in (analogies + non_analogies) for w in a))
+        vecs = model.encode(all_words, convert_to_numpy=True)
+        embeddings = {w: v/np.linalg.norm(v) for w, v in zip(all_words, vecs)}
+        all_vecs = np.array([embeddings[w] for w in all_words])
+
+        # METHOD 1: Per-pair PCA (NO shared coordinate system)
+        per_pair_errors = []
+        for a, b, c, d in analogies:
+            # Fit PCA on just these 4 words (no global context)
+            pair_vecs = np.array([embeddings[w] for w in [a, b, c, d]])
+            pca_pair = PCA(n_components=2)
+            projs = pca_pair.fit_transform(pair_vecs)
+
+            z = projs[:, 0] + 1j * projs[:, 1]
+            phases = np.angle(z)
+
+            theta_ba = phases[1] - phases[0]
+            theta_dc = phases[3] - phases[2]
+
+            theta_ba = np.angle(np.exp(1j * theta_ba))
+            theta_dc = np.angle(np.exp(1j * theta_dc))
+
+            error = abs(theta_ba - theta_dc)
+            if error > np.pi:
+                error = 2 * np.pi - error
+            per_pair_errors.append(np.degrees(error))
+
+        mean_per_pair_error = np.mean(per_pair_errors)
+
+        # METHOD 2: Global PCA (Q51 methodology - shared coordinate system)
+        pca_global = PCA(n_components=2)
+        pca_global.fit(all_vecs)
+
+        def get_global_phase(word):
+            v = embeddings[word]
+            proj = pca_global.transform(v.reshape(1, -1))[0]
+            z = proj[0] + 1j * proj[1]
+            return np.angle(z)
+
+        global_errors = []
+        for a, b, c, d in analogies:
+            theta_a = get_global_phase(a)
+            theta_b = get_global_phase(b)
+            theta_c = get_global_phase(c)
+            theta_d = get_global_phase(d)
+
+            theta_ba = np.angle(np.exp(1j * (theta_b - theta_a)))
+            theta_dc = np.angle(np.exp(1j * (theta_d - theta_c)))
+
+            error = abs(theta_ba - theta_dc)
+            if error > np.pi:
+                error = 2 * np.pi - error
+            global_errors.append(np.degrees(error))
+
+        mean_global_error = np.mean(global_errors)
+
+        # Test non-analogies with global PCA (should have HIGH error)
+        non_analogy_errors = []
+        for a, b, c, d in non_analogies:
+            theta_a = get_global_phase(a)
+            theta_b = get_global_phase(b)
+            theta_c = get_global_phase(c)
+            theta_d = get_global_phase(d)
+
+            theta_ba = np.angle(np.exp(1j * (theta_b - theta_a)))
+            theta_dc = np.angle(np.exp(1j * (theta_d - theta_c)))
+
+            error = abs(theta_ba - theta_dc)
+            if error > np.pi:
+                error = 2 * np.pi - error
+            non_analogy_errors.append(np.degrees(error))
+
+        mean_non_analogy_error = np.mean(non_analogy_errors)
+
+        # Q51 threshold: pass if error < 45 degrees (pi/4)
+        threshold_pass = 45.0  # degrees
+
+        global_pass_count = sum(1 for e in global_errors if e < threshold_pass)
+        global_pass_rate = global_pass_count / len(global_errors)
+
+        # Separation ratio: non-analogies should have higher error
+        separation_ratio = mean_non_analogy_error / mean_global_error if mean_global_error > 0 else 0
+
+        print("\n" + "=" * 70)
+        print("LOCAL VS GLOBAL PHASE EXTRACTION TEST")
+        print("=" * 70)
+        print(f"\nPer-pair PCA (no shared coordinate system):")
+        print(f"  Mean error: {mean_per_pair_error:.1f} deg")
+        print(f"\nGlobal PCA (Q51 methodology - SHARED coordinate system):")
+        print(f"  Mean error on analogies: {mean_global_error:.1f} deg")
+        print(f"  Mean error on non-analogies: {mean_non_analogy_error:.1f} deg")
+        print(f"  Pass rate: {global_pass_rate:.1%}")
+        print(f"  Separation ratio: {separation_ratio:.2f}x")
+        print(f"\nQ51 cross-model results: 90.9% pass, 4.05x separation")
+
+        # The key assertion: global should discriminate analogies from non-analogies
+        # Analogies should have lower error than non-analogies
+        assert mean_global_error < mean_non_analogy_error, \
+            f"Analogies ({mean_global_error:.1f} deg) should have lower error than non-analogies ({mean_non_analogy_error:.1f} deg)"
 
 
 # ============================================================================
