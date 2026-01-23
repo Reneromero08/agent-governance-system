@@ -1,0 +1,183 @@
+{
+  "results": [
+    {
+      "key": "chatgpt_ai",
+      "name": "ChatGPT Release",
+      "type": "TECHNOLOGY",
+      "pre_geodesic": "Monkey",
+      "pre_sim": 0.3927243649959564,
+      "post_geodesic": "Serpent",
+      "post_sim": 0.3125656247138977,
+      "transition_geodesic": "Earthquake",
+      "transition_align": 0.17188507318496704
+    },
+    {
+      "key": "iphone",
+      "name": "iPhone Launch",
+      "type": "TECHNOLOGY",
+      "pre_geodesic": "Eagle",
+      "pre_sim": 0.24626651406288147,
+      "post_geodesic": "Monkey",
+      "post_sim": 0.2926434874534607,
+      "transition_geodesic": "Monkey",
+      "transition_align": 0.2001362144947052
+    },
+    {
+      "key": "internet",
+      "name": "Internet Goes Mainstream",
+      "type": "TECHNOLOGY",
+      "pre_geodesic": "House",
+      "pre_sim": 0.22792257368564606,
+      "post_geodesic": "Wind",
+      "post_sim": 0.1901324987411499,
+      "transition_geodesic": "Jaguar",
+      "transition_align": 0.11017392575740814
+    },
+    {
+      "key": "covid",
+      "name": "COVID-19 Pandemic",
+      "type": "CRISIS",
+      "pre_geodesic": "Wind",
+      "pre_sim": 0.32130104303359985,
+      "post_geodesic": "House",
+      "post_sim": 0.328024685382843,
+      "transition_geodesic": "House",
+      "transition_align": 0.1697211116552353
+    },
+    {
+      "key": "financial_2008",
+      "name": "2008 Financial Crisis",
+      "type": "CRISIS",
+      "pre_geodesic": "Grass",
+      "pre_sim": 0.39943617582321167,
+      "post_geodesic": "Grass",
+      "post_sim": 0.39634183049201965,
+      "transition_geodesic": "Serpent",
+      "transition_align": 0.1786644458770752
+    },
+    {
+      "key": "dotcom_bust",
+      "name": "Dotcom Bust 2000",
+      "type": "CRISIS",
+      "pre_geodesic": "Monkey",
+      "pre_sim": 0.3357463777065277,
+      "post_geodesic": "Earthquake",
+      "post_sim": 0.3802349269390106,
+      "transition_geodesic": "Water",
+      "transition_align": 0.17163938283920288
+    },
+    {
+      "key": "metoo",
+      "name": "MeToo Movement",
+      "type": "SOCIAL",
+      "pre_geodesic": "Jaguar",
+      "pre_sim": 0.3767212927341461,
+      "post_geodesic": "Eagle",
+      "post_sim": 0.40365463495254517,
+      "transition_geodesic": "Eagle",
+      "transition_align": 0.2350153625011444
+    },
+    {
+      "key": "blm_2020",
+      "name": "BLM Summer 2020",
+      "type": "SOCIAL",
+      "pre_geodesic": "Wind",
+      "pre_sim": 0.26173898577690125,
+      "post_geodesic": "Earthquake",
+      "post_sim": 0.4413701891899109,
+      "transition_geodesic": "Earthquake",
+      "transition_align": 0.32426318526268005
+    },
+    {
+      "key": "bitcoin_2017",
+      "name": "Bitcoin Peak 2017",
+      "type": "FINANCIAL",
+      "pre_geodesic": "Monkey",
+      "pre_sim": 0.2604523301124573,
+      "post_geodesic": "Grass",
+      "post_sim": 0.30385279655456543,
+      "transition_geodesic": "Reed",
+      "transition_align": 0.14619484543800354
+    },
+    {
+      "key": "gamestop_2021",
+      "name": "GameStop Squeeze",
+      "type": "FINANCIAL",
+      "pre_geodesic": "Monkey",
+      "pre_sim": 0.32793205976486206,
+      "post_geodesic": "Earthquake",
+      "post_sim": 0.3344939649105072,
+      "transition_geodesic": "Jaguar",
+      "transition_align": 0.15383300185203552
+    },
+    {
+      "key": "trump_2016",
+      "name": "Trump Election 2016",
+      "type": "POLITICAL",
+      "pre_geodesic": "Reed",
+      "pre_sim": 0.30645909905433655,
+      "post_geodesic": "Earthquake",
+      "post_sim": 0.3428761959075928,
+      "transition_geodesic": "Wind",
+      "transition_align": 0.11713570356369019
+    },
+    {
+      "key": "brexit",
+      "name": "Brexit Vote",
+      "type": "POLITICAL",
+      "pre_geodesic": "Grass",
+      "pre_sim": 0.43080267310142517,
+      "post_geodesic": "Earthquake",
+      "post_sim": 0.3754144608974457,
+      "transition_geodesic": "Wind",
+      "transition_align": 0.09703110158443451
+    },
+    {
+      "key": "crispr",
+      "name": "CRISPR Revolution",
+      "type": "SCIENTIFIC",
+      "pre_geodesic": "Lizard",
+      "pre_sim": 0.4110618829727173,
+      "post_geodesic": "Lizard",
+      "post_sim": 0.44892188906669617,
+      "transition_geodesic": "Rain",
+      "transition_align": 0.06193116307258606
+    }
+  ],
+  "transition_signature": {
+    "Earthquake": 0.08974014781415462,
+    "Death": 0.05439392047432753,
+    "Wind": 0.048722987421430074,
+    "Water": 0.04429658645620713,
+    "Flint": 0.03630940759411225,
+    "Crocodile": 0.0353211872996046,
+    "Grass": 0.02980397344351961,
+    "Eagle": 0.024863997331032388,
+    "House": 0.02222118340432644,
+    "Serpent": 0.020852761414761726,
+    "Vulture": 0.01714639337016986,
+    "Rain": 0.01241617205624397,
+    "Jaguar": 0.01136653834524063,
+    "Lizard": 0.007451584132818075,
+    "Flower": 0.003352746080893737,
+    "Rabbit": 0.002387748028223331,
+    "Monkey": 0.0009676539697326147,
+    "Reed": -0.005270114455085535,
+    "Deer": -0.016300815659073684,
+    "Dog": -0.02694554540973443
+  },
+  "top_transition_geodesics": [
+    "Earthquake",
+    "Death",
+    "Wind",
+    "Water",
+    "Flint"
+  ],
+  "stability_geodesics": [
+    "Rabbit",
+    "Monkey",
+    "Reed",
+    "Deer",
+    "Dog"
+  ]
+}
