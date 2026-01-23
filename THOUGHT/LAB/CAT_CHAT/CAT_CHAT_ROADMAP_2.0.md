@@ -1,6 +1,6 @@
 # CAT Chat Roadmap v2.0
 
-**Last updated:** 2026-01-19
+**Last updated:** 2026-01-23
 **Scope:** Pending work to make CAT Chat a fully catalytic, integrated system
 **Previous:** CAT_CHAT_ROADMAP_1.1.md (archived)
 **Design Spec:** `INBOX/reports/V4/01-06-2026-21-13_CAT_CHAT_CATALYTIC_CONTINUITY.md`
@@ -366,7 +366,7 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### J. Recursive E-Score Hierarchy (P3 - Future)
 
-**Status:** Not started
+**Status:** J.0 COMPLETE (2026-01-23), J.1+ Not started
 **Purpose:** Extend effective memory from ~1,000 turns to ~100,000+ turns
 **Depends On:** C (Auto-Controlled Context Loop must work first)
 
@@ -431,20 +431,26 @@ E(query, centroid_L3_B) = 0.6 --> OPEN
 
 ---
 
-**J.0 Vector Persistence (PREREQUISITE):**
+**J.0 Vector Persistence (PREREQUISITE):** COMPLETE (2026-01-23)
 
-Currently CAT Chat stores text but computes embeddings on-the-fly. This is 10,000x slower than using stored vectors:
-```
-Embedding API call: ~10-100ms per item
-Dot product:        ~0.001ms per item
-```
+Previously CAT Chat stored text but computed embeddings on-the-fly (10,000x slower). Now embeddings are persisted to SQLite at turn compression time.
 
-Without stored vectors, the hierarchy can't work at scale.
+**Implementation:**
+- [x] J.0.1 Added `session_event_embeddings` table (separate from append-only `session_events`)
+- [x] J.0.2 `turn_compressor.py` stores embedding at compression time via `VectorPersistence`
+- [x] J.0.3 `auto_context_manager.py` loads vectors on session resume via `load_session_vectors()`
+- [x] J.0.4 `migrate_vectors.py` CLI tool for backfilling existing sessions
 
-- [ ] J.0.1 Add `embedding` BLOB column to `session_events` table
-- [ ] J.0.2 Store embedding at turn compression time (one API call, then persisted)
-- [ ] J.0.3 Add `load_vectors(session_id)` to load all embeddings on session resume
-- [ ] J.0.4 Migrate existing sessions: backfill embeddings for turns without them
+**Files Created/Modified:**
+- `catalytic_chat/embedding_engine.py` - Promoted from archive, provides serialize/deserialize
+- `catalytic_chat/vector_persistence.py` - NEW: VectorPersistence class with CRUD operations
+- `catalytic_chat/migrate_vectors.py` - NEW: CLI for `python -m catalytic_chat.migrate_vectors`
+- `catalytic_chat/session_capsule.py` - Added embeddings table schema
+- `catalytic_chat/turn_compressor.py` - Added embed_fn and vector_persistence params
+- `catalytic_chat/geometric_context_assembler.py` - Added cache-first embedding lookup
+- `catalytic_chat/auto_context_manager.py` - Added load_session_vectors()
+- `tests/test_vector_persistence.py` - 30 unit tests
+- `tests/test_vector_integration.py` - 18 integration tests
 
 **Storage:** 384-dim float32 = 1.5KB per turn. 100K turns = 150MB. Acceptable.
 
@@ -660,13 +666,13 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 | P2 | G. Bundle Replay | DONE | Medium |
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
-| P3 | J. Scaling & Hierarchical Memory | No | Large |
+| P3 | J. Scaling & Hierarchical Memory | J.0 DONE | Large |
 
 **Recommended order:** H -> I -> J
 
 **Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
-**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 complete (E, F, G). C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, governed vector fallback, docs index, and offline bundle replay.
+**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 complete (E, F, G), J.0 complete. C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, governed vector fallback, docs index, offline bundle replay, and vector persistence for 10,000x faster E-score computation.
 
 ---
 

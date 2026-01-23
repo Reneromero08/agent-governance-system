@@ -22,6 +22,10 @@ from typing import List, Dict, Optional, Tuple, Callable, Any, Union
 from dataclasses import dataclass, field, asdict
 from datetime import datetime, timezone
 
+import numpy as np
+
+from .vector_persistence import VectorPersistence
+
 # Import base context assembler
 from catalytic_chat.context_assembler import (
     ContextAssembler,
@@ -103,7 +107,8 @@ class GeometricContextAssembler(ContextAssembler):
         self,
         token_estimator: Optional[Callable[[str], int]] = None,
         model_name: str = 'all-MiniLM-L6-v2',
-        E_threshold: float = 0.5
+        E_threshold: float = 0.5,
+        vector_persistence: Optional[VectorPersistence] = None
     ):
         """
         Initialize geometric context assembler.
@@ -112,6 +117,7 @@ class GeometricContextAssembler(ContextAssembler):
             token_estimator: Function str -> int (default: len(s)//4)
             model_name: Sentence transformer model for embeddings
             E_threshold: Threshold for E-gating (default 0.5)
+            vector_persistence: Optional persistence layer for cached embeddings
         """
         super().__init__(token_estimator)
 
@@ -120,12 +126,19 @@ class GeometricContextAssembler(ContextAssembler):
         self._model_name = model_name
         self.E_threshold = E_threshold
 
+        # Vector persistence for cached embeddings (Phase J.0)
+        self._vector_persistence = vector_persistence
+        self._vector_cache: Dict[str, np.ndarray] = {}  # content_hash -> embedding
+
         # Stats (pattern from geometric_cassette.py:119-126)
         self._geo_stats = {
             'assemblies': 0,
             'assemblies_geometric': 0,
             'embedding_calls': 0,
-            'geometric_ops': 0
+            'geometric_ops': 0,
+            'cache_hits': 0,
+            'persistence_hits': 0,
+            'preloaded': 0
         }
 
     @property
@@ -139,6 +152,53 @@ class GeometricContextAssembler(ContextAssembler):
                 )
             self._reasoner = GeometricReasoner(self._model_name)
         return self._reasoner
+
+    def _get_embedding(self, content: str, content_hash: Optional[str] = None) -> np.ndarray:
+        """Get embedding from cache, persistence layer, or compute fresh.
+
+        Lookup order:
+        1. In-memory cache (_vector_cache)
+        2. Persistence layer (vector_persistence)
+        3. Compute fresh via reasoner
+
+        Results are cached for future lookups.
+
+        Args:
+            content: Text content to embed
+            content_hash: Optional hash for cache lookup
+
+        Returns:
+            Embedding as numpy array
+        """
+        # 1. Check in-memory cache
+        if content_hash and content_hash in self._vector_cache:
+            self._geo_stats['cache_hits'] = self._geo_stats.get('cache_hits', 0) + 1
+            return self._vector_cache[content_hash]
+
+        # 2. Check persistence layer
+        if content_hash and self._vector_persistence is not None:
+            cached = self._vector_persistence.get_embedding_by_hash(content_hash)
+            if cached is not None:
+                self._vector_cache[content_hash] = cached
+                self._geo_stats['persistence_hits'] = self._geo_stats.get('persistence_hits', 0) + 1
+                return cached
+
+        # 3. Fall back to computing fresh embedding
+        state = self.reasoner.initialize(content)
+        vec = state.vector
+        if content_hash:
+            self._vector_cache[content_hash] = vec
+        self._geo_stats['embedding_calls'] = self._geo_stats.get('embedding_calls', 0) + 1
+        return vec
+
+    def preload_vectors(self, vectors: Dict[str, np.ndarray]) -> None:
+        """Preload vectors into cache (called on session resume).
+
+        Args:
+            vectors: Dict mapping content_hash to embedding array
+        """
+        self._vector_cache.update(vectors)
+        self._geo_stats['preloaded'] = len(vectors)
 
     def assemble_with_geometry(
         self,
@@ -223,13 +283,24 @@ class GeometricContextAssembler(ContextAssembler):
         messages: List[ContextMessage],
         query_state: 'GeometricState'
     ) -> Dict[str, float]:
-        """Compute E(query, message) for each message."""
+        """Compute E(query, message) for each message.
+
+        Uses cached embeddings when available (Phase J.0).
+        """
         E_values = {}
 
         for msg in messages:
             if msg.content and msg.content.strip():
-                msg_state = self.reasoner.initialize(msg.content)
-                self._geo_stats['embedding_calls'] += 1
+                # Get content hash for cache lookup
+                content_hash = getattr(msg, 'content_hash', None)
+                if content_hash is None:
+                    content_hash = hashlib.sha256(msg.content.encode()).hexdigest()
+
+                # Get embedding (cache-first via _get_embedding)
+                embedding = self._get_embedding(msg.content, content_hash=content_hash)
+
+                # Create GeometricState from embedding
+                msg_state = GeometricState(vector=embedding)
 
                 E = query_state.E_with(msg_state)
                 self._geo_stats['geometric_ops'] += 1
@@ -243,13 +314,24 @@ class GeometricContextAssembler(ContextAssembler):
         expansions: List[ContextExpansion],
         query_state: 'GeometricState'
     ) -> Dict[str, float]:
-        """Compute E(query, expansion) for each expansion."""
+        """Compute E(query, expansion) for each expansion.
+
+        Uses cached embeddings when available (Phase J.0).
+        """
         E_values = {}
 
         for exp in expansions:
             if exp.content and exp.content.strip():
-                exp_state = self.reasoner.initialize(exp.content)
-                self._geo_stats['embedding_calls'] += 1
+                # Get content hash for cache lookup
+                content_hash = getattr(exp, 'content_hash', None)
+                if content_hash is None:
+                    content_hash = hashlib.sha256(exp.content.encode()).hexdigest()
+
+                # Get embedding (cache-first via _get_embedding)
+                embedding = self._get_embedding(exp.content, content_hash=content_hash)
+
+                # Create GeometricState from embedding
+                exp_state = GeometricState(vector=embedding)
 
                 E = query_state.E_with(exp_state)
                 self._geo_stats['geometric_ops'] += 1

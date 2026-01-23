@@ -8,7 +8,40 @@ All notable changes to Catalytic Chat System are documented in this file.
 
 ---
 
-## [Unreleased] - 2025-12-31
+## [Unreleased] - 2026-01-23
+
+### Added - Phase J.0 (Vector Persistence) - COMPLETE
+
+**Purpose:** Persist embeddings to SQLite for 10,000x faster E-score computation (prerequisite for Phase J hierarchical memory).
+
+**Files Created:**
+- `catalytic_chat/embedding_engine.py` - Promoted from archive/legacy, provides embedding generation and BLOB serialization
+- `catalytic_chat/vector_persistence.py` - VectorPersistence class with session_event_embeddings table
+- `catalytic_chat/migrate_vectors.py` - CLI tool for backfilling existing sessions
+
+**Files Modified:**
+- `catalytic_chat/session_capsule.py` - Added session_event_embeddings table schema
+- `catalytic_chat/turn_compressor.py` - Added embed_fn and vector_persistence params for J.0.2
+- `catalytic_chat/geometric_context_assembler.py` - Added cache-first embedding lookup with stats
+- `catalytic_chat/auto_context_manager.py` - Added load_session_vectors() for J.0.3
+- `catalytic_chat/__init__.py` - Exports ChatEmbeddingEngine, get_embedding_engine
+
+**Tests:**
+- `tests/test_vector_persistence.py` - 30 unit tests for serialization, validation, CRUD
+- `tests/test_vector_integration.py` - 18 integration tests for TurnCompressor, GeometricAssembler, AutoContextManager
+
+**Key Features:**
+- Separate `session_event_embeddings` table preserves append-only `session_events` integrity
+- BLOB storage: 384-dim float32 = 1,536 bytes per embedding
+- Cache hierarchy: in-memory -> persistence layer -> fresh computation
+- Graceful degradation: embedding failures don't fail turn compression
+- Migration CLI: `python -m catalytic_chat.migrate_vectors --list/--all/--session-id`
+
+**Storage:** 100K turns = 150MB (acceptable for SQLite)
+
+---
+
+## [2025-12-31]
 
 ### Added - Phase 7 (Compression Protocol Formalization) - COMPLETE
 - **`THOUGHT/LAB/CAT_CHAT/PHASE_7_COMPRESSION_SPEC.md`** (320 lines)

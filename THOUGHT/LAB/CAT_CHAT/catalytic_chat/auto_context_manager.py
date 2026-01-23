@@ -54,6 +54,7 @@ from .session_capsule import (
     EVENT_TURN_HYDRATED,
     EVENT_BUDGET_CHECK,
 )
+from .vector_persistence import VectorPersistence, PersistedVector
 
 
 # =============================================================================
@@ -189,7 +190,8 @@ class AutoContextManager:
         token_estimator: Optional[Callable[[str], int]] = None,
         E_threshold: float = 0.5,
         enable_hybrid: bool = True,
-        keyword_boost: float = 1.0
+        keyword_boost: float = 1.0,
+        vector_persistence: Optional[VectorPersistence] = None
     ):
         """
         Initialize auto context manager.
@@ -204,6 +206,7 @@ class AutoContextManager:
             E_threshold: E-score threshold for partitioning (default: 0.5)
             enable_hybrid: Enable hybrid retrieval (semantic + keyword) (default: True)
             keyword_boost: Weight for keyword component in hybrid scoring (default: 1.0)
+            vector_persistence: Optional VectorPersistence for cached embeddings (J.0.3)
         """
         self.db_path = Path(db_path)
         self.session_id = session_id
@@ -212,6 +215,9 @@ class AutoContextManager:
         self.token_estimator = token_estimator or (lambda s: len(s) // 4)
         self.E_threshold = E_threshold
         self.enable_hybrid = enable_hybrid
+
+        # Vector persistence for session resume (J.0.3)
+        self._vector_persistence = vector_persistence
 
         # Initialize components
         self.partitioner = ContextPartitioner(
@@ -261,6 +267,24 @@ class AutoContextManager:
     def add_items(self, items: List[ContextItem]) -> None:
         """Add multiple items to the context pool."""
         self._pointer_set.extend(items)
+
+    def load_session_vectors(self) -> Dict[str, np.ndarray]:
+        """Load all persisted vectors for current session (J.0.3).
+
+        Retrieves embeddings from VectorPersistence and returns them
+        in a format suitable for cache preloading.
+
+        Returns:
+            Dict mapping content_hash to embedding vector.
+            This can be passed to GeometricContextAssembler.preload_vectors().
+        """
+        if self._vector_persistence is None:
+            return {}
+
+        vectors = self._vector_persistence.load_vectors(self.session_id)
+
+        # Convert to dict format for cache preloading
+        return {v.content_hash: v.embedding for v in vectors}
 
     def prepare_context(
         self,
@@ -646,7 +670,8 @@ def create_auto_context_manager(
     model_context_window: int,
     system_prompt: str = "",
     embed_fn: Optional[Callable[[str], np.ndarray]] = None,
-    E_threshold: float = 0.5
+    E_threshold: float = 0.5,
+    vector_persistence: Optional[VectorPersistence] = None
 ) -> AutoContextManager:
     """
     Factory function to create an AutoContextManager.
@@ -658,6 +683,7 @@ def create_auto_context_manager(
         system_prompt: System prompt text
         embed_fn: Embedding function (optional)
         E_threshold: E-score threshold
+        vector_persistence: Optional VectorPersistence for cached embeddings (J.0.3)
 
     Returns:
         Configured AutoContextManager
@@ -673,6 +699,7 @@ def create_auto_context_manager(
         budget=budget,
         embed_fn=embed_fn,
         E_threshold=E_threshold,
+        vector_persistence=vector_persistence,
     )
 
 

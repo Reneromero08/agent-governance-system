@@ -18,11 +18,14 @@ Phase C.3 of Auto-Controlled Context Loop implementation.
 import hashlib
 import json
 import sqlite3
+import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
 from typing import Dict, Any, Optional, List, Callable, Tuple
 import numpy as np
+
+from .vector_persistence import VectorPersistence
 
 
 # =============================================================================
@@ -177,7 +180,9 @@ class TurnCompressor:
         db_path: Path,
         session_id: str,
         summarize_fn: Optional[Callable[[str], str]] = None,
-        token_estimator: Optional[Callable[[str], int]] = None
+        token_estimator: Optional[Callable[[str], int]] = None,
+        embed_fn: Optional[Callable[[str], np.ndarray]] = None,
+        vector_persistence: Optional[VectorPersistence] = None,
     ):
         """
         Initialize turn compressor.
@@ -187,11 +192,17 @@ class TurnCompressor:
             session_id: Current session ID for event logging
             summarize_fn: Function to generate turn summary (default: first 50 chars)
             token_estimator: Function to estimate tokens (default: len//4)
+            embed_fn: Optional function to compute embeddings (J.0.2)
+            vector_persistence: Optional VectorPersistence instance for embedding storage (J.0.2)
         """
         self.db_path = Path(db_path)
         self.session_id = session_id
         self.summarize_fn = summarize_fn or self._default_summarize
         self.token_estimator = token_estimator or (lambda s: len(s) // 4)
+
+        # J.0.2: Optional embedding support
+        self._embed_fn = embed_fn
+        self._vector_persistence = vector_persistence
 
         # Cache of compressed turns for fast lookup
         self._pointer_cache: Dict[str, TurnPointer] = {}
@@ -331,6 +342,27 @@ class TurnCompressor:
             ))
 
             conn.commit()
+
+            # J.0.2: Store embedding at compression time
+            if self._embed_fn is not None and self._vector_persistence is not None:
+                try:
+                    # Compute embedding (one API call)
+                    embedding = self._embed_fn(turn.full_content)
+
+                    # Store to persistence layer
+                    self._vector_persistence.store_embedding(
+                        event_id=event_id,
+                        session_id=self.session_id,
+                        content_hash=content_hash,
+                        embedding=embedding
+                    )
+                except Exception as e:
+                    # Log warning but don't fail turn storage
+                    # Embedding can be backfilled later via J.0.4 migration
+                    logging.warning(
+                        "Failed to store embedding for turn %s: %s", event_id, e
+                    )
+
             return event_id
 
         finally:

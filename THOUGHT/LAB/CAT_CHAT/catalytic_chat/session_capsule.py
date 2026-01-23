@@ -237,6 +237,23 @@ class SessionCapsule:
             CREATE INDEX IF NOT EXISTS idx_events_type
                 ON session_events(event_type);
 
+            -- Session event embeddings (for vector search)
+            CREATE TABLE IF NOT EXISTS session_event_embeddings (
+                event_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                content_hash TEXT NOT NULL,
+                embedding BLOB NOT NULL,
+                embedding_model TEXT NOT NULL DEFAULT 'all-MiniLM-L6-v2',
+                created_at TEXT NOT NULL DEFAULT (datetime('now')),
+                FOREIGN KEY (event_id) REFERENCES session_events(event_id)
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_event_embeddings_session
+                ON session_event_embeddings(session_id);
+
+            CREATE INDEX IF NOT EXISTS idx_event_embeddings_hash
+                ON session_event_embeddings(content_hash);
+
             -- Append-only trigger (prevent updates/deletes)
             CREATE TRIGGER IF NOT EXISTS prevent_event_update
             BEFORE UPDATE ON session_events
