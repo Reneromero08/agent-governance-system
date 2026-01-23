@@ -132,8 +132,17 @@ def compute_E_linear(
     if len(context_vecs) == 0:
         return 0.0, []
 
+    # Filter out any non-numeric vectors (defensive)
+    valid_vecs = []
+    for v in context_vecs:
+        if isinstance(v, np.ndarray) and v.dtype.kind in ('f', 'i', 'u'):
+            valid_vecs.append(v)
+    
+    if len(valid_vecs) == 0:
+        return 0.0, []
+
     psi = normalize(query_vec)
-    overlaps = [float(np.dot(psi, normalize(phi))) for phi in context_vecs]
+    overlaps = [float(np.dot(psi, normalize(phi))) for phi in valid_vecs]
 
     # E = mean overlap (quantum inner product)
     E_linear = np.mean(overlaps)

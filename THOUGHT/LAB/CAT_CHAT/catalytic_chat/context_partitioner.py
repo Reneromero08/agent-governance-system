@@ -20,10 +20,11 @@ Phase C.2 of Auto-Controlled Context Loop implementation.
 
 import hashlib
 import json
+import re
 import numpy as np
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
-from typing import List, Dict, Any, Optional, Tuple, Callable
+from typing import List, Dict, Any, Optional, Tuple, Callable, Set
 
 # Import E-score computation from Q44
 import sys
@@ -49,13 +50,126 @@ except ImportError:
         if len(context_vecs) == 0:
             return 0.0, []
         # Filter out non-numeric vectors
-        valid_vecs = [v for v in context_vecs 
+        valid_vecs = [v for v in context_vecs
                       if isinstance(v, np.ndarray) and v.dtype.kind in ('f', 'i', 'u')]
         if len(valid_vecs) == 0:
             return 0.0, []
         psi = normalize(query_vec)
         overlaps = [float(np.dot(psi, normalize(phi))) for phi in valid_vecs]
         return float(np.mean(overlaps)), overlaps
+
+
+# =============================================================================
+# Hybrid Retrieval: Keyword + Semantic
+# =============================================================================
+
+# Common stop words to exclude from keyword matching
+STOP_WORDS = {
+    "the", "a", "an", "is", "are", "was", "were", "be", "been", "being",
+    "have", "has", "had", "do", "does", "did", "will", "would", "could",
+    "should", "may", "might", "must", "shall", "can", "need", "dare",
+    "ought", "used", "to", "of", "in", "for", "on", "with", "at", "by",
+    "from", "as", "into", "through", "during", "before", "after", "above",
+    "below", "between", "under", "again", "further", "then", "once", "here",
+    "there", "when", "where", "why", "how", "all", "each", "few", "more",
+    "most", "other", "some", "such", "no", "nor", "not", "only", "own",
+    "same", "so", "than", "too", "very", "just", "and", "but", "if", "or",
+    "because", "until", "while", "this", "that", "these", "those", "what",
+    "which", "who", "whom", "i", "me", "my", "myself", "we", "our", "ours",
+    "you", "your", "yours", "he", "him", "his", "she", "her", "hers", "it",
+    "its", "they", "them", "their", "theirs", "am", "about", "get", "got",
+}
+
+
+def extract_keywords(text: str, min_length: int = 2) -> Set[str]:
+    """
+    Extract meaningful keywords from text.
+
+    - Tokenizes on word boundaries
+    - Lowercases for matching
+    - Removes stop words
+    - Keeps words >= min_length
+    - Preserves multi-word entities (e.g., "Shadow Fox" -> "shadow", "fox")
+
+    Args:
+        text: Input text
+        min_length: Minimum word length to keep
+
+    Returns:
+        Set of lowercase keywords
+    """
+    # Tokenize: split on non-alphanumeric, keep alphanumeric sequences
+    words = re.findall(r'[a-zA-Z0-9]+', text.lower())
+
+    # Filter: remove stop words and short words
+    keywords = {
+        w for w in words
+        if len(w) >= min_length and w not in STOP_WORDS
+    }
+
+    return keywords
+
+
+def compute_keyword_score(query_keywords: Set[str], item_text: str) -> float:
+    """
+    Compute keyword match score between query keywords and item text.
+
+    Returns:
+        Score in [0, 1] representing fraction of query keywords found in item
+    """
+    if not query_keywords:
+        return 0.0
+
+    item_lower = item_text.lower()
+    matches = sum(1 for kw in query_keywords if kw in item_lower)
+
+    return matches / len(query_keywords)
+
+
+def compute_hybrid_score(
+    semantic_score: float,
+    keyword_score: float,
+    keyword_boost: float = 1.0,
+    tiered_bonus: bool = True
+) -> float:
+    """
+    Combine semantic and keyword scores for hybrid retrieval.
+
+    Formula:
+        hybrid = semantic + keyword_boost * keyword_score + tiered_bonus
+
+    Uses tiered bonus system:
+    - >40% keyword match: +0.5 (likely exact entity match)
+    - >25% keyword match: +0.2 (partial entity match)
+    - Any match: +0.1 (at least some relevance)
+
+    This strongly prioritizes items matching more query keywords,
+    which is crucial for entity discrimination in high-interference data.
+
+    Args:
+        semantic_score: E-score from embedding dot product (typically 0.5-0.9)
+        keyword_score: Fraction of keywords matched (0-1)
+        keyword_boost: Weight for keyword score component (default: 1.0)
+        tiered_bonus: Apply tiered bonus based on match quality
+
+    Returns:
+        Combined score (can exceed 1.0)
+    """
+    hybrid = semantic_score + (keyword_boost * keyword_score)
+
+    # Tiered bonus for keyword match quality
+    if tiered_bonus:
+        if keyword_score > 0.4:
+            # High match - likely exact entity
+            hybrid += 0.5
+        elif keyword_score > 0.25:
+            # Partial match
+            hybrid += 0.2
+        elif keyword_score > 0:
+            # Any match
+            hybrid += 0.1
+
+    return hybrid
 
 
 # =============================================================================
@@ -182,16 +296,21 @@ class ContextPartitioner:
     """
     Partitions context items into working_set and pointer_set based on E-scores.
 
+    Supports HYBRID RETRIEVAL: combines semantic (embedding) scores with
+    keyword matching for better entity discrimination.
+
     Usage:
         partitioner = ContextPartitioner(
             threshold=0.5,
-            embed_fn=my_embedding_function
+            embed_fn=my_embedding_function,
+            enable_hybrid=True  # Enable keyword boosting
         )
 
         result = partitioner.partition(
             query_embedding=query_vec,
             all_items=items,
-            budget_tokens=30000
+            budget_tokens=30000,
+            query_text="Find Shadow Fox"  # Keywords extracted from this
         )
 
         # working_set has high-E items that fit budget
@@ -202,7 +321,9 @@ class ContextPartitioner:
         self,
         threshold: float = 0.5,
         embed_fn: Optional[Callable[[str], np.ndarray]] = None,
-        token_estimator: Optional[Callable[[str], int]] = None
+        token_estimator: Optional[Callable[[str], int]] = None,
+        enable_hybrid: bool = True,
+        keyword_boost: float = 1.0
     ):
         """
         Initialize partitioner.
@@ -211,28 +332,40 @@ class ContextPartitioner:
             threshold: E-score threshold (items below this always go to pointer_set)
             embed_fn: Function to compute embeddings from text (optional)
             token_estimator: Function to estimate tokens from text (default: len//4)
+            enable_hybrid: Enable hybrid retrieval (semantic + keyword matching)
+            keyword_boost: Weight for keyword match component (default: 1.0)
         """
         self.threshold = threshold
         self.embed_fn = embed_fn
         self.token_estimator = token_estimator or (lambda s: len(s) // 4)
+        self.enable_hybrid = enable_hybrid
+        self.keyword_boost = keyword_boost
 
     def score_items(
         self,
         query_embedding: np.ndarray,
-        items: List[ContextItem]
+        items: List[ContextItem],
+        query_text: str = ""
     ) -> List[ScoredItem]:
         """
         Score all items against query embedding.
 
+        When hybrid mode is enabled, combines semantic E-score with
+        keyword matching for better entity discrimination.
+
         Args:
             query_embedding: Query vector (will be normalized)
             items: List of context items with embeddings
+            query_text: Original query text for keyword extraction (hybrid mode)
 
         Returns:
             List of ScoredItem sorted by E-score descending
         """
         if not items:
             return []
+
+        # Extract keywords for hybrid scoring
+        query_keywords = extract_keywords(query_text) if self.enable_hybrid and query_text else set()
 
         # Collect embeddings
         embeddings = []
@@ -265,11 +398,22 @@ class ContextPartitioner:
         E_idx = 0
         for i, item in enumerate(items_with_embeddings):
             if embeddings[i] is not None:
-                E = E_scores[E_idx]
+                semantic_E = E_scores[E_idx]
                 E_idx += 1
             else:
                 # No embedding - use threshold as neutral score
-                E = self.threshold
+                semantic_E = self.threshold
+
+            # Apply hybrid scoring if enabled
+            if self.enable_hybrid and query_keywords:
+                keyword_score = compute_keyword_score(query_keywords, item.content)
+                E = compute_hybrid_score(
+                    semantic_score=semantic_E,
+                    keyword_score=keyword_score,
+                    keyword_boost=self.keyword_boost
+                )
+            else:
+                E = semantic_E
 
             scored.append(ScoredItem(item=item, E_score=E))
 
@@ -330,8 +474,8 @@ class ContextPartitioner:
                 timestamp=timestamp,
             )
 
-        # Score and sort all items
-        scored = self.score_items(query_embedding, all_items)
+        # Score and sort all items (passes query_text for hybrid keyword matching)
+        scored = self.score_items(query_embedding, all_items, query_text)
 
         # Partition based on threshold and budget
         working_set: List[ScoredItem] = []

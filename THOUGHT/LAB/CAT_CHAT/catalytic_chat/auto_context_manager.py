@@ -187,7 +187,9 @@ class AutoContextManager:
         embed_fn: Optional[Callable[[str], np.ndarray]] = None,
         summarize_fn: Optional[Callable[[str], str]] = None,
         token_estimator: Optional[Callable[[str], int]] = None,
-        E_threshold: float = 0.5
+        E_threshold: float = 0.5,
+        enable_hybrid: bool = True,
+        keyword_boost: float = 1.0
     ):
         """
         Initialize auto context manager.
@@ -200,6 +202,8 @@ class AutoContextManager:
             summarize_fn: Function to summarize turns (optional)
             token_estimator: Function to estimate tokens (default: len//4)
             E_threshold: E-score threshold for partitioning (default: 0.5)
+            enable_hybrid: Enable hybrid retrieval (semantic + keyword) (default: True)
+            keyword_boost: Weight for keyword component in hybrid scoring (default: 1.0)
         """
         self.db_path = Path(db_path)
         self.session_id = session_id
@@ -207,12 +211,15 @@ class AutoContextManager:
         self.embed_fn = embed_fn
         self.token_estimator = token_estimator or (lambda s: len(s) // 4)
         self.E_threshold = E_threshold
+        self.enable_hybrid = enable_hybrid
 
         # Initialize components
         self.partitioner = ContextPartitioner(
             threshold=E_threshold,
             embed_fn=embed_fn,
             token_estimator=self.token_estimator,
+            enable_hybrid=enable_hybrid,
+            keyword_boost=keyword_boost,
         )
 
         self.compressor = TurnCompressor(

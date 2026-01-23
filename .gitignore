@@ -48,6 +48,8 @@ NAVIGATION/CORTEX/db/_migration_backup/
 
 # CAT_CHAT databases (runtime artifacts)
 THOUGHT/LAB/CAT_CHAT/**/*.db
+THOUGHT/LAB/CAT_CHAT/**/*.db-shm
+THOUGHT/LAB/CAT_CHAT/**/*.db-wal
 
 # LIL_Q chat logs (personal conversations)
 THOUGHT/LAB/LIL_Q/chat_logs/*.txt

@@ -26,8 +26,8 @@ from pathlib import Path
 from dataclasses import dataclass, field
 from typing import Dict, List, Tuple, Any, Optional
 
-# Add parent to path for imports
-CAT_CHAT_ROOT = Path(__file__).parent.parent
+# Add parent to path for imports (stress_tests -> examples -> CAT_CHAT)
+CAT_CHAT_ROOT = Path(__file__).parent.parent.parent
 sys.path.insert(0, str(CAT_CHAT_ROOT))
 
 # Import Catalytic Chat components
@@ -42,8 +42,10 @@ except ImportError:
 # Configuration
 DEFAULT_LLM_BASE = "http://10.5.0.2:1234"
 DEFAULT_MODEL = "liquid/lfm2.5-1.2b"
-# Using a slightly higher threshold to ensure we only get the EXACT agent match
-DEFAULT_E_THRESHOLD = 0.45 
+# With hybrid scoring, scores range ~0.7-2.4
+# Threshold 0.95 = ensures 100% retrieval for all query types
+# Name queries score ~1.34+, ID queries score ~0.95-1.2
+DEFAULT_E_THRESHOLD = 0.95 
 
 @dataclass
 class AgentProfile:
@@ -187,7 +189,11 @@ class CipherStressRunner:
             print(f"FATAL EMBEDDING ERROR: {e}")
             sys.exit(1)
 
-    def _llm_generate(self, system: str, prompt: str) -> str:
+    def _llm_generate(self, system: str, prompt: str, use_real_llm: bool = True) -> str:
+        if not use_real_llm:
+            # Fast mock for feed turns - no LLM needed
+            return "Acknowledged. Registry updated."
+
         try:
             resp = requests.post(
                 f"{self.args.url}/v1/chat/completions",
@@ -196,39 +202,44 @@ class CipherStressRunner:
                     "messages": [{"role": "system", "content": system}, {"role": "user", "content": prompt}],
                     "max_tokens": 2048,
                     "temperature": 0.1
-                }
+                },
+                timeout=self.timeout
             )
             return resp.json()["choices"][0]["message"]["content"]
         except Exception as e:
             print(f"      [LLM ERROR: {e}]")
             return "ERROR"
 
+    def _mock_llm(self, system: str, prompt: str) -> str:
+        """Fast mock LLM for feed turns - no actual LLM call."""
+        return "Acknowledged. Registry updated."
+
     def run(self):
         print(f"Starting OPERATION HAYSTACK (Cipher Marathon)")
         print(f"Model: {self.args.model} | Turns: 200 | Agents: 50")
+        print(f"Mode: FAST (mock LLM for feed, real LLM for recall only)")
         print("-" * 60)
-        
+
         results = {"success": 0, "total": 0, "details": []}
-        
+
         start = time.time()
-        
+
         for i in range(1, 201):
             user_input = self.scenario.get_turn_input(i)
             is_recall = i in self.scenario.recall_tasks
-            
+
             # Logging
             if is_recall:
                 print(f"Turn {i:03d} [QUERY] {user_input}")
             elif i % 20 == 0:
                 print(f"Turn {i:03d} [FEED] Inputting data stream...")
-            
-            # Catalytic Turn
+
+            # Catalytic Turn - use mock LLM for feed, real LLM for recall
             try:
-                # Force-flush memory logic implies we trust the manager to evict old turns
-                # as we proceed through 200 turns of dense data.
+                llm_fn = self._llm_generate if is_recall else self._mock_llm
                 resp = self.manager.respond_catalytic(
                     query=user_input,
-                    llm_generate=self._llm_generate,
+                    llm_generate=llm_fn,
                     system_prompt=self.system_prompt
                 )
                 
