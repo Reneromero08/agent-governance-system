@@ -366,7 +366,7 @@ This is THE core catalytic behavior. Without this, nothing is actually catalytic
 
 ### J. Recursive E-Score Hierarchy (P3 - Future)
 
-**Status:** J.0 COMPLETE (2026-01-23), J.1+ Not started
+**Status:** J.0-J.5 COMPLETE (2026-01-23)
 **Purpose:** Extend effective memory from ~1,000 turns to ~100,000+ turns
 **Depends On:** C (Auto-Controlled Context Loop must work first)
 
@@ -456,17 +456,24 @@ Previously CAT Chat stored text but computed embeddings on-the-fly (10,000x slow
 
 ---
 
-**J.1 Centroid Structure:**
-- [ ] J.1.1 Define levels: L0 (turns), L1 (100 turns), L2 (1000 turns), L3 (10000 turns)
-- [ ] J.1.2 Each node has: centroid_vector, child_pointers, turn_count
-- [ ] J.1.3 Centroid = mean(child vectors) - pure vector math, no LLM
-- [ ] J.1.4 Store in session_events with level metadata and parent pointer
+**J.1 Centroid Structure:** COMPLETE (2026-01-23)
+- [x] J.1.1 Define levels: L0 (turns), L1 (100 turns), L2 (1000 turns), L3 (10000 turns)
+- [x] J.1.2 Each node has: centroid_vector, child_pointers, turn_count
+- [x] J.1.3 Centroid = mean(child vectors) - pure vector math, no LLM
+- [x] J.1.4 Store in hierarchy_nodes table with level metadata and parent pointer
 
-**J.2 Recursive Retrieval:**
-- [ ] J.2.1 `retrieve(query_vec, node)` - single recursive function
-- [ ] J.2.2 Base case (L0): return turn content if budget allows
-- [ ] J.2.3 Recursive case: E(query, centroid) >= threshold? recurse into children
-- [ ] J.2.4 Budget-aware: stop if working_set would exceed limit
+**Files Created:**
+- `catalytic_chat/hierarchy_schema.py` - HierarchyNode dataclass, level constants
+- `catalytic_chat/centroid_math.py` - E-score computation, centroid operations
+
+**J.2 Recursive Retrieval:** COMPLETE (2026-01-23)
+- [x] J.2.1 `retrieve(query_vec, node)` - single recursive function
+- [x] J.2.2 Base case (L0): return turn content if budget allows
+- [x] J.2.3 Recursive case: TOP-K selection (not threshold-based)
+- [x] J.2.4 Budget-aware: stop if working_set would exceed limit
+
+**Files Created:**
+- `catalytic_chat/hierarchy_retriever.py` - TOP-K recursive retrieval
 
 ```python
 def retrieve(query_vec, node, budget):
@@ -482,20 +489,32 @@ def retrieve(query_vec, node, budget):
     return results
 ```
 
-**J.3 Tree Maintenance:**
-- [ ] J.3.1 On turn compression: add vector to current L1 node, update centroid
-- [ ] J.3.2 When L1 has 100 children: close it, start new L1
-- [ ] J.3.3 When 10 L1 nodes exist: create L2 parent with centroid of L1 centroids
-- [ ] J.3.4 Centroid update: `new_centroid = (old_centroid * n + new_vec) / (n + 1)`
+**J.3 Tree Maintenance:** COMPLETE (2026-01-23)
+- [x] J.3.1 On turn compression: add vector to current L1 node, update centroid
+- [x] J.3.2 When L1 has 100 children: close it, start new L1
+- [x] J.3.3 When 10 L1 nodes exist: create L2 parent with centroid of L1 centroids
+- [x] J.3.4 Centroid update: `new_centroid = (old_centroid * n + new_vec) / (n + 1)`
 
-**J.4 Hot Path (Recent Turns):**
-- [ ] J.4.1 Last 100 turns: check directly (skip hierarchy)
-- [ ] J.4.2 Older turns: use recursive hierarchy
+**Files Created:**
+- `catalytic_chat/hierarchy_builder.py` - Automatic tree building on turn compression
 
-**J.5 Forgetting:**
-- [ ] J.5.1 Track last_accessed per node
-- [ ] J.5.2 Archive old nodes: keep centroid, drop L0 content
-- [ ] J.5.3 Archived nodes still participate in E-score (centroid remains)
+**J.4 Hot Path (Recent Turns):** COMPLETE (2026-01-23)
+- [x] J.4.1 Last 100 turns: check directly (skip hierarchy)
+- [x] J.4.2 Older turns: use recursive hierarchy
+- [x] J.4.3 Integrated into auto_context_manager.py
+- [x] J.4.4 HierarchyMetrics for tracking retrieval statistics
+
+**Files Modified:**
+- `catalytic_chat/hierarchy_retriever.py` - Added retrieve_with_hot_path()
+- `catalytic_chat/auto_context_manager.py` - Hierarchy integration with metrics
+
+**J.5 Forgetting:** COMPLETE (2026-01-23)
+- [x] J.5.1 Track last_accessed per node
+- [x] J.5.2 Archive old nodes: keep centroid, drop L0 content
+- [x] J.5.3 Archived nodes still participate in E-score (centroid remains)
+
+**Files Created:**
+- `catalytic_chat/hierarchy_archiver.py` - Access tracking and archival
 
 ---
 
@@ -666,13 +685,13 @@ ALTER TABLE vectors ADD COLUMN sequence_idx INTEGER;   -- position in sequence
 | P2 | G. Bundle Replay | DONE | Medium |
 | P3 | H. Specs & Demo | No | Medium |
 | P3 | I. Measurement | No | Medium |
-| P3 | J. Scaling & Hierarchical Memory | J.0 DONE | Large |
+| P3 | J. Scaling & Hierarchical Memory | J.0-J.5 DONE | Large |
 
 **Recommended order:** H -> I -> J
 
 **Scaling Note:** J is intentionally last. The core catalytic loop (C) must work well at 1K turns before optimizing for 100K+. Premature optimization is the root of all evil.
 
-**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 complete (E, F, G), J.0 complete. C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, governed vector fallback, docs index, offline bundle replay, and vector persistence for 10,000x faster E-score computation.
+**Note:** P0 core complete (A, B, C core), P1 complete (D), P2 complete (E, F, G), Phase J (J.0-J.5) complete. C.6.3 (quality correlation tracking) still pending. The system is catalytic with auto-managed context, SPC pointer compression, governed vector fallback, docs index, offline bundle replay, vector persistence for 10,000x faster E-score computation, and hierarchical memory for O(log n) retrieval at 100K+ turns.
 
 ---
 

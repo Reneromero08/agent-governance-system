@@ -254,6 +254,32 @@ class SessionCapsule:
             CREATE INDEX IF NOT EXISTS idx_event_embeddings_hash
                 ON session_event_embeddings(content_hash);
 
+            -- Hierarchy nodes for O(log n) retrieval (Phase J.1)
+            -- L0=turns, L1=100 turns, L2=1000 turns, L3=10000 turns
+            CREATE TABLE IF NOT EXISTS session_hierarchy_nodes (
+                node_id TEXT PRIMARY KEY,
+                session_id TEXT NOT NULL,
+                level INTEGER NOT NULL,
+                parent_node_id TEXT,
+                centroid BLOB NOT NULL,
+                turn_count INTEGER NOT NULL,
+                first_turn_seq INTEGER,
+                last_turn_seq INTEGER,
+                is_archived INTEGER DEFAULT 0,
+                last_accessed_at TEXT,
+                created_at TEXT DEFAULT (datetime('now')),
+                FOREIGN KEY (parent_node_id) REFERENCES session_hierarchy_nodes(node_id)
+            );
+
+            CREATE INDEX IF NOT EXISTS idx_hierarchy_session
+                ON session_hierarchy_nodes(session_id);
+
+            CREATE INDEX IF NOT EXISTS idx_hierarchy_level
+                ON session_hierarchy_nodes(session_id, level);
+
+            CREATE INDEX IF NOT EXISTS idx_hierarchy_parent
+                ON session_hierarchy_nodes(parent_node_id);
+
             -- Append-only trigger (prevent updates/deletes)
             CREATE TRIGGER IF NOT EXISTS prevent_event_update
             BEFORE UPDATE ON session_events

@@ -1,6 +1,88 @@
-<!-- CONTENT_HASH: updated_with_phase_i -->
+<!-- CONTENT_HASH: updated_with_phase_j -->
 
 All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file.
+
+## [1.3.0] - 2026-01-23
+
+### Added
+
+**Phase J: Recursive E-Score Hierarchy (P3) - COMPLETE**
+
+Extends effective memory from ~1,000 turns to ~100,000+ turns using hierarchical centroid structure with O(log n) retrieval.
+
+- **J.1 Centroid Structure:**
+  - `catalytic_chat/hierarchy_schema.py` (new) - HierarchyNode dataclass and level constants
+    - Level definitions: L0 (turns), L1 (100 turns), L2 (1000 turns), L3 (10000 turns)
+    - CHILDREN_PER_LEVEL = 100 branching factor
+    - Serialization: to_dict(), from_dict(), to_json(), from_json()
+  - `catalytic_chat/centroid_math.py` (new) - Vector math operations
+    - compute_centroid() - Mean of vectors
+    - update_centroid_incremental() - O(1) update: (old * n + new) / (n + 1)
+    - compute_E() - Born rule E-score: |<q|i>|^2 (cosine squared)
+    - batch_compute_E() - Vectorized batch computation
+  - `catalytic_chat/session_capsule.py` (updated) - Added session_hierarchy_nodes table schema
+
+- **J.2 Recursive Retrieval:**
+  - `catalytic_chat/hierarchy_retriever.py` (new) - TOP-K hierarchical retrieval
+    - retrieve_hierarchical() - Top-K selection at each level (NOT threshold-based)
+    - RetrievalResult dataclass with node_id, event_id, e_score, content_hash, level
+    - RetrievalMetrics for performance tracking (e_computations, hierarchy_used, hits)
+    - Database operations: load_node_children(), store_hierarchy_node(), store_hierarchy_batch()
+    - In-memory hierarchy building for testing
+
+- **J.3 Tree Maintenance:**
+  - `catalytic_chat/hierarchy_builder.py` (new) - Automatic tree building
+    - HierarchyBuilder class with on_turn_compressed() for incremental updates
+    - Level promotion: L1 full (100 children) -> new L1, 10 L1s -> L2 parent
+    - build_initial_hierarchy() with k-means clustering (semantic grouping required)
+    - Optional PCA to 22 dimensions for noise reduction
+  - `catalytic_chat/turn_compressor.py` (updated) - Wired hierarchy_builder integration
+
+- **J.4 Integration & Hot Path:**
+  - `catalytic_chat/hierarchy_retriever.py` (updated) - Added hot path optimization
+    - retrieve_with_hot_path() - Last 100 turns checked directly, older via hierarchy
+    - has_hierarchy() and get_hierarchy_stats() for diagnostics
+  - `catalytic_chat/auto_context_manager.py` (updated) - Hierarchy integration
+    - HierarchyMetrics dataclass for performance stats
+    - configure_hierarchy() for settings
+    - _retrieve_from_hierarchy() with automatic fallback to brute force
+    - finalize_turn() now adds turns to hierarchy after compression
+
+- **J.5 Forgetting & Archival:**
+  - `catalytic_chat/hierarchy_archiver.py` (new) - Memory management
+    - HierarchyArchiver class with access time tracking
+    - update_access_time() - Track node usage for LRU eviction
+    - archive_old_nodes() - Archive old content, preserve centroids
+    - get_archival_candidates() - Dry run for archival preview
+    - restore_archived_node() - Restore if content still available
+    - ArchiveResult and ArchiveStats dataclasses
+
+- **Implementation Plan:**
+  - `PHASE_J_IMPLEMENTATION_PLAN.md` (new) - Detailed parallel execution plan
+
+### Tests
+
+- **146 Phase J tests passing:**
+  - 42 tests in test_hierarchy_schema.py - Schema and centroid math
+  - 36 tests in test_hierarchy_retriever.py - TOP-K retrieval algorithm
+  - 27 tests in test_hierarchy_builder.py - Tree maintenance and k-means
+  - 26 tests in test_hierarchy_archiver.py - Archival and access tracking
+  - 15 tests in test_hierarchy_integration.py - End-to-end integration
+
+### Exit Criteria
+
+- [x] O(log n) E-computations per query (measured via RetrievalMetrics)
+- [x] Recall maintained with TOP-K selection (validated algorithm from SQuAD experiments)
+- [x] Zero external dependencies for retrieval (pure Python + numpy)
+- [x] Self-maintaining tree structure (automatic promotion and centroid updates)
+- [x] Hot path optimization for recent turns (configurable window)
+- [x] Archival mechanism preserves hierarchy structure (centroids never deleted)
+
+### Key Design Decisions
+
+1. **TOP-K selection over threshold-based pruning** - Experimental validation showed threshold-based pruning is too aggressive. TOP-K ensures predictable pruning while maintaining recall.
+2. **k-means clustering required** - Random grouping creates meaningless centroids. Semantic clustering produces discriminative centroids.
+3. **Centroids preserved on archival** - Archived nodes keep their centroids so E-score computation continues to work; only content is dropped.
 
 ## [1.2.9] - 2026-01-19
 

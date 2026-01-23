@@ -13,6 +13,7 @@ Storage:
 - Hash pointer (~50 tokens) remains for potential rehydration
 
 Phase C.3 of Auto-Controlled Context Loop implementation.
+Phase J.3 Integration: Automatic hierarchy maintenance via HierarchyBuilder.
 """
 
 import hashlib
@@ -22,10 +23,13 @@ import logging
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from pathlib import Path
-from typing import Dict, Any, Optional, List, Callable, Tuple
+from typing import Dict, Any, Optional, List, Callable, Tuple, TYPE_CHECKING
 import numpy as np
 
 from .vector_persistence import VectorPersistence
+
+if TYPE_CHECKING:
+    from .hierarchy_builder import HierarchyBuilder
 
 
 # =============================================================================
@@ -183,6 +187,7 @@ class TurnCompressor:
         token_estimator: Optional[Callable[[str], int]] = None,
         embed_fn: Optional[Callable[[str], np.ndarray]] = None,
         vector_persistence: Optional[VectorPersistence] = None,
+        hierarchy_builder: Optional["HierarchyBuilder"] = None,
     ):
         """
         Initialize turn compressor.
@@ -194,6 +199,7 @@ class TurnCompressor:
             token_estimator: Function to estimate tokens (default: len//4)
             embed_fn: Optional function to compute embeddings (J.0.2)
             vector_persistence: Optional VectorPersistence instance for embedding storage (J.0.2)
+            hierarchy_builder: Optional HierarchyBuilder for automatic tree maintenance (J.3)
         """
         self.db_path = Path(db_path)
         self.session_id = session_id
@@ -203,6 +209,9 @@ class TurnCompressor:
         # J.0.2: Optional embedding support
         self._embed_fn = embed_fn
         self._vector_persistence = vector_persistence
+
+        # J.3: Optional hierarchy builder for automatic tree maintenance
+        self._hierarchy_builder = hierarchy_builder
 
         # Cache of compressed turns for fast lookup
         self._pointer_cache: Dict[str, TurnPointer] = {}
@@ -344,6 +353,7 @@ class TurnCompressor:
             conn.commit()
 
             # J.0.2: Store embedding at compression time
+            embedding = None
             if self._embed_fn is not None and self._vector_persistence is not None:
                 try:
                     # Compute embedding (one API call)
@@ -361,6 +371,24 @@ class TurnCompressor:
                     # Embedding can be backfilled later via J.0.4 migration
                     logging.warning(
                         "Failed to store embedding for turn %s: %s", event_id, e
+                    )
+
+            # J.3: Update hierarchy if builder is configured
+            if self._hierarchy_builder is not None and embedding is not None:
+                try:
+                    token_count = self.token_estimator(turn.full_content)
+                    self._hierarchy_builder.on_turn_compressed(
+                        event_id=event_id,
+                        turn_vec=embedding,
+                        content_hash=content_hash,
+                        sequence_num=sequence_num,
+                        token_count=token_count,
+                    )
+                except Exception as e:
+                    # Log warning but don't fail turn storage
+                    # Hierarchy can be rebuilt later via build_initial_hierarchy
+                    logging.warning(
+                        "Failed to update hierarchy for turn %s: %s", event_id, e
                     )
 
             return event_id

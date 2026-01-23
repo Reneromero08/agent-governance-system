@@ -56,10 +56,54 @@ from .session_capsule import (
 )
 from .vector_persistence import VectorPersistence, PersistedVector
 
+# Hierarchy imports (J.4)
+try:
+    from .hierarchy_builder import HierarchyBuilder
+    from .hierarchy_retriever import (
+        retrieve_with_hot_path,
+        has_hierarchy,
+        get_hierarchy_stats,
+        RetrievalMetrics as HierarchyRetrievalMetrics,
+    )
+    from .hierarchy_archiver import HierarchyArchiver
+    HIERARCHY_AVAILABLE = True
+except ImportError:
+    HIERARCHY_AVAILABLE = False
+    HierarchyBuilder = None
+    HierarchyArchiver = None
+
 
 # =============================================================================
 # Data Classes
 # =============================================================================
+
+@dataclass
+class HierarchyMetrics:
+    """
+    Metrics from hierarchy retrieval (Phase J.4).
+
+    Tracks hierarchy performance for session analytics.
+    """
+    levels_built: int = 0               # How many levels exist (0-3)
+    nodes_per_level: Dict[int, int] = field(default_factory=dict)
+    e_computations: int = 0             # E-score computations this query
+    hierarchy_used: bool = False        # Did we use hierarchy or brute force?
+    hot_path_hits: int = 0              # Turns found in hot window
+    hierarchy_hits: int = 0             # Turns found via hierarchy
+    total_turns: int = 0                # Total L0 nodes in hierarchy
+
+    def to_dict(self) -> Dict[str, Any]:
+        """Convert to dictionary for logging."""
+        return {
+            "levels_built": self.levels_built,
+            "nodes_per_level": self.nodes_per_level,
+            "e_computations": self.e_computations,
+            "hierarchy_used": self.hierarchy_used,
+            "hot_path_hits": self.hot_path_hits,
+            "hierarchy_hits": self.hierarchy_hits,
+            "total_turns": self.total_turns,
+        }
+
 
 @dataclass
 class ContextState:
@@ -243,6 +287,17 @@ class AutoContextManager:
         self._turn_pointers: List[TurnPointer] = []
         self._turn_index: int = 0
 
+        # Hierarchy support (J.4)
+        self._hierarchy_builder: Optional[Any] = None
+        self._hierarchy_archiver: Optional[Any] = None
+        self._use_hierarchy_threshold: int = 500  # Use hierarchy if > 500 items
+        self._hot_window: int = 100  # Recent turns for hot path
+        self._last_hierarchy_metrics: Optional[HierarchyMetrics] = None
+
+        # Initialize hierarchy components if available
+        if HIERARCHY_AVAILABLE:
+            self._init_hierarchy()
+
     @property
     def context_state(self) -> ContextState:
         """Get current context state."""
@@ -255,6 +310,157 @@ class AutoContextManager:
             tokens_used=tokens_used,
             turn_index=self._turn_index,
         )
+
+    # =========================================================================
+    # Hierarchy Support (J.4)
+    # =========================================================================
+
+    def _init_hierarchy(self) -> None:
+        """Initialize hierarchy components if available."""
+        if not HIERARCHY_AVAILABLE:
+            return
+
+        try:
+            self._hierarchy_builder = HierarchyBuilder(
+                db_path=self.db_path,
+                session_id=self.session_id,
+            )
+            self._hierarchy_archiver = HierarchyArchiver(self.db_path)
+            self._hierarchy_archiver.ensure_schema()
+        except Exception:
+            # Hierarchy not available or error - graceful fallback
+            self._hierarchy_builder = None
+            self._hierarchy_archiver = None
+
+    def _has_hierarchy(self) -> bool:
+        """Check if hierarchy is available and has nodes."""
+        if not HIERARCHY_AVAILABLE or self._hierarchy_builder is None:
+            return False
+
+        try:
+            conn = self._hierarchy_builder._get_conn()
+            return has_hierarchy(conn, self.session_id)
+        except Exception:
+            return False
+
+    def _get_hierarchy_stats(self) -> HierarchyMetrics:
+        """Get current hierarchy statistics."""
+        if not self._has_hierarchy():
+            return HierarchyMetrics()
+
+        try:
+            conn = self._hierarchy_builder._get_conn()
+            stats = get_hierarchy_stats(conn, self.session_id)
+
+            return HierarchyMetrics(
+                levels_built=stats.get("levels_built", 0),
+                nodes_per_level=stats.get("nodes_per_level", {}),
+                total_turns=stats.get("total_turns", 0),
+            )
+        except Exception:
+            return HierarchyMetrics()
+
+    def _retrieve_from_hierarchy(
+        self,
+        query_vec: np.ndarray,
+        budget_tokens: int
+    ) -> Tuple[List[ContextItem], HierarchyMetrics]:
+        """
+        Retrieve items using hierarchical retrieval with hot path.
+
+        Uses O(log n) hierarchy for large pointer sets.
+
+        Args:
+            query_vec: Query embedding vector
+            budget_tokens: Token budget for retrieval
+
+        Returns:
+            Tuple of (hydrated_items, metrics)
+        """
+        if not self._has_hierarchy():
+            return [], HierarchyMetrics(hierarchy_used=False)
+
+        try:
+            conn = self._hierarchy_builder._get_conn()
+
+            results, retrieval_metrics = retrieve_with_hot_path(
+                query_vec=query_vec,
+                session_id=self.session_id,
+                db_conn=conn,
+                hot_window=self._hot_window,
+                top_k=10,
+                budget_tokens=budget_tokens
+            )
+
+            # Update access times for archiver tracking
+            if results and self._hierarchy_archiver is not None:
+                node_ids = [r.node_id for r in results]
+                self._hierarchy_archiver.update_access_time(node_ids)
+
+            # Convert results to ContextItems
+            hydrated_items: List[ContextItem] = []
+            for r in results:
+                # Try to hydrate turn content from compressor
+                hydration = self.compressor.decompress_turn(r.content_hash, r.e_score)
+
+                if hydration.success and hydration.content:
+                    content = hydration.content.full_content
+                else:
+                    # Fallback: use placeholder
+                    content = f"[Retrieved turn {r.event_id}]"
+
+                # Compute embedding if needed
+                embedding = None
+                if self.embed_fn:
+                    embedding = self.embed_fn(content)
+
+                hydrated_items.append(ContextItem(
+                    item_id=f"hier_{r.node_id}",
+                    content=content,
+                    tokens=self.token_estimator(content),
+                    embedding=embedding,
+                    item_type="hierarchy_turn",
+                    metadata={
+                        "event_id": r.event_id,
+                        "node_id": r.node_id,
+                        "e_score": r.e_score,
+                        "content_hash": r.content_hash,
+                    }
+                ))
+
+            # Build metrics
+            metrics = HierarchyMetrics(
+                levels_built=retrieval_metrics.levels_searched,
+                e_computations=retrieval_metrics.e_computations,
+                hierarchy_used=retrieval_metrics.hierarchy_used,
+                hot_path_hits=retrieval_metrics.hot_path_hits,
+                hierarchy_hits=retrieval_metrics.hierarchy_hits,
+            )
+
+            self._last_hierarchy_metrics = metrics
+            return hydrated_items, metrics
+
+        except Exception:
+            return [], HierarchyMetrics(hierarchy_used=False)
+
+    def configure_hierarchy(
+        self,
+        use_hierarchy_threshold: int = 500,
+        hot_window: int = 100
+    ) -> None:
+        """
+        Configure hierarchy settings.
+
+        Args:
+            use_hierarchy_threshold: Use hierarchy if pointer set exceeds this
+            hot_window: Number of recent turns for hot path (brute force)
+        """
+        self._use_hierarchy_threshold = use_hierarchy_threshold
+        self._hot_window = hot_window
+
+    def get_hierarchy_metrics(self) -> Optional[HierarchyMetrics]:
+        """Get metrics from last hierarchy retrieval."""
+        return self._last_hierarchy_metrics
 
     def add_item(self, item: ContextItem) -> None:
         """
@@ -548,6 +754,25 @@ class AutoContextManager:
             "pointer_tokens": pointer.pointer_tokens,
             "compression_ratio": pointer.compression_ratio,
         })
+
+        # Add to hierarchy (J.4) - enables O(log n) retrieval for large sessions
+        if HIERARCHY_AVAILABLE and self._hierarchy_builder is not None:
+            try:
+                # Compute turn embedding (combining user + assistant)
+                turn_content = f"{user_query}\n{assistant_response}"
+                turn_embedding = self.embed_fn(turn_content) if self.embed_fn else None
+
+                if turn_embedding is not None:
+                    self._hierarchy_builder.on_turn_compressed(
+                        event_id=event.event_id,
+                        turn_vec=turn_embedding,
+                        content_hash=pointer.content_hash,
+                        sequence_num=self._turn_index,
+                        token_count=pointer.original_tokens,
+                    )
+            except Exception:
+                # Hierarchy update failed - continue without it (graceful degradation)
+                pass
 
         return FinalizeResult(
             compression_result=compression_result,
