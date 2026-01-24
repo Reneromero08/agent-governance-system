@@ -24,12 +24,24 @@ def run_cli_command(args, cwd=None):
     Returns:
         Tuple of (exit_code, stdout, stderr)
     """
+    import os
     cmd = [sys.executable, "-m", "catalytic_chat.cli"] + args
+
+    # Set PYTHONPATH to include the CAT_CHAT directory so the module can be found
+    cat_chat_dir = Path(__file__).parent.parent.resolve()
+    env = os.environ.copy()
+    existing_pythonpath = env.get("PYTHONPATH", "")
+    if existing_pythonpath:
+        env["PYTHONPATH"] = str(cat_chat_dir) + os.pathsep + existing_pythonpath
+    else:
+        env["PYTHONPATH"] = str(cat_chat_dir)
+
     result = subprocess.run(
         cmd,
         capture_output=True,
         text=True,
-        cwd=cwd
+        cwd=cwd,
+        env=env
     )
     return result.returncode, result.stdout, result.stderr
 

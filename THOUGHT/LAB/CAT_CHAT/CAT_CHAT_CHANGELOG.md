@@ -1,6 +1,45 @@
-<!-- CONTENT_HASH: updated_with_phase_j -->
+<!-- CONTENT_HASH: updated_with_test_fixes -->
 
 All notable changes to **CAT_CHAT (Catalytic Chat)** are documented in this file.
+
+## [1.3.1] - 2026-01-23
+
+### Fixed
+
+**Test Suite Fixes - 739 passed, 0 failures**
+
+All 38 previously failing tests now pass after fixing test infrastructure and production bugs.
+
+- **CLI Subprocess Tests (7 tests fixed):**
+  - `tests/test_cli_output.py` - Set PYTHONPATH in subprocess environment for module discovery
+  - Fixed: test_bundle_verify_json_stdout_purity, test_bundle_verify_json_purity_on_error,
+    test_bundle_verify_exit_code_invalid_input, test_bundle_verify_quiet_mode,
+    test_trust_verify_json_output, test_trust_verify_exit_code_invalid_input,
+    test_json_deterministic_output
+
+- **Compression Validator Tests (4 tests fixed):**
+  - `tests/test_compression_validator.py` - Fixed job completeness gate and hash computation
+  - `catalytic_chat/compression_validator.py` - Fixed encoding for claim hash validation
+  - `catalytic_chat/section_extractor.py` - Fixed line counting for files ending with newline
+  - `catalytic_chat/bundle.py` - Fixed artifact hash computation to include trailing newline
+
+- **Session Capsule Test (1 test fixed):**
+  - `tests/test_session_capsule.py` - Updated outdated retrieval path assertion
+  - Changed from expecting `cortex_query` to current chain: spc_resolve, cassette_network_symbol, etc.
+
+- **Receipt Chain Test (1 test fixed):**
+  - `tests/test_receipt_chain.py` - Fixed receipt output path for chain verification
+  - `catalytic_chat/executor.py` - Fixed receipt_index chaining for multi-receipt runs
+
+- **Attestation Tests (24 tests fixed):**
+  - Installed missing `pynacl` dependency for Ed25519 cryptographic signing
+
+### Added
+
+- **LLM Configuration:**
+  - `_generated/llm_config.json` (new) - Configurable LLM backend
+  - Default: zai-org/glm-4.7-flash at http://10.5.0.2:1234
+  - `catalytic_chat/llm_client.py` (new) - LLM client with OpenAI-compatible API
 
 ## [1.3.0] - 2026-01-23
 

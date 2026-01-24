@@ -122,7 +122,7 @@ class CompressionValidator:
         claim_copy = dict(self.claim)
         claim_hash = claim_copy.pop("claim_hash", None)
         claim_bytes = _canonical_json_bytes(claim_copy)
-        computed_hash = _sha256(claim_bytes)
+        computed_hash = _sha256(claim_bytes.decode('utf-8'))
 
         if claim_hash != computed_hash:
             self._fail("INVALID_CLAIM_SCHEMA", f"claim_hash mismatch: expected {computed_hash}, got {claim_hash}")
@@ -132,17 +132,21 @@ class CompressionValidator:
         if self.claim is None:
             raise CompressionValidationError("INTERNAL_ERROR", "Claim not loaded")
 
-        self.bundle_manifest = self.bundle_verifier.verify()
+        # Verify bundle integrity first
+        verify_result = self.bundle_verifier.verify()
+
+        # Load the full manifest for metrics computation
+        self.bundle_manifest = self.bundle_verifier._load_manifest()
 
         # Verify bundle_id matches claim
         claim_bundle_id = self.claim.get("bundle_id")
-        bundle_bundle_id = self.bundle_manifest.get("bundle_id")
+        bundle_bundle_id = verify_result.get("bundle_id")
         if claim_bundle_id != bundle_bundle_id:
             self._fail("BUNDLE_ID_MISMATCH", f"Claim bundle_id doesn't match bundle: {claim_bundle_id} != {bundle_bundle_id}")
 
         # Verify run_id matches claim
         claim_run_id = self.claim.get("run_id")
-        bundle_run_id = self.bundle_manifest.get("run_id")
+        bundle_run_id = verify_result.get("run_id")
         if claim_run_id != bundle_run_id:
             self._fail("RUN_ID_MISMATCH", f"Claim run_id doesn't match bundle: {claim_run_id} != {bundle_run_id}")
 

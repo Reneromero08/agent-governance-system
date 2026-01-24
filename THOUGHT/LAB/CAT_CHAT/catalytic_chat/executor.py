@@ -54,11 +54,15 @@ class BundleExecutor:
         from catalytic_chat.attestation import sign_receipt_bytes
 
         parent_receipt_hash = None
+        receipt_index = 0
 
         if self.previous_receipt:
             prev_receipt = load_receipt(self.previous_receipt)
             if prev_receipt:
                 parent_receipt_hash = prev_receipt.get("receipt_hash")
+                prev_index = prev_receipt.get("receipt_index")
+                if prev_index is not None:
+                    receipt_index = prev_index + 1
 
         steps_results = []
         for step in manifest["steps"]:
@@ -96,7 +100,7 @@ class BundleExecutor:
             "parent_receipt_hash": parent_receipt_hash,
             "receipt_hash": None,
             "attestation": None,
-            "receipt_index": 0
+            "receipt_index": receipt_index
         }
 
         receipt["receipt_hash"] = compute_receipt_hash(receipt)

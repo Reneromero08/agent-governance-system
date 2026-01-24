@@ -85,7 +85,8 @@ class SectionExtractor:
         try:
             with open(file_path, 'r', encoding='utf-8') as f:
                 content = f.read()
-                lines = content.count('\n') + 1
+                # Count lines the same way f.readlines() does - each newline terminates a line
+                lines = len(content.splitlines())
         except Exception as e:
             raise ValueError(f"Failed to read {file_path}: {e}")
  

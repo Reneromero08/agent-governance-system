@@ -1,0 +1,37 @@
+{
+  "default": "local",
+  "providers": {
+    "local": {
+      "name": "Local LLM",
+      "base_url": "http://10.5.0.2:1234",
+      "model": "zai-org/glm-4.7-flash",
+      "api_key": "not-needed",
+      "max_tokens": 4096,
+      "temperature": 0.7
+    },
+    "openai": {
+      "name": "OpenAI",
+      "base_url": "https://api.openai.com/v1",
+      "model": "gpt-4",
+      "api_key_env": "OPENAI_API_KEY",
+      "max_tokens": 4096,
+      "temperature": 0.7
+    },
+    "anthropic": {
+      "name": "Anthropic Claude",
+      "base_url": "https://api.anthropic.com/v1",
+      "model": "claude-3-opus-20240229",
+      "api_key_env": "ANTHROPIC_API_KEY",
+      "max_tokens": 4096,
+      "temperature": 0.7
+    },
+    "ollama": {
+      "name": "Ollama Local",
+      "base_url": "http://localhost:11434",
+      "model": "llama3",
+      "api_key": "not-needed",
+      "max_tokens": 4096,
+      "temperature": 0.7
+    }
+  }
+}

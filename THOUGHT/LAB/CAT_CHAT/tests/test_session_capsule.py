@@ -527,7 +527,11 @@ class TestHydrationFailure:
 
         assert result.content == ""
         assert result.source == "unresolved"
-        assert "cortex_query" in result.retrieval_path
+        # Verify resolution was attempted through the current retrieval chain
+        assert any(step in result.retrieval_path for step in [
+            "spc_resolve", "cassette_network_symbol", "cassette_network",
+            "symbol_registry", "docs_index_fts"
+        ])
 
     def test_hydration_stats_track_failures(self, tmp_path):
         """Verify resolver stats track failure count."""

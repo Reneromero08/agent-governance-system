@@ -319,7 +319,31 @@ class BundleBuilder:
         
         sorted_artifacts = sorted(artifacts, key=lambda x: x["artifact_id"])
         sorted_steps = sorted(steps, key=lambda x: (x["ordinal"], x["step_id"]))
-        
+
+        # First pass: write artifacts and build artifact manifests
+        artifact_manifests = []
+        for artifact in sorted_artifacts:
+            content = artifact.pop("content")
+            artifact_path = output_dir / "artifacts" / f"{artifact['artifact_id']}.txt"
+            artifact_path.parent.mkdir(parents=True, exist_ok=True)
+
+            # Ensure content ends with newline for consistency
+            if not content.endswith('\n'):
+                content = content + '\n'
+
+            # Compute hash and bytes from the final content (with trailing newline)
+            artifact["sha256"] = _sha256(content)
+            artifact["bytes"] = len(content.encode('utf-8'))
+            artifact["path"] = f"artifacts/{artifact['artifact_id']}.txt"
+            artifact_manifests.append(artifact)
+
+            with open(artifact_path, 'w', encoding='utf-8') as f:
+                f.write(content)
+
+        sorted_artifact_manifests = sorted(artifact_manifests, key=lambda x: x["artifact_id"])
+
+        # Build pre_manifest with artifacts included (matching verifier expectations)
+        # bundle_id and root_hash are empty for bundle_id computation
         pre_manifest = {
             "bundle_version": self.VERSION,
             "bundle_id": "",
@@ -329,34 +353,16 @@ class BundleBuilder:
             "plan_hash": plan_hash,
             "steps": sorted_steps,
             "inputs": inputs,
-            "artifacts": [],
+            "artifacts": sorted_artifact_manifests,
             "hashes": {"root_hash": ""},
             "provenance": {}
         }
-        
+
         pre_manifest_json = _canonical_json(pre_manifest)
         bundle_id = _sha256(pre_manifest_json)
-        
-        artifact_manifests = []
-        for artifact in sorted_artifacts:
-            content = artifact.pop("content")
-            artifact_path = output_dir / "artifacts" / f"{artifact['artifact_id']}.txt"
-            artifact_path.parent.mkdir(parents=True, exist_ok=True)
-            
-            content_bytes = content.encode('utf-8')
-            artifact_bytes = len(content_bytes)
-            
-            artifact["path"] = f"artifacts/{artifact['artifact_id']}.txt"
-            artifact["bytes"] = artifact_bytes
-            artifact_manifests.append(artifact)
-            
-            with open(artifact_path, 'w', encoding='utf-8') as f:
-                f.write(content)
-                if not content.endswith('\n'):
-                    f.write('\n')
-        
+
         root_hash = self._compute_root_hash(artifact_manifests)
-        
+
         manifest = {
             "bundle_version": self.VERSION,
             "bundle_id": bundle_id,
@@ -366,7 +372,7 @@ class BundleBuilder:
             "plan_hash": plan_hash,
             "steps": sorted_steps,
             "inputs": inputs,
-            "artifacts": sorted(artifact_manifests, key=lambda x: x["artifact_id"]),
+            "artifacts": sorted_artifact_manifests,
             "hashes": {"root_hash": root_hash},
             "provenance": {}
         }

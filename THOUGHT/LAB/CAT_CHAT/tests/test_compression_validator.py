@@ -24,6 +24,7 @@ from catalytic_chat.compression_validator import (
 from catalytic_chat.bundle import BundleBuilder, BundleError, _sha256
 from catalytic_chat.message_cassette import MessageCassette, _generate_id
 from catalytic_chat.section_indexer import SectionIndexer, build_index
+from catalytic_chat.receipt import compute_receipt_hash, canonical_json_bytes
 
 
 @pytest.fixture
@@ -38,8 +39,7 @@ def repo_root(tmp_path):
     cortex_dir = tmp_path / "CORTEX" / "_generated"
     cortex_dir.mkdir(parents=True)
 
-    (law_dir / "CONTRACT.md").write_text("""
-# Test Document
+    (law_dir / "CONTRACT.md").write_text("""# Test Document
 
 This is a test document for symbol extraction.
 
@@ -50,6 +50,8 @@ Content for section 1.
 ## Section 2
 
 Content for section 2.
+
+# End of document
 """)
 
     return tmp_path
@@ -184,13 +186,12 @@ def create_bundle_and_receipts(repo_root, tmp_path, run_id, job_id):
             "receipt_index": 0
         }
 
-        receipt_bytes = _canonical_json_bytes(receipt)
-        receipt_hash = _sha256(receipt_bytes.decode('utf-8'))
+        # Use compute_receipt_hash for consistency with validator
+        receipt_hash = compute_receipt_hash(receipt)
         receipt["receipt_hash"] = receipt_hash
 
         receipt_path = receipts_dir / f"{run_id}_receipt_001.json"
-        receipt_bytes = _canonical_json_bytes(receipt)
-        receipt_path.write_bytes(receipt_bytes)
+        receipt_path.write_bytes(canonical_json_bytes(receipt))
 
         return bundle_dir, receipts_dir, result
 
@@ -198,7 +199,7 @@ def create_bundle_and_receipts(repo_root, tmp_path, run_id, job_id):
         bundle_builder.close()
 
 
-def create_compression_claim(bundle_id, run_id, artifact_count, uncompressed_tokens, compressed_tokens, total_bytes):
+def create_compression_claim(bundle_id, run_id, artifact_count, uncompressed_tokens, compressed_tokens, total_bytes, cas_tokens=None):
     """Create a compression claim for testing."""
     components = [
         {"name": "vector_db_only", "included": True},
@@ -206,6 +207,11 @@ def create_compression_claim(bundle_id, run_id, artifact_count, uncompressed_tok
         {"name": "f3", "included": False},
         {"name": "cas", "included": True}
     ]
+
+    # CAS tokens = sum of _estimate_tokens(sha256_hash) per artifact + 10 per artifact
+    # sha256 hash is 64 chars, so _estimate_tokens(hash) = round(64/4) = 16
+    if cas_tokens is None:
+        cas_tokens = artifact_count * 16 + artifact_count * 10
 
     claim = {
         "claim_version": "1.0.0",
@@ -220,7 +226,7 @@ def create_compression_claim(bundle_id, run_id, artifact_count, uncompressed_tok
             "total_bytes": total_bytes,
             "vector_db_tokens": uncompressed_tokens,
             "symbol_lang_tokens": compressed_tokens,
-            "cas_tokens": total_bytes // 4 + artifact_count * 10
+            "cas_tokens": cas_tokens
         },
         "notes": "Test claim"
     }
@@ -273,34 +279,54 @@ def test_compression_verify_passes_on_matching_claim(indexed_repo):
         artifact_path = artifacts_dir / "test_artifact.txt"
         artifact_path.write_text(artifact_content)
 
-        # Create bundle manifest
-        bundle_json_input = {
+        # Create artifact metadata
+        artifact_id = "test_artifact"
+        section_ref = "test_ref"
+
+        # Create a step that references the artifact
+        step = {
+            "step_id": "step_001",
+            "ordinal": 1,
+            "op": "READ_SECTION",
+            "refs": {"section_id": section_ref},
+            "constraints": {"slice": None},
+            "expected_outputs": {}
+        }
+
+        # Build manifest (with bundle_id="" and root_hash="" for bundle_id computation)
+        bundle_manifest = {
             "bundle_version": "5.0.0",
             "bundle_id": "",
             "run_id": run_id,
             "job_id": job_id,
             "message_id": "test_msg",
             "plan_hash": "test_plan",
-            "steps": [],
-            "inputs": {"symbols": [], "files": [], "slices": []},
+            "steps": [step],
+            "inputs": {"symbols": [], "files": [section_ref], "slices": []},
             "artifacts": [{
-                "artifact_id": "test_artifact",
+                "artifact_id": artifact_id,
                 "kind": "SECTION_SLICE",
-                "ref": "test_ref",
+                "ref": section_ref,
                 "slice": None,
                 "path": "artifacts/test_artifact.txt",
                 "sha256": artifact_hash,
                 "bytes": len(artifact_content.encode('utf-8'))
             }],
-            "hashes": {"root_hash": artifact_hash},
+            "hashes": {"root_hash": ""},
             "provenance": {}
         }
-        bundle_id_input = hashlib.sha256(
-            json.dumps(bundle_json_input, sort_keys=True, separators=(",", ":")).encode('utf-8')
-        ).hexdigest()
 
-        bundle_manifest = bundle_json_input
+        # Compute bundle_id from pre-manifest (matches verifier logic)
+        pre_manifest_json = json.dumps(bundle_manifest, sort_keys=True, separators=(",", ":"))
+        bundle_id_input = hashlib.sha256(pre_manifest_json.encode('utf-8')).hexdigest()
+
+        # Compute root_hash using same algorithm as BundleBuilder._compute_root_hash
+        root_hash_input = f"{artifact_id}:{artifact_hash}\n"
+        root_hash = hashlib.sha256(root_hash_input.encode('utf-8')).hexdigest()
+
+        # Update manifest with computed values
         bundle_manifest["bundle_id"] = bundle_id_input
+        bundle_manifest["hashes"]["root_hash"] = root_hash
 
         bundle_json_path = bundle_dir / "bundle.json"
         bundle_json_path.write_text(json.dumps(bundle_manifest, sort_keys=True, separators=(",", ":")) + "\n")
@@ -317,29 +343,31 @@ def test_compression_verify_passes_on_matching_claim(indexed_repo):
             "error": None,
             "steps": [],
             "artifacts": [{
-                "artifact_id": "test_artifact",
+                "artifact_id": artifact_id,
                 "sha256": artifact_hash,
                 "bytes": len(artifact_content.encode('utf-8'))
             }],
-            "root_hash": artifact_hash,
+            "root_hash": root_hash,
             "parent_receipt_hash": None,
             "receipt_hash": None,
             "attestation": None,
             "receipt_index": 0
         }
 
-        receipt_bytes = _canonical_json_bytes(receipt)
-        receipt_hash = hashlib.sha256(receipt_bytes.decode('utf-8')).hexdigest()
+        # Compute receipt_hash using the same algorithm as the receipt module
+        receipt_hash = compute_receipt_hash(receipt)
         receipt["receipt_hash"] = receipt_hash
 
         receipt_path = receipts_dir / f"{run_id}_receipt_001.json"
         receipt_path.write_bytes(_canonical_json_bytes(receipt))
 
-        # Compute metrics
+        # Compute metrics - must match compression_validator._compute_metrics logic
+        # For SECTION_SLICE: both vector_db_tokens and symbol_lang_tokens = content tokens
         artifact_count = 1
-        uncompressed_tokens = _estimate_tokens(artifact_content)
-        compressed_tokens = _estimate_tokens("test_ref")  # Symbol reference
-        total_bytes = len(artifact_content.encode('utf-8'))  # 34 bytes
+        content_without_newline = artifact_content.rstrip('\n')
+        uncompressed_tokens = _estimate_tokens(content_without_newline)
+        compressed_tokens = uncompressed_tokens  # SECTION_SLICE: symbol_lang_tokens = content
+        total_bytes = len(artifact_content.encode('utf-8'))
 
         claim = create_compression_claim(
             bundle_id_input,
@@ -378,8 +406,7 @@ def test_compression_verify_fails_on_metric_mismatch(indexed_repo):
         tmp_path = Path(tmpdir)
 
         run_id = "test_run_verify_fail"
-        job_id = "test_job_verify_fail"
-        create_completed_job(indexed_repo, run_id, "req_verify_fail", "test intent")
+        _, job_id, _ = create_completed_job(indexed_repo, run_id, "req_verify_fail", "test intent")
 
         bundle_dir, receipts_dir, bundle_result = create_bundle_and_receipts(
             indexed_repo, tmp_path, run_id, job_id
@@ -400,8 +427,9 @@ def test_compression_verify_fails_on_metric_mismatch(indexed_repo):
 
         # Flip compressed_tokens to create mismatch
         claim["reported_metrics"]["compressed_tokens"] = 999
-        claim_copy = dict(claim)
-        claim_hash = _sha256(_canonical_json_bytes(claim_copy).decode('utf-8'))
+        # Recompute claim_hash after modification (without the claim_hash field)
+        del claim["claim_hash"]
+        claim_hash = _sha256(_canonical_json_bytes(claim).decode('utf-8'))
         claim["claim_hash"] = claim_hash
 
         claim_path = tmp_path / "claim.json"
@@ -436,8 +464,7 @@ def test_compression_verify_fails_if_not_strictly_verified(indexed_repo):
         tmp_path = Path(tmpdir)
 
         run_id = "test_run_verify_missing"
-        job_id = "test_job_verify_missing"
-        create_completed_job(indexed_repo, run_id, "req_verify_missing", "test intent")
+        _, job_id, _ = create_completed_job(indexed_repo, run_id, "req_verify_missing", "test intent")
 
         bundle_dir, receipts_dir, bundle_result = create_bundle_and_receipts(
             indexed_repo, tmp_path, run_id, job_id
@@ -487,8 +514,7 @@ def test_compression_outputs_deterministic(indexed_repo):
         tmp_path = Path(tmpdir)
 
         run_id = "test_run_deterministic"
-        job_id = "test_job_deterministic"
-        create_completed_job(indexed_repo, run_id, "req_deterministic", "test intent")
+        _, job_id, _ = create_completed_job(indexed_repo, run_id, "req_deterministic", "test intent")
 
         bundle_dir, receipts_dir, bundle_result = create_bundle_and_receipts(
             indexed_repo, tmp_path, run_id, job_id
