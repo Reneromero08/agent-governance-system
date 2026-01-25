@@ -286,6 +286,8 @@ class AutoContextManager:
         self._pointer_set: List[ContextItem] = []
         self._turn_pointers: List[TurnPointer] = []
         self._turn_index: int = 0
+        self._recent_turn_ids: List[str] = []  # Last 5 turns for recency lock
+        self._recency_lock_count: int = 5  # How many recent turns to always include
 
         # Hierarchy support (J.4)
         self._hierarchy_builder: Optional[Any] = None
@@ -513,9 +515,22 @@ class AutoContextManager:
         Returns:
             PrepareContextResult with assembled context
         """
-        # Compute embedding if needed
+        # Detect +rm suffix for "remember more" mode (mechanical trigger)
+        remember_more = False
+        clean_query = query
+        if query.rstrip().endswith("+rm"):
+            remember_more = True
+            clean_query = query.rstrip()[:-3].rstrip()  # Strip +rm and trailing space
+
+        # Build locked item IDs from recent turns (recency lock)
+        locked_item_ids = set()
+        for turn_id in self._recent_turn_ids[-self._recency_lock_count:]:
+            locked_item_ids.add(f"turn_{turn_id}")
+            locked_item_ids.add(f"turn_ptr_{turn_id}")
+
+        # Compute embedding if needed (use clean query without +rm)
         if query_embedding is None and self.embed_fn:
-            query_embedding = self.embed_fn(query)
+            query_embedding = self.embed_fn(clean_query)
         elif query_embedding is None:
             # No embedding function - use random for testing
             query_embedding = np.random.randn(384)
@@ -561,7 +576,9 @@ class AutoContextManager:
             query_embedding=query_embedding,
             all_items=all_items,
             budget_tokens=budget_available,
-            query_text=query,
+            query_text=clean_query,  # Use clean query (without +rm)
+            locked_item_ids=locked_item_ids,  # Recency lock
+            remember_more=remember_more,  # +rm triggers median threshold
         )
 
         # Extract working and pointer sets
@@ -689,6 +706,12 @@ class AutoContextManager:
 
         if turn_id is None:
             turn_id = f"turn_{self._turn_index:04d}"
+
+        # Track recent turns for recency lock (keep last N)
+        self._recent_turn_ids.append(turn_id)
+        if len(self._recent_turn_ids) > self._recency_lock_count * 2:
+            # Prune old entries (keep some buffer)
+            self._recent_turn_ids = self._recent_turn_ids[-self._recency_lock_count * 2:]
 
         # CATALYTIC: Store individual messages with embeddings
         user_msg_id = f"msg_user_{turn_id}"

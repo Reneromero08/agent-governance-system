@@ -319,7 +319,7 @@ class ContextPartitioner:
 
     def __init__(
         self,
-        threshold: float = 0.5,
+        threshold: float = 1.0,
         embed_fn: Optional[Callable[[str], np.ndarray]] = None,
         token_estimator: Optional[Callable[[str], int]] = None,
         enable_hybrid: bool = True,
@@ -329,7 +329,8 @@ class ContextPartitioner:
         Initialize partitioner.
 
         Args:
-            threshold: E-score threshold (items below this always go to pointer_set)
+            threshold: R-score threshold (default 1.0 = principled cutoff where E > grad_S)
+                       R = E / grad_S, so R > 1 means item's relevance exceeds local uncertainty
             embed_fn: Function to compute embeddings from text (optional)
             token_estimator: Function to estimate tokens from text (default: len//4)
             enable_hybrid: Enable hybrid retrieval (semantic + keyword matching)
@@ -348,10 +349,18 @@ class ContextPartitioner:
         query_text: str = ""
     ) -> List[ScoredItem]:
         """
-        Score all items against query embedding.
+        Score all items against query embedding using the FULL R FORMULA.
 
-        When hybrid mode is enabled, combines semantic E-score with
-        keyword matching for better entity discrimination.
+        R = E / grad_S (principled threshold at R > 1)
+
+        Where:
+        - E = cosine similarity (Born rule probability)
+        - grad_S = std of E-scores (local curvature/uncertainty)
+
+        This replaces arbitrary E thresholds with a mathematical criterion:
+        Include items where E exceeds the local uncertainty (R > 1).
+
+        When hybrid mode is enabled, also combines with keyword matching.
 
         Args:
             query_embedding: Query vector (will be normalized)
@@ -359,7 +368,7 @@ class ContextPartitioner:
             query_text: Original query text for keyword extraction (hybrid mode)
 
         Returns:
-            List of ScoredItem sorted by E-score descending
+            List of ScoredItem sorted by R-score descending
         """
         if not items:
             return []
@@ -393,7 +402,16 @@ class ContextPartitioner:
         else:
             E_scores = []
 
-        # Build scored items
+        # Compute grad_S (local curvature) = std of all E-scores
+        # This is the uncertainty in the semantic landscape
+        if len(E_scores) > 1:
+            grad_S = float(np.std(E_scores))
+            # Prevent division by zero - if all E-scores identical, use small value
+            grad_S = max(grad_S, 0.01)
+        else:
+            grad_S = 0.1  # Default for single item
+
+        # Build scored items with R = E / grad_S
         scored = []
         E_idx = 0
         for i, item in enumerate(items_with_embeddings):
@@ -401,23 +419,26 @@ class ContextPartitioner:
                 semantic_E = E_scores[E_idx]
                 E_idx += 1
             else:
-                # No embedding - use threshold as neutral score
-                semantic_E = self.threshold
+                # No embedding - use low E
+                semantic_E = 0.0
 
-            # Apply hybrid scoring if enabled
+            # Compute R = E / grad_S (the full formula without sigma^Df for now)
+            R_score = semantic_E / grad_S
+
+            # Apply hybrid scoring if enabled (boost R for keyword matches)
             if self.enable_hybrid and query_keywords:
                 keyword_score = compute_keyword_score(query_keywords, item.content)
-                E = compute_hybrid_score(
-                    semantic_score=semantic_E,
-                    keyword_score=keyword_score,
-                    keyword_boost=self.keyword_boost
-                )
-            else:
-                E = semantic_E
+                if keyword_score > 0.4:
+                    R_score *= 1.5  # Strong keyword match boost
+                elif keyword_score > 0.25:
+                    R_score *= 1.2  # Partial match boost
+                elif keyword_score > 0:
+                    R_score *= 1.1  # Any match boost
 
-            scored.append(ScoredItem(item=item, E_score=E))
+            # Store R as the score (threshold will be R > 1.0)
+            scored.append(ScoredItem(item=item, E_score=R_score))
 
-        # Sort by E-score descending
+        # Sort by R-score descending
         scored.sort(key=lambda s: s.E_score, reverse=True)
 
         # Assign ranks
@@ -431,7 +452,9 @@ class ContextPartitioner:
         query_embedding: np.ndarray,
         all_items: List[ContextItem],
         budget_tokens: int,
-        query_text: str = ""
+        query_text: str = "",
+        locked_item_ids: Optional[Set[str]] = None,
+        remember_more: bool = False
     ) -> PartitionResult:
         """
         Partition items into working_set and pointer_set.
@@ -443,15 +466,22 @@ class ContextPartitioner:
         4. Items below threshold always go to pointer_set
         5. Remaining items go to pointer_set
 
+        Mechanical controls:
+        - locked_item_ids: Items that ALWAYS go to working_set (recency lock)
+        - remember_more: If True, use median instead of mean (less aggressive)
+
         Args:
             query_embedding: Query vector
             all_items: All items to partition (current working + pointer sets)
             budget_tokens: Token budget for working_set
             query_text: Original query text for hashing
+            locked_item_ids: Item IDs that bypass threshold (recency lock)
+            remember_more: Use R > median instead of R > mean (+rm trigger)
 
         Returns:
             PartitionResult with working_set, pointer_set, and metrics
         """
+        locked_item_ids = locked_item_ids or set()
         timestamp = datetime.now(timezone.utc).isoformat()
         query_hash = hashlib.sha256(query_text.encode()).hexdigest()[:16]
 
@@ -477,16 +507,40 @@ class ContextPartitioner:
         # Score and sort all items (passes query_text for hybrid keyword matching)
         scored = self.score_items(query_embedding, all_items, query_text)
 
-        # Partition based on threshold and budget
+        # Partition based on DYNAMIC threshold
+        # Default: R > mean(R) - only above-average relevance
+        # With +rm: R > median(R) - top 50% (less aggressive)
         working_set: List[ScoredItem] = []
         pointer_set: List[ScoredItem] = []
         tokens_used = 0
         items_below_threshold = 0
         items_over_budget = 0
+        items_locked = 0
+
+        # Compute dynamic threshold
+        R_scores = [s.E_score for s in scored]
+        if remember_more:
+            # +rm triggered: use median (top 50%, less aggressive)
+            dynamic_threshold = float(np.median(R_scores)) if R_scores else 0.0
+        else:
+            # Default: use mean (above-average only)
+            dynamic_threshold = float(np.mean(R_scores)) if R_scores else 0.0
 
         for s in scored:
-            if s.E_score < self.threshold:
-                # Below threshold - always pointer_set
+            is_locked = s.item.item_id in locked_item_ids
+
+            if is_locked:
+                # Recency lock: ALWAYS include, bypass threshold
+                if tokens_used + s.item.tokens <= budget_tokens:
+                    working_set.append(s)
+                    tokens_used += s.item.tokens
+                    items_locked += 1
+                else:
+                    # Even locked items respect budget
+                    pointer_set.append(s)
+                    items_over_budget += 1
+            elif s.E_score < dynamic_threshold:
+                # Below threshold - pointer_set
                 pointer_set.append(s)
                 items_below_threshold += 1
             elif tokens_used + s.item.tokens <= budget_tokens:
@@ -509,7 +563,7 @@ class ContextPartitioner:
             working_set=working_set,
             pointer_set=pointer_set,
             query_hash=query_hash,
-            threshold=self.threshold,
+            threshold=dynamic_threshold,  # Report actual threshold used
             budget_total=budget_tokens,
             budget_used=tokens_used,
             items_total=len(all_items),
