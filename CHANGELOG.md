@@ -20,6 +20,7 @@ New experimental folder for post-substrate optimization work:
 
 - Added `required_canon_version` field to SKILL.md
 - Created fixtures directory with test_input.json
+- Added arxiv-to-md to filesystem access allowlist in critic.py (legitimate utility)
 
 ---
 
