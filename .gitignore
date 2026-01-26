@@ -128,6 +128,9 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q4/things_eeg_data/
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/datatrail/
 THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
 
+# Q37 histwords data (large .npy files exceed GitHub 100MB limit)
+THOUGHT/LAB/FORMULA/experiments/open_questions/q37/data/histwords_data/
+
 # Feral Resident papers (raw PDFs and converted markdown too large for git)
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/raw/
 THOUGHT/LAB/FERAL_RESIDENT/research/papers/markdown/
