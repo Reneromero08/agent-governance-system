@@ -1,0 +1,94 @@
+{
+  "protein_folding": {
+    "status": "PASS",
+    "pearson_r": 0.7259505041043101,
+    "n_proteins": 5,
+    "results": [
+      {
+        "uniprot_id": "P00533",
+        "R_sequence": 0.931310048142193,
+        "mean_plddt": 76.28925894378291,
+        "length": 1210,
+        "disorder_frac": 0.5148760330578512
+      },
+      {
+        "uniprot_id": "P04637",
+        "R_sequence": 0.9028458296804186,
+        "mean_plddt": 75.83029738562097,
+        "length": 393,
+        "disorder_frac": 0.5877862595419847
+      },
+      {
+        "uniprot_id": "P38398",
+        "R_sequence": 0.8530949064503419,
+        "mean_plddt": 41.99108522336792,
+        "length": 1863,
+        "disorder_frac": 0.6017176596886742
+      },
+      {
+        "uniprot_id": "P42574",
+        "R_sequence": 0.9083843092767715,
+        "mean_plddt": 86.64343721770535,
+        "length": 277,
+        "disorder_frac": 0.51985559566787
+      },
+      {
+        "uniprot_id": "P00519",
+        "R_sequence": 0.9272379600015678,
+        "mean_plddt": 64.67856184195335,
+        "length": 1130,
+        "disorder_frac": 0.5743362831858407
+      }
+    ],
+    "verdict": "PASS: R from sequence predicts structure quality",
+    "caveat": "Small sample size - pilot test only"
+  },
+  "8e_conservation": {
+    "status": "FAIL",
+    "mean_Df_x_alpha": 4.394008076514679,
+    "std": 0.299004579943325,
+    "cv": 0.06804825451766011,
+    "target_8e": 21.746,
+    "deviation_percent": 79.79394796047697,
+    "n_proteins": 5,
+    "results": [
+      {
+        "uniprot_id": "P00519",
+        "Df": 1.0293635217734498,
+        "alpha": 4.1515468404520135,
+        "Df_x_alpha": 4.273450876495123,
+        "n_eigenvalues": 5
+      },
+      {
+        "uniprot_id": "P00533",
+        "Df": 1.040388038492345,
+        "alpha": 4.285005789662745,
+        "Df_x_alpha": 4.458068768435565,
+        "n_eigenvalues": 5
+      },
+      {
+        "uniprot_id": "P04637",
+        "Df": 1.0490164192280178,
+        "alpha": 3.9956409694314727,
+        "Df_x_alpha": 4.191492982273769,
+        "n_eigenvalues": 5
+      },
+      {
+        "uniprot_id": "P38398",
+        "Df": 1.0327153153847808,
+        "alpha": 3.9729285807427184,
+        "Df_x_alpha": 4.102904192262926,
+        "n_eigenvalues": 5
+      },
+      {
+        "uniprot_id": "P42574",
+        "Df": 1.0537139045469002,
+        "alpha": 4.692092931270562,
+        "Df_x_alpha": 4.944123563106014,
+        "n_eigenvalues": 5
+      }
+    ],
+    "verdict": "FAIL: No evidence for 8e at molecular scale",
+    "caveat": "Small sample, pLDDT-based proxy for structure"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "timestamp": "2026-01-25T21:58:29.030077",
+  "n_genes": 2500,
+  "theoretical_8e": 21.74625462767236,
+  "R_statistics": {
+    "mean": 11.68936368,
+    "std": 13.191907002715903,
+    "min": 0.3325,
+    "max": 53.3574,
+    "median": 5.74905
+  },
+  "methods": {
+    "direct_R": {
+      "Df": 1099.5772367305078,
+      "alpha": 1.0712483603920604,
+      "Df_x_alpha": 1177.920311971989,
+      "deviation_from_8e": 53.16658326409328,
+      "deviation_percent": 5316.658326409329
+    },
+    "feature_covariance": {
+      "matrix_shape": [
+        6,
+        6
+      ],
+      "top_eigenvalues": [
+        3.754339007403963,
+        1.858110987550088,
+        0.27416887263375395,
+        0.11086210376764138,
+        0.004919988477224236,
+        5.514829316948587e-10
+      ],
+      "Df": 2.043015030825712,
+      "alpha": 9.0054845221041,
+      "Df_x_alpha": 18.398340238526977,
+      "deviation_from_8e": 0.15395360932107932,
+      "deviation_percent": 15.395360932107932
+    },
+    "R_embedding": {
+      "embedding_dims": 50,
+      "n_samples": 2500,
+      "top_eigenvalues": [
+        2.9051008891890437,
+        1.9096609107750806,
+        1.374418572900282,
+        1.1841525897153369,
+        1.1554947117990242,
+        1.06710699637042,
+        0.9880801641172436,
+        0.908816776388144,
+        0.7791154072140472,
+        0.6690591928876775
+      ],
+      "Df": 23.419693073232697,
+      "alpha": 0.9018624105564809,
+      "Df_x_alpha": 21.121340849518557,
+      "deviation_from_8e": 0.02873661643594451,
+      "deviation_percent": 2.873661643594451
+    },
+    "gene_correlation": {
+      "n_sampled": 500,
+      "top_eigenvalues": [
+        195.63637700306475,
+        95.92497886697049,
+        65.719163713067,
+        34.49659886852369,
+        21.213892503169745,
+        14.258449360152323,
+        10.629056343042699,
+        7.695998318235617,
+        6.055750083156082,
+        4.557962117756025
+      ],
+      "Df": 4.635347815817963,
+      "alpha": 2.2750237915660434,
+      "Df_x_alpha": 10.54552656316956,
+      "deviation_from_8e": 0.5150646976353227,
+      "deviation_percent": 51.50646976353227
+    }
+  },
+  "summary": {
+    "average_Df_x_alpha": 306.99637990580095,
+    "average_deviation_from_8e": 13.466084546871407,
+    "average_deviation_percent": 1346.6084546871407,
+    "8e_holds": false,
+    "interpretation": "STRONG DEVIATION: Raw biological data shows Df x alpha significantly different from 8e. This supports the hypothesis that 8e conservation emerges from trained representations, not raw biological measurements. The deviation suggests biological R values lack the spectral structure that produces 8e in neural embeddings."
+  }
+}

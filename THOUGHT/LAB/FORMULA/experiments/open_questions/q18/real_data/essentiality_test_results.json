@@ -1,0 +1,336 @@
+{
+  "analysis": "R vs Gene Essentiality",
+  "data_sources": {
+    "essentiality": "DepMap CRISPR gene effect (17,916 genes)",
+    "expression": "GEO Series Matrix (GPL570/HG-U133 Plus 2.0)",
+    "probe_mapping": "NCBI GEO GPL570 annotation (45,118 probes)"
+  },
+  "sample_sizes": {
+    "depmap_genes": 17916,
+    "expression_probes": 2500,
+    "probe_annotations": 45118,
+    "mapped_genes": 393,
+    "matched_genes": 349,
+    "essential_matched": 13,
+    "nonessential_matched": 336
+  },
+  "statistics": {
+    "pearson_r": 0.0413,
+    "spearman_r": -0.0213,
+    "auc": 0.5904,
+    "mean_r_essential": 12.9308,
+    "mean_r_nonessential": 15.9367,
+    "r_difference": -3.0059
+  },
+  "interpretation": {
+    "correlation": "WEAK: No clear R-essentiality correlation",
+    "auc": "SUPPORTS: R has predictive power for essentiality",
+    "conclusion": "INCONCLUSIVE: Mixed or weak evidence"
+  },
+  "validation": {
+    "is_circular": false,
+    "reason": "R from expression consistency, essentiality from CRISPR knockouts - independent measurements"
+  },
+  "matched_genes_sample": [
+    {
+      "gene": "PANX2",
+      "R": 48.9671,
+      "mean_effect": 0.056,
+      "essential": false
+    },
+    {
+      "gene": "SLC34A3",
+      "R": 44.8479,
+      "mean_effect": -0.0514,
+      "essential": false
+    },
+    {
+      "gene": "NKX6-3",
+      "R": 40.5759,
+      "mean_effect": 0.0174,
+      "essential": false
+    },
+    {
+      "gene": "RAX2",
+      "R": 39.9502,
+      "mean_effect": -0.0233,
+      "essential": false
+    },
+    {
+      "gene": "GAS2L2",
+      "R": 39.8978,
+      "mean_effect": -0.2919,
+      "essential": false
+    },
+    {
+      "gene": "THRA",
+      "R": 38.5997,
+      "mean_effect": -0.0764,
+      "essential": false
+    },
+    {
+      "gene": "ACACB",
+      "R": 38.2959,
+      "mean_effect": -0.1124,
+      "essential": false
+    },
+    {
+      "gene": "KLC3",
+      "R": 37.8621,
+      "mean_effect": -0.0288,
+      "essential": false
+    },
+    {
+      "gene": "TSSK3",
+      "R": 36.5966,
+      "mean_effect": -0.2195,
+      "essential": false
+    },
+    {
+      "gene": "EXOC3L2",
+      "R": 35.1617,
+      "mean_effect": -0.0073,
+      "essential": false
+    },
+    {
+      "gene": "ART5",
+      "R": 34.8662,
+      "mean_effect": 0.0632,
+      "essential": false
+    },
+    {
+      "gene": "ABHD11",
+      "R": 34.4089,
+      "mean_effect": -0.2415,
+      "essential": false
+    },
+    {
+      "gene": "SPRR4",
+      "R": 34.0977,
+      "mean_effect": 0.0362,
+      "essential": false
+    },
+    {
+      "gene": "SLC16A11",
+      "R": 33.6539,
+      "mean_effect": -0.0874,
+      "essential": false
+    },
+    {
+      "gene": "CIB3",
+      "R": 33.0665,
+      "mean_effect": -0.0442,
+      "essential": false
+    },
+    {
+      "gene": "CAMKK1",
+      "R": 32.7683,
+      "mean_effect": 0.0231,
+      "essential": false
+    },
+    {
+      "gene": "CACNG5",
+      "R": 32.7018,
+      "mean_effect": -0.0706,
+      "essential": false
+    },
+    {
+      "gene": "B3GNT6",
+      "R": 32.6881,
+      "mean_effect": -0.0871,
+      "essential": false
+    },
+    {
+      "gene": "RAI1",
+      "R": 32.108,
+      "mean_effect": -0.063,
+      "essential": false
+    },
+    {
+      "gene": "WFIKKN1",
+      "R": 30.8252,
+      "mean_effect": 0.0286,
+      "essential": false
+    },
+    {
+      "gene": "TNFRSF13C",
+      "R": 30.6049,
+      "mean_effect": 0.0183,
+      "essential": false
+    },
+    {
+      "gene": "CYP2A6",
+      "R": 30.5775,
+      "mean_effect": 0.0104,
+      "essential": false
+    },
+    {
+      "gene": "TMEM190",
+      "R": 30.502,
+      "mean_effect": 0.0308,
+      "essential": false
+    },
+    {
+      "gene": "GPBAR1",
+      "R": 30.3696,
+      "mean_effect": -0.0877,
+      "essential": false
+    },
+    {
+      "gene": "CLDN19",
+      "R": 30.3296,
+      "mean_effect": -0.2317,
+      "essential": false
+    },
+    {
+      "gene": "TAGAP",
+      "R": 30.3256,
+      "mean_effect": 0.0635,
+      "essential": false
+    },
+    {
+      "gene": "CACNG6",
+      "R": 29.7855,
+      "mean_effect": -0.0795,
+      "essential": false
+    },
+    {
+      "gene": "CAMK2N2",
+      "R": 29.4719,
+      "mean_effect": -0.0023,
+      "essential": false
+    },
+    {
+      "gene": "IDI2",
+      "R": 29.2435,
+      "mean_effect": 0.0217,
+      "essential": false
+    },
+    {
+      "gene": "CBARP",
+      "R": 28.9987,
+      "mean_effect": -0.0063,
+      "essential": false
+    },
+    {
+      "gene": "TTLL10",
+      "R": 28.9317,
+      "mean_effect": 0.1021,
+      "essential": false
+    },
+    {
+      "gene": "MFSD6L",
+      "R": 28.5222,
+      "mean_effect": 0.018,
+      "essential": false
+    },
+    {
+      "gene": "CCDC27",
+      "R": 28.3796,
+      "mean_effect": 0.0414,
+      "essential": false
+    },
+    {
+      "gene": "DNAJC5G",
+      "R": 28.1502,
+      "mean_effect": 0.0148,
+      "essential": false
+    },
+    {
+      "gene": "GAMT",
+      "R": 27.0114,
+      "mean_effect": -0.0677,
+      "essential": false
+    },
+    {
+      "gene": "CNBD2",
+      "R": 26.8453,
+      "mean_effect": -0.0597,
+      "essential": false
+    },
+    {
+      "gene": "TRPV3",
+      "R": 26.7208,
+      "mean_effect": 0.1411,
+      "essential": false
+    },
+    {
+      "gene": "RHOXF1",
+      "R": 26.6917,
+      "mean_effect": 0.0082,
+      "essential": false
+    },
+    {
+      "gene": "LMNTD1",
+      "R": 26.1616,
+      "mean_effect": -0.0089,
+      "essential": false
+    },
+    {
+      "gene": "SIGLEC11",
+      "R": 26.1078,
+      "mean_effect": -0.3543,
+      "essential": false
+    },
+    {
+      "gene": "WFDC11",
+      "R": 25.8937,
+      "mean_effect": -0.015,
+      "essential": false
+    },
+    {
+      "gene": "PRR22",
+      "R": 25.6114,
+      "mean_effect": -0.1438,
+      "essential": false
+    },
+    {
+      "gene": "UCN3",
+      "R": 25.4462,
+      "mean_effect": 0.0798,
+      "essential": false
+    },
+    {
+      "gene": "CD300LG",
+      "R": 25.4348,
+      "mean_effect": -0.2097,
+      "essential": false
+    },
+    {
+      "gene": "NEUROD2",
+      "R": 25.4019,
+      "mean_effect": -0.123,
+      "essential": false
+    },
+    {
+      "gene": "TBATA",
+      "R": 25.18,
+      "mean_effect": 0.0124,
+      "essential": false
+    },
+    {
+      "gene": "RTP3",
+      "R": 25.0312,
+      "mean_effect": 0.0079,
+      "essential": false
+    },
+    {
+      "gene": "TXNDC2",
+      "R": 25.0192,
+      "mean_effect": 0.1862,
+      "essential": false
+    },
+    {
+      "gene": "CAPN13",
+      "R": 24.9473,
+      "mean_effect": -0.0368,
+      "essential": false
+    },
+    {
+      "gene": "SMCR8",
+      "R": 24.839,
+      "mean_effect": -0.1005,
+      "essential": false
+    }
+  ]
+}

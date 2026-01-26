@@ -1,0 +1,517 @@
+{
+  "timestamp": "2026-01-25T21:47:52.232429",
+  "test_type": "extended_protein_folding",
+  "description": "R = E/sigma predicting AlphaFold pLDDT",
+  "data_source": "AlphaFold DB (real structures)",
+  "target_proteins": 50,
+  "downloaded_proteins": 47,
+  "proteins_with_data": 47,
+  "download_results": {
+    "P00533": true,
+    "P00519": true,
+    "P04049": true,
+    "P06400": true,
+    "P08069": true,
+    "P10275": true,
+    "P11802": true,
+    "P12931": true,
+    "P15056": true,
+    "P17252": true,
+    "P27361": true,
+    "P31749": true,
+    "P45983": true,
+    "P49841": true,
+    "P53779": true,
+    "P04637": true,
+    "P16220": true,
+    "P19838": true,
+    "P35222": true,
+    "P40763": true,
+    "P42345": true,
+    "P48431": true,
+    "P84022": true,
+    "P38398": true,
+    "P42336": true,
+    "P51587": false,
+    "P60484": true,
+    "P46527": true,
+    "P38936": true,
+    "P42574": true,
+    "P55210": true,
+    "P35354": true,
+    "P01112": true,
+    "P21359": false,
+    "P22681": true,
+    "P23458": true,
+    "P24385": true,
+    "P29350": true,
+    "P30304": true,
+    "P35968": true,
+    "P52564": true,
+    "P61073": true,
+    "P62258": true,
+    "P63092": true,
+    "P67870": true,
+    "P68400": true,
+    "P78527": false,
+    "P98170": true,
+    "Q00987": true,
+    "Q02156": true
+  },
+  "test_results": {
+    "status": "FAIL",
+    "n_proteins": 47,
+    "pearson_r": 0.1433969123479223,
+    "spearman_r": 0.057354301572617956,
+    "spearman_p": 0.7017725645785244,
+    "r_squared": 0.020562674470917974,
+    "regression_slope": 39.769494937095985,
+    "regression_intercept": 42.23709408825868,
+    "mean_R": 0.9193069309417369,
+    "std_R": 0.04004237416450431,
+    "mean_plddt": 78.79746642398338,
+    "std_plddt": 11.105294880693014,
+    "verdict": "WEAK: Positive but weak relationship",
+    "pilot_comparison": {
+      "pilot_r": 0.726,
+      "pilot_n": 5,
+      "difference": -0.5826030876520777
+    },
+    "protein_results": [
+      {
+        "uniprot_id": "P00519",
+        "R_sequence": 0.9272379600015678,
+        "mean_plddt": 64.67856184195301,
+        "std_plddt": 28.381087220874917,
+        "length": 1130,
+        "disorder_frac": 0.5743362831858407,
+        "complexity": 0.9438654868313163
+      },
+      {
+        "uniprot_id": "P00533",
+        "R_sequence": 0.931310048142193,
+        "mean_plddt": 76.28925894378195,
+        "std_plddt": 24.928923632168754,
+        "length": 1210,
+        "disorder_frac": 0.5148760330578512,
+        "complexity": 0.9739585612140649
+      },
+      {
+        "uniprot_id": "P01112",
+        "R_sequence": 0.9063464870245797,
+        "mean_plddt": 92.49536912751678,
+        "std_plddt": 12.357972381172084,
+        "length": 189,
+        "disorder_frac": 0.5185185185185185,
+        "complexity": 0.9566988214656469
+      },
+      {
+        "uniprot_id": "P04049",
+        "R_sequence": 0.9212130793788461,
+        "mean_plddt": 68.23511890838208,
+        "std_plddt": 25.712267757084007,
+        "length": 648,
+        "disorder_frac": 0.5154320987654321,
+        "complexity": 0.9726433472896796
+      },
+      {
+        "uniprot_id": "P04637",
+        "R_sequence": 0.9028458296804186,
+        "mean_plddt": 75.83029738562092,
+        "std_plddt": 24.385055873305717,
+        "length": 393,
+        "disorder_frac": 0.5877862595419847,
+        "complexity": 0.95446788780955
+      },
+      {
+        "uniprot_id": "P06400",
+        "R_sequence": 0.9038472795702676,
+        "mean_plddt": 77.032,
+        "std_plddt": 24.015856207101194,
+        "length": 928,
+        "disorder_frac": 0.5258620689655172,
+        "complexity": 0.9569500925075969
+      },
+      {
+        "uniprot_id": "P08069",
+        "R_sequence": 0.9316797911966627,
+        "mean_plddt": 78.54479834254144,
+        "std_plddt": 21.253316675538326,
+        "length": 1367,
+        "disorder_frac": 0.5215801024140454,
+        "complexity": 0.9729944899657164
+      },
+      {
+        "uniprot_id": "P10275",
+        "R_sequence": 0.9674692208451313,
+        "mean_plddt": 58.85288301235987,
+        "std_plddt": 27.930861358639184,
+        "length": 920,
+        "disorder_frac": 0.5597826086956522,
+        "complexity": 0.9482310099614083
+      },
+      {
+        "uniprot_id": "P11802",
+        "R_sequence": 0.9648582425110642,
+        "mean_plddt": 87.55621632996633,
+        "std_plddt": 15.734546850735248,
+        "length": 303,
+        "disorder_frac": 0.49174917491749176,
+        "complexity": 0.951069363030105
+      },
+      {
+        "uniprot_id": "P12931",
+        "R_sequence": 0.9611116896512678,
+        "mean_plddt": 84.5884100616991,
+        "std_plddt": 20.834611204679806,
+        "length": 536,
+        "disorder_frac": 0.5205223880597015,
+        "complexity": 0.9623632362520776
+      },
+      {
+        "uniprot_id": "P15056",
+        "R_sequence": 0.9270251924950214,
+        "mean_plddt": 67.86922001347709,
+        "std_plddt": 26.473360950999226,
+        "length": 766,
+        "disorder_frac": 0.54177545691906,
+        "complexity": 0.9632655609105863
+      },
+      {
+        "uniprot_id": "P16220",
+        "R_sequence": 0.9548180768864579,
+        "mean_plddt": 62.37573230268511,
+        "std_plddt": 20.66437644049472,
+        "length": 327,
+        "disorder_frac": 0.5259938837920489,
+        "complexity": 0.9067206676426336
+      },
+      {
+        "uniprot_id": "P17252",
+        "R_sequence": 0.8885028231436924,
+        "mean_plddt": 86.90157611718895,
+        "std_plddt": 17.133586101745188,
+        "length": 672,
+        "disorder_frac": 0.5282738095238095,
+        "complexity": 0.9748218899222167
+      },
+      {
+        "uniprot_id": "P19838",
+        "R_sequence": 0.9504614743443961,
+        "mean_plddt": 73.84245374746793,
+        "std_plddt": 26.164404306418113,
+        "length": 968,
+        "disorder_frac": 0.518595041322314,
+        "complexity": 0.9504437877203143
+      },
+      {
+        "uniprot_id": "P22681",
+        "R_sequence": 0.9240885040998814,
+        "mean_plddt": 64.26511152416356,
+        "std_plddt": 27.955993023829183,
+        "length": 906,
+        "disorder_frac": 0.5695364238410596,
+        "complexity": 0.9588506179320184
+      },
+      {
+        "uniprot_id": "P23458",
+        "R_sequence": 0.8886889554795098,
+        "mean_plddt": 85.68230999465527,
+        "std_plddt": 16.61719866197572,
+        "length": 1154,
+        "disorder_frac": 0.5225303292894281,
+        "complexity": 0.9722128985528298
+      },
+      {
+        "uniprot_id": "P24385",
+        "R_sequence": 0.9575009243823424,
+        "mean_plddt": 87.30803062526584,
+        "std_plddt": 17.174815821531485,
+        "length": 295,
+        "disorder_frac": 0.4745762711864407,
+        "complexity": 0.9413406005450006
+      },
+      {
+        "uniprot_id": "P27361",
+        "R_sequence": 0.9410539231517803,
+        "mean_plddt": 89.09128129117259,
+        "std_plddt": 16.32959203994293,
+        "length": 379,
+        "disorder_frac": 0.49076517150395776,
+        "complexity": 0.965142355014876
+      },
+      {
+        "uniprot_id": "P29350",
+        "R_sequence": 0.8774763422193282,
+        "mean_plddt": 86.5352195839462,
+        "std_plddt": 18.35752971382181,
+        "length": 595,
+        "disorder_frac": 0.5529411764705883,
+        "complexity": 0.9682371766909995
+      },
+      {
+        "uniprot_id": "P30304",
+        "R_sequence": 0.8641499851299271,
+        "mean_plddt": 63.93368789194403,
+        "std_plddt": 24.71715773742057,
+        "length": 524,
+        "disorder_frac": 0.5954198473282443,
+        "complexity": 0.9509571128217504
+      },
+      {
+        "uniprot_id": "P31749",
+        "R_sequence": 0.9092679475465718,
+        "mean_plddt": 83.62139831589691,
+        "std_plddt": 18.13934546013669,
+        "length": 480,
+        "disorder_frac": 0.5166666666666667,
+        "complexity": 0.9671857426295315
+      },
+      {
+        "uniprot_id": "P35222",
+        "R_sequence": 0.9927553781012619,
+        "mean_plddt": 81.02417501670007,
+        "std_plddt": 25.836418840746088,
+        "length": 781,
+        "disorder_frac": 0.471190781049936,
+        "complexity": 0.9514747036894462
+      },
+      {
+        "uniprot_id": "P35354",
+        "R_sequence": 0.9499530254735461,
+        "mean_plddt": 93.3688838643371,
+        "std_plddt": 14.788419314624395,
+        "length": 604,
+        "disorder_frac": 0.48841059602649006,
+        "complexity": 0.9762470522848611
+      },
+      {
+        "uniprot_id": "P35968",
+        "R_sequence": 0.9413476459150191,
+        "mean_plddt": 71.67323874847318,
+        "std_plddt": 23.63485761399743,
+        "length": 1356,
+        "disorder_frac": 0.5088495575221239,
+        "complexity": 0.9650899930157865
+      },
+      {
+        "uniprot_id": "P38398",
+        "R_sequence": 0.8530949064503419,
+        "mean_plddt": 41.9910852233677,
+        "std_plddt": 23.658762453022444,
+        "length": 1863,
+        "disorder_frac": 0.6017176596886742,
+        "complexity": 0.945110653618049
+      },
+      {
+        "uniprot_id": "P38936",
+        "R_sequence": 0.8427921326718828,
+        "mean_plddt": 70.16490551181101,
+        "std_plddt": 20.09263757390033,
+        "length": 164,
+        "disorder_frac": 0.6341463414634146,
+        "complexity": 0.9209962555122432
+      },
+      {
+        "uniprot_id": "P40763",
+        "R_sequence": 0.9211837691403242,
+        "mean_plddt": 85.8010902620511,
+        "std_plddt": 18.32486179734748,
+        "length": 770,
+        "disorder_frac": 0.512987012987013,
+        "complexity": 0.9686791220225223
+      },
+      {
+        "uniprot_id": "P42336",
+        "R_sequence": 0.9133030528037818,
+        "mean_plddt": 92.49866085760146,
+        "std_plddt": 10.501218764827122,
+        "length": 1068,
+        "disorder_frac": 0.4934456928838951,
+        "complexity": 0.9749200019284611
+      },
+      {
+        "uniprot_id": "P42345",
+        "R_sequence": 0.9646864067823882,
+        "mean_plddt": 78.56789273919257,
+        "std_plddt": 15.897513748172159,
+        "length": 2549,
+        "disorder_frac": 0.468418987838368,
+        "complexity": 0.9639010759454676
+      },
+      {
+        "uniprot_id": "P42574",
+        "R_sequence": 0.9083843092767715,
+        "mean_plddt": 86.64343721770551,
+        "std_plddt": 22.705010127466025,
+        "length": 277,
+        "disorder_frac": 0.51985559566787,
+        "complexity": 0.9634658491697409
+      },
+      {
+        "uniprot_id": "P45983",
+        "R_sequence": 0.9316789261999082,
+        "mean_plddt": 83.74776070901034,
+        "std_plddt": 20.97719585093397,
+        "length": 427,
+        "disorder_frac": 0.5081967213114754,
+        "complexity": 0.9717976642107617
+      },
+      {
+        "uniprot_id": "P46527",
+        "R_sequence": 0.8161826039667893,
+        "mean_plddt": 71.07769528728211,
+        "std_plddt": 19.913927572033757,
+        "length": 198,
+        "disorder_frac": 0.6666666666666666,
+        "complexity": 0.939611923442359
+      },
+      {
+        "uniprot_id": "P48431",
+        "R_sequence": 0.9951905550950236,
+        "mean_plddt": 61.906247388215625,
+        "std_plddt": 22.52562001737982,
+        "length": 317,
+        "disorder_frac": 0.583596214511041,
+        "complexity": 0.930275222962945
+      },
+      {
+        "uniprot_id": "P49841",
+        "R_sequence": 0.95071791840389,
+        "mean_plddt": 89.10916464155528,
+        "std_plddt": 18.290957288523988,
+        "length": 420,
+        "disorder_frac": 0.5023809523809524,
+        "complexity": 0.9587597104970292
+      },
+      {
+        "uniprot_id": "P52564",
+        "R_sequence": 0.9093782194235345,
+        "mean_plddt": 79.57736501901141,
+        "std_plddt": 21.09988573338297,
+        "length": 334,
+        "disorder_frac": 0.5299401197604791,
+        "complexity": 0.9626058426507786
+      },
+      {
+        "uniprot_id": "P53779",
+        "R_sequence": 0.938434211782811,
+        "mean_plddt": 80.50254338394794,
+        "std_plddt": 24.292876741890982,
+        "length": 464,
+        "disorder_frac": 0.5021551724137931,
+        "complexity": 0.9712701943035162
+      },
+      {
+        "uniprot_id": "P55210",
+        "R_sequence": 0.8818948607123555,
+        "mean_plddt": 82.05285476487724,
+        "std_plddt": 24.230141758316137,
+        "length": 303,
+        "disorder_frac": 0.5346534653465347,
+        "complexity": 0.9699533423860937
+      },
+      {
+        "uniprot_id": "P60484",
+        "R_sequence": 0.8780110915348339,
+        "mean_plddt": 83.75789046042732,
+        "std_plddt": 22.939687042823152,
+        "length": 403,
+        "disorder_frac": 0.5260545905707196,
+        "complexity": 0.9700553602996789
+      },
+      {
+        "uniprot_id": "P61073",
+        "R_sequence": 1.0002068938034736,
+        "mean_plddt": 82.83611190306486,
+        "std_plddt": 18.802437385416926,
+        "length": 352,
+        "disorder_frac": 0.4005681818181818,
+        "complexity": 0.9527653691684759
+      },
+      {
+        "uniprot_id": "P62258",
+        "R_sequence": 0.9205361685315406,
+        "mean_plddt": 92.90457660303474,
+        "std_plddt": 12.685146858114196,
+        "length": 255,
+        "disorder_frac": 0.5176470588235295,
+        "complexity": 0.9375148239046879
+      },
+      {
+        "uniprot_id": "P63092",
+        "R_sequence": 0.8564656395198916,
+        "mean_plddt": 91.76397013067829,
+        "std_plddt": 11.414497617600468,
+        "length": 394,
+        "disorder_frac": 0.5355329949238579,
+        "complexity": 0.9659547237097024
+      },
+      {
+        "uniprot_id": "P67870",
+        "R_sequence": 0.9443676427837346,
+        "mean_plddt": 93.6995605022831,
+        "std_plddt": 10.297397822688696,
+        "length": 215,
+        "disorder_frac": 0.5069767441860465,
+        "complexity": 0.9777645777399193
+      },
+      {
+        "uniprot_id": "P68400",
+        "R_sequence": 0.9187487061716728,
+        "mean_plddt": 90.78435260842238,
+        "std_plddt": 17.84620599602792,
+        "length": 391,
+        "disorder_frac": 0.5063938618925832,
+        "complexity": 0.9686724159142537
+      },
+      {
+        "uniprot_id": "P84022",
+        "R_sequence": 0.9268390850713016,
+        "mean_plddt": 84.21277975133215,
+        "std_plddt": 20.885840337013622,
+        "length": 425,
+        "disorder_frac": 0.5223529411764706,
+        "complexity": 0.9770499996742505
+      },
+      {
+        "uniprot_id": "P98170",
+        "R_sequence": 0.9111738210654804,
+        "mean_plddt": 74.59591708542713,
+        "std_plddt": 22.490328956487378,
+        "length": 497,
+        "disorder_frac": 0.5251509054325956,
+        "complexity": 0.980807360735607
+      },
+      {
+        "uniprot_id": "Q00987",
+        "R_sequence": 0.852564962624133,
+        "mean_plddt": 63.23751749157813,
+        "std_plddt": 23.902370759264393,
+        "length": 491,
+        "disorder_frac": 0.6089613034623218,
+        "complexity": 0.9425254545855153
+      },
+      {
+        "uniprot_id": "Q02156",
+        "R_sequence": 0.8865800440750414,
+        "mean_plddt": 80.45230939414569,
+        "std_plddt": 20.451937672366828,
+        "length": 737,
+        "disorder_frac": 0.5237449118046132,
+        "complexity": 0.9738234588988764
+      }
+    ]
+  },
+  "summary": {
+    "pearson_r": 0.1433969123479223,
+    "spearman_r": 0.057354301572617956,
+    "r_squared": 0.020562674470917974,
+    "verdict": "WEAK: Positive but weak relationship",
+    "comparison_to_pilot": {
+      "pilot_r": 0.726,
+      "pilot_n": 5,
+      "difference": -0.5826030876520777
+    }
+  }
+}

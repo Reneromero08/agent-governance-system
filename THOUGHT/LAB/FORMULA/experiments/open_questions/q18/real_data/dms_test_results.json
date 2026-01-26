@@ -1,0 +1,59 @@
+{
+  "BRCA1": {
+    "protein": "BRCA1",
+    "full_name": "BRCA1 RING domain",
+    "assay": "E3 ubiquitin ligase activity (phage autoubiquitination)",
+    "source": "MaveDB",
+    "publication": "Starita et al. 2015 (PMID: 25823446)",
+    "n_mutations": 3857,
+    "spearman_rho": 0.126754874393134,
+    "spearman_pvalue": 2.7575148938436625e-15,
+    "pearson_r": 0.28164818465878605,
+    "pearson_pvalue": 2.9665368530701055e-71,
+    "delta_r_mean": -0.8608630517236674,
+    "delta_r_std": 1.832427596838508,
+    "fitness_mean": -0.8050613964624659,
+    "fitness_std": 1.2258513792100456,
+    "interpretation": "POSITIVE: delta-R positively correlates with fitness (expected direction)"
+  },
+  "UBE2I": {
+    "protein": "UBE2I",
+    "full_name": "UBE2I (SUMO E2 conjugase)",
+    "assay": "Yeast complementation (functional fitness)",
+    "source": "MaveDB",
+    "publication": "Weile et al. 2017 (PMID: 29269382)",
+    "n_mutations": 3021,
+    "spearman_rho": 0.12276058630745837,
+    "spearman_pvalue": 1.2860886692286585e-11,
+    "pearson_r": 0.11573650162164588,
+    "pearson_pvalue": 1.7695509998833956e-10,
+    "delta_r_mean": -0.506910217813561,
+    "delta_r_std": 0.21782085739725374,
+    "fitness_mean": 0.4461453075851881,
+    "fitness_std": 0.4672159596622016,
+    "interpretation": "POSITIVE: delta-R positively correlates with fitness (expected direction)"
+  },
+  "TP53": {
+    "protein": "TP53",
+    "full_name": "TP53 (p53 tumor suppressor)",
+    "assay": "Yeast-based transcriptional activity (p53AIP1 promoter)",
+    "source": "MaveDB",
+    "publication": "Kato et al. 2003 (PMID: 12826609)",
+    "n_mutations": 2314,
+    "spearman_rho": 0.10684251059234223,
+    "spearman_pvalue": 2.5836679796321366e-07,
+    "pearson_r": 0.11258129304124408,
+    "pearson_pvalue": 5.636648445144821e-08,
+    "delta_r_mean": -0.4294193594292579,
+    "delta_r_std": 0.2420814236692806,
+    "fitness_mean": 59.163180639585136,
+    "fitness_std": 37.10155177216374,
+    "interpretation": "POSITIVE: delta-R positively correlates with fitness (expected direction)"
+  },
+  "summary": {
+    "total_proteins": 3,
+    "significant_correlations": 3,
+    "correct_direction": 3,
+    "verdict": "STRONG SUPPORT: delta-R consistently predicts fitness across all proteins"
+  }
+}
