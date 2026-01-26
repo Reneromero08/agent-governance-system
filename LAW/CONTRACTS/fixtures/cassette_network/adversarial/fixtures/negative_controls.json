@@ -1,0 +1,141 @@
+{
+  "version": "1.1.0",
+  "description": "Negative control queries that must NOT match governance content",
+  "created_at": "2026-01-16",
+  "updated_at": "2026-01-16",
+  "embedding_model": "all-MiniLM-L6-v2",
+  "notes": [
+    "Thresholds calibrated for all-MiniLM-L6-v2 embeddings on AGS corpus",
+    "max_similarity is the HIGHEST acceptable similarity score (E value)",
+    "Any result above max_similarity indicates a false positive",
+    "Known failures documented for future improvement tracking"
+  ],
+  "negative_controls": [
+    {
+      "id": "NC-001",
+      "query": "xyzzy plugh quantum banana sandwich",
+      "max_similarity": 0.40,
+      "category": "gibberish",
+      "rationale": "Random nonsense words should not match any real content",
+      "observed_similarity": 0.34
+    },
+    {
+      "id": "NC-002",
+      "query": "SELECT * FROM users WHERE password = '1234'; DROP TABLE users;--",
+      "max_similarity": 0.35,
+      "category": "sql_injection",
+      "rationale": "SQL injection should NOT match governance documentation",
+      "observed_similarity": 0.28
+    },
+    {
+      "id": "NC-003",
+      "query": "function foo() { return bar.baz().qux; }",
+      "max_similarity": 0.45,
+      "category": "code_snippet",
+      "rationale": "Random JavaScript should not match governance content",
+      "note": "Higher threshold because corpus contains code",
+      "observed_similarity": 0.40
+    },
+    {
+      "id": "NC-004",
+      "query": "The quick brown fox jumps over the lazy dog",
+      "max_similarity": 0.35,
+      "category": "pangram",
+      "rationale": "Classic pangram has no semantic relation to governance"
+    },
+    {
+      "id": "NC-005",
+      "query": "Lorem ipsum dolor sit amet consectetur adipiscing elit",
+      "max_similarity": 0.35,
+      "category": "placeholder_text",
+      "rationale": "Latin placeholder text should not match English governance docs",
+      "observed_similarity": 0.32
+    },
+    {
+      "id": "NC-006",
+      "query": "rm -rf / --no-preserve-root",
+      "max_similarity": 0.40,
+      "category": "destructive_command",
+      "rationale": "Destructive shell command should not match governance content",
+      "known_failure": true,
+      "known_failure_similarity": 0.565,
+      "known_failure_reason": "Matches shell scripting content in corpus (CAPABILITY/ code)"
+    },
+    {
+      "id": "NC-007",
+      "query": "What is the best recipe for chocolate chip cookies?",
+      "max_similarity": 0.30,
+      "category": "off_topic",
+      "rationale": "Cooking question has no relation to governance systems",
+      "observed_similarity": 0.22
+    },
+    {
+      "id": "NC-008",
+      "query": "Who won the 2024 World Series?",
+      "max_similarity": 0.35,
+      "category": "sports",
+      "rationale": "Sports trivia has no relation to governance systems",
+      "observed_similarity": 0.31
+    },
+    {
+      "id": "NC-009",
+      "query": "<script>alert('XSS')</script>",
+      "max_similarity": 0.35,
+      "category": "xss_attack",
+      "rationale": "XSS attack payload should not match governance content",
+      "known_failure": true,
+      "known_failure_similarity": 0.487,
+      "known_failure_reason": "Embedding model matches 'script' and 'alert' to code-related content"
+    },
+    {
+      "id": "NC-010",
+      "query": "sudo apt-get install nginx && systemctl start nginx",
+      "max_similarity": 0.45,
+      "category": "system_admin",
+      "rationale": "Generic sysadmin commands are unrelated to governance docs",
+      "note": "Higher threshold because corpus contains CLI/shell content"
+    },
+    {
+      "id": "NC-011",
+      "query": "Dear Sir/Madam, I am writing to inquire about your services",
+      "max_similarity": 0.40,
+      "category": "generic_email",
+      "rationale": "Generic business email has no semantic relation to governance",
+      "observed_similarity": 0.32
+    },
+    {
+      "id": "NC-012",
+      "query": "42 17 99 83 56 21 78 34 62 15",
+      "max_similarity": 0.50,
+      "category": "random_numbers",
+      "rationale": "Random numbers should not semantically match any content",
+      "known_failure": true,
+      "known_failure_similarity": 0.46,
+      "known_failure_reason": "Numbers match version strings and numeric content in corpus"
+    },
+    {
+      "id": "NC-013",
+      "query": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+      "max_similarity": 0.35,
+      "category": "repeated_chars",
+      "rationale": "Repeated characters should not match real content",
+      "observed_similarity": 0.29
+    },
+    {
+      "id": "NC-014",
+      "query": "compile link execute runtime stack heap",
+      "max_similarity": 0.55,
+      "category": "generic_cs_terms",
+      "rationale": "Generic CS terms without governance context should score low",
+      "note": "Higher threshold because corpus is technical",
+      "observed_similarity": 0.49
+    },
+    {
+      "id": "NC-015",
+      "query": "Bitcoin Ethereum Solana NFT DeFi Web3 blockchain",
+      "max_similarity": 0.40,
+      "category": "crypto_buzzwords",
+      "rationale": "Crypto buzzwords unrelated to this governance system"
+    }
+  ]
+}

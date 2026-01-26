@@ -1,6 +1,6 @@
 ---
 title: AGS Roadmap (TODO Only, Rephased)
-version: 3.8.23
+version: 3.8.25
 last_updated: 2026-01-25
 scope: Unfinished tasks only (reorganized into new numeric phases)
 style: agent-readable, task-oriented, minimal ambiguity
@@ -205,7 +205,10 @@ Purpose: Anyone can verify a release is untampered.
 # Phase 6: Cassette Network (Semantic Manifold) (P0 substrate) ✅ COMPLETE
 
 **Status:** ALL PHASES COMPLETE - Production-ready with L4 Session Cache
-**Canonical Roadmap:** [CASSETTE_NETWORK_ROADMAP.md](THOUGHT/LAB/CASSETTE_NETWORK/CASSETTE_NETWORK_ROADMAP.md) (v3.5.0)
+**Canonical Spec:** [CASSETTE_NETWORK_SPEC.md](LAW/CANON/SEMANTIC/CASSETTE_NETWORK_SPEC.md)
+**Theory:** [CASSETTE_NETWORK_THEORY.md](LAW/CANON/SEMANTIC/CASSETTE_NETWORK_THEORY.md)
+**Roadmap (Archived):** [CASSETTE_NETWORK_ROADMAP.md](MEMORY/ARCHIVE/cassette-network-research/CASSETTE_NETWORK_ROADMAP.md) (v3.5.0, completed)
+**Tests:** [LAW/CONTRACTS/fixtures/cassette_network/](LAW/CONTRACTS/fixtures/cassette_network/) (production tests)
 
 **Completed Infrastructure:**
 - Phase 5.2: SCL Compression (L2) - 529 tests, CODEBOOK.json, scl_cli.py
@@ -224,7 +227,12 @@ Purpose: Anyone can verify a release is untampered.
 ### ESAP - Eigenvalue Spectrum Alignment Protocol
 Cross-model semantic alignment via eigenvalue spectrum invariance.
 **Research Status:** VALIDATED (r = 0.99+ eigenvalue correlation across models)
+**Location:** [THOUGHT/LAB/VECTOR_ELO/eigen-alignment/](THOUGHT/LAB/VECTOR_ELO/eigen-alignment/) (EXPERIMENTAL)
 **Proof:** [01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md](THOUGHT/LAB/VECTOR_ELO/research/cassette-network/01-08-2026_EIGENVALUE_ALIGNMENT_PROOF.md)
+
+**Note:** Cassette integration code (esap_cassette.py, esap_hub.py) moved back to LAB on 2026-01-25.
+These were incomplete ports of the full protocol in eigen-alignment/lib/handshake.py.
+See [cassette-integration/README.md](THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/README.md) for graduation criteria.
 
 - [ ] ESAP.1 Implement full protocol per OPUS pack spec
   - Protocol message types: ANCHOR_SET, SPECTRUM_SIGNATURE, ALIGNMENT_MAP
@@ -234,13 +242,25 @@ Cross-model semantic alignment via eigenvalue spectrum invariance.
 - [ ] ESAP.4 Compare with vec2vec (arXiv:2505.12540) neural approach
 - [ ] ESAP.5 Integrate as cassette handshake artifact (cross-model portability)
 
+### SVTP - Semantic Vector Transport Protocol (PRODUCTION)
+**Status:** GRADUATED to PRIMITIVES - Production-ready
+**Location:** [CAPABILITY/PRIMITIVES/](CAPABILITY/PRIMITIVES/)
+**Spec:** [SVTP_SPECIFICATION.md](CAPABILITY/PRIMITIVES/SVTP_SPECIFICATION.md)
+
+SVTP is the "TCP for LLMs" - a 256D packet structure for semantic transport:
+- `vector_packet.py` - SVTPEncoder, SVTPDecoder (256D packets)
+- `alignment_key.py` - AlignmentKey with Procrustes alignment
+- `llm_vector_bridge.py` - LLM-to-vector translation
+
+SVTP is transport (like TCP), ESAP is handshake/alignment (like TLS).
+
 **Next:** Phase 7 - ELO Integration (scores.elo field)
 
 # Phase 7: Vector ELO (Systemic Intuition) (P1) ✅ CORE COMPLETE
 
 **Status:** Core phases complete (E.1-E.6), MCP integration complete (2026-01-18)
 **Canonical Roadmap:** [VECTOR_ELO_ROADMAP.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_ROADMAP.md)
-**Specification:** [VECTOR_ELO_SPEC.md](THOUGHT/LAB/VECTOR_ELO/VECTOR_ELO_SPEC.md)
+**Specification:** [VECTOR_ELO_SPEC.md](LAW/CANON/SEMANTIC/VECTOR_ELO_SPEC.md) (graduated to CANON)
 
 **Core Principle:** ELO tracks usage. Similarity determines relevance.
 **Design Decision:** ELO is metadata only - does NOT modify search ranking (prevents echo chambers).

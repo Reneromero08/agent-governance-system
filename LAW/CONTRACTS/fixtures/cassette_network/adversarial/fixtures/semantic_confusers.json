@@ -1,0 +1,127 @@
+{
+  "version": "1.1.0",
+  "description": "Semantic confuser pairs - same vocabulary, different meaning",
+  "created_at": "2026-01-16",
+  "updated_at": "2026-01-16",
+  "notes": [
+    "Each pair has queries that share vocabulary but differ in meaning",
+    "query_a should NOT match governance content (different domain)",
+    "query_b SHOULD match governance content (correct domain)",
+    "This tests semantic understanding vs keyword matching",
+    "IMPORTANT: These are adversarial edge cases. In practice, agents query",
+    "for specific governance content (ADR-39, INV-001, genesis prompt),",
+    "not off-topic consumer queries. Marked as known_edge_case for tracking."
+  ],
+  "confusers": [
+    {
+      "id": "SC-001",
+      "query_a": "I need to sign a contract for my new apartment lease",
+      "query_a_max_similarity": 0.40,
+      "query_b": "What are the canon contract rules C1 through C13?",
+      "query_b_min_similarity": 0.50,
+      "shared_vocab": ["contract"],
+      "rationale": "Different meaning of 'contract' - legal document vs governance rules",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about apartment leases"
+    },
+    {
+      "id": "SC-002",
+      "query_a": "Please verify my email address for account creation",
+      "query_a_max_similarity": 0.35,
+      "query_b": "How does the verification protocol ensure pipeline integrity?",
+      "query_b_min_similarity": 0.45,
+      "shared_vocab": ["verify", "verification"],
+      "rationale": "Different meaning of 'verify' - account verification vs system integrity",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about email verification"
+    },
+    {
+      "id": "SC-003",
+      "query_a": "What is the chain of custody for evidence in court?",
+      "query_a_max_similarity": 0.40,
+      "query_b": "How does chain verification work in the SPECTRUM protocol?",
+      "query_b_min_similarity": 0.45,
+      "shared_vocab": ["chain"],
+      "rationale": "Different meaning of 'chain' - legal custody vs verification chain",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about legal evidence custody"
+    },
+    {
+      "id": "SC-004",
+      "query_a": "I need to restore my iPhone from a backup",
+      "query_a_max_similarity": 0.35,
+      "query_b": "How does the catalytic restore guarantee work?",
+      "query_b_min_similarity": 0.45,
+      "shared_vocab": ["restore", "backup"],
+      "rationale": "Different meaning of 'restore' - device backup vs catalytic computing",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about iPhone backups"
+    },
+    {
+      "id": "SC-005",
+      "query_a": "What is the genesis block in Bitcoin?",
+      "query_a_max_similarity": 0.40,
+      "query_b": "What is the genesis prompt for bootstrapping agents?",
+      "query_b_min_similarity": 0.50,
+      "shared_vocab": ["genesis"],
+      "rationale": "Different meaning of 'genesis' - blockchain vs agent bootstrap",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about Bitcoin"
+    },
+    {
+      "id": "SC-006",
+      "query_a": "How do I change the authority settings on my router?",
+      "query_a_max_similarity": 0.35,
+      "query_b": "What is the authority gradient in the governance system?",
+      "query_b_min_similarity": 0.50,
+      "shared_vocab": ["authority", "change"],
+      "rationale": "Different meaning of 'authority' - network admin vs governance",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about router settings"
+    },
+    {
+      "id": "SC-007",
+      "query_a": "Can you run a stress test on my car's suspension?",
+      "query_a_max_similarity": 0.30,
+      "query_b": "What were the stress test results for the catalytic invariants?",
+      "query_b_min_similarity": 0.45,
+      "shared_vocab": ["stress", "test"],
+      "rationale": "Different meaning of 'stress test' - mechanical vs software",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about car mechanics"
+    },
+    {
+      "id": "SC-008",
+      "query_a": "What is the formal dress code for the wedding?",
+      "query_a_max_similarity": 0.30,
+      "query_b": "What is the formal model from complexity theory?",
+      "query_b_min_similarity": 0.45,
+      "shared_vocab": ["formal"],
+      "rationale": "Different meaning of 'formal' - dress code vs mathematical model",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about wedding attire"
+    },
+    {
+      "id": "SC-009",
+      "query_a": "How do I compress images for my website?",
+      "query_a_max_similarity": 0.35,
+      "query_b": "What is the compressed genesis prompt?",
+      "query_b_min_similarity": 0.50,
+      "shared_vocab": ["compress", "compressed"],
+      "rationale": "Different meaning of 'compress' - image processing vs prompt reduction",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about image compression"
+    },
+    {
+      "id": "SC-010",
+      "query_a": "What are the rules for playing basketball?",
+      "query_a_max_similarity": 0.30,
+      "query_b": "What are the non-negotiable rules in the canon contract?",
+      "query_b_min_similarity": 0.50,
+      "shared_vocab": ["rules"],
+      "rationale": "Different meaning of 'rules' - sports vs governance",
+      "known_edge_case": true,
+      "edge_case_reason": "No realistic agent would query about basketball rules"
+    }
+  ]
+}

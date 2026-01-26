@@ -6,6 +6,32 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.25] - 2026-01-25
+
+### Added: Cassette Network & Vector ELO Graduation to CANON
+
+Graduated production-ready specifications from LAB to LAW/CANON/SEMANTIC/:
+
+**New Canon Documents:**
+- `LAW/CANON/SEMANTIC/CASSETTE_NETWORK_SPEC.md` - Cassette Network specification
+- `LAW/CANON/SEMANTIC/CASSETTE_NETWORK_THEORY.md` - Theoretical foundations
+- `LAW/CANON/SEMANTIC/VECTOR_ELO_SPEC.md` - Vector ELO specification
+
+**Production Tests:**
+- `LAW/CONTRACTS/fixtures/cassette_network/` - Migrated from TESTBENCH
+  - ground_truth/, adversarial/, compression/, determinism/
+
+**ESAP Clarification:**
+- Moved incomplete ESAP cassette integration back to LAB (eigen-alignment/cassette-integration/)
+- SVTP (Semantic Vector Transport Protocol) is production-ready in CAPABILITY/PRIMITIVES/
+- ESAP (Eigen-Spectrum Alignment Protocol) remains experimental in LAB
+
+**Archived:**
+- Historical research docs moved to MEMORY/ARCHIVE/cassette-network-research/
+- Completed CASSETTE_NETWORK_ROADMAP.md archived
+
+---
+
 ## [3.8.24] - 2026-01-18
 
 ### Added: CAT Chat Phase 3 Preparation (3.2.3-3.2.5, 3.4)

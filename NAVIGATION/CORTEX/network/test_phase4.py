@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
 """
-Phase 4 Integration Tests - SPC and ESAP
+Phase 4 Integration Tests - SPC and Metrics
 
 Tests:
 1. SPC Decoder - pointer resolution with fail-closed semantics
-2. ESAP - spectral alignment verification
-3. Metrics - Q33 semantic density measurements
-4. Blanket status - Q35 Markov blanket gating
+2. Metrics - Q33 semantic density measurements
+3. Blanket status - Q35 Markov blanket gating
+
+NOTE: ESAP tests moved to THOUGHT/LAB/VECTOR_ELO/eigen-alignment/cassette-integration/
+      ESAP is experimental and not yet production-ready (see AGS_ROADMAP_MASTER.md)
 """
 
 import sys
@@ -25,8 +27,6 @@ from spc_metrics import (
     SPCMetricsTracker,
     DensityMetrics
 )
-from esap_cassette import ESAPCassetteMixin
-from esap_hub import ESAPNetworkHub
 
 
 class TestSPCDecoder:
@@ -94,66 +94,6 @@ class TestSPCDecoder:
         assert "token_receipt" in result
         assert "CDR" in result["token_receipt"]
         assert "compression_ratio" in result["token_receipt"]
-
-
-class TestESAP:
-    """Tests for ESAP spectral alignment."""
-
-    def test_spectrum_computation(self):
-        """Spectrum signature computed correctly."""
-        mixin = ESAPCassetteMixin()
-        vectors = np.random.randn(100, 384)
-        spectrum = mixin.compute_spectrum_signature(vectors)
-
-        assert "eigenvalues_top_k" in spectrum
-        assert len(spectrum["eigenvalues_top_k"]) == 10
-        assert "effective_rank" in spectrum
-        assert spectrum["effective_rank"] > 0
-        assert "anchor_hash" in spectrum
-        assert spectrum["anchor_hash"].startswith("sha256:")
-
-    def test_empty_spectrum(self):
-        """Empty/insufficient vectors return empty spectrum."""
-        mixin = ESAPCassetteMixin()
-
-        # Too few vectors
-        spectrum = mixin.compute_spectrum_signature(np.random.randn(1, 384))
-        assert spectrum["anchor_hash"] == "sha256:empty"
-
-    def test_spectrum_correlation_identical(self):
-        """Identical spectrums have correlation 1.0."""
-        mixin = ESAPCassetteMixin()
-        vectors = np.random.randn(100, 384)
-        spec = mixin.compute_spectrum_signature(vectors)
-
-        corr = ESAPCassetteMixin.compute_spectrum_correlation(spec, spec)
-        assert corr == pytest.approx(1.0, abs=0.001)
-
-    def test_spectrum_correlation_similar(self):
-        """Similar vectors have high correlation."""
-        mixin = ESAPCassetteMixin()
-        vectors_a = np.random.randn(100, 384)
-        vectors_b = vectors_a + np.random.randn(100, 384) * 0.1  # Small noise
-
-        spec_a = mixin.compute_spectrum_signature(vectors_a)
-        spec_b = mixin.compute_spectrum_signature(vectors_b)
-
-        corr = ESAPCassetteMixin.compute_spectrum_correlation(spec_a, spec_b)
-        assert corr > 0.8  # Should be highly correlated
-
-    def test_spectrum_correlation_different(self):
-        """Different random vectors have lower correlation."""
-        mixin = ESAPCassetteMixin()
-        vectors_a = np.random.randn(100, 384)
-        vectors_b = np.random.randn(100, 384)  # Completely different
-
-        spec_a = mixin.compute_spectrum_signature(vectors_a)
-        spec_b = mixin.compute_spectrum_signature(vectors_b)
-
-        corr = ESAPCassetteMixin.compute_spectrum_correlation(spec_a, spec_b)
-        # Random vectors still have some structure, so correlation won't be 0
-        # But should be less than identical (1.0) - use looser tolerance
-        assert corr < 1.0  # Should be less than perfect correlation
 
 
 class TestMetrics:

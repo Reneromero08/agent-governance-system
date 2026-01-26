@@ -1,0 +1,168 @@
+{
+  "version": "1.2.0",
+  "description": "Ground truth test cases for Cassette Network retrieval validation",
+  "created_at": "2026-01-16",
+  "updated_at": "2026-01-16",
+  "corpus_source": "GeometricCassetteNetwork geometric_index tables",
+  "notes": [
+    "Each test case has known correct chunks that MUST be retrieved",
+    "doc_ids are from geometric_index, verified by actual query results",
+    "Required concepts verify semantic understanding, not keyword matching",
+    "Forbidden concepts verify the system avoids false positives",
+    "min_recall is the fraction of expected_chunks that must be found"
+  ],
+  "test_cases": [
+    {
+      "id": "GT-001",
+      "query": "What are the system invariants that must never be violated?",
+      "expected_chunks": [
+        "f372305709ce8725",
+        "8f21346c702adf56"
+      ],
+      "required_concepts": ["invariant"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve INVARIANTS.md chunks about system invariants",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-002",
+      "query": "How do I bootstrap a new AI agent in this system?",
+      "expected_chunks": [
+        "d7cf456d0b805f71",
+        "4523aa9d181bf4f8"
+      ],
+      "required_concepts": ["bootstrap", "agent"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve GENESIS.md about agent bootstrapping",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-003",
+      "query": "What rules govern how contracts can be changed?",
+      "expected_chunks": [
+        "78ad07eaaccc1f36",
+        "8219eb5b63f188a0"
+      ],
+      "required_concepts": ["contract"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve CONTRACT.md change ceremony rules",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-004",
+      "query": "How does the catalytic computing model ensure data restoration?",
+      "expected_chunks": [
+        "cd2fb56207a91c14",
+        "96b8484413d84925"
+      ],
+      "required_concepts": ["catalytic"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve catalytic computing content",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-005",
+      "query": "What is the verification protocol for checking system integrity?",
+      "expected_chunks": [
+        "5c793a4a0ffec229",
+        "ca2287089c5df06b"
+      ],
+      "required_concepts": ["verification"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve verification protocol content",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-006",
+      "query": "What happens when an invariant is violated and how do I recover?",
+      "expected_chunks": [
+        "249438191df0019f"
+      ],
+      "required_concepts": ["invariant", "recovery"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve INVARIANTS.md recovery and remediation section",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-007",
+      "query": "What are the non-negotiable rules in the governance system?",
+      "expected_chunks": [
+        "3a8cb4988098eb19",
+        "3127afad801882d8"
+      ],
+      "required_concepts": ["non-negotiable"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve non-negotiable rules section",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-008",
+      "query": "How is the authority gradient structured in this governance system?",
+      "expected_chunks": [
+        "0ea2768561cc7190",
+        "72faf0177f59a94f"
+      ],
+      "required_concepts": ["authority"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve authority gradient/hierarchy content",
+      "difficulty": "medium"
+    },
+    {
+      "id": "GT-009",
+      "query": "What cryptographic methods ensure data integrity in the system?",
+      "expected_chunks": [
+        "f372305709ce8725",
+        "2ca5c4cdae786c45"
+      ],
+      "required_concepts": ["integrity"],
+      "forbidden_concepts": [],
+      "min_recall": 0.5,
+      "rationale": "Should retrieve cryptographic/integrity content",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-010",
+      "query": "What is the compressed version of the genesis prompt?",
+      "expected_chunks": [
+        "467acfb705e77d8a"
+      ],
+      "required_concepts": ["compressed", "genesis"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve GENESIS_COMPACT.md compressed prompt",
+      "difficulty": "easy"
+    },
+    {
+      "id": "GT-011",
+      "query": "What formal model from complexity theory underlies catalytic computing?",
+      "expected_chunks": [
+        "f8b5d46c03edc3e2"
+      ],
+      "required_concepts": ["complexity"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve CATALYTIC_COMPUTING.md formal model section",
+      "difficulty": "hard"
+    },
+    {
+      "id": "GT-012",
+      "query": "Where are receipts stored and how do I access them?",
+      "expected_chunks": [
+        "769663b13e0100f2"
+      ],
+      "required_concepts": ["receipt"],
+      "forbidden_concepts": [],
+      "min_recall": 1.0,
+      "rationale": "Should retrieve section about where receipts live",
+      "difficulty": "medium"
+    }
+  ]
+}
