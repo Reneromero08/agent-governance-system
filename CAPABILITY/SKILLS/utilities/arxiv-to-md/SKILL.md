@@ -4,6 +4,8 @@
 
 **Status:** Active
 
+**required_canon_version:** ">=1.0.0"
+
 ## Trigger
 
 When the user asks to download, convert, or fetch an arXiv paper as markdown. Examples:

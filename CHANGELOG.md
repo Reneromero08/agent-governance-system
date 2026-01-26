@@ -6,6 +6,23 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.26] - 2026-01-25
+
+### Added: Phase 10 System Evolution LAB folder
+
+New experimental folder for post-substrate optimization work:
+- `THOUGHT/LAB/SYSTEM_EVOLUTION/` - Phase 10 scaffolding
+  - 10.1 Performance Foundation (incremental indexing, caching, dashboard)
+  - 10.2 Scale & Governance (federation, temporal queries, receipt compression)
+  - 10.3 Intelligence & UX (auto symbols, slice prediction, provenance viz, ZK proofs)
+
+### Fixed: arxiv-to-md skill governance compliance
+
+- Added `required_canon_version` field to SKILL.md
+- Created fixtures directory with test_input.json
+
+---
+
 ## [3.8.25] - 2026-01-25
 
 ### Added: Cassette Network & Vector ELO Graduation to CANON

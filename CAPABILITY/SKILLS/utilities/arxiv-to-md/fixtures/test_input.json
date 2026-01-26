@@ -1,0 +1,12 @@
+{
+  "description": "Test fixture for arxiv-to-md skill",
+  "inputs": {
+    "arxiv_id": "1706.03762",
+    "method": "html"
+  },
+  "expected": {
+    "success": true,
+    "output_contains": "Attention Is All You Need"
+  },
+  "notes": "Uses HTML method to avoid pandoc dependency in tests"
+}
