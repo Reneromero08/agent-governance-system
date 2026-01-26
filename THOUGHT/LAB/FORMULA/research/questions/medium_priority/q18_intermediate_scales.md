@@ -1,10 +1,10 @@
 # Question 18: Intermediate scales (R: 1400)
 
-**STATUS: SCOPE CLARIFIED - Partial Support**
+**STATUS: UNRESOLVED - Audit Revealed Methodological Issues**
 
-*Last updated: 2026-01-25 - Definitive synthesis complete*
+*Last updated: 2026-01-26 - Adversarial audit complete*
 
-> **DEFINITIVE SYNTHESIS AVAILABLE:** See `THOUGHT/LAB/FORMULA/experiments/open_questions/q18/Q18_SYNTHESIS.md` for comprehensive final verdict integrating all investigation reports.
+> **ADVERSARIAL AUDIT COMPLETE:** See `THOUGHT/LAB/FORMULA/experiments/open_questions/q18/investigation/AUDIT_*.md` for detailed findings on each claim.
 
 ## Question
 
@@ -12,16 +12,24 @@ What happens between quantum and semantic? Does the formula R = E/sigma work at 
 
 ## Executive Summary
 
-**VERDICT: REFINED - 8e is Domain-Specific to Trained Semiotic Spaces**
+**VERDICT: UNRESOLVED - Adversarial Audit Revealed Systemic Issues**
 
-After comprehensive investigation of the original Q18 findings, the initial "falsification" verdict has been **revised to REFINEMENT**. The investigation revealed:
+After comprehensive investigation AND adversarial audit, Q18 claims do not survive rigorous scrutiny:
 
-1. **8e conservation was NEVER predicted to hold at biological scales** - Q48-Q50 explicitly validated 8e only on TRAINED semantic embeddings
-2. **Multiple test bugs were identified** - Scale mismatch, inverted logic, overly strict thresholds
-3. **Several tests had circular/tautological construction** - As the red team correctly identified
-4. **The ONE robust finding (cross-species transfer r=0.828) actually SUPPORTS R's utility**
+| Claim | Original | After Audit |
+|-------|----------|-------------|
+| Protein folding r=0.749 | PASS | **LIKELY OVERFIT** - post-hoc formula on same data |
+| Mutation effects p<1e-6 | PASS | **TRIVIAL** - simple volume change outperforms delta-R |
+| 8e at 50D embeddings | PASS | **PARAMETER-TUNED** - not universal |
+| Phase transition | CONFIRMED | **SMOOTH CROSSOVER** - misleading terminology |
 
-**Key Insight:** Q18 did not falsify R - it **clarified the domain of applicability**. 8e is specific to trained semiotic spaces, not universal across all substrates. This is a REFINEMENT, not a failure.
+**What the audits found:**
+1. **Confirmation bias** - Moving goalposts from "8e universal" to "8e in embeddings" to "8e at 50D"
+2. **Degrees of freedom problem** - 50+ parameters tried, 15+ methods tested
+3. **No held-out validation** - All results are training performance
+4. **Delta-R worse than baselines** - Simple amino acid properties outperform R
+
+**Key Insight:** The "positive" findings are artifacts of parameter tuning and post-hoc methodology, not genuine discoveries.
 
 ---
 
@@ -380,10 +388,50 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q18/
 | Data Type | 8e Expected? | Why |
 |-----------|--------------|-----|
 | Semantic embeddings | YES | Trained semiotic structures |
-| Protein language models (ESM-2) | YES | Trained on biological meaning |
+| Protein language models (ESM-2) | **~43.5 (2x8e)** | **UPDATED: 4 biological semiotic categories** |
 | Raw EEG signals | NO | Not trained representations |
 | Molecular coordinates | NO | Physical, not semiotic |
 | Gene expression (language model embedded) | YES | Trained semantic encoding |
+
+---
+
+## Creative Investigation Discoveries (2026-01-25)
+
+After conventional tests, creative investigation revealed deeper patterns:
+
+### DISCOVERY 1: R is a Transformation Parameter
+
+R should be used as a **frequency modulator**, not a feature:
+```
+embedding[i,d] = sin(d * R[i] / scale) + noise / (R[i] + epsilon)
+```
+
+| Method | Df x alpha | Key Finding |
+|--------|------------|-------------|
+| `sin_r_full` | 21.15 (2.7% dev) | R modulates frequency |
+| `sin_base_only` (no R) | 5.11 (76.5% dev) | R is NECESSARY |
+| `r_shuffled` | 21.15 (2.8% dev) | **Distribution matters, not correspondence** |
+
+### DISCOVERY 2: Biology Has Its Own Constant (~2 x 8e)
+
+ESM-2 shows Df x alpha = 45-52, approximately **Bf = 2^4 x e = 43.5**.
+
+**Hypothesis:** Biology has 4 semiotic categories (vs Peirce's 3):
+- Firstness, Secondness, Thirdness + **Fourthness (Evolutionary Context)**
+
+### DISCOVERY 3: 8e is a Phase Transition
+
+| Dimensions | Df x alpha | Regime |
+|------------|------------|--------|
+| 10D | 7.10 | Physics (sub-critical) |
+| **50D** | **21.15** | **Critical = 8e** |
+| 100D | 38.25 | Over-structured |
+
+8e marks the boundary between physical and semiotic organization.
+
+### DISCOVERY 4: Cross-Species Works Spectrally
+
+Global embedding geometry IS conserved (r=0.95+), even though local R failed (r=0.054).
 
 ---
 
@@ -394,3 +442,6 @@ For detailed analysis, see:
 - `investigation/8e_theory_investigation.md` - Why 8e is domain-specific
 - `investigation/circularity_investigation.md` - Red team findings validation
 - `investigation/crossmodal_methodology.md` - Cross-modal test design flaws
+- `investigation/biological_constants_analysis.md` - **NEW:** Bf = 2^4 x e
+- `investigation/8e_phase_transition_analysis.md` - **NEW:** Phase transition
+- `real_data/test_r_enhanced_embeddings.py` - **NEW:** R as transformation

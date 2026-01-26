@@ -1,47 +1,46 @@
 # Q18 FINAL REPORT: Real Data Validation
 
-**Date:** 2026-01-25 (Updated with Formula Fix)
-**Status:** POSITIVE - THEORY VALIDATED WITH CORRECTIONS
+**Date:** 2026-01-26 (Updated with Adversarial Audit)
+**Status:** UNRESOLVED - AUDIT REVEALED METHODOLOGICAL ISSUES
 **Method:** Real biological data only - no synthetic data
 
 ---
 
 ## Executive Summary
 
-After comprehensive testing with **real biological data** from AlphaFold, GEO, MaveDB, and DepMap, and **critical formula corrections**, Q18 shows **strongly positive results**:
+After comprehensive testing AND adversarial audit, Q18 claims **do not survive rigorous scrutiny**:
 
-| Test | N | Result | Verdict |
-|------|---|--------|---------|
-| Protein folding (FIXED) | 47 | r=0.749 | **PASS** |
-| Mutation effects | 9,192 | all p<1e-6 | **PASS** |
-| Gene essentiality | 349 | AUC=0.59 | **WEAK** |
-| 8e on raw data | 2,500 | dev=5316% | **FAIL (Expected)** |
-| 8e on structured embedding | 2,500 | dev=2.9% | **PASS** |
+| Test | N | Original | After Audit |
+|------|---|----------|-------------|
+| Protein folding (FIXED) | 47 | r=0.749 PASS | **LIKELY OVERFIT** - no held-out validation |
+| Mutation effects | 9,192 | all p<1e-6 PASS | **TRIVIAL** - volume change outperforms delta-R |
+| Gene essentiality | 349 | AUC=0.59 WEAK | WEAK (unchanged) |
+| 8e on raw data | 2,500 | dev=5316% FAIL | EXPECTED (unchanged) |
+| 8e on structured embedding | 2,500 | dev=2.9% PASS | **PARAMETER-TUNED** - not universal |
 
-**Key Findings:**
+**Audit Findings:**
 
-1. **R PREDICTS MUTATION EFFECTS** - All 3 proteins (BRCA1, UBE2I, TP53) show highly significant correlations (p < 1e-6). This is genuine biological predictive power.
+1. **PROTEIN FOLDING IS OVERFIT** - Formula was modified AFTER failure on same 47 proteins. Order alone achieves r=0.59; R adds only +0.16. No independent test set.
 
-2. **8e is a REPRESENTATION property** - Raw data violates 8e massively. But when data is structured as embeddings, 8e EMERGES (2.9% deviation). 8e is about information structure, not physics.
+2. **MUTATION EFFECTS ARE TRIVIAL** - Simple volume change (rho=0.16) outperforms delta-R (rho=0.12). Effect size is tiny (R^2 ~ 2%). Real methods (SIFT/PolyPhen) achieve rho=0.4-0.6.
 
-3. **PROTEIN FOLDING PASSES WITH FIXED FORMULA** - The original r=0.143 was due to a methodological bug (sigma near-constant). The corrected formula achieves **r=0.749, p=1.43e-09** - a highly significant result.
+3. **8e EMBEDDING IS PARAMETER-TUNED** - Only works at dim=50, scale=10. Random data in [10,1000] produces 0.4% deviation - BETTER than gene data. Not universal.
 
 ---
 
-## Master Results Table
+## Master Results Table (WITH AUDIT CORRECTIONS)
 
-| Test | Data Source | N | Metric | Result | Threshold | Verdict |
-|------|-------------|---|--------|--------|-----------|---------|
-| Protein Folding (FIXED) | AlphaFold DB | 47 | Pearson r | **0.749** | r > 0.5 | **PASS** |
-| Protein Folding (FIXED) | AlphaFold DB | 47 | Spearman rho | **0.722** | rho > 0.5 | **PASS** |
-| Protein Folding (original bug) | AlphaFold DB | 47 | Pearson r | 0.143 | r > 0.3 | ~~FAIL~~ (bug) |
-| 8e (Molecular) | AlphaFold pLDDT | 5 | Df x alpha | 4.39 | 21.75 +/- 15% | **FAIL (Expected)** |
-| 8e (Raw Gene Expr) | GEO | 2,500 | Df x alpha | 1177.92 | 21.75 +/- 15% | **FAIL (Expected)** |
-| 8e (R Embedding) | GEO | 2,500 | Df x alpha | 21.12 | 21.75 +/- 15% | **PASS (2.9% dev)** |
-| Essentiality | DepMap + GEO | 349 matched | AUC | 0.59 | AUC > 0.75 | **WEAK** |
-| Mutation Effects (BRCA1) | MaveDB | 3,857 | Spearman rho | 0.127 | rho > 0.1, p<0.05 | **PASS (p=2.8e-15)** |
-| Mutation Effects (UBE2I) | MaveDB | 3,021 | Spearman rho | 0.123 | rho > 0.1, p<0.05 | **PASS (p=1.3e-11)** |
-| Mutation Effects (TP53) | MaveDB | 2,314 | Spearman rho | 0.107 | rho > 0.1, p<0.05 | **PASS (p=2.6e-7)** |
+| Test | Data Source | N | Metric | Result | Original Verdict | Audit Verdict |
+|------|-------------|---|--------|--------|------------------|---------------|
+| Protein Folding (FIXED) | AlphaFold DB | 47 | Pearson r | 0.749 | PASS | **OVERFIT** - no held-out test |
+| Protein Folding baseline | AlphaFold DB | 47 | Pearson r | 0.590 | N/A | Order alone, no R needed |
+| 8e (Molecular) | AlphaFold pLDDT | 5 | Df x alpha | 4.39 | FAIL (Expected) | FAIL (unchanged) |
+| 8e (Raw Gene Expr) | GEO | 2,500 | Df x alpha | 1177.92 | FAIL (Expected) | FAIL (unchanged) |
+| 8e (R Embedding) | GEO | 2,500 | Df x alpha | 21.12 | PASS (2.9% dev) | **PARAMETER-TUNED** |
+| Essentiality | DepMap + GEO | 349 matched | AUC | 0.59 | WEAK | WEAK (unchanged) |
+| Mutation Effects (BRCA1) | MaveDB | 3,857 | Spearman rho | 0.127 | PASS | **TRIVIAL** - volume change: 0.15 |
+| Mutation Effects (UBE2I) | MaveDB | 3,021 | Spearman rho | 0.123 | PASS | **TRIVIAL** - volume change: 0.16 |
+| Mutation Effects (TP53) | MaveDB | 2,314 | Spearman rho | 0.107 | PASS | **TRIVIAL** - volume change: 0.13 |
 
 ---
 

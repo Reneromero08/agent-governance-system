@@ -1,0 +1,618 @@
+{
+  "timestamp": "2026-01-25T23:51:08.390938",
+  "hypothesis": "Cross-species transfer works in embedding space, not raw R space",
+  "data_summary": {
+    "human_probes": 2500,
+    "mouse_probes": 54436,
+    "ortholog_pairs": 1324
+  },
+  "embedding_methods": {
+    "r_feature": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 7.843405204016533,
+        "spectral_decay": 4.172261467013903,
+        "Df_x_alpha": 32.7247373028945,
+        "deviation_from_8e": 0.5048447589338854,
+        "invariants": {
+          "Df": 7.843405204016533,
+          "alpha": 4.172261467013903,
+          "Df_x_alpha": 32.7247373028945,
+          "effective_dim_ratio": 11.149304585940543,
+          "spectral_entropy": 2.484665794778969,
+          "eig_ratio_12": 1.3808137060060484,
+          "eig_ratio_23": 1.5766094709722949
+        }
+      },
+      "mouse": {
+        "n_samples": 54436,
+        "intrinsic_dim": 3.182783217117438,
+        "spectral_decay": 4.161996168377371,
+        "Df_x_alpha": 13.246731554418579,
+        "deviation_from_8e": 0.39084997480154765,
+        "invariants": {
+          "Df": 3.182783217117438,
+          "alpha": 4.161996168377371,
+          "Df_x_alpha": 13.246731554418579,
+          "effective_dim_ratio": 19.16588364504243,
+          "spectral_entropy": 1.5197189365673056,
+          "eig_ratio_12": 1.834721527697086,
+          "eig_ratio_23": 2.4587689636418055
+        }
+      }
+    },
+    "spectral": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 49.99937542289561,
+        "spectral_decay": 6.854274278645331e-06,
+        "Df_x_alpha": 0.0003427094329094849,
+        "deviation_from_8e": 0.999984240530667,
+        "invariants": {
+          "Df": 49.99937542289561,
+          "alpha": 6.854274278645331e-06,
+          "Df_x_alpha": 0.0003427094329094849,
+          "effective_dim_ratio": 1.0000053841578656,
+          "spectral_entropy": 3.9120229850960078,
+          "eig_ratio_12": 0.9999997501000626,
+          "eig_ratio_23": 0.9999997501000636
+        }
+      },
+      "mouse": {
+        "n_samples": 5000,
+        "intrinsic_dim": 49.9975011085987,
+        "spectral_decay": 2.124063913671456e-06,
+        "Df_x_alpha": 0.00010619788787852312,
+        "deviation_from_8e": 0.9999951164975442,
+        "invariants": {
+          "Df": 49.9975011085987,
+          "alpha": 2.124063913671456e-06,
+          "Df_x_alpha": 0.00010619788787852312,
+          "effective_dim_ratio": 1.0000012461950734,
+          "spectral_entropy": 3.912022971238991,
+          "eig_ratio_12": 0.99999950010025,
+          "eig_ratio_23": 0.999999500100251
+        }
+      }
+    },
+    "pca": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 3.1931844449774713,
+        "spectral_decay": 7.8375696959527525,
+        "Df_x_alpha": 25.026805639543138,
+        "deviation_from_8e": 0.1508559091226789,
+        "invariants": {
+          "Df": 3.1931844449774713,
+          "alpha": 7.8375696959527525,
+          "Df_x_alpha": 25.026805639543138,
+          "effective_dim_ratio": 4.800847467715642,
+          "spectral_entropy": 1.3688535851199963,
+          "eig_ratio_12": 1.087744458345043,
+          "eig_ratio_23": 3.408763328087285
+        }
+      },
+      "mouse": {
+        "n_samples": 10000,
+        "intrinsic_dim": 2.958144657189126,
+        "spectral_decay": 7.858047283607958,
+        "Df_x_alpha": 23.245240587944405,
+        "deviation_from_8e": 0.06893076467358969,
+        "invariants": {
+          "Df": 2.958144657189126,
+          "alpha": 7.858047283607958,
+          "Df_x_alpha": 23.245240587944405,
+          "effective_dim_ratio": 6.025543583254551,
+          "spectral_entropy": 1.336248463828094,
+          "eig_ratio_12": 1.9742622510242318,
+          "eig_ratio_23": 2.037388896775614
+        }
+      }
+    },
+    "normalized_r": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 13.796562834241586,
+        "spectral_decay": 2.945461096075221,
+        "Df_x_alpha": 40.63723908781588,
+        "deviation_from_8e": 0.8687006007969998,
+        "invariants": {
+          "Df": 13.796562834241586,
+          "alpha": 2.945461096075221,
+          "Df_x_alpha": 40.63723908781588,
+          "effective_dim_ratio": 5.301545626406689,
+          "spectral_entropy": 2.9105429526452506,
+          "eig_ratio_12": 1.8198678928262977,
+          "eig_ratio_23": 1.1250207278599063
+        }
+      },
+      "mouse": {
+        "n_samples": 54436,
+        "intrinsic_dim": 19.401303256285512,
+        "spectral_decay": 2.8911483759093373,
+        "Df_x_alpha": 56.0920463999344,
+        "deviation_from_8e": 1.57938883547131,
+        "invariants": {
+          "Df": 19.401303256285512,
+          "alpha": 2.8911483759093373,
+          "Df_x_alpha": 56.0920463999344,
+          "effective_dim_ratio": 3.059296123179381,
+          "spectral_entropy": 3.0816200459375684,
+          "eig_ratio_12": 1.4220871224791278,
+          "eig_ratio_23": 1.004598355277659
+        }
+      }
+    },
+    "rank_based": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 24.864039959999168,
+        "spectral_decay": 2.2131739083102144,
+        "Df_x_alpha": 55.02844449465271,
+        "deviation_from_8e": 1.5304791761533214,
+        "invariants": {
+          "Df": 24.864039959999168,
+          "alpha": 2.2131739083102144,
+          "Df_x_alpha": 55.02844449465271,
+          "effective_dim_ratio": 1.224287165059166,
+          "spectral_entropy": 3.2220421286783907,
+          "eig_ratio_12": 0.9999999999000406,
+          "eig_ratio_23": 0.9999999999000402
+        }
+      },
+      "mouse": {
+        "n_samples": 54436,
+        "intrinsic_dim": 24.863974222592084,
+        "spectral_decay": 2.2137999022962043,
+        "Df_x_alpha": 55.0438637046697,
+        "deviation_from_8e": 1.5311882274488655,
+        "invariants": {
+          "Df": 24.863974222592084,
+          "alpha": 2.2137999022962043,
+          "Df_x_alpha": 55.0438637046697,
+          "effective_dim_ratio": 1.2242872980074075,
+          "spectral_entropy": 3.222037603459726,
+          "eig_ratio_12": 0.9999999999000028,
+          "eig_ratio_23": 0.9999999999000019
+        }
+      }
+    },
+    "hybrid": {
+      "human": {
+        "n_samples": 2500,
+        "intrinsic_dim": 18.624989246044056,
+        "spectral_decay": 3.308930108898116,
+        "Df_x_alpha": 61.62878769413879,
+        "deviation_from_8e": 1.8339954971241554,
+        "invariants": {
+          "Df": 18.624989246044056,
+          "alpha": 3.308930108898116,
+          "Df_x_alpha": 61.62878769413879,
+          "effective_dim_ratio": 4.339289977129283,
+          "spectral_entropy": 3.050896199780732,
+          "eig_ratio_12": 1.6425934397694462,
+          "eig_ratio_23": 1.7508559404895605
+        }
+      },
+      "mouse": {
+        "n_samples": 54436,
+        "intrinsic_dim": 20.341683954950284,
+        "spectral_decay": 3.271674837689411,
+        "Df_x_alpha": 66.55137555164127,
+        "deviation_from_8e": 2.060360355891073,
+        "invariants": {
+          "Df": 20.341683954950284,
+          "alpha": 3.271674837689411,
+          "Df_x_alpha": 66.55137555164127,
+          "effective_dim_ratio": 3.685379462169357,
+          "spectral_entropy": 3.097865899369711,
+          "eig_ratio_12": 1.8079161115567888,
+          "eig_ratio_23": 1.2987164599877898
+        }
+      }
+    }
+  },
+  "cross_species_comparisons": {
+    "r_feature": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 1324,
+        "alignment_error": 8.505689109319068,
+        "normalized_error": 1.354074975460142,
+        "distance_correlation": 0.06566785959943103,
+        "pairwise_distance_correlation": 0.03087728674547892,
+        "scale_X": 6.387270362299561,
+        "scale_Y": 6.175828821027795,
+        "singular_values": [
+          1684.6816539869537,
+          905.5374827310648,
+          508.04149504229366,
+          287.99860586879936,
+          172.98386116669533,
+          153.8048416328281,
+          88.21718934924432,
+          65.77015921565783,
+          44.44797244362835,
+          41.843648398279775
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.0,
+        "std_preservation": 0.0,
+        "expected_random": 0.004978323168491439,
+        "improvement_over_random": 0.0,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 7.843405204016533,
+          "mouse": 3.182783217117438,
+          "ratio": 2.464322785663569,
+          "difference": 4.660621986899095
+        },
+        "alpha_comparison": {
+          "human": 4.172261467013903,
+          "mouse": 4.161996168377371,
+          "ratio": 1.0024664363255018,
+          "difference": 0.010265298636531917
+        },
+        "Df_x_alpha_comparison": {
+          "human": 32.7247373028945,
+          "mouse": 13.246731554418579,
+          "ratio": 2.4704008810182163,
+          "difference": 19.478005748475923,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.9720965600837598,
+        "scale_comparison": {
+          "human_mean_dist": 6.9165714447238225,
+          "mouse_mean_dist": 6.697190000522086,
+          "ratio": 1.0327572375998528
+        }
+      }
+    },
+    "spectral": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 148,
+        "alignment_error": 0.13557800027242503,
+        "normalized_error": 1.1394446508891498,
+        "distance_correlation": 0.06365869328056761,
+        "pairwise_distance_correlation": 0.005654642406518028,
+        "scale_X": 0.14027736157306664,
+        "scale_Y": 0.0976947067545773,
+        "singular_values": [
+          0.07027403506811862,
+          0.06043267593729138,
+          0.05948019427699116,
+          0.056025100382514445,
+          0.048080382179740366,
+          0.04635314609601585,
+          0.041128483311116015,
+          0.03792389774131599,
+          0.037456094086186505,
+          0.035708480845735704
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.0,
+        "std_preservation": 0.0,
+        "expected_random": 0.006,
+        "improvement_over_random": 0.0,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 49.99937542289561,
+          "mouse": 49.9975011085987,
+          "ratio": 1.000037488157515,
+          "difference": 0.0018743142969128712
+        },
+        "alpha_comparison": {
+          "human": 6.854274278645331e-06,
+          "mouse": 2.124063913671456e-06,
+          "ratio": 3.2268104332863086,
+          "difference": 4.730210364973875e-06
+        },
+        "Df_x_alpha_comparison": {
+          "human": 0.0003427094329094849,
+          "mouse": 0.00010619788787852312,
+          "ratio": 3.2270802842470103,
+          "difference": 0.00023651154503096178,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.9912107694873137,
+        "scale_comparison": {
+          "human_mean_dist": 0.14084182873422277,
+          "mouse_mean_dist": 0.09977946446561446,
+          "ratio": 1.4115312138361489
+        }
+      }
+    },
+    "pca": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 248,
+        "alignment_error": 6.87024591651282,
+        "normalized_error": 1.370033708610386,
+        "distance_correlation": 0.10101311071066396,
+        "pairwise_distance_correlation": 0.010018055106612989,
+        "scale_X": 4.536296088564281,
+        "scale_Y": 5.493013224334672,
+        "singular_values": [
+          335.9822791099578,
+          217.7601266530647,
+          85.97971171430929,
+          16.546547184580035,
+          12.984525534310574,
+          6.5971459738484635,
+          0.4486279309250619,
+          0.37168961238382575,
+          0.058368464546130205,
+          7.117429606337087e-06
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.002,
+        "std_preservation": 0.014000000000000005,
+        "expected_random": 0.0051,
+        "improvement_over_random": 0.39215685505574793,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 3.1931844449774713,
+          "mouse": 2.958144657189126,
+          "ratio": 1.0794551365529697,
+          "difference": 0.23503978778834522
+        },
+        "alpha_comparison": {
+          "human": 7.8375696959527525,
+          "mouse": 7.858047283607958,
+          "ratio": 0.9973940615249719,
+          "difference": 0.02047758765520502
+        },
+        "Df_x_alpha_comparison": {
+          "human": 25.026805639543138,
+          "mouse": 23.245240587944405,
+          "ratio": 1.076642142926025,
+          "difference": 1.781565051598733,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.9525449775646008,
+        "scale_comparison": {
+          "human_mean_dist": 5.335484738238032,
+          "mouse_mean_dist": 6.146508641816096,
+          "ratio": 0.8680512871734549
+        }
+      }
+    },
+    "normalized_r": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 1324,
+        "alignment_error": 9.152382029425118,
+        "normalized_error": 1.3291743940758374,
+        "distance_correlation": 0.05900319360075741,
+        "pairwise_distance_correlation": 0.055060218004365884,
+        "scale_X": 6.793018563302631,
+        "scale_Y": 6.978510695889525,
+        "singular_values": [
+          1116.571391652146,
+          905.9247564383963,
+          717.3927295732333,
+          640.6647919427782,
+          565.3797489092055,
+          398.7285785419421,
+          359.91845630404003,
+          314.54581350197407,
+          252.31665594323397,
+          207.87699186069952
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.0030000000000000005,
+        "std_preservation": 0.017058722109231983,
+        "expected_random": 0.004978323168491439,
+        "improvement_over_random": 0.6026125340207323,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 13.796562834241586,
+          "mouse": 19.401303256285512,
+          "ratio": 0.7111152612750771,
+          "difference": 5.6047404220439265
+        },
+        "alpha_comparison": {
+          "human": 2.945461096075221,
+          "mouse": 2.8911483759093373,
+          "ratio": 1.0187858639551568,
+          "difference": 0.05431272016588373
+        },
+        "Df_x_alpha_comparison": {
+          "human": 40.63723908781588,
+          "mouse": 56.0920463999344,
+          "ratio": 0.7244741758573272,
+          "difference": 15.454807312118518,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.950029546591424,
+        "scale_comparison": {
+          "human_mean_dist": 7.044675226436791,
+          "mouse_mean_dist": 7.0587623668127275,
+          "ratio": 0.9980043044738311
+        }
+      }
+    },
+    "rank_based": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 1324,
+        "alignment_error": 6.49408389049499,
+        "normalized_error": 1.3184587450712884,
+        "distance_correlation": -0.006378948002000973,
+        "pairwise_distance_correlation": -0.050197740977162265,
+        "scale_X": 4.943132207191625,
+        "scale_Y": 4.907891064699998,
+        "singular_values": [
+          416.9311151024875,
+          340.44706478016224,
+          317.7039446151702,
+          298.0001952209432,
+          275.19705557128714,
+          251.7752558953051,
+          225.25449993448407,
+          216.70195661078245,
+          195.8494552178741,
+          180.67844692315154
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.0,
+        "std_preservation": 0.0,
+        "expected_random": 0.004978323168491439,
+        "improvement_over_random": 0.0,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 24.864039959999168,
+          "mouse": 24.863974222592084,
+          "ratio": 1.0000026438777043,
+          "difference": 6.57374070840433e-05
+        },
+        "alpha_comparison": {
+          "human": 2.2131739083102144,
+          "mouse": 2.2137999022962043,
+          "ratio": 0.9997172309542013,
+          "difference": 0.0006259939859898367
+        },
+        "Df_x_alpha_comparison": {
+          "human": 55.02844449465271,
+          "mouse": 55.0438637046697,
+          "ratio": 0.9997198741316617,
+          "difference": 0.01541921001698654,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.999999999891196,
+        "scale_comparison": {
+          "human_mean_dist": 4.9452760375091165,
+          "mouse_mean_dist": 4.945275774603105,
+          "ratio": 1.0000000531428426
+        }
+      }
+    },
+    "hybrid": {
+      "procrustes": {
+        "status": "COMPLETED",
+        "n_matched": 1324,
+        "alignment_error": 6.24261208554871,
+        "normalized_error": 1.3305860636422713,
+        "distance_correlation": 0.024302722918056963,
+        "pairwise_distance_correlation": -0.027764945856858476,
+        "scale_X": 4.701581558091494,
+        "scale_Y": 4.681670312633015,
+        "singular_values": [
+          365.0393063681651,
+          325.9580700763334,
+          290.62643359711217,
+          286.2950428982173,
+          244.65931449798015,
+          228.7418542237381,
+          211.27398485462106,
+          192.80836269393384,
+          160.08014506500473,
+          149.21945671490596
+        ]
+      },
+      "neighborhood": {
+        "status": "COMPLETED",
+        "n_pairs_tested": 100,
+        "k_neighbors": 10,
+        "mean_preservation": 0.0,
+        "std_preservation": 0.0,
+        "expected_random": 0.004978323168491439,
+        "improvement_over_random": 0.0,
+        "significant": false
+      },
+      "geometry": {
+        "Df_comparison": {
+          "human": 18.624989246044056,
+          "mouse": 20.341683954950284,
+          "ratio": 0.9156070503897482,
+          "difference": 1.7166947089062283
+        },
+        "alpha_comparison": {
+          "human": 3.308930108898116,
+          "mouse": 3.271674837689411,
+          "ratio": 1.0113872169319482,
+          "difference": 0.037255271208704865
+        },
+        "Df_x_alpha_comparison": {
+          "human": 61.62878769413879,
+          "mouse": 66.55137555164127,
+          "ratio": 0.9260332665284229,
+          "difference": 4.922587857502478,
+          "both_near_8e": false
+        },
+        "eigenvalue_correlation": 0.989499522801382,
+        "scale_comparison": {
+          "human_mean_dist": 4.846443049723237,
+          "mouse_mean_dist": 4.815062353741493,
+          "ratio": 1.0065171940830024
+        }
+      }
+    }
+  },
+  "key_findings": [
+    "pca: Only one species shows 8e (human: 15.1%, mouse: 6.9%)",
+    "r_feature: Eigenvalue spectra are highly correlated (r=0.972)",
+    "spectral: Eigenvalue spectra are highly correlated (r=0.991)",
+    "pca: Embedding GEOMETRY is conserved across species (Df ratio: 1.08, alpha ratio: 1.00)",
+    "pca: Eigenvalue spectra are highly correlated (r=0.953)",
+    "normalized_r: Eigenvalue spectra are highly correlated (r=0.950)",
+    "rank_based: Embedding GEOMETRY is conserved across species (Df ratio: 1.00, alpha ratio: 1.00)",
+    "rank_based: Eigenvalue spectra are highly correlated (r=1.000)",
+    "hybrid: Embedding GEOMETRY is conserved across species (Df ratio: 0.92, alpha ratio: 1.01)",
+    "hybrid: Eigenvalue spectra are highly correlated (r=0.989)"
+  ],
+  "analysis": {
+    "hypothesis_tested": "Cross-species transfer works in embedding space",
+    "verdict": "PARTIALLY_SUPPORTED",
+    "evidence": [
+      "Embedding geometry conserved in: 3 methods",
+      "  - pca: Df_ratio=1.079, alpha_ratio=0.997",
+      "  - rank_based: Df_ratio=1.000, alpha_ratio=1.000",
+      "  - hybrid: Df_ratio=0.916, alpha_ratio=1.011",
+      "Eigenvalue spectra highly correlated (r>0.9) in: 6 methods"
+    ],
+    "interpretation": [
+      "GLOBAL embedding geometry is conserved across species, suggesting a universal structure in how genes are organized by their expression stability (R values).",
+      "LOCAL structure (gene neighborhoods) is NOT preserved across species. This means while the SHAPE of embedding space is similar, individual genes do not occupy corresponding positions.",
+      "PCA embedding shows Df x alpha ~ 24.14 (close to 8e=21.75), suggesting 8e may be a property of properly structured embeddings.",
+      "CONCLUSION: Embedding geometry is conserved but 8e specifically does not emerge consistently. The universal structure may be more about spectral decay patterns than about the specific 8e constant."
+    ],
+    "key_constants": {
+      "Df_x_alpha_human": 25.026805639543138,
+      "Df_x_alpha_mouse": 23.245240587944405,
+      "Df_x_alpha_avg": 24.13602311374377,
+      "deviation_from_8e": 0.1098933368981343
+    }
+  }
+}
