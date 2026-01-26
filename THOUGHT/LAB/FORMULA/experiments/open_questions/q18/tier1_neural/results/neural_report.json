@@ -1,0 +1,40 @@
+{
+  "agent_id": "neural_tier1",
+  "tier": "neural",
+  "tests": {
+    "cross_modal_binding": {
+      "r": 0.05027426426830109,
+      "p": 0.4795812669939432,
+      "passed": false,
+      "r_neural_mean": 0.018425426483154296,
+      "r_visual_mean": 13.102944791316986
+    },
+    "temporal_prediction": {
+      "r_squared": 0.12349469955096398,
+      "shuffled_r_squared": 0.032620899563257706,
+      "ratio": 3.7857539438147767,
+      "passed": false
+    },
+    "8e_conservation": {
+      "df": 68.28496212429323,
+      "alpha": 0.8523627539096035,
+      "df_x_alpha": 58.20355836687555,
+      "deviation_from_8e_pct": 167.64865657744502,
+      "passed": false
+    },
+    "adversarial": {
+      "r_clean": 0.5006100083409974,
+      "r_under_attack": 0.6675642509870366,
+      "passed": false
+    }
+  },
+  "tests_passed": 0,
+  "tests_total": 4,
+  "key_findings": [
+    "Cross-modal binding below threshold (r=0.050)",
+    "Temporal prediction weak (R^2=0.123)",
+    "8e conservation violated (167.6% deviation)",
+    "R estimation vulnerable to attack (r=0.668)"
+  ],
+  "data_hash": "2abceba0a0e2d426"
+}

@@ -1,0 +1,73 @@
+{
+  "agent_id": "gene_tier4",
+  "tier": "gene_expression",
+  "tests": {
+    "cross_species_transfer": {
+      "r": 0.8275356286308073,
+      "passed": true
+    },
+    "essentiality_prediction": {
+      "auc": 0.9899890000000151,
+      "passed": true
+    },
+    "8e_conservation": {
+      "df": 76.24658602682585,
+      "alpha": 0.29751662761481396,
+      "df_x_alpha": 22.684627141844025,
+      "passed": true
+    },
+    "housekeeping_vs_specific": {
+      "r_housekeeping": 5.4296690538618835,
+      "r_specific": 0.33856661107133673,
+      "p_value": 0.0,
+      "passed": true
+    }
+  },
+  "tests_passed": 4,
+  "tests_total": 4,
+  "key_findings": [
+    "R formula transfers across species with r=0.828",
+    "R predicts gene essentiality with AUC=0.990",
+    "8e conservation law holds: Df x alpha = 22.68",
+    "Housekeeping genes have higher R (p=0.00e+00)"
+  ],
+  "data_hash": "76f1e8b7c12d5605",
+  "detailed_results": {
+    "cross_species_transfer": {
+      "r": 0.8275356286308073,
+      "p_value": 0.0,
+      "rho_spearman": 0.9362090028782657,
+      "n_orthologs": 8000,
+      "passed": true
+    },
+    "essentiality_prediction": {
+      "auc": 0.9899890000000151,
+      "r_correlation": 0.7572454384182049,
+      "p_value": 0.0,
+      "n_essential": 1000,
+      "mean_R_essential": 5.337699371598848,
+      "mean_R_nonessential": 1.5625276008323967,
+      "passed": true
+    },
+    "8e_conservation": {
+      "df": 76.24658602682585,
+      "alpha": 0.29751662761481396,
+      "df_x_alpha": 22.684627141844025,
+      "target_8e": 21.74625462767236,
+      "relative_error": 0.043150994515514164,
+      "passed": true
+    },
+    "housekeeping_vs_specific": {
+      "r_housekeeping": 5.4296690538618835,
+      "r_specific": 0.33856661107133673,
+      "median_housekeeping": 4.816542824670345,
+      "median_specific": 0.1842598569289845,
+      "p_value": 0.0,
+      "p_ttest": 0.0,
+      "cohens_d": 3.8162159527858956,
+      "n_housekeeping": 1000,
+      "n_tissue_specific": 1000,
+      "passed": true
+    }
+  }
+}

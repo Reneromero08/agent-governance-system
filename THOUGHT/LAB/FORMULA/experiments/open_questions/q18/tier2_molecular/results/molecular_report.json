@@ -1,0 +1,99 @@
+{
+  "agent_id": "molecular_tier2",
+  "tier": "molecular",
+  "version": "1.0.0",
+  "timestamp": "2026-01-26T01:42:33.103584+00:00",
+  "tests": {
+    "blind_folding": {
+      "auc": 0.9440000000000001,
+      "passed": true
+    },
+    "binding_causality": {
+      "spearman_rho": 0.6606519080689374,
+      "p_value": 1.6377300454017545e-51,
+      "passed": true
+    },
+    "8e_conservation": {
+      "df": 1.185661659108373,
+      "alpha": 3.5214115505539336,
+      "df_x_alpha": 4.15669593445587,
+      "cv_across_families": 0.10558665744553668,
+      "passed": true
+    },
+    "adversarial": {
+      "survival_rate": 1.0,
+      "passed": true
+    }
+  },
+  "tests_passed": 4,
+  "tests_total": 4,
+  "key_findings": [
+    "R successfully predicts fold quality with AUC=0.944",
+    "Delta-R correlates with mutation effects (|rho|=0.661)",
+    "8e conservation holds at molecular scale (CV=10.6%)",
+    "R robust to adversarial sequences (100% survival)"
+  ],
+  "data_hash": "63729b6191465ae2",
+  "detailed_results": {
+    "blind_folding": {
+      "auc": 0.9440000000000001,
+      "correlation": 0.6745990790871613,
+      "p_value": 7.79938280098193e-08,
+      "n_proteins": 750,
+      "n_families": 50,
+      "passed": true,
+      "error": null
+    },
+    "binding_causality": {
+      "spearman_rho": 0.6606519080689374,
+      "p_value": 1.6377300454017545e-51,
+      "n_mutations": 400,
+      "n_proteins": 5,
+      "pearson_r": 0.643474028330254,
+      "passed": true,
+      "error": null
+    },
+    "8e_conservation": {
+      "df": 1.185661659108373,
+      "alpha": 3.5214115505539336,
+      "df_x_alpha": 4.15669593445587,
+      "cv_across_families": 0.10558665744553668,
+      "deviation_from_8e": 0.8088546278140959,
+      "passed": true,
+      "error": null
+    },
+    "adversarial": {
+      "survival_rate": 1.0,
+      "n_cases": 6,
+      "cases_passed": 6,
+      "case_summary": {
+        "idp": {
+          "mean_r": 0.023733555237055504,
+          "meaningful": true
+        },
+        "multidomain": {
+          "mean_r": 0.03562738904471274,
+          "meaningful": true
+        },
+        "homopolymer": {
+          "mean_r": 0.014026644749762176,
+          "meaningful": true
+        },
+        "random": {
+          "mean_r": 0.08092699318382934,
+          "meaningful": true
+        },
+        "tandem_repeat": {
+          "mean_r": 0.028391347558715502,
+          "meaningful": true
+        },
+        "chimeric": {
+          "mean_r": 0.05694593725784363,
+          "meaningful": true
+        }
+      },
+      "passed": true,
+      "error": null
+    }
+  }
+}

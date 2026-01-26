@@ -1,0 +1,140 @@
+{
+  "wave": 3,
+  "test_name": "Adversarial Red Team Validation",
+  "timestamp": "2026-01-25T00:00:00Z",
+  "seed": 42,
+  "attacks": [
+    {
+      "attack_name": "random_gene_shuffling",
+      "target_finding": "Cross-Species Transfer r=0.828",
+      "original_metric": 0.8275356286308073,
+      "attack_methodology": "Randomly shuffle ortholog mappings to test if correlation requires true gene identity or arises from global distribution properties",
+      "null_hypothesis": "If R captures trivial features, random shuffles should preserve correlation",
+      "attack_metrics": {
+        "original_r": 0.8275356286308073,
+        "shuffled_mean": 0.0009200056711311685,
+        "shuffled_std": 0.011599118319750213,
+        "shuffled_max": 0.02506988419470582,
+        "z_score": 71.26538354433642,
+        "permutation_p": 0.0,
+        "n_shuffles": 100
+      },
+      "attack_succeeded": false,
+      "robustness_reason": "Original r=0.828 is 71.3 standard deviations above random shuffles (max shuffled=0.025). The correlation requires true ortholog identity, not trivial features.",
+      "verdict": "ROBUST"
+    },
+    {
+      "attack_name": "alternative_metric_comparison",
+      "target_finding": "Essentiality Prediction AUC=0.990",
+      "original_metric": 0.9908928888888913,
+      "attack_methodology": "Compare R to simpler metrics (1/CV, mean expression, E alone) and check for circularity in test design",
+      "null_hypothesis": "Any expression stability metric would achieve similar AUC",
+      "attack_metrics": {
+        "auc_R": 0.9908928888888913,
+        "auc_inv_cv": 0.9138524444444692,
+        "auc_mean": 0.5506438888888869,
+        "auc_E": 0.9138524444444692,
+        "auc_random": 0.4898697777777807,
+        "auc_housekeeping_indicator": 0.9699777777777306,
+        "best_alternative_auc": 0.9138524444444692,
+        "relative_performance": 0.9222514911545745,
+        "circularity_detected": true
+      },
+      "attack_succeeded": true,
+      "robustness_reason": "R achieves AUC=0.991 while best alternative achieves 0.914 (92.2%). R's combination of E/sigma provides meaningfully better prediction than simpler metrics.\n\nCRITICAL: The test has circularity - essentiality scores were generated using R values, so R trivially predicts essentiality. The AUC=0.990 is NOT evidence that R captures real biological essentiality.",
+      "verdict": "FALSIFIED"
+    },
+    {
+      "attack_name": "circularity_analysis",
+      "target_finding": "Blind Folding Prediction AUC=0.944",
+      "original_metric": 0.944,
+      "attack_methodology": "Analyze code to identify shared features between R computation and fold quality proxy. Quantify circularity contribution.",
+      "null_hypothesis": "R predicts folding because it uses the same features as fold quality definition",
+      "attack_metrics": {
+        "shared_factors": [
+          "hydro_balance",
+          "order_score",
+          "complexity_score"
+        ],
+        "circularity_fold": 0.75,
+        "circularity_r": 0.6,
+        "original_correlation": 0.6746,
+        "estimated_shared_contribution": 0.44999999999999996,
+        "fold_factors_total": 4,
+        "r_factors_total": 5
+      },
+      "attack_succeeded": true,
+      "robustness_reason": "75% of fold quality factors (hydro_balance, order_score, complexity_score) are DIRECTLY used in R computation. The AUC=0.944 is largely circular - R predicts folding because both use the same underlying features. This is not evidence that R captures something beyond these features.",
+      "verdict": "FALSIFIED"
+    },
+    {
+      "attack_name": "outlier_and_tautology_analysis",
+      "target_finding": "Mutation Effects rho=0.661",
+      "original_metric": 0.661,
+      "attack_methodology": "1) Remove extreme mutations and recompute correlation. 2) Bootstrap confidence interval. 3) Check if delta-R and delta-fitness share confounding variables.",
+      "null_hypothesis": "The correlation is driven by outliers or tautological construction",
+      "attack_metrics": {
+        "rho_all": 0.5067157294733091,
+        "rho_no_extreme": 0.40748745489291327,
+        "n_extreme_removed": 40,
+        "bootstrap_ci_low": 0.4255828159763328,
+        "bootstrap_ci_high": 0.5747482724574312,
+        "rho_disruption": 0.7275168358559477,
+        "tautology_detected": true
+      },
+      "attack_succeeded": true,
+      "robustness_reason": "The correlation rho=0.507 is TAUTOLOGICAL. Both delta-R and delta-fitness are computed from the same physicochemical disruption score:\n  - delta_fitness = -(disruption + noise)\n  - delta_r_enhanced = delta_r - disruption * 0.1\nThe correlation is built into the test by construction, not discovered empirically. Raw disruption alone achieves rho=0.728.",
+      "verdict": "FALSIFIED"
+    },
+    {
+      "attack_name": "variance_baseline_comparison",
+      "target_finding": "Perturbation Prediction cosine=0.766",
+      "original_metric": 0.766,
+      "attack_methodology": "Compare R-weighted prediction to simpler baselines: inverse-variance, mean-expression, and uniform weights",
+      "null_hypothesis": "R is essentially measuring expression variance",
+      "attack_metrics": {
+        "mean_cosine_R": 0.05862713345144952,
+        "mean_cosine_var": 0.060730712234554216,
+        "mean_cosine_mean": 0.053123942589619846,
+        "mean_cosine_uniform": 0.05668290865402167,
+        "relative_var_performance": 1.0358806333463098
+      },
+      "attack_succeeded": true,
+      "robustness_reason": "Variance-weighted prediction achieves 0.061 cosine similarity, which is 103.6% of R-weighted (0.059). R does not provide meaningful improvement over simple inverse-variance weighting.",
+      "verdict": "PARTIALLY_FALSIFIED"
+    }
+  ],
+  "summary": {
+    "n_attacks": 5,
+    "n_falsified": 3,
+    "n_partially_falsified": 1,
+    "n_robust": 1,
+    "overall_verdict": "Q18_FINDINGS_NOT_ROBUST",
+    "confidence_in_q18": 0.2
+  },
+  "critical_findings": [
+    "ESSENTIALITY TEST: Circular by construction - essentiality scores are GENERATED using R values",
+    "FOLDING TEST: 75% feature overlap between R computation and fold quality definition",
+    "MUTATION TEST: Tautological - both delta-R and delta-fitness are functions of same disruption score",
+    "CROSS-SPECIES: Only robust finding - random shuffling destroys correlation",
+    "PERTURBATION: Marginal robustness - variance-weighting achieves similar results"
+  ],
+  "recommendations": [
+    "Redesign essentiality test with INDEPENDENT essentiality ground truth (e.g., real DepMap data)",
+    "Redesign folding test to ensure R uses different features than fold quality proxy",
+    "Redesign mutation test with delta-R computed independently of disruption score",
+    "The cross-species transfer test is the most credible evidence for R",
+    "Consider whether R = E/sigma provides value beyond simpler metrics like 1/CV"
+  ],
+  "verdict": {
+    "q18_answer": "NOT_SUPPORTED",
+    "confidence": 0.2,
+    "summary": "Most Q18 positive findings fail adversarial validation due to circularity and tautology",
+    "implications": [
+      "The R = E/sigma formula may not capture biological meaning beyond what simpler metrics capture",
+      "Tests need redesign with truly independent ground truth",
+      "Only cross-species transfer provides credible evidence",
+      "8e conservation law is not relevant to most biological findings (already noted in Wave 2)"
+    ]
+  }
+}
