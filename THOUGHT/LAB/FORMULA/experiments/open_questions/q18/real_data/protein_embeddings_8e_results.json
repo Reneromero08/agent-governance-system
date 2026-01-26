@@ -1,0 +1,99 @@
+{
+  "timestamp": "2026-01-25T23:05:29.098062",
+  "hypothesis": "ESM-2 trained embeddings should show Df x alpha = 8e",
+  "theoretical_8e": 21.74625462767236,
+  "random_expected": 14.5,
+  "n_proteins": 47,
+  "results": [
+    {
+      "name": "ESM-2 Protein Embeddings",
+      "description": "ESM-2 trained protein language model embeddings (facebook/esm2_t6_8M_UR50D)",
+      "n_proteins": 47,
+      "embedding_dim": 320,
+      "Df": 5.5119805335998535,
+      "alpha": 6.568335511475005,
+      "Df_x_alpha": 36.204537477402866,
+      "deviation_from_8e": 0.6648631268821884,
+      "deviation_percent": 66.48631268821885,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        1.1946979761123657,
+        0.3188163936138153,
+        0.22832603752613068,
+        0.1970304697751999,
+        0.14963030815124512,
+        0.12709954380989075,
+        0.11698545515537262,
+        0.09615442156791687,
+        0.0831366553902626,
+        0.06902523338794708
+      ],
+      "method_details": {
+        "model": "facebook/esm2_t6_8M_UR50D",
+        "pooling": "mean",
+        "n_proteins": 47
+      }
+    },
+    {
+      "name": "Random Baseline",
+      "description": "Pure random Gaussian embeddings (negative control)",
+      "n_proteins": 47,
+      "embedding_dim": 320,
+      "Df": 40.50283116088464,
+      "alpha": 0.394811274515484,
+      "Df_x_alpha": 15.990974392114325,
+      "deviation_from_8e": 0.26465615960526717,
+      "deviation_percent": 26.465615960526716,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        12.833604504112767,
+        11.689009770189893,
+        11.2825723983498,
+        11.078713359903352,
+        10.775889387867238,
+        10.666453785054498,
+        9.922431192537902,
+        9.845735303251292,
+        9.560458346678724,
+        9.353597517987817
+      ],
+      "method_details": {
+        "distribution": "normal",
+        "seed": 42
+      }
+    },
+    {
+      "name": "Amino Acid Properties",
+      "description": "Untrained amino acid property-based encoding (control)",
+      "n_proteins": 47,
+      "embedding_dim": 50,
+      "Df": 1.0033929937908397,
+      "alpha": 12.781979148407768,
+      "Df_x_alpha": 12.825348324292957,
+      "deviation_from_8e": 0.4102272532037516,
+      "deviation_percent": 41.02272532037516,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        2.0714702571714714,
+        0.0035135302556023383,
+        6.155921487644205e-07,
+        1.0592312964712267e-07
+      ],
+      "method_details": {
+        "method": "aa_properties",
+        "trained": false
+      }
+    }
+  ],
+  "conclusion": {
+    "status": "HYPOTHESIS_NOT_CONFIRMED",
+    "message": "ESM-2 embeddings showed 66.5% deviation from 8e, outside the 15% threshold.",
+    "esm2_deviation": 66.48631268821885,
+    "possible_explanations": [
+      "Protein semantic space may have different geometry than text",
+      "Sample size (47 proteins) may be insufficient",
+      "ESM-2 architecture may learn different representations",
+      "8e may be specific to text language understanding"
+    ]
+  }
+}

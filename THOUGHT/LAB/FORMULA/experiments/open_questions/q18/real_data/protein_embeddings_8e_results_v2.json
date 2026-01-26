@@ -1,0 +1,141 @@
+{
+  "timestamp": "2026-01-25T23:07:11.676133",
+  "theoretical_8e": 21.74625462767236,
+  "hypothesis": "ESM-2 should show 8e when tested with sufficient samples",
+  "results": [
+    {
+      "name": "ESM-2 Per-Residue Embeddings",
+      "description": "Per-residue hidden states from ESM-2 (3000 samples)",
+      "n_samples": 3000,
+      "embedding_dim": 320,
+      "Df": 40.050437927246094,
+      "alpha": 1.297036900876554,
+      "Df_x_alpha": 51.94689588790408,
+      "deviation_from_8e": 1.388774378729156,
+      "deviation_percent": 138.8774378729156,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        3.320681571960449,
+        1.0085569620132446,
+        0.854041576385498,
+        0.6857650279998779,
+        0.6068440675735474,
+        0.5800096988677979,
+        0.5255371928215027,
+        0.4847186803817749,
+        0.4751321077346802,
+        0.4509470760822296
+      ]
+    },
+    {
+      "name": "ESM-2 Sliding Window Embeddings",
+      "description": "Mean of 50-residue windows from ESM-2",
+      "n_samples": 730,
+      "embedding_dim": 320,
+      "Df": 7.602417469024658,
+      "alpha": 2.092742846585432,
+      "Df_x_alpha": 15.909904775057477,
+      "deviation_from_8e": 0.26838414028262414,
+      "deviation_percent": 26.838414028262413,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        2.422471284866333,
+        0.5554841160774231,
+        0.3097298741340637,
+        0.2900649309158325,
+        0.24279025197029114,
+        0.23651129007339478,
+        0.17278318107128143,
+        0.1634434312582016,
+        0.14679516851902008,
+        0.13050338625907898
+      ]
+    },
+    {
+      "name": "Random Baseline (3000 samples)",
+      "description": "Random Gaussian embeddings for comparison",
+      "n_samples": 3000,
+      "embedding_dim": 320,
+      "Df": 289.0429407648415,
+      "alpha": 0.3047509075849096,
+      "Df_x_alpha": 88.0860985290967,
+      "deviation_from_8e": 3.050633087732088,
+      "deviation_percent": 305.0633087732088,
+      "passes_8e": false,
+      "top_eigenvalues": [
+        1.7411086023561153,
+        1.72408637784239,
+        1.7104668703963617,
+        1.7020061747671718,
+        1.6850063106388178,
+        1.6774136129784787,
+        1.6681509823490184,
+        1.6547833888186647,
+        1.6510767441501504,
+        1.639628136670014
+      ]
+    },
+    {
+      "name": "Sample Size Sweep",
+      "description": "8e analysis at different sample sizes",
+      "sweep_results": [
+        {
+          "n_samples": 100,
+          "Df": 16.840225219726562,
+          "alpha": 6.644054397332847,
+          "Df_x_alpha": 111.88737242319978,
+          "deviation_percent": 414.5133005148473
+        },
+        {
+          "n_samples": 300,
+          "Df": 31.45280647277832,
+          "alpha": 2.708634303006698,
+          "Df_x_alpha": 85.19415053799847,
+          "deviation_percent": 291.76470613743265
+        },
+        {
+          "n_samples": 500,
+          "Df": 26.38348960876465,
+          "alpha": 1.760440266062048,
+          "Df_x_alpha": 46.446557466498916,
+          "deviation_percent": 113.5841700639113
+        },
+        {
+          "n_samples": 1000,
+          "Df": 31.64189338684082,
+          "alpha": 1.5062880068450033,
+          "Df_x_alpha": 47.661804522466554,
+          "deviation_percent": 119.17247516184399
+        },
+        {
+          "n_samples": 2000,
+          "Df": 36.287086486816406,
+          "alpha": 1.3176210047355155,
+          "Df_x_alpha": 47.81262735568358,
+          "deviation_percent": 119.86603290684117
+        },
+        {
+          "n_samples": 3000,
+          "Df": 40.492584228515625,
+          "alpha": 1.2461965492327851,
+          "Df_x_alpha": 50.46171873509407,
+          "deviation_percent": 132.04786111021133
+        },
+        {
+          "n_samples": 5000,
+          "Df": 37.21918869018555,
+          "alpha": 1.2167345400965357,
+          "Df_x_alpha": 45.28587243371909,
+          "deviation_percent": 108.24676804847257
+        }
+      ]
+    }
+  ],
+  "key_finding": {
+    "status": "HYPOTHESIS_NOT_CONFIRMED",
+    "message": "ESM-2 showed 138.9% deviation from 8e even with more samples.",
+    "Df_x_alpha": 51.94689588790408,
+    "deviation_percent": 138.8774378729156,
+    "interpretation": "Protein semantic space may have different geometry than text embeddings, or 8e may be specific to natural language understanding."
+  }
+}
