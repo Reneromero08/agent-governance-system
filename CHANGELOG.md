@@ -27,6 +27,11 @@ New experimental folder for post-substrate optimization work:
 - Disabled fixtures that expect missing test PDF files (basic, multi-page, tables)
 - Fixtures can be re-enabled when actual test PDFs are provided
 
+### Fixed: QEC test import errors
+
+- Added conftest.py to CAPABILITY/TESTBENCH/cassette_network/qec/ to fix `from core import` resolution
+- All 1445 TESTBENCH tests now collect without errors
+
 ---
 
 ## [3.8.25] - 2026-01-25
