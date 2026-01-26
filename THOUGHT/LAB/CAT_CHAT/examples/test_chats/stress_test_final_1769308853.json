@@ -1,0 +1,193 @@
+{
+  "duration": 13577.621407747269,
+  "total_turns": 184,
+  "recall_accuracy": 1.0,
+  "llm_accuracy": 0.625,
+  "recalls": [
+    {
+      "turn": 180,
+      "source_turn": 162,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 11.15275385162355,
+      "expected": [
+        "4 hours",
+        "1 hour",
+        "RTO",
+        "RPO"
+      ]
+    },
+    {
+      "turn": 181,
+      "source_turn": 168,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 16.433283317395162,
+      "expected": [
+        "Sunday",
+        "02:00",
+        "UTC"
+      ]
+    },
+    {
+      "turn": 186,
+      "source_turn": 148,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 11.382930992611465,
+      "expected": [
+        "7 years"
+      ]
+    },
+    {
+      "turn": 187,
+      "source_turn": 135,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 10.470426137475961,
+      "expected": [
+        "Argon2id",
+        "Argon2"
+      ]
+    },
+    {
+      "turn": 188,
+      "source_turn": 122,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 12.022289616553302,
+      "expected": [
+        "WAF",
+        "TOR",
+        "1000",
+        "SQL injection"
+      ]
+    },
+    {
+      "turn": 189,
+      "source_turn": 115,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 10.290984317394473,
+      "expected": [
+        "LaunchDarkly",
+        "feature flag",
+        "kill switch"
+      ]
+    },
+    {
+      "turn": 190,
+      "source_turn": 108,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 9.554693827693939,
+      "expected": [
+        "circuit breaker",
+        "5 consecutive",
+        "half-open"
+      ]
+    },
+    {
+      "turn": 191,
+      "source_turn": 102,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 11.513722707497726,
+      "expected": [
+        "RabbitMQ",
+        "3 replicas",
+        "dlx"
+      ]
+    },
+    {
+      "turn": 193,
+      "source_turn": 3,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 10.74793594646334,
+      "expected": [
+        "RS256"
+      ]
+    },
+    {
+      "turn": 194,
+      "source_turn": 7,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 11.597088100261661,
+      "expected": [
+        "100",
+        "minute",
+        "429"
+      ]
+    },
+    {
+      "turn": 195,
+      "source_turn": 12,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 11.72346209368243,
+      "expected": [
+        "12"
+      ]
+    },
+    {
+      "turn": 196,
+      "source_turn": 18,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 11.423369570570786,
+      "expected": [
+        "UUID",
+        "v4"
+      ]
+    },
+    {
+      "turn": 197,
+      "source_turn": 25,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 11.251696535740072,
+      "expected": [
+        "ISO 8601",
+        "8601"
+      ]
+    },
+    {
+      "turn": 198,
+      "source_turn": 38,
+      "context_found": true,
+      "response_found": true,
+      "E_mean": 9.29991744733711,
+      "expected": [
+        "32",
+        "pk_",
+        "sk_"
+      ]
+    },
+    {
+      "turn": 199,
+      "source_turn": 42,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 9.185832156920833,
+      "expected": [
+        "HMAC",
+        "SHA256",
+        "X-Signature"
+      ]
+    },
+    {
+      "turn": 200,
+      "source_turn": 52,
+      "context_found": true,
+      "response_found": false,
+      "E_mean": 10.49863280863907,
+      "expected": [
+        "3 attempts",
+        "exponential",
+        "backoff"
+      ]
+    }
+  ]
+}
