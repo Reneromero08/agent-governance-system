@@ -1,0 +1,2 @@
+# Test suite for System Evolution (Phase 10)
+# Tests should follow the pattern: test_<module>_<feature>.py

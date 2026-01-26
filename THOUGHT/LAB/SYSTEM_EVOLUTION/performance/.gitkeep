@@ -1,0 +1,5 @@
+# 10.1 Performance Foundation
+# Planned modules:
+# - incremental_indexer.py
+# - query_cache.py
+# - compression_dashboard.py
