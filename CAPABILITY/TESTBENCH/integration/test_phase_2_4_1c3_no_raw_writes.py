@@ -49,6 +49,7 @@ ALLOWED_FILES = {
     'test_inbox_report_writer.py',  # Test for inbox report writer
     'run.py',  # ant-worker adapter script - capability adapter with legitimate file ops
     'memory_cassette.py',  # Memory cassette - needs mkdir for database directory initialization
+    'pdf_converter.py',  # arxiv-to-md utility - needs raw writes to download and save papers
 }
 
 # Lines that should be ignored (comments, imports, defensive code)

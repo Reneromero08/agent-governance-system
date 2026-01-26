@@ -3,11 +3,12 @@
 Tests for cortex-toolkit skill.
 
 Tests the unified CORTEX toolkit operations:
-- build: Rebuild CORTEX index and SECTION_INDEX
 - verify_cas: Check CAS directory integrity
-- verify_system1: Ensure system1.db is in sync
 - summarize: Generate deterministic section summaries
 - smoke_test: Run LLM Packer smoke tests
+
+Note: build and verify_system1 were removed - cassette network now
+handles semantic search via NAVIGATION/CORTEX/cassettes/
 """
 
 from __future__ import annotations
@@ -95,7 +96,8 @@ class TestOperationDispatch:
 
     def test_operations_registry_contains_all_operations(self):
         """Verify all expected operations are in the registry."""
-        expected_ops = ["build", "verify_cas", "verify_system1", "summarize", "smoke_test"]
+        # Note: build and verify_system1 removed - cassette network handles semantic search
+        expected_ops = ["verify_cas", "summarize", "smoke_test"]
         for op in expected_ops:
             assert op in cortex_toolkit.OPERATIONS, f"Operation '{op}' not in OPERATIONS registry"
 
@@ -106,11 +108,12 @@ class TestOperationDispatch:
 
 
 # ============================================================================
-# Test: Build Operation
+# Test: Build Operation (REMOVED - cassette network handles semantic search)
 # ============================================================================
 
+@pytest.mark.skip(reason="build operation removed - cassette network handles semantic search")
 class TestBuildOperation:
-    """Test the build operation."""
+    """Test the build operation (REMOVED)."""
 
     def test_build_can_be_invoked(self, temp_run_dir: Path, mock_writer):
         """Test that build operation can be invoked."""
@@ -203,11 +206,12 @@ class TestVerifyCasOperation:
 
 
 # ============================================================================
-# Test: Verify System1 Operation
+# Test: Verify System1 Operation (REMOVED - cassette network handles semantic search)
 # ============================================================================
 
+@pytest.mark.skip(reason="verify_system1 operation removed - cassette network handles semantic search")
 class TestVerifySystem1Operation:
-    """Test the verify_system1 operation.
+    """Test the verify_system1 operation (REMOVED).
 
     Tests verify the operation is registered and callable.
     The actual cortex verification test runs serially to avoid DB locking.

@@ -57,7 +57,8 @@ QGT_PHASE_PATH = REPO_ROOT / "THOUGHT" / "LAB" / "VECTOR_ELO" / "eigen-alignment
 sys.path.insert(0, str(QGT_PHASE_PATH))
 
 try:
-    from qgt_phase import test_zero_signature, octant_phase_mapping, OctantPhaseResult, ZeroSignatureResult
+    # Import with alias to avoid pytest discovering it as a test function
+    from qgt_phase import test_zero_signature as compute_zero_signature_qgt, octant_phase_mapping, OctantPhaseResult, ZeroSignatureResult
     HAS_QGT_PHASE = True
     print(f"Loaded qgt_phase from {QGT_PHASE_PATH}")
 except ImportError as e:
@@ -246,7 +247,7 @@ def compute_zero_signature(embeddings: np.ndarray, verbose: bool = False) -> Dic
 
         # Also run the full test for statistics
         try:
-            sig_result = test_zero_signature(embeddings, verbose=verbose)
+            sig_result = compute_zero_signature_qgt(embeddings, verbose=verbose)
             return {
                 "normalized_magnitude": sig_result.normalized_magnitude,
                 "is_zero": sig_result.is_zero,
