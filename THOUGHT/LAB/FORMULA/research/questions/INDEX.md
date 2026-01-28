@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.24.0 (2026-01-28 - INDEX sync: Q16 CONFIRMED (adversarial NLI fails), Q19 CONDITIONAL (value learning r=0.52), Q20 CONFIRMED (8e text-specific), Q22 FALSIFIED (no universal threshold), Q23 CLOSED (sqrt3 empirical), Q25 RESOLVED (sigma predictable R^2=0.86). 43/53 questions answered (81.1%).)*
+*Last updated: v4.25.0 (2026-01-28 - Q53 FALSIFIED: Pentagonal/phi geometry does NOT exist. 0/77 eigenvalue ratios near phi, 0 golden angles. The ~72 deg clustering is semantic similarity (arccos(0.31)=72), not geometry. 43/53 questions answered (81.1%), 3 falsified.)*
 
 ---
 
@@ -99,7 +99,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ✅ RESOLVED | **RIGOROUS RETEST: N_min = 3-5 with NO D scaling.** Tested 7 models (D=50-768): N_min constant. Semantic structure matters: diverse=3, coherent=5. Original hypothesis (log scaling) FALSIFIED - N_min is dimension-independent. Practical: use N>=5 for safety. |
 | 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ✅ ANSWERED | **Adaptive thresholding under noise.** Gate becomes MORE conservative under stress (noise improves discrimination by raising effective threshold). This is homeostatic self-protection, not a bug. Cohen's d increases with noise (r=+0.989). |
 | 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ✅ RESOLVED | **R is NOT chaotic.** Lyapunov < 0.05 (mean=0.0357, max=0.0447). R converges to noisy fixed points. 82.1% pass rate. Autocorr > 0.7 all regimes. Regime equilibria: bull~0.22, bear~0.18. |
-| 53 | [Pentagonal Phi Geometry](high_priority/q53_pentagonal_phi_geometry.md) | 1200 | ⏳ PARTIAL | **CONFIRMATION BIAS CORRECTED.** Only 72-deg clustering passes (1/5 tests). FAIL: phi spectrum (0 ratios), golden angle (0 counts), icosahedral (below baseline). INCONCLUSIVE: 5-fold PCA (random also passes). Real finding: trained embeddings cluster at ~70-80 deg (vs 90 deg random) due to semantic similarity, NOT pentagonal/phi geometry. |
+| 53 | [Pentagonal Phi Geometry](high_priority/q53_pentagonal_phi_geometry.md) | 1200 | ❌ FALSIFIED | **Pentagonal/phi geometry does NOT exist.** 0/77 eigenvalue ratios near phi, 0 golden angles, icosahedral below baseline. The ~72 deg clustering is explained by semantic similarity (arccos(0.31)=72), NOT geometry. Model means vary 72-81 deg (not constant). Original claim was apophenia. |
 
 ---
 
@@ -136,7 +136,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 > How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). **Q28 RESOLVED:** R is NOT chaotic (Lyapunov < 0.05). R converges to noisy fixed points with regime-specific equilibria. **Q52 FALSIFIED:** R POSITIVELY correlates with Lyapunov - chaotic systems have HIGH R (fill phase space), stable/periodic have LOW R.
 
 **Cluster G: Geometry & Symmetry** (Q8, Q36, Q38, Q43, Q53)
-> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -0.10 rad), conserves angular momentum (CV=6e-7). *Q53 corrected 2026-01-27: Acute angle clustering (~70-80 deg) confirmed, but pentagonal/phi geometry NOT confirmed.*
+> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -0.10 rad), conserves angular momentum (CV=6e-7). *Q53 FALSIFIED 2026-01-28: Pentagonal/phi geometry does NOT exist. The ~72 deg clustering is explained by semantic similarity (arccos(0.31)=72), not geometry.*
 
 ---
 
@@ -144,8 +144,8 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 
 - **Total Questions:** 53
 - **Answered:** 43 (81.1%) - includes Q16 CONFIRMED, Q19 CONDITIONAL, Q20 CONFIRMED, Q23 CLOSED, Q25 RESOLVED
-- **Partially Answered:** 2 (3.8%) - Q53 PARTIAL (pentagonal geometry), Q4 PARTIAL (novel predictions)
-- **Falsified:** 2 (3.8%) - Q52 Chaos Theory, Q22 Universal Threshold
+- **Partially Answered:** 1 (1.9%) - Q4 PARTIAL (novel predictions)
+- **Falsified:** 3 (5.7%) - Q52 Chaos Theory, Q22 Universal Threshold, Q53 Pentagonal Phi Geometry
 - **Open:** 6 (11.3%)
 
 ### By Priority Level

@@ -1,0 +1,491 @@
+{
+  "timestamp": "2026-01-28T05:41:50.305579+00:00",
+  "hypothesis": "Embedding space has icosahedral (5-fold) symmetry",
+  "phi": 1.618033988749895,
+  "pentagon_angle": 72.0,
+  "n_words": 79,
+  "n_models_total": 5,
+  "n_trained_models": 3,
+  "n_mock_models": 2,
+  "avg_trained_passed": 1.6666666666666667,
+  "avg_mock_passed": 1.0,
+  "verdict": "SUPPORTED",
+  "explanation": "Trained embedding models show stronger 5-fold symmetry signal (1.67 tests) vs random baselines (1.00 tests). This suggests embedding spaces may exhibit phi-related geometric structure.",
+  "model_results": [
+    {
+      "model": "all-MiniLM-L6-v2",
+      "n_embeddings": 79,
+      "n_angles": 3081,
+      "angle_mean": 72.85416412353516,
+      "angle_std": 5.855586051940918,
+      "tests": {
+        "clustering_72": {
+          "test": "72_DEGREE_CLUSTERING",
+          "phi_counts": {
+            "36.0": 1,
+            "72.0": 2046,
+            "108.0": 0,
+            "144.0": 0,
+            "180.0": 0
+          },
+          "expected_uniform": 171.16666666666666,
+          "excess_72_deg": 10.883833494675702,
+          "chi_sq_contributions": {
+            "36.0": 168.18989996773152,
+            "72.0": 20416.26347208777,
+            "108.0": 170.17247499193286,
+            "144.0": 170.17247499193286,
+            "180.0": 170.17247499193286
+          },
+          "total_angles": 3081,
+          "pass": true
+        },
+        "phi_spectrum": {
+          "test": "PHI_RATIO_SPECTRUM",
+          "n_eigenvalues": 78,
+          "n_ratios": 77,
+          "ratios_near_phi": 0,
+          "ratios_near_inv_phi": 0,
+          "phi_density": 0.0,
+          "top_5_ratios": [
+            1.267646901757283,
+            1.2534772958159708,
+            1.0780675626786786,
+            1.0566481370165028,
+            1.1629333037195801
+          ],
+          "pass": "False"
+        },
+        "pca_5fold": {
+          "test": "5FOLD_PCA_SYMMETRY",
+          "hist_5fold": [
+            23,
+            23,
+            12,
+            4,
+            17
+          ],
+          "hist_6fold": [
+            15,
+            28,
+            4,
+            11,
+            12,
+            9
+          ],
+          "cv_5fold": 0.45534444932888896,
+          "cv_6fold": 0.5639663141715512,
+          "5fold_better_than_6fold": "True",
+          "pass": "True"
+        },
+        "golden_angle": {
+          "test": "GOLDEN_ANGLE_PREVALENCE",
+          "golden_angle": 137.50776405003788,
+          "count_near_golden": 0,
+          "expected_uniform": 171.16666666666666,
+          "excess": -1.0,
+          "pass": false
+        },
+        "icosahedral": {
+          "test": "ICOSAHEDRAL_ANGLES",
+          "icosa_angles": [
+            63.43,
+            116.57,
+            180.0
+          ],
+          "counts": {
+            "63.43": 434,
+            "116.57": 0,
+            "180.0": 0
+          },
+          "total_icosa": 434,
+          "expected": 513.5,
+          "excess": -0.15646258503401356,
+          "pass": false
+        }
+      },
+      "tests_passed": 2,
+      "tests_total": 5
+    },
+    {
+      "model": "all-mpnet-base-v2",
+      "n_embeddings": 79,
+      "n_angles": 3081,
+      "angle_mean": 74.9449462890625,
+      "angle_std": 6.297750949859619,
+      "tests": {
+        "clustering_72": {
+          "test": "72_DEGREE_CLUSTERING",
+          "phi_counts": {
+            "36.0": 2,
+            "72.0": 1525,
+            "108.0": 0,
+            "144.0": 0,
+            "180.0": 0
+          },
+          "expected_uniform": 171.16666666666666,
+          "excess_72_deg": 7.857696030977735,
+          "chi_sq_contributions": {
+            "36.0": 166.2189415940626,
+            "72.0": 10645.874314294933,
+            "108.0": 170.17247499193286,
+            "144.0": 170.17247499193286,
+            "180.0": 170.17247499193286
+          },
+          "total_angles": 3081,
+          "pass": true
+        },
+        "phi_spectrum": {
+          "test": "PHI_RATIO_SPECTRUM",
+          "n_eigenvalues": 78,
+          "n_ratios": 77,
+          "ratios_near_phi": 0,
+          "ratios_near_inv_phi": 0,
+          "phi_density": 0.0,
+          "top_5_ratios": [
+            1.3882419259099066,
+            1.0924586123977362,
+            1.1609825778187042,
+            1.2560139469782543,
+            1.0730085017501751
+          ],
+          "pass": "False"
+        },
+        "pca_5fold": {
+          "test": "5FOLD_PCA_SYMMETRY",
+          "hist_5fold": [
+            18,
+            6,
+            10,
+            22,
+            23
+          ],
+          "hist_6fold": [
+            15,
+            9,
+            9,
+            9,
+            20,
+            17
+          ],
+          "cv_5fold": 0.4243811294717497,
+          "cv_6fold": 0.335144361892992,
+          "5fold_better_than_6fold": "False",
+          "pass": "False"
+        },
+        "golden_angle": {
+          "test": "GOLDEN_ANGLE_PREVALENCE",
+          "golden_angle": 137.50776405003788,
+          "count_near_golden": 0,
+          "expected_uniform": 171.16666666666666,
+          "excess": -1.0,
+          "pass": false
+        },
+        "icosahedral": {
+          "test": "ICOSAHEDRAL_ANGLES",
+          "icosa_angles": [
+            63.43,
+            116.57,
+            180.0
+          ],
+          "counts": {
+            "63.43": 246,
+            "116.57": 0,
+            "180.0": 0
+          },
+          "total_icosa": 246,
+          "expected": 513.5,
+          "excess": -0.5218658892128281,
+          "pass": false
+        }
+      },
+      "tests_passed": 1,
+      "tests_total": 5
+    },
+    {
+      "model": "paraphrase-MiniLM-L6-v2",
+      "n_embeddings": 79,
+      "n_angles": 3081,
+      "angle_mean": 81.13670349121094,
+      "angle_std": 6.252025127410889,
+      "tests": {
+        "clustering_72": {
+          "test": "72_DEGREE_CLUSTERING",
+          "phi_counts": {
+            "36.0": 1,
+            "72.0": 541,
+            "108.0": 0,
+            "144.0": 0,
+            "180.0": 0
+          },
+          "expected_uniform": 171.16666666666666,
+          "excess_72_deg": 2.1423039690222656,
+          "chi_sq_contributions": {
+            "36.0": 168.18989996773152,
+            "72.0": 794.4435301710231,
+            "108.0": 170.17247499193286,
+            "144.0": 170.17247499193286,
+            "180.0": 170.17247499193286
+          },
+          "total_angles": 3081,
+          "pass": true
+        },
+        "phi_spectrum": {
+          "test": "PHI_RATIO_SPECTRUM",
+          "n_eigenvalues": 78,
+          "n_ratios": 77,
+          "ratios_near_phi": 0,
+          "ratios_near_inv_phi": 0,
+          "phi_density": 0.0,
+          "top_5_ratios": [
+            1.2021288667153314,
+            1.0990241873467126,
+            1.0715743143292675,
+            1.0416354927545501,
+            1.2342130191074785
+          ],
+          "pass": "False"
+        },
+        "pca_5fold": {
+          "test": "5FOLD_PCA_SYMMETRY",
+          "hist_5fold": [
+            12,
+            17,
+            12,
+            27,
+            11
+          ],
+          "hist_6fold": [
+            12,
+            8,
+            17,
+            10,
+            24,
+            8
+          ],
+          "cv_5fold": 0.37847889588940337,
+          "cv_6fold": 0.4350086146154198,
+          "5fold_better_than_6fold": "True",
+          "pass": "True"
+        },
+        "golden_angle": {
+          "test": "GOLDEN_ANGLE_PREVALENCE",
+          "golden_angle": 137.50776405003788,
+          "count_near_golden": 0,
+          "expected_uniform": 171.16666666666666,
+          "excess": -1.0,
+          "pass": false
+        },
+        "icosahedral": {
+          "test": "ICOSAHEDRAL_ANGLES",
+          "icosa_angles": [
+            63.43,
+            116.57,
+            180.0
+          ],
+          "counts": {
+            "63.43": 93,
+            "116.57": 0,
+            "180.0": 0
+          },
+          "total_icosa": 93,
+          "expected": 513.5,
+          "excess": -0.8192419825072886,
+          "pass": false
+        }
+      },
+      "tests_passed": 2,
+      "tests_total": 5
+    },
+    {
+      "model": "mock-random",
+      "n_embeddings": 79,
+      "n_angles": 3081,
+      "angle_mean": 89.90593241197449,
+      "angle_std": 2.8800243030231525,
+      "tests": {
+        "clustering_72": {
+          "test": "72_DEGREE_CLUSTERING",
+          "phi_counts": {
+            "36.0": 0,
+            "72.0": 0,
+            "108.0": 0,
+            "144.0": 0,
+            "180.0": 0
+          },
+          "expected_uniform": 171.16666666666666,
+          "excess_72_deg": -1.0,
+          "chi_sq_contributions": {
+            "36.0": 170.17247499193286,
+            "72.0": 170.17247499193286,
+            "108.0": 170.17247499193286,
+            "144.0": 170.17247499193286,
+            "180.0": 170.17247499193286
+          },
+          "total_angles": 3081,
+          "pass": false
+        },
+        "phi_spectrum": {
+          "test": "PHI_RATIO_SPECTRUM",
+          "n_eigenvalues": 78,
+          "n_ratios": 77,
+          "ratios_near_phi": 0,
+          "ratios_near_inv_phi": 0,
+          "phi_density": 0.0,
+          "top_5_ratios": [
+            1.0556507030441349,
+            1.0261325333625684,
+            1.0436231573461905,
+            1.0445394467053244,
+            1.0103369663090374
+          ],
+          "pass": "False"
+        },
+        "pca_5fold": {
+          "test": "5FOLD_PCA_SYMMETRY",
+          "hist_5fold": [
+            13,
+            15,
+            17,
+            16,
+            18
+          ],
+          "hist_6fold": [
+            11,
+            12,
+            15,
+            13,
+            13,
+            15
+          ],
+          "cv_5fold": 0.10889019325301495,
+          "cv_6fold": 0.11107549857374022,
+          "5fold_better_than_6fold": "True",
+          "pass": "True"
+        },
+        "golden_angle": {
+          "test": "GOLDEN_ANGLE_PREVALENCE",
+          "golden_angle": 137.50776405003788,
+          "count_near_golden": 0,
+          "expected_uniform": 171.16666666666666,
+          "excess": -1.0,
+          "pass": false
+        },
+        "icosahedral": {
+          "test": "ICOSAHEDRAL_ANGLES",
+          "icosa_angles": [
+            63.43,
+            116.57,
+            180.0
+          ],
+          "counts": {
+            "63.43": 0,
+            "116.57": 0,
+            "180.0": 0
+          },
+          "total_icosa": 0,
+          "expected": 513.5,
+          "excess": -1.0,
+          "pass": false
+        }
+      },
+      "tests_passed": 1,
+      "tests_total": 5
+    },
+    {
+      "model": "mock-random-2",
+      "n_embeddings": 79,
+      "n_angles": 3081,
+      "angle_mean": 89.90593241197449,
+      "angle_std": 2.8800243030231525,
+      "tests": {
+        "clustering_72": {
+          "test": "72_DEGREE_CLUSTERING",
+          "phi_counts": {
+            "36.0": 0,
+            "72.0": 0,
+            "108.0": 0,
+            "144.0": 0,
+            "180.0": 0
+          },
+          "expected_uniform": 171.16666666666666,
+          "excess_72_deg": -1.0,
+          "chi_sq_contributions": {
+            "36.0": 170.17247499193286,
+            "72.0": 170.17247499193286,
+            "108.0": 170.17247499193286,
+            "144.0": 170.17247499193286,
+            "180.0": 170.17247499193286
+          },
+          "total_angles": 3081,
+          "pass": false
+        },
+        "phi_spectrum": {
+          "test": "PHI_RATIO_SPECTRUM",
+          "n_eigenvalues": 78,
+          "n_ratios": 77,
+          "ratios_near_phi": 0,
+          "ratios_near_inv_phi": 0,
+          "phi_density": 0.0,
+          "top_5_ratios": [
+            1.0556507030441349,
+            1.0261325333625684,
+            1.0436231573461905,
+            1.0445394467053244,
+            1.0103369663090374
+          ],
+          "pass": "False"
+        },
+        "pca_5fold": {
+          "test": "5FOLD_PCA_SYMMETRY",
+          "hist_5fold": [
+            13,
+            15,
+            17,
+            16,
+            18
+          ],
+          "hist_6fold": [
+            11,
+            12,
+            15,
+            13,
+            13,
+            15
+          ],
+          "cv_5fold": 0.10889019325301495,
+          "cv_6fold": 0.11107549857374022,
+          "5fold_better_than_6fold": "True",
+          "pass": "True"
+        },
+        "golden_angle": {
+          "test": "GOLDEN_ANGLE_PREVALENCE",
+          "golden_angle": 137.50776405003788,
+          "count_near_golden": 0,
+          "expected_uniform": 171.16666666666666,
+          "excess": -1.0,
+          "pass": false
+        },
+        "icosahedral": {
+          "test": "ICOSAHEDRAL_ANGLES",
+          "icosa_angles": [
+            63.43,
+            116.57,
+            180.0
+          ],
+          "counts": {
+            "63.43": 0,
+            "116.57": 0,
+            "180.0": 0
+          },
+          "total_icosa": 0,
+          "expected": 513.5,
+          "excess": -1.0,
+          "pass": false
+        }
+      },
+      "tests_passed": 1,
+      "tests_total": 5
+    }
+  ]
+}

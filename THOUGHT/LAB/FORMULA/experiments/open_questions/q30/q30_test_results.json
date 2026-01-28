@@ -1,0 +1,522 @@
+{
+  "timestamp": "2026-01-28T03:59:23.680027",
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "test": "ACCURACY_PRESERVATION",
+      "threshold": 0.8,
+      "test_sizes": [
+        50,
+        100,
+        200,
+        500
+      ],
+      "agreement_levels": [
+        "high",
+        "medium",
+        "low"
+      ],
+      "accuracies": {
+        "sampled_20": "100.0%",
+        "sampled_50": "100.0%",
+        "projected_64": "100.0%",
+        "projected_128": "100.0%",
+        "centroid": "100.0%",
+        "nystrom_30": "100.0%",
+        "streaming": "100.0%",
+        "combined": "83.3%"
+      },
+      "best_method": "sampled_20",
+      "best_accuracy": "100.0%",
+      "goal": ">95% gate agreement",
+      "goal_met": true,
+      "sample_errors": {
+        "combined": [
+          {
+            "n": 200,
+            "agreement": "high",
+            "R_exact": 4.433175930254177,
+            "R_approx": 0.7778648751925084,
+            "rel_error": 0.8245355277050985
+          },
+          {
+            "n": 500,
+            "agreement": "high",
+            "R_exact": 4.3729159256126975,
+            "R_approx": 0.7885571404398934,
+            "rel_error": 0.8196724671011352
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "test": "SPEEDUP_MEASUREMENT",
+      "test_sizes": [
+        100,
+        200,
+        500,
+        1000
+      ],
+      "timing_results": {
+        "exact": {
+          "n": 1000,
+          "time": 0.46672113333382487
+        },
+        "sampled_50": {
+          "n": 1000,
+          "time": 0.0011954000001423992
+        },
+        "projected_64": {
+          "n": 1000,
+          "time": 0.5969758000004125
+        },
+        "centroid": {
+          "n": 1000,
+          "time": 0.0023033333333539
+        },
+        "nystrom_50": {
+          "n": 1000,
+          "time": 0.06524886666617628
+        },
+        "streaming": {
+          "n": 1000,
+          "time": 0.007969033334423633
+        },
+        "combined": {
+          "n": 1000,
+          "time": 0.005269799999950919
+        }
+      },
+      "speedups_by_n": {
+        "sampled_50": [
+          {
+            "n": 100,
+            "speedup": 3.8899923614649343
+          },
+          {
+            "n": 200,
+            "speedup": 14.535410683784074
+          },
+          {
+            "n": 500,
+            "speedup": 87.93038318698497
+          },
+          {
+            "n": 1000,
+            "speedup": 390.43092962876676
+          }
+        ],
+        "projected_64": [
+          {
+            "n": 100,
+            "speedup": 0.8826952060857824
+          },
+          {
+            "n": 200,
+            "speedup": 0.9618318795193127
+          },
+          {
+            "n": 500,
+            "speedup": 1.0302434283600168
+          },
+          {
+            "n": 1000,
+            "speedup": 0.7818091341952259
+          }
+        ],
+        "centroid": [
+          {
+            "n": 100,
+            "speedup": 19.709861909684292
+          },
+          {
+            "n": 200,
+            "speedup": 41.531296516333164
+          },
+          {
+            "n": 500,
+            "speedup": 95.2363634708462
+          },
+          {
+            "n": 1000,
+            "speedup": 202.62856729218126
+          }
+        ],
+        "nystrom_50": [
+          {
+            "n": 100,
+            "speedup": 0.6976090347621998
+          },
+          {
+            "n": 200,
+            "speedup": 1.375922722027901
+          },
+          {
+            "n": 500,
+            "speedup": 4.862961938820506
+          },
+          {
+            "n": 1000,
+            "speedup": 7.152938544076871
+          }
+        ],
+        "streaming": [
+          {
+            "n": 100,
+            "speedup": 0.905748513205711
+          },
+          {
+            "n": 200,
+            "speedup": 3.545007256606138
+          },
+          {
+            "n": 500,
+            "speedup": 22.959985811138093
+          },
+          {
+            "n": 1000,
+            "speedup": 58.56684415131523
+          }
+        ],
+        "combined": [
+          {
+            "n": 100,
+            "speedup": 1.337994538827359
+          },
+          {
+            "n": 200,
+            "speedup": 5.146815012986225
+          },
+          {
+            "n": 500,
+            "speedup": 32.24442409485511
+          },
+          {
+            "n": 1000,
+            "speedup": 88.56524599380843
+          }
+        ]
+      },
+      "avg_speedups": {
+        "sampled_50": "124.2x",
+        "projected_64": "0.9x",
+        "centroid": "89.8x",
+        "nystrom_50": "3.5x",
+        "streaming": "21.5x",
+        "combined": "31.8x"
+      },
+      "best_method": "sampled_50",
+      "best_speedup": "124.2x",
+      "goal": ">=10x speedup",
+      "goal_met": "True",
+      "pass": "True"
+    },
+    {
+      "test": "PARETO_FRONTIER",
+      "n_observations": 500,
+      "threshold": 0.8,
+      "method_stats": {
+        "exact": {
+          "accuracy": "100.0%",
+          "speedup": "1.0x",
+          "avg_error": "0.00%"
+        },
+        "sample_20": {
+          "accuracy": "100.0%",
+          "speedup": "297.9x",
+          "avg_error": "0.00%"
+        },
+        "sample_50": {
+          "accuracy": "100.0%",
+          "speedup": "72.9x",
+          "avg_error": "0.00%"
+        },
+        "sample_100": {
+          "accuracy": "100.0%",
+          "speedup": "24.2x",
+          "avg_error": "0.00%"
+        },
+        "proj_32": {
+          "accuracy": "100.0%",
+          "speedup": "1.0x",
+          "avg_error": "0.00%"
+        },
+        "proj_64": {
+          "accuracy": "100.0%",
+          "speedup": "1.0x",
+          "avg_error": "0.00%"
+        },
+        "proj_128": {
+          "accuracy": "100.0%",
+          "speedup": "1.0x",
+          "avg_error": "0.00%"
+        },
+        "centroid": {
+          "accuracy": "100.0%",
+          "speedup": "82.0x",
+          "avg_error": "0.00%"
+        },
+        "nystrom_30": {
+          "accuracy": "100.0%",
+          "speedup": "9.1x",
+          "avg_error": "0.00%"
+        },
+        "nystrom_50": {
+          "accuracy": "100.0%",
+          "speedup": "4.9x",
+          "avg_error": "0.00%"
+        },
+        "combined_small": {
+          "accuracy": "100.0%",
+          "speedup": "178.9x",
+          "avg_error": "0.00%"
+        },
+        "combined_med": {
+          "accuracy": "66.7%",
+          "speedup": "67.8x",
+          "avg_error": "81.97%"
+        },
+        "combined_large": {
+          "accuracy": "100.0%",
+          "speedup": "17.2x",
+          "avg_error": "0.00%"
+        }
+      },
+      "pareto_frontier": [
+        "sample_20"
+      ],
+      "good_frontier_methods": [
+        "sample_20"
+      ],
+      "goal": ">=1 method with >90% accuracy and >5x speedup on frontier",
+      "goal_met": true,
+      "pass": true
+    },
+    {
+      "test": "SCALING_BEHAVIOR",
+      "test_sizes": [
+        50,
+        100,
+        200,
+        400,
+        800
+      ],
+      "scaling_exponents": {
+        "exact": "O(n^1.93)",
+        "sampled_fixed": "O(n^0.18)",
+        "centroid": "O(n^0.96)",
+        "combined": "O(n^-0.04)"
+      },
+      "exact_alpha": "1.93",
+      "subquadratic_methods": [
+        "sampled_fixed",
+        "centroid",
+        "combined"
+      ],
+      "goal": ">=2 methods with alpha < exact - 0.3",
+      "goal_met": true,
+      "scaling_data": {
+        "exact": [
+          {
+            "n": 50,
+            "time": 0.0019325333329713128
+          },
+          {
+            "n": 100,
+            "time": 0.006398966665680443
+          },
+          {
+            "n": 200,
+            "time": 0.019857399999940146
+          },
+          {
+            "n": 400,
+            "time": 0.0920537333355848
+          },
+          {
+            "n": 800,
+            "time": 0.4043217666682419
+          }
+        ],
+        "sampled_fixed": [
+          {
+            "n": 50,
+            "time": 0.0009817333326888427
+          },
+          {
+            "n": 100,
+            "time": 0.0018802000013238285
+          },
+          {
+            "n": 200,
+            "time": 0.0017258666654621873
+          },
+          {
+            "n": 400,
+            "time": 0.001951999999922312
+          },
+          {
+            "n": 800,
+            "time": 0.001777833333714322
+          }
+        ],
+        "centroid": [
+          {
+            "n": 50,
+            "time": 0.00013516666755701104
+          },
+          {
+            "n": 100,
+            "time": 0.0003552666651861121
+          },
+          {
+            "n": 200,
+            "time": 0.0003557333341935494
+          },
+          {
+            "n": 400,
+            "time": 0.0012822999985170707
+          },
+          {
+            "n": 800,
+            "time": 0.001980899999277123
+          }
+        ],
+        "combined": [
+          {
+            "n": 50,
+            "time": 0.0017431666686510046
+          },
+          {
+            "n": 100,
+            "time": 0.0024984000010590535
+          },
+          {
+            "n": 200,
+            "time": 0.0022443666663699937
+          },
+          {
+            "n": 400,
+            "time": 0.002663366666335302
+          },
+          {
+            "n": 800,
+            "time": 0.001474066667772907
+          }
+        ]
+      },
+      "pass": true
+    },
+    {
+      "test": "ROBUSTNESS_TO_AGREEMENT_LEVEL",
+      "n_observations": 300,
+      "agreement_levels": [
+        "high",
+        "medium",
+        "low",
+        "mixed"
+      ],
+      "accuracy_by_level": {
+        "sampled_50": {
+          "high": "100%",
+          "medium": "100%",
+          "low": "100%",
+          "mixed": "100%"
+        },
+        "projected_64": {
+          "high": "100%",
+          "medium": "100%",
+          "low": "100%",
+          "mixed": "100%"
+        },
+        "centroid": {
+          "high": "100%",
+          "medium": "100%",
+          "low": "100%",
+          "mixed": "100%"
+        },
+        "combined": {
+          "high": "100%",
+          "medium": "100%",
+          "low": "100%",
+          "mixed": "100%"
+        }
+      },
+      "consistency_scores": {
+        "sampled_50": {
+          "std": 0.0,
+          "min_accuracy": 1.0,
+          "is_robust": true
+        },
+        "projected_64": {
+          "std": 0.0,
+          "min_accuracy": 1.0,
+          "is_robust": true
+        },
+        "centroid": {
+          "std": 0.0,
+          "min_accuracy": 1.0,
+          "is_robust": true
+        },
+        "combined": {
+          "std": 0.0,
+          "min_accuracy": 1.0,
+          "is_robust": true
+        }
+      },
+      "robust_methods": [
+        "sampled_50",
+        "projected_64",
+        "centroid",
+        "combined"
+      ],
+      "goal": ">=2 methods robust across all agreement levels",
+      "goal_met": true,
+      "pass": true
+    },
+    {
+      "test": "RECOMMENDED_IMPLEMENTATION",
+      "n_benchmark": 500,
+      "benchmark_results": {
+        "sampled_50": {
+          "accuracy": "100.0%",
+          "speedup": "87.3x",
+          "avg_error": "249.57%",
+          "score": "4.50"
+        },
+        "projected_64": {
+          "accuracy": "100.0%",
+          "speedup": "1.0x",
+          "avg_error": "47.71%",
+          "score": "4.39"
+        },
+        "centroid": {
+          "accuracy": "100.0%",
+          "speedup": "98.4x",
+          "avg_error": "626.13%",
+          "score": "0.74"
+        },
+        "nystrom_50": {
+          "accuracy": "100.0%",
+          "speedup": "4.8x",
+          "avg_error": "181.46%",
+          "score": "3.48"
+        },
+        "combined": {
+          "accuracy": "100.0%",
+          "speedup": "66.3x",
+          "avg_error": "565.36%",
+          "score": "1.01"
+        }
+      },
+      "best_method": "sampled_50",
+      "recommendation": "\nRECOMMENDED APPROXIMATION: sampled_50\n\nDescription: Random sample of 50 observations\n\nPerformance:\n- Accuracy: 100.0% gate agreement\n- Speedup: 87.3x faster than exact\n- Average Error: 249.57%\n\nCode:\ndef compute_r_fast(embeddings, sample_size=50, target_dim=64, epsilon=1e-6):\n    \"\"\"\n    Fast approximation of R = E / sigma.\n\n    For n=500, this achieves 87.3x speedup\n    with 100.0% accuracy on gate decisions.\n    \"\"\"\n    n = len(embeddings)\n    d = embeddings[0].shape[0] if embeddings else 0\n\n    # Sample observations\n    k = min(sample_size, n)\n    indices = np.random.choice(n, size=k, replace=False)\n    sampled = [embeddings[i] for i in indices]\n\n    # Project to lower dimension (optional for additional speedup)\n    if target_dim < d:\n        projection = np.random.randn(d, target_dim) / np.sqrt(target_dim)\n        sampled = [e @ projection for e in sampled]\n        sampled = [e / np.linalg.norm(e) for e in sampled]\n\n    # Compute R on sample\n    similarities = []\n    for i in range(k):\n        for j in range(i + 1, k):\n            similarities.append(np.dot(sampled[i], sampled[j]))\n\n    E = np.mean(similarities)\n    sigma = np.std(similarities)\n    return E / max(sigma, epsilon)\n",
+      "goal": ">90% accuracy and >5x speedup",
+      "goal_met": "True",
+      "pass": "True"
+    }
+  ],
+  "verdict": "VALIDATED"
+}

@@ -1,0 +1,82 @@
+{
+  "test_name": "Q52_CHAOS_THEORY",
+  "hypothesis": "R inversely correlated with Lyapunov exponent (r < -0.5)",
+  "prediction": "R detects edge of chaos, predicts bifurcations",
+  "correlation_result": {
+    "pearson_r": 0.5448838570701725,
+    "pearson_p": 4.603127941857192e-09,
+    "spearman_rho": 0.629427573790932,
+    "spearman_p": 2.314111915359344e-12,
+    "n_points": 100,
+    "hypothesis_supported": "False",
+    "verdict": "UNEXPECTED: Positive correlation (r=0.545)"
+  },
+  "bifurcation_results": [
+    {
+      "bifurcation_name": "first",
+      "r_value": 3.0,
+      "r_gradient_at_bifurcation": 66.00201296289183,
+      "detected": "True",
+      "detection_threshold": 15.373020103052744
+    },
+    {
+      "bifurcation_name": "second",
+      "r_value": 3.449,
+      "r_gradient_at_bifurcation": 0.5801571153415536,
+      "detected": "False",
+      "detection_threshold": 15.373020103052744
+    },
+    {
+      "bifurcation_name": "onset_chaos",
+      "r_value": 3.5699,
+      "r_gradient_at_bifurcation": 1.2399864894037866,
+      "detected": "False",
+      "detection_threshold": 15.373020103052744
+    },
+    {
+      "bifurcation_name": "fully_chaotic",
+      "r_value": 4.0,
+      "r_gradient_at_bifurcation": 7.729484810350955,
+      "detected": "False",
+      "detection_threshold": 15.373020103052744
+    }
+  ],
+  "negative_control": {
+    "name": "random_noise_consistent_R",
+    "test_passed": "True",
+    "expected_behavior": "Random noise should have consistent R (CV < 0.1)",
+    "actual_behavior": "CV = 0.0002",
+    "metric_value": 0.00021880531067632812,
+    "metric_threshold": 0.1,
+    "notes": "Random white noise has no chaotic structure, R should be constant"
+  },
+  "henon_result": {
+    "chaotic": {
+      "a": 1.4,
+      "b": 0.3,
+      "lyapunov": 0.41471678449825866,
+      "R": 1.159879565295285
+    },
+    "regular": {
+      "a": 0.2,
+      "b": 0.3,
+      "lyapunov": -0.2159997246535733,
+      "R": 0.0
+    },
+    "R_difference": -1.159879565295285,
+    "consistent_with_hypothesis": "False",
+    "verdict": "INCONSISTENT"
+  },
+  "overall_status": "FALSIFIED",
+  "verdict": "R-Lyapunov correlation: UNEXPECTED: Positive correlation (r=0.545)\nBifurcations detected: 1/4\nHenon test: INCONSISTENT\nNegative control: PASS",
+  "metadata": {
+    "timestamp": "2026-01-28T05:41:11.676630Z",
+    "python_version": "3.11.6",
+    "numpy_version": "2.0.2",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "scipy_version": "1.17.0",
+    "sklearn_version": "1.8.0",
+    "sentence_transformers_version": "3.3.1"
+  },
+  "result_hash": "50159df18952c346"
+}

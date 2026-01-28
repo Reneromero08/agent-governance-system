@@ -1,0 +1,439 @@
+{
+  "timestamp": "2026-01-28T02:25:43.810286",
+  "embedder": "mock",
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "test": "EPSILON_FLOOR_EFFECTIVENESS",
+      "E": 1.0,
+      "sigma": 0.0,
+      "sigma_is_zero": "True",
+      "results_by_epsilon": [
+        {
+          "epsilon": 0.01,
+          "R_naive": "inf",
+          "R_epsilon_floor": 100.0,
+          "is_finite": "True",
+          "is_practical": "True"
+        },
+        {
+          "epsilon": 0.0001,
+          "R_naive": "inf",
+          "R_epsilon_floor": 10000.0,
+          "is_finite": "True",
+          "is_practical": "True"
+        },
+        {
+          "epsilon": 1e-06,
+          "R_naive": "inf",
+          "R_epsilon_floor": 1000000.0,
+          "is_finite": "True",
+          "is_practical": "True"
+        },
+        {
+          "epsilon": 1e-08,
+          "R_naive": "inf",
+          "R_epsilon_floor": 100000000.0,
+          "is_finite": "True",
+          "is_practical": "False"
+        },
+        {
+          "epsilon": 1e-10,
+          "R_naive": "inf",
+          "R_epsilon_floor": 10000000000.0,
+          "is_finite": "True",
+          "is_practical": "False"
+        }
+      ],
+      "all_finite": true,
+      "recommended_epsilon": 1e-06,
+      "recommended_is_practical": true,
+      "pass": true
+    },
+    {
+      "test": "SOFT_SIGMOID_SMOOTHNESS",
+      "k_parameter": 10.0,
+      "thresholds_tested": [
+        {
+          "threshold": 0.5,
+          "is_monotonic": true,
+          "all_in_bounds": true,
+          "prob_at_R_0": 0.0066928509242848554,
+          "prob_at_threshold": 0.5,
+          "prob_at_R_2x_threshold": 0.9933071490757153,
+          "has_good_separation": "True"
+        },
+        {
+          "threshold": 0.8,
+          "is_monotonic": true,
+          "all_in_bounds": true,
+          "prob_at_R_0": 0.0003353501304664781,
+          "prob_at_threshold": 0.5000000000000003,
+          "prob_at_R_2x_threshold": 0.9996646498695336,
+          "has_good_separation": "True"
+        },
+        {
+          "threshold": 1.0,
+          "is_monotonic": true,
+          "all_in_bounds": true,
+          "prob_at_R_0": 4.5397868702434395e-05,
+          "prob_at_threshold": 0.5,
+          "prob_at_R_2x_threshold": 0.9999546021312976,
+          "has_good_separation": "True"
+        }
+      ],
+      "pass": true
+    },
+    {
+      "test": "MAD_ROBUSTNESS",
+      "without_outlier": {
+        "std": 0.08849136668731522,
+        "mad": 0.10301498365235826,
+        "E": 0.0746283243572147,
+        "R_std": 0.8433401714871727,
+        "R_mad": 0.7244414522169007
+      },
+      "with_outlier": {
+        "std": 0.0826259615231968,
+        "mad": 0.06775342662315352,
+        "E": 0.050385288213396266,
+        "R_std": 0.6097997201430553,
+        "R_mad": 0.7436566787040996
+      },
+      "std_change_pct": 6.628222301076702,
+      "mad_change_pct": 34.22953861279738,
+      "R_std_change_pct": 27.69231876658418,
+      "R_mad_change_pct": 2.6524194830590395,
+      "R_mad_more_stable": "True",
+      "both_methods_work": "True",
+      "pass": "True"
+    },
+    {
+      "test": "GATE_ACCURACY_LOW_SIGMA",
+      "goal": "accuracy > 95%",
+      "threshold": 0.8,
+      "results_by_method": {
+        "epsilon_floor": [
+          {
+            "case": "high_agreement_low_sigma",
+            "E": 0.9920023918991777,
+            "sigma": 0.0025638071799103973,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "identical_sigma_zero",
+            "E": 1.0000000000000002,
+            "sigma": 0.0,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "low_agreement",
+            "E": -0.02536894126193647,
+            "sigma": 0.04219318631148875,
+            "expected": "closed",
+            "actual": "closed",
+            "correct": true
+          }
+        ],
+        "soft_sigmoid": [
+          {
+            "case": "high_agreement_low_sigma",
+            "E": 0.9920023918991777,
+            "sigma": 0.0025638071799103973,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "identical_sigma_zero",
+            "E": 1.0000000000000002,
+            "sigma": 0.0,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "low_agreement",
+            "E": -0.02536894126193647,
+            "sigma": 0.04219318631148875,
+            "expected": "closed",
+            "actual": "closed",
+            "correct": true
+          }
+        ],
+        "mad_robust": [
+          {
+            "case": "high_agreement_low_sigma",
+            "E": 0.9920023918991777,
+            "sigma": 0.0025638071799103973,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "identical_sigma_zero",
+            "E": 1.0000000000000002,
+            "sigma": 0.0,
+            "expected": "open",
+            "actual": "open",
+            "correct": true
+          },
+          {
+            "case": "low_agreement",
+            "E": -0.02536894126193647,
+            "sigma": 0.04219318631148875,
+            "expected": "closed",
+            "actual": "closed",
+            "correct": true
+          }
+        ]
+      },
+      "accuracies": {
+        "epsilon_floor": "100.0%",
+        "soft_sigmoid": "100.0%",
+        "mad_robust": "100.0%"
+      },
+      "best_method": "epsilon_floor",
+      "best_accuracy": "100.0%",
+      "goal_met": true,
+      "pass": true
+    },
+    {
+      "test": "EXTREME_EDGE_CASES",
+      "scenarios_tested": [
+        "all_identical",
+        "all_orthogonal",
+        "one_outlier",
+        "high_e_low_sigma"
+      ],
+      "results": [
+        {
+          "scenario": "all_identical",
+          "E": 1.0000000000000002,
+          "sigma": 0.0,
+          "epsilon_floor": {
+            "R": 1000000.0000000002,
+            "stable": "True"
+          },
+          "soft_sigmoid": {
+            "prob": 1.0,
+            "stable": "True"
+          },
+          "mad_robust": {
+            "R": 100000000.00000001,
+            "stable": "True"
+          },
+          "log_ratio": {
+            "R": Infinity,
+            "stable": "True"
+          },
+          "adaptive_epsilon": {
+            "R": 500000.0000000001,
+            "stable": "True"
+          }
+        },
+        {
+          "scenario": "all_orthogonal",
+          "E": -0.010320260744464262,
+          "sigma": 0.03752836577697011,
+          "epsilon_floor": {
+            "R": -0.27499893829103156,
+            "stable": "True"
+          },
+          "soft_sigmoid": {
+            "prob": 2.1445176100180542e-05,
+            "stable": "True"
+          },
+          "mad_robust": {
+            "R": -0.545941337837316,
+            "stable": "True"
+          },
+          "log_ratio": {
+            "R": null,
+            "stable": "True"
+          },
+          "adaptive_epsilon": {
+            "R": -0.27499893829103156,
+            "stable": "True"
+          }
+        },
+        {
+          "scenario": "one_outlier",
+          "E": 0.2000000000000001,
+          "sigma": 0.9797958971132715,
+          "epsilon_floor": {
+            "R": 0.20412414523193154,
+            "stable": "True"
+          },
+          "soft_sigmoid": {
+            "prob": 0.002576461497660941,
+            "stable": "True"
+          },
+          "mad_robust": {
+            "R": 20000000.000000007,
+            "stable": "True"
+          },
+          "log_ratio": {
+            "R": 0.2669446900376749,
+            "stable": "True"
+          },
+          "adaptive_epsilon": {
+            "R": 0.20412414523193154,
+            "stable": "True"
+          }
+        },
+        {
+          "scenario": "high_e_low_sigma",
+          "E": 0.9996764748534439,
+          "sigma": 0.00010417302735767408,
+          "epsilon_floor": {
+            "R": 9596.308182741903,
+            "stable": "True"
+          },
+          "soft_sigmoid": {
+            "prob": 1.0,
+            "stable": "True"
+          },
+          "mad_robust": {
+            "R": 12182.444939057199,
+            "stable": "True"
+          },
+          "log_ratio": {
+            "R": 6652.6001696134035,
+            "stable": "True"
+          },
+          "adaptive_epsilon": {
+            "R": 9596.308182741903,
+            "stable": "True"
+          }
+        }
+      ],
+      "methods_stability": {
+        "epsilon_floor": true,
+        "soft_sigmoid": true,
+        "mad_robust": true,
+        "log_ratio": true,
+        "adaptive_epsilon": true
+      },
+      "stable_methods_count": 5,
+      "pass": true
+    },
+    {
+      "test": "SENSITIVITY_PRESERVATION",
+      "ordering_results": {
+        "epsilon_floor": {
+          "R_high": 98.40161119827088,
+          "R_medium": 0.6201012420388016,
+          "R_low": 0.30178058987227663,
+          "ordering_correct": "True"
+        },
+        "soft_sigmoid": {
+          "R_high": 1.0,
+          "R_medium": 0.14197435085903715,
+          "R_low": 0.00681227135534914,
+          "ordering_correct": "True"
+        },
+        "mad_robust": {
+          "R_high": 133.4460860038827,
+          "R_medium": 0.5248587210734633,
+          "R_low": 0.35558885051057443,
+          "ordering_correct": true
+        },
+        "adaptive_epsilon": {
+          "R_high": 98.40161119827088,
+          "R_medium": 0.6201012420388016,
+          "R_low": 0.30178058987227663,
+          "ordering_correct": "True"
+        }
+      },
+      "methods_preserving_ordering": 4,
+      "pass": true
+    },
+    {
+      "test": "RECOMMENDED_IMPLEMENTATION",
+      "methods_scores": {
+        "epsilon_floor": 6,
+        "soft_sigmoid": 3,
+        "mad_robust": 3,
+        "adaptive_epsilon": 5
+      },
+      "best_method": "epsilon_floor",
+      "best_score": 6,
+      "recommended_epsilon": 1e-06,
+      "recommended_code": "\ndef compute_r_stable(E: float, sigma: float, epsilon: float = 1e-6) -> float:\n    \"\"\"\n    RECOMMENDED: Stable R computation with epsilon floor.\n\n    R = E / max(sigma, epsilon)\n\n    Why epsilon = 1e-6?\n    - Prevents division by zero\n    - Preserves sensitivity for typical sigma values (0.01 - 1.0)\n    - Small enough not to dominate when sigma is meaningful\n\n    For even more robustness (e.g., with outliers), consider:\n    - Using MAD instead of std for sigma calculation\n    - Or use adaptive epsilon: epsilon = 1e-6 * (1 + |E|)\n    \"\"\"\n    return E / max(sigma, epsilon)\n",
+      "validation": {
+        "test_case": "identical_embeddings",
+        "E": 1.0000000000000002,
+        "sigma": 0.0,
+        "R": 1000000.0000000002,
+        "is_stable": "True"
+      },
+      "pass": "True"
+    },
+    {
+      "test": "PRECISION_RECALL_BENCHMARK",
+      "n_positive_cases": 20,
+      "n_negative_cases": 20,
+      "threshold": 0.8,
+      "results": {
+        "epsilon_floor": {
+          "tp": 20,
+          "fp": 1,
+          "tn": 19,
+          "fn": 0,
+          "precision": 0.9523809523809523,
+          "recall": 1.0,
+          "f1": 0.975609756097561,
+          "accuracy": 0.975
+        },
+        "soft_sigmoid": {
+          "tp": 20,
+          "fp": 1,
+          "tn": 19,
+          "fn": 0,
+          "precision": 0.9523809523809523,
+          "recall": 1.0,
+          "f1": 0.975609756097561,
+          "accuracy": 0.975
+        },
+        "mad_robust": {
+          "tp": 20,
+          "fp": 2,
+          "tn": 18,
+          "fn": 0,
+          "precision": 0.9090909090909091,
+          "recall": 1.0,
+          "f1": 0.9523809523809523,
+          "accuracy": 0.95
+        },
+        "adaptive_epsilon": {
+          "tp": 20,
+          "fp": 1,
+          "tn": 19,
+          "fn": 0,
+          "precision": 0.9523809523809523,
+          "recall": 1.0,
+          "f1": 0.975609756097561,
+          "accuracy": 0.975
+        }
+      },
+      "best_method": "epsilon_floor",
+      "best_f1": 0.975609756097561,
+      "goal": "F1 > 0.9",
+      "goal_met": true,
+      "pass": true
+    }
+  ],
+  "verdict": "VALIDATED",
+  "recommendation": {
+    "method": "epsilon_floor",
+    "epsilon": 1e-06,
+    "formula": "R = E / max(sigma, epsilon)",
+    "rationale": "Simple, effective, preserves sensitivity"
+  }
+}
