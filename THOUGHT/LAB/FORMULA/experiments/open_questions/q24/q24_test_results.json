@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-27T22:41:54.134787",
+  "timestamp": "2026-01-28T03:02:13.545362",
   "data_source": "SPY",
   "n_data_points": 751,
   "n_low_r_periods": 17,
@@ -15,9 +15,9 @@
   "strategies": {
     "wait": {
       "n_tests": 68,
-      "mean_improvement": -0.34063715360107766,
-      "std_improvement": 1.5066912857579269,
-      "median_improvement": -0.5847659094525555,
+      "mean_improvement": -0.340681902469734,
+      "std_improvement": 1.5064100624980448,
+      "median_improvement": -0.5847186695018568,
       "success_rate": 0.0,
       "improvement_gt_20pct": 0.04411764705882353,
       "best_time_cost": 5,
@@ -25,9 +25,9 @@
     },
     "change_features": {
       "n_tests": 50,
-      "mean_improvement": 0.79959652121303,
-      "std_improvement": 1.880087680259426,
-      "median_improvement": 0.47556185042545024,
+      "mean_improvement": 0.7995720016180132,
+      "std_improvement": 1.8800287337902586,
+      "median_improvement": 0.4755926591954275,
       "success_rate": 0.6,
       "improvement_gt_20pct": 0.62,
       "best_time_cost": 50,
@@ -45,8 +45,8 @@
     },
     "escalate": {
       "n_tests": 17,
-      "mean_improvement": -0.08198994336988315,
-      "std_improvement": 0.3279597734795326,
+      "mean_improvement": -0.08197491558539519,
+      "std_improvement": 0.32789966234158074,
       "median_improvement": 0.0,
       "success_rate": 0.7647058823529411,
       "improvement_gt_20pct": 0.0,
@@ -58,9 +58,9 @@
     "both": {
       "wait": {
         "n_tests": 68,
-        "mean_improvement": -0.34063715360107766,
-        "std_improvement": 1.5066912857579269,
-        "median_improvement": -0.5847659094525555,
+        "mean_improvement": -0.340681902469734,
+        "std_improvement": 1.5064100624980448,
+        "median_improvement": -0.5847186695018568,
         "success_rate": 0.0,
         "improvement_gt_20pct": 0.04411764705882353,
         "best_time_cost": 5,
@@ -68,9 +68,9 @@
       },
       "change": {
         "n_tests": 50,
-        "mean_improvement": 0.79959652121303,
-        "std_improvement": 1.880087680259426,
-        "median_improvement": 0.47556185042545024,
+        "mean_improvement": 0.7995720016180132,
+        "std_improvement": 1.8800287337902586,
+        "median_improvement": 0.4755926591954275,
         "success_rate": 0.6,
         "improvement_gt_20pct": 0.62,
         "best_time_cost": 50,
@@ -88,8 +88,8 @@
       },
       "escalate": {
         "n_tests": 17,
-        "mean_improvement": -0.08198994336988315,
-        "std_improvement": 0.3279597734795326,
+        "mean_improvement": -0.08197491558539519,
+        "std_improvement": 0.32789966234158074,
         "median_improvement": 0.0,
         "success_rate": 0.7647058823529411,
         "improvement_gt_20pct": 0.0,

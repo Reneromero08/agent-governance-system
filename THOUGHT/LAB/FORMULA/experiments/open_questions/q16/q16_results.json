@@ -1,6 +1,6 @@
 {
   "experiment": "Q16_domain_boundaries",
-  "timestamp": "2026-01-27T22:41:29.435513",
+  "timestamp": "2026-01-28T03:02:27.068781",
   "model": "all-MiniLM-L6-v2",
   "pre_registration": {
     "hypothesis": "R < 0.5 correlation with ground truth in adversarial/NLI domains",

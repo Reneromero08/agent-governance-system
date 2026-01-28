@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-28T03:59:23.680027",
+  "timestamp": "2026-01-28T10:02:10.930540",
   "passed": 6,
   "failed": 0,
   "results": [
@@ -62,153 +62,153 @@
       "timing_results": {
         "exact": {
           "n": 1000,
-          "time": 0.46672113333382487
+          "time": 0.36999019999833155
         },
         "sampled_50": {
           "n": 1000,
-          "time": 0.0011954000001423992
+          "time": 0.0010887333313197207
         },
         "projected_64": {
           "n": 1000,
-          "time": 0.5969758000004125
+          "time": 0.3681161666706127
         },
         "centroid": {
           "n": 1000,
-          "time": 0.0023033333333539
+          "time": 0.0018684000024222769
         },
         "nystrom_50": {
           "n": 1000,
-          "time": 0.06524886666617628
+          "time": 0.0366776333321468
         },
         "streaming": {
           "n": 1000,
-          "time": 0.007969033334423633
+          "time": 0.003956499997002538
         },
         "combined": {
           "n": 1000,
-          "time": 0.005269799999950919
+          "time": 0.002783466666490616
         }
       },
       "speedups_by_n": {
         "sampled_50": [
           {
             "n": 100,
-            "speedup": 3.8899923614649343
+            "speedup": 3.4815416143765043
           },
           {
             "n": 200,
-            "speedup": 14.535410683784074
+            "speedup": 14.698417018636007
           },
           {
             "n": 500,
-            "speedup": 87.93038318698497
+            "speedup": 89.82798445888501
           },
           {
             "n": 1000,
-            "speedup": 390.43092962876676
+            "speedup": 339.83546691809613
           }
         ],
         "projected_64": [
           {
             "n": 100,
-            "speedup": 0.8826952060857824
+            "speedup": 0.8410303072374344
           },
           {
             "n": 200,
-            "speedup": 0.9618318795193127
+            "speedup": 0.9442853988876858
           },
           {
             "n": 500,
-            "speedup": 1.0302434283600168
+            "speedup": 1.0147399339227225
           },
           {
             "n": 1000,
-            "speedup": 0.7818091341952259
+            "speedup": 1.0050908748308132
           }
         ],
         "centroid": [
           {
             "n": 100,
-            "speedup": 19.709861909684292
+            "speedup": 20.312180203816123
           },
           {
             "n": 200,
-            "speedup": 41.531296516333164
+            "speedup": 41.258098092088886
           },
           {
             "n": 500,
-            "speedup": 95.2363634708462
+            "speedup": 84.4684882467386
           },
           {
             "n": 1000,
-            "speedup": 202.62856729218126
+            "speedup": 198.02515495539487
           }
         ],
         "nystrom_50": [
           {
             "n": 100,
-            "speedup": 0.6976090347621998
+            "speedup": 0.6557846260157876
           },
           {
             "n": 200,
-            "speedup": 1.375922722027901
+            "speedup": 1.6065651850485763
           },
           {
             "n": 500,
-            "speedup": 4.862961938820506
+            "speedup": 4.6114556976683625
           },
           {
             "n": 1000,
-            "speedup": 7.152938544076871
+            "speedup": 10.087624701620175
           }
         ],
         "streaming": [
           {
             "n": 100,
-            "speedup": 0.905748513205711
+            "speedup": 0.8892242875297754
           },
           {
             "n": 200,
-            "speedup": 3.545007256606138
+            "speedup": 3.8033015064665663
           },
           {
             "n": 500,
-            "speedup": 22.959985811138093
+            "speedup": 22.90016347545911
           },
           {
             "n": 1000,
-            "speedup": 58.56684415131523
+            "speedup": 93.51452047987812
           }
         ],
         "combined": [
           {
             "n": 100,
-            "speedup": 1.337994538827359
+            "speedup": 1.312315655267182
           },
           {
             "n": 200,
-            "speedup": 5.146815012986225
+            "speedup": 5.363686054032904
           },
           {
             "n": 500,
-            "speedup": 32.24442409485511
+            "speedup": 31.842545144565115
           },
           {
             "n": 1000,
-            "speedup": 88.56524599380843
+            "speedup": 132.92424315783663
           }
         ]
       },
       "avg_speedups": {
-        "sampled_50": "124.2x",
-        "projected_64": "0.9x",
-        "centroid": "89.8x",
-        "nystrom_50": "3.5x",
-        "streaming": "21.5x",
-        "combined": "31.8x"
+        "sampled_50": "112.0x",
+        "projected_64": "1.0x",
+        "centroid": "86.0x",
+        "nystrom_50": "4.2x",
+        "streaming": "30.3x",
+        "combined": "42.9x"
       },
       "best_method": "sampled_50",
-      "best_speedup": "124.2x",
+      "best_speedup": "112.0x",
       "goal": ">=10x speedup",
       "goal_met": "True",
       "pass": "True"
@@ -225,17 +225,17 @@
         },
         "sample_20": {
           "accuracy": "100.0%",
-          "speedup": "297.9x",
+          "speedup": "273.9x",
           "avg_error": "0.00%"
         },
         "sample_50": {
           "accuracy": "100.0%",
-          "speedup": "72.9x",
+          "speedup": "80.2x",
           "avg_error": "0.00%"
         },
         "sample_100": {
           "accuracy": "100.0%",
-          "speedup": "24.2x",
+          "speedup": "23.3x",
           "avg_error": "0.00%"
         },
         "proj_32": {
@@ -250,37 +250,37 @@
         },
         "proj_128": {
           "accuracy": "100.0%",
-          "speedup": "1.0x",
+          "speedup": "0.9x",
           "avg_error": "0.00%"
         },
         "centroid": {
           "accuracy": "100.0%",
-          "speedup": "82.0x",
+          "speedup": "79.9x",
           "avg_error": "0.00%"
         },
         "nystrom_30": {
           "accuracy": "100.0%",
-          "speedup": "9.1x",
+          "speedup": "7.9x",
           "avg_error": "0.00%"
         },
         "nystrom_50": {
           "accuracy": "100.0%",
-          "speedup": "4.9x",
+          "speedup": "4.2x",
           "avg_error": "0.00%"
         },
         "combined_small": {
           "accuracy": "100.0%",
-          "speedup": "178.9x",
+          "speedup": "104.6x",
           "avg_error": "0.00%"
         },
         "combined_med": {
           "accuracy": "66.7%",
-          "speedup": "67.8x",
+          "speedup": "44.0x",
           "avg_error": "81.97%"
         },
         "combined_large": {
           "accuracy": "100.0%",
-          "speedup": "17.2x",
+          "speedup": "12.2x",
           "avg_error": "0.00%"
         }
       },
@@ -304,12 +304,12 @@
         800
       ],
       "scaling_exponents": {
-        "exact": "O(n^1.93)",
-        "sampled_fixed": "O(n^0.18)",
-        "centroid": "O(n^0.96)",
+        "exact": "O(n^2.07)",
+        "sampled_fixed": "O(n^0.05)",
+        "centroid": "O(n^1.01)",
         "combined": "O(n^-0.04)"
       },
-      "exact_alpha": "1.93",
+      "exact_alpha": "2.07",
       "subquadratic_methods": [
         "sampled_fixed",
         "centroid",
@@ -321,89 +321,89 @@
         "exact": [
           {
             "n": 50,
-            "time": 0.0019325333329713128
+            "time": 0.0009977666680545856
           },
           {
             "n": 100,
-            "time": 0.006398966665680443
+            "time": 0.003907866669275488
           },
           {
             "n": 200,
-            "time": 0.019857399999940146
+            "time": 0.018016633332687586
           },
           {
             "n": 400,
-            "time": 0.0920537333355848
+            "time": 0.07220896666694898
           },
           {
             "n": 800,
-            "time": 0.4043217666682419
+            "time": 0.29805576666937367
           }
         ],
         "sampled_fixed": [
           {
             "n": 50,
-            "time": 0.0009817333326888427
+            "time": 0.0010810000021592714
           },
           {
             "n": 100,
-            "time": 0.0018802000013238285
+            "time": 0.0010368666674670142
           },
           {
             "n": 200,
-            "time": 0.0017258666654621873
+            "time": 0.0010545666664256714
           },
           {
             "n": 400,
-            "time": 0.001951999999922312
+            "time": 0.0012192666666427006
           },
           {
             "n": 800,
-            "time": 0.001777833333714322
+            "time": 0.0011743333355601255
           }
         ],
         "centroid": [
           {
             "n": 50,
-            "time": 0.00013516666755701104
+            "time": 0.00013253333114941293
           },
           {
             "n": 100,
-            "time": 0.0003552666651861121
+            "time": 0.00019393333301801854
           },
           {
             "n": 200,
-            "time": 0.0003557333341935494
+            "time": 0.00033430000136528787
           },
           {
             "n": 400,
-            "time": 0.0012822999985170707
+            "time": 0.0007775333360768855
           },
           {
             "n": 800,
-            "time": 0.001980899999277123
+            "time": 0.002215499999389673
           }
         ],
         "combined": [
           {
             "n": 50,
-            "time": 0.0017431666686510046
+            "time": 0.0017188000007687758
           },
           {
             "n": 100,
-            "time": 0.0024984000010590535
+            "time": 0.0016233666683547199
           },
           {
             "n": 200,
-            "time": 0.0022443666663699937
+            "time": 0.0015573000006649333
           },
           {
             "n": 400,
-            "time": 0.002663366666335302
+            "time": 0.0015828999967197888
           },
           {
             "n": 800,
-            "time": 0.001474066667772907
+            "time": 0.0015375000002677552
           }
         ]
       },
@@ -482,7 +482,7 @@
       "benchmark_results": {
         "sampled_50": {
           "accuracy": "100.0%",
-          "speedup": "87.3x",
+          "speedup": "87.4x",
           "avg_error": "249.57%",
           "score": "4.50"
         },
@@ -490,29 +490,29 @@
           "accuracy": "100.0%",
           "speedup": "1.0x",
           "avg_error": "47.71%",
-          "score": "4.39"
+          "score": "4.40"
         },
         "centroid": {
           "accuracy": "100.0%",
-          "speedup": "98.4x",
+          "speedup": "74.1x",
           "avg_error": "626.13%",
           "score": "0.74"
         },
         "nystrom_50": {
           "accuracy": "100.0%",
-          "speedup": "4.8x",
+          "speedup": "4.6x",
           "avg_error": "181.46%",
-          "score": "3.48"
+          "score": "3.44"
         },
         "combined": {
           "accuracy": "100.0%",
-          "speedup": "66.3x",
+          "speedup": "39.6x",
           "avg_error": "565.36%",
           "score": "1.01"
         }
       },
       "best_method": "sampled_50",
-      "recommendation": "\nRECOMMENDED APPROXIMATION: sampled_50\n\nDescription: Random sample of 50 observations\n\nPerformance:\n- Accuracy: 100.0% gate agreement\n- Speedup: 87.3x faster than exact\n- Average Error: 249.57%\n\nCode:\ndef compute_r_fast(embeddings, sample_size=50, target_dim=64, epsilon=1e-6):\n    \"\"\"\n    Fast approximation of R = E / sigma.\n\n    For n=500, this achieves 87.3x speedup\n    with 100.0% accuracy on gate decisions.\n    \"\"\"\n    n = len(embeddings)\n    d = embeddings[0].shape[0] if embeddings else 0\n\n    # Sample observations\n    k = min(sample_size, n)\n    indices = np.random.choice(n, size=k, replace=False)\n    sampled = [embeddings[i] for i in indices]\n\n    # Project to lower dimension (optional for additional speedup)\n    if target_dim < d:\n        projection = np.random.randn(d, target_dim) / np.sqrt(target_dim)\n        sampled = [e @ projection for e in sampled]\n        sampled = [e / np.linalg.norm(e) for e in sampled]\n\n    # Compute R on sample\n    similarities = []\n    for i in range(k):\n        for j in range(i + 1, k):\n            similarities.append(np.dot(sampled[i], sampled[j]))\n\n    E = np.mean(similarities)\n    sigma = np.std(similarities)\n    return E / max(sigma, epsilon)\n",
+      "recommendation": "\nRECOMMENDED APPROXIMATION: sampled_50\n\nDescription: Random sample of 50 observations\n\nPerformance:\n- Accuracy: 100.0% gate agreement\n- Speedup: 87.4x faster than exact\n- Average Error: 249.57%\n\nCode:\ndef compute_r_fast(embeddings, sample_size=50, target_dim=64, epsilon=1e-6):\n    \"\"\"\n    Fast approximation of R = E / sigma.\n\n    For n=500, this achieves 87.4x speedup\n    with 100.0% accuracy on gate decisions.\n    \"\"\"\n    n = len(embeddings)\n    d = embeddings[0].shape[0] if embeddings else 0\n\n    # Sample observations\n    k = min(sample_size, n)\n    indices = np.random.choice(n, size=k, replace=False)\n    sampled = [embeddings[i] for i in indices]\n\n    # Project to lower dimension (optional for additional speedup)\n    if target_dim < d:\n        projection = np.random.randn(d, target_dim) / np.sqrt(target_dim)\n        sampled = [e @ projection for e in sampled]\n        sampled = [e / np.linalg.norm(e) for e in sampled]\n\n    # Compute R on sample\n    similarities = []\n    for i in range(k):\n        for j in range(i + 1, k):\n            similarities.append(np.dot(sampled[i], sampled[j]))\n\n    E = np.mean(similarities)\n    sigma = np.std(similarities)\n    return E / max(sigma, epsilon)\n",
       "goal": ">90% accuracy and >5x speedup",
       "goal_met": "True",
       "pass": "True"

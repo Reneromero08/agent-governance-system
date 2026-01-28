@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-28T05:44:05.287456",
+  "timestamp": "2026-01-28T08:52:32.449871",
   "test": "Q19_VALUE_LEARNING",
   "hypothesis": "r > 0.5",
   "falsification_criterion": "r < 0.3",
@@ -28,23 +28,23 @@
       "log_r_mean": 17.02805458870614,
       "agreement_mean": 0.7583831961839962
     },
-    "SHP": {
-      "n": 300,
-      "r": -0.14298949043958895,
-      "p": 0.013172799993529776,
-      "log_r_mean": 5.588935345111066,
-      "agreement_mean": 0.09622785660387699
-    },
     "OASST": {
       "n": 300,
       "r": 0.601842209120318,
       "p": 6.012288032773305e-31,
       "log_r_mean": 7.919786024924706,
       "agreement_mean": 0.6083542814798778
+    },
+    "SHP": {
+      "n": 300,
+      "r": -0.14298949043958895,
+      "p": 0.013172799993529776,
+      "log_r_mean": 5.588935345111066,
+      "agreement_mean": 0.09622785660387699
     }
   },
   "simpsons_paradox": false,
-  "avg_within_source_r": 0.05106963769080031,
+  "avg_within_source_r": 0.051069637690800314,
   "verdict": "PASS",
   "verdict_reason": "r = 0.5221 > 0.5 (hypothesis threshold)",
   "pass": true

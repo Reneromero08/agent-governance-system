@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.25.0 (2026-01-28 - Q53 FALSIFIED: Pentagonal/phi geometry does NOT exist. 0/77 eigenvalue ratios near phi, 0 golden angles. The ~72 deg clustering is semantic similarity (arccos(0.31)=72), not geometry. 43/53 questions answered (81.1%), 3 falsified.)*
+*Last updated: v4.26.0 (2026-01-28 - Verification swarm complete. Q25 FALSIFIED by real data (synthetic R^2=0.86, real R^2=0.0). 13/13 verifications completed. 42/53 questions answered (79.2%), 4 falsified (Q22, Q25, Q52, Q53).)*
 
 ---
 
@@ -95,7 +95,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ❌ FALSIFIED | **NO universal threshold exists.** median(R) failed in 3/5 domains (deviation up to 43%). R ranges vary 17x by domain (0.2 to 3.5). Youden's J calibration required per-domain. |
 | 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ✅ CLOSED | **sqrt(3) is EMPIRICAL, not geometric.** Optimal for 2/5 models only. Mean optimal alpha=1.88 (not 1.73). Hexagonal packing FALSIFIED, Berry phase FALSIFIED. sqrt(3) is curve-fitted, not derived from symmetry. |
 | 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ✅ RESOLVED | **WAIT is counterproductive (-34%).** CHANGE_FEATURES best (+80% R improvement). ACCEPT_UNCERTAINTY safest (94% success). Decision tree: R<0.3 -> ESCALATE; time-sensitive -> ACCEPT; else -> CHANGE_FEATURES (try longer window). Tested: SPY 3yr, 17 low-R periods. |
-| 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ✅ RESOLVED | **Sigma is PREDICTABLE (R^2=0.86).** sigma ~ 31.7 * (mean_pairwise_distance)^0.94 * (effective_dim)^-0.09. Sigma is geometric - scales with data scale, domain-agnostic. |
+| 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ❌ FALSIFIED | **Hypothesis FALSIFIED by real data.** Synthetic R^2=0.86 but REAL data R^2_cv=0.0. Resolution test's 0.98 R^2 is spurious (driven by domain artifacts: 384-dim NLP vs 12-dim market). Sigma is domain-specific, not predictable from data properties. |
 | 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ✅ RESOLVED | **RIGOROUS RETEST: N_min = 3-5 with NO D scaling.** Tested 7 models (D=50-768): N_min constant. Semantic structure matters: diverse=3, coherent=5. Original hypothesis (log scaling) FALSIFIED - N_min is dimension-independent. Practical: use N>=5 for safety. |
 | 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ✅ ANSWERED | **Adaptive thresholding under noise.** Gate becomes MORE conservative under stress (noise improves discrimination by raising effective threshold). This is homeostatic self-protection, not a bug. Cohen's d increases with noise (r=+0.989). |
 | 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ✅ RESOLVED | **R is NOT chaotic.** Lyapunov < 0.05 (mean=0.0357, max=0.0447). R converges to noisy fixed points. 82.1% pass rate. Autocorr > 0.7 all regimes. Regime equilibria: bull~0.22, bear~0.18. |
@@ -143,9 +143,9 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 ## Summary Statistics
 
 - **Total Questions:** 53
-- **Answered:** 43 (81.1%) - includes Q16 CONFIRMED, Q19 CONDITIONAL, Q20 CONFIRMED, Q23 CLOSED, Q25 RESOLVED
+- **Answered:** 42 (79.2%) - includes Q16 CONFIRMED, Q19 CONDITIONAL, Q20 CONFIRMED, Q23 CLOSED
 - **Partially Answered:** 1 (1.9%) - Q4 PARTIAL (novel predictions)
-- **Falsified:** 3 (5.7%) - Q52 Chaos Theory, Q22 Universal Threshold, Q53 Pentagonal Phi Geometry
+- **Falsified:** 4 (7.5%) - Q22 Universal Threshold, Q25 Sigma Predictability, Q52 Chaos Theory, Q53 Pentagonal Phi Geometry
 - **Open:** 6 (11.3%)
 
 ### By Priority Level

@@ -70,7 +70,7 @@
   "overall_status": "FALSIFIED",
   "verdict": "R-Lyapunov correlation: UNEXPECTED: Positive correlation (r=0.545)\nBifurcations detected: 1/4\nHenon test: INCONSISTENT\nNegative control: PASS",
   "metadata": {
-    "timestamp": "2026-01-28T05:41:11.676630Z",
+    "timestamp": "2026-01-28T10:02:16.248195Z",
     "python_version": "3.11.6",
     "numpy_version": "2.0.2",
     "platform": "Windows-10-10.0.26100-SP0",
@@ -78,5 +78,5 @@
     "sklearn_version": "1.8.0",
     "sentence_transformers_version": "3.3.1"
   },
-  "result_hash": "50159df18952c346"
+  "result_hash": "de4956969c1827b5"
 }

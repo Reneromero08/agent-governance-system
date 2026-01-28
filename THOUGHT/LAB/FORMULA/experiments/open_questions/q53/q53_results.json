@@ -1,5 +1,5 @@
 {
-  "timestamp": "2026-01-28T05:41:50.305579+00:00",
+  "timestamp": "2026-01-28T08:50:38.564700+00:00",
   "hypothesis": "Embedding space has icosahedral (5-fold) symmetry",
   "phi": 1.618033988749895,
   "pentagon_angle": 72.0,
@@ -8,16 +8,16 @@
   "n_trained_models": 3,
   "n_mock_models": 2,
   "avg_trained_passed": 1.6666666666666667,
-  "avg_mock_passed": 1.0,
+  "avg_mock_passed": 0.0,
   "verdict": "SUPPORTED",
-  "explanation": "Trained embedding models show stronger 5-fold symmetry signal (1.67 tests) vs random baselines (1.00 tests). This suggests embedding spaces may exhibit phi-related geometric structure.",
+  "explanation": "Trained embedding models show stronger 5-fold symmetry signal (1.67 tests) vs random baselines (0.00 tests). This suggests embedding spaces may exhibit phi-related geometric structure.",
   "model_results": [
     {
       "model": "all-MiniLM-L6-v2",
       "n_embeddings": 79,
       "n_angles": 3081,
       "angle_mean": 72.85416412353516,
-      "angle_std": 5.855586051940918,
+      "angle_std": 5.855586528778076,
       "tests": {
         "clustering_72": {
           "test": "72_DEGREE_CLUSTERING",
@@ -48,11 +48,11 @@
           "ratios_near_inv_phi": 0,
           "phi_density": 0.0,
           "top_5_ratios": [
-            1.267646901757283,
-            1.2534772958159708,
-            1.0780675626786786,
-            1.0566481370165028,
-            1.1629333037195801
+            1.2676469030999922,
+            1.2534772944467587,
+            1.0780675653521568,
+            1.056648135899198,
+            1.1629333008088873
           ],
           "pass": "False"
         },
@@ -112,7 +112,7 @@
       "n_embeddings": 79,
       "n_angles": 3081,
       "angle_mean": 74.9449462890625,
-      "angle_std": 6.297750949859619,
+      "angle_std": 6.297750473022461,
       "tests": {
         "clustering_72": {
           "test": "72_DEGREE_CLUSTERING",
@@ -143,11 +143,11 @@
           "ratios_near_inv_phi": 0,
           "phi_density": 0.0,
           "top_5_ratios": [
-            1.3882419259099066,
-            1.0924586123977362,
-            1.1609825778187042,
-            1.2560139469782543,
-            1.0730085017501751
+            1.3882419281555582,
+            1.09245860760501,
+            1.1609825781622882,
+            1.2560139518126445,
+            1.0730084993094937
           ],
           "pass": "False"
         },
@@ -206,7 +206,7 @@
       "model": "paraphrase-MiniLM-L6-v2",
       "n_embeddings": 79,
       "n_angles": 3081,
-      "angle_mean": 81.13670349121094,
+      "angle_mean": 81.13671112060547,
       "angle_std": 6.252025127410889,
       "tests": {
         "clustering_72": {
@@ -238,11 +238,11 @@
           "ratios_near_inv_phi": 0,
           "phi_density": 0.0,
           "top_5_ratios": [
-            1.2021288667153314,
-            1.0990241873467126,
-            1.0715743143292675,
-            1.0416354927545501,
-            1.2342130191074785
+            1.2021288721075274,
+            1.099024184165357,
+            1.0715743130676283,
+            1.0416354962065897,
+            1.2342130230694963
           ],
           "pass": "False"
         },
@@ -301,8 +301,8 @@
       "model": "mock-random",
       "n_embeddings": 79,
       "n_angles": 3081,
-      "angle_mean": 89.90593241197449,
-      "angle_std": 2.8800243030231525,
+      "angle_mean": 89.96928430833586,
+      "angle_std": 2.9775863940612335,
       "tests": {
         "clustering_72": {
           "test": "72_DEGREE_CLUSTERING",
@@ -333,35 +333,35 @@
           "ratios_near_inv_phi": 0,
           "phi_density": 0.0,
           "top_5_ratios": [
-            1.0556507030441349,
-            1.0261325333625684,
-            1.0436231573461905,
-            1.0445394467053244,
-            1.0103369663090374
+            1.0280175583817666,
+            1.0361154369079044,
+            1.0148391593083788,
+            1.0138943887844079,
+            1.0202052804097401
           ],
           "pass": "False"
         },
         "pca_5fold": {
           "test": "5FOLD_PCA_SYMMETRY",
           "hist_5fold": [
-            13,
-            15,
             17,
-            16,
-            18
+            13,
+            13,
+            19,
+            17
           ],
           "hist_6fold": [
-            11,
+            13,
             12,
+            10,
             15,
-            13,
-            13,
-            15
+            15,
+            14
           ],
-          "cv_5fold": 0.10889019325301495,
-          "cv_6fold": 0.11107549857374022,
-          "5fold_better_than_6fold": "True",
-          "pass": "True"
+          "cv_5fold": 0.1518987341762538,
+          "cv_6fold": 0.13455880775511284,
+          "5fold_better_than_6fold": "False",
+          "pass": "False"
         },
         "golden_angle": {
           "test": "GOLDEN_ANGLE_PREVALENCE",
@@ -389,15 +389,15 @@
           "pass": false
         }
       },
-      "tests_passed": 1,
+      "tests_passed": 0,
       "tests_total": 5
     },
     {
       "model": "mock-random-2",
       "n_embeddings": 79,
       "n_angles": 3081,
-      "angle_mean": 89.90593241197449,
-      "angle_std": 2.8800243030231525,
+      "angle_mean": 89.96928430833586,
+      "angle_std": 2.9775863940612335,
       "tests": {
         "clustering_72": {
           "test": "72_DEGREE_CLUSTERING",
@@ -428,35 +428,35 @@
           "ratios_near_inv_phi": 0,
           "phi_density": 0.0,
           "top_5_ratios": [
-            1.0556507030441349,
-            1.0261325333625684,
-            1.0436231573461905,
-            1.0445394467053244,
-            1.0103369663090374
+            1.0280175583817666,
+            1.0361154369079044,
+            1.0148391593083788,
+            1.0138943887844079,
+            1.0202052804097401
           ],
           "pass": "False"
         },
         "pca_5fold": {
           "test": "5FOLD_PCA_SYMMETRY",
           "hist_5fold": [
-            13,
-            15,
             17,
-            16,
-            18
+            13,
+            13,
+            19,
+            17
           ],
           "hist_6fold": [
-            11,
+            13,
             12,
+            10,
             15,
-            13,
-            13,
-            15
+            15,
+            14
           ],
-          "cv_5fold": 0.10889019325301495,
-          "cv_6fold": 0.11107549857374022,
-          "5fold_better_than_6fold": "True",
-          "pass": "True"
+          "cv_5fold": 0.1518987341762538,
+          "cv_6fold": 0.13455880775511284,
+          "5fold_better_than_6fold": "False",
+          "pass": "False"
         },
         "golden_angle": {
           "test": "GOLDEN_ANGLE_PREVALENCE",
@@ -484,7 +484,7 @@
           "pass": false
         }
       },
-      "tests_passed": 1,
+      "tests_passed": 0,
       "tests_total": 5
     }
   ]
