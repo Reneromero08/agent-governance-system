@@ -6,6 +6,21 @@ This document outlines how to transform the feral daemon from a **position track
 
 ---
 
+## Implementation Status
+
+| Layer | Phase | Status | Started | Completed |
+|-------|-------|--------|---------|-----------|
+| Layer 1 | Phase 1: Individual Item Storage | NOT STARTED | - | - |
+| Layer 2 | Phase 2: E-Relationship Graph + R-Gate | NOT STARTED | - | - |
+| Layer 3 | Phase 3: Pattern Detection | NOT STARTED | - | - |
+| Layer 4 | Phase 4: Query Interface | NOT STARTED | - | - |
+
+**Last Updated:** 2026-01-27
+**Key Integration:** R-gating added to Phase 2 per FORMULA_LAB (R = gate, E = compass)
+**Blocking Issues:** None identified
+
+---
+
 ## Current State Analysis
 
 ### What The Daemon Does Now
@@ -46,9 +61,39 @@ The centroid converges over time, losing the structure of individual E-relations
 
 ## Proposed Architecture
 
-### Three-Layer System
+### E vs R: Role Clarification
+
+Per FORMULA_LAB validation (FORMULA_VALIDATION_REPORT_2.md):
+
+| Metric | Role | Use in Daemon |
+|--------|------|---------------|
+| **E** (Born rule) | COMPASS - computes relationships | Edge weights, similarity scores |
+| **R** (Resonance) | GATE - decides whether to proceed | Quality control, decision gating |
+
+**Critical insight**: R is a gate, not a compass. E tells you "how related are these?", R tells you "should I trust this decision?"
 
 ```
+R = (E / nablaS) x sigma(f)^Df
+
+Where:
+- E = essence (signal) - the relationship strength
+- nablaS = entropy gradient (noise) - uncertainty in the relationship
+- sigma(f) = symbolic compression - how well the relationship generalizes
+- Df = fractal dimension - complexity of the relationship
+```
+
+### Four-Layer System (Updated)
+
+```
++--------------------------------------------------+
+|  LAYER 4: R-Gate (Quality Control)                |
+|  - Gate edge additions (is this relationship      |
+|    trustworthy?)                                  |
+|  - Gate cluster outputs (is this cluster real?)  |
+|  - Early stopping for low-R operations           |
++--------------------------------------------------+
+           |
+           v
 +--------------------------------------------------+
 |  LAYER 3: Pattern Detection                       |
 |  - Cluster discovery                              |
@@ -72,6 +117,115 @@ The centroid converges over time, losing the structure of individual E-relations
 |  - Preserve provenance                            |
 +--------------------------------------------------+
 ```
+
+### R-Gating Integration Points
+
+1. **Edge creation**: Compute E for relationship, compute R to gate whether to persist
+2. **Cluster validation**: After finding clusters via E, use R to verify they're meaningful
+3. **Novelty gating**: High novelty (low E) items need R-check before special handling
+4. **Query trust**: R-score returned with query results to indicate confidence
+
+---
+
+## Research Foundations
+
+The following validated findings from FORMULA_LAB and FERAL_RESIDENT research directly inform this implementation:
+
+### Semiotic Conservation Law (Q48-Q50)
+
+```
+Df x alpha = 8e = 21.746 (CV = 2.69% across 24 models)
+```
+
+- **Why 8**: Peirce's 3 irreducible semiotic categories -> 2^3 = 8 octants
+- **Why e**: Natural information unit (1 nat per category)
+- **Critical alpha**: 0.5 (Riemann critical line, topologically protected)
+- **Implication**: If Df changes, alpha scales accordingly: `alpha = 8e / Df`
+
+### Four-Tier R-Threshold System (Q17)
+
+| Tier | Action Type | Threshold | Min Observations | Use Case |
+|------|-------------|-----------|------------------|----------|
+| T0 | Read-only | 0.0 | 0 | Query without side effects |
+| T1 | Reversible | 0.5 | 2 (any source) | Create edges that can be deleted |
+| T2 | Persistent | 0.8 | 3 (2+ independent) | Stable edges, cluster membership |
+| T3 | Critical | 1.0 | 5 (3+ independent) | Core structural relationships |
+
+**Observation Quality**: Multi-model = HIGH, Cross-tool = HIGH, Self-consistency = MEDIUM, Same-model-deterministic = INVALID
+
+### Context Optimization (Q13)
+
+```
+Optimal context = N=2-3 observations (NOT maximum)
+
+N=1: 1.2x baseline
+N=2: 47x improvement (PHASE TRANSITION)
+N=3: 47x (peak)
+N=4+: Diminishing returns (down to 24x at N=12)
+```
+
+**Implication**: `compare_to_recent=100` may be overkill. Consider `compare_to_recent=3` for edge computation efficiency.
+
+### Born Rule Validation (Q44)
+
+```
+E = |<psi|phi>|^2 correlates r=0.977 with semantic similarity
+```
+
+- Validated across 5 embedding architectures
+- Precision threshold: E >= 0.5 for meaningful relationships
+- **Code**: `E = dot_product(v1, v2)` where vectors are unit-normalized
+
+### Intensive Property Discovery (Q15)
+
+```
+R = E/sigma = sqrt(Likelihood Precision)
+```
+
+- R is mathematically equal to sqrt(likelihood precision)
+- **Critical**: R is volume-independent (cannot bypass gate by collecting more data)
+- Correlation R vs sqrt(Likelihood Precision): r = 1.0000 (perfect)
+
+### Memory Consolidation Bug (QUANTUM_AUDIT)
+
+**Known Issue**: `blend_memories()` uses iterative superposition creating unequal weights:
+```
+Current: superpose(A, superpose(B, C)) != uniform (A+B+C)/sqrt(3)
+Result: Early memories weighted 2x heavier than late ones
+```
+
+**Fix Required**: Replace iterative superposition with sum-then-normalize:
+```python
+result_vector = sum(states) / np.sqrt(len(states))
+```
+
+### Spectral Convergence (Q34)
+
+- Trained embeddings: Df = 22 (vs 99 random, 62 untrained)
+- Cross-architecture correlation: 0.971 (GloVe, Word2Vec, FastText, BERT all match)
+- **Geodesic concentration**: All trained models cluster within 0.35 radians (20 degree spherical cap)
+- **Implication**: Clusters should be tight in effective 22-dimensional semantic manifold
+
+---
+
+## Prerequisites
+
+Before beginning implementation:
+
+### 1. Foundation Dependencies (READY)
+- [x] Q44 Geometry validated (GeometricState, E_with)
+- [x] Q46 nucleation thresholds operational
+- [x] Vector storage working (resident_db.py)
+- [x] Receipt system functional
+
+### 2. Code Files to Verify
+- `memory/geometric_memory.py` - remember() method (lines 86-131)
+- `memory/vector_store.py` - store_vector() capability
+- `autonomic/feral_daemon.py` - current daemon behavior
+
+### 3. Existing Migration
+- `migrations/001_add_temporal_links.py` exists
+- New migrations will be 002, 003
 
 ---
 
@@ -225,6 +379,61 @@ def compute_E(v1: np.ndarray, v2: np.ndarray) -> float:
     return dot * dot
 
 
+def compute_R(E: float, sigma: float, Df: float = 1.0, use_full_formula: bool = False) -> float:
+    """
+    Resonance gate - validated from Q15 and Q17 research.
+
+    Two modes:
+    1. Simple (default): R = E/sigma = sqrt(Likelihood Precision)
+       - Per Q15: Mathematically equal to sqrt(likelihood precision)
+       - Volume-independent (cannot bypass by collecting more data)
+
+    2. Full formula: R = (E / sigma) x compression^Df
+       - Per FORMULA_LAB: Includes symbolic compression scaling
+
+    Args:
+        E: Essence (relationship strength from Born rule, 0-1)
+        sigma: Standard deviation of E-scores (uncertainty/noise)
+        Df: Fractal dimension (default 1.0, use GeometricState.Df for full)
+        use_full_formula: If True, apply Df scaling
+
+    Returns:
+        R score for gating decisions
+
+    Thresholds (from Q17):
+        T0 (read-only):   0.0
+        T1 (reversible):  0.5
+        T2 (persistent):  0.8
+        T3 (critical):    1.0
+    """
+    if sigma <= 0:
+        sigma = 0.01  # Avoid division by zero
+
+    # Core formula: R = E/sigma (validated r=1.0 with sqrt(likelihood precision))
+    R = E / sigma
+
+    # Optional: Full formula with fractal scaling
+    if use_full_formula and Df != 1.0:
+        # Symbolic compression (default 1.0 = no compression)
+        compression = 1.0
+        R = R * (compression ** Df)
+
+    # Return raw R (caller decides threshold based on tier)
+    return R
+
+
+def get_r_tier(R: float) -> str:
+    """Map R score to action tier per Q17 validation."""
+    if R >= 1.0:
+        return "T3_CRITICAL"
+    elif R >= 0.8:
+        return "T2_PERSISTENT"
+    elif R >= 0.5:
+        return "T1_REVERSIBLE"
+    else:
+        return "T0_READ_ONLY"
+
+
 class ERelationshipGraph:
     """
     Sparse graph of E-relationships between vectors.
@@ -246,16 +455,36 @@ class ERelationshipGraph:
         self,
         vector_id: str,
         vec: np.ndarray,
-        compare_to_recent: int = 100,
+        Df: float = 1.0,
+        compare_to_recent: int = 3,  # Q13: N=2-3 is optimal, not 100
+        r_tier: str = "T1_REVERSIBLE",
     ) -> Dict:
         """
         Add item and compute E-scores to recent items.
+        Uses R-gating to filter edge additions per Q17 tier system.
+
+        Args:
+            vector_id: ID of the new vector
+            vec: The vector itself
+            Df: Fractal dimension of this item (from GeometricState)
+            compare_to_recent: How many recent items to compare (Q13: 2-3 optimal)
+            r_tier: Minimum tier for edge persistence (T0/T1/T2/T3)
 
         Returns stats about new connections formed.
         """
+        # Map tier to threshold (Q17 validated)
+        tier_thresholds = {
+            "T0_READ_ONLY": 0.0,
+            "T1_REVERSIBLE": 0.5,
+            "T2_PERSISTENT": 0.8,
+            "T3_CRITICAL": 1.0,
+        }
+        r_gate_threshold = tier_thresholds.get(r_tier, 0.5)
+
         cursor = self.conn.cursor()
 
         # Get recent daemon items to compare against
+        # Q13: Optimal context is N=2-3, not maximum
         cursor.execute('''
             SELECT vector_id, vec_blob
             FROM vectors
@@ -267,6 +496,9 @@ class ERelationshipGraph:
 
         new_edges = []
         e_scores = []
+        r_scores = []
+        tier_counts = {"T0": 0, "T1": 0, "T2": 0, "T3": 0}
+        gated_out = 0
 
         for other_id, vec_blob in cursor.fetchall():
             other_vec = np.frombuffer(vec_blob, dtype=np.float32)
@@ -274,27 +506,45 @@ class ERelationshipGraph:
             e_scores.append(E)
 
             if E >= self.threshold:
-                # Create edge (sorted IDs to avoid duplicates)
-                id_a, id_b = sorted([vector_id, other_id])
-                edge_id = f"edge_{uuid.uuid4().hex[:16]}"
+                # R-GATE: sigma = std of E-scores (uncertainty measure)
+                # Per Q15: R = E/sigma = sqrt(likelihood precision)
+                sigma = np.std(e_scores) if len(e_scores) > 1 else 0.1
 
-                try:
-                    cursor.execute('''
-                        INSERT OR IGNORE INTO e_edges
-                        (edge_id, vector_id_a, vector_id_b, e_score, created_at)
-                        VALUES (?, ?, ?, ?, datetime('now'))
-                    ''', (edge_id, id_a, id_b, E))
-                    new_edges.append(EEdge(id_a, id_b, E))
-                except sqlite3.IntegrityError:
-                    pass  # Edge already exists
+                # Compute R using validated formula
+                R = compute_R(E, sigma, Df)
+                r_scores.append(R)
+
+                # Classify by tier
+                actual_tier = get_r_tier(R)
+                tier_counts[actual_tier[:2]] += 1
+
+                # Only persist edge if R passes threshold for requested tier
+                if R >= r_gate_threshold:
+                    id_a, id_b = sorted([vector_id, other_id])
+                    edge_id = f"edge_{uuid.uuid4().hex[:16]}"
+
+                    try:
+                        cursor.execute('''
+                            INSERT OR IGNORE INTO e_edges
+                            (edge_id, vector_id_a, vector_id_b, e_score, created_at)
+                            VALUES (?, ?, ?, ?, datetime('now'))
+                        ''', (edge_id, id_a, id_b, E))
+                        new_edges.append(EEdge(id_a, id_b, E))
+                    except sqlite3.IntegrityError:
+                        pass  # Edge already exists
+                else:
+                    gated_out += 1  # R-gate rejected this edge
 
         self.conn.commit()
 
         return {
             "new_edges": len(new_edges),
+            "gated_out": gated_out,  # Edges rejected by R-gate
+            "tier_distribution": tier_counts,  # How edges distributed across tiers
             "items_compared": len(e_scores),
             "mean_E": np.mean(e_scores) if e_scores else 0,
             "max_E": max(e_scores) if e_scores else 0,
+            "mean_R": np.mean(r_scores) if r_scores else 0,
             "above_threshold": sum(1 for e in e_scores if e >= self.threshold),
         }
 
@@ -669,14 +919,15 @@ class EQueryEngine:
 
 ## File Summary
 
-| File | Status | Purpose |
-|------|--------|---------|
-| `memory/geometric_memory.py` | MODIFY | Add individual item storage + E-graph integration |
-| `memory/vector_store.py` | MODIFY | Add `store_vector()` with metadata |
-| `memory/e_graph.py` | NEW | E-relationship graph core |
-| `memory/e_patterns.py` | NEW | Cluster detection, bridges, novelty |
-| `memory/e_query.py` | NEW | Query interface |
-| `migrations/002_add_e_edges.py` | NEW | Database schema for edges |
+| File | Status | Action | Purpose |
+|------|--------|--------|---------|
+| `memory/geometric_memory.py` | EXISTS | MODIFY | Add individual item storage + E-graph integration |
+| `memory/vector_store.py` | EXISTS | MODIFY | Add `store_vector()` with metadata |
+| `memory/e_graph.py` | MISSING | CREATE | E-relationship graph core |
+| `memory/e_patterns.py` | MISSING | CREATE | Cluster detection, bridges, novelty |
+| `memory/e_query.py` | MISSING | CREATE | Query interface |
+| `migrations/002_add_e_edges.py` | MISSING | CREATE | Database schema for edges |
+| `migrations/003_backfill_e_edges.py` | MISSING | CREATE | Backfill existing daemon items |
 
 ---
 
@@ -819,6 +1070,7 @@ After implementation:
 |------------|--------|-------|
 | Store individual items | NO (centroid only) | YES |
 | Track E-relationships | NO | YES (sparse graph) |
+| R-gated edge creation | NO | YES (quality control) |
 | Find related items | Via centroid (poor) | Via E-graph (good) |
 | Detect clusters | NO | YES |
 | Find bridges | NO | YES |
@@ -856,14 +1108,74 @@ For 10,000 daemon items with ~5% connectivity above threshold:
 
 ---
 
+## Quick Start Checklist
+
+### Phase 1 Implementation Steps
+- [ ] Add `daemon_item` to allowed composition_op values
+- [ ] Modify `remember()` to store individual vectors
+- [ ] Add `source_id` and `daemon_step` metadata tracking
+- [ ] Test: verify individual items appear in vectors table
+
+### Phase 2 Implementation Steps
+- [ ] Create `migrations/002_add_e_edges.py`
+- [ ] Run migration to add e_edges table
+- [ ] Create `memory/e_graph.py` with ERelationshipGraph class
+- [ ] Implement `compute_R()` for R-gating (per FORMULA_LAB)
+- [ ] Add R-gate to `add_item()` - reject edges with low R
+- [ ] Integrate e_graph.add_item() into remember() with Df parameter
+- [ ] Test: verify edges created for similar vectors
+- [ ] Test: verify R-gate rejects noisy relationships
+
+### Phase 3 Implementation Steps
+- [ ] Create `memory/e_patterns.py`
+- [ ] Implement find_clusters() with Union-Find
+- [ ] Implement find_bridges()
+- [ ] Implement score_novelty()
+- [ ] Test: verify cluster detection on synthetic data
+
+### Phase 4 Implementation Steps
+- [ ] Create `memory/e_query.py`
+- [ ] Implement find_related(), expand_from(), find_path()
+- [ ] Add query engine to GeometricMemory init
+- [ ] Test: verify graph traversal works
+
+---
+
+## Decision Log
+
+| Date | Decision | Rationale | Research Source |
+|------|----------|-----------|-----------------|
+| 2026-01-27 | E-threshold 0.5 | Balances sparsity vs coverage; validated r=0.977 | Q44 Born Rule |
+| 2026-01-27 | Compare to recent N=3 items | Q13 shows N=2-3 is optimal (47x improvement), N>3 has diminishing returns | Q13 Scaling Law |
+| 2026-01-27 | Keep centroid + items | Backward compatibility; centroid for "where am I", items for "what connects" | E_RELATIONSHIP design |
+| 2026-01-27 | R-gate edge creation | R is gate, E is compass. Use E to compute, R to decide persistence | FORMULA_VALIDATION_2 |
+| 2026-01-27 | Four-tier R thresholds | T0=0.0, T1=0.5, T2=0.8, T3=1.0 with observation requirements | Q17 R-Gate Guide |
+| 2026-01-27 | R = E/sigma | Mathematically equals sqrt(likelihood precision), volume-independent | Q15 Intensive Property |
+| 2026-01-27 | sigma = std(E-scores) | Measures relationship uncertainty; validated as entropy gradient | FORMULA_VALIDATION_1 |
+| 2026-01-27 | Df x alpha = 8e | Semiotic conservation law, CV=2.69% across 24 models | Q48-Q50 |
+| 2026-01-27 | Geodesic < 0.35 rad | Trained models cluster within 20 degree spherical cap | Q34 Spectral Convergence |
+
+---
+
 ## Next Steps
 
-1. **Implement Phase 1** (individual storage) - foundation for everything else
-2. **Run migration** to add e_edges table
-3. **Implement Phase 2** (E-graph) - core relationship tracking
-4. **Backfill** existing daemon items
-5. **Test** on feral_eternal.db papers
-6. **Implement Phase 3** (patterns) if basic graph proves useful
-7. **Benchmark** against pure E-score retrieval
+### Immediate (Phase 1)
+1. Create branch: `feature/e-relationship-graph`
+2. Modify `resident_db.py` to accept `daemon_item` operation type
+3. Update `geometric_memory.py:remember()` per Phase 1 spec
+4. Write unit test for individual item storage
+
+### Short-term (Phase 2)
+5. Create migration-002 for e_edges table
+6. Implement `memory/e_graph.py`
+7. Run backfill on feral_eternal.db
+8. Validate edge creation with test data
+
+### Medium-term (Phase 3-4)
+9. Implement pattern detection after graph stability proven
+10. Add query interface once patterns work
+11. Benchmark against current retrieval
+
+---
 
 The key insight: **you already have the infrastructure**. This is mostly connecting existing pieces (vector storage, E-score computation) into a graph structure that preserves relationships instead of collapsing them into a centroid.
