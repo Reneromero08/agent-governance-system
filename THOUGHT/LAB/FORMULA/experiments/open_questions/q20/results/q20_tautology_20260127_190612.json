@@ -1,0 +1,194 @@
+{
+  "timestamp": "2026-01-28T02:05:46.108587Z",
+  "test": "Q20_TAUTOLOGY_FALSIFICATION",
+  "predictions": [
+    {
+      "prediction": "P1_code_8e",
+      "passed": "False",
+      "models": [
+        {
+          "name": "MiniLM-L6-code",
+          "shape": [
+            62,
+            384
+          ],
+          "Df": 31.623604554279048,
+          "alpha": 0.6124798241081105,
+          "Df_alpha": 19.368819755069275,
+          "vs_8e_percent": 10.932617654434031,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-MiniLM-L6-v2",
+          "domain": "code"
+        },
+        {
+          "name": "MPNet-code",
+          "shape": [
+            62,
+            768
+          ],
+          "Df": 30.200030986970695,
+          "alpha": 0.6460204031935016,
+          "Df_alpha": 19.50983619465905,
+          "vs_8e_percent": 10.284154542030612,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-mpnet-base-v2",
+          "domain": "code"
+        },
+        {
+          "name": "Para-MiniLM-code",
+          "shape": [
+            62,
+            384
+          ],
+          "Df": 30.44614999044111,
+          "alpha": 0.6251452475175816,
+          "Df_alpha": 19.033265971731723,
+          "vs_8e_percent": 12.475659383148804,
+          "8e_target": 21.74625462767236,
+          "model_id": "paraphrase-MiniLM-L6-v2",
+          "domain": "code"
+        }
+      ],
+      "mean_df_alpha": 19.303973973820018,
+      "mean_error_percent": 11.230810526537816,
+      "threshold_percent": 5.0
+    },
+    {
+      "prediction": "P2_random_negative",
+      "passed": "True",
+      "configs": [
+        {
+          "name": "Random-100x384",
+          "shape": [
+            100,
+            384
+          ],
+          "Df": 79.28470318868976,
+          "alpha": 0.2551501457751185,
+          "Df_alpha": 20.229503576331197,
+          "vs_8e_percent": 6.974769114544811,
+          "8e_target": 21.74625462767236,
+          "n_samples": 100,
+          "dim": 384
+        },
+        {
+          "name": "Random-100x768",
+          "shape": [
+            100,
+            768
+          ],
+          "Df": 88.31729723239467,
+          "alpha": 0.1760839468966013,
+          "Df_alpha": 15.551258275920336,
+          "vs_8e_percent": 28.487647449270735,
+          "8e_target": 21.74625462767236,
+          "n_samples": 100,
+          "dim": 768
+        },
+        {
+          "name": "Random-200x384",
+          "shape": [
+            200,
+            384
+          ],
+          "Df": 131.5427759327856,
+          "alpha": 0.33419938193125176,
+          "Df_alpha": 43.96151441425808,
+          "vs_8e_percent": 102.15671694709462,
+          "8e_target": 21.74625462767236,
+          "n_samples": 200,
+          "dim": 384
+        },
+        {
+          "name": "Random-70x384",
+          "shape": [
+            70,
+            384
+          ],
+          "Df": 59.020622705438676,
+          "alpha": 0.2084676719033673,
+          "Df_alpha": 12.30389180968982,
+          "vs_8e_percent": 43.420639460217785,
+          "8e_target": 21.74625462767236,
+          "n_samples": 70,
+          "dim": 384
+        },
+        {
+          "name": "Random-50x512",
+          "shape": [
+            50,
+            512
+          ],
+          "Df": 44.71206236344436,
+          "alpha": 0.16707880933136232,
+          "Df_alpha": 7.470438142433902,
+          "vs_8e_percent": 65.64724238569485,
+          "8e_target": 21.74625462767236,
+          "n_samples": 50,
+          "dim": 512
+        }
+      ],
+      "mean_df_alpha": 19.903321243726666,
+      "mean_error_percent": 49.33740307136456,
+      "threshold_percent": 20.0,
+      "interpretation": "Random should NOT match 8e"
+    },
+    {
+      "prediction": "P3_riemann_alpha",
+      "passed": "True",
+      "models": [
+        {
+          "name": "MiniLM-L6",
+          "shape": [
+            75,
+            384
+          ],
+          "Df": 45.54527346454193,
+          "alpha": 0.47818822362192176,
+          "Df_alpha": 21.779213412383953,
+          "vs_8e_percent": 0.15156074126738117,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-MiniLM-L6-v2",
+          "alpha_vs_half": 0.02181177637807824
+        },
+        {
+          "name": "MPNet",
+          "shape": [
+            75,
+            768
+          ],
+          "Df": 45.40061131956385,
+          "alpha": 0.4885590503527459,
+          "Df_alpha": 22.18087955172024,
+          "vs_8e_percent": 1.9986196772239224,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-mpnet-base-v2",
+          "alpha_vs_half": 0.011440949647254117
+        },
+        {
+          "name": "Para-MiniLM",
+          "shape": [
+            75,
+            384
+          ],
+          "Df": 40.101378501712254,
+          "alpha": 0.5434802468355729,
+          "Df_alpha": 21.794307086557314,
+          "vs_8e_percent": 0.22096889651887935,
+          "8e_target": 21.74625462767236,
+          "model_id": "paraphrase-MiniLM-L6-v2",
+          "alpha_vs_half": 0.043480246835572944
+        }
+      ],
+      "mean_alpha": 0.5034091736034135,
+      "mean_deviation_from_half": 0.02557765762030177,
+      "threshold": 0.1
+    }
+  ],
+  "summary": {
+    "predictions_passed": 2,
+    "predictions_total": 3,
+    "verdict": "PARTIALLY_EXPLANATORY",
+    "explanation": "2/3 predictions passed. R has some explanatory power but not complete."
+  }
+}

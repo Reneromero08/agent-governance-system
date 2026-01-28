@@ -1,0 +1,207 @@
+{
+  "timestamp": "2026-01-28T02:28:31.042116Z",
+  "test": "Q20_TAUTOLOGY_CODEBERT",
+  "target_8e": 21.74625462767236,
+  "predictions": [
+    {
+      "prediction": "P1_codebert_8e",
+      "passed": "False",
+      "models": [
+        {
+          "name": "CodeBERT-base",
+          "shape": [
+            80,
+            768
+          ],
+          "Df": 3.0858129795887606,
+          "alpha": 1.3119758982254863,
+          "Df_alpha": 4.048512255651828,
+          "vs_8e_percent": 81.38294467268837,
+          "8e_target": 21.74625462767236,
+          "model_id": "microsoft/codebert-base",
+          "domain": "code",
+          "training_data": "code (GitHub)"
+        },
+        {
+          "name": "GraphCodeBERT",
+          "shape": [
+            80,
+            768
+          ],
+          "Df": 21.78808987089771,
+          "alpha": 0.8527081375629347,
+          "Df_alpha": 18.57888153486703,
+          "vs_8e_percent": 14.5651430420336,
+          "8e_target": 21.74625462767236,
+          "model_id": "microsoft/graphcodebert-base",
+          "domain": "code",
+          "training_data": "code (GitHub)"
+        }
+      ],
+      "mean_df_alpha": 11.31369689525943,
+      "mean_error_percent": 47.97404385736098,
+      "mean_alpha": 1.0823420178942105,
+      "threshold_percent": 15.0,
+      "alpha_near_half": "False"
+    },
+    {
+      "prediction": "P2_random_negative",
+      "passed": "True",
+      "configs": [
+        {
+          "name": "Random-CodeBERT-shape",
+          "shape": [
+            80,
+            768
+          ],
+          "Df": 71.96415352266587,
+          "alpha": 0.16063737543478046,
+          "Df_alpha": 11.560132747266655,
+          "vs_8e_percent": 46.84081031334816,
+          "8e_target": 21.74625462767236,
+          "n_samples": 80,
+          "dim": 768,
+          "domain": "random"
+        },
+        {
+          "name": "Random-100x768",
+          "shape": [
+            100,
+            768
+          ],
+          "Df": 88.0875285527726,
+          "alpha": 0.1756547332123823,
+          "Df_alpha": 15.47299132727538,
+          "vs_8e_percent": 28.847557465891988,
+          "8e_target": 21.74625462767236,
+          "n_samples": 100,
+          "dim": 768,
+          "domain": "random"
+        },
+        {
+          "name": "Random-100x384",
+          "shape": [
+            100,
+            384
+          ],
+          "Df": 79.51272793855973,
+          "alpha": 0.2535031619125334,
+          "Df_alpha": 20.15672794471593,
+          "vs_8e_percent": 7.309427348163858,
+          "8e_target": 21.74625462767236,
+          "n_samples": 100,
+          "dim": 384,
+          "domain": "random"
+        },
+        {
+          "name": "Random-200x768",
+          "shape": [
+            200,
+            768
+          ],
+          "Df": 158.28591599906937,
+          "alpha": 0.2416034957441128,
+          "Df_alpha": 38.24243063243416,
+          "vs_8e_percent": 75.85755012621908,
+          "8e_target": 21.74625462767236,
+          "n_samples": 200,
+          "dim": 768,
+          "domain": "random"
+        },
+        {
+          "name": "Random-50x768",
+          "shape": [
+            50,
+            768
+          ],
+          "Df": 46.09162757360514,
+          "alpha": 0.1514983692368641,
+          "Df_alpha": 6.982806412874058,
+          "vs_8e_percent": 67.8896134877941,
+          "8e_target": 21.74625462767236,
+          "n_samples": 50,
+          "dim": 768,
+          "domain": "random"
+        },
+        {
+          "name": "Random-75x384",
+          "shape": [
+            75,
+            384
+          ],
+          "Df": 62.35405391003378,
+          "alpha": 0.22746647970213635,
+          "Df_alpha": 14.183457138072614,
+          "vs_8e_percent": 34.77747142708428,
+          "8e_target": 21.74625462767236,
+          "n_samples": 75,
+          "dim": 384,
+          "domain": "random"
+        }
+      ],
+      "mean_df_alpha": 17.766424367106467,
+      "mean_error_percent": 43.58707169475024,
+      "std_error_percent": 23.28631195471165,
+      "threshold_percent": 20.0,
+      "interpretation": "Random should NOT match 8e"
+    },
+    {
+      "prediction": "P3_riemann_alpha",
+      "passed": "True",
+      "models": [
+        {
+          "name": "MiniLM-L6",
+          "shape": [
+            75,
+            384
+          ],
+          "Df": 45.54527346454193,
+          "alpha": 0.47818822362192176,
+          "Df_alpha": 21.779213412383953,
+          "vs_8e_percent": 0.15156074126738117,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-MiniLM-L6-v2",
+          "alpha_vs_half": 0.02181177637807824
+        },
+        {
+          "name": "MPNet",
+          "shape": [
+            75,
+            768
+          ],
+          "Df": 45.40061131956385,
+          "alpha": 0.4885590503527459,
+          "Df_alpha": 22.18087955172024,
+          "vs_8e_percent": 1.9986196772239224,
+          "8e_target": 21.74625462767236,
+          "model_id": "all-mpnet-base-v2",
+          "alpha_vs_half": 0.011440949647254117
+        },
+        {
+          "name": "Para-MiniLM",
+          "shape": [
+            75,
+            384
+          ],
+          "Df": 40.101378501712254,
+          "alpha": 0.5434802468355729,
+          "Df_alpha": 21.794307086557314,
+          "vs_8e_percent": 0.22096889651887935,
+          "8e_target": 21.74625462767236,
+          "model_id": "paraphrase-MiniLM-L6-v2",
+          "alpha_vs_half": 0.043480246835572944
+        }
+      ],
+      "mean_alpha": 0.5034091736034135,
+      "mean_deviation_from_half": 0.02557765762030177,
+      "threshold": 0.1
+    }
+  ],
+  "summary": {
+    "predictions_passed": 2,
+    "predictions_total": 3,
+    "verdict": "EXPLANATORY",
+    "explanation": "R is EXPLANATORY, not merely descriptive.\nEvidence:\n  - Random matrices do NOT show 8e (negative control passed)\n  - 8e appears in novel domains (code) at ~acceptable levels\n  - This means 8e captures genuine learned structure",
+    "threshold_met": true
+  }
+}

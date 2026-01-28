@@ -1,0 +1,62 @@
+{
+  "timestamp": "2026-01-27T22:41:26.698558",
+  "pre_registration": {
+    "hypothesis": "Optimal alpha varies by model (not fixed at sqrt(3))",
+    "prediction": "Different models have different optimal alphas",
+    "falsification": "If all models converge to sqrt(3)",
+    "data": "5 embedding models, same test corpus",
+    "threshold": "Report distribution of optimal alphas"
+  },
+  "models_tested": 5,
+  "per_model_results": {
+    "all-MiniLM-L6-v2": {
+      "optimal": "2.0",
+      "sqrt3_f1": 0.9,
+      "sqrt3_optimal": false
+    },
+    "all-mpnet-base-v2": {
+      "optimal": "sqrt(3)",
+      "sqrt3_f1": 1.0,
+      "sqrt3_optimal": true
+    },
+    "paraphrase-MiniLM-L6-v2": {
+      "optimal": "sqrt(2)",
+      "sqrt3_f1": 1.0,
+      "sqrt3_optimal": false
+    },
+    "paraphrase-mpnet-base-v2": {
+      "optimal": "2.5",
+      "sqrt3_f1": 0.9,
+      "sqrt3_optimal": false
+    },
+    "all-distilroberta-v1": {
+      "optimal": "sqrt(3)",
+      "sqrt3_f1": 0.8000000000000002,
+      "sqrt3_optimal": true
+    }
+  },
+  "summary": {
+    "mean_optimal_alpha": 1.87566303550217,
+    "std_optimal_alpha": 0.36316411889225186,
+    "sqrt3_value": 1.7320508075688772,
+    "sqrt3_optimal_count": 2,
+    "sqrt3_optimal_rate": 0.4,
+    "unique_optima": [
+      "sqrt(3)",
+      "2.0",
+      "sqrt(2)",
+      "2.5"
+    ]
+  },
+  "verdict": {
+    "hypothesis_supported": true,
+    "conclusion": "sqrt(3) is EMPIRICAL (fitted), not GEOMETRIC (derived)",
+    "evidence": [
+      "4 different optimal alphas found across 5 models",
+      "sqrt(3) optimal for 2/5 models",
+      "Standard deviation of 0.363 shows high variability",
+      "Optimal alphas range from 2.0 to sqrt(3)",
+      "Mean optimal alpha (1.876) differs from sqrt(3)"
+    ]
+  }
+}

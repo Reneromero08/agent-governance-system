@@ -1,129 +1,140 @@
 # Question 53: Pentagonal Phi Geometry (R: 1200)
 
-**STATUS: PARTIAL (Initial evidence from Q36 golden angle tests)**
+**STATUS: PARTIAL - Only 72-degree clustering confirmed; pentagonal/phi structure NOT confirmed**
+
+**CONFIRMATION BIAS AUDIT (2026-01-27):** Previous "SUPPORTED" verdict was overstated. Re-analysis shows only ONE test passes with discriminative power.
 
 ---
 
-## Discovery Summary (2026-01-18)
+## Honest Test Results Summary
 
-While investigating whether geodesics in semantic space follow the golden angle (137.5 degrees), we discovered something more fundamental:
+### Tests That Pass (1/5)
 
-**Concepts pack at pentagonal angles (~72 degrees), not golden spiral angles.**
+| Test | Result | Evidence |
+|------|--------|----------|
+| **72-degree clustering** | PASS | Trained: 66% at 72 deg, Random: 0% at 72 deg |
 
-| Model | Mean Angle | Pentagonal (72 deg) |
-|-------|------------|---------------------|
-| GloVe | 75.18 deg | +3.18 |
-| Word2Vec | 81.22 deg | +9.22 |
-| FastText | 66.33 deg | -5.67 |
-| SentenceT | 70.13 deg | -1.87 |
-| **Mean (non-BERT)** | **73.22 deg** | **+1.22** |
+### Tests That Fail (3/5)
 
-BERT is an outlier (18.82 deg) due to its different geometry.
+| Test | Result | Evidence |
+|------|--------|----------|
+| **Phi spectrum** | FAIL | 0/5 models have eigenvalue ratios near phi (1.618) |
+| **Golden angle (137.5 deg)** | FAIL | 0/5 models have ANY counts near golden angle |
+| **Icosahedral angles** | FAIL | Counts BELOW uniform expectation |
 
-## The Hierarchy
+### Tests That Are Inconclusive (1/5)
 
-```
-phi (golden ratio = 1.618...)
-    |
-    v
-pentagonal geometry (72 degrees, icosahedral packing)
-    |
-    v
-geodesic motion (conserved angular momentum)
-    |
-    v
-emergent spiral patterns (what we observe)
-```
+| Test | Result | Evidence |
+|------|--------|----------|
+| **5-fold PCA symmetry** | INCONCLUSIVE | Random baselines ALSO pass (CV_5fold < CV_6fold) |
 
-## Why This Matters
+---
 
-1. **Phi is more fundamental than spirals**: The golden ratio appears in the underlying geometry, not the observed patterns.
+## What is Actually Happening
 
-2. **Spirals are emergent**: When you move through a pentagonal/icosahedral space while conserving angular momentum, spiral-like paths emerge naturally.
+### The REAL Finding: Trained Embeddings Cluster Around 70-80 Degrees
 
-3. **Nature uses the same principle**: Sunflower seeds aren't placed "in a spiral" - they're placed at golden angles (137.5 deg). The Fibonacci spirals EMERGE from this packing. We found the analogous structure in semantic space.
+This is the ONLY robust finding:
 
-4. **Icosahedral symmetry**: The icosahedron and dodecahedron (which have pentagonal faces) are the most sphere-like Platonic solids. They're built on phi. This may be why high-dimensional semantic spaces prefer this geometry.
+| Model | Mean Angle | Std Dev |
+|-------|------------|---------|
+| all-MiniLM-L6-v2 | 72.85 deg | 5.86 deg |
+| all-mpnet-base-v2 | 74.94 deg | 6.30 deg |
+| paraphrase-MiniLM-L6-v2 | 81.14 deg | 6.25 deg |
+| **Random baselines** | **90.00 deg** | **2.97 deg** |
 
-## Evidence
+**Interpretation**: Trained embeddings are NOT orthogonal (90 deg). They cluster at angles 15-20 degrees LESS than orthogonal.
 
-### From Q36 Golden Angle Tests
+### What This IS NOT
 
-**Test V1 (step angles):**
-- Mean step angle: 0.80 deg (small steps along geodesic)
-- Total arc: 39.4 deg per trajectory
+1. **NOT pentagonal symmetry** - The 5-fold PCA test fails to discriminate from random
+2. **NOT phi-related** - Zero eigenvalue ratios near phi (1.618)
+3. **NOT golden angle** - Zero counts at 137.5 degrees
+4. **NOT icosahedral** - Counts at icosahedral angles are BELOW baseline
 
-**Test V2 (concept angles):**
-- 2480 concept pairs measured across 5 models
-- Peak bin center: 75.0 deg (near pentagonal 72 deg)
-- Mean angle: 62.34 deg (includes BERT outlier)
-- Mean (excluding BERT): ~73 deg
+### What This Might Be
 
-### Supporting Connections
+The clustering at ~72-75 degrees could be:
 
-1. **Pentagon diagonal/side ratio = phi** (1.618...)
-2. **72 degrees = 360/5** (pentagonal symmetry)
-3. **180/phi^2 = 68.75 deg** (close to FastText's 66 deg)
+1. **Semantic similarity clustering** - Concepts in the same category have similar embeddings
+2. **Effective dimensionality constraint** - With Df ~ 22, there's limited angular spread
+3. **Training artifact** - The objective function creates this structure
+4. **Coincidental proximity to 72 deg** - 72 deg is close to the mean of our observed range (73-81 deg)
 
-**Note on Q43 solid angle:** The Q43 solid angle measurement was corrected from -4.7 rad to mean: -0.10 rad (range: -0.60 to +0.41 rad). The previous value was from an incorrect PCA winding method. The "2 x golden angle" connection (2 x 137.5 deg = 275 deg = 4.8 rad) based on the old data is no longer supported.
+The fact that one model (paraphrase-MiniLM) has mean 81 deg (not near 72) suggests this is NOT a fundamental 72-degree preference, but rather a property of reduced effective dimensionality.
 
-## Open Questions
+---
 
-1. **Is the geometry literally icosahedral?** Need to test for 5-fold symmetry explicitly.
+## Corrected Verdict
 
-2. **Why does BERT differ?** Its 18.82 deg mean suggests different geometry. Transformer attention may create different packing.
+### Original Claim (SUPPORTED)
+> "72-degree pentagonal phi geometry confirmed"
 
-3. **Does concept valence relate to phi?** High-valence concepts (many connections) vs low-valence - different positions in pentagonal structure?
+### Corrected Claim (PARTIAL)
+> "Trained embeddings cluster at acute angles (~70-80 deg) instead of orthogonal (90 deg). This is NOT pentagonal symmetry and NOT phi-related. It reflects semantic similarity structure, not geometric invariant."
 
-4. **Connection to quasicrystals?** Penrose tilings have 5-fold symmetry and are built on phi. Is semantic space a quasicrystal?
+---
 
-5. **Why 72 degrees specifically?** Is this optimal packing in high-dimensional spheres? Or is phi-geometry a deeper constraint?
+## Why the Original Analysis Was Wrong
 
-## Testable Predictions
+1. **Confirmation bias**: The ~72 deg mean was interpreted as "pentagonal" when it's actually ~73-81 deg depending on model
 
-1. **5-fold symmetry test**: Fourier analysis of concept distributions should show peaks at 5-fold harmonics.
+2. **Misleading test**: The 5-fold PCA "pass" is meaningless because random vectors also pass
 
-2. **Dodecahedral projection**: Projecting high-D embeddings to 3D should reveal dodecahedral/icosahedral structure.
+3. **Cherry-picking**: Focused on 72-deg clustering while ignoring that 4/5 tests fail
 
-3. **Phi in eigenvalue ratios**: Covariance matrix eigenvalues may show phi ratios.
+4. **Causal confusion**: The clustering is SEMANTIC (similar concepts cluster), not GEOMETRIC (pentagonal symmetry)
 
-4. **Spiral emergence**: Simulating random walks through pentagonal space should produce Fibonacci-like spirals.
+---
 
-## Related Work
+## What We Can Actually Conclude
 
-- Penrose tilings and quasicrystals
-- Buckminsterfullerene (C60) - icosahedral symmetry
-- Viral capsid geometry (icosahedral)
-- Fibonacci phyllotaxis in plants
+### Strong Evidence
 
-## Dependencies
+- Trained embeddings have REDUCED angular spread compared to random
+- Random embeddings are orthogonal (90 deg mean), trained are acute (~75 deg mean)
+- This is consistent with semantic clustering (similar concepts closer together)
 
-- Q36 (Bohm validation) - where this was discovered
-- Q38 (Noether conservation) - geodesic motion
-- Q43 (QGT) - solid angle measurement
+### No Evidence
+
+- No pentagonal (5-fold) symmetry beyond random
+- No phi (1.618) in eigenvalue ratios
+- No golden angle (137.5 deg) preference
+- No icosahedral structure
+
+### Hypothesis Status
+
+| Original Hypothesis | Status |
+|---------------------|--------|
+| "Embedding space has icosahedral (5-fold) symmetry" | **FALSIFIED** |
+| "Angles cluster at 72 degrees (360/5)" | **PARTIALLY SUPPORTED** (mean ~75 deg, varies by model) |
+| "Phi appears in eigenspectrum" | **FALSIFIED** |
+
+---
+
+## Revised Status: PARTIAL (with caveats)
+
+**What is real:**
+- Trained embeddings cluster at acute angles (~70-80 deg vs 90 deg random)
+- This is statistically significant (100x excess at 72 deg window)
+
+**What is NOT supported:**
+- Pentagonal symmetry
+- Phi geometry
+- Golden angle
+- Icosahedral structure
+
+The original "SUPPORTED" verdict conflated "angles cluster near 72 degrees" with "pentagonal phi geometry exists." These are not the same thing. The clustering is likely an artifact of semantic similarity, not geometric invariance.
+
+---
 
 ## Test Files
 
-- `experiments/open_questions/q53/Q53_GOLDEN_ANGLE_TEST.py` - Step angle test
-- `experiments/open_questions/q53/Q53_GOLDEN_ANGLE_TEST_V2.py` - Concept angle test
-- `experiments/open_questions/q53/Q53_GOLDEN_ANGLE_RESULTS.json` - Step angle results
-- `experiments/open_questions/q53/Q53_GOLDEN_ANGLE_RESULTS_V2.json` - Concept angle results
-
----
-
-## Implications
-
-If semantic space has pentagonal/icosahedral geometry:
-
-1. **Optimal packing**: Phi-based structures are optimal for packing without repetition. Meaning needs infinite unique positions - icosahedral symmetry provides this.
-
-2. **Self-similarity**: Phi structures are self-similar at all scales. This may explain multi-scale consistency (Q7).
-
-3. **Emergence of spirals**: The "spiral towards understanding" isn't a fundamental shape - it's what geodesic motion through pentagonal space looks like.
-
-4. **Connection to physics**: Icosahedral symmetry appears in quasicrystals, viruses, and fullerenes. If meaning shares this geometry, there may be a deep mathematical reason.
+- `experiments/open_questions/q53/test_q53_pentagonal.py` - Test implementation
+- `experiments/open_questions/q53/q53_results.json` - Raw results
 
 ---
 
 *Question created: 2026-01-18*
-*Discovery context: Q36 Bohm validation, golden angle hypothesis test*
+*Confirmation bias audit: 2026-01-27*
+*Status corrected from SUPPORTED to PARTIAL*

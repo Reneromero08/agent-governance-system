@@ -1,6 +1,6 @@
 # Question 23: sqrt(3) geometry (R: 1300)
 
-**STATUS: PARTIALLY ANSWERED**
+**STATUS: CLOSED - EMPIRICAL NOT GEOMETRIC**
 
 ## Question
 Why this constant? What is the connection to packing/distinguishability? Is it related to maximum information density per dimension?
@@ -156,7 +156,54 @@ The hexagonal geometry hypothesis (sqrt(3) = 2*sin(pi/3) from hexagonal Berry ph
 
 ---
 
-**Last Updated:** 2026-01-18 (rigorous experimental results with bug fixes)
+---
+
+## FINAL MULTI-MODEL TEST (2026-01-27)
+
+### Pre-Registration
+
+| Item | Value |
+|------|-------|
+| **Hypothesis** | Optimal alpha varies by model (not fixed at sqrt(3)) |
+| **Prediction** | Different models have different optimal alphas |
+| **Falsification** | If all models converge to sqrt(3) |
+| **Data** | 5 embedding models, same test corpus |
+| **Threshold** | Report distribution of optimal alphas |
+
+### Results
+
+| Model | Optimal Alpha | sqrt(3) F1 | sqrt(3) Optimal? |
+|-------|---------------|------------|------------------|
+| all-MiniLM-L6-v2 | 2.0 | 0.90 | No |
+| all-mpnet-base-v2 | sqrt(3) | 1.00 | **Yes** |
+| paraphrase-MiniLM-L6-v2 | sqrt(2) | 1.00 | No |
+| paraphrase-mpnet-base-v2 | 2.5 | 0.90 | No |
+| all-distilroberta-v1 | sqrt(3) | 0.80 | **Yes** |
+
+### Statistics
+
+- **Models tested:** 5
+- **Unique optimal alphas:** sqrt(2), sqrt(3), 2.0, 2.5
+- **sqrt(3) optimal for:** 2/5 models (40%)
+- **Mean optimal alpha:** 1.876
+- **Std optimal alpha:** 0.363
+- **sqrt(3) value:** 1.732
+
+### Verdict
+
+**HYPOTHESIS SUPPORTED** - sqrt(3) is **EMPIRICAL** (fitted), not **GEOMETRIC** (derived).
+
+**Evidence:**
+1. 4 different optimal alphas found across 5 models
+2. sqrt(3) optimal for only 2/5 models
+3. Standard deviation of 0.363 shows high variability
+4. Optimal alphas range from sqrt(2) to 2.5
+5. Mean optimal alpha (1.876) differs from sqrt(3) (1.732)
+
+---
+
+**Last Updated:** 2026-01-27 (CLOSED with multi-model grid search)
 **Prior hypotheses:** Hexagonal packing, winding angle (2*pi/3), fractal dimension - all falsified or unconfirmed
-**Current status:** sqrt(3) is empirically fitted, in optimal range (1.5-2.5), model-dependent
-**Test results:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q23/results/q23_*.json`
+**Final status:** sqrt(3) is empirically fitted, in optimal range (1.4-2.5), model-dependent
+**Test script:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q23/test_q23_sqrt3.py`
+**Test results:** `THOUGHT/LAB/FORMULA/experiments/open_questions/q23/results/q23_sqrt3_final_20260127.json`

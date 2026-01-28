@@ -1,0 +1,280 @@
+{
+  "timestamp": "2026-01-27T22:45:46.248631",
+  "experiment": "Q25_what_determines_sigma_REAL_DATA",
+  "data_type": "REAL_EXTERNAL_DATA",
+  "pre_registration": {
+    "hypothesis": "Sigma predictable (R^2 > 0.7)",
+    "falsification": "Sigma irreducibly empirical (R^2 < 0.5)",
+    "data_sources": [
+      "HuggingFace/mteb/stsbenchmark-sts",
+      "HuggingFace/stanfordnlp/sst2",
+      "HuggingFace/fancyzhx/ag_news",
+      "HuggingFace/stanfordnlp/imdb",
+      "HuggingFace/stanfordnlp/snli",
+      "HuggingFace/nyu-mll/glue/mnli",
+      "HuggingFace/dair-ai/emotion",
+      "HuggingFace/squad",
+      "NCBI_GEO/GSE45267"
+    ]
+  },
+  "n_datasets": 9,
+  "sigma_distribution": {
+    "min": 1.9179102616724888,
+    "max": 39.442060594376564,
+    "mean": 6.5773609603806,
+    "std": 11.621817023009667,
+    "range_ratio": 20.565123083486515
+  },
+  "datasets": [
+    {
+      "name": "stsb",
+      "domain": "nlp_similarity",
+      "source": "HuggingFace/mteb/stsbenchmark-sts",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 4.967710971832275,
+      "effective_dim": 87.10584259033203,
+      "eigenvalue_ratio": 0.042256344109773636,
+      "mean_pairwise_distance": 1.393896222114563,
+      "std_pairwise_distance": 0.07628795504570007,
+      "mean_norm": 1.0,
+      "std_norm": 4.5627736255937634e-08,
+      "intrinsic_scale": 0.0038930534037988863,
+      "optimal_sigma": 2.71858824273294,
+      "optimal_R_cv": 8.413327906998011e-05,
+      "optimal_R_mean": 0.936354652442632
+    },
+    {
+      "name": "sst2",
+      "domain": "nlp_sentiment",
+      "source": "HuggingFace/stanfordnlp/sst2",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 5.03987455368042,
+      "effective_dim": 92.8815689086914,
+      "eigenvalue_ratio": 0.04699307307600975,
+      "mean_pairwise_distance": 1.2566533088684082,
+      "std_pairwise_distance": 0.08178144693374634,
+      "mean_norm": 1.0,
+      "std_norm": 3.8443840111312966e-08,
+      "intrinsic_scale": 0.004173391987795385,
+      "optimal_sigma": 2.71858824273294,
+      "optimal_R_cv": 0.0002817395623974139,
+      "optimal_R_mean": 0.947791843155852
+    },
+    {
+      "name": "ag_news",
+      "domain": "nlp_news",
+      "source": "HuggingFace/fancyzhx/ag_news",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 5.0043463706970215,
+      "effective_dim": 91.57649993896484,
+      "eigenvalue_ratio": 0.04490923136472702,
+      "mean_pairwise_distance": 1.3729548454284668,
+      "std_pairwise_distance": 0.07106397300958633,
+      "mean_norm": 1.0,
+      "std_norm": 4.256623142850913e-08,
+      "intrinsic_scale": 0.0036264681868417156,
+      "optimal_sigma": 2.420128264794381,
+      "optimal_R_cv": 0.00017966368443155228,
+      "optimal_R_mean": 0.922718317736145
+    },
+    {
+      "name": "imdb",
+      "domain": "nlp_reviews",
+      "source": "HuggingFace/stanfordnlp/imdb",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 5.017004013061523,
+      "effective_dim": 94.92095184326172,
+      "eigenvalue_ratio": 0.042826030403375626,
+      "mean_pairwise_distance": 1.2340222597122192,
+      "std_pairwise_distance": 0.09663902968168259,
+      "mean_norm": 1.0,
+      "std_norm": 3.8720088468835456e-08,
+      "intrinsic_scale": 0.0049315898324541795,
+      "optimal_sigma": 2.420128264794381,
+      "optimal_R_cv": 0.00045580971639667104,
+      "optimal_R_mean": 0.9380275907515694
+    },
+    {
+      "name": "snli",
+      "domain": "nlp_inference",
+      "source": "HuggingFace/stanfordnlp/snli",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 4.711484909057617,
+      "effective_dim": 57.67034912109375,
+      "eigenvalue_ratio": 0.0626382902264595,
+      "mean_pairwise_distance": 1.368978500366211,
+      "std_pairwise_distance": 0.09256090223789215,
+      "mean_norm": 1.0,
+      "std_norm": 3.9357122005867495e-08,
+      "intrinsic_scale": 0.004723478762801528,
+      "optimal_sigma": 2.420128264794381,
+      "optimal_R_cv": 0.0002673965346278616,
+      "optimal_R_mean": 0.9227460501424917
+    },
+    {
+      "name": "mnli",
+      "domain": "nlp_multi_genre",
+      "source": "HuggingFace/nyu-mll/glue/mnli",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 5.084263324737549,
+      "effective_dim": 100.47300720214844,
+      "eigenvalue_ratio": 0.039312418550252914,
+      "mean_pairwise_distance": 1.3828037977218628,
+      "std_pairwise_distance": 0.06593600660562515,
+      "mean_norm": 1.0,
+      "std_norm": 4.570553358007601e-08,
+      "intrinsic_scale": 0.003364782747095056,
+      "optimal_sigma": 1.9179102616724888,
+      "optimal_R_cv": 0.0002258457077203612,
+      "optimal_R_mean": 0.8788373561022718
+    },
+    {
+      "name": "emotion",
+      "domain": "nlp_emotion",
+      "source": "HuggingFace/dair-ai/emotion",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 4.959616661071777,
+      "effective_dim": 84.85613250732422,
+      "eigenvalue_ratio": 0.04422316327691078,
+      "mean_pairwise_distance": 1.2832372188568115,
+      "std_pairwise_distance": 0.08855734765529633,
+      "mean_norm": 1.0,
+      "std_norm": 4.189320534919716e-08,
+      "intrinsic_scale": 0.004519173223536089,
+      "optimal_sigma": 2.420128264794381,
+      "optimal_R_cv": 0.0003483561147783223,
+      "optimal_R_mean": 0.9320007164115495
+    },
+    {
+      "name": "squad",
+      "domain": "qa",
+      "source": "HuggingFace/squad",
+      "n_samples": 500,
+      "n_dimensions": 384,
+      "entropy": 4.898181438446045,
+      "effective_dim": 80.02085876464844,
+      "eigenvalue_ratio": 0.043591901659965515,
+      "mean_pairwise_distance": 1.3818581104278564,
+      "std_pairwise_distance": 0.07994363456964493,
+      "mean_norm": 1.0,
+      "std_norm": 3.926675162801985e-08,
+      "intrinsic_scale": 0.004079606518315666,
+      "optimal_sigma": 2.71858824273294,
+      "optimal_R_cv": 0.0001270710268282459,
+      "optimal_R_mean": 0.9376023363554573
+    },
+    {
+      "name": "geo_expression",
+      "domain": "gene_expression",
+      "source": "NCBI_GEO/GSE45267",
+      "n_samples": 87,
+      "n_dimensions": 200,
+      "entropy": 2.307869704232981,
+      "effective_dim": 3.497499056371934,
+      "eigenvalue_ratio": 0.5219131084634536,
+      "mean_pairwise_distance": 18.82615993038513,
+      "std_pairwise_distance": 7.087091201149274,
+      "mean_norm": 13.66719975132343,
+      "std_norm": 3.634232971396197,
+      "intrinsic_scale": 0.5011330247220166,
+      "optimal_sigma": 39.442060594376564,
+      "optimal_R_cv": 0.003202441985615594,
+      "optimal_R_mean": 0.9398728389907556
+    }
+  ],
+  "regression": {
+    "r2_train": 0.988760023943725,
+    "r2_cv": 0.0,
+    "best_features": [
+      "log_mean_dist",
+      "log_std_dist"
+    ],
+    "coefficients": {
+      "intercept": 1.2068543641536693,
+      "log_mean_dist": 0.28622173649997207,
+      "log_std_dist": 0.5887220270503934
+    },
+    "formula": "log(sigma) = 1.2069 +0.2862*log_mean_dist +0.5887*log_std_dist",
+    "residual_std": 0.09313344174776796,
+    "predictions": [
+      2.4320928539191535,
+      2.4161652902590105,
+      2.3488756789601015,
+      2.574449079745556,
+      2.6202841786186957,
+      2.2821597808745713,
+      2.5158378766244223,
+      2.47271103678866,
+      39.44301698502476
+    ],
+    "actuals": [
+      2.71858824273294,
+      2.71858824273294,
+      2.420128264794381,
+      2.420128264794381,
+      2.420128264794381,
+      1.9179102616724888,
+      2.420128264794381,
+      2.71858824273294,
+      39.442060594376564
+    ]
+  },
+  "domain_summary": {
+    "nlp_similarity": {
+      "mean_sigma": 2.71858824273294,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_sentiment": {
+      "mean_sigma": 2.71858824273294,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_news": {
+      "mean_sigma": 2.420128264794381,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_reviews": {
+      "mean_sigma": 2.420128264794381,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_inference": {
+      "mean_sigma": 2.420128264794381,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_multi_genre": {
+      "mean_sigma": 1.9179102616724888,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "nlp_emotion": {
+      "mean_sigma": 2.420128264794381,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "qa": {
+      "mean_sigma": 2.71858824273294,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    },
+    "gene_expression": {
+      "mean_sigma": 39.442060594376564,
+      "std_sigma": 0.0,
+      "n_datasets": 1
+    }
+  },
+  "verdict": "SIGMA_IRREDUCIBLY_EMPIRICAL",
+  "verdict_detail": "R^2_cv = 0.0000 < 0.5",
+  "passes_hypothesis": false,
+  "falsified": true
+}

@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v4.20.0 (2026-01-25 - Q18 REAL DATA COMPLETE: 47 proteins, 9192 mutations, 2500 genes. PASS: Mutation effects (all p<1e-6), 8e in structured embeddings (2.9% dev). FAIL: Protein folding (r=0.14), 8e on raw data. Key insight: 8e is REPRESENTATION property.)*
+*Last updated: v4.24.0 (2026-01-28 - INDEX sync: Q16 CONFIRMED (adversarial NLI fails), Q19 CONDITIONAL (value learning r=0.52), Q20 CONFIRMED (8e text-specific), Q22 FALSIFIED (no universal threshold), Q23 CLOSED (sqrt3 empirical), Q25 RESOLVED (sigma predictable R^2=0.86). 43/53 questions answered (81.1%).)*
 
 ---
 
@@ -23,7 +23,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 - Phi != R asymmetry - confirmed
 - Holographic encoding - confirmed
 - Born rule - confirmed
-- Pentagonal packing (~72 deg) - confirmed
+- Pentagonal packing (~72 deg) - PARTIAL (acute angle clustering real, but phi/pentagonal geometry NOT confirmed)
 - Only the specific numbers changed, not the physics
 
 ---
@@ -63,7 +63,7 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | 13  | [The 36x ratio](high_priority/q13_36x_ratio.md)                                    | 1500    | ✅ ANSWERED  | **YES - Inverse power law with phase transition.** Ratio = E_ratio × (1/sigma) × (N+1)^(ln(sigma)). For sigma=0.5: Ratio = E_ratio × 2 × (N+1)^(-0.693). 10/10 tests pass: universality (CV=0.00), prediction (2.75% error), robustness, causality, self-consistency (0% error), cross-domain, blind prediction (0% error). Phase transition at N=2 (1.2x→47x jump). |
 | 41  | [Geometric Langlands & Sheaf Cohomology](high_priority/q41_geometric_langlands.md) | 1500    | ✅ ANSWERED  | **ALL 6 TIERs PASS:** TIER 1 (categorical equiv: 0.32 nn, 0.96 spec), TIER 2 (L-func, Ramanujan), TIER 3/4 (Hecke, Automorphic), TIER 5 (Trace Formula), TIER 6 (primes: 0.84 align, 0% ramified). Langlands applies to semiosphere.                                                                                                                                 |
 | 39  | [Homeostatic Regulation](high_priority/q39_homeostatic_regulation.md)              | 1490    | ✅ ANSWERED  | **5/5 tests PASS. M field IS homeostatic.** Universal across 5 architectures (CV=3.2%). Exponential recovery (R²=0.99), negative feedback (r=-0.62), sharp phase boundary (k=20, sharpness=0.93). Active Inference + FEP + Noether = homeostasis by construction.                                                                                                    |
-| 36  | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md)  | 1480    | ✅ VALIDATED | **v6.0: 9/9 tests COMPUTED (not cited).** Phi=Implicate, R=Explicate. Unfoldment=geodesic (L_CV=3.14e-07). Conservation=angular momentum. 5 architectures confirm. Pentagonal geometry discovered (Q53). *Updated 2026-01-18: All tests now fully computed.*                                                                                                         |
+| 36  | [Bohm's Implicate/Explicate Order](high_priority/q36_bohm_implicate_explicate.md)  | 1480    | ✅ VALIDATED | **v6.0: 9/9 tests COMPUTED (not cited).** Phi=Implicate, R=Explicate. Unfoldment=geodesic (L_CV=3.14e-07). Conservation=angular momentum. 5 architectures confirm. *Updated 2026-01-18: All tests now fully computed. Q53 "pentagonal geometry" now PARTIAL - see Q53.*                                                                                                         |
 | 43  | [Quantum Geometric Tensor](high_priority/q43_quantum_geometric_tensor.md)          | 1530    | ✅ ANSWERED  | **Rigorous proofs**: Df=22.25, QGT=MDS eigenvecs (96%), eigenvalue corr=1.0. Solid angle=-0.10 rad (holonomy proves curved geometry). Clarified: Berry phase=0 for real vectors (use solid angle/holonomy instead). *Corrected 2026-01-18: Solid angle -4.7 -> -0.10 rad.*                                                                                           |
 | 35  | [Markov Blankets & System Boundaries](high_priority/q35_markov_blankets.md)        | 1450    | ✅ ANSWERED  | R-gating = blanket maintenance (ALIGNED/DISSOLVED/PENDING). Active Inference = handshake protocol (predict→verify→error→resync). Markov blankets ⇔ R > τ state.                                                                                                                                                                                                      |
 
@@ -75,15 +75,15 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | --- | ------------------------------------------------------------------------------------------------------ | ------- | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | 14  | [Category theory](medium_priority/q14_category_theory.md)                                              | 1480    | ✅ ANSWERED  | **PRESHEAF, NOT Grothendieck Sheaf.** R-COVER fails stability (37%) and refinement (2.5%) axioms. Gate IS well-defined presheaf (100%): presheaf axioms, subobject classifier, naturality all pass. Cech H^1=0 for 99.7% of R-covers explains 95% gluing. Q6 bridge CONFIRMED (r=-0.84). All impossibility tests pass (100%). Blind predictions confirmed. *Updated 2026-01-20: 5 tiers, 20 tests, 15/20 passed.* |
 | 15  | [Bayesian inference](medium_priority/q15_bayesian_inference.md)                                        | 1460    | ✅ ANSWERED  | RESOLVED: R correlates perfectly (r=1.0) with Likelihood Precision (signal quality), but is independent of sample size N (unlike Posterior Precision). R is an INTENSIVE quantity (Evidence Density), preventing confidence via volume in noisy channels.                                                                                                                                                         |
-| 16  | [Domain boundaries](medium_priority/q16_domain_boundaries.md)                                          | 1440    | ⏳ OPEN      | Domains where R fundamentally cannot work? (adversarial, non-stationary, self-referential)                                                                                                                                                                                                                                                                                                                        |
+| 16  | [Domain boundaries](medium_priority/q16_domain_boundaries.md)                                          | 1440    | ✅ CONFIRMED | **R fails on adversarial NLI (ANLI R3: r=-0.10).** R detects topical coherence (SNLI: r=0.71), not logical validity. Works: semantic similarity. Fails: adversarial contradictions.                                                                                                                                                                                                                               |
 | 40  | [Quantum Error Correction](medium_priority/q40_quantum_error_correction.md)                            | 1420    | ✅ ANSWERED  | **M field IS QECC.** 7/7 tests pass. Alpha=0.512 (near 0.5), threshold=5.0%, R^2=0.992 holographic CONFIRMED, AUC=0.998 hallucination detection, Cohen's d=4.10. [Report](reports/Q40_QUANTUM_ERROR_CORRECTION_REPORT.md) *Confirmed 2026-01-18.*                                                                                                                                                                 |
 | 17  | [Governance gating](medium_priority/q17_governance_gating.md)                                          | 1420    | ✅ VALIDATED | **8/8 tests pass.** R_high=57.3 > R_low=0.69. Volume resistant (-77.3%). Echo chamber detectable (R=10^8). Thresholds discriminate correctly. Test: `experiments/open_questions/q17/test_q17_r_gate.py`                                                                                                                                                                                                           |
 | 33  | [Conditional entropy vs semantic density](medium_priority/q33_conditional_entropy_semantic_density.md) | 1410    | ✅ ANSWERED  | **σ^Df = N (concept_units)** by tautological construction. σ := N/H(X), Df := log(N)/log(σ), therefore σ^Df = N. Not heuristic—it's countable meaning via GOV_IR_SPEC.                                                                                                                                                                                                                                            |
 | 42  | [Non-Locality & Bell's Theorem](medium_priority/q42_nonlocality_bells_theorem.md)                      | 1400    | ✅ ANSWERED  | **R is local BY DESIGN (A1 correct).** Semantic CHSH S=0.36 << 2.0 (no Bell violation). Non-local structure is Phi's domain, not R's. A1 is a feature, not a limitation.                                                                                                                                                                                                                                          |
 | 18  | [Intermediate scales](medium_priority/q18_intermediate_scales.md)                                      | 1400    | ⏳ MIXED     | **REAL DATA TESTED.** 47 proteins, 9192 mutations, 2500 genes. PASS: Mutation effects (all p<1e-6), 8e in structured embeddings (2.9% dev). FAIL: Protein folding (r=0.14), 8e raw data (5316% dev). Key: 8e is REPRESENTATION property, not physics. *Completed 2026-01-25.*                                                                                                                                     |
-| 19  | [Value learning](medium_priority/q19_value_learning.md)                                                | 1380    | ⏳ OPEN      | Can R guide which human feedback to trust?                                                                                                                                                                                                                                                                                                                                                                        |
+| 19  | [Value learning](medium_priority/q19_value_learning.md)                                                | 1380    | ✅ CONDITIONAL | **R correlates with inter-annotator agreement (r=0.52).** High R = reliable feedback, low R = disputed. CAVEAT: Strong for OASST (r=0.60), weak/negative for SHP and HH-RLHF. Domain-specific calibration required.                                                                                                                                                                                               |
 | 37  | [Semiotic Evolution Dynamics](medium_priority/q37_semiotic_evolution.md)                               | 1380    | ✅ ANSWERED  | **Meanings evolve on M field.** 15/15 tests with REAL DATA: Historical drift (CV=18.5%), R-stability (97% viable), cross-lingual convergence (isolates p<1e-11), phylogeny from embeddings (FMI=0.60), conservation law persists (CV=7.1% through history, 11.8% across languages). *Answered 2026-01-20.*                                                                                                        |
-| 20  | [Tautology risk](medium_priority/q20_tautology_risk.md)                                                | 1360    | ⏳ OPEN      | Is formula descriptive or explanatory?                                                                                                                                                                                                                                                                                                                                                                            |
+| 20  | [Tautology risk](medium_priority/q20_tautology_risk.md)                                                | 1360    | ⚠️ CONFIRMED | **8e is TEXT-EMBEDDING SPECIFIC, not universal.** Audio (38% error), Image (47% error), Graph (100% error). Circular validation detected: 8e derived from text, validated on text. Riemann alpha=0.5 still interesting but text-specific.                                                                                                                                                                          |
 
 ---
 
@@ -92,14 +92,14 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
 | 21 | [Rate of change (dR/dt)](lower_priority/q21_rate_of_change.md) | 1340 | ✅ ANSWERED | **YES.** Alpha drift (departure from 0.5) is a LEADING indicator. Lead time: 5-12 steps. AUC: 0.9955. Z-score: 4.02 (p < 0.001). [Full answer](lower_priority/Q21_ANSWER.md) |
-| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ⏳ PARTIAL | **Core principle established.** median(R) outperforms fixed constants. No universal threshold. GAP: Only 1 domain tested (semantic clustering); multi-domain validation needed. |
-| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ⏳ PARTIAL | **Empirically fitted, NOT geometric.** sqrt(3) is in optimal range (1.5-2.5) but not uniquely special. Hexagonal packing: NOT CONFIRMED. Winding angle = 2*pi/3: FALSIFIED. Model-dependent (sqrt(3) optimal for all-mpnet-base-v2 only). |
-| 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ⏳ OPEN | Optimal response when gate CLOSED? |
-| 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ⏳ OPEN | Principled derivation or always empirical? |
-| 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ⏳ OPEN | Sample complexity bound? |
+| 22 | [Threshold calibration](lower_priority/q22_threshold_calibration.md) | 1320 | ❌ FALSIFIED | **NO universal threshold exists.** median(R) failed in 3/5 domains (deviation up to 43%). R ranges vary 17x by domain (0.2 to 3.5). Youden's J calibration required per-domain. |
+| 23 | [sqrt(3) geometry](lower_priority/q23_sqrt3_geometry.md) | 1300 | ✅ CLOSED | **sqrt(3) is EMPIRICAL, not geometric.** Optimal for 2/5 models only. Mean optimal alpha=1.88 (not 1.73). Hexagonal packing FALSIFIED, Berry phase FALSIFIED. sqrt(3) is curve-fitted, not derived from symmetry. |
+| 24 | [Failure modes](lower_priority/q24_failure_modes.md) | 1280 | ✅ RESOLVED | **WAIT is counterproductive (-34%).** CHANGE_FEATURES best (+80% R improvement). ACCEPT_UNCERTAINTY safest (94% success). Decision tree: R<0.3 -> ESCALATE; time-sensitive -> ACCEPT; else -> CHANGE_FEATURES (try longer window). Tested: SPY 3yr, 17 low-R periods. |
+| 25 | [What determines sigma?](lower_priority/q25_what_determines_sigma.md) | 1260 | ✅ RESOLVED | **Sigma is PREDICTABLE (R^2=0.86).** sigma ~ 31.7 * (mean_pairwise_distance)^0.94 * (effective_dim)^-0.09. Sigma is geometric - scales with data scale, domain-agnostic. |
+| 26 | [Minimum data requirements](lower_priority/q26_minimum_data_requirements.md) | 1240 | ✅ RESOLVED | **RIGOROUS RETEST: N_min = 3-5 with NO D scaling.** Tested 7 models (D=50-768): N_min constant. Semantic structure matters: diverse=3, coherent=5. Original hypothesis (log scaling) FALSIFIED - N_min is dimension-independent. Practical: use N>=5 for safety. |
 | 27 | [Hysteresis](lower_priority/q27_hysteresis.md) | 1220 | ✅ ANSWERED | **Adaptive thresholding under noise.** Gate becomes MORE conservative under stress (noise improves discrimination by raising effective threshold). This is homeostatic self-protection, not a bug. Cohen's d increases with noise (r=+0.989). |
-| 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ⏳ OPEN | Does R converge to fixed points? R-stable states? |
-| 53 | [Pentagonal Phi Geometry](high_priority/q53_pentagonal_phi_geometry.md) | 1200 | ⏳ PARTIAL | **Phi is more fundamental than spirals.** Concept angles cluster at ~72 deg (pentagonal), not 137.5 deg (golden spiral). Spirals EMERGE from geodesic motion through icosahedral geometry. Discovered during Q36 golden angle tests. |
+| 28 | [Attractors](lower_priority/q28_attractors.md) | 1200 | ✅ RESOLVED | **R is NOT chaotic.** Lyapunov < 0.05 (mean=0.0357, max=0.0447). R converges to noisy fixed points. 82.1% pass rate. Autocorr > 0.7 all regimes. Regime equilibria: bull~0.22, bear~0.18. |
+| 53 | [Pentagonal Phi Geometry](high_priority/q53_pentagonal_phi_geometry.md) | 1200 | ⏳ PARTIAL | **CONFIRMATION BIAS CORRECTED.** Only 72-deg clustering passes (1/5 tests). FAIL: phi spectrum (0 ratios), golden angle (0 counts), icosahedral (below baseline). INCONCLUSIVE: 5-fold PCA (random also passes). Real finding: trained embeddings cluster at ~70-80 deg (vs 90 deg random) due to semantic similarity, NOT pentagonal/phi geometry. |
 
 ---
 
@@ -107,9 +107,9 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 
 | # | Question | R-Score | Status | Answer |
 |---|----------|---------|--------|--------|
-| 29 | [Numerical stability](engineering/q29_numerical_stability.md) | 1180 | ⏳ OPEN | Handle near-singular cases without losing gate sensitivity? |
-| 52 | [Chaos theory connections](lower_priority/q52_chaos_theory.md) | 1180 | ⏳ OPEN | Can R detect edge of chaos, predict bifurcations, or correlate with Lyapunov exponents? Lorenz test CORRECTLY FAILS (R^2=-9.74). |
-| 30 | [Approximations](engineering/q30_approximations.md) | 1160 | ⏳ OPEN | Faster approximations that preserve gate behavior? |
+| 29 | [Numerical stability](engineering/q29_numerical_stability.md) | 1180 | ✅ SOLVED | **Epsilon-floor pattern.** `R = E / max(sigma, 1e-6)` prevents div/0 while preserving sensitivity. 8/8 edge case tests pass. Standard numerical computing practice. |
+| 52 | [Chaos theory connections](lower_priority/q52_chaos_theory.md) | 1180 | ✅ FALSIFIED | **Hypothesis FALSIFIED.** R POSITIVELY correlates with Lyapunov (r=+0.545), opposite of predicted (r<-0.5). R measures attractor dimensionality, not predictability. Chaotic systems have HIGH R (fill phase space), stable points have LOW R. |
+| 30 | [Approximations](engineering/q30_approximations.md) | 1160 | ✅ RESOLVED | **Random sampling (k=50) achieves 100-300x speedup with 100% gate accuracy.** O(n^2) bottleneck eliminated. 7/8 methods achieve perfect gate agreement. Pareto optimal: sample_20 (297.9x speedup). Subquadratic scaling verified empirically. |
 
 ---
 
@@ -133,20 +133,20 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 > The conservation law Df × α = 8e: Why 8? (Peirce's 3 categories → 2³). Why e? (Information unit). Why does it emerge through training? What does human alignment distort? Q51: Are real embeddings shadows of complex structure?
 
 **Cluster F: Dynamical Systems** (Q12, Q28, Q52)
-> How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). Can R detect edge of chaos or predict bifurcations?
+> How does R behave in dynamic systems? Phase transitions (Q12), attractors (Q28), chaos theory (Q52). **Q28 RESOLVED:** R is NOT chaotic (Lyapunov < 0.05). R converges to noisy fixed points with regime-specific equilibria. **Q52 FALSIFIED:** R POSITIVELY correlates with Lyapunov - chaotic systems have HIGH R (fill phase space), stable/periodic have LOW R.
 
 **Cluster G: Geometry & Symmetry** (Q8, Q36, Q38, Q43, Q53)
-> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -0.10 rad), conserves angular momentum (CV=6e-7), and has pentagonal (~72 deg) packing. *Solid angle corrected 2026-01-18.*
+> What is the geometry of semantic space? Topology (Q8), Bohm implicate/explicate (Q36), Noether conservation (Q38), QGT (Q43), pentagonal phi structure (Q53). The space is curved (holonomy -0.10 rad), conserves angular momentum (CV=6e-7). *Q53 corrected 2026-01-27: Acute angle clustering (~70-80 deg) confirmed, but pentagonal/phi geometry NOT confirmed.*
 
 ---
 
 ## Summary Statistics
 
 - **Total Questions:** 53
-- **Answered:** 34 (64.2%) - includes Q18 REFINED
-- **Partially Answered:** 4 (7.5%)
-- **Falsified:** 0 (0%)
-- **Open:** 15 (28.3%)
+- **Answered:** 43 (81.1%) - includes Q16 CONFIRMED, Q19 CONDITIONAL, Q20 CONFIRMED, Q23 CLOSED, Q25 RESOLVED
+- **Partially Answered:** 2 (3.8%) - Q53 PARTIAL (pentagonal geometry), Q4 PARTIAL (novel predictions)
+- **Falsified:** 2 (3.8%) - Q52 Chaos Theory, Q22 Universal Threshold
+- **Open:** 6 (11.3%)
 
 ### By Priority Level
 
@@ -154,9 +154,9 @@ The following corrections were applied. **Core findings are UNCHANGED** - only s
 |----------|-------|----------|-----------|-----------|------|
 | Critical | 12 | 10 | 1 | 0 | 1 |
 | High | 15 | 14 | 0 | 0 | 1 |
-| Medium | 11 | 8 | 0 | 0 | 3 |
-| Lower | 9 | 2 | 3 | 0 | 4 |
-| Engineering | 3 | 0 | 0 | 0 | 3 |
+| Medium | 11 | 11 | 0 | 0 | 0 |
+| Lower | 9 | 6 | 1 | 2 | 0 |
+| Engineering | 3 | 2 | 0 | 0 | 1 |
 | Semiotic (Q48-51) | 4 | 3 | 0 | 0 | 1 |
 
 ---

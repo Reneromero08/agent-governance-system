@@ -1,0 +1,109 @@
+{
+  "timestamp": "2026-01-27T22:41:54.134787",
+  "data_source": "SPY",
+  "n_data_points": 751,
+  "n_low_r_periods": 17,
+  "r_threshold": 0.8,
+  "closure_reason_distribution": {
+    "both": 17
+  },
+  "market_regime_distribution": {
+    "sideways": 14,
+    "bull": 2,
+    "bear": 1
+  },
+  "strategies": {
+    "wait": {
+      "n_tests": 68,
+      "mean_improvement": -0.34063715360107766,
+      "std_improvement": 1.5066912857579269,
+      "median_improvement": -0.5847659094525555,
+      "success_rate": 0.0,
+      "improvement_gt_20pct": 0.04411764705882353,
+      "best_time_cost": 5,
+      "hypothesis_supported": "False"
+    },
+    "change_features": {
+      "n_tests": 50,
+      "mean_improvement": 0.79959652121303,
+      "std_improvement": 1.880087680259426,
+      "median_improvement": 0.47556185042545024,
+      "success_rate": 0.6,
+      "improvement_gt_20pct": 0.62,
+      "best_time_cost": 50,
+      "hypothesis_supported": "True"
+    },
+    "accept_uncertainty": {
+      "n_tests": 17,
+      "mean_improvement": 0.0,
+      "std_improvement": 0.0,
+      "median_improvement": 0.0,
+      "success_rate": 0.9411764705882353,
+      "improvement_gt_20pct": 0.0,
+      "best_time_cost": 5,
+      "hypothesis_supported": "False"
+    },
+    "escalate": {
+      "n_tests": 17,
+      "mean_improvement": -0.08198994336988315,
+      "std_improvement": 0.3279597734795326,
+      "median_improvement": 0.0,
+      "success_rate": 0.7647058823529411,
+      "improvement_gt_20pct": 0.0,
+      "best_time_cost": 10,
+      "hypothesis_supported": "False"
+    }
+  },
+  "by_closure_reason": {
+    "both": {
+      "wait": {
+        "n_tests": 68,
+        "mean_improvement": -0.34063715360107766,
+        "std_improvement": 1.5066912857579269,
+        "median_improvement": -0.5847659094525555,
+        "success_rate": 0.0,
+        "improvement_gt_20pct": 0.04411764705882353,
+        "best_time_cost": 5,
+        "hypothesis_supported": "False"
+      },
+      "change": {
+        "n_tests": 50,
+        "mean_improvement": 0.79959652121303,
+        "std_improvement": 1.880087680259426,
+        "median_improvement": 0.47556185042545024,
+        "success_rate": 0.6,
+        "improvement_gt_20pct": 0.62,
+        "best_time_cost": 50,
+        "hypothesis_supported": "True"
+      },
+      "accept": {
+        "n_tests": 17,
+        "mean_improvement": 0.0,
+        "std_improvement": 0.0,
+        "median_improvement": 0.0,
+        "success_rate": 0.9411764705882353,
+        "improvement_gt_20pct": 0.0,
+        "best_time_cost": 5,
+        "hypothesis_supported": "False"
+      },
+      "escalate": {
+        "n_tests": 17,
+        "mean_improvement": -0.08198994336988315,
+        "std_improvement": 0.3279597734795326,
+        "median_improvement": 0.0,
+        "success_rate": 0.7647058823529411,
+        "improvement_gt_20pct": 0.0,
+        "best_time_cost": 10,
+        "hypothesis_supported": "False"
+      }
+    }
+  },
+  "recommendations": {
+    "both": "change"
+  },
+  "verdict": {
+    "hypothesis_supported": "False",
+    "best_overall_strategy": "CHANGE_FEATURES",
+    "best_by_success": "ACCEPT_UNCERTAINTY"
+  }
+}

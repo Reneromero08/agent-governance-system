@@ -1,0 +1,60 @@
+{
+  "timestamp": "2026-01-28T07:29:42.907438",
+  "test": "Q19_VALUE_LEARNING_RESOLVED",
+  "methodology": "within-dataset correlation (addresses Simpson's paradox)",
+  "hypothesis": "avg within-dataset r > 0.3",
+  "falsification_criterion": "avg within-dataset r < 0.1",
+  "n_total": 800,
+  "datasets_used": [
+    "OASST",
+    "SHP"
+  ],
+  "datasets_excluded": [
+    "HH-RLHF (invalid agreement proxy)"
+  ],
+  "primary_metric": "avg_within_dataset_r",
+  "avg_within_dataset_r": 0.16785526491120417,
+  "std_within_dataset_r": 0.3372759368367988,
+  "within_dataset_correlations": {
+    "OASST": 0.505131201748003,
+    "SHP": -0.16942067192559465
+  },
+  "pooled_r": 0.23085125063106804,
+  "pooled_p": 3.876660202073919e-11,
+  "simpsons_warning": false,
+  "negative_control": {
+    "global_shuffled_r_mean": 0.0035674993839227578,
+    "global_shuffled_r_std": 0.03433463727300793,
+    "threshold": 0.15,
+    "pass": true
+  },
+  "per_dataset_results": {
+    "OASST": {
+      "n": 400,
+      "r": 0.505131201748003,
+      "p": 2.7291626412108855e-27,
+      "neg_control_mean": -0.00048356172385468444,
+      "neg_control_std": 0.053211413018925666,
+      "log_R_mean": 7.582034925769932,
+      "log_R_std": 7.399540787289941,
+      "agreement_mean": 0.6110971831467878,
+      "agreement_std": 0.10318966448786719,
+      "effect_vs_null": 9.50199665383927
+    },
+    "SHP": {
+      "n": 400,
+      "r": -0.16942067192559465,
+      "p": 0.000667876301115891,
+      "neg_control_mean": -0.004749796521212707,
+      "neg_control_std": 0.045828911403531944,
+      "log_R_mean": 5.076415472658885,
+      "log_R_std": 6.913487075035959,
+      "agreement_mean": 0.10578772740992438,
+      "agreement_std": 0.09300272622638123,
+      "effect_vs_null": -3.593164978822545
+    }
+  },
+  "verdict": "INCONCLUSIVE",
+  "verdict_reason": "0.1 <= avg r = 0.1679 < 0.3",
+  "pass": false
+}

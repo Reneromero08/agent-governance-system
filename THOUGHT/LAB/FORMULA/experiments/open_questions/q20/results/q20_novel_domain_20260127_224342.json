@@ -1,0 +1,91 @@
+{
+  "timestamp": "2026-01-27T22:42:30.211002",
+  "test": "Q20_NOVEL_DOMAIN_CIRCULAR_VALIDATION_FIX",
+  "hypothesis": "Test if 8e holds in domains never used to derive it",
+  "8e_value": 21.74625462767236,
+  "domains": [
+    {
+      "name": "Karate Club (spectral_laplacian)",
+      "shape": [
+        34,
+        32
+      ],
+      "Df": 31.997799785976408,
+      "alpha": 3.697663007899232e-16,
+      "Df_alpha": 1.1831708060277094e-14,
+      "vs_8e_percent": 99.99999999999996,
+      "8e_target": 21.74625462767236,
+      "domain": "graph",
+      "network": "karate_club",
+      "n_nodes": 34
+    },
+    {
+      "name": "Citation Network (BA spectral)",
+      "shape": [
+        100,
+        64
+      ],
+      "Df": 63.998839255512706,
+      "alpha": 1.6232270712962703e-15,
+      "Df_alpha": 1.0388464841108667e-13,
+      "vs_8e_percent": 99.99999999999952,
+      "8e_target": 21.74625462767236,
+      "domain": "graph",
+      "network": "citation_ba",
+      "n_nodes": 100
+    },
+    {
+      "name": "Random Graph (ER spectral)",
+      "shape": [
+        100,
+        64
+      ],
+      "Df": 63.999974025752685,
+      "alpha": 9.697796846660204e-16,
+      "Df_alpha": 6.206587462932793e-14,
+      "vs_8e_percent": 99.99999999999972,
+      "8e_target": 21.74625462767236,
+      "domain": "graph",
+      "network": "random_er",
+      "n_nodes": 100,
+      "is_negative_control": true
+    },
+    {
+      "name": "wav2vec2-base",
+      "shape": [
+        50,
+        768
+      ],
+      "Df": 10.4424832266906,
+      "alpha": 1.2821448760700045,
+      "Df_alpha": 13.38877636254832,
+      "vs_8e_percent": 38.431805422203844,
+      "8e_target": 21.74625462767236,
+      "domain": "audio",
+      "model": "facebook/wav2vec2-base-960h",
+      "method": "wav2vec2"
+    },
+    {
+      "name": "DINOv2-small",
+      "shape": [
+        50,
+        384
+      ],
+      "Df": 4.042113431035625,
+      "alpha": 2.852083190719462,
+      "Df_alpha": 11.528443771638075,
+      "vs_8e_percent": 46.98653184641737,
+      "8e_target": 21.74625462767236,
+      "domain": "image",
+      "model": "facebook/dinov2-small",
+      "method": "dinov2"
+    }
+  ],
+  "summary": {
+    "novel_domain_count": 4,
+    "mean_df_alpha": 6.229305033546628,
+    "mean_error_percent": 71.35458431715517,
+    "verdict": "8e_NOT_UNIVERSAL",
+    "explanation": "8e does NOT appear in novel domains. The tautology concern is CONFIRMED - 8e may be text-specific."
+  }
+}

@@ -114,8 +114,9 @@ class RGate:
         E = np.mean(similarities)
         sigma = np.std(similarities)
 
-        # R = E / σ (with small epsilon for stability)
-        R = E / (sigma + 1e-8)
+        # R = E / max(sigma, epsilon) - Q29 validated numerical stability
+        # epsilon = 1e-6 recommended: prevents div-by-zero while preserving sensitivity
+        R = E / max(sigma, 1e-6)
 
         return RResult(
             R=float(R),

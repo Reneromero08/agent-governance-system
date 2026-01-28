@@ -1,17 +1,24 @@
 # Question 22: Threshold calibration (R: 1320)
 
-**STATUS: PARTIALLY ANSWERED**
+**STATUS: FALSIFIED - No Universal Threshold Exists**
 
 ## Question
 How do we set the gate threshold for different domains? Is there a universal threshold or must it be domain-specific?
 
 ---
 
-## EXPERIMENTAL VERDICT
+## EXPERIMENTAL VERDICT (Audited 2026-01-27)
 
-### Key Finding: Thresholds Must Be Data-Adaptive
+### Key Finding: NO Universal Threshold - Domain-Specific Calibration Required
 
-Fixed mathematical constants (sqrt(2), sqrt(3), phi, etc.) do NOT work as universal thresholds. The optimal threshold depends on the actual R value distribution in your data.
+**The hypothesis that median(R) serves as a universal threshold was FALSIFIED.**
+
+Tested on 5 real-world domains (STS-B, SST-2, SNLI, Market Regimes, MNLI):
+- Only 2 of 5 domains showed median(R) within 10% of optimal threshold
+- Mean deviation: 14.6% (exceeds 10% threshold)
+- Max deviation: 43.14% (Market domain)
+
+**There is no universal threshold.** Each domain requires validation-set calibration.
 
 ---
 
@@ -50,27 +57,29 @@ We tested fixed thresholds vs adaptive percentile-based thresholds on semantic c
 
 ---
 
-## RECOMMENDATIONS
+## RECOMMENDATIONS (Updated after Falsification)
 
-### 1. Use Adaptive Thresholds
+### 1. Domain-Specific Calibration is REQUIRED
 
+**Do NOT use median(R) as a universal threshold.** The test showed this fails in 60% of domains.
+
+Correct approach:
 ```
-threshold = median(all_R_values)
+# Use validation set to find optimal threshold via Youden's J
+threshold = find_optimal_threshold_youden(R_positive_val, R_negative_val)
 ```
 
-Or for precision-recall tradeoff:
-- Higher precision needed: use p60-p75
-- Higher recall needed: use p25-p40
+### 2. Measured R Ranges by Domain (from real data)
 
-### 2. Domain-Specific Calibration Required
+| Domain | Measured Median(R) | Optimal Threshold | Deviation |
+|--------|-------------------|-------------------|-----------|
+| STS-B | 2.16 | 2.49 | 12.95% |
+| SST-2 | 2.04 | 1.84 | 11.11% |
+| SNLI | 2.13 | 2.02 | 5.22% |
+| Market | 0.20 | 0.35 | 43.14% |
+| MNLI | 3.46 | 3.48 | 0.59% |
 
-Each domain has different R distributions:
-
-| Domain | Expected R Range | Recommended Approach |
-|--------|------------------|---------------------|
-| Semantic clustering | 2.5 - 4.5 | Use median of R values |
-| Binary classification | Varies | Calibrate on validation set |
-| Multi-class | Varies | Per-class thresholds |
+**Key observation:** R ranges vary DRAMATICALLY by domain (0.2 to 3.5), proving no universal threshold exists.
 
 ### 3. Cross-Model Variation
 
@@ -96,18 +105,29 @@ Both need domain-specific tuning. Alpha affects the R distribution shape; thresh
 
 **Is there a universal threshold?**
 
-**NO.** Universal thresholds do not exist. The optimal threshold depends on:
+**NO.** The hypothesis that median(R) could serve as a universal threshold was **FALSIFIED** with real data from 5 domains.
 
-1. **Data distribution**: R values vary by domain
-2. **Embedding model**: Different models produce different R ranges
-3. **Precision-recall tradeoff**: Application requirements
-4. **Class balance**: Affects optimal cutpoint
+### Why No Universal Threshold Exists:
 
-**Recommended approach:**
-1. Compute R for a calibration set
-2. Use median(R) as initial threshold
-3. Tune based on precision-recall requirements
-4. Re-calibrate when changing models or domains
+1. **R value ranges differ dramatically by domain:**
+   - Market data: median(R) = 0.20
+   - NLI tasks: median(R) = 2.1 - 3.5
+   - Difference of 17x between domains
+
+2. **Optimal thresholds don't track median:**
+   - 3 of 5 domains showed > 10% deviation between median(R) and optimal
+   - Market domain showed 43% deviation
+
+3. **Class separability varies by domain:**
+   - SNLI/MNLI: Good class separation (low deviation)
+   - Market/STS-B: Poor class separation (high deviation)
+
+### Required Approach:
+
+1. Collect labeled validation data for your specific domain
+2. Compute R values for positive and negative samples
+3. Find optimal threshold using Youden's J statistic (maximizes sensitivity + specificity - 1)
+4. **Do NOT assume median(R) will work** - it failed in 60% of tested domains
 
 ---
 
@@ -150,6 +170,7 @@ To fully answer "for different domains":
 
 ---
 
-**Last Updated:** 2026-01-18
-**Status:** PARTIALLY ANSWERED - Core principle established, multi-domain validation missing
-**Key Finding:** median(R) outperforms fixed mathematical constants (tested on 1 domain only)
+**Last Updated:** 2026-01-27 (Audited and corrected)
+**Status:** FALSIFIED - Universal threshold hypothesis disproven
+**Key Finding:** median(R) is NOT a reliable universal threshold (failed in 3 of 5 domains)
+**Audit:** See DEEP_AUDIT_Q22.md for full verification details

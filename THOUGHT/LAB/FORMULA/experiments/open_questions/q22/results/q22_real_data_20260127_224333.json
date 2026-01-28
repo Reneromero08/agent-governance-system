@@ -1,0 +1,87 @@
+{
+  "timestamp": "2026-01-28T05:41:22.028480Z",
+  "test": "Q22_THRESHOLD_CALIBRATION_REAL_DATA",
+  "synthetic_data_used": false,
+  "domains": [
+    {
+      "domain": "STS-B",
+      "data_source": "HuggingFace: mteb/stsbenchmark-sts",
+      "n_positive": 338,
+      "n_negative": 534,
+      "R_positive_mean": 3.2372071743011475,
+      "R_negative_mean": 1.4414360523223877,
+      "median_R": 2.1643080711364746,
+      "optimal_threshold": 2.486417770385742,
+      "youden_j": 0.8020300068701105,
+      "deviation_percent": 12.9547700881958,
+      "passed": "False"
+    },
+    {
+      "domain": "SST-2",
+      "data_source": "HuggingFace: stanfordnlp/sst2",
+      "n_positive": 100,
+      "n_negative": 100,
+      "R_positive_mean": 2.089701943397522,
+      "R_negative_mean": 2.053709810972214,
+      "median_R": 2.0390928983688354,
+      "optimal_threshold": 1.835195365263589,
+      "youden_j": 0.1100000000000001,
+      "deviation_percent": 11.110399304869679,
+      "passed": "False"
+    },
+    {
+      "domain": "SNLI",
+      "data_source": "HuggingFace: snli",
+      "n_positive": 500,
+      "n_negative": 500,
+      "R_positive_mean": 2.7306771278381348,
+      "R_negative_mean": 1.3274376392364502,
+      "median_R": 2.130260467529297,
+      "optimal_threshold": 2.024615526199341,
+      "youden_j": 0.696,
+      "deviation_percent": 5.218024730682373,
+      "passed": "True"
+    },
+    {
+      "domain": "Market-Regimes",
+      "data_source": "yfinance: SPY 2019-2024",
+      "n_positive": 714,
+      "n_negative": 199,
+      "R_positive_mean": 0.23191991602719128,
+      "R_negative_mean": 0.1890153321845402,
+      "median_R": 0.1973408221694145,
+      "optimal_threshold": 0.3470485689295034,
+      "youden_j": 0.17054459974944747,
+      "deviation_percent": 43.13740500987321,
+      "passed": "False"
+    },
+    {
+      "domain": "GeneExpression",
+      "error": "Dataset 'ma2za/gene_expression_cancer_1' doesn't exist on the Hub or cannot be accessed.",
+      "passed": false
+    },
+    {
+      "domain": "MNLI",
+      "data_source": "HuggingFace: nyu-mll/multi_nli",
+      "n_positive": 500,
+      "n_negative": 500,
+      "R_positive_mean": 3.75771164894104,
+      "R_negative_mean": 3.004443883895874,
+      "median_R": 3.4627370834350586,
+      "optimal_threshold": 3.4834470748901367,
+      "youden_j": 0.3540000000000001,
+      "deviation_percent": 0.5945258140563965,
+      "passed": "True"
+    }
+  ],
+  "summary": {
+    "valid_domains": 5,
+    "domains_passed": 2,
+    "mean_deviation": 14.603024989535493,
+    "std_deviation": 14.922749750271214,
+    "max_deviation": 43.13740500987321,
+    "pass_rate_check": false,
+    "verdict": "FALSIFIED",
+    "explanation": "Only 2/5 domains passed (need 4)"
+  }
+}

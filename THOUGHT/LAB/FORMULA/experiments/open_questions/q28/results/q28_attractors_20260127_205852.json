@@ -1,0 +1,672 @@
+{
+  "test_id": "Q28_ATTRACTORS",
+  "timestamp": "2026-01-28T03:58:48.185924Z",
+  "hypothesis": "R converges to stable values during regime persistence",
+  "prediction": "R dynamics are convergent, not chaotic",
+  "falsification": "R shows chaotic behavior (positive Lyapunov exponent)",
+  "regimes": {
+    "bull_2017": {
+      "type": "bull",
+      "n_observations": 250,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "bull_2017",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.23833838494797402,
+          "R_std": 0.1683951519700043,
+          "R_cv": 0.7065381094031866,
+          "autocorr_lag1": 0.8949216659443264,
+          "mean_reversion_rate": 0.10451027632447589,
+          "tau_relax": 9.568437039994318,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.24018247813980964,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "bull_2017",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.23833838494797402,
+          "R_std": 0.1683951519700043,
+          "R_cv": 0.7065381094031866,
+          "autocorr_lag1": 0.8949216659443264,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": 339.66037923524016,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 9,
+            "n_successful_fits": 9,
+            "mean_R_squared": 0.7765924707111909,
+            "tau_estimates": [
+              999.9999999555714,
+              12.588379416143233,
+              12.577869497381498,
+              999.9999224496551,
+              999.9999999999875
+            ]
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "bull_2017",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.23833838494797402,
+          "R_std": 0.1683951519700043,
+          "R_cv": 0.7065381094031866,
+          "autocorr_lag1": 0.8949216659443264,
+          "mean_reversion_rate": 0.2291229190392528,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "unclear",
+          "passes": false,
+          "details": {
+            "phase_correlation": -0.2291229190392528,
+            "p_value": 0.0004607416764109916,
+            "R_star": 0.23833838494797402,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.6799754292805035
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "bull_2017",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.23833838494797402,
+          "R_std": 0.1683951519700043,
+          "R_cv": 0.7065381094031866,
+          "autocorr_lag1": 0.8949216659443264,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0391049434189198,
+          "attractor_type": "noisy_fixed_point",
+          "passes": true,
+          "details": {
+            "interpretation": "convergent/periodic",
+            "threshold": 0.05
+          }
+        }
+      ]
+    },
+    "volatility_2018": {
+      "type": "volatile",
+      "n_observations": 249,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "volatility_2018",
+          "regime_type": "volatile",
+          "n_observations": 230,
+          "R_mean": 0.16243246382327703,
+          "R_std": 0.10422859692953705,
+          "R_cv": 0.6416734340665308,
+          "autocorr_lag1": 0.732948163001568,
+          "mean_reversion_rate": 0.26387518369179175,
+          "tau_relax": 3.7896705011451197,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.1592003747749348,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "volatility_2018",
+          "regime_type": "volatile",
+          "n_observations": 230,
+          "R_mean": 0.16243246382327703,
+          "R_std": 0.10422859692953705,
+          "R_cv": 0.6416734340665308,
+          "autocorr_lag1": 0.732948163001568,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": 10.36339945696776,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 8,
+            "n_successful_fits": 6,
+            "mean_R_squared": 0.6896557008827192,
+            "tau_estimates": [
+              1.2678420952171923,
+              1.5514323832786276,
+              31.49829799349867,
+              11.864717234698045,
+              10.390572855520334
+            ]
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "volatility_2018",
+          "regime_type": "volatile",
+          "n_observations": 230,
+          "R_mean": 0.16243246382327703,
+          "R_std": 0.10422859692953705,
+          "R_cv": 0.6416734340665308,
+          "autocorr_lag1": 0.732948163001568,
+          "mean_reversion_rate": 0.3723758550410863,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "fixed_point",
+          "passes": true,
+          "details": {
+            "phase_correlation": -0.3723758550410863,
+            "p_value": 6.074246099518964e-09,
+            "R_star": 0.16243246382327703,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.5284867715288744
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "volatility_2018",
+          "regime_type": "volatile",
+          "n_observations": 230,
+          "R_mean": 0.16243246382327703,
+          "R_std": 0.10422859692953705,
+          "R_cv": 0.6416734340665308,
+          "autocorr_lag1": 0.732948163001568,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.018447637180198574,
+          "attractor_type": "noisy_fixed_point",
+          "passes": true,
+          "details": {
+            "interpretation": "convergent/periodic",
+            "threshold": 0.05
+          }
+        }
+      ]
+    },
+    "bull_2019": {
+      "type": "bull",
+      "n_observations": 250,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "bull_2019",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.2503078569006043,
+          "R_std": 0.16114213876609781,
+          "R_cv": 0.643775791527426,
+          "autocorr_lag1": 0.8646915687560143,
+          "mean_reversion_rate": 0.13524744438242173,
+          "tau_relax": 7.393855047146352,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.2485136856812565,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "bull_2019",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.2503078569006043,
+          "R_std": 0.16114213876609781,
+          "R_cv": 0.643775791527426,
+          "autocorr_lag1": 0.8646915687560143,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": 255.69244848436017,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 8,
+            "n_successful_fits": 8,
+            "mean_R_squared": 0.5755745794970343,
+            "tau_estimates": [
+              5.176233985986581,
+              4.849399450585568,
+              7.989458256396842,
+              999.9999999999989,
+              999.9999999999995
+            ]
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "bull_2019",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.2503078569006043,
+          "R_std": 0.16114213876609781,
+          "R_cv": 0.643775791527426,
+          "autocorr_lag1": 0.8646915687560143,
+          "mean_reversion_rate": 0.2604509056486272,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "unclear",
+          "passes": false,
+          "details": {
+            "phase_correlation": -0.2604509056486272,
+            "p_value": 6.398130902997739e-05,
+            "R_star": 0.2503078569006043,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.7047240120743665
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "bull_2019",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.2503078569006043,
+          "R_std": 0.16114213876609781,
+          "R_cv": 0.643775791527426,
+          "autocorr_lag1": 0.8646915687560143,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.03673446195063241,
+          "attractor_type": "noisy_fixed_point",
+          "passes": true,
+          "details": {
+            "interpretation": "convergent/periodic",
+            "threshold": 0.05
+          }
+        }
+      ]
+    },
+    "crisis_2020q1": {
+      "type": "crisis",
+      "n_observations": 60,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "crisis_2020q1",
+          "regime_type": "crisis",
+          "n_observations": 41,
+          "R_mean": 0.19370587405085077,
+          "R_std": 0.10023177036526541,
+          "R_cv": 0.517443112165038,
+          "autocorr_lag1": 0.7018582084896284,
+          "mean_reversion_rate": 0.29276376935656545,
+          "tau_relax": 3.4157232018709895,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.20134220093631358,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "crisis_2020q1",
+          "regime_type": "crisis",
+          "n_observations": 41,
+          "R_mean": 0.19370587405085077,
+          "R_std": 0.10023177036526541,
+          "R_cv": 0.517443112165038,
+          "autocorr_lag1": 0.7018582084896284,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 1,
+            "n_successful_fits": 0,
+            "mean_R_squared": 0.0,
+            "tau_estimates": []
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "crisis_2020q1",
+          "regime_type": "crisis",
+          "n_observations": 41,
+          "R_mean": 0.19370587405085077,
+          "R_std": 0.10023177036526541,
+          "R_cv": 0.517443112165038,
+          "autocorr_lag1": 0.7018582084896284,
+          "mean_reversion_rate": 0.3945421829219948,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "fixed_point",
+          "passes": true,
+          "details": {
+            "phase_correlation": -0.3945421829219948,
+            "p_value": 0.011758570171691012,
+            "R_star": 0.19370587405085077,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.3767116524576609
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "crisis_2020q1",
+          "regime_type": "crisis",
+          "n_observations": 41,
+          "R_mean": 0.19370587405085077,
+          "R_std": 0.09900188611435791,
+          "R_cv": 0.5110938764678814,
+          "autocorr_lag1": 0.0,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "insufficient_data",
+          "passes": false,
+          "details": {
+            "error": "insufficient data for Lyapunov estimation"
+          }
+        }
+      ]
+    },
+    "recovery_2020q2": {
+      "type": "recovery",
+      "n_observations": 61,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "recovery_2020q2",
+          "regime_type": "recovery",
+          "n_observations": 42,
+          "R_mean": 0.18722538234362987,
+          "R_std": 0.11561821301257134,
+          "R_cv": 0.617534927708757,
+          "autocorr_lag1": 0.7481014728077923,
+          "mean_reversion_rate": 0.1991860767776979,
+          "tau_relax": 5.020431225290959,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.1477030677138751,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "recovery_2020q2",
+          "regime_type": "recovery",
+          "n_observations": 42,
+          "R_mean": 0.18722538234362987,
+          "R_std": 0.11561821301257134,
+          "R_cv": 0.617534927708757,
+          "autocorr_lag1": 0.7481014728077923,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 1,
+            "n_successful_fits": 0,
+            "mean_R_squared": 0.0,
+            "tau_estimates": []
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "recovery_2020q2",
+          "regime_type": "recovery",
+          "n_observations": 42,
+          "R_mean": 0.18722538234362987,
+          "R_std": 0.11561821301257134,
+          "R_cv": 0.617534927708757,
+          "autocorr_lag1": 0.7481014728077923,
+          "mean_reversion_rate": 0.3126275758813701,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "fixed_point",
+          "passes": true,
+          "details": {
+            "phase_correlation": -0.3126275758813701,
+            "p_value": 0.04658188789262834,
+            "R_star": 0.18722538234362987,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.4394453344227242
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "recovery_2020q2",
+          "regime_type": "recovery",
+          "n_observations": 42,
+          "R_mean": 0.18722538234362987,
+          "R_std": 0.11423351380365292,
+          "R_cv": 0.6101390330344045,
+          "autocorr_lag1": 0.0,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "insufficient_data",
+          "passes": false,
+          "details": {
+            "error": "insufficient data for Lyapunov estimation"
+          }
+        }
+      ]
+    },
+    "bull_2021": {
+      "type": "bull",
+      "n_observations": 250,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "bull_2021",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.19133331784784804,
+          "R_std": 0.15943355266115983,
+          "R_cv": 0.8332764746421051,
+          "autocorr_lag1": 0.8773834530346388,
+          "mean_reversion_rate": 0.12152958370395267,
+          "tau_relax": 8.228449145462108,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.19523817929890963,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "bull_2021",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.19133331784784804,
+          "R_std": 0.15943355266115983,
+          "R_cv": 0.8332764746421051,
+          "autocorr_lag1": 0.8773834530346388,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": 427.5256011845085,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 12,
+            "n_successful_fits": 12,
+            "mean_R_squared": 0.8330512608214112,
+            "tau_estimates": [
+              999.9999999847076,
+              999.9999899622621,
+              999.9999974892247,
+              999.9999999830699,
+              999.9931656808336
+            ]
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "bull_2021",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.19133331784784804,
+          "R_std": 0.15943355266115983,
+          "R_cv": 0.8332764746421051,
+          "autocorr_lag1": 0.8773834530346388,
+          "mean_reversion_rate": 0.24598469116998403,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "unclear",
+          "passes": false,
+          "details": {
+            "phase_correlation": -0.24598469116998403,
+            "p_value": 0.00016437537015631632,
+            "R_star": 0.19133331784784804,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.8305513334348922
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "bull_2021",
+          "regime_type": "bull",
+          "n_observations": 231,
+          "R_mean": 0.19133331784784804,
+          "R_std": 0.15943355266115983,
+          "R_cv": 0.8332764746421051,
+          "autocorr_lag1": 0.8773834530346388,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.03934991105376955,
+          "attractor_type": "noisy_fixed_point",
+          "passes": true,
+          "details": {
+            "interpretation": "convergent/periodic",
+            "threshold": 0.05
+          }
+        }
+      ]
+    },
+    "bear_2022": {
+      "type": "bear",
+      "n_observations": 207,
+      "tests": [
+        {
+          "test_name": "regime_stability",
+          "regime": "bear_2022",
+          "regime_type": "bear",
+          "n_observations": 188,
+          "R_mean": 0.18511170735465096,
+          "R_std": 0.10340974555787497,
+          "R_cv": 0.5586342807799366,
+          "autocorr_lag1": 0.79569711837749,
+          "mean_reversion_rate": 0.20308569746690702,
+          "tau_relax": 4.924029668167783,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "measured_in_lyapunov_test",
+          "passes": true,
+          "details": {
+            "mu_equilibrium": 0.1852070030629368,
+            "stability_criterion": "CV < 1.0 and autocorr > 0.5"
+          }
+        },
+        {
+          "test_name": "relaxation_time",
+          "regime": "bear_2022",
+          "regime_type": "bear",
+          "n_observations": 188,
+          "R_mean": 0.18511170735465096,
+          "R_std": 0.10340974555787497,
+          "R_cv": 0.5586342807799366,
+          "autocorr_lag1": 0.79569711837749,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": 146.59128241342523,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "relaxation_analysis",
+          "passes": true,
+          "details": {
+            "n_perturbations": 7,
+            "n_successful_fits": 7,
+            "mean_R_squared": 0.6572082725884053,
+            "tau_estimates": [
+              0.9154240261412645,
+              8.95972312569613,
+              6.02005218544603,
+              4.584422285386983,
+              3.1781189273236383
+            ]
+          }
+        },
+        {
+          "test_name": "attractor_basin",
+          "regime": "bear_2022",
+          "regime_type": "bear",
+          "n_observations": 188,
+          "R_mean": 0.18511170735465096,
+          "R_std": 0.10340974555787497,
+          "R_cv": 0.5586342807799366,
+          "autocorr_lag1": 0.79569711837749,
+          "mean_reversion_rate": 0.3183778403629303,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.0,
+          "attractor_type": "fixed_point",
+          "passes": true,
+          "details": {
+            "phase_correlation": -0.3183778403629303,
+            "p_value": 8.968215013207193e-06,
+            "R_star": 0.18511170735465096,
+            "trajectory_bounded": false,
+            "trajectory_range": 0.5039330562910582
+          }
+        },
+        {
+          "test_name": "lyapunov_exponent",
+          "regime": "bear_2022",
+          "regime_type": "bear",
+          "n_observations": 188,
+          "R_mean": 0.18511170735465096,
+          "R_std": 0.10340974555787497,
+          "R_cv": 0.5586342807799366,
+          "autocorr_lag1": 0.79569711837749,
+          "mean_reversion_rate": 0.0,
+          "tau_relax": null,
+          "lyapunov_exponent": 0.044712307504088666,
+          "attractor_type": "noisy_fixed_point",
+          "passes": true,
+          "details": {
+            "interpretation": "convergent/periodic",
+            "threshold": 0.05
+          }
+        }
+      ]
+    }
+  },
+  "summary": {
+    "overall_pass_rate": 0.8214285714285714,
+    "test_pass_rates": {
+      "regime_stability": 1.0,
+      "relaxation_time": 1.0,
+      "attractor_basin": 0.5714285714285714,
+      "lyapunov_exponent": 0.7142857142857143
+    },
+    "mean_lyapunov": 0.0356698522215218,
+    "max_lyapunov": 0.044712307504088666,
+    "attractor_distribution": {
+      "unclear": 3,
+      "noisy_fixed_point": 5,
+      "fixed_point": 4
+    },
+    "regime_R_means": {
+      "bull_2017": 0.23833838494797402,
+      "volatility_2018": 0.16243246382327703,
+      "bull_2019": 0.2503078569006043,
+      "crisis_2020q1": 0.19370587405085077,
+      "recovery_2020q2": 0.18722538234362987,
+      "bull_2021": 0.19133331784784804,
+      "bear_2022": 0.18511170735465096
+    },
+    "hypothesis_supported": true
+  }
+}

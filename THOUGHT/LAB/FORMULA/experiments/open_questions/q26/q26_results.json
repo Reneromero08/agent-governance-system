@@ -1,0 +1,40 @@
+{
+  "test_id": "Q26_MINIMUM_DATA_REQUIREMENTS",
+  "verdict": "INCONCLUSIVE",
+  "hypothesis": "N_min ~ log(D)",
+  "best_scaling": "log",
+  "scaling_fits": {
+    "log": {
+      "c": -7.279708589540863,
+      "b": 150.33092173696733,
+      "r2": 0.17084900100371758
+    },
+    "linear": {
+      "c": -0.024594756735894854,
+      "b": 122.18825291187922,
+      "r2": 0.09616549883734882
+    },
+    "sqrt": {
+      "c": -0.9730523254399177,
+      "b": 129.09744464315278,
+      "r2": 0.1242506679017863
+    }
+  },
+  "N_min_by_D": {
+    "10": 150,
+    "25": 100,
+    "50": 150,
+    "100": 100,
+    "200": 75,
+    "384": 150,
+    "500": 100,
+    "768": 100,
+    "1000": 100
+  },
+  "stability_threshold": 0.1,
+  "reasoning": "No clear scaling law detected (all R^2 < 0.5)",
+  "real_data_validation": {
+    "status": "validated",
+    "D": 384
+  }
+}

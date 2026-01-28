@@ -1,0 +1,64 @@
+{
+  "timestamp": "2026-01-28T02:27:48.997584Z",
+  "test": "Q22_THRESHOLD_CALIBRATION",
+  "domains": [
+    {
+      "domain": "STS-B",
+      "n_positive": 130,
+      "n_negative": 181,
+      "R_positive_mean": 2.806842088699341,
+      "R_negative_mean": 1.2132302522659302,
+      "median_R": 1.897035002708435,
+      "optimal_threshold": 2.0243172645568848,
+      "youden_j": 0.8522311942201446,
+      "deviation_percent": 6.287663459777832,
+      "passed": "True"
+    },
+    {
+      "domain": "SST-2",
+      "error": "Couldn't find cache for glue for config 'sst2'\nAvailable configs in the cache: ['mnli']",
+      "passed": false
+    },
+    {
+      "domain": "SNLI",
+      "n_positive": 300,
+      "n_negative": 300,
+      "R_positive_mean": 2.630647897720337,
+      "R_negative_mean": 1.2589094638824463,
+      "median_R": 2.027059555053711,
+      "optimal_threshold": 1.894555687904358,
+      "youden_j": 0.71,
+      "deviation_percent": 6.9939284324646,
+      "passed": "True"
+    },
+    {
+      "domain": "Market",
+      "error": "'Adj Close'",
+      "passed": false
+    },
+    {
+      "domain": "Semantic",
+      "n_positive": 10,
+      "n_negative": 10,
+      "R_positive_mean": 6.205209732055664,
+      "R_negative_mean": 4.931883978843689,
+      "median_R": 4.584603309631348,
+      "optimal_threshold": 5.359440327888757,
+      "youden_j": 0.20000000000000018,
+      "deviation_percent": 14.45742411246588,
+      "passed": "False"
+    }
+  ],
+  "summary": {
+    "valid_domains": 3,
+    "domains_passed": 2,
+    "mean_deviation": 9.246338668236104,
+    "std_deviation": 3.6960574655713567,
+    "max_deviation": 14.45742411246588,
+    "variance": 13.66084078880576,
+    "variance_check": "True",
+    "pass_rate_check": false,
+    "verdict": "FALSIFIED",
+    "explanation": "Only 2/5 domains passed (need 4/5)"
+  }
+}

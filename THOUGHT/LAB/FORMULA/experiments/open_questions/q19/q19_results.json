@@ -1,0 +1,51 @@
+{
+  "timestamp": "2026-01-28T05:44:05.287456",
+  "test": "Q19_VALUE_LEARNING",
+  "hypothesis": "r > 0.5",
+  "falsification_criterion": "r < 0.3",
+  "n_examples": 900,
+  "pearson_r_log": 0.5221352298069528,
+  "pearson_p_log": 4.320907748395399e-64,
+  "pearson_r_raw": 0.33457043112691126,
+  "pearson_p_raw": 5.599113830141093e-25,
+  "spearman_rho": 0.4826551649490301,
+  "spearman_p": 1.0574789541107015e-53,
+  "r_mean": 22068808.07123421,
+  "r_std": 27031655.773180775,
+  "r_median": 8006650.20942688,
+  "log_r_mean": 10.178925319580639,
+  "log_r_std": 7.778754085012636,
+  "agreement_mean": 0.48765511142258366,
+  "agreement_std": 0.30193798354398704,
+  "high_r_agreement": 0.6211226313369477,
+  "low_r_agreement": 0.3541875915082196,
+  "agreement_difference": 0.26693503982872807,
+  "source_stats": {
+    "HH-RLHF": {
+      "n": 300,
+      "r": -0.30564380560832816,
+      "p": 6.60437154286388e-08,
+      "log_r_mean": 17.02805458870614,
+      "agreement_mean": 0.7583831961839962
+    },
+    "SHP": {
+      "n": 300,
+      "r": -0.14298949043958895,
+      "p": 0.013172799993529776,
+      "log_r_mean": 5.588935345111066,
+      "agreement_mean": 0.09622785660387699
+    },
+    "OASST": {
+      "n": 300,
+      "r": 0.601842209120318,
+      "p": 6.012288032773305e-31,
+      "log_r_mean": 7.919786024924706,
+      "agreement_mean": 0.6083542814798778
+    }
+  },
+  "simpsons_paradox": false,
+  "avg_within_source_r": 0.05106963769080031,
+  "verdict": "PASS",
+  "verdict_reason": "r = 0.5221 > 0.5 (hypothesis threshold)",
+  "pass": true
+}
