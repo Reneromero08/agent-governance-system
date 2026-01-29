@@ -859,33 +859,33 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False,
         edges.extend(resident_link_edges)
 
         # Load E-relationship graph edges (Phase 2)
+        # Mapping: e_edges.vector_id -> vectors.vec_sha256 -> receipts.output_hash (prefix) -> receipt_id
         e_graph_edges = []
         try:
+            # Build set of valid node IDs for filtering
+            valid_node_ids = {node['id'] for node in nodes if node.get('id', '').startswith('chunk:')}
+
             with sqlite3.connect(str(db_path)) as conn:
+                # Join through vec_sha256 -> output_hash (prefix match) to get receipt_id
                 cursor = conn.execute("""
-                    SELECT vector_id_a, vector_id_b, e_score, r_tier
-                    FROM e_edges
-                    WHERE e_score >= 0.6
-                    ORDER BY e_score DESC
-                    LIMIT 500
+                    SELECT DISTINCT
+                        'chunk:' || r_a.receipt_id as node_a,
+                        'chunk:' || r_b.receipt_id as node_b,
+                        e.e_score,
+                        e.r_tier
+                    FROM e_edges e
+                    JOIN vectors v_a ON e.vector_id_a = v_a.vector_id
+                    JOIN vectors v_b ON e.vector_id_b = v_b.vector_id
+                    JOIN receipts r_a ON v_a.vec_sha256 LIKE r_a.output_hash || '%'
+                    JOIN receipts r_b ON v_b.vec_sha256 LIKE r_b.output_hash || '%'
+                    WHERE e.e_score >= 0.6
+                    ORDER BY e.e_score DESC
+                    LIMIT 1000
                 """)
 
-                # Build vector_id -> node_id mapping
-                vector_to_node = {}
-                for node in nodes:
-                    if node.get('id', '').startswith('chunk:'):
-                        # Extract receipt_id from chunk:receipt_id
-                        receipt_id = node['id'].replace('chunk:', '')
-                        vector_to_node[receipt_id] = node['id']
-                        if len(receipt_id) >= 8:
-                            vector_to_node[receipt_id[:8]] = node['id']
-
-                for vid_a, vid_b, e_score, r_tier in cursor.fetchall():
-                    # Try to find nodes (may not exist if vectors aren't in constellation)
-                    node_a = vector_to_node.get(vid_a) or vector_to_node.get(vid_a[:8] if len(vid_a) >= 8 else vid_a)
-                    node_b = vector_to_node.get(vid_b) or vector_to_node.get(vid_b[:8] if len(vid_b) >= 8 else vid_b)
-
-                    if node_a and node_b and node_a != node_b:
+                for node_a, node_b, e_score, r_tier in cursor.fetchall():
+                    # Only include edges where both nodes exist in the constellation
+                    if node_a in valid_node_ids and node_b in valid_node_ids and node_a != node_b:
                         e_graph_edges.append({
                             "from": node_a,
                             "to": node_b,

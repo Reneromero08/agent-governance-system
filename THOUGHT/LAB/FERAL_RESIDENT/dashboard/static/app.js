@@ -949,16 +949,23 @@
                             const alpha = 0.15 + (link.weight || 0.5) * 0.25;  // Reduced opacity
                             return `rgba(100, 255, 255, ${alpha})`;  // Lighter cyan
                         }
+                        // E-relationship edges (Born rule) in bright green
+                        if (link.type === 'e_relationship') {
+                            const alpha = 0.3 + (link.weight || 0.5) * 0.4;  // Stronger for high E
+                            return `rgba(0, 255, 136, ${alpha})`;  // #00ff88
+                        }
                         return 'rgba(0, 143, 17, 0.2)';
                     })
                     .linkWidth(link => {
                         if (link.type === 'smash_trail') return 2;
                         if (link.type === 'similarity') return 1;
+                        if (link.type === 'e_relationship') return 1.5;  // Thicker than similarity
                         return 0.3;
                     })
                     .linkOpacity(link => {
                         if (link.type === 'smash_trail') return 1.0;
                         if (link.type === 'similarity') return 0.3;
+                        if (link.type === 'e_relationship') return 0.5;
                         return 0.2;
                     })
                     .linkVisibility(link => {

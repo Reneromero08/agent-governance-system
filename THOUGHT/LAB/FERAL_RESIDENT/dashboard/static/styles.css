@@ -624,6 +624,7 @@ body, html {
 .edge-legend-color.mind-projected { background: #ff6b6b; }
 .edge-legend-color.co-retrieval { background: #ffd93d; }
 .edge-legend-color.entanglement { background: #c77dff; }
+.edge-legend-color.e-relationship { background: #00ff88; }
 
 .edge-legend-label {
     color: var(--text-secondary);
