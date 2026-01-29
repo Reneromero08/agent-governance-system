@@ -1,0 +1,313 @@
+ts=20260110_055040
+\n=== scifact -> climate_fever ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13940490B55F178EECE16FEBA8E503B19C6E923E9619D439629FF9656B55F427       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          237D0D938DD4859D5EDABDCA4058284DE256C9E109B12081EC39F45E8C03CDC7       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          C34BD93398BF0BE9FD937FD3BE48D4C15ECE6716624D7AE2C38106DB6849BA2C       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== scifact -> snli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          E5283C44C1F3EB4955158552990C4F2A0986AF74C60F5CA1C7B298E1F08649AD       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          7E24B141BD929450D8BACBD0FAE33F6EC9CDB2CCECA218CE0FF7F0B67C8D2DD4       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          47189110B61B8B528619A4186344782D99B655674590ECBB88EFB92177A96D6F       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== scifact -> mnli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          552D7CCE1C869244D7A0C4772AFB2A3A44F9DE4252CF18848338C4F14E499B74       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          52CEAA5DAD4F44D2EFCB6C69C25BE84FAB08526D6EB33FCA4674926235C197EE       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          31AFF3B57CB6577DDB03EFA4DDB696D6C51ADF9FAE1CE7E0B666CB6B3DF82F36       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== climate_fever -> scifact ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          E14D3D220867E49802E4C399BBF67CE854D64FC0FA34076B7766916B8D9E0FF3       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          9C1BCB1F70EBE9C69F1D62E39113CB89FE6387B874FB548B9800F2104958EB29       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          705AB85A5535A4251D3AAAFDECA2E72AE71EE5A09DB46D763EA3E0F611485D84       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== climate_fever -> snli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          73CAD3745DD7ED26B3AA6ADB1C1F9249C7491091D91E2D38E3F18E777130DC95       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          F9A0FBC53F3AA952822E62406D1F411C1DB269EADA2A1B7D8D0A5ABF2CB15DD5       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          B12AD67B9BE0CF8FFAFE58CD693E9243D3DD9E76A6A0D8983175661524C2CE82       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== climate_fever -> mnli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          BF1A3BD71E3A7B7F882A8E95D4205BC42E5D532A6867B8305F33EB3AD210D281       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          B33F7D3B92506F31FA77C112EDF2E0789E0F58B778D70AF80C135C1C493B745B       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          B0B8315163D9716F45B724B4D9F09D7DDA476EEB155D93EC213073BBCE25E328       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== snli -> scifact ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          6B97955EB32DD29A9812398C9670EB8CBD16A8EC1F119A2DECB8D1C142AB2C47       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          3BD4DD91CCD7D1233D701BB9284FD63C0048D293C30FBB6DB30EB196B62DB657       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          0AF12A88C06029EAF6BE6561D13BD88A1E46B27C07CDB528965DA73B42ADC792       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== snli -> climate_fever ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          4A760B8E1F072163572D92E414223E70BE6AC701F41AC0F65138EBA31D3BC50A       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          65896E3D9A5EFCBDBDEE9F0258851B78C609BC47BF10D40FD63B3453FD17E20C       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          4BBEFA66C318E6A5E34A491427B6C55C0E3E418E6C31B4FC00D6DD6BD7F3359E       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== snli -> mnli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          E9F455FC081E6F2DCFD6E6782995CBC85A6B7BBBF045CB3D4AFFDFF697B2CA28       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          01FCF07460262D0769E16D53741E05C3BEF4DE42253CF3FD4393503A5F6E9C94       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          0180B2BA370116F0AC655D7F6A10340FC5A1637B4BC9F235B4B97E1597A736E7       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== mnli -> scifact ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          344125281AC21AF4F3B41BBBD39983562A44C96666498403374400EC447439FD       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          A5A52805486AF15330879000895F7602A527C05C5DCD4C8CFBBA443F4999F831       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          BF3C183BCC1567EB2BCDCAA33F1C9B4F63564DB97D76A28087A163564E5C3F31       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== mnli -> climate_fever ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          B66FCBA7BA5823C09CAAB17513458F66A12A60AC63FA7D736BE0933C5C5ABE49       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          2DFE7D23BA704489EF2760C80FE3E6D14D1B55E55FA94103B70CB56B74A2509D       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          BE0E05B35462123064DF273613F5D6FD71C621EDAA334FCFBAC8370715D68918       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+\n=== mnli -> snli ===
+rc=0
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          4D1BFDBD2FA5CD445A4B5D44E109865D3C0C59A776C505302DCCAF72814178D5       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          13BF7B3039C63BF5A50491FA3CFD8EB4E699D1BA1436315AEF9CBE5711530354       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          D1B59597EEA001086D9103E783422980D30313D0B5EE773EDA8AFED81BA6CA80       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          3BBFCFEF922BDAA47E0487E1278F21AA09B91D8CB074B5DA6FCF56EF1F5437B0       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+

@@ -1,0 +1,1 @@
+{"results":[],"run":{"dataset":"scifact","fast":true,"mode":"stream","neighbor_k":10,"require_geometry_gate":false,"scoring":"cosine","seed":123,"strict":false,"wrong_checks":"neighbor"},"type":"GeometrySummary","version":1}

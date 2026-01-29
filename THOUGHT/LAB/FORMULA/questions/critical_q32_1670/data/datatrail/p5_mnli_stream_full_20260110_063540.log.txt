@@ -1,0 +1,17 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 06:35:49.553257: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 06:35:50.551993: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+Traceback (most recent call last):
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3840, in <module>
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3562, in main
+    run_snli_streaming(
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1262, in run_snli_streaming
+    raise RuntimeError(f"Too few SNLI streaming samples ({len(samples)})")
+RuntimeError: Too few SNLI streaming samples (57)

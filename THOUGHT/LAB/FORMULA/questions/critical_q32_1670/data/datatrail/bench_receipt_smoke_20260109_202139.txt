@@ -1,0 +1,54 @@
+COMMAND: & 'D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Scripts\python.exe' THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode bench --fast --dataset all --scoring cosine --wrong_checks neighbor --neighbor_k 10 --threads 12 --device cpu --st_batch 64 --empirical_receipt_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_bench_smoke_20260109_202139.json'
+
+[Q32:P2] Loading SciFact...
+[Q32:P2] scifact intervention samples=10
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 1.000
+  z(H0: p=0.5) = 4.472  (n=20)
+  mean(M_correct) = -1.294
+  mean(M_wrong)   = -25.862
+  mean(M_correct - M_wrong) = 24.568
+  [J] mean neighbor sim (k=10) = 0.223
+  [Phi_proxy] I(mu_hat; mu_check) = 1.485 bits
+
+[Q32:P2] Loading Climate-FEVER (public votes as truth anchor)...
+[Q32:P2] climate prepared=10
+
+[Q32:P2] Climate-FEVER supports vs refutes discrimination
+  P(M_support_internal > M_refute_internal) = 0.688
+  mean(M_support_internal) = 3.067
+  mean(M_refute_internal)  = -1.590
+
+[Q32:P2] Negative control (check-shuffle across claims)
+  P(M_support_shuffled > M_refute_shuffled) = 0.438
+  mean(M_support_shuffled) = -2.776
+  mean(M_refute_shuffled)  = -3.211
+
+[Q32:P2] Fast debug: worst deltas (support-refute)
+  delta=-3.341  M_support= 1.535  M_refute= 4.876
+  delta=-2.307  M_support= 3.302  M_refute= 5.609
+  delta=-0.516  M_support= 3.285  M_refute= 3.801
+  delta=-0.419  M_support= 2.392  M_refute= 2.811
+  delta=-0.054  M_support= 2.574  M_refute= 2.628
+[Q32:P2] Fast debug: best deltas (support-refute)
+  delta= 5.207  M_support= 3.557  M_refute=-1.650
+  delta= 5.755  M_support= 2.283  M_refute=-3.471
+  delta= 6.739  M_support= 3.394  M_refute=-3.345
+  delta= 17.269  M_support= 3.958  M_refute=-13.311
+  delta= 33.174  M_support= 5.543  M_refute=-27.631
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact: PASS
+  - Climate-FEVER: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_bench_smoke_20260109_202139.json
+[Q32] EmpiricalMetricReceipt sha256: 29A0CFEFC8D41883ED481AC364EDC65BF441115BECC8D15F3A748E89991B63F8
+
+RECEIPT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          29A0CFEFC8D41883ED481AC364EDC65BF441115BECC8D15F3A748E89991B63F8       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+LOG SHA256:

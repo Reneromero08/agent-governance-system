@@ -1,0 +1,11 @@
+usage: q32_physical_force_harness.py [-h] [--mode {synthetic_validator_suite}]
+                                     [--seed SEED] [--n_steps N_STEPS]
+                                     [--lag LAG]
+                                     [--coupling_strength COUPLING_STRENGTH]
+                                     [--noise_std NOISE_STD]
+                                     [--r_detect_threshold R_DETECT_THRESHOLD]
+                                     [--echo_threshold ECHO_THRESHOLD]
+                                     [--receipt_out RECEIPT_OUT]
+q32_physical_force_harness.py: error: unrecognized arguments: --threads 12
+RECEIPT=LAW/CONTRACTS/_runs/q32_public/datatrail/physical_force_receipt_p6_synth_20260110_211959.json
+RC=2

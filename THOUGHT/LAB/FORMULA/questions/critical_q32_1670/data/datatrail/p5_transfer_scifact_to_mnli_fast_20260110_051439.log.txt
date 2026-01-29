@@ -1,0 +1,98 @@
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 05:14:48.208957: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 05:14:49.412279: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Traceback (most recent call last):
+
+[Q32:P3] Calibrating on scifact (seeds=[123])
+
+[Q32:P2] Loading SciFact...
+[Q32:P2] scifact intervention samples=10
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.850
+  z(H0: p=0.5) = 3.130  (n=20)
+  mean(M_correct) = -1.294
+  mean(M_wrong)   = -22.272
+  mean(M_correct - M_wrong) = 20.978
+  [swap] P(M_correct > M_swapped_correct) = 0.600
+  [swap] mean(M_correct - M_swapped_correct) = 0.781
+  [Phi_proxy] I(mu_hat; mu_check) = 1.485 bits
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 2.101
+  mean(M_wrong_end)   = -27.631
+  mean(M_correct - M_wrong) = 29.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.688
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 1.778
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3855, in <module>
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 29.679
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.556 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.500, min_tail = 2
+  stable_cross_rate = 1.000
+  mean_first_cross_frac = 0.016
+  phase_gate_rate=0.500 => PASS
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.875
+  z(H0: p=0.5) = 3.000  (n=16)
+  mean(M_correct_end - M_injected_end) = 3.218
+  inj_gate_z=2.000, inj_gate_margin=0.500 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.964
+  mean dM_wrong   = -1.200
+[Q32:P3] Wrote calibration to LAW\CONTRACTS\_runs\q32_public\datatrail\transfer_calibration_scifact_to_mnli_fast_20260110_051439.json
+
+[Q32:P3] Frozen thresholds: min_z=1.400  min_pair_wins=0.865
+[Q32:P3] Verifying on mnli (seeds=[123])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+[Q32:P3] snli intervention samples=10
+[Q32:P3] snli intervention samples=25
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.850
+  z(H0: p=0.5) = 4.427  (n=40)
+  mean(M_correct) = -5.441
+  mean(M_wrong)   = -20.054
+  mean(M_correct - M_wrong) = 14.614
+  [swap] P(M_correct > M_swapped_correct) = 0.550
+  [swap] mean(M_correct - M_swapped_correct) = -0.631
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+[Q32:P3] SNLI below calibrated pair_wins (reported only): 0.850 < 0.865
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+[Q32:P3] snli streaming samples=10
+[Q32:P3] snli streaming samples=25
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3829, in main
+    results.extend(run_transfer(calibrate_on=args.calibrate_on, apply_to=args.apply_to))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3807, in run_transfer
+    run_snli_streaming(
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1303, in run_snli_streaming
+    R_i = float(R_grounded(last_obs, indep_scores))
+                                     ^^^^^^^^^^^^
+NameError: name 'indep_scores' is not defined

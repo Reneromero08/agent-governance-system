@@ -1,0 +1,27 @@
+COMMAND: & 'D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Scripts\python.exe' THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode bench --fast --dataset scifact --scoring cosine --wrong_checks neighbor --neighbor_k 10 --threads 12 --device cpu --st_batch 64 --ablation no_scale --empirical_receipt_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_ablation_no_scale_smoke_20260109_211408.json'
+
+[Q32:P2] Loading SciFact...
+[Q32:P2] scifact intervention samples=10
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 1.000
+  z(H0: p=0.5) = 4.472  (n=20)
+  mean(M_correct) = -3.770
+  mean(M_wrong)   = -26.310
+  mean(M_correct - M_wrong) = 22.540
+  [J] mean neighbor sim (k=10) = 0.223
+  [Phi_proxy] I(mu_hat; mu_check) = 1.485 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_ablation_no_scale_smoke_20260109_211408.json
+[Q32] EmpiricalMetricReceipt sha256: D3D8A29B0BFB82C3435F5A0292EAC80D90B7ACF43F8D60813CA227E383522E1E
+
+RECEIPT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          D3D8A29B0BFB82C3435F5A0292EAC80D90B7ACF43F8D60813CA227E383522E1E       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+LOG SHA256:

@@ -1,0 +1,8 @@
+{
+  "apply_to": "climate_fever",
+  "calibrate_on": "scifact",
+  "created_at": "2026-01-10T08:18:33Z",
+  "frozen_min_pair_wins": 0.775,
+  "frozen_min_z": 2.6,
+  "seed_base": 123
+}

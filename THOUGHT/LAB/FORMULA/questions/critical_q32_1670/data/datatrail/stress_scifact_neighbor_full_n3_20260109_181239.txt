@@ -1,0 +1,66 @@
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\transformers\utils\hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+
+[Q32:STRESS] SciFact streaming variability (trials=3)
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.575
+  z(H0: p=0.5) = 1.643  (n=120)
+  mean(M_correct_end) = -2.426
+  mean(M_wrong_end)   = -2.228
+  mean(M_correct - M_wrong) = -0.198
+  [J] mean neighbor sim (k=10) = 0.339
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.883
+  mean dM_wrong   = -0.583
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -1.384
+  mean(M_wrong_end)   = -2.043
+  mean(M_correct - M_wrong) = 0.659
+  [J] mean neighbor sim (k=10) = 0.340
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -1.332
+  mean dM_wrong   = -0.383
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:STRESS] Summary
+  pass_rate = 0.333  (pass_n=1/3)
+  min_pair_wins = 0.575
+  min_z = 1.643
+  min_mean_margin = -0.198
+[Q32:STRESS] Wrote LAW\CONTRACTS\_runs\q32_public\datatrail\stress_scifact_neighbor_full_n3_20260109_181239.json
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL

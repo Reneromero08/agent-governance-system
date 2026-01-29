@@ -1,0 +1,44 @@
+{
+  "per_trial": [
+    {
+      "mean_dM_correct": -0.0930963457782168,
+      "mean_dM_wrong": -1.0521177779970743,
+      "mean_margin": 1.1271469499702533,
+      "mean_neighbor_sim": 0.3449620502690474,
+      "pair_wins": 0.675,
+      "seed": 123.0,
+      "z": 3.834057902535463
+    },
+    {
+      "mean_dM_correct": -0.8826054344725375,
+      "mean_dM_wrong": -0.5831995188126081,
+      "mean_margin": -0.19833232410920196,
+      "mean_neighbor_sim": 0.33907447569072247,
+      "pair_wins": 0.575,
+      "seed": 124.0,
+      "z": 1.6431676725151982
+    },
+    {
+      "mean_dM_correct": -1.3320137238440342,
+      "mean_dM_wrong": -0.3827026096932978,
+      "mean_margin": 0.6590876454719431,
+      "mean_neighbor_sim": 0.3397665020078421,
+      "pair_wins": 0.625,
+      "seed": 125.0,
+      "z": 2.7386127875253305
+    }
+  ],
+  "summary": {
+    "dataset": "scifact",
+    "min_mean_margin": -0.19833232410920196,
+    "min_pair_wins": 0.575,
+    "min_z": 1.6431676725151982,
+    "mode": "stress",
+    "neighbor_k": 10,
+    "pass_n": 1,
+    "pass_rate": 0.3333333333333333,
+    "seed_base": 123,
+    "trials": 3,
+    "wrong_checks": "neighbor"
+  }
+}

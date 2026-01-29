@@ -1,0 +1,81 @@
+{
+  "n_genes": 2500,
+  "n_sources": 5,
+  "total_samples_analyzed": 988,
+  "r_statistics": {
+    "mean_R": 11.6894,
+    "std_R": 13.1919,
+    "median_R": 5.7504,
+    "min_R": 0.3325,
+    "max_R": 53.3574,
+    "p25_R": 2.1628,
+    "p75_R": 16.39,
+    "iqr_R": 14.2272,
+    "n_genes": 2500,
+    "deciles": {
+      "p10": 1.0942,
+      "p20": 1.6452,
+      "p30": 3.0406,
+      "p40": 4.4974,
+      "p50": 5.7504,
+      "p60": 7.6779,
+      "p70": 11.9492,
+      "p80": 21.4083,
+      "p90": 37.1907
+    }
+  },
+  "r_analysis": {
+    "mean_R_threshold": 11.6894,
+    "genes_above_threshold": 760,
+    "genes_below_threshold": 1740,
+    "ratio_above_below": 0.4368,
+    "distribution_bins": {
+      "R_0_1": 190,
+      "R_1_2": 402,
+      "R_2_5": 521,
+      "R_5_10": 557,
+      "R_10_20": 300,
+      "R_20_50": 524,
+      "R_50_plus": 6
+    },
+    "interpretation": {
+      "high_R_genes": "Genes with R > mean(R) show high consistency relative to variance",
+      "low_R_genes": "Genes with R < mean(R) show higher variance relative to mean expression",
+      "biological_significance": "High R suggests tightly regulated expression (housekeeping, essential genes)"
+    }
+  },
+  "sources": [
+    {
+      "id": "GSE13904",
+      "description": "Pediatric sepsis blood samples",
+      "n_samples": 227,
+      "n_genes": 500
+    },
+    {
+      "id": "GSE32474",
+      "description": "GEO dataset GSE32474",
+      "n_samples": 174,
+      "n_genes": 500
+    },
+    {
+      "id": "GSE14407",
+      "description": "GEO dataset GSE14407",
+      "n_samples": 24,
+      "n_genes": 500
+    },
+    {
+      "id": "GSE36376",
+      "description": "GEO dataset GSE36376",
+      "n_samples": 433,
+      "n_genes": 500
+    },
+    {
+      "id": "GSE26440",
+      "description": "GEO dataset GSE26440",
+      "n_samples": 130,
+      "n_genes": 500
+    }
+  ],
+  "data_source": "GEO Series Matrix files (NCBI)",
+  "status": "SUCCESS - Real biological data"
+}

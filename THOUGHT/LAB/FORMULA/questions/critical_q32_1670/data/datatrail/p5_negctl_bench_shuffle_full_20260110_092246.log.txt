@@ -1,0 +1,71 @@
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 09:22:55.260198: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 09:22:56.281761: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.683
+  z(H0: p=0.5) = 4.017  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -3.705
+  mean(M_correct - M_wrong) = 1.753
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 3.325
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P2] Loading Climate-FEVER (public votes as truth anchor)...
+[Q32:P2] climate prepared=10
+[Q32:P2] climate prepared=25
+[Q32:P2] climate prepared=50
+
+[Q32:P2] Climate-FEVER supports vs refutes discrimination
+  P(M_support_internal > M_refute_internal) = 0.683
+  mean(M_support_internal) = 3.277
+  mean(M_refute_internal)  = -9.340
+
+[Q32:P2] Negative control (check-shuffle across claims)
+  P(M_support_shuffled > M_refute_shuffled) = 0.467
+  mean(M_support_shuffled) = -7.661
+  mean(M_refute_shuffled)  = -9.839
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.688
+  z(H0: p=0.5) = 5.809  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -10.585
+  mean(M_correct - M_wrong) = 8.103
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.633
+  z(H0: p=0.5) = 4.131  (n=240)
+  mean(M_correct) = -1.052
+  mean(M_wrong)   = -4.048
+  mean(M_correct - M_wrong) = 2.996
+  [swap] P(M_correct > M_swapped_correct) = 0.658
+  [swap] mean(M_correct - M_swapped_correct) = 5.917
+  [Phi_proxy] I(mu_hat; mu_check) = 0.255 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact: PASS
+  - Climate-FEVER: PASS
+  - SNLI: PASS
+  - MNLI: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p5_negctl_bench_shuffle_full_20260110_092246.json
+[Q32] EmpiricalMetricReceipt sha256: CD2F163963259A5D3D95F4578BEF31DBB55D019322D8E890E23FD597BD3238C6

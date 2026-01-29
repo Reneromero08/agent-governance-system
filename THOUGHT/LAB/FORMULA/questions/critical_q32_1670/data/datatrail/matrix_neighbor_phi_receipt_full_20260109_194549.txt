@@ -1,0 +1,304 @@
+COMMAND: & 'D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Scripts\python.exe' THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode matrix --scoring crossencoder --wrong_checks neighbor --neighbor_k 10 --threads 12 --device auto --ce_batch 16 --st_batch 64 --calibration_n 3 --verify_n 3 --empirical_receipt_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_full_20260109_194549.json'
+
+[Q32:P3] Calibrating on climate_fever (seeds=[123, 124, 125])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 3.360
+  [J] mean neighbor sim (k=10) = 0.532
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.717
+  z(H0: p=0.5) = 4.747  (n=120)
+  mean(M_correct - M_wrong) = 3.490
+  [J] mean neighbor sim (k=10) = 0.535
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.642
+  z(H0: p=0.5) = 3.104  (n=120)
+  mean(M_correct - M_wrong) = 2.895
+  [J] mean neighbor sim (k=10) = 0.531
+  [Phi_proxy] I(mu_hat; mu_check) = 0.485 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.761
+  mean(M_wrong_end)   = -6.913
+  mean(M_correct - M_wrong) = 2.152
+  [J] mean neighbor sim (k=10) = 0.574
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.920
+  mean(M_wrong_end)   = -6.950
+  mean(M_correct - M_wrong) = 2.031
+  [J] mean neighbor sim (k=10) = 0.575
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.777
+  mean(M_wrong_end)   = -7.021
+  mean(M_correct - M_wrong) = 2.244
+  [J] mean neighbor sim (k=10) = 0.576
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P3] Frozen thresholds: min_z=2.600  min_pair_wins=0.625
+[Q32:P3] Verifying on scifact (seeds=[123, 124, 125])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.908
+  z(H0: p=0.5) = 8.946  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -12.620
+  mean(M_correct - M_wrong) = 10.668
+  [J] mean neighbor sim (k=10) = 0.329
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.933
+  z(H0: p=0.5) = 9.494  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -12.925
+  mean(M_correct - M_wrong) = 13.489
+  [J] mean neighbor sim (k=10) = 0.315
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.958
+  z(H0: p=0.5) = 10.042  (n=120)
+  mean(M_correct) = 0.924
+  mean(M_wrong)   = -12.499
+  mean(M_correct - M_wrong) = 13.422
+  [J] mean neighbor sim (k=10) = 0.297
+  [Phi_proxy] I(mu_hat; mu_check) = 0.508 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P3] Calibrating on scifact (seeds=[123, 124, 125])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.908
+  z(H0: p=0.5) = 8.946  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -12.620
+  mean(M_correct - M_wrong) = 10.668
+  [J] mean neighbor sim (k=10) = 0.329
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.933
+  z(H0: p=0.5) = 9.494  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -12.925
+  mean(M_correct - M_wrong) = 13.489
+  [J] mean neighbor sim (k=10) = 0.315
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.958
+  z(H0: p=0.5) = 10.042  (n=120)
+  mean(M_correct) = 0.924
+  mean(M_wrong)   = -12.499
+  mean(M_correct - M_wrong) = 13.422
+  [J] mean neighbor sim (k=10) = 0.297
+  [Phi_proxy] I(mu_hat; mu_check) = 0.508 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 3.834  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -2.524
+  mean(M_correct - M_wrong) = 1.127
+  [J] mean neighbor sim (k=10) = 0.345
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -1.052
+
+[Q32:P3] Frozen thresholds: min_z=2.600  min_pair_wins=0.675
+[Q32:P3] Verifying on climate_fever (seeds=[123, 124, 125])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 3.360
+  [J] mean neighbor sim (k=10) = 0.532
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.761
+  mean(M_wrong_end)   = -6.913
+  mean(M_correct - M_wrong) = 2.152
+  [J] mean neighbor sim (k=10) = 0.574
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.625 < 0.675
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.717
+  z(H0: p=0.5) = 4.747  (n=120)
+  mean(M_correct - M_wrong) = 3.490
+  [J] mean neighbor sim (k=10) = 0.535
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.920
+  mean(M_wrong_end)   = -6.950
+  mean(M_correct - M_wrong) = 2.031
+  [J] mean neighbor sim (k=10) = 0.575
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.625 < 0.675
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.642
+  z(H0: p=0.5) = 3.104  (n=120)
+  mean(M_correct - M_wrong) = 2.895
+  [J] mean neighbor sim (k=10) = 0.531
+  [Phi_proxy] I(mu_hat; mu_check) = 0.485 bits
+[Q32:P3] Climate-FEVER-Intervention below calibrated pair_wins (reported only): 0.642 < 0.675
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.777
+  mean(M_wrong_end)   = -7.021
+  mean(M_correct - M_wrong) = 2.244
+  [J] mean neighbor sim (k=10) = 0.576
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.625 < 0.675
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - climate_fever->scifact:SciFact@seed=123: PASS
+  - climate_fever->scifact:SciFact-Streaming@seed=123: PASS
+  - climate_fever->scifact:SciFact@seed=124: PASS
+  - climate_fever->scifact:SciFact-Streaming@seed=124: PASS
+  - climate_fever->scifact:SciFact@seed=125: PASS
+  - climate_fever->scifact:SciFact-Streaming@seed=125: PASS
+  - scifact->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - scifact->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+  - scifact->climate_fever:Climate-FEVER-Intervention@seed=124: PASS
+  - scifact->climate_fever:Climate-FEVER-Streaming@seed=124: PASS
+  - scifact->climate_fever:Climate-FEVER-Intervention@seed=125: PASS
+  - scifact->climate_fever:Climate-FEVER-Streaming@seed=125: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_matrix_neighbor_phi_full_20260109_194549.json
+[Q32] EmpiricalMetricReceipt sha256: D08CF0E5F0BB8135AAC9BF6D95A3CD1F0FF8B1B394FB1845DA3C48BC055DFC05
+
+RECEIPT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          D08CF0E5F0BB8135AAC9BF6D95A3CD1F0FF8B1B394FB1845DA3C48BC055DFC05       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+LOG SHA256:

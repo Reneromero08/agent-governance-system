@@ -1,0 +1,397 @@
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 22:01:04.175745: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 22:01:05.487188: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+`trust_remote_code` is not supported anymore.
+Please check that the Hugging Face dataset 'scifact' isn't based on a loading script and remove `trust_remote_code`.
+If the dataset is based on a loading script, please ask the dataset author to remove it and convert it to a standard format like Parquet.
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+
+[Q32:STRESS] SciFact streaming variability (trials=12)
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 2.101
+  mean(M_wrong_end)   = -25.613
+  mean(M_correct - M_wrong) = 27.715
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.688
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 1.778
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 28.035
+  [J] mean neighbor sim (k=10) = 0.236
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.556 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.964
+  mean dM_wrong   = -1.841
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.587
+  mean(M_wrong_end)   = -26.032
+  mean(M_correct - M_wrong) = 26.620
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.500
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 0.210
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 26.826
+  [J] mean neighbor sim (k=10) = 0.254
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.578 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.033
+  mean dM_wrong   = 1.065
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.200
+  mean(M_wrong_end)   = -24.854
+  mean(M_correct - M_wrong) = 25.053
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.688
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.803
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 25.159
+  [J] mean neighbor sim (k=10) = 0.243
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.728 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -1.729
+  mean dM_wrong   = -0.727
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.659
+  mean(M_wrong_end)   = -26.134
+  mean(M_correct - M_wrong) = 26.793
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.945
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.938
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 24.420
+  [J] mean neighbor sim (k=10) = 0.219
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.553 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.770
+  mean dM_wrong   = -0.109
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.687
+  mean(M_wrong_end)   = -23.296
+  mean(M_correct - M_wrong) = 24.983
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.625
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.640
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.938
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 25.726
+  [J] mean neighbor sim (k=10) = 0.200
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.450 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.662
+  mean dM_wrong   = 1.971
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.431
+  mean(M_wrong_end)   = -24.078
+  mean(M_correct - M_wrong) = 25.510
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.500
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 4.668
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 27.085
+  [J] mean neighbor sim (k=10) = 0.215
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.575 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 3.585
+  mean dM_wrong   = -5.648
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.157
+  mean(M_wrong_end)   = -22.918
+  mean(M_correct - M_wrong) = 24.075
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.771
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 25.452
+  [J] mean neighbor sim (k=10) = 0.237
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.678 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 4.201
+  mean dM_wrong   = -3.459
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.432
+  mean(M_wrong_end)   = -25.777
+  mean(M_correct - M_wrong) = 26.209
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.438
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 1.330
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 25.206
+  [J] mean neighbor sim (k=10) = 0.194
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.637 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.254
+  mean dM_wrong   = -0.052
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = -2.115
+  mean(M_wrong_end)   = -26.718
+  mean(M_correct - M_wrong) = 24.603
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 1.649
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.938
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 23.648
+  [J] mean neighbor sim (k=10) = 0.232
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.603 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.847
+  mean dM_wrong   = -1.613
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.938
+  z(H0: p=0.5) = 3.500  (n=16)
+  mean(M_correct_end) = -0.209
+  mean(M_wrong_end)   = -25.098
+  mean(M_correct - M_wrong) = 24.889
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.500
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.276
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.938
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 24.919
+  [J] mean neighbor sim (k=10) = 0.214
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.637 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.278
+  mean dM_wrong   = 1.070
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.999
+  mean(M_wrong_end)   = -22.105
+  mean(M_correct - M_wrong) = 23.104
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.625
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 0.680
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 21.376
+  [J] mean neighbor sim (k=10) = 0.222
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.709 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.903
+  mean dM_wrong   = -2.975
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.062
+  mean(M_wrong_end)   = -25.373
+  mean(M_correct - M_wrong) = 26.435
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.438
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 1.247
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 1.000
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 25.311
+  [J] mean neighbor sim (k=10) = 0.244
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.177
+  mean dM_wrong   = -5.017
+
+[Q32:STRESS] Summary
+  pass_rate = 1.000  (pass_n=12/12)
+  min_pair_wins = 0.938
+  min_z = 3.500
+  min_mean_margin = 23.104
+  min_mean_R_correct_end = 5.401
+  min_mean_R_wrong_end   = 0.000
+  min_mean_logR_correct_end = -2.115
+  min_mean_logR_wrong_end   = -26.718
+[Q32:STRESS] Wrote LAW/CONTRACTS/_runs/q32_public/datatrail/stress_p2_scifact_neighbor_fast_20260109_220056.json
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming-Stress: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p2_scifact_stress_neighbor_fast_20260109_220056.json
+[Q32] EmpiricalMetricReceipt sha256: 5F6036D167DFC7C787AA844568E79BB4BB82AFDA5A798509F45938F8181E515E
+exit_code=0

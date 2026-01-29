@@ -1,0 +1,82 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 06:24:42.909437: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 06:24:43.909397: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Calibrating on snli (seeds=[123])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+[Q32:P3] Wrote calibration to LAW\CONTRACTS\_runs\q32_public\datatrail\transfer_calibration_p5_transfer_snli_to_climate_fever_full_fixclimate_part2_20260110_061038.json
+
+[Q32:P3] Frozen thresholds: min_z=2.600  min_pair_wins=0.670
+[Q32:P3] Verifying on climate_fever (seeds=[123])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 6.308
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_correct_end) = -7.518
+  mean(M_wrong_end)   = -17.169
+  mean(M_correct - M_wrong) = 9.651
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.915
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.675
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.838
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.506 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.521
+  mean dM_wrong   = 0.534
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.783
+  z(H0: p=0.5) = 6.208  (n=120)
+  mean(M_indep_end - M_wrong_end) = 13.080
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.088
+  phase_gate_rate=0.600 => FAIL
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.650 < 0.670
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - snli->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - snli->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p5_transfer_snli_to_climate_fever_full_fixclimate_part2_20260110_061038.json
+[Q32] EmpiricalMetricReceipt sha256: C6763363690B6E4246D79CCBF594F8F9A61091BDB153CBEF3CE4BCFF31FD511F

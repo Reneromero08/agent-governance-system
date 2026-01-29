@@ -1,0 +1,44 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 04:54:38.121449: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 04:54:39.295030: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+Traceback (most recent call last):
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -5.584
+  mean(M_wrong_end)   = -9.629
+  mean(M_correct - M_wrong) = 4.045
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.642
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.871
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.600
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 5.691
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -3.855
+  mean dM_wrong   = -1.368
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_indep_end - M_wrong_end) = 8.425
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.500, min_tail = 3
+  stable_cross_rate = 0.425
+  mean_first_cross_frac = 0.000
+  phase_gate_rate=0.600 => FAIL
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3731, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3449, in main
+    run_climate_fever_streaming(
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 2517, in run_climate_fever_streaming
+    raise AssertionError("FAIL: Climate-FEVER phase-boundary gate did not pass")
+AssertionError: FAIL: Climate-FEVER phase-boundary gate did not pass

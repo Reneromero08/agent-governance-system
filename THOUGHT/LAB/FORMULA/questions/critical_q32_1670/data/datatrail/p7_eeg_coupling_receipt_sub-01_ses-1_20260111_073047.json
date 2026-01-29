@@ -1,0 +1,66 @@
+{
+  "passed": false,
+  "results": {
+    "best_r_b_to_m_lag": 0.3713161385022482,
+    "best_r_m_to_b_lag": 0.21152361479894616,
+    "detects_coupling": false,
+    "directionality_ok": false,
+    "flags_echo_leak": false,
+    "lag_scan": [
+      {
+        "lag": 0,
+        "r_b_to_m": 0.00825245448226261,
+        "r_m_to_b": 0.00825245448226261
+      },
+      {
+        "lag": 1,
+        "r_b_to_m": -0.05678443983128792,
+        "r_m_to_b": -0.14858516428293414
+      },
+      {
+        "lag": 2,
+        "r_b_to_m": 0.09600558289201463,
+        "r_m_to_b": 0.21152361479894616
+      },
+      {
+        "lag": 3,
+        "r_b_to_m": -0.1664693379868511,
+        "r_m_to_b": 0.00836777305286514
+      },
+      {
+        "lag": 4,
+        "r_b_to_m": 0.3713161385022482,
+        "r_m_to_b": -0.04813349324114047
+      },
+      {
+        "lag": 5,
+        "r_b_to_m": -0.16627683496986836,
+        "r_m_to_b": 0.1155611436536548
+      }
+    ],
+    "null_threshold_abs_r": 0.36166934798779066,
+    "p_value": 0.10978043912175649,
+    "r_m_to_b_zero": 0.00825245448226261
+  },
+  "run": {
+    "best_lag": 2,
+    "csv_path": "LAW/CONTRACTS/_runs/q32_public/datatrail/p7_eeg_sub-01_ses-1_20260111_073047.csv",
+    "echo_threshold": 0.8,
+    "max_lag": 5,
+    "mode": "csv_coupling",
+    "null_kind": "permute",
+    "null_n": 500,
+    "null_quantile": 0.99,
+    "null_rotations": [
+      16,
+      33
+    ],
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.6",
+    "r_detect_threshold": 0.35,
+    "seed_for_rotations": 2026,
+    "threads": 1
+  },
+  "type": "PhysicalForceCouplingReceipt",
+  "version": 1
+}

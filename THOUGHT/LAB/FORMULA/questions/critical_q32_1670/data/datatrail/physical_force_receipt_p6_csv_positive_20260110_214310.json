@@ -1,0 +1,100 @@
+{
+  "passed": true,
+  "results": {
+    "best_r_b_to_m_lag": 0.7048854325829775,
+    "best_r_m_to_b_lag": 0.9375386772941386,
+    "detects_coupling": true,
+    "flags_echo_leak": false,
+    "lag_scan": [
+      {
+        "lag": 0,
+        "r_b_to_m": 0.7048854325829775,
+        "r_m_to_b": 0.7048854325829775
+      },
+      {
+        "lag": 1,
+        "r_b_to_m": 0.6682409115444639,
+        "r_m_to_b": 0.7706939161691215
+      },
+      {
+        "lag": 2,
+        "r_b_to_m": 0.6438145786049512,
+        "r_m_to_b": 0.8347225022645367
+      },
+      {
+        "lag": 3,
+        "r_b_to_m": 0.6043083277586578,
+        "r_m_to_b": 0.9375386772941386
+      },
+      {
+        "lag": 4,
+        "r_b_to_m": 0.5184493035070362,
+        "r_m_to_b": 0.8061292880679815
+      },
+      {
+        "lag": 5,
+        "r_b_to_m": 0.4877656510084276,
+        "r_m_to_b": 0.7435833523723093
+      },
+      {
+        "lag": 6,
+        "r_b_to_m": 0.42525063266852525,
+        "r_m_to_b": 0.6745200223659383
+      },
+      {
+        "lag": 7,
+        "r_b_to_m": 0.36414501700782403,
+        "r_m_to_b": 0.6551998087436564
+      },
+      {
+        "lag": 8,
+        "r_b_to_m": 0.30736542985026266,
+        "r_m_to_b": 0.6007277397712789
+      },
+      {
+        "lag": 9,
+        "r_b_to_m": 0.24481764405946954,
+        "r_m_to_b": 0.5369765442185567
+      },
+      {
+        "lag": 10,
+        "r_b_to_m": 0.20011468910258118,
+        "r_m_to_b": 0.4447379310018994
+      },
+      {
+        "lag": 11,
+        "r_b_to_m": 0.16784067862322916,
+        "r_m_to_b": 0.3888589049633925
+      },
+      {
+        "lag": 12,
+        "r_b_to_m": 0.10960939848840592,
+        "r_m_to_b": 0.3396271590992622
+      }
+    ],
+    "null_threshold_abs_r": 0.16911352046690475,
+    "p_value": 0.001996007984031936,
+    "r_m_to_b_zero": 0.7048854325829775
+  },
+  "run": {
+    "best_lag": 3,
+    "csv_path": "LAW/CONTRACTS/_runs/q32_public/datatrail/p6_phys_demo_positive_20260110_214310.csv",
+    "echo_threshold": 0.8,
+    "max_lag": 12,
+    "mode": "csv_coupling",
+    "null_kind": "permute",
+    "null_n": 500,
+    "null_quantile": 0.99,
+    "null_rotations": [
+      80,
+      160
+    ],
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.13.1",
+    "r_detect_threshold": 0.35,
+    "seed_for_rotations": 2026,
+    "threads": 12
+  },
+  "type": "PhysicalForceCouplingReceipt",
+  "version": 1
+}

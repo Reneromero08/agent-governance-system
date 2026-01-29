@@ -1,0 +1,5 @@
+COMMAND: python THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode matrix --fast --strict --scoring cosine --wrong_checks neighbor --neighbor_k 10 --threads 12 --device cpu --st_batch 64 --calibration_n 2 --verify_n 2
+
+[Q32:P3] Calibrating on climate_fever (seeds=[123, 124])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)

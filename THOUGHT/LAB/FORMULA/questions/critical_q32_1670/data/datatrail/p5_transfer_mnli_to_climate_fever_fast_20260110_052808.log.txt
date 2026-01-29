@@ -1,0 +1,92 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 05:35:43.057294: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 05:35:44.025206: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Calibrating on mnli (seeds=[123])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+[Q32:P3] mnli intervention samples=10
+[Q32:P3] mnli intervention samples=25
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.750
+  z(H0: p=0.5) = 3.162  (n=40)
+  mean(M_correct) = -1.091
+  mean(M_wrong)   = -15.495
+  mean(M_correct - M_wrong) = 14.405
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 4.006
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+[Q32:P3] mnli streaming samples=10
+[Q32:P3] mnli streaming samples=25
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.800
+  z(H0: p=0.5) = 3.795  (n=40)
+  mean(M_correct_end) = -4.682
+  mean(M_wrong_end)   = -21.258
+  mean(M_correct - M_wrong) = 16.576
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.475
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -0.043
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.850
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 14.297
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.654 bits
+[Q32:P3] Wrote calibration to LAW\CONTRACTS\_runs\q32_public\datatrail\transfer_calibration_p5_transfer_mnli_to_climate_fever_fast_20260110_052808.json
+
+[Q32:P3] Frozen thresholds: min_z=1.400  min_pair_wins=0.755
+[Q32:P3] Verifying on climate_fever (seeds=[123])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+[Q32:P2] climate intervention samples=10
+  P(M_correct > M_wrong) = 1.000
+  z(H0: p=0.5) = 4.472  (n=20)
+  mean(M_correct - M_wrong) = 21.632
+  [swap] P(M_correct > M_swapped_correct) = 0.650
+  [swap] mean(M_correct - M_swapped_correct) = 1.851
+  [Phi_proxy] I(mu_hat; mu_check) = 1.553 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+[Q32:P4] streaming samples=5
+[Q32:P4] streaming samples=10
+[Q32:P4] streaming samples=15
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.438
+  z(H0: p=0.5) = -0.500  (n=16)
+  mean(M_correct_end) = -14.960
+  mean(M_wrong_end)   = -19.636
+  mean(M_correct - M_wrong) = 4.676
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.312
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -2.182
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.500
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.989
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -13.050
+  mean dM_wrong   = -1.452
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.562
+  z(H0: p=0.5) = 0.500  (n=16)
+  mean(M_indep_end - M_wrong_end) = 4.418
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.500, min_tail = 2
+  stable_cross_rate = 0.375
+  mean_first_cross_frac = 0.000
+  phase_gate_rate=0.500 => FAIL
+
+[Q32:P4] Climate-FEVER streaming status: FAIL
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.438 < 0.755
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - mnli->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - mnli->climate_fever:Climate-FEVER-Streaming@seed=123: FAIL
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p5_transfer_mnli_to_climate_fever_fast_20260110_052808.json
+[Q32] EmpiricalMetricReceipt sha256: 89760172E22877C527B9B2FC0D9E3ADC25DD06354DB4C234751761F8A8DA468B

@@ -1,0 +1,20 @@
+TS=20260110_214310
+D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_physical_force_harness.py:31: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return _dt.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+LAW/CONTRACTS/_runs/q32_public/datatrail/p6_phys_demo_positive_20260110_214310.csv
+6B53063E2ED0E0E9BC00DE73F4574B511BE791DD948D100AA801358FC5CAE41F
+D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_physical_force_harness.py:31: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return _dt.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+LAW/CONTRACTS/_runs/q32_public/datatrail/p6_phys_demo_null_20260110_214310.csv
+94766C36BD299B847FF85AAC226756126010C5FC033665A4840367ED18AB6151
+D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_physical_force_harness.py:31: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).
+  return _dt.datetime.utcnow().strftime("%Y%m%d_%H%M%S")
+LAW/CONTRACTS/_runs/q32_public/datatrail/p6_phys_demo_echo_leak_20260110_214310.csv
+AA992A128F4D58AAB55A887605B0E401FFF6F29DFEB09D41F7652CD4810C669C
+LAW/CONTRACTS/_runs/q32_public/datatrail/physical_force_receipt_p6_csv_positive_20260110_214310.json
+EF98E87823A319494C2C4EE87365F01C015DC8BF8EF0470FEC56FA17E69CF8CB
+LAW/CONTRACTS/_runs/q32_public/datatrail/physical_force_receipt_p6_csv_null_20260110_214310.json
+38AC50F9D536E7CD022993C6D2693DE6896295FC7C4B05F71A0B3FA1461A95FF
+LAW/CONTRACTS/_runs/q32_public/datatrail/physical_force_receipt_p6_csv_echo_leak_20260110_214310.json
+668A78DD186DB44723A7330F5F93E02B52F716677793B8CDF6E608BF2D1F759C
+RC_POS=0 RC_NULL=2 RC_LEAK=2

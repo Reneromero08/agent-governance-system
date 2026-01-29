@@ -1,0 +1,58 @@
+{
+  "n_concepts": 200,
+  "window_correlations": [
+    {
+      "window": "early_50-100ms",
+      "corr_magnitude": -0.022513869161849897,
+      "corr_centrality": 0.0682510964183078,
+      "corr_distinctiveness": 0.049511701339517475,
+      "brain_df_mean": 24.617369812494772,
+      "brain_df_std": 6.712279906278107
+    },
+    {
+      "window": "P1_100-150ms",
+      "corr_magnitude": -0.020000737802908276,
+      "corr_centrality": 0.02450453602807496,
+      "corr_distinctiveness": -0.06235188791481474,
+      "brain_df_mean": 22.163499276282547,
+      "brain_df_std": 6.2274907252067715
+    },
+    {
+      "window": "N1_150-200ms",
+      "corr_magnitude": 0.0664564868731142,
+      "corr_centrality": -0.07037778575312102,
+      "corr_distinctiveness": -0.13650082520923268,
+      "brain_df_mean": 21.80383737119092,
+      "brain_df_std": 5.9969270322384896
+    },
+    {
+      "window": "P2_200-300ms",
+      "corr_magnitude": -0.00228399071137155,
+      "corr_centrality": -0.1327913291776805,
+      "corr_distinctiveness": -0.22864607661397077,
+      "brain_df_mean": 22.475451658285973,
+      "brain_df_std": 6.493320477834902
+    },
+    {
+      "window": "late_300-500ms",
+      "corr_magnitude": -0.0860853605223761,
+      "corr_centrality": -0.11908469275890633,
+      "corr_distinctiveness": -0.22359542007921912,
+      "brain_df_mean": 21.141258731986536,
+      "brain_df_std": 6.557435179540872
+    },
+    {
+      "window": "sustained_500-750ms",
+      "corr_magnitude": 0.05185786471078561,
+      "corr_centrality": -0.081688844185595,
+      "corr_distinctiveness": -0.11645272599832565,
+      "brain_df_mean": 19.1015479417547,
+      "brain_df_std": 6.442060307550996
+    }
+  ],
+  "best": {
+    "window": "P2_200-300ms",
+    "feature": "distinctiveness",
+    "r": -0.22864607661397077
+  }
+}

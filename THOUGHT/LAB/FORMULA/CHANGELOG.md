@@ -1,5 +1,47 @@
 # FORMULA Lab Changelog
 
+## [5.0.0] - 2026-01-28
+
+### Major Refactoring: Unified Per-Question Structure
+
+**BREAKING CHANGE:** Complete reorganization of the 53-question research lab.
+
+**New Structure:**
+```
+THOUGHT/LAB/FORMULA/
+  INDEX.md              (master index with new paths)
+  CHANGELOG.md
+  .gitignore            (NEW: excludes __pycache__)
+  questions/            (53 unified question folders)
+    {priority}_q{##}_{Rscore}/
+      q##_*.md          (question doc)
+      tests/            (test code)
+      results/          (JSON outputs)
+      reports/          (Q-specific reports)
+  reports/              (global reports, audits, syntheses)
+  _legacy/              (archived old structure)
+```
+
+**Migration Summary:**
+- 53 question folders created with priority/R-score naming
+- 167 test files migrated
+- 223 JSON results organized
+- 44 Q-specific reports distributed
+- 35 global reports consolidated
+- All __pycache__ directories deleted
+- Old path references updated
+
+**Priority Tiers:**
+- Critical (R > 1650): 13 questions
+- High (R 1500-1649): 12 questions
+- Medium (R 1350-1499): 14 questions
+- Lower (R 1200-1349): 11 questions
+- Engineering (R < 1200): 3 questions
+
+**Status:** 42/53 answered (79.2%), 4 falsified (Q22, Q25, Q52, Q53)
+
+---
+
 ## [1.6.0] - 2026-01-15
 
 ### Bloch Sphere Holographic Scaling Correction + Q27 Answered + Q43 Holonomy Validation

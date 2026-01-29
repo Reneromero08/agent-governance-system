@@ -1,0 +1,31 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 22:45:07.431039: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 22:45:08.520814: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+[Q32:P3] snli streaming samples=10
+[Q32:P3] snli streaming samples=25
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.325
+  z(H0: p=0.5) = -2.214  (n=40)
+  mean(M_correct_end) = -6.694
+  mean(M_wrong_end)   = -0.858
+  mean(M_correct - M_wrong) = -5.836
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.425
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -1.803
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.325
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = -7.106
+  [J] mean neighbor sim (k=10) = 0.551
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.626 bits
+
+[Q32:P3] SNLI streaming status: FAIL
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SNLI-Streaming: FAIL
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p3_snli_stream_inflation_fast_20260109_224456.json
+[Q32] EmpiricalMetricReceipt sha256: BF157F3D55F10783F0028D84F0245ED6D5258957D917F3B9E654F3C696AAF992
+exit_code=1

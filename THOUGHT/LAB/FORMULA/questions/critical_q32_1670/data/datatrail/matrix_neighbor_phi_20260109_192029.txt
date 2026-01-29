@@ -1,0 +1,30 @@
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\transformers\utils\hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+Traceback (most recent call last):
+
+[Q32:P3] Calibrating on climate_fever (seeds=[123, 124, 125])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 2044, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 2027, in main
+    results.extend(run_transfer(calibrate_on="climate_fever", apply_to="scifact"))
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1901, in run_transfer
+    cal_bench = [tag_seed(run_intervention_bench(calibrate_on, s), s) for s in cal_seeds]
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1901, in <listcomp>
+    cal_bench = [tag_seed(run_intervention_bench(calibrate_on, s), s) for s in cal_seeds]
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1882, in run_intervention_bench
+    return run_climate_fever_intervention_benchmark(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 969, in run_climate_fever_intervention_benchmark
+    mu_hat_list.append(float(np.mean(np.asarray(obs_scores, dtype=float))))
+    ^^^^^^^^^^^
+NameError: name 'mu_hat_list' is not defined

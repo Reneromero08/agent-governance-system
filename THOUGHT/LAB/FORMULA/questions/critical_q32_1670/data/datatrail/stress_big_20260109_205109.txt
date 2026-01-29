@@ -1,0 +1,294 @@
+COMMAND: & 'D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Scripts\python.exe' THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode stress --fast --dataset scifact --scoring cosine --wrong_checks neighbor --neighbor_k 10 --threads 12 --device cpu --st_batch 64 --stress_n 15 --stress_min_pass_rate 0.9 --stress_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/stress_summary_big_20260109_205109.json' --empirical_receipt_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_big_20260109_205109.json'
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\transformers\utils\hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+
+[Q32:STRESS] SciFact streaming variability (trials=15)
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 2.101
+  mean(M_wrong_end)   = -25.613
+  mean(M_correct - M_wrong) = 27.715
+  [J] mean neighbor sim (k=10) = 0.236
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.556 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.964
+  mean dM_wrong   = -1.841
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.587
+  mean(M_wrong_end)   = -26.032
+  mean(M_correct - M_wrong) = 26.620
+  [J] mean neighbor sim (k=10) = 0.254
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.578 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.033
+  mean dM_wrong   = 1.065
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.200
+  mean(M_wrong_end)   = -24.854
+  mean(M_correct - M_wrong) = 25.053
+  [J] mean neighbor sim (k=10) = 0.243
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.728 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -1.729
+  mean dM_wrong   = -0.727
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.659
+  mean(M_wrong_end)   = -26.134
+  mean(M_correct - M_wrong) = 26.793
+  [J] mean neighbor sim (k=10) = 0.219
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.553 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.770
+  mean dM_wrong   = -0.109
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.687
+  mean(M_wrong_end)   = -23.296
+  mean(M_correct - M_wrong) = 24.983
+  [J] mean neighbor sim (k=10) = 0.200
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.450 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.662
+  mean dM_wrong   = 1.971
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.431
+  mean(M_wrong_end)   = -24.078
+  mean(M_correct - M_wrong) = 25.510
+  [J] mean neighbor sim (k=10) = 0.215
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.575 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 3.585
+  mean dM_wrong   = -5.648
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.157
+  mean(M_wrong_end)   = -22.918
+  mean(M_correct - M_wrong) = 24.075
+  [J] mean neighbor sim (k=10) = 0.237
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.678 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 4.201
+  mean dM_wrong   = -3.459
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.432
+  mean(M_wrong_end)   = -25.777
+  mean(M_correct - M_wrong) = 26.209
+  [J] mean neighbor sim (k=10) = 0.194
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.637 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.254
+  mean dM_wrong   = -0.052
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = -2.115
+  mean(M_wrong_end)   = -26.718
+  mean(M_correct - M_wrong) = 24.603
+  [J] mean neighbor sim (k=10) = 0.232
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.603 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.847
+  mean dM_wrong   = -1.613
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.938
+  z(H0: p=0.5) = 3.500  (n=16)
+  mean(M_correct_end) = -0.209
+  mean(M_wrong_end)   = -25.098
+  mean(M_correct - M_wrong) = 24.889
+  [J] mean neighbor sim (k=10) = 0.214
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.637 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.278
+  mean dM_wrong   = 1.070
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.999
+  mean(M_wrong_end)   = -22.105
+  mean(M_correct - M_wrong) = 23.104
+  [J] mean neighbor sim (k=10) = 0.222
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.709 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.903
+  mean dM_wrong   = -2.975
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.062
+  mean(M_wrong_end)   = -25.373
+  mean(M_correct - M_wrong) = 26.435
+  [J] mean neighbor sim (k=10) = 0.244
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.177
+  mean dM_wrong   = -5.017
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.136
+  mean(M_wrong_end)   = -25.710
+  mean(M_correct - M_wrong) = 26.846
+  [J] mean neighbor sim (k=10) = 0.211
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.669 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.163
+  mean dM_wrong   = -3.480
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.440
+  mean(M_wrong_end)   = -22.550
+  mean(M_correct - M_wrong) = 22.990
+  [J] mean neighbor sim (k=10) = 0.238
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.550 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 3.951
+  mean dM_wrong   = -1.192
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.536
+  mean(M_wrong_end)   = -26.970
+  mean(M_correct - M_wrong) = 28.505
+  [J] mean neighbor sim (k=10) = 0.203
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.528 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 3.024
+  mean dM_wrong   = -4.347
+
+[Q32:STRESS] Summary
+  pass_rate = 1.000  (pass_n=15/15)
+  min_pair_wins = 0.938
+  min_z = 3.500
+  min_mean_margin = 22.990
+  min_mean_R_correct_end = 5.401
+  min_mean_R_wrong_end   = 0.000
+  min_mean_logR_correct_end = -2.115
+  min_mean_logR_wrong_end   = -26.970
+[Q32:STRESS] Wrote LAW/CONTRACTS/_runs/q32_public/datatrail/stress_summary_big_20260109_205109.json
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming-Stress: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_big_20260109_205109.json
+[Q32] EmpiricalMetricReceipt sha256: 90591CA1C40405916079F53EBBDA88F61637662D4D4481418B1C09B5A5F850ED
+
+RECEIPT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          90591CA1C40405916079F53EBBDA88F61637662D4D4481418B1C09B5A5F850ED       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+STRESS_OUT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          465BD900D726E043A755D33258EF55F13AE2EEE605A0CD99031970967D97DAD3       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+LOG SHA256:

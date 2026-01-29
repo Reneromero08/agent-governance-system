@@ -1,0 +1,45 @@
+{
+  "dataset": "OpenNeuro ds005383 (TMNRED)",
+  "dataset_version": "1.0.0",
+  "input": {
+    "channels": null,
+    "eeg_shape": [
+      137000,
+      32
+    ],
+    "events_path": "LAW\\CONTRACTS\\_runs\\q32_public\\physdata\\openneuro\\ds005383\\sub-01\\ses-1\\eeg\\sub-01_ses-1_task-fuzzysemanticrecognition_events.tsv",
+    "events_sha256": "42C63C8B477B5779D2D7906D10AD1CB4B13D843E9DF418D75DAEDB538D9DE9AC",
+    "mat_path": "LAW\\CONTRACTS\\_runs\\q32_public\\physdata\\openneuro\\ds005383\\derivatives\\preproc\\sub-01\\ses-1\\sub-01-ses-1.mat",
+    "mat_sha256": "3C9611BBD2BAB4E62068526D49BE754F3FEB6962BC5EB4706CB7353B88758F8D",
+    "n_epochs": 50,
+    "n_nontargets": 35,
+    "n_targets": 15,
+    "sampling_rate": 200.0,
+    "window_end_ms": 500,
+    "window_start_ms": 200
+  },
+  "output": {
+    "b_mean": -12923.47329259132,
+    "b_std": 1400.5135639798157,
+    "csv_path": "LAW\\CONTRACTS\\_runs\\q32_public\\datatrail\\p7_eeg_sub-01_ses-1_20260111_073047.csv",
+    "csv_sha256": "0F19B1BA3BB971C24B2FBB0470F4A99BB66E17A0FC52006F7E116B2048529256",
+    "m_mean": 0.3,
+    "m_std": 0.45825756949558394,
+    "n_rows": 50
+  },
+  "phase": "Q32-Phase7",
+  "run": {
+    "channels": null,
+    "h5py_version": "3.12.1",
+    "numpy_version": "1.26.4",
+    "platform": "Windows-10-10.0.26100-SP0",
+    "python": "3.11.6",
+    "sampling_rate": 200.0,
+    "session": "ses-1",
+    "subject": "sub-01",
+    "window_end_ms": 500,
+    "window_start_ms": 200
+  },
+  "type": "EEGIngestReceipt",
+  "version": 1
+}

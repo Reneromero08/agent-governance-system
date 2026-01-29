@@ -1,0 +1,12 @@
+# git status
+ M THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py
+
+# git rev-parse HEAD
+34ec923154c010270543a051728bae40bef809b0
+
+# git log -5 --oneline
+34ec923 Q32: make neighbor falsifier truth-inconsistent
+5a1df48 Q32: add neighbor-fitness (J) diagnostics
+76ac145 Q32: add CPU threading + device flags
+6350f98 Q32: add transfer matrix mode
+a1e18ea Q32: make transfer symmetric + strengthen Climate-FEVER streaming

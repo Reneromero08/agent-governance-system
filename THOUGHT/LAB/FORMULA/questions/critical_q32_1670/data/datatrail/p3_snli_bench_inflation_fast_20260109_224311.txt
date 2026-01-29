@@ -1,0 +1,29 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 22:43:22.732494: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 22:43:23.826067: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+[Q32:P3] snli intervention samples=10
+[Q32:P3] snli intervention samples=25
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.275
+  z(H0: p=0.5) = -2.846  (n=40)
+  mean(M_correct) = -5.441
+  mean(M_wrong)   = 0.475
+  mean(M_correct - M_wrong) = -5.916
+  [swap] P(M_correct > M_swapped_correct) = 0.550
+  [swap] mean(M_correct - M_swapped_correct) = -0.631
+  [J] mean neighbor sim (k=10) = 0.504
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32:P3] SNLI status: FAIL
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SNLI: FAIL
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p3_snli_bench_inflation_fast_20260109_224311.json
+[Q32] EmpiricalMetricReceipt sha256: 326FFAD33BB9A8CD03E566CEF45573B2825C3867BA356DA3B7C189E6B6BEEE29
+exit_code=1

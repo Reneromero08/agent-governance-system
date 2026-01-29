@@ -1,0 +1,6002 @@
+[
+  {
+    "human_gene_id": "ENSG00000198888",
+    "human_gene_name": "MT-ND1",
+    "mouse_gene_id": "ENSMUSG00000064341",
+    "mouse_gene_name": "mt-Nd1"
+  },
+  {
+    "human_gene_id": "ENSG00000198763",
+    "human_gene_name": "MT-ND2",
+    "mouse_gene_id": "ENSMUSG00000064345",
+    "mouse_gene_name": "mt-Nd2"
+  },
+  {
+    "human_gene_id": "ENSG00000198804",
+    "human_gene_name": "MT-CO1",
+    "mouse_gene_id": "ENSMUSG00000064351",
+    "mouse_gene_name": "mt-Co1"
+  },
+  {
+    "human_gene_id": "ENSG00000198712",
+    "human_gene_name": "MT-CO2",
+    "mouse_gene_id": "ENSMUSG00000064354",
+    "mouse_gene_name": "mt-Co2"
+  },
+  {
+    "human_gene_id": "ENSG00000228253",
+    "human_gene_name": "MT-ATP8",
+    "mouse_gene_id": "ENSMUSG00000064356",
+    "mouse_gene_name": "mt-Atp8"
+  },
+  {
+    "human_gene_id": "ENSG00000198899",
+    "human_gene_name": "MT-ATP6",
+    "mouse_gene_id": "ENSMUSG00000064357",
+    "mouse_gene_name": "mt-Atp6"
+  },
+  {
+    "human_gene_id": "ENSG00000198938",
+    "human_gene_name": "MT-CO3",
+    "mouse_gene_id": "ENSMUSG00000064358",
+    "mouse_gene_name": "mt-Co3"
+  },
+  {
+    "human_gene_id": "ENSG00000198840",
+    "human_gene_name": "MT-ND3",
+    "mouse_gene_id": "ENSMUSG00000064360",
+    "mouse_gene_name": "mt-Nd3"
+  },
+  {
+    "human_gene_id": "ENSG00000212907",
+    "human_gene_name": "MT-ND4L",
+    "mouse_gene_id": "ENSMUSG00000065947",
+    "mouse_gene_name": "mt-Nd4l"
+  },
+  {
+    "human_gene_id": "ENSG00000198886",
+    "human_gene_name": "MT-ND4",
+    "mouse_gene_id": "ENSMUSG00000064363",
+    "mouse_gene_name": "mt-Nd4"
+  },
+  {
+    "human_gene_id": "ENSG00000198786",
+    "human_gene_name": "MT-ND5",
+    "mouse_gene_id": "ENSMUSG00000064367",
+    "mouse_gene_name": "mt-Nd5"
+  },
+  {
+    "human_gene_id": "ENSG00000198695",
+    "human_gene_name": "MT-ND6",
+    "mouse_gene_id": "ENSMUSG00000064368",
+    "mouse_gene_name": "mt-Nd6"
+  },
+  {
+    "human_gene_id": "ENSG00000198727",
+    "human_gene_name": "MT-CYB",
+    "mouse_gene_id": "ENSMUSG00000064370",
+    "mouse_gene_name": "mt-Cytb"
+  },
+  {
+    "human_gene_id": "ENSG00000278625",
+    "human_gene_name": "U6",
+    "mouse_gene_id": "ENSMUSG00000087825",
+    "mouse_gene_name": "Gm22279"
+  },
+  {
+    "human_gene_id": "ENSG00000278625",
+    "human_gene_name": "U6",
+    "mouse_gene_id": "ENSMUSG00002075997",
+    "mouse_gene_name": "Gm54642"
+  },
+  {
+    "human_gene_id": "ENSG00000278294",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075795",
+    "mouse_gene_name": "Gm54867"
+  },
+  {
+    "human_gene_id": "ENSG00000278294",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075637",
+    "mouse_gene_name": "Gm55073"
+  },
+  {
+    "human_gene_id": "ENSG00000277196",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000003526",
+    "mouse_gene_name": "Prodh"
+  },
+  {
+    "human_gene_id": "ENSG00000278817",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000003531",
+    "mouse_gene_name": "Dgcr6"
+  },
+  {
+    "human_gene_id": "ENSG00000274847",
+    "human_gene_name": "MAFIP",
+    "mouse_gene_id": "ENSMUSG00000024175",
+    "mouse_gene_name": "Tekt4"
+  },
+  {
+    "human_gene_id": "ENSG00000276711",
+    "human_gene_name": "U2",
+    "mouse_gene_id": "ENSMUSG00000084484",
+    "mouse_gene_name": "Gm23788"
+  },
+  {
+    "human_gene_id": "ENSG00000276351",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002075214",
+    "mouse_gene_name": "Gm56421"
+  },
+  {
+    "human_gene_id": "ENSG00000276345",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000037772",
+    "mouse_gene_name": "Mrpl23"
+  },
+  {
+    "human_gene_id": "ENSG00000273532",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002076121",
+    "mouse_gene_name": "Gm56420"
+  },
+  {
+    "human_gene_id": "ENSG00000273554",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000019558",
+    "mouse_gene_name": "Slc6a8"
+  },
+  {
+    "human_gene_id": "ENSG00000277374",
+    "human_gene_name": "U1",
+    "mouse_gene_id": "ENSMUSG00000087812",
+    "mouse_gene_name": "Gm25115"
+  },
+  {
+    "human_gene_id": "ENSG00000273748",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000031590",
+    "mouse_gene_name": "Frg1"
+  },
+  {
+    "human_gene_id": "ENSG00000274202",
+    "human_gene_name": "U2",
+    "mouse_gene_id": "ENSMUSG00000084484",
+    "mouse_gene_name": "Gm23788"
+  },
+  {
+    "human_gene_id": "ENSG00000252900",
+    "human_gene_name": "RNU6-303P",
+    "mouse_gene_id": "ENSMUSG00000064624",
+    "mouse_gene_name": "Gm22305"
+  },
+  {
+    "human_gene_id": "ENSG00000252689",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000065202",
+    "mouse_gene_name": "Gm24615"
+  },
+  {
+    "human_gene_id": "ENSG00000169953",
+    "human_gene_name": "HSFY2",
+    "mouse_gene_id": "ENSMUSG00000045336",
+    "mouse_gene_name": "Hsfy2"
+  },
+  {
+    "human_gene_id": "ENSG00000172468",
+    "human_gene_name": "HSFY1",
+    "mouse_gene_id": "ENSMUSG00000045336",
+    "mouse_gene_name": "Hsfy2"
+  },
+  {
+    "human_gene_id": "ENSG00000176679",
+    "human_gene_name": "TGIF2LY",
+    "mouse_gene_id": "ENSMUSG00000100133",
+    "mouse_gene_name": "Tgif2lx1"
+  },
+  {
+    "human_gene_id": "ENSG00000176679",
+    "human_gene_name": "TGIF2LY",
+    "mouse_gene_id": "ENSMUSG00000100194",
+    "mouse_gene_name": "Tgif2lx2"
+  },
+  {
+    "human_gene_id": "ENSG00000182415",
+    "human_gene_name": "CDY2A",
+    "mouse_gene_id": "ENSMUSG00000059288",
+    "mouse_gene_name": "Cdyl"
+  },
+  {
+    "human_gene_id": "ENSG00000129873",
+    "human_gene_name": "CDY2B",
+    "mouse_gene_id": "ENSMUSG00000059288",
+    "mouse_gene_name": "Cdyl"
+  },
+  {
+    "human_gene_id": "ENSG00000184895",
+    "human_gene_name": "SRY",
+    "mouse_gene_id": "ENSMUSG00000069036",
+    "mouse_gene_name": "Sry"
+  },
+  {
+    "human_gene_id": "ENSG00000154620",
+    "human_gene_name": "TMSB4Y",
+    "mouse_gene_id": "ENSMUSG00000049775",
+    "mouse_gene_name": "Tmsb4x"
+  },
+  {
+    "human_gene_id": "ENSG00000092377",
+    "human_gene_name": "TBL1Y",
+    "mouse_gene_id": "ENSMUSG00000025246",
+    "mouse_gene_name": "Tbl1x"
+  },
+  {
+    "human_gene_id": "ENSG00000252948",
+    "human_gene_name": "RNU6-1314P",
+    "mouse_gene_id": "ENSMUSG00000087823",
+    "mouse_gene_name": "Gm22281"
+  },
+  {
+    "human_gene_id": "ENSG00000252468",
+    "human_gene_name": "RNU2-57P",
+    "mouse_gene_id": "ENSMUSG00000084678",
+    "mouse_gene_name": "Gm26020"
+  },
+  {
+    "human_gene_id": "ENSG00000099715",
+    "human_gene_name": "PCDH11Y",
+    "mouse_gene_id": "ENSMUSG00000034755",
+    "mouse_gene_name": "Pcdh11x"
+  },
+  {
+    "human_gene_id": "ENSG00000172352",
+    "human_gene_name": "CDY1B",
+    "mouse_gene_id": "ENSMUSG00000059288",
+    "mouse_gene_name": "Cdyl"
+  },
+  {
+    "human_gene_id": "ENSG00000172288",
+    "human_gene_name": "CDY1",
+    "mouse_gene_id": "ENSMUSG00000059288",
+    "mouse_gene_name": "Cdyl"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000242875",
+    "human_gene_name": "RBMY1B",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000234414",
+    "human_gene_name": "RBMY1A1",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000244395",
+    "human_gene_name": "RBMY1D",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000242389",
+    "human_gene_name": "RBMY1E",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000169800",
+    "human_gene_name": "RBMY1F",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000096520",
+    "mouse_gene_name": "Rbmyf9"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000095948",
+    "mouse_gene_name": "Rbmyf8"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000101667",
+    "mouse_gene_name": "Rbmyf4"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000093918",
+    "mouse_gene_name": "Rbmyf5"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000093987",
+    "mouse_gene_name": "Rbmyf7"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000095852",
+    "mouse_gene_name": "Rbmyf2"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000094511",
+    "mouse_gene_name": "Rbmyf6"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000091987",
+    "mouse_gene_name": "Rbmyf3"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000094658",
+    "mouse_gene_name": "Rbmy"
+  },
+  {
+    "human_gene_id": "ENSG00000226941",
+    "human_gene_name": "RBMY1J",
+    "mouse_gene_id": "ENSMUSG00000102053",
+    "mouse_gene_name": "Rbmyf1"
+  },
+  {
+    "human_gene_id": "ENSG00000165246",
+    "human_gene_name": "NLGN4Y",
+    "mouse_gene_id": "ENSMUSG00000121607",
+    "mouse_gene_name": "Nlgn4l"
+  },
+  {
+    "human_gene_id": "ENSG00000067048",
+    "human_gene_name": "DDX3Y",
+    "mouse_gene_id": "ENSMUSG00000069045",
+    "mouse_gene_name": "Ddx3y"
+  },
+  {
+    "human_gene_id": "ENSG00000114374",
+    "human_gene_name": "USP9Y",
+    "mouse_gene_id": "ENSMUSG00000069044",
+    "mouse_gene_name": "Usp9y"
+  },
+  {
+    "human_gene_id": "ENSG00000183878",
+    "human_gene_name": "UTY",
+    "mouse_gene_id": "ENSMUSG00000068457",
+    "mouse_gene_name": "Uty"
+  },
+  {
+    "human_gene_id": "ENSG00000012817",
+    "human_gene_name": "KDM5D",
+    "mouse_gene_id": "ENSMUSG00000056673",
+    "mouse_gene_name": "Kdm5d"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000096619",
+    "mouse_gene_name": "Eif1ad14"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000114075",
+    "mouse_gene_name": "Eif1ad18"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000096049",
+    "mouse_gene_name": "Eif1ad17"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000079034",
+    "mouse_gene_name": "Eif1ad8"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000096803",
+    "mouse_gene_name": "Eif1ad16"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000057561",
+    "mouse_gene_name": "Eif1a"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000092019",
+    "mouse_gene_name": "Eif1ad6"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000113201",
+    "mouse_gene_name": "Eif1ad13"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000095717",
+    "mouse_gene_name": "Eif1ad11"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000079029",
+    "mouse_gene_name": "Eif1ad7"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000095724",
+    "mouse_gene_name": "Eif1ad19"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000072905",
+    "mouse_gene_name": "Eif1ad3"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000113805",
+    "mouse_gene_name": "Eif1ad12"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000079031",
+    "mouse_gene_name": "Eif1ad2"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000093847",
+    "mouse_gene_name": "Eif1ad15"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000113971",
+    "mouse_gene_name": "Eif1ad4"
+  },
+  {
+    "human_gene_id": "ENSG00000198692",
+    "human_gene_name": "EIF1AY",
+    "mouse_gene_id": "ENSMUSG00000095799",
+    "mouse_gene_name": "Eif1ad10"
+  },
+  {
+    "human_gene_id": "ENSG00000154646",
+    "human_gene_name": "TMPRSS15",
+    "mouse_gene_id": "ENSMUSG00000022857",
+    "mouse_gene_name": "Tmprss15"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000076695",
+    "mouse_gene_name": "Ighv1-18"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096326",
+    "mouse_gene_name": "Ighv1-78"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000076688",
+    "mouse_gene_name": "Ighv15-2"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094561",
+    "mouse_gene_name": "Ighv1-22"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095130",
+    "mouse_gene_name": "Ighv1-39"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000093896",
+    "mouse_gene_name": "Ighv1-76"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096074",
+    "mouse_gene_name": "Ighv1-72"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094088",
+    "mouse_gene_name": "Ighv1-64"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000093955",
+    "mouse_gene_name": "Ighv1-34"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095863",
+    "mouse_gene_name": "Ighv1-67"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094075",
+    "mouse_gene_name": "Ighv1-80"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096452",
+    "mouse_gene_name": "Ighv1-77"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094546",
+    "mouse_gene_name": "Ighv1-26"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000093894",
+    "mouse_gene_name": "Ighv1-53"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096499",
+    "mouse_gene_name": "Ighv1-5"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094694",
+    "mouse_gene_name": "Ighv1-9"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000076666",
+    "mouse_gene_name": "Ighv14-4"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000102313",
+    "mouse_gene_name": "Ighv1-62-1"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095442",
+    "mouse_gene_name": "Ighv1-4"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096672",
+    "mouse_gene_name": "Ighv1-63"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096410",
+    "mouse_gene_name": "Ighv1-19"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095127",
+    "mouse_gene_name": "Ighv1-82"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096577",
+    "mouse_gene_name": "Ighv1-71"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000076710",
+    "mouse_gene_name": "Ighv1-49"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096078",
+    "mouse_gene_name": "Ighv1-62-2"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095589",
+    "mouse_gene_name": "Ighv1-55"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094087",
+    "mouse_gene_name": "Ighv1-61"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094241",
+    "mouse_gene_name": "Ighv1-24"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094652",
+    "mouse_gene_name": "Ighv1-42"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095204",
+    "mouse_gene_name": "Ighv1-52"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094940",
+    "mouse_gene_name": "Ighv1-84"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096649",
+    "mouse_gene_name": "Ighv1-31"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094509",
+    "mouse_gene_name": "Ighv14-1"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000102888",
+    "mouse_gene_name": "Ighv1-11"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000103254",
+    "mouse_gene_name": "Ighv1-15"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094502",
+    "mouse_gene_name": "Ighv1-69"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095859",
+    "mouse_gene_name": "Ighv1-43"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094862",
+    "mouse_gene_name": "Ighv1-56"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095197",
+    "mouse_gene_name": "Ighv1-59"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095923",
+    "mouse_gene_name": "Ighv1-37"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094689",
+    "mouse_gene_name": "Ighv1-81"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095761",
+    "mouse_gene_name": "Ighv1-20"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095519",
+    "mouse_gene_name": "Ighv1-66"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096020",
+    "mouse_gene_name": "Ighv1-75"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095200",
+    "mouse_gene_name": "Ighv1-7"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096767",
+    "mouse_gene_name": "Ighv1-62-3"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000103290",
+    "mouse_gene_name": "Ighv1-23"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094051",
+    "mouse_gene_name": "Ighv1-36"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095416",
+    "mouse_gene_name": "Ighv1-12"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095642",
+    "mouse_gene_name": "Ighv14-3"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095554",
+    "mouse_gene_name": "Ighv1-16"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000076709",
+    "mouse_gene_name": "Ighv1-47"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094787",
+    "mouse_gene_name": "Ighv1-54"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000096150",
+    "mouse_gene_name": "Ighv1-85"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095889",
+    "mouse_gene_name": "Ighv1-58"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094124",
+    "mouse_gene_name": "Ighv1-74"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000094198",
+    "mouse_gene_name": "Ighv1-50"
+  },
+  {
+    "human_gene_id": "ENSG00000277282",
+    "human_gene_name": "IGHV1OR21-1",
+    "mouse_gene_id": "ENSMUSG00000095583",
+    "mouse_gene_name": "Ighv14-2"
+  },
+  {
+    "human_gene_id": "ENSG00000156282",
+    "human_gene_name": "CLDN17",
+    "mouse_gene_id": "ENSMUSG00000055811",
+    "mouse_gene_name": "Cldn17"
+  },
+  {
+    "human_gene_id": "ENSG00000188694",
+    "human_gene_name": "KRTAP24-1",
+    "mouse_gene_id": "ENSMUSG00000050239",
+    "mouse_gene_name": "Krtap24-1"
+  },
+  {
+    "human_gene_id": "ENSG00000154654",
+    "human_gene_name": "NCAM2",
+    "mouse_gene_id": "ENSMUSG00000022762",
+    "mouse_gene_name": "Ncam2"
+  },
+  {
+    "human_gene_id": "ENSG00000156284",
+    "human_gene_name": "CLDN8",
+    "mouse_gene_id": "ENSMUSG00000050520",
+    "mouse_gene_name": "Cldn8"
+  },
+  {
+    "human_gene_id": "ENSG00000159256",
+    "human_gene_name": "MORC3",
+    "mouse_gene_id": "ENSMUSG00000039456",
+    "mouse_gene_name": "Morc3"
+  },
+  {
+    "human_gene_id": "ENSG00000154645",
+    "human_gene_name": "CHODL",
+    "mouse_gene_id": "ENSMUSG00000022860",
+    "mouse_gene_name": "Chodl"
+  },
+  {
+    "human_gene_id": "ENSG00000252199",
+    "human_gene_name": "SNORA70",
+    "mouse_gene_id": "ENSMUSG00000089188",
+    "mouse_gene_name": "Gm22942"
+  },
+  {
+    "human_gene_id": "ENSG00000252462",
+    "human_gene_name": "RNU6-113P",
+    "mouse_gene_id": "ENSMUSG00000065340",
+    "mouse_gene_name": "Gm25578"
+  },
+  {
+    "human_gene_id": "ENSG00000252963",
+    "human_gene_name": "RN7SKP147",
+    "mouse_gene_id": "ENSMUSG00002074897",
+    "mouse_gene_name": "Gm55389"
+  },
+  {
+    "human_gene_id": "ENSG00000252963",
+    "human_gene_name": "RN7SKP147",
+    "mouse_gene_id": "ENSMUSG00002076265",
+    "mouse_gene_name": "Gm54881"
+  },
+  {
+    "human_gene_id": "ENSG00000223078",
+    "human_gene_name": "RNU2-55P",
+    "mouse_gene_id": "ENSMUSG00000084610",
+    "mouse_gene_name": "Gm25052"
+  },
+  {
+    "human_gene_id": "ENSG00000212609",
+    "human_gene_name": "RNU1-139P",
+    "mouse_gene_id": "ENSMUSG00002076036",
+    "mouse_gene_name": "Gm55339"
+  },
+  {
+    "human_gene_id": "ENSG00000283300",
+    "human_gene_name": "U6",
+    "mouse_gene_id": "ENSMUSG00000064964",
+    "mouse_gene_name": "Gm25147"
+  },
+  {
+    "human_gene_id": "ENSG00000159228",
+    "human_gene_name": "CBR1",
+    "mouse_gene_id": "ENSMUSG00000082815",
+    "mouse_gene_name": "Cbr1b"
+  },
+  {
+    "human_gene_id": "ENSG00000159228",
+    "human_gene_name": "CBR1",
+    "mouse_gene_id": "ENSMUSG00000051483",
+    "mouse_gene_name": "Cbr1"
+  },
+  {
+    "human_gene_id": "ENSG00000252045",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002075554",
+    "mouse_gene_name": "Gm55990"
+  },
+  {
+    "human_gene_id": "ENSG00000252045",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000064936",
+    "mouse_gene_name": "Gm23722"
+  },
+  {
+    "human_gene_id": "ENSG00000252045",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000070063",
+    "mouse_gene_name": "Snora33"
+  },
+  {
+    "human_gene_id": "ENSG00000159263",
+    "human_gene_name": "SIM2",
+    "mouse_gene_id": "ENSMUSG00000062713",
+    "mouse_gene_name": "Sim2"
+  },
+  {
+    "human_gene_id": "ENSG00000183145",
+    "human_gene_name": "RIPPLY3",
+    "mouse_gene_id": "ENSMUSG00000022941",
+    "mouse_gene_name": "Ripply3"
+  },
+  {
+    "human_gene_id": "ENSG00000212136",
+    "human_gene_name": "RNU6-696P",
+    "mouse_gene_id": "ENSMUSG00000089422",
+    "mouse_gene_name": "Gm26008"
+  },
+  {
+    "human_gene_id": "ENSG00000160208",
+    "human_gene_name": "RRP1B",
+    "mouse_gene_id": "ENSMUSG00000058392",
+    "mouse_gene_name": "Rrp1b"
+  },
+  {
+    "human_gene_id": "ENSG00000160216",
+    "human_gene_name": "AGPAT3",
+    "mouse_gene_id": "ENSMUSG00000001211",
+    "mouse_gene_name": "Agpat3"
+  },
+  {
+    "human_gene_id": "ENSG00000252606",
+    "human_gene_name": "RNU6-1150P",
+    "mouse_gene_id": "ENSMUSG00000065340",
+    "mouse_gene_name": "Gm25578"
+  },
+  {
+    "human_gene_id": "ENSG00000274391",
+    "human_gene_name": "TPTE",
+    "mouse_gene_id": "ENSMUSG00000031481",
+    "mouse_gene_name": "Tpte"
+  },
+  {
+    "human_gene_id": "ENSG00000223287",
+    "human_gene_name": "RNU6-954P",
+    "mouse_gene_id": "ENSMUSG00000087825",
+    "mouse_gene_name": "Gm22279"
+  },
+  {
+    "human_gene_id": "ENSG00000223287",
+    "human_gene_name": "RNU6-954P",
+    "mouse_gene_id": "ENSMUSG00002075997",
+    "mouse_gene_name": "Gm54642"
+  },
+  {
+    "human_gene_id": "ENSG00000183036",
+    "human_gene_name": "PCP4",
+    "mouse_gene_id": "ENSMUSG00000090223",
+    "mouse_gene_name": "Pcp4"
+  },
+  {
+    "human_gene_id": "ENSG00000171587",
+    "human_gene_name": "DSCAM",
+    "mouse_gene_id": "ENSMUSG00000050272",
+    "mouse_gene_name": "Dscam"
+  },
+  {
+    "human_gene_id": "ENSG00000183421",
+    "human_gene_name": "RIPK4",
+    "mouse_gene_id": "ENSMUSG00000005251",
+    "mouse_gene_name": "Ripk4"
+  },
+  {
+    "human_gene_id": "ENSG00000160181",
+    "human_gene_name": "TFF2",
+    "mouse_gene_id": "ENSMUSG00000024028",
+    "mouse_gene_name": "Tff2"
+  },
+  {
+    "human_gene_id": "ENSG00000160182",
+    "human_gene_name": "TFF1",
+    "mouse_gene_id": "ENSMUSG00000024032",
+    "mouse_gene_name": "Tff1"
+  },
+  {
+    "human_gene_id": "ENSG00000160185",
+    "human_gene_name": "UBASH3A",
+    "mouse_gene_id": "ENSMUSG00000042345",
+    "mouse_gene_name": "Ubash3a"
+  },
+  {
+    "human_gene_id": "ENSG00000142182",
+    "human_gene_name": "DNMT3L",
+    "mouse_gene_id": "ENSMUSG00000000730",
+    "mouse_gene_name": "Dnmt3l"
+  },
+  {
+    "human_gene_id": "ENSG00000160226",
+    "human_gene_name": "CFAP410",
+    "mouse_gene_id": "ENSMUSG00000020284",
+    "mouse_gene_name": "Cfap410"
+  },
+  {
+    "human_gene_id": "ENSG00000266692",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000093443",
+    "mouse_gene_name": "Gm22871"
+  },
+  {
+    "human_gene_id": "ENSG00000264452",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000093784",
+    "mouse_gene_name": "Gm22394"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000109859",
+    "mouse_gene_name": "Krtap5-26"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000110324",
+    "mouse_gene_name": "Krtap5-24"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000054759",
+    "mouse_gene_name": "Krtap5-2"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000056885",
+    "mouse_gene_name": "Krtap5-20"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000096421",
+    "mouse_gene_name": "Krtap12-20"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000069584",
+    "mouse_gene_name": "Krtap12-23"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000094146",
+    "mouse_gene_name": "Krtap12-21"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000069583",
+    "mouse_gene_name": "Krtap12-1"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000094012",
+    "mouse_gene_name": "Krtap12-22"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000188155",
+    "human_gene_name": "KRTAP10-6",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000109859",
+    "mouse_gene_name": "Krtap5-26"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000110324",
+    "mouse_gene_name": "Krtap5-24"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000054759",
+    "mouse_gene_name": "Krtap5-2"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000056885",
+    "mouse_gene_name": "Krtap5-20"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000075567",
+    "mouse_gene_name": "Krtap1-4"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000078131",
+    "mouse_gene_name": "Krtap1-3"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000049809",
+    "mouse_gene_name": "Krtap9-3"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000096421",
+    "mouse_gene_name": "Krtap12-20"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000069584",
+    "mouse_gene_name": "Krtap12-23"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000094146",
+    "mouse_gene_name": "Krtap12-21"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000069583",
+    "mouse_gene_name": "Krtap12-1"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000094012",
+    "mouse_gene_name": "Krtap12-22"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000078255",
+    "mouse_gene_name": "Krtap9-5"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000062278",
+    "mouse_gene_name": "Krtap2-20"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000057674",
+    "mouse_gene_name": "Krtap2-22"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000060756",
+    "mouse_gene_name": "Krtap2-4"
+  },
+  {
+    "human_gene_id": "ENSG00000243489",
+    "human_gene_name": "KRTAP10-11",
+    "mouse_gene_id": "ENSMUSG00000058725",
+    "mouse_gene_name": "Krtap2-21"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000205439",
+    "human_gene_name": "KRTAP12-3",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000221864",
+    "human_gene_name": "KRTAP12-2",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000187175",
+    "human_gene_name": "KRTAP12-1",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000221398",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000080461",
+    "mouse_gene_name": "Gm22488"
+  },
+  {
+    "human_gene_id": "ENSG00000184221",
+    "human_gene_name": "OLIG1",
+    "mouse_gene_id": "ENSMUSG00000046160",
+    "mouse_gene_name": "Olig1"
+  },
+  {
+    "human_gene_id": "ENSG00000177398",
+    "human_gene_name": "UMODL1",
+    "mouse_gene_id": "ENSMUSG00000054134",
+    "mouse_gene_name": "Umodl1"
+  },
+  {
+    "human_gene_id": "ENSG00000183640",
+    "human_gene_name": "KRTAP8-1",
+    "mouse_gene_id": "ENSMUSG00000059632",
+    "mouse_gene_name": "Krtap8-1"
+  },
+  {
+    "human_gene_id": "ENSG00000274749",
+    "human_gene_name": "KRTAP7-1",
+    "mouse_gene_id": "ENSMUSG00000056706",
+    "mouse_gene_name": "Krtap7-1"
+  },
+  {
+    "human_gene_id": "ENSG00000182591",
+    "human_gene_name": "KRTAP11-1",
+    "mouse_gene_id": "ENSMUSG00000091212",
+    "mouse_gene_name": "Krtap11-1"
+  },
+  {
+    "human_gene_id": "ENSG00000188992",
+    "human_gene_name": "LIPI",
+    "mouse_gene_id": "ENSMUSG00000032948",
+    "mouse_gene_name": "Lipi"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000109859",
+    "mouse_gene_name": "Krtap5-26"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000110324",
+    "mouse_gene_name": "Krtap5-24"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000054759",
+    "mouse_gene_name": "Krtap5-2"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000056885",
+    "mouse_gene_name": "Krtap5-20"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000096421",
+    "mouse_gene_name": "Krtap12-20"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000069584",
+    "mouse_gene_name": "Krtap12-23"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000094146",
+    "mouse_gene_name": "Krtap12-21"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000069583",
+    "mouse_gene_name": "Krtap12-1"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000094012",
+    "mouse_gene_name": "Krtap12-22"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000221837",
+    "human_gene_name": "KRTAP10-9",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000109859",
+    "mouse_gene_name": "Krtap5-26"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000110324",
+    "mouse_gene_name": "Krtap5-24"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000054759",
+    "mouse_gene_name": "Krtap5-2"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000056885",
+    "mouse_gene_name": "Krtap5-20"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000075567",
+    "mouse_gene_name": "Krtap1-4"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000078131",
+    "mouse_gene_name": "Krtap1-3"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000049809",
+    "mouse_gene_name": "Krtap9-3"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000096421",
+    "mouse_gene_name": "Krtap12-20"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000069584",
+    "mouse_gene_name": "Krtap12-23"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000094146",
+    "mouse_gene_name": "Krtap12-21"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000069583",
+    "mouse_gene_name": "Krtap12-1"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000094012",
+    "mouse_gene_name": "Krtap12-22"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000095970",
+    "mouse_gene_name": "Krtap10-33"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112864",
+    "mouse_gene_name": "Krtap10-32"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112380",
+    "mouse_gene_name": "Krtap10-30"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112170",
+    "mouse_gene_name": "Krtap10-28"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000071195",
+    "mouse_gene_name": "Krtap10-31"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000096131",
+    "mouse_gene_name": "Krtap10-29"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112600",
+    "mouse_gene_name": "Gm49918"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000094913",
+    "mouse_gene_name": "Krtap10-27"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000095593",
+    "mouse_gene_name": "Krtap10-26"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000095817",
+    "mouse_gene_name": "Krtap10-22"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000096481",
+    "mouse_gene_name": "Krtap10-23"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000095721",
+    "mouse_gene_name": "Krtap10-25"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000094120",
+    "mouse_gene_name": "Krtap10-21"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000111915",
+    "mouse_gene_name": "Krtap10-24"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112223",
+    "mouse_gene_name": "Krtap10-10"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000069582",
+    "mouse_gene_name": "Krtap10-4"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000112653",
+    "mouse_gene_name": "Krtap10-35"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000096380",
+    "mouse_gene_name": "Krtap10-34"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000078255",
+    "mouse_gene_name": "Krtap9-5"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000062278",
+    "mouse_gene_name": "Krtap2-20"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000057674",
+    "mouse_gene_name": "Krtap2-22"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000060756",
+    "mouse_gene_name": "Krtap2-4"
+  },
+  {
+    "human_gene_id": "ENSG00000215454",
+    "human_gene_name": "KRTAP10-4",
+    "mouse_gene_id": "ENSMUSG00000058725",
+    "mouse_gene_name": "Krtap2-21"
+  },
+  {
+    "human_gene_id": "ENSG00000160294",
+    "human_gene_name": "MCM3AP",
+    "mouse_gene_id": "ENSMUSG00000001150",
+    "mouse_gene_name": "Mcm3ap"
+  },
+  {
+    "human_gene_id": "ENSG00000204899",
+    "human_gene_name": "MZT1",
+    "mouse_gene_id": "ENSMUSG00000033186",
+    "mouse_gene_name": "Mzt1"
+  },
+  {
+    "human_gene_id": "ENSG00000165837",
+    "human_gene_name": "ERICH6B",
+    "mouse_gene_id": "ENSMUSG00000022002",
+    "mouse_gene_name": "Erich6b"
+  },
+  {
+    "human_gene_id": "ENSG00000150361",
+    "human_gene_name": "KLHL1",
+    "mouse_gene_id": "ENSMUSG00000022076",
+    "mouse_gene_name": "Klhl1"
+  },
+  {
+    "human_gene_id": "ENSG00000182670",
+    "human_gene_name": "TTC3",
+    "mouse_gene_id": "ENSMUSG00000040785",
+    "mouse_gene_name": "Ttc3"
+  },
+  {
+    "human_gene_id": "ENSG00000150893",
+    "human_gene_name": "FREM2",
+    "mouse_gene_id": "ENSMUSG00000037016",
+    "mouse_gene_name": "Frem2"
+  },
+  {
+    "human_gene_id": "ENSG00000174015",
+    "human_gene_name": "CBY2",
+    "mouse_gene_id": "ENSMUSG00000034913",
+    "mouse_gene_name": "Cby2"
+  },
+  {
+    "human_gene_id": "ENSG00000152192",
+    "human_gene_name": "POU4F1",
+    "mouse_gene_id": "ENSMUSG00000048349",
+    "mouse_gene_name": "Pou4f1"
+  },
+  {
+    "human_gene_id": "ENSG00000188811",
+    "human_gene_name": "NHLRC3",
+    "mouse_gene_id": "ENSMUSG00000042997",
+    "mouse_gene_name": "Nhlrc3"
+  },
+  {
+    "human_gene_id": "ENSG00000102837",
+    "human_gene_name": "OLFM4",
+    "mouse_gene_id": "ENSMUSG00000022026",
+    "mouse_gene_name": "Olfm4"
+  },
+  {
+    "human_gene_id": "ENSG00000139734",
+    "human_gene_name": "DIAPH3",
+    "mouse_gene_id": "ENSMUSG00000022021",
+    "mouse_gene_name": "Diaph3"
+  },
+  {
+    "human_gene_id": "ENSG00000197683",
+    "human_gene_name": "KRTAP26-1",
+    "mouse_gene_id": "ENSMUSG00000071471",
+    "mouse_gene_name": "Krtap26-1"
+  },
+  {
+    "human_gene_id": "ENSG00000206107",
+    "human_gene_name": "KRTAP27-1",
+    "mouse_gene_id": "ENSMUSG00000090515",
+    "mouse_gene_name": "Krtap27-1"
+  },
+  {
+    "human_gene_id": "ENSG00000182816",
+    "human_gene_name": "KRTAP13-2",
+    "mouse_gene_id": "ENSMUSG00000056350",
+    "mouse_gene_name": "Krtap13-1"
+  },
+  {
+    "human_gene_id": "ENSG00000198390",
+    "human_gene_name": "KRTAP13-1",
+    "mouse_gene_id": "ENSMUSG00000056350",
+    "mouse_gene_name": "Krtap13-1"
+  },
+  {
+    "human_gene_id": "ENSG00000186970",
+    "human_gene_name": "KRTAP15-1",
+    "mouse_gene_id": "ENSMUSG00000022931",
+    "mouse_gene_name": "Krtap15-1"
+  },
+  {
+    "human_gene_id": "ENSG00000240432",
+    "human_gene_name": "KRTAP13-3",
+    "mouse_gene_id": "ENSMUSG00000009047",
+    "mouse_gene_name": "Krtap13-23"
+  },
+  {
+    "human_gene_id": "ENSG00000240432",
+    "human_gene_name": "KRTAP13-3",
+    "mouse_gene_id": "ENSMUSG00000068078",
+    "mouse_gene_name": "Krtap13-20"
+  },
+  {
+    "human_gene_id": "ENSG00000240432",
+    "human_gene_name": "KRTAP13-3",
+    "mouse_gene_id": "ENSMUSG00000050224",
+    "mouse_gene_name": "Krtap13"
+  },
+  {
+    "human_gene_id": "ENSG00000240432",
+    "human_gene_name": "KRTAP13-3",
+    "mouse_gene_id": "ENSMUSG00000116636",
+    "mouse_gene_name": "Krtap13-24"
+  },
+  {
+    "human_gene_id": "ENSG00000240432",
+    "human_gene_name": "KRTAP13-3",
+    "mouse_gene_id": "ENSMUSG00000048830",
+    "mouse_gene_name": "Krtap13-21"
+  },
+  {
+    "human_gene_id": "ENSG00000252273",
+    "human_gene_name": "RNU6-426P",
+    "mouse_gene_id": "ENSMUSG00002075492",
+    "mouse_gene_name": "Gm54599"
+  },
+  {
+    "human_gene_id": "ENSG00000201025",
+    "human_gene_name": "SNORD74B",
+    "mouse_gene_id": "ENSMUSG00000064440",
+    "mouse_gene_name": "Gm26224"
+  },
+  {
+    "human_gene_id": "ENSG00000207638",
+    "human_gene_name": "MIR99A",
+    "mouse_gene_id": "ENSMUSG00000065530",
+    "mouse_gene_name": "Mir99a"
+  },
+  {
+    "human_gene_id": "ENSG00000199030",
+    "human_gene_name": "MIRLET7C",
+    "mouse_gene_id": "ENSMUSG00000065557",
+    "mouse_gene_name": "Mirlet7c-1"
+  },
+  {
+    "human_gene_id": "ENSG00000239023",
+    "human_gene_name": "RNU1-98P",
+    "mouse_gene_id": "ENSMUSG00000077359",
+    "mouse_gene_name": "Gm25308"
+  },
+  {
+    "human_gene_id": "ENSG00000186971",
+    "human_gene_name": "KRTAP13-4",
+    "mouse_gene_id": "ENSMUSG00000056350",
+    "mouse_gene_name": "Krtap13-1"
+  },
+  {
+    "human_gene_id": "ENSG00000160299",
+    "human_gene_name": "PCNT",
+    "mouse_gene_id": "ENSMUSG00000001151",
+    "mouse_gene_name": "Pcnt"
+  },
+  {
+    "human_gene_id": "ENSG00000159140",
+    "human_gene_name": "SON",
+    "mouse_gene_id": "ENSMUSG00000022961",
+    "mouse_gene_name": "Son"
+  },
+  {
+    "human_gene_id": "ENSG00000118946",
+    "human_gene_name": "PCDH17",
+    "mouse_gene_id": "ENSMUSG00000035566",
+    "mouse_gene_name": "Pcdh17"
+  },
+  {
+    "human_gene_id": "ENSG00000136141",
+    "human_gene_name": "LRCH1",
+    "mouse_gene_id": "ENSMUSG00000068015",
+    "mouse_gene_name": "Lrch1"
+  },
+  {
+    "human_gene_id": "ENSG00000184564",
+    "human_gene_name": "SLITRK6",
+    "mouse_gene_id": "ENSMUSG00000045871",
+    "mouse_gene_name": "Slitrk6"
+  },
+  {
+    "human_gene_id": "ENSG00000182968",
+    "human_gene_name": "SOX1",
+    "mouse_gene_id": "ENSMUSG00000096014",
+    "mouse_gene_name": "Sox1"
+  },
+  {
+    "human_gene_id": "ENSG00000041515",
+    "human_gene_name": "MYO16",
+    "mouse_gene_id": "ENSMUSG00000039057",
+    "mouse_gene_name": "Myo16"
+  },
+  {
+    "human_gene_id": "ENSG00000180530",
+    "human_gene_name": "NRIP1",
+    "mouse_gene_id": "ENSMUSG00000048490",
+    "mouse_gene_name": "Nrip1"
+  },
+  {
+    "human_gene_id": "ENSG00000159200",
+    "human_gene_name": "RCAN1",
+    "mouse_gene_id": "ENSMUSG00000022951",
+    "mouse_gene_name": "Rcan1"
+  },
+  {
+    "human_gene_id": "ENSG00000185950",
+    "human_gene_name": "IRS2",
+    "mouse_gene_id": "ENSMUSG00000038894",
+    "mouse_gene_name": "Irs2"
+  },
+  {
+    "human_gene_id": "ENSG00000153498",
+    "human_gene_name": "SPACA7",
+    "mouse_gene_id": "ENSMUSG00000010435",
+    "mouse_gene_name": "Spaca7"
+  },
+  {
+    "human_gene_id": "ENSG00000204442",
+    "human_gene_name": "NALF1",
+    "mouse_gene_id": "ENSMUSG00000079157",
+    "mouse_gene_name": "Nalf1"
+  },
+  {
+    "human_gene_id": "ENSG00000185974",
+    "human_gene_name": "GRK1",
+    "mouse_gene_id": "ENSMUSG00000031450",
+    "mouse_gene_name": "Grk1"
+  },
+  {
+    "human_gene_id": "ENSG00000122042",
+    "human_gene_name": "UBL3",
+    "mouse_gene_id": "ENSMUSG00000001687",
+    "mouse_gene_name": "Ubl3"
+  },
+  {
+    "human_gene_id": "ENSG00000171189",
+    "human_gene_name": "GRIK1",
+    "mouse_gene_id": "ENSMUSG00000022935",
+    "mouse_gene_name": "Grik1"
+  },
+  {
+    "human_gene_id": "ENSG00000179813",
+    "human_gene_name": "FAM216B",
+    "mouse_gene_id": "ENSMUSG00000045655",
+    "mouse_gene_name": "Fam216b"
+  },
+  {
+    "human_gene_id": "ENSG00000202395",
+    "human_gene_name": "RN7SKP1",
+    "mouse_gene_id": "ENSMUSG00002076750",
+    "mouse_gene_name": "Gm55840"
+  },
+  {
+    "human_gene_id": "ENSG00000252812",
+    "human_gene_name": "RN7SKP2",
+    "mouse_gene_id": "ENSMUSG00002076200",
+    "mouse_gene_name": "Gm54538"
+  },
+  {
+    "human_gene_id": "ENSG00000206812",
+    "human_gene_name": "RNU6-38P",
+    "mouse_gene_id": "ENSMUSG00000087782",
+    "mouse_gene_name": "Gm23169"
+  },
+  {
+    "human_gene_id": "ENSG00000200733",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000064542",
+    "mouse_gene_name": "Gm22980"
+  },
+  {
+    "human_gene_id": "ENSG00000201847",
+    "human_gene_name": "SNORD31B",
+    "mouse_gene_id": "ENSMUSG00000065305",
+    "mouse_gene_name": "Gm23246"
+  },
+  {
+    "human_gene_id": "ENSG00000200072",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000084667",
+    "mouse_gene_name": "Gm23212"
+  },
+  {
+    "human_gene_id": "ENSG00000253094",
+    "human_gene_name": "SNORD36",
+    "mouse_gene_id": "ENSMUSG00000065295",
+    "mouse_gene_name": "Gm24134"
+  },
+  {
+    "human_gene_id": "ENSG00000252952",
+    "human_gene_name": "RNU6-58P",
+    "mouse_gene_id": "ENSMUSG00000088889",
+    "mouse_gene_name": "Gm24211"
+  },
+  {
+    "human_gene_id": "ENSG00000198553",
+    "human_gene_name": "KCNRG",
+    "mouse_gene_id": "ENSMUSG00000046168",
+    "mouse_gene_name": "Kcnrg"
+  },
+  {
+    "human_gene_id": "ENSG00000283785",
+    "human_gene_name": "MIR15A",
+    "mouse_gene_id": "ENSMUSG00000093007",
+    "mouse_gene_name": "Mir15a"
+  },
+  {
+    "human_gene_id": "ENSG00000150510",
+    "human_gene_name": "FAM124A",
+    "mouse_gene_id": "ENSMUSG00000035184",
+    "mouse_gene_name": "Fam124a"
+  },
+  {
+    "human_gene_id": "ENSG00000189167",
+    "human_gene_name": "ZAR1L",
+    "mouse_gene_id": "ENSMUSG00000056586",
+    "mouse_gene_name": "Zar1l"
+  },
+  {
+    "human_gene_id": "ENSG00000212564",
+    "human_gene_name": "RNU6-1326P",
+    "mouse_gene_id": "ENSMUSG00000084479",
+    "mouse_gene_name": "Gm26424"
+  },
+  {
+    "human_gene_id": "ENSG00000243927",
+    "human_gene_name": "MRPS6",
+    "mouse_gene_id": "ENSMUSG00000039680",
+    "mouse_gene_name": "Mrps6"
+  },
+  {
+    "human_gene_id": "ENSG00000133111",
+    "human_gene_name": "RFXAP",
+    "mouse_gene_id": "ENSMUSG00000036615",
+    "mouse_gene_name": "Rfxap"
+  },
+  {
+    "human_gene_id": "ENSG00000215475",
+    "human_gene_name": "SIAH3",
+    "mouse_gene_id": "ENSMUSG00000091722",
+    "mouse_gene_name": "Siah3"
+  },
+  {
+    "human_gene_id": "ENSG00000198743",
+    "human_gene_name": "SLC5A3",
+    "mouse_gene_id": "ENSMUSG00000089774",
+    "mouse_gene_name": "Slc5a3"
+  },
+  {
+    "human_gene_id": "ENSG00000175820",
+    "human_gene_name": "CCDC168",
+    "mouse_gene_id": "ENSMUSG00000091844",
+    "mouse_gene_name": "Ccdc168"
+  },
+  {
+    "human_gene_id": "ENSG00000159197",
+    "human_gene_name": "KCNE2",
+    "mouse_gene_id": "ENSMUSG00000039672",
+    "mouse_gene_name": "Kcne2"
+  },
+  {
+    "human_gene_id": "ENSG00000199477",
+    "human_gene_name": "SNORA31",
+    "mouse_gene_id": "ENSMUSG00000064652",
+    "mouse_gene_name": "Gm24165"
+  },
+  {
+    "human_gene_id": "ENSG00000199477",
+    "human_gene_name": "SNORA31",
+    "mouse_gene_id": "ENSMUSG00000088410",
+    "mouse_gene_name": "Gm24240"
+  },
+  {
+    "human_gene_id": "ENSG00000199477",
+    "human_gene_name": "SNORA31",
+    "mouse_gene_id": "ENSMUSG00000065147",
+    "mouse_gene_name": "Snora31"
+  },
+  {
+    "human_gene_id": "ENSG00000178235",
+    "human_gene_name": "SLITRK1",
+    "mouse_gene_id": "ENSMUSG00000075478",
+    "mouse_gene_name": "Slitrk1"
+  },
+  {
+    "human_gene_id": "ENSG00000244264",
+    "human_gene_name": "RN7SL597P",
+    "mouse_gene_id": "ENSMUSG00000092875",
+    "mouse_gene_name": "Gm22649"
+  },
+  {
+    "human_gene_id": "ENSG00000165572",
+    "human_gene_name": "KBTBD6",
+    "mouse_gene_id": "ENSMUSG00000075502",
+    "mouse_gene_name": "Kbtbd6"
+  },
+  {
+    "human_gene_id": "ENSG00000120696",
+    "human_gene_name": "KBTBD7",
+    "mouse_gene_id": "ENSMUSG00000043881",
+    "mouse_gene_name": "Kbtbd7"
+  },
+  {
+    "human_gene_id": "ENSG00000223280",
+    "human_gene_name": "RNU6-57P",
+    "mouse_gene_id": "ENSMUSG00000119731",
+    "mouse_gene_name": "Gm23096"
+  },
+  {
+    "human_gene_id": "ENSG00000166265",
+    "human_gene_name": "CYYR1",
+    "mouse_gene_id": "ENSMUSG00000041134",
+    "mouse_gene_name": "Cyyr1"
+  },
+  {
+    "human_gene_id": "ENSG00000125249",
+    "human_gene_name": "RAP2A",
+    "mouse_gene_id": "ENSMUSG00000051615",
+    "mouse_gene_name": "Rap2a"
+  },
+  {
+    "human_gene_id": "ENSG00000160202",
+    "human_gene_name": "CRYAA",
+    "mouse_gene_id": "ENSMUSG00000024041",
+    "mouse_gene_name": "Cryaa"
+  },
+  {
+    "human_gene_id": "ENSG00000222726",
+    "human_gene_name": "RNU2-7P",
+    "mouse_gene_id": "ENSMUSG00000064772",
+    "mouse_gene_name": "Gm25202"
+  },
+  {
+    "human_gene_id": "ENSG00000180730",
+    "human_gene_name": "SHISA2",
+    "mouse_gene_id": "ENSMUSG00000044461",
+    "mouse_gene_name": "Shisa2"
+  },
+  {
+    "human_gene_id": "ENSG00000133105",
+    "human_gene_name": "RXFP2",
+    "mouse_gene_id": "ENSMUSG00000053368",
+    "mouse_gene_name": "Rxfp2"
+  },
+  {
+    "human_gene_id": "ENSG00000073910",
+    "human_gene_name": "FRY",
+    "mouse_gene_id": "ENSMUSG00000056602",
+    "mouse_gene_name": "Fry"
+  },
+  {
+    "human_gene_id": "ENSG00000253797",
+    "human_gene_name": "UTP14C",
+    "mouse_gene_id": "ENSMUSG00000079470",
+    "mouse_gene_name": "Utp14b"
+  },
+  {
+    "human_gene_id": "ENSG00000253797",
+    "human_gene_name": "UTP14C",
+    "mouse_gene_id": "ENSMUSG00000063785",
+    "mouse_gene_name": "Utp14a"
+  },
+  {
+    "human_gene_id": "ENSG00000123171",
+    "human_gene_name": "CCDC70",
+    "mouse_gene_id": "ENSMUSG00000017049",
+    "mouse_gene_name": "Ccdc70"
+  },
+  {
+    "human_gene_id": "ENSG00000125245",
+    "human_gene_name": "GPR18",
+    "mouse_gene_id": "ENSMUSG00000050350",
+    "mouse_gene_name": "Gpr18"
+  },
+  {
+    "human_gene_id": "ENSG00000102524",
+    "human_gene_name": "TNFSF13B",
+    "mouse_gene_id": "ENSMUSG00000031497",
+    "mouse_gene_name": "Tnfsf13b"
+  },
+  {
+    "human_gene_id": "ENSG00000132932",
+    "human_gene_name": "ATP8A2",
+    "mouse_gene_id": "ENSMUSG00000021983",
+    "mouse_gene_name": "Atp8a2"
+  },
+  {
+    "human_gene_id": "ENSG00000151835",
+    "human_gene_name": "SACS",
+    "mouse_gene_id": "ENSMUSG00000048279",
+    "mouse_gene_name": "Sacs"
+  },
+  {
+    "human_gene_id": "ENSG00000231824",
+    "human_gene_name": "AKAIN1",
+    "mouse_gene_id": "ENSMUSG00000091636",
+    "mouse_gene_name": "Akain1"
+  },
+  {
+    "human_gene_id": "ENSG00000132874",
+    "human_gene_name": "SLC14A2",
+    "mouse_gene_id": "ENSMUSG00000024552",
+    "mouse_gene_name": "Slc14a2"
+  },
+  {
+    "human_gene_id": "ENSG00000178695",
+    "human_gene_name": "KCTD12",
+    "mouse_gene_id": "ENSMUSG00000098557",
+    "mouse_gene_name": "Kctd12"
+  },
+  {
+    "human_gene_id": "ENSG00000102805",
+    "human_gene_name": "CLN5",
+    "mouse_gene_id": "ENSMUSG00000022125",
+    "mouse_gene_name": "Cln5"
+  },
+  {
+    "human_gene_id": "ENSG00000212710",
+    "human_gene_name": "CTAGE1",
+    "mouse_gene_id": "ENSMUSG00000021000",
+    "mouse_gene_name": "Mia2"
+  },
+  {
+    "human_gene_id": "ENSG00000134489",
+    "human_gene_name": "HRH4",
+    "mouse_gene_id": "ENSMUSG00000037346",
+    "mouse_gene_name": "Hrh4"
+  },
+  {
+    "human_gene_id": "ENSG00000253309",
+    "human_gene_name": "SERPINE3",
+    "mouse_gene_id": "ENSMUSG00000091155",
+    "mouse_gene_name": "Serpine3"
+  },
+  {
+    "human_gene_id": "ENSG00000177511",
+    "human_gene_name": "ST8SIA3",
+    "mouse_gene_id": "ENSMUSG00000056812",
+    "mouse_gene_name": "St8sia3"
+  },
+  {
+    "human_gene_id": "ENSG00000139780",
+    "human_gene_name": "METTL21C",
+    "mouse_gene_id": "ENSMUSG00000047343",
+    "mouse_gene_name": "Mettl21c"
+  },
+  {
+    "human_gene_id": "ENSG00000125255",
+    "human_gene_name": "SLC10A2",
+    "mouse_gene_id": "ENSMUSG00000023073",
+    "mouse_gene_name": "Slc10a2"
+  },
+  {
+    "human_gene_id": "ENSG00000228075",
+    "human_gene_name": "BOD1L2",
+    "mouse_gene_id": "ENSMUSG00000044502",
+    "mouse_gene_name": "Bod1"
+  },
+  {
+    "human_gene_id": "ENSG00000081138",
+    "human_gene_name": "CDH7",
+    "mouse_gene_id": "ENSMUSG00000026312",
+    "mouse_gene_name": "Cdh7"
+  },
+  {
+    "human_gene_id": "ENSG00000043355",
+    "human_gene_name": "ZIC2",
+    "mouse_gene_id": "ENSMUSG00000061524",
+    "mouse_gene_name": "Zic2"
+  },
+  {
+    "human_gene_id": "ENSG00000139800",
+    "human_gene_name": "ZIC5",
+    "mouse_gene_id": "ENSMUSG00000041703",
+    "mouse_gene_name": "Zic5"
+  },
+  {
+    "human_gene_id": "ENSG00000169840",
+    "human_gene_name": "GSX1",
+    "mouse_gene_id": "ENSMUSG00000053129",
+    "mouse_gene_name": "Gsx1"
+  },
+  {
+    "human_gene_id": "ENSG00000166603",
+    "human_gene_name": "MC4R",
+    "mouse_gene_id": "ENSMUSG00000047259",
+    "mouse_gene_name": "Mc4r"
+  },
+  {
+    "human_gene_id": "ENSG00000139515",
+    "human_gene_name": "PDX1",
+    "mouse_gene_id": "ENSMUSG00000029644",
+    "mouse_gene_name": "Pdx1"
+  },
+  {
+    "human_gene_id": "ENSG00000172915",
+    "human_gene_name": "NBEA",
+    "mouse_gene_id": "ENSMUSG00000027799",
+    "mouse_gene_name": "Nbea"
+  },
+  {
+    "human_gene_id": "ENSG00000101542",
+    "human_gene_name": "CDH20",
+    "mouse_gene_id": "ENSMUSG00000050840",
+    "mouse_gene_name": "Cdh20"
+  },
+  {
+    "human_gene_id": "ENSG00000141428",
+    "human_gene_name": "C18orf21",
+    "mouse_gene_id": "ENSMUSG00000024273",
+    "mouse_gene_name": "2700062C07Rik"
+  },
+  {
+    "human_gene_id": "ENSG00000141424",
+    "human_gene_name": "SLC39A6",
+    "mouse_gene_id": "ENSMUSG00000024270",
+    "mouse_gene_name": "Slc39a6"
+  },
+  {
+    "human_gene_id": "ENSG00000252128",
+    "human_gene_name": "SNORD27",
+    "mouse_gene_id": "ENSMUSG00000065281",
+    "mouse_gene_name": "Gm24452"
+  },
+  {
+    "human_gene_id": "ENSG00000102678",
+    "human_gene_name": "FGF9",
+    "mouse_gene_id": "ENSMUSG00000021974",
+    "mouse_gene_name": "Fgf9"
+  },
+  {
+    "human_gene_id": "ENSG00000166573",
+    "human_gene_name": "GALR1",
+    "mouse_gene_id": "ENSMUSG00000024553",
+    "mouse_gene_name": "Galr1"
+  },
+  {
+    "human_gene_id": "ENSG00000202347",
+    "human_gene_name": "RNU1-16P",
+    "mouse_gene_id": "ENSMUSG00000064432",
+    "mouse_gene_name": "Gm25587"
+  },
+  {
+    "human_gene_id": "ENSG00000153531",
+    "human_gene_name": "ADPRHL1",
+    "mouse_gene_id": "ENSMUSG00000031448",
+    "mouse_gene_name": "Adprhl1"
+  },
+  {
+    "human_gene_id": "ENSG00000197971",
+    "human_gene_name": "MBP",
+    "mouse_gene_id": "ENSMUSG00000041607",
+    "mouse_gene_name": "Mbp"
+  },
+  {
+    "human_gene_id": "ENSG00000132958",
+    "human_gene_name": "TPTE2",
+    "mouse_gene_id": "ENSMUSG00000031481",
+    "mouse_gene_name": "Tpte"
+  },
+  {
+    "human_gene_id": "ENSG00000120659",
+    "human_gene_name": "TNFSF11",
+    "mouse_gene_id": "ENSMUSG00000022015",
+    "mouse_gene_name": "Tnfsf11"
+  },
+  {
+    "human_gene_id": "ENSG00000253710",
+    "human_gene_name": "ALG11",
+    "mouse_gene_id": "ENSMUSG00000063362",
+    "mouse_gene_name": "Alg11"
+  },
+  {
+    "human_gene_id": "ENSG00000173988",
+    "human_gene_name": "LRRC63",
+    "mouse_gene_id": "ENSMUSG00000021997",
+    "mouse_gene_name": "Lrrc63"
+  },
+  {
+    "human_gene_id": "ENSG00000280165",
+    "human_gene_name": "PCDH20",
+    "mouse_gene_id": "ENSMUSG00000050505",
+    "mouse_gene_name": "Pcdh20"
+  },
+  {
+    "human_gene_id": "ENSG00000212293",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000084690",
+    "mouse_gene_name": "Gm24896"
+  },
+  {
+    "human_gene_id": "ENSG00000132972",
+    "human_gene_name": "RNF17",
+    "mouse_gene_id": "ENSMUSG00000000365",
+    "mouse_gene_name": "Rnf17"
+  },
+  {
+    "human_gene_id": "ENSG00000102471",
+    "human_gene_name": "NDFIP2",
+    "mouse_gene_id": "ENSMUSG00000053253",
+    "mouse_gene_name": "Ndfip2"
+  },
+  {
+    "human_gene_id": "ENSG00000199272",
+    "human_gene_name": "RNU6-349P",
+    "mouse_gene_id": "ENSMUSG00000088370",
+    "mouse_gene_name": "Gm22880"
+  },
+  {
+    "human_gene_id": "ENSG00000251897",
+    "human_gene_name": "RNU6-916P",
+    "mouse_gene_id": "ENSMUSG00000118793",
+    "mouse_gene_name": "Gm22352"
+  },
+  {
+    "human_gene_id": "ENSG00000207160",
+    "human_gene_name": "RNU6-1289P",
+    "mouse_gene_id": "ENSMUSG00000084593",
+    "mouse_gene_name": "Gm22345"
+  },
+  {
+    "human_gene_id": "ENSG00000222704",
+    "human_gene_name": "RN7SKP182",
+    "mouse_gene_id": "ENSMUSG00002076285",
+    "mouse_gene_name": "Gm55615"
+  },
+  {
+    "human_gene_id": "ENSG00000207797",
+    "human_gene_name": "MIR187",
+    "mouse_gene_id": "ENSMUSG00000065532",
+    "mouse_gene_name": "Mir187"
+  },
+  {
+    "human_gene_id": "ENSG00000253038",
+    "human_gene_name": "RNU6-706P",
+    "mouse_gene_id": "ENSMUSG00002076182",
+    "mouse_gene_name": "Gm55060"
+  },
+  {
+    "human_gene_id": "ENSG00000206944",
+    "human_gene_name": "RNU6-708P",
+    "mouse_gene_id": "ENSMUSG00000118967",
+    "mouse_gene_name": "Gm23142"
+  },
+  {
+    "human_gene_id": "ENSG00000206944",
+    "human_gene_name": "RNU6-708P",
+    "mouse_gene_id": "ENSMUSG00000119880",
+    "mouse_gene_name": "Gm22716"
+  },
+  {
+    "human_gene_id": "ENSG00000206944",
+    "human_gene_name": "RNU6-708P",
+    "mouse_gene_id": "ENSMUSG00000064407",
+    "mouse_gene_name": "Gm23926"
+  },
+  {
+    "human_gene_id": "ENSG00000206944",
+    "human_gene_name": "RNU6-708P",
+    "mouse_gene_id": "ENSMUSG00000119310",
+    "mouse_gene_name": "Gm26240"
+  },
+  {
+    "human_gene_id": "ENSG00000206944",
+    "human_gene_name": "RNU6-708P",
+    "mouse_gene_id": "ENSMUSG00000075934",
+    "mouse_gene_name": "Gm24423"
+  },
+  {
+    "human_gene_id": "ENSG00000206769",
+    "human_gene_name": "RNU6-116P",
+    "mouse_gene_id": "ENSMUSG00000119543",
+    "mouse_gene_name": "Gm23648"
+  },
+  {
+    "human_gene_id": "ENSG00000206769",
+    "human_gene_name": "RNU6-116P",
+    "mouse_gene_id": "ENSMUSG00000119760",
+    "mouse_gene_name": "Gm26177"
+  },
+  {
+    "human_gene_id": "ENSG00000252555",
+    "human_gene_name": "RNU6-567P",
+    "mouse_gene_id": "ENSMUSG00000088830",
+    "mouse_gene_name": "Gm23545"
+  },
+  {
+    "human_gene_id": "ENSG00000207072",
+    "human_gene_name": "RNU6-39P",
+    "mouse_gene_id": "ENSMUSG00000119383",
+    "mouse_gene_name": "Gm26285"
+  },
+  {
+    "human_gene_id": "ENSG00000199728",
+    "human_gene_name": "RNU6-655P",
+    "mouse_gene_id": "ENSMUSG00000065722",
+    "mouse_gene_name": "Gm26166"
+  },
+  {
+    "human_gene_id": "ENSG00000175065",
+    "human_gene_name": "DSG4",
+    "mouse_gene_id": "ENSMUSG00000001804",
+    "mouse_gene_name": "Dsg4"
+  },
+  {
+    "human_gene_id": "ENSG00000207298",
+    "human_gene_name": "RNU6-83P",
+    "mouse_gene_id": "ENSMUSG00000065657",
+    "mouse_gene_name": "Gm25337"
+  },
+  {
+    "human_gene_id": "ENSG00000207298",
+    "human_gene_name": "RNU6-83P",
+    "mouse_gene_id": "ENSMUSG00000064921",
+    "mouse_gene_name": "Gm22229"
+  },
+  {
+    "human_gene_id": "ENSG00000222472",
+    "human_gene_name": "RN7SKP7",
+    "mouse_gene_id": "ENSMUSG00002076100",
+    "mouse_gene_name": "Gm54931"
+  },
+  {
+    "human_gene_id": "ENSG00000186009",
+    "human_gene_name": "ATP4B",
+    "mouse_gene_id": "ENSMUSG00000031449",
+    "mouse_gene_name": "Atp4b"
+  },
+  {
+    "human_gene_id": "ENSG00000186047",
+    "human_gene_name": "DLEU7",
+    "mouse_gene_id": "ENSMUSG00000048281",
+    "mouse_gene_name": "Dleu7"
+  },
+  {
+    "human_gene_id": "ENSG00000139737",
+    "human_gene_name": "SLAIN1",
+    "mouse_gene_id": "ENSMUSG00000055717",
+    "mouse_gene_name": "Slain1"
+  },
+  {
+    "human_gene_id": "ENSG00000206602",
+    "human_gene_name": "SNORD58A",
+    "mouse_gene_id": "ENSMUSG00000064647",
+    "mouse_gene_name": "Gm23301"
+  },
+  {
+    "human_gene_id": "ENSG00000271982",
+    "human_gene_name": "SNORD58B",
+    "mouse_gene_id": "ENSMUSG00000064871",
+    "mouse_gene_name": "Snord58b"
+  },
+  {
+    "human_gene_id": "ENSG00000271982",
+    "human_gene_name": "SNORD58B",
+    "mouse_gene_id": "ENSMUSG00000065853",
+    "mouse_gene_name": "Gm22354"
+  },
+  {
+    "human_gene_id": "ENSG00000207154",
+    "human_gene_name": "RNU1-46P",
+    "mouse_gene_id": "ENSMUSG00000064512",
+    "mouse_gene_name": "Gm22456"
+  },
+  {
+    "human_gene_id": "ENSG00000207154",
+    "human_gene_name": "RNU1-46P",
+    "mouse_gene_id": "ENSMUSG00000065764",
+    "mouse_gene_name": "Gm23850"
+  },
+  {
+    "human_gene_id": "ENSG00000176624",
+    "human_gene_name": "MEX3C",
+    "mouse_gene_id": "ENSMUSG00000037253",
+    "mouse_gene_name": "Mex3c"
+  },
+  {
+    "human_gene_id": "ENSG00000119547",
+    "human_gene_name": "ONECUT2",
+    "mouse_gene_id": "ENSMUSG00000045991",
+    "mouse_gene_name": "Onecut2"
+  },
+  {
+    "human_gene_id": "ENSG00000284440",
+    "human_gene_name": "MIR122",
+    "mouse_gene_id": "ENSMUSG00000065402",
+    "mouse_gene_name": "Mir122"
+  },
+  {
+    "human_gene_id": "ENSG00000201598",
+    "human_gene_name": "RNU6-219P",
+    "mouse_gene_id": "ENSMUSG00002076950",
+    "mouse_gene_name": "Gm54984"
+  },
+  {
+    "human_gene_id": "ENSG00000201598",
+    "human_gene_name": "RNU6-219P",
+    "mouse_gene_id": "ENSMUSG00000070173",
+    "mouse_gene_name": "Gm24164"
+  },
+  {
+    "human_gene_id": "ENSG00000173482",
+    "human_gene_name": "PTPRM",
+    "mouse_gene_id": "ENSMUSG00000033278",
+    "mouse_gene_name": "Ptprm"
+  },
+  {
+    "human_gene_id": "ENSG00000133116",
+    "human_gene_name": "KL",
+    "mouse_gene_id": "ENSMUSG00000058488",
+    "mouse_gene_name": "Kl"
+  },
+  {
+    "human_gene_id": "ENSG00000136099",
+    "human_gene_name": "PCDH8",
+    "mouse_gene_id": "ENSMUSG00000036422",
+    "mouse_gene_name": "Pcdh8"
+  },
+  {
+    "human_gene_id": "ENSG00000223024",
+    "human_gene_name": "RNU6-55P",
+    "mouse_gene_id": "ENSMUSG00000087825",
+    "mouse_gene_name": "Gm22279"
+  },
+  {
+    "human_gene_id": "ENSG00000223024",
+    "human_gene_name": "RNU6-55P",
+    "mouse_gene_id": "ENSMUSG00002075997",
+    "mouse_gene_name": "Gm54642"
+  },
+  {
+    "human_gene_id": "ENSG00000276644",
+    "human_gene_name": "DACH1",
+    "mouse_gene_id": "ENSMUSG00000055639",
+    "mouse_gene_name": "Dach1"
+  },
+  {
+    "human_gene_id": "ENSG00000201155",
+    "human_gene_name": "RNU1-24P",
+    "mouse_gene_id": "ENSMUSG00002075834",
+    "mouse_gene_name": "Gm55063"
+  },
+  {
+    "human_gene_id": "ENSG00000201155",
+    "human_gene_name": "RNU1-24P",
+    "mouse_gene_id": "ENSMUSG00000088258",
+    "mouse_gene_name": "Gm24291"
+  },
+  {
+    "human_gene_id": "ENSG00000201155",
+    "human_gene_name": "RNU1-24P",
+    "mouse_gene_id": "ENSMUSG00000064565",
+    "mouse_gene_name": "Gm24145"
+  },
+  {
+    "human_gene_id": "ENSG00000201155",
+    "human_gene_name": "RNU1-24P",
+    "mouse_gene_id": "ENSMUSG00000118890",
+    "mouse_gene_name": "Gm23727"
+  },
+  {
+    "human_gene_id": "ENSG00000201155",
+    "human_gene_name": "RNU1-24P",
+    "mouse_gene_id": "ENSMUSG00000065804",
+    "mouse_gene_name": "Gm23039"
+  },
+  {
+    "human_gene_id": "ENSG00000200840",
+    "human_gene_name": "RNU6-82P",
+    "mouse_gene_id": "ENSMUSG00002075277",
+    "mouse_gene_name": "Gm55093"
+  },
+  {
+    "human_gene_id": "ENSG00000083635",
+    "human_gene_name": "NUFIP1",
+    "mouse_gene_id": "ENSMUSG00000022009",
+    "mouse_gene_name": "Nufip1"
+  },
+  {
+    "human_gene_id": "ENSG00000154856",
+    "human_gene_name": "APCDD1",
+    "mouse_gene_id": "ENSMUSG00000071847",
+    "mouse_gene_name": "Apcdd1"
+  },
+  {
+    "human_gene_id": "ENSG00000223341",
+    "human_gene_name": "RN7SKP3",
+    "mouse_gene_id": "ENSMUSG00002076799",
+    "mouse_gene_name": "Gm55378"
+  },
+  {
+    "human_gene_id": "ENSG00000180332",
+    "human_gene_name": "KCTD4",
+    "mouse_gene_id": "ENSMUSG00000046523",
+    "mouse_gene_name": "Kctd4"
+  },
+  {
+    "human_gene_id": "ENSG00000151846",
+    "human_gene_name": "PABPC3",
+    "mouse_gene_id": "ENSMUSG00000046173",
+    "mouse_gene_name": "Pabpc6"
+  },
+  {
+    "human_gene_id": "ENSG00000151846",
+    "human_gene_name": "PABPC3",
+    "mouse_gene_id": "ENSMUSG00000051732",
+    "mouse_gene_name": "Pabpc2"
+  },
+  {
+    "human_gene_id": "ENSG00000165566",
+    "human_gene_name": "AMER2",
+    "mouse_gene_id": "ENSMUSG00000021986",
+    "mouse_gene_name": "Amer2"
+  },
+  {
+    "human_gene_id": "ENSG00000120669",
+    "human_gene_name": "SOHLH2",
+    "mouse_gene_id": "ENSMUSG00000027794",
+    "mouse_gene_name": "Sohlh2"
+  },
+  {
+    "human_gene_id": "ENSG00000221139",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000080607",
+    "mouse_gene_name": "Gm23839"
+  },
+  {
+    "human_gene_id": "ENSG00000252677",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00000088772",
+    "mouse_gene_name": "Gm26040"
+  },
+  {
+    "human_gene_id": "ENSG00000171791",
+    "human_gene_name": "BCL2",
+    "mouse_gene_id": "ENSMUSG00000057329",
+    "mouse_gene_name": "Bcl2"
+  },
+  {
+    "human_gene_id": "ENSG00000242715",
+    "human_gene_name": "CCDC169",
+    "mouse_gene_id": "ENSMUSG00000048655",
+    "mouse_gene_name": "Ccdc169"
+  },
+  {
+    "human_gene_id": "ENSG00000176194",
+    "human_gene_name": "CIDEA",
+    "mouse_gene_id": "ENSMUSG00000024526",
+    "mouse_gene_name": "Cidea"
+  },
+  {
+    "human_gene_id": "ENSG00000134762",
+    "human_gene_name": "DSC3",
+    "mouse_gene_id": "ENSMUSG00000059898",
+    "mouse_gene_name": "Dsc3"
+  },
+  {
+    "human_gene_id": "ENSG00000134765",
+    "human_gene_name": "DSC1",
+    "mouse_gene_id": "ENSMUSG00000044322",
+    "mouse_gene_name": "Dsc1"
+  },
+  {
+    "human_gene_id": "ENSG00000102794",
+    "human_gene_name": "ACOD1",
+    "mouse_gene_id": "ENSMUSG00000022126",
+    "mouse_gene_name": "Acod1"
+  },
+  {
+    "human_gene_id": "ENSG00000183098",
+    "human_gene_name": "GPC6",
+    "mouse_gene_id": "ENSMUSG00000058571",
+    "mouse_gene_name": "Gpc6"
+  },
+  {
+    "human_gene_id": "ENSG00000134760",
+    "human_gene_name": "DSG1",
+    "mouse_gene_id": "ENSMUSG00000061928",
+    "mouse_gene_name": "Dsg1b"
+  },
+  {
+    "human_gene_id": "ENSG00000134760",
+    "human_gene_name": "DSG1",
+    "mouse_gene_id": "ENSMUSG00000069441",
+    "mouse_gene_name": "Dsg1a"
+  },
+  {
+    "human_gene_id": "ENSG00000134760",
+    "human_gene_name": "DSG1",
+    "mouse_gene_id": "ENSMUSG00000034774",
+    "mouse_gene_name": "Dsg1c"
+  },
+  {
+    "human_gene_id": "ENSG00000080166",
+    "human_gene_name": "DCT",
+    "mouse_gene_id": "ENSMUSG00000022129",
+    "mouse_gene_name": "Dct"
+  },
+  {
+    "human_gene_id": "ENSG00000207019",
+    "human_gene_name": "RNU6-167P",
+    "mouse_gene_id": "ENSMUSG00000088705",
+    "mouse_gene_name": "Gm25549"
+  },
+  {
+    "human_gene_id": "ENSG00000154611",
+    "human_gene_name": "PSMA8",
+    "mouse_gene_id": "ENSMUSG00000036743",
+    "mouse_gene_name": "Psma8"
+  },
+  {
+    "human_gene_id": "ENSG00000125285",
+    "human_gene_name": "SOX21",
+    "mouse_gene_id": "ENSMUSG00000061517",
+    "mouse_gene_name": "Sox21"
+  },
+  {
+    "human_gene_id": "ENSG00000252335",
+    "human_gene_name": "RNU6-62P",
+    "mouse_gene_id": "ENSMUSG00000065223",
+    "mouse_gene_name": "Gm25792"
+  },
+  {
+    "human_gene_id": "ENSG00000185352",
+    "human_gene_name": "HS6ST3",
+    "mouse_gene_id": "ENSMUSG00000053465",
+    "mouse_gene_name": "Hs6st3"
+  },
+  {
+    "human_gene_id": "ENSG00000131196",
+    "human_gene_name": "NFATC1",
+    "mouse_gene_id": "ENSMUSG00000033016",
+    "mouse_gene_name": "Nfatc1"
+  },
+  {
+    "human_gene_id": "ENSG00000198033",
+    "human_gene_name": "TUBA3C",
+    "mouse_gene_id": "ENSMUSG00000067338",
+    "mouse_gene_name": "Tuba3b"
+  },
+  {
+    "human_gene_id": "ENSG00000179399",
+    "human_gene_name": "GPC5",
+    "mouse_gene_id": "ENSMUSG00000022112",
+    "mouse_gene_name": "Gpc5"
+  },
+  {
+    "human_gene_id": "ENSG00000183463",
+    "human_gene_name": "URAD",
+    "mouse_gene_id": "ENSMUSG00000025481",
+    "mouse_gene_name": "Urah"
+  },
+  {
+    "human_gene_id": "ENSG00000205863",
+    "human_gene_name": "C1QTNF9B",
+    "mouse_gene_id": "ENSMUSG00000071347",
+    "mouse_gene_name": "C1qtnf9"
+  },
+  {
+    "human_gene_id": "ENSG00000139618",
+    "human_gene_name": "BRCA2",
+    "mouse_gene_id": "ENSMUSG00000041147",
+    "mouse_gene_name": "Brca2"
+  },
+  {
+    "human_gene_id": "ENSG00000153487",
+    "human_gene_name": "ING1",
+    "mouse_gene_id": "ENSMUSG00000045969",
+    "mouse_gene_name": "Ing1"
+  },
+  {
+    "human_gene_id": "ENSG00000122034",
+    "human_gene_name": "GTF3A",
+    "mouse_gene_id": "ENSMUSG00000016503",
+    "mouse_gene_name": "Gtf3a"
+  },
+  {
+    "human_gene_id": "ENSG00000222969",
+    "human_gene_name": "RN7SKP8",
+    "mouse_gene_id": "ENSMUSG00002076799",
+    "mouse_gene_name": "Gm55378"
+  },
+  {
+    "human_gene_id": "ENSG00000053747",
+    "human_gene_name": "LAMA3",
+    "mouse_gene_id": "ENSMUSG00000024421",
+    "mouse_gene_name": "Lama3"
+  },
+  {
+    "human_gene_id": "ENSG00000283199",
+    "human_gene_name": "C13orf46",
+    "mouse_gene_id": "ENSMUSG00000031452",
+    "mouse_gene_name": "1700029H14Rik"
+  },
+  {
+    "human_gene_id": "ENSG00000226792",
+    "human_gene_name": "C13orf42",
+    "mouse_gene_id": "ENSMUSG00000100486",
+    "mouse_gene_name": "Gm4131"
+  },
+  {
+    "human_gene_id": "ENSG00000207500",
+    "human_gene_name": "SNORD102",
+    "mouse_gene_id": "ENSMUSG00000077185",
+    "mouse_gene_name": "Gm25091"
+  },
+  {
+    "human_gene_id": "ENSG00000207051",
+    "human_gene_name": "SNORA27",
+    "mouse_gene_id": "ENSMUSG00000077564",
+    "mouse_gene_name": "Gm23202"
+  },
+  {
+    "human_gene_id": "ENSG00000141404",
+    "human_gene_name": "GNAL",
+    "mouse_gene_id": "ENSMUSG00000024524",
+    "mouse_gene_name": "Gnal"
+  },
+  {
+    "human_gene_id": "ENSG00000141434",
+    "human_gene_name": "MEP1B",
+    "mouse_gene_id": "ENSMUSG00000024313",
+    "mouse_gene_name": "Mep1b"
+  },
+  {
+    "human_gene_id": "ENSG00000167210",
+    "human_gene_name": "LOXHD1",
+    "mouse_gene_id": "ENSMUSG00000032818",
+    "mouse_gene_name": "Loxhd1"
+  },
+  {
+    "human_gene_id": "ENSG00000197641",
+    "human_gene_name": "SERPINB13",
+    "mouse_gene_id": "ENSMUSG00000048775",
+    "mouse_gene_name": "Serpinb13"
+  },
+  {
+    "human_gene_id": "ENSG00000206073",
+    "human_gene_name": "SERPINB4",
+    "mouse_gene_id": "ENSMUSG00000044594",
+    "mouse_gene_name": "Serpinb3a"
+  },
+  {
+    "human_gene_id": "ENSG00000206073",
+    "human_gene_name": "SERPINB4",
+    "mouse_gene_id": "ENSMUSG00000058017",
+    "mouse_gene_name": "Serpinb3d"
+  },
+  {
+    "human_gene_id": "ENSG00000206073",
+    "human_gene_name": "SERPINB4",
+    "mouse_gene_id": "ENSMUSG00000073602",
+    "mouse_gene_name": "Serpinb3b"
+  },
+  {
+    "human_gene_id": "ENSG00000206073",
+    "human_gene_name": "SERPINB4",
+    "mouse_gene_id": "ENSMUSG00000073601",
+    "mouse_gene_name": "Serpinb3c"
+  },
+  {
+    "human_gene_id": "ENSG00000206072",
+    "human_gene_name": "SERPINB11",
+    "mouse_gene_id": "ENSMUSG00000026327",
+    "mouse_gene_name": "Serpinb11"
+  },
+  {
+    "human_gene_id": "ENSG00000187773",
+    "human_gene_name": "DIPK1C",
+    "mouse_gene_id": "ENSMUSG00000047992",
+    "mouse_gene_name": "Dipk1c"
+  },
+  {
+    "human_gene_id": "ENSG00000206043",
+    "human_gene_name": "C18orf63",
+    "mouse_gene_id": "ENSMUSG00000117781",
+    "mouse_gene_name": "Gm17266"
+  },
+  {
+    "human_gene_id": "ENSG00000166634",
+    "human_gene_name": "SERPINB12",
+    "mouse_gene_id": "ENSMUSG00000059956",
+    "mouse_gene_name": "Serpinb12"
+  },
+  {
+    "human_gene_id": "ENSG00000141391",
+    "human_gene_name": "PRELID3A",
+    "mouse_gene_id": "ENSMUSG00000024530",
+    "mouse_gene_name": "Prelid3a"
+  },
+  {
+    "human_gene_id": "ENSG00000206418",
+    "human_gene_name": "RAB12",
+    "mouse_gene_id": "ENSMUSG00000023460",
+    "mouse_gene_name": "Rab12"
+  },
+  {
+    "human_gene_id": "ENSG00000141759",
+    "human_gene_name": "TXNL4A",
+    "mouse_gene_id": "ENSMUSG00000057130",
+    "mouse_gene_name": "Txnl4a"
+  },
+  {
+    "human_gene_id": "ENSG00000101546",
+    "human_gene_name": "RBFA",
+    "mouse_gene_id": "ENSMUSG00000024570",
+    "mouse_gene_name": "Rbfa"
+  },
+  {
+    "human_gene_id": "ENSG00000178184",
+    "human_gene_name": "PARD6G",
+    "mouse_gene_id": "ENSMUSG00000056214",
+    "mouse_gene_name": "Pard6g"
+  },
+  {
+    "human_gene_id": "ENSG00000091157",
+    "human_gene_name": "WDR7",
+    "mouse_gene_id": "ENSMUSG00000040560",
+    "mouse_gene_name": "Wdr7"
+  },
+  {
+    "human_gene_id": "ENSG00000177143",
+    "human_gene_name": "CETN1",
+    "mouse_gene_id": "ENSMUSG00000050996",
+    "mouse_gene_name": "Cetn1"
+  },
+  {
+    "human_gene_id": "ENSG00000206422",
+    "human_gene_name": "LRRC30",
+    "mouse_gene_id": "ENSMUSG00000073375",
+    "mouse_gene_name": "Lrrc30"
+  },
+  {
+    "human_gene_id": "ENSG00000168454",
+    "human_gene_name": "TXNDC2",
+    "mouse_gene_id": "ENSMUSG00000050612",
+    "mouse_gene_name": "Txndc2"
+  },
+  {
+    "human_gene_id": "ENSG00000154864",
+    "human_gene_name": "PIEZO2",
+    "mouse_gene_id": "ENSMUSG00000041482",
+    "mouse_gene_name": "Piezo2"
+  },
+  {
+    "human_gene_id": "ENSG00000166960",
+    "human_gene_name": "CCDC178",
+    "mouse_gene_id": "ENSMUSG00000024306",
+    "mouse_gene_name": "Ccdc178"
+  },
+  {
+    "human_gene_id": "ENSG00000176136",
+    "human_gene_name": "MC5R",
+    "mouse_gene_id": "ENSMUSG00000007480",
+    "mouse_gene_name": "Mc5r"
+  },
+  {
+    "human_gene_id": "ENSG00000174448",
+    "human_gene_name": "STARD6",
+    "mouse_gene_id": "ENSMUSG00000079608",
+    "mouse_gene_name": "Stard6"
+  },
+  {
+    "human_gene_id": "ENSG00000283927",
+    "human_gene_name": "MIR133A1",
+    "mouse_gene_id": "ENSMUSG00000065399",
+    "mouse_gene_name": "Mir133a-1"
+  },
+  {
+    "human_gene_id": "ENSG00000284453",
+    "human_gene_name": "MIR1-2",
+    "mouse_gene_id": "ENSMUSG00000106348",
+    "mouse_gene_name": "Mir1a-2"
+  },
+  {
+    "human_gene_id": "ENSG00000252325",
+    "human_gene_name": "RNU6-1038P",
+    "mouse_gene_id": "ENSMUSG00000118814",
+    "mouse_gene_name": "Gm24925"
+  },
+  {
+    "human_gene_id": "ENSG00000134443",
+    "human_gene_name": "GRP",
+    "mouse_gene_id": "ENSMUSG00000024517",
+    "mouse_gene_name": "Grp"
+  },
+  {
+    "human_gene_id": "ENSG00000134438",
+    "human_gene_name": "RAX",
+    "mouse_gene_id": "ENSMUSG00000024518",
+    "mouse_gene_name": "Rax"
+  },
+  {
+    "human_gene_id": "ENSG00000166569",
+    "human_gene_name": "CPLX4",
+    "mouse_gene_id": "ENSMUSG00000024519",
+    "mouse_gene_name": "Cplx4"
+  },
+  {
+    "human_gene_id": "ENSG00000197046",
+    "human_gene_name": "SIGLEC15",
+    "mouse_gene_id": "ENSMUSG00000091055",
+    "mouse_gene_name": "Siglec15"
+  },
+  {
+    "human_gene_id": "ENSG00000222179",
+    "human_gene_name": "RN7SKP26",
+    "mouse_gene_id": "ENSMUSG00002074913",
+    "mouse_gene_name": "Gm55956"
+  },
+  {
+    "human_gene_id": "ENSG00000222179",
+    "human_gene_name": "RN7SKP26",
+    "mouse_gene_id": "ENSMUSG00002076618",
+    "mouse_gene_name": "Gm55102"
+  },
+  {
+    "human_gene_id": "ENSG00000141431",
+    "human_gene_name": "ASXL3",
+    "mouse_gene_id": "ENSMUSG00000045215",
+    "mouse_gene_name": "Asxl3"
+  },
+  {
+    "human_gene_id": "ENSG00000175322",
+    "human_gene_name": "ZNF519",
+    "mouse_gene_id": "ENSMUSG00000060314",
+    "mouse_gene_name": "Zfp941"
+  },
+  {
+    "human_gene_id": "ENSG00000222018",
+    "human_gene_name": "C21orf140",
+    "mouse_gene_id": "ENSMUSG00000051728",
+    "mouse_gene_name": "Fam243"
+  },
+  {
+    "human_gene_id": "ENSG00000243627",
+    "human_gene_name": "SMIM34",
+    "mouse_gene_id": "ENSMUSG00000116967",
+    "mouse_gene_name": "Smim34"
+  },
+  {
+    "human_gene_id": "ENSG00000242550",
+    "human_gene_name": "SERPINB10",
+    "mouse_gene_id": "ENSMUSG00000092572",
+    "mouse_gene_name": "Serpinb10"
+  },
+  {
+    "human_gene_id": "ENSG00000236396",
+    "human_gene_name": "SLC35G4",
+    "mouse_gene_id": "ENSMUSG00000018776",
+    "mouse_gene_name": "Slc35g3"
+  },
+  {
+    "human_gene_id": "ENSG00000255112",
+    "human_gene_name": "CHMP1B",
+    "mouse_gene_id": "ENSMUSG00000109901",
+    "mouse_gene_name": "Chmp1b"
+  },
+  {
+    "human_gene_id": "ENSG00000179981",
+    "human_gene_name": "TSHZ1",
+    "mouse_gene_id": "ENSMUSG00000046982",
+    "mouse_gene_name": "Tshz1"
+  },
+  {
+    "human_gene_id": "ENSG00000252097",
+    "human_gene_name": "RNU6-346P",
+    "mouse_gene_id": "ENSMUSG00000089271",
+    "mouse_gene_name": "Gm24552"
+  },
+  {
+    "human_gene_id": "ENSG00000130856",
+    "human_gene_name": "ZNF236",
+    "mouse_gene_id": "ENSMUSG00000041258",
+    "mouse_gene_name": "Zfp236"
+  },
+  {
+    "human_gene_id": "ENSG00000275631",
+    "human_gene_name": "U1",
+    "mouse_gene_id": "ENSMUSG00000087812",
+    "mouse_gene_name": "Gm25115"
+  },
+  {
+    "human_gene_id": "ENSG00000283904",
+    "human_gene_name": "MIR155",
+    "mouse_gene_id": "ENSMUSG00000065397",
+    "mouse_gene_name": "Mir155"
+  },
+  {
+    "human_gene_id": "ENSG00000182093",
+    "human_gene_name": "GET1",
+    "mouse_gene_id": "ENSMUSG00000023147",
+    "mouse_gene_name": "Get1"
+  },
+  {
+    "human_gene_id": "ENSG00000212329",
+    "human_gene_name": "RNU6-316P",
+    "mouse_gene_id": "ENSMUSG00000087825",
+    "mouse_gene_name": "Gm22279"
+  },
+  {
+    "human_gene_id": "ENSG00000212329",
+    "human_gene_name": "RNU6-316P",
+    "mouse_gene_id": "ENSMUSG00002075997",
+    "mouse_gene_name": "Gm54642"
+  },
+  {
+    "human_gene_id": "ENSG00000180011",
+    "human_gene_name": "PTGR3",
+    "mouse_gene_id": "ENSMUSG00000049090",
+    "mouse_gene_name": "Ptgr3"
+  },
+  {
+    "human_gene_id": "ENSG00000207278",
+    "human_gene_name": "RNU6-831P",
+    "mouse_gene_id": "ENSMUSG00000119452",
+    "mouse_gene_name": "Gm23794"
+  },
+  {
+    "human_gene_id": "ENSG00000170579",
+    "human_gene_name": "DLGAP1",
+    "mouse_gene_id": "ENSMUSG00000003279",
+    "mouse_gene_name": "Dlgap1"
+  },
+  {
+    "human_gene_id": "ENSG00000205726",
+    "human_gene_name": "ITSN1",
+    "mouse_gene_id": "ENSMUSG00000022957",
+    "mouse_gene_name": "Itsn1"
+  },
+  {
+    "human_gene_id": "ENSG00000187323",
+    "human_gene_name": "DCC",
+    "mouse_gene_id": "ENSMUSG00000060534",
+    "mouse_gene_name": "Dcc"
+  },
+  {
+    "human_gene_id": "ENSG00000171873",
+    "human_gene_name": "ADRA1D",
+    "mouse_gene_id": "ENSMUSG00000027335",
+    "mouse_gene_name": "Adra1d"
+  },
+  {
+    "human_gene_id": "ENSG00000125903",
+    "human_gene_name": "DEFB129",
+    "mouse_gene_id": "ENSMUSG00000074681",
+    "mouse_gene_name": "Defb23"
+  },
+  {
+    "human_gene_id": "ENSG00000178591",
+    "human_gene_name": "DEFB125",
+    "mouse_gene_id": "ENSMUSG00000074680",
+    "mouse_gene_name": "Defb26"
+  },
+  {
+    "human_gene_id": "ENSG00000173404",
+    "human_gene_name": "INSM1",
+    "mouse_gene_id": "ENSMUSG00000068154",
+    "mouse_gene_name": "Insm1"
+  },
+  {
+    "human_gene_id": "ENSG00000185982",
+    "human_gene_name": "DEFB128",
+    "mouse_gene_id": "ENSMUSG00000049560",
+    "mouse_gene_name": "Defb20"
+  },
+  {
+    "human_gene_id": "ENSG00000067900",
+    "human_gene_name": "ROCK1",
+    "mouse_gene_id": "ENSMUSG00000024290",
+    "mouse_gene_name": "Rock1"
+  },
+  {
+    "human_gene_id": "ENSG00000132640",
+    "human_gene_name": "BTBD3",
+    "mouse_gene_id": "ENSMUSG00000062098",
+    "mouse_gene_name": "Btbd3"
+  },
+  {
+    "human_gene_id": "ENSG00000101230",
+    "human_gene_name": "ISM1",
+    "mouse_gene_id": "ENSMUSG00000074766",
+    "mouse_gene_name": "Ism1"
+  },
+  {
+    "human_gene_id": "ENSG00000215397",
+    "human_gene_name": "SCRT2",
+    "mouse_gene_id": "ENSMUSG00000060257",
+    "mouse_gene_name": "Scrt2"
+  },
+  {
+    "human_gene_id": "ENSG00000088782",
+    "human_gene_name": "DEFB127",
+    "mouse_gene_id": "ENSMUSG00000027468",
+    "mouse_gene_name": "Defb22"
+  },
+  {
+    "human_gene_id": "ENSG00000215547",
+    "human_gene_name": "DEFB115",
+    "mouse_gene_id": "ENSMUSG00000074679",
+    "mouse_gene_name": "Defb28"
+  },
+  {
+    "human_gene_id": "ENSG00000101447",
+    "human_gene_name": "FAM83D",
+    "mouse_gene_id": "ENSMUSG00000027654",
+    "mouse_gene_name": "Fam83d"
+  },
+  {
+    "human_gene_id": "ENSG00000158445",
+    "human_gene_name": "KCNB1",
+    "mouse_gene_id": "ENSMUSG00000050556",
+    "mouse_gene_name": "Kcnb1"
+  },
+  {
+    "human_gene_id": "ENSG00000124089",
+    "human_gene_name": "MC3R",
+    "mouse_gene_id": "ENSMUSG00000038537",
+    "mouse_gene_name": "Mc3r"
+  },
+  {
+    "human_gene_id": "ENSG00000054803",
+    "human_gene_name": "CBLN4",
+    "mouse_gene_id": "ENSMUSG00000067578",
+    "mouse_gene_name": "Cbln4"
+  },
+  {
+    "human_gene_id": "ENSG00000141437",
+    "human_gene_name": "SLC25A52",
+    "mouse_gene_id": "ENSMUSG00000045973",
+    "mouse_gene_name": "Slc25a51"
+  },
+  {
+    "human_gene_id": "ENSG00000130701",
+    "human_gene_name": "RBBP8NL",
+    "mouse_gene_id": "ENSMUSG00000038980",
+    "mouse_gene_name": "Rbbp8nl"
+  },
+  {
+    "human_gene_id": "ENSG00000222320",
+    "human_gene_name": "RNU6-1050P",
+    "mouse_gene_id": "ENSMUSG00000084550",
+    "mouse_gene_name": "Gm25269"
+  },
+  {
+    "human_gene_id": "ENSG00000206863",
+    "human_gene_name": "RNU5A-6P",
+    "mouse_gene_id": "ENSMUSG00000065658",
+    "mouse_gene_name": "Gm23102"
+  },
+  {
+    "human_gene_id": "ENSG00000124225",
+    "human_gene_name": "PMEPA1",
+    "mouse_gene_id": "ENSMUSG00000038400",
+    "mouse_gene_name": "Pmepa1"
+  },
+  {
+    "human_gene_id": "ENSG00000101115",
+    "human_gene_name": "SALL4",
+    "mouse_gene_id": "ENSMUSG00000027547",
+    "mouse_gene_name": "Sall4"
+  },
+  {
+    "human_gene_id": "ENSG00000132631",
+    "human_gene_name": "SCP2D1",
+    "mouse_gene_id": "ENSMUSG00000027431",
+    "mouse_gene_name": "Scp2d1"
+  },
+  {
+    "human_gene_id": "ENSG00000125533",
+    "human_gene_name": "BHLHE23",
+    "mouse_gene_id": "ENSMUSG00000045493",
+    "mouse_gene_name": "Bhlhe23"
+  },
+  {
+    "human_gene_id": "ENSG00000179242",
+    "human_gene_name": "CDH4",
+    "mouse_gene_id": "ENSMUSG00000000305",
+    "mouse_gene_name": "Cdh4"
+  },
+  {
+    "human_gene_id": "ENSG00000184402",
+    "human_gene_name": "SS18L1",
+    "mouse_gene_id": "ENSMUSG00000039086",
+    "mouse_gene_name": "Ss18l1"
+  },
+  {
+    "human_gene_id": "ENSG00000196074",
+    "human_gene_name": "SYCP2",
+    "mouse_gene_id": "ENSMUSG00000060445",
+    "mouse_gene_name": "Sycp2"
+  },
+  {
+    "human_gene_id": "ENSG00000130702",
+    "human_gene_name": "LAMA5",
+    "mouse_gene_id": "ENSMUSG00000015647",
+    "mouse_gene_name": "Lama5"
+  },
+  {
+    "human_gene_id": "ENSG00000283291",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075795",
+    "mouse_gene_name": "Gm54867"
+  },
+  {
+    "human_gene_id": "ENSG00000283291",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075637",
+    "mouse_gene_name": "Gm55073"
+  },
+  {
+    "human_gene_id": "ENSG00000200231",
+    "human_gene_name": "RNU1-23P",
+    "mouse_gene_id": "ENSMUSG00000088733",
+    "mouse_gene_name": "Gm23895"
+  },
+  {
+    "human_gene_id": "ENSG00000252467",
+    "human_gene_name": "RNU6-347P",
+    "mouse_gene_id": "ENSMUSG00000118977",
+    "mouse_gene_name": "Gm23567"
+  },
+  {
+    "human_gene_id": "ENSG00000207158",
+    "human_gene_name": "RNU6-929P",
+    "mouse_gene_id": "ENSMUSG00000118853",
+    "mouse_gene_name": "Gm23308"
+  },
+  {
+    "human_gene_id": "ENSG00000199017",
+    "human_gene_name": "MIR1-1",
+    "mouse_gene_id": "ENSMUSG00000070144",
+    "mouse_gene_name": "Mir1a-1"
+  },
+  {
+    "human_gene_id": "ENSG00000284508",
+    "human_gene_name": "MIR133A2",
+    "mouse_gene_id": "ENSMUSG00000065399",
+    "mouse_gene_name": "Mir133a-1"
+  },
+  {
+    "human_gene_id": "ENSG00000124232",
+    "human_gene_name": "RBPJL",
+    "mouse_gene_id": "ENSMUSG00000017007",
+    "mouse_gene_name": "Rbpjl"
+  },
+  {
+    "human_gene_id": "ENSG00000124251",
+    "human_gene_name": "TP53TG5",
+    "mouse_gene_id": "ENSMUSG00000017720",
+    "mouse_gene_name": "Trp53tg5"
+  },
+  {
+    "human_gene_id": "ENSG00000276859",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002076469",
+    "mouse_gene_name": "Gm56457"
+  },
+  {
+    "human_gene_id": "ENSG00000274491",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002076297",
+    "mouse_gene_name": "Gm56458"
+  },
+  {
+    "human_gene_id": "ENSG00000101162",
+    "human_gene_name": "TUBB1",
+    "mouse_gene_id": "ENSMUSG00000016255",
+    "mouse_gene_name": "Tubb1"
+  },
+  {
+    "human_gene_id": "ENSG00000125975",
+    "human_gene_name": "C20orf173",
+    "mouse_gene_id": "ENSMUSG00000074646",
+    "mouse_gene_name": "6430550D23Rik"
+  },
+  {
+    "human_gene_id": "ENSG00000160282",
+    "human_gene_name": "FTCD",
+    "mouse_gene_id": "ENSMUSG00000001155",
+    "mouse_gene_name": "Ftcd"
+  },
+  {
+    "human_gene_id": "ENSG00000197296",
+    "human_gene_name": "FITM2",
+    "mouse_gene_id": "ENSMUSG00000048486",
+    "mouse_gene_name": "Fitm2"
+  },
+  {
+    "human_gene_id": "ENSG00000124196",
+    "human_gene_name": "GTSF1L",
+    "mouse_gene_id": "ENSMUSG00000070708",
+    "mouse_gene_name": "Gtsf1l"
+  },
+  {
+    "human_gene_id": "ENSG00000099985",
+    "human_gene_name": "OSM",
+    "mouse_gene_id": "ENSMUSG00000058755",
+    "mouse_gene_name": "Osm"
+  },
+  {
+    "human_gene_id": "ENSG00000125879",
+    "human_gene_name": "OTOR",
+    "mouse_gene_id": "ENSMUSG00000027416",
+    "mouse_gene_name": "Otor"
+  },
+  {
+    "human_gene_id": "ENSG00000101074",
+    "human_gene_name": "R3HDML",
+    "mouse_gene_id": "ENSMUSG00000078949",
+    "mouse_gene_name": "R3hdml"
+  },
+  {
+    "human_gene_id": "ENSG00000100365",
+    "human_gene_name": "NCF4",
+    "mouse_gene_id": "ENSMUSG00000071715",
+    "mouse_gene_name": "Ncf4"
+  },
+  {
+    "human_gene_id": "ENSG00000207598",
+    "human_gene_name": "MIR124-3",
+    "mouse_gene_id": "ENSMUSG00000065454",
+    "mouse_gene_name": "Mir124a-3"
+  },
+  {
+    "human_gene_id": "ENSG00000101197",
+    "human_gene_name": "BIRC7",
+    "mouse_gene_id": "ENSMUSG00000038840",
+    "mouse_gene_name": "Birc7"
+  },
+  {
+    "human_gene_id": "ENSG00000101198",
+    "human_gene_name": "NKAIN4",
+    "mouse_gene_id": "ENSMUSG00000027574",
+    "mouse_gene_name": "Nkain4"
+  },
+  {
+    "human_gene_id": "ENSG00000241945",
+    "human_gene_name": "PWP2",
+    "mouse_gene_id": "ENSMUSG00000032834",
+    "mouse_gene_name": "Pwp2"
+  },
+  {
+    "human_gene_id": "ENSG00000222439",
+    "human_gene_name": "RNU6-994P",
+    "mouse_gene_id": "ENSMUSG00002076486",
+    "mouse_gene_name": "Gm54874"
+  },
+  {
+    "human_gene_id": "ENSG00000222439",
+    "human_gene_name": "RNU6-994P",
+    "mouse_gene_id": "ENSMUSG00000088644",
+    "mouse_gene_name": "Gm26485"
+  },
+  {
+    "human_gene_id": "ENSG00000101204",
+    "human_gene_name": "CHRNA4",
+    "mouse_gene_id": "ENSMUSG00000027577",
+    "mouse_gene_name": "Chrna4"
+  },
+  {
+    "human_gene_id": "ENSG00000100346",
+    "human_gene_name": "CACNA1I",
+    "mouse_gene_id": "ENSMUSG00000022416",
+    "mouse_gene_name": "Cacna1i"
+  },
+  {
+    "human_gene_id": "ENSG00000125863",
+    "human_gene_name": "MKKS",
+    "mouse_gene_id": "ENSMUSG00000027274",
+    "mouse_gene_name": "Mkks"
+  },
+  {
+    "human_gene_id": "ENSG00000142156",
+    "human_gene_name": "COL6A1",
+    "mouse_gene_id": "ENSMUSG00000001119",
+    "mouse_gene_name": "Col6a1"
+  },
+  {
+    "human_gene_id": "ENSG00000260903",
+    "human_gene_name": "XKR7",
+    "mouse_gene_id": "ENSMUSG00000042631",
+    "mouse_gene_name": "Xkr7"
+  },
+  {
+    "human_gene_id": "ENSG00000126003",
+    "human_gene_name": "PLAGL2",
+    "mouse_gene_id": "ENSMUSG00000051413",
+    "mouse_gene_name": "Plagl2"
+  },
+  {
+    "human_gene_id": "ENSG00000125998",
+    "human_gene_name": "FAM83C",
+    "mouse_gene_id": "ENSMUSG00000074647",
+    "mouse_gene_name": "Fam83c"
+  },
+  {
+    "human_gene_id": "ENSG00000101405",
+    "human_gene_name": "OXT",
+    "mouse_gene_id": "ENSMUSG00000027301",
+    "mouse_gene_name": "Oxt"
+  },
+  {
+    "human_gene_id": "ENSG00000160223",
+    "human_gene_name": "ICOSLG",
+    "mouse_gene_id": "ENSMUSG00000000732",
+    "mouse_gene_name": "Icosl"
+  },
+  {
+    "human_gene_id": "ENSG00000101200",
+    "human_gene_name": "AVP",
+    "mouse_gene_id": "ENSMUSG00000037727",
+    "mouse_gene_name": "Avp"
+  },
+  {
+    "human_gene_id": "ENSG00000201294",
+    "human_gene_name": "RNU6-1019P",
+    "mouse_gene_id": "ENSMUSG00000065787",
+    "mouse_gene_name": "Gm22681"
+  },
+  {
+    "human_gene_id": "ENSG00000201294",
+    "human_gene_name": "RNU6-1019P",
+    "mouse_gene_id": "ENSMUSG00000077265",
+    "mouse_gene_name": "Gm24430"
+  },
+  {
+    "human_gene_id": "ENSG00000201294",
+    "human_gene_name": "RNU6-1019P",
+    "mouse_gene_id": "ENSMUSG00000084473",
+    "mouse_gene_name": "Gm25784"
+  },
+  {
+    "human_gene_id": "ENSG00000179772",
+    "human_gene_name": "FOXS1",
+    "mouse_gene_id": "ENSMUSG00000074676",
+    "mouse_gene_name": "Foxs1"
+  },
+  {
+    "human_gene_id": "ENSG00000212555",
+    "human_gene_name": "RNU6-192P",
+    "mouse_gene_id": "ENSMUSG00000065320",
+    "mouse_gene_name": "Gm22056"
+  },
+  {
+    "human_gene_id": "ENSG00000125850",
+    "human_gene_name": "OVOL2",
+    "mouse_gene_id": "ENSMUSG00000037279",
+    "mouse_gene_name": "Ovol2"
+  },
+  {
+    "human_gene_id": "ENSG00000159267",
+    "human_gene_name": "HLCS",
+    "mouse_gene_id": "ENSMUSG00000040820",
+    "mouse_gene_name": "Hlcs"
+  },
+  {
+    "human_gene_id": "ENSG00000212232",
+    "human_gene_name": "SNORD17",
+    "mouse_gene_id": "ENSMUSG00000077714",
+    "mouse_gene_name": "Snord17"
+  },
+  {
+    "human_gene_id": "ENSG00000199719",
+    "human_gene_name": "RN7SKP74",
+    "mouse_gene_id": "ENSMUSG00002074958",
+    "mouse_gene_name": "Gm55136"
+  },
+  {
+    "human_gene_id": "ENSG00000232838",
+    "human_gene_name": "PET117",
+    "mouse_gene_id": "ENSMUSG00000098387",
+    "mouse_gene_name": "Pet117"
+  },
+  {
+    "human_gene_id": "ENSG00000159261",
+    "human_gene_name": "CLDN14",
+    "mouse_gene_id": "ENSMUSG00000047109",
+    "mouse_gene_name": "Cldn14"
+  },
+  {
+    "human_gene_id": "ENSG00000252103",
+    "human_gene_name": "RNU6-917P",
+    "mouse_gene_id": "ENSMUSG00000089035",
+    "mouse_gene_name": "Gm22157"
+  },
+  {
+    "human_gene_id": "ENSG00000252103",
+    "human_gene_name": "RNU6-917P",
+    "mouse_gene_id": "ENSMUSG00000118780",
+    "mouse_gene_name": "Gm24538"
+  },
+  {
+    "human_gene_id": "ENSG00000124104",
+    "human_gene_name": "SNX21",
+    "mouse_gene_id": "ENSMUSG00000050373",
+    "mouse_gene_name": "Snx21"
+  },
+  {
+    "human_gene_id": "ENSG00000176177",
+    "human_gene_name": "ENTHD1",
+    "mouse_gene_id": "ENSMUSG00000050439",
+    "mouse_gene_name": "Enthd1"
+  },
+  {
+    "human_gene_id": "ENSG00000160179",
+    "human_gene_name": "ABCG1",
+    "mouse_gene_id": "ENSMUSG00000024030",
+    "mouse_gene_name": "Abcg1"
+  },
+  {
+    "human_gene_id": "ENSG00000128342",
+    "human_gene_name": "LIF",
+    "mouse_gene_id": "ENSMUSG00000034394",
+    "mouse_gene_name": "Lif"
+  },
+  {
+    "human_gene_id": "ENSG00000100106",
+    "human_gene_name": "TRIOBP",
+    "mouse_gene_id": "ENSMUSG00000033088",
+    "mouse_gene_name": "Triobp"
+  },
+  {
+    "human_gene_id": "ENSG00000149609",
+    "human_gene_name": "C20orf144",
+    "mouse_gene_id": "ENSMUSG00000038523",
+    "mouse_gene_name": "1700003F12Rik"
+  },
+  {
+    "human_gene_id": "ENSG00000101292",
+    "human_gene_name": "PROKR2",
+    "mouse_gene_id": "ENSMUSG00000050558",
+    "mouse_gene_name": "Prokr2"
+  },
+  {
+    "human_gene_id": "ENSG00000125888",
+    "human_gene_name": "BANF2",
+    "mouse_gene_id": "ENSMUSG00000037307",
+    "mouse_gene_name": "Banf2"
+  },
+  {
+    "human_gene_id": "ENSG00000198900",
+    "human_gene_name": "TOP1",
+    "mouse_gene_id": "ENSMUSG00000070544",
+    "mouse_gene_name": "Top1"
+  },
+  {
+    "human_gene_id": "ENSG00000171864",
+    "human_gene_name": "PRND",
+    "mouse_gene_id": "ENSMUSG00000027338",
+    "mouse_gene_name": "Prnd"
+  },
+  {
+    "human_gene_id": "ENSG00000188636",
+    "human_gene_name": "RTL6",
+    "mouse_gene_id": "ENSMUSG00000055745",
+    "mouse_gene_name": "Rtl6"
+  },
+  {
+    "human_gene_id": "ENSG00000204103",
+    "human_gene_name": "MAFB",
+    "mouse_gene_id": "ENSMUSG00000074622",
+    "mouse_gene_name": "Mafb"
+  },
+  {
+    "human_gene_id": "ENSG00000130943",
+    "human_gene_name": "PKDREJ",
+    "mouse_gene_id": "ENSMUSG00000052496",
+    "mouse_gene_name": "Pkdrej"
+  },
+  {
+    "human_gene_id": "ENSG00000124107",
+    "human_gene_name": "SLPI",
+    "mouse_gene_id": "ENSMUSG00000017002",
+    "mouse_gene_name": "Slpi"
+  },
+  {
+    "human_gene_id": "ENSG00000101446",
+    "human_gene_name": "SPINT3",
+    "mouse_gene_id": "ENSMUSG00000074596",
+    "mouse_gene_name": "Spint3"
+  },
+  {
+    "human_gene_id": "ENSG00000138944",
+    "human_gene_name": "SHISAL1",
+    "mouse_gene_id": "ENSMUSG00000062760",
+    "mouse_gene_name": "Shisal1"
+  },
+  {
+    "human_gene_id": "ENSG00000142178",
+    "human_gene_name": "SIK1",
+    "mouse_gene_id": "ENSMUSG00000024042",
+    "mouse_gene_name": "Sik1"
+  },
+  {
+    "human_gene_id": "ENSG00000101448",
+    "human_gene_name": "EPPIN",
+    "mouse_gene_id": "ENSMUSG00000017733",
+    "mouse_gene_name": "Eppin"
+  },
+  {
+    "human_gene_id": "ENSG00000276871",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075795",
+    "mouse_gene_name": "Gm54867"
+  },
+  {
+    "human_gene_id": "ENSG00000276871",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075637",
+    "mouse_gene_name": "Gm55073"
+  },
+  {
+    "human_gene_id": "ENSG00000277248",
+    "human_gene_name": "U2",
+    "mouse_gene_id": "ENSMUSG00000084484",
+    "mouse_gene_name": "Gm23788"
+  },
+  {
+    "human_gene_id": "ENSG00000209482",
+    "human_gene_name": "SNORD83A",
+    "mouse_gene_id": "ENSMUSG00002075255",
+    "mouse_gene_name": "Gm55357"
+  },
+  {
+    "human_gene_id": "ENSG00000209480",
+    "human_gene_name": "SNORD83B",
+    "mouse_gene_id": "ENSMUSG00000077734",
+    "mouse_gene_name": "Snord83b"
+  },
+  {
+    "human_gene_id": "ENSG00000124116",
+    "human_gene_name": "WFDC3",
+    "mouse_gene_id": "ENSMUSG00000076434",
+    "mouse_gene_name": "Wfdc3"
+  },
+  {
+    "human_gene_id": "ENSG00000159216",
+    "human_gene_name": "RUNX1",
+    "mouse_gene_id": "ENSMUSG00000022952",
+    "mouse_gene_name": "Runx1"
+  },
+  {
+    "human_gene_id": "ENSG00000196431",
+    "human_gene_name": "CRYBA4",
+    "mouse_gene_id": "ENSMUSG00000066975",
+    "mouse_gene_name": "Cryba4"
+  },
+  {
+    "human_gene_id": "ENSG00000101470",
+    "human_gene_name": "TNNC2",
+    "mouse_gene_id": "ENSMUSG00000017300",
+    "mouse_gene_name": "Tnnc2"
+  },
+  {
+    "human_gene_id": "ENSG00000160233",
+    "human_gene_name": "LRRC3",
+    "mouse_gene_id": "ENSMUSG00000051652",
+    "mouse_gene_name": "Lrrc3"
+  },
+  {
+    "human_gene_id": "ENSG00000157617",
+    "human_gene_name": "C2CD2",
+    "mouse_gene_id": "ENSMUSG00000045975",
+    "mouse_gene_name": "C2cd2"
+  },
+  {
+    "human_gene_id": "ENSG00000101188",
+    "human_gene_name": "NTSR1",
+    "mouse_gene_id": "ENSMUSG00000027568",
+    "mouse_gene_name": "Ntsr1"
+  },
+  {
+    "human_gene_id": "ENSG00000199024",
+    "human_gene_name": "MIR103A2",
+    "mouse_gene_id": "ENSMUSG00000065563",
+    "mouse_gene_name": "Mir103-2"
+  },
+  {
+    "human_gene_id": "ENSG00000186458",
+    "human_gene_name": "DEFB132",
+    "mouse_gene_id": "ENSMUSG00000048500",
+    "mouse_gene_name": "Defb15"
+  },
+  {
+    "human_gene_id": "ENSG00000186458",
+    "human_gene_name": "DEFB132",
+    "mouse_gene_id": "ENSMUSG00000052554",
+    "mouse_gene_name": "Defb34"
+  },
+  {
+    "human_gene_id": "ENSG00000186458",
+    "human_gene_name": "DEFB132",
+    "mouse_gene_id": "ENSMUSG00000027468",
+    "mouse_gene_name": "Defb22"
+  },
+  {
+    "human_gene_id": "ENSG00000247315",
+    "human_gene_name": "ZCCHC3",
+    "mouse_gene_id": "ENSMUSG00000074682",
+    "mouse_gene_name": "Zcchc3"
+  },
+  {
+    "human_gene_id": "ENSG00000124098",
+    "human_gene_name": "FAM210B",
+    "mouse_gene_id": "ENSMUSG00000027495",
+    "mouse_gene_name": "Fam210b"
+  },
+  {
+    "human_gene_id": "ENSG00000133454",
+    "human_gene_name": "MYO18B",
+    "mouse_gene_id": "ENSMUSG00000072720",
+    "mouse_gene_name": "Myo18b"
+  },
+  {
+    "human_gene_id": "ENSG00000124103",
+    "human_gene_name": "FAM209A",
+    "mouse_gene_id": "ENSMUSG00000027505",
+    "mouse_gene_name": "Fam209"
+  },
+  {
+    "human_gene_id": "ENSG00000213714",
+    "human_gene_name": "FAM209B",
+    "mouse_gene_id": "ENSMUSG00000027505",
+    "mouse_gene_name": "Fam209"
+  },
+  {
+    "human_gene_id": "ENSG00000124201",
+    "human_gene_name": "ZNFX1",
+    "mouse_gene_id": "ENSMUSG00000039501",
+    "mouse_gene_name": "Znfx1"
+  },
+  {
+    "human_gene_id": "ENSG00000160180",
+    "human_gene_name": "TFF3",
+    "mouse_gene_id": "ENSMUSG00000024029",
+    "mouse_gene_name": "Tff3"
+  },
+  {
+    "human_gene_id": "ENSG00000243646",
+    "human_gene_name": "IL10RB",
+    "mouse_gene_id": "ENSMUSG00000022969",
+    "mouse_gene_name": "Il10rb"
+  },
+  {
+    "human_gene_id": "ENSG00000209042",
+    "human_gene_name": "SNORD12C",
+    "mouse_gene_id": "ENSMUSG00000077515",
+    "mouse_gene_name": "Gm25878"
+  },
+  {
+    "human_gene_id": "ENSG00000222365",
+    "human_gene_name": "SNORD12B",
+    "mouse_gene_id": "ENSMUSG00000077565",
+    "mouse_gene_name": "Gm23201"
+  },
+  {
+    "human_gene_id": "ENSG00000212304",
+    "human_gene_name": "SNORD12",
+    "mouse_gene_id": "ENSMUSG00000077698",
+    "mouse_gene_name": "Snord12"
+  },
+  {
+    "human_gene_id": "ENSG00000124217",
+    "human_gene_name": "MOCS3",
+    "mouse_gene_id": "ENSMUSG00000074576",
+    "mouse_gene_name": "Mocs3"
+  },
+  {
+    "human_gene_id": "ENSG00000101336",
+    "human_gene_name": "HCK",
+    "mouse_gene_id": "ENSMUSG00000003283",
+    "mouse_gene_name": "Hck"
+  },
+  {
+    "human_gene_id": "ENSG00000242220",
+    "human_gene_name": "TCP10L",
+    "mouse_gene_id": "ENSMUSG00000071322",
+    "mouse_gene_name": "Tcp10a"
+  },
+  {
+    "human_gene_id": "ENSG00000242220",
+    "human_gene_name": "TCP10L",
+    "mouse_gene_id": "ENSMUSG00000055602",
+    "mouse_gene_name": "Tcp10b"
+  },
+  {
+    "human_gene_id": "ENSG00000242220",
+    "human_gene_name": "TCP10L",
+    "mouse_gene_id": "ENSMUSG00000052469",
+    "mouse_gene_name": "Tcp10c"
+  },
+  {
+    "human_gene_id": "ENSG00000185272",
+    "human_gene_name": "RBM11",
+    "mouse_gene_id": "ENSMUSG00000032940",
+    "mouse_gene_name": "Rbm11"
+  },
+  {
+    "human_gene_id": "ENSG00000142185",
+    "human_gene_name": "TRPM2",
+    "mouse_gene_id": "ENSMUSG00000009292",
+    "mouse_gene_name": "Trpm2"
+  },
+  {
+    "human_gene_id": "ENSG00000177732",
+    "human_gene_name": "SOX12",
+    "mouse_gene_id": "ENSMUSG00000051817",
+    "mouse_gene_name": "Sox12"
+  },
+  {
+    "human_gene_id": "ENSG00000184226",
+    "human_gene_name": "PCDH9",
+    "mouse_gene_id": "ENSMUSG00000055421",
+    "mouse_gene_name": "Pcdh9"
+  },
+  {
+    "human_gene_id": "ENSG00000124257",
+    "human_gene_name": "NEURL2",
+    "mouse_gene_id": "ENSMUSG00000039873",
+    "mouse_gene_name": "Neurl2"
+  },
+  {
+    "human_gene_id": "ENSG00000168634",
+    "human_gene_name": "WFDC13",
+    "mouse_gene_id": "ENSMUSG00000067704",
+    "mouse_gene_name": "Wfdc13"
+  },
+  {
+    "human_gene_id": "ENSG00000149651",
+    "human_gene_name": "SPINT4",
+    "mouse_gene_id": "ENSMUSG00000017310",
+    "mouse_gene_name": "Spint4"
+  },
+  {
+    "human_gene_id": "ENSG00000198326",
+    "human_gene_name": "TMEM239",
+    "mouse_gene_id": "ENSMUSG00000049692",
+    "mouse_gene_name": "Tmem239"
+  },
+  {
+    "human_gene_id": "ENSG00000125878",
+    "human_gene_name": "TCF15",
+    "mouse_gene_id": "ENSMUSG00000068079",
+    "mouse_gene_name": "Tcf15"
+  },
+  {
+    "human_gene_id": "ENSG00000149634",
+    "human_gene_name": "SPATA25",
+    "mouse_gene_id": "ENSMUSG00000017767",
+    "mouse_gene_name": "Spata25"
+  },
+  {
+    "human_gene_id": "ENSG00000125508",
+    "human_gene_name": "SRMS",
+    "mouse_gene_id": "ENSMUSG00000027579",
+    "mouse_gene_name": "Srms"
+  },
+  {
+    "human_gene_id": "ENSG00000124203",
+    "human_gene_name": "ZNF831",
+    "mouse_gene_id": "ENSMUSG00000050600",
+    "mouse_gene_name": "Zfp831"
+  },
+  {
+    "human_gene_id": "ENSG00000078699",
+    "human_gene_name": "CBFA2T2",
+    "mouse_gene_id": "ENSMUSG00000038533",
+    "mouse_gene_name": "Cbfa2t2"
+  },
+  {
+    "human_gene_id": "ENSG00000243156",
+    "human_gene_name": "MICAL3",
+    "mouse_gene_id": "ENSMUSG00000051586",
+    "mouse_gene_name": "Mical3"
+  },
+  {
+    "human_gene_id": "ENSG00000288649",
+    "human_gene_name": "ACTL10",
+    "mouse_gene_id": "ENSMUSG00000078129",
+    "mouse_gene_name": "Actl10"
+  },
+  {
+    "human_gene_id": "ENSG00000155304",
+    "human_gene_name": "HSPA13",
+    "mouse_gene_id": "ENSMUSG00000032932",
+    "mouse_gene_name": "Hspa13"
+  },
+  {
+    "human_gene_id": "ENSG00000198862",
+    "human_gene_name": "LTN1",
+    "mouse_gene_id": "ENSMUSG00000052299",
+    "mouse_gene_name": "Ltn1"
+  },
+  {
+    "human_gene_id": "ENSG00000125823",
+    "human_gene_name": "CSTL1",
+    "mouse_gene_id": "ENSMUSG00000055177",
+    "mouse_gene_name": "Cstl1"
+  },
+  {
+    "human_gene_id": "ENSG00000149635",
+    "human_gene_name": "OCSTAMP",
+    "mouse_gene_id": "ENSMUSG00000027670",
+    "mouse_gene_name": "Ocstamp"
+  },
+  {
+    "human_gene_id": "ENSG00000158296",
+    "human_gene_name": "SLC13A3",
+    "mouse_gene_id": "ENSMUSG00000018459",
+    "mouse_gene_name": "Slc13a3"
+  },
+  {
+    "human_gene_id": "ENSG00000184787",
+    "human_gene_name": "UBE2G2",
+    "mouse_gene_id": "ENSMUSG00000009293",
+    "mouse_gene_name": "Ube2g2"
+  },
+  {
+    "human_gene_id": "ENSG00000100312",
+    "human_gene_name": "ACR",
+    "mouse_gene_id": "ENSMUSG00000022622",
+    "mouse_gene_name": "Acr"
+  },
+  {
+    "human_gene_id": "ENSG00000124091",
+    "human_gene_name": "GCNT7",
+    "mouse_gene_id": "ENSMUSG00000074569",
+    "mouse_gene_name": "Gcnt7"
+  },
+  {
+    "human_gene_id": "ENSG00000124140",
+    "human_gene_name": "SLC12A5",
+    "mouse_gene_id": "ENSMUSG00000017740",
+    "mouse_gene_name": "Slc12a5"
+  },
+  {
+    "human_gene_id": "ENSG00000281295",
+    "human_gene_name": "",
+    "mouse_gene_id": "ENSMUSG00002075132",
+    "mouse_gene_name": "Gm55812"
+  },
+  {
+    "human_gene_id": "ENSG00000075275",
+    "human_gene_name": "CELSR1",
+    "mouse_gene_id": "ENSMUSG00000016028",
+    "mouse_gene_name": "Celsr1"
+  },
+  {
+    "human_gene_id": "ENSG00000160218",
+    "human_gene_name": "TRAPPC10",
+    "mouse_gene_id": "ENSMUSG00000000374",
+    "mouse_gene_name": "Trappc10"
+  },
+  {
+    "human_gene_id": "ENSG00000188677",
+    "human_gene_name": "PARVB",
+    "mouse_gene_id": "ENSMUSG00000022438",
+    "mouse_gene_name": "Parvb"
+  },
+  {
+    "human_gene_id": "ENSG00000125363",
+    "human_gene_name": "AMELX",
+    "mouse_gene_id": "ENSMUSG00000031354",
+    "mouse_gene_name": "Amelx"
+  },
+  {
+    "human_gene_id": "ENSG00000149474",
+    "human_gene_name": "KAT14",
+    "mouse_gene_id": "ENSMUSG00000027425",
+    "mouse_gene_name": "Kat14"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000079577",
+    "mouse_gene_name": "Gm14692"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000067764",
+    "mouse_gene_name": "Xlr5c"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000067768",
+    "mouse_gene_name": "Xlr4b"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000079578",
+    "mouse_gene_name": "Gm1140"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000058328",
+    "mouse_gene_name": "Xlr5a"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000057836",
+    "mouse_gene_name": "Xlr3a"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000031362",
+    "mouse_gene_name": "Xlr4c"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000079845",
+    "mouse_gene_name": "Xlr4a"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000058147",
+    "mouse_gene_name": "Xlr3c"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000073125",
+    "mouse_gene_name": "Xlr3b"
+  },
+  {
+    "human_gene_id": "ENSG00000177138",
+    "human_gene_name": "FAM9B",
+    "mouse_gene_id": "ENSMUSG00000072479",
+    "mouse_gene_name": "Xlr5b"
+  },
+  {
+    "human_gene_id": "ENSG00000252928",
+    "human_gene_name": "RNU6-64P",
+    "mouse_gene_id": "ENSMUSG00000088236",
+    "mouse_gene_name": "Gm25425"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002075175",
+    "mouse_gene_name": "Gm55425"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002076252",
+    "mouse_gene_name": "Gm56405"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002075989",
+    "mouse_gene_name": "Gm55356"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002075919",
+    "mouse_gene_name": "Gm54487"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000092905",
+    "mouse_gene_name": "Gm25735"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000093059",
+    "mouse_gene_name": "Gm24809"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000092986",
+    "mouse_gene_name": "Gm25574"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000092974",
+    "mouse_gene_name": "Gm25072"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002076051",
+    "mouse_gene_name": "Gm56028"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002076384",
+    "mouse_gene_name": "Gm54720"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000093345",
+    "mouse_gene_name": "Gm27956"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00000093249",
+    "mouse_gene_name": "Gm24576"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002075925",
+    "mouse_gene_name": "Gm56145"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002076654",
+    "mouse_gene_name": "Gm55459"
+  },
+  {
+    "human_gene_id": "ENSG00000276800",
+    "human_gene_name": "Metazoa_SRP",
+    "mouse_gene_id": "ENSMUSG00002076025",
+    "mouse_gene_name": "Gm56242"
+  },
+  {
+    "human_gene_id": "ENSG00000199865",
+    "human_gene_name": "RNU6-495P",
+    "mouse_gene_id": "ENSMUSG00000119833",
+    "mouse_gene_name": "Gm24584"
+  },
+  {
+    "human_gene_id": "ENSG00000100138",
+    "human_gene_name": "SNU13",
+    "mouse_gene_id": "ENSMUSG00000063480",
+    "mouse_gene_name": "Snu13"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000079577",
+    "mouse_gene_name": "Gm14692"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000067764",
+    "mouse_gene_name": "Xlr5c"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000067768",
+    "mouse_gene_name": "Xlr4b"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000079578",
+    "mouse_gene_name": "Gm1140"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000058328",
+    "mouse_gene_name": "Xlr5a"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000057836",
+    "mouse_gene_name": "Xlr3a"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000031362",
+    "mouse_gene_name": "Xlr4c"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000079845",
+    "mouse_gene_name": "Xlr4a"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000058147",
+    "mouse_gene_name": "Xlr3c"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000073125",
+    "mouse_gene_name": "Xlr3b"
+  },
+  {
+    "human_gene_id": "ENSG00000183304",
+    "human_gene_name": "FAM9A",
+    "mouse_gene_id": "ENSMUSG00000072479",
+    "mouse_gene_name": "Xlr5b"
+  },
+  {
+    "human_gene_id": "ENSG00000125780",
+    "human_gene_name": "TGM3",
+    "mouse_gene_id": "ENSMUSG00000027401",
+    "mouse_gene_name": "Tgm3"
+  },
+  {
+    "human_gene_id": "ENSG00000166948",
+    "human_gene_name": "TGM6",
+    "mouse_gene_id": "ENSMUSG00000027403",
+    "mouse_gene_name": "Tgm6"
+  },
+  {
+    "human_gene_id": "ENSG00000126010",
+    "human_gene_name": "GRPR",
+    "mouse_gene_id": "ENSMUSG00000031364",
+    "mouse_gene_name": "Grpr"
+  },
+  {
+    "human_gene_id": "ENSG00000177324",
+    "human_gene_name": "BEND2",
+    "mouse_gene_id": "ENSMUSG00000108981",
+    "mouse_gene_name": "Bend2"
+  },
+  {
+    "human_gene_id": "ENSG00000208023",
+    "human_gene_name": "MIR185",
+    "mouse_gene_id": "ENSMUSG00000065464",
+    "mouse_gene_name": "Mir185"
+  },
+  {
+    "human_gene_id": "ENSG00000236444",
+    "human_gene_name": "UBE2L5",
+    "mouse_gene_id": "ENSMUSG00000038965",
+    "mouse_gene_name": "Ube2l3"
+  },
+  {
+    "human_gene_id": "ENSG00000284140",
+    "human_gene_name": "MIR3618",
+    "mouse_gene_id": "ENSMUSG00000093246",
+    "mouse_gene_name": "Mir3618"
+  },
+  {
+    "human_gene_id": "ENSG00000284464",
+    "human_gene_name": "MIR1306",
+    "mouse_gene_id": "ENSMUSG00000080452",
+    "mouse_gene_name": "Mir1306"
+  },
+  {
+    "human_gene_id": "ENSG00000274309",
+    "human_gene_name": "SNORA71E",
+    "mouse_gene_id": "ENSMUSG00000065840",
+    "mouse_gene_name": "Gm25187"
+  },
+  {
+    "human_gene_id": "ENSG00000264346",
+    "human_gene_name": "SNORA77B",
+    "mouse_gene_id": "ENSMUSG00000080364",
+    "mouse_gene_name": "Gm25777"
+  },
+  {
+    "human_gene_id": "ENSG00000199266",
+    "human_gene_name": "SNORA60",
+    "mouse_gene_id": "ENSMUSG00000064585",
+    "mouse_gene_name": "Gm25129"
+  },
+  {
+    "human_gene_id": "ENSG00000234409",
+    "human_gene_name": "CCDC188",
+    "mouse_gene_id": "ENSMUSG00000090777",
+    "mouse_gene_name": "Ccdc188"
+  },
+  {
+    "human_gene_id": "ENSG00000101438",
+    "human_gene_name": "SLC32A1",
+    "mouse_gene_id": "ENSMUSG00000037771",
+    "mouse_gene_name": "Slc32a1"
+  },
+  {
+    "human_gene_id": "ENSG00000185915",
+    "human_gene_name": "KLHL34",
+    "mouse_gene_id": "ENSMUSG00000047485",
+    "mouse_gene_name": "Klhl34"
+  },
+  {
+    "human_gene_id": "ENSG00000149646",
+    "human_gene_name": "CNBD2",
+    "mouse_gene_id": "ENSMUSG00000038085",
+    "mouse_gene_name": "Cnbd2"
+  },
+  {
+    "human_gene_id": "ENSG00000040608",
+    "human_gene_name": "RTN4R",
+    "mouse_gene_id": "ENSMUSG00000043811",
+    "mouse_gene_name": "Rtn4r"
+  },
+  {
+    "human_gene_id": "ENSG00000157542",
+    "human_gene_name": "KCNJ6",
+    "mouse_gene_id": "ENSMUSG00000043301",
+    "mouse_gene_name": "Kcnj6"
+  },
+  {
+    "human_gene_id": "ENSG00000250878",
+    "human_gene_name": "METTL21EP",
+    "mouse_gene_id": "ENSMUSG00000046828",
+    "mouse_gene_name": "Mettl21e"
+  },
+  {
+    "human_gene_id": "ENSG00000149970",
+    "human_gene_name": "CNKSR2",
+    "mouse_gene_id": "ENSMUSG00000025658",
+    "mouse_gene_name": "Cnksr2"
+  },
+  {
+    "human_gene_id": "ENSG00000160214",
+    "human_gene_name": "RRP1",
+    "mouse_gene_id": "ENSMUSG00000061032",
+    "mouse_gene_name": "Rrp1"
+  },
+  {
+    "human_gene_id": "ENSG00000184470",
+    "human_gene_name": "TXNRD2",
+    "mouse_gene_id": "ENSMUSG00000075704",
+    "mouse_gene_name": "Txnrd2"
+  },
+  {
+    "human_gene_id": "ENSG00000130699",
+    "human_gene_name": "TAF4",
+    "mouse_gene_id": "ENSMUSG00000039117",
+    "mouse_gene_name": "Taf4"
+  },
+  {
+    "human_gene_id": "ENSG00000215595",
+    "human_gene_name": "C20orf202",
+    "mouse_gene_id": "ENSMUSG00000087035",
+    "mouse_gene_name": "Tmem74bos"
+  },
+  {
+    "human_gene_id": "ENSG00000158901",
+    "human_gene_name": "WFDC8",
+    "mouse_gene_id": "ENSMUSG00000070533",
+    "mouse_gene_name": "Wfdc8"
+  },
+  {
+    "human_gene_id": "ENSG00000284536",
+    "human_gene_name": "MIR17",
+    "mouse_gene_id": "ENSMUSG00000065508",
+    "mouse_gene_name": "Mir17"
+  },
+  {
+    "human_gene_id": "ENSG00000283815",
+    "human_gene_name": "MIR18A",
+    "mouse_gene_id": "ENSMUSG00000065403",
+    "mouse_gene_name": "Mir18"
+  },
+  {
+    "human_gene_id": "ENSG00000284204",
+    "human_gene_name": "MIR19A",
+    "mouse_gene_id": "ENSMUSG00000065416",
+    "mouse_gene_name": "Mir19a"
+  },
+  {
+    "human_gene_id": "ENSG00000283762",
+    "human_gene_name": "MIR20A",
+    "mouse_gene_id": "ENSMUSG00000065442",
+    "mouse_gene_name": "Mir20a"
+  },
+  {
+    "human_gene_id": "ENSG00000284375",
+    "human_gene_name": "MIR19B1",
+    "mouse_gene_id": "ENSMUSG00000076256",
+    "mouse_gene_name": "Mir19b-1"
+  },
+  {
+    "human_gene_id": "ENSG00000182035",
+    "human_gene_name": "ADIG",
+    "mouse_gene_id": "ENSMUSG00000044405",
+    "mouse_gene_name": "Adig"
+  },
+  {
+    "human_gene_id": "ENSG00000201662",
+    "human_gene_name": "RNU6-60P",
+    "mouse_gene_id": "ENSMUSG00000119509",
+    "mouse_gene_name": "Gm22290"
+  },
+  {
+    "human_gene_id": "ENSG00000275877",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075795",
+    "mouse_gene_name": "Gm54867"
+  },
+  {
+    "human_gene_id": "ENSG00000275877",
+    "human_gene_name": "5_8S_rRNA",
+    "mouse_gene_id": "ENSMUSG00002075637",
+    "mouse_gene_name": "Gm55073"
+  },
+  {
+    "human_gene_id": "ENSG00000274385",
+    "human_gene_name": "U6",
+    "mouse_gene_id": "ENSMUSG00000087825",
+    "mouse_gene_name": "Gm22279"
+  },
+  {
+    "human_gene_id": "ENSG00000274385",
+    "human_gene_name": "U6",
+    "mouse_gene_id": "ENSMUSG00002075997",
+    "mouse_gene_name": "Gm54642"
+  },
+  {
+    "human_gene_id": "ENSG00000215251",
+    "human_gene_name": "FASTKD5",
+    "mouse_gene_id": "ENSMUSG00000079043",
+    "mouse_gene_name": "Fastkd5"
+  },
+  {
+    "human_gene_id": "ENSG00000172315",
+    "human_gene_name": "TP53RK",
+    "mouse_gene_id": "ENSMUSG00000039725",
+    "mouse_gene_name": "Trp53rka"
+  },
+  {
+    "human_gene_id": "ENSG00000172315",
+    "human_gene_name": "TP53RK",
+    "mouse_gene_id": "ENSMUSG00000042854",
+    "mouse_gene_name": "Trp53rkb"
+  },
+  {
+    "human_gene_id": "ENSG00000124097",
+    "human_gene_name": "HMGB1P1",
+    "mouse_gene_id": "ENSMUSG00000066551",
+    "mouse_gene_name": "Hmgb1"
+  },
+  {
+    "human_gene_id": "ENSG00000124237",
+    "human_gene_name": "CIMIP1",
+    "mouse_gene_id": "ENSMUSG00000027518",
+    "mouse_gene_name": "Cimip1"
+  },
+  {
+    "human_gene_id": "ENSG00000124227",
+    "human_gene_name": "ANKRD60",
+    "mouse_gene_id": "ENSMUSG00000027517",
+    "mouse_gene_name": "Ankrd60"
+  },
+  {
+    "human_gene_id": "ENSG00000167098",
+    "human_gene_name": "SUN5",
+    "mouse_gene_id": "ENSMUSG00000027480",
+    "mouse_gene_name": "Sun5"
+  },
+  {
+    "human_gene_id": "ENSG00000186191",
+    "human_gene_name": "BPIFB4",
+    "mouse_gene_id": "ENSMUSG00000074665",
+    "mouse_gene_name": "Bpifb4"
+  },
+  {
+    "human_gene_id": "ENSG00000131050",
+    "human_gene_name": "BPIFA2",
+    "mouse_gene_id": "ENSMUSG00000042459",
+    "mouse_gene_name": "Bpifa2"
+  },
+  {
+    "human_gene_id": "ENSG00000241837",
+    "human_gene_name": "ATP5PO",
+    "mouse_gene_id": "ENSMUSG00000022956",
+    "mouse_gene_name": "Atp5po"
+  },
+  {
+    "human_gene_id": "ENSG00000131059",
+    "human_gene_name": "BPIFA3",
+    "mouse_gene_id": "ENSMUSG00000027482",
+    "mouse_gene_name": "Bpifa3"
+  },
+  {
+    "human_gene_id": "ENSG00000186190",
+    "human_gene_name": "BPIFB3",
+    "mouse_gene_id": "ENSMUSG00000068008",
+    "mouse_gene_name": "Bpifb3"
+  },
+  {
+    "human_gene_id": "ENSG00000102466",
+    "human_gene_name": "FGF14",
+    "mouse_gene_id": "ENSMUSG00000025551",
+    "mouse_gene_name": "Fgf14"
+  },
+  {
+    "human_gene_id": "ENSG00000101444",
+    "human_gene_name": "AHCY",
+    "mouse_gene_id": "ENSMUSG00000027597",
+    "mouse_gene_name": "Ahcy"
+  },
+  {
+    "human_gene_id": "ENSG00000101444",
+    "human_gene_name": "AHCY",
+    "mouse_gene_id": "ENSMUSG00000048087",
+    "mouse_gene_name": "Ahcyl"
+  },
+  {
+    "human_gene_id": "ENSG00000102554",
+    "human_gene_name": "KLF5",
+    "mouse_gene_id": "ENSMUSG00000005148",
+    "mouse_gene_name": "Klf5"
+  },
+  {
+    "human_gene_id": "ENSG00000102445",
+    "human_gene_name": "RUBCNL",
+    "mouse_gene_id": "ENSMUSG00000034959",
+    "mouse_gene_name": "Rubcnl"
+  },
+  {
+    "human_gene_id": "ENSG00000101003",
+    "human_gene_name": "GINS1",
+    "mouse_gene_id": "ENSMUSG00000027454",
+    "mouse_gene_name": "Gins1"
+  },
+  {
+    "human_gene_id": "ENSG00000157540",
+    "human_gene_name": "DYRK1A",
+    "mouse_gene_id": "ENSMUSG00000022897",
+    "mouse_gene_name": "Dyrk1a"
+  },
+  {
+    "human_gene_id": "ENSG00000232388",
+    "human_gene_name": "SMIM26",
+    "mouse_gene_id": "ENSMUSG00000074754",
+    "mouse_gene_name": "Smim26"
+  },
+  {
+    "human_gene_id": "ENSG00000073150",
+    "human_gene_name": "PANX2",
+    "mouse_gene_id": "ENSMUSG00000058441",
+    "mouse_gene_name": "Panx2"
+  },
+  {
+    "human_gene_id": "ENSG00000088386",
+    "human_gene_name": "SLC15A1",
+    "mouse_gene_id": "ENSMUSG00000025557",
+    "mouse_gene_name": "Slc15a1"
+  },
+  {
+    "human_gene_id": "ENSG00000207932",
+    "human_gene_name": "MIR33A",
+    "mouse_gene_id": "ENSMUSG00000065465",
+    "mouse_gene_name": "Mir33"
+  },
+  {
+    "human_gene_id": "ENSG00000100292",
+    "human_gene_name": "HMOX1",
+    "mouse_gene_id": "ENSMUSG00000005413",
+    "mouse_gene_name": "Hmox1"
+  },
+  {
+    "human_gene_id": "ENSG00000054796",
+    "human_gene_name": "SPO11",
+    "mouse_gene_id": "ENSMUSG00000005883",
+    "mouse_gene_name": "Spo11"
+  },
+  {
+    "human_gene_id": "ENSG00000166862",
+    "human_gene_name": "CACNG2",
+    "mouse_gene_id": "ENSMUSG00000019146",
+    "mouse_gene_name": "Cacng2"
+  },
+  {
+    "human_gene_id": "ENSG00000100191",
+    "human_gene_name": "SLC5A4",
+    "mouse_gene_id": "ENSMUSG00000020229",
+    "mouse_gene_name": "Slc5a4a"
+  },
+  {
+    "human_gene_id": "ENSG00000100298",
+    "human_gene_name": "APOBEC3H",
+    "mouse_gene_id": "ENSMUSG00000009585",
+    "mouse_gene_name": "Apobec3"
+  },
+  {
+    "human_gene_id": "ENSG00000132819",
+    "human_gene_name": "RBM38",
+    "mouse_gene_id": "ENSMUSG00000027510",
+    "mouse_gene_name": "Rbm38"
+  },
+  {
+    "human_gene_id": "ENSG00000204548",
+    "human_gene_name": "DEFB121",
+    "mouse_gene_id": "ENSMUSG00000027468",
+    "mouse_gene_name": "Defb22"
+  },
+  {
+    "human_gene_id": "ENSG00000180424",
+    "human_gene_name": "DEFB123",
+    "mouse_gene_id": "ENSMUSG00000044863",
+    "mouse_gene_name": "Defb36"
+  },
+  {
+    "human_gene_id": "ENSG00000180383",
+    "human_gene_name": "DEFB124",
+    "mouse_gene_id": "ENSMUSG00000074678",
+    "mouse_gene_name": "Defb25"
+  },
+  {
+    "human_gene_id": "ENSG00000197183",
+    "human_gene_name": "NOL4L",
+    "mouse_gene_id": "ENSMUSG00000061411",
+    "mouse_gene_name": "Nol4l"
+  },
+  {
+    "human_gene_id": "ENSG00000185264",
+    "human_gene_name": "CIMIP4",
+    "mouse_gene_id": "ENSMUSG00000062154",
+    "mouse_gene_name": "Cimip4"
+  },
+  {
+    "human_gene_id": "ENSG00000207227",
+    "human_gene_name": "RNU6-900P",
+    "mouse_gene_id": "ENSMUSG00000065747",
+    "mouse_gene_name": "Gm25006"
+  },
+  {
+    "human_gene_id": "ENSG00000207227",
+    "human_gene_name": "RNU6-900P",
+    "mouse_gene_id": "ENSMUSG00000088304",
+    "mouse_gene_name": "Gm24504"
+  },
+  {
+    "human_gene_id": "ENSG00000182957",
+    "human_gene_name": "SPATA13",
+    "mouse_gene_id": "ENSMUSG00000021990",
+    "mouse_gene_name": "Spata13"
+  },
+  {
+    "human_gene_id": "ENSG00000124134",
+    "human_gene_name": "KCNS1",
+    "mouse_gene_id": "ENSMUSG00000040164",
+    "mouse_gene_name": "Kcns1"
+  },
+  {
+    "human_gene_id": "ENSG00000161180",
+    "human_gene_name": "CCDC116",
+    "mouse_gene_id": "ENSMUSG00000022768",
+    "mouse_gene_name": "Ccdc116"
+  },
+  {
+    "human_gene_id": "ENSG00000169906",
+    "human_gene_name": "S100G",
+    "mouse_gene_id": "ENSMUSG00000040808",
+    "mouse_gene_name": "S100g"
+  },
+  {
+    "human_gene_id": "ENSG00000187516",
+    "human_gene_name": "H2AP",
+    "mouse_gene_id": "ENSMUSG00000040456",
+    "mouse_gene_name": "H2ap"
+  },
+  {
+    "human_gene_id": "ENSG00000212102",
+    "human_gene_name": "MIR301B",
+    "mouse_gene_id": "ENSMUSG00000065572",
+    "mouse_gene_name": "Mir130b"
+  },
+  {
+    "human_gene_id": "ENSG00000212102",
+    "human_gene_name": "MIR301B",
+    "mouse_gene_id": "ENSMUSG00000076288",
+    "mouse_gene_name": "Mir301b"
+  },
+  {
+    "human_gene_id": "ENSG00000168703",
+    "human_gene_name": "WFDC12",
+    "mouse_gene_id": "ENSMUSG00000042845",
+    "mouse_gene_name": "Wfdc12"
+  },
+  {
+    "human_gene_id": "ENSG00000124157",
+    "human_gene_name": "SEMG2",
+    "mouse_gene_id": "ENSMUSG00000040132",
+    "mouse_gene_name": "Semg1"
+  },
+  {
+    "human_gene_id": "ENSG00000124157",
+    "human_gene_name": "SEMG2",
+    "mouse_gene_id": "ENSMUSG00000017003",
+    "mouse_gene_name": "Svs3a"
+  },
+  {
+    "human_gene_id": "ENSG00000124157",
+    "human_gene_name": "SEMG2",
+    "mouse_gene_id": "ENSMUSG00000050383",
+    "mouse_gene_name": "Svs3b"
+  },
+  {
+    "human_gene_id": "ENSG00000215545",
+    "human_gene_name": "DEFB116",
+    "mouse_gene_id": "ENSMUSG00000044249",
+    "mouse_gene_name": "Defb29"
+  },
+  {
+    "human_gene_id": "ENSG00000100023",
+    "human_gene_name": "PPIL2",
+    "mouse_gene_id": "ENSMUSG00000022771",
+    "mouse_gene_name": "Ppil2"
+  },
+  {
+    "human_gene_id": "ENSG00000131068",
+    "human_gene_name": "DEFB118",
+    "mouse_gene_id": "ENSMUSG00000056544",
+    "mouse_gene_name": "Defb21"
+  },
+  {
+    "human_gene_id": "ENSG00000180483",
+    "human_gene_name": "DEFB119",
+    "mouse_gene_id": "ENSMUSG00000050645",
+    "mouse_gene_name": "Defb19"
+  },
+  {
+    "human_gene_id": "ENSG00000102313",
+    "human_gene_name": "ITIH6",
+    "mouse_gene_id": "ENSMUSG00000087149",
+    "mouse_gene_name": "Itih6"
+  },
+  {
+    "human_gene_id": "ENSG00000125813",
+    "human_gene_name": "PAX1",
+    "mouse_gene_id": "ENSMUSG00000037034",
+    "mouse_gene_name": "Pax1"
+  },
+  {
+    "human_gene_id": "ENSG00000175121",
+    "human_gene_name": "WFDC5",
+    "mouse_gene_id": "ENSMUSG00000040154",
+    "mouse_gene_name": "Wfdc5"
+  },
+  {
+    "human_gene_id": "ENSG00000088881",
+    "human_gene_name": "EBF4",
+    "mouse_gene_id": "ENSMUSG00000053552",
+    "mouse_gene_name": "Ebf4"
+  },
+  {
+    "human_gene_id": "ENSG00000008086",
+    "human_gene_name": "CDKL5",
+    "mouse_gene_id": "ENSMUSG00000031292",
+    "mouse_gene_name": "Cdkl5"
+  },
+  {
+    "human_gene_id": "ENSG00000131044",
+    "human_gene_name": "TTLL9",
+    "mouse_gene_id": "ENSMUSG00000074673",
+    "mouse_gene_name": "Ttll9"
+  },
+  {
+    "human_gene_id": "ENSG00000160201",
+    "human_gene_name": "U2AF1",
+    "mouse_gene_id": "ENSMUSG00000061613",
+    "mouse_gene_name": "U2af1"
+  },
+  {
+    "human_gene_id": "ENSG00000126218",
+    "human_gene_name": "F10",
+    "mouse_gene_id": "ENSMUSG00000031444",
+    "mouse_gene_name": "F10"
+  },
+  {
+    "human_gene_id": "ENSG00000100027",
+    "human_gene_name": "YPEL1",
+    "mouse_gene_id": "ENSMUSG00000022773",
+    "mouse_gene_name": "Ypel1"
+  },
+  {
+    "human_gene_id": "ENSG00000132671",
+    "human_gene_name": "SSTR4",
+    "mouse_gene_id": "ENSMUSG00000037014",
+    "mouse_gene_name": "Sstr4"
+  },
+  {
+    "human_gene_id": "ENSG00000178726",
+    "human_gene_name": "THBD",
+    "mouse_gene_id": "ENSMUSG00000074743",
+    "mouse_gene_name": "Thbd"
+  },
+  {
+    "human_gene_id": "ENSG00000183798",
+    "human_gene_name": "EMILIN3",
+    "mouse_gene_id": "ENSMUSG00000050700",
+    "mouse_gene_name": "Emilin3"
+  },
+  {
+    "human_gene_id": "ENSG00000183260",
+    "human_gene_name": "ABHD16B",
+    "mouse_gene_id": "ENSMUSG00000055882",
+    "mouse_gene_name": "Abhd16b"
+  },
+  {
+    "human_gene_id": "ENSG00000199805",
+    "human_gene_name": "RNU1-134P",
+    "mouse_gene_id": "ENSMUSG00000119449",
+    "mouse_gene_name": "Gm25818"
+  },
+  {
+    "human_gene_id": "ENSG00000130590",
+    "human_gene_name": "SAMD10",
+    "mouse_gene_id": "ENSMUSG00000038605",
+    "mouse_gene_name": "Samd10"
+  },
+  {
+    "human_gene_id": "ENSG00000239127",
+    "human_gene_name": "SNORD125",
+    "mouse_gene_id": "ENSMUSG00000088634",
+    "mouse_gene_name": "Gm24958"
+  },
+  {
+    "human_gene_id": "ENSG00000100285",
+    "human_gene_name": "NEFH",
+    "mouse_gene_id": "ENSMUSG00000020396",
+    "mouse_gene_name": "Nefh"
+  },
+  {
+    "human_gene_id": "ENSG00000169508",
+    "human_gene_name": "GPR183",
+    "mouse_gene_id": "ENSMUSG00000051212",
+    "mouse_gene_name": "Gpr183"
+  },
+  {
+    "human_gene_id": "ENSG00000101251",
+    "human_gene_name": "SEL1L2",
+    "mouse_gene_id": "ENSMUSG00000074764",
+    "mouse_gene_name": "Sel1l2"
+  },
+  {
+    "human_gene_id": "ENSG00000122025",
+    "human_gene_name": "FLT3",
+    "mouse_gene_id": "ENSMUSG00000042817",
+    "mouse_gene_name": "Flt3"
+  },
+  {
+    "human_gene_id": "ENSG00000100003",
+    "human_gene_name": "SEC14L2",
+    "mouse_gene_id": "ENSMUSG00000003585",
+    "mouse_gene_name": "Sec14l2"
+  },
+  {
+    "human_gene_id": "ENSG00000172264",
+    "human_gene_name": "MACROD2",
+    "mouse_gene_id": "ENSMUSG00000068205",
+    "mouse_gene_name": "Macrod2"
+  },
+  {
+    "human_gene_id": "ENSG00000268994",
+    "human_gene_name": "FAM236B",
+    "mouse_gene_id": "ENSMUSG00000079479",
+    "mouse_gene_name": "Fam236f"
+  },
+  {
+    "human_gene_id": "ENSG00000268994",
+    "human_gene_name": "FAM236B",
+    "mouse_gene_id": "ENSMUSG00000079476",
+    "mouse_gene_name": "Fam236e"
+  },
+  {
+    "human_gene_id": "ENSG00000102804",
+    "human_gene_name": "TSC22D1",
+    "mouse_gene_id": "ENSMUSG00000022010",
+    "mouse_gene_name": "Tsc22d1"
+  },
+  {
+    "human_gene_id": "ENSG00000147081",
+    "human_gene_name": "AKAP4",
+    "mouse_gene_id": "ENSMUSG00000050089",
+    "mouse_gene_name": "Akap4"
+  },
+  {
+    "human_gene_id": "ENSG00000165621",
+    "human_gene_name": "OXGR1",
+    "mouse_gene_id": "ENSMUSG00000044819",
+    "mouse_gene_name": "Oxgr1"
+  },
+  {
+    "human_gene_id": "ENSG00000185808",
+    "human_gene_name": "PIGP",
+    "mouse_gene_id": "ENSMUSG00000022940",
+    "mouse_gene_name": "Pigp"
+  },
+  {
+    "human_gene_id": "ENSG00000102221",
+    "human_gene_name": "JADE3",
+    "mouse_gene_id": "ENSMUSG00000037315",
+    "mouse_gene_name": "Jade3"
+  },
+  {
+    "human_gene_id": "ENSG00000185513",
+    "human_gene_name": "L3MBTL1",
+    "mouse_gene_id": "ENSMUSG00000035576",
+    "mouse_gene_name": "L3mbtl1"
+  },
+  {
+    "human_gene_id": "ENSG00000133115",
+    "human_gene_name": "STOML3",
+    "mouse_gene_id": "ENSMUSG00000027744",
+    "mouse_gene_name": "Stoml3"
+  },
+  {
+    "human_gene_id": "ENSG00000132975",
+    "human_gene_name": "GPR12",
+    "mouse_gene_id": "ENSMUSG00000041468",
+    "mouse_gene_name": "Gpr12"
+  },
+  {
+    "human_gene_id": "ENSG00000134864",
+    "human_gene_name": "GGACT",
+    "mouse_gene_id": "ENSMUSG00000041625",
+    "mouse_gene_name": "Ggact"
+  },
+  {
+    "human_gene_id": "ENSG00000189299",
+    "human_gene_name": "FOXR2",
+    "mouse_gene_id": "ENSMUSG00000071665",
+    "mouse_gene_name": "Foxr2"
+  },
+  {
+    "human_gene_id": "ENSG00000187601",
+    "human_gene_name": "MAGEH1",
+    "mouse_gene_id": "ENSMUSG00000047238",
+    "mouse_gene_name": "Mageh1"
+  },
+  {
+    "human_gene_id": "ENSG00000080618",
+    "human_gene_name": "CPB2",
+    "mouse_gene_id": "ENSMUSG00000021999",
+    "mouse_gene_name": "Cpb2"
+  },
+  {
+    "human_gene_id": "ENSG00000156239",
+    "human_gene_name": "HEMK2",
+    "mouse_gene_id": "ENSMUSG00000044442",
+    "mouse_gene_name": "N6amt1"
+  },
+  {
+    "human_gene_id": "ENSG00000206203",
+    "human_gene_name": "TSSK2",
+    "mouse_gene_id": "ENSMUSG00000045521",
+    "mouse_gene_name": "Tssk2"
+  },
+  {
+    "human_gene_id": "ENSG00000063515",
+    "human_gene_name": "GSC2",
+    "mouse_gene_id": "ENSMUSG00000022738",
+    "mouse_gene_name": "Gsc2"
+  },
+  {
+    "human_gene_id": "ENSG00000196468",
+    "human_gene_name": "FGF16",
+    "mouse_gene_id": "ENSMUSG00000031230",
+    "mouse_gene_name": "Fgf16"
+  },
+  {
+    "human_gene_id": "ENSG00000100218",
+    "human_gene_name": "RSPH14",
+    "mouse_gene_id": "ENSMUSG00000009070",
+    "mouse_gene_name": "Rsph14"
+  },
+  {
+    "human_gene_id": "ENSG00000147183",
+    "human_gene_name": "CPXCR1",
+    "mouse_gene_id": "ENSMUSG00000072995",
+    "mouse_gene_name": "Cpxcr1"
+  },
+  {
+    "human_gene_id": "ENSG00000174740",
+    "human_gene_name": "PABPC5",
+    "mouse_gene_id": "ENSMUSG00000034732",
+    "mouse_gene_name": "Pabpc5"
+  },
+  {
+    "human_gene_id": "ENSG00000156299",
+    "human_gene_name": "TIAM1",
+    "mouse_gene_id": "ENSMUSG00000002489",
+    "mouse_gene_name": "Tiam1"
+  },
+  {
+    "human_gene_id": "ENSG00000186288",
+    "human_gene_name": "PABPC1L2A",
+    "mouse_gene_id": "ENSMUSG00000084842",
+    "mouse_gene_name": "Pabpc1l2b"
+  },
+  {
+    "human_gene_id": "ENSG00000186288",
+    "human_gene_name": "PABPC1L2A",
+    "mouse_gene_id": "ENSMUSG00000086524",
+    "mouse_gene_name": "Pabpc1l2a"
+  },
+  {
+    "human_gene_id": "ENSG00000174225",
+    "human_gene_name": "ARL13A",
+    "mouse_gene_id": "ENSMUSG00000052549",
+    "mouse_gene_name": "Arl13a"
+  },
+  {
+    "human_gene_id": "ENSG00000100129",
+    "human_gene_name": "EIF3L",
+    "mouse_gene_id": "ENSMUSG00000033047",
+    "mouse_gene_name": "Eif3l"
+  },
+  {
+    "human_gene_id": "ENSG00000165288",
+    "human_gene_name": "BRWD3",
+    "mouse_gene_id": "ENSMUSG00000063663",
+    "mouse_gene_name": "Brwd3"
+  },
+  {
+    "human_gene_id": "ENSG00000170191",
+    "human_gene_name": "NANP",
+    "mouse_gene_id": "ENSMUSG00000053916",
+    "mouse_gene_name": "Nanp"
+  },
+  {
+    "human_gene_id": "ENSG00000120675",
+    "human_gene_name": "DNAJC15",
+    "mouse_gene_id": "ENSMUSG00000022013",
+    "mouse_gene_name": "Dnajc15"
+  },
+  {
+    "human_gene_id": "ENSG00000151778",
+    "human_gene_name": "SERP2",
+    "mouse_gene_id": "ENSMUSG00000052584",
+    "mouse_gene_name": "Serp2"
+  },
+  {
+    "human_gene_id": "ENSG00000201348",
+    "human_gene_name": "RNU105B",
+    "mouse_gene_id": "ENSMUSG00000065181",
+    "mouse_gene_name": "Gm25139"
+  }
+]

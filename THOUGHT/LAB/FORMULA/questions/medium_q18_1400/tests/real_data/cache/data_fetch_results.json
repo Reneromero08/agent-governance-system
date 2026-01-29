@@ -1,0 +1,16 @@
+{
+  "strategies_tried": [
+    {
+      "name": "GEO DataSet SOFT",
+      "success": false,
+      "n_genes": 0
+    },
+    {
+      "name": "GEO Series Matrix",
+      "success": true,
+      "n_genes": 500
+    }
+  ],
+  "successful_source": "GEO Series Matrix",
+  "has_data": true
+}

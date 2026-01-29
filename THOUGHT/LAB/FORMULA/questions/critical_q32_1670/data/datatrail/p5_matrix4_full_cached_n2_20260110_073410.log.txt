@@ -1,0 +1,1257 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 07:34:19.833057: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 07:34:20.814422: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+
+[Q32:P3] (matrix_cached) Calibrating on climate_fever (seeds=[123, 124])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 6.308
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct - M_wrong) = 8.120
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 6.072
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_correct_end) = -7.518
+  mean(M_wrong_end)   = -17.169
+  mean(M_correct - M_wrong) = 9.651
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.915
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.675
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.838
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.506 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.521
+  mean dM_wrong   = 0.534
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.783
+  z(H0: p=0.5) = 6.208  (n=120)
+  mean(M_indep_end - M_wrong_end) = 13.080
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.088
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.683
+  z(H0: p=0.5) = 4.017  (n=120)
+  mean(M_correct_end) = -6.458
+  mean(M_wrong_end)   = -16.799
+  mean(M_correct - M_wrong) = 10.341
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 7.969
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.700
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.799
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.427 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.144
+  mean dM_wrong   = 1.543
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.725
+  z(H0: p=0.5) = 4.930  (n=120)
+  mean(M_indep_end - M_wrong_end) = 12.234
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.583
+  mean_first_cross_frac = 0.081
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P3] (matrix_cached) Frozen thresholds for climate_fever: min_z=2.600  min_pair_wins=0.660
+
+[Q32:P3] (matrix_cached) Verifying climate_fever->scifact (seeds=[123, 124])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -4.335
+  mean(M_correct - M_wrong) = 2.383
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 3.325
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -3.906
+  mean(M_correct - M_wrong) = 4.470
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.506
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P3] (matrix_cached) Verifying climate_fever->snli (seeds=[123, 124])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.708
+  z(H0: p=0.5) = 6.455  (n=240)
+  mean(M_correct) = -2.425
+  mean(M_wrong)   = -9.423
+  mean(M_correct - M_wrong) = 6.997
+  [swap] P(M_correct > M_swapped_correct) = 0.617
+  [swap] mean(M_correct - M_swapped_correct) = 4.713
+  [Phi_proxy] I(mu_hat; mu_check) = 0.260 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.600
+  z(H0: p=0.5) = 3.098  (n=240)
+  mean(M_correct_end) = -6.850
+  mean(M_wrong_end)   = -9.819
+  mean(M_correct - M_wrong) = 2.969
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.550
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.690
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.642
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.185
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.573 bits
+[Q32:P3] SNLI-Streaming below calibrated pair_wins (reported only): 0.600 < 0.660
+
+[Q32:P3] (matrix_cached) Verifying climate_fever->mnli (seeds=[123, 124])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.608
+  z(H0: p=0.5) = 3.357  (n=240)
+  mean(M_correct) = -1.435
+  mean(M_wrong)   = -4.121
+  mean(M_correct - M_wrong) = 2.686
+  [swap] P(M_correct > M_swapped_correct) = 0.637
+  [swap] mean(M_correct - M_swapped_correct) = 6.324
+  [Phi_proxy] I(mu_hat; mu_check) = 0.277 bits
+[Q32:P3] MNLI below calibrated pair_wins (reported only): 0.608 < 0.660
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.654
+  z(H0: p=0.5) = 4.777  (n=240)
+  mean(M_correct_end) = -3.164
+  mean(M_wrong_end)   = -5.882
+  mean(M_correct - M_wrong) = 2.718
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.056
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.728
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.558 bits
+[Q32:P3] MNLI-Streaming below calibrated pair_wins (reported only): 0.654 < 0.660
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.667
+  z(H0: p=0.5) = 5.164  (n=240)
+  mean(M_correct) = -0.402
+  mean(M_wrong)   = -3.204
+  mean(M_correct - M_wrong) = 2.803
+  [swap] P(M_correct > M_swapped_correct) = 0.675
+  [swap] mean(M_correct - M_swapped_correct) = 5.613
+  [Phi_proxy] I(mu_hat; mu_check) = 0.342 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.629
+  z(H0: p=0.5) = 4.002  (n=240)
+  mean(M_correct_end) = -3.030
+  mean(M_wrong_end)   = -4.895
+  mean(M_correct - M_wrong) = 1.864
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.546
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 4.604
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.688
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.400
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.557 bits
+[Q32:P3] MNLI-Streaming below calibrated pair_wins (reported only): 0.629 < 0.660
+
+[Q32:P3] (matrix_cached) Calibrating on scifact (seeds=[123, 124])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -4.335
+  mean(M_correct - M_wrong) = 2.383
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 3.325
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -3.906
+  mean(M_correct - M_wrong) = 4.470
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.506
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P3] (matrix_cached) Frozen thresholds for scifact: min_z=2.600  min_pair_wins=0.704
+
+[Q32:P3] (matrix_cached) Verifying scifact->climate_fever (seeds=[123, 124])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 6.308
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+[Q32:P3] Climate-FEVER-Intervention below calibrated pair_wins (reported only): 0.692 < 0.704
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_correct_end) = -7.518
+  mean(M_wrong_end)   = -17.169
+  mean(M_correct - M_wrong) = 9.651
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.915
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.675
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.838
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.506 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.521
+  mean dM_wrong   = 0.534
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.783
+  z(H0: p=0.5) = 6.208  (n=120)
+  mean(M_indep_end - M_wrong_end) = 13.080
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.088
+  phase_gate_rate=0.600 => FAIL
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.650 < 0.704
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct - M_wrong) = 8.120
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 6.072
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.683
+  z(H0: p=0.5) = 4.017  (n=120)
+  mean(M_correct_end) = -6.458
+  mean(M_wrong_end)   = -16.799
+  mean(M_correct - M_wrong) = 10.341
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 7.969
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.700
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.799
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.427 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.144
+  mean dM_wrong   = 1.543
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.725
+  z(H0: p=0.5) = 4.930  (n=120)
+  mean(M_indep_end - M_wrong_end) = 12.234
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.583
+  mean_first_cross_frac = 0.081
+  phase_gate_rate=0.600 => FAIL
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.683 < 0.704
+
+[Q32:P3] (matrix_cached) Verifying scifact->snli (seeds=[123, 124])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+[Q32:P3] SNLI-Streaming below calibrated pair_wins (reported only): 0.662 < 0.704
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.708
+  z(H0: p=0.5) = 6.455  (n=240)
+  mean(M_correct) = -2.425
+  mean(M_wrong)   = -9.423
+  mean(M_correct - M_wrong) = 6.997
+  [swap] P(M_correct > M_swapped_correct) = 0.617
+  [swap] mean(M_correct - M_swapped_correct) = 4.713
+  [Phi_proxy] I(mu_hat; mu_check) = 0.260 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.600
+  z(H0: p=0.5) = 3.098  (n=240)
+  mean(M_correct_end) = -6.850
+  mean(M_wrong_end)   = -9.819
+  mean(M_correct - M_wrong) = 2.969
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.550
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.690
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.642
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.185
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.573 bits
+[Q32:P3] SNLI-Streaming below calibrated pair_wins (reported only): 0.600 < 0.704
+
+[Q32:P3] (matrix_cached) Verifying scifact->mnli (seeds=[123, 124])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.608
+  z(H0: p=0.5) = 3.357  (n=240)
+  mean(M_correct) = -1.435
+  mean(M_wrong)   = -4.121
+  mean(M_correct - M_wrong) = 2.686
+  [swap] P(M_correct > M_swapped_correct) = 0.637
+  [swap] mean(M_correct - M_swapped_correct) = 6.324
+  [Phi_proxy] I(mu_hat; mu_check) = 0.277 bits
+[Q32:P3] MNLI below calibrated pair_wins (reported only): 0.608 < 0.704
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.654
+  z(H0: p=0.5) = 4.777  (n=240)
+  mean(M_correct_end) = -3.164
+  mean(M_wrong_end)   = -5.882
+  mean(M_correct - M_wrong) = 2.718
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.056
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.728
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.558 bits
+[Q32:P3] MNLI-Streaming below calibrated pair_wins (reported only): 0.654 < 0.704
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.667
+  z(H0: p=0.5) = 5.164  (n=240)
+  mean(M_correct) = -0.402
+  mean(M_wrong)   = -3.204
+  mean(M_correct - M_wrong) = 2.803
+  [swap] P(M_correct > M_swapped_correct) = 0.675
+  [swap] mean(M_correct - M_swapped_correct) = 5.613
+  [Phi_proxy] I(mu_hat; mu_check) = 0.342 bits
+[Q32:P3] MNLI below calibrated pair_wins (reported only): 0.667 < 0.704
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.629
+  z(H0: p=0.5) = 4.002  (n=240)
+  mean(M_correct_end) = -3.030
+  mean(M_wrong_end)   = -4.895
+  mean(M_correct - M_wrong) = 1.864
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.546
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 4.604
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.688
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.400
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.557 bits
+[Q32:P3] MNLI-Streaming below calibrated pair_wins (reported only): 0.629 < 0.704
+
+[Q32:P3] (matrix_cached) Calibrating on snli (seeds=[123, 124])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.708
+  z(H0: p=0.5) = 6.455  (n=240)
+  mean(M_correct) = -2.425
+  mean(M_wrong)   = -9.423
+  mean(M_correct - M_wrong) = 6.997
+  [swap] P(M_correct > M_swapped_correct) = 0.617
+  [swap] mean(M_correct - M_swapped_correct) = 4.713
+  [Phi_proxy] I(mu_hat; mu_check) = 0.260 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.600
+  z(H0: p=0.5) = 3.098  (n=240)
+  mean(M_correct_end) = -6.850
+  mean(M_wrong_end)   = -9.819
+  mean(M_correct - M_wrong) = 2.969
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.550
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.690
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.642
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.185
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.573 bits
+
+[Q32:P3] (matrix_cached) Frozen thresholds for snli: min_z=2.600  min_pair_wins=0.619
+
+[Q32:P3] (matrix_cached) Verifying snli->climate_fever (seeds=[123, 124])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 6.308
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+  P(M_correct_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_correct_end) = -7.518
+  mean(M_wrong_end)   = -17.169
+  mean(M_correct - M_wrong) = 9.651
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.915
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.675
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.838
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.506 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.521
+  mean dM_wrong   = 0.534
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.783
+  z(H0: p=0.5) = 6.208  (n=120)
+  mean(M_indep_end - M_wrong_end) = 13.080
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.088
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct - M_wrong) = 8.120
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 6.072
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.683
+  z(H0: p=0.5) = 4.017  (n=120)
+  mean(M_correct_end) = -6.458
+  mean(M_wrong_end)   = -16.799
+  mean(M_correct - M_wrong) = 10.341
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 7.969
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.700
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.799
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.427 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.144
+  mean dM_wrong   = 1.543
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.725
+  z(H0: p=0.5) = 4.930  (n=120)
+  mean(M_indep_end - M_wrong_end) = 12.234
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.583
+  mean_first_cross_frac = 0.081
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P3] (matrix_cached) Verifying snli->scifact (seeds=[123, 124])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -4.335
+  mean(M_correct - M_wrong) = 2.383
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 3.325
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -3.906
+  mean(M_correct - M_wrong) = 4.470
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.506
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P3] (matrix_cached) Verifying snli->mnli (seeds=[123, 124])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.608
+  z(H0: p=0.5) = 3.357  (n=240)
+  mean(M_correct) = -1.435
+  mean(M_wrong)   = -4.121
+  mean(M_correct - M_wrong) = 2.686
+  [swap] P(M_correct > M_swapped_correct) = 0.637
+  [swap] mean(M_correct - M_swapped_correct) = 6.324
+  [Phi_proxy] I(mu_hat; mu_check) = 0.277 bits
+[Q32:P3] MNLI below calibrated pair_wins (reported only): 0.608 < 0.619
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.654
+  z(H0: p=0.5) = 4.777  (n=240)
+  mean(M_correct_end) = -3.164
+  mean(M_wrong_end)   = -5.882
+  mean(M_correct - M_wrong) = 2.718
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.056
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.728
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.558 bits
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.667
+  z(H0: p=0.5) = 5.164  (n=240)
+  mean(M_correct) = -0.402
+  mean(M_wrong)   = -3.204
+  mean(M_correct - M_wrong) = 2.803
+  [swap] P(M_correct > M_swapped_correct) = 0.675
+  [swap] mean(M_correct - M_swapped_correct) = 5.613
+  [Phi_proxy] I(mu_hat; mu_check) = 0.342 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.629
+  z(H0: p=0.5) = 4.002  (n=240)
+  mean(M_correct_end) = -3.030
+  mean(M_wrong_end)   = -4.895
+  mean(M_correct - M_wrong) = 1.864
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.546
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 4.604
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.688
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.400
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.557 bits
+
+[Q32:P3] (matrix_cached) Calibrating on mnli (seeds=[123, 124])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.608
+  z(H0: p=0.5) = 3.357  (n=240)
+  mean(M_correct) = -1.435
+  mean(M_wrong)   = -4.121
+  mean(M_correct - M_wrong) = 2.686
+  [swap] P(M_correct > M_swapped_correct) = 0.637
+  [swap] mean(M_correct - M_swapped_correct) = 6.324
+  [Phi_proxy] I(mu_hat; mu_check) = 0.277 bits
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.667
+  z(H0: p=0.5) = 5.164  (n=240)
+  mean(M_correct) = -0.402
+  mean(M_wrong)   = -3.204
+  mean(M_correct - M_wrong) = 2.803
+  [swap] P(M_correct > M_swapped_correct) = 0.675
+  [swap] mean(M_correct - M_swapped_correct) = 5.613
+  [Phi_proxy] I(mu_hat; mu_check) = 0.342 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.654
+  z(H0: p=0.5) = 4.777  (n=240)
+  mean(M_correct_end) = -3.164
+  mean(M_wrong_end)   = -5.882
+  mean(M_correct - M_wrong) = 2.718
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.056
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.728
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.558 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.629
+  z(H0: p=0.5) = 4.002  (n=240)
+  mean(M_correct_end) = -3.030
+  mean(M_wrong_end)   = -4.895
+  mean(M_correct - M_wrong) = 1.864
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.546
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 4.604
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.688
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.400
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.557 bits
+
+[Q32:P3] (matrix_cached) Frozen thresholds for mnli: min_z=2.600  min_pair_wins=0.615
+
+[Q32:P3] (matrix_cached) Verifying mnli->climate_fever (seeds=[123, 124])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 6.308
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_correct_end) = -7.518
+  mean(M_wrong_end)   = -17.169
+  mean(M_correct - M_wrong) = 9.651
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.915
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.675
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.838
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.506 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.521
+  mean dM_wrong   = 0.534
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.783
+  z(H0: p=0.5) = 6.208  (n=120)
+  mean(M_indep_end - M_wrong_end) = 13.080
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.088
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct - M_wrong) = 8.120
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 6.072
+  [Phi_proxy] I(mu_hat; mu_check) = 0.509 bits
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.683
+  z(H0: p=0.5) = 4.017  (n=120)
+  mean(M_correct_end) = -6.458
+  mean(M_wrong_end)   = -16.799
+  mean(M_correct - M_wrong) = 10.341
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.558
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 7.969
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.700
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.799
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.427 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.144
+  mean dM_wrong   = 1.543
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.725
+  z(H0: p=0.5) = 4.930  (n=120)
+  mean(M_indep_end - M_wrong_end) = 12.234
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.583
+  mean_first_cross_frac = 0.081
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P3] (matrix_cached) Verifying mnli->scifact (seeds=[123, 124])
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_correct) = -1.952
+  mean(M_wrong)   = -4.335
+  mean(M_correct - M_wrong) = 2.383
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 3.325
+  [Phi_proxy] I(mu_hat; mu_check) = 0.409 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P2] Loading SciFact...
+
+[Q32:P2] SciFact check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct) = 0.564
+  mean(M_wrong)   = -3.906
+  mean(M_correct - M_wrong) = 4.470
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.506
+  [Phi_proxy] I(mu_hat; mu_check) = 0.414 bits
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.767
+  z(H0: p=0.5) = 5.842  (n=120)
+  mean(M_correct_end) = -1.396
+  mean(M_wrong_end)   = -5.679
+  mean(M_correct - M_wrong) = 4.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.600
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.707
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.742
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 7.869
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.587 bits
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.558
+  mean_first_cross_frac = 0.071
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.667
+  z(H0: p=0.5) = 3.651  (n=120)
+  mean(M_correct_end - M_injected_end) = 6.713
+  inj_gate_z=2.600, inj_gate_margin=0.750 => PASS
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.093
+  mean dM_wrong   = -0.519
+
+[Q32:P3] (matrix_cached) Verifying mnli->snli (seeds=[123, 124])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.708
+  z(H0: p=0.5) = 6.455  (n=240)
+  mean(M_correct) = -2.425
+  mean(M_wrong)   = -9.423
+  mean(M_correct - M_wrong) = 6.997
+  [swap] P(M_correct > M_swapped_correct) = 0.617
+  [swap] mean(M_correct - M_swapped_correct) = 4.713
+  [Phi_proxy] I(mu_hat; mu_check) = 0.260 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.600
+  z(H0: p=0.5) = 3.098  (n=240)
+  mean(M_correct_end) = -6.850
+  mean(M_wrong_end)   = -9.819
+  mean(M_correct - M_wrong) = 2.969
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.550
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.690
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.642
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.185
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.573 bits
+[Q32:P3] SNLI-Streaming below calibrated pair_wins (reported only): 0.600 < 0.615
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - climate_fever->*:Climate-FEVER-Intervention@seed=123: PASS
+  - climate_fever->*:Climate-FEVER-Intervention@seed=124: PASS
+  - climate_fever->*:Climate-FEVER-Streaming@seed=123: PASS
+  - climate_fever->*:Climate-FEVER-Streaming@seed=124: PASS
+  - climate_fever->scifact:SciFact@seed=123: PASS
+  - climate_fever->scifact:SciFact-Streaming@seed=123: PASS
+  - climate_fever->scifact:SciFact@seed=124: PASS
+  - climate_fever->scifact:SciFact-Streaming@seed=124: PASS
+  - climate_fever->snli:SNLI@seed=123: PASS
+  - climate_fever->snli:SNLI-Streaming@seed=123: PASS
+  - climate_fever->snli:SNLI@seed=124: PASS
+  - climate_fever->snli:SNLI-Streaming@seed=124: PASS
+  - climate_fever->mnli:MNLI@seed=123: PASS
+  - climate_fever->mnli:MNLI-Streaming@seed=123: PASS
+  - climate_fever->mnli:MNLI@seed=124: PASS
+  - climate_fever->mnli:MNLI-Streaming@seed=124: PASS
+  - scifact->*:SciFact@seed=123: PASS
+  - scifact->*:SciFact@seed=124: PASS
+  - scifact->*:SciFact-Streaming@seed=123: PASS
+  - scifact->*:SciFact-Streaming@seed=124: PASS
+  - scifact->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - scifact->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+  - scifact->climate_fever:Climate-FEVER-Intervention@seed=124: PASS
+  - scifact->climate_fever:Climate-FEVER-Streaming@seed=124: PASS
+  - scifact->snli:SNLI@seed=123: PASS
+  - scifact->snli:SNLI-Streaming@seed=123: PASS
+  - scifact->snli:SNLI@seed=124: PASS
+  - scifact->snli:SNLI-Streaming@seed=124: PASS
+  - scifact->mnli:MNLI@seed=123: PASS
+  - scifact->mnli:MNLI-Streaming@seed=123: PASS
+  - scifact->mnli:MNLI@seed=124: PASS
+  - scifact->mnli:MNLI-Streaming@seed=124: PASS
+  - snli->*:SNLI@seed=123: PASS
+  - snli->*:SNLI@seed=124: PASS
+  - snli->*:SNLI-Streaming@seed=123: PASS
+  - snli->*:SNLI-Streaming@seed=124: PASS
+  - snli->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - snli->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+  - snli->climate_fever:Climate-FEVER-Intervention@seed=124: PASS
+  - snli->climate_fever:Climate-FEVER-Streaming@seed=124: PASS
+  - snli->scifact:SciFact@seed=123: PASS
+  - snli->scifact:SciFact-Streaming@seed=123: PASS
+  - snli->scifact:SciFact@seed=124: PASS
+  - snli->scifact:SciFact-Streaming@seed=124: PASS
+  - snli->mnli:MNLI@seed=123: PASS
+  - snli->mnli:MNLI-Streaming@seed=123: PASS
+  - snli->mnli:MNLI@seed=124: PASS
+  - snli->mnli:MNLI-Streaming@seed=124: PASS
+  - mnli->*:MNLI@seed=123: PASS
+  - mnli->*:MNLI@seed=124: PASS
+  - mnli->*:MNLI-Streaming@seed=123: PASS
+  - mnli->*:MNLI-Streaming@seed=124: PASS
+  - mnli->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - mnli->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+  - mnli->climate_fever:Climate-FEVER-Intervention@seed=124: PASS
+  - mnli->climate_fever:Climate-FEVER-Streaming@seed=124: PASS
+  - mnli->scifact:SciFact@seed=123: PASS
+  - mnli->scifact:SciFact-Streaming@seed=123: PASS
+  - mnli->scifact:SciFact@seed=124: PASS
+  - mnli->scifact:SciFact-Streaming@seed=124: PASS
+  - mnli->snli:SNLI@seed=123: PASS
+  - mnli->snli:SNLI-Streaming@seed=123: PASS
+  - mnli->snli:SNLI@seed=124: PASS
+  - mnli->snli:SNLI-Streaming@seed=124: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p5_matrix4_full_cached_n2_20260110_073410.json
+[Q32] EmpiricalMetricReceipt sha256: 8D97D42B90FB73A25CF8AB78C49D03E87BE72521C79E6E5C1362EB4437CB16D9

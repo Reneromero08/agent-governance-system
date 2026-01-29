@@ -1,0 +1,73 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 00:57:53.050332: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 00:57:54.164156: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Calibrating on snli (seeds=[123])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.892
+  z(H0: p=0.5) = 12.135  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -21.141
+  mean(M_correct - M_wrong) = 18.659
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [J] mean neighbor sim (k=10) = 0.530
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.758
+  z(H0: p=0.5) = 8.004  (n=240)
+  mean(M_correct_end) = -5.463
+  mean(M_wrong_end)   = -15.225
+  mean(M_correct - M_wrong) = 9.763
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.550
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.512
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.475
+  [J] mean neighbor sim (k=10) = 0.530
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.586 bits
+[Q32:P3] Wrote calibration to LAW/CONTRACTS/_runs/q32_public/datatrail/transfer_calibration_snli_to_climate_full_20260110_005742.json
+
+[Q32:P3] Frozen thresholds: min_z=2.600  min_pair_wins=0.772
+[Q32:P3] Verifying on climate_fever (seeds=[123])
+
+[Q32:P2] Climate-FEVER intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.692
+  z(H0: p=0.5) = 4.199  (n=120)
+  mean(M_correct - M_wrong) = 3.360
+  [swap] P(M_correct > M_swapped_correct) = 0.633
+  [swap] mean(M_correct - M_swapped_correct) = 5.527
+  [J] mean neighbor sim (k=10) = 0.532
+  [Phi_proxy] I(mu_hat; mu_check) = 0.510 bits
+[Q32:P3] Climate-FEVER-Intervention below calibrated pair_wins (reported only): 0.692 < 0.772
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -4.761
+  mean(M_wrong_end)   = -6.913
+  mean(M_correct - M_wrong) = 2.152
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.650
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.166
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.583
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 3.764
+  [J] mean neighbor sim (k=10) = 0.574
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+[Q32:P3] Climate-FEVER-Streaming below calibrated pair_wins (reported only): 0.625 < 0.772
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - snli->climate_fever:Climate-FEVER-Intervention@seed=123: PASS
+  - snli->climate_fever:Climate-FEVER-Streaming@seed=123: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p3_transfer_snli_to_climate_neighbor_full_20260110_005742.json
+[Q32] EmpiricalMetricReceipt sha256: E9A899CB7A6513900C5AB3B8FE23F59C2677B771A435D36E3DE086A17A787E8C
+exit_code=0

@@ -1,0 +1,30 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 21:59:41.191246: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 21:59:42.159333: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P4] Climate-FEVER streaming + intervention
+[Q32:P4] streaming samples=5
+[Q32:P4] streaming samples=10
+[Q32:P4] streaming samples=15
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.812
+  z(H0: p=0.5) = 2.500  (n=16)
+  mean(M_correct_end) = -2.725
+  mean(M_wrong_end)   = -13.553
+  mean(M_correct - M_wrong) = 10.828
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.500
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 0.906
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.938
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 11.482
+  [J] mean neighbor sim (k=10) = 0.585
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - Climate-FEVER-Streaming: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p2_climate_stream_neighbor_full_fast_20260109_215932.json
+[Q32] EmpiricalMetricReceipt sha256: FBEA5596D6B0CBDA978B87148F855467656EDF93939968691139F4A4B5C3F424
+exit_code=0

@@ -1,0 +1,40 @@
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+Generating test split:   0%|          | 0/10000 [00:00<?, ? examples/s]
+Generating test split: 100%|##########| 10000/10000 [00:00<00:00, 1511624.32 examples/s]
+
+Generating validation split:   0%|          | 0/10000 [00:00<?, ? examples/s]
+Generating validation split: 100%|##########| 10000/10000 [00:00<00:00, 1944237.70 examples/s]
+
+Generating train split:   0%|          | 0/550152 [00:00<?, ? examples/s]
+Generating train split:  60%|#####9    | 329000/550152 [00:00<00:00, 3270726.42 examples/s]
+Generating train split: 100%|##########| 550152/550152 [00:00<00:00, 3499899.49 examples/s]
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 22:42:33.987257: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 22:42:35.035347: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[Q32:P3] snli intervention samples=10
+[Q32:P3] snli intervention samples=25
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.900
+  z(H0: p=0.5) = 5.060  (n=40)
+  mean(M_correct) = -5.441
+  mean(M_wrong)   = -24.089
+  mean(M_correct - M_wrong) = 18.649
+  [swap] P(M_correct > M_swapped_correct) = 0.550
+  [swap] mean(M_correct - M_swapped_correct) = -0.631
+  [J] mean neighbor sim (k=10) = 0.436
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SNLI: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p3_snli_bench_neighbor_full_fast_20260109_224219.json
+[Q32] EmpiricalMetricReceipt sha256: DB0118056C96DF8E63DC6C746BA19FCC6ACA1AD88B84260BCB874EF7BB13BFBC
+exit_code=0

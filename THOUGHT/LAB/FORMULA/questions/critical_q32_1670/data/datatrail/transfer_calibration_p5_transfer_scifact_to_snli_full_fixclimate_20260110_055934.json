@@ -1,0 +1,8 @@
+{
+  "apply_to": "snli",
+  "calibrate_on": "scifact",
+  "created_at": "2026-01-10T13:05:28Z",
+  "frozen_min_pair_wins": 0.7366666666666666,
+  "frozen_min_z": 2.6,
+  "seed_base": 123
+}

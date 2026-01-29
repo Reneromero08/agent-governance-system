@@ -1,0 +1,120 @@
+COMMAND: & 'D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Scripts\python.exe' THOUGHT/LAB/FORMULA/experiments/open_questions/q32/q32_public_benchmarks.py --mode stress --fast --dataset scifact --scoring cosine --wrong_checks neighbor --neighbor_k 10 --threads 12 --device cpu --st_batch 64 --stress_n 5 --stress_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/stress_summary_smoke_20260109_202945.json' --empirical_receipt_out 'LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_smoke_20260109_202945.json'
+
+[Q32:STRESS] SciFact streaming variability (trials=5)
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 2.101
+  mean(M_wrong_end)   = -25.613
+  mean(M_correct - M_wrong) = 27.715
+  [J] mean neighbor sim (k=10) = 0.236
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.556 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.964
+  mean dM_wrong   = -1.841
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.587
+  mean(M_wrong_end)   = -26.032
+  mean(M_correct - M_wrong) = 26.620
+  [J] mean neighbor sim (k=10) = 0.254
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.578 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.033
+  mean dM_wrong   = 1.065
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.200
+  mean(M_wrong_end)   = -24.854
+  mean(M_correct - M_wrong) = 25.053
+  [J] mean neighbor sim (k=10) = 0.243
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.728 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -1.729
+  mean dM_wrong   = -0.727
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 0.659
+  mean(M_wrong_end)   = -26.134
+  mean(M_correct - M_wrong) = 26.793
+  [J] mean neighbor sim (k=10) = 0.219
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.553 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.770
+  mean dM_wrong   = -0.109
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 1.000
+  z(H0: p=0.5) = 4.000  (n=16)
+  mean(M_correct_end) = 1.687
+  mean(M_wrong_end)   = -23.296
+  mean(M_correct - M_wrong) = 24.983
+  [J] mean neighbor sim (k=10) = 0.200
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.450 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.662
+  mean dM_wrong   = 1.971
+
+[Q32:STRESS] Summary
+  pass_rate = 1.000  (pass_n=5/5)
+  min_pair_wins = 1.000
+  min_z = 4.000
+  min_mean_margin = 24.983
+  min_mean_R_correct_end = 8.354
+  min_mean_R_wrong_end   = 0.000
+  min_mean_logR_correct_end = 0.200
+  min_mean_logR_wrong_end   = -26.134
+[Q32:STRESS] Wrote LAW/CONTRACTS/_runs/q32_public/datatrail/stress_summary_smoke_20260109_202945.json
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming-Stress: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_stress_smoke_20260109_202945.json
+[Q32] EmpiricalMetricReceipt sha256: 04A53121276F9677140DE8D66CCB8197439052A682F99743C488B5CB1C937C3E
+
+RECEIPT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          04A53121276F9677140DE8D66CCB8197439052A682F99743C488B5CB1C937C3E       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+STRESS_OUT SHA256:
+
+Algorithm       Hash                                                                   Path
+---------       ----                                                                   ----
+SHA256          8887FC37FB5F1D9BBDDFBAD74413BEB063A0E3914078D9B94E1AEDADA86E121C       D:\CCC 2.0\AI\wt-q32-next\LAW\CO…
+
+
+LOG SHA256:

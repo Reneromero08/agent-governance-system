@@ -1,0 +1,6395 @@
+{
+  "modality": "eeg",
+  "nodes": [
+    {
+      "id": "ds001785",
+      "latestSnapshot": {
+        "created": "2021-04-28T15:27:09.000Z",
+        "size": 26701806128,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perceptual consciousness"
+      },
+      "name": "Perithreshold Tactile detection task with confidence"
+    },
+    {
+      "id": "ds001787",
+      "latestSnapshot": {
+        "created": "2024-06-17T01:24:01.000Z",
+        "size": 6112012191,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG meditation study"
+    },
+    {
+      "id": "ds001810",
+      "latestSnapshot": {
+        "created": "2019-05-28T12:25:39.000Z",
+        "size": 49117378796,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG study of the attentional blink; before, during, and after transcranial Direct Current Stimulation (tDCS)"
+    },
+    {
+      "id": "ds001849",
+      "latestSnapshot": {
+        "created": "2020-07-22T14:19:57.000Z",
+        "size": 47790430570,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "RS_TMSEEG_Data"
+    },
+    {
+      "id": "ds001971",
+      "latestSnapshot": {
+        "created": "2019-06-12T12:35:12.000Z",
+        "size": 34339201028,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Audiocue walking study"
+    },
+    {
+      "id": "ds002034",
+      "latestSnapshot": {
+        "created": "2022-04-08T15:37:24.000Z",
+        "size": 10842685064,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "cross-over intervention",
+        "studyDomain": "Covert visual attention"
+      },
+      "name": "Real-time EEG feedback on alpha power lateralization leads to behavioral improvements in a covert attention task"
+    },
+    {
+      "id": "ds002094",
+      "latestSnapshot": {
+        "created": "2019-08-02T13:56:21.000Z",
+        "size": 42339775606,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Single-pulse open-loop TMS-EEG dataset"
+    },
+    {
+      "id": "ds002158",
+      "latestSnapshot": {
+        "created": "2020-04-25T11:20:01.000Z",
+        "size": 82185122527,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "metacognition"
+      },
+      "name": "Simultaneous eeg-fmri for a speeded discrimination task with confidence"
+    },
+    {
+      "id": "ds002181",
+      "latestSnapshot": {
+        "created": "2019-09-27T17:33:40.000Z",
+        "size": 158221569,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "CRYPTO and PROVIDE EEG Baseline Data"
+    },
+    {
+      "id": "ds002218",
+      "latestSnapshot": {
+        "created": "2019-10-03T05:22:32.000Z",
+        "size": 2089143297,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Auditory and Visual Rhythm Omission EEG"
+    },
+    {
+      "id": "ds002336",
+      "latestSnapshot": {
+        "created": "2021-06-07T17:46:33.000Z",
+        "size": 18046628207,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "EEG-fMRI Neurofeedback",
+        "studyDomain": "Neurofeedback"
+      },
+      "name": "An open access, multi-modal human neuroimaging dataset for data integration: simultaneous EEG and MRI acquisition during a motor imagery neurofeedback task: XP1"
+    },
+    {
+      "id": "ds002338",
+      "latestSnapshot": {
+        "created": "2022-03-31T15:18:49.000Z",
+        "size": 26024158019,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "EEG-fMRI neurofeedback motor imagery task",
+        "studyDomain": "Neurofeedback"
+      },
+      "name": "An open access, multi-modal human neuroimaging dataset for data integration: simultaneous EEG and MRI acquisition during a motor imagery neurofeedback task: XP2"
+    },
+    {
+      "id": "ds002578",
+      "latestSnapshot": {
+        "created": "2021-10-26T01:07:53.000Z",
+        "size": 1429242343,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Cognition"
+      },
+      "name": "P3 study"
+    },
+    {
+      "id": "ds002680",
+      "latestSnapshot": {
+        "created": "2021-10-19T16:26:43.000Z",
+        "size": 9902131689,
+        "tag": "1.2.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Cognition"
+      },
+      "name": "Go-nogo categorization and detection task"
+    },
+    {
+      "id": "ds002691",
+      "latestSnapshot": {
+        "created": "2021-10-19T16:25:42.000Z",
+        "size": 814480634,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Cognition"
+      },
+      "name": "Internal attention study"
+    },
+    {
+      "id": "ds002718",
+      "latestSnapshot": {
+        "created": "2025-11-08T05:07:40.000Z",
+        "size": 4623904945,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Face processing EEG dataset for EEGLAB"
+    },
+    {
+      "id": "ds002720",
+      "latestSnapshot": {
+        "created": "2020-04-23T12:06:55.000Z",
+        "size": 2563670728,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Music emotions"
+      },
+      "name": "BCItempo"
+    },
+    {
+      "id": "ds002721",
+      "latestSnapshot": {
+        "created": "2024-02-19T15:56:43.000Z",
+        "size": 3598850279,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Music emotion"
+      },
+      "name": "filmClips"
+    },
+    {
+      "id": "ds002722",
+      "latestSnapshot": {
+        "created": "2020-04-23T11:46:00.000Z",
+        "size": 6545791966,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Music emotion"
+      },
+      "name": "phBCMIcalibration"
+    },
+    {
+      "id": "ds002723",
+      "latestSnapshot": {
+        "created": "2020-04-23T11:34:51.000Z",
+        "size": 2789434877,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Music emotion"
+      },
+      "name": "phBCMItesting"
+    },
+    {
+      "id": "ds002724",
+      "latestSnapshot": {
+        "created": "2020-04-24T08:02:54.000Z",
+        "size": 9147071936,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Music emotion"
+      },
+      "name": "phBCMItraining"
+    },
+    {
+      "id": "ds002725",
+      "latestSnapshot": {
+        "created": "2020-04-24T01:44:52.000Z",
+        "size": 16445696685,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "t1w",
+          "channels",
+          "eeg",
+          "events",
+          "bold"
+        ],
+        "studyDesign": "Block design & Event related",
+        "studyDomain": "Music emotion"
+      },
+      "name": "A dataset recording joint EEG-fMRI during affective music listening "
+    },
+    {
+      "id": "ds002778",
+      "latestSnapshot": {
+        "created": "2021-12-10T18:20:38.000Z",
+        "size": 571470906,
+        "tag": "1.0.5"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Resting State",
+        "studyDomain": "Parkinson's Disease"
+      },
+      "name": "UC San Diego Resting State EEG Data from Patients with Parkinson's Disease"
+    },
+    {
+      "id": "ds002791",
+      "latestSnapshot": {
+        "created": "2020-05-14T12:57:15.000Z",
+        "size": 50562457196,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "electrodes",
+          "events"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "DataSet1"
+    },
+    {
+      "id": "ds002814",
+      "latestSnapshot": {
+        "created": "2021-12-10T18:20:38.000Z",
+        "size": 29779119341,
+        "tag": "1.3.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TODO: name of the dataset"
+    },
+    {
+      "id": "ds002833",
+      "latestSnapshot": {
+        "created": "2020-07-20T17:52:15.000Z",
+        "size": 42698181625,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "electrodes",
+          "events"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "DataSet2"
+    },
+    {
+      "id": "ds002893",
+      "latestSnapshot": {
+        "created": "2022-06-18T20:41:02.000Z",
+        "size": 8262777491,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Auditory-Visual Shift Study"
+    },
+    {
+      "id": "ds003004",
+      "latestSnapshot": {
+        "created": "2022-08-23T17:00:33.000Z",
+        "size": 38704522994,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Emotion Study"
+    },
+    {
+      "id": "ds003039",
+      "latestSnapshot": {
+        "created": "2025-04-08T22:21:56.000Z",
+        "size": 8401128487,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG"
+      },
+      "name": "free walking study"
+    },
+    {
+      "id": "ds003061",
+      "latestSnapshot": {
+        "created": "2022-08-26T00:28:24.000Z",
+        "size": 2421802195,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "P300 sound task"
+    },
+    {
+      "id": "ds003190",
+      "latestSnapshot": {
+        "created": "2020-10-06T01:17:50.000Z",
+        "size": 1079425010,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "channels",
+          "eeg",
+          "events"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Assesment of the visual stimuli properties in P300 paradigm"
+    },
+    {
+      "id": "ds003194",
+      "latestSnapshot": {
+        "created": "2022-09-20T05:00:13.000Z",
+        "size": 198333437,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Neuroepo multisession"
+    },
+    {
+      "id": "ds003195",
+      "latestSnapshot": {
+        "created": "2022-09-20T04:55:52.000Z",
+        "size": 126957087,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Placebo Neuroepo multisession"
+    },
+    {
+      "id": "ds003343",
+      "latestSnapshot": {
+        "created": "2021-05-05T13:15:08.000Z",
+        "size": 695587039,
+        "tag": "2.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perception"
+      },
+      "name": "Disentangling the percepts of illusory movement and sensory stimulation during tendon vibration in the EEG"
+    },
+    {
+      "id": "ds003380",
+      "latestSnapshot": {
+        "created": "2020-11-13T05:13:05.000Z",
+        "size": 20614209,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Corticothalamic communication under analgesia, sedation and gradual ischemia: a multimodal model of controlled gradual cerebral ischemia in pig"
+    },
+    {
+      "id": "ds003420",
+      "latestSnapshot": {
+        "created": "2020-12-13T17:40:52.000Z",
+        "size": 50565140405,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Dataset 1"
+    },
+    {
+      "id": "ds003421",
+      "latestSnapshot": {
+        "created": "2020-12-13T17:41:58.000Z",
+        "size": 42498451545,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Dataset 2"
+    },
+    {
+      "id": "ds003458",
+      "latestSnapshot": {
+        "created": "2021-01-04T22:45:44.000Z",
+        "size": 5065148524,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ThreeArmedBandit"
+    },
+    {
+      "id": "ds003474",
+      "latestSnapshot": {
+        "created": "2021-01-15T20:45:24.000Z",
+        "size": 17867698098,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ProbabilisticSelection"
+    },
+    {
+      "id": "ds003478",
+      "latestSnapshot": {
+        "created": "2021-01-18T19:50:26.000Z",
+        "size": 11430503904,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Rest"
+    },
+    {
+      "id": "ds003490",
+      "latestSnapshot": {
+        "created": "2021-01-27T18:23:22.000Z",
+        "size": 6276604033,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Rest"
+    },
+    {
+      "id": "ds003505",
+      "latestSnapshot": {
+        "created": "2022-11-02T12:46:33.000Z",
+        "size": 31105987628,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "fully crossed factorial design, randomized presentation orders",
+        "studyDomain": "Visual evoked potentials (faces, motion), brain anatomy, connectivity"
+      },
+      "name": "VEPCON: Source imaging of high-density visual evoked potentials with multi-scale brain parcellations and connectomes"
+    },
+    {
+      "id": "ds003506",
+      "latestSnapshot": {
+        "created": "2021-02-05T20:08:19.000Z",
+        "size": 17399670602,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ReinforcementLearning"
+    },
+    {
+      "id": "ds003509",
+      "latestSnapshot": {
+        "created": "2021-02-08T22:27:00.000Z",
+        "size": 23987498608,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "SimonConflict"
+    },
+    {
+      "id": "ds003516",
+      "latestSnapshot": {
+        "created": "2022-10-04T08:24:18.000Z",
+        "size": 8152002419,
+        "tag": "1.1.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Attended speaker paradigm (own name in ignored)"
+    },
+    {
+      "id": "ds003517",
+      "latestSnapshot": {
+        "created": "2021-02-15T18:10:41.000Z",
+        "size": 6262665570,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ContinuousVideoGamePlay"
+    },
+    {
+      "id": "ds003518",
+      "latestSnapshot": {
+        "created": "2021-02-16T18:03:18.000Z",
+        "size": 42423396129,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "SimonConflict"
+    },
+    {
+      "id": "ds003519",
+      "latestSnapshot": {
+        "created": "2021-02-17T17:12:53.000Z",
+        "size": 9623063888,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "VisualWorkingMemory"
+    },
+    {
+      "id": "ds003522",
+      "latestSnapshot": {
+        "created": "2021-02-19T22:38:51.000Z",
+        "size": 27224783220,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ThreeStimAuditoryOddball"
+    },
+    {
+      "id": "ds003523",
+      "latestSnapshot": {
+        "created": "2021-02-22T20:47:47.000Z",
+        "size": 40304005269,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "VisualWorkingMemory"
+    },
+    {
+      "id": "ds003523",
+      "latestSnapshot": {
+        "created": "2021-02-22T20:47:47.000Z",
+        "size": 40304005269,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "VisualWorkingMemory"
+    },
+    {
+      "id": "ds003555",
+      "latestSnapshot": {
+        "created": "2021-03-08T20:36:10.000Z",
+        "size": 16177352613,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Dataset of EEG recordings of pediatric patients with epilepsy based on the 10-20 system "
+    },
+    {
+      "id": "ds003570",
+      "latestSnapshot": {
+        "created": "2021-03-19T14:02:19.000Z",
+        "size": 51133422324,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG: Improvisation and Musical Structures"
+    },
+    {
+      "id": "ds003574",
+      "latestSnapshot": {
+        "created": "2021-06-07T09:55:55.000Z",
+        "size": 19277929546,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Reward biases spontaneous neural reactivation during sleep"
+    },
+    {
+      "id": "ds003602",
+      "latestSnapshot": {
+        "created": "2022-07-27T17:16:27.000Z",
+        "size": 78609742101,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Childhood Sexual Abuse and problem drinking in women: Neurobehavioral mechanisms"
+    },
+    {
+      "id": "ds003620",
+      "latestSnapshot": {
+        "created": "2021-11-09T19:10:35.000Z",
+        "size": 18299512036,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subject",
+        "studyDomain": "Attention"
+      },
+      "name": "Runabout: A mobile EEG study of auditory oddball processing in laboratory and real-world conditions"
+    },
+    {
+      "id": "ds003626",
+      "latestSnapshot": {
+        "created": "2022-03-14T21:15:32.000Z",
+        "size": 19624686464,
+        "tag": "2.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Inner Speech"
+      },
+      "name": "Inner Speech"
+    },
+    {
+      "id": "ds003638",
+      "latestSnapshot": {
+        "created": "2021-08-25T23:38:04.000Z",
+        "size": 16397669261,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "cognitive control reinforcement learning effort"
+      },
+      "name": "EEG: Electrophysiological biomarkers of behavioral dimensions \nfrom cross-species paradigms"
+    },
+    {
+      "id": "ds003645",
+      "latestSnapshot": {
+        "created": "2023-04-14T14:27:58.000Z",
+        "size": 114157254734,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "meg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Face processing MEEG dataset with HED annotation"
+    },
+    {
+      "id": "ds003655",
+      "latestSnapshot": {
+        "created": "2023-05-31T08:24:01.000Z",
+        "size": 21756907235,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "VerbalWorkingMemory"
+    },
+    {
+      "id": "ds003670",
+      "latestSnapshot": {
+        "created": "2021-06-17T20:13:01.000Z",
+        "size": 77549594582,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Dataset of Concurrent EEG, ECG, and Behavior with Multiple Doses of transcranial Electrical Stimulation - BIDS"
+    },
+    {
+      "id": "ds003690",
+      "latestSnapshot": {
+        "created": "2021-06-10T08:30:11.000Z",
+        "size": 23043388712,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG, ECG and pupil data from young and older adults: rest and auditory cued reaction time tasks"
+    },
+    {
+      "id": "ds003702",
+      "latestSnapshot": {
+        "created": "2024-09-17T17:40:13.000Z",
+        "size": 18784103504,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Social Memory cuing"
+    },
+    {
+      "id": "ds003710",
+      "latestSnapshot": {
+        "created": "2022-10-20T20:01:16.000Z",
+        "size": 10934705875,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "APPLESEED Example Dataset"
+    },
+    {
+      "id": "ds003739",
+      "latestSnapshot": {
+        "created": "2021-11-26T09:52:40.000Z",
+        "size": 11742611120,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Sensorimotor perturbations"
+      },
+      "name": "Perturbed beam-walking task"
+    },
+    {
+      "id": "ds003751",
+      "latestSnapshot": {
+        "created": "2023-07-08T06:40:35.000Z",
+        "size": 5057922854,
+        "tag": "1.0.6"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Single-trial",
+        "studyDomain": "Emotion"
+      },
+      "name": "Dataset on Emotion with Naturalistic Stimuli"
+    },
+    {
+      "id": "ds003753",
+      "latestSnapshot": {
+        "created": "2021-09-27T21:10:32.000Z",
+        "size": 4965119239,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Reinforcement Learning",
+        "studyDomain": "Reinforcement Learning"
+      },
+      "name": "Probabilistic Learning with Affective Feedback: Exp #2"
+    },
+    {
+      "id": "ds003766",
+      "latestSnapshot": {
+        "created": "2024-01-20T00:42:55.000Z",
+        "size": 76565985366,
+        "tag": "2.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "HD-EEG task with mouse tracking"
+    },
+    {
+      "id": "ds003768",
+      "latestSnapshot": {
+        "created": "2026-01-06T15:53:55.000Z",
+        "size": 92938507671,
+        "tag": "1.0.13"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Human sleep"
+      },
+      "name": "Simultaneous EEG and fMRI signals during sleep from humans"
+    },
+    {
+      "id": "ds003774",
+      "latestSnapshot": {
+        "created": "2022-08-25T13:43:21.000Z",
+        "size": 10863711359,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "20 Participants listened to 12 songs from different Genres",
+        "studyDomain": "Music"
+      },
+      "name": "Music Listening- Genre EEG dataset (MUSIN-G)"
+    },
+    {
+      "id": "ds003775",
+      "latestSnapshot": {
+        "created": "2022-11-23T14:20:16.000Z",
+        "size": 4815795862,
+        "tag": "1.2.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG, resting-state"
+      },
+      "name": "SRM Resting-state EEG"
+    },
+    {
+      "id": "ds003800",
+      "latestSnapshot": {
+        "created": "2021-09-27T21:10:33.000Z",
+        "size": 198443567,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Gamma Entrainment"
+      },
+      "name": "Auditory Gamma Entrainment"
+    },
+    {
+      "id": "ds003801",
+      "latestSnapshot": {
+        "created": "2021-11-09T19:10:35.000Z",
+        "size": 1233075132,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Participants were presented with a two-competing speaker paradigm. Salient environmental sound occurred infrequently. During presentation of the auditory scene participants eother walked a pre-determined indoor route (50% of trials) or sat on a chair. ",
+        "studyDomain": "Auditory Attention"
+      },
+      "name": "Neural Tracking to go"
+    },
+    {
+      "id": "ds003805",
+      "latestSnapshot": {
+        "created": "2021-09-27T21:10:44.000Z",
+        "size": 9223975,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Gamma Entrainment"
+      },
+      "name": "Multisensory Gamma Entrainment"
+    },
+    {
+      "id": "ds003810",
+      "latestSnapshot": {
+        "created": "2021-11-09T19:10:35.000Z",
+        "size": 72366316,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Motor Imagery vs Rest - Low-Cost EEG System"
+    },
+    {
+      "id": "ds003822",
+      "latestSnapshot": {
+        "created": "2021-09-27T21:10:33.000Z",
+        "size": 6248471793,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Reinforcement Learning with Affective Feedback",
+        "studyDomain": "Reinforcement Learning"
+      },
+      "name": "Probabilistic Learning with Affective Feedback: Exp #1"
+    },
+    {
+      "id": "ds003825",
+      "latestSnapshot": {
+        "created": "2022-10-10T23:47:11.000Z",
+        "size": 44258973478,
+        "tag": "1.2.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Human electroencephalography recordings from 50 subjects for 22,248 images from 1,854 object concepts"
+    },
+    {
+      "id": "ds003838",
+      "latestSnapshot": {
+        "created": "2024-02-11T11:30:40.000Z",
+        "size": 107600042705,
+        "tag": "1.0.6"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG, pupillometry, ECG and photoplethysmography, and behavioral data in the digit span task"
+    },
+    {
+      "id": "ds003846",
+      "latestSnapshot": {
+        "created": "2025-04-09T01:41:14.000Z",
+        "size": 10480325277,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "2 x 3",
+        "studyDomain": ""
+      },
+      "name": "Prediction Error"
+    },
+    {
+      "id": "ds003885",
+      "latestSnapshot": {
+        "created": "2023-05-24T02:35:11.000Z",
+        "size": 49551741596,
+        "tag": "1.0.8"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Capacity for movement is a major organisational principle in object representations: EEG data from Experiment 2"
+    },
+    {
+      "id": "ds003887",
+      "latestSnapshot": {
+        "created": "2023-05-24T02:37:57.000Z",
+        "size": 49100681711,
+        "tag": "1.2.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Capacity for movement is a major organisational principle in object representations: EEG data from Experiment 3 "
+    },
+    {
+      "id": "ds003944",
+      "latestSnapshot": {
+        "created": "2022-08-12T19:48:26.000Z",
+        "size": 6606397463,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG: First Episode Psychosis vs. Control Resting Task 1"
+    },
+    {
+      "id": "ds003947",
+      "latestSnapshot": {
+        "created": "2022-08-12T19:49:46.000Z",
+        "size": 13466591790,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG: First Episode Psychosis vs. Control Resting Task 2"
+    },
+    {
+      "id": "ds003969",
+      "latestSnapshot": {
+        "created": "2021-12-10T18:20:38.000Z",
+        "size": 58478045346,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Block design",
+        "studyDomain": "Meditation"
+      },
+      "name": "Meditation vs thinking task"
+    },
+    {
+      "id": "ds003987",
+      "latestSnapshot": {
+        "created": "2022-01-09T22:15:44.000Z",
+        "size": 27451677701,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "3 drug sessions",
+        "studyDomain": "Cognitive Control and Reinforcement Learning"
+      },
+      "name": "EEG: Amphetamine trials 5CCPT and Probabilistic Learning"
+    },
+    {
+      "id": "ds004000",
+      "latestSnapshot": {
+        "created": "2022-01-11T04:53:23.000Z",
+        "size": 24161100490,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Schizophrenia"
+      },
+      "name": "Fribourg Ultimatum Game in Schizophrenia Study"
+    },
+    {
+      "id": "ds004010",
+      "latestSnapshot": {
+        "created": "2022-01-11T04:53:57.000Z",
+        "size": 24844863656,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "MAVIS"
+    },
+    {
+      "id": "ds004015",
+      "latestSnapshot": {
+        "created": "2022-10-04T08:05:02.000Z",
+        "size": 6475869232,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG"
+      },
+      "name": "Attended speaker paradigm (cEEGrid data)"
+    },
+    {
+      "id": "ds004017",
+      "latestSnapshot": {
+        "created": "2023-03-20T13:22:15.000Z",
+        "size": 22471485461,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Electrophysiology, Education"
+      },
+      "name": "B/D Motor Intervention for Learning"
+    },
+    {
+      "id": "ds004018",
+      "latestSnapshot": {
+        "created": "2022-02-01T02:24:27.000Z",
+        "size": 11334174445,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "RSVP",
+        "studyDomain": "vision"
+      },
+      "name": "EEG recordings for 200 object images presented in RSVP sequences at 5Hz or 20Hz"
+    },
+    {
+      "id": "ds004019",
+      "latestSnapshot": {
+        "created": "2022-02-09T17:46:49.000Z",
+        "size": 18550696170,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Experimental",
+        "studyDomain": "EEG"
+      },
+      "name": "Effect of obesity on arithmetic processing in preteens with high and low math skills. An event-related potentials study"
+    },
+    {
+      "id": "ds004022",
+      "latestSnapshot": {
+        "created": "2022-02-09T22:23:15.000Z",
+        "size": 646522651,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Motor imagery",
+        "studyDomain": "EEG"
+      },
+      "name": "Multimodal EEG and fNIRS Biosignal Acquisition during Motor Imagery Tasks in Patients with Orthopedic Impairment"
+    },
+    {
+      "id": "ds004024",
+      "latestSnapshot": {
+        "created": "2022-10-19T21:25:59.000Z",
+        "size": 1096522005938,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG"
+      },
+      "name": "TMS-EEG-MRI-fMRI-DWI data on paired associative stimulation and connectivity (Shirley Ryan AbilityLab, Chicago, IL)"
+    },
+    {
+      "id": "ds004033",
+      "latestSnapshot": {
+        "created": "2022-02-09T22:23:32.000Z",
+        "size": 21270391132,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Repeated measures",
+        "studyDomain": "EEG"
+      },
+      "name": "Electrode walking study"
+    },
+    {
+      "id": "ds004040",
+      "latestSnapshot": {
+        "created": "2022-02-24T03:15:05.000Z",
+        "size": 12440254661,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Trance channeling EEG study"
+    },
+    {
+      "id": "ds004043",
+      "latestSnapshot": {
+        "created": "2022-02-25T07:20:37.000Z",
+        "size": 16582819425,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "The time-course of feature-based attention effects dissociated from temporal expectation and target-related processes"
+    },
+    {
+      "id": "ds004067",
+      "latestSnapshot": {
+        "created": "2022-03-13T21:36:37.000Z",
+        "size": 108218050324,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Event-related",
+        "studyDomain": "Psychology"
+      },
+      "name": "Moral conviction and metacognitive ability shape multiple stages of information processing"
+    },
+    {
+      "id": "ds004075",
+      "latestSnapshot": {
+        "created": "2022-03-18T01:36:04.000Z",
+        "size": 7936059852,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "continuous recordings",
+        "studyDomain": "Speech processing"
+      },
+      "name": "what_are_we_talking_about"
+    },
+    {
+      "id": "ds004105",
+      "latestSnapshot": {
+        "created": "2022-05-04T23:03:34.000Z",
+        "size": 21876513335,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "BCIT Auditory Cueing"
+    },
+    {
+      "id": "ds004106",
+      "latestSnapshot": {
+        "created": "2022-04-29T19:16:16.000Z",
+        "size": 72590770632,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "BCIT Advanced Guard Duty"
+    },
+    {
+      "id": "ds004106",
+      "latestSnapshot": {
+        "created": "2022-04-29T19:16:16.000Z",
+        "size": 72590770632,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "BCIT Advanced Guard Duty"
+    },
+    {
+      "id": "ds004117",
+      "latestSnapshot": {
+        "created": "2022-06-16T23:21:01.000Z",
+        "size": 6229874415,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Memory"
+      },
+      "name": "Sternberg Working Memory"
+    },
+    {
+      "id": "ds004118",
+      "latestSnapshot": {
+        "created": "2022-05-04T22:53:42.000Z",
+        "size": 133504200631,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Human reaction times and fatigue."
+      },
+      "name": "Calibration Driving"
+    },
+    {
+      "id": "ds004119",
+      "latestSnapshot": {
+        "created": "2022-05-04T22:45:18.000Z",
+        "size": 59203206625,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Pattern recognition"
+      },
+      "name": "BCIT Basic Guard Duty"
+    },
+    {
+      "id": "ds004120",
+      "latestSnapshot": {
+        "created": "2022-05-04T22:29:32.000Z",
+        "size": 324791400217,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Human performance during driving."
+      },
+      "name": "BCIT Baseline Driving"
+    },
+    {
+      "id": "ds004121",
+      "latestSnapshot": {
+        "created": "2022-05-03T23:43:05.000Z",
+        "size": 25671365743,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "BCIT Mind Wandering"
+    },
+    {
+      "id": "ds004122",
+      "latestSnapshot": {
+        "created": "2022-05-04T22:05:50.000Z",
+        "size": 38826707124,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "BCIT Speed Control"
+    },
+    {
+      "id": "ds004123",
+      "latestSnapshot": {
+        "created": "2022-05-04T15:34:31.000Z",
+        "size": 18814102906,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "BCIT Traffic Complexity"
+    },
+    {
+      "id": "ds004147",
+      "latestSnapshot": {
+        "created": "2024-01-24T19:53:26.000Z",
+        "size": 4291179548,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Average Task Value"
+    },
+    {
+      "id": "ds004148",
+      "latestSnapshot": {
+        "created": "2022-06-13T08:42:17.000Z",
+        "size": 32936811897,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "This dataset contains resting(eyes closed, eyes open) and cognitive(subtraction, music, memory) state EEG recordings with 60 participants during three experimental sessions together with sleep, emotion, mental health, and mind-wandering related measures",
+        "studyDomain": "EEG"
+      },
+      "name": "A test-retest resting and cognitive state EEG dataset"
+    },
+    {
+      "id": "ds004151",
+      "latestSnapshot": {
+        "created": "2022-06-14T18:38:37.000Z",
+        "size": 24845636935,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Quantitative Studies",
+        "studyDomain": "Inhibition and obesity"
+      },
+      "name": "Effect of obesity on inhibitory control in preadolescents during stop-signal \ntask. An event-related potentials study"
+    },
+    {
+      "id": "ds004152",
+      "latestSnapshot": {
+        "created": "2022-09-07T12:48:48.000Z",
+        "size": 5118532675,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Drum Trainer"
+    },
+    {
+      "id": "ds004166",
+      "latestSnapshot": {
+        "created": "2022-06-17T07:46:14.000Z",
+        "size": 83074443348,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "repeated measure",
+        "studyDomain": "working memory training"
+      },
+      "name": "Effects of Forward and Backward Span Trainings on Working Memory: Evidence from a Randomized, Controlled Trial"
+    },
+    {
+      "id": "ds004196",
+      "latestSnapshot": {
+        "created": "2023-06-16T08:25:46.000Z",
+        "size": 10022897658,
+        "tag": "2.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Inner Speech"
+      },
+      "name": "FMRI-EEG Prestudy"
+    },
+    {
+      "id": "ds004200",
+      "latestSnapshot": {
+        "created": "2022-10-06T09:12:27.000Z",
+        "size": 7740008000,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Temporal Scaling"
+    },
+    {
+      "id": "ds004252",
+      "latestSnapshot": {
+        "created": "2022-08-17T15:24:26.000Z",
+        "size": 1392179512,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Rotation-tolerant representations elucidate the time course of high-level object processing"
+    },
+    {
+      "id": "ds004256",
+      "latestSnapshot": {
+        "created": "2022-09-24T16:01:53.000Z",
+        "size": 19516271222,
+        "tag": "1.0.5"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": " "
+    },
+    {
+      "id": "ds004262",
+      "latestSnapshot": {
+        "created": "2022-09-07T12:37:47.000Z",
+        "size": 3728371669,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Continuous Feedback Processing"
+    },
+    {
+      "id": "ds004264",
+      "latestSnapshot": {
+        "created": "2022-10-06T15:04:01.000Z",
+        "size": 3546002190,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Steer the Ship"
+    },
+    {
+      "id": "ds004279",
+      "latestSnapshot": {
+        "created": "2024-11-29T15:37:16.000Z",
+        "size": 27082275332,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Silent and speech perception"
+      },
+      "name": "EEG: silent and perceive speech on 30 spanish sentences"
+    },
+    {
+      "id": "ds004284",
+      "latestSnapshot": {
+        "created": "2022-10-03T22:29:10.000Z",
+        "size": 17562665263,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "eeg-neuroforecasting"
+    },
+    {
+      "id": "ds004295",
+      "latestSnapshot": {
+        "created": "2022-10-15T16:37:47.000Z",
+        "size": 33829431825,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-subjects",
+        "studyDomain": ""
+      },
+      "name": "Reward gain and punishment avoidance reversal learning"
+    },
+    {
+      "id": "ds004306",
+      "latestSnapshot": {
+        "created": "2023-09-27T14:44:14.000Z",
+        "size": 686761341,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG Neural Decoding"
+      },
+      "name": "MultisensoryDataset"
+    },
+    {
+      "id": "ds004315",
+      "latestSnapshot": {
+        "created": "2022-10-27T04:59:58.000Z",
+        "size": 10532286604,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Probabilistic Selection Task",
+        "studyDomain": ""
+      },
+      "name": "Mood Manipulation and PST, Experiment 1"
+    },
+    {
+      "id": "ds004317",
+      "latestSnapshot": {
+        "created": "2022-10-27T18:11:15.000Z",
+        "size": 19639199295,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Probabilistic Selection Task",
+        "studyDomain": ""
+      },
+      "name": "Mood Manipulation and PST, Experiment 2"
+    },
+    {
+      "id": "ds004324",
+      "latestSnapshot": {
+        "created": "2023-03-08T08:37:21.000Z",
+        "size": 2637688659,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "ToonFaces"
+    },
+    {
+      "id": "ds004347",
+      "latestSnapshot": {
+        "created": "2022-11-28T17:06:33.000Z",
+        "size": 2574266001,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Symmetry perception and affective responses: a combined EEG/EMG study"
+    },
+    {
+      "id": "ds004348",
+      "latestSnapshot": {
+        "created": "2024-09-23T10:33:39.000Z",
+        "size": 8793613791,
+        "tag": "1.0.5"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Explorative",
+        "studyDomain": "Sleep monitoring using wearable EEG"
+      },
+      "name": "Ear-EEG Sleep Monitoring 2017 (EESM17)"
+    },
+    {
+      "id": "ds004350",
+      "latestSnapshot": {
+        "created": "2025-02-07T16:56:30.000Z",
+        "size": 10139679269,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Executive Functioning Data"
+    },
+    {
+      "id": "ds004356",
+      "latestSnapshot": {
+        "created": "2024-01-18T18:40:33.000Z",
+        "size": 228796285688,
+        "tag": "2.2.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory Brainstem Response"
+      },
+      "name": "Music and Speech Elicit Similar Subcortical Responses in Human Listeners"
+    },
+    {
+      "id": "ds004357",
+      "latestSnapshot": {
+        "created": "2024-01-10T03:23:08.000Z",
+        "size": 20769757800,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Features-EEG"
+    },
+    {
+      "id": "ds004362",
+      "latestSnapshot": {
+        "created": "2022-12-15T16:17:09.000Z",
+        "size": 8347280653,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG Motor Movement/Imagery Dataset"
+    },
+    {
+      "id": "ds004367",
+      "latestSnapshot": {
+        "created": "2022-12-15T13:16:11.000Z",
+        "size": 30039343360,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perception"
+      },
+      "name": ""
+    },
+    {
+      "id": "ds004368",
+      "latestSnapshot": {
+        "created": "2022-12-15T13:14:58.000Z",
+        "size": 1045574363,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perception"
+      },
+      "name": "Meta-rdk"
+    },
+    {
+      "id": "ds004369",
+      "latestSnapshot": {
+        "created": "2023-02-06T14:17:42.000Z",
+        "size": 2182344547,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Attended Speaker Paradigm",
+        "studyDomain": "Auditory Attention"
+      },
+      "name": "Blink-Pause-Relation (Competing Speaker Paradigm)"
+    },
+    {
+      "id": "ds004381",
+      "latestSnapshot": {
+        "created": "2024-10-29T11:46:29.000Z",
+        "size": 8296777421,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Intraoperative SEP stimulation with 8 different rates",
+        "studyDomain": "Intraoperative Neuromonitoring"
+      },
+      "name": "Intraoperative EEG dataset during medianus-tibialis stimulation with 8 different rates"
+    },
+    {
+      "id": "ds004388",
+      "latestSnapshot": {
+        "created": "2023-07-06T19:24:02.000Z",
+        "size": 732876216370,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subject design",
+        "studyDomain": "Somatosensory system"
+      },
+      "name": "Somatosensory evoked potentials in the human spinal cord to mixed nerve stimulation"
+    },
+    {
+      "id": "ds004389",
+      "latestSnapshot": {
+        "created": "2023-07-06T19:26:09.000Z",
+        "size": 404264478546,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subject design",
+        "studyDomain": "Somatosensory system"
+      },
+      "name": "Somatosensory evoked potentials in the human spinal cord to mixed and sensory nerve stimulation"
+    },
+    {
+      "id": "ds004395",
+      "latestSnapshot": {
+        "created": "2023-06-01T03:35:20.000Z",
+        "size": 9583322399138,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Memory"
+      },
+      "name": "Penn Electrophysiology of Encoding and Retrieval Study (PEERS)"
+    },
+    {
+      "id": "ds004408",
+      "latestSnapshot": {
+        "created": "2023-08-01T14:47:06.000Z",
+        "size": 20083249467,
+        "tag": "1.0.8"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": " Invariant encoding of phonemes in neural responses to continuous speech\n"
+    },
+    {
+      "id": "ds004444",
+      "latestSnapshot": {
+        "created": "2023-07-20T11:43:15.000Z",
+        "size": 52204973510,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Brain-computer interface, Brain-machine interface, Sensorimotor rhythm"
+      },
+      "name": "The BMI-HDEEG dataset 1"
+    },
+    {
+      "id": "ds004446",
+      "latestSnapshot": {
+        "created": "2023-07-20T11:43:17.000Z",
+        "size": 31382983993,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "The BMI-HDEEG dataset 2"
+    },
+    {
+      "id": "ds004447",
+      "latestSnapshot": {
+        "created": "2023-07-20T11:43:45.000Z",
+        "size": 22253513860,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "The BMI-HDEEG dataset 3"
+    },
+    {
+      "id": "ds004448",
+      "latestSnapshot": {
+        "created": "2023-09-22T08:15:34.000Z",
+        "size": 40980947792,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "The BMI-HDEEG dataset 4"
+    },
+    {
+      "id": "ds004460",
+      "latestSnapshot": {
+        "created": "2024-02-08T15:02:55.000Z",
+        "size": 63428693430,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Spatial cognition"
+      },
+      "name": "EEG and motion capture data set for a full-body/joystick rotation task"
+    },
+    {
+      "id": "ds004475",
+      "latestSnapshot": {
+        "created": "2023-07-31T22:21:55.000Z",
+        "size": 52115324993,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "This mobile brain body imaging (MoBI) experiment investigates brain activity correlated to gait adaptation during split-belt treadmill walking. 30 participants completed an abrupt and gradual split-belt walking paradigm (2:1 belt speed ratio). ",
+        "studyDomain": "EEG"
+      },
+      "name": ""
+    },
+    {
+      "id": "ds004477",
+      "latestSnapshot": {
+        "created": "2023-10-29T23:25:15.000Z",
+        "size": 23989925051,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Decision-Making"
+      },
+      "name": "PES - Pandemic Emergency Scenario"
+    },
+    {
+      "id": "ds004502",
+      "latestSnapshot": {
+        "created": "2023-03-06T17:05:06.000Z",
+        "size": 63828222669,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Cognitive Neuroscience"
+      },
+      "name": "Anticipatory differences between Attention and Expectation"
+    },
+    {
+      "id": "ds004504",
+      "latestSnapshot": {
+        "created": "2024-10-30T09:15:12.000Z",
+        "size": 2829897024,
+        "tag": "1.0.8"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Resting state EEG recordings, to investigate potential differences in resting-state EEG recordings between individuals with Alzheimer's disease or Frontotemporal dementia and healthy individuals.",
+        "studyDomain": "Neuroscience, Alzheimer's disease, Frontotemporal dementia"
+      },
+      "name": "A dataset of 88 EEG recordings from: Alzheimer's disease, Frontotemporal dementia and Healthy subjects"
+    },
+    {
+      "id": "ds004505",
+      "latestSnapshot": {
+        "created": "2023-06-28T14:10:07.000Z",
+        "size": 37123164373,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Real World Table Tennis"
+    },
+    {
+      "id": "ds004505",
+      "latestSnapshot": {
+        "created": "2023-06-28T14:10:07.000Z",
+        "size": 37123164373,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Real World Table Tennis"
+    },
+    {
+      "id": "ds004511",
+      "latestSnapshot": {
+        "created": "2023-06-05T23:55:41.000Z",
+        "size": 217194708760,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Between-Subject",
+        "studyDomain": "Cognitive Control and Deception"
+      },
+      "name": "Deception_data"
+    },
+    {
+      "id": "ds004514",
+      "latestSnapshot": {
+        "created": "2025-04-03T23:41:15.000Z",
+        "size": 25930603322,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "nirs"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Simultaneous recordings of EEG and fNIRS of semantic categories of imagined concepts of animals and tools"
+    },
+    {
+      "id": "ds004515",
+      "latestSnapshot": {
+        "created": "2023-03-15T18:47:27.000Z",
+        "size": 10177195129,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Reinforcement learning",
+        "studyDomain": "Reinforcement Learning"
+      },
+      "name": "EEG: Alcohol imagery reinforcement learning task with light and heavy drinker participants"
+    },
+    {
+      "id": "ds004517",
+      "latestSnapshot": {
+        "created": "2025-04-03T23:41:33.000Z",
+        "size": 13610005494,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG of semantic categories of imagined concepts of animals and tools during auditory imagery task"
+    },
+    {
+      "id": "ds004519",
+      "latestSnapshot": {
+        "created": "2023-03-04T19:46:39.000Z",
+        "size": 13486847571,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-participants",
+        "studyDomain": ""
+      },
+      "name": "EsterAndNouri2023"
+    },
+    {
+      "id": "ds004520",
+      "latestSnapshot": {
+        "created": "2023-03-06T17:32:21.000Z",
+        "size": 11175907697,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-participants",
+        "studyDomain": "Cognitive Neuroscience"
+      },
+      "name": "EsterPytel2023"
+    },
+    {
+      "id": "ds004521",
+      "latestSnapshot": {
+        "created": "2023-03-07T18:36:19.000Z",
+        "size": 11470005753,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-participants",
+        "studyDomain": "Cognitive Neuroscience"
+      },
+      "name": "Changes in behavioral priority influence the accessibility of working memory content - Experiment 2"
+    },
+    {
+      "id": "ds004532",
+      "latestSnapshot": {
+        "created": "2023-05-18T15:21:12.000Z",
+        "size": 23367840317,
+        "tag": "1.2.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Probabilistic Selection",
+        "studyDomain": "Reinforcement Learning"
+      },
+      "name": "EEG: Probabilistic Selection Task (PST) + PST with Cabergoline Challenge"
+    },
+    {
+      "id": "ds004554",
+      "latestSnapshot": {
+        "created": "2023-04-28T08:59:42.000Z",
+        "size": 9432071415,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Forced Picture Naming Task",
+        "studyDomain": ""
+      },
+      "name": "Forced Picture Naming Task"
+    },
+    {
+      "id": "ds004561",
+      "latestSnapshot": {
+        "created": "2023-05-03T23:20:08.000Z",
+        "size": 104871731022,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Illusion of Agency over Electrically-Actuated Movements"
+    },
+    {
+      "id": "ds004563",
+      "latestSnapshot": {
+        "created": "2023-07-06T22:12:40.000Z",
+        "size": 108333359388,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Vicarious touch: overlapping neural patterns between seeing and feeling touch"
+    },
+    {
+      "id": "ds004572",
+      "latestSnapshot": {
+        "created": "2025-08-18T17:43:20.000Z",
+        "size": 46776268496,
+        "tag": "1.3.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Hypnosis"
+      },
+      "name": "OTKA PLB-HYP Study1"
+    },
+    {
+      "id": "ds004574",
+      "latestSnapshot": {
+        "created": "2023-05-24T17:01:42.000Z",
+        "size": 14469987580,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Observational",
+        "studyDomain": "Cross-modal Oddball"
+      },
+      "name": "Cross-modal Oddball Task."
+    },
+    {
+      "id": "ds004577",
+      "latestSnapshot": {
+        "created": "2023-05-25T16:16:58.000Z",
+        "size": 684369909,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "EEG recording: The study was performed in a dimly lit soundproof room. While recording each child remained on its mother's lap and wore a polyester cap with surface electrodes distributed according to the 10\u201320 International System (Fp1, Fp2, F3, F4, C3, C4, P3, P4, O1, O2, F7, F8, T3, T4, T5, T6 Fz, Cz, Pz). Impedances were at or below 5000 \u03a9.  Referential EEG recordings were taken during spontaneous quiet sleep, stage II, for a 30 min interval using linked ear lobes as reference.",
+        "studyDomain": "EEG in healthy at term infants from 0 to 12 months"
+      },
+      "name": "Dataset containing resting EEG for a sample of 103 normal infants in the first year of life"
+    },
+    {
+      "id": "ds004579",
+      "latestSnapshot": {
+        "created": "2023-05-25T15:46:19.000Z",
+        "size": 25896737364,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Observational",
+        "studyDomain": "Human Interval Timing"
+      },
+      "name": "Interval Timing Task"
+    },
+    {
+      "id": "ds004580",
+      "latestSnapshot": {
+        "created": "2023-05-25T16:41:08.000Z",
+        "size": 17008438192,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Cross-Section",
+        "studyDomain": "Simon Reaction-Time Task"
+      },
+      "name": "Simon-conflict Task."
+    },
+    {
+      "id": "ds004582",
+      "latestSnapshot": {
+        "created": "2023-06-01T04:57:32.000Z",
+        "size": 315915939030,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Reality Perception"
+      },
+      "name": "FakeFaceEmo_data"
+    },
+    {
+      "id": "ds004584",
+      "latestSnapshot": {
+        "created": "2023-05-31T13:49:17.000Z",
+        "size": 3078216426,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Cross-sectional",
+        "studyDomain": "Cognition / Parkinson's disease"
+      },
+      "name": "Rest eyes open"
+    },
+    {
+      "id": "ds004587",
+      "latestSnapshot": {
+        "created": "2024-06-28T10:51:24.000Z",
+        "size": 235517890332,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "IllusionGameEEG_data"
+    },
+    {
+      "id": "ds004588",
+      "latestSnapshot": {
+        "created": "2023-06-01T12:00:30.000Z",
+        "size": 560003959,
+        "tag": "1.2.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Neuromarketing"
+      },
+      "name": "Neuma"
+    },
+    {
+      "id": "ds004595",
+      "latestSnapshot": {
+        "created": "2023-06-09T21:09:50.000Z",
+        "size": 8390886212,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "3-armed bandit",
+        "studyDomain": "Reinforcement Learning"
+      },
+      "name": "EEG: RL Task (3-Armed Bandit) with alcohol cues in hazardous drinkers and ctls"
+    },
+    {
+      "id": "ds004598",
+      "latestSnapshot": {
+        "created": "2023-07-10T19:04:43.000Z",
+        "size": 10673023391,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "4 WT and 5 Tg rats underwent linear track experiments",
+        "studyDomain": "Hippocampal LFPs in Alzheimer's Disease"
+      },
+      "name": "LFP during linear track in 6-month old TgF344-AD rats"
+    },
+    {
+      "id": "ds004602",
+      "latestSnapshot": {
+        "created": "2023-08-27T11:31:01.000Z",
+        "size": 79364456510,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Performance Monitoring"
+      },
+      "name": "Registerd Replication Report of ERN/Pe Psychometrics"
+    },
+    {
+      "id": "ds004603",
+      "latestSnapshot": {
+        "created": "2023-09-21T03:28:20.000Z",
+        "size": 29391618186,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subjects",
+        "studyDomain": "Vision"
+      },
+      "name": "Visual Attribute-Specific Contextual Trajectory Paradigm"
+    },
+    {
+      "id": "ds004621",
+      "latestSnapshot": {
+        "created": "2025-06-21T10:56:57.000Z",
+        "size": 83086874697,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "cognitive control"
+      },
+      "name": "The Nencki-Symfonia EEG/ERP dataset"
+    },
+    {
+      "id": "ds004625",
+      "latestSnapshot": {
+        "created": "2023-07-04T18:08:12.000Z",
+        "size": 67068941232,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Walking over uneven terrain; speed",
+        "studyDomain": "EEG"
+      },
+      "name": "Mind in Motion Young Adults Walking Over Uneven Terrain"
+    },
+    {
+      "id": "ds004626",
+      "latestSnapshot": {
+        "created": "2023-08-07T21:55:09.000Z",
+        "size": 21336340983,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Loneliness"
+      },
+      "name": "Can we dissociate hypervigilance to social threats from altered perceptual decision-making processes in lonely individuals? An exploration with Drift Diffusion Modelling and EEG event-related potentials."
+    },
+    {
+      "id": "ds004635",
+      "latestSnapshot": {
+        "created": "2024-07-16T11:59:14.000Z",
+        "size": 27971375388,
+        "tag": "3.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Gaffrey Lab Infant Microstates Reliability"
+    },
+    {
+      "id": "ds004657",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:46:52.000Z",
+        "size": 46237302253,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Driving with Autonomous Aids"
+    },
+    {
+      "id": "ds004660",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:47:42.000Z",
+        "size": 7782408262,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TNO"
+    },
+    {
+      "id": "ds004661",
+      "latestSnapshot": {
+        "created": "2024-09-06T14:53:36.000Z",
+        "size": 1505576944,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ANDI"
+    },
+    {
+      "id": "ds004706",
+      "latestSnapshot": {
+        "created": "2023-08-22T12:13:59.000Z",
+        "size": 1426144562699,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": "episodic memory, spatial memory"
+      },
+      "name": "Spatial memory and non-invasive closed-loop stimulus timing"
+    },
+    {
+      "id": "ds004718",
+      "latestSnapshot": {
+        "created": "2025-10-14T01:06:57.000Z",
+        "size": 39765512028,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Le Petit Prince Hong Kong: Naturalistic fMRI and EEG dataset from older Cantonese speakers"
+    },
+    {
+      "id": "ds004745",
+      "latestSnapshot": {
+        "created": "2023-09-08T14:15:03.000Z",
+        "size": 253839277,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "SSVEP with artifact and artifact-free conditions",
+        "studyDomain": "EEG"
+      },
+      "name": "8-Channel SSVEP EEG Dataset with Artifacts Trials"
+    },
+    {
+      "id": "ds004752",
+      "latestSnapshot": {
+        "created": "2023-09-20T10:40:50.000Z",
+        "size": 10984448479,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "ieeg",
+          "eeg"
+        ],
+        "studyDesign": "Intracranial EEG, scalp EEG recordings of epilepsy patients performing a verbal working memory task",
+        "studyDomain": "Cognitive neuroscience, working memory"
+      },
+      "name": "Dataset of intracranial EEG, scalp EEG and beamforming sources from epilepsy patients performing a verbal working memory task"
+    },
+    {
+      "id": "ds004771",
+      "latestSnapshot": {
+        "created": "2023-09-25T03:47:45.000Z",
+        "size": 1462175616,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Psychology, Computer Programming"
+      },
+      "name": "EEG/ERP data from a Python Reading Task"
+    },
+    {
+      "id": "ds004784",
+      "latestSnapshot": {
+        "created": "2023-12-21T18:58:48.000Z",
+        "size": 1084178641,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Phantom EEG Dataset with Motion, Muscle, and Eye Artifacts and Example Scripts"
+    },
+    {
+      "id": "ds004785",
+      "latestSnapshot": {
+        "created": "2023-10-02T14:51:39.000Z",
+        "size": 368223688,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Reactive Balance",
+        "studyDomain": ""
+      },
+      "name": "EEG data for paper titled - Precise cortical contributions to feedback sensorimotor control during reactive balance"
+    },
+    {
+      "id": "ds004796",
+      "latestSnapshot": {
+        "created": "2025-06-22T11:08:23.000Z",
+        "size": 257896989782,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "A Polish Electroencephalography, Alzheimer\u2019s Risk-genes, Lifestyle and Neuroimaging (PEARL-Neuro) Database"
+    },
+    {
+      "id": "ds004802",
+      "latestSnapshot": {
+        "created": "2023-10-17T11:15:33.000Z",
+        "size": 10810016249,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Pilot data for Loneliness in the Brain: Distinguishing Between Hypersensitivity and Hyperalertness"
+    },
+    {
+      "id": "ds004816",
+      "latestSnapshot": {
+        "created": "2023-10-26T00:02:11.000Z",
+        "size": 9731821453,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG-attention-rsvp-exp1"
+    },
+    {
+      "id": "ds004817",
+      "latestSnapshot": {
+        "created": "2023-10-26T00:02:19.000Z",
+        "size": 10808487309,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG-attention-rsvp-exp2"
+    },
+    {
+      "id": "ds004840",
+      "latestSnapshot": {
+        "created": "2023-11-12T22:23:51.000Z",
+        "size": 628618633,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": " ### 1.1 Study Overview  This dataset forms part of an ongoing single-site Randomized Clinical Trial (RCT) involving adult burn patients admitted to the Intensive Care Unit (ICU). The key details of the study include:  - **Participants**: The study encompasses 82 adult burn patients admitted to the ICU. - **Randomization**: Participants were randomly assigned to either an intervention group or a control group in a 1:1 ratio. The intervention group received standard care in addition to a maximum of six Music therapy sessions provided by a certified music therapist over a 2-week period. - **Electrophysiological Measures**: Electrophysiological measures were taken from a subset of 9 participants in the intervention group (11%). - **Ethics and Registration**: The study was approved by the ethics committee of the Fundaci\u00f3n Santa Fe de Bogot\u00e1 (FSFB) with approval IDs CCEI-11234-2019 and CCEI-11971-2020. It is registered on Clinicaltrials.gov under the identifier NCT04571255. - **Informed Consent**: All participants",
+        "studyDomain": "EEG, ECG and EMG Music therapy "
+      },
+      "name": "Dataset of electrophysiological signals (EEG, ECG, EMG) during Music therapy with adult burn patients in the Intensive Care Unit."
+    },
+    {
+      "id": "ds004841",
+      "latestSnapshot": {
+        "created": "2023-11-13T17:59:04.000Z",
+        "size": 7846933953,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TX14"
+    },
+    {
+      "id": "ds004842",
+      "latestSnapshot": {
+        "created": "2023-11-13T18:17:34.000Z",
+        "size": 5589053822,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TX15"
+    },
+    {
+      "id": "ds004843",
+      "latestSnapshot": {
+        "created": "2023-11-13T19:01:24.000Z",
+        "size": 8229205347,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "T16"
+    },
+    {
+      "id": "ds004844",
+      "latestSnapshot": {
+        "created": "2023-11-13T19:23:59.000Z",
+        "size": 23976121518,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "T22"
+    },
+    {
+      "id": "ds004849",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:33:15.000Z",
+        "size": 83056636,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "STRONG"
+    },
+    {
+      "id": "ds004850",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:33:20.000Z",
+        "size": 83056630,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ODE"
+    },
+    {
+      "id": "ds004850",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:33:20.000Z",
+        "size": 83056630,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ODE"
+    },
+    {
+      "id": "ds004851",
+      "latestSnapshot": {
+        "created": "2024-07-09T03:15:38.000Z",
+        "size": 60057550495,
+        "tag": "2.1.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "HID"
+    },
+    {
+      "id": "ds004852",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:35:59.000Z",
+        "size": 83056658,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "InsurgentCivilian"
+    },
+    {
+      "id": "ds004853",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:36:03.000Z",
+        "size": 83056632,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TX17"
+    },
+    {
+      "id": "ds004854",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:36:07.000Z",
+        "size": 83056632,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "TX18"
+    },
+    {
+      "id": "ds004855",
+      "latestSnapshot": {
+        "created": "2023-11-14T15:36:36.000Z",
+        "size": 83056628,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "FT"
+    },
+    {
+      "id": "ds004860",
+      "latestSnapshot": {
+        "created": "2023-11-23T16:05:54.000Z",
+        "size": 4065631774,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-subject",
+        "studyDomain": "moral judgment"
+      },
+      "name": "Investigating the cognitive conflict triggered by moral judgment of accidental harm : an event-related potentials study"
+    },
+    {
+      "id": "ds004883",
+      "latestSnapshot": {
+        "created": "2023-12-21T11:55:36.000Z",
+        "size": 131858855109,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Three versions of a flanker task",
+        "studyDomain": "Performance Monitoring"
+      },
+      "name": "Registerd Report of ERN During Three Versions of a Flanker Task"
+    },
+    {
+      "id": "ds004902",
+      "latestSnapshot": {
+        "created": "2025-04-27T16:47:34.000Z",
+        "size": 8898598868,
+        "tag": "1.0.8"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "A Resting-state EEG Dataset for Sleep Deprivation"
+    },
+    {
+      "id": "ds004917",
+      "latestSnapshot": {
+        "created": "2024-05-23T13:40:26.000Z",
+        "size": 40213447001,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Decision-making"
+      },
+      "name": "Probability Decision-making Task with ambiguity"
+    },
+    {
+      "id": "ds004940",
+      "latestSnapshot": {
+        "created": "2025-08-11T19:45:09.000Z",
+        "size": null,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [],
+        "studyDesign": "Electroencepholography (EEG)",
+        "studyDomain": "Adolescent semantic comprehension in passive and active contexts using EEG"
+      },
+      "name": "Neurophysiological measures of covert semantic processing in neurotypical adolescents actively ignoring spoken sentence inputs: A high-density event-related potential (ERP) study."
+    },
+    {
+      "id": "ds004942",
+      "latestSnapshot": {
+        "created": "2024-01-23T03:00:50.000Z",
+        "size": 26899933059,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Mixed Factorial Design",
+        "studyDomain": "Spatial Working Memory"
+      },
+      "name": "SpatialMemory"
+    },
+    {
+      "id": "ds004951",
+      "latestSnapshot": {
+        "created": "2024-02-06T15:55:56.000Z",
+        "size": 23627351784,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "braille letter recognition"
+      },
+      "name": "Braille letters - EEG"
+    },
+    {
+      "id": "ds004952",
+      "latestSnapshot": {
+        "created": "2025-03-08T10:37:09.000Z",
+        "size": 222393779876,
+        "tag": "1.2.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Semantic decoding"
+      },
+      "name": "Novel Reading"
+    },
+    {
+      "id": "ds004980",
+      "latestSnapshot": {
+        "created": "2024-02-20T17:37:08.000Z",
+        "size": 16989514308,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "3 by 2 repeated-measures design",
+        "studyDomain": "Neuro-architecture"
+      },
+      "name": "EEG data set for a architectural affordances task"
+    },
+    {
+      "id": "ds004995",
+      "latestSnapshot": {
+        "created": "2024-03-24T05:23:36.000Z",
+        "size": 29637642698,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "The Time-Course of Food Representation in the Human Brain"
+    },
+    {
+      "id": "ds005021",
+      "latestSnapshot": {
+        "created": "2024-03-11T03:54:44.000Z",
+        "size": 51007318536,
+        "tag": "1.2.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Visual Perception"
+      },
+      "name": "Tilt Illusion by Phase"
+    },
+    {
+      "id": "ds005028",
+      "latestSnapshot": {
+        "created": "2024-03-11T23:12:16.000Z",
+        "size": 442568172,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "P300 Speller"
+      },
+      "name": "Comparing P300 Flashing paradigms in online typing with language models"
+    },
+    {
+      "id": "ds005034",
+      "latestSnapshot": {
+        "created": "2024-03-21T07:44:31.000Z",
+        "size": 65885314989,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "The effect of theta tACS on working memory"
+    },
+    {
+      "id": "ds005048",
+      "latestSnapshot": {
+        "created": "2025-04-10T15:22:23.000Z",
+        "size": 373200390,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Gamma entrainment"
+      },
+      "name": "40Hz Auditory Entrainment"
+    },
+    {
+      "id": "ds005079",
+      "latestSnapshot": {
+        "created": "2024-07-01T21:21:53.000Z",
+        "size": 1809231507,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Healing"
+      },
+      "name": "The Effects of Directed Therapeutic Intent on Live and Damaged Cells"
+    },
+    {
+      "id": "ds005087",
+      "latestSnapshot": {
+        "created": "2025-01-23T22:53:56.000Z",
+        "size": 13146879384,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "rapid-hemifield-object-eeg"
+    },
+    {
+      "id": "ds005089",
+      "latestSnapshot": {
+        "created": "2024-04-18T09:33:33.000Z",
+        "size": 73021312471,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Selective attention"
+      },
+      "name": "Competition_EEG"
+    },
+    {
+      "id": "ds005095",
+      "latestSnapshot": {
+        "created": "2024-05-10T12:12:17.000Z",
+        "size": 15336165155,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "STERNBERG"
+    },
+    {
+      "id": "ds005106",
+      "latestSnapshot": {
+        "created": "2025-03-05T22:48:06.000Z",
+        "size": 1331391470,
+        "tag": "1.5.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "200 Objects Infants EEG"
+    },
+    {
+      "id": "ds005114",
+      "latestSnapshot": {
+        "created": "2024-04-29T20:15:22.000Z",
+        "size": 59996318346,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "DPX Task",
+        "studyDomain": "Cognitive Control"
+      },
+      "name": "EEG: DPX Cog Ctl Task in Acute Mild TBI"
+    },
+    {
+      "id": "ds005121",
+      "latestSnapshot": {
+        "created": "2024-05-03T01:43:00.000Z",
+        "size": 9711091695,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "EEG nap study using Targeted Memory Reactivation",
+        "studyDomain": "Memory consolidation and sleep"
+      },
+      "name": "Siefert2024"
+    },
+    {
+      "id": "ds005131",
+      "latestSnapshot": {
+        "created": "2024-07-28T15:28:07.000Z",
+        "size": 23996523766,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory Neuroscience"
+      },
+      "name": "Evoked Responses to Elevated sounds"
+    },
+    {
+      "id": "ds005170",
+      "latestSnapshot": {
+        "created": "2024-12-12T06:43:12.000Z",
+        "size": 97416063152,
+        "tag": "1.1.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Imaginary Speech Classic Experimental Paradigm",
+        "studyDomain": "electroencephalogram"
+      },
+      "name": "Chisco"
+    },
+    {
+      "id": "ds005178",
+      "latestSnapshot": {
+        "created": "2024-05-31T23:06:26.000Z",
+        "size": 27636341897,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "single arm",
+        "studyDomain": "Automatic sleep scoring with ear-EEG"
+      },
+      "name": "Ear-EEG Sleep Monitoring 2023 (EESM23)"
+    },
+    {
+      "id": "ds005185",
+      "latestSnapshot": {
+        "created": "2024-11-09T13:45:24.000Z",
+        "size": 287335439821,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Mobile Sleep Scoring"
+      },
+      "name": "Ear-EEG Sleep Monitoring 2019 (EESM19)"
+    },
+    {
+      "id": "ds005189",
+      "latestSnapshot": {
+        "created": "2024-06-16T15:24:05.000Z",
+        "size": 17255876906,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Recognition memory"
+      },
+      "name": "Search Superiority Recollection Familiarity"
+    },
+    {
+      "id": "ds005207",
+      "latestSnapshot": {
+        "created": "2024-06-01T15:54:26.000Z",
+        "size": 30627443497,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Automatic sleep scoring with ear-EEG"
+      },
+      "name": "Surrey cEEGrid sleep data set"
+    },
+    {
+      "id": "ds005262",
+      "latestSnapshot": {
+        "created": "2025-01-22T21:44:02.000Z",
+        "size": 722210589,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ArEEG: Arabic Inner Speech EEG dataset"
+    },
+    {
+      "id": "ds005273",
+      "latestSnapshot": {
+        "created": "2024-06-22T16:34:52.000Z",
+        "size": 47690881750,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perceptual awareness"
+      },
+      "name": "Neural representation of consciously seen and unseen information"
+    },
+    {
+      "id": "ds005274",
+      "latestSnapshot": {
+        "created": "2024-06-21T20:16:16.000Z",
+        "size": 75399884,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Experimental research",
+        "studyDomain": "Robot"
+      },
+      "name": "UV_EEG"
+    },
+    {
+      "id": "ds005280",
+      "latestSnapshot": {
+        "created": "2024-06-26T06:57:02.000Z",
+        "size": 45503186303,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "pain and EEG"
+      },
+      "name": "223 By BP"
+    },
+    {
+      "id": "ds005284",
+      "latestSnapshot": {
+        "created": "2024-06-26T09:15:50.000Z",
+        "size": 1784094196,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "26 By Biosemi"
+    },
+    {
+      "id": "ds005285",
+      "latestSnapshot": {
+        "created": "2024-06-26T06:49:38.000Z",
+        "size": 12705224701,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "29 By ANT"
+    },
+    {
+      "id": "ds005286",
+      "latestSnapshot": {
+        "created": "2024-06-26T09:16:24.000Z",
+        "size": 10042737622,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "30 By ANT"
+    },
+    {
+      "id": "ds005289",
+      "latestSnapshot": {
+        "created": "2024-06-26T14:04:32.000Z",
+        "size": 7636421599,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "39 By BP"
+    },
+    {
+      "id": "ds005291",
+      "latestSnapshot": {
+        "created": "2024-06-26T14:05:42.000Z",
+        "size": 21968960012,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "65 By ANT"
+    },
+    {
+      "id": "ds005292",
+      "latestSnapshot": {
+        "created": "2024-06-27T01:42:37.000Z",
+        "size": 54603307745,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "142 by Biosemi"
+    },
+    {
+      "id": "ds005293",
+      "latestSnapshot": {
+        "created": "2024-07-29T07:01:52.000Z",
+        "size": 106171437197,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "95 By BP"
+    },
+    {
+      "id": "ds005296",
+      "latestSnapshot": {
+        "created": "2024-06-28T23:22:32.000Z",
+        "size": 9154606091,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Mixed repeated measures group design",
+        "studyDomain": "EEG"
+      },
+      "name": "Sentence semantic and syntactic violations"
+    },
+    {
+      "id": "ds005305",
+      "latestSnapshot": {
+        "created": "2024-07-04T08:10:16.000Z",
+        "size": 6850532958,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Observational",
+        "studyDomain": "Executive functions"
+      },
+      "name": "EEG Resting-state Microstates Correlates of Executive Functions"
+    },
+    {
+      "id": "ds005307",
+      "latestSnapshot": {
+        "created": "2024-08-15T14:43:17.000Z",
+        "size": 19411390126,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "nociception"
+      },
+      "name": "Laser-evoked potentials in the human spinal cord and cortex"
+    },
+    {
+      "id": "ds005340",
+      "latestSnapshot": {
+        "created": "2024-11-22T21:58:06.000Z",
+        "size": 10172114688,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory Brainstem Response"
+      },
+      "name": "Fundamental frequency predominantly drives talker differences in auditory brainstem responses to continuous speech"
+    },
+    {
+      "id": "ds005342",
+      "latestSnapshot": {
+        "created": "2024-07-15T19:07:42.000Z",
+        "size": 2181595802,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG data offline and online during motor imagery for standing and sitting"
+    },
+    {
+      "id": "ds005343",
+      "latestSnapshot": {
+        "created": "2024-07-16T12:00:23.000Z",
+        "size": 24373540791,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Gaffrey Lab Infant Microstates and Attention"
+    },
+    {
+      "id": "ds005343",
+      "latestSnapshot": {
+        "created": "2024-07-16T12:00:23.000Z",
+        "size": 24373540791,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Gaffrey Lab Infant Microstates and Attention"
+    },
+    {
+      "id": "ds005345",
+      "latestSnapshot": {
+        "created": "2025-04-17T07:54:50.000Z",
+        "size": 174527101942,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Le Petit Prince Multitalker: Naturalistic 7T fMRI and EEG Dataset"
+    },
+    {
+      "id": "ds005363",
+      "latestSnapshot": {
+        "created": "2024-07-27T11:07:23.000Z",
+        "size": 19011100939,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Object recognition"
+      },
+      "name": "Object recognition in healthy aging (ORHA) - EEG"
+    },
+    {
+      "id": "ds005383",
+      "latestSnapshot": {
+        "created": "2024-07-28T17:18:44.000Z",
+        "size": 375577954,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "observational study",
+        "studyDomain": "EEG"
+      },
+      "name": "TMNRED, A Chinese Language EEG Dataset for Fuzzy Semantic Target Identification in Natural Reading Environments"
+    },
+    {
+      "id": "ds005385",
+      "latestSnapshot": {
+        "created": "2025-05-05T12:05:14.000Z",
+        "size": 79529430433,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Resting-state EEG data before and after cognitive activity across the adult lifespan and a 5-year follow-up"
+    },
+    {
+      "id": "ds005397",
+      "latestSnapshot": {
+        "created": "2025-11-10T12:51:56.000Z",
+        "size": 12872404161,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within Subjects 3x4",
+        "studyDomain": "Architectural affordances"
+      },
+      "name": "Affordances of stairs"
+    },
+    {
+      "id": "ds005403",
+      "latestSnapshot": {
+        "created": "2024-08-06T18:19:30.000Z",
+        "size": 127189601509,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "speech production, motor control"
+      },
+      "name": "Delayed Auditory Feedback EEG/EGG"
+    },
+    {
+      "id": "ds005406",
+      "latestSnapshot": {
+        "created": "2024-08-12T09:54:38.000Z",
+        "size": 14241904586,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "2 (same vs different movement) x 2 (one vs two agents)",
+        "studyDomain": "Social interaction, perceptual binding"
+      },
+      "name": "EEG frequency tagging reveals the integration of dissimilar observed actions"
+    },
+    {
+      "id": "ds005407",
+      "latestSnapshot": {
+        "created": "2024-08-10T01:07:46.000Z",
+        "size": 40639241652,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory Brainstem Response"
+      },
+      "name": "The effect of speech masking on the subcortical response to speech"
+    },
+    {
+      "id": "ds005408",
+      "latestSnapshot": {
+        "created": "2024-12-10T17:02:57.000Z",
+        "size": 16418282216,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory Brainstem Response"
+      },
+      "name": "The effect of speech masking on the subcortical response to speech"
+    },
+    {
+      "id": "ds005410",
+      "latestSnapshot": {
+        "created": "2024-08-26T13:51:29.000Z",
+        "size": 21213480734,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Semantic_conditioning"
+    },
+    {
+      "id": "ds005416",
+      "latestSnapshot": {
+        "created": "2024-12-17T01:14:50.000Z",
+        "size": 22869324774,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Watching the fatigue level of a dynamic parallax experimental paradigm in a mixed reality environment",
+        "studyDomain": "Stereo Vision Fatigue under Mixed Reality Environment"
+      },
+      "name": "Fatigue Characterization of EEG under Mixed Reality Stereo Vision"
+    },
+    {
+      "id": "ds005420",
+      "latestSnapshot": {
+        "created": "2024-08-21T17:22:57.000Z",
+        "size": 390188994,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Exploratory",
+        "studyDomain": "Cognitive neuroscience"
+      },
+      "name": "Resting state EEG with closed eyes and open eyes in females from 60 to 80 years old"
+    },
+    {
+      "id": "ds005429",
+      "latestSnapshot": {
+        "created": "2024-08-30T05:31:09.000Z",
+        "size": 17684554701,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-participant comparison of three different auditory sequences for evoking the MMN/P3b effect.",
+        "studyDomain": "auditory perception"
+      },
+      "name": "Auditory oddball comparison (Optimum-1, Learning-oddball, and the local\u2013global paradigm)"
+    },
+    {
+      "id": "ds005473",
+      "latestSnapshot": {
+        "created": "2024-09-11T10:00:36.000Z",
+        "size": 6637997774,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "29 By BP"
+    },
+    {
+      "id": "ds005486",
+      "latestSnapshot": {
+        "created": "2025-03-01T17:12:32.000Z",
+        "size": 398401151423,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "PREDICT"
+    },
+    {
+      "id": "ds005505",
+      "latestSnapshot": {
+        "created": "2025-03-07T21:58:22.000Z",
+        "size": 110708612638,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 1"
+    },
+    {
+      "id": "ds005506",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:11:30.000Z",
+        "size": 120126392039,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 2"
+    },
+    {
+      "id": "ds005507",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:23:03.000Z",
+        "size": 149646643076,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 3"
+    },
+    {
+      "id": "ds005508",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:31:34.000Z",
+        "size": 246753616656,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 4"
+    },
+    {
+      "id": "ds005509",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:37:20.000Z",
+        "size": 240701002046,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 5"
+    },
+    {
+      "id": "ds005510",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:42:03.000Z",
+        "size": 97492911148,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 6"
+    },
+    {
+      "id": "ds005512",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:52:49.000Z",
+        "size": 168778412421,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 8"
+    },
+    {
+      "id": "ds005514",
+      "latestSnapshot": {
+        "created": "2025-03-11T02:55:15.000Z",
+        "size": 198677619354,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 9"
+    },
+    {
+      "id": "ds005515",
+      "latestSnapshot": {
+        "created": "2025-03-11T03:01:17.000Z",
+        "size": 172385562881,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 10"
+    },
+    {
+      "id": "ds005516",
+      "latestSnapshot": {
+        "created": "2025-03-11T03:03:16.000Z",
+        "size": 235310606952,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Healthy Brain Network (HBN) EEG - Release 11"
+    },
+    {
+      "id": "ds005520",
+      "latestSnapshot": {
+        "created": "2025-05-16T14:00:14.000Z",
+        "size": 47150724861,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "MOBA game"
+      },
+      "name": "Research data supporting 'EEG recording during playing MOBA game'"
+    },
+    {
+      "id": "ds005530",
+      "latestSnapshot": {
+        "created": "2025-02-24T20:34:28.000Z",
+        "size": 6949640968,
+        "tag": "1.0.9"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "Within-subject design with longitudinal follow-up",
+        "studyDomain": "Cognitive Neuroscience"
+      },
+      "name": "Depotentiation of emotional reactivity using TMR during REM sleep"
+    },
+    {
+      "id": "ds005540",
+      "latestSnapshot": {
+        "created": "2025-05-21T08:07:57.000Z",
+        "size": 50796471315,
+        "tag": "1.0.7"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Affective Computing"
+      },
+      "name": "EmoEEG-MC: A Multi-Context Emotional EEG Dataset for Cross-Context Emotion Decoding"
+    },
+    {
+      "id": "ds005555",
+      "latestSnapshot": {
+        "created": "2025-05-22T12:37:27.000Z",
+        "size": 35921406226,
+        "tag": "1.1.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Sleep"
+      },
+      "name": "Bitbrain Open Access Sleep Dataset"
+    },
+    {
+      "id": "ds005565",
+      "latestSnapshot": {
+        "created": "2024-10-17T20:57:24.000Z",
+        "size": 2816585202,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Language"
+      },
+      "name": "FSP"
+    },
+    {
+      "id": "ds005571",
+      "latestSnapshot": {
+        "created": "2024-11-11T14:35:45.000Z",
+        "size": 67959727373,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "fMRI - EEG+TMS",
+        "studyDomain": "Cognitive Control"
+      },
+      "name": "Expectation of Conflict Stimuli "
+    },
+    {
+      "id": "ds005586",
+      "latestSnapshot": {
+        "created": "2024-10-24T11:57:34.000Z",
+        "size": 30422094662,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perception"
+      },
+      "name": "EEG responses to the number of objects in partially occluded and uncovered scenes"
+    },
+    {
+      "id": "ds005594",
+      "latestSnapshot": {
+        "created": "2024-11-12T09:42:30.000Z",
+        "size": 11695588974,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Vision / Orthography"
+      },
+      "name": "Alphabetic Decision Task"
+    },
+    {
+      "id": "ds005620",
+      "latestSnapshot": {
+        "created": "2024-11-06T16:30:52.000Z",
+        "size": 83002662733,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-subject experimental study",
+        "studyDomain": "Conciousness"
+      },
+      "name": "A repeated awakening study exploring the capacity of complexity measures to capture dreaming during propofol sedation"
+    },
+    {
+      "id": "ds005628",
+      "latestSnapshot": {
+        "created": "2024-11-14T18:19:55.000Z",
+        "size": 664444547,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subjects design",
+        "studyDomain": "Neuroscience"
+      },
+      "name": "Dataset of Visual and Audiovisual Stimuli in Virtual Reality from the Edzna Archaeological Site"
+    },
+    {
+      "id": "ds005642",
+      "latestSnapshot": {
+        "created": "2025-07-08T05:00:55.000Z",
+        "size": 14838061051,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Face and object perception"
+      },
+      "name": "How the spontaneous perception of face pareidolia unfolds over time"
+    },
+    {
+      "id": "ds005648",
+      "latestSnapshot": {
+        "created": "2024-11-21T04:24:38.000Z",
+        "size": 838871578,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Mapping object space dimensions: new insights from temporal dynamics"
+    },
+    {
+      "id": "ds005662",
+      "latestSnapshot": {
+        "created": "2025-11-21T07:22:34.000Z",
+        "size": 115754787270,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "A high-quality EEG dataset for studying visual touch perception"
+    },
+    {
+      "id": "ds005672",
+      "latestSnapshot": {
+        "created": "2024-12-04T15:03:18.000Z",
+        "size": 4545640816,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Perceive and Imagine",
+        "studyDomain": ""
+      },
+      "name": "PerceiveImagine"
+    },
+    {
+      "id": "ds005688",
+      "latestSnapshot": {
+        "created": "2024-12-03T14:45:54.000Z",
+        "size": 9036020603,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "ECOG of murine brain subjected to (sham) tDUS and (sham) 0.1Hz light stimulus ",
+        "studyDomain": "Transcranial ultrasound "
+      },
+      "name": "visStim"
+    },
+    {
+      "id": "ds005692",
+      "latestSnapshot": {
+        "created": "2024-12-04T16:14:23.000Z",
+        "size": 99649236711,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Physiology of the human spinal cord"
+      },
+      "name": "SpinalExpect_NonInvasive"
+    },
+    {
+      "id": "ds005697",
+      "latestSnapshot": {
+        "created": "2024-12-10T01:53:24.000Z",
+        "size": 71461601517,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Perceive and Imagine",
+        "studyDomain": "EEG"
+      },
+      "name": "PerceiveImagine"
+    },
+    {
+      "id": "ds005779",
+      "latestSnapshot": {
+        "created": "2025-01-02T20:15:41.000Z",
+        "size": 95206991257,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within-subjects repeated measures",
+        "studyDomain": "motor neurophysiology"
+      },
+      "name": "Real-time personalized brain state-dependent TMS in healthy adults "
+    },
+    {
+      "id": "ds005787",
+      "latestSnapshot": {
+        "created": "2025-01-07T14:39:18.000Z",
+        "size": 15178095600,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "NOD-EEG"
+    },
+    {
+      "id": "ds005795",
+      "latestSnapshot": {
+        "created": "2025-01-28T11:38:42.000Z",
+        "size": 6887944978,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Multimodal Imaging Data, Auditory Category Learning"
+      },
+      "name": "MULTI-CLARID (Multimodal Category Learning and Resting-state Imaging Data)"
+    },
+    {
+      "id": "ds005811",
+      "latestSnapshot": {
+        "created": "2025-05-03T09:09:13.000Z",
+        "size": 15129652583,
+        "tag": "1.0.8"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "NOD-EEG"
+    },
+    {
+      "id": "ds005815",
+      "latestSnapshot": {
+        "created": "2025-06-17T11:32:34.000Z",
+        "size": 8155837338,
+        "tag": "2.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "YOTO (You Only Think Once): An EEG Dataset for Tracking Spontaneous Cognitive Transitions and Multimodal Stimuli Responses in Resting-State and Task Phases"
+    },
+    {
+      "id": "ds005841",
+      "latestSnapshot": {
+        "created": "2025-01-14T18:15:10.000Z",
+        "size": 7889278693,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "2x2 repeated measures",
+        "studyDomain": "Visual Perception"
+      },
+      "name": "EEG Experiment measuring ERPs in VR"
+    },
+    {
+      "id": "ds005857",
+      "latestSnapshot": {
+        "created": "2025-04-02T18:37:15.000Z",
+        "size": 305355180585,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ltpDelayRepFRReadOnly"
+    },
+    {
+      "id": "ds005857",
+      "latestSnapshot": {
+        "created": "2025-04-02T18:37:15.000Z",
+        "size": 305355180585,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "ltpDelayRepFRReadOnly"
+    },
+    {
+      "id": "ds005863",
+      "latestSnapshot": {
+        "created": "2025-03-14T03:20:15.000Z",
+        "size": 11371789699,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Cognitive electrophysiology",
+        "studyDomain": "Cognition, EEG"
+      },
+      "name": "Cognitive Electrophysiology in Socioeconomic Context in Adulthood"
+    },
+    {
+      "id": "ds005866",
+      "latestSnapshot": {
+        "created": "2025-01-21T22:05:45.000Z",
+        "size": 3837193012,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Flankers-NEAR"
+    },
+    {
+      "id": "ds005868",
+      "latestSnapshot": {
+        "created": "2025-01-22T00:17:40.000Z",
+        "size": 3146044984,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Flankers-FAR"
+    },
+    {
+      "id": "ds005872",
+      "latestSnapshot": {
+        "created": "2025-01-23T02:51:19.000Z",
+        "size": 41874965,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEGEyeNet Dataset"
+    },
+    {
+      "id": "ds005873",
+      "latestSnapshot": {
+        "created": "2025-03-17T17:35:03.000Z",
+        "size": 47635473156,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Cohort study",
+        "studyDomain": "Epilepsy"
+      },
+      "name": "BIDS SeizeIT2"
+    },
+    {
+      "id": "ds005876",
+      "latestSnapshot": {
+        "created": "2025-01-23T20:53:55.000Z",
+        "size": 7654276844,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Song Familiarity"
+    },
+    {
+      "id": "ds005907",
+      "latestSnapshot": {
+        "created": "2025-02-07T00:07:46.000Z",
+        "size": 6062770483,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "EEG: RL Task (3-Armed Bandit) with alcohol cues in hazardous drinkers and ctls"
+    },
+    {
+      "id": "ds005932",
+      "latestSnapshot": {
+        "created": "2025-11-05T20:18:42.000Z",
+        "size": 2446718661,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "PWIe"
+    },
+    {
+      "id": "ds005946",
+      "latestSnapshot": {
+        "created": "2025-02-27T14:46:53.000Z",
+        "size": 15923179540,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Two (condition: match, mismatch) by four (block: physical, imagery, literal, metaphorical) fully within-subject design",
+        "studyDomain": "Language, communication, mental imagery"
+      },
+      "name": "ERC_CoG PROMENADE - WP2 - MetaImagery (Metaphor and Mental Imagery)"
+    },
+    {
+      "id": "ds005960",
+      "latestSnapshot": {
+        "created": "2025-03-13T14:43:51.000Z",
+        "size": 61945670760,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Selective attention"
+      },
+      "name": "General Info: inst-comp-eeg"
+    },
+    {
+      "id": "ds006018",
+      "latestSnapshot": {
+        "created": "2025-05-22T18:33:58.000Z",
+        "size": 11372008786,
+        "tag": "1.2.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG"
+      },
+      "name": "Cognitive Electrophysiology in Socioeconomic Context in Adulthood: An EEG dataset"
+    },
+    {
+      "id": "ds006033",
+      "latestSnapshot": {
+        "created": "2025-05-08T09:02:04.000Z",
+        "size": 16449271220,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "inner speech"
+      },
+      "name": "Synchronous EEG and fMRI dataset on inner speech"
+    },
+    {
+      "id": "ds006036",
+      "latestSnapshot": {
+        "created": "2025-05-13T14:26:17.000Z",
+        "size": 1125336650,
+        "tag": "1.0.5"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Dementia"
+      },
+      "name": "Dementia_photostimulation_dataset"
+    },
+    {
+      "id": "ds006040",
+      "latestSnapshot": {
+        "created": "2025-10-15T06:18:10.000Z",
+        "size": 185217927063,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Sustained Attention Task, Simultaneous EEG-fMRI"
+      },
+      "name": "Sustained Attention Task (gradCPT) Dataset using simultaneous EEG-fMRI and DTI"
+    },
+    {
+      "id": "ds006095",
+      "latestSnapshot": {
+        "created": "2025-04-07T01:15:10.000Z",
+        "size": 139411715731,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Walking over uneven terrain; speed",
+        "studyDomain": "EEG"
+      },
+      "name": "Mind in Motion Older Adults Walking Over Uneven Terrain"
+    },
+    {
+      "id": "ds006104",
+      "latestSnapshot": {
+        "created": "2025-04-08T12:14:54.000Z",
+        "size": 46128446170,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Repeated measures",
+        "studyDomain": "Language"
+      },
+      "name": "EEG dataset for speech decoding"
+    },
+    {
+      "id": "ds006126",
+      "latestSnapshot": {
+        "created": "2025-04-15T13:41:43.000Z",
+        "size": 1159689297,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Randomized, Single-Blind, Sham-Controlled Crossover Design",
+        "studyDomain": "Cognitive Neuroscience \u2013 Motor Imagery and Neural Plasticity"
+      },
+      "name": "TDCS Modulation of Visual Cortex in Motor Imagery"
+    },
+    {
+      "id": "ds006142",
+      "latestSnapshot": {
+        "created": "2025-09-03T07:40:31.000Z",
+        "size": 26073650133,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "memory"
+      },
+      "name": "Essex EEG Movie Memory dataset"
+    },
+    {
+      "id": "ds006159",
+      "latestSnapshot": {
+        "created": "2025-05-21T14:05:01.000Z",
+        "size": 15404183606,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Implicit Learning EEG (BioSemi)"
+    },
+    {
+      "id": "ds006171",
+      "latestSnapshot": {
+        "created": "2025-04-24T13:46:57.000Z",
+        "size": 72833078851,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Perception and attention"
+      },
+      "name": "EEG data during three near-threshold visual detection tasks: a no-cue task, a noninformative cue task (50% validity), and an informative cue task (100% validity)"
+    },
+    {
+      "id": "ds006260",
+      "latestSnapshot": {
+        "created": "2025-05-29T20:03:20.000Z",
+        "size": 2908201731,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Interventional Randomized Controlled Trial",
+        "studyDomain": "Neuroeducation"
+      },
+      "name": "Dataset of psychophysiological data from children with learning difficulties who strengthen reading and math skills through assistive technology"
+    },
+    {
+      "id": "ds006269",
+      "latestSnapshot": {
+        "created": "2025-05-30T14:42:58.000Z",
+        "size": 114536455305,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "This study recorded EEG from 24 male Syngap1 heterozygous (HET) and wild-type (WT) rats across two 6-hour sessions.",
+        "studyDomain": "Syngap1-related neurodevelopmental disorder rat model "
+      },
+      "name": "Tethered EEG Recordings in Syngap1 rats"
+    },
+    {
+      "id": "ds006317",
+      "latestSnapshot": {
+        "created": "2025-06-08T12:23:31.000Z",
+        "size": 56822054258,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Chisco-2.0"
+    },
+    {
+      "id": "ds006366",
+      "latestSnapshot": {
+        "created": "2025-09-05T13:06:20.000Z",
+        "size": 6526725895,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Sleep scoring in mice, variability between labs"
+      },
+      "name": "Mouse Sleep Staging Validation dataset (MSSV)"
+    },
+    {
+      "id": "ds006367",
+      "latestSnapshot": {
+        "created": "2025-06-25T12:01:16.000Z",
+        "size": 29810755955,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within subjects",
+        "studyDomain": "Long-term memory and working memory interplays"
+      },
+      "name": "Memory Reactivation Levels Remain Unaffected by Anticipated Interference, Experiment 1 Dataset"
+    },
+    {
+      "id": "ds006370",
+      "latestSnapshot": {
+        "created": "2025-06-25T11:53:45.000Z",
+        "size": 43035741246,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within subjects design",
+        "studyDomain": "Long-term memory and working memory interplays"
+      },
+      "name": "Memory Reactivation Levels Remain Unaffected by Anticipated Interference Experiment 2 Dataset"
+    },
+    {
+      "id": "ds006374",
+      "latestSnapshot": {
+        "created": "2025-07-10T14:56:25.000Z",
+        "size": 33413497382,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Nociception"
+      },
+      "name": "Expectation effects on repetition suppression in nociception"
+    },
+    {
+      "id": "ds006394",
+      "latestSnapshot": {
+        "created": "2025-06-27T04:44:21.000Z",
+        "size": 560818153,
+        "tag": "1.0.3"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": "EEG"
+      },
+      "name": "Electrophysiological markers of surprise-induced failures of visual and auditory awareness"
+    },
+    {
+      "id": "ds006434",
+      "latestSnapshot": {
+        "created": "2025-09-11T17:43:36.000Z",
+        "size": 110646361086,
+        "tag": "1.2.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "exp1Diotic"
+    },
+    {
+      "id": "ds006437",
+      "latestSnapshot": {
+        "created": "2025-08-21T17:34:41.000Z",
+        "size": 4631684039,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Frontal Alpha Asymmetry"
+      },
+      "name": "LIGHT Hypnotherapy"
+    },
+    {
+      "id": "ds006446",
+      "latestSnapshot": {
+        "created": "2025-07-07T11:34:38.000Z",
+        "size": 17285482171,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-participants",
+        "studyDomain": "Episodic future thinking and intertemporal choice"
+      },
+      "name": "Cueing the future to reduce temporal discounting"
+    },
+    {
+      "id": "ds006465",
+      "latestSnapshot": {
+        "created": "2025-10-29T03:31:08.000Z",
+        "size": 8768486080,
+        "tag": "2.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "3M-CPSEED\uff1aAn EEG-based Dataset for Chinese Pinyin Production in Overt, Silent-intended, and Imagined Speech"
+    },
+    {
+      "id": "ds006466",
+      "latestSnapshot": {
+        "created": "2025-10-06T18:46:57.000Z",
+        "size": 126131448388,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "HeartBEAM"
+    },
+    {
+      "id": "ds006480",
+      "latestSnapshot": {
+        "created": "2025-10-06T17:43:35.000Z",
+        "size": 68786099468,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "HeartBEAM_YA"
+    },
+    {
+      "id": "ds006525",
+      "latestSnapshot": {
+        "created": "2025-08-01T17:19:32.000Z",
+        "size": 3223158965,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Resting"
+      },
+      "name": "Resting EEG"
+    },
+    {
+      "id": "ds006547",
+      "latestSnapshot": {
+        "created": "2025-08-12T11:19:42.000Z",
+        "size": 18921502382,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Visual EEG Study (BrainVision \u2192 BIDS)"
+    },
+    {
+      "id": "ds006554",
+      "latestSnapshot": {
+        "created": "2025-08-12T23:36:26.000Z",
+        "size": 13014195680,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Social Observation EEG raw data"
+    },
+    {
+      "id": "ds006563",
+      "latestSnapshot": {
+        "created": "2025-08-15T19:16:48.000Z",
+        "size": 6045373165,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Dimension-based attention modulates early visual processing"
+    },
+    {
+      "id": "ds006576",
+      "latestSnapshot": {
+        "created": "2026-01-05T14:36:33.000Z",
+        "size": 399338147042,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "mri",
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "memory consolidation"
+      },
+      "name": "The role of REM sleep in neural differentiation of memories in the hippocampus"
+    },
+    {
+      "id": "ds006593",
+      "latestSnapshot": {
+        "created": "2025-08-23T21:11:35.000Z",
+        "size": 463412434,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Brain-Computer Interface"
+      },
+      "name": "cBCI Matrix Multimodal Dataset"
+    },
+    {
+      "id": "ds006647",
+      "latestSnapshot": {
+        "created": "2025-09-11T01:38:42.000Z",
+        "size": 4610198011,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "This EEG study examined aesthetic and creative judgments of short poetry. Participants read and rated 210 texts, including 140 short poems (Haiku and Senryu) and 70 structurally matched control texts, on five dimensions: Aesthetic Appeal, Imagery, Emotional Impact, Originality, and Creativity. EEG was recorded throughout, with resting-state data collected before and after the task.",
+        "studyDomain": "Psychology"
+      },
+      "name": "Poetry EEG Study"
+    },
+    {
+      "id": "ds006648",
+      "latestSnapshot": {
+        "created": "2025-09-11T02:01:28.000Z",
+        "size": 48749259066,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "This EEG study examined aesthetic and creative judgments of short poetry. Participants read and rated 210 texts, including 140 short poems (Haiku and Senryu) and 70 structurally matched control texts, on five dimensions: Aesthetic Appeal, Imagery, Emotional Impact, Originality, and Creativity. EEG was recorded throughout, with resting-state data collected before and after the task.",
+        "studyDomain": "psychology"
+      },
+      "name": "Poetry Assessment EEG Dataset 1"
+    },
+    {
+      "id": "ds006695",
+      "latestSnapshot": {
+        "created": "2025-09-20T16:30:31.000Z",
+        "size": 10052862715,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Validation of Sleep Staging with Forehead EEG Patch"
+    },
+    {
+      "id": "ds006735",
+      "latestSnapshot": {
+        "created": "2025-09-30T22:16:34.000Z",
+        "size": 207114745022,
+        "tag": "1.0.4"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Music perception; EEG; Temporal response function; "
+      },
+      "name": "Chimeric music reveals an interaction of pitch and time in electrophysiological signatures of music encoding"
+    },
+    {
+      "id": "ds006761",
+      "latestSnapshot": {
+        "created": "2025-10-08T06:16:05.000Z",
+        "size": 83755152274,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Neural decoding of competitive decision-making in Rock-Paper-Scissors"
+    },
+    {
+      "id": "ds006768",
+      "latestSnapshot": {
+        "created": "2025-10-10T05:01:22.000Z",
+        "size": 7002555913,
+        "tag": "1.1.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Repeated Measures",
+        "studyDomain": "Vision"
+      },
+      "name": "Multiple Object Monitoring (EEG)"
+    },
+    {
+      "id": "ds006801",
+      "latestSnapshot": {
+        "created": "2025-10-16T15:41:38.000Z",
+        "size": 1414488873,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Between-subjects design with three groups (active, passive, control); repeated-measures (pre- and post-intervention) EEG recordings.",
+        "studyDomain": "Learning and memory, attention, educational neuroscience"
+      },
+      "name": "Resting-state EEG before and after different study methods"
+    },
+    {
+      "id": "ds006802",
+      "latestSnapshot": {
+        "created": "2025-10-17T02:06:39.000Z",
+        "size": 66817006188,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "Collaborative rule learning promotes interbrain information alignment"
+    },
+    {
+      "id": "ds006803",
+      "latestSnapshot": {
+        "created": "2025-10-17T00:02:26.000Z",
+        "size": 1496421526,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "An ealuation of test performance and EEG data of 2 different groups of college students taking a signals proccessing course in the Biomedical engineering program at Tec de Monterrey",
+        "studyDomain": "Neuroeducation Neuroengineering EEG STEM "
+      },
+      "name": "NeuroTechs Dataset for Stem Skills"
+    },
+    {
+      "id": "ds006803",
+      "latestSnapshot": {
+        "created": "2025-10-17T00:02:26.000Z",
+        "size": 1496421526,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "An ealuation of test performance and EEG data of 2 different groups of college students taking a signals proccessing course in the Biomedical engineering program at Tec de Monterrey",
+        "studyDomain": "Neuroeducation Neuroengineering EEG STEM "
+      },
+      "name": "NeuroTechs Dataset for Stem Skills"
+    },
+    {
+      "id": "ds006817",
+      "latestSnapshot": {
+        "created": "2025-10-28T08:15:53.000Z",
+        "size": 10400423631,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Visual Attribute-Specific Contextual Trajectory Paradigm 2.0"
+    },
+    {
+      "id": "ds006839",
+      "latestSnapshot": {
+        "created": "2025-10-29T12:42:28.000Z",
+        "size": 11119141416,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "EEG recordings during sham neurofeedback in virtual reality"
+    },
+    {
+      "id": "ds006840",
+      "latestSnapshot": {
+        "created": "2025-11-17T02:47:29.000Z",
+        "size": 6435718408,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within-subject, repeated-measures; unimanual control with congruent vs. incongruent visuomotor mapping.",
+        "studyDomain": "Motor control; Sensorimotor integration; Brain\u2013computer interface (BCI)"
+      },
+      "name": "IACKD: Intention Action Conflict EEG-Hand Kinematics Dataset "
+    },
+    {
+      "id": "ds006848",
+      "latestSnapshot": {
+        "created": "2025-10-28T07:46:08.000Z",
+        "size": 44416584256,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "beh"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "AlphaDirection1: EEG, ECG, PPG in the resting state and working memory for sequentially and simultaneously presented digits"
+    },
+    {
+      "id": "ds006850",
+      "latestSnapshot": {
+        "created": "2025-10-30T12:10:32.000Z",
+        "size": 37239047888,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Environmental Neuroscience"
+      },
+      "name": "Urban Appraisal: Physiological Recording during Rating of Different Urban Environments"
+    },
+    {
+      "id": "ds006861",
+      "latestSnapshot": {
+        "created": "2025-12-29T13:12:27.000Z",
+        "size": 55976306491,
+        "tag": "1.0.2"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Neuroscience"
+      },
+      "name": "Targeted Neuromodulation of the Left Dorsolateral Prefrontal Cortex Alleviates Altered Affective Response Evaluation in Lonely Individuals\n"
+    },
+    {
+      "id": "ds006866",
+      "latestSnapshot": {
+        "created": "2025-10-29T23:48:25.000Z",
+        "size": 124810279277,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Neuroscience"
+      },
+      "name": "Discrepancy between self-report and neurophysiological markers of socio-affective responses in lonely individuals"
+    },
+    {
+      "id": "ds006921",
+      "latestSnapshot": {
+        "created": "2025-11-25T16:09:53.000Z",
+        "size": 69692194143,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Observational, resting state",
+        "studyDomain": "Phantom limb pain"
+      },
+      "name": "High Density Resting State EEG of Phantom Limb Pain and Controls"
+    },
+    {
+      "id": "ds006923",
+      "latestSnapshot": {
+        "created": "2025-11-11T04:35:58.000Z",
+        "size": 8691122065,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Neuropsychology"
+      },
+      "name": "Dataset of Electroencephalograms of Juvenile Offenders"
+    },
+    {
+      "id": "ds006940",
+      "latestSnapshot": {
+        "created": "2025-11-15T23:11:01.000Z",
+        "size": 3883627381,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "motion"
+        ],
+        "studyDesign": "This dataset presents a comprehensive record from a multi-session brain\u2013machine interface (BMI) training study involving seven healthy adult participants (four male, three female), aged between 20 and 30 years (Mean = 24.3, SD = 3.8). The study focused on both open-loop and closed-loop control of a lower-limb exoskeleton (Rex Bionics) using EEG data. Each participant completed nine sessions, scheduled two to three times per week depending on availability. Every session was structured into two distinct phases: a Training Phase, during which participants practiced motor imagery tasks to calibrate the decoder, and a Trial Phase, in which they engaged in closed-loop BMI control to initiate or halt walking. EEG recordings were acquired using 60 scalp electrodes and 4 EOG channels, alongside motion data collected via inertial measurement unit (IMU) sensors mounted on the participant\u2019s forehead and the back brace of the exoskeleton. Decoder feedback and control signals were logged to evaluate BMI responsiveness and gait transitions. Following the BMI experiment, six of the seven participants completed the Motor Imagery Questionnaire \u2013 Revised Second Version (MIQ-RS), which is included in the dataset as PDF files. All data are provided in raw form, without filtering or artifact removal, and validation spreadsheets summarizing data availability, synchronization, and electrode placement are included to support transparency and reproducibility.",
+        "studyDomain": "Brain\u2013Machine Interface (BMI), Motor Imagery, Lower Limb, Walk\u2013Stop Task, Exoskeleton, Neurorehabilitation."
+      },
+      "name": "Dataset: EEG-Controlled Exoskeleton for Walking and Standing - A Longitudinal Study of Healthy Individuals"
+    },
+    {
+      "id": "ds006945",
+      "latestSnapshot": {
+        "created": "2025-11-20T00:30:24.000Z",
+        "size": 5761229972,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg",
+          "mri"
+        ],
+        "studyDesign": "This study investigated the neural mechanisms underlying kinesthetic motor imagery (KI) of gait-related actions. Participants completed a set of controlled conditions in which they imagined themselves walking or remaining still (rest/stop) while multimodal neuroimaging data were recorded. The experiment used a within-subject design, where each participant performed all task conditions during the same session.",
+        "studyDomain": "Motor imagery, fMRI, Structural MRI, EEG"
+      },
+      "name": "Structural MRI and fMRI of Participants Performing Kinesthetic Motor Imagery of Walking vs. Standing While Viewing a First\u2011Person Exoskeleton Video Stimulus (11 Stop\u2011Walk\u2011Stop Cycles)"
+    },
+    {
+      "id": "ds006963",
+      "latestSnapshot": {
+        "created": "2025-12-01T10:30:00.000Z",
+        "size": 56696991879,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Within Subject",
+        "studyDomain": "EEG"
+      },
+      "name": "Motor Control Processes Moderate Visual Working Memory Gating Dataset"
+    },
+    {
+      "id": "ds007006",
+      "latestSnapshot": {
+        "created": "2025-12-01T20:47:02.000Z",
+        "size": 963375182,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Mu Suppression"
+      },
+      "name": "VR-Compassion Cultivation Training"
+    },
+    {
+      "id": "ds007020",
+      "latestSnapshot": {
+        "created": "2025-12-02T04:32:19.000Z",
+        "size": 1870056562,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Single-session resting-state EEG (cross-sectional)",
+        "studyDomain": "Neurodegenerative Diseases"
+      },
+      "name": "EEG Mortality Dataset in Parkinson's Disease"
+    },
+    {
+      "id": "ds007028",
+      "latestSnapshot": {
+        "created": "2025-12-04T12:05:48.000Z",
+        "size": 14882843764,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Auditory cortex"
+      },
+      "name": "Auditory Cortex Macaque Monkey DISC Data"
+    },
+    {
+      "id": "ds007081",
+      "latestSnapshot": {
+        "created": "2025-12-14T17:28:23.000Z",
+        "size": 12129532986,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": true,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "2x2 within subject design",
+        "studyDomain": "Cognitive neuroscience (EEG)"
+      },
+      "name": "Passive but accessible:  Studied information is not actively stored in working memory, yet attended regardless of anticipated load"
+    },
+    {
+      "id": "ds007162",
+      "latestSnapshot": {
+        "created": "2026-01-05T12:41:00.000Z",
+        "size": 65339062772,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": ""
+      },
+      "name": "Adaptive recruitment of cortex-wide recurrence for visual object recognition (EEG)"
+    },
+    {
+      "id": "ds007172",
+      "latestSnapshot": {
+        "created": "2026-01-06T13:23:50.000Z",
+        "size": 11852106397,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "",
+        "studyDomain": "Hemispheric Lateralization"
+      },
+      "name": "EEG-Asymmetries Dataset"
+    },
+    {
+      "id": "ds007175",
+      "latestSnapshot": {
+        "created": "2026-01-07T18:18:48.000Z",
+        "size": 215211348736,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": null,
+        "studyDomain": null
+      },
+      "name": "FFR-active-listening"
+    },
+    {
+      "id": "ds007176",
+      "latestSnapshot": {
+        "created": "2026-01-07T16:46:47.000Z",
+        "size": 22616298800,
+        "tag": "1.0.1"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "Longitudinal repeated-measures EEG study with 43 healthy adults over 4 sessions spanning ~2 years",
+        "studyDomain": "EEG resting-state recordings; neural activity and spectral analysis in healthy adults"
+      },
+      "name": "Longitudinal EEG Test-Retest Reliability in Healthy Individuals"
+    },
+    {
+      "id": "ds007180",
+      "latestSnapshot": {
+        "created": "2026-01-07T18:48:28.000Z",
+        "size": 15755538005,
+        "tag": "1.0.0"
+      },
+      "metadata": {
+        "dataProcessed": null,
+        "modalities": [
+          "eeg"
+        ],
+        "studyDesign": "within participants: one independent variable - cueing",
+        "studyDomain": "attention and working memory"
+      },
+      "name": "Exo-EEG Experiment"
+    }
+  ],
+  "stamp": "20260111_045148"
+}

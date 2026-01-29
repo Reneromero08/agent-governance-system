@@ -1,0 +1,46 @@
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+Xet Storage is enabled for this repo, but the 'hf_xet' package is not installed. Falling back to regular HTTP download. For better performance, install the package with: `pip install huggingface_hub[hf_xet]` or `pip install hf_xet`
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+Generating train split:   0%|          | 0/392702 [00:00<?, ? examples/s]
+Generating train split:  64%|######4   | 253000/392702 [00:00<00:00, 2407806.64 examples/s]
+Generating train split: 100%|##########| 392702/392702 [00:00<00:00, 2662557.90 examples/s]
+
+Generating validation_matched split:   0%|          | 0/9815 [00:00<?, ? examples/s]
+Generating validation_matched split: 100%|##########| 9815/9815 [00:00<00:00, 1932092.45 examples/s]
+
+Generating validation_mismatched split:   0%|          | 0/9832 [00:00<?, ? examples/s]
+Generating validation_mismatched split: 100%|##########| 9832/9832 [00:00<00:00, 2046570.57 examples/s]
+
+Generating test_matched split:   0%|          | 0/9796 [00:00<?, ? examples/s]
+Generating test_matched split: 100%|##########| 9796/9796 [00:00<00:00, 1735036.61 examples/s]
+
+Generating test_mismatched split:   0%|          | 0/9847 [00:00<?, ? examples/s]
+Generating test_mismatched split: 100%|##########| 9847/9847 [00:00<00:00, 2072006.80 examples/s]
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 05:13:39.657489: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 05:13:40.725700: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+[Q32:P3] mnli intervention samples=10
+[Q32:P3] mnli intervention samples=25
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.750
+  z(H0: p=0.5) = 3.162  (n=40)
+  mean(M_correct) = -1.091
+  mean(M_wrong)   = -15.495
+  mean(M_correct - M_wrong) = 14.405
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 4.006
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - MNLI: PASS
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p5_mnli_bench_fast_20260110_051326.json
+[Q32] EmpiricalMetricReceipt sha256: 80D8BBCEDAD0C655F0EF198317AE23880C1D68597622B43F0104DCFE02DAD6EA

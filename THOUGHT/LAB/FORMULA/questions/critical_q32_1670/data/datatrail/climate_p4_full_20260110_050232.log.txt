@@ -1,0 +1,44 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 05:02:41.576524: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 05:02:42.590478: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 2.739  (n=120)
+  mean(M_correct_end) = -5.584
+  mean(M_wrong_end)   = -9.629
+  mean(M_correct - M_wrong) = 4.045
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.642
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.871
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.600
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 5.691
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.000 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -3.855
+  mean dM_wrong   = -1.368
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.733
+  z(H0: p=0.5) = 5.112  (n=120)
+  mean(M_indep_end - M_wrong_end) = 8.425
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 2
+  stable_cross_rate = 0.492
+  mean_first_cross_frac = 0.068
+  phase_gate_rate=0.450 => PASS
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - Climate-FEVER-Streaming: PASS
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p4_climate_full_20260110_050232.json
+[Q32] EmpiricalMetricReceipt sha256: 9C267FBA0B833ADD151D4665D0C274DEF5A19B13CB6835CB2793ED75A6BB85BA
+[Q32] GeometrySummary written: LAW\CONTRACTS\_runs\q32_public\datatrail\geometry_p4_climate_full_20260110_050232.json
+[Q32] GeometrySummary sha256: D590FAA16F669CE24689D800CE1DBCEDF67BC4AC2989E0C97106FFF1338AAA39
+[Q32] StreamSeriesSummary written: LAW\CONTRACTS\_runs\q32_public\datatrail\series_p4_climate_full_20260110_050232.json
+[Q32] StreamSeriesSummary sha256: C0E2DAA5EDC209B860C0B8839B64F7B2B71DC0670F51B96F34F1ED2827206DC0

@@ -1,0 +1,1 @@
+{"results":[],"run":{"dataset":"climate_fever","fast":false,"mode":"stream","neighbor_k":10,"require_geometry_gate":false,"scoring":"crossencoder","seed":123,"strict":true,"wrong_checks":"dissimilar"},"type":"GeometrySummary","version":1}

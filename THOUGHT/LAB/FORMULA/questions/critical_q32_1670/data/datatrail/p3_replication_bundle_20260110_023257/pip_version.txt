@@ -1,0 +1,2 @@
+pip 25.2 from C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\pip (python 3.11)
+

@@ -1,0 +1,79 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 05:36:24.274199: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 05:36:25.263224: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Calibrating on mnli (seeds=[123])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+[Q32:P3] mnli intervention samples=10
+[Q32:P3] mnli intervention samples=25
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.750
+  z(H0: p=0.5) = 3.162  (n=40)
+  mean(M_correct) = -1.091
+  mean(M_wrong)   = -15.495
+  mean(M_correct - M_wrong) = 14.405
+  [swap] P(M_correct > M_swapped_correct) = 0.575
+  [swap] mean(M_correct - M_swapped_correct) = 4.006
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+[Q32:P3] mnli streaming samples=10
+[Q32:P3] mnli streaming samples=25
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.800
+  z(H0: p=0.5) = 3.795  (n=40)
+  mean(M_correct_end) = -4.682
+  mean(M_wrong_end)   = -21.258
+  mean(M_correct - M_wrong) = 16.576
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.475
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -0.043
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.850
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 14.297
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.654 bits
+[Q32:P3] Wrote calibration to LAW\CONTRACTS\_runs\q32_public\datatrail\transfer_calibration_p5_transfer_mnli_to_snli_fast_20260110_052808.json
+
+[Q32:P3] Frozen thresholds: min_z=1.400  min_pair_wins=0.755
+[Q32:P3] Verifying on snli (seeds=[123])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+[Q32:P3] snli intervention samples=10
+[Q32:P3] snli intervention samples=25
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.850
+  z(H0: p=0.5) = 4.427  (n=40)
+  mean(M_correct) = -5.441
+  mean(M_wrong)   = -20.054
+  mean(M_correct - M_wrong) = 14.614
+  [swap] P(M_correct > M_swapped_correct) = 0.550
+  [swap] mean(M_correct - M_swapped_correct) = -0.631
+  [Phi_proxy] I(mu_hat; mu_check) = 0.933 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+[Q32:P3] snli streaming samples=10
+[Q32:P3] snli streaming samples=25
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.675
+  z(H0: p=0.5) = 2.214  (n=40)
+  mean(M_correct_end) = -5.986
+  mean(M_wrong_end)   = -16.022
+  mean(M_correct - M_wrong) = 10.036
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.400
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -2.301
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.650
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 10.508
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.659 bits
+[Q32:P3] SNLI-Streaming below calibrated pair_wins (reported only): 0.675 < 0.755
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - mnli->snli:SNLI@seed=123: PASS
+  - mnli->snli:SNLI-Streaming@seed=123: PASS
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p5_transfer_mnli_to_snli_fast_20260110_052808.json
+[Q32] EmpiricalMetricReceipt sha256: D1B59597EEA001086D9103E783422980D30313D0B5EE773EDA8AFED81BA6CA80

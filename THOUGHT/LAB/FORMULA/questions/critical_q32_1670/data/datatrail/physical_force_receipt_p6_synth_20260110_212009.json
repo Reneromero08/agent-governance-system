@@ -1,0 +1,46 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "detects_coupling": true,
+      "flags_echo_leak": false,
+      "name": "positive_lagged_coupling",
+      "r_b_to_m_lag": 0.6043083277615711,
+      "r_m_to_b_lag": 0.9375386772933197,
+      "r_m_to_b_shuffled": 0.14063940237766204,
+      "r_m_to_b_zero": 0.7048854325824219
+    },
+    {
+      "detects_coupling": false,
+      "flags_echo_leak": false,
+      "name": "null_independent",
+      "r_b_to_m_lag": -0.024124212277697572,
+      "r_m_to_b_lag": -0.024535054881447287,
+      "r_m_to_b_shuffled": -0.041729162244181967,
+      "r_m_to_b_zero": -0.056489308222465826
+    },
+    {
+      "detects_coupling": true,
+      "flags_echo_leak": true,
+      "name": "echo_leak",
+      "r_b_to_m_lag": 0.6448823430851309,
+      "r_m_to_b_lag": 0.6964663699991378,
+      "r_m_to_b_shuffled": -0.11844923572547021,
+      "r_m_to_b_zero": 0.8819136992411091
+    }
+  ],
+  "run": {
+    "coupling_strength": 1.5,
+    "echo_threshold": 0.8,
+    "lag": 3,
+    "mode": "synthetic_validator_suite",
+    "n_steps": 240,
+    "noise_std": 0.35,
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.13.1",
+    "r_detect_threshold": 0.35,
+    "seed": 123
+  },
+  "type": "PhysicalForceCouplingReceipt",
+  "version": 1
+}

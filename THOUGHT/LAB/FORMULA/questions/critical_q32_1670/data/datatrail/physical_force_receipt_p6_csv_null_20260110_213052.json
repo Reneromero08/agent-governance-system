@@ -1,0 +1,82 @@
+{
+  "passed": false,
+  "results": {
+    "best_null_abs_r_m_to_b_lag": 0.08339554017522302,
+    "best_r_m_to_b_lag": -0.05768082616850101,
+    "detects_coupling": false,
+    "flags_echo_leak": false,
+    "lag_scan": [
+      {
+        "lag": 0,
+        "r_m_to_b": -0.056489308227285255
+      },
+      {
+        "lag": 1,
+        "r_m_to_b": -0.03834458358887462
+      },
+      {
+        "lag": 2,
+        "r_m_to_b": -0.05768082616850101
+      },
+      {
+        "lag": 3,
+        "r_m_to_b": -0.024535054887033815
+      },
+      {
+        "lag": 4,
+        "r_m_to_b": -0.026903028019794266
+      },
+      {
+        "lag": 5,
+        "r_m_to_b": -0.017856501428696797
+      },
+      {
+        "lag": 6,
+        "r_m_to_b": -0.0037323149040596956
+      },
+      {
+        "lag": 7,
+        "r_m_to_b": 0.04522697360129082
+      },
+      {
+        "lag": 8,
+        "r_m_to_b": 0.011758699424543426
+      },
+      {
+        "lag": 9,
+        "r_m_to_b": 0.009115702376291371
+      },
+      {
+        "lag": 10,
+        "r_m_to_b": -0.011164427671156421
+      },
+      {
+        "lag": 11,
+        "r_m_to_b": -0.043783894425799
+      },
+      {
+        "lag": 12,
+        "r_m_to_b": -0.018237209926612565
+      }
+    ],
+    "r_m_to_b_zero": -0.056489308227285255
+  },
+  "run": {
+    "best_lag": 2,
+    "csv_path": "LAW/CONTRACTS/_runs/q32_public/datatrail/p6_phys_demo_null_20260110_213052.csv",
+    "echo_threshold": 0.8,
+    "max_lag": 12,
+    "mode": "csv_coupling",
+    "null_rotations": [
+      160,
+      80
+    ],
+    "platform": "Windows-11-10.0.26100-SP0",
+    "python": "3.13.1",
+    "r_detect_threshold": 0.35,
+    "seed_for_rotations": 2026,
+    "threads": 12
+  },
+  "type": "PhysicalForceCouplingReceipt",
+  "version": 1
+}

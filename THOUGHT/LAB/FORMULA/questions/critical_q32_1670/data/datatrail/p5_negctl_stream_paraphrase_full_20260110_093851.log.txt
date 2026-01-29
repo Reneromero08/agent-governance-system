@@ -1,0 +1,105 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 09:39:01.227745: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 09:39:02.534829: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'claims' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\claims\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:18 2026).
+Using the latest cached version of the dataset since scifact couldn't be found on the Hugging Face Hub
+Found the latest cached dataset configuration 'corpus' at D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAW\CONTRACTS\_runs\q32_public\hf_cache\datasets\scifact\corpus\1.0.0\15660e43ecfb3f7420850027005a63611abb2d401e9746b4059c1260745d9831 (last modified on Thu Jan  8 23:36:21 2026).
+Traceback (most recent call last):
+
+[Q32:P4] Climate-FEVER streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.500
+  z(H0: p=0.5) = 0.000  (n=120)
+  mean(M_correct_end) = -7.086
+  mean(M_wrong_end)   = -9.559
+  mean(M_correct - M_wrong) = 2.473
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.575
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 6.751
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.575
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 4.749
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.525 bits
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -6.860
+  mean dM_wrong   = -2.113
+
+[Q32:P4] Independence probe (independent checks vs wrong checks)
+  P(M_indep_end > M_wrong_end) = 0.650
+  z(H0: p=0.5) = 3.286  (n=120)
+  mean(M_indep_end - M_wrong_end) = 6.635
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.325
+  mean_first_cross_frac = 0.158
+  phase_gate_rate=0.600 => FAIL
+
+[Q32:P4] Climate-FEVER streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.842
+  z(H0: p=0.5) = 7.486  (n=120)
+  mean(M_correct_end) = -2.634
+  mean(M_wrong_end)   = -16.750
+  mean(M_correct - M_wrong) = 14.116
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.642
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.694
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.767
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 14.273
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.551 bits
+
+[Q32:P4] Geometry-break proxy (end-step)
+  P(cos(obs, check_correct) > cos(obs, check_wrong)) = 0.967
+  z(H0: p=0.5) = 10.224  (n=120)
+  mean(cos_correct - cos_wrong) = 0.199
+  mean(PR_check - PR_wrong) = 0.449
+  geom_gate_z=2.600, geom_gate_margin=0.080 => PASS
+
+[Q32:P4] Phase-boundary (stable delta) probe
+  delta_tau = 0.750, min_tail = 3
+  stable_cross_rate = 0.633
+  mean_first_cross_frac = 0.086
+  phase_gate_rate=0.600 => PASS
+
+[Q32:P4] Delayed-injection causal probe (end-step)
+  P(M_correct_end > M_injected_end) = 0.358
+  z(H0: p=0.5) = -3.104  (n=120)
+  mean(M_correct_end - M_injected_end) = -1.080
+  inj_gate_z=2.600, inj_gate_margin=0.750 => FAIL
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -2.006
+  mean dM_wrong   = -2.719
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.487
+  z(H0: p=0.5) = -0.387  (n=240)
+  mean(M_correct_end) = -7.455
+  mean(M_wrong_end)   = -10.235
+  mean(M_correct - M_wrong) = 2.780
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.529
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.977
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.592
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 5.371
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.555 bits
+
+[Q32:P3] SNLI streaming status: FAIL
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 4248, in <module>
+    raise SystemExit(main())
+                     ^^^^^^
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 3737, in main
+    run_snli_streaming(
+  File "D:\CCC 2.0\AI\wt-q32-next\THOUGHT\LAB\FORMULA\experiments\open_questions\q32\q32_public_benchmarks.py", line 1320, in run_snli_streaming
+    raise RuntimeError(f"Too few {tag} streaming samples ({len(samples)})")
+RuntimeError: Too few MNLI streaming samples (76)

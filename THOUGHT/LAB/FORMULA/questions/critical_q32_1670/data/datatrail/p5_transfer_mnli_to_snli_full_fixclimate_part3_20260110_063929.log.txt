@@ -1,0 +1,70 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-10 07:05:25.803927: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-10 07:05:28.041460: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] Calibrating on mnli (seeds=[123])
+
+[Q32:P3] Loading MNLI (NLI truth anchor)...
+
+[Q32:P3] MNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.608
+  z(H0: p=0.5) = 3.357  (n=240)
+  mean(M_correct) = -1.435
+  mean(M_wrong)   = -4.121
+  mean(M_correct - M_wrong) = 2.686
+  [swap] P(M_correct > M_swapped_correct) = 0.637
+  [swap] mean(M_correct - M_swapped_correct) = 6.324
+  [Phi_proxy] I(mu_hat; mu_check) = 0.277 bits
+
+[Q32:P3] MNLI streaming (chunked NLI evidence)
+
+[Q32:P3] MNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.654
+  z(H0: p=0.5) = 4.777  (n=240)
+  mean(M_correct_end) = -3.164
+  mean(M_wrong_end)   = -5.882
+  mean(M_correct - M_wrong) = 2.718
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.562
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 2.056
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.713
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 6.728
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 0.558 bits
+[Q32:P3] Wrote calibration to LAW\CONTRACTS\_runs\q32_public\datatrail\transfer_calibration_p5_transfer_mnli_to_snli_full_fixclimate_part3_20260110_063929.json
+
+[Q32:P3] Frozen thresholds: min_z=2.600  min_pair_wins=0.613
+[Q32:P3] Verifying on snli (seeds=[123])
+
+[Q32:P3] Loading SNLI (NLI truth anchor)...
+
+[Q32:P3] SNLI check intervention (correct vs wrong check)
+  P(M_correct > M_wrong) = 0.733
+  z(H0: p=0.5) = 7.230  (n=240)
+  mean(M_correct) = -2.482
+  mean(M_wrong)   = -9.823
+  mean(M_correct - M_wrong) = 7.341
+  [swap] P(M_correct > M_swapped_correct) = 0.625
+  [swap] mean(M_correct - M_swapped_correct) = 4.623
+  [Phi_proxy] I(mu_hat; mu_check) = 0.463 bits
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.662
+  z(H0: p=0.5) = 5.035  (n=240)
+  mean(M_correct_end) = -5.362
+  mean(M_wrong_end)   = -10.094
+  mean(M_correct - M_wrong) = 4.732
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.567
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = 3.480
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.696
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 8.140
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.619 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - mnli->snli:SNLI@seed=123: PASS
+  - mnli->snli:SNLI-Streaming@seed=123: PASS
+[Q32] EmpiricalMetricReceipt written: LAW\CONTRACTS\_runs\q32_public\datatrail\empirical_receipt_p5_transfer_mnli_to_snli_full_fixclimate_part3_20260110_063929.json
+[Q32] EmpiricalMetricReceipt sha256: E1E69BBC7912D72F0BED46541DBCF82AC930DAD4B653EED91700D4BE9BF07146

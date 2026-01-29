@@ -1,0 +1,195 @@
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\transformers\utils\hub.py:124: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\_runs\q32_public\venv\Lib\site-packages\huggingface_hub\file_download.py:942: FutureWarning: `resume_download` is deprecated and will be removed in version 1.0.0. Downloads always resume when possible. If you want to force a new download, use `force_download=True`.
+  warnings.warn(
+
+[Q32:STRESS] SciFact streaming variability (trials=10)
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.688
+  z(H0: p=0.5) = 1.500  (n=16)
+  mean(M_correct_end) = -2.457
+  mean(M_wrong_end)   = -6.568
+  mean(M_correct - M_wrong) = 4.110
+  [J] mean neighbor sim (k=10) = 0.248
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -0.147
+  mean dM_wrong   = -2.820
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.812
+  z(H0: p=0.5) = 2.500  (n=16)
+  mean(M_correct_end) = -1.197
+  mean(M_wrong_end)   = -5.194
+  mean(M_correct - M_wrong) = 3.997
+  [J] mean neighbor sim (k=10) = 0.268
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.109
+  mean dM_wrong   = -0.160
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.812
+  z(H0: p=0.5) = 2.500  (n=16)
+  mean(M_correct_end) = -3.138
+  mean(M_wrong_end)   = -2.999
+  mean(M_correct - M_wrong) = -0.139
+  [J] mean neighbor sim (k=10) = 0.267
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -5.474
+  mean dM_wrong   = -1.552
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 1.000  (n=16)
+  mean(M_correct_end) = -3.562
+  mean(M_wrong_end)   = -8.639
+  mean(M_correct - M_wrong) = 5.078
+  [J] mean neighbor sim (k=10) = 0.248
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 2.533
+  mean dM_wrong   = -0.969
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.688
+  z(H0: p=0.5) = 1.500  (n=16)
+  mean(M_correct_end) = -5.436
+  mean(M_wrong_end)   = -4.899
+  mean(M_correct - M_wrong) = -0.538
+  [J] mean neighbor sim (k=10) = 0.229
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -5.233
+  mean dM_wrong   = -0.564
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.312
+  z(H0: p=0.5) = -1.500  (n=16)
+  mean(M_correct_end) = -5.875
+  mean(M_wrong_end)   = -2.466
+  mean(M_correct - M_wrong) = -3.410
+  [J] mean neighbor sim (k=10) = 0.260
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -1.957
+  mean dM_wrong   = -1.375
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.750
+  z(H0: p=0.5) = 2.000  (n=16)
+  mean(M_correct_end) = -0.477
+  mean(M_wrong_end)   = -6.693
+  mean(M_correct - M_wrong) = 6.216
+  [J] mean neighbor sim (k=10) = 0.274
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 0.996
+  mean dM_wrong   = -0.953
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.500
+  z(H0: p=0.5) = 0.000  (n=16)
+  mean(M_correct_end) = -4.284
+  mean(M_wrong_end)   = -3.492
+  mean(M_correct - M_wrong) = -0.793
+  [J] mean neighbor sim (k=10) = 0.269
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.039
+  mean dM_wrong   = 0.536
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.688
+  z(H0: p=0.5) = 1.500  (n=16)
+  mean(M_correct_end) = 0.777
+  mean(M_wrong_end)   = -3.984
+  mean(M_correct - M_wrong) = 4.761
+  [J] mean neighbor sim (k=10) = 0.277
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = 1.233
+  mean dM_wrong   = 0.604
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:P4] SciFact streaming + intervention
+[Q32:P4] scifact streaming samples=10
+
+[Q32:P4] Intervention: replace truth-consistent checks with wrong checks
+  P(M_correct_end > M_wrong_end) = 0.625
+  z(H0: p=0.5) = 1.000  (n=16)
+  mean(M_correct_end) = -3.223
+  mean(M_wrong_end)   = -4.693
+  mean(M_correct - M_wrong) = 1.470
+  [J] mean neighbor sim (k=10) = 0.232
+
+[Q32:P4] Streaming deltas
+  mean dM_correct = -4.111
+  mean dM_wrong   = 1.183
+
+[Q32:P4] SciFact streaming status: FAIL
+
+[Q32:STRESS] Summary
+  pass_rate = 0.100  (pass_n=1/10)
+  min_pair_wins = 0.312
+  min_z = -1.500
+  min_mean_margin = -3.410
+[Q32:STRESS] Wrote LAW\CONTRACTS\_runs\q32_public\datatrail\stress_scifact_neighbor_fast_n10_20260109_180741.json
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: PASS
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL
+  - SciFact-Streaming: FAIL

@@ -1,0 +1,29 @@
+C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\transformers\utils\hub.py:110: FutureWarning: Using `TRANSFORMERS_CACHE` is deprecated and will be removed in v5 of Transformers. Use `HF_HOME` instead.
+  warnings.warn(
+2026-01-09 22:44:20.011958: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+2026-01-09 22:44:21.196944: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.
+WARNING:tensorflow:From C:\Users\rene_\AppData\Local\Programs\Python\Python311\Lib\site-packages\tf_keras\src\losses.py:2976: The name tf.losses.sparse_softmax_cross_entropy is deprecated. Please use tf.compat.v1.losses.sparse_softmax_cross_entropy instead.
+
+
+[Q32:P3] SNLI streaming (chunked NLI evidence)
+[Q32:P3] snli streaming samples=10
+[Q32:P3] snli streaming samples=25
+
+[Q32:P3] SNLI streaming intervention (chunked)
+  P(M_correct_end > M_wrong_end) = 0.775
+  z(H0: p=0.5) = 3.479  (n=40)
+  mean(M_correct_end) = -6.694
+  mean(M_wrong_end)   = -18.977
+  mean(M_correct - M_wrong) = 12.282
+  [swap_correct] P(M_correct_end > M_swapped_correct_end) = 0.425
+  [swap_correct] mean(M_correct_end - M_swapped_correct_end) = -1.803
+  [swap_wrong] P(M_correct_end > M_swapped_wrong_end) = 0.700
+  [swap_wrong] mean(M_correct_end - M_swapped_wrong_end) = 13.574
+  [J] mean neighbor sim (k=10) = 0.407
+  [Phi_proxy] mean I(mu_hat(t); mu_check(t)) = 1.626 bits
+
+[Q32] PUBLIC BENCHMARK SUMMARY
+  - SNLI-Streaming: PASS
+[Q32] EmpiricalMetricReceipt written: LAW/CONTRACTS/_runs/q32_public/datatrail/empirical_receipt_p3_snli_stream_neighbor_full_fast_20260109_224403.json
+[Q32] EmpiricalMetricReceipt sha256: F9CDF94287E3F1BA603FB94815A829998D9C493F453A2AA66C24CFBF1203BEFD
+exit_code=0
