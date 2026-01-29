@@ -32,6 +32,10 @@ class VectorRecord:
     context_vec_blob: Optional[bytes] = None
     sequence_id: Optional[str] = None
     sequence_idx: Optional[int] = None
+    # E-relationship daemon metadata (Phase 1)
+    source_id: Optional[str] = None
+    daemon_step: Optional[int] = None
+    mind_hash_before: Optional[str] = None
 
     @property
     def vector(self) -> np.ndarray:
@@ -89,9 +93,13 @@ class ResidentDB:
         vec_blob BLOB NOT NULL,
         vec_sha256 TEXT NOT NULL,
         Df REAL,
-        composition_op TEXT,  -- 'initialize' | 'entangle' | 'superpose' | 'project' | 'add' | 'subtract'
+        composition_op TEXT,  -- 'initialize' | 'entangle' | 'superpose' | 'project' | 'add' | 'subtract' | 'daemon_item' | 'remember'
         parent_ids JSON,      -- List of parent vector IDs for composition
-        created_at TEXT NOT NULL
+        created_at TEXT NOT NULL,
+        -- E-relationship daemon metadata (Phase 1)
+        source_id TEXT,       -- Source document/session ID
+        daemon_step INTEGER,  -- Step number in daemon sequence
+        mind_hash_before TEXT -- Mind state hash before this item was added
     );
 
     -- Index for vector hash lookups
@@ -200,7 +208,10 @@ class ResidentDB:
         vector: np.ndarray,
         Df: float,
         composition_op: str = 'initialize',
-        parent_ids: Optional[List[str]] = None
+        parent_ids: Optional[List[str]] = None,
+        source_id: Optional[str] = None,
+        daemon_step: Optional[int] = None,
+        mind_hash_before: Optional[str] = None
     ) -> str:
         """
         Store a vector and return its ID.
@@ -210,6 +221,9 @@ class ResidentDB:
             Df: Participation ratio
             composition_op: How this vector was created
             parent_ids: IDs of parent vectors if composed
+            source_id: Source document/session ID (E-relationship daemon)
+            daemon_step: Step number in daemon sequence (E-relationship daemon)
+            mind_hash_before: Mind state hash before this item was added
 
         Returns:
             vector_id: Unique ID for this vector
@@ -218,24 +232,27 @@ class ResidentDB:
         vec_sha256 = hashlib.sha256(vec_blob).hexdigest()
 
         # Check if vector already exists (content-addressed)
-        existing = self.conn.execute(
-            "SELECT vector_id FROM vectors WHERE vec_sha256 = ?",
-            (vec_sha256,)
-        ).fetchone()
+        # For daemon_item, allow duplicates by checking composition_op
+        if composition_op != 'daemon_item':
+            existing = self.conn.execute(
+                "SELECT vector_id FROM vectors WHERE vec_sha256 = ?",
+                (vec_sha256,)
+            ).fetchone()
 
-        if existing:
-            return existing['vector_id']
+            if existing:
+                return existing['vector_id']
 
         vector_id = str(uuid.uuid4())[:8]
         now = datetime.now(timezone.utc).isoformat()
 
         self.conn.execute(
             """
-            INSERT INTO vectors (vector_id, vec_blob, vec_sha256, Df, composition_op, parent_ids, created_at)
-            VALUES (?, ?, ?, ?, ?, ?, ?)
+            INSERT INTO vectors (vector_id, vec_blob, vec_sha256, Df, composition_op,
+                                 parent_ids, created_at, source_id, daemon_step, mind_hash_before)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
             """,
             (vector_id, vec_blob, vec_sha256, Df, composition_op,
-             json.dumps(parent_ids or []), now)
+             json.dumps(parent_ids or []), now, source_id, daemon_step, mind_hash_before)
         )
         self.conn.commit()
 
@@ -258,7 +275,10 @@ class ResidentDB:
             Df=row['Df'],
             composition_op=row['composition_op'],
             parent_ids=json.loads(row['parent_ids']),
-            created_at=row['created_at']
+            created_at=row['created_at'],
+            source_id=row['source_id'] if 'source_id' in row.keys() else None,
+            daemon_step=row['daemon_step'] if 'daemon_step' in row.keys() else None,
+            mind_hash_before=row['mind_hash_before'] if 'mind_hash_before' in row.keys() else None
         )
 
     def get_vector_by_hash(self, vec_sha256: str) -> Optional[VectorRecord]:
@@ -278,7 +298,10 @@ class ResidentDB:
             Df=row['Df'],
             composition_op=row['composition_op'],
             parent_ids=json.loads(row['parent_ids']),
-            created_at=row['created_at']
+            created_at=row['created_at'],
+            source_id=row['source_id'] if 'source_id' in row.keys() else None,
+            daemon_step=row['daemon_step'] if 'daemon_step' in row.keys() else None,
+            mind_hash_before=row['mind_hash_before'] if 'mind_hash_before' in row.keys() else None
         )
 
     def get_all_vectors(self, limit: int = 1000) -> List[VectorRecord]:
@@ -296,10 +319,76 @@ class ResidentDB:
                 Df=row['Df'],
                 composition_op=row['composition_op'],
                 parent_ids=json.loads(row['parent_ids']),
-                created_at=row['created_at']
+                created_at=row['created_at'],
+                source_id=row['source_id'] if 'source_id' in row.keys() else None,
+                daemon_step=row['daemon_step'] if 'daemon_step' in row.keys() else None,
+                mind_hash_before=row['mind_hash_before'] if 'mind_hash_before' in row.keys() else None
             )
             for row in rows
         ]
+
+    def get_daemon_items(
+        self,
+        source_id: Optional[str] = None,
+        limit: int = 1000
+    ) -> List[VectorRecord]:
+        """
+        Get daemon items (individual stored interactions).
+
+        Args:
+            source_id: Filter by source (e.g., session ID, paper ID)
+            limit: Maximum number of items to return
+
+        Returns:
+            List of VectorRecords with composition_op='daemon_item'
+        """
+        if source_id:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM vectors
+                WHERE composition_op = 'daemon_item' AND source_id = ?
+                ORDER BY daemon_step ASC
+                LIMIT ?
+                """,
+                (source_id, limit)
+            ).fetchall()
+        else:
+            rows = self.conn.execute(
+                """
+                SELECT * FROM vectors
+                WHERE composition_op = 'daemon_item'
+                ORDER BY created_at DESC
+                LIMIT ?
+                """,
+                (limit,)
+            ).fetchall()
+
+        return [
+            VectorRecord(
+                vector_id=row['vector_id'],
+                vec_blob=row['vec_blob'],
+                vec_sha256=row['vec_sha256'],
+                Df=row['Df'],
+                composition_op=row['composition_op'],
+                parent_ids=json.loads(row['parent_ids']),
+                created_at=row['created_at'],
+                source_id=row['source_id'] if 'source_id' in row.keys() else None,
+                daemon_step=row['daemon_step'] if 'daemon_step' in row.keys() else None,
+                mind_hash_before=row['mind_hash_before'] if 'mind_hash_before' in row.keys() else None
+            )
+            for row in rows
+        ]
+
+    def daemon_item_count(self, source_id: Optional[str] = None) -> int:
+        """Count daemon items (optionally for a specific source)."""
+        if source_id:
+            return self.conn.execute(
+                "SELECT COUNT(*) FROM vectors WHERE composition_op = 'daemon_item' AND source_id = ?",
+                (source_id,)
+            ).fetchone()[0]
+        return self.conn.execute(
+            "SELECT COUNT(*) FROM vectors WHERE composition_op = 'daemon_item'"
+        ).fetchone()[0]
 
     def vector_count(self) -> int:
         """Count total vectors"""

@@ -858,13 +858,55 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False,
 
         edges.extend(resident_link_edges)
 
+        # Load E-relationship graph edges (Phase 2)
+        e_graph_edges = []
+        try:
+            with sqlite3.connect(str(db_path)) as conn:
+                cursor = conn.execute("""
+                    SELECT vector_id_a, vector_id_b, e_score, r_tier
+                    FROM e_edges
+                    WHERE e_score >= 0.6
+                    ORDER BY e_score DESC
+                    LIMIT 500
+                """)
+
+                # Build vector_id -> node_id mapping
+                vector_to_node = {}
+                for node in nodes:
+                    if node.get('id', '').startswith('chunk:'):
+                        # Extract receipt_id from chunk:receipt_id
+                        receipt_id = node['id'].replace('chunk:', '')
+                        vector_to_node[receipt_id] = node['id']
+                        if len(receipt_id) >= 8:
+                            vector_to_node[receipt_id[:8]] = node['id']
+
+                for vid_a, vid_b, e_score, r_tier in cursor.fetchall():
+                    # Try to find nodes (may not exist if vectors aren't in constellation)
+                    node_a = vector_to_node.get(vid_a) or vector_to_node.get(vid_a[:8] if len(vid_a) >= 8 else vid_a)
+                    node_b = vector_to_node.get(vid_b) or vector_to_node.get(vid_b[:8] if len(vid_b) >= 8 else vid_b)
+
+                    if node_a and node_b and node_a != node_b:
+                        e_graph_edges.append({
+                            "from": node_a,
+                            "to": node_b,
+                            "type": "e_relationship",
+                            "weight": float(e_score),
+                            "r_tier": r_tier
+                        })
+        except Exception as e:
+            # e_edges table may not exist yet - ignore
+            pass
+
+        edges.extend(e_graph_edges)
+
         # Edge type color legend (for frontend)
         edge_colors = {
             'hierarchy': '#008f11',      # Dark green - structural
             'similarity': '#64ffff',      # Cyan - cosine similarity
             'mind_projected': '#ff6b6b',  # Coral red - resident's perspective
             'co_retrieval': '#ffd93d',    # Gold - retrieved together
-            'entanglement': '#c77dff'     # Purple - quantum bound
+            'entanglement': '#c77dff',    # Purple - quantum bound
+            'e_relationship': '#00ff88'   # Bright green - E-graph edges
         }
 
         result = {
@@ -875,6 +917,7 @@ async def get_constellation(max_nodes: int = 500, bypass_cache: bool = False,
             'edge_count': len(edges),
             'similarity_edge_count': len([e for e in edges if e.get('type') == 'similarity']),
             'resident_link_count': len(resident_link_edges),
+            'e_graph_edge_count': len(e_graph_edges),
             'edge_colors': edge_colors,
             'from_cache': False
         }
@@ -1502,6 +1545,229 @@ async def get_memory_stats():
         'E_min': min(E_values) if E_values else 0,
         'E_max': max(E_values) if E_values else 0
     }
+
+
+# =============================================================================
+# Routes: E-Relationship Graph (Phase 2)
+# =============================================================================
+
+@app.get("/api/e-graph/stats")
+async def get_e_graph_stats():
+    """Get E-relationship graph statistics."""
+    import sqlite3
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+
+        # Import E-graph components
+        sys.path.insert(0, str(FERAL_RESIDENT_PATH / "memory"))
+        from e_graph import ERelationshipGraph
+        from e_patterns import EPatternDetector
+
+        graph = ERelationshipGraph(conn)
+        detector = EPatternDetector(conn)
+
+        graph_stats = graph.get_stats()
+        pattern_stats = detector.get_stats()
+
+        conn.close()
+
+        return {
+            'ok': True,
+            'graph': graph_stats,
+            'patterns': pattern_stats
+        }
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
+
+
+@app.get("/api/e-graph/clusters")
+async def get_e_graph_clusters(min_size: int = 3, min_e: float = 0.5, limit: int = 20):
+    """Get E-relationship graph clusters."""
+    import sqlite3
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+
+        sys.path.insert(0, str(FERAL_RESIDENT_PATH / "memory"))
+        from e_patterns import EPatternDetector
+
+        detector = EPatternDetector(conn)
+        clusters = detector.find_clusters(min_size=min_size, min_e=min_e)
+
+        result = []
+        for cluster in clusters[:limit]:
+            result.append({
+                'cluster_id': cluster.cluster_id,
+                'size': cluster.size,
+                'member_ids': list(cluster.member_ids)[:50],  # Limit members for response size
+                'internal_edges': cluster.internal_edges,
+                'mean_e_score': cluster.mean_e_score
+            })
+
+        conn.close()
+
+        return {
+            'ok': True,
+            'clusters': result,
+            'total_clusters': len(clusters)
+        }
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
+
+
+@app.get("/api/e-graph/edges")
+async def get_e_graph_edges(
+    vector_id: str = None,
+    min_e: float = 0.5,
+    min_tier: str = None,
+    limit: int = 100
+):
+    """Get E-relationship graph edges.
+
+    Args:
+        vector_id: Optional - filter to edges for this vector
+        min_e: Minimum E score
+        min_tier: Minimum R tier (T0, T1, T2, T3)
+        limit: Maximum edges to return
+    """
+    import sqlite3
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+
+        if vector_id:
+            sys.path.insert(0, str(FERAL_RESIDENT_PATH / "memory"))
+            from e_graph import ERelationshipGraph
+
+            graph = ERelationshipGraph(conn)
+            edges = graph.get_edges(vector_id, min_e=min_e, min_tier=min_tier)
+
+            result = [
+                {
+                    'edge_id': e.edge_id,
+                    'vector_id_a': e.vector_id_a,
+                    'vector_id_b': e.vector_id_b,
+                    'e_score': e.e_score,
+                    'r_score': e.r_score,
+                    'r_tier': e.r_tier
+                }
+                for e in edges[:limit]
+            ]
+        else:
+            # Get top edges by E score
+            query = "SELECT * FROM e_edges WHERE e_score >= ?"
+            params = [min_e]
+
+            if min_tier:
+                query += " AND r_tier >= ?"
+                params.append(min_tier)
+
+            query += " ORDER BY e_score DESC LIMIT ?"
+            params.append(limit)
+
+            rows = conn.execute(query, params).fetchall()
+
+            result = [
+                {
+                    'edge_id': row['edge_id'],
+                    'vector_id_a': row['vector_id_a'],
+                    'vector_id_b': row['vector_id_b'],
+                    'e_score': row['e_score'],
+                    'r_score': row['r_score'],
+                    'r_tier': row['r_tier']
+                }
+                for row in rows
+            ]
+
+        conn.close()
+
+        return {
+            'ok': True,
+            'edges': result,
+            'count': len(result)
+        }
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
+
+
+@app.get("/api/e-graph/neighbors")
+async def get_e_graph_neighbors(vector_id: str, min_e: float = 0.3, hops: int = 2):
+    """Get neighbors of a vector via E-graph traversal."""
+    import sqlite3
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+
+        sys.path.insert(0, str(FERAL_RESIDENT_PATH / "memory"))
+        from e_query import EQueryEngine
+
+        engine = EQueryEngine(conn)
+        results = engine.find_related_to_vector(vector_id, top_k=50, min_e=min_e, max_hops=hops)
+
+        conn.close()
+
+        return {
+            'ok': True,
+            'neighbors': [
+                {
+                    'vector_id': r.vector_id,
+                    'e_score': r.e_score,
+                    'hops': r.hops
+                }
+                for r in results
+            ],
+            'count': len(results)
+        }
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
+
+
+@app.get("/api/e-graph/path")
+async def find_e_graph_path(from_id: str, to_id: str, max_hops: int = 5):
+    """Find shortest path between two vectors in E-graph."""
+    import sqlite3
+
+    db_path = FERAL_RESIDENT_PATH / "data" / "db" / "feral_eternal.db"
+
+    try:
+        conn = sqlite3.connect(str(db_path))
+        conn.row_factory = sqlite3.Row
+
+        sys.path.insert(0, str(FERAL_RESIDENT_PATH / "memory"))
+        from e_query import EQueryEngine
+
+        engine = EQueryEngine(conn)
+        result = engine.find_path(from_id, to_id, max_hops=max_hops)
+
+        conn.close()
+
+        return {
+            'ok': True,
+            'found': result.found,
+            'path': result.path,
+            'length': result.length,
+            'total_e': result.total_e
+        }
+    except Exception as e:
+        import traceback
+        return {'ok': False, 'error': str(e), 'trace': traceback.format_exc()}
 
 
 # =============================================================================

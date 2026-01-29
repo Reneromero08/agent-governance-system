@@ -6,14 +6,22 @@ Replaces HDC bind() with quantum entangle().
 
 This module provides the GeometricMemory class that the VectorResident
 uses for compositional memory accumulation.
+
+Phase 1 E-Relationship Enhancement:
+- Individual items stored BEFORE centroid interpolation
+- Each item tagged with source_id, daemon_step, mind_hash_before
+- Backward-compatible: centroid tracking still works
 """
 
 import sys
 from pathlib import Path
-from typing import List, Dict, Tuple, Optional
+from typing import List, Dict, Tuple, Optional, TYPE_CHECKING
 import hashlib
 import warnings
 import numpy as np
+
+if TYPE_CHECKING:
+    from .resident_db import ResidentDB
 
 # Add CAPABILITY to path for imports
 # memory/ -> FERAL_RESIDENT/ -> LAB/ -> THOUGHT/ -> repo/
@@ -75,13 +83,22 @@ class GeometricMemory:
         print(f"Current Df: {memory.mind_state.Df:.2f}")
     """
 
-    def __init__(self, model_name: str = 'all-MiniLM-L6-v2'):
+    def __init__(
+        self,
+        model_name: str = 'all-MiniLM-L6-v2',
+        db: Optional['ResidentDB'] = None,
+        source_id: Optional[str] = None
+    ):
         self.reasoner = GeometricReasoner(model_name)
         self.mind_state: Optional[GeometricState] = None
         self.memory_history: List[Dict] = []
         self._initial_state: Optional[GeometricState] = None
         # Q27 Entropy Control: 0=permissive, >0.025=selective filtering
         self.temperature: float = 0.0
+        # E-relationship daemon (Phase 1)
+        self._db = db
+        self._source_id = source_id
+        self._daemon_step = 0
 
     def remember(self, interaction_text: str) -> Dict:
         """
@@ -90,10 +107,32 @@ class GeometricMemory:
         Old approach: mind = hdc_bind(mind, embed(interaction))
         New approach: mind = interpolate(mind, new, t=1/N)
 
-        Returns receipt of the operation.
+        Phase 1 Enhancement: Store individual item BEFORE interpolation
+        for E-relationship graph construction.
+
+        Returns receipt of the operation including item_id if db is connected.
         """
+        # Capture mind state BEFORE this interaction (for graph edges)
+        mind_hash_before = None
+        if self.mind_state is not None:
+            mind_hash_before = self.mind_state.receipt()['vector_hash']
+
         # Initialize interaction to manifold (BOUNDARY operation)
         interaction = self.reasoner.initialize(interaction_text)
+
+        # Phase 1: Store individual item BEFORE centroid interpolation
+        item_id = None
+        if self._db is not None:
+            item_id = self._db.store_vector(
+                vector=interaction.vector,
+                Df=interaction.Df,
+                composition_op='daemon_item',
+                parent_ids=[],
+                source_id=self._source_id,
+                daemon_step=self._daemon_step,
+                mind_hash_before=mind_hash_before
+            )
+            self._daemon_step += 1
 
         if self.mind_state is None:
             # First memory
@@ -107,7 +146,7 @@ class GeometricMemory:
             # As N grows, new interactions have less weight, preventing drift
             n = len(self.memory_history) + 1  # Count includes this new memory
             t = 1.0 / (n + 1)  # Weighted blend: (N*Mind + New) / (N+1)
-            
+
             self.mind_state = self.reasoner.interpolate(
                 self.mind_state,
                 interaction,
@@ -120,7 +159,9 @@ class GeometricMemory:
             'mind_hash': self.mind_state.receipt()['vector_hash'],
             'Df': self.mind_state.Df,
             'distance_from_start': self.mind_distance_from_start(),
-            'memory_index': len(self.memory_history)
+            'memory_index': len(self.memory_history),
+            'item_id': item_id,  # Phase 1: Individual item ID for graph lookup
+            'item_Df': interaction.Df  # Phase 1: Individual item Df (before interpolation)
         }
 
         self.memory_history.append({
@@ -273,6 +314,59 @@ class GeometricMemory:
         self._initial_state = None
         self.memory_history = []
         self.temperature = 0.0
+        self._daemon_step = 0
+
+    # ========================================================================
+    # E-Relationship Daemon Methods (Phase 1)
+    # ========================================================================
+
+    def connect_db(self, db: 'ResidentDB', source_id: Optional[str] = None):
+        """
+        Connect to a database for individual item storage.
+
+        Call this to enable E-relationship graph construction.
+        Items stored via remember() will be persisted to the database.
+
+        Args:
+            db: ResidentDB instance
+            source_id: Optional source identifier (session, paper, etc.)
+        """
+        self._db = db
+        self._source_id = source_id
+        self._daemon_step = 0
+
+    def set_source_id(self, source_id: str):
+        """Set the source ID for subsequent remember() calls."""
+        self._source_id = source_id
+        self._daemon_step = 0  # Reset step for new source
+
+    def get_stored_item_ids(self) -> List[str]:
+        """
+        Get list of item IDs stored during this session.
+
+        Returns:
+            List of vector IDs for items stored via remember()
+        """
+        return [
+            m['item_id']
+            for m in self.memory_history
+            if m.get('item_id') is not None
+        ]
+
+    @property
+    def db_connected(self) -> bool:
+        """Check if database is connected for individual item storage."""
+        return self._db is not None
+
+    @property
+    def source_id(self) -> Optional[str]:
+        """Get current source ID."""
+        return self._source_id
+
+    @property
+    def daemon_step(self) -> int:
+        """Get current daemon step (number of items stored)."""
+        return self._daemon_step
 
     # ========================================================================
     # Q27 Entropy Toolkit Methods
