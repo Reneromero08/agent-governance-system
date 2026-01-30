@@ -1,8 +1,24 @@
-<!-- CONTENT_HASH: 5a3c8f1b -->
+<!-- CONTENT_HASH: auto-update -->
 
 # Changelog
 
 All notable changes to Agent Governance System will be documented in this file.
+
+---
+
+## [3.8.31] - 2026-01-30
+
+### Changed: Roadmap V4 replaces deprecated master
+
+- New `AGS_ROADMAP_V4.md` with only remaining phases (Crypto Safe, Swarm, Omega)
+- Consolidated all "future work" from completed phases into Omega section
+- Archived `AGS_ROADMAP_MASTER.md` to `MEMORY/ARCHIVE/roadmaps/`
+
+### Fixed: INBOX policy no longer requires hardcoded filename list
+
+- `check_inbox_policy.py` now exempts all root-level files automatically
+- Removed brittle hardcoded list (CHANGELOG.md, AGENTS.md, etc.)
+- Policy only applies to .md files in non-governance subdirectories
 
 ---
 

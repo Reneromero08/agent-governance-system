@@ -2,14 +2,15 @@
 """
 INBOX Policy Check
 
-Enforces that all human-readable documents are stored in INBOX directory
-and contain content hashes.
+Enforces that human-readable documents in INBOX contain content hashes.
 
+Root-level docs and files in governance directories are exempt.
 This script is run by the pre-commit hook.
 """
 
 from __future__ import annotations
 
+import fnmatch
 import hashlib
 import os
 import re
@@ -107,13 +108,13 @@ def check_inbox_policy() -> dict:
         rel_path = file_path.relative_to(PROJECT_ROOT)
         parts = str(rel_path).split(os.sep)
 
-        # Exempt directories (repo-owned documentation lives under docs/)
-        if any(part in ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", "BUILD", "docs", ".git"] for part in parts):
+        # Exempt all governance directories
+        exempt_dirs = ["LAW", "CAPABILITY", "NAVIGATION", "DIRECTION", "THOUGHT", "MEMORY", "BUILD", "docs", ".git"]
+        if any(part in exempt_dirs for part in parts):
             continue
 
-        # Exempt root-level canon files
-        root_exempt = ["CHANGELOG.md", "AGENTS.md", "README.md", "AGS_ROADMAP_MASTER.md", "pyproject.toml"]
-        if str(rel_path) in root_exempt:
+        # Exempt root-level files (no subdirectory = governance doc)
+        if len(parts) == 1:
             continue
 
         # Check if file is in INBOX

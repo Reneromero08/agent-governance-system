@@ -1,4 +1,30 @@
 ---
+title: AGS Roadmap (DEPRECATED)
+version: 3.8.25
+last_updated: 2026-01-30
+deprecated: 2026-01-30
+superseded_by: AGS_ROADMAP_V4.md
+scope: DEPRECATED - See AGS_ROADMAP_V4.md for current roadmap
+status: Deprecated
+notes:
+  - This file is kept for historical reference only
+  - All active work should reference AGS_ROADMAP_V4.md
+---
+
+> **DEPRECATED:** This roadmap has been superseded by [AGS_ROADMAP_V4.md](AGS_ROADMAP_V4.md).
+>
+> The new roadmap contains only the remaining phases (Crypto Safe, Swarm, Omega) with all
+> "future work" items from completed phases consolidated into the Omega section.
+>
+> **Reason for deprecation:** Phases 1-8 are complete. This roadmap contained too much
+> historical/completed content, making it difficult to see what actually needs to be done.
+
+---
+
+## Historical Context (for reference)
+
+The original frontmatter was:
+```yaml
 title: AGS Roadmap (TODO Only, Rephased)
 version: 3.8.25
 last_updated: 2026-01-25
@@ -9,6 +35,8 @@ notes:
   - Write scope must be explicitly allowlisted per ticket.
   - LAB is the safe zone; CANON requires maximal constraint.
   - Routing is task-typed with predeclared fallbacks; no ad hoc escalation logic.
+```
+
 ---
 
 <!-- This file intentionally includes ONLY unfinished tasks, reorganized into new phases. -->
