@@ -373,17 +373,38 @@ def holonomy(path: np.ndarray, vector: np.ndarray) -> np.ndarray:
     return v
 
 
-def holonomy_angle(path: np.ndarray, vector: np.ndarray) -> float:
+def holonomy_angle(path: np.ndarray, vector: np.ndarray = None) -> float:
     """
     Compute the rotation angle from holonomy around a loop.
 
     Args:
         path: (n_points, dim) embeddings forming a closed loop
-        vector: (dim,) tangent vector to transport
+        vector: (dim,) tangent vector to transport. If None, generates a
+                random tangent vector at path[0].
 
     Returns:
         Rotation angle in radians
     """
+    path = normalize_embeddings(path)
+
+    # Generate a default tangent vector if none provided
+    if vector is None:
+        # Create a random vector and project to tangent space at path[0]
+        dim = path.shape[1]
+        vector = np.random.randn(dim)
+        vector = vector - np.dot(vector, path[0]) * path[0]
+        norm = np.linalg.norm(vector)
+        if norm > 1e-10:
+            vector = vector / norm
+        else:
+            # If random vector was parallel to path[0], use orthogonal basis vector
+            vector = np.zeros(dim)
+            # Find a coordinate where path[0] is not too large
+            idx = np.argmin(np.abs(path[0]))
+            vector[idx] = 1.0
+            vector = vector - np.dot(vector, path[0]) * path[0]
+            vector = vector / (np.linalg.norm(vector) + 1e-10)
+
     v_initial = vector.copy()
     v_initial = v_initial - np.dot(v_initial, path[0]) * path[0]
     v_initial = v_initial / (np.linalg.norm(v_initial) + 1e-10)

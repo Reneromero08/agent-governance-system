@@ -1,0 +1,178 @@
+{
+  "timestamp": "2026-01-30T04:32:58.099986Z",
+  "test": "Q51_OCTANT_PHASE_SECTORS",
+  "hypothesis": "Octant k corresponds to phase sector [k*pi/4, (k+1)*pi/4)",
+  "success_criteria": {
+    "octant_phase_correlation_r": "> 0.6",
+    "chi_square_p_value": "< 0.01",
+    "phase_peaks_match_octants": true
+  },
+  "phase_periodicity": {
+    "chi2_statistic": 13.966507177033492,
+    "p_value": 0.051780272347994316,
+    "counts": [
+      27,
+      11,
+      23,
+      25,
+      36,
+      29,
+      28,
+      30
+    ],
+    "bin_edges": [
+      -3.1415927410125732,
+      -2.356194496154785,
+      -1.5707963705062866,
+      -0.7853981852531433,
+      0.0,
+      0.7853981852531433,
+      1.5707963705062866,
+      2.356194496154785,
+      3.1415927410125732
+    ],
+    "uniform_reject_p01": false,
+    "sector_width_rad": 0.7853981633974483,
+    "sector_width_deg": 45.0
+  },
+  "octant_phase_correlation": {
+    "confusion_matrix": [
+      [
+        0,
+        0,
+        0,
+        0,
+        22,
+        5,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        12,
+        13
+      ],
+      [
+        0,
+        0,
+        10,
+        15,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        21,
+        14,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        5,
+        6,
+        0,
+        0
+      ],
+      [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0,
+        11,
+        12
+      ],
+      [
+        0,
+        0,
+        18,
+        15,
+        0,
+        0,
+        0,
+        0
+      ],
+      [
+        15,
+        15,
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ]
+    ],
+    "diagonal_fraction": 0.07177033492822966,
+    "best_shift": 3,
+    "best_shift_fraction": 0.2535885167464115,
+    "cramers_v": 0.6719517126111233,
+    "octant_sector_correlation": 0.2535885167464115
+  },
+  "angular_momentum": {
+    "L_mean": -0.011319046840071678,
+    "L_std": 0.434911847114563,
+    "L_by_sector_mean": [
+      0.08309200406074524,
+      0.1731187403202057,
+      0.30301910638809204,
+      0.5090335011482239,
+      -0.7785500884056091,
+      -0.359759658575058,
+      -0.3312048017978668,
+      -0.061482205986976624
+    ],
+    "L_by_sector_std": [
+      0.053230248391628265,
+      0.06949815899133682,
+      0.09328960627317429,
+      0.27246618270874023,
+      0.37230974435806274,
+      0.17310667037963867,
+      0.19264648854732513,
+      0.04514429718255997
+    ],
+    "r_mean": 0.1978074163198471,
+    "r_std": 0.10825266689062119
+  },
+  "assessment": {
+    "criterion_1_correlation": {
+      "value": 0.2535885167464115,
+      "threshold": 0.6,
+      "passed": false
+    },
+    "criterion_2_periodicity": {
+      "value": 0.051780272347994316,
+      "threshold": 0.01,
+      "passed": false
+    },
+    "criterion_3_peaks": {
+      "value": 2,
+      "threshold": 4,
+      "passed": false
+    },
+    "overall_pass": false
+  },
+  "anti_pattern_check": {
+    "circular_reasoning_avoided": true,
+    "octants_defined_from_signs": true,
+    "phase_defined_independently": true,
+    "forced_structure": false,
+    "honest_assessment": true
+  }
+}

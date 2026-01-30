@@ -1,0 +1,107 @@
+{
+  "timestamp": "20260129_221730",
+  "test": "Q51_CORRECTED_COMPREHENSIVE",
+  "models_tested": [
+    "MiniLM-L6-v2",
+    "BERT-base"
+  ],
+  "q51_1_phase_structure": {
+    "status": "complete",
+    "df": 17.94432310433626,
+    "alpha": 1.2685943474256536,
+    "df_alpha_product": 22.764066858540534,
+    "pca_winding_examples": [
+      6.2831854820251465,
+      6.283185005187988,
+      -2.384185791015625e-07,
+      6.2831854820251465,
+      6.283185005187988
+    ]
+  },
+  "q51_2_octant_structure": {
+    "status": "complete",
+    "octant_counts": [
+      3,
+      16,
+      11,
+      4,
+      8,
+      11,
+      4,
+      7
+    ],
+    "chi2_stat": 17.5,
+    "p_value": 0.01444154788030605,
+    "is_nonuniform": true
+  },
+  "q51_3_8e_universality": {
+    "status": "partial",
+    "models_tested": 2,
+    "results": [
+      {
+        "model": "all-MiniLM-L6-v2",
+        "df": 33.30574363155573,
+        "alpha": 0.8881132075931518,
+        "product": 29.579270807896147,
+        "error_pct": 36.021662870855096,
+        "r_squared": 0.8626044425383524,
+        "n_samples": 64
+      },
+      {
+        "model": "bert-base-uncased",
+        "df": 17.94432310433626,
+        "alpha": 1.2685943474256536,
+        "product": 22.764066858540534,
+        "error_pct": 4.681628154789551,
+        "r_squared": 0.9163556421491166,
+        "n_samples": 64
+      }
+    ],
+    "mean_product": 26.17166883321834,
+    "cv_percent": 13.020193692626563
+  },
+  "q51_4_real_topology": {
+    "status": "complete",
+    "n_loops_tested": 5,
+    "loops": [
+      {
+        "loop": "king -> man -> woman -> queen -> king",
+        "n_points": 5,
+        "pca_winding": 6.2831854820251465,
+        "spherical_excess": -0.30725908279418945,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "good -> better -> best -> good",
+        "n_points": 4,
+        "pca_winding": 6.283185005187988,
+        "spherical_excess": 0.47675228118896484,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "hot -> warm -> cool -> cold -> hot",
+        "n_points": 5,
+        "pca_winding": -2.384185791015625e-07,
+        "spherical_excess": -2.2360262870788574,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "big -> small -> short -> tall -> big",
+        "n_points": 5,
+        "pca_winding": 6.2831854820251465,
+        "spherical_excess": -1.128866195678711,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "happy -> sad -> angry -> calm -> happy",
+        "n_points": 5,
+        "pca_winding": 6.283185005187988,
+        "spherical_excess": -0.7980003356933594,
+        "holonomy": 0.0
+      }
+    ],
+    "mean_pca_winding": 5.026548147201538,
+    "mean_spherical_excess": -0.7986799240112304,
+    "note": "Berry phase undefined for real embeddings; measured holonomy and spherical excess instead"
+  }
+}

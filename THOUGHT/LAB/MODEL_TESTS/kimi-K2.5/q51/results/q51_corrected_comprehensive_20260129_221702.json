@@ -1,0 +1,88 @@
+{
+  "timestamp": "20260129_221702",
+  "test": "Q51_CORRECTED_COMPREHENSIVE",
+  "models_tested": [
+    "MiniLM-L6-v2",
+    "BERT-base"
+  ],
+  "q51_1_phase_structure": {
+    "status": "complete",
+    "df": 17.94432310433626,
+    "alpha": 1.2685943474256536,
+    "df_alpha_product": 22.764066858540534,
+    "pca_winding_examples": [
+      6.2831854820251465,
+      6.283185005187988,
+      -2.384185791015625e-07,
+      6.2831854820251465,
+      6.283185005187988
+    ]
+  },
+  "q51_2_octant_structure": {
+    "status": "complete",
+    "octant_counts": [
+      3,
+      16,
+      11,
+      4,
+      8,
+      11,
+      4,
+      7
+    ],
+    "chi2_stat": 17.5,
+    "p_value": 0.01444154788030605,
+    "is_nonuniform": true
+  },
+  "q51_3_8e_universality": {
+    "status": "partial",
+    "models_tested": 0,
+    "results": [],
+    "mean_product": null,
+    "cv_percent": null
+  },
+  "q51_4_real_topology": {
+    "status": "complete",
+    "n_loops_tested": 5,
+    "loops": [
+      {
+        "loop": "king \u2192 man \u2192 woman \u2192 queen \u2192 king",
+        "n_points": 5,
+        "pca_winding": 6.2831854820251465,
+        "spherical_excess": -0.30725908279418945,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "good \u2192 better \u2192 best \u2192 good",
+        "n_points": 4,
+        "pca_winding": 6.283185005187988,
+        "spherical_excess": 0.47675228118896484,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "hot \u2192 warm \u2192 cool \u2192 cold \u2192 hot",
+        "n_points": 5,
+        "pca_winding": -2.384185791015625e-07,
+        "spherical_excess": -2.2360262870788574,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "big \u2192 small \u2192 short \u2192 tall \u2192 big",
+        "n_points": 5,
+        "pca_winding": 6.2831854820251465,
+        "spherical_excess": -1.128866195678711,
+        "holonomy": 0.0
+      },
+      {
+        "loop": "happy \u2192 sad \u2192 angry \u2192 calm \u2192 happy",
+        "n_points": 5,
+        "pca_winding": 6.283185005187988,
+        "spherical_excess": -0.7980003356933594,
+        "holonomy": 0.0
+      }
+    ],
+    "mean_pca_winding": 5.026548147201538,
+    "mean_spherical_excess": -0.7986799240112304,
+    "note": "Berry phase undefined for real embeddings; measured holonomy and spherical excess instead"
+  }
+}

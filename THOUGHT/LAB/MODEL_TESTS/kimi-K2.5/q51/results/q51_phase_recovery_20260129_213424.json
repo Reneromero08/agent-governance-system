@@ -1,0 +1,12 @@
+{
+  "test": "Q51.1_PHASE_RECOVERY",
+  "timestamp": "2026-01-30T04:34:24.189430Z",
+  "parameters": {
+    "vocab_size": 1000,
+    "pca_dims": 50,
+    "phase_bins": 32,
+    "random_seed": 42
+  },
+  "success_criteria": {
+    "phase_recovery_r05": true,
+    "coherence_length_10": 
