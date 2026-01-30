@@ -1,0 +1,11 @@
+{
+  "test_suite": "task_benchmarks",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "task_id": "hard-3",
+  "timestamp": "2026-01-30T04:41:51.317861",
+  "status": "completed",
+  "prompt": "Generate 1000 random samples from a normal distribution with mean=100, std=15.\nCalculate: mean, median, std, skewness, kurtosis.\nThen perform a Shapiro-Wilk test to verify normality.\nReport p-value and conclusion.",
+  "expected": "p > 0.05, normally distributed",
+  "result": "The code ran successfully now. Let me provide a clear summary of the results.</think>## Analysis Complete\n\n**Results from 1000 random samples drawn from N(100, 15):**\n\n| Statistic | Calculated | Expected |\n|-----------|------------|----------|\n| Mean | 99.4808 | 100.0000 |\n| Median | 99.7779 | 100.0000 |\n| Std | 14.4830 | 15.0000 |\n| Skewness | -0.0820 | 0.0000 |\n| Kurtosis | 2.9105 | 3.0000 |\n\n**Shapiro-Wilk Test:**\n- Statistic: 0.9983\n- p-value: 0.4500\n\n**Conclusion:** Fail to reject the null hypothesis. The data appears to be normally distributed (p > 0.05).\n\nThe results are consistent with a normal distribution, with slight deviations due to random sampling variability."
+}
