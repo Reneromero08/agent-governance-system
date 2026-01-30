@@ -6,6 +6,42 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.29] - 2026-01-30
+
+### Refactored: MCP server modularization (15 tools to 11 tools)
+
+Continued MCP simplification by extracting modules and consolidating tools.
+
+**New modules extracted from server.py:**
+- `CAPABILITY/MCP/primitives.py` (437 lines) - Safe primitives:
+  - Platform-aware file locking (Windows msvcrt / Unix fcntl)
+  - Atomic JSONL write and rewrite operations
+  - Streaming JSONL reader with pagination
+  - Task state machine validation
+  - File hashing utilities
+
+- `CAPABILITY/MCP/validation.py` (599 lines) - Path/bundle validation:
+  - CMP-01 path validation (durable/catalytic/forbidden roots)
+  - Containment overlap checking
+  - JobSpec path validation
+  - Post-run output verification
+  - SPECTRUM-02 bundle verification
+
+**Memory tools consolidated:**
+- Merged 5 tools into single `memory` tool with operation parameter:
+  - `save` - Save memory to resident cassette
+  - `query` - Semantic search over memories
+  - `recall` - Retrieve memory by hash
+  - `neighbors` - Find semantically similar memories
+  - `stats` - Get memory statistics
+
+### Changed
+
+- server.py reduced from 2,659 to 1,709 lines (36% smaller)
+- tools.json reduced from 15 to 11 tool definitions
+
+---
+
 ## [3.8.28] - 2026-01-30
 
 ### Refactored: MCP server from 31 tools to 15 tools
