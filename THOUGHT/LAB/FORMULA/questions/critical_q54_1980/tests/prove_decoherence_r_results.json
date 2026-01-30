@@ -1,0 +1,30 @@
+{
+  "test_name": "prove_decoherence_r",
+  "timestamp": "2026-01-30T02:52:34.447681",
+  "claim": "R increases during quantum-classical transition",
+  "parameters": {
+    "N_ENV": 5,
+    "COUPLING": 0.5,
+    "T_MAX": 10.0,
+    "N_TIMESTEPS": 100
+  },
+  "measurements": {
+    "initial_coherence": 0.5000000000000002,
+    "min_coherence": 4.694100576990713e-09,
+    "final_coherence": 0.20795287540107898,
+    "t_decoherence": 0.9090909090909091,
+    "R_initial": 2.0394568498277727e-17,
+    "R_max": 100.00000000000006,
+    "t_max_R": 7.878787878787879,
+    "R_final": 76.71212921208196,
+    "max_entropy": 0.9999999999971145,
+    "max_correlation": 1.0000000000000002
+  },
+  "predictions": {
+    "R_increases_to_peak": true,
+    "peak_near_decoherence": false,
+    "correlation_drives_R": true
+  },
+  "tests_passed": 2,
+  "verdict": "PASS"
+}

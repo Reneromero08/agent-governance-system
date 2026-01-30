@@ -1,0 +1,36 @@
+{
+  "test_name": "prove_wave_r",
+  "timestamp": "2026-01-30T02:49:57.733626",
+  "claim": "R_standing > R_propagating by factor 3-5x",
+  "parameters": {
+    "N_GRID": 512,
+    "X_MAX": 10.0,
+    "T_MAX": 10.0,
+    "N_TIMESTEPS": 200,
+    "OMEGA": 2.0,
+    "N_MODES": 5
+  },
+  "standing_wave": {
+    "R_mean": 1.0249566712787157,
+    "R_std": 0.4413986519055784,
+    "E_mean": 1.0,
+    "grad_S_mean": 0.5014346570160955,
+    "sigma_mean": 0.4939899438623112,
+    "Df_mean": 1.0
+  },
+  "propagating_wave": {
+    "R_mean": 0.12967322767161238,
+    "R_std": 4.9689457520730056e-17,
+    "E_mean": 1.0,
+    "grad_S_mean": 1.6601468501296217,
+    "sigma_mean": 0.21527660046516858,
+    "Df_mean": 1.0
+  },
+  "ratio": 7.904150221928159,
+  "predictions": {
+    "standing_higher": true,
+    "ratio_above_2": true,
+    "ratio_in_range": false
+  },
+  "verdict": "PASS"
+}

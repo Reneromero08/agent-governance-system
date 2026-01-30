@@ -1,0 +1,73 @@
+{
+  "test_name": "prove_semantic_r",
+  "timestamp": "2026-01-30T02:52:52.911759",
+  "claim": "R predicts semantic stability across word categories",
+  "parameters": {
+    "EMBEDDING_DIM": 50,
+    "N_NEIGHBORS": 10
+  },
+  "category_results": {
+    "concrete": {
+      "n_words": 20,
+      "R_mean": 225.3307140204301,
+      "R_std": 15.321717950259792,
+      "E_mean": 3.412479400721781,
+      "grad_S_mean": 0.010000000000000002,
+      "sigma_mean": 0.9902841333776771,
+      "Df_mean": 42.75
+    },
+    "abstract": {
+      "n_words": 20,
+      "R_mean": 71.7989769620884,
+      "R_std": 6.246093865088273,
+      "E_mean": 14.885714347317005,
+      "grad_S_mean": 0.13583641120457476,
+      "sigma_mean": 0.991437530938555,
+      "Df_mean": 49.7
+    },
+    "numbers": {
+      "n_words": 11,
+      "R_mean": 147.85034130213342,
+      "R_std": 56.942900955193124,
+      "E_mean": 2.392749012710106,
+      "grad_S_mean": 0.009999999999999998,
+      "sigma_mean": 0.9822429127564408,
+      "Df_mean": 33.09090909090909
+    },
+    "neologisms": {
+      "n_words": 10,
+      "R_mean": 0.0012392847113714338,
+      "R_std": 0.0022947454097777664,
+      "E_mean": 14.244670479014365,
+      "grad_S_mean": 0.01634935047241164,
+      "sigma_mean": 0.649016779039407,
+      "Df_mean": 41.3
+    },
+    "verbs": {
+      "n_words": 18,
+      "R_mean": 153.1139287306166,
+      "R_std": 9.73420992428,
+      "E_mean": 10.975323006056506,
+      "grad_S_mean": 0.05275744055362915,
+      "sigma_mean": 0.9936911064374728,
+      "Df_mean": 48.833333333333336
+    }
+  },
+  "key_ratios": {
+    "concrete_vs_abstract": 3.138355496895313,
+    "numbers_vs_neologisms": 119302.96561031346
+  },
+  "predictions": {
+    "concrete_higher_than_abstract": true,
+    "numbers_higher_than_neologisms": true,
+    "numbers_highest": false,
+    "neologisms_lowest": true,
+    "statistically_significant": true
+  },
+  "statistical_test": {
+    "t_statistic": 40.446695339797216,
+    "p_value": 7.56449826804798e-33
+  },
+  "tests_passed": 4,
+  "verdict": "PASS"
+}
