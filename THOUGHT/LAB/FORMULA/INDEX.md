@@ -23,7 +23,7 @@ questions/{priority}_q{##}_{Rscore}/
 
 | # | Question | R-Score | Status | Folder |
 |---|----------|---------|--------|--------|
-| 54 | Energy Spiral -> Matter | 1980 | **SUPPORTED** | [critical_q54_1980](questions/critical_q54_1980/) |
+| 54 | Energy Spiral -> Matter | 1980 | **VALIDATED** | [critical_q54_1980](questions/critical_q54_1980/) |
 | 51 | Complex Plane & Phase Recovery | 1940 | ANSWERED | [critical_q51_1940](questions/critical_q51_1940/) |
 | 50 | Completing 8e | 1920 | ANSWERED | [critical_q50_1920](questions/critical_q50_1920/) |
 | 48 | Riemann-Spectral Bridge | 1900 | ANSWERED | [critical_q48_1900](questions/critical_q48_1900/) |
