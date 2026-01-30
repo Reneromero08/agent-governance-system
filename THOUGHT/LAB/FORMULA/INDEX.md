@@ -2,7 +2,7 @@
 
 **Ranked by R-score** (which answers would resolve the most downstream uncertainty)
 
-*Last updated: v7.0.0 (2026-01-30 - ALL TESTS FIXED: A derives 3.49x (2.3% err), B r=+0.9993 non-circular, sigma=0.27 derived, 8e law derived from topology+semiotics. See [fixed status](questions/critical_q54_1980/FIXED_STATUS.md). 42/54 answered (77.8%), 4 falsified.*
+*Last updated: v7.1.0 (2026-01-30 - Q54 CROWN JEWEL: One formula unifies wave mechanics, Quantum Darwinism, E=mc², and semantics. R = (E/grad_S) × sigma^Df describes how energy crystallizes into matter. See [crown jewel](questions/critical_q54_1980/CROWN_JEWEL.md). 43/54 answered (79.6%), 4 falsified.*
 
 ---
 
