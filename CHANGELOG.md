@@ -6,6 +6,37 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.28] - 2026-01-30
+
+### Refactored: MCP server from 31 tools to 15 tools
+
+Major refactoring to reduce MCP server complexity by extracting non-essential tools.
+
+**New skills extracted from MCP:**
+- `governance/critic-run` - Runs TOOLS/governance/critic.py
+- `governance/adr-create` - Creates ADRs with auto-numbering and template
+- `governance/commit-ceremony` - Pre-commit validation workflow
+- `governance/research-cache` - Persistent research cache management
+- `utilities/test-primitives` - CAT LAB safe primitives testing
+
+**Swarm coordination moved to TURBO_SWARM lab:**
+- Created `THOUGHT/LAB/TURBO_SWARM/MCP_SWARM_SERVER/` standalone server
+- Tools: message_board_list, message_board_write, agent_inbox_list, agent_inbox_claim, agent_inbox_finalize
+
+**Terminal sharing moved to MCP_EXPERIMENTAL lab:**
+- Created `THOUGHT/LAB/MCP_EXPERIMENTAL/terminal_sharing_server.py`
+- Tools: terminal_register, terminal_log, terminal_get, terminal_list
+- Fixed bugs in original implementation (broken self references)
+
+### Removed
+
+- `pack_validate` MCP tool (duplicate of utilities/pack-validate skill)
+- `terminal_bridge` MCP tool (duplicate of utilities/terminal-bridge skill)
+- Terminal sharing code from main MCP (moved to lab)
+- Swarm coordination code from main MCP (moved to lab)
+
+---
+
 ## [3.8.27] - 2026-01-30
 
 ### Added: terminal-bridge skill

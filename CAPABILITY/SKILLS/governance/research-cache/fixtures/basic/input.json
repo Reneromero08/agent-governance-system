@@ -1,0 +1,9 @@
+{
+    "description": "Test research-cache list action",
+    "action": "list",
+    "dry_run": true,
+    "_mock_entries": [
+        {"url": "https://example.com/doc1", "tags": ["api", "docs"]},
+        {"url": "https://example.com/doc2", "tags": ["tutorial"]}
+    ]
+}

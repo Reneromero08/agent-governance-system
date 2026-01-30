@@ -1,0 +1,10 @@
+{
+    "description": "Test adr-create dry run mode",
+    "title": "Test Decision Record",
+    "context": "We need to test the ADR creation skill",
+    "decision": "Use dry_run mode for deterministic testing",
+    "status": "proposed",
+    "dry_run": true,
+    "_mock_next_number": 999,
+    "_mock_date": "2025-01-01"
+}

@@ -1,0 +1,32 @@
+{
+    "_mock_critic_passed": true,
+    "_mock_git_status": "M README.md\nM CHANGELOG.md",
+    "_mock_runner_passed": true,
+    "_mock_staged_files": [
+        "README.md",
+        "CHANGELOG.md"
+    ],
+    "ceremony_prompt": "Ready for the Chunked Commit Ceremony? Shall I commit these 2 files?",
+    "checklist": {
+        "1_failsafe_critic": {
+            "output": "[MOCK] Critic check passed",
+            "passed": true,
+            "tool": "TOOLS/governance/critic.py"
+        },
+        "2_failsafe_runner": {
+            "output": "[MOCK] Runner check passed",
+            "passed": true,
+            "tool": "LAW/CONTRACTS/runner.py"
+        },
+        "3_files_staged": true,
+        "4_ready_for_commit": true
+    },
+    "description": "Test commit-ceremony with mock values",
+    "dry_run": true,
+    "git_status": "M README.md\nM CHANGELOG.md",
+    "staged_count": 2,
+    "staged_files": [
+        "README.md",
+        "CHANGELOG.md"
+    ]
+}

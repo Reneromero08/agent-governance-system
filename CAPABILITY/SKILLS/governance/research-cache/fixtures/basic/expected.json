@@ -1,0 +1,38 @@
+{
+    "_mock_entries": [
+        {
+            "tags": [
+                "api",
+                "docs"
+            ],
+            "url": "https://example.com/doc1"
+        },
+        {
+            "tags": [
+                "tutorial"
+            ],
+            "url": "https://example.com/doc2"
+        }
+    ],
+    "action": "list",
+    "count": 2,
+    "description": "Test research-cache list action",
+    "dry_run": true,
+    "entries": [
+        {
+            "tags": [
+                "api",
+                "docs"
+            ],
+            "url": "https://example.com/doc1"
+        },
+        {
+            "tags": [
+                "tutorial"
+            ],
+            "url": "https://example.com/doc2"
+        }
+    ],
+    "output": "Found 2 entries",
+    "success": true
+}

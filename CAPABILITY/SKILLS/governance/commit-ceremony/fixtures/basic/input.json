@@ -1,0 +1,8 @@
+{
+    "description": "Test commit-ceremony with mock values",
+    "dry_run": true,
+    "_mock_critic_passed": true,
+    "_mock_runner_passed": true,
+    "_mock_staged_files": ["README.md", "CHANGELOG.md"],
+    "_mock_git_status": "M README.md\nM CHANGELOG.md"
+}

@@ -1,0 +1,22 @@
+{
+    "build_id": "mock:deterministic",
+    "catalytic_roots_count": 5,
+    "description": "Test test-primitives with mock results",
+    "details": [
+        "PASS: File locking (Windows/Unix)",
+        "PASS: Atomic JSONL write",
+        "PASS: Atomic JSONL rewrite",
+        "PASS: Streaming JSONL reader",
+        "PASS: Task state transitions",
+        "PASS: Task spec validation",
+        "PASS: File hashing (SHA-256)",
+        "PASS: Constants and build ID"
+    ],
+    "dry_run": true,
+    "durable_roots_count": 3,
+    "summary": "Tests: 8/8 passed",
+    "tests_failed": 0,
+    "tests_passed": 8,
+    "tests_run": 8,
+    "validator_semver": "1.0.0"
+}

@@ -1,0 +1,6 @@
+{
+    "description": "Test critic-run basic invocation",
+    "exit_code": 0,
+    "passed": true,
+    "verbose": false
+}
