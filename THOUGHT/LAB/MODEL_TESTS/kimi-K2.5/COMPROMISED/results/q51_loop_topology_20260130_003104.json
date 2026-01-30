@@ -1,0 +1,683 @@
+{
+  "timestamp": "20260130_003104",
+  "test": "Q51_LOOP_TOPOLOGY",
+  "theory": {
+    "berry_phase_requires": "complex wavefunctions",
+    "winding_number_applies_to": "real or complex",
+    "coordinate_dependence_test": "physical invariants are basis-independent"
+  },
+  "semantic_loops": {
+    "gender_royal": {
+      "words": [
+        "king",
+        "queen",
+        "woman",
+        "man",
+        "king"
+      ],
+      "description": "king -> queen -> woman -> man -> king (gender loop)",
+      "expected": "closed semantic loop"
+    },
+    "temperature": {
+      "words": [
+        "hot",
+        "warm",
+        "cool",
+        "cold",
+        "hot"
+      ],
+      "description": "hot -> warm -> cool -> cold -> hot (temperature loop)",
+      "expected": "closed temperature cycle"
+    },
+    "comparative": {
+      "words": [
+        "good",
+        "better",
+        "best",
+        "excellent",
+        "good"
+      ],
+      "description": "good -> better -> best -> excellent -> good (comparative loop)",
+      "expected": "closed quality gradient"
+    },
+    "size": {
+      "words": [
+        "big",
+        "large",
+        "small",
+        "tiny",
+        "big"
+      ],
+      "description": "big -> large -> small -> tiny -> big (size loop)",
+      "expected": "closed size cycle"
+    },
+    "emotion": {
+      "words": [
+        "happy",
+        "joyful",
+        "sad",
+        "melancholy",
+        "happy"
+      ],
+      "description": "happy -> joyful -> sad -> melancholy -> happy (emotion loop)",
+      "expected": "closed emotion cycle"
+    },
+    "spatial": {
+      "words": [
+        "north",
+        "east",
+        "south",
+        "west",
+        "north"
+      ],
+      "description": "north -> east -> south -> west -> north (spatial loop)",
+      "expected": "closed directional loop"
+    },
+    "temporal": {
+      "words": [
+        "morning",
+        "afternoon",
+        "evening",
+        "night",
+        "morning"
+      ],
+      "description": "morning -> afternoon -> evening -> night -> morning (temporal loop)",
+      "expected": "closed time cycle"
+    },
+    "lifecycle": {
+      "words": [
+        "birth",
+        "growth",
+        "maturity",
+        "death",
+        "birth"
+      ],
+      "description": "birth -> growth -> maturity -> death -> birth (lifecycle loop)",
+      "expected": "closed life cycle"
+    },
+    "logical": {
+      "words": [
+        "premise",
+        "inference",
+        "conclusion",
+        "verification",
+        "premise"
+      ],
+      "description": "premise -> inference -> conclusion -> verification -> premise (logical loop)",
+      "expected": "closed reasoning cycle"
+    },
+    "causal": {
+      "words": [
+        "cause",
+        "effect",
+        "consequence",
+        "outcome",
+        "cause"
+      ],
+      "description": "cause -> effect -> consequence -> outcome -> cause (causal loop)",
+      "expected": "closed causality loop"
+    }
+  },
+  "model_results": {
+    "all-MiniLM-L6-v2": {
+      "model": "all-MiniLM-L6-v2",
+      "dimension": 384,
+      "n_words": 40,
+      "loops": {
+        "gender_royal": {
+          "words": [
+            "king",
+            "queen",
+            "woman",
+            "man",
+            "king"
+          ],
+          "indices": [
+            22,
+            6,
+            20,
+            13,
+            22
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.9400068068985856,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566355,
+            "solid_angle_cv": 2.4356145472990595e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.96,
+            "solid_angle_variance": 5.127595883936577e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "temperature": {
+          "words": [
+            "hot",
+            "warm",
+            "cool",
+            "cold",
+            "hot"
+          ],
+          "indices": [
+            16,
+            37,
+            34,
+            15,
+            16
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.3212963906514963,
+          "winding_number_2d": 7.067899292141149e-17,
+          "coordinate_dependence": {
+            "winding_cv": 2.0000000000000004,
+            "solid_angle_cv": 2.709733933145901e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 7.992832064615897e-34,
+            "solid_angle_variance": 1.2818989709841442e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "comparative": {
+          "words": [
+            "good",
+            "better",
+            "best",
+            "excellent",
+            "good"
+          ],
+          "indices": [
+            19,
+            31,
+            33,
+            24,
+            19
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.754875961234399,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 0.0,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 0.0,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "size": {
+          "words": [
+            "big",
+            "large",
+            "small",
+            "tiny",
+            "big"
+          ],
+          "indices": [
+            18,
+            29,
+            38,
+            23,
+            18
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 3.488540196250563,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333337,
+            "solid_angle_cv": 2.545988786256556e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.6400000000000002,
+            "solid_angle_variance": 7.888609052210118e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "emotion": {
+          "words": [
+            "happy",
+            "joyful",
+            "sad",
+            "melancholy",
+            "happy"
+          ],
+          "indices": [
+            5,
+            25,
+            30,
+            9,
+            5
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.181747773471816,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 0.0,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 0.0,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "spatial": {
+          "words": [
+            "north",
+            "east",
+            "south",
+            "west",
+            "north"
+          ],
+          "indices": [
+            35,
+            1,
+            39,
+            26,
+            35
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.4231207377837798,
+          "winding_number_2d": -7.067899292141149e-17,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566356,
+            "solid_angle_cv": 2.515852365567072e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 4.795699238769537e-33,
+            "solid_angle_variance": 1.2818989709841442e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "temporal": {
+          "words": [
+            "morning",
+            "afternoon",
+            "evening",
+            "night",
+            "morning"
+          ],
+          "indices": [
+            7,
+            8,
+            28,
+            4,
+            7
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 3.0415745895352373,
+          "winding_number_2d": -1.0000000000000002,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333335,
+            "solid_angle_cv": 5.223682053894068e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.6400000000000001,
+            "solid_angle_variance": 2.524354896707238e-30,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "lifecycle": {
+          "words": [
+            "birth",
+            "growth",
+            "maturity",
+            "death",
+            "birth"
+          ],
+          "indices": [
+            21,
+            0,
+            27,
+            3,
+            21
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.1895476181601694,
+          "winding_number_2d": 1.0,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333335,
+            "solid_angle_cv": 7.256393274545622e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.6400000000000001,
+            "solid_angle_variance": 2.524354896707238e-30,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "logical": {
+          "words": [
+            "premise",
+            "inference",
+            "conclusion",
+            "verification",
+            "premise"
+          ],
+          "indices": [
+            12,
+            36,
+            17,
+            14,
+            12
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.9667101768982214,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333337,
+            "solid_angle_cv": 4.4305762952671223e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.6400000000000002,
+            "solid_angle_variance": 7.592786212752239e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "causal": {
+          "words": [
+            "cause",
+            "effect",
+            "consequence",
+            "outcome",
+            "cause"
+          ],
+          "indices": [
+            11,
+            10,
+            32,
+            2,
+            11
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.3025660710059856,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 4.879194240312912e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 1.262177448353619e-30,
+            "berry_phase_variance": 0.0
+          }
+        }
+      }
+    },
+    "bert-base-uncased": {
+      "model": "bert-base-uncased",
+      "dimension": 768,
+      "n_words": 40,
+      "loops": {
+        "gender_royal": {
+          "words": [
+            "king",
+            "queen",
+            "woman",
+            "man",
+            "king"
+          ],
+          "indices": [
+            22,
+            6,
+            20,
+            13,
+            22
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.579360362441646,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333337,
+            "solid_angle_cv": 0.0,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.6400000000000002,
+            "solid_angle_variance": 0.0,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "temperature": {
+          "words": [
+            "hot",
+            "warm",
+            "cool",
+            "cold",
+            "hot"
+          ],
+          "indices": [
+            16,
+            37,
+            34,
+            15,
+            16
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.7126961323146865,
+          "winding_number_2d": -7.067899292141149e-17,
+          "coordinate_dependence": {
+            "winding_cv": 1.699673171197595,
+            "solid_angle_cv": 5.313914337679503e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 5.195340842000332e-33,
+            "solid_angle_variance": 8.283039504820624e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "comparative": {
+          "words": [
+            "good",
+            "better",
+            "best",
+            "excellent",
+            "good"
+          ],
+          "indices": [
+            19,
+            31,
+            33,
+            24,
+            19
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.741702129342066,
+          "winding_number_2d": 1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 3.2395146466901393e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 7.888609052210118e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "size": {
+          "words": [
+            "big",
+            "large",
+            "small",
+            "tiny",
+            "big"
+          ],
+          "indices": [
+            18,
+            29,
+            38,
+            23,
+            18
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.4409930279708014,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566356,
+            "solid_angle_cv": 0.0,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9599999999999997,
+            "solid_angle_variance": 0.0,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "emotion": {
+          "words": [
+            "happy",
+            "joyful",
+            "sad",
+            "melancholy",
+            "happy"
+          ],
+          "indices": [
+            5,
+            25,
+            30,
+            9,
+            5
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.169504890989783,
+          "winding_number_2d": 1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 4.0939221636007694e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 7.888609052210118e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "spatial": {
+          "words": [
+            "north",
+            "east",
+            "south",
+            "west",
+            "north"
+          ],
+          "indices": [
+            35,
+            1,
+            39,
+            26,
+            35
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.6504329893139857,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 2.690743644806357e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 1.9721522630525295e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "temporal": {
+          "words": [
+            "morning",
+            "afternoon",
+            "evening",
+            "night",
+            "morning"
+          ],
+          "indices": [
+            7,
+            8,
+            28,
+            4,
+            7
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.7521745507930504,
+          "winding_number_2d": 1.0,
+          "coordinate_dependence": {
+            "winding_cv": 4.898979485566357,
+            "solid_angle_cv": 2.6018420077932807e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.9600000000000002,
+            "solid_angle_variance": 5.127595883936577e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "lifecycle": {
+          "words": [
+            "birth",
+            "growth",
+            "maturity",
+            "death",
+            "birth"
+          ],
+          "indices": [
+            21,
+            0,
+            27,
+            3,
+            21
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.465116156647831,
+          "winding_number_2d": -1.0,
+          "coordinate_dependence": {
+            "winding_cv": 1.3333333333333335,
+            "solid_angle_cv": 3.6029881035909045e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.64,
+            "solid_angle_variance": 7.888609052210118e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "logical": {
+          "words": [
+            "premise",
+            "inference",
+            "conclusion",
+            "verification",
+            "premise"
+          ],
+          "indices": [
+            12,
+            36,
+            17,
+            14,
+            12
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 1.5485538848617821,
+          "winding_number_2d": 0.0,
+          "coordinate_dependence": {
+            "winding_cv": 0.6236095644623236,
+            "solid_angle_cv": 4.62413571704355e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 2.797491222615564e-33,
+            "solid_angle_variance": 5.127595883936577e-31,
+            "berry_phase_variance": 0.0
+          }
+        },
+        "causal": {
+          "words": [
+            "cause",
+            "effect",
+            "consequence",
+            "outcome",
+            "cause"
+          ],
+          "indices": [
+            11,
+            10,
+            32,
+            2,
+            11
+          ],
+          "berry_phase_fullD": -0.0,
+          "solid_angle_3d": 2.2241270007305314,
+          "winding_number_2d": 1.0,
+          "coordinate_dependence": {
+            "winding_cv": 0.0,
+            "solid_angle_cv": 3.99337996438038e-16,
+            "berry_phase_cv": Infinity,
+            "winding_variance": 0.0,
+            "solid_angle_variance": 7.888609052210118e-31,
+            "berry_phase_variance": 0.0
+          }
+        }
+      }
+    }
+  },
+  "verdict": {
+    "what_formula_measured": "winding_number",
+    "not_measured": "berry_phase",
+    "evidence": "coordinate_dependence_of_winding",
+    "conclusion": "geometric_not_quantum_topological"
+  }
+}

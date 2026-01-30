@@ -1,0 +1,62 @@
+{
+  "minilm": {
+    "model_name": "MiniLM-L6-v2",
+    "n_samples": 66,
+    "embedding_dim": 384,
+    "geometric_rotation_invariance": -0.5209285721764517,
+    "geometric_phase_shift_mean": -0.26284678253676097,
+    "geometric_phase_shift_std": 1.5763381018487208,
+    "is_geometric_phase": false,
+    "max_imag_eigenvalue": 0.003942255862057209,
+    "eigenvalue_spectrum_real": [
+      -1.7429598378104597e-17,
+      -1.0432360214163423e-17,
+      -8.863910506887705e-18,
+      -8.039354805826108e-18,
+      -7.645274476462159e-18,
+      -7.449008290814727e-18,
+      -6.640587212020067e-18,
+      -6.3897648090835536e-18,
+      -6.193820467382103e-18,
+      -6.004977657539419e-18
+    ],
+    "has_complex_pairs": true,
+    "is_complex_structure": true,
+    "basis_correlation_mean": 0.12419951368331002,
+    "basis_correlation_std": 0.12471109456407425,
+    "is_coordinate_invariant": false,
+    "structure_type": "mixed",
+    "confidence": 0.5,
+    "model_loaded": true
+  },
+  "bert": {
+    "model_name": "BERT-base-uncased",
+    "n_samples": 66,
+    "embedding_dim": 768,
+    "geometric_rotation_invariance": -0.7180204886510949,
+    "geometric_phase_shift_mean": 0.2042459812451149,
+    "geometric_phase_shift_std": 1.841462460350656,
+    "is_geometric_phase": false,
+    "max_imag_eigenvalue": 0.04960876703262329,
+    "eigenvalue_spectrum_real": [
+      -4.492111257310868e-16,
+      -2.484978464269037e-16,
+      -2.1025617652714105e-16,
+      -2.003207134384425e-16,
+      -1.787173857480468e-16,
+      -1.5426523234523733e-16,
+      -1.47635332946573e-16,
+      -1.3801957362166328e-16,
+      -1.256122939689272e-16,
+      -1.2451381644165255e-16
+    ],
+    "has_complex_pairs": true,
+    "is_complex_structure": true,
+    "basis_correlation_mean": 0.09469810225084498,
+    "basis_correlation_std": 0.057577133347702994,
+    "is_coordinate_invariant": false,
+    "structure_type": "mixed",
+    "confidence": 0.5,
+    "model_loaded": true
+  }
+}

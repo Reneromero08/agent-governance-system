@@ -1,0 +1,109 @@
+{
+  "timestamp": "20260130_003008",
+  "test_name": "q51_8e_vocabulary_robust_quick",
+  "note": "Quick validation with reduced samples. Full test in test_q51_8e_vocabulary_robust.py",
+  "test_configuration": {
+    "vocabulary_source": "WordSim-353",
+    "vocabulary_size": 131,
+    "vocab_sizes_tested": [
+      50,
+      100
+    ],
+    "samples_per_size": 3,
+    "target_8e": 21.74625462767236,
+    "models_tested": [
+      "all-MiniLM-L6-v2"
+    ]
+  },
+  "model_results": [
+    {
+      "model": "all-MiniLM-L6-v2",
+      "vocab_sizes": {
+        "50": {
+          "samples": [
+            {
+              "sample_idx": 0,
+              "n_loaded": 50,
+              "Df": 34.169980201403604,
+              "alpha": 0.7032721991470959,
+              "product": 24.03079712105384,
+              "error_pct_vs_8e": 10.505452697469904,
+              "r_squared": 0.8328940508634395,
+              "seed": 50
+            },
+            {
+              "sample_idx": 1,
+              "n_loaded": 50,
+              "Df": 34.00464817323307,
+              "alpha": 0.7399943419729298,
+              "product": 25.163247248972596,
+              "error_pct_vs_8e": 15.713016700135904,
+              "r_squared": 0.7619293507124367,
+              "seed": 1050
+            },
+            {
+              "sample_idx": 2,
+              "n_loaded": 50,
+              "Df": 34.94494587541066,
+              "alpha": 0.6958478594338336,
+              "product": 24.316365785435682,
+              "error_pct_vs_8e": 11.818638205830743,
+              "r_squared": 0.7976649130329694,
+              "seed": 2050
+            }
+          ],
+          "statistics": {
+            "n_samples": 3,
+            "mean_Df_alpha": 24.503470051820702,
+            "std_Df_alpha": 0.48087893689951366,
+            "cv_percent": 1.962493213747016,
+            "mean_error_vs_8e": 12.679035867812184,
+            "converged": true
+          }
+        },
+        "100": {
+          "samples": [
+            {
+              "sample_idx": 0,
+              "n_loaded": 100,
+              "Df": 54.127249666724765,
+              "alpha": 0.9246689228352786,
+              "product": 50.049785645366576,
+              "error_pct_vs_8e": 130.15358967459915,
+              "r_squared": 0.8094291920252061,
+              "seed": 100
+            },
+            {
+              "sample_idx": 1,
+              "n_loaded": 100,
+              "Df": 53.90067383340211,
+              "alpha": 0.9389369884738406,
+              "product": 50.609336365845316,
+              "error_pct_vs_8e": 132.72667975405912,
+              "r_squared": 0.8007603838850309,
+              "seed": 1100
+            },
+            {
+              "sample_idx": 2,
+              "n_loaded": 100,
+              "Df": 54.011577094332615,
+              "alpha": 0.9374615528564468,
+              "product": 50.63377693507875,
+              "error_pct_vs_8e": 132.83906954095298,
+              "r_squared": 0.7973654444206829,
+              "seed": 2100
+            }
+          ],
+          "statistics": {
+            "n_samples": 3,
+            "mean_Df_alpha": 50.43096631543022,
+            "std_Df_alpha": 0.26972005583411407,
+            "cv_percent": 0.5348302353500385,
+            "mean_error_vs_8e": 131.90644632320377,
+            "converged": true
+          }
+        }
+      }
+    }
+  ]
+}
