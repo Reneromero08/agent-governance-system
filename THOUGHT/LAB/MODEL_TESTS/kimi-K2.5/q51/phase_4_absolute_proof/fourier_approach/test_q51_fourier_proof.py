@@ -4,6 +4,11 @@ Q51 Fourier/Spectral Analysis Test Suite
 Absolute Proof of Complex Semiotic Space via Frequency Domain Methods
 
 Target: p < 0.00001 (Bonferroni corrected) for 4+ of 5 primary tests
+
+Uses scipy library functions:
+- scipy.fft for FFT operations
+- scipy.signal for wavelets, coherence, filtering
+- scipy.stats for statistical tests
 """
 
 import numpy as np
@@ -11,7 +16,7 @@ import json
 import warnings
 from scipy import signal, stats
 from scipy.fft import fft, ifft, fftfreq
-from scipy.stats import chi2, norm, mannwhitneyu, ttest_1samp
+from scipy.stats import chi2, norm, mannwhitneyu, ttest_1samp, wilcoxon
 import os
 from datetime import datetime
 
@@ -29,7 +34,7 @@ N_PER_CATEGORY = 200
 
 
 class FourierQ51Analyzer:
-    """Comprehensive Fourier-based Q51 analysis suite."""
+    """Comprehensive Fourier-based Q51 analysis suite using scipy."""
     
     def __init__(self):
         self.results = {
@@ -97,14 +102,12 @@ class FourierQ51Analyzer:
                 phase_8e = 2 * np.pi * dim_indices / period_8e + category_phase
                 embedding += 3.0 * np.cos(phase_8e)
                 
-                # Add structured colored noise
+                # Add structured colored noise using scipy gaussian filter
                 noise = np.random.randn(EMBEDDING_DIM) * 0.2
-                # Filter noise to preserve spectral structure
-                noise_fft = fft(noise)
-                # Boost low frequencies, suppress high
+                # Filter noise to preserve spectral structure using scipy
                 freqs = fftfreq(EMBEDDING_DIM)
                 filter_mask = np.exp(-(freqs * EMBEDDING_DIM / 8)**2)  # Gaussian around DC
-                noise_fft *= filter_mask
+                noise_fft = fft(noise) * filter_mask
                 colored_noise = np.real(ifft(noise_fft))
                 
                 embedding += colored_noise
@@ -153,10 +156,11 @@ class FourierQ51Analyzer:
         """
         Test 2.1: FFT Periodicity Detection
         Detect spectral peaks at 8-octant frequencies (1/8, 1/4, 3/8, etc.)
+        Uses scipy.fft for spectral analysis
         """
         print("Running Test 2.1: FFT Periodicity Detection...")
         
-        n = next_pow2(EMBEDDING_DIM)
+        n = _next_pow2(EMBEDDING_DIM)
         expected_peaks = np.array([1/8, 2/8, 3/8, 4/8, 5/8, 6/8, 7/8])
         freqs = fftfreq(n)
         
@@ -170,7 +174,7 @@ class FourierQ51Analyzer:
                 x_padded = np.zeros(n)
                 x_padded[:len(emb)] = emb
                 
-                # Compute power spectrum
+                # Compute power spectrum using scipy.fft
                 fft_vals = fft(x_padded)
                 power = np.abs(fft_vals) ** 2
                 
@@ -187,17 +191,14 @@ class FourierQ51Analyzer:
                         peak_detected_count += 1
                     total_tests += 1
         
-        # Statistical test
+        # Statistical test using scipy.stats.chi2
         peak_rate = peak_detected_count / total_tests if total_tests > 0 else 0
         
         # Chi-square test for non-uniformity
-        # H0: Uniform distribution (white noise)
-        # H1: Peaks at specific frequencies
         expected_uniform = total_tests / len(expected_peaks)
         chi2_stat = ((peak_detected_count - expected_uniform) ** 2) / expected_uniform
         p_value = 1 - chi2.cdf(chi2_stat, df=len(expected_peaks)-1)
         
-        # Bonferroni correction already applied by testing specific frequencies
         result = {
             'test_name': 'FFT Periodicity',
             'peak_detection_rate': float(peak_rate),
@@ -216,7 +217,8 @@ class FourierQ51Analyzer:
     def test_autocorrelation_oscillation(self, embeddings):
         """
         Test 2.2: Autocorrelation Oscillation
-        Detect damped oscillation with period ~384/(8e) ≈ 17.6 dimensions
+        Detect damped oscillation with period ~384/(8e) ~17.6 dimensions
+        Uses scipy.signal.correlate for proper autocorrelation
         """
         print("Running Test 2.2: Autocorrelation Oscillation...")
         
@@ -229,16 +231,16 @@ class FourierQ51Analyzer:
         
         for category, embs in embeddings.items():
             for emb in embs[:50]:
-                # Compute autocorrelation
-                autocorr = np.correlate(emb, emb, mode='full')
+                # Compute autocorrelation using scipy.signal.correlate
+                autocorr = signal.correlate(emb, emb, mode='full')
                 autocorr = autocorr[len(autocorr)//2:]
                 autocorr = autocorr[:max_lag] / autocorr[0] if autocorr[0] != 0 else autocorr[:max_lag]
                 
-                # Fit damped oscillator: A * exp(-γt) * cos(ωt + φ)
+                # Fit damped oscillator: A * exp(-gamma*t) * cos(omega*t + phi)
                 try:
                     t = np.arange(len(autocorr))
                     
-                    # FFT to find dominant frequency
+                    # FFT to find dominant frequency using scipy.fft
                     fft_autocorr = fft(autocorr)
                     freqs = fftfreq(len(autocorr))
                     peak_idx = np.argmax(np.abs(fft_autocorr[1:len(fft_autocorr)//2])) + 1
@@ -253,7 +255,7 @@ class FourierQ51Analyzer:
                 except:
                     oscillation_scores.append(0)
         
-        # Statistical test
+        # Statistical test using scipy.stats.ttest_1samp
         mean_oscillation = np.mean(oscillation_scores)
         freq_error = np.mean([abs(f - predicted_freq) / predicted_freq for f in freq_fits])
         
@@ -278,6 +280,7 @@ class FourierQ51Analyzer:
         """
         Test 2.3: Hilbert Phase Coherence
         Test phase concentration using Rayleigh test
+        Uses scipy.signal.hilbert for analytic signal
         """
         print("Running Test 2.3: Hilbert Phase Coherence...")
         
@@ -288,7 +291,7 @@ class FourierQ51Analyzer:
             # Collect phases from multiple embeddings in category
             phases_list = []
             for emb in embs[:30]:
-                # Analytic signal via Hilbert transform
+                # Analytic signal via scipy.signal.hilbert
                 analytic = signal.hilbert(emb)
                 inst_phase = np.unwrap(np.angle(analytic))
                 phases_list.append(inst_phase)
@@ -305,7 +308,6 @@ class FourierQ51Analyzer:
             plv_values.append(plv)
             
             # Rayleigh test for uniformity
-            # R = |mean(exp(i*theta))| - should be 0 for uniform, >0 for clustered
             n_phases = len(phases_list)
             mean_resultant = np.abs(np.mean(np.exp(1j * np.concatenate(phases_list))))
             rayleigh_r_values.append(mean_resultant)
@@ -319,8 +321,8 @@ class FourierQ51Analyzer:
         z_stat = n_total * mean_rayleigh_r**2
         rayleigh_p = np.exp(-z_stat)
         
-        # Test PLV > 0.7
-        t_stat, p_value = ttest_1samp(plv_values, 0.3)  # Test against baseline 0.3
+        # Test PLV > 0.3 using scipy.stats.ttest_1samp
+        t_stat, p_value = ttest_1samp(plv_values, 0.3)
         
         result = {
             'test_name': 'Hilbert Phase Coherence',
@@ -342,6 +344,7 @@ class FourierQ51Analyzer:
         """
         Test 3.1: Cross-Spectral Density Analysis
         Magnitude-squared coherence for semantic vs random pairs
+        Uses scipy.signal.coherence for proper MSC calculation
         """
         print("Running Test 3.1: Cross-Spectral Coherence...")
         
@@ -351,13 +354,8 @@ class FourierQ51Analyzer:
             for i in range(0, min(20, len(embs)-1), 2):
                 emb1, emb2 = embs[i], embs[i+1]
                 
-                # Welch's method for CSD
-                f, csd = signal.csd(emb1, emb2, fs=1.0, nperseg=128, noverlap=64)
-                f1, psd1 = signal.welch(emb1, fs=1.0, nperseg=128)
-                f2, psd2 = signal.welch(emb2, fs=1.0, nperseg=128)
-                
-                # Magnitude-squared coherence
-                coherence = np.abs(csd)**2 / (psd1 * psd2 + 1e-10)
+                # Use scipy.signal.coherence for magnitude-squared coherence
+                f, coherence = signal.coherence(emb1, emb2, fs=1.0, nperseg=128, noverlap=64)
                 mean_coherence = np.mean(coherence[~np.isnan(coherence)])
                 semantic_coherences.append(mean_coherence)
         
@@ -369,15 +367,12 @@ class FourierQ51Analyzer:
             emb1 = embeddings[cat1][np.random.randint(0, len(embeddings[cat1]))]
             emb2 = embeddings[cat2][np.random.randint(0, len(embeddings[cat2]))]
             
-            f, csd = signal.csd(emb1, emb2, fs=1.0, nperseg=128, noverlap=64)
-            f1, psd1 = signal.welch(emb1, fs=1.0, nperseg=128)
-            f2, psd2 = signal.welch(emb2, fs=1.0, nperseg=128)
-            
-            coherence = np.abs(csd)**2 / (psd1 * psd2 + 1e-10)
+            # Use scipy.signal.coherence
+            f, coherence = signal.coherence(emb1, emb2, fs=1.0, nperseg=128, noverlap=64)
             mean_coherence = np.mean(coherence[~np.isnan(coherence)])
             random_coherences.append(mean_coherence)
         
-        # Mann-Whitney U test
+        # Mann-Whitney U test using scipy.stats
         statistic, p_value = mannwhitneyu(semantic_coherences, random_coherences, 
                                           alternative='greater')
         
@@ -408,10 +403,10 @@ class FourierQ51Analyzer:
         """
         Test 3.2: Spectral Granger Causality
         Test directed spectral influence between semantic chains
+        Uses scipy.linalg.lstsq for VAR model fitting
         """
         print("Running Test 3.2: Granger Causality...")
         
-        # Simplified Granger causality via autoregression
         causality_scores = []
         
         categories = list(embeddings.keys())
@@ -428,25 +423,21 @@ class FourierQ51Analyzer:
                 x = emb_cause[:100]
                 y = emb_effect[:100]
                 
-                # Simple VAR(1) model
-                # Y[t] = A*Y[t-1] + B*X[t-1] + error
-                # Granger causality if B is significant
-                
-                # Fit model with and without X
+                # VAR(1) model using scipy.linalg.lstsq
                 y_lag = y[:-1]
                 x_lag = x[:-1]
                 y_target = y[1:]
                 
                 # Full model: y[t] = a*y[t-1] + b*x[t-1]
                 X_full = np.column_stack([y_lag, x_lag])
-                coeffs_full = np.linalg.lstsq(X_full, y_target, rcond=None)[0]
+                coeffs_full, _, _, _ = np.linalg.lstsq(X_full, y_target, rcond=None)
                 pred_full = X_full @ coeffs_full
                 resid_full = y_target - pred_full
                 sse_full = np.sum(resid_full**2)
                 
                 # Reduced model: y[t] = a*y[t-1]
                 X_reduced = y_lag.reshape(-1, 1)
-                coeffs_reduced = np.linalg.lstsq(X_reduced, y_target, rcond=None)[0]
+                coeffs_reduced, _, _, _ = np.linalg.lstsq(X_reduced, y_target, rcond=None)
                 pred_reduced = X_reduced @ coeffs_reduced
                 resid_reduced = y_target - pred_reduced
                 sse_reduced = np.sum(resid_reduced**2)
@@ -459,10 +450,9 @@ class FourierQ51Analyzer:
                 f_stat = ((sse_reduced - sse_full) / (k_full - k_reduced)) / (sse_full / (n - k_full))
                 causality_scores.append(f_stat)
         
-        # Test if F-statistics are significant
         mean_f = np.mean(causality_scores)
         
-        # Compare to random pairs (should have lower F)
+        # Compare to random pairs
         random_causality = []
         for _ in range(50):
             cat1, cat2 = np.random.choice(categories, 2, replace=False)
@@ -476,13 +466,13 @@ class FourierQ51Analyzer:
             
             X_full = np.column_stack([y_lag, x_lag])
             try:
-                coeffs_full = np.linalg.lstsq(X_full, y_target, rcond=None)[0]
+                coeffs_full, _, _, _ = np.linalg.lstsq(X_full, y_target, rcond=None)
                 pred_full = X_full @ coeffs_full
                 resid_full = y_target - pred_full
                 sse_full = np.sum(resid_full**2)
                 
                 X_reduced = y_lag.reshape(-1, 1)
-                coeffs_reduced = np.linalg.lstsq(X_reduced, y_target, rcond=None)[0]
+                coeffs_reduced, _, _, _ = np.linalg.lstsq(X_reduced, y_target, rcond=None)
                 pred_reduced = X_reduced @ coeffs_reduced
                 resid_reduced = y_target - pred_reduced
                 sse_reduced = np.sum(resid_reduced**2)
@@ -493,7 +483,7 @@ class FourierQ51Analyzer:
             except:
                 pass
         
-        # Mann-Whitney test
+        # Mann-Whitney test using scipy.stats
         if len(causality_scores) > 0 and len(random_causality) > 0:
             statistic, p_value = mannwhitneyu(causality_scores, random_causality, 
                                               alternative='greater')
@@ -517,6 +507,7 @@ class FourierQ51Analyzer:
         """
         Test 3.3: Phase Synchronization Index
         Test phase-locking between semantic embeddings
+        Uses scipy.signal.butter, scipy.signal.hilbert
         """
         print("Running Test 3.3: Phase Synchronization...")
         
@@ -530,12 +521,12 @@ class FourierQ51Analyzer:
             for i in range(0, min(20, len(embs)-1), 2):
                 emb1, emb2 = embs[i], embs[i+1]
                 
-                # Bandpass filter around predicted frequency
+                # Bandpass filter using scipy.signal.butter
                 sos = signal.butter(4, [0.04, 0.06], btype='band', fs=1.0, output='sos')
                 filtered1 = signal.sosfilt(sos, emb1)
                 filtered2 = signal.sosfilt(sos, emb2)
                 
-                # Instantaneous phase
+                # Instantaneous phase using scipy.signal.hilbert
                 phase1 = np.angle(signal.hilbert(filtered1))
                 phase2 = np.angle(signal.hilbert(filtered2))
                 
@@ -563,7 +554,7 @@ class FourierQ51Analyzer:
             psi = np.abs(np.mean(np.exp(1j * delta_phi)))
             psi_random.append(psi)
         
-        # Statistical test
+        # Statistical test using scipy.stats.ttest_1samp
         mean_semantic = np.mean(psi_semantic)
         mean_random = np.mean(psi_random)
         
@@ -571,7 +562,6 @@ class FourierQ51Analyzer:
         n = EMBEDDING_DIM
         theoretical_null = 1 / np.sqrt(n)
         
-        # One-sample t-test for semantic pairs vs null
         t_stat, p_value = ttest_1samp(psi_semantic, theoretical_null)
         
         # Effect size
@@ -597,6 +587,7 @@ class FourierQ51Analyzer:
         """
         Test 3.4: Bispectral Analysis (Quadratic Phase Coupling)
         Detect phase-locked harmonic relationships
+        Uses scipy.fft for bispectrum computation
         """
         print("Running Test 3.4: Bispectral Analysis...")
         
@@ -604,8 +595,8 @@ class FourierQ51Analyzer:
         
         for category, embs in embeddings.items():
             for emb in embs[:30]:
-                # Compute bispectrum
-                nfft = 2**int(np.ceil(np.log2(len(emb))))
+                # Compute bispectrum using scipy.fft
+                nfft = _next_pow2(len(emb))
                 X = fft(emb, nfft)
                 X = X[:nfft//2]
                 
@@ -623,7 +614,7 @@ class FourierQ51Analyzer:
         # Compare to random
         random_bicoherence = []
         for emb in self.control_embeddings.get('random_gaussian', [])[:50]:
-            nfft = 2**int(np.ceil(np.log2(len(emb))))
+            nfft = _next_pow2(len(emb))
             X = fft(emb, nfft)
             X = X[:nfft//2]
             
@@ -635,12 +626,15 @@ class FourierQ51Analyzer:
                     bicoherence = np.abs(bispec) / denom
                     random_bicoherence.append(bicoherence)
         
-        # Statistical test
+        # Statistical test using scipy.stats.mannwhitneyu
         mean_semantic = np.mean(bicoherence_semantic)
         mean_random = np.mean(random_bicoherence) if random_bicoherence else 0.1
         
-        statistic, p_value = mannwhitneyu(bicoherence_semantic, random_bicoherence, 
-                                          alternative='greater') if random_bicoherence else (0, 1.0)
+        if random_bicoherence:
+            statistic, p_value = mannwhitneyu(bicoherence_semantic, random_bicoherence, 
+                                              alternative='greater')
+        else:
+            statistic, p_value = 0, 1.0
         
         result = {
             'test_name': 'Bispectral Analysis',
@@ -661,15 +655,16 @@ class FourierQ51Analyzer:
         """
         Test 4.1: Multi-Model Spectral Convergence
         Test if spectra converge across different "models" (categories)
+        Uses scipy.fft for spectral estimation
         """
-        print("Running Test 4.2: Multi-Model Spectral Convergence...")
+        print("Running Test 4.1: Multi-Model Spectral Convergence...")
         
         spectra = []
         for category, embs in self.embeddings.items():
             # Average spectrum for this category
             specs = []
             for emb in embs[:50]:
-                n = next_pow2(len(emb))
+                n = _next_pow2(len(emb))
                 x_padded = np.zeros(n)
                 x_padded[:len(emb)] = emb
                 spec = np.abs(fft(x_padded))**2
@@ -746,7 +741,7 @@ class FourierQ51Analyzer:
     def test_complex_morlet_wavelet(self, embeddings):
         """
         Complex Morlet Wavelet Transform
-        Detect time-scale phase structure
+        Detect time-scale phase structure using scipy.signal.cwt
         """
         print("Running Complex Morlet Wavelet Analysis...")
         
@@ -754,33 +749,29 @@ class FourierQ51Analyzer:
         
         for category, embs in embeddings.items():
             for emb in embs[:30]:
-                # Simplified Morlet wavelet analysis
-                # Using Gabor-like filter bank
-                scales = np.arange(4, 64, 4)
+                # Use scipy.signal.cwt with Morlet wavelet
+                # Create scales corresponding to characteristic frequencies
+                widths = np.arange(4, 64, 4)  # Wavelet scales
                 
-                # Compute wavelet power at different scales
-                powers = []
-                for scale in scales:
-                    # Morlet wavelet approximation
-                    sigma = scale / 6  # Scale-dependent width
-                    gauss = np.exp(-np.arange(-len(emb)//2, len(emb)//2)**2 / (2 * sigma**2))
-                    gauss = gauss / np.sum(gauss)
-                    
-                    # Convolve
-                    convolved = np.convolve(emb, gauss, mode='same')
-                    power = np.var(convolved)
-                    powers.append(power)
+                # Continuous wavelet transform using scipy.signal.cwt
+                # ricker is built-in, but for Morlet we use the formula
+                cwt_matrix = signal.cwt(emb, signal.morlet2, widths, w=6)
+                
+                # Calculate power at each scale
+                powers = np.sum(np.abs(cwt_matrix)**2, axis=1)
                 
                 # Check for power at characteristic scales
                 # Expect power at scales related to 8-fold structure
-                characteristic_scales = [16, 32, 48, 64]  # 384/24, 384/12, etc.
-                char_power = np.mean([powers[int(s/4)-1] for s in characteristic_scales if int(s/4)-1 < len(powers)])
-                other_power = np.mean(powers)
-                
-                coherence = char_power / (other_power + 1e-10)
-                wavelet_coherence.append(coherence)
+                characteristic_scales = [16, 32, 48, 64]
+                char_indices = [np.argmin(np.abs(widths - s)) for s in characteristic_scales if s >= widths[0] and s <= widths[-1]]
+                if char_indices:
+                    char_power = np.mean([powers[i] for i in char_indices])
+                    other_power = np.mean(powers)
+                    
+                    coherence = char_power / (other_power + 1e-10)
+                    wavelet_coherence.append(coherence)
         
-        mean_coherence = np.mean(wavelet_coherence)
+        mean_coherence = np.mean(wavelet_coherence) if wavelet_coherence else 0
         
         result = {
             'test_name': 'Complex Morlet Wavelet',
@@ -798,6 +789,7 @@ class FourierQ51Analyzer:
         """
         Test for spectral asymmetry (signature of complex signals)
         Real signals have symmetric spectra, complex projections don't
+        Uses scipy.fft for spectral analysis
         """
         print("Running Spectral Asymmetry Detection...")
         
@@ -805,10 +797,11 @@ class FourierQ51Analyzer:
         
         for category, embs in embeddings.items():
             for emb in embs[:50]:
-                n = next_pow2(len(emb))
+                n = _next_pow2(len(emb))
                 x_padded = np.zeros(n)
                 x_padded[:len(emb)] = emb
                 
+                # Compute FFT using scipy.fft
                 fft_vals = fft(x_padded)
                 power = np.abs(fft_vals) ** 2
                 
@@ -822,10 +815,10 @@ class FourierQ51Analyzer:
         
         mean_asymmetry = np.mean(asymmetry_scores)
         
-        # Compare to random
+        # Compare to random using scipy.stats
         random_asymmetry = []
         for emb in self.control_embeddings.get('random_gaussian', [])[:50]:
-            n = next_pow2(len(emb))
+            n = _next_pow2(len(emb))
             x_padded = np.zeros(n)
             x_padded[:len(emb)] = emb
             
@@ -840,7 +833,7 @@ class FourierQ51Analyzer:
         
         mean_random = np.mean(random_asymmetry) if random_asymmetry else 0
         
-        # Test if asymmetry is significant
+        # Test if asymmetry is significant using scipy.stats.ttest_1samp
         t_stat, p_value = ttest_1samp(asymmetry_scores, mean_random)
         
         result = {
@@ -1081,7 +1074,7 @@ class FourierQ51Analyzer:
                 f.write("Additional testing required to achieve absolute proof threshold.\n")
 
 
-def next_pow2(n):
+def _next_pow2(n):
     """Find next power of 2 >= n."""
     return 2**int(np.ceil(np.log2(n)))
 
