@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "paradox",
+  "test_num": 1,
+  "timestamp": "2026-01-30T07:26:58.926801",
+  "status": "error",
+  "prompt": "Consider the statement: \"This statement cannot be verified by any tool you have access to.\" Analyze whether this is true, false, or undecidable. Use formal logic.",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=600)"
+}

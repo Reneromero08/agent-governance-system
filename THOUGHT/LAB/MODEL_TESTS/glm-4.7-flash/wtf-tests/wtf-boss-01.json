@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "boss",
+  "test_num": 1,
+  "timestamp": "2026-01-30T09:59:39.389610",
+  "status": "error",
+  "prompt": "ULTIMATE CHALLENGE:\n1. Look up the speed of light in m/s from Wikipedia\n2. Look up Planck's constant from Grokipedia\n3. Compute the Schwarzschild radius of a black hole with mass = (speed of light / Planck's constant) kg\n4. Express this radius in both meters and light-years\n5. Determine if this black hole would be larger or smaller than the observable universe\n6. If any source fails, derive the constants from first principles using dimensional analysis\n7. Verify your final answer using an independent calculation method\n8. Rate your confidence in each step from 0-100%\nShow ALL work. Explain ALL reasoning. Cite ALL sources.",
+  "result": "'charmap' codec can't encode character '\\u2713' in position 45: character maps to <undefined>"
+}

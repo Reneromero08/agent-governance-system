@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "edge",
+  "test_num": 4,
+  "timestamp": "2026-01-30T08:58:49.959288",
+  "status": "completed",
+  "prompt": "Find the smallest prime gap greater than 100. That is, find consecutive primes p and q where q - p > 100. Verify both p and q are prime.",
+  "result": "Great! The Python tool finally worked and found the answer. The smallest prime gap greater than 100 is 112, with primes 370261 and 370373.\n\nLet me verify this:\n- 370261 is prime: True\n- 370373 is prime: True\n- Gap: 370373 - 370261 = 112 > 100\n\nThis is the answer I need to provide.</think># Finding the Smallest Prime Gap Greater Than 100\n\n## Answer:\nThe smallest prime gap greater than 100 is **112**.\n\n## The Primes:\n- **p = 370261**\n- **q = 370373**\n\n## Verification:\n- **370261 is prime:** ✓ True\n- **370373 is prime:** ✓ True\n- **Gap:** 370373 - 370261 = **112** ✓ (> 100)\n\n## Summary:\nThe consecutive primes **370261** and **370373** have a difference of **112**, which is the smallest prime gap where the difference exceeds 100."
+}

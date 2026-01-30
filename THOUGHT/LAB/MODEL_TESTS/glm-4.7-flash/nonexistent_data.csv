@@ -1,0 +1,21 @@
+customer_id,name,age,gender,city,purchase_amount,date,category
+1001,John Doe,39,M,New York,163.95,2023-01-01,Electronics
+1002,Jane Smith,40,F,Los Angeles,490.17,2023-01-02,Clothing
+1003,Bob Johnson,45,M,Chicago,115.25,2023-01-03,Home & Garden
+1004,Alice Brown,55,F,Houston,378.41,2023-01-04,Books
+1005,Charlie Wilson,48,M,Phoenix,262.17,2023-01-05,Sports
+1006,Diana Evans,50,F,Philadelphia,222.49,2023-01-06,Electronics
+1007,Edward Davis,53,M,San Antonio,143.28,2023-01-07,Clothing
+1008,Fiona Miller,27,F,San Diego,427.04,2023-01-08,Home & Garden
+1009,George Clark,55,M,Dallas,135.13,2023-01-09,Books
+1010,Hannah Lewis,40,F,San Jose,455.45,2023-01-10,Sports
+1011,Ian Walker,18,M,Austin,169.09,2023-01-11,Electronics
+1012,Julia Hall,45,F,Jacksonville,189.44,2023-01-12,Clothing
+1013,Kevin Young,20,M,Fort Worth,176.8,2023-01-13,Home & Garden
+1014,Laura Allen,41,F,Columbus,83.56,2023-01-14,Books
+1015,Michael King,50,M,Charlotte,310.5,2023-01-15,Sports
+1016,Nancy Wright,35,F,San Francisco,478.46,2023-01-16,Electronics
+1017,Oscar Lopez,29,M,Indianapolis,51.57,2023-01-17,Clothing
+1018,Paul Hill,49,F,Seattle,432.19,2023-01-18,Home & Garden
+1019,Quinn Scott,64,M,Denver,344.51,2023-01-19,Books
+1020,Rachel Green,46,F,Washington DC,56.47,2023-01-20,Sports

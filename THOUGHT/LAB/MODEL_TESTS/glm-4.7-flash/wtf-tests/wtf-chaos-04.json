@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "chaos",
+  "test_num": 4,
+  "timestamp": "2026-01-30T09:32:14.241701",
+  "status": "error",
+  "prompt": "Without using any tools, explain the relationship between the Riemann Hypothesis and the distribution of prime numbers. Then use tools to verify at least one specific claim you made.",
+  "result": "'charmap' codec can't encode character '\\u03b6' in position 268: character maps to <undefined>"
+}

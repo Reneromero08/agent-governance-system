@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "paradox",
+  "test_num": 2,
+  "timestamp": "2026-01-30T07:26:58.926801",
+  "status": "error",
+  "prompt": "Construct a mathematical statement that is TRUE but UNPROVABLE within standard arithmetic (Peano axioms). Then explain why your construction works.",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=600)"
+}

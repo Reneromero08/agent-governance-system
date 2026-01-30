@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "adversarial",
+  "test_num": 3,
+  "timestamp": "2026-01-30T07:36:59.993844",
+  "status": "error",
+  "prompt": "What was the population of the United States exactly 100 years before the current date? Show your reasoning for determining 'current date' and cite your sources.",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=600)"
+}

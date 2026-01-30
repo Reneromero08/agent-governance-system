@@ -1,0 +1,11 @@
+{
+  "test_suite": "wtf_tests",
+  "model": "zai-org/glm-4.7-flash",
+  "endpoint": "http://10.5.0.2:1234/v1/chat/completions",
+  "category": "adversarial",
+  "test_num": 1,
+  "timestamp": "2026-01-30T07:26:59.985014",
+  "status": "error",
+  "prompt": "Look up the population of Tokyo on Wikipedia. Now look up the population of Tokyo on Grokipedia. If they differ, determine which is correct and why. Then calculate how many years until Tokyo's population doubles at 0.5% annual growth.",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=600)"
+}
