@@ -1,0 +1,28 @@
+{
+  "timestamp": "20260129_231624",
+  "test": "Q51_RIGOROUS_FALSIFICATION",
+  "n_embeddings": 50,
+  "dimension": 384,
+  "test1_eigenvalue_reality": {
+    "max_imag": 0.0,
+    "result": "REAL"
+  },
+  "test2_covariance_symmetry": {
+    "is_symmetric": true,
+    "is_real": true,
+    "result": "REAL"
+  },
+  "test3_gram_reality": {
+    "is_symmetric": true,
+    "is_real": true,
+    "result": "REAL"
+  },
+  "test4_phase_structure": {
+    "strong_correlation_fraction": 0.5883240861618799,
+    "kurtosis": 0.7581117442913845,
+    "result": "STRUCTURED"
+  },
+  "verdict": "REAL",
+  "real_indicators": 3,
+  "complex_indicators": 0
+}
