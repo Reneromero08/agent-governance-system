@@ -1,0 +1,144 @@
+{
+  "metadata": {
+    "timestamp": "2026-01-30T05:44:18.233751",
+    "threshold_p": 1e-05,
+    "bonferroni_factor": 384,
+    "corrected_p": 2.604166666666667e-08,
+    "embedding_dim": 384,
+    "n_embeddings": 1000
+  },
+  "tier1_single_embedding": {
+    "fft_periodicity": {
+      "test_name": "FFT Periodicity",
+      "peak_detection_rate": 0.3171428571428571,
+      "mean_peak_ratio": 2.146817907860317,
+      "chi2_statistic": 74.42,
+      "p_value": 5.051514762044462e-14,
+      "corrected_p_value": 1.9397816686250735e-11,
+      "passed": true,
+      "n_tests": 350,
+      "n_detected": 111
+    },
+    "autocorrelation": {
+      "test_name": "Autocorrelation Oscillation",
+      "predicted_period": 17.658213176229232,
+      "mean_oscillation_score": 0.3531642635245847,
+      "mean_freq_error": 0.6468357364754153,
+      "t_statistic": 1.0039132599351022e+17,
+      "p_value": 0.0,
+      "passed": true,
+      "n_samples": 250
+    },
+    "hilbert_coherence": {
+      "test_name": "Hilbert Phase Coherence",
+      "mean_plv": 0.3375394656641595,
+      "mean_rayleigh_r": 0.004723716966262793,
+      "rayleigh_p_value": 0.7733283532456556,
+      "t_statistic": NaN,
+      "p_value": NaN,
+      "passed": false,
+      "n_categories": 1
+    },
+    "morlet_wavelet": {
+      "test_name": "Complex Morlet Wavelet",
+      "mean_scale_coherence": 0.973410654442519,
+      "passed": false,
+      "n_samples": 150
+    },
+    "spectral_asymmetry": {
+      "test_name": "Spectral Asymmetry",
+      "semantic_asymmetry_mean": 0.0,
+      "random_asymmetry_mean": 0.0,
+      "t_statistic": NaN,
+      "p_value": NaN,
+      "passed": false,
+      "n_samples": 250
+    }
+  },
+  "tier2_cross_embedding": {
+    "cross_spectral": {
+      "test_name": "Cross-Spectral Coherence",
+      "semantic_coherence_mean": 0.21012809305505978,
+      "semantic_coherence_std": 0.0020170684402088476,
+      "random_coherence_mean": 0.2171098480520633,
+      "random_coherence_std": 0.011642988782736464,
+      "mann_whitney_statistic": 835.0,
+      "p_value": 0.9979108820651671,
+      "cohens_d": -0.8355909507029154,
+      "passed": false,
+      "n_semantic": 50,
+      "n_random": 50
+    },
+    "granger_causality": {
+      "test_name": "Spectral Granger Causality",
+      "semantic_f_mean": 179.25836146469388,
+      "random_f_mean": 9.50549480898637,
+      "mann_whitney_p": 6.969397374707194e-16,
+      "passed": true,
+      "n_semantic": 40,
+      "n_random": 50
+    },
+    "phase_sync": {
+      "test_name": "Phase Synchronization",
+      "semantic_psi_mean": 0.29214177791876883,
+      "random_psi_mean": 0.4805603235482891,
+      "theoretical_null": 0.051031036307982884,
+      "t_statistic": 16.412272917348425,
+      "p_value": 1.5051963026467753e-21,
+      "cohens_d": 2.344610416764061,
+      "passed": false,
+      "n_semantic": 50,
+      "n_random": 50
+    },
+    "bispectral": {
+      "test_name": "Bispectral Analysis",
+      "semantic_bicoherence_mean": 0.9999967918853143,
+      "random_bicoherence_mean": 0.9999999999997847,
+      "mann_whitney_p": 1.0,
+      "passed": false,
+      "n_semantic": 450,
+      "n_random": 150
+    }
+  },
+  "tier3_population": {
+    "multimodel": {
+      "test_name": "Multi-Model Convergence",
+      "mean_correlation": 0.9999948945810448,
+      "min_correlation": 0.9999893762935275,
+      "std_correlation": 2.8991487489196954e-06,
+      "passed": true,
+      "n_comparisons": 10
+    }
+  },
+  "controls": {
+    "random_gaussian": {
+      "fft_periodicity": {
+        "passed": true,
+        "p_value": 5.051514762044462e-14,
+        "control_valid": false
+      },
+      "hilbert_coherence": {
+        "passed": false,
+        "p_value": NaN,
+        "control_valid": true
+      }
+    },
+    "phase_scrambled": {
+      "hilbert_coherence": {
+        "passed": false,
+        "p_value": NaN,
+        "control_valid": true
+      }
+    },
+    "all_controls_passed": false
+  },
+  "summary": {
+    "total_tests": 10,
+    "passed_tests": 4,
+    "failed_tests": 6,
+    "primary_tests_passed": 2,
+    "primary_tests_required": 4,
+    "overall_passed": false,
+    "controls_valid": false
+  }
+}

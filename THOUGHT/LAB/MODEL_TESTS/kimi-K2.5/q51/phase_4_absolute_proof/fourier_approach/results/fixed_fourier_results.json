@@ -1,0 +1,35 @@
+{
+  "fft_periodicity": {
+    "mean_peaks_real": 0.5094339622641509,
+    "mean_peaks_null": 0.28595,
+    "mann_whitney_statistic": 3205454.0,
+    "p_value": 0.00026711779606570547,
+    "cohen_d": 0.4139069930133366,
+    "n_real": 53,
+    "n_null": 100000,
+    "expected_ratios": [
+      0.125,
+      0.25,
+      0.375,
+      0.5,
+      0.625,
+      0.75,
+      0.875
+    ]
+  },
+  "hilbert_coherence": {
+    "mean_plv_real": 0.20995476841926575,
+    "mean_plv_null": 0.04515007510368697,
+    "mann_whitney_statistic": 99540266.0,
+    "p_value": 0.0,
+    "cohen_d": 2.260565534048458,
+    "n_pairs": 1000,
+    "n_null": 100000
+  },
+  "cross_spectral": {
+    "mean_semantic": 0.4219112694263458,
+    "mean_random": 0.21027657389640808,
+    "mann_whitney_statistic": 28275.0,
+    "p_value_two_sided": 1.083220908417804e-42,
+    "cohen_d": 1.8970950841903687,
+    "direction_correct": 

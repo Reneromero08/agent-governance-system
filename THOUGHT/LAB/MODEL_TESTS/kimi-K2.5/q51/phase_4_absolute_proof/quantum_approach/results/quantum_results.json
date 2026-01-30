@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "timestamp": "2026-01-30T02:17:16.703545",
+    "n_tests": 1000,
+    "p_threshold": 1e-05,
+    "dimension": 8,
+    "hilbert_dimension": 8,
+    "seed": 51
+  },
+  "experiments": [
+    {
+      "experiment": "contextual_advantage",
+      "n_tests": 1000,
+      "classical_mse": 0.0013916965957018995,
+      "quantum_mse": 2.272751752294433,
+      "advantage": -2.271360055698731,
+      "t_statistic": 105.95121560151779,
+      "p_value": 0.0,
+      "cohens_d": 3.3504716367782152,
+      "significant": 0.0,
+      "threshold_met": 0.0
+    },
+    {
+      "experiment": "phase_interference",
+      "n_tests": 2500,
+      "mean_visibility": 0.5280870450969601,
+      "max_visibility": 10.626578586867074,
+      "std_visibility": 0.8194186019829257,
+      "threshold": 0.7,
+      "t_statistic": 32.22327639357376,
+      "p_value": 8.332714326702577e-228,
+      "significant": true,
+      "threshold_met": 1.0
+    },
+    {
+      "experiment": "non_commutativity",
+      "n_tests": 1000,
+      "mean_distance": 1.0279517458418923,
+      "std_distance": 0.3295569905235972,
+      "t_statistic": 98.63753171341746,
+      "p_value": 0.0,
+      "threshold": 0.1,
+      "significant": true,
+      "threshold_met": 1.0
+    },
+    {
+      "experiment": "bell_inequality",
+      "n_trials": 25,
+      "mean_S": 1.2751308718632095,
+      "std_S": 0.05689207313225636,
+      "max_S": 1.305925599128378,
+      "ci_99_999_lower": 1.220576580057929,
+      "ci_99_999_upper": 1.3000117863661167,
+      "classical_bound": 2.0,
+      "quantum_bound": 2.8284271247461903,
+      "t_statistic": -63.7056343579827,
+      "p_value": 0.0,
+      "proportion_above_classical": 0.0,
+      "n_above_classical": 0,
+      "violation_detected": 0.0,
+      "significant_violation": 0.0,
+      "threshold_met": 0.0
+    }
+  ],
+  "summary": {
+    "total_experiments": 4,
+    "significant_results": 2,
+    "thresholds_met": 2,
+    "all_thresholds_met": false,
+    "chsh_mean": 1.2751308718632095,
+    "chsh_max": 1.305925599128378,
+    "interference_visibility": 10.626578586867074,
+    "contextual_advantage_p": 0.0,
+    "non_commutativity_detected": true,
+    "non_commutativity_distance": 1.0279517458418923
+  }
+}

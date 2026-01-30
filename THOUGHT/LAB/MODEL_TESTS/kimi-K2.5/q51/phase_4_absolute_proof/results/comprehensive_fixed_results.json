@@ -1,0 +1,60 @@
+{
+  "bell_inequality": {
+    "MiniLM-384D": {
+      "mean_S": 2.0,
+      "max_S": 2.0,
+      "violations": 0,
+      "n_tests": 40,
+      "p_value": 1.3946237931701733e-08,
+      "cohen_d": 1.2895749931677734,
+      "classical_bound": 2.0,
+      "quantum_bound": 2.828
+    },
+    "BERT-768D": {
+      "mean_S": 2.0,
+      "max_S": 2.0,
+      "violations": 0,
+      "n_tests": 40,
+      "p_value": 1.3946237931701733e-08,
+      "cohen_d": 1.2895749931677734,
+      "classical_bound": 2.0,
+      "quantum_bound": 2.828
+    },
+    "MPNet-768D": {
+      "mean_S": 2.0,
+      "max_S": 2.0,
+      "violations": 0,
+      "n_tests": 40,
+      "p_value": 1.3946237931701733e-08,
+      "cohen_d": 1.2895749931677734,
+      "classical_bound": 2.0,
+      "quantum_bound": 2.828
+    }
+  },
+  "contextual_advantage": {
+    "MiniLM-384D": {
+      "mean_classical_error": 0.8862268328666687,
+      "mean_quantum_error": 1.3896174053750818,
+      "advantage": -0.5033905725084131,
+      "p_value": 1.8189894035458565e-12,
+      "cohen_d": 2.7908513313523233,
+      "n_tests": 40
+    },
+    "BERT-768D": {
+      "mean_classical_error": 7.767612457275391,
+      "mean_quantum_error": 8.83544517302256,
+      "advantage": -1.0678327157471692,
+      "p_value": 1.8189894035458565e-12,
+      "cohen_d": 12.86558844141802,
+      "n_tests": 40
+    },
+    "MPNet-768D": {
+      "mean_classical_error": 0.8978355526924133,
+      "mean_quantum_error": 1.430980008031985,
+      "advantage": -0.5331444553395717,
+      "p_value": 1.8189894035458565e-12,
+      "cohen_d": 2.5608974855442455,
+      "n_tests": 40
+    }
+  }
+}
