@@ -8,7 +8,7 @@ Validates write firewall enforcement in production surfaces:
 - Error receipts include firewall violation details
 
 Run:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_2_4_1b_write_enforcement.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_write_firewall_enforcement.py -v
 """
 from __future__ import annotations
 

@@ -13,9 +13,9 @@
 | CAPABILITY/TESTBENCH/adversarial/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
 | CAPABILITY/TESTBENCH/core/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
 | CAPABILITY/TESTBENCH/integration/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
-| CAPABILITY/TESTBENCH/phases/phase6_governance/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
-| CAPABILITY/TESTBENCH/phases/phase7_swarm/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
-| CAPABILITY/TESTBENCH/phases/phase8_router/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
+| CAPABILITY/TESTBENCH/mcp-capability-tests/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
+| CAPABILITY/TESTBENCH/subsystem-tests/swarm-tests/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
+| CAPABILITY/TESTBENCH/subsystem-tests/router-tests/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
 | CAPABILITY/TESTBENCH/pipeline/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
 | CAPABILITY/TESTBENCH/spectrum/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |
 | CAPABILITY/TOOLS/__pycache__ | Python Runtime | Compiled bytecode | Python-internal optimization artifacts |

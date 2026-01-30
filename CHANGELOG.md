@@ -6,6 +6,31 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.30] - 2026-01-30
+
+### Refactored: Phase-based naming to feature-based naming
+
+Eliminates legacy phase numbering from test organization to improve
+discoverability and reduce confusion from multiple roadmap rewrites.
+
+**Test file renames (64 files):**
+- 29 integration tests: `test_phase_X_Y_*.py` -> `test_<feature>.py`
+- `phase6/` -> `mcp-capability-tests/`
+- `phases/phase7_swarm/` -> `subsystem-tests/swarm-tests/`
+- `phases/phase8_router/` -> `subsystem-tests/router-tests/`
+
+**Proof directory renames:**
+- `PHASE_1_5_CATALYTIC_GUARDRAILS/` -> `WRITE_FIREWALL_VERIFICATION/`
+- `PHASE_2_4_WRITE_SURFACES/` -> `WRITE_SURFACE_GOVERNANCE/`
+
+### Changed
+
+- Updated `.github/workflows/contracts.yml` pytest ignore paths
+- Updated `AGENTS.md` test file reference
+- Updated `CATALYTIC_DOMAINS.md` pycache paths
+
+---
+
 ## [3.8.29] - 2026-01-30
 
 ### Refactored: MCP server modularization (15 tools to 11 tools)

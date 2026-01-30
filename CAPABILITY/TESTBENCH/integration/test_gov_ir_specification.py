@@ -13,7 +13,7 @@ Deliverables verified:
     - Canonical JSON normalization documented
 
 Usage:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_5_3_2_gov_ir_spec.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_gov_ir_specification.py -v
 """
 
 import hashlib

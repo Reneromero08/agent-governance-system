@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-Phase 6.4 Benchmark Tasks (6.4.2-6.4.4)
+Compression Benchmark Tasks
 
 Deterministic benchmark suite for validating compression preserves task success.
 Tasks are evaluated with both baseline (full context) and compressed (retrieved) context.
@@ -241,8 +241,8 @@ def get_test_pass_tasks() -> List[BenchmarkTask]:
         BenchmarkTask(
             task_id="test_001",
             task_type=TaskType.TESTS_PASS,
-            description="Phase 6 receipt tests pass",
-            fixture_path=REPO_ROOT / "CAPABILITY" / "TESTBENCH" / "phase6" / "test_cassette_receipt.py",
+            description="Cassette receipt tests pass",
+            fixture_path=REPO_ROOT / "CAPABILITY" / "TESTBENCH" / "mcp-capability-tests" / "test_cassette_receipt.py",
         ),
     ]
     return tasks

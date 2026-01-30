@@ -1,4 +1,4 @@
-# CAPABILITY/TESTBENCH/phases/phase8_router/test_phase8_router_receipts.py
+# CAPABILITY/TESTBENCH/subsystem-tests/router-tests/test_router_receipts.py
 
 import json
 from datetime import datetime

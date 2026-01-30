@@ -13,7 +13,7 @@ Deliverables verified:
     - Markov blanket semantics documented
 
 Usage:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_5_3_3_codebook_sync.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_codebook_sync.py -v
 """
 
 import hashlib

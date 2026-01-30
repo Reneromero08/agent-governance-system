@@ -14,7 +14,7 @@ Deliverables verified:
     - Grammar specification complete
 
 Usage:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_5_2_2_codebook.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_codebook_lookup.py -v
 """
 
 import hashlib

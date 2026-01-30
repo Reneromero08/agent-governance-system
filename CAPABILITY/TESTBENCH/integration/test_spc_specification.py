@@ -13,7 +13,7 @@ Deliverables verified:
     - Fail-closed behavior documented
 
 Usage:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_5_3_1_spc_spec.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_spc_specification.py -v
 """
 
 import hashlib

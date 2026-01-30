@@ -61,13 +61,13 @@ jobs:
         run: |
           mkdir -p "$TMPDIR"
           python -m pytest CAPABILITY/TESTBENCH -q -s \
-            --ignore=CAPABILITY/TESTBENCH/phase6 \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_1_1_canon_embedding.py \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_1_2_adr_embedding.py \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_1_3_model_registry.py \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_1_4_skill_discovery.py \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_5_2_3_stacked_resolution.py \
-            --ignore=CAPABILITY/TESTBENCH/integration/test_phase_2_4_1b_write_enforcement.py \
+            --ignore=CAPABILITY/TESTBENCH/mcp-capability-tests \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_canon_embedding.py \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_adr_embedding.py \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_model_registry.py \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_skill_discovery.py \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_stacked_symbol_resolution.py \
+            --ignore=CAPABILITY/TESTBENCH/integration/test_write_firewall_enforcement.py \
             --ignore=CAPABILITY/TESTBENCH/pipeline/test_write_firewall.py
 
       - name: CI strict verification (SPECTRUM-05)

@@ -11,7 +11,7 @@ CI Gate Logic:
     - Atlas MUST be regenerable and match stored artifact
 
 Usage:
-    pytest CAPABILITY/TESTBENCH/integration/test_phase_5_3_4_tokenizer_atlas.py -v
+    pytest CAPABILITY/TESTBENCH/integration/test_tokenizer_atlas.py -v
 """
 
 import hashlib

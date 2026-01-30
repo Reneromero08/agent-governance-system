@@ -173,7 +173,7 @@ Receipts are aggregated per session for cumulative savings reports via `TokenSes
 #### Reference
 - Schema: `CAPABILITY/PRIMITIVES/schemas/token_receipt.schema.json`
 - Primitives: `CAPABILITY/PRIMITIVES/token_receipt.py`, `token_session.py`, `token_firewall.py`
-- Tests: `CAPABILITY/TESTBENCH/integration/test_phase_5_2_7_token_accountability.py`
+- Tests: `CAPABILITY/TESTBENCH/integration/test_token_accountability.py`
 
 ## 1. Required startup sequence (non-negotiable)
 
