@@ -1,0 +1,44 @@
+{
+  "test_name": "Q54_Test_C_Zurek_Data",
+  "timestamp": "2026-01-29T23:31:43.772830",
+  "data_source": "simulated",
+  "simulation_params": {
+    "n_env_modes": 6,
+    "coupling": 0.5,
+    "temperature": 0.0,
+    "t_max": 5.0,
+    "n_timesteps": 100
+  },
+  "decoherence_time": 0.6060606060606061,
+  "R_before_transition": 8.152438805423413,
+  "R_after_transition": 16.804886410683356,
+  "transition_sharpness": 14.276538548678904,
+  "hypothesis_tests": {
+    "R_increases": true,
+    "is_sharp": true,
+    "stabilizes": false,
+    "has_spike": true,
+    "correlated_with_redundancy": true
+  },
+  "hypothesis_metrics": {
+    "R_change": 8.652447605259942,
+    "sharpness": 14.276538548678904,
+    "late_variance": 38.7684679949958,
+    "early_variance": 7.6916489852879755,
+    "max_dR_dt": 163.7716905709748,
+    "R_redundancy_correlation": 0.6488159407866521,
+    "R_redundancy_p_value": 2.883726935869416e-13
+  },
+  "verdict": "PASS",
+  "reason": "4/5 criteria met for crystallization hypothesis",
+  "prediction_stated_before": {
+    "expectation": "R spike/step at t_decoherence",
+    "before_behavior": "R fluctuates (quantum uncertainty)",
+    "after_behavior": "R stabilizes at high value (classical lock-in)"
+  },
+  "falsification_criteria": [
+    "R is flat throughout (no transition signature)",
+    "R DECREASES during decoherence (opposite of crystallization)",
+    "No threshold behavior visible"
+  ]
+}

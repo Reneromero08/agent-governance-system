@@ -1,0 +1,45 @@
+{
+  "test_name": "Q54_Test_A_Statistical_Analysis",
+  "timestamp": "2026-01-30T00:27:25.356154",
+  "base_results": {
+    "k_values": [
+      1,
+      2,
+      3,
+      4,
+      5
+    ],
+    "ratios": [
+      2.4017857142857144,
+      2.4277456647398843,
+      5.808333333333334,
+      3.462151394422311,
+      2.9617021276595743
+    ]
+  },
+  "bootstrap": {
+    "point_estimate": 3.4123436468881634,
+    "standard_error": 0.5634531281203399,
+    "ci_95_lower": 2.5241529771421547,
+    "ci_95_upper": 4.657787421741605,
+    "ci_excludes_null": true
+  },
+  "monte_carlo": {
+    "n_trials": 20,
+    "mean_ratio": 3.4502388670102175,
+    "std_ratio": 1.322070125908606,
+    "min_ratio": 1.9980510880511264,
+    "max_ratio": 6.855442941507919
+  },
+  "power_analysis": {
+    "effect_size": 3.4123436468881634,
+    "n_required_standard": 3,
+    "n_required_stringent": 5
+  },
+  "verdict": "STRONG SUPPORT",
+  "pre_registration": {
+    "prediction_lower": 2.1,
+    "prediction_upper": 4.7,
+    "falsification_threshold": 1.5
+  }
+}

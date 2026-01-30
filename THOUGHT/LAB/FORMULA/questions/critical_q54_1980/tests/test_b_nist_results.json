@@ -1,0 +1,326 @@
+{
+  "timestamp": "2026-01-30T00:56:51.070636",
+  "test_name": "Q54_Test_B_NIST_Spectroscopy",
+  "prediction": "r > 0.7 between binding energy and phase lock proxy",
+  "data_source": "NIST Atomic Spectra Database",
+  "elements": [
+    {
+      "element": "Hydrogen",
+      "symbol": "H I",
+      "Z": 1,
+      "ionization_energy_eV": 13.598434599702,
+      "n_levels": 8,
+      "levels": [
+        {
+          "n": 1,
+          "config": "1s",
+          "energy_eV": 0.0,
+          "binding_energy_eV": 13.598434599702,
+          "phase_lock_v1": 1.0,
+          "phase_lock_v2": 13.598434599702,
+          "phase_lock_v3": 1.0
+        },
+        {
+          "n": 2,
+          "config": "2s",
+          "energy_eV": 10.19881052514816,
+          "binding_energy_eV": 3.3996240745538397,
+          "phase_lock_v1": 0.25,
+          "phase_lock_v2": 1.6998120372769199,
+          "phase_lock_v3": 0.25
+        },
+        {
+          "n": 3,
+          "config": "3s",
+          "energy_eV": 12.0874949611,
+          "binding_energy_eV": 1.5109396386019984,
+          "phase_lock_v1": 0.1111111111111111,
+          "phase_lock_v2": 0.5036465462006662,
+          "phase_lock_v3": 0.1111111111111111
+        },
+        {
+          "n": 4,
+          "config": "4s",
+          "energy_eV": 12.74853299663,
+          "binding_energy_eV": 0.8499016030719986,
+          "phase_lock_v1": 0.0625,
+          "phase_lock_v2": 0.21247540076799964,
+          "phase_lock_v3": 0.0625
+        },
+        {
+          "n": 5,
+          "config": "5s",
+          "energy_eV": 13.054498464,
+          "binding_energy_eV": 0.5439361357019994,
+          "phase_lock_v1": 0.04,
+          "phase_lock_v2": 0.10878722714039987,
+          "phase_lock_v3": 0.04
+        },
+        {
+          "n": 6,
+          "config": "6s",
+          "energy_eV": 13.22070162532,
+          "binding_energy_eV": 0.37773297438199904,
+          "phase_lock_v1": 0.027777777777777776,
+          "phase_lock_v2": 0.06295549573033317,
+          "phase_lock_v3": 0.027777777777777776
+        },
+        {
+          "n": 7,
+          "config": "7s",
+          "energy_eV": 13.3204,
+          "binding_energy_eV": 0.27803459970199995,
+          "phase_lock_v1": 0.02040816326530612,
+          "phase_lock_v2": 0.039719228528857134,
+          "phase_lock_v3": 0.02040816326530612
+        },
+        {
+          "n": 8,
+          "config": "8s",
+          "energy_eV": 13.3858,
+          "binding_energy_eV": 0.2126345997019996,
+          "phase_lock_v1": 0.015625,
+          "phase_lock_v2": 0.02657932496274995,
+          "phase_lock_v3": 0.015625
+        }
+      ],
+      "correlation_v1": {
+        "proxy_definition": "Z^2 / n^2 (spatial confinement)",
+        "r": 0.9999999992632488,
+        "p_value": 9.99775282212467e-28,
+        "r_squared": 0.9999999985264976
+      },
+      "correlation_v2": {
+        "proxy_definition": "|E_binding| / n (energy per quantum)",
+        "r": 0.9933462096946535,
+        "p_value": 7.327866234016221e-07,
+        "r_squared": 0.9867366923147345
+      },
+      "correlation_v3": {
+        "proxy_definition": "1 / n^2 (pure localization)",
+        "r": 0.9999999992632488,
+        "p_value": 9.99775282212467e-28,
+        "r_squared": 0.9999999985264976
+      }
+    },
+    {
+      "element": "Helium",
+      "symbol": "He I",
+      "Z": 2,
+      "ionization_energy_eV": 24.587387936,
+      "n_levels": 6,
+      "levels": [
+        {
+          "n": 1,
+          "config": "1s2",
+          "energy_eV": 0.0,
+          "binding_energy_eV": 24.587387936,
+          "phase_lock_v1": 4.0,
+          "phase_lock_v2": 24.587387936,
+          "phase_lock_v3": 1.0
+        },
+        {
+          "n": 2,
+          "config": "1s.2s",
+          "energy_eV": 20.615774823,
+          "binding_energy_eV": 3.971613113,
+          "phase_lock_v1": 1.0,
+          "phase_lock_v2": 1.9858065565,
+          "phase_lock_v3": 0.25
+        },
+        {
+          "n": 3,
+          "config": "1s.3s",
+          "energy_eV": 22.920317359,
+          "binding_energy_eV": 1.6670705770000005,
+          "phase_lock_v1": 0.4444444444444444,
+          "phase_lock_v2": 0.5556901923333335,
+          "phase_lock_v3": 0.1111111111111111
+        },
+        {
+          "n": 4,
+          "config": "1s.4s",
+          "energy_eV": 23.67357059,
+          "binding_energy_eV": 0.9138173459999983,
+          "phase_lock_v1": 0.25,
+          "phase_lock_v2": 0.22845433649999958,
+          "phase_lock_v3": 0.0625
+        },
+        {
+          "n": 5,
+          "config": "1s.5s",
+          "energy_eV": 24.01,
+          "binding_energy_eV": 0.5773879359999974,
+          "phase_lock_v1": 0.16,
+          "phase_lock_v2": 0.11547758719999948,
+          "phase_lock_v3": 0.04
+        },
+        {
+          "n": 6,
+          "config": "1s.6s",
+          "energy_eV": 24.19,
+          "binding_energy_eV": 0.39738793599999767,
+          "phase_lock_v1": 0.1111111111111111,
+          "phase_lock_v2": 0.06623132266666627,
+          "phase_lock_v3": 0.027777777777777776
+        }
+      ],
+      "correlation_v1": {
+        "proxy_definition": "Z^2 / n^2 (spatial confinement)",
+        "r": 0.9968909736996808,
+        "p_value": 1.4484040810772094e-05,
+        "r_squared": 0.9937916134438978
+      },
+      "correlation_v2": {
+        "proxy_definition": "|E_binding| / n (energy per quantum)",
+        "r": 0.9978570208657899,
+        "p_value": 6.883618689123438e-06,
+        "r_squared": 0.9957186340911494
+      },
+      "correlation_v3": {
+        "proxy_definition": "1 / n^2 (pure localization)",
+        "r": 0.9968909736996808,
+        "p_value": 1.4484040810772094e-05,
+        "r_squared": 0.9937916134438978
+      }
+    },
+    {
+      "element": "Lithium",
+      "symbol": "Li I",
+      "Z": 3,
+      "ionization_energy_eV": 5.391714996,
+      "n_levels": 6,
+      "levels": [
+        {
+          "n": 2,
+          "config": "1s2.2s",
+          "energy_eV": 0.0,
+          "binding_energy_eV": 5.391714996,
+          "phase_lock_v1": 2.25,
+          "phase_lock_v2": 2.695857498,
+          "phase_lock_v3": 0.25
+        },
+        {
+          "n": 3,
+          "config": "1s2.3s",
+          "energy_eV": 3.373129,
+          "binding_energy_eV": 2.018585996,
+          "phase_lock_v1": 1.0,
+          "phase_lock_v2": 0.6728619986666667,
+          "phase_lock_v3": 0.1111111111111111
+        },
+        {
+          "n": 4,
+          "config": "1s2.4s",
+          "energy_eV": 4.341,
+          "binding_energy_eV": 1.050714996,
+          "phase_lock_v1": 0.5625,
+          "phase_lock_v2": 0.262678749,
+          "phase_lock_v3": 0.0625
+        },
+        {
+          "n": 5,
+          "config": "1s2.5s",
+          "energy_eV": 4.749,
+          "binding_energy_eV": 0.6427149960000005,
+          "phase_lock_v1": 0.36,
+          "phase_lock_v2": 0.1285429992000001,
+          "phase_lock_v3": 0.04
+        },
+        {
+          "n": 6,
+          "config": "1s2.6s",
+          "energy_eV": 4.96,
+          "binding_energy_eV": 0.4317149960000002,
+          "phase_lock_v1": 0.25,
+          "phase_lock_v2": 0.07195249933333336,
+          "phase_lock_v3": 0.027777777777777776
+        },
+        {
+          "n": 7,
+          "config": "1s2.7s",
+          "energy_eV": 5.08,
+          "binding_energy_eV": 0.3117149960000001,
+          "phase_lock_v1": 0.1836734693877551,
+          "phase_lock_v2": 0.04453071371428573,
+          "phase_lock_v3": 0.02040816326530612
+        }
+      ],
+      "correlation_v1": {
+        "proxy_definition": "Z^2 / n^2 (spatial confinement)",
+        "r": 0.998103649942324,
+        "p_value": 5.390805538366163e-06,
+        "r_squared": 0.9962108960281894
+      },
+      "correlation_v2": {
+        "proxy_definition": "|E_binding| / n (energy per quantum)",
+        "r": 0.9948981096657221,
+        "p_value": 3.8977528195765646e-05,
+        "r_squared": 0.9898222486164272
+      },
+      "correlation_v3": {
+        "proxy_definition": "1 / n^2 (pure localization)",
+        "r": 0.9981036499423244,
+        "p_value": 5.3908055383636385e-06,
+        "r_squared": 0.99621089602819
+      }
+    }
+  ],
+  "combined": {
+    "n_total_levels": 20,
+    "elements_included": [
+      "H",
+      "He",
+      "Li"
+    ],
+    "correlation_v1": {
+      "proxy_definition": "Z^2 / n^2 (spatial confinement)",
+      "r": 0.8810687525355949,
+      "p_value": 2.9140905892102515e-07,
+      "r_squared": 0.7762821466946294
+    },
+    "correlation_v2": {
+      "proxy_definition": "|E_binding| / n (energy per quantum)",
+      "r": 0.9932197574307481,
+      "p_value": 2.8063147830318883e-18,
+      "r_squared": 0.986485486550794
+    },
+    "correlation_v3": {
+      "proxy_definition": "1 / n^2 (pure localization)",
+      "r": 0.9511588352627928,
+      "p_value": 1.2573861662182475e-10,
+      "r_squared": 0.9047031298984726
+    }
+  },
+  "prediction_results": {
+    "H I": {
+      "r_v1": 0.9999999992632488,
+      "r_v3": 0.9999999992632488,
+      "passed": true,
+      "strong": true
+    },
+    "He I": {
+      "r_v1": 0.9968909736996808,
+      "r_v3": 0.9968909736996808,
+      "passed": true,
+      "strong": true
+    },
+    "Li I": {
+      "r_v1": 0.998103649942324,
+      "r_v3": 0.9981036499423244,
+      "passed": true,
+      "strong": true
+    },
+    "combined": {
+      "r_v1": 0.8810687525355949,
+      "passed": true,
+      "strong": false
+    }
+  },
+  "overall_passed": true,
+  "theoretical_note": {
+    "theoretical_note": "For hydrogen-like atoms, binding energy E_n = 13.6*Z^2/n^2 eV. Thus correlation between E_binding and 1/n^2 is DEFINITIONAL for H. The non-trivial test is whether multi-electron atoms (He, Li) maintain high correlation despite electron screening and exchange effects.",
+    "prediction": "r > 0.7 for all elements",
+    "strong_prediction": "r > 0.9 indicates Rydberg-like behavior persists"
+  }
+}

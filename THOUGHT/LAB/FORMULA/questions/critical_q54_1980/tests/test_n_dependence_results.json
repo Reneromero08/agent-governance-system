@@ -1,0 +1,177 @@
+{
+  "test_name": "N_Dependence_Test",
+  "timestamp": "2026-01-30T01:53:12.158054",
+  "theoretical_predictions": {
+    "r_formula": {
+      "sigma": 0.27,
+      "log_sigma": -1.3093333199837622,
+      "prediction": "R ~ N^{-1.309}",
+      "direction": "DECREASES with N"
+    },
+    "zurek": {
+      "prediction": "Redundancy ~ N/ln(N)",
+      "direction": "INCREASES with N"
+    }
+  },
+  "zhu_results": {
+    "source": "Zhu et al. 2025",
+    "N_values": [
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "R_values": [
+      4.745907199099589,
+      2.052036331607776,
+      1.3117490764209365,
+      0.960791433409341,
+      0.7755826703117517,
+      0.6466452441013382,
+      0.5534997890269379,
+      0.48201181872866716
+    ],
+    "intrinsic_values": [
+      20.000000121348307,
+      12.603241350746273,
+      10.790348797003979,
+      10.034332372088851,
+      9.911585212024546,
+      9.842646751037787,
+      9.829670783469835,
+      9.826322352723576
+    ],
+    "alpha_fit": -2.301690601803694,
+    "alpha_err": 0.15758911687457167,
+    "alpha_intrinsic": -0.6488286899599732,
+    "alpha_predicted": -1.3093333199837622,
+    "alpha_consistent": false,
+    "R_decreases_with_N": true,
+    "linear_slope": -0.4704817932804409,
+    "linear_r_squared": 0.6490306902327913,
+    "linear_p_value": 0.015787226927695373
+  },
+  "simulation_results": {
+    "source": "QuTiP simulation",
+    "N_values": [
+      3,
+      5,
+      7,
+      9,
+      11,
+      13
+    ],
+    "R_final_values": [
+      22.820354417460052,
+      8.459597872952115,
+      4.885237317518601,
+      3.361359612828047,
+      2.4973641791135774,
+      1.962970386536662
+    ],
+    "R_dec_values": [
+      23.729535851520975,
+      10.509771622349687,
+      6.209653228028664,
+      4.028067798628285,
+      3.095102052492094,
+      2.18686538967215
+    ],
+    "intrinsic_final_values": [
+      96.03999999999955,
+      69.29897598308084,
+      61.959875705530166,
+      59.69479850577374,
+      57.67824268180275,
+      56.42049545907064
+    ],
+    "alpha_fit": -1.8075466294080604,
+    "alpha_err": 0.05422038708725645,
+    "alpha_intrinsic": -0.38547719036073996,
+    "alpha_predicted": -1.3093333199837622,
+    "alpha_consistent": false,
+    "R_decreases_with_N": true,
+    "linear_slope": -1.7671071277260446,
+    "linear_r_squared": 0.6936763871650515,
+    "linear_p_value": 0.039563391595610224,
+    "zurek_prediction": [
+      2.730717679880512,
+      3.1066746727980594,
+      3.597288396588255,
+      4.096076519820768,
+      4.5873563056667095,
+      5.06832618826664
+    ],
+    "simulation_details": [
+      {
+        "n_env": 2,
+        "N_total": 3,
+        "t_dec": 1.0204081632653061,
+        "R_at_dec": 23.729535851520975,
+        "R_final": 22.820354417460052,
+        "intrinsic_final": 96.03999999999955,
+        "R_initial": 1.0
+      },
+      {
+        "n_env": 4,
+        "N_total": 5,
+        "t_dec": 0.7142857142857143,
+        "R_at_dec": 10.509771622349687,
+        "R_final": 8.459597872952115,
+        "intrinsic_final": 69.29897598308084,
+        "R_initial": 1.0
+      },
+      {
+        "n_env": 6,
+        "N_total": 7,
+        "t_dec": 0.6122448979591837,
+        "R_at_dec": 6.209653228028664,
+        "R_final": 4.885237317518601,
+        "intrinsic_final": 61.959875705530166,
+        "R_initial": 1.0
+      },
+      {
+        "n_env": 8,
+        "N_total": 9,
+        "t_dec": 0.5102040816326531,
+        "R_at_dec": 4.028067798628285,
+        "R_final": 3.361359612828047,
+        "intrinsic_final": 59.69479850577374,
+        "R_initial": 1.0
+      },
+      {
+        "n_env": 10,
+        "N_total": 11,
+        "t_dec": 0.5102040816326531,
+        "R_at_dec": 3.095102052492094,
+        "R_final": 2.4973641791135774,
+        "intrinsic_final": 57.67824268180275,
+        "R_initial": 1.0
+      },
+      {
+        "n_env": 12,
+        "N_total": 13,
+        "t_dec": 0.40816326530612246,
+        "R_at_dec": 2.18686538967215,
+        "R_final": 1.962970386536662,
+        "intrinsic_final": 56.42049545907064,
+        "R_initial": 1.0
+      }
+    ]
+  },
+  "verdict": {
+    "verdict": "R FORMULA SUPPORTED - R decreases with N as predicted",
+    "r_formula_supported": true,
+    "zurek_supported": false,
+    "evidences": [
+      "Zhu data: R DECREASES with N (supports R formula)",
+      "Zhu data: alpha = -2.302 does NOT match prediction -1.309",
+      "Simulation: R DECREASES with N (supports R formula)",
+      "Simulation: alpha = -1.808 does NOT match prediction -1.309"
+    ]
+  }
+}

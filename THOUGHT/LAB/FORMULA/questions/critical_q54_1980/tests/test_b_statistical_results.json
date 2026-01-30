@@ -1,0 +1,305 @@
+{
+  "test_name": "Q54_Test_B_Statistical_Analysis",
+  "timestamp": "2026-01-30T00:32:07.145543",
+  "base_results": {
+    "bound_locks": [
+      43083.493840115465,
+      22760.753124807517,
+      15605.98963176487,
+      11764.838381148445,
+      9237.748637162507,
+      6974.026159487049,
+      4625.891296916792
+    ],
+    "plane_locks": [
+      398.42210132990226,
+      276.72585262647186,
+      228.73255836590272,
+      209.41268755376709,
+      202.81330789349352,
+      202.81330789349352,
+      209.41268755376709,
+      228.73255836590278,
+      276.72585262647186,
+      398.4221013299023
+    ],
+    "avg_bound": 16293.248724486095,
+    "avg_plane": 263.2213015539075,
+    "base_ratio": 61.89943073869822
+  },
+  "bootstrap": {
+    "point_estimate": 61.89943073869822,
+    "standard_error": 18.62298198944057,
+    "ci_95_lower": 31.837770027511894,
+    "ci_95_upper": 103.25652590174683,
+    "ci_excludes_null": true
+  },
+  "monte_carlo": {
+    "n_trials": 30,
+    "mean_ratio": 55.10566441541087,
+    "std_ratio": 13.327989343589097,
+    "min_ratio": 32.786227463649745,
+    "max_ratio": 83.85156441374342,
+    "robust_fraction": 1.0,
+    "trial_details": [
+      {
+        "trial": 0,
+        "well_depth": 3.8267522254857584,
+        "n_grid": 329,
+        "perturbation": 0.016539658128075972,
+        "ratio": 38.82071051885855,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 1,
+        "well_depth": 3.0588353045570935,
+        "n_grid": 321,
+        "perturbation": 0.014971467867374608,
+        "ratio": 32.786227463649745,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 2,
+        "well_depth": 3.8898778122483946,
+        "n_grid": 360,
+        "perturbation": 0.00837481249221996,
+        "ratio": 41.95896661293784,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 3,
+        "well_depth": 3.2136950168514873,
+        "n_grid": 336,
+        "perturbation": 0.019061356053056585,
+        "ratio": 35.350885895012446,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 4,
+        "well_depth": 7.497354237174598,
+        "n_grid": 316,
+        "perturbation": 0.010256495594183995,
+        "ratio": 38.28486069191867,
+        "n_bound_states": 9
+      },
+      {
+        "trial": 5,
+        "well_depth": 6.141254267656337,
+        "n_grid": 513,
+        "perturbation": 0.01683668316253425,
+        "ratio": 64.01627166799872,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 6,
+        "well_depth": 5.2817226211521495,
+        "n_grid": 563,
+        "perturbation": 0.007269815657009048,
+        "ratio": 71.50632776540026,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 7,
+        "well_depth": 6.571195580182023,
+        "n_grid": 313,
+        "perturbation": 0.00825847690609422,
+        "ratio": 38.36364073147911,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 8,
+        "well_depth": 5.980070307990381,
+        "n_grid": 355,
+        "perturbation": 0.01273313043316796,
+        "ratio": 46.113732525040525,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 9,
+        "well_depth": 4.464572548195163,
+        "n_grid": 439,
+        "perturbation": 0.005342320721694541,
+        "ratio": 49.10762575151743,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 10,
+        "well_depth": 3.6058201242857724,
+        "n_grid": 571,
+        "perturbation": 0.017682682647576727,
+        "ratio": 63.002412228155116,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 11,
+        "well_depth": 6.12991683830826,
+        "n_grid": 465,
+        "perturbation": 0.009823037598124956,
+        "ratio": 57.894839592182976,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 12,
+        "well_depth": 7.730818830983125,
+        "n_grid": 524,
+        "perturbation": 0.019511390098309208,
+        "ratio": 68.94254554940713,
+        "n_bound_states": 9
+      },
+      {
+        "trial": 13,
+        "well_depth": 5.039175867600481,
+        "n_grid": 348,
+        "perturbation": 0.01964266885840155,
+        "ratio": 42.24876966460107,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 14,
+        "well_depth": 5.3188128841264355,
+        "n_grid": 434,
+        "perturbation": 0.01674880358636848,
+        "ratio": 55.396327953311044,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 15,
+        "well_depth": 6.113228523618574,
+        "n_grid": 537,
+        "perturbation": 0.012036644108642146,
+        "ratio": 66.88475913849307,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 16,
+        "well_depth": 6.849748800735819,
+        "n_grid": 477,
+        "perturbation": 0.008502635681280662,
+        "ratio": 62.40920038601774,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 17,
+        "well_depth": 6.561112050740762,
+        "n_grid": 540,
+        "perturbation": 0.009038765046736424,
+        "ratio": 69.52136782886258,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 18,
+        "well_depth": 6.9132465319500085,
+        "n_grid": 404,
+        "perturbation": 0.005594771504068512,
+        "ratio": 54.13898102051588,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 19,
+        "well_depth": 3.8290404674587197,
+        "n_grid": 427,
+        "perturbation": 0.005159378115253109,
+        "ratio": 48.02396485660574,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 20,
+        "well_depth": 4.909670145660291,
+        "n_grid": 301,
+        "perturbation": 0.011303117370762393,
+        "ratio": 38.643959618504205,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 21,
+        "well_depth": 4.030235466977613,
+        "n_grid": 368,
+        "perturbation": 0.005042089503318164,
+        "ratio": 44.941472751889734,
+        "n_bound_states": 6
+      },
+      {
+        "trial": 22,
+        "well_depth": 7.785272866267334,
+        "n_grid": 439,
+        "perturbation": 0.01424223733327417,
+        "ratio": 55.12530558070741,
+        "n_bound_states": 9
+      },
+      {
+        "trial": 23,
+        "well_depth": 4.139179955346622,
+        "n_grid": 643,
+        "perturbation": 0.019606259708334694,
+        "ratio": 72.05816690430996,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 24,
+        "well_depth": 6.536291921390888,
+        "n_grid": 651,
+        "perturbation": 0.01781882588360839,
+        "ratio": 83.85156441374342,
+        "n_bound_states": 8
+      },
+      {
+        "trial": 25,
+        "well_depth": 5.096907456858395,
+        "n_grid": 563,
+        "perturbation": 0.009327709223850147,
+        "ratio": 70.27616174062929,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 26,
+        "well_depth": 5.024110023156981,
+        "n_grid": 550,
+        "perturbation": 0.014892975196012136,
+        "ratio": 69.76703869759292,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 27,
+        "well_depth": 4.121784534011741,
+        "n_grid": 611,
+        "perturbation": 0.012130117297832938,
+        "ratio": 66.86759960839446,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 28,
+        "well_depth": 4.6703951650124935,
+        "n_grid": 439,
+        "perturbation": 0.019000211240684406,
+        "ratio": 50.33879791490787,
+        "n_bound_states": 7
+      },
+      {
+        "trial": 29,
+        "well_depth": 6.646809007353136,
+        "n_grid": 438,
+        "perturbation": 0.017067370264299008,
+        "ratio": 56.52744738968146,
+        "n_bound_states": 8
+      }
+    ]
+  },
+  "power_analysis": {
+    "effect_size": 61.89943073869822,
+    "coefficient_of_variation": 0.24186241986153761,
+    "n_required_standard": 1,
+    "n_required_stringent": 1
+  },
+  "effect_size": {
+    "log_ratio": 4.125510983181352,
+    "cohens_d_equivalent": 13.712453865335238,
+    "interpretation": "VERY LARGE"
+  },
+  "verdict": "STRONG SUPPORT",
+  "pre_registration": {
+    "prediction_lower": 31.837770027511894,
+    "prediction_upper": 103.25652590174683,
+    "falsification_threshold_weak": 5.0,
+    "falsification_threshold_strong": 2.0
+  }
+}

@@ -1,0 +1,98 @@
+{
+  "timestamp": "2026-01-30T01:34:17.572439",
+  "test_name": "Q54_Test_B_NonCircular",
+  "purpose": "Replace circular 1/n^2 proxy with independent measures",
+  "data_sources": [
+    "NIST Atomic Spectra Database",
+    "Wiese & Fuhr JPCRD 38(4) 2009"
+  ],
+  "tests": {
+    "lifetime_correlation": {
+      "test": "lifetime_correlation",
+      "n_states": 9,
+      "r_linear": -0.20302397870621344,
+      "p_linear": 0.6003473576553771,
+      "r_log": -0.6028231269415576,
+      "p_log": 0.08575072303354528,
+      "r_circular": 0.9999999999993839,
+      "p_circular": 6.0387970446380416e-43,
+      "r_theory": -0.0371177155175219,
+      "p_theory": 0.9244711716151229,
+      "interpretation": "MODERATE correlation between binding energy and lifetime",
+      "supports_hypothesis": null,
+      "binding_energies": [
+        3.3996240745538397,
+        1.5109396386019984,
+        1.5109396386019984,
+        1.5109396386019984,
+        0.8499016030719986,
+        0.8499016030719986,
+        0.8499016030719986,
+        0.5439361357019994,
+        0.37773297438199904
+      ],
+      "lifetimes": [
+        1.596,
+        158.3,
+        5.27,
+        15.5,
+        460.0,
+        12.4,
+        36.5,
+        24.0,
+        41.0
+      ]
+    },
+    "oscillator_strength": {
+      "test": "oscillator_strength_correlation",
+      "n_transitions": 6,
+      "r_f_linear": 0.9765142065709668,
+      "p_f_linear": 0.0008208965632420915,
+      "r_f_log": 0.9617136124085306,
+      "p_f_log": 0.002170710209921168,
+      "r_A_log": 0.9479820023514447,
+      "p_A_log": 0.003988431095316804,
+      "r_circular": 1.0,
+      "interpretation": "STRONG correlation between binding energy and oscillator strength",
+      "supports_hypothesis": true
+    },
+    "selection_rules": {
+      "test": "selection_rule_stability",
+      "n_groups": 2,
+      "groups": [
+        {
+          "n": 3,
+          "E_binding": 1.5109396386019984,
+          "lifetimes": [
+            158.3,
+            5.27,
+            15.5
+          ],
+          "spread_ratio": 30.037950664136627,
+          "n_states": 3
+        },
+        {
+          "n": 4,
+          "E_binding": 0.8499016030719986,
+          "lifetimes": [
+            460.0,
+            12.4,
+            36.5
+          ],
+          "spread_ratio": 37.096774193548384,
+          "n_states": 3
+        }
+      ],
+      "conclusion": "Binding energy alone does not determine stability"
+    }
+  },
+  "verdict": {
+    "overall_verdict": "FAIL",
+    "message": "The non-circular tests show WEAK correlations between binding\nenergy and independent stability measures. The 'phase lock'\nhypothesis is NOT SUPPORTED by atomic spectroscopy data.",
+    "test1_pass": false,
+    "test2_pass": true,
+    "strong_correlations": false,
+    "test1_supports_simple": false
+  },
+  "methodology_note": "This test uses radiative lifetimes (tau ~ n^3) and oscillator strengths (from dipole matrix elements) which are INDEPENDENT of the Rydberg energy formula (E ~ 1/n^2). The previous test using phase_lock ~ 1/n^2 was CIRCULAR because E ~ 1/n^2 by definition."
+}

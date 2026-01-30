@@ -1,0 +1,247 @@
+{
+  "bound_states": [
+    {
+      "index": 0,
+      "energy": -4.907119458138643,
+      "nodes": 0,
+      "phase_lock": 43083.493840115465,
+      "total_mixing": 2.3210745249933518e-05,
+      "state_type": "bound"
+    },
+    {
+      "index": 1,
+      "energy": -4.629122160395569,
+      "nodes": 1,
+      "phase_lock": 22760.753124807517,
+      "total_mixing": 4.3935277295814734e-05,
+      "state_type": "bound"
+    },
+    {
+      "index": 2,
+      "energy": -4.168093642284399,
+      "nodes": 2,
+      "phase_lock": 15605.98963176487,
+      "total_mixing": 6.407796132098998e-05,
+      "state_type": "bound"
+    },
+    {
+      "index": 3,
+      "energy": -3.528124634633132,
+      "nodes": 3,
+      "phase_lock": 11764.838381148445,
+      "total_mixing": 8.49990427069839e-05,
+      "state_type": "bound"
+    },
+    {
+      "index": 4,
+      "energy": -2.7167702202433466,
+      "nodes": 4,
+      "phase_lock": 9237.748637162507,
+      "total_mixing": 0.00010825148413078738,
+      "state_type": "bound"
+    },
+    {
+      "index": 5,
+      "energy": -1.749310012355489,
+      "nodes": 5,
+      "phase_lock": 6974.026159487049,
+      "total_mixing": 0.00014338919544195568,
+      "state_type": "bound"
+    },
+    {
+      "index": 6,
+      "energy": -0.6675118896662164,
+      "nodes": 6,
+      "phase_lock": 4625.891296916792,
+      "total_mixing": 0.0002161745566019917,
+      "state_type": "bound"
+    }
+  ],
+  "unbound_states": [
+    {
+      "index": 7,
+      "energy": 0.08824076543932691,
+      "nodes": 7,
+      "phase_lock": 2572.9115820008665,
+      "total_mixing": 0.0003886647357008412,
+      "state_type": "unbound"
+    },
+    {
+      "index": 8,
+      "energy": 0.11329647235424911,
+      "nodes": 8,
+      "phase_lock": 3018.85468312404,
+      "total_mixing": 0.0003312514529401452,
+      "state_type": "unbound"
+    },
+    {
+      "index": 9,
+      "energy": 0.30807577695896526,
+      "nodes": 9,
+      "phase_lock": 2759.7741052070032,
+      "total_mixing": 0.0003623484973328977,
+      "state_type": "unbound"
+    },
+    {
+      "index": 10,
+      "energy": 0.43855234122508335,
+      "nodes": 10,
+      "phase_lock": 2154.1802398958116,
+      "total_mixing": 0.0004642137094565335,
+      "state_type": "unbound"
+    },
+    {
+      "index": 11,
+      "energy": 0.6091208928623875,
+      "nodes": 11,
+      "phase_lock": 2886.079495392453,
+      "total_mixing": 0.00034649080234847057,
+      "state_type": "unbound"
+    },
+    {
+      "index": 12,
+      "energy": 0.9427474114661631,
+      "nodes": 12,
+      "phase_lock": 2672.160621233061,
+      "total_mixing": 0.0003742290010764969,
+      "state_type": "unbound"
+    },
+    {
+      "index": 13,
+      "energy": 1.0979146092959606,
+      "nodes": 13,
+      "phase_lock": 2594.538560827556,
+      "total_mixing": 0.00038542499043877737,
+      "state_type": "unbound"
+    },
+    {
+      "index": 14,
+      "energy": 1.5570133395520598,
+      "nodes": 14,
+      "phase_lock": 2921.6909766509566,
+      "total_mixing": 0.00034226754574375584,
+      "state_type": "unbound"
+    },
+    {
+      "index": 15,
+      "energy": 1.7939897626639754,
+      "nodes": 15,
+      "phase_lock": 2763.659037326782,
+      "total_mixing": 0.0003618391366278218,
+      "state_type": "unbound"
+    },
+    {
+      "index": 16,
+      "energy": 2.1843150258862725,
+      "nodes": 16,
+      "phase_lock": 3481.64103256118,
+      "total_mixing": 0.0002872208796506444,
+      "state_type": "unbound"
+    },
+    {
+      "index": 17,
+      "energy": 2.639883695365943,
+      "nodes": 17,
+      "phase_lock": 3443.37813951475,
+      "total_mixing": 0.0002904124843346199,
+      "state_type": "unbound"
+    },
+    {
+      "index": 18,
+      "energy": 2.9521735051540485,
+      "nodes": 18,
+      "phase_lock": 4024.801718353492,
+      "total_mixing": 0.00024845944470752474,
+      "state_type": "unbound"
+    },
+    {
+      "index": 19,
+      "energy": 3.5273117023987854,
+      "nodes": 19,
+      "phase_lock": 4717.610401378578,
+      "total_mixing": 0.0002119717218928847,
+      "state_type": "unbound"
+    }
+  ],
+  "plane_waves": [
+    {
+      "k": 0.5,
+      "total_mixing": 0.002509900923322469,
+      "phase_lock": 398.42210132990226
+    },
+    {
+      "k": 1.0,
+      "total_mixing": 0.00361368477324673,
+      "phase_lock": 276.72585262647186
+    },
+    {
+      "k": 1.5,
+      "total_mixing": 0.004371918047627934,
+      "phase_lock": 228.73255836590272
+    },
+    {
+      "k": 2.0,
+      "total_mixing": 0.0047752598549849,
+      "phase_lock": 209.41268755376709
+    },
+    {
+      "k": 2.5,
+      "total_mixing": 0.004930642916810693,
+      "phase_lock": 202.81330789349352
+    },
+    {
+      "k": 3.0,
+      "total_mixing": 0.004930642916810693,
+      "phase_lock": 202.81330789349352
+    },
+    {
+      "k": 3.5,
+      "total_mixing": 0.0047752598549849,
+      "phase_lock": 209.41268755376709
+    },
+    {
+      "k": 4.0,
+      "total_mixing": 0.0043719180476279335,
+      "phase_lock": 228.73255836590278
+    },
+    {
+      "k": 4.5,
+      "total_mixing": 0.0036136847732467304,
+      "phase_lock": 276.72585262647186
+    },
+    {
+      "k": 5.0,
+      "total_mixing": 0.0025099009233224686,
+      "phase_lock": 398.4221013299023
+    }
+  ],
+  "predictions": {
+    "pred1_bound_more_stable": {
+      "prediction": "Bound states resist perturbation MORE than free states",
+      "bound_avg": 16293.248724486095,
+      "plane_avg": 263.2213015539075,
+      "ratio": 61.89943073869822,
+      "passed": true
+    },
+    "pred2_lock_varies": {
+      "prediction": "Phase lock shows meaningful variation",
+      "variance": 150468555.98038897,
+      "passed": true
+    },
+    "pred3_energy_lock_correlation": {
+      "prediction": "More BINDING energy (energy locked) -> more phase lock",
+      "correlation": 0.7966137501712164,
+      "p_value": 0.032005186006681695,
+      "passed": true
+    }
+  },
+  "parameters": {
+    "N_GRID": 500,
+    "X_MAX": 10.0,
+    "WELL_DEPTH": 5.0,
+    "PERTURBATION_STRENGTH": 0.01,
+    "N_MODES": 20
+  },
+  "timestamp": "2026-01-29T23:39:58.917542",
+  "overall_passed": true
+}
