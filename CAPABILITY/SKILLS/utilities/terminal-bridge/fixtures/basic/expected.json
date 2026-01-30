@@ -1,0 +1,26 @@
+{
+  "ok": true,
+  "operation": "status",
+  "server": "both",
+  "result": {
+    "ags": {
+      "server": "ags",
+      "name": "AGS PowerShell Bridge (Google Antigravity)",
+      "host": "127.0.0.1",
+      "port": 8765,
+      "reachable": false,
+      "config_exists": true,
+      "script_exists": true,
+      "ready": false
+    },
+    "vscode": {
+      "server": "vscode",
+      "name": "VSCode Antigravity Bridge",
+      "host": "127.0.0.1",
+      "port": 4000,
+      "reachable": false,
+      "ready": false
+    }
+  },
+  "error": null
+}

@@ -6,6 +6,25 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.27] - 2026-01-30
+
+### Added: terminal-bridge skill
+
+Integrated `THOUGHT/LAB/TERMINAL_BRIDGE` into production as `CAPABILITY/SKILLS/utilities/terminal-bridge/`:
+
+- Unified skill supporting two distinct bridge servers:
+  - **AGS PowerShell Bridge** (port 8765) - For Google Antigravity/MCP command execution
+  - **VSCode Antigravity Bridge** (port 4000) - For spawning terminals inside VSCode IDE
+- Operations: `status`, `execute`, `launch_terminal`, `setup_info`
+- Fixtures for basic, ags_status, and setup_info scenarios
+- Reference documentation preserved in `references/VSCODE_BRIDGE.md`
+
+### Removed
+
+- `THOUGHT/LAB/TERMINAL_BRIDGE/` - Fully superseded by production skill
+
+---
+
 ## [3.8.26] - 2026-01-25
 
 ### Added: Phase 10 System Evolution LAB folder

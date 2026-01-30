@@ -1,0 +1,16 @@
+{
+  "ok": true,
+  "operation": "status",
+  "server": "ags",
+  "result": {
+    "server": "ags",
+    "name": "AGS PowerShell Bridge (Google Antigravity)",
+    "host": "127.0.0.1",
+    "port": 8765,
+    "reachable": false,
+    "config_exists": true,
+    "script_exists": true,
+    "ready": false
+  },
+  "error": null
+}

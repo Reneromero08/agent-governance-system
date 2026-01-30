@@ -1,0 +1,35 @@
+{
+  "ok": true,
+  "operation": "setup_info",
+  "server": null,
+  "result": {
+    "servers": {
+      "ags": {
+        "name": "AGS PowerShell Bridge (Google Antigravity)",
+        "port": 8765,
+        "config_path": "CAPABILITY/MCP/powershell_bridge_config.json",
+        "script_path": "CAPABILITY/MCP/powershell_bridge.ps1",
+        "instructions": [
+          "1. Update token in CAPABILITY/MCP/powershell_bridge_config.json",
+          "2. Start bridge: powershell -ExecutionPolicy Bypass -File CAPABILITY\\MCP\\powershell_bridge.ps1",
+          "3. Test: POST http://127.0.0.1:8765/run with X-Bridge-Token header",
+          "4. Use MCP tool 'terminal_bridge' or this skill with server='ags'"
+        ],
+        "mcp_tool": "mcp__ags__terminal_bridge"
+      },
+      "vscode": {
+        "name": "VSCode Antigravity Bridge",
+        "port": 4000,
+        "extension_path": "D:/CCC 2.0/AI/AGI/EXTENSIONS/antigravity-bridge/antigravity-bridge-0.1.0.vsix",
+        "instructions": [
+          "1. Install extension: code --install-extension antigravity-bridge-0.1.0.vsix",
+          "2. Open VSCode - extension auto-starts HTTP server on port 4000",
+          "3. Test: POST http://127.0.0.1:4000/terminal with {name, cwd, initialCommand}",
+          "4. Use this skill with server='vscode' and operation='launch_terminal'"
+        ],
+        "api_endpoint": "POST http://127.0.0.1:4000/terminal"
+      }
+    }
+  },
+  "error": null
+}

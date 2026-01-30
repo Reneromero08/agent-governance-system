@@ -1,8 +1,6 @@
-<!-- CONTENT_HASH: 64b5d8da5aa0215d860aa8344464ed6dd43696e558fee034698b50f5dc81b457 -->
+# VSCode Antigravity Bridge Extension
 
-# Antigravity Bridge Extension
-
-> Local copy of extension from `D:\CCC 2.0\AI\AGI\EXTENSIONS\antigravity-bridge`
+> Reference for the VSCode terminal bridge extension
 
 ## Purpose
 
@@ -66,5 +64,5 @@ Original source: `D:\CCC 2.0\AI\AGI\EXTENSIONS\antigravity-bridge\src\extension.
 ## Governance
 
 > **INV-014**: External window spawning is PROHIBITED
-> 
+>
 > All agent terminals MUST use this bridge. No `Start-Process wt`, no external windows.
