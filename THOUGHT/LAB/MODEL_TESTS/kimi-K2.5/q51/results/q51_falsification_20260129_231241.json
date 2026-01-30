@@ -1,0 +1,12 @@
+{
+  "test": "Q51_FALSIFICATION_PHASE_RANDOMIZATION",
+  "timestamp": "20260129_231241",
+  "verdict": "FALSIFIED",
+  "retention_pct": 1.0,
+  "original_similarity_mean": 0.5684,
+  "randomized_similarity_mean": 0.0059,
+  "p_value": 1.8e-05,
+  "cohens_d": 5.6328,
+  "conclusion": "Complex phase hypothesis DEFINITIVELY FALSIFIED",
+  "interpretation": "Phase carries essential semantic information. Embeddings are REAL, not complex projections."
+}
