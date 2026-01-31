@@ -524,10 +524,10 @@ class QuantumSemanticExperiments:
             entangled = self.sim.create_bell_state(emb_a, emb_b)
             
             # CHSH optimal angles
-            # Alice: a = 0, a' = pi/4
-            # Bob: b = pi/8, b' = -pi/8 (3pi/8)
-            angles_alice = [0, np.pi/4]
-            angles_bob = [np.pi/8, -np.pi/8]
+            # Alice: a = 0, a' = pi/2
+            # Bob: b = pi/4, b' = -pi/4
+            angles_alice = [0, np.pi/2]
+            angles_bob = [np.pi/4, -np.pi/4]
             
             # Calculate all four correlations using Qiskit measurements
             correlations = {}

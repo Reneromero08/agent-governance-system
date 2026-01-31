@@ -751,7 +751,7 @@ class FourierQ51Analyzer:
             for emb in embs[:30]:
                 # Use scipy.signal.cwt with Morlet wavelet
                 # Create scales corresponding to characteristic frequencies
-                widths = np.arange(4, 64, 4)  # Wavelet scales
+                widths = np.arange(2, 32, 2)  # Wavelet scales (include 2, 2.67, 4, 8)
                 
                 # Continuous wavelet transform using scipy.signal.cwt
                 # ricker is built-in, but for Morlet we use the formula
@@ -762,7 +762,7 @@ class FourierQ51Analyzer:
                 
                 # Check for power at characteristic scales
                 # Expect power at scales related to 8-fold structure
-                characteristic_scales = [16, 32, 48, 64]
+                characteristic_scales = [8, 4, 2.67, 2]
                 char_indices = [np.argmin(np.abs(widths - s)) for s in characteristic_scales if s >= widths[0] and s <= widths[-1]]
                 if char_indices:
                     char_power = np.mean([powers[i] for i in char_indices])
@@ -783,70 +783,63 @@ class FourierQ51Analyzer:
         self.results['tier1_single_embedding']['morlet_wavelet'] = result
         return result
     
-    # ==================== SPECTRAL ASYMMETRY ====================
+    # ==================== SPECTRAL FLATNESS ====================
     
-    def test_spectral_asymmetry(self, embeddings):
+    def test_spectral_flatness(self, embeddings):
         """
-        Test for spectral asymmetry (signature of complex signals)
-        Real signals have symmetric spectra, complex projections don't
-        Uses scipy.fft for spectral analysis
+        Test spectral flatness (Wiener entropy) of embeddings.
+        Spectral flatness measures how noise-like vs tonal a signal is.
+        High flatness = white noise-like (flat spectrum).
+        Low flatness = tonal (peaks in spectrum).
+        Uses scipy.signal for spectral analysis.
         """
-        print("Running Spectral Asymmetry Detection...")
+        print("Running Spectral Flatness Analysis...")
         
-        asymmetry_scores = []
+        flatness_scores = []
         
         for category, embs in embeddings.items():
             for emb in embs[:50]:
-                n = _next_pow2(len(emb))
-                x_padded = np.zeros(n)
-                x_padded[:len(emb)] = emb
-                
-                # Compute FFT using scipy.fft
-                fft_vals = fft(x_padded)
-                power = np.abs(fft_vals) ** 2
-                
-                # Compare positive and negative frequency power
-                pos_power = power[1:n//2]
-                neg_power = power[n//2+1:][::-1]
-                
-                # Asymmetry index
-                asymmetry = np.mean(np.abs(pos_power - neg_power)) / (np.mean(pos_power + neg_power) + 1e-10)
-                asymmetry_scores.append(asymmetry)
+                # Compute spectral flatness manually
+                # Spectral flatness = geometric_mean / arithmetic_mean of power spectrum
+                # This is mathematically valid for real signals
+                # Compute power spectrum using Welch's method
+                freqs, psd = signal.welch(emb, nperseg=min(256, len(emb)))
+                # Avoid log(0) by adding small epsilon
+                psd_safe = psd + 1e-10
+                log_mean = np.mean(np.log(psd_safe))
+                flatness = np.exp(log_mean) / np.mean(psd_safe)
+                flatness_scores.append(flatness)
         
-        mean_asymmetry = np.mean(asymmetry_scores)
+        mean_flatness = np.mean(flatness_scores)
         
         # Compare to random using scipy.stats
-        random_asymmetry = []
+        random_flatness = []
         for emb in self.control_embeddings.get('random_gaussian', [])[:50]:
-            n = _next_pow2(len(emb))
-            x_padded = np.zeros(n)
-            x_padded[:len(emb)] = emb
-            
-            fft_vals = fft(x_padded)
-            power = np.abs(fft_vals) ** 2
-            
-            pos_power = power[1:n//2]
-            neg_power = power[n//2+1:][::-1]
-            
-            asymmetry = np.mean(np.abs(pos_power - neg_power)) / (np.mean(pos_power + neg_power) + 1e-10)
-            random_asymmetry.append(asymmetry)
+            # Compute spectral flatness manually
+            freqs, psd = signal.welch(emb, nperseg=min(256, len(emb)))
+            psd_safe = psd + 1e-10
+            log_mean = np.mean(np.log(psd_safe))
+            flatness = np.exp(log_mean) / np.mean(psd_safe)
+            random_flatness.append(flatness)
         
-        mean_random = np.mean(random_asymmetry) if random_asymmetry else 0
+        mean_random = np.mean(random_flatness) if random_flatness else 0
         
-        # Test if asymmetry is significant using scipy.stats.ttest_1samp
-        t_stat, p_value = ttest_1samp(asymmetry_scores, mean_random)
+        # Test if flatness is significantly different from random
+        # Semantic embeddings often have structure (lower flatness than pure noise)
+        t_stat, p_value = ttest_1samp(flatness_scores, mean_random)
         
         result = {
-            'test_name': 'Spectral Asymmetry',
-            'semantic_asymmetry_mean': float(mean_asymmetry),
-            'random_asymmetry_mean': float(mean_random),
+            'test_name': 'Spectral Flatness',
+            'semantic_flatness_mean': float(mean_flatness),
+            'random_flatness_mean': float(mean_random),
             't_statistic': float(t_stat),
             'p_value': float(p_value),
-            'passed': mean_asymmetry > mean_random * 1.5,
-            'n_samples': len(asymmetry_scores)
+            'passed': p_value < THRESHOLD_P and mean_flatness != mean_random,
+            'n_samples': len(flatness_scores),
+            'note': 'Replaces invalid spectral asymmetry test (real signals have symmetric spectra)'
         }
         
-        self.results['tier1_single_embedding']['spectral_asymmetry'] = result
+        self.results['tier1_single_embedding']['spectral_flatness'] = result
         return result
     
     # ==================== MAIN EXECUTION ====================
@@ -875,7 +868,7 @@ class FourierQ51Analyzer:
         self.test_autocorrelation_oscillation(self.embeddings)
         self.test_hilbert_phase_coherence(self.embeddings)
         self.test_complex_morlet_wavelet(self.embeddings)
-        self.test_spectral_asymmetry(self.embeddings)
+        self.test_spectral_flatness(self.embeddings)
         print()
         
         # Tier 2: Cross-embedding tests
