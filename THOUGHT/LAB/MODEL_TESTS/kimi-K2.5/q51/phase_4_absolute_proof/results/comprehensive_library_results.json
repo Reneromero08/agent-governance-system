@@ -1,0 +1,90 @@
+{
+  "library_status": {
+    "qiskit": true,
+    "qutip": true,
+    "scipy": true
+  },
+  "models_tested": [
+    "MiniLM-384D",
+    "BERT-768D",
+    "MPNet-768D"
+  ],
+  "results": {
+    "bell_inequality": {
+      "MiniLM-384D": {
+        "chsh_S": -0.025390625,
+        "chsh_violation": 0,
+        "mean_embedding_correlation": 0.5328050851821899,
+        "std_embedding_correlation": 0.1805179864168167,
+        "strong_correlations": 8,
+        "n_tests": 40,
+        "p_value": 1.0723267042473371e-17,
+        "cohen_d": 1.9666106700897217,
+        "classical_bound": 2.0,
+        "quantum_bound": 2.828,
+        "qiskit_available": true
+      },
+      "BERT-768D": {
+        "chsh_S": -0.017578125,
+        "chsh_violation": 0,
+        "mean_embedding_correlation": 0.8640435338020325,
+        "std_embedding_correlation": 0.07630562782287598,
+        "strong_correlations": 39,
+        "n_tests": 40,
+        "p_value": 5.257368147729474e-09,
+        "cohen_d": 0.9477652907371521,
+        "classical_bound": 2.0,
+        "quantum_bound": 2.828,
+        "qiskit_available": true
+      },
+      "MPNet-768D": {
+        "chsh_S": 0.0234375,
+        "chsh_violation": 0,
+        "mean_embedding_correlation": 0.5457202792167664,
+        "std_embedding_correlation": 0.17367824912071228,
+        "strong_correlations": 10,
+        "n_tests": 40,
+        "p_value": 3.8436324151047165e-23,
+        "cohen_d": 2.506715774536133,
+        "classical_bound": 2.0,
+        "quantum_bound": 2.828,
+        "qiskit_available": true
+      }
+    },
+    "contextual_advantage": {
+      "MiniLM-384D": {
+        "mean_classical_fidelity": 0.3321602940559387,
+        "mean_quantum_fidelity": 0.02452508816990563,
+        "advantage": -0.3076352058860331,
+        "quantum_wins": 0,
+        "n_tests": 64,
+        "p_value": 3.5254980732707397e-12,
+        "cohen_d": -1.7125493536550924,
+        "winner": "CLASSICAL",
+        "qutip_available": true
+      },
+      "BERT-768D": {
+        "mean_classical_fidelity": 0.7208729982376099,
+        "mean_quantum_fidelity": 0.2876353858732348,
+        "advantage": -0.4332376123643751,
+        "quantum_wins": 0,
+        "n_tests": 64,
+        "p_value": 3.5254980732707397e-12,
+        "cohen_d": -4.548465208775888,
+        "winner": "CLASSICAL",
+        "qutip_available": true
+      },
+      "MPNet-768D": {
+        "mean_classical_fidelity": 0.3360244631767273,
+        "mean_quantum_fidelity": 0.0037928640798020018,
+        "advantage": -0.3322315990969253,
+        "quantum_wins": 0,
+        "n_tests": 64,
+        "p_value": 3.5254980732707397e-12,
+        "cohen_d": -1.7286420947852825,
+        "winner": "CLASSICAL",
+        "qutip_available": true
+      }
+    }
+  }
+}

@@ -1,14 +1,14 @@
 # Q51 Fourier/Spectral Analysis Report
 
-**Date:** 2026-01-30 05:44:18
+**Date:** 2026-01-30 20:45:39
 **Status:** INCOMPLETE
 
 ## Executive Summary
 
 - **Total Tests:** 10
-- **Passed:** 4
-- **Failed:** 6
-- **Primary Tests Passed:** 2/5
+- **Passed:** 6
+- **Failed:** 4
+- **Primary Tests Passed:** 3/5
 - **Controls Valid:** False
 
 ## Methodology
@@ -36,15 +36,15 @@
 ### Complex Morlet Wavelet
 - **Status:** [FAIL]
 
-### Spectral Asymmetry
-- **Status:** [FAIL]
-- **P-Value:** nan
+### Spectral Flatness
+- **Status:** [PASS]
+- **P-Value:** 0.00e+00
 
 ## Tier 2: Cross-Embedding Spectral Coherence
 
 ### Cross-Spectral Coherence
-- **Status:** [FAIL]
-- **P-Value:** 9.98e-01
+- **Status:** [PASS]
+- **P-Value:** 3.53e-18
 
 ### Spectral Granger Causality
 - **Status:** [PASS]

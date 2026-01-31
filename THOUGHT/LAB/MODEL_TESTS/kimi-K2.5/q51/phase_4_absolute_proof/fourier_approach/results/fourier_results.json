@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "timestamp": "2026-01-30T05:44:18.233751",
+    "timestamp": "2026-01-30T20:45:38.666349",
     "threshold_p": 1e-05,
     "bonferroni_factor": 384,
     "corrected_p": 2.604166666666667e-08,
@@ -41,31 +41,32 @@
     },
     "morlet_wavelet": {
       "test_name": "Complex Morlet Wavelet",
-      "mean_scale_coherence": 0.973410654442519,
+      "mean_scale_coherence": 0.020812308529008984,
       "passed": false,
       "n_samples": 150
     },
-    "spectral_asymmetry": {
-      "test_name": "Spectral Asymmetry",
-      "semantic_asymmetry_mean": 0.0,
-      "random_asymmetry_mean": 0.0,
-      "t_statistic": NaN,
-      "p_value": NaN,
-      "passed": false,
-      "n_samples": 250
+    "spectral_flatness": {
+      "test_name": "Spectral Flatness",
+      "semantic_flatness_mean": 8.121258354061414e-07,
+      "random_flatness_mean": 0.7540373541402476,
+      "t_statistic": -523913472.19505423,
+      "p_value": 0.0,
+      "passed": true,
+      "n_samples": 250,
+      "note": "Replaces invalid spectral asymmetry test (real signals have symmetric spectra)"
     }
   },
   "tier2_cross_embedding": {
     "cross_spectral": {
       "test_name": "Cross-Spectral Coherence",
-      "semantic_coherence_mean": 0.21012809305505978,
-      "semantic_coherence_std": 0.0020170684402088476,
-      "random_coherence_mean": 0.2171098480520633,
-      "random_coherence_std": 0.011642988782736464,
-      "mann_whitney_statistic": 835.0,
-      "p_value": 0.9979108820651671,
-      "cohens_d": -0.8355909507029154,
-      "passed": false,
+      "semantic_coherence_mean": 0.9671176907932185,
+      "semantic_coherence_std": 0.0018528486423141366,
+      "random_coherence_mean": 0.8851815391980812,
+      "random_coherence_std": 0.04429142964417524,
+      "mann_whitney_statistic": 2500.0,
+      "p_value": 3.533035965194466e-18,
+      "cohens_d": 2.613913329579364,
+      "passed": true,
       "n_semantic": 50,
       "n_random": 50
     },
@@ -83,9 +84,9 @@
       "semantic_psi_mean": 0.29214177791876883,
       "random_psi_mean": 0.4805603235482891,
       "theoretical_null": 0.051031036307982884,
-      "t_statistic": 16.412272917348425,
-      "p_value": 1.5051963026467753e-21,
-      "cohens_d": 2.344610416764061,
+      "t_statistic": 16.412272917348382,
+      "p_value": 1.5051963026469274e-21,
+      "cohens_d": 2.3446104167640547,
       "passed": false,
       "n_semantic": 50,
       "n_random": 50
@@ -134,9 +135,9 @@
   },
   "summary": {
     "total_tests": 10,
-    "passed_tests": 4,
-    "failed_tests": 6,
-    "primary_tests_passed": 2,
+    "passed_tests": 6,
+    "failed_tests": 4,
+    "primary_tests_passed": 3,
     "primary_tests_required": 4,
     "overall_passed": false,
     "controls_valid": false
