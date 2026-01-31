@@ -1,33 +1,34 @@
 {
   "metadata": {
-    "timestamp": "2026-01-30T05:44:16.334741",
+    "timestamp": "2026-01-30T19:23:41.744589",
     "n_tests": 1000,
     "p_threshold": 1e-05,
     "dimension": 8,
     "hilbert_dimension": 8,
-    "seed": 51
+    "seed": 51,
+    "qiskit": true
   },
   "experiments": [
     {
       "experiment": "contextual_advantage",
       "n_tests": 1000,
       "classical_mse": 0.0013916965957018995,
-      "quantum_mse": 2.272751752294433,
-      "advantage": -2.271360055698731,
-      "t_statistic": 105.95121560151779,
+      "quantum_mse": 2.409800801485061,
+      "advantage": -2.408409104889359,
+      "t_statistic": 96.25634154302676,
       "p_value": 0.0,
-      "cohens_d": 3.3504716367782152,
+      "cohens_d": 3.0438927968912624,
       "significant": 0.0,
       "threshold_met": 0.0
     },
     {
       "experiment": "phase_interference",
       "n_tests": 2500,
-      "mean_visibility": 0.35424157310712107,
-      "max_visibility": 0.9995702331487257,
-      "std_visibility": 0.265154603796655,
+      "mean_visibility": 0.40880159227697566,
+      "max_visibility": 0.9995003400956124,
+      "std_visibility": 0.24779448243039046,
       "threshold": 0.7,
-      "t_statistic": 66.79906012472637,
+      "t_statistic": 82.48803202125609,
       "p_value": 0.0,
       "significant": true,
       "threshold_met": 1.0
@@ -35,9 +36,9 @@
     {
       "experiment": "non_commutativity",
       "n_tests": 1000,
-      "mean_distance": 1.0279517458418923,
-      "std_distance": 0.3295569905235972,
-      "t_statistic": 98.63753171341746,
+      "mean_distance": 1.0230561740531967,
+      "std_distance": 0.3336494651760165,
+      "t_statistic": 96.96366969856919,
       "p_value": 0.0,
       "threshold": 0.1,
       "significant": true,
@@ -46,15 +47,15 @@
     {
       "experiment": "bell_inequality",
       "n_trials": 100,
-      "mean_S": 1.3065629648763768,
-      "std_S": 1.9357399876532503e-16,
-      "max_S": 1.306562964876377,
-      "ci_99_999_lower": 1.3065629648763766,
-      "ci_99_999_upper": 1.3065629648763772,
+      "mean_S": 0.03283203125,
+      "std_S": 0.008211003471131266,
+      "max_S": 0.046875,
+      "ci_99_999_lower": 0.029474999765625,
+      "ci_99_999_upper": 0.03572255860351561,
       "classical_bound": 2.0,
       "quantum_bound": 2.8284271247461903,
       "theoretical_max": 2.8284271247461903,
-      "t_statistic": -6934369008.922693,
+      "t_statistic": -2395.770183375597,
       "p_value": 0.0,
       "proportion_above_classical": 0.0,
       "n_above_classical": 0,
@@ -68,11 +69,11 @@
     "significant_results": 2,
     "thresholds_met": 2,
     "all_thresholds_met": false,
-    "chsh_mean": 1.3065629648763768,
-    "chsh_max": 1.306562964876377,
-    "interference_visibility": 0.9995702331487257,
+    "chsh_mean": 0.03283203125,
+    "chsh_max": 0.046875,
+    "interference_visibility": 0.9995003400956124,
     "contextual_advantage_p": 0.0,
     "non_commutativity_detected": true,
-    "non_commutativity_distance": 1.0279517458418923
+    "non_commutativity_distance": 1.0230561740531967
   }
 }

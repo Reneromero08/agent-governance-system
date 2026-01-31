@@ -6,7 +6,7 @@ Q51 PHASE 5: Rigorous Complex Plane Test
 
 **Test:** If true, we can extract phase angles via PCA to 2D and test phase arithmetic:
 - Analogies should satisfy: θ_a - θ_b ≈ θ_c - θ_d (phase differences preserved)
-- Antonyms should differ by π (180°) in phase
+- Antonyms should differ by pi (180 degrees) in phase
 - Context should rotate phase predictably
 
 **Methodology:**
@@ -104,7 +104,7 @@ class Q51RigorousTester:
             diff_ab = phases[0] - phases[1]
             diff_cd = phases[2] - phases[3]
             
-            # Circular difference (handle 2π wraparound)
+            # Circular difference (handle 2pi wraparound)
             error = np.abs(np.angle(np.exp(1j * (diff_ab - diff_cd))))
             
             phase_differences.append((diff_ab, diff_cd))
@@ -142,10 +142,10 @@ class Q51RigorousTester:
         print(f"  Mann-Whitney p: {p_value:.2e}")
         print(f"  Effect size: d={cohen_d:.3f}")
         
-        # Threshold: errors should be < π/4 (45°) for Q51 to hold
+        # Threshold: errors should be < pi/4 (45 degrees) for Q51 to hold
         small_errors = np.sum(errors < np.pi/4) / len(errors)
         
-        print(f"  Small errors (<45°): {small_errors:.1%}")
+        print(f"  Small errors (<45 degrees): {small_errors:.1%}")
         print(f"  Status: {'PASS' if p_value < 0.00001 and cohen_d > 0.5 else 'FAIL'}")
         
         self.results['phase_arithmetic'] = {
@@ -162,9 +162,9 @@ class Q51RigorousTester:
     
     def test_2_antonym_phase_opposition(self) -> Dict:
         """
-        TEST 2: Antonyms Should Differ by π in Phase
+        TEST 2: Antonyms Should Differ by pi in Phase
         
-        If Q51 is true: θ_hot - θ_cold ≈ π (180° phase difference)
+        If Q51 is true: θ_hot - θ_cold ≈ pi (180 degrees phase difference)
         """
         print("\n" + "="*60)
         print("TEST 2: Antonym Phase Opposition")
@@ -193,7 +193,7 @@ class Q51RigorousTester:
         
         phase_diffs = np.array(phase_diffs)
         
-        # Test if antonyms differ by ~π (180°)
+        # Test if antonyms differ by ~pi (180 degrees)
         distances_from_pi = np.abs(phase_diffs - np.pi)
         
         # Compare to random word pairs
@@ -208,7 +208,7 @@ class Q51RigorousTester:
             diff = min(diff, 2*np.pi - diff)
             random_diffs.append(diff)
         
-        # Are antonyms closer to π than random pairs?
+        # Are antonyms closer to pi than random pairs?
         statistic, p_value = stats.mannwhitneyu(
             distances_from_pi, 
             np.abs(np.array(random_diffs) - np.pi),
@@ -222,15 +222,15 @@ class Q51RigorousTester:
         pooled_std = np.sqrt((np.var(distances_from_pi) + np.var(np.abs(np.array(random_diffs) - np.pi))) / 2)
         cohen_d = (np.mean(np.abs(np.array(random_diffs) - np.pi)) - mean_distance_from_pi) / pooled_std if pooled_std > 0 else 0
         
-        print(f"  Mean phase difference: {mean_diff:.3f} (target: π={np.pi:.3f})")
-        print(f"  Mean distance from π: {mean_distance_from_pi:.3f}")
+        print(f"  Mean phase difference: {mean_diff:.3f} (target: pi={np.pi:.3f})")
+        print(f"  Mean distance from pi: {mean_distance_from_pi:.3f}")
         print(f"  Mann-Whitney p: {p_value:.2e}")
         print(f"  Effect size: d={cohen_d:.3f}")
         
-        # Check if any are close to π (within π/4)
+        # Check if any are close to pi (within pi/4)
         close_to_pi = np.sum(distances_from_pi < np.pi/4) / len(distances_from_pi)
         
-        print(f"  Close to π (<45°): {close_to_pi:.1%}")
+        print(f"  Close to pi (<45 degrees): {close_to_pi:.1%}")
         print(f"  Status: {'PASS' if p_value < 0.00001 and cohen_d > 0.5 else 'FAIL'}")
         
         self.results['antonym_opposition'] = {
