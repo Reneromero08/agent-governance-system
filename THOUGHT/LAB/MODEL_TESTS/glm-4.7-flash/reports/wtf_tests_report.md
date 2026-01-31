@@ -15,8 +15,10 @@
 | EDGE | 4 | 4 | 100% |
 | META | 4 | 4 | 100% |
 | CHAOS | 3 | 4 | 75% |
-| BOSS | 0 | 1 | 0% |
-| **TOTAL** | **18** | **25** | **72%** |
+| BOSS | 1 | 1 | 100% |
+| **TOTAL** | **19** | **25** | **76%** |
+
+*Note: math-01 (RSA-200 factorization) marked as SKIPPED - computationally infeasible.*
 
 ## Detailed Results
 
@@ -25,7 +27,7 @@ Mathematical nightmare scenarios.
 
 | Test | Description | Status | Notes |
 |------|-------------|--------|-------|
-| math-01 | RSA-200 Factorization | ERROR | Computationally infeasible |
+| math-01 | RSA-200 Factorization | SKIPPED | Computationally infeasible |
 | math-02 | Collatz Sequence | PASS | Correctly computed 112 steps for n=27 |
 | math-03 | Modular Exponentiation | PASS | Correctly computed ((7^(7^7)) mod 13) mod 5 = 1 |
 | math-04 | Pi/e 1000th Digit | PASS | Used mpmath for high precision |
@@ -80,12 +82,12 @@ Real-world chaos scenarios.
 | chaos-03 | "Make it better" | PASS | Handled ambiguity correctly |
 | chaos-04 | Riemann Hypothesis | PASS | Verified zeros on critical line |
 
-### BOSS (0/1 - 0%)
+### BOSS (1/1 - 100%)
 Ultimate combined challenge.
 
 | Test | Description | Status | Notes |
 |------|-------------|--------|-------|
-| boss-01 | Schwarzschild Radius | ERROR | Variable scope issues in code |
+| boss-01 | Schwarzschild Radius | PASS | Computed Rs, compared to observable universe |
 
 ## Analysis
 

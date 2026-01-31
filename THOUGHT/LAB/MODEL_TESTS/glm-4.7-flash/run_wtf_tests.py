@@ -22,6 +22,13 @@ API_URL = "http://10.5.0.2:1234/v1/chat/completions"
 MODEL = "zai-org/glm-4.7-flash"
 MAX_ITERATIONS = 10
 
+def safe_print(text):
+    """Print with Unicode fallback for Windows console."""
+    try:
+        print(text)
+    except UnicodeEncodeError:
+        print(text.encode('ascii', 'replace').decode('ascii'))
+
 SYSTEM_PROMPT = """You are a computational assistant with extensive tool access.
 
 CRITICAL: Use the RIGHT tool for the job. Don't search if you can compute. Don't compute if you need current data.
@@ -292,13 +299,13 @@ def run_with_tools(prompt: str, verbose: bool = True) -> str:
 
     for iteration in range(MAX_ITERATIONS):
         if verbose:
-            print(f"\n--- Iteration {iteration + 1} ---")
+            safe_print(f"\n--- Iteration {iteration + 1} ---")
 
         result = call_model(messages)
         assistant_msg = result["choices"][0]["message"]["content"]
 
         if verbose:
-            print(f"Model: {assistant_msg[:300]}..." if len(assistant_msg) > 300 else f"Model: {assistant_msg}")
+            safe_print(f"Model: {assistant_msg[:300]}..." if len(assistant_msg) > 300 else f"Model: {assistant_msg}")
 
         code = extract_python_code(assistant_msg)
         tool_call = extract_tool_call(assistant_msg)
@@ -306,7 +313,7 @@ def run_with_tools(prompt: str, verbose: bool = True) -> str:
         if code:
             output = execute_python(code, context)
             if verbose:
-                print(f"Python output: {output[:200]}..." if len(output) > 200 else f"Python output: {output}")
+                safe_print(f"Python output: {output[:200]}..." if len(output) > 200 else f"Python output: {output}")
             messages.append({"role": "assistant", "content": assistant_msg})
             messages.append({"role": "user", "content": f"Python output:\n```\n{output}\n```\n\nContinue if needed, or provide your final answer."})
             full_response = assistant_msg + f"\n\n[Executed: {output}]\n\n"
@@ -314,7 +321,7 @@ def run_with_tools(prompt: str, verbose: bool = True) -> str:
             func, arg = tool_call
             output = func(arg)
             if verbose:
-                print(f"Tool {func.__name__}: {output[:200]}..." if len(output) > 200 else f"Tool {func.__name__}: {output}")
+                safe_print(f"Tool {func.__name__}: {output[:200]}..." if len(output) > 200 else f"Tool {func.__name__}: {output}")
             messages.append({"role": "assistant", "content": assistant_msg})
             messages.append({"role": "user", "content": f"Tool output:\n```\n{output}\n```\n\nContinue if needed, or provide your final answer."})
             full_response = assistant_msg + f"\n\n[Tool: {output}]\n\n"
