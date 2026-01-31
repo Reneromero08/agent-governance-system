@@ -6,6 +6,29 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.32] - 2026-01-31
+
+### Security: Remove MASTER_OVERRIDE_PREFLIGHT bypass (CRITICAL)
+
+- **BREAKING**: Removed environment variable bypass in `preflight.py` that
+  allowed agents to skip ALL contract validation by setting
+  `MASTER_OVERRIDE_PREFLIGHT=1`. This was a security backdoor.
+
+### Added: Catalytic system hardening (SPECTRUM-05 compliance)
+
+- `catalytic_errors.py` - Structured error codes (CAT-001 through CAT-010)
+- `path_utils.py` - Centralized path normalization with security checks
+- PROOF.json schema validation in `catalytic_validator.py`
+- Forbidden artifact checks (logs/, tmp/, transcript.json)
+- Symlink rejection in `CatalyticSnapshot.capture()`
+- 27 new tests for CatalyticLedgerValidator and CatalyticRuntime
+
+### Fixed
+
+- Bare `except: pass` in `catalytic_runtime.py` now catches specific exceptions
+
+---
+
 ## [3.8.31] - 2026-01-30
 
 ### Changed: Roadmap V4 replaces deprecated master

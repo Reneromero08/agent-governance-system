@@ -133,10 +133,8 @@ class PreflightValidator:
         """
         errors = []
 
-        # MASTER_OVERRIDE: Skip path validation if environment variable is set
-        import os
-        if os.environ.get("MASTER_OVERRIDE_PREFLIGHT", "").lower() in ("1", "true", "yes"):
-            return errors
+        # SECURITY: No bypass mechanism. All paths must pass validation.
+        # Any override functionality must use cryptographic attestation with audit trail.
 
         # Check if absolute
         if Path(path_str).is_absolute():

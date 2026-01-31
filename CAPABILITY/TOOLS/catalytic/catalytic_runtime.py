@@ -56,6 +56,11 @@ from CAPABILITY.PRIMITIVES.cas_store import CatalyticStore, normalize_relpath
 from CAPABILITY.PRIMITIVES.merkle import build_manifest_root
 from CAPABILITY.PRIMITIVES.ledger import Ledger
 from CAPABILITY.PRIMITIVES.memo_cache import JobMemoCache, compute_job_cache_key
+from CAPABILITY.PRIMITIVES.catalytic_errors import (
+    CatalyticError,
+    CAT_005_DOMAIN_VIOLATION,
+    domain_violation,
+)
 
 DETERMINISTIC_TIMESTAMP_SENTINEL = "CATALYTIC-DPT-02_CONFIG"
 
@@ -75,6 +80,13 @@ class CatalyticSnapshot:
         # rglob ordering is not specified; enforce deterministic ordering by normalized relative path.
         items = []
         for file_path in self.domain_path.rglob("*"):
+            # SECURITY: Reject symlinks in catalytic domains
+            if file_path.is_symlink():
+                raise CatalyticError(
+                    CAT_005_DOMAIN_VIOLATION,
+                    f"Symlink not allowed in catalytic domain: {file_path}",
+                    {"path": str(file_path), "reason": "symlink"},
+                )
             if file_path.is_file():
                 rel_path = normalize_relpath(file_path.relative_to(self.domain_path))
                 items.append((rel_path, file_path))
@@ -514,8 +526,9 @@ class CatalyticRuntime:
                     "error": str(e),
                 }
                 self.fs_guard.guarded_write_text(self.ledger_dir / "STATUS.json", json.dumps(failed_status, indent=2))
-            except:
-                pass
+            except (IOError, OSError) as e:
+                # Log but don't fail - STATUS.json write is best-effort
+                print(f"Warning: STATUS.json write failed: {e}", file=sys.stderr)
             return False
 
     def _durable_outputs_map(self) -> Dict[str, Path]:
