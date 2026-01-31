@@ -20,10 +20,13 @@ import json
 import sys
 import hashlib
 from pathlib import Path
-from typing import Dict, Tuple
+from typing import Dict, List, Tuple
+
+from jsonschema import Draft7Validator
 
 # Add repo root to path
-sys.path.insert(0, str(Path(__file__).resolve().parents[3]))
+REPO_ROOT = Path(__file__).resolve().parents[3]
+sys.path.insert(0, str(REPO_ROOT))
 from CAPABILITY.PRIMITIVES.restore_proof import RestorationProofValidator
 from CAPABILITY.PRIMITIVES.merkle import build_manifest_root
 
@@ -66,6 +69,44 @@ class CatalyticLedgerValidator:
             if not path.exists():
                 self.errors.append(f"Missing required file: {filename}")
                 return False
+
+        return True
+
+    def validate_forbidden_artifacts(self) -> bool:
+        """SPECTRUM-05 Section 4.8: Check for forbidden artifacts."""
+        forbidden = ["logs/", "tmp/", "transcript.json"]
+        has_forbidden = False
+
+        for name in forbidden:
+            path = self.ledger_dir / name
+            if path.exists():
+                self.errors.append(f"Forbidden artifact present: {name}")
+                has_forbidden = True
+
+        return not has_forbidden
+
+    def validate_proof_schema(self) -> bool:
+        """Validate PROOF.json against the canonical schema."""
+        schema_path = REPO_ROOT / "LAW" / "SCHEMAS" / "proof.schema.json"
+
+        if not schema_path.exists():
+            self.errors.append("PROOF schema not found at LAW/SCHEMAS/proof.schema.json")
+            return False
+
+        try:
+            schema = json.loads(schema_path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError as e:
+            self.errors.append(f"PROOF schema is invalid JSON: {e}")
+            return False
+
+        validator = Draft7Validator(schema)
+        schema_errors = list(validator.iter_errors(self.proof))
+
+        if schema_errors:
+            for err in schema_errors:
+                path_str = ".".join(str(p) for p in err.path) if err.path else "(root)"
+                self.errors.append(f"PROOF.json schema violation at {path_str}: {err.message}")
+            return False
 
         return True
 
@@ -222,7 +263,17 @@ class CatalyticLedgerValidator:
             report["errors"] = self.errors
             return False, report
 
+        # Check for forbidden artifacts (SPECTRUM-05 Section 4.8)
+        if not self.validate_forbidden_artifacts():
+            report["errors"] = self.errors
+            return False, report
+
         if not self.validate_schemas():
+            report["errors"] = self.errors
+            return False, report
+
+        # Validate PROOF.json against canonical schema
+        if not self.validate_proof_schema():
             report["errors"] = self.errors
             return False, report
 
