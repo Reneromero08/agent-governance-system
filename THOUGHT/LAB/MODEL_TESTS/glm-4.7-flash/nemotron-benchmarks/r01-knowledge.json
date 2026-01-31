@@ -1,0 +1,8 @@
+{
+  "test_id": "r01-knowledge",
+  "prompt": "Explain what a closure is in JavaScript in 2 sentences.",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=300)",
+  "status": "error",
+  "timestamp": "2026-01-30T23:02:45.856317",
+  "model": "zai-org/glm-4.7-flash"
+}

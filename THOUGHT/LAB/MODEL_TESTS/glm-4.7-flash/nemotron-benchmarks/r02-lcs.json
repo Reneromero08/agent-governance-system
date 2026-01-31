@@ -1,0 +1,8 @@
+{
+  "test_id": "r02-lcs",
+  "prompt": "Write a function for longest common subsequence (return string, not length)",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=300)",
+  "status": "error",
+  "timestamp": "2026-01-30T23:19:31.048858",
+  "model": "zai-org/glm-4.7-flash"
+}

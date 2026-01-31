@@ -1,0 +1,8 @@
+{
+  "test_id": "r02-sheep",
+  "prompt": "A farmer has 17 sheep. All but 9 die. How many are left?",
+  "result": "('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))",
+  "status": "error",
+  "timestamp": "2026-01-30T23:04:30.988783",
+  "model": "zai-org/glm-4.7-flash"
+}

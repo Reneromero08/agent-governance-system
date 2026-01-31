@@ -1,0 +1,8 @@
+{
+  "test_id": "r02-widgets",
+  "prompt": "5 machines make 5 widgets in 5 minutes. How long for 100 machines to make 100 widgets?",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=300)",
+  "status": "error",
+  "timestamp": "2026-01-30T23:09:31.003415",
+  "model": "zai-org/glm-4.7-flash"
+}

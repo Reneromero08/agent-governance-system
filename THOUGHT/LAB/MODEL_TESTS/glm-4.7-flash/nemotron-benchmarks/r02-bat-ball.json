@@ -1,0 +1,8 @@
+{
+  "test_id": "r02-bat-ball",
+  "prompt": "Bat and ball cost $1.10. Bat costs $1 more than ball. Ball cost?",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=300)",
+  "status": "error",
+  "timestamp": "2026-01-30T23:14:31.038122",
+  "model": "zai-org/glm-4.7-flash"
+}

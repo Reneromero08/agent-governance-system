@@ -1,0 +1,8 @@
+{
+  "test_id": "r03-spatial",
+  "prompt": "Alice is not next to Carol. Bob is left of Carol. Who's in the middle?",
+  "result": "HTTPConnectionPool(host='10.5.0.2', port=1234): Read timed out. (read timeout=300)",
+  "status": "error",
+  "timestamp": "2026-01-30T23:24:31.061955",
+  "model": "zai-org/glm-4.7-flash"
+}
