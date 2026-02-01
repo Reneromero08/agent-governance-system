@@ -67,7 +67,7 @@ def basic_fixture() -> Dict[str, Any]:
     fixture_path = FIXTURES_DIR / "basic" / "input.json"
     if fixture_path.exists():
         return json.loads(fixture_path.read_text(encoding="utf-8"))
-    return {"operation": "verify_system1"}
+    return {"operation": "verify_cas"}
 
 
 @pytest.fixture
@@ -105,49 +105,6 @@ class TestOperationDispatch:
         """Verify all operations are callable functions."""
         for op_name, op_func in cortex_toolkit.OPERATIONS.items():
             assert callable(op_func), f"Operation '{op_name}' is not callable"
-
-
-# ============================================================================
-# Test: Build Operation (REMOVED - cassette network handles semantic search)
-# ============================================================================
-
-@pytest.mark.skip(reason="build operation removed - cassette network handles semantic search")
-class TestBuildOperation:
-    """Test the build operation (REMOVED)."""
-
-    def test_build_can_be_invoked(self, temp_run_dir: Path, mock_writer):
-        """Test that build operation can be invoked."""
-        payload = {"operation": "build", "expected_paths": [], "timeout_sec": 5}
-        output_path = temp_run_dir / "output.json"
-
-        # The build may fail (no cortex.build.py), but it should be invokable
-        result = cortex_toolkit.op_build(payload, output_path, mock_writer)
-
-        # Verify write_durable was called with output
-        assert mock_writer.write_durable.called
-        call_args = mock_writer.write_durable.call_args[0]
-        output_data = json.loads(call_args[1])
-
-        # Output should have expected structure
-        assert "ok" in output_data
-        assert "errors" in output_data
-
-    def test_build_with_missing_script_reports_error(self, temp_run_dir: Path, mock_writer):
-        """Test that build reports error when script is missing."""
-        payload = {
-            "operation": "build",
-            "build_script": "nonexistent/script.py",
-            "expected_paths": []
-        }
-        output_path = temp_run_dir / "output.json"
-
-        result = cortex_toolkit.op_build(payload, output_path, mock_writer)
-
-        call_args = mock_writer.write_durable.call_args[0]
-        output_data = json.loads(call_args[1])
-
-        assert output_data["ok"] is False
-        assert any("not_found" in err for err in output_data["errors"])
 
 
 # ============================================================================
@@ -203,44 +160,6 @@ class TestVerifyCasOperation:
 
         assert output_data["status"] == "failure"
         assert len(output_data["corrupt_blobs"]) > 0
-
-
-# ============================================================================
-# Test: Verify System1 Operation (REMOVED - cassette network handles semantic search)
-# ============================================================================
-
-@pytest.mark.skip(reason="verify_system1 operation removed - cassette network handles semantic search")
-class TestVerifySystem1Operation:
-    """Test the verify_system1 operation (REMOVED).
-
-    Tests verify the operation is registered and callable.
-    The actual cortex verification test runs serially to avoid DB locking.
-    """
-
-    def test_verify_system1_in_operations_registry(self):
-        """Test that verify_system1 is registered as a valid operation."""
-        assert "verify_system1" in cortex_toolkit.OPERATIONS
-        assert callable(cortex_toolkit.OPERATIONS["verify_system1"])
-
-    def test_verify_system1_handles_missing_db(self, temp_run_dir: Path, mock_writer, monkeypatch):
-        """Test that verify_system1 handles missing DB gracefully."""
-        # Point to a non-existent DB to avoid race conditions with CI DB rebuild
-        fake_db = temp_run_dir / "nonexistent.db"
-        monkeypatch.setattr(cortex_toolkit, "DB_PATH", fake_db)
-
-        payload = {"operation": "verify_system1"}
-        output_path = temp_run_dir / "output.json"
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
-        result = cortex_toolkit.op_verify_system1(payload, output_path, mock_writer)
-
-        # Should return non-zero for missing DB
-        assert result == 1
-        assert mock_writer.write_durable.called
-        call_args = mock_writer.write_durable.call_args[0]
-        output_data = json.loads(call_args[1])
-        assert output_data["success"] is False
-        assert "does not exist" in output_data["description"]
 
 
 # ============================================================================

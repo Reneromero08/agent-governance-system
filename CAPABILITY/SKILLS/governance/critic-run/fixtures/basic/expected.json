@@ -1,6 +1,7 @@
 {
     "description": "Test critic-run basic invocation",
     "exit_code": 0,
+    "output": "[critic] Running governance checks...\n[critic] All checks passed",
     "passed": true,
     "verbose": false
 }
