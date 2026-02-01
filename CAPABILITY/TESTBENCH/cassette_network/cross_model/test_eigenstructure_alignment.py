@@ -204,7 +204,6 @@ class TestAlphaUniversality:
         if errors:
             print(f"  Warning: {len(errors)} models had errors")
 
-    @pytest.mark.xfail(reason="Requires corpus size >> embedding dimension. Small corpus leads to unstable alpha estimates.")
     def test_alpha_consistency_across_corpus_sizes(self, sentence_transformer):
         """Alpha should be stable regardless of corpus size."""
         model = sentence_transformer("all-MiniLM-L6-v2")
