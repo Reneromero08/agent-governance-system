@@ -1,0 +1,8 @@
+{
+  "test_id": "r06-lateral",
+  "prompt": "What word is always spelled incorrectly?",
+  "result": "The user is asking a riddle: \"What word is always spelled incorrectly?\"\n\n1.  **Analyze the riddle:** This is a classic wordplay riddle.\n2.  **Identify the answer:** The answer is \"incorrectly\".\n3.  **Verify:** Does \"incorrectly\" fit the description? Yes, because it is spelled with an 'r' instead of an 'l' (i-r-r-e-c-o-r-r-e-c-t-l-y vs i-l-l-e-c-o-r-r-e-c-t-l-y). Or, more simply, it is the word that describes the action of being spelled wrong.\n4.  **Formulate the output:** State the answer clearly.</think>The word is **incorrectly**.",
+  "status": "completed",
+  "timestamp": "2026-01-31T06:19:10.406103",
+  "model": "zai-org/glm-4.7-flash"
+}

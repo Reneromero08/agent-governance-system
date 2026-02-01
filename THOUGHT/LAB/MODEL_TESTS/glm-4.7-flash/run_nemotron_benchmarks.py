@@ -182,7 +182,7 @@ def call_model(prompt: str) -> str:
         "temperature": 0.3,
         "max_tokens": 2000,
     }
-    response = requests.post(API_URL, json=payload, timeout=300)
+    response = requests.post(API_URL, json=payload, timeout=1800)  # 30 min timeout
     response.raise_for_status()
     return response.json()["choices"][0]["message"]["content"]
 
@@ -208,16 +208,46 @@ def save_result(test_id: str, data: Dict[str, Any]):
     with open(filepath, 'w', encoding='utf-8') as f:
         json.dump(data, f, indent=2, ensure_ascii=False)
 
-def run_all():
-    results = []
+def run_all(parallel=1, resume=True):
+    from concurrent.futures import ThreadPoolExecutor, as_completed
+
+    # Filter out already completed tests if resuming (retry errors)
+    pending = []
     for test_id, prompt in BENCHMARKS.items():
-        result = run_benchmark(test_id, prompt)
-        save_result(test_id, result)
-        results.append(result)
+        filepath = os.path.join(OUTPUT_DIR, f"{test_id}.json")
+        skip = False
+        if resume and os.path.exists(filepath):
+            try:
+                with open(filepath, 'r', encoding='utf-8') as f:
+                    data = json.load(f)
+                    if data.get('status') == 'completed':
+                        safe_print(f"SKIP: {test_id} (already completed)")
+                        skip = True
+            except:
+                pass
+        if not skip:
+            pending.append((test_id, prompt))
+
+    safe_print(f"\nRunning {len(pending)} tests ({len(BENCHMARKS) - len(pending)} already done)")
+
+    results = []
+    with ThreadPoolExecutor(max_workers=parallel) as executor:
+        futures = {executor.submit(run_benchmark, tid, prompt): tid for tid, prompt in pending}
+        for future in as_completed(futures):
+            test_id = futures[future]
+            try:
+                result = future.result()
+                save_result(test_id, result)
+                results.append(result)
+            except Exception as e:
+                safe_print(f"FAILED: {test_id} - {e}")
+                results.append({"test_id": test_id, "status": "error", "result": str(e)})
 
     completed = sum(1 for r in results if r["status"] == "completed")
+    total_done = len([f for f in os.listdir(OUTPUT_DIR) if f.endswith('.json')]) if os.path.exists(OUTPUT_DIR) else 0
     print(f"\n{'='*60}")
-    print(f"TOTAL: {completed}/{len(results)} completed ({100*completed/len(results):.1f}%)")
+    print(f"This run: {completed}/{len(pending)} completed")
+    print(f"TOTAL: {total_done}/{len(BENCHMARKS)} ({100*total_done/len(BENCHMARKS):.1f}%)")
     print(f"{'='*60}")
     return results
 

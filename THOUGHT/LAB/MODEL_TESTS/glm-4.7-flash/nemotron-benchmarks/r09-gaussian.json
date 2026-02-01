@@ -1,0 +1,8 @@
+{
+  "test_id": "r09-gaussian",
+  "prompt": "What is the integral of e^(-x^2) from 0 to infinity?",
+  "result": "1.  **Analyze the Request:** The user is asking for the definite integral of $e^{-x^2}$ from 0 to infinity.\n\n2.  **Identify the Mathematical Concept:** This is a classic integral in calculus, specifically Gaussian integration. The function $e^{-x^2}$ is the Gaussian function.\n\n3.  **Recall Known Results:**\n    *   The indefinite integral $\\int e^{-x^2} dx$ cannot be expressed in terms of elementary functions (polynomials, exponentials, trigonometric functions, etc.).\n    *   The definite integral from $-\\infty$ to $\\infty$ is $\\sqrt{\\pi}$.\n    *   The definite integral from $0$ to $\\infty$ is $\\frac{\\sqrt{\\pi}}{2}$.\n\n4.  **Verify the Result:**\n    *   Let $I = \\int_{-\\infty}^{\\infty} e^{-x^2} dx$.\n    *   Square $I$: $I^2 = \\left(\\int_{-\\infty}^{\\infty} e^{-x^2} dx\\right) \\left(\\int_{-\\infty}^{\\infty} e^{-y^2} dy\\right) = \\int_{-\\infty}^{\\infty} \\int_{-\\infty}^{\\infty} e^{-(x^2+y^2)} dx dy$.\n    *   Convert to polar coordinates: $x = r\\cos\\theta$, $y = r\\sin\\theta$, $dx dy = r dr d\\theta$.\n    *   Limits: $r$ goes from 0 to $\\infty$, $\\theta$ goes from 0 to $2\\pi$.\n    *   $I^2 = \\int_{0}^{2\\pi} \\int_{0}^{\\infty} e^{-r^2} r dr d\\theta$.\n    *   Let $u = r^2$, $du = 2r dr \\Rightarrow r dr = \\frac{1}{2} du$.\n    *   $I^2 = \\int_{0}^{2\\pi} \\int_{0}^{\\infty} e^{-u} \\frac{1}{2} du d\\theta = \\frac{1}{2} \\int_{",
+  "status": "completed",
+  "timestamp": "2026-01-31T11:25:29.563416",
+  "model": "zai-org/glm-4.7-flash"
+}
