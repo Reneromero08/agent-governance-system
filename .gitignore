@@ -150,3 +150,4 @@ THOUGHT/LAB/FERAL_RESIDENT/data/
 THOUGHT/LAB/NEO3000/data/
 !THOUGHT/LAB/NEO3000/data/.gitkeep
 THOUGHT/LAB/FERAL_RESIDENT/backups_to_delete/
+CAPABILITY/TESTBENCH/cassette_network/success_metrics_results.json
