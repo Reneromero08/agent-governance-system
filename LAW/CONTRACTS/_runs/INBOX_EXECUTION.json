@@ -1,86 +1,98 @@
 {
   "operation": "INBOX_EXECUTION",
-  "version": "1.0.0",
-  "version_hash": "53658e57694ff5dc",
-  "timestamp": "2026-01-05T20:27:28.192905Z",
+  "version": "1.1.0",
+  "version_hash": "26da561b091a562f",
+  "timestamp": "2026-02-01T20:23:21.472892Z",
   "pre_digest": {
-    "timestamp": "2026-01-05T20:27:28.116298Z",
-    "file_count": 75
+    "timestamp": "2026-02-01T20:23:21.447892Z",
+    "file_count": 79
   },
   "post_digest": {
-    "timestamp": "2026-01-05T20:27:28.190882Z",
-    "file_count": 75
+    "timestamp": "2026-02-01T20:23:21.471892Z",
+    "file_count": 79
   },
   "moves_executed": 70,
   "moves_failed": 0,
   "integrity_verified": true,
+  "digest_semantics": {
+    "content_integrity": {
+      "verdict": "pass",
+      "files_verified": 70,
+      "mismatches": []
+    },
+    "tree_digest": {
+      "verdict": "pass",
+      "expected_files": 70,
+      "missing_files": []
+    }
+  },
   "move_results": [
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-001.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-001.json",
+      "source": "2025-12\\Week-01\\12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-02-45_CI_STABILIZATION_REPORT.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-002.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-002.json",
+      "source": "2025-12\\Week-01\\12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
+      "target": "2025-12/Week-01/12-29-2025-04-49_GITHUB_BRANCH_PROTECTION_GUIDE.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-005.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-005.json",
+      "source": "2025-12\\Week-01\\12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_GIT_PROTOCOL_IMPLEMENTATION_REPORT.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-30-006.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-006.json",
+      "source": "2025-12\\Week-01\\12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SESSION_REPORT_2025_12_28.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-31-001.json",
-      "target": "2025-12/Week-01/TASK-2025-12-31-001.json",
+      "source": "2025-12\\Week-01\\12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_SWARM_REFACTORING_REPORT.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\COMPLETED_TASKS\\TASK-2025-12-31-002.json",
-      "target": "2025-12/Week-01/TASK-2025-12-31-002.json",
+      "source": "2025-12\\Week-01\\12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
+      "target": "2025-12/Week-01/12-29-2025-05-36_TERMINAL_AMPUTATION_CORTEX.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\FAILED_TASKS\\TASK-2025-12-30-003.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-003.json",
+      "source": "2025-12\\Week-01\\12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_CANON_COMPRESSION_ANALYSIS.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\FAILED_TASKS\\TASK-2025-12-30-004.json",
-      "target": "2025-12/Week-01/TASK-2025-12-30-004.json",
+      "source": "2025-12\\Week-01\\12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_CATALYTIC_INTEGRITY_STACK_REPORT.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "agents\\Local Models\\PENDING_TASKS\\TASK-2025-12-30-002.json",
-      "target": "2025-12/Week-01/PENDING_TASKS/TASK-2025-12-30-002.json",
+      "source": "2025-12\\Week-01\\12-29-2025-07-01_F3_STRATEGY.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_F3_STRATEGY.md",
       "success": true,
       "hash_before": null,
       "hash_after": null
     },
     {
-      "source": "reports\\01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
-      "target": "2026-01/Week-01/01-01-2026-11-37_SYSTEM_POTENTIAL_REPORT.md",
+      "source": "2025-12\\Week-01\\12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
+      "target": "2025-12/Week-01/12-29-2025-07-01_SKILL_AND_TOOLS_BUG_REPORT.md",
       "success": true,
       "hash_before": null,
       "hash_after": null

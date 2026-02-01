@@ -32,18 +32,14 @@ def test_guarded_writer_basic():
         writer.write_tmp("LAW/CONTRACTS/_runs/_tmp/test.json", b'{"test": "data"}')
         print("  [OK] Tmp write succeeded")
     except FirewallViolation as e:
-        print(f"  [FAIL] Tmp write failed: {e.error_code}")
-        return False
+        raise AssertionError(f"Tmp write failed: {e.error_code}")
 
     # Test durable write without gate (should fail)
     try:
         writer.write_durable("LAW/CONTRACTS/_runs/test_durable.json", b'{"test": "data"}')
-        print("  [FAIL] Durable write succeeded before gate opening (should have failed)")
-        return False
+        raise AssertionError("Durable write succeeded before gate opening (should have failed)")
     except FirewallViolation as e:
-        if e.error_code != "FIREWALL_DURABLE_WRITE_BEFORE_COMMIT":
-            print(f"  [FAIL] Wrong error code: {e.error_code}")
-            return False
+        assert e.error_code == "FIREWALL_DURABLE_WRITE_BEFORE_COMMIT", f"Wrong error code: {e.error_code}"
         print(f"  [OK] Durable write blocked before gate: {e.error_code}")
 
     # Test durable write with gate open (should succeed)
@@ -52,8 +48,7 @@ def test_guarded_writer_basic():
         writer.write_durable("LAW/CONTRACTS/_runs/test_durable.json", b'{"test": "data"}')
         print("  [OK] Durable write succeeded after gate opening")
     except FirewallViolation as e:
-        print(f"  [FAIL] Durable write failed after gate: {e.error_code}")
-        return False
+        raise AssertionError(f"Durable write failed after gate: {e.error_code}")
 
     # Cleanup
     try:
@@ -61,8 +56,6 @@ def test_guarded_writer_basic():
         (REPO_ROOT / "LAW/CONTRACTS/_runs/test_durable.json").unlink(missing_ok=True)
     except Exception:
         pass
-
-    return True
 
 
 def test_forbidden_write():
@@ -74,26 +67,18 @@ def test_forbidden_write():
     # Test write to CANON (should fail)
     try:
         writer.write_tmp("LAW/CANON/test.json", b'{"test": "data"}')
-        print("  [FAIL] Write to CANON succeeded (should have failed)")
-        return False
+        raise AssertionError("Write to CANON succeeded (should have failed)")
     except FirewallViolation as e:
-        if e.error_code != "FIREWALL_PATH_EXCLUDED":
-            print(f"  [FAIL] Wrong error code for CANON write: {e.error_code}")
-            return False
+        assert e.error_code == "FIREWALL_PATH_EXCLUDED", f"Wrong error code for CANON write: {e.error_code}"
         print(f"  [OK] Write to CANON blocked: {e.error_code}")
 
     # Test write to AGENTS.md (should fail)
     try:
         writer.write_tmp("AGENTS.md", b'{"test": "data"}')
-        print("  [FAIL] Write to AGENTS.md succeeded (should have failed)")
-        return False
+        raise AssertionError("Write to AGENTS.md succeeded (should have failed)")
     except FirewallViolation as e:
-        if e.error_code != "FIREWALL_PATH_EXCLUDED":
-            print(f"  [FAIL] Wrong error code for AGENTS.md write: {e.error_code}")
-            return False
+        assert e.error_code == "FIREWALL_PATH_EXCLUDED", f"Wrong error code for AGENTS.md write: {e.error_code}"
         print(f"  [OK] Write to AGENTS.md blocked: {e.error_code}")
-
-    return True
 
 
 def test_mkdir_enforcement():
@@ -107,18 +92,14 @@ def test_mkdir_enforcement():
         writer.mkdir_tmp("LAW/CONTRACTS/_runs/_tmp/test_dir")
         print("  [OK] Mkdir in tmp succeeded")
     except FirewallViolation as e:
-        print(f"  [FAIL] Mkdir in tmp failed: {e.error_code}")
-        return False
+        raise AssertionError(f"Mkdir in tmp failed: {e.error_code}")
 
     # Test mkdir in forbidden domain (should fail)
     try:
         writer.mkdir_tmp("LAW/CANON/test_dir")
-        print("  [FAIL] Mkdir in CANON succeeded (should have failed)")
-        return False
+        raise AssertionError("Mkdir in CANON succeeded (should have failed)")
     except FirewallViolation as e:
-        if e.error_code != "FIREWALL_PATH_EXCLUDED":
-            print(f"  [FAIL] Wrong error code for CANON mkdir: {e.error_code}")
-            return False
+        assert e.error_code == "FIREWALL_PATH_EXCLUDED", f"Wrong error code for CANON mkdir: {e.error_code}"
         print(f"  [OK] Mkdir in CANON blocked: {e.error_code}")
 
     # Cleanup
@@ -126,8 +107,6 @@ def test_mkdir_enforcement():
         (REPO_ROOT / "LAW/CONTRACTS/_runs/_tmp/test_dir").rmdir()
     except Exception:
         pass
-
-    return True
 
 
 def test_atomic_writes_module():
@@ -145,25 +124,19 @@ def test_atomic_writes_module():
         print("  [OK] Atomic canonical write succeeded")
 
         # Verify file exists and is valid JSON
-        if test_path.exists():
-            import json
-            data = json.loads(test_path.read_text())
-            if data == {"test": "data"}:
-                print("  [OK] Atomic write content verified")
-            else:
-                print(f"  [FAIL] Atomic write content mismatch: {data}")
-                return False
+        assert test_path.exists(), "Atomic write file not created"
 
-            test_path.unlink(missing_ok=True)
-        else:
-            print("  [FAIL] Atomic write file not created")
-            return False
+        import json
+        data = json.loads(test_path.read_text())
+        assert data == {"test": "data"}, f"Atomic write content mismatch: {data}"
+        print("  [OK] Atomic write content verified")
 
+        test_path.unlink(missing_ok=True)
+
+    except AssertionError:
+        raise
     except Exception as e:
-        print(f"  [FAIL] Atomic write failed: {e}")
-        return False
-
-    return True
+        raise AssertionError(f"Atomic write failed: {e}")
 
 
 def main():
@@ -172,23 +145,33 @@ def main():
     print("RUNTIME WRITE INTERCEPTION TESTS")
     print("=" * 60)
 
-    results = []
+    tests = [
+        ("GuardedWriter basic", test_guarded_writer_basic),
+        ("Forbidden write blocking", test_forbidden_write),
+        ("Mkdir enforcement", test_mkdir_enforcement),
+        ("AtomicGuardedWrites module", test_atomic_writes_module),
+    ]
 
-    results.append(("GuardedWriter basic", test_guarded_writer_basic()))
-    results.append(("Forbidden write blocking", test_forbidden_write()))
-    results.append(("Mkdir enforcement", test_mkdir_enforcement()))
-    results.append(("AtomicGuardedWrites module", test_atomic_writes_module()))
+    results = []
+    for name, test_func in tests:
+        try:
+            test_func()
+            results.append((name, True, None))
+        except AssertionError as e:
+            results.append((name, False, str(e)))
 
     print("\n" + "=" * 60)
     print("TEST RESULTS")
     print("=" * 60)
 
     all_passed = True
-    for name, passed in results:
+    for name, passed, error in results:
         status = "[OK] PASS" if passed else "[FAIL] FAIL"
         print(f"{status}: {name}")
         if not passed:
             all_passed = False
+            if error:
+                print(f"       Error: {error}")
 
     print("=" * 60)
     if all_passed:

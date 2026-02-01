@@ -303,3 +303,9 @@ def pytest_configure(config):
     config.addinivalue_line(
         "markers", "coverage: marks tests that measure corpus reachability"
     )
+    config.addinivalue_line(
+        "markers", "benchmark: marks tests as performance benchmarks"
+    )
+    config.addinivalue_line(
+        "markers", "cross_model: marks tests for cross-model retrieval"
+    )

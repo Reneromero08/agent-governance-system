@@ -108,13 +108,11 @@ def test_pruned_backup_preserved_on_rename_failure():
         assert not staging_dir.exists(), "Staging directory should be cleaned up"
         assert (test_pack_dir / "PRUNED").exists(), "PRUNED/ should exist after restore"
 
-        print("✓ Test passed: PRUNED backup preserved and restored on rename failure")
+        print("[PASS] Test passed: PRUNED backup preserved and restored on rename failure")
         print("  - Backup (PRUNED._old) created from existing PRUNED/")
         print("  - On failure, backup restored back to PRUNED/")
         print("  - Staging directory cleaned up")
         print("  - Last-known-good PRUNED/ preserved")
-
-    return 0
 
 
 def test_pruned_atomic_fail_closed():
@@ -172,11 +170,9 @@ def test_pruned_atomic_fail_closed():
         assert not staging_dir.exists(), "Staging directory should be cleaned up after failure"
         assert valid_pruned_dir.exists(), "Valid PRUNED/ should remain untouched on failure"
 
-        print("✓ Test passed: PRUNED failure leaves no partial output")
+        print("[PASS] Test passed: PRUNED failure leaves no partial output")
         print("  - Staging directory cleaned up")
         print("  - Existing PRUNED/ left untouched")
-
-    return 0
 
 
 def test_pruned_manifest_includes_hashes():
@@ -255,12 +251,10 @@ def test_pruned_manifest_includes_hashes():
         assert contract_entry["hash"] == actual_hash, \
             "Manifest hash must match actual file hash"
 
-        print("✓ Test passed: PRUNED manifest includes sha256 hashes and byte sizes")
+        print("[PASS] Test passed: PRUNED manifest includes sha256 hashes and byte sizes")
         print(f"  - Entries: {len(entries)}")
         print(f"  - CONTRACT.md hash: {contract_entry['hash']}")
         print(f"  - CONTRACT.md size: {contract_entry['size']} bytes")
-
-    return 0
 
 
 def test_pruned_manifest_determinism():
@@ -321,10 +315,8 @@ def test_pruned_manifest_determinism():
         # Verify byte-for-byte identical
         assert json1 == json2, "Manifests must be identical across runs"
 
-        print("✓ Test passed: PRUNED manifest is deterministic")
+        print("[PASS] Test passed: PRUNED manifest is deterministic")
         print("  - Both runs produced identical manifest")
-
-    return 0
 
 
 def main():

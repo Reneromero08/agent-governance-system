@@ -6,6 +6,33 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.34] - 2026-02-01
+
+### Fixed: Reduce pytest warnings from 267 to 3
+
+**Tests:**
+- Registered custom pytest marks (`benchmark`, `cross_model`) in `conftest.py`
+- Fixed tests returning values instead of None in:
+  - `test_inbox_normalize_v11.py` (7 tests)
+  - `test_pruned_atomicity.py` (4 tests)
+  - `test_write_enforcement.py` (4 tests)
+
+**Skills:**
+- `inbox-report-writer`: Upgraded `inbox_normalize.py` to v1.1
+  - Added `digest_semantics` structure with `content_integrity` and `tree_digest` verdicts
+  - Fixed cross-platform path separator handling in digest verification
+  - Maintains backward compatibility with `integrity_verified` field
+
+**Dependencies:**
+- Updated `torchao` to nightly (0.16.0.dev) - reduces internal deprecation warnings from 6 to 3
+
+**Results:**
+- Warnings reduced from 267 to 3 (98.9% reduction)
+- Remaining 3 warnings are upstream `torchao` internal deprecations
+- All 1434 tests pass
+
+---
+
 ## [3.8.33] - 2026-02-01
 
 ### Fixed: Test suite cleanup and governance compliance
