@@ -14,7 +14,7 @@ from typing import Optional, Dict, List, Tuple
 # Configuration
 INBOX_ROOT = Path("INBOX")
 RECEIPTS_DIR = Path("LAW/CONTRACTS/_runs")
-VERSION = "1.0.0"
+VERSION = "1.1.0"
 VERSION_HASH = hashlib.sha256(f"inbox_normalize_v{VERSION}".encode()).hexdigest()[:16]
 
 # Files to exclude from normalization (no date pattern, system files)
@@ -272,22 +272,58 @@ def execute_moves(files: List[Dict]) -> Tuple[bool, List[Dict]]:
     return len(errors) == 0, results + [{"error": e} for e in errors]
 
 def generate_execution_receipt(files: List[Dict], pre_digest: Dict, post_digest: Dict, move_results: List[Dict]) -> Dict:
-    """Generate the execution receipt."""
+    """Generate the execution receipt with v1.1 digest semantics."""
     successful_moves = [r for r in move_results if r.get("success")]
     failed_moves = [r for r in move_results if r.get("error")]
-    
-    # Verify content integrity
-    integrity_verified = True
+
+    # Verify content integrity - check that file hashes match before/after move
+    # Normalize path separators for cross-platform compatibility
+    pre_files_normalized = {k.replace("\\", "/"): v for k, v in pre_digest["files"].items()}
+    post_files_normalized = {k.replace("\\", "/"): v for k, v in post_digest["files"].items()}
+
+    content_mismatches = []
     for result in successful_moves:
-        source = result["source"]
-        target = result["target"]
-        if source in pre_digest["files"] and target in post_digest["files"]:
-            pre_hash = pre_digest["files"][source]["hash"]
-            post_hash = post_digest["files"][target]["hash"]
+        source = result["source"].replace("\\", "/")
+        target = result["target"].replace("\\", "/")
+        if source in pre_files_normalized and target in post_files_normalized:
+            pre_hash = pre_files_normalized[source]["hash"]
+            post_hash = post_files_normalized[target]["hash"]
             if pre_hash != post_hash:
-                integrity_verified = False
-                break
-    
+                content_mismatches.append({
+                    "source": source,
+                    "target": target,
+                    "pre_hash": pre_hash,
+                    "post_hash": post_hash
+                })
+
+    content_integrity_passed = len(content_mismatches) == 0
+
+    # Verify tree digest - check that all expected files exist in post state
+    missing_targets = []
+    for result in successful_moves:
+        target = result["target"].replace("\\", "/")
+        if target not in post_files_normalized:
+            missing_targets.append(target)
+
+    tree_digest_passed = len(missing_targets) == 0
+
+    # Build digest_semantics structure (v1.1 feature)
+    digest_semantics = {
+        "content_integrity": {
+            "verdict": "pass" if content_integrity_passed else "fail",
+            "files_verified": len(successful_moves),
+            "mismatches": content_mismatches
+        },
+        "tree_digest": {
+            "verdict": "pass" if tree_digest_passed else "fail",
+            "expected_files": len(successful_moves),
+            "missing_files": missing_targets
+        }
+    }
+
+    # Legacy field for backward compatibility
+    integrity_verified = content_integrity_passed and tree_digest_passed
+
     return {
         "operation": "INBOX_EXECUTION",
         "version": VERSION,
@@ -304,6 +340,7 @@ def generate_execution_receipt(files: List[Dict], pre_digest: Dict, post_digest:
         "moves_executed": len(successful_moves),
         "moves_failed": len(failed_moves),
         "integrity_verified": integrity_verified,
+        "digest_semantics": digest_semantics,
         "move_results": successful_moves[:10],  # First 10 for brevity
         "errors": failed_moves
     }

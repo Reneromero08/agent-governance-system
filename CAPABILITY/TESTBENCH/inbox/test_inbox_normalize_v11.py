@@ -54,81 +54,81 @@ def compute_target_folder(timestamp: datetime) -> str:
 def test_iso_week_edge_cases():
     """Test ISO week calculation for edge cases."""
     print("Testing ISO week edge cases...")
-    
+
     # Test cases: (date, expected_week, note)
     test_cases = [
         # Late December dates that belong to Week-01 of next year
         (datetime(2025, 12, 29), 1, "Monday - first day of ISO Week-01, 2026"),
         (datetime(2025, 12, 30), 1, "Tuesday - ISO Week-01, 2026"),
         (datetime(2025, 12, 31), 1, "Wednesday - ISO Week-01, 2026"),
-        
+
         # Mid December dates in Week-52 of 2025
         (datetime(2025, 12, 23), 52, "Tuesday - ISO Week-52, 2025"),
         (datetime(2025, 12, 28), 52, "Sunday - ISO Week-52, 2025"),
-        
+
         # January dates in Week-01 of 2026
         (datetime(2026, 1, 1), 1, "Thursday - ISO Week-01, 2026"),
         (datetime(2026, 1, 5), 2, "Monday - ISO Week-02, 2026"),
     ]
-    
-    all_passed = True
+
+    failures = []
     for dt, expected_week, note in test_cases:
         actual_week = get_iso_week(dt)
         status = "[PASS]" if actual_week == expected_week else "[FAIL]"
-        print(f"  {status} {dt.strftime('%Y-%m-%d')} → Week-{actual_week:02d} (expected: {expected_week:02d}) - {note}")
+        print(f"  {status} {dt.strftime('%Y-%m-%d')} -> Week-{actual_week:02d} (expected: {expected_week:02d}) - {note}")
         if actual_week != expected_week:
-            all_passed = False
-    
-    return all_passed
+            failures.append(f"{dt.strftime('%Y-%m-%d')}: got {actual_week}, expected {expected_week}")
+
+    assert not failures, f"ISO week failures: {failures}"
 
 def test_timestamp_parsing_determinism():
     """Test that timestamp parsing is deterministic."""
     print("\nTesting timestamp parsing determinism...")
-    
+
     # Test filenames
     test_filenames = [
         ("12-28-2025-12-00_AGENT_SAFETY_REPORT.md", "2025-12-28T12:00:00"),
         ("TASK-2025-12-30-001.json", "2025-12-30T00:00:00"),
         ("12-29-2025-02-45_CI_STABILIZATION_REPORT.md", "2025-12-29T02:45:00"),
     ]
-    
-    all_passed = True
+
+    failures = []
     for filename, expected in test_filenames:
         result = parse_filename_date(filename)
         if result is None:
-            print(f"  ❌ {filename} → None (failed to parse)")
-            all_passed = False
+            print(f"  [FAIL] {filename} -> None (failed to parse)")
+            failures.append(f"{filename}: failed to parse")
         else:
             actual = result.isoformat()
             status = "[PASS]" if actual == expected else "[FAIL]"
-            print(f"  {status} {filename} → {actual} (expected: {expected})")
+            print(f"  {status} {filename} -> {actual} (expected: {expected})")
             if actual != expected:
-                all_passed = False
-    
-    return all_passed
+                failures.append(f"{filename}: got {actual}, expected {expected}")
+
+    assert not failures, f"Timestamp parsing failures: {failures}"
 
 def test_schema_computation():
     """Test that schema computation produces correct paths."""
     print("\nTesting schema computation...")
-    
+
     # Test cases: (date, expected_folder)
     test_cases = [
         (datetime(2025, 12, 29), "2025-12/Week-01"),  # Edge case!
         (datetime(2025, 12, 28), "2025-12/Week-52"),
         (datetime(2026, 1, 1), "2026-01/Week-01"),
     ]
-    
-    all_passed = True
+
+    failures = []
     for dt, expected_folder in test_cases:
         actual_folder = compute_target_folder(dt)
-        
+
         status = "[PASS]" if actual_folder == expected_folder else "[FAIL]"
-        print(f"  {status} {dt.strftime('%Y-%m-%d')} → {actual_folder}")
+        print(f"  {status} {dt.strftime('%Y-%m-%d')} -> {actual_folder}")
         if actual_folder != expected_folder:
-            all_passed = False
             print(f"      Expected: {expected_folder}")
-    
-    return all_passed
+            failures.append(f"{dt.strftime('%Y-%m-%d')}: got {actual_folder}, expected {expected_folder}")
+
+    assert not failures, f"Schema computation failures: {failures}"
 
 def test_timestamp_policy_documentation():
     """Verify timestamp policy is explicitly documented in the script."""
@@ -143,15 +143,14 @@ def test_timestamp_policy_documentation():
         ("Pattern priority documented", "Pattern 1:" in content or "Pattern 2:" in content),
     ]
 
-    all_passed = True
+    failures = []
     for check_name, passed in checks:
-        status = "✅" if passed else "❌"
+        status = "[PASS]" if passed else "[FAIL]"
         print(f"  {status} {check_name}")
         if not passed:
-            all_passed = False
+            failures.append(check_name)
 
-    assert all_passed, "Timestamp policy documentation checks failed"
-    return all_passed
+    assert not failures, f"Timestamp policy documentation checks failed: {failures}"
 
 def test_schema_documentation():
     """Verify schema is explicitly documented."""
@@ -166,30 +165,30 @@ def test_schema_documentation():
         ("Folder structure documented", "YYYY-MM/Week-" in content or "Week-XX" in content),
     ]
 
-    all_passed = True
+    failures = []
     for check_name, passed in checks:
-        status = "✅" if passed else "❌"
+        status = "[PASS]" if passed else "[FAIL]"
         print(f"  {status} {check_name}")
         if not passed:
-            all_passed = False
+            failures.append(check_name)
 
-    assert all_passed, "Schema documentation checks failed"
-    return all_passed
+    assert not failures, f"Schema documentation checks failed: {failures}"
 
 def test_digest_semantics_receipt():
     """Test that execution receipt distinguishes content vs tree digest."""
+    import pytest
     print("\nTesting digest semantics in receipt...")
-    
+
     # Check if INBOX_EXECUTION.json exists and has the new structure
     receipt_path = Path("LAW/CONTRACTS/_runs/INBOX_EXECUTION.json")
-    
+
     if not receipt_path.exists():
-        print("  ⚠️ INBOX_EXECUTION.json not found (run normalization first)")
-        return None  # Skip, not a failure
-    
+        print("  [SKIP] INBOX_EXECUTION.json not found (run normalization first)")
+        pytest.skip("INBOX_EXECUTION.json not found")
+
     with open(receipt_path, 'r') as f:
         receipt = json.load(f)
-    
+
     checks = [
         ("digest_semantics exists", "digest_semantics" in receipt),
         ("content_integrity exists", "content_integrity" in receipt.get("digest_semantics", {})),
@@ -197,15 +196,15 @@ def test_digest_semantics_receipt():
         ("verdict for content_integrity", "verdict" in receipt.get("digest_semantics", {}).get("content_integrity", {})),
         ("verdict for tree_digest", "verdict" in receipt.get("digest_semantics", {}).get("tree_digest", {})),
     ]
-    
-    all_passed = True
+
+    failures = []
     for check_name, passed in checks:
-        status = "✅" if passed else "❌"
+        status = "[PASS]" if passed else "[FAIL]"
         print(f"  {status} {check_name}")
         if not passed:
-            all_passed = False
-    
-    return all_passed
+            failures.append(check_name)
+
+    assert not failures, f"Digest semantics checks failed: {failures}"
 
 def test_version_updated():
     """Verify version exists and is valid."""
@@ -215,59 +214,68 @@ def test_version_updated():
         content = f.read()
 
     # Check for VERSION variable with valid semantic version format
-    import re
     version_pattern = r'VERSION\s*=\s*["\'](\d+\.\d+\.\d+)["\']'
     match = re.search(version_pattern, content)
 
     if match:
         version = match.group(1)
-        print(f"  ✅ VERSION = \"{version}\" found")
-        all_passed = True
+        print(f"  [PASS] VERSION = \"{version}\" found")
     else:
-        print(f"  ❌ VERSION not found or invalid format")
-        all_passed = False
+        print(f"  [FAIL] VERSION not found or invalid format")
 
-    return all_passed
+    assert match is not None, "VERSION not found or invalid format"
 
 def main():
     """Run all tests."""
+    import pytest
     print("=" * 60)
     print("INBOX Normalization v1.1 Test Suite")
     print("=" * 60)
-    
+
+    tests = [
+        ("ISO Week Edge Cases", test_iso_week_edge_cases),
+        ("Timestamp Parsing Determinism", test_timestamp_parsing_determinism),
+        ("Schema Computation", test_schema_computation),
+        ("Timestamp Policy Documentation", test_timestamp_policy_documentation),
+        ("Schema Documentation", test_schema_documentation),
+        ("Digest Semantics Receipt", test_digest_semantics_receipt),
+        ("Version Updated", test_version_updated),
+    ]
+
     results = []
-    
-    # Run tests
-    results.append(("ISO Week Edge Cases", test_iso_week_edge_cases()))
-    results.append(("Timestamp Parsing Determinism", test_timestamp_parsing_determinism()))
-    results.append(("Schema Computation", test_schema_computation()))
-    results.append(("Timestamp Policy Documentation", test_timestamp_policy_documentation()))
-    results.append(("Schema Documentation", test_schema_documentation()))
-    results.append(("Digest Semantics Receipt", test_digest_semantics_receipt()))
-    results.append(("Version Updated", test_version_updated()))
-    
+    for name, test_func in tests:
+        try:
+            test_func()
+            results.append((name, "passed", None))
+        except pytest.skip.Exception as e:
+            results.append((name, "skipped", str(e)))
+        except AssertionError as e:
+            results.append((name, "failed", str(e)))
+
     # Summary
     print("\n" + "=" * 60)
     print("Test Summary")
     print("=" * 60)
-    
+
     passed = 0
     failed = 0
     skipped = 0
-    
-    for name, result in results:
-        if result is None:
-            print(f"  ⏭️ {name}: SKIPPED")
+
+    for name, status, error in results:
+        if status == "skipped":
+            print(f"  [SKIP] {name}: SKIPPED")
             skipped += 1
-        elif result:
-            print(f"  ✅ {name}: PASSED")
+        elif status == "passed":
+            print(f"  [PASS] {name}: PASSED")
             passed += 1
         else:
-            print(f"  ❌ {name}: FAILED")
+            print(f"  [FAIL] {name}: FAILED")
+            if error:
+                print(f"         Error: {error}")
             failed += 1
-    
+
     print(f"\nTotal: {passed} passed, {failed} failed, {skipped} skipped")
-    
+
     return 0 if failed == 0 else 1
 
 if __name__ == "__main__":
