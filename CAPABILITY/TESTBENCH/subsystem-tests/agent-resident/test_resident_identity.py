@@ -13,7 +13,7 @@ from pathlib import Path
 from datetime import datetime, timezone
 
 # Add project paths
-PROJECT_ROOT = Path(__file__).resolve().parents[3]
+PROJECT_ROOT = Path(__file__).resolve().parents[4]
 sys.path.insert(0, str(PROJECT_ROOT / "NAVIGATION" / "CORTEX" / "network"))
 
 from memory_cassette import MemoryCassette

@@ -1,5 +1,15 @@
 #!/usr/bin/env python3
 """
+DEPRECATED - Archived 2026-02-01
+
+These tests are deprecated because they test adversarial edge cases that no
+real agent would ever query (SQL injection, XSS payloads, "How do I restore
+my iPhone?", etc.). They document embedding model vocabulary overlap limitations
+but are not relevant to actual system usage.
+
+---
+Original docstring:
+
 Negative Control Tests
 
 Tests that verify the system correctly REJECTS semantically unrelated queries.

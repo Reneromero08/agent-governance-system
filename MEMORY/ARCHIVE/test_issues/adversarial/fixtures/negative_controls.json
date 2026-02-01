@@ -1,4 +1,5 @@
 {
+  "DEPRECATED": "2026-02-01 - Archived: tests adversarial edge cases irrelevant to real usage",
   "version": "1.1.0",
   "description": "Negative control queries that must NOT match governance content",
   "created_at": "2026-01-16",

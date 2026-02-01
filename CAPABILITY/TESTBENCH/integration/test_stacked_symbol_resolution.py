@@ -32,7 +32,7 @@ class TestDomainPathExtraction:
         assert paths == ["LAW/CANON"]
 
 
-@pytest.mark.skipif(not SYSTEM1_DB.exists(), reason="system1.db not available")
+@pytest.mark.skipif(not SYSTEM1_DB.exists(), reason="system1.db deprecated - FTS via cassette network")
 class TestL1L2FTSResolution:
     def test_fts_stacked_resolution(self):
         result = stacked_lookup("法", query="verification", limit=5)
@@ -41,7 +41,7 @@ class TestL1L2FTSResolution:
         assert result["entry"]["chunk_count"] > 0
 
 
-@pytest.mark.skipif(not CANON_INDEX_DB.exists(), reason="canon_index.db not available")
+@pytest.mark.skipif(not CANON_INDEX_DB.exists(), reason="canon_index.db deprecated - semantic via cassette network")
 class TestL1L3SemanticResolution:
     def test_semantic_stacked_resolution(self):
         result = stacked_lookup("法", semantic="verification protocols", limit=5)
