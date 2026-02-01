@@ -1,0 +1,216 @@
+[critic] Running governance checks...
+[critic] All checks passed
+[contracts/runner] Found 9 cassette databases
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\canon-sync.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\canon-validators.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\commit-ceremony.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\context-edit-authority.
+Validation passed
+
+[contracts/runner] OK (0.08s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\deletion-authorization.
+Validation passed
+
+[contracts/runner] OK (0.07s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\log-output-roots.
+Validation passed
+
+[contracts/runner] OK (0.08s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\no-raw-paths.
+Validation passed
+
+[contracts/runner] OK (0.08s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\output-root-enforcement.
+Validation passed
+
+[contracts/runner] OK (0.09s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\policy-proof-receipts.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\preflight.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\privacy-boundary.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running contract fixture in D:\CCC 2.0\AI\agent-governance-system\LAW\CONTRACTS\fixtures\governance\token-grammar.
+Validation passed
+
+[contracts/runner] OK (0.06s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\ant-worker\fixtures\basic.
+[ant-worker] Task executed successfully
+Validation passed
+
+[contracts/runner] OK (exec=0.30s, validate=0.07s, total=0.36s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\basic: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\agents\workspace-isolation\fixtures\gemini_antipattern: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_allow.
+Validation passed
+
+[contracts/runner] OK (exec=0.88s, validate=0.06s, total=0.95s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\artifact_only_outside_block.
+Validation passed
+
+[contracts/runner] OK (exec=0.77s, validate=0.06s, total=0.83s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\read_only_write_block.
+Validation passed
+
+[contracts/runner] OK (exec=0.78s, validate=0.07s, total=0.85s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\admission-control\fixtures\repo_write_flag_required.
+Validation passed
+
+[contracts/runner] OK (exec=0.74s, validate=0.06s, total=0.80s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\adr-create\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.07s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\canon-governance-check\fixtures\basic.
+
+[contracts/runner] OK (exec=0.25s, validate=0.07s, total=0.32s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\canon-migration\fixtures\basic.
+Migration skill completed
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.07s, total=0.32s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\ci-trigger-policy\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.07s, total=0.34s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\commit-ceremony\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.06s, total=0.32s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\critic-run\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.70s, validate=0.06s, total=0.76s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\artifact-only.
+{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.35s, validate=0.06s, total=0.41s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-allow.
+{"verdict":"ALLOW","reasons":[],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.34s, validate=0.09s, total=0.43s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\intent-guard\fixtures\repo-write-block.
+{"verdict":"BLOCK","reasons":["REPO_WRITE_FLAG_REQUIRED"],"normalized_paths":{"read":["LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/PIPELINE.json","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline/steps/step1/JOBSPEC.json"],"write":["LAW/CONTRACTS/_runs","LAW/CONTRACTS/_runs/_pipelines/intent-pipeline"]},"policy_version":"1"}
+Validation passed
+
+[contracts/runner] OK (exec=0.37s, validate=0.08s, total=0.45s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\invariant-freeze\fixtures\basic.
+All 15 invariants present
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.07s, total=0.34s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\master-override\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.06s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\master-override\fixtures\unauthorized-read.
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.07s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\repo-contract-alignment\fixtures\basic.
+repo-contract-alignment completed
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.08s, total=0.36s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\governance\research-cache\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.09s, total=0.35s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.45s, validate=0.08s, total=0.53s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\inbox\inbox-report-writer\fixtures\write_report: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\doc-merge-batch-skill\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.59s, validate=0.09s, total=0.68s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\doc-update\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.28s, validate=0.08s, total=0.36s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\example-echo\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.08s, total=0.35s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\file-analyzer\fixtures\basic.
+[skill] File analyzer skill executed successfully
+Validation passed
+
+[contracts/runner] OK (exec=0.25s, validate=0.06s, total=0.31s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pack-validate\fixtures\basic.
+Pack validation completed
+Validation passed
+
+[contracts/runner] OK (exec=0.26s, validate=0.06s, total=0.32s)
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\basic: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\multi-page: no expected.json
+Skipping D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\pdf-to-markdown\fixtures\tables: no expected.json
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\powershell-bridge\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.24s, validate=0.08s, total=0.32s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\prompt-runner\fixtures.
+Validation passed
+
+[contracts/runner] OK (exec=0.25s, validate=0.06s, total=0.31s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\skill-creator\fixtures\basic.
+[skill] Skill creator skill executed successfully
+Validation passed
+
+[contracts/runner] OK (exec=0.27s, validate=0.06s, total=0.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\ags_status.
+Validation passed
+
+[contracts/runner] OK (exec=1.26s, validate=0.06s, total=1.33s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=2.29s, validate=0.13s, total=2.42s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\terminal-bridge\fixtures\setup_info.
+Validation passed
+
+[contracts/runner] OK (exec=0.40s, validate=0.09s, total=0.50s)
+Running skill fixture in D:\CCC 2.0\AI\agent-governance-system\CAPABILITY\SKILLS\utilities\test-primitives\fixtures\basic.
+Validation passed
+
+[contracts/runner] OK (exec=0.43s, validate=0.10s, total=0.53s)
+All fixtures passed
+bringing up nodes...
+bringing up nodes...
+
+........................................................................ [  4%]
+........................................................................ [  9%]
+........................................................................ [ 14%]
+........................................................................ [ 19%]
+........................................................................ [ 24%]
+........................................................................ [ 29%]
+........................................................................ [ 34%]
+........................................................................ [ 39%]
+........................................................................ [ 44%]
+...........................................................s..........s. [ 49%]
+.....s..s.......s..s.s.s.s..s.s..s..............s.......s............s.. [ 54%]
+s....................................................................... [ 59%]
+........................................................................ [ 64%]
+........................................................................ [ 69%]
+...................................s.................................... [ 74%]
+........................................................................ [ 78%]
+................................ss...................................... [ 83%]
+....................................F...........

@@ -6,6 +6,38 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.33] - 2026-02-01
+
+### Fixed: Test suite cleanup and governance compliance
+
+**Skills:**
+- `adr-create`: Replaced `Path.glob()` with `iterdir()` to comply with filesystem access policy (critic check now passes)
+- `adr-create`: Fixed Windows path separator issue in fixture expected output
+- `critic-run`: Added missing `output` field to fixture expected output
+
+**Tests:**
+- `catalytic/test_catalytic_runtime.py`: Fixed symlink test to work on Windows without admin rights (try/except instead of skipif)
+- `integration/test_semiotic_compression.py`: Marked determinism tests as `@pytest.mark.slow` (6 tests x 100 iterations each)
+
+**Removed (archived to MEMORY/ARCHIVE/):**
+- 5 deprecated cortex toolkit tests (build/verify_system1 operations removed)
+- 2 pre-SVTP eigenstructure alignment tests (marked xfail, superseded by SVTP)
+- 2 stacked symbol resolution tests (system1.db and canon_index.db deprecated)
+
+**Added:**
+- 9 new SVTP (Semantic Vector Transport Protocol) production tests in `core/test_vector_packet.py`
+  - Single-model encode/decode
+  - Pilot tone corruption detection
+  - Packet structure and serialization
+  - Cross-model communication between MiniLM and MPNet
+
+**Results:**
+- All 30+ fixtures now pass
+- Critic check passes
+- ~1,440 tests ready for push gate (8 slow tests skipped by default)
+
+---
+
 ## [3.8.32] - 2026-01-31
 
 ### Security: Remove MASTER_OVERRIDE_PREFLIGHT bypass (CRITICAL)

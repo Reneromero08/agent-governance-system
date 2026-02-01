@@ -79,16 +79,25 @@ class TestCatalyticSnapshot:
         # Should use forward slashes
         assert "sub/nested/deep.txt" in files
 
-    @pytest.mark.skipif(sys.platform == "win32", reason="Symlinks require admin on Windows")
     def test_capture_rejects_symlinks(self, tmp_path: Path) -> None:
         """Symlinks in domain should raise CatalyticError."""
+        import os
+        
         domain = tmp_path / "domain"
         domain.mkdir()
         real_file = domain / "real.txt"
         real_file.write_text("real content")
         symlink = domain / "link.txt"
-        symlink.symlink_to(real_file)
-
+        
+        # Try to create symlink - may fail on Windows without admin rights
+        # or without Developer Mode enabled
+        try:
+            symlink.symlink_to(real_file)
+        except (OSError, NotImplementedError) as e:
+            # On Windows, symlinks may require admin rights or Developer Mode
+            # Skip this test if we can't create the test fixture
+            pytest.skip(f"Cannot create symlink for testing: {e}")
+        
         snapshot = CatalyticSnapshot(domain)
 
         with pytest.raises(CatalyticError) as exc_info:

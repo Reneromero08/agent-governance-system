@@ -152,57 +152,13 @@ class TestAlphaUniversality:
     NOTE: Alpha calculation requires a corpus larger than embedding dimension
     for meaningful eigenspectrum. With 20 samples in 384-d space, we get
     rank-deficient covariance. Q21 validates alpha ~ 0.5 with proper corpora.
-    These tests document the calculation but may not achieve alpha ~ 0.5.
+    
+    DEPRECATED TEST REMOVED: test_alpha_range was archived to
+    MEMORY/ARCHIVE/deprecated_tests/test_pre_svtp_alignment_deprecated.py
+    as it is superseded by SVTP (Semantic Vector Transport Protocol).
+    
+    See: CAPABILITY/PRIMITIVES/vector_packet.py for production SVTP implementation.
     """
-
-    @pytest.mark.xfail(reason="Requires corpus size >> embedding dimension for valid alpha. Q21 validates with larger corpora.")
-    def test_alpha_range(self, model_pairs_fixture, sentence_transformer):
-        """All models should have alpha in [0.4, 0.6]."""
-        results = []
-
-        for model_info in model_pairs_fixture["individual_models"]:
-            model_name = model_info["name"]
-
-            try:
-                model = sentence_transformer(model_name)
-                embeddings = model.encode(TEST_CORPUS, normalize_embeddings=True)
-                embeddings = np.array(embeddings)
-
-                alpha = compute_eigenspectrum_alpha(embeddings)
-
-                results.append({
-                    "model": model_name,
-                    "alpha": alpha,
-                    "expected": model_info["expected_alpha"],
-                    "in_range": 0.4 <= alpha <= 0.6
-                })
-            except Exception as e:
-                results.append({
-                    "model": model_name,
-                    "error": str(e)
-                })
-
-        # Print results
-        print("\n=== Alpha Universality ===")
-        for r in results:
-            if "error" in r:
-                print(f"  {r['model']}: ERROR - {r['error']}")
-            else:
-                status = "PASS" if r["in_range"] else "FAIL"
-                print(f"  {r['model']}: alpha={r['alpha']:.4f} [{status}]")
-
-        # Check all passed
-        passed = [r for r in results if r.get("in_range", False)]
-        failed = [r for r in results if "in_range" in r and not r["in_range"]]
-        errors = [r for r in results if "error" in r]
-
-        assert len(failed) == 0, (
-            f"Alpha outside [0.4, 0.6] for: "
-            + ", ".join(f"{r['model']}={r['alpha']:.4f}" for r in failed)
-        )
-
-        if errors:
-            print(f"  Warning: {len(errors)} models had errors")
 
     def test_alpha_consistency_across_corpus_sizes(self, sentence_transformer):
         """Alpha should be stable regardless of corpus size."""

@@ -331,44 +331,18 @@ class TestTransformStability:
 
     NOTE: With small training sets (15 examples), Procrustes alignment
     overfits. Cross-model transforms require larger corpora for stability.
+    
+    DEPRECATED TEST REMOVED: test_transform_on_held_out_data was archived to
+    MEMORY/ARCHIVE/deprecated_tests/test_pre_svtp_alignment_deprecated.py
+    as it is superseded by SVTP (Semantic Vector Transport Protocol).
+    
+    SVTP uses 128+ canonical anchors instead of 15 training examples,
+    providing stable cross-model communication.
+    
+    See: CAPABILITY/PRIMITIVES/vector_packet.py for production SVTP implementation.
     """
 
-    @pytest.mark.xfail(reason="15 training examples insufficient for stable cross-model transform. Needs larger corpus.")
-    def test_transform_on_held_out_data(self, sentence_transformer, sklearn_available):
-        """Transform learned on training data should work on held-out data."""
-        # Split corpus
-        train_corpus = TEST_CORPUS[:15]
-        test_corpus = TEST_CORPUS[15:]
-
-        model_a = sentence_transformer("all-MiniLM-L6-v2")
-        model_b = sentence_transformer("paraphrase-MiniLM-L6-v2")
-
-        # Train embeddings
-        train_a = np.array(model_a.encode(train_corpus, normalize_embeddings=True))
-        train_b = np.array(model_b.encode(train_corpus, normalize_embeddings=True))
-
-        # Learn transform on training data
-        R, train_error = procrustes_alignment(train_a, train_b)
-
-        # Test embeddings
-        test_a = np.array(model_a.encode(test_corpus, normalize_embeddings=True))
-        test_b = np.array(model_b.encode(test_corpus, normalize_embeddings=True))
-
-        # Apply transform to test data
-        test_a_transformed = (test_a - train_a.mean(0)) @ R
-        test_b_centered = test_b - train_b.mean(0)
-
-        test_error = np.mean(np.linalg.norm(test_a_transformed - test_b_centered, axis=1))
-
-        print("\n=== Transform Stability ===")
-        print(f"Train error: {train_error:.4f}")
-        print(f"Test error: {test_error:.4f}")
-        print(f"Error increase: {(test_error - train_error) / train_error * 100:.1f}%")
-
-        # Test error should not be dramatically worse than train
-        assert test_error < train_error * 2, (
-            f"Test error {test_error:.4f} >> train error {train_error:.4f}"
-        )
+    pass
 
 
 if __name__ == "__main__":

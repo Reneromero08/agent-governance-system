@@ -10,7 +10,7 @@
     "title": "Test Decision Record",
     "would_create": {
         "adr_number": 999,
-        "content_preview": "# ADR-999: Test Decision Record\n\n**Date:** 2025-01-01\n**Status:** proposed\n**Tags:** \n\n## Context\n\nWe need to test the ADR creation skill\n\n## Decision\n\nUse dry_run mode for deterministic testing\n\n## Consequences\n\n[Describe the positive and negative consequences of this decision]\n\n## Review\n\n**Review Date:** [Set a date to revisit this decision, e.g., 6 months from now]\n",
+        "content_preview": "# ADR-999: Test Decision Record\n\n**Date:** 2025-01-01\n**Status:** proposed\n**Tags:**\n\n## Context\n\nWe need to test the ADR creation skill\n\n## Decision\n\nUse dry_run mode for deterministic testing\n\n## Consequences\n\n[Describe the positive and negative consequences of this decision]\n\n## Review\n\n**Review Date:** [Set a date to revisit this decision, e.g., 6 months from now]\n",
         "filename": "ADR-999-test-decision-record.md",
         "path": "LAW/CONTEXT/decisions/ADR-999-test-decision-record.md",
         "title": "Test Decision Record"

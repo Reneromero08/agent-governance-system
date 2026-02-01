@@ -74,8 +74,13 @@ def jobspec_schema():
 # ═══════════════════════════════════════════════════════════════════════════════
 
 
+@pytest.mark.slow
 class TestDeterminism:
-    """Test that SCL operations are deterministic."""
+    """Test that SCL operations are deterministic.
+    
+    These tests run 100 iterations and are marked as slow.
+    Use --run-slow to execute them.
+    """
 
     def test_decode_deterministic_100_runs(self, scl_cli):
         """Same program → same JSON hash across 100 runs."""

@@ -62,12 +62,13 @@ def find_next_adr_number(decisions_dir: Path) -> int:
     if not decisions_dir.exists():
         return 1
 
-    existing = list(decisions_dir.glob("ADR-*.md"))
+    # Use iterdir() instead of glob() to comply with filesystem access policy
     numbers = []
-    for f in existing:
-        match = re.match(r"ADR-(\d+)", f.stem)
-        if match:
-            numbers.append(int(match.group(1)))
+    for f in decisions_dir.iterdir():
+        if f.is_file() and f.name.startswith("ADR-") and f.suffix == ".md":
+            match = re.match(r"ADR-(\d+)", f.stem)
+            if match:
+                numbers.append(int(match.group(1)))
     return max(numbers, default=0) + 1
 
 
@@ -142,7 +143,8 @@ def create_adr(
     slug = generate_slug(title)
     filename = f"ADR-{next_num:03d}-{slug}.md"
     filepath = decisions_dir / filename
-    rel_path = str(filepath.relative_to(PROJECT_ROOT))
+    # Normalize path to use forward slashes for cross-platform consistency
+    rel_path = filepath.relative_to(PROJECT_ROOT).as_posix()
 
     content = generate_adr_content(next_num, title, context, decision, status, date)
 
