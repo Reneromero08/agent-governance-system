@@ -1,0 +1,8 @@
+{
+  "test_id": "r10-snail",
+  "prompt": "A snail climbs 3 feet per day but slides back 2 feet at night. How many days to climb a 30 foot wall?",
+  "result": "1.  **Analyze the Request:**\n    *   **Subject:** A snail climbing a wall.\n    *   **Rate:** Climbs 3 feet/day, slides back 2 feet/night.\n    *   **Goal:** Determine the number of days to climb a 30-foot wall.\n    *   **Constraint:** Use reasoning steps and verify.\n\n2.  **Initial Setup & Assumptions:**\n    *   The snail starts at the bottom (0 feet).\n    *   Day 1: Climbs 3 feet, reaches 3 feet. Night 1: Slides back 2 feet, ends at 1 foot.\n    *   Net progress per full day/night cycle = 1 foot.\n    *   The snail reaches the top *during* the day's climb, not at night.\n\n3.  **Step-by-Step Simulation (Mental or Scratchpad):**\n\n    *   *Day 1:*\n        *   Start: 0 ft\n        *   Climb: +3 ft -> 3 ft\n        *   Slide: -2 ft -> 1 ft\n        *   End of Day 1: 1 ft\n\n    *   *Day 2:*\n        *   Start: 1 ft\n        *   Climb: +3 ft -> 4 ft\n        *   Slide: -2 ft -> 2 ft\n        *   End of Day 2: 2 ft\n\n    *   *Day 3:*\n        *   Start: 2 ft\n        *   Climb: +3 ft -> 5 ft\n        *   Slide: -2 ft -> 3 ft\n        *   End of Day 3: 3 ft\n\n    *   *Day 4:*\n        *   Start: 3 ft\n        *   Climb: +3 ft -> 6 ft\n        *   Slide: -2 ft -> 4 ft\n        *   End of Day 4: 4 ft\n\n    *   *Day 5:*\n        *   Start: 4 ft\n        *   Climb: +3 ft -> 7 ft\n        *   Slide: -2 ft -> 5 ft\n        *   End of Day 5: 5 ft\n\n    *   *Day 6:*\n        *   Start: 5 ft\n       ",
+  "status": "completed",
+  "timestamp": "2026-01-31T11:47:07.322101",
+  "model": "zai-org/glm-4.7-flash"
+}

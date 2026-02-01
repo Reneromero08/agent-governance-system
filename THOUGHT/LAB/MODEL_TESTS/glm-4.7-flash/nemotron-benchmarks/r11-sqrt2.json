@@ -1,0 +1,8 @@
+{
+  "test_id": "r11-sqrt2",
+  "prompt": "Prove that sqrt(2) is irrational.",
+  "result": "1.  **Understand the Goal**: The user wants a proof that $\\sqrt{2}$ is irrational.\n\n2.  **Identify the Method**: The standard proof for the irrationality of $\\sqrt{2}$ is by contradiction (reductio ad absurdum). This is the most common and rigorous method.\n\n3.  **Structure the Proof**:\n    *   **Assumption**: Start by assuming the opposite of what we want to prove (i.e., that $\\sqrt{2}$ *is* rational).\n    *   **Definition of Rational**: Recall that a rational number can be expressed as a fraction $\\frac{a}{b}$ where $a$ and $b$ are integers with no common factors (coprime).\n    *   **Algebraic Manipulation**: Square both sides to get $2 = \\frac{a^2}{b^2}$.\n    *   **Deduction**: Rearrange to get $2b^2 = a^2$.\n    *   **Parity Argument (Even/Odd)**:\n        *   If $a^2$ is even, then $a$ must be even.\n        *   Substitute $a = 2k$.\n        *   Substitute back into the equation to find a relationship with $b$.\n    *   **Contradiction**: Show that if $a$ is even, then $b$ must also be even.\n    *   **Conclusion**: This contradicts the initial assumption that $a$ and $b$ are coprime. Therefore, the assumption is false, and $\\sqrt{2}$ is irrational.\n\n4.  **Drafting the Steps (Mental or Scratchpad)**:\n    *   Assume $\\sqrt{2} = \\frac{a}{b}$.\n    *   $a, b \\in \\mathbb{Z}$, $b \\neq 0$, $\\gcd(a, b) = 1$.\n    *   $2 = \\frac{a^2}{b^2} \\implies a^2 = 2b^2$.\n    *   $a^2$ is even $\\implies a$ is even.\n    *   $a = 2k$.\n    *   $(2k)^2 = 2b^2 \\implies 4k^2 = 2b^2 \\implies 2k^2",
+  "status": "completed",
+  "timestamp": "2026-01-31T12:18:02.104948",
+  "model": "zai-org/glm-4.7-flash"
+}
