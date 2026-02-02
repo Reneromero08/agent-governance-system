@@ -130,6 +130,14 @@ THOUGHT/LAB/FORMULA/experiments/open_questions/q32/physdata/
 
 # Q37 histwords data (large .npy files exceed GitHub 100MB limit)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q37/data/histwords_data/
+THOUGHT/LAB/FORMULA/questions/**/histwords_data/
+
+# Q32 physdata (large .mat files exceed GitHub 100MB limit)
+THOUGHT/LAB/FORMULA/questions/**/physdata/
+
+# Generic large data files (safety net)
+*.npy
+*.mat
 
 # Q18 real data cache (downloaded biological datasets - too large for git)
 THOUGHT/LAB/FORMULA/experiments/open_questions/q18/real_data/cache/
