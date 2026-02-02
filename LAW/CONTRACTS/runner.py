@@ -91,7 +91,15 @@ def ensure_navigation_dbs() -> int:
 
     Navigation is now handled by the cassette network (NAVIGATION/CORTEX/cassettes/).
     This function verifies at least some cassettes exist.
+
+    In CI environments (CI=true), this check is skipped since cassettes are
+    derived artifacts that aren't tracked in git.
     """
+    import os
+    if os.environ.get("CI") == "true":
+        print("[contracts/runner] CI environment detected - skipping cassette check", flush=True)
+        return 0
+
     if not CASSETTES_DIR.exists():
         print(f"[contracts/runner] Cassettes directory not found: {CASSETTES_DIR}")
         return 1

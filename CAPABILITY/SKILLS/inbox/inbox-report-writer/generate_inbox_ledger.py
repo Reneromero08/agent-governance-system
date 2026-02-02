@@ -51,11 +51,13 @@ def _load_section_index() -> List[dict]:
     for index_path in SECTION_INDEX_PATHS:
         if index_path.exists():
             return json.loads(index_path.read_text(encoding="utf-8"))
-    raise FileNotFoundError("SECTION_INDEX.json not found in cortex outputs")
+    # In CI environments, SECTION_INDEX.json may not exist (gitignored)
+    # Return empty list to allow fallback to filesystem scanning
+    return []
 
 
 def list_inbox_markdown_files(inbox_root: Path) -> List[Path]:
-    """List INBOX markdown files using the cortex index."""
+    """List INBOX markdown files using the cortex index, with filesystem fallback."""
     records = _load_section_index()
     paths = set()
     for record in records:
@@ -73,6 +75,14 @@ def list_inbox_markdown_files(inbox_root: Path) -> List[Path]:
         full_path = PROJECT_ROOT / rel_path
         if full_path.exists() and full_path.is_file():
             results.append(full_path)
+
+    # Fallback to filesystem scan if index returned no results
+    if not results and inbox_root.exists():
+        for md_file in inbox_root.rglob("*.md"):
+            if md_file.is_file():
+                results.append(md_file)
+        results.sort()
+
     return results
 
 

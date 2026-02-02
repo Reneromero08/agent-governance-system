@@ -6,6 +6,28 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.35] - 2026-02-02
+
+### Fixed: CI workflow references to deleted scripts
+
+**CI/CD:**
+- Removed `cortex.build.py` and `reset_system1.py` steps from `.github/workflows/contracts.yml`
+- These scripts were deleted in Phase 2.4 cleanup (commit 8450ab40) but CI still referenced them
+- Added `scipy` and `sentence-transformers` to CI dependencies (required by qec tests, alignment_key, and resident tests)
+- Skip `cassette_network` tests in CI (require populated cassette databases which are gitignored)
+
+**Contracts:**
+- `runner.py`: Skip cassette database check in CI environments (cassettes are derived artifacts not tracked in git)
+
+**Skills:**
+- `inbox-report-writer`: Add filesystem fallback when SECTION_INDEX.json is unavailable (gitignored in CI)
+
+**Gitignore:**
+- Added `THOUGHT/LAB/FORMULA/questions/**/histwords_data/` and `**/physdata/` patterns
+- Added global `*.npy` and `*.mat` ignore as safety net for large data files
+
+---
+
 ## [3.8.34] - 2026-02-01
 
 ### Fixed: Reduce pytest warnings from 267 to 3
