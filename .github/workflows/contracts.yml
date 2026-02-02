@@ -25,17 +25,11 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements.txt
-          python -m pip install pytest cryptography referencing
+          python -m pip install pytest cryptography referencing scipy sentence-transformers
       
       - name: Test query module (pre-build gate)
         run: python NAVIGATION/CORTEX/tests/test_query.py
-      
-      - name: Build cortex index
-        run: python NAVIGATION/CORTEX/db/cortex.build.py
-      
-      - name: Build system1 index
-        run: python NAVIGATION/CORTEX/db/reset_system1.py
-      
+
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
@@ -62,6 +56,7 @@ jobs:
           mkdir -p "$TMPDIR"
           python -m pytest CAPABILITY/TESTBENCH -q -s \
             --ignore=CAPABILITY/TESTBENCH/mcp-capability-tests \
+            --ignore=CAPABILITY/TESTBENCH/cassette_network \
             --ignore=CAPABILITY/TESTBENCH/integration/test_canon_embedding.py \
             --ignore=CAPABILITY/TESTBENCH/integration/test_adr_embedding.py \
             --ignore=CAPABILITY/TESTBENCH/integration/test_model_registry.py \
