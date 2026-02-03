@@ -45,7 +45,8 @@ def get_tokens(text: str, model: str = "gpt-4o") -> int:
     encoding_name = MODEL_ENCODINGS.get(model, "cl100k_base")
     try:
         encoding = tiktoken.get_encoding(encoding_name)
-    except Exception:
+    except Exception as e:
+        print(f"[WARNING] Failed to get encoding '{encoding_name}', falling back to cl100k_base: {e}", file=sys.stderr)
         encoding = tiktoken.get_encoding("cl100k_base")
     
     return len(encoding.encode(text))

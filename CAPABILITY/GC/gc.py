@@ -284,7 +284,8 @@ def _delete_blob(hash_str: str, cas_root: Path) -> bool:
             obj_path.unlink()
             return True
         return False
-    except Exception:
+    except Exception as e:
+        print(f"[GC] Warning: Failed to delete blob {hash_str}: {e}", file=sys.stderr)
         return False
 
 
