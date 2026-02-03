@@ -1,0 +1,74 @@
+name: Release Seal Verification
+
+on:
+  push:
+    tags:
+      - 'v*'  # Trigger on version tags (v1.0.0, v3.9.0, etc.)
+
+jobs:
+  verify-seal:
+    name: Verify Release Seal
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install cryptography
+
+      - name: Verify release seal exists
+        run: |
+          if [ ! -f "RELEASE_MANIFEST.json" ]; then
+            echo "::error::RELEASE_MANIFEST.json not found - release is not sealed!"
+            exit 1
+          fi
+          if [ ! -f "RELEASE_MANIFEST.json.sig" ]; then
+            echo "::error::RELEASE_MANIFEST.json.sig not found - release signature missing!"
+            exit 1
+          fi
+          echo "Release seal files present"
+
+      - name: Verify release seal integrity
+        run: |
+          python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --json | tee seal_result.json
+
+          # Check if verification passed
+          if ! python -c "import json; r=json.load(open('seal_result.json')); exit(0 if r.get('passed') else 1)"; then
+            echo "::error::Release seal verification FAILED - repository may have been tampered with!"
+            cat seal_result.json
+            exit 1
+          fi
+
+          echo "::notice::Release seal verification PASSED"
+
+      - name: Display seal details
+        if: success()
+        run: |
+          echo "## Release Seal Verified" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Tag: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`json" >> $GITHUB_STEP_SUMMARY
+          cat seal_result.json >> $GITHUB_STEP_SUMMARY
+          echo "\`\`\`" >> $GITHUB_STEP_SUMMARY
+
+      - name: Fail summary on broken seal
+        if: failure()
+        run: |
+          echo "## Release Seal BROKEN" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Tag: ${{ github.ref_name }}" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The release seal verification failed. This indicates:" >> $GITHUB_STEP_SUMMARY
+          echo "- Files were modified after sealing" >> $GITHUB_STEP_SUMMARY
+          echo "- The manifest or signature was tampered with" >> $GITHUB_STEP_SUMMARY
+          echo "- Files are missing from the sealed manifest" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "Per CCL v1.4 Section 4.1, modifications require clear notice." >> $GITHUB_STEP_SUMMARY

@@ -6,6 +6,52 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.9.0] - 2026-02-03
+
+### Added: Crypto Safe - Tamper-Evident Release Sealing
+
+Cryptographic sealing system to defend CCL v1.4 license provisions (Sections 3.6, 3.7, 4.4).
+
+**Core Primitives:**
+- `CAPABILITY/PRIMITIVES/release_manifest.py`: `FileEntry`, `ReleaseManifest`, `SealReceipt`, `VerificationReceipt` dataclasses
+- `CAPABILITY/PRIMITIVES/release_sealer.py`: `seal_repo()` and `verify_seal()` functions
+
+**CLI Tools:**
+- `seal_release.py`: Generate keypairs and seal repositories
+- `verify_release.py`: Verify sealed releases (exit 0=PASS, 1=FAIL)
+
+**Usage:**
+```bash
+# Generate keypair
+python -m CAPABILITY.TOOLS.catalytic.seal_release keygen \
+    --private-key keys/release.key --public-key keys/release.pub
+
+# Seal repository
+python -m CAPABILITY.TOOLS.catalytic.seal_release seal \
+    --repo-dir . --private-key keys/release.key
+
+# Verify (detects any tampering)
+python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --pubkey keys/release.pub
+```
+
+**License Enforcement:**
+| Violation | License Section | Seal Evidence |
+|-----------|-----------------|---------------|
+| Removed LICENSE file | 4.1(a) | `MISSING_FILE: LICENSE` |
+| Removed copyright notices | 4.1(b) | `TAMPERED_FILE` or `MISSING_FILE` |
+| Modified without disclosure | 4.1(c) | Any `TAMPERED_FILE` |
+| Stripped license terms | 3.5 | Seal proves original terms |
+
+**Tests:** 28 test cases in `test_release_sealer.py`
+**Documentation:** `NAVIGATION/PROOFS/CRYPTO_SAFE/VERIFICATION_GUIDE.md`
+
+**Enforcement Hooks (defense in depth):**
+- Pre-commit: Blocks accidental commit of `*.key` files (signing keys)
+- Pre-push: When pushing `v*` tags, requires valid release seal
+- GitHub Actions: `release-seal.yml` verifies seal on tag push
+
+---
+
 ## [3.8.38] - 2026-02-03
 
 ### Fixed
