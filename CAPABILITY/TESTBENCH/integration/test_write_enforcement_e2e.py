@@ -122,7 +122,8 @@ def test_end_to_end_enforcement():
                                     'line': node.lineno,
                                     'reason': 'no_writer_param'
                                 })
-                    except:
+                    except Exception as e:
+                        print(f"Warning: Error processing file {file_path}: {e}")
                         continue
         
         # Get top 5 candidates

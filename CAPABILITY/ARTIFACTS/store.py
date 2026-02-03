@@ -309,7 +309,8 @@ def materialize(ref: str, out_path: str, *, atomic: bool = True) -> None:
             if temp_path.exists():
                 try:
                     temp_path.unlink()
-                except:
+                except Exception as e:
+                    print(f"Warning: Could not clean up temp file {temp_path}: {e}")
                     pass
             raise ArtifactException(f"Failed to write file atomically: {out_path}: {e}")
     else:

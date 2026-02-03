@@ -43,7 +43,8 @@ def generate_report():
                     res = analyze_text(text)
                     f_orig += res['original']
                     f_comp += res['compressed']
-                except:
+                except Exception as e:
+                    print(f"Warning: Skipping file {f} due to error: {e}")
                     continue
         
         folder_stats[folder] = (f_orig, f_comp)

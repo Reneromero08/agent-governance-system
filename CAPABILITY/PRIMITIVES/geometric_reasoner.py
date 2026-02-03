@@ -28,7 +28,8 @@ try:
         try:
             resp = requests.get("http://localhost:8421/health", timeout=1)
             return resp.status_code == 200
-        except:
+        except Exception as e:
+            print(f"Health check failed: {e}")
             return False
 
     class _RemoteEmbedder:
