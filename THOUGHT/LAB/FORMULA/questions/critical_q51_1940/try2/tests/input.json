@@ -1,0 +1,23 @@
+{
+  "task_id": "q51_phase_arithmetic_try2",
+  "prompt_path": "THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try2/tests/prompt.md",
+  "output_dir": "THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try2",
+  "plan_ref": "THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try2/tests/plan.md",
+  "commands": [
+    {
+      "command": "python -c \"import importlib, subprocess, sys; mods={'sentence_transformers':'sentence-transformers==2.7.0','sklearn':'scikit-learn==1.4.2','numpy':'numpy==1.26.4'}; missing=[pkg for mod,pkg in mods.items() if importlib.util.find_spec(mod) is None]; print('missing', missing); import sys as _s; import subprocess as _sp;  if missing: _sp.check_call([_s.executable,'-m','pip','install',*missing])\"",
+      "timeout_sec": 1800,
+      "allow_failure": false
+    },
+    {
+      "command": "python THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try2/tests/pre_register.py",
+      "timeout_sec": 120,
+      "allow_failure": false
+    },
+    {
+      "command": "python THOUGHT/LAB/FORMULA/questions/critical_q51_1940/try2/tests/run_eval.py",
+      "timeout_sec": 7200,
+      "allow_failure": false
+    }
+  ]
+}
