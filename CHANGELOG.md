@@ -50,12 +50,13 @@ python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --pubkey keys/r
 - Pre-push: When pushing `v*` tags, requires valid release seal
 - GitHub Actions: `release-seal.yml` verifies seal on tag push
 
-### Removed: qgt_lib third-party library
+### Removed: qgt_lib third-party library (history purged)
 
-- Removed `THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/` from git tracking
+- **Purged from git history**: Third-party library files (docs/, include/, src/, tests/, CMakeLists.txt, etc.)
 - Third-party MIT-licensed library (Copyright Tsotchke 2024), not part of AGS
-- Added to `.gitignore` - keep locally for experimental formula tests if needed
-- CI unaffected (cassette_network tests already ignored)
+- **Preserved in git**: Our tests in `qgt_lib/python/` (test_q34_*.py, test_q43_*.py, etc.)
+- Added to `.gitignore` - library can be restored locally for experiments if needed
+- Note: History rewrite changed commit hashes; required force push
 
 ---
 
