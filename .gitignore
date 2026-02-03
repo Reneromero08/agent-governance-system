@@ -50,8 +50,9 @@ NAVIGATION/CORTEX/db/_migration_backup/
 THOUGHT/LAB/CAT_CHAT/**/*.db
 
 # qgt_lib - third-party library (MIT license, not part of AGS)
-# Keep locally for experimental formula tests, but don't track in git
-THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/
+# Keep library locally for experiments, but only track OUR tests (python/)
+THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/*
+!THOUGHT/LAB/VECTOR_ELO/eigen-alignment/qgt_lib/python/
 THOUGHT/LAB/CAT_CHAT/**/*.db-shm
 THOUGHT/LAB/CAT_CHAT/**/*.db-wal
 
