@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: be917b99962d73a8f5e1f7adae1dd8b258edbda71c6d414ca3c5410ae7ff0e9e -->
+<!-- CONTENT_HASH: e8a9c7db32c0bf22c3a7edf5f0f731ed7b08e9ebf16447047b182517428cd38b -->
 
 # AGENTS.md
 
@@ -12,6 +12,43 @@ repository. It is procedural authority. If unclear, defer to CANON.
 ## 0. Initial Connection & Cortex Access
 
 Before reading any rules, agents must establish a connection to the cortex (semantic indexing system) to access governance files and tools. This section provides the essential connection guidance that enables all subsequent operations.
+
+### 0.0 Virtual Environment Requirement (MANDATORY)
+
+**All Python commands MUST be executed within the repository's virtual environment.**
+
+The repository uses `.venv/` at the root. Agents MUST activate or reference this venv for ALL Python operations:
+
+**Windows (PowerShell):**
+```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+**Windows (cmd):**
+```cmd
+.\.venv\Scripts\activate.bat
+```
+
+**Unix/macOS:**
+```bash
+source .venv/bin/activate
+```
+
+**Alternative (without activation):** Prefix commands with the venv Python path:
+```bash
+# Windows
+.\.venv\Scripts\python.exe <script>
+
+# Unix/macOS
+./.venv/bin/python <script>
+```
+
+**Why this matters:**
+- Dependencies are installed in `.venv/`, not system Python
+- Using system Python will cause `ModuleNotFoundError` for AGS packages
+- This ensures reproducible execution across all agents and sessions
+
+**Verification:** After activation, `python --version` should work and `pip list` should show AGS dependencies (sentence-transformers, torch, etc.).
 
 ### 0.1 Connection Methods
 
