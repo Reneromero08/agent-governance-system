@@ -1,0 +1,45 @@
+{
+  "batch_size": 64,
+  "dataset_path": "results/dataset/questions-words.txt",
+  "dataset_url": "https://download.tensorflow.org/data/questions-words.txt",
+  "metrics": [
+    "|S|/n",
+    "chi_square_p_uniform",
+    "max_pair_diff",
+    "df_tones_m2",
+    "df_tones_m3",
+    "random_null_expected_s_over_n"
+  ],
+  "models": [
+    "all-MiniLM-L6-v2",
+    "all-MiniLM-L12-v2",
+    "all-mpnet-base-v2",
+    "all-distilroberta-v1",
+    "all-roberta-large-v1",
+    "paraphrase-MiniLM-L6-v2",
+    "paraphrase-mpnet-base-v2",
+    "multi-qa-MiniLM-L6-cos-v1",
+    "multi-qa-mpnet-base-dot-v1",
+    "nli-mpnet-base-v2",
+    "BAAI/bge-small-en-v1.5",
+    "BAAI/bge-base-en-v1.5",
+    "BAAI/bge-large-en-v1.5",
+    "thenlper/gte-small",
+    "thenlper/gte-base",
+    "thenlper/gte-large",
+    "intfloat/e5-small-v2",
+    "intfloat/e5-base-v2",
+    "intfloat/e5-large-v2"
+  ],
+  "normalize_embeddings": false,
+  "octant_index_rule": "k = (pc1>=0) + 2*(pc2>=0) + 4*(pc3>=0)",
+  "octant_sign_rule": "sign = +1 if component >= 0 else -1",
+  "pca_components": 3,
+  "phase_mapping": "theta_k = (k + 0.5) * pi/4",
+  "run_date": "2026-02-03",
+  "success_thresholds": {
+    "chi_square_p_gt": 0.05,
+    "max_pair_diff_lt": 0.02,
+    "s_over_n_lt": 0.05
+  }
+}
