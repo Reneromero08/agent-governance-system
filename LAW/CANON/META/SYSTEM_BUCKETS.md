@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 36e1b2bc23a1f9d5e7c8a9b2d3f4e5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2 -->
+<!-- CONTENT_HASH: 42365627005e7880cee1ba76377b2948a0ee57848e6dcd358beb51feccac90e5 -->
 
 # SYSTEM BUCKETS
 
@@ -82,6 +82,12 @@ This document defines the classification buckets of the Agent Governance System 
 **Key Directories:**
 - `THOUGHT/LAB/` - Volatile features (e.g., `CAT_CHAT`, `NEO3000`, `TURBO_SWARM`).
 - `THOUGHT/CONTEXT/` - Lab-specific research and notes.
+
+**Permissions (GOVERNANCE EXEMPT):**
+- Agents MAY freely create, modify, and delete files in `THOUGHT/LAB/` when directed by the user.
+- `THOUGHT/LAB/` is explicitly exempt from the "output roots" restriction in CONTRACT.md Rule 8.
+- No `MASTER_OVERRIDE` is required for writes to `THOUGHT/LAB/`.
+- The user's explicit instruction to work in `THOUGHT/LAB/` is sufficient authorization.
 
 **Prohibitions:**
 - No binding force on the main system.
