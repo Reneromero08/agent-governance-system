@@ -16,6 +16,16 @@ All notable changes to Agent Governance System will be documented in this file.
 
 **Rationale:** External agents (e.g., Codex) were incorrectly refusing to write to `THOUGHT/LAB/` by misinterpreting the output roots rule as a blanket write restriction. This clarification makes explicit what was always implicit: the experimental sandbox is exempt from governance write restrictions.
 
+### Added: Virtual environment requirement for agents
+
+**AGENTS.md:**
+- Added Section 0.0 "Virtual Environment Requirement (MANDATORY)" as the first subsection
+- All Python commands MUST be executed within `.venv/`
+- Provides activation commands for Windows (PowerShell/cmd) and Unix/macOS
+- Alternative: prefix commands with `.venv/Scripts/python.exe` or `.venv/bin/python`
+
+**Rationale:** External agents were using system Python instead of the repository venv, causing ModuleNotFoundError for AGS dependencies.
+
 ---
 
 ## [3.8.35] - 2026-02-02
