@@ -1,7 +1,7 @@
 ---
 title: AGS Roadmap V4 (Remaining Work Only)
-version: 4.0.0
-last_updated: 2026-01-30
+version: 4.2.0
+last_updated: 2026-02-03
 scope: Unfinished phases only - Crypto Safe, Swarm, Omega
 style: agent-readable, task-oriented, minimal ambiguity
 status: Active
@@ -44,69 +44,147 @@ Every task must produce:
 
 ---
 
-# Phase 1: Crypto Safe (Template Sealing & Release)
+# Phase 1: Crypto Safe (Repo Sealing for License Defense)
 
-**Purpose:** Cryptographically seal the template for license enforcement and provenance.
+**Purpose:** Cryptographically seal this repo to defend CCL v1.4 license provisions.
 **Status:** NOT STARTED
 **Priority:** P1
 
-## 1.1 Template Sealing Primitive (CRYPTO_SAFE.2)
+## License Defense Context
 
-- [ ] 1.1.1 Implement `template_seal(template_dir, output_path, meta) -> receipt`
-  - Hash all template files (code, governance rules, architecture)
-  - Sign manifest with your key (proves YOU released this)
-  - Emit tamper-evident seal file
-- [ ] 1.1.2 Implement `template_verify(sealed_dir, signature) -> verdict`
-  - Verify hashes match original
-  - Verify signature is valid
-  - Detect ANY tampering
+The seal provides cryptographic evidence to enforce these CCL v1.4 provisions:
+
+| CCL Section | What It Prohibits | What Seal Proves |
+|-------------|-------------------|------------------|
+| **3.6** No Circumvention | Bypassing Access Controls on Protected Artifacts | "The encrypted artifacts I released have hash X - you have plaintext without attestation" |
+| **3.7** No False Attestation | Submitting false Compliance Attestations | "I have no attestation record for you, yet you have decrypted content" |
+| **4.4** Cryptographic Handshake | Access without signed attestation | "Protected Artifacts require attestation - here's proof of what I released" |
+
+**The Defense Scenario:**
+1. Someone claims: "I didn't circumvent anything"
+2. You prove: "Here's the exact sealed state I released, signed by me"
+3. You prove: "The Protected Artifacts I released were encrypted with hash X"
+4. You prove: "You have plaintext but no attestation record from me"
+5. Conclusion: "Section 3.6 violation - the seal was broken"
+
+## Philosophy: Tamper-Evidence, Not Access Control
+
+Crypto Safe is a **detection system**, not a **prevention system**:
+
+| What Crypto Safe IS | What Crypto Safe is NOT |
+|---------------------|-------------------------|
+| Tamper-evidence ("you broke my seal") | Access control ("you cannot use this") |
+| Proof of provenance ("I released this") | DRM or copy protection |
+| License violation evidence | Permission management |
+| Wax seal (proves opening, doesn't prevent it) | Lock (prevents access) |
+
+**Core Principle:** Anyone can fork, modify, and use this repository. They simply cannot claim they received it unmodified from the original author. The seal proves authenticity, not exclusivity.
+
+### Non-Goals (Explicit)
+
+1. **NOT preventing access** - No keys required to use the code
+2. **NOT barring anyone from the repo** - Open source remains open source
+3. **NOT DRM** - No runtime checks, no phone-home, no license servers
+4. **NOT key management** - No automated key release, no revocation infrastructure
+
+## What Gets Sealed
+
+**This repo IS the release.** No separate export step.
+
+| Category | What | Where |
+|----------|------|-------|
+| **Framework Code** | All tracked `.py`, `.md`, governance docs | Entire repo |
+| **License** | CCL v1.4 | `LICENSE` |
+| **Protected Artifacts** | Encrypted vectors, CAS, proofs (when distributed) | Encrypted blobs in repo |
+| **Manifest** | Hashes of all tracked files + signature | `RELEASE_MANIFEST.json` |
+
+**NOT sealed** (gitignored, never in repo):
+- Working vector databases (local only)
+- Unencrypted CAS blobs (local only)
+- Runtime artifacts
+
+---
+
+## 1.1 Repo Sealing Primitive (CRYPTO_SAFE.2)
+
+- [ ] 1.1.1 Implement `seal_repo(repo_dir, key_path) -> receipt`
+  - Hash all tracked git files (code, docs, governance, LICENSE)
+  - Include encrypted Protected Artifacts if present
+  - Sign manifest with author's key
+  - Emit `RELEASE_MANIFEST.json` + detached signature
+- [ ] 1.1.2 Implement `verify_seal(repo_dir, public_key) -> verdict`
+  - Verify all tracked files match manifest hashes
+  - Verify signature is valid against public key
+  - Detect ANY modification from sealed state
+  - Deterministic: same input -> same result
 
 ## 1.2 Release Manifest Schema (CRYPTO_SAFE.3)
 
-- [ ] 1.2.1 Define release manifest schema
-  - List of all template files with hashes
-  - Version, timestamp, license reference
-  - Your signature
-- [ ] 1.2.2 Add signature support (offline signing)
-  - GPG or age-based signing
-  - Public key published for verification
-  - "This is what I released" - irrefutable
+- [ ] 1.2.1 Define `RELEASE_MANIFEST.json` schema
+  ```
+  {
+    "version": "1.0.0",
+    "sealed_at": "ISO-8601 timestamp",
+    "license": "CCL-v1.4",
+    "git_commit": "sha256 of HEAD",
+    "files": [
+      {"path": "...", "sha256": "...", "size": N},
+      ...
+    ],
+    "protected_artifacts": [
+      {"path": "...", "sha256": "...", "encrypted": true},
+      ...
+    ],
+    "manifest_hash": "sha256 of this manifest"
+  }
+  ```
+- [ ] 1.2.2 Add GPG/age signature support
+  - Offline signing (no network calls)
+  - Public key published in repo for verification
+  - Detached signature file: `RELEASE_MANIFEST.json.sig`
 
-## 1.3 Release Export Integration (CRYPTO_SAFE.4)
+## 1.3 Protected Artifacts Encryption (CRYPTO_SAFE.4)
 
-**Prerequisites:**
-- [ ] **DECISION: Define template boundary** - Which files/features are framework vs instance-specific?
-  - Review each directory and decide what's public-facing
-  - Document first-run initialization process for new users
-  - Test that template works standalone (without your data)
-  - This is a MANUAL decision, not automated
-
-- [ ] 1.3.1 Implement `export_template.py` script
-  - Exclude all instance data (per inventory + manual decisions)
-  - Include all framework code
-  - Add `.gitkeep` files for empty directories
-  - Seal the result
-- [ ] 1.3.2 Emit `RELEASE_MANIFEST.json` + signature into export
-- [ ] 1.3.3 Add `.gitattributes` export-ignore patterns for `git archive`
-- [ ] 1.3.4 Write first-run documentation (how new users initialize their AGS instance)
+- [ ] 1.3.1 Implement `encrypt_protected(artifact_path, key) -> encrypted_blob`
+  - Encrypt vectors, CAS, proofs before distribution
+  - Use age or GPG (local tools, no cloud)
+  - Emit encrypted blob + hash
+- [ ] 1.3.2 Document attestation flow for key release
+  - Recipient submits signed Compliance Attestation (per CCL 4.4)
+  - Author verifies attestation, releases decryption key
+  - Manual process (no automation required for v1)
 
 ## 1.4 Seal Verification Tool (CRYPTO_SAFE.5)
 
-- [ ] 1.4.1 Add `verify_release(release_dir)` that checks:
-  - All template files match manifest hashes
-  - Signature is valid
-  - No instance data leaked into release
-  - Deterministic verification (same input -> same result)
+- [ ] 1.4.1 Implement `verify_release` CLI
+  ```bash
+  python -m CAPABILITY.PRIMITIVES.verify_release --manifest RELEASE_MANIFEST.json --pubkey author.pub
+  ```
+  - Checks: all files match manifest hashes
+  - Checks: signature valid
+  - Checks: no untracked files that should be tracked
+  - Output: PASS/FAIL with detailed report
+  - Exit code: 0 for PASS, 1 for FAIL (fail-closed)
 
 ## 1.5 Tests & Docs (CRYPTO_SAFE.6-7)
 
-- [ ] 1.5.1 Fixtures: tampered file -> FAIL, invalid signature -> FAIL, instance data leak -> FAIL
-- [ ] 1.5.2 Add `NAVIGATION/PROOFS/CRYPTO_SAFE/` verification guide
+- [ ] 1.5.1 Test fixtures:
+  - Tampered file -> FAIL
+  - Invalid signature -> FAIL
+  - Missing file -> FAIL
+  - Extra untracked file -> WARN
+  - Valid sealed repo -> PASS
+- [ ] 1.5.2 Add verification guide to `NAVIGATION/PROOFS/CRYPTO_SAFE/`
+  - How to verify a release
+  - How to request Protected Artifacts access (attestation process)
+  - What "seal broken" means legally (CCL 3.6 reference)
 
 **Exit Criteria:**
-- [ ] Template releases contain no instance data
+- [ ] All tracked git files are sealed with hashes + signature
 - [ ] Seals are tamper-evident (any modification detectable)
 - [ ] "You broke my seal" is cryptographically provable
+- [ ] Protected Artifacts can be encrypted for distribution
+- [ ] Verification is deterministic and fail-closed
 
 ---
 
@@ -254,8 +332,9 @@ Research foundation exists: HDC/VSA papers indexed (5), vec2text papers (5), Cod
 
 | Metric | Target |
 |--------|--------|
-| Template releases | Zero instance data leakage |
+| Repo seal | All tracked files hashed + signed |
 | Seal verification | 100% tampering detection |
+| License defense | CCL 3.6/3.7/4.4 violations provable |
 | Swarm delegation | Deterministic receipts |
 | ELO convergence | Variance <10% after 100 sessions |
 | LITE pack accuracy | 90%+ accessed files are high-ELO |
@@ -266,9 +345,11 @@ Research foundation exists: HDC/VSA papers indexed (5), vec2text papers (5), Cod
 
 | Version | Date | Changes |
 |---------|------|---------|
+| 4.2.0 | 2026-02-03 | Rewrote Phase 1 for license defense framing; removed template export (repo IS the release); linked to CCL 3.6/3.7/4.4 provisions |
+| 4.1.0 | 2026-02-03 | Added Crypto Safe Philosophy section clarifying tamper-evidence vs access control; explicit Non-Goals |
 | 4.0.0 | 2026-01-30 | New roadmap with only remaining phases; supersedes AGS_ROADMAP_MASTER.md |
 
 ---
 
-*Roadmap v4.0.0 - 2026-01-30*
+*Roadmap v4.2.0 - 2026-02-03*
 *Phases 1-8 archived. Remaining: Crypto Safe, Swarm, Omega.*
