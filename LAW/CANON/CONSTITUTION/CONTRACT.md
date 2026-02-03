@@ -1,4 +1,4 @@
-<!-- CONTENT_HASH: 07b58b92ca7fe70d05412d6334636a7d769b77c386fdd94bf33f09ec966f4144 -->
+<!-- CONTENT_HASH: 350636599cc775662f5328245c856a6927696942f1c9eb1a811fd7a7d571ee4e -->
 
 # Canon Contract
 
@@ -50,6 +50,8 @@ This document defines the non-negotiable rules and the authority gradient for th
    - `MEMORY/LLM_PACKER/_packs/`
 
    `BUILD/` is reserved for user build outputs and must not be used for system artifacts.
+
+   **THOUGHT/LAB/ exemption:** `THOUGHT/LAB/` is explicitly exempt from this rule. Agents MAY freely create, modify, and delete files in `THOUGHT/LAB/` when directed by the user. No `MASTER_OVERRIDE` required. This is the designated experimental sandbox - governance does not restrict writes here.
 
    **Logging policy** (see ADR-015): All system logs (emergency, audit, crisis, steward) must be written under `LAW/CONTRACTS/_runs/<purpose>_logs/` subdirectories.
 

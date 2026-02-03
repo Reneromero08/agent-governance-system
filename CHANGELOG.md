@@ -6,6 +6,18 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.36] - 2026-02-03
+
+### Clarified: THOUGHT/LAB/ governance exemption
+
+**Canon:**
+- `CONTRACT.md` Rule 8: Added explicit exemption stating `THOUGHT/LAB/` is not subject to the "output roots" restriction. Agents may freely write here when directed by the user. No `MASTER_OVERRIDE` required.
+- `SYSTEM_BUCKETS.md` Section 5: Added "Permissions (GOVERNANCE EXEMPT)" subsection explicitly stating agents may create, modify, and delete files in `THOUGHT/LAB/` without governance restrictions.
+
+**Rationale:** External agents (e.g., Codex) were incorrectly refusing to write to `THOUGHT/LAB/` by misinterpreting the output roots rule as a blanket write restriction. This clarification makes explicit what was always implicit: the experimental sandbox is exempt from governance write restrictions.
+
+---
+
 ## [3.8.35] - 2026-02-02
 
 ### Fixed: CI workflow references to deleted scripts
