@@ -18,6 +18,13 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.38] - 2026-02-03
+
+### Security
+- Fixed SQL injection vulnerability in codebook lookup (_fts_search_within_paths function)
+
+---
+
 ## [3.8.37] - 2026-02-03
 
 ### Fixed
