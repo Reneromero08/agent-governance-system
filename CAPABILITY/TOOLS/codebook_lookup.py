@@ -471,7 +471,12 @@ def _fts_search_within_paths(query, paths, limit=20):
         with sqlite3.connect(str(SYSTEM1_DB)) as conn:
             conn.row_factory = sqlite3.Row
             path_conditions = " OR ".join([f"f.path LIKE ?" for _ in paths])
-            path_params = [f"{p}%" for p in paths]
+            # Sanitize paths to prevent SQL injection
+            sanitized_paths = []
+            for path in paths:
+                # Only allow alphanumeric characters, spaces, hyphens, underscores, dots, and forward/backward slashes
+                sanitized_path = re.sub(r'[^a-zA-Z0-9/\\_. -]', '_', path)
+                sanitized_paths.append(f"{sanitized_path}%")
             cursor = conn.execute(f"""
                 SELECT f.path, c.chunk_index, fts.content,
                        snippet(chunks_fts, 0, '<<', '>>', '...', 64) as snippet, rank
@@ -480,7 +485,7 @@ def _fts_search_within_paths(query, paths, limit=20):
                 JOIN files f ON c.file_id = f.file_id
                 WHERE chunks_fts MATCH ? AND ({path_conditions})
                 ORDER BY rank LIMIT ?
-            """, (query, *path_params, limit))
+            """, (query, *sanitized_paths, limit))
             for row in cursor.fetchall():
                 results.append({
                     'path': row['path'], 'chunk_index': row['chunk_index'],
