@@ -260,7 +260,8 @@ class AGSMCPServer:
                     except ValueError:
                         pass  # Keep absolute path if not under project root
                 self.session_auditor.record_file_access(file_path)
-            except Exception:
+            except Exception as e:
+                print(f"[WARNING] Audit failure in _audit_file_access: {e}", file=sys.stderr)
                 pass  # Don't let audit failures break tool calls
 
     def _audit_adr_read(self, adr_id: str) -> None:
@@ -268,7 +269,8 @@ class AGSMCPServer:
         if self.session_auditor and self._session_auditor_available:
             try:
                 self.session_auditor.record_adr_read(adr_id)
-            except Exception:
+            except Exception as e:
+                print(f"[WARNING] Audit failure in _audit_adr_read: {e}", file=sys.stderr)
                 pass
 
     def _audit_symbol_expansion(self, symbol: str) -> None:
@@ -276,7 +278,8 @@ class AGSMCPServer:
         if self.session_auditor and self._session_auditor_available:
             try:
                 self.session_auditor.record_symbol_expansion(symbol)
-            except Exception:
+            except Exception as e:
+                print(f"[WARNING] Audit failure in _audit_symbol_expansion: {e}", file=sys.stderr)
                 pass
 
     def _audit_search(self, is_semantic: bool) -> None:
@@ -284,7 +287,8 @@ class AGSMCPServer:
         if self.session_auditor and self._session_auditor_available:
             try:
                 self.session_auditor.record_search(is_semantic=is_semantic)
-            except Exception:
+            except Exception as e:
+                print(f"[WARNING] Audit failure in _audit_search: {e}", file=sys.stderr)
                 pass
 
     def _track_tool_access(self, tool_name: str, arguments: Dict, result: Dict) -> None:
@@ -324,7 +328,8 @@ class AGSMCPServer:
                                     adr_match = re.search(r"ADR-(\d+)", path)
                                     if adr_match:
                                         self._audit_adr_read(f"ADR-{adr_match.group(1)}")
-                except Exception:
+                except Exception as e:
+                    print(f"[WARNING] Audit failure in _track_tool_access (ADR read): {e}", file=sys.stderr)
                     pass
 
             # Codebook lookup - track symbol expansion
@@ -351,7 +356,8 @@ class AGSMCPServer:
                                 path = res.get("path", res.get("file_path", ""))
                                 if path:
                                     self._audit_file_access(path)
-                    except Exception:
+                    except Exception as e:
+                        print(f"[WARNING] Audit failure in _track_tool_access (cassette network query): {e}", file=sys.stderr)
                         pass
 
             # ADR creation - track ADR read (reviewing existing ADRs)
@@ -361,7 +367,8 @@ class AGSMCPServer:
                 if adr_id:
                     self._audit_adr_read(adr_id)
 
-        except Exception:
+        except Exception as e:
+            print(f"[WARNING] Audit failure in _track_tool_access (overall): {e}", file=sys.stderr)
             pass  # Don't let tracking failures break tool calls
 
     def _ensure_semantic_adapter(self) -> None:

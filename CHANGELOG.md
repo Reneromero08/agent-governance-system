@@ -6,6 +6,18 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.38] - 2026-02-03
+
+### Fixed
+- Improved exception handling with proper error logging
+- Added error logging to silent exception handlers in MCP server
+- Enhanced error reporting in tokenizer harness and GC operations
+
+### Security
+- Replaced silent exception swallowing with informative warnings
+
+---
+
 ## [3.8.37] - 2026-02-03
 
 ### Fixed
