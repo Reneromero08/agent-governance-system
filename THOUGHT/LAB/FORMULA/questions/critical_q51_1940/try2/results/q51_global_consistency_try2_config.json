@@ -1,0 +1,20 @@
+{
+  "consistency_thresholds": {
+    "berry_mean_abs_diff_max": 0.2,
+    "berry_quant_score_min": 0.8,
+    "phase_fraction_passing_min": 0.6,
+    "phase_mean_error_max_radians": 0.7853981633974483,
+    "zero_mean_s_over_n_max": 0.05,
+    "zero_uniform_fraction_min": 0.5,
+    "zero_uniform_p_min": 0.05
+  },
+  "input_files": {
+    "berry_phase_results": "results/q51_berry_phase_try2_results.json",
+    "phase_arithmetic_results": "results/results.json",
+    "zero_signature_results": "results/q51_zero_signature_try2_results.json"
+  },
+  "reported_metrics": {
+    "cramers_v_octant_phase": 0.27
+  },
+  "run_date": "2026-02-03"
+}

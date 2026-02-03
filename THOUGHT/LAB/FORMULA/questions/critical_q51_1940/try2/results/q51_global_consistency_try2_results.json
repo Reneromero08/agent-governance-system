@@ -1,0 +1,76 @@
+{
+  "aggregates": {
+    "berry_mean_abs_diff_global": 9.94551605020834e-08,
+    "berry_mean_abs_diff_local": 2.485293587945095e-07,
+    "berry_mean_quant_score": 0.9999999448783161,
+    "cramers_v": 0.27,
+    "phase_fraction_passing": 1.0,
+    "phase_mean_error_radians": 0.4587956039338832,
+    "phase_mean_pass_rate": 0.8330842455332499,
+    "zero_mean_max_pair_diff": 0.08979354463506835,
+    "zero_mean_s_over_n": 0.0904056907799085,
+    "zero_uniform_fraction": 0.0,
+    "zero_uniform_p_min": 0.05
+  },
+  "anti_pattern_check": {
+    "ground_truth_independent_of_R": true,
+    "no_grid_search": true,
+    "no_synthetic_data": true,
+    "parameters_fixed_before_results": true
+  },
+  "config": {
+    "consistency_thresholds": {
+      "berry_mean_abs_diff_max": 0.2,
+      "berry_quant_score_min": 0.8,
+      "phase_fraction_passing_min": 0.6,
+      "phase_mean_error_max_radians": 0.7853981633974483,
+      "zero_mean_s_over_n_max": 0.05,
+      "zero_uniform_fraction_min": 0.5,
+      "zero_uniform_p_min": 0.05
+    },
+    "input_files": {
+      "berry_phase_results": "results/q51_berry_phase_try2_results.json",
+      "phase_arithmetic_results": "results/results.json",
+      "zero_signature_results": "results/q51_zero_signature_try2_results.json"
+    },
+    "reported_metrics": {
+      "cramers_v_octant_phase": 0.27
+    },
+    "run_date": "2026-02-03"
+  },
+  "consistency": {
+    "berry_holonomy_supported": true,
+    "can_all_be_true": true,
+    "contradictions": [],
+    "phase_arithmetic_supported": true,
+    "roots_of_unity_supported": false,
+    "zero_signature_supported": false
+  },
+  "dependency_scan": {
+    "direct_dependency_found": false,
+    "direct_dependency_hits": {
+      "berry": [],
+      "phase": [],
+      "zero": []
+    },
+    "shared_dataset": true,
+    "shared_models": true,
+    "shared_pca": true
+  },
+  "forced_claim": "The intersection forces only projection-level regularities supported by the metrics: phase-difference analogies pass the fixed threshold, and loop \u03b3 is numerically stable under the tested basis transforms. Zero-signature cancellation is not supported by the mean |S|/n threshold in this run, so it cannot be forced by the intersection.",
+  "implicit_assumptions": [
+    "All tests rely on PCA-based projections; independence is limited by shared coordinate choices.",
+    "Phase interpretations assume PCA axes encode meaningful angular structure (not guaranteed).",
+    "Cramer's V is treated as a reported input (not recomputed here)."
+  ],
+  "inputs": {
+    "berry_phase_results": "results/q51_berry_phase_try2_results.json",
+    "phase_arithmetic_results": "results/results.json",
+    "zero_signature_results": "results/q51_zero_signature_try2_results.json"
+  },
+  "interpretive_claims_not_forced": [
+    "Exact 8th-roots-of-unity phase structure",
+    "Underlying complex multiplication structure for analogies",
+    "Topological Berry phase / holonomy in embedding space"
+  ]
+}
