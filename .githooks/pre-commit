@@ -11,6 +11,18 @@ else
     exit 1
 fi
 
+# Block private key commits (Crypto Safe)
+echo "[PRE-COMMIT] Checking for private keys..."
+if git diff --cached --name-only | grep -E '\.key$' | grep -v '\.pub\.key$'; then
+    echo ""
+    echo "[PRE-COMMIT] ERROR: Private key file staged for commit!"
+    echo "             Signing keys must NEVER be committed to the repository."
+    echo ""
+    echo "  Unstage with: git reset HEAD <file>.key"
+    echo ""
+    exit 1
+fi
+
 echo "[PRE-COMMIT] Running preflight..."
 $PYTHON_CMD CAPABILITY/TOOLS/ags.py preflight --allow-dirty-tracked
 

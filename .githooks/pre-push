@@ -2,7 +2,61 @@
 # Pre-push hook - blocks push without approval token
 set -e
 
+# Cross-platform Python detection
+if python3 --version >/dev/null 2>&1; then
+    PYTHON_CMD="python3"
+elif python --version >/dev/null 2>&1; then
+    PYTHON_CMD="python"
+else
+    echo "[PRE-PUSH] ERROR: No Python found"
+    exit 1
+fi
+
 TOKEN_FILE="LAW/CONTRACTS/_runs/ALLOW_PUSH.token"
+
+# Check if pushing release tags - verify seal (Crypto Safe)
+# Read stdin for refs being pushed
+while read local_ref local_sha remote_ref remote_sha; do
+    # Check if this is a version tag (v*)
+    if echo "$remote_ref" | grep -qE '^refs/tags/v[0-9]'; then
+        TAG_NAME=$(echo "$remote_ref" | sed 's|refs/tags/||')
+        echo "[PRE-PUSH] Release tag detected: $TAG_NAME"
+        echo "[PRE-PUSH] Verifying release seal..."
+
+        # Check if manifest exists
+        if [ ! -f "RELEASE_MANIFEST.json" ]; then
+            echo ""
+            echo "[PRE-PUSH] ERROR: Release tag push blocked - no seal found!"
+            echo ""
+            echo "  Before pushing a release tag, you must seal the repository:"
+            echo ""
+            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal \\"
+            echo "        --repo-dir . --private-key <your-key-path>"
+            echo "    git add RELEASE_MANIFEST.json RELEASE_MANIFEST.json.sig"
+            echo "    git commit -m \"Seal release $TAG_NAME\""
+            echo ""
+            exit 1
+        fi
+
+        # Verify the seal (uses embedded public key if no --pubkey specified)
+        if ! $PYTHON_CMD -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . 2>/dev/null; then
+            echo ""
+            echo "[PRE-PUSH] ERROR: Release tag push blocked - seal verification FAILED!"
+            echo ""
+            echo "  The repository state does not match the seal."
+            echo "  Re-seal the repository before pushing the release tag:"
+            echo ""
+            echo "    python -m CAPABILITY.TOOLS.catalytic.seal_release seal \\"
+            echo "        --repo-dir . --private-key <your-key-path>"
+            echo "    git add RELEASE_MANIFEST.json RELEASE_MANIFEST.json.sig"
+            echo "    git commit --amend  # or new commit"
+            echo ""
+            exit 1
+        fi
+
+        echo "[PRE-PUSH] Release seal verified for $TAG_NAME"
+    fi
+done
 
 echo "[PRE-PUSH] Checking push approval..."
 
