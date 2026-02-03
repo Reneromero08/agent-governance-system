@@ -37,7 +37,8 @@ DISPATCHER_SCRIPT = Path(__file__).parent / "failure_dispatcher.py"
 def count_files(d: Path) -> int:
     try:
         return len(list(d.glob("*.json"))) if d.exists() else 0
-    except:
+    except Exception as e:
+        print(f"Error counting files in {d}: {e}")
         return 0
 
 

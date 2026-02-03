@@ -36,8 +36,8 @@ content, error = _run_tool_test("critic_run")
 try:
     result = json.loads(content)
     print(f"✓ Passed: {result['passed']}")
-except:
-    print(f"Output: {content[:200]}")
+except Exception as e:
+    print(f"JSON Parse Error: {e}, Output: {content[:200]}")
 
 # Test commit_ceremony
 print("\n--- commit_ceremony ---")
@@ -48,8 +48,8 @@ try:
     print(f"✓ Runner passed: {result['checklist']['2_failsafe_runner']['passed']}")
     print(f"✓ Staged files: {result['staged_count']}")
     print(f"✓ Ready: {result['checklist']['4_ready_for_commit']}")
-except:
-    print(f"Output: {content[:200]}")
+except Exception as e:
+    print(f"JSON Parse Error: {e}, Output: {content[:200]}")
 
 # Test adr_create (don't actually create one in test)
 print("\n--- adr_create (validation only) ---")

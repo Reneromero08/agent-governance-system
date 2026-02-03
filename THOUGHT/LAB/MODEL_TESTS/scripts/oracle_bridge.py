@@ -221,7 +221,8 @@ def ask_oracle_auto(question: str, config: OracleConfig = None) -> str:
         result = ask_duckduckgo_chat(question)
         if not result.startswith("Error:"):
             return result
-    except:
+    except Exception as e:
+        print(f"Warning: DuckDuckGo oracle failed: {e}")
         pass
 
     # Fallback to API services if available
@@ -235,7 +236,8 @@ def ask_oracle_auto(question: str, config: OracleConfig = None) -> str:
             result = ask_local_llm(question, config)
             if not result.startswith("Error:"):
                 return result
-        except:
+        except Exception as e:
+            print(f"Warning: Local LLM oracle failed: {e}")
             pass
 
     return (

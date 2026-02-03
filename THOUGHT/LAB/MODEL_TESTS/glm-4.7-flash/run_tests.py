@@ -195,8 +195,32 @@ def execute_python(code: str) -> str:
             lines[-1] = f"print({last_line})"
             full_code = '\n'.join(lines)
 
+        # Create a safe execution environment with limited builtins
+        safe_builtins = {
+            'abs': abs, 'round': round, 'min': min, 'max': max,
+            'len': len, 'sum': sum, 'range': range, 'enumerate': enumerate,
+            'zip': zip, 'map': map, 'filter': filter, 'sorted': sorted,
+            'bool': bool, 'int': int, 'float': float, 'str': str, 'list': list,
+            'dict': dict, 'tuple': tuple, 'set': set, 'print': print,
+            'pow': pow, 'divmod': divmod, 'complex': complex, 'oct': oct,
+            'hex': hex, 'bin': bin, 'chr': chr, 'ord': ord, 'repr': repr,
+            'ascii': ascii, 'hashtable': hash, 'id': id, 'type': type,
+            'isinstance': isinstance, 'issubclass': issubclass, 'callable': callable,
+            'getattr': getattr, 'setattr': setattr, 'delattr': delattr,
+            'hasattr': hasattr, 'vars': vars, 'property': property,
+            'staticmethod': staticmethod, 'classmethod': classmethod,
+            'super': super, 'object': object, 'Exception': Exception,
+            'ValueError': ValueError, 'TypeError': TypeError, 'RuntimeError': RuntimeError,
+            'ZeroDivisionError': ZeroDivisionError, 'IndexError': IndexError,
+            'KeyError': KeyError, 'AttributeError': AttributeError,
+            'NameError': NameError, 'ImportError': ImportError,
+            'StopIteration': StopIteration, 'OverflowError': OverflowError,
+            'AssertionError': AssertionError, 'NotImplementedError': NotImplementedError,
+            'RecursionError': RecursionError
+        }
+
         with contextlib.redirect_stdout(stdout):
-            exec(full_code, {"__builtins__": __builtins__}, _PERSISTENT_CONTEXT)
+            exec(full_code, {"__builtins__": safe_builtins}, _PERSISTENT_CONTEXT)
 
         output = stdout.getvalue().strip()
         return output if output else "(No output)"
@@ -579,8 +603,32 @@ def run_task_parallel(task: dict) -> dict:
                         lines[-1] = f"print({last_line})"
                         full_code = '\n'.join(lines)
 
+                    # Create a safe execution environment with limited builtins
+                    safe_builtins = {
+                        'abs': abs, 'round': round, 'min': min, 'max': max,
+                        'len': len, 'sum': sum, 'range': range, 'enumerate': enumerate,
+                        'zip': zip, 'map': map, 'filter': filter, 'sorted': sorted,
+                        'bool': bool, 'int': int, 'float': float, 'str': str, 'list': list,
+                        'dict': dict, 'tuple': tuple, 'set': set, 'print': print,
+                        'pow': pow, 'divmod': divmod, 'complex': complex, 'oct': oct,
+                        'hex': hex, 'bin': bin, 'chr': chr, 'ord': ord, 'repr': repr,
+                        'ascii': ascii, 'hashtable': hash, 'id': id, 'type': type,
+                        'isinstance': isinstance, 'issubclass': issubclass, 'callable': callable,
+                        'getattr': getattr, 'setattr': setattr, 'delattr': delattr,
+                        'hasattr': hasattr, 'vars': vars, 'property': property,
+                        'staticmethod': staticmethod, 'classmethod': classmethod,
+                        'super': super, 'object': object, 'Exception': Exception,
+                        'ValueError': ValueError, 'TypeError': TypeError, 'RuntimeError': RuntimeError,
+                        'ZeroDivisionError': ZeroDivisionError, 'IndexError': IndexError,
+                        'KeyError': KeyError, 'AttributeError': AttributeError,
+                        'NameError': NameError, 'ImportError': ImportError,
+                        'StopIteration': StopIteration, 'OverflowError': OverflowError,
+                        'AssertionError': AssertionError, 'NotImplementedError': NotImplementedError,
+                        'RecursionError': RecursionError
+                    }
+
                     with contextlib.redirect_stdout(stdout):
-                        exec(full_code, {"__builtins__": __builtins__}, thread_context)
+                        exec(full_code, {"__builtins__": safe_builtins}, thread_context)
 
                     output = stdout.getvalue().strip()
                     output = output if output else "(No output)"

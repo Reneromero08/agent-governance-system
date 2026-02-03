@@ -256,7 +256,8 @@ class GenericCassette(DatabaseCassette):
                     cursor = conn.execute(f"SELECT COUNT(*) as count FROM {table}")
                     count = cursor.fetchone()[0]
                     stats[f"{table}_count"] = count
-                except:
+                except Exception as e:
+                    print(f"Warning: Could not count rows in table {table}: {e}")
                     pass
             
             # Check for FTS

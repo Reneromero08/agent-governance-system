@@ -1344,7 +1344,8 @@ class AGSMCPServer:
                         "embeddings_count": embedding_stats.get("total_embeddings", 0) if isinstance(embedding_stats, dict) else 0,
                         "semantic_ready": True
                     }
-                except:
+                except Exception as e:
+                    print(f"[WARNING] Failed to get embedding stats: {e}", file=sys.stderr)
                     session_info["semantic_stats"] = {"semantic_ready": False}
             
             # Add audit log entries if requested
@@ -1363,7 +1364,8 @@ class AGSMCPServer:
                                 audit_entries.append(entry)
                                 if len(audit_entries) >= limit:
                                     break
-                        except:
+                        except Exception as e:
+                            print(f"[WARNING] Failed to parse audit log entry: {e}", file=sys.stderr)
                             continue
                 session_info["audit_log_entries"] = audit_entries
                 session_info["audit_log_count"] = len(audit_entries)
@@ -1580,8 +1582,8 @@ def main():
             try:
                 results = json.loads(content)
                 print(f"  Found {len(results)} results")
-            except:
-                print(f"  Output: {content[:100]}...")
+            except Exception as e:
+                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
 
         # Test context_search
         print("\n--- Testing context_search ---")
@@ -1598,8 +1600,8 @@ def main():
             try:
                 results = json.loads(content)
                 print(f"  Found {len(results)} records")
-            except:
-                print(f"  Output: {content[:100]}...")
+            except Exception as e:
+                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
 
         # Test context_review
         print("\n--- Testing context_review ---")
@@ -1618,8 +1620,8 @@ def main():
                 overdue = len(results.get("overdue", []))
                 upcoming = len(results.get("upcoming", []))
                 print(f"  Overdue: {overdue}, Upcoming: {upcoming}")
-            except:
-                print(f"  Output: {content[:100]}...")
+            except Exception as e:
+                print(f"  Error parsing JSON: {e}, Output: {content[:100]}...")
 
         # Test canon_read
         print("\n--- Testing canon_read ---")

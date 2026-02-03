@@ -6,6 +6,18 @@ All notable changes to Agent Governance System will be documented in this file.
 
 ---
 
+## [3.8.37] - 2026-02-03
+
+### Fixed
+- Fixed bare except: clauses in production code
+- Secured exec() calls with limited built-ins
+
+### Security
+- Fixed unsafe exec() calls that could allow arbitrary code execution
+- Replaced bare except: clauses to prevent hiding critical errors
+
+---
+
 ## [3.8.36] - 2026-02-03
 
 ### Clarified: THOUGHT/LAB/ governance exemption
