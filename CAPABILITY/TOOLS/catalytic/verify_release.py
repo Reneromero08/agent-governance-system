@@ -46,6 +46,9 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
+# Default public key location
+DEFAULT_PUBLIC_KEY = REPO_ROOT / "LAW" / "CONTRACTS" / "_keys" / "release.pub"
+
 from CAPABILITY.PRIMITIVES.release_sealer import verify_seal
 from CAPABILITY.PRIMITIVES.release_manifest import VerificationStatus
 
@@ -63,7 +66,7 @@ def main() -> int:
     )
     parser.add_argument(
         "--pubkey",
-        help="Path to public key file (optional, uses embedded key if not provided)",
+        help=f"Path to public key file (default: {DEFAULT_PUBLIC_KEY.relative_to(REPO_ROOT)})",
     )
     parser.add_argument("--json", action="store_true", help="Output as JSON")
     parser.add_argument("--verbose", "-v", action="store_true", help="Verbose output")
@@ -71,7 +74,12 @@ def main() -> int:
     args = parser.parse_args()
 
     repo_dir = Path(args.repo_dir).resolve()
-    public_key_path = Path(args.pubkey).resolve() if args.pubkey else None
+    if args.pubkey:
+        public_key_path = Path(args.pubkey).resolve()
+    elif DEFAULT_PUBLIC_KEY.exists():
+        public_key_path = DEFAULT_PUBLIC_KEY
+    else:
+        public_key_path = None
 
     if not repo_dir.is_dir():
         print(f"ERROR: Repository directory not found: {repo_dir}", file=sys.stderr)

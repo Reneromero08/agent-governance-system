@@ -95,6 +95,9 @@ MEMORY/LLM_PACKER/_packs/**
 
 MEMORY/Original/
 
+# Release signing keys (private key MUST stay local)
+LAW/CONTRACTS/_keys/*.key
+
 # Python Cache
 __pycache__/
 *.pyc
