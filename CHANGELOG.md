@@ -20,18 +20,18 @@ Cryptographic sealing system to defend CCL v1.4 license provisions (Sections 3.6
 - `seal_release.py`: Generate keypairs and seal repositories
 - `verify_release.py`: Verify sealed releases (exit 0=PASS, 1=FAIL)
 
+**Key Location:** `LAW/CONTRACTS/_keys/` (private key gitignored, public key tracked)
+
 **Usage:**
 ```bash
-# Generate keypair
-python -m CAPABILITY.TOOLS.catalytic.seal_release keygen \
-    --private-key keys/release.key --public-key keys/release.pub
+# Generate keypair (uses default location)
+python -m CAPABILITY.TOOLS.catalytic.seal_release keygen
 
-# Seal repository
-python -m CAPABILITY.TOOLS.catalytic.seal_release seal \
-    --repo-dir . --private-key keys/release.key
+# Seal repository (uses default key)
+python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir .
 
-# Verify (detects any tampering)
-python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir . --pubkey keys/release.pub
+# Verify (uses default public key)
+python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir .
 ```
 
 **License Enforcement:**

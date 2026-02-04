@@ -6,18 +6,19 @@ Create tamper-evident seals for AGS releases to defend CCL v1.4 license
 provisions (Sections 3.6, 3.7, 4.4).
 
 Usage:
-  # Generate a new keypair
-  python -m CAPABILITY.TOOLS.catalytic.seal_release keygen \
-      --private-key keys/release.key --public-key keys/release.pub
+  # Generate a new keypair (uses default location: LAW/CONTRACTS/_keys/)
+  python -m CAPABILITY.TOOLS.catalytic.seal_release keygen
 
-  # Seal the repository
+  # Seal the repository (uses default key location)
+  python -m CAPABILITY.TOOLS.catalytic.seal_release seal --repo-dir .
+
+  # Seal with custom key path
   python -m CAPABILITY.TOOLS.catalytic.seal_release seal \
-      --repo-dir . --private-key keys/release.key
+      --repo-dir . --private-key /path/to/custom.key
 
   # Seal with exclusions
   python -m CAPABILITY.TOOLS.catalytic.seal_release seal \
-      --repo-dir . --private-key keys/release.key \
-      --exclude .ags-cas --exclude .git
+      --repo-dir . --exclude .ags-cas --exclude .git
 
 Exit codes:
   0: Success
@@ -36,6 +37,11 @@ from pathlib import Path
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
 
+# Default key location (gitignored for private key, tracked for public key)
+DEFAULT_KEY_DIR = REPO_ROOT / "LAW" / "CONTRACTS" / "_keys"
+DEFAULT_PRIVATE_KEY = DEFAULT_KEY_DIR / "release.key"
+DEFAULT_PUBLIC_KEY = DEFAULT_KEY_DIR / "release.pub"
+
 from CAPABILITY.PRIMITIVES.signature import (
     generate_keypair,
     save_keypair,
@@ -47,8 +53,8 @@ from CAPABILITY.PRIMITIVES.release_sealer import seal_repo
 
 def cmd_keygen(args: argparse.Namespace) -> int:
     """Generate a new Ed25519 keypair for release signing."""
-    private_path = Path(args.private_key)
-    public_path = Path(args.public_key)
+    private_path = Path(args.private_key) if args.private_key else DEFAULT_PRIVATE_KEY
+    public_path = Path(args.public_key) if args.public_key else DEFAULT_PUBLIC_KEY
 
     # Check if files exist
     if private_path.exists() and not args.force:
@@ -95,7 +101,7 @@ def cmd_keygen(args: argparse.Namespace) -> int:
 def cmd_seal(args: argparse.Namespace) -> int:
     """Seal a repository by creating a signed manifest."""
     repo_dir = Path(args.repo_dir).resolve()
-    private_path = Path(args.private_key).resolve()
+    private_path = Path(args.private_key).resolve() if args.private_key else DEFAULT_PRIVATE_KEY
 
     if not repo_dir.is_dir():
         print(f"ERROR: Repository directory not found: {repo_dir}", file=sys.stderr)
@@ -168,14 +174,23 @@ def main() -> int:
 
     # keygen
     p_keygen = subparsers.add_parser("keygen", help="Generate a new Ed25519 keypair")
-    p_keygen.add_argument("--private-key", required=True, help="Path to save private key")
-    p_keygen.add_argument("--public-key", required=True, help="Path to save public key")
+    p_keygen.add_argument(
+        "--private-key",
+        help=f"Path to save private key (default: {DEFAULT_PRIVATE_KEY.relative_to(REPO_ROOT)})",
+    )
+    p_keygen.add_argument(
+        "--public-key",
+        help=f"Path to save public key (default: {DEFAULT_PUBLIC_KEY.relative_to(REPO_ROOT)})",
+    )
     p_keygen.add_argument("--force", action="store_true", help="Overwrite existing files")
 
     # seal
     p_seal = subparsers.add_parser("seal", help="Seal a repository")
     p_seal.add_argument("--repo-dir", required=True, help="Path to repository root")
-    p_seal.add_argument("--private-key", required=True, help="Path to private key file")
+    p_seal.add_argument(
+        "--private-key",
+        help=f"Path to private key file (default: {DEFAULT_PRIVATE_KEY.relative_to(REPO_ROOT)})",
+    )
     p_seal.add_argument(
         "--exclude",
         action="append",
