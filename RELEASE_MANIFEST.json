@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "sealed_at": "2026-02-04T00:56:05.872251+00:00",
+  "sealed_at": "2026-02-04T01:02:27.241327+00:00",
   "license": "CCL-v1.4",
-  "git_commit": "fde4f17695cd8a467492c015e4113b7b3e791eb0",
+  "git_commit": "6cdc35ef963e5f5147a5f2075cc637722f45bc88",
   "files": [
     {
       "path": ".editorconfig",
@@ -56,13 +56,8 @@
     },
     {
       "path": ".gitignore",
-      "sha256": "858648c8e1ebb22e344f47ba54d99d9c3cfa384859229664a0e7105433e0a07b",
-      "size": 4917
-    },
-    {
-      "path": ".vscode/settings.json",
-      "sha256": "d7c4c5969a13be89c26b96373e811c72455b9bcc938c3e2ee1de236c55773289",
-      "size": 42
+      "sha256": "3e4e19f422547f868d62435f1de52933769ec42787bb23b41c63ef4eaa786ed7",
+      "size": 4926
     },
     {
       "path": "AGENTS.md",
@@ -20410,6 +20405,6 @@
       "size": 66
     }
   ],
-  "merkle_root": "0ef71749f3ecda7579109b31ef1a38c281cab92868dba3bc57fce2f12c836dbc",
-  "manifest_hash": "85fc34b5a3f326baa6e1a0c4c1fdcf2bec081b5a6c1619009f48bf153e578a56"
+  "merkle_root": "e7cae4e90a72eea9d7273e9525f12d2be84f0c33a765c64c057e2c5ec11cc579",
+  "manifest_hash": "aecf5c09eb91047bfe9ecdbb4732c32ea0647c87fbadbb2d17ba1d2dfb9a32e4"
 }
