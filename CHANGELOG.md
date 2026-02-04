@@ -50,6 +50,9 @@ python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir .
 - Pre-push: When pushing `v*` tags, requires valid release seal
 - GitHub Actions: `release-seal.yml` verifies seal on tag push
 
+### Fixed
+- CI workflow `release-seal.yml` now installs full `requirements.txt` (fixes missing `jsonschema` error)
+
 ### Removed: qgt_lib third-party library (history purged)
 
 - **Purged from git history**: Third-party library files (docs/, include/, src/, tests/, CMakeLists.txt, etc.)
