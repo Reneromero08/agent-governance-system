@@ -52,6 +52,7 @@ python -m CAPABILITY.TOOLS.catalytic.verify_release --repo-dir .
 
 ### Fixed
 - CI workflow `release-seal.yml` now installs full `requirements.txt` (fixes missing `jsonschema` error)
+- Release sealer uses git-normalized content hashes for cross-platform consistency (fixes CRLF/LF mismatch)
 
 ### Removed: qgt_lib third-party library (history purged)
 
