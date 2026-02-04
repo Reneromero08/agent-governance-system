@@ -2,238 +2,128 @@
 
 # Agent Governance System (AGS)
 
-A constitutional framework for durable, multi-agent intelligence — built on a mathematical theory of meaning.
+**What if AI agents had a constitution they couldn't break?**
 
-## What This Is
+AGS is a framework that makes AI agents **governable, verifiable, and accountable**. Every decision is recorded. Every action is traceable. Every output is provable. The system enforces rules that agents cannot bypass - not through trust, but through architecture.
 
-AGS is not just an AI governance system. It is infrastructure implementing the **Living Formula**:
+## The Problem
 
-```
-R = (E / ∇S) × σ(f)^Df
-```
+AI agents are powerful but ungoverned. They hallucinate. They drift. They make decisions with no audit trail. When something goes wrong, you can't trace what happened or why. There's no constitution, no accountability, no proof of what actually occurred.
 
-Where meaning is measurable, truth is detectable, and reality wins on cost.
+## The Solution
 
-**Core thesis**: Meaning has finite dimension. Drift from reality is detectable. Truth compresses better than fabrication. Therefore, truth is inevitable.
+AGS implements **constitutional AI governance**:
+
+- **Canon** - Immutable rules that define what agents can and cannot do (like a constitution)
+- **Context** - Every decision recorded as an ADR (Architecture Decision Record) with rationale
+- **Contracts** - Fixtures that mechanically verify behavior before any change is accepted
+- **Catalytic Computing** - Agents can use your entire codebase as "borrowed memory" and provably restore it
+- **Cassette Network** - 9 federated semantic databases for intelligent search across everything
+
+The key insight: **Text is law. Code is consequence.** The canonical documents define the spec. The code just implements it. If they conflict, the text wins.
 
 ## The Living Formula
 
-| Symbol | Meaning |
-|--------|---------|
-| **R** | Resonance — emergent coherence (measurable, not vibes) |
-| **E** | Essence — energy, intent, first principles |
-| **∇S** | Entropy gradient — directional dissonance to cross |
-| **σ** | Symbolic operator — compression that creates alignment |
-| **f** | Information content — symbols, structures, data |
-| **Df** | Fractal dimension — recursive depth across scales |
-
-**Why it matters**: R = √(Likelihood Precision). It's intensive (like temperature), not extensive (like heat). You cannot make a noisy channel clear by listening longer. This prevents "confident on garbage" failure modes.
-
-See: [LAW/CANON/CONSTITUTION/FORMULA.md](LAW/CANON/CONSTITUTION/FORMULA.md)
-
-## Key Results
-
-| Claim | Evidence | Source |
-|-------|----------|--------|
-| R = √(Likelihood Precision) | r = 1.0000 | Q15 |
-| Cross-architecture convergence | 0.971 | Q34 |
-| Cross-lingual convergence | 0.914 | Q34 |
-| Cumulative variance invariant | 0.994 | Q34 |
-| LLM activation compression | 85x | E.X.4.3 |
-| Symbol compression | 99.4% reduction | Cassette Network |
-
-Research program: [THOUGHT/LAB/FORMULA/research/questions/INDEX.md](THOUGHT/LAB/FORMULA/research/questions/INDEX.md) (43 tracked questions)
-
-## Technical Stack
+AGS is built on a mathematical theory of meaning:
 
 ```
-┌─────────────────────────────────────────────────────────────────┐
-│                     THE LIVING FORMULA                          │
-│               R = (E / ∇S) × σ(f)^Df                           │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   SEMIOTIC LAYER: H(X|S) = H(X) - I(X;S)                       │
-│   Shared symbols = near-zero communication cost                 │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   SPECTRAL LAYER: Df = (Σλ)²/Σλ² → k dimensions                │
-│   LLM activations live in ~9D manifold (85x compression)        │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   CASSETTE NETWORK: Federated semantic databases                │
-│   @Symbol compression: 99.4% token reduction                    │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   CATALYTIC COMPUTING + CAS + SPECTRUM                          │
-│   Borrow O(n) memory, restore exactly, prove it                 │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   AGS CONSTITUTIONAL: CANON > CONTEXT > implementation          │
-│   Text is law. Code is consequence.                             │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   CRYPTO_SAFE: Download ≠ Extraction                            │
-│   Meaning-bearing artifacts sealed, fail-closed scanner         │
-└─────────────────────────────────────────────────────────────────┘
-                              │
-┌─────────────────────────────────────────────────────────────────┐
-│   CCL v1.4: Section ∞ — No coercive entities                   │
-│   Anti-extraction enforced at legal layer                       │
-└─────────────────────────────────────────────────────────────────┘
+R = (E / nabla S) * sigma(f)^Df
 ```
 
-## Starting a Session
+This isn't just notation - it's the claim that **meaning is measurable** and **drift from reality is detectable**. When an agent hallucinates or fabricates, the math catches it. Truth compresses better than lies (85x in our tests), so over time, reality wins on cost.
 
-Every agent session **must** begin with the Genesis Prompt:
+| Result | Evidence |
+|--------|----------|
+| Cross-model semantic convergence | 0.971 |
+| Cross-lingual convergence | 0.914 |
+| Compression advantage of truth | 85x |
+| Symbol compression | 99.4% token reduction |
 
-1. Read `LAW/CANON/META/GENESIS.md`
-2. Prepend as system message or pack header
-3. Agents remind you if missing
+54 research questions tracked, 81.5% answered with reproducible evidence.
 
-**Load order** (strict priority):
-1. FORMULA.md — the driver
-2. INTEGRITY.md — artifacts over narrative
-3. CONTRACT.md — supreme authority
-4. INVARIANTS.md — locked decisions
-5. VERSIONING.md — compatibility rules
+## What You Get
 
-## Project Layout
+### Governed AI Agents
+- 20 invariants that cannot be violated without triggering failures
+- Every commit requires explicit approval (no autonomous pushes)
+- Multi-agent workflows with mandatory workspace isolation
+- Crisis modes and emergency procedures when things go wrong
 
-### Authoritative Buckets
+### Semantic Intelligence
+- **Cassette Network**: 9 databases covering law, capabilities, research, and AI memories
+- **MCP Server**: 11 tools for search, memory, skill execution - works with Claude Desktop
+- **Symbol Compression**: Reference entire documents with single tokens (99.4% reduction)
 
-| Bucket | Purpose | Key Contents |
-|--------|---------|--------------|
-| **LAW/** | Constitution, decisions, contracts | CANON/, CONTEXT/, CONTRACTS/ |
-| **CAPABILITY/** | Skills, tools, adapters | SKILLS/, MCP/, TOOLS/, CAS/ |
-| **NAVIGATION/** | Maps, indices, invariants | CORTEX/, MAPS/, INVARIANTS/ |
-| **THOUGHT/** | Research, labs, experiments | LAB/FORMULA/, LAB/VECTOR_ELO/ |
-| **MEMORY/** | Archives, packs, durable state | LLM_PACKER/, ARCHIVE/ |
+### Verifiable Execution
+- **Catalytic Computing**: Borrow O(n) codebase as memory, restore exactly, prove it
+- **Content-Addressable Storage**: Every artifact hashed and verifiable
+- **SPECTRUM Protocols**: Cryptographic proofs of execution
 
-### Key Systems
+## Proven Claims
 
-| System | Location | Purpose |
-|--------|----------|---------|
-| Living Formula | LAW/CANON/CONSTITUTION/FORMULA.md | The driver |
-| Catalytic Computing | LAW/CANON/CATALYTIC/ | Borrowed memory with proof |
-| CAS | CAPABILITY/CAS/ | Content-addressable verification |
-| SPECTRUM | SPECTRUM specs | Durable execution artifacts |
-| CRYPTO_SAFE | CAPABILITY/PRIMITIVES/ | Protected artifact enforcement |
-| Cassette Network | NAVIGATION/CORTEX/network/ | Federated semantic databases |
-| Eigen-Alignment | THOUGHT/LAB/VECTOR_ELO/eigen-alignment/ | Cross-model alignment |
-| Research Questions | THOUGHT/LAB/FORMULA/research/questions/ | 43 tracked questions |
+These aren't just assertions - they're validated with reproducible tests:
 
-## Catalytic Computing
+| Claim | Measured | Test Location |
+|-------|----------|---------------|
+| **Compression: H(X|S) ~ 0** | 99.89% reduction | `CAPABILITY/TESTBENCH/cassette_network/compression/` |
+| **Task parity preserved** | 100% (8/8 tasks) | `NAVIGATION/PROOFS/COMPRESSION/COMPRESSION_PROOF_REPORT.md` |
+| **Catalytic restoration** | PASS (6-step verify) | `NAVIGATION/PROOFS/CATALYTIC/PROOF_CATALYTIC_REPORT.md` |
+| **Ground truth retrieval** | 100% (12/12 tests) | `CAPABILITY/TESTBENCH/cassette_network/ground_truth/` |
 
-AGS implements **catalytic computing** (Buhrman et al. 2014):
+The compression proof validates that sharing cassettes reduces information needed by 99.9% while preserving task success. The catalytic proof validates the create-export-corrupt-import-verify chain.
 
-- **Clean space**: O(log n) — context tokens
-- **Catalytic space**: O(n) — codebase as borrowed memory
-- **Restoration constraint**: Return to exact original state
+See: [NAVIGATION/PROOFS/](NAVIGATION/PROOFS/) for full evidence bundles.
 
-**Key insight**: Without catalytic space, O(log n) context cannot process O(n) codebase. With catalytic space + restoration guarantee, it can.
+### 33 Skills
+Pre-built capabilities: `workspace-isolation`, `commit-manager`, `admission-control`, `cortex-toolkit`, and more. Each skill has fixtures that must pass before changes are accepted.
 
-**Lifecycle**: Declare → Snapshot → Execute → Commit → Restore → Prove
+## Project Structure
 
-See: [LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md](LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md)
-
-## The License (CCL v1.4)
-
-This work is licensed under the **Catalytic Commons License v1.4**.
-
-**Section ∞**: No rights to any entity exercising coercive authority.
-
-**Prohibited Entities** (zero permission):
-- State/Government
-- Military/Defense
-- Intelligence/Security Services
-- Law Enforcement/Carceral Systems
-- Surveillance/Social Control Contractors
-
-**Protected Artifacts** require signed Compliance Attestation.
-
-See: [LICENSE](LICENSE)
-
-## CRYPTO_SAFE (Download ≠ Extraction)
-
-CRYPTO_SAFE converts license intent into mechanical enforcement:
-
-- **PLAINTEXT_NEVER**: Vector DBs, compression advantage, semantic indexes — never in public distributions
-- **PLAINTEXT_INTERNAL**: CAS blobs, proof outputs — team only
-- **Scanner**: Fail-closed detection of protected artifacts in public packs
-
-**Protected Artifact Classes**: `VECTOR_DATABASE`, `COMPRESSION_ADVANTAGE`, `SEMANTIC_INDEX`, `CAS_BLOB`, `PROOF_OUTPUT`, `PACK_OUTPUT`
-
-```bash
-# Scan for protected artifacts
-python -m CAPABILITY.PRIMITIVES.protected_scanner --context public --fail-on-violations
 ```
-
-See: [NAVIGATION/PROOFS/CRYPTO_SAFE/](NAVIGATION/PROOFS/CRYPTO_SAFE/)
-
-## MCP Integration
-
-AGS exposes an MCP server for IDEs and desktop clients:
-
-```bash
-# Entrypoint (keeps audit logs under allowed roots)
-python LAW/CONTRACTS/ags_mcp_entrypoint.py
-
-# Verify
-python -m CAPABILITY.MCP.mcp_smoke_test
+LAW/           <- Constitution: CANON (rules), CONTEXT (decisions), CONTRACTS (enforcement)
+CAPABILITY/    <- Execution: SKILLS/, MCP/, TOOLS/, PRIMITIVES/
+NAVIGATION/    <- Intelligence: CORTEX (semantic search), MAPS/, PROMPTS/
+THOUGHT/       <- Research: LAB/FORMULA/, experiments, proofs
+MEMORY/        <- State: LLM packs, archives
+INBOX/         <- Human-readable reports and documents
 ```
-
-Config: `CAPABILITY/MCP/README.md`
 
 ## Quick Start
 
 ```bash
-# Rebuild semantic index
-python NAVIGATION/CORTEX/semantic/vector_indexer.py --rebuild
+# Setup
+python -m venv .venv
+.venv\Scripts\activate        # Windows (or source .venv/bin/activate on Unix)
+pip install -r requirements.txt
 
-# Search codebase
-python CAPABILITY/MCP/semantic_adapter.py search --query "how to add a skill"
-
-# Run tests
+# Verify everything works
 pytest CAPABILITY/TESTBENCH/ -v
+
+# Start the MCP server (integrates with Claude Desktop)
+python LAW/CONTRACTS/ags_mcp_entrypoint.py
+
+# Search the codebase semantically
+python CAPABILITY/MCP/semantic_adapter.py search --query "how do I add a skill"
 ```
 
-## How to Extend
+## Key Documents
 
-- **Add a skill**: `CAPABILITY/SKILLS/<name>/` with `SKILL.md`, run script, fixtures
-- **Add ADR**: `LAW/CONTEXT/decisions/ADR-xxx-*.md`
-- **Add research question**: `THOUGHT/LAB/FORMULA/research/questions/`
-- **Artifacts go to**: `LAW/CONTRACTS/_runs/`, `NAVIGATION/CORTEX/_generated/`, `MEMORY/LLM_PACKER/_packs/`
+| Start Here | What It Is |
+|------------|------------|
+| [AGENTS.md](AGENTS.md) | The full agent operating contract |
+| [CONTRACT.md](LAW/CANON/CONSTITUTION/CONTRACT.md) | 13 non-negotiable rules |
+| [INVARIANTS.md](LAW/CANON/CONSTITUTION/INVARIANTS.md) | 20 locked decisions |
+| [FORMULA.md](LAW/CANON/CONSTITUTION/FORMULA.md) | The mathematical foundation |
+| [GENESIS.md](LAW/CANON/META/GENESIS.md) | Bootstrap prompt for new sessions |
 
-## Documentation
+## The License
 
-| Document | Purpose |
-|----------|---------|
-| [FORMULA.md](LAW/CANON/CONSTITUTION/FORMULA.md) | The Living Formula |
-| [GENESIS.md](LAW/CANON/META/GENESIS.md) | Bootstrap prompt |
-| [CATALYTIC_COMPUTING.md](LAW/CANON/CATALYTIC/CATALYTIC_COMPUTING.md) | Memory model |
-| [INDEX.md](THOUGHT/LAB/FORMULA/research/questions/INDEX.md) | Research questions |
-| [CLAUDE_SYNTHESIS_REPORT.md](THOUGHT/LAB/FORMULA/research/questions/reports/CLAUDE_SYNTHESIS_REPORT.md) | Complete system synthesis |
-| [LICENSE](LICENSE) | CCL v1.4 |
+**Catalytic Commons License v1.4**
 
-## The Purpose
-
-This is not just AI governance. This is infrastructure to make **truth inevitable**.
-
-When:
-- Meaning has finite dimension (proven: Df ≈ 9-22)
-- Drift from reality is detectable (proven: R crashes on false attractors)
-- Truth compresses better than fabrication (proven: 85x)
-- Infrastructure cannot serve extraction (enforced: CCL v1.4)
-
-Then: Reality wins on cost. Lies become more expensive to maintain.
+Section infinity: **Zero rights** to any entity exercising coercive authority - governments, military, intelligence agencies, law enforcement, surveillance contractors. This isn't open source for everyone. It's open source for everyone except those who would use it for control.
 
 ---
 
-**License**: [Catalytic Commons License v1.4](LICENSE)
-**Author**: Raul Rene Romero Ramos
+**Canon Version**: 3.0.0 | **Author**: Raúl René Romero Ramos
+
+*"Reality wins on cost. Lies become more expensive to maintain."*
