@@ -74,6 +74,7 @@ NAVIGATION/PROOFS/_RUNS/
 # Local-only editor state (not governance-critical)
 .claude/
 .kilocode/
+.vscode/
 
 # Research Cache
 LAW/CONTEXT/research/*.db
