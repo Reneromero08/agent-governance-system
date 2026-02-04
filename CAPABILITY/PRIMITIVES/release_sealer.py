@@ -111,6 +111,31 @@ def get_git_commit(repo_dir: Path) -> Optional[str]:
         return None
 
 
+def get_git_normalized_hash(repo_dir: Path, rel_path: str) -> Optional[str]:
+    """
+    Get SHA-256 hash of file content as Git sees it (normalized).
+
+    Uses: git show :path
+
+    This gets the file content with Git's filters applied (including
+    line ending normalization via .gitattributes), then SHA-256 hashes it.
+
+    Returns:
+        64-char SHA-256 hex hash, or None if file not in index
+    """
+    import hashlib
+    try:
+        result = subprocess.run(
+            ["git", "show", f":{rel_path}"],
+            cwd=repo_dir,
+            capture_output=True,
+            check=True,
+        )
+        return hashlib.sha256(result.stdout).hexdigest()
+    except subprocess.CalledProcessError:
+        return None
+
+
 # =============================================================================
 # SEAL REPOSITORY
 # =============================================================================
@@ -180,7 +205,11 @@ def seal_repo(
             # Skip files that don't exist (e.g., submodules, deleted but cached)
             continue
 
-        file_hash = sha256_file(abs_path)
+        # Use git-normalized content hash for cross-platform consistency
+        file_hash = get_git_normalized_hash(repo_dir, rel_path)
+        if not file_hash:
+            # Fallback to raw hash if not in git index
+            file_hash = sha256_file(abs_path)
         file_size = abs_path.stat().st_size
         total_bytes += file_size
 
@@ -355,8 +384,11 @@ def verify_seal(
                 expected_hash=file_entry.sha256,
             )
 
-        # Check file hash
-        actual_hash = sha256_file(file_path)
+        # Check file hash using git-normalized content for cross-platform consistency
+        actual_hash = get_git_normalized_hash(repo_dir, file_entry.path)
+        if not actual_hash:
+            # Fallback to raw hash if not in git index
+            actual_hash = sha256_file(file_path)
         if actual_hash != file_entry.sha256:
             return VerificationReceipt(
                 status=VerificationStatus.TAMPERED_FILE,
