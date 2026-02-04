@@ -1,0 +1,61 @@
+{
+  "batch_size": 64,
+  "dataset_path": "results/dataset/questions-words.txt",
+  "dataset_url": "https://download.tensorflow.org/data/questions-words.txt",
+  "distortion": {
+    "epsilon": 0.01,
+    "tanh": true
+  },
+  "epsilon": 1e-09,
+  "holonomy_diff_threshold_radians": 0.2,
+  "holonomy_pass_fraction_min": 0.6,
+  "lambda_pass_fraction_min": 0.6,
+  "lambda_ratio_threshold": 0.8,
+  "loop_word_count": 3,
+  "loops_per_category_max": 3,
+  "metrics": [
+    "exp1_median_phase_error",
+    "exp1_pass_bases",
+    "exp2_median_lambda_diff",
+    "exp2_baseline_median",
+    "exp2_ratio",
+    "exp3_median_gamma_diff_sign",
+    "exp3_median_gamma_diff_tanh",
+    "exp4_complex_probe_median_error",
+    "exp4_phase_probe_median_error"
+  ],
+  "models": [
+    "all-MiniLM-L6-v2",
+    "all-MiniLM-L12-v2",
+    "all-mpnet-base-v2",
+    "all-distilroberta-v1",
+    "all-roberta-large-v1",
+    "paraphrase-MiniLM-L6-v2",
+    "paraphrase-mpnet-base-v2",
+    "multi-qa-MiniLM-L6-cos-v1",
+    "multi-qa-mpnet-base-dot-v1",
+    "nli-mpnet-base-v2",
+    "BAAI/bge-small-en-v1.5",
+    "BAAI/bge-base-en-v1.5",
+    "BAAI/bge-large-en-v1.5",
+    "thenlper/gte-small",
+    "thenlper/gte-base",
+    "thenlper/gte-large",
+    "intfloat/e5-small-v2",
+    "intfloat/e5-base-v2",
+    "intfloat/e5-large-v2"
+  ],
+  "normalize_embeddings": false,
+  "num_bases": 50,
+  "phase_error_threshold_radians": 0.7853981633974483,
+  "phase_pass_min_bases": 50,
+  "probe": {
+    "complex_better_fraction_min": 0.6,
+    "complex_better_ratio": 0.9,
+    "phase_baseline": "predict cos/sin then normalize",
+    "ridge": 1e-06
+  },
+  "random_seed": 1337,
+  "run_date": "2026-02-03",
+  "train_split_ratio": 0.8
+}
