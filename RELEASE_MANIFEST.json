@@ -1,8 +1,8 @@
 {
   "version": "1.0.0",
-  "sealed_at": "2026-02-04T00:36:13.477791+00:00",
+  "sealed_at": "2026-02-04T00:56:05.872251+00:00",
   "license": "CCL-v1.4",
-  "git_commit": "53c255d731ad731926eb4c5dc091710e87dc3415",
+  "git_commit": "fde4f17695cd8a467492c015e4113b7b3e791eb0",
   "files": [
     {
       "path": ".editorconfig",
@@ -20406,10 +20406,10 @@
     },
     {
       "path": "requirements.txt",
-      "sha256": "5bfdd1747c5380bbde482cf0c49e9bc3994efe9fd4cfa31918473dde4cbf8c44",
-      "size": 45
+      "sha256": "29946c1c098adcedeecba4dee934922a20755f15970a9e8af53eb2e49ca0c967",
+      "size": 66
     }
   ],
-  "merkle_root": "5d415b853d81d3dbe39e9266e40428b23aa885131dfc7c8e71af3f10cf8c1eeb",
-  "manifest_hash": "7096b8c5bdd9fab84d1c4a94b6eb04f544d09a466d8b0b41f1bcbcf337da11af"
+  "merkle_root": "0ef71749f3ecda7579109b31ef1a38c281cab92868dba3bc57fce2f12c836dbc",
+  "manifest_hash": "85fc34b5a3f326baa6e1a0c4c1fdcf2bec081b5a6c1619009f48bf153e578a56"
 }
